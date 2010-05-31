@@ -107,8 +107,7 @@ public class OSGiTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Boolean labelValue = ((OSGiType)object).getGenerateInstanceBundle();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((OSGiType)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_OSGiType_type") :
 			getString("_UI_OSGiType_type") + " " + label;

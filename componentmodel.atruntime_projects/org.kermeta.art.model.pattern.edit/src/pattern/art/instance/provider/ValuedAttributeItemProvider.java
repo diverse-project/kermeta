@@ -130,7 +130,7 @@ public class ValuedAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ValuedAttribute)object).getValue();
+		String label = ((ValuedAttribute)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ValuedAttribute_type") :
 			getString("_UI_ValuedAttribute_type") + " " + label;

@@ -15,15 +15,20 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
+import patternframework.PObject;
+import patternframework.PatternframeworkPackage;
 
 /**
  * This is the item provider adapter for a {@link patternframework.PObject} object.
@@ -60,8 +65,31 @@ public class PObjectItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPidPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Pid feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPidPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PObject_pid_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PObject_pid_feature", "_UI_PObject_type"),
+				 PatternframeworkPackage.Literals.POBJECT__PID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -83,7 +111,10 @@ public class PObjectItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_PObject_type");
+		String label = ((PObject)object).getPid();
+		return label == null || label.length() == 0 ?
+			getString("_UI_PObject_type") :
+			getString("_UI_PObject_type") + " " + label;
 	}
 
 	/**
@@ -96,6 +127,12 @@ public class PObjectItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(PObject.class)) {
+			case PatternframeworkPackage.POBJECT__PID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

@@ -42,7 +42,7 @@ import patternframework.PatternframeworkPackage;
  */
 public class PModelImpl extends EObjectImpl implements PModel {
 	/**
-	 * The cached value of the '{@link #getContent() <em>Content</em>}' reference list.
+	 * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getContent()
@@ -87,7 +87,7 @@ public class PModelImpl extends EObjectImpl implements PModel {
 	 */
 	public EList<PObject> getContent() {
 		if (content == null) {
-			content = new EObjectResolvingEList<PObject>(PObject.class, this, PatternframeworkPackage.PMODEL__CONTENT);
+			content = new EObjectContainmentEList<PObject>(PObject.class, this, PatternframeworkPackage.PMODEL__CONTENT);
 		}
 		return content;
 	}
@@ -112,6 +112,8 @@ public class PModelImpl extends EObjectImpl implements PModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case PatternframeworkPackage.PMODEL__CONTENT:
+				return ((InternalEList<?>)getContent()).basicRemove(otherEnd, msgs);
 			case PatternframeworkPackage.PMODEL__ROLES:
 				return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
 		}

@@ -272,6 +272,15 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPObject_Pid() {
+		return (EAttribute)pObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPConstraint() {
 		return pConstraintEClass;
 	}
@@ -387,6 +396,7 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 		createEReference(pModelEClass, PMODEL__ROLES);
 
 		pObjectEClass = createEClass(POBJECT);
+		createEAttribute(pObjectEClass, POBJECT__PID);
 
 		pConstraintEClass = createEClass(PCONSTRAINT);
 		createEAttribute(pConstraintEClass, PCONSTRAINT__EXPRESSION);
@@ -444,10 +454,11 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 		addEParameter(op, this.getPLabel(), "roleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(pModelEClass, PModel.class, "PModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPModel_Content(), this.getPObject(), null, "content", null, 0, -1, PModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPModel_Content(), this.getPObject(), null, "content", null, 0, -1, PModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPModel_Roles(), this.getPRole(), null, "roles", null, 0, -1, PModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pObjectEClass, PObject.class, "PObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPObject_Pid(), this.getPLabel(), "pid", null, 0, 1, PObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pConstraintEClass, PConstraint.class, "PConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPConstraint_Expression(), this.getPExpression(), "expression", null, 0, 1, PConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -490,6 +501,12 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 		   });		
 		addAnnotation
 		  (getModelPattern_FeatureIdentifier(), 
+		   source, 
+		   new String[] {
+			 "isComposite", "true"
+		   });		
+		addAnnotation
+		  (getPObject_Pid(), 
 		   source, 
 		   new String[] {
 			 "isComposite", "true"

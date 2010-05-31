@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import pattern.art.instance.AttributeInstance;
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
 
 import patternframework.provider.PObjectItemProvider;
@@ -84,7 +85,10 @@ public class AttributeInstanceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_AttributeInstance_type");
+		String label = ((AttributeInstance)object).getPid();
+		return label == null || label.length() == 0 ?
+			getString("_UI_AttributeInstance_type") :
+			getString("_UI_AttributeInstance_type") + " " + label;
 	}
 
 	/**

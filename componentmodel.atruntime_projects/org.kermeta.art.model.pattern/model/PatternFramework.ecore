@@ -26,11 +26,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
-        eType="#//PObject"/>
+        eType="#//PObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//PRole" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pid" eType="#//PLabel">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="#//PExpression">
       <eAnnotations source="kermeta">

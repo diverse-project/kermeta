@@ -139,7 +139,10 @@ public class DictionaryValuedAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_DictionaryValuedAttribute_type");
+		String label = ((DictionaryValuedAttribute)object).getPid();
+		return label == null || label.length() == 0 ?
+			getString("_UI_DictionaryValuedAttribute_type") :
+			getString("_UI_DictionaryValuedAttribute_type") + " " + label;
 	}
 
 	/**

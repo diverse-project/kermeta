@@ -27,8 +27,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import pattern.art.ArtFactory;
+import pattern.art.group.GroupFactory;
+import pattern.art.implem.ImplemFactory;
+import pattern.art.instance.InstanceFactory;
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
 
+import pattern.art.type.TypeFactory;
 import patternframework.PModel;
 import patternframework.PatternframeworkFactory;
 import patternframework.PatternframeworkPackage;
@@ -68,31 +73,8 @@ public class PModelItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addContentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Content feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addContentPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PModel_content_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PModel_content_feature", "_UI_PModel_type"),
-				 PatternframeworkPackage.Literals.PMODEL__CONTENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -107,6 +89,7 @@ public class PModelItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(PatternframeworkPackage.Literals.PMODEL__CONTENT);
 			childrenFeatures.add(PatternframeworkPackage.Literals.PMODEL__ROLES);
 		}
 		return childrenFeatures;
@@ -159,6 +142,7 @@ public class PModelItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PModel.class)) {
+			case PatternframeworkPackage.PMODEL__CONTENT:
 			case PatternframeworkPackage.PMODEL__ROLES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -176,6 +160,221 @@ public class PModelItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 PatternframeworkFactory.eINSTANCE.createPObject()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createNamedElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createModelElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createSystem()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createDataType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createTypedElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ArtFactory.eINSTANCE.createCardinalityElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createComponentInstance()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createPrimitiveInstance()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createCompositeInstance()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createTransmissionBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createDelegationBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createAttributeInstance()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createValuedAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createDictionaryValuedAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createDefaultEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 InstanceFactory.eINSTANCE.createOtherEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createComponentType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createCompositeType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createService()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createFunctionalService()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createControlService()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createAbstractPort()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createPort()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createPortCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createPortId()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createBasicAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createDictionary()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 TypeFactory.eINSTANCE.createDictionaryDefaultValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ImplemFactory.eINSTANCE.createComponentImplementation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ImplemFactory.eINSTANCE.createFractalComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ImplemFactory.eINSTANCE.createOSGiComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ImplemFactory.eINSTANCE.createTypeImplementation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 ImplemFactory.eINSTANCE.createOSGiType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 GroupFactory.eINSTANCE.createGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 GroupFactory.eINSTANCE.createTypeGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PatternframeworkPackage.Literals.PMODEL__CONTENT,
+				 GroupFactory.eINSTANCE.createInstanceGroup()));
 
 		newChildDescriptors.add
 			(createChildParameter

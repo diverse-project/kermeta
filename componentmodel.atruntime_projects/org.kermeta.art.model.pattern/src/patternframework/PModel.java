@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PModel extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Content</b></em>' reference list.
+	 * Returns the value of the '<em><b>Content</b></em>' containment reference list.
 	 * The list contents are of type {@link patternframework.PObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -37,9 +37,9 @@ public interface PModel extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Content</em>' reference list.
+	 * @return the value of the '<em>Content</em>' containment reference list.
 	 * @see patternframework.PatternframeworkPackage#getPModel_Content()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<PObject> getContent();

@@ -186,10 +186,12 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="PatternFramework.ecore#//PModel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PatternFramework.ecore#//PModel/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PatternFramework.ecore#//PModel/content"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PatternFramework.ecore#//PModel/roles"/>
     </genClasses>
-    <genClasses ecoreClass="PatternFramework.ecore#//PObject"/>
+    <genClasses ecoreClass="PatternFramework.ecore#//PObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PatternFramework.ecore#//PObject/pid"/>
+    </genClasses>
     <genClasses ecoreClass="PatternFramework.ecore#//PConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PatternFramework.ecore#//PConstraint/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PatternFramework.ecore#//PConstraint/language"/>

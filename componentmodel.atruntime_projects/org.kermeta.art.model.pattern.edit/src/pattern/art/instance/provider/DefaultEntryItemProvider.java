@@ -105,7 +105,7 @@ public class DefaultEntryItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DefaultEntry)object).getValue();
+		String label = ((DefaultEntry)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DefaultEntry_type") :
 			getString("_UI_DefaultEntry_type") + " " + label;

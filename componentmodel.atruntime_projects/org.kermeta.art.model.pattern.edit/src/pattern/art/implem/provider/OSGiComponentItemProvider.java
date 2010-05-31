@@ -107,7 +107,7 @@ public class OSGiComponentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OSGiComponent)object).getImplementingClass();
+		String label = ((OSGiComponent)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_OSGiComponent_type") :
 			getString("_UI_OSGiComponent_type") + " " + label;

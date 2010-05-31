@@ -75,6 +75,15 @@ public interface TypePackage extends EPackage {
 	int COMPONENT_TYPE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__PID = ArtPackage.MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,6 +146,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int PRIMITIVE_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__PID = COMPONENT_TYPE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -203,6 +221,15 @@ public interface TypePackage extends EPackage {
 	int COMPOSITE_TYPE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__PID = COMPONENT_TYPE__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -267,6 +294,15 @@ public interface TypePackage extends EPackage {
 	int SERVICE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__PID = ArtPackage.MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -302,6 +338,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int OPERATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__PID = ArtPackage.MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -350,6 +395,15 @@ public interface TypePackage extends EPackage {
 	int PARAMETER = 5;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__PID = ArtPackage.TYPED_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -385,6 +439,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int FUNCTIONAL_SERVICE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTIONAL_SERVICE__PID = SERVICE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -424,6 +487,15 @@ public interface TypePackage extends EPackage {
 	int CONTROL_SERVICE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_SERVICE__PID = SERVICE__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -459,6 +531,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int ABSTRACT_PORT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__PID = ArtPackage.NAMED_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -505,6 +586,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int PORT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__PID = ArtPackage.CARDINALITY_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -580,6 +670,15 @@ public interface TypePackage extends EPackage {
 	int PORT_COLLECTION = 10;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__PID = ABSTRACT_PORT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -635,6 +734,15 @@ public interface TypePackage extends EPackage {
 	int PORT_ID = 11;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_ID__PID = ArtPackage.NAMED_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -661,6 +769,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int ATTRIBUTE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__PID = ArtPackage.TYPED_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -698,6 +815,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int BASIC_ATTRIBUTE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ATTRIBUTE__PID = ATTRIBUTE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -744,6 +870,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int DICTIONARY = 14;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY__PID = ATTRIBUTE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -799,6 +934,15 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	int DICTIONARY_DEFAULT_VALUE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_DEFAULT_VALUE__PID = PatternframeworkPackage.POBJECT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.

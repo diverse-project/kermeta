@@ -73,6 +73,15 @@ public interface ArtPackage extends EPackage {
 	int NAMED_ELEMENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__PID = PatternframeworkPackage.POBJECT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +110,15 @@ public interface ArtPackage extends EPackage {
 	int MODEL_ELEMENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT__PID = NAMED_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -127,6 +145,15 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 */
 	int SYSTEM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -202,6 +229,15 @@ public interface ArtPackage extends EPackage {
 	int DATA_TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__PID = MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -228,6 +264,15 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 */
 	int TYPED_ELEMENT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -265,6 +310,15 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 */
 	int CARDINALITY_ELEMENT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARDINALITY_ELEMENT__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

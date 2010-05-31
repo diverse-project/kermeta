@@ -127,7 +127,7 @@ public interface PatternframeworkPackage extends EPackage {
 	int PMODEL = 1;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' reference list.
+	 * The feature id for the '<em><b>Content</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -164,13 +164,22 @@ public interface PatternframeworkPackage extends EPackage {
 	int POBJECT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POBJECT__PID = 0;
+
+	/**
 	 * The number of structural features of the '<em>PObject</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POBJECT_FEATURE_COUNT = 0;
+	int POBJECT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link patternframework.impl.PConstraintImpl <em>PConstraint</em>}' class.
@@ -342,10 +351,10 @@ public interface PatternframeworkPackage extends EPackage {
 	EClass getPModel();
 
 	/**
-	 * Returns the meta object for the reference list '{@link patternframework.PModel#getContent <em>Content</em>}'.
+	 * Returns the meta object for the containment reference list '{@link patternframework.PModel#getContent <em>Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Content</em>'.
+	 * @return the meta object for the containment reference list '<em>Content</em>'.
 	 * @see patternframework.PModel#getContent()
 	 * @see #getPModel()
 	 * @generated
@@ -372,6 +381,17 @@ public interface PatternframeworkPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link patternframework.PObject#getPid <em>Pid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pid</em>'.
+	 * @see patternframework.PObject#getPid()
+	 * @see #getPObject()
+	 * @generated
+	 */
+	EAttribute getPObject_Pid();
 
 	/**
 	 * Returns the meta object for class '{@link patternframework.PConstraint <em>PConstraint</em>}'.
@@ -544,7 +564,7 @@ public interface PatternframeworkPackage extends EPackage {
 		EClass PMODEL = eINSTANCE.getPModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Content</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Content</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -568,6 +588,14 @@ public interface PatternframeworkPackage extends EPackage {
 		 * @generated
 		 */
 		EClass POBJECT = eINSTANCE.getPObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Pid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POBJECT__PID = eINSTANCE.getPObject_Pid();
 
 		/**
 		 * The meta object literal for the '{@link patternframework.impl.PConstraintImpl <em>PConstraint</em>}' class.

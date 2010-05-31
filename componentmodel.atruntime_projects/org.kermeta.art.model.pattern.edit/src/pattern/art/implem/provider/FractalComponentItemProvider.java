@@ -130,7 +130,7 @@ public class FractalComponentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FractalComponent)object).getControllerDesc();
+		String label = ((FractalComponent)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FractalComponent_type") :
 			getString("_UI_FractalComponent_type") + " " + label;

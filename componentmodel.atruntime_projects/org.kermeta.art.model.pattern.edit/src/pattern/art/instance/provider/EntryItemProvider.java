@@ -113,7 +113,7 @@ public class EntryItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Entry)object).getValue();
+		String label = ((Entry)object).getPid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Entry_type") :
 			getString("_UI_Entry_type") + " " + label;

@@ -71,6 +71,15 @@ public interface ImplemPackage extends EPackage {
 	int COMPONENT_IMPLEMENTATION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_IMPLEMENTATION__PID = PatternframeworkPackage.POBJECT__PID;
+
+	/**
 	 * The number of structural features of the '<em>Component Implementation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +97,15 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	int FRACTAL_COMPONENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRACTAL_COMPONENT__PID = COMPONENT_IMPLEMENTATION__PID;
 
 	/**
 	 * The feature id for the '<em><b>Controller Desc</b></em>' attribute.
@@ -127,6 +145,15 @@ public interface ImplemPackage extends EPackage {
 	int OS_GI_COMPONENT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_COMPONENT__PID = COMPONENT_IMPLEMENTATION__PID;
+
+	/**
 	 * The feature id for the '<em><b>Implementing Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -155,6 +182,15 @@ public interface ImplemPackage extends EPackage {
 	int TYPE_IMPLEMENTATION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_IMPLEMENTATION__PID = PatternframeworkPackage.POBJECT__PID;
+
+	/**
 	 * The number of structural features of the '<em>Type Implementation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +208,15 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	int OS_GI_TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_TYPE__PID = TYPE_IMPLEMENTATION__PID;
 
 	/**
 	 * The feature id for the '<em><b>Generate Instance Bundle</b></em>' attribute.

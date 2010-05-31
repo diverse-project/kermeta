@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import pattern.art.implem.TypeImplementation;
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
 
 import patternframework.provider.PObjectItemProvider;
@@ -84,7 +85,10 @@ public class TypeImplementationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_TypeImplementation_type");
+		String label = ((TypeImplementation)object).getPid();
+		return label == null || label.length() == 0 ?
+			getString("_UI_TypeImplementation_type") :
+			getString("_UI_TypeImplementation_type") + " " + label;
 	}
 
 	/**

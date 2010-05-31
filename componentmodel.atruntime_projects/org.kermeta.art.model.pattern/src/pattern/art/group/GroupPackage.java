@@ -71,6 +71,15 @@ public interface GroupPackage extends EPackage {
 	int GROUP = 0;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__PID = ArtPackage.NAMED_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,6 +106,15 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 */
 	int TYPE_GROUP = 1;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_GROUP__PID = GROUP__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -143,6 +161,15 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 */
 	int INSTANCE_GROUP = 2;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_GROUP__PID = GROUP__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
