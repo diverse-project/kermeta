@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.smartadapters.core.resource.core.mopp.CoreMetaInformation" id="org.smartadapters.core.resource.core.mopp.CoreMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.smartadapters.core.resource.core.ui.CoreEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="core" icon="icons/editor_icon.gif" id="org.smartadapters.core.resource.core.ui.CoreEditor" name="EMFText core Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.smartadapters.core.resource.core.ui.CorePreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Core Text Editor" id="org.smartadapters.core.resource.core.ui.CorePreferencePage" class="org.smartadapters.core.resource.core.ui.CorePreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.smartadapters.core.resource.core.ui.CoreSyntaxColoringPreferencePage" class="org.smartadapters.core.resource.core.ui.CoreSyntaxColoringPreferencePage" category="org.smartadapters.core.resource.core.ui.CorePreferencePage">
+		</page>
+		<page name="Brackets" id="org.smartadapters.core.resource.core.ui.CoreBracketPreferencePage" class="org.smartadapters.core.resource.core.ui.CoreBracketPreferencePage" category="org.smartadapters.core.resource.core.ui.CorePreferencePage">
+		</page>
+		<page name="Occurrence" id="org.smartadapters.core.resource.core.ui.CoreOccurrencePreferencePage" class="org.smartadapters.core.resource.core.ui.CoreOccurrencePreferencePage" category="org.smartadapters.core.resource.core.ui.CorePreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.smartadapters.core.resource.core.ui.CoreNewFileWizard" id="org.smartadapters.core.resource.core.ui.CoreNewFileWizard" name="EMFText .core file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.smartadapters.core.resource.core.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension id="org.smartadapters.core.resource.core.nature" name="core nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.smartadapters.core.resource.core.mopp.CoreNature" />
+		</runtime>
+		<builder id="org.smartadapters.core.resource.core.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.smartadapters.core.resource.core.builder" name="core Builder">
+		<builder hasNature="true">
+			<run class="org.smartadapters.core.resource.core.mopp.CoreBuilderAdapter" />
+		</builder>
+	</extension>
+	
+	<extension-point id="org.smartadapters.core.resource.core.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.smartadapters.core.resource.core.mopp.CoreResourceFactoryDelegator" type="core">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.smartadapters.core.resource.core.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>
