@@ -276,9 +276,9 @@
       </figure>
       <para>The <ulink
           url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_define_metamodel.link"
-          > Logo tutorial </ulink> presents how to create a dynamic instance with an ecorediag. The
-        next section presents another way to create instances of a given metamodel, create a tree
-        view editor with an EMF project.</para>
+          > Logo tutorial </ulink> ( chapter 4 Editor, section 4.1 Dynamic Instance) presents how to
+        create a dynamic instance with an ecorediag. The next section presents another way to create
+        instances of a given metamodel, create a tree view editor with an EMF project.</para>
     </section>
     <section id="treeViewEditor">
       <title>Tree view editor</title>
@@ -418,7 +418,7 @@
           url="http://www.kermeta.org/sintaks/"> Sintaks </ulink> (which is part of the Kermeta
         project) . This textuals editors are not detailed here, please refer to the <ulink
           url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_editor.title.link"
-          > Logo tutorial </ulink>. </para>
+          > Logo tutorial </ulink> (chapter 4 Editor, section 4.3 Textual Editor). </para>
     </section>
     <section id="graphical_editors">
       <title> Graphical editors</title>
@@ -1434,7 +1434,7 @@ post post3 of operation step of class State violated</programlisting>
     <para> You can customize your user interface like shown below. For more samples please refer to
       the <ulink
         url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_ui_improvements.link"
-        > Logo tutorial </ulink>. </para>
+        > Logo tutorial </ulink> (chapter 9 : UI Improvement). </para>
     <section id="CustomizeEMF_Editor">
       <title> Customize the generated EMF editor</title>
       <para> Generated code can be modified for customization. An EMF editor for FSM models is ever
