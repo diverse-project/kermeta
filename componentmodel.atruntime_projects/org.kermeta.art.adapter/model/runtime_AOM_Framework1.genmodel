@@ -35,10 +35,6 @@
         </genClasses>
         <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/setAdaptation"/>
         <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/unsetAdaptation"/>
-        <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/makeUnique">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/makeUnique/element"/>
-        </genClasses>
         <nestedGenPackages prefix="Adaptations" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations">
           <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"

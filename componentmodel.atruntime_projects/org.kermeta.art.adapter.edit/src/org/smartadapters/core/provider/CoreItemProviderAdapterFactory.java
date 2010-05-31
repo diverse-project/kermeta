@@ -122,29 +122,6 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.smartadapters.core.makeUnique} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected makeUniqueItemProvider makeUniqueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.smartadapters.core.makeUnique}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createmakeUniqueAdapter() {
-		if (makeUniqueItemProvider == null) {
-			makeUniqueItemProvider = new makeUniqueItemProvider(this);
-		}
-
-		return makeUniqueItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,7 +222,6 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	public void dispose() {
 		if (adapterItemProvider != null) adapterItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
-		if (makeUniqueItemProvider != null) makeUniqueItemProvider.dispose();
 	}
 
 }

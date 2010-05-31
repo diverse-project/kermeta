@@ -311,43 +311,6 @@ public interface CorePackage extends EPackage {
 	int UNSET_ADAPTATION_FEATURE_COUNT = ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.smartadapters.core.impl.makeUniqueImpl <em>make Unique</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.smartadapters.core.impl.makeUniqueImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getmakeUnique()
-	 * @generated
-	 */
-	int MAKE_UNIQUE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Adapter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAKE_UNIQUE__ADAPTER = ADAPTATION__ADAPTER;
-
-	/**
-	 * The feature id for the '<em><b>Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAKE_UNIQUE__ELEMENT = ADAPTATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>make Unique</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAKE_UNIQUE_FEATURE_COUNT = ADAPTATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.smartadapters.core.uniqueType <em>unique Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -355,7 +318,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.smartadapters.core.impl.CorePackageImpl#getuniqueType()
 	 * @generated
 	 */
-	int UNIQUE_TYPE = 8;
+	int UNIQUE_TYPE = 7;
 
 
 	/**
@@ -526,27 +489,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getunsetAdaptation();
-
-	/**
-	 * Returns the meta object for class '{@link org.smartadapters.core.makeUnique <em>make Unique</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>make Unique</em>'.
-	 * @see org.smartadapters.core.makeUnique
-	 * @generated
-	 */
-	EClass getmakeUnique();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.smartadapters.core.makeUnique#getElement <em>Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Element</em>'.
-	 * @see org.smartadapters.core.makeUnique#getElement()
-	 * @see #getmakeUnique()
-	 * @generated
-	 */
-	EReference getmakeUnique_Element();
 
 	/**
 	 * Returns the meta object for enum '{@link org.smartadapters.core.uniqueType <em>unique Type</em>}'.
@@ -721,24 +663,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass UNSET_ADAPTATION = eINSTANCE.getunsetAdaptation();
-
-		/**
-		 * The meta object literal for the '{@link org.smartadapters.core.impl.makeUniqueImpl <em>make Unique</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.smartadapters.core.impl.makeUniqueImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getmakeUnique()
-		 * @generated
-		 */
-		EClass MAKE_UNIQUE = eINSTANCE.getmakeUnique();
-
-		/**
-		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAKE_UNIQUE__ELEMENT = eINSTANCE.getmakeUnique_Element();
 
 		/**
 		 * The meta object literal for the '{@link org.smartadapters.core.uniqueType <em>unique Type</em>}' enum.

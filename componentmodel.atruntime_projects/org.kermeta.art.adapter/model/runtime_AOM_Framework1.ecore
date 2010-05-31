@@ -54,10 +54,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="setAdaptation" abstract="true" eSuperTypes="#//smartadapters/core/Adaptation"/>
       <eClassifiers xsi:type="ecore:EClass" name="unsetAdaptation" abstract="true"
           eSuperTypes="#//smartadapters/core/Adaptation"/>
-      <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="#//smartadapters/core/Adaptation">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
-            eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/PatternFramework.ecore#//PObject"/>
-      </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="uniqueType">
         <eLiterals name="unique" literal="unique"/>
         <eLiterals name="non_unique" value="1" literal="non_unique"/>

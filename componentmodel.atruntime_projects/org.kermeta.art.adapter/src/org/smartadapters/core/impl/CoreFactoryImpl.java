@@ -63,7 +63,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eClass.getClassifierID()) {
 			case CorePackage.ADAPTER: return createAdapter();
 			case CorePackage.ASPECT: return createAspect();
-			case CorePackage.MAKE_UNIQUE: return createmakeUnique();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -117,16 +116,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public Aspect createAspect() {
 		AspectImpl aspect = new AspectImpl();
 		return aspect;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public makeUnique createmakeUnique() {
-		makeUniqueImpl makeUnique = new makeUniqueImpl();
-		return makeUnique;
 	}
 
 	/**

@@ -27,11 +27,19 @@ import org.smartadapters.core.impl.CorePackageImpl;
 
 import pattern.art.ArtPackage;
 
+import pattern.art.group.GroupPackage;
+import pattern.art.group.impl.GroupPackageImpl;
+import pattern.art.impl.ArtPackageImpl;
+import pattern.art.implem.ImplemPackage;
+import pattern.art.implem.impl.ImplemPackageImpl;
 import pattern.art.instance.InstancePackage;
 
+import pattern.art.instance.impl.InstancePackageImpl;
 import pattern.art.type.TypePackage;
 
+import pattern.art.type.impl.TypePackageImpl;
 import patternframework.PatternframeworkPackage;
+import patternframework.impl.PatternframeworkPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

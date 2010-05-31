@@ -33,7 +33,17 @@ import org.smartadapters.core.unsetAdaptation;
 
 import pattern.art.ArtPackage;
 
+import pattern.art.group.GroupPackage;
+import pattern.art.group.impl.GroupPackageImpl;
+import pattern.art.impl.ArtPackageImpl;
+import pattern.art.implem.ImplemPackage;
+import pattern.art.implem.impl.ImplemPackageImpl;
+import pattern.art.instance.InstancePackage;
+import pattern.art.instance.impl.InstancePackageImpl;
+import pattern.art.type.TypePackage;
+import pattern.art.type.impl.TypePackageImpl;
 import patternframework.PatternframeworkPackage;
+import patternframework.impl.PatternframeworkPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,13 +100,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass unsetAdaptationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass makeUniqueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -324,24 +327,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getmakeUnique() {
-		return makeUniqueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getmakeUnique_Element() {
-		return (EReference)makeUniqueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getuniqueType() {
 		return uniqueTypeEEnum;
 	}
@@ -397,9 +382,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		unsetAdaptationEClass = createEClass(UNSET_ADAPTATION);
 
-		makeUniqueEClass = createEClass(MAKE_UNIQUE);
-		createEReference(makeUniqueEClass, MAKE_UNIQUE__ELEMENT);
-
 		// Create enums
 		uniqueTypeEEnum = createEEnum(UNIQUE_TYPE);
 	}
@@ -444,7 +426,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createAdaptationEClass.getESuperTypes().add(this.getAdaptation());
 		setAdaptationEClass.getESuperTypes().add(this.getAdaptation());
 		unsetAdaptationEClass.getESuperTypes().add(this.getAdaptation());
-		makeUniqueEClass.getESuperTypes().add(this.getAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(adapterEClass, Adapter.class, "Adapter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -469,9 +450,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(setAdaptationEClass, setAdaptation.class, "setAdaptation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unsetAdaptationEClass, unsetAdaptation.class, "unsetAdaptation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(makeUniqueEClass, makeUnique.class, "makeUnique", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getmakeUnique_Element(), thePatternframeworkPackage.getPObject(), null, "element", null, 1, 1, makeUnique.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(uniqueTypeEEnum, uniqueType.class, "uniqueType");

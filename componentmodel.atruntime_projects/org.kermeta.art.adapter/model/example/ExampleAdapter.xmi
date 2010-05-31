@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:core="http://SmartAdapters4ART/smartadapters/core" xsi:schemaLocation="http://SmartAdapters4ART/smartadapters/core runtime_AOM_Framework1.ecore#//smartadapters/core">
+<aspect>
+    <template>
+      <pattern>
+        <content href="drivingPointcut.xmi#/"/>
+        <content href="drivingPointcut.xmi#//@root"/>
+        <content href="drivingPointcut.xmi#//@services.0"/>
+        <content href="drivingPointcut.xmi#//@types.0"/>
+        <content href="drivingPointcut.xmi#//@root/@subComponent.0"/>
+        <content href="drivingPointcut.xmi#//@types.0/@port.0"/>
+        <roles name="anySystem">
+          <player href="drivingPointcut.xmi#/"/>
+        </roles>
+        <roles name="anyRootComponent">
+          <player href="drivingPointcut.xmi#//@root"/>
+        </roles>
+        <roles name="anyComponent">
+          <player href="drivingPointcut.xmi#//@root/@subComponent.0"/>
+        </roles>
+        <roles name="anyType">
+          <player href="drivingPointcut.xmi#//@types.0"/>
+        </roles>
+        <roles name="anyNotifierClientPort">
+          <player href="drivingPointcut.xmi#//@types.0/@port.0"/>
+        </roles>
+        <roles name="anyNotifierService">
+          <player href="drivingPointcut.xmi#//@services.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.0"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.1"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.2"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.0/@binding.0"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.2/@binding.0"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.2/@binding.1"/>
+      <content href="drivingAdvice.xmi#/"/>
+      <content href="drivingAdvice.xmi#//@root"/>
+      <content href="drivingAdvice.xmi#//@services.0"/>
+      <content href="drivingAdvice.xmi#//@services.1"/>
+      <content href="drivingAdvice.xmi#//@services.2"/>
+      <content href="drivingAdvice.xmi#//@services.3"/>
+      <content href="drivingAdvice.xmi#//@types.0"/>
+      <content href="drivingAdvice.xmi#//@types.1"/>
+      <content href="drivingAdvice.xmi#//@types.2"/>
+      <content href="drivingAdvice.xmi#//@types.0/@port.0"/>
+      <content href="drivingAdvice.xmi#//@types.0/@port.1"/>
+      <content href="drivingAdvice.xmi#//@types.0/@port.2"/>
+      <content href="drivingAdvice.xmi#//@types.1/@port.0"/>
+      <content href="drivingAdvice.xmi#//@types.1/@port.1"/>
+      <content href="drivingAdvice.xmi#//@types.2/@port.0"/>
+      <content href="drivingAdvice.xmi#//@types.2/@port.1"/>
+      <content href="drivingAdvice.xmi#//@types.2/@port.2"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.3/@binding.0"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.3"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.4"/>
+      <content href="drivingAdvice.xmi#//@types.3/@port.0"/>
+      <content href="drivingAdvice.xmi#//@root/@subComponent.0/@binding.1"/>
+    </structure>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="drivingPointcut.xmi#/"/>
+    <refservices href="drivingAdvice.xmi#//@services.0"/>
+    <refservices href="drivingAdvice.xmi#//@services.1"/>
+    <refservices href="drivingAdvice.xmi#//@services.2"/>
+    <refservices href="drivingAdvice.xmi#//@services.3"/>
+    <reftypes href="drivingAdvice.xmi#//@types.0"/>
+    <reftypes href="drivingAdvice.xmi#//@types.1"/>
+    <reftypes href="drivingAdvice.xmi#//@types.2"/>
+    <reftypes href="drivingAdvice.xmi#//@types.3"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="drivingPointcut.xmi#//@root"/>
+    <refsubComponent href="drivingAdvice.xmi#//@root/@subComponent.0"/>
+    <refsubComponent href="drivingAdvice.xmi#//@root/@subComponent.1"/>
+    <refsubComponent href="drivingAdvice.xmi#//@root/@subComponent.2"/>
+    <refsubComponent href="drivingAdvice.xmi#//@root/@subComponent.4"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimetypePort">
+    <PortToSet href="drivingAdvice.xmi#//@types.0/@port.0"/>
+    <refservice href="drivingPointcut.xmi#//@services.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="drivingAdvice.xmi#//@root/@subComponent.3/@binding.0"/>
+    <refclient href="drivingPointcut.xmi#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="drivingPointcut.xmi#//@root/@subComponent.0"/>
+    <refbinding href="drivingAdvice.xmi#//@root/@subComponent.3/@binding.0"/>
+  </adapt>
+</core:Adapter>
+    

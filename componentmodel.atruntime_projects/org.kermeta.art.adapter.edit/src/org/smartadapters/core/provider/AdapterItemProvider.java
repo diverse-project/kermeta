@@ -194,11 +194,6 @@ public class AdapterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CorePackage.Literals.ADAPTER__ADAPT,
-				 CoreFactory.eINSTANCE.createmakeUnique()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeSystem()));
 
 		newChildDescriptors.add
