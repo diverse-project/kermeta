@@ -2407,7 +2407,7 @@ operation main() is do
       if (o == void) then stdio.writeln("Void object!") 
       else 
          stdio.writeln("---------------------------------") 
-         stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName 
+         stdio.writeln("Objet : " + o.getMetaClass.typeDefinition.qualifiedName 
             + " ( " + o.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) 
       end
       var template : cs::Template // Print instances which type is cs::Template 
