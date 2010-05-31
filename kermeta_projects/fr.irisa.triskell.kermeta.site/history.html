@@ -21,13 +21,32 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 	<li>Collections now implement an each operation that provides contextual informations like "first element", "last element", "element count" during the iteration .
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=9331&group_id=32&atid=208">feature request #9331)</a>.  
 	</li>
+	<li>Added an "Extended error view" which allows to see the details of a given error even if it contains many informations on many lines.
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8099&group_id=32&atid=208">feature request #8099)</a>. 
+		It works by selecting an error in the standard error view or by hovering your mouse over an error. 
+	</li>
 </ul>
 
 <h3>Improved features</h3>
-<ul>	
+<ul>
 	<li>Support for property file in compiler V1.
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=9106&group_id=32&atid=208">feature request #9106)</a>.  
 	</li>
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>Fixed a big memory leak, that force the user to use the "Kermeta trash bin".
+	This button should not be needed anymore.	
+	</li>
+	<li>#3724; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=3724&group_id=32&atid=205">How to suppress the kermeta nature of a project ?.</a> Now we have clear actions to add Kermeta nature and remove kermeta nature on projects.</li>
+	<li>#4339; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=4339&group_id=32&atid=205">when calling kmlogo interpreter cannot call the compiler anymore and vice versa</a></li>
+	<li>#5278; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5278&group_id=32&atid=205">conflict and crash if there is an alias to an Enumeration</a></li>
+	<li>#6092; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6092&group_id=32&atid=205">Only a 'null' word when saving model if MM not registered</a></li>
+	<li>#6466; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6466&group_id=32&atid=205">Console is closed before interpreter can report an error.</a></li>
+	<li>#7759; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7759&group_id=32&atid=205">km2Ecore doesn't save the documentation of the invariants.</a></li>
+	<li>#8858; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8858&group_id=32&atid=205"> failed to run the full logo tutorial on some OS due to bluetooh module.</a> The Logo sample has been refactored and a tutorial has been created for it in the eclipse help.</li>
+	<li>#9465; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=9465&group_id=32&atid=205">KMT printing fails on Linux and Mac OS X after OCL conversion.</a></li>	
+
 </ul>
 <h2 class="Heading">V1.3.2 (27/10/2009)</h2>
 <h3>New features</h3>
