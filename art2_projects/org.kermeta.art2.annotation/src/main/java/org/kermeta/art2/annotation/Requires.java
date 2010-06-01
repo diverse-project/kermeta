@@ -17,8 +17,7 @@ import java.lang.annotation.Target;
  */
 @Inherited
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD})
-public @interface PortType {
-        java.lang.String name();
-        boolean async() default false;
+@Target({ElementType.TYPE})
+public @interface Requires {
+    RequiredPort[] value();
 }

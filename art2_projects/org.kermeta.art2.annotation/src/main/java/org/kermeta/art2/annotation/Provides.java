@@ -17,10 +17,7 @@ import java.lang.annotation.Target;
  */
 @Inherited
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD})
-public @interface PortTypeInterface {
-        Class className();
-        String classQName() default "";
-        String method() default "empty";
-        boolean generate() default false;
+@Target({ElementType.TYPE})
+public @interface Provides {
+        ProvidedPort[] value();
 }
