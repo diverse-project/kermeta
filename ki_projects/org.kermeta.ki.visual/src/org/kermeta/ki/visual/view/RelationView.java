@@ -25,10 +25,10 @@ public class RelationView extends LinkView {
 		composition = isComposition ? new GeneralPath() : null;
 
 		if(srcRole!=null)
-			endingSrc = new RoleView(srcRole, srcCard, this, true, isComposition && compositionAtStart);
+			endingSrc = new RoleView(srcRole, srcCard, this, true, isComposition && !compositionAtStart);
 		
 		if(targetRole!=null)
-			endingTar = new RoleView(targetRole, targetCard, this, false, isComposition && !compositionAtStart);
+			endingTar = new RoleView(targetRole, targetCard, this, false, isComposition && compositionAtStart);
 	}
 
 	
