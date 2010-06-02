@@ -124,6 +124,9 @@
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"</filename></emphasis></term>
         		<listitem><para>
           			This files adds a support for getting a kind of singleton in Kermeta.</para>
+          			<para>See the presentation done for Kermeta days 09 <ulink type="" url="http://www.kermeta.org/community/workshop/09/slides/Vojtisek-KermetaDay09-Singleton.pdf">
+        				http://www.kermeta.org/community/workshop/09/slides/Vojtisek-KermetaDay09-Singleton.pdf</ulink>
+        			</para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
