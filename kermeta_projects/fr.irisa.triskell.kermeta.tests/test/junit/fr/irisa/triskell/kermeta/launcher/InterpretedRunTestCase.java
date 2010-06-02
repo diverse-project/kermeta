@@ -23,6 +23,7 @@ import java.util.Map;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
+import org.kermeta.io.plugin.IOPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,6 +108,9 @@ public class InterpretedRunTestCase extends AbstractRunTestCase {
         //if(isLastOfSerie){
         	interpreter = null;
         //}
+        if(isLastOfSerie){
+        	IOPlugin.getDefault().getEditionKermetaUnitStore().clear();
+        }
         
     }
 
