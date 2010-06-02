@@ -1,7 +1,7 @@
 /*
  * Creation : May 4, 2010
  * Licence  : EPL 
- * Copyright: INRIA Rennes
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
 package kermeta::ki::visual;
@@ -17,8 +17,7 @@ using kermeta::language::structure
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::interaction::event
-using kermeta::ki::malai::picking
+using kermeta::ki::malai::action
 
 
 class ElementsDisplayer inherits Instrument
@@ -29,22 +28,28 @@ class ElementsDisplayer inherits Instrument
 	
 	reference metamodel : ModelingUnit
 	
-	reference picker : Picker
 	
 	
-	operation initialiseWidgets(eventManager : EventManager) : Void is do
+	method initialise(actionRegistry : ActionRegistry) : Void is do
+		super(actionRegistry)
+		
+		initialiseWidgets
+	end
+	
+	
+	operation initialiseWidgets() : Void is do
 		opButton   := ToggleButton.new
 		attrButton := ToggleButton.new
 		
-		opButton.initialiseWithIcon("/res/op.png", eventManager)
-		attrButton.initialiseWithIcon("/res/attr.png", eventManager)
+		opButton.initialiseWithIcon("/res/op.png")
+		attrButton.initialiseWithIcon("/res/attr.png")
 	end
 	
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(ButtonPress2ChangeOperationsVisibility.new, picker, void, eventManager, false)	
-		addLink(ButtonPress2ChangePropertiesVisibility.new, picker, void, eventManager, false)	
+	method initialiseLinks() : Void is do
+		addLink(ButtonPress2ChangeOperationsVisibility.new, false)
+		addLink(ButtonPress2ChangePropertiesVisibility.new, false)
 	end
 	
 	
@@ -120,19 +125,3 @@ class ButtonPress2ChangePropertiesVisibility inherits ButtonPressLink
 	
 	method updateAction() : Void is do end
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

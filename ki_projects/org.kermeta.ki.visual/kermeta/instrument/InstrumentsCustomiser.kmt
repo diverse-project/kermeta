@@ -21,7 +21,6 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerCar
 
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction
 using kermeta::language::structure
@@ -35,10 +34,10 @@ class InstrumentsCustomiser inherits Instrument
 	
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(ButtonPress2ModifyViewPolicy.new, picker, void, eventManager, false)	
-		addLink(ValueChanged2ChangeRadius.new, picker, void, eventManager, false)	
-		addLink(CheckBoxPressed2Card.new, picker, void, eventManager, false)	
+	method initialiseLinks() : Void is do
+		addLink(ButtonPress2ModifyViewPolicy.new, false)	
+		addLink(ValueChanged2ChangeRadius.new, false)	
+		addLink(CheckBoxPressed2Card.new, false)	
 	end
 }
 

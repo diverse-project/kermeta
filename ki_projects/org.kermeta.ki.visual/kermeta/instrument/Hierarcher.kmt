@@ -13,7 +13,6 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Pre
 
 
 using kermeta::ki::malai::instrument
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::interaction
 using kermeta::language::structure
 
@@ -24,8 +23,8 @@ class Hierarcher inherits Instrument
 	reference metamodel : ModelingUnit
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(Press2GetHierarchy.new, metamodel, void, eventManager, false)
+	method initialiseLinks() : Void is do
+		addLink(Press2GetHierarchy.new, false)
 	end
 }
 

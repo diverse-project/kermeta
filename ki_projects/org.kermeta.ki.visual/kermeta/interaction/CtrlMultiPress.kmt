@@ -104,7 +104,7 @@ class CtrlMultiPressPressureTransition inherits PressureTransition {
 	method action() : Void is do
 		ctrlPress.pxs.add(Real.clone(px))
 		ctrlPress.pys.add(Real.clone(py))
-		ctrlPress.objects.add(ctrlPress.getPickableAt(px, py))
+		ctrlPress.objects.add(ctrlPress.getPickableAt(px, py, source))
 	end
 }
 

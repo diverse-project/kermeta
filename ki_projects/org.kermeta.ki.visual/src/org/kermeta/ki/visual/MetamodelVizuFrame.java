@@ -136,14 +136,14 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	
-	public MetamodelVizuFrame(EventManagerWrapper emw, JPanel toolbar) { 
+	public MetamodelVizuFrame(final EventManagerWrapper emw, final JPanel toolbar) { 
 		super("Metamodel visualisation");
 		
 //		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
 //		catch(Exception e) { /* */ }
 		
 		getContentPane().setLayout(new BorderLayout());
-		mmView = new MetamodelView(emw);
+		mmView = new MetamodelView();
 		JScrollPane sp = new JScrollPane(mmView);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		int width  = (int)(screen.width*0.85);
@@ -157,8 +157,8 @@ public class MetamodelVizuFrame extends JFrame {
      	addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(mmView.getEventManager()!=null)
-					mmView.getEventManager().onExitEvent();
+				if(emw!=null)
+					emw.onExitEvent();
             }});
      
 		new FileDrop(mmView, new FileDrop.Listener() {

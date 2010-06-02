@@ -13,7 +13,6 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.k
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::widget
 using kermeta::ki::malai::picking
-using kermeta::ki::malai::interaction::event
 
 
 class ContinueOperationSelector inherits Instrument
@@ -23,13 +22,14 @@ class ContinueOperationSelector inherits Instrument
 	reference picker : Picker
 	
 	
-	operation initialiseWidgets(eventManager : EventManager) : Void is do
+	operation initialiseWidgets() : Void is do
 		button := ToggleButton.new
-		button.initialiseWithText("->", eventManager)
+		button.initialiseWithText("->")
 	end
 	
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
+	method initialiseLinks() : Void is do
+		//TODO
 	end
 }

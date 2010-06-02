@@ -20,7 +20,6 @@ using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
 using kermeta::ki::malai::picking
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::action
 using kermeta::standard
 using kermeta::language::structure
@@ -44,12 +43,9 @@ class InstrumentsSelector inherits Instrument
 	
 	attribute handButton : ToggleButton
 	
-	reference picker : Picker
-	
 	
 
-	operation initialiseInstruments(pruner : Pruner, flattener : Flattener, hierarcher : Hierarcher, 
-							hand : Hand, eventManager : EventManager) : Void is do
+	operation initialiseInstruments(pruner : Pruner, flattener : Flattener, hierarcher : Hierarcher, hand : Hand) : Void is do
 		self.pruner     := pruner
 		self.flattener  := flattener
 		self.hierarcher := hierarcher
@@ -65,18 +61,18 @@ class InstrumentsSelector inherits Instrument
 		hierarcherButton := ToggleButton.new
 		handButton		 := ToggleButton.new
 		
-		prunerButton.initialiseWithIcon("/res/prune.png", eventManager)
-		flattenerButton.initialiseWithIcon("/res/flat.png", eventManager)
-		hierarcherButton.initialiseWithIcon("/res/hierar.png", eventManager)
-		handButton.initialiseWithIcon("/res/hand.png", eventManager)
+		prunerButton.initialiseWithIcon("/res/prune.png")
+		flattenerButton.initialiseWithIcon("/res/flat.png")
+		hierarcherButton.initialiseWithIcon("/res/hierar.png")
+		handButton.initialiseWithIcon("/res/hand.png")
 		
 		interimFeedback
 	end
 	
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(ButtonPressed2ActivateIns.new, picker, void, eventManager, false)
+	method initialiseLinks() : Void is do
+		addLink(ButtonPressed2ActivateIns.new, false)
 	end
 	
 	

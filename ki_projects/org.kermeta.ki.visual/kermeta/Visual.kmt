@@ -40,14 +40,10 @@ class Visual
 {
 	operation main() : Void is do
 		var aui			   : MetamodelCanvas init MetamodelCanvas.new
-		var eventManager   : EventManager    init EventManager.new
 		var dispatcher     : ListDispatcher  init ListDispatcher.new
 		
 		dispatcher.initialise
-		eventManager.initialise(dispatcher)
-		dispatcher.processes.add(eventManager)
-		
-		aui.initialise(eventManager)
+		aui.initialise(dispatcher)
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(aui)
 		aui.setVisible(true)
 		aui.refreshView
@@ -60,6 +56,8 @@ class Visual
 
 
 class MetamodelCanvas inherits ActionHandler, UndoHandler {
+	reference dispatcher : ListDispatcher
+
 	attribute metamodel : ModelingUnit
 	
 	attribute eltDisplayer : ElementsDisplayer
@@ -86,8 +84,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute actionRegistry : ActionRegistry
 	
-	attribute eventManager : EventManager
-	
 	attribute toolbar : Panel
 	
 	attribute viewPanel : Panel
@@ -95,13 +91,13 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 
 	
-	operation initialise(eventManager : EventManager) : Void is do
+	operation initialise(dispatcher : ListDispatcher) : Void is do
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
 		loadMetamodel("/examples/Ecore.km")
 //		loadMetamodel("/examples/UML.km")
 
-		self.eventManager := eventManager
+		self.dispatcher   := dispatcher
 		undoCollector     := UndoCollector.new 
 		actionRegistry    := ActionRegistry.new
 		
@@ -130,56 +126,60 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser.pruner := pruner
 		customiser.initialise(actionRegistry)
 		pruner.initialise(actionRegistry)
-		pruner.initialiseWidgets(eventManager)
 		undoManager.initialise(actionRegistry)
-		undoManager.initialiseWidgets(eventManager)
 		
 		pruner.metamodel := metamodel
-		pruner.initialiseLinks(eventManager)
+		pruner.initialiseLinks()
 		flattener.metamodel := metamodel
-		flattener.initialiseLinks(eventManager)
-		hand.picker := metamodel
-		hand.initialiseLinks(eventManager)
+		flattener.initialiseLinks()
+		hand.initialiseLinks()
 		hierarcher.metamodel := metamodel
-		hierarcher.initialiseLinks(eventManager)
+		hierarcher.initialiseLinks()
 		
 		eltDisplayer.metamodel := metamodel
 		eltDisplayer.initialise(actionRegistry)
-		eltDisplayer.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
-		selector.initialiseInstruments(pruner, flattener, hierarcher, hand, eventManager)
+		selector.initialiseInstruments(pruner, flattener, hierarcher, hand)
 
 		initialiseUI
-		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, metamodel.getEventManager)
 
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
 		model2view.modelingUnit := metamodel
 		metamodel.accept(model2view)
+		metamodel.setEventManager(self.dispatcher)
 		
-		eltDisplayer.picker := toolbar
-		eltDisplayer.initialiseLinks(eventManager)
+		eltDisplayer.initialiseLinks()
 		eltDisplayer.interimFeedback
 		eltDisplayer.setActivated(true)
 		zoomer.zoomable  := metamodel
 		zoomer.metamodel := metamodel
-		zoomer.initialiseLinks(eventManager)
+		zoomer.initialiseLinks()
 		zoomer.setActivated(true)
 		scroller.panel  := viewPanel
-		scroller.picker := metamodel
-		scroller.initialiseLinks(eventManager)
+		scroller.initialiseLinks()
 		scroller.setActivated(true)
 		customiser.picker := toolbar
-		customiser.initialiseLinks(eventManager)
+		customiser.initialiseLinks()
 		customiser.setActivated(true)	
-		selector.picker := toolbar
-		selector.initialiseLinks(eventManager)
+		selector.initialiseLinks()
 		selector.setActivated(true)
 		pruner.metamodel := metamodel
 		undoManager.undoCollector := undoCollector		
-		undoManager.picker := toolbar
 		undoCollector.handlers.add(undoManager)
-		undoManager.initialiseLinks(eventManager)
+		undoManager.initialiseLinks()
 		undoManager.setActivated(true)
+		
+		pruner.addEventable(metamodel)
+		flattener.addEventable(metamodel)
+		hand.addEventable(metamodel)
+		hierarcher.addEventable(metamodel)
+		eltDisplayer.addEventable(toolbar)
+		selector.addEventable(toolbar)
+		undoManager.addEventable(toolbar)
+		customiser.addEventable(toolbar)
+		zoomer.addEventable(metamodel)
+		scroller.addEventable(metamodel)
 		
 		//TOREMOVE
 /*		var action : PruneHierarchy init PruneHierarchy.new
@@ -223,25 +223,26 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar    := Panel.new
 		viewPanel  := Panel.new
 		
-		toolbar.initialise(eventManager)
-		
+		toolbar.initialiseEventManager(true, dispatcher)
+		viewPanel.initialiseEventManager(false, void)
+
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
 					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton,
 					selector.handButton, pruner.grayedButton, pruner.hideButton, pruner.radiusSpinner, pruner.cardCheckBox,
 					eltDisplayer.opButton, eltDisplayer.attrButton)
 					
-		toolbar.components.add(undoManager.undoButton)
-		toolbar.components.add(undoManager.redoButton)
-		toolbar.components.add(pruner.hideButton)
-		toolbar.components.add(pruner.grayedButton)
-		toolbar.components.add(pruner.radiusSpinner)
-		toolbar.components.add(pruner.cardCheckBox)
-		toolbar.components.add(selector.prunerButton)
-		toolbar.components.add(selector.hierarcherButton)
-		toolbar.components.add(selector.flattenerButton)
-		toolbar.components.add(selector.handButton)
-		toolbar.components.add(eltDisplayer.attrButton)
-		toolbar.components.add(eltDisplayer.opButton)
+		toolbar.addComponent(undoManager.undoButton, false)
+		toolbar.addComponent(undoManager.redoButton, false)
+		toolbar.addComponent(pruner.hideButton, false)
+		toolbar.addComponent(pruner.grayedButton, false)
+		toolbar.addComponent(pruner.radiusSpinner, false)
+		toolbar.addComponent(pruner.cardCheckBox, false)
+		toolbar.addComponent(selector.prunerButton, false)
+		toolbar.addComponent(selector.hierarcherButton, false)
+		toolbar.addComponent(selector.flattenerButton, false)
+		toolbar.addComponent(selector.handButton, false)
+		toolbar.addComponent(eltDisplayer.attrButton, false)
+		toolbar.addComponent(eltDisplayer.opButton, false)
 	end
 
 

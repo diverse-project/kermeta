@@ -15,7 +15,6 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/Pres
 
 using kermeta::language::structure
 using kermeta::standard
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::action
@@ -49,30 +48,32 @@ class Pruner inherits Instrument
 		viewPolicy    := PrunerViewPolicy.hide
 		radiusEffect  := 0
 		considerCard0 := true
+		
+		initialiseWidgets
 	end
 	
 	
 	
-	operation initialiseWidgets(eventManager : EventManager) : Void is do
+	operation initialiseWidgets() : Void is do
 		hideButton    := ToggleButton.new
 		grayedButton  := ToggleButton.new
 		radiusSpinner := Spinner.new
 		cardCheckBox  := CheckBox.new
 		
-		hideButton.initialiseWithText("Hide", eventManager)
-		grayedButton.initialiseWithText("Gray", eventManager)
-		radiusSpinner.initialise(eventManager)
-		cardCheckBox.initialise(eventManager)
+		hideButton.initialiseWithText("Hide")
+		grayedButton.initialiseWithText("Gray")
+		radiusSpinner.initialise()
+		cardCheckBox.initialise()
 		cardCheckBox.setText("With card 0")
 		interimFeedback
 	end
 	
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(MultiPress2Prune.new, metamodel, void, eventManager, false)
-		addLink(Press2Prune.new, metamodel, void, eventManager, false)
-		addLink(Press2Reinit.new, metamodel, void, eventManager, false)
+	method initialiseLinks() : Void is do
+		addLink(MultiPress2Prune.new, false)
+		addLink(Press2Prune.new, false)
+		addLink(Press2Reinit.new, false)
 	end
 	
 	

@@ -11,7 +11,6 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Pre
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Flat.kmt"
 
 using kermeta::ki::malai::instrument
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::interaction
 using kermeta::language::structure
 
@@ -21,8 +20,8 @@ class Flattener inherits Instrument
 	reference metamodel : ModelingUnit
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(Press2Flat.new, metamodel, void, eventManager, false)
+	method initialiseLinks() : Void is do
+		addLink(Press2Flat.new, false)
 	end
 }
 

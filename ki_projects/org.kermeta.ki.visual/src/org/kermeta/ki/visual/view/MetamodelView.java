@@ -22,7 +22,6 @@ import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
 import org.kermeta.ki.malai.Zoomable;
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.MetamodelVizuFrame;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
@@ -38,7 +37,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	protected List<LinkView> links;
 	
-	protected EventManagerWrapper eventManager;
+//	protected EventManagerWrapper eventManager;
 	
 	protected double zoom;
 	
@@ -288,20 +287,20 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	
 	
-	public MetamodelView(EventManagerWrapper emw) {
+	public MetamodelView() {
 		super();
 
 		operationsVisible = true;
 		attributesVisible = true;
-		eventManager = emw;
+//		eventManager = emw;
 		entities  	 = new ArrayList<EntityView>();
 		links 		 = new ArrayList<LinkView>();
 		zoom		 = 1.;
 		
 		setFocusable(true);
 		
-		if(eventManager!=null)
-			eventManager.attachTo(this);
+//		if(eventManager!=null)
+//			eventManager.attachTo(this);
 		
 		addMouseListener(this); //TODO to remove!!
 		addMouseMotionListener(this); //TODO to remove!!
@@ -498,9 +497,9 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	
 	
-	public EventManagerWrapper getEventManager() {
-		return eventManager;
-	}
+//	public EventManagerWrapper getEventManager() {
+//		return eventManager;
+//	}
 
 
 

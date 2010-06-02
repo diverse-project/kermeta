@@ -8,12 +8,16 @@ package kermeta::language::structure;
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Eventable.kmt"
 require kermeta
 
 
 using kermeta::standard
 using kermeta::ki::malai::picking
 using kermeta::ki::visual
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::dispatcher
 
 
 aspect class Object {
@@ -142,7 +146,18 @@ aspect class ClassDefinition inherits Pickable {
 
 
 
-aspect class ModelingUnit inherits Picker {
+aspect class ModelingUnit inherits Picker, Eventable {
+	attribute eventManager : EventManager
+	
+	
+	operation setEventManager(dispatcher : ListDispatcher) : Void is do
+		eventManager := EventManager.new
+		eventManager.initialise(dispatcher)
+		extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(self, eventManager)
+		dispatcher.processes.add(eventManager)
+	end
+	
+	
 	operation isClassDefined(classDef : GenericTypeDefinition) : Boolean is do
 		result := (not classDef.isVoid).andThen{b | packages.exists{p | p.ownedTypeDefinition.exists{td | classDef==td }}}
 	end
@@ -194,6 +209,16 @@ aspect class ModelingUnit inherits Picker {
 	
 	operation setPropertiesVisible(visible : Boolean) : Void is do
 		extern org::kermeta::ki::visual::view::MetamodelView.setPropertiesVisible(self, visible)
+	end
+	
+	
+	method hasEventManager() : Boolean is do
+		result := not eventManager.isVoid
+	end
+	
+	
+	method getEventManager() : EventManager is do
+		result := eventManager
 	end
 }
 
