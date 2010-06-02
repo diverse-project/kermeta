@@ -25,7 +25,7 @@
          </action>
       </objectContribution>
       <objectContribution
-            id="art.resource.art.popups.contribution1"
+            id="art.resource.art.popups.contribution2"
             nameFilter="*.art"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
@@ -42,6 +42,46 @@
                id="art.resource.art.popups.popup.actions.ART2XMI"
                label="ART 2 XMI"
                menubarPath="art.resource.art.popups.menu2/group2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="art.resource.art.popups.contribution4"
+            nameFilter="*.part"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="art.resource.art.popups.menu2"
+               label="ART"
+               path="additions">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               class="art.resource.art.popups.popup.actions.PART2XMI"
+               enablesFor="1"
+               id="art.resource.art.popups.popup.actions.PART2XMI"
+               label="PART 2 XMI"
+               menubarPath="art.resource.art.popups.menu2/group2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="art.resource.art.popups.contribution1"
+            nameFilter="*.xmi"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="art.resource.art.popups.menu1"
+               label="ART"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="art.resource.art.popups.popup.actions.XMI2PART"
+               enablesFor="1"
+               id="art.resource.art.popups.popup.actions.XMI2PART"
+               label="XMI to PART"
+               menubarPath="art.resource.art.popups.menu1/group1">
          </action>
       </objectContribution>
    </extension>
