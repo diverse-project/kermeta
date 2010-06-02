@@ -8,7 +8,7 @@
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-	<date>Revision: $Date::                      $</date>
+    <date>$LastChangedDate::                     $</date>
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
     </author>

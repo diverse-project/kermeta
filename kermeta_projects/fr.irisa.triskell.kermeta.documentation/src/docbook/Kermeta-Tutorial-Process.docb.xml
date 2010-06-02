@@ -11,6 +11,7 @@
         </mediaobject>
         <title>Kermeta Tutorial : Processes to build a DSL</title>
         <pubdate>Build date: @BUILD.DATE@</pubdate>
+    	<date>$LastChangedDate::                     $</date>
         <pubdate/>
         <author>
             <firstname>Haja</firstname>

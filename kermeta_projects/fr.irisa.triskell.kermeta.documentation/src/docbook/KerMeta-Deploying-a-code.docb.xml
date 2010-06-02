@@ -7,8 +7,7 @@
     <title>Deploying Kermeta code</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
-    <date>$Date::                      $</date>
+    <date>$LastChangedDate::                     $</date>
 	<authorgroup>
 		<author>
 	      <firstname>Cyril</firstname>

@@ -6,6 +6,7 @@
   <bookinfo>
     <subtitle>How to create an EMF model and use it in Kermeta</subtitle>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <date>$LastChangedDate::                     $</date>
     <author>
       <firstname>Zoé </firstname>
       <surname>Drey</surname>
@@ -22,8 +23,6 @@
         <para>Engineer in Triskell team.</para>
       </authorblurb>
     </author>
-    <date>2007-11-09T13:26:46</date>
-    <date>March 2005</date>
     <confgroup/>
   </bookinfo>
   <chapter>

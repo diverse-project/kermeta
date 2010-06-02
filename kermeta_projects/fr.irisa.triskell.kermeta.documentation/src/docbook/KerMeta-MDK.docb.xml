@@ -7,8 +7,7 @@
     <title>Kermeta MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
-    <pubdate>$LastChangedDate::                     $</pubdate>
+    <date>$LastChangedDate::                     $</date>
     <author>
       <firstname>Didier</firstname>
       <surname>Vojtisek</surname>

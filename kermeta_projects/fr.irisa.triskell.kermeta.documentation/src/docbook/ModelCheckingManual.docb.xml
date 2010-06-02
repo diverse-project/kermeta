@@ -13,6 +13,7 @@
     <title>Model checking manual</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <date>$LastChangedDate::                     $</date>
 
     <author>
       <firstname>Didier</firstname>
