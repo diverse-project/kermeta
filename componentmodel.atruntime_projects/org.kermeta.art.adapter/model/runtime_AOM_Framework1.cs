@@ -15,6 +15,7 @@ OPTIONS {
 	memoize = "true";
 	tokenspace = "0";
 	usePredefinedTokens = "false";
+	
 }
 
 TOKENS{
@@ -121,20 +122,49 @@ RULES{
 	
 	//makeUnique::= "makeUnique"  "{" ( "adapter"  ":" adapter[]| "element"  ":" element[] )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeSystem::= "set system" SystemToSet[] "{" ( "set root"  ":" refroot[]| "add services"  ":" refservices[]| "add types"  ":" reftypes[]| "add dataTypes"  ":" refdataTypes[]  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeSystem::= "set" #1 "system" #1 SystemToSet[] !0 "{"  ( 
+					!1 "root" #1 "=" #1 refroot[] | 
+					!1 "services" #1 "+=" #1 refservices[] ("," #1 refservices[])* | 
+					!1 "types" #1 "+=" #1  reftypes[] ("," #1 reftypes[])* | 
+					!1 "datatypes" #1 "+=" #1 refdataTypes[] ("," #1 refdataTypes[])*
+				)* !0 "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance::= "set component" ComponentInstanceToSet[] "{" ( "set type"  ":" reftype[]| "set state"  ":" refstate[STRING_LITERAL] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname[STRING_LITERAL]  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance::= "set" #1 "instance" #1 ComponentInstanceToSet[] !0 "{" ( 
+					!1 "type"  #1 "=" #1 reftype[] | 
+					!1 "state"  #1 "=" #1 refstate[STRING_LITERAL] | 
+					!1 "super"  #1 "=" #1 refsuperComponent[] | 
+					!1 "attribute"  #1 "+=" #1 refattribute[] ("," #1 refattribute[])* | 
+					!1 "binding"  #1 "+=" #1 refbinding[] ("," #1 refbinding[])* | 
+					!1 "name"  #1 "=" #1 refname[STRING_LITERAL]  
+				)* !0 "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance::= "set primitive component" PrimitiveInstanceToSet[] "{" ( "set type"  ":" reftype[]| "set state"  ":" refstate[STRING_LITERAL] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname[STRING_LITERAL]  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance::= "set" #1 "primitive" #1 "component" #1 PrimitiveInstanceToSet[] !0 "{" ( 
+					!1 "type"  #1 "=" #1 reftype[]| 
+					!1 "state"  #1 "=" #1 refstate[STRING_LITERAL] | 
+					!1 "super"  #1 "=" #1 refsuperComponent[] | 
+					!1 "attribute"  #1 "+=" #1 refattribute[]  ("," #1 refattribute[])* | 
+					!1 "binding"  #1 "+=" #1 refbinding[] ("," #1 refbinding[])* | 
+					!1 "name"  #1 "=" #1 refname[STRING_LITERAL]  
+				)* !0 "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance::= "set composite component" CompositeInstanceToSet[] "{" ( "add subComponent"  ":" refsubComponent[]| "add delegation"  ":" refdelegation[]| "set state"  ":" refstate[STRING_LITERAL] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname[STRING_LITERAL]  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance::= "set" #1 "composite" #1 "component" #1 CompositeInstanceToSet[] !0 "{" ( 
+					!1 "component"  #1 "+=" #1 refsubComponent[] ("," #1 refsubComponent[])* | 
+					!1 "delegation"  #1 "+=" #1 refdelegation[] ("," #1 refdelegation[])* | 
+					!1 "state"  #1 "=" #1 refstate[STRING_LITERAL] | 
+					!1 "super"  #1 "=" #1 refsuperComponent[] | 
+					!1 "attribute"  #1 "+=" #1 refattribute[] ("," #1 refattribute[])* | 
+					!1 "binding"  #1 "+=" #1 refbinding[] ("," #1 refbinding[])* | 
+					!1 "name" #1 "=" #1 refname[STRING_LITERAL]  
+				)* !0 "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding::= "set binding" TransmissionBindingToSet[] "{" ( "set required port "  ":" refclient[]| "ref provided port"  ":" refserver[]| "set server component"  ":" refserverInstance[]| "set id"  ":" refId[STRING_LITERAL]  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding::= "set" #1 "binding" #1 TransmissionBindingToSet[] !0 "{" ( 
+					!1 "requiredPort"  #1 "=" #1 refclient[]| 
+					!1 "providedPort"  #1 "=" #1 refserver[]| 
+					!1 "server"  #1 "=" #1 refserverInstance[]| 
+					!1 "id"  #1 "=" #1 refId[STRING_LITERAL]  
+				)* "}"  ;
 	
-	
-	
-	
-	pattern.art.System::= ("system" #1 name[] ";" )? (!0 "root" #1 root)? ( !0 (services | types | dataTypes ) )* ;
+	pattern.art.System::= ("system" (#1 name[])? ( #1 "<" pid[] ">")? ";" )? (!0 "root" #1 root)? ( !0 (services | types | dataTypes ) )* ;
 	
 	pattern.art.DataType::= "datatype" (#1 name[])? ( #1 "<" pid[] ">")?  ";"  ;
 	
@@ -142,9 +172,9 @@ RULES{
 	
 	pattern.art.Instance.CompositeInstance::= "composite" #1 "instance"  (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
 	
-	pattern.art.Instance.TransmissionBinding::= "bind" #1 ( client[] | "?" ) #1  "to" #1 ( serverInstance[] "::" server[] | "?" ) ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
+	pattern.art.Instance.TransmissionBinding::= "bind" #1 ( client[] | "?" ) #1  "to" #1 ( serverInstance[] "::" server[] | "?" ) ( #1 "<" pid[] ">")?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
 	
-	pattern.art.Instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
+	pattern.art.Instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 "<" pid[] ">")?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
 	
 	pattern.art.Instance.ValuedAttribute::=  attribute[] #1 ":=" #1 value[STRING_LITERAL] ;
 	

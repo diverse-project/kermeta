@@ -7,7 +7,8 @@
   <foreignModel>runtime_AOM_Framework1.ecore</foreignModel>
   <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#/">
     <nestedGenPackages prefix="Smartadapters" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters">
-      <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core">
+      <nestedGenPackages prefix="Core" disposableProviderFactory="true" fileExtensions="part"
+          ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType">
           <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/unique"/>
           <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/non_unique"/>
