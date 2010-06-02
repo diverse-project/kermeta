@@ -5,14 +5,12 @@ import java.awt.Dimension;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public abstract class Spinner {
-	public static RuntimeObject initialise(RuntimeObject spinnerRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
+	public static RuntimeObject initialise(RuntimeObject spinnerRO) {
 		final JSpinner spinner = new JSpinner(new SpinnerNumberModel(0, 0, 10000,1));
 		
 		spinner.setEditor(new JSpinner.NumberEditor(spinner, "0"));
@@ -20,7 +18,6 @@ public abstract class Spinner {
 		
 		spinnerRO.setUserData(spinner);
 		RuntimeObject2JavaMap.MAP.put(spinner, spinnerRO);
-		emw.attachTo(spinner);
 		
 		return spinnerRO.getFactory().getMemory().voidINSTANCE; 
 	}

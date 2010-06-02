@@ -53,13 +53,13 @@ public class CanvasIS extends JFrame {
 	
 	
 	
-	public CanvasIS(EventManagerWrapper emw) { 
+	public CanvasIS(final EventManagerWrapper emw) { 
 		super();
 		
 		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
 		catch(Exception e) { /* */ }
 		
-		canvas = new CanvasUI(emw);
+		canvas = new CanvasUI();
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(canvas, BorderLayout.CENTER);
@@ -71,7 +71,7 @@ public class CanvasIS extends JFrame {
      	addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent e) {
-						canvas.getEventManager().onExitEvent();
+						emw.onExitEvent();
                     }});  
 	}
 	

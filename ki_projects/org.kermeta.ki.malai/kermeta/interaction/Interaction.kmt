@@ -1,49 +1,45 @@
 /*
  * Creation : February 22, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction;
-
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/StateMachine.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Eventable.kmt"
 
 using kermeta::ki::malai::picking
-using kermeta::ki::malai::interaction::event
 using kermeta::standard
 
-
-abstract class Interaction inherits StateMachine
-{
+/**
+ * Defines an interaction as defined in the Malai model. An interaction is a state machine and a class.
+ * @author Arnaud BLOUIN
+ */
+abstract class Interaction inherits StateMachine {
+	/**
+	 * The handlers that want to be notified when the state machine of the
+	 * interaction changed.
+	 */
 	reference handlers : InteractionHandler[0..*]
 	
-	reference picker : Picker
-	
-	reference pickable : Pickable
-	
-	
-	method initialise(eventManager : EventManager) : Void is do
-		super(eventManager)
-		eventManager.handlers.add(self)
-	end
-
-	
-	method matches(obj : Object) : Boolean is do
-		result := if(obj.isVoid and pickable.isVoid and picker.isVoid) then false
-				else if(picker.isVoid) 
-					then pickable==obj else (picker==obj).orElse{b | picker.containsObject(obj)}
-					end 
-				end
-	end
 	
 
+	/**
+	 * Links the interaction to an eventable object (e.g. a MPanel or a MButton).
+	 * @param eventable The Eventable object.
+	 */
+	operation linkToEventable(eventable : Eventable) : Void is do
+		if(not eventable.isVoid and eventable.hasEventManager()) then
+			eventable.getEventManager().handlers.add(self)
+		end
+	end
+	
+	
+	
 	/**
 	 * Notifies handlers that the interaction starts.
 	 */
@@ -102,13 +98,28 @@ abstract class Interaction inherits StateMachine
 	 * Gets the pickable object at the given position.
 	 * @param px : the X-coordinate of the position.
 	 * @param py : the Y-coordinate of the position.
-	 * @return the found object or null.
+	 * @param source : The source object in which the function will search. 
+	 * @return null if nothing is found. Otherwise a pickable object.
 	 */
-	operation getPickableAt(px : Real, py : Real) : Pickable is do
-		if(picker.isVoid) then
-			result := if pickable.isVoid.orElse{v | pickable.contains(px, py)} then void else pickable end
+	operation getPickableAt(px : Real, py : Real, source : Object) : Pickable is do
+		if(not source.isVoid) then
+			if(source.isInstanceOf(Picker)) then
+				result := source.asType(Picker).getPickableAt(px, py)
+			else
+				if(source.isInstanceOf(Pickable)) then
+					var pickable : Pickable init source.asType(Pickable)
+					
+					if(pickable.contains(px, py)) then
+						result := pickable
+					else
+						result := pickable.getPicker().getPickableAt(px, py)
+					end
+				else
+					result := void
+				end
+			end
 		else
-			result := picker.getPickableAt(px, py)
+			result := void
 		end
 	end
 }

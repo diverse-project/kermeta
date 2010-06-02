@@ -6,7 +6,6 @@
  */
 package kermeta::ki::malai::interaction::event;
 
-
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/EventHandler.kmt"
@@ -22,7 +21,6 @@ using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
 using kermeta::standard
-
 
 
 /**
@@ -87,32 +85,26 @@ class EventManager inherits Dispatchable
 			var button 	: Integer 	 init me.getButton
 			var x 		: Real 		 init me.getX.toReal
 			var y 		: Real 		 init me.getY.toReal
+			var object  : Object     init info.getSourceObject
 			
 			if(name.equals("MOUSE_MOVED")) then
-			// FIXME: must sue the following line in compiled mode. The interpreter is too slow.
-//				handlers.each{h | if(h.matches(object)) then h.onMove(button, x, y, false, 0) end }
-				handlers.each{h | h.onMove(button, x, y, false, 0) }
+				handlers.each{h | h.onMove(button, x, y, false, 0, object) }
 			else
 			if(name.equals("MOUSE_DRAGGED")) then
-			// FIXME: must sue the following line in compiled mode. The interpreter is too slow.			
-//				handlers.each{h | if(h.matches(object)) then h.onMove(button, x, y, true, 0) end }
-				handlers.each{h | h.onMove(button, x, y, true, 0) }
+				handlers.each{h | h.onMove(button, x, y, true, 0, object) }
 			else
 			if(name.equals("MOUSE_PRESSED")) then
-				var object  : Object init info.getSourceObject
-				handlers.each{h | if(h.matches(object)) then h.onPressure(button, x, y, 0) end }
+				handlers.each{h | h.onPressure(button, x, y, 0, object) }
 			else
 			if(name.equals("MOUSE_RELEASED")) then
-				var object  : Object init info.getSourceObject
-				handlers.each{h | if(h.matches(object)) then h.onRelease(button, x, y, 0) end }
+				handlers.each{h | h.onRelease(button, x, y, 0, object) }
 			end 
 			if(name.equals("MOUSE_WHEEL_MOVED")) then
-				var object : Object init info.getSourceObject
 				var mwe    : MouseWheelEvent init info.asType(MouseWheelEvent)
 				var isUp   : Boolean init mwe.getWheelRotation<0
 				var increment : Integer init mwe.getScrollAmount
 				
-				handlers.each{h | if(h.matches(object)) then h.onWheel(x, y, isUp, increment, 0) end }
+				handlers.each{h | h.onWheel(x, y, isUp, increment, 0, object) }
 			end end end end
 		else
 		if(info.isInstanceOf(KeyEvent)) then
@@ -120,21 +112,21 @@ class EventManager inherits Dispatchable
 			
 			if(name.equals("KEY_PRESSED")) then
 				var object  : Object init info.getSourceObject
-				handlers.each{h | if(h.matches(object)) then h.onKeyPressure(keyCode, 0) end }
+				handlers.each{h | h.onKeyPressure(keyCode, 0) }
 			else
 			if(name.equals("KEY_RELEASED")) then
 				var object  : Object init info.getSourceObject
-				handlers.each{h | if(h.matches(object)) then h.onKeyRelease(keyCode, 0) end }
+				handlers.each{h | h.onKeyRelease(keyCode, 0) }
 			end end
 		else
 		if(name.equals("ACTION_PERFORMED")) then
 			var src : Object init info.asType(ActionEvent).getSourceObject
-			
+
 			if(src.isInstanceOf(CheckBox)) then
-				handlers.each{h | if(h.matches(src)) then h.onCheckBoxPressed(src.asType(CheckBox)) end }
+				handlers.each{h | h.onCheckBoxPressed(src.asType(CheckBox)) }
 			else
 				if(src.isInstanceOf(Button)) then
-					handlers.each{h | if(h.matches(src)) then h.onButtonPressed(src.asType(Button)) end }
+					handlers.each{h | h.onButtonPressed(src.asType(Button)) }
 				end
 			end
 		else
@@ -146,7 +138,8 @@ class EventManager inherits Dispatchable
 			var src : Object init info.asType(ChangeEvent).getSourceObject
 
 			if(src.isInstanceOf(Spinner)) then
-				handlers.each{h | if(h.matches(src)) then h.onSpinnerValueModified(src.asType(Spinner)) end }
+				var spinner : Spinner init src.asType(Spinner)
+				handlers.each{h | h.onSpinnerValueModified(spinner) }
 			end
 		end end end end end
 	end

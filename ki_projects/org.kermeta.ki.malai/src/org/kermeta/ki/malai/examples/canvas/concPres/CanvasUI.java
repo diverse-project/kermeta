@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.picking.Pickable;
 import org.kermeta.ki.malai.picking.Picker;
 
@@ -29,8 +28,6 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 	protected ArrayList<ShapeUI> shapesUI;
 	
 	protected SelectionBorder selectionBorder;
-	
-	protected EventManagerWrapper eventManager;
 	
 	
 	
@@ -117,23 +114,16 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 	
 	
 
-	public CanvasUI(EventManagerWrapper emw) {
+	public CanvasUI() {
 		super();
 		
-		eventManager = emw;
 		selectionBorder = new SelectionBorder();
-		shapesUI     = new ArrayList<ShapeUI>();
+		shapesUI        = new ArrayList<ShapeUI>();
 		setPreferredSize(new Dimension(900, 500));
 		setFocusable(true);
-		
-		eventManager.attachTo(this);
 	}
 
 
-	public EventManagerWrapper getEventManager() {
-		return eventManager;
-	}
-	
 	
 	public ShapeUI getViewAt(Point2D point) {
 		if(point==null)

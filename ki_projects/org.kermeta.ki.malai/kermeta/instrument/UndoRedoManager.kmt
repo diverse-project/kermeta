@@ -20,9 +20,7 @@ using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::undo
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::picking
 using kermeta::ki::malai::action
-using kermeta::ki::malai::interaction::event
 
 
 class UndoRedoManager inherits Instrument, UndoHandler
@@ -31,23 +29,27 @@ class UndoRedoManager inherits Instrument, UndoHandler
 	
 	attribute redoButton : Button
 	
-	reference picker : Picker
-	
 	reference undoCollector : UndoCollector
 	
 	
-	
-	operation initialiseWidgets(eventManager : EventManager) : Void is do
-		undoButton := Button.new
-		redoButton := Button.new
-		undoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Undo.png", eventManager)
-		redoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Redo.png", eventManager)
+	method initialise(actionRegistry : ActionRegistry) : Void is do
+		super(actionRegistry)
+		
+		initialiseWidgets
 	end
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(ButtonPressed2Redo.new, picker, void, eventManager, false)
-		addLink(ButtonPressed2Undo.new, picker, void, eventManager, false)
+	operation initialiseWidgets() : Void is do
+		undoButton := Button.new
+		redoButton := Button.new
+		undoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Undo.png")
+		redoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Redo.png")
+	end
+	
+	
+	method initialiseLinks() : Void is do
+		addLink(ButtonPressed2Redo.new, false)
+		addLink(ButtonPressed2Undo.new, false)
 	end
 	
 	

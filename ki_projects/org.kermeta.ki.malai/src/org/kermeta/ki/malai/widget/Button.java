@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -30,20 +29,13 @@ public abstract class Button
 	}
 	
 	
-	public static void attachToEventManager(EventManagerWrapper manager, AbstractButton button) {
-		manager.attachTo(button);
-	}
-	
-	
-	public static RuntimeObject initialise(RuntimeObject buttonRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
-		final AbstractButton button   = createButtonInstance(buttonRO);
+	public static RuntimeObject initialise(RuntimeObject buttonRO) {
+		final AbstractButton button = createButtonInstance(buttonRO);
 		
 		button.setText("button");
 		
 		buttonRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, buttonRO);
-		attachToEventManager(emw, button);
 		
 		return buttonRO.getFactory().getMemory().voidINSTANCE; 
 	}
@@ -62,32 +54,28 @@ public abstract class Button
 	
 	
 	
-	public static RuntimeObject initialiseWithURI(RuntimeObject widgetRO, RuntimeObject uriRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw 	= (EventManagerWrapper) eventManagerRO.getUserData();
-		final ImageIcon imageIcon 		= loadImageIcon(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO));
-		AbstractButton button 			= createButtonInstance(widgetRO);
+	public static RuntimeObject initialiseWithURI(RuntimeObject widgetRO, RuntimeObject uriRO) {
+		final ImageIcon imageIcon 	= loadImageIcon(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO));
+		AbstractButton button 		= createButtonInstance(widgetRO);
 		
 		if(imageIcon!=null)
 			button.setIcon(imageIcon);
 		
 		widgetRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
-		attachToEventManager(emw, button);
 		
 		return widgetRO.getFactory().getMemory().voidINSTANCE;
 	}
 	
 	
 	
-	public static RuntimeObject initialiseWithText(RuntimeObject widgetRO, RuntimeObject textRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw 	= (EventManagerWrapper) eventManagerRO.getUserData();
-		final AbstractButton button 	= createButtonInstance(widgetRO);
+	public static RuntimeObject initialiseWithText(RuntimeObject widgetRO, RuntimeObject textRO) {
+		final AbstractButton button = createButtonInstance(widgetRO);
 		
 		button.setText(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(textRO));
 		
 		widgetRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
-		attachToEventManager(emw, button);
 		
 		return widgetRO.getFactory().getMemory().voidINSTANCE; 
 	}

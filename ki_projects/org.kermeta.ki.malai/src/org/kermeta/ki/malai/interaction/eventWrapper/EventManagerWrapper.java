@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractButton;
-import javax.swing.JComponent;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -49,6 +48,23 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		
 		events = new ArrayList<EventWrapper>();
 	}
+
+	
+	/**
+	 * Attaches the SwingEventManager to the Java component to listen.
+	 * @param componentRO The Java Component to listen.
+	 * @param eventManagerRO The event manager to attach to the component.
+	 */
+	public static RuntimeObject attachTo(final RuntimeObject componentRO, final RuntimeObject eventManagerRO) {
+		final Object obj1 = componentRO==null ? null : componentRO.getUserData();
+		final Object obj2 = eventManagerRO==null ? null : eventManagerRO.getUserData();
+		
+		if(obj1!=null && obj1 instanceof Component && obj2!=null && obj2 instanceof EventManagerWrapper)
+			((EventManagerWrapper) obj2).attachTo((Component) obj1);
+		
+		return componentRO==null ? null : componentRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
 	
 
 	
@@ -59,7 +75,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	 * @param dispatcherRo A Kermeta AbstractDispatcher that contains the Java DispatcherWrapper.
 	 * @return The Kermeta EventManager.
 	 */
-	public static RuntimeObject initialise(RuntimeObject self, RuntimeObject dispatcherRo) {
+	public static RuntimeObject initialise(final RuntimeObject self, final RuntimeObject dispatcherRo) {
 		EventManagerWrapper emw = new EventManagerWrapper();
 		emw.dispatcher 			= (DispatcherWrapper) dispatcherRo.getUserData();
 		self.setUserData(emw);
@@ -72,7 +88,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	 * @param self The Kermeta EventManager that encapsulates the EventManagerWrapper.
 	 * @return True if the list of events is not empty.
 	 */
-	public static RuntimeObject isWaiting(RuntimeObject self) {
+	public static RuntimeObject isWaiting(final RuntimeObject self) {
 		Object obj = self.getUserData();
 		
 		if(obj instanceof EventManagerWrapper)
@@ -87,7 +103,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	 * @param self The Kermeta EventManager that encapsulates the EventManagerWrapper.
 	 * @return The next Kermeta Event to analyse.
 	 */
-	public static RuntimeObject getTopEvent(RuntimeObject self) {
+	public static RuntimeObject getTopEvent(final RuntimeObject self) {
 		// An instance of the Kermeta class Event is created.
 		EventManagerWrapper emw = (EventManagerWrapper) self.getUserData();
 		RuntimeObject ro = self.getFactory().createObjectFromClassName("kermeta::ki::malai::interaction::event::Event");
@@ -123,19 +139,19 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		}
 	}
 	
-	
+
 	
 	/**
 	 * Attaches the EventManager to the Java component to listen.
 	 * @param comp The Java Component to listen.
 	 */
-	public void attachTo(JComponent comp) {
+	public void attachTo(final Component comp) {
 		if(comp!=null) {
 			comp.addMouseListener(this);
 			comp.addMouseMotionListener(this);
 			comp.addMouseWheelListener(this);
 			comp.addKeyListener(this);
-			
+
 			if(comp instanceof AbstractButton)
 				((AbstractButton)comp).addActionListener(this);
 			
@@ -148,11 +164,12 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 	
 	
+	
 	/**
 	 * Detaches the EventManager to the Java listened component.
 	 * @param comp The Java Component to detach.
 	 */
-	public void detachForm(JComponent comp) {
+	public void detachForm(Component comp) {
 		if(comp!=null) {
 			comp.removeMouseListener(this);
 			comp.removeMouseMotionListener(this);
@@ -171,38 +188,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 	
 	
-	
-	/**
-	 * Attaches the EventManager to the Java component to listen.
-	 * @param comp The Java Component to listen.
-	 */
-	public void attachTo(Component comp) {
-		if(comp!=null) {
-			comp.addMouseListener(this);
-			comp.addMouseMotionListener(this);
-			comp.addMouseWheelListener(this);
-			comp.addKeyListener(this);
-		}
-	}
-	
-	
-	
-	/**
-	 * Detaches the EventManager to the Java listened component.
-	 * @param comp The Java Component to detach.
-	 */
-	public void detachForm(Component comp) {
-		if(comp!=null) {
-			comp.removeMouseListener(this);
-			comp.removeMouseMotionListener(this);
-			comp.removeMouseWheelListener(this);
-			comp.removeKeyListener(this);
-		}
-	}
-	
-	
 
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_CLICKED, e));
 		}
@@ -213,7 +200,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_ENTERED, e));
 		}
@@ -224,7 +211,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_EXITED, e));
 		}
@@ -235,7 +222,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_PRESSED, e));
 		}
@@ -246,7 +233,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 
 	
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_RELEASED, e));
 		}
@@ -256,7 +243,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_PRESSED, e));
 		}
@@ -266,7 +253,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_RELEASED, e));
 		}
@@ -276,7 +263,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_TYPED, e));
 		}
@@ -286,7 +273,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_DRAGGED, e));
 		}
@@ -296,7 +283,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_MOVED, e));
 		}
@@ -306,7 +293,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
-	public void mouseWheelMoved(MouseWheelEvent e) {
+	public void mouseWheelMoved(final MouseWheelEvent e) {
 		synchronized(events) {		
 			events.add(new EventWrapper(EventWrapper.MOUSE_WHEEL_MOVED, e));
 		}
@@ -316,7 +303,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ACTION_PERFORMED, e));
 		}
@@ -338,7 +325,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	
 	
 
-	public void itemStateChanged(ItemEvent e) {
+	public void itemStateChanged(final ItemEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ITEM_STATE_CHANGED, e));
 		}
@@ -349,7 +336,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 
 
-	public void stateChanged(ChangeEvent e) {
+	public void stateChanged(final ChangeEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.STATE_CHANGED, e));
 		}

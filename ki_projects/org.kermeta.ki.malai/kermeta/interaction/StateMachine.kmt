@@ -1,7 +1,7 @@
 /*
  * Creation : February 22, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
 package kermeta::ki::malai::interaction;
@@ -11,7 +11,6 @@ require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
 
 using kermeta::standard
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::widget
 
 
@@ -25,12 +24,8 @@ abstract class StateMachine inherits EventHandler
 	
 	reference currentState : State
 	
-	/** The general events manager that dispatches produced events. */
-	reference eventManager : EventManager
 	
-	
-	operation initialise(eventManager : EventManager) : Void is do
-		self.eventManager := eventManager
+	operation initialise() : Void is do
 		activated := true
 		initState := InitState.new
 		initState.initialise("init")
@@ -175,7 +170,7 @@ abstract class StateMachine inherits EventHandler
 
 
 
-	method onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer) : Void is do
+	method onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer, source : Object) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			var t : Transition
@@ -188,6 +183,7 @@ abstract class StateMachine inherits EventHandler
 					mt.py      := py
 					mt.button  := button
 					mt.pressed := pressed
+					mt.source  := source
 					
 					if(t.isGuardRespected) then
 						stop := true
@@ -203,7 +199,7 @@ abstract class StateMachine inherits EventHandler
 	
 
 
-	method onPressure(button : Integer, px : Real, py : Real, idHID : Integer) : Void is do
+	method onPressure(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			var t : Transition
@@ -215,6 +211,7 @@ abstract class StateMachine inherits EventHandler
 					pt.px     := px
 					pt.py     := py
 					pt.button := button
+					pt.source := source
 					
 					if(t.isGuardRespected) then
 						stop := true
@@ -229,7 +226,7 @@ abstract class StateMachine inherits EventHandler
 
 
 
-	method onRelease(button : Integer, px : Real, py : Real, idHID : Integer) : Void is do
+	method onRelease(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			var t : Transition
@@ -241,6 +238,7 @@ abstract class StateMachine inherits EventHandler
 					rt.px     := px
 					rt.py     := py
 					rt.button := button
+					rt.source := source
 					
 					if(t.isGuardRespected) then
 						stop := true
@@ -302,7 +300,7 @@ abstract class StateMachine inherits EventHandler
 	
 	
 	
-	method onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer) : Void is do
+	method onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer, source : Object) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			var t : Transition
@@ -315,6 +313,7 @@ abstract class StateMachine inherits EventHandler
 					wt.py        := py
 					wt.isUp      := isUp
 					wt.increment := increment
+					wt.source	 := source
 					
 					if(t.isGuardRespected) then
 						stop := true

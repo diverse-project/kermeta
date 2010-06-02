@@ -17,12 +17,13 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 public abstract class Panel 
 {
 	public static RuntimeObject initialise(RuntimeObject panelRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
 		final JPanel panel = new JPanel();
 		
 		panelRO.setUserData(panel);
 		RuntimeObject2JavaMap.MAP.put(panel, panelRO);
-		emw.attachTo(panel);
+		
+		if(eventManagerRO!=null && eventManagerRO.getUserData()!=null)
+			((EventManagerWrapper) eventManagerRO.getUserData()).attachTo(panel);
 		
 		return panelRO.getFactory().getMemory().voidINSTANCE; 
 	}

@@ -17,7 +17,6 @@ using kermeta::ki::malai::action
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::interaction::event
 using kermeta::standard
 using kermeta::language::structure
 
@@ -29,8 +28,8 @@ class Zoomer inherits Instrument
 	reference metamodel : ModelingUnit
 	
 	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(Scroll2Zoom.new, zoomable, void, eventManager, true)
+	method initialiseLinks() : Void is do
+		addLink(Scroll2Zoom.new, true)
 	end
 }
 

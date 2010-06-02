@@ -4,33 +4,29 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::instrument;
-
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
-using kermeta::ki::malai::picking
-using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::interaction
 
 
-abstract class Instrument
-{
-	/**  Defines if the instrument is activated or not. */
+/**
+ * Defines an abstract model of an instrument.
+ */
+abstract class Instrument {
+	/** Defines if the instrument is activated or not. */
 	attribute activated : Boolean
 	
-	/**  The links of the instrument. */
+	/** The links of the instrument. */
 	attribute links : Link[0..*]
 	
 	reference actionRegistry : ActionRegistry
+	
 	
 	
 	operation initialise(actionRegistry : ActionRegistry) : Void is do
@@ -39,19 +35,47 @@ abstract class Instrument
 	end
 	
 	
+		
+	/**
+	 * This method is called when an action managed by a link of the instrument is aborted.
+	 * This method can be used to provide users with information about the result of the action.
+	 * @param link The link of the instrument that managed the aborted action.
+	 * @param action The aborted action.
+	 */
+	operation onActionAborted(link : Link, action : Action) : Void is do
+		// Should be overridden.
+	end
+	
+	
+	/**
+	 * This method is called when an action managed by a link of the instrument is done.
+	 * This method can be used to provide users with information about the result of the action.
+	 * @param link The link of the instrument that managed the done action.
+	 * @param action The done action.
+	 */
+	operation onActionDone(link : Link, action : Action) : Void is do
+		// Should be overridden.
+	end
+	
+	
+	
+	/**
+	 * Binds the interaction of the links of the instrument to a Eventable object that produces
+	 * events used by the interactions.
+	 * @param eventable The eventable object that gathers event used by the interactions.
+	 */
+	operation addEventable(eventable : Eventable) : Void is do
+		links.each{link | link.addEventable(eventable) }
+	end
+	
+	
 	
 	/**
 	* Adds and configures the given link to the instrument.
 	*/
-	operation addLink(link : Link, picker : Picker, pickable : Pickable, eventManager : EventManager, execute : Boolean) : Void is do
-		link.initialise(self, eventManager, false)
+	operation addLink(link : Link, execute : Boolean) : Void is do
+		link.initialise(self, false)
 		link.execute := execute
-		
-		if(pickable.isVoid) 
-		then link.setPickerToInteraction(picker)
-		else link.setPickableToInteraction(pickable)
-		end
-		
 		links.add(link)
 	end
 	
@@ -60,7 +84,7 @@ abstract class Instrument
 	/**
 	 * Initialises the links of the instrument.
 	 */
-	operation initialiseLinks(eventManager : EventManager) is abstract
+	operation initialiseLinks() is abstract
 	
 	
 	/**

@@ -19,7 +19,7 @@ using kermeta::language::structure
 
 class Zoom inherits Action
 {
-	reference metamodel : ModelingUnit
+	reference metamodel : ModelingUnit//FIXME to remove!
 
 	reference zoomable : Picker
 	

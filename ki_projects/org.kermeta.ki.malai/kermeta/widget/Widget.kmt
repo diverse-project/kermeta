@@ -9,16 +9,22 @@ package kermeta::ki::malai::widget;
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Eventable.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::dispatcher
 
 
 
 abstract class GraphicalComponent inherits Pickable
 {
-	operation initialise(eventManager : EventManager) : Void is abstract
+	reference componentContainer : GraphicalComponent
+	
+
+	operation initialise() : Void is abstract
 	
 
 	operation setEnable(enable : Boolean) : Void is do
@@ -45,6 +51,17 @@ abstract class GraphicalComponent inherits Pickable
 	operation getY() : Integer is do
 		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getY(self)
 	end
+	
+	
+	method getPicker() : Picker is do
+		result := void
+		
+		if(componentContainer.isInstanceOf(Picker)) then
+			result := componentContainer.asType(Picker)
+		else
+			result := componentContainer.getPicker
+		end
+	end
 }
 
 
@@ -57,8 +74,8 @@ class Button inherits GraphicalComponent
 	end
 
 
-	method initialise(eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::Button.initialise(self, eventManager)
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialise(self)
 	end
 
 	operation setSelected(selected : Boolean) : Void is do
@@ -66,13 +83,13 @@ class Button inherits GraphicalComponent
 	end
 	
 	
-	operation initialiseWithIcon(uri : String, eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::Button.initialiseWithURI(self, uri, eventManager)
+	operation initialiseWithIcon(uri : String) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialiseWithURI(self, uri)
 	end
 	
 	
-	operation initialiseWithText(text : String, eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::Button.initialiseWithText(self, text, eventManager)
+	operation initialiseWithText(text : String) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialiseWithText(self, text)
 	end
 }
 
@@ -88,8 +105,8 @@ class ToggleButton inherits Button
 
 class CheckBox inherits ToggleButton
 {
-	method initialise(eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::CheckBox.initialise(self, eventManager)
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::CheckBox.initialise(self)
 	end
 	
 	operation isChecked() : Boolean is do
@@ -106,8 +123,8 @@ class CheckBox inherits ToggleButton
 
 class Spinner inherits GraphicalComponent
 {
-	method initialise(eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::Spinner.initialise(self, eventManager)
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::Spinner.initialise(self)
 	end
 	
 	operation getValue() : String is do
@@ -118,15 +135,48 @@ class Spinner inherits GraphicalComponent
 
 
 
-class Panel inherits GraphicalComponent, Picker
+class Panel inherits GraphicalComponent, Picker, Eventable
 {
 	reference components : GraphicalComponent[0..*]
 	
+	attribute eventManager : EventManager
 	
-	method initialise(eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::malai::widget::Panel.initialise(self, eventManager)
+	
+	method initialise() : Void is do
+		self.eventManager := void
+		extern org::kermeta::ki::malai::widget::Panel.initialise(self, void)
 	end
 	
+	
+	
+	/**
+	* The panel is created without any eventManager.
+	*/
+	operation initialiseEventManager(withEventManager : Boolean, dispatcher : ListDispatcher) : Void is do
+		if(withEventManager) then
+			eventManager := EventManager.new
+			eventManager.initialise(dispatcher)
+			dispatcher.processes.add(eventManager)
+		else
+			eventManager := void
+		end
+		
+		extern org::kermeta::ki::malai::widget::Panel.initialise(self, eventManager)
+		
+		if(withEventManager) then
+			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(self, eventManager)
+		end
+	end
+	
+	
+	method hasEventManager() : Boolean is do
+		result := not eventManager.isVoid
+	end
+	
+	
+	method getEventManager() : EventManager is do
+		result := eventManager
+	end
 	
 	
 	operation hasScrollbars() : Boolean is do
@@ -159,9 +209,17 @@ class Panel inherits GraphicalComponent, Picker
 	
 	
 	
-	operation addComponent(component : GraphicalComponent) : Void is do
+	operation addComponent(component : GraphicalComponent, addToUIPanel : Boolean) : Void is do
 		components.add(component)
-		extern org::kermeta::ki::malai::widget::Panel.add(self, component)
+		component.componentContainer := self
+
+		if(not eventManager.isVoid) then
+			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(component, eventManager)
+		end
+		
+		if(addToUIPanel) then
+			extern org::kermeta::ki::malai::widget::Panel.add(self, component)
+		end
 	end
 	
 	

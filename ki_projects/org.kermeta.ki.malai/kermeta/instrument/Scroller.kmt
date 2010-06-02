@@ -13,9 +13,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Key
 
 
 using kermeta::ki::malai::instrument
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::picking
 using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
 using kermeta::language::structure
@@ -26,12 +24,9 @@ class Scroller inherits Instrument
 {
 	reference panel : Panel
 	
-	reference picker : Picker
 	
-	
-	
-	method initialiseLinks(eventManager : EventManager) : Void is do
-		addLink(Scrolling2Scroll.new, picker, void, eventManager, false)
+	method initialiseLinks() : Void is do
+		addLink(Scrolling2Scroll.new, false)
 	end
 }
 

@@ -2,19 +2,16 @@ package org.kermeta.ki.malai.widget;
 
 import javax.swing.JCheckBox;
 
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public abstract class CheckBox {
-	public static RuntimeObject initialise(RuntimeObject cbRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw 	= (EventManagerWrapper) eventManagerRO.getUserData();
-		final JCheckBox cb 				= new JCheckBox(); 
+	public static RuntimeObject initialise(RuntimeObject cbRO) {
+		final JCheckBox cb = new JCheckBox(); 
 		
 		cbRO.setUserData(cb);
 		RuntimeObject2JavaMap.MAP.put(cb, cbRO);
-		emw.attachTo(cb);
 		
 		return cbRO.getFactory().getMemory().voidINSTANCE; 
 	}

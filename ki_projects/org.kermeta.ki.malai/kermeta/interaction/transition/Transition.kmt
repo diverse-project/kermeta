@@ -123,22 +123,31 @@ class WheelTransition inherits PointingDeviceTransition {
 
 
 
-
+/**
+ * This abstract transition defines a model for transitions based on pointing device events.
+*/
 abstract class PointingDeviceTransition inherits Transition {
+	/** The X-coordinate of the pointing device. */
 	attribute px : Real
 	
+	/** The Y-coordinate of the pointing device. */
 	attribute py : Real
 	
+	/** The button used. */
 	attribute button : Integer
+	
+	/** The object picked at the position (x, y). */
+	reference source : Object
 	
 	
 	
 	method initialise(inputState : State, outputState : State) : Void is do
 		super(inputState, outputState)
 
-		px := void
-		py := void
+		px     := void
+		py     := void
 		button := void
+		source := void
 	end
 }
 

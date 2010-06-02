@@ -14,9 +14,7 @@ using kermeta::standard
 using kermeta::language::structure
 using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
-using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::undo
-using kermeta::ki::malai::picking
 
 
 /**
@@ -48,15 +46,26 @@ abstract class Link inherits InteractionHandler
 	 * @param instrument The instrument that contains the link.
 	 * @param exec Specifies if the action must be execute or update on each evolution of the interaction.
 	 */
-	operation initialise(instrument : Instrument, eventManager : EventManager, execute : Boolean) : Void is do
+	operation initialise(instrument : Instrument, execute : Boolean) : Void is do
 		self.instrument := instrument
 		self.execute    := execute
 		
 		interaction := createInteraction()
-		interaction.initialise(eventManager)
+		interaction.initialise()
 		interaction.handlers.add(self)
 	end
 
+
+	/**
+	 * Binds the interaction of the link to a Eventable object that produces
+	 * events used by the interaction.
+	 * @param eventable The eventable object that gathers event used by the interaction.
+	 */
+	operation addEventable(eventable : Eventable) : Void is do
+		if(not eventable.isVoid and not interaction.isVoid) then
+			interaction.linkToEventable(eventable)
+		end
+	end
 
 	
 	/**
@@ -101,31 +110,10 @@ abstract class Link inherits InteractionHandler
 	operation createInteraction() : Interaction is abstract
 
 	
-	/**
-	* Sets the given picker to the interaction corresponding to the link.
-	*/
-	operation setPickerToInteraction(picker : Picker) : Void is do
-		if(not interaction.isVoid) then
-			interaction.picker := picker
-		end
-	end
-
-
-	/**
-	* Sets the given pickable to the interaction corresponding to the link.
-	*/
-	operation setPickableToInteraction(pickable : Pickable) : Void is do
-		if(not interaction.isVoid) then
-			interaction.pickable := pickable
-		end
-	end
-
 
 	/**
 	 * Initialises the action of the link. If the attribute 'action' is
 	 * not null, nothing will be done.
-	 * @throws DependencyUnfulfilledException Occurs when the 'necessity' relation between
-	 * the concerned classes is not respected.
 	 */
 	operation createAction() : Void is abstract
 	
@@ -169,8 +157,12 @@ abstract class Link inherits InteractionHandler
     			if(action.hadEffect) then
     				if(action.isRegisterable) then
     					 instrument.actionRegistry.addAction(action)
-    				else instrument.actionRegistry.cancelActions(action)
+    				else 
+    					instrument.actionRegistry.cancelActions(action)
     				end
+    				
+    				// The instrument is notified about the end of the action.
+    				instrument.onActionDone(self, action)
     			end
    			
     			action := void
@@ -196,6 +188,9 @@ abstract class Link inherits InteractionHandler
 	method interactionAborts(inter : Interaction) : Void is do
 		if(not action.isVoid and inter==interaction) then
 			action.abort()
+			
+			// The instrument is notified about the aborting of the action.
+			instrument.onActionAborted(self, action)
 			
 			if(execute) then
 				if(action.isInstanceOf(Undoable)) then

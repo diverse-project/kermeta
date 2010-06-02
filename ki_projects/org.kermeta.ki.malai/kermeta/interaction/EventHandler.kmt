@@ -14,13 +14,13 @@ using kermeta::ki::malai::widget
 
 
 abstract class EventHandler {
-	operation onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer) : Void is abstract
+	operation onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer, source : Object) : Void is abstract
 
-	operation onPressure(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract
+	operation onPressure(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is abstract
 	
-	operation onRelease(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract
+	operation onRelease(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is abstract
 	
-	operation onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer) : Void is abstract
+	operation onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer, source : Object) : Void is abstract
 	
 	operation onKeyPressure(key : Integer, idHID : Integer) : Void is abstract
 	

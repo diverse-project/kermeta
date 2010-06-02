@@ -6,19 +6,35 @@
  */
 package kermeta::ki::malai::picking;
 
-
 require kermeta
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
-
+require "Pickable.kmt"
 
 using kermeta::standard
 
-
-abstract class Picker
-{
+/**
+ * Defines an interface for objects that contains pickable and picker objects.
+*/
+abstract class Picker {
+	/**
+	 * @param x The x-coordinate of the position used to get the pickable object.
+	 * @param y The y-coordinate of the position used to get the pickable object.
+	 * @return The pickable object at the given position.
+	 */
 	operation getPickableAt(px : Real, py : Real) : Pickable is abstract
-	
+
+
+	/**
+	 * @param x The x-coordinate of the position used to get the picker object.
+	 * @param y The y-coordinate of the position used to get the picker object.
+	 * @return The pickable object at the given position.
+	 */	
 	operation getPickerAt(px : Real, py : Real) : Picker is abstract
-	
+
+
+	/**
+	 * Tests if the given object is contained by the calling picker.
+	 * @param obj The object to test.
+	 * @return True: the given object is contained by the calling picker.
+	 */	
 	operation containsObject(obj : Object) : Boolean is abstract
 }

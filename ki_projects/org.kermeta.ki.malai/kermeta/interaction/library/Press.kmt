@@ -58,6 +58,6 @@ class PressPressureTransition inherits PressureTransition
 		press.px     := Real.clone(px)
 		press.py     := Real.clone(py)
 		press.button := button
-		press.target := press.getPickableAt(press.px, press.py)
+		press.target := press.getPickableAt(press.px, press.py, source)
 	end
 }
