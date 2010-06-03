@@ -53,7 +53,7 @@ public class PART2XMI implements IObjectActionDelegate {
 			artres.load(null);
 			EcoreUtil.resolveAll(artres);
 			
-			Resource xmires = rs.createResource(artres.getURI().trimFileExtension().appendFileExtension("xmi"));
+			Resource xmires = rs.createResource(artres.getURI().trimFileExtension().appendFileExtension("smART"));
 			xmires.getContents().addAll(artres.getContents());
 			xmires.save(null);
 		} catch (IOException e) {
