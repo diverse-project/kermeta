@@ -15,7 +15,6 @@ OPTIONS {
 	memoize = "true";
 	tokenspace = "0";
 	usePredefinedTokens = "false";
-	
 }
 
 TOKENS{
@@ -216,7 +215,7 @@ RULES{
 	
 	pattern.art.Type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 ( service[] | "?") #1 "{" ids ("," #1 ids)* "}" ;
 	
-	patternframework.ModelPattern::= (!1 constraints)? (!1 "featureID" #1 ":" #1 featureIdentifier[])? !1 "pattern" #1 pattern  ( !1 "negative" #1 "pattern" #1 ":" falsepositivepatterns  )*  ;
+	patternframework.ModelPattern::= (!1 constraints)? (!1 "featureID" #1 ":" #1 featureIdentifier[STRING_LITERAL])? !1 "pattern" #1 pattern  ( !1 "negative" #1 "pattern" #1 ":" falsepositivepatterns  )*  ;
 	
 	patternframework.PModel::= "model" !0 "{" (!1 content) !0 "}" !1 ("roles" #1 ":" #1 roles ("," #1 roles)* ";")? ;
 		
