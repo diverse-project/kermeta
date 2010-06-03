@@ -1486,12 +1486,12 @@ public class CoreLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12266:11: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12267:2: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12471:11: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12472:2: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12267:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12472:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -1504,7 +1504,7 @@ public class CoreLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12267:7: ~ ( '\\n' | '\\r' | '\\uffff' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12472:7: ~ ( '\\n' | '\\r' | '\\uffff' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1541,12 +1541,12 @@ public class CoreLexer extends Lexer {
         try {
             int _type = ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12270:11: ( '/*' ( . )* '*/' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12271:2: '/*' ( . )* '*/'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12475:11: ( '/*' ( . )* '*/' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12476:2: '/*' ( . )* '*/'
             {
             match("/*"); 
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12271:6: ( . )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12476:6: ( . )*
             loop2:
             do {
                 int alt2=2;
@@ -1571,7 +1571,7 @@ public class CoreLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12271:6: .
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12476:6: .
             	    {
             	    matchAny(); 
 
@@ -1602,11 +1602,11 @@ public class CoreLexer extends Lexer {
         try {
             int _type = ANNOTATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12273:11: ( '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12274:2: '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12478:11: ( '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12479:2: '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
             match('@'); 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12274:5: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12479:5: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt3=0;
             loop3:
             do {
@@ -1661,7 +1661,7 @@ public class CoreLexer extends Lexer {
         try {
             int _type = T_INSTANCE_STATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12276:17: ( '#ON' | '#OFF' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12481:17: ( '#ON' | '#OFF' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1699,7 +1699,7 @@ public class CoreLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12277:2: '#ON'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12482:2: '#ON'
                     {
                     match("#ON"); 
 
@@ -1707,7 +1707,7 @@ public class CoreLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12277:8: '#OFF'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12482:8: '#OFF'
                     {
                     match("#OFF"); 
 
@@ -1729,7 +1729,7 @@ public class CoreLexer extends Lexer {
         try {
             int _type = T_PORT_KIND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12278:12: ( 'provided' | 'required' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12483:12: ( 'provided' | 'required' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1747,7 +1747,7 @@ public class CoreLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12279:2: 'provided'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12484:2: 'provided'
                     {
                     match("provided"); 
 
@@ -1755,7 +1755,7 @@ public class CoreLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12279:13: 'required'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12484:13: 'required'
                     {
                     match("required"); 
 
@@ -1777,7 +1777,7 @@ public class CoreLexer extends Lexer {
         try {
             int _type = T_IMPLEM;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12280:9: ( 'bundle' | 'memory' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12485:9: ( 'bundle' | 'memory' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1795,7 +1795,7 @@ public class CoreLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12281:2: 'bundle'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12486:2: 'bundle'
                     {
                     match("bundle"); 
 
@@ -1803,7 +1803,7 @@ public class CoreLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12281:11: 'memory'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12486:11: 'memory'
                     {
                     match("memory"); 
 
@@ -1825,8 +1825,8 @@ public class CoreLexer extends Lexer {
         try {
             int _type = T_OPTIONAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12282:11: ( 'optional' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12283:2: 'optional'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12487:11: ( 'optional' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12488:2: 'optional'
             {
             match("optional"); 
 
@@ -1846,10 +1846,10 @@ public class CoreLexer extends Lexer {
         try {
             int _type = MULTIPLICITY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12284:13: ( ( ( '*' ) | ( ( '0' .. '9' )+ ) ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12489:13: ( ( ( '*' ) | ( ( '0' .. '9' )+ ) ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
             {
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1867,10 +1867,10 @@ public class CoreLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:4: ( '*' )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:4: ( '*' )
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:4: ( '*' )
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:5: '*'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:4: ( '*' )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:5: '*'
                     {
                     match('*'); 
 
@@ -1880,12 +1880,12 @@ public class CoreLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:12: ( ( '0' .. '9' )+ )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:12: ( ( '0' .. '9' )+ )
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:12: ( ( '0' .. '9' )+ )
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:13: ( '0' .. '9' )+
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:12: ( ( '0' .. '9' )+ )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:13: ( '0' .. '9' )+
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:13: ( '0' .. '9' )+
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:13: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -1899,7 +1899,7 @@ public class CoreLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12285:14: '0' .. '9'
+                    	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12490:14: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1940,11 +1940,11 @@ public class CoreLexer extends Lexer {
         try {
             int _type = STRING_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12287:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:2: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12492:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:2: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )*
             loop9:
             do {
                 int alt9=5;
@@ -1992,7 +1992,7 @@ public class CoreLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:6: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:6: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -2008,10 +2008,10 @@ public class CoreLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
             	    {
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:48: '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:48: '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
             	    {
             	    match('\\'); 
             	    match('u'); 
@@ -2058,11 +2058,11 @@ public class CoreLexer extends Lexer {
             	    }
             	    break;
             	case 3 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:169: '\\\\' ( '0' .. '7' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:169: '\\\\' ( '0' .. '7' )
             	    {
             	    match('\\'); 
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:173: ( '0' .. '7' )
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:174: '0' .. '7'
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:173: ( '0' .. '7' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:174: '0' .. '7'
             	    {
             	    matchRange('0','7'); 
 
@@ -2072,7 +2072,7 @@ public class CoreLexer extends Lexer {
             	    }
             	    break;
             	case 4 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12288:184: ~ ( '\\\\' | '\"' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12493:184: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2109,8 +2109,8 @@ public class CoreLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12289:11: ( ( ' ' | '\\t' | '\\f' ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12290:2: ( ' ' | '\\t' | '\\f' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12494:11: ( ( ' ' | '\\t' | '\\f' ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12495:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2138,10 +2138,10 @@ public class CoreLexer extends Lexer {
         try {
             int _type = LINEBREAKS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12293:11: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12294:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12498:11: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12499:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12294:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12499:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -2165,7 +2165,7 @@ public class CoreLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12294:3: '\\r\\n'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12499:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -2173,14 +2173,14 @@ public class CoreLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12294:10: '\\r'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12499:10: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12294:15: '\\n'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12499:15: '\\n'
                     {
                     match('\n'); 
 
@@ -2206,8 +2206,8 @@ public class CoreLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12297:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12298:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12502:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12503:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -2218,7 +2218,7 @@ public class CoreLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12298:30: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12503:30: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
             loop11:
             do {
                 int alt11=2;
@@ -2251,7 +2251,7 @@ public class CoreLexer extends Lexer {
                 }
             } while (true);
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12298:77: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12503:77: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
             loop13:
             do {
                 int alt13=2;
@@ -2264,10 +2264,10 @@ public class CoreLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12298:78: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12503:78: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    {
             	    match('.'); 
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12298:81: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.core/src-gen/org/smartadapters/core/resource/core/mopp/Core.g:12503:81: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    int cnt12=0;
             	    loop12:
             	    do {

@@ -3287,6 +3287,19 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_TransmissionBinding_3(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 	}
 	public void print_pattern_art_instance_TransmissionBinding_0(pattern.art.instance.TransmissionBinding element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int count;
@@ -3367,6 +3380,26 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
+		out.print("<");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.TRANSMISSION_BINDING__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.core.ICoreTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.TRANSMISSION_BINDING__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
+		}
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print(">");
+	}
+	public void print_pattern_art_instance_TransmissionBinding_3(pattern.art.instance.TransmissionBinding element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("(");
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("id");
@@ -3428,6 +3461,19 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
 		print_pattern_art_instance_DelegationBinding_2(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_DelegationBinding_3(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -3512,6 +3558,26 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 		}
 	}
 	public void print_pattern_art_instance_DelegationBinding_2(pattern.art.instance.DelegationBinding element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print("<");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DELEGATION_BINDING__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.core.ICoreTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DELEGATION_BINDING__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
+		}
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print(">");
+	}
+	public void print_pattern_art_instance_DelegationBinding_3(pattern.art.instance.DelegationBinding element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int count;
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
@@ -5925,7 +5991,7 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 		out.print(":");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
 		count = printCountingMap.get("featureIdentifier");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(patternframework.PatternframeworkPackage.MODEL_PATTERN__FEATURE_IDENTIFIER));
@@ -5937,7 +6003,7 @@ public class CorePrinter implements org.smartadapters.core.resource.core.ICoreTe
 				o = null;
 			}
 			if (o != null) {
-				org.smartadapters.core.resource.core.ICoreTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				org.smartadapters.core.resource.core.ICoreTokenResolver resolver = tokenResolverFactory.createTokenResolver("STRING_LITERAL");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(patternframework.PatternframeworkPackage.MODEL_PATTERN__FEATURE_IDENTIFIER), element));
 			}

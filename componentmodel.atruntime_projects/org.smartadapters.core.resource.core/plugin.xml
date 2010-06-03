@@ -30,12 +30,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard
-        category="org.emftext.runtime.ui.EMFTextFileCategory"
-        class="org.smartadapters.core.resource.core.ui.CoreNewFileWizard"
-        icon="/icons/default_new_icon.gif"
-        id="org.smartadapters.core.resource.core.ui.CoreNewFileWizard"
-        name="EMFText .part file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.smartadapters.core.resource.core.ui.CoreNewFileWizard" id="org.smartadapters.core.resource.core.ui.CoreNewFileWizard" name="EMFText .part file">
 		</wizard>
 	</extension>
 	
