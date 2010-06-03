@@ -20,6 +20,23 @@ import org.kermeta.smartadapters.drools.utils.TreeIterable;
 
 public class SmartAdaptersDrools {
 
+	/*public void main2(){
+		Rule_RulesName_0ConsequenceInvoker aspect = new Rule_RulesName_0ConsequenceInvoker();
+		
+		WorkingMemory wMemory = new ReteooWorkingMemory();
+
+		
+		KnowledgeHelper kHelper = new DefaultKnowledgeHelper(wMemory);
+
+		kHelper.insert(new TreeIterable<EObject>(resource.getAllContents()));
+		
+		try {
+			aspect.evaluate(kHelper, wMemory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
+	
 	/**
 	 * 
 	 * @param args
@@ -28,6 +45,17 @@ public class SmartAdaptersDrools {
 	 * arg[i>1] = URI to an aspect (drl file)
 	 */
 	public static void main(String[] args){
+		/*SmartAdaptersDrools sad = new SmartAdaptersDrools();
+		String artURI = args[0];
+		sad.loadArtModel(artURI);
+		sad.main2();
+		
+		
+		
+		/*Properties systemProperties = System.getProperties();
+		systemProperties.put ("drools.dump.dir", "c:/temp/");
+		*/
+
 		if(args.length > 2){
 			String artURI = args[0];
 			String wovenArtURI = args[1];
@@ -50,6 +78,7 @@ public class SmartAdaptersDrools {
 			sad.saveArtModel(wovenArtURI, sad.resource);
 			System.out.println("Done!");
 		}
+		
 	}
 
 	private org.eclipse.emf.ecore.resource.Resource resource;
