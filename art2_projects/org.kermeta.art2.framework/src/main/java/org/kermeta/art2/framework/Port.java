@@ -11,10 +11,6 @@ package org.kermeta.art2.framework;
  */
 public interface Port {
 
-    public void setComponent(Component component);
-
-    public void setName(String name);
-
     public String getName();
 
 }

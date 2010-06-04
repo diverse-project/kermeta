@@ -4,17 +4,14 @@
  */
 package org.kermeta.art2.framework;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 /**
  *
  * @author ffouquet
  */
-public abstract class AbstractComponentType implements Component {
+public class AbstractComponentType implements ComponentType {
 
     private HashMap<String,Port> hostedPorts = new HashMap<String,Port>();
     private HashMap<String,Port> neededPorts = new HashMap<String,Port>();
@@ -59,6 +56,12 @@ public abstract class AbstractComponentType implements Component {
             port = this.getNeededPorts().get(portName);
         }
         return port;
+    }
+
+    @Override
+    public <T> T getPortByName(String name, Class<T> type) {
+        Port retp = getPortByName(name);
+        return (T)retp;
     }
 
 

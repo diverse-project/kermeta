@@ -6,16 +6,12 @@ package org.kermeta.art2.framework.annotation.processor;
 
 import com.sun.mirror.apt.AnnotationProcessor;
 import com.sun.mirror.apt.AnnotationProcessorEnvironment;
-import com.sun.mirror.declaration.AnnotationMirror;
 import com.sun.mirror.declaration.AnnotationTypeDeclaration;
-import com.sun.mirror.declaration.AnnotationTypeElementDeclaration;
-import com.sun.mirror.declaration.AnnotationValue;
 import com.sun.mirror.declaration.Declaration;
-import com.sun.mirror.util.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
-import javax.lang.model.element.Element;
+import org.kermeta.art2.framework.Art2Generator;
+import org.kermeta.art2.framework.Art2Utility;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.framework.annotation.processor.visitor.ComponentTypeVisitor;
 
@@ -36,8 +32,10 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process() {
 
-        art2.ContainerRoot root = art2.Art2Factory.eINSTANCE.createContainerRoot();
+       // System.out.println(env.getOptions());
 
+        art2.ContainerRoot root = art2.Art2Factory.eINSTANCE.createContainerRoot();
+        Art2Utility.root_$eq(root);
 
 
 
@@ -49,6 +47,16 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
             ComponentTypeVisitor ctv = new ComponentTypeVisitor(env, root);
             ctVisitors.add(ctv);
             decl.accept(ctv);
+            
+            //GENERATE FACTORY
+            //try {
+                //Writer writer = env.getFiler().createSourceFile("totoFactory");
+                //writer.append("import *;");
+                //writer.close();
+           // } catch (IOException ex) {
+           //     Logger.getLogger(Art2AnnotationProcessor.class.getName()).log(Level.SEVERE, null, ex);
+           // }
+
         }
 
         //GENERER ART2 LIB
@@ -59,9 +67,9 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
         }
         root.getLibrariy().add(newlib);
 
+        Art2Generator.generatePortWrapper(root, env.getFiler());
+        Art2Generator.generateFactory(root, env.getFiler());
         Art2XmiHelper.save("art2.xmi", root);
-
-
 
 
     }

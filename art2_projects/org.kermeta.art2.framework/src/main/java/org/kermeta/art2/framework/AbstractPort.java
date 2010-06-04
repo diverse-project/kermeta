@@ -5,23 +5,20 @@
 
 package org.kermeta.art2.framework;
 
-import org.kermeta.art2.framework.Component;
-import org.kermeta.art2.framework.Port;
-
 /**
  *
  * @author ffouquet
  */
 public abstract class AbstractPort implements Port {
 
-    private Component component = null;
+    private Object component = null;
     private String name;
 
-    public Component getComponent() {
+    public Object getComponent() {
         return component;
     }
 
-    public void setComponent(Component component) {
+    public void setComponent(Object component) {
         this.component = component;
     }
 
@@ -29,12 +26,6 @@ public abstract class AbstractPort implements Port {
     public String getName() {
         return this.name;
     }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
 
 }

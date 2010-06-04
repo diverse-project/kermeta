@@ -19,6 +19,8 @@ import org.kermeta.art2.annotation.ProvidedPort;
 import org.kermeta.art2.annotation.Provides;
 import org.kermeta.art2.annotation.RequiredPort;
 import org.kermeta.art2.annotation.Requires;
+import org.kermeta.art2.annotation.Start;
+import org.kermeta.art2.annotation.Stop;
 
 /**
  *
@@ -41,6 +43,8 @@ public class Art2AnnotationProcessorFactory implements
         stype.add(Provides.class.getName());
         stype.add(Requires.class.getName());
         stype.add(RequiredPort.class.getName());
+        stype.add(Start.class.getName());
+        stype.add(Stop.class.getName());
         return stype;
     }
 

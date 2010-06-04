@@ -8,23 +8,21 @@ package org.kermeta.art2.framework.annotation.processor.visitor
 import art2.ComponentType
 import art2.ContainerRoot
 import art2.PortType
-import art2.ServicePortType
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.declaration.ClassDeclaration
 import com.sun.mirror.declaration.MethodDeclaration
-import com.sun.mirror.`type`.TypeMirror
-import com.sun.mirror.`type`.ClassType
 import com.sun.mirror.util.SimpleDeclarationVisitor
+import org.kermeta.art2.framework.Art2Utility
 import scala.collection.JavaConversions._
 
 class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : ContainerRoot) extends SimpleDeclarationVisitor {
 
   var componentType : ComponentType = _
-  var componentTypeFactory : String = ""
   def getComponentType : ComponentType = {
     return componentType;
   }
 
+  /*
   private def foundOrCreatePortType(qName:String,root : ContainerRoot) : PortType ={
     root.getPortTypes.find({pt=>pt.getName.equals(qName)}) match {
       case Some(pt)=> pt//TODO CHECK COSISTENCY}
@@ -36,49 +34,58 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         }
     }
   }
-
+*/
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
 
     componentType = art2.Art2Factory.eINSTANCE.createComponentType();
 
+    var ctname = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).name
+    if(ctname.equals("empty")){
+      ctname = classdef.getSimpleName
+    }
+    componentType.setName(ctname)
+    
+    componentType.setFactoryBean(classdef.getQualifiedName+"Factory")
+
+    
+
     /* CHECK PROVIDED PORTS */
-    classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{types=>
+    if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
+      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{types=>
 
-      /* TODO , remove that :  CE CODE EST IGNOBLE MAIS RECOMMANDE PAR SUN !!! */
-      var tv = new DataTypeVisitor
-      try {
-        types.className
-      } catch {
-        case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
+        /* TODO , remove that :  CE CODE EST IGNOBLE MAIS RECOMMANDE PAR SUN !!! */
+        var tv = new PortTypeVisitor
+        try {
+          types.className
+        } catch {
+          case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
+        }
+        //root.getPortTypes.add(tv.dataType)
+
+        var ptREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
+        ptREF.setName(types.name)
+        ptREF.setRef(Art2Utility.getOraddPortType(tv.dataType))
+        componentType.getProvided.add(ptREF)
+
       }
-      var typename : String = tv.getDataType.getName
-
-      var ptREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
-      ptREF.setName(types.name)
-      ptREF.setRef(foundOrCreatePortType(typename,root))
-      componentType.getProvided.add(ptREF)
-
     }
     /* CHECK REQUIRED PORTS */
-    classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]).value.foreach{req=>
-      var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
-      ptreqREF.setName(req.name)
+    if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]) != null){
+      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]).value.foreach{req=>
+        var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
+        ptreqREF.setName(req.name)
 
+        var tv = new PortTypeVisitor
+        try {
+          req.className
+        } catch {
+          case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
+        }
+        ptreqREF.setRef(Art2Utility.getOraddPortType(tv.dataType))
 
-      var tv = new DataTypeVisitor
-      try {
-        req.className
-      } catch {
-        case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
+        componentType.getRequired.add(ptreqREF)
       }
-      var typename : String = tv.getDataType.getName
-      ptreqREF.setRef(foundOrCreatePortType(typename,root))
-
-      componentType.getRequired.add(ptreqREF)
     }
-
-    //TODO GENERATE FACTORY FOR COMPONENT TYPE using classdef.getQualifiedName
-    componentType.setFactoryBean(componentTypeFactory)
 
     //PROCESS SUB METHOD
     classdef.getMethods().foreach{method => method.accept(this) }
@@ -94,7 +101,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         case Some(ptref) => {
             var ptREFmapping = art2.Art2Factory.eINSTANCE.createPortTypeMapping
             ptREFmapping.setBeanMethodName(methoddef.getSimpleName)
-            ptREFmapping.setServiceMethodName(annotationPort.name)
+            ptREFmapping.setServiceMethodName(annotationPort.method)
             ptref.getMappings.add(ptREFmapping)
 
             //TODO GENERATED AND CHECK OPERATION
