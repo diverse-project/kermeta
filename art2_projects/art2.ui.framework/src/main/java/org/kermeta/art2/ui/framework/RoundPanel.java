@@ -65,12 +65,14 @@ public class RoundPanel extends JPanel {
 
     @Override
     public boolean contains(int x, int y) {
+        
         int xx = (SHADOW_SIZE - 6);
         int yy = (SHADOW_SIZE - 6);
-        int w = getWidth() - x * 2;
-        int h = getHeight() - y * 2;
+        int w = getWidth() - xx * 2;
+        int h = getHeight() - yy * 2;
         int arc = 15;
         RoundRectangle2D.Double rec = new RoundRectangle2D.Double(xx, yy, w, h, arc, arc);
+        //System.out.println("cont"+x+" "+y+" "+rec.contains(x, y));
         return rec.contains(x, y);
     }
 
