@@ -53,7 +53,7 @@ public class XMI2ART implements IObjectActionDelegate {
 			xmires.load(null);
 			EcoreUtil.resolveAll(xmires);
 			
-			Resource artres = rs.createResource(xmires.getURI().trimFileExtension().appendFileExtension("art"));
+			Resource artres = rs.createResource(xmires.getURI().trimFileExtension().appendFileExtension("artext"));
 			artres.getContents().addAll(xmires.getContents());
 			artres.save(null);
 		} catch (IOException e) {

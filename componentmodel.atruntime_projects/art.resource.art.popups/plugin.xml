@@ -6,7 +6,7 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             id="art.resource.art.popups.contribution1"
-            nameFilter="*.xmi"
+            nameFilter="*.art"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                label="ART"
@@ -26,7 +26,7 @@
       </objectContribution>
       <objectContribution
             id="art.resource.art.popups.contribution2"
-            nameFilter="*.art"
+            nameFilter="*.artext"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="art.resource.art.popups.menu2"
@@ -46,7 +46,7 @@
       </objectContribution>
       <objectContribution
             id="art.resource.art.popups.contribution4"
-            nameFilter="*.part"
+            nameFilter="*.smARText"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="art.resource.art.popups.menu2"

@@ -7,7 +7,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="art.resource.art.ui.ArtEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="art" icon="icons/editor_icon.gif" id="art.resource.art.ui.ArtEditor" name="EMFText art Editor">
+		<editor class="art.resource.art.ui.ArtEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="artext" icon="icons/editor_icon.gif" id="art.resource.art.ui.ArtEditor" name="EMFText art Editor">
 		</editor>
 	</extension>
 	
@@ -46,7 +46,7 @@
 	<extension-point id="art.resource.art.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
 	
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="art.resource.art.mopp.ArtResourceFactoryDelegator" type="art">
+		<parser class="art.resource.art.mopp.ArtResourceFactoryDelegator" type="artext">
 		</parser>
 	</extension>
 	
