@@ -17,7 +17,7 @@
             </separator>
          </menu>
          <action
-               label="XMI to ART"
+               label="art 2 artext"
                class="art.resource.art.popups.popup.actions.XMI2ART"
                menubarPath="art.resource.art.popups.menu1/group1"
                enablesFor="1"
@@ -40,7 +40,7 @@
                class="art.resource.art.popups.popup.actions.ART2XMI"
                enablesFor="1"
                id="art.resource.art.popups.popup.actions.ART2XMI"
-               label="ART 2 XMI"
+               label="artext 2 art"
                menubarPath="art.resource.art.popups.menu2/group2">
          </action>
       </objectContribution>
@@ -60,7 +60,7 @@
                class="art.resource.art.popups.popup.actions.PART2XMI"
                enablesFor="1"
                id="art.resource.art.popups.popup.actions.PART2XMI"
-               label="PART 2 XMI"
+               label="smARText 2 smART"
                menubarPath="art.resource.art.popups.menu2/group2">
          </action>
       </objectContribution>
@@ -80,7 +80,7 @@
                class="art.resource.art.popups.popup.actions.XMI2PART"
                enablesFor="1"
                id="art.resource.art.popups.popup.actions.XMI2PART"
-               label="XMI to PART"
+               label="smART 2 smARText"
                menubarPath="art.resource.art.popups.menu1/group1">
          </action>
       </objectContribution>
