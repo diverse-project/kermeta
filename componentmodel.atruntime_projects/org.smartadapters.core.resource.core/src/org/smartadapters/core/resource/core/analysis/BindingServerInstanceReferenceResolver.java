@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.core.analysis;
 
 public class BindingServerInstanceReferenceResolver implements org.smartadapters.core.resource.core.ICoreReferenceResolver<pattern.art.instance.Binding, pattern.art.instance.ComponentInstance> {
 	
-	private org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.Binding, pattern.art.instance.ComponentInstance> delegate = new org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.Binding, pattern.art.instance.ComponentInstance>();
+	private IntraPatternResolverDelegate<pattern.art.instance.Binding, pattern.art.instance.ComponentInstance> delegate = new IntraPatternResolverDelegate<pattern.art.instance.Binding, pattern.art.instance.ComponentInstance>();
 	
 	public void resolve(java.lang.String identifier, pattern.art.instance.Binding container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.core.ICoreReferenceResolveResult<pattern.art.instance.ComponentInstance> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);

@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.core.analysis;
 
 public class DefaultEntryKeyReferenceResolver implements org.smartadapters.core.resource.core.ICoreReferenceResolver<pattern.art.instance.DefaultEntry, pattern.art.type.DictionaryDefaultValue> {
 	
-	private org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.DefaultEntry, pattern.art.type.DictionaryDefaultValue> delegate = new org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.DefaultEntry, pattern.art.type.DictionaryDefaultValue>();
+	private IntraPatternResolverDelegate<pattern.art.instance.DefaultEntry, pattern.art.type.DictionaryDefaultValue> delegate = new IntraPatternResolverDelegate<pattern.art.instance.DefaultEntry, pattern.art.type.DictionaryDefaultValue>();
 	
 	public void resolve(java.lang.String identifier, pattern.art.instance.DefaultEntry container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.core.ICoreReferenceResolveResult<pattern.art.type.DictionaryDefaultValue> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);

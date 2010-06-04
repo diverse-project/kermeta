@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.core.analysis;
 
 public class DictionaryValueTypeReferenceResolver implements org.smartadapters.core.resource.core.ICoreReferenceResolver<pattern.art.type.Dictionary, pattern.art.DataType> {
 	
-	private org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.type.Dictionary, pattern.art.DataType> delegate = new org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.type.Dictionary, pattern.art.DataType>();
+	private IntraPatternResolverDelegate<pattern.art.type.Dictionary, pattern.art.DataType> delegate = new IntraPatternResolverDelegate<pattern.art.type.Dictionary, pattern.art.DataType>();
 	
 	public void resolve(java.lang.String identifier, pattern.art.type.Dictionary container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.core.ICoreReferenceResolveResult<pattern.art.DataType> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);

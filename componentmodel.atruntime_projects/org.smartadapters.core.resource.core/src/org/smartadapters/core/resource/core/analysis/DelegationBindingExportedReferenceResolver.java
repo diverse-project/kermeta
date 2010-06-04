@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.core.analysis;
 
 public class DelegationBindingExportedReferenceResolver implements org.smartadapters.core.resource.core.ICoreReferenceResolver<pattern.art.instance.DelegationBinding, pattern.art.type.AbstractPort> {
 	
-	private org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.DelegationBinding, pattern.art.type.AbstractPort> delegate = new org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.DelegationBinding, pattern.art.type.AbstractPort>();
+	private IntraPatternResolverDelegate<pattern.art.instance.DelegationBinding, pattern.art.type.AbstractPort> delegate = new IntraPatternResolverDelegate<pattern.art.instance.DelegationBinding, pattern.art.type.AbstractPort>();
 	
 	public void resolve(java.lang.String identifier, pattern.art.instance.DelegationBinding container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.core.ICoreReferenceResolveResult<pattern.art.type.AbstractPort> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);

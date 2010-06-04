@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.core.analysis;
 
 public class ComponentInstanceTypeReferenceResolver implements org.smartadapters.core.resource.core.ICoreReferenceResolver<pattern.art.instance.ComponentInstance, pattern.art.type.ComponentType> {
 	
-	private org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.ComponentInstance, pattern.art.type.ComponentType> delegate = new org.smartadapters.core.resource.core.analysis.CoreDefaultResolverDelegate<pattern.art.instance.ComponentInstance, pattern.art.type.ComponentType>();
+	private IntraPatternResolverDelegate<pattern.art.instance.ComponentInstance, pattern.art.type.ComponentType> delegate = new IntraPatternResolverDelegate<pattern.art.instance.ComponentInstance, pattern.art.type.ComponentType>();
 	
 	public void resolve(java.lang.String identifier, pattern.art.instance.ComponentInstance container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.core.ICoreReferenceResolveResult<pattern.art.type.ComponentType> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
