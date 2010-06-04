@@ -1,4 +1,4 @@
-package art.resource.art.analysis.helper;
+package art.resource.artext.analysis.helper;
 
 /*******************************************************************************
  * Copyright (c) 2006-2009 
