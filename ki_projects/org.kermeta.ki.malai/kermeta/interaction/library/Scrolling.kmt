@@ -64,6 +64,6 @@ class ScrollingWheelTransition inherits WheelTransition
 		scrolling.increment := scrolling.increment + (if(isUp) then -increment else increment end)
 		scrolling.px        := Real.clone(px)
 		scrolling.py        := Real.clone(py)
-		scrolling.target    := scrolling.getPickableAt(scrolling.px, scrolling.py)
+		scrolling.target    := scrolling.getPickableAt(scrolling.px, scrolling.py, source)
 	end
 }
