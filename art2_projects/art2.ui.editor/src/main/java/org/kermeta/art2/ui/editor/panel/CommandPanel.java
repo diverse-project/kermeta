@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
+import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
 import org.kermeta.art2.ui.editor.widget.JCommandButton;
 
 /**
@@ -29,7 +30,13 @@ public class CommandPanel extends JPanel {
         btAddNodeCommand.setKernel(kernel);
         btAddNode.setCommand(btAddNodeCommand);
 
+        JCommandButton btSave = new JCommandButton("Save");
+        SaveActuelModelCommand btSaveCommand = new SaveActuelModelCommand();
+        btSaveCommand.setKernel(kernel);
+        btSave.setCommand(btSaveCommand);
+
         add(btAddNode);
+        add(btSave);
 
         
 
