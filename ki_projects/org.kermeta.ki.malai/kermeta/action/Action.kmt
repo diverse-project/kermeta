@@ -59,9 +59,12 @@ abstract class Action {
 	operation canDo() : Boolean is abstract
 	
 	
-	/** True if the execution of the action had effects on the target. */
-	operation hadEffect() : Boolean is abstract
-	
+	/** True if the execution of the action had effects on the target. 
+	 *  By default this method only checks if the action is done. Should be overridden.
+	*/
+	operation hadEffect() : Boolean is do
+		result := isDone
+	end
 	
 	
 	/** Defines if the given action can cancel the calling action.

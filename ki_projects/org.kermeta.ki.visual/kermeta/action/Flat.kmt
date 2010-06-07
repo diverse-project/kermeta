@@ -40,11 +40,6 @@ class Flat inherits Action, Undoable
 	end
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not metamodel.isVoid and not classToFlat.isVoid
 	end

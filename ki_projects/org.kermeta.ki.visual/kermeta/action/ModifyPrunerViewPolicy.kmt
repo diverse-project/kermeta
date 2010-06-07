@@ -50,11 +50,6 @@ class ModifyPrunerViewPolicy inherits Action, Undoable
 	
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not pruner.isVoid and not newViewPolicy.isVoid
 	end

@@ -54,11 +54,6 @@ class ActionReinitView inherits Action, Undoable {
 	
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not metamodel.isVoid
 	end

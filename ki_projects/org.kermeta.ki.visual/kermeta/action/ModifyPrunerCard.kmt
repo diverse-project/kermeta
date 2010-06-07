@@ -28,11 +28,6 @@ class ModifyPrunerCard inherits Action
 	end
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not pruner.isVoid and not card0.isVoid
 	end

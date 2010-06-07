@@ -29,11 +29,6 @@ class ModifyPrunerRadiusEffect inherits Action
 	end
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not pruner.isVoid and not newValue.isVoid
 	end

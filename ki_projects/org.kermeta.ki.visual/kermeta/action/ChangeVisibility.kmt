@@ -22,11 +22,6 @@ abstract class ChangeVisibility inherits Action
 	reference metamodel : ModelingUnit
 	
 	
-	method hadEffect() : Boolean is do
-		result := isDone
-	end
-	
-	
 	method canDo() : Boolean is do
 		result := not metamodel.isVoid and not visible.isVoid
 	end
