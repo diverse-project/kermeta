@@ -12,7 +12,7 @@
   <bean id="artRuntime" class="org.kermeta.art2.runtime.impl.ArtRuntimeServiceBean" init-method="init">
   	<property name="dictionary">
   		<props>
-  			<prop key="node.name" value="node-0" />
+  			<prop key="node.name" value="$[karaf.name]" />
   			<prop key="deploy.path" value="$[karaf.base]/deploy" />
   		</props>
   	</property>
