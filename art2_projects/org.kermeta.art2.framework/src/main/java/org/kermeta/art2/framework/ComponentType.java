@@ -13,13 +13,13 @@ import java.util.Properties;
  */
 public interface ComponentType {
 
-    public void setHostedPorts(HashMap<String, Port> ports);
+    public void setHostedPorts(HashMap<String, Object> ports);
 
-    public HashMap<String, Port> getHostedPorts();
+    public HashMap<String, Object> getHostedPorts();
 
-    public void setNeededPorts(HashMap<String, Port> ports);
+    public void setNeededPorts(HashMap<String, Object> ports);
 
-    public HashMap<String, Port> getNeededPorts();
+    public HashMap<String, Object> getNeededPorts();
 
     public Properties getDictionary();
 

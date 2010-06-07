@@ -13,8 +13,8 @@ import java.util.Properties;
  */
 public class AbstractComponentType implements ComponentType {
 
-    private HashMap<String,Port> hostedPorts = new HashMap<String,Port>();
-    private HashMap<String,Port> neededPorts = new HashMap<String,Port>();
+    private HashMap<String,Object> hostedPorts = new HashMap<String,Object>();
+    private HashMap<String,Object> neededPorts = new HashMap<String,Object>();
     private Properties dictionary = new Properties();
 
     @Override
@@ -23,32 +23,30 @@ public class AbstractComponentType implements ComponentType {
     }
 
     @Override
-    public HashMap<String,Port> getHostedPorts() {
-        return this.hostedPorts;
-    }
-
-    @Override
-    public HashMap<String,Port> getNeededPorts() {
-        return this.neededPorts;
-    }
-
-    @Override
     public void setDictionary(Properties dictionary) {
         this.dictionary = dictionary;
     }
 
     @Override
-    public void setHostedPorts(HashMap<String,Port> ports) {
+    public void setHostedPorts(HashMap<String,Object> ports) {
         this.hostedPorts = ports;
+        for(Object p: this.hostedPorts.values()){
+            ((AbstractPort)p).setComponent(this);
+        }
     }
 
     @Override
-    public void setNeededPorts(HashMap<String,Port> ports) {
-        this.neededPorts = ports;
+    public HashMap<String, Object> getNeededPorts() {
+        return neededPorts;
     }
 
-    public Port getPortByName(String portName) {
-        Port port = null;
+    @Override
+    public void setNeededPorts(HashMap<String, Object> neededPorts) {
+        this.neededPorts = neededPorts;
+    }
+
+    public Object getPortByName(String portName) {
+        Object port = null;
         if(this.getHostedPorts().containsKey(portName)){
             port = this.getHostedPorts().get(portName);
         }
@@ -60,8 +58,13 @@ public class AbstractComponentType implements ComponentType {
 
     @Override
     public <T> T getPortByName(String name, Class<T> type) {
-        Port retp = getPortByName(name);
+        Object retp = getPortByName(name);
         return (T)retp;
+    }
+
+    @Override
+    public HashMap<String, Object> getHostedPorts() {
+       return this.hostedPorts;
     }
 
 

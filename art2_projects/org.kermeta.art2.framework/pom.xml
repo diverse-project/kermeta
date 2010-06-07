@@ -66,6 +66,15 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.0.0</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Private-Package></Private-Package>
+                        <Import-Package>!com.sun.*,!org.kermeta.art2.annotation,*</Import-Package>
+                        <Export-Package>org.kermeta.art2.framework,org.kermeta.art2.framework.*</Export-Package>
+                    </instructions>
+                </configuration>
+
+
             </plugin>
             <plugin>
                 <groupId>org.scala-tools</groupId>

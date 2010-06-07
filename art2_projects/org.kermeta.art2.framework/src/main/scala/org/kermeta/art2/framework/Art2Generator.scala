@@ -24,7 +24,7 @@ object Art2Generator {
       wrapper.append("public static "+componentBean+" create"+ct.getName+"(){"+"return new "+componentBean+"();}\n")
       ct.getProvided.foreach{ref=>
         var portName = ct.getName()+"PORT"+ref.getName();
-        wrapper.append("public static "+portName+" create"+portName+"(Object o){ return new "+portName+"(o);}\n")
+        wrapper.append("public static "+portName+" create"+portName+"(){ return new "+portName+"();}\n")
       }
       wrapper.append("}\n")
       wrapper.close
@@ -42,7 +42,7 @@ object Art2Generator {
         wrapper.append("import org.kermeta.art2.framework.AbstractPort;\n");
         wrapper.append("import "+ref.getRef().getName()+";\n");
         wrapper.append("public class "+portName+" extends AbstractPort implements "+ref.getRef().getName()+" {\n");
-        wrapper.append("public "+portName+"(Object c){setComponent(c);}\n")
+        //wrapper.append("public "+portName+"(Object c){setComponent(c);}\n") /* AVOID CIRCULAR REFERENCE */
         ref.getRef match {
           case sPT : ServicePortType=> sPT.getOperations.foreach{op=>
               wrapper.append("public "+op.getReturnType.getName+" "+op.getName+"(")
