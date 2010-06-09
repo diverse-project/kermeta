@@ -149,11 +149,13 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector.initialise(actionRegistry)
 		selector.initialiseInstruments(pruner, flattener, hierarcher, hand)
 
-		metamodel.setEventManager(self.dispatcher)
-
+		var eventManager : EventManager init EventManager.new
+		eventManager.initialise(dispatcher)
+		
 		initialiseUI
-		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, metamodel.getEventManager)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		metamodel.setEventManager(self.dispatcher)
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
 		model2view.modelingUnit := metamodel
 		metamodel.accept(model2view)

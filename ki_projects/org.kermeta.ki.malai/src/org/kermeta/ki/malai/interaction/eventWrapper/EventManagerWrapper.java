@@ -61,8 +61,10 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		final Object obj1 = componentRO==null ? null : componentRO.getUserData();
 		final Object obj2 = eventManagerRO==null ? null : eventManagerRO.getUserData();
 		
-		if(obj1!=null && obj1 instanceof Component && obj2!=null && obj2 instanceof EventManagerWrapper)
+		if(obj1 instanceof Component && obj2 instanceof EventManagerWrapper)
 			((EventManagerWrapper) obj2).attachTo((Component) obj1);
+		else
+			System.err.println("ERROR KI: Trying to attach the event manager " + obj2 + " to the component " + obj1 + ".");
 		
 		return componentRO==null ? null : componentRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -234,6 +236,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			if(e.getSource() instanceof JComponent)
 				((JComponent)e.getSource()).grabFocus();
+			
+			System.out.println(">>>>" + e);
 			
 			events.add(new EventWrapper(EventWrapper.MOUSE_PRESSED, e));
 		}
