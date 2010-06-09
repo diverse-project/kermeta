@@ -179,6 +179,30 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
             //res.append("checkParamInvariants(super.getInvariants)\n")
             res1.append("}\n")
             /* End checkInvariants Generation  */
+
+            res1.append("override def checkAllInvariants(){\n")
+            res1.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
+             i = 0
+            listInv.filter(b => !Util.hasCompilerIgnoreTag(b)  ).foreach(a => {
+                    if(i != 0) res1.append(",")
+                    res1.append("(")
+                    res1.append("\""+a.getName+"\" -> (()=>")
+                    a.generateScalaCode(res1)
+                    res1.append("))")
+                    i = i + 1
+                })
+            res1.append(" )\n")
+            res1.append("checkParamInvariants(invariants, constraintDiagnostic)\n")
+            
+            /*
+             this.getSuperType.foreach(superC => {
+             res.append("super[")
+             res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+             res.append("Aspect].checkInvariants\n")
+             })*/
+            //res.append("checkParamInvariants(super.getInvariants)\n")
+            res1.append("}\n")
+
         }
     }
 
