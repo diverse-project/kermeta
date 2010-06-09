@@ -23,16 +23,30 @@ class CentreOnClass inherits Action {
 	
 	
 	
-	method doActionBody() : Void is do
-		var clazz : TypeDefinition
+	operation getSearchedClassesInPackage(pkg : Package, name : String) : TypeDefinition is do
+		result := pkg.ownedTypeDefinition.detect{t | t.name==name }
 		
-		metamodel.packages.exists{p | 
-			clazz := p.ownedTypeDefinition.detect{td | td.name==className}
-			
-			not clazz.isVoid
+		if(result.isVoid) then
+			pkg.nestedPackage.exists{p | 
+				result := getSearchedClassesInPackage(p, name)
+				not result.isVoid
+			}
+		end
+	end
+	
+	
+	operation getSearchedClasses() : TypeDefinition is do
+		metamodel.packages.exists{p |
+			result:= getSearchedClassesInPackage(p, className)
+			not result.isVoid
 		}
-		
+	end
+	
+	
+	method doActionBody() : Void is do
+		var clazz : TypeDefinition init getSearchedClasses()
 		metamodel.focusOnTypeDefinition(clazz)
+		done()
 	end
 	
 	
@@ -40,7 +54,7 @@ class CentreOnClass inherits Action {
 		result := not className.isVoid and not metamodel.isVoid
 		
 		if(result) then
-			result := metamodel.packages.exists{p | p.ownedTypeDefinition.exists{td | td.name==className}}
+			result := not getSearchedClasses().isVoid
 		end
 	end
 	

@@ -22,17 +22,22 @@ class SearchClasses inherits Action {
 	attribute text : String
 	
 	
-	method doActionBody() : Void is do
-		searcher.searchedClasses.clear()
-		
-		searcher.metamodel.packages.each{p | 
-			p.ownedTypeDefinition.each{ t | 
-				if(t.name.contains(text)) then
-					searcher.searchedClasses.add(t)
-				end
-			}
+	
+	operation addSearchedClasses(pkg : Package) : Void is do
+		pkg.ownedTypeDefinition.each{ t |
+			if(t.name.contains(text)) then
+				searcher.searchedClasses.add(t)
+			end
 		}
 		
+		pkg.nestedPackage.each{p | addSearchedClasses(p) }
+	end
+	
+	
+	
+	method doActionBody() : Void is do
+		searcher.searchedClasses.clear()
+		searcher.metamodel.packages.each{p | addSearchedClasses(p)}
 		done()
 	end
 	
