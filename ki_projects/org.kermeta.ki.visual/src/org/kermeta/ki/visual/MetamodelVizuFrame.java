@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
@@ -35,7 +36,7 @@ public class MetamodelVizuFrame extends JFrame {
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
 							RuntimeObject prunerButRO, RuntimeObject flattenerButRO, RuntimeObject hierarcherButRO, 
 							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO, RuntimeObject radiusRO, RuntimeObject cardRO,
-							RuntimeObject showOpButRO, RuntimeObject showAttrButRO) {
+							RuntimeObject showOpButRO, RuntimeObject showAttrButRO, RuntimeObject tfRO) {
 		JPanel toolbar 				= (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
 		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
@@ -49,6 +50,7 @@ public class MetamodelVizuFrame extends JFrame {
 		AbstractButton showOpBut	= (AbstractButton)showOpButRO.getUserData();
 		AbstractButton showAttrBut	= (AbstractButton)showAttrButRO.getUserData();
 		JCheckBox cardCB			= (JCheckBox)cardRO.getUserData();
+		JTextField	tf				= (JTextField) tfRO.getUserData();
 		ButtonGroup groupSelector 	= new ButtonGroup();
 		ButtonGroup groupPruner 	= new ButtonGroup();
 		
@@ -69,6 +71,8 @@ public class MetamodelVizuFrame extends JFrame {
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(showOpBut);
 		toolbar.add(showAttrBut);
+		toolbar.add(Box.createHorizontalStrut(50));
+		toolbar.add(tf);
 		
 		groupSelector.add(prunerBut);
 		groupSelector.add(hierarcherBut);
@@ -87,8 +91,6 @@ public class MetamodelVizuFrame extends JFrame {
 	public static RuntimeObject organise(RuntimeObject appliRO) {
 		MetamodelVizuFrame interactiveSys = (MetamodelVizuFrame) appliRO.getUserData();
 		interactiveSys.mmView.updateLayout();
-//		interactiveSys.mmView.initialiseForest();
-//		interactiveSys.mmView.setTreeLayout();
 		
 		return appliRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -145,6 +147,7 @@ public class MetamodelVizuFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout());
 		mmView = new MetamodelView();
 		JScrollPane sp = new JScrollPane(mmView);
+		mmView.setScrollPane(sp);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		int width  = (int)(screen.width*0.85);
 		int height = (int)(screen.height*0.8);

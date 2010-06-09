@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractButton;
+import javax.swing.JComponent;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -155,6 +157,9 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			if(comp instanceof AbstractButton)
 				((AbstractButton)comp).addActionListener(this);
 			
+			if(comp instanceof JTextField)
+				((JTextField)comp).addActionListener(this);
+			
 			if(comp instanceof ItemSelectable)
 				((ItemSelectable)comp).addItemListener(this);
 			
@@ -178,6 +183,9 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			
 			if(comp instanceof AbstractButton)
 				((AbstractButton)comp).removeActionListener(this);
+			
+			if(comp instanceof JTextField)
+				((JTextField)comp).removeActionListener(this);
 			
 			if(comp instanceof ItemSelectable)
 				((ItemSelectable)comp).removeItemListener(this);
@@ -224,6 +232,9 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	
 	public void mousePressed(final MouseEvent e) {
 		synchronized(events) {
+			if(e.getSource() instanceof JComponent)
+				((JComponent)e.getSource()).grabFocus();
+			
 			events.add(new EventWrapper(EventWrapper.MOUSE_PRESSED, e));
 		}
 		synchronized(dispatcher) {

@@ -4,7 +4,7 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-package kermeta::ki::malai::interaction;
+package kermeta::ki::visual;
 
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
@@ -13,6 +13,7 @@ require kermeta
 
 
 using kermeta::standard
+using kermeta::ki::malai::interaction
 using kermeta::ki::malai::picking
 
 

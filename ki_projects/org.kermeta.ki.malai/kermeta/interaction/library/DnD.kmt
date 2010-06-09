@@ -4,8 +4,6 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction;
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"

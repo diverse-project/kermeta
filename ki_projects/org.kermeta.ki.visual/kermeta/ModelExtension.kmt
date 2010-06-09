@@ -150,6 +150,12 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	attribute eventManager : EventManager
 	
 	
+	operation focusOnTypeDefinition(typeDef : TypeDefinition) : Void is do
+		extern org::kermeta::ki::visual::view::MetamodelView.focusOnTypeDefinition(self, typeDef)
+	end
+	
+	
+	
 	operation setEventManager(dispatcher : ListDispatcher) : Void is do
 		eventManager := EventManager.new
 		eventManager.initialise(dispatcher)

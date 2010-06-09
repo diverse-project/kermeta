@@ -1,11 +1,9 @@
-/* $Id:$ 
+/*
  * Creation : February 8, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-
 package kermeta::ki::malai::presentation;
 
 

@@ -19,12 +19,16 @@ using kermeta::ki::malai::dispatcher
 
 
 
-abstract class GraphicalComponent inherits Pickable
-{
+abstract class GraphicalComponent inherits Pickable {
 	reference componentContainer : GraphicalComponent
 	
 
 	operation initialise() : Void is abstract
+	
+	
+	operation setPopupMenu(popupMenu : PopupMenu) : Void is do
+		extern org::kermeta::ki::malai::widget::GraphicalComponent.setPopupMenu(self, popupMenu)
+	end
 	
 
 	operation setEnable(enable : Boolean) : Void is do
@@ -37,10 +41,19 @@ abstract class GraphicalComponent inherits Pickable
 	end
 	
 	
-	
 	method contains(px : Real, py : Real) : Boolean is do
 		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.contains(self, px, py)
 	end
+	
+	
+	operation getXOnScreen() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getXOnScreen(self)
+	end
+
+	
+	operation getYOnScreen() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getYOnScreen(self)
+	end	
 	
 	
 	operation getX() : Integer is do
@@ -53,6 +66,22 @@ abstract class GraphicalComponent inherits Pickable
 	end
 	
 	
+	operation getWidth() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getWidth(self)
+	end
+	
+	
+	operation getHeight() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getHeight(self)
+	end
+	
+	
+	operation setPosition(x : Integer, y : Integer) : Void is do
+		extern org::kermeta::ki::malai::widget::GraphicalComponent.setPosition(self, x, y)
+	end
+	
+	
+	
 	method getPicker() : Picker is do
 		result := void
 		
@@ -61,6 +90,109 @@ abstract class GraphicalComponent inherits Pickable
 		else
 			result := componentContainer.getPicker
 		end
+	end
+}
+
+
+
+class PopupMenu inherits GraphicalComponent {
+	attribute menuItems : MenuItem[0..*]
+	
+	
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::PopupMenu.initialise(self)
+	end
+
+
+	method setVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::malai::widget::PopupMenu.setVisible(self, visible)
+	end
+	
+	
+	operation addMenuItem(menuItem : MenuItem) : Void is do
+		menuItems.add(menuItem)
+		extern org::kermeta::ki::malai::widget::PopupMenu.addMenuItem(self, menuItem)
+	end
+	
+	
+	operation removeAllMenuItems() : Void is do
+		menuItems.clear()
+		extern org::kermeta::ki::malai::widget::PopupMenu.removeAllMenuItems(self)
+	end
+	
+	
+	operation getSelectedIndex() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::PopupMenu.getSelectedIndex(self)
+	end
+	
+	
+	operation setSelectedIndex(index : Integer) : Void is do
+		extern org::kermeta::ki::malai::widget::PopupMenu.setSelectedIndex(self, index)
+	end
+	
+	
+	operation getNbMenuItems() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::PopupMenu.getNbMenuItems(self)
+	end
+}
+
+
+
+class MenuItem inherits GraphicalComponent {
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::MenuItem.initialise(self)
+	end
+	
+	operation setText(name : String) : Void is do
+		extern org::kermeta::ki::malai::widget::MenuItem.setText(self, name)
+	end
+	
+	
+	operation getText() : String is do
+		result ?= extern org::kermeta::ki::malai::widget::MenuItem.getText(self)
+	end
+}
+
+
+
+class Window inherits GraphicalComponent {
+	reference components : GraphicalComponent[0..*]
+
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::Window.initialise(self)
+	end
+	
+	
+	operation setAlwaysOnTop(onTop : Boolean) : Void is do
+		extern org::kermeta::ki::malai::widget::Window.setAlwaysOnTop(self, onTop)
+	end
+	
+	
+	operation addComponent(component : GraphicalComponent, addToUIPanel : Boolean) : Void is do
+		components.add(component)
+		component.componentContainer := self
+
+		if(addToUIPanel) then
+			extern org::kermeta::ki::malai::widget::Window.add(self, component)
+		end
+	end
+}
+
+
+
+class TextField inherits GraphicalComponent {
+	method initialise() : Void is do
+		extern org::kermeta::ki::malai::widget::TextField.initialise(self)
+	end
+	
+	
+	operation getText() : String is do
+		result ?= extern org::kermeta::ki::malai::widget::TextField.getText(self)
+	end
+	
+	
+	operation setText(text : String) : String is do
+		result ?= extern org::kermeta::ki::malai::widget::TextField.setText(self, text)
 	end
 }
 

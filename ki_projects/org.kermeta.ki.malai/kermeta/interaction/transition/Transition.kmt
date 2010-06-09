@@ -84,6 +84,12 @@ class ButtonPressedTransition inherits Transition {
 
 
 
+class TextChangedTransition inherits Transition {
+	attribute textField : TextField
+}
+
+
+
 class KeyPressureTransition inherits KeyboardTransition {
 }
 
@@ -161,17 +167,6 @@ class PressureTransition inherits PointingDeviceTransition {
 
 class ReleaseTransition inherits PointingDeviceTransition {
 }
-
-
-
-
-class TextChangedTransition inherits Transition {
-	attribute textCompName : String
-	
-	attribute text : String
-}
-
-
 
 
 

@@ -1,0 +1,65 @@
+/*
+ * Creation : May 12, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::interaction
+
+
+class KeyActivateSearcher inherits Interaction
+{
+	method initStateMachine() : Void is do
+		var keyCtrlPressed  : State init IntermediaryState.new
+		var keyEnd	    	: State init TerminalState.new
+		var keyAbort    	: State init AbortingState.new
+		
+		keyCtrlPressed.initialise("keyPressed")
+		keyEnd.initialise("keyEnd")
+		keyAbort.initialise("keyAbort")
+		addState(keyCtrlPressed)
+		addState(keyEnd)
+		addState(keyAbort)
+		
+		var transition : Transition
+		
+		transition := KeyCtrlPressureTransition.new
+		transition.initialise(initState, keyCtrlPressed)
+		
+		transition := KeyCtrlPressureTransition.new
+		transition.initialise(keyCtrlPressed, keyAbort)
+		
+		transition := KeySpacePressureTransition.new
+		transition.initialise(keyCtrlPressed, keyEnd)
+	end
+}
+
+
+
+class KeyCtrlPressureTransition inherits KeyPressureTransition {
+	method isGuardRespected() : Boolean is do
+		result := key==17
+	end
+}
+
+
+
+class KeyCtrlReleaseTransition inherits KeyReleaseTransition {
+	method isGuardRespected() : Boolean is do
+		result := key==17
+	end
+}
+
+
+class KeySpacePressureTransition inherits KeyPressureTransition {
+	method isGuardRespected() : Boolean is do
+		result := key==32
+	end
+}

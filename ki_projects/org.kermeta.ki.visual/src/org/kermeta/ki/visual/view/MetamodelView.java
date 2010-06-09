@@ -16,7 +16,10 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.BoundedRangeModel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
@@ -37,13 +40,57 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	protected List<LinkView> links;
 	
-//	protected EventManagerWrapper eventManager;
-	
 	protected double zoom;
 	
 	protected boolean operationsVisible;
 	
 	protected boolean attributesVisible;
+	
+	protected JScrollPane scrollPane;
+	
+	
+	
+	public static RuntimeObject focusOnTypeDefinition(RuntimeObject mmRO, RuntimeObject typeDefRO) {
+		MetamodelView mm = (MetamodelView) mmRO.getUserData();
+		Object typeDef   = typeDefRO.getUserData();
+		
+		if(typeDef!=null && typeDef instanceof EntityView) {
+			final Point2D.Double centre = ((EntityView) typeDef).getCentre();
+			final JScrollBar vertSB  = mm.scrollPane.getVerticalScrollBar();
+			final JScrollBar horizSB = mm.scrollPane.getHorizontalScrollBar();
+
+			if(vertSB.isVisible()) {
+				final BoundedRangeModel model = vertSB.getModel();
+				final int value	= model.getValue();
+				final int cy 	= mm.scrollPane.getHeight()/2 + value;
+				int newValue 	= value+((int)centre.y)-cy;
+				
+				if(newValue>model.getMaximum())
+					newValue = model.getMaximum();
+				else if(newValue<model.getMinimum())
+					newValue = model.getMinimum();
+				
+				model.setValue(newValue);
+			}
+			
+			if(horizSB.isVisible()) {
+				final BoundedRangeModel model = horizSB.getModel();
+				final int value	= model.getValue();
+				final int cx 	= mm.scrollPane.getWidth()/2 + value;
+				int newValue 	= value+((int)centre.x)-cx;
+				
+				if(newValue>model.getMaximum())
+					newValue = model.getMaximum();
+				else if(newValue<model.getMinimum())
+					newValue = model.getMinimum();
+				
+				model.setValue(newValue);
+			}
+		}
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
 	
 	
 	
@@ -292,15 +339,9 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 		operationsVisible = true;
 		attributesVisible = true;
-//		eventManager = emw;
 		entities  	 = new ArrayList<EntityView>();
 		links 		 = new ArrayList<LinkView>();
 		zoom		 = 1.;
-		
-		setFocusable(true);
-		
-//		if(eventManager!=null)
-//			eventManager.attachTo(this);
 		
 		addMouseListener(this); //TODO to remove!!
 		addMouseMotionListener(this); //TODO to remove!!
@@ -496,12 +537,6 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	}
 	
 	
-	
-//	public EventManagerWrapper getEventManager() {
-//		return eventManager;
-//	}
-
-
 
 	public List<EntityView> getEntities() {
 		return entities;
@@ -517,7 +552,6 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 	@Override
 	public void paint(Graphics g) {
-		requestFocus();
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -646,9 +680,16 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 
 	public void mouseExited(MouseEvent e) {
-//		
+		//		
 	}
 
+	
+	
+	public void setScrollPane(final JScrollPane scrollPane) {
+		if(scrollPane!=null)
+			this.scrollPane = scrollPane;
+	}
+	
 
 	public EntityView draggedShape;//TODO to remove!!
 	public FloatingText draggedLabel;//TODO to remove!!

@@ -1,0 +1,48 @@
+/*
+ * Creation : June 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::widget
+
+
+class TextFieldChanged inherits Interaction {
+	reference textField : TextField
+	
+	
+	method reinit() : Void is do
+		super
+
+		textField := void		
+	end
+	
+	
+	method initStateMachine() : Void is do
+		var changed : TerminalState init TerminalState.new
+	
+		changed.initialise("changed")
+		addState(changed)
+		
+		var tft : TFCTextChangedTransition init TFCTextChangedTransition.new
+		tft.textFieldChanged := self
+		tft.initialise(initState, changed)
+	end
+}
+
+
+
+class TFCTextChangedTransition inherits TextChangedTransition {
+	reference textFieldChanged : TextFieldChanged
+
+	method action() : Void is do
+		textFieldChanged.textField := textField
+	end
+}

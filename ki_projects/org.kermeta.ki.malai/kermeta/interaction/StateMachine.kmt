@@ -80,7 +80,7 @@ abstract class StateMachine inherits EventHandler
 
 	
 	
-	method onTextChanged(textCompName : String, TextValue : String) : Void is do
+	method onTextChanged(textField : TextField) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			
@@ -88,8 +88,7 @@ abstract class StateMachine inherits EventHandler
 				if(t.isInstanceOf(TextChangedTransition)) then
 					var tct : TextChangedTransition init t.asType(TextChangedTransition)
 	
-					tct.textCompName := textCompName
-					tct.text := TextValue
+					tct.textField := textField
 					
 					if(t.isGuardRespected()) then
 						stop := true

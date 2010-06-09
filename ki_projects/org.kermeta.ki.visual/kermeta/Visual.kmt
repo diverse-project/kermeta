@@ -17,6 +17,8 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/ElementsDisplayer.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Searcher.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/SearcherActivator.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
@@ -78,6 +80,10 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute customiser : InstrumentsCustomiser
 	
+	attribute searcher : Searcher
+	
+//	attribute searcherActivator : SearcherActivator
+	
 	attribute zoomer : Zoomer
 	
 	attribute scroller : Scroller
@@ -116,6 +122,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector         := InstrumentsSelector.new
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
+		searcher		 := Searcher.new
+//		searcherActivator:= SearcherActivator.new
 		
 		eltDisplayer.initialise(actionRegistry)
 		hand.initialise(actionRegistry)
@@ -127,6 +135,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser.initialise(actionRegistry)
 		pruner.initialise(actionRegistry)
 		undoManager.initialise(actionRegistry)
+		searcher.initialise(actionRegistry)
+//		searcherActivator.initialise(actionRegistry)
 		
 		pruner.metamodel := metamodel
 		pruner.initialiseLinks()
@@ -135,6 +145,11 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		hand.initialiseLinks()
 		hierarcher.metamodel := metamodel
 		hierarcher.initialiseLinks()
+		searcher.initialiseWidgets(dispatcher)
+		searcher.initialiseLinks()
+		searcher.metamodel := metamodel
+//		searcherActivator.searcher := searcher
+//		searcherActivator.initialiseLinks()
 		
 		eltDisplayer.metamodel := metamodel
 		eltDisplayer.initialise(actionRegistry)
@@ -169,6 +184,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoCollector.handlers.add(undoManager)
 		undoManager.initialiseLinks()
 		undoManager.setActivated(true)
+		searcher.setActivated(true)
+//		searcherActivator.setActivated(true)
 		
 		pruner.addEventable(metamodel)
 		flattener.addEventable(metamodel)
@@ -180,6 +197,9 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser.addEventable(toolbar)
 		zoomer.addEventable(metamodel)
 		scroller.addEventable(metamodel)
+//		searcherActivator.addEventable(metamodel)
+//		searcherActivator.addEventable(toolbar)
+		searcher.addEventable(toolbar)
 		
 		//TOREMOVE
 /*		var action : PruneHierarchy init PruneHierarchy.new
@@ -229,7 +249,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
 					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton,
 					selector.handButton, pruner.grayedButton, pruner.hideButton, pruner.radiusSpinner, pruner.cardCheckBox,
-					eltDisplayer.opButton, eltDisplayer.attrButton)
+					eltDisplayer.opButton, eltDisplayer.attrButton, searcher.textField)
 					
 		toolbar.addComponent(undoManager.undoButton, false)
 		toolbar.addComponent(undoManager.redoButton, false)
@@ -243,6 +263,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.addComponent(selector.handButton, false)
 		toolbar.addComponent(eltDisplayer.attrButton, false)
 		toolbar.addComponent(eltDisplayer.opButton, false)
+		toolbar.addComponent(searcher.textField, false)
 	end
 
 

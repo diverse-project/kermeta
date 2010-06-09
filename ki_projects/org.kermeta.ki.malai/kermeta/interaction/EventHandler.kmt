@@ -30,7 +30,7 @@ abstract class EventHandler {
 	
 	operation onCheckBoxPressed(checkbox : CheckBox) : Void is abstract
 	
-	operation onTextChanged(textCompName : String, TextValue : String) : Void is abstract
+	operation onTextChanged(textField : TextField) : Void is abstract
 	
 	operation onSpinnerValueModified(spinner : Spinner) : Void is abstract
 	
