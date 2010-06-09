@@ -17,45 +17,19 @@ using kermeta::language::structure
 
 
 class CentreOnClass inherits Action {
-	attribute className : String
+	reference ~class : TypeDefinition
 	
 	reference metamodel : ModelingUnit
 	
 	
-	
-	operation getSearchedClassesInPackage(pkg : Package, name : String) : TypeDefinition is do
-		result := pkg.ownedTypeDefinition.detect{t | t.name==name }
-		
-		if(result.isVoid) then
-			pkg.nestedPackage.exists{p | 
-				result := getSearchedClassesInPackage(p, name)
-				not result.isVoid
-			}
-		end
-	end
-	
-	
-	operation getSearchedClasses() : TypeDefinition is do
-		metamodel.packages.exists{p |
-			result:= getSearchedClassesInPackage(p, className)
-			not result.isVoid
-		}
-	end
-	
-	
 	method doActionBody() : Void is do
-		var clazz : TypeDefinition init getSearchedClasses()
-		metamodel.focusOnTypeDefinition(clazz)
+		metamodel.focusOnTypeDefinition(~class)
 		done()
 	end
 	
 	
 	method canDo() : Boolean is do
-		result := not className.isVoid and not metamodel.isVoid
-		
-		if(result) then
-			result := not getSearchedClasses().isVoid
-		end
+		result := not ~class.isVoid and not metamodel.isVoid
 	end
 	
 	
