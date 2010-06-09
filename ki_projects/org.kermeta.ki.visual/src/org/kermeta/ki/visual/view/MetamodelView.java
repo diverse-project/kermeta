@@ -63,7 +63,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				final BoundedRangeModel model = vertSB.getModel();
 				final int value	= model.getValue();
 				final int cy 	= mm.scrollPane.getHeight()/2 + value;
-				int newValue 	= value+((int)centre.y)-cy;
+				int newValue 	= value+((int)(centre.y*mm.zoom))-cy;
 				
 				if(newValue>model.getMaximum())
 					newValue = model.getMaximum();
@@ -77,7 +77,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				final BoundedRangeModel model = horizSB.getModel();
 				final int value	= model.getValue();
 				final int cx 	= mm.scrollPane.getWidth()/2 + value;
-				int newValue 	= value+((int)centre.x)-cx;
+				int newValue 	= value+((int)(centre.x*mm.zoom))-cx;
 				
 				if(newValue>model.getMaximum())
 					newValue = model.getMaximum();

@@ -18,7 +18,6 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Instruments
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/ElementsDisplayer.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Searcher.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/SearcherActivator.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
@@ -82,8 +81,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute searcher : Searcher
 	
-//	attribute searcherActivator : SearcherActivator
-	
 	attribute zoomer : Zoomer
 	
 	attribute scroller : Scroller
@@ -123,7 +120,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		searcher		 := Searcher.new
-//		searcherActivator:= SearcherActivator.new
 		
 		eltDisplayer.initialise(actionRegistry)
 		hand.initialise(actionRegistry)
@@ -136,7 +132,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		pruner.initialise(actionRegistry)
 		undoManager.initialise(actionRegistry)
 		searcher.initialise(actionRegistry)
-//		searcherActivator.initialise(actionRegistry)
 		
 		pruner.metamodel := metamodel
 		pruner.initialiseLinks()
@@ -148,8 +143,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		searcher.initialiseWidgets(dispatcher)
 		searcher.initialiseLinks()
 		searcher.metamodel := metamodel
-//		searcherActivator.searcher := searcher
-//		searcherActivator.initialiseLinks()
 		
 		eltDisplayer.metamodel := metamodel
 		eltDisplayer.initialise(actionRegistry)
@@ -185,7 +178,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager.initialiseLinks()
 		undoManager.setActivated(true)
 		searcher.setActivated(true)
-//		searcherActivator.setActivated(true)
 		
 		pruner.addEventable(metamodel)
 		flattener.addEventable(metamodel)
@@ -197,8 +189,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser.addEventable(toolbar)
 		zoomer.addEventable(metamodel)
 		scroller.addEventable(metamodel)
-//		searcherActivator.addEventable(metamodel)
-//		searcherActivator.addEventable(toolbar)
 		searcher.addEventable(toolbar)
 		
 		//TOREMOVE
