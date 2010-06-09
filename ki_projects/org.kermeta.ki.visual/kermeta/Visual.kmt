@@ -98,6 +98,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
 		loadMetamodel("/examples/Ecore.km")
+//		loadMetamodel("/examples/framework.km")
 //		loadMetamodel("/examples/UML.km")
 
 		self.dispatcher   := dispatcher
@@ -191,7 +192,9 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager.addEventable(toolbar)
 		customiser.addEventable(toolbar)
 		zoomer.addEventable(metamodel)
+		zoomer.addEventable(toolbar)
 		scroller.addEventable(metamodel)
+		scroller.addEventable(toolbar)
 		searcher.addEventable(toolbar)
 		
 		//TOREMOVE

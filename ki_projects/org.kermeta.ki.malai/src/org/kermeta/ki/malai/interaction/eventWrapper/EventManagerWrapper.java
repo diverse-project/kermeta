@@ -237,8 +237,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			if(e.getSource() instanceof JComponent)
 				((JComponent)e.getSource()).grabFocus();
 			
-			System.out.println(">>>>" + e);
-			
 			events.add(new EventWrapper(EventWrapper.MOUSE_PRESSED, e));
 		}
 		synchronized(dispatcher) {
