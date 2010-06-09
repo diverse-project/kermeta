@@ -67,7 +67,7 @@ trait ObjectAspect extends EObject  with Contracted {
             }
         }
     }
-      def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition], diagnostic : kermeta.exceptions.ConstraintsDiagnostic) = {
+    def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition], diagnostic : kermeta.exceptions.ConstraintsDiagnostic) = {
         if (diagnostic == null)
           constraintDiagnostic = new Throwable with ConstraintsDiagnostic;
         if(inv !=  null ){
