@@ -67,14 +67,36 @@ trait ObjectAspect extends EObject  with Contracted {
             }
         }
     }
+      def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition], diagnostic : kermeta.exceptions.ConstraintsDiagnostic) = {
+        if (diagnostic == null)
+          constraintDiagnostic = new Throwable with ConstraintsDiagnostic;
+        if(inv !=  null ){
+            for(cond <- inv){
+                if(!cond._2()){
+                    var constraintException = kermeta.exceptions.RichFactory.createConstraintViolatedInvException
+                     constraintException.message = "Contraint Invariant Exception "+cond._1
+                   constraintDiagnostic.add(constraintException)
+                }
+            }
+        }
+    }
+
+
     /* Default Method Overloaded in by each class definition */
     def checkInvariants() = {
         val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap[String,Condition]()
         checkParamInvariants(invariants)
     }
-    def checkAllInvariants() = { /*TODO*/ println("todo checkAllInvariant") }
+    def checkAllInvariants() = { /*TODO*/ //println("todo checkAllInvariant") }
+
+       checkInvariants()
+
+    }
+    var constraintDiagnostic : kermeta.exceptions.ConstraintsDiagnostic = _
+
     def getViolatedConstraints() : kermeta.exceptions.ConstraintsDiagnostic={
-    /*TODO*/ println("todo getViolatedConstraints"); return new Throwable with ConstraintsDiagnostic;}
+    /*TODO*/ println("todo getViolatedConstraints "+ constraintDiagnostic); return constraintDiagnostic;
+  }
 	
 	
 }
