@@ -408,7 +408,7 @@ public class CompiledLaunchShortcut implements ILaunchShortcut {
 									+ "\n"
 									+ "#specified output project output, default is temporary file\n"
 									+ "output.target.folder = "
-									+ p.getLocation().toOSString() + File.separator + "ScalaOutput"
+									+ (p.getLocation().toOSString() + File.separator + "ScalaOutput").replace("\\", "\\\\")
 									+ "\n"
 									+ "\n"
 									+ "#workspace loader mapping\n"
