@@ -44,11 +44,29 @@ object POMGeneratorHelper {
         project.setPackaging("bundle");
         project.setName("Kermeta Compiled output")
 
+        project.getProperties().put("project.build.sourceEncoding", "UTF-8")
+        project.getProperties().put("project.reporting.outputEncoding", "UTF-8")
+        project.getProperties().put("scala.version", "2.8.0.RC1")
+
+
 
         /* INIT Project Repository */
-        var triskellNexusRepo = new Repository
-        triskellNexusRepo.setId("triskellPublic")
-        triskellNexusRepo.setUrl("http://tipimouss.irisa.fr:8081/nexus/content/groups/public")
+        var triskellInternal = new Repository
+        triskellInternal.setId("triskellInternal")
+        triskellInternal.setUrl("http://tipimouss.irisa.fr/maven2/")
+
+        var triskellInternalSnapshot = new Repository
+        triskellInternalSnapshot.setId("triskellInternalSnapshot")
+        triskellInternalSnapshot.setUrl("http://tipimouss.irisa.fr/maven2-snapshots/")
+
+        var triskellPublic = new Repository
+        triskellPublic.setId("triskellPublic")
+        triskellPublic.setUrl("http://www.kermeta.org/maven2/")
+
+        var triskellPublicSnapshot = new Repository
+        triskellPublicSnapshot.setId("triskellPublicSnapshot")
+        triskellPublicSnapshot.setUrl("http://www.kermeta.org/maven2-snapshots/")
+
         var scalaRepo = new Repository()
         scalaRepo.setId("Scala-tools Maven2 Repository")
         scalaRepo.setUrl("http://scala-tools.org/repo-releases")
@@ -60,7 +78,10 @@ object POMGeneratorHelper {
         //project.getModel().getPluginRepositories().add(scalaPluginRepo)
 
         project.getModel.setPluginRepositories(project.getModel().getPluginRepositories()++List(scalaPluginRepo))
-        project.getModel.setRepositories(project.getModel.getRepositories++List(triskellNexusRepo))
+        project.getModel.setRepositories(project.getModel.getRepositories++List(triskellInternal))
+        project.getModel.setRepositories(project.getModel.getRepositories++List(triskellInternalSnapshot))
+        project.getModel.setRepositories(project.getModel.getRepositories++List(triskellPublic))
+        project.getModel.setRepositories(project.getModel.getRepositories++List(triskellPublicSnapshot))
         project.getModel.setRepositories(project.getModel.getRepositories++List(scalaRepo))
 
         /* INIT PROJECT BUILD */
@@ -80,6 +101,7 @@ object POMGeneratorHelper {
         var pluginScala = new Plugin();
         pluginScala.setGroupId("org.scala-tools");
         pluginScala.setArtifactId("maven-scala-plugin");
+        pluginScala.setVersion("2.12");
         var pluginScalaExecution = new PluginExecution();
         // pluginScalaExecution.setPhase("process-resources");
         //pluginScalaExecution.addGoal("add-source");

@@ -53,8 +53,10 @@ object Main extends LogAspect {
       GlobalConfiguration.load(resource)
 
     }
+//    additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/hrc.jar")
+    //home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/fr.irisa.triskell.fuml_1.0.0.jar")
 
-    additionalClassPath = List("/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/libNative/native.jar") ++ additionalClassPath
+    //additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/fr.irisa.triskell.fuml_1.0.0.jar") ++ additionalClassPath
 
     /*       additionalClassPath = List("/home/barais/workspaces/kermetaRuntimeTest/AntWorld/libNative/native.jar"
      ,
@@ -106,6 +108,7 @@ object Main extends LogAspect {
 	   
     var compilo = new Compiler
 
+ //   inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
 
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
@@ -113,8 +116,8 @@ object Main extends LogAspect {
 //
 //
 
-    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/dev/kermeta/HelloWorld.km"
-
+  //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/dev/kermeta/HelloWorld.km"
+ // inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/FUMLStarter.km"
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
