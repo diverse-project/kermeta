@@ -47,7 +47,7 @@ class Zoom inherits Action
 			extern org::kermeta::ki::malai::ZoomUtils.zoomOut(zoomable, getZoomIncrement()*incr.toReal*-1.toReal)
 		end
 		
-		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)
 		done()
 
 		previousIncrement := increment
@@ -73,8 +73,3 @@ class Zoom inherits Action
 		result := "0.25".toReal
 	end
 }
-
-
-
-
-

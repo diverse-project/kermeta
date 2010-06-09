@@ -22,7 +22,7 @@ using kermeta::ki::malai::dispatcher
 
 aspect class Object {
 	operation isVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::ComponentView.isVisible(self)
+		result ?= extern org::kermeta::ki::visual::view::ComponentViewExtern.isVisible(self)
 	end
 	
 	
@@ -43,27 +43,27 @@ aspect class ClassDefinition inherits Pickable {
 
 
 	operation entity2ViewMapping() : Void is do
-		extern org::kermeta::ki::visual::view::EntityView.update(self, self.name, self.isAbstract)
+		extern org::kermeta::ki::visual::view::EntityViewExtern.update(self, self.name, self.isAbstract)
 	end
 	
 	
 	method contains(px : Real, py : Real) : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::EntityView.contains(self, px, py)
+		result ?= extern org::kermeta::ki::visual::view::EntityViewExtern.contains(self, px, py)
 	end
 	
 	
 	operation unprune() : Void is do
-		extern org::kermeta::ki::visual::view::EntityView.unprune(self)
+		extern org::kermeta::ki::visual::view::EntityViewExtern.unprune(self)
 	end
 	
 	
 	operation prune(viewPolicy : PrunerViewPolicy) : Void is do
-		extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, self)
+		extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, self)
 	end
 	
 	
 	operation isPruned() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::ComponentView.isPruned(self)
+		result ?= extern org::kermeta::ki::visual::view::ComponentViewExtern.isPruned(self)
 	end
 	
 	
@@ -74,23 +74,23 @@ aspect class ClassDefinition inherits Pickable {
 		srcClass.ownedAttribute.add(p)
 		
 		if(p.type.isInstanceOf(PrimitiveType)) then
-			extern org::kermeta::ki::visual::view::EntityView.onAttributeRemoved(self, p)
-			extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, p, p.name, p.type.asType(PrimitiveType).name)
+			extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeRemoved(self, p)
+			extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(srcClass, p, p.name, p.type.asType(PrimitiveType).name)
 		else 
 			if(p.type.isInstanceOf(Class)) then
 				var cd : ClassDefinition init p.type.asType(Class).classDefinition
 				
 				if(cd.isKermetaPrimitiveType) then
-					extern org::kermeta::ki::visual::view::EntityView.onAttributeRemoved(self, p)
-					extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, p, p.name, cd.name)
+					extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeRemoved(self, p)
+					extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(srcClass, p, p.name, cd.name)
 				else
 					if(cd==self) then
 						cd := srcClass
 					end
 					
-					extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
+					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, p)
 					if(not p.opposite.isVoid) then
-						extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p.opposite)
+						extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, p.opposite)
 					end
 					
 					var oppositeName : String init ""
@@ -103,7 +103,7 @@ aspect class ClassDefinition inherits Pickable {
 						oppositeCardString := p.opposite.getCardinalityString
 					end
 			
-					extern org::kermeta::ki::visual::view::MetamodelView.onRelationAdded(metamodel, p, p.isComposite, srcClass, cd, 
+					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(metamodel, p, p.isComposite, srcClass, cd, 
 											p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
 			end
@@ -118,8 +118,8 @@ aspect class ClassDefinition inherits Pickable {
 		srcClass.ownedOperation.add(op)
 		self.ownedOperation.remove(op)
 
-		extern org::kermeta::ki::visual::view::EntityView.onOperationRemoved(self, op)
-		extern org::kermeta::ki::visual::view::EntityView.onOperationAdded(srcClass, op, op.name, typeName, op.isAbstract)
+		extern org::kermeta::ki::visual::view::EntityViewExtern.onOperationRemoved(self, op)
+		extern org::kermeta::ki::visual::view::EntityViewExtern.onOperationAdded(srcClass, op, op.name, typeName, op.isAbstract)
 	end
 	
 	
@@ -151,7 +151,7 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	
 	
 	operation focusOnTypeDefinition(typeDef : TypeDefinition) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelView.focusOnTypeDefinition(self, typeDef)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.focusOnTypeDefinition(self, typeDef)
 	end
 	
 	
@@ -171,7 +171,7 @@ aspect class ModelingUnit inherits Picker, Eventable {
 
 	operation reinitView() : Void is do//TODO see if ownedTypeDefinition works
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
-		extern org::kermeta::ki::visual::view::MetamodelView.update(self)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(self)
 	end
 
 
@@ -199,22 +199,22 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	
 	
 	operation isOperationsVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::MetamodelView.isOperationsVisible(self)
+		result ?= extern org::kermeta::ki::visual::view::MetamodelViewExtern.isOperationsVisible(self)
 	end
 	
 	
 	operation isPropertiesVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::MetamodelView.isPropertiesVisible(self)
+		result ?= extern org::kermeta::ki::visual::view::MetamodelViewExtern.isPropertiesVisible(self)
 	end
 	
 	
 	operation setOperationsVisible(visible : Boolean) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelView.setOperationsVisible(self, visible)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setOperationsVisible(self, visible)
 	end
 	
 	
 	operation setPropertiesVisible(visible : Boolean) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelView.setPropertiesVisible(self, visible)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setPropertiesVisible(self, visible)
 	end
 	
 	

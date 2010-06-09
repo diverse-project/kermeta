@@ -154,7 +154,7 @@ class ActionPrune inherits Action, Undoable {
 			pruningOp.transform
 		end
 		
-		extern org::kermeta::ki::visual::view::MetamodelView.updateArrows(metamodel)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.updateArrows(metamodel)
 		done()
 	end
 	
@@ -206,6 +206,6 @@ class ActionPrune inherits Action, Undoable {
 		}
 		
 		arePruned := arePruned2
-		extern org::kermeta::ki::visual::view::MetamodelView.updateArrows(metamodel)
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.updateArrows(metamodel)
 	end
 }

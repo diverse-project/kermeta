@@ -3,7 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Malai
 Bundle-SymbolicName: org.kermeta.ki.malai
 Bundle-Version: 1.0.0.qualifier
-Export-Package: org.kermeta.ki.malai.examples.canvas.concPres,
- org.kermeta.ki.malai.examples.canvas.ui
+Export-Package: org.kermeta.ki.malai,
+ org.kermeta.ki.malai.dispatcherWrapper,
+ org.kermeta.ki.malai.examples.canvas.concPres,
+ org.kermeta.ki.malai.examples.canvas.ui,
+ org.kermeta.ki.malai.interaction.eventWrapper,
+ org.kermeta.ki.malai.kermetaMap,
+ org.kermeta.ki.malai.picking,
+ org.kermeta.ki.malai.widget
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter;bundle-version="1.3.2"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
