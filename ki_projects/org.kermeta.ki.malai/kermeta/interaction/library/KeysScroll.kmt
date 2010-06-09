@@ -25,6 +25,9 @@ class KeysScroll inherits Interaction
 	
 	attribute numberUp : Integer
 	
+	/** Defines if the interaction must search the object at the position of a scroll. */
+	attribute searchPickable : Boolean
+	
 	
 	method reinit() : Void is do
 		super
@@ -34,6 +37,7 @@ class KeysScroll inherits Interaction
 		px		:= void
 		py		:= void
 		numberUp:= 0
+		searchPickable := false
 	end
 	
 	
@@ -156,7 +160,11 @@ class KSWheelTransition inherits WheelTransition
 	method action() : Void is do
 		keysScroll.px 		:= Real.clone(px)
 		keysScroll.py 		:= Real.clone(py)
-		keysScroll.object 	:= keysScroll.getPickableAt(px, py, source)
+
+		if(keysScroll.searchPickable) then
+			keysScroll.object 	:= keysScroll.getPickableAt(px, py, source)
+		end
+
 		keysScroll.numberUp	:= keysScroll.numberUp + if(isUp) then 1 else -1 end
 	end
 	
