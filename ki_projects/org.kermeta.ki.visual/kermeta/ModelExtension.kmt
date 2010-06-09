@@ -36,6 +36,22 @@ aspect class Object {
 }
 
 
+aspect class NamedElement {
+	operation getPackageName() : String is do
+		var pkg : Package
+		result := ""
+		
+		from var obj : Object init container()
+		until not obj.isInstanceOf(Package)
+		loop
+			pkg := obj.asType(Package)
+			result := result + if(result.size>0) then ":" else "" end +  pkg.name
+			obj := pkg.container
+		end
+	end
+}
+
+
 aspect class ClassDefinition inherits Pickable {
 	operation isKermetaPrimitiveType() : Boolean is do
 		result := name=="String" or name=="Boolean" or name=="Real" or name=="Integer"

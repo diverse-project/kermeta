@@ -10,6 +10,7 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/action/SearchClasses.k
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/SelectMenuItem.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ReinitSearchField.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/CentreOnClass.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActivateDesactivateInstruments.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/KeyPress.kmt"
@@ -75,6 +76,10 @@ class Searcher inherits Instrument {
 	method onActionDone(link : Link, action : Action) : Void is do
 		if(link.isInstanceOf(TextChanged2SearchClasses)) then
 			if(searchedClasses.size>0) then
+				var nameStart : String init "<html>"
+				var nameEnd   : String init ")</font></html>"
+				var color     : String init "<font color=\"gray\">"
+				
 				var menuItem : MenuItem
 				popupMenu.setVisible(false)
 				popupMenu.removeAllMenuItems()
@@ -82,7 +87,7 @@ class Searcher inherits Instrument {
 				searchedClasses.each{td |
 					menuItem := MenuItem.new
 					menuItem.initialise()
-					menuItem.setText(td.name)
+					menuItem.setText(nameStart + td.name + color + " (" + td.getPackageName() + nameEnd)
 					popupMenu.addMenuItem(menuItem)
 				}
 				
@@ -128,6 +133,7 @@ class Enter2CentreOnClass inherits Link {
 		var searcher 		: Searcher init instrument.asType(Searcher)
 		
 		centreOnClass.className := searcher.popupMenu.menuItems.at(searcher.popupMenu.getSelectedIndex()).getText()
+		centreOnClass.className := centreOnClass.className.split("<").at(1).split(">").at(1)
 		centreOnClass.metamodel := searcher.metamodel
 		
 		action := centreOnClass
