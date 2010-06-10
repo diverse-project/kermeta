@@ -3,12 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.kermeta.compilerv2; singleton:=true
 Bundle-Vendor: %providerName
-Bundle-Version: 1.4.0
+Bundle-Version: 1.4.1
 Bundle-Activator: org.kermeta.compiler.Activator
 Import-Package: org.eclipse.core.runtime,
  org.osgi.framework,
  org.eclipse.ui,
  fr.irisa.triskell.eclipse.console
 Bundle-ClassPath: .,
- lib/kermeta.compilo.scala-0.0.2-SNAPSHOT.jar
+ lib/kermeta.compilo.scala-0.0.2-BETA1.jar
 Export-Package: org.kermeta.compiler.service
