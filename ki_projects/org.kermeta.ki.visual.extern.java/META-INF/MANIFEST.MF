@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ki Visual Extern Java
+Bundle-SymbolicName: org.kermeta.ki.visual.extern.java
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.kermeta.ki.visual.concretePres,
+ org.kermeta.ki.malai.javaBinding
