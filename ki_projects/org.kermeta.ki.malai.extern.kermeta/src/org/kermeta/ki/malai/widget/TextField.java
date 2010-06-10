@@ -33,6 +33,6 @@ public abstract class TextField {
 		
 		textField.setText(String.getValue(textRO));
 		
-		return String.create(textField.getText(), textFieldRO.getFactory());
+		return textFieldRO.getFactory().getMemory().voidINSTANCE; 
 	}
 }

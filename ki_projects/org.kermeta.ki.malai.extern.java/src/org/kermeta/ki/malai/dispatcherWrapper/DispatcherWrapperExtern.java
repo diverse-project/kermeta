@@ -2,8 +2,6 @@ package org.kermeta.ki.malai.dispatcherWrapper;
 
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-
 /**
  * A DispatcherWrapper corresponds to a Kermeta Dispatcher.
  * The only use of this class is to be able to put in wait
@@ -20,9 +18,8 @@ public abstract class DispatcherWrapperExtern {
 	 * @param self The Kermeta Dispatcher.
 	 * @return The Kermeta Dispatcher.
 	 */
-	public static RuntimeObject initialise(final RuntimeObject self) {
+	public static void initialise(final Object self) {
 		Source2TargetMap.MAP.add(self, new DispatcherWrapper());
-		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
 	
@@ -32,13 +29,11 @@ public abstract class DispatcherWrapperExtern {
 	 * @param self The Kermeta Dispatcher.
 	 * @return The Kermeta Dispatcher.
 	 */
-	public static RuntimeObject waitForEvent(final RuntimeObject self) {
-		final Object obj = Source2TargetMap.MAP.getTargetObject(self);
-		
-		try {
-			synchronized(obj) { obj.wait(); }
-		}catch(InterruptedException e) { e.printStackTrace(); }
-		
-		return self.getFactory().getMemory().voidINSTANCE;
+	public static void waitForEvent(final Object self) {
+//		final Object obj = Source2TargetMap.MAP.getTargetObject(self);
+//		
+//		try {
+//			synchronized(obj) { obj.wait(); }
+//		}catch(InterruptedException e) { e.printStackTrace(); }
 	}
 }
