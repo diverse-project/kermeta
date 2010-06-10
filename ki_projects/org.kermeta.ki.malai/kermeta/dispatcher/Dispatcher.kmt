@@ -84,7 +84,6 @@ class SingleDispatcher inherits AbstractDispatcher
 		end
 
 		extern org::kermeta::ki::malai::kermetaMap::Source2TargetMapExtern.cleanMap(self)
-		extern org::kermeta::ki::malai::kermetaMap::RuntimeObject2JavaMap.cleanMap(self)//TODO hashmap to remove
 	end
 }
 
@@ -121,6 +120,5 @@ class ListDispatcher inherits AbstractDispatcher
 		end
 		
 		extern org::kermeta::ki::malai::kermetaMap::Source2TargetMapExtern.cleanMap(self)
-		extern org::kermeta::ki::malai::kermetaMap::RuntimeObject2JavaMap.cleanMap(self)//TODO hashmap to remove
 	end
 }
