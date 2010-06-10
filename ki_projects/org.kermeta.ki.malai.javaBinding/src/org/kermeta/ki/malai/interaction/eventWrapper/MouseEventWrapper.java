@@ -1,6 +1,9 @@
 package org.kermeta.ki.malai.interaction.eventWrapper;
 
 import java.awt.event.MouseEvent;
+
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -16,7 +19,7 @@ public abstract class MouseEventWrapper extends InputEventWrapper {
 	 * in the Kermeta MouseEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getButton(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseEvent)
 			return Integer.create(((MouseEvent)obj).getButton(), self.getFactory());
@@ -32,7 +35,7 @@ public abstract class MouseEventWrapper extends InputEventWrapper {
 	 * in the Kermeta MouseEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getClickCount(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseEvent)
 			return Integer.create(((MouseEvent)obj).getClickCount(), self.getFactory());
@@ -48,7 +51,7 @@ public abstract class MouseEventWrapper extends InputEventWrapper {
 	 * in the Kermeta MouseEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getX(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseEvent)
 			return Integer.create(((MouseEvent)obj).getX(), self.getFactory());
@@ -65,7 +68,7 @@ public abstract class MouseEventWrapper extends InputEventWrapper {
 	 * in the Kermeta MouseEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getY(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseEvent)
 			return Integer.create(((MouseEvent)obj).getY(), self.getFactory());
@@ -81,7 +84,7 @@ public abstract class MouseEventWrapper extends InputEventWrapper {
 	 * in the Kermeta MouseEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject paramString(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseEvent)
 			return String.create(((MouseEvent)obj).paramString(), self.getFactory());

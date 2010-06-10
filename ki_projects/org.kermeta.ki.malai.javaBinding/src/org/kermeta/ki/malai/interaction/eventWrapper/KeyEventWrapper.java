@@ -2,6 +2,8 @@ package org.kermeta.ki.malai.interaction.eventWrapper;
 
 import java.awt.event.KeyEvent;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
@@ -17,7 +19,7 @@ public abstract class KeyEventWrapper extends InputEventWrapper {
 	 * in the Kermeta KeyEvent, or the kermeta void.
 	 */
 	public static RuntimeObject getKeyCode(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof KeyEvent)
 			return Integer.create(((KeyEvent)obj).getKeyCode(), self.getFactory());
@@ -33,7 +35,7 @@ public abstract class KeyEventWrapper extends InputEventWrapper {
 	 * in the Kermeta KeyEvent, or the kermeta void.
 	 */
 	public static RuntimeObject getKeyLocation(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof KeyEvent)
 			return Integer.create(((KeyEvent)obj).getKeyLocation(), self.getFactory());
@@ -49,7 +51,7 @@ public abstract class KeyEventWrapper extends InputEventWrapper {
 	 * in the Kermeta KeyEvent, or the kermeta void.
 	 */
 	public static RuntimeObject getKeyChar(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof KeyEvent)
 			return String.create(java.lang.String.valueOf(((KeyEvent)obj).getKeyChar()), self.getFactory());
@@ -65,7 +67,7 @@ public abstract class KeyEventWrapper extends InputEventWrapper {
 	 * in the Kermeta KeyEvent, or the kermeta void.
 	 */
 	public static RuntimeObject isActionKey(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof KeyEvent)
 			return ((KeyEvent)obj).isActionKey() ? self.getFactory().getMemory().trueINSTANCE : self.getFactory().getMemory().falseINSTANCE;

@@ -2,6 +2,8 @@ package org.kermeta.ki.malai.interaction.eventWrapper;
 
 import java.awt.event.MouseWheelEvent;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 
@@ -16,7 +18,7 @@ public abstract class MouseWheelEventWrapper extends MouseEventWrapper {
 	 * in the Kermeta MouseWheelEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getScrollAmount(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseWheelEvent)
 			return Integer.create(((MouseWheelEvent)obj).getScrollAmount(), self.getFactory());
@@ -31,7 +33,7 @@ public abstract class MouseWheelEventWrapper extends MouseEventWrapper {
 	 * in the Kermeta MouseWheelEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getScrollType(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseWheelEvent)
 			return Integer.create(((MouseWheelEvent)obj).getScrollType(), self.getFactory());
@@ -46,7 +48,7 @@ public abstract class MouseWheelEventWrapper extends MouseEventWrapper {
 	 * in the Kermeta MouseWheelEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getUnitsToScroll(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseWheelEvent)
 			return Integer.create(((MouseWheelEvent)obj).getUnitsToScroll(), self.getFactory());
@@ -62,7 +64,7 @@ public abstract class MouseWheelEventWrapper extends MouseEventWrapper {
 	 * in the Kermeta MouseWheelEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getWheelRotation(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof MouseWheelEvent)
 			return Integer.create(((MouseWheelEvent)obj).getWheelRotation(), self.getFactory());

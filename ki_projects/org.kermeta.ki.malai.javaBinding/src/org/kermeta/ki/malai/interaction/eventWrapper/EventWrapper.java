@@ -9,6 +9,8 @@ import java.util.EventObject;
 
 import javax.swing.event.ChangeEvent;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
@@ -80,7 +82,7 @@ public class EventWrapper {
 	 * @return The name of the EventWrapper (String).
 	 */
 	public static RuntimeObject getName(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof EventWrapper)
 			return String.create(((EventWrapper)obj).name, self.getFactory());
@@ -95,7 +97,7 @@ public class EventWrapper {
 	 * @return The java event object of the EventWrapper (an AWTEvent Kermeta instance).
 	 */
 	public static RuntimeObject getInfo(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof EventWrapper) {
 			EventWrapper ew  = (EventWrapper) obj;
@@ -104,7 +106,7 @@ public class EventWrapper {
 			// Kermeta class path to create an instance of this Kermeta class.
 			try {
 				RuntimeObject ro = self.getFactory().createObjectFromClassName(getEventClassPath(ew.info));
-				ro.setUserData(ew.info);
+				Source2TargetMap.MAP.add(ro, ew.info);
 				
 				return ro;
 			}catch(Exception ex) {ex.printStackTrace(); }

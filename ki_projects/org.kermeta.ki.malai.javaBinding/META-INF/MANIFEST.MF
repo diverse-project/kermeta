@@ -8,8 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter;bundle-version="1.3.2"
 Export-Package: org.kermeta.ki.malai,
  org.kermeta.ki.malai.dispatcherWrapper,
- org.kermeta.ki.malai.examples.canvas.concPres,
- org.kermeta.ki.malai.examples.canvas.ui,
  org.kermeta.ki.malai.examples.house.ui,
  org.kermeta.ki.malai.interaction.eventWrapper,
  org.kermeta.ki.malai.kermetaMap,

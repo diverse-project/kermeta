@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
-import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -33,16 +33,14 @@ public abstract class Button
 		final AbstractButton button = createButtonInstance(buttonRO);
 		
 		button.setText("button");
-		
-		buttonRO.setUserData(button);
-		RuntimeObject2JavaMap.MAP.put(button, buttonRO);
+		Source2TargetMap.MAP.add(buttonRO, button);
 		
 		return buttonRO.getFactory().getMemory().voidINSTANCE; 
 	}
 	
 	
 	public static RuntimeObject setSelected(RuntimeObject widgetRO, RuntimeObject selectedRO) {
-		final Object obj = widgetRO.getUserData();
+		final Object obj = Source2TargetMap.MAP.getTargetObject(widgetRO);
 		
 		if(obj==null || !(obj instanceof AbstractButton))
 			System.out.println("The graphical object is null or is not an AbstractButton: " + obj + " " + widgetRO);
@@ -61,8 +59,7 @@ public abstract class Button
 		if(imageIcon!=null)
 			button.setIcon(imageIcon);
 		
-		widgetRO.setUserData(button);
-		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
+		Source2TargetMap.MAP.add(widgetRO, button);
 		
 		return widgetRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -73,9 +70,7 @@ public abstract class Button
 		final AbstractButton button = createButtonInstance(widgetRO);
 		
 		button.setText(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(textRO));
-		
-		widgetRO.setUserData(button);
-		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
+		Source2TargetMap.MAP.add(widgetRO, button);
 		
 		return widgetRO.getFactory().getMemory().voidINSTANCE; 
 	}
@@ -83,7 +78,7 @@ public abstract class Button
 	
 	
 	public static RuntimeObject getActionCommand(RuntimeObject widgetRO) {
-		final Object obj = widgetRO.getUserData();
+		final Object obj = Source2TargetMap.MAP.getTargetObject(widgetRO);
 		String ac;
 		
 		if(obj==null || !(obj instanceof Component)) {

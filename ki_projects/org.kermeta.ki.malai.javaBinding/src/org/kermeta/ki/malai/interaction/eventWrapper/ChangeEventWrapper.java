@@ -3,6 +3,8 @@ package org.kermeta.ki.malai.interaction.eventWrapper;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
@@ -14,7 +16,7 @@ public class ChangeEventWrapper extends AWTEventWrapper {
 	 * into the given kermeta ActionEvent, or the kermeta void.
 	 */
 	public static RuntimeObject getValue(RuntimeObject self) {
-		Object obj = self.getUserData(); // We get the Java ChangeEvent.
+		Object obj = Source2TargetMap.MAP.getTargetObject(self); // We get the Java ChangeEvent.
 		
 		if(obj instanceof ChangeEvent) {
 			Object source = ((ChangeEvent)obj).getSource();

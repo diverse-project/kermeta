@@ -2,6 +2,8 @@ package org.kermeta.ki.malai.interaction.eventWrapper;
 
 import java.awt.event.InputEvent;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 
@@ -16,7 +18,7 @@ public abstract class InputEventWrapper extends AWTEventWrapper {
 	 * in the Kermeta InputEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getModifiers(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof InputEvent)
 			return Integer.create(((InputEvent)obj).getModifiers(), self.getFactory());
@@ -31,7 +33,7 @@ public abstract class InputEventWrapper extends AWTEventWrapper {
 	 * in the Kermeta InputEvent, or the Kermeta void.
 	 */
 	public static RuntimeObject getModifiersEx(RuntimeObject self) {
-		Object obj = self.getUserData();
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 		
 		if(obj instanceof InputEvent)
 			return Integer.create(((InputEvent)obj).getModifiersEx(), self.getFactory());

@@ -4,14 +4,14 @@ import java.awt.Component;
 
 import javax.swing.JWindow;
 
-import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 
 public abstract class Window {
 	public static RuntimeObject setAlwaysOnTop(final RuntimeObject windowRO, final RuntimeObject onTopRO) {
-		final JWindow window = (JWindow) windowRO.getUserData();
+		final JWindow window = (JWindow) Source2TargetMap.MAP.getTargetObject(windowRO);
 		final boolean onTop = Boolean.getValue(onTopRO);
 		
 		window.setAlwaysOnTop(onTop);
@@ -25,9 +25,7 @@ public abstract class Window {
 		final JWindow window = new JWindow();
 		
 		window.setLocation(200, 200);
-		
-		windowRO.setUserData(window);
-		RuntimeObject2JavaMap.MAP.put(window, windowRO);
+		Source2TargetMap.MAP.add(windowRO, window);
 		
 		return windowRO.getFactory().getMemory().voidINSTANCE; 
 	}
@@ -35,8 +33,8 @@ public abstract class Window {
 	
 	
 	public static RuntimeObject add(final RuntimeObject windowRO, final RuntimeObject componentRO) {
-		final Object window = windowRO.getUserData();
-		final Object comp   = componentRO.getUserData();
+		final Object window = Source2TargetMap.MAP.getTargetObject(windowRO);
+		final Object comp   = Source2TargetMap.MAP.getTargetObject(componentRO);
 		
 		if(window==null || !(window instanceof JWindow) || comp==null || !(comp instanceof Component))
 			System.out.println("The graphicals objects are null or are not valid: " + window + " " + comp);

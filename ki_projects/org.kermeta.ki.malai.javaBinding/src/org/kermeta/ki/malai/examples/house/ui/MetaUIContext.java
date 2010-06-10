@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -62,10 +63,10 @@ public class MetaUIContext extends JFrame {
 	
 	
 	public static RuntimeObject initialise(RuntimeObject self, RuntimeObject eventManager) {
-		EventManagerWrapper emw = (EventManagerWrapper) eventManager.getUserData();
+		EventManagerWrapper emw = (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(eventManager);
 		MetaUIContext meta = new MetaUIContext(emw);
 
-		self.setUserData(meta);
+		Source2TargetMap.MAP.add(self, meta);
 		meta.setVisible(true);
 		
 		return self.getFactory().getMemory().voidINSTANCE;

@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -15,16 +15,14 @@ public abstract class Spinner {
 		
 		spinner.setEditor(new JSpinner.NumberEditor(spinner, "0"));
 		spinner.setMaximumSize(new Dimension(50, 30));
-		
-		spinnerRO.setUserData(spinner);
-		RuntimeObject2JavaMap.MAP.put(spinner, spinnerRO);
+		Source2TargetMap.MAP.add(spinnerRO, spinner);
 		
 		return spinnerRO.getFactory().getMemory().voidINSTANCE; 
 	}
 	
 	
 	public static RuntimeObject getValue(RuntimeObject spinnerRO) {
-		JSpinner spinner = (JSpinner) spinnerRO.getUserData();
+		JSpinner spinner = (JSpinner) Source2TargetMap.MAP.getTargetObject(spinnerRO);
 		
 		if(spinner==null)
 			return spinnerRO.getFactory().getMemory().voidINSTANCE; 

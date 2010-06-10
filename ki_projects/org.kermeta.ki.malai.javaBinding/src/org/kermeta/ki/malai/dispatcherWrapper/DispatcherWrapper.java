@@ -1,5 +1,7 @@
 package org.kermeta.ki.malai.dispatcherWrapper;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -18,9 +20,8 @@ public class DispatcherWrapper {
 	 * @param self The Kermeta Dispatcher.
 	 * @return The Kermeta Dispatcher.
 	 */
-	public static RuntimeObject initialise(RuntimeObject self) {
-		self.setUserData(new DispatcherWrapper());
-		
+	public static RuntimeObject initialise(final RuntimeObject self) {
+		Source2TargetMap.MAP.add(self, new DispatcherWrapper());
 		return self;
 	}
 	
@@ -31,9 +32,9 @@ public class DispatcherWrapper {
 	 * @param self The Kermeta Dispatcher.
 	 * @return The Kermeta Dispatcher.
 	 */
-	public static RuntimeObject waitForEvent(RuntimeObject self) {
+	public static RuntimeObject waitForEvent(final RuntimeObject self) {
 		try {
-			Object obj = self.getUserData();
+			final Object obj = Source2TargetMap.MAP.getTargetObject(self);
 
 			synchronized(obj) { obj.wait(); }
 		}catch(InterruptedException e) { e.printStackTrace(); }

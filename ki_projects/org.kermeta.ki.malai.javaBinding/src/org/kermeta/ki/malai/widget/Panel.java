@@ -8,7 +8,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
-import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -19,11 +19,10 @@ public abstract class Panel
 	public static RuntimeObject initialise(RuntimeObject panelRO, RuntimeObject eventManagerRO) {
 		final JPanel panel = new JPanel();
 		
-		panelRO.setUserData(panel);
-		RuntimeObject2JavaMap.MAP.put(panel, panelRO);
+		Source2TargetMap.MAP.add(panelRO, panel);
 		
-		if(eventManagerRO!=null && eventManagerRO.getUserData()!=null)
-			((EventManagerWrapper) eventManagerRO.getUserData()).attachTo(panel);
+		if(eventManagerRO!=null && Source2TargetMap.MAP.getTargetObject(eventManagerRO)!=null)
+			((EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(eventManagerRO)).attachTo(panel);
 		
 		return panelRO.getFactory().getMemory().voidINSTANCE; 
 	}
@@ -31,8 +30,8 @@ public abstract class Panel
 	
 	
 	public static RuntimeObject add(RuntimeObject panelRO, RuntimeObject componentRO) {
-		Object panel = panelRO.getUserData();
-		Object comp  = componentRO.getUserData();
+		Object panel = Source2TargetMap.MAP.getTargetObject(panelRO);
+		Object comp  = Source2TargetMap.MAP.getTargetObject(componentRO);
 		
 		if(panel==null || !(panel instanceof JPanel) || comp==null || !(comp instanceof Component))
 			System.out.println("The graphicals objects are null or are not valid: " + panel + " " + comp);
@@ -46,7 +45,7 @@ public abstract class Panel
 	
 	
 	public static RuntimeObject hasScrollbars(RuntimeObject panelRO) {
-		boolean ok = hasScrollbars((JPanel) panelRO.getUserData());
+		boolean ok = hasScrollbars((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO));
 		
 		return ok ? panelRO.getFactory().getMemory().trueINSTANCE :  panelRO.getFactory().getMemory().falseINSTANCE;
 	}
@@ -56,7 +55,7 @@ public abstract class Panel
 	
 	
 	public static RuntimeObject isVerticalScrollbarVisible(RuntimeObject panelRO) {
-		JScrollBar sb = getScrollbar((JPanel) panelRO.getUserData(), true);
+		JScrollBar sb = getScrollbar((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO), true);
 		
 		return sb==null || ! sb.isVisible() ? panelRO.getFactory().getMemory().falseINSTANCE :  
 							panelRO.getFactory().getMemory().trueINSTANCE;
@@ -66,7 +65,7 @@ public abstract class Panel
 	
 	
 	public static RuntimeObject isHorizontalScrollbarVisible(RuntimeObject panelRO) {
-		JScrollBar sb = getScrollbar((JPanel) panelRO.getUserData(), false);
+		JScrollBar sb = getScrollbar((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO), false);
 		
 		return sb==null || ! sb.isVisible() ? panelRO.getFactory().getMemory().falseINSTANCE :  
 							panelRO.getFactory().getMemory().trueINSTANCE;
@@ -90,7 +89,7 @@ public abstract class Panel
 	
 	
 	public static void scroll(RuntimeObject panelRO, RuntimeObject incrementR0, boolean vertical) {
-		JScrollBar bar = getScrollbar((JPanel) panelRO.getUserData(), vertical);
+		JScrollBar bar = getScrollbar((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO), vertical);
 		int increment  = Integer.getValue(incrementR0);
 		
 		if(bar!=null && bar.isVisible())

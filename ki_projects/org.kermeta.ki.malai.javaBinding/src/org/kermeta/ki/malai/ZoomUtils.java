@@ -1,11 +1,13 @@
 package org.kermeta.ki.malai;
 
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Real;
 
 public abstract class ZoomUtils {
 	public static RuntimeObject zoomIn(RuntimeObject zoomableRO, RuntimeObject incrementRO) {
-		final Object zoomable = zoomableRO.getUserData();
+		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
 		
 		if(zoomable instanceof Zoomable)
 			((Zoomable)zoomable).zoomIn(Real.getValue(incrementRO));
@@ -16,7 +18,7 @@ public abstract class ZoomUtils {
 	
 	
 	public static RuntimeObject zoomOut(RuntimeObject zoomableRO, RuntimeObject decrementRO) {
-		final Object zoomable = zoomableRO.getUserData();
+		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
 		
 		if(zoomable instanceof Zoomable)
 			((Zoomable)zoomable).zoomOut(Real.getValue(decrementRO));
@@ -27,7 +29,7 @@ public abstract class ZoomUtils {
 	
 	
 	public static RuntimeObject zoomDefault(RuntimeObject zoomableRO) {
-		final Object zoomable = zoomableRO.getUserData();
+		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
 		
 		if(zoomable instanceof Zoomable)
 			((Zoomable)zoomable).zoomDefault();
