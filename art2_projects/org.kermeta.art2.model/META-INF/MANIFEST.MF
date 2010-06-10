@@ -16,3 +16,4 @@ Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.impl,
  org.eclipse.emf.ecore.util
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0"
