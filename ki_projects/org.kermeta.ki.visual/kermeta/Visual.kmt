@@ -152,11 +152,12 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 		var eventManager : EventManager init EventManager.new
 		eventManager.initialise(dispatcher)
+		dispatcher.processes.add(eventManager)
 		
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
-		metamodel.setEventManager(self.dispatcher)
+		metamodel.setEventManager(eventManager)
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
 		model2view.modelingUnit := metamodel
 		metamodel.accept(model2view)

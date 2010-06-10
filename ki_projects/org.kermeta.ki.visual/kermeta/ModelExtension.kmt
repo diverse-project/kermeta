@@ -172,11 +172,9 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	
 	
 	
-	operation setEventManager(dispatcher : ListDispatcher) : Void is do
-		eventManager := EventManager.new
-		eventManager.initialise(dispatcher)
+	operation setEventManager(eventManager : EventManager) : Void is do
+		self.eventManager := eventManager
 		extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(self, eventManager)
-		dispatcher.processes.add(eventManager)
 	end
 	
 	

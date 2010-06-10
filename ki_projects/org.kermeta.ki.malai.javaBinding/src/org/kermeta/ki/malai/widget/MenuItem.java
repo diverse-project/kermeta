@@ -10,7 +10,6 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 public abstract class MenuItem {
 	public static RuntimeObject initialise(final RuntimeObject menuItemRO) {
 		final JMenuItem menuItem = new JMenuItem();
-		
 		menuItemRO.setUserData(menuItem);
 		RuntimeObject2JavaMap.MAP.put(menuItem, menuItemRO);
 		

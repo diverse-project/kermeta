@@ -1,0 +1,22 @@
+/*
+ * Creation : June 7, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::action;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+
+
+
+
+/*
+class ActivateDesactivatePresentations inherits Action {
+	reference presentationsActivate : AbstractPresentation[0..*]
+	
+	reference presentationsDesactivate : AbstractPresentation[0..*]
+}
+*/

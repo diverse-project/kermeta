@@ -6,5 +6,5 @@ Bundle-Version: 1
 Bundle-Vendor: INRIA Rennes, Triskell
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
- org.kermeta.ki.visual.concretePres;bundle-version="1.0.0",
- org.kermeta.ki.malai;bundle-version="1.0.0"
+ org.kermeta.ki.visual.concretePres,
+ org.kermeta.ki.malai.javaBinding

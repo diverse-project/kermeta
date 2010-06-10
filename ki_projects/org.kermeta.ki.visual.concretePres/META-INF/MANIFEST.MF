@@ -5,6 +5,6 @@ Bundle-SymbolicName: org.kermeta.ki.visual.concretePres
 Bundle-Version: 1.0.0
 Bundle-Vendor: INRIA Rennes, Triskell
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.kermeta.ki.malai
+Require-Bundle: org.kermeta.ki.malai.javaBinding
 Export-Package: org.kermeta.ki.visual,
  org.kermeta.ki.visual.view

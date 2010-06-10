@@ -11,8 +11,8 @@ public class RuntimeObject2JavaMap extends IdentityHashMap<Object, RuntimeObject
 	
 	public static final RuntimeObject2JavaMap MAP = new RuntimeObject2JavaMap();
 	
-	/** The hashmap that contains for each Java Object the corresponding Kermeta RuntimeObject. */
-	protected IdentityHashMap<Object, RuntimeObject> map;
+//	/** The hashmap that contains for each Java Object the corresponding Kermeta RuntimeObject. */
+//	protected IdentityHashMap<Object, RuntimeObject> map;
 	
 	
 	

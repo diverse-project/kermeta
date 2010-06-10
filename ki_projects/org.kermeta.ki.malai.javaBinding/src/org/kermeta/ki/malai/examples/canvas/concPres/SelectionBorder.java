@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class SelectionBorder extends Rectangle2D.Double {
+	private static final long serialVersionUID = 1L;
+
 	public static final BasicStroke STROKE = new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.f, new float[] { 2f, 1f }, 0);
 
 	protected boolean visible;
