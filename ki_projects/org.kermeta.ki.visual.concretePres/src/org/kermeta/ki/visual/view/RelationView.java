@@ -1,5 +1,6 @@
 package org.kermeta.ki.visual.view;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
@@ -86,6 +87,12 @@ public class RelationView extends LinkView {
 		}
 		else {
 		}
+	}
+	
+	
+	
+	public Font getFont() {
+		return new Font(entitySrc.font.getFontName(), Font.PLAIN, (int)Math.min(entitySrc.fontSize, entityTar.fontSize));
 	}
 	
 	

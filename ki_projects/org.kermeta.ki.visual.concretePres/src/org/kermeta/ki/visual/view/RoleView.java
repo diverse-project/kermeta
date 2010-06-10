@@ -121,6 +121,7 @@ public class RoleView {
 	
 	public void paint(Graphics2D g) {
 		if(view.isVisible() && name!=null && card!=null && (name.text.length()>0 || card.text.length()>0)) {
+			g.setFont(view.getFont());
 			name.paint(g);
 			card.paint(g);
 		}
