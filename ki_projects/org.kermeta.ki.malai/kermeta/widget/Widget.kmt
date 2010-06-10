@@ -296,7 +296,7 @@ class Panel inherits GraphicalComponent, Picker, Eventable
 		extern org::kermeta::ki::malai::widget::Panel.initialise(self, eventManager)
 		
 		if(withEventManager) then
-			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(self, eventManager)
+			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.attachTo(self, eventManager)
 		end
 	end
 	
@@ -346,7 +346,7 @@ class Panel inherits GraphicalComponent, Picker, Eventable
 		component.componentContainer := self
 
 		if(not eventManager.isVoid) then
-			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.attachTo(component, eventManager)
+			extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.attachTo(component, eventManager)
 		end
 		
 		if(addToUIPanel) then

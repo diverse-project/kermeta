@@ -1,5 +1,6 @@
 package org.kermeta.ki.malai;
 
+import org.kermeta.ki.malai.Zoomable;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;

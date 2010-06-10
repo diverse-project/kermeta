@@ -22,12 +22,12 @@ class Event
 {
 	/** Returns the name of the event, e.g. MOUSE_PRESSED, KEY_RELEASED, etc. */
 	operation getName() : String is do
-		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapper.getName(self)
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapperExtern.getName(self)
 	end
 	
 	
 	/** Returns the event corresponding to the produced Java event. */
 	operation getInfo() : AWTEvent is do
-		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapper.getInfo(self)
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapperExtern.getInfo(self)
 	end
 }

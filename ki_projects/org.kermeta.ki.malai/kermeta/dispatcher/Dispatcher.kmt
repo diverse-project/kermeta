@@ -25,14 +25,14 @@ abstract class AbstractDispatcher
 	/** Initialises the dispatcher. */
 	operation initialise() : Void is do
 		/* A Java DispatcherWrapper is associated, using setUserData, to the kermeta AbstractDispatcher. */
-		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.initialise(self)
+		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapperExtern.initialise(self)
 	end
 	
 
 	/** Waits for an event to said processes to run. */
 	operation waitForEvent() : Void is do
 		/* The associated Java DispatcherWrapper is put in wait until a process launch a notify on the DispatcherWrapper. */
-		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.waitForEvent(self)
+		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapperExtern.waitForEvent(self)
 	end
 	
 	
