@@ -9,19 +9,20 @@
             nameFilter="*.art"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               id="art.resource.art.popups.menu1"
                label="ART"
-               path="additions"
-               id="art.resource.art.popups.menu1">
+               path="additions">
             <separator
                   name="group1">
             </separator>
          </menu>
          <action
-               label="art 2 artext"
                class="art.resource.art.popups.popup.actions.XMI2ART"
-               menubarPath="art.resource.art.popups.menu1/group1"
                enablesFor="1"
-               id="art.resource.art.popups.popup.actions.XMI2ART">
+               icon="icons/DivaModelFile.gif"
+               id="art.resource.art.popups.popup.actions.XMI2ART"
+               label="art 2 artext"
+               menubarPath="art.resource.art.popups.menu1/group1">
          </action>
       </objectContribution>
       <objectContribution
@@ -39,6 +40,7 @@
          <action
                class="art.resource.art.popups.popup.actions.ART2XMI"
                enablesFor="1"
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.ART2XMI"
                label="artext 2 art"
                menubarPath="art.resource.art.popups.menu2/group2">
@@ -59,6 +61,7 @@
          <action
                class="art.resource.art.popups.popup.actions.PART2XMI"
                enablesFor="1"
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.PART2XMI"
                label="smARText 2 smART"
                menubarPath="art.resource.art.popups.menu2/group2">
@@ -79,6 +82,7 @@
          <action
                class="art.resource.art.popups.popup.actions.XMI2PART"
                enablesFor="1"
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.XMI2PART"
                label="smART 2 smARText"
                menubarPath="art.resource.art.popups.menu1/group1">
