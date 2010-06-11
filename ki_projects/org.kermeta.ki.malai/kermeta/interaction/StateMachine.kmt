@@ -44,7 +44,7 @@ abstract class StateMachine inherits EventHandler
 	
 	
 	
-	operation setActivated(activated : Boolean) : Void is do
+	operation setIsActivated(activated : Boolean) : Void is do
 		self.activated := activated
 	end
 	

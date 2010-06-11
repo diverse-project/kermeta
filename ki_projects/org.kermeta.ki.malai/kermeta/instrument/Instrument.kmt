@@ -90,10 +90,11 @@ abstract class Instrument {
 	/**
 	 * Activates or desactivates the instrument.
 	 */
-	operation setActivated(activated : Boolean) : Void is do
+	 //TODO rename as setActivated when the merger will no more sucks.
+	operation setIsActivated(activated : Boolean) : Void is do
 		self.activated := activated
 		
-		links.each{link | link.setActivated(activated) }
+		links.each{link | link.setIsActivated(activated) }
 		interimFeedback()
 	end
 	

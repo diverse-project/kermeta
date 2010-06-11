@@ -51,10 +51,10 @@ class InstrumentsSelector inherits Instrument
 		self.hierarcher := hierarcher
 		self.hand 		:= hand
 		
-		pruner.setActivated(false)
-		flattener.setActivated(false)
-		hierarcher.setActivated(false)
-		hand.setActivated(true)
+		pruner.setIsActivated(false)
+		flattener.setIsActivated(false)
+		hierarcher.setIsActivated(false)
+		hand.setIsActivated(true)
 		
 		prunerButton     := ToggleButton.new
 		flattenerButton  := ToggleButton.new

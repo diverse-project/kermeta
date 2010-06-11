@@ -40,6 +40,6 @@ class ActivateInstrument inherits Action
 
 
 	method doActionBody() : Void is do
-		instrument.setActivated(true)
+		instrument.setIsActivated(true)
 	end
 }

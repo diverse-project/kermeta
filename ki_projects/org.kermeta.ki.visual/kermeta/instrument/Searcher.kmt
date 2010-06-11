@@ -47,7 +47,7 @@ class Searcher inherits Instrument {
 	
 	
 	
-	method setActivated(activated : Boolean) : Void is do
+	method setIsActivated(activated : Boolean) : Void is do
 		super(activated)
 		textField.setVisible(activated)
 		

@@ -45,7 +45,7 @@ class ActivateDesactivateInstruments inherits Action
 
 
 	method doActionBody() : Void is do
-		instrumentsActivate.each{ins | ins.setActivated(true)}
-		instrumentsDesactivate.each{ins | ins.setActivated(false)}
+		instrumentsActivate.each{ins | ins.setIsActivated(true)}
+		instrumentsDesactivate.each{ins | ins.setIsActivated(false)}
 	end
 }

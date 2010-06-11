@@ -54,7 +54,7 @@ class UndoRedoManager inherits Instrument, UndoHandler
 	
 	
 	
-	method setActivated(activated : Boolean) : Void is do
+	method setIsActivated(activated : Boolean) : Void is do
 		super(activated)
 		
 		if(activated) then

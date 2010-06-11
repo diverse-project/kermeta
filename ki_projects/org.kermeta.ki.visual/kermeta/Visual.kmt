@@ -164,25 +164,25 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		
 		eltDisplayer.initialiseLinks()
 		eltDisplayer.interimFeedback
-		eltDisplayer.setActivated(true)
+		eltDisplayer.setIsActivated(true)
 		zoomer.zoomable  := metamodel
 		zoomer.metamodel := metamodel
 		zoomer.initialiseLinks()
-		zoomer.setActivated(true)
+		zoomer.setIsActivated(true)
 		scroller.panel  := viewPanel
 		scroller.initialiseLinks()
-		scroller.setActivated(true)
+		scroller.setIsActivated(true)
 		customiser.picker := toolbar
 		customiser.initialiseLinks()
-		customiser.setActivated(true)	
+		customiser.setIsActivated(true)	
 		selector.initialiseLinks()
-		selector.setActivated(true)
+		selector.setIsActivated(true)
 		pruner.metamodel := metamodel
 		undoManager.undoCollector := undoCollector		
 		undoCollector.handlers.add(undoManager)
 		undoManager.initialiseLinks()
-		undoManager.setActivated(true)
-		searcher.setActivated(true)
+		undoManager.setIsActivated(true)
+		searcher.setIsActivated(true)
 		
 		pruner.addEventable(metamodel)
 		flattener.addEventable(metamodel)

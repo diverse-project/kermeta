@@ -66,7 +66,9 @@ class ActionRegistry {
 		until i>=actions.size or actions.isEmpty
 		loop
 			if(actions.at(i).cancelledBy(clazz)) then
-				notifyHandlersOnCancel(actions.removeAt(i))
+				var act : Action init actions.at(i)
+				actions.removeAt(i)
+				notifyHandlersOnCancel(act)
 			else
 				i := i+1
 			end

@@ -91,24 +91,40 @@ class UndoCollector
 	
 	/** The last undoable action name. */
 	operation getLastUndoMessage() : String is do
-		result := if not undoStack.isEmpty then undoStack.peek().getUndoName() end
+		if not undoStack.isEmpty then 
+			result := undoStack.peek().getUndoName()
+		else 
+			result := "" 
+		end
 	end
 	
 	
 	/** The last redoable action name. */
 	operation getLastRedoMessage() : String is do
-		result := if not redoStack.isEmpty then redoStack.peek().getUndoName() end
+		if not redoStack.isEmpty then 
+			result := redoStack.peek().getUndoName() 
+		else 
+			result := "" 
+		end
 	end
 		
 
 	/** The last undoable action. */
 	operation getLastUndo() : Undoable is do
-		result := if not undoStack.isEmpty then undoStack.peek() end
+		if not undoStack.isEmpty then 
+			result := undoStack.peek() 
+		else 
+			result := void 
+		end
 	end
 	
 	
 	/** The last redoable action. */
 	operation getLastRedo() : Undoable is do
-		result := if not redoStack.isEmpty then redoStack.peek() end
+		if not redoStack.isEmpty then 
+			result := redoStack.peek() 
+		else 
+			result := void 
+		end
 	end
 }

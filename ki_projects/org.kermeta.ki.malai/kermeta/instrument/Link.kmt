@@ -130,8 +130,8 @@ abstract class Link inherits InteractionHandler
 	operation isConditionRespected() : Boolean is abstract
 	
 	
-	operation setActivated(activated : Boolean) : Void is do
-		interaction.setActivated(activated)
+	operation setIsActivated(activated : Boolean) : Void is do
+		interaction.setIsActivated(activated)
 	end
 	
 	
