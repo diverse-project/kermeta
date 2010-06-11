@@ -19,6 +19,9 @@ public class App {
 
         Art2EditorPanel artpanel = new Art2EditorPanel();
         //TODO REMOVE
+
+     //   Syste
+
         artpanel.load("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2.xmi");
 
         jframe.add(artpanel,BorderLayout.CENTER);

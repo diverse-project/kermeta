@@ -19,11 +19,12 @@ import javax.swing.JPanel;
  * @author ffouquet
  */
 public class TrashPanel extends JPanel {
-
+/*
     private BufferedImage image;
 
     public TrashPanel(){
         this.setOpaque(false);
+
         try {
             image = ImageIO.read(new File(this.getClass().getClassLoader().getResource("trashcan_empty.png").getFile()));
         } catch (IOException ex) {
@@ -36,5 +37,5 @@ public class TrashPanel extends JPanel {
       super.paintComponent(g);
       g.drawImage(image, 0, 0, this);
     }
-
+*/
 }

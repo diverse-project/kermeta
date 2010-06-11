@@ -18,6 +18,7 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceMotionListener;
 import javax.swing.SwingUtilities;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
+import org.kermeta.art2.ui.editor.command.CleanRequirePortBinding;
 import org.kermeta.art2.ui.editor.widget.FlightPortPanel;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
@@ -118,6 +119,11 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
      */
     @Override
     public void dragGestureRecognized(DragGestureEvent dge) {
+        CleanRequirePortBinding commandclean = new CleanRequirePortBinding();
+        commandclean.setKernel(kernel);
+        commandclean.setPortpanel(eventSourcePanel);
+        commandclean.execute(null);
+
         //tempPanel = new ComponentPanel();
         //tempPanel.setPreferredSize(new Dimension(200,200));
 
@@ -133,6 +139,9 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
         // flightComponent.setActive(true);
 
         tempBinding.setFromPort(eventSourcePanel);
+
+        
+
         tempBinding.setToPort(tempPanel);
         kernel.getModelPanel().addBinding(tempBinding);
         kernel.getModelPanel().setFlightObject(tempPanel);
