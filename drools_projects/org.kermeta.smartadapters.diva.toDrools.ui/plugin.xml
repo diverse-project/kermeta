@@ -45,8 +45,8 @@
          </menu>
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.WeaverUI"
-               enablesFor="2"
-               icon="icons/DivaModelFile.gif"
+               enablesFor="*"
+               icon="icons/Variant.gif"
                id="org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect"
                label="Weave Aspect"
                menubarPath="smartadapters.diva.menu">
