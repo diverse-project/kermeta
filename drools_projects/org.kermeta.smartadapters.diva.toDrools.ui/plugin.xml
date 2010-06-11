@@ -8,15 +8,20 @@
             nameFilter="*.smART"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="smartadapters.diva.menu"
-               label="SmartAdapters4DiVA">
+               label="SmartAdapters4DiVA"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
          </menu>
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.CompilerUI"
                icon="icons/DivaModelFile.gif"
                id="org.kermeta.smartadapters.diva.toDrools.ui.CompileAspect"
                label="Compile Aspect"
-               menubarPath="smartadapters.diva.menu">
+               menubarPath="smartadapters.diva.menu/group1">
          </action>
       </objectContribution>
       <objectContribution
@@ -24,15 +29,20 @@
             nameFilter="*.art"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="smartadapters.diva.menu"
-               label="SmartAdapters4DiVA">
+               label="SmartAdapters4DiVA"
+               path="additions">
+            <separator
+                  name="group2">
+            </separator>
          </menu>
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.CleanerUI"
                icon="icons/DivaModelFile.gif"
                id="org.kermeta.smartadapters.diva.toDrools.ui.Clean"
                label="Clean Model"
-               menubarPath="smartadapters.diva.menu">
+               menubarPath="smartadapters.diva.menu/group2">
          </action>
       </objectContribution>
       <objectContribution
@@ -40,8 +50,13 @@
             nameFilter="*"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="smartadapters.diva.menu"
-               label="SmartAdapters4DiVA">
+               label="SmartAdapters4DiVA"
+               path="additions">
+            <separator
+                  name="group3">
+            </separator>
          </menu>
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.WeaverUI"
@@ -49,7 +64,7 @@
                icon="icons/Variant.gif"
                id="org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect"
                label="Weave Aspect"
-               menubarPath="smartadapters.diva.menu">
+               menubarPath="smartadapters.diva.menu/group3">
          </action>
       </objectContribution>
    </extension>

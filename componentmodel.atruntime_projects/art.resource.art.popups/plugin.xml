@@ -9,6 +9,7 @@
             nameFilter="*.art"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.menu1"
                label="ART"
                path="additions">
@@ -19,7 +20,6 @@
          <action
                class="art.resource.art.popups.popup.actions.XMI2ART"
                enablesFor="1"
-               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.XMI2ART"
                label="art 2 artext"
                menubarPath="art.resource.art.popups.menu1/group1">
@@ -30,6 +30,7 @@
             nameFilter="*.artext"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.menu2"
                label="ART"
                path="additions">
@@ -40,7 +41,6 @@
          <action
                class="art.resource.art.popups.popup.actions.ART2XMI"
                enablesFor="1"
-               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.ART2XMI"
                label="artext 2 art"
                menubarPath="art.resource.art.popups.menu2/group2">
@@ -51,6 +51,7 @@
             nameFilter="*.smARText"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.menu2"
                label="ART"
                path="additions">
@@ -61,7 +62,6 @@
          <action
                class="art.resource.art.popups.popup.actions.PART2XMI"
                enablesFor="1"
-               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.PART2XMI"
                label="smARText 2 smART"
                menubarPath="art.resource.art.popups.menu2/group2">
@@ -72,6 +72,7 @@
             nameFilter="*.smART"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
+               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.menu1"
                label="ART"
                path="additions">
@@ -82,7 +83,6 @@
          <action
                class="art.resource.art.popups.popup.actions.XMI2PART"
                enablesFor="1"
-               icon="icons/DivaModelFile.gif"
                id="art.resource.art.popups.popup.actions.XMI2PART"
                label="smART 2 smARText"
                menubarPath="art.resource.art.popups.menu1/group1">
