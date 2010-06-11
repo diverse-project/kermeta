@@ -91,6 +91,12 @@
 		      <include name="**/**"/>
 		    </fileset>
 		</scp>
+		<!-- override the site.xml with the correct category.xml -->
+		<scp file="category.xml" remoteTofile="${deploy.user}@${deploy.server}:${deploy.path}/site.xml"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		</scp>
 	</target>
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
