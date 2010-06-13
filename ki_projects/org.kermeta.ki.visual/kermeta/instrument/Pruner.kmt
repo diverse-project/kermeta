@@ -73,7 +73,6 @@ class Pruner inherits Instrument
 	method initialiseLinks() : Void is do
 		addLink(MultiPress2Prune.new, false)
 		addLink(Press2Prune.new, false)
-		addLink(Press2Reinit.new, false)
 	end
 	
 	
@@ -135,43 +134,6 @@ class MultiPress2Prune inherits Link
 		action          := as
 	end
 }
-
-
-
-
-class Press2Reinit inherits Link
-{
-	method createInteraction() : Interaction is do
-		result := Press.new
-	end
-	
-	method updateAction() : Void is do
-	end
-	
-	
-	method getActionClass() : Class is do
-		result := ActionReinitView
-	end
-	
-	
-	method isConditionRespected() : Boolean is do
-		var press : Press init interaction.asType(Press)
-		
-		result := press.target.isVoid
-	end
-	
-	
-	method createAction() : Void is do
-		var as : ActionReinitView init ActionReinitView.new
-		var pruner : Pruner init instrument.asType(Pruner)
-		
-		as.initialise(instrument.actionRegistry)
-		as.metamodel := pruner.metamodel
-		action       := as
-	end
-}
-
-
 
 
 

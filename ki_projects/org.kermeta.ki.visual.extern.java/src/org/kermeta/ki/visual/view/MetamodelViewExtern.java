@@ -52,10 +52,14 @@ public abstract class MetamodelViewExtern {
 		final EntityView view   			= (EntityView) Source2TargetMap.MAP.getTargetObject(entityRO);
 		
 		metamodelView.removeEntity(view);
-//		RuntimeObject2JavaMap.MAP.remove(view);//TODO see if we need to remove the entity from the hashmap
-		// We do not release the user data.
+		Source2TargetMap.MAP.removeSourceObject(entityRO);
 	}
 	
+	
+	
+	public static void organise(final Object mmRO) {
+		((MetamodelView)Source2TargetMap.MAP.getTargetObject(mmRO)).updateLayout();
+	}
 	
 	
 	

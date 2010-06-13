@@ -21,77 +21,6 @@ using kermeta::ki::malai::undo
 enumeration PrunerViewPolicy { hide; gray; }
 
 
-
-class ActionReinitView inherits Action, Undoable {
-	attribute viewPolicy : PrunerViewPolicy
-	
-	reference metamodel : ModelingUnit
-	
-	attribute arePruned : Sequence<Boolean>
-	
-	
-	method doActionBody() : Void is do
-		var i : Integer init 0
-		var pruned : Boolean
-		arePruned := Sequence<Boolean>.new
-
-		metamodel.packages.each{pkg |
-			pkg.allNestedClassDefinitions.each{cd |
-				pruned := cd.isPruned
-				arePruned.add(pruned)
-				
-				if(viewPolicy.isVoid and pruned) then
-					viewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
-				end
-				
-				i := i + 1
-			}
-		}
-		
-		metamodel.reinitView
-		done()
-	end
-	
-	
-	
-	method canDo() : Boolean is do
-		result := not metamodel.isVoid
-	end
-	
-	
-	method cancelledBy(action : Class) : Boolean is do
-		result := false
-	end
-	
-	
-	method isRegisterable() : Boolean is do
-		result := true
-	end
-	
-	
-	method undo() : Void is do
-		var i : Integer init 0
-
-		metamodel.packages.each{pkg |
-			pkg.allNestedClassDefinitions.each{cd |
-				if(arePruned.at(i)) then
-					cd.prune(viewPolicy)
-				end
-				i := i + 1
-			}
-		}
-	end
-	
-	
-	method redo() : Void is do
-		metamodel.reinitView
-	end
-}
-
-
-
-
-
 class ActionPrune inherits Action, Undoable {
 	reference selection : ClassDefinition[0..*]
 	
@@ -156,7 +85,7 @@ class ActionPrune inherits Action, Undoable {
 			pruningOp.transform
 		end
 		
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.updateArrows(metamodel)
+		metamodel.organise()
 		done()
 	end
 	
@@ -210,6 +139,6 @@ class ActionPrune inherits Action, Undoable {
 		}
 		
 		arePruned := arePruned2
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.updateArrows(metamodel)
+		metamodel.organise()
 	end
 }

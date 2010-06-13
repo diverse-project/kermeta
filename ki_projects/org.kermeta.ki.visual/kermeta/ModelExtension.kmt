@@ -166,6 +166,10 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	attribute eventManager : EventManager
 	
 	
+	operation update() : Void is do
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(self)
+	end
+	
 	operation focusOnTypeDefinition(typeDef : TypeDefinition) : Void is do
 		extern org::kermeta::ki::visual::view::MetamodelViewExtern.focusOnTypeDefinition(self, typeDef)
 	end
@@ -183,6 +187,11 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	end
 
 
+	operation organise() : Void is do
+		extern org::kermeta::ki::visual::view::MetamodelViewExtern.organise(self)
+	end
+
+	
 	operation reinitView() : Void is do//TODO see if ownedTypeDefinition works
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
 		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(self)

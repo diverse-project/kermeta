@@ -197,35 +197,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		scroller.addEventable(metamodel)
 		scroller.addEventable(toolbar)
 		searcher.addEventable(toolbar)
-		
-		//TOREMOVE
-/*		var action : PruneHierarchy init PruneHierarchy.new
-		action.metamodel := metamodel
-		action.actionRegistry := actionRegistry
-		action.selection.add(model2view.clazz)
-		action.viewPolicy := PrunerViewPolicy.hide
-		action.doIt()
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.organise(self)
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)*/
-/* 		var action2 : Flat init Flat.new
-		action2.metamodel := metamodel
-		action2.actionRegistry := actionRegistry
-		action2.classToFlat := model2view.clazz
-		action2.doIt()
-		*/
-/*		var action : ActionPrune init ActionPrune.new
-		action.metamodel := metamodel
-		action.actionRegistry := actionRegistry
-		action.selection.add(model2view.clazz)
-		action.selection.add(model2view.op)
-		action.selection.add(model2view.prop)
-		action.selection.add(model2view.asso)
-		action.selection.add(model2view.pkg)
-		action.selection.add(model2view.param)
-		action.viewPolicy := PrunerViewPolicy.hide
-		action.doIt() 
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.organise(self)
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)*/
 	end
 	
 	

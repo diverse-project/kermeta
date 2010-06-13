@@ -65,9 +65,8 @@ public abstract class MetamodelViewExtern {
 		final EntityView view   			= (EntityView) Source2TargetMap.MAP.getTargetObject(entityRO);
 		
 		metamodelView.removeEntity(view);
-//		RuntimeObject2JavaMap.MAP.remove(view);//TODO see if we need to remove the entity from the hashmap
-		// We do not release the user data.
 		
+		Source2TargetMap.MAP.removeSourceObject(entityRO);
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}
 	
@@ -82,12 +81,17 @@ public abstract class MetamodelViewExtern {
 		final boolean isAspect  	= fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(isAspectRO);
 		final EntityView view 		= obj instanceof EntityView ? (EntityView)obj : mmView.addEntity(name, position, isAspect); 
 		
-		if(view!=null && Source2TargetMap.MAP.getTargetObject(view)==null)
-			Source2TargetMap.MAP.add(entityRO, view);
+		Source2TargetMap.MAP.add(entityRO, view);
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}
 	
+	
+	
+	public static RuntimeObject organise(final RuntimeObject mmRO) {
+		((MetamodelView)Source2TargetMap.MAP.getTargetObject(mmRO)).updateLayout();
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
 	
 	
 	

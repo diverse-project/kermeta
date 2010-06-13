@@ -172,6 +172,7 @@ class ClassFlattener
 			
 			// Removing the class.
 			removedClasses.add(currentClass)
+			//FIXME should remove the supertype from the metamodel and set to not visible?
 			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onEntityRemoved(metamodel, currentClass)
 		end
 	end

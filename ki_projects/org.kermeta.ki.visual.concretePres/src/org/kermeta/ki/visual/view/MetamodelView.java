@@ -597,8 +597,8 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 	public EntityView draggedShape;//TODO to remove!!
 	public FloatingText draggedLabel;//TODO to remove!!
-	public int startX;
-	public int startY;
+	public double startX;
+	public double startY;
 	
 	public void mousePressed(MouseEvent e) {//TODO to remove
 		if(MetamodelVizuFrame.hand.isSelected()) {
@@ -606,6 +606,8 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 			int i = links.size()-1;
 			LinkView link;
 			RelationView rel;
+			final double px = e.getX()/zoom;
+			final double py = e.getY()/zoom;
 			
 			while(draggedLabel==null && i>=0) {
 				link = links.get(i);
@@ -613,22 +615,22 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				if(link instanceof RelationView && link.isVisible()) {
 					rel = (RelationView) link;
 					rel.update();
-					if(rel.endingSrc.name.contains(e.getX()*zoom, e.getY()*zoom)) {
+					if(rel.endingSrc.name.contains(px, py)) {
 						draggedLabel = rel.endingSrc.name;
-						startX = e.getX();
-						startY = e.getY();
-					} else if(rel.endingSrc.card.contains(e.getX()*zoom, e.getY()*zoom)) {
+						startX = px;
+						startY = py;
+					} else if(rel.endingSrc.card.contains(px, py)) {
 						draggedLabel = rel.endingSrc.card;
-						startX = e.getX();
-						startY = e.getY();
-					} else if(rel.endingTar.name.contains(e.getX()*zoom, e.getY()*zoom)) {
+						startX = px;
+						startY = py;
+					} else if(rel.endingTar.name.contains(px, py)) {
 						draggedLabel = rel.endingTar.name;
-						startX = e.getX();
-						startY = e.getY();
-					} else if(rel.endingTar.card.contains(e.getX()*zoom, e.getY()*zoom)) {
+						startX = px;
+						startY = py;
+					} else if(rel.endingTar.card.contains(px, py)) {
 						draggedLabel = rel.endingTar.card;
-						startX = e.getX();
-						startY = e.getY();
+						startX = px;
+						startY = py;
 					}
 				}
 				i--;
@@ -639,17 +641,17 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				i = entities.size()-1;
 				
 				while(draggedShape==null && i>=0) {
-					if(entities.get(i).isVisible() && entities.get(i).getBorders().contains(e.getX()*zoom, e.getY()*zoom)) {
+					if(entities.get(i).isVisible() && entities.get(i).getBorders().contains(px, py)) {
 						draggedShape = entities.get(i);
-						startX = e.getX();
-						startY = e.getY();
+						startX = px;
+						startY = py;
 					}
 					else
 						i--;
 				}
 			}
 			else {
-				draggedLabel.setManualPosition(e.getX(), e.getY());
+				draggedLabel.setManualPosition(px, py);
 			}
 		}
 	}
@@ -664,20 +666,20 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 
 	public void mouseDragged(MouseEvent e) {
-		int gapX = e.getX() - startX;
-		int gapY = e.getY() - startY;
+		final double gapX = e.getX()/zoom - startX;
+		final double gapY = e.getY()/zoom - startY;
 		
 		if(draggedLabel!=null) {
 			draggedLabel.setPosition(draggedLabel.getPosition().x + gapX, draggedLabel.getPosition().y + gapY);
-			startX = e.getX();
-			startY = e.getY();
+			startX = e.getX()/zoom;
+			startY = e.getY()/zoom;
 			
 			repaint();
 		} else
 			if(draggedShape!=null) {
-				draggedShape.setCentre((int)draggedShape.getCentre().x + gapX, (int)draggedShape.getCentre().y + gapY);
-				startX = e.getX();
-				startY = e.getY();
+				draggedShape.setCentre((int)(draggedShape.getCentre().x + gapX), (int)(draggedShape.getCentre().y + gapY));
+				startX = e.getX()/zoom;
+				startY = e.getY()/zoom;
 				
 				draggedShape.update();
 				

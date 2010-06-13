@@ -11,15 +11,13 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/operation/ClassFlattener.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 
-
 using kermeta::ki::malai::action
 using kermeta::ki::malai::undo
 using kermeta::language::structure
 
 
 
-class Flat inherits Action, Undoable
-{
+class Flat inherits Action, Undoable {
 	attribute flatteningOperation : ClassFlattener
 	
 	reference metamodel : ModelingUnit
@@ -33,10 +31,7 @@ class Flat inherits Action, Undoable
 		flatteningOperation.metamodel 	:= metamodel
 		
 		flatteningOperation.flat(classToFlat)
-		
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)
-		
-		done()
+		metamodel.organise()
 	end
 	
 	
@@ -113,7 +108,7 @@ class Flat inherits Action, Undoable
 			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceRemoved(metamodel, in.source, in.target)
 		}
 		
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)
+		metamodel.organise()
 	end
 	
 	
