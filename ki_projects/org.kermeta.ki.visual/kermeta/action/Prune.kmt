@@ -123,14 +123,16 @@ class ActionPrune inherits Action, Undoable {
 
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				pruned := cd.isPruned
-				arePruned.add(pruned)
-
-				if(viewPolicy.isVoid and pruned) then
-					oldViewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
+				if(not cd.isAspect) then
+					pruned := cd.isPruned
+					arePruned.add(pruned)
+	
+					if(viewPolicy.isVoid and pruned) then
+						oldViewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
+					end
+					
+					i := i + 1
 				end
-				
-				i := i + 1
 			}
 		}
 		
@@ -195,13 +197,15 @@ class ActionPrune inherits Action, Undoable {
 		
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				arePruned2.add(cd.isPruned)
-				if(arePruned.at(i)) then 
-					cd.prune(policy)
-				else
-					cd.unprune
-				end		
-				i := i + 1
+				if(not cd.isAspect) then
+					arePruned2.add(cd.isPruned)
+					if(arePruned.at(i)) then 
+						cd.prune(policy)
+					else
+						cd.unprune
+					end		
+					i := i + 1
+				end
 			}
 		}
 		
