@@ -178,8 +178,10 @@ public abstract class LinkView extends ComponentView {
 			if(entitySrc==entityTar) {
 				Rectangle2D rec  = entitySrc.getBorders();
 				final float gap = 60f;
-				pointSrc = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y-10), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y-10)), rec);
-				pointTar = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y+10), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y+10)), rec);
+				final double heightArrow = rec.getHeight()>20 ? 10 : rec.getHeight()/2. - 2.;
+				
+				pointSrc = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y-heightArrow), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y-heightArrow)), rec);
+				pointTar = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y+heightArrow), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y+heightArrow)), rec);
 				
 				path.reset();
 				path.moveTo((float)pointSrc.x, (float)pointSrc.y);
