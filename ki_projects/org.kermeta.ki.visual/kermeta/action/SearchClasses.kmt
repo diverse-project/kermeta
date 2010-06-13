@@ -25,7 +25,7 @@ class SearchClasses inherits Action {
 	
 	operation addSearchedClasses(pkg : Package) : Void is do
 		pkg.ownedTypeDefinition.each{ t |
-			if(t.name.contains(text)) then
+			if(t.name.contains(text) and not t.isAspect) then
 				searcher.searchedClasses.add(t)
 			end
 		}
@@ -37,7 +37,11 @@ class SearchClasses inherits Action {
 	
 	method doActionBody() : Void is do
 		searcher.searchedClasses.clear()
-		searcher.metamodel.packages.each{p | addSearchedClasses(p)}
+		
+		if(text.size()>0) then
+			searcher.metamodel.packages.each{p | addSearchedClasses(p)}
+		end
+		
 		done()
 	end
 	
