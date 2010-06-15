@@ -7,7 +7,7 @@ import patternframework.PModel;
 
 public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
 	
-	public final static java.lang.String NAME_FEATURE = "name";
+	//public final static java.lang.String NAME_FEATURE = "name";
 	
 	protected EObject getParentPModel(EObject obj) {
 		EObject result = obj;
@@ -53,8 +53,17 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 			return true;
 		}
 		
-		final java.lang.String match = matches(element, identifier, resolveFuzzy);
-		if (match == null) {
+		String match1 = matches(element, identifier, resolveFuzzy, "name");
+		if (match1 != null) {
+			result.addMapping(match1, cast(element));
+			if (!resolveFuzzy) {
+				return false;
+			}
+		}
+
+		
+		String match2 = matches(element, identifier, resolveFuzzy, "pid");
+		if (match2 == null) {
 			return true;
 		}
 		// we can safely cast 'element' to 'ReferenceType' here,
@@ -62,10 +71,12 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 		// the type of the reference. unfortunately the compiler
 		// does not know that this is sufficient, so we must call
 		// cast(), which is not type safe by itself.
-		result.addMapping(match, cast(element));
+		result.addMapping(match2, cast(element));
 		if (!resolveFuzzy) {
 			return false;
 		}
+		
+		
 		return true;
 	}
 	
@@ -84,10 +95,13 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 	}
 	
 	protected java.lang.String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
-		return getName(element);
+		String result = getName(element, "name");
+		if (result == null || result.trim().equals(""))
+			result = getName(element, "pid");
+		return result;
 	}
 	
-	private java.lang.String matches(org.eclipse.emf.ecore.EObject element, java.lang.String identifier, boolean matchFuzzy) {
+	private java.lang.String matches(org.eclipse.emf.ecore.EObject element, java.lang.String identifier, boolean matchFuzzy, String name_feature) {
 		// first check for attributes that have set the ID flag to true
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = element.eClass().getEStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
@@ -104,7 +118,7 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 		}
 		
 		// then check for an attribute that is called 'name'
-		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
+		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(name_feature);
 		if (nameAttr instanceof org.eclipse.emf.ecore.EAttribute) {
 			java.lang.Object attributeValue = element.eGet(nameAttr);
 			return matches(identifier, attributeValue, matchFuzzy);
@@ -121,7 +135,7 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 			}
 			
 			for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
-				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
+				if (o.getName().toLowerCase().endsWith(name_feature) && o.getEParameters().size() == 0 ) {
 					java.lang.String result = (java.lang.String) org.smartadapters.core.resource.smARText.util.SmARTextEObjectUtil.invokeOperation(element, o);
 					java.lang.String match = matches(identifier, result, matchFuzzy);
 					if (match != null) {
@@ -146,8 +160,8 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 		return null;
 	}
 	
-	private java.lang.String getName(ReferenceType element) {
-		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
+	private java.lang.String getName(ReferenceType element, String name_feature) {
+		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(name_feature);
 		if(element.eIsProxy()) {
 			java.lang.String fragment = ((org.eclipse.emf.ecore.InternalEObject) element).eProxyURI().fragment();
 			if (fragment != null && fragment.startsWith(org.smartadapters.core.resource.smARText.ISmARTextContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -166,7 +180,7 @@ public class IntraPatternResolverDelegate<ContainerType extends org.eclipse.emf.
 				}
 			}
 			for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
-				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
+				if (o.getName().toLowerCase().endsWith(name_feature) && o.getEParameters().size() == 0 ) {
 					java.lang.String result = (java.lang.String) org.smartadapters.core.resource.smARText.util.SmARTextEObjectUtil.invokeOperation(element, o);
 					if (result != null) {
 						return result;
