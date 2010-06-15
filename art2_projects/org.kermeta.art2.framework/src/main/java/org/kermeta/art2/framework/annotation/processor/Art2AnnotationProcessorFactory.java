@@ -50,6 +50,7 @@ public class Art2AnnotationProcessorFactory implements
 
     @Override
     public AnnotationProcessor getProcessorFor(Set<AnnotationTypeDeclaration> declarations, AnnotationProcessorEnvironment env) {
+
         AnnotationProcessor result;
 
         if (declarations.isEmpty()) {

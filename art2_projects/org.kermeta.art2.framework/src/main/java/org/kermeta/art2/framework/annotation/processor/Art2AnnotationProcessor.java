@@ -32,7 +32,7 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process() {
 
-       // System.out.println(env.getOptions());
+      //  System.out.println(env.getOptions());
 
         art2.ContainerRoot root = art2.Art2Factory.eINSTANCE.createContainerRoot();
         Art2Utility.root_$eq(root);
@@ -69,7 +69,7 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
 
         Art2Generator.generatePortWrapper(root, env.getFiler());
         Art2Generator.generateFactory(root, env.getFiler());
-        Art2XmiHelper.save("art2.xmi", root);
+        Art2XmiHelper.save("META-INF/art2Lib.xmi", root);
 
 
     }

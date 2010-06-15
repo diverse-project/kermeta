@@ -53,11 +53,15 @@ object Art2Generator {
                 }
               }
               wrapper.append("){\n");
+              if(!op.getReturnType.getName.equals("void")) { wrapper.append("return ") }
               wrapper.append("(("+ct.getFactoryBean.substring(0, ct.getFactoryBean.indexOf("Factory"))+")getComponent()).")
 
               wrapper.append(ref.getMappings.find(map=>{map.getServiceMethodName.equals(op.getName)}).get.getBeanMethodName+"(")
               op.getParameters.foreach{param=>
                 wrapper.append(param.getName)
+                if(op.getParameters.indexOf(param) != (op.getParameters.size-1)){
+                  wrapper.append(",")
+                }
               }
               wrapper.append(");}\n")
             }
