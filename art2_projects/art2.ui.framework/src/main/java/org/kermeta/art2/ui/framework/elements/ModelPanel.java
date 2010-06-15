@@ -7,14 +7,18 @@ package org.kermeta.art2.ui.framework.elements;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JViewport;
+import javax.swing.Scrollable;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.CompoundPainter;
 import org.jdesktop.swingx.painter.MattePainter;
@@ -76,7 +80,7 @@ public class ModelPanel extends JLayeredPane {
         revalidate();
     }
 
-    public void removeBinding(Binding b){
+    public void removeBinding(Binding b) {
         bindingPanel.removeBinding(b);
     }
 
@@ -86,5 +90,16 @@ public class ModelPanel extends JLayeredPane {
 
     public void unsetFlightObject(JPanel fobject) {
         dragPanel.remove(fobject);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        Dimension parentsize = this.getParent().getSize();
+        Dimension preferedDim = new Dimension(0, 0);
+        for (Component child : nodePanel.getComponents()) {
+            preferedDim.width = Math.max(child.getMinimumSize().width, preferedDim.width);
+            preferedDim.height = Math.max(child.getLocation().y + child.getSize().height, preferedDim.height);
+        }
+        return preferedDim;
     }
 }

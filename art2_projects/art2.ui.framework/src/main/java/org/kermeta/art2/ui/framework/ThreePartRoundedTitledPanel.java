@@ -7,6 +7,7 @@ package org.kermeta.art2.ui.framework;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Panel;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
@@ -23,7 +24,10 @@ public class ThreePartRoundedTitledPanel extends RoundedTitledPanel {
         c_left.setOpaque(false);
         c_center.setOpaque(false);
         c_right.setOpaque(false);
-        
+
+        c_left.setLayout(new BoxLayout(c_left, BoxLayout.PAGE_AXIS));
+        c_right.setLayout(new BoxLayout(c_right, BoxLayout.PAGE_AXIS));
+
         this.content.setLayout(new BorderLayout());
         this.content.add(c_left, BorderLayout.WEST);
         this.content.add(c_center, BorderLayout.CENTER);

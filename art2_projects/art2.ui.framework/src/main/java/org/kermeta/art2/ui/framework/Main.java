@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import org.jdesktop.swingx.JXTitledPanel;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
@@ -29,8 +30,8 @@ public class Main {
     public static void main(String[] args) {
         JFrame jframe = new JFrame("Art2 UI Tester");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setPreferredSize(new Dimension(800,600));
-        
+        jframe.setPreferredSize(new Dimension(800, 600));
+
 
 
         ModelPanel model = new ModelPanel();
@@ -39,7 +40,7 @@ public class Main {
         model.addNode(node2);
         model.addNode(node1);
 
-        
+
         ComponentPanel c1 = new ComponentPanel();
         ComponentPanel c2 = new ComponentPanel();
         ComponentPanel c3 = new ComponentPanel();
@@ -48,18 +49,21 @@ public class Main {
         PortPanel p11 = new PortPanel();
         p11.setType(PortType.PROVIDED);
         PortPanel p12 = new PortPanel();
-        p11.setType(PortType.REQUIRED);
+        p12.setType(PortType.REQUIRED);
         PortPanel p21 = new PortPanel();
-        p11.setType(PortType.PROVIDED);
+        p21.setType(PortType.PROVIDED);
         PortPanel p22 = new PortPanel();
-        p11.setType(PortType.REQUIRED);
+        p22.setType(PortType.REQUIRED);
+        PortPanel p23 = new PortPanel();
+        p23.setType(PortType.REQUIRED);
 
         p11.setTitle("PORT11");
         p12.setTitle("PORT12");
         p21.setTitle("PORT21");
         p22.setTitle("PORT22");
+        p23.setTitle("PORT23");
 
-        
+
         Binding b = new Binding();
         b.setFromPort(p11);
         b.setToPort(p22);
@@ -71,6 +75,7 @@ public class Main {
         c2.setTitle("c2");
         c2.addLeft(p21);
         c2.addRight(p22);
+        c2.addRight(p23);
 
         node1.setTitle("node1");
 
@@ -81,7 +86,9 @@ public class Main {
         node2.add(c4);
 
 
-        jframe.add(model, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(model, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        jframe.add(scrollPane, BorderLayout.CENTER);
 
         jframe.pack();
         jframe.setVisible(true);

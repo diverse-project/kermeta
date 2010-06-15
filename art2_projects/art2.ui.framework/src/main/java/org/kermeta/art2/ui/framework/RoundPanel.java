@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -61,6 +62,9 @@ public class RoundPanel extends JPanel {
         add(up, BorderLayout.NORTH);
         add(down, BorderLayout.SOUTH);
         add(content, BorderLayout.CENTER);
+
+        content.setLayout(new FlowLayout());
+
     }
 
     @Override
