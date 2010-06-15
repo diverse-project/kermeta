@@ -1,4 +1,4 @@
-SYNTAXDEF core
+SYNTAXDEF smARText
 FOR <http://SmartAdapters4ART/smartadapters/core> 
 START Adapter 
 
@@ -46,6 +46,8 @@ TOKENS{
 		DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 		DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;	
 		
+		DEFINE TXTID $'<'('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*'>'$;
+		
 		DEFINE TEXT $('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*$;
 }
 
@@ -61,16 +63,24 @@ TOKENSTYLES {
 	
 	"system" COLOR #444444, BOLD;
 	
+	"TXTID"  COLOR #444444, BOLD;
+	
 	"root" COLOR #007F55, BOLD;
 	"primitive" COLOR #007F55, BOLD;
 	"composite" COLOR #007F55, BOLD;
+	"component" COLOR #007F55, BOLD;
+	"binding" COLOR #007F55, BOLD;
+	"server" COLOR #007F55, BOLD;
+	"requiredPort" COLOR #007F55, BOLD;
+	"providedPort" COLOR #007F55, BOLD;
 	"instance" COLOR #007F55, BOLD;
 	 
 	"T_INSTANCE_STATE" COLOR #007F55, BOLD; 
 	
-	":" COLOR #000000;
-	"::" COLOR #000000;
-	":=" COLOR #000000;
+	":" COLOR #444444, BOLD;
+	"?" COLOR #444444, BOLD;
+	"=" COLOR #444444, BOLD;
+	"+=" COLOR #444444, BOLD;
 	
 	"bind" COLOR #007F55, BOLD;
 	"delegate" COLOR #007F55, BOLD;
@@ -81,6 +91,7 @@ TOKENSTYLES {
 	"control" COLOR #CC8000, BOLD;
 	
 	"service" COLOR #CC8000, BOLD;
+	"services" COLOR #CC8000, BOLD;
 	"operation" COLOR #CC8000, BOLD;
 	"in" COLOR #CC8000, BOLD;
 	"out" COLOR #CC8000, BOLD;
@@ -163,17 +174,17 @@ RULES{
 					!1 "id"  #1 "=" #1 refId[STRING_LITERAL]  
 				)* "}"  ;
 	
-	pattern.art.System::= ("system" (#1 name[])? ( #1 "<" pid[] ">")? ";" )? (!0 "root" #1 root)? ( !0 (services | types | dataTypes ) )* ;
+	pattern.art.System::= ("system" (#1 name[])? ( #1 pid[TXTID])? ";" )? (!0 "root" #1 root)? ( !0 (services | types | dataTypes ) )* ;
 	
-	pattern.art.DataType::= "datatype" (#1 name[])? ( #1 "<" pid[] ">")?  ";"  ;
+	pattern.art.DataType::= "datatype" (#1 name[])? ( #1 pid[TXTID])?  ";"  ;
 	
-	pattern.art.Instance.PrimitiveInstance::= "primitive" #1 "instance"  (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
+	pattern.art.Instance.PrimitiveInstance::= "primitive" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
 	
-	pattern.art.Instance.CompositeInstance::= "composite" #1 "instance"  (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
+	pattern.art.Instance.CompositeInstance::= "composite" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
 	
-	pattern.art.Instance.TransmissionBinding::= "bind" #1 ( client[] | "?" ) #1  "to" #1 ( serverInstance[] "::" server[] | "?" ) ( #1 "<" pid[] ">")?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
+	pattern.art.Instance.TransmissionBinding::= "bind" #1 ( client[] | "?" ) #1  "to" #1 ( serverInstance[] "::" server[] | "?" ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
 	
-	pattern.art.Instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 "<" pid[] ">")?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
+	pattern.art.Instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
 	
 	pattern.art.Instance.ValuedAttribute::=  attribute[] #1 ":=" #1 value[STRING_LITERAL] ;
 	
@@ -183,21 +194,21 @@ RULES{
 	
 	pattern.art.Instance.OtherEntry::=   "[" #1 key[STRING_LITERAL] #1 "->" #1 value[STRING_LITERAL] #1 "]" ;
 	
-	pattern.art.Type.PrimitiveType::= "type" (#1 name[])? ( #1 "<" pid[] ">")? #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
+	pattern.art.Type.PrimitiveType::= "type" (#1 name[])? ( #1 pid[TXTID])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
 	
-	pattern.art.Type.CompositeType::= "compositetype" (#1 name[])? ( #1 "<" pid[] ">")? #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
+	pattern.art.Type.CompositeType::= "compositetype" (#1 name[])? ( #1 pid[TXTID])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
 	
 	//Type.Operation::= !1 "operation" #1 name[] "(" ("in" #1 input | "out" #1 output)? ( "," #1 ("in" #1 input | "out" #1 output) )* ")"  ;
 	
-	pattern.art.Type.Operation::= !1 "operation" #1 (#1 name[])? ( #1 "<" pid[] ">")? "(" (input)? ( "," #1 input )* ")" (":" output)? ( "," #1 output )* ;
+	pattern.art.Type.Operation::= !1 "operation" #1 (#1 name[])? ( #1 pid[TXTID])? "(" (input)? ( "," #1 input )* ")" (":" output)? ( "," #1 output )* ;
 	
-	pattern.art.Type.Parameter::= (type[] | "?") (#1 name[])? ( #1 "<" pid[] ">")?;
+	pattern.art.Type.Parameter::= (type[] | "?") (#1 name[])? ( #1 pid[TXTID])?;
 	
-	pattern.art.Type.FunctionalService::= "functional" #1 "service" (#1 name[])? ( #1 "<" pid[] ">")? #1 "{" ( operation )* !0 "}"  ;
+	pattern.art.Type.FunctionalService::= "functional" #1 "service" (#1 name[])? ( #1 pid[TXTID])? #1 "{" ( operation )* !0 "}"  ;
 	
-	pattern.art.Type.ControlService::= "control" #1 "service" (#1 name[])? ( #1 "<" pid[] ">")? #1 "{" ( operation )* !0 "}"  ;
+	pattern.art.Type.ControlService::= "control" #1 "service" (#1 name[])? ( #1 pid[TXTID])? #1 "{" ( operation )* !0 "}"  ;
 	
-	pattern.art.Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 ( service[] | "?" )? #1 ("[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]")? ;
+	pattern.art.Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( service[] | "?" )? #1 ("[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]")? ;
 	
 	pattern.art.Implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 	
@@ -205,19 +216,20 @@ RULES{
 		
 	pattern.art.Implem.OSGiType::= generateInstanceBundle[T_IMPLEM]  ;
 	
-	pattern.art.Type.BasicAttribute::= !1 "attribute" (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 (type[] | "?") ( #1 "default"  #1 defaultValue[STRING_LITERAL] )? ;
+	pattern.art.Type.BasicAttribute::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") ( #1 "default"  #1 defaultValue[STRING_LITERAL] )? ;
 	
-	pattern.art.Type.Dictionary::= !1 "attribute" (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" "[" (type[] | "?") #1 "->" #1 (valueType[] | "?") "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
+	pattern.art.Type.Dictionary::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" "[" (type[] | "?") #1 "->" #1 (valueType[] | "?") "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
 	
 	pattern.art.Type.DictionaryDefaultValue::= !1 "[" #1 key[STRING_LITERAL] #1 ("->" #1 value[STRING_LITERAL] )? #1 "]" ;
 	
 	pattern.art.Type.PortId ::= name[];
 	
-	pattern.art.Type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 "<" pid[] ">")? #1 ":" #1 ( service[] | "?") #1 "{" ids ("," #1 ids)* "}" ;
+	pattern.art.Type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( service[] | "?") #1 "{" ids ("," #1 ids)* "}" ;
 	
-	patternframework.ModelPattern::= (!1 constraints)? (!1 "featureID" #1 ":" #1 featureIdentifier[STRING_LITERAL])? !1 "pattern" #1 pattern  ( !1 "negative" #1 "pattern" #1 ":" falsepositivepatterns  )*  ;
+	patternframework.ModelPattern::= (!1 constraints)? (!1 "featureID" #1 ":" #1 featureIdentifier[STRING_LITERAL])? !1 pattern  ( !1 "negative" #1 "pattern" #1 ":" falsepositivepatterns  )*  ;
 	
-	patternframework.PModel::= "model" !0 "{" (!1 content) !0 "}" !1 ("roles" #1 ":" #1 roles ("," #1 roles)* ";")? ;
+	//patternframework.PModel::= "model" !0 "{" (!1 content) !0 "}" !1 ("roles" #1 ":" #1 roles ("," #1 roles)* ";")? ;
+	patternframework.PModel::=  content ( !0 "roles" #1 ":" #1 roles ("," #1 roles)* ";")? ;
 		
 	patternframework.PConstraint::= "constraint" #1 "(" #1 language[] #1 ")" #1 ":" #1 expression[STRING_LITERAL] ";"  ;
 	
