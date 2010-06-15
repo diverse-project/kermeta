@@ -1,75 +1,80 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.kermeta.art2</groupId>
-	<artifactId>art2.runtime</artifactId>
-	<packaging>bundle</packaging>
-	<name>ART2 :: Runtime</name>
-	<version>0.4.0-SNAPSHOT</version>
-	<repositories>
-		<repository>
-			<id>triskellPublic</id>
-			<url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-	<dependencies>
-		<dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.kompare</artifactId>
-			<version>1.2.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.art2</groupId>
+    <artifactId>art2.runtime</artifactId>
+    <packaging>bundle</packaging>
+    <name>ART2 :: Runtime</name>
+    <version>0.4.0-SNAPSHOT</version>
+    <repositories>
+        <repository>
+            <id>triskellPublic</id>
+            <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.kompare</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
 
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-ClassPath>.</Bundle-ClassPath>
-						<Import-Package>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Import-Package>
                                                     !sun.misc,!org.kermeta.log4j.util,!org.eclipse.core.*,*
-                                                </Import-Package>
-						<Private-Package>
+                        </Import-Package>
+                        <Private-Package>
                                                     *
-                                                </Private-Package>
+                        </Private-Package>
 						<!--<DynamicImport-Package>*</DynamicImport-Package>-->
-						<Export-Package>org.kermeta.art2.runtime,*</Export-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-		 <plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-compiler-plugin</artifactId>
-		  <configuration>
-		   <source>1.6</source>
-		   <target>1.6</target>
-		   <encoding>${project.build.sourceEncoding}</encoding>
-		  </configuration>
-		 </plugin>
-		 <plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-resources-plugin</artifactId>
-		  <configuration>
-		   <encoding>${project.build.sourceEncoding}</encoding>
-		  </configuration>
-		 </plugin>
-		</plugins>
-	</build>
+                        <Export-Package>org.kermeta.art2.runtime,*</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
-		<distributionManagement>
-		<snapshotRepository>
-			<id>nexus</id>
-			<url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
- <properties>
-  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- </properties>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus</id>
+            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+
+
 </project>
 
