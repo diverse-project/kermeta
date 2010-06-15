@@ -36,6 +36,8 @@ public class Art2EditorPanel extends JPanel {
 
     public Art2EditorPanel() {
 
+               
+
 
         leftpanel.setOpaque(false);
         leftpanel.setLayout(new BoxLayout(leftpanel, BoxLayout.PAGE_AXIS));
@@ -76,6 +78,11 @@ public class Art2EditorPanel extends JPanel {
             ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
             palette.addComponentTypePanel(ctp);
         }
-        Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
+        //TODO CLEAN PALETTE
+
+        //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
     }
+
+   
+
 }

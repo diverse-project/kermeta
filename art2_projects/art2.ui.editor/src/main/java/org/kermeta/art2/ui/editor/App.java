@@ -20,7 +20,8 @@ public class App {
         Art2EditorPanel artpanel = new Art2EditorPanel();
         //TODO REMOVE
 
-     //   Syste
+        //java.class.path
+
 
         artpanel.load("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2.xmi");
 
