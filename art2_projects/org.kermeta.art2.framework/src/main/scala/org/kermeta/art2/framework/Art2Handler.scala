@@ -9,6 +9,7 @@ import art2.ContainerRoot
 import art2.PortType
 import art2.ServicePortType
 import art2.{ComponentType => art2CT}
+import art2.ComponentTypeLibrary
 import scala.collection.JavaConversions._
 
 class Art2Handler {
@@ -19,6 +20,7 @@ class Art2Handler {
 
   def merge(modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
+      /* STEP 0 MERGE ComponentType */
       var cts : List[art2CT] = List()++modelToMerge.getComponentTypes.toList
       cts.foreach{dt=>
         actualModel.getComponentTypes.find({ct=>ct.getName.equals(dt.getName)}) match {
@@ -31,6 +33,22 @@ class Art2Handler {
             }
         }
       }
+      /* STEP 1 Merge ComponentType Lib */
+      var ctLib : List[ComponentTypeLibrary] = List()++modelToMerge.getLibrariy.toList
+      ctLib.foreach{libtomerge=>
+        actualModel.getLibrariy.find({elib=> elib.getName.equals(libtomerge.getName) }) match {
+          case Some(elib) => {
+              libtomerge.getSubComponentTypes.foreach{libCTtomerge=>
+                elib.getSubComponentTypes.find({esublib=>esublib.getName.equals(libCTtomerge.getName)}) match {
+                  case Some(subct)=> //TODO CHECK CONSISTENCY
+                  case None => elib.getSubComponentTypes.add(libCTtomerge)
+                }
+              }
+          }
+          case None => actualModel.getLibrariy.add(libtomerge)
+        }
+      }
+      
     }
   }
   

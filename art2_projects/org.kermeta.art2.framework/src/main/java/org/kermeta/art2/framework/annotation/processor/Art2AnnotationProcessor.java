@@ -61,11 +61,11 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
 
         //GENERER ART2 LIB
 
-        art2.ComponentTypeLibrary newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary();
-        for (ComponentTypeVisitor ctv : ctVisitors) {
-            newlib.getSubComponentTypes().add(ctv.getComponentType());
-        }
-        root.getLibrariy().add(newlib);
+        //art2.ComponentTypeLibrary newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary();
+        //for (ComponentTypeVisitor ctv : ctVisitors) {
+        //    newlib.getSubComponentTypes().add(ctv.getComponentType());
+        //}
+        //root.getLibrariy().add(newlib);
 
         Art2Generator.generatePortWrapper(root, env.getFiler());
         Art2Generator.generateFactory(root, env.getFiler());

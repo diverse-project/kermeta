@@ -47,7 +47,18 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     
     componentType.setFactoryBean(classdef.getQualifiedName+"Factory")
 
-    
+    var ctLibName = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).libName
+
+    /* CREATE FACTORY IF NEEDED */
+    root.getLibrariy.find({lib=>lib.getName.equals(ctLibName)}) match {
+      case Some(lib)=> lib.getSubComponentTypes.add(componentType)
+      case None => {
+          var newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary
+          newlib.setName(ctLibName)
+          newlib.getSubComponentTypes.add(componentType)
+          root.getLibrariy.add(newlib)
+      }
+    }
 
     /* CHECK PROVIDED PORTS */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
