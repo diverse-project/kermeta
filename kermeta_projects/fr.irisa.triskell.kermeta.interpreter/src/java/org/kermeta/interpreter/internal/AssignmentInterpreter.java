@@ -56,7 +56,8 @@ public class AssignmentInterpreter {
 			/* BEGINNING OF HORRIBLE THING */
 			/******************************/
 			// Type collection of object
-			Class coll_class = StructureFactory.eINSTANCE.createClass();    
+			Class coll_class = interpreter.getMemory().getCollectionOfObjectClass();
+			/* Class coll_class = StructureFactory.eINSTANCE.createClass();    
 		    coll_class.setTypeDefinition((ClassDefinition)interpreter.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Collection"));
 		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
@@ -69,7 +70,7 @@ public class AssignmentInterpreter {
 		    binding.setType(object_class);
 		    // Add to type param bindings the binding
 		    coll_class.getTypeParamBinding().add(binding);
-
+			*/
 			if (expectedType.equals(new SimpleType(coll_class, tcc))) {
 				// THIS IS A TERRIBLE HACK TO ALLOW CASTING COLLECTIONS
 				// OF ANYTHING TO COLLECTION OF OBJECTS

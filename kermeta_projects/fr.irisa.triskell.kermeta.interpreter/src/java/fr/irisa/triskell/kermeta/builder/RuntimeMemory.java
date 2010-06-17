@@ -14,7 +14,12 @@ import java.util.Hashtable;
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.KermetaUnit;
 
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -46,6 +51,34 @@ public class RuntimeMemory {
 	
 	public RuntimeObject voidINSTANCE;
 	public RuntimeObject stdioINSTANCE;
+	
+	/**
+	 * Convenient cache for often used type
+	 * this avoid to recreate them too often  
+	 * NOTE : Maybe we can generalize this with other classdefinition and use a nicer hashtable cache ?
+	 */
+	protected fr.irisa.triskell.kermeta.language.structure.Class collectionOfObjectCacheClass;
+	public fr.irisa.triskell.kermeta.language.structure.Class getCollectionOfObjectClass(){
+		if (collectionOfObjectCacheClass == null){
+			// Type collection of object
+			Class coll_class = StructureFactory.eINSTANCE.createClass();    
+		    coll_class.setTypeDefinition((ClassDefinition)getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Collection"));
+		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
+		    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
+		    
+		    Class object_class = StructureFactory.eINSTANCE.createClass();   
+		    object_class.setTypeDefinition((ClassDefinition)getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object"));
+	
+		    
+		    // Set the param binding type
+		    binding.setType(object_class);
+		    // Add to type param bindings the binding
+		    coll_class.getTypeParamBinding().add(binding);
+		    collectionOfObjectCacheClass = coll_class;
+		}
+	    return collectionOfObjectCacheClass;
+
+	}
 	
 	protected KermetaUnit unit;
     protected long time = System.currentTimeMillis();
