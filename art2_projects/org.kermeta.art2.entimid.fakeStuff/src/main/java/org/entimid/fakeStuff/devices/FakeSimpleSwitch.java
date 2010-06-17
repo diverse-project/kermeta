@@ -27,7 +27,7 @@ import org.kermeta.art2.framework.AbstractComponentType;
     @RequiredPort(name="on",className=SimpleActionService.class),
     @RequiredPort(name="off",className=SimpleActionService.class)
 })
-@ComponentType
+@ComponentType(libName="fakeStuff")
 public class FakeSimpleSwitch extends AbstractComponentType {
 
     private static final int SWITCH_WIDTH = 50;

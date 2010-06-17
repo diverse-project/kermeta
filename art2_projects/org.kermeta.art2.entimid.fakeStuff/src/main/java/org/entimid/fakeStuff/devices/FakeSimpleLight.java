@@ -24,7 +24,7 @@ import org.kermeta.art2.framework.AbstractComponentType;
     @ProvidedPort(name="on",className=SimpleActionService.class),
     @ProvidedPort(name="off",className=SimpleActionService.class)
 })
-@ComponentType
+@ComponentType(libName="fakeStuff")
 public class FakeSimpleLight extends AbstractComponentType {
 	
 

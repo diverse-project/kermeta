@@ -16,5 +16,5 @@
   <portTypes xsi:type="art2:ServicePortType" name="org.entimid.framework.SimpleActionService">
     <operations name="process" returnType="//@dataTypes.0"/>
   </portTypes>
-  <librariy subComponentTypes="//@componentTypes.0 //@componentTypes.1"/>
+  <librariy name="fakeStuff" subComponentTypes="//@componentTypes.0 //@componentTypes.1"/>
 </art2:ContainerRoot>
