@@ -5110,6 +5110,7 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 	}
 	
 	public void print_pattern_art_implem_OSGiComponent(pattern.art.implem.OSGiComponent element, java.lang.String outertab, java.io.PrintWriter out) {
+		java.lang.String localtab = outertab;
 		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(2);
 		java.lang.Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__PID));
@@ -5118,8 +5119,24 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		printCountingMap.put("implementingClass", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("OSGiComponent");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_implem_OSGiComponent_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
@@ -5136,6 +5153,22 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), element));
 			}
 			printCountingMap.put("implementingClass", count - 1);
+		}
+	}
+	public void print_pattern_art_implem_OSGiComponent_0(pattern.art.implem.OSGiComponent element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
 		}
 	}
 	

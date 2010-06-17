@@ -212,7 +212,7 @@ RULES{
 	
 	pattern.art.Implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 	
-	pattern.art.Implem.OSGiComponent::= "OSGiComponent" #1 ":" #1 implementingClass[STRING_LITERAL] ;
+	pattern.art.Implem.OSGiComponent::= "OSGiComponent" ( #1 pid[TXTID] )? #1 ":" #1 implementingClass[STRING_LITERAL] ;
 		
 	pattern.art.Implem.OSGiType::= generateInstanceBundle[T_IMPLEM]  ;
 	
