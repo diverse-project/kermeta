@@ -1,6 +1,8 @@
 package org.kermeta.smartadapters.diva.toDrools.ui;
 
 import java.io.IOException;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
@@ -29,13 +31,35 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	//protected TreeSelection currentSelection;
 	protected IFile baseFile;
 	protected IFile aspectFile;
+	protected SortedSet<String> aspectFiles;
+	
+	public WeaverUI(){
+		aspectFiles = new TreeSet<String>(new AspectComparator());
+	}
 
 	public void run() {
-		if (baseFile != null && aspectFile != null){
+		if (baseFile != null && aspectFile != null && aspectFiles.size()>0){
 			IOConsole console = new EclipseConsole("SmartAdapters weaver for DiVA");
-			console.println(new InfoMessage("Weaving..."));
-
-			SmartAdaptersDrools.main(new String[]{"file:/"+baseFile.getRawLocation().toOSString(),"file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"),aspectFile.getRawLocation().toOSString()});
+			console.println(new InfoMessage("Weaving..."/*+aspectFiles.size()+" aspects..."*/));
+			
+			String[] params = new String[/*aspectFiles.size()+2*/3];
+			params[0] = "file:/"+baseFile.getRawLocation().toOSString();
+			params[1] = "file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"); 
+			//params[2] = aspectFile.getRawLocation().toOSString();
+			
+			
+			int i = 2;
+			for(String aspect : aspectFiles){
+				/*console.println(new InfoMessage(aspect));
+				params[i] = aspect;
+				++i;*/
+				
+				params[2] = aspect;
+				SmartAdaptersDrools.main(params);
+				params[0] = params[1];
+			}
+			
+			
 
 			console.println(new InfoMessage("Done!"));
 
@@ -66,6 +90,7 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 		}
 		baseFile = null;
 		aspectFile = null;
+		aspectFiles.clear();
 		//MessageDialog.openInformation(shell, "Info", "Weaving...");
 	}
 
@@ -95,6 +120,7 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 				}
 				else if (file.getFullPath().getFileExtension().equals("drl")){
 					aspectFile = file;
+					aspectFiles.add(file.getRawLocation().toOSString());
 				}
 			}
 		}
