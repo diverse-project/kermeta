@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
+import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
 import org.kermeta.art2.ui.editor.widget.JCommandButton;
 
@@ -35,8 +36,14 @@ public class CommandPanel extends JPanel {
         btSaveCommand.setKernel(kernel);
         btSave.setCommand(btSaveCommand);
 
+        JCommandButton btLoadLib = new JCommandButton("LoadLib");
+        LoadNewLibCommand btLoadLibCommand = new LoadNewLibCommand();
+        btLoadLibCommand.setKernel(kernel);
+        btLoadLib.setCommand(btLoadLibCommand);
+
         add(btAddNode);
         add(btSave);
+        add(btLoadLib);
 
         
 

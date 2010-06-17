@@ -35,8 +35,8 @@ public class Art2EditorPanel extends JPanel {
     private CommandPanel commandPanel;
 
     public Art2EditorPanel() {
+        kernel.setEditorPanel(this);
 
-               
 
 
         leftpanel.setOpaque(false);
@@ -74,15 +74,16 @@ public class Art2EditorPanel extends JPanel {
     public void load(String uri) {
         ContainerRoot nroot = Art2XmiHelper.load(uri);
         kernel.getModelHandler().merge(nroot);
-        for (ComponentType ct : kernel.getModelHandler().getActualModel().getComponentTypes()) {
-            ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
-            palette.addComponentTypePanel(ctp);
+        for (art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
+            for (art2.ComponentType ct : ctl.getSubComponentTypes()) {
+                ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
+                palette.addComponentTypePanel(ctp,ctl.getName());
+            }
+
+
         }
         //TODO CLEAN PALETTE
 
         //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
     }
-
-   
-
 }

@@ -18,19 +18,9 @@ public class App {
         jframe.setPreferredSize(new Dimension(800, 600));
 
         Art2EditorPanel artpanel = new Art2EditorPanel();
-        //TODO REMOVE
-
-        //java.class.path
-
-
-        artpanel.load("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2.xmi");
-
         jframe.add(artpanel,BorderLayout.CENTER);
-
-
 
         jframe.pack();
         jframe.setVisible(true);
-
     }
 }
