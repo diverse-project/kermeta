@@ -8,7 +8,7 @@ package org.smartadapters.core.resource.smARText.analysis;
 
 public class AspectPersistentReferenceResolver implements org.smartadapters.core.resource.smARText.ISmARTextReferenceResolver<org.smartadapters.core.Aspect, patternframework.PObject> {
 	
-	private org.smartadapters.core.resource.smARText.analysis.SmARTextDefaultResolverDelegate<org.smartadapters.core.Aspect, patternframework.PObject> delegate = new org.smartadapters.core.resource.smARText.analysis.SmARTextDefaultResolverDelegate<org.smartadapters.core.Aspect, patternframework.PObject>();
+	private IntraPatternResolverDelegate<org.smartadapters.core.Aspect, patternframework.PObject> delegate = new IntraPatternResolverDelegate<org.smartadapters.core.Aspect, patternframework.PObject>();
 	
 	public void resolve(java.lang.String identifier, org.smartadapters.core.Aspect container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.smartadapters.core.resource.smARText.ISmARTextReferenceResolveResult<patternframework.PObject> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
