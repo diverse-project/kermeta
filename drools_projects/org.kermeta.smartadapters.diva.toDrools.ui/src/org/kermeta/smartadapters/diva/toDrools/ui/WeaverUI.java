@@ -40,14 +40,14 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	public void run() {
 		if (baseFile != null && aspectFile != null && aspectFiles.size()>0){
 			IOConsole console = new EclipseConsole("SmartAdapters weaver for DiVA");
-			console.println(new InfoMessage("Weaving..."/*+aspectFiles.size()+" aspects..."*/));
+			console.println(new InfoMessage("Weaving "+aspectFiles.size()+" aspects..."));
 			
 			String[] params = new String[/*aspectFiles.size()+2*/3];
 			params[0] = "file:/"+baseFile.getRawLocation().toOSString();
 			params[1] = "file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"); 
 			//params[2] = aspectFile.getRawLocation().toOSString();
 			
-			
+			long start = System.currentTimeMillis();
 			int i = 2;
 			for(String aspect : aspectFiles){
 				/*console.println(new InfoMessage(aspect));
@@ -61,7 +61,7 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 			
 			
 
-			console.println(new InfoMessage("Done!"));
+			console.println(new InfoMessage("Done in "+(System.currentTimeMillis()-start)+" ms"));
 
 
 
@@ -69,8 +69,9 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 			System.out.println(file_uri);
 			try {
 				console.println(new InfoMessage("Cleaning..."));
+				start = System.currentTimeMillis();
 				KExecMain.run("main", file_uri, console, DIVA_KERMETA_CODE, ENTRY_POINT);
-				console.println(new InfoMessage("Done!"));
+				console.println(new InfoMessage("Done in "+(System.currentTimeMillis()-start)+" ms"));
 
 				java.io.File file;
 				file = new java.io.File(baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"));
