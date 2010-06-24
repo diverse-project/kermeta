@@ -1,0 +1,68 @@
+/* $Id:$ 
+ * Creation : June 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "main::resources::Main"
+@mainOperation "main"
+
+
+package main::resources;
+
+
+require kermeta
+require "./artAspect.ecore"
+require "platform:/resource/org.kermeta.art2.model/metamodel/art.ecore"
+//require "http://ArtAspect/2.0"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::utils
+
+using Art2Aspect
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
+
+class Context
+{
+	reference res : StringBuffer
+	reference cache : Hashtable<Object,String>
+	reference i : Integer
+	
+	operation generateName(o : Object):String is do
+		if (i.isVoid) then i:= 0 end
+		result :="var"+ i.toString()
+		cache.put(o,result)
+		i:=i+1
+	end
+	
+}
+
+aspect class AspectRoot
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		var name : String init ctx.generateName(self)
+		self.aspects.each{a |
+			a.pointcut.pointcutToDrools(ctx)
+		}
+	end
+}
+
+aspect class AspectDefinition
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		var name : String init ctx.generateName(self)
+		if self.pointcut != void then
+			self.pointcut.pointcutToDrools(ctx)
+		end
+	end	
+}
