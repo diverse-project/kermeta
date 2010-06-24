@@ -64,7 +64,6 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 			case Art2Package.COMPONENT_TYPE: return createComponentType();
 			case Art2Package.CONTAINER_NODE: return createContainerNode();
 			case Art2Package.CONTAINER_ROOT: return createContainerRoot();
-			case Art2Package.PORT_TYPE: return createPortType();
 			case Art2Package.PORT: return createPort();
 			case Art2Package.NAMESPACE: return createNamespace();
 			case Art2Package.DICTIONARY: return createDictionary();
@@ -134,16 +133,6 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 	public ContainerRoot createContainerRoot() {
 		ContainerRootImpl containerRoot = new ContainerRootImpl();
 		return containerRoot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PortType createPortType() {
-		PortTypeImpl portType = new PortTypeImpl();
-		return portType;
 	}
 
 	/**

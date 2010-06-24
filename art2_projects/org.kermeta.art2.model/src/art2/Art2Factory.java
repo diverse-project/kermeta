@@ -62,15 +62,6 @@ public interface Art2Factory extends EFactory {
 	ContainerRoot createContainerRoot();
 
 	/**
-	 * Returns a new object of class '<em>Port Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Port Type</em>'.
-	 * @generated
-	 */
-	PortType createPortType();
-
-	/**
 	 * Returns a new object of class '<em>Port</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

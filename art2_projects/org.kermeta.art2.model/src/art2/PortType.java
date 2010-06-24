@@ -20,7 +20,7 @@ package art2;
  * </p>
  *
  * @see art2.Art2Package#getPortType()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface PortType extends NamedElement {

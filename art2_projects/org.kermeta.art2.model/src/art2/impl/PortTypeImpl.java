@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class PortTypeImpl extends NamedElementImpl implements PortType {
+public abstract class PortTypeImpl extends NamedElementImpl implements PortType {
 	/**
 	 * The default value of the '{@link #isSynchrone() <em>Synchrone</em>}' attribute.
 	 * <!-- begin-user-doc -->
