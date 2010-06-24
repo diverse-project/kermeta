@@ -5,15 +5,8 @@
     <groupId>org.kermeta.art2</groupId>
     <artifactId>art2.model</artifactId>
     <name>ART2 :: MODEL</name>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.4.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
-        </repository>
-    </distributionManagement>
 
     <repositories>
         <repository>
@@ -82,4 +75,26 @@
     </properties>
 
 
+    <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+<!--
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+        </repository>
+    </distributionManagement>
+-->
 </project>
