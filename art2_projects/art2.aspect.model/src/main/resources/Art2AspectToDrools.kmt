@@ -5,64 +5,174 @@
  * Authors  : 
  *            bmorin
  */
-@mainClass "main::resources::Main"
+@mainClass "Art2Aspect::Main"
 @mainOperation "main"
 
 
-package main::resources;
+package Art2Aspect;
 
 
 require kermeta
 require "./artAspect.ecore"
-require "platform:/resource/org.kermeta.art2.model/metamodel/art.ecore"
+require "./Art2ToDrools.kmt"
 //require "http://ArtAspect/2.0"
 
 using kermeta::standard
 using kermeta::persistence
 using kermeta::utils
 
-using Art2Aspect
+using art2
 
 class Main
 {
-	operation main() : Void is do 
-		// TODO: implement 'main' operation
-	end
-}
-
-class Context
-{
-	reference res : StringBuffer
-	reference cache : Hashtable<Object,String>
-	reference i : Integer
-	
-	operation generateName(o : Object):String is do
-		if (i.isVoid) then i:= 0 end
-		result :="var"+ i.toString()
-		cache.put(o,result)
-		i:=i+1
+	operation main() : Void is 
+	do 
+		var ctx : Context init Context.new
+		ctx.cache := Hashtable<Object, String>.new
+		ctx.res := StringBuffer.new
+		
+		var aspectRoot : AspectRoot init loadAspect
+		aspectRoot.pointcutToDrools(ctx)
+		stdio.writeln(ctx.res.toString)
 	end
 	
+	operation loadAspect() : AspectRoot is 
+	do
+		var aspectURI : String init "file:/home/entimid2/workspace2/art2.aspect.model/src/main/resources/AspectRoot.xmi"
+		var aspectMetamodelURI : String init "platform:/resource/art2.aspect.model/src/main/resources/artAspect.ecore"
+		var rep : Repository init EMFRepository.new
+		var res : Resource
+		res ?= rep.createResource(aspectURI, aspectMetamodelURI)
+		res.load
+		result ?= res.one
+	end
 }
 
 aspect class AspectRoot
 {
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
-		var name : String init ctx.generateName(self)
 		self.aspects.each{a |
-			a.pointcut.pointcutToDrools(ctx)
+			a.pointcutToDrools(ctx)
 		}
 	end
 }
-
+		
 aspect class AspectDefinition
 {
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
-		var name : String init ctx.generateName(self)
+		var ruleName : String init if name!=void then name else ctx.generateName(self) end
+		ctx.res.append("rule \""+ruleName+"\"\n")
 		if self.pointcut != void then
+			ctx.res.append("when\n")
 			self.pointcut.pointcutToDrools(ctx)
 		end
 	end	
+}
+
+aspect class PointcutDefinition
+{	
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		portTypePatterns.each{ptp | ptp.pointcutToDrools(ctx)}
+		componentTypePatterns.each{ctp | ctp.pointcutToDrools(ctx)}
+		nodePatterns.each{np | np.pointcutToDrools(ctx)}
+	end		
+}
+
+aspect class NodePattern
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		componentPatterns.each{cp | cp.pointcutToDrools(ctx)}
+	
+		var i : Integer init 0
+	
+		var varName : String init "\t$"+ctx.generateName(self)
+		ctx.res.append(varName)
+		ctx.res.append(": art2.Node(")
+		
+		if(self.namePattern != void) then
+			ctx.res.append("name == \""+namePattern+"\"")//TODO regex
+			i := i+1
+		end
+		
+		if(self.componentPatterns.size > 0) then
+			var j : Integer init 0
+			if i > 0 then
+				ctx.res.append(", ")
+			end
+			self.componentPatterns.each{p |
+				if j>0 then ctx.res.append(", ") end
+				ctx.res.append("components contains $"+ctx.cache.getValue(p))
+				j := j+1
+			}
+			i := i+1
+		end
+				
+		ctx.res.append(")\n")
+	end
+}
+
+aspect class ComponentTypePattern
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		if(type != void) then
+			type.pointcutToDrools(ctx)
+		else
+			self.portPatterns.each{pp | pp.pointcutToDrools(ctx)}
+			
+			var varName : String init "\t$"+ctx.generateName(self)		
+			ctx.res.append(varName)
+		    ctx.res.append(": art2.ComponentType(")
+			
+			if(self.portPatterns.size > 0) then
+				var j : Integer init 0
+				self.portPatterns.each{pp |
+					if j>0 then ctx.res.append(", ") end
+					ctx.res.append("TODO cannot choose between required/provided PortTypeRef")
+					j := j+1
+				}
+			end
+			ctx.res.append(")\n")
+		end		
+	end
+}
+
+aspect class PortTypePattern
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		if(type != void) then
+			type.pointcutToDrools(ctx)
+		end
+	end
+}
+
+aspect class PortTypeRefPattern
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		if(ref != void) then
+			//ref.pointcutToDrools(ctx)
+		end
+	end
+}
+
+aspect class ComponentPattern
+{
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		var varName : String init "\t$"+ctx.generateName(self)
+		ctx.res.append(varName)
+		ctx.res.append(": art2.ComponentInstance(")
+		
+		if namePattern != void then
+			ctx.res.append("name == \""+namePattern+"\"")//TODO regex
+		end
+	
+		ctx.res.append(")\n")
+	end
 }
