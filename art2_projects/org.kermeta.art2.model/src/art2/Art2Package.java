@@ -325,13 +325,40 @@ public interface Art2Package extends EPackage {
 	int COMPONENT_TYPE__PROVIDED = DEPLOY_UNIT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Bean</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__BEAN = DEPLOY_UNIT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Start Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__START_METHOD = DEPLOY_UNIT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Stop Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__STOP_METHOD = DEPLOY_UNIT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = DEPLOY_UNIT_FEATURE_COUNT + 6;
+	int COMPONENT_TYPE_FEATURE_COUNT = DEPLOY_UNIT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.ContainerNodeImpl <em>Container Node</em>}' class.
@@ -866,6 +893,33 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_TYPE__PROVIDED = COMPONENT_TYPE__PROVIDED;
+
+	/**
+	 * The feature id for the '<em><b>Bean</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__BEAN = COMPONENT_TYPE__BEAN;
+
+	/**
+	 * The feature id for the '<em><b>Start Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__START_METHOD = COMPONENT_TYPE__START_METHOD;
+
+	/**
+	 * The feature id for the '<em><b>Stop Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__STOP_METHOD = COMPONENT_TYPE__STOP_METHOD;
 
 	/**
 	 * The feature id for the '<em><b>Childs</b></em>' reference list.
@@ -1728,6 +1782,39 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentType_Provided();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art2.ComponentType#getBean <em>Bean</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bean</em>'.
+	 * @see art2.ComponentType#getBean()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EAttribute getComponentType_Bean();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art2.ComponentType#getStartMethod <em>Start Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Start Method</em>'.
+	 * @see art2.ComponentType#getStartMethod()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EAttribute getComponentType_StartMethod();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art2.ComponentType#getStopMethod <em>Stop Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Stop Method</em>'.
+	 * @see art2.ComponentType#getStopMethod()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EAttribute getComponentType_StopMethod();
 
 	/**
 	 * Returns the meta object for class '{@link art2.ContainerNode <em>Container Node</em>}'.
@@ -2738,6 +2825,30 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT_TYPE__PROVIDED = eINSTANCE.getComponentType_Provided();
+
+		/**
+		 * The meta object literal for the '<em><b>Bean</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONENT_TYPE__BEAN = eINSTANCE.getComponentType_Bean();
+
+		/**
+		 * The meta object literal for the '<em><b>Start Method</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONENT_TYPE__START_METHOD = eINSTANCE.getComponentType_StartMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Stop Method</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONENT_TYPE__STOP_METHOD = eINSTANCE.getComponentType_StopMethod();
 
 		/**
 		 * The meta object literal for the '{@link art2.impl.ContainerNodeImpl <em>Container Node</em>}' class.

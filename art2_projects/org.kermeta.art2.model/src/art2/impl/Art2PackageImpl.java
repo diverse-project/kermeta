@@ -471,6 +471,33 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getComponentType_Bean() {
+		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponentType_StartMethod() {
+		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponentType_StopMethod() {
+		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getContainerNode() {
 		return containerNodeEClass;
 	}
@@ -1247,6 +1274,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(componentTypeEClass, COMPONENT_TYPE__INTEGRATION_PATTERNS);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__PROVIDED);
+		createEAttribute(componentTypeEClass, COMPONENT_TYPE__BEAN);
+		createEAttribute(componentTypeEClass, COMPONENT_TYPE__START_METHOD);
+		createEAttribute(componentTypeEClass, COMPONENT_TYPE__STOP_METHOD);
 
 		containerNodeEClass = createEClass(CONTAINER_NODE);
 		createEReference(containerNodeEClass, CONTAINER_NODE__COMPONENTS);
@@ -1426,6 +1456,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getComponentType_IntegrationPatterns(), this.getIntegrationPattern(), null, "integrationPatterns", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_ExtraFonctionalProperties(), this.getExtraFonctionalProperty(), null, "extraFonctionalProperties", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_Provided(), this.getPortTypeRef(), null, "provided", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponentType_Bean(), ecorePackage.getEString(), "bean", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponentType_StartMethod(), ecorePackage.getEString(), "startMethod", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponentType_StopMethod(), ecorePackage.getEString(), "stopMethod", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerNodeEClass, ContainerNode.class, "ContainerNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainerNode_Components(), this.getComponentInstance(), null, "components", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

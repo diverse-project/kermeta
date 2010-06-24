@@ -41,6 +41,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link art2.impl.ComponentTypeImpl#getIntegrationPatterns <em>Integration Patterns</em>}</li>
  *   <li>{@link art2.impl.ComponentTypeImpl#getExtraFonctionalProperties <em>Extra Fonctional Properties</em>}</li>
  *   <li>{@link art2.impl.ComponentTypeImpl#getProvided <em>Provided</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getBean <em>Bean</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getStartMethod <em>Start Method</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getStopMethod <em>Stop Method</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,6 +119,66 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * @ordered
 	 */
 	protected EList<PortTypeRef> provided;
+
+	/**
+	 * The default value of the '{@link #getBean() <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBean()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BEAN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBean() <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBean()
+	 * @generated
+	 * @ordered
+	 */
+	protected String bean = BEAN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStartMethod() <em>Start Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStartMethod()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String START_METHOD_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStartMethod() <em>Start Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStartMethod()
+	 * @generated
+	 * @ordered
+	 */
+	protected String startMethod = START_METHOD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStopMethod() <em>Stop Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStopMethod()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STOP_METHOD_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStopMethod() <em>Stop Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStopMethod()
+	 * @generated
+	 * @ordered
+	 */
+	protected String stopMethod = STOP_METHOD_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -284,6 +347,69 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getBean() {
+		return bean;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBean(String newBean) {
+		String oldBean = bean;
+		bean = newBean;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__BEAN, oldBean, bean));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStartMethod() {
+		return startMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStartMethod(String newStartMethod) {
+		String oldStartMethod = startMethod;
+		startMethod = newStartMethod;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__START_METHOD, oldStartMethod, startMethod));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStopMethod() {
+		return stopMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStopMethod(String newStopMethod) {
+		String oldStopMethod = stopMethod;
+		stopMethod = newStopMethod;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__STOP_METHOD, oldStopMethod, stopMethod));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -321,6 +447,12 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return getExtraFonctionalProperties();
 			case Art2Package.COMPONENT_TYPE__PROVIDED:
 				return getProvided();
+			case Art2Package.COMPONENT_TYPE__BEAN:
+				return getBean();
+			case Art2Package.COMPONENT_TYPE__START_METHOD:
+				return getStartMethod();
+			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
+				return getStopMethod();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -355,6 +487,15 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				getProvided().clear();
 				getProvided().addAll((Collection<? extends PortTypeRef>)newValue);
 				return;
+			case Art2Package.COMPONENT_TYPE__BEAN:
+				setBean((String)newValue);
+				return;
+			case Art2Package.COMPONENT_TYPE__START_METHOD:
+				setStartMethod((String)newValue);
+				return;
+			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
+				setStopMethod((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -385,6 +526,15 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 			case Art2Package.COMPONENT_TYPE__PROVIDED:
 				getProvided().clear();
 				return;
+			case Art2Package.COMPONENT_TYPE__BEAN:
+				setBean(BEAN_EDEFAULT);
+				return;
+			case Art2Package.COMPONENT_TYPE__START_METHOD:
+				setStartMethod(START_METHOD_EDEFAULT);
+				return;
+			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
+				setStopMethod(STOP_METHOD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -409,6 +559,12 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return extraFonctionalProperties != null;
 			case Art2Package.COMPONENT_TYPE__PROVIDED:
 				return provided != null && !provided.isEmpty();
+			case Art2Package.COMPONENT_TYPE__BEAN:
+				return BEAN_EDEFAULT == null ? bean != null : !BEAN_EDEFAULT.equals(bean);
+			case Art2Package.COMPONENT_TYPE__START_METHOD:
+				return START_METHOD_EDEFAULT == null ? startMethod != null : !START_METHOD_EDEFAULT.equals(startMethod);
+			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
+				return STOP_METHOD_EDEFAULT == null ? stopMethod != null : !STOP_METHOD_EDEFAULT.equals(stopMethod);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -425,6 +581,12 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (factoryBean: ");
 		result.append(factoryBean);
+		result.append(", bean: ");
+		result.append(bean);
+		result.append(", startMethod: ");
+		result.append(startMethod);
+		result.append(", stopMethod: ");
+		result.append(stopMethod);
 		result.append(')');
 		return result.toString();
 	}

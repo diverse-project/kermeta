@@ -22,6 +22,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link art2.ComponentType#getIntegrationPatterns <em>Integration Patterns</em>}</li>
  *   <li>{@link art2.ComponentType#getExtraFonctionalProperties <em>Extra Fonctional Properties</em>}</li>
  *   <li>{@link art2.ComponentType#getProvided <em>Provided</em>}</li>
+ *   <li>{@link art2.ComponentType#getBean <em>Bean</em>}</li>
+ *   <li>{@link art2.ComponentType#getStartMethod <em>Start Method</em>}</li>
+ *   <li>{@link art2.ComponentType#getStopMethod <em>Stop Method</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,5 +158,83 @@ public interface ComponentType extends DeployUnit {
 	 * @generated
 	 */
 	EList<PortTypeRef> getProvided();
+
+	/**
+	 * Returns the value of the '<em><b>Bean</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bean</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bean</em>' attribute.
+	 * @see #setBean(String)
+	 * @see art2.Art2Package#getComponentType_Bean()
+	 * @model
+	 * @generated
+	 */
+	String getBean();
+
+	/**
+	 * Sets the value of the '{@link art2.ComponentType#getBean <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bean</em>' attribute.
+	 * @see #getBean()
+	 * @generated
+	 */
+	void setBean(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Start Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Start Method</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Start Method</em>' attribute.
+	 * @see #setStartMethod(String)
+	 * @see art2.Art2Package#getComponentType_StartMethod()
+	 * @model
+	 * @generated
+	 */
+	String getStartMethod();
+
+	/**
+	 * Sets the value of the '{@link art2.ComponentType#getStartMethod <em>Start Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Start Method</em>' attribute.
+	 * @see #getStartMethod()
+	 * @generated
+	 */
+	void setStartMethod(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Stop Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stop Method</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stop Method</em>' attribute.
+	 * @see #setStopMethod(String)
+	 * @see art2.Art2Package#getComponentType_StopMethod()
+	 * @model
+	 * @generated
+	 */
+	String getStopMethod();
+
+	/**
+	 * Sets the value of the '{@link art2.ComponentType#getStopMethod <em>Stop Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Stop Method</em>' attribute.
+	 * @see #getStopMethod()
+	 * @generated
+	 */
+	void setStopMethod(String value);
 
 } // ComponentType
