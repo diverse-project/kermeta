@@ -8,9 +8,10 @@
 package kompose;
 
 require kermeta
-require "http://www.kermeta.org/kompose"
+require "platform:/lookup/org.kermeta.kompose.core.model/model/kompose.ecore"
 require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
 require "kompose.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
@@ -56,7 +57,7 @@ aspect abstract class Mergeable
 		}
 		/* Merging properties */
 		props.each{p|
-			ctx.logger.printDebug(self.toString)
+			KLogger.getDefault().asType(KLogger).printDebug(self.toString)
 			var mergeable : Boolean init Mergeable.isSuperTypeOf(p.type)
 			var selfValue : Object init self.get(p)
 			var otherValue : Object init other.get(p)
@@ -64,37 +65,37 @@ aspect abstract class Mergeable
 			if p.upper == 1 then
 				/* Property only exists in one object */
 				if selfValue == void then
-					ctx.trace.addTrace(KTrace.new.newModelTrace(void,other))
+					TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(void,other))
 					result.~set(p, otherValue)
 				else
 					if other.get(p) == void then
-						ctx.trace.addTrace(KTrace.new.newModelTrace(self,void))
+						TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(self,void))
 						result.~set(p, selfValue)
 					else
 						if mergeable then
 							var me1 : Mergeable		me1 ?= selfValue
 							var me2 : Mergeable		me2 ?= otherValue								
 							if me1 == void or me2 == void then
-								ctx.logger.printError("Elements are not mergeable")
+								KLogger.getDefault().asType(KLogger).printError("Elements are not mergeable")
 							else						
 								if me1.getSignature == me2.getSignature then
 									/* p is a relation */
 									if p.isComposite then
 										result.~set(p, me1.merge(me2, ctx, composer))
 									else
-										ctx.trace.addTrace(KTrace.new.newModelTrace(me1,me2))
+										TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(me1,me2))
 										result.~set(p, me1)
 									end
 								else
-									ctx.logger.printError("Elements signature do not match: m1="+me1.toString+"/m2="+me2.toString)
+									KLogger.getDefault().asType(KLogger).printError("Elements signature do not match: m1="+me1.toString+"/m2="+me2.toString)
 								end
 							end
 						else
 							if selfValue == otherValue then
-								ctx.trace.addTrace(KTrace.new.newModelTrace(self,other))
+								TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(self,other))
 								result.~set(p, selfValue)
 							else
-								ctx.logger.printError("conflicting value for property " + p.name + " picking the first value")
+								KLogger.getDefault().asType(KLogger).printError("conflicting value for property " + p.name + " picking the first value")
 								// look for method to resolve conflict into the specialization
 								result.~set(p,composer.resolveConflict(selfValue,otherValue,p))
 								//result.~set(p, selfValue)
@@ -107,14 +108,14 @@ aspect abstract class Mergeable
 			/* Test on collection size because on compiled mode, collection are
 				initialized as empty ones and not null ones */
 				if selfValue == void then
-					ctx.trace.addTrace(KTrace.new.newModelTrace(void,other))
+					TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(void,other))
 					result.~set(p, otherValue)
 				else
 					if otherValue == void then
-						ctx.trace.addTrace(KTrace.new.newModelTrace(self,void))
+						TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(self,void))
 						result.~set(p, selfValue)
 					else
-						ctx.trace.addTrace(KTrace.new.newModelTrace(self,other))
+						TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(self,other))
 						result := mergeCollections(self,other,result,p,ctx,composer)
 					end
 				end
@@ -159,7 +160,7 @@ aspect abstract class Mergeable
 						if p.isComposite then
 							col.add(me.merge(me2, ctx, composer))
 						else
-							ctx.trace.addTrace(KTrace.new.newModelTrace(me,me2))
+							TraceModel.getDefault().asType(TraceModel).addTrace(KTrace.new.newModelTrace(me,me2))
 							col.add(me)
 						end
 					}
@@ -174,6 +175,7 @@ aspect abstract class Mergeable
 				if matching.size == 0 then
 					if not composer.mode.equals(Modes.INTERSECTION) then
 						col.add(me)
+						//stdio.writeln("We should hide "+me.getStringID)
 					end
 				/*else
 					matching.each{ me2 | 
@@ -212,15 +214,12 @@ class MergeContext {
 	attribute comp : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
 	reference resources: kermeta::persistence::EMFResource[0..*]
 	attribute objectIndex : Hashtable<kermeta::standard::Integer,kermeta::standard::Object>
-	reference logger : KLogger
-	
-	reference trace : TraceModel
 	
 	/**
 	 * Initialization of context information containers
 	 * param logger : a KLogger object to be able to log informations
 	 */
-	operation initialize(logger : KLogger, trace : TraceModel) is do
+	operation initialize() is do
 		left := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		right := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		any := Hashtable<kermeta::standard::Integer, Mergeable>.new
@@ -228,8 +227,6 @@ class MergeContext {
 		processed := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
 		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
 		objectIndex := Hashtable<kermeta::standard::Integer,kermeta::standard::Object>.new
-		self.logger := logger
-		self.trace := trace
 	end
 	
 	/**
@@ -254,20 +251,20 @@ class MergeContext {
 	 * param element : element to indexate
 	 */
 	operation indexate(element : Object) : Void is do
-		self.logger.printDebug("indexate : test "+element.toString+" : "+element.isInstanceOf(kermeta::language::behavior::Expression).toString)
+		KLogger.getDefault().asType(KLogger).printDebug("indexate : test "+element.toString+" : "+element.isInstanceOf(kermeta::language::behavior::Expression).toString)
 		if not element.isInstanceOf(kermeta::language::behavior::Expression) and not element.isInstanceOf(kermeta::language::structure::Tag) then
-			self.logger.printDebug("compose merge.kmt : resouceContains "+element.toString)
+			KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : resouceContains "+element.toString)
 			if self.resourceContains(element) then
-				self.logger.printDebug("compose merge.kmt : contains "+element.toString)
+				KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : contains "+element.toString)
 				if not self.objectIndex.containsKey(element.oid) then
-					self.logger.printDebug("indexate merge.kmt : add "+element.toString)
+					KLogger.getDefault().asType(KLogger).printDebug("indexate merge.kmt : add "+element.toString)
 					self.objectIndex.put(element.oid,element)
-					self.logger.printDebug("indexate merge.kmt : properties "+element.toString)
+					KLogger.getDefault().asType(KLogger).printDebug("indexate merge.kmt : properties "+element.toString)
 					var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
-					self.logger.printDebug("indexate merge.kmt : each "+properties.toString)
+					KLogger.getDefault().asType(KLogger).printDebug("indexate merge.kmt : each "+properties.toString)
 					properties.each{ p |
 						if p.upper != 1 then
-							self.logger.printDebug("indexate merge.kmt : get "+p.toString)
+							KLogger.getDefault().asType(KLogger).printDebug("indexate merge.kmt : get "+p.toString)
 							var objects : Collection<Object> objects?=element.~get(p)
 							objects.each{obj|
 								if not obj.isKindOf(kermeta::language::behavior::Expression) then
@@ -275,7 +272,7 @@ class MergeContext {
 								end
 							}
 						else
-							self.logger.printDebug("indexate merge.kmt : indexate recursive "+element.~get(p).toString)
+							KLogger.getDefault().asType(KLogger).printDebug("indexate merge.kmt : indexate recursive "+element.~get(p).toString)
 							if not p.isKindOf(kermeta::language::behavior::Expression) then
 								self.indexate(element.~get(p))
 							end
@@ -358,17 +355,12 @@ class MergeContext {
 	operation isProcessed(e : Mergeable) : kermeta::standard::Boolean is do
 		result := processed.getValue(e.oid()) != void
 	end
-	
-	operation getTrace() : TraceModel is do
-		result := self.trace
-	end
 }
 
 /** This class contain the "compose" operation that should be used to recusively merge two models from their roots */
 class ModelElementComposer
 {
 	reference resources: kermeta::persistence::EMFResource [0..*]
-	reference logger : KLogger
 	
 	/**
 	 * Global method of composition
@@ -377,32 +369,30 @@ class ModelElementComposer
 	 * param logger : KLogger object
 	 * returns a mergeable object
 	 */
-	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger, trace : TraceModel, composer : Composer) : Mergeable is do
-		self.logger := logger
-		var ctx : MergeContext init MergeContext.new
-		self.logger.printDebug("compose merge.kmt : initialize")
-		ctx.initialize(logger,trace)
-		self.logger.printDebug("compose merge.kmt : addAll")
+	operation compose(m1 : Mergeable, m2 : Mergeable, composer : Composer) : Mergeable is do
+		var ctx : MergeContext init MergeContext.new.initialize
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : initialize")
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : addAll")
 		ctx.resources.addAll(self.resources)
-		self.logger.printDebug("compose merge.kmt : indexate m1")
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : indexate m1")
 		ctx.indexate(m1)
-		self.logger.printDebug("compose merge.kmt : indexate m2")
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : indexate m2")
 		ctx.indexate(m2)
-		self.logger.printDebug("compose merge.kmt : end indexate")
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : end indexate")
 		if m1 == void or m2 == void then
 			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 			ex.message := "Model elements are not mergeable"
 			raise ex
 		end
-		self.logger.printDebug("compose merge.kmt : trying to compose "+m1.toString+" / "+m2.toString)
-		self.logger.printDebug("compose merge.kmt : signatures "+(m1.getSignature==m2.getSignature).toString)
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : trying to compose "+m1.toString+" / "+m2.toString)
+		KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : signatures "+(m1.getSignature==m2.getSignature).toString)
 		if m1.getSignature == m2.getSignature then
-			self.logger.printDebug("compose merge.kmt : merging")
+			KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : merging")
 			result := m1.merge(m2, ctx, composer)
-			self.logger.printDebug("compose merge.kmt : fixReferences")
+			KLogger.getDefault().asType(KLogger).printDebug("compose merge.kmt : fixReferences")
 			result := fixReferences(result, ctx)			
 		else
-			self.logger.printInfo("Models not mergeable")
+			KLogger.getDefault().asType(KLogger).printInfo("Models not mergeable")
 		end
 	end	
 	
@@ -466,7 +456,7 @@ class ModelElementComposer
 						objres.keys.each{ k |
 							objs.remove(k)
 							objs.add(objres.getValue(k))
-							self.logger.printDebug("OBJRES = "+result.toString + "." + p.name + " + " + objres.getValue(k).toString)
+							KLogger.getDefault().asType(KLogger).printDebug("OBJRES = "+result.toString + "." + p.name + " + " + objres.getValue(k).toString)
 						}
 						objs ?= result.get(p)
 					end

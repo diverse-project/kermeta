@@ -5,7 +5,7 @@
  * author: Mickael Clavreul - mclavreu(at)irisa.fr - Triskell Team
  * 
  */
- package kompose;
+package kompose;
 
 require "merge.kmt" 
 
@@ -42,11 +42,10 @@ class KomposeMain {
         result.primaryModelURI := c.primaryModelURI
         result.aspectModelURI := c.aspectModelURI
         result.composedModelURI := c.composedModelURI
+        result.metamodelName := c.metamodelName
         result.repository := EMFRepository.new
-        result.logger := KLogger.new
-        result.logger.initialize
-        result.logger.enableLog(logging)
-        result.trace := TraceModel.new
+        KLogger.getDefault().asType(KLogger).initialize
+        KLogger.getDefault().asType(KLogger).enableLog(logging)
         result.mode := c.mode
      end
 }
@@ -56,21 +55,21 @@ class KomposeMain {
  */
 aspect abstract class Composer {
 
-	reference resources: kermeta::persistence::EMFResource [0..*]   
-	reference logger : KLogger
-	reference trace : TraceModel
+	reference resources: kermeta::persistence::EMFResource [0..*]
 	reference repository : EMFRepository
+	reference meta_resources : kermeta::persistence::EMFResource [0..*]
 	
 	/**
 	 * Loads a specific model from uri
 	 * param path : path of the model to load
 	 * returns the root of the model as a Mergeable element
 	 */
-	operation loadModel(path : String) : kompose::Mergeable is do
+	operation loadModel(path : String, res : kermeta::persistence::EMFResource[0..*]) : kompose::Mergeable is do
     	var resource : kermeta::persistence::EMFResource
        	resource ?= repository.getResource(path)
         resource.load
-        self.resources.add(resource)
+        //self.resources.add(resource)
+        res.add(resource)
     	result ?= resource.instances.one
    end
    
@@ -106,9 +105,11 @@ aspect abstract class Composer {
     // If the Create directive is to be used, the "classes" property of the context
     // should be populated with the classes that might be instanciated using the
     // create directive
-    operation createContext(model : Mergeable) : Context is do
+    operation createContext(model : Mergeable, metamodel : Mergeable) : Context is do
+    //operation createContext(model : Mergeable) : Context is do
     	result := Context.new
-    	result.initialize(model)
+    	result.initialize(model, metamodel)
+    	//result.initialize(model)
     end
 	
 	/**
@@ -116,13 +117,15 @@ aspect abstract class Composer {
 	 * param model : root element of the model
 	 * param directives : set of directives to be applied
 	 */
-	operation executeDirectives(model : Mergeable, directives : oset ElementDirective[*]) is do
+	operation executeDirectives(model : Mergeable, metamodel : Mergeable, directives : oset ElementDirective[*]) is do
+	//operation executeDirectives(model : Mergeable, directives : oset ElementDirective[*]) is do
 		// create the context
-		var context : Context init createContext(model)
+		var context : Context init createContext(model, metamodel)
+		//var context : Context init createContext(model)
 
 		directives.each{ d | 
 			d.context := context
-			d.execute
+			d.execute()
 		}
 	end
 	
@@ -136,45 +139,51 @@ aspect abstract class Composer {
 	 */
 	operation compose() : Mergeable is do
 		// load models to compose
-		self.logger.printInfo("Loading models...")
-		var pm : Mergeable init loadModel(primaryModelURI)
-		var am : Mergeable init loadModel(aspectModelURI)
+		KLogger.getDefault().asType(KLogger).printInfo("Loading models...")
+		var pm : Mergeable init loadModel(primaryModelURI, self.resources)
+		var am : Mergeable init loadModel(aspectModelURI, self.resources)
+		stdio.writeln("KOMPOSE DEBUG: metamodel "+metamodelName)
+		var mm : Mergeable init loadModel(metamodelName, self.meta_resources)
 		var cm : Mergeable
-		self.logger.printInfo("OK")
+		KLogger.getDefault().asType(KLogger).printInfo("OK")
 		
 		// execute pre-directives
-		self.logger.printInfo("Executing predirectives on primary model...")
-		executeDirectives(pm, predirectivesPM)
-		self.logger.printInfo("OK")
-		self.logger.printInfo("Executing predirectives on aspect model...")
-		executeDirectives(am, predirectivesAM)
-		self.logger.printInfo("OK")
+		KLogger.getDefault().asType(KLogger).printInfo("Executing predirectives on primary model...")
+		executeDirectives(pm, mm, predirectivesPM)
+		//executeDirectives(pm, predirectivesPM)
+		KLogger.getDefault().asType(KLogger).printInfo("OK")
+		KLogger.getDefault().asType(KLogger).printInfo("Executing predirectives on aspect model...")
+		executeDirectives(am, mm, predirectivesAM)
+		//executeDirectives(am, predirectivesAM)
+		KLogger.getDefault().asType(KLogger).printInfo("OK")
 		
 		// perform the composition
-		self.logger.printInfo("Composing models...")
+		KLogger.getDefault().asType(KLogger).printInfo("Composing models...")
 		var composer : ModelElementComposer init ModelElementComposer.new
 		composer.resources.addAll(self.resources)
-		cm := composer.compose(pm, am,self.logger,self.trace, self)
+		cm := composer.compose(pm, am, self)
 		
 		// execute post-directives
-		self.logger.printInfo("Executing postdirectives on composed model...")
-		executeDirectives(cm, postdirectives)
-		self.logger.printInfo("OK")
+		KLogger.getDefault().asType(KLogger).printInfo("Executing postdirectives on composed model...")
+		executeDirectives(cm, mm, postdirectives)
+		//executeDirectives(cm, postdirectives)
+		KLogger.getDefault().asType(KLogger).printInfo("OK")
 		
 		// save the result
+		//cm := pm
 		if cm.isVoid() then
-			self.logger.printError("Saving composed model is impossible...")
-			self.logger.printError("See previous errors for explanations.")
+			KLogger.getDefault().asType(KLogger).printError("Saving composed model is impossible...")
+			KLogger.getDefault().asType(KLogger).printError("See previous errors for explanations.")
 		else
-			self.logger.printInfo("Saving composed model...")
+			KLogger.getDefault().asType(KLogger).printInfo("Saving composed model...")
 			saveModel(cm, composedModelURI)
 		end
-        self.logger.printInfo("OK")
+        KLogger.getDefault().asType(KLogger).printInfo("OK")
         result := cm
         
     rescue (ex : DirectiveRuntimeException)
-   		self.logger.printError("\n" + ex.toString)
-   		self.logger.printInfo("composition aborded.")
+   		KLogger.getDefault().asType(KLogger).printError("\n" + ex.toString)
+   		KLogger.getDefault().asType(KLogger).printInfo("composition aborded.")
 	end
 }
 
@@ -292,6 +301,38 @@ aspect class Set
 	end
 }
 
+aspect class Destroy{	
+	/* resolve the value */
+	operation resolveValue() : Object is do
+		result := ~value.getElement(context)
+		if result == void then 
+			var ex : ValueNotFoundException init ValueNotFoundException.new
+			ex.destroyDirective := self
+			raise ex
+		end 
+	end
+}
+
+aspect class Merge{
+	operation resolveLeftRef() : Object is do
+		result := left.getElement(context)
+		if result == void then 
+			var ex : ValueNotFoundException init ValueNotFoundException.new
+			ex.mergeDirective := self
+			raise ex
+		end 
+	end
+	
+	operation resolveRightRef() : Object is do
+		result := right.getElement(context)
+		if result == void then 
+			var ex : ValueNotFoundException init ValueNotFoundException.new
+			ex.mergeDirective := self
+			raise ex
+		end 
+	end
+}
+
 /** 
  * ElementRef class
  */
@@ -322,7 +363,12 @@ aspect class NameRef
 		names.add(str)
 		
 		// checks the name of the first package
-		if names.elementAt(0) != c.model.getStringID then
+		/*if names.elementAt(0) != c.metamodel.getStringID then
+			stdio.writeln("KOMPOSE DEBUG: "+ names.elementAt(0).toString +" Not found in the metamodel")
+		else
+			stdio.writeln("KOMPOSE DEBUG: "+names.elementAt(0).toString+" found !")
+		end*/
+		if (names.elementAt(0) != c.model.getStringID).andThen{e|names.elementAt(0) != c.metamodel.getStringID} then
 		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
 			ex.elementRef := self
 			raise ex
@@ -331,32 +377,99 @@ aspect class NameRef
 		names.removeAt(0)
 		
 		// iterates on names
-		var ne : Mergeable 
+		var ne : Mergeable
 		var cur : Mergeable init c.model
-		var found : Boolean
+		var found : Boolean init false
 		
 		// iterates on each name and contained resources
-		names.each{ n |
-			found := false
-			getContents(cur).each{ e | 
-				ne ?= e
+		
+		names.each{n|
+			found := false 
+			from var it : kermeta::standard::Iterator<Object> init getContents(cur).iterator()
+			until
+				it.isOff or found
+			loop
+				ne ?= it.next()
 				if ne != void then
 					//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
 					if n == ne.getStringID then 
 						cur := ne
-						found := true						
+						found := true					
+					end
+				end
+			end
+			if not found then
+				cur := void
+			end
+		}
+		/*names.each{ n |
+			found := false
+			getContents(cur).each{ e | 
+				ne ?= e
+				if ne != void then
+					stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+					if n == ne.getStringID then 
+						cur := ne
+						found := true					
 					end
 				end
 			}
 			if not found then
-				var ex : ElementNotResolvedException init ElementNotResolvedException.new
-				ex.elementRef := self
-				raise ex
+				cur := void
 			end
 		}
+		*/
+		if cur == void then
+			cur := c.metamodel
+			names.each{n|
+				found := false
+				from var it : kermeta::standard::Iterator<Object> init getContents(cur).iterator()
+				until
+					it.isOff or found
+				loop
+					ne ?= it.next()
+					if ne != void then
+						//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+						if n == ne.getStringID then 
+							cur := ne
+							found := true					
+						end
+					end
+				end
+				if not found then
+					cur := void
+				end
+			}
+		end
+		/*stdio.writeln("KOMPOSE DEBUG: found "+found.toString)
+		if cur == void then
+			cur := c.metamodel
+			names.each{n|
+				found := false
+				getContents(cur).each{e|
+					ne ?= e
+					if ne != void then
+						stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+						if n == ne.getStringID then 
+							cur := ne
+							found := true					
+						end
+					end
+				}
+				if not found then
+					cur := void
+				end
+			}
+		end*/
+		if cur == void then
+			var ex : ElementNotResolvedException init ElementNotResolvedException.new
+			ex.elementRef := self
+			stdio.writeln("KOMPOSE DEBUG: Element "+ names.last +" not found in the model/metamodel!")
+			raise ex
+		end
 		result := cur
-	rescue (e : kermeta::exceptions::Exception)
-		stdio.writeln(e.message)
+		rescue (e : kermeta::exceptions::Exception)
+			stdio.writeln("KOMPOSE ERROR MESSAGE: "+e.message)
 		result := void	
 	end
 	
@@ -435,6 +548,7 @@ aspect abstract class Change
 		//select the property
 		var prop : seq Property[*] init 
 			mclass.allAttribute.select{ p | 
+				//stdio.writeln("KOMPOSE DEBUG: attribute "+p.name+" found in targetObj")
 		    	p.name == propertyName 
 			}
 		// check that it exists
@@ -506,11 +620,14 @@ aspect class VoidLiteral
 aspect class Context
 {
 	reference model : Mergeable
+	reference metamodel : Mergeable
 	reference variables : Hashtable<String, Object>
 	reference classes : Hashtable<String, Class>
 	
-	operation initialize(model : Mergeable) is do
+	operation initialize(model : Mergeable, metamodel : Mergeable) is do
+	//operation initialize(model : Mergeable) is do
 		self.model := model
+		self.metamodel := metamodel
 		variables := Hashtable<String, Object>.new
 		classes := Hashtable<String, Class>.new
 	end
@@ -555,6 +672,14 @@ class ValueNotFoundException inherits ElementNotResolvedException {
 		getter is do result ?= directive end
 		setter is do directive := value elementRef := value.~value end
 		
+	property destroyDirective : Destroy
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.~value end
+	
+	property mergeDirective : Merge
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.left end
+		
 	method toString() : String from DirectiveRuntimeException is do
 		result := super + "\nValue object "+ elementRef.toString +" could not be resolved"
 	end
@@ -576,8 +701,17 @@ class ClassNotFoundException inherits DirectiveRuntimeException {
 	property createDirective : Create 
 		getter is do result ?= directive end
 		setter is do directive := value end
+		
+	property destroyDirective : Destroy 
+		getter is do result ?= directive end
+		setter is do directive := value end
 
 	method toString() : String from DirectiveRuntimeException is do
-		 result := super + "\nMeta-Class "+ createDirective.className +" could not be found"
+		if createDirective != void then
+			result := super + "\nMeta-Class "+ createDirective.className +" could not be found"
+		end
+		if destroyDirective != void then
+			result := super + "\nMeta-Class "+destroyDirective.toString +" could not be found"
+		end
 	end
 }
