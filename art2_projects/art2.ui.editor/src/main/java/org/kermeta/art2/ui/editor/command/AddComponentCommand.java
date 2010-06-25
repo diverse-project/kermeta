@@ -49,7 +49,7 @@ public class AddComponentCommand implements Command {
                 //INSTANCIATE MODEL ELEMENTS
                 art2.Port port = art2.Art2Factory.eINSTANCE.createPort();
                 instance.getProvided().add(port);
-                port.setName(ref.getName());
+                //port.setName(ref.getName());
                 port.setPortTypeRef(ref);
                 
                 //ADDING NEW PORT TO UI
@@ -61,7 +61,7 @@ public class AddComponentCommand implements Command {
                 //INSTANCIATE MODEL ELEMENTS
                 art2.Port port = art2.Art2Factory.eINSTANCE.createPort();
                 instance.getRequired().add(port);
-                port.setName(ref.getName());
+                //port.setName(ref.getName());
                 port.setPortTypeRef(ref);
 
                 //ADDING NEW PORT TO UI

@@ -15,6 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddComponentCommand;
+import org.kermeta.art2.ui.editor.command.MoveComponentCommand;
+import org.kermeta.art2.ui.framework.elements.ComponentPanel;
+import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 
 /**
@@ -36,44 +39,55 @@ public class NodeDragTargetListener extends DropTarget {
         target = _target;
     }
 
+    private Boolean isDropAccept(Object o) {
+        if (o instanceof ComponentPanel) {
+            return true;
+        }
+        if (o instanceof ComponentTypePanel) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * callback when DnD is finished
      * @param arg0
      */
     @Override
     public void drop(DropTargetDropEvent arg0) {
-        AddComponentCommand command = new AddComponentCommand();
-        command.setKernel(kernel);
-        command.setNodepanel(target);
         try {
-            command.execute(arg0.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType)));
+            Object o = arg0.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+            if (isDropAccept(o)) {
+                if (o instanceof ComponentTypePanel) {
+                    AddComponentCommand command = new AddComponentCommand();
+                    command.setKernel(kernel);
+                    command.setNodepanel(target);
+                    command.execute(o);
+                }
+                if (o instanceof ComponentPanel) {
+                    MoveComponentCommand command = new MoveComponentCommand();
+                    command.setKernel(kernel);
+                    command.setNodepanel(target);
+                    command.execute(o);
+                }
+                kernel.getModelPanel().repaint();
+                kernel.getModelPanel().revalidate();
+                arg0.dropComplete(true);
+            } else {
+                arg0.rejectDrop();
+            }
         } catch (Exception ex) {
             Logger.getLogger(NodeDragTargetListener.class.getName()).log(Level.SEVERE, null, ex);
+            arg0.rejectDrop();
         }
 
-        /*
-        IComponentControl newctrl = ((IComponentView) target).getControl();
-        if (newctrl != null) {
-        IComponentCable newcable = ConcreteFactory.getInstance().newCableMonoToMono();
-        if (!newcable.plug(newctrl, panel.previousSelectedPort)) {
-        ((IComponent) newcable).destroy();
-        arg0.rejectDrop();
-        ((IComponentTable)panel.tableview.getControl()).warningBadCable();
-        } else {
-        panel.tableview.getControl().addChild((IComponent) newcable);
-        }
-        }*/
-        kernel.getModelPanel().repaint();
-        kernel.getModelPanel().revalidate();
-
-        arg0.dropComplete(true);
     }
 
     /**
      * not implemented
      * @param dtde
      */
-    //@Override
+    @Override
     public void dragEnter(DropTargetDragEvent dtde) {
     }
 
@@ -81,7 +95,7 @@ public class NodeDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dragExit(DropTargetEvent arg0) {
     }
 
@@ -89,7 +103,7 @@ public class NodeDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dragOver(DropTargetDragEvent arg0) {
     }
 
@@ -97,7 +111,7 @@ public class NodeDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dropActionChanged(DropTargetDragEvent arg0) {
     }
 }

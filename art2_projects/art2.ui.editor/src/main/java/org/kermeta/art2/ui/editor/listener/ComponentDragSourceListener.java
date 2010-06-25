@@ -5,6 +5,7 @@
 package org.kermeta.art2.ui.editor.listener;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -18,47 +19,33 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceMotionListener;
 import javax.swing.SwingUtilities;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
-import org.kermeta.art2.ui.editor.command.CleanRequirePortBinding;
-import org.kermeta.art2.ui.editor.widget.FlightPortPanel;
-import org.kermeta.art2.ui.framework.elements.Binding;
-import org.kermeta.art2.ui.framework.elements.PortPanel;
-import org.kermeta.art2.ui.framework.elements.PortPanel.PortNature;
+import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 
 /**
  * implementation of the drag source listener for the Dnd of a component
  * @author francoisfouquet
  */
-public class PortDragSourceListener extends DragSourceAdapter implements DragSourceMotionListener, DragGestureListener {
+public class ComponentDragSourceListener extends DragSourceAdapter implements DragSourceMotionListener, DragGestureListener {
 
+    private Container sourceNode = null;
     private Art2UIKernel kernel;
-    private PortPanel eventSourcePanel;
+    private ComponentPanel flightComponent;
     private DragSource dragSource;
     private DragGestureEvent dragOriginEvent;
     private Transferable transferable;
     private Point origin2;
-    private FlightPortPanel tempPanel= new FlightPortPanel();
-
-    private Binding tempBinding = null; //new Binding();
 
     /**
      * constructor
      * @param _p
      * @param _panel
      */
-    public PortDragSourceListener(PortPanel _ct, Art2UIKernel _kernel) {
-        this.eventSourcePanel = _ct;
+    public ComponentDragSourceListener(ComponentPanel _ct, Art2UIKernel _kernel) {
+        //this.panel = _panel;
+        this.flightComponent = _ct;
         this.kernel = _kernel;
-
-        if( eventSourcePanel.getNature().equals(PortNature.MESSAGE) ){
-            tempBinding = new Binding(Binding.Type.multi);
-        }
-        if( eventSourcePanel.getNature().equals(PortNature.SERVICE) ){
-            tempBinding = new Binding(Binding.Type.simple);
-        }
-
-        
         this.dragSource = DragSource.getDefaultDragSource();
-        this.dragSource.createDefaultDragGestureRecognizer((Component) this.eventSourcePanel, DnDConstants.ACTION_MOVE, this);
+        this.dragSource.createDefaultDragGestureRecognizer((Component) this.flightComponent, DnDConstants.ACTION_MOVE, this);
         dragSource.addDragSourceMotionListener(this);
         transferable = new Transferable() {
 
@@ -74,7 +61,7 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
 
             @Override
             public Object getTransferData(DataFlavor arg0) {
-                return eventSourcePanel;
+                return flightComponent;
             }
         };
 
@@ -86,7 +73,7 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
      */
     @Override
     public void dragMouseMoved(DragSourceDragEvent dsde) {
-        if (dsde.getDragSourceContext().getComponent().equals(this.eventSourcePanel)) {
+        if (dsde.getDragSourceContext().getComponent().equals(this.flightComponent)) {
 
             Point p = dsde.getLocation();
             Point p2 = (Point) p.clone();
@@ -95,10 +82,8 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
             //tempPanel.setLocation(new Point(p2.x - origin2.x, p2.y - origin2.y));
             // kernel.getModelPanel().setFlightObject(flightComponent, new Point(p2.x - origin2.x, p2.y - origin2.y));
 
-            tempPanel.setBounds(p2.x - origin2.x, p2.y - origin2.y, eventSourcePanel.getWidth(), eventSourcePanel.getHeight());
-
+            flightComponent.setBounds(p2.x - origin2.x, p2.y - origin2.y, flightComponent.getWidth(), flightComponent.getHeight());
             kernel.getModelPanel().repaint();
-           // kernel.getModelPanel().revalidate();
         }
     }
 
@@ -108,15 +93,17 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
      */
     @Override
     public void dragDropEnd(DragSourceDropEvent dsde) {
+        if (!dsde.getDropSuccess()) {
+            sourceNode.add(this.flightComponent);
+        }
+
         //tv.showTrashZone(false);
 
         //App.view.desktop.remove(flightComponent);
         //tv.add(flightComponent);
 
         //flightComponent.setActive(false);
-        kernel.getModelPanel().unsetFlightObject(tempPanel);
-        kernel.getModelPanel().removeBinding(tempBinding);
-
+        kernel.getModelPanel().unsetFlightObject(flightComponent);
         kernel.getModelPanel().repaint();
         kernel.getModelPanel().revalidate();
     }
@@ -127,20 +114,10 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
      */
     @Override
     public void dragGestureRecognized(DragGestureEvent dge) {
-
-        //STEP 0 CLEAN SELECTED PORT
-        CleanRequirePortBinding commandclean = new CleanRequirePortBinding();
-        commandclean.setKernel(kernel);
-        commandclean.setPortpanel(eventSourcePanel);
-        commandclean.execute(null);
-
-        //STEP 1 CREATE FLIGHT BINDING
-        //if()
-
-
-
         //tempPanel = new ComponentPanel();
         //tempPanel.setPreferredSize(new Dimension(200,200));
+        sourceNode = this.flightComponent.getParent();
+
 
         dragOriginEvent = dge;
         Point origin = dragOriginEvent.getDragOrigin();
@@ -153,16 +130,14 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
 
         // flightComponent.setActive(true);
 
-        tempBinding.setFrom(eventSourcePanel);
-
-        
-
-        tempBinding.setTo(tempPanel);
-        kernel.getModelPanel().addBinding(tempBinding);
-        kernel.getModelPanel().setFlightObject(tempPanel);
+        sourceNode.remove(this.flightComponent);
+        kernel.getModelPanel().setFlightObject(this.flightComponent);
 
         // tv.remove(flightComponent);
         // App.view.desktop.add(flightComponent);
+
+        kernel.getModelPanel().repaint();
+        kernel.getModelPanel().revalidate();
 
     }
 }

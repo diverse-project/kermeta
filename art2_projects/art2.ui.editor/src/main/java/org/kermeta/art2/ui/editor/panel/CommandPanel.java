@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.kermeta.art2.ui.editor.panel;
 
 import java.awt.event.MouseAdapter;
@@ -11,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
+import org.kermeta.art2.ui.editor.command.AddHubCommand;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
 import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
@@ -22,9 +22,14 @@ import org.kermeta.art2.ui.editor.widget.JCommandButton;
  */
 public class CommandPanel extends JPanel {
 
-    public CommandPanel(Art2UIKernel kernel){
+    public CommandPanel(Art2UIKernel kernel) {
         this.setOpaque(false);
-        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        JCommandButton btAddHub = new JCommandButton("Add hub");
+        AddHubCommand btAddHubCommand = new AddHubCommand();
+        btAddHubCommand.setKernel(kernel);
+        btAddHub.setCommand(btAddHubCommand);
 
         JCommandButton btAddNode = new JCommandButton("Add node");
         AddNodeCommand btAddNodeCommand = new AddNodeCommand();
@@ -41,12 +46,11 @@ public class CommandPanel extends JPanel {
         btLoadLibCommand.setKernel(kernel);
         btLoadLib.setCommand(btLoadLibCommand);
 
+        add(btAddHub);
         add(btAddNode);
         add(btSave);
         add(btLoadLib);
 
-        
 
     }
-
 }
