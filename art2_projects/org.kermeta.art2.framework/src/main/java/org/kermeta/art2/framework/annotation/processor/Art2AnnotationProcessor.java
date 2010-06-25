@@ -32,13 +32,8 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process() {
 
-      //  System.out.println(env.getOptions());
-
         art2.ContainerRoot root = art2.Art2Factory.eINSTANCE.createContainerRoot();
         Art2Utility.root_$eq(root);
-
-
-
 
         //GENERATE & RUN ComponentType visitor
         Collection<ComponentTypeVisitor> ctVisitors = new ArrayList<ComponentTypeVisitor>();
@@ -47,30 +42,12 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
             ComponentTypeVisitor ctv = new ComponentTypeVisitor(env, root);
             ctVisitors.add(ctv);
             decl.accept(ctv);
-            
-            //GENERATE FACTORY
-            //try {
-                //Writer writer = env.getFiler().createSourceFile("totoFactory");
-                //writer.append("import *;");
-                //writer.close();
-           // } catch (IOException ex) {
-           //     Logger.getLogger(Art2AnnotationProcessor.class.getName()).log(Level.SEVERE, null, ex);
-           // }
-
         }
 
-        //GENERER ART2 LIB
-
-        //art2.ComponentTypeLibrary newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary();
-        //for (ComponentTypeVisitor ctv : ctVisitors) {
-        //    newlib.getSubComponentTypes().add(ctv.getComponentType());
-        //}
-        //root.getLibrariy().add(newlib);
-
         Art2Generator.generatePortWrapper(root, env.getFiler());
+        Art2Generator.generatePortProxy(root, env.getFiler());
         Art2Generator.generateFactory(root, env.getFiler());
         Art2XmiHelper.save("META-INF/art2Lib.xmi", root);
-
 
     }
 }

@@ -26,4 +26,19 @@ object Art2Utility {
     }
   }
 
+  def getRelatedBinding(component : art2.ComponentInstance,root: art2.ContainerRoot) : java.util.List[art2.Binding] = {
+    var res = new java.util.ArrayList[art2.Binding]();
+    root.getBindings.foreach{b=>
+      component.getProvided.find({p=> b.getPorts.contains(p)}) match {
+        case Some(e)=> res.add(b)
+        case None =>
+      }
+      component.getRequired.find({p=> b.getPorts.contains(p)}) match {
+        case Some(e)=> res.add(b)
+        case None =>
+      }
+    }
+    res
+  }
+
 }

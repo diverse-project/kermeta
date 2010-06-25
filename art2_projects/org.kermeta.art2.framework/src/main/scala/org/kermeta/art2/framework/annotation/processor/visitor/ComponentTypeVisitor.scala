@@ -22,19 +22,6 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     return componentType;
   }
 
-  /*
-  private def foundOrCreatePortType(qName:String,root : ContainerRoot) : PortType ={
-    root.getPortTypes.find({pt=>pt.getName.equals(qName)}) match {
-      case Some(pt)=> pt//TODO CHECK COSISTENCY}
-      case None=> {
-          var newpt = art2.Art2Factory.eINSTANCE.createServicePortType
-          newpt.setName(qName)
-          root.getPortTypes.add(newpt)
-          newpt
-        }
-    }
-  }
-*/
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
 
     componentType = art2.Art2Factory.eINSTANCE.createComponentType();
@@ -57,43 +44,66 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
           newlib.setName(ctLibName)
           newlib.getSubComponentTypes.add(componentType)
           root.getLibrariy.add(newlib)
-      }
+        }
     }
 
     /* CHECK PROVIDED PORTS */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
-      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{types=>
+      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{req=>
 
-        /* TODO , remove that :  CE CODE EST IGNOBLE MAIS RECOMMANDE PAR SUN !!! */
-        var tv = new PortTypeVisitor
-        try {
-          types.className
-        } catch {
-          case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
-        }
-        //root.getPortTypes.add(tv.dataType)
+        var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
+        ptreqREF.setName(req.name)
 
-        var ptREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
-        ptREF.setName(types.name)
-        ptREF.setRef(Art2Utility.getOraddPortType(tv.dataType))
-        componentType.getProvided.add(ptREF)
+        ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
+            case org.kermeta.art2.annotation.PortType.SERVICE => {
+                var tv = new ServicePortTypeVisitor
+                try { req.className
+                } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
+                tv.dataType
+              }
+            case org.kermeta.art2.annotation.PortType.MESSAGE => {
+                var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                mpt.setName("org.kermeta.art2.framework.MessagePort")
+                req.filter.foreach{ndts=>
+                  var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                  ndt.setName(ndts)
+                  mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+                }
+                mpt
+              }
+            case _ => null
+          }))
+
+        componentType.getProvided.add(ptreqREF)
 
       }
     }
     /* CHECK REQUIRED PORTS */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]).value.foreach{req=>
+
         var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
         ptreqREF.setName(req.name)
 
-        var tv = new PortTypeVisitor
-        try {
-          req.className
-        } catch {
-          case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)
-        }
-        ptreqREF.setRef(Art2Utility.getOraddPortType(tv.dataType))
-
+        ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
+            case org.kermeta.art2.annotation.PortType.SERVICE => {
+                var tv = new ServicePortTypeVisitor
+                try { req.className
+                } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
+                tv.dataType
+              }
+            case org.kermeta.art2.annotation.PortType.MESSAGE => {
+                var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                mpt.setName("org.kermeta.art2.framework.MessagePort")
+                req.filter.foreach{ndts=>
+                  var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                  ndt.setName(ndts)
+                  mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+                }
+                mpt
+              }
+            case _ => null
+          }))
         componentType.getRequired.add(ptreqREF)
       }
     }
@@ -106,61 +116,37 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
   }
 
   override def visitMethodDeclaration(methoddef : MethodDeclaration) = {
+
+    /* STEP 0 : PROCESS PORTS & PORT ANNOTATION */
+    var portAnnotations : List[org.kermeta.art2.annotation.Port] = Nil
+
     var annotationPort = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Port])
-    if(annotationPort != null){
-      componentType.getProvided.find({provided=> provided.getName.equals(annotationPort.name) }) match {
+    if(annotationPort != null){ portAnnotations = portAnnotations ++ List(annotationPort) }
+
+    var annotationPorts = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Ports])
+    if(annotationPorts != null){ portAnnotations = portAnnotations ++ annotationPorts.value.toList }
+
+    portAnnotations.foreach{annot=>
+      componentType.getProvided.find({provided=> provided.getName.equals(annot.name) }) match {
         case Some(ptref) => {
             var ptREFmapping = art2.Art2Factory.eINSTANCE.createPortTypeMapping
             ptREFmapping.setBeanMethodName(methoddef.getSimpleName)
-            ptREFmapping.setServiceMethodName(annotationPort.method)
+            ptREFmapping.setServiceMethodName(annot.method)
             ptref.getMappings.add(ptREFmapping)
 
             //TODO GENERATED AND CHECK OPERATION
 
           }
-        case None => env.getMessager.printError("ProvidedPort not found "+annotationPort.name)
+        case None => env.getMessager.printError("ProvidedPort not found "+annot.name)
       }
-
-      /*
-       root.getPortTypes.find({pt => pt.getName.equals(annotationPort.`type`)}) match {
-       case Some(pt) => {
-
-
-
-
-       var ptREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
-       ptREF.setName(annotationPort.name)
-       ptREF.setRef(pt)
-
-       var ptREFmapping = art2.Art2Factory.eINSTANCE.createPortTypeMapping
-       ptREFmapping.setBeanMethodName(methoddef.getSimpleName)
-       ptREFmapping.setServiceMethodName(annotationPort.name)
-
-       ptREF.getMappings.add(ptREFmapping)
-
-
-       pt match {
-       case spt : ServicePortType => {
-       //GENERATE OPERATION
-       var newop = art2.Art2Factory.eINSTANCE.createOperation();
-       newop.setName(methoddef.getSimpleName());
-       var tv = new DataTypeVisitor
-       methoddef.getReturnType().accept(tv);
-       newop.setReturnType(tv.getDataType())
-       spt.getOperations().add(newop);
-       }
-       case _ =>
-       }
-
-
-
-
-       componentType.getProvided.add(ptREF)
-            
-       }
-       case None => println("Error, PortType not found !")
-       }
-       */
     }
+
+    /* STEP 1 : PROCESS START & STOP METHOD */
+    var startAnnot = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Start])
+    var stopAnnot = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Stop])
+    if(startAnnot != null){ componentType.setStartMethod(methoddef.getSimpleName)}
+    if(stopAnnot != null){ componentType.setStopMethod(methoddef.getSimpleName)}
+
+    
   }
 }

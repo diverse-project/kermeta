@@ -6,6 +6,7 @@ package org.kermeta.art2.framework.annotation.processor.visitor;
 
 import com.sun.mirror.declaration.MethodDeclaration;
 import com.sun.mirror.declaration.ParameterDeclaration;
+import com.sun.mirror.declaration.TypeDeclaration;
 import com.sun.mirror.type.AnnotationType;
 import com.sun.mirror.type.ArrayType;
 import com.sun.mirror.type.ClassType;
@@ -25,7 +26,7 @@ import org.kermeta.art2.framework.Art2Utility;
  *
  * @author ffouquet
  */
-public class PortTypeVisitor implements TypeVisitor {
+public class ServicePortTypeVisitor implements TypeVisitor {
 
     art2.ServicePortType dataType = art2.Art2Factory.eINSTANCE.createServicePortType();
 
@@ -57,8 +58,7 @@ public class PortTypeVisitor implements TypeVisitor {
     @Override
     public void visitClassType(ClassType t) {
 
-        this.visitInterfaceType((InterfaceType) t);
-
+       this.visitTypeDeclaration(t.getDeclaration());
     }
 
     @Override
@@ -68,31 +68,7 @@ public class PortTypeVisitor implements TypeVisitor {
 
     @Override
     public void visitInterfaceType(InterfaceType t) {
-        dataType.setName(t.getDeclaration().getQualifiedName());
-        for (MethodDeclaration m : t.getDeclaration().getMethods()) {
-
-            //BUILD NEW OPERATION
-            art2.Operation newo = art2.Art2Factory.eINSTANCE.createOperation();
-            dataType.getOperations().add(newo);
-            newo.setName(m.getSimpleName());
-
-            //BUILD RETURN TYPE
-            DataTypeVisitor rtv = new DataTypeVisitor();
-            m.getReturnType().accept(rtv);
-            newo.setReturnType(Art2Utility.getOraddDataType(rtv.dataType));
-
-            //BUILD PARAMETER
-            for(ParameterDeclaration p :  m.getParameters()){
-
-                art2.Parameter newp = art2.Art2Factory.eINSTANCE.createParameter();
-                newo.getParameters().add(newp);
-                newp.setName(p.getSimpleName());
-
-                DataTypeVisitor ptv = new DataTypeVisitor();
-                p.getType().accept(ptv);
-                newp.setType(Art2Utility.getOraddDataType(ptv.dataType));
-            }
-        }
+        this.visitTypeDeclaration(t.getDeclaration());
     }
 
     @Override
@@ -113,5 +89,35 @@ public class PortTypeVisitor implements TypeVisitor {
     @Override
     public void visitWildcardType(WildcardType t) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void visitTypeDeclaration(TypeDeclaration t) {
+
+        dataType.setName(t.getQualifiedName());
+        for (MethodDeclaration m : t.getMethods()) {
+
+            //BUILD NEW OPERATION
+            art2.Operation newo = art2.Art2Factory.eINSTANCE.createOperation();
+            dataType.getOperations().add(newo);
+            newo.setName(m.getSimpleName());
+
+            //BUILD RETURN TYPE
+            DataTypeVisitor rtv = new DataTypeVisitor();
+            m.getReturnType().accept(rtv);
+            newo.setReturnType(Art2Utility.getOraddDataType(rtv.dataType));
+
+            //BUILD PARAMETER
+            for (ParameterDeclaration p : m.getParameters()) {
+
+                art2.Parameter newp = art2.Art2Factory.eINSTANCE.createParameter();
+                newo.getParameters().add(newp);
+                newp.setName(p.getSimpleName());
+
+                DataTypeVisitor ptv = new DataTypeVisitor();
+                p.getType().accept(ptv);
+                newp.setType(Art2Utility.getOraddDataType(ptv.dataType));
+            }
+        }
+
     }
 }
