@@ -1398,4 +1398,17 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_k8WfoH7KEd-cNrayh6tSVA" id="(0.7428571428571429,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_k8WfoX7KEd-cNrayh6tSVA" id="(0.13725490196078433,1.0)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_WpfFYIAnEd-XctqwnIzGoA" type="3002" source="_vY9HBByWEd-8waU98cXZ2Q" target="_8LYAcH7JEd-cNrayh6tSVA">
+    <children xmi:type="notation:Node" xmi:id="_WpgTgIAnEd-XctqwnIzGoA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WpgTgYAnEd-XctqwnIzGoA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Wpg6kIAnEd-XctqwnIzGoA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Wpg6kYAnEd-XctqwnIzGoA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_WpfFYYAnEd-XctqwnIzGoA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WpfFYoAnEd-XctqwnIzGoA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="art.ecore#//ContainerRoot/mBindings"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WpfFY4AnEd-XctqwnIzGoA" points="[20, -1, -982, 199]$[996, -52, -6, 148]$[1001, -180, -1, 20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Wpkk8IAnEd-XctqwnIzGoA" id="(0.803921568627451,0.40476190476190477)"/>
+  </edges>
 </notation:Diagram>

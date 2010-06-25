@@ -12,6 +12,7 @@ import art2.ComponentType;
 import art2.ComponentTypeLibrary;
 import art2.ContainerNode;
 import art2.ContainerRoot;
+import art2.MBinding;
 import art2.MessageHub;
 import art2.PortType;
 import art2.Repository;
@@ -46,6 +47,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link art2.impl.ContainerRootImpl#getPortTypes <em>Port Types</em>}</li>
  *   <li>{@link art2.impl.ContainerRootImpl#getLibrariy <em>Librariy</em>}</li>
  *   <li>{@link art2.impl.ContainerRootImpl#getMessageHub <em>Message Hub</em>}</li>
+ *   <li>{@link art2.impl.ContainerRootImpl#getMBindings <em>MBindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +133,16 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * @ordered
 	 */
 	protected EList<MessageHub> messageHub;
+
+	/**
+	 * The cached value of the '{@link #getMBindings() <em>MBindings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMBindings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MBinding> mBindings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,6 +264,18 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<MBinding> getMBindings() {
+		if (mBindings == null) {
+			mBindings = new EObjectContainmentEList<MBinding>(MBinding.class, this, Art2Package.CONTAINER_ROOT__MBINDINGS);
+		}
+		return mBindings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -271,6 +295,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return ((InternalEList<?>)getLibrariy()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return ((InternalEList<?>)getMessageHub()).basicRemove(otherEnd, msgs);
+			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+				return ((InternalEList<?>)getMBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -299,6 +325,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return getLibrariy();
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return getMessageHub();
+			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+				return getMBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,6 +372,10 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				getMessageHub().clear();
 				getMessageHub().addAll((Collection<? extends MessageHub>)newValue);
 				return;
+			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+				getMBindings().clear();
+				getMBindings().addAll((Collection<? extends MBinding>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -380,6 +412,9 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				getMessageHub().clear();
 				return;
+			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+				getMBindings().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -408,6 +443,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return librariy != null && !librariy.isEmpty();
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return messageHub != null && !messageHub.isEmpty();
+			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+				return mBindings != null && !mBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

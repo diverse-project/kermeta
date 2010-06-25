@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link art2.ContainerRoot#getPortTypes <em>Port Types</em>}</li>
  *   <li>{@link art2.ContainerRoot#getLibrariy <em>Librariy</em>}</li>
  *   <li>{@link art2.ContainerRoot#getMessageHub <em>Message Hub</em>}</li>
+ *   <li>{@link art2.ContainerRoot#getMBindings <em>MBindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,5 +162,21 @@ public interface ContainerRoot extends EObject {
 	 * @generated
 	 */
 	EList<MessageHub> getMessageHub();
+
+	/**
+	 * Returns the value of the '<em><b>MBindings</b></em>' containment reference list.
+	 * The list contents are of type {@link art2.MBinding}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>MBindings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>MBindings</em>' containment reference list.
+	 * @see art2.Art2Package#getContainerRoot_MBindings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MBinding> getMBindings();
 
 } // ContainerRoot

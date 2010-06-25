@@ -22,6 +22,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/integrationPatterns"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/extraFonctionalProperties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/provided"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/bean"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/startMethod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/stopMethod"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/components"/>
@@ -35,6 +38,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/portTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/librariy"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/messageHub"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/mBindings"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//PortType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//PortType/synchrone"/>

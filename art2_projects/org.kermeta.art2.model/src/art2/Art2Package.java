@@ -480,13 +480,22 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_ROOT__MESSAGE_HUB = 7;
 
 	/**
+	 * The feature id for the '<em><b>MBindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_ROOT__MBINDINGS = 8;
+
+	/**
 	 * The number of structural features of the '<em>Container Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT_FEATURE_COUNT = 8;
+	int CONTAINER_ROOT_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.PortTypeImpl <em>Port Type</em>}' class.
@@ -1936,6 +1945,17 @@ public interface Art2Package extends EPackage {
 	EReference getContainerRoot_MessageHub();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link art2.ContainerRoot#getMBindings <em>MBindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>MBindings</em>'.
+	 * @see art2.ContainerRoot#getMBindings()
+	 * @see #getContainerRoot()
+	 * @generated
+	 */
+	EReference getContainerRoot_MBindings();
+
+	/**
 	 * Returns the meta object for class '{@link art2.PortType <em>Port Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2941,6 +2961,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference CONTAINER_ROOT__MESSAGE_HUB = eINSTANCE.getContainerRoot_MessageHub();
+
+		/**
+		 * The meta object literal for the '<em><b>MBindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER_ROOT__MBINDINGS = eINSTANCE.getContainerRoot_MBindings();
 
 		/**
 		 * The meta object literal for the '{@link art2.impl.PortTypeImpl <em>Port Type</em>}' class.

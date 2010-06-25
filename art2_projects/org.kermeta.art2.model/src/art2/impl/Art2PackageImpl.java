@@ -597,6 +597,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getContainerRoot_MBindings() {
+		return (EReference)containerRootEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPortType() {
 		return portTypeEClass;
 	}
@@ -1290,6 +1299,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(containerRootEClass, CONTAINER_ROOT__PORT_TYPES);
 		createEReference(containerRootEClass, CONTAINER_ROOT__LIBRARIY);
 		createEReference(containerRootEClass, CONTAINER_ROOT__MESSAGE_HUB);
+		createEReference(containerRootEClass, CONTAINER_ROOT__MBINDINGS);
 
 		portTypeEClass = createEClass(PORT_TYPE);
 		createEAttribute(portTypeEClass, PORT_TYPE__SYNCHRONE);
@@ -1472,6 +1482,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getContainerRoot_PortTypes(), this.getPortType(), null, "portTypes", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_Librariy(), this.getComponentTypeLibrary(), null, "librariy", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_MessageHub(), this.getMessageHub(), null, "messageHub", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerRoot_MBindings(), this.getMBinding(), null, "mBindings", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portTypeEClass, PortType.class, "PortType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortType_Synchrone(), ecorePackage.getEBoolean(), "synchrone", null, 0, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
