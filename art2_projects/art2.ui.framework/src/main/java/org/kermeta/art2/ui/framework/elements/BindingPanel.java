@@ -54,26 +54,34 @@ public class BindingPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5F));
         g2d.setStroke(new BasicStroke(5, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
+
+
         for (Binding b : bindings) {
-            g2d.setColor(new Color(243, 238, 39, 150));
+            //g2d.setColor(new Color(243, 238, 39, 150));
             Point p1 = null;
             Point ptemp = new Point();
-            ptemp = ((JComponent) b.getFromPort()).getLocationOnScreen();
-            ptemp.setLocation(ptemp.getX() + (((JComponent) b.getFromPort()).getWidth() / 2), ptemp.getY() + (((JComponent) b.getFromPort()).getHeight() / 2));
+            ptemp = b.getFrom().getLocationOnScreen();
+            ptemp.setLocation(ptemp.getX() + (b.getFrom().getWidth() / 2), ptemp.getY() + (b.getFrom().getHeight() / 2));
             SwingUtilities.convertPointFromScreen(ptemp, this);
             p1 = ptemp;
             Point p2 = null;
-            ptemp = ((JComponent) b.getToPort()).getLocationOnScreen();
-            ptemp.setLocation(ptemp.getX() + (((JComponent) b.getToPort()).getWidth() / 2), ptemp.getY() + (((JComponent) b.getToPort()).getHeight() / 2));
+            ptemp = b.getTo().getLocationOnScreen();
+            ptemp.setLocation(ptemp.getX() + (b.getTo().getWidth() / 2), ptemp.getY() + (b.getTo().getHeight() / 2));
             SwingUtilities.convertPointFromScreen(ptemp, this);
             p2 = ptemp;
             if (p1 != null && p2 != null) {
+                /*
+                if (b.getSelected()) {
+                    g2d.setColor(new Color(243, 0, 0, 150));
+                } else {
+                    g2d.setColor(new Color(243, 238, 39, 150));
+                }*/
+                g2d.setColor(b.getActualColor());
+
                 drawCable(g2d, p1, p2);
             }
         }
 
         g.setColor(new Color(255, 255, 255, 150));
-
-        
     }
 }

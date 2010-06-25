@@ -74,6 +74,12 @@ public class ModelPanel extends JLayeredPane {
         revalidate();
     }
 
+    public void addHub(JPanel p) {
+        nodePanel.add(p);
+        repaint();
+        revalidate();
+    }
+
     public void addBinding(Binding b) {
         bindingPanel.addBinding(b);
         repaint();

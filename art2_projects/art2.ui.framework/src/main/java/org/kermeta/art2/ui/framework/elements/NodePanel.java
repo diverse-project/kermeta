@@ -5,19 +5,31 @@
 package org.kermeta.art2.ui.framework.elements;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import org.kermeta.art2.ui.framework.RoundedTitledPanel;
+import org.kermeta.art2.ui.framework.SelectElement;
 
 /**
  *
  * @author ffouquet
  */
-public class NodePanel extends RoundedTitledPanel {
+public class NodePanel extends RoundedTitledPanel implements SelectElement {
 
     public NodePanel() {
 
         this.setBackground(new Color(100, 100, 100, 150));
+    }
+
+    private Boolean selected= false;
+
+    @Override
+    public void setSelected(Boolean _selected) {
+        selected = _selected;
+        active = _selected;
+    }
+
+    @Override
+    public Boolean getSelected() {
+        return selected;
     }
 /*
     @Override

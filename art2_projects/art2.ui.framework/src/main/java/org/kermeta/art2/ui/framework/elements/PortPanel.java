@@ -22,9 +22,30 @@ import javax.swing.JPanel;
 public class PortPanel extends JPanel {
 
     public enum PortType {
-
         REQUIRED, PROVIDED
     };
+    public enum PortNature {
+        MESSAGE, SERVICE
+    };
+
+    private PortNature nature = null;
+
+    public PortNature getNature() {
+        return nature;
+    }
+
+    public void setNature(PortNature pt) {
+        nature = pt;
+        if (pt.equals(PortNature.MESSAGE)) {
+            actualFillColor = new Color(255, 127, 36, 240);
+        }
+        if (pt.equals(PortNature.SERVICE)) {
+            actualFillColor = new Color(0, 0, 0, 150);
+        }
+    }
+
+
+
     private Color borderColor = Color.WHITE;
     private String title = "";
 

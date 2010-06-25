@@ -33,7 +33,7 @@ public class RoundPanel extends JPanel {
     private JPanel down = new JPanel();
     private static final int SHADOW_SIZE = 20;
     private BufferedImage shadow;
-    private boolean active = false;
+    protected boolean active = false;
     private Color backgroundColor = new Color(0, 0, 0, 200);
 
     @Override

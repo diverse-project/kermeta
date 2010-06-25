@@ -8,19 +8,20 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Panel;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
  *
  * @author ffouquet
  */
-public class ThreePartRoundedTitledPanel extends RoundedTitledPanel {
+public class ThreePartRoundedPanel extends RoundedTitledPanel {
 
     private JPanel c_left = new JPanel();
     private JPanel c_center = new JPanel();
     private JPanel c_right = new JPanel();
 
-    public ThreePartRoundedTitledPanel() {
+    public ThreePartRoundedPanel() {
         c_left.setOpaque(false);
         c_center.setOpaque(false);
         c_right.setOpaque(false);
@@ -34,15 +35,15 @@ public class ThreePartRoundedTitledPanel extends RoundedTitledPanel {
         this.content.add(c_right, BorderLayout.EAST);
     }
 
-    public Component addLeft(JPanel p) {
+    public Component addLeft(JComponent p) {
         return c_left.add(p);
     }
 
-    public Component addRight(JPanel p) {
+    public Component addRight(JComponent p) {
         return c_right.add(p);
     }
 
-    public Component addCenter(JPanel p) {
+    public Component addCenter(JComponent p) {
         return c_center.add(p);
     }
 

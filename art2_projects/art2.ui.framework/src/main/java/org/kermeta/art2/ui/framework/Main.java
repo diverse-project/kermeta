@@ -8,13 +8,11 @@ import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.ModelPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import org.jdesktop.swingx.JXTitledPanel;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
+import org.kermeta.art2.ui.framework.elements.HubPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
 
@@ -41,6 +39,11 @@ public class Main {
         model.addNode(node1);
 
 
+        HubPanel hub1 = new HubPanel();
+        hub1.setTitle("topic1");
+        model.addHub(hub1);
+
+
         ComponentPanel c1 = new ComponentPanel();
         ComponentPanel c2 = new ComponentPanel();
         ComponentPanel c3 = new ComponentPanel();
@@ -48,26 +51,49 @@ public class Main {
 
         PortPanel p11 = new PortPanel();
         p11.setType(PortType.PROVIDED);
+        p11.setNature(PortPanel.PortNature.SERVICE);
         PortPanel p12 = new PortPanel();
         p12.setType(PortType.REQUIRED);
+        p12.setNature(PortPanel.PortNature.SERVICE);
         PortPanel p21 = new PortPanel();
         p21.setType(PortType.PROVIDED);
+        p21.setNature(PortPanel.PortNature.SERVICE);
         PortPanel p22 = new PortPanel();
         p22.setType(PortType.REQUIRED);
+        p22.setNature(PortPanel.PortNature.SERVICE);
         PortPanel p23 = new PortPanel();
         p23.setType(PortType.REQUIRED);
-
-        p11.setTitle("PORT11");
-        p12.setTitle("PORT12");
-        p21.setTitle("PORT21");
-        p22.setTitle("PORT22");
-        p23.setTitle("PORT23");
+        p23.setNature(PortPanel.PortNature.SERVICE);
+        PortPanel p24 = new PortPanel();
+        p24.setType(PortType.REQUIRED);
+        p24.setNature(PortPanel.PortNature.MESSAGE);
 
 
-        Binding b = new Binding();
-        b.setFromPort(p11);
-        b.setToPort(p22);
+
+        p11.setTitle("P11");
+        p12.setTitle("P12");
+        p21.setTitle("P21");
+        p22.setTitle("P22");
+        p23.setTitle("P23");
+        p24.setTitle("P24");
+
+
+        Binding b = new Binding(Binding.Type.simple);
+        b.setFrom(p11);
+        b.setTo(p22);
         model.addBinding(b);
+
+        Binding sb = new Binding(Binding.Type.simple);
+        sb.setSelected(true);
+        sb.setFrom(p12);
+        sb.setTo(p23);
+        model.addBinding(sb);
+
+        Binding mb = new Binding(Binding.Type.multi);
+        mb.setFrom(p24);
+        mb.setTo(hub1);
+        model.addBinding(mb);
+
 
         c1.setTitle("c1");
         c1.addLeft(p11);
@@ -76,6 +102,7 @@ public class Main {
         c2.addLeft(p21);
         c2.addRight(p22);
         c2.addRight(p23);
+        c2.addRight(p24);
 
         node1.setTitle("node1");
 
