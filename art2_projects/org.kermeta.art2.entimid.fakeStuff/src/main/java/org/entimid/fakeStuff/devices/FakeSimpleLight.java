@@ -7,11 +7,16 @@ import java.awt.Graphics2D;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import org.entimid.framework.OnOffService;
 import org.entimid.framework.SimpleActionService;
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.Port;
+import org.kermeta.art2.annotation.PortType;
+import org.kermeta.art2.annotation.Ports;
 import org.kermeta.art2.annotation.ProvidedPort;
 import org.kermeta.art2.annotation.Provides;
+import org.kermeta.art2.annotation.RequiredPort;
+import org.kermeta.art2.annotation.Requires;
 import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.framework.AbstractComponentType;
@@ -22,12 +27,15 @@ import org.kermeta.art2.framework.AbstractComponentType;
  */
 @Provides({
     @ProvidedPort(name="on",className=SimpleActionService.class),
-    @ProvidedPort(name="off",className=SimpleActionService.class)
+    @ProvidedPort(name="off",className=SimpleActionService.class),
+    @ProvidedPort(name="onoff",className=OnOffService.class)
 })
-@ComponentType(libName="fakeStuff")
+@Requires({
+    @RequiredPort(name="log",type=PortType.MESSAGE,optional=true)
+})
+@ComponentType(libName="fakeLights")
 public class FakeSimpleLight extends AbstractComponentType {
 	
-
     @Start
     public void init() {
         logger = Logger.getLogger(this.getClass().getName());
@@ -42,13 +50,19 @@ public class FakeSimpleLight extends AbstractComponentType {
         frame = null;
     }
 
-    @Port(name="on",method="process")
+    @Ports({
+        @Port(name="on",method="process"),
+        @Port(name="onoff",method="on")
+    })
     public void lightUp(){
         frame.setColor(Color.green);
         state = true;
     }
 
-    @Port(name="off",method="process")
+    @Ports({
+        @Port(name="off",method="process"),
+        @Port(name="onoff",method="off")
+    })
     public void lightOff(){
         frame.setColor(Color.red);
         state = false;

@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="ASCII"?>
 <art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
-  <componentTypes name="FakeSimpleSwitch" factoryBean="org.entimid.fakeStuff.devices.FakeSimpleSwitchFactory">
+  <componentTypes name="FakeSimpleSwitch" factoryBean="org.entimid.fakeStuff.devices.FakeSimpleSwitchFactory" startMethod="init" stopMethod="stop">
     <required name="on" ref="//@portTypes.0"/>
     <required name="off" ref="//@portTypes.0"/>
   </componentTypes>
-  <componentTypes name="FakeSimpleLight" factoryBean="org.entimid.fakeStuff.devices.FakeSimpleLightFactory">
+  <componentTypes name="FakeSimpleLog" factoryBean="org.entimid.fakeStuff.devices.FakeSimpleLogFactory" startMethod="init" stopMethod="stop">
+    <provided name="log" ref="//@portTypes.1">
+      <mappings beanMethodName="processMsg" serviceMethodName="process"/>
+    </provided>
+  </componentTypes>
+  <componentTypes name="FakeSimpleLight" factoryBean="org.entimid.fakeStuff.devices.FakeSimpleLightFactory" startMethod="init" stopMethod="stop">
+    <required name="log" ref="//@portTypes.1"/>
     <provided name="on" ref="//@portTypes.0">
       <mappings beanMethodName="lightUp" serviceMethodName="process"/>
     </provided>
     <provided name="off" ref="//@portTypes.0">
       <mappings beanMethodName="lightOff" serviceMethodName="process"/>
     </provided>
+    <provided name="onoff" ref="//@portTypes.2">
+      <mappings beanMethodName="lightUp" serviceMethodName="on"/>
+      <mappings beanMethodName="lightOff" serviceMethodName="off"/>
+    </provided>
   </componentTypes>
-  <dataTypes name="void"/>
+  <dataTypes name="Unit"/>
   <portTypes xsi:type="art2:ServicePortType" name="org.entimid.framework.SimpleActionService">
     <operations name="process" returnType="//@dataTypes.0"/>
   </portTypes>
-  <librariy name="fakeStuff" subComponentTypes="//@componentTypes.0 //@componentTypes.1"/>
+  <portTypes xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <portTypes xsi:type="art2:ServicePortType" name="org.entimid.framework.OnOffService">
+    <operations name="on" returnType="//@dataTypes.0"/>
+    <operations name="off" returnType="//@dataTypes.0"/>
+  </portTypes>
+  <librariy name="fakeSwitchs" subComponentTypes="//@componentTypes.0"/>
+  <librariy name="fakeLog" subComponentTypes="//@componentTypes.1"/>
+  <librariy name="fakeLights" subComponentTypes="//@componentTypes.2"/>
 </art2:ContainerRoot>

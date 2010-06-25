@@ -24,10 +24,10 @@ import org.kermeta.art2.framework.AbstractComponentType;
  * @author ffouquet
  */
 @Requires({
-    @RequiredPort(name="on",className=SimpleActionService.class),
-    @RequiredPort(name="off",className=SimpleActionService.class)
+    @RequiredPort(name = "on", className = SimpleActionService.class),
+    @RequiredPort(name = "off", className = SimpleActionService.class)
 })
-@ComponentType(libName="fakeStuff")
+@ComponentType(libName = "fakeSwitchs")
 public class FakeSimpleSwitch extends AbstractComponentType {
 
     private static final int SWITCH_WIDTH = 50;
@@ -60,6 +60,7 @@ public class FakeSimpleSwitch extends AbstractComponentType {
             setLayout(new FlowLayout());
             on = new JButton(onText);
             on.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     getPortByName("on", SimpleActionService.class).process();
@@ -68,6 +69,7 @@ public class FakeSimpleSwitch extends AbstractComponentType {
 
             off = new JButton(offText);
             off.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     getPortByName("off", SimpleActionService.class).process();
