@@ -14,6 +14,10 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface ProvidedPort {
 
+    PortType type() default PortType.SERVICE;
+
+    String[] filter() default {};
+
     String name();
 
     Class className() default Void.class;
