@@ -59,7 +59,11 @@ public class AbstractComponentType implements ComponentType {
     @Override
     public <T> T getPortByName(String name, Class<T> type) {
         Object retp = getPortByName(name);
-        return (T)retp;
+        if(retp != null){
+            return (T)retp;
+        } else {
+            return null;
+        }
     }
 
     @Override

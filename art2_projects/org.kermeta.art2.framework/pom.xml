@@ -46,11 +46,7 @@
             <artifactId>art2.annotation</artifactId>
             <version>1.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-            <version>2.2.0</version>
-        </dependency>
+        
     </dependencies>
 
     <build>
@@ -111,10 +107,10 @@
                 <version>2.0.2</version>
                 <executions>
                     <execution>
-			<phase>compile</phase>
-			<goals>
-				<goal>compile</goal>
-			</goals>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
@@ -131,9 +127,17 @@
 
 
     <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2private</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
         <snapshotRepository>
-            <id>nexus</id>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2private-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
 
