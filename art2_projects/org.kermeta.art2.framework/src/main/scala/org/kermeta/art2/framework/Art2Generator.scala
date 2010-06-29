@@ -9,7 +9,6 @@ import art2.ContainerRoot
 import art2.MessagePortType
 import art2.ServicePortType
 import com.sun.mirror.apt.Filer
-import java.io.File
 import scala.collection.JavaConversions._
 
 object Art2Generator {
