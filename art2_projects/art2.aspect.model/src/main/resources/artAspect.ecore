@@ -30,8 +30,10 @@
         eType="ecore:EClass ../../../../org.kermeta.art2.model/metamodel/art.ecore#//Port"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponentTypePattern">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="portPatterns" upperBound="-1"
-        eType="#//PortTypeRefPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredPortTypeRefPatterns"
+        upperBound="-1" eType="#//PortTypeRefPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedPortTypeRefPatterns"
+        upperBound="-1" eType="#//PortTypeRefPattern" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../org.kermeta.art2.model/metamodel/art.ecore#//ComponentType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodePattern" eSuperTypes="#//PatternNamedElement">

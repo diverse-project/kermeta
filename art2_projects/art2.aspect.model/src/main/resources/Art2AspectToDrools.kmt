@@ -122,17 +122,27 @@ aspect class ComponentTypePattern
 		if(type != void) then
 			type.pointcutToDrools(ctx)
 		else
-			self.portPatterns.each{pp | pp.pointcutToDrools(ctx)}
+			self.requiredPortTypeRefPatterns.each{pp | pp.pointcutToDrools(ctx)}
+			self.providedPortTypeRefPatterns.each{pp | pp.pointcutToDrools(ctx)}
 			
 			var varName : String init "\t$"+ctx.generateName(self)		
 			ctx.res.append(varName)
 		    ctx.res.append(": art2.ComponentType(")
 			
-			if(self.portPatterns.size > 0) then
+			if(self.requiredPortTypeRefPatterns.size > 0) then
 				var j : Integer init 0
-				self.portPatterns.each{pp |
+				self.requiredPortTypeRefPatterns.each{pp |
 					if j>0 then ctx.res.append(", ") end
-					ctx.res.append("TODO cannot choose between required/provided PortTypeRef")
+					ctx.res.append("required contains $"+ctx.cache.getValue(pp))
+					j := j+1
+				}
+			end
+			
+			if(self.providedPortTypeRefPatterns.size > 0) then
+				var j : Integer init 0
+				self.providedPortTypeRefPatterns.each{pp |
+					if j>0 then ctx.res.append(", ") end
+					ctx.res.append("required contains $"+ctx.cache.getValue(pp))
 					j := j+1
 				}
 			end
@@ -147,6 +157,8 @@ aspect class PortTypePattern
 	do
 		if(type != void) then
 			type.pointcutToDrools(ctx)
+		else
+			var varName : String init "\t$"+ctx.generateName(self)
 		end
 	end
 }
@@ -156,8 +168,33 @@ aspect class PortTypeRefPattern
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
 		if(ref != void) then
-			//ref.pointcutToDrools(ctx)
+			ref.pointcutToDrools(ctx)
 		end
+		
+		var varName : String init "\t$"+ctx.generateName(self)
+		var i : Integer init 0
+		
+		ctx.res.append(varName)
+		ctx.res.append(": art2.PortTypeRef(")
+		
+		if(self.namePattern != void) then
+			ctx.res.append("name == \""+namePattern+"\"")
+			i := i+1
+		end
+		
+		if(self.ref != void) then
+			if(i>0) then
+				ctx.res.append(", ")
+			end
+			
+			if(self.ref.type != void) then
+				ctx.res.append("ref == "+"$"+ctx.cache.getValue(self.ref.type))
+			else
+				ctx.res.append("ref == "+"$"+ctx.cache.getValue(self.ref))
+			end
+		end
+		
+		ctx.res.append(")\n")						
 	end
 }
 

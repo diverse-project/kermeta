@@ -25,17 +25,26 @@ class Context
 {
 	reference res : StringBuffer
 	reference cache : Hashtable<Object,String>
-	reference i : Integer
 	
-	operation generateName(o : Object):String is do
+	attribute i : Integer
+	
+	operation getNextIndex() : Integer is
+	do
+		if (i.isVoid) then 
+			i := 0
+		else
+			i := i+1 
+		end
+		result := i
+	end
+	
+	operation generateName(o : Object):String is do	
 		if cache.getValue(o) != void then
 			result := cache.getValue(o)
 		else
-			if (i.isVoid) then i := 0 end
-			result :="var"+ i.toString()
+			result :="var"+ getNextIndex().toString
 			cache.put(o,result)
-			i:=i+1
-		end
+		end	
 	end
 }
 
@@ -91,12 +100,12 @@ aspect class ComponentType
 
 aspect class PortType
 {
-	//attribute alreadyVisited : Boolean
+	attribute alreadyVisited : Boolean
 
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
-		//if((alreadyVisited == void).orElse{b | not alreadyVisited}) then
-			//alreadyVisited := true
+		if((alreadyVisited == void).orElse{b | not alreadyVisited}) then
+			alreadyVisited := true
 	
 			var varName : String init "\t$"+ctx.generateName(self)
 			ctx.res.append(varName)
@@ -107,7 +116,7 @@ aspect class PortType
 			end
 		
 			ctx.res.append(")\n")
-		//end
+		end
 	end	
 }
 

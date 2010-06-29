@@ -23,20 +23,5 @@
         <type xsi:type="art2:ServicePortType" href="ContainerRoot.xmi#//@portTypes.0"/>
       </portTypePatterns>
     </pointcut>
-    <advice>
-      <nodes/>
-      <componentTypes/>
-      <componentTypes xsi:type="art2:CompositeType"/>
-      <repositories/>
-      <bindings/>
-      <dataTypes xsi:type="art2:DictionaryAttribute"/>
-      <dataTypes/>
-      <portTypes xsi:type="art2:ServicePortType"/>
-      <portTypes xsi:type="art2:MessagePortType"/>
-      <librariy/>
-      <messageHub xsi:type="art2:Topic"/>
-      <messageHub/>
-      <messageHub xsi:type="art2:Queue"/>
-    </advice>
   </aspects>
 </Art2Aspect:AspectRoot>
