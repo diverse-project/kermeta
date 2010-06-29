@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Art2Aspect:AspectRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Art2Aspect="http://ArtAspect/2.0" xmlns:art2="http://art/2.0" xsi:schemaLocation="http://ArtAspect/2.0 artAspect.ecore http://art/2.0 ../../../../org.kermeta.art2.model/metamodel/art.ecore">
   <aspects>
+    <bindings source="//@aspects.0/@pointcut/@nodePatterns.0/@componentPatterns.0/@portPatterns.0">
+      <target href="ContainerRoot.xmi#//@nodes.0/@components.0/@provided.0"/>
+    </bindings>
     <pointcut>
       <componentTypePatterns>
         <type href="ContainerRoot.xmi#//@componentTypes.0"/>
@@ -12,7 +15,7 @@
       </componentTypePatterns>
       <nodePatterns namePattern="node1">
         <componentPatterns namePattern="component1">
-          <portPatterns/>
+          <portPatterns ref="//@aspects.0/@pointcut/@componentTypePatterns.1/@requiredPortTypeRefPatterns.0"/>
         </componentPatterns>
         <componentPatterns namePattern="component2"/>
         <componentPatterns>
@@ -23,5 +26,20 @@
         <type xsi:type="art2:ServicePortType" href="ContainerRoot.xmi#//@portTypes.0"/>
       </portTypePatterns>
     </pointcut>
+    <advice>
+      <nodes/>
+      <componentTypes/>
+      <componentTypes xsi:type="art2:CompositeType"/>
+      <repositories/>
+      <bindings/>
+      <dataTypes xsi:type="art2:DictionaryAttribute"/>
+      <dataTypes/>
+      <portTypes xsi:type="art2:ServicePortType"/>
+      <portTypes xsi:type="art2:MessagePortType"/>
+      <librariy/>
+      <messageHub xsi:type="art2:Topic"/>
+      <messageHub/>
+      <messageHub xsi:type="art2:Queue"/>
+    </advice>
   </aspects>
 </Art2Aspect:AspectRoot>

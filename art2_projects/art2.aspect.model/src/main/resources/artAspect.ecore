@@ -40,7 +40,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentPatterns" upperBound="-1"
         eType="#//ComponentPattern" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PortPattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PortPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//PortTypeRefPattern"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponentPattern" eSuperTypes="#//PatternNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="portPatterns" upperBound="-1"
         eType="#//PortPattern" containment="true"/>
