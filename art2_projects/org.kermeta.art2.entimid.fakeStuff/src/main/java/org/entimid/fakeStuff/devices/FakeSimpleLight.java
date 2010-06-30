@@ -20,28 +20,34 @@ import org.kermeta.art2.annotation.Requires;
 import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.framework.AbstractComponentType;
+import org.kermeta.art2.framework.MessagePort;
 
 /**
  *
  * @author ffouquet
  */
 @Provides({
-    @ProvidedPort(name="on",className=SimpleActionService.class),
-    @ProvidedPort(name="off",className=SimpleActionService.class),
-    @ProvidedPort(name="onoff",className=OnOffService.class)
+    @ProvidedPort(name = "on", className = SimpleActionService.class),
+    @ProvidedPort(name = "off", className = SimpleActionService.class),
+    @ProvidedPort(name = "onoff", className = OnOffService.class)
 })
 @Requires({
-    @RequiredPort(name="log",type=PortType.MESSAGE,optional=true)
+    @RequiredPort(name = "log", type = PortType.MESSAGE, optional = true)
 })
-@ComponentType(libName="fakeLights")
+@ComponentType(libName = "fakeLights")
 public class FakeSimpleLight extends AbstractComponentType {
-	
+
     @Start
     public void init() {
         logger = Logger.getLogger(this.getClass().getName());
         frame = new MyFrame(Color.RED);
         frame.setVisible(true);
         state = false;
+
+        MessagePort log = getPortByName("log", MessagePort.class);
+        if (log != null) {
+            log.process("INIT");
+        }
     }
 
     @Stop
@@ -51,23 +57,33 @@ public class FakeSimpleLight extends AbstractComponentType {
     }
 
     @Ports({
-        @Port(name="on",method="process"),
-        @Port(name="onoff",method="on")
+        @Port(name = "on", method = "process"),
+        @Port(name = "onoff", method = "on")
     })
-    public void lightUp(){
+    public void lightUp() {
         frame.setColor(Color.green);
         state = true;
+
+        MessagePort log = getPortByName("log", MessagePort.class);
+        if (log != null) {
+            log.process("change color");
+        }
+
     }
 
     @Ports({
-        @Port(name="off",method="process"),
-        @Port(name="onoff",method="off")
+        @Port(name = "off", method = "process"),
+        @Port(name = "onoff", method = "off")
     })
-    public void lightOff(){
+    public void lightOff() {
         frame.setColor(Color.red);
         state = false;
-    }
 
+        MessagePort log = getPortByName("log", MessagePort.class);
+        if (log != null) {
+            log.process("change color");
+        }
+    }
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 300;
     private static Logger logger;
@@ -106,8 +122,7 @@ public class FakeSimpleLight extends AbstractComponentType {
         public final void setColor(Color c) {
             this.c = c;
             repaint();
-            Logger.getLogger(this.getName()).info("SetColor "+c.toString());
+            Logger.getLogger(this.getName()).info("SetColor " + c.toString());
         }
     }
-
 }

@@ -7,6 +7,10 @@
     <packaging>bundle</packaging>
     <name>EnTiMid - FakeStuff</name>
     <version>0.2.0-SNAPSHOT</version>
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://tipimouss:8095/job/entimid.fakeStuff/</url>
+    </ciManagement>
     <repositories>
         <repository>
             <id>fr.irisa.triskell</id>
@@ -117,5 +121,22 @@
 
         </plugins>
     </build>
+
+
+    <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2private</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2private-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
 
