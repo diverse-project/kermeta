@@ -382,7 +382,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 484;
+		int followSetID = 494;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime.CommonToken nextToken = (org.antlr.runtime.CommonToken) tokenStream.get(i);
@@ -779,118 +779,123 @@ options {
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_229 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(")");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_230 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":=");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_231 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getValuedAttribute().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__VALUE), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_232 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":=");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_233 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_234 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDefaultEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__KEY), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_235 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_236 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDefaultEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__VALUE), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_237 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_238 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getOtherEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__KEY), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_239 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_240 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getOtherEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__VALUE), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_241 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_242 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPrimitiveType().getEStructuralFeature(pattern.art.type.TypePackage.PRIMITIVE_TYPE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_243 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPrimitiveType().getEStructuralFeature(pattern.art.type.TypePackage.PRIMITIVE_TYPE__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_244 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("implementation");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_245 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_246 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_247 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getCompositeType().getEStructuralFeature(pattern.art.type.TypePackage.COMPOSITE_TYPE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_248 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getCompositeType().getEStructuralFeature(pattern.art.type.TypePackage.COMPOSITE_TYPE__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_249 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("implementation");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_250 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_251 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_252 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getOperation().getEStructuralFeature(pattern.art.type.TypePackage.OPERATION__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_253 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getOperation().getEStructuralFeature(pattern.art.type.TypePackage.OPERATION__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_254 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("(");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_255 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_256 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(")");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_257 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_258 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_259 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_260 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_261 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getParameter().getEStructuralFeature(pattern.art.type.TypePackage.PARAMETER__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_262 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getParameter().getEStructuralFeature(pattern.art.type.TypePackage.PARAMETER__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_263 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("service");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_264 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getFunctionalService().getEStructuralFeature(pattern.art.type.TypePackage.FUNCTIONAL_SERVICE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_265 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getFunctionalService().getEStructuralFeature(pattern.art.type.TypePackage.FUNCTIONAL_SERVICE__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_266 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_232 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getValuedAttribute().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_233 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":=");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_234 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDictionaryValuedAttribute().getEStructuralFeature(pattern.art.instance.InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_235 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_236 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDefaultEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__KEY), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_237 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_238 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDefaultEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__VALUE), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_239 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_240 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getDefaultEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_241 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getOtherEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__KEY), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_242 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_243 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getOtherEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__VALUE), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_244 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_245 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.instance.InstancePackage.eINSTANCE.getOtherEntry().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_246 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPrimitiveType().getEStructuralFeature(pattern.art.type.TypePackage.PRIMITIVE_TYPE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_247 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPrimitiveType().getEStructuralFeature(pattern.art.type.TypePackage.PRIMITIVE_TYPE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_248 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("implementation");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_249 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_250 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_251 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getCompositeType().getEStructuralFeature(pattern.art.type.TypePackage.COMPOSITE_TYPE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_252 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getCompositeType().getEStructuralFeature(pattern.art.type.TypePackage.COMPOSITE_TYPE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_253 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("implementation");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_254 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_255 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_256 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getOperation().getEStructuralFeature(pattern.art.type.TypePackage.OPERATION__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_257 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getOperation().getEStructuralFeature(pattern.art.type.TypePackage.OPERATION__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_258 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("(");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_259 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_260 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(")");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_261 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_262 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_263 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_264 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_265 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getParameter().getEStructuralFeature(pattern.art.type.TypePackage.PARAMETER__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_266 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getParameter().getEStructuralFeature(pattern.art.type.TypePackage.PARAMETER__PID), "TXTID");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_267 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("service");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_268 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getControlService().getEStructuralFeature(pattern.art.type.TypePackage.CONTROL_SERVICE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_269 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getControlService().getEStructuralFeature(pattern.art.type.TypePackage.CONTROL_SERVICE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_268 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getFunctionalService().getEStructuralFeature(pattern.art.type.TypePackage.FUNCTIONAL_SERVICE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_269 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getFunctionalService().getEStructuralFeature(pattern.art.type.TypePackage.FUNCTIONAL_SERVICE__PID), "TXTID");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_270 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_271 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__IS_OPTIONAL), "T_OPTIONAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_272 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("port");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_273 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_274 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_275 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_276 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__SERVICE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_277 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_278 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("[");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_279 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__LOWER), "MULTIPLICITY");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_280 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("..");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_281 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__UPPER), "MULTIPLICITY");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_282 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_283 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("<");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_284 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("controllerDesc");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_285 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_286 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getFractalComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.FRACTAL_COMPONENT__CONTROLLER_DESC), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_287 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("contentDesc");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_288 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_289 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getFractalComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.FRACTAL_COMPONENT__CONTENT_DESC), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_290 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(">");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_291 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getOSGiComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_271 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("service");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_272 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getControlService().getEStructuralFeature(pattern.art.type.TypePackage.CONTROL_SERVICE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_273 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getControlService().getEStructuralFeature(pattern.art.type.TypePackage.CONTROL_SERVICE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_274 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_275 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__IS_OPTIONAL), "T_OPTIONAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_276 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("port");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_277 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_278 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_279 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_280 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__SERVICE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_281 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_282 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("[");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_283 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__LOWER), "MULTIPLICITY");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_284 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("..");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_285 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPort().getEStructuralFeature(pattern.art.type.TypePackage.PORT__UPPER), "MULTIPLICITY");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_286 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_287 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("<");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_288 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("controllerDesc");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_289 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_290 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getFractalComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.FRACTAL_COMPONENT__CONTROLLER_DESC), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_291 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("contentDesc");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_292 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_293 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getOSGiComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_294 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_295 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_293 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getFractalComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.FRACTAL_COMPONENT__CONTENT_DESC), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_294 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(">");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_295 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getOSGiComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__PID), "TXTID");
 	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_296 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_297 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__TYPE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_298 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_299 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("default");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_300 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__DEFAULT_VALUE), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_301 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_302 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_303 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_304 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("[");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_305 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__TYPE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_306 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_307 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_308 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__VALUE_TYPE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_309 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_310 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_311 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("default");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_312 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_313 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_314 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__KEY), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_315 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_316 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_317 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__VALUE), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_318 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_319 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_320 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("port");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_321 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_322 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__PID), "TXTID");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_323 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_324 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__SERVICE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_325 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_326 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_327 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_328 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getModelPattern().getEStructuralFeature(patternframework.PatternframeworkPackage.MODEL_PATTERN__FEATURE_IDENTIFIER), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_329 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("pattern");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_330 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_331 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_332 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPRole().getEStructuralFeature(patternframework.PatternframeworkPackage.PROLE__NAME), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_333 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_334 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(";");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_335 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("(");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_336 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPConstraint().getEStructuralFeature(patternframework.PatternframeworkPackage.PCONSTRAINT__LANGUAGE), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_337 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(")");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_338 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_339 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPConstraint().getEStructuralFeature(patternframework.PatternframeworkPackage.PCONSTRAINT__EXPRESSION), "STRING_LITERAL");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_340 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(";");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_341 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_342 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPRole().getEStructuralFeature(patternframework.PatternframeworkPackage.PROLE__PLAYER), "TEXT");
-	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_343 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_297 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.implem.ImplemPackage.eINSTANCE.getOSGiComponent().getEStructuralFeature(pattern.art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_298 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_299 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_300 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_301 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__TYPE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_302 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_303 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("default");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_304 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getBasicAttribute().getEStructuralFeature(pattern.art.type.TypePackage.BASIC_ATTRIBUTE__DEFAULT_VALUE), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_305 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_306 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_307 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_308 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("[");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_309 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__TYPE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_310 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_311 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_312 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionary().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY__VALUE_TYPE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_313 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_314 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_315 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("default");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_316 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_317 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_318 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__KEY), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_319 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("->");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_320 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_321 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("]");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_322 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__VALUE), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_323 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_324 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_325 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("port");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_326 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_327 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__PID), "TXTID");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_328 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_329 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(pattern.art.type.TypePackage.eINSTANCE.getPortCollection().getEStructuralFeature(pattern.art.type.TypePackage.PORT_COLLECTION__SERVICE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_330 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("?");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_331 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("{");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_332 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_333 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getModelPattern().getEStructuralFeature(patternframework.PatternframeworkPackage.MODEL_PATTERN__FEATURE_IDENTIFIER), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_334 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("pattern");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_335 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_336 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_337 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPRole().getEStructuralFeature(patternframework.PatternframeworkPackage.PROLE__NAME), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_338 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(",");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_339 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(";");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_340 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("(");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_341 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPConstraint().getEStructuralFeature(patternframework.PatternframeworkPackage.PCONSTRAINT__LANGUAGE), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_342 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(")");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_343 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_344 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPConstraint().getEStructuralFeature(patternframework.PatternframeworkPackage.PCONSTRAINT__EXPRESSION), "STRING_LITERAL");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_345 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(";");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_346 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString(":");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_347 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedStructuralFeature(patternframework.PatternframeworkPackage.eINSTANCE.getPRole().getEStructuralFeature(patternframework.PatternframeworkPackage.PROLE__PLAYER), "TEXT");
+	private final static org.smartadapters.core.resource.smARText.ISmARTextExpectedElement TERMINAL_348 = new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedCsString("}");
 	
 	public static void wire0() {
 		TERMINAL_0.addFollower(TERMINAL_1);
@@ -1625,6 +1630,7 @@ options {
 		TERMINAL_229.addFollower(TERMINAL_43);
 		TERMINAL_26.addFollower(TERMINAL_230);
 		TERMINAL_230.addFollower(TERMINAL_231);
+		TERMINAL_231.addFollower(TERMINAL_232);
 		TERMINAL_231.addFollower(TERMINAL_26);
 		TERMINAL_231.addFollower(TERMINAL_27);
 		TERMINAL_231.addFollower(TERMINAL_24);
@@ -1636,9 +1642,6 @@ options {
 		TERMINAL_231.addFollower(TERMINAL_42);
 		TERMINAL_231.addFollower(TERMINAL_47);
 		TERMINAL_231.addFollower(TERMINAL_43);
-		TERMINAL_27.addFollower(TERMINAL_232);
-		TERMINAL_232.addFollower(TERMINAL_28);
-		TERMINAL_232.addFollower(TERMINAL_29);
 		TERMINAL_232.addFollower(TERMINAL_26);
 		TERMINAL_232.addFollower(TERMINAL_27);
 		TERMINAL_232.addFollower(TERMINAL_24);
@@ -1650,153 +1653,192 @@ options {
 		TERMINAL_232.addFollower(TERMINAL_42);
 		TERMINAL_232.addFollower(TERMINAL_47);
 		TERMINAL_232.addFollower(TERMINAL_43);
+		TERMINAL_27.addFollower(TERMINAL_233);
 		TERMINAL_233.addFollower(TERMINAL_28);
 		TERMINAL_233.addFollower(TERMINAL_29);
-		TERMINAL_28.addFollower(TERMINAL_234);
-		TERMINAL_234.addFollower(TERMINAL_235);
-		TERMINAL_235.addFollower(TERMINAL_236);
+		TERMINAL_233.addFollower(TERMINAL_234);
+		TERMINAL_233.addFollower(TERMINAL_26);
+		TERMINAL_233.addFollower(TERMINAL_27);
+		TERMINAL_233.addFollower(TERMINAL_24);
+		TERMINAL_233.addFollower(TERMINAL_193);
+		TERMINAL_233.addFollower(TERMINAL_22);
+		TERMINAL_233.addFollower(TERMINAL_23);
+		TERMINAL_233.addFollower(TERMINAL_25);
+		TERMINAL_233.addFollower(TERMINAL_194);
+		TERMINAL_233.addFollower(TERMINAL_42);
+		TERMINAL_233.addFollower(TERMINAL_47);
+		TERMINAL_233.addFollower(TERMINAL_43);
+		TERMINAL_235.addFollower(TERMINAL_28);
+		TERMINAL_235.addFollower(TERMINAL_29);
+		TERMINAL_234.addFollower(TERMINAL_26);
+		TERMINAL_234.addFollower(TERMINAL_27);
+		TERMINAL_234.addFollower(TERMINAL_24);
+		TERMINAL_234.addFollower(TERMINAL_193);
+		TERMINAL_234.addFollower(TERMINAL_22);
+		TERMINAL_234.addFollower(TERMINAL_23);
+		TERMINAL_234.addFollower(TERMINAL_25);
+		TERMINAL_234.addFollower(TERMINAL_194);
+		TERMINAL_234.addFollower(TERMINAL_42);
+		TERMINAL_234.addFollower(TERMINAL_47);
+		TERMINAL_234.addFollower(TERMINAL_43);
+		TERMINAL_28.addFollower(TERMINAL_236);
 		TERMINAL_236.addFollower(TERMINAL_237);
-		TERMINAL_237.addFollower(TERMINAL_233);
-		TERMINAL_237.addFollower(TERMINAL_26);
-		TERMINAL_237.addFollower(TERMINAL_27);
-		TERMINAL_237.addFollower(TERMINAL_24);
-		TERMINAL_237.addFollower(TERMINAL_193);
-		TERMINAL_237.addFollower(TERMINAL_22);
-		TERMINAL_237.addFollower(TERMINAL_23);
-		TERMINAL_237.addFollower(TERMINAL_25);
-		TERMINAL_237.addFollower(TERMINAL_194);
-		TERMINAL_237.addFollower(TERMINAL_42);
-		TERMINAL_237.addFollower(TERMINAL_47);
-		TERMINAL_237.addFollower(TERMINAL_43);
-		TERMINAL_29.addFollower(TERMINAL_238);
+		TERMINAL_237.addFollower(TERMINAL_238);
 		TERMINAL_238.addFollower(TERMINAL_239);
 		TERMINAL_239.addFollower(TERMINAL_240);
-		TERMINAL_240.addFollower(TERMINAL_241);
-		TERMINAL_241.addFollower(TERMINAL_233);
-		TERMINAL_241.addFollower(TERMINAL_26);
-		TERMINAL_241.addFollower(TERMINAL_27);
-		TERMINAL_241.addFollower(TERMINAL_24);
-		TERMINAL_241.addFollower(TERMINAL_193);
-		TERMINAL_241.addFollower(TERMINAL_22);
-		TERMINAL_241.addFollower(TERMINAL_23);
-		TERMINAL_241.addFollower(TERMINAL_25);
-		TERMINAL_241.addFollower(TERMINAL_194);
-		TERMINAL_241.addFollower(TERMINAL_42);
-		TERMINAL_241.addFollower(TERMINAL_47);
-		TERMINAL_241.addFollower(TERMINAL_43);
-		TERMINAL_19.addFollower(TERMINAL_242);
-		TERMINAL_19.addFollower(TERMINAL_243);
-		TERMINAL_19.addFollower(TERMINAL_244);
-		TERMINAL_19.addFollower(TERMINAL_245);
+		TERMINAL_239.addFollower(TERMINAL_235);
+		TERMINAL_239.addFollower(TERMINAL_234);
+		TERMINAL_239.addFollower(TERMINAL_26);
+		TERMINAL_239.addFollower(TERMINAL_27);
+		TERMINAL_239.addFollower(TERMINAL_24);
+		TERMINAL_239.addFollower(TERMINAL_193);
+		TERMINAL_239.addFollower(TERMINAL_22);
+		TERMINAL_239.addFollower(TERMINAL_23);
+		TERMINAL_239.addFollower(TERMINAL_25);
+		TERMINAL_239.addFollower(TERMINAL_194);
+		TERMINAL_239.addFollower(TERMINAL_42);
+		TERMINAL_239.addFollower(TERMINAL_47);
+		TERMINAL_239.addFollower(TERMINAL_43);
+		TERMINAL_240.addFollower(TERMINAL_235);
+		TERMINAL_240.addFollower(TERMINAL_234);
+		TERMINAL_240.addFollower(TERMINAL_26);
+		TERMINAL_240.addFollower(TERMINAL_27);
+		TERMINAL_240.addFollower(TERMINAL_24);
+		TERMINAL_240.addFollower(TERMINAL_193);
+		TERMINAL_240.addFollower(TERMINAL_22);
+		TERMINAL_240.addFollower(TERMINAL_23);
+		TERMINAL_240.addFollower(TERMINAL_25);
+		TERMINAL_240.addFollower(TERMINAL_194);
+		TERMINAL_240.addFollower(TERMINAL_42);
+		TERMINAL_240.addFollower(TERMINAL_47);
+		TERMINAL_240.addFollower(TERMINAL_43);
+		TERMINAL_29.addFollower(TERMINAL_241);
+		TERMINAL_241.addFollower(TERMINAL_242);
 		TERMINAL_242.addFollower(TERMINAL_243);
-		TERMINAL_242.addFollower(TERMINAL_244);
-		TERMINAL_242.addFollower(TERMINAL_245);
 		TERMINAL_243.addFollower(TERMINAL_244);
-		TERMINAL_243.addFollower(TERMINAL_245);
-		TERMINAL_244.addFollower(TERMINAL_36);
-		TERMINAL_245.addFollower(TERMINAL_33);
-		TERMINAL_245.addFollower(TERMINAL_41);
-		TERMINAL_245.addFollower(TERMINAL_37);
-		TERMINAL_245.addFollower(TERMINAL_38);
-		TERMINAL_245.addFollower(TERMINAL_246);
-		TERMINAL_246.addFollower(TERMINAL_17);
-		TERMINAL_246.addFollower(TERMINAL_18);
-		TERMINAL_246.addFollower(TERMINAL_19);
-		TERMINAL_246.addFollower(TERMINAL_20);
-		TERMINAL_246.addFollower(TERMINAL_21);
-		TERMINAL_246.addFollower(TERMINAL_42);
-		TERMINAL_246.addFollower(TERMINAL_47);
-		TERMINAL_246.addFollower(TERMINAL_43);
-		TERMINAL_20.addFollower(TERMINAL_247);
-		TERMINAL_20.addFollower(TERMINAL_248);
-		TERMINAL_20.addFollower(TERMINAL_249);
-		TERMINAL_20.addFollower(TERMINAL_250);
+		TERMINAL_244.addFollower(TERMINAL_245);
+		TERMINAL_244.addFollower(TERMINAL_235);
+		TERMINAL_244.addFollower(TERMINAL_234);
+		TERMINAL_244.addFollower(TERMINAL_26);
+		TERMINAL_244.addFollower(TERMINAL_27);
+		TERMINAL_244.addFollower(TERMINAL_24);
+		TERMINAL_244.addFollower(TERMINAL_193);
+		TERMINAL_244.addFollower(TERMINAL_22);
+		TERMINAL_244.addFollower(TERMINAL_23);
+		TERMINAL_244.addFollower(TERMINAL_25);
+		TERMINAL_244.addFollower(TERMINAL_194);
+		TERMINAL_244.addFollower(TERMINAL_42);
+		TERMINAL_244.addFollower(TERMINAL_47);
+		TERMINAL_244.addFollower(TERMINAL_43);
+		TERMINAL_245.addFollower(TERMINAL_235);
+		TERMINAL_245.addFollower(TERMINAL_234);
+		TERMINAL_245.addFollower(TERMINAL_26);
+		TERMINAL_245.addFollower(TERMINAL_27);
+		TERMINAL_245.addFollower(TERMINAL_24);
+		TERMINAL_245.addFollower(TERMINAL_193);
+		TERMINAL_245.addFollower(TERMINAL_22);
+		TERMINAL_245.addFollower(TERMINAL_23);
+		TERMINAL_245.addFollower(TERMINAL_25);
+		TERMINAL_245.addFollower(TERMINAL_194);
+		TERMINAL_245.addFollower(TERMINAL_42);
+		TERMINAL_245.addFollower(TERMINAL_47);
+		TERMINAL_245.addFollower(TERMINAL_43);
+		TERMINAL_19.addFollower(TERMINAL_246);
+		TERMINAL_19.addFollower(TERMINAL_247);
+		TERMINAL_19.addFollower(TERMINAL_248);
+		TERMINAL_19.addFollower(TERMINAL_249);
+		TERMINAL_246.addFollower(TERMINAL_247);
+		TERMINAL_246.addFollower(TERMINAL_248);
+		TERMINAL_246.addFollower(TERMINAL_249);
 		TERMINAL_247.addFollower(TERMINAL_248);
 		TERMINAL_247.addFollower(TERMINAL_249);
-		TERMINAL_247.addFollower(TERMINAL_250);
-		TERMINAL_248.addFollower(TERMINAL_249);
-		TERMINAL_248.addFollower(TERMINAL_250);
-		TERMINAL_249.addFollower(TERMINAL_36);
-		TERMINAL_250.addFollower(TERMINAL_33);
-		TERMINAL_250.addFollower(TERMINAL_41);
-		TERMINAL_250.addFollower(TERMINAL_37);
-		TERMINAL_250.addFollower(TERMINAL_38);
-		TERMINAL_250.addFollower(TERMINAL_251);
-		TERMINAL_251.addFollower(TERMINAL_17);
-		TERMINAL_251.addFollower(TERMINAL_18);
-		TERMINAL_251.addFollower(TERMINAL_19);
-		TERMINAL_251.addFollower(TERMINAL_20);
-		TERMINAL_251.addFollower(TERMINAL_21);
-		TERMINAL_251.addFollower(TERMINAL_42);
-		TERMINAL_251.addFollower(TERMINAL_47);
-		TERMINAL_251.addFollower(TERMINAL_43);
-		TERMINAL_30.addFollower(TERMINAL_252);
-		TERMINAL_30.addFollower(TERMINAL_253);
-		TERMINAL_30.addFollower(TERMINAL_254);
+		TERMINAL_248.addFollower(TERMINAL_36);
+		TERMINAL_249.addFollower(TERMINAL_33);
+		TERMINAL_249.addFollower(TERMINAL_41);
+		TERMINAL_249.addFollower(TERMINAL_37);
+		TERMINAL_249.addFollower(TERMINAL_38);
+		TERMINAL_249.addFollower(TERMINAL_250);
+		TERMINAL_250.addFollower(TERMINAL_17);
+		TERMINAL_250.addFollower(TERMINAL_18);
+		TERMINAL_250.addFollower(TERMINAL_19);
+		TERMINAL_250.addFollower(TERMINAL_20);
+		TERMINAL_250.addFollower(TERMINAL_21);
+		TERMINAL_250.addFollower(TERMINAL_42);
+		TERMINAL_250.addFollower(TERMINAL_47);
+		TERMINAL_250.addFollower(TERMINAL_43);
+		TERMINAL_20.addFollower(TERMINAL_251);
+		TERMINAL_20.addFollower(TERMINAL_252);
+		TERMINAL_20.addFollower(TERMINAL_253);
+		TERMINAL_20.addFollower(TERMINAL_254);
+		TERMINAL_251.addFollower(TERMINAL_252);
+		TERMINAL_251.addFollower(TERMINAL_253);
+		TERMINAL_251.addFollower(TERMINAL_254);
 		TERMINAL_252.addFollower(TERMINAL_253);
 		TERMINAL_252.addFollower(TERMINAL_254);
-		TERMINAL_253.addFollower(TERMINAL_254);
-		TERMINAL_254.addFollower(TERMINAL_31);
-		TERMINAL_254.addFollower(TERMINAL_32);
+		TERMINAL_253.addFollower(TERMINAL_36);
+		TERMINAL_254.addFollower(TERMINAL_33);
+		TERMINAL_254.addFollower(TERMINAL_41);
+		TERMINAL_254.addFollower(TERMINAL_37);
+		TERMINAL_254.addFollower(TERMINAL_38);
 		TERMINAL_254.addFollower(TERMINAL_255);
-		TERMINAL_254.addFollower(TERMINAL_256);
-		TERMINAL_255.addFollower(TERMINAL_31);
-		TERMINAL_255.addFollower(TERMINAL_32);
+		TERMINAL_255.addFollower(TERMINAL_17);
+		TERMINAL_255.addFollower(TERMINAL_18);
+		TERMINAL_255.addFollower(TERMINAL_19);
+		TERMINAL_255.addFollower(TERMINAL_20);
+		TERMINAL_255.addFollower(TERMINAL_21);
+		TERMINAL_255.addFollower(TERMINAL_42);
+		TERMINAL_255.addFollower(TERMINAL_47);
+		TERMINAL_255.addFollower(TERMINAL_43);
+		TERMINAL_30.addFollower(TERMINAL_256);
+		TERMINAL_30.addFollower(TERMINAL_257);
+		TERMINAL_30.addFollower(TERMINAL_258);
 		TERMINAL_256.addFollower(TERMINAL_257);
 		TERMINAL_256.addFollower(TERMINAL_258);
-		TERMINAL_256.addFollower(TERMINAL_30);
-		TERMINAL_256.addFollower(TERMINAL_259);
-		TERMINAL_256.addFollower(TERMINAL_260);
-		TERMINAL_256.addFollower(TERMINAL_42);
-		TERMINAL_256.addFollower(TERMINAL_47);
-		TERMINAL_256.addFollower(TERMINAL_43);
-		TERMINAL_257.addFollower(TERMINAL_31);
-		TERMINAL_257.addFollower(TERMINAL_32);
+		TERMINAL_257.addFollower(TERMINAL_258);
 		TERMINAL_258.addFollower(TERMINAL_31);
 		TERMINAL_258.addFollower(TERMINAL_32);
-		TERMINAL_31.addFollower(TERMINAL_261);
-		TERMINAL_31.addFollower(TERMINAL_262);
-		TERMINAL_31.addFollower(TERMINAL_255);
-		TERMINAL_31.addFollower(TERMINAL_256);
+		TERMINAL_258.addFollower(TERMINAL_259);
+		TERMINAL_258.addFollower(TERMINAL_260);
+		TERMINAL_259.addFollower(TERMINAL_31);
+		TERMINAL_259.addFollower(TERMINAL_32);
+		TERMINAL_260.addFollower(TERMINAL_261);
+		TERMINAL_260.addFollower(TERMINAL_262);
+		TERMINAL_260.addFollower(TERMINAL_30);
+		TERMINAL_260.addFollower(TERMINAL_263);
+		TERMINAL_260.addFollower(TERMINAL_264);
+		TERMINAL_260.addFollower(TERMINAL_42);
+		TERMINAL_260.addFollower(TERMINAL_47);
+		TERMINAL_260.addFollower(TERMINAL_43);
+		TERMINAL_261.addFollower(TERMINAL_31);
+		TERMINAL_261.addFollower(TERMINAL_32);
+		TERMINAL_262.addFollower(TERMINAL_31);
+		TERMINAL_262.addFollower(TERMINAL_32);
+		TERMINAL_31.addFollower(TERMINAL_265);
+		TERMINAL_31.addFollower(TERMINAL_266);
+		TERMINAL_31.addFollower(TERMINAL_259);
+		TERMINAL_31.addFollower(TERMINAL_260);
 		TERMINAL_31.addFollower(TERMINAL_42);
 		TERMINAL_31.addFollower(TERMINAL_47);
 		TERMINAL_31.addFollower(TERMINAL_43);
-		TERMINAL_32.addFollower(TERMINAL_261);
-		TERMINAL_32.addFollower(TERMINAL_262);
-		TERMINAL_32.addFollower(TERMINAL_255);
-		TERMINAL_32.addFollower(TERMINAL_256);
+		TERMINAL_32.addFollower(TERMINAL_265);
+		TERMINAL_32.addFollower(TERMINAL_266);
+		TERMINAL_32.addFollower(TERMINAL_259);
+		TERMINAL_32.addFollower(TERMINAL_260);
 		TERMINAL_32.addFollower(TERMINAL_42);
 		TERMINAL_32.addFollower(TERMINAL_47);
 		TERMINAL_32.addFollower(TERMINAL_43);
-		TERMINAL_261.addFollower(TERMINAL_262);
-		TERMINAL_261.addFollower(TERMINAL_255);
-		TERMINAL_261.addFollower(TERMINAL_256);
-		TERMINAL_261.addFollower(TERMINAL_42);
-		TERMINAL_261.addFollower(TERMINAL_47);
-		TERMINAL_261.addFollower(TERMINAL_43);
-		TERMINAL_262.addFollower(TERMINAL_255);
-		TERMINAL_262.addFollower(TERMINAL_256);
-		TERMINAL_262.addFollower(TERMINAL_42);
-		TERMINAL_262.addFollower(TERMINAL_47);
-		TERMINAL_262.addFollower(TERMINAL_43);
-		TERMINAL_17.addFollower(TERMINAL_263);
-		TERMINAL_263.addFollower(TERMINAL_264);
-		TERMINAL_263.addFollower(TERMINAL_265);
-		TERMINAL_263.addFollower(TERMINAL_266);
-		TERMINAL_264.addFollower(TERMINAL_265);
-		TERMINAL_264.addFollower(TERMINAL_266);
 		TERMINAL_265.addFollower(TERMINAL_266);
-		TERMINAL_266.addFollower(TERMINAL_30);
+		TERMINAL_265.addFollower(TERMINAL_259);
+		TERMINAL_265.addFollower(TERMINAL_260);
+		TERMINAL_265.addFollower(TERMINAL_42);
+		TERMINAL_265.addFollower(TERMINAL_47);
+		TERMINAL_265.addFollower(TERMINAL_43);
 		TERMINAL_266.addFollower(TERMINAL_259);
-		TERMINAL_259.addFollower(TERMINAL_17);
-		TERMINAL_259.addFollower(TERMINAL_18);
-		TERMINAL_259.addFollower(TERMINAL_19);
-		TERMINAL_259.addFollower(TERMINAL_20);
-		TERMINAL_259.addFollower(TERMINAL_21);
-		TERMINAL_259.addFollower(TERMINAL_42);
-		TERMINAL_259.addFollower(TERMINAL_47);
-		TERMINAL_259.addFollower(TERMINAL_43);
-		TERMINAL_18.addFollower(TERMINAL_267);
+		TERMINAL_266.addFollower(TERMINAL_260);
+		TERMINAL_266.addFollower(TERMINAL_42);
+		TERMINAL_266.addFollower(TERMINAL_47);
+		TERMINAL_266.addFollower(TERMINAL_43);
+		TERMINAL_17.addFollower(TERMINAL_267);
 		TERMINAL_267.addFollower(TERMINAL_268);
 		TERMINAL_267.addFollower(TERMINAL_269);
 		TERMINAL_267.addFollower(TERMINAL_270);
@@ -1804,321 +1846,341 @@ options {
 		TERMINAL_268.addFollower(TERMINAL_270);
 		TERMINAL_269.addFollower(TERMINAL_270);
 		TERMINAL_270.addFollower(TERMINAL_30);
-		TERMINAL_270.addFollower(TERMINAL_260);
-		TERMINAL_260.addFollower(TERMINAL_17);
-		TERMINAL_260.addFollower(TERMINAL_18);
-		TERMINAL_260.addFollower(TERMINAL_19);
-		TERMINAL_260.addFollower(TERMINAL_20);
-		TERMINAL_260.addFollower(TERMINAL_21);
-		TERMINAL_260.addFollower(TERMINAL_42);
-		TERMINAL_260.addFollower(TERMINAL_47);
-		TERMINAL_260.addFollower(TERMINAL_43);
-		TERMINAL_33.addFollower(TERMINAL_271);
-		TERMINAL_33.addFollower(TERMINAL_272);
+		TERMINAL_270.addFollower(TERMINAL_263);
+		TERMINAL_263.addFollower(TERMINAL_17);
+		TERMINAL_263.addFollower(TERMINAL_18);
+		TERMINAL_263.addFollower(TERMINAL_19);
+		TERMINAL_263.addFollower(TERMINAL_20);
+		TERMINAL_263.addFollower(TERMINAL_21);
+		TERMINAL_263.addFollower(TERMINAL_42);
+		TERMINAL_263.addFollower(TERMINAL_47);
+		TERMINAL_263.addFollower(TERMINAL_43);
+		TERMINAL_18.addFollower(TERMINAL_271);
 		TERMINAL_271.addFollower(TERMINAL_272);
+		TERMINAL_271.addFollower(TERMINAL_273);
+		TERMINAL_271.addFollower(TERMINAL_274);
 		TERMINAL_272.addFollower(TERMINAL_273);
 		TERMINAL_272.addFollower(TERMINAL_274);
-		TERMINAL_272.addFollower(TERMINAL_275);
 		TERMINAL_273.addFollower(TERMINAL_274);
-		TERMINAL_273.addFollower(TERMINAL_275);
-		TERMINAL_274.addFollower(TERMINAL_275);
+		TERMINAL_274.addFollower(TERMINAL_30);
+		TERMINAL_274.addFollower(TERMINAL_264);
+		TERMINAL_264.addFollower(TERMINAL_17);
+		TERMINAL_264.addFollower(TERMINAL_18);
+		TERMINAL_264.addFollower(TERMINAL_19);
+		TERMINAL_264.addFollower(TERMINAL_20);
+		TERMINAL_264.addFollower(TERMINAL_21);
+		TERMINAL_264.addFollower(TERMINAL_42);
+		TERMINAL_264.addFollower(TERMINAL_47);
+		TERMINAL_264.addFollower(TERMINAL_43);
+		TERMINAL_33.addFollower(TERMINAL_275);
+		TERMINAL_33.addFollower(TERMINAL_276);
 		TERMINAL_275.addFollower(TERMINAL_276);
-		TERMINAL_275.addFollower(TERMINAL_277);
-		TERMINAL_275.addFollower(TERMINAL_278);
-		TERMINAL_275.addFollower(TERMINAL_33);
-		TERMINAL_275.addFollower(TERMINAL_41);
-		TERMINAL_275.addFollower(TERMINAL_37);
-		TERMINAL_275.addFollower(TERMINAL_38);
-		TERMINAL_275.addFollower(TERMINAL_246);
-		TERMINAL_275.addFollower(TERMINAL_251);
-		TERMINAL_275.addFollower(TERMINAL_42);
-		TERMINAL_275.addFollower(TERMINAL_47);
-		TERMINAL_275.addFollower(TERMINAL_43);
+		TERMINAL_276.addFollower(TERMINAL_277);
 		TERMINAL_276.addFollower(TERMINAL_278);
-		TERMINAL_276.addFollower(TERMINAL_33);
-		TERMINAL_276.addFollower(TERMINAL_41);
-		TERMINAL_276.addFollower(TERMINAL_37);
-		TERMINAL_276.addFollower(TERMINAL_38);
-		TERMINAL_276.addFollower(TERMINAL_246);
-		TERMINAL_276.addFollower(TERMINAL_251);
-		TERMINAL_276.addFollower(TERMINAL_42);
-		TERMINAL_276.addFollower(TERMINAL_47);
-		TERMINAL_276.addFollower(TERMINAL_43);
+		TERMINAL_276.addFollower(TERMINAL_279);
 		TERMINAL_277.addFollower(TERMINAL_278);
-		TERMINAL_277.addFollower(TERMINAL_33);
-		TERMINAL_277.addFollower(TERMINAL_41);
-		TERMINAL_277.addFollower(TERMINAL_37);
-		TERMINAL_277.addFollower(TERMINAL_38);
-		TERMINAL_277.addFollower(TERMINAL_246);
-		TERMINAL_277.addFollower(TERMINAL_251);
-		TERMINAL_277.addFollower(TERMINAL_42);
-		TERMINAL_277.addFollower(TERMINAL_47);
-		TERMINAL_277.addFollower(TERMINAL_43);
+		TERMINAL_277.addFollower(TERMINAL_279);
 		TERMINAL_278.addFollower(TERMINAL_279);
 		TERMINAL_279.addFollower(TERMINAL_280);
-		TERMINAL_280.addFollower(TERMINAL_281);
+		TERMINAL_279.addFollower(TERMINAL_281);
+		TERMINAL_279.addFollower(TERMINAL_282);
+		TERMINAL_279.addFollower(TERMINAL_33);
+		TERMINAL_279.addFollower(TERMINAL_41);
+		TERMINAL_279.addFollower(TERMINAL_37);
+		TERMINAL_279.addFollower(TERMINAL_38);
+		TERMINAL_279.addFollower(TERMINAL_250);
+		TERMINAL_279.addFollower(TERMINAL_255);
+		TERMINAL_279.addFollower(TERMINAL_42);
+		TERMINAL_279.addFollower(TERMINAL_47);
+		TERMINAL_279.addFollower(TERMINAL_43);
+		TERMINAL_280.addFollower(TERMINAL_282);
+		TERMINAL_280.addFollower(TERMINAL_33);
+		TERMINAL_280.addFollower(TERMINAL_41);
+		TERMINAL_280.addFollower(TERMINAL_37);
+		TERMINAL_280.addFollower(TERMINAL_38);
+		TERMINAL_280.addFollower(TERMINAL_250);
+		TERMINAL_280.addFollower(TERMINAL_255);
+		TERMINAL_280.addFollower(TERMINAL_42);
+		TERMINAL_280.addFollower(TERMINAL_47);
+		TERMINAL_280.addFollower(TERMINAL_43);
 		TERMINAL_281.addFollower(TERMINAL_282);
-		TERMINAL_282.addFollower(TERMINAL_33);
-		TERMINAL_282.addFollower(TERMINAL_41);
-		TERMINAL_282.addFollower(TERMINAL_37);
-		TERMINAL_282.addFollower(TERMINAL_38);
-		TERMINAL_282.addFollower(TERMINAL_246);
-		TERMINAL_282.addFollower(TERMINAL_251);
-		TERMINAL_282.addFollower(TERMINAL_42);
-		TERMINAL_282.addFollower(TERMINAL_47);
-		TERMINAL_282.addFollower(TERMINAL_43);
-		TERMINAL_34.addFollower(TERMINAL_283);
+		TERMINAL_281.addFollower(TERMINAL_33);
+		TERMINAL_281.addFollower(TERMINAL_41);
+		TERMINAL_281.addFollower(TERMINAL_37);
+		TERMINAL_281.addFollower(TERMINAL_38);
+		TERMINAL_281.addFollower(TERMINAL_250);
+		TERMINAL_281.addFollower(TERMINAL_255);
+		TERMINAL_281.addFollower(TERMINAL_42);
+		TERMINAL_281.addFollower(TERMINAL_47);
+		TERMINAL_281.addFollower(TERMINAL_43);
+		TERMINAL_282.addFollower(TERMINAL_283);
 		TERMINAL_283.addFollower(TERMINAL_284);
 		TERMINAL_284.addFollower(TERMINAL_285);
 		TERMINAL_285.addFollower(TERMINAL_286);
-		TERMINAL_286.addFollower(TERMINAL_287);
+		TERMINAL_286.addFollower(TERMINAL_33);
+		TERMINAL_286.addFollower(TERMINAL_41);
+		TERMINAL_286.addFollower(TERMINAL_37);
+		TERMINAL_286.addFollower(TERMINAL_38);
+		TERMINAL_286.addFollower(TERMINAL_250);
+		TERMINAL_286.addFollower(TERMINAL_255);
+		TERMINAL_286.addFollower(TERMINAL_42);
+		TERMINAL_286.addFollower(TERMINAL_47);
+		TERMINAL_286.addFollower(TERMINAL_43);
+		TERMINAL_34.addFollower(TERMINAL_287);
 		TERMINAL_287.addFollower(TERMINAL_288);
 		TERMINAL_288.addFollower(TERMINAL_289);
 		TERMINAL_289.addFollower(TERMINAL_290);
-		TERMINAL_290.addFollower(TERMINAL_192);
-		TERMINAL_290.addFollower(TERMINAL_203);
-		TERMINAL_290.addFollower(TERMINAL_42);
-		TERMINAL_290.addFollower(TERMINAL_47);
-		TERMINAL_290.addFollower(TERMINAL_43);
-		TERMINAL_35.addFollower(TERMINAL_291);
-		TERMINAL_35.addFollower(TERMINAL_292);
+		TERMINAL_290.addFollower(TERMINAL_291);
 		TERMINAL_291.addFollower(TERMINAL_292);
 		TERMINAL_292.addFollower(TERMINAL_293);
-		TERMINAL_293.addFollower(TERMINAL_192);
-		TERMINAL_293.addFollower(TERMINAL_203);
-		TERMINAL_293.addFollower(TERMINAL_42);
-		TERMINAL_293.addFollower(TERMINAL_47);
-		TERMINAL_293.addFollower(TERMINAL_43);
-		TERMINAL_36.addFollower(TERMINAL_245);
-		TERMINAL_36.addFollower(TERMINAL_250);
-		TERMINAL_36.addFollower(TERMINAL_42);
-		TERMINAL_36.addFollower(TERMINAL_47);
-		TERMINAL_36.addFollower(TERMINAL_43);
-		TERMINAL_37.addFollower(TERMINAL_294);
-		TERMINAL_37.addFollower(TERMINAL_295);
-		TERMINAL_37.addFollower(TERMINAL_296);
-		TERMINAL_294.addFollower(TERMINAL_295);
-		TERMINAL_294.addFollower(TERMINAL_296);
+		TERMINAL_293.addFollower(TERMINAL_294);
+		TERMINAL_294.addFollower(TERMINAL_192);
+		TERMINAL_294.addFollower(TERMINAL_203);
+		TERMINAL_294.addFollower(TERMINAL_42);
+		TERMINAL_294.addFollower(TERMINAL_47);
+		TERMINAL_294.addFollower(TERMINAL_43);
+		TERMINAL_35.addFollower(TERMINAL_295);
+		TERMINAL_35.addFollower(TERMINAL_296);
 		TERMINAL_295.addFollower(TERMINAL_296);
 		TERMINAL_296.addFollower(TERMINAL_297);
-		TERMINAL_296.addFollower(TERMINAL_298);
-		TERMINAL_297.addFollower(TERMINAL_299);
-		TERMINAL_297.addFollower(TERMINAL_33);
-		TERMINAL_297.addFollower(TERMINAL_41);
-		TERMINAL_297.addFollower(TERMINAL_37);
-		TERMINAL_297.addFollower(TERMINAL_38);
-		TERMINAL_297.addFollower(TERMINAL_246);
-		TERMINAL_297.addFollower(TERMINAL_251);
+		TERMINAL_297.addFollower(TERMINAL_192);
+		TERMINAL_297.addFollower(TERMINAL_203);
 		TERMINAL_297.addFollower(TERMINAL_42);
 		TERMINAL_297.addFollower(TERMINAL_47);
 		TERMINAL_297.addFollower(TERMINAL_43);
+		TERMINAL_36.addFollower(TERMINAL_249);
+		TERMINAL_36.addFollower(TERMINAL_254);
+		TERMINAL_36.addFollower(TERMINAL_42);
+		TERMINAL_36.addFollower(TERMINAL_47);
+		TERMINAL_36.addFollower(TERMINAL_43);
+		TERMINAL_37.addFollower(TERMINAL_298);
+		TERMINAL_37.addFollower(TERMINAL_299);
+		TERMINAL_37.addFollower(TERMINAL_300);
 		TERMINAL_298.addFollower(TERMINAL_299);
-		TERMINAL_298.addFollower(TERMINAL_33);
-		TERMINAL_298.addFollower(TERMINAL_41);
-		TERMINAL_298.addFollower(TERMINAL_37);
-		TERMINAL_298.addFollower(TERMINAL_38);
-		TERMINAL_298.addFollower(TERMINAL_246);
-		TERMINAL_298.addFollower(TERMINAL_251);
-		TERMINAL_298.addFollower(TERMINAL_42);
-		TERMINAL_298.addFollower(TERMINAL_47);
-		TERMINAL_298.addFollower(TERMINAL_43);
+		TERMINAL_298.addFollower(TERMINAL_300);
 		TERMINAL_299.addFollower(TERMINAL_300);
-		TERMINAL_300.addFollower(TERMINAL_33);
-		TERMINAL_300.addFollower(TERMINAL_41);
-		TERMINAL_300.addFollower(TERMINAL_37);
-		TERMINAL_300.addFollower(TERMINAL_38);
-		TERMINAL_300.addFollower(TERMINAL_246);
-		TERMINAL_300.addFollower(TERMINAL_251);
-		TERMINAL_300.addFollower(TERMINAL_42);
-		TERMINAL_300.addFollower(TERMINAL_47);
-		TERMINAL_300.addFollower(TERMINAL_43);
-		TERMINAL_38.addFollower(TERMINAL_301);
-		TERMINAL_38.addFollower(TERMINAL_302);
-		TERMINAL_38.addFollower(TERMINAL_303);
-		TERMINAL_301.addFollower(TERMINAL_302);
+		TERMINAL_300.addFollower(TERMINAL_301);
+		TERMINAL_300.addFollower(TERMINAL_302);
 		TERMINAL_301.addFollower(TERMINAL_303);
+		TERMINAL_301.addFollower(TERMINAL_33);
+		TERMINAL_301.addFollower(TERMINAL_41);
+		TERMINAL_301.addFollower(TERMINAL_37);
+		TERMINAL_301.addFollower(TERMINAL_38);
+		TERMINAL_301.addFollower(TERMINAL_250);
+		TERMINAL_301.addFollower(TERMINAL_255);
+		TERMINAL_301.addFollower(TERMINAL_42);
+		TERMINAL_301.addFollower(TERMINAL_47);
+		TERMINAL_301.addFollower(TERMINAL_43);
 		TERMINAL_302.addFollower(TERMINAL_303);
+		TERMINAL_302.addFollower(TERMINAL_33);
+		TERMINAL_302.addFollower(TERMINAL_41);
+		TERMINAL_302.addFollower(TERMINAL_37);
+		TERMINAL_302.addFollower(TERMINAL_38);
+		TERMINAL_302.addFollower(TERMINAL_250);
+		TERMINAL_302.addFollower(TERMINAL_255);
+		TERMINAL_302.addFollower(TERMINAL_42);
+		TERMINAL_302.addFollower(TERMINAL_47);
+		TERMINAL_302.addFollower(TERMINAL_43);
 		TERMINAL_303.addFollower(TERMINAL_304);
-		TERMINAL_304.addFollower(TERMINAL_305);
-		TERMINAL_304.addFollower(TERMINAL_306);
+		TERMINAL_304.addFollower(TERMINAL_33);
+		TERMINAL_304.addFollower(TERMINAL_41);
+		TERMINAL_304.addFollower(TERMINAL_37);
+		TERMINAL_304.addFollower(TERMINAL_38);
+		TERMINAL_304.addFollower(TERMINAL_250);
+		TERMINAL_304.addFollower(TERMINAL_255);
+		TERMINAL_304.addFollower(TERMINAL_42);
+		TERMINAL_304.addFollower(TERMINAL_47);
+		TERMINAL_304.addFollower(TERMINAL_43);
+		TERMINAL_38.addFollower(TERMINAL_305);
+		TERMINAL_38.addFollower(TERMINAL_306);
+		TERMINAL_38.addFollower(TERMINAL_307);
+		TERMINAL_305.addFollower(TERMINAL_306);
 		TERMINAL_305.addFollower(TERMINAL_307);
 		TERMINAL_306.addFollower(TERMINAL_307);
 	}
 	public static void wire3() {
 		TERMINAL_307.addFollower(TERMINAL_308);
-		TERMINAL_307.addFollower(TERMINAL_309);
+		TERMINAL_308.addFollower(TERMINAL_309);
 		TERMINAL_308.addFollower(TERMINAL_310);
-		TERMINAL_309.addFollower(TERMINAL_310);
+		TERMINAL_309.addFollower(TERMINAL_311);
 		TERMINAL_310.addFollower(TERMINAL_311);
-		TERMINAL_310.addFollower(TERMINAL_33);
-		TERMINAL_310.addFollower(TERMINAL_41);
-		TERMINAL_310.addFollower(TERMINAL_37);
-		TERMINAL_310.addFollower(TERMINAL_38);
-		TERMINAL_310.addFollower(TERMINAL_246);
-		TERMINAL_310.addFollower(TERMINAL_251);
-		TERMINAL_310.addFollower(TERMINAL_42);
-		TERMINAL_310.addFollower(TERMINAL_47);
-		TERMINAL_310.addFollower(TERMINAL_43);
 		TERMINAL_311.addFollower(TERMINAL_312);
-		TERMINAL_312.addFollower(TERMINAL_39);
-		TERMINAL_312.addFollower(TERMINAL_313);
-		TERMINAL_313.addFollower(TERMINAL_33);
-		TERMINAL_313.addFollower(TERMINAL_41);
-		TERMINAL_313.addFollower(TERMINAL_37);
-		TERMINAL_313.addFollower(TERMINAL_38);
-		TERMINAL_313.addFollower(TERMINAL_246);
-		TERMINAL_313.addFollower(TERMINAL_251);
-		TERMINAL_313.addFollower(TERMINAL_42);
-		TERMINAL_313.addFollower(TERMINAL_47);
-		TERMINAL_313.addFollower(TERMINAL_43);
-		TERMINAL_39.addFollower(TERMINAL_314);
+		TERMINAL_311.addFollower(TERMINAL_313);
+		TERMINAL_312.addFollower(TERMINAL_314);
+		TERMINAL_313.addFollower(TERMINAL_314);
 		TERMINAL_314.addFollower(TERMINAL_315);
-		TERMINAL_314.addFollower(TERMINAL_316);
-		TERMINAL_315.addFollower(TERMINAL_317);
-		TERMINAL_317.addFollower(TERMINAL_316);
+		TERMINAL_314.addFollower(TERMINAL_33);
+		TERMINAL_314.addFollower(TERMINAL_41);
+		TERMINAL_314.addFollower(TERMINAL_37);
+		TERMINAL_314.addFollower(TERMINAL_38);
+		TERMINAL_314.addFollower(TERMINAL_250);
+		TERMINAL_314.addFollower(TERMINAL_255);
+		TERMINAL_314.addFollower(TERMINAL_42);
+		TERMINAL_314.addFollower(TERMINAL_47);
+		TERMINAL_314.addFollower(TERMINAL_43);
+		TERMINAL_315.addFollower(TERMINAL_316);
 		TERMINAL_316.addFollower(TERMINAL_39);
-		TERMINAL_316.addFollower(TERMINAL_313);
-		TERMINAL_316.addFollower(TERMINAL_42);
-		TERMINAL_316.addFollower(TERMINAL_47);
-		TERMINAL_316.addFollower(TERMINAL_43);
-		TERMINAL_40.addFollower(TERMINAL_318);
-		TERMINAL_40.addFollower(TERMINAL_319);
+		TERMINAL_316.addFollower(TERMINAL_317);
+		TERMINAL_317.addFollower(TERMINAL_33);
+		TERMINAL_317.addFollower(TERMINAL_41);
+		TERMINAL_317.addFollower(TERMINAL_37);
+		TERMINAL_317.addFollower(TERMINAL_38);
+		TERMINAL_317.addFollower(TERMINAL_250);
+		TERMINAL_317.addFollower(TERMINAL_255);
+		TERMINAL_317.addFollower(TERMINAL_42);
+		TERMINAL_317.addFollower(TERMINAL_47);
+		TERMINAL_317.addFollower(TERMINAL_43);
+		TERMINAL_39.addFollower(TERMINAL_318);
+		TERMINAL_318.addFollower(TERMINAL_319);
+		TERMINAL_318.addFollower(TERMINAL_320);
+		TERMINAL_318.addFollower(TERMINAL_321);
+		TERMINAL_319.addFollower(TERMINAL_322);
+		TERMINAL_322.addFollower(TERMINAL_320);
+		TERMINAL_322.addFollower(TERMINAL_321);
+		TERMINAL_320.addFollower(TERMINAL_321);
+		TERMINAL_321.addFollower(TERMINAL_39);
+		TERMINAL_321.addFollower(TERMINAL_317);
+		TERMINAL_321.addFollower(TERMINAL_42);
+		TERMINAL_321.addFollower(TERMINAL_47);
+		TERMINAL_321.addFollower(TERMINAL_43);
+		TERMINAL_40.addFollower(TERMINAL_323);
+		TERMINAL_40.addFollower(TERMINAL_324);
 		TERMINAL_40.addFollower(TERMINAL_42);
 		TERMINAL_40.addFollower(TERMINAL_47);
 		TERMINAL_40.addFollower(TERMINAL_43);
-		TERMINAL_41.addFollower(TERMINAL_320);
-		TERMINAL_320.addFollower(TERMINAL_321);
-		TERMINAL_320.addFollower(TERMINAL_322);
-		TERMINAL_320.addFollower(TERMINAL_323);
-		TERMINAL_321.addFollower(TERMINAL_322);
-		TERMINAL_321.addFollower(TERMINAL_323);
-		TERMINAL_322.addFollower(TERMINAL_323);
-		TERMINAL_323.addFollower(TERMINAL_324);
-		TERMINAL_323.addFollower(TERMINAL_325);
-		TERMINAL_324.addFollower(TERMINAL_326);
+		TERMINAL_41.addFollower(TERMINAL_325);
 		TERMINAL_325.addFollower(TERMINAL_326);
-		TERMINAL_326.addFollower(TERMINAL_40);
-		TERMINAL_318.addFollower(TERMINAL_40);
-		TERMINAL_319.addFollower(TERMINAL_33);
-		TERMINAL_319.addFollower(TERMINAL_41);
-		TERMINAL_319.addFollower(TERMINAL_37);
-		TERMINAL_319.addFollower(TERMINAL_38);
-		TERMINAL_319.addFollower(TERMINAL_246);
-		TERMINAL_319.addFollower(TERMINAL_251);
-		TERMINAL_319.addFollower(TERMINAL_42);
-		TERMINAL_319.addFollower(TERMINAL_47);
-		TERMINAL_319.addFollower(TERMINAL_43);
-		TERMINAL_14.addFollower(TERMINAL_327);
+		TERMINAL_325.addFollower(TERMINAL_327);
+		TERMINAL_325.addFollower(TERMINAL_328);
+		TERMINAL_326.addFollower(TERMINAL_327);
+		TERMINAL_326.addFollower(TERMINAL_328);
 		TERMINAL_327.addFollower(TERMINAL_328);
-		TERMINAL_328.addFollower(TERMINAL_15);
-		TERMINAL_328.addFollower(TERMINAL_16);
-		TERMINAL_328.addFollower(TERMINAL_17);
-		TERMINAL_328.addFollower(TERMINAL_18);
-		TERMINAL_328.addFollower(TERMINAL_19);
-		TERMINAL_328.addFollower(TERMINAL_20);
-		TERMINAL_328.addFollower(TERMINAL_21);
-		TERMINAL_328.addFollower(TERMINAL_22);
-		TERMINAL_328.addFollower(TERMINAL_23);
-		TERMINAL_328.addFollower(TERMINAL_24);
-		TERMINAL_328.addFollower(TERMINAL_25);
-		TERMINAL_328.addFollower(TERMINAL_26);
-		TERMINAL_328.addFollower(TERMINAL_27);
-		TERMINAL_328.addFollower(TERMINAL_28);
-		TERMINAL_328.addFollower(TERMINAL_29);
-		TERMINAL_328.addFollower(TERMINAL_30);
-		TERMINAL_328.addFollower(TERMINAL_31);
-		TERMINAL_328.addFollower(TERMINAL_32);
-		TERMINAL_328.addFollower(TERMINAL_33);
-		TERMINAL_328.addFollower(TERMINAL_34);
-		TERMINAL_328.addFollower(TERMINAL_35);
-		TERMINAL_328.addFollower(TERMINAL_36);
-		TERMINAL_328.addFollower(TERMINAL_37);
-		TERMINAL_328.addFollower(TERMINAL_38);
-		TERMINAL_328.addFollower(TERMINAL_39);
-		TERMINAL_328.addFollower(TERMINAL_40);
-		TERMINAL_328.addFollower(TERMINAL_41);
-		TERMINAL_328.addFollower(TERMINAL_42);
-		TERMINAL_328.addFollower(TERMINAL_43);
-		TERMINAL_328.addFollower(TERMINAL_44);
-		TERMINAL_43.addFollower(TERMINAL_329);
-		TERMINAL_329.addFollower(TERMINAL_330);
-		TERMINAL_330.addFollower(TERMINAL_15);
-		TERMINAL_330.addFollower(TERMINAL_16);
-		TERMINAL_330.addFollower(TERMINAL_17);
-		TERMINAL_330.addFollower(TERMINAL_18);
-		TERMINAL_330.addFollower(TERMINAL_19);
-		TERMINAL_330.addFollower(TERMINAL_20);
-		TERMINAL_330.addFollower(TERMINAL_21);
-		TERMINAL_330.addFollower(TERMINAL_22);
-		TERMINAL_330.addFollower(TERMINAL_23);
-		TERMINAL_330.addFollower(TERMINAL_24);
-		TERMINAL_330.addFollower(TERMINAL_25);
-		TERMINAL_330.addFollower(TERMINAL_26);
-		TERMINAL_330.addFollower(TERMINAL_27);
-		TERMINAL_330.addFollower(TERMINAL_28);
-		TERMINAL_330.addFollower(TERMINAL_29);
-		TERMINAL_330.addFollower(TERMINAL_30);
-		TERMINAL_330.addFollower(TERMINAL_31);
-		TERMINAL_330.addFollower(TERMINAL_32);
-		TERMINAL_330.addFollower(TERMINAL_33);
-		TERMINAL_330.addFollower(TERMINAL_34);
-		TERMINAL_330.addFollower(TERMINAL_35);
-		TERMINAL_330.addFollower(TERMINAL_36);
-		TERMINAL_330.addFollower(TERMINAL_37);
-		TERMINAL_330.addFollower(TERMINAL_38);
-		TERMINAL_330.addFollower(TERMINAL_39);
-		TERMINAL_330.addFollower(TERMINAL_40);
-		TERMINAL_330.addFollower(TERMINAL_41);
-		TERMINAL_330.addFollower(TERMINAL_42);
-		TERMINAL_330.addFollower(TERMINAL_43);
-		TERMINAL_330.addFollower(TERMINAL_44);
-		TERMINAL_42.addFollower(TERMINAL_331);
-		TERMINAL_331.addFollower(TERMINAL_332);
-		TERMINAL_333.addFollower(TERMINAL_332);
-		TERMINAL_334.addFollower(TERMINAL_47);
-		TERMINAL_334.addFollower(TERMINAL_43);
-		TERMINAL_13.addFollower(TERMINAL_335);
-		TERMINAL_335.addFollower(TERMINAL_336);
+		TERMINAL_328.addFollower(TERMINAL_329);
+		TERMINAL_328.addFollower(TERMINAL_330);
+		TERMINAL_329.addFollower(TERMINAL_331);
+		TERMINAL_330.addFollower(TERMINAL_331);
+		TERMINAL_331.addFollower(TERMINAL_40);
+		TERMINAL_323.addFollower(TERMINAL_40);
+		TERMINAL_324.addFollower(TERMINAL_33);
+		TERMINAL_324.addFollower(TERMINAL_41);
+		TERMINAL_324.addFollower(TERMINAL_37);
+		TERMINAL_324.addFollower(TERMINAL_38);
+		TERMINAL_324.addFollower(TERMINAL_250);
+		TERMINAL_324.addFollower(TERMINAL_255);
+		TERMINAL_324.addFollower(TERMINAL_42);
+		TERMINAL_324.addFollower(TERMINAL_47);
+		TERMINAL_324.addFollower(TERMINAL_43);
+		TERMINAL_14.addFollower(TERMINAL_332);
+		TERMINAL_332.addFollower(TERMINAL_333);
+		TERMINAL_333.addFollower(TERMINAL_15);
+		TERMINAL_333.addFollower(TERMINAL_16);
+		TERMINAL_333.addFollower(TERMINAL_17);
+		TERMINAL_333.addFollower(TERMINAL_18);
+		TERMINAL_333.addFollower(TERMINAL_19);
+		TERMINAL_333.addFollower(TERMINAL_20);
+		TERMINAL_333.addFollower(TERMINAL_21);
+		TERMINAL_333.addFollower(TERMINAL_22);
+		TERMINAL_333.addFollower(TERMINAL_23);
+		TERMINAL_333.addFollower(TERMINAL_24);
+		TERMINAL_333.addFollower(TERMINAL_25);
+		TERMINAL_333.addFollower(TERMINAL_26);
+		TERMINAL_333.addFollower(TERMINAL_27);
+		TERMINAL_333.addFollower(TERMINAL_28);
+		TERMINAL_333.addFollower(TERMINAL_29);
+		TERMINAL_333.addFollower(TERMINAL_30);
+		TERMINAL_333.addFollower(TERMINAL_31);
+		TERMINAL_333.addFollower(TERMINAL_32);
+		TERMINAL_333.addFollower(TERMINAL_33);
+		TERMINAL_333.addFollower(TERMINAL_34);
+		TERMINAL_333.addFollower(TERMINAL_35);
+		TERMINAL_333.addFollower(TERMINAL_36);
+		TERMINAL_333.addFollower(TERMINAL_37);
+		TERMINAL_333.addFollower(TERMINAL_38);
+		TERMINAL_333.addFollower(TERMINAL_39);
+		TERMINAL_333.addFollower(TERMINAL_40);
+		TERMINAL_333.addFollower(TERMINAL_41);
+		TERMINAL_333.addFollower(TERMINAL_42);
+		TERMINAL_333.addFollower(TERMINAL_43);
+		TERMINAL_333.addFollower(TERMINAL_44);
+		TERMINAL_43.addFollower(TERMINAL_334);
+		TERMINAL_334.addFollower(TERMINAL_335);
+		TERMINAL_335.addFollower(TERMINAL_15);
+		TERMINAL_335.addFollower(TERMINAL_16);
+		TERMINAL_335.addFollower(TERMINAL_17);
+		TERMINAL_335.addFollower(TERMINAL_18);
+		TERMINAL_335.addFollower(TERMINAL_19);
+		TERMINAL_335.addFollower(TERMINAL_20);
+		TERMINAL_335.addFollower(TERMINAL_21);
+		TERMINAL_335.addFollower(TERMINAL_22);
+		TERMINAL_335.addFollower(TERMINAL_23);
+		TERMINAL_335.addFollower(TERMINAL_24);
+		TERMINAL_335.addFollower(TERMINAL_25);
+		TERMINAL_335.addFollower(TERMINAL_26);
+		TERMINAL_335.addFollower(TERMINAL_27);
+		TERMINAL_335.addFollower(TERMINAL_28);
+		TERMINAL_335.addFollower(TERMINAL_29);
+		TERMINAL_335.addFollower(TERMINAL_30);
+		TERMINAL_335.addFollower(TERMINAL_31);
+		TERMINAL_335.addFollower(TERMINAL_32);
+		TERMINAL_335.addFollower(TERMINAL_33);
+		TERMINAL_335.addFollower(TERMINAL_34);
+		TERMINAL_335.addFollower(TERMINAL_35);
+		TERMINAL_335.addFollower(TERMINAL_36);
+		TERMINAL_335.addFollower(TERMINAL_37);
+		TERMINAL_335.addFollower(TERMINAL_38);
+		TERMINAL_335.addFollower(TERMINAL_39);
+		TERMINAL_335.addFollower(TERMINAL_40);
+		TERMINAL_335.addFollower(TERMINAL_41);
+		TERMINAL_335.addFollower(TERMINAL_42);
+		TERMINAL_335.addFollower(TERMINAL_43);
+		TERMINAL_335.addFollower(TERMINAL_44);
+		TERMINAL_42.addFollower(TERMINAL_336);
 		TERMINAL_336.addFollower(TERMINAL_337);
-		TERMINAL_337.addFollower(TERMINAL_338);
-		TERMINAL_338.addFollower(TERMINAL_339);
-		TERMINAL_339.addFollower(TERMINAL_340);
-		TERMINAL_340.addFollower(TERMINAL_14);
-		TERMINAL_340.addFollower(TERMINAL_15);
-		TERMINAL_340.addFollower(TERMINAL_16);
-		TERMINAL_340.addFollower(TERMINAL_17);
-		TERMINAL_340.addFollower(TERMINAL_18);
-		TERMINAL_340.addFollower(TERMINAL_19);
-		TERMINAL_340.addFollower(TERMINAL_20);
-		TERMINAL_340.addFollower(TERMINAL_21);
-		TERMINAL_340.addFollower(TERMINAL_22);
-		TERMINAL_340.addFollower(TERMINAL_23);
-		TERMINAL_340.addFollower(TERMINAL_24);
-		TERMINAL_340.addFollower(TERMINAL_25);
-		TERMINAL_340.addFollower(TERMINAL_26);
-		TERMINAL_340.addFollower(TERMINAL_27);
-		TERMINAL_340.addFollower(TERMINAL_28);
-		TERMINAL_340.addFollower(TERMINAL_29);
-		TERMINAL_340.addFollower(TERMINAL_30);
-		TERMINAL_340.addFollower(TERMINAL_31);
-		TERMINAL_340.addFollower(TERMINAL_32);
-		TERMINAL_340.addFollower(TERMINAL_33);
-		TERMINAL_340.addFollower(TERMINAL_34);
-		TERMINAL_340.addFollower(TERMINAL_35);
-		TERMINAL_340.addFollower(TERMINAL_36);
-		TERMINAL_340.addFollower(TERMINAL_37);
-		TERMINAL_340.addFollower(TERMINAL_38);
-		TERMINAL_340.addFollower(TERMINAL_39);
-		TERMINAL_340.addFollower(TERMINAL_40);
-		TERMINAL_340.addFollower(TERMINAL_41);
-		TERMINAL_340.addFollower(TERMINAL_42);
-		TERMINAL_340.addFollower(TERMINAL_43);
-		TERMINAL_340.addFollower(TERMINAL_44);
-		TERMINAL_332.addFollower(TERMINAL_341);
+		TERMINAL_338.addFollower(TERMINAL_337);
+		TERMINAL_339.addFollower(TERMINAL_47);
+		TERMINAL_339.addFollower(TERMINAL_43);
+		TERMINAL_13.addFollower(TERMINAL_340);
+		TERMINAL_340.addFollower(TERMINAL_341);
 		TERMINAL_341.addFollower(TERMINAL_342);
 		TERMINAL_342.addFollower(TERMINAL_343);
-		TERMINAL_343.addFollower(TERMINAL_333);
-		TERMINAL_343.addFollower(TERMINAL_334);
+		TERMINAL_343.addFollower(TERMINAL_344);
+		TERMINAL_344.addFollower(TERMINAL_345);
+		TERMINAL_345.addFollower(TERMINAL_14);
+		TERMINAL_345.addFollower(TERMINAL_15);
+		TERMINAL_345.addFollower(TERMINAL_16);
+		TERMINAL_345.addFollower(TERMINAL_17);
+		TERMINAL_345.addFollower(TERMINAL_18);
+		TERMINAL_345.addFollower(TERMINAL_19);
+		TERMINAL_345.addFollower(TERMINAL_20);
+		TERMINAL_345.addFollower(TERMINAL_21);
+		TERMINAL_345.addFollower(TERMINAL_22);
+		TERMINAL_345.addFollower(TERMINAL_23);
+		TERMINAL_345.addFollower(TERMINAL_24);
+		TERMINAL_345.addFollower(TERMINAL_25);
+		TERMINAL_345.addFollower(TERMINAL_26);
+		TERMINAL_345.addFollower(TERMINAL_27);
+		TERMINAL_345.addFollower(TERMINAL_28);
+		TERMINAL_345.addFollower(TERMINAL_29);
+		TERMINAL_345.addFollower(TERMINAL_30);
+		TERMINAL_345.addFollower(TERMINAL_31);
+		TERMINAL_345.addFollower(TERMINAL_32);
+		TERMINAL_345.addFollower(TERMINAL_33);
+		TERMINAL_345.addFollower(TERMINAL_34);
+		TERMINAL_345.addFollower(TERMINAL_35);
+		TERMINAL_345.addFollower(TERMINAL_36);
+		TERMINAL_345.addFollower(TERMINAL_37);
+		TERMINAL_345.addFollower(TERMINAL_38);
+		TERMINAL_345.addFollower(TERMINAL_39);
+		TERMINAL_345.addFollower(TERMINAL_40);
+		TERMINAL_345.addFollower(TERMINAL_41);
+		TERMINAL_345.addFollower(TERMINAL_42);
+		TERMINAL_345.addFollower(TERMINAL_43);
+		TERMINAL_345.addFollower(TERMINAL_44);
+		TERMINAL_337.addFollower(TERMINAL_346);
+		TERMINAL_346.addFollower(TERMINAL_347);
+		TERMINAL_347.addFollower(TERMINAL_348);
+		TERMINAL_348.addFollower(TERMINAL_338);
+		TERMINAL_348.addFollower(TERMINAL_339);
 	}
 	// wire the terminals
 	static {
@@ -8014,6 +8076,7 @@ parse_pattern_art_instance_ValuedAttribute returns [pattern.art.instance.ValuedA
 	)
 	{
 		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_232, 275));
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 275));
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 275));
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 275));
@@ -8025,6 +8088,68 @@ parse_pattern_art_instance_ValuedAttribute returns [pattern.art.instance.ValuedA
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 275));
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 275));
 		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 275));
+	}
+	
+	(
+		(
+			(
+				a3 = TXTID				
+				{
+					if (terminateParsing) {
+						throw new org.smartadapters.core.resource.smARText.mopp.SmARTextTerminateParsingException();
+					}
+					if (element == null) {
+						element = pattern.art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+					}
+					if (a3 != null) {
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TXTID");
+						tokenResolver.setOptions(getOptions());
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID), result);
+						java.lang.Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a3).getLine(), ((org.antlr.runtime.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a3).getStartIndex(), ((org.antlr.runtime.CommonToken) a3).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String)resolvedObject;
+						if (resolved != null) {
+							element.eSet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID), resolved);
+							completedElement(resolved);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos((org.antlr.runtime.CommonToken) a3, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 276));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 276));
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 277));
 	}
 	
 ;
@@ -8067,7 +8192,7 @@ parse_pattern_art_instance_DictionaryValuedAttribute returns [pattern.art.instan
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_232, 276));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 278));
 	}
 	
 	a1 = ':=' {
@@ -8079,19 +8204,20 @@ parse_pattern_art_instance_DictionaryValuedAttribute returns [pattern.art.instan
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 277));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 277));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 279));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 279));
 	}
 	
 	(
@@ -8115,18 +8241,19 @@ parse_pattern_art_instance_DictionaryValuedAttribute returns [pattern.art.instan
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 278));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 278));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 280));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 280));
 			}
 			
 			(
@@ -8140,8 +8267,8 @@ parse_pattern_art_instance_DictionaryValuedAttribute returns [pattern.art.instan
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 279));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 279));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 281));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 281));
 					}
 					
 					(
@@ -8163,53 +8290,118 @@ parse_pattern_art_instance_DictionaryValuedAttribute returns [pattern.art.instan
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 280));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 280));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 282));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 282));
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 281));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 281));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 283));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 283));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 282));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 282));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 284));
+	}
+	
+	(
+		(
+			(
+				a5 = TXTID				
+				{
+					if (terminateParsing) {
+						throw new org.smartadapters.core.resource.smARText.mopp.SmARTextTerminateParsingException();
+					}
+					if (element == null) {
+						element = pattern.art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+					}
+					if (a5 != null) {
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TXTID");
+						tokenResolver.setOptions(getOptions());
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__PID), result);
+						java.lang.Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a5).getLine(), ((org.antlr.runtime.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a5).getStartIndex(), ((org.antlr.runtime.CommonToken) a5).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String)resolvedObject;
+						if (resolved != null) {
+							element.eSet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__PID), resolved);
+							completedElement(resolved);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos((org.antlr.runtime.CommonToken) a5, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 285));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 285));
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 286));
 	}
 	
 ;
@@ -8227,7 +8419,7 @@ parse_pattern_art_instance_DefaultEntry returns [pattern.art.instance.DefaultEnt
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 283));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_236, 287));
 	}
 	
 	(
@@ -8264,7 +8456,7 @@ parse_pattern_art_instance_DefaultEntry returns [pattern.art.instance.DefaultEnt
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 284));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_237, 288));
 	}
 	
 	a2 = '->' {
@@ -8276,7 +8468,7 @@ parse_pattern_art_instance_DefaultEntry returns [pattern.art.instance.DefaultEnt
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_236, 285));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_238, 289));
 	}
 	
 	(
@@ -8309,7 +8501,7 @@ parse_pattern_art_instance_DefaultEntry returns [pattern.art.instance.DefaultEnt
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_237, 286));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_239, 290));
 	}
 	
 	a4 = ']' {
@@ -8321,18 +8513,86 @@ parse_pattern_art_instance_DefaultEntry returns [pattern.art.instance.DefaultEnt
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 287));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 287));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_240, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 291));
+	}
+	
+	(
+		(
+			(
+				a5 = TXTID				
+				{
+					if (terminateParsing) {
+						throw new org.smartadapters.core.resource.smARText.mopp.SmARTextTerminateParsingException();
+					}
+					if (element == null) {
+						element = pattern.art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+					}
+					if (a5 != null) {
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TXTID");
+						tokenResolver.setOptions(getOptions());
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID), result);
+						java.lang.Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a5).getLine(), ((org.antlr.runtime.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a5).getStartIndex(), ((org.antlr.runtime.CommonToken) a5).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String)resolvedObject;
+						if (resolved != null) {
+							element.eSet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID), resolved);
+							completedElement(resolved);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos((org.antlr.runtime.CommonToken) a5, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 292));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 292));
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 293));
 	}
 	
 ;
@@ -8350,7 +8610,7 @@ parse_pattern_art_instance_OtherEntry returns [pattern.art.instance.OtherEntry e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_238, 288));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_241, 294));
 	}
 	
 	(
@@ -8383,7 +8643,7 @@ parse_pattern_art_instance_OtherEntry returns [pattern.art.instance.OtherEntry e
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_239, 289));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_242, 295));
 	}
 	
 	a2 = '->' {
@@ -8395,7 +8655,7 @@ parse_pattern_art_instance_OtherEntry returns [pattern.art.instance.OtherEntry e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_240, 290));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_243, 296));
 	}
 	
 	(
@@ -8428,7 +8688,7 @@ parse_pattern_art_instance_OtherEntry returns [pattern.art.instance.OtherEntry e
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_241, 291));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 297));
 	}
 	
 	a4 = ']' {
@@ -8440,18 +8700,86 @@ parse_pattern_art_instance_OtherEntry returns [pattern.art.instance.OtherEntry e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_233, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 292));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 292));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 298));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 298));
+	}
+	
+	(
+		(
+			(
+				a5 = TXTID				
+				{
+					if (terminateParsing) {
+						throw new org.smartadapters.core.resource.smARText.mopp.SmARTextTerminateParsingException();
+					}
+					if (element == null) {
+						element = pattern.art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+					}
+					if (a5 != null) {
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TXTID");
+						tokenResolver.setOptions(getOptions());
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID), result);
+						java.lang.Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a5).getLine(), ((org.antlr.runtime.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a5).getStartIndex(), ((org.antlr.runtime.CommonToken) a5).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String)resolvedObject;
+						if (resolved != null) {
+							element.eSet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID), resolved);
+							completedElement(resolved);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos((org.antlr.runtime.CommonToken) a5, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 299));
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_235, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_234, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_193, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_194, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 300));
 	}
 	
 ;
@@ -8469,10 +8797,10 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_242, 293));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_243, 293));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 293));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 293));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 301));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_247, 301));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 301));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 301));
 	}
 	
 	(
@@ -8507,18 +8835,18 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_243, 294));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 294));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 294));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_247, 302));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 302));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 302));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_243, 295));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 295));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 295));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_247, 303));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 303));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 303));
 	}
 	
 	(
@@ -8553,16 +8881,16 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 296));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 296));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 304));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 304));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_244, 297));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 297));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 305));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 305));
 	}
 	
 	(
@@ -8576,7 +8904,7 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 298));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 306));
 			}
 			
 			(
@@ -8598,14 +8926,14 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 299));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 307));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 300));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 308));
 	}
 	
 	a5 = '{' {
@@ -8617,11 +8945,11 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 301));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 301));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 301));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 301));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 301));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 309));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 309));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 309));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 309));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 309));
 	}
 	
 	(
@@ -8645,11 +8973,11 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 302));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 302));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 302));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 302));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 302));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 310));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 310));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 310));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 310));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 310));
 			}
 			
 			
@@ -8672,22 +9000,22 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 303));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 303));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 303));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 303));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 303));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 311));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 311));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 311));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 311));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 311));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 304));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 304));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 304));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 304));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 304));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 312));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 312));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 312));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 312));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 312));
 	}
 	
 	a8 = '}' {
@@ -8699,14 +9027,14 @@ parse_pattern_art_type_PrimitiveType returns [pattern.art.type.PrimitiveType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 305));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 305));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 313));
 	}
 	
 ;
@@ -8724,10 +9052,10 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_247, 306));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 306));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 306));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 306));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 314));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_252, 314));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 314));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 314));
 	}
 	
 	(
@@ -8762,18 +9090,18 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 307));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 307));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 307));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_252, 315));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 315));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 315));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_248, 308));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 308));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 308));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_252, 316));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 316));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 316));
 	}
 	
 	(
@@ -8808,16 +9136,16 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 309));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 309));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 317));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 317));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 310));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 310));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 318));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 318));
 	}
 	
 	(
@@ -8831,7 +9159,7 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 311));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 319));
 			}
 			
 			(
@@ -8853,14 +9181,14 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 312));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 320));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 313));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 321));
 	}
 	
 	a5 = '{' {
@@ -8872,11 +9200,11 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 314));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 314));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 314));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 314));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 314));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 322));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 322));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 322));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 322));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 322));
 	}
 	
 	(
@@ -8900,11 +9228,11 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 315));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 315));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 315));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 315));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 315));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 323));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 323));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 323));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 323));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 323));
 			}
 			
 			
@@ -8927,22 +9255,22 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 316));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 316));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 316));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 316));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 316));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 324));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 324));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 324));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 324));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 324));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 317));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 317));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 317));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 317));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 317));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 325));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 325));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 325));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 325));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 325));
 	}
 	
 	a8 = '}' {
@@ -8954,14 +9282,14 @@ parse_pattern_art_type_CompositeType returns [pattern.art.type.CompositeType ele
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 318));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 318));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 326));
 	}
 	
 ;
@@ -8979,9 +9307,9 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_252, 319));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 319));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 319));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 327));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_257, 327));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 327));
 	}
 	
 	(
@@ -9016,16 +9344,16 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 320));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 320));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_257, 328));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 328));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_253, 321));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 321));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_257, 329));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 329));
 	}
 	
 	(
@@ -9060,14 +9388,14 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 322));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 330));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 323));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 331));
 	}
 	
 	a3 = '(' {
@@ -9079,10 +9407,10 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 324));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 324));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 324));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 324));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 332));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 332));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 332));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 332));
 	}
 	
 	(
@@ -9106,16 +9434,16 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 325));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 325));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 333));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 333));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 326));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 326));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 334));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 334));
 	}
 	
 	(
@@ -9129,8 +9457,8 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 327));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 327));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 335));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 335));
 			}
 			
 			(
@@ -9152,16 +9480,16 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 328));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 328));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 336));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 336));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 329));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 329));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 337));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 337));
 	}
 	
 	a7 = ')' {
@@ -9173,14 +9501,14 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_257, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 330));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 330));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_261, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 338));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 338));
 	}
 	
 	(
@@ -9194,8 +9522,8 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 331));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 331));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 339));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 339));
 			}
 			
 			(
@@ -9217,26 +9545,26 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 332));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 332));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 340));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 333));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 333));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 341));
 	}
 	
 	(
@@ -9250,8 +9578,8 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 334));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 334));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 342));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 342));
 			}
 			
 			(
@@ -9273,26 +9601,26 @@ parse_pattern_art_type_Operation returns [pattern.art.type.Operation element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 335));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 335));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 343));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 343));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_258, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 336));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 336));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 344));
 	}
 	
 ;
@@ -9336,13 +9664,13 @@ parse_pattern_art_type_Parameter returns [pattern.art.type.Parameter element = n
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_261, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 337));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 337));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 345));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 345));
 		}
 		
 		
@@ -9355,25 +9683,25 @@ parse_pattern_art_type_Parameter returns [pattern.art.type.Parameter element = n
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_261, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 338));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 338));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 346));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 346));
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_261, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 339));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 339));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 347));
 	}
 	
 	(
@@ -9408,24 +9736,24 @@ parse_pattern_art_type_Parameter returns [pattern.art.type.Parameter element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 340));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 340));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 340));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 340));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 340));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 340));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 348));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_262, 341));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 341));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 341));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 341));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 341));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 341));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 349));
 	}
 	
 	(
@@ -9460,22 +9788,22 @@ parse_pattern_art_type_Parameter returns [pattern.art.type.Parameter element = n
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 342));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 342));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 342));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 342));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 342));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 350));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 350));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 350));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 350));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 350));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 343));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_256, 343));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 343));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 343));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 343));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 351));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 351));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 351));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 351));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 351));
 	}
 	
 ;
@@ -9493,7 +9821,7 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 344));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_267, 352));
 	}
 	
 	a1 = 'service' {
@@ -9505,9 +9833,9 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 345));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 345));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 345));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_268, 353));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 353));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 353));
 	}
 	
 	(
@@ -9542,16 +9870,16 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 346));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 346));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 354));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 354));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_265, 347));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 347));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 355));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 355));
 	}
 	
 	(
@@ -9586,14 +9914,14 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 348));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 356));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_266, 349));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 357));
 	}
 	
 	a4 = '{' {
@@ -9605,8 +9933,8 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 350));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 350));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 358));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 358));
 	}
 	
 	(
@@ -9630,16 +9958,16 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 351));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 351));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 359));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 359));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 352));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_259, 352));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 360));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_263, 360));
 	}
 	
 	a6 = '}' {
@@ -9651,14 +9979,14 @@ parse_pattern_art_type_FunctionalService returns [pattern.art.type.FunctionalSer
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 353));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 353));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 361));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 361));
 	}
 	
 ;
@@ -9676,7 +10004,7 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_267, 354));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_271, 362));
 	}
 	
 	a1 = 'service' {
@@ -9688,9 +10016,9 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_268, 355));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 355));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 355));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_272, 363));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_273, 363));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 363));
 	}
 	
 	(
@@ -9725,16 +10053,16 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 356));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 356));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_273, 364));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 364));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_269, 357));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 357));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_273, 365));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 365));
 	}
 	
 	(
@@ -9769,14 +10097,14 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 358));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 366));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_270, 359));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 367));
 	}
 	
 	a4 = '{' {
@@ -9788,8 +10116,8 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 360));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 360));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 368));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 368));
 	}
 	
 	(
@@ -9813,16 +10141,16 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 361));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 361));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 369));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 369));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 362));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_260, 362));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 370));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_264, 370));
 	}
 	
 	a6 = '}' {
@@ -9834,14 +10162,14 @@ parse_pattern_art_type_ControlService returns [pattern.art.type.ControlService e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 363));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 363));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 371));
 	}
 	
 ;
@@ -9880,8 +10208,8 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_271, 364));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_272, 364));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 372));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_276, 372));
 	}
 	
 	(
@@ -9916,14 +10244,14 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_272, 365));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_276, 373));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_272, 366));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_276, 374));
 	}
 	
 	a2 = 'port' {
@@ -9935,9 +10263,9 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_273, 367));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 367));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 367));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_277, 375));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 375));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 375));
 	}
 	
 	(
@@ -9972,16 +10300,16 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 368));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 368));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 376));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 376));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_274, 369));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 369));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 377));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 377));
 	}
 	
 	(
@@ -10016,14 +10344,14 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 370));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 378));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_275, 371));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 379));
 	}
 	
 	a5 = ':' {
@@ -10035,18 +10363,18 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_276, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_277, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 372));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 372));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_280, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_281, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_282, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 380));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 380));
 	}
 	
 	(
@@ -10085,16 +10413,16 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 373));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 373));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_282, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 381));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 381));
 			}
 			
 			
@@ -10107,32 +10435,32 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 374));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 374));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_282, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 382));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 382));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_278, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 375));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 375));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_282, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 383));
 	}
 	
 	(
@@ -10146,7 +10474,7 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_279, 376));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_283, 384));
 			}
 			
 			(
@@ -10179,7 +10507,7 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_280, 377));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_284, 385));
 			}
 			
 			a10 = '..' {
@@ -10191,7 +10519,7 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_281, 378));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_285, 386));
 			}
 			
 			(
@@ -10224,7 +10552,7 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_282, 379));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_286, 387));
 			}
 			
 			a12 = ']' {
@@ -10236,30 +10564,30 @@ parse_pattern_art_type_Port returns [pattern.art.type.Port element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 380));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 380));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 388));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 388));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 381));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 381));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 389));
 	}
 	
 ;
@@ -10277,7 +10605,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_283, 382));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_287, 390));
 	}
 	
 	a1 = '<' {
@@ -10289,7 +10617,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_284, 383));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_288, 391));
 	}
 	
 	a2 = 'controllerDesc' {
@@ -10301,7 +10629,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_285, 384));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_289, 392));
 	}
 	
 	a3 = ':' {
@@ -10313,7 +10641,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_286, 385));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_290, 393));
 	}
 	
 	(
@@ -10346,7 +10674,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_287, 386));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_291, 394));
 	}
 	
 	a5 = 'contentDesc' {
@@ -10358,7 +10686,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_288, 387));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_292, 395));
 	}
 	
 	a6 = ':' {
@@ -10370,7 +10698,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_289, 388));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_293, 396));
 	}
 	
 	(
@@ -10403,7 +10731,7 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_290, 389));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_294, 397));
 	}
 	
 	a8 = '>' {
@@ -10415,11 +10743,11 @@ parse_pattern_art_implem_FractalComponent returns [pattern.art.implem.FractalCom
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_192, 390));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_203, 390));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 390));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 390));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 390));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_192, 398));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_203, 398));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 398));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 398));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 398));
 	}
 	
 ;
@@ -10437,8 +10765,8 @@ parse_pattern_art_implem_OSGiComponent returns [pattern.art.implem.OSGiComponent
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_291, 391));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_292, 391));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_295, 399));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 399));
 	}
 	
 	(
@@ -10473,14 +10801,14 @@ parse_pattern_art_implem_OSGiComponent returns [pattern.art.implem.OSGiComponent
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_292, 392));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 400));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_292, 393));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 401));
 	}
 	
 	a2 = ':' {
@@ -10492,7 +10820,7 @@ parse_pattern_art_implem_OSGiComponent returns [pattern.art.implem.OSGiComponent
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_293, 394));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_297, 402));
 	}
 	
 	(
@@ -10525,11 +10853,11 @@ parse_pattern_art_implem_OSGiComponent returns [pattern.art.implem.OSGiComponent
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_192, 395));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_203, 395));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 395));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 395));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 395));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_192, 403));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_203, 403));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 403));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 403));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 403));
 	}
 	
 ;
@@ -10568,11 +10896,11 @@ parse_pattern_art_implem_OSGiType returns [pattern.art.implem.OSGiType element =
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_245, 396));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 396));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 396));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 396));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 396));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_249, 404));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_254, 404));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 404));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 404));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 404));
 	}
 	
 ;
@@ -10590,9 +10918,9 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_294, 397));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_295, 397));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 397));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_298, 405));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 405));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 405));
 	}
 	
 	(
@@ -10627,16 +10955,16 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_295, 398));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 398));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 406));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 406));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_295, 399));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 399));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 407));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 407));
 	}
 	
 	(
@@ -10671,14 +10999,14 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 400));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 408));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_296, 401));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 409));
 	}
 	
 	a3 = ':' {
@@ -10690,8 +11018,8 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_297, 402));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_298, 402));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_301, 410));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_302, 410));
 	}
 	
 	(
@@ -10729,16 +11057,16 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 403));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 403));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 411));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 411));
 		}
 		
 		
@@ -10751,31 +11079,31 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 404));
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 404));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 412));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 412));
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_299, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 405));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 405));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 413));
 	}
 	
 	(
@@ -10789,7 +11117,7 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_300, 406));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_304, 414));
 			}
 			
 			(
@@ -10822,30 +11150,30 @@ parse_pattern_art_type_BasicAttribute returns [pattern.art.type.BasicAttribute e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 407));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 407));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 415));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 415));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 408));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 408));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 416));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 416));
 	}
 	
 ;
@@ -10863,9 +11191,9 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_301, 409));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_302, 409));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 409));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_305, 417));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_306, 417));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 417));
 	}
 	
 	(
@@ -10900,16 +11228,16 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_302, 410));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 410));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_306, 418));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 418));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_302, 411));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 411));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_306, 419));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 419));
 	}
 	
 	(
@@ -10944,14 +11272,14 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 412));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 420));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_303, 413));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 421));
 	}
 	
 	a3 = ':' {
@@ -10963,7 +11291,7 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_304, 414));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_308, 422));
 	}
 	
 	a4 = '[' {
@@ -10975,8 +11303,8 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_305, 415));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_306, 415));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_309, 423));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_310, 423));
 	}
 	
 	(
@@ -11014,7 +11342,7 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 416));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_311, 424));
 		}
 		
 		
@@ -11027,13 +11355,13 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 417));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_311, 425));
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_307, 418));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_311, 426));
 	}
 	
 	a7 = '->' {
@@ -11045,8 +11373,8 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_308, 419));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_309, 419));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_312, 427));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_313, 427));
 	}
 	
 	(
@@ -11084,7 +11412,7 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_310, 420));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_314, 428));
 		}
 		
 		
@@ -11097,13 +11425,13 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_310, 421));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_314, 429));
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_310, 422));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_314, 430));
 	}
 	
 	a10 = ']' {
@@ -11115,16 +11443,16 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_311, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 423));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 423));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_315, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 431));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 431));
 	}
 	
 	(
@@ -11138,7 +11466,7 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_312, 424));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_316, 432));
 			}
 			
 			a12 = '{' {
@@ -11150,8 +11478,8 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 425));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_313, 425));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 433));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_317, 433));
 			}
 			
 			(
@@ -11175,8 +11503,8 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 426));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_313, 426));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 434));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_317, 434));
 			}
 			
 			a14 = '}' {
@@ -11188,30 +11516,30 @@ parse_pattern_art_type_Dictionary returns [pattern.art.type.Dictionary element =
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 427));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 427));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 435));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 435));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 428));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 428));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 436));
 	}
 	
 ;
@@ -11229,7 +11557,7 @@ parse_pattern_art_type_DictionaryDefaultValue returns [pattern.art.type.Dictiona
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_314, 429));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_318, 437));
 	}
 	
 	(
@@ -11262,8 +11590,9 @@ parse_pattern_art_type_DictionaryDefaultValue returns [pattern.art.type.Dictiona
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_315, 430));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_316, 430));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_319, 438));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_320, 438));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 438));
 	}
 	
 	(
@@ -11277,7 +11606,7 @@ parse_pattern_art_type_DictionaryDefaultValue returns [pattern.art.type.Dictiona
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_317, 431));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_322, 439));
 			}
 			
 			(
@@ -11310,30 +11639,74 @@ parse_pattern_art_type_DictionaryDefaultValue returns [pattern.art.type.Dictiona
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_316, 432));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_320, 440));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 440));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_316, 433));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_320, 441));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 441));
 	}
 	
-	a4 = ']' {
+	(
+		(
+			(
+				a4 = TXTID				
+				{
+					if (terminateParsing) {
+						throw new org.smartadapters.core.resource.smARText.mopp.SmARTextTerminateParsingException();
+					}
+					if (element == null) {
+						element = pattern.art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+					}
+					if (a4 != null) {
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TXTID");
+						tokenResolver.setOptions(getOptions());
+						org.smartadapters.core.resource.smARText.ISmARTextTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__PID), result);
+						java.lang.Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a4).getLine(), ((org.antlr.runtime.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a4).getStartIndex(), ((org.antlr.runtime.CommonToken) a4).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String)resolvedObject;
+						if (resolved != null) {
+							element.eSet(element.eClass().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__PID), resolved);
+							completedElement(resolved);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos((org.antlr.runtime.CommonToken) a4, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 442));
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 443));
+	}
+	
+	a5 = ']' {
 		if (element == null) {
 			element = pattern.art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime.CommonToken)a4, element);
+		copyLocalizationInfos((org.antlr.runtime.CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 434));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_313, 434));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 434));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 434));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 434));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 444));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_317, 444));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 444));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 444));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 444));
 	}
 	
 ;
@@ -11372,11 +11745,11 @@ parse_pattern_art_type_PortId returns [pattern.art.type.PortId element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_318, 435));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_319, 435));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 435));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 435));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 435));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 445));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_324, 445));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 445));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 445));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 445));
 	}
 	
 ;
@@ -11415,7 +11788,7 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_320, 436));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_325, 446));
 	}
 	
 	a1 = 'port' {
@@ -11427,9 +11800,9 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_321, 437));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_322, 437));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 437));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_326, 447));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_327, 447));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 447));
 	}
 	
 	(
@@ -11464,16 +11837,16 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_322, 438));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 438));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_327, 448));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 448));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_322, 439));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 439));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_327, 449));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 449));
 	}
 	
 	(
@@ -11508,14 +11881,14 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 440));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 450));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 441));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 451));
 	}
 	
 	a4 = ':' {
@@ -11527,8 +11900,8 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_324, 442));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_325, 442));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_329, 452));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_330, 452));
 	}
 	
 	(
@@ -11566,7 +11939,7 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_326, 443));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_331, 453));
 		}
 		
 		
@@ -11579,13 +11952,13 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_326, 444));
+			addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_331, 454));
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_326, 445));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_331, 455));
 	}
 	
 	a7 = '{' {
@@ -11597,7 +11970,7 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 446));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 456));
 	}
 	
 	(
@@ -11619,8 +11992,8 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_318, 447));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_319, 447));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 457));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_324, 457));
 	}
 	
 	(
@@ -11634,7 +12007,7 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 448));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 458));
 			}
 			
 			(
@@ -11656,16 +12029,16 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_318, 449));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_319, 449));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 459));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_324, 459));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_318, 450));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_319, 450));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_323, 460));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_324, 460));
 	}
 	
 	a11 = '}' {
@@ -11677,15 +12050,15 @@ parse_pattern_art_type_PortCollection returns [pattern.art.type.PortCollection e
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_246, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_251, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 451));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 451));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_250, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_255, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 461));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 461));
 	}
 	
 ;
@@ -11715,74 +12088,74 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 452));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 452));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 462));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 453));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 453));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 463));
 	}
 	
 	(
@@ -11796,7 +12169,7 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_327, 454));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_332, 464));
 			}
 			
 			a2 = ':' {
@@ -11808,7 +12181,7 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_328, 455));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_333, 465));
 			}
 			
 			(
@@ -11841,72 +12214,72 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 456));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 456));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 466));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 457));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 457));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 467));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 467));
 	}
 	
 	(
@@ -11928,8 +12301,8 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 458));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 458));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 468));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 468));
 	}
 	
 	(
@@ -11943,7 +12316,7 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_329, 459));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_334, 469));
 			}
 			
 			a6 = 'pattern' {
@@ -11955,7 +12328,7 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_330, 460));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_335, 470));
 			}
 			
 			a7 = ':' {
@@ -11967,36 +12340,36 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 461));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 461));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 471));
 			}
 			
 			(
@@ -12018,16 +12391,16 @@ parse_patternframework_ModelPattern returns [patternframework.ModelPattern eleme
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 462));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 462));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 472));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 472));
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 463));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 463));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 473));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 473));
 	}
 	
 ;
@@ -12055,9 +12428,9 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 464));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 464));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 464));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 474));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 474));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 474));
 	}
 	
 	(
@@ -12071,7 +12444,7 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_331, 465));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_336, 475));
 			}
 			
 			a2 = ':' {
@@ -12083,7 +12456,7 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_332, 466));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_337, 476));
 			}
 			
 			(
@@ -12105,8 +12478,8 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_333, 467));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_334, 467));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_338, 477));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_339, 477));
 			}
 			
 			(
@@ -12120,7 +12493,7 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_332, 468));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_337, 478));
 					}
 					
 					(
@@ -12142,16 +12515,16 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_333, 469));
-						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_334, 469));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_338, 479));
+						addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_339, 479));
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_333, 470));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_334, 470));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_338, 480));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_339, 480));
 			}
 			
 			a6 = ';' {
@@ -12163,16 +12536,16 @@ parse_patternframework_PModel returns [patternframework.PModel element = null]
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 471));
-				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 471));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 481));
+				addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 481));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 472));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 472));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_47, 482));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 482));
 	}
 	
 ;
@@ -12190,7 +12563,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_335, 473));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_340, 483));
 	}
 	
 	a1 = '(' {
@@ -12202,7 +12575,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_336, 474));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_341, 484));
 	}
 	
 	(
@@ -12235,7 +12608,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_337, 475));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_342, 485));
 	}
 	
 	a3 = ')' {
@@ -12247,7 +12620,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_338, 476));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_343, 486));
 	}
 	
 	a4 = ':' {
@@ -12259,7 +12632,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_339, 477));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_344, 487));
 	}
 	
 	(
@@ -12292,7 +12665,7 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_340, 478));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_345, 488));
 	}
 	
 	a6 = ';' {
@@ -12304,37 +12677,37 @@ parse_patternframework_PConstraint returns [patternframework.PConstraint element
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 479));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 479));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_14, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_15, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_16, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_17, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_18, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_19, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_20, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_21, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_22, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_23, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_24, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_25, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_26, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_27, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_28, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_29, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_30, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_31, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_32, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_33, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_34, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_35, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_36, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_37, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_38, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_39, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_40, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_41, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_42, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_43, 489));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_44, 489));
 	}
 	
 ;
@@ -12373,7 +12746,7 @@ parse_patternframework_PRole returns [patternframework.PRole element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_341, 480));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_346, 490));
 	}
 	
 	a1 = ':' {
@@ -12385,7 +12758,7 @@ parse_patternframework_PRole returns [patternframework.PRole element = null]
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_342, 481));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_347, 491));
 	}
 	
 	(
@@ -12422,7 +12795,7 @@ parse_patternframework_PRole returns [patternframework.PRole element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_343, 482));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_348, 492));
 	}
 	
 	a3 = '}' {
@@ -12434,8 +12807,8 @@ parse_patternframework_PRole returns [patternframework.PRole element = null]
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_333, 483));
-		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_334, 483));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_338, 493));
+		addExpectedElement(new org.smartadapters.core.resource.smARText.mopp.SmARTextExpectedTerminal(TERMINAL_339, 493));
 	}
 	
 ;

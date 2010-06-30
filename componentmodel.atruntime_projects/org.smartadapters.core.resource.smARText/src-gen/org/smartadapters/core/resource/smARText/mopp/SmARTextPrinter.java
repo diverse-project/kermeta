@@ -3583,6 +3583,7 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 	}
 	
 	public void print_pattern_art_instance_ValuedAttribute(pattern.art.instance.ValuedAttribute element, java.lang.String outertab, java.io.PrintWriter out) {
+		java.lang.String localtab = outertab;
 		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(3);
 		java.lang.Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID));
@@ -3593,6 +3594,9 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		printCountingMap.put("attribute", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
 		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
 		count = printCountingMap.get("attribute");
 		if (count > 0) {
@@ -3620,6 +3624,35 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__VALUE), element));
 			}
 			printCountingMap.put("value", count - 1);
+		}
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_ValuedAttribute_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	public void print_pattern_art_instance_ValuedAttribute_0(pattern.art.instance.ValuedAttribute element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.VALUED_ATTRIBUTE__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
 		}
 	}
 	
@@ -3660,6 +3693,19 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
 		print_pattern_art_instance_DictionaryValuedAttribute_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_DictionaryValuedAttribute_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -3734,8 +3780,25 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 			printCountingMap.put("entries", count - 1);
 		}
 	}
+	public void print_pattern_art_instance_DictionaryValuedAttribute_1(pattern.art.instance.DictionaryValuedAttribute element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
+		}
+	}
 	
 	public void print_pattern_art_instance_DefaultEntry(pattern.art.instance.DefaultEntry element, java.lang.String outertab, java.io.PrintWriter out) {
+		java.lang.String localtab = outertab;
 		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(3);
 		java.lang.Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID));
@@ -3746,6 +3809,9 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		printCountingMap.put("key", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("[");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
@@ -3782,9 +3848,39 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("]");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_DefaultEntry_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	public void print_pattern_art_instance_DefaultEntry_0(pattern.art.instance.DefaultEntry element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.DEFAULT_ENTRY__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
+		}
 	}
 	
 	public void print_pattern_art_instance_OtherEntry(pattern.art.instance.OtherEntry element, java.lang.String outertab, java.io.PrintWriter out) {
+		java.lang.String localtab = outertab;
 		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(3);
 		java.lang.Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID));
@@ -3795,6 +3891,9 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		printCountingMap.put("key", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("[");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
@@ -3831,6 +3930,35 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("]");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_instance_OtherEntry_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	public void print_pattern_art_instance_OtherEntry_0(pattern.art.instance.OtherEntry element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.instance.InstancePackage.OTHER_ENTRY__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
+		}
 	}
 	
 	public void print_pattern_art_type_PrimitiveType(pattern.art.type.PrimitiveType element, java.lang.String outertab, java.io.PrintWriter out) {
@@ -5605,6 +5733,19 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 		}
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_pattern_art_type_DictionaryDefaultValue_1(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("]");
 	}
@@ -5624,6 +5765,22 @@ public class SmARTextPrinter implements org.smartadapters.core.resource.smARText
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__VALUE), element));
 			}
 			printCountingMap.put("value", count - 1);
+		}
+	}
+	public void print_pattern_art_type_DictionaryDefaultValue_1(pattern.art.type.DictionaryDefaultValue element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		int count;
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
+		count = printCountingMap.get("pid");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__PID));
+			if (o != null) {
+				org.smartadapters.core.resource.smARText.ISmARTextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TXTID");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(pattern.art.type.TypePackage.DICTIONARY_DEFAULT_VALUE__PID), element));
+			}
+			printCountingMap.put("pid", count - 1);
 		}
 	}
 	

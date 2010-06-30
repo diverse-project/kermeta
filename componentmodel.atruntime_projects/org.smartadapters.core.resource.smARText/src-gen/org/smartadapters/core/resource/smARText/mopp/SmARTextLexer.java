@@ -1465,12 +1465,12 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12545:11: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12546:2: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12918:11: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12919:2: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12546:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12919:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -1483,7 +1483,7 @@ public class SmARTextLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12546:7: ~ ( '\\n' | '\\r' | '\\uffff' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12919:7: ~ ( '\\n' | '\\r' | '\\uffff' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1520,12 +1520,12 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12549:11: ( '/*' ( . )* '*/' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12550:2: '/*' ( . )* '*/'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12922:11: ( '/*' ( . )* '*/' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12923:2: '/*' ( . )* '*/'
             {
             match("/*"); 
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12550:6: ( . )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12923:6: ( . )*
             loop2:
             do {
                 int alt2=2;
@@ -1550,7 +1550,7 @@ public class SmARTextLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12550:6: .
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12923:6: .
             	    {
             	    matchAny(); 
 
@@ -1581,11 +1581,11 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = ANNOTATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12552:11: ( '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12553:2: '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12925:11: ( '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12926:2: '@' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
             match('@'); 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12553:5: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12926:5: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt3=0;
             loop3:
             do {
@@ -1640,7 +1640,7 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = T_INSTANCE_STATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12555:17: ( '#ON' | '#OFF' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12928:17: ( '#ON' | '#OFF' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1678,7 +1678,7 @@ public class SmARTextLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12556:2: '#ON'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12929:2: '#ON'
                     {
                     match("#ON"); 
 
@@ -1686,7 +1686,7 @@ public class SmARTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12556:8: '#OFF'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12929:8: '#OFF'
                     {
                     match("#OFF"); 
 
@@ -1708,7 +1708,7 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = T_PORT_KIND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12557:12: ( 'provided' | 'required' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12930:12: ( 'provided' | 'required' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1726,7 +1726,7 @@ public class SmARTextLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12558:2: 'provided'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12931:2: 'provided'
                     {
                     match("provided"); 
 
@@ -1734,7 +1734,7 @@ public class SmARTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12558:13: 'required'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12931:13: 'required'
                     {
                     match("required"); 
 
@@ -1756,7 +1756,7 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = T_IMPLEM;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12559:9: ( 'bundle' | 'memory' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12932:9: ( 'bundle' | 'memory' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1774,7 +1774,7 @@ public class SmARTextLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12560:2: 'bundle'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12933:2: 'bundle'
                     {
                     match("bundle"); 
 
@@ -1782,7 +1782,7 @@ public class SmARTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12560:11: 'memory'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12933:11: 'memory'
                     {
                     match("memory"); 
 
@@ -1804,8 +1804,8 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = T_OPTIONAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12561:11: ( 'optional' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12562:2: 'optional'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12934:11: ( 'optional' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12935:2: 'optional'
             {
             match("optional"); 
 
@@ -1825,10 +1825,10 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = MULTIPLICITY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12563:13: ( ( ( '*' ) | ( ( '0' .. '9' )+ ) ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12936:13: ( ( ( '*' ) | ( ( '0' .. '9' )+ ) ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
             {
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:2: ( ( '*' ) | ( ( '0' .. '9' )+ ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1846,10 +1846,10 @@ public class SmARTextLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:4: ( '*' )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:4: ( '*' )
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:4: ( '*' )
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:5: '*'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:4: ( '*' )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:5: '*'
                     {
                     match('*'); 
 
@@ -1859,12 +1859,12 @@ public class SmARTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:12: ( ( '0' .. '9' )+ )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:12: ( ( '0' .. '9' )+ )
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:12: ( ( '0' .. '9' )+ )
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:13: ( '0' .. '9' )+
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:12: ( ( '0' .. '9' )+ )
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:13: ( '0' .. '9' )+
                     {
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:13: ( '0' .. '9' )+
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:13: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -1878,7 +1878,7 @@ public class SmARTextLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12564:14: '0' .. '9'
+                    	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12937:14: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1919,11 +1919,11 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = STRING_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12566:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:2: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12939:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:2: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ) | '\\\\' ( '0' .. '7' ) | ~ ( '\\\\' | '\"' ) )*
             loop9:
             do {
                 int alt9=5;
@@ -1971,7 +1971,7 @@ public class SmARTextLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:6: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:6: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1987,10 +1987,10 @@ public class SmARTextLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
             	    {
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:48: '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:47: ( '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:48: '\\\\' 'u' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
             	    {
             	    match('\\'); 
             	    match('u'); 
@@ -2037,11 +2037,11 @@ public class SmARTextLexer extends Lexer {
             	    }
             	    break;
             	case 3 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:169: '\\\\' ( '0' .. '7' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:169: '\\\\' ( '0' .. '7' )
             	    {
             	    match('\\'); 
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:173: ( '0' .. '7' )
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:174: '0' .. '7'
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:173: ( '0' .. '7' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:174: '0' .. '7'
             	    {
             	    matchRange('0','7'); 
 
@@ -2051,7 +2051,7 @@ public class SmARTextLexer extends Lexer {
             	    }
             	    break;
             	case 4 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12567:184: ~ ( '\\\\' | '\"' )
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12940:184: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2088,8 +2088,8 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12568:11: ( ( ' ' | '\\t' | '\\f' ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12569:2: ( ' ' | '\\t' | '\\f' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12941:11: ( ( ' ' | '\\t' | '\\f' ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12942:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2117,10 +2117,10 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = LINEBREAKS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12572:11: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12573:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12945:11: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12946:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12573:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12946:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -2144,7 +2144,7 @@ public class SmARTextLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12573:3: '\\r\\n'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12946:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -2152,14 +2152,14 @@ public class SmARTextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12573:10: '\\r'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12946:10: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12573:15: '\\n'
+                    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12946:15: '\\n'
                     {
                     match('\n'); 
 
@@ -2185,8 +2185,8 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = TXTID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12576:6: ( '<' ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* '>' )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12577:2: '<' ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* '>'
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12949:6: ( '<' ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* '>' )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12950:2: '<' ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* '>'
             {
             match('<'); 
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
@@ -2198,7 +2198,7 @@ public class SmARTextLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12577:33: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12950:33: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
             loop11:
             do {
                 int alt11=2;
@@ -2231,7 +2231,7 @@ public class SmARTextLexer extends Lexer {
                 }
             } while (true);
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12577:80: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12950:80: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
             loop13:
             do {
                 int alt13=2;
@@ -2244,10 +2244,10 @@ public class SmARTextLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12577:81: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12950:81: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    {
             	    match('.'); 
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12577:84: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12950:84: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    int cnt12=0;
             	    loop12:
             	    do {
@@ -2311,8 +2311,8 @@ public class SmARTextLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12578:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* )
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12579:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12951:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )* )
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12952:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )* ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -2323,7 +2323,7 @@ public class SmARTextLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12579:30: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12952:30: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )*
             loop14:
             do {
                 int alt14=2;
@@ -2356,7 +2356,7 @@ public class SmARTextLexer extends Lexer {
                 }
             } while (true);
 
-            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12579:77: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
+            // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12952:77: ( '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )*
             loop16:
             do {
                 int alt16=2;
@@ -2369,10 +2369,10 @@ public class SmARTextLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12579:78: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12952:78: '.' ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    {
             	    match('.'); 
-            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12579:81: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            	    // /opt/eclipses/eclipse-modeling-galileo-incubation-linux-gtk-x86_64-DIVA_dev/workspace/org.smartadapters.core.resource.smARText/src-gen/org/smartadapters/core/resource/smARText/mopp/SmARText.g:12952:81: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             	    int cnt15=0;
             	    loop15:
             	    do {

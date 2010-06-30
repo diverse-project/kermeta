@@ -186,13 +186,13 @@ RULES{
 	
 	pattern.art.Instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
 	
-	pattern.art.Instance.ValuedAttribute::=  attribute[] #1 ":=" #1 value[STRING_LITERAL] ;
+	pattern.art.Instance.ValuedAttribute::=  attribute[] #1 ":=" #1 value[STRING_LITERAL] ( #1 pid[TXTID])? ;
 	
-	pattern.art.Instance.DictionaryValuedAttribute::= attribute[] #1 ":=" #1 ( entries ("," #1 entries)* )? ;
+	pattern.art.Instance.DictionaryValuedAttribute::= attribute[] #1 ":=" #1 ( entries ("," #1 entries)* )? ( #1 pid[TXTID])?;
 	
-	pattern.art.Instance.DefaultEntry::= "[" #1 key[] #1 "->" #1 value[STRING_LITERAL] #1 "]" ;
+	pattern.art.Instance.DefaultEntry::= "[" #1 key[] #1 "->" #1 value[STRING_LITERAL] #1 "]" ( #1 pid[TXTID])? ;
 	
-	pattern.art.Instance.OtherEntry::=   "[" #1 key[STRING_LITERAL] #1 "->" #1 value[STRING_LITERAL] #1 "]" ;
+	pattern.art.Instance.OtherEntry::=   "[" #1 key[STRING_LITERAL] #1 "->" #1 value[STRING_LITERAL] #1 "]" ( #1 pid[TXTID])? ;
 	
 	pattern.art.Type.PrimitiveType::= "type" (#1 name[])? ( #1 pid[TXTID])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
 	
@@ -220,7 +220,7 @@ RULES{
 	
 	pattern.art.Type.Dictionary::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" "[" (type[] | "?") #1 "->" #1 (valueType[] | "?") "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
 	
-	pattern.art.Type.DictionaryDefaultValue::= !1 "[" #1 key[STRING_LITERAL] #1 ("->" #1 value[STRING_LITERAL] )? #1 "]" ;
+	pattern.art.Type.DictionaryDefaultValue::= !1 "[" #1 key[STRING_LITERAL] #1 ("->" #1 value[STRING_LITERAL] )? #1 ( #1 pid[TXTID])? "]" ;
 	
 	pattern.art.Type.PortId ::= name[];
 	

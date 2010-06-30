@@ -1,4 +1,4 @@
-SYNTAXDEF art
+SYNTAXDEF artext
 FOR <http://art> <http://art/instance>
 START System
 
