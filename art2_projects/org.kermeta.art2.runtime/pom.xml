@@ -36,11 +36,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>sjson.json</groupId>
-            <artifactId>sjson</artifactId>
-            <version>0.5-SNAPSHOT-2.8.Beta1</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.framework</artifactId>
             <version>1.0.2-SNAPSHOT</version>
