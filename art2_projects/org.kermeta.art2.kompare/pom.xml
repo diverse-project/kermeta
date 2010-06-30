@@ -119,8 +119,8 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>fr.irisa.triskell</groupId>
-            <artifactId>kermeta.scala.framework</artifactId>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.framework.scala</artifactId>
             <version>0.0.4</version>
         </dependency>
         <dependency>
