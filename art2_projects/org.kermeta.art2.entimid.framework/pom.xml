@@ -140,9 +140,17 @@
     </properties>
 
     <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2private</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
         <snapshotRepository>
-            <id>nexus</id>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2private-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
 
