@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.kermeta.art2.ui.editor.command;
 
 import art2.Binding;
@@ -29,26 +28,29 @@ public class AddBindingCommand implements Command {
 
     @Override
     public void execute(Object p) {
-        if(p instanceof PortPanel){
-             PortPanel fromPanel = (PortPanel) p;
-             Port fromPort = (Port) kernel.getUifactory().getMapping().get(fromPanel);
-             Port targetPort = (Port) kernel.getUifactory().getMapping().get(target);
+        if (p instanceof PortPanel) {
 
-             //TODO CHECK CONSISTENCY
-             Binding newb = art2.Art2Factory.eINSTANCE.createBinding();
-             newb.getPorts().add(fromPort);
-             newb.getPorts().add(targetPort);
+            PortPanel fromPanel = (PortPanel) p;
+            if (fromPanel.getNature().equals(PortPanel.PortNature.SERVICE)) {
 
-             kernel.getModelHandler().getActualModel().getBindings().add(newb);
+                Port fromPort = (Port) kernel.getUifactory().getMapping().get(fromPanel);
+                Port targetPort = (Port) kernel.getUifactory().getMapping().get(target);
 
-             org.kermeta.art2.ui.framework.elements.Binding uib = kernel.getUifactory().createBinding(newb);
-             kernel.getModelPanel().addBinding(uib);
+                //TODO CHECK CONSISTENCY
+                Binding newb = art2.Art2Factory.eINSTANCE.createBinding();
+                newb.getPorts().add(fromPort);
+                newb.getPorts().add(targetPort);
 
+                kernel.getModelHandler().getActualModel().getBindings().add(newb);
+
+                org.kermeta.art2.ui.framework.elements.Binding uib = kernel.getUifactory().createBinding(newb);
+                kernel.getModelPanel().addBinding(uib);
+
+            }
         }
 
-       
 
-        
+
+
     }
-
 }

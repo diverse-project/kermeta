@@ -34,7 +34,7 @@ public class MoveComponentCommand implements Command {
             ComponentPanel panel = (ComponentPanel) p ;
             ContainerNode node = (ContainerNode) kernel.getUifactory().getMapping().get(nodepanel);
             ComponentInstance type = (ComponentInstance) kernel.getUifactory().getMapping().get(p);
-
+            
             if(!node.getComponents().contains(type)){
                 panel.getParent().remove(panel);
                 nodepanel.add(panel);
