@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+<!--
+<feature name="scala.runtime" version="2.8.0">
+	<bundle>mvn:org.scala-lang-osgi/scala-library/2.8.0-SNAPSHOT</bundle>
+</feature>
+
+<feature name="emf" version="3.5.0">
+	<bundle>mvn:org.eclipse/emf/3.5.0</bundle>
+</feature>
+
+<feature name="org.kermeta.scala.runtime" version="1.3.0">
+	<feature version="2.8.0">scala.runtime</feature>
+	<feature version="3.5.0">emf</feature>
+	<bundle>mvn:org.kermeta/kermeta.model</bundle>
+	<bundle>mvn:fr.irisa.triskell/kermeta.scala.framework</bundle>
+</feature>
+
+
+<feature name="org.kermeta.art2.runtime" version="1.0.0">
+	<feature version="2.8.0">scala.runtime</feature>
+	<feature version="1.3.0">org.kermeta.scala.runtime</feature>
+	<feature version="3.5.0">emf</feature>
+	<bundle>mvn:org.kermeta.art2/art2.model</bundle>
+	<bundle>mvn:org.kermeta.art2/art2.kompare</bundle>
+	<bundle>mvn:org.kermeta.art2/art2.runtime</bundle>
+	<bundle>mvn:org.kermeta.art2/art2.runtime.gui</bundle>
+</feature>
+-->
+
+
+
+<!--
+    <feature name="transaction" version="1.0.0">
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-j2ee-connector_1.5_spec/2.0.0</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.howl/1.0.1-1_1</bundle>
+        <bundle>mvn:org.apache.geronimo.components/geronimo-transaction/2.2-r634076</bundle>
+        <bundle>mvn:org.springframework/spring-tx/2.5.6</bundle>
+        <bundle>mvn:org.apache.servicemix.transaction/org.apache.servicemix.transaction/1.0.0</bundle>
+    </feature>
+
+    <feature name="connector" version="4.0.0">
+        <feature version="1.0.0">transaction</feature>
+        <bundle>mvn:org.apache.geronimo.components/geronimo-connector/2.2-r634076</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jencks/2.1_1</bundle>
+    </feature>
+
+
+    <feature name="activemq" version="5.3.2">
+        <feature version="4.0.0">connector</feature>
+
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-annotation_1.0_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-j2ee-management_1.1_spec/1.0.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.1</bundle>
+<bundle>mvn:org.apache.geronimo.specs/geronimo-jaxr_1.0_spec/2.1</bundle>
+
+
+        <bundle>mvn:commons-pool/commons-pool/1.5.4</bundle>
+        <bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/2.4_3</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-net/1.4.1_3</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.oro/2.0.8_3</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.velocity/1.6.2_3</bundle>
+        <bundle>mvn:org.apache.activemq/activemq-core/5.3.2</bundle>
+        <bundle>mvn:org.apache.activemq/kahadb/5.3.2</bundle>
+        <bundle>mvn:org.apache.activemq/activemq-console/5.3.2</bundle>
+        <bundle>mvn:org.apache.activemq/activemq-pool/5.3.2</bundle>
+        <bundle>mvn:org.apache.activemq/activeio-core/3.1.2</bundle>
+        <bundle>mvn:org.apache.servicemix.activemq/org.apache.servicemix.activemq.commands/4.2.0</bundle>
+    </feature>
+-->
+
+
+    <feature name="emflib" version="2.5.0">
+        <bundle>mvn:org.kermeta.emf/emf.lib</bundle>
+    </feature>
+
+    <feature name="kermeta.runtime" version="2.0.0">
+        <bundle>mvn:fr.irisa.triskell/kermeta.scala.framework</bundle>
+    </feature>
+
+
+
+
+    <feature name="art2.runtime" version="0.9.0">
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-annotation_1.0_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-j2ee-management_1.1_spec/1.0.1</bundle>
+
+        <feature version="2.5.0">emflib</feature>
+        <feature version="2.0.0">kermeta.runtime</feature>
+
+        <bundle>mvn:org.kermeta.art2/art2.model</bundle>
+        <bundle>mvn:org.kermeta.art2/art2.framework</bundle>
+        <bundle>mvn:org.kermeta.art2/art2.runtime</bundle>
+
+        <bundle>mvn:org.entimid/entimid.framework</bundle>
+        <bundle>mvn:org.entimid/entimid.fakeStuff</bundle>
+        <bundle>mvn:org.kermeta.art2/art2.runtime.gui</bundle>
+        <!--<bundle>mvn:org.kermeta.art2/art2.runtime.gui</bundle>
+	<bundle>mvn:org.kermeta.art2/art2.runtime.poller</bundle>
+        <bundle>mvn:org.entimid/entimid.framework</bundle>
+        <bundle>mvn:org.entimid/entimid.fakeStuff</bundle>-->
+        <!--<bundle>mvn:org.scala-lang-osgi/scala-library/2.8.0-SNAPSHOT</bundle>-->
+    </feature>
+
+
+</features>
