@@ -1,0 +1,103 @@
+generating BluePrint XML file for component instance1.1
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 
+    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- create the bean -->
+	<bean id="instance1.1" class="org.art.toto" init-method="start" destroy-method="stop">
+		<!-- Attributes -->
+			<property name="attribute1" value="value1" />
+			<property name="attribute2" value="value2" />
+			<property name="dico1">
+				<props>
+					<prop key="defaultEntry1">divaValue1</prop>
+					<prop key="otherEntry">dicoValue2</prop>
+					<prop key="defaultEntry2">defaultValue2</prop>
+				</props>
+			</property>
+		
+		<!-- Bindings -->
+			<property name="type1.port1" ref="instance1.1_type1.port1" />
+			<property name="type1.port2" ref="instance1.1_type1.port2" />
+	</bean>
+
+<reference id="instance1.1_type1.port1" interface="service1" filter="(name=instance2.1)" />
+<reference-list id="instance1.1_type1.port2" interface="service1" filter="(|(name=instance2.2)(name=instance2.3))" />		
+<!-- export the bean on the service registry -->
+</blueprint>
+generating BluePrint XML file for component instance2.1
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 
+    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- create the bean -->
+	<bean id="instance2.1" class="org.art.titi1" init-method="start" destroy-method="stop">
+		<!-- Attributes -->
+		
+		<!-- Bindings -->
+	</bean>
+
+<!-- export the bean on the service registry -->
+<service ref="instance2.1" interface="service1">
+	<service-properties>
+		<!-- info not available in ART -->
+	</service-properties>
+</service>
+
+</blueprint>
+generating BluePrint XML file for component instance2.2
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 
+    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- create the bean -->
+	<bean id="instance2.2" class="org.art.titi2" init-method="start" destroy-method="stop">
+		<!-- Attributes -->
+		
+		<!-- Bindings -->
+	</bean>
+
+<!-- export the bean on the service registry -->
+<service ref="instance2.2" interface="service1">
+	<service-properties>
+		<!-- info not available in ART -->
+	</service-properties>
+</service>
+
+</blueprint>
+generating BluePrint XML file for component instance2.3
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 
+    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- create the bean -->
+	<bean id="instance2.3" class="org.art.titi3" init-method="start" destroy-method="stop">
+		<!-- Attributes -->
+		
+		<!-- Bindings -->
+	</bean>
+
+<!-- export the bean on the service registry -->
+<service ref="instance2.3" interface="service1">
+	<service-properties>
+		<!-- info not available in ART -->
+	</service-properties>
+</service>
+
+</blueprint>
