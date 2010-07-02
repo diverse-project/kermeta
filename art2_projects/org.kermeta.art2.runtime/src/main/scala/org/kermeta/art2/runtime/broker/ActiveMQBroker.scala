@@ -56,10 +56,11 @@ class ActiveMQBroker {
 
       var connector = broker.addNetworkConnector("multicast://"+"default");
       connector.setDuplex(true);
+      connector.setName("default-nc")
       broker.addConnector("tcp://localhost:61616");
 
       
-      broker.start()
+      
 
       
 
@@ -90,23 +91,23 @@ class ActiveMQBroker {
 
 
        broker.setPersistenceAdapter(persistance)
-
+*/
        var tc = new TransportConnector
        tc.setName("openwire")
-       tc.setUri(new URI("tcp://0.0.0.0:0"))
+       tc.setUri(new URI("tcp://0.0.0.0:61616"))
        tc.setDiscoveryUri(new URI("multicast://default"))
        tc.setBrokerService(broker)
-       //var tc2 = new TransportConnector
-       //tc2.setName("stomp")
-       //tc2.setUri(new URI("stomp://0.0.0.0:61613"))
+       var tc2 = new TransportConnector
+       tc2.setName("stomp")
+       tc2.setUri(new URI("stomp://0.0.0.0:61613"))
 
        var tcs = new java.util.ArrayList[TransportConnector]
        tcs.add(tc);
-       //tcs.add(tc2)
+       tcs.add(tc2)
 
        broker.setTransportConnectors(tcs)
-       */
-      // broker.start
+       
+       broker.start
 
     } catch {
       case e => e.printStackTrace
