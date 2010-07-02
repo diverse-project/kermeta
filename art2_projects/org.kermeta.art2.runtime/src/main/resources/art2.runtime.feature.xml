@@ -76,11 +76,11 @@
     <feature name="emflib" version="2.5.0">
         <bundle>mvn:org.kermeta.emf/emf.lib</bundle>
     </feature>
-
+<!--
     <feature name="kermeta.runtime" version="2.0.0">
         <bundle>mvn:fr.irisa.triskell/kermeta.scala.framework</bundle>
     </feature>
-
+-->
 
 
 
@@ -91,7 +91,7 @@
         <bundle>mvn:org.apache.geronimo.specs/geronimo-j2ee-management_1.1_spec/1.0.1</bundle>
 
         <feature version="2.5.0">emflib</feature>
-        <feature version="2.0.0">kermeta.runtime</feature>
+      <!--  <feature version="2.0.0">kermeta.runtime</feature> -->
 
         <bundle>mvn:org.kermeta.art2/art2.model</bundle>
         <bundle>mvn:org.kermeta.art2/art2.framework</bundle>

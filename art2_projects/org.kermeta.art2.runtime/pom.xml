@@ -102,6 +102,7 @@
                             !org.aopalliance.*,
                             !javax.ejb,
                             !javax.xml.ws,
+                            !org.apache.commons.*,
                             org.eclipse.emf.*,
                             scala.*,
                             org.xml.*,
@@ -110,7 +111,7 @@
                             com.thoughtworks.*,
                             art2.*,
                             org.kermeta.art2.framework.*,
-                            javax.xml.*,javax.net.*,javax.jms.*,javax.management.*,javax.naming.*,javax.transaction.*
+                            javax.xml.*,javax.net.*,javax.jms.*,javax.management.*,javax.naming.*,javax.transaction.*,
                          </Import-Package>
                         <Private-Package>
                             org.kermeta.log4j.util,kermeta.*,fr.irisa.triskell.kermeta.*,ScalaAspect.*,ScalaImplicit.*,kermeta.kunit,org.kermeta.komparator,org.kermeta.artKomparator,org.kermeta.art.deployer,org.kermeta.art.generator,runner,scalaUtil,
@@ -121,7 +122,7 @@
                             org.apache.activeio.*,
                             org.apache.activemq.*,
                             org.apache.kahadb.*,
-                            org.apache.commons.*
+                            org.apache.commons.*,
                        </Private-Package>
 
                        <!-- <Import-Package>

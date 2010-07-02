@@ -10,12 +10,12 @@
 
 
     <bean id="broker" class="org.kermeta.art2.runtime.broker.ActiveMQBroker" init-method="start" destroy-method="stop">
-        <property name="dataDirectory" value="$[karaf.base]/data/activemq/default"/>
+        <property name="dataDirectory" value="$[karaf.base]/data/activemq/art2broker"/>
      </bean>
 
   <!-- create the bean -->
-    
-    <bean id="artRuntime" class="org.kermeta.art2.runtime.internal.ArtRuntimeServiceBean" init-method="init">
+    <!--
+    <bean id="artRuntime" class="org.kermeta.art2.runtime.internal.ArtRuntimeServiceBean" init-method="init"  destroy-method="stop">
         <property name="dictionary">
             <props>
                 <prop key="node.name" value="$[karaf.name]" />
@@ -23,10 +23,9 @@
             </props>
         </property>
     </bean>
-        
+        -->
   <!-- export the bean on the service registry -->
-  
-    <service ref="artRuntime" interface="org.kermeta.art2.runtime.ArtRuntimeService" /> 
+<!--    <service ref="artRuntime" interface="org.kermeta.art2.runtime.ArtRuntimeService" />  -->
 
         
 </blueprint>

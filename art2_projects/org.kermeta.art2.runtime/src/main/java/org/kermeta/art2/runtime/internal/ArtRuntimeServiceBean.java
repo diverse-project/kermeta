@@ -86,4 +86,9 @@ public class ArtRuntimeServiceBean implements ArtRuntimeService {
         update("file:empty.xmi");
 
     }//fin init
+
+
+    public void stop(){
+        
+    }
 }
