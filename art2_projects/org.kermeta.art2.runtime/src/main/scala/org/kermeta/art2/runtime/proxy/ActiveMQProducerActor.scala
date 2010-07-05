@@ -33,7 +33,7 @@ class ActiveMQProducerActor extends org.kermeta.art2.framework.MessagePort{
   def getName : String = "dummyProxy"
 
   def start() = {
-    var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker")
+    var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
     connection = Some(connectionFactory.createConnection())
     connection.get.start
     session = connection.get.createSession(false, Session.AUTO_ACKNOWLEDGE)

@@ -35,7 +35,7 @@ class ActiveMQConsumer extends MessageListener {
 
   def init(){
     try{
-      var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker")
+      var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
       connection = Some(connectionFactory.createConnection())
       connection.get.start
       session = connection.get.createSession(false, Session.AUTO_ACKNOWLEDGE)
