@@ -34,7 +34,7 @@ class ActiveMQBroker {
   def start = {
     try{
       
-      println("Starting, embedded  AMQ Broker to "+dataDir)
+      println("Starting, embedded AMQ V5 Broker to "+dataDir)
 
 
       //  System.out.println(this.getClass.getClassLoader.getResource("activemq.xml").getPath);
@@ -92,7 +92,7 @@ class ActiveMQBroker {
 
        broker.setPersistenceAdapter(persistance)
 */
-/*
+
        var tc = new TransportConnector
        tc.setName("openwire")
        tc.setUri(new URI("tcp://0.0.0.0:61616"))
@@ -107,7 +107,7 @@ class ActiveMQBroker {
        tcs.add(tc2)
 
        broker.setTransportConnectors(tcs)
-       */
+       
        broker.start
 
     } catch {
