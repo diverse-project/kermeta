@@ -59,14 +59,40 @@ aspect class System
 				
 		ctx.res.append(")\n")
 		
-	end
+	end 
 }
 
 package instance{
 
+	aspect class ValuedAttribute
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.instance.ValuedAttribute(")
+			if (not self.~attribute.isVoid) then
+				ctx.res.append("attribute == $" + ctx.cache.getValue(self.~attribute) + "")
+				i:=i+1
+			end
+			if (not self.~value.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("value == \"" + ~value+"\"")
+				i:=i+1
+			end
+			
+			ctx.res.append(")\n")			
+		end	
+	}
+
 	aspect class ComponentInstance
 	{
-		method toDrools(ctx : patternframework::Context) : Void is do 		
+		method toDrools(ctx : patternframework::Context) : Void is do
+			~attribute.each{a | a.toDrools(ctx)}
 
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
@@ -85,20 +111,95 @@ package instance{
 				ctx.res.append("type == $" + ctx.cache.getValue(self.type))
 				i:=i+1
 			end
+			if (~attribute.size>0) then
+				if (i>0) then ctx.res.append(",") end
+				var j : Integer init 0
+				self.~attribute.each{a| 
+					if (j>0) then ctx.res.append(",") end
+					ctx.res.append("attribute contains $" + ctx.cache.getValue(a))
+					j:=j+1
+				}
+				i:=i+1
+			end
+			
+			binding.each{b | b.toDrools(ctx)}
+			if (binding.size>0) then
+				if (i>0) then ctx.res.append(",") end
+				var j : Integer init 0
+				self.binding.each{b| 
+					if (j>0) then ctx.res.append(",") end
+					ctx.res.append("binding contains $" + ctx.cache.getValue(b))
+					j:=j+1
+				}
+				i:=i+1
+			end
 			
 			ctx.res.append(")\n")
 
 		end
 	}
+	
+	aspect class TransmissionBinding
+	{
+		method toDrools(ctx : patternframework::Context) : Void is 
+		do
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+					
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.instance.TransmissionBinding(")
+			
+			if client != void then
+				if ctx.cache.getValue(self.client) == void then
+					self.client.toDrools(ctx)
+				end
+			
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("client == $" + ctx.cache.getValue(self.client))
+				i:=i+1
+			end
+			if server != void then
+				if ctx.cache.getValue(self.server) == void then
+					self.server.toDrools(ctx)
+				end
+			
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("server == $" + ctx.cache.getValue(self.server))
+				i:=i+1
+			end
+			if serverInstance != void then
+				if ctx.cache.getValue(self.serverInstance) == void then
+					self.serverInstance.toDrools(ctx)
+				end
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("serverInstance == $" + ctx.cache.getValue(self.serverInstance))
+				i:=i+1
+			end			
+			ctx.res.append(")\n")
+		end 
+	}
+	
 	aspect class CompositeInstance
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
+			if(ctx.cache.getValue(self) == void) then
+		
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			
 			/*if (not self.type.isVoid()) then
 					self.type.toDrools(ctx)
 			end*/
+			~attribute.each{a | a.toDrools(ctx)}
+			binding.each{b | 
+				var bindingName : String init ctx.getGenerateName()
+				ctx.cache.put(b,name)
+				b.serverInstance.toDrools(ctx)
+				b.toDrools(ctx)
+			}
 			self.subComponent.each{e|e.toDrools(ctx)}
 					
 					var i : Integer init 0
@@ -115,6 +216,16 @@ package instance{
 						ctx.res.append("type == $" + ctx.cache.getValue(self.type))
 						i:=i+1
 					end
+					if (~attribute.size>0) then
+						if (i>0) then ctx.res.append(",") end
+						var j : Integer init 0
+						self.~attribute.each{a| 
+							if (j>0) then ctx.res.append(",") end
+							ctx.res.append("attribute contains $" + ctx.cache.getValue(a))
+							j:=j+1
+						}
+						i:=i+1
+					end
 					if (self.subComponent.size > 0) then
 						if (i>0) then ctx.res.append(",") end
 						var j : Integer init 0
@@ -124,18 +235,39 @@ package instance{
 						}
 						i:=i+1
 					end
+					
+			
+			if (binding.size>0) then
+				if (i>0) then ctx.res.append(",") end
+				var j : Integer init 0
+				self.binding.each{b| 
+					if (j>0) then ctx.res.append(",") end
+					ctx.res.append("binding contains $" + ctx.cache.getValue(b))
+					j:=j+1
+				}
+				i:=i+1
+			end
 				ctx.res.append(")\n")
 			end
-		
+			end
 	}
 	aspect class PrimitiveInstance
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
+		if(ctx.cache.getValue(self) == void) then
 			//self.type.toDrools(ctx)
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			
 			var i : Integer init 0
+			
+			~attribute.each{a | a.toDrools(ctx)}
+			binding.each{b | 
+				var bindingName : String init ctx.getGenerateName()
+				ctx.cache.put(b,name)
+				b.serverInstance.toDrools(ctx)
+				b.toDrools(ctx)
+			}			
 			
 			ctx.res.append("$")
 			ctx.res.append(name) 
@@ -149,10 +281,30 @@ package instance{
 				ctx.res.append("type == $" + ctx.cache.getValue(self.type))
 				i:=i+1
 			end
+			if (~attribute.size>0) then
+				if (i>0) then ctx.res.append(",") end
+				var j : Integer init 0
+				self.~attribute.each{a| 
+					if (j>0) then ctx.res.append(",") end
+					ctx.res.append("attribute contains $" + ctx.cache.getValue(a))
+					j:=j+1
+				}
+				i:=i+1
+			end			
 			
+			if (binding.size>0) then
+				if (i>0) then ctx.res.append(",") end
+				var j : Integer init 0
+				self.binding.each{b| 
+					if (j>0) then ctx.res.append(",") end
+					ctx.res.append("binding contains $" + ctx.cache.getValue(b))
+					j:=j+1
+				}
+				i:=i+1
+			end	
 							ctx.res.append(")\n")
 			
-			
+		end
 		end
 	}
 	aspect class Binding
@@ -165,10 +317,34 @@ package instance{
 
 package type{
 
+	aspect class BasicAttribute
+	{
+		method toDrools(ctx : patternframework::Context) : Void is 
+		do
+				var varName : String init ctx.getGenerateName()
+				ctx.cache.put(self,varName)			
+				var i : Integer init 0
+			
+				ctx.res.append("$")
+				ctx.res.append(varName) 
+				ctx.res.append(": art.type.BasicAttribute(")
+				if name != void then
+					ctx.res.append("name == \""+name+"\"")
+					i := i+1
+				end
+				if defaultValue != void then
+					if (i>0) then ctx.res.append(",") end
+					ctx.res.append("defaultValue == \""+defaultValue+"\"")
+				end	
+				ctx.res.append(")\n")
+		end
+	}
+
 	aspect class ComponentType
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
 			self.port.each{e|e.toDrools(ctx)}
+			self.~attribute.each{a | a.toDrools(ctx)}
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)			
 			var i : Integer init 0
@@ -185,6 +361,11 @@ package type{
 				ctx.res.append("port contains $" + ctx.cache.getValue(p))
 				i:=i+1
 			}
+			self.~attribute.each{a|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append(" attribute contains $" + ctx.cache.getValue(a))
+				i:=i+1
+			}
 			
 							ctx.res.append(")\n")
 		end
@@ -194,6 +375,8 @@ package type{
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
 			self.port.each{e|e.toDrools(ctx)}
+			self.~attribute.each{a | a.toDrools(ctx)}
+			
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)			
 			var i : Integer init 0
@@ -210,6 +393,11 @@ package type{
 				ctx.res.append("port contains $" + ctx.cache.getValue(p))
 				i:=i+1
 			}
+			self.~attribute.each{a|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append(" attribute contains $" + ctx.cache.getValue(a))
+				i:=i+1
+			}
 			
 							ctx.res.append(")\n")
 		end
@@ -218,6 +406,8 @@ package type{
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
 			self.port.each{e|e.toDrools(ctx)}
+			self.~attribute.each{a | a.toDrools(ctx)}
+			
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)			
 			var i : Integer init 0
@@ -234,6 +424,11 @@ package type{
 				ctx.res.append("port contains $" + ctx.cache.getValue(p))
 				i:=i+1
 			}
+			self.~attribute.each{a|
+					if (i>0) then ctx.res.append(",") end
+					ctx.res.append(" attribute contains $" + ctx.cache.getValue(a))
+					i:=i+1
+			}
 			
 							ctx.res.append(")\n")
 		end
@@ -242,6 +437,8 @@ package type{
 	aspect class Port
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
+		
+		 if(ctx.cache.getValue(self) == void) then
 			/*if (service != void) then
 				self.service.toDrools(ctx)
 			end*/
@@ -271,7 +468,7 @@ package type{
 	
 			
 							ctx.res.append(")\n")
-				
+		end		
 		
 		end
 	}

@@ -55,8 +55,13 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 				++i;*/
 				
 				params[2] = aspect;
+				
+				//String cmd = "java -jar "+"./lib/smartadapters.jar" + " " + params[0] + " " + params[1];
+
+				
 				SmartAdaptersDrools.main(params);
 				params[0] = params[1];
+				//params[1] = params[1].replace(".art", ".woven.art"); 
 			}
 			
 			
