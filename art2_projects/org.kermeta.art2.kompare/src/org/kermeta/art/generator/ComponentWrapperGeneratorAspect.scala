@@ -76,11 +76,11 @@ else
 (`_res`).append("proxyProducer\" /></property>\n\t\t</bean>\n\t\t\n\t\t<service ref=\"")
 (`_res`).append(((rp).ScalaportTypeRef).Scalaname)
 (`_res`).append("proxy\" interface=\"")
-(`_res`).append(((c).ScalacomponentType).Scalaname)
+(`_res`).append((((rp).ScalaportTypeRef).Scalaref).Scalaname)
 (`_res`).append("\">\n\t\t\t<service-properties>\n\t\t\t\t<entry key=\"artPortName\" value=\"")
 (`_res`).append(((rp).ScalaportTypeRef).Scalaname)
 (`_res`).append("\" />\n\t\t\t\t<entry key=\"artComponentName\" value=\"")
-(`_res`).append((remoteNode).Scalaname)
+(`_res`).append((remotePort).container.asInstanceOf[art2.ComponentInstance].Scalaname)
 (`_res`).append("\" />\n\t\t\t</service-properties>\n\t\t</service>\n\t\t\n")}
 
 (`_res`).append("\n")}
