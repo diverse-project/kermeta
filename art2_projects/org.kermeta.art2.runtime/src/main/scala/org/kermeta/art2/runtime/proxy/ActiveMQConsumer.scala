@@ -65,7 +65,7 @@ class ActiveMQConsumer extends MessageListener {
   def onMessage(message : Message){
     message match {
       case s : TextMessage => delegate.process(s)
-      case o : ObjectMessage => println(o.getClass.getName);delegate.process(o.getObject)
+      case o : ObjectMessage => println(o.getObject.getClass.getName);delegate.process(o.getObject)
       case _ => println("Strange message ???"+message)
     }
   }
