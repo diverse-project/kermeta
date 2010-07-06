@@ -60,7 +60,7 @@ else
 (`_res`).append("\t\t<!-- not collocated binding proxy injected -->\n\t\t<bean id=\"")
 (`_res`).append(((rp).ScalaportTypeRef).Scalaname)
 (`_res`).append("proxyProducer\" class=\"org.kermeta.art2.runtime.proxy.Factory\" factory-method=\"createProducer\" init-method=\"init\" destroy-method=\"stop\">\n\t\t\t<property name=\"uri\" value=\"")
-(`_res`).append((rp).getProxyURI())
+(`_res`).append((remotePort).getProxyURI())
 (`_res`).append("\" />\n\t\t\t<property name=\"hubType\" value=\"")
 (`_res`).append((rp).getProxyHubType())
 (`_res`).append("\" />\n\t\t</bean>\n\t\t\n\t\t<bean id=\"")
