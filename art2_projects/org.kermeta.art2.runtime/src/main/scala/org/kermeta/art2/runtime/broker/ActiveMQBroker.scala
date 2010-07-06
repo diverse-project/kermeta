@@ -34,7 +34,7 @@ class ActiveMQBroker {
   def start = {
     try{
       
-      println("Starting, embedded AMQV5 Broker to "+dataDir)
+      println("Starting, embedded AMQV6 Broker to "+dataDir)
 
 
       //  System.out.println(this.getClass.getClassLoader.getResource("activemq.xml").getPath);
