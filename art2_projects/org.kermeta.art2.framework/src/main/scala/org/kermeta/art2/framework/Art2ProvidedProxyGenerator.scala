@@ -48,7 +48,7 @@ object Art2ProvidedProxyGenerator {
           }
           wrapper.append(")\n")
         }
-        wrapper.append("case _ => \n")
+        wrapper.append("case _ => println(\"uncatch message : \"+o) \n")
         wrapper.append("}\n")
       }
         
