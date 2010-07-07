@@ -13,7 +13,22 @@ trait StringLiteralAspect extends ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {	
 		res.append("\"")
-		res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replace("\"","\\\"") )
+    
+                var stringlit = this.getValue
+                var stringlitRes = new StringBuilder
+                for (i <- 0 until stringlit.size) {
+                  stringlit.charAt(i) match {
+                    case '"'=> stringlitRes.append("\\");stringlitRes.append("\"")
+                    case '\\' => stringlitRes.append("\\");stringlitRes.append("\\")
+                    case '\n' => stringlitRes.append("\\n");
+                    case '\t' => stringlitRes.append("\\t");
+                    case _ @ c => stringlitRes.append(c)
+        
+        
+                  }
+                }
+    
+		res.append(stringlitRes.toString)//.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t") )
 		res.append("\"")
 	} 
 

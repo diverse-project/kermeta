@@ -51,7 +51,9 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
 
       var genpackageName : StringBuilder= new StringBuilder
       //var packageName : StringBuilder= new StringBuilder
-			
+
+     // println(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo)
+
       genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo))
 	
       //og.error("AspectVisitor ClassDef Gen | {} | {}",genpackageName.toString,par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameNoRoot)
@@ -74,6 +76,9 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
       if (!Util.hasEcoreTag(par)){
         var res1 : StringBuilder = new StringBuilder
+
+        
+
         res1.append("package "+genpackageName+"\n")
         res1.append("trait ")
         res1.append(par.getName())

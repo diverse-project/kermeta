@@ -66,7 +66,15 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
   }
   def generateOperationCall(res : StringBuilder){
     var TargetType : StringBuilder = new StringBuilder
+    
     this.getTarget().getStaticType().generateScalaCode(TargetType)
+    
+    if(this.getName.contains("split")){
+      println("call equivalence")
+      println(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
+    }
+    
+    
     var ops : List[Operation] = this.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(this.getName))
     if (ops.size>0){
       if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
@@ -140,7 +148,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
       case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res,"(",")")}
       case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res,"(",")")}
       case "equals" => {res.append("(");generateTarget(res);res.append(" == ");generateParam(res,"(",")");res.append(")");}
-      //case "run" if(this.getTarget != null) => generateKUnitCase(res)
+        //case "run" if(this.getTarget != null) => generateKUnitCase(res)
       case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
@@ -162,7 +170,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
       case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {res.append(Util.getEcoreRenameOperation(this.getStaticOperation));generateParam(res,"(",")") }
       case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
       case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }
-      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res) }
+      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res); }
       case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral ==null) => {generateTarget(res);res.append(".");generateName(res) }
       case _ => log.debug("!!! Uncatch case ")
  

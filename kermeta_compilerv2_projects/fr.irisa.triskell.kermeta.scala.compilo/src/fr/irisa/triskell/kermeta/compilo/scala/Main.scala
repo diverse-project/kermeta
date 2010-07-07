@@ -56,16 +56,15 @@ object Main extends LogAspect {
 //    additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/hrc.jar")
     //home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/fr.irisa.triskell.fuml_1.0.0.jar")
 
-    //additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/fr.irisa.triskell.fuml_1.0.0.jar") ++ additionalClassPath
+    
+ //   additionalClassPath = List("/Users/ffouquet/.m2/repository/org/kermeta/art2/art2.model/1.4.0-SNAPSHOT/art2.model-1.4.0-SNAPSHOT.jar") ++ additionalClassPath
+ //   additionalClassPath = List("/Users/ffouquet/.m2/repository/org/kermeta/art2/art2.model/1.4.0-SNAPSHOT/art2.model-1.4.0-SNAPSHOT.jar") ++ additionalClassPath
 
-    /*       additionalClassPath = List("/home/barais/workspaces/kermetaRuntimeTest/AntWorld/libNative/native.jar"
-     ,
-     "/opt/galileo/eclipse/plugins/org.eclipse.uml2.common_1.5.0.v200905041045.jar","/opt/galileo/eclipse/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar"
-     )*/
-    /*       "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/fr.irisa.triskell.traceability.model_1.3.2.jar",
-     "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/flowEMFEditor_1.0.0.jar",
-     "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/org.kermeta.kompose.core.model_0.0.5.jar")
-     */
+  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/malaiExterns.jar") ++ additionalClassPath
+  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/malaiJavaBinding.jar") ++ additionalClassPath
+  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visualExterns.jar") ++ additionalClassPath
+  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visuConcretePres.jar") ++ additionalClassPath
+
 
 
 
@@ -116,8 +115,17 @@ object Main extends LogAspect {
 //
 //
 
-  //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/dev/kermeta/HelloWorld.km"
- // inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/FUMLStarter.km"
+ //   inputFile = "/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/dev/kermeta/HelloWorld.km"
+// inputFile = "/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
+// 
+// 
+ //
+ //inputFile = "/Users/ffouquet/Desktop/Arnaud/compil/Visual.km"
+ //
+ //
+
+    //inputFile = "/Users/ffouquet/NetBeansProjects/POC/PJulien/TestParser/resources/TestFouquetsParser.km"
+
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)

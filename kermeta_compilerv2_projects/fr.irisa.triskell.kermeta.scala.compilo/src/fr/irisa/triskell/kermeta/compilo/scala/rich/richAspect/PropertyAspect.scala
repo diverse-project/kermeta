@@ -219,7 +219,10 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
                     res.append( "this."+prefix+"set" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "(value)")
                 }
             }else{
+        if(this.getSetterBody != null){
+
                 this.getSetterBody.generateScalaCode(res)
+        }
 
             }
             res.append("}\n")
