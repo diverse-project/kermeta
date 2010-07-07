@@ -26,12 +26,31 @@ public class CompilerUI implements IObjectActionDelegate, Runnable {
     protected IFile file;
 	
 	public void run() {
+		String aspect_uri = "file:/" + file.getLocation().toOSString().replace("\\", "/");
+		String target_uri = file.getLocation().toOSString().replace("\\", "/").replace(".smART",".drl");
+		process(aspect_uri, target_uri);		
+	}
+	
+	
+	public static void process(String aspect_uri, String target_file) {
 		IOConsole console = new EclipseConsole("SmartAdapters compiler for DiVA");
-		console.println(new InfoMessage("Compiling DiVA aspect models: " + file.getLocation().toOSString() + "..."));
+		console.println(new InfoMessage("Compiling DiVA aspect models: " + aspect_uri + "..."));
 			
 		try {			
-			String file_uri = "file:/" + file.getLocation().toOSString().replace("\\", "/");
-		    KExecMain.run("main", file_uri, console, DIVA_KERMETA_CODE, ENTRY_POINT);
+		    KExecMain.run("process", aspect_uri, target_file, console, DIVA_KERMETA_CODE, ENTRY_POINT);
+			console.println(new OKMessage("Execution terminated successfully."));
+		} catch (Throwable e) {
+			console.println(new ErrorMessage("Runtime error : "));
+			console.println(new ThrowableMessage(e));
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void process(String aspect_uri, String target_file, IOConsole console) {
+		console.println(new InfoMessage("Compiling DiVA aspect models: " + aspect_uri + "..."));
+			
+		try {			
+		    KExecMain.run("process", aspect_uri, target_file, console, DIVA_KERMETA_CODE, ENTRY_POINT);
 			console.println(new OKMessage("Execution terminated successfully."));
 		} catch (Throwable e) {
 			console.println(new ErrorMessage("Runtime error : "));

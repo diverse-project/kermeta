@@ -20,25 +20,17 @@ import org.kermeta.smartadapters.drools.utils.TreeIterable;
 
 public class SmartAdaptersDrools {
 
-	/*public void main2(){
-		Rule_RulesName_0ConsequenceInvoker aspect = new Rule_RulesName_0ConsequenceInvoker();
-		
-		WorkingMemory wMemory = new ReteooWorkingMemory();
-
-		
-		KnowledgeHelper kHelper = new DefaultKnowledgeHelper(wMemory);
-
-		kHelper.insert(new TreeIterable<EObject>(resource.getAllContents()));
-		
-		try {
-			aspect.evaluate(kHelper, wMemory);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public static void weaveConfiguration(String baseURI, String configURI, String[] aspectsURI) {
+		String params[] = new String[aspectsURI.length + 2];
+		params[0] = baseURI;
+		params[1] = configURI;
+		for (int i=2; i<aspectsURI.length+2; i++) {
+			params[i] = aspectsURI[i-2];
 		}
-	}*/
+		main(params);
+	}
 	
 	/**
-	 * 
 	 * @param args
 	 * arg[0] = URI to the base model
 	 * arg[1] = URI to the woven model
