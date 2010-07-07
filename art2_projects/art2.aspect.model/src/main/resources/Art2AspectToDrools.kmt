@@ -38,7 +38,7 @@ class Main
 	
 	operation loadAspect() : AspectRoot is 
 	do
-		var aspectURI : String init "file:/home/entimid2/workspace2/art2.aspect.model/src/main/resources/AspectRoot.xmi"
+		var aspectURI : String init "file:/home/entimid2/workspace2/art2.aspect.model/src/main/resources/AspectTest.xmi"
 		var aspectMetamodelURI : String init "platform:/resource/art2.aspect.model/src/main/resources/artAspect.ecore"
 		var rep : Repository init EMFRepository.new
 		var res : Resource

@@ -1,0 +1,13 @@
+rule "var0"
+when
+	$var1: art2.PortTypeRef(name == "on")
+	$var2: art2.ComponentType(required contains $var1)
+	$var3: art2.inini(portTypeRef contains $var1)
+	$var4: art2.ComponentInstance()
+	$var5: art2.Node(name == "duke.irisa.fr", components contains $var4)
+then
+	System.out.println($var1);
+	System.out.println($var2);
+	System.out.println($var3);
+	System.out.println($var4);
+	System.out.println($var5);
