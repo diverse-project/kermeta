@@ -34,12 +34,16 @@ public final class KermetaLexer implements Lexer<KmTokenId> {
             String keyword = iterDelimiter.next().toString();
             delimiters.put(keyword, KmTokenId.SEPARATOR);
         }
+
+        
     }
     private LexerInput input;
     private TokenFactory<KmTokenId> tokenFactory;
 
     KermetaLexer(LexerRestartInfo<KmTokenId> info) {
         this.input = info.input();
+
+        this.input.readText();
         this.tokenFactory = info.tokenFactory();
         assert (info.state() == null); // passed argument always null
     }
@@ -49,15 +53,6 @@ public final class KermetaLexer implements Lexer<KmTokenId> {
         while (true) {
             int ch = input.read();
             switch (ch) {
-                case '+':
-                    return token(KmTokenId.PLUS);
-
-                case '-':
-                    return token(KmTokenId.MINUS);
-
-                case '*':
-                    return token(KmTokenId.STAR);
-
                 case '/':
                     switch (input.read()) {
                         case '/': // in single-line comment
@@ -88,13 +83,6 @@ public final class KermetaLexer implements Lexer<KmTokenId> {
                     }
                     input.backup(1);
                     return token(KmTokenId.SLASH);
-
-                case '(':
-                    return token(KmTokenId.LPAREN);
-
-                case ')':
-                    return token(KmTokenId.RPAREN);
-
 
                 case '"': {
                     while (true) {
@@ -127,7 +115,6 @@ public final class KermetaLexer implements Lexer<KmTokenId> {
                     return null;
 
                 default:
-
                     if (Character.isWhitespace((char) ch)) {
                         ch = input.read();
                         while (ch != EOF && Character.isWhitespace((char) ch)) {
@@ -155,13 +142,13 @@ public final class KermetaLexer implements Lexer<KmTokenId> {
                         }
                     } else {
                         while (true) {
-                            if (ch == EOF || Character.isLetterOrDigit(ch) || Character.isWhitespace((char) ch)) {
+                            if ( ch == '"' | ch == EOF || Character.isLetterOrDigit(ch) || Character.isWhitespace((char) ch)) {
                                 input.backup(1); // backup the extra char (or EOF)
                                 // Check for keywords
                                 KmTokenId id = delimiters.get(input.readText());
                                 //System.out.println(input.readText());
                                 if (id == null) {
-                                    id = KmTokenId.ERROR;
+                                    //id = KmTokenId.ERROR;
                                 }
                                 return token(id);
                             }

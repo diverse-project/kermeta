@@ -25,7 +25,7 @@ public class KermetaParser extends Parser {
         try {
             //org.kermeta.scala.parser.Parser.parse(texttoParse);
 
-            System.out.println("wuill parse");
+           // System.out.println("wuill parse");
             //System.out.println(org.kermeta.scala.parser.);
 
             parser = new org.kermeta.scala.parser.Parser();

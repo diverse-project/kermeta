@@ -5,5 +5,5 @@
     <fontcolor name="whitespace" default="whitespace"/>
     <fontcolor name="character" default="character"/>
     <fontcolor name="string" default="string"/>
-    <fontcolor name="identifier" foreColor="magenta" default="identifier"/>
+    <fontcolor name="identifier" foreColor="gray" default="identifier"/>
 </fontscolors>
