@@ -21,12 +21,15 @@ import org.hornetq.api.core.client.ClientSession;
 import org.hornetq.api.core.client.ClientSessionFactory;
 import org.hornetq.api.core.client.HornetQClient;
 import org.hornetq.api.core.client.MessageHandler;
+import org.hornetq.core.config.BroadcastGroupConfiguration;
 import org.hornetq.core.config.Configuration;
+import org.hornetq.core.config.DiscoveryGroupConfiguration;
 import org.hornetq.core.config.impl.ConfigurationImpl;
 import org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory;
 import org.hornetq.core.remoting.impl.invm.InVMConnectorFactory;
 import org.hornetq.core.remoting.impl.netty.NettyAcceptor;
 import org.hornetq.core.remoting.impl.netty.NettyAcceptorFactory;
+import org.hornetq.core.remoting.impl.netty.NettyConnector;
 import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
 import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
@@ -46,9 +49,12 @@ public class EmbeddedServer {
          configuration.setSecurityEnabled(false);
          
          configuration.getAcceptorConfigurations().add(new TransportConfiguration(InVMAcceptorFactory.class.getName()));
-         configuration.getConnectorConfigurations().put("vm",new TransportConfiguration(InVMConnectorFactory.class.getName()));
          configuration.getAcceptorConfigurations().add(new TransportConfiguration(NettyAcceptorFactory.class.getName()));
-         configuration.getConnectorConfigurations().put("netty",new TransportConfiguration(NettyConnectorFactory.class.getName()));
+
+
+         configuration.getDiscoveryGroupConfigurations().put("art2broker", new DiscoveryGroupConfiguration("art2broker-group", "127.16.9.7", "231.7.7.7", 9876, 10000));
+
+         //configuration.getConnectorConfigurations().put("netty",new TransportConfiguration(NettyConnectorFactory.class.getName()));
          
 
 
@@ -86,7 +92,7 @@ public class EmbeddedServer {
             });
 
 
-            Thread.currentThread().sleep(200000);
+            Thread.currentThread().sleep(36000);
             session.close();
 
             
