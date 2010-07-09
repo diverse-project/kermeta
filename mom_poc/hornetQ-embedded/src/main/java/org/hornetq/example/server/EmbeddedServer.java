@@ -22,6 +22,7 @@ import org.hornetq.api.core.client.ClientSessionFactory;
 import org.hornetq.api.core.client.HornetQClient;
 import org.hornetq.api.core.client.MessageHandler;
 import org.hornetq.core.config.BroadcastGroupConfiguration;
+import org.hornetq.core.config.ClusterConnectionConfiguration;
 import org.hornetq.core.config.Configuration;
 import org.hornetq.core.config.DiscoveryGroupConfiguration;
 import org.hornetq.core.config.impl.ConfigurationImpl;
@@ -34,6 +35,8 @@ import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
 import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
 import org.hornetq.core.server.JournalType;
+import org.hornetq.core.server.impl.HornetQServerImpl;
+import org.hornetq.spi.core.security.HornetQSecurityManagerImpl;
 
 /**
  * @author <a href="mailto:andy.taylor@jboss.org">Andy Taylor</a>
@@ -47,19 +50,31 @@ public class EmbeddedServer {
          //configuration.setPersistenceEnabled(true);
          configuration.setJournalType(JournalType.NIO);
          configuration.setSecurityEnabled(false);
+         //configuration.setJMXManagementEnabled(false);
+         
          
          configuration.getAcceptorConfigurations().add(new TransportConfiguration(InVMAcceptorFactory.class.getName()));
          configuration.getAcceptorConfigurations().add(new TransportConfiguration(NettyAcceptorFactory.class.getName()));
 
 
-         configuration.getDiscoveryGroupConfigurations().put("art2broker", new DiscoveryGroupConfiguration("art2broker-group", "127.16.9.7", "231.7.7.7", 9876, 10000));
+         configuration.getDiscoveryGroupConfigurations().put("art2broker", new DiscoveryGroupConfiguration("art2broker-group", null, "231.7.7.7", 9876, 10000));
+
+
+         configuration.getClusterConfigurations().add(new ClusterConnectionConfiguration("art2Cluster", "art2", 500, true, true, 1, 1, "art2broker-group"));
+
+
+
+         configuration.setClusterUser("art2");
+         configuration.setClusterPassword("art2");
+
+
 
          //configuration.getConnectorConfigurations().put("netty",new TransportConfiguration(NettyConnectorFactory.class.getName()));
          
 
 
          // Step 2. Create and start the server
-         HornetQServer server = HornetQServers.newHornetQServer(configuration);
+         HornetQServer server = new HornetQServerImpl(configuration, null, new HornetQSecurityManagerImpl());
          server.start();
 
          
@@ -70,8 +85,8 @@ public class EmbeddedServer {
 
             ClientSession session = nettyFactory.createSession();
 
-            if(!session.queueQuery(new SimpleString("example")).isExists()){
-                session.createQueue("example", "example", true);
+            if(!session.queueQuery(new SimpleString("art2.q1")).isExists()){
+                session.createQueue("art2.q1", "art2.q1", true);
             }
 
             ClientProducer producer = session.createProducer("example");
