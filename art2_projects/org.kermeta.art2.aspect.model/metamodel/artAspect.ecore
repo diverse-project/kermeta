@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Art2Aspect"
+    nsURI="http://ArtAspect/2.0" nsPrefix="Art2Aspect">
+  <eClassifiers xsi:type="ecore:EClass" name="AspectRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1"
+        eType="#//AspectDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AspectDefinition" eSuperTypes="platform:/plugin/org.kermeta.art2.model/metamodel/art.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//BindingPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointcut" eType="#//PointcutDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="advice" eType="ecore:EClass platform:/plugin/org.kermeta.art2.model/metamodel/art.ecore#//ContainerRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PointcutDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypePatterns"
+        upperBound="-1" eType="#//ComponentTypePattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodePatterns" upperBound="-1"
+        eType="#//NodePattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="portTypePatterns" upperBound="-1"
+        eType="#//PortTypePattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//PortPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.kermeta.art2.model/metamodel/art.ecore#//Port"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentTypePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredPortTypeRefPatterns"
+        upperBound="-1" eType="#//PortTypeRefPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedPortTypeRefPatterns"
+        upperBound="-1" eType="#//PortTypeRefPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.kermeta.art2.model/metamodel/art.ecore#//ComponentType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodePattern" eSuperTypes="#//PatternNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentPatterns" upperBound="-1"
+        eType="#//ComponentPattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//PortTypeRefPattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentPattern" eSuperTypes="#//PatternNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedPortPatterns" upperBound="-1"
+        eType="#//PortPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredPortPatterns" upperBound="-1"
+        eType="#//PortPattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortTypePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.kermeta.art2.model/metamodel/art.ecore#//PortType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortTypeRefPattern" eSuperTypes="#//PatternNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//PortTypePattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namePattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
