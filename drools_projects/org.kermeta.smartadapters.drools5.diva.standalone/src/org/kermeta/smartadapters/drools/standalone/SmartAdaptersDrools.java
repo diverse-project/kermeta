@@ -1,6 +1,7 @@
 package org.kermeta.smartadapters.drools.standalone;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.drools.KnowledgeBase;
@@ -20,12 +21,12 @@ import org.kermeta.smartadapters.drools.utils.TreeIterable;
 
 public class SmartAdaptersDrools {
 
-	public static void weaveConfiguration(String baseURI, String configURI, String[] aspectsURI) {
-		String params[] = new String[aspectsURI.length + 2];
+	public static void weaveConfiguration(String baseURI, String configURI, ArrayList<String> aspectsURI) {
+		String params[] = new String[aspectsURI.size() + 2];
 		params[0] = baseURI;
 		params[1] = configURI;
-		for (int i=2; i<aspectsURI.length+2; i++) {
-			params[i] = aspectsURI[i-2];
+		for (int i=2; i<aspectsURI.size()+2; i++) {
+			params[i] = aspectsURI.get(i-2);
 		}
 		main(params);
 	}
