@@ -252,7 +252,7 @@
             <artifactId>kermeta.emf.ecore.xmi</artifactId>
             <version>2.5.0</version>
         </dependency>
-        -->
+        
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.scala.loader</artifactId>
@@ -263,7 +263,7 @@
                     <groupId>fr.irisa.triskell</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
