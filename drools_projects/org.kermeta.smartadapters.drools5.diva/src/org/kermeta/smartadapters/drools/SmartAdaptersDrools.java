@@ -232,7 +232,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			dsplFile = "file://" + file.getAbsolutePath();
 		}
 		else {
-			logger.warn("Cannot find the DiVA model. Please check the diva.model property in your launch configuration.");
+			logger.warn("Cannot find the DiVA model. Please check the \"diva.model\" property.");
 		}
 
 		property = System.getProperty("smartadapters");
@@ -243,7 +243,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			smartAdapters = file.getAbsolutePath();
 		}
 		else {
-			logger.warn("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
+			logger.warn("Cannot find the binaries of smartadapters. Please check the \"smartadapters\" property.");
 		}
 		
 		property = System.getProperty("aspects.drools.repository");
