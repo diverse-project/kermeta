@@ -18,12 +18,12 @@
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
 	<target name="all" depends="">
-	   <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
+	 <!--  <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/>
 		<antcall target="provision_linux_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_linux_x86_base_for_kermeta"/>
-	    <antcall target="provision_win32_base_for_kermeta"/>
-	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
+	   --> <antcall target="provision_win32_base_for_kermeta"/>
+	   <!-- <antcall target="provision_win32_x86_64_base_for_kermeta"/> -->
 	</target>
 
 
@@ -35,7 +35,7 @@
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_linux_x86_base_for_kermeta">
@@ -46,7 +46,7 @@
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 
@@ -58,7 +58,7 @@
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -70,7 +70,7 @@
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -82,7 +82,7 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_macosx-cocoa_base_for_kermeta">
@@ -93,7 +93,7 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="PlatformSDKProfile"/>
 		</antcall>
 	</target>
 
