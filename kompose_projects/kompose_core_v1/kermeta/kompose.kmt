@@ -1,0 +1,564 @@
+/* $Id:$ 
+ * Creation : June 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+
+package kompose;
+
+require kermeta
+require "platform:/lookup/kompose_core_v1/metamodel/kompose.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
+
+require "platform:/lookup/kompose_directives_v1/kermeta/directives.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+using kermeta::standard
+using kermeta::persistence
+using kermeta::utils
+using kermeta::language::structure
+
+aspect class Composer{
+	reference primaryModel : EMFResource
+	reference aspectModel : EMFResource
+	
+	operation loadCompositionModel(uri : String) : Context is do
+		var resource : EMFResource
+		resource ?= EMFRepository.getDefault().asType(EMFRepository).getResource(uri)
+		resource.load
+		result := resource.one.asType(Context)
+	end
+	operation loadModel(uri : String) : EMFResource is do
+		var resource : EMFResource
+       	resource ?= EMFRepository.getDefault().asType(EMFRepository).getResource(uri)
+        resource.load
+        result := resource
+	end
+	operation saveModel(model : Object, model_uri : String, mm_uri : String) is do
+		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource(model_uri, mm_uri)
+        resource.add(model)
+      	resource.save
+	end
+	
+	operation compose(ctx : Context) is do
+		var engine : Engine init Engine.getDefault().asType(Engine)
+		var matcher : Matcher init Matcher.getDefault().asType(Matcher)
+		var merger : Merger init Merger.getDefault().asType(Merger)
+		//loading models
+		stdio.writeln("loading models")
+		primaryModel := loadModel(ctx.primaryModelURI)
+		aspectModel := loadModel(ctx.aspectModelURI)
+		ctx.resources.add(primaryModel)
+		ctx.resources.add(aspectModel)
+		//executing directives
+		stdio.writeln("executing directives")
+		engine.applyDirectives(primaryModel.one.asType(Mergeable),ctx, ctx.predirectivesPM)
+		//engine.applyDirectives(aspectModel.one.asType(Mergeable),ctx, ctx.predirectivesAM)
+		ctx.indexate(primaryModel.one)
+		var cm2 : Object
+		cm2 := merger.fixReferences(primaryModel.one.asType(Mergeable), ctx)
+		saveModel(cm2,ctx.composedModelURI,ctx.metamodelName)
+		//looking for match
+		/*stdio.writeln("looking for match")
+		//var matches : OrderedSet<Match> init OrderedSet<Match>.new
+		var matches : OrderedSet<Match> init matcher.computeMatch(primaryModel,aspectModel)
+		matches.each{m|
+			if m.eltPM.isKindOf(ecore::EGenericType) then
+				if m.eltAM.isKindOf(ecore::EGenericType) then
+					stdio.writeln("-- GT="+m.eltPM.asType(ecore::EGenericType).eClassifier.name+" matches "+m.eltAM.asType(ecore::EGenericType).eClassifier.name)
+				else
+					stdio.writeln("-- GT²="+m.eltPM.asType(ecore::EGenericType).eClassifier.name+" matches "+m.eltAM.toString)
+				end
+			else
+				stdio.writeln("-- "+m.eltPM.asType(ecore::ENamedElement).name+" matches "+m.eltAM.toString)
+			end
+		}
+		//merging models
+		ctx.indexate(primaryModel.instances.one)
+		ctx.indexate(aspectModel.instances.one)
+		stdio.writeln("merging models")
+		//stdio.writeln(merger.merge(primaryModel.instances.one,aspectModel.instances.one,matches).toString)
+		var cm : Object
+		stdio.writeln("cm is "+cm.toString)
+		//cm := merger.merge(primaryModel,aspectModel,matches)
+		cm := merger.merge(primaryModel.instances.one.asType(Mergeable),aspectModel.instances.one.asType(Mergeable),matches, ctx)
+		stdio.writeln("###Composed objects")
+		ctx.trace.keys().each{k|
+			stdio.writeln(k.toString+" should match with "+ctx.trace.getValue(k).toString)
+		}
+		stdio.writeln("###End composed objects")
+		var cm2 : Object
+		cm2 := merger.fixReferences(cm.asType(Mergeable), ctx)
+		//executing directives
+		stdio.writeln("executing postdirectives")
+		engine.applyDirectives(cm2.asType(Mergeable),ctx, ctx.postdirectives)
+		//saving model
+		stdio.writeln("saving model")
+		saveModel(cm2,ctx.composedModelURI,ctx.metamodelName)
+		*/
+	end
+}
+
+aspect class ConflictResolver{
+	operation resolveConflict(selfValue : Object, otherValue : Object, prop : Object) : Object is do
+		result := selfValue
+	end
+}
+
+aspect class Context{
+	attribute types : Hashtable<String, kermeta::language::structure::Class>
+	attribute variables : Hashtable<String, Object>
+	attribute processed : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
+	attribute objectIndex : Hashtable<kermeta::standard::Integer,kermeta::standard::Object>
+	reference resources: kermeta::persistence::EMFResource[0..*]
+	reference trace : Hashtable<Mergeable,Mergeable>
+	reference metamodel : Mergeable
+	
+	operation initialize() : Context is do
+		self.types := Hashtable<String, kermeta::language::structure::Class>.new
+		self.variables := Hashtable<String, Object>.new
+		self.trace := Hashtable<Mergeable,Mergeable>.new
+		processed := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
+		objectIndex := Hashtable<kermeta::standard::Integer,kermeta::standard::Object>.new
+		result := self
+	end
+	
+	/**
+	 * Creates a context to be able to get back references from elements once merge process
+	 * is done
+	 * param element : element to indexate
+	 */
+	operation indexate(element : Object) : Void is do
+		if not element.isInstanceOf(kermeta::language::behavior::Expression) and not element.isInstanceOf(kermeta::language::structure::Tag) then
+			if self.resourceContains(element) then
+				//stdio.writeln("element "+ element.toString +" contained in the resource")
+				if not self.objectIndex.containsKey(element.oid) then
+					self.objectIndex.put(element.oid,element)
+					var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+					properties.each{ p |
+						if p.upper != 1 then
+							var objects : Collection<Object> objects?=element.~get(p)
+							objects.each{obj|
+								if not obj.isKindOf(kermeta::language::behavior::Expression) then
+									self.indexate(obj)
+								end
+							}
+						else
+							if not p.isKindOf(kermeta::language::behavior::Expression) then
+								self.indexate(element.~get(p))
+							end
+						end
+					}
+				end
+			end
+		end
+	end
+	
+	/**
+	 * Test if an element comes from a resource already loaded
+	 * param element : element to test
+	 * returns true if element comes from one of the resources loaded, false otherwise
+	 */
+	operation resourceContains(element : Object) : kermeta::standard::Boolean is do
+		result:=false
+		self.resources.each{resource|
+			if not element.containingResource().isVoid then
+				if element.containingResource()==resource then
+					result:=true
+				end
+			end
+		}
+	end
+	
+	operation addTrace(e1 : Mergeable, e2 : Mergeable) is do
+		trace.put(e1,e2)
+	end
+	
+	/**
+	 * Tests if an object has been processed in fixReferences
+	 * param e : element to test
+	 * returns true if e has been processed, false otherwise
+	 */
+	operation isProcessed(e : Mergeable) : kermeta::standard::Boolean is do
+		result := processed.getValue(e.oid()) != void
+	end
+	
+	/**
+	 * Give the information that an object has been processed in fixReferences
+	 * param e : element processed
+	 */
+	operation addProcessedElement(e : Mergeable) is do
+		processed.put(e.oid(), true)
+	end
+	
+	operation addVariable(name : String, o : Object) is do
+		self.variables.put(name,o)
+	end
+	
+	operation getVariable(name : String) : Object is do
+		result := self.variables.getValue(name)
+	end
+	
+	operation getType(name : String) : Object is do
+		result := self.types.getValue(name)
+	end
+	
+	/*operation getPrimaryModelURI() : String is do
+		result := self.primaryModelURI
+	end
+	
+	operation getAspectModelURI() : String is do
+		result := self.aspectModelURI
+	end
+	
+	operation getComposedModelURI() : String is do
+		result := self.composedModelURI
+	end
+	
+	operation getMetamodelName() : String is do
+		result := self.metamodelName
+	end
+	
+	operation getMode() : Modes is do
+		result := self.mode
+	end
+	
+	operation getPMDirectives() : OrderedSet<directives::CompositionDirective> is do
+		result := self.predirectivesPM
+	end
+	
+	operation getAMDirectives() : OrderedSet<directives::CompositionDirective> is do
+		result := self.predirectivesAM
+	end
+	
+	operation getPostDirectives() : OrderedSet<directives::CompositionDirective> is do
+		result := self.postdirectives
+	end*/
+}
+
+aspect class Engine{
+	operation applyDirectives(model : Mergeable, ctx : Context, directives : OrderedSet<directives::CompositionDirective>) : Mergeable is do
+		// launch directives execution on the resource's model elements
+		/*directives.each{d|
+			d.execute(model,ctx)
+		}*/
+		directives.each{d|
+			d.execute(model,ctx)
+		}
+		result := model
+	end
+}
+
+aspect class Matcher{
+	operation computeMatch(model1 : Resource, model2 : Resource) : OrderedSet<Match> is do
+		var matches : OrderedSet<Match> init OrderedSet<Match>.new
+		model1.contents.each{c|
+			stdio.write("\n"+c.asType(Mergeable).toString+" match with \n")
+			model2.contents.select{e|e.getMetaClass().classDefinition.equals(c.getMetaClass().classDefinition)}.each{c2|
+				stdio.write("\t"+c2.asType(Mergeable).toString+"?")
+				if c.asType(Mergeable).getSignature() == c2.asType(Mergeable).getSignature() then
+					matches.add(Match.new.initialize(c,c2))
+					stdio.write(" yes.\n")
+				else
+					stdio.write(" no.\n")
+				end
+			}
+		}
+		result := matches
+	end
+	
+	operation computeMatchForMergeable(o1 : Mergeable, o2 : Mergeable, hasToBeEqual : Boolean) : OrderedSet<Match> is do
+		var matches : OrderedSet<Match> init OrderedSet<Match>.new
+		if (o1.getSignature == o2.getSignature).orElse{e|hasToBeEqual} then
+			//stdio.writeln("####### Adding a match for "+o1.getStringID+" and "+o2.getStringID)
+			matches.add(Match.new.initialize(o1,o2))
+			var props1 : Sequence<Property> init o1.getMetaClass.classDefinition.allAttribute.select{p| not p.isDerived and p.isComposite}
+			var props2 : Sequence<Property> init o2.getMetaClass.classDefinition.allAttribute.select{p| not p.isDerived and p.isComposite}
+			props1.each{p1|
+				props2.select{p|p.type.equals(p1.type)}.each{p2|
+					stdio.writeln(o1.get(p1).toString+ " " +o2.get(p2).toString)
+					if (o1.get(p1) != void) and (o2.get(p2) != void) then
+						if p1.upper == 1 and p2.upper == 1 then
+							if Mergeable.isSuperTypeOf(p1.type) and Mergeable.isSuperTypeOf(p2.type) then
+								stdio.writeln("recursive call for "+p1.type.toString+" and "+p2.type.toString)
+								matches.addAll(computeMatchForMergeable(o1.get(p1).asType(Mergeable), o2.get(p2).asType(Mergeable), false))
+							end
+						else
+							var c1 : Collection<Object>
+							var c2 : Collection<Object>
+							c1 ?= o1.get(p1)
+							c2 ?= o2.get(p2)
+							stdio.writeln("Collections are not void="+(c1 != void).toString+" "+(c2 != void).toString)
+							matches.addAll(computeMatchForCollectionOfMergeable(c1, c2))
+						end
+					end
+				}
+			}
+		end
+		result := matches
+	end
+	
+	operation computeMatchForCollectionOfMergeable(o1 : Collection<Object>, o2 : Collection<Object>) : OrderedSet<Match> is do
+		var matches : OrderedSet<Match> init OrderedSet<Match>.new
+		o1.each{p1|
+			stdio.writeln("\t\t"+p1.toString)
+			o2.each{p2|
+				stdio.writeln("\t\t"+p2.toString)
+				matches.addAll(computeMatchForMergeable(p1.asType(Mergeable),p2.asType(Mergeable),false))
+			}
+		}
+		result := matches
+	end
+}
+
+aspect class Match{
+	reference eltPM : Object
+	reference eltAM : Object
+	operation initialize(e1 : Object, e2 : Object) : Match is do
+		self.eltPM := e1
+		self.eltAM := e2
+		result := self
+	end
+	
+	method toString() : String is do
+		result := "-------"+self.eltPM.toString+" matches with "+self.eltAM.toString
+	end
+}
+
+aspect abstract class Mergeable{
+	operation getSignature() : kompose::Signature is abstract
+	operation getStringID() : String is abstract
+}
+
+aspect class Merger{
+	operation merge(model1 : Mergeable, model2 : Mergeable, matches : OrderedSet<Match>, ctx : Context) : Mergeable is do
+		//stdio.writeln("##MERGING "+model1.getStringID + " with "+model2.getStringID)
+		var type : Class init model1.getMetaClass
+		stdio.writeln("metaclass="+model1.getMetaClass.toString)
+		result ?= type.new
+		var e : Match init matches.select{m|m.eltPM.equals(model1)}.one
+		if e != void then
+			//ctx.addObjectComposedTrace(model1.asType(Mergeable),model2.asType(Mergeable),result)
+			ctx.addTrace(model1,result)
+			ctx.addTrace(model2,result)
+		end
+		//stdio.writeln("result= "+result.toString+" for "+model1.toString)
+		var props : Collection<Property> init model1.getMetaClass.classDefinition.allAttribute.select{p|
+			not p.isDerived
+		}
+		props.each{p|
+			stdio.writeln(p.name+" from "+model1.toString)
+			var mergeable : Boolean init Mergeable.isSuperTypeOf(p.type)
+			var selfValue : Object init model1.get(p)
+			var otherValue : Object init model2.get(p)
+			if p.upper == 1 then
+				if selfValue == void then
+					result.~set(p,otherValue)
+				else
+					if otherValue == void then
+						result.~set(p,selfValue)
+					else
+						if mergeable then
+							var me1 : Mergeable		me1 ?= selfValue
+							var me2 : Mergeable		me2 ?= otherValue
+							if me1 == void or me2 == void then
+								stdio.writeln("Elements are not mergeable")
+							else
+								stdio.writeln("Looking for match for "+p.type.toString)
+								var match_prop : Match init matches.select{m|m.eltPM.equals(me1)}.one
+								stdio.writeln(match_prop.toString)
+								if match_prop != void then
+									if p.isComposite() then
+										result.~set(p, merge(me1, me2, matches, ctx))
+									else
+										result.~set(p,me1)
+									end
+								else
+									stdio.writeln("Elements signature do not match: m1="+me1.getStringID+"/m2="+me2.getStringID)
+									result.~set(p,me1)
+								end
+							end
+						else
+							if selfValue == otherValue then
+								result.~set(p, selfValue)
+							else
+								result.~set(p,ConflictResolver.getDefault().asType(ConflictResolver).resolveConflict(selfValue,otherValue,p))
+							end
+						end
+					end
+				end
+				/*if p.isComposite then
+					var match_prop : Match init matches.select{m|m.eltPM.equals(me1)}.one
+					if match_prop != void then
+						stdio.writeln("Call merge on "+p.name)
+						stdio.writeln("isComposite")
+						result.~set(p, merge(me1, me2, matches, ctx))
+					else
+						if selfValue == void then
+							result.~set(p, otherValue)
+						else
+							result.~set(p, selfValue)
+						end
+						stdio.writeln(p.name + " is set to "+result.get(p).toString)
+					end
+				else
+					stdio.writeln("attribute "+p.name + " is set")
+					if selfValue == otherValue then					
+						result.~set(p, selfValue)
+					else
+						stdio.writeln("KOMPOSE_WARNING: conflicting value for property " + p.name + " picking the first value")
+						// look for method to resolve conflict into the specialization
+						result.~set(p,ConflictResolver.getDefault().asType(ConflictResolver).resolveConflict(selfValue,otherValue,p))
+					end
+				end*/
+			else
+				stdio.writeln("Merging collection "+p.name)
+				//merge collections
+				if selfValue == void then
+					result.~set(p, otherValue)
+				else
+					if otherValue == void then
+						result.~set(p, selfValue)
+					else
+						result := mergeCollections(model1.asType(Mergeable),model2.asType(Mergeable),result,p,matches, ctx)
+					end
+				end
+			end
+		}
+	end
+	
+	/**
+	 * Generic merge method that tries to merge elements from two different collections
+	 * param m1 : first mergeable element
+	 * param m2 : second mergeable element
+	 * param out : merged collection
+	 * param p : the property that correspond to a collection
+	 * param ctx : context provided by a specialization
+	 * returns a merged collection
+	 */
+	operation mergeCollections(m1 : Mergeable, m2 : Mergeable, out : Mergeable, p : Property, matches : OrderedSet<Match>, ctx : Context) : Mergeable is do
+		result := out
+		var ocol1 : Collection<Object> 	ocol1 ?= m1.get(p) 
+		var col1 : Collection<Mergeable> init Sequence<Mergeable>.new
+		ocol1.each{ k | 
+			var m : Mergeable	m ?= k
+			col1.add(m)
+		}
+		var ocol2 : Collection<Object> 	ocol2 ?= m2.get(p) 
+		var col2 : Collection<Mergeable> init Sequence<Mergeable>.new
+		ocol2.each{ k | 
+			var m : Mergeable	m ?= k
+			col2.add(m)
+		}
+		var col : Collection<Object>
+		col ?= result.get(p)
+		col1.each{me|
+			if not me.isVoid() then
+				var match : Match init matches.select{m|m.eltPM.equals(me)}.one
+				if match != void then
+					if p.isComposite then
+						stdio.writeln("Should call merge on "+me.toString + " | " + match.eltAM.asType(Mergeable).toString)
+						col.add(merge(me,match.eltAM.asType(Mergeable),matches,ctx))
+					else
+						col.add(me)
+					end
+				else
+					col.add(me)
+				end
+			end
+		}
+		col2.each{me|
+			if not me.isVoid() then
+				var match : Match init matches.select{m|m.eltAM.equals(me)}.one
+				if match == void then
+					col.add(me)
+				end
+			end
+		}
+	end
+	
+	/**
+	 * Restore broken links between elements or between resource and elements
+	 * param e : an object result of the composition
+	 * param ctx : index context
+	 * returns a restored mergeable object
+	 */
+	operation fixReferences(e : Mergeable, ctx : Context) : Mergeable is do
+		stdio.writeln("Processing "+e.toString)
+		if ctx.isProcessed(e) then
+			stdio.writeln(e.toString+" has already been processed")
+			result := e
+		else
+			if ctx.trace.values.select{v|v.equals(e)}.one != void then
+				stdio.writeln(e.toString+" is a composed object")
+				result := e
+			else
+				result := ctx.trace.getValue(e)
+				if result != void then
+					stdio.writeln(e.toString+" has been merged into "+result.toString)
+					e := result
+				else
+					stdio.writeln(e.toString+" has not been merged")
+					result ?= e.getMetaClass().new
+					ctx.addTrace(e, result)
+				end
+			end
+			if not ctx.isProcessed(result) then
+				stdio.writeln(e.toString+" has not been processed yet")
+				ctx.addProcessedElement(result)
+				var props : Collection<Property> init e.getMetaClass.typeDefinition.asType(ClassDefinition).allAttribute.select{p|
+					not p.isDerived
+				}
+				props.each{p|
+					var me : Mergeable
+					if p.upper == 1 then						
+						me ?= e.get(p)
+						if me != void then
+							result.~set(p,fixReferences(me,ctx))
+						else
+							result.~set(p,e.get(p))
+						end
+					else
+						var objs : Collection<Object>
+						var objres : Hashtable<Object, Object>
+						objs ?= e.get(p)
+						objres := Hashtable<Object, Object>.new
+						objs.each{ o |
+							me ?= o
+							if me != void then
+								objres.put(me, fixReferences(me, ctx))
+							end
+						}
+						objs ?= result.get(p)
+						objres.keys.each{ k |
+							objs.remove(k)
+							objs.add(objres.getValue(k))
+						}
+						objs ?= result.get(p)
+					end
+				}
+			end
+		end
+	end
+}
+
+aspect abstract class Signature{
+}
+
+class StringSignature inherits Signature
+{
+	attribute sign : kermeta::standard::String
+	
+	method equals(other : Object ) : kermeta::standard::Boolean is do
+		var othersign : StringSignature
+		othersign ?= other
+		if othersign != void then
+			result := sign == othersign.sign
+		else
+			result := false
+		end
+	end	
+}

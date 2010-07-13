@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/kompose_core_v1/src"
+    modelPluginID="kompose_core_v1" modelName="Kompose" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../kompose_directives_v1/metamodel/directives.genmodel#//directives">
+  <foreignModel>kompose.ecore</foreignModel>
+  <genPackages prefix="Kompose" disposableProviderFactory="true" ecorePackage="kompose.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kompose.ecore#//Modes">
+      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/UNION"/>
+      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/INTERSECTION"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="kompose.ecore#//String"/>
+    <genClasses ecoreClass="kompose.ecore#//Matcher"/>
+    <genClasses ecoreClass="kompose.ecore#//Context">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Context/mode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Context/composedModelURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Context/aspectModelURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Context/primaryModelURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Context/metamodelName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Context/predirectivesPM"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Context/predirectivesAM"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Context/postdirectives"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Merger"/>
+    <genClasses ecoreClass="kompose.ecore#//Composer">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/context"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/engine"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/merger"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/matcher"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Engine"/>
+    <genClasses ecoreClass="kompose.ecore#//ConflictResolver"/>
+    <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>
+    <genClasses image="false" ecoreClass="kompose.ecore#//Signature"/>
+  </genPackages>
+</genmodel:GenModel>
