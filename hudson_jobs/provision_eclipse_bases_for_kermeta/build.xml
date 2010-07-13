@@ -179,28 +179,29 @@
 		           maxmemory="128m"
 		           >
 			<arg value="-application"/>
-			<arg value="org.eclipse.equinox.p2.director"/>
+				<arg value="org.eclipse.equinox.p2.director"/>
 			<arg value="-metadataRepository"/>
-			<arg value="${feature.repository}"/>
+				<arg value="${feature.repository}"/>
 			<arg value="-artifactRepository"/>
-			<arg value="${feature.repository}"/>
+				<arg value="${feature.repository}"/>
 			<arg value="-installIU"/>
-			<arg value="${feature.name}"/>
+				<arg value="${feature.name}"/>
 			<arg value="-destination"/>
-			<arg value="${target.eclipse.dir}/eclipse"/>
+				<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-bundlepool"/>
-			<arg value="${target.eclipse.dir}/eclipse"/>
+				<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-profileProperties"/>
-			<arg value="org.eclipse.update.install.features=true"/>
+				<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
-			<arg value="${target.profile}"/> 
+				<arg value="${target.profile}"/> 
 			<arg value="-p2.os"/> 
-			<arg value="${target.os}"/> 
+				<arg value="${target.os}"/> 
 			<arg value="-p2.ws"/> 
-			<arg value="${target.ws}"/> 
+				<arg value="${target.ws}"/> 
 			<arg value="-p2.arch"/> 
-			<arg value="${target.arch}"/>
-			<arg value="-shared ${target.eclipse.dir}/eclipse/p2"/>
+				<arg value="${target.arch}"/>
+			<arg value="-shared"/>
+				<arg value="${target.eclipse.dir}/eclipse/p2"/>
 			<jvmarg value="-Declipse.p2.MD5Check=false"/>
 		</java>	
 	</target>
