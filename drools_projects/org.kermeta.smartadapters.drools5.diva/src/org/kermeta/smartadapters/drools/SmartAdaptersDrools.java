@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.kermeta.smartadapters.drools.utils.AspectComparator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 
 import service.arf.ARF;
 import service.arf.InputHandle;
@@ -93,6 +95,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	private List<String> aspectsFiles = new LinkedList<String>();
 	private List<String> configsFiles = new LinkedList<String>();
 
+	private Boolean showSwingUI = true;
 
 	public SmartAdaptersDrools(){
 		droolsFiles = new LinkedList<String>();
@@ -155,6 +158,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	}
 
 	private BundleContext context;
+	private ServiceRegistration registration;
 
 	@Override
 	public BundleContext getContext() {
@@ -186,6 +190,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		initAspectFiles();
 		initUiComponents();
 		layoutComponents();
+		exportService();
 	}
 
 	private void initConfigurations() {
@@ -232,7 +237,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			dsplFile = "file://" + file.getAbsolutePath();
 		}
 		else {
-			logger.warn("Cannot find the DiVA model. Please check the \"diva.model\" property.");
+			logger.warn("Cannot find the DiVA model. Please check the diva.model property in your launch configuration.");
 		}
 
 		property = System.getProperty("smartadapters");
@@ -243,7 +248,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			smartAdapters = file.getAbsolutePath();
 		}
 		else {
-			logger.warn("Cannot find the binaries of smartadapters. Please check the \"smartadapters\" property.");
+			logger.warn("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
 		}
 		
 		property = System.getProperty("aspects.drools.repository");
@@ -270,8 +275,8 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		//System.out.println("property model.base= "+property);
 		if(property != null){
 			file = new File(property);
-			System.out.println("file = "+file.getAbsolutePath());
-			baseModelURI = "file://"+file.getAbsolutePath();
+			logger.debug("base model= "+file.getAbsolutePath());
+			baseModelURI  = "file://" + file.getAbsolutePath();
 		}
 		else {
 			logger.warn("Cannot find the base model. Please check the model.base property in your launch configuration.");
@@ -281,18 +286,31 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		//System.out.println("property = "+property);
 		if(property != null){
 			file = new File(property);
-			System.out.println("file = "+file.getAbsolutePath());
+			logger.debug("pre-woven configurations= "+file.getAbsolutePath());
 			configurationsRepository = file.getAbsolutePath();
 		}
 		else {
 			logger.warn("Cannot find the configurations repository. Please check the configurations.folder property in your launch configuration.");
+		}
+		
+		property = System.getProperty("aspects.showConsole");
+		if(property != null && (property.equals("0") || property.equalsIgnoreCase("false"))){
+			showSwingUI = false;
 		}
 	}
 
 
 	@Override
 	public void stop() {
-
+		try
+		{
+			registration.unregister();
+			registration = null;
+		}
+		catch( Exception e )
+		{
+			// Nothing to do, might happen if the service was already unregistered
+		}
 	}
 
 	public void produceConfiguration(String confURI) {
@@ -486,6 +504,9 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 
 
 	private void initUiComponents() {
+		if( !showSwingUI )
+			return;
+		
 		frame = new JFrame("Context Evolution Console");
 		screen = new JTextField(30);
 		submit = new JButton("change context");
@@ -508,7 +529,9 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	}
 
 	private void layoutComponents() {
-
+		if( !showSwingUI )
+			return;
+		
 		top.add(screen);
 		// top.add(forceRebuild);
 		bottom.add(submit);
@@ -561,4 +584,10 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	public void keyTyped(KeyEvent e) {
 
 	}	
+	
+	private void exportService() {
+		Properties props = new Properties();
+		props.put("InstanceName", instanceName);
+		registration = context.registerService( IWeaver.class.getName(), this, props );
+	}
 }
