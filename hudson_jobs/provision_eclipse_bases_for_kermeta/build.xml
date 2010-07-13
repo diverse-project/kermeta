@@ -3,16 +3,16 @@
 	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk-x86_64.tar.gz"/>
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/> -->
 	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
-	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.1.0.v20100507.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
-	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/helios"/>
 	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
@@ -31,7 +31,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk-x86_64.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
@@ -42,7 +42,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
@@ -54,11 +54,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32.zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-win32.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -66,11 +66,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32-x86_64.zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-win32-x86_64.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -78,22 +78,22 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-macosx-cocoa-x86_64.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_macosx-cocoa_base_for_kermeta">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-macosx-cocoa.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 
