@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/kompose_directives_v1/src"
+    modelPluginID="kompose_directives_v1" modelName="Directives" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>directives.ecore</foreignModel>
+  <genPackages prefix="Directives" disposableProviderFactory="true" ecorePackage="directives.ecore#/">
+    <genDataTypes ecoreDataType="directives.ecore#//String"/>
+    <genDataTypes ecoreDataType="directives.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="directives.ecore#//Integer"/>
+    <genClasses image="false" ecoreClass="directives.ecore#//CompositionDirective"/>
+    <genClasses image="false" ecoreClass="directives.ecore#//ElementDirective">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference directives.ecore#//ElementDirective/target"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//Create">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//Create/className"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference directives.ecore#//Create/type"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//Concat">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//Concat/propertyNames"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="directives.ecore#//Change">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//Change/propertyName"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//Destroy"/>
+    <genClasses ecoreClass="directives.ecore#//Merge"/>
+    <genClasses ecoreClass="directives.ecore#//Set"/>
+    <genClasses ecoreClass="directives.ecore#//Add"/>
+    <genClasses ecoreClass="directives.ecore#//Remove"/>
+    <genClasses image="false" ecoreClass="directives.ecore#//UnaryDirective"/>
+    <genClasses image="false" ecoreClass="directives.ecore#//BinaryDirective">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference directives.ecore#//BinaryDirective/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="directives.ecore#//Literal">
+      <genOperations ecoreOperation="directives.ecore#//Literal/getString"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//IntegerLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//VoidLiteral"/>
+    <genClasses ecoreClass="directives.ecore#//IDRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//IDRef/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//NameRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//NameRef/qname"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="directives.ecore#//ElementRef"/>
+    <genClasses ecoreClass="directives.ecore#//MetaRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//MetaRef/name"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//PropRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute directives.ecore#//PropRef/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference directives.ecore#//PropRef/object"/>
+    </genClasses>
+    <genClasses ecoreClass="directives.ecore#//ObjectRef"/>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,557 @@
+/* $Id:$ 
+ * Creation : June 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+package directives;
+
+require kermeta
+require "platform:/lookup/kompose_directives_v1/metamodel/directives.ecore"
+require "platform:/lookup/kompose_directives_v1/kermeta/exceptions.kmt"
+require "platform:/lookup/kompose_core_v1/kermeta/kompose.kmt"
+
+using kermeta::language::structure
+using exceptions
+using kermeta::standard
+using kermeta::persistence
+
+aspect abstract class CompositionDirective{
+	operation execute(model : kompose::Mergeable, ctx : kompose::Context) is abstract
+}
+
+aspect abstract class ElementDirective{
+	
+	/* resolve the target models element */
+	operation resolveTarget(model : kompose::Mergeable, ctx : kompose::Context) : Object is do
+		result ?= target.getElement(model,ctx)
+		stdio.writeln("ElementDirective.resolveTarget="+result.toString)
+		if result == void then 
+			var ex : TargetNotFoundException init TargetNotFoundException.new
+			ex.directive := self
+			stdio.writeln("Can't find the target "+target.getStringID)
+			raise ex
+		end 
+	end
+}
+
+aspect abstract class UnaryDirective{
+}
+
+aspect abstract class BinaryDirective{
+	operation getSymb() : String is abstract
+		
+	/* resolve the value */
+	operation resolveValue(model : kompose::Mergeable, ctx : kompose::Context) : OrderedSet<Object> is do
+		var list : OrderedSet<Object> init OrderedSet<Object>.new
+		~value.each{v|
+			var m : Object init v.getElement(model,ctx)
+			if m == void then
+				var ex : ValueNotFoundException init ValueNotFoundException.new
+				ex.directive := self
+				stdio.writeln("Can't find the value "+v.getStringID)
+				raise ex
+			else
+				list.add(m)
+			end
+		}
+		result := list
+	end
+	
+	/* Get the property in the targetObject */
+	/*operation getProperty(targetObj : kompose::Mergeable, valueObj : kompose::Mergeable) : Property is do
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= targetObj.getMetaClass.typeDefinition
+		//select the property
+		var prop : seq Property[*] init 
+			mclass.allAttribute.select{ p | 
+				//stdio.writeln("KOMPOSE DEBUG: attribute "+p.name+" found in targetObj")
+		    	p.name == 
+			}
+		// check that it exists
+		if prop.size == 0 then
+			var ex : PropertyNotFoundException init PropertyNotFoundException.new
+			ex.changeDirective := self 
+			raise ex
+		end
+		result := prop.one
+	end*/
+}
+
+//UnaryDirectives
+aspect class Create{
+	method toString() : String is do
+		result := "CREATE " + type.name + "AS $" + target.toString
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		// get the class
+		var cls : Class init ctx.types.getValue(className)
+		stdio.writeln("Create (Class)="+cls.toString)
+		// raise an exception if the class was not found
+		if cls == void then 
+			var ex : ClassNotFoundException init ClassNotFoundException.new
+			ex.createDirective := self
+			raise ex
+		end
+		// create the object
+		stdio.writeln("Create (Obj)="+cls.new.toString)
+		var obj : Object init cls.new
+		// add the object to the context
+		stdio.writeln("Create "+obj.toString+" AS $"+target.toString)
+		ctx.addVariable(target.getStringID(), obj)
+	end
+}
+
+aspect class Destroy{
+	method toString() : String is do
+		result := "DESTROY " + target.toString
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		stdio.writeln("Executing "+self.toString)
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Destroy.execute(target)= "+targetObj.getStringID)
+		var o : Object
+		o ?= targetObj.container
+		targetObj.container.getMetaClass().classDefinition.allAttribute.select{p|not p.isDerived}.each{a|
+			stdio.writeln("Destroy.execute(attributes)= "+a.name)
+			stdio.writeln("\tDestroy.execute(attributes).value= "+o.get(a).toString)
+			if o.get(a).equals(targetObj) then
+				stdio.writeln("\tDestroy.execute(attributes).found="+o.get(a).toString)
+			else
+				if o.get(a).isInstanceOf(Collection<Object>) then
+					stdio.writeln("\tDestroy.execute(attributes).value is a collection")
+					var co : Collection<Object>
+					var found : Object
+					co ?= o.get(a)
+					if co != void then
+						stdio.writeln("\tDestroy.execute(attributes).value= co != void")
+						co.each{e|
+							if e.equals(targetObj) then
+								stdio.writeln("\tDestroy.execute(attributes).found in the collection="+o.get(a).toString)
+								found := e
+							end
+						}
+						co.remove(found)
+					end
+				end
+			end
+			if a.name.equals(targetObj.getStringID) then
+				stdio.writeln("Destroy.execute(attributes).found="+a.name)
+			end
+		}
+		stdio.writeln("Destroy.execute(container)= "+o.toString)
+		
+		stdio.writeln("End DESTROY")
+	end
+}
+
+//BinaryDirectives
+aspect abstract class Change{
+	method toString() : String is do
+		result := target.toString + " " + getSymb() + " " + ~value.toString
+	end
+}
+
+aspect class Concat{
+	method getSymb() : String is do
+		result := "+="
+	end
+	
+	method toString() : String is do
+		result := target.toString()
+		result := result + getSymb()
+		self.~value.each{v|
+			result := result + v.toString
+		}
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		var sb : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		sb.append("Executing ")
+		sb.append(target.getStringID)
+		sb.append(" ")
+		sb.append(getSymb)
+		sb.append(" ")
+		~value.each{v|
+			sb.append(v.getStringID)
+		}
+		stdio.writeln(sb.toString)
+		// resolve the target object
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Concat.execute(target)= "+targetObj.toString)
+		// get value
+		var val : OrderedSet<Object> init resolveValue(model,ctx)
+		stdio.writeln("Concat.execute(values)"+val.size().toString+"= ")
+		val.each{v|
+			stdio.writeln(v.toString)
+		}
+		// find the property
+		var prop : Property
+		prop := target.getProperty(targetObj)
+		stdio.writeln("Concat.execute(property)= "+prop.name.toString)
+		var concat_value : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		val.each{v|
+			if v.isInstanceOf(prop.type) then
+				concat_value.append(v.toString)
+			else
+				var prop2 : Property
+				var found : Boolean init false
+				var e : ElementRef
+				from var it : kermeta::standard::Iterator<Object> init ~value.iterator()
+				until
+					it.isOff or found
+				loop
+					e ?= it.next()
+					stdio.writeln("#####Value="+e.toString)
+					if not e.isInstanceOf(Literal) then
+						prop2 := e.getProperty(v.asType(kompose::Mergeable))
+						if prop2 != void then
+							found := true
+						end
+					end
+				end
+				if found then
+					concat_value.append(v.get(prop2).toString)
+				else
+					//raise exception
+				end
+			end
+		}
+		targetObj.~set(prop, concat_value.toString)
+		stdio.writeln("Concat.execute(target)= "+targetObj.toString)
+	end
+}
+
+aspect class Merge{
+	method getSymb() : String is do
+		result := ""
+	end
+	
+	method toString() : String is do
+		result := "MERGE " + ~value.toString + " with " + target.toString
+	end
+}
+
+aspect class Set{
+	method getSymb() : String is do
+		result := "="
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		var sb : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		sb.append("Executing ")
+		sb.append(target.getStringID)
+		sb.append(" ")
+		sb.append(getSymb)
+		sb.append(" ")
+		~value.each{v|
+			sb.append(v.getStringID)
+		}
+		stdio.writeln(sb.toString)
+		// resolve the target object
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Set.execute(target)= "+targetObj.toString)
+		// get value
+		var val : Object init resolveValue(model,ctx).one
+		stdio.writeln("Set.execute(value)= "+val.toString)
+		// find the property
+		var prop : Property
+		prop := target.getProperty(targetObj)
+		stdio.writeln("Set.execute(property)= "+prop.name.toString)
+		
+		
+		//TODO: check that the type of the value is correct
+		//if val.isInstanceOf(prop.type.asType(Class)) then
+		// set the value
+		stdio.writeln("#####val.isInstanceOf="+val.toString)
+		if val.isInstanceOf(prop.type) then
+			stdio.writeln("#####val is a primitiveType")
+			targetObj.~set(prop, val)
+		else
+			var prop2 : Property
+			prop2 :=~value.one.getProperty(val.asType(kompose::Mergeable))
+			targetObj.~set(prop,val.get(prop2))
+		end
+		stdio.writeln("Set.execute()= "+targetObj.get(prop).toString)
+		//else
+		//	stdio.writeln("TYPE ERROR : The type of property " + prop.name + " is " + prop.type.toString)
+		//end
+	end
+}
+
+aspect class Add{
+	method getSymb() : String is do
+		result := "+"
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		// resolve the target object
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Add.execute(target)= "+targetObj.toString)
+		// get value
+		var val : Object init resolveValue(model,ctx).one
+		stdio.writeln("Add.execute(value)= "+val.toString)
+		// find the property
+		var prop : Property
+		prop ?= target.getProperty(targetObj)
+		stdio.writeln("Add.execute(property)= "+prop.name.toString)
+		
+		var c : kermeta::standard::Collection<Object>
+		c ?= targetObj.get(prop)
+		stdio.writeln("Add.execute(size before)= "+c.size.toString)
+		c.add(val)
+		stdio.writeln("Add.execute(size after)= "+c.size.toString)
+		//else
+		//	stdio.writeln("TYPE ERROR : The type of property " + prop.name + " is " + prop.type.toString)
+		//end
+	end
+}
+
+aspect class Remove{
+	method getSymb() : String is do
+		result := "-"
+	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		// resolve the target object
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Remove.execute(target)= "+targetObj.toString)
+		// get value
+		var val : Object init resolveValue(model,ctx).one
+		stdio.writeln("Remove.execute(value)= "+val.toString)
+		// find the property
+		var prop : Property
+		prop ?= target.getProperty(targetObj)
+		stdio.writeln("Remove.execute(property)= "+prop.name.toString)
+		var c : kermeta::standard::Collection<Object>
+		c ?= targetObj.get(prop)
+		stdio.writeln("Remove.execute(size before)= "+c.size.toString)
+		c.remove(val)
+		stdio.writeln("Remove.execute(size after)= "+c.size.toString)
+		//else
+		//	stdio.writeln("TYPE ERROR : The type of property " + prop.name + " is " + prop.type.toString)
+		//end
+	end
+}
+
+//References
+aspect abstract class ElementRef{
+	operation getElement(model : kompose::Mergeable, c: kompose::Context) : Object is abstract
+	operation getProperty(model : kompose::Mergeable) : Property is abstract
+	operation getStringID() : String is abstract
+}
+
+aspect class NameRef{	
+	method getStringID() : String is do
+		result := qname
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		stdio.writeln("NameRef.getElement="+model.toString)
+		// Splits the qualified name 
+		var names : kermeta::standard::Sequence<String> init kermeta::standard::Sequence<String>.new
+		var str : String
+		from  str := qname
+		until str.indexOf("::") < 0
+		loop
+			names.add(str.substring(0, str.indexOf("::")))
+			str := str.substring(str.indexOf("::")+2, str.size)
+		end
+		names.add(str)
+		if (names.elementAt(0) != model.getStringID).andThen{e|names.elementAt(0) != c.metamodel.getStringID} then
+		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
+			ex.elementRef.add(self)
+			raise ex
+		end
+		// removes the root of the model
+		names.removeAt(0)
+		
+		// iterates on names
+		var ne : kompose::Mergeable
+		var cur : kompose::Mergeable init model
+		var found : Boolean init false
+		
+		// iterates on each name and contained resources
+		
+		names.each{n|
+			found := false 
+			from var it : kermeta::standard::Iterator<Object> init getContents(cur).iterator()
+			until
+				it.isOff or found
+			loop
+				ne ?= it.next()
+				if ne != void then
+					//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+					if n == ne.getStringID then 
+						cur := ne
+						found := true					
+					end
+				end
+			end
+			if not found then
+				cur := void
+			end
+		}
+		if cur == void then
+			cur := c.metamodel
+			names.each{n|
+				found := false
+				from var it : kermeta::standard::Iterator<Object> init getContents(cur).iterator()
+				until
+					it.isOff or found
+				loop
+					ne ?= it.next()
+					if ne != void then
+						//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+						if n == ne.getStringID then 
+							cur := ne
+							found := true					
+						end
+					end
+				end
+				if not found then
+					cur := void
+				end
+			}
+		end
+		stdio.writeln("##current= "+cur.toString)
+		if cur == void then
+			var ex : ElementNotResolvedException init ElementNotResolvedException.new
+			ex.elementRef.add(self)
+			stdio.writeln("KOMPOSE DEBUG: Element "+ names.last +" not found in the model/metamodel!")
+			raise ex
+		end
+		result := cur
+		stdio.writeln("End NameRef.getElement="+result.toString)
+		rescue (e : kermeta::exceptions::Exception)
+			stdio.writeln("KOMPOSE ERROR MESSAGE: "+e.message)
+		result := void
+	end
+	
+	/** get all the objects containes by the object c */
+	operation getContents(c : Object) : kermeta::standard::Collection<Object> is do
+		result := kermeta::standard::Sequence<Object>.new 
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= c.getMetaClass.typeDefinition
+		//select composite properties
+		var props : seq Property[*] init 
+			mclass.allAttribute.select{ p | 
+		    	p.isComposite and kompose::Mergeable.isSuperTypeOf(p.type)
+			}
+		var objs : kermeta::standard::Collection<Object>
+		props.each{ p | 
+			if p.upper == 1 then 
+				result.add(c.get(p))
+			else
+				objs ?= c.get(p)
+				objs.each{ o | result.add(o) }
+			end	
+		}
+	end
+}
+
+aspect abstract class Literal{
+}
+
+aspect class IDRef{
+	method getStringID() : String is do
+		result := identifier
+	end
+	
+	method getElement(model : kompose::Mergeable, c: kompose::Context) : Object is do
+		result := c.getVariable(identifier)
+	end
+}
+
+aspect class MetaRef{
+	method getStringID() : String is do
+		result := name
+	end
+	
+	method getElement(model : kompose::Mergeable, c: kompose::Context) : Object is do
+		result := c.getType(name)
+	end
+}
+
+aspect class PropRef{
+	method getStringID() : String is do
+		result := self.object.getStringID + "." + ~property
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		var m : kompose::Mergeable
+		stdio.writeln("PropRef.getElement="+object.getElement(model,c).toString)
+		m ?= object.getElement(model,c)
+		stdio.writeln("PropRef.getElement(Mergeable)="+m.toString)
+		result := m
+		stdio.writeln("End PropRef.getElement="+result.toString)
+	end
+	
+	method getProperty(model : kompose::Mergeable) : Property is do
+		var mclass : ClassDefinition
+		mclass ?= model.getMetaClass.typeDefinition
+		//select the property
+		var prop : seq Property[*] init 
+			mclass.allAttribute.select{ p | 
+				//stdio.writeln("KOMPOSE DEBUG: attribute "+p.name+" found in "+model.getStringID)
+		    	p.name == ~property 
+			}
+		// check that it exists
+		if prop.size == 0 then
+			var ex : PropertyNotFoundException init PropertyNotFoundException.new
+			//ex.changeDirective := self 
+			raise ex
+		end
+		result := prop.one
+	end
+}
+
+aspect class StringLiteral{
+	method getStringID() : String is do
+		result := ~value
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		result := ~value
+	end
+}
+
+aspect class BooleanLiteral{
+	method getStringID() : String is do
+		result := ~value.toString
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		result := ~value
+	end
+}
+
+aspect class IntegerLiteral{
+	method getStringID() : String is do
+		result := ~value.toString
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		result := ~value
+	end
+}
+
+aspect class VoidLiteral{
+	method getStringID() : String is do
+		result := "void"
+	end
+	
+	method getElement(model : kompose::Mergeable, c : kompose::Context) : Object is do
+		result := void
+	end
+}

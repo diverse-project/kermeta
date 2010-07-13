@@ -1,0 +1,89 @@
+/* $Id:$ 
+ * Creation : July 6, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+package exceptions;
+
+require kermeta
+require "platform:/lookup/kompose_directives_v1/metamodel/directives.ecore"
+
+using directives
+using kermeta::standard
+
+/* Exception that can be raised when directives are executed */
+abstract class DirectiveRuntimeException inherits kermeta::exceptions::Exception {
+	reference directive : CompositionDirective
+	
+	method toString() : String is do
+		result := "An exception was raised while executing directive " + directive.toString
+	end
+}
+
+/* The property could not be found */
+class PropertyNotFoundException inherits DirectiveRuntimeException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value end
+		
+		method toString() : String from DirectiveRuntimeException is do
+			result := super + "\nProperty "+ changeDirective.propertyName +" could not be found"
+		end
+}
+
+/* The metaclass could not be found */
+class ClassNotFoundException inherits DirectiveRuntimeException {
+	property createDirective : Create 
+		getter is do result ?= directive end
+		setter is do directive := value end
+		
+	property destroyDirective : Destroy 
+		getter is do result ?= directive end
+		setter is do directive := value end
+
+	method toString() : String from DirectiveRuntimeException is do
+		if createDirective != void then
+			result := super + "\nMeta-Class "+ createDirective.className +" could not be found"
+		end
+		if destroyDirective != void then
+			result := super + "\nMeta-Class "+destroyDirective.toString +" could not be found"
+		end
+	end
+}
+
+/* Eception raised if and element cannot be resolved */
+class ElementNotResolvedException inherits DirectiveRuntimeException {
+	reference elementRef : OrderedSet<ElementRef>
+}
+
+/* The target for a Change directive was not found */
+class TargetNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef.add(value.target) end
+		
+	property destroyDirective : Destroy
+		getter is do result ?= directive end
+		setter is do directive := value elementRef.add(value.target) end
+		
+	property mergeDirective : Merge
+		getter is do result ?= directive end
+		setter is do directive := value elementRef.add(value.target) end
+	
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nTarget object "+ elementRef.toString +" could not be resolved"
+	end
+}
+
+/* The value for a Change directive was not found */
+class ValueNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.~value end
+		
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nValue object "+ elementRef.toString +" could not be resolved"
+	end
+}
