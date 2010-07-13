@@ -136,12 +136,12 @@
   		</antcall>
 		
 		<!-- FROM TOPCASED -->
-		<antcall target="provision_feature">
+	<!--	<antcall target="provision_feature">
     		<param name="feature.name" value="org.topcased.modeler.uml.feature.group, org.topcased.dependencies.feature.group"/>
 			<param name="feature.repository" value="${topcased.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
-		
+	-->	
 		<!-- FIND BUGS -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
