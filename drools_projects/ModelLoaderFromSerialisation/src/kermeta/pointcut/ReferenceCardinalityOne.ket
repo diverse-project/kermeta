@@ -1,0 +1,13 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="ReferencePCTemplate"
+ismethod="false"operation="generateOne"
+parameters="PropertyName:String"
+%>
+	if (not self.<%=PropertyName%>.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("<%=PropertyName%> == $"+ctx.cache.getValue(self.<%=PropertyName%>)+"Decl")
+	end

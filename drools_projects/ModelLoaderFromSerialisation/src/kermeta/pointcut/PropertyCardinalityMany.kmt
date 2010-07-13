@@ -1,0 +1,17 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class PropertyPCTemplateMany{
+operation generateMany(PropertyName:String, isString:Boolean):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tif (self.")
+_res.append(PropertyName)
+_res.append(".size > 0) then\n\t\tif i > 0 then\n\t\t\tctx.res.append(\", \")\n\t\tend\n\t\t\n\t\tvar j : Integer init 0\n\t\tself.")
+_res.append(PropertyName)
+_res.append(".each{o |\n\t\t\tif j > 0 then\n\t\t\t\tctx.res.append(\", \")\n\t\t\tend\n\t\t\tctx.res.append(\"")
+_res.append(PropertyName)
+_res.append(" contains \"+o.toString)\n\t\t}\n\t\ti := i+1\t\n\tend\n")
+result := _res.toString
+end
+}

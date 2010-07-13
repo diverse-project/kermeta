@@ -1,0 +1,23 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="PropertyPCTemplateMany"
+ismethod="false"operation="generateMany"
+parameters="PropertyName:String, isString:Boolean"
+%>
+	if (self.<%=PropertyName%>.size > 0) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		
+		var j : Integer init 0
+		self.<%=PropertyName%>.each{o |
+			if j > 0 then
+				ctx.res.append(", ")
+			end
+			ctx.res.append("<%=PropertyName%> contains "+o.toString)
+		}
+		i := i+1	
+	end

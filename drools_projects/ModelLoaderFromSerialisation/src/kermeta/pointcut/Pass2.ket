@@ -1,0 +1,13 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="Pass2TemplatePC"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String"
+%>	
+		var varName : String init ctx.cache.getValue(self)
+		ctx.res.append("$"+varName+": <%=classQualifiedName%>(")
+		ctx.res.append("this == $"+varName+"Decl")
+		

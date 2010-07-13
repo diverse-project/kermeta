@@ -24,6 +24,13 @@ require "PropertyCardinalityMany.kmt"
 require "ReferenceCardinalityMany.kmt" 
 require "ReferenceCardinalityOne.kmt" 
 
+require "./pointcut/Pass1.kmt"
+require "./pointcut/Pass2.kmt"
+require "./pointcut/PropertyCardinalityOne.kmt" 
+require "./pointcut/PropertyCardinalityMany.kmt" 
+require "./pointcut/ReferenceCardinalityMany.kmt" 
+require "./pointcut/ReferenceCardinalityOne.kmt"
+
 
 
 using kermeta::standard
@@ -37,11 +44,21 @@ class Main {
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		
 		ctx.pass1template := Pass1Template.new
 		ctx.propertytemplate := PropertyTemplate.new
 		ctx.propertytemplatemany := PropertyTemplateMany.new
 		ctx.referencetemplate := ReferenceTemplate.new
 		ctx.referencetemplatemany := ReferenceTemplateMany.new
+		
+		ctx.pass1templatePC := Pass1TemplatePC.new
+		ctx.pass2templatePC := Pass2TemplatePC.new
+		ctx.propertytemplatePC := PropertyPCTemplate.new
+		ctx.propertytemplatemanyPC := PropertyPCTemplateMany.new
+		ctx.referencetemplatePC := ReferencePCTemplate.new
+		ctx.referencetemplatemanyPC := ReferencePCTemplateMany.new  
+	
+	
 		
 		var rep : EMFRepository  init EMFRepository.new
 		var res : EMFResource 
@@ -53,26 +70,38 @@ class Main {
 			
 		var h : Header init Header.new 			
 		ctx.res.append(h.generate(uriecore,root.name))	
-		root.eSubpackages.each{p| p.toGenerate(ctx)}
-		root.eClassifiers.each{c| c.toGenerate(ctx)}			
+		//stdio.writeln("root.name= "+root.name)
+		//root.toGenerate(ctx)
+		
+		
+		root.eSubpackages.each{p| stdio.writeln("p1.name= "+p.name) p.toGenerate(ctx)}
+		root.eClassifiers.each{c| stdio.writeln("c1.name= "+c.name) c.toGenerate(ctx)}			
+		
+		//saving kmt file
 		var f : kermeta::io::FileIO		init 	kermeta::io::FileIO.new
 		var fileName : String init ctx.getGenerateName
+		stdio.writeln("saving kmt file to: "+"/model/"+fileName+".kmt")
 		f.writeTextFile("/model/"+fileName+".kmt",ctx.res.toString)
+		
+		
+		
 		ctx.res := kermeta::utils::StringBuffer.new
-			
-		
-		
 		
 		res.dependentResources.each{res|
 		res.each{e|
-		root ?= e
-			
+			root ?= e
 			var hl : HeaderLink init HeaderLink.new 			
 			ctx.res.append(hl.generate(uriecore,root.name))	
-			root.eSubpackages.each{p| p.toGenerate(ctx)}
-			root.eClassifiers.each{c| c.toGenerate(ctx)}			
+			
+			//stdio.writeln("root2.name= "+root.name)
+			//root.toGenerate(ctx)
+			
+			root.eSubpackages.each{p| stdio.writeln("p2.name= "+p.name) p.toGenerate(ctx)}
+			root.eClassifiers.each{c| stdio.writeln("c2.name= "+c.name) c.toGenerate(ctx)}			
+			
 			f :=	kermeta::io::FileIO.new
 			fileName := ctx.getGenerateName
+			stdio.writeln("saving kmt file to: "+"/model/"+fileName+".kmt")
 			f.writeTextFile("/model/"+fileName+".kmt",ctx.res.toString)
 			ctx.res := kermeta::utils::StringBuffer.new
 			
@@ -93,11 +122,24 @@ class Main {
 
 }
 class Context{
+	/*
+	Advice-related references
+	*/
 	reference pass1template : Pass1Template
 	reference propertytemplate : PropertyTemplate
 	reference propertytemplatemany : PropertyTemplateMany
 	reference referencetemplate : ReferenceTemplate  
-	reference referencetemplatemany : ReferenceTemplateMany  
+	reference referencetemplatemany : ReferenceTemplateMany
+	
+	/*
+	Pointcut-related references
+	*/
+	reference pass1templatePC : Pass1TemplatePC
+	reference pass2templatePC : Pass2TemplatePC
+	reference propertytemplatePC : PropertyPCTemplate
+	reference propertytemplatemanyPC : PropertyPCTemplateMany
+	reference referencetemplatePC : ReferencePCTemplate  
+	reference referencetemplatemanyPC : ReferencePCTemplateMany  
 	
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
@@ -113,9 +155,10 @@ class Context{
 aspect class EPackage{
 		
 	method toGenerate(ctx:Context) : Void is do 
+		stdio.writeln(self.name+".toGenerate")
 		ctx.res.append("package " + self.name + " {\n")
-		self.eSubpackages.each{p| p.toGenerate(ctx)}
-		self.eClassifiers.each{c| c.toGenerate(ctx)}			
+		self.eClassifiers.each{c| c.toGenerate(ctx)}
+		self.eSubpackages.each{p| p.toGenerate(ctx)}			
 		ctx.res.append("}\n")		
 	end
 	
@@ -133,6 +176,8 @@ aspect class EPackage{
 aspect class EClass{
 		
 	method toGenerate(ctx:Context) : Void is do 
+	stdio.writeln(self.name+".toGenerate")
+	
 		ctx.res.append("aspect class " + self.name + " {\n")
 		
 		if (self.eSuperTypes.size == 0) then
@@ -147,11 +192,29 @@ aspect class EClass{
 		end
 		ctx.res.append(" is do \n \t")
 		if (not self.~abstract) then
+		
+			stdio.writeln("not abstract")
+		
 			//classQualifiedName:String, packNameUpper:String, className:String	
 			var packNameUpper : String init self.ePackage.name.substring(0,1).toUpperCase + self.ePackage.name.substring(1,self.ePackage.name.size)
 			ctx.res.append(ctx.pass1template.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
-			self.eAllReferences().each{a|a.generateTraverse(ctx,"pass1create")}
 			
+			
+			
+			//Bug Kermeta: eAllReferences does not include eReferences!!!!!
+			/*stdio.errorln(self.name+" "+self.eReferences.size.toString)	
+			self.eReferences.each{a|
+				stdio.writeln(self.name.toUpperCase)
+				a.generateTraverse(ctx,"pass1create")
+			}*/
+			
+			
+			stdio.errorln(self.name+" "+self.eAllReferences.size.toString)			
+			self.eAllReferences.each{a|
+				stdio.writeln(self.name.toUpperCase)
+				a.generateTraverse(ctx,"pass1create")
+			}
+			//end Bug Kermeta
 			
 		end
 		ctx.res.append("end \n")
@@ -168,18 +231,84 @@ aspect class EClass{
 		end
 		ctx.res.append(" is do \n \t")
 		if (not self.~abstract) then
+			//Bug Kermeta: eAllReferences does not include eReferences!!!!!
+			//self.eAttributes().each{a|a.toGenerate(ctx)}
 			self.eAllAttributes().each{a|a.toGenerate(ctx)}
+			//self.eReferences().each{a|a.toGenerate(ctx)}
 			self.eAllReferences().each{a|a.toGenerate(ctx)}
+			//self.eReferences.each{a|a.generateTraverse(ctx,"pass2set")}
 			self.eAllReferences().each{a|a.generateTraverse(ctx,"pass2set")}
-			
+			//end Bug Kermeta
 		end
 		
 		
 		
-		ctx.res.append("end \n }\n")
+		ctx.res.append("end\n")
 		
 		
 		
+		if (self.eSuperTypes.size == 0) then
+			ctx.res.append("operation  ")
+		else
+			ctx.res.append("method  ")
+		end
+		
+		ctx.res.append("pointcut2droolsPass1(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		
+		//appeler le template pointcut.Pass1
+		ctx.res.append(ctx.pass1templatePC.generate(self.getQualifiedNameGen.replace("pattern.","")))
+		
+		if (not self.~abstract) then
+			//self.eAttributes.each{a | a.pointcutToDrools(ctx)}
+			self.eAllAttributes.each{a | a.pointcutToDrools(ctx)}			
+		end
+		
+		ctx.res.append("ctx.res.append(\")\\n\")\n")
+		
+		self.eAllReferences.each{a|
+				stdio.writeln(self.name.toUpperCase)
+				a.generateTraversePC(ctx,"pointcut2droolsPass1")
+		}
+		
+		
+		ctx.res.append("end\n")
+		
+		
+		
+		
+		if (self.eSuperTypes.size == 0) then
+			ctx.res.append("operation  ")
+		else
+			ctx.res.append("method  ")
+		end
+		
+		ctx.res.append("pointcut2droolsPass2(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template pointcut.Pass2
+		ctx.res.append(ctx.pass2templatePC.generate(self.getQualifiedNameGen.replace("pattern.","")))
+		
+		if (not self.~abstract) then
+			//self.eReferences.each{a | a.pointcutToDrools(ctx)}
+			self.eAllReferences.each{a | a.pointcutToDrools(ctx)}			
+		end
+		
+		ctx.res.append("ctx.res.append(\")\\n\")\n")
+		
+		self.eAllReferences.each{a|
+				stdio.writeln(self.name.toUpperCase)
+				a.generateTraversePC(ctx,"pointcut2droolsPass2")
+		}
+		
+		ctx.res.append("end\n")
+		
+		ctx.res.append("\n}")
 		
 	end
 	
@@ -216,7 +345,16 @@ aspect class EAttribute{
 		end		
 	end
 	
-	
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		if self.name != "pid" then
+			if (self.many) then
+				ctx.res.append(ctx.propertytemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+			else
+				ctx.res.append(ctx.propertytemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+			end
+		end
+	end
 
 }
 
@@ -236,6 +374,7 @@ aspect class EReference{
  
  
  	operation generateTraverse(ctx:Context,methodName:String):Void is do
+ 		stdio.writeln(self.name+".generateTraverse"+ methodName)
 		if (self.containment) then
 			if (self.many) then
 				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".size >0 then\n")
@@ -247,13 +386,33 @@ aspect class EReference{
 				ctx.res.append("end\n")
 			end
 			
-		end
-			
+		end	
 	end
 	
- 
+	operation generateTraversePC(ctx:Context,methodName:String):Void is 
+	do
+		if (self.containment) then
+			if (self.many) then
+				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".size >0 then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".each{c|c."+methodName+"(ctx)}\n")
+				ctx.res.append("end\n")
+			else
+				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".isVoid then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+"."+methodName+"(ctx)\n")			
+				ctx.res.append("end\n")
+			end
+			
+		end	
+	end
 	
-
+	operation pointcutToDrools(ctx : Context) : Void is
+	do
+		if (self.many) then
+			ctx.res.append(ctx.referencetemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+		else
+			ctx.res.append(ctx.referencetemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"))  )
+		end	
+	end
 } 
 
 

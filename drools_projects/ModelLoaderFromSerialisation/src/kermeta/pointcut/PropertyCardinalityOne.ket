@@ -1,0 +1,16 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="PropertyPCTemplate"
+ismethod="false"operation="generateOne"
+parameters="PropertyName:String,str:Boolean"
+%>
+	if (not self.<%=PropertyName%>.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("<%=PropertyName%> == <%if str then%>\\"<%end%>"+self.<%=PropertyName%>.toString<%if str then%>+"\\""<%end%>)
+		i := i+1	
+	end

@@ -1,0 +1,15 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="ReferencePCTemplateMany"
+ismethod="false"operation="generateMany"
+parameters="PropertyName:String"
+%>
+	if (self.<%=PropertyName%>.size > 0) then
+		self.<%=PropertyName%>.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("<%=PropertyName%> contains $"+ctx.cache.getValue(o)+"Decl")
+		}
+	end

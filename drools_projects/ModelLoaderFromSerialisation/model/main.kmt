@@ -1,0 +1,59 @@
+
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "pattern::Main"
+@mainOperation "main"
+
+
+package pattern;
+
+
+require kermeta
+require "s0.kmt"
+
+require "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+
+using pattern::art
+
+class Main {
+
+	operation initialize():Context is do
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		result:=ctx		
+	end
+	
+	
+	
+	operation main(uri:String) : Void is do
+		var ctx : Context init self.initialize()
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.createResource(uri, "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore")
+		res.load
+		var s : org::smartadapters::core::Adapter 
+		s?= res.one()
+		
+		var systemPC : System 
+		systemPC ?= s.~aspect.template.pattern.content.one
+		systemPC.pointcut2droolsPass1(ctx)
+		systemPC.pointcut2droolsPass2(ctx)
+		
+		var systemAD : System
+		systemAD ?= s.~aspect.structure.content.one
+		systemAD.pass1create(ctx)
+		systemAD.pass2set(ctx)
+		
+		stdio.writeln(ctx.res.toString) 
+	end
+}
+}

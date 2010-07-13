@@ -1,0 +1,17 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class ReferencePCTemplateMany{
+operation generateMany(PropertyName:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tif (self.")
+_res.append(PropertyName)
+_res.append(".size > 0) then\n\t\tself.")
+_res.append(PropertyName)
+_res.append(".each{o |\n\t\t\tctx.res.append(\", \")\n\t\t\tctx.res.append(\"")
+_res.append(PropertyName)
+_res.append(" contains $\"+ctx.cache.getValue(o)+\"Decl\")\n\t\t}\n\tend\n")
+result := _res.toString
+end
+}

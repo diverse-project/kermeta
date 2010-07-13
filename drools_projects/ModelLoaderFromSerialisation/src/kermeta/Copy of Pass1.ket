@@ -37,4 +37,3 @@ parameters="classQualifiedName:String, packName:String, className:String, packNa
 			ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
 		end 
 	end
-	
