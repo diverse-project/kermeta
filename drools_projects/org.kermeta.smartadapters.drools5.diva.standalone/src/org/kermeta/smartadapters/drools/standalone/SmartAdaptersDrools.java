@@ -113,8 +113,7 @@ public class SmartAdaptersDrools {
 		java.util.Map<String,Object> m = f.getExtensionToFactoryMap();
 		m.put("ecore",new EcoreResourceFactoryImpl());
 		m.put("*",new XMIResourceFactoryImpl());
-
-
+		
 		rs.getPackageRegistry().put(art.ArtPackage.eNS_URI, art.ArtPackage.eINSTANCE);
 
 		URI uri1  = URI.createURI(uri);//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
