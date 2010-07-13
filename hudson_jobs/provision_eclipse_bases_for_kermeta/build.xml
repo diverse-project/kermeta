@@ -200,7 +200,7 @@
 			<arg value="${target.ws}"/> 
 			<arg value="-p2.arch"/> 
 			<arg value="${target.arch}"/>
- 			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
+			<arg value="-shared ${target.eclipse.dir}/eclipse/p2"/>
 			<jvmarg value="-Declipse.p2.MD5Check=false"/>
 		</java>	
 	</target>
