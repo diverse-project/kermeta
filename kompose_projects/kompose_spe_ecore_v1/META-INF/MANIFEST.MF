@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Specialization Ecore V1
+Bundle-SymbolicName: kompose_spe_ecore_v1
+Bundle-Version: 0.0.6.qualifier
+Bundle-Activator: kompose_spe_ecore_v1.Activator
+Bundle-Vendor: IRISA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

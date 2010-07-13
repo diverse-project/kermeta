@@ -1,0 +1,154 @@
+/* $Id:$ 
+ * Creation : June 30, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+ @mainClass "ecore::EcoreComposer"
+ @mainOperation "main"
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/kompose_core_v1/kermeta/kompose.kmt"
+require "platform:/lookup/kompose_spe_ecore_v1/kermeta/directives_ecore.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kompose
+using ecore
+
+class EcoreComposer{
+
+operation main(uri : String) is do
+		var e : EPackage init EPackage.new
+		stdio.writeln(e.toString)
+		var ctx : Context
+		var composer : Composer init Composer.new
+		var meta : Mergeable
+		ctx := composer.loadCompositionModel(uri).initialize()
+		//var mm : Resource init EMFRepository.getDefault().asType(EMFRepository).getRegisteredEcoreResource(ctx.metamodelName) 
+		//ctx.metamodel ?= mm.instances.one
+		stdio.writeln("Context=" + ctx.toString)
+		stdio.writeln("Context MM_name=" + ctx.metamodelName.toString)
+		stdio.writeln("Context CM_name=" + ctx.composedModelURI.toString)
+		stdio.writeln("Context AM_name=" + ctx.aspectModelURI.toString)
+		stdio.writeln("Context PM_name=" + ctx.primaryModelURI.toString)
+		stdio.writeln("Directives AM=" + ctx.predirectivesAM.one.toString)
+		stdio.writeln("Directives PM=" + ctx.predirectivesPM.one.toString)
+		stdio.writeln("Directives POST=" + ctx.postdirectives.one.toString)
+		ctx.types.put("Package", EPackage)
+		ctx.types.put("Class", EClass)
+		ctx.types.put("Attribute", EAttribute)
+		ctx.types.put("Reference", EReference)
+		ctx.types.put("Operation", EOperation)
+		ctx.types.put("Parameter", EParameter)
+		ctx.types.put("Type",EDataType)
+		ctx.types.put("Property",kermeta::language::structure::Property)
+		composer.compose(ctx)
+end
+
+}
+//Signatures for all ECore elements we want to match
+class OperationSignature inherits kompose::Signature
+{
+	reference op : EOperation 
+	
+	method equals(other : Object) : kermeta::standard::Boolean is do
+		var othersign : OperationSignature
+		othersign ?= other
+		if othersign != void then
+			result := self.op.name == othersign.op.name 
+			//self.op.eParameters.each{ p1 | 
+			//	if result then
+			//		result := othersign.op.eParameters.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
+			//	end
+			//}
+		else
+			result := false
+		end
+	end
+	
+}
+
+class ParameterSignature inherits kompose::Signature
+{
+	reference param : EParameter 
+	
+	method equals(other : Object ) : kermeta::standard::Boolean is do
+		var othersign : ParameterSignature
+		othersign ?= other
+		if othersign != void then
+			result := self.param.name == othersign.param.name and
+				self.param.eType.getSignature.equals(othersign.param.eType.getSignature)
+		else
+			result := false
+		end
+	end
+	
+}
+
+aspect class EModelElement inherits kompose::Mergeable {}
+
+aspect class EGenericType inherits kompose::Mergeable {
+
+	method getSignature(): kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := eClassifier.name
+		result := s
+	end
+}
+
+aspect class EAnnotation inherits kompose::Mergeable {
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := source
+		result := s
+	end
+}
+
+aspect class EStringToStringMapEntry inherits kompose::Mergeable {
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := self.key + "_sep_" + self.~value
+		result := s
+	end
+}
+
+aspect class ENamedElement{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+			kompose::StringSignature.new
+		s.sign := name
+		result := s
+	end
+	
+	method getStringID() : String is do
+		result := name
+	end
+	/*method toString() : String is do
+		result := name + self.getStringID
+	end*/
+}
+
+aspect class EOperation
+{
+	method getSignature() : kompose::Signature is do
+		var s : OperationSignature init OperationSignature.new
+		s.op := self
+		result := s
+	end
+}
+
+aspect class EParameter
+{
+	method getSignature() : kompose::Signature is do
+		var s : ParameterSignature init ParameterSignature.new
+		s.param := self
+		result := s
+	end
+}

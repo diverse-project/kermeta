@@ -1,0 +1,94 @@
+/* $Id:$ 
+ * Creation : July 6, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+package directives;
+
+
+require kermeta
+require "platform:/lookup/kompose_directives_v1/kermeta/directives.kmt"
+require "platform:/lookup/kompose_spe_ecore_v1/kermeta/kompose_ecore.kmt"
+
+using kermeta::language::structure
+using ecore
+using kermeta::standard
+using kermeta::persistence
+
+aspect class Destroy{
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		// get value
+		var val : Object init resolveTarget(model,ctx)
+		
+		stdio.writeln("KOMPOSE DEBUG: Destroy "+val.toString)
+		var cls : ENamedElement
+		if val.isInstanceOf(EClassifier) then
+			// check for EDatatype/EEnum
+			cls := model.asType(EPackage).eClassifiers.select{c|c.name.equals(val.asType(EClass).name)}.one
+			// raise an exception if the class was not found
+			if cls == void then
+				var ex : exceptions::ClassNotFoundException init exceptions::ClassNotFoundException.new
+				ex.destroyDirective := self
+				raise ex
+			else
+				model.asType(EPackage).eClassifiers.remove(cls.asType(EClass))
+				stdio.writeln("Class "+cls.name+" has been tagged to be destroyed !")
+			end
+		else
+			if val.isInstanceOf(ETypedElement) then
+				cls := model.asType(EPackage).eClassifiers.select{c|
+					stdio.writeln("KOMPOSE DEBUG: looking for "+val.asType(ENamedElement).name+" in "+c.name)
+					val.container().asType(ENamedElement).name.equals(c.name)
+				}.one
+				//stdio.writeln(val.container().asType(ENamedElement).name)
+				//stdio.writeln(cls.name)
+				if cls != void then
+					cls.asType(EClass).eStructuralFeatures.remove(val.asType(EStructuralFeature))
+				else
+					// EParameter
+				end
+			else
+				// EEnumLiteral?
+			end
+		end
+		stdio.writeln("KOMPOSE DEBUG: Destroy found "+val.toString)
+	end
+}
+
+aspect class Merge{
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+		stdio.writeln("Executing "+self.toString)
+		var targetObj : kompose::Mergeable
+		targetObj ?= resolveTarget(model,ctx)
+		stdio.writeln("Merge.execute(target)= "+targetObj.getStringID)
+		// get value
+		var val : Object init resolveValue(model,ctx).one
+		stdio.writeln("Merge.execute(value)= "+val.toString)
+		//var matches : OrderedSet<kompose::Match> init kompose::Matcher.getDefault().asType(kompose::Matcher).computeMatch(targetObj.containingResource, val.containingResource)
+		var matches : OrderedSet<kompose::Match> init OrderedSet<kompose::Match>.new
+		/*var m : kompose::Match init kompose::Match.new.initialize(targetObj,val)
+		matches.add(m)
+		*/
+		if targetObj.isKindOf(EPackage) then
+			if targetObj.asType(EPackage).eSubpackages.contains(val.asType(EPackage)) then
+				targetObj.asType(ecore::EPackage).eSubpackages.remove(val.asType(ecore::EPackage))
+			end
+			if val.asType(EPackage).eSubpackages.contains(targetObj.asType(EPackage)) then
+				val.asType(ecore::EPackage).eSubpackages.remove(targetObj.asType(ecore::EPackage))
+			end
+		end
+			stdio.writeln("\tSize before="+matches.size.toString)
+			matches.addAll(kompose::Matcher.getDefault().asType(kompose::Matcher).computeMatchForMergeable(targetObj,val.asType(kompose::Mergeable),true))
+			stdio.writeln("\tSize after="+matches.size.toString)
+		var merger : kompose::Merger init kompose::Merger.getDefault().asType(kompose::Merger)
+		var cm : kompose::Mergeable init merger.merge(targetObj,val.asType(kompose::Mergeable),matches,ctx)
+		//targetObj := cm
+		/*cm.asType(ecore::EPackage).eSubpackages.each{p|
+			stdio.writeln("\t"+p.name)
+		}*/
+		stdio.writeln("Merge.execute(call merger)= "+targetObj.getStringID)
+		stdio.writeln("End Executing MERGE")
+	end
+}
