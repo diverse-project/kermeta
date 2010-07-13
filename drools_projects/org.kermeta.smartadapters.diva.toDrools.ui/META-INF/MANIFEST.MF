@@ -3,7 +3,15 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Ui
 Bundle-SymbolicName: org.kermeta.smartadapters.diva.toDrools.ui;singleton:=true
 Bundle-Version: 1.0.0
-Export-Package: org.kermeta.smartadapters.diva.toDrools.ui
+Export-Package: org.kermeta.smartadapters.diva.toDrools.ui,
+ org.smartadapters.core,
+ org.smartadapters.core.adaptations,
+ org.smartadapters.core.adaptations.impl,
+ org.smartadapters.core.adaptations.util,
+ org.smartadapters.core.adaptationsScalaAspect,
+ org.smartadapters.core.impl,
+ org.smartadapters.core.util,
+ org.smartadapters.coreScalaAspect
 Import-Package: org.eclipse.jface.action,
  org.eclipse.jface.viewers,
  org.eclipse.ui,
