@@ -92,7 +92,7 @@ public class EmbeddedServer {
                 session.createQueue("art2.q1", "art2.q1", true);
             }
 
-            ClientProducer producer = session.createProducer("example");
+            ClientProducer producer = session.createProducer("art2.q1");
             ClientMessage message = session.createMessage(true);
             message.getBodyBuffer().writeString("Hello");
 
@@ -100,7 +100,7 @@ public class EmbeddedServer {
             session.start();
 
 
-            ClientConsumer consumer = session.createConsumer("example");
+            ClientConsumer consumer = session.createConsumer("art2.q1");
             consumer.setMessageHandler(new MessageHandler() {
 
                 @Override
