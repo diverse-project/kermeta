@@ -8,6 +8,6 @@ ismethod="false"operation="generate"
 parameters="classQualifiedName:String"
 %>	
 		var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": <%=classQualifiedName%>(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": <%=classQualifiedName%>(")
+		ctx.res.append("this == "+varName+"Decl")
 		

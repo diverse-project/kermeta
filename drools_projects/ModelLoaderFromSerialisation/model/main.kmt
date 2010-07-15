@@ -43,15 +43,22 @@ class Main {
 		var s : org::smartadapters::core::Adapter 
 		s?= res.one()
 		
+		ctx.res.append("Rule \"Aspect\"\n")
+		ctx.res.append("when\n")
+		
 		var systemPC : System 
 		systemPC ?= s.~aspect.template.pattern.content.one
 		systemPC.pointcut2droolsPass1(ctx)
 		systemPC.pointcut2droolsPass2(ctx)
 		
+		ctx.res.append("then\n")
+		
 		var systemAD : System
 		systemAD ?= s.~aspect.structure.content.one
 		systemAD.pass1create(ctx)
 		systemAD.pass2set(ctx)
+		
+		ctx.res.append("end")
 		
 		stdio.writeln(ctx.res.toString) 
 	end

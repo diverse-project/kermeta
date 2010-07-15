@@ -9,5 +9,5 @@ parameters="PropertyName:String"
 %>
 	if (not self.<%=PropertyName%>.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("<%=PropertyName%> == $"+ctx.cache.getValue(self.<%=PropertyName%>)+"Decl")
+		ctx.res.append("<%=PropertyName%> == "+ctx.cache.getValue(self.<%=PropertyName%>)+"Decl")
 	end

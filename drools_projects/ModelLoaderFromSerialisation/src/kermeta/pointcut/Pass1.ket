@@ -9,6 +9,6 @@ parameters="classQualifiedName:String"
 %>
 		var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"<%=classQualifiedName%>(")
 		

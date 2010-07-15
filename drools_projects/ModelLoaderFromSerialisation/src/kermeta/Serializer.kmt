@@ -323,6 +323,7 @@ aspect class EClass{
 aspect class EAttribute{
 		
 	method toGenerate(ctx:Context) : Void is do 
+	if self.name != "pid" then
 		var propertyUpper : String init self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)
 		if (self.many) then
 			//ropertyNameUpper:String,PropertyName:String,str:Boolean
@@ -331,7 +332,7 @@ aspect class EAttribute{
 		else
 			ctx.res.append(ctx.propertytemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType))  )
 		end
-		
+	end	
 	end
 	
 	

@@ -85,15 +85,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.NamedElement(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -106,8 +102,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.NamedElement(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.NamedElement(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -161,15 +157,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.ModelElement(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -182,8 +174,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.ModelElement(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.ModelElement(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -262,10 +254,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.root.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Root"+"("+ctx.cache.getValue(self.root)+");
 ")	
@@ -327,7 +315,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.System(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -365,34 +353,34 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.System(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.System(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.root.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("root == $"+ctx.cache.getValue(self.root)+"Decl")
+		ctx.res.append("root == "+ctx.cache.getValue(self.root)+"Decl")
 	end
 	if (self.services.size > 0) then
 		self.services.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("services contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("services contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.types.size > 0) then
 		self.types.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("types contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.dataTypes.size > 0) then
 		self.dataTypes.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("dataTypes contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("dataTypes contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -473,15 +461,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.DataType(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -494,8 +478,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.DataType(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.DataType(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -549,10 +533,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -561,7 +541,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.TypedElement(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -574,11 +554,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.TypedElement(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.TypedElement(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -641,15 +621,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.CardinalityElement(")
 			if (not self.lower.isVoid()) then
 		if i > 0 then
@@ -676,8 +652,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.CardinalityElement(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.CardinalityElement(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -751,10 +727,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -807,7 +779,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.ComponentInstance(")
 			if (not self.state.isVoid()) then
 		if i > 0 then
@@ -842,36 +814,36 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.ComponentInstance(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.ComponentInstance(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == $"+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -961,10 +933,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -1017,7 +985,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.PrimitiveInstance(")
 			if (not self.state.isVoid()) then
 		if i > 0 then
@@ -1052,36 +1020,36 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.PrimitiveInstance(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.PrimitiveInstance(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == $"+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -1181,10 +1149,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.subComponent.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"SubComponent"+"().add("+ctx.cache.getValue(c)+");
@@ -1261,7 +1225,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.CompositeInstance(")
 			if (not self.state.isVoid()) then
 		if i > 0 then
@@ -1306,48 +1270,48 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.CompositeInstance(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.CompositeInstance(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.subComponent.size > 0) then
 		self.subComponent.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subComponent contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subComponent contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.delegation.size > 0) then
 		self.delegation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("delegation contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("delegation contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == $"+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -1428,10 +1392,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.serverInstance.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
 ")	
@@ -1440,7 +1400,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.Binding(")
 			if (not self.id.isVoid()) then
 		if i > 0 then
@@ -1453,11 +1413,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.Binding(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.Binding(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == $"+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1512,10 +1472,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.client.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Client"+"("+ctx.cache.getValue(self.client)+");
 ")	
@@ -1532,7 +1488,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.TransmissionBinding(")
 			if (not self.id.isVoid()) then
 		if i > 0 then
@@ -1545,19 +1501,19 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.TransmissionBinding(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.TransmissionBinding(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.client.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("client == $"+ctx.cache.getValue(self.client)+"Decl")
+		ctx.res.append("client == "+ctx.cache.getValue(self.client)+"Decl")
 	end
 	if (not self.server.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("server == $"+ctx.cache.getValue(self.server)+"Decl")
+		ctx.res.append("server == "+ctx.cache.getValue(self.server)+"Decl")
 	end
 	if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == $"+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1612,10 +1568,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.source.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Source"+"("+ctx.cache.getValue(self.source)+");
 ")	
@@ -1632,7 +1584,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.DelegationBinding(")
 			if (not self.id.isVoid()) then
 		if i > 0 then
@@ -1645,19 +1597,19 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.DelegationBinding(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.DelegationBinding(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.source.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("source == $"+ctx.cache.getValue(self.source)+"Decl")
+		ctx.res.append("source == "+ctx.cache.getValue(self.source)+"Decl")
 	end
 	if (not self.exported.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("exported == $"+ctx.cache.getValue(self.exported)+"Decl")
+		ctx.res.append("exported == "+ctx.cache.getValue(self.exported)+"Decl")
 	end
 	if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == $"+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1708,22 +1660,18 @@ method  pass1create(ctx:Context):Void is do
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 		if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
-end
+ 	end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.AttributeInstance(")
 		ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.AttributeInstance(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.AttributeInstance(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -1777,10 +1725,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.~attribute.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Attribute"+"("+ctx.cache.getValue(self.~attribute)+");
 ")	
@@ -1789,7 +1733,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.ValuedAttribute(")
 			if (not self.~value.isVoid()) then
 		if i > 0 then
@@ -1802,11 +1746,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.ValuedAttribute(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.ValuedAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.~attribute.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~attribute == $"+ctx.cache.getValue(self.~attribute)+"Decl")
+		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1862,11 +1806,7 @@ if self.entries.size >0 then
 end
 end 
 method  pass2set(ctx:Context):Void is do 
- 		if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
-
+ 	
 	self.entries.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Entries"+"().add("+ctx.cache.getValue(c)+");
 ")	
@@ -1886,7 +1826,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.DictionaryValuedAttribute(")
 		ctx.res.append(")\n")
 
@@ -1897,17 +1837,17 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.DictionaryValuedAttribute(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.DictionaryValuedAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.entries.size > 0) then
 		self.entries.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("entries contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("entries contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.~attribute.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~attribute == $"+ctx.cache.getValue(self.~attribute)+"Decl")
+		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -1967,15 +1907,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.Entry(")
 			if (not self.~value.isVoid()) then
 		if i > 0 then
@@ -1988,8 +1924,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.Entry(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.Entry(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -2043,10 +1979,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.key.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Key"+"("+ctx.cache.getValue(self.key)+");
 ")	
@@ -2055,7 +1987,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.DefaultEntry(")
 			if (not self.~value.isVoid()) then
 		if i > 0 then
@@ -2068,11 +2000,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.DefaultEntry(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.DefaultEntry(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.key.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("key == $"+ctx.cache.getValue(self.key)+"Decl")
+		ctx.res.append("key == "+ctx.cache.getValue(self.key)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -2131,15 +2063,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.instance.OtherEntry(")
 			if (not self.key.isVoid()) then
 		if i > 0 then
@@ -2159,8 +2087,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.instance.OtherEntry(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.instance.OtherEntry(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -2231,10 +2159,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.port.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
@@ -2279,7 +2203,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.ComponentType(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -2307,29 +2231,29 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.ComponentType(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.ComponentType(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2414,10 +2338,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.port.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
@@ -2462,7 +2382,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.PrimitiveType(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -2490,29 +2410,29 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.PrimitiveType(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.PrimitiveType(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2597,10 +2517,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.port.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
@@ -2645,7 +2561,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.CompositeType(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -2673,29 +2589,29 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.CompositeType(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.CompositeType(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == $"+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2770,10 +2686,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.~operation.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
@@ -2790,7 +2702,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Service(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -2808,12 +2720,12 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Service(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Service(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -2884,10 +2796,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.input.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Input"+"().add("+ctx.cache.getValue(c)+");
@@ -2916,7 +2824,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Operation(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -2939,18 +2847,18 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Operation(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Operation(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.input.size > 0) then
 		self.input.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("input contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("input contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.output.size > 0) then
 		self.output.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("output contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("output contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -3016,10 +2924,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -3028,7 +2932,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Parameter(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3041,11 +2945,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Parameter(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Parameter(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3105,10 +3009,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.~operation.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
@@ -3125,7 +3025,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.FunctionalService(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3143,12 +3043,12 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.FunctionalService(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.FunctionalService(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -3214,10 +3114,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.~operation.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
@@ -3234,7 +3130,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.ControlService(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3252,12 +3148,12 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.ControlService(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.ControlService(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -3322,10 +3218,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.service.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
 ")	
@@ -3334,7 +3226,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.AbstractPort(")
 			if (not self.role.isVoid()) then
 		if i > 0 then
@@ -3354,11 +3246,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.AbstractPort(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.AbstractPort(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == $"+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3429,10 +3321,6 @@ method  pass2set(ctx:Context):Void from CardinalityElement is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.service.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
 ")	
@@ -3441,7 +3329,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void from CardinalityElement is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Port(")
 			if (not self.isOptional.isVoid()) then
 		if i > 0 then
@@ -3482,11 +3370,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void from CardinalityElement is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Port(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Port(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == $"+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3550,10 +3438,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.ids.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Ids"+"().add("+ctx.cache.getValue(c)+");
@@ -3574,7 +3458,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.PortCollection(")
 			if (not self.role.isVoid()) then
 		if i > 0 then
@@ -3599,17 +3483,17 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.PortCollection(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.PortCollection(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.ids.size > 0) then
 		self.ids.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("ids contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("ids contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == $"+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -3669,15 +3553,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.PortId(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3690,8 +3570,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.PortId(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.PortId(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -3745,10 +3625,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -3757,7 +3633,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Attribute(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3770,11 +3646,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Attribute(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Attribute(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3833,10 +3709,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
@@ -3845,7 +3717,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.BasicAttribute(")
 			if (not self.defaultValue.isVoid()) then
 		if i > 0 then
@@ -3865,11 +3737,11 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.BasicAttribute(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.BasicAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3929,10 +3801,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 	if (not self.~valueType.isVoid()) then
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ValueType"+"("+ctx.cache.getValue(self.~valueType)+");
 ")	
@@ -3957,7 +3825,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.Dictionary(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -3975,21 +3843,21 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.Dictionary(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.Dictionary(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (not self.~valueType.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~valueType == $"+ctx.cache.getValue(self.~valueType)+"Decl")
+		ctx.res.append("~valueType == "+ctx.cache.getValue(self.~valueType)+"Decl")
 	end
 	if (self.keys.size > 0) then
 		self.keys.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("keys contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("keys contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == $"+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -4053,15 +3921,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.type.DictionaryDefaultValue(")
 			if (not self.key.isVoid()) then
 		if i > 0 then
@@ -4081,8 +3945,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.type.DictionaryDefaultValue(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.type.DictionaryDefaultValue(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4134,22 +3998,18 @@ method  pass1create(ctx:Context):Void is do
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 		if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
-end
+ 	end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.implem.ComponentImplementation(")
 		ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.implem.ComponentImplementation(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.implem.ComponentImplementation(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4207,15 +4067,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ContentDesc"+"(\""+self.contentDesc.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.implem.FractalComponent(")
 			if (not self.controllerDesc.isVoid()) then
 		if i > 0 then
@@ -4235,8 +4091,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.implem.FractalComponent(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.implem.FractalComponent(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4290,15 +4146,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ImplementingClass"+"(\""+self.implementingClass.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.implem.OSGiComponent(")
 			if (not self.implementingClass.isVoid()) then
 		if i > 0 then
@@ -4311,8 +4163,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.implem.OSGiComponent(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.implem.OSGiComponent(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4362,22 +4214,18 @@ method  pass1create(ctx:Context):Void is do
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 		if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
-end
+ 	end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.implem.TypeImplementation(")
 		ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.implem.TypeImplementation(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.implem.TypeImplementation(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4431,15 +4279,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"GenerateInstanceBundle"+"("+self.generateInstanceBundle.toString+");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.implem.OSGiType(")
 			if (not self.generateInstanceBundle.isVoid()) then
 		if i > 0 then
@@ -4452,8 +4296,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.implem.OSGiType(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.implem.OSGiType(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4509,15 +4353,11 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.group.Group(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -4530,8 +4370,8 @@ ctx.res.append(")\n")
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.group.Group(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.group.Group(")
+		ctx.res.append("this == "+varName+"Decl")
 		ctx.res.append(")\n")
 end
 
@@ -4590,10 +4430,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.types.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Types"+"().add("+ctx.cache.getValue(c)+");
@@ -4617,7 +4453,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.group.TypeGroup(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -4635,18 +4471,18 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.group.TypeGroup(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.group.TypeGroup(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.types.size > 0) then
 		self.types.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("types contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.subGroups.size > 0) then
 		self.subGroups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subGroups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -4712,10 +4548,6 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-	if (not self.pid.isVoid()) then
-		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pid"+"(\""+self.pid.toString+"\");
-")	
-	end
 
 	self.instances.each{c|
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Instances"+"().add("+ctx.cache.getValue(c)+");
@@ -4739,7 +4571,7 @@ end
 method  pointcut2droolsPass1(ctx:Context):Void is do 
  			var i : Integer init 0
 		var varName : String init ctx.getGenerateName()
-		ctx.cache.put(self,varName)
+		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"art.group.InstanceGroup(")
 			if (not self.name.isVoid()) then
 		if i > 0 then
@@ -4757,18 +4589,18 @@ end
 end
 method  pointcut2droolsPass2(ctx:Context):Void is do 
  			var varName : String init ctx.cache.getValue(self)
-		ctx.res.append("$"+varName+": art.group.InstanceGroup(")
-		ctx.res.append("this == $"+varName+"Decl")
+		ctx.res.append(varName+": art.group.InstanceGroup(")
+		ctx.res.append("this == "+varName+"Decl")
 			if (self.instances.size > 0) then
 		self.instances.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("instances contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("instances contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.subGroups.size > 0) then
 		self.subGroups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subGroups contains $"+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
