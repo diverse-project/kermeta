@@ -17,7 +17,6 @@ require kermeta
 
 
 require "platform:/lookup/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
-require "./Art2DROOLS.kmt"
 require "../model/s0.kmt"
 require "./adaptationsGenerator.kmt"
 
@@ -25,6 +24,8 @@ using kermeta::standard
 using kermeta::language::structure
 using kermeta::persistence
 using org::smartadapters::core
+
+using pattern::art
 class Main {
 	
 	operation main(file : String) : Void is do
@@ -35,7 +36,7 @@ class Main {
 	
 	operation process(smarturl:String,drl:String):Void is do
 	
-	var ctx : Context init Context.new
+		var ctx : pattern::Context init pattern::Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
 		
@@ -54,7 +55,7 @@ class Main {
 			o.ownedTags.add(t)
 		}
 		 
-		var name:String init "RulesName"
+		var name:String init "RuleName"
 		
 		ctx.res.append("global java.util.List list;\n")
 		ctx.res.append("global java.util.Map uniqueobjects;\n")
@@ -62,97 +63,36 @@ class Main {
 		ctx.res.append("rule \""+ name + "\"\n")
 						 
 		 
-		root.~aspect.template.pattern.toDrools(ctx)
-		var mai :pattern::Main init pattern::Main.new
-		var ctxadvice :pattern::Context 
-		ctxadvice := mai.initialize()
- 		
-		root.~aspect.structure.content.one.pass1create(ctxadvice)
-		root.~aspect.structure.content.one.pass2set(ctxadvice)
-		ctx.res.append(ctxadvice.res.toString)
+		ctx.res.append("when\n")
+		
+		var systemPC : System 
+		systemPC ?= root.~aspect.template.pattern.content.one
+		systemPC.pointcut2droolsPass1(ctx)
+		systemPC.pointcut2droolsPass2(ctx)
+		
+		ctx.res.append("then\n")
+		
+		var systemAD : System
+		systemAD ?= root.~aspect.structure.content.one
+		systemAD.pass1create(ctx)
+		systemAD.pass2set(ctx)
 		
 		var ctxadaptation : org::smartadapters::core::adaptations::Context init org::smartadapters::core::adaptations::Context.new
 		ctxadaptation.res := kermeta::utils::StringBuffer.new
 		ctxadaptation.cache := kermeta::utils::Hashtable<Object,String>.new		
 		
-		ctx.cache.keys().each{key| ctxadaptation.cache.put(key,"$"+ctx.cache.getValue(key))}
-		ctxadvice.cache.keys().each{key| ctxadaptation.cache.put(key,ctxadvice.cache.getValue(key))}
+		ctx.cache.keys().each{key| ctxadaptation.cache.put(key,ctx.cache.getValue(key))}
 		root.adapt.each{a| a.toDrools(ctxadaptation)} 
 		
 		ctx.res.append(ctxadaptation.res.toString)
+		
 		ctx.res.append("end")
+		
 		stdio.writeln(ctx.res.toString)
 		
 		var f : kermeta::io::FileIO init kermeta::io::FileIO.new
-		//f.writeTextFile("drl/1.drl",ctx.res.toString)
 		stdio.writeln("saving to "+drl)
 		f.writeTextFile(drl,ctx.res.toString)
-		stdio.writeln(ctx.res.toString)
-		//f.writeTextFile("drl/3.drl",ctx.res.toString)
-		//f.writeTextFile("drl/4.drl",ctx.res.toString)
-		//f.writeTextFile("drl/5.drl",ctx.res.toString)
-		//f.writeTextFile("drl/6.drl",ctx.res.toString)
-		
-	
-	end
-	
-
-}
-class Context{
-	reference res : kermeta::utils::StringBuffer
-	reference cache : kermeta::utils::Hashtable<Object,String>
-	operation getGenerateName():String is do
-		if (i.isVoid) then i:= 0 end
-		result :="s"+ i.toString()
-		i:=i+1
-	end
-	reference i : Integer	
-}
-
-aspect class ModelPattern
-{
-	operation toDrools(ctx:Context) : Void is do 
-		self.pattern.toDrools(ctx)
-		
-	end
-	
-	
-}
- 
-aspect class PModel
-{
-	operation toDrools(ctx:Context) : Void is do 
-
-	ctx.res.append("\t when \n")
-		self.content.each{p|
-			p.toDrools(ctx)
-		}
-		
-		ctx.res.append("then\n \t java.util.HashMap m = new java.util.HashMap();\n")
-		self.roles.each{p|
-			p.toDrools(ctx)
-		}
-		ctx.res.append("\t list.add(m);\n ")
-		//end\n")		
+		stdio.writeln(ctx.res.toString)	
 	end
 }
-
-
-aspect class PRole
-{
-	operation toDrools(ctx:Context) : Void is do 
-		ctx.res.append("m.put(\"")
-		ctx.res.append(self.name)
-		ctx.res.append("\",$")
-		ctx.res.append(ctx.cache.getValue(self.player))
-		ctx.res.append(");\n")						
-	end
-}
-
-aspect class PObject
-{
-	operation toDrools(ctx:Context) : Void is do 
-			ctx.res.append("TODO " +self.getMetaClass.toString)
-	end
-}
-

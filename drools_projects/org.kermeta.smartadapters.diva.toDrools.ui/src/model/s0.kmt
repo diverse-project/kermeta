@@ -14,36 +14,12 @@ package pattern;
 
 
 require kermeta
-require "platform:/lookup/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+require "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
 require "s1.kmt"
 
 using kermeta::standard
 using kermeta::persistence
 
-class Main {
-
-	operation initialize():Context is do
-		var ctx : Context init Context.new
-		ctx.res := kermeta::utils::StringBuffer.new
-		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
-		result:=ctx		
-	end
-	
-	
-	
-	operation main(uri:String) : Void is do
-		var ctx : Context init self.initialize()
-		var rep : EMFRepository  init EMFRepository.new
-		var res : EMFResource 
-		res ?= rep.createResource(uri, "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore")
-		res.load
-		var s : System 
-		s?= res.one()
-		s.pass1create(ctx)
-		s.pass2set(ctx)
-		stdio.writeln(ctx.res.toString) 
-	end
-}
 class Context{
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
@@ -68,17 +44,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.NamedElement" +" "+ na +  " = (art.NamedElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.NamedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.NamedElement" +" "+ na +  " = (art.NamedElement) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.NamedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -86,9 +85,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-aspect class ModelElement {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.NamedElement(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.NamedElement(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class ModelElement {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -97,17 +116,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.ModelElement" +" "+ na +  " = (art.ModelElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createModelElement();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.ModelElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.ModelElement" +" "+ na +  " = (art.ModelElement) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.ModelElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -115,9 +157,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-aspect class System {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.ModelElement(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.ModelElement(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class System {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -126,17 +188,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.System" +" "+ na +  " = (art.System) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createSystem();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createSystem();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.System" +" "+ na +  " = art.ArtFactory.eINSTANCE.createSystem();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.System" +" "+ na +  " = (art.System) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createSystem();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.System" +" "+ na +  " = art.ArtFactory.eINSTANCE.createSystem();
+")
+		end 
 	end
 	
 if not self.root.isVoid then
@@ -226,9 +311,107 @@ if self.groups.size >0 then
 
 	self.groups.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class DataType {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.System(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if not self.root.isVoid then
+
+	self.root.pointcut2droolsPass1(ctx)
+end
+
+if self.services.size >0 then
+
+	self.services.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.types.size >0 then
+
+	self.types.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.dataTypes.size >0 then
+
+	self.dataTypes.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.groups.size >0 then
+
+	self.groups.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.System(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.root.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("root == "+ctx.cache.getValue(self.root)+"Decl")
+	end
+	if (self.services.size > 0) then
+		self.services.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("services contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.types.size > 0) then
+		self.types.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.dataTypes.size > 0) then
+		self.dataTypes.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("dataTypes contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if not self.root.isVoid then
+
+	self.root.pointcut2droolsPass2(ctx)
+end
+
+if self.services.size >0 then
+
+	self.services.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.types.size >0 then
+
+	self.types.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.dataTypes.size >0 then
+
+	self.dataTypes.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.groups.size >0 then
+
+	self.groups.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class DataType {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -237,17 +420,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.DataType" +" "+ na +  " = (art.DataType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createDataType();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createDataType();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.DataType" +" "+ na +  " = art.ArtFactory.eINSTANCE.createDataType();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.DataType" +" "+ na +  " = (art.DataType) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createDataType();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.DataType" +" "+ na +  " = art.ArtFactory.eINSTANCE.createDataType();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -255,9 +461,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-aspect class TypedElement {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.DataType(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.DataType(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class TypedElement {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -266,17 +492,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.TypedElement" +" "+ na +  " = (art.TypedElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.TypedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.TypedElement" +" "+ na +  " = (art.TypedElement) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.TypedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -288,9 +537,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
 	end
-end 
- }
-aspect class CardinalityElement {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.TypedElement(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.TypedElement(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class CardinalityElement {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -299,17 +572,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.CardinalityElement" +" "+ na +  " = (art.CardinalityElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.CardinalityElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.CardinalityElement" +" "+ na +  " = (art.CardinalityElement) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.CardinalityElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -325,162 +621,456 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-package instance {
-//All the meta-classes are aspectized with a 2-pass visitor (here, ComponentInstance)
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.CardinalityElement(")
+			if (not self.lower.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("lower == "+self.lower.toString)
+		i := i+1	
+	end
+	if (not self.upper.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("upper == "+self.upper.toString)
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.CardinalityElement(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}package instance {
 aspect class ComponentInstance {
-	//Pass1 is responsible for creating model elements (using create* operations)
-	method  pass1create(ctx:Context):Void is do  	
-		var na : String init ctx.getGenerateName
-	 	ctx.cache.put(self,na)
-	 	//the advice model element is unique
-		if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-			ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = (art.instance.ComponentInstance) uniqueobjects.get(\""+na+"\");")
-			ctx.res.append("if ("+" "+ na + " " + "== null){")
-			ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();")
-			ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");")
-			ctx.res.append("}")
-		//the advice model element is per join point
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = (art.instance.ComponentInstance) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+")	
+	else
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
+")
+			
+			ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = (art.instance.ComponentInstance) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
 		else
-			ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();")
-		end
-		//visit of the containment graph
-		if self.~attribute.size >0 then
-			self.~attribute.each{c|c.pass1create(ctx)}
-		end
-		if self.binding.size >0 then
-			self.binding.each{c|c.pass1create(ctx)}
-		end
-		if not self.implem.isVoid then
-			self.implem.pass1create(ctx)
-		end
-	end 
+			ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();
+")
+		end 
+	end
 	
-	//Pass2 is responsible for setting the properties of an (already created) advice element
-	method  pass2set(ctx:Context):Void is do 
-	 	if (not self.state.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");")	
-		end
-		if (not self.name.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");")	
-		end
-		if (not self.type.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");")	
-		end
-		if (not self.superComponent.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");")	
-		end
-		self.~attribute.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
-		self.binding.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
-		if (not self.implem.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");")	
-		end
-		self.groups.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
-		if self.~attribute.size >0 then
-			self.~attribute.each{c|c.pass2set(ctx)}
-		end
-		if self.binding.size >0 then
-			self.binding.each{c|c.pass2set(ctx)}
-		end
-		if not self.implem.isVoid then
-			self.implem.pass2set(ctx)
-		end
-	end 
- }
+if self.~attribute.size >0 then
 
-aspect class PrimitiveInstance {
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
 
-	/**
-	 * pass1create is responsible for creating the elements of the advice model.
-	 * In particular, it manages the uniqueness of these elements
-	 */
-	method  pass1create(ctx:Context):Void is do 
-		//Associates a unique string to this (self) element
-		var na : String init ctx.getGenerateName
- 		ctx.cache.put(self,na)
- 			
- 		//if this element is unique
-		if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = (art.instance.PrimitiveInstance) uniqueobjects.get(\""+na+"\");")
-			ctx.res.append("if ("+" "+ na + " " + "== null){")
-			ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();")
-			ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");")
-			ctx.res.append("}")
-		else //else, this element is not unique
-			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();")
-		end
-	
-		//visiting all the contained elements
-		if self.~attribute.size >0 then
-			self.~attribute.each{c|c.pass1create(ctx)}
-		end
+if self.binding.size >0 then
 
-		if self.binding.size >0 then
-			self.binding.each{c|c.pass1create(ctx)}
-		end
+	self.binding.each{c|c.pass1create(ctx)}
+end
 
-		if not self.implem.isVoid then
-			self.implem.pass1create(ctx)
-		end	
-	end 
+if not self.implem.isVoid then
 
-	/**
-	 * pass1set is responsible for linking together the (already created) elements of the advice model 
-	 */
-	method  pass2set(ctx:Context):Void is do 
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
  		if (not self.state.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");")	
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");
+")	
+	end
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.binding.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.ComponentInstance(")
+			if (not self.state.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
 		end
-		if (not self.name.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");")	
+		ctx.res.append("state == \""+self.state.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
 		end
-		if (not self.type.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");")	
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.ComponentInstance(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.binding.size > 0) then
+		self.binding.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class PrimitiveInstance {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = (art.instance.PrimitiveInstance) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+")	
+	else
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
+")
+			
+			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = (art.instance.PrimitiveInstance) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+")
+		end 
+	end
+	
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.state.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");
+")	
+	end
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.binding.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.PrimitiveInstance(")
+			if (not self.state.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
 		end
-		if (not self.superComponent.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");")	
+		ctx.res.append("state == \""+self.state.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
 		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
 
-		self.~attribute.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
+if self.~attribute.size >0 then
 
-		self.binding.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
 
-		if (not self.implem.isVoid()) then
-			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");")	
-		end
+if self.binding.size >0 then
 
-		self.groups.each{c|
-			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");")	
-		}	
+	self.binding.each{c|c.pointcut2droolsPass1(ctx)}
+end
 
-		//visiting all the contained elements
-		if self.~attribute.size >0 then
-			self.~attribute.each{c|c.pass2set(ctx)}
-		end
+if not self.implem.isVoid then
 
-		if self.binding.size >0 then
-			self.binding.each{c|c.pass2set(ctx)}
-		end
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.PrimitiveInstance(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.binding.size > 0) then
+		self.binding.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
 
-		if not self.implem.isVoid then
-			self.implem.pass2set(ctx)
-		end
-	end 
-}
+if self.~attribute.size >0 then
 
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
 
-aspect class CompositeInstance {
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class CompositeInstance {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -489,17 +1079,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = (art.instance.CompositeInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = (art.instance.CompositeInstance) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+")
+		end 
 	end
 	
 if self.subComponent.size >0 then
@@ -608,9 +1221,128 @@ if not self.implem.isVoid then
 
 	self.implem.pass2set(ctx)
 end
-end 
- }
-aspect class Binding {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.CompositeInstance(")
+			if (not self.state.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("state == \""+self.state.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.subComponent.size >0 then
+
+	self.subComponent.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.delegation.size >0 then
+
+	self.delegation.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.CompositeInstance(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.subComponent.size > 0) then
+		self.subComponent.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("subComponent contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.delegation.size > 0) then
+		self.delegation.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("delegation contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.binding.size > 0) then
+		self.binding.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.subComponent.size >0 then
+
+	self.subComponent.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.delegation.size >0 then
+
+	self.delegation.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class Binding {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -619,17 +1351,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.Binding" +" "+ na +  " = (art.instance.Binding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.Binding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.Binding" +" "+ na +  " = (art.instance.Binding) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.Binding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -641,9 +1396,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
 ")	
 	end
-end 
- }
-aspect class TransmissionBinding {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.Binding(")
+			if (not self.id.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("id == \""+self.id.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.Binding(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.serverInstance.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class TransmissionBinding {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -652,17 +1431,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = (art.instance.TransmissionBinding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = (art.instance.TransmissionBinding) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -682,9 +1484,41 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
 ")	
 	end
-end 
- }
-aspect class DelegationBinding {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.TransmissionBinding(")
+			if (not self.id.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("id == \""+self.id.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.TransmissionBinding(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.client.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("client == "+ctx.cache.getValue(self.client)+"Decl")
+	end
+	if (not self.server.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("server == "+ctx.cache.getValue(self.server)+"Decl")
+	end
+	if (not self.serverInstance.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class DelegationBinding {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -693,17 +1527,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = (art.instance.DelegationBinding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = (art.instance.DelegationBinding) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -723,9 +1580,41 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
 ")	
 	end
-end 
- }
-aspect class AttributeInstance {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.DelegationBinding(")
+			if (not self.id.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("id == \""+self.id.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.DelegationBinding(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.source.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("source == "+ctx.cache.getValue(self.source)+"Decl")
+	end
+	if (not self.exported.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("exported == "+ctx.cache.getValue(self.exported)+"Decl")
+	end
+	if (not self.serverInstance.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class AttributeInstance {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -734,23 +1623,59 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = (art.instance.AttributeInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = (art.instance.AttributeInstance) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 	end 
- }
-aspect class ValuedAttribute {
+ 	end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.AttributeInstance(")
+		ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.AttributeInstance(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class ValuedAttribute {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -759,17 +1684,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = (art.instance.ValuedAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = (art.instance.ValuedAttribute) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -781,9 +1729,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Attribute"+"("+ctx.cache.getValue(self.~attribute)+");
 ")	
 	end
-end 
- }
-aspect class DictionaryValuedAttribute {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.ValuedAttribute(")
+			if (not self.~value.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.ValuedAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.~attribute.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class DictionaryValuedAttribute {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -792,17 +1764,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = (art.instance.DictionaryValuedAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = (art.instance.DictionaryValuedAttribute) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+")
+		end 
 	end
 	
 if self.entries.size >0 then
@@ -827,9 +1822,42 @@ if self.entries.size >0 then
 
 	self.entries.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class Entry {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.DictionaryValuedAttribute(")
+		ctx.res.append(")\n")
+
+if self.entries.size >0 then
+
+	self.entries.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.DictionaryValuedAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.entries.size > 0) then
+		self.entries.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("entries contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.~attribute.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.entries.size >0 then
+
+	self.entries.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class Entry {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -838,17 +1866,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.Entry" +" "+ na +  " = (art.instance.Entry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.Entry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.Entry" +" "+ na +  " = (art.instance.Entry) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.Entry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -856,9 +1907,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-end 
- }
-aspect class DefaultEntry {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.Entry(")
+			if (not self.~value.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.Entry(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class DefaultEntry {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -867,17 +1938,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = (art.instance.DefaultEntry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = (art.instance.DefaultEntry) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -889,9 +1983,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Key"+"("+ctx.cache.getValue(self.key)+");
 ")	
 	end
-end 
- }
-aspect class OtherEntry {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.DefaultEntry(")
+			if (not self.~value.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.DefaultEntry(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.key.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("key == "+ctx.cache.getValue(self.key)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class OtherEntry {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -900,17 +2018,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = (art.instance.OtherEntry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = (art.instance.OtherEntry) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -922,9 +2063,36 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-end 
- }
-}
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.instance.OtherEntry(")
+			if (not self.key.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("key == \""+self.key.toString+"\"")
+		i := i+1	
+	end
+	if (not self.~value.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.instance.OtherEntry(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}}
 package type {
 aspect class ComponentType {
 method  pass1create(ctx:Context):Void is do 
@@ -935,17 +2103,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.ComponentType" +" "+ na +  " = (art.type.ComponentType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.ComponentType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.ComponentType" +" "+ na +  " = (art.type.ComponentType) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.ComponentType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+")
+		end 
 	end
 	
 if self.port.size >0 then
@@ -1008,9 +2199,81 @@ if not self.implem.isVoid then
 
 	self.implem.pass2set(ctx)
 end
-end 
- }
-aspect class PrimitiveType {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.ComponentType(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.ComponentType(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.port.size > 0) then
+		self.port.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class PrimitiveType {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1019,17 +2282,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = (art.type.PrimitiveType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = (art.type.PrimitiveType) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+")
+		end 
 	end
 	
 if self.port.size >0 then
@@ -1092,9 +2378,81 @@ if not self.implem.isVoid then
 
 	self.implem.pass2set(ctx)
 end
-end 
- }
-aspect class CompositeType {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.PrimitiveType(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.PrimitiveType(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.port.size > 0) then
+		self.port.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class CompositeType {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1103,17 +2461,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.CompositeType" +" "+ na +  " = (art.type.CompositeType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.CompositeType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.CompositeType" +" "+ na +  " = (art.type.CompositeType) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.CompositeType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+")
+		end 
 	end
 	
 if self.port.size >0 then
@@ -1176,9 +2557,81 @@ if not self.implem.isVoid then
 
 	self.implem.pass2set(ctx)
 end
-end 
- }
-aspect class Service {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.CompositeType(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass1(ctx)
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.CompositeType(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.port.size > 0) then
+		self.port.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.~attribute.size > 0) then
+		self.~attribute.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.groups.size > 0) then
+		self.groups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.implem.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pointcut2droolsPass2(ctx)
+end
+end
+
+}aspect class Service {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1187,17 +2640,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.Service" +" "+ na +  " = (art.type.Service) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createService();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createService();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Service" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createService();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Service" +" "+ na +  " = (art.type.Service) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createService();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Service" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createService();
+")
+		end 
 	end
 	
 if self.~operation.size >0 then
@@ -1222,9 +2698,45 @@ if self.~operation.size >0 then
 
 	self.~operation.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class Operation {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Service(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Service(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.~operation.size > 0) then
+		self.~operation.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class Operation {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1233,17 +2745,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.Operation" +" "+ na +  " = (art.type.Operation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Operation" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Operation" +" "+ na +  " = (art.type.Operation) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Operation" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+")
+		end 
 	end
 	
 if self.input.size >0 then
@@ -1285,9 +2820,61 @@ if self.output.size >0 then
 
 	self.output.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class Parameter {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Operation(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.input.size >0 then
+
+	self.input.each{c|c.pointcut2droolsPass1(ctx)}
+end
+
+if self.output.size >0 then
+
+	self.output.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Operation(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.input.size > 0) then
+		self.input.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("input contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.output.size > 0) then
+		self.output.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("output contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.input.size >0 then
+
+	self.input.each{c|c.pointcut2droolsPass2(ctx)}
+end
+
+if self.output.size >0 then
+
+	self.output.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class Parameter {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1296,17 +2883,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.Parameter" +" "+ na +  " = (art.type.Parameter) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Parameter" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Parameter" +" "+ na +  " = (art.type.Parameter) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Parameter" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1318,9 +2928,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
 	end
-end 
- }
-aspect class FunctionalService {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Parameter(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Parameter(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class FunctionalService {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1329,17 +2963,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = (art.type.FunctionalService) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.FunctionalService" +" "+ na +  " = (art.type.FunctionalService) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.FunctionalService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+")
+		end 
 	end
 	
 if self.~operation.size >0 then
@@ -1364,9 +3021,45 @@ if self.~operation.size >0 then
 
 	self.~operation.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class ControlService {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.FunctionalService(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.FunctionalService(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.~operation.size > 0) then
+		self.~operation.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class ControlService {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1375,17 +3068,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.ControlService" +" "+ na +  " = (art.type.ControlService) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.ControlService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.ControlService" +" "+ na +  " = (art.type.ControlService) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.ControlService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+")
+		end 
 	end
 	
 if self.~operation.size >0 then
@@ -1410,9 +3126,45 @@ if self.~operation.size >0 then
 
 	self.~operation.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class AbstractPort {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.ControlService(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.ControlService(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.~operation.size > 0) then
+		self.~operation.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class AbstractPort {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1421,17 +3173,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = (art.type.AbstractPort) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.AbstractPort" +" "+ na +  " = (art.type.AbstractPort) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.AbstractPort" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1447,9 +3222,40 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
 ")	
 	end
-end 
- }
-aspect class Port {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.AbstractPort(")
+			if (not self.role.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("role == \""+self.role.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.AbstractPort(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.service.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class Port {
 method  pass1create(ctx:Context):Void from CardinalityElement is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1458,17 +3264,40 @@ method  pass1create(ctx:Context):Void from CardinalityElement is do
 		ctx.res.append("art.type.Port" +" "+ na +  " = (art.type.Port) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPort();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Port" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Port" +" "+ na +  " = (art.type.Port) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Port" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void from CardinalityElement is do 
@@ -1496,9 +3325,61 @@ method  pass2set(ctx:Context):Void from CardinalityElement is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
 ")	
 	end
-end 
- }
-aspect class PortCollection {
+end
+method  pointcut2droolsPass1(ctx:Context):Void from CardinalityElement is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Port(")
+			if (not self.isOptional.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("isOptional == "+self.isOptional.toString)
+		i := i+1	
+	end
+	if (not self.lower.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("lower == "+self.lower.toString)
+		i := i+1	
+	end
+	if (not self.upper.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("upper == "+self.upper.toString)
+		i := i+1	
+	end
+	if (not self.role.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("role == \""+self.role.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void from CardinalityElement is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Port(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.service.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class PortCollection {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1507,17 +3388,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.PortCollection" +" "+ na +  " = (art.type.PortCollection) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.PortCollection" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.PortCollection" +" "+ na +  " = (art.type.PortCollection) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.PortCollection" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+")
+		end 
 	end
 	
 if self.ids.size >0 then
@@ -1550,9 +3454,56 @@ if self.ids.size >0 then
 
 	self.ids.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class PortId {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.PortCollection(")
+			if (not self.role.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("role == \""+self.role.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.ids.size >0 then
+
+	self.ids.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.PortCollection(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.ids.size > 0) then
+		self.ids.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("ids contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.service.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.ids.size >0 then
+
+	self.ids.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class PortId {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1561,17 +3512,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.PortId" +" "+ na +  " = (art.type.PortId) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.PortId" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.PortId" +" "+ na +  " = (art.type.PortId) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.PortId" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1579,9 +3553,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-aspect class Attribute {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.PortId(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.PortId(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class Attribute {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1590,17 +3584,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.Attribute" +" "+ na +  " = (art.type.Attribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Attribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Attribute" +" "+ na +  " = (art.type.Attribute) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Attribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1612,9 +3629,33 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
 	end
-end 
- }
-aspect class BasicAttribute {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Attribute(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Attribute(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class BasicAttribute {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1623,17 +3664,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = (art.type.BasicAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = (art.type.BasicAttribute) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1649,9 +3713,40 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
 ")	
 	end
-end 
- }
-aspect class Dictionary {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.BasicAttribute(")
+			if (not self.defaultValue.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("defaultValue == \""+self.defaultValue.toString+"\"")
+		i := i+1	
+	end
+	if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.BasicAttribute(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+ctx.res.append(")\n")
+end
+
+}aspect class Dictionary {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1660,17 +3755,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.Dictionary" +" "+ na +  " = (art.type.Dictionary) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.Dictionary" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.Dictionary" +" "+ na +  " = (art.type.Dictionary) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.Dictionary" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+")
+		end 
 	end
 	
 if self.keys.size >0 then
@@ -1703,9 +3821,53 @@ if self.keys.size >0 then
 
 	self.keys.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class DictionaryDefaultValue {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.Dictionary(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.keys.size >0 then
+
+	self.keys.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.Dictionary(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (not self.~valueType.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("~valueType == "+ctx.cache.getValue(self.~valueType)+"Decl")
+	end
+	if (self.keys.size > 0) then
+		self.keys.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("keys contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(", ")
+		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+	end
+ctx.res.append(")\n")
+
+if self.keys.size >0 then
+
+	self.keys.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class DictionaryDefaultValue {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1714,17 +3876,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = (art.type.DictionaryDefaultValue) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = (art.type.DictionaryDefaultValue) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1736,9 +3921,36 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
 ")	
 	end
-end 
- }
-}
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.type.DictionaryDefaultValue(")
+			if (not self.key.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("key == \""+self.key.toString+"\"")
+		i := i+1	
+	end
+	if (not self.~value.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.type.DictionaryDefaultValue(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}}
 package implem {
 aspect class ComponentImplementation {
 method  pass1create(ctx:Context):Void is do 
@@ -1749,23 +3961,59 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = (art.implem.ComponentImplementation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = (art.implem.ComponentImplementation) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 	end 
- }
-aspect class FractalComponent {
+ 	end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.implem.ComponentImplementation(")
+		ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.implem.ComponentImplementation(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class FractalComponent {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1774,17 +4022,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = (art.implem.FractalComponent) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = (art.implem.FractalComponent) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1796,9 +4067,36 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ContentDesc"+"(\""+self.contentDesc.toString+"\");
 ")	
 	end
-end 
- }
-aspect class OSGiComponent {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.implem.FractalComponent(")
+			if (not self.controllerDesc.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("controllerDesc == \""+self.controllerDesc.toString+"\"")
+		i := i+1	
+	end
+	if (not self.contentDesc.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("contentDesc == \""+self.contentDesc.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.implem.FractalComponent(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class OSGiComponent {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1807,17 +4105,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = (art.implem.OSGiComponent) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = (art.implem.OSGiComponent) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1825,9 +4146,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ImplementingClass"+"(\""+self.implementingClass.toString+"\");
 ")	
 	end
-end 
- }
-aspect class TypeImplementation {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.implem.OSGiComponent(")
+			if (not self.implementingClass.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("implementingClass == \""+self.implementingClass.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.implem.OSGiComponent(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class TypeImplementation {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1836,23 +4177,59 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = (art.implem.TypeImplementation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = (art.implem.TypeImplementation) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
- 	end 
- }
-aspect class OSGiType {
+ 	end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.implem.TypeImplementation(")
+		ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.implem.TypeImplementation(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class OSGiType {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1861,17 +4238,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = (art.implem.OSGiType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.implem.OSGiType" +" "+ na +  " = (art.implem.OSGiType) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.implem.OSGiType" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1879,9 +4279,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"GenerateInstanceBundle"+"("+self.generateInstanceBundle.toString+");
 ")	
 	end
-end 
- }
-}
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.implem.OSGiType(")
+			if (not self.generateInstanceBundle.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("generateInstanceBundle == "+self.generateInstanceBundle.toString)
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.implem.OSGiType(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}}
 package group {
 aspect class Group {
 method  pass1create(ctx:Context):Void is do 
@@ -1892,17 +4312,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.group.Group" +" "+ na +  " = (art.group.Group) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.group.Group" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.group.Group" +" "+ na +  " = (art.group.Group) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.group.Group" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+")
+		end 
 	end
 	end 
 method  pass2set(ctx:Context):Void is do 
@@ -1910,9 +4353,29 @@ method  pass2set(ctx:Context):Void is do
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
 	end
-end 
- }
-aspect class TypeGroup {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.group.Group(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.group.Group(")
+		ctx.res.append("this == "+varName+"Decl")
+		ctx.res.append(")\n")
+end
+
+}aspect class TypeGroup {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1921,17 +4384,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = (art.group.TypeGroup) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.group.TypeGroup" +" "+ na +  " = (art.group.TypeGroup) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.group.TypeGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+")
+		end 
 	end
 	
 if self.subGroups.size >0 then
@@ -1963,9 +4449,51 @@ if self.subGroups.size >0 then
 
 	self.subGroups.each{c|c.pass2set(ctx)}
 end
-end 
- }
-aspect class InstanceGroup {
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.group.TypeGroup(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.group.TypeGroup(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.types.size > 0) then
+		self.types.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.subGroups.size > 0) then
+		self.subGroups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}aspect class InstanceGroup {
 method  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
@@ -1974,17 +4502,40 @@ method  pass1create(ctx:Context):Void is do
 		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = (art.group.InstanceGroup) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if ("+" "+ na + " " + "== null){
-"  )
-		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
 ")
-		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+			ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+")
+			ctx.res.append("	uniqueobjects.put(\""+na+"\","+ na+");
 ")
 		ctx.res.append("}
-"  )
-		
+")	
 	else
-		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
+			var scopeName : String init "scope_"+ctx.getGenerateName
+			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
+			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
+				ctx.res.append(scopeName+".add("+elt+");")
+			}
+			
+			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
+				ctx.res.append("	uniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
+			ctx.res.append("}
 ")
+			
+			ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = (art.group.InstanceGroup) uniqueObjectsWithScope.get("+scopeName+").get(\""+na+"\");
+")
+			ctx.res.append("if ("+" "+ na + " " + "== null){
+")
+				ctx.res.append("	"+na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+")
+				ctx.res.append("	uniqueobjectsWithScope.get("+scopeName+").put(\""+na+"\","+ na+");
+")
+			ctx.res.append("}
+")
+		else
+			ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+")
+		end 
 	end
 	
 if self.subGroups.size >0 then
@@ -2016,7 +4567,49 @@ if self.subGroups.size >0 then
 
 	self.subGroups.each{c|c.pass2set(ctx)}
 end
-end 
- }
-}
+end
+method  pointcut2droolsPass1(ctx:Context):Void is do 
+ 			var i : Integer init 0
+		var varName : String init ctx.getGenerateName()
+		ctx.cache.put(self,"$"+varName)
+		ctx.res.append("$"+varName+"Decl: "+"art.group.InstanceGroup(")
+			if (not self.name.isVoid()) then
+		if i > 0 then
+			ctx.res.append(", ")
+		end
+		ctx.res.append("name == \""+self.name.toString+"\"")
+		i := i+1	
+	end
+ctx.res.append(")\n")
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pointcut2droolsPass1(ctx)}
+end
+end
+method  pointcut2droolsPass2(ctx:Context):Void is do 
+ 			var varName : String init ctx.cache.getValue(self)
+		ctx.res.append(varName+": art.group.InstanceGroup(")
+		ctx.res.append("this == "+varName+"Decl")
+			if (self.instances.size > 0) then
+		self.instances.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("instances contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+	if (self.subGroups.size > 0) then
+		self.subGroups.each{o |
+			ctx.res.append(", ")
+			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
+		}
+	end
+ctx.res.append(")\n")
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pointcut2droolsPass2(ctx)}
+end
+end
+
+}}
 }
