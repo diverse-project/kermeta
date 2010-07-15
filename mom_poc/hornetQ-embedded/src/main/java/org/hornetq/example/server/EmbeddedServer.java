@@ -45,6 +45,8 @@ public class EmbeddedServer {
 
     public static void main(String[] args) throws Exception {
 
+
+
             // Step 1. Create the Configuration, and set the properties accordingly
          Configuration configuration = new ConfigurationImpl();
          //configuration.setPersistenceEnabled(true);
@@ -67,6 +69,7 @@ public class EmbeddedServer {
          configuration.setClusterUser("art2");
          configuration.setClusterPassword("art2");
 
+         configuration.setClustered(true);
 
 
          //configuration.getConnectorConfigurations().put("netty",new TransportConfiguration(NettyConnectorFactory.class.getName()));
