@@ -1,5 +1,7 @@
-#Mon Jul 05 17:25:56 CEST 2010
+#Tue Jul 06 10:53:40 CEST 2010
 eclipse.preferences.version=1
 encoding/sitac.ecorediag=UTF-8
+encoding/sitacCtrl.ecore=UTF-8
+encoding/sitacCtrl.ecorediag=UTF-8
 encoding/sitacView.ecore=UTF-8
 encoding/sitacView.ecorediag=UTF-8
