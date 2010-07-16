@@ -8,7 +8,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.interpreter,
- net.sourceforge.lpg.lpgjavaruntime,
  org.eclipse.ui.ide,
  org.kermeta.eclipse.ocl.parser
 Bundle-ActivationPolicy: lazy
@@ -19,7 +18,8 @@ Export-Package: fr.irisa.triskell.kermeta.ocl,
  fr.irisa.triskell.kermeta.ocl.ui.popup.actions,
  org.kermeta.compiler.runtime.basetypes.ocl.helpers,
  org.kermeta.interpreter.runtime.basetypes.ocl.helpers
-Import-Package: org.eclipse.ocl,
+Import-Package: lpg.runtime;version="2.0.17",
+ org.eclipse.ocl,
  org.eclipse.ocl.cst,
  org.eclipse.ocl.cst.impl,
  org.eclipse.ocl.cst.util,
