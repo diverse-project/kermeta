@@ -7,19 +7,21 @@ operation generateOne(PropertyName:String,str:Boolean):String is do
 var _res: StringBuffer init StringBuffer.new
 _res.append("\tif (not self.")
 _res.append(PropertyName)
-_res.append(".isVoid()) then\n\t\tif i > 0 then\n\t\t\tctx.res.append(\", \")\n\t\tend\n\t\tctx.res.append(\"")
-_res.append(PropertyName)
-_res.append(" == ")
+_res.append(".isVoid()) then\n\t\tif i > 0 then\n\t\t\tctx.res.append(\", \")\n\t\tend\n")
 if str then
-_res.append("\\\"")
-end
-_res.append("\"+self.")
+_res.append("\t\tctx.res.append(\"")
 _res.append(PropertyName)
-_res.append(".toString")
-if str then
-_res.append("+\"\\\"\"")
+_res.append("\"+ctx.convert(self.")
+_res.append(PropertyName)
+_res.append(".toString))\n")
+else
+_res.append("\t\tctx.res.append(\"")
+_res.append(PropertyName)
+_res.append(" == \"+self.")
+_res.append(PropertyName)
+_res.append(".toString)\n")
 end
-_res.append(")\n\t\ti := i+1\t\n\tend\n")
+_res.append("\t\ti := i+1\t\n\tend\n")
 result := _res.toString
 end
 }

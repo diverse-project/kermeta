@@ -16,13 +16,13 @@ require kermeta
 //require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
   
-require "Header.kmt"  
-require "HeaderLink.kmt"  
-require "Pass1.kmt" 
-require "PropertyCardinalityOne.kmt" 
-require "PropertyCardinalityMany.kmt" 
-require "ReferenceCardinalityMany.kmt" 
-require "ReferenceCardinalityOne.kmt" 
+require "./advice/Header.kmt"  
+require "./advice/HeaderLink.kmt"  
+require "./advice/Pass1.kmt" 
+require "./advice/PropertyCardinalityOne.kmt" 
+require "./advice/PropertyCardinalityMany.kmt" 
+require "./advice/ReferenceCardinalityMany.kmt" 
+require "./advice/ReferenceCardinalityOne.kmt" 
 
 require "./pointcut/Pass1.kmt"
 require "./pointcut/Pass2.kmt"
@@ -39,7 +39,8 @@ using ecore
 class Main {
 	
 	operation main() : Void is do
-		var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+		//var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+		var uriecore : String init "platform:/resource/GenericComposition/SequenceDiagram-Example/metamodel/SequenceDiagram.ecore"
 	
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new

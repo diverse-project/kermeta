@@ -34,7 +34,8 @@ class Main {
 	operation initialize():Context is do
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
-		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new
+		ctx.helper := String2DroolsHelper.new
 		result:=ctx		
 	end
 	
@@ -56,7 +57,9 @@ class Main {
 class Context{
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
+		
 	reference lastgenerateName : String
+	reference i : Integer
 	
 	operation getGenerateName():String is do
 		if (i.isVoid) then i:= 0 end
@@ -64,6 +67,13 @@ class Context{
 		lastgenerateName := result
 		i:=i+1
 	end
-	reference i : Integer	
+	
+	operation convert(val : String) : String is 
+	do 
+		result := " == "+"\\""+val+"\\""
+		if val.contains("*") then
+			result := " matches "+"\\""+val.replace("*",".*")+"\\""
+		end
+	end
 }
 
