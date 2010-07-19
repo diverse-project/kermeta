@@ -127,7 +127,7 @@ object Main extends LogAspect {
     //inputFile = "/Users/ffouquet/NetBeansProjects/POC/PJulien/TestParser/resources/TestFouquetsParser.km"
     
     
-    inputFile = "/Users/ffouquet/Desktop/GenericComposition/Composer/composer.km"
+  //  inputFile = "/Users/ffouquet/Desktop/GenericComposition/Composer/composer.km"
 
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
