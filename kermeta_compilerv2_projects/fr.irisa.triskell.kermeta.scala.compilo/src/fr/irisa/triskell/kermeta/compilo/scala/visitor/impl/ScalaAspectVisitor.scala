@@ -90,7 +90,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
           var i = 0
           for(a <- listSuperTypes){
             if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") }
-            res1.append(Util.protectScalaKeyword(Util.getQualifiedNamedBase(a.asInstanceOf[Class].getTypeDefinition)))
+            res1.append(Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(a.asInstanceOf[Class].getTypeDefinition)))
             par.generateBindingParamerterClass(a.asInstanceOf[Class],res1)
             i = i + 1
           }

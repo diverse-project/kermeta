@@ -138,6 +138,32 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
     res.append("]")
 
   }
+  
+  /* TO MERGE */
+  def generateInstanceOf(res:StringBuilder, methodName : String, o : fr.irisa.triskell.kermeta.language.structure.Object)={
+    res.append("var tempC"+o.hashCode+" = ")
+    if (o.isInstanceOf[TypeLiteral]){
+      o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
+    }
+    else{
+      o.asInstanceOf[ObjectAspect].generateScalaCode(res)
+    }
+res.append(";\n")    
+
+    
+    generateTarget(res);
+    res.append(".");
+    res.append(methodName)
+    
+    res.append("[")
+
+    res.append("tempC"+o.hashCode)
+    
+    res.append("]")
+  }  
+  
+  
+  
 
   override def generateScalaCode(res : StringBuilder) : Unit = {
     log.debug("CallFeature={}",this.getName())
@@ -152,7 +178,10 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
       case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
-      case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
+      //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
+      
+      case "isInstanceOf" => generateInstanceOf(res,"isInstanceOf",this.getParameters.get(0) )
+        
       case "isInstance" => {generateParam(res,"","") ;res.append(".isInstanceOf");generateInstanceOf(res, this.getTarget)}
       case "isVoid" => { res.append("kermeta.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
       case "add"
