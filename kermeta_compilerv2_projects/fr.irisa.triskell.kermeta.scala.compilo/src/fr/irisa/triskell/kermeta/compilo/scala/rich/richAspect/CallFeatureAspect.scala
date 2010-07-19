@@ -141,6 +141,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
   
   /* TO MERGE */
   def generateInstanceOf(res:StringBuilder, methodName : String, o : fr.irisa.triskell.kermeta.language.structure.Object)={
+    res.append("{")
     res.append("var tempC"+o.hashCode+" = ")
     if (o.isInstanceOf[TypeLiteral]){
       o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
@@ -160,6 +161,7 @@ res.append(";\n")
     res.append("tempC"+o.hashCode)
     
     res.append("]")
+    res.append("}")
   }  
   
   
