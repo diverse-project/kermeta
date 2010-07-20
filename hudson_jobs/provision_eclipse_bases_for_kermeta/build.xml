@@ -136,8 +136,8 @@
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		<!-- FROM SCALA -->
-		<antcall target="provision_feature">
-    		<param name="feature.name" value="ch.epfl.lamp.sdt.feature.group"/>
+		<antcall target="provision_feature">  
+    		<param name="feature.name" value="ch.epfl.lamp.sdt.feature.group, org.eclipse.contribution.weaving.feature.group"/>
 			<param name="feature.repository" value="${scala.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
