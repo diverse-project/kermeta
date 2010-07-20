@@ -16,3 +16,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader;bundle-version="[1.2.0,2.0.0)"
 Bundle-Activator: org.kermeta.smartadapters.diva.toDrools.ui.Activator
 Bundle-ClassPath: .
+Bundle-ActivationPolicy: lazy
