@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Standalone
-Bundle-SymbolicName: org.kermeta.smartadatpers.drools5.diva.standalone
+Bundle-SymbolicName: org.kermeta.smartadatpers.drools5.diva.standalone;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: standalone.jar,
  lib/antlr-runtime-3.1.1.jar,
@@ -413,3 +413,4 @@ Export-Package: .,
  org.xml.sax.helpers,
  schema,
  src.fr.irisa.triskell.eclipse.wizard
+Bundle-ActivationPolicy: lazy
