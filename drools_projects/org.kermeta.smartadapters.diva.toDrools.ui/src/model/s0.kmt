@@ -14,7 +14,7 @@ package pattern;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+require "platform:/lookup/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
 require "s1.kmt"
 
 using kermeta::standard

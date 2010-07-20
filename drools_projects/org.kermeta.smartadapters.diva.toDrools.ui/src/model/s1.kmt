@@ -12,7 +12,7 @@ package patternframework;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+require "platform:/lookup/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
 require "s0.kmt"
 
 using kermeta::standard
