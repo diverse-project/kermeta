@@ -3,15 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Ui
 Bundle-SymbolicName: org.kermeta.smartadapters.diva.toDrools.ui;singleton:=true
 Bundle-Version: 1.0.0
-Export-Package: org.kermeta.smartadapters.diva.toDrools.ui,
- org.smartadapters.core,
- org.smartadapters.core.adaptations,
- org.smartadapters.core.adaptations.impl,
- org.smartadapters.core.adaptations.util,
- org.smartadapters.core.adaptationsScalaAspect,
- org.smartadapters.core.impl,
- org.smartadapters.core.util,
- org.smartadapters.coreScalaAspect
+Export-Package: org.kermeta.smartadapters.diva.toDrools.ui
 Import-Package: org.eclipse.jface.action,
  org.eclipse.jface.viewers,
  org.eclipse.ui,
@@ -23,5 +15,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.logging;bundle-version="[1.0.4,2.0.0)",
  org.kermeta.io.loader;bundle-version="[1.2.0,2.0.0)"
 Bundle-Activator: org.kermeta.smartadapters.diva.toDrools.ui.Activator
-Bundle-ClassPath: lib/kermeta.compiled.DroolsGenerator-0.0.1-SNAPSHOT.jar,
- .
+Bundle-ClassPath: .
