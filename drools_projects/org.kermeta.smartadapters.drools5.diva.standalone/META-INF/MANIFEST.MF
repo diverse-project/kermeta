@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Standalone
 Bundle-SymbolicName: org.kermeta.smartadatpers.drools5.diva.standalone;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-ClassPath: standalone.jar,
+Bundle-ClassPath: .,
  lib/antlr-runtime-3.1.1.jar,
  lib/core-3.4.2.v_883_R34x.jar,
  lib/drools-api-5.0.1.jar,
@@ -414,3 +414,7 @@ Export-Package: .,
  schema,
  src.fr.irisa.triskell.eclipse.wizard
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.kermeta.smartadapters.drools.standalone.Activator
+Import-Package: org.eclipse.ui.plugin,
+ org.osgi.framework
+Require-Bundle: org.eclipse.core.runtime
