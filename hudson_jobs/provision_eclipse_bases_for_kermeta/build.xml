@@ -14,16 +14,17 @@
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
 	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
 	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
+	<property name="scala.official.repository" value="http://download.scala-ide.org/update-current"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
 	<target name="all" depends="">
-	   <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
+	    <antcall target="provision_win32_base_for_kermeta"/>
+	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
+	    <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/>
 		<antcall target="provision_linux_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_linux_x86_base_for_kermeta"/>
-	    <antcall target="provision_win32_base_for_kermeta"/>
-	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
 	</target>
 
 
@@ -132,6 +133,12 @@
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.eclipse.sdk.feature.group, org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt.feature.group, org.eclipse.zest.feature.group, org.eclipse.stp.sca.feature.feature.group, org.eclipse.stp.sca.feature.xmleditors.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<!-- FROM SCALA -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="ch.epfl.lamp.sdt.feature.group"/>
+			<param name="feature.repository" value="${scala.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		
