@@ -1,0 +1,62 @@
+    dialect "java"
+
+import org.drools.solver.core.score.calculator.SimpleScoreCalculator;
+import org.drools.solver.core.score.constraint.ConstraintType;
+
+import org.drools.solver.core.score.constraint.IntConstraintOccurrence;
+
+import org.eclipse.emf.ecore.*;
+
+import domain.EcoreSolution;
+
+global SimpleScoreCalculator scoreCalculator;
+
+// ############################################################################
+// Soft constraints
+// ############################################################################
+/*
+rule "ClassesWithTheSameName"
+when
+		$q1 : EClass( $classifierID: classifierID , $name: name)
+		$q2 : EClass( classifierID > $classifierID, name == $name )
+		EPackage(EClassifiers contains $q1)
+		EPackage(EClassifiers contains $q2)
+then
+		insertLogical(new IntConstraintOccurrence("ClassesWithTheSameName", -1000));
+		//System.out.println("q1 " + Integer.toString($q1.getClassifierID()) + " " + $q1.getName());
+		//System.out.println("q2 " + Integer.toString($q2.getClassifierID()) + " " + $q2.getName());
+end
+*/
+/*
+rule "ClassNameNull"
+    when
+        $q1 : EClass(name == null);
+        EReference(EType == $q1);
+    then
+        insertLogical(new IntConstraintOccurrence("ClassNameNull", -1, $q1));
+end
+*/
+
+rule "ClassesNotReferenced"
+    when
+        $q1 : EClass();
+        $q2 : EPackage(EClassifiers contains $q1);
+        not( exists ( EReference(EType == $q1) ));
+    then
+        insertLogical(new IntConstraintOccurrence("ClassesNotReferenced", -1, $q1));
+end
+
+// ############################################################################
+// Calculate score
+// ############################################################################
+
+rule "ConstraintsBroken"
+    when
+        $occurrenceCount : Number() from accumulate(
+            IntConstraintOccurrence($weight: weight),
+            sum($weight)
+        );
+
+    then
+        scoreCalculator.setScore( $occurrenceCount.intValue() );
+end

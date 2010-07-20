@@ -1,0 +1,120 @@
+import org.drools.solver.core.score.calculator.SimpleScoreCalculator;
+import org.drools.solver.core.score.constraint.UnweightedConstraintOccurrence;
+import org.drools.solver.core.score.constraint.ConstraintType;
+import org.drools.solver.core.score.constraint.IntConstraintOccurrence;
+import org.eclipse.emf.ecore.*;
+
+global SimpleScoreCalculator scoreCalculator;
+
+
+
+rule "ceoAge"
+when
+	$var1: EReference(name == "age")
+	$var2: EClass(EStructuralFeatures contains $var1)
+	$var3: EReference(name == "employee", EType == $var2)
+	$var4: EClass(name == "Company", EStructuralFeatures contains $var3)
+	EPackage(EClassifiers contains $var4)
+then
+	//System.out.println("ceoAge is applicable");
+	insertLogical(new IntConstraintOccurrence("ceoAge", 10));
+end
+
+rule "ceoAge1"
+when
+	$var5: EReference(name == "age")
+	$var6: EClass(EStructuralFeatures contains $var5)
+	$var7: EReference(name == "ceo", EType == $var6)
+	$var8: EClass(name == "Company", EStructuralFeatures contains $var7)
+	EPackage(EClassifiers contains $var8)
+then
+	//System.out.println("ceoAge1 is applicable");
+	insertLogical(new IntConstraintOccurrence("ceoAge1", 10));
+end
+
+rule "notyoungEmployee"
+when
+	$var9: EDataType(name == "EInt")
+	$var10: EAttribute(name == "age", EAttributeType == $var9)
+	$var11: EClass(name == "Person", EAllAttributes contains $var10)
+	EPackage(EClassifiers contains $var11)
+then
+	//System.out.println("notyoungEmployee is applicable");
+	insertLogical(new IntConstraintOccurrence("notyoungEmployee", 10));
+end
+
+rule "diff"
+when
+	$var12: EReference(name == "employee")
+	$var13: EClass(name == "Company", EStructuralFeatures contains $var12)
+	EPackage(EClassifiers contains $var13)
+then
+	//System.out.println("diff is applicable");
+	insertLogical(new IntConstraintOccurrence("diff", 10));
+end
+
+rule "diff1"
+when
+	$var14: EReference(name == "employee")
+	$var15: EClass(name == "Company", EStructuralFeatures contains $var14)
+	EPackage(EClassifiers contains $var15)
+then
+	//System.out.println("diff1 is applicable");
+	insertLogical(new IntConstraintOccurrence("diff1", 10));
+end
+
+rule "diff2"
+when
+	$var16: EReference(name == "forename")
+	$var17: EClass(EStructuralFeatures contains $var16)
+	$var18: EReference(name == "employee", EType == $var17)
+	$var19: EClass(name == "Company", EStructuralFeatures contains $var18)
+	EPackage(EClassifiers contains $var19)
+then
+	//System.out.println("diff2 is applicable");
+	insertLogical(new IntConstraintOccurrence("diff2", 10));
+end
+
+rule "diff3"
+when
+	$var20: EReference(name == "forename")
+	$var21: EClass(EStructuralFeatures contains $var20)
+	$var22: EReference(name == "employee", EType == $var21)
+	$var23: EClass(name == "Company", EStructuralFeatures contains $var22)
+	EPackage(EClassifiers contains $var23)
+then
+	//System.out.println("diff3 is applicable");
+	insertLogical(new IntConstraintOccurrence("diff3", 10));
+end
+
+rule "duprie"
+when
+	$var24: EReference(name == "owner")
+	$var25: EClass(name == "Company", EStructuralFeatures contains $var24)
+	EPackage(EClassifiers contains $var25)
+then
+	//System.out.println("duprie is applicable");
+	insertLogical(new IntConstraintOccurrence("duprie", 10));
+end
+
+rule "duprie1"
+when
+	$var26: EReference(name == "owner")
+	$var27: EClass(name == "Company", EStructuralFeatures contains $var26)
+	EPackage(EClassifiers contains $var27)
+then
+	//System.out.println("duprie1 is applicable");
+	insertLogical(new IntConstraintOccurrence("duprie1", 10));
+end
+
+rule "duprie2"
+when
+	$var28: EDataType(name == "EString")
+	$var29: EAttribute(name == "forename", EAttributeType == $var28)
+	$var30: EClass(name == "Person", EAllAttributes contains $var29)
+	EPackage(EClassifiers contains $var30)
+then
+	//System.out.println("duprie2 is applicable");
+	insertLogical(new IntConstraintOccurrence("duprie2", 10));
+end
+

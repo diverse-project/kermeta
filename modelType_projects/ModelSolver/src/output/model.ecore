@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="CP1252"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Model">
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Company">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employee" eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ceo" eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner"/>
+  </eClassifiers>
+</ecore:EPackage>

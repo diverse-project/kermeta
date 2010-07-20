@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localSearchSolver>
+    <scoreDrl>/input/ModelRules.drl</scoreDrl>
+    <scoreDrl>/config/ModelSolverScoreRules.drl</scoreDrl>
+    <scoreDefinition>
+        <scoreDefinitionType>SIMPLE</scoreDefinitionType>
+    </scoreDefinition>
+    <termination>
+        <terminationCompositionStyle>OR</terminationCompositionStyle>
+        <maximumStepCount>100</maximumStepCount>
+        <!--<scoreAttained>0</scoreAttained>-->
+    </termination>
+    <selector>
+        <moveFactoryClass>movefactory.ModelSolverMoveFactory</moveFactoryClass>
+    </selector>
+    <accepter>
+        <completeSolutionTabuSize>1000</completeSolutionTabuSize>
+    </accepter>
+    <forager>
+        <foragerType>MAX_SCORE_OF_ALL</foragerType>
+    </forager>
+</localSearchSolver>
