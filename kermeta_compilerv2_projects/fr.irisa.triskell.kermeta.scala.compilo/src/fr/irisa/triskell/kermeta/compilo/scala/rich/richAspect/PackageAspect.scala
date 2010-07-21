@@ -37,7 +37,6 @@ trait PackageAspect extends ObjectAspect with IVisitable with LogAspect {
     return res
   }
 
-
 	
 	
 }
