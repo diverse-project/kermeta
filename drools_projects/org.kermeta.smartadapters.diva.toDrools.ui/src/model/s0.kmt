@@ -6,9 +6,6 @@
  * Authors  : 
  *            barais
  */
-@mainClass "pattern::Main"
-@mainOperation "main"
-
 
 package pattern;
 
@@ -20,30 +17,6 @@ require "s1.kmt"
 using kermeta::standard
 using kermeta::persistence
 
-class Main {
-
-	operation initialize():Context is do
-		var ctx : Context init Context.new
-		ctx.res := kermeta::utils::StringBuffer.new
-		ctx.cache := kermeta::utils::Hashtable<Object,String>.new
-		result:=ctx		
-	end
-	
-	
-	
-	operation main(uri:String) : Void is do
-		var ctx : Context init self.initialize()
-		var rep : EMFRepository  init EMFRepository.new
-		var res : EMFResource 
-		res ?= rep.createResource(uri, "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore")
-		res.load
-		var s : System 
-		s?= res.one()
-		s.pass1create(ctx)
-		s.pass2set(ctx)
-		stdio.writeln(ctx.res.toString) 
-	end
-}
 class Context{
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
