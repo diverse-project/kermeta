@@ -39,8 +39,8 @@ using ecore
 class Main {
 	
 	operation main() : Void is do
-		//var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
-		var uriecore : String init "platform:/resource/GenericComposition/SequenceDiagram-Example/metamodel/SequenceDiagram.ecore"
+		var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+		//var uriecore : String init "platform:/resource/GenericComposition/SequenceDiagram-Example/metamodel/SequenceDiagram.ecore"
 	
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
@@ -351,9 +351,9 @@ aspect class EAttribute{
 	do
 		if self.name != "pid" then
 			if (self.many) then
-				ctx.res.append(ctx.propertytemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+				ctx.res.append(ctx.propertytemplatemanyPC.generateMany(self.name,isString(self.eType)))
 			else
-				ctx.res.append(ctx.propertytemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+				ctx.res.append(ctx.propertytemplatePC.generateOne(self.name,isString(self.eType)))
 			end
 		end
 	end
@@ -410,9 +410,9 @@ aspect class EReference{
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
 		if (self.many) then
-			ctx.res.append(ctx.referencetemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+			ctx.res.append(ctx.referencetemplatemanyPC.generateMany(self.name))
 		else
-			ctx.res.append(ctx.referencetemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"))  )
+			ctx.res.append(ctx.referencetemplatePC.generateOne(self.name))
 		end	
 	end
 } 

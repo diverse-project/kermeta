@@ -35,7 +35,6 @@ class Main {
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new
-		ctx.helper := String2DroolsHelper.new
 		result:=ctx		
 	end
 	
