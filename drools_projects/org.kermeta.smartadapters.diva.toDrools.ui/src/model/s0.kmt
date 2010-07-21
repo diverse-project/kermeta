@@ -20,10 +20,36 @@ require "s1.kmt"
 using kermeta::standard
 using kermeta::persistence
 
+class Main {
+
+	operation initialize():Context is do
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new
+		result:=ctx		
+	end
+	
+	
+	
+	operation main(uri:String) : Void is do
+		var ctx : Context init self.initialize()
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.createResource(uri, "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore")
+		res.load
+		var s : System 
+		s?= res.one()
+		s.pass1create(ctx)
+		s.pass2set(ctx)
+		stdio.writeln(ctx.res.toString) 
+	end
+}
 class Context{
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
+		
 	reference lastgenerateName : String
+	reference i : Integer
 	
 	operation getGenerateName():String is do
 		if (i.isVoid) then i:= 0 end
@@ -31,7 +57,14 @@ class Context{
 		lastgenerateName := result
 		i:=i+1
 	end
-	reference i : Integer	
+	
+	operation convert(val : String) : String is 
+	do 
+		result := " == "+"\""+val+"\""
+		if val.contains("*") then
+			result := " matches "+"\""+val.replace("*",".*")+"\""
+		end
+	end
 }
 
 package art {
@@ -95,7 +128,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -167,7 +200,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -321,7 +354,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -471,7 +504,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -547,7 +580,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -645,7 +678,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -785,14 +818,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state == \""+self.state.toString+"\"")
+		ctx.res.append("state"+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -991,14 +1024,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state == \""+self.state.toString+"\"")
+		ctx.res.append("state"+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1231,14 +1264,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state == \""+self.state.toString+"\"")
+		ctx.res.append("state"+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1406,7 +1439,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id == \""+self.id.toString+"\"")
+		ctx.res.append("id"+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1494,7 +1527,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id == \""+self.id.toString+"\"")
+		ctx.res.append("id"+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1590,7 +1623,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id == \""+self.id.toString+"\"")
+		ctx.res.append("id"+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1739,7 +1772,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		ctx.res.append("~value"+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1917,7 +1950,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		ctx.res.append("~value"+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1993,7 +2026,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		ctx.res.append("~value"+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2073,14 +2106,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("key == \""+self.key.toString+"\"")
+		ctx.res.append("key"+ctx.convert(self.key.toString))
 		i := i+1	
 	end
 	if (not self.~value.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		ctx.res.append("~value"+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2209,7 +2242,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2388,7 +2421,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2567,7 +2600,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2708,7 +2741,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2830,7 +2863,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2938,7 +2971,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3031,7 +3064,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3136,7 +3169,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3232,14 +3265,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role == \""+self.role.toString+"\"")
+		ctx.res.append("role"+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3356,14 +3389,14 @@ method  pointcut2droolsPass1(ctx:Context):Void from CardinalityElement is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role == \""+self.role.toString+"\"")
+		ctx.res.append("role"+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3464,14 +3497,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role == \""+self.role.toString+"\"")
+		ctx.res.append("role"+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3563,7 +3596,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3639,7 +3672,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3723,14 +3756,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("defaultValue == \""+self.defaultValue.toString+"\"")
+		ctx.res.append("defaultValue"+ctx.convert(self.defaultValue.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3831,7 +3864,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3931,14 +3964,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("key == \""+self.key.toString+"\"")
+		ctx.res.append("key"+ctx.convert(self.key.toString))
 		i := i+1	
 	end
 	if (not self.~value.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value == \""+self.~value.toString+"\"")
+		ctx.res.append("~value"+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4077,14 +4110,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("controllerDesc == \""+self.controllerDesc.toString+"\"")
+		ctx.res.append("controllerDesc"+ctx.convert(self.controllerDesc.toString))
 		i := i+1	
 	end
 	if (not self.contentDesc.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("contentDesc == \""+self.contentDesc.toString+"\"")
+		ctx.res.append("contentDesc"+ctx.convert(self.contentDesc.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4156,7 +4189,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("implementingClass == \""+self.implementingClass.toString+"\"")
+		ctx.res.append("implementingClass"+ctx.convert(self.implementingClass.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4363,7 +4396,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4459,7 +4492,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4577,7 +4610,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")

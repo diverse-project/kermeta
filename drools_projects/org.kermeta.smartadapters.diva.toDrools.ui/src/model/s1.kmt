@@ -442,7 +442,7 @@ operation  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("expression == \""+self.expression.toString+"\"")
+		ctx.res.append("expression"+ctx.convert(self.expression.toString))
 		i := i+1	
 	end
 	if (not self.language.isVoid()) then
@@ -525,7 +525,7 @@ operation  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name == \""+self.name.toString+"\"")
+		ctx.res.append("name"+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
