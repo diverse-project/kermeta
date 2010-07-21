@@ -231,7 +231,6 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
                 if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("kermeta")){//!IsObjectClassChildren(par)){
                     viewDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
                 }
-					
                 viewDef.append("\n")
 
 
@@ -253,7 +252,17 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
                 if (!IsAnExceptionChildren(par)){
                     viewDef.append(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with ")
                 }
-                 viewDef.append( kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
+                 viewDef.append( kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString )
+                 var superClassName = cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName
+                 if (!(classOf[Object].getCanonicalName.equals(superClassName)
+                       || classOf[fr.irisa.triskell.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName)) ){
+                       viewDef.append(" with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
+                       println("toto " +superClassName)
+                }else{
+                    println(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName)
+                }
+                viewDef.append(" \n")
+
                 implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n"
                 implicitDef append " implicit def richAspect" + param.toString +"(v : "+ packageName.toString+"."+par.getName()+"Aspect" + param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+ param.toString +"]\n"
 	

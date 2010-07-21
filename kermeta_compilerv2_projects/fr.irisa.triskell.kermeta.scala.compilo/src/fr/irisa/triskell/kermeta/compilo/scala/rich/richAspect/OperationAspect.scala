@@ -15,15 +15,16 @@ trait OperationAspect extends ObjectAspect with LogAspect {
     if (!Util.hasCompilerIgnoreTag(this)){
       log.debug("Operation={}",this.getName)
       res.append("\n   ")
-      if (this.getSuperOperation()!=null          ){
-        res.append(" override")
+      //TODO in fact it should limit this case to operation that come from Kermeta Object
+      if (this.getSuperOperation()!=null   && !Util.hasEcoreTag( this.getSuperOperation().getOwningClass )      ){
+               res.append(" override")
       }
       res.append(" def ")
-      if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-        res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
-      }else{
+      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+      //}else{
         res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(this)))
-      }
+      //}
       this.generateParamerterOp( res)
       /* Default constructor declaration */
       res.append("(")
@@ -60,11 +61,11 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         res.append(" override")
       }
       res.append(" def ")
-      if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-        res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
-      }else{
+      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+      //}else{
         res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(this)))
-      }
+      //}
       this.generateParamerterOp( res)
       /* Default constructor declaration */
       res.append("(")
@@ -92,7 +93,6 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         res.append(res1)
       }
       //this.getType.generateScalaCode(res)
-      if (this.getBody!= null){
         res.append(" = {\n")
         res.append("var result : ")
         this.getListorType(res)
@@ -102,15 +102,17 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         this.getListorType(res)
         //this.getType.generateScalaCode(res)
         res.append("]; \n")
+      if (this.getBody!= null){
 				
         this.getBody().asInstanceOf[ObjectAspect].generateScalaCode(res)
+      }
         res append " return result\n}\n"
         //this.getType.generateScalaCode(res)
         //res append "]\n}\n"
         //res.append("}/*End_"+this.getName()+"*/\n")
-      } else {
-        res.append("\n")
-      }
+      //} else {
+      //  res.append("\n")
+      //}
     }
   }
   def generateParamerterOp(res1:StringBuilder) = {

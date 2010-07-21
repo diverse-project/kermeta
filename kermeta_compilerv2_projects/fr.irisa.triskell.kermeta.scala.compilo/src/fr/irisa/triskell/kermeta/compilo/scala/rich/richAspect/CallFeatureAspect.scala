@@ -77,12 +77,12 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
     
     var ops : List[Operation] = this.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(this.getName))
     if (ops.size>0){
-      if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-        res.append(Util.protectScalaKeyword(ops.get(0).getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
-      }else{
+      //if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+      //  res.append(Util.protectScalaKeyword(ops.get(0).getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+      //}else{
         res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
 
-      }
+      //}
     }else{
       res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(this.getStaticOperation))))
 

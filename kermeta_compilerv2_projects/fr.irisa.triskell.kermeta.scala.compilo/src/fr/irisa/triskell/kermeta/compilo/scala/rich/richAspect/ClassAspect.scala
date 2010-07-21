@@ -32,10 +32,8 @@ trait ClassAspect extends TypeAspect with ObjectAspect with LogAspect {
 //                    res.append("_<:")
                     var res1: StringBuilder = new StringBuilder
                     e.generateScalaCode(res1)
-                    println(this.getQualifiedNameCompilo() + " " +res1)
-                    println("canonical " + classOf[fr.irisa.triskell.kermeta.language.structure.Object].getCanonicalName )
-                    if (res1.toString.contains(classOf[fr.irisa.triskell.kermeta.language.structure.Object].getCanonicalName))
-                        res.append("_")
+                     if (false && res1.toString.contains(classOf[fr.irisa.triskell.kermeta.language.structure.Object].getCanonicalName))
+                        res.append("_ <: _root_.org.eclipse.emf.ecore.EObject")
                     else
                         res.append(res1.toString)
                     if (i< this.getTypeParamBinding.size()){
