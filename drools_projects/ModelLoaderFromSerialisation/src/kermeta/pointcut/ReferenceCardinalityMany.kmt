@@ -11,7 +11,7 @@ _res.append(".size > 0) then\n\t\tself.")
 _res.append(PropertyName)
 _res.append(".each{o |\n\t\t\tctx.res.append(\", \")\n\t\t\tctx.res.append(\"")
 _res.append(PropertyName)
-_res.append(" contains \"+ctx.cache.getValue(o)+\"Decl\")\n\t\t}\n\tend\n")
+_res.append("\".replace(\"~\",\"\")+\" contains \"+ctx.cache.getValue(o)+\"Decl\")\n\t\t}\n\tend\n")
 result := _res.toString
 end
 }

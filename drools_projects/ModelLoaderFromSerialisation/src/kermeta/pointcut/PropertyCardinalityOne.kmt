@@ -11,13 +11,13 @@ _res.append(".isVoid()) then\n\t\tif i > 0 then\n\t\t\tctx.res.append(\", \")\n\
 if str then
 _res.append("\t\tctx.res.append(\"")
 _res.append(PropertyName)
-_res.append("\"+ctx.convert(self.")
+_res.append("\".replace(\"~\",\"\")+ctx.convert(self.")
 _res.append(PropertyName)
 _res.append(".toString))\n")
 else
 _res.append("\t\tctx.res.append(\"")
 _res.append(PropertyName)
-_res.append(" == \"+self.")
+_res.append("\".replace(\"~\",\"\")+\" == \"+self.")
 _res.append(PropertyName)
 _res.append(".toString)\n")
 end

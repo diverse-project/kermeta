@@ -10,6 +10,6 @@ parameters="PropertyName:String"
 	if (self.<%=PropertyName%>.size > 0) then
 		self.<%=PropertyName%>.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("<%=PropertyName%> contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("<%=PropertyName%>".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end

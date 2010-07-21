@@ -17,7 +17,7 @@ parameters="PropertyName:String, isString:Boolean"
 			if j > 0 then
 				ctx.res.append(", ")
 			end
-			ctx.res.append("<%=PropertyName%> contains "+o.toString)
+			ctx.res.append("<%=PropertyName%>".replace("~","")+" contains "+o.toString)
 		}
 		i := i+1	
 	end

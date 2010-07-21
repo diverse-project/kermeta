@@ -12,9 +12,9 @@ parameters="PropertyName:String,str:Boolean"
 			ctx.res.append(", ")
 		end
 		<%if str then%>
-		ctx.res.append("<%=PropertyName%>"+ctx.convert(self.<%=PropertyName%>.toString))
+		ctx.res.append("<%=PropertyName%>".replace("~","")+ctx.convert(self.<%=PropertyName%>.toString))
 		<%else%>
-		ctx.res.append("<%=PropertyName%> == "+self.<%=PropertyName%>.toString)
+		ctx.res.append("<%=PropertyName%>".replace("~","")+" == "+self.<%=PropertyName%>.toString)
 		<%end%>
 		i := i+1	
 	end

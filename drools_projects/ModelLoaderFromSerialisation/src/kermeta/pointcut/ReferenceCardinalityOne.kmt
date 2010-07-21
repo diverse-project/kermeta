@@ -9,7 +9,7 @@ _res.append("\tif (not self.")
 _res.append(PropertyName)
 _res.append(".isVoid()) then\n\t\tctx.res.append(\", \")\n\t\tctx.res.append(\"")
 _res.append(PropertyName)
-_res.append(" == \"+ctx.cache.getValue(self.")
+_res.append("\".replace(\"~\",\"\")+\" == \"+ctx.cache.getValue(self.")
 _res.append(PropertyName)
 _res.append(")+\"Decl\")\n\tend\n")
 result := _res.toString
