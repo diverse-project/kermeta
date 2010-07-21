@@ -40,7 +40,7 @@ class Compiler extends LogAspect {
             fo.delete
        
         
-
+            
         fo.createNewFile
         ReflexivityLoader.copyFile(fi, fo);
         var midTime= System.currentTimeMillis() - startTime
@@ -49,6 +49,7 @@ class Compiler extends LogAspect {
         /* Target Model Aspect Generation */
         var visitorAspect = new ScalaAspectVisitor
 
+        
         var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect)
         /* Utility Files & Factory Generation */
         var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor

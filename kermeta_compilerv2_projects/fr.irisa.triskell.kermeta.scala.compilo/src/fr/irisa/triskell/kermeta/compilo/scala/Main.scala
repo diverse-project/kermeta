@@ -66,8 +66,8 @@ object Main extends LogAspect {
   //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visuConcretePres.jar") ++ additionalClassPath
 
 
-additionalClassPath = List("/Users/ffouquet/Desktop/MIK/core.jar") ++ additionalClassPath
-additionalClassPath = List("/Users/ffouquet/Desktop/MIK/directives.jar") ++ additionalClassPath
+additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/core.jar") ++ additionalClassPath
+additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/directives.jar") ++ additionalClassPath
   
 
     var inputFile : String = ""
@@ -129,7 +129,7 @@ additionalClassPath = List("/Users/ffouquet/Desktop/MIK/directives.jar") ++ addi
     //inputFile = "/Users/ffouquet/NetBeansProjects/POC/PJulien/TestParser/resources/TestFouquetsParser.km"
     
     
-    inputFile = "/Users/ffouquet/Desktop/MIK/kompose_ecore.km"
+    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
     
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
@@ -150,7 +150,7 @@ additionalClassPath = List("/Users/ffouquet/Desktop/MIK/directives.jar") ++ addi
       /* if(compilationResult == 0){
        EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
        }*/
-      if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
+      if (false && GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
         var classpath =EmbettedScalaCompiler.getActualClasspath
         
         if (additionalClassPath != null)
