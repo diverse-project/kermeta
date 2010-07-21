@@ -101,7 +101,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -173,7 +173,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -327,7 +327,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -363,30 +363,30 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.root.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("root == "+ctx.cache.getValue(self.root)+"Decl")
+		ctx.res.append("root".replace("~","")+" == "+ctx.cache.getValue(self.root)+"Decl")
 	end
 	if (self.services.size > 0) then
 		self.services.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("services contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("services".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.types.size > 0) then
 		self.types.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("types".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.dataTypes.size > 0) then
 		self.dataTypes.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("dataTypes contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("dataTypes".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -477,7 +477,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -553,7 +553,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -564,7 +564,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -637,21 +637,21 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("lower == "+self.lower.toString)
+		ctx.res.append("lower".replace("~","")+" == "+self.lower.toString)
 		i := i+1	
 	end
 	if (not self.upper.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("upper == "+self.upper.toString)
+		ctx.res.append("upper".replace("~","")+" == "+self.upper.toString)
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -791,14 +791,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state"+ctx.convert(self.state.toString))
+		ctx.res.append("state".replace("~","")+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -824,32 +824,32 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent".replace("~","")+" == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -997,14 +997,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state"+ctx.convert(self.state.toString))
+		ctx.res.append("state".replace("~","")+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1030,32 +1030,32 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent".replace("~","")+" == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -1237,14 +1237,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("state"+ctx.convert(self.state.toString))
+		ctx.res.append("state".replace("~","")+ctx.convert(self.state.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1281,43 +1281,43 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.subComponent.size > 0) then
 		self.subComponent.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subComponent contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subComponent".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.delegation.size > 0) then
 		self.delegation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("delegation contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("delegation".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 	if (not self.superComponent.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("superComponent == "+ctx.cache.getValue(self.superComponent)+"Decl")
+		ctx.res.append("superComponent".replace("~","")+" == "+ctx.cache.getValue(self.superComponent)+"Decl")
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.binding.size > 0) then
 		self.binding.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("binding contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("binding".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -1412,7 +1412,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id"+ctx.convert(self.id.toString))
+		ctx.res.append("id".replace("~","")+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1423,7 +1423,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance".replace("~","")+" == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1500,7 +1500,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id"+ctx.convert(self.id.toString))
+		ctx.res.append("id".replace("~","")+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1511,15 +1511,15 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.client.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("client == "+ctx.cache.getValue(self.client)+"Decl")
+		ctx.res.append("client".replace("~","")+" == "+ctx.cache.getValue(self.client)+"Decl")
 	end
 	if (not self.server.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("server == "+ctx.cache.getValue(self.server)+"Decl")
+		ctx.res.append("server".replace("~","")+" == "+ctx.cache.getValue(self.server)+"Decl")
 	end
 	if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance".replace("~","")+" == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1596,7 +1596,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("id"+ctx.convert(self.id.toString))
+		ctx.res.append("id".replace("~","")+ctx.convert(self.id.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1607,15 +1607,15 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.source.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("source == "+ctx.cache.getValue(self.source)+"Decl")
+		ctx.res.append("source".replace("~","")+" == "+ctx.cache.getValue(self.source)+"Decl")
 	end
 	if (not self.exported.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("exported == "+ctx.cache.getValue(self.exported)+"Decl")
+		ctx.res.append("exported".replace("~","")+" == "+ctx.cache.getValue(self.exported)+"Decl")
 	end
 	if (not self.serverInstance.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("serverInstance == "+ctx.cache.getValue(self.serverInstance)+"Decl")
+		ctx.res.append("serverInstance".replace("~","")+" == "+ctx.cache.getValue(self.serverInstance)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1745,7 +1745,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value"+ctx.convert(self.~value.toString))
+		ctx.res.append("~value".replace("~","")+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1756,7 +1756,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.~attribute.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
+		ctx.res.append("~attribute".replace("~","")+" == "+ctx.cache.getValue(self.~attribute)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -1848,12 +1848,12 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.entries.size > 0) then
 		self.entries.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("entries contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("entries".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.~attribute.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~attribute == "+ctx.cache.getValue(self.~attribute)+"Decl")
+		ctx.res.append("~attribute".replace("~","")+" == "+ctx.cache.getValue(self.~attribute)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -1923,7 +1923,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value"+ctx.convert(self.~value.toString))
+		ctx.res.append("~value".replace("~","")+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -1999,7 +1999,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value"+ctx.convert(self.~value.toString))
+		ctx.res.append("~value".replace("~","")+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2010,7 +2010,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.key.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("key == "+ctx.cache.getValue(self.key)+"Decl")
+		ctx.res.append("key".replace("~","")+" == "+ctx.cache.getValue(self.key)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -2079,14 +2079,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("key"+ctx.convert(self.key.toString))
+		ctx.res.append("key".replace("~","")+ctx.convert(self.key.toString))
 		i := i+1	
 	end
 	if (not self.~value.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value"+ctx.convert(self.~value.toString))
+		ctx.res.append("~value".replace("~","")+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2215,7 +2215,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2242,24 +2242,24 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2394,7 +2394,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2421,24 +2421,24 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2573,7 +2573,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2600,24 +2600,24 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.port.size > 0) then
 		self.port.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("port contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("port".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.~attribute.size > 0) then
 		self.~attribute.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~attribute contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~attribute".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.groups.size > 0) then
 		self.groups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("groups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("groups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.implem.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("implem == "+ctx.cache.getValue(self.implem)+"Decl")
+		ctx.res.append("implem".replace("~","")+" == "+ctx.cache.getValue(self.implem)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -2714,7 +2714,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2731,7 +2731,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -2836,7 +2836,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2858,13 +2858,13 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.input.size > 0) then
 		self.input.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("input contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("input".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.output.size > 0) then
 		self.output.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("output contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("output".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -2944,7 +2944,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -2955,7 +2955,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3037,7 +3037,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3054,7 +3054,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -3142,7 +3142,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3159,7 +3159,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.~operation.size > 0) then
 		self.~operation.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("~operation contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("~operation".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -3238,14 +3238,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role"+ctx.convert(self.role.toString))
+		ctx.res.append("role".replace("~","")+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3256,7 +3256,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service".replace("~","")+" == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3341,35 +3341,35 @@ method  pointcut2droolsPass1(ctx:Context):Void from CardinalityElement is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("isOptional == "+self.isOptional.toString)
+		ctx.res.append("isOptional".replace("~","")+" == "+self.isOptional.toString)
 		i := i+1	
 	end
 	if (not self.lower.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("lower == "+self.lower.toString)
+		ctx.res.append("lower".replace("~","")+" == "+self.lower.toString)
 		i := i+1	
 	end
 	if (not self.upper.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("upper == "+self.upper.toString)
+		ctx.res.append("upper".replace("~","")+" == "+self.upper.toString)
 		i := i+1	
 	end
 	if (not self.role.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role"+ctx.convert(self.role.toString))
+		ctx.res.append("role".replace("~","")+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3380,7 +3380,7 @@ method  pointcut2droolsPass2(ctx:Context):Void from CardinalityElement is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service".replace("~","")+" == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3470,14 +3470,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("role"+ctx.convert(self.role.toString))
+		ctx.res.append("role".replace("~","")+ctx.convert(self.role.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3494,12 +3494,12 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.ids.size > 0) then
 		self.ids.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("ids contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("ids".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.service.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("service == "+ctx.cache.getValue(self.service)+"Decl")
+		ctx.res.append("service".replace("~","")+" == "+ctx.cache.getValue(self.service)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -3569,7 +3569,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3645,7 +3645,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3656,7 +3656,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3729,14 +3729,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("defaultValue"+ctx.convert(self.defaultValue.toString))
+		ctx.res.append("defaultValue".replace("~","")+ctx.convert(self.defaultValue.toString))
 		i := i+1	
 	end
 	if (not self.name.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3747,7 +3747,7 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 end
@@ -3837,7 +3837,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -3853,17 +3853,17 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.~valueType.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("~valueType == "+ctx.cache.getValue(self.~valueType)+"Decl")
+		ctx.res.append("~valueType".replace("~","")+" == "+ctx.cache.getValue(self.~valueType)+"Decl")
 	end
 	if (self.keys.size > 0) then
 		self.keys.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("keys contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("keys".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (not self.type.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("type == "+ctx.cache.getValue(self.type)+"Decl")
+		ctx.res.append("type".replace("~","")+" == "+ctx.cache.getValue(self.type)+"Decl")
 	end
 ctx.res.append(")\n")
 
@@ -3937,14 +3937,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("key"+ctx.convert(self.key.toString))
+		ctx.res.append("key".replace("~","")+ctx.convert(self.key.toString))
 		i := i+1	
 	end
 	if (not self.~value.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("~value"+ctx.convert(self.~value.toString))
+		ctx.res.append("~value".replace("~","")+ctx.convert(self.~value.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4083,14 +4083,14 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("controllerDesc"+ctx.convert(self.controllerDesc.toString))
+		ctx.res.append("controllerDesc".replace("~","")+ctx.convert(self.controllerDesc.toString))
 		i := i+1	
 	end
 	if (not self.contentDesc.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("contentDesc"+ctx.convert(self.contentDesc.toString))
+		ctx.res.append("contentDesc".replace("~","")+ctx.convert(self.contentDesc.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4162,7 +4162,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("implementingClass"+ctx.convert(self.implementingClass.toString))
+		ctx.res.append("implementingClass".replace("~","")+ctx.convert(self.implementingClass.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4295,7 +4295,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("generateInstanceBundle == "+self.generateInstanceBundle.toString)
+		ctx.res.append("generateInstanceBundle".replace("~","")+" == "+self.generateInstanceBundle.toString)
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4369,7 +4369,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4465,7 +4465,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4482,13 +4482,13 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.types.size > 0) then
 		self.types.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("types contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("types".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.subGroups.size > 0) then
 		self.subGroups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subGroups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -4583,7 +4583,7 @@ method  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -4600,13 +4600,13 @@ method  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.instances.size > 0) then
 		self.instances.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("instances contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("instances".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.subGroups.size > 0) then
 		self.subGroups.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("subGroups contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("subGroups".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")

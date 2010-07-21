@@ -133,7 +133,7 @@ operation  pointcut2droolsPass1(ctx:Context):Void is do
 			if j > 0 then
 				ctx.res.append(", ")
 			end
-			ctx.res.append("featureIdentifier contains "+o.toString)
+			ctx.res.append("featureIdentifier".replace("~","")+" contains "+o.toString)
 		}
 		i := i+1	
 	end
@@ -160,16 +160,16 @@ operation  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.pattern.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("pattern == "+ctx.cache.getValue(self.pattern)+"Decl")
+		ctx.res.append("pattern".replace("~","")+" == "+ctx.cache.getValue(self.pattern)+"Decl")
 	end
 	if (not self.constraints.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("constraints == "+ctx.cache.getValue(self.constraints)+"Decl")
+		ctx.res.append("constraints".replace("~","")+" == "+ctx.cache.getValue(self.constraints)+"Decl")
 	end
 	if (self.falsepositivepatterns.size > 0) then
 		self.falsepositivepatterns.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("falsepositivepatterns contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("falsepositivepatterns".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -295,13 +295,13 @@ operation  pointcut2droolsPass2(ctx:Context):Void is do
 			if (self.content.size > 0) then
 		self.content.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("content contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("content".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 	if (self.roles.size > 0) then
 		self.roles.each{o |
 			ctx.res.append(", ")
-			ctx.res.append("roles contains "+ctx.cache.getValue(o)+"Decl")
+			ctx.res.append("roles".replace("~","")+" contains "+ctx.cache.getValue(o)+"Decl")
 		}
 	end
 ctx.res.append(")\n")
@@ -442,14 +442,14 @@ operation  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("expression"+ctx.convert(self.expression.toString))
+		ctx.res.append("expression".replace("~","")+ctx.convert(self.expression.toString))
 		i := i+1	
 	end
 	if (not self.language.isVoid()) then
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("language == "+self.language.toString)
+		ctx.res.append("language".replace("~","")+" == "+self.language.toString)
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -525,7 +525,7 @@ operation  pointcut2droolsPass1(ctx:Context):Void is do
 		if i > 0 then
 			ctx.res.append(", ")
 		end
-		ctx.res.append("name"+ctx.convert(self.name.toString))
+		ctx.res.append("name".replace("~","")+ctx.convert(self.name.toString))
 		i := i+1	
 	end
 ctx.res.append(")\n")
@@ -536,7 +536,7 @@ operation  pointcut2droolsPass2(ctx:Context):Void is do
 		ctx.res.append("this == "+varName+"Decl")
 			if (not self.player.isVoid()) then
 		ctx.res.append(", ")
-		ctx.res.append("player == "+ctx.cache.getValue(self.player)+"Decl")
+		ctx.res.append("player".replace("~","")+" == "+ctx.cache.getValue(self.player)+"Decl")
 	end
 ctx.res.append(")\n")
 end
