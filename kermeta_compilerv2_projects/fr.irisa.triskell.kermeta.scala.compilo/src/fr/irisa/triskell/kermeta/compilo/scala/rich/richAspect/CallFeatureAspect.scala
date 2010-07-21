@@ -141,23 +141,21 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
   }
   
   /* TO MERGE */
-  def generateInstanceOf(res:StringBuilder, methodName : String, o : fr.irisa.triskell.kermeta.language.structure.Object)={
-    res.append("{")
-    res.append("var tempC"+o.hashCode+" = ")
-    if (o.isInstanceOf[TypeLiteral]){
-      o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
-    }
-    else{
-      o.asInstanceOf[ObjectAspect].generateScalaCode(res)
-    }
-    res.append(";\n")    
+  def generateIsInstanceOf(res:StringBuilder, o : fr.irisa.triskell.kermeta.language.structure.Object)={
     generateTarget(res);
     res.append(".");
-    res.append(methodName)
-    res.append("[")
-    res.append("tempC"+o.hashCode) 
-    res.append("]")
-    res.append("}")
+    if (o.isInstanceOf[TypeLiteral]){
+      res.append("isInstanceOf[")
+      res.append("_root_.")
+      o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
+      res.append("]")
+    }
+    else{
+      res.append("getClass.getName.equals(")
+      o.asInstanceOf[ObjectAspect].generateScalaCode(res)
+      res.append(".getClass.getName)")
+    }
+    res.append("\n")    
   }  
   
   
@@ -176,11 +174,13 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
         
         
       case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
-      case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
+      
       case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
         //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "isInstance" => {generateParam(res,"","") ;res.append(".isInstanceOf");generateInstanceOf(res, this.getTarget)}
-      case "isInstanceOf" => generateInstanceOf(res,"isInstanceOf",this.getParameters.get(0) )
+      
+      case "isKindOf" => generateIsInstanceOf(res,this.getParameters.get(0) )
+      case "isInstanceOf" => generateIsInstanceOf(res,this.getParameters.get(0) )
         
       
       case "isVoid" => { res.append("kermeta.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}

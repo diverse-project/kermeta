@@ -69,7 +69,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
                 res append " with "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
 //                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
-            res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
+            res append " with "+Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(this))
 	    res.append("{\n")
     //  res.append("{this:"+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))+"=>\n")
 				
@@ -119,7 +119,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 
             //println(superC.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
 
-            res.append(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
+            res.append("_root_."+Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
             //res.append(superC.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
                         //res.append("Aspect")
                         generateBindingParamerterClass(superC.asInstanceOf[Class],res)
@@ -129,7 +129,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
                     })
   //              res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
-            res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
+            res append " with "+Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(this))
             res.append("{\n")
             //res.append("{this:"+Util.protectScalaKeyword(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this)))+"=>\n")
 

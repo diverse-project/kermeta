@@ -66,7 +66,9 @@ object Main extends LogAspect {
   //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visuConcretePres.jar") ++ additionalClassPath
 
 
-
+additionalClassPath = List("/Users/ffouquet/Desktop/MIK/core.jar") ++ additionalClassPath
+additionalClassPath = List("/Users/ffouquet/Desktop/MIK/directives.jar") ++ additionalClassPath
+  
 
     var inputFile : String = ""
     var runnerParams = List[String]()
@@ -127,8 +129,8 @@ object Main extends LogAspect {
     //inputFile = "/Users/ffouquet/NetBeansProjects/POC/PJulien/TestParser/resources/TestFouquetsParser.km"
     
     
-  //  inputFile = "/Users/ffouquet/Desktop/GenericComposition/Composer/composer.km"
-
+    inputFile = "/Users/ffouquet/Desktop/MIK/kompose_ecore.km"
+    
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
