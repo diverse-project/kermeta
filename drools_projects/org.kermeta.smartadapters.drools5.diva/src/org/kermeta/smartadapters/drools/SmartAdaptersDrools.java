@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,6 +52,7 @@ import eu.diva.divastudio.services.runtime.CausalLink;
 import eu.diva.divastudio.services.runtime.IWeaver;
 import eu.diva.osgi.component.DiVAComponentOSGi;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import org.kermeta.smartadapters.drools.utils.StreamGobbler;
 
 public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionListener, KeyListener{
 
@@ -402,9 +403,24 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 				//System.out.println(cmd);
 				Process process;
 				start = System.currentTimeMillis();
+				int exitStatus = 0;
 				try {
 					process = Runtime.getRuntime().exec(cmd);
-					process.waitFor();
+					
+					// any error message?
+		            StreamGobbler errorGobbler = new 
+		                StreamGobbler(process.getErrorStream(), "SmART-ERROR");            
+		            
+		            // any output?
+		            StreamGobbler outputGobbler = new 
+		                StreamGobbler(process.getInputStream(), "SmART-OUTPUT");
+		                
+		            // kick them off
+		            errorGobbler.start();
+		            outputGobbler.start();
+					
+					
+					exitStatus = process.waitFor();
 					process.destroy();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -414,9 +430,14 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 				logger.info("Weaving "+droolsAspectsToWeave.size()+" aspects in "+(System.currentTimeMillis()-start)+" ms (including Drools initialization ~2s)");
 				
 
+				if (exitStatus == 0) {
+					logger.info("Weaving OK. The reconfiguration process will continue");
 				//System.out.println("link.reconfigureByModelURI("+baseModelURI.replace(".art", "_woven.art")+")");
 				link.reconfigureByModelURI(baseModelURI.replace(".art", "_woven.art").replace("file://", ""));
 				//link.reconfigureInMemory((art.System)resource.getContents().get(0));
+				} else {
+					logger.error("Problem during the weaving. The Reconfiguration process will not go further.");
+				}
 			}
 		}
 		else{

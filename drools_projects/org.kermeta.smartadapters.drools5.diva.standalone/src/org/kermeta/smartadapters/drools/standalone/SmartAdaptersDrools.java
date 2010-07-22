@@ -103,7 +103,7 @@ public class SmartAdaptersDrools {
 
 		ksession.execute(new TreeIterable<EObject>(resource.getAllContents()));
 
-		java.lang.System.err.println("Number of Join Points: "  + globalList.size());	
+		//java.lang.System.err.println("Number of Join Points: "  + globalList.size());	
 	}
 
 	art.System loadArtModel(String uri){
