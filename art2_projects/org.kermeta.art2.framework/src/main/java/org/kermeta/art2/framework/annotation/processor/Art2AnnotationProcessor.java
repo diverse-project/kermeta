@@ -10,6 +10,7 @@ import com.sun.mirror.declaration.AnnotationTypeDeclaration;
 import com.sun.mirror.declaration.Declaration;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 import org.kermeta.art2.framework.Art2Generator;
 import org.kermeta.art2.framework.Art2Utility;
 import org.kermeta.art2.framework.Art2XmiHelper;

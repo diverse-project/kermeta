@@ -43,6 +43,12 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
           var newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary
           newlib.setName(ctLibName)
           newlib.getSubComponentTypes.add(componentType)
+
+          /* INIT MAVEN INFO */
+          newlib.setUnitName(env.getOptions.find({op => op._1.contains("art2.lib.id")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
+          newlib.setGroupName(env.getOptions.find({op => op._1.contains("art2.lib.group")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
+          newlib.setVersion(env.getOptions.find({op => op._1.contains("art2.lib.version")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
+
           root.getLibrariy.add(newlib)
         }
     }
@@ -55,24 +61,24 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         ptreqREF.setName(req.name)
 
         ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
-            case org.kermeta.art2.annotation.PortType.SERVICE => {
-                var tv = new ServicePortTypeVisitor
-                try { req.className
-                } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
-                tv.dataType
-              }
-            case org.kermeta.art2.annotation.PortType.MESSAGE => {
-                var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
-                mpt.setName("org.kermeta.art2.framework.MessagePort")
-                req.filter.foreach{ndts=>
-                  var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
-                  ndt.setName(ndts)
-                  mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+              case org.kermeta.art2.annotation.PortType.SERVICE => {
+                  var tv = new ServicePortTypeVisitor
+                  try { req.className
+                  } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
+                  tv.dataType
                 }
-                mpt
-              }
-            case _ => null
-          }))
+              case org.kermeta.art2.annotation.PortType.MESSAGE => {
+                  var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                  mpt.setName("org.kermeta.art2.framework.MessagePort")
+                  req.filter.foreach{ndts=>
+                    var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                    ndt.setName(ndts)
+                    mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+                  }
+                  mpt
+                }
+              case _ => null
+            }))
 
         componentType.getProvided.add(ptreqREF)
 
@@ -86,24 +92,24 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         ptreqREF.setName(req.name)
 
         ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
-            case org.kermeta.art2.annotation.PortType.SERVICE => {
-                var tv = new ServicePortTypeVisitor
-                try { req.className
-                } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
-                tv.dataType
-              }
-            case org.kermeta.art2.annotation.PortType.MESSAGE => {
-                var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
-                mpt.setName("org.kermeta.art2.framework.MessagePort")
-                req.filter.foreach{ndts=>
-                  var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
-                  ndt.setName(ndts)
-                  mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+              case org.kermeta.art2.annotation.PortType.SERVICE => {
+                  var tv = new ServicePortTypeVisitor
+                  try { req.className
+                  } catch {case e : com.sun.mirror.`type`.MirroredTypeException => e.getTypeMirror.accept(tv)}
+                  tv.dataType
                 }
-                mpt
-              }
-            case _ => null
-          }))
+              case org.kermeta.art2.annotation.PortType.MESSAGE => {
+                  var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                  mpt.setName("org.kermeta.art2.framework.MessagePort")
+                  req.filter.foreach{ndts=>
+                    var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                    ndt.setName(ndts)
+                    mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
+                  }
+                  mpt
+                }
+              case _ => null
+            }))
         componentType.getRequired.add(ptreqREF)
       }
     }
