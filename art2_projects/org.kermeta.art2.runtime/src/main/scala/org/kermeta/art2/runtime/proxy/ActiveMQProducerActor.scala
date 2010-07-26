@@ -18,6 +18,7 @@ class ActiveMQProducerActor extends org.kermeta.art2.framework.MessagePort{
   var session : Session = null
   var destination : Destination = null
   var connection : Option[Connection] = None
+  var cf : javax.jms.ConnectionFactory = null
 
   def getUri() : String = uri
   def setUri(u : String) = {
@@ -29,12 +30,17 @@ class ActiveMQProducerActor extends org.kermeta.art2.framework.MessagePort{
   def setHubType(u : String) = {
     hubType = u
   }
+  def getCf() : javax.jms.ConnectionFactory = cf
+  def setCf(p : javax.jms.ConnectionFactory) = {
+    cf = p
+  }
+
 
   def getName : String = "dummyProxy"
 
   def start() = {
-    var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
-    connection = Some(connectionFactory.createConnection())
+    //var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
+    connection = Some(cf.createConnection())
     connection.get.start
     session = connection.get.createSession(false, Session.AUTO_ACKNOWLEDGE)
     destination = hubType match {

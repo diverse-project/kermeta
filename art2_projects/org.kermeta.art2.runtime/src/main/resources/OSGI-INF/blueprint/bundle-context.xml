@@ -11,7 +11,7 @@
 
     <bean id="broker" class="org.kermeta.art2.runtime.broker.ActiveMQBroker" init-method="start" destroy-method="stop">
         <property name="dataDirectory" value="$[karaf.base]/data/activemq/art2broker"/>
-     </bean>
+    </bean>
 
   <!-- create the bean -->
     
@@ -25,7 +25,16 @@
     </bean>
         
   <!-- export the bean on the service registry -->
-    <service ref="artRuntime" interface="org.kermeta.art2.runtime.ArtRuntimeService" />  
+    <service ref="artRuntime" interface="org.kermeta.art2.runtime.ArtRuntimeService" />
 
-        
+    <bean id="activemqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="broker">
+        <property name="brokerURL" value="vm://art2broker?create=false" />
+    </bean>
+
+    <service ref="activemqConnectionFactory" interface="javax.jms.ConnectionFactory">
+        <service-properties>
+            <entry key="name" value="art2broker" />
+        </service-properties>
+    </service>
+
 </blueprint>

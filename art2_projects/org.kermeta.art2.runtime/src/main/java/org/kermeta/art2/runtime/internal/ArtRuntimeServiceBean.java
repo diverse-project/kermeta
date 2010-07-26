@@ -18,6 +18,12 @@ import runner.MainRunner;
  */
 public class ArtRuntimeServiceBean implements ArtRuntimeService {
 
+
+    public ArtRuntimeServiceBean(){
+        System.out.println("Build bean"+this.hashCode());
+    }
+
+
     private org.kermeta.artKomparator.LauncherAspect actualLaunch = null;
     private Properties dictionary = null;
 
@@ -70,6 +76,7 @@ public class ArtRuntimeServiceBean implements ArtRuntimeService {
     }
 
     public void init() {
+        System.out.println("INIT RUNTIME");
 
         //MainRunner runner = new MainRunner();
         MainRunner.init();
@@ -89,6 +96,8 @@ public class ArtRuntimeServiceBean implements ArtRuntimeService {
 
 
     public void stop(){
-        
+        System.out.println("STOP RUNTIME");
+        actualLaunch = null;
+
     }
 }

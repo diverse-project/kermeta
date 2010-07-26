@@ -17,6 +17,7 @@ class ActiveMQConsumer extends MessageListener {
   var destination : Destination = null
   var connection : Option[Connection] = None
   var delegate : org.kermeta.art2.framework.MessagePort = null
+  var cf : javax.jms.ConnectionFactory = null
 
 
   def getDelegate():Object = {delegate}
@@ -32,11 +33,16 @@ class ActiveMQConsumer extends MessageListener {
   def setHubType(u : String) = {
     hubType = u
   }
+  def getCf() : javax.jms.ConnectionFactory = cf
+  def setCf(p : javax.jms.ConnectionFactory) = {
+    cf = p
+  }
+
 
   def init(){
     try{
-      var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
-      connection = Some(connectionFactory.createConnection())
+      //var connectionFactory = new ActiveMQConnectionFactory("vm://art2broker?create=false")
+      connection = Some(cf.createConnection())
       connection.get.start
       session = connection.get.createSession(false, Session.AUTO_ACKNOWLEDGE)
     
@@ -65,7 +71,7 @@ class ActiveMQConsumer extends MessageListener {
   def onMessage(message : Message){
     message match {
       case s : TextMessage => delegate.process(s)
-      case o : ObjectMessage => println(o.getObject.asInstanceOf[org.kermeta.art2.framework.MethodCallMessage].getMethodName);delegate.process(o.getObject)
+      case o : ObjectMessage => delegate.process(o.getObject)
       case _ => println("Strange message ???"+message)
     }
   }
