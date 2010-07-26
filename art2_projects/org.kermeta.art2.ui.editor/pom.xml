@@ -8,6 +8,14 @@
     <version>1.0-SNAPSHOT</version>
     <name>ART2 :: UI EDITOR</name>
     <url>http://maven.apache.org</url>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
+    
+
     <build>
         <plugins>
             <plugin>
@@ -58,20 +66,7 @@
     </properties>
 
 
-    <distributionManagement>
-        <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2private</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2private-snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
+
 
     
 
