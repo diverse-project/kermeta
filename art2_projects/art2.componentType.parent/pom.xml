@@ -8,23 +8,12 @@
     <version>1.0-SNAPSHOT</version>
     <name>ART2 :: ComponentType :: Parent</name>
     <url>http://maven.apache.org</url>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.framework</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
 
 
     <build>
@@ -73,9 +62,9 @@
                         <outputFile>art2Lib.xmi</outputFile>
                     </outputFiles>
                     <options>
-                       <value>art2.lib.id=${project.artifactId}</value>
-                       <value>art2.lib.group=${project.groupId}</value>
-                       <value>art2.lib.version=${project.version}</value>
+                        <value>art2.lib.id=${project.artifactId}</value>
+                        <value>art2.lib.group=${project.groupId}</value>
+                        <value>art2.lib.version=${project.version}</value>
                     </options>
                 </configuration>
                 <executions>
@@ -113,22 +102,11 @@
             </plugin>
         </plugins>
     </build>
-
-
-    <distributionManagement>
-        <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2private</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2private-snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-
-
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+    </dependencies>
 </project>
