@@ -107,7 +107,7 @@
 	</target>
 
 	<target name="get_dropins">
-		<get src="ftp://ftp.inria.fr/pub/Apache/incubator/aries/org.apache.aries.blueprint-0.1-incubating.jar" 
+		<get src="http://mirror.mkhelif.fr/apache/incubator/aries/org.apache.aries.blueprint-0.1-incubating.jar" 
 							dest="${env.WORKSPACE}/build/dropins/org.apache.aries.blueprint-0.1-incubating.jar"
 							usetimestamp="true"/>
 	</target>
