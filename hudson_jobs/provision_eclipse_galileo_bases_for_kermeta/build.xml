@@ -105,8 +105,14 @@
   			<property name="eclipse.base.url" value="${eclipse.native.base.url}"/>
 		</ant>
 	</target>
+
+	<target name="get_dropins">
+		<get src="ftp://ftp.inria.fr/pub/Apache/incubator/aries/org.apache.aries.blueprint-0.1-incubating.jar" 
+							dest="${env.WORKSPACE}/build/dropins/org.apache.aries.blueprint-0.1-incubating.jar"
+							usetimestamp="true"/>
+	</target>
 	
-	<target name="provision_eclipse_version" depends="get_native_eclipse">
+	<target name="provision_eclipse_version" depends="get_native_eclipse, get_dropins">
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
@@ -169,12 +175,21 @@
 					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_galileo_${eclipse.version.name}_base"/>
 		</antcall>
 		<!-- FROM OTHER UPDATE SITE -->
-
+		
+		<echo>Additional install in the dropin folder - should be replaced later by proper installation </echo>
+		
+		<copy todir="${env.WORKSPACE}/build/kermeta_galileo_${eclipse.version.name}_base/eclipse/dropins">
+			<fileset dir="${env.WORKSPACE}/build/dropins"></fileset>
+		</copy>
+		
+		<echo>Zipping the resulting package</echo>
 		<delete file="${env.WORKSPACE}/build/kermeta_galileo_${eclipse.version.name}_base.zip" failonerror="false"/>
 		<zip destfile="${env.WORKSPACE}/build/kermeta_galileo_${eclipse.version.name}_base.zip">
 			<fileset dir="${env.WORKSPACE}/build/kermeta_galileo_${eclipse.version.name}_base"></fileset>
 		</zip>
 	</target>
+	
+	
 	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
 		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}; target.profile=${target.profile}</echo>
