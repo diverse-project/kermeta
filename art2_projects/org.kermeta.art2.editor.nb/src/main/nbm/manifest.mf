@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Localizing-Bundle: org/kermeta/art2/editor/nb/Bundle.properties
+OpenIDE-Module-Layer: org/kermeta/art2/editor/nb/layer.xml
+OpenIDE-Module-Requires: org.openide.windows.WindowManager
