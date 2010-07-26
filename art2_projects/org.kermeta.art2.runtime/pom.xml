@@ -2,22 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kermeta.art2</groupId>
     <artifactId>art2.runtime</artifactId>
     <packaging>bundle</packaging>
     <name>ART2 :: Runtime</name>
-    <version>0.5.0-SNAPSHOT</version>
-    <repositories>
-        <repository>
-            <id>triskellPublic</id>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
+
+    <groupId>${parent.groupId}</groupId>
+    <version>${art2.version}</version>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+
+
     <dependencies>
         <dependency>
-            <groupId>org.kermeta.art2</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>art2.kompare</artifactId>
-            <version>1.2.0-SNAPSHOT</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
@@ -38,7 +41,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.framework</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
+            <version>${art2.version}</version>
         </dependency>
     </dependencies>
 
@@ -137,45 +140,8 @@
                     </instructions>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
-
-    <distributionManagement>
-        <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2private</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2private-snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-
 
 
 </project>
