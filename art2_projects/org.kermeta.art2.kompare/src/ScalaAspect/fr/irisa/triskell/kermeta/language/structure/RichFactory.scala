@@ -1,6 +1,6 @@
 package ScalaAspect.fr.irisa.triskell.kermeta.language.structure
 import ScalaImplicit.org.kermeta.org.kermeta.default.aspects.ImplicitConversion._
-object RichFactory extends fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl{
+object RichFactory extends fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl with fr.irisa.triskell.kermeta.language.structure.StructureFactory{
  def createPropertyConstraint : ScalaAspect.fr.irisa.triskell.kermeta.language.structure.PropertyConstraint = { new ScalaAspect.fr.irisa.triskell.kermeta.language.structure.RichPropertyConstraint }
  override def createProperty : fr.irisa.triskell.kermeta.language.structure.Property = { new ScalaAspect.fr.irisa.triskell.kermeta.language.structure.RichProperty }
  override def createClassDefinition : fr.irisa.triskell.kermeta.language.structure.ClassDefinition = { new ScalaAspect.fr.irisa.triskell.kermeta.language.structure.RichClassDefinition }
