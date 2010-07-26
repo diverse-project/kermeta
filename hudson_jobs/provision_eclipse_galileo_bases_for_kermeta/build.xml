@@ -107,6 +107,7 @@
 	</target>
 
 	<target name="get_dropins">
+		<mkdir dir="${env.WORKSPACE}/build/dropins/"/>
 		<get src="http://mirror.mkhelif.fr/apache/incubator/aries/org.apache.aries.blueprint-0.1-incubating.jar" 
 							dest="${env.WORKSPACE}/build/dropins/org.apache.aries.blueprint-0.1-incubating.jar"
 							usetimestamp="true"/>
