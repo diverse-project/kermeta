@@ -1,0 +1,258 @@
+<project name="build_eclipse_bases_for_kermeta" default="all">
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<property name="eclipse.native.archive.extension" value="tar.gz"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
+	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
+	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
+	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/> -->
+	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
+	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
+	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
+	<property name="scala.official.repository" value="http://download.scala-ide.org/update-current"/>
+	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
+	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
+		
+	<target name="all" depends="">
+	    <antcall target="provision_win32_base_for_kermeta"/>
+	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
+	    <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
+	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/>
+		<antcall target="provision_linux_x86_64_base_for_kermeta"/>
+	    <antcall target="provision_linux_x86_base_for_kermeta"/>
+	</target>
+
+
+	<target name="provision_linux_x86_64_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="linux_x86_64"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="SDKProfile"/>
+		</antcall>
+	</target>
+	<target name="provision_linux_x86_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="linux_x86"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk.tar.gz"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="SDKProfile"/>
+		</antcall>
+	</target>
+
+	<target name="provision_win32_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
+		</antcall>
+	</target>
+	
+	<target name="provision_win32_x86_64_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32_x86_64"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32-x86_64.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
+		</antcall>
+	</target>
+	
+	<target name="provision_macosx-cocoa_x86_64_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
+		</antcall>
+	</target>
+	<target name="provision_macosx-cocoa_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macosx-cocoa"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
+		</antcall>
+	</target>
+
+	<target name="get_native_eclipse">
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.native.version.name}"/>
+  			<property name="archive.extension" value="${eclipse.native.archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.native.base.url}"/>
+		</ant>
+	</target>
+	
+	<target name="provision_eclipse_version" depends="get_native_eclipse">
+		<echo>Provision ${eclipse.version.name}</echo>
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
+  			<property name="archive.extension" value="${archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.base.url}"/>
+		</ant>
+
+		<mkdir dir="${eclipse.workspace.dir}"/>
+		<antcall target="create_target_base">
+			<param name="eclipse.base.dir" value="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+		</antcall>
+		
+		<!-- get log4j plugin from Kermeta site -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.apache.log4j"/>
+			<param name="feature.repository" value="http://www.kermeta.org/update"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		
+		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
+		<!-- org.eclipse.xpand.sdk.feature.group is required by topcased UML modeler,
+		     org.eclipse.jdt seems not installed in some version (win32) and is required by findbug -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.sdk.feature.group, org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt.feature.group, org.eclipse.zest.feature.group, org.eclipse.stp.sca.feature.feature.group, org.eclipse.stp.sca.feature.xmleditors.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<!-- FROM SCALA -->
+		<antcall target="provision_feature">  
+    		<param name="feature.name" value="ch.epfl.lamp.sdt.feature.group, org.eclipse.contribution.weaving.feature.group"/>
+			<param name="feature.repository" value="${scala.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		
+		<!-- FROM TOPCASED -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.topcased.modeler.uml.feature.group, org.topcased.dependencies.feature.group"/>
+			<param name="feature.repository" value="${topcased.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		
+		<!-- FIND BUGS -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
+			<param name="feature.repository" value="http://findbugs.cs.umd.edu/eclipse"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+
+		<!-- FROM EMFTEXT -->
+		<antcall target="provision_feature">
+		    		<param name="feature.name" value="org.emftext.access.feature.group, org.emftext.sdk.feature.group, org.emftext.commons.antlr3_1_1.feature.group"/>
+					<param name="feature.repository" value="http://reuseware.org/update"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+		</antcall>
+		<!-- FROM m2eclipse.sonatype.org -->
+		<antcall target="provision_feature">
+		    		<param name="feature.name" value="org.maven.ide.eclipse.feature.feature.group"/>
+					<param name="feature.repository" value="http://m2eclipse.sonatype.org/sites/m2e"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+		</antcall>
+		<!-- FROM OTHER UPDATE SITE -->
+
+		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip" failonerror="false"/>
+		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"></fileset>
+		</zip>
+	</target>
+	<target name="provision_feature" >
+		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
+		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}; target.profile=${target.profile}</echo>
+		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.equinox.p2.director"/>
+			<arg value="-metadataRepository"/>
+			<arg value="${feature.repository}"/>
+			<arg value="-artifactRepository"/>
+			<arg value="${feature.repository}"/>
+			<arg value="-installIU"/>
+			<arg value="${feature.name}"/>
+			<arg value="-destination"/>
+			<arg value="${target.eclipse.dir}/eclipse"/>
+			<arg value="-bundlepool"/>
+			<arg value="${target.eclipse.dir}/eclipse"/>
+			<arg value="-profileProperties"/>
+			<arg value="org.eclipse.update.install.features=true"/>
+			<arg value="-profile"/>
+			<arg value="${target.profile}"/> 
+			<arg value="-p2.os"/> 
+			<arg value="${target.os}"/> 
+			<arg value="-p2.ws"/> 
+			<arg value="${target.ws}"/> 
+			<arg value="-p2.arch"/> 
+			<arg value="${target.arch}"/>
+ 			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
+		</java>	
+	</target>
+	
+	<!-- create an empty base from the downloaded one -->
+	<target name="create_target_base">
+		<delete dir="${target.eclipse.dir}" failonerror="false"/>	
+		<copy todir="${target.eclipse.dir}">
+			<fileset dir="${eclipse.base.dir}" includes="**" >
+				<exclude name="*.tstamp"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+
+	<target name="mirror_eclipse_official_repository">
+		<!-- need an eclipse for doing the mirroring -->
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.native.version.name}"/>
+  			<property name="archive.extension" value="tar.gz"/>
+  			<property name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+		</ant>
+		<echo>Mirroring metadata to ${eclipse.official.repository}</echo>
+		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.equinox.p2.metadata.repository.mirrorApplication"/>
+			<arg value="-source"/>
+			<arg value="${eclipse.official.repository}"/>
+			<arg value="-destination"/>
+			<arg value="${eclipse.official.repository.local.mirror}"/>
+		</java>
+		<echo>Mirroring artifacts</echo>
+		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.equinox.p2.artifact.repository.mirrorApplication"/>
+			<arg value="-source"/>
+			<arg value="${eclipse.official.repository}"/>
+			<arg value="-destination"/>
+			<arg value="${eclipse.official.repository.local.mirror}"/>
+		</java>
+	</target>
+</project>
