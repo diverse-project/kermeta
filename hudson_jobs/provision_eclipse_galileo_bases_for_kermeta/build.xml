@@ -245,7 +245,7 @@
   			<property name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
 		</ant>
 		<echo>Mirroring metadata to ${eclipse.official.repository}</echo>
-		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
+		<java jar="${env.WORKSPACE}/eclipse_galileo_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
 		           maxmemory="128m"
@@ -258,7 +258,7 @@
 			<arg value="${eclipse.official.repository.local.mirror}"/>
 		</java>
 		<echo>Mirroring artifacts</echo>
-		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
+		<java jar="${env.WORKSPACE}/eclipse_galileo_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
 		           maxmemory="128m"
