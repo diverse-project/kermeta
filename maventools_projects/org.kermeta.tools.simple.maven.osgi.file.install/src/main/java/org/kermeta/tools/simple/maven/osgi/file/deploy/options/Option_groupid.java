@@ -2,7 +2,7 @@
  * Created on 11 mai 2004
  *
  */
-package org.kermeta.tools.simple.maven.osgi.file.install.options;
+package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 
 import java.util.Vector;
 

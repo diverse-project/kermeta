@@ -2,7 +2,7 @@
  * Created on 11 mai 2004
  *
  */
-package org.kermeta.tools.simple.maven.osgi.file.install.options;
+package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 
 /** This is a special option (with no name) that memorize the arguments that are not 
     involved with a known option.

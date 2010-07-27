@@ -7,7 +7,7 @@
  * Authors : 
  *           Didier Vojtisek <didier.vojtisek@inria.fr> 
  */
-package org.kermeta.tools.simple.maven.osgi.file.install;
+package org.kermeta.tools.simple.maven.osgi.file.deploy;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,13 +16,13 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.kermeta.tools.simple.maven.osgi.file.install.options.CheckOption;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.NoOption;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.Option;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.Option_H;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.Option_groupid;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.Option_jarfolder;
-import org.kermeta.tools.simple.maven.osgi.file.install.options.Option_simulate;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.CheckOption;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.NoOption;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_H;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_groupid;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_jarfolder;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_simulate;
 
 
 
@@ -42,6 +42,7 @@ public class CLI {
     
     protected String jarFolder=".";
     protected String groupId="org.kermeta";
+    protected String repositoryId="local";
     protected boolean simulation=false;
     protected String defaultVersion="1.0.0";
     
@@ -109,11 +110,12 @@ public class CLI {
 		}
 		for( String file : dir.list()){
 			if(file.endsWith(".jar")){
-				StringBuffer command = new StringBuffer("mvn install:install-file ");
+				StringBuffer command = new StringBuffer("mvn deploy:deploy-file ");
 				command.append(" -Dfile="+file);
 				command.append(" -DgroupId="+groupId);
 				command.append(" -DartifactId=" +getArtifactId(file));
 				command.append(" -Dversion="+getVersion(file));
+				command.append(" -DrepositoryId="+getVersion(file));
 				command.append(" -Dpackaging=jar");
 				command.append(" -DgeneratePom=true");
 				System.out.println(command);
