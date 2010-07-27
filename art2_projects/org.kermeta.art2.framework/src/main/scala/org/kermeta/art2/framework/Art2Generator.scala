@@ -5,9 +5,9 @@
 
 package org.kermeta.art2.framework
 
-import art2.ContainerRoot
-import art2.MessagePortType
-import art2.ServicePortType
+import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.MessagePortType
+import org.kermeta.art2.ServicePortType
 import com.sun.mirror.apt.Filer
 import scala.collection.JavaConversions._
 

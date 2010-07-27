@@ -5,18 +5,20 @@
 
 package org.kermeta.art2.framework
 
-import art2.ContainerRoot
-import art2.PortType
-import art2.ServicePortType
-import art2.{ComponentType => art2CT}
-import art2.ComponentTypeLibrary
+import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.PortType
+import org.kermeta.art2.ServicePortType
+import org.kermeta.art2.TypedElement
+import org.kermeta.art2.{ComponentType => art2CT}
+import org.kermeta.art2.Art2Factory
+import org.kermeta.art2.ComponentTypeLibrary
 import scala.collection.JavaConversions._
 
 class Art2Handler {
 
   //TODO LOCK OBJECT
 
-  private var actualModel : ContainerRoot = art2.Art2Factory.eINSTANCE.createContainerRoot
+  private var actualModel : ContainerRoot = Art2Factory.eINSTANCE.createContainerRoot
 
   def merge(modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
@@ -52,7 +54,7 @@ class Art2Handler {
     }
   }
   
-  private def mergePortType(portType : PortType) : art2.PortType = {
+  private def mergePortType(portType : PortType) : PortType = {
     actualModel.getPortTypes.find({pt=>pt.getName.equals(portType.getName)}) match {
       case Some(existPT) => existPT
       case None => {
@@ -71,7 +73,7 @@ class Art2Handler {
     }
   }
 
-  private def mergeDataType(datatype : art2.TypedElement) : art2.TypedElement = {
+  private def mergeDataType(datatype : TypedElement) : TypedElement = {
     actualModel.getDataTypes.find({dt=>dt.getName.equals(datatype.getName)}) match {
       case Some(existDT) => existDT
       case None => actualModel.getDataTypes.add(datatype);datatype

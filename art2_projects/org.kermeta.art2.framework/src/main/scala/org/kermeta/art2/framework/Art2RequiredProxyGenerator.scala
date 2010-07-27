@@ -5,17 +5,18 @@
 
 package org.kermeta.art2.framework
 
-import art2.ContainerRoot
-import art2.MessagePortType
-import art2.PortTypeRef
-import art2.ServicePortType
+import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.MessagePortType
+import org.kermeta.art2.PortTypeRef
+import org.kermeta.art2.ServicePortType
+import org.kermeta.art2.{ComponentType => ART2ComponentType }
 import com.sun.mirror.apt.Filer
 import java.io.File
 import scala.collection.JavaConversions._
 
 object Art2RequiredProxyGenerator {
 
-  def generate(root:ContainerRoot,filer:Filer,ct: art2.ComponentType,ref:PortTypeRef) = {
+  def generate(root:ContainerRoot,filer:Filer,ct: ART2ComponentType,ref:PortTypeRef) = {
     var portPackage = ct.getFactoryBean().substring(0, ct.getFactoryBean().lastIndexOf("."));
     var portName = ct.getName()+"PORTPROXY"+ref.getName();
     //var wrapper = filer.createSourceFile(portPackage+"."+portName);

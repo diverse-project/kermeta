@@ -11,6 +11,8 @@ import com.sun.mirror.declaration.Declaration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+import org.kermeta.art2.Art2Factory;
+import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.framework.Art2Generator;
 import org.kermeta.art2.framework.Art2Utility;
 import org.kermeta.art2.framework.Art2XmiHelper;
@@ -33,7 +35,7 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process() {
 
-        art2.ContainerRoot root = art2.Art2Factory.eINSTANCE.createContainerRoot();
+        ContainerRoot root = Art2Factory.eINSTANCE.createContainerRoot();
         Art2Utility.root_$eq(root);
 
         //GENERATE & RUN ComponentType visitor

@@ -5,9 +5,10 @@
 
 package org.kermeta.art2.framework.annotation.processor.visitor
 
-import art2.ComponentType
-import art2.ContainerRoot
-import art2.PortType
+import org.kermeta.art2.Art2Factory
+import org.kermeta.art2.ComponentType
+import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.PortType
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.declaration.ClassDeclaration
 import com.sun.mirror.declaration.MethodDeclaration
@@ -24,7 +25,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
 
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
 
-    componentType = art2.Art2Factory.eINSTANCE.createComponentType();
+    componentType = Art2Factory.eINSTANCE.createComponentType();
 
     var ctname = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).name
     if(ctname.equals("empty")){
@@ -40,7 +41,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     root.getLibrariy.find({lib=>lib.getName.equals(ctLibName)}) match {
       case Some(lib)=> lib.getSubComponentTypes.add(componentType)
       case None => {
-          var newlib = art2.Art2Factory.eINSTANCE.createComponentTypeLibrary
+          var newlib = Art2Factory.eINSTANCE.createComponentTypeLibrary
           newlib.setName(ctLibName)
           newlib.getSubComponentTypes.add(componentType)
 
@@ -57,7 +58,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{req=>
 
-        var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
+        var ptreqREF = Art2Factory.eINSTANCE.createPortTypeRef
         ptreqREF.setName(req.name)
 
         ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
@@ -68,10 +69,10 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
                   tv.dataType
                 }
               case org.kermeta.art2.annotation.PortType.MESSAGE => {
-                  var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                  var mpt = Art2Factory.eINSTANCE.createMessagePortType
                   mpt.setName("org.kermeta.art2.framework.MessagePort")
                   req.filter.foreach{ndts=>
-                    var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                    var ndt = Art2Factory.eINSTANCE.createTypedElement
                     ndt.setName(ndts)
                     mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
                   }
@@ -88,7 +89,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Requires]).value.foreach{req=>
 
-        var ptreqREF = art2.Art2Factory.eINSTANCE.createPortTypeRef
+        var ptreqREF = Art2Factory.eINSTANCE.createPortTypeRef
         ptreqREF.setName(req.name)
 
         ptreqREF.setRef(Art2Utility.getOraddPortType(req.`type` match {
@@ -99,10 +100,10 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
                   tv.dataType
                 }
               case org.kermeta.art2.annotation.PortType.MESSAGE => {
-                  var mpt = art2.Art2Factory.eINSTANCE.createMessagePortType
+                  var mpt = Art2Factory.eINSTANCE.createMessagePortType
                   mpt.setName("org.kermeta.art2.framework.MessagePort")
                   req.filter.foreach{ndts=>
-                    var ndt = art2.Art2Factory.eINSTANCE.createTypedElement
+                    var ndt = Art2Factory.eINSTANCE.createTypedElement
                     ndt.setName(ndts)
                     mpt.getFilters.add(Art2Utility.getOraddDataType(ndt))
                   }
@@ -135,7 +136,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     portAnnotations.foreach{annot=>
       componentType.getProvided.find({provided=> provided.getName.equals(annot.name) }) match {
         case Some(ptref) => {
-            var ptREFmapping = art2.Art2Factory.eINSTANCE.createPortTypeMapping
+            var ptREFmapping = Art2Factory.eINSTANCE.createPortTypeMapping
             ptREFmapping.setBeanMethodName(methoddef.getSimpleName)
             ptREFmapping.setServiceMethodName(annot.method)
             ptref.getMappings.add(ptREFmapping)

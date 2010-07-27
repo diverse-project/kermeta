@@ -20,6 +20,10 @@ import com.sun.mirror.type.TypeVariable;
 import com.sun.mirror.type.VoidType;
 import com.sun.mirror.type.WildcardType;
 import com.sun.mirror.util.TypeVisitor;
+import org.kermeta.art2.Art2Factory;
+import org.kermeta.art2.Operation;
+import org.kermeta.art2.Parameter;
+import org.kermeta.art2.ServicePortType;
 import org.kermeta.art2.framework.Art2Utility;
 
 /**
@@ -28,7 +32,7 @@ import org.kermeta.art2.framework.Art2Utility;
  */
 public class ServicePortTypeVisitor implements TypeVisitor {
 
-    art2.ServicePortType dataType = art2.Art2Factory.eINSTANCE.createServicePortType();
+    ServicePortType dataType = Art2Factory.eINSTANCE.createServicePortType();
 
     @Override
     public void visitTypeMirror(TypeMirror t) {
@@ -97,7 +101,7 @@ public class ServicePortTypeVisitor implements TypeVisitor {
         for (MethodDeclaration m : t.getMethods()) {
 
             //BUILD NEW OPERATION
-            art2.Operation newo = art2.Art2Factory.eINSTANCE.createOperation();
+            Operation newo = Art2Factory.eINSTANCE.createOperation();
             dataType.getOperations().add(newo);
             newo.setName(m.getSimpleName());
 
@@ -109,7 +113,7 @@ public class ServicePortTypeVisitor implements TypeVisitor {
             //BUILD PARAMETER
             for (ParameterDeclaration p : m.getParameters()) {
 
-                art2.Parameter newp = art2.Art2Factory.eINSTANCE.createParameter();
+                Parameter newp = Art2Factory.eINSTANCE.createParameter();
                 newo.getParameters().add(newp);
                 newp.setName(p.getSimpleName());
 

@@ -5,7 +5,7 @@
 
 package org.kermeta.art2.framework.annotation.processor.visitor;
 
-import art2.TypedElement;
+import org.kermeta.art2.TypedElement;
 import com.sun.mirror.type.AnnotationType;
 import com.sun.mirror.type.ArrayType;
 import com.sun.mirror.type.ClassType;
@@ -19,6 +19,7 @@ import com.sun.mirror.type.TypeVariable;
 import com.sun.mirror.type.VoidType;
 import com.sun.mirror.type.WildcardType;
 import com.sun.mirror.util.TypeVisitor;
+import org.kermeta.art2.Art2Factory;
 
 
 /**
@@ -27,7 +28,7 @@ import com.sun.mirror.util.TypeVisitor;
  */
 public class DataTypeVisitor implements TypeVisitor {
 
-    art2.TypedElement dataType = art2.Art2Factory.eINSTANCE.createTypedElement();
+    TypedElement dataType = Art2Factory.eINSTANCE.createTypedElement();
 
     public TypedElement getDataType() {
         return dataType;
