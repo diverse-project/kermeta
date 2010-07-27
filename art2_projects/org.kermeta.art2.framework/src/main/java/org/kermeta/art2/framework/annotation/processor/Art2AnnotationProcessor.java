@@ -28,12 +28,17 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
     private AnnotationTypeDeclaration componentTypeAnnotationPortType;
 
     public Art2AnnotationProcessor(AnnotationProcessorEnvironment _env) {
+
+        //System.out.println("HELLO");
+
         this.env = _env;
         componentTypeAnnotationPortType = (AnnotationTypeDeclaration) this.env.getTypeDeclaration("org.kermeta.art2.annotation.ComponentType");
     }
 
     @Override
     public void process() {
+
+        //System.out.println("hello");
 
         ContainerRoot root = Art2Factory.eINSTANCE.createContainerRoot();
         Art2Utility.root_$eq(root);
