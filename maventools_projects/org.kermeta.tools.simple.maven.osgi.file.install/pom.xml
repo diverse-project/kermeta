@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.tools</groupId>
+	<artifactId>tools.simple.maven.osgi.file.install</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Simple.maven.osgi.file.install</name>
+	<url>http://www.kermeta.org/</url>
+	<inceptionYear>2010</inceptionYear>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+			<distribution>repo</distribution>
+			<comments></comments>
+		</license>
+	</licenses>	
+	
+	<distributionManagement>
+		<downloadUrl>http://www.kermeta.org/</downloadUrl>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>kermeta</id>
+			<name>Kermeta release repository</name>
+			<url>${distribution.base}/maven2/</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>kermetaSnapshot</id>
+			<name>Kermeta snapshot repository</name>
+			<url>${distribution.base}/maven2-snapshots/</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
+	<dependencies>
+
+	</dependencies>
+	<build>
+
+		<!-- All plugins must have fixed version numbers to avoid automatic plugin upgrade -->
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<!-- We are developing with JDK5 -->
+					<compilerVersion>1.5</compilerVersion>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+
+		</plugins>
+	</build>
+	
+	<properties>
+		<distribution.base>file:/var/www/html/</distribution.base>
+	</properties>
+</project>
