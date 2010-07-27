@@ -29,7 +29,7 @@
 				
                 <configuration>
                     <instructions>
-                        <Export-Package>art2,art2.impl,art2.util</Export-Package>
+                        <Export-Package>org.kermeta.art2,org.kermeta.art2.impl,org.kermeta.art2.util</Export-Package>
                         <Import-Package>
 						org.eclipse.emf.*,
 						org.osgi.framework
