@@ -22,6 +22,7 @@ import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_H;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_groupid;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_jarfolder;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_repositoryid;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_simulate;
 
 
@@ -60,6 +61,7 @@ public class CLI {
 				new NoOption (new Vector<String>()),
 				new Option_jarfolder (new Vector<String>()),
 				new Option_groupid (new Vector<String>()),
+				new Option_repositoryid (new Vector<String>()),
 				new Option_simulate (),
 				new Option_H ()
 			} 
@@ -79,6 +81,14 @@ public class CLI {
 			if (it.hasNext())
 			{
 				groupId = it.next().toString();
+			}
+		}
+	    if (checkOption.Saw ("-repositoryid"))
+		{
+	    	Iterator<?> it = checkOption.getOption("-repositoryid").getParameters().iterator();			
+			if (it.hasNext())
+			{
+				repositoryId = it.next().toString();
 			}
 		}
 	    if(checkOption.Saw ("-h"))
