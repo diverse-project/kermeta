@@ -12,6 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <art2.version>2.0.0-SNAPSHOT</art2.version>
+        <emf.version>2.6.0</emf.version>
+        <scala.version>2.8.0</scala.version>
     </properties>
     
     <dependencies>
@@ -46,6 +48,44 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <repositories>
+
+        <repository>
+            <id>triskellPublic</id>
+            <url>http://tipimouss.irisa.fr/maven2</url>
+        </repository>
+        <repository>
+            <id>triskellPublicSnapShots</id>
+            <url>http://tipimouss.irisa.fr/maven2-snapshots</url>
+        </repository>
+        <repository>
+            <id>triskellPrivate</id>
+            <url>http://tipimouss.irisa.fr/maven2private</url>
+        </repository>
+        <repository>
+            <id>triskellPrivateSnapshots</id>
+            <url>http://tipimouss.irisa.fr/maven2private-snapshots</url>
+        </repository>
+
+        <repository>
+            <id>thirdparty</id>
+            <name>Irisa Tipimouss Nexus ThirdParty</name>
+            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/thirdparty</url>
+        </repository>
+        <repository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>http://scala-tools.org/repo-releases</url>
+        </repository>
+        <repository>
+            <id>triskellPublic</id>
+            <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+        </repository>
+
+    </repositories>
+
 
 
     <distributionManagement>
