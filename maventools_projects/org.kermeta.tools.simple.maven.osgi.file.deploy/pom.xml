@@ -4,7 +4,7 @@
 	<artifactId>tools.simple.maven.osgi.file.deploy</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>Simple.maven.osgi.file.install</name>
+	<name>Simple.maven.osgi.file.deploy</name>
 	<url>http://www.kermeta.org/</url>
 	<inceptionYear>2010</inceptionYear>
 	<licenses>
