@@ -9,8 +9,10 @@
  */
 package org.kermeta.tools.simple.maven.osgi.file.deploy;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -105,14 +107,15 @@ public class CLI {
 	 * entry point for the command lien
 	 * @param args
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) throws IOException {		
+	public static void main(String[] args) throws IOException, InterruptedException {		
 		CLI theLauncherRun;				
 	    theLauncherRun = new CLI(args);
 	    theLauncherRun.run();		
 	}
 	
-	public void run() throws IOException {
+	public void run() throws IOException, InterruptedException {
 		File dir = new File(this.jarFolder);
 		if(!dir.exists()){
 			System.err.println("Error : " + this.jarFolder + " doesn't exist" );
@@ -134,7 +137,17 @@ public class CLI {
 				command.append(" -DgeneratePom=true");
 				System.out.println(command);
 				if(!simulation){
-					Runtime.getRuntime().exec(command.toString());					
+					Process p = Runtime.getRuntime().exec(command.toString());
+					// redirect output
+					BufferedReader r1 = new BufferedReader(
+	                        new InputStreamReader(p.getInputStream())
+					);
+	                String x;
+	                while ((x = r1.readLine()) != null) {
+	                	System.out.println(x);
+	                }
+	                r1.close();
+					p.waitFor(); // wait for the end of the command
 				}
 			}
 			else{
