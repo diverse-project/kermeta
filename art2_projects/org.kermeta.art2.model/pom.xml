@@ -19,6 +19,20 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <!-- Add resources from the plugin structure -->
+        <resources>
+	      	<resource>
+	        	<directory>.</directory>
+	        	<includes>
+	          		<include>plugin.xml</include>
+	          		<include>plugin.properties</include>
+	        	</includes>
+	      	</resource>
+	      	<resource>
+	        	<directory>metamodel</directory>
+	        	<targetPath>metamodel</targetPath>
+	      	</resource>
+	    </resources>
         <plugins>
 
             <plugin>
@@ -30,7 +44,7 @@
             </plugin>
 
 
-			<!-- Creation of the bundle jar -->
+			<!-- Creation of the bundle jar and its manifest -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -45,11 +59,11 @@
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <!-- additional resources in the bundle -->                        
-                        <Include-Resource>{maven-resources},
+                        <!-- <Include-Resource>{maven-resources},
                         	metamodel=metamodel,
                         	plugin.xml,
                         	plugin.properties
-                        </Include-Resource>
+                        </Include-Resource> -->
                     </instructions>
                 </configuration>
 		
