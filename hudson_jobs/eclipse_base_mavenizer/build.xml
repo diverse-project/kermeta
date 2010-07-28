@@ -19,6 +19,7 @@
 	</target>	
 	<target name="get_executable_libs">
 		<echo>Step 1 - Retrieve latest version of the executables</echo>
+		<mkdir dir="${lib.folder}"/>
 		<get src="${simple.maven.osgi.file.deploy.url}" 
 							dest="${lib.folder}/${smofd.jar}"
 							usetimestamp="true"/>
