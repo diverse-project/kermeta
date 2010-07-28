@@ -1,4 +1,4 @@
-/* $Id: CheckOption.java,v 1.3 2007-08-08 13:00:20 dvojtise Exp $
+/* $Id$
  * Created on 11 mai 2004
  *			Erwan Drezen
  */

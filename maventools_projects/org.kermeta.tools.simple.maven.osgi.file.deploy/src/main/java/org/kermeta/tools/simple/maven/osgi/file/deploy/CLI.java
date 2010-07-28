@@ -1,4 +1,4 @@
-/* $Id: $
+/* $Id$
  * Project    : org.kermeta.tools.simple.maven.osgi.file.install
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
@@ -26,6 +26,7 @@ import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_groupid;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_jarfolder;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_repositoryid;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_simulate;
+import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_url;
 
 
 
@@ -48,6 +49,7 @@ public class CLI {
     protected String repositoryId="localhost";
     protected boolean simulation=false;
     protected String defaultVersion="1.0.0";
+    protected String deploymentUrl = "file://var/www/html/maven2";
     
     
     /**
@@ -64,6 +66,7 @@ public class CLI {
 				new Option_jarfolder (new Vector<String>()),
 				new Option_groupid (new Vector<String>()),
 				new Option_repositoryid (new Vector<String>()),
+				new Option_url (new Vector<String>()),
 				new Option_simulate (),
 				new Option_H ()
 			} 
@@ -95,6 +98,14 @@ public class CLI {
 			if (it.hasNext())
 			{
 				repositoryId = it.next().toString();
+			}
+		}
+	    if (checkOption.Saw ("-url"))
+		{
+	    	Iterator<?> it = checkOption.getOption("-url").getParameters().iterator();			
+			if (it.hasNext())
+			{
+				deploymentUrl = it.next().toString();
 			}
 		}
 	    if(checkOption.Saw ("-h"))
@@ -135,6 +146,7 @@ public class CLI {
 				command.append(" -DrepositoryId="+repositoryId);
 				command.append(" -Dpackaging=jar");
 				command.append(" -DgeneratePom=true");
+				command.append(" -Durl="+deploymentUrl);
 				System.out.println(command);
 				if(!simulation){
 					Process p = Runtime.getRuntime().exec(command.toString());
