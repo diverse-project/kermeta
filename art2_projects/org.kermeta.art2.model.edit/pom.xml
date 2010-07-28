@@ -45,6 +45,7 @@
 				
                 <configuration>
                     <instructions>
+                        <includez>foo.MF</includez>                    	
                     	<Bundle-SymbolicName>org.kermeta.art2.model.edit;singleton:=true</Bundle-SymbolicName>                        
                         <Export-Package>org.kermeta.art2.provider</Export-Package>
                         <Import-Package>
@@ -55,8 +56,10 @@
 						org.osgi.framework
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        Bundle-ActivationPolicy: lazy
-                        <!-- additional resources in the bundle -->                        
+                        <!-- add extra element in the manifest, copy them from this file
+                             Bundle-ActivationPolicy: lazy -->
+                        <_include>resources/META-INF/MANIFEST.MF</_include>
+                        <!-- additional resources in the bundle already done via the main resource element-->                        
                         <!-- <Include-Resource>{maven-resources},
                         	icons=icons,
                         	plugin.xml,
