@@ -51,6 +51,7 @@
             </plugin>
 
 
+<!-- Synch MANIFEST for eclipse user -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>truezip-maven-plugin</artifactId>
@@ -63,22 +64,12 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <verbose>true</verbose>
-
                             <files>
                                 <file>
                                     <source>${project.build.outputDirectory}/META-INF/MANIFEST.MF</source>
                                     <outputDirectory>${project.basedir}/META-INF</outputDirectory>
                                 </file>
                             </files>
-                            <!--
-                            <filesets>
-                                <fileset>
-                                    <directory>${archive}/META-INF2</directory>
-                                    <outputDirectory>${project.baseUri}/META-INF</outputDirectory>
-                                </fileset>
-                            </filesets>
--->
                         </configuration>
                     </execution>
 
