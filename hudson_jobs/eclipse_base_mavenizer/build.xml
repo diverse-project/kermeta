@@ -8,7 +8,7 @@
 	<property name="smofd.jar" value="tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
 	<property name="simple.maven.osgi.file.deploy.url" value="http://tipimouss.irisa.fr/maven2-snapshots/org/kermeta/tools/tools.simple.maven.osgi.file.deploy/1.0.0-SNAPSHOT/tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
 	<property name="jars.folder" location="${env.WORKSPACE}/eclipse_galileo_${eclipse.native.version.name}_base/eclipse/plugins"/>
-	<property name="deployment.url" value="file://var/www/html/maven2"/>
+	<property name="deployment.url" value="file:///var/www/html/maven2"/>
 	
 	<property name="group.id" value="org.kermeta.eclipse"/>
 	<property name="repository.id" value="tipimouss"/>
