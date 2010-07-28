@@ -128,7 +128,7 @@ public class CLI {
 		for( String file : dir.list()){
 			if(file.endsWith(".jar")){
 				StringBuffer command = new StringBuffer("mvn deploy:deploy-file ");
-				command.append(" -Dfile="+file);
+				command.append(" -Dfile="+this.jarFolder+"/"+file);
 				command.append(" -DgroupId="+groupId);
 				command.append(" -DartifactId=" +getArtifactId(file));
 				command.append(" -Dversion="+getVersion(file));
