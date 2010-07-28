@@ -1,6 +1,6 @@
 /* $Id: CheckOption.java,v 1.3 2007-08-08 13:00:20 dvojtise Exp $
  * Created on 11 mai 2004
- *
+ *			Erwan Drezen
  */
 package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 

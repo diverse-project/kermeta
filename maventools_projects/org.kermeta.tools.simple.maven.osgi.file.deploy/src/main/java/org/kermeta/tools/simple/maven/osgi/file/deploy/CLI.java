@@ -43,7 +43,7 @@ public class CLI {
     
     protected String jarFolder=".";
     protected String groupId="org.kermeta";
-    protected String repositoryId="local";
+    protected String repositoryId="localhost";
     protected boolean simulation=false;
     protected String defaultVersion="1.0.0";
     
@@ -66,6 +66,10 @@ public class CLI {
 				new Option_H ()
 			} 
 		);
+		if(args.length ==0){
+			System.out.println("No parameter seen : using default values");
+			checkOption.DisplayHelp(System.out);
+		}
 	    nbOptionErrors = checkOption.Proceed(args);
 	    if (checkOption.Saw ("-jarfolder"))
 		{

@@ -18,7 +18,7 @@ public class Option_jarfolder extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("folder containing the jar that must be analyzed and send to the maven repository");
+		setHelp ("folder containing the jar that must be analyzed and send to the maven repository. Optional, default value = .");
 		setMultiple (true);
 		setParameters (args);
 	}

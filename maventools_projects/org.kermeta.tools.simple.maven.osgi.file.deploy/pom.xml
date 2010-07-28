@@ -2,7 +2,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.tools</groupId>
 	<artifactId>tools.simple.maven.osgi.file.deploy</artifactId>
-	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Simple.maven.osgi.file.deploy</name>
 	<url>http://www.kermeta.org/</url>
@@ -38,9 +37,10 @@
 	</dependencies>
 	<build>
 
-		<!-- All plugins must have fixed version numbers to avoid automatic plugin upgrade -->
-
+		
 		<plugins>
+		
+			<!-- Java directives -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -53,16 +53,31 @@
 				</configuration>
 			</plugin>
 
+
+			<!-- Support for development in Eclipse environment  -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.3</version>
 			</plugin>
-
+			
+			<!-- Jar building directives  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<archive>
+			        	<manifest>
+			            	<mainClass>org.kermeta.tools.simple.maven.osgi.file.deploy.CLI</mainClass>			            
+			          	</manifest>          	
+        			</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	
 	<properties>
-		<distribution.base>file:/var/www/html/</distribution.base>
+		<distribution.base>file:/var/www/html/</distribution.base>		
 	</properties>
 </project>

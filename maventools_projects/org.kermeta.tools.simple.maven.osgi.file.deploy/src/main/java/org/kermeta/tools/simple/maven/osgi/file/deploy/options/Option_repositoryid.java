@@ -18,7 +18,7 @@ public class Option_repositoryid extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("id-to-map-on-server-section-of-settings.xml");
+		setHelp ("id-to-map-on-server-section-of-settings.xml. Optional, default value = localhost");
 		setMultiple (true);
 		setParameters (args);
 	}

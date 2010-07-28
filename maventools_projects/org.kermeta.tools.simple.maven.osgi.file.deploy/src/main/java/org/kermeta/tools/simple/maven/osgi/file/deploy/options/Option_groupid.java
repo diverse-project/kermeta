@@ -18,7 +18,7 @@ public class Option_groupid extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("GroupId that will be used for the artifacts");
+		setHelp ("GroupId that will be used for the artifacts. Optional, default value = org.kermeta");
 		setMultiple (true);
 		setParameters (args);
 	}
