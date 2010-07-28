@@ -18,7 +18,7 @@ public class Option_url extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("URL where the jars will be deployed. Optional, default value = file://var/www/html/maven2");
+		setHelp ("URL where the jars will be deployed. Optional, default value = file:///var/www/html/maven2");
 		setMultiple (true);
 		setParameters (args);
 	}

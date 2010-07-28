@@ -49,7 +49,7 @@ public class CLI {
     protected String repositoryId="localhost";
     protected boolean simulation=false;
     protected String defaultVersion="1.0.0";
-    protected String deploymentUrl = "file://var/www/html/maven2";
+    protected String deploymentUrl = "file:///var/www/html/maven2";
     
     
     /**
