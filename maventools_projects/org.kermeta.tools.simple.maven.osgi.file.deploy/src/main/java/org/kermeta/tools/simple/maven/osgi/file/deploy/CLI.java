@@ -129,7 +129,7 @@ public class CLI {
 				command.append(" -DgroupId="+groupId);
 				command.append(" -DartifactId=" +getArtifactId(file));
 				command.append(" -Dversion="+getVersion(file));
-				command.append(" -DrepositoryId="+getVersion(file));
+				command.append(" -DrepositoryId="+repositoryId);
 				command.append(" -Dpackaging=jar");
 				command.append(" -DgeneratePom=true");
 				System.out.println(command);
