@@ -8,6 +8,7 @@ Export-Package: org.kermeta.art2;uses:="org.eclipse.emf.ecore,org.kerm
  e.emf.common.notify,org.kermeta.art2,org.eclipse.emf.common.notify.im
  pl,org.eclipse.emf.common.util"
 Private-Package: metamodel,.
+Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Built-By: dvojtise
 Tool: Bnd-0.0.311
@@ -15,7 +16,7 @@ Bundle-Name: ART2 :: MODEL
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1280323163950
+Bnd-LastModified: 1280386916038
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

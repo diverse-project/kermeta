@@ -1,4 +1,6 @@
-
+<!-- $Id:$ -->
+<!-- License    : EPL 									 -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -58,6 +60,9 @@
                         <Import-Package>org.eclipse.emf.*,org.osgi.framework
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <!-- add extra element in the manifest, copy them from this file -->
+                        <_include>resources/META-INF/MANIFEST-part.MF</_include>
+                        
                         <!-- additional resources in the bundle -->                        
                         <!-- <Include-Resource>{maven-resources},
                         	metamodel=metamodel,

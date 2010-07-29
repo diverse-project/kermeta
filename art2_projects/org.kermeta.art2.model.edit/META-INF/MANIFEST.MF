@@ -12,7 +12,7 @@ Bundle-Name: ART2 :: MODEL :: EDIT
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1280329255120
+Bnd-LastModified: 1280386867395
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common,org.eclipse.emf.common.notify,o
  rg.eclipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse.emf.edit
