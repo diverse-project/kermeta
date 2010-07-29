@@ -6,6 +6,8 @@ package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 
 import java.util.Vector;
 
+import org.kermeta.tools.simple.maven.osgi.file.deploy.CLI;
+
 
 /**
 */
@@ -18,7 +20,7 @@ public class Option_jarfolder extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("folder containing the jar that must be analyzed and send to the maven repository. Optional, default value = .");
+		setHelp ("folder containing the jar that must be analyzed and send to the maven repository. Optional, default value = "+CLI.defaultJarFolder);
 		setMultiple (true);
 		setParameters (args);
 	}

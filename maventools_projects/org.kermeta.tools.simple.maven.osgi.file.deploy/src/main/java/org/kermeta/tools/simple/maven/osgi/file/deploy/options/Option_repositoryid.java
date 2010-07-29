@@ -6,6 +6,8 @@ package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 
 import java.util.Vector;
 
+import org.kermeta.tools.simple.maven.osgi.file.deploy.CLI;
+
 
 /**
 */
@@ -18,7 +20,8 @@ public class Option_repositoryid extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("id-to-map-on-server-section-of-settings.xml. Optional, default value = localhost");
+		setHelp ("id-to-map-on-server-section-of-settings.xml. Optional, default value = "+CLI.defaultRepositoryId);
+		
 		setMultiple (true);
 		setParameters (args);
 	}

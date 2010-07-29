@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.CheckOption;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.NoOption;
@@ -27,9 +25,6 @@ import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_jarfolder;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_repositoryid;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_simulate;
 import org.kermeta.tools.simple.maven.osgi.file.deploy.options.Option_url;
-
-
-
 
 
 
@@ -44,12 +39,16 @@ public class CLI {
     protected String[] theArgs;
     protected int nbOptionErrors=0;
     
-    protected String jarFolder=".";
-    protected String groupId="org.kermeta";
-    protected String repositoryId="localhost";
-    protected boolean simulation=false;
-    protected String defaultVersion="1.0.0";
-    protected String deploymentUrl = "file:///var/www/html/maven2";
+    public static String defaultJarFolder=".";
+    protected String jarFolder=defaultJarFolder;
+    public static String defaultGroupId="org.kermeta";
+    protected String groupId=defaultGroupId;
+    public static String defaultRepositoryId="localhost";
+    protected String repositoryId=defaultRepositoryId;
+    public static boolean simulation=false;
+    public static String defaultVersion="1.0.0";
+    public static String defaultDeploymentUrl = "file:///var/www/html/maven2";
+    protected String deploymentUrl = defaultDeploymentUrl;
     
     
     /**
@@ -138,11 +137,12 @@ public class CLI {
 		}
 		for( String file : dir.list()){
 			if(file.endsWith(".jar")){
+				JarAnalyzer jarAnalyzer = new JarAnalyzer(jarFolder, file);
 				StringBuffer command = new StringBuffer("mvn deploy:deploy-file ");
 				command.append(" -Dfile="+this.jarFolder+"/"+file);
 				command.append(" -DgroupId="+groupId);
-				command.append(" -DartifactId=" +getArtifactId(file));
-				command.append(" -Dversion="+getVersion(file));
+				command.append(" -DartifactId=" + jarAnalyzer.getArtifactId());
+				command.append(" -Dversion="+ jarAnalyzer.getVersion());
 				command.append(" -DrepositoryId="+repositoryId);
 				command.append(" -Dpackaging=jar");
 				command.append(" -DgeneratePom=true");
@@ -168,53 +168,5 @@ public class CLI {
 		}
 	}
 	
-	protected String getArtifactId(String jarFileName){
-		StringBuffer result = new StringBuffer();
-		java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(jarFileName.replace(".jar", ""), "_");
-		boolean versionFound = false;
-		boolean isFirst = true;
-		while ( tokenizer.hasMoreTokens() ) {
-			String n = tokenizer.nextToken();
-			Pattern p = Pattern.compile("\\d.*");
-			Matcher m = p.matcher(n);
-			if( m.matches() ){
-				versionFound= true;
-			}
-			if(!versionFound){
-				if(!isFirst){
-					result.append("_");
-				}
-				result.append(n); 
-			}
-			isFirst=false;
-			
-		}
-		return result.toString();
-	}
-	protected String getVersion(String jarFileName){
-		StringBuffer result = new StringBuffer();
-		java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(jarFileName.replace(".jar", ""), "_");
-		boolean versionFound = false;
-		boolean isFirst = true;
-		while ( tokenizer.hasMoreTokens() ) {
-			String n = tokenizer.nextToken();
-			Pattern p = Pattern.compile("\\d.*");
-			Matcher m = p.matcher(n);
-			if( m.matches() ){
-				versionFound= true;
-			}
-			if(versionFound){
-				if(!isFirst){
-					result.append("_");
-				}
-				result.append(n);
-				isFirst=false; 
-			}
-			
-		}
-		if(!versionFound){
-			result.append(defaultVersion);
-		}
-		return result.toString();
-	}
+	
 }

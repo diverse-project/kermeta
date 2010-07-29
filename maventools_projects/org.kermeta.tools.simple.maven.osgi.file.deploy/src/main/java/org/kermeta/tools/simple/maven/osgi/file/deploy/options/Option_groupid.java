@@ -6,6 +6,8 @@ package org.kermeta.tools.simple.maven.osgi.file.deploy.options;
 
 import java.util.Vector;
 
+import org.kermeta.tools.simple.maven.osgi.file.deploy.CLI;
+
 
 /**
 */
@@ -18,7 +20,7 @@ public class Option_groupid extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("GroupId that will be used for the artifacts. Optional, default value = org.kermeta");
+		setHelp ("GroupId that will be used for the artifacts. Optional, default value = " + CLI.defaultGroupId);
 		setMultiple (true);
 		setParameters (args);
 	}
