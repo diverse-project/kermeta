@@ -27,7 +27,7 @@ public class JarAnalyzer {
 		java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(jarFileName.replace(".jar", ""), "_");
 		boolean versionFound = false;
 		boolean isFirstTokenOfId = true;
-		boolean isFirstTokenOfVersion = false;
+		boolean isFirstTokenOfVersion = true;
 		while ( tokenizer.hasMoreTokens() ) {
 			String currentToken = tokenizer.nextToken();
 			Pattern p = Pattern.compile("\\d.*");
