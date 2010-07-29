@@ -47,7 +47,7 @@
 				
                 <configuration>
                     <instructions>                    	
-                    	<Bundle-SymbolicName>org.kermeta.art2.model.edit;singleton:=true</Bundle-SymbolicName>                        
+                    	<Bundle-SymbolicName>org.kermeta.art2.model.editor;singleton:=true</Bundle-SymbolicName>                        
                         <Export-Package>org.kermeta.art2.presentation</Export-Package>
                         <Import-Package>
                         org.kermeta.art2,
