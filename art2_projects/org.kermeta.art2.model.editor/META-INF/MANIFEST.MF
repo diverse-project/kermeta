@@ -26,7 +26,9 @@ Bundle-Name: ART2 :: MODEL :: EDITOR
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1280400863664
+Bnd-LastModified: 1280418887685
+Bundle-Activator: org.kermeta.art2.presentation.ArtEditorPlugin$Implem
+ entation
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.core.resources,org.eclipse.core.runtime;re
  gistry=split;version="3.4",org.eclipse.emf.common,org.eclipse.emf.com
@@ -48,5 +50,5 @@ Import-Package: org.eclipse.core.resources,org.eclipse.core.runtime;re
  eclipse.ui.views.contentoutline,org.eclipse.ui.views.properties;ui.vi
  ews=split,org.kermeta.art2,org.kermeta.art2.impl,org.kermeta.art2.pro
  vider,org.kermeta.art2.util,org.osgi.framework;version="1.5"
-Bundle-SymbolicName: org.kermeta.art2.model.edit;singleton:=true
+Bundle-SymbolicName: org.kermeta.art2.model.editor;singleton:=true
 
