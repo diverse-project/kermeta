@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.kermeta.art2.presentation.Art2ModelWizardID"
+            name="%_UI_Art2ModelWizard_label"
+            class="org.kermeta.art2.presentation.Art2ModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/Art2ModelFile.gif">
+         <description>%_UI_Art2ModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.kermeta.art2.presentation.Art2EditorID"
+            name="%_UI_Art2Editor_label"
+            icon="icons/full/obj16/Art2ModelFile.gif"
+            extensions="art2"
+            class="org.kermeta.art2.presentation.Art2Editor"
+            contributorClass="org.kermeta.art2.presentation.Art2ActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
