@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent" >
+<org.andnav.osm.views.OpenStreetMapView
+    android:id="@+id/osmapview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:enabled="true"
+    android:clickable="true" />
+<Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="1dip"
+        android:text="Save" />
+<Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="1dip"
+        android:text="Load" />
+        
+<sitac.view.LibToolBox android:id="@+id/newlist"
+               android:layout_width="wrap_content" 
+               android:layout_height="wrap_content"
+               android:layout_alignParentTop="true"
+               android:layout_toRightOf="@+id/button1"
+               android:layout_toLeftOf="@+id/button2"
+               android:drawSelectorOnTop="false"/>
+               
+<sitac.view.PropertyEditor android:id="@+id/newpropedit"
+                           android:layout_width="fill_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentBottom="true"
+                           android:layout_alignParentRight="true" >
+           <Button
+           		android:id="@+id/button5"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_alignParentBottom="true"
+        		android:layout_alignParentRight="true"
+        		android:layout_toLeftOf="@+id/button3"
+        		android:layout_marginLeft="1dip"
+        		android:text="Color"
+            	/>   
+            	
+           <Button
+        	android:id="@+id/button3"
+        	android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+        	android:layout_alignParentBottom="true"
+        	android:layout_alignParentRight="true"
+        	android:layout_marginLeft="1dip"
+        	android:text="+" />
+        	
+			<Button
+        	android:id="@+id/button4"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentBottom="true"
+        	android:layout_alignParentLeft="true"
+        	android:layout_marginLeft="1dip"
+        	android:text="-" /> 	             
+</sitac.view.PropertyEditor>                                          
+                       
+
+</RelativeLayout>    
+    

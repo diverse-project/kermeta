@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, OSMdroidMapActivity!</string>
+    <string name="app_name">TestOSMdroid</string>
+<string name="mapzone">MapZone</string>
+<string name="mapitempoint">MapItemPoint</string>
+<string name="mapline">MapLine</string>
+<string name="item">Item</string>
+<string name="delete">delete</string>
+<string name="colors">Colors</string>
+<string name="red">Red</string>
+<string name="blue">Blue</string>
+<string name="green">Green</string>
+<string name="yellow">Yellow</string>
+<string name="black">Black</string>
+<string name="undo">Undo</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item"
+          android:title="@string/item" />
+    <item android:id="@+id/delete"
+          android:title="@string/delete" 
+          android:icon="@drawable/delete" />
+    <item android:id="@+id/colors"
+          android:title="@string/colors" >
+          <menu>
+            <item android:id="@+id/red"
+                  android:title="@string/red" />
+            <item android:id="@+id/blue"
+                  android:title="@string/blue" />
+            <item android:id="@+id/green"
+                  android:title="@string/green" />
+            <item android:id="@+id/yellow"
+                  android:title="@string/yellow" />
+            <item android:id="@+id/black"
+                  android:title="@string/black" />
+          </menu>
+     </item>
+     <item android:id="@+id/undo"
+           android:title="@string/undo"
+           android:icon="@drawable/undo" />
+</menu>
