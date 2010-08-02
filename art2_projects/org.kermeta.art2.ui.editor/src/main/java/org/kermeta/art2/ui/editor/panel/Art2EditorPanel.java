@@ -4,8 +4,8 @@
  */
 package org.kermeta.art2.ui.editor.panel;
 
-import art2.ContainerRoot;
-import art2.NamedElement;
+import org.kermeta.art2.ContainerRoot;
+import org.kermeta.art2.NamedElement;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GradientPaint;
