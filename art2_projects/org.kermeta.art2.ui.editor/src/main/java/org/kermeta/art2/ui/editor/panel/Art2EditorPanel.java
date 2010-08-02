@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.panel;
 
 import org.kermeta.art2.ContainerRoot;
@@ -78,8 +77,8 @@ public class Art2EditorPanel extends JPanel {
         ContainerRoot nroot = Art2XmiHelper.load(uri);
         kernel.getModelHandler().merge(nroot);
         palette.clear();
-        for (art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
-            for (art2.ComponentType ct : ctl.getSubComponentTypes()) {
+        for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
+            for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
                 ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
                 palette.addComponentTypePanel(ctp, ctl.getName());
             }
@@ -96,12 +95,12 @@ public class Art2EditorPanel extends JPanel {
         southpanel.setVisible(true);
         southpanel.removeAll();
         if (p instanceof ComponentPanel) {
-            art2.NamedElement elem = (NamedElement) kernel.getUifactory().getMapping().get(p);
+        	org.kermeta.art2.NamedElement elem = (NamedElement) kernel.getUifactory().getMapping().get(p);
             ComponentPropertyEditor prop = new ComponentPropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
         if (p instanceof NodePanel) {
-            art2.ContainerNode elem = (art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
+        	org.kermeta.art2.ContainerNode elem = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
             NodePropertyEditor prop = new NodePropertyEditor(elem, kernel);
             southpanel.add(prop);
         }

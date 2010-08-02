@@ -1,11 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.Binding;
-import art2.Port;
+import org.kermeta.art2.Art2Factory;
+import org.kermeta.art2.Binding;
+import org.kermeta.art2.Port;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 
@@ -37,7 +37,7 @@ public class AddBindingCommand implements Command {
                 Port targetPort = (Port) kernel.getUifactory().getMapping().get(target);
 
                 //TODO CHECK CONSISTENCY
-                Binding newb = art2.Art2Factory.eINSTANCE.createBinding();
+                Binding newb = Art2Factory.eINSTANCE.createBinding();
                 newb.getPorts().add(fromPort);
                 newb.getPorts().add(targetPort);
 

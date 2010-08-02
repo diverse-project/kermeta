@@ -1,11 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor;
 
-import art2.ComponentInstance;
-import art2.ComponentType;
+import org.kermeta.art2.ComponentInstance;
+import org.kermeta.art2.ComponentType;
 import java.awt.Component;
 import javax.swing.JComponent;
 import org.kermeta.art2.ui.editor.command.SelectComponentCommand;
@@ -62,7 +61,7 @@ public class Art2UIFactory {
         return cui;
     }
 
-    public NodePanel createComponentNode(art2.ContainerNode node) {
+    public NodePanel createComponentNode(org.kermeta.art2.ContainerNode node) {
         NodePanel nui = new NodePanel();
         ((Component) nui).setDropTarget(new NodeDragTargetListener(nui, kernel));
         nui.setTitle(node.getName());
@@ -79,7 +78,7 @@ public class Art2UIFactory {
         return nui;
     }
 
-    public HubPanel createHub(art2.MessageHub hub) {
+    public HubPanel createHub(org.kermeta.art2.MessageHub hub) {
         HubPanel hui = new HubPanel();
         ((Component) hui).setDropTarget(new HubDragTargetListener(hui, kernel));
         hui.setTitle(hub.getName());
@@ -87,12 +86,12 @@ public class Art2UIFactory {
         return hui;
     }
 
-    public PortPanel createPort(art2.Port port) {
+    public PortPanel createPort(org.kermeta.art2.Port port) {
         PortPanel pui = new PortPanel();
-        if (port.getPortTypeRef().getRef() instanceof art2.MessagePortType) {
+        if (port.getPortTypeRef().getRef() instanceof org.kermeta.art2.MessagePortType) {
             pui.setNature(PortPanel.PortNature.MESSAGE);
         }
-        if (port.getPortTypeRef().getRef() instanceof art2.ServicePortType) {
+        if (port.getPortTypeRef().getRef() instanceof org.kermeta.art2.ServicePortType) {
             pui.setNature(PortPanel.PortNature.SERVICE);
         }
         pui.setTitle(port.getPortTypeRef().getName());
@@ -102,7 +101,7 @@ public class Art2UIFactory {
         return pui;
     }
 
-    public Binding createBinding(art2.Binding mb) {
+    public Binding createBinding(org.kermeta.art2.Binding mb) {
         Binding bui = new Binding(Binding.Type.simple);
         PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(0));
         PortPanel toPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(1));
@@ -112,7 +111,7 @@ public class Art2UIFactory {
         return bui;
     }
 
-    public Binding createMBinding(art2.MBinding mb) {
+    public Binding createMBinding(org.kermeta.art2.MBinding mb) {
         Binding bui = new Binding(Binding.Type.multi);
         PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPort());
         HubPanel toPortPanel = (HubPanel) kernel.getUifactory().getMapping().get(mb.getHub());

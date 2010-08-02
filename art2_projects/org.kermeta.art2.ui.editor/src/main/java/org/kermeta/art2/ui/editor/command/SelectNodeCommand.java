@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
 import org.kermeta.art2.ui.editor.Art2UIKernel;
@@ -25,7 +24,7 @@ public class SelectNodeCommand implements Command {
             NodePanel node = (NodePanel) p;
             node.setSelected(!node.getSelected());
 
-            art2.ContainerNode instance = (art2.ContainerNode) kernel.getUifactory().getMapping().get(node);
+            org.kermeta.art2.ContainerNode instance = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(node);
 
             if (node.getSelected()) {
                 kernel.getEditorPanel().showPropertyFor(node);

@@ -1,13 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.Binding;
-import art2.MBinding;
-import art2.MessageHub;
-import art2.Port;
+import org.kermeta.art2.Binding;
+import org.kermeta.art2.MBinding;
+import org.kermeta.art2.MessageHub;
+import org.kermeta.art2.Port;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.HubPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
@@ -39,7 +38,7 @@ public class AddMBindingCommand implements Command {
                 MessageHub targetHub = (MessageHub) kernel.getUifactory().getMapping().get(target);
 
                 //TODO CHECK CONSISTENCY
-                MBinding newb = art2.Art2Factory.eINSTANCE.createMBinding();
+                MBinding newb = org.kermeta.art2.Art2Factory.eINSTANCE.createMBinding();
                 newb.setPort(fromPort);
                 newb.setHub(targetHub);
 

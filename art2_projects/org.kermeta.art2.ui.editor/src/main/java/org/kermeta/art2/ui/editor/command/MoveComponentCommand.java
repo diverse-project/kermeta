@@ -1,11 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.ComponentInstance;
-import art2.ContainerNode;
+import org.kermeta.art2.ComponentInstance;
+import org.kermeta.art2.ContainerNode;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;

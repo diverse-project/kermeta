@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.property;
 
 import org.kermeta.art2.ui.editor.Art2UIKernel;
@@ -12,7 +11,7 @@ import org.kermeta.art2.ui.editor.Art2UIKernel;
  */
 public class ComponentPropertyEditor extends NamedElementPropertyEditor {
 
-    public ComponentPropertyEditor(art2.NamedElement elem, Art2UIKernel _kernel) {
+    public ComponentPropertyEditor(org.kermeta.art2.NamedElement elem, Art2UIKernel _kernel) {
 
         super(elem, _kernel);
 

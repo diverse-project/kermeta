@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.property;
 
 import java.util.logging.Level;
@@ -22,11 +21,11 @@ import org.kermeta.art2.ui.framework.TitledElement;
  */
 public class NamedElementPropertyEditor extends ThreePartRoundedPanel {
 
-    private art2.NamedElement namedElem = null;
+    private org.kermeta.art2.NamedElement namedElem = null;
     private TitledElement gui = null;
     private Art2UIKernel kernel;
 
-    public NamedElementPropertyEditor(art2.NamedElement elem, Art2UIKernel _kernel) {
+    public NamedElementPropertyEditor(org.kermeta.art2.NamedElement elem, Art2UIKernel _kernel) {
         namedElem = elem;
         kernel = _kernel;
         gui = (TitledElement) kernel.getUifactory().getMapping().get(namedElem);

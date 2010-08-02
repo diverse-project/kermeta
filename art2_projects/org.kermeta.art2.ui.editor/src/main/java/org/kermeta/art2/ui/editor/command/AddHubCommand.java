@@ -1,11 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.MessageHub;
+import org.kermeta.art2.MessageHub;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.HubPanel;
 
@@ -23,7 +21,7 @@ public class AddHubCommand implements Command {
 
     @Override
     public void execute(Object p) {
-        MessageHub newhub = art2.Art2Factory.eINSTANCE.createMessageHub();
+        MessageHub newhub = org.kermeta.art2.Art2Factory.eINSTANCE.createMessageHub();
         //CREATE NEW NAME
         newhub.setName("hub-"+kernel.getModelHandler().getActualModel().getMessageHub().size());
         HubPanel newhubpanel = kernel.getUifactory().createHub(newhub);

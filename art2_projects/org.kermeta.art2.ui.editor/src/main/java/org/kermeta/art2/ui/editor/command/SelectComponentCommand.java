@@ -1,10 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.ComponentInstance;
+import org.kermeta.art2.ComponentInstance;
 import java.util.List;
 import org.kermeta.art2.framework.Art2Utility;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
@@ -29,7 +28,7 @@ public class SelectComponentCommand implements Command {
             ComponentPanel component = (ComponentPanel) p;
             component.setSelected(!component.getSelected());
 
-            art2.ComponentInstance instance = (ComponentInstance) kernel.getUifactory().getMapping().get(component);
+            org.kermeta.art2.ComponentInstance instance = (ComponentInstance) kernel.getUifactory().getMapping().get(component);
 
             if(component.getSelected()){
                 kernel.getEditorPanel().showPropertyFor(component);
@@ -37,9 +36,9 @@ public class SelectComponentCommand implements Command {
                 kernel.getEditorPanel().unshowPropertyFor(component);
             }
 
-            List<art2.Binding> relatedbinding = Art2Utility.getRelatedBinding(instance, kernel.getModelHandler().getActualModel());
+            List<org.kermeta.art2.Binding> relatedbinding = Art2Utility.getRelatedBinding(instance, kernel.getModelHandler().getActualModel());
 
-            for(art2.Binding b : relatedbinding){
+            for(org.kermeta.art2.Binding b : relatedbinding){
                 Binding belem = (Binding) kernel.getUifactory().getMapping().get(b);
                 belem.setSelected(!belem.getSelected());
             }

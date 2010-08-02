@@ -1,14 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import art2.ComponentInstance;
-import art2.ComponentType;
-import art2.ContainerNode;
-import art2.PortTypeRef;
+import org.kermeta.art2.Art2Factory;
+import org.kermeta.art2.ComponentInstance;
+import org.kermeta.art2.ComponentType;
+import org.kermeta.art2.ContainerNode;
+import org.kermeta.art2.Port;
+import org.kermeta.art2.PortTypeRef;
 import java.util.Random;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
@@ -37,7 +37,7 @@ public class AddComponentCommand implements Command {
     @Override
     public void execute(Object p) {
         if(p instanceof ComponentTypePanel){
-            ComponentInstance instance = art2.Art2Factory.eINSTANCE.createComponentInstance();
+            ComponentInstance instance = Art2Factory.eINSTANCE.createComponentInstance();
             
             ContainerNode node = (ContainerNode) kernel.getUifactory().getMapping().get(nodepanel);
             ComponentType type = (ComponentType) kernel.getUifactory().getMapping().get(p);
@@ -47,7 +47,7 @@ public class AddComponentCommand implements Command {
 
             for(PortTypeRef ref : type.getProvided()){
                 //INSTANCIATE MODEL ELEMENTS
-                art2.Port port = art2.Art2Factory.eINSTANCE.createPort();
+                Port port = Art2Factory.eINSTANCE.createPort();
                 instance.getProvided().add(port);
                 //port.setName(ref.getName());
                 port.setPortTypeRef(ref);
@@ -59,7 +59,7 @@ public class AddComponentCommand implements Command {
             }
             for(PortTypeRef ref : type.getRequired()){
                 //INSTANCIATE MODEL ELEMENTS
-                art2.Port port = art2.Art2Factory.eINSTANCE.createPort();
+                Port port = Art2Factory.eINSTANCE.createPort();
                 instance.getRequired().add(port);
                 //port.setName(ref.getName());
                 port.setPortTypeRef(ref);
