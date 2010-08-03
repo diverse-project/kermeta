@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="org.kemeta.art2.editor.eclipse.contribution1">
+         <menu
+               label="ART2"
+               path="additions"
+               id="org.kemeta.art2.editor.eclipse.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Open in Graphical editor"
+               class="org.kemeta.art2.editor.eclipse.popup.actions.OpenGraphicalEditorAction"
+               menubarPath="org.kemeta.art2.editor.eclipse.menu1/group1"
+               enablesFor="1"
+               id="org.kemeta.art2.editor.eclipse.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
