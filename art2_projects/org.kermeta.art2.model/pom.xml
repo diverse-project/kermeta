@@ -1,11 +1,11 @@
-<!-- $Id:$ -->
+<!-- $Id$ -->
 <!-- License    : EPL 									 -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>art2.model</artifactId>
-    <name>ART2 :: MODEL</name>
+    <name>ART2 :: Model</name>
     <packaging>bundle</packaging>
 
 
@@ -73,33 +73,6 @@
                 </configuration>
 		
             </plugin>
-
-
-			<!-- Synch MANIFEST for eclipse user -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>copy-out-files</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>${project.build.outputDirectory}/META-INF/MANIFEST.MF</source>
-                                    <outputDirectory>${project.basedir}/META-INF</outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
-                    </execution>
-
-                </executions>
-            </plugin>
-
 
             
         </plugins>
