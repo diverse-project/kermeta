@@ -28,11 +28,6 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>art2.framework</artifactId>
-            <version>${art2.version}</version>
-        </dependency>
     </dependencies>
 
 
