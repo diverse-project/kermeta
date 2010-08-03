@@ -47,9 +47,9 @@
 				
                 <configuration>
                     <instructions>                    	
-                    	<Bundle-SymbolicName>org.kemeta.art2.editor.eclipse;singleton:=true</Bundle-SymbolicName> 
-                    	<Bundle-Activator>org.kemeta.art2.editor.eclipse.Activator</Bundle-Activator>                    	                       
-                        <Export-Package>org.kermeta.art2.presentation</Export-Package>
+                    	<Bundle-SymbolicName>org.kermeta.art2.editor.eclipse;singleton:=true</Bundle-SymbolicName> 
+                    	<Bundle-Activator>org.kermeta.art2.editor.eclipse.Activator</Bundle-Activator>                    	                       
+                        <Export-Package>org.kermeta.art2.editor.eclipse.*</Export-Package>
                         <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>org.eclipse.ui,
                         	org.eclipse.core.runtime,

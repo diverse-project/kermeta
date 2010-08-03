@@ -1,7 +1,7 @@
 /* $Id: Art2UIFactory.java 11975 2010-08-02 16:02:55Z dvojtise $ 
  * License    : EPL 								
  * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
-package org.kemeta.art2.editor.eclipse;
+package org.kermeta.art2.editor.eclipse;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

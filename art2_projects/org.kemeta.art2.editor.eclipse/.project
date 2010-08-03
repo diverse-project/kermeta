@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.kemeta.art2.editor.eclipse</name>
+	<name>org.kermeta.art2.editor.eclipse</name>
 	<comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
 	<projects>
 		<project>art2.ui.editor</project>
@@ -23,7 +23,7 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
+		<!-- <buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<arguments>
 				<dictionary>
@@ -31,7 +31,7 @@
 					<value>&lt;project&gt;/.externalToolBuilders/Maven_Ant_Builder.launch</value>
 				</dictionary>
 			</arguments>
-		</buildCommand>
+		</buildCommand> -->
 		<buildCommand>
 			<name>org.maven.ide.eclipse.maven2Builder</name>
 			<arguments>

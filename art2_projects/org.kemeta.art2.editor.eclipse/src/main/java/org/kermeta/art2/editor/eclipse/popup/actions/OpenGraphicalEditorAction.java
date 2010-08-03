@@ -1,7 +1,7 @@
 /* $Id: Art2UIFactory.java 11975 2010-08-02 16:02:55Z dvojtise $ 
  * License    : EPL 								
  * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
-package org.kemeta.art2.editor.eclipse.popup.actions;
+package org.kermeta.art2.editor.eclipse.popup.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;

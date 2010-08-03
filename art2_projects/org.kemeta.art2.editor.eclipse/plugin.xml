@@ -17,7 +17,7 @@
          </menu>
          <action
                label="Open in Graphical editor"
-               class="org.kemeta.art2.editor.eclipse.popup.actions.OpenGraphicalEditorAction"
+               class="org.kermeta.art2.editor.eclipse.popup.actions.OpenGraphicalEditorAction"
                menubarPath="org.kemeta.art2.editor.eclipse.menu1/group1"
                enablesFor="1"
                id="org.kemeta.art2.editor.eclipse.newAction">
