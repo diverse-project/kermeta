@@ -1,0 +1,219 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>art2.platform.equinox</artifactId>
+    <packaging>jar</packaging>
+    <name>ART2 :: Platform :: Equinox</name>
+    <url>http://maven.apache.org</url>
+
+    <groupId>${parent.groupId}</groupId>
+    <version>${art2.version}</version>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+
+    <properties>
+        <eclipse.home>/Applications/eclipse/eclipse35</eclipse.home>
+        <eclipse.application>org.eclipse.platform.ide</eclipse.application>
+        <eclipse.product>org.eclipse.platform.ide</eclipse.product>
+        <osgi.ws>cocoa</osgi.ws>
+        <osgi.os>macosx</osgi.os>
+        <osgi.arch>x86_64</osgi.arch>
+        <osgi.nl>fr_FR</osgi.nl>
+        <osgi.noShutdown>true</osgi.noShutdown>
+        <consoleLog>true</consoleLog>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.ops4j</groupId>
+                <artifactId>maven-pax-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <framework>equinox</framework>
+
+                    <deployURLs>
+                        <!--
+                        file:/Applications/eclipse/eclipse35/plugins/org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar,
+                        file:/Applications/eclipse/eclipse35/plugins/org.eclipse.equinox.common_3.5.1.R35x_v20090807-1100.jar,
+                        file:/Applications/eclipse/eclipse35/plugins/org.eclipse.update.configurator_3.3.0.v20090312.jar
+                        -->
+                    </deployURLs>
+
+                    <provision>
+                        <param>--log=DEBUG</param>
+                        <param>--workingDirectory=target/runner</param>
+                        <param>--definitionURL=http://osgilab.googlecode.com/svn/trunk/org.osgilab.tips/pax-platforms/platform-equinox-3.6.0.xml</param>
+                    </provision>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>zodiac-repository</id>
+            <name>Zodiac Milestone Repository</name>
+            <url>http://zodiac.springsource.com/maven/bundles/milestone </url>
+        </repository>
+    </repositories>
+
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.model</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <!--
+
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint</artifactId>
+            <version>0.1-incubating</version>
+        </dependency>
+
+
+        -->
+       <dependency>
+            <groupId>org.apache.geronimo.blueprint</groupId>
+            <artifactId>geronimo-blueprint</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+<!-- Gemini 
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint</groupId>
+            <artifactId>gemini-blueprint-core</artifactId>
+            <version>1.0.0.M1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.aopalliance-1.0</artifactId>
+            <version>1.0.0-rc1</version>
+        </dependency>
+-->
+
+
+
+        <dependency>
+            <groupId>com.weiglewilczek.scala-lang-osgi</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.core</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.deploy.osgi</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>art2.adaptation.model</artifactId>
+            <groupId>org.kermeta.art2</groupId>
+            <type>jar</type>
+            <version>${art2.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>commons-management</artifactId>
+            <groupId>org.fusesource.commonman</groupId>
+            <type>jar</type>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.core.bus</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+-->
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.kompare</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-mvn</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-assembly</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.entimid</groupId>
+            <artifactId>entimid.framework</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.core.bus.activemq</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+</project>
