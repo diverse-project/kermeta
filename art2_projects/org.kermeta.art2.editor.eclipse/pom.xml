@@ -85,7 +85,6 @@
                         	org.kermeta.art2.impl,
                         	org.kermeta.art2.util,
                         	org.kermeta.art2.framework,
-                        	org.kermeta.art2.provider,
 							org.eclipse.emf.*,
 							org.osgi.framework
                         </Import-Package>                        
