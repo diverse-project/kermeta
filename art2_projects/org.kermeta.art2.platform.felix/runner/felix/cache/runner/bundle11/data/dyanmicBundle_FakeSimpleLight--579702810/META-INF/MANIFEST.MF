@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: FakeSimpleLight--579702810
+Bundle-Version: 1
+DynamicImport-Package: *
+Bundle-ManifestVersion: 2
+Bundle-Blueprint: component.xml
+

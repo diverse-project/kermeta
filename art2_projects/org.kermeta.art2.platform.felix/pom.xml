@@ -1,0 +1,184 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>art2.platform.felix</artifactId>
+    <packaging>jar</packaging>
+    <name>ART2 :: Platform :: Felix</name>
+    <url>http://maven.apache.org</url>
+
+    <groupId>${parent.groupId}</groupId>
+    <version>${art2.version}</version>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+
+    <properties>
+        <art2.node.name>duke.irisa.fr</art2.node.name>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.ops4j</groupId>
+                <artifactId>maven-pax-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <framework>felix</framework>
+<!--
+                    <deployURLs>
+
+
+
+    mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.activation-api-1.1/1.5.0,
+    mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.1/1.5.0,
+    mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.5.0,
+    mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.1.12_1,
+    mvn:org.fusesource.commonman/commons-management/1.0,
+    mvn:org.apache.camel/camel-core/2.4.0,
+    mvn:org.apache.camel/camel-blueprint/2.4.0,
+    mvn:commons-codec/commons-codec/1.4,
+    mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-httpclient/3.1_4,
+    mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/1.1.2,
+    mvn:org.apache.camel/camel-http/2.4.0,
+    mvn:org.eclipse.jetty/jetty-util/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-io/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-http/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-client/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-continuation/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-jmx/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-server/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-security/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-servlet/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-servlets/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-xml/7.1.4.v20100610,
+    mvn:org.eclipse.jetty/jetty-webapp/7.1.4.v20100610,
+    mvn:org.apache.camel/camel-jetty/2.4.0
+
+
+                    </deployURLs>
+                    -->
+
+
+                    <provision>
+
+
+                     <!--   <param>-ups</param>
+                        <param>-keepOriginalUrls</param>-->
+                        <param>--log=INFO</param>
+                        <!--<param>-shell=karaf.shell</param>-->
+                    </provision>
+                    
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.model</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>art2.adaptation.model</artifactId>
+            <groupId>org.kermeta.art2</groupId>
+            <type>jar</type>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint</artifactId>
+            <version>0.1-incubating</version>
+        </dependency>
+        <dependency>
+            <groupId>com.weiglewilczek.scala-lang-osgi</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.core.bus.activemq</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.core</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.deploy.osgi</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.kompare</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-mvn</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-assembly</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.entimid</groupId>
+            <artifactId>entimid.framework</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+
+    </dependencies>
+</project>
