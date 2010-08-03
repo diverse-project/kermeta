@@ -6,7 +6,7 @@
     <artifactId>art2.root</artifactId>
     <packaging>pom</packaging>
     <version>2</version>
-    <name>ART2 :: ROOT</name>
+    <name>ART2 :: Root</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -46,6 +46,58 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.0.1</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <!-- Synch MANIFEST for eclipse user -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/META-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/META-INF"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>copy-out-files</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <files>
+                                <file>
+                                    <source>${project.build.outputDirectory}/META-INF/MANIFEST.MF</source>
+                                    <outputDirectory>${project.basedir}/META-INF</outputDirectory>
+                                </file>
+                            </files>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+-->
         </plugins>
     </build>
 
