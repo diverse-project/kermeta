@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>art2.ui.framework</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>ART2 :: UI FRAMEWORK</name>
     
     <groupId>${parent.groupId}</groupId>
@@ -17,8 +17,52 @@
         <groupId>org.kermeta.art2</groupId>
         <version>2</version>
     </parent>
-    
-
+    <build>
+     	<plugins>
+			<!-- Creation of the bundle jar and its manifest -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+				
+                <configuration>
+                    <instructions>                    	
+                    	<Bundle-SymbolicName>org.kemeta.art2.ui.framework;singleton:=true</Bundle-SymbolicName> 
+                    	<!-- <Bundle-Activator>org.kemeta.art2.editor.eclipse.Activator</Bundle-Activator> -->                    	                       
+                        <Export-Package>
+                        	org.kemeta.art2.ui.framework,
+                        	org.kemeta.art2.ui.framework.elements,
+                        	org.jdesktop.swingx
+                        </Export-Package>
+                        <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
+                        <Require-Bundle>
+                        </Require-Bundle>
+                        <!-- use the ! for avoiding to import some packages that are already there with the Require-Bundle -->
+                     	<Import-Package>
+							javax.*,
+                        	org.kermeta.art2,
+                        	org.kermeta.art2.impl,
+                        	org.kermeta.art2.util,
+                        	org.kermeta.art2.framework,
+                        	org.kermeta.art2.provider,
+							org.eclipse.emf.*,
+							org.osgi.framework
+                        </Import-Package>                        
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <!-- add extra element in the manifest, copy them from this file
+                             ex: Bundle-ActivationPolicy: lazy -->
+                        <!-- <_include>src/main/resources/MANIFEST-part.MF</_include> -->
+                        <!-- embed any dependencies with artifactId swingx -->
+						<Embed-Dependency>swingx</Embed-Dependency>
+                        
+                    </instructions>
+                </configuration>
+				
+				
+            </plugin>
+    	</plugins>
+	</build>
     <dependencies>
         <dependency>
             <groupId>org.swinglabs</groupId>
