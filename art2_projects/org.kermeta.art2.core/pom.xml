@@ -1,0 +1,78 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>art2.core</artifactId>
+    <packaging>bundle</packaging>
+    <name>ART2 :: Core</name>
+
+    <groupId>${parent.groupId}</groupId>
+    <version>${art2.version}</version>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.model</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.kompare</artifactId>
+            <version>${art2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>art2.deploy.osgi</artifactId>
+            <version>${art2.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Import-Package>
+                           *
+                        </Import-Package>
+                        <Private-Package>
+                            org.kermeta.art2.core.impl
+                        </Private-Package>
+                        <Export-Package>
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+</project>
