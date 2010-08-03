@@ -28,6 +28,32 @@
 
     <build>
         <plugins>
+            <!-- APT ART2 PLUGIN : ART2 JAVA ANNOTATION INTEGRATION -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.0-alpha-3</version>
+                <configuration>
+                    <outputFiles>
+                        <outputFile>art2Lib.xmi</outputFile>
+                    </outputFiles>
+                    <options>
+                        <value>art2.lib.id=${project.artifactId}</value>
+                        <value>art2.lib.group=${project.groupId}</value>
+                        <value>art2.lib.version=${project.version}</value>
+                    </options>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                            <goal>test-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Java compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -38,6 +64,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- Resources plugin : allow to collect and embedd severals resources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -46,6 +73,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- Felix BnD plugin : allow Bundle packaging : generate OSGi JAR  -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
