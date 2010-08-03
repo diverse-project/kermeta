@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.art2.adaptation.model/src"
+    modelPluginID="org.kermeta.art2.adaptation.model" modelName="Art2adaptation" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.kermeta.art2.model/metamodel/art.genmodel#//art2">
+  <foreignModel>art2adaptation.ecore</foreignModel>
+  <genPackages prefix="Art2adaptation" basePackage="org.kermeta" disposableProviderFactory="true"
+      ecorePackage="art2adaptation.ecore#/">
+    <genClasses ecoreClass="art2adaptation.ecore#//AdaptationPrimitive"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//AdaptationModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art2adaptation.ecore#//AdaptationModel/adaptations"/>
+    </genClasses>
+    <genClasses ecoreClass="art2adaptation.ecore#//ComponentTypeAdaptation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art2adaptation.ecore#//ComponentTypeAdaptation/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="art2adaptation.ecore#//ComponentInstanceAdaptation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art2adaptation.ecore#//ComponentInstanceAdaptation/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="art2adaptation.ecore#//AddComponentType"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//RemoveComponentType"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//AddComponentInstance"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//RemoveComponentInstance"/>
+  </genPackages>
+</genmodel:GenModel>
