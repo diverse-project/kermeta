@@ -79,21 +79,25 @@
 							!org.eclipse.swt.graphics, 
 							!org.eclipse.swt.layout, 
 							!org.eclipse.swt.widgets,
+							!sun.misc,
 							javax.*,
 							org.jdesktop.*,
                         	org.kermeta.art2,
                         	org.kermeta.art2.impl,
+                        	org.kermeta.art2.ui.*,
                         	org.kermeta.art2.util,
                         	org.kermeta.art2.framework,
 							org.eclipse.emf.*,
-							org.osgi.framework
+							org.osgi.framework,
+							org.apache.camel.*,
+							org.xml.sax.*
                         </Import-Package>                        
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <!-- add extra element in the manifest, copy them from this file
                              ex: Bundle-ActivationPolicy: lazy -->
                         <_include>src/main/resources/MANIFEST-part.MF</_include>
                         <!-- embed any dependencies with artifactId art2.ui.editor, art2.ui.framework -->
-						<Embed-Dependency>art2.ui.editor,art2.ui.framework</Embed-Dependency>
+						<!-- <Embed-Dependency>art2.ui.editor,art2.ui.framework</Embed-Dependency> -->
                         
                     </instructions>
                 </configuration>
