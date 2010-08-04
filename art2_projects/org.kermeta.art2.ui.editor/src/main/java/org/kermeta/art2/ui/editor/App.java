@@ -20,8 +20,11 @@ public class App {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setPreferredSize(new Dimension(800, 600));
 
-        Art2EditorPanel artpanel = new Art2EditorPanel();
-        jframe.add(artpanel,BorderLayout.CENTER);
+        Art2Editor artpanel = new Art2Editor();
+        jframe.add(artpanel.getPanel(),BorderLayout.CENTER);
+
+        artpanel.loadModel("/Users/ffouquet/Desktop/distart.xmi");
+
 
         jframe.pack();
         jframe.setVisible(true);

@@ -15,7 +15,10 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import org.kermeta.art2.ContainerRoot;
+import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
+import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 
 /**
  *
@@ -40,7 +43,25 @@ public class LoadNewLibCommand implements Command {
                 JarEntry entry = jar.getJarEntry("META-INF/art2Lib.xmi");
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));
-                    kernel.getEditorPanel().load(path);
+                    //kernel.getEditorPanel().loadLib(path);
+
+
+
+                    ContainerRoot nroot = Art2XmiHelper.load(path);
+                    kernel.getModelHandler().merge(nroot);
+                    kernel.getEditorPanel().getPalette().clear();
+                    for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
+                        for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
+                            ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
+                            kernel.getEditorPanel().getPalette().addComponentTypePanel(ctp, ctl.getName());
+                        }
+                    }
+                    kernel.getEditorPanel().doLayout();
+                    kernel.getEditorPanel().repaint();
+                    kernel.getEditorPanel().revalidate();
+
+
+
                 }
             } catch (IOException ex) {
                 Logger.getLogger(LoadNewLibCommand.class.getName()).log(Level.SEVERE, null, ex);

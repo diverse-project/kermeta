@@ -29,9 +29,17 @@ import org.kermeta.art2.ui.framework.elements.NodePanel;
 public class Art2EditorPanel extends JPanel {
 
     private Art2UIKernel kernel = new Art2UIKernel();
+
+    public Art2UIKernel getKernel() {
+        return kernel;
+    }
     private JXPanel leftpanel = new JXPanel();
     private JXPanel southpanel = new JXPanel();
     private ComponentTypePalette palette = new ComponentTypePalette();
+
+    public ComponentTypePalette getPalette() {
+        return palette;
+    }
     private CommandPanel commandPanel;
 
     public Art2EditorPanel() {
@@ -73,7 +81,8 @@ public class Art2EditorPanel extends JPanel {
 
     }
 
-    public void load(String uri) {
+    /*
+    public void loadLib(String uri) {
         ContainerRoot nroot = Art2XmiHelper.load(uri);
         kernel.getModelHandler().merge(nroot);
         palette.clear();
@@ -89,7 +98,7 @@ public class Art2EditorPanel extends JPanel {
         //TODO CLEAN PALETTE
 
         //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
-    }
+    }*/
 
     public void showPropertyFor(JPanel p) {
         southpanel.setVisible(true);
