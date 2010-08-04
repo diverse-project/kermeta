@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>art2.ui.editor</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>ART2 :: UI EDITOR</name>
     <url>http://maven.apache.org</url>
 
