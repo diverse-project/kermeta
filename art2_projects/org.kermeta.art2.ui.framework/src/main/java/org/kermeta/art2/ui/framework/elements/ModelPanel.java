@@ -108,4 +108,9 @@ public class ModelPanel extends JLayeredPane {
         }
         return preferedDim;
     }
+
+    public void clear(){
+        bindingPanel.clear();
+        nodePanel.removeAll();
+    }
 }

@@ -17,6 +17,7 @@
         <groupId>org.kermeta.art2</groupId>
         <version>2</version>
     </parent>
+
     <build>
      	<plugins>
             <!-- Creation of the bundle jar and its manifest -->
@@ -32,20 +33,14 @@
                         </Export-Package>
                         <!-- use the ! for avoiding to import some packages that are already there with the Require-Bundle -->
                      	<Import-Package>
-							javax.*,
-                        	org.kermeta.art2,
-                        	org.kermeta.art2.impl,
-                        	org.kermeta.art2.util,
-                        	org.kermeta.art2.framework,
-                        	org.kermeta.art2.provider,
-							org.eclipse.emf.*,
-							org.osgi.framework
+				*
                         </Import-Package>                        
                         <!-- add extra element in the manifest, copy them from this file
                              ex: Bundle-ActivationPolicy: lazy -->
                         <!-- <_include>src/main/resources/MANIFEST-part.MF</_include> -->
                         <!-- embed any dependencies with artifactId swingx -->
 			<Embed-Dependency>swingx</Embed-Dependency>
+                        <!--<Embed-Transitive>true</Embed-Transitive>-->
                     </instructions>
                 </configuration>	
             </plugin>

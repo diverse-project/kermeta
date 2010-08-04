@@ -38,6 +38,14 @@ public class BindingPanel extends JPanel {
         bindings.remove(b);
     }
 
+    public void clear(){
+        Collection<Binding> rbindings = new ArrayList();
+        rbindings.addAll(bindings);
+        for(Binding b : rbindings){
+            removeBinding(b);
+        }
+    }
+
     public void drawCable(Graphics2D g2D, Point start, Point end) {
         Point intermed = new Point();
         intermed.y = Math.max(end.y, start.y) + 30;
