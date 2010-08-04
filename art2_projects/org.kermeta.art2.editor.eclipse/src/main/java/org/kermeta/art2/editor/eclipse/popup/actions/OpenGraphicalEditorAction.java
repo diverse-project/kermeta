@@ -45,7 +45,7 @@ public class OpenGraphicalEditorAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		
 		JFrame jframe = new JFrame("Art2 UI Tester");
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jframe.setPreferredSize(new Dimension(800, 600));
 
         Art2Editor artpanel = new Art2Editor();
