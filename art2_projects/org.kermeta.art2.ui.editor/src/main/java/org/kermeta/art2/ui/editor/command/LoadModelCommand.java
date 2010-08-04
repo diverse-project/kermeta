@@ -62,7 +62,7 @@ public class LoadModelCommand implements Command {
                     portPanel.setType(PortType.PROVIDED);
                     insPanel.addLeft(portPanel);
                 }
-                for (Port portR : ci.getProvided()) {
+                for (Port portR : ci.getRequired()) {
                     //ADDING NEW PORT TO UI
                     PortPanel portPanel = kernel.getUifactory().createPort(portR);
                     portPanel.setType(PortType.REQUIRED);
@@ -77,7 +77,7 @@ public class LoadModelCommand implements Command {
             HubPanel newhubpanel = kernel.getUifactory().createHub(hub);
             kernel.getModelPanel().addHub(newhubpanel);
         }
-        /*
+        
         //LOAD BINDING
         for (Binding binding : kernel.getModelHandler().getActualModel().getBindings()) {
             org.kermeta.art2.ui.framework.elements.Binding uib = kernel.getUifactory().createBinding(binding);
@@ -88,7 +88,7 @@ public class LoadModelCommand implements Command {
         for (MBinding binding : kernel.getModelHandler().getActualModel().getMBindings()) {
             org.kermeta.art2.ui.framework.elements.Binding uib = kernel.getUifactory().createMBinding(binding);
             kernel.getModelPanel().addBinding(uib);
-        }*/
+        }
 
 
         //REFRESH UI
