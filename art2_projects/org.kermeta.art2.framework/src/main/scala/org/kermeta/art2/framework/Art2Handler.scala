@@ -83,4 +83,7 @@ class Art2Handler {
   /* ACESSOR TO MODEL */
   def getActualModel : ContainerRoot = {actualModel}
 
+  def setActualModel(c : ContainerRoot) = {
+    actualModel = c
+  }
 }
