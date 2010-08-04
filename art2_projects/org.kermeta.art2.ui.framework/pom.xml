@@ -33,7 +33,7 @@
                         </Export-Package>
                         <!-- use the ! for avoiding to import some packages that are already there with the Require-Bundle -->
                      	<Import-Package>
-				*
+				!*
                         </Import-Package>                        
                         <!-- add extra element in the manifest, copy them from this file
                              ex: Bundle-ActivationPolicy: lazy -->
