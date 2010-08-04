@@ -1,6 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.art2.platform.eclipse,org.kermeta.art2.pla
- tform.eclipse.provisionning;uses:="org.osgi.framework"
 Built-By: ffouquet
 Build-Jdk: 1.6.0_20
 Bundle-Version: 2.0.0.SNAPSHOT
@@ -10,8 +8,7 @@ Bnd-LastModified: 1280842016908
 Created-By: Apache Maven Bundle Plugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.kermeta.art2.platform.equinox
-Import-Package: org.kermeta.art2.platform.eclipse,org.kermeta.art2.pla
- tform.eclipse.provisionning,org.osgi.framework;version="1.5"
+Import-Package: org.osgi.framework;version="1.5"
 Bundle-Activator: org.kermeta.art2.platform.eclipse.provisionning.Art2ProvisionningActivator
-Require-Bundle: org.eclipse.equinox.common;bundle-version="3.6.0"
+Require-Bundle: org.eclipse.equinox.common
 

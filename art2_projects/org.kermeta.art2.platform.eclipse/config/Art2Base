@@ -1,1 +1,6 @@
+mvn:org.fusesource.commonman/commons-management
+mvn:org.apache.camel/camel-core
 mvn:org.kermeta.art2/art2.model
+mvn:org.kermeta.art2/art2.framework
+mvn:org.kermeta.art2/art2.ui.framework
+mvn:org.kermeta.art2/art2.ui.editor
