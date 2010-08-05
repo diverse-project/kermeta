@@ -223,5 +223,14 @@
             <artifactId>org.eclipse.equinox.common</artifactId>
             <version>[3.5.1.R35x_v20090807-1100,)</version>
         </dependency>
+
+
+         <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.workbench</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 </project>
