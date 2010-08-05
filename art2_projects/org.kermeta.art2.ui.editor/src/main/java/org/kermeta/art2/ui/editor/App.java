@@ -23,7 +23,7 @@ public class App {
         Art2Editor artpanel = new Art2Editor();
         jframe.add(artpanel.getPanel(),BorderLayout.CENTER);
 
-        artpanel.loadModel("/Users/ffouquet/Desktop/distart.xmi");
+        //artpanel.loadModel("/Users/ffouquet/Desktop/distart.xmi");
 
 
         jframe.pack();
