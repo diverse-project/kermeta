@@ -498,6 +498,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponentType_RequiredLibs() {
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getContainerNode() {
 		return containerNodeEClass;
 	}
@@ -599,6 +608,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EReference getContainerRoot_MBindings() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContainerRoot_ThirdParties() {
+		return (EReference)containerRootEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1011,6 +1029,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeployUnit_Url() {
+		return (EAttribute)deployUnitEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponentTypeLibrary() {
 		return componentTypeLibraryEClass;
 	}
@@ -1286,6 +1313,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__BEAN);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__START_METHOD);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__STOP_METHOD);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__REQUIRED_LIBS);
 
 		containerNodeEClass = createEClass(CONTAINER_NODE);
 		createEReference(containerNodeEClass, CONTAINER_NODE__COMPONENTS);
@@ -1300,6 +1328,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(containerRootEClass, CONTAINER_ROOT__LIBRARIY);
 		createEReference(containerRootEClass, CONTAINER_ROOT__MESSAGE_HUB);
 		createEReference(containerRootEClass, CONTAINER_ROOT__MBINDINGS);
+		createEReference(containerRootEClass, CONTAINER_ROOT__THIRD_PARTIES);
 
 		portTypeEClass = createEClass(PORT_TYPE);
 		createEAttribute(portTypeEClass, PORT_TYPE__SYNCHRONE);
@@ -1363,6 +1392,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__GROUP_NAME);
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__UNIT_NAME);
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__VERSION);
+		createEAttribute(deployUnitEClass, DEPLOY_UNIT__URL);
 
 		componentTypeLibraryEClass = createEClass(COMPONENT_TYPE_LIBRARY);
 		createEReference(componentTypeLibraryEClass, COMPONENT_TYPE_LIBRARY__SUB_COMPONENT_TYPES);
@@ -1469,6 +1499,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEAttribute(getComponentType_Bean(), ecorePackage.getEString(), "bean", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_StartMethod(), ecorePackage.getEString(), "startMethod", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_StopMethod(), ecorePackage.getEString(), "stopMethod", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_RequiredLibs(), this.getDeployUnit(), null, "requiredLibs", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerNodeEClass, ContainerNode.class, "ContainerNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainerNode_Components(), this.getComponentInstance(), null, "components", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1483,6 +1514,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getContainerRoot_Librariy(), this.getComponentTypeLibrary(), null, "librariy", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_MessageHub(), this.getMessageHub(), null, "messageHub", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_MBindings(), this.getMBinding(), null, "mBindings", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerRoot_ThirdParties(), this.getDeployUnit(), null, "thirdParties", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portTypeEClass, PortType.class, "PortType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortType_Synchrone(), ecorePackage.getEBoolean(), "synchrone", null, 0, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1542,10 +1574,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getRepository_Units(), this.getDeployUnit(), null, "units", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRepository_Url(), ecorePackage.getEString(), "url", null, 0, 1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(deployUnitEClass, DeployUnit.class, "DeployUnit", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(deployUnitEClass, DeployUnit.class, "DeployUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeployUnit_GroupName(), ecorePackage.getEString(), "groupName", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeployUnit_UnitName(), ecorePackage.getEString(), "unitName", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeployUnit_Version(), ecorePackage.getEString(), "version", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeployUnit_Url(), ecorePackage.getEString(), "url", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentTypeLibraryEClass, ComponentTypeLibrary.class, "ComponentTypeLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentTypeLibrary_SubComponentTypes(), this.getComponentType(), null, "subComponentTypes", null, 0, -1, ComponentTypeLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

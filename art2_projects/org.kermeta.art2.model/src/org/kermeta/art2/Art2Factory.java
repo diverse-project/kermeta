@@ -206,6 +206,15 @@ public interface Art2Factory extends EFactory {
 	Repository createRepository();
 
 	/**
+	 * Returns a new object of class '<em>Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deploy Unit</em>'.
+	 * @generated
+	 */
+	DeployUnit createDeployUnit();
+
+	/**
 	 * Returns a new object of class '<em>Component Type Library</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

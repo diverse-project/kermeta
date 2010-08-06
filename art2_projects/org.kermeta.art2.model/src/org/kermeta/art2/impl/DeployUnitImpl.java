@@ -10,9 +10,11 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.ComponentType;
 import org.kermeta.art2.DeployUnit;
 
 /**
@@ -25,12 +27,13 @@ import org.kermeta.art2.DeployUnit;
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getGroupName <em>Group Name</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getUnitName <em>Unit Name</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getUrl <em>Url</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
+public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 	/**
 	 * The default value of the '{@link #getGroupName() <em>Group Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -90,6 +93,26 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 	 * @ordered
 	 */
 	protected String version = VERSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected String url = URL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +201,27 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUrl(String newUrl) {
+		String oldUrl = url;
+		url = newUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.DEPLOY_UNIT__URL, oldUrl, url));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -187,6 +231,8 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 				return getUnitName();
 			case Art2Package.DEPLOY_UNIT__VERSION:
 				return getVersion();
+			case Art2Package.DEPLOY_UNIT__URL:
+				return getUrl();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,6 +253,9 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 				return;
 			case Art2Package.DEPLOY_UNIT__VERSION:
 				setVersion((String)newValue);
+				return;
+			case Art2Package.DEPLOY_UNIT__URL:
+				setUrl((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,6 +278,9 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 			case Art2Package.DEPLOY_UNIT__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
+			case Art2Package.DEPLOY_UNIT__URL:
+				setUrl(URL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -247,6 +299,8 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 				return UNIT_NAME_EDEFAULT == null ? unitName != null : !UNIT_NAME_EDEFAULT.equals(unitName);
 			case Art2Package.DEPLOY_UNIT__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case Art2Package.DEPLOY_UNIT__URL:
+				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -267,6 +321,8 @@ public abstract class DeployUnitImpl extends NamedElementImpl implements DeployU
 		result.append(unitName);
 		result.append(", version: ");
 		result.append(version);
+		result.append(", url: ");
+		result.append(url);
 		result.append(')');
 		return result.toString();
 	}

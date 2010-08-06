@@ -26,6 +26,7 @@ import org.kermeta.art2.ComponentType;
 import org.kermeta.art2.ComponentTypeLibrary;
 import org.kermeta.art2.ContainerNode;
 import org.kermeta.art2.ContainerRoot;
+import org.kermeta.art2.DeployUnit;
 import org.kermeta.art2.MBinding;
 import org.kermeta.art2.MessageHub;
 import org.kermeta.art2.PortType;
@@ -48,6 +49,7 @@ import org.kermeta.art2.TypedElement;
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getLibrariy <em>Librariy</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMessageHub <em>Message Hub</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMBindings <em>MBindings</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getThirdParties <em>Third Parties</em>}</li>
  * </ul>
  * </p>
  *
@@ -143,6 +145,16 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * @ordered
 	 */
 	protected EList<MBinding> mBindings;
+
+	/**
+	 * The cached value of the '{@link #getThirdParties() <em>Third Parties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThirdParties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DeployUnit> thirdParties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,6 +288,18 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DeployUnit> getThirdParties() {
+		if (thirdParties == null) {
+			thirdParties = new EObjectContainmentEList<DeployUnit>(DeployUnit.class, this, Art2Package.CONTAINER_ROOT__THIRD_PARTIES);
+		}
+		return thirdParties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -297,6 +321,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return ((InternalEList<?>)getMessageHub()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return ((InternalEList<?>)getMBindings()).basicRemove(otherEnd, msgs);
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+				return ((InternalEList<?>)getThirdParties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -327,6 +353,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return getMessageHub();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return getMBindings();
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+				return getThirdParties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -376,6 +404,10 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				getMBindings().clear();
 				getMBindings().addAll((Collection<? extends MBinding>)newValue);
 				return;
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+				getThirdParties().clear();
+				getThirdParties().addAll((Collection<? extends DeployUnit>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -415,6 +447,9 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				getMBindings().clear();
 				return;
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+				getThirdParties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -445,6 +480,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return messageHub != null && !messageHub.isEmpty();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return mBindings != null && !mBindings.isEmpty();
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+				return thirdParties != null && !thirdParties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

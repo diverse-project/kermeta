@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.art2.ComponentType#getBean <em>Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.ComponentType#getStartMethod <em>Start Method</em>}</li>
  *   <li>{@link org.kermeta.art2.ComponentType#getStopMethod <em>Stop Method</em>}</li>
+ *   <li>{@link org.kermeta.art2.ComponentType#getRequiredLibs <em>Required Libs</em>}</li>
  * </ul>
  * </p>
  *
@@ -236,5 +237,21 @@ public interface ComponentType extends DeployUnit {
 	 * @generated
 	 */
 	void setStopMethod(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Required Libs</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.art2.DeployUnit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Required Libs</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Required Libs</em>' reference list.
+	 * @see org.kermeta.art2.Art2Package#getComponentType_RequiredLibs()
+	 * @model
+	 * @generated
+	 */
+	EList<DeployUnit> getRequiredLibs();
 
 } // ComponentType

@@ -26,6 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/bean"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/startMethod"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/stopMethod"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/requiredLibs"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/components"/>
@@ -40,6 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/librariy"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/messageHub"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/mBindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/thirdParties"/>
     </genClasses>
     <genClasses image="false" ecoreClass="art.ecore#//PortType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//PortType/synchrone"/>
@@ -102,6 +104,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/groupName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/unitName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/url"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ComponentTypeLibrary">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentTypeLibrary/subComponentTypes"/>

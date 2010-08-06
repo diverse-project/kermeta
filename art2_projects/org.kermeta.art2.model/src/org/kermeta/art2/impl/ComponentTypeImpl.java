@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.art2.Art2Package;
 import org.kermeta.art2.ComponentType;
+import org.kermeta.art2.DeployUnit;
 import org.kermeta.art2.DictionaryType;
 import org.kermeta.art2.ExtraFonctionalProperty;
 import org.kermeta.art2.IntegrationPattern;
@@ -44,6 +46,7 @@ import org.kermeta.art2.PortTypeRef;
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getBean <em>Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getStartMethod <em>Start Method</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getStopMethod <em>Stop Method</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getRequiredLibs <em>Required Libs</em>}</li>
  * </ul>
  * </p>
  *
@@ -179,6 +182,16 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * @ordered
 	 */
 	protected String stopMethod = STOP_METHOD_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRequiredLibs() <em>Required Libs</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiredLibs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DeployUnit> requiredLibs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -410,6 +423,18 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DeployUnit> getRequiredLibs() {
+		if (requiredLibs == null) {
+			requiredLibs = new EObjectResolvingEList<DeployUnit>(DeployUnit.class, this, Art2Package.COMPONENT_TYPE__REQUIRED_LIBS);
+		}
+		return requiredLibs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -453,6 +478,8 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return getStartMethod();
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				return getStopMethod();
+			case Art2Package.COMPONENT_TYPE__REQUIRED_LIBS:
+				return getRequiredLibs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -496,6 +523,10 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				setStopMethod((String)newValue);
 				return;
+			case Art2Package.COMPONENT_TYPE__REQUIRED_LIBS:
+				getRequiredLibs().clear();
+				getRequiredLibs().addAll((Collection<? extends DeployUnit>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -535,6 +566,9 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				setStopMethod(STOP_METHOD_EDEFAULT);
 				return;
+			case Art2Package.COMPONENT_TYPE__REQUIRED_LIBS:
+				getRequiredLibs().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -565,6 +599,8 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return START_METHOD_EDEFAULT == null ? startMethod != null : !START_METHOD_EDEFAULT.equals(startMethod);
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				return STOP_METHOD_EDEFAULT == null ? stopMethod != null : !STOP_METHOD_EDEFAULT.equals(stopMethod);
+			case Art2Package.COMPONENT_TYPE__REQUIRED_LIBS:
+				return requiredLibs != null && !requiredLibs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

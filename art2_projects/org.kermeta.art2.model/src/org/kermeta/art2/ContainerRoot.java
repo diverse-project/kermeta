@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.art2.ContainerRoot#getLibrariy <em>Librariy</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMessageHub <em>Message Hub</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMBindings <em>MBindings</em>}</li>
+ *   <li>{@link org.kermeta.art2.ContainerRoot#getThirdParties <em>Third Parties</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,5 +179,21 @@ public interface ContainerRoot extends EObject {
 	 * @generated
 	 */
 	EList<MBinding> getMBindings();
+
+	/**
+	 * Returns the value of the '<em><b>Third Parties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.art2.DeployUnit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Third Parties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Third Parties</em>' containment reference list.
+	 * @see org.kermeta.art2.Art2Package#getContainerRoot_ThirdParties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DeployUnit> getThirdParties();
 
 } // ContainerRoot

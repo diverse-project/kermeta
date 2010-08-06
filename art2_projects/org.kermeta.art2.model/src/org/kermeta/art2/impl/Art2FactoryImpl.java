@@ -80,6 +80,7 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 			case Art2Package.TYPED_ELEMENT: return createTypedElement();
 			case Art2Package.MESSAGE_PORT_TYPE: return createMessagePortType();
 			case Art2Package.REPOSITORY: return createRepository();
+			case Art2Package.DEPLOY_UNIT: return createDeployUnit();
 			case Art2Package.COMPONENT_TYPE_LIBRARY: return createComponentTypeLibrary();
 			case Art2Package.NAMED_ELEMENT: return createNamedElement();
 			case Art2Package.INTEGRATION_PATTERN: return createIntegrationPattern();
@@ -293,6 +294,16 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 	public Repository createRepository() {
 		RepositoryImpl repository = new RepositoryImpl();
 		return repository;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeployUnit createDeployUnit() {
+		DeployUnitImpl deployUnit = new DeployUnitImpl();
+		return deployUnit;
 	}
 
 	/**

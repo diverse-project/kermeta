@@ -216,13 +216,22 @@ public interface Art2Package extends EPackage {
 	int DEPLOY_UNIT__VERSION = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOY_UNIT__URL = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Deploy Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOY_UNIT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int DEPLOY_UNIT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ComponentTypeImpl <em>Component Type</em>}' class.
@@ -269,6 +278,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_TYPE__VERSION = DEPLOY_UNIT__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__URL = DEPLOY_UNIT__URL;
 
 	/**
 	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
@@ -352,13 +370,22 @@ public interface Art2Package extends EPackage {
 	int COMPONENT_TYPE__STOP_METHOD = DEPLOY_UNIT_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Required Libs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__REQUIRED_LIBS = DEPLOY_UNIT_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = DEPLOY_UNIT_FEATURE_COUNT + 9;
+	int COMPONENT_TYPE_FEATURE_COUNT = DEPLOY_UNIT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ContainerNodeImpl <em>Container Node</em>}' class.
@@ -489,13 +516,22 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_ROOT__MBINDINGS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Third Parties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_ROOT__THIRD_PARTIES = 9;
+
+	/**
 	 * The number of structural features of the '<em>Container Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT_FEATURE_COUNT = 9;
+	int CONTAINER_ROOT_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.PortTypeImpl <em>Port Type</em>}' class.
@@ -850,6 +886,15 @@ public interface Art2Package extends EPackage {
 	int COMPOSITE_TYPE__VERSION = COMPONENT_TYPE__VERSION;
 
 	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__URL = COMPONENT_TYPE__URL;
+
+	/**
 	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -929,6 +974,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_TYPE__STOP_METHOD = COMPONENT_TYPE__STOP_METHOD;
+
+	/**
+	 * The feature id for the '<em><b>Required Libs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__REQUIRED_LIBS = COMPONENT_TYPE__REQUIRED_LIBS;
 
 	/**
 	 * The feature id for the '<em><b>Childs</b></em>' reference list.
@@ -1306,6 +1360,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_TYPE_LIBRARY__VERSION = DEPLOY_UNIT__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE_LIBRARY__URL = DEPLOY_UNIT__URL;
 
 	/**
 	 * The feature id for the '<em><b>Sub Component Types</b></em>' reference list.
@@ -1826,6 +1889,17 @@ public interface Art2Package extends EPackage {
 	EAttribute getComponentType_StopMethod();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.art2.ComponentType#getRequiredLibs <em>Required Libs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Required Libs</em>'.
+	 * @see org.kermeta.art2.ComponentType#getRequiredLibs()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EReference getComponentType_RequiredLibs();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.ContainerNode <em>Container Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1954,6 +2028,17 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getContainerRoot_MBindings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getThirdParties <em>Third Parties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Third Parties</em>'.
+	 * @see org.kermeta.art2.ContainerRoot#getThirdParties()
+	 * @see #getContainerRoot()
+	 * @generated
+	 */
+	EReference getContainerRoot_ThirdParties();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.PortType <em>Port Type</em>}'.
@@ -2433,6 +2518,17 @@ public interface Art2Package extends EPackage {
 	EAttribute getDeployUnit_Version();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2.DeployUnit#getUrl <em>Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Url</em>'.
+	 * @see org.kermeta.art2.DeployUnit#getUrl()
+	 * @see #getDeployUnit()
+	 * @generated
+	 */
+	EAttribute getDeployUnit_Url();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.ComponentTypeLibrary <em>Component Type Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2871,6 +2967,14 @@ public interface Art2Package extends EPackage {
 		EAttribute COMPONENT_TYPE__STOP_METHOD = eINSTANCE.getComponentType_StopMethod();
 
 		/**
+		 * The meta object literal for the '<em><b>Required Libs</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_TYPE__REQUIRED_LIBS = eINSTANCE.getComponentType_RequiredLibs();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.ContainerNodeImpl <em>Container Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2969,6 +3073,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference CONTAINER_ROOT__MBINDINGS = eINSTANCE.getContainerRoot_MBindings();
+
+		/**
+		 * The meta object literal for the '<em><b>Third Parties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER_ROOT__THIRD_PARTIES = eINSTANCE.getContainerRoot_ThirdParties();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.PortTypeImpl <em>Port Type</em>}' class.
@@ -3365,6 +3477,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPLOY_UNIT__VERSION = eINSTANCE.getDeployUnit_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOY_UNIT__URL = eINSTANCE.getDeployUnit_Url();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.ComponentTypeLibraryImpl <em>Component Type Library</em>}' class.
