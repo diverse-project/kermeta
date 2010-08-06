@@ -1,14 +1,19 @@
 Manifest-Version: 1.0
-Built-By: ffouquet
-Build-Jdk: 1.6.0_20
-Bundle-Version: 2.0.0.SNAPSHOT
+Export-Package: org.kermeta.art2.platform.eclipse.provisionning;uses:=
+ "org.eclipse.core.runtime,org.osgi.framework"
+Bundle-ClassPath: .
+Built-By: hrambelo
 Tool: Bnd-0.0.357
 Bundle-Name: ART2 :: Platform :: Equinox
-Bnd-LastModified: 1280842016908
 Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_18
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1281101618166
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.kermeta.art2.platform.equinox
-Import-Package: org.osgi.framework;version="1.5"
-Bundle-Activator: org.kermeta.art2.platform.eclipse.provisionning.Art2ProvisionningActivator
-Require-Bundle: org.eclipse.equinox.common
+Bundle-Activator: org.kermeta.art2.platform.eclipse.provisionning.Art2
+ ProvisionningActivator
+Import-Package: org.eclipse.core.runtime;common=split;version="3.4",or
+ g.kermeta.art2.platform.eclipse.provisionning,org.osgi.framework;vers
+ ion="1.5"
+Bundle-SymbolicName: org.kermeta.art2.platform.eclipse
 
