@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Private-Package: org.kermeta.art2.adaptation.deploy.osgi.context,org.k
+ ermeta.art2.adaptation.deploy.osgi,org.kermeta.art2.adaptation.deploy
+ .osgi.command.generator,org.kermeta.art2.adaptation.deploy.osgi.comma
+ nd
+Bundle-ClassPath: .
+Built-By: ffouquet
+Tool: Bnd-0.0.311
+Bundle-Name: ART2 :: Deploy :: OSGI
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 2.0.0.SNAPSHOT
+Build-Jdk: 1.6.0_20
+Bnd-LastModified: 1281018600848
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
+ kermeta.art2,org.kermeta.art2.api.service.adaptation.deploy,org.kerme
+ ta.art2.framework,org.kermeta.art2.framework.aspects,org.kermeta.art2
+ adaptation,org.osgi.framework;version="1.5",org.osgi.service.blueprin
+ t.container;version="1.0",scala,scala.collection,scala.collection.gen
+ eric,scala.collection.immutable,scala.collection.mutable,scala.reflec
+ t,scala.runtime,scala.xml
+Bundle-SymbolicName: org.kermeta.art2.deploy.osgi
+

@@ -8,10 +8,13 @@ import org.kermeta.art2adaptation.AdaptationModel
 import org.kermeta.art2adaptation.AdaptationPrimitive
 import org.kermeta.art2adaptation.AddComponentInstance
 import org.kermeta.art2adaptation.AddComponentType
+import org.kermeta.art2adaptation.AddThirdParty
 import org.kermeta.art2adaptation.ComponentInstanceAdaptation
 import org.kermeta.art2adaptation.ComponentTypeAdaptation
 import org.kermeta.art2adaptation.RemoveComponentInstance
 import org.kermeta.art2adaptation.RemoveComponentType
+import org.kermeta.art2adaptation.RemoveThirdParty
+import org.kermeta.art2adaptation.ThirdPartyAdaptation
 import scala.collection.JavaConversions._
 
 class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
@@ -25,8 +28,13 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     var listPrimitive = plan(model)
     println("plansize="+listPrimitive.size);
     listPrimitive foreach{ p => p match {
+        //ThirdParty
+        case tpa : AddThirdParty =>executedCommand = executedCommand ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
+        case tpa : RemoveThirdParty =>executedCommand = executedCommand ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
+        //ComponentType
         case cta : AddComponentType =>executedCommand = executedCommand ++ List(AddComponentTypeCommand(cta.getRef,ctx))
         case cta : RemoveComponentType =>executedCommand = executedCommand ++ List(RemoveComponentTypeCommand(cta.getRef,ctx))
+        //ComponentInstance
         case ca : AddComponentInstance =>executedCommand = executedCommand ++ List(AddComponentInstanceCommand(ca.getRef,ctx))
         case ca : RemoveComponentInstance =>executedCommand = executedCommand ++ List(RemoveComponentInstanceCommand(ca.getRef,ctx))
         case _ => println("Unknow art2 adaptation primitive");false
@@ -43,7 +51,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         try{
           c.undo
         } catch {
-          case _ @ e => println("ART2DEPLOYERROR="+e);
+          case _ @ e => println("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
         }
       })
     allResult
@@ -52,9 +60,10 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
   /* Simple plan algorithme / separe primitive type */
   def plan(model : AdaptationModel) : List[AdaptationPrimitive] = {
+    var thirdPartiesAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ThirdPartyAdaptation] }).toList
     var componentTypeAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ComponentTypeAdaptation] }).toList
     var componentInstanceAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ComponentInstanceAdaptation] }).toList
-    var res = componentTypeAdaptations ++ componentInstanceAdaptations
+    var res = thirdPartiesAdaptations ++ componentTypeAdaptations ++ componentInstanceAdaptations
     res.toList
   }
   
