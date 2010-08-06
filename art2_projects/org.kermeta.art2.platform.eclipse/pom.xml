@@ -25,6 +25,7 @@
         <osgi.nl>fr_FR</osgi.nl>
         <osgi.noShutdown>true</osgi.noShutdown>
         <consoleLog>true</consoleLog>
+        <art2.node.name>duke</art2.node.name>
     </properties>
 
     <build>

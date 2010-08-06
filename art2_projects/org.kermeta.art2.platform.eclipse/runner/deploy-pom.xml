@@ -239,6 +239,7 @@
     <eclipse.application>org.eclipse.platform.ide</eclipse.application>
     <osgi.ws>cocoa</osgi.ws>
     <emf.version>2.6.0</emf.version>
+    <art2.node.name>duke</art2.node.name>
     <scala.version>2.8.0</scala.version>
     <osgi.arch>x86_64</osgi.arch>
     <consoleLog>true</consoleLog>
