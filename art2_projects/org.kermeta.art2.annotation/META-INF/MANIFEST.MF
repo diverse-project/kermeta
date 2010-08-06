@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.art2.annotation
+Built-By: ffouquet
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Tool: Bnd-0.0.357
+Bundle-Name: ART2 :: ANNOTATION
+Bnd-LastModified: 1281009865535
+Created-By: Apache Maven Bundle Plugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.art2.annotation
+Import-Package: org.kermeta.art2.annotation
+
