@@ -1,6 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*$Id$
  */
 package org.kermeta.art2.platform.eclipse.provisionning;
 
