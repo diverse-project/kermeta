@@ -63,11 +63,12 @@ public class Art2CoreBean implements Art2ModelHandlerService {
     public void init() {
 
         try {
-            System.out.println("ART2Node=" + nodeName);
+            System.out.println("ART2Node=" + this.bundle.getBundleContext().getProperty("art2.node.name"));
 
             
 
             /* DEBUG MODE ONLY */
+            /*
             ContainerRoot umodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/distart.xmi");
             model = Art2Factory.eINSTANCE.createContainerRoot();
             updateModel(umodel);
@@ -76,6 +77,9 @@ public class Art2CoreBean implements Art2ModelHandlerService {
                 return;
             }
             System.out.println("NoUse STATMENT");
+             * 
+             *
+             */
 
             File lastModelssaved = this.bundle.getBundleContext().getDataFile("lastModel.xmi");
             if (lastModelssaved.getTotalSpace() != 0) {
