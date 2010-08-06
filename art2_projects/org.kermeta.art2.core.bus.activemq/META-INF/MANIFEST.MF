@@ -1,0 +1,40 @@
+Manifest-Version: 1.0
+Export-Package: javax.jms,org.kermeta.art2.runtime.proxy;uses:="javax.
+ jms,scala.collection.mutable,scala.reflect,org.kermeta.art2.framework
+ ,scala,scala.runtime,scala.collection.immutable,scala.actors"
+Ignore-Package: javax.ejb,org.apache.log4j,javax.security.auth.login,o
+ rg.apache.maven.plugin.logging,org.springframework.beans,org.apache.t
+ ools.ant.taskdefs,org.apache.xpath.objects,org.springframework.beans.
+ propertyeditors,org.springframework.jndi,javax.servlet,org.apache.xpa
+ th,com.thoughtworks.xstream.io.xml,org.apache.xbean.spring.context.im
+ pl,org.apache.derby.jdbc,sun.misc,org.springframework.beans.factory,o
+ rg.codehaus.jam,javax.security.auth.callback,org.springframework.util
+ ,org.apache.commons.net.ftp,org.springframework.core.io,org.apache.av
+ alon.framework.logger,org.apache.xbean.spring.context,org.springframe
+ work.context,com.thoughtworks.xstream,javax.security.auth,org.apache.
+ maven.project,com.thoughtworks.xstream.io.json,org.apache.tools.ant,o
+ rg.objectweb.howl.log,com.thoughtworks.xstream.converters,com.thought
+ works.xstream.io,org.apache.log,javax.sql,javax.security.auth.spi,org
+ .springframework.osgi.context.support,org.apache.maven.plugin
+Bundle-ClassPath: .,geronimo-j2ee-management_1.1_spec-1.0.1.jar,junit-
+ 4.8.1.jar,geronimo-jms_1.1_spec-1.1.1.jar,kahadb-5.3.2.jar,activemq-c
+ ore-5.3.2.jar,geronimo-jta_1.1_spec-1.1.1.jar,backport-util-concurren
+ t-3.1.jar,activeio-core-3.1.2.jar,commons-logging-1.1.1.jar
+Built-By: ffouquet
+Tool: Bnd-0.0.357
+Bundle-Name: ART2 :: Core :: Bus :: ActiveMQ
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1280992475938
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.art2.core.bus.activemq
+Import-Package: javax.annotation,javax.management,javax.management.ope
+ nmbean,javax.management.remote,javax.naming,javax.naming.directory,ja
+ vax.naming.event,javax.naming.spi,javax.net,javax.net.ssl,javax.xml.p
+ arsers,org.kermeta.art2.framework,org.osgi.framework;version="1.4",or
+ g.w3c.dom,org.w3c.dom.traversal,org.xml.sax,scala,scala.actors,scala.
+ collection.immutable,scala.collection.mutable,scala.reflect,scala.run
+ time
+Embed-Dependency: *;scope=!provided
+
