@@ -28,16 +28,53 @@ class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKom
       case None=> {
           actualLocalNode match {
             case Some(aln) => stopNode(aln)
-            case None =>  println("ART2 Stange Error !!!");adaptationModel
+            case None => {
+                /* BEST EFFORT PREPARE PLATEFORM */
+                updateAllThirdParties(actualModel,targetModel)
+
+              }
           }
         }
     }
+  }
+
+  def updateAllThirdParties(actualRoot : ContainerRoot, updateRoot : ContainerRoot):AdaptationModel={
+    var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
+    updateRoot.getThirdParties.foreach{uct=>
+      actualRoot.getThirdParties.find({act=> act.getName == uct.getName }) match {
+        case Some(ct)=> //OK
+        case None => {
+            var addtpcmd = Art2adaptationFactory.eINSTANCE.createAddThirdParty
+            addtpcmd.setRef(uct)
+            adaptationModel.getAdaptations.add(addtpcmd)
+          }
+      }
+    }
+    actualRoot.getThirdParties.foreach{act=>
+      updateRoot.getThirdParties.find({uct=> act.getName == uct.getName }) match {
+        case Some(ct)=> //OK
+        case None => {
+            var rmtpcmd = Art2adaptationFactory.eINSTANCE.createRemoveThirdParty
+            rmtpcmd.setRef(act)
+            adaptationModel.getAdaptations.add(rmtpcmd)
+          }
+      }
+    }
+    adaptationModel
   }
 
 
   def stopNode(node:ContainerNode):AdaptationModel={
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
     println("STOP NODE "+node.getName)
+
+    var root = node.eContainer.asInstanceOf[ContainerRoot]
+    root.getThirdParties.foreach{tp=>
+      var rmtpcmd = Art2adaptationFactory.eINSTANCE.createRemoveThirdParty
+      rmtpcmd.setRef(tp)
+      adaptationModel.getAdaptations.add(rmtpcmd)
+    }
+
     node.getComponentTypes.foreach{ct=>
       var rmctcmd = Art2adaptationFactory.eINSTANCE.createRemoveComponentType
       rmctcmd.setRef(ct)
@@ -56,6 +93,14 @@ class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKom
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
     println("INIT NODE "+node.getName)
     //UPDATE ALL COMPONENT TYPE
+
+    var root = node.eContainer.asInstanceOf[ContainerRoot]
+    root.getThirdParties.foreach{tp=>
+      var addtpcmd = Art2adaptationFactory.eINSTANCE.createAddThirdParty
+      addtpcmd.setRef(tp)
+      adaptationModel.getAdaptations.add(addtpcmd)
+    }
+
     node.getComponentTypes.foreach{ct=>
       var newctcmd = Art2adaptationFactory.eINSTANCE.createAddComponentType
       newctcmd.setRef(ct)
@@ -72,6 +117,16 @@ class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKom
   def updateNode(actualNode : ContainerNode,updateNode : ContainerNode) : AdaptationModel = {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
     println("INIT NODE "+actualNode.getName)
+
+
+    //ThirdParty
+    //ComponentType Step
+    var actualRoot = actualNode.eContainer.asInstanceOf[ContainerRoot]
+    var updateRoot = updateNode.eContainer.asInstanceOf[ContainerRoot]
+    //TODO INSTALL ONLY USED THIRDPARTIES
+    adaptationModel.getAdaptations.addAll(updateAllThirdParties(actualRoot,updateRoot).getAdaptations)
+
+
     //ComponentType Step
     updateNode.getComponentTypes.foreach{uct=>
       actualNode.getComponentTypes.find({act=> act.isModelEquals(uct) }) match {

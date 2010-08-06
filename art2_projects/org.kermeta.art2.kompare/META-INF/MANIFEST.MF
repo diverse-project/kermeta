@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.art2.kompare;uses:="scala.runtime,org.kerm
+ eta.art2,org.eclipse.emf.common.util,org.kermeta.art2adaptation,scala
+ .collection,scala.collection.mutable,scala,org.kermeta.art2.framework
+ .aspects,scala.collection.immutable,org.eclipse.emf.ecore,org.kermeta
+ .art2.api.service.core.kompare,scala.reflect"
+Built-By: ffouquet
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Tool: Bnd-0.0.357
+Bundle-Name: ART2 :: Kompare
+Bnd-LastModified: 1281023178502
+Created-By: Apache Maven Bundle Plugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.art2.kompare
+Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
+ kermeta.art2,org.kermeta.art2.api.service.core.kompare,org.kermeta.ar
+ t2.framework.aspects,org.kermeta.art2.kompare,org.kermeta.art2adaptat
+ ion,scala,scala.collection,scala.collection.immutable,scala.collectio
+ n.mutable,scala.reflect,scala.runtime
+
