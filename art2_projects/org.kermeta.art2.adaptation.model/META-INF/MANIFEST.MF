@@ -1,16 +1,28 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
-Bundle-SymbolicName: org.kermeta.art2.adaptation.model;singleton:=true
-Bundle-Version: 1.0.0
+Export-Package: org.kermeta.art2adaptation;uses:="org.eclipse.emf.ecor
+ e,org.eclipse.emf.common.util,org.kermeta.art2adaptation.impl,org.ker
+ meta.art2",org.kermeta.art2adaptation.impl;uses:="org.eclipse.emf.eco
+ re.util,org.eclipse.emf.ecore,org.eclipse.emf.common.util,org.kermeta
+ .art2adaptation,org.eclipse.emf.common.notify,org.eclipse.emf.ecore.i
+ mpl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resource,org.k
+ ermeta.art2",org.kermeta.art2adaptation.util;uses:="org.eclipse.emf.e
+ core,org.kermeta.art2adaptation,org.eclipse.emf.common.notify,org.ecl
+ ipse.emf.common.notify.impl,org.eclipse.emf.common.util"
+Private-Package: org.kermeta.art2adaptation.util,org.kermeta.art2adapt
+ ation.impl,org.kermeta.art2adaptation,
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
-Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.kermeta.art2adaptation,
- org.kermeta.art2adaptation.impl,
- org.kermeta.art2adaptation.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.kermeta.art2.model;visibility:=reexport
-Bundle-ActivationPolicy: lazy
+Built-By: ffouquet
+Tool: Bnd-0.0.311
+Bundle-Name: ART2 :: ADAPTATION :: MODEL
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 2.0.0.SNAPSHOT
+Build-Jdk: 1.6.0_20
+Bnd-LastModified: 1281013977430
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
+ otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
+ pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
+ .resource,org.eclipse.emf.ecore.util,org.kermeta.art2,org.osgi.framew
+ ork
+Bundle-SymbolicName: org.kermeta.art2.adaptation.model
+

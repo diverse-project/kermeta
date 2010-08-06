@@ -275,6 +275,91 @@ public interface Art2adaptationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.ThirdPartyAdaptationImpl <em>Third Party Adaptation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.ThirdPartyAdaptationImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getThirdPartyAdaptation()
+	 * @generated
+	 */
+	int THIRD_PARTY_ADAPTATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THIRD_PARTY_ADAPTATION__REF = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Third Party Adaptation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THIRD_PARTY_ADAPTATION_FEATURE_COUNT = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.AddThirdPartyImpl <em>Add Third Party</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.AddThirdPartyImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddThirdParty()
+	 * @generated
+	 */
+	int ADD_THIRD_PARTY = 9;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_THIRD_PARTY__REF = THIRD_PARTY_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Add Third Party</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_THIRD_PARTY_FEATURE_COUNT = THIRD_PARTY_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.RemoveThirdPartyImpl <em>Remove Third Party</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.RemoveThirdPartyImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveThirdParty()
+	 * @generated
+	 */
+	int REMOVE_THIRD_PARTY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_THIRD_PARTY__REF = THIRD_PARTY_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Remove Third Party</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_THIRD_PARTY_FEATURE_COUNT = THIRD_PARTY_ADAPTATION_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AdaptationPrimitive <em>Adaptation Primitive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -386,6 +471,47 @@ public interface Art2adaptationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRemoveComponentInstance();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.ThirdPartyAdaptation <em>Third Party Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Third Party Adaptation</em>'.
+	 * @see org.kermeta.art2adaptation.ThirdPartyAdaptation
+	 * @generated
+	 */
+	EClass getThirdPartyAdaptation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.art2adaptation.ThirdPartyAdaptation#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see org.kermeta.art2adaptation.ThirdPartyAdaptation#getRef()
+	 * @see #getThirdPartyAdaptation()
+	 * @generated
+	 */
+	EReference getThirdPartyAdaptation_Ref();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AddThirdParty <em>Add Third Party</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Add Third Party</em>'.
+	 * @see org.kermeta.art2adaptation.AddThirdParty
+	 * @generated
+	 */
+	EClass getAddThirdParty();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.RemoveThirdParty <em>Remove Third Party</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Remove Third Party</em>'.
+	 * @see org.kermeta.art2adaptation.RemoveThirdParty
+	 * @generated
+	 */
+	EClass getRemoveThirdParty();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -512,6 +638,44 @@ public interface Art2adaptationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REMOVE_COMPONENT_INSTANCE = eINSTANCE.getRemoveComponentInstance();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.ThirdPartyAdaptationImpl <em>Third Party Adaptation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.ThirdPartyAdaptationImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getThirdPartyAdaptation()
+		 * @generated
+		 */
+		EClass THIRD_PARTY_ADAPTATION = eINSTANCE.getThirdPartyAdaptation();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THIRD_PARTY_ADAPTATION__REF = eINSTANCE.getThirdPartyAdaptation_Ref();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.AddThirdPartyImpl <em>Add Third Party</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.AddThirdPartyImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddThirdParty()
+		 * @generated
+		 */
+		EClass ADD_THIRD_PARTY = eINSTANCE.getAddThirdParty();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.RemoveThirdPartyImpl <em>Remove Third Party</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.RemoveThirdPartyImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveThirdParty()
+		 * @generated
+		 */
+		EClass REMOVE_THIRD_PARTY = eINSTANCE.getRemoveThirdParty();
 
 	}
 

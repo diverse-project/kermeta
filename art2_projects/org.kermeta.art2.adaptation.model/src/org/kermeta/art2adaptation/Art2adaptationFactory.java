@@ -98,6 +98,33 @@ public interface Art2adaptationFactory extends EFactory {
 	RemoveComponentInstance createRemoveComponentInstance();
 
 	/**
+	 * Returns a new object of class '<em>Third Party Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Third Party Adaptation</em>'.
+	 * @generated
+	 */
+	ThirdPartyAdaptation createThirdPartyAdaptation();
+
+	/**
+	 * Returns a new object of class '<em>Add Third Party</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add Third Party</em>'.
+	 * @generated
+	 */
+	AddThirdParty createAddThirdParty();
+
+	/**
+	 * Returns a new object of class '<em>Remove Third Party</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Remove Third Party</em>'.
+	 * @generated
+	 */
+	RemoveThirdParty createRemoveThirdParty();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

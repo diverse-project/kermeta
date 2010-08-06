@@ -145,6 +145,29 @@ public class Art2adaptationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2adaptationPackage.THIRD_PARTY_ADAPTATION: {
+				ThirdPartyAdaptation thirdPartyAdaptation = (ThirdPartyAdaptation)theEObject;
+				T result = caseThirdPartyAdaptation(thirdPartyAdaptation);
+				if (result == null) result = caseAdaptationPrimitive(thirdPartyAdaptation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.ADD_THIRD_PARTY: {
+				AddThirdParty addThirdParty = (AddThirdParty)theEObject;
+				T result = caseAddThirdParty(addThirdParty);
+				if (result == null) result = caseThirdPartyAdaptation(addThirdParty);
+				if (result == null) result = caseAdaptationPrimitive(addThirdParty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.REMOVE_THIRD_PARTY: {
+				RemoveThirdParty removeThirdParty = (RemoveThirdParty)theEObject;
+				T result = caseRemoveThirdParty(removeThirdParty);
+				if (result == null) result = caseThirdPartyAdaptation(removeThirdParty);
+				if (result == null) result = caseAdaptationPrimitive(removeThirdParty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -266,6 +289,51 @@ public class Art2adaptationSwitch<T> {
 	 * @generated
 	 */
 	public T caseRemoveComponentInstance(RemoveComponentInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Third Party Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Third Party Adaptation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseThirdPartyAdaptation(ThirdPartyAdaptation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add Third Party</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add Third Party</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddThirdParty(AddThirdParty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Remove Third Party</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Remove Third Party</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRemoveThirdParty(RemoveThirdParty object) {
 		return null;
 	}
 

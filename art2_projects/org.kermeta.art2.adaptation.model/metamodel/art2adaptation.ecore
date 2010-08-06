@@ -18,4 +18,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="RemoveComponentType" eSuperTypes="#//ComponentTypeAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="AddComponentInstance" eSuperTypes="#//ComponentInstanceAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveComponentInstance" eSuperTypes="#//ComponentInstanceAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdPartyAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//DeployUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddThirdParty" eSuperTypes="#//ThirdPartyAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveThirdParty" eSuperTypes="#//ThirdPartyAdaptation"/>
 </ecore:EPackage>

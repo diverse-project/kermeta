@@ -68,6 +68,9 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.REMOVE_COMPONENT_TYPE: return createRemoveComponentType();
 			case Art2adaptationPackage.ADD_COMPONENT_INSTANCE: return createAddComponentInstance();
 			case Art2adaptationPackage.REMOVE_COMPONENT_INSTANCE: return createRemoveComponentInstance();
+			case Art2adaptationPackage.THIRD_PARTY_ADAPTATION: return createThirdPartyAdaptation();
+			case Art2adaptationPackage.ADD_THIRD_PARTY: return createAddThirdParty();
+			case Art2adaptationPackage.REMOVE_THIRD_PARTY: return createRemoveThirdParty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -151,6 +154,36 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public RemoveComponentInstance createRemoveComponentInstance() {
 		RemoveComponentInstanceImpl removeComponentInstance = new RemoveComponentInstanceImpl();
 		return removeComponentInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ThirdPartyAdaptation createThirdPartyAdaptation() {
+		ThirdPartyAdaptationImpl thirdPartyAdaptation = new ThirdPartyAdaptationImpl();
+		return thirdPartyAdaptation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddThirdParty createAddThirdParty() {
+		AddThirdPartyImpl addThirdParty = new AddThirdPartyImpl();
+		return addThirdParty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RemoveThirdParty createRemoveThirdParty() {
+		RemoveThirdPartyImpl removeThirdParty = new RemoveThirdPartyImpl();
+		return removeThirdParty;
 	}
 
 	/**

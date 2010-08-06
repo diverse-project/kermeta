@@ -18,12 +18,15 @@ import org.kermeta.art2adaptation.AdaptationModel;
 import org.kermeta.art2adaptation.AdaptationPrimitive;
 import org.kermeta.art2adaptation.AddComponentInstance;
 import org.kermeta.art2adaptation.AddComponentType;
+import org.kermeta.art2adaptation.AddThirdParty;
 import org.kermeta.art2adaptation.Art2adaptationFactory;
 import org.kermeta.art2adaptation.Art2adaptationPackage;
 import org.kermeta.art2adaptation.ComponentInstanceAdaptation;
 import org.kermeta.art2adaptation.ComponentTypeAdaptation;
 import org.kermeta.art2adaptation.RemoveComponentInstance;
 import org.kermeta.art2adaptation.RemoveComponentType;
+import org.kermeta.art2adaptation.RemoveThirdParty;
+import org.kermeta.art2adaptation.ThirdPartyAdaptation;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,6 +90,27 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * @generated
 	 */
 	private EClass removeComponentInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass thirdPartyAdaptationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addThirdPartyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass removeThirdPartyEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -256,6 +280,42 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getThirdPartyAdaptation() {
+		return thirdPartyAdaptationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getThirdPartyAdaptation_Ref() {
+		return (EReference)thirdPartyAdaptationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAddThirdParty() {
+		return addThirdPartyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRemoveThirdParty() {
+		return removeThirdPartyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Art2adaptationFactory getArt2adaptationFactory() {
 		return (Art2adaptationFactory)getEFactoryInstance();
 	}
@@ -297,6 +357,13 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		addComponentInstanceEClass = createEClass(ADD_COMPONENT_INSTANCE);
 
 		removeComponentInstanceEClass = createEClass(REMOVE_COMPONENT_INSTANCE);
+
+		thirdPartyAdaptationEClass = createEClass(THIRD_PARTY_ADAPTATION);
+		createEReference(thirdPartyAdaptationEClass, THIRD_PARTY_ADAPTATION__REF);
+
+		addThirdPartyEClass = createEClass(ADD_THIRD_PARTY);
+
+		removeThirdPartyEClass = createEClass(REMOVE_THIRD_PARTY);
 	}
 
 	/**
@@ -336,6 +403,9 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		removeComponentTypeEClass.getESuperTypes().add(this.getComponentTypeAdaptation());
 		addComponentInstanceEClass.getESuperTypes().add(this.getComponentInstanceAdaptation());
 		removeComponentInstanceEClass.getESuperTypes().add(this.getComponentInstanceAdaptation());
+		thirdPartyAdaptationEClass.getESuperTypes().add(this.getAdaptationPrimitive());
+		addThirdPartyEClass.getESuperTypes().add(this.getThirdPartyAdaptation());
+		removeThirdPartyEClass.getESuperTypes().add(this.getThirdPartyAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(adaptationPrimitiveEClass, AdaptationPrimitive.class, "AdaptationPrimitive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -356,6 +426,13 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		initEClass(addComponentInstanceEClass, AddComponentInstance.class, "AddComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(removeComponentInstanceEClass, RemoveComponentInstance.class, "RemoveComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(thirdPartyAdaptationEClass, ThirdPartyAdaptation.class, "ThirdPartyAdaptation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getThirdPartyAdaptation_Ref(), theArt2Package.getDeployUnit(), null, "ref", null, 1, 1, ThirdPartyAdaptation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addThirdPartyEClass, AddThirdParty.class, "AddThirdParty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(removeThirdPartyEClass, RemoveThirdParty.class, "RemoveThirdParty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -104,6 +104,18 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 				return createRemoveComponentInstanceAdapter();
 			}
 			@Override
+			public Adapter caseThirdPartyAdaptation(ThirdPartyAdaptation object) {
+				return createThirdPartyAdaptationAdapter();
+			}
+			@Override
+			public Adapter caseAddThirdParty(AddThirdParty object) {
+				return createAddThirdPartyAdapter();
+			}
+			@Override
+			public Adapter caseRemoveThirdParty(RemoveThirdParty object) {
+				return createRemoveThirdPartyAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -232,6 +244,48 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRemoveComponentInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.ThirdPartyAdaptation <em>Third Party Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.ThirdPartyAdaptation
+	 * @generated
+	 */
+	public Adapter createThirdPartyAdaptationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.AddThirdParty <em>Add Third Party</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.AddThirdParty
+	 * @generated
+	 */
+	public Adapter createAddThirdPartyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.RemoveThirdParty <em>Remove Third Party</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.RemoveThirdParty
+	 * @generated
+	 */
+	public Adapter createRemoveThirdPartyAdapter() {
 		return null;
 	}
 
