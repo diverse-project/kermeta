@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Export-Package: org.kermeta.art2.framework;uses:="scala.collection.mut
  able,scala.runtime,org.kermeta.art2,scala.collection,org.eclipse.emf.
- common.util,scala,scala.reflect,scala.collection.immutable,scala.coll
+ common.util,scala,scala.collection.immutable,scala.reflect,scala.coll
  ection.generic,org.eclipse.emf.ecore.xmi.impl,org.eclipse.emf.ecore.r
  esource,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resource.impl",or
  g.kermeta.art2.framework.annotation.processor.visitor;uses:="scala.ru
- ntime,org.kermeta.art2,scala,org.eclipse.emf.common.util,org.kermeta.
- art2.framework,scala.collection,scala.collection.mutable,scala.collec
+ ntime,org.kermeta.art2,org.eclipse.emf.common.util,org.kermeta.art2.f
+ ramework,scala.collection,scala.collection.mutable,scala,scala.collec
  tion.immutable,scala.reflect,scala.collection.generic",org.kermeta.ar
  t2.framework.aspects;uses:="org.kermeta.art2,scala,scala.reflect,scal
  a.runtime,scala.collection,org.eclipse.emf.common.util,scala.collecti
@@ -22,7 +22,7 @@ Bundle-Name: ART2 :: FRAMEWORK
 Created-By: Apache Maven Bundle Plugin
 Bundle-Version: 2.0.0.SNAPSHOT
 Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1280901813265
+Bnd-LastModified: 1281020641601
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
  eclipse.emf.ecore.resource,org.eclipse.emf.ecore.resource.impl,org.ec

@@ -22,6 +22,8 @@ import org.kermeta.art2.annotation.RequiredPort;
 import org.kermeta.art2.annotation.Requires;
 import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
+import org.kermeta.art2.annotation.ThirdParties;
+import org.kermeta.art2.annotation.ThirdParty;
 
 /**
  *
@@ -47,13 +49,17 @@ public class Art2AnnotationProcessorFactory implements
         stype.add(Start.class.getName());
         stype.add(Stop.class.getName());
         stype.add(Ports.class.getName());
+
+        stype.add(ThirdParties.class.getName());
+        stype.add(ThirdParty.class.getName());
+
         return stype;
     }
 
     @Override
     public AnnotationProcessor getProcessorFor(Set<AnnotationTypeDeclaration> declarations, AnnotationProcessorEnvironment env) {
 
-       // System.out.println("hello");
+        // System.out.println("hello");
 
         AnnotationProcessor result;
 

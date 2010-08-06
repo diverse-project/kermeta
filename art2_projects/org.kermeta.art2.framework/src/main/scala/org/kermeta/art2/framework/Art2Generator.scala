@@ -8,10 +8,15 @@ package org.kermeta.art2.framework
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.MessagePortType
 import org.kermeta.art2.ServicePortType
+import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.apt.Filer
 import scala.collection.JavaConversions._
 
 object Art2Generator {
+
+  def generateLibURI(env:AnnotationProcessorEnvironment) = {
+    env.getOptions.find({op => op._1.contains("art2.lib.target")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
+  }
 
   /* GENERATE FACTORY FOR COMPONENT & PORT  */
   def generateFactory(root:ContainerRoot,filer:Filer){

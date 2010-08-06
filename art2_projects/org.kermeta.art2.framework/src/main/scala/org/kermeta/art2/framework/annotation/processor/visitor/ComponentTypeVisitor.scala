@@ -54,6 +54,25 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         }
     }
 
+    /* CHECK THIRDPARTIES */
+    if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]) != null){
+      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]).value.foreach{tp=>
+        
+        var newThirdParty = Art2Factory.eINSTANCE.createDeployUnit
+        newThirdParty.setName(tp.name)
+        newThirdParty.setUrl(tp.url)
+        root.getThirdParties.find({etp => etp.getName == tp.name}) match {
+          case Some(e) =>
+          case None => {
+              root.getThirdParties.add(newThirdParty)
+              componentType.getRequiredLibs.add(newThirdParty)
+          }
+        }
+
+      }
+    }
+
+
     /* CHECK PROVIDED PORTS */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{req=>
