@@ -31,7 +31,7 @@
             <artifactId>art2.annotation</artifactId>
             <version>${art2.version}</version>
         </dependency>
-<!--
+
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
@@ -40,7 +40,7 @@
             <optional>true</optional>
             <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
-     -->
+     
     </dependencies>
 
     <build>
