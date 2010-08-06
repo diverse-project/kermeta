@@ -40,7 +40,7 @@ public class LoadNewLibCommand implements Command {
             JarFile jar;
             try {
                 jar = new JarFile(filechooser.getSelectedFile().getAbsolutePath());
-                JarEntry entry = jar.getJarEntry("META-INF/art2Lib.xmi");
+                JarEntry entry = jar.getJarEntry("META-INF/art2Lib.art2");
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));
                     //kernel.getEditorPanel().loadLib(path);
