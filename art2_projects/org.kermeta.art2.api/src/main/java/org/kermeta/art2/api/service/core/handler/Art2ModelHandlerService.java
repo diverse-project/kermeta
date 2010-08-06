@@ -5,8 +5,6 @@ package org.kermeta.art2.api.service.core.handler;
  * and open the template in the editor.
  */
 
-
-
 import java.util.List;
 import org.kermeta.art2.ContainerRoot;
 
