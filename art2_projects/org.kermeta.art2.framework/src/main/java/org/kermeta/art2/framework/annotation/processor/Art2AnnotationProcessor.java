@@ -55,7 +55,7 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
         Art2Generator.generatePortWrapper(root, env.getFiler());
         Art2Generator.generatePortProxy(root, env.getFiler());
         Art2Generator.generateFactory(root, env.getFiler());
-
+        System.out.println("Saving to "+ Art2Generator.generateLibURI(env));
         Art2XmiHelper.save(Art2Generator.generateLibURI(env), root);
 
     }

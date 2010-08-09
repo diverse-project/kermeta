@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* $Id$ 
+ * License    : EPL 								
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 
 package org.kermeta.art2.framework
 
@@ -15,7 +14,7 @@ import scala.collection.JavaConversions._
 object Art2Generator {
 
   def generateLibURI(env:AnnotationProcessorEnvironment) = {
-    env.getOptions.find({op => op._1.contains("art2.lib.target")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
+    "file://" + env.getOptions.find({op => op._1.contains("art2.lib.target")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
   }
 
   /* GENERATE FACTORY FOR COMPONENT & PORT  */
