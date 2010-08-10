@@ -1,4 +1,4 @@
-<!-- $Id:$  -->
+<!-- $Id$  -->
 <!-- License    : EPL 									 -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -20,7 +20,7 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
+			</plugin> 
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -31,11 +31,17 @@
 					<Bundle-SymbolicName>org.kermeta.utilities.eclipse.jface</Bundle-SymbolicName> 
                    	<Bundle-Classpath>.</Bundle-Classpath>
 					<Export-Package>org.kermeta.utilities.eclipse.jface.*</Export-Package>
-					<!-- <Require-Bundle>
+					<Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.ui
-                    </Require-Bundle> -->
-					<Import-Package>*</Import-Package>
+                    </Require-Bundle>
+					<Import-Package>
+							!org.eclipse.core.resources,
+							!org.eclipse.core.runtime, 
+							!org.eclipse.ui.*,
+							!org.eclipse.jface.*,
+							*
+					</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -66,6 +72,11 @@
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.core.runtime</artifactId>
             <version>[3.5.0.v20090525,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.jface</artifactId>
+            <version>[3.5.2.M20100120-0800,)</version>
         </dependency>
 		<dependency>
             <groupId>org.kermeta.eclipse</groupId>
