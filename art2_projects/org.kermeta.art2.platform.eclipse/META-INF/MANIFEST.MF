@@ -8,7 +8,7 @@ Bundle-Name: ART2 :: Platform :: Equinox
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_18
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1281341412578
+Bnd-LastModified: 1281452668730
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.kermeta.art2.platform.eclipse.provisionning.Art2
  ProvisionningActivator
