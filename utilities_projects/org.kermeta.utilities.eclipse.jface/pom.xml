@@ -84,6 +84,18 @@
             <version>[3.5.2.M20100120-0800,)</version>
         </dependency>
 	</dependencies>
+	
+	
+	<repositories>
+        <repository>
+            <id>kermeta Public</id>
+            <url>http://www.kermeta.org/maven2</url>
+        </repository>
+        <repository>
+            <id>kermeta PublicSnapShots</id>
+            <url>http://www.kermeta.org/maven2-snapshots</url>
+        </repository>
+     </repositories>
 	<distributionManagement>
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
