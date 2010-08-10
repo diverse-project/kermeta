@@ -5,20 +5,20 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="org.eclipse.ui.preferencePages.Workbench"
-            class="org.kermeta.utils.provisionner.eclipse.preferences.BundleProvisionnerPreferencePage"
-            id="org.kermeta.utils.provisionner.eclipse.preferences.BundleProvisionnerPreferencePage"
+            class="org.kermeta.utils.provisionner4eclipse.preferences.BundleProvisionnerPreferencePage"
+            id="org.kermeta.utils.provisionner4eclipse.preferences.BundleProvisionnerPreferencePage"
             name="External bundle provisionner (Experimental)">
       </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="org.kermeta.utils.provisionner.eclipse.preferences.PreferenceInitializer">
+            class="org.kermeta.utils.provisionner4eclipse.preferences.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
 	        point="org.eclipse.ui.startup">
-	     <startup class="org.kermeta.utils.provisionner.eclipse.ProvisionnerEarlyStartup"/>
+	     <startup class="org.kermeta.utils.provisionner4eclipse.ProvisionnerEarlyStartup"/>
 	</extension>
 
 </plugin>

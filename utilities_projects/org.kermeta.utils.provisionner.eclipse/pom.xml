@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>utils.provisionner.eclipse</artifactId>
+    <artifactId>utils.provisionner4eclipse</artifactId>
     <packaging>bundle</packaging>
     <name>Provisionner for Eclipse</name>
     <url>http://maven.apache.org</url>
@@ -20,7 +20,17 @@
 	      	</resource>
 	    </resources>
         <plugins>
-            
+            <!-- Java compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
             <!-- Creation of the bundle jar and its manifest -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -30,9 +40,9 @@
 				
                 <configuration>
                     <instructions>  
-                    	<Bundle-SymbolicName>org.kermeta.utils.provisionner.eclipse;singleton:=true</Bundle-SymbolicName> 
-                    	<Bundle-Activator>org.kermeta.utils.provisionner.eclipse.Activator</Bundle-Activator>                    	                       
-                        <Export-Package>org.kermeta.utils.provisionner.eclipse.*</Export-Package>        
+                    	<Bundle-SymbolicName>org.kermeta.utils.provisionner4eclipse;singleton:=true</Bundle-SymbolicName> 
+                    	<Bundle-Activator>org.kermeta.utils.provisionner4eclipse.Activator</Bundle-Activator>                    	                       
+                        <Export-Package>org.kermeta.utils.provisionner4eclipse.*</Export-Package>        
                     	<Bundle-ClassPath>.</Bundle-ClassPath>
                     	<!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>
@@ -122,6 +132,11 @@
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.equinox.common</artifactId>
             <version>[3.5.1.R35x_v20090807-1100,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.equinox.preferences</artifactId>
+            <version>[3.2.301.R35x_v20091117,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
