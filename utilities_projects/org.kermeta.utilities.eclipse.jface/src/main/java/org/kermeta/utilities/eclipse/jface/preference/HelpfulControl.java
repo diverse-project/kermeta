@@ -3,13 +3,7 @@
  */
 package org.kermeta.utilities.eclipse.jface.preference;
 
-//import java.io.*;
-//import java.util.*;
 
-
-/**
- @author Daniel Winterstein
- */
 public interface HelpfulControl {
 
     public void setToolTipText(String text);

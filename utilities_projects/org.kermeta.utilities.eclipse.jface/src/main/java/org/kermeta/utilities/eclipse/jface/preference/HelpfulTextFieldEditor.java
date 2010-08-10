@@ -2,17 +2,12 @@
     Created on 27-May-2004
  */
 package org.kermeta.utilities.eclipse.jface.preference;
-//import java.io.*;
-//import java.util.*;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.PlatformUI;
 
 
-/**
- @author Daniel Winterstein
- */
 public class HelpfulTextFieldEditor extends TextFieldEditor implements
         HelpfulControl {
 
