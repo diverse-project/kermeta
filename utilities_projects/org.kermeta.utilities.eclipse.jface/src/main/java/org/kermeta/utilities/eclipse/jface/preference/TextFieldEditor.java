@@ -13,7 +13,7 @@
 package org.kermeta.utilities.eclipse.jface.preference;
 
 import org.eclipse.jface.resource.JFaceResources;
-//import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.GC;
@@ -335,8 +335,8 @@ public Text getTextControl(Composite parent) {
 				});
 				break;
 			default :
-				throw new  RuntimeException("Unknown validate strategy");
-				//Assert.isTrue(false, "Unknown validate strategy");//$NON-NLS-1$
+				//throw new  RuntimeException("Unknown validate strategy");
+				Assert.isTrue(false, "Unknown validate strategy");//$NON-NLS-1$
 		}
 		textField.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent event) {
@@ -441,7 +441,7 @@ public void setTextLimit(int limit) {
  *  perform validation only after the text has been typed in
  */
 public void setValidateStrategy(int value) {
-	//Assert.isTrue(value == VALIDATE_ON_FOCUS_LOST || value == VALIDATE_ON_KEY_STROKE);
+	Assert.isTrue(value == VALIDATE_ON_FOCUS_LOST || value == VALIDATE_ON_KEY_STROKE);
 	validateStrategy = value;
 }
 /**
