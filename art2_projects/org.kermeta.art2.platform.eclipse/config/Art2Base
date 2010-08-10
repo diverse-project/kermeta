@@ -7,5 +7,6 @@ mvn:org.kermeta.art2/art2.ui.editor
 mvn:org.kermeta.language/language.model
 mvn:org.kermeta.traceability/traceability.model
 mvn:org.kermeta.language/language.api
+mvn:org.kermeta.language/language.builder.eclipse
 mvn:org.kermeta.language/language.loader.scala
 mvn:org.kermeta.language/language.texteditor.eclipse
