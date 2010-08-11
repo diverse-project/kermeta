@@ -39,10 +39,11 @@ public class BundleProvisionnerPreferencePage
 	public BundleProvisionnerPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Additional Eclipse platform provisionning system (Experimental): \n"+"" +
-				"This adds bundles from external sources."	+
-				"Note: in this experimental version, removed entries won't be unloaded dynamically, "+
-				"a restart of Eclipse is required for that.");
+		setDescription("Additional Eclipse platform dynamic provisionning system: \n"+"" +
+				"This dynamicaly adds bundles from external sources.\n"	+
+				"Notes and current limitations in this experimental version: \n"+
+				"- removed entries won't be unloaded dynamically, \n  a restart of Eclipse is required for that."+
+				"- the order is important, it main fail to start a bundle if \n  a required bundles isn't present before.");
 	}
 	
 	/**

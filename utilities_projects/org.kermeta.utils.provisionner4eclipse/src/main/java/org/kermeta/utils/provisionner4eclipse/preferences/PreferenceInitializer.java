@@ -30,7 +30,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_BUNDLE_URI_LIST,
 				"# Add here the URIs to the bundle \n"+
 				"# you want to dynamically add to this platform\n"+
-				"# It supports standard URI and PAX URL \n"+
+				"# It supports standard URI and maven PAX URL \n"+
 				"# (see http://wiki.ops4j.org/display/paxurl/Documentation)\n" +
 				"# Example URIs:\n" +
 				"# mvn:org.kermeta.language/language.model\n"+
