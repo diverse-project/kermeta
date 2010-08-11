@@ -10,6 +10,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapViewer;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
@@ -27,6 +28,21 @@ public class MapLine extends MapItem{
     {
         points.add(p);
     }
+    
+    public void setPoints(List<MapPoint> p)
+    {
+    	points=new ArrayList<MapPoint>();
+    	for (int i=0;i<p.size();i++)
+    	{
+    		MapPoint mp=new MapPoint(p.get(i).getPoint());
+    		points.add(mp);
+    	}
+    }
+    
+    public List<MapPoint> getPoints()
+    {
+    	return points;
+    }
 
     public void removeLastPoint()
     {
@@ -38,8 +54,15 @@ public class MapLine extends MapItem{
         return points.size();
     }
 
-    public GeneralPath render(JXMapViewer map)
+    public void render(Graphics2D g,JXMapViewer map)
     {
+    	if (isSelected())
+    	{
+    		g.setColor(selectedColor);
+    		drawCorners(g,map);
+    	}
+    	else
+    		g.setColor(color);
         GeneralPath polyline=new GeneralPath(GeneralPath.WIND_EVEN_ODD,points.size());
         MapPoint gp;
         Point2D pt;
@@ -56,7 +79,7 @@ public class MapLine extends MapItem{
 
             }
         }
-        return polyline;
+        g.draw(polyline);
     }
 
     public void drawCorners(Graphics2D g,JXMapViewer map)
@@ -71,29 +94,26 @@ public class MapLine extends MapItem{
         }
     }
 
-    public MapItem move(JXMapKit map,int deltax,int deltay)
+    public void move(JXMapKit map,int deltax,int deltay)
     {
-        MapLine newLine=new MapLine();
-        for (int i=0;i<points.size();i++)
+    	for (int i=0;i<points.size();i++)
         {
             MapPoint gp1 = points.get(i);
             Point2D pt = map.getMainMap().getTileFactory().geoToPixel(gp1.getPoint(), map.getMainMap().getZoom());
             Point2D.Double p1 = new Point2D.Double(pt.getX() + deltax, pt.getY() + deltay);
-            gp1.setPoint(map.getMainMap().getTileFactory().pixelToGeo(p1, map.getMainMap().getZoom()));
-            newLine.addPoint(gp1);
+            gp1.setPoint(map.getMainMap().getTileFactory().pixelToGeo(p1, map.getMainMap().getZoom()));    
         }
-        return newLine;
     }
 
-    public void movePoint(MapPoint gp)
+    public void setPoint(MapPoint gp)
     {
         if (points.contains(selPoint))
-        {
-        int ind=points.indexOf(selPoint);
-        points.remove(selPoint);
-        selPoint = gp;
-        points.add(ind, selPoint);
-        }
+        	selPoint.setPoint(gp.getPoint());
+    }
+    
+    public MapPoint getSelectedPoint()
+    {
+    	return selPoint;
     }
 
     public boolean findLine(JXMapKit map,double x,double y)
@@ -126,7 +146,7 @@ public class MapLine extends MapItem{
                 || ((x >= (x2 - 20 * epsilon)) && (x <= (x1 + 20 * epsilon))));
     }
 
-    public void setLinePoint(JXMapKit map,GeoPosition gp)
+    public void setPoint(JXMapKit map,GeoPosition gp)
     {
         Point2D pt = map.getMainMap().getTileFactory().geoToPixel(gp, map.getMainMap().getZoom());
         for (int i = 0; i < points.size(); i++) {

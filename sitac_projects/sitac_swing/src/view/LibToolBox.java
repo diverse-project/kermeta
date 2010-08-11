@@ -13,6 +13,8 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import control.Ctrl;
+
 public class LibToolBox extends ToolBox implements InternalFrameListener {
 	private JInternalFrame frame1;
 	private JInternalFrame frame2;
@@ -20,19 +22,19 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 	private JDesktopPane desk;
 	private final static int DIM = 200;
 
-	public LibToolBox() {
+	public LibToolBox(Ctrl c) {
 		frame1 = new JInternalFrame("Library 1", false, false, false, true);
 		frame2 = new JInternalFrame("Library 2", false, false, false, true);
 		frame3 = new JInternalFrame("Library 3", false, false, false, true);
 		desk = new JDesktopPane();
 		desk.setDesktopManager(new ImmovableDesktopManager());
 
-		frame1.getContentPane().add(new SymbolsLibrary());
+		frame1.getContentPane().add(new SymbolsLibrary(c));
 		frame1.setBounds(0, 0, DIM, DIM);
 		frame1.setVisible(true);
 		frame1.addInternalFrameListener(this);
 
-		JPanel shapes = new ShapesLibrary();
+		JPanel shapes = new ShapesLibrary(c);
 		shapes.setPreferredSize(new Dimension(DIM, DIM));
 		JScrollPane scroll = new JScrollPane(shapes,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -42,7 +44,12 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 		frame2.setVisible(true);
 		frame2.addInternalFrameListener(this);
 
-		frame3.getContentPane().add(new RemoveLibrary());
+		JPanel remove = new RemoveLibrary(c);
+		remove.setPreferredSize(new Dimension(DIM, DIM));
+		scroll = new JScrollPane(remove,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		frame3.getContentPane().add(scroll);
 		frame3.setBounds(0, 2 * DIM, DIM, DIM);
 		frame3.setVisible(true);
 		frame3.addInternalFrameListener(this);
@@ -171,10 +178,6 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 
 		@Override
 		public void dragFrame(JComponent f, int x, int y) {
-			/*
-			 * if (!(f instanceof JInternalFrame)) { super.dragFrame( f, x, y );
-			 * }
-			 */
 		}
 	}
 }

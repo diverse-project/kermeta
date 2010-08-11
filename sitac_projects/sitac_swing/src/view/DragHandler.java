@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -36,13 +34,11 @@ public class DragHandler extends TransferHandler{
 		
 		if (!support.isDataFlavorSupported(rectangleFlavor))
 			return false;
-		System.out.println("can import");
 		return true;
 	}
 	
 	public boolean importData(TransferHandler.TransferSupport support)
 	{
-		System.out.println("import data");
 		if (!canImport(support)) 
             return false;
         Transferable t = support.getTransferable();
@@ -65,9 +61,7 @@ public class DragHandler extends TransferHandler{
 		
 		if (c instanceof ItemType)
 		{
-			System.out.println("create transferable");
 			ItemType item=(ItemType)c;
-			//Rectangle r=item.getRectangle();
 			Transferable t=new Draggable(item);
 			return t;
 		}
@@ -75,14 +69,8 @@ public class DragHandler extends TransferHandler{
 			return null;
 	}
 	
-	public void exportDone(JComponent source, InputEvent e, int action)
-	{
-		System.out.println("export done");
-	}
-	
 	public int getSourceActions(JComponent c)
 	{
-		System.out.println("get actions");
 		return COPY;
 	}
 }

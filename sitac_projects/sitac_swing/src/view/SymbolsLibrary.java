@@ -13,18 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
+import control.Ctrl;
+
 public class SymbolsLibrary extends JPanel {
 	private JLabel engineLabel = new JLabel("Engines");
 	private JLabel ambLabel = new JLabel("Ambulances");
 	private JLabel placeLabel = new JLabel("Places");
-	/*private Rectangle engine1 = new Rectangle(90, 10, 20, 20);
-	private Rectangle engine2 = new Rectangle(120, 10, 20, 20);
-	private Rectangle engine3 = new Rectangle(150, 10, 20, 20);
-	private Rectangle amb1 = new Rectangle(90, 40, 20, 20);
-	private Rectangle amb2 = new Rectangle(120, 40, 20, 20);
-	private Rectangle amb3 = new Rectangle(150, 40, 20, 20);
-	private Rectangle place = new Rectangle(90, 70, 20, 20);
-	private Rectangle dragged = new Rectangle(20, 20);*/
 	private ItemType engine1;
 	private ItemType engine2;
 	private ItemType engine3;
@@ -32,12 +26,11 @@ public class SymbolsLibrary extends JPanel {
 	private ItemType amb2;
 	private ItemType amb3;
 	private ItemType place;
-	/*private Color color;
-	private boolean isDragged = false;
-	private int nbLines;*/
+	//private Ctrl controller;
 
-	public SymbolsLibrary() {
+	public SymbolsLibrary(Ctrl c) {
 		super();
+		//controller=c;
 		setLayout(null);
 		setPreferredSize(new Dimension(100,100));
 		setSize(new Dimension(100,100));
@@ -105,141 +98,3 @@ public class SymbolsLibrary extends JPanel {
 		place.addMouseListener(listener);
 	}
 }
-	
-	/*public boolean isDragged()
-	{
-		return isDragged;
-	}
-	
-	public int getNbLines()
-	{
-		return nbLines;
-	}
-	
-	public Color getColor()
-	{
-		return color;
-	}*/
-
-	/*public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		g.setColor(Color.red);
-		g.drawRect(90, 10, 20, 20);
-		g.drawLine(100, 10, 100, 5);
-		g.drawRect(120, 10, 20, 20);
-		g.drawLine(128, 10, 128, 5);
-		g.drawLine(132, 10, 132, 5);
-		g.drawRect(150, 10, 20, 20);
-		g.drawLine(155, 10, 155, 5);
-		g.drawLine(160, 10, 160, 5);
-		g.drawLine(165, 10, 165, 5);
-
-		g.setColor(Color.blue);
-		g.drawRect(90, 40, 20, 20);
-		g.drawLine(100, 40, 100, 35);
-		g.drawRect(120, 40, 20, 20);
-		g.drawLine(128, 40, 128, 35);
-		g.drawLine(132, 40, 132, 35);
-		g.drawRect(150, 40, 20, 20);
-		g.drawLine(155, 40, 155, 35);
-		g.drawLine(160, 40, 160, 35);
-		g.drawLine(165, 40, 165, 35);
-
-		g.setColor(Color.green);
-		g.drawRect(90, 70, 20, 20);
-		g.drawLine(90, 65, 110, 65);
-
-		if (isDragged) {
-			g1.setColor(color);
-			g1.draw(dragged);
-			switch (nbLines) {
-			case 0:
-				int x = (int) (dragged.getX());
-				int y = (int) (dragged.getY() - 5);
-				g.drawLine(x, y, x + 20, y);
-				break;
-			case 1:
-				x = (int) (dragged.getX() + dragged.getWidth() / 2);
-				y = (int) (dragged.getY());
-				g.drawLine(x, y, x, y - 5);
-				break;
-			case 2:
-				x = (int) (dragged.getX() + 8);
-				y = (int) (dragged.getY());
-				g.drawLine(x, y, x, y - 5);
-				g.drawLine(x + 4, y, x + 4, y - 5);
-				break;
-			case 3:
-				x = (int) (dragged.getX() + 5);
-				y = (int) (dragged.getY());
-				g.drawLine(x, y, x, y - 5);
-				g.drawLine(x + 5, y, x + 5, y - 5);
-				g.drawLine(x + 10, y, x + 10, y - 5);
-				break;
-			}
-		}
-	}*/
-
-	/*class DragListener extends MouseInputAdapter {
-		public void mousePressed(MouseEvent e) {
-			int x = e.getX();
-			int y = e.getY();
-			if (engine1.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.red;
-				nbLines = 1;
-				isDragged = true;
-			} else if (engine2.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.red;
-				nbLines = 2;
-				isDragged = true;
-			} else if (engine3.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.red;
-				nbLines = 3;
-				isDragged = true;
-			} else if (amb1.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.blue;
-				nbLines = 1;
-				isDragged = true;
-			} else if (amb2.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.blue;
-				nbLines = 2;
-				isDragged = true;
-			} else if (amb3.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.blue;
-				nbLines = 3;
-				isDragged = true;
-			} else if (place.contains(x, y)) {
-				dragged.setLocation(x, y);
-				color = Color.green;
-				nbLines = 0;
-				isDragged = true;
-			} else {
-				isDragged = false;
-			}
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			isDragged = false;
-			JPanel panel = (JPanel) e.getSource();
-			panel.repaint();
-		}
-
-		public void mouseDragged(MouseEvent e) {
-			System.out.println("symbol");
-			if (isDragged) {
-				int x = e.getX();
-				int y = e.getY();
-				dragged.setLocation(x, y);
-				JPanel panel = (JPanel) e.getSource();
-				panel.repaint();
-			}
-		}
-	}*/
-
