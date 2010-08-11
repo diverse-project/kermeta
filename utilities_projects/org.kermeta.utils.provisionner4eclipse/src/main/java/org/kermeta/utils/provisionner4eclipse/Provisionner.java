@@ -40,8 +40,14 @@ public class Provisionner {
 						hasStartError = true;
 					}
 				}
+				
 				catch (Exception e) {
-					statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to install " + bundleURI, e));
+					if(e.getClass().getName().equals("org.eclipse.osgi.framework.internal.core.Framework$DuplicateBundleException")){
+						statusChildren.add(new Status(IStatus.WARNING, Activator.PLUGIN_ID, 0, "ingored installation of already installed bundle " + bundleURI, e));
+					}
+					else{
+						statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to install " + bundleURI, e));
+					}
 					hasStartError = true;
 				}
 				
