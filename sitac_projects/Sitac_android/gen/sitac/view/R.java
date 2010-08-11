@@ -25,14 +25,15 @@ public final class R {
         public static final int point=0x7f02000b;
         public static final int redgroup=0x7f02000c;
         public static final int redgroups=0x7f02000d;
-        public static final int redsingle=0x7f02000e;
-        public static final int triangle=0x7f02000f;
-        public static final int undo=0x7f020010;
-        public static final int waste=0x7f020011;
-        public static final int waste2=0x7f020012;
-        public static final int water=0x7f020013;
-        public static final int water2=0x7f020014;
-        public static final int zone=0x7f020015;
+        public static final int redo=0x7f02000e;
+        public static final int redsingle=0x7f02000f;
+        public static final int triangle=0x7f020010;
+        public static final int undo=0x7f020011;
+        public static final int waste=0x7f020012;
+        public static final int waste2=0x7f020013;
+        public static final int water=0x7f020014;
+        public static final int water2=0x7f020015;
+        public static final int zone=0x7f020016;
     }
     public static final class id {
         public static final int black=0x7f060016;
@@ -55,6 +56,7 @@ public final class R {
         public static final int newview=0x7f06000e;
         public static final int osmapview=0x7f060006;
         public static final int red=0x7f060012;
+        public static final int redo=0x7f060018;
         public static final int scroolview=0x7f060000;
         public static final int send=0x7f060003;
         public static final int undo=0x7f060017;
@@ -84,6 +86,7 @@ public final class R {
         public static final int mapline=0x7f040004;
         public static final int mapzone=0x7f040002;
         public static final int red=0x7f040008;
+        public static final int redo=0x7f04000e;
         public static final int undo=0x7f04000d;
         public static final int yellow=0x7f04000b;
     }

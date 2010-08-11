@@ -5,37 +5,40 @@ import java.util.ArrayList;
 import org.andnav.osm.views.OpenStreetMapView;
 import org.andnav.osm.views.overlay.OpenStreetMapViewPathOverlay;
 
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.view.View;
 
 public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 
 	private ArrayList<MapItem> items;
-	private boolean createitem;
-	private MapItem currentitem;
-	private boolean itemselected;
+	private boolean createitem=false;
+	private boolean itemselected=false;
 	private int itemindex=-1;
 	private int currentpoint=-1;
 	private MapPoint MapPoint;
 	private boolean dragndrop=false;
-	private int itemtype=0;
-	private Context context;
+	private Context ctx;
 	
 	public MyPathOverlay(int color, Context ctx) {
 		super(color, ctx);
-		// TODO Auto-generated constructor stub
 		this.items=new ArrayList<MapItem>();
-		this.createitem=false;
-		this.itemselected=false;
-		this.MapPoint=new MapPoint(1,1);
-		this.context=ctx;
+		this.ctx=ctx;
 	}
 	
-	public void addItem(MapItem s)
+	public void addItem(MapItem item)
 	{
-		this.items.add(s);
+		this.items.add(item);
+	}
+	
+	public void deleteItem(MapItem item)
+	{
+		this.items.remove(item);
 	}
 	
 	public ArrayList<MapItem> getItems()
@@ -58,9 +61,14 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 		this.itemselected=sel;
 	}
 	
-	public void setItemType(int type)
+	public void setCreateItem(boolean s)
 	{
-		this.itemtype=type;
+		this.createitem=s;
+	}
+	
+	public int getSelectedColor()
+	{
+		return this.mPaint.getColor();
 	}
 	
 	public void onDraw(Canvas canvas,OpenStreetMapView mapview)
@@ -73,52 +81,37 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 	public boolean onLongPress(MotionEvent event, OpenStreetMapView mapview)
 	{
 	    if(this.createitem==true)
-	   	    	this.createitem=false;
-	    this.itemtype=0;
+	    {
+	    	this.createitem=false;
+	    	Ctrl.getInstance().deleteLastCommands(items.get(itemindex).getPoints().size());
+	    }
 	    return true;
-	}
-	
-	public void putNewItem(OpenStreetMapView mapview)
-	{
-		this.createitem=true;
-    	if(this.itemtype==0)
-    		this.currentitem=new MapItemPoint(new MapPoint(mapview.getMapCenterLatitudeE6(),mapview.getMapCenterLongitudeE6()));
-    	if(this.itemtype==2)
-    		this.currentitem=new MapZone();
-    	if(this.itemtype==1)
-    		this.currentitem=new MapLine();
-    	this.currentitem.setColor(this.mPaint.getColor());
-    	this.addItem(this.currentitem);
-    	this.itemindex=this.items.size()-1;
-    	this.itemtype=0;
 	}
 	
 	public boolean onSingleTapUp(MotionEvent event, OpenStreetMapView mapview)
 	{
+	  FactoryMaker.getInstance().setAdapter(new Adapter(ctx));
 	  if(this.itemselected==false)
 	  {
+	    MapPoint gp=new MapPoint(mapview.getProjection().fromPixels(event.getX(), event.getY()).getLatitudeE6(),mapview.getProjection().fromPixels(event.getX(), event.getY()).getLongitudeE6());			
 		if(this.createitem==true)
-		{
-			this.currentitem.addPoint(new MapPoint(mapview.getDrawnBoundingBoxE6().getGeoPointOfRelativePositionWithLinearInterpolation(event.getX() / mapview.getWidth(), event.getY() / mapview.getHeight()).getLatitudeE6(),mapview.getDrawnBoundingBoxE6().getGeoPointOfRelativePositionWithLinearInterpolation(event.getX() / mapview.getWidth(), event.getY() / mapview.getHeight()).getLongitudeE6()));
-			
+		{	
+			FactoryMaker.getInstance().setMapItem(items.get(itemindex));
+			FactoryMaker.getInstance().setOldMapPoint(gp);
+			AbstractCommandFactory acf=FactoryMaker.getInstance().create(13);
+			Ctrl.getInstance().execute(acf.create());
 		}
 		else
 		{
-			MapPoint gp=new MapPoint(mapview.getProjection().fromPixels(event.getX(), event.getY()).getLatitudeE6(),mapview.getProjection().fromPixels(event.getX(), event.getY()).getLongitudeE6());
 			int size=this.items.size();
 			for(int i=0;i<size;i++)
 			{
 				MapItem item=this.items.get(i);
-				int ok=item.pointClicked(gp, mapview);
-				if(ok!=-1)
-				{
-					item.setSelected(true);
-					this.itemselected=true;
-					this.itemindex=i;
-					MapWidget mapw=(MapWidget)context;
-					mapw.getPropertyEditor().setSelectable(item);
-					mapw.getPropertyEditor().setSelectableButtonsVisible();
-					mapw.getPropertyEditor().setVisibility(View.VISIBLE);
+				if(item.isSelectedDragnDrop(gp, mapview)==true)
+				{	
+					FactoryMaker.getInstance().setSelectable(item);
+					AbstractCommandFactory acf=FactoryMaker.getInstance().create(3);
+					Ctrl.getInstance().execute(acf.create());
 					break;
 				}
 			}
@@ -129,26 +122,35 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 		  this.itemselected=false;
 	  }
 		
-		mapview.invalidate();
 		return true;
 	}
 	
 	public boolean onTouchEvent(MotionEvent event,OpenStreetMapView mapview)
 	{
+		int ev=event.getAction();
+		float x=event.getX();
+		float y=event.getY();
+		MapPoint gp=new MapPoint(mapview.getProjection().fromPixels(x, y).getLatitudeE6(),mapview.getProjection().fromPixels(x, y).getLongitudeE6());
+		
 		if(this.itemselected==true)
 		{
-			int ev=event.getAction();
-			float x=event.getX();
-			float y=event.getY();
-			MapPoint gp=new MapPoint(mapview.getProjection().fromPixels(x, y).getLatitudeE6(),mapview.getProjection().fromPixels(x, y).getLongitudeE6());
 			switch(ev)
 			{
 			case MotionEvent.ACTION_DOWN:
-				this.currentpoint=items.get(itemindex).pointClicked(gp,mapview);
+				this.currentpoint=items.get(itemindex).pointClicked(gp,mapview);			
 				if(items.get(itemindex).isSelectedDragnDrop(gp,mapview)==true)
 				{
 					this.MapPoint=gp;
 					this.dragndrop=true;
+					
+					FactoryMaker.getInstance().setMapItem(items.get(itemindex));
+					FactoryMaker.getInstance().setOldMapPoint(gp);
+				}
+				else if(this.currentpoint!=-1)
+				{
+					FactoryMaker.getInstance().setMapItem(items.get(itemindex));
+					FactoryMaker.getInstance().setIntParam2(this.currentpoint);
+					FactoryMaker.getInstance().setOldMapPoint(items.get(itemindex).getPoints().get(currentpoint));
 				}
 				break;
 			case MotionEvent.ACTION_MOVE:
@@ -167,6 +169,19 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 					}
 				break;
 			case MotionEvent.ACTION_UP:
+				if(currentpoint!=-1)
+				{
+					FactoryMaker.getInstance().setCurrentMapPoint(gp);
+					FactoryMaker.getInstance().setIntParam2(currentpoint);
+					AbstractCommandFactory acf=FactoryMaker.getInstance().create(7);
+					Ctrl.getInstance().execute(acf.create());
+				}
+				else if(dragndrop==true)
+				{
+					FactoryMaker.getInstance().setCurrentMapPoint(gp);
+					AbstractCommandFactory acf=FactoryMaker.getInstance().create(1);
+					Ctrl.getInstance().execute(acf.create());
+				}
 				this.currentpoint=-1;
 				this.itemselected=false;
 				this.items.get(this.itemindex).setSelected(false);
@@ -177,7 +192,6 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 			}
 			return true;
 		}
-		
 		return super.onTouchEvent(event, mapview);
 	}
 	

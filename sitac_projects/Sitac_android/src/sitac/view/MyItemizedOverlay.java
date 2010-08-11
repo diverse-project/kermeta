@@ -6,7 +6,10 @@ import org.andnav.osm.ResourceProxy;
 import org.andnav.osm.views.OpenStreetMapView;
 import org.andnav.osm.views.overlay.OpenStreetMapViewItemizedOverlay;
 
-import sitac.view.util.OverlayItemFactory;
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,8 +20,6 @@ import android.view.MotionEvent;
 public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverlayItem> {
 	
 	private boolean newitem=false;
-	private int newitemtype=-1;
-	private int newitemgroup=-1;
 	private Context context;
 
 	public MyItemizedOverlay(Context ctx, List<MyOverlayItem> list, Drawable marker,
@@ -26,7 +27,6 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 			ResourceProxy resourceProxy) {
 		super(ctx, list, marker, markerHotspot, onItemTapListener, resourceProxy);
 		this.context=ctx;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void addItem(MyOverlayItem item)
@@ -68,19 +68,10 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 	{
 		return this.newitem;
 	}
-	
-	public void setNewItemType(int t)
-	{
-		this.newitemtype=t;
-	}
-	
-	public void setNewItemGroup(int g)
-	{
-		this.newitemgroup=g;
-	}
-	
+
 	public boolean onTouchEvent(MotionEvent event,OpenStreetMapView mapview)
 	{
+		FactoryMaker.getInstance().setAdapter(new Adapter(context));
 		int i=this.itemSelected();
 		if(i!=-1)
 		{
@@ -96,6 +87,9 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 				mapview.invalidate();
 				break;
 			case MotionEvent.ACTION_UP:
+				AbstractCommandFactory acf=FactoryMaker.getInstance().create(10);
+				Ctrl.getInstance().execute(acf.create());
+				
 				this.mItemList.get(i).setSelected(false);
 				this.mItemList.get(i).getMarker().setAlpha(150);
 				break;
@@ -108,9 +102,11 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 				float x=event.getX();
 				float y=event.getY();
 				MapPoint gp=new MapPoint(mapview.getProjection().fromPixels(x, y).getLatitudeE6(),mapview.getProjection().fromPixels(x, y).getLongitudeE6());
-				this.createNewItem(this.newitemtype, this.newitemgroup, gp);
 			    this.newitem=false;
-			    mapview.invalidate();
+			    
+			    FactoryMaker.getInstance().setOldMapPoint(gp);
+			    AbstractCommandFactory acf=FactoryMaker.getInstance().create(12);
+			    Ctrl.getInstance().execute(acf.create());
 			    return true;
 			}
 		return super.onTouchEvent(event, mapview);
@@ -137,13 +133,4 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
         }
    }
 	
-	private void createNewItem(int type,int group,MapPoint gp)
-	{
-		OverlayItemFactory fact=new OverlayItemFactory();
-		ItemType itemtype=fact.createNewItem(type, group,this.context);
-		MyOverlayItem item=new MyOverlayItem(itemtype,gp);
-		if(item!=null)
-			this.addItem(item);
-	}
-
 }

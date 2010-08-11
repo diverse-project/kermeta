@@ -1,5 +1,10 @@
 package sitac.view;
 
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -53,23 +58,28 @@ public class ChatPanel extends Activity {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					sendMessage();				
 				}        	
-	        });    
+	        });   
 
 	    }
 	 
 	 private void sendMessage()
+	 {		
+		 FactoryMaker.getInstance().setAdapter(new Adapter(this));
+		 FactoryMaker.getInstance().setMessage(this.textedit.getText().toString());
+		 AbstractCommandFactory acf=FactoryMaker.getInstance().create(4);
+		 Ctrl.getInstance().execute(acf.create());		 
+	 }
+	 
+	 public TextView getTextView()
 	 {
-		this.textview.append("\n"); 
-		this.textview.setTextColor(Color.RED);
-		this.textview.append(this.textedit.getText());
-		this.textview.invalidate();
-		this.textedit.clearComposingText();
-		this.textedit.setText("");
-		this.textedit.invalidate();
-		
+		 return textview;
+	 }
+	 
+	 public EditText getEditText()
+	 {
+		 return textedit;
 	 }
 	 
 }

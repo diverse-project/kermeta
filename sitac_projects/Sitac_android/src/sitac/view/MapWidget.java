@@ -12,11 +12,17 @@ import org.andnav.osm.DefaultResourceProxyImpl;
 import org.andnav.osm.ResourceProxy;
 import org.andnav.osm.views.OpenStreetMapView;
 import org.andnav.osm.views.overlay.OpenStreetMapViewItemizedOverlay;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
 import sitac.view.util.OverlayItemFactory;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -48,7 +54,7 @@ public class MapWidget extends Activity {
 
 	@Override    
     public void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
         
         mResourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
         
@@ -58,32 +64,37 @@ super.onCreate(savedInstanceState);
         /* Itemized Overlay */
         {
         	Drawable draw=this.getResources().getDrawable(R.drawable.icon);
-            draw.setAlpha(150);
-            draw.setBounds(0,0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
-            
-                /* Create a static ItemizedOverlay showing a some Markers on some cities. */
-                final ArrayList<MyOverlayItem> items = new ArrayList<MyOverlayItem>();                
-                
-                /* OnTapListener for the Markers, shows a simple Toast. */
-               this.mMyLocationOverlay = new MyItemizedOverlay(this, items,null,null, new OpenStreetMapViewItemizedOverlay.OnItemTapListener<MyOverlayItem>(){
-                                @Override
-                                public boolean onItemTap(int index, MyOverlayItem item) {
-                                      Toast t=  Toast.makeText(MapWidget.this, "Item '" + item.getTitle() + "' : "+item.getDescription(), Toast.LENGTH_LONG);
-                                      t.setDuration(100);
-                                      t.show();
-                                      item.setSelected(true);
-                                      propedit.setOverlayItem(item);
-                                      propedit.setItemButtonsVisible();
-                                      propedit.setVisibility(View.VISIBLE);
-                                      return true; // We 'handled' this event.
-                                }
-                }, mResourceProxy);
-                this.mOsmv.getOverlays().add(this.mMyLocationOverlay);
+        	draw.setAlpha(150);
+        	draw.setBounds(0,0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
+
+        	final ArrayList<MyOverlayItem> items = new ArrayList<MyOverlayItem>();                
+
+        	/* OnTapListener for the Markers, shows a simple Toast. */
+        	this.mMyLocationOverlay = new MyItemizedOverlay(this, items,null,null, new OpenStreetMapViewItemizedOverlay.OnItemTapListener<MyOverlayItem>(){
+        		@Override
+        		public boolean onItemTap(int index, MyOverlayItem item) {
+        			Toast t=  Toast.makeText(MapWidget.this, "Item '" + item.getTitle() + "' : "+item.getDescription(), Toast.LENGTH_LONG);
+        			t.setDuration(100);
+        			t.show();
+        			item.setSelected(true);
+        			FactoryMaker.getInstance().setAdapter(new Adapter(MapWidget.this));
+        			FactoryMaker.getInstance().setOverlayItem(item);
+        			try {
+        				FactoryMaker.getInstance().setOldMapPoint((MapPoint)item.getPosition().clone());
+        			} catch (CloneNotSupportedException e) {
+        				e.printStackTrace();
+        			}
+        			propedit.setOverlayItem(item);
+        			propedit.setItemButtonsVisible();
+        			propedit.setVisibility(View.VISIBLE);
+        			return true; // We 'handled' this event.
+        		}
+        	}, mResourceProxy);
+        	this.mOsmv.getOverlays().add(this.mMyLocationOverlay);
         }
         
         this.mOsmv.setBuiltInZoomControls(true);
         this.mOsmv.getController().setCenter(new MapPoint(47.25,-1.38).toGeoPoint());
-        //this.mOsmv.getController().setZoom(this.mOsmv.getMaxZoomLevel());
         this.mOsmv.getController().setZoom(10);
         
         this.pathoverlay=new MyPathOverlay(Color.BLACK,this);
@@ -94,7 +105,6 @@ super.onCreate(savedInstanceState);
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				saveCoord();				
 			}        	
         });
@@ -104,7 +114,6 @@ super.onCreate(savedInstanceState);
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				loadCoord();				
 			}        	
         });
@@ -144,7 +153,7 @@ super.onCreate(savedInstanceState);
 	    	builder.setTitle("Choose type");
 	    	builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
 	    	    public void onClick(DialogInterface dialog, int item) {
-	    	       mMyLocationOverlay.setNewItemType(item);
+	    	       FactoryMaker.getInstance().setIntParam1(item);
 	    	       dialog();
 	    	    }
 	    	});
@@ -155,79 +164,44 @@ super.onCreate(savedInstanceState);
 	    	int index=this.pathoverlay.getItemIndex();
 	    	if(index!=-1)
 	    	{
-	    		this.pathoverlay.getItems().remove(index);
-	    		this.mOsmv.invalidate();
-	    		this.pathoverlay.setItemIndex(-1);
-	    		this.pathoverlay.setItemSelected(false);
+	    		int nr=pathoverlay.getItems().get(index).getPoints().size();
+                
+	    		FactoryMaker.getInstance().setAdapter(new Adapter(this));
+	    		FactoryMaker.getInstance().setMapItem(pathoverlay.getItems().get(index));
+	    		AbstractCommandFactory acf=FactoryMaker.getInstance().create(8);
+	    		Ctrl.getInstance().execute(acf.create());
+	    		
+	    		Ctrl.getInstance().deleteCommandsOnDelete(nr);
 	    	}
 	    	index=this.mMyLocationOverlay.itemSelected();
 	    	if(index!=-1)
 	    	{
-	    		this.mMyLocationOverlay.deleteItem(this.mMyLocationOverlay.getOverlayItems().get(index));
-	            this.mOsmv.invalidate();	
+	    		FactoryMaker.getInstance().setAdapter(new Adapter(this));
+	    		FactoryMaker.getInstance().setOverlayItem(mMyLocationOverlay.getOverlayItems().get(index));
+	    		AbstractCommandFactory acf=FactoryMaker.getInstance().create(9);
+	    		Ctrl.getInstance().execute(acf.create());
 	    	}
 	        return true;
 	    case R.id.undo:
-	    	int index2=this.pathoverlay.getItemIndex();
-	    	if(index2!=-1)
-	    	{
-	    		MapItem s=this.pathoverlay.getItems().get(index2);
-	    		if(s.getPoints().size()>0)
-	    		{
-	    			s.getPoints().remove(s.getPoints().size()-1);
-	    			this.mOsmv.invalidate();
-	    		}
-	    	}
+	    	Ctrl.getInstance().undo();
+	    	return true;
+	    case R.id.redo:
+	    	Ctrl.getInstance().redo();
 	    	return true;
 	    case R.id.black:
-	    	int index3=this.pathoverlay.getItemIndex();
-	    	if(index3!=-1)
-	    	{
-	    		this.pathoverlay.getItems().get(index3).setColor(Color.BLACK);
-	    		this.mOsmv.invalidate();
-	    	}
-	    	else
 	    	this.pathoverlay.setColor(Color.BLACK);
 	    	return true;
 	    case R.id.blue:
-	    	int index4=this.pathoverlay.getItemIndex();
-	    	if(index4!=-1)
-	    	{
-	    		this.pathoverlay.getItems().get(index4).setColor(Color.BLUE);
-	    		this.mOsmv.invalidate();
-	    	}
-	    	else
-	    	   this.pathoverlay.setColor(Color.BLUE);
+	    	this.pathoverlay.setColor(Color.BLUE);
 	    	return true;
 	    case R.id.green:
-	    	int index5=this.pathoverlay.getItemIndex();
-	    	if(index5!=-1)
-	    	{
-	    		this.pathoverlay.getItems().get(index5).setColor(Color.GREEN);
-	    		this.mOsmv.invalidate();
-	    	}
-	    	else
-	    		this.pathoverlay.setColor(Color.GREEN);
+	        this.pathoverlay.setColor(Color.GREEN);
 	    	return true;
 	    case R.id.red:
-	    	int index6=this.pathoverlay.getItemIndex();
-	    	if(index6!=-1)
-	    	{
-	    		this.pathoverlay.getItems().get(index6).setColor(Color.RED);
-	    	    this.mOsmv.invalidate();
-	    	}
-	    	else
-	    		this.pathoverlay.setColor(Color.RED);
+	    	this.pathoverlay.setColor(Color.RED);
 	    	return true;
 	    case R.id.yellow:
-	    	int index7=this.pathoverlay.getItemIndex();
-	    	if(index7!=-1)
-	    	{
-	    		this.pathoverlay.getItems().get(index7).setColor(Color.YELLOW);
-	    		this.mOsmv.invalidate();
-	    	}
-	    	else
-	    		this.pathoverlay.setColor(Color.YELLOW);
+	    	this.pathoverlay.setColor(Color.YELLOW);
 	    	return true;
 	    default: return super.onOptionsItemSelected(item);
 	        	
@@ -237,7 +211,6 @@ super.onCreate(savedInstanceState);
 	private void saveCoord()
 	{
 		File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/coord.xml");
-		//File newxmlfile = new File(this.getFilesDir()+"/coord.xml");
 		        try{
 		                newxmlfile.createNewFile();
 		        }catch(IOException e){
@@ -305,8 +278,7 @@ super.onCreate(savedInstanceState);
 		                       
 		                } catch (Exception e) {
 		                        Log.e("Exception","error occurred while creating xml file");
-		                        //this.addOverlay(mapview.getMapCenter(), 0, "error occurred while creating xml file");
-		                }	
+		                         }	
 	}
 	
 	private void loadCoord()
@@ -324,15 +296,11 @@ super.onCreate(savedInstanceState);
 		        int eventType = xpp.getEventType();
 		        while (eventType != XmlPullParser.END_DOCUMENT) {
 		         if(eventType == XmlPullParser.START_DOCUMENT) {
-					  //this.mMyLocationOverlay.addItem(new MyOverlayItem("start",null,this.mOsmv.getMapCenter()));
-					  //this.mOsmv.invalidate();
 		             System.out.println("Start document");
 		         } else if(eventType == XmlPullParser.END_DOCUMENT) {
 		             System.out.println("End document");
 		             this.mOsmv.invalidate();
 		         } else if(eventType == XmlPullParser.START_TAG) {
-	            	 //this.mMyLocationOverlay.addItem(new MyOverlayItem("center",null,this.mOsmv.getMapCenter()));
-		             //this.mOsmv.invalidate();
 	            	 System.out.println("Start tag "+xpp.getName());
 		             if(xpp.getName().equals("center"))
 		             {
@@ -348,8 +316,6 @@ super.onCreate(savedInstanceState);
 		            	 String longit=xpp.getAttributeValue(null,"long");
 		            	 int type=Integer.parseInt(xpp.getAttributeValue(null, "type"));
 		            	 int group=Integer.parseInt(xpp.getAttributeValue(null, "group"));
-		            	 //String title=xpp.getAttributeValue(null, "title");
-		            	 //String desc=xpp.getAttributeValue(null, "desc");
 		            	 MapPoint gp=new MapPoint(Integer.parseInt(lat),Integer.parseInt(longit));
 		            	 OverlayItemFactory fact=new OverlayItemFactory();
 		            	 ItemType itemtype=fact.createNewItem(type, group,this);
@@ -378,8 +344,6 @@ super.onCreate(savedInstanceState);
 			            	 String longit=xpp.getAttributeValue(null,"long"+i);
 			            	 MapPoint gp=new MapPoint(Integer.parseInt(lat),Integer.parseInt(longit));
 			            	 s.addPoint(gp);
-			            	 //this.mMyLocationOverlay.addItem(new MyOverlayItem("shape",i+"",gp));
-		            		 //this.mOsmv.invalidate();
 		            	 }
                         s.setColor(Integer.parseInt(color)); 
                         this.pathoverlay.addItem(s);
@@ -411,7 +375,7 @@ super.onCreate(savedInstanceState);
     	builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
     	    public void onClick(DialogInterface dialog, int item) {
     	       mMyLocationOverlay.setNewItem(true);
-    	       mMyLocationOverlay.setNewItemGroup(item);
+    	       FactoryMaker.getInstance().setIntParam2(item);
     	       alert.dismiss();
     	    }
     	});
@@ -419,22 +383,22 @@ super.onCreate(savedInstanceState);
     	alert.show();
 	}
 	
-	protected MyItemizedOverlay getItemizedOverlay()
+	public MyItemizedOverlay getItemizedOverlay()
 	{
 		return this.mMyLocationOverlay;
 	}
 	
-	protected PropertyEditor getPropertyEditor()
+	public PropertyEditor getPropertyEditor()
 	{
 		return this.propedit;
 	}
 	
-	protected MyPathOverlay getPathOverlay()
+	public MyPathOverlay getPathOverlay()
 	{
 		return this.pathoverlay;
 	}
 	
-	protected OpenStreetMapView getMapView()
+	public OpenStreetMapView getMapView()
 	{
 		return this.mOsmv;
 	}

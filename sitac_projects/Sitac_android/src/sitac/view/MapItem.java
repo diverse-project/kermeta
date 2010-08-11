@@ -56,7 +56,7 @@ public class MapItem extends Selectable{
 		{
 			Point p1=mapview.getProjection().toMapPixels(mp.toGeoPoint(), null);
 			Point p2=mapview.getProjection().toMapPixels(points.get(j).toGeoPoint(), null);
-			if((Math.abs(p1.x-p2.x)<=2)&&(Math.abs(p1.y-p2.y)<=2))
+			if((Math.abs(p1.x-p2.x)<=10)&&(Math.abs(p1.y-p2.y)<=10))
 			{
 				ok=j;
 				break;
@@ -68,12 +68,23 @@ public class MapItem extends Selectable{
 	public boolean isSelectedDragnDrop(MapPoint mp,OpenStreetMapView mapview)
 	{
 		boolean ok=false;
+		Point p=mapview.getProjection().toMapPixels(mp.toGeoPoint(), null);
 		int size=points.size();
-		for(int j=0;j<size;j++)
+		if(size==1)
 		{
-			Point p1=mapview.getProjection().toMapPixels(mp.toGeoPoint(), null);
-			Point p2=mapview.getProjection().toMapPixels(points.get(j).toGeoPoint(), null);
-			if((Math.abs(p1.x-p2.x)<=10)&&(Math.abs(p1.y-p2.y)<=10))
+			if(this.pointClicked(mp, mapview)!=-1)
+				return true;
+		}
+		for(int j=0;j<size-1;j++)
+		{
+			Point p1=mapview.getProjection().toMapPixels(points.get(j).toGeoPoint(), null);
+			Point p2=mapview.getProjection().toMapPixels(points.get(j+1).toGeoPoint(), null);
+			
+			int a=p2.y-p1.y;
+			int b=(p2.x-p1.x)*(-1);
+			int c=(p2.y-p1.y)*(-1)*p1.x+(p2.x-p1.x)*p1.y;
+			
+			if((Math.abs(a*p.x+b*p.y+c)<=1000))
 			{
 				ok=true;
 				break;

@@ -4,7 +4,7 @@ import org.andnav.osm.util.GeoPoint;
 
 import android.location.Location;
 
-public class MapPoint {	
+public class MapPoint implements Cloneable{	
 
 	protected static final String LAT_EDEFAULT = null;
 	protected static final String LONG_EDEFAULT = null;
@@ -109,5 +109,10 @@ public class MapPoint {
 		result.append(long_);
 		result.append(')');
 		return result.toString();
+	}
+	
+	public Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
 	}
 }

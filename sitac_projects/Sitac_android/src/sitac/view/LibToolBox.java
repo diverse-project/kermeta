@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
 import sitac.view.util.OverlayItemFactory;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -29,7 +34,6 @@ public class LibToolBox extends ExpandableListView{
 	public LibToolBox(Context context) {
 		super(context);
 		library=new ArrayList<Library>();
-		// TODO Auto-generated constructor stub
 	}
 
     public LibToolBox(Context context,AttributeSet attrs)
@@ -122,8 +126,7 @@ public class LibToolBox extends ExpandableListView{
 				// Populate your custom view here
 				((TextView)v.findViewById(R.id.name)).setText( (String) ((Map<String,Object>)getChild(groupPosition, childPosition)).get(NAME) );
 				((ImageView)v.findViewById(R.id.image)).setImageDrawable( (Drawable) ((Map<String,Object>)getChild(groupPosition, childPosition)).get(IMAGE) );
-                //((LibToolBox)v.findViewById(R.id.newlist2)).setBackgroundColor(Color.RED);
-				
+                				
 				return v;
 			}
 
@@ -194,25 +197,30 @@ public class LibToolBox extends ExpandableListView{
 
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-			// TODO Auto-generated method stub
 			
 			int nrgroups=getNrLibraries();
 			for(int i=0;i<nrgroups;i++)
 				collapseGroup(i);
 			
-			MapWidget mpw=(MapWidget)getContext();
-			
 			if(groupPosition<2)
 			{
-			mpw.getItemizedOverlay().setNewItem(true);
-			mpw.getItemizedOverlay().setNewItemType(library.get(groupPosition).getItemAtIndex(childPosition).getType());
-			mpw.getItemizedOverlay().setNewItemGroup(library.get(groupPosition).getItemAtIndex(childPosition).getGroup());
+			((MapWidget)getContext()).getItemizedOverlay().setNewItem(true);
+			FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
+			FactoryMaker.getInstance().setIntParam1(library.get(groupPosition).getItemAtIndex(childPosition).getType());
+			FactoryMaker.getInstance().setIntParam2(library.get(groupPosition).getItemAtIndex(childPosition).getGroup());
 			}
 			
 			if(groupPosition==2)
 			{
-				mpw.getPathOverlay().setItemType(childPosition);
-				mpw.getPathOverlay().putNewItem(mpw.getMapView());
+				FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
+				if(childPosition==0)
+					FactoryMaker.getInstance().setItemType("MapPoint");
+				if(childPosition==1)
+					FactoryMaker.getInstance().setItemType("MapLine");
+				if(childPosition==2)
+					FactoryMaker.getInstance().setItemType("MapZone");
+				AbstractCommandFactory acf=FactoryMaker.getInstance().create(0);
+				Ctrl.getInstance().execute(acf.create());
 			}
 			return true;
 		}

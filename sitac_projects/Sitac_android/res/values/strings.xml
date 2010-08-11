@@ -14,4 +14,5 @@
 <string name="yellow">Yellow</string>
 <string name="black">Black</string>
 <string name="undo">Undo</string>
+<string name="redo">Redo</string>
 </resources>

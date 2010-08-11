@@ -3,7 +3,6 @@ package sitac.view;
 import org.andnav.osm.views.OpenStreetMapView;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -45,14 +44,12 @@ public class MapZone extends MapItem{
 			
 			if(this.isSelected==true)
 			{
-				paint.setColor(Color.BLACK);
-				canvas.drawCircle(p1.x, p1.y, 2, paint);
-				canvas.drawCircle(p2.x, p2.y, 2, paint);
+				canvas.drawCircle(p1.x, p1.y, 3, paint);
+				canvas.drawCircle(p2.x, p2.y, 3, paint);
 			}
 			
 		}
 		
-		//path.setFillType(Path.FillType.EVEN_ODD);
 		path.close();
 		canvas.drawPath(path, paint);
 		}

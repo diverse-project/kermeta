@@ -1,6 +1,10 @@
 package sitac.view;
 
-import sitac.view.util.OverlayItemFactory;
+import sitac.control.AbstractCommandFactory;
+import sitac.control.Adapter;
+import sitac.control.Ctrl;
+import sitac.control.FactoryMaker;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,7 +24,6 @@ public class PropertyEditor extends RelativeLayout {
 
 	public PropertyEditor(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setSelectable(Selectable newSelectable)
@@ -43,14 +46,14 @@ public class PropertyEditor extends RelativeLayout {
 		return item;
 	}
 	
-	protected void setSelectableButtonsVisible()
+	public void setSelectableButtonsVisible()
 	{
 		buttoncol.setVisibility(View.VISIBLE);
 		buttonplus.setVisibility(View.INVISIBLE);
 		buttonminus.setVisibility(View.INVISIBLE);
 	}
 	
-	protected void setItemButtonsVisible()
+	public void setItemButtonsVisible()
 	{
 		buttoncol.setVisibility(View.INVISIBLE);
 		buttonplus.setVisibility(View.VISIBLE);
@@ -64,7 +67,6 @@ public class PropertyEditor extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(selected.isSelected==true)
 					showDialog();				
 			}        	
@@ -75,7 +77,6 @@ public class PropertyEditor extends RelativeLayout {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					if(item.isSelected()==true)
 						moreLessItems(1);				
 				}        	
@@ -87,7 +88,6 @@ public class PropertyEditor extends RelativeLayout {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					if(item.isSelected()==true)
 						moreLessItems(-1);				
 				}        	
@@ -96,14 +96,13 @@ public class PropertyEditor extends RelativeLayout {
 	}
 	
 	private void changeSelectableColor(int color)
-	{
-		if(selected instanceof MapItem)
-		{
-			MapItem item=(MapItem)selected;
-			item.setColor(color);
-			selected.setSelected(false);
-			((MapWidget)getContext()).getMapView().invalidate();
-		}
+	{		
+		FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
+		FactoryMaker.getInstance().setSelectable(selected);
+		FactoryMaker.getInstance().setIntParam2(color);
+		AbstractCommandFactory acf=FactoryMaker.getInstance().create(6);
+		Ctrl.getInstance().execute(acf.create());
+		
 		this.setVisibility(View.INVISIBLE);
 	}
 	
@@ -143,17 +142,11 @@ public class PropertyEditor extends RelativeLayout {
 	
 	private void moreLessItems(int dir)
 	{
-    		int type=item.getType();
-    		int group=item.getGroup();
-    		int newgroup=group+dir;
-    		if((newgroup<=2)&&(newgroup>=0))
-    		{   		
-    			OverlayItemFactory fact=new OverlayItemFactory();
-    			ItemType itemtype=fact.createNewItem(type, newgroup, getContext());
-    			item.setItemType(itemtype);
-    		}
-    	
-    	this.setVisibility(View.INVISIBLE);
+    	FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
+		FactoryMaker.getInstance().setOverlayItem(item);
+		FactoryMaker.getInstance().setIntParam2(dir);
+		AbstractCommandFactory acf=FactoryMaker.getInstance().create(11);
+		Ctrl.getInstance().execute(acf.create());
 	}
 	
 	public boolean onTouchEvent(MotionEvent e)
