@@ -10,3 +10,7 @@ mvn:org.kermeta.language/language.api
 mvn:org.kermeta.language/language.builder.eclipse
 mvn:org.kermeta.language/language.loader.scala
 mvn:org.kermeta.language/language.texteditor.eclipse
+mvn:org.kermeta.eclipse/org.antlr.runtime
+mvn:org.kermeta.kp/kp.model
+mvn:org.kermeta.kp/kp.editor
+mvn:org.kermeta.kp/kp.editor.ui
