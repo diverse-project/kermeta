@@ -12,6 +12,7 @@ import org.kermeta.art2.ServicePortType
 import org.kermeta.art2.{ComponentType => ART2ComponentType }
 import java.io.File
 import com.sun.mirror.apt.Filer
+import org.kermeta.art2.framework.aspects.Art2Aspects._
 import scala.collection.JavaConversions._
 
 object Art2ProvidedProxyGenerator {
@@ -41,7 +42,7 @@ object Art2ProvidedProxyGenerator {
           wrapper.append("case \""+op.getName+"\"=> delegate."+op.getName+"(")
 
           op.getParameters.foreach{param=>
-            wrapper.append("opcall.getParams.get(\""+param.getName+"\").asInstanceOf["+param.getType.getName+"]")
+            wrapper.append("opcall.getParams.get(\""+param.getName+"\").asInstanceOf["+param.getType.print('[',']')+"]")
 
             if(op.getParameters.indexOf(param) != (op.getParameters.size-1)){
               wrapper.append(",")

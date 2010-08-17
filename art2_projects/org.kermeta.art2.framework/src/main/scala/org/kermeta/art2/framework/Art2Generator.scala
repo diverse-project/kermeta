@@ -10,6 +10,7 @@ import org.kermeta.art2.ServicePortType
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.apt.Filer
 import scala.collection.JavaConversions._
+import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 object Art2Generator {
 
@@ -61,7 +62,7 @@ object Art2Generator {
           case sPT : ServicePortType=> sPT.getOperations.foreach{op=>
               wrapper.append("public "+op.getReturnType.getName+" "+op.getName+"(")
               op.getParameters.foreach{param=>
-                wrapper.append(param.getType.getName+" "+param.getName) 
+                wrapper.append(param.getType.print('<','>')+" "+param.getName)
                 if(op.getParameters.indexOf(param) != (op.getParameters.size-1)){
                   wrapper.append(",")
                 }

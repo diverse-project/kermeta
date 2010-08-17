@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.kermeta.art2.framework.annotation.processor.visitor;
 
 import org.kermeta.art2.TypedElement;
@@ -20,7 +19,7 @@ import com.sun.mirror.type.VoidType;
 import com.sun.mirror.type.WildcardType;
 import com.sun.mirror.util.TypeVisitor;
 import org.kermeta.art2.Art2Factory;
-
+import org.kermeta.art2.framework.Art2Utility;
 
 /**
  *
@@ -57,11 +56,20 @@ public class DataTypeVisitor implements TypeVisitor {
     @Override
     public void visitDeclaredType(DeclaredType t) {
         dataType.setName(t.getDeclaration().getQualifiedName());
+        System.out.println(dataType.getName());
     }
 
     @Override
     public void visitClassType(ClassType t) {
         dataType.setName(t.getDeclaration().getQualifiedName());
+        //  System.out.println(dataType.getName());
+        for (TypeMirror tm : t.getActualTypeArguments()) {
+            DataTypeVisitor dtv = new DataTypeVisitor();
+            tm.accept(dtv);
+            //System.out.println(dtv.dataType.getName());
+            dataType.getGenericTypes().add(Art2Utility.getOraddDataType(dtv.getDataType()));
+        }
+
     }
 
     @Override
@@ -71,7 +79,17 @@ public class DataTypeVisitor implements TypeVisitor {
 
     @Override
     public void visitInterfaceType(InterfaceType t) {
+
         dataType.setName(t.getDeclaration().getQualifiedName());
+        //System.out.println(dataType.getName() + t.getActualTypeArguments().size());
+        for (TypeMirror tm : t.getActualTypeArguments()) {
+            DataTypeVisitor dtv = new DataTypeVisitor();
+            tm.accept(dtv);
+            //System.out.println(dtv.dataType.getName());
+            dataType.getGenericTypes().add(Art2Utility.getOraddDataType(dtv.getDataType()));
+        }
+
+        //    System.out.println(dataType.getName());
     }
 
     @Override
@@ -93,7 +111,4 @@ public class DataTypeVisitor implements TypeVisitor {
     public void visitWildcardType(WildcardType t) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    
-
 }

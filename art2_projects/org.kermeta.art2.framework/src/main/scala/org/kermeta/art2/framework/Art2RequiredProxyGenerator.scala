@@ -13,6 +13,7 @@ import org.kermeta.art2.{ComponentType => ART2ComponentType }
 import com.sun.mirror.apt.Filer
 import java.io.File
 import scala.collection.JavaConversions._
+import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 object Art2RequiredProxyGenerator {
 
@@ -41,12 +42,12 @@ object Art2RequiredProxyGenerator {
 
           wrapper.append("def "+op.getName+"(")
           op.getParameters.foreach{param=>
-            wrapper.append(param.getName+":"+param.getType.getName)
+            wrapper.append(param.getName+":"+param.getType.print('[',']'))
             if(op.getParameters.indexOf(param) != (op.getParameters.size-1)){
               wrapper.append(",")
             }
           }
-          wrapper.append(") : "+op.getReturnType.getName+"={\n");
+          wrapper.append(") : "+op.getReturnType.print('[',']')+"={\n");
           wrapper.append("var msgcall = new org.kermeta.art2.framework.MethodCallMessage;\n")
           wrapper.append("msgcall.setMethodName(\""+op.getName+"\");\n")
           op.getParameters.foreach{param=>
