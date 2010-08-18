@@ -18,6 +18,7 @@ case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  exten
     /* Actually deploy only bundle from library  */
     try{
       lastExecutionBundle = Some(ctx.bundleContext.installBundle(ct.getUrl));
+      var symbolicName : String = lastExecutionBundle.get.getSymbolicName
       ctx.bundleMapping.append(Art2OSGiBundle(ct,ct.getName,ct.getClass,lastExecutionBundle.get))
       lastExecutionBundle.get.start
       true

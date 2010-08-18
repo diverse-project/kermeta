@@ -42,6 +42,7 @@ case class AddComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager) 
       case Some(l) => {
           try{
             lastExecutionBundle = Some(ctx.bundleContext.installBundle(buildQuery(l)));
+            var symbolicName : String = lastExecutionBundle.get.getSymbolicName
             ctx.bundleMapping.append(Art2OSGiBundle(ct,ct.getName,ct.getClass,lastExecutionBundle.get))
             lastExecutionBundle.get.start
             true

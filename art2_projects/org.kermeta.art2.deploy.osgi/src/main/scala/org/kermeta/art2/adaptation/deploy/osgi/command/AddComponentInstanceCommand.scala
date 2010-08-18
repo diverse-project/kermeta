@@ -23,19 +23,27 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
     var METAINFDIR = new File(directory.getAbsolutePath+"/"+"META-INF")
     METAINFDIR.mkdir
 
+
+    //FOUND CT SYMBOLIC NAME
+
+    var mappingFound =  ctx.bundleMapping.find({bundle => bundle.obj.equals(c.getComponentType)}) match {
+      case Some(bundle)=> bundle
+      case None => println("ComponentType Not Found"); return false; null;
+    }
+
+
     //var OSGIINFDIR = new File(directory.getAbsolutePath+"/"+"OSGI-INF"+"/"+"blueprint")
     //OSGIINFDIR.mkdirs
 
     /* Generate File */
-
-    
     var MANIFEST = new File(METAINFDIR+"/"+"MANIFEST.MF")
     MANIFEST.write(List("Manifest-Version: 1.0",
                         "Bundle-SymbolicName: "+c.getName,
                         "Bundle-Version: 1",
                         "DynamicImport-Package: *",
                         "Bundle-ManifestVersion: 2",
-                        "Bundle-Blueprint: component.xml"
+                        "Bundle-Blueprint: component.xml",
+                        "Require-Bundle: "+mappingFound.bundle.getSymbolicName
       ))
      
 
