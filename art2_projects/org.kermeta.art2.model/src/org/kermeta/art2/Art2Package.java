@@ -738,13 +738,22 @@ public interface Art2Package extends EPackage {
 	int TYPED_ELEMENT__NAME = NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Generic Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__GENERIC_TYPES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Typed Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.DictionaryAttributeImpl <em>Dictionary Attribute</em>}' class.
@@ -764,6 +773,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int DICTIONARY_ATTRIBUTE__NAME = TYPED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Generic Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_ATTRIBUTE__GENERIC_TYPES = TYPED_ELEMENT__GENERIC_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -2422,6 +2440,17 @@ public interface Art2Package extends EPackage {
 	EClass getTypedElement();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.art2.TypedElement#getGenericTypes <em>Generic Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Generic Types</em>'.
+	 * @see org.kermeta.art2.TypedElement#getGenericTypes()
+	 * @see #getTypedElement()
+	 * @generated
+	 */
+	EReference getTypedElement_GenericTypes();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.MessagePortType <em>Message Port Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3399,6 +3428,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EClass TYPED_ELEMENT = eINSTANCE.getTypedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Generic Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPED_ELEMENT__GENERIC_TYPES = eINSTANCE.getTypedElement_GenericTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.MessagePortTypeImpl <em>Message Port Type</em>}' class.

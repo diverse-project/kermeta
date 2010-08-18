@@ -948,6 +948,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypedElement_GenericTypes() {
+		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMessagePortType() {
 		return messagePortTypeEClass;
 	}
@@ -1380,6 +1389,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(parameterEClass, PARAMETER__TYPE);
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
+		createEReference(typedElementEClass, TYPED_ELEMENT__GENERIC_TYPES);
 
 		messagePortTypeEClass = createEClass(MESSAGE_PORT_TYPE);
 		createEReference(messagePortTypeEClass, MESSAGE_PORT_TYPE__FILTERS);
@@ -1566,6 +1576,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getParameter_Type(), this.getTypedElement(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypedElement_GenericTypes(), this.getTypedElement(), null, "genericTypes", null, 0, -1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(messagePortTypeEClass, MessagePortType.class, "MessagePortType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMessagePortType_Filters(), this.getTypedElement(), null, "filters", null, 0, -1, MessagePortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

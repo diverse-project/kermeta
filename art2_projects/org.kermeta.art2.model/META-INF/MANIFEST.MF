@@ -16,7 +16,7 @@ Bundle-Name: ART2 :: Model
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_20
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1281015469724
+Bnd-LastModified: 1282055700587
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

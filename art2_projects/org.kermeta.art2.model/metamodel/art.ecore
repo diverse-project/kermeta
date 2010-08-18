@@ -123,7 +123,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypedElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="genericTypes" upperBound="-1"
+        eType="#//TypedElement"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessagePortType" eSuperTypes="#//PortType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="filters" upperBound="-1"
         eType="#//TypedElement"/>
