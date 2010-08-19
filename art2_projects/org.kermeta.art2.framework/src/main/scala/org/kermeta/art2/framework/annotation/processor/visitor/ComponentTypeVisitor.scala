@@ -38,7 +38,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     var ctLibName = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).libName
 
     /* CREATE FACTORY IF NEEDED */
-    root.getLibrariy.find({lib=>lib.getName.equals(ctLibName)}) match {
+    root.getLibraries.find({lib=>lib.getName.equals(ctLibName)}) match {
       case Some(lib)=> lib.getSubComponentTypes.add(componentType)
       case None => {
           var newlib = Art2Factory.eINSTANCE.createComponentTypeLibrary
@@ -50,7 +50,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
           newlib.setGroupName(env.getOptions.find({op => op._1.contains("art2.lib.group")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
           newlib.setVersion(env.getOptions.find({op => op._1.contains("art2.lib.version")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
 
-          root.getLibrariy.add(newlib)
+          root.getLibraries.add(newlib)
         }
     }
 

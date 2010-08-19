@@ -36,9 +36,9 @@ class Art2Handler {
         }
       }
       /* STEP 1 Merge ComponentType Lib */
-      var ctLib : List[ComponentTypeLibrary] = List()++modelToMerge.getLibrariy.toList
+      var ctLib : List[ComponentTypeLibrary] = List()++modelToMerge.getLibraries.toList
       ctLib.foreach{libtomerge=>
-        actualModel.getLibrariy.find({elib=> elib.getName.equals(libtomerge.getName) }) match {
+        actualModel.getLibraries.find({elib=> elib.getName.equals(libtomerge.getName) }) match {
           case Some(elib) => {
               libtomerge.getSubComponentTypes.foreach{libCTtomerge=>
                 elib.getSubComponentTypes.find({esublib=>esublib.getName.equals(libCTtomerge.getName)}) match {
@@ -47,7 +47,7 @@ class Art2Handler {
                 }
               }
           }
-          case None => actualModel.getLibrariy.add(libtomerge)
+          case None => actualModel.getLibraries.add(libtomerge)
         }
       }
       
