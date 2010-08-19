@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.art2.android.sharedlib
+Built-By: ffouquet
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Tool: Bnd-0.0.357
+Bundle-Name: ART2 :: Android :: SharedLib
+Bnd-LastModified: 1282226203218
+Created-By: Apache Maven Bundle Plugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.art2.android.sharedlib
+Import-Package: org.kermeta.art2.android.sharedlib
+
