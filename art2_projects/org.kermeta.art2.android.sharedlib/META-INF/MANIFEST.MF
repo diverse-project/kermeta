@@ -1,13 +1,40 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.art2.android.sharedlib
+Export-Package: javax.naming.internal;uses:="javax.naming",javax.manag
+ ement.timer;uses:="mx4j.timer,javax.management,mx4j.log",javax.jms;us
+ es:="javax.transaction.xa",javax.management;uses:="javax.management.l
+ oading,mx4j.util,mx4j.server,mx4j.log,mx4j",javax.naming.spi;uses:="j
+ avax.naming,javax.naming.directory,javax.naming.internal",javax.namin
+ g.directory;uses:="javax.naming",javax.transaction.xa,javax.managemen
+ t.monitor;uses:="mx4j.monitor,javax.management",javax.management.rela
+ tion;uses:="javax.management,mx4j.log",javax.naming;uses:="javax.nami
+ ng.internal,javax.naming.spi",javax.management.openmbean;uses:="javax
+ .management,mx4j.util",javax.management.j2ee.statistics,javax.activat
+ ion;uses:="com.sun.activation.registries",javax.transaction;uses:="ja
+ vax.transaction.xa",javax.management.j2ee;uses:="javax.management",ja
+ vax.management.modelmbean;uses:="javax.xml.parsers,javax.management,o
+ rg.w3c.dom,mx4j,mx4j.log,mx4j.persist,mx4j.util,javax.management.load
+ ing",javax.management.loading;uses:="javax.management,mx4j.log,mx4j.l
+ oading",com.sun.activation.viewers;uses:="javax.activation",com.sun.a
+ ctivation.registries,mx4j.server.interceptor;uses:="mx4j.server,javax
+ .management,mx4j.log,mx4j,mx4j.util",mx4j.server;uses:="mx4j.log,mx4j
+ .util,javax.management,javax.management.loading,mx4j,mx4j.loading,mx4
+ j.server.interceptor",mx4j;uses:="mx4j.util,javax.management",mx4j.lo
+ g;uses:="org.apache.commons.logging,javax.management",mx4j.monitor;us
+ es:="mx4j.log,javax.management,mx4j.timer",mx4j.persist;uses:="mx4j.l
+ oading,javax.management",mx4j.timer;uses:="javax.management.timer",mx
+ 4j.loading;uses:="javax.management,javax.management.loading",mx4j.uti
+ l
+Ignore-Package: javax.ejb,org.apache.bcel.classfile,org.apache.log4j,o
+ rg.apache.bcel.generic
 Built-By: ffouquet
-Build-Jdk: 1.6.0_20
-Bundle-Version: 2.0.0.SNAPSHOT
 Tool: Bnd-0.0.357
 Bundle-Name: ART2 :: Android :: SharedLib
-Bnd-LastModified: 1282226203218
 Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 2.0.0.SNAPSHOT
+Build-Jdk: 1.6.0_20
+Bnd-LastModified: 1282228483921
 Bundle-ManifestVersion: 2
+Import-Package: javax.xml.parsers,org.apache.commons.logging,org.w3c.d
+ om
 Bundle-SymbolicName: org.kermeta.art2.android.sharedlib
-Import-Package: org.kermeta.art2.android.sharedlib
 

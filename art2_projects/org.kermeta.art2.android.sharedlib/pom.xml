@@ -53,20 +53,6 @@
 
     <build>
         <plugins>
-            <!--
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Export-Package>*</Export-Package>
-                        <Private-Package>javax.management.ReflectionException,*</Private-Package>
-                    </instructions>
-                </configuration>
-            </plugin>
--->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -114,6 +100,34 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                        <configuration>
+                            <instructions>
+                                <Export-Package>javax.*,com.*,mx4j.*,!org.apache.log4j</Export-Package>
+                                <Import-Package>
+                                    !org.apache.log4j,
+                                    org.w3c.dom,
+                                    org.apache.commons.logging,
+                                    javax.xml.parsers,
+                                    !javax.ejb,
+                                    !org.apache.bcel.*
+                                 </Import-Package>
+                            </instructions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
