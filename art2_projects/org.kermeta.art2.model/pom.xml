@@ -22,9 +22,7 @@
     <build>
         <sourceDirectory>src</sourceDirectory>
         <!-- Add resources from the plugin structure -->
-        <!--
         <resources>
-
 	      	<resource>
 	        	<directory>.</directory>
 	        	<includes>
@@ -37,7 +35,6 @@
 	        	<targetPath>metamodel</targetPath>
 	      	</resource>
 	    </resources>
-            -->
         <plugins>
 
 			<!-- Creation of the bundle jar and its manifest -->
