@@ -83,6 +83,7 @@ object AddComponentInstanceGenerator {
         <property name="dictionary">
           <props>
             <prop key="art.name">{c.getName}</prop>
+            <prop key="osgi.bundle"><ref component-id="blueprintBundle" /></prop>
           </props>
         </property>
 
