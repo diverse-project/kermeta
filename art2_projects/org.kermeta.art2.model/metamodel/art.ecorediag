@@ -887,7 +887,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_NDJjAZjuEd-FNaA2OH-dGA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_NDJjApjuEd-FNaA2OH-dGA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="art.ecore#//ContainerRoot/librariy"/>
+    <element xmi:type="ecore:EReference" href="art.ecore#//ContainerRoot/libraries"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NDJjA5juEd-FNaA2OH-dGA" points="[0, 0, 437, 162]$[-437, -61, 0, 101]$[-437, -162, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NIIwsJjuEd-FNaA2OH-dGA" id="(0.19607843137254902,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NIIwsZjuEd-FNaA2OH-dGA" id="(0.8518518518518519,1.0)"/>

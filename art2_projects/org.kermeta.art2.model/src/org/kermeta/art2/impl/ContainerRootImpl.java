@@ -46,7 +46,7 @@ import org.kermeta.art2.TypedElement;
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getPortTypes <em>Port Types</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getLibrariy <em>Librariy</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getLibraries <em>Libraries</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMessageHub <em>Message Hub</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getThirdParties <em>Third Parties</em>}</li>
@@ -117,14 +117,14 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	protected EList<PortType> portTypes;
 
 	/**
-	 * The cached value of the '{@link #getLibrariy() <em>Librariy</em>}' containment reference list.
+	 * The cached value of the '{@link #getLibraries() <em>Libraries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLibrariy()
+	 * @see #getLibraries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentTypeLibrary> librariy;
+	protected EList<ComponentTypeLibrary> libraries;
 
 	/**
 	 * The cached value of the '{@link #getMessageHub() <em>Message Hub</em>}' containment reference list.
@@ -252,11 +252,11 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentTypeLibrary> getLibrariy() {
-		if (librariy == null) {
-			librariy = new EObjectContainmentEList<ComponentTypeLibrary>(ComponentTypeLibrary.class, this, Art2Package.CONTAINER_ROOT__LIBRARIY);
+	public EList<ComponentTypeLibrary> getLibraries() {
+		if (libraries == null) {
+			libraries = new EObjectContainmentEList<ComponentTypeLibrary>(ComponentTypeLibrary.class, this, Art2Package.CONTAINER_ROOT__LIBRARIES);
 		}
-		return librariy;
+		return libraries;
 	}
 
 	/**
@@ -315,8 +315,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
 				return ((InternalEList<?>)getPortTypes()).basicRemove(otherEnd, msgs);
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
-				return ((InternalEList<?>)getLibrariy()).basicRemove(otherEnd, msgs);
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
+				return ((InternalEList<?>)getLibraries()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return ((InternalEList<?>)getMessageHub()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
@@ -347,8 +347,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return getDataTypes();
 			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
 				return getPortTypes();
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
-				return getLibrariy();
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
+				return getLibraries();
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return getMessageHub();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
@@ -392,9 +392,9 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				getPortTypes().clear();
 				getPortTypes().addAll((Collection<? extends PortType>)newValue);
 				return;
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
-				getLibrariy().clear();
-				getLibrariy().addAll((Collection<? extends ComponentTypeLibrary>)newValue);
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
+				getLibraries().clear();
+				getLibraries().addAll((Collection<? extends ComponentTypeLibrary>)newValue);
 				return;
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				getMessageHub().clear();
@@ -438,8 +438,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
 				getPortTypes().clear();
 				return;
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
-				getLibrariy().clear();
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
+				getLibraries().clear();
 				return;
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				getMessageHub().clear();
@@ -474,8 +474,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return dataTypes != null && !dataTypes.isEmpty();
 			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
 				return portTypes != null && !portTypes.isEmpty();
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
-				return librariy != null && !librariy.isEmpty();
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
+				return libraries != null && !libraries.isEmpty();
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 				return messageHub != null && !messageHub.isEmpty();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.art2.ContainerRoot#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getPortTypes <em>Port Types</em>}</li>
- *   <li>{@link org.kermeta.art2.ContainerRoot#getLibrariy <em>Librariy</em>}</li>
+ *   <li>{@link org.kermeta.art2.ContainerRoot#getLibraries <em>Libraries</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMessageHub <em>Message Hub</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getThirdParties <em>Third Parties</em>}</li>
@@ -133,20 +133,20 @@ public interface ContainerRoot extends EObject {
 	EList<PortType> getPortTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Librariy</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Libraries</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.art2.ComponentTypeLibrary}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Librariy</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Libraries</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Librariy</em>' containment reference list.
-	 * @see org.kermeta.art2.Art2Package#getContainerRoot_Librariy()
+	 * @return the value of the '<em>Libraries</em>' containment reference list.
+	 * @see org.kermeta.art2.Art2Package#getContainerRoot_Libraries()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ComponentTypeLibrary> getLibrariy();
+	EList<ComponentTypeLibrary> getLibraries();
 
 	/**
 	 * Returns the value of the '<em><b>Message Hub</b></em>' containment reference list.

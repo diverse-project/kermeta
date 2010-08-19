@@ -489,13 +489,13 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_ROOT__PORT_TYPES = 5;
 
 	/**
-	 * The feature id for the '<em><b>Librariy</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Libraries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__LIBRARIY = 6;
+	int CONTAINER_ROOT__LIBRARIES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Message Hub</b></em>' containment reference list.
@@ -2015,15 +2015,15 @@ public interface Art2Package extends EPackage {
 	EReference getContainerRoot_PortTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getLibrariy <em>Librariy</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getLibraries <em>Libraries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Librariy</em>'.
-	 * @see org.kermeta.art2.ContainerRoot#getLibrariy()
+	 * @return the meta object for the containment reference list '<em>Libraries</em>'.
+	 * @see org.kermeta.art2.ContainerRoot#getLibraries()
 	 * @see #getContainerRoot()
 	 * @generated
 	 */
-	EReference getContainerRoot_Librariy();
+	EReference getContainerRoot_Libraries();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getMessageHub <em>Message Hub</em>}'.
@@ -3080,12 +3080,12 @@ public interface Art2Package extends EPackage {
 		EReference CONTAINER_ROOT__PORT_TYPES = eINSTANCE.getContainerRoot_PortTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Librariy</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Libraries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTAINER_ROOT__LIBRARIY = eINSTANCE.getContainerRoot_Librariy();
+		EReference CONTAINER_ROOT__LIBRARIES = eINSTANCE.getContainerRoot_Libraries();
 
 		/**
 		 * The meta object literal for the '<em><b>Message Hub</b></em>' containment reference list feature.

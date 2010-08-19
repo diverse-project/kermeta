@@ -87,9 +87,10 @@ public class ContainerRootItemProvider
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__BINDINGS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__DATA_TYPES);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__PORT_TYPES);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__LIBRARIY);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__LIBRARIES);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__MESSAGE_HUB);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__MBINDINGS);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES);
 		}
 		return childrenFeatures;
 	}
@@ -147,9 +148,10 @@ public class ContainerRootItemProvider
 			case Art2Package.CONTAINER_ROOT__BINDINGS:
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
 			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-			case Art2Package.CONTAINER_ROOT__LIBRARIY:
+			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
+			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -214,7 +216,7 @@ public class ContainerRootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__LIBRARIY,
+				(Art2Package.Literals.CONTAINER_ROOT__LIBRARIES,
 				 Art2Factory.eINSTANCE.createComponentTypeLibrary()));
 
 		newChildDescriptors.add
@@ -236,6 +238,50 @@ public class ContainerRootItemProvider
 			(createChildParameter
 				(Art2Package.Literals.CONTAINER_ROOT__MBINDINGS,
 				 Art2Factory.eINSTANCE.createMBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
+				 Art2Factory.eINSTANCE.createDeployUnit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
+				 Art2Factory.eINSTANCE.createComponentType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
+				 Art2Factory.eINSTANCE.createCompositeType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
+				 Art2Factory.eINSTANCE.createComponentTypeLibrary()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == Art2Package.Literals.CONTAINER_ROOT__COMPONENT_TYPES ||
+			childFeature == Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES ||
+			childFeature == Art2Package.Literals.CONTAINER_ROOT__LIBRARIES;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

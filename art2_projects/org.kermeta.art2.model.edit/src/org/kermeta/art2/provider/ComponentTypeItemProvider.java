@@ -68,6 +68,7 @@ public class ComponentTypeItemProvider
 			addBeanPropertyDescriptor(object);
 			addStartMethodPropertyDescriptor(object);
 			addStopMethodPropertyDescriptor(object);
+			addRequiredLibsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -156,6 +157,28 @@ public class ComponentTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Required Libs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRequiredLibsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentType_requiredLibs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_requiredLibs_feature", "_UI_ComponentType_type"),
+				 Art2Package.Literals.COMPONENT_TYPE__REQUIRED_LIBS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

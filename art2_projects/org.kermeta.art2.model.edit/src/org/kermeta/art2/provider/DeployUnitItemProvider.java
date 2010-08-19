@@ -64,6 +64,7 @@ public class DeployUnitItemProvider
 			addGroupNamePropertyDescriptor(object);
 			addUnitNamePropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
+			addUrlPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +136,28 @@ public class DeployUnitItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Url feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUrlPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DeployUnit_url_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DeployUnit_url_feature", "_UI_DeployUnit_type"),
+				 Art2Package.Literals.DEPLOY_UNIT__URL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,6 +186,7 @@ public class DeployUnitItemProvider
 			case Art2Package.DEPLOY_UNIT__GROUP_NAME:
 			case Art2Package.DEPLOY_UNIT__UNIT_NAME:
 			case Art2Package.DEPLOY_UNIT__VERSION:
+			case Art2Package.DEPLOY_UNIT__URL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -536,6 +536,29 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.DeployUnit} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeployUnitItemProvider deployUnitItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.DeployUnit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeployUnitAdapter() {
+		if (deployUnitItemProvider == null) {
+			deployUnitItemProvider = new DeployUnitItemProvider(this);
+		}
+
+		return deployUnitItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.ComponentTypeLibrary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -884,6 +907,7 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		if (typedElementItemProvider != null) typedElementItemProvider.dispose();
 		if (messagePortTypeItemProvider != null) messagePortTypeItemProvider.dispose();
 		if (repositoryItemProvider != null) repositoryItemProvider.dispose();
+		if (deployUnitItemProvider != null) deployUnitItemProvider.dispose();
 		if (componentTypeLibraryItemProvider != null) componentTypeLibraryItemProvider.dispose();
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (integrationPatternItemProvider != null) integrationPatternItemProvider.dispose();
