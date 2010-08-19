@@ -43,7 +43,7 @@ public class LoadModelCommand implements Command {
         /* Synch every UI Component */
         //LOAD COMPONENT TYPE
         kernel.getEditorPanel().getPalette().clear();
-        for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
+        for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
             for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
                 ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
                 kernel.getEditorPanel().getPalette().addComponentTypePanel(ctp, ctl.getName());
