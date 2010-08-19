@@ -15,6 +15,8 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
@@ -39,7 +41,8 @@ public class LoadNewLibCommand implements Command {
         if (filechooser.getSelectedFile() != null) {
             JarFile jar;
             try {
-                jar = new JarFile(filechooser.getSelectedFile().getAbsolutePath());
+            	
+                jar = new JarFile(filechooser.getSelectedFile().getAbsoluteFile()); //new JarFile(filechooser.getSelectedFile().getAbsoluteFile().toURI().toString());
                 JarEntry entry = jar.getJarEntry("ART2-INF/art2Lib.art2");
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));
@@ -83,6 +86,7 @@ public class LoadNewLibCommand implements Command {
         inputStream.close();
         out.flush();
         out.close();
-        return temp.getAbsolutePath();
+        
+        return URI.createFileURI(temp.getAbsolutePath()).toString();
     }
 }
