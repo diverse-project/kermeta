@@ -29,7 +29,7 @@ case class AddComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager) 
   }
 
   def findLib(ct : ComponentType) : Option[DeployUnit] = {
-    ct.eContainer.asInstanceOf[ContainerRoot].getLibrariy.find{lib=>
+    ct.eContainer.asInstanceOf[ContainerRoot].getLibraries.find{lib=>
       lib.getSubComponentTypes.exists({sct => sct == ct})
     }
   }
