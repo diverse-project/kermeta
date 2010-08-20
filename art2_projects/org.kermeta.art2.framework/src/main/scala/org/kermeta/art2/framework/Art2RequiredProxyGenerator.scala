@@ -51,7 +51,7 @@ object Art2RequiredProxyGenerator {
           wrapper.append("var msgcall = new org.kermeta.art2.framework.MethodCallMessage;\n")
           wrapper.append("msgcall.setMethodName(\""+op.getName+"\");\n")
           op.getParameters.foreach{param=>
-            wrapper.append("msgcall.getParams.put(\""+param.getName+"\","+param.getName+")")
+            wrapper.append("msgcall.getParams.put(\""+param.getName+"\","+param.getName+");\n")
           }
           wrapper.append("delegate.process(msgcall);\n")
           wrapper.append("}\n")
