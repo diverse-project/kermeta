@@ -4,6 +4,8 @@
 package org.kermeta.art2.ui.editor.command;
 
 import javax.swing.JFileChooser;
+
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 
@@ -23,7 +25,8 @@ public class SaveActuelModelCommand implements Command {
     @Override
     public void execute(Object p) {
         filechooser.showSaveDialog(kernel.getModelPanel());
-        Art2XmiHelper.save(filechooser.getSelectedFile().getPath(), kernel.getModelHandler().getActualModel());
+        Art2XmiHelper.save(URI.createFileURI(filechooser.getSelectedFile().getPath()).toString(), 
+        		kernel.getModelHandler().getActualModel());
     }
 
 }
