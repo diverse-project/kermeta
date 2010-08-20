@@ -9,7 +9,7 @@
         <property name="bundleContext" ref="blueprintBundleContext"/>
         <property name="kompareService" ref="kompareService"/>
         <property name="deployService" ref="deployService"/>
-        <property name="nodeName" value="duke.irisa.fr"/>
+        <!-- <property name="nodeName" value="duke.irisa.fr"/> -->
     </bean>
 
     <service ref="corebean" interface="org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService" />
