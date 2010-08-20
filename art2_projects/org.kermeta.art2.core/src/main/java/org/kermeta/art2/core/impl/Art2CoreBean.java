@@ -65,7 +65,7 @@ public class Art2CoreBean implements Art2ModelHandlerService {
         try {
             System.out.println("ART2Node=" + this.bundle.getBundleContext().getProperty("art2.node.name"));
 
-            
+            setNodeName(this.bundle.getBundleContext().getProperty("art2.node.name"));
 
             /* DEBUG MODE ONLY */
             /*
