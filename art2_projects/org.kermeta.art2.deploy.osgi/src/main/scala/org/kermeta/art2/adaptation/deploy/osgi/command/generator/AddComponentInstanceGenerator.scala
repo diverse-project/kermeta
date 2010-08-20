@@ -81,10 +81,10 @@ object AddComponentInstanceGenerator {
       <bean id={c.getName} class={c.getComponentType.getFactoryBean} factory-method={"create"+c.getComponentType.getName}  init-method={c.getComponentType.getStartMethod} destroy-method={c.getComponentType.getStopMethod}>
 
         <property name="dictionary">
-          <props>
-            <prop key="art.name">{c.getName}</prop>
-            <prop key="osgi.bundle" value="#blueprintBundle"></prop>
-          </props>
+          <map>
+            <entry key="art.name"><ref component-id={c.getName} /></entry>
+            <entry key="osgi.bundle"><ref component-id="blueprintBundle" /></entry>
+          </map>
         </property>
 
         <property name="hostedPorts">
