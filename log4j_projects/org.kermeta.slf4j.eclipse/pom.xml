@@ -1,0 +1,229 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.utils</groupId>
+	<artifactId>utils.slf4j.eclipse</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+	<name>Utils :: SLF4J eclipse</name>
+	
+		
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<!-- Add resources from the plugin structure -->
+        <resources>
+	      	<resource>
+	        	<directory>.</directory>
+	        	<includes>
+	          		<include>plugin.xml</include>
+	          		<include>plugin.properties</include>
+	        	</includes>
+	      	</resource>
+	      	<resource>
+	        	<directory>icons</directory>
+	        	<targetPath>icons</targetPath>
+	      	</resource>
+	    </resources>
+		<plugins>
+			<plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                    	<id>extract_api_src</id>
+                    	<goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                            	<unzip src="lib/thirdparty/slf4j-api-1.5.11-sources.jar" dest="${project.build.directory}/extracted_src">
+									<patternset>
+									    <exclude name="**/impl/**"/>
+								        <exclude name="**/META-INF/**"/>
+									</patternset>
+								</unzip>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                    	<id>sync_meta_inf</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/META-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/META-INF"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<plugin>
+		    	<groupId>org.codehaus.mojo</groupId>
+	        	<artifactId>build-helper-maven-plugin</artifactId>
+	        	<version>1.5</version>
+	        	<executions>
+	          		<execution>
+	            		<id>add-source</id>
+	            		<phase>generate-sources</phase>
+	            		<goals>
+	              			<goal>add-source</goal>
+	           			</goals>
+	            		<configuration>
+	    					<sources>
+	    						<source>${project.build.directory}/extracted_src</source>
+	    					</sources>
+	    				</configuration>
+	    			</execution>
+		    	</executions>
+		    </plugin>
+			
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                        org.kermeta.slf4j.eclipse.*,
+                        org.slf4j.*
+                        </Export-Package>
+                        <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
+                        <Require-Bundle>
+                    		org.eclipse.ui,
+ 							org.eclipse.core.runtime,
+ 							org.eclipse.core.resources,
+ 							org.eclipse.core.jobs,
+ 							org.eclipse.core.runtime.preferences
+                        </Require-Bundle>
+                        <Import-Package>
+                        	!org.eclipse.core.*,
+							!org.eclipse.ui.*,
+							!org.eclipse.jface.*,
+							!org.eclipse.swt.*,
+							!org.eclipse.swt.*,
+	                        org.kermeta.art2,
+	                        org.kermeta.art2.framework,
+							org.osgi.framework,		
+							org.apache.log4j.*
+                        </Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-SymbolicName>org.kermeta.slf4j.eclipse; singleton:=true</Bundle-SymbolicName>
+                        <Bundle-Activator>org.kermeta.slf4j.eclipse.Activator</Bundle-Activator>                    	                                               
+                        <!-- add extra element in the manifest, copy them from this file
+                             ex: Bundle-ActivationPolicy: lazy -->
+                        <_include>resources/META-INF/MANIFEST-part.MF</_include>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <!-- Synch MANIFEST for eclipse user -->
+          <!--    <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/META-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/META-INF"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> --> 
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- Main dependencies -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>	
+		
+		
+		<!-- Eclipse dependencies -->
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.jobs</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.2.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.preferences</artifactId>
+			<version>[3.2.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface.text</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.swt</artifactId>
+            <version>[3.5.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+            <version>[3.5.0.0,)</version>
+        </dependency>
+        <dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.console</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.workbench</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2.13,2.0.0)</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+</project>

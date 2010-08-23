@@ -7,7 +7,7 @@
 		</tstamp>
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		
-		<unzip src="lib/thirdparty/slf4j-api-1.5.11-sources.jar" dest="extracted_src">
+		<unzip src="lib/thirdparty/slf4j-api-1.5.11-sources.jar" dest="target/extracted_src">
 			<patternset>
 			    <exclude name="**/impl/**"/>
 		        <exclude name="**/META-INF/**"/>
