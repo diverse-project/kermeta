@@ -34,7 +34,7 @@ case class AddComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager) 
     }
   }
 
-  var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
+  //var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
   def execute() : Boolean= {
     println("CMD ADD CT EXECUTION");
     /* Actually deploy only bundle from library  */

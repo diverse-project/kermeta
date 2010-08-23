@@ -38,7 +38,7 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
     /* Generate File */
     var MANIFEST = new File(METAINFDIR+"/"+"MANIFEST.MF")
     MANIFEST.write(List("Manifest-Version: 1.0",
-                        "Bundle-SymbolicName: "+c.getName,
+                        "Bundle-SymbolicName: "+c.getName+";blueprint.wait-for-dependencies:=false",
                         "Bundle-Version: 1",
                         "DynamicImport-Package: *",
                         "Bundle-ManifestVersion: 2",
@@ -70,6 +70,6 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
     /* TODO CALL refreshPackage */
   }
 
-  var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
+//  var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
 
 }

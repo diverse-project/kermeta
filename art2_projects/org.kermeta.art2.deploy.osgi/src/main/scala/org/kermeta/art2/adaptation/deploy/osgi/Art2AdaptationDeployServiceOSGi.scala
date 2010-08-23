@@ -23,38 +23,68 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
   def setContext(context : Art2DeployManager) = { ctx = context }
 
+
+  def phase(cmds: List[PrimitiveCommand] ):Boolean = {
+    var intermediate = cmds.forall(c=> {
+        try{ c.execute } catch {
+          case _ @ e => println("ART2 DEPLOY ERROR="+e);false
+        }
+      })
+    if(intermediate){
+      intermediate = cmds.forall(c=> {
+          try{
+            c.getLastExecutionBundle match {
+              case None => false
+              case Some(b) => b.start;true
+            }
+          } catch {
+            case _ @ e => println("ART2 START ERROR="+e);false
+          }
+        })
+    }
+    if(!intermediate){
+      cmds.foreach(c=>{
+          try{
+            c.undo
+          } catch {
+            case _ @ e => println("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
+          }
+        })
+    }
+    intermediate
+  }
+
+
   def deploy(model : AdaptationModel) = {
-    var executedCommand :List[PrimitiveCommand] = List()
+    var executedCommandTP :List[PrimitiveCommand] = List()
+    var executedCommandCT :List[PrimitiveCommand] = List()
+    var executedCommandCI :List[PrimitiveCommand] = List()
+
     var listPrimitive = plan(model)
     println("plansize="+listPrimitive.size);
     listPrimitive foreach{ p => p match {
         //ThirdParty
-        case tpa : AddThirdParty =>executedCommand = executedCommand ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
-        case tpa : RemoveThirdParty =>executedCommand = executedCommand ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
-        //ComponentType
-        case cta : AddComponentType =>executedCommand = executedCommand ++ List(AddComponentTypeCommand(cta.getRef,ctx))
-        case cta : RemoveComponentType =>executedCommand = executedCommand ++ List(RemoveComponentTypeCommand(cta.getRef,ctx))
-        //ComponentInstance
-        case ca : AddComponentInstance =>executedCommand = executedCommand ++ List(AddComponentInstanceCommand(ca.getRef,ctx))
-        case ca : RemoveComponentInstance =>executedCommand = executedCommand ++ List(RemoveComponentInstanceCommand(ca.getRef,ctx))
+        case tpa : AddThirdParty =>executedCommandTP = executedCommandTP ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
+        case tpa : RemoveThirdParty =>executedCommandTP = executedCommandTP ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
+          //ComponentType
+        case cta : AddComponentType =>executedCommandCT = executedCommandCT ++ List(AddComponentTypeCommand(cta.getRef,ctx))
+        case cta : RemoveComponentType =>executedCommandCT = executedCommandCT ++ List(RemoveComponentTypeCommand(cta.getRef,ctx))
+          //ComponentInstance
+        case ca : AddComponentInstance =>executedCommandCI = executedCommandCI ++ List(AddComponentInstanceCommand(ca.getRef,ctx))
+        case ca : RemoveComponentInstance =>executedCommandCI = executedCommandCI ++ List(RemoveComponentInstanceCommand(ca.getRef,ctx))
         case _ => println("Unknow art2 adaptation primitive");false
       }
     }
-    var allResult = executedCommand.forall(c=> {
-        try{
-          c.execute
-        } catch {
-          case _ @ e => println("ART2DEPLOYERROR="+e);false
-        }
-      })
-    if(!allResult) executedCommand.foreach(c=>{
-        try{
-          c.undo
-        } catch {
-          case _ @ e => println("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
-        }
-      })
-    allResult
+
+    var executionResult = true
+    println("Phase 1 install ThirdParty "+executedCommandTP.size)
+    if(executionResult){ executionResult = phase(executedCommandTP) }
+    println("Phase 2 install ComponentType "+executedCommandCT.size)
+    if(executionResult){ executionResult = phase(executedCommandCT) }
+    println("Phase 3 install ComponentInstance "+executedCommandCI.size)
+    if(executionResult){ executionResult = phase(executedCommandCI) }
+
+    executionResult
   }
 
 

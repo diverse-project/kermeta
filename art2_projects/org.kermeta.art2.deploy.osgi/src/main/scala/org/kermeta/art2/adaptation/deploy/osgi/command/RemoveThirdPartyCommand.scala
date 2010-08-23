@@ -11,7 +11,7 @@ import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 case class RemoveThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager) extends PrimitiveCommand {
 
   def execute() : Boolean= {
-  println("Not implemented")
+    println("Not implemented")
     true
   }
 

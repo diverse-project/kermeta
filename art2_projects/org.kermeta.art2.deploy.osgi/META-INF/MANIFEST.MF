@@ -10,7 +10,7 @@ Bundle-Name: ART2 :: Deploy :: OSGI
 Created-By: Apache Maven Bundle Plugin
 Bundle-Version: 2.0.0.SNAPSHOT
 Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1282298199438
+Bnd-LastModified: 1282580101583
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
  kermeta.art2,org.kermeta.art2.api.service.adaptation.deploy,org.kerme

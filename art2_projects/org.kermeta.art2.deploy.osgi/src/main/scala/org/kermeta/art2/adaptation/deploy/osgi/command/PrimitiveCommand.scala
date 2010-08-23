@@ -11,4 +11,8 @@ trait PrimitiveCommand {
 
   def undo(): Unit
 
+  var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
+
+  def getLastExecutionBundle = lastExecutionBundle
+
 }
