@@ -26,7 +26,7 @@ object AddComponentInstanceGenerator {
           if(pp.isBind){
             provided.add(
               <bean id={pp.getPortTypeRef.getName} class={c.getComponentType.getFactoryBean} factory-method={"create"+c.getComponentType.getName+"PORT"+pp.getPortTypeRef.getName  } />
-              <service ref={pp.getPortTypeRef.getName} interface={pp.getPortTypeRef.getRef.getName}>
+              <service ref={pp.getPortTypeRef.getName} interface={pp.getPortTypeRef.getRef.getName} depends-on={c.getName}>
                 <service-properties>
                   <entry key="artPortName" value={pp.getPortTypeRef.getName} />
                   <entry key="artComponentName" value={c.getName} />
