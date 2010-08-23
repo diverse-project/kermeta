@@ -21,9 +21,9 @@ public interface ComponentType {
 
     public HashMap<String, Object> getNeededPorts();
 
-    public Properties getDictionary();
+    public HashMap<String,Object> getDictionary();
 
-    public void setDictionary(Properties dictionary);
+    public void setDictionary(HashMap<String,Object> dictionary);
 
     public <T> T getPortByName(String name, Class<T> type);
 }

@@ -15,15 +15,15 @@ public class AbstractComponentType implements ComponentType {
 
     private HashMap<String,Object> hostedPorts = new HashMap<String,Object>();
     private HashMap<String,Object> neededPorts = new HashMap<String,Object>();
-    private Properties dictionary = new Properties();
+    private HashMap<String,Object> dictionary = new HashMap<String,Object>();
 
     @Override
-    public Properties getDictionary() {
+    public HashMap<String,Object> getDictionary() {
         return this.dictionary;
     }
 
     @Override
-    public void setDictionary(Properties dictionary) {
+    public void setDictionary(HashMap<String,Object> dictionary) {
         this.dictionary = dictionary;
     }
 
