@@ -8,6 +8,7 @@ package org.kermeta.art2.adaptation.deploy.osgi.command
 import java.io.File
 import org.kermeta.art2.ComponentInstance
 import org.kermeta.art2.adaptation.deploy.osgi.command.generator.AddComponentInstanceGenerator
+import org.kermeta.art2.adaptation.deploy.osgi.command.generator.AddComponentInstanceWrapperGenerator
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import org.kermeta.art2.framework.FileHelper._
@@ -42,14 +43,17 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
                         "Bundle-Version: 1",
                         "DynamicImport-Package: *",
                         "Bundle-ManifestVersion: 2",
-                        "Bundle-Blueprint: component.xml",
+                        "Bundle-Blueprint: component.xml, componentWrapper.xml",
                         "Require-Bundle: "+mappingFound.bundle.getSymbolicName
       ))
      
 
     var BLUEPRINTBASE = new File(directory+"/"+"component.xml")
     BLUEPRINTBASE.write(AddComponentInstanceGenerator.generate(c))
-    
+
+    var BLUEPRINTWRAPPER = new File(directory+"/"+"componentWrapper.xml")
+    BLUEPRINTWRAPPER.write(AddComponentInstanceWrapperGenerator.generate(c))
+
     // println(AddComponentInstanceGenerator.generate(c));
     println("CI-DIRECTORY"+directory.getAbsolutePath)
     try{
