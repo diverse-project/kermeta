@@ -226,4 +226,32 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+
+        <repository>
+            <id>Kermeta Public</id>
+            <url>http://www.kermeta.org/maven2</url>
+        </repository>
+        <repository>
+            <id>Kermeta Public SnapShots</id>
+            <url>http://www.kermeta.org/maven2-snapshots</url>
+        </repository>
+    </repositories>
+
+
+
+    <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
