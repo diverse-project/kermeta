@@ -38,6 +38,7 @@ object AddComponentInstanceWrapperGenerator {
                             <bean id={rp.getPortTypeRef.getName+"proxyProducer"} class="org.kermeta.art2.runtime.proxy.Factory" factory-method="createProducer" init-method="init" destroy-method="stop">
                               <property name="uri" value={remotePort.getProxyURI} />
                               <property name="hubType" value={rp.getProxyHubType} />
+                              <property name="cf"><ref component-id="cf" /></property>
                             </bean>
 
                             <bean id={rp.getPortTypeRef.getName+"proxy"} class={c.getComponentType.getFactoryBean} factory-method={"create"+c.getComponentType.getName+"PORTPROXY"+rp.getPortTypeRef.getName}>
@@ -63,6 +64,7 @@ object AddComponentInstanceWrapperGenerator {
                     <bean id={rp.getPortTypeRef.getName+"proxyProducer"} class="org.kermeta.art2.runtime.proxy.Factory" factory-method="createProducer" init-method="init" destroy-method="stop">
                       <property name="uri" value={rp.getProxyURI} />
                       <property name="hubType" value={rp.getProxyHubType} />
+                      <property name="cf"><ref component-id="cf" /></property>
                     </bean>
 
                     <bean id={rp.getPortTypeRef.getName+"proxy"} class={c.getComponentType.getFactoryBean} factory-method={"create"+c.getComponentType.getName+"PORTPROXY"+rp.getPortTypeRef.getName}>
@@ -83,51 +85,8 @@ object AddComponentInstanceWrapperGenerator {
         }
         required
       }
-      <!-- create the bean -->
-      <bean id={c.getName} class={c.getComponentType.getFactoryBean} factory-method={"create"+c.getComponentType.getName}  init-method={c.getComponentType.getStartMethod} destroy-method={c.getComponentType.getStopMethod}>
 
-        <property name="dictionary">
-          <map>
-            <entry key="art.name"><ref component-id={c.getName} /></entry>
-            <entry key="osgi.bundle"><ref component-id="blueprintBundle" /></entry>
-          </map>
-        </property>
-
-        <property name="hostedPorts">
-          <map>
-            {
-              var entries = new scala.collection.mutable.ArrayBuffer[scala.xml.Elem]
-              c.getProvided.foreach{hp =>
-                if(hp.isBind){
-                  entries.append(
-                    <entry key={hp.getPortTypeRef.getName}>
-                      <ref component-id={hp.getPortTypeRef.getName} />
-                    </entry>
-                  )
-                }
-              }
-              entries
-            }
-          </map>
-        </property>
-        <property name="neededPorts">
-          <map>
-            {
-              var entries = new scala.collection.mutable.ArrayBuffer[scala.xml.Elem]
-              c.getRequired.foreach{np =>
-                if(np.isBind){
-                  entries.append(
-                    <entry key={np.getPortTypeRef.getName}>
-                      <ref component-id={np.getPortTypeRef.getName} />
-                    </entry>
-                  )
-                }
-              }
-              entries
-            }
-          </map>
-        </property>
-      </bean>
+      
     </blueprint>;
     content.toString
   }

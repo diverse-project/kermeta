@@ -12,9 +12,11 @@ case class RemoveComponentInstanceCommand(c : ComponentInstance, ctx : Art2Deplo
 
   def execute() : Boolean= {
     println("CMD REMOVE CT EXECUTION");
-    ctx.bundleMapping.find({bm=> bm.obj  == c }) match {
-      case Some(mp) => { mp.bundle.stop;mp.bundle.uninstall;true }
-      case None => false
+
+    var bundles = ctx.bundleMapping.filter({bm=> bm.obj  == c })
+
+    bundles.forall{mp=>
+      mp.bundle.stop;mp.bundle.uninstall;true
     }
   }
 
