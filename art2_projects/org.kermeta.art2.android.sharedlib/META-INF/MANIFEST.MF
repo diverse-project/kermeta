@@ -32,7 +32,7 @@ Bundle-Name: ART2 :: Android :: SharedLib
 Created-By: Apache Maven Bundle Plugin
 Bundle-Version: 2.0.0.SNAPSHOT
 Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1282237790156
+Bnd-LastModified: 1282663494993
 Bundle-ManifestVersion: 2
 Import-Package: javax.xml.parsers,org.apache.commons.logging,org.w3c.d
  om
