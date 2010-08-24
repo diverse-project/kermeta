@@ -9,6 +9,7 @@ import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.PortType
 import org.kermeta.art2.ServicePortType
 import org.kermeta.art2.TypedElement
+import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.{ComponentType => art2CT}
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ComponentTypeLibrary
@@ -22,13 +23,28 @@ class Art2Handler {
 
   def merge(modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
+      /* STEP 0 MERGE PARTY */
+      var tps : List[DeployUnit] = List()++modelToMerge.getThirdParties.toList
+      tps.foreach{tp=>
+        actualModel.getThirdParties.find({atp=> atp.getName == tp.getName}) match {
+          case Some(ftp)=> {
+              //CHECK CONSISTENCY, IF NOT JUST ADD
+              if(tp.getUrl != ftp.getUrl){
+                actualModel.getThirdParties.add(tp)
+              }
+          }
+          case None => {
+              actualModel.getThirdParties.add(tp)
+          }
+        }
+      }
+
       /* STEP 0 MERGE ComponentType */
       var cts : List[art2CT] = List()++modelToMerge.getComponentTypes.toList
       cts.foreach{dt=>
         actualModel.getComponentTypes.find({ct=>ct.getName.equals(dt.getName)}) match {
-          case Some(fct)=> //TODO CHECK CONSISTENCY // CHECK UNICITY
+          case Some(fct)=> mergeComponentType(fct,dt)
           case None => {
-              
               actualModel.getComponentTypes.add(dt)
               dt.getProvided.foreach{ptref=>ptref.setRef(mergePortType(ptref.getRef))}
               dt.getRequired.foreach{ptref=>ptref.setRef(mergePortType(ptref.getRef))}
@@ -52,6 +68,12 @@ class Art2Handler {
       }
       
     }
+  }
+
+  private def mergeComponentType(actualComponentType : org.kermeta.art2.ComponentType,newComponentType : org.kermeta.art2.ComponentType) = {
+    //SEARCH FORALL REFERENCED MODEL ELEMENT
+    
+
   }
   
   private def mergePortType(portType : PortType) : PortType = {
