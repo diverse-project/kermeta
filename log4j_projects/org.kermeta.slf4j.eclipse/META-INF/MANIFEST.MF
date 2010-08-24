@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.slf4j.eclipse.preferences;uses:="org.kerme
+ ta.slf4j.eclipse",org.kermeta.slf4j.eclipse;uses:="org.apache.log4j,o
+ rg.apache.log4j.xml,org.osgi.framework",org.slf4j.impl;uses:="org.slf
+ 4j.spi,org.apache.log4j,org.slf4j.helpers,org.slf4j",org.slf4j.spi;us
+ es:="org.slf4j",org.slf4j.helpers;uses:="org.slf4j.spi,org.slf4j",org
+ .slf4j;uses:="org.slf4j.impl,org.slf4j.helpers,org.slf4j.spi"
+Ignore-Package: org.eclipse.jface.preference,org.eclipse.core.runtime,
+ org.eclipse.ui,org.eclipse.core.resources,org.eclipse.ui.plugin,org.e
+ clipse.swt.widgets,org.eclipse.core.runtime.preferences
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Built-By: dvojtise
+Tool: Bnd-0.0.357
+Bundle-Localization: plugin
+Bundle-Name: Utils :: SLF4J eclipse
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
+ re.resources,org.eclipse.core.jobs,org.eclipse.core.runtime.preferenc
+ es
+Bundle-Vendor: IRISA/INRIA
+Build-Jdk: 1.6.0_17
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1282579972280
+Bundle-Activator: org.kermeta.slf4j.eclipse.Activator
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.slf4j.eclipse; singleton:=true
+Import-Package: !org.eclipse.swt.*,org.apache.log4j,org.apache.log4j.x
+ ml,org.kermeta.art2,org.kermeta.art2.framework,org.osgi.framework;ver
+ sion="1.5"
+
