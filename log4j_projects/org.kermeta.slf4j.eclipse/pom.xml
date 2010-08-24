@@ -113,7 +113,6 @@
 							!org.eclipse.ui.*,
 							!org.eclipse.jface.*,
 							!org.eclipse.swt.*,
-							!org.eclipse.swt.*,
 	                        org.kermeta.art2,
 	                        org.kermeta.art2.framework,
 							org.osgi.framework,		

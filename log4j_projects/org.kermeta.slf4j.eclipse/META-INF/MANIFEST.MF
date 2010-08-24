@@ -21,11 +21,10 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
 Bundle-Vendor: IRISA/INRIA
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1282579972280
+Bnd-LastModified: 1282634882435
 Bundle-Activator: org.kermeta.slf4j.eclipse.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.kermeta.slf4j.eclipse; singleton:=true
-Import-Package: !org.eclipse.swt.*,org.apache.log4j,org.apache.log4j.x
- ml,org.kermeta.art2,org.kermeta.art2.framework,org.osgi.framework;ver
- sion="1.5"
+Import-Package: org.apache.log4j,org.apache.log4j.xml,org.kermeta.art2
+ ,org.kermeta.art2.framework,org.osgi.framework;version="1.5"
 
