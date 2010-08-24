@@ -47,7 +47,7 @@ public class LoadNewLibCommand implements Command {
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));
                     //kernel.getEditorPanel().loadLib(path);
-
+                    System.out.println(path);
 
 
                     ContainerRoot nroot = Art2XmiHelper.load(path);
