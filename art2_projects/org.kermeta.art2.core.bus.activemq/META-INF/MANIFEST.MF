@@ -26,7 +26,7 @@ Bundle-Name: ART2 :: Core :: Bus :: ActiveMQ
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_20
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1280992475938
+Bnd-LastModified: 1282591168673
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.kermeta.art2.core.bus.activemq
 Import-Package: javax.annotation,javax.management,javax.management.ope
