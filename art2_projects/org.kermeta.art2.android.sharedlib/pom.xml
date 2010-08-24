@@ -15,6 +15,16 @@
         <version>2</version>
     </parent>
 
+    <properties>
+        <android.home>/Users/ffouquet/Documents/DEV/sdk/android-sdk-mac_86</android.home>
+        <android.platform.version>8</android.platform.version>
+        <android.platform>platforms/android-${android.platform.version}</android.platform>
+        <android.framework.aidl>${android.home}/${android.platform}/framework.aidl</android.framework.aidl>
+        <android.jar>${android.home}/${android.platform}/android.jar</android.jar>
+        <android.tools.aapt>${android.home}/${android.platform}/tools/aapt</android.tools.aapt>
+        <android.tools.dx>${android.home}/${android.platform}/tools/dx</android.tools.dx>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax.naming</groupId>
@@ -71,7 +81,7 @@
                                     <exclude>org.scala-lang:scala-library</exclude>
                                 </excludes>
                             </artifactSet>
-
+<!--
                             <relocations>
                                 <relocation>
                                     <pattern>javax.jms</pattern>
@@ -93,9 +103,7 @@
                                     <pattern>javax.activation</pattern>
                                     <shadedPattern>shaded.javax.activation</shadedPattern>
                                 </relocation>
-
-
-                            </relocations>
+                            </relocations>-->
                         </configuration>
                     </execution>
                 </executions>
@@ -121,12 +129,100 @@
                                     javax.xml.parsers,
                                     !javax.ejb,
                                     !org.apache.bcel.*
-                                 </Import-Package>
+                                </Import-Package>
                             </instructions>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-dex</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${android.tools.dx}</executable>
+                            <arguments>
+                          <!--<argument>-JXmx1024M</argument>-->
+                                <argument>--dex</argument>
+                          <!-- argument>\-\-verbose</argument -->
+                                <argument>--core-library</argument>
+                                <argument>--output=${project.build.directory}/classes.dex</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.jar</argument>
+                                
+                          <!-- uncomment this line if you have any generated classes such as aidl interfaces -->
+                          <!-- argument>${project.build.directory}/generated-classes/</argument -->
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+
+<!--
+
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>maven-android-plugin</artifactId>
+                <version>2.5.1-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <sdk>
+                        <path>/Users/ffouquet/Documents/DEV/sdk/android-sdk-mac_86</path>
+                        <platform>8</platform>
+                    </sdk>
+                    <deleteConflictingFiles>true</deleteConflictingFiles>
+                    <sign><debug>false</debug></sign>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>dex</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+
+
+<!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>prepare-dexed-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${android.tools.aapt}</executable>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <arguments>
+                                <argument>add</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.jar</argument>
+                                <argument>classes.dex</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+-->
 
         </plugins>
     </build>
