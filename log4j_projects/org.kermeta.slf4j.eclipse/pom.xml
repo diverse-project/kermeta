@@ -106,7 +106,7 @@
  							org.eclipse.core.runtime,
  							org.eclipse.core.resources,
  							org.eclipse.core.jobs,
- 							org.eclipse.core.runtime.preferences
+ 							org.eclipse.equinox.preferences
                         </Require-Bundle>
                         <Import-Package>
                         	!org.eclipse.core.*,

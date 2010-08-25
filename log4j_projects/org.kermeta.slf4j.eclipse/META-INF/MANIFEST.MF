@@ -16,12 +16,11 @@ Bundle-Localization: plugin
 Bundle-Name: Utils :: SLF4J eclipse
 Created-By: Apache Maven Bundle Plugin
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
- re.resources,org.eclipse.core.jobs,org.eclipse.core.runtime.preferenc
- es
+ re.resources,org.eclipse.core.jobs,org.eclipse.equinox.preferences
 Bundle-Vendor: IRISA/INRIA
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.0.SNAPSHOT
-Bnd-LastModified: 1282634882435
+Bnd-LastModified: 1282727311531
 Bundle-Activator: org.kermeta.slf4j.eclipse.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.kermeta.slf4j.eclipse; singleton:=true
