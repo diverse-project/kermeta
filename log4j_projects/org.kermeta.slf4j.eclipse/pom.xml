@@ -98,8 +98,10 @@
                     <instructions>
                         <Export-Package>
                         org.kermeta.slf4j.eclipse.*,
-                        org.slf4j.*
+                        org.slf4j.*;version=1.5.11
                         </Export-Package>
+                        <Bundle-Vendor>IRISA/INRIA</Bundle-Vendor>
+                        <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
                         <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>
                     		org.eclipse.ui,
@@ -108,6 +110,8 @@
  							org.eclipse.core.jobs,
  							org.eclipse.equinox.preferences
                         </Require-Bundle>
+                        <_versionpolicy>[${version;==;${@}},${version;+;${@}})</_versionpolicy>
+                        
                         <Import-Package>
                         	!org.eclipse.core.*,
 							!org.eclipse.ui.*,
@@ -123,7 +127,7 @@
                         <Bundle-Activator>org.kermeta.slf4j.eclipse.Activator</Bundle-Activator>                    	                                               
                         <!-- add extra element in the manifest, copy them from this file
                              ex: Bundle-ActivationPolicy: lazy -->
-                        <_include>resources/META-INF/MANIFEST-part.MF</_include>
+                        <!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
                     </instructions>
                 </configuration>
             </plugin>
