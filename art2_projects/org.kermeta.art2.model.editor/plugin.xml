@@ -29,7 +29,7 @@
       <editor
             id="org.kermeta.art2.presentation.Art2EditorID"
             name="%_UI_Art2Editor_label"
-            icon="icons/full/obj16/Art2ModelFile.gif"
+            icon="icons/full/obj16/art2_logo_v2_16.png"
             extensions="art2"
             class="org.kermeta.art2.presentation.Art2Editor"
             contributorClass="org.kermeta.art2.presentation.Art2ActionBarContributor">
