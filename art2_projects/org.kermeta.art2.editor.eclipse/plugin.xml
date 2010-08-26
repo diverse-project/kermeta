@@ -8,19 +8,21 @@
             objectClass="org.eclipse.core.resources.IFile"
             id="org.kemeta.art2.editor.eclipse.contribution1">
          <menu
+               icon="icons/art2_logo_v2_16.png"
+               id="org.kemeta.art2.editor.eclipse.menu1"
                label="ART2"
-               path="additions"
-               id="org.kemeta.art2.editor.eclipse.menu1">
+               path="additions">
             <separator
                   name="group1">
             </separator>
          </menu>
          <action
-               label="Open in Graphical editor"
                class="org.kermeta.art2.editor.eclipse.popup.actions.OpenGraphicalEditorAction"
-               menubarPath="org.kemeta.art2.editor.eclipse.menu1/group1"
                enablesFor="1"
-               id="org.kemeta.art2.editor.eclipse.newAction">
+               icon="icons/art2_logo_v2_16.png"
+               id="org.kemeta.art2.editor.eclipse.newAction"
+               label="Open in Graphical editor"
+               menubarPath="org.kemeta.art2.editor.eclipse.menu1/group1">
          </action>
       </objectContribution>
    </extension>
