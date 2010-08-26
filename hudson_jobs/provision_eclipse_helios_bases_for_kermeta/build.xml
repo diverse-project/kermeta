@@ -110,7 +110,30 @@
 		</ant>
 	</target>
 	
-	<target name="provision_eclipse_version" depends="get_native_eclipse">
+	
+	<target name="get_dropins">
+		<mkdir dir="${env.WORKSPACE}/build/dropins/"/>
+		<get src="http://repo1.maven.org/maven2/org/apache/aries/blueprint/org.apache.aries.blueprint/0.1-incubating/org.apache.aries.blueprint-0.1-incubating.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.apache.aries.blueprint-0.1-incubating.jar"
+						usetimestamp="true"/>
+		<get src="http://www.kermeta.org/maven2-snapshots/org/kermeta/utils/utils.slf4j.eclipse/2.0.0-SNAPSHOT/utils.slf4j.eclipse-2.0.0-SNAPSHOT.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.kermeta.utils.slf4j.eclipse-2.0.0-SNAPSHOT.jar"
+						usetimestamp="true"/>
+		<get src="http://www.kermeta.org/maven2-snapshots/org/kermeta/utils/utils.provisionner4eclipse/2.0.0-SNAPSHOT/utils.provisionner4eclipse-2.0.0-SNAPSHOT.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.kermeta.utils.provisionner4eclipse-2.0.0-SNAPSHOT.jar"
+						usetimestamp="true"/>
+		<get src="http://www.kermeta.org/maven2-snapshots/org/kermeta/utilities/eclipse/utilities.eclipse.jface/2.0.0-SNAPSHOT/utilities.eclipse.jface-2.0.0-SNAPSHOT.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.kermeta.utilities.eclipse.jface-2.0.0-SNAPSHOT.jar"
+						usetimestamp="true"/>
+		<get src="http://repo1.maven.org/maven2/org/ops4j/pax/url/pax-url-mvn/1.1.3/pax-url-mvn-1.1.3.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.ops4j.pax-url-mvn-1.1.3.jar"
+						usetimestamp="true"/>
+		<get src="http://repo1.maven.org/maven2/org/ops4j/pax/url/pax-url-assembly/1.1.3/pax-url-assembly-1.1.3.jar" 
+						dest="${env.WORKSPACE}/build/dropins/org.ops4j.pax-url-assembly-1.1.3.jar"
+						usetimestamp="true"/>
+	</target>
+	
+	<target name="provision_eclipse_version" depends="get_native_eclipse, get_dropins">
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
@@ -167,6 +190,11 @@
 					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
 		</antcall>
 		<!-- FROM OTHER UPDATE SITE -->
+
+		<echo>Additional install in the dropin folder - should be replaced later by proper installation </echo>			
+		<copy todir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base/eclipse/dropins">
+			<fileset dir="${env.WORKSPACE}/build/dropins"></fileset>
+		</copy>
 
 		<delete file="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip" failonerror="false"/>
 		<zip destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip">
