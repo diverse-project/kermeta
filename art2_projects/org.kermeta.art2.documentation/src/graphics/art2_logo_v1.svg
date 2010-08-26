@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="art2_logo_v1.svg">
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4022"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4020"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3147"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="gears"
+       id="path-effect3145"
+       is_visible="true"
+       teeth="10"
+       phi="5" />
+    <inkscape:path-effect
+       effect="sketch"
+       id="path-effect3143"
+       is_visible="true"
+       nbiter_approxstrokes="5"
+       strokelength="100"
+       strokelength_rdm="0.3;1"
+       strokeoverlap="0.3"
+       strokeoverlap_rdm="0.3;1"
+       ends_tolerance="0.1;1"
+       parallel_offset="5;1"
+       tremble_size="5;1"
+       tremble_frequency="1"
+       nbtangents="5"
+       tgt_places_rdmness="1;1"
+       tgtscale="10"
+       tgtlength="100"
+       tgtlength_rdm="0.3;1" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3141"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3139"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="sketch"
+       id="path-effect3135"
+       is_visible="true"
+       nbiter_approxstrokes="5"
+       strokelength="100"
+       strokelength_rdm="0.3;1"
+       strokeoverlap="0.3"
+       strokeoverlap_rdm="0.3;1"
+       ends_tolerance="0.1;1"
+       parallel_offset="5;1"
+       tremble_size="5;1"
+       tremble_frequency="1"
+       nbtangents="5"
+       tgt_places_rdmness="1;1"
+       tgtscale="10"
+       tgtlength="100"
+       tgtlength_rdm="0.3;1" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3133"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 79.953064,2.4925381 79.953064,5.2525381 79.953064,8.0125381 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0"
+       pattern-nodetypes="sssss" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3131"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3127"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3125"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3121"
+       is_visible="true"
+       bendpath="m 65.894701,484.43421 571.358779,0"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect2999"
+       is_visible="true"
+       pattern="m 93.944183,204.05081 c 65.381907,71.75252 51.365007,69.58296 -10.101525,96.87312 L 185.8173,299.93916 c -33.25955,-39.32589 -7.9788,-40.97178 -3.08122,-55.53301 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0"
+       pattern-nodetypes="ccccc" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect2997"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="195.29378"
+     inkscape:cy="910.03417"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:object-paths="true"
+     inkscape:snap-global="false"
+     inkscape:window-width="1224"
+     inkscape:window-height="898"
+     inkscape:window-x="122"
+     inkscape:window-y="43"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#a3d6ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.12229347000000000px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+       id="rect3001"
+       width="90.809601"
+       height="101.90311"
+       x="91.985031"
+       y="188.7429"
+       rx="19.977097"
+       ry="25.219734"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <text
+       xml:space="preserve"
+       style="font-size:105.2621994px;font-style:oblique;font-variant:normal;font-weight:900;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial Black;-inkscape-font-specification:'Arial Black, Heavy Oblique'"
+       x="116.21136"
+       y="238.85442"
+       id="text3917"
+       sodipodi:linespacing="125%"
+       transform="scale(0.8490782,1.1777478)"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"><tspan
+         sodipodi:role="line"
+         id="tspan4058"
+         x="116.21136"
+         y="238.85442">A</tspan></text>
+    <rect
+       style="fill:#a3d6ff;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1;fill-opacity:1"
+       id="rect3001-8"
+       width="90.913727"
+       height="80.812202"
+       x="205.55118"
+       y="65.443138"
+       rx="20"
+       ry="20"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#a3d6ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.10001229999999990px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+       id="rect3001-2"
+       width="90.820999"
+       height="97.884781"
+       x="322.72086"
+       y="189.74191"
+       rx="19.979601"
+       ry="24.225248"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#8effa8;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+       id="rect3001-7"
+       width="90.913727"
+       height="80.812202"
+       x="320.65781"
+       y="8.8745975"
+       rx="20"
+       ry="20"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956"
+       width="15.947115"
+       height="11.623957"
+       x="174.17836"
+       y="200.34818"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-2"
+       width="15.947115"
+       height="11.623957"
+       x="173.93857"
+       y="245.37471"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-9"
+       width="15.989125"
+       height="11.162441"
+       x="196.29115"
+       y="87.495247"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-8"
+       width="15.972817"
+       height="11.50034"
+       x="315.08643"
+       y="210.23492"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-6"
+       width="15.989125"
+       height="11.162441"
+       x="288.43402"
+       y="115.35239"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-1"
+       width="15.989125"
+       height="11.162441"
+       x="287.71973"
+       y="86.066666"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <rect
+       style="fill:#ff0000;stroke-linejoin:round"
+       id="rect3956-5"
+       width="15.989125"
+       height="11.162441"
+       x="315.15845"
+       y="63.843323"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 185.18069,205.29244 7.65838,0 0,-111.320998 6.26595,0 0,0"
+       id="path4024"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 315.66079,214.74561 -7.7983,0 0,-93.40136 -6.38043,0 0,0"
+       id="path4024-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081" />
+    <text
+       xml:space="preserve"
+       style="font-size:87.6121521px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
+       x="211.80287"
+       y="140.52757"
+       id="text4044"
+       sodipodi:linespacing="125%"
+       transform="scale(1.012514,0.98764064)"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"><tspan
+         sodipodi:role="line"
+         id="tspan4046"
+         x="211.80287"
+         y="140.52757">R</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:106.20236206px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
+       x="323.15897"
+       y="282.88718"
+       id="text4048"
+       sodipodi:linespacing="125%"
+       transform="scale(1.025025,0.97558597)"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"><tspan
+         sodipodi:role="line"
+         id="tspan4050"
+         x="323.15897"
+         y="282.88718">T</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:85.62237549px;font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="302.38013"
+       y="84.726532"
+       id="text4052"
+       sodipodi:linespacing="125%"
+       transform="scale(1.1153076,0.89661363)"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"><tspan
+         sodipodi:role="line"
+         id="tspan4054"
+         x="302.38013"
+         y="84.726532">2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 301.26017,91.683402 8.63115,0 0,-22.175943 7.06186,0 0,0"
+       id="path4024-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="8.9259081"
+       inkscape:export-ydpi="8.9259081"
+       inkscape:export-filename="C:\Users\dvojtise\workspaces\kermetaV2_svn_3\org.kermeta.art2.documentation\src\graphics\art2_logo_v1_32.png" />
+  </g>
+</svg>
