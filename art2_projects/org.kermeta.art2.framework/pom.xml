@@ -5,7 +5,7 @@
     <packaging>bundle</packaging>
     <name>ART2 :: FRAMEWORK</name>
 
-    <groupId>${parent.groupId}</groupId>
+    <groupId>${project.parent.groupId}</groupId>
     <version>${art2.version}</version>
 
     <parent>
