@@ -117,7 +117,7 @@
 							!org.eclipse.ui.*,
 							!org.eclipse.jface.*,
 							!org.eclipse.swt.*,
-							org.osgi.framework,		
+							org.osgi.framework;version="[1.5,2)",		
 							org.apache.log4j.*
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
