@@ -15,11 +15,15 @@ import org.kermeta.art2adaptation.RemoveComponentInstance
 import org.kermeta.art2adaptation.RemoveComponentType
 import org.kermeta.art2adaptation.RemoveThirdParty
 import org.kermeta.art2adaptation.ThirdPartyAdaptation
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
 class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
   var ctx : Art2DeployManager = null
+  
+  var internalLog : Logger = LoggerFactory.getLogger("org.kermeta.art2.deploy.osgi.Art2AdaptationDeployServiceOSGi")
 
   def setContext(context : Art2DeployManager) = { ctx = context }
 
@@ -27,7 +31,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
   def phase(cmds: List[PrimitiveCommand] ):Boolean = {
     var intermediate = cmds.forall(c=> {
         try{ c.execute } catch {
-          case _ @ e => println("ART2 DEPLOY ERROR="+e);false
+          case _ @ e => internalLog.error("ART2 DEPLOY ERROR="+e);false
         }
       })
     if(intermediate){
@@ -38,7 +42,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
               case Some(b) => b.start;true
             }
           } catch {
-            case _ @ e => println("ART2 START ERROR="+e);false
+            case _ @ e => internalLog.error("ART2 START ERROR="+e);false
           }
         })
     }
@@ -47,7 +51,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           try{
             c.undo
           } catch {
-            case _ @ e => println("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
+            case _ @ e => internalLog.error("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
           }
         })
     }
@@ -61,7 +65,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     var executedCommandCI :List[PrimitiveCommand] = List()
 
     var listPrimitive = plan(model)
-    println("plansize="+listPrimitive.size);
+    internalLog.debug("plansize="+listPrimitive.size)    
     listPrimitive foreach{ p => p match {
         //ThirdParty
         case tpa : AddThirdParty =>executedCommandTP = executedCommandTP ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
@@ -72,16 +76,16 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           //ComponentInstance
         case ca : AddComponentInstance =>executedCommandCI = executedCommandCI ++ List(AddComponentInstanceCommand(ca.getRef,ctx))
         case ca : RemoveComponentInstance =>executedCommandCI = executedCommandCI ++ List(RemoveComponentInstanceCommand(ca.getRef,ctx))
-        case _ => println("Unknow art2 adaptation primitive");false
+        case _ => internalLog.error("Unknow art2 adaptation primitive");false
       }
     }
 
     var executionResult = true
-    println("Phase 1 install ThirdParty "+executedCommandTP.size)
+    internalLog.debug("Phase 1 install ThirdParty "+executedCommandTP.size)
     if(executionResult){ executionResult = phase(executedCommandTP) }
-    println("Phase 2 install ComponentType "+executedCommandCT.size)
+   internalLog.debug("Phase 2 install ComponentType "+executedCommandCT.size)
     if(executionResult){ executionResult = phase(executedCommandCT) }
-    println("Phase 3 install ComponentInstance "+executedCommandCI.size)
+   internalLog.debug("Phase 3 install ComponentInstance "+executedCommandCI.size)
     if(executionResult){ executionResult = phase(executedCommandCI) }
 
     executionResult
