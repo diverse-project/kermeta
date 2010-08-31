@@ -11,11 +11,15 @@ import org.kermeta.art2.adaptation.deploy.osgi.command.generator.AddComponentIns
 import org.kermeta.art2.adaptation.deploy.osgi.command.generator.AddComponentInstanceWrapperGenerator
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.kermeta.art2.framework.FileHelper._
 
 case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployManager) extends PrimitiveCommand {
 
   var executedBundles : List[org.osgi.framework.Bundle] = List()
+  
+   var internalLog : Logger = LoggerFactory.getLogger("org.kermeta.art2.deploy.osgi.AddComponentInstanceCommand")
 
   def execute() : Boolean= {
 
@@ -36,7 +40,7 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
     //FOUND CT SYMBOLIC NAME
     var mappingFound =  ctx.bundleMapping.find({bundle => bundle.obj.equals(c.getComponentType)}) match {
       case Some(bundle)=> bundle
-      case None => println("ComponentType Not Found"); return false; null;
+      case None => internalLog.error("ComponentType Not Found"); return false; null;
     }
 
     //var OSGIINFDIR = new File(directory.getAbsolutePath+"/"+"OSGI-INF"+"/"+"blueprint")
@@ -93,7 +97,7 @@ case class AddComponentInstanceCommand(c : ComponentInstance, ctx : Art2DeployMa
 
       true
     } catch {
-      case _ @ e => e.printStackTrace;false
+      case _ @ e => e.printStackTrace();false
     }
   }
 

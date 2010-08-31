@@ -7,13 +7,18 @@ package org.kermeta.art2.adaptation.deploy.osgi.command.generator
 
 import org.kermeta.art2.Binding
 import org.kermeta.art2.ComponentInstance
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import scala.xml._
 import org.kermeta.art2._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
+
 object AddComponentInstanceGenerator {
 
+	 var internalLog : Logger = LoggerFactory.getLogger("org.kermeta.art2.deploy.osgi.AddComponentInstanceGenerator")
+	 
   def generate(c : ComponentInstance) : String = {
     var content =
       //  <?xml version="1.0" encoding="UTF-8"?>
@@ -71,7 +76,7 @@ object AddComponentInstanceGenerator {
                     <reference id={rp.getPortTypeRef.getName} interface="org.kermeta.art2.framework.MessagePort" filter={"&(artComponentName="+c.getName+")(artPortName="+rp.getPortTypeRef.getName+")"} />
                   )
                 }
-              case _ @ uncatch => println(uncatch)
+              case _ @ uncatch => internalLog.error(uncatch.toString)
             }
           }
         }

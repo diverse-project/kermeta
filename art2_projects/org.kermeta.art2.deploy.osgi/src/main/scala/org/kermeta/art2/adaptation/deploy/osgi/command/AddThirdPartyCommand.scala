@@ -23,7 +23,7 @@ case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  exten
      // lastExecutionBundle.get.start
       true
     } catch {
-      case _ @ e =>e.printStackTrace; false
+      case _ @ e => e.printStackTrace(); false
     }
 
   }
