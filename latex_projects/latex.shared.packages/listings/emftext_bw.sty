@@ -15,7 +15,8 @@
 morekeywords=[0]{ SYNTAXDEF, FOR, START, IMPORTS, OPTIONS, TOKENS, TOKENSTYLES, RULES},
 morekeywords=[1]{ DEFINE, COLOR },
 sensitive=true,
-% morecomment=[l]{//},
+morecomment=[s]{<}{>},   % forces the whole < > to be in italic in case of // in the URL used by EMFText
+morecomment=[l]{//},
 morecomment=[s]{/*}{*/},
 morestring=[b]",
 }

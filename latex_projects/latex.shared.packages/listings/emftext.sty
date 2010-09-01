@@ -15,23 +15,26 @@
 \definecolor{EMFTextBlack}{rgb}{0,0,0}
 \definecolor{EMFTextGreen}{rgb}{0,0.59,0}
 \definecolor{EMFTextPurple}{rgb}{0.5,0,0.47}
+\definecolor{EMFTextOrange}{cmyk}{0,0.40,0.95,0}
 \definecolor{EMFTextOliveGreen}{cmyk}{0.64,0,0.95,0.40}
 
 \lstdefinelanguage{emftext}
 {
 morekeywords=[0]{ SYNTAXDEF, FOR, START, IMPORTS, OPTIONS, TOKENS, TOKENSTYLES, RULES},
 morekeywords=[1]{ DEFINE, COLOR },
-sensitive=true,
-% morecomment=[l]{//},
+sensitive=true,   
+morecomment=[s][\color{EMFTextPurple}]{<}{>},	 % forces the whole < > to be colored, in case of // in the URL used by EMFText
+morecomment=[l]{//},
 morecomment=[s]{/*}{*/},
 morestring=[b]",
 }
 
 \lstset{language=emftext,
-   basicstyle=\ttfamily,
-   keywordstyle=[0]\bf\color{EMFTextRed},
-   keywordstyle=[1]\color{EMFTextBlue},
-   commentstyle=\color{EMFTextOliveGreen},
+   basicstyle=\small,			%\ttfamily,
+   keywordstyle=[0]\small\bf\color{EMFTextRed},
+   keywordstyle=[1]\small\color{EMFTextOrange},
+   commentstyle=\color{EMFTextOliveGreen}, 
+   stringstyle=\color{EMFTextBlue},
    tabsize=2,
    breaklines=true,
 %   frame=single,
