@@ -7,18 +7,11 @@
 %% Authors : bmorin, mclavreu
 %%
 %%
-\ProvidesFile{kermeta.sty}
+\ProvidesFile{kermeta_bw.sty}
     [2009/02/05 0.1 listings language file for Kermeta]
 
-%% Kermeta Language
-\definecolor{KRed}{rgb}{0.59,0,0}
-\definecolor{KBlue}{rgb}{0,0,0.59}
-\definecolor{KBlack}{rgb}{0,0,0}
-\definecolor{KGreen}{rgb}{0,0.59,0}
-\definecolor{KPurple}{rgb}{0.5,0,0.47}
-\definecolor{KOliveGreen}{cmyk}{0.64,0,0.95,0.40}
 
-\lstdefinelanguage{kermeta}
+\lstdefinelanguage{kermeta_bw}
 {
 morekeywords=[0]{ require, using, extern, pre, post, inv},
 morekeywords=[1]{ package, inherits, class, attribute, reference, property, readonly, getter, is, setter, alias, enumeration, operation, method },
@@ -33,7 +26,7 @@ morecomment=[s]{/*}{*/},
 morestring=[b]",
 }
 
-\lstset{language=kermeta,
+\lstset{language=kermeta_bw,
    basicstyle=\ttfamily,
    keywordstyle=[0]\bf\color{KRed},
    keywordstyle=[1]\bf\color{KBlue},
@@ -42,7 +35,7 @@ morestring=[b]",
    keywordstyle=[4]\textit\bf\color{KPurple},
    keywordstyle=[5]\bf\color{KBlack},
    keywordstyle=[6]\bf\color{KPurple},
-   commentstyle=\color{KOliveGreen},
+   commentstyle=\textit\color{KOliveGreen},
    tabsize=2,
    breaklines=true,
 %   frame=single,

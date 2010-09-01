@@ -6,18 +6,11 @@
 %% Authors : dvojtise
 %%
 %%
-\ProvidesFile{emftext.sty}
-    [2010/09/01 0.1 listings language file for EMFText]
+\ProvidesFile{emftext_bw.sty}
+    [2010/09/01 0.1 black and white listings language file for EMFText]
 
-%% Kermeta Language
-\definecolor{EMFTextRed}{rgb}{0.59,0,0}
-\definecolor{EMFTextBlue}{rgb}{0,0,0.59}
-\definecolor{EMFTextBlack}{rgb}{0,0,0}
-\definecolor{EMFTextGreen}{rgb}{0,0.59,0}
-\definecolor{EMFTextPurple}{rgb}{0.5,0,0.47}
-\definecolor{EMFTextOliveGreen}{cmyk}{0.64,0,0.95,0.40}
 
-\lstdefinelanguage{emftext}
+\lstdefinelanguage{emftext_bw}
 {
 morekeywords=[0]{ SYNTAXDEF, FOR, START, IMPORTS, OPTIONS, TOKENS, TOKENSTYLES, RULES},
 morekeywords=[1]{ DEFINE, COLOR },
@@ -27,11 +20,11 @@ morecomment=[s]{/*}{*/},
 morestring=[b]",
 }
 
-\lstset{language=emftext,
+\lstset{language=emftext_bw,
    basicstyle=\ttfamily,
-   keywordstyle=[0]\bf\color{EMFTextRed},
-   keywordstyle=[1]\color{EMFTextBlue},
-   commentstyle=\color{EMFTextOliveGreen},
+   keywordstyle=[0]\bf,
+   keywordstyle=[1]\textit\bf,
+   commentstyle=\textit,
    tabsize=2,
    breaklines=true,
 %   frame=single,
