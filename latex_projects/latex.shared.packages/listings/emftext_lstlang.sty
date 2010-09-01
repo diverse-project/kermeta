@@ -1,0 +1,46 @@
+%% $Id: lstlang0.sty,v 1.1 2009-02-05 14:06:43 mclavreu Exp $
+%% Project : fr.irisa.triskell.kermeta.documentation
+%% Copyright : IRISA / INRIA / Universite de Rennes 1
+%% ----------------------------------------------------------------------------
+%% Creation date : 05 fevrier 2009
+%% Authors : dvojtise
+%%
+%%
+\ProvidesFile{emftext_lstlang.sty}
+    [2009/02/05 0.1 listings language file for EMFText]
+
+%% Kermeta Language
+\definecolor{EMFTextRed}{rgb}{0.59,0,0}
+\definecolor{EMFTextBlue}{rgb}{0,0,0.59}
+\definecolor{EMFTextBlack}{rgb}{0,0,0}
+\definecolor{EMFTextGreen}{rgb}{0,0.59,0}
+\definecolor{EMFTextPurple}{rgb}{0.5,0,0.47}
+\definecolor{EMFTextOliveGreen}{cmyk}{0.64,0,0.95,0.40}
+
+\lstdefinelanguage{emftext}
+{
+morekeywords=[0]{ SYNTAXDEF, FOR, START, IMPORTS, OPTIONS, TOKENS, TOKENSTYLES, RULES},
+morekeywords=[1]{ DEFINE, COLOR },
+sensitive=true,
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morestring=[b]",
+}
+
+\lstset{language=emftext,
+   basicstyle=\ttfamily,
+   keywordstyle=[0]\bf\color{EMFTextRed},
+   keywordstyle=[1]\color{EMFTextBlue},
+   commentstyle=\color{EMFTextOliveGreen},
+   tabsize=2,
+   breaklines=true,
+%   frame=single,
+%   backgroundcolor=\color{Gris}    
+}
+
+\endinput
+
+%% End of file `lstlang0.sty'.
+
+
+  
