@@ -901,10 +901,13 @@ public class Runtime2EMF {
 		// Not found : maybe the ecore is splitted in several files. Let's look in the other part of the ecore file ...
 		Set<Resource>resSet = ResourceHelper.findResourceDependencies(res);
 		for(Resource subRes : resSet){
-			if(subRes == null){
+			/* if(subRes == null){
 				Set<Resource>resSet2 = ResourceHelper.findResourceDependencies(res);
-			}
+			} */
 			result = getEClassFromFQualifiedName(kqname, subRes);
+			if(result != null) {
+				return result;
+			}
 			
 		}
 		// If it was still not found, maybe it is an Ecore Type? (like EEnum,
