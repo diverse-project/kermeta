@@ -8,25 +8,25 @@ package org.kermeta.art2adaptation.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.kermeta.art2adaptation.AddBinding;
 import org.kermeta.art2adaptation.Art2adaptationPackage;
-import org.kermeta.art2adaptation.RemoveComponentType;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Remove Component Type</b></em>'.
+ * An implementation of the model object '<em><b>Add Binding</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class RemoveComponentTypeImpl extends ComponentTypeAdaptationImpl implements RemoveComponentType {
+public class AddBindingImpl extends BindingAdaptationImpl implements AddBinding {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RemoveComponentTypeImpl() {
+	protected AddBindingImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class RemoveComponentTypeImpl extends ComponentTypeAdaptationImpl impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Art2adaptationPackage.Literals.REMOVE_COMPONENT_TYPE;
+		return Art2adaptationPackage.Literals.ADD_BINDING;
 	}
 
-} //RemoveComponentTypeImpl
+} //AddBindingImpl

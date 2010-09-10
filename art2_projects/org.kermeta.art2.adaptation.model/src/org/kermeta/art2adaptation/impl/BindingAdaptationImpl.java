@@ -13,25 +13,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.kermeta.art2.ComponentType;
+import org.kermeta.art2.MBinding;
 
 import org.kermeta.art2adaptation.Art2adaptationPackage;
-import org.kermeta.art2adaptation.ComponentTypeAdaptation;
+import org.kermeta.art2adaptation.BindingAdaptation;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Component Type Adaptation</b></em>'.
+ * An implementation of the model object '<em><b>Binding Adaptation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.art2adaptation.impl.ComponentTypeAdaptationImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link org.kermeta.art2adaptation.impl.BindingAdaptationImpl#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl implements ComponentTypeAdaptation {
+public class BindingAdaptationImpl extends AdaptationPrimitiveImpl implements BindingAdaptation {
 	/**
 	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -40,14 +40,14 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentType ref;
+	protected MBinding ref;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComponentTypeAdaptationImpl() {
+	protected BindingAdaptationImpl() {
 		super();
 	}
 
@@ -58,7 +58,7 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Art2adaptationPackage.Literals.COMPONENT_TYPE_ADAPTATION;
+		return Art2adaptationPackage.Literals.BINDING_ADAPTATION;
 	}
 
 	/**
@@ -66,13 +66,13 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentType getRef() {
+	public MBinding getRef() {
 		if (ref != null && ref.eIsProxy()) {
 			InternalEObject oldRef = (InternalEObject)ref;
-			ref = (ComponentType)eResolveProxy(oldRef);
+			ref = (MBinding)eResolveProxy(oldRef);
 			if (ref != oldRef) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF, oldRef, ref));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Art2adaptationPackage.BINDING_ADAPTATION__REF, oldRef, ref));
 			}
 		}
 		return ref;
@@ -83,7 +83,7 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentType basicGetRef() {
+	public MBinding basicGetRef() {
 		return ref;
 	}
 
@@ -92,11 +92,11 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRef(ComponentType newRef) {
-		ComponentType oldRef = ref;
+	public void setRef(MBinding newRef) {
+		MBinding oldRef = ref;
 		ref = newRef;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF, oldRef, ref));
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2adaptationPackage.BINDING_ADAPTATION__REF, oldRef, ref));
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF:
+			case Art2adaptationPackage.BINDING_ADAPTATION__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
 		}
@@ -122,8 +122,8 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF:
-				setRef((ComponentType)newValue);
+			case Art2adaptationPackage.BINDING_ADAPTATION__REF:
+				setRef((MBinding)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF:
-				setRef((ComponentType)null);
+			case Art2adaptationPackage.BINDING_ADAPTATION__REF:
+				setRef((MBinding)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -152,10 +152,10 @@ public class ComponentTypeAdaptationImpl extends AdaptationPrimitiveImpl impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Art2adaptationPackage.COMPONENT_TYPE_ADAPTATION__REF:
+			case Art2adaptationPackage.BINDING_ADAPTATION__REF:
 				return ref != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ComponentTypeAdaptationImpl
+} //BindingAdaptationImpl
