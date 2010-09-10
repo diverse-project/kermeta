@@ -48,12 +48,10 @@
         eType="#//Repository" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypes" upperBound="-1"
         eType="#//TypedElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="portTypes" upperBound="-1"
-        eType="#//PortType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="libraries" upperBound="-1"
         eType="#//TypeLibrary" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="messageHub" upperBound="-1"
-        eType="#//Hub" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hubs" upperBound="-1" eType="#//Hub"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mBindings" upperBound="-1"
         eType="#//MBinding" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="thirdParties" upperBound="-1"
@@ -61,7 +59,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="platformModel" eType="#//PlatformModel"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PortType" abstract="true" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="PortType" abstract="true" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchrone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port">
