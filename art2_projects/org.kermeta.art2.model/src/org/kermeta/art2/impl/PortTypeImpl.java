@@ -28,7 +28,7 @@ import org.kermeta.art2.PortType;
  *
  * @generated
  */
-public abstract class PortTypeImpl extends NamedElementImpl implements PortType {
+public abstract class PortTypeImpl extends TypeDefinitionImpl implements PortType {
 	/**
 	 * The default value of the '{@link #isSynchrone() <em>Synchrone</em>}' attribute.
 	 * <!-- begin-user-doc -->

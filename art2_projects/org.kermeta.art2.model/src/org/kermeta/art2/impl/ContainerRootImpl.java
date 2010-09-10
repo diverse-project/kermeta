@@ -46,9 +46,8 @@ import org.kermeta.art2.TypedElement;
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getTypeDefinitions <em>Type Definitions</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getRepositories <em>Repositories</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getDataTypes <em>Data Types</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getPortTypes <em>Port Types</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getLibraries <em>Libraries</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMessageHub <em>Message Hub</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getHubs <em>Hubs</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getThirdParties <em>Third Parties</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getPlatformModel <em>Platform Model</em>}</li>
@@ -99,16 +98,6 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	protected EList<TypedElement> dataTypes;
 
 	/**
-	 * The cached value of the '{@link #getPortTypes() <em>Port Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPortTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<PortType> portTypes;
-
-	/**
 	 * The cached value of the '{@link #getLibraries() <em>Libraries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,14 +108,14 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	protected EList<TypeLibrary> libraries;
 
 	/**
-	 * The cached value of the '{@link #getMessageHub() <em>Message Hub</em>}' containment reference list.
+	 * The cached value of the '{@link #getHubs() <em>Hubs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMessageHub()
+	 * @see #getHubs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Hub> messageHub;
+	protected EList<Hub> hubs;
 
 	/**
 	 * The cached value of the '{@link #getMBindings() <em>MBindings</em>}' containment reference list.
@@ -230,18 +219,6 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PortType> getPortTypes() {
-		if (portTypes == null) {
-			portTypes = new EObjectContainmentEList<PortType>(PortType.class, this, Art2Package.CONTAINER_ROOT__PORT_TYPES);
-		}
-		return portTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<TypeLibrary> getLibraries() {
 		if (libraries == null) {
 			libraries = new EObjectContainmentEList<TypeLibrary>(TypeLibrary.class, this, Art2Package.CONTAINER_ROOT__LIBRARIES);
@@ -254,11 +231,11 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Hub> getMessageHub() {
-		if (messageHub == null) {
-			messageHub = new EObjectContainmentEList<Hub>(Hub.class, this, Art2Package.CONTAINER_ROOT__MESSAGE_HUB);
+	public EList<Hub> getHubs() {
+		if (hubs == null) {
+			hubs = new EObjectContainmentEList<Hub>(Hub.class, this, Art2Package.CONTAINER_ROOT__HUBS);
 		}
-		return messageHub;
+		return hubs;
 	}
 
 	/**
@@ -344,12 +321,10 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return ((InternalEList<?>)getRepositories()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-				return ((InternalEList<?>)getPortTypes()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 				return ((InternalEList<?>)getLibraries()).basicRemove(otherEnd, msgs);
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
-				return ((InternalEList<?>)getMessageHub()).basicRemove(otherEnd, msgs);
+			case Art2Package.CONTAINER_ROOT__HUBS:
+				return ((InternalEList<?>)getHubs()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return ((InternalEList<?>)getMBindings()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
@@ -376,12 +351,10 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return getRepositories();
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
 				return getDataTypes();
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-				return getPortTypes();
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 				return getLibraries();
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
-				return getMessageHub();
+			case Art2Package.CONTAINER_ROOT__HUBS:
+				return getHubs();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return getMBindings();
 			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
@@ -417,17 +390,13 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				getDataTypes().clear();
 				getDataTypes().addAll((Collection<? extends TypedElement>)newValue);
 				return;
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-				getPortTypes().clear();
-				getPortTypes().addAll((Collection<? extends PortType>)newValue);
-				return;
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 				getLibraries().clear();
 				getLibraries().addAll((Collection<? extends TypeLibrary>)newValue);
 				return;
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
-				getMessageHub().clear();
-				getMessageHub().addAll((Collection<? extends Hub>)newValue);
+			case Art2Package.CONTAINER_ROOT__HUBS:
+				getHubs().clear();
+				getHubs().addAll((Collection<? extends Hub>)newValue);
 				return;
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				getMBindings().clear();
@@ -464,14 +433,11 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
 				getDataTypes().clear();
 				return;
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-				getPortTypes().clear();
-				return;
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 				getLibraries().clear();
 				return;
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
-				getMessageHub().clear();
+			case Art2Package.CONTAINER_ROOT__HUBS:
+				getHubs().clear();
 				return;
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				getMBindings().clear();
@@ -502,12 +468,10 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return repositories != null && !repositories.isEmpty();
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
 				return dataTypes != null && !dataTypes.isEmpty();
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
-				return portTypes != null && !portTypes.isEmpty();
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
 				return libraries != null && !libraries.isEmpty();
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
-				return messageHub != null && !messageHub.isEmpty();
+			case Art2Package.CONTAINER_ROOT__HUBS:
+				return hubs != null && !hubs.isEmpty();
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 				return mBindings != null && !mBindings.isEmpty();
 			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:

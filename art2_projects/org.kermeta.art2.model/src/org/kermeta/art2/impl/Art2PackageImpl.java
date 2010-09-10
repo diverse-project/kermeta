@@ -611,7 +611,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_PortTypes() {
+	public EReference getContainerRoot_Libraries() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -620,7 +620,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_Libraries() {
+	public EReference getContainerRoot_Hubs() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -629,7 +629,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_MessageHub() {
+	public EReference getContainerRoot_MBindings() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -638,7 +638,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_MBindings() {
+	public EReference getContainerRoot_ThirdParties() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -647,17 +647,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_ThirdParties() {
-		return (EReference)containerRootEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getContainerRoot_PlatformModel() {
-		return (EReference)containerRootEClass.getEStructuralFeatures().get(9);
+		return (EReference)containerRootEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1536,9 +1527,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(containerRootEClass, CONTAINER_ROOT__TYPE_DEFINITIONS);
 		createEReference(containerRootEClass, CONTAINER_ROOT__REPOSITORIES);
 		createEReference(containerRootEClass, CONTAINER_ROOT__DATA_TYPES);
-		createEReference(containerRootEClass, CONTAINER_ROOT__PORT_TYPES);
 		createEReference(containerRootEClass, CONTAINER_ROOT__LIBRARIES);
-		createEReference(containerRootEClass, CONTAINER_ROOT__MESSAGE_HUB);
+		createEReference(containerRootEClass, CONTAINER_ROOT__HUBS);
 		createEReference(containerRootEClass, CONTAINER_ROOT__MBINDINGS);
 		createEReference(containerRootEClass, CONTAINER_ROOT__THIRD_PARTIES);
 		createEReference(containerRootEClass, CONTAINER_ROOT__PLATFORM_MODEL);
@@ -1698,7 +1688,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		componentInstanceEClass.getESuperTypes().add(this.getNamedElement());
 		componentTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		containerNodeEClass.getESuperTypes().add(this.getNamedElement());
-		portTypeEClass.getESuperTypes().add(this.getNamedElement());
+		portTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		namespaceEClass.getESuperTypes().add(this.getNamedElement());
 		dictionaryAttributeEClass.getESuperTypes().add(this.getTypedElement());
 		compositeTypeEClass.getESuperTypes().add(this.getComponentType());
@@ -1748,9 +1738,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getContainerRoot_TypeDefinitions(), this.getTypeDefinition(), null, "typeDefinitions", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_Repositories(), this.getRepository(), null, "repositories", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_DataTypes(), this.getTypedElement(), null, "dataTypes", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerRoot_PortTypes(), this.getPortType(), null, "portTypes", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_Libraries(), this.getTypeLibrary(), null, "libraries", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerRoot_MessageHub(), this.getHub(), null, "messageHub", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerRoot_Hubs(), this.getHub(), null, "hubs", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_MBindings(), this.getMBinding(), null, "mBindings", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_ThirdParties(), this.getDeployUnit(), null, "thirdParties", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_PlatformModel(), this.getPlatformModel(), null, "platformModel", null, 0, 1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

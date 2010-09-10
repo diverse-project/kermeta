@@ -23,7 +23,7 @@ package org.kermeta.art2;
  * @model abstract="true"
  * @generated
  */
-public interface PortType extends NamedElement {
+public interface PortType extends TypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Synchrone</b></em>' attribute.
 	 * <!-- begin-user-doc -->

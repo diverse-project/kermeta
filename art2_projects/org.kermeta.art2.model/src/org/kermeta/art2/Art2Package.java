@@ -426,31 +426,22 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_ROOT__DATA_TYPES = 3;
 
 	/**
-	 * The feature id for the '<em><b>Port Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER_ROOT__PORT_TYPES = 4;
-
-	/**
 	 * The feature id for the '<em><b>Libraries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__LIBRARIES = 5;
+	int CONTAINER_ROOT__LIBRARIES = 4;
 
 	/**
-	 * The feature id for the '<em><b>Message Hub</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Hubs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__MESSAGE_HUB = 6;
+	int CONTAINER_ROOT__HUBS = 5;
 
 	/**
 	 * The feature id for the '<em><b>MBindings</b></em>' containment reference list.
@@ -459,7 +450,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__MBINDINGS = 7;
+	int CONTAINER_ROOT__MBINDINGS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Third Parties</b></em>' containment reference list.
@@ -468,7 +459,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__THIRD_PARTIES = 8;
+	int CONTAINER_ROOT__THIRD_PARTIES = 7;
 
 	/**
 	 * The feature id for the '<em><b>Platform Model</b></em>' containment reference.
@@ -477,7 +468,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__PLATFORM_MODEL = 9;
+	int CONTAINER_ROOT__PLATFORM_MODEL = 8;
 
 	/**
 	 * The number of structural features of the '<em>Container Root</em>' class.
@@ -486,7 +477,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT_FEATURE_COUNT = 10;
+	int CONTAINER_ROOT_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.PortTypeImpl <em>Port Type</em>}' class.
@@ -505,7 +496,16 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_TYPE__NAME = NAMED_ELEMENT__NAME;
+	int PORT_TYPE__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Deploy Unit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_TYPE__DEPLOY_UNIT = TYPE_DEFINITION__DEPLOY_UNIT;
 
 	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
@@ -514,7 +514,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_TYPE__SYNCHRONE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int PORT_TYPE__SYNCHRONE = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Port Type</em>' class.
@@ -523,7 +523,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PORT_TYPE_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.PortImpl <em>Port</em>}' class.
@@ -1023,6 +1023,15 @@ public interface Art2Package extends EPackage {
 	int SERVICE_PORT_TYPE__NAME = PORT_TYPE__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Deploy Unit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_PORT_TYPE__DEPLOY_UNIT = PORT_TYPE__DEPLOY_UNIT;
+
+	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1159,6 +1168,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int MESSAGE_PORT_TYPE__NAME = PORT_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Deploy Unit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_PORT_TYPE__DEPLOY_UNIT = PORT_TYPE__DEPLOY_UNIT;
 
 	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
@@ -2161,17 +2179,6 @@ public interface Art2Package extends EPackage {
 	EReference getContainerRoot_DataTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getPortTypes <em>Port Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Port Types</em>'.
-	 * @see org.kermeta.art2.ContainerRoot#getPortTypes()
-	 * @see #getContainerRoot()
-	 * @generated
-	 */
-	EReference getContainerRoot_PortTypes();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getLibraries <em>Libraries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2183,15 +2190,15 @@ public interface Art2Package extends EPackage {
 	EReference getContainerRoot_Libraries();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getMessageHub <em>Message Hub</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getHubs <em>Hubs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Message Hub</em>'.
-	 * @see org.kermeta.art2.ContainerRoot#getMessageHub()
+	 * @return the meta object for the containment reference list '<em>Hubs</em>'.
+	 * @see org.kermeta.art2.ContainerRoot#getHubs()
 	 * @see #getContainerRoot()
 	 * @generated
 	 */
-	EReference getContainerRoot_MessageHub();
+	EReference getContainerRoot_Hubs();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getMBindings <em>MBindings</em>}'.
@@ -3434,14 +3441,6 @@ public interface Art2Package extends EPackage {
 		EReference CONTAINER_ROOT__DATA_TYPES = eINSTANCE.getContainerRoot_DataTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Port Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTAINER_ROOT__PORT_TYPES = eINSTANCE.getContainerRoot_PortTypes();
-
-		/**
 		 * The meta object literal for the '<em><b>Libraries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3450,12 +3449,12 @@ public interface Art2Package extends EPackage {
 		EReference CONTAINER_ROOT__LIBRARIES = eINSTANCE.getContainerRoot_Libraries();
 
 		/**
-		 * The meta object literal for the '<em><b>Message Hub</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Hubs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTAINER_ROOT__MESSAGE_HUB = eINSTANCE.getContainerRoot_MessageHub();
+		EReference CONTAINER_ROOT__HUBS = eINSTANCE.getContainerRoot_Hubs();
 
 		/**
 		 * The meta object literal for the '<em><b>MBindings</b></em>' containment reference list feature.

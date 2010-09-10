@@ -118,6 +118,7 @@ public class Art2Switch<T> {
 			case Art2Package.PORT_TYPE: {
 				PortType portType = (PortType)theEObject;
 				T result = casePortType(portType);
+				if (result == null) result = caseTypeDefinition(portType);
 				if (result == null) result = caseNamedElement(portType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -187,6 +188,7 @@ public class Art2Switch<T> {
 				ServicePortType servicePortType = (ServicePortType)theEObject;
 				T result = caseServicePortType(servicePortType);
 				if (result == null) result = casePortType(servicePortType);
+				if (result == null) result = caseTypeDefinition(servicePortType);
 				if (result == null) result = caseNamedElement(servicePortType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -216,6 +218,7 @@ public class Art2Switch<T> {
 				MessagePortType messagePortType = (MessagePortType)theEObject;
 				T result = caseMessagePortType(messagePortType);
 				if (result == null) result = casePortType(messagePortType);
+				if (result == null) result = caseTypeDefinition(messagePortType);
 				if (result == null) result = caseNamedElement(messagePortType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

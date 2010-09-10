@@ -22,9 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.art2.ContainerRoot#getTypeDefinitions <em>Type Definitions</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getRepositories <em>Repositories</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getDataTypes <em>Data Types</em>}</li>
- *   <li>{@link org.kermeta.art2.ContainerRoot#getPortTypes <em>Port Types</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getLibraries <em>Libraries</em>}</li>
- *   <li>{@link org.kermeta.art2.ContainerRoot#getMessageHub <em>Message Hub</em>}</li>
+ *   <li>{@link org.kermeta.art2.ContainerRoot#getHubs <em>Hubs</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getThirdParties <em>Third Parties</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getPlatformModel <em>Platform Model</em>}</li>
@@ -101,22 +100,6 @@ public interface ContainerRoot extends EObject {
 	EList<TypedElement> getDataTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Port Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.art2.PortType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Port Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Port Types</em>' containment reference list.
-	 * @see org.kermeta.art2.Art2Package#getContainerRoot_PortTypes()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<PortType> getPortTypes();
-
-	/**
 	 * Returns the value of the '<em><b>Libraries</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.art2.TypeLibrary}.
 	 * <!-- begin-user-doc -->
@@ -133,20 +116,20 @@ public interface ContainerRoot extends EObject {
 	EList<TypeLibrary> getLibraries();
 
 	/**
-	 * Returns the value of the '<em><b>Message Hub</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Hubs</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.art2.Hub}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Message Hub</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Hubs</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message Hub</em>' containment reference list.
-	 * @see org.kermeta.art2.Art2Package#getContainerRoot_MessageHub()
+	 * @return the value of the '<em>Hubs</em>' containment reference list.
+	 * @see org.kermeta.art2.Art2Package#getContainerRoot_Hubs()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Hub> getMessageHub();
+	EList<Hub> getHubs();
 
 	/**
 	 * Returns the value of the '<em><b>MBindings</b></em>' containment reference list.
