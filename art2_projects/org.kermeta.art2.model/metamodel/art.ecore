@@ -50,7 +50,7 @@
         eType="#//TypedElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="libraries" upperBound="-1"
         eType="#//TypeLibrary" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hubs" upperBound="-1" eType="#//Hub"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hubs" upperBound="-1" eType="#//Channel"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mBindings" upperBound="-1"
         eType="#//MBinding" containment="true"/>
@@ -167,12 +167,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beanMethodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceMethodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Hub" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//HubType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Channel" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ChannelType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MBinding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1" eType="#//Port"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hub" lowerBound="1" eType="#//Hub"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hub" lowerBound="1" eType="#//Channel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeType" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bootstrap" upperBound="-1"
@@ -198,7 +198,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NetworkProperty" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HubType" eSuperTypes="#//TypeDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="ChannelType" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factoryBean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
