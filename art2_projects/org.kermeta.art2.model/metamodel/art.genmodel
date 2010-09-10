@@ -106,8 +106,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/url"/>
     </genClasses>
-    <genClasses ecoreClass="art.ecore#//ComponentTypeLibrary">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentTypeLibrary/subTypes"/>
+    <genClasses ecoreClass="art.ecore#//TypeLibrary">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TypeLibrary/subTypes"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//NamedElement/name"/>
