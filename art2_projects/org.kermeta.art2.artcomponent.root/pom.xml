@@ -1,0 +1,75 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.art2</groupId>
+    <artifactId>art2.artcomponent.root</artifactId>
+    <packaging>pom</packaging>
+    <version>2</version>
+    <name>ART2 :: Root</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+    
+    <build>
+        <plugins>
+            <!-- APT ART2 PLUGIN : ART2 JAVA ANNOTATION INTEGRATION -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.0-alpha-3</version>
+                <configuration>
+                    <outputFiles>
+                        <outputFile>art2Lib.xmi</outputFile>
+                    </outputFiles>
+                    <options>
+                        <value>art2.lib.id=${project.artifactId}</value>
+                        <value>art2.lib.group=${project.groupId}</value>
+                        <value>art2.lib.version=${project.version}</value>
+                        <value>art2.lib.target=${basedir}/src/main/resources/ART2-INF/art2Lib.art2</value>
+                    </options>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                            <goal>test-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+	<dependencies>
+		<!-- all ART components will need ART2 to compile -->
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.annotation</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+	</dependencies>
+
+    <repositories>
+        <repository>
+            <id>triskellPublic</id>
+            <url>http://tipimouss.irisa.fr/maven2</url>
+        </repository>
+        <repository>
+            <id>triskellPublicSnapShots</id>
+            <url>http://tipimouss.irisa.fr/maven2-snapshots</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+    </distributionManagement>
+
+</project>
