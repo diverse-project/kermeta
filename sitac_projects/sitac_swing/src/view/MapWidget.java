@@ -45,7 +45,8 @@ public class MapWidget {
 	private FactoryMaker factoryMaker;
 	private AbstractCommandFactory factory;
 	private Ctrl controller;
-	
+	private MapItem currentItem;
+
 	private static final int CREATE_ITEM = 0;
 	private static final int MOVE_ITEM = 1;
 	private static final int SELECT_ITEM = 3;
@@ -101,42 +102,24 @@ public class MapWidget {
 		drawLine = b;
 		if (drawLine)
 		{
-			factoryMaker.setItemType("line");
-			factory=factoryMaker.create(CREATE_ITEM);
-			Command cmd=factory.create();
-			controller.execute(cmd);
+			currentItem = new MapLine();
 			if (color!=null)
-				shapes.get(shapes.size()-1).setColor(color);
+				currentItem.setColor(color);
 			else
-				shapes.get(shapes.size()-1).setColor(defaultColor);
+				currentItem.setColor(defaultColor);
 		}
-		else
-			if (shapes.size() > 0 && shapes.get(shapes.size()-1).size()==0)
-			{
-				shapes.remove(shapes.size()-1);
-				controller.removeLastCommand();
-			}
 	}
 
 	public void setDrawZoneMode(boolean b) {
 		drawShape = b;
 		if (drawShape)
 		{
-			factoryMaker.setItemType("zone");
-			factory=factoryMaker.create(CREATE_ITEM);
-			Command cmd=factory.create();
-			controller.execute(cmd);
+			currentItem = new MapZone();
 			if (color!=null)
-				shapes.get(shapes.size()-1).setColor(color);
+				currentItem.setColor(color);
 			else
-				shapes.get(shapes.size()-1).setColor(defaultColor);
+				currentItem.setColor(defaultColor);
 		}
-		else
-			if (shapes.size() > 0 && shapes.get(shapes.size()-1).size()==0)
-			{
-				shapes.remove(shapes.size()-1);
-				controller.removeLastCommand();
-			}
 	}
 
 	public void setDrawBrushMode(boolean b) {
@@ -149,7 +132,6 @@ public class MapWidget {
 			type.equals("zone") && selected instanceof MapZone ||
 			type.equals("item point") && selected instanceof MapItemPoint)
 			{
-				//shapes.remove(selected);
 				factoryMaker.setMapItem(selected);
 				factory=factoryMaker.create(REMOVE_ITEM);
 				Command cmd=factory.create();
@@ -157,31 +139,24 @@ public class MapWidget {
 				map.repaint();
 			}
 	}
-
-	public void changeItemType() {
-		if (selected instanceof MapItemPoint) {
-			
-			map.repaint();
-		}
-	}
 	
 	public MapItem moveItem()
 	{
 		return selected;
 	}
 
-	public void addItem(Point p, Rectangle r, Color c, Line2D.Float[] lines) {
+	public void addItem(Point p, Rectangle r, Color c, Line2D.Float[] lines, String desc) {
 		Rectangle rect = map.getMainMap().getViewportBounds();
 		Point p1 = new Point(Math.abs(p.x + rect.x), Math.abs(p.y + rect.y));
 		GeoPosition gp = map.getMainMap().getTileFactory().pixelToGeo(p1,
 				map.getMainMap().getZoom());
 		MapPoint mp = new MapPoint(gp);
-		factoryMaker.setItemType("item point");
+		MapItemPoint item = new MapItemPoint(mp);
+		factoryMaker.setMapItem(item);
 		factory=factoryMaker.create(CREATE_ITEM);
 		Command cmd=factory.create();
 		controller.execute(cmd);
-		MapItemPoint item=(MapItemPoint)shapes.get(shapes.size()-1);
-		item.setPoint(mp);
+		item.setDesc(desc);
 		Shape[] s = new Shape[lines.length + 1];
 		s[0] = r;
 		for (int i = 0; i < lines.length; i++)
@@ -223,6 +198,8 @@ public class MapWidget {
 					MapItem item = shapes.get(i);
 					item.render(g, map);
 				}
+				if (currentItem != null)
+					currentItem.render(g, map);
 				g.dispose();
 			}
 		};
@@ -236,45 +213,39 @@ public class MapWidget {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() == 2 && drawShape) {
-				MapZone currentShape = (MapZone)shapes.get(shapes.size()-1);
-				currentShape.removeLastPoint();
-				factoryMaker.setItemType("zone");
+				((MapZone)currentItem).removeLastPoint();
+				factoryMaker.setMapItem(currentItem);
 				factory=factoryMaker.create(CREATE_ITEM);
 				Command cmd=factory.create();
 				controller.execute(cmd);
-				if (color!=null)
-					shapes.get(shapes.size()-1).setColor(color);
-				else
-					shapes.get(shapes.size()-1).setColor(defaultColor);
+				controller.endDrawZone();
+				drawShape = false;
+				currentItem = null;
 				map.repaint();
 			} else if (drawShape) {
-				MapZone currentShape = (MapZone)shapes.get(shapes.size()-1);
 				int x = e.getX();
 				int y = e.getY();
 				Rectangle rect = map.getMainMap().getViewportBounds();
 				Point p = new Point(Math.abs(x + rect.x), Math.abs(y + rect.y));
-				currentShape.addPoint(new MapPoint(map.getMainMap()
+				((MapZone)currentItem).addPoint(new MapPoint(map.getMainMap()
 						.getTileFactory().pixelToGeo(p,
 								map.getMainMap().getZoom())));
 			} else if (e.getClickCount() == 2 && drawLine) {
-				MapLine currentLine = (MapLine) shapes.get(shapes.size()-1);
-				currentLine.removeLastPoint();
-				factoryMaker.setItemType("line");
+				((MapLine)currentItem).removeLastPoint();
+				factoryMaker.setMapItem(currentItem);
 				factory=factoryMaker.create(CREATE_ITEM);
 				Command cmd=factory.create();
 				controller.execute(cmd);
-				if (color!=null)
-					shapes.get(shapes.size()-1).setColor(color);
-				else
-					shapes.get(shapes.size()-1).setColor(defaultColor);
+				controller.endDrawLine();
+				drawLine = false;
+				currentItem = null;
 				map.repaint();
 			} else if (drawLine) {
-				MapLine currentLine = (MapLine) shapes.get(shapes.size()-1);
 				int x = e.getX();
 				int y = e.getY();
 				Rectangle rect = map.getMainMap().getViewportBounds();
 				Point p = new Point(Math.abs(x + rect.x), Math.abs(y + rect.y));
-				currentLine.addPoint(new MapPoint(map.getMainMap()
+				((MapLine)currentItem).addPoint(new MapPoint(map.getMainMap()
 						.getTileFactory().pixelToGeo(p,
 								map.getMainMap().getZoom())));
 			}
@@ -283,31 +254,29 @@ public class MapWidget {
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			if (drawLine) { 
-				MapLine currentLine = (MapLine) shapes.get(shapes.size()-1);
-				if (currentLine.size() > 0)
+				if (currentItem.size() > 0)
 				{
-					if (currentLine.size() > 1) 
-						currentLine.removeLastPoint();
+					if (currentItem.size() > 1) 
+						((MapLine)currentItem).removeLastPoint();
 					int x = e.getX();
 					int y = e.getY();
 					Rectangle rect = map.getMainMap().getViewportBounds();
 					Point p = new Point(Math.abs(x + rect.x), Math.abs(y + rect.y));
-					currentLine.addPoint(new MapPoint(map.getMainMap()
+					((MapLine)currentItem).addPoint(new MapPoint(map.getMainMap()
 							.getTileFactory().pixelToGeo(p,
 									map.getMainMap().getZoom())));
 					map.repaint();
 				}
 			} else if (drawShape) { 
-				MapZone currentShape = (MapZone)shapes.get(shapes.size()-1);
-				if (currentShape.size() > 0) 
+				if (currentItem.size() > 0) 
 				{
-					if (currentShape.size() > 1) 
-						currentShape.removeLastPoint();
+					if (currentItem.size() > 1) 
+						((MapZone)currentItem).removeLastPoint();
 					int x = e.getX();
 					int y = e.getY();
 					Rectangle rect = map.getMainMap().getViewportBounds();
 					Point p = new Point(Math.abs(x + rect.x), Math.abs(y + rect.y));
-					currentShape.addPoint(new MapPoint(map.getMainMap()
+					((MapZone)currentItem).addPoint(new MapPoint(map.getMainMap()
 							.getTileFactory().pixelToGeo(p,
 									map.getMainMap().getZoom())));
 					map.repaint();
@@ -430,12 +399,12 @@ public class MapWidget {
 				Point p = new Point(Math.abs(x + rect.x), Math.abs(y + rect.y));
 				GeoPosition gp = map.getMainMap().getTileFactory().pixelToGeo(
 						p, map.getMainMap().getZoom());
-				factoryMaker.setItemType("item point");
+				MapPoint mp = new MapPoint(gp);
+				MapItemPoint item = new MapItemPoint(mp);
+				factoryMaker.setMapItem(item);
 				factory=factoryMaker.create(CREATE_ITEM);
 				Command cmd=factory.create();
 				controller.execute(cmd);
-				MapItemPoint item=(MapItemPoint)shapes.get(shapes.size()-1);
-				item.setPoint(new MapPoint(gp));
 				if (color != null)
 					item.setColor(color);
 				else

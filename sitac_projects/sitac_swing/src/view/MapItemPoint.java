@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
@@ -18,6 +14,7 @@ import org.jdesktop.swingx.mapviewer.GeoPosition;
 public class MapItemPoint extends MapItem{
     private MapPoint pos;
     private Shape[] shapes;
+    private String desc;
 
     public MapItemPoint()
     {
@@ -26,6 +23,22 @@ public class MapItemPoint extends MapItem{
     public MapItemPoint(MapPoint p)
     {
         pos=p;
+    }
+    
+    public MapItemPoint(MapPoint p, String desc)
+    {
+    	this(p);
+    	this.desc = desc;
+    }
+    
+    public void setDesc(String desc)
+    {
+    	this.desc = desc;
+    }
+    
+    public String getDesc()
+    {
+    	return desc;
     }
     
     public GeoPosition getPosition()
@@ -49,13 +62,17 @@ public class MapItemPoint extends MapItem{
     		g.setColor(selectedColor);
     	else
     		g.setColor(color);
+    	g.setFont(new Font("font",Font.BOLD,12));
     	Point2D p=map.getTileFactory().geoToPixel(pos.getPoint(), map.getZoom());
     	g.translate((int)p.getX()-shapes[0].getBounds().width/2,(int)p.getY()-shapes[0].getBounds().height/2);
         for (int i=0;i<shapes.length;i++)	
         {
         	g.draw(shapes[i]);
-        	g.fill(shapes[i]);
+        	if (desc == null)
+        		g.fill(shapes[i]);
         }
+        if (desc != null)
+        	g.drawString(desc, 5,20);
         g.translate(-(int)p.getX()+shapes[0].getBounds().width/2,-(int)p.getY()+shapes[0].getBounds().height/2);
     }
 

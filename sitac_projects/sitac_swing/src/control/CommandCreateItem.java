@@ -4,18 +4,17 @@ import view.MapItem;
 
 public class CommandCreateItem extends Command{
 	private MapItem item;
-	private String itemType;
 	private Adapter adapter;
 	
-	public CommandCreateItem(Adapter adapter,String itemType)
+	public CommandCreateItem(Adapter adapter, MapItem item)
 	{
-		this.adapter=adapter;
-		this.itemType=itemType;
+		this.adapter = adapter;
+		this.item = item;
 	}
 	
 	@Override
 	public void execute() {
-		item=adapter.createItem(itemType);
+		adapter.createItem(item);
 	}
 
 	@Override

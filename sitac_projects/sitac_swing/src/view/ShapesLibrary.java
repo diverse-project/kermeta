@@ -49,6 +49,16 @@ public class ShapesLibrary extends JPanel {
 		add(zoneBtn);
 		add(brushBtn);
 	}
+	
+	public void setLineBtnSelected(boolean b)
+	{
+		lineBtn.setSelected(b);
+	}
+	
+	public void setZoneBtnSelected(boolean b)
+	{
+		zoneBtn.setSelected(b);
+	}
 
 	public boolean isLineSelected() {
 		return lineBtn.isSelected();

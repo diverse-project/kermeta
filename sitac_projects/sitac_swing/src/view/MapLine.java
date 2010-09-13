@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -74,9 +70,64 @@ public class MapLine extends MapItem{
                 polyline.moveTo(pt.getX(),pt.getY());
             else
                 polyline.lineTo(pt.getX(),pt.getY());
-            if (j==points.size()-1)
+            if (j==points.size()-1 && points.size()>=2)
             {
-
+            	Polygon poly=new Polygon();
+            	GeoPosition gp1=points.get(points.size()-2).getPoint();
+            	Point2D p1=map.getTileFactory().geoToPixel(gp1,map.getZoom());
+            	double x1=p1.getX();
+            	double y1=p1.getY();
+            	GeoPosition gp2=points.get(points.size()-1).getPoint();
+            	Point2D p2=map.getTileFactory().geoToPixel(gp2,map.getZoom());
+            	double x2=p2.getX();
+            	double y2=p2.getY();
+            	double m1,m2;
+            	double d=5;
+            	if (x1-x2!=0 && y1-y2!=0)
+            	{
+            		m1=(y1-y2)/(x1-x2);
+            		m2=-1/m1;
+            		double x3=x2-Math.sqrt((d*d)/(1+m2*m2));
+            		double y3=m2*(x3-x2)+y2;
+            		double x4=x2+Math.sqrt((d*d)/(1+m2*m2));
+            		double y4=m2*(x4-x2)+y2;
+            		d=8;
+            		double x5=x2-Math.sqrt((d*d)/(1+m1*m1));
+            		double y5;
+            		double x6=x2+Math.sqrt((d*d)/(1+m1*m1));
+            		if (isBetween(x5,x1,x2,0.0f))
+            		{
+            			y5=m1*(x6-x2)+y2;
+            			x5=x6;
+            		}
+            		else
+            			y5=m1*(x5-x2)+y2;
+            		poly.addPoint((int)x3, (int)y3);
+            		poly.addPoint((int)x4, (int)y4);
+            		poly.addPoint((int)x5, (int)y5);
+            		
+            	}
+            	else 
+            		if (x1-x2==0)
+            		{
+            			poly.addPoint((int)x2-5,(int)y2);
+            			poly.addPoint((int)x2+5,(int)y2);
+            			if (y1<y2)
+            				poly.addPoint((int)x2,(int)y2+8);
+            			else
+            				poly.addPoint((int)x2,(int)y2-8);
+            		}
+            		else
+            		{
+            			poly.addPoint((int)x2,(int)y2-5);
+            			poly.addPoint((int)x2,(int)y2+5);
+            			if (x1<x2)
+            				poly.addPoint((int)x2+8,(int)y2);
+            			else
+            				poly.addPoint((int)x2-8,(int)y2);
+            		}
+            	g.draw(poly);
+        		g.fill(poly);
             }
         }
         g.draw(polyline);
@@ -116,6 +167,10 @@ public class MapLine extends MapItem{
     	return selPoint;
     }
 
+    /**check if the point defined by x and y coordinates is on the line 
+     (there is considered a small epsilon because the user probably won't click 
+     exactly on the line)
+     */
     public boolean findLine(JXMapKit map,double x,double y)
     {
         double epsilon=0.2f;

@@ -14,29 +14,36 @@ import javax.swing.event.InternalFrameListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import control.Ctrl;
+import control.MoyenControl;
 
 public class LibToolBox extends ToolBox implements InternalFrameListener {
 	private JInternalFrame frame1;
 	private JInternalFrame frame2;
 	private JInternalFrame frame3;
+	private ShapesLibrary shapes;
 	private JDesktopPane desk;
 	private final static int DIM = 200;
 
-	public LibToolBox(Ctrl c) {
-		frame1 = new JInternalFrame("Library 1", false, false, false, true);
-		frame2 = new JInternalFrame("Library 2", false, false, false, true);
-		frame3 = new JInternalFrame("Library 3", false, false, false, true);
+	public LibToolBox(Ctrl c, MoyenControl moyenCtrl) {
+		frame1 = new JInternalFrame("Engines", false, false, false, true);
+		frame2 = new JInternalFrame("Shapes", false, false, false, true);
+		frame3 = new JInternalFrame("Tools", false, false, false, true);
 		desk = new JDesktopPane();
 		desk.setDesktopManager(new ImmovableDesktopManager());
 
-		frame1.getContentPane().add(new SymbolsLibrary(c));
+		JPanel symbols = new SymbolsLibrary(moyenCtrl);
+		symbols.setPreferredSize(new Dimension(DIM, 10*DIM));
+		JScrollPane scroll = new JScrollPane(symbols,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		frame1.getContentPane().add(scroll);
 		frame1.setBounds(0, 0, DIM, DIM);
 		frame1.setVisible(true);
 		frame1.addInternalFrameListener(this);
 
-		JPanel shapes = new ShapesLibrary(c);
+		shapes = new ShapesLibrary(c);
 		shapes.setPreferredSize(new Dimension(DIM, DIM));
-		JScrollPane scroll = new JScrollPane(shapes,
+		scroll = new JScrollPane(shapes,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		frame2.getContentPane().add(scroll);
@@ -70,6 +77,16 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 	public JDesktopPane getDesk() {
 		return desk;
 	}
+	
+	public void setDrawLineState(boolean b)
+	{
+		shapes.setLineBtnSelected(b);
+	}
+	
+	public void setDrawZoneState(boolean b)
+	{
+		shapes.setZoneBtnSelected(b);
+	}
 
 	@Override
 	public void internalFrameActivated(InternalFrameEvent e) {
@@ -87,6 +104,7 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 	public void internalFrameDeactivated(InternalFrameEvent e) {
 	}
 
+	/**Resize the other internal frames when a frame is deiconified**/
 	@Override
 	public void internalFrameDeiconified(InternalFrameEvent e) {
 		JInternalFrame f = (JInternalFrame) e.getSource();
@@ -136,6 +154,7 @@ public class LibToolBox extends ToolBox implements InternalFrameListener {
 		}
 	}
 
+	/**Resize the other frames when an internal frame is iconified**/
 	@Override
 	public void internalFrameIconified(InternalFrameEvent e) {
 		JInternalFrame f = (JInternalFrame) e.getSource();

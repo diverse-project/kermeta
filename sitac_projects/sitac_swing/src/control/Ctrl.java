@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import view.TabView;
 
+/**The main controller**/
 public class Ctrl {
 	private LinkedList<Command> commands;
 	private int level=0;
@@ -12,7 +13,7 @@ public class Ctrl {
 	
 	public Ctrl()
 	{
-		commands=new LinkedList<Command>();
+		commands = new LinkedList<Command>();
 	}
 	
 	public void addView(TabView v)
@@ -90,8 +91,13 @@ public class Ctrl {
 		view.getMap().removeItem("item point");
 	}
 	
-	public void changeItemType()
+	public void endDrawLine()
 	{
-		view.getMap().changeItemType();
+		view.setDrawLineState(false);
+	}
+	
+	public void endDrawZone()
+	{
+		view.setDrawZoneState(false);
 	}
 }

@@ -9,7 +9,6 @@ import view.Selectable;
 
 public class FactoryMaker{
 	private Adapter adapter;
-	private String itemType;
 	private MapItem item;
 	private String mess;
 	private Selectable selItem;
@@ -22,14 +21,8 @@ public class FactoryMaker{
 		this.adapter=adapter;
 	}
 	
-	public void setItemType(String itemType)
-	{
-		this.itemType=itemType;
-	}
-	
 	public void setOldPoint(MapPoint p)
 	{
-		System.out.println("set old");
 		oldPoint=p;
 	}
 	
@@ -68,7 +61,7 @@ public class FactoryMaker{
 		switch (type)
 		{
 		case 0:
-			return new CommandCreateItemFactory(adapter,itemType);
+			return new CommandCreateItemFactory(adapter,item);
 		case 1:
 			return new CommandMoveItemFactory(adapter,points,item);
 		case 2:
@@ -80,7 +73,7 @@ public class FactoryMaker{
 		case 5:
 			return new CommandUpdateViewFactory(adapter);
 		case 6:
-			return new CommandMovePointFactory(adapter,oldPoint,newPoint);
+			return new CommandMovePointFactory(adapter,oldPoint,newPoint,item);
 		case 7:
 			return new CommandRemoveItemFactory(adapter,item);
 		default:

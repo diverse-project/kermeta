@@ -14,7 +14,6 @@ public class CommandSelectItem extends Command{
 	
 	@Override
 	public void execute() {
-		System.out.println("select");
 		adapter.selectItem(selItem,true);
 	}
 
@@ -25,7 +24,6 @@ public class CommandSelectItem extends Command{
 
 	@Override
 	public void undo() {
-		System.out.println("select undo");
 		adapter.selectItem(selItem,false);
 	}
 

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import java.awt.Color;
@@ -12,7 +7,6 @@ import java.util.List;
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapViewer;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
-
 
 public abstract class MapItem extends Selectable {
 	protected Color color;

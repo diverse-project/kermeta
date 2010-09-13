@@ -1,18 +1,20 @@
 package control;
 
+import view.MapItem;
+
 public class CommandCreateItemFactory extends AbstractCommandFactory{
 	private Adapter adapter;
-	private String itemType;
+	private MapItem item;
 	
-	public CommandCreateItemFactory(Adapter adapter, String itemType)
+	public CommandCreateItemFactory(Adapter adapter, MapItem item)
 	{
-		this.adapter=adapter;
-		this.itemType=itemType;
+		this.adapter = adapter;
+		this.item = item;
 	}
 	
 	@Override
 	public Command create() {
-		return new CommandCreateItem(adapter,itemType);
+		return new CommandCreateItem(adapter, item);
 	}
 
 }
