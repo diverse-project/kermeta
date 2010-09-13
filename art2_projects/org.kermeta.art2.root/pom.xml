@@ -34,32 +34,7 @@
 
     <build>
         <plugins>
-            <!-- APT ART2 PLUGIN : ART2 JAVA ANNOTATION INTEGRATION -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-                <version>1.0-alpha-3</version>
-                <configuration>
-                    <outputFiles>
-                        <outputFile>art2Lib.xmi</outputFile>
-                    </outputFiles>
-                    <options>
-                        <value>art2.lib.id=${project.artifactId}</value>
-                        <value>art2.lib.group=${project.groupId}</value>
-                        <value>art2.lib.version=${project.version}</value>
-                        <value>art2.lib.target=${basedir}/src/main/resources/ART2-INF/art2Lib.art2</value>
-                    </options>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process</goal>
-                            <goal>test-process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
+            
             <!-- Java compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -84,7 +59,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.1</version>
+                <version>2.1.0</version>
                 <extensions>true</extensions>
             </plugin>
 
@@ -136,31 +111,7 @@
                 </configuration>
             </plugin>
 
-            <!--
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>copy-out-files</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>${project.build.outputDirectory}/META-INF/MANIFEST.MF</source>
-                                    <outputDirectory>${project.basedir}/META-INF</outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
-                    </execution>
-
-                </executions>
-            </plugin>
--->
+            
         </plugins>
     </build>
 
