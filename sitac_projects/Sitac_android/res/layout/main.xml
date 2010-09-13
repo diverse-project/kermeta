@@ -22,6 +22,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="1dip"
         android:text="Load" />
+ <CheckBox
+        android:id="@+id/showlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button1"/>       
         
 <sitac.view.LibToolBox android:id="@+id/newlist"
                android:layout_width="wrap_content" 
@@ -45,25 +51,7 @@
         		android:layout_toLeftOf="@+id/button3"
         		android:layout_marginLeft="1dip"
         		android:text="Color"
-            	/>   
-            	
-           <Button
-        	android:id="@+id/button3"
-        	android:layout_width="wrap_content"
-       		android:layout_height="wrap_content"
-        	android:layout_alignParentBottom="true"
-        	android:layout_alignParentRight="true"
-        	android:layout_marginLeft="1dip"
-        	android:text="+" />
-        	
-			<Button
-        	android:id="@+id/button4"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentBottom="true"
-        	android:layout_alignParentLeft="true"
-        	android:layout_marginLeft="1dip"
-        	android:text="-" /> 	             
+            	/>   	             
 </sitac.view.PropertyEditor>                                          
                        
 

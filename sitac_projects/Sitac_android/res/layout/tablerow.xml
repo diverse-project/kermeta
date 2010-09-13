@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+               xmlns:android="http://schemas.android.com/apk/res/android"
+			   android:id="@+id/enginegrouptable"
+			   android:layout_width="fill_parent"
+			   android:layout_height="fill_parent"
+			   android:stretchColumns="0,2,4,6,8,10,12"
+			   android:shrinkColumns="*"
+			   android:collapseColumns="0" >
+<TableRow
+ 		android:layout_height="wrap_content">
+ 		
+<TextView 
+			  android:id="@+id/col0"
+			  android:gravity="center_horizontal"
+	          android:text=" Name "  />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" /> 		
+ 			
+<TextView 
+			  android:id="@+id/col1"
+			  android:gravity="center_horizontal"
+	          android:text=" Name "  />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+			  
+<TextView 	  android:id="@+id/col2"
+			  android:gravity="center_horizontal"
+	    	  android:text=" Request "  />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+<TextView      android:id="@+id/col3"
+               android:gravity="center_horizontal"
+     		   android:text=" Expected " />   
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+<TextView      android:id="@+id/col4"
+     		   android:gravity="center_horizontal"
+     		   android:text=" CRN " />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />	
+        
+<TextView      android:id="@+id/col5"
+			   android:gravity="center_horizontal"
+     		   android:text=" Use " />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+<TextView       android:id="@+id/col6"
+     			android:gravity="center_horizontal"
+     			android:text=" Left "  />		    		      	     
+ </TableRow>
+ 
+ <View
+        android:layout_height="1dip"
+        android:background="#FF909090" /> 
+</TableLayout>       

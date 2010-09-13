@@ -29,6 +29,7 @@ public class MapItemPoint extends MapItem{
 		return pos;
 	}
 
+	@Override
 	public void addPoint(MapPoint gp)
 	{
 		if(this.points.size()<MapItemPoint.nopoints)
@@ -44,6 +45,7 @@ public class MapItemPoint extends MapItem{
 		points.add(pos);
 	}
 
+	@Override
 	public void draw(Canvas canvas, OpenStreetMapView mapview) 
 	{
 		Paint paint=new Paint();

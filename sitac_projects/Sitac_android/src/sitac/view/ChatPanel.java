@@ -23,7 +23,8 @@ public class ChatPanel extends Activity {
 	private Button button;
 	private EditText textedit;
 	
-	 public void onCreate(Bundle savedInstanceState) {
+	 @Override
+	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 
 	        setContentView(R.layout.chat);

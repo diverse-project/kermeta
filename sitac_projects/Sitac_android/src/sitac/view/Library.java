@@ -44,4 +44,9 @@ public class Library {
 	{
 		return name;
 	}
+	
+	public int indexOf(ItemType item)
+	{
+		return items.indexOf(item);
+	}
 }

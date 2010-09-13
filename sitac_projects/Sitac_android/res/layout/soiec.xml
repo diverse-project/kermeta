@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+				android:layout_width="fill_parent"
+     			android:layout_height="fill_parent" >
+ 
+ <TableLayout  android:id="@+id/soiectable"
+			   android:layout_width="fill_parent"
+			   android:layout_height="wrap_content"
+			   android:stretchColumns="*"
+ >    			
+
+ <TableRow
+ 			android:id="@+id/soiecheaderrow"
+ 			android:layout_height="wrap_content">     			
+<Button
+        android:id="@+id/buttonS"
+        android:text="Situation" />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+<Button
+        android:id="@+id/buttonO"
+        android:text="Objectif" />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+<Button
+        android:id="@+id/buttonI"
+        android:text="IDM" />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />        
+<Button
+        android:id="@+id/buttonE"
+        android:text="Exec." />
+<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />        
+<Button
+        android:id="@+id/buttonC"
+        android:text="Cdt" />
+</TableRow>
+</TableLayout>       
+
+<RelativeLayout 
+			android:id="@+id/rellayoutS"
+			android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_below="@+id/soiectable" >
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+<LinearLayout
+			  android:id="@+id/layoutS"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:orientation="vertical" />    
+</ScrollView>
+     <Button
+        android:id="@+id/addS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Add" />
+</RelativeLayout>
+
+
+<RelativeLayout 
+			android:id="@+id/rellayoutO"
+			android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_below="@+id/soiectable" >
+<sitac.view.ExpListObjectif
+		android:id="@+id/explistobjectif"
+		android:layout_width="fill_parent"
+ 		android:layout_height="fill_parent"
+      />
+</RelativeLayout>
+
+
+<RelativeLayout 
+			android:id="@+id/rellayoutI"
+			android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_below="@+id/soiectable" >
+<sitac.view.ExpListIDM
+		android:id="@+id/explistidm"
+		android:layout_width="fill_parent"
+ 		android:layout_height="fill_parent"
+      />
+</RelativeLayout>
+
+
+<RelativeLayout 
+			android:id="@+id/rellayoutE"
+			android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_below="@+id/soiectable" >
+<sitac.view.ExpListExec
+		android:id="@+id/explistexec"
+		android:layout_width="fill_parent"
+ 		android:layout_height="fill_parent"
+      />    		
+<ScrollView 
+			android:id="@+id/scrollmoyens"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"  
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true" > 		
+<LinearLayout
+			android:id="@+id/layoutmoyens"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true" /> 
+</ScrollView>			   		
+<Button
+        android:id="@+id/addmoyens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="M." />
+<Button
+        android:id="@+id/closemoyens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/scrollmoyens"
+        android:text="-" />
+</RelativeLayout>
+
+
+<RelativeLayout 
+			android:id="@+id/rellayoutC"
+			android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_below="@+id/soiectable" >
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">    		
+<TextView
+		android:id="@+id/textviewC"
+        android:textSize="10pt"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"/>
+ </ScrollView>
+<Button
+		android:id="@+id/addC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Add" />
+</RelativeLayout>
+
+ 
+</RelativeLayout>

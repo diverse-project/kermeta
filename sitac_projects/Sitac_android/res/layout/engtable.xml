@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/engines"
+     			android:layout_width="fill_parent"
+     			android:layout_height="fill_parent" >
+
+<ScrollView 
+			 android:id="@+id/scroll"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             >     			     
+<TableLayout   android:id="@+id/enginetable"
+			   android:layout_width="fill_parent"
+			   android:layout_height="fill_parent"
+			   android:stretchColumns="0,2,4,6,8,10,12"
+			   android:shrinkColumns="*"
+			   android:collapseColumns="0" >
+ <TableRow
+ 			android:id="@+id/engtablerow"
+ 			android:layout_height="wrap_content">
+ 			
+ 	<TextView android:id="@+id/engcol0"
+	          android:text=" ID "  />
+			  
+    <View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />		
+ 			
+	<TextView android:id="@+id/engcol1"
+	          android:text=" Name "  />
+			  
+    <View
+        android:id="@+id/verticalseparator"
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+			  
+	<TextView android:id="@+id/engcol2"
+	    	  android:text=" Request "  />
+			  
+	<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+     <TextView android:id="@+id/engcol3"
+     		   android:text=" Expected " />   
+			  
+	<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+     <TextView android:id="@+id/engcol4"
+     		   android:text=" CRN " />
+	
+	<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />	
+        
+     <TextView android:id="@+id/engcol5"
+     		   android:text=" Use " />
+	
+	<View
+        android:layout_height="fill_parent"
+        android:layout_width="1dip"
+        android:background="#FF909090" />
+        
+     <TextView  android:id="@+id/engcol6"
+     			android:text=" Left "  />		 
+     			 			   		      	     
+ </TableRow>
+ 
+ 
+ <View
+        android:id="@+id/horizontlseparator"
+        android:layout_height="1dip"
+        android:background="#FF909090" />       
+        
+</TableLayout>
+
+</ScrollView>
+
+
+<sitac.view.GroupExpandableList android:id="@+id/newlist2"
+			   android:layout_below="@+id/scroll"
+			   android:layout_above="@+id/moreengines"
+               android:layout_width="wrap_content" 
+               android:layout_height="wrap_content"
+               android:drawSelectorOnTop="false"
+               /> 
+
+<Button
+        android:id="@+id/moreengines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="+" />
+        
+<Button
+        android:id="@+id/closemenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="-" />
+        
+<Button
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Group" />
+        
+<ListView 
+		  android:id="@+id/optionslist"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_toRightOf="@+id/closemenu" 
+          android:layout_toLeftOf="@+id/group"/>        
+
+</RelativeLayout>
+      

@@ -7,6 +7,7 @@ import android.widget.TabHost;
 
 public class TabView extends TabActivity {
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.tabs);
@@ -19,16 +20,20 @@ public class TabView extends TabActivity {
 	    intent = new Intent().setClass(this, MapWidget.class);
 
 	    // Initialize a TabSpec for each tab and add it to the TabHost
-	    spec = tabHost.newTabSpec("artists").setIndicator("MapView").setContent(intent);
+	    spec = tabHost.newTabSpec("1").setIndicator("MapView").setContent(intent);
 	    tabHost.addTab(spec);
 
 	    // Do the same for the other tabs
 	    intent = new Intent().setClass(this, SoiecActivity.class);
-	    spec = tabHost.newTabSpec("albums").setIndicator("SOIEC").setContent(intent);
+	    spec = tabHost.newTabSpec("2").setIndicator("SOIEC").setContent(intent);
+	    tabHost.addTab(spec);
+	    
+	    intent = new Intent().setClass(this, EnginesActivity.class);
+	    spec = tabHost.newTabSpec("3").setIndicator("Engines").setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    intent = new Intent().setClass(this, ChatPanel.class);
-	    spec = tabHost.newTabSpec("albums").setIndicator("ChatPanel").setContent(intent);
+	    spec = tabHost.newTabSpec("4").setIndicator("Messages").setContent(intent);
 	    tabHost.addTab(spec);
 
 

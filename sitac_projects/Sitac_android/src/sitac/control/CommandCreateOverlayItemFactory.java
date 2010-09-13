@@ -1,24 +1,24 @@
 package sitac.control;
 
+import sitac.view.ItemType;
 import sitac.view.MapPoint;
 
 public class CommandCreateOverlayItemFactory extends AbstractCommandFactory {
 
 	private Adapter adapter;
 	private MapPoint point;
-	private int type,group;
+	private ItemType itemtype;
 	
-	public CommandCreateOverlayItemFactory(Adapter adapter,MapPoint point,int type,int group)
+	public CommandCreateOverlayItemFactory(Adapter adapter,MapPoint point,ItemType itemtype)
 	{
 		this.adapter=adapter;
 		this.point=point;
-		this.group=group;
-		this.type=type;
+		this.itemtype=itemtype;
 	}
 	
 	@Override
 	public Command create() {
-		return new CommandCreateOverlayItem(adapter,type,group,point);
+		return new CommandCreateOverlayItem(adapter,itemtype,point);
 	}
 
 }

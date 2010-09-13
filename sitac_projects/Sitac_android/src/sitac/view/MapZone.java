@@ -15,12 +15,14 @@ public class MapZone extends MapItem{
 		super();
 	}
 
+	@Override
 	public void addPoint(MapPoint gp)
 	{
 		if(this.points.size()<MapZone.nopoints)
 			this.points.add(gp);
 	}
 	
+	@Override
 	public void draw(Canvas canvas, OpenStreetMapView mapview) 
 	{
 		int size=this.points.size();

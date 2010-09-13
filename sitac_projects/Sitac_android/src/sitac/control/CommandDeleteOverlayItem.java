@@ -15,20 +15,26 @@ public class CommandDeleteOverlayItem extends Command {
 	
 	@Override
 	public void execute() {
-		adapter.deleteOverlayItem(item);
-
+		if(item.getItemType().getTitle().equals("FPT")||item.getItemType().getTitle().equals("VSAV"))
+			adapter.deleteOverlayItem(item,item.getItemType());
+		else
+			adapter.deleteOverlayItem(item);
 	}
 
 	@Override
 	public void redo() {
-		adapter.deleteOverlayItem(item);
-
+		if(item.getItemType().getTitle().equals("FPT")||item.getItemType().getTitle().equals("VSAV"))
+			adapter.deleteOverlayItem(item,item.getItemType());
+		else
+			adapter.deleteOverlayItem(item);
 	}
 
 	@Override
 	public void undo() {
-		adapter.placeOverlayItem(item);
-
+		if(item.getItemType().getTitle().equals("FPT")||item.getItemType().getTitle().equals("VSAV"))
+			adapter.placeOverlayItem(item,item.getItemType());
+		else
+			adapter.placeOverlayItem(item);
 	}
 
 }

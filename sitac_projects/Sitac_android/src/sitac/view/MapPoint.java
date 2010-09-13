@@ -1,6 +1,8 @@
 package sitac.view;
 
 import org.andnav.osm.util.GeoPoint;
+import org.andnav.osm.util.constants.GeoConstants;
+import org.andnav.osm.views.util.constants.MathConstants;
 
 import android.location.Location;
 
@@ -81,10 +83,10 @@ public class MapPoint implements Cloneable{
 
 	public int distanceTo(final MapPoint other) {           
 
-		final double a1 = GeoPoint.DEG2RAD * (this.lat / 1E6);
-		final double a2 = GeoPoint.DEG2RAD * (this.long_ / 1E6);
-		final double b1 = GeoPoint.DEG2RAD * (other.lat / 1E6);
-		final double b2 = GeoPoint.DEG2RAD * (other.long_ / 1E6);
+		final double a1 = MathConstants.DEG2RAD * (this.lat / 1E6);
+		final double a2 = MathConstants.DEG2RAD * (this.long_ / 1E6);
+		final double b1 = MathConstants.DEG2RAD * (other.lat / 1E6);
+		final double b2 = MathConstants.DEG2RAD * (other.long_ / 1E6);
 
 		final double cosa1 = Math.cos(a1);
 		final double cosb1 = Math.cos(b1);
@@ -97,9 +99,10 @@ public class MapPoint implements Cloneable{
 
 		final double tt = Math.acos( t1 + t2 + t3 );
 
-		return (int)(GeoPoint.RADIUS_EARTH_METERS*tt);
+		return (int)(GeoConstants.RADIUS_EARTH_METERS*tt);
 	}	
 
+	@Override
 	public String toString()
 	{
 		StringBuffer result = new StringBuffer(super.toString());
@@ -111,6 +114,7 @@ public class MapPoint implements Cloneable{
 		return result.toString();
 	}
 	
+	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
 		return super.clone();

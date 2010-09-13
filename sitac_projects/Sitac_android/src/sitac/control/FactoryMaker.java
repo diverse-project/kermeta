@@ -1,5 +1,6 @@
 package sitac.control;
 
+import sitac.view.ItemType;
 import sitac.view.MapItem;
 import sitac.view.MapPoint;
 import sitac.view.MyOverlayItem;
@@ -13,8 +14,9 @@ public class FactoryMaker{
 	private MapItem item;
 	private String mess;
 	private Selectable selItem;
-	private int param1,param2;
+	private int param;
 	private MyOverlayItem overlayitem;
+	private ItemType libitemtype;
 	
 	private static AbstractCommandFactory pf=null;
 	
@@ -67,19 +69,19 @@ public class FactoryMaker{
 		selItem=s;
 	}
 	
-	public void setIntParam1(int p)
+	public void setIntParam(int p)
 	{
-		param1=p;
-	}
-	
-	public void setIntParam2(int p)
-	{
-		param2=p;
+		param=p;
 	}
 	
 	public void setOverlayItem(MyOverlayItem item)
 	{
 		overlayitem=item;
+	}
+	
+	public void setLibItemType(ItemType item)
+	{
+		libitemtype=item;
 	}
 	
 	public AbstractCommandFactory create(int type)
@@ -105,10 +107,10 @@ public class FactoryMaker{
 			pf=new CommandUpdateViewFactory(adapter);
 			break;
 		case 6:
-			pf=new CommandChangeSelectablePropertyFactory(adapter,selItem,param2);
+			pf=new CommandChangeSelectablePropertyFactory(adapter,selItem,param);
 			break;
 		case 7:
-			pf=new CommandMoveItemPointFactory(adapter,item,oldpoint,currpoint,param2);
+			pf=new CommandMoveItemPointFactory(adapter,item,oldpoint,currpoint,param);
 			break;
 		case 8:
 			pf=new CommandDeleteItemFactory(adapter,item);
@@ -120,10 +122,10 @@ public class FactoryMaker{
 			pf=new CommandMoveOverlayItemFactory(adapter,overlayitem,oldpoint);
 			break;
 		case 11:
-			pf=new CommandChangeOverlayItemPropertyFactory(adapter,overlayitem,param2);
+			pf=new CommandChangeOverlayItemPropertyFactory(adapter,overlayitem,param);
 			break;
 		case 12:
-			pf=new CommandCreateOverlayItemFactory(adapter,oldpoint,param1,param2);
+			pf=new CommandCreateOverlayItemFactory(adapter,oldpoint,libitemtype);
 			break;
 		case 13:
 			pf=new CommandAddMapPointToItemFactory(adapter,item,oldpoint);

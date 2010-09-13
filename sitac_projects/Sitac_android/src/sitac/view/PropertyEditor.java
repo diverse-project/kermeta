@@ -18,8 +18,7 @@ import android.widget.RelativeLayout;
 public class PropertyEditor extends RelativeLayout {
 	
 	private Selectable selected;
-	private MyOverlayItem item;
-	private Button buttoncol,buttonplus,buttonminus;
+	private Button buttoncol;
 	private AlertDialog alert;
 
 	public PropertyEditor(Context context, AttributeSet attrs) {
@@ -36,28 +35,12 @@ public class PropertyEditor extends RelativeLayout {
 		return selected;
 	}
 	
-	public void setOverlayItem(MyOverlayItem newItem)
+	public void setSelectableButtonsVisible(boolean visibility)
 	{
-		item=newItem;
-	}
-	
-	public MyOverlayItem getOverlayItem()
-	{
-		return item;
-	}
-	
-	public void setSelectableButtonsVisible()
-	{
-		buttoncol.setVisibility(View.VISIBLE);
-		buttonplus.setVisibility(View.INVISIBLE);
-		buttonminus.setVisibility(View.INVISIBLE);
-	}
-	
-	public void setItemButtonsVisible()
-	{
-		buttoncol.setVisibility(View.INVISIBLE);
-		buttonplus.setVisibility(View.VISIBLE);
-		buttonminus.setVisibility(View.VISIBLE);
+		if(visibility==true)
+			buttoncol.setVisibility(View.VISIBLE);
+		else
+			buttoncol.setVisibility(View.INVISIBLE);
 	}
 	
 	protected void addDefaultButtons()
@@ -71,35 +54,13 @@ public class PropertyEditor extends RelativeLayout {
 					showDialog();				
 			}        	
         });
-		
-		buttonplus=(Button)findViewById(R.id.button3);
-		buttonplus.setOnClickListener(new View.OnClickListener(){
-
-				@Override
-				public void onClick(View v) {
-					if(item.isSelected()==true)
-						moreLessItems(1);				
-				}        	
-	        });
-		buttonplus.setVisibility(View.INVISIBLE);
-		
-		buttonminus=(Button)findViewById(R.id.button4);
-		buttonminus.setOnClickListener(new View.OnClickListener(){
-
-				@Override
-				public void onClick(View v) {
-					if(item.isSelected()==true)
-						moreLessItems(-1);				
-				}        	
-	        });
-		buttonminus.setVisibility(View.INVISIBLE);
 	}
 	
 	private void changeSelectableColor(int color)
 	{		
 		FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
 		FactoryMaker.getInstance().setSelectable(selected);
-		FactoryMaker.getInstance().setIntParam2(color);
+		FactoryMaker.getInstance().setIntParam(color);
 		AbstractCommandFactory acf=FactoryMaker.getInstance().create(6);
 		Ctrl.getInstance().execute(acf.create());
 		
@@ -140,15 +101,7 @@ public class PropertyEditor extends RelativeLayout {
     	this.setVisibility(View.INVISIBLE);
 	}
 	
-	private void moreLessItems(int dir)
-	{
-    	FactoryMaker.getInstance().setAdapter(new Adapter(getContext()));
-		FactoryMaker.getInstance().setOverlayItem(item);
-		FactoryMaker.getInstance().setIntParam2(dir);
-		AbstractCommandFactory acf=FactoryMaker.getInstance().create(11);
-		Ctrl.getInstance().execute(acf.create());
-	}
-	
+	@Override
 	public boolean onTouchEvent(MotionEvent e)
 	{
 		this.setVisibility(View.INVISIBLE);

@@ -14,6 +14,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
+/**
+ * 
+ * @author Catalin Cupse	
+ * The class represents the map overlay that contains MapItems: points (MapItemPoint), lines (MapLine)
+ * and zones (MapZone).
+ */
+
 public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 
 	private ArrayList<MapItem> items;
@@ -71,6 +78,7 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 		return this.mPaint.getColor();
 	}
 	
+	@Override
 	public void onDraw(Canvas canvas,OpenStreetMapView mapview)
 	{
 		int size=this.items.size();
@@ -78,6 +86,11 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 			this.items.get(i).draw(canvas, mapview);
 	}
 	
+	@Override
+	/**
+	 * In order to finish the drawing of an MapItem ( to finish adding new points to the 
+	 * current MapItem ), a long press is needed.
+	 */
 	public boolean onLongPress(MotionEvent event, OpenStreetMapView mapview)
 	{
 	    if(this.createitem==true)
@@ -88,6 +101,11 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 	    return true;
 	}
 	
+	@Override
+	/**
+	 * With a single tap you can either select an existing item from the map ( if you tap on that item - the
+	 * constituent points will be highlighted ), or you can add a new point to the item that is currently created.
+	 */
 	public boolean onSingleTapUp(MotionEvent event, OpenStreetMapView mapview)
 	{
 	  FactoryMaker.getInstance().setAdapter(new Adapter(ctx));
@@ -125,6 +143,11 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 		return true;
 	}
 	
+	@Override
+	/**
+	 * You can either drag the entire item on the map ( all the constituent points will be moved in respect to the
+	 * movement of the finger on the device ), or just a point of the selected item.
+	 */
 	public boolean onTouchEvent(MotionEvent event,OpenStreetMapView mapview)
 	{
 		int ev=event.getAction();
@@ -149,7 +172,7 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 				else if(this.currentpoint!=-1)
 				{
 					FactoryMaker.getInstance().setMapItem(items.get(itemindex));
-					FactoryMaker.getInstance().setIntParam2(this.currentpoint);
+					FactoryMaker.getInstance().setIntParam(this.currentpoint);
 					FactoryMaker.getInstance().setOldMapPoint(items.get(itemindex).getPoints().get(currentpoint));
 				}
 				break;
@@ -172,7 +195,7 @@ public class MyPathOverlay extends OpenStreetMapViewPathOverlay {
 				if(currentpoint!=-1)
 				{
 					FactoryMaker.getInstance().setCurrentMapPoint(gp);
-					FactoryMaker.getInstance().setIntParam2(currentpoint);
+					FactoryMaker.getInstance().setIntParam(currentpoint);
 					AbstractCommandFactory acf=FactoryMaker.getInstance().create(7);
 					Ctrl.getInstance().execute(acf.create());
 				}

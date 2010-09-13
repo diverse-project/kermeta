@@ -9,6 +9,7 @@ import org.andnav.osm.views.overlay.OpenStreetMapViewItemizedOverlay;
 import sitac.control.AbstractCommandFactory;
 import sitac.control.Adapter;
 import sitac.control.Ctrl;
+import sitac.control.CtrlMoyens;
 import sitac.control.FactoryMaker;
 
 import android.content.Context;
@@ -17,6 +18,12 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 
+/**
+ * 
+ * @author Catalin Cupse
+ * The class represents the map overlay which contains all the engines added on the map ( engines repersented by
+ * MyOverlayItem objects ).
+ */
 public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverlayItem> {
 	
 	private boolean newitem=false;
@@ -27,6 +34,7 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 			ResourceProxy resourceProxy) {
 		super(ctx, list, marker, markerHotspot, onItemTapListener, resourceProxy);
 		this.context=ctx;
+		CtrlMoyens.getInstance().setItemizedOverlay(this);
 	}
 	
 	public void addItem(MyOverlayItem item)
@@ -69,13 +77,18 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 		return this.newitem;
 	}
 
+	@Override
+	/**
+	 * You can select an item by tapping on it; you can drag the selected item on the map. 
+	 * In order to create a new item, you tap on the map on the desired position for the item 
+	 * ( after you have selected the type of the item you want to create from the LibToolBox ).
+	 */
 	public boolean onTouchEvent(MotionEvent event,OpenStreetMapView mapview)
 	{
 		FactoryMaker.getInstance().setAdapter(new Adapter(context));
 		int i=this.itemSelected();
 		if(i!=-1)
 		{
-			this.mItemList.get(i).getMarker().setAlpha(255);
 			int ev=event.getAction();
 			float x=event.getX();
 			float y=event.getY();
@@ -91,7 +104,6 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 				Ctrl.getInstance().execute(acf.create());
 				
 				this.mItemList.get(i).setSelected(false);
-				this.mItemList.get(i).getMarker().setAlpha(150);
 				break;
 			}
 			return true;
@@ -112,6 +124,7 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
 		return super.onTouchEvent(event, mapview);
 	}
 	
+	@Override
 	protected void onDrawItem(final Canvas c, final int index, final Point curScreenCoords) 
 	{
         final int left = curScreenCoords.x - this.mMarkerHotSpot.x;
@@ -132,5 +145,45 @@ public class MyItemizedOverlay extends OpenStreetMapViewItemizedOverlay<MyOverla
             this.mMarker.draw(c);
         }
    }
+	
+	/**
+	 * If you change the name of an engine in the EnginesActivity tab, the map item representing
+	 * that engine will update with respect to that changes.
+	 * @param index the index of the engine with the name changed
+	 */
+	public void updateItemDescription(int index)
+	{
+		int size=mItemList.size();
+		for(int i=0;i<size;i++)
+		{
+			if(mItemList.get(i).getItemType().getMoyenId()==index)
+			{
+				mItemList.get(i).getItemType().setDescription(CtrlMoyens.getInstance().getMoyenName(index));
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * When an engine arrives at the indicated place, the icon on the map representing that 
+	 * engine will turn from a dashed line to a solid line.
+	 * @param index the index of the engine that have arrived 
+	 */
+	public void updateItemIcon(int index)
+	{
+		int size=mItemList.size();
+		for(int i=0;i<size;i++)
+		{
+			if(mItemList.get(i).getItemType().getMoyenId()==index)
+			{
+				if(mItemList.get(i).getItemType().getTitle().equals("FPT"))
+					mItemList.get(i).getItemType().setIcon(context.getResources().getDrawable(R.drawable.redsingle));
+				else
+					mItemList.get(i).getItemType().setIcon(context.getResources().getDrawable(R.drawable.greensingle));
+				((MapWidget)context).getMapView().invalidate();
+				break;
+			}
+		}
+	}
 	
 }

@@ -10,6 +10,7 @@ import sitac.view.MapWidget;
 import sitac.view.MapZone;
 import sitac.view.MyOverlayItem;
 import sitac.view.Selectable;
+
 import sitac.view.util.OverlayItemFactory;
 
 import android.content.Context;
@@ -73,6 +74,7 @@ public class Adapter {
 		((MapWidget)ctx).getPathOverlay().deleteItem(item);
 		((MapWidget)ctx).getPathOverlay().setItemSelected(false);
 		((MapWidget)ctx).getPathOverlay().setCreateItem(false);
+		((MapWidget)ctx).getPathOverlay().setItemIndex(-1);
 		((MapWidget)ctx).getPropertyEditor().setVisibility(View.INVISIBLE);
 		((MapWidget)ctx).getMapView().invalidate();
 	}
@@ -101,7 +103,7 @@ public class Adapter {
 		((MapWidget)ctx).getPathOverlay().setItemSelected(true);
 		((MapWidget)ctx).getPathOverlay().setItemIndex(((MapWidget)ctx).getPathOverlay().getItems().indexOf(sel));
 		((MapWidget)ctx).getPropertyEditor().setSelectable(sel);
-		((MapWidget)ctx).getPropertyEditor().setSelectableButtonsVisible();
+		((MapWidget)ctx).getPropertyEditor().setSelectableButtonsVisible(true);
 		((MapWidget)ctx).getPropertyEditor().setVisibility(View.VISIBLE);
 	}
 	
@@ -144,10 +146,8 @@ public class Adapter {
 		return oldcolor;
 	}
 	
-	public MyOverlayItem createOverlayItem(int type,int group,MapPoint mp)
+	public MyOverlayItem createOverlayItem(ItemType itemtype,MapPoint mp)
 	{
-		OverlayItemFactory fact=new OverlayItemFactory();
-		ItemType itemtype=fact.createNewItem(type, group,ctx);
 		MyOverlayItem item=new MyOverlayItem(itemtype,mp);
 		if(item!=null)
 		{
@@ -155,8 +155,34 @@ public class Adapter {
 			item.setSelected(false);
 			((MapWidget)ctx).getMapView().invalidate();
 		}
+		if(itemtype.getTitle().equals("FPT")||itemtype.getTitle().equals("VSAV"))
+		{
+			CtrlMoyens.getInstance().deleteMoyenFromListView(itemtype);
+			CtrlMoyens.getInstance().setMoyenPosTarget(itemtype.getMoyenId(), mp.getLatitudeE6()/1E6, mp.getLongitudeE6()/1E6);
+		}
+		((MapWidget)ctx).getToolBox().addDefaultAdapter();
 		
 		return item;
+	}
+	
+	public void deleteOverlayItem(MyOverlayItem item, ItemType itemtype)
+	{
+		((MapWidget)ctx).getItemizedOverlay().deleteItem(item);
+		((MapWidget)ctx).getMapView().invalidate();
+		if(itemtype.getTitle().equals("FPT")||itemtype.getTitle().equals("VSAV"))
+		{
+			CtrlMoyens.getInstance().addMoyenToListView(itemtype);
+		}
+	}
+	
+	public void placeOverlayItem(MyOverlayItem item, ItemType itemtype)
+	{
+		((MapWidget)ctx).getItemizedOverlay().addItem(item);
+		((MapWidget)ctx).getMapView().invalidate();
+		if(itemtype.getTitle().equals("FPT")||itemtype.getTitle().equals("VSAV"))
+		{
+			CtrlMoyens.getInstance().deleteMoyenFromListView(itemtype);
+		}
 	}
 	
 	public void deleteOverlayItem(MyOverlayItem item)

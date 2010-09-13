@@ -4,6 +4,14 @@ import org.andnav.osm.views.overlay.OpenStreetMapViewOverlayItem;
 
 import android.graphics.drawable.Drawable;
 
+/**
+ * 
+ * @author Catalin Cupse
+ * The class represent a type of overlay items that can display an icon on the map. This will be
+ * used for displaying the engines ( FPT, VSAV, etc. ) on the map widget. The icon ( a small png picture)
+ * is contained by the ItemType object (along with a description - the type and the name of the engine).
+ */
+
 public class MyOverlayItem extends OpenStreetMapViewOverlayItem {
 	
 	private boolean selected=false;
@@ -14,7 +22,6 @@ public class MyOverlayItem extends OpenStreetMapViewOverlayItem {
 		super(title, description, MapPoint.toGeoPoint());
 		this.mMapPoint=MapPoint;
 		this.itemtype=new ItemType();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public MyOverlayItem(ItemType item,MapPoint mappoint)
@@ -71,6 +78,11 @@ public class MyOverlayItem extends OpenStreetMapViewOverlayItem {
 	public void setItemType(ItemType item)
 	{
 		itemtype=item;
+	}
+	
+	public ItemType getItemType()
+	{
+		return itemtype;
 	}
 	
 	public String getDescription()

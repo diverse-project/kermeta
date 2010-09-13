@@ -10,7 +10,6 @@ public class OverlayItemFactory extends OverlayItemAbstractFactory {
 	@Override
 	public ItemType createNewItem(int type, int group, Context ctx)
 	{
-		// TODO Auto-generated method stub
 		ItemType item=null;
 		switch(type)
 		{
@@ -106,6 +105,15 @@ public class OverlayItemFactory extends OverlayItemAbstractFactory {
 			break;
 		}
 
+		return item;
+	}
+
+	@Override
+	public ItemType createNewItem(int type, int group, String title, String desc, Context ctx)
+	{
+		ItemType item=this.createNewItem(type, group, ctx);
+		item.setTitle(title);
+		item.setDescription(desc);		
 		return item;
 	}
 	

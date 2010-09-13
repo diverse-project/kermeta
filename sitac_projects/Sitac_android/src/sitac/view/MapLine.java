@@ -20,6 +20,7 @@ public class MapLine extends MapItem{
 		this.points.addAll(gps);
 	}
 	
+	@Override
 	public void draw(Canvas canvas, OpenStreetMapView mapview) 
 	{
 		int size=this.points.size();
@@ -39,6 +40,25 @@ public class MapLine extends MapItem{
 				canvas.drawCircle(p2.x, p2.y, 3, paint);
 			}
 			
+			//-------------Drawing the arrow tip-------------	
+			if(i==size-2)
+			{
+				double sin=(Math.sqrt(2))/2;
+				double cos=(Math.sqrt(2))/2;
+
+				double xp=p1.x*cos-p1.y*sin-p2.x*cos+p2.y*sin+p2.x;
+				double yp=p1.x*sin+p1.y*cos-p2.x*sin-p2.y*cos+p2.y;
+				double xk=xp/10+9*p2.x/10;
+				double yk=yp/10+9*p2.y/10;
+				canvas.drawLine(p2.x, p2.y, (float)xk, (float)yk, paint);
+
+				xp=p1.x*cos+p1.y*sin-p2.x*cos-p2.y*sin+p2.x;
+				yp=(-1)*p1.x*sin+p1.y*cos+p2.x*sin-p2.y*cos+p2.y;
+				xk=xp/10+9*p2.x/10;
+				yk=yp/10+9*p2.y/10;
+				canvas.drawLine(p2.x, p2.y, (float)xk, (float)yk, paint);
+			}
+			//--------------------------
 		}	
 	}
 }
