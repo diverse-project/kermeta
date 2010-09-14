@@ -108,7 +108,7 @@
 	
     <scm>
     	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</connection>
-    	<developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</developerConnection>
+    	<developerConnection>scm:svn:svn+ssh://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</developerConnection>
     	<url>http://gforge.inria.fr/scm/viewvc.php/tags/utilities.eclipse.jface-2.0.0?root=kermeta</url>
   	</scm>
 	
