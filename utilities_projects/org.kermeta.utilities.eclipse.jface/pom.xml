@@ -106,6 +106,12 @@
 	</dependencies>
 	
 	
+    <scm>
+    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utilities.eclipse.jface</connection>
+    	<developerConnection>scm:svn:svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utilities.eclipse.jface</developerConnection>
+    	<url>http://gforge.inria.fr/scm/viewvc.php/trunk/utilities_projects/org.kermeta.utilities.eclipse.jface/?root=kermeta</url>
+  	</scm>
+	
 	<repositories>
         <repository>
             <id>kermeta Public</id>
