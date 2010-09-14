@@ -175,7 +175,13 @@
             <id>kermeta PublicSnapShots</id>
             <url>http://www.kermeta.org/maven2-snapshots</url>
         </repository>
-     </repositories>
+    </repositories>
+    <scm>
+    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse</connection>
+    	<developerConnection>scm:svn:svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse</developerConnection>
+    	<url>http://gforge.inria.fr/scm/viewvc.php/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse/?root=kermeta</url>
+  	</scm>
+    
 	<distributionManagement>
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
