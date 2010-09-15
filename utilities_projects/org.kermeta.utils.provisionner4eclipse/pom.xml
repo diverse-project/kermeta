@@ -126,22 +126,22 @@
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.core.runtime</artifactId>
-            <version>[3.5.0.v20090525,4.0.0.0)</version>
+            <version>[3.5.0.v20090525,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.equinox.common</artifactId>
-            <version>[3.5.1.R35x_v20090807-1100,4.0.0.0)</version>
+            <version>[3.5.1.R35x_v20090807-1100,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.equinox.preferences</artifactId>
-            <version>[3.2.301.R35x_v20091117,4.0.0.0)</version>
+            <version>[3.2.301.R35x_v20091117,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.jface</artifactId>
-            <version>[3.5.2.M20100120-0800,4.0.0.0)</version>
+            <version>[3.5.2.M20100120-0800,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
@@ -156,12 +156,12 @@
 		<dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.ui</artifactId>
-            <version>[3.5.2.M20100120-0800,4.0.0.0)</version>
+            <version>[3.5.2.M20100120-0800,)</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.ui.workbench</artifactId>
-            <version>[3.5.2.M20100113-0800,4.0.0.0)</version>
+            <version>[3.5.2.M20100113-0800,)</version>
         </dependency>
     </dependencies>
     
