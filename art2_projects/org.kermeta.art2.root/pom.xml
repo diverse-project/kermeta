@@ -29,6 +29,11 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
 
 
@@ -149,7 +154,10 @@
             <id>triskellPublicNexus</id>
             <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
         </repository>
-
+        <repository>
+            <id>jboss public</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+        </repository>
     </repositories>
 
 
