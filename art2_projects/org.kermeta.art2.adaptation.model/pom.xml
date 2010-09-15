@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.model</artifactId>
-            <version>${art2.version}</version>
+            <version>[${art2.version},)</version>
         </dependency>
     </dependencies>
 
