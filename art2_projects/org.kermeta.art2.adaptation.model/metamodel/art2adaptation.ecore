@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="art2adaptation"
+    nsURI="http://art2adaptation/1.0" nsPrefix="art2adaptation">
+  <eClassifiers xsi:type="ecore:EClass" name="AdaptationPrimitive"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdaptationModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="adaptations" upperBound="-1"
+        eType="#//AdaptationPrimitive" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//TypeDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//Instance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddType" eSuperTypes="#//TypeAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveType" eSuperTypes="#//TypeAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AddInstance" eSuperTypes="#//InstanceAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveInstance" eSuperTypes="#//InstanceAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdPartyAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//DeployUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddThirdParty" eSuperTypes="#//ThirdPartyAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveThirdParty" eSuperTypes="#//ThirdPartyAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//MBinding"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddBinding" eSuperTypes="#//BindingAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveBinding" eSuperTypes="#//BindingAdaptation"/>
+</ecore:EPackage>
