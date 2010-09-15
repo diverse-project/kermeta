@@ -1,0 +1,129 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package org.kermeta.art2.framework.bus.netty.remote
+
+import org.jboss.netty.channel.SimpleChannelUpstreamHandler
+import java.net.InetSocketAddress
+import java.util.concurrent.Executors
+import org.jboss.netty.bootstrap.ClientBootstrap
+import org.jboss.netty.bootstrap.ConnectionlessBootstrap
+import org.jboss.netty.channel.Channel
+import org.jboss.netty.channel.ChannelEvent
+import org.jboss.netty.channel.ChannelFuture
+import org.jboss.netty.channel.ChannelHandlerContext
+import org.jboss.netty.channel.ChannelStateEvent
+import org.jboss.netty.channel.ChannelPipeline
+import org.jboss.netty.channel.ChannelPipelineFactory
+import org.jboss.netty.channel.ChannelState
+import org.jboss.netty.channel.Channels
+import org.jboss.netty.channel.ExceptionEvent
+import org.jboss.netty.channel.FixedReceiveBufferSizePredictorFactory
+import org.jboss.netty.channel.MessageEvent
+import org.jboss.netty.channel.SimpleChannelUpstreamHandler
+import org.jboss.netty.channel.group.DefaultChannelGroup
+import org.jboss.netty.channel.socket.DatagramChannel
+import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory
+import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory
+import org.jboss.netty.handler.codec.serialization.ObjectDecoder
+import org.jboss.netty.handler.codec.serialization.ObjectEncoder
+import org.kermeta.art2.framework.Art2Actor
+import org.slf4j.LoggerFactory
+import scala.actors.Actor
+import scala.actors.TIMEOUT
+
+class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUpstreamHandler with Art2Actor {
+
+  var logger = LoggerFactory.getLogger(this.getClass);
+  var bootstrap : Option[ConnectionlessBootstrap] = None
+ // var bossPool : Option[java.util.concurrent.ExecutorService] = None
+  var ioPool  : Option[java.util.concurrent.ExecutorService] = None
+  var me  = this
+  var channel : Option[DatagramChannel] = None
+  var channelfutur : Option[ChannelFuture] = None
+  var allChannels = new DefaultChannelGroup()
+
+  case class STOP_RACTOR
+  case class CHANNEL_CONNECTED(e : ChannelStateEvent)
+
+
+  override def start(): Actor = synchronized {
+    /* DO NETTY INIT CODE */
+   // bossPool  = Some(Executors.newCachedThreadPool())
+    ioPool = Some(Executors.newCachedThreadPool())
+
+    var newbootstrap = new ConnectionlessBootstrap(new NioDatagramChannelFactory(ioPool.get))
+    newbootstrap.setPipelineFactory(new ChannelPipelineFactory() {
+        def getPipeline() : ChannelPipeline = {
+          return Channels.pipeline(
+            new ObjectEncoder(),
+            new ObjectDecoder(),
+            me);
+        }
+      });
+
+    newbootstrap.setOption("broadcast", "true");
+    //newbootstrap.setOption("connectTimeoutMillis", timeout);
+    newbootstrap.setOption("receiveBufferSizePredictorFactory",new FixedReceiveBufferSizePredictorFactory(1024));
+    channel = Some(newbootstrap.bind(new InetSocketAddress(0)).asInstanceOf[DatagramChannel])
+    //allChannels.add(channel.get)
+    bootstrap = Some(newbootstrap)
+    super.start()
+    this
+  }
+
+  override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
+    var message = e.getMessage
+    if(delegate == null){
+      logger.warn("No delegate found - message lost from "+e.getRemoteAddress+" : "+message.toString)
+    } else {
+      logger.info("Message rec from "+e.getRemoteAddress+" : "+message.toString)
+      delegate ! message
+    }
+  }
+  override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {
+    logger.error("Unexpected exception from downstream.",e.getCause());
+  }
+
+  override def stop(){
+    me ! STOP_RACTOR()
+    channel match {
+      case None =>
+      case Some(c)=> c.close
+    }
+    bootstrap match {
+      case None =>
+      case Some(b) =>
+        allChannels.close().awaitUninterruptibly();
+        b.releaseExternalResources();
+        ioPool match {
+          case None =>
+          case Some(p) => p.shutdown
+        }
+    }
+  }
+
+  def sendMessage(c : DatagramChannel,o : Any) : Boolean = {
+    try{
+
+      c.write(o,new InetSocketAddress("255.255.255.255", port));true
+    } catch {
+      case _ @ e => logger.error("Unexpected exception, while sending msg.",e);false
+    }
+  }
+
+  def act() = {
+    loop {
+      react {
+        case s : STOP_RACTOR => exit()
+        case _ @ msg =>
+          channel match {
+            case Some(b) => sendMessage(b,msg)
+            case None => logger.error("Msg lost "+msg)
+          }
+      }
+    }
+  }
+}

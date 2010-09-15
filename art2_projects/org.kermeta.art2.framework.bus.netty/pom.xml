@@ -1,0 +1,71 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>art2.framework.bus.netty</artifactId>
+    <packaging>bundle</packaging>
+    <name>ART2 :: Framework :: Bus :: Netty</name>
+    <url>http://maven.apache.org</url>
+
+    <groupId>${parent.groupId}</groupId>
+    <version>${art2.version}</version>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2</version>
+    </parent>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.2.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Import-Package>!org.jboss.netty.*,org.kermeta.art2.*,*;resolution:=optional</Import-Package>
+                        <Private-Package>org.kermeta.art2.framework.bus.netty</Private-Package>
+                        <Dynamic-ImportPackage>*</Dynamic-ImportPackage>
+                        <Export-Package>org.kermeta.art2.framework.bus.netty.remote,org.jboss.netty.*;version=3.2</Export-Package>
+                        <Embed-Dependency>netty;inline=true</Embed-Dependency>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
