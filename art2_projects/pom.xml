@@ -26,15 +26,17 @@
 	
     <modules>
         <module>org.kermeta.art2.root</module>
-        <module>org.kermeta.art2.annotation</module>
         <module>org.kermeta.art2.model</module>
+        <!--
+        <module>org.kermeta.art2.annotation</module>
+        
         <module>org.kermeta.art2.adaptation.model</module>
         <module>org.kermeta.art2.api</module>
         <module>org.kermeta.art2.core</module>
         <module>org.kermeta.art2.framework</module>
         <module>org.kermeta.art2.framework.bus.netty</module>
         <module>org.kermeta.art2.deploy.osgi</module>
-        <module>org.kermeta.art2.kompare</module>
+        <module>org.kermeta.art2.kompare</module>-->
     </modules>
 
 	
