@@ -1,16 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ClassPath: .
 Built-By: ffouquet
-Build-Jdk: 1.6.0_20
-Bundle-Version: 2.0.0.SNAPSHOT
 Tool: Bnd-0.0.357
 Bundle-Name: ART2 :: Core
-Bnd-LastModified: 1281023203926
 Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1284560809193
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.kermeta.art2.core.impl.Art2CoreActivator
+Import-Package: org.eclipse.emf.common.util,org.jboss.netty.channel;ve
+ rsion="3.2",org.kermeta.art2,org.kermeta.art2.api.service.adaptation.
+ deploy,org.kermeta.art2.api.service.core.handler,org.kermeta.art2.api
+ .service.core.kompare,org.kermeta.art2.framework,org.kermeta.art2.fra
+ mework.bus.netty.remote,org.kermeta.art2.framework.message,org.kermet
+ a.art2adaptation,org.osgi.framework;version="1.5",org.osgi.util.track
+ er;version="1.4",org.slf4j;version="1.6",scala,scala.actors,scala.col
+ lection,scala.collection.generic,scala.collection.immutable,scala.col
+ lection.mutable,scala.reflect,scala.runtime
 Bundle-SymbolicName: org.kermeta.art2.core
-Import-Package: org.kermeta.art2,org.kermeta.art2.api.service.adaptati
- on.deploy,org.kermeta.art2.api.service.core.handler,org.kermeta.art2.
- api.service.core.kompare,org.kermeta.art2.framework,org.kermeta.art2a
- daptation,org.osgi.framework;version="1.5"
 

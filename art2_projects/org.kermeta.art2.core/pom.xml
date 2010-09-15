@@ -48,6 +48,22 @@
             <version>${art2.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.framework.bus.netty</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.2.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -60,14 +76,13 @@
                 <configuration>
                     <instructions>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Import-Package>
-                           *
-                        </Import-Package>
+                        <Import-Package>*</Import-Package>
                         <Private-Package>
                             org.kermeta.art2.core.impl
                         </Private-Package>
                         <Export-Package>
                         </Export-Package>
+                        <Bundle-Activator>org.kermeta.art2.core.impl.Art2CoreActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
