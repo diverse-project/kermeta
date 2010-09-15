@@ -1,0 +1,57 @@
+<!-- $Id: pom.xml 12411 2010-09-15 07:36:52Z kermeta_bot $  -->
+<!-- License    : EPL 									 -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+  	<groupId>org.kermeta.utilities</groupId>
+  	<artifactId>utilities_projects</artifactId>
+  	<version>2.0.0-SNAPSHOT</version>
+  	<packaging>pom</packaging>
+  	<name>Utilities projects</name>
+	<build>
+		<plugins>
+
+			 
+		</plugins>
+	</build>
+	
+	<dependencies>
+        
+	</dependencies>
+	
+	<modules>
+    		<module>org.kermeta.utilities.eclipse.jface</module>
+    		<module>fr.irisa.triskell.cache.utilities</module>
+    		<module>org.kermeta.utils.provisionner4eclipse</module>
+	</modules>
+    	<scm>
+    		<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects</connection>
+    		<developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects</developerConnection>
+    		<url>http://gforge.inria.fr/scm/viewvc.php/trunk/utilities_projects?root=kermeta</url>
+  	</scm>
+	
+	<repositories>
+		<repository>
+		    <id>kermeta Public</id>
+		    <url>http://www.kermeta.org/maven2</url>
+		</repository>
+		<repository>
+		    <id>kermeta PublicSnapShots</id>
+		    <url>http://www.kermeta.org/maven2-snapshots</url>
+		</repository>
+     	</repositories>
+	<distributionManagement>
+		<repository>
+	      		<id>tipimouss-local-maven-repository</id>
+	      		<name>Tipimouss Local release repository</name>
+	      		<url>file:/var/www/html/maven2</url>
+	      		<uniqueVersion>false</uniqueVersion>
+    		</repository>
+	    	<snapshotRepository>
+	      		<id>tipimouss-local-maven-snapshot-repository</id>
+	      		<name>Tipimouss Local  snapshot repository</name>
+	      		<url>file:/var/www/html/maven2-snapshots</url>
+	      		<uniqueVersion>false</uniqueVersion>
+	    	</snapshotRepository>
+	</distributionManagement>
+</project>
