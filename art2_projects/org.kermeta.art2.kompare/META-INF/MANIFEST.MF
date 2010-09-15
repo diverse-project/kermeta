@@ -1,21 +1,28 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.art2.kompare;uses:="scala.runtime,org.kerm
- eta.art2,org.eclipse.emf.common.util,org.kermeta.art2adaptation,scala
- .collection,scala.collection.mutable,scala,org.kermeta.art2.framework
- .aspects,scala.collection.immutable,org.eclipse.emf.ecore,org.kermeta
- .art2.api.service.core.kompare,scala.reflect"
+Export-Package: org.kermeta.art2.kompare.sub;uses:="org.eclipse.emf.co
+ mmon.util,org.kermeta.art2adaptation,scala.runtime,org.kermeta.art2,s
+ cala.collection,scala.collection.mutable,scala,org.eclipse.emf.ecore,
+ scala.collection.immutable,org.kermeta.art2.framework.aspects,scala.r
+ eflect,org.slf4j",org.kermeta.art2.kompare;uses:="org.eclipse.emf.com
+ mon.util,org.kermeta.art2.framework,org.kermeta.art2adaptation,org.ke
+ rmeta.art2,org.kermeta.art2.api.service.core.kompare,scala.reflect,or
+ g.osgi.framework,scala,scala.runtime,scala.collection,scala.collectio
+ n.mutable,org.slf4j,org.kermeta.art2.kompare.sub"
 Built-By: ffouquet
-Build-Jdk: 1.6.0_20
-Bundle-Version: 2.0.0.SNAPSHOT
 Tool: Bnd-0.0.357
 Bundle-Name: ART2 :: Kompare
-Bnd-LastModified: 1281023178502
 Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1284540069030
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.kermeta.art2.kompare
+Bundle-Activator: org.kermeta.art2.kompare.Art2KompareActivator
 Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
  kermeta.art2,org.kermeta.art2.api.service.core.kompare,org.kermeta.ar
- t2.framework.aspects,org.kermeta.art2.kompare,org.kermeta.art2adaptat
- ion,scala,scala.collection,scala.collection.immutable,scala.collectio
- n.mutable,scala.reflect,scala.runtime
+ t2.framework,org.kermeta.art2.framework.aspects,org.kermeta.art2.komp
+ are,org.kermeta.art2.kompare.sub,org.kermeta.art2adaptation,org.osgi.
+ framework;version="1.5",org.slf4j;version="1.6",scala,scala.collectio
+ n,scala.collection.immutable,scala.collection.mutable,scala.reflect,s
+ cala.runtime
+Bundle-SymbolicName: org.kermeta.art2.kompare
 

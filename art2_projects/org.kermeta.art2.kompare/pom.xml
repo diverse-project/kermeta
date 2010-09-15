@@ -17,30 +17,17 @@
 
     <build>
         <plugins>
+
             <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
                 <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
+                    <instructions>
+                        <Bundle-Activator>org.kermeta.art2.kompare.Art2KompareActivator</Bundle-Activator>
+                        <Export-Package>org.kermeta.art2.kompare.*</Export-Package>
+                        <Import-Package>*</Import-Package>
+                    </instructions>
                 </configuration>
             </plugin>
         </plugins>
@@ -67,6 +54,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.framework</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
         </dependency>
     </dependencies>
 </project>
