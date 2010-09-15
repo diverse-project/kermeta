@@ -16,6 +16,10 @@
     </parent>
 
 
+<properties>
+    <art2v>2.0.0</art2v>
+</properties>
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -51,7 +55,7 @@
         <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.model</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>${art2v}-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
