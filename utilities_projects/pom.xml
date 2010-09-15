@@ -10,20 +10,34 @@
   	<name>Utilities projects</name>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+				  <!-- <allowTimestampedSnapshots>true</allowTimestampedSnapshots> -->
+				  <autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			      </plugin>
 
 			 
 		</plugins>
 	</build>
 	
-	<dependencies>
-        
-	</dependencies>
 	
 	<modules>
     		<module>org.kermeta.utilities.eclipse.jface</module>
     		<module>fr.irisa.triskell.cache.utilities</module>
     		<module>org.kermeta.utils.provisionner4eclipse</module>
 	</modules>
+
+	<!-- <dependencies>
+    		<dependency>
+		      <groupId>org.kermeta.utilities</groupId>
+		      <artifactId>utilities.eclipse.jface</artifactId>
+    		</dependency>
+  	</dependencies> -->
+	
     	<scm>
     		<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects</connection>
     		<developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects</developerConnection>
