@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-SymbolicName: FakeSimpleSwitch-820984209
-Bundle-Version: 1
-DynamicImport-Package: *
-Bundle-ManifestVersion: 2
-Bundle-Blueprint: component.xml
-
