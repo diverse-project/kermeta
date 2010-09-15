@@ -10,17 +10,15 @@
   	<name>Utilities projects</name>
 	<build>
 		<plugins>
-		<!-- 	<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.0</version>
 				<configuration>
-				  <allowTimestampedSnapshots>true</allowTimestampedSnapshots> 
+				<!--   <allowTimestampedSnapshots>true</allowTimestampedSnapshots> --> 
 				  <autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
-			      </plugin>
-
-			--> 
+			</plugin> 
 		</plugins>
 	</build>
 	
