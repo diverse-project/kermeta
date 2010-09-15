@@ -27,6 +27,7 @@
     <modules>
         <module>org.kermeta.art2.root</module>
         <module>org.kermeta.art2.model</module>
+        <module>org.kermeta.art2.adaptation.model</module>
         <!--
         <module>org.kermeta.art2.annotation</module>
         
