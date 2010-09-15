@@ -6,13 +6,13 @@
 package org.kermeta.art2.adaptation.deploy.osgi.command
 
 import org.kermeta.art2.ComponentType
-import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2._
 import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import scala.collection.JavaConversions._
 
-case class AddComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager)  extends PrimitiveCommand{
+case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends PrimitiveCommand{
 
   def buildQuery(du : DeployUnit) : String = {
     var query = new StringBuilder
@@ -28,10 +28,12 @@ case class AddComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager) 
     query.toString
   }
 
-  def findLib(ct : ComponentType) : Option[DeployUnit] = {
-    ct.eContainer.asInstanceOf[ContainerRoot].getLibraries.find{lib=>
-      lib.getSubComponentTypes.exists({sct => sct == ct})
-    }
+  def findLib(ct : TypeDefinition) : Option[DeployUnit] = {
+    //ct.eContainer.asInstanceOf[ContainerRoot].getLibraries.find{lib=>
+    //  lib.getSubTypes.exists({sct => sct == ct})
+    //}
+    //
+    Some(ct.getDeployUnit)
   }
 
   //var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None

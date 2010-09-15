@@ -5,10 +5,10 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.command
 
-import org.kermeta.art2.ComponentType
+import org.kermeta.art2._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 
-case class RemoveComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManager) extends PrimitiveCommand {
+case class RemoveTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager) extends PrimitiveCommand {
 
   def execute() : Boolean= {
     println("CMD REMOVE CT EXECUTION");
@@ -19,6 +19,6 @@ case class RemoveComponentTypeCommand(ct : ComponentType, ctx : Art2DeployManage
   }
 
   def undo() = {
-    AddComponentTypeCommand(ct,ctx).execute
+    AddTypeCommand(ct,ctx).execute
   }
 }

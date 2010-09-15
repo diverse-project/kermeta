@@ -6,20 +6,20 @@
 
 
  <!--   <reference interface="org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService" id="modelHandler" />-->
-
+<!--
     <bean id="ctx" class="org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager">
         <property name="bundle" ref="blueprintBundle"/>
         <property name="bundleContext" ref="blueprintBundleContext"/>
         <property name="bundleContainer" ref="blueprintContainer"/>
-    <!--    <property name="modelHandler" ref="modelHandler"/>-->
+
     </bean>
 
     <bean id="art2deploy" class="org.kermeta.art2.adaptation.deploy.osgi.Art2AdaptationDeployServiceOSGi">
         <property name="context" ref="ctx"/>
     </bean>
         
-  <!-- export the bean on the service registry -->
-    <service ref="art2deploy" interface="org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService" />
 
+    <service ref="art2deploy" interface="org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService" />
+-->
 
 </blueprint>

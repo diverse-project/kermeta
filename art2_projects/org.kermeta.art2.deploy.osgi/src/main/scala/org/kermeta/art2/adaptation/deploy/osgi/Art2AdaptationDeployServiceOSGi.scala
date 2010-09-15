@@ -1,40 +1,45 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi
 
+import org.kermeta.art2.ComponentInstance
 import org.kermeta.art2.adaptation.deploy.osgi.command._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2adaptation.AdaptationModel
 import org.kermeta.art2adaptation.AdaptationPrimitive
-import org.kermeta.art2adaptation.AddComponentInstance
-import org.kermeta.art2adaptation.AddComponentType
+import org.kermeta.art2adaptation.AddBinding
+import org.kermeta.art2adaptation.AddInstance
+import org.kermeta.art2adaptation.AddType
 import org.kermeta.art2adaptation.AddThirdParty
-import org.kermeta.art2adaptation.ComponentInstanceAdaptation
-import org.kermeta.art2adaptation.ComponentTypeAdaptation
-import org.kermeta.art2adaptation.RemoveComponentInstance
-import org.kermeta.art2adaptation.RemoveComponentType
+import org.kermeta.art2adaptation.BindingAdaptation
+import org.kermeta.art2adaptation.InstanceAdaptation
+import org.kermeta.art2adaptation.TypeAdaptation
+import org.kermeta.art2adaptation.RemoveBinding
+import org.kermeta.art2adaptation.RemoveInstance
+import org.kermeta.art2adaptation.RemoveType
 import org.kermeta.art2adaptation.RemoveThirdParty
 import org.kermeta.art2adaptation.ThirdPartyAdaptation
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
 class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
   var ctx : Art2DeployManager = null
-  
-  var internalLog : Logger = LoggerFactory.getLogger("org.kermeta.art2.deploy.osgi.Art2AdaptationDeployServiceOSGi")
+  var logger = LoggerFactory.getLogger(this.getClass);
+
 
   def setContext(context : Art2DeployManager) = { ctx = context }
 
 
-  def phase(cmds: List[PrimitiveCommand] ):Boolean = {
+  def phase(cmds: List[PrimitiveCommand],desc:String,autostart:Boolean):Boolean = {
+    logger.info(desc+"="+cmds.size)
     var intermediate = cmds.forall(c=> {
         try{ c.execute } catch {
           case _ @ e => internalLog.error("ART2 DEPLOY ERROR="+e);false
         }
       })
-    if(intermediate){
+
+    if(intermediate && autostart){
       intermediate = cmds.forall(c=> {
           try{
             c.getLastExecutionBundle match {
@@ -55,51 +60,72 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           }
         })
     }
+    logger.info("Result : "+intermediate)
     intermediate
   }
 
 
-  def deploy(model : AdaptationModel) = {
+  def deploy(model : AdaptationModel,nodeName:String) = {
     var executedCommandTP :List[PrimitiveCommand] = List()
     var executedCommandCT :List[PrimitiveCommand] = List()
     var executedCommandCI :List[PrimitiveCommand] = List()
+    var executedCommandBI :List[PrimitiveCommand] = List()
 
-    var listPrimitive = plan(model)
-    internalLog.debug("plansize="+listPrimitive.size)    
-    listPrimitive foreach{ p => p match {
+    var stopCommand :List[PrimitiveCommand] = List()
+    var startCommand :List[PrimitiveCommand] = List()
+
+    // var listPrimitive = plan(model)
+    //println("plansize="+listPrimitive.size);
+    model.getAdaptations foreach{ p => p match {
         //ThirdParty
         case tpa : AddThirdParty =>executedCommandTP = executedCommandTP ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
         case tpa : RemoveThirdParty =>executedCommandTP = executedCommandTP ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
-          //ComponentType
-        case cta : AddComponentType =>executedCommandCT = executedCommandCT ++ List(AddComponentTypeCommand(cta.getRef,ctx))
-        case cta : RemoveComponentType =>executedCommandCT = executedCommandCT ++ List(RemoveComponentTypeCommand(cta.getRef,ctx))
-          //ComponentInstance
-        case ca : AddComponentInstance =>executedCommandCI = executedCommandCI ++ List(AddComponentInstanceCommand(ca.getRef,ctx))
-        case ca : RemoveComponentInstance =>executedCommandCI = executedCommandCI ++ List(RemoveComponentInstanceCommand(ca.getRef,ctx))
+          //Type
+        case cta : AddType =>executedCommandCT = executedCommandCT ++ List(AddTypeCommand(cta.getRef,ctx))
+        case cta : RemoveType =>executedCommandCT = executedCommandCT ++ List(RemoveTypeCommand(cta.getRef,ctx))
+          //Instance
+        case ca : AddInstance => {
+            executedCommandCI = executedCommandCI ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
+            if(ca.getRef.isInstanceOf[ComponentInstance]){
+              startCommand = startCommand ++ List(StartComponentCommand(ca.getRef,ctx,nodeName))
+            }
+          }
+        case ca : RemoveInstance =>{
+            executedCommandCI = executedCommandCI ++ List(RemoveInstanceCommand(ca.getRef,ctx,nodeName))
+            if(ca.getRef.isInstanceOf[ComponentInstance]){
+              stopCommand = stopCommand ++ List(StopComponentCommand(ca.getRef,ctx,nodeName))
+            }
+          }
+          //Binding
+        case ca : AddBinding =>executedCommandBI = executedCommandBI ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
+        case ca : RemoveBinding =>executedCommandBI = executedCommandBI ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
+
         case _ => internalLog.error("Unknow art2 adaptation primitive");false
       }
     }
 
     var executionResult = true
-    internalLog.debug("Phase 1 install ThirdParty "+executedCommandTP.size)
-    if(executionResult){ executionResult = phase(executedCommandTP) }
-   internalLog.debug("Phase 2 install ComponentType "+executedCommandCT.size)
-    if(executionResult){ executionResult = phase(executedCommandCT) }
-   internalLog.debug("Phase 3 install ComponentInstance "+executedCommandCI.size)
-    if(executionResult){ executionResult = phase(executedCommandCI) }
 
+    if(executionResult){ executionResult=phase(stopCommand,"Phase 0 STOP COMPONENT",false) }
+    if(executionResult){ executionResult=phase(executedCommandTP,"Phase 1 install ThirdParty",true) }
+    if(executionResult){ executionResult=phase(executedCommandCT,"Phase 2 install ComponentType",true) }
+    if(executionResult){ executionResult=phase(executedCommandCI,"Phase 3 install ComponentInstance",true) }
+    if(executionResult){ executionResult=phase(executedCommandBI,"Phase 4 install Bindings",false) }
+    if(executionResult){ executionResult=phase(startCommand,"Phase 5 START COMPONENT",false) }
     executionResult
   }
 
 
   /* Simple plan algorithme / separe primitive type */
-  def plan(model : AdaptationModel) : List[AdaptationPrimitive] = {
-    var thirdPartiesAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ThirdPartyAdaptation] }).toList
-    var componentTypeAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ComponentTypeAdaptation] }).toList
-    var componentInstanceAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ComponentInstanceAdaptation] }).toList
-    var res = thirdPartiesAdaptations ++ componentTypeAdaptations ++ componentInstanceAdaptations
-    res.toList
-  }
+  /*
+   def plan(model : AdaptationModel) : List[AdaptationPrimitive] = {
+   var thirdPartiesAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[ThirdPartyAdaptation] }).toList
+   var componentTypeAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[TypeAdaptation] }).toList
+   var componentInstanceAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[InstanceAdaptation] }).toList
+   var bindingAdaptations = model.getAdaptations.filter({a => a.isInstanceOf[BindingAdaptation] }).toList
+   var res = thirdPartiesAdaptations ++ componentTypeAdaptations ++ componentInstanceAdaptations ++ bindingAdaptations
+   res.toList
+   }*/
   
 
 }

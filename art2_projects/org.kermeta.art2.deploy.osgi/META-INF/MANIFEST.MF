@@ -8,16 +8,18 @@ Built-By: ffouquet
 Tool: Bnd-0.0.311
 Bundle-Name: ART2 :: Deploy :: OSGI
 Created-By: Apache Maven Bundle Plugin
-Bundle-Version: 2.0.0.SNAPSHOT
 Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1282643037332
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1284561229621
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.kermeta.art2.adaptation.deploy.osgi.Art2DeployAc
+ tivator
 Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
  kermeta.art2,org.kermeta.art2.api.service.adaptation.deploy,org.kerme
- ta.art2.framework,org.kermeta.art2.framework.aspects,org.kermeta.art2
- adaptation,org.osgi.framework;version="1.5",org.osgi.service.blueprin
- t.container;version="1.0",scala,scala.collection,scala.collection.gen
- eric,scala.collection.immutable,scala.collection.mutable,scala.reflec
- t,scala.runtime,scala.xml
+ ta.art2.framework,org.kermeta.art2.framework.message,org.kermeta.art2
+ adaptation,org.osgi.framework;version="1.5",org.slf4j;version="1.6",s
+ cala,scala.actors,scala.collection,scala.collection.generic,scala.col
+ lection.immutable,scala.collection.mutable,scala.reflect,scala.runtim
+ e
 Bundle-SymbolicName: org.kermeta.art2.deploy.osgi
 

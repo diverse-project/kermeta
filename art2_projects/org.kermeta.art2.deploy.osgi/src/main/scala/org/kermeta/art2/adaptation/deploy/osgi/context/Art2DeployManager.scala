@@ -5,10 +5,8 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.context
 
-import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.service.blueprint.container.BlueprintContainer;
 
 class Art2DeployManager {
 
@@ -16,8 +14,8 @@ class Art2DeployManager {
   def setBundle(b : Bundle)  = { bundle = b }
   var bundleContext : BundleContext = null;
   def setBundleContext(bc : BundleContext) = bundleContext = bc
-  var bundleContainer : BlueprintContainer = null;
-  def setBundleContainer(bc : BlueprintContainer) = bundleContainer = bc
+  //var bundleContainer : BlueprintContainer = null;
+ // def setBundleContainer(bc : BlueprintContainer) = bundleContainer = bc
  // var modelHandler : Art2ModelHandlerService = null;
 //  def setModelHandler(mh : Art2ModelHandlerService) = modelHandler = mh
 

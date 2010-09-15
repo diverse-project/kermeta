@@ -5,7 +5,7 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.command.generator
 
-import org.kermeta.art2.Binding
+
 import org.kermeta.art2.ComponentInstance
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,7 +16,7 @@ import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 
 object AddComponentInstanceGenerator {
-
+/*
 	 var internalLog : Logger = LoggerFactory.getLogger("org.kermeta.art2.deploy.osgi.AddComponentInstanceGenerator")
 	 
   def generate(c : ComponentInstance) : String = {
@@ -130,5 +130,5 @@ object AddComponentInstanceGenerator {
     </blueprint>;
     content.toString
   }
-
+*/
 }
