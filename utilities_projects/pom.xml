@@ -27,8 +27,8 @@
 	
 	<modules>
     		<module>org.kermeta.utilities.eclipse.jface</module>
-    	<!-- 	<module>fr.irisa.triskell.cache.utilities</module>
-    		<module>org.kermeta.utils.provisionner4eclipse</module> -->
+    	 	<module>fr.irisa.triskell.cache.utilities</module>
+    		<module>org.kermeta.utils.provisionner4eclipse</module> 
 	</modules>
 
 	<!-- <dependencies>
