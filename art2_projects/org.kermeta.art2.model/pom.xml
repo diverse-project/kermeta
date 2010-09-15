@@ -9,7 +9,7 @@
     <packaging>bundle</packaging>
 
 
-    <groupId>${parent.groupId}</groupId>
+    <groupId>${project.parent.groupId}</groupId>
     <version>${art2.version}</version>
 
     <parent>
