@@ -16,8 +16,8 @@ public class Art2UIKernel {
 
     public Art2UIKernel(){
         uifactory = new Art2UIFactory(this);
-        modelPanel = new ModelPanel();
         modelHandler = new Art2Handler();
+        modelPanel = uifactory.createModelPanelUI(modelHandler.getActualModel());
     }
 
     private Art2UIFactory uifactory;

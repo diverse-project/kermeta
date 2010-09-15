@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.Random;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -17,9 +16,12 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 import org.eclipse.emf.common.util.URI;
+import org.kermeta.art2.ChannelType;
+import org.kermeta.art2.ComponentType;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
+import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 
 /**
@@ -41,7 +43,7 @@ public class LoadNewLibCommand implements Command {
         if (filechooser.getSelectedFile() != null) {
             JarFile jar;
             try {
-            	
+
                 jar = new JarFile(filechooser.getSelectedFile().getAbsoluteFile()); //new JarFile(filechooser.getSelectedFile().getAbsoluteFile().toURI().toString());
                 JarEntry entry = jar.getJarEntry("ART2-INF/art2Lib.art2");
                 if (entry != null) {
@@ -53,10 +55,16 @@ public class LoadNewLibCommand implements Command {
                     ContainerRoot nroot = Art2XmiHelper.load(path);
                     kernel.getModelHandler().merge(nroot);
                     kernel.getEditorPanel().getPalette().clear();
-                    for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
-                        for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
-                            ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
-                            kernel.getEditorPanel().getPalette().addComponentTypePanel(ctp, ctl.getName());
+                    for (org.kermeta.art2.TypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
+                        for (org.kermeta.art2.TypeDefinition ct : ctl.getSubTypes()) {
+                            if (ct instanceof ComponentType) {
+                                ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI((ComponentType) ct);
+                                kernel.getEditorPanel().getPalette().addTypeDefinitionPanel(ctp, ctl.getName());
+                            }
+                            if (ct instanceof ChannelType) {
+                                ChannelTypePanel ctp = kernel.getUifactory().createChannelTypeUI((ChannelType) ct);
+                                kernel.getEditorPanel().getPalette().addTypeDefinitionPanel(ctp, ctl.getName());
+                            }
                         }
                     }
                     kernel.getEditorPanel().doLayout();
@@ -86,7 +94,7 @@ public class LoadNewLibCommand implements Command {
         inputStream.close();
         out.flush();
         out.close();
-        
+
         return URI.createFileURI(temp.getAbsolutePath()).toString();
     }
 }

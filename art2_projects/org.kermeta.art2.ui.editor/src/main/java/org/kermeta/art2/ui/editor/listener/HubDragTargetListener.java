@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddMBindingCommand;
-import org.kermeta.art2.ui.framework.elements.HubPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 
 /**
  * implementation of the target listener
@@ -22,14 +22,14 @@ import org.kermeta.art2.ui.framework.elements.HubPanel;
 public class HubDragTargetListener extends DropTarget {
 
     Art2UIKernel kernel;
-    HubPanel target;
+    ChannelPanel target;
 
     /**
      * constructor
      * @param _p the table view panel
      * @param _target the view of the component
      */
-    public HubDragTargetListener(HubPanel _target, Art2UIKernel _kernel) {
+    public HubDragTargetListener(ChannelPanel _target, Art2UIKernel _kernel) {
         kernel = _kernel;
         target = _target;
     }

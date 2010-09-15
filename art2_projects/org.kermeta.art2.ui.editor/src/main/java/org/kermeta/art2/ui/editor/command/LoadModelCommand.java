@@ -4,19 +4,19 @@
  */
 package org.kermeta.art2.ui.editor.command;
 
-import org.kermeta.art2.Binding;
+
+import org.kermeta.art2.Channel;
 import org.kermeta.art2.ComponentInstance;
+import org.kermeta.art2.ComponentType;
 import org.kermeta.art2.ContainerNode;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.MBinding;
-import org.kermeta.art2.MessageHub;
 import org.kermeta.art2.Port;
-import org.kermeta.art2.PortTypeRef;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
-import org.kermeta.art2.ui.framework.elements.HubPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
@@ -43,10 +43,14 @@ public class LoadModelCommand implements Command {
         /* Synch every UI Component */
         //LOAD COMPONENT TYPE
         kernel.getEditorPanel().getPalette().clear();
-        for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
-            for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
-                ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
-                kernel.getEditorPanel().getPalette().addComponentTypePanel(ctp, ctl.getName());
+        for (org.kermeta.art2.TypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
+            for (org.kermeta.art2.TypeDefinition ct : ctl.getSubTypes()) {
+                if(ct instanceof ComponentType){
+                ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI((ComponentType)ct);
+                kernel.getEditorPanel().getPalette().addTypeDefinitionPanel(ctp, ctl.getName());
+                }
+
+
             }
         }
 
@@ -73,16 +77,17 @@ public class LoadModelCommand implements Command {
             }
         }
         //LOAD HUB
-        for (MessageHub hub : kernel.getModelHandler().getActualModel().getMessageHub()) {
-            HubPanel newhubpanel = kernel.getUifactory().createHub(hub);
+        for (Channel hub : kernel.getModelHandler().getActualModel().getHubs()) {
+            ChannelPanel newhubpanel = kernel.getUifactory().createHub(hub);
             kernel.getModelPanel().addHub(newhubpanel);
         }
         
         //LOAD BINDING
+        /*
         for (Binding binding : kernel.getModelHandler().getActualModel().getBindings()) {
             org.kermeta.art2.ui.framework.elements.Binding uib = kernel.getUifactory().createBinding(binding);
             kernel.getModelPanel().addBinding(uib);
-        }
+        }*/
 
         //LOAD MBINDING
         for (MBinding binding : kernel.getModelHandler().getActualModel().getMBindings()) {

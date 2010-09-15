@@ -36,9 +36,8 @@ public class SelectComponentCommand implements Command {
                 kernel.getEditorPanel().unshowPropertyFor(component);
             }
 
-            List<org.kermeta.art2.Binding> relatedbinding = Art2Utility.getRelatedBinding(instance, kernel.getModelHandler().getActualModel());
-
-            for(org.kermeta.art2.Binding b : relatedbinding){
+            List<org.kermeta.art2.MBinding> relatedbinding = Art2Utility.getRelatedBinding(instance, kernel.getModelHandler().getActualModel());
+            for(org.kermeta.art2.MBinding b : relatedbinding){
                 Binding belem = (Binding) kernel.getUifactory().getMapping().get(b);
                 belem.setSelected(!belem.getSelected());
             }

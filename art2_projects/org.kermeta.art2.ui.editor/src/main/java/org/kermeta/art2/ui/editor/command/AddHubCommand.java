@@ -3,9 +3,10 @@
  * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.command;
 
-import org.kermeta.art2.MessageHub;
+import org.kermeta.art2.Channel;
+import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
-import org.kermeta.art2.ui.framework.elements.HubPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 
 /**
  *
@@ -21,13 +22,14 @@ public class AddHubCommand implements Command {
 
     @Override
     public void execute(Object p) {
-        MessageHub newhub = org.kermeta.art2.Art2Factory.eINSTANCE.createMessageHub();
+        Channel newhub = org.kermeta.art2.Art2Factory.eINSTANCE.createChannel();
+        ChannelType type = (ChannelType) kernel.getUifactory().getMapping().get(p);
+        newhub.setTypeDefinition(type);
+
         //CREATE NEW NAME
-        newhub.setName("hub-"+kernel.getModelHandler().getActualModel().getMessageHub().size());
-        HubPanel newhubpanel = kernel.getUifactory().createHub(newhub);
-        kernel.getModelHandler().getActualModel().getMessageHub().add(newhub);
+        newhub.setName("hub-" + kernel.getModelHandler().getActualModel().getHubs().size());
+        ChannelPanel newhubpanel = kernel.getUifactory().createHub(newhub);
+        kernel.getModelHandler().getActualModel().getHubs().add(newhub);
         kernel.getModelPanel().addHub(newhubpanel);
     }
-
-
 }

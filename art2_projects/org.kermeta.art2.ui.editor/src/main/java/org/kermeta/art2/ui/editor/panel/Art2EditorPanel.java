@@ -35,9 +35,9 @@ public class Art2EditorPanel extends JPanel {
     }
     private JXPanel leftpanel = new JXPanel();
     private JXPanel southpanel = new JXPanel();
-    private ComponentTypePalette palette = new ComponentTypePalette();
+    private TypeDefinitionPalette palette = new TypeDefinitionPalette();
 
-    public ComponentTypePalette getPalette() {
+    public TypeDefinitionPalette getPalette() {
         return palette;
     }
     private CommandPanel commandPanel;

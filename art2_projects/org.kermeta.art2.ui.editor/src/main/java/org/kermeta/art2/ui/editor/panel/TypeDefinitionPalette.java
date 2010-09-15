@@ -17,12 +17,12 @@ import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
  *
  * @author ffouquet
  */
-public class ComponentTypePalette extends JScrollPane {
+public class TypeDefinitionPalette extends JScrollPane {
 
     private JPanel subpanels = new JPanel();
     private List<ComponentTypeLibraryPalette> libPalettes = new ArrayList<ComponentTypeLibraryPalette>();
 
-    public void addComponentTypePanel(ComponentTypePanel ctp, String libName) {
+    public void addTypeDefinitionPanel(JPanel ctp, String libName) {
         ComponentTypeLibraryPalette foundP = null;
         for (ComponentTypeLibraryPalette p : libPalettes) {
             if (p.getName().equals(libName)) {
@@ -44,7 +44,7 @@ public class ComponentTypePalette extends JScrollPane {
         subpanels.removeAll();
     }
 
-    public ComponentTypePalette() {
+    public TypeDefinitionPalette() {
         subpanels.setOpaque(false);
         subpanels.setLayout(new BoxLayout(subpanels, BoxLayout.PAGE_AXIS));
         setOpaque(false);

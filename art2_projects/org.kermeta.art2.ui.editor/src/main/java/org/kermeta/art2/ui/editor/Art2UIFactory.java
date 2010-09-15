@@ -6,20 +6,25 @@ package org.kermeta.art2.ui.editor;
 import org.kermeta.art2.ComponentInstance;
 import org.kermeta.art2.ComponentType;
 import java.awt.Component;
-import javax.swing.JComponent;
+import org.kermeta.art2.ChannelType;
+import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.ui.editor.command.SelectComponentCommand;
 import org.kermeta.art2.ui.editor.command.SelectNodeCommand;
+import org.kermeta.art2.ui.editor.listener.ChannelTypeDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.CommandMouseListener;
 import org.kermeta.art2.ui.editor.listener.ComponentDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.ComponentTypeDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.HubDragTargetListener;
+import org.kermeta.art2.ui.editor.listener.ModelDragTargetListener;
 import org.kermeta.art2.ui.editor.listener.NodeDragTargetListener;
 import org.kermeta.art2.ui.editor.listener.PortDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.PortDragTargetListener;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
-import org.kermeta.art2.ui.framework.elements.HubPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
+import org.kermeta.art2.ui.framework.elements.ModelPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 
@@ -40,9 +45,24 @@ public class Art2UIFactory {
         return mapping;
     }
 
+    public ModelPanel createModelPanelUI(ContainerRoot ct) {
+        ModelPanel mui = new ModelPanel();
+        ((Component) mui).setDropTarget(new ModelDragTargetListener(mui, kernel));
+        mapping.bind(mui, ct);
+        return mui;
+    }
+
     public ComponentTypePanel createComponentTypeUI(ComponentType ct) {
         ComponentTypePanel ctui = new ComponentTypePanel(ct.getName());
         ComponentTypeDragSourceListener listener = new ComponentTypeDragSourceListener(ctui, kernel);
+        mapping.bind(ctui, ct);
+        return ctui;
+    }
+
+    public ChannelTypePanel createChannelTypeUI(ChannelType ct) {
+        ChannelTypePanel ctui = new ChannelTypePanel();
+        ctui.setTitle(ct.getName());
+        ChannelTypeDragSourceListener listener = new ChannelTypeDragSourceListener(ctui, kernel);
         mapping.bind(ctui, ct);
         return ctui;
     }
@@ -78,8 +98,8 @@ public class Art2UIFactory {
         return nui;
     }
 
-    public HubPanel createHub(org.kermeta.art2.MessageHub hub) {
-        HubPanel hui = new HubPanel();
+    public ChannelPanel createHub(org.kermeta.art2.Channel hub) {
+        ChannelPanel hui = new ChannelPanel();
         ((Component) hui).setDropTarget(new HubDragTargetListener(hui, kernel));
         hui.setTitle(hub.getName());
         mapping.bind(hui, hub);
@@ -101,20 +121,20 @@ public class Art2UIFactory {
         return pui;
     }
 
+    /*
     public Binding createBinding(org.kermeta.art2.Binding mb) {
-        Binding bui = new Binding(Binding.Type.simple);
-        PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(0));
-        PortPanel toPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(1));
-        bui.setFrom(fromPortPanel);
-        bui.setTo(toPortPanel);
-        mapping.bind(bui, mb);
-        return bui;
-    }
-
+    Binding bui = new Binding(Binding.Type.simple);
+    PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(0));
+    PortPanel toPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPorts().get(1));
+    bui.setFrom(fromPortPanel);
+    bui.setTo(toPortPanel);
+    mapping.bind(bui, mb);
+    return bui;
+    }*/
     public Binding createMBinding(org.kermeta.art2.MBinding mb) {
         Binding bui = new Binding(Binding.Type.multi);
         PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPort());
-        HubPanel toPortPanel = (HubPanel) kernel.getUifactory().getMapping().get(mb.getHub());
+        ChannelPanel toPortPanel = (ChannelPanel) kernel.getUifactory().getMapping().get(mb.getHub());
         bui.setFrom(fromPortPanel);
         bui.setTo(toPortPanel);
         mapping.bind(bui, mb);

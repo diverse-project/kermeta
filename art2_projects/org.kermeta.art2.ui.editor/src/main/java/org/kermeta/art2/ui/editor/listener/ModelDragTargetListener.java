@@ -5,35 +5,46 @@
 package org.kermeta.art2.ui.editor.listener;
 
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
-import org.kermeta.art2.ui.editor.command.AddMBindingCommand;
-import org.kermeta.art2.ui.framework.elements.PortPanel;
+import org.kermeta.art2.ui.editor.command.AddComponentCommand;
+import org.kermeta.art2.ui.editor.command.AddHubCommand;
+import org.kermeta.art2.ui.editor.command.MoveComponentCommand;
+import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
+import org.kermeta.art2.ui.framework.elements.ComponentPanel;
+import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
+import org.kermeta.art2.ui.framework.elements.ModelPanel;
+import org.kermeta.art2.ui.framework.elements.NodePanel;
 
 /**
  * implementation of the target listener
  * @author francoisfouquet
  */
-public class PortDragTargetListener extends DropTarget {
+public class ModelDragTargetListener extends DropTarget {
 
     Art2UIKernel kernel;
-    PortPanel target;
+    ModelPanel target;
 
     /**
      * constructor
      * @param _p the table view panel
      * @param _target the view of the component
      */
-    public PortDragTargetListener(PortPanel _target, Art2UIKernel _kernel) {
+    public ModelDragTargetListener(ModelPanel _target, Art2UIKernel _kernel) {
         kernel = _kernel;
         target = _target;
+    }
+
+    private Boolean isDropAccept(Object o) {
+        if (o instanceof ChannelTypePanel) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -42,38 +53,32 @@ public class PortDragTargetListener extends DropTarget {
      */
     @Override
     public void drop(DropTargetDropEvent arg0) {
-
-        //DEPRECATED BEFORE MBINDING
-
-        /*
         try {
-            Object draggedPanel = arg0.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-
-            if (target.getNature().equals(PortPanel.PortNature.SERVICE)) {
-                AddBindingCommand command = new AddBindingCommand();
-                command.setKernel(kernel);
-                command.setTarget(target);
-                command.execute(draggedPanel);
+            Object o = arg0.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+            if (isDropAccept(o)) {
+                if (o instanceof ChannelTypePanel) {
+                    AddHubCommand command = new AddHubCommand();
+                    command.setKernel(kernel);
+                    command.execute(o);
+                }
                 kernel.getModelPanel().repaint();
                 kernel.getModelPanel().revalidate();
                 arg0.dropComplete(true);
             } else {
                 arg0.rejectDrop();
             }
-
-
-
         } catch (Exception ex) {
-            Logger.getLogger(PortDragTargetListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelDragTargetListener.class.getName()).log(Level.SEVERE, null, ex);
             arg0.rejectDrop();
-        }*/
+        }
+
     }
 
     /**
      * not implemented
      * @param dtde
      */
-    //@Override
+    @Override
     public void dragEnter(DropTargetDragEvent dtde) {
     }
 
@@ -81,7 +86,7 @@ public class PortDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dragExit(DropTargetEvent arg0) {
     }
 
@@ -89,7 +94,7 @@ public class PortDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dragOver(DropTargetDragEvent arg0) {
     }
 
@@ -97,7 +102,7 @@ public class PortDragTargetListener extends DropTarget {
      * not implemented
      * @param arg0
      */
-    //@Override
+    @Override
     public void dropActionChanged(DropTargetDragEvent arg0) {
     }
 }
