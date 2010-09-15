@@ -10,6 +10,6 @@ import org.kermeta.art2adaptation.AdaptationModel;
  */
 public interface Art2AdaptationDeployService {
 
-    public boolean deploy(AdaptationModel model);
+    public boolean deploy(AdaptationModel model,String nodeName);
 
 }

@@ -20,4 +20,6 @@ public interface Art2ModelHandlerService {
 
     public List<ContainerRoot> getPreviousModel();
 
+    public String getNodeName();
+
 }
