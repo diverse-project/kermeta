@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
-import org.kermeta.art2.ui.framework.elements.HubPanel;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
 
@@ -39,7 +39,7 @@ public class Main {
         model.addNode(node1);
 
 
-        HubPanel hub1 = new HubPanel();
+        ChannelPanel hub1 = new ChannelPanel();
         hub1.setTitle("topic1");
         model.addHub(hub1);
 

@@ -25,7 +25,7 @@ import org.kermeta.art2.ui.framework.TitledElement;
  *
  * @author ffouquet
  */
-public class HubPanel extends JPanel implements TitledElement,SelectElement {
+public class ChannelPanel extends JPanel implements TitledElement,SelectElement {
 
     private String title = "";
 
@@ -35,10 +35,15 @@ public class HubPanel extends JPanel implements TitledElement,SelectElement {
             title = _title;
         }
     }
+
+    public String getTitle(){
+        return title;
+    }
+
     private Color borderColor = Color.WHITE;
     private Color actualFillColor = new Color(255, 127, 36, 180);
 
-    public HubPanel() {
+    public ChannelPanel() {
         setOpaque(false);
         this.setLayout(null);
         this.setPreferredSize(new Dimension(100, 100));
