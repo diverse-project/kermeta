@@ -6,7 +6,7 @@
     <artifactId>art2.artcomponent.root</artifactId>
     <packaging>pom</packaging>
     <version>2</version>
-    <name>ART2 :: Root</name>
+    <name>ART2 :: ArtComponent</name>
     <url>http://maven.apache.org</url>
 
     <parent>
@@ -45,7 +45,7 @@
         </plugins>
     </build>
 
-	<dependencies>
+    <dependencies>
 		<!-- all ART components will need ART2 to compile -->
         <dependency>
             <groupId>org.kermeta.art2</groupId>
@@ -57,19 +57,7 @@
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
-	</dependencies>
+    </dependencies>
 
-    <repositories>
-        <repository>
-            <id>triskellPublic</id>
-            <url>http://tipimouss.irisa.fr/maven2</url>
-        </repository>
-        <repository>
-            <id>triskellPublicSnapShots</id>
-            <url>http://tipimouss.irisa.fr/maven2-snapshots</url>
-        </repository>
-    </repositories>
-    <distributionManagement>
-    </distributionManagement>
 
 </project>
