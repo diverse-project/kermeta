@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>art2.framework</artifactId>
     <packaging>bundle</packaging>
-    <name>ART2 :: FRAMEWORK</name>
+    <name>ART2 :: Framework</name>
 
     <groupId>${project.parent.groupId}</groupId>
     <version>${art2.version}</version>
@@ -31,7 +31,7 @@
             <artifactId>art2.annotation</artifactId>
             <version>${art2.version}</version>
         </dependency>
-
+<!--
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
@@ -40,7 +40,33 @@
             <optional>true</optional>
             <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
-     
+     -->
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-lgpl</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-lgpl</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -55,8 +81,8 @@
                     <instructions>
                         <Private-Package></Private-Package>
                         <Bundle-SymbolicName>org.kermeta.art2.framework</Bundle-SymbolicName>
-                        <Import-Package>!com.sun.*,!org.kermeta.art2.annotation,*</Import-Package>
-                        <Export-Package>org.kermeta.art2.framework,org.kermeta.art2.framework.*</Export-Package>
+                        <Import-Package>!org.joda.*,!com.sun.*,!org.kermeta.art2.annotation,!org.codehaus.jackson.*,*</Import-Package>
+                        <Export-Package>org.kermeta.art2.framework,org.kermeta.art2.framework.*,org.codehaus.jackson.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

@@ -19,10 +19,13 @@ case class PortAspect(p : Port) {
 
   def isBind() : Boolean ={
     var container = p.eContainer.eContainer.eContainer.asInstanceOf[ContainerRoot]
+    var mb = p.getPortTypeRef.getRef
+    container.getMBindings.exists({mb => mb.getPort == p})
+    /*
     p.getPortTypeRef.getRef match {
       case mpt : MessagePortType => container.getMBindings.exists({mb => mb.getPort == p})
       case spt : ServicePortType => container.getBindings.exists({b => b.isUsingPort(p)})
-    }
+    }*/
   }
 
   def getProxyURI() : String = {
@@ -38,6 +41,7 @@ case class PortAspect(p : Port) {
     }
   }
 
+  /*
   def getProxyHubType() : String = {
     var container : ContainerRoot = p.eContainer.eContainer.eContainer.asInstanceOf[ContainerRoot]
     if(p.isBind){
@@ -55,7 +59,7 @@ case class PortAspect(p : Port) {
     } else {
       ""
     }
-  }
+  }*/
 
 }
 

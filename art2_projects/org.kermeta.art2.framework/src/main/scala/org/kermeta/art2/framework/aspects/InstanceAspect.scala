@@ -9,11 +9,12 @@ import org.kermeta.art2._
 import scala.collection.JavaConversions._
 import Art2Aspects._
 
-case class ComponentTypeAspect(ct : ComponentType) {
 
-  def isModelEquals(pct : ComponentType) : Boolean = {
-    pct.getName == ct.getName
-    /* deep compare */
+case class InstanceAspect(cself : org.kermeta.art2.Instance) {
+
+  def isModelEquals(c : org.kermeta.art2.Instance) : Boolean = {
+    cself.getName == c.getName
+    /* TODO deep compare */
   }
 
 }

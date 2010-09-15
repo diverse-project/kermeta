@@ -2,7 +2,7 @@
  * License    : EPL 								
  * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 
-package org.kermeta.art2.framework
+package org.kermeta.art2.framework.generator
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.MessagePortType
@@ -10,6 +10,7 @@ import org.kermeta.art2.ServicePortType
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.apt.Filer
 import scala.collection.JavaConversions._
+import org.kermeta.art2.ComponentType
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 object Art2Generator {
@@ -18,37 +19,9 @@ object Art2Generator {
     "file://" + env.getOptions.find({op => op._1.contains("art2.lib.target")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
   }
 
-  /* GENERATE FACTORY FOR COMPONENT & PORT  */
-  def generateFactory(root:ContainerRoot,filer:Filer){
-    root.getComponentTypes.foreach{ct=>
-      var componentPackage = ct.getFactoryBean().substring(0, ct.getFactoryBean().lastIndexOf("."));
-      var factoryName = ct.getFactoryBean.substring(ct.getFactoryBean.lastIndexOf(".")+1)
-      var componentBean = ct.getFactoryBean.substring(0, ct.getFactoryBean.indexOf("Factory"))
-      var wrapper = filer.createSourceFile(ct.getFactoryBean);
-      wrapper.append("package "+componentPackage+";\n");
-      wrapper.append("public class "+factoryName+"{\n")
-      wrapper.append("public static "+componentBean+" create"+ct.getName+"(){"+"return new "+componentBean+"();}\n")
-      ct.getProvided.foreach{ref=>
-        var portName = ct.getName()+"PORT"+ref.getName();
-        var portNameProxy = ct.getName()+"PORTPROXY"+ref.getName();
-        wrapper.append("public static "+portName+" create"+portName+"(){ return new "+portName+"();}\n")
-        wrapper.append("public static "+portNameProxy+" create"+portNameProxy+"(){ return new "+portNameProxy+"();}\n")
-      }
-      ct.getRequired.foreach{ref=>
-        var portName = ct.getName()+"PORT"+ref.getName();
-        var portNameProxy = ct.getName()+"PORTPROXY"+ref.getName();
-        //wrapper.append("public static "+portName+" create"+portName+"(){ return new "+portName+"();}\n")
-        wrapper.append("public static "+portNameProxy+" create"+portNameProxy+"(){ return new "+portNameProxy+"();}\n")
-      }
-
-      wrapper.append("}\n")
-      wrapper.close
-    }
-  }
-
   /* GENERATE WRAPPER FOR DECLARATIF PORT */
   def generatePortWrapper(root:ContainerRoot,filer:Filer){
-    root.getComponentTypes.foreach{ct=>
+    root.getTypeDefinitions.filter(p=> p.isInstanceOf[ComponentType]).foreach{ctt=> var ct = ctt.asInstanceOf[ComponentType]
       ct.getProvided.foreach{ref=>
         var portPackage = ct.getFactoryBean().substring(0, ct.getFactoryBean().lastIndexOf("."));
         var portName = ct.getName()+"PORT"+ref.getName();
@@ -106,13 +79,15 @@ object Art2Generator {
   }
     
   /*  */
-  def generatePortProxy(root:ContainerRoot,filer:Filer){
-    root.getComponentTypes.foreach{ct=>
-      ct.getProvided.foreach{ref=> Art2ProvidedProxyGenerator.generate(root, filer, ct, ref)  }
-      ct.getRequired.foreach{ref=> Art2RequiredProxyGenerator.generate(root, filer, ct, ref)  }
+
+
+  def generatePort(root:ContainerRoot,filer:Filer){
+    root.getTypeDefinitions.filter(p=> p.isInstanceOf[ComponentType]).foreach{ctt=> var ct = ctt.asInstanceOf[ComponentType]
+      ct.getProvided.foreach{ref=> Art2ProvidedPortGenerator.generate(root, filer, ct, ref)  }
+      //ct.getProvided.foreach{ref=> Art2ProvidedProxyGenerator.generate(root, filer, ct, ref)  }
+      ct.getRequired.foreach{ref=> Art2RequiredPortGenerator.generate(root, filer, ct, ref)  }
     }
-
-
   }
+
 
 }

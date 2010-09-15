@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.framework
+package org.kermeta.art2.framework.generator
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.MessagePortType

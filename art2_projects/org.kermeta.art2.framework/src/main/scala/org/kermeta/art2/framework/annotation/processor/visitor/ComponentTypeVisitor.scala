@@ -26,30 +26,39 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
 
     componentType = Art2Factory.eINSTANCE.createComponentType();
-
     var ctname = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).name
     if(ctname.equals("empty")){
       ctname = classdef.getSimpleName
     }
     componentType.setName(ctname)
-    
+    componentType.setBean(classdef.getQualifiedName)
     componentType.setFactoryBean(classdef.getQualifiedName+"Factory")
 
-    var ctLibName = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).libName
+    /* CREATE COMPONENT TYPE DEPLOY UNIT IF NEEDED */
+    var unitName = env.getOptions.find({op => op._1.contains("art2.lib.id")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
+    var groupName = env.getOptions.find({op => op._1.contains("art2.lib.group")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
+    var version = env.getOptions.find({op => op._1.contains("art2.lib.version")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
+    var ctdeployunit = root.getDeployUnits.find({du => du.getUnitName == unitName && du.getGroupName == groupName && du.getVersion == version }) match {
+      case None => {
+          var newdeploy = Art2Factory.eINSTANCE.createDeployUnit
+          newdeploy.setUnitName(unitName)
+          newdeploy.setGroupName(groupName)
+          newdeploy.setVersion(version)
+          root.getDeployUnits.add(newdeploy)
+          newdeploy
+      }
+      case Some(fdu)=> fdu
+    }
+    componentType.setDeployUnit(ctdeployunit)
 
     /* CREATE FACTORY IF NEEDED */
+    var ctLibName = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentType]).libName
     root.getLibraries.find({lib=>lib.getName.equals(ctLibName)}) match {
-      case Some(lib)=> lib.getSubComponentTypes.add(componentType)
+      case Some(lib)=> lib.getSubTypes.add(componentType)
       case None => {
-          var newlib = Art2Factory.eINSTANCE.createComponentTypeLibrary
+          var newlib = Art2Factory.eINSTANCE.createTypeLibrary
           newlib.setName(ctLibName)
-          newlib.getSubComponentTypes.add(componentType)
-
-          /* INIT MAVEN INFO */
-          newlib.setUnitName(env.getOptions.find({op => op._1.contains("art2.lib.id")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
-          newlib.setGroupName(env.getOptions.find({op => op._1.contains("art2.lib.group")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
-          newlib.setVersion(env.getOptions.find({op => op._1.contains("art2.lib.version")}).getOrElse{("key=","")}._1.split('=').toList.get(1))
-
+          newlib.getSubTypes.add(componentType)
           root.getLibraries.add(newlib)
         }
     }
@@ -57,16 +66,15 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     /* CHECK THIRDPARTIES */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]).value.foreach{tp=>
-        
         var newThirdParty = Art2Factory.eINSTANCE.createDeployUnit
         newThirdParty.setName(tp.name)
         newThirdParty.setUrl(tp.url)
-        root.getThirdParties.find({etp => etp.getName == tp.name}) match {
+        root.getDeployUnits.find({etp => etp.getName == tp.name}) match {
           case Some(e) =>
           case None => {
-              root.getThirdParties.add(newThirdParty)
+              root.getDeployUnits.add(newThirdParty)
               componentType.getRequiredLibs.add(newThirdParty)
-          }
+            }
         }
 
       }
@@ -137,7 +145,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     //PROCESS SUB METHOD
     classdef.getMethods().foreach{method => method.accept(this) }
 
-    root.getComponentTypes.add(componentType)
+    root.getTypeDefinitions.add(componentType)
 
   }
 

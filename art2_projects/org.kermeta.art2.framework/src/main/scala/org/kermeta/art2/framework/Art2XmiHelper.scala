@@ -30,7 +30,9 @@ object Art2XmiHelper {
     var rs = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
     rs.getPackageRegistry().put(Art2Package.eNS_URI, Art2Package.eINSTANCE);
-    return rs.getResource(URI.createURI(uri), true).getContents().get(0).asInstanceOf[ContainerRoot];
+    var res = rs.getResource(URI.createURI(uri), true).getContents().get(0);
+    //println(res)
+    return res.asInstanceOf[ContainerRoot];
   }
 
   def loadStream(input : InputStream) : ContainerRoot = {

@@ -36,7 +36,7 @@ case class ComponentInstanceAspect(cself : ComponentInstance) {
 
     if(result) return result
 
-
+/*
     //ckeck all bindings from runtime where neededPorts used
     var neededBindingRuntime : List[Binding] = List()
     cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getBindings.foreach{b=>
@@ -66,7 +66,7 @@ case class ComponentInstanceAspect(cself : ComponentInstance) {
     } else {
       result =true
     }
-
+*/
     
 
     result

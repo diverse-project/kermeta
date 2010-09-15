@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.framework
+package org.kermeta.art2.framework.generator
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.MessagePortType
@@ -23,9 +23,10 @@ object Art2RequiredProxyGenerator {
     //var wrapper = filer.createSourceFile(portPackage+"."+portName);
     var wrapper = filer.createTextFile(com.sun.mirror.apt.Filer.Location.SOURCE_TREE, "", new File(portPackage.replace(".", "/")+"/"+portName+".scala"), "UTF-8");
     wrapper.append("package "+portPackage+";\n");
+    wrapper.append("import org.kermeta.art2.framework.Art2Actor;\n")
     wrapper.append("import org.kermeta.art2.framework.AbstractPort;\n");
     wrapper.append("import "+ref.getRef().getName()+";\n");
-    wrapper.append("class "+portName+" extends AbstractPort with "+ref.getRef().getName()+" {\n");
+    wrapper.append("class "+portName+" extends AbstractPort with "+ref.getRef().getName()+" with Art2Actor {\n");
     //wrapper.append("public "+portName+"(Object c){setComponent(c);}\n") /* AVOID CIRCULAR REFERENCE */
 
     wrapper.append("var delegate : org.kermeta.art2.framework.MessagePort = null\n")

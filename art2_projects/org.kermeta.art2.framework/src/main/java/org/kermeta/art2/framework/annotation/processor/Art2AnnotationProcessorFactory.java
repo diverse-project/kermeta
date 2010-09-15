@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+import org.kermeta.art2.annotation.ChannelTypeFragment;
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.Port;
 import org.kermeta.art2.annotation.Ports;
@@ -40,6 +41,7 @@ public class Art2AnnotationProcessorFactory implements
     @Override
     public Collection<String> supportedAnnotationTypes() {
         Collection<String> stype = new ArrayList();
+        stype.add(ChannelTypeFragment.class.getName());
         stype.add(ComponentType.class.getName());
         stype.add(Port.class.getName());
         stype.add(ProvidedPort.class.getName());
@@ -49,7 +51,6 @@ public class Art2AnnotationProcessorFactory implements
         stype.add(Start.class.getName());
         stype.add(Stop.class.getName());
         stype.add(Ports.class.getName());
-
         stype.add(ThirdParties.class.getName());
         stype.add(ThirdParty.class.getName());
 
