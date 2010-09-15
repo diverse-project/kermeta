@@ -25,7 +25,7 @@
         <osgi.nl>fr_FR</osgi.nl>
         <osgi.noShutdown>true</osgi.noShutdown>
         <consoleLog>true</consoleLog>
-        <art2.node.name>duke</art2.node.name>
+        <art2.node.name>duke.irisa.fr</art2.node.name>
     </properties>
 
     <build>
@@ -209,11 +209,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.6.1</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.entimid</groupId>
             <artifactId>entimid.framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        -->
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -234,19 +237,25 @@
             <artifactId>org.osgi.core</artifactId>
             <version>4.2.0</version>
         </dependency>
+
+
+        
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.equinox.common</artifactId>
             <version>[3.5.1.R35x_v20090807-1100,)</version>
         </dependency>
-
-
+<!--
          <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.workbench</artifactId>
             <version>2.0.0-SNAPSHOT</version>
         </dependency>
-
-
+-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.framework.bus.netty</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

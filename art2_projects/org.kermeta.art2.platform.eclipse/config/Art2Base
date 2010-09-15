@@ -1,16 +1,7 @@
-mvn:org.fusesource.commonman/commons-management
-mvn:org.apache.camel/camel-core
 mvn:org.kermeta.art2/art2.model
 mvn:org.kermeta.art2/art2.framework
-mvn:org.kermeta.art2/art2.ui.framework
-mvn:org.kermeta.art2/art2.ui.editor
 mvn:org.kermeta.language/language.model
 mvn:org.kermeta.traceability/traceability.model
 mvn:org.kermeta.language/language.api
-mvn:org.kermeta.language/language.builder.eclipse
 mvn:org.kermeta.language/language.loader.scala
 mvn:org.kermeta.language/language.texteditor.eclipse
-mvn:org.kermeta.eclipse/org.antlr.runtime
-mvn:org.kermeta.kp/kp.model
-mvn:org.kermeta.kp/kp.editor
-mvn:org.kermeta.kp/kp.editor.ui
