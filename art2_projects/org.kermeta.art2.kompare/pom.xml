@@ -25,8 +25,8 @@
                 <configuration>
                     <instructions>
                         <Bundle-Activator>org.kermeta.art2.kompare.Art2KompareActivator</Bundle-Activator>
-                        <Export-Package>org.kermeta.art2.kompare.*</Export-Package>
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>!org.kermeta.art2.kompare.*,*</Import-Package>
+                        <Private-Package>org.kermeta.art2.kompare.*</Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
