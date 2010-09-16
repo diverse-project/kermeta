@@ -6,20 +6,17 @@
 package org.kermeta.art2.core.impl
 
 import org.kermeta.art2.Art2Factory
-import org.kermeta.art2.Art2Package
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.api.service.core.kompare.ModelKompareService
 import org.kermeta.art2.framework.Art2Actor
 import org.kermeta.art2.framework.Art2XmiHelper
-import org.kermeta.art2adaptation.AdaptationModel
 import org.osgi.framework.BundleContext
 import org.slf4j.LoggerFactory
 import scala.reflect.BeanProperty
 import org.kermeta.art2.framework.message._
 import scala.actors.Actor
-import scala.actors.Scheduler
 import scala.collection.JavaConversions._
 
 class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
