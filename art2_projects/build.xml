@@ -42,9 +42,9 @@
 		</antcall>
 		<antcall target="change_to_dev_version">
 		</antcall>
+		<antcall target="deploy_dev_version"></antcall>
 		<antcall target="commit_dev_version">
 		</antcall>
-		<antcall target="deploy_dev_version"></antcall>
 	</target>
 
 	<target name="change_to_release_version">
