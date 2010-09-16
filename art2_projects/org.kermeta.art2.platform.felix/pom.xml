@@ -5,10 +5,6 @@
     <artifactId>art2.platform.felix</artifactId>
     <packaging>jar</packaging>
     <name>ART2 :: Platform :: Felix</name>
-    <url>http://maven.apache.org</url>
-
-    <groupId>${parent.groupId}</groupId>
-    <version>2.1.0-SNAPSHOT</version>
 
     <parent>
         <artifactId>art2.root</artifactId>
