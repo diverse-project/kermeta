@@ -6,9 +6,6 @@
     <packaging>bundle</packaging>
     <name>ART2 :: Kompare</name>
 
-    <groupId>${parent.groupId}</groupId>
-    <version>2.1.0-SNAPSHOT</version>
-
     <parent>
         <artifactId>art2.root</artifactId>
         <groupId>org.kermeta.art2</groupId>
@@ -36,24 +33,24 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.api</artifactId>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <artifactId>art2.adaptation.model</artifactId>
             <groupId>org.kermeta.art2</groupId>
             <type>jar</type>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <artifactId>art2.model</artifactId>
             <groupId>org.kermeta.art2</groupId>
             <type>jar</type>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.framework</artifactId>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
