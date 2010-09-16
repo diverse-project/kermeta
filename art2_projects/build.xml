@@ -44,6 +44,7 @@
 		</antcall>
 		<antcall target="commit_dev_version">
 		</antcall>
+		<antcall target="deploy_dev_version"></antcall>
 	</target>
 
 	<target name="change_to_release_version">
@@ -139,6 +140,13 @@
 			<arg value="." />
 			<arg value="-m" />
 			<arg value="&quot;Creating ${next.development.version} development version.&quot;" />
+		</exec>
+	</target>
+	<target name="deploy_dev_version">
+		<echo>Deploying snapshot version ${next.development.version}</echo>		
+		<exec executable="mvn">
+			<arg value="clean" />
+			<arg value="deploy" />
 		</exec>
 	</target>
 </project>
