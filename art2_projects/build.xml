@@ -17,8 +17,8 @@
 	<property name="next.development.version" value="${env.NEXT_DEVELOPMENT_VERSION}" />
 
 	<!-- Other configuration parameters -->
-	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/test_version_multi_projects" />
-	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/test_version_multi_projects-" />
+	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/trunk/art2_projects" />
+	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/art2_projects-" />
 	<property name="parent.root" value="org.kermeta.art2.root" />
 	<property name="synchronized.property" value="art2.version" />
 
