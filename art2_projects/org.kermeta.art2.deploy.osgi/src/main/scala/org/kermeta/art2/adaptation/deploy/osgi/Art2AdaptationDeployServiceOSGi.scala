@@ -6,19 +6,14 @@ import org.kermeta.art2.adaptation.deploy.osgi.command._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2adaptation.AdaptationModel
-import org.kermeta.art2adaptation.AdaptationPrimitive
 import org.kermeta.art2adaptation.AddBinding
 import org.kermeta.art2adaptation.AddInstance
 import org.kermeta.art2adaptation.AddType
 import org.kermeta.art2adaptation.AddThirdParty
-import org.kermeta.art2adaptation.BindingAdaptation
-import org.kermeta.art2adaptation.InstanceAdaptation
-import org.kermeta.art2adaptation.TypeAdaptation
 import org.kermeta.art2adaptation.RemoveBinding
 import org.kermeta.art2adaptation.RemoveInstance
 import org.kermeta.art2adaptation.RemoveType
 import org.kermeta.art2adaptation.RemoveThirdParty
-import org.kermeta.art2adaptation.ThirdPartyAdaptation
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
@@ -35,7 +30,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     logger.info(desc+"="+cmds.size)
     var intermediate = cmds.forall(c=> {
         try{ c.execute } catch {
-          case _ @ e => internalLog.error("ART2 DEPLOY ERROR="+e);false
+          case _ @ e => logger.error("ART2 DEPLOY ERROR="+e);false
         }
       })
 
@@ -47,7 +42,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
               case Some(b) => b.start;true
             }
           } catch {
-            case _ @ e => internalLog.error("ART2 START ERROR="+e);false
+            case _ @ e => logger.error("ART2 START ERROR="+e);false
           }
         })
     }
@@ -56,7 +51,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           try{
             c.undo
           } catch {
-            case _ @ e => internalLog.error("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
+            case _ @ e => logger.error("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
           }
         })
     }
@@ -100,7 +95,7 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         case ca : AddBinding =>executedCommandBI = executedCommandBI ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
         case ca : RemoveBinding =>executedCommandBI = executedCommandBI ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
 
-        case _ => internalLog.error("Unknow art2 adaptation primitive");false
+        case _ => logger.error("Unknow art2 adaptation primitive");false
       }
     }
 
