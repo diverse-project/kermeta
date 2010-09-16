@@ -119,7 +119,17 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   def act() = {
     loop {
       react {
-        case STOP() => logger.info("Client Actor will die");exit()
+        case STOP() =>
+          loopWhile(this.mailboxSize > 0){
+            react {
+              case _ @ msg =>
+                channel match {
+                  case Some(b) => sendMessage(b,msg)
+                  case None => logger.error("Msg lost "+msg)
+                }
+            }
+          }
+          exit()
         case _ @ msg =>
           channel match {
             case Some(b) => sendMessage(b,msg)
