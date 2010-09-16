@@ -8,12 +8,12 @@
     <url>http://maven.apache.org</url>
 
     <groupId>${parent.groupId}</groupId>
-    <version>${art2.version}</version>
+    <version>2.1.0-SNAPSHOT</version>
 
     <parent>
         <artifactId>art2.root</artifactId>
         <groupId>org.kermeta.art2</groupId>
-        <version>2</version>
+        <version>2.1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -27,9 +27,6 @@
                 <groupId>org.ops4j</groupId>
                 <artifactId>maven-pax-plugin</artifactId>
                 <version>1.4</version>
-                <configuration>
-                    <shell>karaf.shell</shell>
-                </configuration>
             </plugin>
         </plugins>
     </build>
