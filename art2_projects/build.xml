@@ -68,9 +68,13 @@
 	
 	<target name="deploy_release_version">
 		<echo>Deploying release version ${release.version}</echo>
-		<artifact:mvn pom="pom.xml">
+		<!-- <artifact:mvn pom="pom.xml">
 			<arg value="deploy" />
-		</artifact:mvn>
+		</artifact:mvn> -->
+		<exec executable="mvn">
+			<arg value="clean" />
+			<arg value="deploy" />
+		</exec>
 	</target>
 	
 	<target name="tag_release_version">
