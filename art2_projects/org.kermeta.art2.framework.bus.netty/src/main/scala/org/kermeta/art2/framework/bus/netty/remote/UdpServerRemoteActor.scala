@@ -8,7 +8,6 @@ package org.kermeta.art2.framework.bus.netty.remote
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 import org.jboss.netty.bootstrap.ConnectionlessBootstrap
-import org.jboss.netty.bootstrap.ServerBootstrap
 import org.jboss.netty.channel.Channel
 import org.jboss.netty.channel.ChannelEvent
 import org.jboss.netty.channel.ChannelHandlerContext
@@ -26,6 +25,9 @@ import org.jboss.netty.channel.group.DefaultChannelGroup
 import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory
 import org.jboss.netty.handler.codec.serialization.ObjectDecoder
 import org.jboss.netty.handler.codec.serialization.ObjectEncoder
+import org.jboss.netty.handler.codec.compression.ZlibDecoder
+import org.jboss.netty.handler.codec.compression.ZlibEncoder
+import org.jboss.netty.handler.codec.compression.ZlibWrapper
 import org.kermeta.art2.framework.Art2Actor
 import org.slf4j.LoggerFactory
 import scala.actors.Actor
@@ -33,27 +35,23 @@ import scala.actors.Actor
 class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUpstreamHandler with Art2Actor {
 
   var logger = LoggerFactory.getLogger(this.getClass);
- // var bossPool : Option[java.util.concurrent.ExecutorService] = None
+  // var bossPool : Option[java.util.concurrent.ExecutorService] = None
   var ioPool  : Option[java.util.concurrent.ExecutorService] = None
   var bootstrap : Option[ConnectionlessBootstrap] = None
   var channel : Option[Channel] = None
   var me = this
   var cgroup : ChannelGroup = new DefaultChannelGroup
-  case class STOP_RACTOR
 
   override def start(): Actor = synchronized {
     /* DO NETTY INIT CODE */
-   // bossPool  = Some(Executors.newCachedThreadPool())
+    // bossPool  = Some(Executors.newCachedThreadPool())
     ioPool = Some(Executors.newCachedThreadPool())
 
 
     var newbootstrap = new ConnectionlessBootstrap(new NioDatagramChannelFactory(ioPool.get))
     newbootstrap.setPipelineFactory(new ChannelPipelineFactory() {
         def getPipeline() : ChannelPipeline = {
-          return Channels.pipeline(
-            new ObjectEncoder(),
-            new ObjectDecoder(),
-            me);
+          me.getPipeline
         }
       });
     newbootstrap.setOption("broadcast", "false");
@@ -67,8 +65,17 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
     this
   }
 
+  def getPipeline() : ChannelPipeline = {
+    var pipeline = Channels.pipeline()
+    pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
+    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+    pipeline.addLast("objectEnc", new ObjectEncoder())
+    pipeline.addLast("objectDec", new ObjectDecoder())
+    pipeline.addLast("handler", me);
+    pipeline
+  }
+
   override def stop(){
-    me ! STOP_RACTOR()
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -82,13 +89,15 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
         } catch {case _ @ e => logger.error(this.getClass.getName, e)}
 
     }
+    me ! STOP
     logger.info("Server Actor is stopped")
   }
 
   def act() = {
     loop {
       react {
-        case s : STOP_RACTOR => exit()
+        case STOP => logger.info("Server Actor will die");exit()
+          /*
         case _ @ msg => channel match {
             case None => println("TODO WAITING PERIOD")
             case Some(b) => {
@@ -100,7 +109,8 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
                   case _ @ e => logger.error("Unexpected exception, while sending msg.",e);
                 }
               }
-          }
+          }*/
+        
       }
     }
   }

@@ -27,8 +27,13 @@ import org.jboss.netty.channel.group.DefaultChannelGroup
 import org.jboss.netty.channel.socket.DatagramChannel
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory
 import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory
+import org.jboss.netty.handler.codec.compression.ZlibDecoder
+import org.jboss.netty.handler.codec.compression.ZlibEncoder
 import org.jboss.netty.handler.codec.serialization.ObjectDecoder
 import org.jboss.netty.handler.codec.serialization.ObjectEncoder
+import org.jboss.netty.handler.codec.compression.ZlibDecoder
+import org.jboss.netty.handler.codec.compression.ZlibEncoder
+import org.jboss.netty.handler.codec.compression.ZlibWrapper
 import org.kermeta.art2.framework.Art2Actor
 import org.slf4j.LoggerFactory
 import scala.actors.Actor
@@ -45,7 +50,6 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   var channelfutur : Option[ChannelFuture] = None
   var allChannels = new DefaultChannelGroup()
 
-  case class STOP_RACTOR
   case class CHANNEL_CONNECTED(e : ChannelStateEvent)
 
 
@@ -57,10 +61,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
     var newbootstrap = new ConnectionlessBootstrap(new NioDatagramChannelFactory(ioPool.get))
     newbootstrap.setPipelineFactory(new ChannelPipelineFactory() {
         def getPipeline() : ChannelPipeline = {
-          return Channels.pipeline(
-            new ObjectEncoder(),
-            new ObjectDecoder(),
-            me);
+          me.getPipeline
         }
       });
 
@@ -72,6 +73,16 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
     bootstrap = Some(newbootstrap)
     super.start()
     this
+  }
+
+    def getPipeline() : ChannelPipeline = {
+    var pipeline = Channels.pipeline()
+    pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
+    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+    pipeline.addLast("objectEnc", new ObjectEncoder())
+    pipeline.addLast("objectDec", new ObjectDecoder())
+    pipeline.addLast("handler", me);
+    pipeline
   }
 
   override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
@@ -88,7 +99,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   }
 
   override def stop(){
-    me ! STOP_RACTOR()
+    me ! STOP()
     channel match {
       case None =>
       case Some(c)=> c.close
@@ -103,11 +114,11 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
           case Some(p) => p.shutdown
         }
     }
+
   }
 
   def sendMessage(c : DatagramChannel,o : Any) : Boolean = {
     try{
-
       c.write(o,new InetSocketAddress("255.255.255.255", port));true
     } catch {
       case _ @ e => logger.error("Unexpected exception, while sending msg.",e);false
@@ -117,7 +128,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   def act() = {
     loop {
       react {
-        case s : STOP_RACTOR => exit()
+        case STOP() => logger.info("");exit()
         case _ @ msg =>
           channel match {
             case Some(b) => sendMessage(b,msg)

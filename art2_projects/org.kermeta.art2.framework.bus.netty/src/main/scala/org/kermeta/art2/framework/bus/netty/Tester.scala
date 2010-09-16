@@ -21,66 +21,68 @@ object Tester {
    */
   def main(args: Array[String]): Unit = {
 
+    /*
+     var msg = new Art2Message()
+     var json : String = msg.toJSON
+     var conjson = json.fromJSON(classOf[Art2Message])
 
-    var msg = new Art2Message()
     
-    var json : String = msg.toJSON
+     class MyActor extends Actor {
+     case class STOPMSG
+     def act = {
+     loop {
+     react {
+     case STOPMSG => exit
+     case _ @ msg => println(msg)
+     }
+     }
+     }
+     def stop = {
+     this ! STOPMSG
+     }
+     }
+     var actorSD = new MyActor
+     actorSD.start
+
+     var actorS = new TcpServerRemoteActor(8090,actorSD)
+     actorS.start
+
+     //   var actorS2 = new UdpServerRemoteActor(8091,null)
+     //  actorS2.start
+
     
-    println(json)
-    
-    var conjson = json.fromJSON(classOf[Art2Message])
-
-    println(conjson)
-
-
-
-    class MyActor extends Actor {
-      def act = {
-        loop {
-          react {
-            case _ @ msg => println(msg)
-          }
-        }
-      }
-      def stop = {
-        exit
-      }
-    }
-    var actorSD = new MyActor
-    actorSD.start
-    actorSD.stop
-    actorSD.start
-
-    var actorS = new TcpServerRemoteActor(8090,actorSD)
-    actorS.start
+     var clientactor = new TcpClientRemoteActor(null,2000){
+     def getRemoteAddr : InetSocketAddress = {
+     new InetSocketAddress("localhost",8090)
+     }
+     }
+     clientactor.start
+     clientactor ! "Hello"
 
 
- //   var actorS2 = new UdpServerRemoteActor(8091,null)
-  //  actorS2.start
+     //   var clientactor2 = new UdpClientRemoteActor(null,2000,8091)
+     //  clientactor2.start
+     //  clientactor2 ! "Multicast hello world !"
+     */
 
-    var clientactor = new TcpClientRemoteActor(null,2000){
-      def getRemoteAddr : InetSocketAddress = {
-        new InetSocketAddress("localhost",8090)
-      }
-    }
-    clientactor.start
-    clientactor ! "Hello"
+    var synch = new Art2ModelSynch(8082,null)
+    synch.start
 
-
- //   var clientactor2 = new UdpClientRemoteActor(null,2000,8091)
-  //  clientactor2.start
-  //  clientactor2 ! "Multicast hello world !"
-
+    //synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
 
     new Thread(){
       override def run = { Thread.sleep(3000);
                           //clientactor2.stop;
-                          clientactor.stop;
-                          actorS.stop;
-                          actorSD.stop
-                        //  actorS2.stop;
-                          println("Test end")  }
+
+                          //  clientactor.stop;println("Client stopped")
+                          //   actorS.stop;println("Server stopped")
+                          //   actorSD.stop;println("Server delegate stopped")
+                          //  actorS2.stop;
+                          synch.stop
+      }
     }.start
+
+
 
 
 

@@ -21,6 +21,9 @@ import org.jboss.netty.channel.ChannelState
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
 import org.jboss.netty.channel.group.ChannelGroup
 import org.jboss.netty.channel.group.DefaultChannelGroup
+import org.jboss.netty.handler.codec.compression.ZlibDecoder
+import org.jboss.netty.handler.codec.compression.ZlibEncoder
+import org.jboss.netty.handler.codec.compression.ZlibWrapper
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory
 import org.jboss.netty.handler.codec.serialization.ObjectDecoder
 import org.jboss.netty.handler.codec.serialization.ObjectEncoder
@@ -46,10 +49,7 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
     var newbootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool()))
     newbootstrap.setPipelineFactory(new ChannelPipelineFactory() {
         def getPipeline() : ChannelPipeline = {
-          return Channels.pipeline(
-            new ObjectEncoder(),
-            new ObjectDecoder(),
-            me);
+          me.getPipeline
         }
       });
     channel = Some(newbootstrap.bind(new InetSocketAddress("0.0.0.0",port)))
@@ -60,8 +60,17 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
     this
   }
 
+  def getPipeline() : ChannelPipeline = {
+    var pipeline = Channels.pipeline()
+    pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
+    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+    pipeline.addLast("objectEnc", new ObjectEncoder())
+    pipeline.addLast("objectDec", new ObjectDecoder())
+    pipeline.addLast("handler", me);
+    pipeline
+  }
+
   override def stop(){
-    me ! STOP_RACTOR()
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -79,6 +88,7 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
         } catch {case _ @ e => logger.error(this.getClass.getName, e)}
         
     }
+    me ! STOP_RACTOR()
     logger.info("Server Actor is stopped")
   }
 

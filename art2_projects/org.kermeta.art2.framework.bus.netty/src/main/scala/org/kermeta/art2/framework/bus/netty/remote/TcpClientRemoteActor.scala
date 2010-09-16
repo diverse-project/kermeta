@@ -23,6 +23,9 @@ import org.jboss.netty.channel.MessageEvent
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
 import org.jboss.netty.channel.group.DefaultChannelGroup
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory
+import org.jboss.netty.handler.codec.compression.ZlibDecoder
+import org.jboss.netty.handler.codec.compression.ZlibEncoder
+import org.jboss.netty.handler.codec.compression.ZlibWrapper
 import org.jboss.netty.handler.codec.serialization.ObjectDecoder
 import org.jboss.netty.handler.codec.serialization.ObjectEncoder
 import org.kermeta.art2.framework.Art2Actor
@@ -53,16 +56,23 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     var newbootstrap = new ClientBootstrap(new NioClientSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool()));
     newbootstrap.setPipelineFactory(new ChannelPipelineFactory() {
         def getPipeline() : ChannelPipeline = {
-          return Channels.pipeline(
-            new ObjectEncoder(),
-            new ObjectDecoder(),
-            me);
+          me.getPipeline
         }
       });
     newbootstrap.setOption("connectTimeoutMillis", timeout);
     bootstrap = Some(newbootstrap)
     super.start()
     this
+  }
+
+  def getPipeline() : ChannelPipeline = {
+    var pipeline = Channels.pipeline()
+    pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
+    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+    pipeline.addLast("objectEnc", new ObjectEncoder())
+    pipeline.addLast("objectDec", new ObjectDecoder())
+    pipeline.addLast("handler", me);
+    pipeline
   }
 
   override def channelConnected(ctx :ChannelHandlerContext,e : ChannelStateEvent) = {
@@ -111,7 +121,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   }
 
   override def stop(){
-    me ! STOP_RACTOR()
+    
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -126,6 +136,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
           case Some(p) => p.shutdown
         }
     }
+    me ! STOP_RACTOR()
   }
 
   def sendMessage(c : Channel,o : Any) : Boolean = {
