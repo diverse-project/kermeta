@@ -8,10 +8,6 @@
     <name>ART2 :: Model</name>
     <packaging>bundle</packaging>
 
-
-    <groupId>${project.parent.groupId}</groupId>
-    <version>2.1.0-SNAPSHOT</version>
-
     <parent>
         <artifactId>art2.root</artifactId>
         <groupId>org.kermeta.art2</groupId>
