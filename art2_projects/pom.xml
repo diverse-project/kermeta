@@ -26,6 +26,7 @@
 	
     <modules>
         <module>org.kermeta.art2.root</module>
+        <module>org.kermeta.art2.artcomponent.root</module>
         <module>org.kermeta.art2.model</module>
         <!-- <module>org.kermeta.art2.model.edit</module>
         <module>org.kermeta.art2.model.editor</module> -->
