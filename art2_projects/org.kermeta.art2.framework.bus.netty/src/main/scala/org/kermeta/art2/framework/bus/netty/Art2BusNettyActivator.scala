@@ -25,8 +25,10 @@ class Art2BusNettyActivator extends BundleActivator {
     new Thread {
       override def run(){
         modelHandlerServiceTracker.open
-        discoveryActor = new Art2PlatformDiscoveryActor(8081,8080,modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService])
-        modelSynchRemoteActor = new Art2ModelSynch(8082,modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService])
+        var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
+
+        discoveryActor = new Art2PlatformDiscoveryActor(8081,8080,mhandler)
+        modelSynchRemoteActor = new Art2ModelSynch(8082,mhandler,mhandler.getNodeName)
 
         modelSynchRemoteActor.start
         discoveryActor.start

@@ -8,16 +8,12 @@ package org.kermeta.art2.framework.bus.netty.remote
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
-import org.jboss.netty.bootstrap.ClientBootstrap
 import org.jboss.netty.bootstrap.ConnectionlessBootstrap
-import org.jboss.netty.channel.Channel
-import org.jboss.netty.channel.ChannelEvent
 import org.jboss.netty.channel.ChannelFuture
 import org.jboss.netty.channel.ChannelHandlerContext
 import org.jboss.netty.channel.ChannelStateEvent
 import org.jboss.netty.channel.ChannelPipeline
 import org.jboss.netty.channel.ChannelPipelineFactory
-import org.jboss.netty.channel.ChannelState
 import org.jboss.netty.channel.Channels
 import org.jboss.netty.channel.ExceptionEvent
 import org.jboss.netty.channel.FixedReceiveBufferSizePredictorFactory
@@ -25,7 +21,6 @@ import org.jboss.netty.channel.MessageEvent
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
 import org.jboss.netty.channel.group.DefaultChannelGroup
 import org.jboss.netty.channel.socket.DatagramChannel
-import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory
 import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory
 import org.jboss.netty.handler.codec.compression.ZlibDecoder
 import org.jboss.netty.handler.codec.compression.ZlibEncoder
@@ -34,16 +29,16 @@ import org.jboss.netty.handler.codec.serialization.ObjectEncoder
 import org.jboss.netty.handler.codec.compression.ZlibDecoder
 import org.jboss.netty.handler.codec.compression.ZlibEncoder
 import org.jboss.netty.handler.codec.compression.ZlibWrapper
+import org.jboss.netty.handler.codec.string.StringEncoder
 import org.kermeta.art2.framework.Art2Actor
 import org.slf4j.LoggerFactory
 import scala.actors.Actor
-import scala.actors.TIMEOUT
 
 class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUpstreamHandler with Art2Actor {
 
   var logger = LoggerFactory.getLogger(this.getClass);
   var bootstrap : Option[ConnectionlessBootstrap] = None
- // var bossPool : Option[java.util.concurrent.ExecutorService] = None
+  // var bossPool : Option[java.util.concurrent.ExecutorService] = None
   var ioPool  : Option[java.util.concurrent.ExecutorService] = None
   var me  = this
   var channel : Option[DatagramChannel] = None
@@ -55,7 +50,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
 
   override def start(): Actor = synchronized {
     /* DO NETTY INIT CODE */
-   // bossPool  = Some(Executors.newCachedThreadPool())
+    // bossPool  = Some(Executors.newCachedThreadPool())
     ioPool = Some(Executors.newCachedThreadPool())
 
     var newbootstrap = new ConnectionlessBootstrap(new NioDatagramChannelFactory(ioPool.get))
@@ -69,18 +64,19 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
     //newbootstrap.setOption("connectTimeoutMillis", timeout);
     newbootstrap.setOption("receiveBufferSizePredictorFactory",new FixedReceiveBufferSizePredictorFactory(1024));
     channel = Some(newbootstrap.bind(new InetSocketAddress(0)).asInstanceOf[DatagramChannel])
-    //allChannels.add(channel.get)
+    allChannels.add(channel.get)
     bootstrap = Some(newbootstrap)
     super.start()
     this
   }
 
-    def getPipeline() : ChannelPipeline = {
+  def getPipeline() : ChannelPipeline = {
     var pipeline = Channels.pipeline()
     pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
-    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
-    pipeline.addLast("objectEnc", new ObjectEncoder())
-    pipeline.addLast("objectDec", new ObjectDecoder())
+    //pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+    //  pipeline.addLast("objectEnc", new ObjectEncoder())
+    //   pipeline.addLast("objectDec", new ObjectDecoder())
+    pipeline.addLast("objectDec", new StringEncoder())
     pipeline.addLast("handler", me);
     pipeline
   }
@@ -95,26 +91,21 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
     }
   }
   override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {
-    logger.error("Unexpected exception from downstream.",e.getCause());
+    //logger.error("Unexpected exception from downstream.",e.getCause());
   }
 
   override def stop(){
     me ! STOP()
-    channel match {
-      case None =>
-      case Some(c)=> c.close
-    }
     bootstrap match {
       case None =>
       case Some(b) =>
-        allChannels.close().awaitUninterruptibly();
+        allChannels.close().awaitUninterruptibly(); 
         b.releaseExternalResources();
         ioPool match {
           case None =>
           case Some(p) => p.shutdown
         }
     }
-
   }
 
   def sendMessage(c : DatagramChannel,o : Any) : Boolean = {
@@ -128,7 +119,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   def act() = {
     loop {
       react {
-        case STOP() => logger.info("");exit()
+        case STOP() => logger.info("Client Actor will die");exit()
         case _ @ msg =>
           channel match {
             case Some(b) => sendMessage(b,msg)

@@ -9,6 +9,7 @@ import java.net.InetSocketAddress
 import org.kermeta.art2.framework.JacksonSerializer._
 import org.kermeta.art2.framework.bus.netty.remote.TcpClientRemoteActor
 import org.kermeta.art2.framework.bus.netty.remote.TcpServerRemoteActor
+import org.kermeta.art2.framework.bus.netty.remote.UdpClientRemoteActor
 import org.kermeta.art2.framework.message.Art2Message
 import org.kermeta.art2.framework._
 import scala.actors.Actor
@@ -65,10 +66,10 @@ object Tester {
      //  clientactor2 ! "Multicast hello world !"
      */
 
-    var synch = new Art2ModelSynch(8082,null)
+    var synch = new Art2ModelSynch(8082,null,"duke.irisa.fr")
     synch.start
 
-    //synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
+    synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
 
     new Thread(){
       override def run = { Thread.sleep(3000);
@@ -84,6 +85,12 @@ object Tester {
 
 
 
+   // var client = new UdpClientRemoteActor(null,8082)
+    //client.start
+
+    //Thread.sleep(2000)
+
+    //client.stop
 
 
 
