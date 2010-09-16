@@ -27,6 +27,12 @@
                 <groupId>org.ops4j</groupId>
                 <artifactId>maven-pax-plugin</artifactId>
                 <version>1.4</version>
+                <configuration>
+                    <provision>
+                        <param>--log=DEBUG</param>
+                        <param>--workingDirectory=target/runner</param>
+                    </provision>
+                </configuration>
             </plugin>
         </plugins>
     </build>
