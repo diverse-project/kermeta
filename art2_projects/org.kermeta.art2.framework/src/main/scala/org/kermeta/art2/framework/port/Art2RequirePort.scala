@@ -30,6 +30,7 @@ trait Art2RequiredPort extends Art2Port {
   def act() = {
     loop {
       react {
+        case STOP => exit
         case bindmsg : Art2FragmentBindMessage => { bind(bindmsg);reply(true) }
           /* other kind of message send */
         case _ @ msg => {

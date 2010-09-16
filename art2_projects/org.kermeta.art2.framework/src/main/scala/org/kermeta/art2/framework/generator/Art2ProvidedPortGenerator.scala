@@ -44,6 +44,7 @@ object Art2ProvidedPortGenerator {
                 /* GENERATE LOOP */
                 wrapper.append("def act()={\n")
                 wrapper.append("loop{\nreact{\n")
+                wrapper.append("case STOP=>exit\n")
                 /* CALL MAPPED METHOD */
                 wrapper.append("case _ @ msg => component.")
                 wrapper.append(mapping.getBeanMethodName+"(msg)\n")
@@ -76,6 +77,7 @@ object Art2ProvidedPortGenerator {
           }
           /* CREATE ACTOR LOOP */
           wrapper.append("def act() = {loop{react{\n")
+          wrapper.append("case STOP=>exit\n")
           wrapper.append("case opcall : org.kermeta.art2.framework.MethodCallMessage => reply(opcall.getMethodName match {\n")
           sPT.getOperations.foreach{op=>
             /* FOUND METHOD MAPPING */

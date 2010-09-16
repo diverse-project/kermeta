@@ -19,6 +19,7 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
   def act() = {
     loop {
       react {
+        case STOP => exit
         case Art2StartMessage => {
             getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].start}
             //getArt2ComponentType.getNeededPorts.foreach{np=>np.asInstanceOf[Art2Port].start} //DEPRECATED NP STARTED AT ACTIVATOR TIME

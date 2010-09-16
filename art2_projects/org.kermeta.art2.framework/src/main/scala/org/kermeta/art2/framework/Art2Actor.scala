@@ -9,8 +9,10 @@ import scala.actors.Actor
 
 trait Art2Actor extends Actor {
 
+  case class STOP
+
   override def start : Actor = super.start
 
-  def stop : Unit = exit
+  def stop : Unit = this ! STOP
 
 }

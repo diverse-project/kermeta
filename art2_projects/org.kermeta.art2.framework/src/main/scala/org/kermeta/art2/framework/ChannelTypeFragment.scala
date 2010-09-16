@@ -6,7 +6,6 @@
 package org.kermeta.art2.framework
 
 import java.util.HashMap
-import org.kermeta.art2.Channel
 import org.kermeta.art2.framework.message.Art2FragmentUnbindMessage
 import org.kermeta.art2.framework.message.Art2PortBindMessage;
 import org.kermeta.art2.framework.message.Art2FragmentBindMessage
@@ -47,6 +46,7 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
   def act()={
     loop{
       react {
+        case STOP => exit
         case msg : Art2FragmentBindMessage=> fragementBinded.put(msg.getChannelName, msg.getProxy);reply(true)
         case msg : Art2FragmentUnbindMessage=> fragementBinded.remove(msg.getChannelName);reply(true)
         case msg : Art2PortBindMessage => portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)
