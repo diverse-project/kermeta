@@ -17,8 +17,9 @@ public class App {
         System.out.println("Hello World!");
 
 
-        ContainerRoot amodel = Art2Factory.eINSTANCE.createContainerRoot();
-        ContainerRoot nmodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/AS.art2");
+       // ContainerRoot amodel = Art2Factory.eINSTANCE.createContainerRoot();
+        ContainerRoot amodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/AS.art2");
+        ContainerRoot nmodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/AS2.art2");
 
         System.out.println("new model " + nmodel);
 
