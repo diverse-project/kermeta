@@ -29,6 +29,7 @@ import org.jboss.netty.handler.codec.compression.ZlibDecoder
 import org.jboss.netty.handler.codec.compression.ZlibEncoder
 import org.jboss.netty.handler.codec.compression.ZlibWrapper
 import org.jboss.netty.handler.codec.string.StringDecoder
+import org.jboss.netty.handler.codec.string.StringEncoder
 import org.kermeta.art2.framework.Art2Actor
 import org.slf4j.LoggerFactory
 import scala.actors.Actor
@@ -68,12 +69,13 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
 
   def getPipeline() : ChannelPipeline = {
     var pipeline = Channels.pipeline()
-   // pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
-    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
+  //  pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
+  //  pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
 
- //   pipeline.addLast("objectEnc", new ObjectEncoder())
-//    pipeline.addLast("objectDec", new ObjectDecoder())
-   pipeline.addLast("objectDec", new StringDecoder())
+   // pipeline.addLast("objectEnc", new ObjectEncoder())
+   // pipeline.addLast("objectDec", new ObjectDecoder())
+   pipeline.addLast("stringDec", new StringDecoder())
+   pipeline.addLast("stringEnc", new StringEncoder())
     pipeline.addLast("handler", me);
     pipeline
   }
@@ -128,7 +130,7 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
     }
   }
   override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {
-    //logger.error("Unexpected exception from downstream.",e.getCause());
+    logger.error("Unexpected exception from downstream.",e.getCause());
   }
   override def handleUpstream(ctx :ChannelHandlerContext, e: ChannelEvent) {
     e match {

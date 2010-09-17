@@ -69,7 +69,7 @@ object Tester {
     var synch = new Art2ModelSynch(8082,null,"duke.irisa.fr")
     synch.start
 
-    synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
+//    synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
 
     new Thread(){
       override def run = { Thread.sleep(3000);

@@ -22,33 +22,33 @@ class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService,nodeName 
   var me : Art2Actor = this
   var logger = LoggerFactory.getLogger(this.getClass)
 
-  var client = new UdpClientRemoteActor(this,port)
-  var server = new UdpServerRemoteActor(port,this)
+  //var client = new TcpClientRemoteActor(this,port)
+  var server = new TcpServerRemoteActor(port,this)
 
-  def synch(model : ContainerRoot)={
+  //def synch(model : ContainerRoot)={
 
-    var outStream = new ByteArrayOutputStream
-    Art2XmiHelper.saveStream(outStream, model)
-    outStream.flush
+    //var outStream = new ByteArrayOutputStream
+    //Art2XmiHelper.saveStream(outStream, model)
+    //outStream.flush
     // var msg = outStream.toString
 
-    var msg = new Art2ModelSynchMessage
-    msg.setNodeSenderName(nodeName)
-    msg.setNewModelAsString(outStream.toString)
+    //  var msg = new Art2ModelSynchMessage
+    //  msg.setNodeSenderName(nodeName)
+    //msg.setNewModelAsString(outStream.toString)
 
-    outStream.close
-    logger.info("Send model to other fragment="+msg)
-    client ! msg.toJSON
-  }
+    //   outStream.close
+    //  logger.info("Send model to other fragment="+msg)
+  //  client ! modelHandler.getLastModel.toJSON
+ // }
 
   override def start() : Actor = {
-    client.start
+    //client.start
     server.start
     super.start
   }
 
   override def stop(){
-    client.stop
+    //client.stop
     server.stop
     me ! STOP
   }
@@ -59,6 +59,7 @@ class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService,nodeName 
         case STOP => exit
         case  msg : String=> {
             logger.info("Model rec from other fragment"+msg)
+            
             var msgsynch = msg.fromJSON(classOf[Art2ModelSynchMessage])
 
             if(msgsynch.getNodeSenderName == nodeName){

@@ -20,25 +20,26 @@ import scala.collection.JavaConversions._
 class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : Int,modelHandler : Art2ModelHandlerService) extends Art2Actor {
 
   var me : Art2Actor = this
-
+  var client = new UdpClientRemoteActor(this,art2discoveryPort)
+  var logger = LoggerFactory.getLogger(this.getClass)
   var server = new UdpServerRemoteActor(art2discoveryPort,this){
+    /* ACK OVERRIDE RECEIVED METHOD TO SET THE IP OF SENDER */
     override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
-      var art2discoveryMessage = e.getMessage.toString.fromJSON(classOf[Art2DiscoveryMessage])
-      art2discoveryMessage.setRemoteAddr(e.getRemoteAddress.toString.split(':').toList.get(0))
-      me ! art2discoveryMessage
+      try{
+        var art2discoveryMessage = e.getMessage.toString.fromJSON(classOf[Art2DiscoveryMessage])
+        art2discoveryMessage.setRemoteAddr(e.getRemoteAddress.toString.split(':').toList.get(0))
+        me ! art2discoveryMessage
+      } catch {
+        case _ @ e => logger.error("Bad Message Received")
+      }
     }
   };
 
-
-  var client = new UdpClientRemoteActor(this,art2discoveryPort)
-  var logger = LoggerFactory.getLogger(this.getClass)
-  case class STOP_SCHEDULER
   var timer : Art2Actor = new Art2Actor {
-    override def stop : Unit = this ! STOP_SCHEDULER
     def act = {
       loop {
-        reactWithin(60000) {
-          case STOP_SCHEDULER => exit
+        reactWithin(360000) {
+          case STOP => exit
           case TIMEOUT => { /* TODO SEND RICHER MESSAGE */
               var discoveryMessage = new Art2DiscoveryMessage
               discoveryMessage.setOriginNodeName(modelHandler.getNodeName)
@@ -46,8 +47,9 @@ class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : In
               discoveryMessage.setNetworkRate("100")
               discoveryMessage.setArt2DispatcherPort(art2dispatcherPort)
               discoveryMessage.setArt2DiscoveryPort(art2discoveryPort)
+              logger.info("Send synch Platform Message "+discoveryMessage.toJSON)
               client ! discoveryMessage.toJSON
-          }
+            }
         }
       }
     }
