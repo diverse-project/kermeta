@@ -25,36 +25,30 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   @BeanProperty var kompareService :org.kermeta.art2.api.service.core.kompare.ModelKompareService = null
   @BeanProperty var deployService :org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService = null
   @BeanProperty var nodeName : String = ""
-  var models : List[ContainerRoot] = List()
+
+  var models : java.util.ArrayList[ContainerRoot] = new java.util.ArrayList()
+  var model : ContainerRoot = Art2Factory.eINSTANCE.createContainerRoot()
+
   var logger = LoggerFactory.getLogger(this.getClass);
+
+  private def switchToNewModel(c : ContainerRoot)={
+    models.add(model)
+    model = c
+  }
 
   override def start : Actor={
     logger.info("Start event rec : node name = "+bundleContext.getProperty("art2.node.name"))
     setNodeName(bundleContext.getProperty("art2.node.name"));
     super.start
 
-    /* DEBUG ONLY */
-    /*
-    super.start
-    models = models ++ List(Art2Factory.eINSTANCE.createContainerRoot())
-    var umodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/AS2.art2");
-    updateModel(umodel);
-    System.out.println("Model DEBUG UPDATED");
-    if (true) {return this;}
-    */
-    //System.out.println("NoUse STATMENT");
-
-
     var lastModelssaved = bundleContext.getDataFile("lastModel.xmi");
     if (lastModelssaved.getTotalSpace() != 0) {
       /* Load previous state */
       var model = Art2XmiHelper.load(lastModelssaved.getAbsolutePath());
-      models = models ++ List(model)
-    } else {
-      /* INIT EMPTY model */
-      models = models ++ List(Art2Factory.eINSTANCE.createContainerRoot())
+      switchToNewModel(model)
+      //models.add(model)
+      //models = models ++ List(model)
     }
-
     this
   }
 
@@ -66,14 +60,19 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   def act()={
     loop{
       react {
-        case Art2PreviousModel() => sender ! models.tail
-        case Art2LastModel() => sender ! models.head /* TODO DEEP CLONE */
+        case Art2PreviousModel() => reply(models)
+        case Art2LastModel() => reply(model) /* TODO DEEP CLONE */
         case Art2UpdateModel(newmodel) => {
             println("REC")
             if (newmodel == null) { logger.error("Null model")} else {
-              var adaptationModel = kompareService.kompare(models.head, newmodel, nodeName);
+
+              println("previous model = "+model.getNodes.mkString(","))
+              println("new model = "+newmodel.getNodes.mkString(","))
+
+              var adaptationModel = kompareService.kompare(model, newmodel, nodeName);
               var deployResult = deployService.deploy(adaptationModel,nodeName);
-              models = models ++ List(newmodel)
+              //models = models ++ List(newmodel)
+              switchToNewModel(newmodel)
               logger.info("Deploy result " + deployResult)
             }
           }
