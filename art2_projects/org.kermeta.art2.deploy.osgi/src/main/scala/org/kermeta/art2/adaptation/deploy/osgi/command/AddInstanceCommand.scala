@@ -33,7 +33,10 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
 
 
     //FOUND CT SYMBOLIC NAME
-    var mappingFound =  ctx.bundleMapping.find({bundle => bundle.obj.equals(c.getTypeDefinition)}) match {
+    var mappingFound =  ctx.bundleMapping.find({bundle =>
+        println(bundle.name+"-"+c.getTypeDefinition.getName+"-"+c.getTypeDefinition.getClass.getName)
+        bundle.name==c.getTypeDefinition.getName && bundle.objClass.getName==c.getTypeDefinition.getClass.getName
+      }) match {
       case Some(bundle)=> bundle
       case None => println("ComponentType Not Found"); return false; null;
     }
