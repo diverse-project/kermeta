@@ -46,7 +46,7 @@ class Interpreter
 	operation loadProgram(uri : String) : ASM::LogoProgram is do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.getResource(uri)
-        result ?= resource.instances.one  
+        result ?= resource.one  
 	end
 	
 }
