@@ -107,10 +107,10 @@
     language<phrase></phrase></title>
 
     <para>This chapter aims to help you to have a quick overview of most of
-    the features of Kermeta. Then, it gives the pointers to the detailled
+    the features of Kermeta. Then, it gives the pointers to the detailed
     sections in the reference chapter. It also gives some small examples that
     should help you to understand the basis of the concepts without having to
-    jump to the corresponding detailled section.</para>
+    jump to the corresponding detailed section.</para>
 
     <section id="sec_introduction_presentation.link">
       <title
@@ -177,7 +177,7 @@
       support for all Language Driven Engineering activities. It will be typically 
       used to build tools useful to build software.  This includes (but is not restricted to):
       model checkers, simulators, model transformations (any kind of transformations 
-      including model weavers or compilers), ...</para>
+      including model weavers or compilers).</para>
       
     </section>
 
@@ -218,7 +218,7 @@ class HelloworldExample
         <title>Classic features</title>
 
         <para>Kermeta language includes usual statements like blocks and
-        loops, comments,...</para>
+        loops, comments, etc</para>
 
         <programlisting language="kermeta">do
     // a loop for getting a text from an user
@@ -309,7 +309,7 @@ class Child inherits Reader {
     do>
         self.age := age
     end
-    // an action which triggers an Exception...
+    // an action which triggers an Exception
     operation read(book : ChildBook) : Void is
     do
         if age &lt; book.minimalAge then
@@ -363,7 +363,7 @@ class Child inherits Reader {
       endterm="section_architecture.title.link"
       linkend="section_architecture.link" />, Kermeta extends the MOF. It
       provides useful means to manipulate models. The support of model introduces 
-      the main difference with "more" traditionnal programming languages.</para>
+      the main difference with "more" traditional programming languages.</para>
 
       <section id="section_toward_a_first_concrete_example.link">
         <title>Associations : toward a first concrete
@@ -442,7 +442,7 @@ resource.load
 // in this sample, you know that your root element is always a Library, 
 // so you can directly get the first one
 var aLibrary : Libray
-aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if not a Library you'll get Void</programlisting>
+aLibrary ?= resource.one // note the conditional assignment using the ?=, if not a Library you'll get Void</programlisting>
 
         <para>In the same way, you can serialize a model, or load, change and
         save an existing model.</para>
@@ -471,12 +471,12 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
         <title>Navigation in a model</title>
 
         <para>Actually, navigating in a model is as simple as using objects in
-        an Object Oriented program. However, several features have been added
+        an object-oriented program. However, several features have been added
         in order to ease this activity.</para>
 
         <para>For example, thanks to the lambda expressions, the collections
         of the language are easily manipulated using lexical closure (select,
-        collect, each, ...). This applies to all the collections of the
+        collect, each, etc). This applies to all the collections of the
         language, the one you may define directly but also the one which are
         used when an <link linkend="section_properties.link">Attribute or
         Reference</link> has a multiplicity greater than 1.</para>
@@ -537,7 +537,38 @@ smithBooks.addAll(
           </itemizedlist></para>
       </section>
     </section>
-
+    <section>
+    	<title>Aspect-oriented language</title>
+    	
+		<para>Since Kermeta is an extension of MOF, a MOF meta-model can conversely be seen as a valid 
+    	Kermeta program that just declares packages, classes and so on but does nothing. 
+    	Kermeta can then be used to breath life into this meta-model by incrementally 
+    	introducing aspects for handling concerns of static semantics, dynamic semantics, 
+    	or model transformations. </para>
+    	<para>One of the key features of Kermeta is the static composition operator <literal>require</literal> allows extending an existing meta-model with new elements 
+    	such as properties, operations, constraints or classes. This operator allows defining these various 
+    	aspects in separate units and integrating them automatically into the meta-model. The composition 
+    	is done statically and the composed model is typed-checked to ensure the safe integration of all units. 
+    	This mechanism makes it easy to reuse existing meta-models or to split meta-models into reusable pieces. 
+    	It can be compared to the open class paradigm. Consequently a meta-class that identifies a domain concept 
+    	can be extended without editing the meta-model directly. Open classes in Kermeta are used to organize 
+    	<literal>cross-cutting</literal> concerns separately from the meta-model to which they belong, a key 
+    	feature of aspect-oriented programming. With this mechanism, Kermeta can support the addition of new 
+    	meta-class, new subclasses, new methods, new properties, new contracts to existing meta-model. The 
+    	require mechanism also provides flexibility. For example, several operational semantics could be 
+    	defined in separate units for a single meta-model and then alternatively composed depending on 
+    	particular needs. This is the case for instance in the UML meta-model when several semantics 
+    	variation points are defined.
+    	</para><para>
+		Thank to this composition operator, Kermeta can remain a kernel platform to safely integrate all the 
+		concerns around a meta-model. This feature has proved to be extreemly useful in the context of 
+    	metamodel engineering. </para>
+    	<para>
+    	More details in <xref
+          endterm="section_weaving.title.link"
+          linkend="section_weaving.link" />
+    	</para>
+    </section>
     <section>
       <title>Some "advanced" features</title>
 
@@ -1113,7 +1144,7 @@ end</programlisting>
       id="section_files"></phrase></title>
 
       <para>Kermeta code can be quite large, and invloves many classes in
-      different metamodels. The main mecanism used to organise your code is
+      different metamodels. The main mechanism used to organise your code is
       the <literal>require</literal> statement.</para>
 
       <section>
@@ -1181,7 +1212,7 @@ class C inherits subPackage1::A
         <para>A typical error, is to require both an ecore file and the registered version of it. They represent two 
         distinct resources in memory.</para><para>
         A more clever error, is when the two versions are hidden inside an erroneous ecore file which uses 
-        several ways to access some metaclass and actually is not consistent... (ex: you find references to both http://www.eclipse.org/emf/2002/Ecore 
+        several ways to access some metaclass and actually is not consistent. (ex: you find references to both http://www.eclipse.org/emf/2002/Ecore 
         and platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore in the ecore file or one of the dependent files)
         </para></warning>		
 		
@@ -1199,11 +1230,11 @@ class C inherits subPackage1::A
         </para>
         <formalpara><title>Relative path</title><para>You can use a path relative to the 
         	current file using the normal syntax (./ , ../, etc) </para></formalpara>
-        <formalpara><title>Eclipse workspace relative path</title><para>In eclipse, you can use a path 
+        <formalpara><title>Eclipse workspace relative path</title><para>In Eclipse, you can use a path 
         	relative to the user's workspace. In that case the path looks like <literal>platform:/resource/<replaceable>your_project_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
-        <formalpara><title>Eclipse plugin relative path</title><para>In eclipse, you can use a path that search in 
+        <formalpara><title>Eclipse plugin relative path</title><para>In Eclipse, you can use a path that search in 
         the installed plugins. In that case the path looks like <literal>platform:/plugin/<replaceable>plugin_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
-        <formalpara><title>Eclipse workspace or plugin relative path</title><para>When deploying kermeta code, it is 
+        <formalpara><title>Eclipse workspace or plugin relative path</title><para>When deploying Kermeta code, it is 
         sometime interesting to search in both the user's workspace and in the plugins. In that case the path looks like <literal>platform:/lookup/<replaceable>plugin_or_project_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
         <note><para>This platform:/lookup/ is available in Kermeta only, and only in the require statement.</para>
         <para>Be careful, using the current version (Kermeta 1.3.1) since a deployed plugin using this protocol may be modified by the user's workspace content!</para></note>
@@ -1212,12 +1243,12 @@ class C inherits subPackage1::A
         ecore model plugin, it also registers the EPackage using a unique
         identifier (nsuri) in order to retreive it quickly. In Kermeta you can
         also use this nsuri into the require statement. This approach is
-        useful becauseyou can be sure that you require the very same model as
-        eclispe use to load and save models of that sort. For example, instead
+        useful because you can be sure that you require the very same model as
+        Eclipse use to load and save models of that sort. For example, instead
         of requiring ecore.ecore you may use <literal>require
         "http://www.eclipse.org/emf/2002/Ecore"</literal>. This also works for
         all other registered metamodels (Your own registered metamodel, UML
-        metamodel, etc ...). <ulink
+        metamodel, etc). <ulink
         url="http://www.kermeta.org/documents/ui_user_guide/">Kermeta user
         interface</ulink> provides a view that display all registered
         EPackages and their nsuri.</para></formalpara>
@@ -1227,9 +1258,9 @@ class C inherits subPackage1::A
 
         <para>Kermeta lets you organise your code the way you prefer. There is
         no predefined organisation of your code, but the language and the
-        workbench proposes various mecanisms and tools to structure it
+        workbench proposes various mechanisms and tools to structure it
         according to your needs and the style you wish for your code.
-        Typically if you use kermeta internal weaver (see <xref
+        Typically if you use Kermeta internal weaver (see <xref
         linkend="section_weaving.link" />), manually transform your ecore into
         Kermeta, eventually weaving the ecore using the merge button available
         on the worbench.</para>
@@ -1237,9 +1268,9 @@ class C inherits subPackage1::A
         <para>For example, you can put all your classes into a single file
         (like in Ecore, every classes is in the .ecore file) or you may create
         a file for each of them and then use the <literal>require</literal> to
-        indicates that they must know each other You can also use an
+        indicates that they must know each other. You can also use an
         organisation like java, with a file per class and a directory per
-        package...</para>
+        package.</para>
       </section>
     </section>
 
@@ -1281,7 +1312,7 @@ end</programlisting>
       linkend="section_collections.link">collection</link>. Then to use its
       content, you need to use the collection operation like add, addAll,
       remove, select, etc. If you use the assignment <literal>:=</literal> it
-      will replace your collection ...</para>
+      will replace your collection.</para>
     </section>
 
     <section id="section_basic_types.link">
@@ -1292,7 +1323,7 @@ end</programlisting>
 
         <para>Kermeta implements a few primitive types. By primitive types, we
         mean types that are basic to any language, i.e integer, and that have
-        a "literal" value. See below table.</para>
+        a literal value. See below table.</para>
 
         <informaltable>
           <tgroup cols="3">
@@ -1422,7 +1453,7 @@ end</programlisting>
         definition from another package if needed.</para>
 
         <tip><para>
-           It is interesting to redefine your own datatype for all the standard type you use in your metamodel, so when you convert the file into ecore in order to have serialisation, you won't have any dependency to framework.ecore (which is the ecore version of the framework where kermeta standard type) This allow a lazy coupling of the type definitions. 
+           It is interesting to redefine your own datatype for all the standard type you use in your metamodel, so when you convert the file into ecore in order to have serialisation, you won't have any dependency to framework.ecore (which is the ecore version of the framework where Kermeta standard type) This allow a lazy coupling of the type definitions. 
         </para></tip>
       </section>
     </section>
@@ -1576,7 +1607,7 @@ a := A&lt;Integer&gt;.new
           that are <emphasis role="strong">not</emphasis> intended to be run,
           you can put any type of parameters.</para>
 
-          <para>Technically, if you use kermeta inside Eclipse, when you will
+          <para>Technically, if you use Kermeta inside Eclipse, when you will
           ask it to run your operation, the interpreter will implicitely
           instanciate the class containing this operation, and then will call
           this operation.</para>
@@ -1598,7 +1629,7 @@ a := A&lt;Integer&gt;.new
         <emphasis>// do something with 1st and 2nd arguments</emphasis>
     <emphasis role="strong">end</emphasis>
 }
-<emphasis>// If you ask to launch main0, kermeta interpereter will create an instance of A and will run main0 on it.</emphasis></programlisting>
+<emphasis>// If you ask to launch main0, Kermeta interpereter will create an instance of A and will run main0 on it.</emphasis></programlisting>
         </section>
       </section>
 
@@ -1641,10 +1672,25 @@ class A
           <para>This is because of the compatibility with EMOF and Ecore. In
           those metalanguages, the user must always be able to create object
           (except if they are declared abstract), it cannot rely on a action
-          language (since they don't define one). In addition we want that all
+          language (since they don't define one). In addition, we want that all
           Meta tool be able to create the object the same way, so, as Ecore
-          doesn't provide constructor with its editors, then Kermeta doesn't
-          too.</para>
+          doesn't provide constructor with its editors, then neither does Kermeta.</para>
+          <para>However, you can easily add an <literal>init</literal> or <literal>myInitialize</literal> operation that will 
+          take as many parameters as you want. Even better, you can use a Builder or a Factory design pattern.</para>
+          <programlisting language="kermeta">
+aspect class ClassFromMyEcore {
+	 
+	operation init(myParam : String) : ClassFromMyEcore is do
+		// assign myParam to some attribute 
+		self.name := myParam
+		// return self for easier use
+		result := self
+	end
+	// now you can create and initialize this class in one line
+	// var foo : ClassFromMyEcore init ClassFromMyEcore.new.init("foo")	
+}
+          </programlisting>
+          
         </section>
 
          
@@ -1665,33 +1711,32 @@ class A
       <title id="section_inheritance.title.link">Inheritance<phrase
       id="section_inheritance"></phrase></title>
 
-      <para>As kermeta is Object Oriented, it supports inheritance. Like its
+      <para>As Kermeta is object-oriented, it supports inheritance. Like its
       basis EMOF, it support both, simple and multiple inheritance.</para>
 
       <section>
         <title>Using simple inheritance<phrase
         id="sec_simple-inheritance.link"></phrase></title>
 
-        <programlisting><emphasis role="strong">abstract</emphasis> <emphasis
-            role="strong">class</emphasis> Person
+        <programlisting language="kermeta">abstract class Person
 {
-    <emphasis role="strong">attribute</emphasis> name : string
-    <emphasis role="strong">attribute</emphasis> lastName : string
+    attribute name : string
+    attribute lastName : string
 
-    <emphasis role="strong">reference</emphasis> father : Male#children 
-    <emphasis role="strong">reference</emphasis> mother : Female#children
+    reference father : Male#children 
+    reference mother : Female#children
 }
 
-<emphasis role="strong">class</emphasis> Male <emphasis role="strong">inherits</emphasis> Person
+class Male inherits Person
 {
-    <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#father
-    <emphasis role="strong">reference</emphasis> wife : Female[0..1]#husband
+    reference children : oset Person[0..*]#father
+    reference wife : Female[0..1]#husband
 }
 
-class Female <emphasis role="strong">inherits</emphasis> Person
+class Female inherits Person
 {
-    <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#mother
-    <emphasis role="strong">reference</emphasis> husband : Male[0..1]#wife
+    reference children : oset Person[0..*]#mother
+    reference husband : Male[0..1]#wife
 }</programlisting>
 
         <para>In this example, we define a simple model which represent
@@ -1734,12 +1779,12 @@ class AnotherSubA inherits A {
         </programlisting>
 
         <para>In this situation you must use one of the following methods :
-        conditionnal assignment or asType</para>
+        conditional assignment or asType</para>
 
         <section>
-          <title>Casting using contionnal assignment</title>
+          <title>Casting using conditional assignment</title>
 
-          <para>The conditionnal assignment <literal>?=</literal> allows to
+          <para>The conditional assignment <literal>?=</literal> allows to
           assign only if the passed object is of the correct type. If not of
           the correct type, the assigned value will simply be
           <literal>Void</literal>.</para>
@@ -1747,11 +1792,11 @@ class AnotherSubA inherits A {
           <programlisting language="kermeta">
 	aSubA ?= aA  // works
 	var aAnotherSubA : AnotherSubA
-	aAnotherSubA ?= aA  // works too, but has been assigned Void and not the value ...
+	aAnotherSubA ?= aA  // works too, but has been assigned Void and not the value 
         	</programlisting>
 
           <para>This still propose some control on the types and won't accept
-          all kind of cast, for example, you cannot conditionnaly assign if
+          all kind of cast, for example, you cannot conditionaly assign if
           you don't have a common supertype.</para>
 
           <programlisting language="kermeta">
@@ -1790,7 +1835,7 @@ class C {
 
           <para>In complement you can use the <literal>isVoid</literal>
           operation (available on every object) to test the result of a
-          conditionnal cast. Or you may use the <literal>isKindOf</literal> or the <literal>isInstanceOf</literal>
+          conditional cast. Or you may use the <literal>isKindOf</literal> or the <literal>isInstanceOf</literal>
           operations to test if the calling object has the same type of the given class before
           the assignment/asType. The <literal>isKindOf</literal> operation returns <literal>true</literal> if the calling object 
           has exactly the same type than the given class. The <literal>isInstanceOf</literal> operation returns <literal>true</literal>
@@ -2309,7 +2354,7 @@ class C {
       <section>
         <title>Prepare a model</title>
 
-        <para>The user will refer to eclipse documentation for the creation of
+        <para>The user will refer to Eclipse documentation for the creation of
         an EMF model from its ECore meta-model. We suggest to use the Wizard
         samples to create, at the first hand, an Ecore meta-model, and then,
         at the second hand, instances of this Ecore meta-model, using the
@@ -2333,7 +2378,8 @@ class C {
           <listitem>
             <para>At the top of the source code where you will access your
             model, don't forget to add <literal>require "your_metamodel.ecore"
-            </literal>so that you can access your metamodel in Kermeta.</para>
+            </literal> so you can tell Kermeta that you will create/load/manipulate 
+            instances of these metaclasses.</para>
 
             <para>Alternatively, you can use the Kermeta version of your
             metamodel using <literal>require "your_metamodel.kmt"</literal> or
@@ -2357,31 +2403,29 @@ class C {
           </listitem>
         </itemizedlist>
 
-        <programlisting><emphasis role="strong">@mainClass</emphasis> "root::TestCSLoading"
-<emphasis role="strong">@mainOperation</emphasis> "main"
+        <programlisting language="kermeta">@mainClass "root::TestCSLoading"
+@mainOperation "main"
 
-<emphasis role="strong">package</emphasis> root;
+package root;
 
-<emphasis role="strong">require</emphasis> kermeta
-<emphasis role="strong">require</emphasis> "cs.ecore"
+require kermeta
+require "cs.ecore"
 
-<emphasis role="strong">using</emphasis> kermeta::standard
-<emphasis role="strong">using</emphasis> kermeta::persistence
+using kermeta::standard
+using kermeta::persistence
 
-<emphasis role="strong">class</emphasis> TestCSLoading
+class TestCSLoading
 {
-     <emphasis role="strong">operation</emphasis> initialize(uri : String, mm_uri : String) : Set&lt;Object&gt; <emphasis
-            role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-         <emphasis>/* Initialize the EMF repository */</emphasis>
-         <emphasis role="strong">var</emphasis> repository     : EMFRepository init EMFRepository.new
-         <emphasis>/* Create an EMF Resource */</emphasis>
-         <emphasis role="strong">var</emphasis> resource : Resource init repository.createResource(uri, mm_uri)
-         <emphasis>/* Load the resource */</emphasis>
+     operation initialize(uri : String, mm_uri : String) : Set&lt;Object&gt; is do
+         /* Initialize the EMF repository */
+         var repository     : EMFRepository init EMFRepository.new
+         /* Create an EMF Resource */
+         var resource : Resource init repository.createResource(uri, mm_uri)
+         /* Load the resource */
          resource.load
-         <emphasis>/* Get the loaded __root__ instances (a Set&lt;Object&gt;) */</emphasis>
-         <emphasis role="strong">result</emphasis> := resource  // a resource is a collection of objects contained
-     <emphasis role="strong">end</emphasis>
- </programlisting>
+         /* Get the loaded __root__ instances (a Set&lt;Object&gt;) */
+         result := resource  // a resource is a collection of objects contained
+     end</programlisting>
 
         <itemizedlist>
           <listitem>
@@ -2399,11 +2443,8 @@ class C {
 
         <programlisting language="kermeta">
 operation main() is do 
-   var instances := self.initialize("./test.cs", "./cs.ecore") 
-   from var it : Iterator&lt;Object&gt; init instances.iterator 
-   until it.isOff 
-   loop
-      var o : Object o := it.next 
+   var instances : Set&lt;Object&gt; init self.initialize("./test.cs", "./cs.ecore")
+   instances.each{ o |
       if (o == void) then stdio.writeln("Void object!") 
       else 
          stdio.writeln("---------------------------------") 
@@ -2424,7 +2465,7 @@ operation main() is do
          decision ?= o 
          stdio.writeln(" name : " + decision.name) 
       end
-   end
+   }
 }</programlisting>
 
         <para>If your resource is dependent of other resources and that EMF
@@ -2435,7 +2476,12 @@ operation main() is do
       <section>
         <title>Save a model into an EMF Resource</title>
 
-        <para>TODO : give an example.</para>
+        <para>To save a model, simply add the model elements in a Resource then 
+        call the save operation. All model elements contained by these added elements 
+        will also be saved in the Resource.</para>
+        <para>You can split your model in several files by using several resources, 
+        but you need to make sure that they all belong to the same Repository. Otherwise, 
+        you'll get at best a Dangling exception, or worse create inconsistent files.</para>
       </section>
     </section>
 
@@ -2452,23 +2498,23 @@ operation main() is do
         define some classes in a package you may define them in a specific
         file and start this file with a package naming directive (followed by
         a semi-colon) like in the following example<footnote id="ftn1">
-            <para>Each kermeta file(.kmt) must declare a package
+            <para>Each Kermeta file(.kmt) must declare a package
             directive.</para>
           </footnote>.</para>
 
         <para><emphasis role="strong">Example 1</emphasis>: 1 file.kmt == 1
         package naming directive</para>
 
-        <programlisting><emphasis>// My file</emphasis>
-<emphasis role="strong">package</emphasis> MyNewPackage;
+        <programlisting language="kermeta">// My file
+package MyNewPackage;
 
-<emphasis role="strong">class</emphasis> A { 
-<emphasis>// ...</emphasis> 
+class A { 
+// ... 
 }</programlisting>
 
-        <programlisting>
-<emphasis role="strong">class</emphasis> B {
-<emphasis>// ...</emphasis> 
+        <programlisting language="kermeta">
+class B {
+// ... 
 }</programlisting>
 
         <para>Here, classes A and B are defined in a package called
@@ -2481,22 +2527,22 @@ operation main() is do
         <para role="lineBreak"><emphasis role="strong">Example 2</emphasis>:
         Defining subpackages using braces</para>
 
-        <programlisting><emphasis>// file : MyPackage-part1.kmt</emphasis>
-<emphasis role="strong">package</emphasis> MyPackage;
+        <programlisting language="kermeta">// file : MyPackage-part1.kmt
+package MyPackage;
 
-<emphasis role="strong">package</emphasis> subPackage1 
+package subPackage1 
 {
-    <emphasis role="strong">class</emphasis> A 
+    class A 
     {
-<emphasis>// ...</emphasis>
+// ...
     }
 }
 
-<emphasis role="strong">package</emphasis> subPackage2
+package subPackage2
 {
-    <emphasis role="strong">class</emphasis> B
+    class B
     {
-<emphasis>// ...</emphasis>
+// ...
     }
 }</programlisting>
 
@@ -2526,12 +2572,12 @@ operation main() is do
         <para><emphasis role="strong">Example 3</emphasis>: Defining
         subpackage using <literal>::</literal> syntactic sugar</para>
 
-        <programlisting><emphasis>// file : subPackage3.kmt</emphasis>
-<emphasis role="strong">package</emphasis> MyPackage::subPackage3;
+        <programlisting language="kermeta">// file : subPackage3.kmt
+package MyPackage::subPackage3;
 
-<emphasis role="strong">class</emphasis> C 
+class C 
 {
-<emphasis>// ...</emphasis>
+// ...
 }</programlisting>
 
         <para>If a given file, when you want to use a class definition that is
@@ -2541,20 +2587,20 @@ operation main() is do
         clearer: the <literal>using</literal> primitive provides such a
         shortcut. Taking the previous example, it becomes:</para>
 
-        <programlisting><emphasis>// file : MyPackage-part2.kmt</emphasis>
-<emphasis role="strong">package</emphasis> MyPackage;
+        <programlisting language="kermeta">// file : MyPackage-part2.kmt
+package MyPackage;
 
-<emphasis role="strong">require</emphasis> "MyPackage-part1.kmt"
+require "MyPackage-part1.kmt"
 
-<emphasis role="strong">using</emphasis> subPackage1 <emphasis>// &lt;- "shortcut"!</emphasis> 
+using subPackage1 // &lt;- "shortcut"! 
 
-<emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> A 
+class C inherits A 
 {
-<emphasis></emphasis><emphasis>// ...</emphasis>
+// ...
 }</programlisting>
 
         <para>The using statement is a syntactical shorcut, it has no
-        conterpart in kermeta metamodel.</para>
+        conterpart in Kermeta metamodel.</para>
 
         <note><para>
            The using statement is different from the definition of a local datatype with an alias. (See 
@@ -2571,13 +2617,13 @@ operation main() is do
       <title id="section_collections.title.link">Collections<phrase
       id="section_collections"></phrase></title>
 
-      <para>Collections are widely used in kermeta not only because of their
+      <para>Collections are widely used in Kermeta not only because of their
       usual usage for collecting data in variables but also because they are
       used to represent <link linkend="section_properties.link">class
       property</link> when the multiplicity is greater than 1.</para>
 
       <para>Collections is one of the concept where the genericity is the most
-      visible sinc it greatly helps to write more robust code.</para>
+      visible since it greatly helps to write more robust code.</para>
 
       <section>
         <title>Definition and initialization</title>
@@ -2685,7 +2731,7 @@ operation main() is do
         </informaltable>
 
         <figure id="refIllustration4">
-          <title>: The kermeta collections</title>
+          <title>: The Kermeta collections</title>
 
           <mediaobject>
             <imageobject>
@@ -2708,19 +2754,19 @@ operation main() is do
         <para><emphasis role="strong">Example 1</emphasis>: how to declare
         collections</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 using kermeta::standard		// don't need to specify it all the time
-	<emphasis>// This is the simpliest and recommanded way of declaring a collection variable</emphasis>
-	<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
-	<emphasis role="strong">var</emphasis> myColB : OrderedSet&lt;Integer&gt; <emphasis>// this is equivalent to saying oset Integer[0..*]</emphasis>
+	// This is the simpliest and recommanded way of declaring a collection variable
+	var myColA : Set&lt;Integer&gt; // this is equivalent to saying set Integer[0..*]
+	var myColB : OrderedSet&lt;Integer&gt; // this is equivalent to saying oset Integer[0..*]
 		</programlisting>
 
-        <programlisting>
-	<emphasis>// Collection with multiplicities</emphasis>
-	<emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]<emphasis> // At least 4 elements and never more than 6</emphasis>
-	<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*]<emphasis> // At least two strings in the sequence</emphasis>
-	<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">set</emphasis> String[1..*]<emphasis> // An non empty set</emphasis>
-	<emphasis role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
+        <programlisting language="kermeta">
+	// Collection with multiplicities
+    var myCol1 : set Integer[4..6] // At least 4 elements and never more than 6
+	var myCol3 : seq String[2..*] // At least two strings in the sequence
+	var myCol4 : set String[1..*] // An non empty set
+	var myCol5 : String[1..*] // If you don't specify any keyword, it is an ordered set
         </programlisting>
 
         <para>There is currently no way to define a collection by extension
@@ -2732,35 +2778,24 @@ using kermeta::standard		// don't need to specify it all the time
         <para><emphasis role="strong">Example 2</emphasis>: initialize
         collections</para>
 
-        <programlisting><emphasis>// Example of declaration of variables as Collections. All those syntaxes are valid</emphasis>
-<phrase id="DDE_LINK1"></phrase><emphasis role="strong">var</emphasis> myCol1 : <emphasis
-            role="strong">set</emphasis> Integer[0..*]    <emphasis
-            role="strong">init</emphasis> kermeta::standard::Set&lt;Integer&gt;.new
-<emphasis>// Fill in myCol1</emphasis>
+        <programlisting language="kermeta">// Example of declaration of variables as Collections. All those syntaxes are valid
+<phrase id="DDE_LINK1"></phrase>var myCol1 : set Integer[0..*]    init kermeta::standard::Set&lt;Integer&gt;.new
+// Fill in myCol1
 myCol1.add(10)
 myCol1.add(50)
 
-<emphasis role="strong">var</emphasis> myCol2 : <emphasis role="strong">oset</emphasis> String[0..*]    <emphasis
-            role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;String&gt;.new
-<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">bag</emphasis> Boolean[0..*]    <emphasis
-            role="strong">init</emphasis> kermeta::standard::Bag&lt;Boolean&gt;.new
-<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">seq</emphasis> Integer[0..*]    <emphasis
-            role="strong">init</emphasis> kermeta::standard::Sequence&lt;Integer&gt;.new
-<emphasis>// if no keyword specified, and multiplicity is set, it is an OrderedSet</emphasis></programlisting>
+var myCol2 : oset String[0..*]    init kermeta::standard::OrderedSet&lt;String&gt;.new
+var myCol3 : bag Boolean[0..*]    init kermeta::standard::Bag&lt;Boolean&gt;.new
+var myCol4 : seq Integer[0..*]    init kermeta::standard::Sequence&lt;Integer&gt;.new
+// if no keyword specified, and multiplicity is set, it is an OrderedSet</programlisting>
 
-        <programlisting><emphasis role="strong">var</emphasis> myCol4 : String[0..*]<emphasis
-            role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;String&gt;.new
+        <programlisting language="kermeta">var myCol4 : String[0..*] init kermeta::standard::OrderedSet&lt;String&gt;.new
 </programlisting>
 
-        <programlisting><emphasis role="strong">var</emphasis> myCol1a : <emphasis
-            role="strong">seq</emphasis> Integer[0..*]    <emphasis
-            role="strong">init</emphasis> myCol1
-<emphasis role="strong">var</emphasis> myCol2a : <emphasis role="strong">oset</emphasis> String[0..*]    <emphasis
-            role="strong">init</emphasis> myCol2
-<emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Bag&lt;Boolean&gt; <emphasis
-            role="strong">init</emphasis> myCol3
-<emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Sequence&lt;Integer&gt; <emphasis
-            role="strong">init</emphasis> myCol4</programlisting>
+        <programlisting language="kermeta">var myCol1a : seq Integer[0..*]    init myCol1
+var myCol2a : oset String[0..*]    init myCol2
+var myCol3a : kermeta::standard::Bag&lt;Boolean&gt; init myCol3
+var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlisting>
 
         <note><para>
            Conclusion : in most cases, you don't need to use this special syntax, you can simply use the generic collection names (Set&lt;Something&gt;, OrderedSet&lt;Something&gt;, etc.) available in Kermeta framework. Moreover, lower and upper bounds aren’t checked yet by Kermeta type checker and interpreter. 
@@ -2778,71 +2813,67 @@ myCol1.add(50)
 		<section>
 			<title>Function <emphasis>each</emphasis></title>
 			<para>TODO</para>
-	        <programlisting>aCollection.<emphasis role="strong">each</emphasis> { e | 
-	    <emphasis>/* do something with each element e of this collection */</emphasis>
-}
-			</programlisting>
+	        <programlisting language="kermeta">aCollection.each { e | 
+	    /* do something with each element e of this collection */
+}</programlisting>
 		</section>
 
 		<section>
 			<title>Function <emphasis>forAll</emphasis></title>
 			<para>TODO</para>
-	        <programlisting>aBoolean := aCollection.<emphasis role="strong">forAll</emphasis> { e | <emphasis>/* put here a condition */</emphasis>
-	} <emphasis>// return true if the condition is true for all elements in the collection.</emphasis></programlisting>
+	        <programlisting language="kermeta">aBoolean := aCollection.forAll { e | /* put here a condition */
+	} // return true if the condition is true for all elements in the collection.</programlisting>
 		</section>
 		
 		<section>
 			<title>Function <emphasis>select</emphasis></title>
 			<para>TODO</para>
-	        <programlisting>aCollection2 := aCollection.<emphasis role="strong">select</emphasis> { e | 
-	     <emphasis>/* put here a condition that returns true for elements that must be included in the resulting Collection */</emphasis>
-	}
-			</programlisting>
+	        <programlisting language="kermeta">aCollection2 := aCollection.<emphasis role="strong">select</emphasis> { e | 
+	     /* put here a condition that returns true for elements that must be included in the resulting Collection */
+	}</programlisting>
 		</section>
 
 		<section>
 			<title>Function <emphasis>reject</emphasis></title>
 			<para>TODO</para>
-	        <programlisting>aCollection2 := aCollection.<emphasis role="strong">reject</emphasis> { e | 
-	     <emphasis>/* put here a condition that returns true for elements that must be exclude in the resulting Collection */</emphasis>
-	}
-			</programlisting>
+	        <programlisting language="kermeta">aCollection2 := aCollection.<emphasis role="strong">reject</emphasis> { e | 
+	     /* put here a condition that returns true for elements that must be exclude in the resulting Collection */
+	}</programlisting>
 		</section>
 
 		<section>
 			<title>Function <emphasis>collect</emphasis></title>
 			<para>TODO</para>
-			<programlisting><emphasis> // return a new collection which size is the same as in the original </emphasis>
-			<emphasis> // collection, and which element type is the type of the result of the expression.</emphasis>
+			<programlisting language="kermeta"> // return a new collection which size is the same as in the original 
+			 // collection, and which element type is the type of the result of the expression.
 			aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e | 
-			     <emphasis>/* put here an expression, for example e.name */</emphasis>
-			}
-			</programlisting>
+			     /* put here an expression, for example e.name */
+			}</programlisting>
 		</section>
 		
 		<section>
 			<title>Function <emphasis>detect</emphasis></title>
 			<para>TODO</para>
-        	<programlisting>anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns an element (usually the first) that fulfills the condition.</programlisting>
+        	<programlisting language="kermeta">anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | /* a condition */} // returns an element (usually the first) that fulfills the condition.</programlisting>
 		</section>
 
 		<section>
 			<title>Function <emphasis>exists</emphasis></title>
 			<para>Function <emphasis>exists</emphasis> returns <emphasis>true</emphasis> if at least one element fulfills the last boolean 
 			expression defined into the block. For instance:</para>
-			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns true if at least one element fulfills the condition.</programlisting>
+			<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | /* a condition */} // returns true if at least one element fulfills the condition.</programlisting>
 			<para>If several boolean condition are defined into the block of function <emphasis>exists</emphasis>, the last condition is used for the test.
 			For instance, the following function exists returns true at the first iteration:</para>
-			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | false true }</programlisting>
+			<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | false true }</programlisting>
 			<para>Instructions can be defined into the block of function <emphasis>exists</emphasis>. For instance, the following code displays the current object at each iteration:</para>
-			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e |
+			<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e |
 				stdio.writeln(e.toString)
-				<emphasis>/* a condition */</emphasis>
+				/* a condition */
 			}
 			</programlisting>
 			<para>If no boolean expression is defined, value <emphasis>Void</emphasis> is returned, as illstrated in the following example. Such a use of function <emphasis>exists</emphasis> is not adviced
 			since it corresponds to the use of function <emphasis>each</emphasis>.</para>
-			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | stdio.writeln(e.toString) }<emphasis>/* The value of aBoolean is <emphasis>Void</emphasis> */</emphasis></programlisting>
+			<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | stdio.writeln(e.toString) }/* The value of aBoolean is Void */</programlisting>
 		</section>
       </section>
     </section>
@@ -2862,7 +2893,7 @@ myCol1.add(50)
       role="strong">opposite</emphasis> properties. This last concept is
       explained in the following subsection.</para>
 
-      <para>Unlike UML, there is no concept of visibility in kermeta, so every
+      <para>Unlike UML, there is no concept of visibility in Kermeta, so every
       property is visible</para>
 
       <section id="section_properties-opposite.link">
@@ -2908,7 +2939,7 @@ myCol1.add(50)
         <para>Attributes, references and properties underlying collections may
         eventually be specialized. By default, they are represented by an
         OrderedSet. If you wish to be more precise and for exemple allow to
-        have several item with the same value in your collection, you can use
+        have several items with the same value in your collection, you can use
         the collection modifiers as defined in <xref
         linkend="section_collections.link" /></para>
 
@@ -3292,6 +3323,13 @@ assert(a5c.equals(a5))</programlisting></entry>
           <literal>addAll</literal>
 
            operations. 
+        </para></note>
+        <note><para>For the same reason,<literal>reference refA : OrderedSet&lt;String&gt;</literal>
+        is different from <literal>reference refB  : String[0..*]</literal>. 
+        If both can be navigated the same way (using add, each or any operation available on Collection), 
+        <literal>refA</literal> needs to be created before use with <literal>refA := OrderedSet&lt;String&gt;.new</literal>.
+        <literal>refA</literal> is a reference to a colection whereas <literal>refB</literal> is a reference to
+         String with a multiplicity greater than 1 (which is internally represented as a ReflectiveCollection&lt;String&gt;)
         </para></note>
       </section>
 
@@ -3967,7 +4005,7 @@ and op.name.indexOf("All")==-1}
     </section>
 
     <section id="section_weaving.link">
-      <title id="section_weaving.title.link">Weaving kermeta code<phrase
+      <title id="section_weaving.title.link">Weaving Kermeta code<phrase
       id="section_weaving"></phrase></title>
 
       <para>Since version 0.4.1, it is possible to write Kermeta code using a
@@ -4092,7 +4130,7 @@ aspect class A {
 
         <note><para>Please note that the visibility of the features is respected. In
         base.kmt, class A doesn't know about attributes id or
-        decorators...</para></note>
+        decorators.</para></note>
 
 		<tip>
 			<para>In the previous example we aspectize a *.kmt, we could choose to aspectize the corresponding *.ecore file.</para>
@@ -4205,7 +4243,7 @@ aspect class A {
         <para>The second declaration, has a body. It implements a kind of
         default behavior for the operation that will be used if no other body
         is declared for this operation. this is useful when converting ecore
-        models into kermeta for example.</para>
+        models into Kermeta for example.</para>
 
         <para>The last definition is the one that will be used in this
         context.</para>
@@ -4221,7 +4259,7 @@ aspect class A {
       <section>
         <title>Aspect and abstract</title>
 
-        <para>In kermeta textual syntax, the keyword aspect must be placed before the keyword abstract.</para>
+        <para>In Kermeta textual syntax, the keyword aspect must be placed before the keyword abstract.</para>
         <para>Example :</para>
         <programlisting language="kermeta">package pack;
 require kermeta
@@ -4257,14 +4295,14 @@ aspect abstract class A {
       able to typecheck this kind of model. A model type is simply the set of
       the type of all allowed model elements.</para>
 
-      <para>In addition, it introduce a mecanism of conformance between
+      <para>In addition, it introduce a mechanism of conformance between
       modeltype that helps to reuse code from one metamodel to another.</para>
 
       <section>
         <title>Definition of a model type</title>
 
         <para>A model type is simply a set of metaclasses. Expressed in
-        kermeta, this is a collection of kermeta classes.</para>
+        Kermeta, this is a collection of Kermeta classes.</para>
 
         <programlisting language="kermeta">
 package aMetamodel;
@@ -4378,7 +4416,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         </note>
 
         <warning><para>
-           The current implementation works only when there is no ambiguity, if there is ambiguity between two metamodels, then they are considered as not conformant. A future version, may eventually introduce a binding mecanism that would allows to remove those ambiguity. (See Jim Steel Phd thesis for more details ???) 
+           The current implementation works only when there is no ambiguity, if there is ambiguity between two metamodels, then they are considered as not conformant. A future version, may eventually introduce a binding mechanism that would allows to remove those ambiguity. (See Jim Steel Phd thesis for more details ???) 
         </para></warning>
       </section>
 
@@ -4400,13 +4438,13 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
       Kermeta</title>
 
       <para>If you have existing code that you want to run in a Kermeta
-      program, you can use one of those two mecanisms : extern call or
+      program, you can use one of those two mechanisms : extern call or
       seamless require.</para>
 
       <para>The extern call is currently the more robust approach as it is
       used internally by Kermeta to implement some part of its framework. It
       also helps to clearly specify the border between java and
-      kermeta.</para>
+      Kermeta.</para>
 
       <para>The seamless java require is more straitghforward to use (no
       wrapper to write) but is still in prototype (v0.4.2) and still have
@@ -4700,7 +4738,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
     MOF only defines structures, and the operational semantic corresponding to
     MOF concepts has to be defined in Kermeta. For instance MOF does not
     provide a semantic for behavior inheritance (concepts like method
-    redefinition, abstract method, ... does not have any sense in the
+    redefinition, abstract method, etc does not have any sense in the
     MOF).</para>
 
     <section id="section_architecture.link">
@@ -5075,7 +5113,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       Kermeta program as a model, typically to transform it.</para>
 
       <warning><para>
-         You should not try to execute operations on kermeta models you've just dynamically created unless you froze it. This is a feature which has not been completly tested. 
+         You should not try to execute operations on Kermeta models you've just dynamically created unless you froze it. This is a feature which has not been completly tested. 
       </para></warning>
 
       <para>Another typical way to access to a Kermeta model and Kermeta
@@ -5660,7 +5698,7 @@ package myPackage;
 		<varlistentry><term><varname>mainClass</varname></term>
 			<listitem>
 			<formalpara><title>Possible values</title>
-				<para>Qualified name of a class in the kermeta program.
+				<para>Qualified name of a class in the Kermeta program.
 				</para>
 			</formalpara>	
 			<formalpara><title>Context</title>
@@ -5668,7 +5706,7 @@ package myPackage;
 				</para>
 			</formalpara>
 			<formalpara><title>Use description</title>
-				<para>Indicates a preferred class from which the run configuration should try to start the kermeta program.
+				<para>Indicates a preferred class from which the run configuration should try to start the Kermeta program.
 				This helps to create a default run configuration.
 				Must be used with the mainOperation tag.
 				</para>
@@ -5700,7 +5738,7 @@ class MyMainClass
 				</para>
 			</formalpara>
 			<formalpara><title>Use description</title>
-				<para>Indicates a preferred operation from which the run configuration should try to start the kermeta program.
+				<para>Indicates a preferred operation from which the run configuration should try to start the Kermeta program.
 				This helps to create a default run configuration.
 				Must be used with the mainClass tag. The operation must : either have no parameter, or have string parameters.
 				</para>
@@ -5728,8 +5766,8 @@ class MyMainClass
   <appendix id="appendix_KermetaEcore.link">
     <title id="appendix_KermetaEcore.title.link">Kermeta / Ecore mapping</title>
 
-	<para>Kermeta natively integrates Ecore defintions, however it uses an internal mapping in order to import ecore model as kermeta models.
-	In the other way round a kermeta model can be translated into a pure ecore model. (for example in the compiler)</para>
+	<para>Kermeta natively integrates Ecore defintions, however it uses an internal mapping in order to import ecore model as Kermeta models.
+	In the other way round a Kermeta model can be translated into a pure ecore model. (for example in the compiler)</para>
     <para>This annex indicates how Kermeta models are translated into Ecore models and vice versa.</para>
     <note><para>TODO : finish this by looking into kermeta2ecore transformation and the compiler specifications.</para></note>
     <informaltable>
