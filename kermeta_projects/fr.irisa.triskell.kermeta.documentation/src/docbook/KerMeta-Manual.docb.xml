@@ -239,7 +239,7 @@ end
       </section>
 
       <section>
-        <title>Corresponding section in the Reference chapter</title>
+        <title>Corresponding sections in the Reference chapter</title>
 
         <para>All these "classic" imperative features and their syntaxes are
         described in <xref linkend="chapter_reference.link" />. More precisely
@@ -319,7 +319,7 @@ class Child inherits Reader {
 }</programlisting>
 
       <section>
-        <title>Corresponding section in the Reference chapter</title>
+        <title>Corresponding sections in the Reference chapter</title>
 
         <para>You can get more informations about Kermeta object-oriented
         features in <xref linkend="chapter_reference.link" />. More precisely
@@ -517,7 +517,7 @@ smithBooks.addAll(
       </section>
 
       <section>
-        <title>Corresponding section in the Reference chapter</title>
+        <title>Corresponding sections in the Reference chapter</title>
 
         <para>You can get more informations about all Kermeta model-oriented
         features in the <xref linkend="chapter_reference.link" />. More
@@ -563,11 +563,13 @@ smithBooks.addAll(
 		Thank to this composition operator, Kermeta can remain a kernel platform to safely integrate all the 
 		concerns around a meta-model. This feature has proved to be extreemly useful in the context of 
     	metamodel engineering. </para>
-    	<para>
-    	More details in <xref
-          endterm="section_weaving.title.link"
-          linkend="section_weaving.link" />
-    	</para>
+    	<section>
+        	<title>Corresponding section in the Reference chapter</title>
+	    	<para>
+	    	You'll find more details in the Reference chapter, more precisely in: <xref
+	          linkend="section_weaving.link" />
+	    	</para>
+    	</section>
     </section>
     <section>
       <title>Some "advanced" features</title>
