@@ -53,7 +53,7 @@
                     url="http://gforge.inria.fr/tracker/?group_id=32">
                     <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
                 </ulink> or using the developer mailing list
-                (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.0 </para>
+                (kermeta-developers@lists.gforge.inria.fr) Last check: v1.4.1 </para>
         </important>
         <tip>
             <para> The most update version of this document is available on line from <ulink type=""
@@ -97,7 +97,7 @@
                         the metamodel;</para>
                 </listitem>
                 <listitem>
-                    <para>we will <link linkend="chapter_behaviour.link">add some behaviour</link>
+                    <para>we will <link linkend="chapter_behavior.link">add some behavior</link>
                         (through aspect weaving with Kermeta) where you can bind with another
                         framework (provide GUI defined with another language - Java for example).
                     </para>
@@ -113,8 +113,7 @@
         </figure>
     </chapter>
     <chapter id="chapter_define_abstract_syntax.link">
-        <title id="chapter_define_abstract_syntax.title.link">Define abstract
-            syntax<phrase/></title>
+        <title id="chapter_define_abstract_syntax.title.link">Define abstract syntax</title>
         <section>
             <title>Terminology and format used in this tutorial<phrase/></title>
             <orderedlist>
@@ -133,14 +132,17 @@
                 <listitem>
                     <para><emphasis role="bold">model object / root class</emphasis>: in the scope
                         of the EMF dynamic editor, these terms designate the model root class that
-                        contains all other ones. This root class is the only one in a model that has
+                        contains all other ones. This is usually a good practice  to define a class which 
+                        is the only one in a model to have
                         no container (i.e. which has no “black-diamonded” relation pointing to
-                        it).</para>
+                        it).<footnote>This isn't mandatory but this helps using generic tools like the EMF reflective tree editor</footnote></para>
                 </listitem>
                 <listitem>
                     <para><emphasis role="bold">containment</emphasis>: this term designates an
-                        important property of classes attributes/references. This property has to be
-                        appropriately set, in such a way that all the elements of an instance-model
+                        important property of classes associations. This property has to be
+                        appropriately set<footnote>Be careful of the terminology, 
+                        in ecore, this is done using a property on an <literal>EReference</literal>, in kermeta textual syntax, 
+                        this is done by using the keyword <literal>attribute</literal> rather than <literal>reference</literal></footnote>, in such a way that all the elements of an instance-model
                         should be accessed from the root class of the model, which is aimed at being
                         the highest-level container.</para>
                 </listitem>
@@ -275,8 +277,7 @@
         </section>
     </chapter>
     <chapter id="chapter_model_manipulation_kermeta.link">
-        <title id="chapter_model_manipulation_kermeta.title.link">Model manipulation in
-            Kermeta<phrase/></title>
+        <title id="chapter_model_manipulation_kermeta.title.link">Model manipulation in Kermeta</title>
         <para>This section illustrates some importants steps in order to succesfully manipulate the
             metamodel in Kermeta. This is about <emphasis role="italic">why to register</emphasis>
             your metamodel and <emphasis role="italic">how to load/save</emphasis> it.</para>
@@ -376,8 +377,8 @@
             </itemizedlist>
         </note>
     </chapter>
-    <chapter id="chapter_behaviour.link">
-        <title id="chapter_behaviour.title.link">Behaviour<phrase/></title>
+    <chapter id="chapter_behavior.link">
+        <title id="chapter_behavior.title.link">Behavior<phrase/></title>
         <para>Like adding the contracts seen on the previous chapter, some <emphasis role="bold"
                 >dynamic semantics</emphasis> can be added to our metamodel through Kermeta
                 <emphasis role="bold">aspect weaving</emphasis>. According to the dynamic behave
@@ -386,20 +387,20 @@
             you want for that element). </para>
         <para>To do so you have to define a <emphasis role="bold">virtual machine</emphasis> (VM)
             representing the application domain where you'are going to weave your methods.</para>
-        <para>If needed, you can implement a Kermeta wrapper to another language or librairy to add
-            missing feature to your VM (you can call <emphasis role="bold">Java.lang.Math</emphasis>
+        <para>If needed, you can implement a Kermeta wrapper to another language or library to add
+            missing feature to your VM (For example, you can call <emphasis role="bold">Java.lang.Math</emphasis>
             to perform calculation or <emphasis role="bold">Java AWT</emphasis> for drawing). </para>
         <note>
             <para>A complete example is given inside : </para>
             <itemizedlist>
                 <listitem>
-                    <para>chapter 8 "Behaviour" in <ulink
+                    <para>chapter 8 "Behavior" in <ulink
                             url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
                             >FSM tutorial</ulink>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>chapter 7 "Behaviour" in <ulink
+                    <para>chapter 7 "Behavior" in <ulink
                             url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
                             >Logo Tutorial</ulink></para>
                 </listitem>
@@ -407,8 +408,7 @@
         </note>
     </chapter>
     <chapter id="chapter_model_transformation_compilation.link">
-        <title id="chapter_model_transformation.title.link">Model transformation -
-            Compilation<phrase/></title>
+        <title id="chapter_model_transformation.title.link">Model transformation - Compilation<phrase/></title>
         <para>In this next part of the tutorial, we manage the transformation of the metamodel or
             its compilation to another environement.</para>
         <para>Through the same mechanism of <emphasis role="bold">aspect weaving</emphasis> provided
