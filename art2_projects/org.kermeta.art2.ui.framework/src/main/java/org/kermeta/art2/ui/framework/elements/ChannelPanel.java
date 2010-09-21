@@ -140,13 +140,16 @@ public class ChannelPanel extends JPanel implements TitledElement,SelectElement 
     private BufferedImage shadow;
     protected boolean active = false;
 
+    private Boolean selected = false;
+
     @Override
-    public void setSelected(Boolean selected) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setSelected(Boolean _selected) {
+        selected = _selected;
+        active = _selected;
     }
 
     @Override
     public Boolean getSelected() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return selected;
     }
 }
