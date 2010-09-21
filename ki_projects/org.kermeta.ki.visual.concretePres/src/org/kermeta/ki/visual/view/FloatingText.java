@@ -73,7 +73,7 @@ public class FloatingText {
 		if(text==null || text.length()==0)
 			return false;
 		
-		Rectangle2D rec = new TextLayout(text, role.view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds();
+		Rectangle2D rec = new TextLayout(text, role.view.entitySrc.getBodyFont(), EntityView.FONT_RENDER_CONT).getBounds();
 		rec.setFrame(position.x, position.y-rec.getHeight(), rec.getWidth(), rec.getHeight());
 		return rec.contains(x, y);
 	}

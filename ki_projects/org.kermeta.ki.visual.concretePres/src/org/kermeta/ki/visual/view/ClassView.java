@@ -16,7 +16,7 @@ public class ClassView extends EntityView {
 	
 	@Override
 	public Color getFillingColor(int opacity) {
-		return opacity==255 ? Color.LIGHT_GRAY : new Color(192, 192, 192, opacity);
+		return opacity==255 ? new Color(255,255,206) : new Color(255,255,206, opacity);
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import java.util.List;
 
 
 public abstract class EntityView extends ComponentView {
+	public static final String FONT_NAME = "Arial";
+	
 	public static final float WIDTH_GAP = 2f;
 	
 	public static final float HEIGHT_GAP = 4f;
@@ -36,8 +38,6 @@ public abstract class EntityView extends ComponentView {
 	protected double scale;
 
 	protected double fontSize;
-	
-	protected Font font;
 	
 	protected int fontStyle;
 	
@@ -180,8 +180,9 @@ public abstract class EntityView extends ComponentView {
 		g.setColor(lineColor);
 		g.draw(path);
 		g.setColor(Color.BLACK);
-		g.setFont(font);
+		g.setFont(getTitleFont());
 		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
+		g.setFont(getBodyFont());
 		
 		if(metamodel.attributesVisible)
 			for(AttributeView attr : attributes)
@@ -211,11 +212,18 @@ public abstract class EntityView extends ComponentView {
 	}
 	
 	
+	public Font getTitleFont() {
+		return new Font(FONT_NAME, fontStyle+Font.BOLD, (int)fontSize);
+	}
+	
+	
+	public Font getBodyFont() {
+		return new Font(FONT_NAME, fontStyle, (int)fontSize);
+	}
+	
 	
 	@Override
 	public void update() {
-		font = new Font("Arial", fontStyle, (int)fontSize);
-		
 		final Dimension dim    			= getPreferredSize();
 		final Rectangle2D titleBounds 	= getTitleBounds();
 		int textHeight  				= (int) titleBounds.getHeight();
@@ -262,7 +270,7 @@ public abstract class EntityView extends ComponentView {
 	
 	
 	protected Rectangle2D getTitleBounds() {
-		return new TextLayout(name, font, FONT_RENDER_CONT).getBounds();
+		return new TextLayout(name, getTitleFont(), FONT_RENDER_CONT).getBounds();
 	}
 	
 	

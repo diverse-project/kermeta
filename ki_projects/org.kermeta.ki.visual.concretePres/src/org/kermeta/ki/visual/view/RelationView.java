@@ -92,7 +92,7 @@ public class RelationView extends LinkView {
 	
 	
 	public Font getFont() {
-		return new Font(entitySrc.font.getFontName(), Font.PLAIN, (int)Math.min(entitySrc.fontSize, entityTar.fontSize));
+		return new Font(EntityView.FONT_NAME, Font.PLAIN, (int)Math.min(entitySrc.fontSize, entityTar.fontSize));
 	}
 	
 	

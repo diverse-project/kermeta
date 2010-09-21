@@ -1,5 +1,6 @@
 package org.kermeta.ki.visual.view;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.font.TextLayout;
 import java.awt.geom.Line2D;
@@ -58,10 +59,11 @@ public class RoleView {
 		Point2D.Double[] pts;
 		Point2D.Double pt = source ? view.pointTar : view.pointSrc;
 		double gap 		  = 10.;
+		Font font 		  = view.entitySrc.getBodyFont(); 
 		
 		if(view.entitySrc==view.entityTar) {
-			Rectangle2D rec1 = new TextLayout(name.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds();
-			Rectangle2D rec2 = new TextLayout(card.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds();
+			Rectangle2D rec1 = new TextLayout(name.text, font, EntityView.FONT_RENDER_CONT).getBounds();
+			Rectangle2D rec2 = new TextLayout(card.text, font, EntityView.FONT_RENDER_CONT).getBounds();
 			
 			pts = new Point2D.Double[2];
 			pts[0] = new Point2D.Double(pt.x - rec1.getWidth() - gap, pt.y - gap/2.);
@@ -77,8 +79,8 @@ public class RoleView {
 				
 				if(LinkView.equals(pts[0].x, pts[1].x, 20))
 					if(xMin>(view.pointSrc.x-15) && xMin>(view.pointTar.x-15)) {
-						double w1 = new TextLayout(name.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds().getWidth();
-						double w2 = new TextLayout(card.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds().getWidth();
+						double w1 = new TextLayout(name.text, font, EntityView.FONT_RENDER_CONT).getBounds().getWidth();
+						double w2 = new TextLayout(card.text, font, EntityView.FONT_RENDER_CONT).getBounds().getWidth();
 						double maxWidth = Math.max(w1, w2);
 						
 						pts[0].x -= maxWidth + gap;
@@ -94,8 +96,8 @@ public class RoleView {
 					pts[1].x -= gap;
 					
 					if(yMin<(view.pointSrc.y+15) && yMin<(view.pointTar.y+15)) {
-						double h1 = new TextLayout(name.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds().getHeight();
-						double h2 = new TextLayout(card.text, view.entitySrc.font, EntityView.FONT_RENDER_CONT).getBounds().getHeight();
+						double h1 = new TextLayout(name.text, font, EntityView.FONT_RENDER_CONT).getBounds().getHeight();
+						double h2 = new TextLayout(card.text, font, EntityView.FONT_RENDER_CONT).getBounds().getHeight();
 						double maxHeight = Math.max(h1, h2);
 						
 						pts[0].y += maxHeight + gap;

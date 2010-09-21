@@ -45,6 +45,6 @@ public class OperationView extends EntityElementView {
 
 	@Override
 	public Font getFont() {
-		return new Font(entity.font.getName(), isAbstract ? Font.ITALIC : Font.PLAIN, (int)(entity.fontSize*0.9));
+		return new Font(EntityView.FONT_NAME, isAbstract ? Font.ITALIC : Font.PLAIN, (int)(entity.fontSize*0.9));
 	}
 }

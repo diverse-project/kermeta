@@ -19,7 +19,7 @@ public class AttributeView extends EntityElementView {
 	
 	@Override
 	public Font getFont() {
-		return new Font(entity.font.getName(), Font.PLAIN, (int)(entity.fontSize*0.9));
+		return new Font(EntityView.FONT_NAME, Font.PLAIN, (int)(entity.fontSize*0.9));
 	}
 	
 	
