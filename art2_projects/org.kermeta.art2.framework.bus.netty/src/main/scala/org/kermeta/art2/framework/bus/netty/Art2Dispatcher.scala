@@ -11,23 +11,23 @@ import org.osgi.framework.BundleContext
 import org.osgi.util.tracker.ServiceTracker
 import org.slf4j.LoggerFactory
 import org.kermeta.art2.framework.Art2Actor
+import org.kermeta.art2.framework.Art2Port
 import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.JacksonSerializer._
 import scala.collection.JavaConversions._
-import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 
-class Art2Dispatcher(port : Int,handler : Art2ModelHandlerService,bc : BundleContext) extends Art2Actor {
+class Art2Dispatcher(port : Int,bc : BundleContext) extends Art2Actor {
 
   var logger = LoggerFactory.getLogger(this.getClass);
   var server = new TcpServerRemoteActor(port,this)
   var waitingMessage = List()
-  var serviceTracker = new ServiceTracker(bc,classOf[Art2Actor].getName(), null)
-
+  var serviceTracker = new ServiceTracker(bc,classOf[Art2Port].getName(), null)
 
   def act = {
 
     loop {
       react {
+        case STOP => exit
         case jsoncontent : String => {
             try {
               /* unserialize */
@@ -39,7 +39,7 @@ class Art2Dispatcher(port : Int,handler : Art2ModelHandlerService,bc : BundleCon
                   case None => logger.error("Not implemented yet !!! ")
                   case Some(sr)=> {
                       reply(serviceTracker.getService(sr).asInstanceOf[Art2Actor] !? art2message.getContent)
-                  }
+                    }
                 }
               } else {
                 servicefound match {
@@ -54,7 +54,16 @@ class Art2Dispatcher(port : Int,handler : Art2ModelHandlerService,bc : BundleCon
     }
   }
 
-  override def start = server.start;serviceTracker.open;super.start;this
-  override def stop : Unit = serviceTracker.close;server.stop;exit
+  override def start = {
+    super.start
+    server.start
+    serviceTracker.open
+    this
+  }
+  override def stop : Unit = {
+    serviceTracker.close
+    server.stop
+    this!STOP
+  }
 
 }

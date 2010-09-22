@@ -12,8 +12,8 @@ import scala.collection.JavaConversions._
 
 class Art2RequirePortRemoteClient(bindmsg : Art2FragmentBindMessage,modelHandler : Art2ModelHandlerService,delegate : Actor,timeout : Int) extends TcpClientRemoteActor(delegate : Actor,timeout : Int) {
 
-  def getRemoteAddr : InetSocketAddress = {
-
+  def getRemoteAddr : InetSocketAddress = {null
+/*
     /* Trivial algorithme search only one */
     var platformModel = modelHandler.getLastModel.getPlatformModel
     var nodenetwork = platformModel.getNodeNetworks.filter{loopNN=> loopNN.getTarget == bindmsg.getChannelName }
@@ -34,6 +34,6 @@ class Art2RequirePortRemoteClient(bindmsg : Art2FragmentBindMessage,modelHandler
           }
         }
     }
-    new InetSocketAddress(0)
+    new InetSocketAddress(0)*/
   }
 }

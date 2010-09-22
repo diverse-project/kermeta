@@ -71,6 +71,7 @@ class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : In
       react {
         case jsoncontent : String => {
             logger.info("Discovery message rec="+jsoncontent)
+            /*
             try{
               var art2discoveryMessage = jsoncontent.fromJSON(classOf[Art2DiscoveryMessage])
               var actualModel = modelHandler.getLastModel
@@ -141,6 +142,7 @@ class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : In
               /* Synch model handler - switch to online mode */
               
             } catch {case _ @ e => logger.error("Unexpected exception, while sending msg.",e) }
+            */
           }
         case _ @ m => logger.warn("unprocess message : "+m.toString)
       }

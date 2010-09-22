@@ -16,6 +16,7 @@ class Art2BusNettyActivator extends BundleActivator {
   var modelHandlerServiceTracker : ServiceTracker = null
   var discoveryActor : Art2PlatformDiscoveryActor = null
   var modelSynchRemoteActor : Art2ModelSynch = null
+  var art2dispatcher : Art2Dispatcher = null
 
 
   def start(bc : BundleContext){
@@ -27,12 +28,14 @@ class Art2BusNettyActivator extends BundleActivator {
         modelHandlerServiceTracker.open
         var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
 
-        discoveryActor = new Art2PlatformDiscoveryActor(8081,8080,mhandler)
-        modelSynchRemoteActor = new Art2ModelSynch(8082,mhandler,mhandler.getNodeName)
+        //discoveryActor = new Art2PlatformDiscoveryActor(8081,8080,mhandler)
+        modelSynchRemoteActor = new Art2ModelSynch(8081,mhandler,mhandler.getNodeName)
 
         modelSynchRemoteActor.start
-        discoveryActor.start
+        //discoveryActor.start
         
+        art2dispatcher = new Art2Dispatcher(8080,bc)
+        art2dispatcher.start
 
       }
     }.start
@@ -45,8 +48,9 @@ class Art2BusNettyActivator extends BundleActivator {
 
   def stop(bc : BundleContext){
     modelHandlerServiceTracker.close
-    discoveryActor.stop
+    //discoveryActor.stop
     modelSynchRemoteActor.stop
+    art2dispatcher.stop
   }
 }
 

@@ -14,7 +14,6 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
