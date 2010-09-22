@@ -104,6 +104,11 @@ public class ChannelPanel extends JPanel implements TitledElement,SelectElement 
         //g2.fillRoundRect(x, y, w, h, arc, arc);
         g2.setStroke(new BasicStroke(3f));
         g2.setColor(borderColor);
+        if (selected) {
+            g2.setColor(new Color(243, 238, 39, 150));
+        } else {
+            g2.setColor(Color.WHITE);
+        }
         g2.drawOval(x, y, w, h);//, arc, arc);
 
         g2.setColor(Color.WHITE);
@@ -123,6 +128,13 @@ public class ChannelPanel extends JPanel implements TitledElement,SelectElement 
         shadow =
                 GraphicsUtilities.createCompatibleTranslucentImage(w, h);
         Graphics2D g2 = shadow.createGraphics();
+
+        if (active) {
+            g2.setColor(new Color(243, 238, 39, 150));
+        } else {
+            g2.setColor(Color.WHITE);
+        }
+
         g2.setColor(Color.WHITE);
         g2.fillOval(0, 0, w, h);
         g2.dispose();
