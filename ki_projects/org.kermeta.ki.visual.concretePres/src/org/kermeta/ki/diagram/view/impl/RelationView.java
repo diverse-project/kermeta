@@ -6,6 +6,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+import org.kermeta.ki.diagram.view.interfaces.IDecorationView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
@@ -26,6 +27,11 @@ public class RelationView extends ComponentView implements IRelationView {
 	/** The position of the last point of the relation. */
 	protected Point2D pointTar;
 	
+	/** The decoration located at the source position of the relation. */
+	protected IDecorationView sourceDecoration;
+	
+	/** The decoration located at the target position of the relation. */
+	protected IDecorationView targetDecoration; 
 	
 	
 	/**
@@ -42,6 +48,8 @@ public class RelationView extends ComponentView implements IRelationView {
 		
 		entitySrc = src;
 		entityTar = target;
+		sourceDecoration = null;
+		targetDecoration = null;
 		updateLineColor(255);
 	}
 
@@ -69,6 +77,22 @@ public class RelationView extends ComponentView implements IRelationView {
 		if(isVisible()) {
 			g.setColor(getLineColor());
 			g.draw(path);
+			
+			if(sourceDecoration!=null) {
+				g.translate(pointSrc.getX(), pointSrc.getY());
+				beginRotation(pointSrc, g);
+				sourceDecoration.paint(g);
+				endRotation(pointSrc, g);
+				g.translate(-pointSrc.getX(), -pointSrc.getY());
+			}
+			
+			if(targetDecoration!=null) {
+				g.translate(pointTar.getX(), pointTar.getY());
+				beginRotation(pointTar, g);
+				targetDecoration.paint(g);
+				endRotation(pointTar, g);
+				g.translate(-pointTar.getX(), -pointTar.getY());
+			}
 		}
 	}
 	
@@ -350,5 +374,41 @@ public class RelationView extends ComponentView implements IRelationView {
 	@Override
 	public void onUnpruning() {
 		updateLineColor(255);
+	}
+
+
+	@Override
+	public IDecorationView getSourceDecoration() {
+		return sourceDecoration;
+	}
+
+
+	@Override
+	public void setSourceDecoration(final IDecorationView sourceDecoration) {
+		setDecoration(this.sourceDecoration, sourceDecoration);
+		this.sourceDecoration = sourceDecoration;
+	}
+	
+	
+	
+	protected void setDecoration(final IDecorationView oldDecoration, final IDecorationView newDecoration) {
+		if(oldDecoration!=null)// Releasing the decoration.
+			oldDecoration.setRelation(null);
+		
+		if(newDecoration!=null) // Anchoring the new decoration.
+			newDecoration.setRelation(this);
+	}
+
+	
+	@Override
+	public IDecorationView getTargetDecoration() {
+		return targetDecoration;
+	}
+
+
+	@Override
+	public void setTargetDecoration(final IDecorationView targetDecoration) {
+		setDecoration(this.targetDecoration, targetDecoration);
+		this.targetDecoration = targetDecoration;
 	}
 }

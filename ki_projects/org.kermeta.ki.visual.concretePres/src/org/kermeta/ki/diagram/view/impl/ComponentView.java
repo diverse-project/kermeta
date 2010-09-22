@@ -1,7 +1,6 @@
 package org.kermeta.ki.diagram.view.impl;
 
 import java.awt.Color;
-import java.awt.geom.GeneralPath;
 
 import org.kermeta.ki.diagram.view.interfaces.IComponentView;
 
@@ -9,10 +8,7 @@ import org.kermeta.ki.diagram.view.interfaces.IComponentView;
  * A component view is the abstract representation of an object.
  * @author Arnaud Blouin
  */
-public abstract class ComponentView implements IComponentView {
-	/** The path of the component. */
-	protected GeneralPath path;
-	
+public abstract class ComponentView extends View implements IComponentView {
 	/** The current visibility of the component. */
 	protected Visibility visibility;
 	
@@ -28,7 +24,6 @@ public abstract class ComponentView implements IComponentView {
 		super();
 		
 		visibility 	= Visibility.STANDARD;
-		path 		= new GeneralPath();
 		lineColor	= Color.BLACK;
 	}
 	

@@ -1,9 +1,8 @@
 package org.kermeta.ki.diagram.view.interfaces;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
-public interface IComponentView {
+public interface IComponentView extends IView {
 	/** The different possible visibility of a component. */
 	enum Visibility { STANDARD, NONE, GRAYED } 
 	
@@ -23,12 +22,6 @@ public interface IComponentView {
 	 * @return True if the component is pruned, i.e. its visibility is not standard.
 	 */
 	boolean isPruned();
-
-	/**
-	 * Paints the component.
-	 * @param g The graphics.
-	 */
-	void paint(final Graphics2D g);
 
 	/**
 	 * @return True if the component is visible.
