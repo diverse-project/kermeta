@@ -8,6 +8,7 @@ import org.kermeta.art2.ComponentType;
 import java.awt.Component;
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
+import org.kermeta.art2.ui.editor.command.SelectChannelCommand;
 import org.kermeta.art2.ui.editor.command.SelectComponentCommand;
 import org.kermeta.art2.ui.editor.command.SelectNodeCommand;
 import org.kermeta.art2.ui.editor.listener.ChannelTypeDragSourceListener;
@@ -102,6 +103,14 @@ public class Art2UIFactory {
         ChannelPanel hui = new ChannelPanel();
         ((Component) hui).setDropTarget(new HubDragTargetListener(hui, kernel));
         hui.setTitle(hub.getName());
+
+        /* ADD SELECT COMMAND */
+        CommandMouseListener mouse_listener = new CommandMouseListener();
+        SelectChannelCommand command = new SelectChannelCommand();
+        command.setKernel(kernel);
+        mouse_listener.setCommand(command);
+        hui.addMouseListener(mouse_listener);
+
         mapping.bind(hui, hub);
         return hui;
     }

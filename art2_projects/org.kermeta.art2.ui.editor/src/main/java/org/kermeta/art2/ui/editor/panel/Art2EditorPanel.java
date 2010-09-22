@@ -17,7 +17,9 @@ import org.jdesktop.swingx.painter.MattePainter;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.property.ComponentPropertyEditor;
+import org.kermeta.art2.ui.editor.property.NamedElementPropertyEditor;
 import org.kermeta.art2.ui.editor.property.NodePropertyEditor;
+import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
@@ -83,36 +85,41 @@ public class Art2EditorPanel extends JPanel {
 
     /*
     public void loadLib(String uri) {
-        ContainerRoot nroot = Art2XmiHelper.load(uri);
-        kernel.getModelHandler().merge(nroot);
-        palette.clear();
-        for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
-            for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
-                ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
-                palette.addComponentTypePanel(ctp, ctl.getName());
-            }
-        }
-        this.doLayout();
-        repaint();
-        revalidate();
-        //TODO CLEAN PALETTE
+    ContainerRoot nroot = Art2XmiHelper.load(uri);
+    kernel.getModelHandler().merge(nroot);
+    palette.clear();
+    for (org.kermeta.art2.ComponentTypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibrariy()) {
+    for (org.kermeta.art2.ComponentType ct : ctl.getSubComponentTypes()) {
+    ComponentTypePanel ctp = kernel.getUifactory().createComponentTypeUI(ct);
+    palette.addComponentTypePanel(ctp, ctl.getName());
+    }
+    }
+    this.doLayout();
+    repaint();
+    revalidate();
+    //TODO CLEAN PALETTE
 
-        //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
+    //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
     }*/
-
     public void showPropertyFor(JPanel p) {
         southpanel.setVisible(true);
         southpanel.removeAll();
         if (p instanceof ComponentPanel) {
-        	org.kermeta.art2.NamedElement elem = (NamedElement) kernel.getUifactory().getMapping().get(p);
+            org.kermeta.art2.NamedElement elem = (NamedElement) kernel.getUifactory().getMapping().get(p);
             ComponentPropertyEditor prop = new ComponentPropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
         if (p instanceof NodePanel) {
-        	org.kermeta.art2.ContainerNode elem = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
+            org.kermeta.art2.ContainerNode elem = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
             NodePropertyEditor prop = new NodePropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
+        if (p instanceof ChannelPanel) {
+            org.kermeta.art2.Channel elem = (org.kermeta.art2.Channel) kernel.getUifactory().getMapping().get(p);
+            NamedElementPropertyEditor prop = new NamedElementPropertyEditor(elem, kernel);
+            southpanel.add(prop);
+        }
+
     }
 
     public void unshowPropertyFor(JPanel p) {
