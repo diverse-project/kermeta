@@ -89,7 +89,6 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 			case Art2Package.CHANNEL: return createChannel();
 			case Art2Package.MBINDING: return createMBinding();
 			case Art2Package.NODE_TYPE: return createNodeType();
-			case Art2Package.PLATFORM_MODEL: return createPlatformModel();
 			case Art2Package.NODE_NETWORK: return createNodeNetwork();
 			case Art2Package.NODE_LINK: return createNodeLink();
 			case Art2Package.NETWORK_PROPERTY: return createNetworkProperty();
@@ -389,16 +388,6 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 	public NodeType createNodeType() {
 		NodeTypeImpl nodeType = new NodeTypeImpl();
 		return nodeType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PlatformModel createPlatformModel() {
-		PlatformModelImpl platformModel = new PlatformModelImpl();
-		return platformModel;
 	}
 
 	/**

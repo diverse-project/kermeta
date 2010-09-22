@@ -192,10 +192,6 @@ public class Art2AdapterFactory extends AdapterFactoryImpl {
 				return createNodeTypeAdapter();
 			}
 			@Override
-			public Adapter casePlatformModel(PlatformModel object) {
-				return createPlatformModelAdapter();
-			}
-			@Override
 			public Adapter caseNodeNetwork(NodeNetwork object) {
 				return createNodeNetworkAdapter();
 			}
@@ -656,20 +652,6 @@ public class Art2AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNodeTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.art2.PlatformModel <em>Platform Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.art2.PlatformModel
-	 * @generated
-	 */
-	public Adapter createPlatformModelAdapter() {
 		return null;
 	}
 

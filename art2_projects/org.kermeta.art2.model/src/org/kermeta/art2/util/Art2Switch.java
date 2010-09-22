@@ -298,12 +298,6 @@ public class Art2Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Art2Package.PLATFORM_MODEL: {
-				PlatformModel platformModel = (PlatformModel)theEObject;
-				T result = casePlatformModel(platformModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Art2Package.NODE_NETWORK: {
 				NodeNetwork nodeNetwork = (NodeNetwork)theEObject;
 				T result = caseNodeNetwork(nodeNetwork);
@@ -796,21 +790,6 @@ public class Art2Switch<T> {
 	 * @generated
 	 */
 	public T caseNodeType(NodeType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Platform Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Platform Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePlatformModel(PlatformModel object) {
 		return null;
 	}
 

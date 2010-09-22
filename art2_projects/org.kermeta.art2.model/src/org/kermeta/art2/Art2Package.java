@@ -177,7 +177,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getTypeDefinition()
 	 * @generated
 	 */
-	int TYPE_DEFINITION = 35;
+	int TYPE_DEFINITION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -507,13 +507,13 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_ROOT__DEPLOY_UNITS = 7;
 
 	/**
-	 * The feature id for the '<em><b>Platform Model</b></em>' containment reference.
+	 * The feature id for the '<em><b>Node Networks</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_ROOT__PLATFORM_MODEL = 8;
+	int CONTAINER_ROOT__NODE_NETWORKS = 8;
 
 	/**
 	 * The number of structural features of the '<em>Container Root</em>' class.
@@ -1864,34 +1864,6 @@ public interface Art2Package extends EPackage {
 	int NODE_TYPE_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.art2.impl.PlatformModelImpl <em>Platform Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.art2.impl.PlatformModelImpl
-	 * @see org.kermeta.art2.impl.Art2PackageImpl#getPlatformModel()
-	 * @generated
-	 */
-	int PLATFORM_MODEL = 30;
-
-	/**
-	 * The feature id for the '<em><b>Node Networks</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLATFORM_MODEL__NODE_NETWORKS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Platform Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLATFORM_MODEL_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.NodeNetworkImpl <em>Node Network</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1899,7 +1871,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getNodeNetwork()
 	 * @generated
 	 */
-	int NODE_NETWORK = 31;
+	int NODE_NETWORK = 30;
 
 	/**
 	 * The feature id for the '<em><b>Link</b></em>' containment reference list.
@@ -1945,7 +1917,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getNodeLink()
 	 * @generated
 	 */
-	int NODE_LINK = 32;
+	int NODE_LINK = 31;
 
 	/**
 	 * The feature id for the '<em><b>Network Type</b></em>' attribute.
@@ -1991,7 +1963,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getNetworkProperty()
 	 * @generated
 	 */
-	int NETWORK_PROPERTY = 33;
+	int NETWORK_PROPERTY = 32;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2028,7 +2000,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getChannelType()
 	 * @generated
 	 */
-	int CHANNEL_TYPE = 34;
+	int CHANNEL_TYPE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2119,7 +2091,7 @@ public interface Art2Package extends EPackage {
 	 * @see org.kermeta.art2.impl.Art2PackageImpl#getInstance()
 	 * @generated
 	 */
-	int INSTANCE = 36;
+	int INSTANCE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2432,15 +2404,15 @@ public interface Art2Package extends EPackage {
 	EReference getContainerRoot_DeployUnits();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.ContainerRoot#getPlatformModel <em>Platform Model</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ContainerRoot#getNodeNetworks <em>Node Networks</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Platform Model</em>'.
-	 * @see org.kermeta.art2.ContainerRoot#getPlatformModel()
+	 * @return the meta object for the containment reference list '<em>Node Networks</em>'.
+	 * @see org.kermeta.art2.ContainerRoot#getNodeNetworks()
 	 * @see #getContainerRoot()
 	 * @generated
 	 */
-	EReference getContainerRoot_PlatformModel();
+	EReference getContainerRoot_NodeNetworks();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.PortType <em>Port Type</em>}'.
@@ -3198,27 +3170,6 @@ public interface Art2Package extends EPackage {
 	EReference getNodeType_Bootstrap();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.art2.PlatformModel <em>Platform Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Platform Model</em>'.
-	 * @see org.kermeta.art2.PlatformModel
-	 * @generated
-	 */
-	EClass getPlatformModel();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.PlatformModel#getNodeNetworks <em>Node Networks</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Node Networks</em>'.
-	 * @see org.kermeta.art2.PlatformModel#getNodeNetworks()
-	 * @see #getPlatformModel()
-	 * @generated
-	 */
-	EReference getPlatformModel_NodeNetworks();
-
-	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.NodeNetwork <em>Node Network</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3682,12 +3633,12 @@ public interface Art2Package extends EPackage {
 		EReference CONTAINER_ROOT__DEPLOY_UNITS = eINSTANCE.getContainerRoot_DeployUnits();
 
 		/**
-		 * The meta object literal for the '<em><b>Platform Model</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Node Networks</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTAINER_ROOT__PLATFORM_MODEL = eINSTANCE.getContainerRoot_PlatformModel();
+		EReference CONTAINER_ROOT__NODE_NETWORKS = eINSTANCE.getContainerRoot_NodeNetworks();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.PortTypeImpl <em>Port Type</em>}' class.
@@ -4308,24 +4259,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference NODE_TYPE__BOOTSTRAP = eINSTANCE.getNodeType_Bootstrap();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.art2.impl.PlatformModelImpl <em>Platform Model</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.art2.impl.PlatformModelImpl
-		 * @see org.kermeta.art2.impl.Art2PackageImpl#getPlatformModel()
-		 * @generated
-		 */
-		EClass PLATFORM_MODEL = eINSTANCE.getPlatformModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Node Networks</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PLATFORM_MODEL__NODE_NETWORKS = eINSTANCE.getPlatformModel_NodeNetworks();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.NodeNetworkImpl <em>Node Network</em>}' class.

@@ -41,7 +41,6 @@ import org.kermeta.art2.NodeNetwork;
 import org.kermeta.art2.NodeType;
 import org.kermeta.art2.Operation;
 import org.kermeta.art2.Parameter;
-import org.kermeta.art2.PlatformModel;
 import org.kermeta.art2.Port;
 import org.kermeta.art2.PortType;
 import org.kermeta.art2.PortTypeMapping;
@@ -269,13 +268,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * @generated
 	 */
 	private EClass nodeTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass platformModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -619,7 +611,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerRoot_PlatformModel() {
+	public EReference getContainerRoot_NodeNetworks() {
 		return (EReference)containerRootEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1267,24 +1259,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPlatformModel() {
-		return platformModelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPlatformModel_NodeNetworks() {
-		return (EReference)platformModelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getNodeNetwork() {
 		return nodeNetworkEClass;
 	}
@@ -1526,7 +1500,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(containerRootEClass, CONTAINER_ROOT__HUBS);
 		createEReference(containerRootEClass, CONTAINER_ROOT__MBINDINGS);
 		createEReference(containerRootEClass, CONTAINER_ROOT__DEPLOY_UNITS);
-		createEReference(containerRootEClass, CONTAINER_ROOT__PLATFORM_MODEL);
+		createEReference(containerRootEClass, CONTAINER_ROOT__NODE_NETWORKS);
 
 		portTypeEClass = createEClass(PORT_TYPE);
 		createEAttribute(portTypeEClass, PORT_TYPE__SYNCHRONE);
@@ -1624,9 +1598,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		nodeTypeEClass = createEClass(NODE_TYPE);
 		createEReference(nodeTypeEClass, NODE_TYPE__BOOTSTRAP);
-
-		platformModelEClass = createEClass(PLATFORM_MODEL);
-		createEReference(platformModelEClass, PLATFORM_MODEL__NODE_NETWORKS);
 
 		nodeNetworkEClass = createEClass(NODE_NETWORK);
 		createEReference(nodeNetworkEClass, NODE_NETWORK__LINK);
@@ -1740,7 +1711,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getContainerRoot_Hubs(), this.getChannel(), null, "hubs", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_MBindings(), this.getMBinding(), null, "mBindings", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerRoot_DeployUnits(), this.getDeployUnit(), null, "deployUnits", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerRoot_PlatformModel(), this.getPlatformModel(), null, "platformModel", null, 0, 1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerRoot_NodeNetworks(), this.getNodeNetwork(), null, "nodeNetworks", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portTypeEClass, PortType.class, "PortType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortType_Synchrone(), ecorePackage.getEBoolean(), "synchrone", null, 0, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1838,9 +1809,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(nodeTypeEClass, NodeType.class, "NodeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNodeType_Bootstrap(), this.getDeployUnit(), null, "bootstrap", null, 0, -1, NodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(platformModelEClass, PlatformModel.class, "PlatformModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPlatformModel_NodeNetworks(), this.getNodeNetwork(), null, "nodeNetworks", null, 0, -1, PlatformModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeNetworkEClass, NodeNetwork.class, "NodeNetwork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNodeNetwork_Link(), this.getNodeLink(), null, "link", null, 0, -1, NodeNetwork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

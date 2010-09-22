@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.art2.ContainerRoot#getHubs <em>Hubs</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.ContainerRoot#getDeployUnits <em>Deploy Units</em>}</li>
- *   <li>{@link org.kermeta.art2.ContainerRoot#getPlatformModel <em>Platform Model</em>}</li>
+ *   <li>{@link org.kermeta.art2.ContainerRoot#getNodeNetworks <em>Node Networks</em>}</li>
  * </ul>
  * </p>
  *
@@ -164,29 +164,19 @@ public interface ContainerRoot extends EObject {
 	EList<DeployUnit> getDeployUnits();
 
 	/**
-	 * Returns the value of the '<em><b>Platform Model</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Node Networks</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.art2.NodeNetwork}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Platform Model</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Node Networks</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Platform Model</em>' containment reference.
-	 * @see #setPlatformModel(PlatformModel)
-	 * @see org.kermeta.art2.Art2Package#getContainerRoot_PlatformModel()
+	 * @return the value of the '<em>Node Networks</em>' containment reference list.
+	 * @see org.kermeta.art2.Art2Package#getContainerRoot_NodeNetworks()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PlatformModel getPlatformModel();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.art2.ContainerRoot#getPlatformModel <em>Platform Model</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Platform Model</em>' containment reference.
-	 * @see #getPlatformModel()
-	 * @generated
-	 */
-	void setPlatformModel(PlatformModel value);
+	EList<NodeNetwork> getNodeNetworks();
 
 } // ContainerRoot

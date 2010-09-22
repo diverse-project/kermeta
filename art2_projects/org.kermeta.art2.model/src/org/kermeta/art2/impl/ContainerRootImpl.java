@@ -28,7 +28,7 @@ import org.kermeta.art2.ContainerNode;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.DeployUnit;
 import org.kermeta.art2.MBinding;
-import org.kermeta.art2.PlatformModel;
+import org.kermeta.art2.NodeNetwork;
 import org.kermeta.art2.Repository;
 import org.kermeta.art2.TypeDefinition;
 import org.kermeta.art2.TypeLibrary;
@@ -49,7 +49,7 @@ import org.kermeta.art2.TypedElement;
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getHubs <em>Hubs</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getMBindings <em>MBindings</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getDeployUnits <em>Deploy Units</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getPlatformModel <em>Platform Model</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ContainerRootImpl#getNodeNetworks <em>Node Networks</em>}</li>
  * </ul>
  * </p>
  *
@@ -137,14 +137,14 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	protected EList<DeployUnit> deployUnits;
 
 	/**
-	 * The cached value of the '{@link #getPlatformModel() <em>Platform Model</em>}' containment reference.
+	 * The cached value of the '{@link #getNodeNetworks() <em>Node Networks</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPlatformModel()
+	 * @see #getNodeNetworks()
 	 * @generated
 	 * @ordered
 	 */
-	protected PlatformModel platformModel;
+	protected EList<NodeNetwork> nodeNetworks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -266,42 +266,11 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PlatformModel getPlatformModel() {
-		return platformModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetPlatformModel(PlatformModel newPlatformModel, NotificationChain msgs) {
-		PlatformModel oldPlatformModel = platformModel;
-		platformModel = newPlatformModel;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Art2Package.CONTAINER_ROOT__PLATFORM_MODEL, oldPlatformModel, newPlatformModel);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<NodeNetwork> getNodeNetworks() {
+		if (nodeNetworks == null) {
+			nodeNetworks = new EObjectContainmentEList<NodeNetwork>(NodeNetwork.class, this, Art2Package.CONTAINER_ROOT__NODE_NETWORKS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPlatformModel(PlatformModel newPlatformModel) {
-		if (newPlatformModel != platformModel) {
-			NotificationChain msgs = null;
-			if (platformModel != null)
-				msgs = ((InternalEObject)platformModel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Art2Package.CONTAINER_ROOT__PLATFORM_MODEL, null, msgs);
-			if (newPlatformModel != null)
-				msgs = ((InternalEObject)newPlatformModel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Art2Package.CONTAINER_ROOT__PLATFORM_MODEL, null, msgs);
-			msgs = basicSetPlatformModel(newPlatformModel, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.CONTAINER_ROOT__PLATFORM_MODEL, newPlatformModel, newPlatformModel));
+		return nodeNetworks;
 	}
 
 	/**
@@ -328,8 +297,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return ((InternalEList<?>)getMBindings()).basicRemove(otherEnd, msgs);
 			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
 				return ((InternalEList<?>)getDeployUnits()).basicRemove(otherEnd, msgs);
-			case Art2Package.CONTAINER_ROOT__PLATFORM_MODEL:
-				return basicSetPlatformModel(null, msgs);
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+				return ((InternalEList<?>)getNodeNetworks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -358,8 +327,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return getMBindings();
 			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
 				return getDeployUnits();
-			case Art2Package.CONTAINER_ROOT__PLATFORM_MODEL:
-				return getPlatformModel();
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+				return getNodeNetworks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -405,8 +374,9 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				getDeployUnits().clear();
 				getDeployUnits().addAll((Collection<? extends DeployUnit>)newValue);
 				return;
-			case Art2Package.CONTAINER_ROOT__PLATFORM_MODEL:
-				setPlatformModel((PlatformModel)newValue);
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+				getNodeNetworks().clear();
+				getNodeNetworks().addAll((Collection<? extends NodeNetwork>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -444,8 +414,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
 				getDeployUnits().clear();
 				return;
-			case Art2Package.CONTAINER_ROOT__PLATFORM_MODEL:
-				setPlatformModel((PlatformModel)null);
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+				getNodeNetworks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -475,8 +445,8 @@ public class ContainerRootImpl extends EObjectImpl implements ContainerRoot {
 				return mBindings != null && !mBindings.isEmpty();
 			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
 				return deployUnits != null && !deployUnits.isEmpty();
-			case Art2Package.CONTAINER_ROOT__PLATFORM_MODEL:
-				return platformModel != null;
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+				return nodeNetworks != null && !nodeNetworks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

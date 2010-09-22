@@ -287,15 +287,6 @@ public interface Art2Factory extends EFactory {
 	NodeType createNodeType();
 
 	/**
-	 * Returns a new object of class '<em>Platform Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Platform Model</em>'.
-	 * @generated
-	 */
-	PlatformModel createPlatformModel();
-
-	/**
 	 * Returns a new object of class '<em>Node Network</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

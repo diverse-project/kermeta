@@ -50,8 +50,8 @@
         eType="#//MBinding" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployUnits" upperBound="-1"
         eType="#//DeployUnit" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="platformModel" eType="#//PlatformModel"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeNetworks" upperBound="-1"
+        eType="#//NodeNetwork" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortType" abstract="true" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchrone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -169,10 +169,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="NodeType" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bootstrap" upperBound="-1"
         eType="#//DeployUnit"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PlatformModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeNetworks" upperBound="-1"
-        eType="#//NodeNetwork" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeNetwork">
     <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="#//NodeLink"
