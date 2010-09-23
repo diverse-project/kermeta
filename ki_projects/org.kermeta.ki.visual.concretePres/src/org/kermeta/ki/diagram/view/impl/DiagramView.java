@@ -14,6 +14,10 @@ import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
+/**
+ * Implements a diagram that contains entities and relations.
+ * @author Arnaud Blouin
+ */
 public class DiagramView extends JPanel implements IDiagramView {
 	private static final long serialVersionUID = 1L;
 
@@ -60,6 +64,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 		g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		
@@ -67,7 +73,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 		for(IEntityView entity : entities)
 			entity.paint(g2);
-		
+
 		for(IRelationView relation : relations)
 			relation.paint(g2);
 	}

@@ -78,23 +78,27 @@ public class RelationView extends ComponentView implements IRelationView {
 			g.setColor(getLineColor());
 			g.draw(path);
 			
-			if(sourceDecoration!=null) {
-				g.translate(pointSrc.getX(), pointSrc.getY());
-				beginRotation(pointSrc, g);
-				sourceDecoration.paint(g);
-				endRotation(pointSrc, g);
-				g.translate(-pointSrc.getX(), -pointSrc.getY());
-			}
-			
-			if(targetDecoration!=null) {
-				g.translate(pointTar.getX(), pointTar.getY());
-				beginRotation(pointTar, g);
-				targetDecoration.paint(g);
-				endRotation(pointTar, g);
-				g.translate(-pointTar.getX(), -pointTar.getY());
-			}
+			paintDecoration(sourceDecoration, pointSrc, g, getLineAngle());
+			paintDecoration(targetDecoration, pointTar, g, getLineAngle()+Math.PI);
 		}
 	}
+	
+	
+	
+	protected void paintDecoration(final IDecorationView decoration, final Point2D position, final Graphics2D g, final double lineAngle) {
+		if(decoration!=null) {
+			g.translate(position.getX(), position.getY());
+			boolean okRotation = beginRotation(position, g, lineAngle)!=null;
+			
+			decoration.paint(g);
+			
+			if(okRotation)
+				endRotation(g, lineAngle);
+			
+			g.translate(-position.getX(), -position.getY());
+		}
+	}
+	
 	
 	
 	@Override
@@ -166,51 +170,28 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	
 	
-	protected Point2D.Double beginRotation(final Point2D position, final Graphics2D g) {
-		final double lineAngle = getLineAngle();
-		
-		if(lineAngle!=0 && !Double.isInfinite(lineAngle) && !Double.isNaN(lineAngle)) {
-			final double yRot;
-			final double c2x, c2y;
-			final double c3x, c3y;
-			final double b = getB();
-			
-			if(Math.abs(lineAngle)==(Math.PI/2.)) {
-				yRot = position.getY();
-				final double cx = position.getX();
-				final double cy = yRot;
-				c2x = Math.cos(lineAngle)*cx - Math.sin(lineAngle)*cy;
-				c2y = Math.sin(lineAngle)*cx + Math.cos(lineAngle)*cy;
-				c3x = Math.cos(-lineAngle)*(cx-c2x) - Math.sin(-lineAngle)*(cy-c2y);
-				c3y = Math.sin(-lineAngle)*(cx-c2x) + Math.cos(-lineAngle)*(cy-c2y);
-			}
-			else {
-				yRot = Math.sin(-lineAngle)*position.getX()+Math.cos(-lineAngle)*(position.getY()-b)+b;
-				c2x = - Math.sin(lineAngle)*b;
-				c2y = Math.cos(lineAngle)*b;
-				c3x = Math.cos(-lineAngle)*(-c2x) - Math.sin(-lineAngle)*(b-c2y);
-				c3y = Math.sin(-lineAngle)*(-c2x) + Math.cos(-lineAngle)*(b-c2y);
-			}
-			
-			if(lineAngle%(Math.PI*2)!=0) {		
-				g.rotate(lineAngle);
-				g.translate(c3x, c3y);
-				
-				return new Point2D.Double(c3x, c3y);
-			}
+	protected static Point2D beginRotation(final Point2D position, final Graphics2D g, final double angle) {
+		Point2D p = null;
+
+		if(!Number.NUMBER.equals(angle, 0.) && !Double.isInfinite(angle) && !Double.isNaN(angle)) {
+			final double cx = position.getX(), cy = position.getY();
+			final double c2x = Math.cos(angle) * cx - Math.sin(angle)* cy;
+			final double c2y = Math.sin(angle) * cx + Math.cos(angle)* cy;
+			final double c3x = Math.cos(-angle) * (cx - c2x)- Math.sin(-angle) * (cy - c2y);
+			final double c3y = Math.sin(-angle) * (cx - c2x)+ Math.cos(-angle) * (cy - c2y);
+
+			g.rotate(angle);
+			p = new Point2D.Double(c3x, c3y);
 		}
-		return null;
+
+		return p;
 	}
 	
 	
 	
-	protected void endRotation(final Point2D translation, final Graphics2D g) {
-		final double lineAngle = getLineAngle();
-		
-		if(lineAngle!=0 && !Double.isInfinite(lineAngle) && !Double.isNaN(lineAngle)) {
-			g.translate(-translation.getX(), -translation.getY());
-			g.rotate(-lineAngle);
-		}
+	protected static void endRotation(final Graphics2D g, final double angle) {
+		if(!Number.NUMBER.equals(angle, 0.) && !Double.isInfinite(angle) && !Double.isNaN(angle))
+			g.rotate(-angle);
 	}
 
 	
