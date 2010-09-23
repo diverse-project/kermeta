@@ -7,8 +7,9 @@ import javax.swing.JFrame;
 import org.kermeta.ki.diagram.view.impl.DiagramView;
 import org.kermeta.ki.diagram.view.impl.RelationView;
 import org.kermeta.ki.kompren.view.ClassView;
-import org.kermeta.ki.kompren.view.CompositionDecorationView;
-import org.kermeta.ki.kompren.view.InheritanceDecorationView;
+import org.kermeta.ki.kompren.view.InheritanceView;
+import org.kermeta.ki.kompren.view.RelationClassView;
+import org.kermeta.ki.kompren.view.RoleView.Cardinality;
 
 public class DiagramTest {
 
@@ -18,16 +19,9 @@ public class DiagramTest {
 		ClassView class1 = new ClassView("Class1");
 		ClassView class2 = new ClassView("Class2");
 		ClassView class3 = new ClassView("Class3");
-		RelationView rel = new RelationView(class1, class2);
-		RelationView rel2 = new RelationView(class2, class3);
-		RelationView rel3 = new RelationView(class3, class1);
-		rel.setSourceDecoration(new CompositionDecorationView(rel));
-		rel.setTargetDecoration(new CompositionDecorationView(rel));
-		rel.setTargetDecoration(new CompositionDecorationView(rel));
-		rel2.setSourceDecoration(new InheritanceDecorationView(rel2));
-		rel2.setTargetDecoration(new InheritanceDecorationView(rel2));
-		rel3.setSourceDecoration(new InheritanceDecorationView(rel3));
-		rel3.setTargetDecoration(new InheritanceDecorationView(rel3));
+		RelationView rel = new RelationClassView(class1, class2, true, true, "role1", "role2", Cardinality.ONE, Cardinality.ONE_MULTI);
+		RelationView rel2 = new InheritanceView(class2, class3);
+		RelationView rel3 = new InheritanceView(class3, class1);
 		
 		class1.setCentre(200, 200);
 		class1.addAttribute("myAttr1", "int");

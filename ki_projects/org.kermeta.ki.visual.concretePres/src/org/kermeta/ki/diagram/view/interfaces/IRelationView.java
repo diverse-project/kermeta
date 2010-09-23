@@ -1,10 +1,17 @@
 package org.kermeta.ki.diagram.view.interfaces;
 
+import java.awt.geom.Point2D;
+
 /**
  * The interface for a relation established between two entities.
  * @author Arnaud Blouin
  */
 public interface IRelationView extends IComponentView {
+	/** The position of the first point of the relation. */
+	Point2D getPointSource();
+	
+	/** The position of the last point of the relation. */
+	Point2D getPointTarget();
 
 	/**
 	 * @return The source entity.

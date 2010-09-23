@@ -392,4 +392,100 @@ public class RelationView extends ComponentView implements IRelationView {
 		setDecoration(this.targetDecoration, targetDecoration);
 		this.targetDecoration = targetDecoration;
 	}
+
+
+	@Override
+	public Point2D getPointSource() {
+		return pointSrc;
+	}
+
+
+	@Override
+	public Point2D getPointTarget() {
+		return pointTar;
+	}
+	
+	
+	
+
+	public static Point2D.Double[] findPoints(final Line2D line, final double x, final double y, final double distance) {
+		if(line==null)
+			return null;
+		
+		if(Number.NUMBER.equals(distance, 0.)) {
+			Point2D.Double[] sol = new Point2D.Double[1];
+			sol[0] 		 		 = new Point2D.Double(x,y);
+			
+			return sol;
+		}
+		
+		if(Number.NUMBER.equals(line.getX1(), line.getX2())) {
+			if(Number.NUMBER.equals(line.getY1(), line.getY2()))// The line is a point. So no position can be computed. 
+				return null;
+			
+			Point2D.Double sol[] = new Point2D.Double[2];
+			sol[0] = new Point2D.Double(x, y-distance);
+			sol[1] = new Point2D.Double(x, y+distance);
+			
+			return sol;
+		}
+		
+		final double a = (line.getY1() - line.getY2())/(line.getX1() - line.getX2());
+		final double b = line.getY1() - a*line.getX1();
+		double A = a*a+1., B = -2.*(x+y*a-a*b);
+		double C = b*b-(2.*y*b)+y*y+x*x-(distance*distance);
+		double delta = B*B-4.*A*C;
+
+		if(delta>0.) {
+			double _x1, _x2, _y1, _y2;
+			Point2D.Double sol[] = new Point2D.Double[2];
+			
+			_x1 = (-B+Math.sqrt(delta))/(2*A);
+			_x2 = (-B-Math.sqrt(delta))/(2*A);
+			_y1 = a*_x1+b;
+			_y2 = a*_x2+b;
+			sol[0] = new Point2D.Double(_x1, _y1);
+			sol[1] = new Point2D.Double(_x2, _y2);
+			
+			return sol;
+		}
+		else
+			if(Number.NUMBER.equals(delta, 0.)) {
+				double _x2, _y2;
+				Point2D.Double sol[] = new Point2D.Double[1];
+				
+				_x2 = -B/2*A;
+				_y2 = a*_x2+b;
+				sol[0] = new Point2D.Double(_x2, _y2);
+				
+				return sol;
+			}
+			else 
+				return null;
+	}
+
+	
+	
+	
+	public Line2D getPerpendicularLine(final Point2D pt) {
+		if(isVerticalLine())
+			return Number.NUMBER.equals(pt.getX(), pointSrc.getX()) ? new Line2D.Double(0., pt.getY(), pt.getX(), pt.getY()) : null;
+			
+		if(Number.NUMBER.equals(pt.getX(), 0.)) {
+			Point2D pt3  = new Point2D.Double(pointTar.getX(), pointTar.getY());
+			Point2D pt2  = Number.NUMBER.rotatePoint(pt3, pt, Math.PI/2.);
+			
+			return new Line2D.Double(pt2, pt);
+		}
+		
+		final double a = getA();
+		
+		if(Number.NUMBER.equals(a, 0.))
+			return new Line2D.Double(pt.getX(), pt.getY(), pt.getX(), pt.getY()-10.);
+		
+		double a2 = -1./a;
+		
+		return new Line2D.Double(0., pt.getY()-a2*pt.getX(), pt.getX(), pt.getY());
+	}
+
 }
