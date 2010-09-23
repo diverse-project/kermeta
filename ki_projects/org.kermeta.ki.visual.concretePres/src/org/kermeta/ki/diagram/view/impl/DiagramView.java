@@ -1,18 +1,26 @@
 package org.kermeta.ki.diagram.view.impl;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
 
+import org.kermeta.ki.diagram.layout.ILayoutStrategy;
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
+import org.kermeta.ki.visual.view.InheritanceView;
 
 /**
  * Implements a diagram that contains entities and relations.
@@ -36,16 +44,22 @@ public class DiagramView extends JPanel implements IDiagramView {
 	/** The name of the font to use. */
 	protected String fontName;
 	
+	/** The strategy used to layout the diagram. */
+	protected ILayoutStrategy strategy;
+	
 	
 	/**
 	 * Initialises the diagram.
 	 */
-	public DiagramView() {
+	public DiagramView(final boolean withScrollPane) {
 		super();
 		
 		zoom 		= 1.;
 		entities 	= new ArrayList<IEntityView>();
 		relations	= new ArrayList<IRelationView>();
+		
+		if(withScrollPane)
+			scrollPane = new JScrollPane(this);
 	}
 	
 	
@@ -106,6 +120,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 	@Override
 	public void refresh() {
+		revalidate();
 		repaint();
 	}
 
@@ -120,5 +135,156 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public void addRelation(final IRelationView relation) {
 		if(relation!=null)
 			relations.add(relation);
+	}
+
+
+	@Override
+	public void updateLayout() {
+		if(strategy!=null)
+			strategy.updateLayout();
+	}
+
+
+	@Override
+	public Dimension getPreferredScrollableViewportSize() {	
+		return new Dimension(-100, 100);
+	}
+
+	
+	@Override
+	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
+	}
+	
+	
+	@Override
+	public boolean getScrollableTracksViewportHeight() {
+		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
+	}
+	
+
+	@Override
+	public boolean getScrollableTracksViewportWidth() {
+		return getParent() instanceof JViewport ? ((JViewport)getParent()).getWidth() > getPreferredSize().width : false;
+	}
+
+	
+	@Override
+	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+		return 4;
+	}
+
+
+	@Override
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+	
+	
+	@Override
+	public void update() {
+		for(final IEntityView entity : entities)
+			entity.update();
+		
+		recentre();
+		
+		for(final IRelationView relation : relations)
+			relation.update();
+		
+		updatePreferredSize();
+		refresh();
+	}
+	
+	
+	
+	@Override
+	public void recentre() {
+		double xMin, yMin;
+		Point2D centre;
+		int i, nbEntities = entities.size();
+		Rectangle2D rec;
+		xMin = Double.MAX_VALUE;
+		yMin = Double.MAX_VALUE;
+
+		for(i=0; i<nbEntities; i++) {
+			rec = entities.get(i).getBorders();
+			if(rec.getMinX() < xMin) xMin = rec.getMinX();
+			if(rec.getMinY() < yMin) yMin = rec.getMinY();
+		}
+
+		xMin = 10-xMin;
+		yMin = 10-yMin;
+		
+		for(IEntityView e : entities) {
+			centre = e.getCentre();
+			centre.setLocation(centre.getX()+xMin, centre.getY()+yMin);
+			e.update();
+		}
+		
+		for(IRelationView relation : relations)
+			relation.update();
+	}
+	
+	
+	
+	@Override
+	public void updatePreferredSize() {
+		double maxX = Double.MIN_VALUE;
+		double maxY = Double.MIN_VALUE;
+		Rectangle2D dim;
+		
+		for(IEntityView entity : entities)
+			if(entity.isVisible()) {
+				dim = entity.getBorders();
+				
+				if(dim.getMaxX()>maxX)
+					maxX = dim.getMaxX();
+				if(dim.getMaxY()>maxY)
+					maxY = dim.getMaxY();
+			}
+		
+		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+	}
+	
+	
+	
+	@Override
+	public List<IEntityView> getRootEntities() {
+		List<IEntityView> roots = new ArrayList<IEntityView>();
+		boolean again;
+		int i;
+		final int size = relations.size();
+		IRelationView relation;
+		
+		for(IEntityView entityView : entities) {
+			i = 0;
+			again = true;
+			
+			while(again && i<size) {
+				relation = relations.get(i);
+				
+				if(relation instanceof InheritanceView && relation.getEntitySrc()==entityView)
+					again = false;
+				
+				i++;
+			}
+			
+			if(again && !roots.contains(entityView))
+				roots.add(entityView);
+		}
+		
+		return roots;
+	}
+
+
+	@Override
+	public void setLayoutStrategy(final ILayoutStrategy strategy) {
+		this.strategy = strategy;
+	}
+
+
+	@Override
+	public ILayoutStrategy getLayoutStrategy() {
+		return strategy;
 	}
 }

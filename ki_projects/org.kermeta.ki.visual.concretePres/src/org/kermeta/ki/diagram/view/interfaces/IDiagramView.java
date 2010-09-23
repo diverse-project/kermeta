@@ -2,11 +2,16 @@ package org.kermeta.ki.diagram.view.interfaces;
 
 import java.util.List;
 
+import javax.swing.JScrollPane;
+import javax.swing.Scrollable;
+
+import org.kermeta.ki.diagram.layout.ILayoutStrategy;
+
 /**
  * The interface of diagram classes.
  * @author Arnaud Blouin
  */
-public interface IDiagramView {
+public interface IDiagramView extends Scrollable {
 	/**
 	 * @return The entities of the diagram.
 	 */
@@ -45,4 +50,43 @@ public interface IDiagramView {
 	 * Refreshes the view of the diagram.
 	 */
 	void refresh();
+
+	/**
+	 * Updates the layout of the diagram.
+	 */
+	void updateLayout();
+
+	/**
+	 * @return The scrollpane of the diagram. Can be null.
+	 */
+	JScrollPane getScrollPane();
+	
+	
+	/** Updates the diagram and its components. */
+	void update();
+	
+	
+	/** Updates the dimension of the diagram. */
+	void updatePreferredSize();
+	
+	
+	/** Recentre the components that compose the diagram. */
+	void recentre();
+
+	/**
+	 * @return The list of entities that compose the roots of the diagram.
+	 */
+	List<IEntityView> getRootEntities();
+	
+	/**
+	 * Sets a new strategy to layout the diagram.
+	 * @param strategy The new strategy. Can be null.
+	 */
+	void setLayoutStrategy(final ILayoutStrategy strategy);
+	
+	
+	/**
+	 * @return The layout strategy. Can be null.
+	 */
+	ILayoutStrategy getLayoutStrategy();
 }
