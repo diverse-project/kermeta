@@ -25,4 +25,15 @@ public interface IPolygonDecorationView extends IDecorationView {
 	 * @param fillColor The colour of the interior of the decoration.
 	 */
 	void setFillColor(final Color fillColor);
+	
+	/**
+	 * defines if the decoration must be filled.
+	 * @param filled True: the decoration will be filled.
+	 */
+	void setFilled(final boolean filled);
+	
+	/**
+	 * @return True: the decoration is filled.
+	 */
+	boolean isFilled();
 }

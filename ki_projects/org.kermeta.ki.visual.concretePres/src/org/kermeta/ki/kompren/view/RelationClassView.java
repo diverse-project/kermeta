@@ -31,6 +31,9 @@ public class RelationClassView extends RelationView {
 			else
 				setSourceDecoration(new CompositionDecorationView(this));
 		
+		if(srcRole==null)
+			setTargetDecoration(new RelationDecorationView(this));
+		
 		if(srcRole!=null)
 			roleSrc = new RoleView(srcRole, srcCard, this, true, isComposition && !compositionAtStart);
 		
