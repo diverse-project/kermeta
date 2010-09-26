@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.art2.NodeLink#getNetworkType <em>Network Type</em>}</li>
  *   <li>{@link org.kermeta.art2.NodeLink#getEstimatedRate <em>Estimated Rate</em>}</li>
  *   <li>{@link org.kermeta.art2.NodeLink#getNetworkProperties <em>Network Properties</em>}</li>
+ *   <li>{@link org.kermeta.art2.NodeLink#getLastCheck <em>Last Check</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,5 +97,31 @@ public interface NodeLink extends EObject {
 	 * @generated
 	 */
 	EList<NetworkProperty> getNetworkProperties();
+
+	/**
+	 * Returns the value of the '<em><b>Last Check</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Check</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Check</em>' attribute.
+	 * @see #setLastCheck(String)
+	 * @see org.kermeta.art2.Art2Package#getNodeLink_LastCheck()
+	 * @model
+	 * @generated
+	 */
+	String getLastCheck();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.art2.NodeLink#getLastCheck <em>Last Check</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Check</em>' attribute.
+	 * @see #getLastCheck()
+	 * @generated
+	 */
+	void setLastCheck(String value);
 
 } // NodeLink

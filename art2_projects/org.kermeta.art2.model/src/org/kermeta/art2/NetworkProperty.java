@@ -16,6 +16,7 @@ package org.kermeta.art2;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.art2.NetworkProperty#getValue <em>Value</em>}</li>
+ *   <li>{@link org.kermeta.art2.NetworkProperty#getLastCheck <em>Last Check</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +50,31 @@ public interface NetworkProperty extends NamedElement {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Check</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Check</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Check</em>' attribute.
+	 * @see #setLastCheck(String)
+	 * @see org.kermeta.art2.Art2Package#getNetworkProperty_LastCheck()
+	 * @model
+	 * @generated
+	 */
+	String getLastCheck();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.art2.NetworkProperty#getLastCheck <em>Last Check</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Check</em>' attribute.
+	 * @see #getLastCheck()
+	 * @generated
+	 */
+	void setLastCheck(String value);
 
 } // NetworkProperty

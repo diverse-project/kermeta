@@ -1947,13 +1947,22 @@ public interface Art2Package extends EPackage {
 	int NODE_LINK__NETWORK_PROPERTIES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Last Check</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_LINK__LAST_CHECK = 3;
+
+	/**
 	 * The number of structural features of the '<em>Node Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_LINK_FEATURE_COUNT = 3;
+	int NODE_LINK_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.NetworkPropertyImpl <em>Network Property</em>}' class.
@@ -1984,13 +1993,22 @@ public interface Art2Package extends EPackage {
 	int NETWORK_PROPERTY__VALUE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Last Check</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NETWORK_PROPERTY__LAST_CHECK = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Network Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int NETWORK_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ChannelTypeImpl <em>Channel Type</em>}' class.
@@ -3256,6 +3274,17 @@ public interface Art2Package extends EPackage {
 	EReference getNodeLink_NetworkProperties();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2.NodeLink#getLastCheck <em>Last Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Check</em>'.
+	 * @see org.kermeta.art2.NodeLink#getLastCheck()
+	 * @see #getNodeLink()
+	 * @generated
+	 */
+	EAttribute getNodeLink_LastCheck();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.NetworkProperty <em>Network Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3275,6 +3304,17 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNetworkProperty_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2.NetworkProperty#getLastCheck <em>Last Check</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Check</em>'.
+	 * @see org.kermeta.art2.NetworkProperty#getLastCheck()
+	 * @see #getNetworkProperty()
+	 * @generated
+	 */
+	EAttribute getNetworkProperty_LastCheck();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.ChannelType <em>Channel Type</em>}'.
@@ -4329,6 +4369,14 @@ public interface Art2Package extends EPackage {
 		EReference NODE_LINK__NETWORK_PROPERTIES = eINSTANCE.getNodeLink_NetworkProperties();
 
 		/**
+		 * The meta object literal for the '<em><b>Last Check</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_LINK__LAST_CHECK = eINSTANCE.getNodeLink_LastCheck();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.NetworkPropertyImpl <em>Network Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4345,6 +4393,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute NETWORK_PROPERTY__VALUE = eINSTANCE.getNetworkProperty_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Check</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NETWORK_PROPERTY__LAST_CHECK = eINSTANCE.getNetworkProperty_LastCheck();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.ChannelTypeImpl <em>Channel Type</em>}' class.

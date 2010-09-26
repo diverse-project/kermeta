@@ -587,6 +587,10 @@
         <element xmi:type="ecore:EAttribute" href="art.ecore#//NodeLink/estimatedRate"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_vUGQgbpoEd-l4bVyLUNzzw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_cBaOwMZkEd-72NOoS6p8FA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="art.ecore#//NodeLink/lastCheck"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cBaOwcZkEd-72NOoS6p8FA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_inpzErpoEd-l4bVyLUNzzw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_inpzE7poEd-l4bVyLUNzzw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_inpzFLpoEd-l4bVyLUNzzw"/>
@@ -606,6 +610,10 @@
       <children xmi:type="notation:Node" xmi:id="_35g7QLp1Ed-l4bVyLUNzzw" type="2001">
         <element xmi:type="ecore:EAttribute" href="art.ecore#//NetworkProperty/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_35g7Qbp1Ed-l4bVyLUNzzw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XqkxYcZkEd-72NOoS6p8FA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="art.ecore#//NetworkProperty/lastCheck"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XqkxYsZkEd-72NOoS6p8FA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_v5jbErp1Ed-l4bVyLUNzzw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_v5jbE7p1Ed-l4bVyLUNzzw"/>

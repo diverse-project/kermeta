@@ -36,6 +36,7 @@ import org.kermeta.art2.NodeLink;
  *   <li>{@link org.kermeta.art2.impl.NodeLinkImpl#getNetworkType <em>Network Type</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.NodeLinkImpl#getEstimatedRate <em>Estimated Rate</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.NodeLinkImpl#getNetworkProperties <em>Network Properties</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.NodeLinkImpl#getLastCheck <em>Last Check</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +92,26 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 	 * @ordered
 	 */
 	protected EList<NetworkProperty> networkProperties;
+
+	/**
+	 * The default value of the '{@link #getLastCheck() <em>Last Check</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastCheck()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LAST_CHECK_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastCheck() <em>Last Check</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastCheck()
+	 * @generated
+	 * @ordered
+	 */
+	protected String lastCheck = LAST_CHECK_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -170,6 +191,27 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLastCheck() {
+		return lastCheck;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLastCheck(String newLastCheck) {
+		String oldLastCheck = lastCheck;
+		lastCheck = newLastCheck;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.NODE_LINK__LAST_CHECK, oldLastCheck, lastCheck));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -193,6 +235,8 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 				return getEstimatedRate();
 			case Art2Package.NODE_LINK__NETWORK_PROPERTIES:
 				return getNetworkProperties();
+			case Art2Package.NODE_LINK__LAST_CHECK:
+				return getLastCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +260,9 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 				getNetworkProperties().clear();
 				getNetworkProperties().addAll((Collection<? extends NetworkProperty>)newValue);
 				return;
+			case Art2Package.NODE_LINK__LAST_CHECK:
+				setLastCheck((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -237,6 +284,9 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 			case Art2Package.NODE_LINK__NETWORK_PROPERTIES:
 				getNetworkProperties().clear();
 				return;
+			case Art2Package.NODE_LINK__LAST_CHECK:
+				setLastCheck(LAST_CHECK_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,6 +305,8 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 				return ESTIMATED_RATE_EDEFAULT == null ? estimatedRate != null : !ESTIMATED_RATE_EDEFAULT.equals(estimatedRate);
 			case Art2Package.NODE_LINK__NETWORK_PROPERTIES:
 				return networkProperties != null && !networkProperties.isEmpty();
+			case Art2Package.NODE_LINK__LAST_CHECK:
+				return LAST_CHECK_EDEFAULT == null ? lastCheck != null : !LAST_CHECK_EDEFAULT.equals(lastCheck);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -273,6 +325,8 @@ public class NodeLinkImpl extends EObjectImpl implements NodeLink {
 		result.append(networkType);
 		result.append(", estimatedRate: ");
 		result.append(estimatedRate);
+		result.append(", lastCheck: ");
+		result.append(lastCheck);
 		result.append(')');
 		return result.toString();
 	}

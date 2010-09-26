@@ -1331,6 +1331,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getNodeLink_LastCheck() {
+		return (EAttribute)nodeLinkEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNetworkProperty() {
 		return networkPropertyEClass;
 	}
@@ -1342,6 +1351,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EAttribute getNetworkProperty_Value() {
 		return (EAttribute)networkPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNetworkProperty_LastCheck() {
+		return (EAttribute)networkPropertyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1608,9 +1626,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(nodeLinkEClass, NODE_LINK__NETWORK_TYPE);
 		createEAttribute(nodeLinkEClass, NODE_LINK__ESTIMATED_RATE);
 		createEReference(nodeLinkEClass, NODE_LINK__NETWORK_PROPERTIES);
+		createEAttribute(nodeLinkEClass, NODE_LINK__LAST_CHECK);
 
 		networkPropertyEClass = createEClass(NETWORK_PROPERTY);
 		createEAttribute(networkPropertyEClass, NETWORK_PROPERTY__VALUE);
+		createEAttribute(networkPropertyEClass, NETWORK_PROPERTY__LAST_CHECK);
 
 		channelTypeEClass = createEClass(CHANNEL_TYPE);
 		createEAttribute(channelTypeEClass, CHANNEL_TYPE__START_METHOD);
@@ -1819,9 +1839,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEAttribute(getNodeLink_NetworkType(), ecorePackage.getEString(), "networkType", null, 0, 1, NodeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNodeLink_EstimatedRate(), ecorePackage.getEIntegerObject(), "estimatedRate", null, 0, 1, NodeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodeLink_NetworkProperties(), this.getNetworkProperty(), null, "networkProperties", null, 0, -1, NodeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodeLink_LastCheck(), ecorePackage.getEString(), "lastCheck", null, 0, 1, NodeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(networkPropertyEClass, NetworkProperty.class, "NetworkProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNetworkProperty_Value(), ecorePackage.getEString(), "value", null, 0, 1, NetworkProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNetworkProperty_LastCheck(), ecorePackage.getEString(), "lastCheck", null, 0, 1, NetworkProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(channelTypeEClass, ChannelType.class, "ChannelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChannelType_StartMethod(), ecorePackage.getEString(), "startMethod", null, 0, 1, ChannelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
