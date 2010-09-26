@@ -13,7 +13,7 @@ case class RemoveInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName 
   def execute() : Boolean= {
     println("CMD REMOVE CT EXECUTION");
 
-    var bundles = ctx.bundleMapping.filter({bm=> bm.obj  == c })
+    var bundles = ctx.bundleMapping.filter({bm=> bm.objClass  == c.getClass && bm.name == c.getName })
 
     bundles.forall{mp=>
       mp.bundle.stop;mp.bundle.uninstall;true

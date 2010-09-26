@@ -19,7 +19,7 @@ case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  exten
     try{
       lastExecutionBundle = Some(ctx.bundleContext.installBundle(ct.getUrl));
       var symbolicName : String = lastExecutionBundle.get.getSymbolicName
-      ctx.bundleMapping.append(Art2OSGiBundle(ct,ct.getName,ct.getClass,lastExecutionBundle.get))
+      ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
      // lastExecutionBundle.get.start
       true
     } catch {

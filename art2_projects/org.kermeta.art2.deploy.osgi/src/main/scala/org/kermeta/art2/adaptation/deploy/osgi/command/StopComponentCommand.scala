@@ -14,8 +14,8 @@ import org.kermeta.art2.framework.message.Art2StopMessage
 
 case class StopComponentCommand(c : Instance, ctx : Art2DeployManager,nodeName:String) extends PrimitiveCommand {
 
-  def execute() : Boolean= {0
-                            ctx.bundleMapping.find(map=>map.obj == c) match {
+  def execute() : Boolean= {
+      ctx.bundleMapping.find(map=>map.objClass == c.getClass && map.name == c.getName) match {
       case None => false
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle

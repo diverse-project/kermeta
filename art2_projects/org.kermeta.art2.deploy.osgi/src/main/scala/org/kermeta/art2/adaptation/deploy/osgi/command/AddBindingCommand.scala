@@ -22,7 +22,7 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
 
   def execute() : Boolean= {
 
-    var art2ChannelFound = ctx.bundleMapping.find(map=>map.obj == c.getHub) match {
+    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getHub.getClass && map.name == c.getHub.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
       case Some(mapfound)=> {
           var channelBundle = mapfound.bundle
@@ -30,8 +30,8 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
             case None => logger.error("Channel Fragment Service not found");None
             case Some(sr)=> Some(channelBundle.getBundleContext.getService(sr).asInstanceOf[Art2ChannelFragment])}}
     }
-
-    var art2ComponentFound = ctx.bundleMapping.find(map=>map.obj == c.getPort.eContainer.asInstanceOf[ComponentInstance]) match {
+    
+    var art2ComponentFound = ctx.bundleMapping.find(map=>map.objClass == c.getPort.eContainer.asInstanceOf[ComponentInstance].getClass && map.name == c.getPort.eContainer.asInstanceOf[ComponentInstance].getName ) match {
       case None => logger.error("Component Mapping not found");None
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle
@@ -81,7 +81,7 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
   }
 
   def undo() = {
-    
+    RemoveBindingCommand(c,ctx,nodeName).execute
   }
 
 

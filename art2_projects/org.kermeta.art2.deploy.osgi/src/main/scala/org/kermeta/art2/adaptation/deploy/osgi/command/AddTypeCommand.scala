@@ -45,7 +45,7 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
           try{
             lastExecutionBundle = Some(ctx.bundleContext.installBundle(buildQuery(l)));
             var symbolicName : String = lastExecutionBundle.get.getSymbolicName
-            ctx.bundleMapping.append(Art2OSGiBundle(ct,ct.getName,ct.getClass,lastExecutionBundle.get))
+            ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
             lastExecutionBundle.get.start
             true
           } catch {

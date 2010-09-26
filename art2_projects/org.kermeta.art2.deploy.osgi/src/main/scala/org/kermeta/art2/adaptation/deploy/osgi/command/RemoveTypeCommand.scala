@@ -12,7 +12,7 @@ case class RemoveTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager) exten
 
   def execute() : Boolean= {
     println("CMD REMOVE CT EXECUTION");
-    ctx.bundleMapping.find({bm=> bm.obj  == ct }) match {
+    ctx.bundleMapping.find({bm=> bm.objClass  == ct.getClass && bm.name == ct.getName }) match {
       case Some(mp) => { mp.bundle.stop;mp.bundle.uninstall;true }
       case None => false
     }

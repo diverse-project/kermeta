@@ -5,6 +5,4 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.context
 
-import org.eclipse.emf.ecore.EObject
-
-case class Art2OSGiBundle(obj : EObject,name : String,objClass : Class[_],bundle : org.osgi.framework.Bundle)
+case class Art2OSGiBundle(name : String,objClass : Class[_],bundle : org.osgi.framework.Bundle)

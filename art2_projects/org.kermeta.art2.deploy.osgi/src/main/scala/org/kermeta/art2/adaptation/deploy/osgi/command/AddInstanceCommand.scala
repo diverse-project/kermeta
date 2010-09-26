@@ -38,7 +38,7 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
         bundle.name==c.getTypeDefinition.getName && bundle.objClass.getName==c.getTypeDefinition.getClass.getName
       }) match {
       case Some(bundle)=> bundle
-      case None => println("ComponentType Not Found"); return false; null;
+      case None => println("Type Not Found"); return false; null;
     }
 
     //var OSGIINFDIR = new File(directory.getAbsolutePath+"/"+"OSGI-INF"+"/"+"blueprint")
@@ -94,7 +94,7 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
       // var bundleWrapper= ctx.bundleContext.installBundle("assembly:"+directoryWrapper.getAbsolutePath);
       //    executedBundles = List(bundle,bundleWrapper)
 
-      ctx.bundleMapping.append(Art2OSGiBundle(c,c.getName,c.getClass,bundle))
+      ctx.bundleMapping.append(Art2OSGiBundle(c.getName,c.getClass,bundle))
       // ctx.bundleMapping.append(Art2OSGiBundle(c,c.getName,c.getClass,bundleWrapper))
 
       lastExecutionBundle = Some(bundle)

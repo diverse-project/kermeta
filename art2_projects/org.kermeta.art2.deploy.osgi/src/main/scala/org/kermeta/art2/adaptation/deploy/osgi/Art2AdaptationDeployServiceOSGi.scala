@@ -2,15 +2,18 @@
 package org.kermeta.art2.adaptation.deploy.osgi
 
 import org.kermeta.art2.ComponentInstance
+import org.kermeta.art2.adaptation.deploy.osgi.command.AddFragmentBindingCommand
 import org.kermeta.art2.adaptation.deploy.osgi.command._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2adaptation.AdaptationModel
 import org.kermeta.art2adaptation.AddBinding
+import org.kermeta.art2adaptation.AddFragmentBinding
 import org.kermeta.art2adaptation.AddInstance
 import org.kermeta.art2adaptation.AddType
 import org.kermeta.art2adaptation.AddThirdParty
 import org.kermeta.art2adaptation.RemoveBinding
+import org.kermeta.art2adaptation.RemoveFragmentBinding
 import org.kermeta.art2adaptation.RemoveInstance
 import org.kermeta.art2adaptation.RemoveType
 import org.kermeta.art2adaptation.RemoveThirdParty
@@ -25,47 +28,25 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
   def setContext(context : Art2DeployManager) = { ctx = context }
 
-
-  def phase(cmds: List[PrimitiveCommand],desc:String,autostart:Boolean):Boolean = {
-    logger.info(desc+"="+cmds.size)
-    var intermediate = cmds.forall(c=> {
-        try{ c.execute } catch {
-          case _ @ e => logger.error("ART2 DEPLOY ERROR="+e);false
-        }
-      })
-
-    if(intermediate && autostart){
-      intermediate = cmds.forall(c=> {
-          try{
-            c.getLastExecutionBundle match {
-              case None => false
-              case Some(b) => b.start;true
-            }
-          } catch {
-            case _ @ e => logger.error("ART2 START ERROR="+e);false
-          }
-        })
-    }
-    if(!intermediate){
-      cmds.foreach(c=>{
-          try{
-            c.undo
-          } catch {
-            case _ @ e => logger.error("ART2 ROLLBACK !!!! DEPLOYERROR="+e);
-          }
-        })
-    }
-    logger.info("Result : "+intermediate)
-    intermediate
-  }
-
-
   def deploy(model : AdaptationModel,nodeName:String) = {
+
+    var phase = new Art2DeployPhase
+
     var executedCommandTP :List[PrimitiveCommand] = List()
     var executedCommandCT :List[PrimitiveCommand] = List()
-    var executedCommandCI :List[PrimitiveCommand] = List()
-    var executedCommandBI :List[PrimitiveCommand] = List()
+    //var executedCommandCI :List[PrimitiveCommand] = List()
+    //  var executedCommandBI :List[PrimitiveCommand] = List()
 
+
+    //INSTANCE LIST
+    var command_add_instance :List[PrimitiveCommand] = List()
+    var command_remove_instance :List[PrimitiveCommand] = List()
+
+    //BINDING LIST
+    var command_remove_binding :List[PrimitiveCommand] = List()
+    var command_add_binding :List[PrimitiveCommand] = List()
+
+    //Life cycle command COMMAND
     var stopCommand :List[PrimitiveCommand] = List()
     var startCommand :List[PrimitiveCommand] = List()
 
@@ -80,20 +61,23 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         case cta : RemoveType =>executedCommandCT = executedCommandCT ++ List(RemoveTypeCommand(cta.getRef,ctx))
           //Instance
         case ca : AddInstance => {
-            executedCommandCI = executedCommandCI ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
+            command_add_instance = command_add_instance ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
             if(ca.getRef.isInstanceOf[ComponentInstance]){
               startCommand = startCommand ++ List(StartComponentCommand(ca.getRef,ctx,nodeName))
             }
           }
         case ca : RemoveInstance =>{
-            executedCommandCI = executedCommandCI ++ List(RemoveInstanceCommand(ca.getRef,ctx,nodeName))
+            command_remove_instance = command_remove_instance ++ List(RemoveInstanceCommand(ca.getRef,ctx,nodeName))
             if(ca.getRef.isInstanceOf[ComponentInstance]){
               stopCommand = stopCommand ++ List(StopComponentCommand(ca.getRef,ctx,nodeName))
             }
           }
           //Binding
-        case ca : AddBinding =>executedCommandBI = executedCommandBI ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
-        case ca : RemoveBinding =>executedCommandBI = executedCommandBI ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
+        case ca : AddBinding =>command_add_binding = command_add_binding ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
+        case ca : RemoveBinding =>command_remove_binding = command_remove_binding ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
+          //Channel binding
+        case ca : AddFragmentBinding =>command_add_binding = command_add_binding ++ List(AddFragmentBindingCommand(ca.getRef,ca.getTargetNodeName,ctx,nodeName))
+        case ca : RemoveFragmentBinding =>command_remove_binding = command_remove_binding ++ List(RemoveFragmentBindingCommand(ca.getRef,ca.getTargetNodeName,ctx,nodeName))
 
         case _ => logger.error("Unknow art2 adaptation primitive");false
       }
@@ -101,12 +85,21 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
     var executionResult = true
 
-    if(executionResult){ executionResult=phase(stopCommand,"Phase 0 STOP COMPONENT",false) }
-    if(executionResult){ executionResult=phase(executedCommandTP,"Phase 1 install ThirdParty",true) }
-    if(executionResult){ executionResult=phase(executedCommandCT,"Phase 2 install ComponentType",true) }
-    if(executionResult){ executionResult=phase(executedCommandCI,"Phase 3 install ComponentInstance",true) }
-    if(executionResult){ executionResult=phase(executedCommandBI,"Phase 4 install Bindings",false) }
-    if(executionResult){ executionResult=phase(startCommand,"Phase 5 START COMPONENT",false) }
+    if(executionResult){ executionResult=phase.phase(stopCommand,"Phase 0 STOP COMPONENT",false) }
+    if(executionResult){ executionResult=phase.phase(command_remove_binding,"Phase 1 Remove Binding",false) }
+    if(executionResult){ executionResult=phase.phase(command_remove_instance,"Phase 2 Remove Instance",false) }
+
+    //INSTALL TYPE
+    if(executionResult){ executionResult=phase.phase(executedCommandTP,"Phase 3 ThirdParty",true) }
+    if(executionResult){ executionResult=phase.phase(executedCommandCT,"Phase 4 ComponentType",true) }
+
+    //INSTALL ISTANCE
+    if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 5 install ComponentInstance",true) }
+    if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 6 install Bindings",false) }
+    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 7 START COMPONENT",false) }
+
+    if(!executionResult){phase.rollback}
+
     executionResult
   }
 
