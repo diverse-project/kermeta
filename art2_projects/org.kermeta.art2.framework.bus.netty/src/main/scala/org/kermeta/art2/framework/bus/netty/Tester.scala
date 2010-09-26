@@ -7,6 +7,7 @@ package org.kermeta.art2.framework.bus.netty
 
 import java.net.InetSocketAddress
 import org.kermeta.art2.framework.JacksonSerializer._
+import org.kermeta.art2.framework.bus.netty.remote.Art2DispatcherActor
 import org.kermeta.art2.framework.bus.netty.remote.TcpClientRemoteActor
 import org.kermeta.art2.framework.bus.netty.remote.TcpServerRemoteActor
 import org.kermeta.art2.framework.bus.netty.remote.UdpClientRemoteActor
@@ -66,10 +67,13 @@ object Tester {
      //  clientactor2 ! "Multicast hello world !"
      */
 
-    var synch = new Art2ModelSynch(8082,null,"duke.irisa.fr")
-    synch.start
+    //var synch = new Art2ModelSynch(8082,null,"duke.irisa.fr")
+    //synch.start
 
 //    synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
+
+  //  var actorPoc = new Art2DispatcherActor(8080,null)
+  //  actorPoc.start
 
     new Thread(){
       override def run = { Thread.sleep(3000);
@@ -79,7 +83,7 @@ object Tester {
                           //   actorS.stop;println("Server stopped")
                           //   actorSD.stop;println("Server delegate stopped")
                           //  actorS2.stop;
-                          synch.stop
+                    //      actorPoc.stop
       }
     }.start
 

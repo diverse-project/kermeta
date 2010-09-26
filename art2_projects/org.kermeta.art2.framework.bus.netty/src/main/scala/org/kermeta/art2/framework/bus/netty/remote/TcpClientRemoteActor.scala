@@ -44,8 +44,9 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   var channelfutur : Option[ChannelFuture] = None
   var allChannels = new DefaultChannelGroup()
 
-  case class STOP_RACTOR
+ // case class STOP_RACTOR
   case class CHANNEL_CONNECTED(e : ChannelStateEvent)
+  //case class RESPONSE_RECEIVE(msg : Any)
 
 
   override def start(): Actor = synchronized {
@@ -101,8 +102,6 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   }
 
 
-
-
   def getRemoteAddr : InetSocketAddress 
 
   private def reconnect() = {
@@ -136,7 +135,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
           case Some(p) => p.shutdown
         }
     }
-    me ! STOP_RACTOR()
+    me ! STOP()
   }
 
   def sendMessage(c : Channel,o : Any) : Boolean = {
@@ -150,7 +149,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   def act() = {
     loop {
       react {
-        case s : STOP_RACTOR => exit()
+        case s : STOP => exit()
         case _ @ msg => channelfutur match {
             case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
             case _ => {
@@ -160,7 +159,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
                 var sended = false
                 loopWhile(!sended){
                   reactWithin(timeout) {
-                    case s : STOP_RACTOR => exit()
+                    case s : STOP => exit()
                     case c : CHANNEL_CONNECTED => sended = sendMessage(c.e.getChannel,msg);
                     case TIMEOUT => reconnect
                   }
