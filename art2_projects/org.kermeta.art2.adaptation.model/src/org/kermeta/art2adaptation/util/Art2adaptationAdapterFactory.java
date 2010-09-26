@@ -128,6 +128,18 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 				return createRemoveBindingAdapter();
 			}
 			@Override
+			public Adapter caseFragmentBindingAdaptation(FragmentBindingAdaptation object) {
+				return createFragmentBindingAdaptationAdapter();
+			}
+			@Override
+			public Adapter caseAddFragmentBinding(AddFragmentBinding object) {
+				return createAddFragmentBindingAdapter();
+			}
+			@Override
+			public Adapter caseRemoveFragmentBinding(RemoveFragmentBinding object) {
+				return createRemoveFragmentBindingAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -340,6 +352,48 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRemoveBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.FragmentBindingAdaptation <em>Fragment Binding Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.FragmentBindingAdaptation
+	 * @generated
+	 */
+	public Adapter createFragmentBindingAdaptationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.AddFragmentBinding <em>Add Fragment Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.AddFragmentBinding
+	 * @generated
+	 */
+	public Adapter createAddFragmentBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.RemoveFragmentBinding <em>Remove Fragment Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.RemoveFragmentBinding
+	 * @generated
+	 */
+	public Adapter createRemoveFragmentBindingAdapter() {
 		return null;
 	}
 

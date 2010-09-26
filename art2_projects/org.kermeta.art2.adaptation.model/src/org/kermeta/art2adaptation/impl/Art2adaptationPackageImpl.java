@@ -6,6 +6,7 @@
  */
 package org.kermeta.art2adaptation.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -17,14 +18,17 @@ import org.kermeta.art2.Art2Package;
 import org.kermeta.art2adaptation.AdaptationModel;
 import org.kermeta.art2adaptation.AdaptationPrimitive;
 import org.kermeta.art2adaptation.AddBinding;
+import org.kermeta.art2adaptation.AddFragmentBinding;
 import org.kermeta.art2adaptation.AddInstance;
 import org.kermeta.art2adaptation.AddThirdParty;
 import org.kermeta.art2adaptation.AddType;
 import org.kermeta.art2adaptation.Art2adaptationFactory;
 import org.kermeta.art2adaptation.Art2adaptationPackage;
 import org.kermeta.art2adaptation.BindingAdaptation;
+import org.kermeta.art2adaptation.FragmentBindingAdaptation;
 import org.kermeta.art2adaptation.InstanceAdaptation;
 import org.kermeta.art2adaptation.RemoveBinding;
+import org.kermeta.art2adaptation.RemoveFragmentBinding;
 import org.kermeta.art2adaptation.RemoveInstance;
 import org.kermeta.art2adaptation.RemoveThirdParty;
 import org.kermeta.art2adaptation.RemoveType;
@@ -135,6 +139,27 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * @generated
 	 */
 	private EClass removeBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fragmentBindingAdaptationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addFragmentBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass removeFragmentBindingEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -376,6 +401,51 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFragmentBindingAdaptation() {
+		return fragmentBindingAdaptationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFragmentBindingAdaptation_Ref() {
+		return (EReference)fragmentBindingAdaptationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFragmentBindingAdaptation_TargetNodeName() {
+		return (EAttribute)fragmentBindingAdaptationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAddFragmentBinding() {
+		return addFragmentBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRemoveFragmentBinding() {
+		return removeFragmentBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Art2adaptationFactory getArt2adaptationFactory() {
 		return (Art2adaptationFactory)getEFactoryInstance();
 	}
@@ -431,6 +501,14 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		addBindingEClass = createEClass(ADD_BINDING);
 
 		removeBindingEClass = createEClass(REMOVE_BINDING);
+
+		fragmentBindingAdaptationEClass = createEClass(FRAGMENT_BINDING_ADAPTATION);
+		createEReference(fragmentBindingAdaptationEClass, FRAGMENT_BINDING_ADAPTATION__REF);
+		createEAttribute(fragmentBindingAdaptationEClass, FRAGMENT_BINDING_ADAPTATION__TARGET_NODE_NAME);
+
+		addFragmentBindingEClass = createEClass(ADD_FRAGMENT_BINDING);
+
+		removeFragmentBindingEClass = createEClass(REMOVE_FRAGMENT_BINDING);
 	}
 
 	/**
@@ -476,6 +554,9 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		bindingAdaptationEClass.getESuperTypes().add(this.getAdaptationPrimitive());
 		addBindingEClass.getESuperTypes().add(this.getBindingAdaptation());
 		removeBindingEClass.getESuperTypes().add(this.getBindingAdaptation());
+		fragmentBindingAdaptationEClass.getESuperTypes().add(this.getAdaptationPrimitive());
+		addFragmentBindingEClass.getESuperTypes().add(this.getFragmentBindingAdaptation());
+		removeFragmentBindingEClass.getESuperTypes().add(this.getFragmentBindingAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(adaptationPrimitiveEClass, AdaptationPrimitive.class, "AdaptationPrimitive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -510,6 +591,14 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		initEClass(addBindingEClass, AddBinding.class, "AddBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(removeBindingEClass, RemoveBinding.class, "RemoveBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(fragmentBindingAdaptationEClass, FragmentBindingAdaptation.class, "FragmentBindingAdaptation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFragmentBindingAdaptation_Ref(), theArt2Package.getChannel(), null, "ref", null, 1, 1, FragmentBindingAdaptation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFragmentBindingAdaptation_TargetNodeName(), ecorePackage.getEString(), "targetNodeName", null, 0, 1, FragmentBindingAdaptation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addFragmentBindingEClass, AddFragmentBinding.class, "AddFragmentBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(removeFragmentBindingEClass, RemoveFragmentBinding.class, "RemoveFragmentBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

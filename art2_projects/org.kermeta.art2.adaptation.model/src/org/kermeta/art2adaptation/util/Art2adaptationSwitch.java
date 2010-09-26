@@ -191,6 +191,29 @@ public class Art2adaptationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2adaptationPackage.FRAGMENT_BINDING_ADAPTATION: {
+				FragmentBindingAdaptation fragmentBindingAdaptation = (FragmentBindingAdaptation)theEObject;
+				T result = caseFragmentBindingAdaptation(fragmentBindingAdaptation);
+				if (result == null) result = caseAdaptationPrimitive(fragmentBindingAdaptation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.ADD_FRAGMENT_BINDING: {
+				AddFragmentBinding addFragmentBinding = (AddFragmentBinding)theEObject;
+				T result = caseAddFragmentBinding(addFragmentBinding);
+				if (result == null) result = caseFragmentBindingAdaptation(addFragmentBinding);
+				if (result == null) result = caseAdaptationPrimitive(addFragmentBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.REMOVE_FRAGMENT_BINDING: {
+				RemoveFragmentBinding removeFragmentBinding = (RemoveFragmentBinding)theEObject;
+				T result = caseRemoveFragmentBinding(removeFragmentBinding);
+				if (result == null) result = caseFragmentBindingAdaptation(removeFragmentBinding);
+				if (result == null) result = caseAdaptationPrimitive(removeFragmentBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -402,6 +425,51 @@ public class Art2adaptationSwitch<T> {
 	 * @generated
 	 */
 	public T caseRemoveBinding(RemoveBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fragment Binding Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fragment Binding Adaptation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFragmentBindingAdaptation(FragmentBindingAdaptation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add Fragment Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add Fragment Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddFragmentBinding(AddFragmentBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Remove Fragment Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Remove Fragment Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRemoveFragmentBinding(RemoveFragmentBinding object) {
 		return null;
 	}
 

@@ -6,6 +6,7 @@
  */
 package org.kermeta.art2adaptation;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -443,6 +444,118 @@ public interface Art2adaptationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.FragmentBindingAdaptationImpl <em>Fragment Binding Adaptation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.FragmentBindingAdaptationImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getFragmentBindingAdaptation()
+	 * @generated
+	 */
+	int FRAGMENT_BINDING_ADAPTATION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAGMENT_BINDING_ADAPTATION__REF = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target Node Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAGMENT_BINDING_ADAPTATION__TARGET_NODE_NAME = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Fragment Binding Adaptation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAGMENT_BINDING_ADAPTATION_FEATURE_COUNT = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.AddFragmentBindingImpl <em>Add Fragment Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.AddFragmentBindingImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddFragmentBinding()
+	 * @generated
+	 */
+	int ADD_FRAGMENT_BINDING = 15;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_FRAGMENT_BINDING__REF = FRAGMENT_BINDING_ADAPTATION__REF;
+
+	/**
+	 * The feature id for the '<em><b>Target Node Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_FRAGMENT_BINDING__TARGET_NODE_NAME = FRAGMENT_BINDING_ADAPTATION__TARGET_NODE_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Add Fragment Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_FRAGMENT_BINDING_FEATURE_COUNT = FRAGMENT_BINDING_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.RemoveFragmentBindingImpl <em>Remove Fragment Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.RemoveFragmentBindingImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveFragmentBinding()
+	 * @generated
+	 */
+	int REMOVE_FRAGMENT_BINDING = 16;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_FRAGMENT_BINDING__REF = FRAGMENT_BINDING_ADAPTATION__REF;
+
+	/**
+	 * The feature id for the '<em><b>Target Node Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_FRAGMENT_BINDING__TARGET_NODE_NAME = FRAGMENT_BINDING_ADAPTATION__TARGET_NODE_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Remove Fragment Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_FRAGMENT_BINDING_FEATURE_COUNT = FRAGMENT_BINDING_ADAPTATION_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AdaptationPrimitive <em>Adaptation Primitive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,6 +749,58 @@ public interface Art2adaptationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRemoveBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.FragmentBindingAdaptation <em>Fragment Binding Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fragment Binding Adaptation</em>'.
+	 * @see org.kermeta.art2adaptation.FragmentBindingAdaptation
+	 * @generated
+	 */
+	EClass getFragmentBindingAdaptation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.art2adaptation.FragmentBindingAdaptation#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see org.kermeta.art2adaptation.FragmentBindingAdaptation#getRef()
+	 * @see #getFragmentBindingAdaptation()
+	 * @generated
+	 */
+	EReference getFragmentBindingAdaptation_Ref();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2adaptation.FragmentBindingAdaptation#getTargetNodeName <em>Target Node Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Node Name</em>'.
+	 * @see org.kermeta.art2adaptation.FragmentBindingAdaptation#getTargetNodeName()
+	 * @see #getFragmentBindingAdaptation()
+	 * @generated
+	 */
+	EAttribute getFragmentBindingAdaptation_TargetNodeName();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AddFragmentBinding <em>Add Fragment Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Add Fragment Binding</em>'.
+	 * @see org.kermeta.art2adaptation.AddFragmentBinding
+	 * @generated
+	 */
+	EClass getAddFragmentBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.RemoveFragmentBinding <em>Remove Fragment Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Remove Fragment Binding</em>'.
+	 * @see org.kermeta.art2adaptation.RemoveFragmentBinding
+	 * @generated
+	 */
+	EClass getRemoveFragmentBinding();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -838,6 +1003,52 @@ public interface Art2adaptationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REMOVE_BINDING = eINSTANCE.getRemoveBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.FragmentBindingAdaptationImpl <em>Fragment Binding Adaptation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.FragmentBindingAdaptationImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getFragmentBindingAdaptation()
+		 * @generated
+		 */
+		EClass FRAGMENT_BINDING_ADAPTATION = eINSTANCE.getFragmentBindingAdaptation();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FRAGMENT_BINDING_ADAPTATION__REF = eINSTANCE.getFragmentBindingAdaptation_Ref();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Node Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FRAGMENT_BINDING_ADAPTATION__TARGET_NODE_NAME = eINSTANCE.getFragmentBindingAdaptation_TargetNodeName();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.AddFragmentBindingImpl <em>Add Fragment Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.AddFragmentBindingImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddFragmentBinding()
+		 * @generated
+		 */
+		EClass ADD_FRAGMENT_BINDING = eINSTANCE.getAddFragmentBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.RemoveFragmentBindingImpl <em>Remove Fragment Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.RemoveFragmentBindingImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveFragmentBinding()
+		 * @generated
+		 */
+		EClass REMOVE_FRAGMENT_BINDING = eINSTANCE.getRemoveFragmentBinding();
 
 	}
 

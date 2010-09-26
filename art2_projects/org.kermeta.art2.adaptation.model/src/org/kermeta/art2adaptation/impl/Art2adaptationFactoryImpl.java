@@ -74,6 +74,9 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.BINDING_ADAPTATION: return createBindingAdaptation();
 			case Art2adaptationPackage.ADD_BINDING: return createAddBinding();
 			case Art2adaptationPackage.REMOVE_BINDING: return createRemoveBinding();
+			case Art2adaptationPackage.FRAGMENT_BINDING_ADAPTATION: return createFragmentBindingAdaptation();
+			case Art2adaptationPackage.ADD_FRAGMENT_BINDING: return createAddFragmentBinding();
+			case Art2adaptationPackage.REMOVE_FRAGMENT_BINDING: return createRemoveFragmentBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -217,6 +220,36 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public RemoveBinding createRemoveBinding() {
 		RemoveBindingImpl removeBinding = new RemoveBindingImpl();
 		return removeBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FragmentBindingAdaptation createFragmentBindingAdaptation() {
+		FragmentBindingAdaptationImpl fragmentBindingAdaptation = new FragmentBindingAdaptationImpl();
+		return fragmentBindingAdaptation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddFragmentBinding createAddFragmentBinding() {
+		AddFragmentBindingImpl addFragmentBinding = new AddFragmentBindingImpl();
+		return addFragmentBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RemoveFragmentBinding createRemoveFragmentBinding() {
+		RemoveFragmentBindingImpl removeFragmentBinding = new RemoveFragmentBindingImpl();
+		return removeFragmentBinding;
 	}
 
 	/**

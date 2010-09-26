@@ -152,6 +152,33 @@ public interface Art2adaptationFactory extends EFactory {
 	RemoveBinding createRemoveBinding();
 
 	/**
+	 * Returns a new object of class '<em>Fragment Binding Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Fragment Binding Adaptation</em>'.
+	 * @generated
+	 */
+	FragmentBindingAdaptation createFragmentBindingAdaptation();
+
+	/**
+	 * Returns a new object of class '<em>Add Fragment Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add Fragment Binding</em>'.
+	 * @generated
+	 */
+	AddFragmentBinding createAddFragmentBinding();
+
+	/**
+	 * Returns a new object of class '<em>Remove Fragment Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Remove Fragment Binding</em>'.
+	 * @generated
+	 */
+	RemoveFragmentBinding createRemoveFragmentBinding();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
