@@ -103,6 +103,50 @@ trait UpdateNodeKompare {
       }
     }
 
+
+
+    //FRAGMENT BINDING STEP
+    //ONLY CHECK FOR HUB NO UNINSTALL
+    updateRoot.getHubs.foreach{newhub=>
+
+      var previousHub = actualRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
+        case None => // NOTHING TO DO HUB WILL BE UNINSTALL, NO UNBIND IS NECESSARY
+        case Some(previousHub)=>{
+            newhub.getOtherFragment(updateNode.getName).foreach{newhubBindingNodeName=>
+              previousHub.getOtherFragment(actualNode.getName).find(b=> b ==newhubBindingNodeName) match {
+                case None => {
+                    //NEW BINDING TODO
+                    var addccmd = Art2adaptationFactory.eINSTANCE.createAddFragmentBinding
+                    addccmd.setRef(newhub)
+                    addccmd.setTargetNodeName(newhubBindingNodeName)
+                    adaptationModel.getAdaptations.add(addccmd)
+                  }
+                case Some(bname)=> //OK ALREADY BINDED
+              }
+            }
+            previousHub.getOtherFragment(actualNode.getName).foreach{previousHubBindingNodeName=>
+              newhub.getOtherFragment(updateNode.getName).find(b=> b ==previousHubBindingNodeName) match {
+                case None => {
+                    //REMOVE BINDING TODO
+                    var addccmd = Art2adaptationFactory.eINSTANCE.createRemoveFragmentBinding
+                    addccmd.setRef(newhub)
+                    addccmd.setTargetNodeName(previousHubBindingNodeName)
+                    adaptationModel.getAdaptations.add(addccmd)
+                  }
+                case Some(bname)=> //OK ALREADY BINDED
+              }
+            }
+          }
+      }
+
+    }
+
+
+
+
+
+
+
     adaptationModel
   }
   

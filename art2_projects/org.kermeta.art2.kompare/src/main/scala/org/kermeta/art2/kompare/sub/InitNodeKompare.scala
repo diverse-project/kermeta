@@ -40,10 +40,17 @@ trait InitNodeKompare {
       })
     
 
-    /* TODO BIND FRAGMENT */
+    /* add FRAGMENT binding */
+    root.getHubs.foreach{channel =>
+      channel.getOtherFragment(node.getName).foreach{remoteName =>
+        var addccmd = Art2adaptationFactory.eINSTANCE.createAddFragmentBinding
+        addccmd.setRef(channel)
+        addccmd.setTargetNodeName(remoteName)
+        adaptationModel.getAdaptations.add(addccmd)
+      }
+    }
     
-    
-    /* remove mbinding */
+    /* add mbinding */
     root.getMBindings.foreach{b=>
       if(b.getPort.eContainer.eContainer == node){
         var addcmd = Art2adaptationFactory.eINSTANCE.createAddBinding
