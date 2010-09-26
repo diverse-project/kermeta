@@ -5,17 +5,14 @@
 
 package org.kermeta.art2.framework.message
 
-import org.kermeta.art2.framework.Art2ChannelFragment
 import scala.reflect.BeanProperty
 
-class Art2FragmentBindMessage {
-  @BeanProperty
-  var proxy : Art2ChannelFragment = null
+class Art2ResponseMessage {
 
   @BeanProperty
-  var channelName : String = ""
+  var responseTag = ""
 
   @BeanProperty
-  var fragmentNodeName : String = ""
+  var content : Any = null
 
 }

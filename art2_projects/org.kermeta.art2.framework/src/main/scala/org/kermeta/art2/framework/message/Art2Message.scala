@@ -5,26 +5,27 @@
 
 package org.kermeta.art2.framework.message
 
-
-import org.kermeta.art2.framework.Art2Actor
-import org.osgi.framework.BundleContext
 import scala.reflect.BeanProperty
 
 class Art2Message{
+
   @BeanProperty 
   var destNodeName = "default"
 
   @BeanProperty
-  var destComponentName = "default"
-
-  @BeanProperty
-  var destPortName = "default"
+  var destChannelName = "default"
 
   @BeanProperty
   var content : Any = null
 
   @BeanProperty
   var inOut : java.lang.Boolean = false
+
+  @BeanProperty
+  var responseTag = ""
+
+  @BeanProperty
+  var timeout : Long = 3000
 
 }
 /*

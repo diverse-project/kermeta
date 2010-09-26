@@ -11,5 +11,8 @@ class Art2FragmentUnbindMessage {
 
   @BeanProperty
   var channelName : String = ""
+
+  @BeanProperty
+  var fragmentNodeName : String = ""
   
 }

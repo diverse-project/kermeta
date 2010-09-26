@@ -5,27 +5,28 @@
 
 package org.kermeta.art2.framework
 
+import java.net.InetSocketAddress
+import java.util.Date
 import org.kermeta.art2.Art2Factory
+import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
 object Art2PlatformHelper {
 
-  def updateNodeLinkProp(modelHandler : Art2ModelHandlerService,targetNodeName:String,key:String,value:String,networkType : String,weight:Int) = {
-
-    var actualModel = modelHandler.getLastModel
+  def updateNodeLinkProp(actualModel : ContainerRoot,currentNodeName : String,targetNodeName:String,key:String,value:String,networkType : String,weight:Int) = {
     var logger = LoggerFactory.getLogger(this.getClass);
 
     /* SEARCH THE NODE NETWORK */
     var nodenetwork = actualModel.getNodeNetworks.find({nn =>
-        nn.getInitBy.getName == modelHandler.getNodeName && nn.getTarget.getName == targetNodeName }) getOrElse {
+        nn.getInitBy.getName == currentNodeName && nn.getTarget.getName == targetNodeName }) getOrElse {
       var newNodeNetwork = Art2Factory.eINSTANCE.createNodeNetwork
-      var thisNode = actualModel.getNodes.find({loopNode => loopNode.getName == modelHandler.getNodeName })
+      var thisNode = actualModel.getNodes.find({loopNode => loopNode.getName == currentNodeName })
       var targetNode = actualModel.getNodes.find({loopNode => loopNode.getName == targetNodeName })
       var thisNodeFound = thisNode.getOrElse{
         var newnode = Art2Factory.eINSTANCE.createContainerNode
-        newnode.setName(modelHandler.getNodeName)
+        newnode.setName(currentNodeName)
         actualModel.getNodes.add(newnode)
         newnode
       }
@@ -54,14 +55,37 @@ object Art2PlatformHelper {
     }
 
     /* Found Property and SET remote IP */
-    nodelink.getNetworkProperties.find({networkProp => networkProp.getName == key }).getOrElse{
+    var prop = nodelink.getNetworkProperties.find({networkProp => networkProp.getName == key }).getOrElse{
       var newprop = Art2Factory.eINSTANCE.createNetworkProperty
       newprop.setName(key)
       nodelink.getNetworkProperties.add(newprop)
       newprop
-    }.setValue(value)
+    }
+    prop.setValue(value)
+    prop.setLastCheck(new Date().getTime.toString)
 
     logger.info("New node link prop registred = "+targetNodeName+","+key+","+value)
 
   }
+
+
+
+  def getProperty(model:ContainerRoot,targetNodeName : String,key:String) : String = {
+    var filteredNodeNetwork = model.getNodeNetworks.filter(lNN=> lNN.getTarget.getName == targetNodeName)
+    var bestResultProp = ""
+    filteredNodeNetwork.foreach{fnn=>
+      fnn.getLink.foreach{fnl=>
+        fnl.getNetworkProperties.find(p=> p.getName == key) match {
+          case None =>
+          case Some(prop)=> bestResultProp = prop.getValue
+        }
+      }
+    }
+    bestResultProp
+  }
+
+
+
+
+
 }

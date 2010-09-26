@@ -18,6 +18,8 @@ object Art2Aspects{
   implicit def portAspect(p : Port ) = PortAspect(p)
  // implicit def bindingAspect(b : Binding ) = BindingAspect(b)
   implicit def typedElementAspect(b : TypedElement ) = TypedElementAspect(b)
+  implicit def channelAspect(c:Channel) = ChannelAspect(c)
+
 }
 
 

@@ -47,8 +47,8 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
     loop{
       react {
         case STOP => exit
-        case msg : Art2FragmentBindMessage=> fragementBinded.put(msg.getChannelName, msg.getProxy);reply(true)
-        case msg : Art2FragmentUnbindMessage=> fragementBinded.remove(msg.getChannelName);reply(true)
+        case msg : Art2FragmentBindMessage=> fragementBinded.put(msg.getChannelName+"-"+msg.getFragmentNodeName, msg.getProxy);reply(true)
+        case msg : Art2FragmentUnbindMessage=> fragementBinded.remove(msg.getChannelName+"-"+msg.getFragmentNodeName);reply(true)
         case msg : Art2PortBindMessage => portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)
         case msg : Art2PortUnbindMessage => portsBinded.remove(createPortKey(msg));reply(true)
         case msg : MethodCallMessage => reply(dispatch(msg,true))
