@@ -7,7 +7,6 @@ package org.kermeta.art2.framework.bus.jmdns
 
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.framework.Art2Actor
-import org.kermeta.art2.framework.Art2PlatformHelper
 import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.message.Art2PlatformModelUpdate
 import org.slf4j.LoggerFactory
