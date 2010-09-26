@@ -20,7 +20,7 @@ class SynchPlatformCommand extends Command {
   var kernel : Art2UIKernel = null
   var client = new TcpClientRemoteActor(null,1000) {
       def getRemoteAddr : InetSocketAddress = {
-        new InetSocketAddress("localhost",8082)
+        new InetSocketAddress("localhost",8081)
       }
     }
     client.start
