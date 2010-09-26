@@ -11,10 +11,13 @@ import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployServic
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.api.service.core.kompare.ModelKompareService
 import org.kermeta.art2.framework.Art2Actor
+import org.kermeta.art2.framework.Art2PlatformHelper
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.osgi.framework.BundleContext
 import org.slf4j.LoggerFactory
 import scala.reflect.BeanProperty
+import org.kermeta.art2.framework.merger.Art2PlatformMerger
+import org.kermeta.art2.framework.message.Art2PlatformModelUpdate
 import org.kermeta.art2.framework.message._
 import scala.actors.Actor
 import scala.collection.JavaConversions._
@@ -46,8 +49,6 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
       /* Load previous state */
       var model = Art2XmiHelper.load(lastModelssaved.getAbsolutePath());
       switchToNewModel(model)
-      //models.add(model)
-      //models = models ++ List(model)
     }
     this
   }
@@ -60,17 +61,18 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   def act()={
     loop{
       react {
+        case updateMsg : Art2PlatformModelUpdate => Art2PlatformHelper.updateNodeLinkProp(model,nodeName, updateMsg.targetNodeName, updateMsg.key, updateMsg.value, updateMsg.networkType, updateMsg.weight)
         case Art2PreviousModel() => reply(models)
         case Art2LastModel() => reply(model) /* TODO DEEP CLONE */
         case Art2UpdateModel(newmodel) => {
-            println("REC")
             if (newmodel == null) { logger.error("Null model")} else {
-
-              println("previous model = "+model.getNodes.mkString(","))
-              println("new model = "+newmodel.getNodes.mkString(","))
 
               var adaptationModel = kompareService.kompare(model, newmodel, nodeName);
               var deployResult = deployService.deploy(adaptationModel,nodeName);
+
+              //MErge previous model on new model for platform model
+              Art2PlatformMerger.merge(newmodel,model)
+
               //models = models ++ List(newmodel)
               switchToNewModel(newmodel)
               logger.info("Deploy result " + deployResult)
