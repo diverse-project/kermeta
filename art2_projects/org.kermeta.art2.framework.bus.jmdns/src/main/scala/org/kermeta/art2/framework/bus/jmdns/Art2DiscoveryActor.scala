@@ -9,6 +9,7 @@ import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.framework.Art2Actor
 import org.kermeta.art2.framework.Art2PlatformHelper
 import org.kermeta.art2.framework.Constants
+import org.kermeta.art2.framework.message.Art2PlatformModelUpdate
 import org.slf4j.LoggerFactory
 import scala.actors.Actor
 import javax.jmdns._
@@ -46,9 +47,9 @@ class Art2DiscoveryActor(time: Int,modelHandler : Art2ModelHandlerService,dispat
     var serviceInfoDispatcher = ServiceInfo.create(Constants.ART2_SERVICE_DISPATCHER, nodeName, dispatcherPort, modelHandler.getNodeName+"Art2 Dispatcher Service")
     jmdns.registerService(serviceInfoDispatcher)
 
-    var serviceInfoModel = ServiceInfo.create(Constants.ART2_SERVICE_MODELSYNCH, nodeName, dispatcherPort, modelHandler.getNodeName+"Art2 Model Service")
+    var serviceInfoModel = ServiceInfo.create(Constants.ART2_SERVICE_MODELSYNCH, nodeName, modelSynchPort, modelHandler.getNodeName+"Art2 Model Service")
     jmdns.registerService(serviceInfoModel)
-
+    this ! UPDATE_PLATFORM_MSG
     this
   }
 
@@ -65,15 +66,25 @@ class Art2DiscoveryActor(time: Int,modelHandler : Art2ModelHandlerService,dispat
       var infos = jmdns.list(Constants.ART2_SERVICE_MODELSYNCH);
       infos.foreach{info=>
         var nodeName = info.getName.replace("-", ".")
-        Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
-        Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT,info.getPort.toString,"lan",info.getWeight)
+
+        modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
+        modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT,info.getPort.toString,"lan",info.getWeight)
+
+      //  Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
+      //  Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT,info.getPort.toString,"lan",info.getWeight)
       }
       //PROCESS ART2DISPATCHER SERVICE
       var infos2 = jmdns.list(Constants.ART2_SERVICE_DISPATCHER);
       infos2.foreach{info=>
         var nodeName = info.getName.replace("-", ".")
-        Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
-        Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT,info.getPort.toString,"lan",info.getWeight)
+
+
+                modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
+        modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT,info.getPort.toString,"lan",info.getWeight)
+
+
+        //Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
+        //Art2PlatformHelper.updateNodeLinkProp(modelHandler,nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT,info.getPort.toString,"lan",info.getWeight)
       }
     } catch {
       case _ @ e => logger.error("ART2 Platform model update error", e)
