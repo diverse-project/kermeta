@@ -18,8 +18,8 @@ object Constants {
 
 
 
-  def ART2_SERVICE_MODELSYNCH = "_art2model._tcp.local."
-  def ART2_SERVICE_DISPATCHER = "_art2dispatcher._tcp.local."
+  def ART2_SERVICE = "_art2._tcp.local."
+  //def ART2_SERVICE_DISPATCHER = "_art2dispatcher._tcp.local."
   def ART2_PLATFORM_REMOTE_NODE_IP = "art2.remote.node.ip"
   def ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT = "art2.remote.node.dispatcher.port"
   def ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT = "art2.remote.node.modelsynch.port"
