@@ -132,6 +132,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	
 	
 
+	@Override
 	public void mouseClicked(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_CLICKED, e));
@@ -143,6 +144,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
+	@Override
 	public void mouseEntered(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_ENTERED, e));
@@ -154,6 +156,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
+	@Override
 	public void mouseExited(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_EXITED, e));
@@ -165,6 +168,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	
 	
+	@Override
 	public void mousePressed(final MouseEvent e) {
 		synchronized(events) {
 			if(e.getSource() instanceof JComponent)
@@ -179,6 +183,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 
 	
+	@Override
 	public void mouseReleased(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_RELEASED, e));
@@ -189,6 +194,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void keyPressed(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_PRESSED, e));
@@ -199,6 +205,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void keyReleased(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_RELEASED, e));
@@ -209,6 +216,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void keyTyped(final KeyEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_TYPED, e));
@@ -219,6 +227,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void mouseDragged(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_DRAGGED, e));
@@ -229,6 +238,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void mouseMoved(final MouseEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_MOVED, e));
@@ -239,6 +249,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 	
+	@Override
 	public void mouseWheelMoved(final MouseWheelEvent e) {
 		synchronized(events) {		
 			events.add(new EventWrapper(EventWrapper.MOUSE_WHEEL_MOVED, e));
@@ -249,6 +260,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 
+	@Override
 	public void actionPerformed(final ActionEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ACTION_PERFORMED, e));
@@ -271,6 +283,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	
 	
 
+	@Override
 	public void itemStateChanged(final ItemEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ITEM_STATE_CHANGED, e));
@@ -282,6 +295,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 
 
+	@Override
 	public void stateChanged(final ChangeEvent e) {
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.STATE_CHANGED, e));
