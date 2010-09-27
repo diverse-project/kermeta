@@ -28,4 +28,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddBinding" eSuperTypes="#//BindingAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveBinding" eSuperTypes="#//BindingAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FragmentBindingAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//Channel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetNodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddFragmentBinding" eSuperTypes="#//FragmentBindingAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveFragmentBinding" eSuperTypes="#//FragmentBindingAdaptation"/>
 </ecore:EPackage>

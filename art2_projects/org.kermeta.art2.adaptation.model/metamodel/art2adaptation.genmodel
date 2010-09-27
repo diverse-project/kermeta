@@ -31,5 +31,11 @@
     </genClasses>
     <genClasses ecoreClass="art2adaptation.ecore#//AddBinding"/>
     <genClasses ecoreClass="art2adaptation.ecore#//RemoveBinding"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//FragmentBindingAdaptation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art2adaptation.ecore#//FragmentBindingAdaptation/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art2adaptation.ecore#//FragmentBindingAdaptation/targetNodeName"/>
+    </genClasses>
+    <genClasses ecoreClass="art2adaptation.ecore#//AddFragmentBinding"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//RemoveFragmentBinding"/>
   </genPackages>
 </genmodel:GenModel>
