@@ -1,5 +1,13 @@
 package org.kermeta.ki.malai.interaction.eventWrapper;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+
+import javax.swing.event.ChangeEvent;
+
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 public abstract class EventWrapperExtern {
@@ -23,22 +31,52 @@ public abstract class EventWrapperExtern {
 	 * @return The java event object of the EventWrapper (an AWTEvent Kermeta instance).
 	 */
 	public static Object getInfo(final Object self) {
-//		Object obj = Source2TargetMap.MAP.getTargetObject(self);
+		Object obj = Source2TargetMap.MAP.getTargetObject(self);
 //		
-//		if(obj instanceof EventWrapper) {
-//			EventWrapper ew  = (EventWrapper) obj;
+		if(obj instanceof EventWrapper) {
+			EventWrapper ew  = (EventWrapper) obj;
 //			// To create a Kermeta instance using the EventWrapper, we must get the type of the 
 //			// Java event object (e.g. ActionEvent, MouseEvent, etc.) in order to get the good
 //			// Kermeta class path to create an instance of this Kermeta class.
-//			try {
-//				RuntimeObject ro = self.getFactory().createObjectFromClassName(EventWrapper.getEventClassPath(ew.info));
-//				Source2TargetMap.MAP.add(ro, ew.info);
-//				
-//				return ro;
-//			}catch(Exception ex) {ex.printStackTrace(); }
-//		}
+			Class<?> clazz = getClass(ew.info);
+			
+			if(clazz==null)
+				return null;
+			//FIXME dodgy
+			Object event = null;
+			
+			try {
+				event = clazz.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+			Source2TargetMap.MAP.add(event, ew.info);
+			return event;
+		}
 		return null;
 	}
+	
+	
+	public static Class<?> getClass(final Object evt) {
+		String name = "";
+		
+		if(evt instanceof ActionEvent) 			name = "kermeta.ki.malai.interaction.event.ActionEvent";
+		else if(evt instanceof MouseWheelEvent)	name = "kermeta.ki.malai.interaction.event.MouseWheelEvent";
+		else if(evt instanceof MouseEvent) 		name = "kermeta.ki.malai.interaction.event.MouseEvent";
+		else if(evt instanceof KeyEvent)		name = "kermeta.ki.malai.interaction.event.KeyEvent";
+		else if(evt instanceof ItemEvent)		name = "kermeta.ki.malai.interaction.event.ItemEvent";
+		else if(evt instanceof ChangeEvent)		name = "kermeta.ki.malai.interaction.event.ChangeEvent";
+		
+		try {
+			return Class.forName(name);
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	
 	
 	/**

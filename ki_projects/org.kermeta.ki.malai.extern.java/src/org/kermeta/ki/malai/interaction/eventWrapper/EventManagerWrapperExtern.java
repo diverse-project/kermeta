@@ -29,7 +29,6 @@ public abstract class EventManagerWrapperExtern {
 	 * into it.
 	 * @param self The Kermeta EventManager.
 	 * @param dispatcherRo A Kermeta AbstractDispatcher that contains the Java DispatcherWrapper.
-	 * @return The Kermeta EventManager.
 	 */
 	public static void initialise(final Object self, final Object dispatcherRo) {
 		EventManagerWrapper emw = new EventManagerWrapper();
@@ -40,7 +39,6 @@ public abstract class EventManagerWrapperExtern {
 	
 	/**
 	 * @param self The Kermeta EventManager that encapsulates the EventManagerWrapper.
-	 * @return 
 	 * @return True if the list of events is not empty.
 	 */
 	public static boolean isWaiting(final Object self) {
@@ -57,13 +55,7 @@ public abstract class EventManagerWrapperExtern {
 	 */
 	public static Object getTopEvent(final Object self) {
 //		// An instance of the Kermeta class Event is created.
-//		EventManagerWrapper emw = (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(self);
-//		Object ro = self.getFactory().createObjectFromClassName("kermeta::ki::malai::interaction::event::Event");
-//		// The next Java Event is encapsulating into the Kermeta Event.
-//		Source2TargetMap.MAP.add(ro, emw.getTopEvent());
-//		
-//		return ro;
-		//TODO
-		return null;
+		EventManagerWrapper emw = (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(self);
+		return emw.getTopEvent();
 	}
 }

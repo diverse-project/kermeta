@@ -9,7 +9,6 @@ import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 public class ChangeEventWrapper extends AWTEventWrapper {
 	/**
 	 * @param self The kermeta ActionEvent.
-	 * @return 
 	 * @return The action command (String) of the object that produces the Java ActionEvent encapsulates
 	 * into the given kermeta ActionEvent, or the kermeta void.
 	 */

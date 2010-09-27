@@ -11,7 +11,6 @@ import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 public abstract class ActionEventWrapper extends AWTEventWrapper {
 	/**
 	 * @param self The Kermeta ActionEvent.
-	 * @return 
 	 * @return The modifiers (Integer) that contains the Java ActionEvent encapsulates
 	 * in the Kermeta ActionEvent, or the kermeta void.
 	 */
@@ -28,7 +27,6 @@ public abstract class ActionEventWrapper extends AWTEventWrapper {
 	
 	/**
 	 * @param self The kermeta ActionEvent.
-	 * @return 
 	 * @return The action command (String) of the object that produces the Java ActionEvent encapsulates
 	 * into the given kermeta ActionEvent, or the kermeta void.
 	 */
@@ -45,7 +43,6 @@ public abstract class ActionEventWrapper extends AWTEventWrapper {
 	
 	/**
 	 * @param self The kermeta ActionEvent.
-	 * @return 
 	 * @return The paramString value (String) of the Java ActionEvent encapsulates into the
 	 * Kermeta ActionEvent, or the kermeta void.
 	 */

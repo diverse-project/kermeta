@@ -16,7 +16,6 @@ public abstract class DispatcherWrapperExtern {
 	 * It puts the DispatcherWrapper instance into the Kermeta Dispatcher
 	 * using setUserData.
 	 * @param self The Kermeta Dispatcher.
-	 * @return The Kermeta Dispatcher.
 	 */
 	public static void initialise(final Object self) {
 		Source2TargetMap.MAP.add(self, new DispatcherWrapper());
@@ -27,13 +26,12 @@ public abstract class DispatcherWrapperExtern {
 	 * Puts in wait the DispatcherWrapper and therefore the Kermeta
 	 * Dispatcher.
 	 * @param self The Kermeta Dispatcher.
-	 * @return The Kermeta Dispatcher.
 	 */
 	public static void waitForEvent(final Object self) {
-//		final Object obj = Source2TargetMap.MAP.getTargetObject(self);
-//		
-//		try {
-//			synchronized(obj) { obj.wait(); }
-//		}catch(InterruptedException e) { e.printStackTrace(); }
+		final Object obj = Source2TargetMap.MAP.getTargetObject(self);
+		
+		try {
+			synchronized(obj) { obj.wait(); }
+		}catch(InterruptedException e) { e.printStackTrace(); }
 	}
 }
