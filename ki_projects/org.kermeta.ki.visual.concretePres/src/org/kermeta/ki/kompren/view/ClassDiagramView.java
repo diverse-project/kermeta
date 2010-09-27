@@ -23,11 +23,19 @@ public class ClassDiagramView extends DiagramView {
 	
 	public void setPropertiesVisible(final boolean visible) {
 		propertiesVisible = visible;
+		
+		for(final IEntityView entity : entities)
+			if(entity instanceof ClassView)
+				((ClassView)entity).setPropertiesVisible(visible);
 	}
 	
 	
 	public void setOperationsVisible(final boolean visible) {
 		operationsVisible = visible;
+		
+		for(final IEntityView entity : entities)
+			if(entity instanceof ClassView)
+				((ClassView)entity).setOperationsVisible(visible);
 	}
 	
 	

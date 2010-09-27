@@ -47,7 +47,7 @@ public abstract class DiagramViewExtern {
 	
 	
 	
-	public static RuntimeObject updateArrows(final RuntimeObject mmRO) {
+	public static RuntimeObject updateRelations(final RuntimeObject mmRO) {
 		((IDiagramView) Source2TargetMap.MAP.getTargetObject(mmRO)).updateRelations();
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}

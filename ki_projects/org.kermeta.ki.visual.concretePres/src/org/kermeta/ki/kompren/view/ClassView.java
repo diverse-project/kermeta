@@ -55,7 +55,7 @@ public class ClassView extends EntityView {
 	protected List<OperationView> operations;
 	
 	/** Defines if the attributes must be visible or not. */
-	protected boolean attributesVisible;
+	protected boolean propertiesVisible;
 	
 	/** Defines if the operations must be visible or not. */
 	protected boolean operationsVisible;
@@ -73,7 +73,7 @@ public class ClassView extends EntityView {
 			throw new IllegalArgumentException();
 		
 		operationsVisible 	= true;
-		attributesVisible	= true;
+		propertiesVisible	= true;
 		this.name 			= name;
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
@@ -161,7 +161,7 @@ public class ClassView extends EntityView {
 		dim.height = (int) (titleBounds.getHeight() + HEIGHT_HEADER_GAP*2);
 		dim.width  = (int) (titleBounds.getWidth() + 2*WIDTH_GAP);
 		
-		if(attributesVisible)
+		if(propertiesVisible)
 			for(AttributeView attr : attributes) {
 				width = (int) attr.getWidth();
 				
@@ -230,7 +230,7 @@ public class ClassView extends EntityView {
 		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
 		g.setFont(getFont());
 		
-		if(attributesVisible)
+		if(propertiesVisible)
 			for(AttributeView attr : attributes)
 				attr.paint(g);
 		
@@ -263,7 +263,7 @@ public class ClassView extends EntityView {
 		path.moveTo(cx-halfWidth, cy-halfHeight+textHeaderHeight);
 		path.lineTo(cx+halfWidth, cy-halfHeight+textHeaderHeight);
 		
-		if(attributesVisible)
+		if(propertiesVisible)
 			for(AttributeView attr : attributes) {
 				textHeight 	= (int) attr.getHeight();
 				yAttr 		+= textHeight;
@@ -309,17 +309,17 @@ public class ClassView extends EntityView {
 	/**
 	 * @return True: the attributes are displayed.
 	 */
-	public boolean isAttributesVisible() {
-		return attributesVisible;
+	public boolean isPropertiesVisible() {
+		return propertiesVisible;
 	}
 
 
 	/**
 	 * Sets if the attributes must be displayed.
-	 * @param attributesVisible True: the attributes are displayed.
+	 * @param propertiesVisible True: the attributes are displayed.
 	 */
-	public void setAttributesVisible(final boolean attributesVisible) {
-		this.attributesVisible = attributesVisible;
+	public void setPropertiesVisible(final boolean propertiesVisible) {
+		this.propertiesVisible = propertiesVisible;
 	}
 
 
