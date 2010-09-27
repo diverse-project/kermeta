@@ -68,11 +68,14 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
 
   def getPipeline() : ChannelPipeline = {
     var pipeline = Channels.pipeline()
-    pipeline.addLast("gzipdeflater", new ZlibEncoder(ZlibWrapper.GZIP))
-    pipeline.addLast("gzipinflater", new ZlibDecoder(ZlibWrapper.GZIP))
-    pipeline.addLast("objectEnc", new ObjectEncoder())
-    pipeline.addLast("objectDec", new ObjectDecoder())
-    pipeline.addLast("handler", me);
+    pipeline.addLast("deflater", new ZlibEncoder(ZlibWrapper.ZLIB))
+    pipeline.addLast("inflater", new ZlibDecoder(ZlibWrapper.ZLIB))
+
+    pipeline.addLast("decoder", new ObjectDecoder())
+    pipeline.addLast("encoder", new ObjectEncoder())
+
+    pipeline.addLast("handler", this);
+    pipeline
     pipeline
   }
 
