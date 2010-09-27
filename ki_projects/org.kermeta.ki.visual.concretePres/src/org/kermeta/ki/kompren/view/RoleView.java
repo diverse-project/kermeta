@@ -40,6 +40,19 @@ public class RoleView {
 		};
 		
 		public abstract String getText();
+		
+		
+		public static Cardinality getCardinality(final String card) {
+			if(ONE.getText().equals(card))
+				return ONE;
+			if(ONE_MULTI.getText().equals(card))
+				return ONE_MULTI;
+			if(ZERO_MULTI.getText().equals(card))
+				return ZERO_MULTI;
+			if(ZERO_ONE.getText().equals(card))
+				return ZERO_ONE;
+			return null;
+		}
 	}
 	
 	

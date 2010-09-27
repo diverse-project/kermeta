@@ -17,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
-import org.kermeta.ki.diagram.view.impl.DiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 
@@ -25,7 +24,7 @@ public class KomprenFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	/** The displayed diagram. */
-	protected IDiagramView diagram;
+	protected ClassDiagramView diagram;
 	
 	public static AbstractButton hand;//TODO to remove!!
 	
@@ -100,7 +99,7 @@ public class KomprenFrame extends JFrame {
 //		catch(Exception e) { /* */ }
 		
 		getContentPane().setLayout(new BorderLayout());
-		diagram = new DiagramView(true);
+		diagram = new ClassDiagramView(true);
 		JScrollPane sp = diagram.getScrollPane();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		int width  = (int)(screen.width*0.85);
@@ -117,5 +116,11 @@ public class KomprenFrame extends JFrame {
 				if(emw!=null)
 					emw.onExitEvent();
             }});
+	}
+	
+	
+	
+	public IDiagramView getDiagramView() {
+		return diagram;
 	}
 }

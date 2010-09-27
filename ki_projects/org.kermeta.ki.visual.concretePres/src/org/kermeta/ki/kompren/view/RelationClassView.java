@@ -65,4 +65,16 @@ public class RelationClassView extends RelationView {
 		if(roleTar!=null)
 			roleTar.update();
 	}
+
+
+
+	public RoleView getRoleSrc() {
+		return roleSrc;
+	}
+
+
+
+	public RoleView getRoleTar() {
+		return roleTar;
+	}
 }

@@ -339,4 +339,22 @@ public class ClassView extends EntityView {
 	public void setOperationsVisible(final boolean operationsVisible) {
 		this.operationsVisible = operationsVisible;
 	}
+
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	@Override
+	public void setName(final String name) {
+		if(name!=null)
+			this.name = name;
+	}
+	
+	
+	public void setIsAbstract(final boolean isAbstract) {
+		fontStyle = isAbstract ? Font.ITALIC : Font.PLAIN;
+	}
 }

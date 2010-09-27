@@ -44,6 +44,20 @@ public interface IEntityView extends IComponentView {
 	 */
 	void setFillingColor(final Color fillingColor);
 
+	
+	/**
+	 * @return The name of the entity.
+	 */
+	String getName();
+	
+	
+	/**
+	 * Sets the name of the entity.
+	 * @param name The new name of the entity. Cannot be null.
+	 */
+	void setName(final String name);
+	
+	
 	/** 
 	 * Sets the scale to apply on the shape but does NOT update it.
 	 * @param scale The new scale.

@@ -11,7 +11,9 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoundedRangeModel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
@@ -64,10 +66,59 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	
 	@Override
+	public void updateRelations() {
+		for(IRelationView relation : relations)
+			relation.update();
+		
+		repaint();
+	}
+	
+	
+	@Override
 	public List<IEntityView> getEntities() {
 		return entities;
 	}
 
+	
+	
+	
+	@Override
+	public void focusOnEntity(final IEntityView view) {
+		final Point2D.Double centre = view.getCentre();
+		final JScrollBar vertSB  = scrollPane.getVerticalScrollBar();
+		final JScrollBar horizSB = scrollPane.getHorizontalScrollBar();
+
+		if(vertSB.isVisible()) {
+			final BoundedRangeModel model = vertSB.getModel();
+			final int value	= model.getValue();
+			final int cy 	= scrollPane.getHeight()/2 + value;
+			int newValue 	= value+((int)(centre.y*zoom))-cy;
+			
+			if(newValue>model.getMaximum())
+				newValue = model.getMaximum();
+			else if(newValue<model.getMinimum())
+				newValue = model.getMinimum();
+			
+			model.setValue(newValue);
+		}
+		
+		if(horizSB.isVisible()) {
+			final BoundedRangeModel model = horizSB.getModel();
+			final int value	= model.getValue();
+			final int cx 	= scrollPane.getWidth()/2 + value;
+			int newValue 	= value+((int)(centre.x*zoom))-cx;
+			
+			if(newValue>model.getMaximum())
+				newValue = model.getMaximum();
+			else if(newValue<model.getMinimum())
+				newValue = model.getMinimum();
+			
+			model.setValue(newValue);
+		}
+	}
+
+	
+	
 	
 	@Override
 	public void paint(final Graphics g) {
@@ -286,5 +337,39 @@ public class DiagramView extends JPanel implements IDiagramView {
 	@Override
 	public ILayoutStrategy getLayoutStrategy() {
 		return strategy;
+	}
+	
+	
+	@Override
+	public boolean removeEntity(final IEntityView entity) {
+		return entities.remove(entity);
+	}
+	
+	
+	
+	@Override
+	public boolean removeRelation(final IRelationView relation) {
+		return relations.remove(relation);
+	}
+	
+
+	@Override
+	public void addRelation(final int position, final IRelationView link) {
+		if(link!=null && position<entities.size() && position>=0)
+			relations.add(position, link);
+		else
+			if((position==-1 || position==entities.size()) && link!=null)
+				relations.add(link);
+	}
+	
+	
+	
+	@Override
+	public void addEntity(final int position, final IEntityView entity) {
+		if(entity!=null && position<entities.size() && position>=0)
+			entities.add(position, entity);
+		else
+			if((position==-1 || position==entities.size()) && entity!=null)
+				entities.add(entity);
 	}
 }

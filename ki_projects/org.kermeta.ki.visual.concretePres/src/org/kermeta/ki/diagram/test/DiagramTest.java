@@ -4,8 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import org.kermeta.ki.diagram.view.impl.DiagramView;
 import org.kermeta.ki.diagram.view.impl.RelationView;
+import org.kermeta.ki.kompren.view.ClassDiagramView;
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.ClassView;
 import org.kermeta.ki.kompren.view.InheritanceView;
@@ -16,7 +16,7 @@ public class DiagramTest {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		DiagramView diag = new DiagramView(true);
+		ClassDiagramView diag = new ClassDiagramView(true);
 		ClassView class1 = new ClassView("Class1");
 		ClassView class2 = new ClassView("Class2");
 		ClassView class3 = new ClassView("Class3");

@@ -12,6 +12,18 @@ import org.kermeta.ki.diagram.layout.ILayoutStrategy;
  * @author Arnaud Blouin
  */
 public interface IDiagramView extends Scrollable {
+	void focusOnEntity(final IEntityView view);
+	
+	void addRelation(final int position, final IRelationView link);
+	
+	void addEntity(final int position, final IEntityView entity);
+	
+	boolean removeRelation(final IRelationView relation);
+	
+	boolean removeEntity(final IEntityView entity);
+	
+	void updateRelations();
+	
 	/**
 	 * @return The entities of the diagram.
 	 */
