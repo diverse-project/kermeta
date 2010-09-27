@@ -78,15 +78,15 @@ public class ClassDiagramView extends DiagramView {
 			int i 			= 0;
 			final int size 	= relations.size();
 			IRelationView link;
-			RelationClassView rel;
+			RoleView role;
 			
 			while(again && i<size) {
 				link = relations.get(i);
 				
 				if(link.getEntitySrc()==tarClass && link.getEntityTar()==srcClass && link instanceof RelationClassView) {
-					rel = (RelationClassView)link;
+					role = ((RelationClassView)link).getRoleTar();
 					
-					if(rel.getRoleTar().name.text.equals(srcRole) && rel.getRoleTar().card.text.equals(srcCard))
+					if(role!=null && role.name.text.equals(srcRole) && role.card.text.equals(srcCard))
 						again = false;
 				}
 				

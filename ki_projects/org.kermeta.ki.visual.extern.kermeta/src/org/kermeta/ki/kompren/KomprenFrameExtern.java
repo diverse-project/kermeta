@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.KomprenFrame;
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
@@ -50,11 +51,12 @@ public abstract class KomprenFrameExtern {
 	public static RuntimeObject initialise(RuntimeObject appliRO, RuntimeObject mmRO, RuntimeObject tbRO, RuntimeObject viewPanelRO, RuntimeObject emwRO) {
 			EventManagerWrapper emw 	= (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(emwRO);
 			JPanel toolbar 				= (JPanel) Source2TargetMap.MAP.getTargetObject(tbRO);
-			KomprenFrame canvasIS 		= new KomprenFrame(emw, toolbar);
+			KomprenFrame kompren 		= new KomprenFrame(emw, toolbar);
 			
-			Source2TargetMap.MAP.add(appliRO, canvasIS);
-			Source2TargetMap.MAP.add(viewPanelRO, canvasIS.getDiagramView());
-			Source2TargetMap.MAP.add(mmRO, canvasIS.getDiagramView());
+			kompren.getDiagramView().setLayoutStrategy(new ClassModelBasicStrategy(kompren.getDiagramView()));
+			Source2TargetMap.MAP.add(appliRO, kompren);
+			Source2TargetMap.MAP.add(viewPanelRO, kompren.getDiagramView());
+			Source2TargetMap.MAP.add(mmRO, kompren.getDiagramView());
 			
 			return appliRO.getFactory().getMemory().voidINSTANCE;
 	}

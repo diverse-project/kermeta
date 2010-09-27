@@ -3,7 +3,6 @@ package org.kermeta.ki.kompren.view;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Real;
 
 public abstract class ClassViewExtern {
 	public static RuntimeObject onAttributeAdded(final RuntimeObject entityRO, final RuntimeObject propertyRO, 
@@ -47,20 +46,6 @@ public abstract class ClassViewExtern {
 		Source2TargetMap.MAP.removeSourceObject(opRO);
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE; 
-	}
-	
-	
-	
-	public static RuntimeObject contains(final RuntimeObject entityRO, final RuntimeObject xRO, final RuntimeObject yRO) {
-		final boolean contains = ((ClassView)Source2TargetMap.MAP.getTargetObject(entityRO)).contains(Real.getValue(xRO), Real.getValue(yRO));
-		return contains ? entityRO.getFactory().getMemory().trueINSTANCE : entityRO.getFactory().getMemory().falseINSTANCE; 
-	}
-	
-	
-	
-	public static RuntimeObject unprune(final RuntimeObject entityRO) {
-		((ClassView)Source2TargetMap.MAP.getTargetObject(entityRO)).onUnpruning();
-		return entityRO.getFactory().getMemory().voidINSTANCE;
 	}
 	
 	

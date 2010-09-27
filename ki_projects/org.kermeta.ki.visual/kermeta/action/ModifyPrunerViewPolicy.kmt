@@ -64,5 +64,3 @@ class ModifyPrunerViewPolicy inherits Action, Undoable
 		result := true
 	end
 }
-
-

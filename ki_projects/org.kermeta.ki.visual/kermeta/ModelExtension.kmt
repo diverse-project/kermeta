@@ -22,7 +22,7 @@ using kermeta::ki::malai::dispatcher
 
 aspect class Object {
 	operation isVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::ComponentViewExtern.isVisible(self)
+		result ?= extern org::kermeta::ki::kompren::view::EntityViewExtern.isVisible(self)
 	end
 	
 	
@@ -59,27 +59,27 @@ aspect class ClassDefinition inherits Pickable {
 
 
 	operation entity2ViewMapping() : Void is do
-		extern org::kermeta::ki::visual::view::EntityViewExtern.update(self, self.name, self.isAbstract)
+		extern org::kermeta::ki::kompren::view::ClassViewExtern.update(self, self.name, self.isAbstract)
 	end
 	
 	
 	method contains(px : Real, py : Real) : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::EntityViewExtern.contains(self, px, py)
+		result ?= extern org::kermeta::ki::kompren::view::EntityViewExtern.contains(self, px, py)
 	end
 	
 	
 	operation unprune() : Void is do
-		extern org::kermeta::ki::visual::view::EntityViewExtern.unprune(self)
+		extern org::kermeta::ki::kompren::view::EntityViewExtern.unprune(self)
 	end
 	
 	
 	operation prune(viewPolicy : PrunerViewPolicy) : Void is do
-		extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, self)
+		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, self)
 	end
 	
 	
 	operation isPruned() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::ComponentViewExtern.isPruned(self)
+		result ?= extern org::kermeta::ki::kompren::view::EntityViewExtern.isPruned(self)
 	end
 	
 	
@@ -90,23 +90,23 @@ aspect class ClassDefinition inherits Pickable {
 		srcClass.ownedAttribute.add(p)
 		
 		if(p.type.isInstanceOf(PrimitiveType)) then
-			extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeRemoved(self, p)
-			extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(srcClass, p, p.name, p.type.asType(PrimitiveType).name)
+			extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeRemoved(self, p)
+			extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(srcClass, p, p.name, p.type.asType(PrimitiveType).name)
 		else 
 			if(p.type.isInstanceOf(Class)) then
 				var cd : ClassDefinition init p.type.asType(Class).classDefinition
 				
 				if(cd.isKermetaPrimitiveType) then
-					extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeRemoved(self, p)
-					extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(srcClass, p, p.name, cd.name)
+					extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeRemoved(self, p)
+					extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(srcClass, p, p.name, cd.name)
 				else
 					if(cd==self) then
 						cd := srcClass
 					end
 					
-					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, p)
+					extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, p)
 					if(not p.opposite.isVoid) then
-						extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, p.opposite)
+						extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, p.opposite)
 					end
 					
 					var oppositeName : String init ""
@@ -119,7 +119,7 @@ aspect class ClassDefinition inherits Pickable {
 						oppositeCardString := p.opposite.getCardinalityString
 					end
 			
-					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(metamodel, p, p.isComposite, srcClass, cd, 
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(metamodel, p, p.isComposite, srcClass, cd, 
 											p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
 			end
@@ -134,8 +134,8 @@ aspect class ClassDefinition inherits Pickable {
 		srcClass.ownedOperation.add(op)
 		self.ownedOperation.remove(op)
 
-		extern org::kermeta::ki::visual::view::EntityViewExtern.onOperationRemoved(self, op)
-		extern org::kermeta::ki::visual::view::EntityViewExtern.onOperationAdded(srcClass, op, op.name, typeName, op.isAbstract)
+		extern org::kermeta::ki::kompren::view::ClassViewExtern.onOperationRemoved(self, op)
+		extern org::kermeta::ki::kompren::view::ClassViewExtern.onOperationAdded(srcClass, op, op.name, typeName, op.isAbstract)
 	end
 	
 	
@@ -167,11 +167,11 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	
 	
 	operation update() : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(self)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(self)
 	end
 	
 	operation focusOnTypeDefinition(typeDef : TypeDefinition) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.focusOnTypeDefinition(self, typeDef)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.focusOnEntity(self, typeDef)
 	end
 	
 	
@@ -188,13 +188,13 @@ aspect class ModelingUnit inherits Picker, Eventable {
 
 
 	operation organise() : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.organise(self)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.organise(self)
 	end
 
 	
 	operation reinitView() : Void is do//TODO see if ownedTypeDefinition works
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(self)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(self)
 	end
 
 
@@ -222,22 +222,22 @@ aspect class ModelingUnit inherits Picker, Eventable {
 	
 	
 	operation isOperationsVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::MetamodelViewExtern.isOperationsVisible(self)
+		result ?= extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.isOperationsVisible(self)
 	end
 	
 	
 	operation isPropertiesVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::MetamodelViewExtern.isPropertiesVisible(self)
+		result ?= extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.isPropertiesVisible(self)
 	end
 	
 	
 	operation setOperationsVisible(visible : Boolean) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setOperationsVisible(self, visible)
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setOperationsVisible(self, visible)
 	end
 	
 	
 	operation setPropertiesVisible(visible : Boolean) : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setPropertiesVisible(self, visible)
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setPropertiesVisible(self, visible)
 	end
 	
 	

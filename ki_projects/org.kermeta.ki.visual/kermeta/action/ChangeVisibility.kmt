@@ -41,8 +41,8 @@ abstract class ChangeVisibility inherits Action
 class ChangeOperationsVisibility inherits ChangeVisibility
 {
 	method doActionBody() : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setOperationsVisible(metamodel, visible)
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setOperationsVisible(metamodel, visible)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(metamodel)
 	end
 }
 
@@ -52,9 +52,7 @@ class ChangeOperationsVisibility inherits ChangeVisibility
 class ChangePropertiesVisibility inherits ChangeVisibility
 {
 	method doActionBody() : Void is do
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.setPropertiesVisible(metamodel, visible)
-		extern org::kermeta::ki::visual::view::MetamodelViewExtern.update(metamodel)
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setPropertiesVisible(metamodel, visible)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(metamodel)
 	end
 }
-
-

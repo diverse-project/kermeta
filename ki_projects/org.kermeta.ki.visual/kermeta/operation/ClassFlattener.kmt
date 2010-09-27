@@ -56,7 +56,7 @@ class ClassFlattener
 				removedInheritances.add(inheritance)
 				
 				classToFlat.superType.remove(superType)
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceRemoved(metamodel, classToFlat, cd)
+				extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, classToFlat, cd)
 				flatClass(cd, classToFlat)
 			else
 				classToFlat.superType.remove(superType)
@@ -81,7 +81,7 @@ class ClassFlattener
 									removedProperties.add(prop)
 																		
 									cd.ownedAttribute.remove(attr)
-									extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, attr)
+									extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, attr)
 								end
 							}
 						end 
@@ -143,7 +143,7 @@ class ClassFlattener
 					inBackup.source := st
 					inBackup.target := classToFlat
 					addedInheritances.add(inBackup)
-					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceAdded(metamodel, st, classToFlat, -1)
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(metamodel, st, classToFlat, -1)
 				end
 				
 				// Removing the class from its sub-type
@@ -173,7 +173,7 @@ class ClassFlattener
 			// Removing the class.
 			removedClasses.add(currentClass)
 			//FIXME should remove the supertype from the metamodel and set to not visible?
-			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onEntityRemoved(metamodel, currentClass)
+			extern org::kermeta::ki::kompren::view::DiagramViewExtern.onEntityRemoved(metamodel, currentClass)
 		end
 	end
 }

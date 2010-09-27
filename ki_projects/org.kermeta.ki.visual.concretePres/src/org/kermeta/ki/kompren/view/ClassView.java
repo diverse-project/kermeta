@@ -117,12 +117,12 @@ public class ClassView extends EntityView {
 	 * @param opName The name of the operation.
 	 * @param opTypeName The name of the type of the operation.
 	 * @param isAbs True: the operation is abstract.
-	 * @return The created view of the operation or null if the given parameters are null or empty.
+	 * @return The created view of the operation or null if the given name is null or empty.
 	 */
 	public OperationView addOperation(final String opName, final String opTypeName, final boolean isAbs) {
 		final OperationView op;
 		
-		if(opName==null || opTypeName==null || opName.length()==0 || opTypeName.length()==0)
+		if(opName==null || opName.length()==0)
 			op = null;
 		else {
 			op = new OperationView(opName, opTypeName, isAbs, this);

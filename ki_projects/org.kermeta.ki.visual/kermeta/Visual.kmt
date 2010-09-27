@@ -41,11 +41,11 @@ class Visual
 {
 	operation main() : Void is do
 		var aui			   : MetamodelCanvas init MetamodelCanvas.new
-		var dispatcher     : ListDispatcher  init ListDispatcher.new
+		var dispatcher     : ListDispatcher  init ListDispatcher.new //FIXME compil
 		
 		dispatcher.initialise
 		aui.initialise(dispatcher)
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.organise(aui)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.organise(aui)
 		aui.setVisible(true)
 		aui.refreshView
 		
@@ -57,7 +57,7 @@ class Visual
 
 
 class MetamodelCanvas inherits ActionHandler, UndoHandler {
-	reference dispatcher : ListDispatcher
+	reference dispatcher : ListDispatcher//FIXME compil
 
 	attribute metamodel : ModelingUnit
 	
@@ -155,7 +155,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		dispatcher.processes.add(eventManager)
 		
 		initialiseUI
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
 		metamodel.setEventManager(eventManager)
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
@@ -214,7 +214,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.initialiseEventManager(true, dispatcher)
 		viewPanel.initialiseEventManager(false, void)
 
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.initialiseToolbar(toolbar, undoManager.undoButton, 
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialiseToolbar(toolbar, undoManager.undoButton, 
 					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton,
 					selector.handButton, pruner.grayedButton, pruner.hideButton, pruner.radiusSpinner, pruner.cardCheckBox,
 					eltDisplayer.opButton, eltDisplayer.attrButton, searcher.textField)
@@ -246,12 +246,12 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	
 	operation setVisible(visible : Boolean) : Void is do
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.setVisible(self, visible)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.setVisible(self, visible)
 	end
 	
 	
 	operation refreshView() : Void is do
-		extern org::kermeta::ki::visual::MetamodelVizuFrameExtern.refreshView(self)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.refreshView(self)
 	end
 	
 	
@@ -310,13 +310,13 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 		var typeName : String init if(o.type.isInstanceOf(NamedElement)) then o.type.asType(NamedElement).name else "" end
 		var paramTypeName 	: String
 
-		extern org::kermeta::ki::visual::view::EntityViewExtern.onOperationAdded(o.owningClass, o, o.name, typeName, o.isAbstract)
+		extern org::kermeta::ki::kompren::view::ClassViewExtern.onOperationAdded(o.owningClass, o, o.name, typeName, o.isAbstract)
 		
 		o.ownedParameter.each{param |
 			paramTypeName := if(param.type.isInstanceOf(NamedElement)) then param.type.asType(NamedElement).name else void end
 			
 			if(not paramTypeName.isVoid) then
-				extern org::kermeta::ki::visual::view::OperationViewExtern.onParameterAdded(o, param.name, paramTypeName)
+				extern org::kermeta::ki::kompren::view::OperationViewExtern.onParameterAdded(o, param.name, paramTypeName)
 			end
 		}
 	end
@@ -328,7 +328,7 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 			var cd : ClassDefinition init p.type.asType(Class).classDefinition
 
 			if(cd.isKermetaPrimitiveType) then
-				extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(p.owningClass, p, p.name, cd.name)
+				extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, cd.name)
 			else	
 				if(classes.contains(cd)) then
 					var oppositeName : String init ""
@@ -340,7 +340,7 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 						oppositeCompo := p.opposite.isComposite
 						oppositeCardString := p.opposite.getCardinalityString
 					end
-					extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(modelingUnit, p, p.isComposite or oppositeCompo, p.owningClass, cd, 
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(modelingUnit, p, p.isComposite or oppositeCompo, p.owningClass, cd, 
 												p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
 			end
@@ -350,11 +350,11 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 			if(p.type.isInstanceOf(PrimitiveType)) then
 				var pt : PrimitiveType init p.type.asType(PrimitiveType)
 				
-				extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(p.owningClass, p, p.name, pt.name)
+				extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, pt.name)
 			else
 				if(p.type.isInstanceOf(Enumeration)) then
 					var enum : Enumeration init p.type.asType(Enumeration)
-					extern org::kermeta::ki::visual::view::EntityViewExtern.onAttributeAdded(p.owningClass, p, p.name, enum.name)
+					extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, enum.name)
 				end
 			end
 		end
@@ -372,7 +372,7 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 	
 		if(firstPass) then
 			classes.add(c)
-			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onEntityAdded(modelingUnit, c, c.isAspect, -1, c.name)
+			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onEntityAdded(modelingUnit, c, c.isAspect, -1, c.name)
 			c.entity2ViewMapping
 		else
 			c.ownedAttribute.each{p | p.accept(self)}
@@ -383,7 +383,7 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 					var cd : ClassDefinition init t.asType(Class).classDefinition
 					
 					if(classes.contains(cd)) then
-						extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceAdded(modelingUnit, c, cd, -1)
+						extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(modelingUnit, c, cd, -1)
 					end
 				end
 			}

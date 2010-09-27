@@ -490,7 +490,7 @@ class MetamodelPruner
 			requiredKermetaMetaClasses.each{clazz |
 				clazz.ownedAttribute.each{attr |
 					if(not attr.type.isInstanceOf(PrimitiveType)) then
-						extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, attr)
+						extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, attr)
 					end
 				}
 			}
@@ -545,8 +545,8 @@ class MetamodelPruner
 				object | 
 					if object.isInstanceOf(ClassDefinition) then
 						object.asType(ClassDefinition).ownedOperation.each {
-							 op |  extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, op)
-//									extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+							 op |  extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, op)
+//									extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 						}
 				end
 			}
@@ -570,9 +570,9 @@ class MetamodelPruner
 	
 	operation TagRemovalInPackage(aPackage : Package):Void is do
 		if (not aPackage.isVoid) then
-			aPackage.tag.each{ t | extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, t) }
+			aPackage.tag.each{ t | extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, t) }
 			aPackage.asType(TypeDefinitionContainer).ownedTags.each { 
-				object | extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+				object | extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 			}
 		end
 		
@@ -586,7 +586,7 @@ class MetamodelPruner
 	operation TagRemoval() : Void is do
 		//Remove all Tags for Modelling Unit
 		inputKermetaMetamodel.ownedTags.each { 
-			tag | extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, tag)
+			tag | extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, tag)
 		}
 		
 		//Remove all Tags from packages
@@ -605,13 +605,13 @@ class MetamodelPruner
 			 			removeProperty := not requiredKermetaMetaProperties.exists{reqProp | reqProp == prop }
 			 								
 			 			if removeProperty then
-			 				extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
-//		 					extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+			 				extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
+//		 					extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 		 					
 			 				if not prop.opposite.isVoid  then
 			 					if not prop.opposite.owningClass.isVoid then
-			 						extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, prop.opposite)
-//			 						extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+			 						extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, prop.opposite)
+//			 						extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 			 					end
 			 				end
 			 			end
@@ -639,8 +639,8 @@ class MetamodelPruner
 				if object.isInstanceOf(ClassDefinition) then
 					//If the class is in the set of required classes
 					if not requiredKermetaMetaClasses.contains(object.asType(ClassDefinition)) then								
-				 		extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
-//				 		extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+				 		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+//				 		extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 					end
 				end
 			}
@@ -665,7 +665,7 @@ class MetamodelPruner
 				if object.isInstanceOf(PrimitiveType) then
 					//If the class is in the set of required classes
 					if not requiredKermetaMetaPrimitiveTypes.contains(object.asType(PrimitiveType)) then								
-				 		extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+				 		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 					end
 				end
 			}
@@ -695,7 +695,7 @@ class MetamodelPruner
 				 	}
 				 
 					if removeEnum then 
-						extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+						extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 					end
 				end
 			}
@@ -723,8 +723,8 @@ class MetamodelPruner
 				
 		if(aPackage.nestedPackage.isEmpty) then
 			if ownedTypeDefEmpty then
-				extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+				extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
+				extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 			end
 		else
 			aPackage.nestedPackage.each{p |//TODO does it really work?
@@ -732,8 +732,8 @@ class MetamodelPruner
 			}
 				
 			if ownedTypeDefEmpty and result then
-				extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
-//				extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+				extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
+//				extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 			end
 		end
 	end
@@ -744,8 +744,8 @@ class MetamodelPruner
 	operation EmptyPackageRemoval():Void is do
 		self.inputKermetaMetamodel.packages.each{ p |
 			if self.isPackageEmpty(p) then
-				extern org::kermeta::ki::visual::view::ComponentViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, p)
-//				extern org::kermeta::ki::visual::view::MetamodelViewExtern.refresh(inputKermetaMetamodel)
+				extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, p)
+//				extern org::kermeta::ki::kompren::view::DiagramViewExtern.refresh(inputKermetaMetamodel)
 			end
 		}
 	end

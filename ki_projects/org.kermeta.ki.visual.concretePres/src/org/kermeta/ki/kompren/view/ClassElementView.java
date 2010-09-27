@@ -32,11 +32,11 @@ public abstract class ClassElementView extends ComponentView {
 	public ClassElementView(final String name, final String typeName, final ClassView parent) {
 		super();
 		
-		if(name==null || typeName==null || parent==null)
+		if(name==null || parent==null)
 			throw new IllegalArgumentException();
 		
 		this.name 		= name;
-		this.typeName 	= typeName;
+		this.typeName 	= typeName==null ? "" : typeName;
 		position  		= new Point2D.Double();
 		this.entity		= parent;
 	}

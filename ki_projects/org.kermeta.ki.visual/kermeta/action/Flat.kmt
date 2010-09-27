@@ -56,7 +56,7 @@ class Flat inherits Action, Undoable {
 			
 			if(obj.isInstanceOf(Package)) then
 				obj.asType(Package).ownedTypeDefinition.add(clazz)
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onEntityAdded(metamodel, clazz, clazz.isAspect, -1, clazz.name)
+				extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onEntityAdded(metamodel, clazz, clazz.isAspect, -1, clazz.name)
 			end
 		}
 	
@@ -73,7 +73,7 @@ class Flat inherits Action, Undoable {
 				oppositeCardString := prop.prop.opposite.getCardinalityString
 			end
 			
-			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(metamodel, prop.prop, prop.prop.isComposite, 
+			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(metamodel, prop.prop, prop.prop.isComposite, 
 									prop.prop.owningClass, prop.owningClass, prop.prop.name, prop.prop.getCardinalityString, 
 									oppositeName, oppositeCardString, -1, oppositeCompo)
 		}
@@ -94,7 +94,7 @@ class Flat inherits Action, Undoable {
 			end
 			
 			in.source.superType.add(in.sourceType)
-			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceAdded(metamodel, in.source, in.target, -1)
+			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(metamodel, in.source, in.target, -1)
 		}
 		
 		flatteningOperation.addedInheritances.each{in |
@@ -105,7 +105,7 @@ class Flat inherits Action, Undoable {
 					end
 				end
 			}
-			extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceRemoved(metamodel, in.source, in.target)
+			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, in.source, in.target)
 		}
 		
 		metamodel.organise()
