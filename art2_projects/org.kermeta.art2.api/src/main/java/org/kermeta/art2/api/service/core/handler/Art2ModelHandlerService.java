@@ -16,7 +16,7 @@ public interface Art2ModelHandlerService {
 
     public ContainerRoot getLastModel();
 
-    public void updateModel(ContainerRoot model);
+    public Boolean updateModel(ContainerRoot model);
 
     public List<ContainerRoot> getPreviousModel();
 
