@@ -75,6 +75,8 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
 
               //models = models ++ List(newmodel)
               switchToNewModel(newmodel)
+
+              reply(deployResult)
               logger.info("Deploy result " + deployResult)
             }
           }
@@ -84,7 +86,7 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   }
   
   override def getLastModel : ContainerRoot = (this !? Art2LastModel()).asInstanceOf[ContainerRoot]
-  override def updateModel(model : ContainerRoot) ={ this ! Art2UpdateModel(model) }
+  override def updateModel(model : ContainerRoot) : java.lang.Boolean ={ (this !? Art2UpdateModel(model)).asInstanceOf[Boolean] }
   override def getPreviousModel : java.util.List[ContainerRoot] = (this !? Art2PreviousModel).asInstanceOf[java.util.List[ContainerRoot]]
 
 }
