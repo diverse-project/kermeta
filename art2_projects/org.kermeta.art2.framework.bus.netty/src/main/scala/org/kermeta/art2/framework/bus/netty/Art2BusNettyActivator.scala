@@ -30,7 +30,7 @@ class Art2BusNettyActivator extends BundleActivator {
         var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
 
         //discoveryActor = new Art2PlatformDiscoveryActor(8081,8080,mhandler)
-        modelSynchRemoteActor = new Art2ModelSynch(8081,mhandler,mhandler.getNodeName)
+        modelSynchRemoteActor = new Art2ModelSynch(8081,mhandler)
         modelSynchRemoteActor.start
         //discoveryActor.start
 

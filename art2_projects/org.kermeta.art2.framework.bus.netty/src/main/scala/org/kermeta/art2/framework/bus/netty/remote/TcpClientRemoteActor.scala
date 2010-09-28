@@ -122,8 +122,8 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     }
   }
 
-  override def stop(){
-    
+  /* private method to clode the client after sending message */
+  private def interneStop(){
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -138,7 +138,6 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
           case Some(p) => p.shutdown
         }
     }
-    me ! STOP()
   }
 
   def sendMessage(c : Channel,o : Any) : Boolean = {
@@ -152,7 +151,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   def act() = {
     loop {
       react {
-        case s : STOP => exit()
+        case s : STOP => interneStop(); exit()
         case _ @ msg => channelfutur match {
             case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
             case _ => {

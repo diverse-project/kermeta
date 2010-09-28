@@ -51,43 +51,45 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
   }
 
 
+  private def sendInternal(msg : Any) = {
+    var msgArt2remote = new org.kermeta.art2.framework.message.Art2Message()
+    msgArt2remote.setDestNodeName(remoteNodeName)
+    msgArt2remote.setDestChannelName(remoteChannelName)
+    msgArt2remote.setContent(msg)
+    msgArt2remote.setInOut(msg.isInstanceOf[MethodCallMessage])
+
+    var tag = msgArt2remote.hashCode //NAIF TAG //TODO
+    msgArt2remote.setResponseTag(tag.toString)
+
+    var msgJSON = msgArt2remote.toJSON
+    nettyClient ! msgJSON
+    if(msg.isInstanceOf[MethodCallMessage]){
+      //WAIT FOR REPLY
+      var result : Any = null
+      reactWithin(timeout){
+        case RESPONSE_RECEIVE(_@ctx,_@e) => {
+            var artResponse = e.getMessage.toString.fromJSON(classOf[Art2ResponseMessage])
+            if(artResponse.getResponseTag == tag){
+              result = artResponse.getContent
+            } else {
+              logger.error("Tag isn't equals")
+            }
+          }
+        case TIMEOUT => logger.error("Synchronous client TIMEOUT")
+      }
+      reply(result)
+    }
+  }
+
 
   def act(){
     loop {
       react {
-        case _ @ msg => {
+        case STOP()=> {
 
-
-
-            var msgArt2remote = new org.kermeta.art2.framework.message.Art2Message()
-            msgArt2remote.setDestNodeName(remoteNodeName)
-            msgArt2remote.setDestChannelName(remoteChannelName)
-            msgArt2remote.setContent(msg)
-            msgArt2remote.setInOut(msg.isInstanceOf[MethodCallMessage])
-
-            var tag = msgArt2remote.hashCode //NAIF TAG //TODO
-            msgArt2remote.setResponseTag(tag.toString)
-
-            var msgJSON = msgArt2remote.toJSON
-            nettyClient ! msgJSON
-            if(msg.isInstanceOf[MethodCallMessage]){
-              //WAIT FOR REPLY
-              var result : Any = null
-              reactWithin(timeout){
-                case RESPONSE_RECEIVE(_@ctx,_@e) => {
-                    var artResponse = e.getMessage.toString.fromJSON(classOf[Art2ResponseMessage])
-                    if(artResponse.getResponseTag == tag){
-                      result = artResponse.getContent
-                    } else {
-                      logger.error("Tag isn't equals")
-                    }
-                  }
-                case TIMEOUT => logger.error("Synchronous client TIMEOUT")
-              }
-              reply(result)
-
-            } 
+            exit()
           }
+        case _ @ msg => sendInternal(msg)
       }
     }
   }
