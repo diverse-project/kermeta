@@ -71,7 +71,7 @@ public class Art2UIFactory {
     public ComponentPanel createComponentInstance(ComponentInstance ci) {
         ComponentPanel cui = new ComponentPanel();
         ComponentDragSourceListener draglistener = new ComponentDragSourceListener(cui, kernel);
-        cui.setTitle(ci.getName());
+        cui.setTitle(ci.getName()+" : "+ci.getTypeDefinition().getName());
 
         CommandMouseListener listener = new CommandMouseListener();
         SelectComponentCommand command = new SelectComponentCommand();
@@ -85,7 +85,7 @@ public class Art2UIFactory {
     public NodePanel createComponentNode(org.kermeta.art2.ContainerNode node) {
         NodePanel nui = new NodePanel();
         ((Component) nui).setDropTarget(new NodeDragTargetListener(nui, kernel));
-        nui.setTitle(node.getName());
+        nui.setTitle(node.getName()+" : Node");
 
 
         CommandMouseListener listener = new CommandMouseListener();
@@ -102,7 +102,8 @@ public class Art2UIFactory {
     public ChannelPanel createHub(org.kermeta.art2.Channel hub) {
         ChannelPanel hui = new ChannelPanel();
         ((Component) hui).setDropTarget(new HubDragTargetListener(hui, kernel));
-        hui.setTitle(hub.getName());
+        hui.setTitle(hub.getName()+" : \n"+hub.getTypeDefinition().getName());
+
 
         /* ADD SELECT COMMAND */
         CommandMouseListener mouse_listener = new CommandMouseListener();

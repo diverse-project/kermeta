@@ -23,7 +23,7 @@ class SynchPlatformCommand extends Command {
         new InetSocketAddress("localhost",8081)
       }
     }
-    client.start
+ //   client.start
 
   def execute(p :Object) {
 
@@ -49,7 +49,8 @@ class SynchPlatformCommand extends Command {
     client ! msg.toJSON
 
 
-    //client.stop
+
+    client.stop
   }
 
 }
