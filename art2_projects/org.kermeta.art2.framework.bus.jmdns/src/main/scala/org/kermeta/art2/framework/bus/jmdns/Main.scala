@@ -5,9 +5,11 @@
 
 package org.kermeta.art2.framework.bus.jmdns
 
+import java.net.NetworkInterface
 import javax.jmdns.JmDNS
 import javax.jmdns.ServiceInfo
 import org.slf4j.Logger
+import scala.collection.JavaConversions._
 
 object Main {
 
@@ -15,7 +17,15 @@ object Main {
    * @param args the command line arguments
    */
   def main(args: Array[String]): Unit = {
-        try
+
+    NetworkInterface.getNetworkInterfaces.foreach{it =>
+      it.getInetAddresses.foreach{addr =>
+        println(addr)
+      }
+    }
+
+
+    try
         {
             System.out.println("Opening JmDNS");
             var jmdns = JmDNS.create("duke.irisa.fr");

@@ -64,6 +64,8 @@ class Art2DiscoveryActor(time: Int,modelHandler : Art2ModelHandlerService,dispat
 
         info.getPropertyString(Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT)
 
+        
+
         modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP,info.getHostAddress,"lan",info.getWeight)
         modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT,info.getPropertyString(Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT),"lan",info.getWeight)
         modelHandler.asInstanceOf[Art2Actor] ! Art2PlatformModelUpdate(nodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT,info.getPropertyString(Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT),"lan",info.getWeight)
