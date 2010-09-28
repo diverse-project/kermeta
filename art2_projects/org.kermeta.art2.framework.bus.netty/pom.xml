@@ -52,7 +52,7 @@
                     <instructions>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-Activator>org.kermeta.art2.framework.bus.netty.Art2BusNettyActivator</Bundle-Activator>
-                        <Import-Package>!org.jboss.netty.*,org.kermeta.art2.*,*;resolution:=optional</Import-Package>
+                        <Import-Package>!org.jboss.netty.*,org.kermeta.art2.*,org.slf4j.*;version="${slf4j.version.range}",*;resolution:=optional</Import-Package>
                         <Private-Package>org.kermeta.art2.framework.bus.netty</Private-Package>
                         <Dynamic-ImportPackage>*</Dynamic-ImportPackage>
                         <Export-Package>org.kermeta.art2.framework.bus.netty.remote,org.jboss.netty.*;version=3.2</Export-Package>
