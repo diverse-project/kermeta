@@ -45,7 +45,7 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
     super.start
 
     var lastModelssaved = bundleContext.getDataFile("lastModel.xmi");
-    if (lastModelssaved.getTotalSpace() != 0) {
+    if (lastModelssaved.length() != 0) {
       /* Load previous state */
       var model = Art2XmiHelper.load(lastModelssaved.getAbsolutePath());
       switchToNewModel(model)
@@ -70,14 +70,16 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
               var adaptationModel = kompareService.kompare(model, newmodel, nodeName);
               var deployResult = deployService.deploy(adaptationModel,nodeName);
 
-              //MErge previous model on new model for platform model
-              Art2PlatformMerger.merge(newmodel,model)
-
-              //models = models ++ List(newmodel)
-              switchToNewModel(newmodel)
-
+              if(deployResult){
+                //MErge previous model on new model for platform model
+                Art2PlatformMerger.merge(newmodel,model)
+                switchToNewModel(newmodel)
+                logger.info("Deploy result " + deployResult)
+              } else {
+                //KEEP FAIL MODEL
+              }
               reply(deployResult)
-              logger.info("Deploy result " + deployResult)
+
             }
           }
         case _ @ unknow=> logger.warn("unknow message  "+unknow)
