@@ -18,15 +18,15 @@ import org.kermeta.art2.framework.JacksonSerializer._
 class SynchPlatformCommand extends Command {
 
   var kernel : Art2UIKernel = null
-  var client = new TcpClientRemoteActor(null,1000) {
+  //   client.start
+
+  def execute(p :Object) {
+
+    var client = new TcpClientRemoteActor(null,1000) {
       def getRemoteAddr : InetSocketAddress = {
         new InetSocketAddress("localhost",8081)
       }
     }
- //   client.start
-
-  def execute(p :Object) {
-
 
     client.start
 
