@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-android:generate-sources</actionName>
+            <displayName>android:generate-sources</displayName>
+            <goals>
+                <goal>android:generate-sources</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-android:deploy</actionName>
+            <displayName>android:deploy</displayName>
+            <goals>
+                <goal>android:deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-android:undeploy</actionName>
+            <displayName>android:undeploy</displayName>
+            <goals>
+                <goal>android:undeploy</goal>
+            </goals>
+        </action>
+    </actions>
