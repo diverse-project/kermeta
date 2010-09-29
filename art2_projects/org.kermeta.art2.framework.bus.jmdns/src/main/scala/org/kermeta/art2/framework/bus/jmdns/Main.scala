@@ -19,8 +19,14 @@ object Main {
   def main(args: Array[String]): Unit = {
 
     NetworkInterface.getNetworkInterfaces.foreach{it =>
+      println("it="+it.getDisplayName)
+      println("it="+it.getName)
+
       it.getInetAddresses.foreach{addr =>
         println(addr)
+        println(addr.getCanonicalHostName)
+        println(addr.getHostName)
+        println(addr.getHostAddress)
       }
     }
 
