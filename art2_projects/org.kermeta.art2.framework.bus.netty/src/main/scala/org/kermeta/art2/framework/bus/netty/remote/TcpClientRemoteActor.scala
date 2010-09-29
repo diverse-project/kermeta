@@ -151,7 +151,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   def act() = {
     loop {
       react {
-        case s : STOP => interneStop(); exit()
+        case STOP => { interneStop(); exit() }
         case _ @ msg => channelfutur match {
             case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
             case _ => {
