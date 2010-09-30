@@ -6,10 +6,7 @@
 package org.kermeta.art2.framework
 
 import java.util.HashMap
-import org.kermeta.art2.framework.message.Art2FragmentUnbindMessage
-import org.kermeta.art2.framework.message.Art2PortBindMessage;
-import org.kermeta.art2.framework.message.Art2FragmentBindMessage
-import org.kermeta.art2.framework.message.Art2PortUnbindMessage
+import org.kermeta.art2.framework.message._
 import scala.collection.JavaConversions._
 import scala.reflect.BeanProperty
 
@@ -28,6 +25,7 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
   override def getBindedPorts():java.util.List[Art2Port] = { portsBinded.values.toList } //OVERRIDE BY FACTORY
   override def getOtherFragments():java.util.List[Art2ChannelFragment] = { fragementBinded.values.toList }
   override def sendTo(delegate : Art2Actor,o:Object, synchronous : java.lang.Boolean) : Object = {
+
     if(synchronous.booleanValue){
       return (delegate !? o).asInstanceOf[Object]
     } else {
@@ -46,13 +44,29 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
   def act()={
     loop{
       react {
-        case STOP => exit
+        case STOP => exit //TODO EMPTY WAITING LIST
         case msg : Art2FragmentBindMessage=> fragementBinded.put(msg.getChannelName+"-"+msg.getFragmentNodeName, msg.getProxy);reply(true)
         case msg : Art2FragmentUnbindMessage=> fragementBinded.remove(msg.getChannelName+"-"+msg.getFragmentNodeName);reply(true)
         case msg : Art2PortBindMessage => portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)
         case msg : Art2PortUnbindMessage => portsBinded.remove(createPortKey(msg));reply(true)
-        case msg : MethodCallMessage => reply(dispatch(msg,true))
-        case msg : Object => dispatch(msg,false)
+          //USE CASE A MSG REC BY OTHER FRAGMENT
+        case msg : Art2Message => {
+            if(msg.inOut.booleanValue){
+              reply(dispatch(msg))
+            } else {
+              dispatch(msg)
+            }
+          }
+        case msg : MethodCallMessage =>{
+            var msg2 = new Art2Message
+            msg2.setContent(msg)
+            reply(dispatch(msg2))
+          }
+        case msg : Object => {
+            var msg2 = new Art2Message
+            msg2.setContent(msg)
+            dispatch(msg2)
+          }
         case _ @ msg => println("WTF !")
       }
     }

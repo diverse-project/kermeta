@@ -5,13 +5,15 @@
 
 package org.kermeta.art2.framework;
 
+import org.kermeta.art2.framework.message.*;
+
 /**
  *
  * @author ffouquet
  */
 public abstract class AbstractChannelFragment {
 
-    abstract public Object dispatch(Object o, Boolean synchronous);
+    abstract public Object dispatch(Art2Message msg);
 
     public java.util.List<Art2Port> getBindedPorts(){return null;} //OVERRIDE BY FACTORY
 
