@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,15 +21,16 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.kermeta.art2.MessageHub;
+import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.Instance;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.MessageHub} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.Instance} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class MessageHubItemProvider
+public class InstanceItemProvider
 	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -42,7 +44,7 @@ public class MessageHubItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MessageHubItemProvider(AdapterFactory adapterFactory) {
+	public InstanceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -57,19 +59,42 @@ public class MessageHubItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypeDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns MessageHub.gif.
+	 * This adds a property descriptor for the Type Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypeDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Instance_typeDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Instance_typeDefinition_feature", "_UI_Instance_type"),
+				 Art2Package.Literals.INSTANCE__TYPE_DEFINITION,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns Instance.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/MessageHub"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Instance"));
 	}
 
 	/**
@@ -80,10 +105,10 @@ public class MessageHubItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((MessageHub)object).getName();
+		String label = ((Instance)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_MessageHub_type") :
-			getString("_UI_MessageHub_type") + " " + label;
+			getString("_UI_Instance_type") :
+			getString("_UI_Instance_type") + " " + label;
 	}
 
 	/**

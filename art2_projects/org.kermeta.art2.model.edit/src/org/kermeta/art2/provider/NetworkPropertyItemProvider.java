@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,19 +20,19 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.art2.Art2Factory;
 import org.kermeta.art2.Art2Package;
-import org.kermeta.art2.ContainerNode;
+import org.kermeta.art2.NetworkProperty;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.ContainerNode} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.NetworkProperty} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ContainerNodeItemProvider
+public class NetworkPropertyItemProvider
 	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -48,7 +46,7 @@ public class ContainerNodeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ContainerNodeItemProvider(AdapterFactory adapterFactory) {
+	public NetworkPropertyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,72 +61,65 @@ public class ContainerNodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
+			addLastCheckPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ContainerNode_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ContainerNode_type_feature", "_UI_ContainerNode_type"),
-				 Art2Package.Literals.CONTAINER_NODE__TYPE,
+				 getString("_UI_NetworkProperty_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NetworkProperty_value_feature", "_UI_NetworkProperty_type"),
+				 Art2Package.Literals.NETWORK_PROPERTY__VALUE,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Last Check feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_NODE__COMPONENTS);
-		}
-		return childrenFeatures;
+	protected void addLastCheckPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NetworkProperty_lastCheck_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NetworkProperty_lastCheck_feature", "_UI_NetworkProperty_type"),
+				 Art2Package.Literals.NETWORK_PROPERTY__LAST_CHECK,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns ContainerNode.gif.
+	 * This returns NetworkProperty.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ContainerNode"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NetworkProperty"));
 	}
 
 	/**
@@ -139,10 +130,10 @@ public class ContainerNodeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ContainerNode)object).getName();
+		String label = ((NetworkProperty)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ContainerNode_type") :
-			getString("_UI_ContainerNode_type") + " " + label;
+			getString("_UI_NetworkProperty_type") :
+			getString("_UI_NetworkProperty_type") + " " + label;
 	}
 
 	/**
@@ -156,9 +147,10 @@ public class ContainerNodeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ContainerNode.class)) {
-			case Art2Package.CONTAINER_NODE__COMPONENTS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(NetworkProperty.class)) {
+			case Art2Package.NETWORK_PROPERTY__VALUE:
+			case Art2Package.NETWORK_PROPERTY__LAST_CHECK:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -174,11 +166,6 @@ public class ContainerNodeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_NODE__COMPONENTS,
-				 Art2Factory.eINSTANCE.createComponentInstance()));
 	}
 
 }

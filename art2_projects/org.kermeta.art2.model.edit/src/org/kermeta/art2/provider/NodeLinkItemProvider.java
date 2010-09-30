@@ -13,6 +13,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -22,20 +24,22 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.art2.Art2Factory;
 import org.kermeta.art2.Art2Package;
-import org.kermeta.art2.ContainerNode;
+import org.kermeta.art2.NodeLink;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.ContainerNode} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.NodeLink} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ContainerNodeItemProvider
-	extends NamedElementItemProvider
+public class NodeLinkItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +52,7 @@ public class ContainerNodeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ContainerNodeItemProvider(AdapterFactory adapterFactory) {
+	public NodeLinkItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,29 +67,75 @@ public class ContainerNodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addNetworkTypePropertyDescriptor(object);
+			addEstimatedRatePropertyDescriptor(object);
+			addLastCheckPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Network Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addNetworkTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ContainerNode_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ContainerNode_type_feature", "_UI_ContainerNode_type"),
-				 Art2Package.Literals.CONTAINER_NODE__TYPE,
+				 getString("_UI_NodeLink_networkType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeLink_networkType_feature", "_UI_NodeLink_type"),
+				 Art2Package.Literals.NODE_LINK__NETWORK_TYPE,
 				 true,
 				 false,
-				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Estimated Rate feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEstimatedRatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NodeLink_estimatedRate_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeLink_estimatedRate_feature", "_UI_NodeLink_type"),
+				 Art2Package.Literals.NODE_LINK__ESTIMATED_RATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Last Check feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLastCheckPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NodeLink_lastCheck_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeLink_lastCheck_feature", "_UI_NodeLink_type"),
+				 Art2Package.Literals.NODE_LINK__LAST_CHECK,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -102,7 +152,7 @@ public class ContainerNodeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_NODE__COMPONENTS);
+			childrenFeatures.add(Art2Package.Literals.NODE_LINK__NETWORK_PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -121,14 +171,14 @@ public class ContainerNodeItemProvider
 	}
 
 	/**
-	 * This returns ContainerNode.gif.
+	 * This returns NodeLink.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ContainerNode"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NodeLink"));
 	}
 
 	/**
@@ -139,10 +189,10 @@ public class ContainerNodeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ContainerNode)object).getName();
+		String label = ((NodeLink)object).getNetworkType();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ContainerNode_type") :
-			getString("_UI_ContainerNode_type") + " " + label;
+			getString("_UI_NodeLink_type") :
+			getString("_UI_NodeLink_type") + " " + label;
 	}
 
 	/**
@@ -156,8 +206,13 @@ public class ContainerNodeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ContainerNode.class)) {
-			case Art2Package.CONTAINER_NODE__COMPONENTS:
+		switch (notification.getFeatureID(NodeLink.class)) {
+			case Art2Package.NODE_LINK__NETWORK_TYPE:
+			case Art2Package.NODE_LINK__ESTIMATED_RATE:
+			case Art2Package.NODE_LINK__LAST_CHECK:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case Art2Package.NODE_LINK__NETWORK_PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -177,8 +232,19 @@ public class ContainerNodeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_NODE__COMPONENTS,
-				 Art2Factory.eINSTANCE.createComponentInstance()));
+				(Art2Package.Literals.NODE_LINK__NETWORK_PROPERTIES,
+				 Art2Factory.eINSTANCE.createNetworkProperty()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ArtEditPlugin.INSTANCE;
 	}
 
 }

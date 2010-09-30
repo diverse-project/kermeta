@@ -63,7 +63,7 @@ public class ComponentInstanceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addComponentTypePropertyDescriptor(object);
+			addTypeDefinitionPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
 			addMetricsPropertyDescriptor(object);
 		}
@@ -71,19 +71,19 @@ public class ComponentInstanceItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Component Type feature.
+	 * This adds a property descriptor for the Type Definition feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addComponentTypePropertyDescriptor(Object object) {
+	protected void addTypeDefinitionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ComponentInstance_componentType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentInstance_componentType_feature", "_UI_ComponentInstance_type"),
-				 Art2Package.Literals.COMPONENT_INSTANCE__COMPONENT_TYPE,
+				 getString("_UI_Instance_typeDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Instance_typeDefinition_feature", "_UI_Instance_type"),
+				 Art2Package.Literals.INSTANCE__TYPE_DEFINITION,
 				 true,
 				 false,
 				 true,

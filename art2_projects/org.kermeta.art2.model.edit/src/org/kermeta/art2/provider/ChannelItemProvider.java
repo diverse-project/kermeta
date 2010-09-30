@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,16 +21,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.kermeta.art2.Queue;
+import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.Channel;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.Queue} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.Channel} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class QueueItemProvider
-	extends MessageHubItemProvider
+public class ChannelItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -42,7 +44,7 @@ public class QueueItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public QueueItemProvider(AdapterFactory adapterFactory) {
+	public ChannelItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -57,19 +59,42 @@ public class QueueItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypeDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns Queue.gif.
+	 * This adds a property descriptor for the Type Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypeDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Instance_typeDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Instance_typeDefinition_feature", "_UI_Instance_type"),
+				 Art2Package.Literals.INSTANCE__TYPE_DEFINITION,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns Channel.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Queue"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Channel"));
 	}
 
 	/**
@@ -80,10 +105,10 @@ public class QueueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Queue)object).getName();
+		String label = ((Channel)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Queue_type") :
-			getString("_UI_Queue_type") + " " + label;
+			getString("_UI_Channel_type") :
+			getString("_UI_Channel_type") + " " + label;
 	}
 
 	/**

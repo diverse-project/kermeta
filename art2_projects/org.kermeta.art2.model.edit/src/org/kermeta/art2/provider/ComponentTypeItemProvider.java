@@ -36,7 +36,7 @@ import org.kermeta.art2.ComponentType;
  * @generated
  */
 public class ComponentTypeItemProvider
-	extends DeployUnitItemProvider
+	extends TypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -64,57 +64,10 @@ public class ComponentTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addFactoryBeanPropertyDescriptor(object);
-			addBeanPropertyDescriptor(object);
 			addStartMethodPropertyDescriptor(object);
 			addStopMethodPropertyDescriptor(object);
-			addRequiredLibsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Factory Bean feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFactoryBeanPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_factoryBean_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_factoryBean_feature", "_UI_ComponentType_type"),
-				 Art2Package.Literals.COMPONENT_TYPE__FACTORY_BEAN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Bean feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addBeanPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_bean_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_bean_feature", "_UI_ComponentType_type"),
-				 Art2Package.Literals.COMPONENT_TYPE__BEAN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -157,28 +110,6 @@ public class ComponentTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Required Libs feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRequiredLibsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_requiredLibs_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_requiredLibs_feature", "_UI_ComponentType_type"),
-				 Art2Package.Literals.COMPONENT_TYPE__REQUIRED_LIBS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -254,8 +185,6 @@ public class ComponentTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentType.class)) {
-			case Art2Package.COMPONENT_TYPE__FACTORY_BEAN:
-			case Art2Package.COMPONENT_TYPE__BEAN:
 			case Art2Package.COMPONENT_TYPE__START_METHOD:
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

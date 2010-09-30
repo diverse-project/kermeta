@@ -33,7 +33,7 @@ import org.kermeta.art2.PortType;
  * @generated
  */
 public class PortTypeItemProvider
-	extends NamedElementItemProvider
+	extends TypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

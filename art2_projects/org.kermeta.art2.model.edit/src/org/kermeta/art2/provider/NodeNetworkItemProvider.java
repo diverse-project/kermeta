@@ -15,6 +15,8 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,16 +25,19 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.kermeta.art2.Art2Factory;
 import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.NodeNetwork;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.Binding} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.NodeNetwork} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BindingItemProvider
+public class NodeNetworkItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -46,7 +51,7 @@ public class BindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BindingItemProvider(AdapterFactory adapterFactory) {
+	public NodeNetworkItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,25 +66,26 @@ public class BindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPortsPropertyDescriptor(object);
+			addInitByPropertyDescriptor(object);
+			addTargetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Ports feature.
+	 * This adds a property descriptor for the Init By feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPortsPropertyDescriptor(Object object) {
+	protected void addInitByPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Binding_ports_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Binding_ports_feature", "_UI_Binding_type"),
-				 Art2Package.Literals.BINDING__PORTS,
+				 getString("_UI_NodeNetwork_initBy_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeNetwork_initBy_feature", "_UI_NodeNetwork_type"),
+				 Art2Package.Literals.NODE_NETWORK__INIT_BY,
 				 true,
 				 false,
 				 true,
@@ -89,14 +95,66 @@ public class BindingItemProvider
 	}
 
 	/**
-	 * This returns Binding.gif.
+	 * This adds a property descriptor for the Target feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NodeNetwork_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeNetwork_target_feature", "_UI_NodeNetwork_type"),
+				 Art2Package.Literals.NODE_NETWORK__TARGET,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(Art2Package.Literals.NODE_NETWORK__LINK);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns NodeNetwork.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Binding"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NodeNetwork"));
 	}
 
 	/**
@@ -107,7 +165,7 @@ public class BindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Binding_type");
+		return getString("_UI_NodeNetwork_type");
 	}
 
 	/**
@@ -120,6 +178,12 @@ public class BindingItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(NodeNetwork.class)) {
+			case Art2Package.NODE_NETWORK__LINK:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -133,6 +197,11 @@ public class BindingItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.NODE_NETWORK__LINK,
+				 Art2Factory.eINSTANCE.createNodeLink()));
 	}
 
 	/**

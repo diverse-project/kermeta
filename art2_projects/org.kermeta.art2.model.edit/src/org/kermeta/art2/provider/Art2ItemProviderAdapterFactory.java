@@ -306,29 +306,6 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.Binding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BindingItemProvider bindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.art2.Binding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBindingAdapter() {
-		if (bindingItemProvider == null) {
-			bindingItemProvider = new BindingItemProvider(this);
-		}
-
-		return bindingItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.CompositeType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -559,26 +536,26 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.ComponentTypeLibrary} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.TypeLibrary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComponentTypeLibraryItemProvider componentTypeLibraryItemProvider;
+	protected TypeLibraryItemProvider typeLibraryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.art2.ComponentTypeLibrary}.
+	 * This creates an adapter for a {@link org.kermeta.art2.TypeLibrary}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createComponentTypeLibraryAdapter() {
-		if (componentTypeLibraryItemProvider == null) {
-			componentTypeLibraryItemProvider = new ComponentTypeLibraryItemProvider(this);
+	public Adapter createTypeLibraryAdapter() {
+		if (typeLibraryItemProvider == null) {
+			typeLibraryItemProvider = new TypeLibraryItemProvider(this);
 		}
 
-		return componentTypeLibraryItemProvider;
+		return typeLibraryItemProvider;
 	}
 
 	/**
@@ -697,72 +674,26 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.Topic} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.Channel} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TopicItemProvider topicItemProvider;
+	protected ChannelItemProvider channelItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.art2.Topic}.
+	 * This creates an adapter for a {@link org.kermeta.art2.Channel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTopicAdapter() {
-		if (topicItemProvider == null) {
-			topicItemProvider = new TopicItemProvider(this);
+	public Adapter createChannelAdapter() {
+		if (channelItemProvider == null) {
+			channelItemProvider = new ChannelItemProvider(this);
 		}
 
-		return topicItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.MessageHub} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MessageHubItemProvider messageHubItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.art2.MessageHub}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMessageHubAdapter() {
-		if (messageHubItemProvider == null) {
-			messageHubItemProvider = new MessageHubItemProvider(this);
-		}
-
-		return messageHubItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.Queue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected QueueItemProvider queueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.art2.Queue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createQueueAdapter() {
-		if (queueItemProvider == null) {
-			queueItemProvider = new QueueItemProvider(this);
-		}
-
-		return queueItemProvider;
+		return channelItemProvider;
 	}
 
 	/**
@@ -786,6 +717,167 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		}
 
 		return mBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.NodeType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NodeTypeItemProvider nodeTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.NodeType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNodeTypeAdapter() {
+		if (nodeTypeItemProvider == null) {
+			nodeTypeItemProvider = new NodeTypeItemProvider(this);
+		}
+
+		return nodeTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.NodeNetwork} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NodeNetworkItemProvider nodeNetworkItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.NodeNetwork}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNodeNetworkAdapter() {
+		if (nodeNetworkItemProvider == null) {
+			nodeNetworkItemProvider = new NodeNetworkItemProvider(this);
+		}
+
+		return nodeNetworkItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.NodeLink} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NodeLinkItemProvider nodeLinkItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.NodeLink}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNodeLinkAdapter() {
+		if (nodeLinkItemProvider == null) {
+			nodeLinkItemProvider = new NodeLinkItemProvider(this);
+		}
+
+		return nodeLinkItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.NetworkProperty} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NetworkPropertyItemProvider networkPropertyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.NetworkProperty}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNetworkPropertyAdapter() {
+		if (networkPropertyItemProvider == null) {
+			networkPropertyItemProvider = new NetworkPropertyItemProvider(this);
+		}
+
+		return networkPropertyItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.ChannelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ChannelTypeItemProvider channelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.ChannelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createChannelTypeAdapter() {
+		if (channelTypeItemProvider == null) {
+			channelTypeItemProvider = new ChannelTypeItemProvider(this);
+		}
+
+		return channelTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.TypeDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeDefinitionItemProvider typeDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.TypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeDefinitionAdapter() {
+		if (typeDefinitionItemProvider == null) {
+			typeDefinitionItemProvider = new TypeDefinitionItemProvider(this);
+		}
+
+		return typeDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.Instance} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InstanceItemProvider instanceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.Instance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInstanceAdapter() {
+		if (instanceItemProvider == null) {
+			instanceItemProvider = new InstanceItemProvider(this);
+		}
+
+		return instanceItemProvider;
 	}
 
 	/**
@@ -897,7 +989,6 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		if (dictionaryTypeItemProvider != null) dictionaryTypeItemProvider.dispose();
 		if (dictionaryAttributeItemProvider != null) dictionaryAttributeItemProvider.dispose();
 		if (dictionaryValueItemProvider != null) dictionaryValueItemProvider.dispose();
-		if (bindingItemProvider != null) bindingItemProvider.dispose();
 		if (compositeTypeItemProvider != null) compositeTypeItemProvider.dispose();
 		if (portTypeRefItemProvider != null) portTypeRefItemProvider.dispose();
 		if (wireItemProvider != null) wireItemProvider.dispose();
@@ -908,16 +999,21 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		if (messagePortTypeItemProvider != null) messagePortTypeItemProvider.dispose();
 		if (repositoryItemProvider != null) repositoryItemProvider.dispose();
 		if (deployUnitItemProvider != null) deployUnitItemProvider.dispose();
-		if (componentTypeLibraryItemProvider != null) componentTypeLibraryItemProvider.dispose();
+		if (typeLibraryItemProvider != null) typeLibraryItemProvider.dispose();
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (integrationPatternItemProvider != null) integrationPatternItemProvider.dispose();
 		if (extraFonctionalPropertyItemProvider != null) extraFonctionalPropertyItemProvider.dispose();
 		if (metricItemProvider != null) metricItemProvider.dispose();
 		if (portTypeMappingItemProvider != null) portTypeMappingItemProvider.dispose();
-		if (topicItemProvider != null) topicItemProvider.dispose();
-		if (messageHubItemProvider != null) messageHubItemProvider.dispose();
-		if (queueItemProvider != null) queueItemProvider.dispose();
+		if (channelItemProvider != null) channelItemProvider.dispose();
 		if (mBindingItemProvider != null) mBindingItemProvider.dispose();
+		if (nodeTypeItemProvider != null) nodeTypeItemProvider.dispose();
+		if (nodeNetworkItemProvider != null) nodeNetworkItemProvider.dispose();
+		if (nodeLinkItemProvider != null) nodeLinkItemProvider.dispose();
+		if (networkPropertyItemProvider != null) networkPropertyItemProvider.dispose();
+		if (channelTypeItemProvider != null) channelTypeItemProvider.dispose();
+		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
+		if (instanceItemProvider != null) instanceItemProvider.dispose();
 	}
 
 }

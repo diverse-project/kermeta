@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,16 +21,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.kermeta.art2.Topic;
+import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.NodeType;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.Topic} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.NodeType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TopicItemProvider
-	extends MessageHubItemProvider
+public class NodeTypeItemProvider
+	extends TypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -42,7 +44,7 @@ public class TopicItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TopicItemProvider(AdapterFactory adapterFactory) {
+	public NodeTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -57,19 +59,42 @@ public class TopicItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addBootstrapPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns Topic.gif.
+	 * This adds a property descriptor for the Bootstrap feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBootstrapPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NodeType_bootstrap_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodeType_bootstrap_feature", "_UI_NodeType_type"),
+				 Art2Package.Literals.NODE_TYPE__BOOTSTRAP,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns NodeType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Topic"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NodeType"));
 	}
 
 	/**
@@ -80,10 +105,10 @@ public class TopicItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Topic)object).getName();
+		String label = ((NodeType)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Topic_type") :
-			getString("_UI_Topic_type") + " " + label;
+			getString("_UI_NodeType_type") :
+			getString("_UI_NodeType_type") + " " + label;
 	}
 
 	/**

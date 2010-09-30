@@ -82,15 +82,14 @@ public class ContainerRootItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__NODES);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__COMPONENT_TYPES);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__REPOSITORIES);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__BINDINGS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__DATA_TYPES);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__PORT_TYPES);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__LIBRARIES);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__MESSAGE_HUB);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__HUBS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__MBINDINGS);
-			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__DEPLOY_UNITS);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__NODE_NETWORKS);
 		}
 		return childrenFeatures;
 	}
@@ -143,15 +142,14 @@ public class ContainerRootItemProvider
 
 		switch (notification.getFeatureID(ContainerRoot.class)) {
 			case Art2Package.CONTAINER_ROOT__NODES:
-			case Art2Package.CONTAINER_ROOT__COMPONENT_TYPES:
+			case Art2Package.CONTAINER_ROOT__TYPE_DEFINITIONS:
 			case Art2Package.CONTAINER_ROOT__REPOSITORIES:
-			case Art2Package.CONTAINER_ROOT__BINDINGS:
 			case Art2Package.CONTAINER_ROOT__DATA_TYPES:
-			case Art2Package.CONTAINER_ROOT__PORT_TYPES:
 			case Art2Package.CONTAINER_ROOT__LIBRARIES:
-			case Art2Package.CONTAINER_ROOT__MESSAGE_HUB:
+			case Art2Package.CONTAINER_ROOT__HUBS:
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
-			case Art2Package.CONTAINER_ROOT__THIRD_PARTIES:
+			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
+			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -176,23 +174,43 @@ public class ContainerRootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__COMPONENT_TYPES,
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
+				 Art2Factory.eINSTANCE.createTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
 				 Art2Factory.eINSTANCE.createComponentType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__COMPONENT_TYPES,
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
 				 Art2Factory.eINSTANCE.createCompositeType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
+				 Art2Factory.eINSTANCE.createServicePortType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
+				 Art2Factory.eINSTANCE.createMessagePortType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
+				 Art2Factory.eINSTANCE.createNodeType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__TYPE_DEFINITIONS,
+				 Art2Factory.eINSTANCE.createChannelType()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(Art2Package.Literals.CONTAINER_ROOT__REPOSITORIES,
 				 Art2Factory.eINSTANCE.createRepository()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__BINDINGS,
-				 Art2Factory.eINSTANCE.createBinding()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -206,33 +224,13 @@ public class ContainerRootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__PORT_TYPES,
-				 Art2Factory.eINSTANCE.createServicePortType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__PORT_TYPES,
-				 Art2Factory.eINSTANCE.createMessagePortType()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(Art2Package.Literals.CONTAINER_ROOT__LIBRARIES,
-				 Art2Factory.eINSTANCE.createComponentTypeLibrary()));
+				 Art2Factory.eINSTANCE.createTypeLibrary()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__MESSAGE_HUB,
-				 Art2Factory.eINSTANCE.createMessageHub()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__MESSAGE_HUB,
-				 Art2Factory.eINSTANCE.createTopic()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__MESSAGE_HUB,
-				 Art2Factory.eINSTANCE.createQueue()));
+				(Art2Package.Literals.CONTAINER_ROOT__HUBS,
+				 Art2Factory.eINSTANCE.createChannel()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -241,47 +239,13 @@ public class ContainerRootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
+				(Art2Package.Literals.CONTAINER_ROOT__DEPLOY_UNITS,
 				 Art2Factory.eINSTANCE.createDeployUnit()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
-				 Art2Factory.eINSTANCE.createComponentType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
-				 Art2Factory.eINSTANCE.createCompositeType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES,
-				 Art2Factory.eINSTANCE.createComponentTypeLibrary()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == Art2Package.Literals.CONTAINER_ROOT__COMPONENT_TYPES ||
-			childFeature == Art2Package.Literals.CONTAINER_ROOT__THIRD_PARTIES ||
-			childFeature == Art2Package.Literals.CONTAINER_ROOT__LIBRARIES;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(Art2Package.Literals.CONTAINER_ROOT__NODE_NETWORKS,
+				 Art2Factory.eINSTANCE.createNodeNetwork()));
 	}
 
 	/**

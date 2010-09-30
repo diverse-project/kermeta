@@ -20,18 +20,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.art2.Art2Package;
-import org.kermeta.art2.ComponentTypeLibrary;
+import org.kermeta.art2.ChannelType;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.ComponentTypeLibrary} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.ChannelType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComponentTypeLibraryItemProvider
-	extends DeployUnitItemProvider
+public class ChannelTypeItemProvider
+	extends TypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -44,7 +46,7 @@ public class ComponentTypeLibraryItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentTypeLibraryItemProvider(AdapterFactory adapterFactory) {
+	public ChannelTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,42 +61,65 @@ public class ComponentTypeLibraryItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSubComponentTypesPropertyDescriptor(object);
+			addStartMethodPropertyDescriptor(object);
+			addStopMethodPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Sub Component Types feature.
+	 * This adds a property descriptor for the Start Method feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSubComponentTypesPropertyDescriptor(Object object) {
+	protected void addStartMethodPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ComponentTypeLibrary_subComponentTypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentTypeLibrary_subComponentTypes_feature", "_UI_ComponentTypeLibrary_type"),
-				 Art2Package.Literals.COMPONENT_TYPE_LIBRARY__SUB_COMPONENT_TYPES,
+				 getString("_UI_ChannelType_startMethod_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChannelType_startMethod_feature", "_UI_ChannelType_type"),
+				 Art2Package.Literals.CHANNEL_TYPE__START_METHOD,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns ComponentTypeLibrary.gif.
+	 * This adds a property descriptor for the Stop Method feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStopMethodPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChannelType_stopMethod_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChannelType_stopMethod_feature", "_UI_ChannelType_type"),
+				 Art2Package.Literals.CHANNEL_TYPE__STOP_METHOD,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns ChannelType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComponentTypeLibrary"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ChannelType"));
 	}
 
 	/**
@@ -105,10 +130,10 @@ public class ComponentTypeLibraryItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComponentTypeLibrary)object).getName();
+		String label = ((ChannelType)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ComponentTypeLibrary_type") :
-			getString("_UI_ComponentTypeLibrary_type") + " " + label;
+			getString("_UI_ChannelType_type") :
+			getString("_UI_ChannelType_type") + " " + label;
 	}
 
 	/**
@@ -121,6 +146,13 @@ public class ComponentTypeLibraryItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ChannelType.class)) {
+			case Art2Package.CHANNEL_TYPE__START_METHOD:
+			case Art2Package.CHANNEL_TYPE__STOP_METHOD:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
