@@ -13,7 +13,7 @@ import org.kermeta.art2.framework.aspects.Art2Aspects._
 trait InitNodeKompare {
   def getInitNodeAdaptationModel(node:ContainerNode):AdaptationModel= {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
-    println("INIT NODE "+node.getName)
+    println("INIT NODE v2 "+node.getName)
     //UPDATE ALL COMPONENT TYPE
 
     var root = node.eContainer.asInstanceOf[ContainerRoot]
