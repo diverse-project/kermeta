@@ -1,4 +1,4 @@
-<!-- $Id$ -->
+<!-- $Id: pom.xml 12703 2010-09-29 08:07:33Z hrambelo $ -->
 <!-- License    : EPL                                    -->
 <!-- Project    : org.kermeta.utils.slf4j.eclipse -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
@@ -115,6 +115,11 @@
                         <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
                         <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>
+                    		org.eclipse.ui,
+ 							org.eclipse.core.runtime,
+ 							org.eclipse.core.resources,
+ 							org.eclipse.core.jobs,
+ 							org.eclipse.equinox.preferences
                         </Require-Bundle>
                         <_versionpolicy>[${version;==;${@}},${version;+;${@}})</_versionpolicy>
                         
@@ -123,7 +128,6 @@
 							!org.eclipse.ui.*,
 							!org.eclipse.jface.*,
 							!org.eclipse.swt.*,
-							org.eclipse.equinox.preferences,
 							org.osgi.framework;version="[1.5,2)",		
 							org.apache.log4j.*
                         </Import-Package>
@@ -228,7 +232,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
+			<version>[1.2.13,2.0.0)</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
