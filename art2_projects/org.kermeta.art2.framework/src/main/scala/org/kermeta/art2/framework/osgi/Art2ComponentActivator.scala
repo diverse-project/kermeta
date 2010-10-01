@@ -53,6 +53,8 @@ abstract class Art2ComponentActivator extends BundleActivator {
   }
 
   def stop(bc : BundleContext){
+    /* STOP NEEDED PORT */
+    componentActor.getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].stop}
     componentActor.stop
     componentActor = null
   }

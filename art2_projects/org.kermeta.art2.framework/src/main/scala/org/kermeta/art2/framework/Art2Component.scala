@@ -28,7 +28,7 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
         }
         case Art2StopMessage => { 
             getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].stop}
-            getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].stop}
+            //getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].stop} //DEPRECATED NP STARTED AT ACTIVATOR TIME
             stopComponent
             reply(true)
         }
