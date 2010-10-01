@@ -15,7 +15,7 @@ trait InitNodeKompare extends AbstractKompare {
 
   def getInitNodeAdaptationModel(node:ContainerNode):AdaptationModel= {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
-    logger.info("INIT NODE "+node.getName)
+    logger.info("INIT NODE v2 "+node.getName)
     //UPDATE ALL COMPONENT TYPE
 
     var root = node.eContainer.asInstanceOf[ContainerRoot]
