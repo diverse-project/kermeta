@@ -10,7 +10,7 @@ import org.kermeta.art2.framework.message._
 import scala.collection.JavaConversions._
 import scala.reflect.BeanProperty
 
-trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragment {
+trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
 
   private var portsBinded : HashMap[String,Art2Port] = new HashMap[String, Art2Port]()
   private var fragementBinded : HashMap[String,Art2ChannelFragment] = new HashMap[String, Art2ChannelFragment]()
@@ -22,14 +22,24 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
   @BeanProperty
   var dictionary : HashMap[String, Object] = new HashMap[String, Object]()
 
-  override def getBindedPorts():java.util.List[Art2Port] = { portsBinded.values.toList } //OVERRIDE BY FACTORY
-  override def getOtherFragments():java.util.List[Art2ChannelFragment] = { fragementBinded.values.toList }
-  override def sendTo(delegate : Art2Actor,o:Object, synchronous : java.lang.Boolean) : Object = {
+   override def getBindedPorts():java.util.List[Art2Port] = { portsBinded.values.toList } //OVERRIDE BY FACTORY
+   override def getOtherFragments():java.util.List[Art2ChannelFragment] = { fragementBinded.values.toList }
+   override def forward(delegate : Art2Actor,msg : Art2Message) : Object = {
 
-    if(synchronous.booleanValue){
-      return (delegate !? o).asInstanceOf[Object]
-    } else {
-      (delegate ! o);return null
+    delegate match {
+      case p: Art2Port => {
+          if(msg.inOut.booleanValue){
+            return (delegate !? msg.getContent).asInstanceOf[Object]
+          } else {
+            (delegate ! msg.getContent);return null
+          }
+        }
+      case f : Art2ChannelFragment =>
+        if(msg.inOut.booleanValue){
+          return (delegate !? msg.getContent).asInstanceOf[Object]
+        } else {
+          (delegate ! msg.getContent);return null
+        }
     }
   }
 
@@ -59,11 +69,13 @@ trait ChannelTypeFragment extends AbstractChannelFragment with Art2ChannelFragme
           }
         case msg : MethodCallMessage =>{
             var msg2 = new Art2Message
+            msg2.setInOut(true)
             msg2.setContent(msg)
             reply(dispatch(msg2))
           }
         case msg : Object => {
             var msg2 = new Art2Message
+            msg2.setInOut(false)
             msg2.setContent(msg)
             dispatch(msg2)
           }

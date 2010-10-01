@@ -6,7 +6,6 @@
 package org.kermeta.art2.framework.message
 
 import scala.reflect.BeanProperty
-import java.{util => ju}
 
 class Art2Message{
 
@@ -29,26 +28,7 @@ class Art2Message{
   var timeout : Long = 3000
 
   @BeanProperty
-  var passedNodes : ju.List[String] = new ju.ArrayList[String]()
+  var passedNodes : java.util.List[String] = new java.util.ArrayList[String]()
 
 }
-/*
- class Art2BindMessage extends Art2Message{
- @BeanProperty
- var targetNodeName = "default"
 
- @BeanProperty
- var targetComponentName = "default"
-
- @BeanProperty
- var targetPortName = "default"
-
- @BeanProperty
- var proxy : Art2Actor = null
-
- @BeanProperty
- var bundleContext : BundleContext = null
- }
- */
-case class Art2StartMessage() extends Art2Message
-case class Art2StopMessage() extends Art2Message
