@@ -11,9 +11,12 @@ import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import scala.collection.JavaConversions._
+import org.slf4j.LoggerFactory
 
 case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends PrimitiveCommand{
 
+  var logger = LoggerFactory.getLogger(this.getClass);
+	
   def buildQuery(du : DeployUnit) : String = {
     var query = new StringBuilder
     query.append("mvn:")
@@ -38,7 +41,7 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
 
   //var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
   def execute() : Boolean= {
-    println("CMD ADD CT EXECUTION");
+    logger.info("CMD ADD CT EXECUTION");
     /* Actually deploy only bundle from library  */
     findLib(ct) match {
       case Some(l) => {
@@ -49,7 +52,7 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
             lastExecutionBundle.get.start
             true
           } catch {
-            case _ @ e =>e.printStackTrace; false
+            case _ @ e =>logger.error("failed to perform CMD ADD CT EXECUTION on " +lastExecutionBundle.get.getSymbolicName,e); false
           }
         }
       case None => false
