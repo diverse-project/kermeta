@@ -40,7 +40,7 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   }
 
   override def start : Actor={
-    logger.info("Start event rec : node name = "+bundleContext.getProperty("art2.node.name"))
+    logger.info("Start event : node name = "+bundleContext.getProperty("art2.node.name"))
     setNodeName(bundleContext.getProperty("art2.node.name"));
     super.start
 
