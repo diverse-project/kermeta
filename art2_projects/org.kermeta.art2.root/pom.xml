@@ -143,20 +143,10 @@
             <id>triskellPrivateSnapshots</id>
             <url>http://tipimouss.irisa.fr/maven2private-snapshots</url>
         </repository>
-
-        <repository>
-            <id>thirdparty</id>
-            <name>Irisa Tipimouss Nexus ThirdParty</name>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/thirdparty</url>
-        </repository>
         <repository>
             <id>scala-tools.org</id>
             <name>Scala-tools Maven2 Repository</name>
             <url>http://scala-tools.org/repo-releases</url>
-        </repository>
-        <repository>
-            <id>triskellPublicNexus</id>
-            <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
         </repository>
         <repository>
             <id>jboss public</id>
