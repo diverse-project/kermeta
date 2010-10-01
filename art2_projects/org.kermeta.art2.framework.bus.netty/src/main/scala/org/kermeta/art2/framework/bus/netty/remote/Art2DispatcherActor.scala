@@ -39,7 +39,7 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
                 servicefound match {
                   case None => logger.error("Not implemented yet !!! ")
                   case Some(sr)=> {
-                      var resultCall = serviceTracker.getService(sr).asInstanceOf[Art2ChannelFragment] !? art2message.getContent
+                      var resultCall = serviceTracker.getService(sr).asInstanceOf[Art2ChannelFragment] !? art2message
 
                       var callResult = new Art2ResponseMessage
                       callResult.setContent(resultCall)
@@ -52,7 +52,7 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
               } else {
                 servicefound match {
                   case None => logger.error("Not implemented yet !!! ")
-                  case Some(sr)=> serviceTracker.getService(sr).asInstanceOf[Art2Actor] ! art2message.getContent
+                  case Some(sr)=> serviceTracker.getService(sr).asInstanceOf[Art2Actor] ! art2message
                 }
               }
             } catch {case _ @ e => logger.error("Unexpected exception, while sending msg to port.",e) }

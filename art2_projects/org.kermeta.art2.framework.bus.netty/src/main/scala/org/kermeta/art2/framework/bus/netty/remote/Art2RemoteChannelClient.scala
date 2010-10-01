@@ -5,15 +5,15 @@
 
 package org.kermeta.art2.framework.bus.netty.remote
 import java.net.InetSocketAddress
+import java.util.Date
 import org.jboss.netty.channel.ChannelHandlerContext
 import org.jboss.netty.channel.MessageEvent
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
-import org.kermeta.art2.framework.Art2Actor
 import org.kermeta.art2.framework.Art2ChannelFragment
 import org.kermeta.art2.framework.Art2PlatformHelper
 import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.MethodCallMessage
-import org.kermeta.art2.framework.message.Art2PortBindMessage
+import org.kermeta.art2.framework.message.Art2Message
 import org.kermeta.art2.framework.message.Art2ResponseMessage
 import org.slf4j.LoggerFactory
 import org.kermeta.art2.framework.JacksonSerializer._
@@ -51,17 +51,15 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
   }
 
 
-  private def sendInternal(msg : Any) = {
-    var msgArt2remote = new org.kermeta.art2.framework.message.Art2Message()
-    msgArt2remote.setDestNodeName(remoteNodeName)
-    msgArt2remote.setDestChannelName(remoteChannelName)
-    msgArt2remote.setContent(msg)
-    msgArt2remote.setInOut(msg.isInstanceOf[MethodCallMessage])
+  private def sendInternal(msg : Art2Message) = {
+    msg.setDestNodeName(remoteNodeName)
+    msg.setDestChannelName(remoteChannelName)
+    msg.getPassedNodes.add(modelHandler.getNodeName)
 
-    var tag = msgArt2remote.hashCode //NAIF TAG //TODO
-    msgArt2remote.setResponseTag(tag.toString)
+    var tag = msg.hashCode+new Date().getTime //NAIF TAG //TODO
+    msg.setResponseTag(tag.toString)
 
-    var msgJSON = msgArt2remote.toJSON
+    var msgJSON = msg.toJSON
     nettyClient ! msgJSON
     if(msg.isInstanceOf[MethodCallMessage]){
       //WAIT FOR REPLY
@@ -89,7 +87,7 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
 
             exit()
           }
-        case _ @ msg => sendInternal(msg)
+        case msg : Art2Message => sendInternal(msg)
       }
     }
   }
