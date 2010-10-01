@@ -32,7 +32,7 @@ object Art2PlatformHelper {
       }
 
       newNodeNetwork.setTarget(targetNode.getOrElse{
-          logger.warn("Unknow node add to model")
+          logger.warn("Unknow node "+targetNodeName+" add to model")
           var newnode =Art2Factory.eINSTANCE.createContainerNode
           newnode.setName(targetNodeName)
           actualModel.getNodes.add(newnode)
