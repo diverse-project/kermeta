@@ -18,6 +18,11 @@
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
 
 </project>
