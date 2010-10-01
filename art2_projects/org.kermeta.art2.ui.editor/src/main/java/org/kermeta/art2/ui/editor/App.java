@@ -23,7 +23,8 @@ public class App {
         Art2Editor artpanel = new Art2Editor();
         jframe.add(artpanel.getPanel(),BorderLayout.CENTER);
 
-        artpanel.loadModel("/Users/ffouquet/Desktop/AS.art2");
+
+        //artpanel.loadModel("/Users/ffouquet/Desktop/AS.art2");
 
 
         jframe.pack();
