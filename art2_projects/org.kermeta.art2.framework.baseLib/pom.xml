@@ -25,4 +25,23 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Override BnD plugin config -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                        <Export-Package>org.kermeta.art2.framework.baselib.channeltype.*</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>
