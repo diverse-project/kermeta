@@ -28,12 +28,13 @@
         <module>org.kermeta.art2.root</module>
         <module>org.kermeta.art2.artcomponent.root</module>
         <module>org.kermeta.art2.model</module>
-        <!-- <module>org.kermeta.art2.model.edit</module>
-        <module>org.kermeta.art2.model.editor</module> -->
-        <!-- <module>org.kermeta.art2.editor.eclipse</module> -->
+        <module>org.kermeta.art2.model.edit</module>
+        <module>org.kermeta.art2.model.editor</module>
+        <module>org.kermeta.art2.editor.eclipse</module>
         <!-- <module>org.kermeta.art2.editor.nb</module> -->
         <module>org.kermeta.art2.adaptation.model</module>
-        
+        <module>org.kermeta.art2.ui.framework</module>
+        <module>org.kermeta.art2.ui.editor</module>
         <module>org.kermeta.art2.annotation</module>
         
         <module>org.kermeta.art2.api</module>
