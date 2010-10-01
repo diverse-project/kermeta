@@ -11,13 +11,11 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait UpdateNodeKompare {
-  
-  var logger = LoggerFactory.getLogger(this.getClass);
+trait UpdateNodeKompare extends AbstractKompare {
   
   def getUpdateNodeAdaptationModel(actualNode : ContainerNode,updateNode : ContainerNode) : AdaptationModel = {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
-    logger.info("INIT NODE "+actualNode.getName)
+    logger.info("UPDATE NODE "+actualNode.getName)
 
     
     var actualRoot = actualNode.eContainer.asInstanceOf[ContainerRoot]

@@ -7,14 +7,15 @@ package org.kermeta.art2.kompare.sub
 
 import org.kermeta.art2._
 import org.kermeta.art2adaptation._
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait StopNodeKompare {
+trait StopNodeKompare extends AbstractKompare {
 
   def getStopNodeAdaptationModel(node:ContainerNode):AdaptationModel={
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
-    println("STOP NODE "+node.getName)
+    logger.info("STOP NODE "+node.getName)
 
     var root = node.eContainer.asInstanceOf[ContainerRoot]
 

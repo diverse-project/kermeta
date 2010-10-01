@@ -7,13 +7,15 @@ package org.kermeta.art2.kompare.sub
 
 import org.kermeta.art2._
 import org.kermeta.art2adaptation._
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait InitNodeKompare {
+trait InitNodeKompare extends AbstractKompare {
+
   def getInitNodeAdaptationModel(node:ContainerNode):AdaptationModel= {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
-    println("INIT NODE v2 "+node.getName)
+    logger.info("INIT NODE "+node.getName)
     //UPDATE ALL COMPONENT TYPE
 
     var root = node.eContainer.asInstanceOf[ContainerRoot]

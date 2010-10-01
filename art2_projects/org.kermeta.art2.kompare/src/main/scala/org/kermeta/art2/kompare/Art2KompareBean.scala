@@ -6,14 +6,16 @@
 package org.kermeta.art2.kompare
 
 import org.kermeta.art2._
+import org.kermeta.art2.kompare.sub.AbstractKompare
 import org.kermeta.art2.kompare.sub.InitNodeKompare
 import org.kermeta.art2.kompare.sub.StopNodeKompare
 import org.kermeta.art2.kompare.sub.UpdateNodeKompare
 import org.kermeta.art2adaptation._
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKompareService with InitNodeKompare with StopNodeKompare with UpdateNodeKompare {
+class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKompareService with InitNodeKompare with StopNodeKompare with UpdateNodeKompare with AbstractKompare  {
 
   def kompare(actualModel : ContainerRoot,targetModel:ContainerRoot,nodeName : String) : AdaptationModel = {
 
