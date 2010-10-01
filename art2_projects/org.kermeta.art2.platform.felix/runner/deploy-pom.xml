@@ -205,6 +205,7 @@
   <properties>
     <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
     <slf4j.version>1.6.1</slf4j.version>
+    <slf4j.version.range>[1.5,2)</slf4j.version.range>
     <art2.version>2.1.1-SNAPSHOT</art2.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <bundle.vendor>IRISA/INRIA</bundle.vendor>
