@@ -10,6 +10,8 @@ import org.kermeta.art2.framework.AbstractChannelFragment;
 import org.kermeta.art2.framework.Art2ChannelFragment;
 import org.kermeta.art2.framework.Art2Port;
 import org.kermeta.art2.framework.message.Art2Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -18,9 +20,15 @@ import org.kermeta.art2.framework.message.Art2Message;
 @ChannelTypeFragment(libName="Art2BaseChannelType")
 public class DefaultMessageChannelType extends AbstractChannelFragment {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public Object dispatch(Art2Message msg) {
-        
+
+        if(getBindedPorts().isEmpty() && getOtherFragments().isEmpty()){
+            logger.warn("No consumer, msg lost="+msg.getContent());
+        }
+
         for(Art2Port p : getBindedPorts()){
             forward(p, msg);
         }

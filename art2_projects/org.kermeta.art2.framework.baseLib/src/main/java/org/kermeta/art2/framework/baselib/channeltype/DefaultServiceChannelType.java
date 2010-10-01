@@ -19,8 +19,6 @@ public class DefaultServiceChannelType extends AbstractChannelFragment {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-
     @Override
     public Object dispatch(Art2Message msg) {
 
