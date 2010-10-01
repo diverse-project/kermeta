@@ -13,7 +13,7 @@
     </parent>
 
     <properties>
-        <art2.node.name>duke.irisa.fr</art2.node.name>
+        <art2.node.name>duke</art2.node.name>
         <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
     </properties>
 
