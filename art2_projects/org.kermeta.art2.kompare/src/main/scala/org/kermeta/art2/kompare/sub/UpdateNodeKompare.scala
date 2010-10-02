@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait UpdateNodeKompare extends AbstractKompare {
+trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
   
   def getUpdateNodeAdaptationModel(actualNode : ContainerNode,updateNode : ContainerNode) : AdaptationModel = {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
@@ -102,47 +102,38 @@ trait UpdateNodeKompare extends AbstractKompare {
     }
 
 
+    
+
+
 
     //FRAGMENT BINDING STEP
     //ONLY CHECK FOR HUB NO UNINSTALL
     updateRoot.getHubs.foreach{newhub=>
-
-      var previousHub = actualRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
-        case None => // NOTHING TO DO HUB WILL BE UNINSTALL, NO UNBIND IS NECESSARY
-        case Some(previousHub)=>{
-            newhub.getOtherFragment(updateNode.getName).foreach{newhubBindingNodeName=>
-              previousHub.getOtherFragment(actualNode.getName).find(b=> b ==newhubBindingNodeName) match {
-                case None => {
-                    //NEW BINDING TODO
-                    var addccmd = Art2adaptationFactory.eINSTANCE.createAddFragmentBinding
-                    addccmd.setRef(newhub)
-                    addccmd.setTargetNodeName(newhubBindingNodeName)
-                    adaptationModel.getAdaptations.add(addccmd)
-                  }
-                case Some(bname)=> //OK ALREADY BINDED
-              }
-            }
-            previousHub.getOtherFragment(actualNode.getName).foreach{previousHubBindingNodeName=>
-              newhub.getOtherFragment(updateNode.getName).find(b=> b ==previousHubBindingNodeName) match {
-                case None => {
-                    //REMOVE BINDING TODO
-                    var addccmd = Art2adaptationFactory.eINSTANCE.createRemoveFragmentBinding
-                    addccmd.setRef(newhub)
-                    addccmd.setTargetNodeName(previousHubBindingNodeName)
-                    adaptationModel.getAdaptations.add(addccmd)
-                  }
-                case Some(bname)=> //OK ALREADY BINDED
-              }
+      actualRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
+        case None => {
+            //NEW HUB INIT BINDING
+            newhub.getOtherFragment(updateNode.getName).foreach{remoteName =>
+              var addccmd = Art2adaptationFactory.eINSTANCE.createAddFragmentBinding
+              addccmd.setRef(newhub)
+              addccmd.setTargetNodeName(remoteName)
+              adaptationModel.getAdaptations.add(addccmd)
             }
           }
+
+        case Some(previousHub)=>{
+            adaptationModel.getAdaptations.addAll(getUpdateChannelAdaptationModel(previousHub,newhub,updateNode.getName).getAdaptations)
+          }
       }
-
     }
-
-
-
-
-
+    actualRoot.getHubs.foreach{newhub=>
+      updateRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
+        case None => // NOTHING TO DO HUB WILL BE UNINSTALL, NO UNBIND IS NECESSARY
+        case Some(previousHub)=> {
+            //CHECK AND UPDATE MBINDING
+            adaptationModel.getAdaptations.addAll(getUpdateChannelAdaptationModel(previousHub,newhub,updateNode.getName).getAdaptations)
+          }
+      }
+    }
 
 
     adaptationModel
