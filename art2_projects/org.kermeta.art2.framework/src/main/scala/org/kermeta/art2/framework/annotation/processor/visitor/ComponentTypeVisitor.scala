@@ -46,7 +46,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
           newdeploy.setVersion(version)
           root.getDeployUnits.add(newdeploy)
           newdeploy
-      }
+        }
       case Some(fdu)=> fdu
     }
     componentType.setDeployUnit(ctdeployunit)
@@ -66,16 +66,22 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     /* CHECK THIRDPARTIES */
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]).value.foreach{tp=>
-        var newThirdParty = Art2Factory.eINSTANCE.createDeployUnit
-        newThirdParty.setName(tp.name)
-        newThirdParty.setUrl(tp.url)
+
         root.getDeployUnits.find({etp => etp.getName == tp.name}) match {
-          case Some(e) =>
+          case Some(e) => {
+              componentType.getRequiredLibs.add(e)
+            }
           case None => {
+              var newThirdParty = Art2Factory.eINSTANCE.createDeployUnit
+              newThirdParty.setName(tp.name)
+              newThirdParty.setUrl(tp.url)
               root.getDeployUnits.add(newThirdParty)
               componentType.getRequiredLibs.add(newThirdParty)
             }
         }
+
+
+
 
       }
     }
