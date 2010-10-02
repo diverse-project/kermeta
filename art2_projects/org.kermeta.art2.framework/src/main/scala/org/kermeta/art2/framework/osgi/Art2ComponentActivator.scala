@@ -30,6 +30,10 @@ abstract class Art2ComponentActivator extends BundleActivator {
     componentName = bc.getBundle.getHeaders.find(dic => dic._1 == Constants.ART2_INSTANCE_NAME_HEADER).get._2.toString
     /* Create component actor */
     componentActor = callFactory()
+
+    /* PUT INITIAL PROPERTIES */
+    componentActor.getArt2ComponentType.getDictionary.put(Constants.ART2_PROPERTY_OSGI_BUNDLE, bc.getBundle)
+
     /* Start actor */
     componentActor.start
     /* Expose component in OSGI */
