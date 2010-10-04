@@ -73,9 +73,9 @@ public class AppTest
         //adapModel.getAdaptations().removeAll(toRemove);
 
         System.out.println("Adaptation Model Size =" + adapModel.getAdaptations().size());
-
+*/
 
         // adaptationService.deploy(adapModel);
-*/
+
     }
 }
