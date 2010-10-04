@@ -35,11 +35,15 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
           }
         }
       case f : Art2ChannelFragment =>
+        msg.setDestChannelName(f.getName)
+        msg.setDestNodeName(f.getNodeName)
+
         if(msg.inOut.booleanValue){
-          return (delegate !? msg.getContent).asInstanceOf[Object]
+          return (delegate !? msg).asInstanceOf[Object]
         } else {
-          (delegate ! msg.getContent);return null
+          (delegate ! msg);return null
         }
+      case _ => println("WTF !!!");return null
     }
   }
 
@@ -55,8 +59,15 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
     loop{
       react {
         case STOP => exit //TODO EMPTY WAITING LIST
-        case msg : Art2FragmentBindMessage=> fragementBinded.put(msg.getChannelName+"-"+msg.getFragmentNodeName, msg.getProxy);reply(true)
-        case msg : Art2FragmentUnbindMessage=> fragementBinded.remove(msg.getChannelName+"-"+msg.getFragmentNodeName);reply(true)
+        case msg : Art2FragmentBindMessage=> {
+            fragementBinded.put(msg.getChannelName+"-"+msg.getFragmentNodeName, msg.getProxy);
+            msg.getProxy.start;
+            reply(true)
+        }
+        case msg : Art2FragmentUnbindMessage=> {
+            fragementBinded.get(msg.getChannelName+"-"+msg.getFragmentNodeName).stop
+            fragementBinded.remove(msg.getChannelName+"-"+msg.getFragmentNodeName);reply(true)
+        }
         case msg : Art2PortBindMessage => portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)
         case msg : Art2PortUnbindMessage => portsBinded.remove(createPortKey(msg));reply(true)
           //USE CASE A MSG REC BY OTHER FRAGMENT
