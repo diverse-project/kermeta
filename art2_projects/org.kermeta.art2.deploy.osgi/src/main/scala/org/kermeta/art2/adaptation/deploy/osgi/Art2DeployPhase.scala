@@ -29,7 +29,7 @@ class Art2DeployPhase {
     logger.info(desc+"="+cmds.size)
     var intermediate = cmds.forall(c=> {
         try{ c.execute } catch {
-          case _ @ e => logger.error("ART2 DEPLOY ERROR="+e);false
+          case _ @ e => logger.error("ART2 DEPLOY ERROR=",e);false
         }
       })
 

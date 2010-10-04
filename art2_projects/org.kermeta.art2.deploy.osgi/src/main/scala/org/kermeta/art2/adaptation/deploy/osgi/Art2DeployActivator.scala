@@ -24,6 +24,7 @@ class Art2DeployActivator extends BundleActivator {
     context = new Art2DeployManager
     context.setBundle(bc.getBundle)
     context.setBundleContext(bc)
+    context.setModelHandlerServiceTracker(modelHandlerServiceTracker)
 
     bean = new Art2AdaptationDeployServiceOSGi
     bean.setContext(context)
