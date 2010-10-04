@@ -17,6 +17,7 @@ import org.kermeta.art2.framework.message.Art2Message
 import org.kermeta.art2.framework.message.Art2ResponseMessage
 import org.slf4j.LoggerFactory
 import org.kermeta.art2.framework.JacksonSerializer._
+import scala.actors.Actor
 import scala.actors.TIMEOUT
 import scala.collection.JavaConversions._
 
@@ -24,6 +25,17 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
 
   def getNodeName = remoteNodeName
   def getName = remoteChannelName
+
+  override def start() : Actor = {
+    nettyClient.start
+    super.start
+  }
+
+  override def stop() = {
+    nettyClient.stop
+    super.stop
+  }
+
 
   var logger = LoggerFactory.getLogger(this.getClass)
   case class RESPONSE_RECEIVE(ctx :ChannelHandlerContext,e : MessageEvent)
@@ -87,7 +99,8 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
 
             exit()
           }
-        case msg : Art2Message => sendInternal(msg)
+        case msg : Art2Message => println("SEND INTERNAL");sendInternal(msg)
+        case _ => println("WTF !!")
       }
     }
   }
