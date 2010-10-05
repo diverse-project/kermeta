@@ -31,6 +31,9 @@ public class NodePanel extends RoundedTitledPanel implements SelectElement {
     public Boolean getSelected() {
         return selected;
     }
+
+    
+
 /*
     @Override
     public Dimension getPreferredSize() {

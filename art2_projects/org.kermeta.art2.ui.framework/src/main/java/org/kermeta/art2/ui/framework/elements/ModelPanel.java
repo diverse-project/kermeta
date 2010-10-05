@@ -22,6 +22,8 @@ import javax.swing.Scrollable;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.CompoundPainter;
 import org.jdesktop.swingx.painter.MattePainter;
+import org.kermeta.art2.ui.framework.listener.DragDropLayout;
+import org.kermeta.art2.ui.framework.listener.InstanceDragSourceListener;
 
 /**
  *
@@ -34,8 +36,17 @@ public class ModelPanel extends JLayeredPane {
     private JPanel dragPanel;
     private JXPanel nodePanel;
 
+    public void update() {
+        bindingPanel.repaint();
+        bindingPanel.revalidate();
+        nodePanel.repaint();
+        nodePanel.revalidate();
+
+    }
+
     public ModelPanel() {
         nodePanel = new JXPanel();
+        nodePanel.setLayout(new DragDropLayout());
         dragPanel = new JPanel();
         dragPanel.setOpaque(false);
         bindingPanel = new BindingPanel();
@@ -70,12 +81,16 @@ public class ModelPanel extends JLayeredPane {
 
     public void addNode(JPanel p) {
         nodePanel.add(p);
+        p.setBounds(50, 50, (int) p.getLayout().preferredLayoutSize(p).getWidth(), (int) p.getLayout().preferredLayoutSize(p).getHeight());
+        InstanceDragSourceListener listener = new InstanceDragSourceListener(p);
         repaint();
         revalidate();
     }
 
     public void addHub(JPanel p) {
         nodePanel.add(p);
+        p.setBounds(50, 50, (int) p.getPreferredSize().getWidth(), (int) p.getPreferredSize().getHeight());
+        InstanceDragSourceListener listener = new InstanceDragSourceListener(p);
         repaint();
         revalidate();
     }
@@ -103,13 +118,14 @@ public class ModelPanel extends JLayeredPane {
         Dimension parentsize = this.getParent().getSize();
         Dimension preferedDim = new Dimension(0, 0);
         for (Component child : nodePanel.getComponents()) {
-            preferedDim.width = Math.max(child.getMinimumSize().width, preferedDim.width);
+           // preferedDim.width = Math.max(child.getMinimumSize().width, preferedDim.width);
             preferedDim.height = Math.max(child.getLocation().y + child.getSize().height, preferedDim.height);
+            preferedDim.width = Math.max(child.getLocation().x + child.getSize().width, preferedDim.width);
         }
         return preferedDim;
     }
 
-    public void clear(){
+    public void clear() {
         bindingPanel.clear();
         nodePanel.removeAll();
     }
