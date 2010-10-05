@@ -13,6 +13,7 @@ import org.kermeta.art2.framework.bus.netty.remote.TcpServerRemoteActor
 import org.kermeta.art2.framework.bus.netty.remote.UdpClientRemoteActor
 import org.kermeta.art2.framework.message.Art2Message
 import org.kermeta.art2.framework._
+import org.osgi.framework.BundleContext
 import scala.actors.Actor
 
 
@@ -72,24 +73,46 @@ object Tester {
 
 //    synch.synch(org.kermeta.art2.Art2Factory.eINSTANCE.createContainerRoot)
 
-  //  var actorPoc = new Art2DispatcherActor(8080,null)
-  //  actorPoc.start
+    //  var actorPoc = new Art2DispatcherActor(8080,null)
+    //  actorPoc.start
+
+
+    var dispatch = new Art2DispatcherActor(8082,null)
+
+    dispatch.start
+
+    var client = new TcpClientRemoteActor(null,10000){
+      def getRemoteAddr : InetSocketAddress = {
+        new InetSocketAddress("127.0.0.1",8082)
+      }
+
+
+
+    }
+    client.start
+
+    client ! "yepee"
 
     new Thread(){
       override def run = { Thread.sleep(3000);
+
+
+                          client.stop
+                          dispatch.stop
+
+      }
                           //clientactor2.stop;
 
                           //  clientactor.stop;println("Client stopped")
                           //   actorS.stop;println("Server stopped")
                           //   actorSD.stop;println("Server delegate stopped")
                           //  actorS2.stop;
-                    //      actorPoc.stop
-      }
+                          //      actorPoc.stop
     }.start
 
 
 
-   // var client = new UdpClientRemoteActor(null,8082)
+    // var client = new UdpClientRemoteActor(null,8082)
     //client.start
 
     //Thread.sleep(2000)

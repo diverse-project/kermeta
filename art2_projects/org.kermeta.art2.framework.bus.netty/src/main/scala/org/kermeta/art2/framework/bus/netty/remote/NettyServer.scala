@@ -43,7 +43,7 @@ trait NettyServer extends SimpleChannelUpstreamHandler with Art2Actor {
   def getPort : Int
   def getIP : String = "0.0.0.0"
 
-  def startServer() = synchronized {
+  def startServer = {
     /* DO NETTY INIT CODE */
     bossPool  = Some(Executors.newCachedThreadPool())
     ioPool = Some(Executors.newCachedThreadPool())
@@ -54,6 +54,7 @@ trait NettyServer extends SimpleChannelUpstreamHandler with Art2Actor {
     //LISTENER FOR ALL INTERFACE
     cgroup.add(newbootstrap.bind(new InetSocketAddress(getIP,getPort)))
     bootstrap = Some(newbootstrap)
+    logger.info("Netty Server Started")
   }
 
   /* Default Pipeline */
@@ -103,12 +104,14 @@ trait NettyServer extends SimpleChannelUpstreamHandler with Art2Actor {
 
   case class ART_MESSAGE(ctx :ChannelHandlerContext,e : MessageEvent)
   override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
+    logger.info("Hello")
     this ! ART_MESSAGE(ctx,e)
   }
 
+  /*
   override def channelOpen(ctx:ChannelHandlerContext,e : ChannelStateEvent) = {
     cgroup.add(e.getChannel)
-  }
+  }*/
 
 
 }

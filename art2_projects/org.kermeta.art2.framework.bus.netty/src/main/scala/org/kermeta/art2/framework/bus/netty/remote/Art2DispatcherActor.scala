@@ -5,6 +5,8 @@
 
 package org.kermeta.art2.framework.bus.netty.remote
 
+import org.jboss.netty.channel.ChannelHandlerContext
+import org.jboss.netty.channel.MessageEvent
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
 import org.kermeta.art2.framework.Art2Actor
 import org.kermeta.art2.framework.Art2ChannelFragment
@@ -12,6 +14,7 @@ import org.kermeta.art2.framework.Art2Port
 import org.kermeta.art2.framework.message.Art2ResponseMessage
 import org.osgi.framework.BundleContext
 import org.osgi.util.tracker.ServiceTracker
+import org.slf4j.LoggerFactory
 import scala.actors.Actor
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.Constants
@@ -19,9 +22,16 @@ import org.kermeta.art2.framework.JacksonSerializer._
 import org.kermeta.art2.framework.message.Art2Message
 
 
-class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUpstreamHandler with NettyServer with Art2Actor {
+class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUpstreamHandler with Art2Actor {
 
-  var serviceTracker = new ServiceTracker(bc,classOf[Art2Port].getName(), null)
+  var serviceTracker : ServiceTracker = null// = new ServiceTracker(bc,classOf[Art2Port].getName(), null)
+  var nettyServer = new TcpServerRemoteActor(port,this){
+    override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
+      logger.info("Hello")
+      this ! ART_NETTY_MESSAGE(ctx,e)
+    }
+  }
+  var logger = LoggerFactory.getLogger(this.getClass)
 
   def getPort = port
   
@@ -29,7 +39,7 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
     loop {
       react {
         case STOP => /* TODO process unfinish message */ exit()
-        case ART_MESSAGE(_@ctx,_@e) => {
+        case ART_NETTY_MESSAGE(_@ctx,_@e) => {
             try {
               /* unserialize */
               var art2message = e.getMessage.toString.fromJSON(classOf[Art2Message])
@@ -63,16 +73,16 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
   }
 
   override def start() : Actor={
-    serviceTracker.open
-    super.start
-    startServer
-    this
+    //serviceTracker.open
+    var actor = super.start
+    nettyServer.start
+    actor
   }
 
   override def stop()={
-    stopServer
+    nettyServer.stop
     this ! STOP
-    serviceTracker.close
+    //serviceTracker.close
   }
 
 }

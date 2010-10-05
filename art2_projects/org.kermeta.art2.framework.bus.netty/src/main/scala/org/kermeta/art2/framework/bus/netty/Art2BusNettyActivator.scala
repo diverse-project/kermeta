@@ -35,7 +35,7 @@ class Art2BusNettyActivator extends BundleActivator {
         //discoveryActor.start
 
 
-        art2dispatcher = new Art2DispatcherActor(8080,bc)
+        art2dispatcher = new Art2DispatcherActor(8082,bc)
       //  art2dispatcher = new Art2Dispatcher(8080,bc)
         art2dispatcher.start
 
