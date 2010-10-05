@@ -41,18 +41,29 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
 
   //var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
   def execute() : Boolean= {
-    logger.info("CMD ADD CT EXECUTION");
+    logger.info("CMD ADD CT EXECUTION ");
     /* Actually deploy only bundle from library  */
     findLib(ct) match {
       case Some(l) => {
           try{
+            logger.info("Try to install from URI, "+buildQuery(l))
             lastExecutionBundle = Some(ctx.bundleContext.installBundle(buildQuery(l)));
             var symbolicName : String = lastExecutionBundle.get.getSymbolicName
             ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
             lastExecutionBundle.get.start
             true
           } catch {
-            case _ @ e =>logger.error("failed to perform CMD ADD CT EXECUTION on " +lastExecutionBundle.get.getSymbolicName,e); false
+            case _ @ e =>{
+                try{
+                  lastExecutionBundle match {
+                    case None => logger.error("failed to perform CMD ADD CT EXECUTION")
+                    case Some(bundle) => logger.error("failed to perform CMD ADD CT EXECUTION on " +bundle.getSymbolicName,e);
+                  }
+                } catch {
+                  case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
+                }
+                false
+            }
           }
         }
       case None => false
