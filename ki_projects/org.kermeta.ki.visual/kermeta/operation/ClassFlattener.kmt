@@ -12,7 +12,8 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 using kermeta::language::structure
 using kermeta::standard
 
-
+//FIXME with UML.ecore, prune with radius=1 Class Class. Relation <code>redefinedOperation</code> of Classifier not visible because of the radius.
+// But if you flat Class Class, redefinedOperation is then added to Class. Undo the flattening and this relation will appear in Class Classifier 
 
 class ClassFlattener
 {
@@ -26,11 +27,11 @@ class ClassFlattener
 	
 	attribute removedInheritances : InheritanceBackup[0..*]
 	
-	attribute removedProperties : PropertyBackup[0..*]
-	
-	reference removedClasses : ClassDefinition[0..*]
+	reference removedClasses : ClassBackup[0..*]
 	
 	reference classToFlat : ClassDefinition
+	
+	reference changedProperties : PropertyChangedBackup[0..*]
 	
 	
 	operation flat(classToFlat : ClassDefinition) : Void is do
@@ -48,46 +49,54 @@ class ClassFlattener
 			superType := classToFlat.superType.one
 
 			if(superType.isInstanceOf(Class).andThen{b | metamodel.isClassDefined(superType.asType(Class).typeDefinition)}) then
-				cd 						:= superType.asType(Class).classDefinition
-				inheritance 			:= InheritanceBackup.new
-				inheritance.source 		:= classToFlat
-				inheritance.sourceType 	:= superType
-				inheritance.target 		:= cd
-				removedInheritances.add(inheritance)
+				cd := superType.asType(Class).classDefinition
 				
-				classToFlat.superType.remove(superType)
-				extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, classToFlat, cd)
-				flatClass(cd, classToFlat)
+				if(not cd.isPruned) then
+					inheritance 			:= InheritanceBackup.new
+					inheritance.source 		:= classToFlat
+					inheritance.sourceType 	:= superType
+					inheritance.target 		:= cd
+					removedInheritances.add(inheritance)
+					
+					classToFlat.superType.remove(superType)
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, classToFlat, cd)
+					flatClass(cd, classToFlat)
+				end
 			else
 				classToFlat.superType.remove(superType)
 			end
 		end
 		
-		// Removing attributes which type is a removed class.
-		metamodel.packages.each{p |
-			p.ownedTypeDefinition.each{td |
-				if(classToFlat!=td and td.isInstanceOf(ClassDefinition)) then
-					cd := td.asType(ClassDefinition)
+		// Each property which source class is ClassToFlat and which target class is no more visible must be
+		// modified: the target type of the property must be ClassToFlat.
+		classToFlat.ownedAttribute.each{attr |
+			if(attr.type.isInstanceOf(ParameterizedType)) then
+				cd2 := attr.type.asType(ParameterizedType).typeDefinition.asType(ClassDefinition)
+				
+				if((cd2.isPruned).andThen{b | removedClasses.exists{clazz | clazz==cd2}}) then
+					var backup : PropertyChangedBackup init PropertyChangedBackup.new
+					var oppositeName : String init ""
+					var oppositeCompo : Boolean init false
+					var oppositeCardString : String init ""
 					
-					cd.ownedAttribute.each{attr |
-						if(attr.type.isInstanceOf(ParameterizedType)) then
-							cd2 := attr.type.asType(ParameterizedType).typeDefinition.asType(ClassDefinition)
-							
-							removedClasses.each{cl |
-								if((cl==cd2).andThen{b | attr.opposite.isVoid.orElse{b | removedClasses.exists{clazz | clazz==attr.opposite.owningClass}}}) then
-									prop := PropertyBackup.new
-									prop.prop := attr
-									prop.owningClass := cd
-									removedProperties.add(prop)
-																		
-									cd.ownedAttribute.remove(attr)
-									extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, attr)
-								end
-							}
-						end 
-					}
+					backup.prop := attr
+					backup.type := attr.type
+					changedProperties.add(backup)
+					
+					if(not attr.opposite.isVoid) then 
+						oppositeName  := attr.opposite.name 
+						oppositeCompo := attr.opposite.isComposite
+						oppositeCardString := attr.opposite.getCardinalityString
+					end
+					
+					extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, attr)
+					var clazz : Class init Class.new
+					clazz.typeDefinition := classToFlat
+					attr.type := clazz
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(metamodel, attr, attr.isComposite, classToFlat, classToFlat, 
+											attr.name, attr.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
-			}
+			end	
 		}
 	end
 	
@@ -123,27 +132,34 @@ class ClassFlattener
 			// Changing inheritance: sub-types of this class inherit now of the flattened class.
 			var subTypes : Set<ClassDefinition> init currentClass.getSubTypes
 			var inheritance : InheritanceBackup
+			var cd : ClassDefinition
 			
 			subTypes.each{st |
-				inBackup := InheritanceBackup.new
-				inBackup.source := st
-				inBackup.target := currentClass
-				inBackup.sourceType := st.superType.detect{st2 | (st2.isInstanceOf(ParameterizedType)).andThen{b | st2.asType(ParameterizedType).typeDefinition==currentClass }}
-
-				removedInheritances.add(inBackup)
-				if(not inBackup.sourceType.isVoid) then
-					st.superType.remove(inBackup.sourceType)
-				end
-				
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onInheritanceRemoved(metamodel, st, currentClass)
-				
-				// A link must not be created if the class st is the class to flat or the previous class in the hierarchy.
-				if(st!=classToFlat and st!=upperClass) then
+				if(not st.isPruned) then
 					inBackup := InheritanceBackup.new
 					inBackup.source := st
-					inBackup.target := classToFlat
-					addedInheritances.add(inBackup)
-					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(metamodel, st, classToFlat, -1)
+					inBackup.target := currentClass
+					inBackup.sourceType := st.superType.detect{st2 | (st2.isInstanceOf(ParameterizedType)).andThen{b | st2.asType(ParameterizedType).typeDefinition==currentClass }}
+	
+					removedInheritances.add(inBackup)
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, st, currentClass)
+					
+					if((not inBackup.sourceType.isVoid)) then
+						st.superType.remove(inBackup.sourceType)
+					end
+					
+					// A link must not be created if the class st is the class to flat or the previous class in the hierarchy.
+					if((st!=classToFlat and st!=upperClass and not st.isPruned).andThen{b | 
+							not st.superType.exists{st2 | st2.isInstanceOf(ParameterizedType).andThen{b2 | st2.asType(ParameterizedType).typeDefinition==classToFlat}}}) then
+						inBackup := InheritanceBackup.new
+						inBackup.source := st
+						inBackup.target := classToFlat
+						addedInheritances.add(inBackup)
+						var clazz : Class init Class.new
+						clazz.typeDefinition := classToFlat
+						st.superType.add(clazz)
+						extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(metamodel, st, classToFlat, -1)
+					end
 				end
 				
 				// Removing the class from its sub-type
@@ -165,19 +181,51 @@ class ClassFlattener
 			
 			// Contining on the super types of the current class.
 			currentClass.superType.each{st |
-				if(st.isInstanceOf(Class).andThen{b | metamodel.isClassDefined(st.asType(Class).typeDefinition)}) then
-					flatClass(st.asType(Class).classDefinition, currentClass)
+				if(st.isInstanceOf(Class)) then
+					var clazz : Class init st.asType(Class)
+					cd := st.asType(Class).classDefinition
+					
+					if(not cd.isPruned) then
+						inheritance 			:= InheritanceBackup.new
+						inheritance.source 		:= currentClass
+						inheritance.sourceType 	:= st
+						inheritance.target 		:= cd
+						removedInheritances.add(inheritance)
+						currentClass.superType.remove(st)
+						extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceRemoved(metamodel, currentClass, cd)
+						
+						if((clazz.typeDefinition!=classToFlat).andThen{b |
+							metamodel.isClassDefined(st.asType(Class).typeDefinition)}) then
+							flatClass(st.asType(Class).classDefinition, currentClass)
+						end
+					end
 				end
 			}
 			
 			// Removing the class.
-			removedClasses.add(currentClass)
-			//FIXME should remove the supertype from the metamodel and set to not visible?
-			extern org::kermeta::ki::kompren::view::DiagramViewExtern.onEntityRemoved(metamodel, currentClass)
+			var classBackup : ClassBackup init ClassBackup.new
+			classBackup.clazz   := currentClass
+			classBackup.visible := currentClass.isVisible
+			classBackup.pruned  := currentClass.isPruned
+			removedClasses.add(classBackup)
+			extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(true, currentClass)
 		end
 	end
 }
 
+
+class ClassBackup {
+	reference clazz : ClassDefinition
+	reference visible : Boolean
+	reference pruned : Boolean
+}
+
+
+
+class PropertyChangedBackup {
+	reference prop : Property
+	reference type : Type
+}
 
 
 

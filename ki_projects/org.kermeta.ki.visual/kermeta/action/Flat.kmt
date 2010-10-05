@@ -51,41 +51,50 @@ class Flat inherits Action, Undoable {
 	
 	
 	method undo() : Void is do
+		// Restoring classes visibility.
 		flatteningOperation.removedClasses.each{clazz |
-			var obj : Object init clazz.container()
-			
-			if(obj.isInstanceOf(Package)) then
-				obj.asType(Package).ownedTypeDefinition.add(clazz)
-				extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onEntityAdded(metamodel, clazz, clazz.isAspect, -1, clazz.name)
+			if(not clazz.pruned) then
+				clazz.clazz.unprune
+			else
+				if(clazz.visible) then
+					clazz.clazz.prune(PrunerViewPolicy.gray)
+				else
+					clazz.clazz.prune(PrunerViewPolicy.hide)
+				end
 			end
-		}
-	
-		flatteningOperation.removedProperties.each{prop |
-			prop.owningClass.ownedAttribute.add(prop.prop)
-			prop.prop.owningClass := prop.owningClass
-			var oppositeName : String init ""
-			var oppositeCompo : Boolean init false
-			var oppositeCardString : String init ""
-			
-			if(not prop.prop.opposite.isVoid) then 
-				oppositeName  := prop.prop.opposite.name 
-				oppositeCompo := prop.prop.opposite.isComposite
-				oppositeCardString := prop.prop.opposite.getCardinalityString
-			end
-			
-			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(metamodel, prop.prop, prop.prop.isComposite, 
-									prop.prop.owningClass, prop.owningClass, prop.prop.name, prop.prop.getCardinalityString, 
-									oppositeName, oppositeCardString, -1, oppositeCompo)
 		}
 		
+		// Restoring modified properties
+		flatteningOperation.changedProperties.each{propBackup | true
+				var oppositeName : String init ""
+				var oppositeCompo : Boolean init false
+				var oppositeCardString : String init ""
+				
+				if(not propBackup.prop.opposite.isVoid) then 
+					oppositeName  := propBackup.prop.opposite.name 
+					oppositeCompo := propBackup.prop.opposite.isComposite
+					oppositeCardString := propBackup.prop.opposite.getCardinalityString
+				end
+				
+				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, propBackup.prop)
+				var clazz : Class init Class.new
+				clazz.typeDefinition := propBackup.type.asType(Class).typeDefinition
+				propBackup.prop.type := clazz
+				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(metamodel, propBackup.prop, propBackup.prop.isComposite, classToFlat, 
+						clazz.typeDefinition, propBackup.prop.name, propBackup.prop.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
+		}
+
+		// Restoring moved operations	
 		flatteningOperation.addedOperations.each{op |
 			classToFlat.moveOperationTo(op.op, op.owningClass)
 		}
 	
-		flatteningOperation.addedProperties.each{prop |
+		// Restoring moved properties
+		flatteningOperation.addedProperties.each{prop | true
 			classToFlat.movePropertyTo(prop.prop, prop.owningClass, metamodel)
 		}
 		
+		// Restoring removed inheritances
 		flatteningOperation.removedInheritances.each{in |
 			if(in.sourceType.isVoid) then
 				var clazz : Class init Class.new
@@ -97,6 +106,7 @@ class Flat inherits Action, Undoable {
 			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(metamodel, in.source, in.target, -1)
 		}
 		
+		// Removing added inheritances
 		flatteningOperation.addedInheritances.each{in |
 			in.source.superType.each{st |
 				if(st.isInstanceOf(ParameterizedType)) then
