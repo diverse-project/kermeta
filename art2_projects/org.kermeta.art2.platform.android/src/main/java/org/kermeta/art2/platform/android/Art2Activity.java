@@ -10,8 +10,6 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import org.kermeta.art2.platform.android.AndroidFelixService.AndroidFelixServiceBinder;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -48,30 +46,25 @@ public class Art2Activity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.main);
 
+        
         final Context app_ctx = this.getApplicationContext();
+
+        final Context ctx = this;
 
         Button btstart = (Button) findViewById(R.id.StartFelix);
         btstart.setOnClickListener(new Button.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent_start = new Intent(".AndroidFelixService.ACTION");
+                Intent intent_start = new Intent(ctx,AndroidFelixService.class);
                 Log.i("art2.service", "start bind service");
                 startService(intent_start);
+                /*
                 bindService(intent_start, new ServiceConnection() {
-
                     @Override
                     public void onServiceConnected(ComponentName name, IBinder service) {
-
-
-                        //throw new UnsupportedOperationException("Not supported yet.");
-
                         AndroidFelixServiceBinder felixservicebinder = (AndroidFelixServiceBinder) service;
                         BundleContext ctx = felixservicebinder.getService().getFrameworkBundleContext();
-
-                        
-                        Toast.makeText(app_ctx, "size=" + ctx.getBundles().length, 3000).show();
-
-
+                        //Toast.makeText(app_ctx, "size=" + ctx.getBundles().length, 3000).show();
                     }
 
                     @Override
@@ -79,7 +72,7 @@ public class Art2Activity extends Activity {
                         //throw new UnsupportedOperationException("Not supported yet.");
                     }
                 }, BIND_AUTO_CREATE);
-
+*/
                 //startService(intent_start);
             }
         });
@@ -89,7 +82,7 @@ public class Art2Activity extends Activity {
 
             public void onClick(View v) {
                 Log.i("art2.platform", "try to stop the platform");
-                Intent intent_stop = new Intent(".AndroidFelixService.ACTION");
+                Intent intent_stop = new Intent(ctx,AndroidFelixService.class);
                 stopService(intent_stop);
             }
         });

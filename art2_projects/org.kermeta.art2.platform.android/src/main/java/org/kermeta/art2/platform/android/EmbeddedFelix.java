@@ -29,7 +29,9 @@ import org.osgi.framework.Constants;
  */
 public class EmbeddedFelix {
 
-    public static final String FELIX_CACHE_DIR = "org.kermeta.art2.platform.android/felixcache";
+    //public static final String FELIX_CACHE_DIR = "org.kermeta.art2.platform.android/felixcache";
+    public static final String FELIX_CACHE_DIR = "/mnt/sdcard/OSGI";
+
     private static final String ANDROID_FRAMEWORK_PACKAGES = ("org.osgi.framework; version=1.5.0,"
             + "org.osgi.service.packageadmin; version=1.2.0,"
             + "org.osgi.framework.launch; version=1.5.0,"
@@ -128,7 +130,6 @@ public class EmbeddedFelix {
     public void start() {
 
         File sdDir = Environment.getExternalStorageDirectory();
-
         File m_cache = new File(sdDir.getAbsolutePath() + "/" + FELIX_CACHE_DIR);
         if (!m_cache.exists()) {
             if (!m_cache.mkdirs()) {
@@ -189,10 +190,10 @@ public class EmbeddedFelix {
         //startRawBundle(context, "file://scala_collection.jar", R.raw.scala_collection, false);
         //startRawBundle(context, "file://scala_library.jar", R.raw.scala_library, true);
 
-
+/*
         startUrlBundle(context, "file:/data/bundles/scala_collection.jar", false);
         startUrlBundle(context, "file:/data/bundles/scala_library.jar", true);
-
+*/
 
 
 
@@ -211,7 +212,7 @@ public class EmbeddedFelix {
         // startMavenBundle(context, "http://duke.irisa.fr/maven2/", "org.kermeta.art2.android", "art2.android.core.bus.activemq",true);
         // startMavenBundle(context, "http://duke.irisa.fr/maven2/", "org.kermeta.art2.android", "art2.android.notification", true);
 
-
+/*
         startUrlBundle(context, "http://10.0.2.2/maven2/org/kermeta/art2/android/mavenized/emf.lib-2.6.0/1.0.0/emf.lib-2.6.0-1.0.0.jar", true);
         startUrlBundle(context, "http://10.0.2.2/maven2/org/kermeta/art2/android/mavenized/art2.model-2.1.1-SNAPSHOT/1.0.0/art2.model-2.1.1-SNAPSHOT-1.0.0.jar", true);
         startUrlBundle(context, "http://10.0.2.2/maven2/org/kermeta/art2/android/mavenized/art2.api-2.1.1-SNAPSHOT/1.0.0/art2.api-2.1.1-SNAPSHOT-1.0.0.jar", true);
@@ -223,7 +224,7 @@ public class EmbeddedFelix {
 
         startUrlBundle(context, "http://10.0.2.2/maven2/org/kermeta/art2/android/mavenized/art2.framework.bus.netty-2.1.1-SNAPSHOT/1.0.0/art2.framework.bus.netty-2.1.1-SNAPSHOT-1.0.0.jar", true);
         startUrlBundle(context, "http://10.0.2.2/maven2/org/kermeta/art2/android/mavenized/art2.framework.bus.jmdns-2.1.1-SNAPSHOT/1.0.0/art2.framework.bus.jmdns-2.1.1-SNAPSHOT-1.0.0.jar", true);
-
+*/
         // startMavenBundle(context, "http://duke.irisa.fr/maven2", "org.kermeta.art2", "art2.android.sharedlib");
 
         System.out.println(context.getBundles().length);

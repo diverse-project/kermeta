@@ -6,18 +6,33 @@ package org.kermeta.art2.platform.android;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Binder;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.MulticastLock;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Hashtable;
+import org.apache.felix.framework.Logger;
+import org.apache.felix.framework.cache.BundleCache;
+import org.apache.felix.framework.util.FelixConstants;
+import org.apache.felix.main.AutoProcessor;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
+import org.osgi.framework.launch.Framework;
+import org.osgi.framework.launch.FrameworkFactory;
 
 /**
  *
@@ -25,89 +40,340 @@ import org.osgi.framework.BundleContext;
  */
 public class AndroidFelixService extends Service implements Art2AndroidPlatform {
 
-    public class AndroidFelixServiceBinder extends Binder {
-
-        AndroidFelixService getService() {
-            return AndroidFelixService.this;
-        }
-    }
-    private EmbeddedFelix felix = null;
-    private final IBinder mBinder = new AndroidFelixServiceBinder();
-    private NotificationManager mNM;
+    protected MulticastLock multicastLock;
+    protected Framework felixFramework;
+    public static final String FELIX_BASE = "OSGI";
+    public static final String FELIX_CACHE_DIR = "OSGI/cache";
+    private static final int ART2SERVICE_NOTIFICATION_ID = 1;
+    private static final String ANDROID_FRAMEWORK_PACKAGES = ("org.osgi.framework; version=1.5.0,"
+            + "org.osgi.service.packageadmin; version=1.2.0,"
+            + "org.osgi.framework.launch; version=1.5.0,"
+            + "org.osgi.service.startlevel; version=1.0.0,"
+            + "org.osgi.service.url; version=1.0.0,"
+            + "org.osgi.util.tracker,"
+            + "android; "
+            + "android.app;"
+            + "android.content;"
+            + "android.database;"
+            + "android.database.sqlite;"
+            + "android.graphics; "
+            + "android.graphics.drawable; "
+            + "android.graphics.glutils; "
+            + "android.hardware; "
+            + "android.location; "
+            + "android.media; "
+            + "android.net; "
+            + "android.opengl; "
+            + "android.os; "
+            + "android.provider; "
+            + "android.sax; "
+            + "android.speech.recognition; "
+            + "android.telephony; "
+            + "android.telephony.gsm; "
+            + "android.text; "
+            + "android.text.method; "
+            + "android.text.style; "
+            + "android.text.util; "
+            + "android.speech; "
+            + "android.speech.tts; "
+            + "android.util; "
+            + "android.view; "
+            + "android.view.animation; "
+            + "android.webkit; "
+            + "android.widget; "
+            + "com.google.android.maps; "
+            + "com.google.android.xmppService; "
+            + "javax.crypto; "
+            + "javax.crypto.interfaces; "
+            + "javax.crypto.spec; "
+            + "javax.microedition.khronos.opengles; "
+            + "javax.net; "
+            + "javax.net.ssl; "
+            + "javax.security.auth; "
+            + "javax.security.auth.callback; "
+            + "javax.security.auth.login; "
+            + "javax.security.auth.x500; "
+            + "javax.security.cert; "
+            + "javax.sound.midi; "
+            + "javax.sound.midi.spi; "
+            + "javax.sound.sampled; "
+            + "javax.sound.sampled.spi; "
+            + "javax.sql; "
+            + "javax.xml; "
+            + "javax.xml.datatype; "
+            + "javax.xml.namespace; "
+            + "javax.xml.parsers; "
+            + "javax.xml.transform; "
+            + "javax.xml.transform.dom; "
+            + "javax.xml.transform.sax; "
+            + "javax.xml.transform.stream; "
+            + "javax.xml.validation; "
+            + "javax.xml.xpath; "
+            + "junit.extensions; "
+            + "junit.framework; "
+            + "org.apache.commons.logging; "
+            + "org.apache.commons.codec; "
+            + "org.apache.commons.codec.binary; "
+            + "org.apache.commons.codec.language; "
+            + "org.apache.commons.codec.net; "
+            + "org.apache.commons.httpclient; "
+            + "org.apache.commons.httpclient.auth; "
+            + "org.apache.commons.httpclient.cookie; "
+            + "org.apache.commons.httpclient.methods; "
+            + "org.apache.commons.httpclient.methods.multipart; "
+            + "org.apache.commons.httpclient.params; "
+            + "org.apache.commons.httpclient.protocol; "
+            + "org.apache.commons.httpclient.util; "
+            + "org.bluez; "
+            + "org.json; "
+            + "org.w3c.dom; "
+            + "org.xml.sax; "
+            + "org.xml.sax.ext; "
+            + "org.xml.sax.helpers; "
+            + "org.kermeta.art2.platform.android;").intern();
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mBinder;
+        return null;
     }
 
+    /**
+     * Launch the OSGi framework.
+     */
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        System.setProperty("java.net.preferIPv6Addresses", "false");
+        System.setProperty("java.net.preferIPv4Addresses", "true");
+        System.setProperty("java.net.preferIPv4Stack", "true");
 
-        /* Redirect Output stream */
-        PrintStream m_out = new PrintStream(new OutputStream() {
+        System.setProperty("art2.node.name", "dukeTab");
 
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-            @Override
-            public void write(int oneByte) throws IOException {
-                output.write(oneByte);
-                if (oneByte == '\n') {
-                    Log.v("art2.platform.service.out", new String(output.toByteArray()));
-                    output = new ByteArrayOutputStream();
-                }
-            }
-        });
-        System.setErr(m_out);
-        System.setOut(m_out);
-
-        felix = new EmbeddedFelix(getResources());
-        Log.d("art2.platform.service", "Art2 Platform Service created");
-
-
-        //Notification n = new Notification();
-
-        // mNM.notify(0, new Notification());
-
-
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.d("art2.platform.service", "Art2 Platform Service stopped");
-        bootstrapthread.stop();
-        felix.stop();
-        felix = null;
-        super.onDestroy();
-    }
-
-    private Thread bootstrapthread = null;
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        felix.start();
-        felix.getFrameworkBundleContext().registerService(Art2AndroidPlatform.class.getName(), this, new Hashtable());
-
-        bootstrapthread = new Thread() {
+        new Thread() {
 
             @Override
             public void run() {
-                felix.bootstrap(getFrameworkBundleContext());
-            }
-        };
-        bootstrapthread.start();
+                /* Redirect Output stream */
+                PrintStream m_out = new PrintStream(new OutputStream() {
 
-        Log.d("art2.platform.service", "Art2 Platform Service started");
-        Toast.makeText(this, "Art2 Platform Service started", 3000).show();
-        return START_STICKY;
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+                    @Override
+                    public void write(int oneByte) throws IOException {
+                        output.write(oneByte);
+                        if (oneByte == '\n') {
+                            Log.i("art2.osgi.service.logger", new String(output.toByteArray()));
+                            output = new ByteArrayOutputStream();
+                        }
+                    }
+                });
+                System.setErr(m_out);
+                System.setOut(m_out);
+
+                File sdDir = Environment.getExternalStorageDirectory();
+                File m_cache = new File(sdDir.getAbsolutePath() + "/" + FELIX_CACHE_DIR);
+                Log.i("art2.felix", m_cache.getAbsolutePath());
+                if (!m_cache.exists()) {
+                    if (!m_cache.mkdirs()) {
+                        Log.e("art2.felix", "unable to create cache");
+                        throw new IllegalStateException("Unable to create cache dir");
+                    } else {
+                        Log.i("art2.felix", "cache created");
+                    }
+                } else {
+                    m_cache.delete();
+                    m_cache.mkdir();
+                    Log.i("art2.felix", "cache already exist");
+                }
+
+
+                try {
+                    // Activate WiFi multicast
+                    WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                    multicastLock = wifiManager.createMulticastLock("ART2-Multicast-Lock");
+                    multicastLock.acquire();
+                } catch (Exception e) {
+                    Log.e("art2.osgi.service.logger", "Exception when creating the multicast lock", e);
+                }
+
+                // Launch the Felix OSGi framework
+                // System.setProperty(Main.SYSTEM_PROPERTIES_PROP, "file://".concat(felixDeploymentDir).concat("/conf/system.properties"));
+                // Main.loadSystemProperties();
+                HashMap<String, Object> configMap = new HashMap<String, Object>();
+                //configMap.put("org.osgi.framework.bootdelegation", "*");
+
+
+                configMap.put(FelixConstants.LOG_LEVEL_PROP, String.valueOf(Logger.LOG_DEBUG));
+                configMap.put(org.osgi.framework.Constants.FRAMEWORK_SYSTEMPACKAGES, ANDROID_FRAMEWORK_PACKAGES);
+                configMap.put(org.osgi.framework.Constants.FRAMEWORK_STORAGE, m_cache.getAbsolutePath());
+                configMap.put(org.osgi.framework.Constants.FRAMEWORK_STORAGE_CLEAN, org.osgi.framework.Constants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT);
+                //configMap.put("felix.auto.deploy.dir", FELIX_BASE + "/bundle");
+                //configMap.put(BundleCache.CACHE_ROOTDIR_PROP, FELIX_BASE);
+
+
+                // configProps.setProperty(Constants.FRAMEWORK_STORAGE, FELIX_CACHE_DIR);
+                // configProps.setProperty("felix.auto.deploy.dir", felixDeploymentDir + "/bundle");
+                // configProps.setProperty(BundleCache.CACHE_ROOTDIR_PROP, felixDeploymentDir);
+
+                try {
+                    //   logger.info("Starting the OSGi framework");
+                    long initial_time = System.currentTimeMillis();
+                    // Create an instance of the framework.
+                    FrameworkFactory factory = new org.apache.felix.framework.FrameworkFactory();
+                    felixFramework = factory.newFramework(configMap);
+                    // Initialize the framework, but don't start it yet.
+                    felixFramework.init();
+                    // Use the system bundle context to process the auto-deploy and auto-install/auto-start properties.
+                    //AutoProcessor.process(configProps, felixFramework.getBundleContext());
+                    // Start the framework.
+                    //AutoProcessor.process(configMap, felixFramework.getBundleContext());
+                    felixFramework.start();
+
+
+                    startRawBundle(felixFramework.getBundleContext(), "file://paxurl.jar", R.raw.paxurl, true);
+                    startRawBundle(felixFramework.getBundleContext(), "file://shell.jar", R.raw.shell, true);
+                    //startRawBundle(context,"file://shelltui.jar", R.raw.shelltui);
+                    startRawBundle(felixFramework.getBundleContext(), "file://shellremote.jar", R.raw.shellremote, true);
+                    startRawBundle(felixFramework.getBundleContext(), "file://osgi_compendium.jar", R.raw.osgi_compendium, true);
+                    startRawBundle(felixFramework.getBundleContext(), "file://slf4jandroid.jar", R.raw.slf4jandroid, true);
+
+                    String defaultBundlePath = sdDir.getAbsolutePath() + "/" + FELIX_BASE + "/bundle/";
+
+                    try {
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"emf.lib-2.6.0.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.collection-2.8.0.jar", false);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.library-2.8.0.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.model-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.adaptation.model-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.api-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.kompare-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.netty-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.deploy.osgi-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.core-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.jmdns-2.1.1-SNAPSHOT.jar", true);
+                        
+
+                    } catch (Exception e) {
+                        Log.e("art2.osgi.service.logger", "Error deploying base ART2 bundles", e);
+                    }
+
+
+                    Log.i("art2.osgi.service.logger", "OSGi framework started in: " + (System.currentTimeMillis() - initial_time) / 1000 + " seconds");
+
+                    // Save the framework as a system property
+                    System.getProperties().put(Constants.getArt2FrameworkProperty(), felixFramework);
+
+                    // Register the service activity
+                    Hashtable<String, String> properties = new Hashtable<String, String>();
+                    properties.put("platform", "android");
+                    felixFramework.getBundleContext().registerService(Context.class.getName(), AndroidFelixService.this, properties);
+                } catch (Throwable t) {
+                    Log.e("", "The OSGi framework could not be started", t);
+                }
+            }
+        }.start();
+        //Set the service as foreground, so that the Android OS doesn't kill it
+        setServiceAsForeground();
     }
 
+    /* STOP & DESTROY SERVICE */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("art2.osgi.service.logger", "Stopping the OSGi framework...");
+        try {
+            //Stop the framework
+            felixFramework.stop();
+        } catch (BundleException e) {
+            Log.e("art2.osgi.service.logger", "Exception when stopping the OSGi framework", e);
+        }
+        //System.getProperties().remove(MUSIC_OSGI_FRAMEWORK);
+        multicastLock.release();
+        //Unset the service as foreground
+        unsetServiceAsForeground();
+    }
 
+    /**
+     * This is a wrapper around the new startForeground method from Android 2.0+,
+     * using the older APIs if it is not available.
+     */
+    private void setServiceAsForeground() {
+        // If we have the new startForeground API, then use it.
+        try {
+            Class[] startForegroundMethodSignature = new Class[]{int.class, Notification.class};
+            Method startForegroundMethod = getClass().getMethod("startForeground", startForegroundMethodSignature);
 
+            // Prepare arguments for the method
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notification = new Notification(R.drawable.icon, getString(R.string.app_name), System.currentTimeMillis());
+            PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0);
+            notification.setLatestEventInfo(getApplicationContext(), getString(R.string.app_name), getString(R.string.notification_description), contentIntent);
+            Object[] startForegroundMethodArgs = new Object[]{Integer.valueOf(ART2SERVICE_NOTIFICATION_ID), notification};
+            try {
+                startForegroundMethod.invoke(this, startForegroundMethodArgs);
+                notificationManager.notify(ART2SERVICE_NOTIFICATION_ID, notification);
+            } catch (Exception e) {
+                // Should not happen.
+                Log.e("art2.osgi.service.logger", "Unable to invoke startForeground", e);
+            }
+        } catch (NoSuchMethodException e) {
+            // Running on an older platform -> Fall back on the old API.
+            setForeground(true);
+        }
+    }
 
-    public BundleContext getFrameworkBundleContext() {
-        return this.felix.getFrameworkBundleContext();
+    /**
+     * This is a wrapper around the new stopForeground method from Android 2.0+,
+     * using the older APIs if it is not available.
+     */
+    private void unsetServiceAsForeground() {
+        // If we have the new stopForeground API, then use it.
+        try {
+            Class[] stopForegroundMethodSignature = new Class[]{boolean.class};
+            Method stopForegroundMethod = getClass().getMethod("stopForeground", stopForegroundMethodSignature);
+
+            // Prepare arguments for the method
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Object[] stopForegroundMethodArgs = new Object[]{Boolean.TRUE};
+            try {
+                stopForegroundMethod.invoke(this, stopForegroundMethodArgs);
+            } catch (Exception e) {
+                // Should not happen.
+                Log.e("art2.osgi.service.logger", "Unable to invoke stopForeground", e);
+            }
+            notificationManager.cancel(ART2SERVICE_NOTIFICATION_ID);
+        } catch (NoSuchMethodException e) {
+            // Running on an older platform -> Fall back on the old API.
+            setForeground(false);
+        }
+    }
+
+    private Bundle startRawBundle(BundleContext context, String name, Integer id, Boolean start) {
+        InputStream is = getResources().openRawResource(id);
+        Bundle bundle = null;
+        try {
+            bundle = context.installBundle(name, is);
+            if (start) {
+                bundle.start();
+            }
+        } catch (BundleException ex) {
+            Log.e("art2.bootstrap", ex.getMessage(), ex);
+        }
+        return bundle;
+    }
+
+    private Bundle startDefaultBundle(BundleContext context, String fileName, Boolean start) {
+        Bundle bundle = null;
+        try {
+            bundle = context.installBundle("file:" + fileName);
+            if (start) {
+                bundle.start();
+            }
+        } catch (BundleException ex) {
+            Log.e("art2.bootstrap", ex.getMessage(), ex);
+        }
+        return bundle;
     }
 }
