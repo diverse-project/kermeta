@@ -26,7 +26,7 @@ class Art2JmDNSActivator extends BundleActivator {
         modelHandlerServiceTracker.open
         var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
 
-        art2discovery = new Art2DiscoveryActor(90000,mhandler,8080,8081)
+        art2discovery = new Art2DiscoveryActor(90000,mhandler,8082,8081)
         art2discovery.start
 
       }
