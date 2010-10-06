@@ -39,8 +39,6 @@ public class RelationClassView extends RelationView {
 		
 		if(targetRole!=null && targetRole.length()>0 && targetCard!=null)
 			roleTar = new RoleView(targetRole, targetCard, this, false, isComposition && compositionAtStart);
-		
-		System.out.println("##### " + srcRole + " " + srcCard + " >>>> " + targetRole + " " + targetCard);
 	}
 
 	

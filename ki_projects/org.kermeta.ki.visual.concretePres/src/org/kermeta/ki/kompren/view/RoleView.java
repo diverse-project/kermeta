@@ -29,7 +29,7 @@ public class RoleView {
 		ZERO_MULTI {
 			@Override
 			public String getText() {
-				return "*";
+				return "0..*";
 			}
 		},
 		ONE_MULTI {
