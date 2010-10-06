@@ -20,13 +20,12 @@ class Art2JmDNSActivator extends BundleActivator {
   def start(bc : BundleContext){
 
     modelHandlerServiceTracker = new ServiceTracker(bc,classOf[Art2ModelHandlerService].getName,null)
-
     new Thread {
       override def run(){
         modelHandlerServiceTracker.open
         var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
 
-        art2discovery = new Art2DiscoveryActor(90000,mhandler,8082,8081)
+        art2discovery = new Art2DiscoveryActor(1,mhandler,8082,8081)
         art2discovery.start
 
       }
