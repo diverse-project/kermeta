@@ -1,0 +1,48 @@
+/*
+ * Creation : October 6, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin 
+ */
+package kermeta::ki::visual;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ZoomMetamodel.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+
+using kermeta::ki::malai::instrument
+using kermeta::language::structure
+
+class ZoomerMetamodel inherits Zoomer {
+	reference metamodel : ModelingUnit
+
+	method initialiseLinks() : Void is do
+		addLink(Scroll2ZoomMetamodel.new, true)
+	end
+}
+
+
+
+class Scroll2ZoomMetamodel inherits Scroll2Zoom {
+
+	method createAction() : Void is do
+		action := ZoomMetamodel.new
+		initAction
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := ZoomMetamodel
+	end
+
+	
+	method initAction() : Void is do
+		super
+		var zoomIn : ZoomMetamodel init action.asType(ZoomMetamodel)
+		var zoomer : ZoomerMetamodel init instrument.asType(ZoomerMetamodel)
+		
+		zoomIn.metamodel := zoomer.metamodel
+	end
+}
+

@@ -25,9 +25,6 @@ class Zoomer inherits Instrument
 {
 	reference zoomable : Picker
 	
-	reference metamodel : ModelingUnit
-	
-	
 	method initialiseLinks() : Void is do
 		addLink(Scroll2Zoom.new, true)
 	end
@@ -55,13 +52,18 @@ class Scroll2Zoom inherits Link
 	
 	
 	method createAction() : Void is do
-		var zoomIn : Zoom   init Zoom.new
+		action := Zoom.new
+		
+		initAction
+	end
+
+	
+	operation initAction() : Void is do
+		var zoomIn : Zoom init action.asType(Zoom)
 		var zoomer : Zoomer init instrument.asType(Zoomer)
-		 
+		
 		zoomIn.zoomable := zoomer.zoomable
-		zoomIn.metamodel := zoomer.metamodel
-		zoomIn.initialise(instrument.actionRegistry)
-		action := zoomIn
+		zoomIn.initialise(instrument.actionRegistry)		
 	end
 	
 	

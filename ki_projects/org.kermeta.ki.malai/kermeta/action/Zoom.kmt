@@ -16,11 +16,8 @@ using kermeta::standard
 using kermeta::language::structure
 
 
-
 class Zoom inherits Action
 {
-	reference metamodel : ModelingUnit//FIXME to remove!
-
 	reference zoomable : Picker
 	
 	attribute px : Integer
@@ -33,7 +30,7 @@ class Zoom inherits Action
 	
 	
 	method canDo() : Boolean is do
-		result := not zoomable.isVoid and not metamodel.isVoid and not increment.isVoid
+		result := not zoomable.isVoid and not increment.isVoid
 	end
 	
 	
@@ -47,7 +44,6 @@ class Zoom inherits Action
 			extern org::kermeta::ki::malai::ZoomUtils.zoomOut(zoomable, getZoomIncrement()*incr.toReal*-1.toReal)
 		end
 		
-		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(metamodel)//FIXME
 		done()
 
 		previousIncrement := increment

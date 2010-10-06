@@ -19,9 +19,9 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Instruments
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/ElementsDisplayer.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Searcher.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/ZoomerMetamodel.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
 
 using kermeta
 using kermeta::ki::malai::undo
@@ -81,7 +81,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute searcher : Searcher
 	
-	attribute zoomer : Zoomer
+	attribute zoomer : ZoomerMetamodel
 	
 	attribute scroller : Scroller
 	
@@ -113,7 +113,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		eltDisplayer	 := ElementsDisplayer.new
 		hand			 := Hand.new
 		hierarcher		 := Hierarcher.new
-		zoomer			 := Zoomer.new
+		zoomer			 := ZoomerMetamodel.new
 		pruner      	 := Pruner.new
 		flattener      	 := Flattener.new
 		undoManager 	 := UndoRedoManager.new
@@ -155,7 +155,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		dispatcher.processes.add(eventManager)
 		
 		initialiseUI
-		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager, selector.handButton)
 
 		metamodel.setEventManager(eventManager)
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
