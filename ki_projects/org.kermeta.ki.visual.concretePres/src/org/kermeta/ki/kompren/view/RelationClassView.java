@@ -31,14 +31,16 @@ public class RelationClassView extends RelationView {
 			else
 				setSourceDecoration(new CompositionDecorationView(this));
 		
-		if(srcRole==null)
+		if(targetRole==null || srcRole==null || targetRole.length()==0 || srcRole.length()==0)
 			setTargetDecoration(new RelationDecorationView(this));
 		
-		if(srcRole!=null && srcCard!=null)
+		if(srcRole!=null && srcRole.length()>0 && srcCard!=null)
 			roleSrc = new RoleView(srcRole, srcCard, this, true, isComposition && !compositionAtStart);
 		
-		if(targetRole!=null && targetCard!=null)
+		if(targetRole!=null && targetRole.length()>0 && targetCard!=null)
 			roleTar = new RoleView(targetRole, targetCard, this, false, isComposition && compositionAtStart);
+		
+		System.out.println("##### " + srcRole + " " + srcCard + " >>>> " + targetRole + " " + targetCard);
 	}
 
 	

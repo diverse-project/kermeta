@@ -104,14 +104,14 @@ public class RoleView {
 		if((!name.autoPosition && !card.autoPosition) || name==null || card==null || name.text.length()==0 || card.text.length()==0)
 			return ;
 		
-		Point2D[] pts;
-		Point2D pointTar= view.getPointTarget();
-		Point2D pointSrc= view.getPointSource();
-		Point2D pt 		= source ? pointSrc : pointTar;
-		double gap 		= 10.;
+		Point2D.Double[] pts;
+		Point2D pointTar  = view.getPointTarget();
+		Point2D pointSrc  = view.getPointSource();
+		Point2D pt 		  = source ? pointTar : pointSrc;
+		double gap 		  = 10.;
 		IEntityView entitySrc = view.getEntitySrc();
 		IEntityView entityTar = view.getEntityTar();
-		Font font 		= entitySrc.getFont(); 
+		Font font 			  = entitySrc.getFont();
 		
 		if(entitySrc==entityTar) {
 			Rectangle2D rec1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds();
@@ -135,39 +135,39 @@ public class RoleView {
 						double w2 = new TextLayout(card.text, font, ClassView.FONT_RENDER_CONT).getBounds().getWidth();
 						double maxWidth = Math.max(w1, w2);
 						
-						pts[0].setLocation(pts[0].getX() - maxWidth + gap, pts[0].getY());
-						pts[1].setLocation(pts[1].getX() - maxWidth + gap, pts[0].getY());
+						pts[0].x -= maxWidth + gap;
+						pts[1].x -= maxWidth + gap;
 					}
 					else {
-						pts[0].setLocation(pts[1].getX() + gap, pts[0].getY());
-						pts[1].setLocation(pts[1].getX() + gap, pts[0].getY());
+						pts[0].x += gap;
+						pts[1].x += gap;
 					}
 				
-				if(Number.NUMBER.equals(pts[0].getY(), pts[1].getY(), 20)) {
-					pts[0].setLocation(pts[1].getX() - gap, pts[0].getY());
-					pts[1].setLocation(pts[1].getX() - gap, pts[0].getY());
+				if(Number.NUMBER.equals(pts[0].y, pts[1].y, 20)) {
+					pts[0].x -= gap;
+					pts[1].x -= gap;
 					
 					if(yMin<(pointSrc.getY()+15) && yMin<(pointTar.getY()+15)) {
 						double h1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds().getHeight();
 						double h2 = new TextLayout(card.text, font, ClassView.FONT_RENDER_CONT).getBounds().getHeight();
 						double maxHeight = Math.max(h1, h2);
 						
-						pts[0].setLocation(pts[0].getX(), pts[0].getY() + maxHeight + gap);
-						pts[1].setLocation(pts[1].getX(), pts[0].getY() +  maxHeight + gap);
+						pts[0].y += maxHeight + gap;
+						pts[1].y += maxHeight + gap;
 					}
 					else {
-						pts[0].setLocation(pts[0].getX(), pts[0].getY() - gap);
-						pts[1].setLocation(pts[1].getX(), pts[1].getY() - gap);
+						pts[0].y -= gap;
+						pts[1].y -= gap;
 					}
 				}
 			}
 		}//else
 		
 		if(name.autoPosition && pts!=null)
-			name.position.setLocation(pts[0].getX(), pts[0].getY());
+			name.position.setLocation(pts[0].x, pts[0].y);
 		
 		if(card.autoPosition && pts!=null)
-			card.position.setLocation(pts[1].getX(), pts[1].getY());
+			card.position.setLocation(pts[1].x, pts[1].y);
 	}
 	
 	
