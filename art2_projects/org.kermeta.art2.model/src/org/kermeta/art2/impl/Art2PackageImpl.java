@@ -521,15 +521,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerNode_Type() {
-		return (EReference)containerNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getContainerRoot() {
 		return containerRootEClass;
 	}
@@ -1507,7 +1498,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		containerNodeEClass = createEClass(CONTAINER_NODE);
 		createEReference(containerNodeEClass, CONTAINER_NODE__COMPONENTS);
-		createEReference(containerNodeEClass, CONTAINER_NODE__TYPE);
 
 		containerRootEClass = createEClass(CONTAINER_ROOT);
 		createEReference(containerRootEClass, CONTAINER_ROOT__NODES);
@@ -1679,6 +1669,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		componentInstanceEClass.getESuperTypes().add(this.getInstance());
 		componentTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		containerNodeEClass.getESuperTypes().add(this.getNamedElement());
+		containerNodeEClass.getESuperTypes().add(this.getInstance());
 		portTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		namespaceEClass.getESuperTypes().add(this.getNamedElement());
 		dictionaryAttributeEClass.getESuperTypes().add(this.getTypedElement());
@@ -1720,7 +1711,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(containerNodeEClass, ContainerNode.class, "ContainerNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainerNode_Components(), this.getComponentInstance(), null, "components", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerNode_Type(), this.getNodeType(), null, "type", null, 1, 1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerRootEClass, ContainerRoot.class, "ContainerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainerRoot_Nodes(), this.getContainerNode(), null, "nodes", null, 0, -1, ContainerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

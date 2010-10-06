@@ -26,7 +26,6 @@
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/components"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/type"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerRoot/nodes"/>

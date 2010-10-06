@@ -398,22 +398,22 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_NODE__NAME = NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_NODE__TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_NODE__COMPONENTS = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER_NODE__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CONTAINER_NODE__COMPONENTS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Container Node</em>' class.
@@ -2313,17 +2313,6 @@ public interface Art2Package extends EPackage {
 	EReference getContainerNode_Components();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.art2.ContainerNode#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.kermeta.art2.ContainerNode#getType()
-	 * @see #getContainerNode()
-	 * @generated
-	 */
-	EReference getContainerNode_Type();
-
-	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.ContainerRoot <em>Container Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3589,14 +3578,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference CONTAINER_NODE__COMPONENTS = eINSTANCE.getContainerNode_Components();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTAINER_NODE__TYPE = eINSTANCE.getContainerNode_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.ContainerRootImpl <em>Container Root</em>}' class.

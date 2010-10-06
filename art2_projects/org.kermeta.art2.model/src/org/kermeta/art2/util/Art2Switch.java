@@ -106,6 +106,7 @@ public class Art2Switch<T> {
 			case Art2Package.CONTAINER_NODE: {
 				ContainerNode containerNode = (ContainerNode)theEObject;
 				T result = caseContainerNode(containerNode);
+				if (result == null) result = caseInstance(containerNode);
 				if (result == null) result = caseNamedElement(containerNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

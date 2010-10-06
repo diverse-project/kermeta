@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.kermeta.art2.Art2Package;
 import org.kermeta.art2.ComponentInstance;
 import org.kermeta.art2.ContainerNode;
+import org.kermeta.art2.Instance;
+import org.kermeta.art2.TypeDefinition;
 import org.kermeta.art2.NodeType;
 
 /**
@@ -33,14 +35,24 @@ import org.kermeta.art2.NodeType;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.kermeta.art2.impl.ContainerNodeImpl#getTypeDefinition <em>Type Definition</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ContainerNodeImpl#getComponents <em>Components</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ContainerNodeImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode {
+	/**
+	 * The cached value of the '{@link #getTypeDefinition() <em>Type Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeDefinition()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeDefinition typeDefinition;
+
 	/**
 	 * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -50,16 +62,6 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> components;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected NodeType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,49 +87,49 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TypeDefinition getTypeDefinition() {
+		if (typeDefinition != null && typeDefinition.eIsProxy()) {
+			InternalEObject oldTypeDefinition = (InternalEObject)typeDefinition;
+			typeDefinition = (TypeDefinition)eResolveProxy(oldTypeDefinition);
+			if (typeDefinition != oldTypeDefinition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Art2Package.CONTAINER_NODE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
+			}
+		}
+		return typeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinition basicGetTypeDefinition() {
+		return typeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeDefinition(TypeDefinition newTypeDefinition) {
+		TypeDefinition oldTypeDefinition = typeDefinition;
+		typeDefinition = newTypeDefinition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.CONTAINER_NODE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ComponentInstance> getComponents() {
 		if (components == null) {
 			components = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, Art2Package.CONTAINER_NODE__COMPONENTS);
 		}
 		return components;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NodeType getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (NodeType)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Art2Package.CONTAINER_NODE__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NodeType basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(NodeType newType) {
-		NodeType oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.CONTAINER_NODE__TYPE, oldType, type));
 	}
 
 	/**
@@ -152,11 +154,11 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Art2Package.CONTAINER_NODE__TYPE_DEFINITION:
+				if (resolve) return getTypeDefinition();
+				return basicGetTypeDefinition();
 			case Art2Package.CONTAINER_NODE__COMPONENTS:
 				return getComponents();
-			case Art2Package.CONTAINER_NODE__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -170,12 +172,12 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Art2Package.CONTAINER_NODE__TYPE_DEFINITION:
+				setTypeDefinition((TypeDefinition)newValue);
+				return;
 			case Art2Package.CONTAINER_NODE__COMPONENTS:
 				getComponents().clear();
 				getComponents().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
-			case Art2Package.CONTAINER_NODE__TYPE:
-				setType((NodeType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -189,11 +191,11 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Art2Package.CONTAINER_NODE__TYPE_DEFINITION:
+				setTypeDefinition((TypeDefinition)null);
+				return;
 			case Art2Package.CONTAINER_NODE__COMPONENTS:
 				getComponents().clear();
-				return;
-			case Art2Package.CONTAINER_NODE__TYPE:
-				setType((NodeType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -207,12 +209,44 @@ public class ContainerNodeImpl extends NamedElementImpl implements ContainerNode
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Art2Package.CONTAINER_NODE__TYPE_DEFINITION:
+				return typeDefinition != null;
 			case Art2Package.CONTAINER_NODE__COMPONENTS:
 				return components != null && !components.isEmpty();
-			case Art2Package.CONTAINER_NODE__TYPE:
-				return type != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Instance.class) {
+			switch (derivedFeatureID) {
+				case Art2Package.CONTAINER_NODE__TYPE_DEFINITION: return Art2Package.INSTANCE__TYPE_DEFINITION;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Instance.class) {
+			switch (baseFeatureID) {
+				case Art2Package.INSTANCE__TYPE_DEFINITION: return Art2Package.CONTAINER_NODE__TYPE_DEFINITION;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //ContainerNodeImpl

@@ -19,19 +19,39 @@
         <sourceDirectory>src</sourceDirectory>
         <!-- Add resources from the plugin structure -->
         <resources>
-	      	<resource>
-	        	<directory>.</directory>
-	        	<includes>
-	          		<include>plugin.xml</include>
-	          		<include>plugin.properties</include>
-	        	</includes>
-	      	</resource>
-	      	<resource>
-	        	<directory>metamodel</directory>
-	        	<targetPath>metamodel</targetPath>
-	      	</resource>
-	    </resources>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>plugin.xml</include>
+                    <include>plugin.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>metamodel</directory>
+                <targetPath>metamodel</targetPath>
+            </resource>
+        </resources>
         <plugins>
+
+<!--
+            <plugin>
+                <groupId>org.kermeta.emf</groupId>
+                <artifactId>org.kermeta.emf.genmodel</artifactId>
+                <version>2.6.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals><goal>generate</goal></goals>
+                        <configuration>
+                            <ecore>metamodel/art.ecore</ecore>
+                            <output>${project.build.sourceDirectory}</output>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+
 
 			<!-- Creation of the bundle jar and its manifest -->
             <plugin>

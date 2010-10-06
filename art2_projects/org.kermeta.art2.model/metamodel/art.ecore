@@ -28,10 +28,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stopMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContainerNode" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ContainerNode" eSuperTypes="#//NamedElement #//Instance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
         eType="#//ComponentInstance" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//NodeType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainerRoot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
