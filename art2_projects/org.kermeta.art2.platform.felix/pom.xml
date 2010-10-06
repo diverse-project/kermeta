@@ -31,7 +31,10 @@
 
                     <deployURLs>
                         mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework.bus.netty,
-                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework.bus.jmdns
+                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework.bus.jmdns,
+                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework,
+                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.deploy.osgi
+                        
                         <!--
                         file:/Applications/eclipse/eclipse35/plugins/org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar,
                         file:/Applications/eclipse/eclipse35/plugins/org.eclipse.equinox.common_3.5.1.R35x_v20090807-1100.jar,
@@ -77,17 +80,20 @@
             <artifactId>art2.core</artifactId>
             <version>${art2.version}</version>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
-
+-->
+<!--
         <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.deploy.osgi</artifactId>
             <version>${art2.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <artifactId>art2.adaptation.model</artifactId>
             <groupId>org.kermeta.art2</groupId>
