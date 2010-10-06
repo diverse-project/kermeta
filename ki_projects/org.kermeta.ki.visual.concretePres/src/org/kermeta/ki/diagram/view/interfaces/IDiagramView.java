@@ -6,12 +6,15 @@ import javax.swing.JScrollPane;
 import javax.swing.Scrollable;
 
 import org.kermeta.ki.diagram.layout.ILayoutStrategy;
+import org.kermeta.ki.diagram.view.impl.Hand;
 
 /**
  * The interface of diagram classes.
  * @author Arnaud Blouin
  */
 public interface IDiagramView extends Scrollable {
+	Hand getHand();
+	
 	void focusOnEntity(final IEntityView view);
 	
 	void addRelation(final int position, final IRelationView link);
@@ -23,6 +26,20 @@ public interface IDiagramView extends Scrollable {
 	boolean removeEntity(final IEntityView entity);
 	
 	void updateRelations();
+	
+	
+	double getZoom();
+
+	void setZoom(final double zoom);
+	
+	int getNbEntities();
+	
+	int getNbRelations();
+	
+	IEntityView getEntityAt(final int i);
+	
+	IRelationView getRelationAt(final int i);
+
 	
 	/**
 	 * @return The entities of the diagram.

@@ -22,7 +22,6 @@ import org.kermeta.ki.diagram.layout.ILayoutStrategy;
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
-import org.kermeta.ki.visual.view.InheritanceView;
 
 /**
  * Implements a diagram that contains entities and relations.
@@ -49,6 +48,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 	/** The strategy used to layout the diagram. */
 	protected ILayoutStrategy strategy;
 	
+	protected Hand hand;
+	
 	
 	/**
 	 * Initialises the diagram.
@@ -59,6 +60,10 @@ public class DiagramView extends JPanel implements IDiagramView {
 		zoom 		= 1.;
 		entities 	= new ArrayList<IEntityView>();
 		relations	= new ArrayList<IRelationView>();
+		hand		= new Hand(this);
+		
+		addMouseListener(hand);
+		addMouseMotionListener(hand);
 		
 		if(withScrollPane)
 			scrollPane = new JScrollPane(this);
@@ -79,6 +84,27 @@ public class DiagramView extends JPanel implements IDiagramView {
 		return entities;
 	}
 
+	
+	
+	
+	public int getNbEntities() {
+		return entities.size();
+	}
+	
+	
+	public int getNbRelations() {
+		return relations.size();
+	}
+	
+	
+	public IEntityView getEntityAt(final int i) {
+		return entities.get(i);
+	}
+	
+	
+	public IRelationView getRelationAt(final int i) {
+		return relations.get(i);
+	}
 	
 	
 	
@@ -301,30 +327,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	@Override
 	public List<IEntityView> getRootEntities() {
-		List<IEntityView> roots = new ArrayList<IEntityView>();
-		boolean again;
-		int i;
-		final int size = relations.size();
-		IRelationView relation;
-		
-		for(IEntityView entityView : entities) {
-			i = 0;
-			again = true;
-			
-			while(again && i<size) {
-				relation = relations.get(i);
-				
-				if(relation instanceof InheritanceView && relation.getEntitySrc()==entityView)
-					again = false;
-				
-				i++;
-			}
-			
-			if(again && !roots.contains(entityView))
-				roots.add(entityView);
-		}
-		
-		return roots;
+		return new ArrayList<IEntityView>();
 	}
 
 
@@ -371,5 +374,22 @@ public class DiagramView extends JPanel implements IDiagramView {
 		else
 			if((position==-1 || position==entities.size()) && entity!=null)
 				entities.add(entity);
+	}
+
+
+	public double getZoom() {
+		return zoom;
+	}
+
+
+	public void setZoom(final double zoom) {
+		if(zoom>0)
+			this.zoom = zoom;
+	}
+
+
+	@Override
+	public Hand getHand() {
+		return hand;
 	}
 }

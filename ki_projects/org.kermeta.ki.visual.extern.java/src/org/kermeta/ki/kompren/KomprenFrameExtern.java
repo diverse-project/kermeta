@@ -42,12 +42,14 @@ public abstract class KomprenFrameExtern {
 	
 	
 	
-	public static void initialise(final Object appliRO, final Object mmRO, final Object tbRO, final Object viewPanelRO, final Object emwRO) {
+	public static void initialise(final Object appliRO, final Object mmRO, final Object tbRO, final Object viewPanelRO, 
+									final Object emwRO, final Object handButRO) {
 		EventManagerWrapper emw 	= (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(emwRO);
 		JPanel toolbar 				= (JPanel) Source2TargetMap.MAP.getTargetObject(tbRO);
 		KomprenFrame kompren 		= new KomprenFrame(emw, toolbar);
 			
 		kompren.getDiagramView().setLayoutStrategy(new ClassModelBasicStrategy(kompren.getDiagramView()));
+		kompren.getDiagramView().getHand().setHandButton((AbstractButton)Source2TargetMap.MAP.getTargetObject(handButRO));
 		Source2TargetMap.MAP.add(appliRO, kompren);
 		Source2TargetMap.MAP.add(viewPanelRO, kompren.getDiagramView());
 		Source2TargetMap.MAP.add(mmRO, kompren.getDiagramView());

@@ -26,10 +26,6 @@ public class KomprenFrame extends JFrame {
 	/** The displayed diagram. */
 	protected ClassDiagramView diagram;
 	
-	public static AbstractButton hand;//TODO to remove!!
-	
-	
-	
 	
 	/**
 	 * Initialises the toolbar of the viewer.
@@ -37,7 +33,6 @@ public class KomprenFrame extends JFrame {
 	public static void initialiseToolbar(JPanel toolbar, AbstractButton undoBut, AbstractButton redoBut, AbstractButton prunerBut, AbstractButton flattenerBut,
 			AbstractButton hierarcherBut, AbstractButton handBut, AbstractButton grayedBut, AbstractButton hideBut, JSpinner radiusSpin,
 			AbstractButton showOpBut, AbstractButton showAttrBut, JCheckBox cardCB, JTextField tf) {
-		
 		ButtonGroup groupSelector 	= new ButtonGroup();
 		ButtonGroup groupPruner 	= new ButtonGroup();
 		
@@ -49,7 +44,7 @@ public class KomprenFrame extends JFrame {
 		toolbar.add(hierarcherBut);
 		toolbar.add(flattenerBut);
 		toolbar.add(handBut);
-		hand = handBut;
+		
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(hideBut);
 		toolbar.add(grayedBut);

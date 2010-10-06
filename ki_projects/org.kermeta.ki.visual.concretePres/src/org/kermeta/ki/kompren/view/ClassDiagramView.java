@@ -1,5 +1,8 @@
 package org.kermeta.ki.kompren.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.kermeta.ki.diagram.view.impl.DiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
@@ -20,6 +23,36 @@ public class ClassDiagramView extends DiagramView {
 		propertiesVisible = true;
 	}
 
+	
+	
+	@Override
+	public List<IEntityView> getRootEntities() {
+		List<IEntityView> roots = new ArrayList<IEntityView>();
+		boolean again;
+		int i;
+		final int size = relations.size();
+		IRelationView relation;
+		
+		for(IEntityView entityView : entities) {
+			i = 0;
+			again = true;
+			
+			while(again && i<size) {
+				relation = relations.get(i);
+				
+				if(relation instanceof InheritanceView && relation.getEntitySrc()==entityView)
+					again = false;
+				
+				i++;
+			}
+			
+			if(again && !roots.contains(entityView))
+				roots.add(entityView);
+		}
+		
+		return roots;
+	}
+	
 	
 	public void setPropertiesVisible(final boolean visible) {
 		propertiesVisible = visible;
