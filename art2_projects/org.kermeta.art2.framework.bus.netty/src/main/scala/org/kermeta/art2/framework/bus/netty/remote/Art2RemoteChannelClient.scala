@@ -52,6 +52,7 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
       var remotePORT = Art2PlatformHelper.getProperty(model,remoteNodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT)
       if("" != remoteIP && "" != remotePORT ){
         try {
+          logger.info("Try remote addr "+remoteIP+"-"+java.lang.Integer.parseInt(remotePORT))
           new InetSocketAddress(remoteIP,java.lang.Integer.parseInt(remotePORT))
         } catch {
           case _ @ e => logger.error("Error parsing remote port as Integer",e) ; new InetSocketAddress(0)

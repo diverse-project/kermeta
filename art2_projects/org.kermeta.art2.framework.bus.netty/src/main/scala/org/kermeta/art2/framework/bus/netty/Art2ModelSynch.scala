@@ -84,6 +84,7 @@ class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService) extends 
 
                     var client = new TcpClientRemoteActor(null,1000) {
                       def getRemoteAddr : InetSocketAddress = {
+                        logger.info(ip)
                         new InetSocketAddress(ip,java.lang.Integer.parseInt(modelSynchPort))
                       }
                     }

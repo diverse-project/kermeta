@@ -77,13 +77,13 @@ object Tester {
     //  actorPoc.start
 
 
-    var dispatch = new Art2DispatcherActor(8082,null)
+  //  var dispatch = new Art2DispatcherActor(8082,null)
 
-    dispatch.start
+  //  dispatch.start
 
     var client = new TcpClientRemoteActor(null,10000){
       def getRemoteAddr : InetSocketAddress = {
-        new InetSocketAddress("127.0.0.1",8082)
+        new InetSocketAddress("131.254.15.214",8082)
       }
 
 
@@ -98,7 +98,7 @@ object Tester {
 
 
                           client.stop
-                          dispatch.stop
+                         // dispatch.stop
 
       }
                           //clientactor2.stop;

@@ -27,10 +27,13 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
   var serviceTracker : ServiceTracker = null// = new ServiceTracker(bc,classOf[Art2Port].getName(), null)
   var nettyServer = new TcpServerRemoteActor(port,this){
     override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
-      logger.info("Hello")
-      this ! ART_NETTY_MESSAGE(ctx,e)
+      logger.info("Hello2")
+      me ! ART_NETTY_MESSAGE(ctx,e)
     }
   }
+
+  var me  = this
+
   var logger = LoggerFactory.getLogger(this.getClass)
 
   def getPort = port
