@@ -8,17 +8,61 @@ package kermeta::ki::visual;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/KeyPress.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ZoomMetamodel.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 
 using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
 using kermeta::language::structure
 
 class ZoomerMetamodel inherits Zoomer {
 	reference metamodel : ModelingUnit
 
 	method initialiseLinks() : Void is do
+		addLink(KeyPress2Zoom.new, false)
 		addLink(Scroll2ZoomMetamodel.new, true)
+	end
+}
+
+
+class KeyPress2Zoom inherits Link {
+	method getActionClass() : Class is do
+		result := ZoomMetamodel
+	end
+	
+	
+	method createInteraction() : Interaction is do
+		result := KeyPress.new
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var press : KeyPress init interaction.asType(KeyPress)
+		result := press.key==107 or press.key==109 // + ou -
+	end
+	
+	
+	method createAction() : Void is do
+		var zoomIn : ZoomMetamodel init ZoomMetamodel.new
+		var zoomer : ZoomerMetamodel init instrument.asType(ZoomerMetamodel)
+		
+		zoomIn.zoomable := zoomer.zoomable
+		zoomIn.metamodel := zoomer.metamodel
+		zoomIn.initialise(instrument.actionRegistry)
+		action := zoomIn
+	end
+	
+	
+	method updateAction() : Void is do
+		var press : KeyPress init interaction.asType(KeyPress)
+		var zoom  : ZoomMetamodel init action.asType(ZoomMetamodel)
+		
+		if(press.key==107) then // +
+			zoom.increment := 1
+		else // -
+			zoom.increment := -1
+		end
 	end
 }
 

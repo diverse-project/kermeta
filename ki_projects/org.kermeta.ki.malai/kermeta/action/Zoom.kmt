@@ -36,7 +36,13 @@ class Zoom inherits Action
 	
 	
 	method doActionBody() : Void is do
-		var incr : Integer init if(previousIncrement.isVoid) then increment else increment-previousIncrement end
+		var incr : Integer
+		
+		if(previousIncrement.isVoid) then 
+			incr := increment 
+		else 
+			incr := increment-previousIncrement 
+		end
 
 		if(incr>0) then
 			extern org::kermeta::ki::malai::ZoomUtils.zoomIn(zoomable, getZoomIncrement()*incr.toReal)

@@ -407,6 +407,5 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public void zoomOut(final double decrement) {
 		if((zoom-decrement)>0.)
 			zoom -= decrement;
-		System.out.println("ZOOM=" + zoom);
 	}
 }
