@@ -5,8 +5,10 @@
 
 package org.kermeta.art2.framework
 
+import org.kermeta.art2.Channel
 import org.kermeta.art2.ComponentInstance
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.Instance
 import org.kermeta.art2.MBinding
 import org.kermeta.art2.PortType
 import org.kermeta.art2.TypedElement
@@ -44,5 +46,24 @@ object Art2Utility {
     }
     res
   }
+
+
+  def getRelatedBinding(inst : Instance) : java.util.List[MBinding] = {
+    var res = new java.util.ArrayList[MBinding]()
+    inst match {
+      case component : ComponentInstance => res.addAll(getRelatedBinding(component,component.eContainer.eContainer.asInstanceOf[ContainerRoot]))
+      case channel : Channel => {
+          channel.eContainer.asInstanceOf[ContainerRoot].getMBindings.foreach{b=>
+            if(b.getHub == channel){
+              res.add(b)
+            }
+          }
+        }
+      case _ =>
+    }
+    res
+  }
+
+
 
 }

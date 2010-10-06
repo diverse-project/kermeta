@@ -23,6 +23,8 @@ object Constants {
   def ART2_PLATFORM_REMOTE_NODE_IP = "art2.remote.node.ip"
   def ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT = "art2.remote.node.dispatcher.port"
   def ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT = "art2.remote.node.modelsynch.port"
+  def ART2_PLATFORM_REMOTE_MTU = "art2.remote.node.mtu"
+  def ART2_PLATFORM_REMOTE_NETWORK_TYPE = "art2.remote.network.type"
 
   def ART2_PROPERTY_OSGI_BUNDLE = "osgi.bundle"
 
