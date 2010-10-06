@@ -198,30 +198,27 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	
 	public static Point2D intersectionPoint(final Line2D line, final Rectangle2D rec) {
-		Point2D pt = getIntersectionSegment(line, new Line2D.Double(rec.getX(), rec.getY(), rec.getX()+rec.getWidth(), rec.getY()));
+		final double width 	= rec.getWidth();
+		final double height = rec.getHeight();
+		final double x 		= rec.getX();
+		final double y 		= rec.getY();
+		
+		Point2D pt = getIntersectionSegment(line, new Line2D.Double(x, y, x+width, y));
 
 		if(pt!=null)
 			return pt;
 		
-		pt = getIntersectionSegment(line, 
-				new Line2D.Double(rec.getX()+rec.getWidth(), rec.getY(), rec.getX()+rec.getWidth(), rec.getY()+rec.getHeight()));
+		pt = getIntersectionSegment(line, new Line2D.Double(x+width, y, x+width, y+height));
 		
 		if(pt!=null)
 			return pt;
 		
-		pt = getIntersectionSegment(line, 
-				new Line2D.Double(rec.getX()+rec.getWidth(), rec.getY()+rec.getHeight(), rec.getX(), rec.getY()+rec.getHeight()));
+		pt = getIntersectionSegment(line, new Line2D.Double(x, y+height, x+width, y+height));
 		
 		if(pt!=null)
 			return pt;
 		
-		pt = getIntersectionSegment(line, 
-				new Line2D.Double(rec.getX(), rec.getY()+rec.getHeight(), rec.getX(), rec.getY()));
-		
-		if(pt!=null)
-			return pt;
-		
-		return pt;
+		return getIntersectionSegment(line, new Line2D.Double(x, y, x, y+height));
 	}
 	
 	
@@ -317,7 +314,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	@Override
 	public void update() {
-		if(entitySrc!=null && entityTar!=null) {
+		if(entitySrc!=null && entityTar!=null && entitySrc.isVisible() && entityTar.isVisible()) {
 			if(entitySrc==entityTar) {
 				Rectangle2D rec  = entitySrc.getBorders();
 				final float gap = 60f;

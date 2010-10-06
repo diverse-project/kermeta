@@ -103,14 +103,17 @@ public class RoleView {
 	public void update() {
 		if((!name.autoPosition && !card.autoPosition) || name==null || card==null || name.text.length()==0 || card.text.length()==0)
 			return ;
-		
-		Point2D.Double[] pts;
 		Point2D pointTar  = view.getPointTarget();
 		Point2D pointSrc  = view.getPointSource();
-		Point2D pt 		  = source ? pointTar : pointSrc;
-		double gap 		  = 10.;
 		IEntityView entitySrc = view.getEntitySrc();
 		IEntityView entityTar = view.getEntityTar();
+		
+		if(!entitySrc.isVisible() || !entityTar.isVisible() || pointTar==null || pointSrc==null)
+			return ;
+		
+		Point2D.Double[] pts;
+		Point2D pt 		  = source ? pointTar : pointSrc;
+		double gap 		  = 10.;
 		Font font 			  = entitySrc.getFont();
 		
 		if(entitySrc==entityTar) {
