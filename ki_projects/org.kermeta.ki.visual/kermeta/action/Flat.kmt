@@ -32,6 +32,7 @@ class Flat inherits Action, Undoable {
 		
 		flatteningOperation.flat(classToFlat)
 		metamodel.organise()
+		metamodel.focusOnTypeDefinition(classToFlat)
 	end
 	
 	
@@ -119,6 +120,7 @@ class Flat inherits Action, Undoable {
 		}
 		
 		metamodel.organise()
+		metamodel.focusOnTypeDefinition(classToFlat)
 	end
 	
 	

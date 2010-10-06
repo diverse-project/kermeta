@@ -86,6 +86,7 @@ class ActionPrune inherits Action, Undoable {
 		end
 		
 		metamodel.organise()
+		metamodel.focusOnTypeDefinition(selection.at(0))
 		done()
 	end
 	
@@ -140,5 +141,6 @@ class ActionPrune inherits Action, Undoable {
 		
 		arePruned := arePruned2
 		metamodel.organise()
+		metamodel.focusOnTypeDefinition(selection.at(0))
 	end
 }

@@ -33,22 +33,23 @@ public class ClassDiagramView extends DiagramView {
 		final int size = relations.size();
 		IRelationView relation;
 		
-		for(IEntityView entityView : entities) {
-			i = 0;
-			again = true;
-			
-			while(again && i<size) {
-				relation = relations.get(i);
+		for(IEntityView entityView : entities)
+			if(entityView.isVisible()) {
+				i = 0;
+				again = true;
 				
-				if(relation instanceof InheritanceView && relation.getEntitySrc()==entityView)
-					again = false;
+				while(again && i<size) {
+					relation = relations.get(i);
+					
+					if(relation instanceof InheritanceView && relation.getEntitySrc()==entityView && relation.getEntityTar().isVisible())
+						again = false;
+					
+					i++;
+				}
 				
-				i++;
+				if(again && !roots.contains(entityView))
+					roots.add(entityView);
 			}
-			
-			if(again && !roots.contains(entityView))
-				roots.add(entityView);
-		}
 		
 		return roots;
 	}
