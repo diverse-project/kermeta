@@ -392,4 +392,21 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public Hand getHand() {
 		return hand;
 	}
+
+
+	public void zoomDefault() {
+		zoom = 1.;
+	}
+
+
+	public void zoomIn(final double increment) {
+		zoom += increment;
+	}
+
+
+	public void zoomOut(final double decrement) {
+		if((zoom-decrement)>0.)
+			zoom -= decrement;
+		System.out.println("ZOOM=" + zoom);
+	}
 }

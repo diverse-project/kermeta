@@ -7,12 +7,13 @@ import javax.swing.Scrollable;
 
 import org.kermeta.ki.diagram.layout.ILayoutStrategy;
 import org.kermeta.ki.diagram.view.impl.Hand;
+import org.kermeta.ki.malai.Zoomable;
 
 /**
  * The interface of diagram classes.
  * @author Arnaud Blouin
  */
-public interface IDiagramView extends Scrollable {
+public interface IDiagramView extends Scrollable, Zoomable {
 	Hand getHand();
 	
 	void focusOnEntity(final IEntityView view);
