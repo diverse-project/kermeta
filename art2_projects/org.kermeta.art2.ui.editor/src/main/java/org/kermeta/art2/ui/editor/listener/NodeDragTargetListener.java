@@ -45,8 +45,8 @@ public class NodeDragTargetListener extends DropTarget {
         if (o instanceof ComponentPanel) {
             //CHECK IF THIS COMPONENT IS NOT IN NODE
             ComponentInstance component = (ComponentInstance) kernel.getUifactory().getMapping().get(o);
-
-            if (((ContainerNode)component.eContainer()).getComponents().contains(component)) {
+            ContainerNode node = (ContainerNode) kernel.getUifactory().getMapping().get(target);
+            if (node.getComponents().contains(component)) {
                 return false;
             } else {
                 return true;
