@@ -101,6 +101,10 @@ public class ModelPanel extends JLayeredPane {
         revalidate();
     }
 
+    public void removeInstance(JPanel panel){
+        nodePanel.remove(panel);
+    }  
+
     public void removeBinding(Binding b) {
         bindingPanel.removeBinding(b);
     }
