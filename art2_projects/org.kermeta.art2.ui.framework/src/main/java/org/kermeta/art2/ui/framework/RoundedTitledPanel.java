@@ -39,6 +39,12 @@ public class RoundedTitledPanel extends RoundPanel implements TitledElement {
     }
 
     @Override
+    public void remove(Component comp) {
+        contentPanel.remove(comp);
+    }
+
+
+    @Override
     public void setTitle(String _title) {
         title.setTitle(_title);
     }
