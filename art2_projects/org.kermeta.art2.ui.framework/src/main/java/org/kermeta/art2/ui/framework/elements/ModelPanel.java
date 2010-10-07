@@ -101,9 +101,11 @@ public class ModelPanel extends JLayeredPane {
         revalidate();
     }
 
-    public void removeInstance(JPanel panel){
+    public void removeInstance(JPanel panel) {
         nodePanel.remove(panel);
-    }  
+        repaint();
+        revalidate();
+    }
 
     public void removeBinding(Binding b) {
         bindingPanel.removeBinding(b);
@@ -122,7 +124,7 @@ public class ModelPanel extends JLayeredPane {
         Dimension parentsize = this.getParent().getSize();
         Dimension preferedDim = new Dimension(0, 0);
         for (Component child : nodePanel.getComponents()) {
-           // preferedDim.width = Math.max(child.getMinimumSize().width, preferedDim.width);
+            // preferedDim.width = Math.max(child.getMinimumSize().width, preferedDim.width);
             preferedDim.height = Math.max(child.getLocation().y + child.getSize().height, preferedDim.height);
             preferedDim.width = Math.max(child.getLocation().x + child.getSize().width, preferedDim.width);
         }
