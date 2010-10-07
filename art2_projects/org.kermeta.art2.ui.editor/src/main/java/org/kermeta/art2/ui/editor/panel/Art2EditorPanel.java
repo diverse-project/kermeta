@@ -19,6 +19,7 @@ import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.property.ComponentPropertyEditor;
 import org.kermeta.art2.ui.editor.property.NamedElementPropertyEditor;
 import org.kermeta.art2.ui.editor.property.NodePropertyEditor;
+import org.kermeta.art2.ui.framework.SelectElement;
 import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
@@ -119,10 +120,11 @@ public class Art2EditorPanel extends JPanel {
             NamedElementPropertyEditor prop = new NamedElementPropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
+        southpanel.repaint();
+        southpanel.revalidate();
 
     }
-
-    public void unshowPropertyFor(JPanel p) {
+    public void unshowPropertyEditor() {
         southpanel.setVisible(false);
         southpanel.removeAll();
     }

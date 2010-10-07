@@ -6,7 +6,6 @@ package org.kermeta.art2.ui.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import org.kermeta.art2.ui.editor.panel.Art2EditorPanel;
 
 /**
  * Hello world!

@@ -5,6 +5,8 @@
 
 package org.kermeta.art2.ui.editor.panel;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 import org.jdesktop.swingx.JXTaskPane;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 
@@ -14,9 +16,14 @@ import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
  */
 public class ComponentTypeLibraryPalette extends JXTaskPane {
 
+    //private JPanel content = new JPanel();
+
     public ComponentTypeLibraryPalette(String name){
         this.setTitle(name);
         this.setName(name);
+        //this.setLayout(new BorderLayout());
+        //add(content);
+        
     }
 
     public void addComponentTypePanel(ComponentTypePanel ctp){
@@ -24,5 +31,7 @@ public class ComponentTypeLibraryPalette extends JXTaskPane {
         repaint();
         revalidate();
     }
+
+ 
 
 }

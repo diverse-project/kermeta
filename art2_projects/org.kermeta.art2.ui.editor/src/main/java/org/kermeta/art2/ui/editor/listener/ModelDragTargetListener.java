@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddComponentCommand;
-import org.kermeta.art2.ui.editor.command.AddHubCommand;
+import org.kermeta.art2.ui.editor.command.AddChannelCommand;
 import org.kermeta.art2.ui.editor.command.MoveComponentCommand;
 import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
@@ -57,7 +57,8 @@ public class ModelDragTargetListener extends DropTarget {
             Object o = arg0.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
             if (isDropAccept(o)) {
                 if (o instanceof ChannelTypePanel) {
-                    AddHubCommand command = new AddHubCommand();
+                    AddChannelCommand command = new AddChannelCommand();
+                    command.setPoint(arg0.getLocation());
                     command.setKernel(kernel);
                     command.execute(o);
                 }

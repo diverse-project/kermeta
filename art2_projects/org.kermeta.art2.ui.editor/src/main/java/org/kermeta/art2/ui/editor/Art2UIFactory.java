@@ -8,9 +8,7 @@ import org.kermeta.art2.ComponentType;
 import java.awt.Component;
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
-import org.kermeta.art2.ui.editor.command.SelectChannelCommand;
-import org.kermeta.art2.ui.editor.command.SelectComponentCommand;
-import org.kermeta.art2.ui.editor.command.SelectNodeCommand;
+import org.kermeta.art2.ui.editor.command.SelectInstanceCommand;
 import org.kermeta.art2.ui.editor.listener.ChannelTypeDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.CommandMouseListener;
 import org.kermeta.art2.ui.editor.listener.ComponentDragSourceListener;
@@ -74,7 +72,7 @@ public class Art2UIFactory {
         cui.setTitle(ci.getName()+" : "+ci.getTypeDefinition().getName());
 
         CommandMouseListener listener = new CommandMouseListener();
-        SelectComponentCommand command = new SelectComponentCommand();
+        SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
         listener.setCommand(command);
         cui.addMouseListener(listener);
@@ -89,7 +87,7 @@ public class Art2UIFactory {
 
 
         CommandMouseListener listener = new CommandMouseListener();
-        SelectNodeCommand command = new SelectNodeCommand();
+        SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
         listener.setCommand(command);
         nui.addMouseListener(listener);
@@ -107,7 +105,7 @@ public class Art2UIFactory {
 
         /* ADD SELECT COMMAND */
         CommandMouseListener mouse_listener = new CommandMouseListener();
-        SelectChannelCommand command = new SelectChannelCommand();
+        SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
         mouse_listener.setCommand(command);
         hui.addMouseListener(mouse_listener);

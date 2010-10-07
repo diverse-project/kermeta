@@ -15,6 +15,11 @@ public class MappingRepository {
     private HashMap<Object, EObject> uiTOemf = new HashMap<Object, EObject>();
     private HashMap<EObject, Object> emfTOui = new HashMap<EObject, Object>();
 
+    public void unbind(Object uio, EObject emfo){
+        uiTOemf.remove(uio);
+        emfTOui.remove(emfo);
+    }
+
     public void bind(Object uio, EObject emfo) {
         uiTOemf.put(uio, emfo);
         emfTOui.put(emfo, uio);

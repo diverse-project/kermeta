@@ -12,6 +12,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
+import org.kermeta.art2.ui.editor.command.RemoveInstanceCommand;
+import org.kermeta.art2.ui.editor.widget.JCommandButton;
 import org.kermeta.art2.ui.framework.ThreePartRoundedPanel;
 import org.kermeta.art2.ui.framework.TitledElement;
 
@@ -35,6 +37,12 @@ public class NamedElementPropertyEditor extends ThreePartRoundedPanel {
 
         this.addCenter(label);
         this.addCenter(namefield);
+
+        JCommandButton btDelete = new JCommandButton("Delete");
+        RemoveInstanceCommand removecmd = new RemoveInstanceCommand(elem);
+        removecmd.setKernel(kernel);
+        btDelete.setCommand(removecmd);
+        this.addCenter(btDelete);
 
         namefield.setText(namedElem.getName());
 
