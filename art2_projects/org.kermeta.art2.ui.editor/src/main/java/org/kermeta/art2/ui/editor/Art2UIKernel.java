@@ -23,6 +23,7 @@ public class Art2UIKernel {
 
     private Art2UIFactory uifactory;
     private ModelPanel modelPanel;
+
     private Art2Handler modelHandler;
     private Art2EditorPanel editorPanel;
 

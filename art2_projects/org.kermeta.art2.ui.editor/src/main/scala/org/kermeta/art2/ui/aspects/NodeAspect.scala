@@ -27,6 +27,9 @@ case class NodeAspect(self : ContainerNode) {
     //REMOVE UI
     var nodePanel = kernel.getUifactory().getMapping().get(self).asInstanceOf[NodePanel]
     var modelPanel = kernel.getUifactory().getMapping().get(self.eContainer).asInstanceOf[ModelPanel]
+
+    println(nodePanel+"-"+modelPanel)
+
     modelPanel.removeInstance(nodePanel)
 
     //REMOVE INSTANCE

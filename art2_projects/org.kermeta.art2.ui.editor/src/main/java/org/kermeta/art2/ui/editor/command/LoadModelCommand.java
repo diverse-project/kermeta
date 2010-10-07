@@ -18,6 +18,7 @@ import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
+import org.kermeta.art2.ui.framework.elements.ModelPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
@@ -40,6 +41,10 @@ public class LoadModelCommand implements Command {
         ContainerRoot previousModel = Art2XmiHelper.load(p.toString());
         kernel.getModelHandler().setActualModel(previousModel);
         kernel.getModelPanel().clear();
+
+        //HACK :-)
+        kernel.getUifactory().getMapping().bind(kernel.getModelPanel(), previousModel);
+
 
         /* Synch every UI Component */
         //LOAD COMPONENT TYPE
