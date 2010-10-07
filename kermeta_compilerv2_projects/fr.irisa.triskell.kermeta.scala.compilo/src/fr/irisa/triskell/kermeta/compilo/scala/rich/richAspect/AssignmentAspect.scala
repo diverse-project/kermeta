@@ -15,17 +15,17 @@ trait AssignmentAspect extends ObjectAspect with LogAspect {
         if (this.isIsCast()){
             res append "try{\n"
         }
-		
         this.getTarget().generateScalaCode(res)
         res.append(" = ")
+        res append "("	
         this.getValue().generateScalaCode(res)
-		 
+        res append ")"	
         /* Step looking for a cast */
         var targetClass : StringBuilder = new StringBuilder
         if (!this.isIsCast()){
-            if(this.getValue().isInstanceOf[VoidLiteral]){
+            //if(this.getValue().isInstanceOf[VoidLiteral]){
                 this.getTarget.getStaticType.generateScalaCode(targetClass)
-            }
+            //}
         } else {
             if (this.getTarget.getStaticType.isInstanceOf[Class] || this.getTarget.getStaticType.isInstanceOf[PrimitiveType]){
                 this.getTarget.getStaticType.generateScalaCode(targetClass)
@@ -41,6 +41,7 @@ trait AssignmentAspect extends ObjectAspect with LogAspect {
         if(!targetClass.toString.equals("")){
             res append ".asInstanceOf["+targetClass.toString+"]"
         }
+        
         res.append(";")
         if (this.isIsCast()){
             res append "\n}catch { case e:ClassCastException => {}}\n"

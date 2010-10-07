@@ -35,8 +35,8 @@ object GlobalConfiguration extends LogAspect{
                 log.info("No output folder specified, temp created : "+result)
                 result
             }
-            outputFolder = outputProject+"/src"
-            outputBinFolder = outputProject+"/bin"
+            outputFolder = outputProject+ java.io.File.separator+"src"
+            outputBinFolder = outputProject + java.io.File.separator+"bin"
             workspaceURI = if(_props.containsKey("workspace.platform.uri")) { _props.getProperty("workspace.platform.uri") } else { null }
             pluginURI = if(_props.containsKey("workspace.plugin.uri")) { _props.getProperty("workspace.plugin.uri") } else { null }
             this.init = true

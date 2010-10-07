@@ -179,11 +179,12 @@ trait OperationAspect extends ObjectAspect with LogAspect {
     t match {
         case "kermeta.standard.Void" => "Unit"
         case "Int" => "java.lang.Integer"
-        case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]
+        //TO Improve
+                /*case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]
                     && (
                         "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
                         "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) )
-                ) => "Boolean"
+                ) => "Boolean"*/
         case booleanRegex() => "java.lang.Boolean"
         case _ => t
     }

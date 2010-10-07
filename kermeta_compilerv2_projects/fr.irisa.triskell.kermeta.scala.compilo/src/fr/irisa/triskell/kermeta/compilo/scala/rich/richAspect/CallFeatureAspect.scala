@@ -33,11 +33,15 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
             //ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
             res.append("]")
           }
-        }else{//TODO gérer l'initialisation des types paramétrés
+        }
+        else{//TODO gérer l'initialisation des types paramétrés
           res.append("null.asInstanceOf[" + this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().getQualifiedNameCompilo() + "]")
         }
       }else{
+          res.append("utils.UTilScala.newInstance(")
         this.getTarget.asInstanceOf[ObjectAspect].generateScalaCode(res)
+        res.append(")")
+
       }
     }
   }
@@ -71,7 +75,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
     
     if(this.getName.contains("split")){
       println("call equivalence")
-      println(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
+      //println(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
     }
     
     
@@ -130,7 +134,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
   def generateInstanceOf(res:StringBuilder, o : fr.irisa.triskell.kermeta.language.structure.Object)={
     res.append("[")
     if (o.isInstanceOf[TypeLiteral]){
-      res.append("_root_.")
+      //res.append("_root_.")
       o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
     }
     else{
@@ -142,18 +146,23 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
   
   /* TO MERGE */
   def generateIsInstanceOf(res:StringBuilder, o : fr.irisa.triskell.kermeta.language.structure.Object)={
-    generateTarget(res);
-    res.append(".");
     if (o.isInstanceOf[TypeLiteral]){
+      generateTarget(res);
+      res.append(".");
+    
       res.append("isInstanceOf[")
-      res.append("_root_.")
+      //res.append("_root_.")
       o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
       res.append("]")
     }
     else{
-      res.append("getClass.getName.equals(")
+      res.append("utils.UTilScala.isInstanceOf(")
+
+      generateTarget(res);
+    res.append(",");
+    
       o.asInstanceOf[ObjectAspect].generateScalaCode(res)
-      res.append(".getClass.getName)")
+      res.append(")")
     }
     res.append("\n")    
   }  
@@ -199,7 +208,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
       case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {res.append(Util.getEcoreRenameOperation(this.getStaticOperation));generateParam(res,"(",")") }
       case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
       case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }
-      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res); }
+      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {println(this.getTarget().getClass); generateTarget(res);res.append(".");generateEnumLiteralCall(res); }
       case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral ==null) => {generateTarget(res);res.append(".");generateName(res) }
       case _ => log.debug("!!! Uncatch case ")
  

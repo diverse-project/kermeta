@@ -14,7 +14,9 @@ trait TypeLiteralAspect extends ObjectAspect {
         if (this.getTyperef().getType.isInstanceOf[Class]){
             res.append("scalaUtil.Util.getMetaClass(\"")
         }
-        this.getTyperef().getType.generateScalaCode(res)
+        res.append(_root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+         
+        //this.getTyperef().getType.generateScalaCode(res)
         if (this.getTyperef().getType.isInstanceOf[Class]){
             res.append("\")")
         }        

@@ -137,8 +137,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             }
         )
 		
-        res.append("}\n def main(args : Array[String]) : Unit = {\n\t init() \n\t" )
-
+        res.append("}\n def main(args : Array[String]) : Unit = {\n")
+        if (packages.exists(pac=> "ecore".equals(pac.getName))){
+            res.append("\t org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.asInstanceOf[org.eclipse.emf.ecore.EcoreFactoryWrapper].setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory) \n \t init() \n\t" )
+        }
         if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
         {
             res.append(GlobalConfiguration.scalaAspectPrefix+".")
@@ -257,9 +259,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
                  if (!(classOf[Object].getCanonicalName.equals(superClassName)
                        || classOf[fr.irisa.triskell.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName)) ){
                        viewDef.append(" with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
-                       println("toto " +superClassName)
+                     //  println("toto " +superClassName)
                 }else{
-                    println(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName)
+                    //println(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName)
                 }
                 viewDef.append(" \n")
 

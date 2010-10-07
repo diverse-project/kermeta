@@ -31,7 +31,7 @@ class Compiler extends LogAspect {
         var startTime = System.currentTimeMillis
         var v : IVisitable = t.loadKM(url).asInstanceOf[IVisitable] /* Load KM Model */
 
-        println(GlobalConfiguration.outputFolder)
+        //println(GlobalConfiguration.outputFolder)
         var fi  = new File(url);
         var fo =  new File(GlobalConfiguration.outputFolder +File.separator+".."+File.separator + "resources").getCanonicalFile
         fo.mkdirs

@@ -95,7 +95,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
         var s: StringBuilder = new StringBuilder
         this.getType().asInstanceOf[ObjectAspect].generateScalaCode(s)
         var currentname : String = this.getName
-        if ("class".equals(currentname)){
+        if ("class".equals(currentname)  &&Util.hasEcoreTag(this) ){
             currentname = currentname + "_"
         }
 		
@@ -106,11 +106,16 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
 		
 		
         res.append("def "+GlobalConfiguration.scalaPrefix)
-        res.append(this.getName+"")
+//        res.append(this.getName+"")
+          res.append(this.getName+"")
         res.append(" : ")
         getListorType(res)
         res.append("={")
         if (this.getGetterBody == null){
+            // For reflexivity
+            if (this.getUpper>1 ||this.getUpper == -1){
+                res.append("new RichKermetaList(")
+            }
             res.append("this.")
             if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
                 if (this.getType().isInstanceOf[PrimitiveType]
@@ -138,8 +143,12 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
                 currentname = getUmlExtension
             }
 		
-            res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()" + "}")
-
+            res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()")
+                  // For reflexivity
+            if (this.getUpper>1 ||this.getUpper == -1){
+                res.append(")")
+            }
+            res.append("}")
         }else{
             res.append("var result : ")
             this.getListorType(res)

@@ -53,21 +53,11 @@ object Main extends LogAspect {
       GlobalConfiguration.load(resource)
 
     }
-//    additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/hrc.jar")
-    //home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/fr.irisa.triskell.fuml_1.0.0.jar")
-
-    
- //   additionalClassPath = List("/Users/ffouquet/.m2/repository/org/kermeta/art2/art2.model/1.4.0-SNAPSHOT/art2.model-1.4.0-SNAPSHOT.jar") ++ additionalClassPath
- //   additionalClassPath = List("/Users/ffouquet/.m2/repository/org/kermeta/art2/art2.model/1.4.0-SNAPSHOT/art2.model-1.4.0-SNAPSHOT.jar") ++ additionalClassPath
-
-  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/malaiExterns.jar") ++ additionalClassPath
-  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/malaiJavaBinding.jar") ++ additionalClassPath
-  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visualExterns.jar") ++ additionalClassPath
-  //  additionalClassPath = List("/Users/ffouquet/Desktop/Arnaud/compil/compilVisu/lib/visuConcretePres.jar") ++ additionalClassPath
 
 
-additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/core.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/directives.jar") ++ additionalClassPath
+//additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/core.jar") ++ additionalClassPath
+//additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/directives.jar") ++ additionalClassPath
+ // additionalClassPath = List("/home/barais/malai.jar") ++ additionalClassPath
   
 
     var inputFile : String = ""
@@ -109,47 +99,22 @@ additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kerm
 	   
     var compilo = new Compiler
 
- //   inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
-
-//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
-//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
-//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/001_LoadUML.km"
-//
-//
-
- //   inputFile = "/Users/ffouquet/Documents/DEV/workspaces/kermetaBench/AntWorld/dev/kermeta/HelloWorld.km"
-// inputFile = "/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
-// 
-// 
- //
- //inputFile = "/Users/ffouquet/Desktop/Arnaud/compil/Visual.km"
- //
- //
-
-    //inputFile = "/Users/ffouquet/NetBeansProjects/POC/PJulien/TestParser/resources/TestFouquetsParser.km"
-    
-    
-    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
-    
+//    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
+  //    inputFile = "/home/barais/workspaces/malal/org.kermeta.ki.visual/kermeta/Visual.km"
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
+      CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     } else {
       log.warn("No Input File Found ! ")
     }
+    
+    
 
     /* Scalac compilation step */
-    /*var classpath =EmbettedScalaCompiler.getActualClasspath
-     if (additionalClassPath != null)
-     classpath = classpath ++ additionalClassPath*/
 
 
     if (scalacompile){
-      //var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
-      /* Scala runner */
-      /* if(compilationResult == 0){
-       EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
-       }*/
       if (false && GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
         var classpath =EmbettedScalaCompiler.getActualClasspath
         
