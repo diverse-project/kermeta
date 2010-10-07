@@ -39,10 +39,19 @@ public class GenmodelPlugin extends AbstractMojo {
      */
     private File genmodel;
 
+
+    /**
+     * Clear output dir
+     *
+     * @parameter
+     */
+    private Boolean clearOutput=true;
+
+
     @Override
     public void execute() throws MojoExecutionException {
         
 
-        Util.createGenModel(ecore, genmodel, output, getLog());
+        Util.createGenModel(ecore, genmodel, output, getLog(),clearOutput);
     }
 }

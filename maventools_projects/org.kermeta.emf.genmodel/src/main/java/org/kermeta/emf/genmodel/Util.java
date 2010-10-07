@@ -50,7 +50,7 @@ public class Util {
         return (path.delete());
     }
 
-    public static void createGenModel(File ecore, File genmodel, File sourcePath, Log log) {
+    public static void createGenModel(File ecore, File genmodel, File sourcePath, Log log,Boolean bool) {
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
                 put("ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
@@ -98,7 +98,10 @@ public class Util {
             }
         }
 
-        deleteDirectory(sourcePath);
+        if(bool) {
+            log.info("Clear output directory , "+sourcePath.getAbsolutePath());
+            deleteDirectory(sourcePath);
+        }
         sourcePath.mkdir();
         EcorePlugin.getPlatformResourceMap().put(outputfileName, URI.createFileURI(sourcePath.getAbsolutePath() + "/"));
         Util.generate(genModelModel, log);
