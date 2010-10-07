@@ -13,6 +13,8 @@ import java.awt.dnd.DropTargetEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.kermeta.art2.ComponentInstance;
+import org.kermeta.art2.ContainerNode;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddComponentCommand;
 import org.kermeta.art2.ui.editor.command.MoveComponentCommand;
@@ -41,7 +43,14 @@ public class NodeDragTargetListener extends DropTarget {
 
     private Boolean isDropAccept(Object o) {
         if (o instanceof ComponentPanel) {
-            return true;
+            //CHECK IF THIS COMPONENT IS NOT IN NODE
+            ComponentInstance component = (ComponentInstance) kernel.getUifactory().getMapping().get(o);
+
+            if (((ContainerNode)component.eContainer()).getComponents().contains(component)) {
+                return false;
+            } else {
+                return true;
+            }
         }
         if (o instanceof ComponentTypePanel) {
             return true;
