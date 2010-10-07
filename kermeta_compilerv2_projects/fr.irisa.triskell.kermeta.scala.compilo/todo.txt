@@ -19,8 +19,9 @@
 	
 
 #ok 7. 	 fr.irisa.triskell.kermeta.language.structure.ConstraintType.ConstraintType =>  fr.irisa.triskell.kermeta.language.structure.ConstraintType
-dans getqualifiedNameCompilo des enum séparé le cas des enums ecore.
 
-8. Gérer les property avec body.
-9. Gérer les isVoid.
-10. Implanter toutes les méthodes du Framework
+
+NameRefAspect pas de root ni de scalaAspect  :  and((scalaUtil.Util.getMetaClass("kompose.Mergeable")).isSuperTypeOf((p).Scalatype))}
+
+file:/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output/shipshop.kompose
+
