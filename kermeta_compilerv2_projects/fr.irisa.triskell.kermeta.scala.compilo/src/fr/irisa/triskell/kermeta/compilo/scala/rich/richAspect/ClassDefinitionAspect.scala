@@ -19,14 +19,12 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
     }
 	
     override def generateScalaCode(res : StringBuilder) : Unit = {
-        res.append("import "+ GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n")
+        res.append("import "+ "_root_."+ GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n")
         if (Util.hasEcoreTag(this)){
             res.append("trait ")
             res.append(this.getName())
             res.append("Aspect")
             this.generateParamerterClass(res)
-			
-			
             if (this.getSuperType.size == 0){//1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
                 res append " extends "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
                 // res.append(" with ScalaAspect.org.eclipse.emf.ecore.EObjectAspect")
