@@ -17,19 +17,19 @@ import javax.jmdns._
 import scala.actors.TIMEOUT
 import scala.collection.JavaConversions._
 
-class Art2DiscoveryActor(minutes:Int,modelHandler : Art2ModelHandlerService,dispatcherPort : Int,modelSynchPort : Int) extends Art2Actor with ServiceListener {
+class Art2DiscoveryActor(secondes:Int,modelHandler : Art2ModelHandlerService,dispatcherPort : Int,modelSynchPort : Int) extends Art2Actor with ServiceListener {
 
   var jmdns : List[JmDNS] = List()
   var logger = LoggerFactory.getLogger(this.getClass);
 
   //case class UPDATE_PLATFORM_MSG
 
-  def act()={
+  override def act()={
     loop{
-      reactWithin(minutes*60*1000) {
-        case STOP => exit
+      reactWithin(secondes*1000) {
+        case STOP_ACTOR => exit
           //case UPDATE_PLATFORM_MSG => updatePlatformModelFromJMDNS()
-        case TIMEOUT => updatePlatformModelFromJMDNS()
+        case TIMEOUT => { logger.info("Periodic update");updatePlatformModelFromJMDNS() }
       }
     }
   }
@@ -82,7 +82,7 @@ class Art2DiscoveryActor(minutes:Int,modelHandler : Art2ModelHandlerService,disp
   }
 
   /* STOP ALL JMDNS SERVICE */
-  override def stop(){jmdns.foreach{j=>j.close()};this ! STOP}
+  override def stop(){jmdns.foreach{j=>j.close()};super[Art2Actor].forceStop}
 
   def serviceAdded(event: javax.jmdns.ServiceEvent)={
     /*
@@ -126,5 +126,9 @@ class Art2DiscoveryActor(minutes:Int,modelHandler : Art2ModelHandlerService,disp
       case _ @ e => logger.error("ART2 Platform model update error", e)
     }
   }
+
+    def internal_process(msg : Any) = {
+
+    }
 
 }
