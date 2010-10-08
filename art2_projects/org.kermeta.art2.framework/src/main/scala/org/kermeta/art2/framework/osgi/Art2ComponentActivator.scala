@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -54,11 +54,18 @@ abstract class Art2ComponentActivator extends BundleActivator {
     /* START NEEDPORT ACTOR */
     componentActor.getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].start}
 
+    /* START HOSTED ACTOR */
+    componentActor.getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].start}
+
+
   }
 
   def stop(bc : BundleContext){
     /* STOP NEEDED PORT */
     componentActor.getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].stop}
+    /* STOP NEEDED PORT */
+    componentActor.getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].stop}
+
     componentActor.stop
     componentActor = null
   }

@@ -7,7 +7,6 @@ package org.kermeta.art2.framework
 
 import java.util.HashMap
 import org.kermeta.art2.framework.message._
-import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import scala.reflect.BeanProperty
 
@@ -58,50 +57,46 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
     }
   }
 
-  def act()={
-    loop{
-      react {
-        case STOP => exit //TODO EMPTY WAITING LIST
-        case msg : Art2FragmentBindMessage=> {
-            fragementBinded.put(createPortKey(msg), msg.getProxy);
-            msg.getProxy.start;
-            reply(true)
-          }
-        case msg : Art2FragmentUnbindMessage=> {
-            var actorPort = fragementBinded.get(createPortKey(msg))
-            if(actorPort!=null){
-              actorPort.stop
-              fragementBinded.remove(createPortKey(msg))
-            } else {
-              println("Can't unbind Fragment "+createPortKey(msg))
-            }
-            reply(true)
-          }
-        case msg : Art2PortBindMessage => portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)
-        case msg : Art2PortUnbindMessage => portsBinded.remove(createPortKey(msg));reply(true)
-          //USE CASE A MSG REC BY OTHER FRAGMENT
-        case msg : Art2Message => {
-            if(msg.inOut.booleanValue){
-              reply(dispatch(msg))
-            } else {
-              dispatch(msg)
-            }
-          }
-        case msg : MethodCallMessage =>{
-            var msg2 = new Art2Message
-            msg2.setInOut(true)
-            msg2.setContent(msg)
-            reply(dispatch(msg2))
-          }
-        case msg : Object => {
-            var msg2 = new Art2Message
-            msg2.setInOut(false)
-            msg2.setContent(msg)
-            dispatch(msg2)
-          }
-        case _ @ msg => println("WTF !")
+  override def internal_process(msg : Any)= msg match {
+    case msg : Art2FragmentBindMessage=> {
+        fragementBinded.put(createPortKey(msg), msg.getProxy);
+        msg.getProxy.start;
+        reply(true)
       }
-    }
+    case msg : Art2FragmentUnbindMessage=> {
+        var actorPort = fragementBinded.get(createPortKey(msg))
+        if(actorPort!=null){
+          actorPort.stop
+          fragementBinded.remove(createPortKey(msg))
+        } else {
+          println("Can't unbind Fragment "+createPortKey(msg))
+        }
+        reply(true)
+      }
+    case msg : Art2PortBindMessage => {portsBinded.put(createPortKey(msg), msg.getProxy);reply(true)}
+    case msg : Art2PortUnbindMessage => {portsBinded.remove(createPortKey(msg));reply(true)}
+      //USE CASE A MSG REC BY OTHER FRAGMENT
+    case msg : Art2Message => {
+        if(msg.inOut.booleanValue){
+          reply(dispatch(msg))
+        } else {
+          dispatch(msg)
+        }
+      }
+    case msg : MethodCallMessage =>{
+        var msg2 = new Art2Message
+        msg2.setInOut(true)
+        msg2.setContent(msg)
+        reply(dispatch(msg2))
+      }
+    case msg : Object => {
+        var msg2 = new Art2Message
+        msg2.setInOut(false)
+        msg2.setContent(msg)
+        dispatch(msg2)
+      }
+    case _ @ msg => println("WTF !")
   }
+  
 
 }

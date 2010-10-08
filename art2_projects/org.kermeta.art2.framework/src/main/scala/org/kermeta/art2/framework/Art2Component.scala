@@ -16,34 +16,32 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
 
   var logger = LoggerFactory.getLogger(this.getClass);
 
-  def act() = {
-    loop {
-      react {
-        case STOP => exit
-        case Art2StartMessage => {
-            getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].start}
-            //getArt2ComponentType.getNeededPorts.foreach{np=>np.asInstanceOf[Art2Port].start} //DEPRECATED NP STARTED AT ACTIVATOR TIME
-            startComponent
-            reply(true)
+  override def internal_process(msg : Any) = msg match {
+    case Art2StartMessage => {
+        //Wake Up Hosted Port
+        getArt2ComponentType.getHostedPorts.foreach{hp=>
+          var port = hp._2.asInstanceOf[Art2Port]
+          if(port.isInPause){
+            port.resume
+          }
         }
-        case Art2StopMessage => { 
-            getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].stop}
-            //getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].stop} //DEPRECATED NP STARTED AT ACTIVATOR TIME
-            stopComponent
-            reply(true)
-        }
-  /*
-        case msg : Art2BindMessage => {
-            /* TODO CHECK NODE NAME & COMPONENT NAME */
-            c.getNeededPorts.find({np => np.asInstanceOf[Port].getName == msg.getDestPortName}) match {
-              case None => logger.error("none found port message "+msg)
-              case Some(d)=> d.asInstanceOf[Art2Actor] ! msg
-            }
-        }*/
-        case _ @ msg => logger.error("unknow message "+msg)
+        startComponent
+        reply(true)
       }
-    }
+    case Art2StopMessage => {
+        //Pause Hosted Port
+        getArt2ComponentType.getHostedPorts.foreach{hp=>
+          var port = hp._2.asInstanceOf[Art2Port]
+          if(!port.isInPause){
+            port.pause
+          }
+        }
+        stopComponent
+        reply(true)
+      }
+      case _ @ msg => logger.error("unknow message "+msg)
   }
+
 
   def startComponent
   def stopComponent

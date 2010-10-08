@@ -42,13 +42,11 @@ object Art2ProvidedPortGenerator {
           ref.getMappings.find(map=>{map.getServiceMethodName.equals(Constants.ART2_MESSAGEPORT_DEFAULTMETHOD)}) match {
             case Some(mapping)=>{
                 /* GENERATE LOOP */
-                wrapper.append("def act()={\n")
-                wrapper.append("loop{\nreact{\n")
-                wrapper.append("case STOP=>exit\n")
+                wrapper.append("override def internal_process(msg : Any)=msg match {\n")
                 /* CALL MAPPED METHOD */
                 wrapper.append("case _ @ msg => component.")
                 wrapper.append(mapping.getBeanMethodName+"(msg)\n")
-                wrapper.append("}}}\n")
+                wrapper.append("}\n")
               }
             case None => logger.error("Error method mapping not found ");System.exit(1)
           }
@@ -76,8 +74,7 @@ object Art2ProvidedPortGenerator {
             wrapper.append("}\n")
           }
           /* CREATE ACTOR LOOP */
-          wrapper.append("def act() = {loop{react{\n")
-          wrapper.append("case STOP=>exit\n")
+           wrapper.append("override def internal_process(msg : Any)=msg match {\n")
           wrapper.append("case opcall : org.kermeta.art2.framework.MethodCallMessage => reply(opcall.getMethodName match {\n")
           sPT.getOperations.foreach{op=>
             /* FOUND METHOD MAPPING */
@@ -95,7 +92,7 @@ object Art2ProvidedPortGenerator {
             }
           }
           wrapper.append("case _ @ o => println(\"uncatch message , method not found in service declaration : \"+o);null \n")
-          wrapper.append("})}}}\n")
+          wrapper.append("})}\n")
         }
 
     }

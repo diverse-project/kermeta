@@ -34,26 +34,22 @@ trait Art2RequiredPort extends Art2Port {
     }
   }
 
-  def act() = {
-    loop {
-      react {
-        case STOP => exit
-        case bindmsg : Art2FragmentBindMessage => { bind(bindmsg);reply(true) }
-        case unbindmsg : Art2FragmentUnbindMessage => { unbind(unbindmsg);reply(true) }
-          /* other kind of message send */
-        case _ @ msg => {
-            delegate match {
-              case None => react {case bindmsg : Art2FragmentBindMessage => bind(bindmsg)}
-              case Some(d) => {
-                  if(getInOut){
-                    try { reply(d !? (10000,msg)) } catch { case _ @ e=> logger.error("error sending message  ",e) }
-                  } else {
-                    try { d ! msg } catch { case _ @ e=> logger.error("error sending message  ",e) }
-                  }
-                }
+  override def internal_process(msg : Any) = msg match {
+    case bindmsg : Art2FragmentBindMessage => { bind(bindmsg);reply(true) }
+    case unbindmsg : Art2FragmentUnbindMessage => { unbind(unbindmsg);reply(true) }
+      /* other kind of message send */
+    case _ @ msg => {
+        delegate match {
+          case None => react {case bindmsg : Art2FragmentBindMessage => bind(bindmsg)}
+          case Some(d) => {
+              if(getInOut){
+                try { reply(d !? (10000,msg)) } catch { case _ @ e=> logger.error("error sending message  ",e) }
+              } else {
+                try { d ! msg } catch { case _ @ e=> logger.error("error sending message  ",e) }
+              }
             }
-          }
+        }
       }
-    }
+
   }
 }
