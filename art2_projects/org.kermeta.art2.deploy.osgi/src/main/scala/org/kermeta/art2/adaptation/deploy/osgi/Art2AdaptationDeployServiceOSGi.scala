@@ -25,17 +25,20 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
   var ctx : Art2DeployManager = null
   var logger = LoggerFactory.getLogger(this.getClass);
 
-
   def setContext(context : Art2DeployManager) = { ctx = context }
-
   def deploy(model : AdaptationModel,nodeName:String) = {
 
     var phase = new Art2DeployPhase
 
     var executedCommandTP :List[PrimitiveCommand] = List()
-    var executedCommandCT :List[PrimitiveCommand] = List()
+    //var executedCommandCT :List[PrimitiveCommand] = List()
     //var executedCommandCI :List[PrimitiveCommand] = List()
     //  var executedCommandBI :List[PrimitiveCommand] = List()
+
+
+    //TYPE LIST
+    var command_add_type :List[PrimitiveCommand] = List()
+    var command_remove_type :List[PrimitiveCommand] = List()
 
 
     //INSTANCE LIST
@@ -57,8 +60,8 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         case tpa : AddThirdParty =>executedCommandTP = executedCommandTP ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
         case tpa : RemoveThirdParty =>executedCommandTP = executedCommandTP ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
           //Type
-        case cta : AddType =>executedCommandCT = executedCommandCT ++ List(AddTypeCommand(cta.getRef,ctx))
-        case cta : RemoveType =>executedCommandCT = executedCommandCT ++ List(RemoveTypeCommand(cta.getRef,ctx))
+        case cta : AddType =>command_add_type = command_add_type ++ List(AddTypeCommand(cta.getRef,ctx))
+        case cta : RemoveType =>command_remove_type = command_remove_type ++ List(RemoveTypeCommand(cta.getRef,ctx))
           //Instance
         case ca : AddInstance => {
             command_add_instance = command_add_instance ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
@@ -88,15 +91,16 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     if(executionResult){ executionResult=phase.phase(stopCommand,"Phase 0 STOP COMPONENT",false) }
     if(executionResult){ executionResult=phase.phase(command_remove_binding,"Phase 1 Remove Binding",false) }
     if(executionResult){ executionResult=phase.phase(command_remove_instance,"Phase 2 Remove Instance",false) }
+    if(executionResult){ executionResult=phase.phase(command_remove_type,"Phase 3 Remove ComponentType",false) }
 
     //INSTALL TYPE
-    if(executionResult){ executionResult=phase.phase(executedCommandTP,"Phase 3 ThirdParty",true) }
-    if(executionResult){ executionResult=phase.phase(executedCommandCT,"Phase 4 ComponentType",true) }
+    if(executionResult){ executionResult=phase.phase(executedCommandTP,"Phase 4 ThirdParty",true) }
+    if(executionResult){ executionResult=phase.phase(command_add_type,"Phase 5 Add ComponentType",true) }
 
     //INSTALL ISTANCE
-    if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 5 install ComponentInstance",true) }
-    if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 6 install Bindings",false) }
-    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 7 START COMPONENT",false) }
+    if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 6 install ComponentInstance",true) }
+    if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 7 install Bindings",false) }
+    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 8 START COMPONENT",false) }
 
     if(!executionResult){phase.rollback}
 

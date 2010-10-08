@@ -19,7 +19,7 @@ class Art2DeployPhase {
         try{
           c.undo
         } catch {
-          case _ @ e => logger.error("ART2 PHase ROLLBACK !!!! DEPLOYERROR="+e);
+          case _ @ e => logger.error("ART2 Phase ROLLBACK Error !!!! DEPLOYERROR=",e);
         }
       })
     executed = List()
@@ -28,9 +28,8 @@ class Art2DeployPhase {
   def phase(cmds: List[PrimitiveCommand],desc:String,autostart:Boolean):Boolean = {
     logger.info(desc+"="+cmds.size)
     var intermediate = cmds.forall(c=> {
-        try{ c.execute } catch {
-          case _ @ e => logger.error("ART2 DEPLOY ERROR=",e);false
-        }
+        logger.info("Execute command "+c.getClass.getName)
+        try{ c.execute } catch { case _ @ e => logger.error("ART2 DEPLOY ERROR=",e);false }
       })
 
     if(intermediate && autostart){
