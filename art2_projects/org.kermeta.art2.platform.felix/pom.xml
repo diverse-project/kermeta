@@ -30,10 +30,10 @@
                     </provision>
 
                     <deployURLs>
-                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework.bus.netty,
-                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework.bus.jmdns,
-                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.framework,
-                        mvn:http://duke.irisa.fr/maven2!org.kermeta.art2/art2.deploy.osgi
+                        mvn:org.kermeta.art2/art2.framework.bus.netty,
+                        mvn:org.kermeta.art2/art2.framework.bus.jmdns,
+                        mvn:org.kermeta.art2/art2.framework,
+                        mvn:org.kermeta.art2/art2.deploy.osgi
                         
                         <!--
                         file:/Applications/eclipse/eclipse35/plugins/org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar,
