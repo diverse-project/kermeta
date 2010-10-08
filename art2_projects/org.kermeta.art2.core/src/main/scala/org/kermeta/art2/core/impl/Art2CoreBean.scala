@@ -54,38 +54,35 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   }
 
   override def stop() : Unit = {
+    super[Art2Actor].forceStop
     Art2XmiHelper.save(bundleContext.getDataFile("lastModel.xmi").getAbsolutePath(), models.head);
-    exit
   }
 
-  def act()={
-    loop{
-      react {
-        case updateMsg : Art2PlatformModelUpdate => Art2PlatformHelper.updateNodeLinkProp(model,nodeName, updateMsg.targetNodeName, updateMsg.key, updateMsg.value, updateMsg.networkType, updateMsg.weight)
-        case Art2PreviousModel() => reply(models)
-        case Art2LastModel() => reply(model) /* TODO DEEP CLONE */
-        case Art2UpdateModel(newmodel) => {
-            if (newmodel == null) { logger.error("Null model")} else {
+  def internal_process(msg : Any) = msg match {
+    case updateMsg : Art2PlatformModelUpdate => Art2PlatformHelper.updateNodeLinkProp(model,nodeName, updateMsg.targetNodeName, updateMsg.key, updateMsg.value, updateMsg.networkType, updateMsg.weight)
+    case Art2PreviousModel() => reply(models)
+    case Art2LastModel() => reply(model) /* TODO DEEP CLONE */
+    case Art2UpdateModel(newmodel) => {
+        if (newmodel == null) { logger.error("Null model")} else {
 
-              var adaptationModel = kompareService.kompare(model, newmodel, nodeName);
-              var deployResult = deployService.deploy(adaptationModel,nodeName);
+          var adaptationModel = kompareService.kompare(model, newmodel, nodeName);
+          var deployResult = deployService.deploy(adaptationModel,nodeName);
 
-              if(deployResult){
-                //MErge previous model on new model for platform model
-                Art2PlatformMerger.merge(newmodel,model)
-                switchToNewModel(newmodel)
-                logger.info("Deploy result " + deployResult)
-              } else {
-                //KEEP FAIL MODEL
-              }
-              reply(deployResult)
-
-            }
+          if(deployResult){
+            //MErge previous model on new model for platform model
+            Art2PlatformMerger.merge(newmodel,model)
+            switchToNewModel(newmodel)
+            logger.info("Deploy result " + deployResult)
+          } else {
+            //KEEP FAIL MODEL
           }
-        case _ @ unknow=> logger.warn("unknow message  "+unknow)
+          reply(deployResult)
+
+        }
       }
-    }
+    case _ @ unknow=> logger.warn("unknow message  "+unknow)
   }
+
   
   override def getLastModel : ContainerRoot = (this !? Art2LastModel()).asInstanceOf[ContainerRoot]
   override def updateModel(model : ContainerRoot) : java.lang.Boolean ={ (this !? Art2UpdateModel(model)).asInstanceOf[Boolean] }
