@@ -44,7 +44,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   var channelfutur : Option[ChannelFuture] = None
   var allChannels = new DefaultChannelGroup()
 
- // case class STOP_RACTOR
+  // case class STOP_RACTOR
   case class CHANNEL_CONNECTED(e : ChannelStateEvent)
   //case class RESPONSE_RECEIVE(msg : Any)
 
@@ -63,7 +63,6 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     newbootstrap.setOption("connectTimeoutMillis", timeout);
     bootstrap = Some(newbootstrap)
     super.start()
-    this
   }
 
   def getPipeline() : ChannelPipeline = {
@@ -123,7 +122,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   }
 
   /* private method to clode the client after sending message */
-  private def interneStop(){
+  override  def stop(){
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -138,6 +137,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
           case Some(p) => p.shutdown
         }
     }
+    super[Art2Actor].stop
   }
 
   def sendMessage(c : Channel,o : Any) : Boolean = {
@@ -148,27 +148,41 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     }
   }
 
-  def act() = {
-    loop {
-      react {
-        case STOP => { interneStop(); exit() }
-        case _ @ msg => channelfutur match {
-            case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
-            case _ => {
-                /* TRY TO RECONNECT */
-                logger.info("Try to reconnect netty")
-                reconnect
-                var sended = false
-                loopWhile(!sended){
-                  reactWithin(timeout) {
-                    case s : STOP => exit()
-                    case c : CHANNEL_CONNECTED => sended = sendMessage(c.e.getChannel,msg);
-                    case TIMEOUT => reconnect
-                  }
-                }
+  def internal_process(msg : Any) = msg match {
+    case _ @ msg => channelfutur match {
+        case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
+        case _ => {
+            /* TRY TO RECONNECT */
+            logger.info("Try to reconnect netty")
+            reconnect
+            var sended = false
+            loopWhile(!sended){
+              reactWithin(timeout) {
+                case c : CHANNEL_CONNECTED => sended = sendMessage(c.e.getChannel,msg);
+                case TIMEOUT => reconnect
               }
+            }
           }
       }
-    }
   }
+  /*
+   override  def act() { loop { react {
+   case STOP_ACTOR => exit
+   case _ @ msg => channelfutur match {
+   case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
+   case _ => {
+   /* TRY TO RECONNECT */
+   logger.info("Try to reconnect netty")
+   reconnect
+   var sended = false
+   loopWhile(!sended){
+   reactWithin(timeout) {
+   case s : STOP_ACTOR => exit()
+   case c : CHANNEL_CONNECTED => sended = sendMessage(c.e.getChannel,msg);
+   case TIMEOUT => reconnect
+   }
+   }
+   }
+   }
+   }}}*/
 }

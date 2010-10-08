@@ -19,6 +19,8 @@ import scala.collection.JavaConversions._
 
 class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : Int,modelHandler : Art2ModelHandlerService) extends Art2Actor {
 
+  def internal_process(msg : Any) = {}
+
   var me : Art2Actor = this
   var client = new UdpClientRemoteActor(this,art2discoveryPort)
   var logger = LoggerFactory.getLogger(this.getClass)
@@ -36,10 +38,11 @@ class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : In
   };
 
   var timer : Art2Actor = new Art2Actor {
-    def act = {
+    def internal_process(msg : Any)={}
+    override def act = {
       loop {
         reactWithin(360000) {
-          case STOP => exit
+          case STOP_ACTOR => exit
           case TIMEOUT => { /* TODO SEND RICHER MESSAGE */
               var discoveryMessage = new Art2DiscoveryMessage
               discoveryMessage.setOriginNodeName(modelHandler.getNodeName)
@@ -66,83 +69,83 @@ class Art2PlatformDiscoveryActor(art2discoveryPort : Int,art2dispatcherPort : In
     timer.stop;server.stop;client.stop;exit
   }
 
-  def act = {
+  override  def act = {
     loop {
       react {
         case jsoncontent : String => {
             logger.info("Discovery message rec="+jsoncontent)
             /*
-            try{
-              var art2discoveryMessage = jsoncontent.fromJSON(classOf[Art2DiscoveryMessage])
-              var actualModel = modelHandler.getLastModel
-              var platformModel : org.kermeta.art2.PlatformModel = actualModel.getPlatformModel
-              /* SEARCH THE NODE NETWORK */
-              var nodenetwork = platformModel.getNodeNetworks.find({nn => nn.getInitBy.getName == modelHandler.getNodeName && nn.getTarget == art2discoveryMessage.getOriginNodeName }) getOrElse {
-                var newNodeNetwork = Art2Factory.eINSTANCE.createNodeNetwork
-                var thisNode = actualModel.getNodes.find({loopNode => loopNode.getName == modelHandler.getNodeName })
-                var targetNode = actualModel.getNodes.find({loopNode => loopNode.getName == art2discoveryMessage.getOriginNodeName })
-                thisNode match {
-                  case Some(thisNode)=>{
-                      newNodeNetwork.setTarget(targetNode.getOrElse{
-                          logger.warn("Unknow node add to model")
-                          var newnode =Art2Factory.eINSTANCE.createContainerNode
-                          newnode.setName(art2discoveryMessage.getOriginNodeName)
-                          actualModel.getNodes.add(newnode)
-                          newnode
-                        })
-                      newNodeNetwork.setInitBy(thisNode)
-                      platformModel.getNodeNetworks.add(newNodeNetwork)
-                    }
-                  case None => throw new Exception("Self node name not found")
-                }
-                newNodeNetwork
-              }
-              /* Found node link */
-              var nodelink = nodenetwork.getLink.find(loopLink => loopLink.getNetworkType == art2discoveryMessage.getNetworkType).getOrElse{
-                var newlink = Art2Factory.eINSTANCE.createNodeLink
-                newlink.setNetworkType(art2discoveryMessage.getNetworkType)
-                nodenetwork.getLink.add(newlink)
-                newlink
-              }
-              try { nodelink.setEstimatedRate(Integer.parseInt(art2discoveryMessage.getNetworkRate)) } catch {
-                case _ @ e => logger.error("Unexpected estimate rate",e)
-              }
+             try{
+             var art2discoveryMessage = jsoncontent.fromJSON(classOf[Art2DiscoveryMessage])
+             var actualModel = modelHandler.getLastModel
+             var platformModel : org.kermeta.art2.PlatformModel = actualModel.getPlatformModel
+             /* SEARCH THE NODE NETWORK */
+             var nodenetwork = platformModel.getNodeNetworks.find({nn => nn.getInitBy.getName == modelHandler.getNodeName && nn.getTarget == art2discoveryMessage.getOriginNodeName }) getOrElse {
+             var newNodeNetwork = Art2Factory.eINSTANCE.createNodeNetwork
+             var thisNode = actualModel.getNodes.find({loopNode => loopNode.getName == modelHandler.getNodeName })
+             var targetNode = actualModel.getNodes.find({loopNode => loopNode.getName == art2discoveryMessage.getOriginNodeName })
+             thisNode match {
+             case Some(thisNode)=>{
+             newNodeNetwork.setTarget(targetNode.getOrElse{
+             logger.warn("Unknow node add to model")
+             var newnode =Art2Factory.eINSTANCE.createContainerNode
+             newnode.setName(art2discoveryMessage.getOriginNodeName)
+             actualModel.getNodes.add(newnode)
+             newnode
+             })
+             newNodeNetwork.setInitBy(thisNode)
+             platformModel.getNodeNetworks.add(newNodeNetwork)
+             }
+             case None => throw new Exception("Self node name not found")
+             }
+             newNodeNetwork
+             }
+             /* Found node link */
+             var nodelink = nodenetwork.getLink.find(loopLink => loopLink.getNetworkType == art2discoveryMessage.getNetworkType).getOrElse{
+             var newlink = Art2Factory.eINSTANCE.createNodeLink
+             newlink.setNetworkType(art2discoveryMessage.getNetworkType)
+             nodenetwork.getLink.add(newlink)
+             newlink
+             }
+             try { nodelink.setEstimatedRate(Integer.parseInt(art2discoveryMessage.getNetworkRate)) } catch {
+             case _ @ e => logger.error("Unexpected estimate rate",e)
+             }
               
-              /* Found Network remote IP */
-              nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.ip" }).getOrElse{
-                var newprop = Art2Factory.eINSTANCE.createNetworkProperty
-                newprop.setName("art2.remote.node.ip")
-                nodelink.getNetworkProperties.add(newprop)
-                newprop
-              }.setValue(art2discoveryMessage.getRemoteAddr)
-              /* Found Network remote IP */
-              nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.port" }).getOrElse{
-                var newprop = Art2Factory.eINSTANCE.createNetworkProperty
-                newprop.setName("art2.remote.node.ip")
-                nodelink.getNetworkProperties.add(newprop)
-                newprop
-              }.setValue(art2dispatcherPort.toString) /* TODO BETTER IMPLEMENTATION */
-              /* Found Network remote discovery port */
-              nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.discovery.port" }).getOrElse{
-                var newprop = Art2Factory.eINSTANCE.createNetworkProperty
-                newprop.setName("art2.remote.node.discovery.port")
-                nodelink.getNetworkProperties.add(newprop)
-                newprop
-              }.setValue(art2discoveryMessage.getArt2DiscoveryPort.toString)
+             /* Found Network remote IP */
+             nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.ip" }).getOrElse{
+             var newprop = Art2Factory.eINSTANCE.createNetworkProperty
+             newprop.setName("art2.remote.node.ip")
+             nodelink.getNetworkProperties.add(newprop)
+             newprop
+             }.setValue(art2discoveryMessage.getRemoteAddr)
+             /* Found Network remote IP */
+             nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.port" }).getOrElse{
+             var newprop = Art2Factory.eINSTANCE.createNetworkProperty
+             newprop.setName("art2.remote.node.ip")
+             nodelink.getNetworkProperties.add(newprop)
+             newprop
+             }.setValue(art2dispatcherPort.toString) /* TODO BETTER IMPLEMENTATION */
+             /* Found Network remote discovery port */
+             nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.discovery.port" }).getOrElse{
+             var newprop = Art2Factory.eINSTANCE.createNetworkProperty
+             newprop.setName("art2.remote.node.discovery.port")
+             nodelink.getNetworkProperties.add(newprop)
+             newprop
+             }.setValue(art2discoveryMessage.getArt2DiscoveryPort.toString)
               
-              /* Found Network remote dispatcher port */
-              nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.dispatcher.port" }).getOrElse{
-                var newprop = Art2Factory.eINSTANCE.createNetworkProperty
-                newprop.setName("art2.remote.node.dispatcher.port")
-                nodelink.getNetworkProperties.add(newprop)
-                newprop
-              }.setValue(art2discoveryMessage.getArt2DispatcherPort.toString)
+             /* Found Network remote dispatcher port */
+             nodelink.getNetworkProperties.find({networkProp => networkProp.getName == "art2.remote.node.dispatcher.port" }).getOrElse{
+             var newprop = Art2Factory.eINSTANCE.createNetworkProperty
+             newprop.setName("art2.remote.node.dispatcher.port")
+             nodelink.getNetworkProperties.add(newprop)
+             newprop
+             }.setValue(art2discoveryMessage.getArt2DispatcherPort.toString)
 
 
-              /* Synch model handler - switch to online mode */
+             /* Synch model handler - switch to online mode */
               
-            } catch {case _ @ e => logger.error("Unexpected exception, while sending msg.",e) }
-            */
+             } catch {case _ @ e => logger.error("Unexpected exception, while sending msg.",e) }
+             */
           }
         case _ @ m => logger.warn("unprocess message : "+m.toString)
       }

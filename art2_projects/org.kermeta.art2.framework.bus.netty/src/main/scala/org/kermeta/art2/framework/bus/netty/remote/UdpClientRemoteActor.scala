@@ -37,6 +37,10 @@ import scala.actors.Actor
 
 class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUpstreamHandler with Art2Actor {
 
+  def internal_process(msg : Any) = {
+    
+  }
+
   var logger = LoggerFactory.getLogger(this.getClass);
   var bootstrap : Option[ConnectionlessBootstrap] = None
   // var bossPool : Option[java.util.concurrent.ExecutorService] = None
@@ -97,7 +101,7 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
   }
 
   override def stop(){
-    me ! STOP()
+    me ! STOP_ACTOR()
     bootstrap match {
       case None =>
       case Some(b) =>
@@ -118,10 +122,10 @@ class UdpClientRemoteActor(delegate : Actor,port : Int) extends SimpleChannelUps
     }
   }
 
-  def act() = {
+override  def act() = {
     loop {
       react {
-        case STOP() =>
+        case STOP_ACTOR(f) =>
           loopWhile(this.mailboxSize > 0){
             react {
               case _ @ msg =>

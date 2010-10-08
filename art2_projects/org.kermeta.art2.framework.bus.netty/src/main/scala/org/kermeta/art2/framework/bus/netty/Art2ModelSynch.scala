@@ -46,70 +46,64 @@ class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService) extends 
   override def start() : Actor = {
     //client.start
     server.start
-    super.start
+    super[Art2Actor].start
   }
 
   override def stop(){
     //client.stop
     server.stop
-    me ! STOP
+    super[Art2Actor].stop
   }
 
-  def act()={
-    loop{
-      react {
-        case STOP => exit
-        case  msg : String=> {
-            logger.info("Model rec from other fragment"+msg)
+  def internal_process(msg : Any) = msg match {
+    case nmsg : ART_NETTY_MESSAGE => {
+        var msg = nmsg.e.getMessage.toString
+        logger.info("Model rec from other fragment"+msg)
             
-            var msgsynch = msg.fromJSON(classOf[Art2ModelSynchMessage])
+        var msgsynch = msg.fromJSON(classOf[Art2ModelSynchMessage])
 
-            if(msgsynch.getNodeSenderName == modelHandler.getNodeName || msgsynch.passedNodes.contains(modelHandler.getNodeName) ){
-              logger.info("No process msg send by me or passed by me !")
-            } else {
-              var stream = new ByteArrayInputStream(msgsynch.getNewModelAsString.toString.getBytes)
-              var newModel = Art2XmiHelper.loadStream(stream)
-              if(modelHandler != null){
-                var result = modelHandler.updateModel(newModel)
-                if(result.booleanValue){
-                  logger.info("local model update ok, send version to all fragment")
-                  var root = modelHandler.getLastModel
+        if(msgsynch.getNodeSenderName == modelHandler.getNodeName || msgsynch.passedNodes.contains(modelHandler.getNodeName) ){
+          logger.info("No process msg send by me or passed by me !")
+        } else {
+          var stream = new ByteArrayInputStream(msgsynch.getNewModelAsString.toString.getBytes)
+          var newModel = Art2XmiHelper.loadStream(stream)
+          if(modelHandler != null){
+            var result = modelHandler.updateModel(newModel)
+            if(result.booleanValue){
+              logger.info("local model update ok, send version to all fragment")
+              var root = modelHandler.getLastModel
 
-                  msgsynch.passedNodes.add(modelHandler.getNodeName)
-                  msgsynch.setNodeSenderName(modelHandler.getNodeName)
-                  root.getNodes.filter(node => node.getName != modelHandler.getNodeName ).foreach{remoteNode =>
-                    //SEND
-                    var ip = Art2PlatformHelper.getProperty(root,remoteNode.getName, Constants.ART2_PLATFORM_REMOTE_NODE_IP)
-                    var modelSynchPort = Art2PlatformHelper.getProperty(root,remoteNode.getName, Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT)
+              msgsynch.passedNodes.add(modelHandler.getNodeName)
+              msgsynch.setNodeSenderName(modelHandler.getNodeName)
+              root.getNodes.filter(node => !msgsynch.passedNodes.contains(node.getName) ).foreach{remoteNode =>
 
-                    var client = new TcpClientRemoteActor(null,1000) {
-                      def getRemoteAddr : InetSocketAddress = {
-                        logger.info(ip)
-                        new InetSocketAddress(ip,java.lang.Integer.parseInt(modelSynchPort))
-                      }
-                    }
-                    client.start
+                //SEND
+                var ip = Art2PlatformHelper.getProperty(root,remoteNode.getName, Constants.ART2_PLATFORM_REMOTE_NODE_IP)
+                var modelSynchPort = Art2PlatformHelper.getProperty(root,remoteNode.getName, Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT)
 
-                    client ! msgsynch.toJSON
-
-                    client.stop
+                var client = new TcpClientRemoteActor(null,1000) {
+                  def getRemoteAddr : InetSocketAddress = {
+                    logger.info(ip)
+                    new InetSocketAddress(ip,java.lang.Integer.parseInt(modelSynchPort))
                   }
-
-
-                } else {
-                  logger.warn("Distributed rollback not implemented")
                 }
+                client.start
 
-              } else {
-                logger.error("No service handler found loast message "+msg)
+                client ! msgsynch.toJSON
+
+                client.stop
               }
+
+
+            } else {
+              logger.warn("Distributed rollback not implemented")
             }
 
-
-
+          } else {
+            logger.error("No service handler found loast message "+msg)
           }
+        }
       }
-    }
   }
 
 

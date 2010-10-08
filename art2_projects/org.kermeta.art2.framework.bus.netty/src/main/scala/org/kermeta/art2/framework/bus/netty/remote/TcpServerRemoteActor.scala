@@ -55,8 +55,7 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
     channel = Some(newbootstrap.bind(new InetSocketAddress("0.0.0.0",port)))
     cgroup.add(channel.get)
     bootstrap = Some(newbootstrap)
-    super.start()
-    this
+    super.start
   }
 
   def getPipeline() : ChannelPipeline = {
@@ -89,28 +88,24 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
         } catch {case _ @ e => logger.error(this.getClass.getName, e)}
         
     }
-    me ! STOP_RACTOR()
+    super[Art2Actor].stop
     logger.info("Server Actor is stopped")
   }
 
-  def act() = {
-    loop {
-      react {
-        case s : STOP_RACTOR => exit()
-        case _ @ msg => channel match {
-            case None => println("TODO WAITING PERIOD")
-            case Some(b) => {
-                try{
-                  if(b.isConnected){
-                    b.write(msg)
-                  }
-                } catch {
-                  case _ @ e => logger.error("Unexpected exception, while sending msg.",e);
-                }
+
+  def internal_process(msg : Any) = msg match {
+    case _ @ msg => channel match {
+        case None => println("TODO WAITING PERIOD")
+        case Some(b) => {
+            try{
+              if(b.isConnected){
+                b.write(msg)
               }
+            } catch {
+              case _ @ e => logger.error("Unexpected exception, while sending msg.",e);
+            }
           }
       }
-    }
   }
 
   override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
@@ -119,7 +114,7 @@ class TcpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
       logger.warn("No delegate found - message lost : "+message.toString)
     } else {
       logger.info("Message rec : "+message.toString)
-      delegate ! message
+      delegate ! ART_NETTY_MESSAGE(ctx,e) //message
     }
   }
   override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {

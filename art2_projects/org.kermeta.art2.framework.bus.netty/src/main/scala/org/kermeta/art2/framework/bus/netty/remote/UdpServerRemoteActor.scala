@@ -36,6 +36,10 @@ import scala.actors.Actor
 
 class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUpstreamHandler with Art2Actor {
 
+  def internal_process(msg : Any)= {
+    
+  }
+
   var logger = LoggerFactory.getLogger(this.getClass);
   // var bossPool : Option[java.util.concurrent.ExecutorService] = None
   var ioPool  : Option[java.util.concurrent.ExecutorService] = None
@@ -94,14 +98,14 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
         } catch {case _ @ e => logger.error(this.getClass.getName, e)}
 
     }
-    me ! STOP
+   // me ! STOP
     logger.info("Server Actor is stopped")
   }
-
+/*
   def act() = {
     loop {
       react {
-        case STOP => logger.info("Server Actor will die");exit()
+//        case STOP => logger.info("Server Actor will die");exit()
           /*
         case _ @ msg => channel match {
             case None => println("TODO WAITING PERIOD")
@@ -119,7 +123,7 @@ class UdpServerRemoteActor(port : Int,delegate : Actor) extends SimpleChannelUps
       }
     }
   }
-
+*/
   override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
     var message = e.getMessage
     if(delegate == null){

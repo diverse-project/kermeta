@@ -93,18 +93,11 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
   }
 
 
-  def act(){
-    loop {
-      react {
-        case STOP()=> {
-
-            exit()
-          }
-        case msg : Art2Message => println("SEND INTERNAL");sendInternal(msg)
-        case _ => println("WTF !!")
-      }
-    }
+  def internal_process(msg : Any) = msg match {
+    case msg : Art2Message => println("SEND INTERNAL");sendInternal(msg)
+    case _ => println("WTF !!")
   }
+
 
 
 }

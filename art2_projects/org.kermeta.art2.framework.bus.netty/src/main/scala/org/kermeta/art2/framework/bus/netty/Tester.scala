@@ -13,6 +13,7 @@ import org.kermeta.art2.framework.bus.netty.remote.TcpServerRemoteActor
 import org.kermeta.art2.framework.bus.netty.remote.UdpClientRemoteActor
 import org.kermeta.art2.framework.message.Art2Message
 import org.kermeta.art2.framework._
+import org.kermeta.art2.framework.message.Art2ModelSynchMessage
 import org.osgi.framework.BundleContext
 import scala.actors.Actor
 
@@ -79,26 +80,25 @@ object Tester {
 
   //  var dispatch = new Art2DispatcherActor(8082,null)
 
-  //  dispatch.start
+   // dispatch.start
 
     var client = new TcpClientRemoteActor(null,10000){
       def getRemoteAddr : InetSocketAddress = {
-        new InetSocketAddress("131.254.15.214",8082)
+        new InetSocketAddress("localhost",8081)
       }
-
-
-
     }
     client.start
 
-    client ! "yepee"
+    var msg = new Art2ModelSynchMessage
+    client ! msg.toJSON
+
 
     new Thread(){
       override def run = { Thread.sleep(3000);
 
 
                           client.stop
-                         // dispatch.stop
+                   //      dispatch.stop
 
       }
                           //clientactor2.stop;

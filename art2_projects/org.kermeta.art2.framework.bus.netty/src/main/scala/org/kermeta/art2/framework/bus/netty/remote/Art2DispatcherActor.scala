@@ -24,13 +24,8 @@ import org.kermeta.art2.framework.message.Art2Message
 
 class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUpstreamHandler with Art2Actor {
 
-  var serviceTracker : ServiceTracker = null// = new ServiceTracker(bc,classOf[Art2Port].getName(), null)
-  var nettyServer = new TcpServerRemoteActor(port,this){
-    override def messageReceived(ctx :ChannelHandlerContext,e : MessageEvent) {
-      logger.info("Hello2")
-      me ! ART_NETTY_MESSAGE(ctx,e)
-    }
-  }
+  var serviceTracker : ServiceTracker =new ServiceTracker(bc,classOf[Art2ChannelFragment].getName(), null)
+  var nettyServer = new TcpServerRemoteActor(port,this)
 
   var me  = this
 
@@ -38,45 +33,41 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
 
   def getPort = port
   
-  def act()={
-    loop {
-      react {
-        case STOP => /* TODO process unfinish message */ exit()
-        case ART_NETTY_MESSAGE(_@ctx,_@e) => {
-            try {
-              /* unserialize */
-              var art2message = e.getMessage.toString.fromJSON(classOf[Art2Message])
-              /* retrive service */
-              var servicefound = serviceTracker.getServiceReferences.find(sr => {sr.getProperty(Constants.ART2_NODE_NAME) == art2message.destNodeName && sr.getProperty(Constants.ART2_INSTANCE_NAME) == art2message.getDestChannelName} )
-              if(art2message.inOut.booleanValue){
-                servicefound match {
-                  case None => logger.error("Not implemented yet !!! ")
-                  case Some(sr)=> {
-                      var resultCall = serviceTracker.getService(sr).asInstanceOf[Art2ChannelFragment] !? art2message
+  def internal_process(msg : Any) = msg match {
+    case nmsg : ART_NETTY_MESSAGE => {
+        try {
+          /* unserialize */
+          var art2message = nmsg.e.getMessage.toString.fromJSON(classOf[Art2Message])
+          /* retrive service */
+          var servicefound = serviceTracker.getServiceReferences.find(sr => {sr.getProperty(Constants.ART2_NODE_NAME) == art2message.destNodeName && sr.getProperty(Constants.ART2_INSTANCE_NAME) == art2message.getDestChannelName} )
+          if(art2message.inOut.booleanValue){
+            servicefound match {
+              case None => logger.error("Not implemented yet !!! ")
+              case Some(sr)=> {
+                  var resultCall = serviceTracker.getService(sr).asInstanceOf[Art2ChannelFragment] !? art2message
 
-                      var callResult = new Art2ResponseMessage
-                      callResult.setContent(resultCall)
-                      callResult.setResponseTag(art2message.getResponseTag)
+                  var callResult = new Art2ResponseMessage
+                  callResult.setContent(resultCall)
+                  callResult.setResponseTag(art2message.getResponseTag)
 
-                      e.getChannel.write(callResult.toJSON)
+                  nmsg.e.getChannel.write(callResult.toJSON)
 
-                    }
                 }
-              } else {
-                servicefound match {
-                  case None => logger.error("Not implemented yet !!! ")
-                  case Some(sr)=> serviceTracker.getService(sr).asInstanceOf[Art2Actor] ! art2message
-                }
-              }
-            } catch {case _ @ e => logger.error("Unexpected exception, while sending msg to port.",e) }
+            }
+          } else {
+            servicefound match {
+              case None => logger.error("Not implemented yet !!! ")
+              case Some(sr)=> serviceTracker.getService(sr).asInstanceOf[Art2Actor] ! art2message
+            }
           }
-        case _ @ msg => logger.error("Art2Dispatcher Error, message not process "+msg)
+        } catch {case _ @ e => logger.error("Unexpected exception, while sending msg to port.",e) }
       }
-    }
+    case _ @ msg => logger.error("Art2Dispatcher Error, message not process "+msg)
+
   }
 
   override def start() : Actor={
-    //serviceTracker.open
+    serviceTracker.open
     var actor = super.start
     nettyServer.start
     actor
@@ -84,8 +75,8 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
 
   override def stop()={
     nettyServer.stop
-    this ! STOP
-    //serviceTracker.close
+    super[Art2Actor].stop
+    serviceTracker.close
   }
 
 }
