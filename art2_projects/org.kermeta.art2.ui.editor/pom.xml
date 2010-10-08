@@ -39,4 +39,22 @@
     </dependencies>
 
 
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>!org.kermeta.art2.ui.editor.*,!org.kermeta.art2.ui.aspects.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                        <Private-Package>org.kermeta.art2.ui.editor.*,org.kermeta.art2.ui.aspects.*</Private-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>

@@ -48,7 +48,7 @@ class SynchPlatformCommand extends Command {
     client ! msg.toJSON
 
 
-    Thread.sleep(1000)
+   // Thread.sleep(1000)
 
 
     client.stop
