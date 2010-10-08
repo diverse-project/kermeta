@@ -38,7 +38,6 @@ class SynchPlatformCommand extends Command {
     var msg = new Art2ModelSynchMessage
     msg.setNodeSenderName("art2.editor")
     msg.setNewModelAsString(outStream.toString)
-
     outStream.close
 
 
@@ -48,6 +47,8 @@ class SynchPlatformCommand extends Command {
 
     client ! msg.toJSON
 
+
+    Thread.sleep(1000)
 
 
     client.stop
