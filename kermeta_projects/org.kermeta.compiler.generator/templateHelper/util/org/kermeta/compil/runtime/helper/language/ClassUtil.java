@@ -12,6 +12,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class ClassUtil {
+	
+	public static final String IMPL_PACKAGE = "impl.";
+	public static final String IMPL_CLASS_NAME = "Impl";
+	public static final String END_OF_NAME = "EON";
+	public static final String IMPL_CLASS_NAME_END_OF_NAME = "ImplEON";
 
 	public static Object newObject( org.eclipse.emf.ecore.EClass eClass ) {
 		return (kermeta.language.structure.Object) EcoreUtil.create(eClass);
@@ -19,10 +24,10 @@ public class ClassUtil {
 	
 	public static Object newObject( String class_QN ) {
 		
-		class_QN = class_QN.replace("impl.", "");
+		class_QN = class_QN.replace(IMPL_PACKAGE, "");
 		
-		if(class_QN.endsWith("Impl")) {
-			class_QN = class_QN.replace("Impl", "");
+		if(class_QN.endsWith(IMPL_CLASS_NAME)) {
+			class_QN = (class_QN + END_OF_NAME).replace(IMPL_CLASS_NAME_END_OF_NAME, "");
 		}
 		
 		String type = class_QN;

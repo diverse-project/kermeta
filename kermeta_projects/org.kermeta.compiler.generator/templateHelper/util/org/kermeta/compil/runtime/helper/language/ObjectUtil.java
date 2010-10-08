@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ExceptionsFactory;
 import kermeta.exceptions.TypeCastError;
 import kermeta.language.structure.Class;
@@ -34,6 +35,11 @@ import org.kermeta.compil.runtime.helper.basetypes.StringUtil;
 import org.kermeta.compil.runtime.helper.error.KRuntimeError;
 
 public class ObjectUtil {
+	
+	public static final String IMPL_PACKAGE = "impl.";
+	public static final String IMPL_CLASS_NAME = "Impl";
+	public static final String END_OF_NAME = "EON";
+	public static final String IMPL_CLASS_NAME_END_OF_NAME = "ImplEON";
 
 	public static kermeta.language.structure.Object container(java.lang.Object self) {
 		return null;
@@ -57,9 +63,9 @@ public class ObjectUtil {
 			return true;
 		}
 		
-		String str_type = o.getClass().getName().replace("impl.", "");
-		if(str_type.endsWith("Impl")) {
-			str_type = str_type.replace("Impl", "");
+		String str_type = o.getClass().getName().replace(IMPL_PACKAGE, "");
+		if(str_type.endsWith(IMPL_CLASS_NAME)) {
+			str_type = (str_type + END_OF_NAME).replace(IMPL_CLASS_NAME_END_OF_NAME, "");
 		}
 		
 		if ( type.equals(str_type) ) {
@@ -81,9 +87,9 @@ public class ObjectUtil {
 			return true;
 		}
 		
-		String str_type = o.getClass().getName().replace("impl.", "");
-		if(str_type.endsWith("Impl")) {
-			str_type = str_type.replace("Impl", "");
+		String str_type = o.getClass().getName().replace(IMPL_PACKAGE, "");
+		if(str_type.endsWith(IMPL_CLASS_NAME)) {
+			str_type = (str_type + END_OF_NAME).replace(IMPL_CLASS_NAME_END_OF_NAME, "");
 		}
 
 		if ( type.equals(str_type) ) {
