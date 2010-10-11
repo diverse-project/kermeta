@@ -33,7 +33,7 @@ trait StopNodeKompare extends AbstractKompare {
     /* remove mbinding */
     root.getMBindings.foreach{b=>
       if(b.getPort.eContainer.eContainer == node){
-        var addcmd = Art2adaptationFactory.eINSTANCE.createAddBinding
+        var addcmd = Art2adaptationFactory.eINSTANCE.createRemoveBinding
         addcmd.setRef(b)
         adaptationModel.getAdaptations.add(addcmd)
       }
