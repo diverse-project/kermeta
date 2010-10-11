@@ -3,10 +3,6 @@ package org.kermeta.art2.framework.baselib;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.kermeta.art2.framework.Art2Actor;
-import org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelType;
-import org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelTypeFactory;
-import org.kermeta.art2.framework.message.Art2Message;
 
 /**
  * Unit test for simple App.

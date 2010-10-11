@@ -22,16 +22,24 @@ public class DefaultServiceChannelType extends AbstractChannelFragment {
     @Override
     public Object dispatch(Art2Message msg) {
 
+        System.out.println("Ok I will dispatcher !!! 3");
+        Object result = null;
+
         if (this.getBindedPorts().size() == 1) {
-            return forward(getBindedPorts().get(0), msg);
+
+            System.out.println("local dispatch");
+
+            result = forward(getBindedPorts().get(0), msg);
         } else {
             if (this.getOtherFragments().size() == 1) {
-                return forward(getOtherFragments().get(0), msg);
+                result = forward(getOtherFragments().get(0), msg);
             } else {
                 logger.error("No Art2 port or fragment bind on this channel fragment, message lost = ", msg.getContent());
-                return null;
             }
         }
+
+        System.out.println("Ok result "+result);
+        return result;
 
     }
 }
