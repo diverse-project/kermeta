@@ -54,6 +54,22 @@
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
+
+
+
+        <!-- Use to output logger message in APT phase -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.24</version>
+        </dependency>
+
+
     </dependencies>
 
 
