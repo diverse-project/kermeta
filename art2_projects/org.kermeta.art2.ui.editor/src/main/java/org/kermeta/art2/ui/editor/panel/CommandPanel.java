@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddChannelCommand;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
+import org.kermeta.art2.ui.editor.command.LoadModelCommandUI;
 import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
 import org.kermeta.art2.ui.editor.command.SynchPlatformCommand;
@@ -26,12 +27,12 @@ public class CommandPanel extends JPanel {
     public CommandPanel(Art2UIKernel kernel) {
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-/*
+        /*
         JCommandButton btAddHub = new JCommandButton("Add hub");
         AddHubCommand btAddHubCommand = new AddHubCommand();
         btAddHubCommand.setKernel(kernel);
         btAddHub.setCommand(btAddHubCommand);
-*/
+         */
         JCommandButton btAddNode = new JCommandButton("Add node");
         AddNodeCommand btAddNodeCommand = new AddNodeCommand();
         btAddNodeCommand.setKernel(kernel);
@@ -41,6 +42,11 @@ public class CommandPanel extends JPanel {
         SaveActuelModelCommand btSaveCommand = new SaveActuelModelCommand();
         btSaveCommand.setKernel(kernel);
         btSave.setCommand(btSaveCommand);
+
+        JCommandButton btLoadModel = new JCommandButton("LoadModel");
+        LoadModelCommandUI btLoadLibCommandUI = new LoadModelCommandUI();
+        btLoadLibCommandUI.setKernel(kernel);
+        btLoadModel.setCommand(btLoadLibCommandUI);
 
         JCommandButton btLoadLib = new JCommandButton("LoadLib");
         LoadNewLibCommand btLoadLibCommand = new LoadNewLibCommand();
@@ -53,9 +59,10 @@ public class CommandPanel extends JPanel {
         btSynch.setCommand(synchComd);
 
 
-       // add(btAddHub);
+        // add(btAddHub);
         add(btAddNode);
         add(btSave);
+        add(btLoadModel);
         add(btLoadLib);
         add(btSynch);
 
