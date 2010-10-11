@@ -23,7 +23,7 @@ public class App {
         jframe.add(artpanel.getPanel(),BorderLayout.CENTER);
 
 
-        artpanel.loadModel("/Users/ffouquet/Desktop/AS.art2");
+        //artpanel.loadModel("/Users/ffouquet/Desktop/AS.art2");
 
 
         jframe.pack();
