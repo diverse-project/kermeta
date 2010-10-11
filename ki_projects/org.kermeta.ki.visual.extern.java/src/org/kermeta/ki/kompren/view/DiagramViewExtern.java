@@ -43,7 +43,7 @@ public abstract class DiagramViewExtern {
 	}
 	
 	
-	public static void focusOnTypeDefinition(final Object mmRO, final Object typeDefRO) {
+	public static void focusOnEntity(final Object mmRO, final Object typeDefRO) {
 		final IDiagramView mm = (IDiagramView) Source2TargetMap.MAP.getTargetObject(mmRO);
 		final Object typeDef   = Source2TargetMap.MAP.getTargetObject(typeDefRO);
 		

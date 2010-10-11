@@ -77,11 +77,11 @@ class Flat inherits Action, Undoable {
 					oppositeCardString := propBackup.prop.opposite.getCardinalityString
 				end
 				
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onLinkRemoved(metamodel, propBackup.prop)
+				extern org::kermeta::ki::kompren::view::DiagramViewExtern.onRelationRemoved(metamodel, propBackup.prop)
 				var clazz : Class init Class.new
 				clazz.typeDefinition := propBackup.type.asType(Class).typeDefinition
 				propBackup.prop.type := clazz
-				extern org::kermeta::ki::visual::view::MetamodelViewExtern.onRelationAdded(metamodel, propBackup.prop, propBackup.prop.isComposite, classToFlat, 
+				extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(metamodel, propBackup.prop, propBackup.prop.isComposite, classToFlat, 
 						clazz.typeDefinition, propBackup.prop.name, propBackup.prop.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 		}
 
