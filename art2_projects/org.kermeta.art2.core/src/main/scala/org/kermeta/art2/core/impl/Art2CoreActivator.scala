@@ -6,6 +6,7 @@
 package org.kermeta.art2.core.impl
 
 import java.util.Hashtable
+import org.kermeta.art2.api.configuration.ConfigurationService
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.osgi.framework.BundleActivator
 import org.osgi.framework.BundleContext
@@ -18,6 +19,12 @@ class Art2CoreActivator extends BundleActivator {
   var deployServiceTracker : ServiceTracker = null
 
   def start(bc : BundleContext){
+
+    //START CONFIG SERVICE
+    var configBean = new Art2ConfigServiceBean
+    bc.registerService(classOf[ConfigurationService].getName(), configBean, new Hashtable());
+
+
     myBean = new Art2CoreBean
     myBean.setBundleContext(bc)
     kompareServiceTracker = new ServiceTracker(bc,classOf[org.kermeta.art2.api.service.core.kompare.ModelKompareService].getName,null)
