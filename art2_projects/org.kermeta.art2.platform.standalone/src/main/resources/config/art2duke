@@ -1,0 +1,5 @@
+node{
+        name = "duke"
+        model.synch.port = 8081
+        dipatcher.port = 8080
+    }

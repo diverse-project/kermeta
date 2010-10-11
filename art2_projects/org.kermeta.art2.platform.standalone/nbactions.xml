@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-RunDuke</actionName>
+        <displayName>RunDuke</displayName>
+        <goals>
+            <goal>exec:java</goal>
+        </goals>
+        <properties>
+            <node.name>duke</node.name>
+            <art2.config>/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.platform.standalone/src/main/resources/config/art2duke</art2.config>
+        </properties>
+    </action>
+        
+    <action>
+        <actionName>CUSTOM-RunEntimid</actionName>
+        <displayName>RunEntimid</displayName>
+        <goals>
+            <goal>exec:java</goal>
+        </goals>
+        <properties>
+            <node.name>entimid</node.name>
+            <art2.config>/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.platform.standalone/src/main/resources/config/art2entimid</art2.config>
+        </properties>
+    </action>
+
+
+</actions>
