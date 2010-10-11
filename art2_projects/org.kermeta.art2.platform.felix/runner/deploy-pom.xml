@@ -29,33 +29,6 @@
   </distributionManagement>
   <repositories>
     <repository>
-      <releases>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>fail</checksumPolicy>
-      </snapshots>
-      <id>kermeta</id>
-      <name>Kermeta</name>
-      <url>http://www.kermeta.org/maven2</url>
-    </repository>
-    <repository>
-      <releases>
-        <enabled>false</enabled>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>fail</checksumPolicy>
-      </snapshots>
-      <id>kermetaSnapshot</id>
-      <name>Kermeta Snapshots</name>
-      <url>http://www.kermeta.org/maven2-snapshots</url>
-    </repository>
-    <repository>
       <id>triskellPublic</id>
       <url>http://tipimouss.irisa.fr/maven2</url>
     </repository>
