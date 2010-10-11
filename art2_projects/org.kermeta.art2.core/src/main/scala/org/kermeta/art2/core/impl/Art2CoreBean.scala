@@ -7,6 +7,7 @@ package org.kermeta.art2.core.impl
 
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.api.configuration.ConfigurationService
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.api.service.core.kompare.ModelKompareService
@@ -21,9 +22,11 @@ import org.kermeta.art2.framework.message.Art2PlatformModelUpdate
 import org.kermeta.art2.framework.message._
 import scala.actors.Actor
 import scala.collection.JavaConversions._
+import org.kermeta.art2.api.configuration.ConfigConstants
 
 class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
 
+  @BeanProperty var configService : ConfigurationService = null
   @BeanProperty var bundleContext : BundleContext = null;
   @BeanProperty var kompareService :org.kermeta.art2.api.service.core.kompare.ModelKompareService = null
   @BeanProperty var deployService :org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService = null
@@ -40,8 +43,8 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
   }
 
   override def start : Actor={
-    logger.info("Start event : node name = "+bundleContext.getProperty("art2.node.name"))
-    setNodeName(bundleContext.getProperty("art2.node.name"));
+    logger.info("Start event : node name = "+configService.getProperty(ConfigConstants.ART2_NODE_NAME))
+    setNodeName(configService.getProperty(ConfigConstants.ART2_NODE_NAME));
     super.start
 
     var lastModelssaved = bundleContext.getDataFile("lastModel.xmi");

@@ -27,6 +27,7 @@ class Art2CoreActivator extends BundleActivator {
 
     myBean = new Art2CoreBean
     myBean.setBundleContext(bc)
+    myBean.setConfigService(configBean)
     kompareServiceTracker = new ServiceTracker(bc,classOf[org.kermeta.art2.api.service.core.kompare.ModelKompareService].getName,null)
     deployServiceTracker = new ServiceTracker(bc,classOf[org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService].getName,null)
     new Thread {
