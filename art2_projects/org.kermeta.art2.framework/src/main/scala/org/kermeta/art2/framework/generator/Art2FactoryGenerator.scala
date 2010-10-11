@@ -8,6 +8,7 @@ package org.kermeta.art2.framework.generator
 import com.sun.mirror.apt.Filer
 import java.io.File
 import org.kermeta.art2.ContainerRoot
+import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.MessagePortType
 import org.kermeta.art2.ServicePortType
@@ -16,6 +17,8 @@ import org.kermeta.art2.ComponentType
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 object Art2FactoryGenerator {
+
+  var logger = LoggerFactory.getLogger(this.getClass);
 
   /* GENERATE FACTORY FOR COMPONENT & PORT  */
   def generateFactory(root:ContainerRoot,filer:Filer){
@@ -36,6 +39,14 @@ object Art2FactoryGenerator {
       /* create Component Actor */
       wrapper.append("def createComponentActor() : Art2Component = {\n")
       wrapper.append("new Art2Component(create"+ct.getName+"()){")
+
+      if(ct.getStartMethod == null || ct.getStopMethod == null){
+        logger.error("Start method is mandatory for component name => "+ct.getName);System.exit(1)
+      }
+      if(ct.getStartMethod == null || ct.getStopMethod == null){
+        logger.error("Stop method is mandatory for component name => "+ct.getName);System.exit(1)
+      }
+
       wrapper.append("def startComponent(){getArt2ComponentType.asInstanceOf["+componentBean+"]."+ct.getStartMethod+"()}\n")
       wrapper.append("def stopComponent(){getArt2ComponentType.asInstanceOf["+componentBean+"]."+ct.getStopMethod+"()}\n")
       wrapper.append("}}\n")

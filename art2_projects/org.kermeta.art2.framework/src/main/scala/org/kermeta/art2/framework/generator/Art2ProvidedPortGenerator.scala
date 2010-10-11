@@ -48,7 +48,7 @@ object Art2ProvidedPortGenerator {
                 wrapper.append(mapping.getBeanMethodName+"(msg)\n")
                 wrapper.append("}\n")
               }
-            case None => logger.error("Error method mapping not found ");System.exit(1)
+            case None => logger.error("Error method mapping not found => process");System.exit(1)
           }
         }
 
@@ -88,7 +88,7 @@ object Art2ProvidedPortGenerator {
                   wrapper.append(")\n")
 
                 }
-              case None => logger.error("Error method mapping not found ");System.exit(1)
+              case None => logger.error("Error method mapping not found => "+op.getName);System.exit(1)
             }
           }
           wrapper.append("case _ @ o => println(\"uncatch message , method not found in service declaration : \"+o);null \n")

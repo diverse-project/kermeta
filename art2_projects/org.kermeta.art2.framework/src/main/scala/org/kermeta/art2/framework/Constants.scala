@@ -32,7 +32,7 @@ object Constants {
   def ART2_PROPERTY_OSGI_BUNDLE = "osgi.bundle"
 
 
-
+  def ART2_PORT_AUTO = "auto"
 
 
   //ART2 PARAM

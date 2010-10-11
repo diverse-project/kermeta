@@ -188,7 +188,7 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     /* STEP 1 : PROCESS START & STOP METHOD */
     var startAnnot = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Start])
     var stopAnnot = methoddef.getAnnotation(classOf[org.kermeta.art2.annotation.Stop])
-    if(startAnnot != null){ componentType.setStartMethod(methoddef.getSimpleName)}
+    if(startAnnot != null){ componentType.setStartMethod(methoddef.getSimpleName)} 
     if(stopAnnot != null){ componentType.setStopMethod(methoddef.getSimpleName)}
 
     
