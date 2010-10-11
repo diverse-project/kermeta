@@ -8,6 +8,7 @@ package org.kermeta.art2.framework.bus.netty.remote
 import org.jboss.netty.channel.ChannelHandlerContext
 import org.jboss.netty.channel.MessageEvent
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler
+import org.kermeta.art2.api.service.remote.Art2Dispatcher
 import org.kermeta.art2.framework.Art2Actor
 import org.kermeta.art2.framework.Art2ChannelFragment
 import org.kermeta.art2.framework.Art2Port
@@ -22,7 +23,7 @@ import org.kermeta.art2.framework.JacksonSerializer._
 import org.kermeta.art2.framework.message.Art2Message
 
 
-class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUpstreamHandler with Art2Actor {
+class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUpstreamHandler with Art2Actor with Art2Dispatcher {
 
   var serviceTracker : ServiceTracker =new ServiceTracker(bc,classOf[Art2ChannelFragment].getName(), null)
   var nettyServer = new TcpServerRemoteActor(port,this)

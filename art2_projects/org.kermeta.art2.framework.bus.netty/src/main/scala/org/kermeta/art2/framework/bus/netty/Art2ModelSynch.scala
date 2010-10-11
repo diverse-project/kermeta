@@ -7,6 +7,7 @@ package org.kermeta.art2.framework.bus.netty
 
 import java.io.ByteArrayInputStream
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
+import org.kermeta.art2.api.service.remote.Art2ModelDispatcher
 import org.kermeta.art2.framework.Art2Actor
 import java.net.InetSocketAddress
 import org.kermeta.art2._
@@ -20,7 +21,7 @@ import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.JacksonSerializer._
 import scala.collection.JavaConversions._
 
-class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService) extends Art2Actor {
+class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService) extends Art2Actor with Art2ModelDispatcher {
 
   var me : Art2Actor = this
   var logger = LoggerFactory.getLogger(this.getClass)

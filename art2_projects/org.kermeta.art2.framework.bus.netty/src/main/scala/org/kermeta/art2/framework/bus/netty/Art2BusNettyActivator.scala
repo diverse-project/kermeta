@@ -45,13 +45,15 @@ class Art2BusNettyActivator extends BundleActivator {
         /* create model synch service */
         var modelDispatcherPort = configService.getProperty(ConfigConstants.ART2_NODE_MODELSYNC_PORT)
         if(modelDispatcherPort == Constants.ART2_PORT_AUTO){
+          logger.info("Port Auto => search for a free port for Model Dispatcher")
           var i = 8000
           var found = false
-          while( (!found) && (i<9000) ){
+          while( (!found) && (i<9000) ){     
             if(NetworkUtility.available(i)){
               modelDispatcherPort = i.toString
               found = true
             }
+            i = i +1
           }
         }
         try{
@@ -70,6 +72,7 @@ class Art2BusNettyActivator extends BundleActivator {
         /* create model synch service */
         var msgDispatcherPort = configService.getProperty(ConfigConstants.ART2_NODE_DISPATCHER_PORT)
         if(msgDispatcherPort == Constants.ART2_PORT_AUTO){
+          logger.info("Port Auto => search for a free port for Msg Dispatcher")
           var i = 8000
           var found = false
           while( (!found) && (i<9000) ){
@@ -77,6 +80,7 @@ class Art2BusNettyActivator extends BundleActivator {
               msgDispatcherPort = i.toString
               found = true
             }
+            i = i +1
           }
         }
         try{
