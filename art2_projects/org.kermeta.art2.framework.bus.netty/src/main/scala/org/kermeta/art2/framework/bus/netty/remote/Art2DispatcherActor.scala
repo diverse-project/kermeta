@@ -38,6 +38,19 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
         try {
           /* unserialize */
           var art2message = nmsg.e.getMessage.toString.fromJSON(classOf[Art2Message])
+          /* deep unserialize */
+          if(art2message.getContentClass != null){
+            try{
+              var actualContent = art2message.getContent.toString
+              var unserializecontent = actualContent.fromJSON(Class.forName(art2message.getContentClass))
+              art2message.setContent(unserializecontent)
+
+            } catch {
+              case _ @ e => logger.error("deep unserialize error", e)
+            }
+          }
+
+
           /* retrive service */
           var servicefound = serviceTracker.getServiceReferences.find(sr => {sr.getProperty(Constants.ART2_NODE_NAME) == art2message.destNodeName && sr.getProperty(Constants.ART2_INSTANCE_NAME) == art2message.getDestChannelName} )
           if(art2message.inOut.booleanValue){

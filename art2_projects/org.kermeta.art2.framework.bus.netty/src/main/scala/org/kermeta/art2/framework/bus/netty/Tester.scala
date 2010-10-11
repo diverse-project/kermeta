@@ -78,9 +78,14 @@ object Tester {
     //  actorPoc.start
 
 
-  //  var dispatch = new Art2DispatcherActor(8082,null)
+    //  var dispatch = new Art2DispatcherActor(8082,null)
 
-   // dispatch.start
+    // dispatch.start
+
+
+    var actorS = new TcpServerRemoteActor(8081,null)
+    actorS.start
+
 
     var client = new TcpClientRemoteActor(null,10000){
       def getRemoteAddr : InetSocketAddress = {
@@ -91,23 +96,24 @@ object Tester {
 
     var msg = new Art2ModelSynchMessage
     client ! msg.toJSON
-
+    client.stop
 
     new Thread(){
       override def run = { Thread.sleep(3000);
 
+                          actorS.stop
 
-                          client.stop
-                   //      dispatch.stop
+                          //      client.stop
+                          //      dispatch.stop
 
       }
-                          //clientactor2.stop;
+      //clientactor2.stop;
 
-                          //  clientactor.stop;println("Client stopped")
-                          //   actorS.stop;println("Server stopped")
-                          //   actorSD.stop;println("Server delegate stopped")
-                          //  actorS2.stop;
-                          //      actorPoc.stop
+      //  clientactor.stop;println("Client stopped")
+      //   actorS.stop;println("Server stopped")
+      //   actorSD.stop;println("Server delegate stopped")
+      //  actorS2.stop;
+      //      actorPoc.stop
     }.start
 
 

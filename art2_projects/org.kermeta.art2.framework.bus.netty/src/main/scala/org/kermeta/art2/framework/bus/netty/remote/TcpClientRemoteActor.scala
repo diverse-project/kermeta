@@ -93,7 +93,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     }
   }
   override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {
-    logger.error("Unexpected exception from downstream.",e.getCause());
+    logger.error("Unexpected exception from downstream.",e);
   }
   override def handleUpstream(ctx :ChannelHandlerContext, e: ChannelEvent) {
     e match {
@@ -122,25 +122,8 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   }
 
   /* private method to clode the client after sending message */
-  override  def stop(){
-    bootstrap match {
-      case None =>
-      case Some(b) =>
-        allChannels.close().awaitUninterruptibly();
-        b.releaseExternalResources();
-        ioPool match {
-          case None =>
-          case Some(p) => p.shutdown
-        }
-        bossPool match {
-          case None =>
-          case Some(p) => p.shutdown
-        }
-    }
-    super[Art2Actor].stop
-  }
 
-  def sendMessage(c : Channel,o : Any) : Boolean = {
+  def sendMessageInternal(c : Channel,o : Any) : Boolean = {
     try{
       c.write(o);true
     } catch {
@@ -148,23 +131,34 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     }
   }
 
+
   def internal_process(msg : Any) = msg match {
-    case _ @ msg => channelfutur match {
-        case Some(b) if(b.isSuccess) => sendMessage(b.getChannel,msg)
-        case _ => {
-            /* TRY TO RECONNECT */
-            logger.info("Try to reconnect netty")
-            reconnect
-            var sended = false
-            loopWhile(!sended){
-              reactWithin(timeout) {
-                case c : CHANNEL_CONNECTED => sended = sendMessage(c.e.getChannel,msg);
-                case TIMEOUT => reconnect
-              }
+    case _ @ msgi => {
+        var sended = false
+        var nbTryTest = 0
+        //First Try
+        channelfutur match {
+          case Some(b) if(b.isSuccess) => {
+              sended = sendMessageInternal(b.getChannel,msgi)
+              nbTryTest = nbTryTest + 1
             }
+          case _ =>
+        }
+        //try Loop
+        loopWhile(!sended && nbTryTest < nbTryMax){
+          reconnect
+          reactWithin(timeout) {
+            case c : CHANNEL_CONNECTED => sended = sendMessageInternal(c.e.getChannel,msgi);
+            case TIMEOUT => reconnect
           }
+          nbTryTest = nbTryTest + 1
+
+        }
+
       }
   }
+
+
   /*
    override  def act() { loop { react {
    case STOP_ACTOR => exit
@@ -185,4 +179,46 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
    }
    }
    }}}*/
+
+
+
+  
+  var pauseState = false
+override  def act() = {
+    loop {
+      react {
+        case PAUSE_ACTOR => {
+            pauseState = true
+            react {
+              case RESUME_ACTOR => pauseState = false //NOTHING TO DO
+              case STOP_ACTOR(f) => pauseState = false ; stopRequest(f)
+            }
+          }
+        case STOP_ACTOR(f) => stopRequest(f)
+        case _ @ msg => internal_process(msg)
+      }
+    }
+  }
+
+  def stopRequest(force : Boolean) : Nothing = {
+    bootstrap match {
+      case None =>
+      case Some(b) =>
+        allChannels.close().awaitUninterruptibly();
+        b.releaseExternalResources();
+        ioPool match {
+          case None =>
+          case Some(p) => p.shutdown
+        }
+        bossPool match {
+          case None =>
+          case Some(p) => p.shutdown
+        }
+    }
+    exit
+  }
+
+  def nbTryMax : Int = 3
+
+
 }

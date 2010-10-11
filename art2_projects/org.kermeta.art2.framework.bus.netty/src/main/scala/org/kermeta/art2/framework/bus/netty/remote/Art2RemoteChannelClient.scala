@@ -72,6 +72,15 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
     var tag = msg.hashCode+new Date().getTime //NAIF TAG //TODO
     msg.setResponseTag(tag.toString)
 
+    //CONTENT SERIALIZE
+    msg.getContent match {
+      case ar :AnyRef => msg.setContentClass(ar.getClass.getName)
+      case _ => msg.setContentClass(null)
+    }
+    var contentJSON = msg.getContent.toJSON
+    msg.setContent(contentJSON)
+
+
     var msgJSON = msg.toJSON
     nettyClient ! msgJSON
     if(msg.isInstanceOf[MethodCallMessage]){
