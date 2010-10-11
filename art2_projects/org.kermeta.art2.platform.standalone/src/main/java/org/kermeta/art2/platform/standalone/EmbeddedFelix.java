@@ -43,6 +43,7 @@ public class EmbeddedFelix {
         }
 
         configProps.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA, "sun.misc");
+        configProps.put(Constants.FRAMEWORK_STORAGE_CLEAN, Constants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT);
 
 
         Runtime.getRuntime().addShutdownHook(new Thread("Felix Shutdown Hook") {
