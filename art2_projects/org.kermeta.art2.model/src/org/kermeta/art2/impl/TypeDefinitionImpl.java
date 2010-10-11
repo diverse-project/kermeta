@@ -9,6 +9,7 @@ package org.kermeta.art2.impl;
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.kermeta.art2.Art2Package;
 import org.kermeta.art2.DeployUnit;
+import org.kermeta.art2.DictionaryType;
 import org.kermeta.art2.TypeDefinition;
 
 /**
@@ -32,6 +34,7 @@ import org.kermeta.art2.TypeDefinition;
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getBean <em>Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getRequiredLibs <em>Required Libs</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getHashcode <em>Hashcode</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getDictionaryType <em>Dictionary Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,6 +117,16 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected String hashcode = HASHCODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDictionaryType() <em>Dictionary Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDictionaryType()
+	 * @generated
+	 * @ordered
+	 */
+	protected DictionaryType dictionaryType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,6 +265,63 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DictionaryType getDictionaryType() {
+		return dictionaryType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDictionaryType(DictionaryType newDictionaryType, NotificationChain msgs) {
+		DictionaryType oldDictionaryType = dictionaryType;
+		dictionaryType = newDictionaryType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE, oldDictionaryType, newDictionaryType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDictionaryType(DictionaryType newDictionaryType) {
+		if (newDictionaryType != dictionaryType) {
+			NotificationChain msgs = null;
+			if (dictionaryType != null)
+				msgs = ((InternalEObject)dictionaryType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE, null, msgs);
+			if (newDictionaryType != null)
+				msgs = ((InternalEObject)newDictionaryType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE, null, msgs);
+			msgs = basicSetDictionaryType(newDictionaryType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE, newDictionaryType, newDictionaryType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
+				return basicSetDictionaryType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -266,6 +336,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return getRequiredLibs();
 			case Art2Package.TYPE_DEFINITION__HASHCODE:
 				return getHashcode();
+			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
+				return getDictionaryType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -295,6 +367,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case Art2Package.TYPE_DEFINITION__HASHCODE:
 				setHashcode((String)newValue);
 				return;
+			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
+				setDictionaryType((DictionaryType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -322,6 +397,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case Art2Package.TYPE_DEFINITION__HASHCODE:
 				setHashcode(HASHCODE_EDEFAULT);
 				return;
+			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
+				setDictionaryType((DictionaryType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -344,6 +422,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return requiredLibs != null && !requiredLibs.isEmpty();
 			case Art2Package.TYPE_DEFINITION__HASHCODE:
 				return HASHCODE_EDEFAULT == null ? hashcode != null : !HASHCODE_EDEFAULT.equals(hashcode);
+			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
+				return dictionaryType != null;
 		}
 		return super.eIsSet(featureID);
 	}

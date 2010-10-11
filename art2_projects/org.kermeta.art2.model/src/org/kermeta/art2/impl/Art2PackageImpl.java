@@ -395,7 +395,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentInstance_Dictionary() {
+	public EReference getComponentInstance_Required() {
 		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -404,7 +404,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentInstance_Required() {
+	public EReference getComponentInstance_Namespace() {
 		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -413,17 +413,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentInstance_Namespace() {
-		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getComponentInstance_Metrics() {
-		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(4);
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -440,7 +431,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_Dictionary() {
+	public EReference getComponentType_Required() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -449,7 +440,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_Required() {
+	public EReference getComponentType_IntegrationPatterns() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -458,7 +449,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_IntegrationPatterns() {
+	public EReference getComponentType_ExtraFonctionalProperties() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -467,7 +458,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_ExtraFonctionalProperties() {
+	public EReference getComponentType_Provided() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -476,17 +467,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_Provided() {
-		return (EReference)componentTypeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getComponentType_StartMethod() {
-		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -495,7 +477,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * @generated
 	 */
 	public EAttribute getComponentType_StopMethod() {
-		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -757,6 +739,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EReference getDictionaryValue_Attribute() {
 		return (EReference)dictionaryValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDictionaryValue_Value() {
+		return (EAttribute)dictionaryValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1439,6 +1430,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypeDefinition_DictionaryType() {
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstance() {
 		return instanceEClass;
 	}
@@ -1450,6 +1450,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EReference getInstance_TypeDefinition() {
 		return (EReference)instanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstance_Dictionary() {
+		return (EReference)instanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1482,13 +1491,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		// Create classes and their features
 		componentInstanceEClass = createEClass(COMPONENT_INSTANCE);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__PROVIDED);
-		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__DICTIONARY);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__REQUIRED);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__NAMESPACE);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__METRICS);
 
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
-		createEReference(componentTypeEClass, COMPONENT_TYPE__DICTIONARY);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__REQUIRED);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__INTEGRATION_PATTERNS);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES);
@@ -1533,6 +1540,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		dictionaryValueEClass = createEClass(DICTIONARY_VALUE);
 		createEReference(dictionaryValueEClass, DICTIONARY_VALUE__ATTRIBUTE);
+		createEAttribute(dictionaryValueEClass, DICTIONARY_VALUE__VALUE);
 
 		compositeTypeEClass = createEClass(COMPOSITE_TYPE);
 		createEReference(compositeTypeEClass, COMPOSITE_TYPE__CHILDS);
@@ -1632,9 +1640,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__BEAN);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__REQUIRED_LIBS);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__HASHCODE);
+		createEReference(typeDefinitionEClass, TYPE_DEFINITION__DICTIONARY_TYPE);
 
 		instanceEClass = createEClass(INSTANCE);
 		createEReference(instanceEClass, INSTANCE__TYPE_DEFINITION);
+		createEReference(instanceEClass, INSTANCE__DICTIONARY);
 	}
 
 	/**
@@ -1695,13 +1705,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentInstance_Provided(), this.getPort(), null, "provided", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentInstance_Dictionary(), this.getDictionary(), null, "dictionary", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Required(), this.getPort(), null, "required", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Namespace(), this.getNamespace(), null, "namespace", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Metrics(), this.getMetric(), null, "metrics", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentType_Dictionary(), this.getDictionaryType(), null, "dictionary", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_Required(), this.getPortTypeRef(), null, "required", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_IntegrationPatterns(), this.getIntegrationPattern(), null, "integrationPatterns", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_ExtraFonctionalProperties(), this.getExtraFonctionalProperty(), null, "extraFonctionalProperties", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1746,6 +1754,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(dictionaryValueEClass, DictionaryValue.class, "DictionaryValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDictionaryValue_Attribute(), this.getDictionaryAttribute(), null, "attribute", null, 1, 1, DictionaryValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDictionaryValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, DictionaryValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compositeTypeEClass, CompositeType.class, "CompositeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeType_Childs(), this.getComponentType(), null, "childs", null, 0, -1, CompositeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1845,9 +1854,11 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEAttribute(getTypeDefinition_Bean(), ecorePackage.getEString(), "bean", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_RequiredLibs(), this.getDeployUnit(), null, "requiredLibs", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeDefinition_Hashcode(), ecorePackage.getEString(), "hashcode", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeDefinition_DictionaryType(), this.getDictionaryType(), null, "dictionaryType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstance_TypeDefinition(), this.getTypeDefinition(), null, "typeDefinition", null, 1, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstance_Dictionary(), this.getDictionary(), null, "dictionary", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

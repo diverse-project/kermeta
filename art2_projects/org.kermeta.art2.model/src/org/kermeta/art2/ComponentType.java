@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.art2.ComponentType#getDictionary <em>Dictionary</em>}</li>
  *   <li>{@link org.kermeta.art2.ComponentType#getRequired <em>Required</em>}</li>
  *   <li>{@link org.kermeta.art2.ComponentType#getIntegrationPatterns <em>Integration Patterns</em>}</li>
  *   <li>{@link org.kermeta.art2.ComponentType#getExtraFonctionalProperties <em>Extra Fonctional Properties</em>}</li>
@@ -31,32 +30,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ComponentType extends TypeDefinition {
-	/**
-	 * Returns the value of the '<em><b>Dictionary</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dictionary</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dictionary</em>' containment reference.
-	 * @see #setDictionary(DictionaryType)
-	 * @see org.kermeta.art2.Art2Package#getComponentType_Dictionary()
-	 * @model containment="true"
-	 * @generated
-	 */
-	DictionaryType getDictionary();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.art2.ComponentType#getDictionary <em>Dictionary</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dictionary</em>' containment reference.
-	 * @see #getDictionary()
-	 * @generated
-	 */
-	void setDictionary(DictionaryType value);
-
 	/**
 	 * Returns the value of the '<em><b>Required</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.art2.PortTypeRef}.

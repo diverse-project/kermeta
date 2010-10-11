@@ -39,8 +39,8 @@ import org.kermeta.art2.TypeDefinition;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getTypeDefinition <em>Type Definition</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getProvided <em>Provided</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getDictionary <em>Dictionary</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getProvided <em>Provided</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getRequired <em>Required</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentInstanceImpl#getMetrics <em>Metrics</em>}</li>
@@ -61,16 +61,6 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 	protected TypeDefinition typeDefinition;
 
 	/**
-	 * The cached value of the '{@link #getProvided() <em>Provided</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProvided()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Port> provided;
-
-	/**
 	 * The cached value of the '{@link #getDictionary() <em>Dictionary</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,6 +69,16 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 	 * @ordered
 	 */
 	protected Dictionary dictionary;
+
+	/**
+	 * The cached value of the '{@link #getProvided() <em>Provided</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvided()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Port> provided;
 
 	/**
 	 * The cached value of the '{@link #getRequired() <em>Required</em>}' containment reference list.
@@ -292,10 +292,10 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
-				return ((InternalEList<?>)getProvided()).basicRemove(otherEnd, msgs);
 			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
 				return basicSetDictionary(null, msgs);
+			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
+				return ((InternalEList<?>)getProvided()).basicRemove(otherEnd, msgs);
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				return ((InternalEList<?>)getRequired()).basicRemove(otherEnd, msgs);
 		}
@@ -313,10 +313,10 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 			case Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION:
 				if (resolve) return getTypeDefinition();
 				return basicGetTypeDefinition();
-			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
-				return getProvided();
 			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
 				return getDictionary();
+			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
+				return getProvided();
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				return getRequired();
 			case Art2Package.COMPONENT_INSTANCE__NAMESPACE:
@@ -340,12 +340,12 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 			case Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION:
 				setTypeDefinition((TypeDefinition)newValue);
 				return;
+			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
+				setDictionary((Dictionary)newValue);
+				return;
 			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
 				getProvided().clear();
 				getProvided().addAll((Collection<? extends Port>)newValue);
-				return;
-			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
-				setDictionary((Dictionary)newValue);
 				return;
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				getRequired().clear();
@@ -373,11 +373,11 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 			case Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION:
 				setTypeDefinition((TypeDefinition)null);
 				return;
-			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
-				getProvided().clear();
-				return;
 			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
 				setDictionary((Dictionary)null);
+				return;
+			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
+				getProvided().clear();
 				return;
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				getRequired().clear();
@@ -402,10 +402,10 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 		switch (featureID) {
 			case Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION:
 				return typeDefinition != null;
-			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
-				return provided != null && !provided.isEmpty();
 			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
 				return dictionary != null;
+			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
+				return provided != null && !provided.isEmpty();
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				return required != null && !required.isEmpty();
 			case Art2Package.COMPONENT_INSTANCE__NAMESPACE:
@@ -426,6 +426,7 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 		if (baseClass == Instance.class) {
 			switch (derivedFeatureID) {
 				case Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION: return Art2Package.INSTANCE__TYPE_DEFINITION;
+				case Art2Package.COMPONENT_INSTANCE__DICTIONARY: return Art2Package.INSTANCE__DICTIONARY;
 				default: return -1;
 			}
 		}
@@ -442,6 +443,7 @@ public class ComponentInstanceImpl extends NamedElementImpl implements Component
 		if (baseClass == Instance.class) {
 			switch (baseFeatureID) {
 				case Art2Package.INSTANCE__TYPE_DEFINITION: return Art2Package.COMPONENT_INSTANCE__TYPE_DEFINITION;
+				case Art2Package.INSTANCE__DICTIONARY: return Art2Package.COMPONENT_INSTANCE__DICTIONARY;
 				default: return -1;
 			}
 		}

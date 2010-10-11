@@ -116,22 +116,22 @@ public interface Art2Package extends EPackage {
 	int COMPONENT_INSTANCE__TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Provided</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__PROVIDED = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__DICTIONARY = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int COMPONENT_INSTANCE__DICTIONARY = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Provided</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__PROVIDED = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' containment reference list.
@@ -234,13 +234,22 @@ public interface Art2Package extends EPackage {
 	int TYPE_DEFINITION__HASHCODE = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__DICTIONARY_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ComponentTypeImpl <em>Component Type</em>}' class.
@@ -307,13 +316,13 @@ public interface Art2Package extends EPackage {
 	int COMPONENT_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
 
 	/**
-	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__DICTIONARY = TYPE_DEFINITION_FEATURE_COUNT + 0;
+	int COMPONENT_TYPE__DICTIONARY_TYPE = TYPE_DEFINITION__DICTIONARY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' containment reference list.
@@ -322,7 +331,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__REQUIRED = TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int COMPONENT_TYPE__REQUIRED = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Integration Patterns</b></em>' containment reference list.
@@ -331,7 +340,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__INTEGRATION_PATTERNS = TYPE_DEFINITION_FEATURE_COUNT + 2;
+	int COMPONENT_TYPE__INTEGRATION_PATTERNS = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Extra Fonctional Properties</b></em>' containment reference.
@@ -340,7 +349,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES = TYPE_DEFINITION_FEATURE_COUNT + 3;
+	int COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES = TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Provided</b></em>' containment reference list.
@@ -349,7 +358,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__PROVIDED = TYPE_DEFINITION_FEATURE_COUNT + 4;
+	int COMPONENT_TYPE__PROVIDED = TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Start Method</b></em>' attribute.
@@ -358,7 +367,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__START_METHOD = TYPE_DEFINITION_FEATURE_COUNT + 5;
+	int COMPONENT_TYPE__START_METHOD = TYPE_DEFINITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Stop Method</b></em>' attribute.
@@ -367,7 +376,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__STOP_METHOD = TYPE_DEFINITION_FEATURE_COUNT + 6;
+	int COMPONENT_TYPE__STOP_METHOD = TYPE_DEFINITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
@@ -376,7 +385,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 7;
+	int COMPONENT_TYPE_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ContainerNodeImpl <em>Container Node</em>}' class.
@@ -407,13 +416,22 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_NODE__TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_NODE__DICTIONARY = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_NODE__COMPONENTS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CONTAINER_NODE__COMPONENTS = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Container Node</em>' class.
@@ -422,7 +440,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int CONTAINER_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ContainerRootImpl <em>Container Root</em>}' class.
@@ -587,6 +605,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int PORT_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
+
+	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_TYPE__DICTIONARY_TYPE = TYPE_DEFINITION__DICTIONARY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
@@ -857,13 +884,22 @@ public interface Art2Package extends EPackage {
 	int DICTIONARY_VALUE__ATTRIBUTE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUE__VALUE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Dictionary Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_VALUE_FEATURE_COUNT = 1;
+	int DICTIONARY_VALUE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
@@ -930,13 +966,13 @@ public interface Art2Package extends EPackage {
 	int COMPOSITE_TYPE__HASHCODE = COMPONENT_TYPE__HASHCODE;
 
 	/**
-	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_TYPE__DICTIONARY = COMPONENT_TYPE__DICTIONARY;
+	int COMPOSITE_TYPE__DICTIONARY_TYPE = COMPONENT_TYPE__DICTIONARY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' containment reference list.
@@ -1158,6 +1194,15 @@ public interface Art2Package extends EPackage {
 	int SERVICE_PORT_TYPE__HASHCODE = PORT_TYPE__HASHCODE;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_PORT_TYPE__DICTIONARY_TYPE = PORT_TYPE__DICTIONARY_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1339,6 +1384,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int MESSAGE_PORT_TYPE__HASHCODE = PORT_TYPE__HASHCODE;
+
+	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_PORT_TYPE__DICTIONARY_TYPE = PORT_TYPE__DICTIONARY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Synchrone</b></em>' attribute.
@@ -1736,13 +1790,22 @@ public interface Art2Package extends EPackage {
 	int CHANNEL__TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANNEL__DICTIONARY = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Channel</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHANNEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CHANNEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.MBindingImpl <em>MBinding</em>}' class.
@@ -1844,6 +1907,15 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int NODE_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
+
+	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_TYPE__DICTIONARY_TYPE = TYPE_DEFINITION__DICTIONARY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Bootstrap</b></em>' reference list.
@@ -2075,6 +2147,15 @@ public interface Art2Package extends EPackage {
 	int CHANNEL_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANNEL_TYPE__DICTIONARY_TYPE = TYPE_DEFINITION__DICTIONARY_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Start Method</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2130,13 +2211,22 @@ public interface Art2Package extends EPackage {
 	int INSTANCE__TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Dictionary</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE__DICTIONARY = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int INSTANCE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 
 	/**
@@ -2159,17 +2249,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentInstance_Provided();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.ComponentInstance#getDictionary <em>Dictionary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Dictionary</em>'.
-	 * @see org.kermeta.art2.ComponentInstance#getDictionary()
-	 * @see #getComponentInstance()
-	 * @generated
-	 */
-	EReference getComponentInstance_Dictionary();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ComponentInstance#getRequired <em>Required</em>}'.
@@ -2213,17 +2292,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EClass getComponentType();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.ComponentType#getDictionary <em>Dictionary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Dictionary</em>'.
-	 * @see org.kermeta.art2.ComponentType#getDictionary()
-	 * @see #getComponentType()
-	 * @generated
-	 */
-	EReference getComponentType_Dictionary();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.art2.ComponentType#getRequired <em>Required</em>}'.
@@ -2600,6 +2668,17 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getDictionaryValue_Attribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2.DictionaryValue#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.kermeta.art2.DictionaryValue#getValue()
+	 * @see #getDictionaryValue()
+	 * @generated
+	 */
+	EAttribute getDictionaryValue_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.CompositeType <em>Composite Type</em>}'.
@@ -3403,6 +3482,17 @@ public interface Art2Package extends EPackage {
 	EAttribute getTypeDefinition_Hashcode();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.TypeDefinition#getDictionaryType <em>Dictionary Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Dictionary Type</em>'.
+	 * @see org.kermeta.art2.TypeDefinition#getDictionaryType()
+	 * @see #getTypeDefinition()
+	 * @generated
+	 */
+	EReference getTypeDefinition_DictionaryType();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.Instance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3422,6 +3512,17 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getInstance_TypeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.Instance#getDictionary <em>Dictionary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Dictionary</em>'.
+	 * @see org.kermeta.art2.Instance#getDictionary()
+	 * @see #getInstance()
+	 * @generated
+	 */
+	EReference getInstance_Dictionary();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3464,14 +3565,6 @@ public interface Art2Package extends EPackage {
 		EReference COMPONENT_INSTANCE__PROVIDED = eINSTANCE.getComponentInstance_Provided();
 
 		/**
-		 * The meta object literal for the '<em><b>Dictionary</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_INSTANCE__DICTIONARY = eINSTANCE.getComponentInstance_Dictionary();
-
-		/**
 		 * The meta object literal for the '<em><b>Required</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3504,14 +3597,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EClass COMPONENT_TYPE = eINSTANCE.getComponentType();
-
-		/**
-		 * The meta object literal for the '<em><b>Dictionary</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_TYPE__DICTIONARY = eINSTANCE.getComponentType_Dictionary();
 
 		/**
 		 * The meta object literal for the '<em><b>Required</b></em>' containment reference list feature.
@@ -3810,6 +3895,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference DICTIONARY_VALUE__ATTRIBUTE = eINSTANCE.getDictionaryValue_Attribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DICTIONARY_VALUE__VALUE = eINSTANCE.getDictionaryValue_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
@@ -4460,6 +4553,14 @@ public interface Art2Package extends EPackage {
 		EAttribute TYPE_DEFINITION__HASHCODE = eINSTANCE.getTypeDefinition_Hashcode();
 
 		/**
+		 * The meta object literal for the '<em><b>Dictionary Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION__DICTIONARY_TYPE = eINSTANCE.getTypeDefinition_DictionaryType();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.InstanceImpl <em>Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4476,6 +4577,14 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference INSTANCE__TYPE_DEFINITION = eINSTANCE.getInstance_TypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Dictionary</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE__DICTIONARY = eINSTANCE.getInstance_Dictionary();
 
 	}
 

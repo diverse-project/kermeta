@@ -8,6 +8,7 @@ package org.kermeta.art2.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.Dictionary;
 import org.kermeta.art2.Instance;
 import org.kermeta.art2.TypeDefinition;
 
@@ -26,6 +28,7 @@ import org.kermeta.art2.TypeDefinition;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.art2.impl.InstanceImpl#getTypeDefinition <em>Type Definition</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.InstanceImpl#getDictionary <em>Dictionary</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +44,16 @@ public class InstanceImpl extends NamedElementImpl implements Instance {
 	 * @ordered
 	 */
 	protected TypeDefinition typeDefinition;
+
+	/**
+	 * The cached value of the '{@link #getDictionary() <em>Dictionary</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDictionary()
+	 * @generated
+	 * @ordered
+	 */
+	protected Dictionary dictionary;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,12 +117,71 @@ public class InstanceImpl extends NamedElementImpl implements Instance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Dictionary getDictionary() {
+		return dictionary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDictionary(Dictionary newDictionary, NotificationChain msgs) {
+		Dictionary oldDictionary = dictionary;
+		dictionary = newDictionary;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Art2Package.INSTANCE__DICTIONARY, oldDictionary, newDictionary);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDictionary(Dictionary newDictionary) {
+		if (newDictionary != dictionary) {
+			NotificationChain msgs = null;
+			if (dictionary != null)
+				msgs = ((InternalEObject)dictionary).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Art2Package.INSTANCE__DICTIONARY, null, msgs);
+			if (newDictionary != null)
+				msgs = ((InternalEObject)newDictionary).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Art2Package.INSTANCE__DICTIONARY, null, msgs);
+			msgs = basicSetDictionary(newDictionary, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.INSTANCE__DICTIONARY, newDictionary, newDictionary));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case Art2Package.INSTANCE__DICTIONARY:
+				return basicSetDictionary(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case Art2Package.INSTANCE__TYPE_DEFINITION:
 				if (resolve) return getTypeDefinition();
 				return basicGetTypeDefinition();
+			case Art2Package.INSTANCE__DICTIONARY:
+				return getDictionary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,6 +196,9 @@ public class InstanceImpl extends NamedElementImpl implements Instance {
 		switch (featureID) {
 			case Art2Package.INSTANCE__TYPE_DEFINITION:
 				setTypeDefinition((TypeDefinition)newValue);
+				return;
+			case Art2Package.INSTANCE__DICTIONARY:
+				setDictionary((Dictionary)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,6 +215,9 @@ public class InstanceImpl extends NamedElementImpl implements Instance {
 			case Art2Package.INSTANCE__TYPE_DEFINITION:
 				setTypeDefinition((TypeDefinition)null);
 				return;
+			case Art2Package.INSTANCE__DICTIONARY:
+				setDictionary((Dictionary)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,6 +232,8 @@ public class InstanceImpl extends NamedElementImpl implements Instance {
 		switch (featureID) {
 			case Art2Package.INSTANCE__TYPE_DEFINITION:
 				return typeDefinition != null;
+			case Art2Package.INSTANCE__DICTIONARY:
+				return dictionary != null;
 		}
 		return super.eIsSet(featureID);
 	}

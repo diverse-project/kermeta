@@ -37,7 +37,6 @@ import org.kermeta.art2.PortTypeRef;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getDictionary <em>Dictionary</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getRequired <em>Required</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getIntegrationPatterns <em>Integration Patterns</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.ComponentTypeImpl#getExtraFonctionalProperties <em>Extra Fonctional Properties</em>}</li>
@@ -50,16 +49,6 @@ import org.kermeta.art2.PortTypeRef;
  * @generated
  */
 public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentType {
-	/**
-	 * The cached value of the '{@link #getDictionary() <em>Dictionary</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDictionary()
-	 * @generated
-	 * @ordered
-	 */
-	protected DictionaryType dictionary;
-
 	/**
 	 * The cached value of the '{@link #getRequired() <em>Required</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -157,49 +146,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	protected EClass eStaticClass() {
 		return Art2Package.Literals.COMPONENT_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DictionaryType getDictionary() {
-		return dictionary;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDictionary(DictionaryType newDictionary, NotificationChain msgs) {
-		DictionaryType oldDictionary = dictionary;
-		dictionary = newDictionary;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__DICTIONARY, oldDictionary, newDictionary);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDictionary(DictionaryType newDictionary) {
-		if (newDictionary != dictionary) {
-			NotificationChain msgs = null;
-			if (dictionary != null)
-				msgs = ((InternalEObject)dictionary).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Art2Package.COMPONENT_TYPE__DICTIONARY, null, msgs);
-			if (newDictionary != null)
-				msgs = ((InternalEObject)newDictionary).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Art2Package.COMPONENT_TYPE__DICTIONARY, null, msgs);
-			msgs = basicSetDictionary(newDictionary, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__DICTIONARY, newDictionary, newDictionary));
 	}
 
 	/**
@@ -331,8 +277,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
-				return basicSetDictionary(null, msgs);
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 				return ((InternalEList<?>)getRequired()).basicRemove(otherEnd, msgs);
 			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
@@ -353,8 +297,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
-				return getDictionary();
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 				return getRequired();
 			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
@@ -380,9 +322,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
-				setDictionary((DictionaryType)newValue);
-				return;
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 				getRequired().clear();
 				getRequired().addAll((Collection<? extends PortTypeRef>)newValue);
@@ -416,9 +355,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
-				setDictionary((DictionaryType)null);
-				return;
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 				getRequired().clear();
 				return;
@@ -449,8 +385,6 @@ public class ComponentTypeImpl extends TypeDefinitionImpl implements ComponentTy
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
-				return dictionary != null;
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 				return required != null && !required.isEmpty();
 			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:

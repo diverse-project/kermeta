@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.art2.Instance#getTypeDefinition <em>Type Definition</em>}</li>
+ *   <li>{@link org.kermeta.art2.Instance#getDictionary <em>Dictionary</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,31 @@ public interface Instance extends NamedElement {
 	 * @generated
 	 */
 	void setTypeDefinition(TypeDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Dictionary</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dictionary</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dictionary</em>' containment reference.
+	 * @see #setDictionary(Dictionary)
+	 * @see org.kermeta.art2.Art2Package#getInstance_Dictionary()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Dictionary getDictionary();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.art2.Instance#getDictionary <em>Dictionary</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dictionary</em>' containment reference.
+	 * @see #getDictionary()
+	 * @generated
+	 */
+	void setDictionary(Dictionary value);
 
 } // Instance

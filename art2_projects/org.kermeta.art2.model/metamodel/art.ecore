@@ -6,8 +6,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//NamedElement #//Instance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="provided" upperBound="-1"
         eType="#//Port" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary" eType="#//Dictionary"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" upperBound="-1"
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"/>
@@ -15,8 +13,6 @@
         eType="#//Metric"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//TypeDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary" eType="#//DictionaryType"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" upperBound="-1"
         eType="#//PortTypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="integrationPatterns" upperBound="-1"
@@ -82,6 +78,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DictionaryValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
         eType="#//DictionaryAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeType" eSuperTypes="#//ComponentType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childs" upperBound="-1"
@@ -199,9 +196,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredLibs" upperBound="-1"
         eType="#//DeployUnit"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hashcode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionaryType" eType="#//DictionaryType"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instance" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1"
         eType="#//TypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary" eType="#//Dictionary"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
