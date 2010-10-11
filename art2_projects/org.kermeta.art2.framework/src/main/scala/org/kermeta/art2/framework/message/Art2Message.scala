@@ -19,6 +19,9 @@ class Art2Message{
   var content : Any = null
 
   @BeanProperty
+  var contentClass : String = null
+
+  @BeanProperty
   var inOut : java.lang.Boolean = false
 
   @BeanProperty

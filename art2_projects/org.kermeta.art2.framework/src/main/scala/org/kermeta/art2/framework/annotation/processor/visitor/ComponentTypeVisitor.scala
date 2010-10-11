@@ -16,7 +16,7 @@ import com.sun.mirror.util.SimpleDeclarationVisitor
 import org.kermeta.art2.framework.Art2Utility
 import scala.collection.JavaConversions._
 
-class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : ContainerRoot) extends SimpleDeclarationVisitor {
+class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : ContainerRoot) extends SimpleDeclarationVisitor with TypeDefinitionVisitor {
 
   var componentType : ComponentType = _
   def getComponentType : ComponentType = {
@@ -33,6 +33,10 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
     componentType.setName(ctname)
     componentType.setBean(classdef.getQualifiedName)
     componentType.setFactoryBean(classdef.getQualifiedName+"Factory")
+
+    //COMMON TYPE PROPERTY
+    processType(componentType,classdef,env,root)
+
 
     /* CREATE COMPONENT TYPE DEPLOY UNIT IF NEEDED */
     var unitName = env.getOptions.find({op => op._1.contains("art2.lib.id")}).getOrElse{("key=","")}._1.split('=').toList.get(1)

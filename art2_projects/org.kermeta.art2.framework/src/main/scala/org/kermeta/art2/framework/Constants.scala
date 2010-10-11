@@ -8,6 +8,9 @@ package org.kermeta.art2.framework
 object Constants {
 
   def ART2_NODE_NAME = "art2.node.name"
+  def ART2_MODEL_PORT = "art2.modelsynch.port"
+
+
   def ART2_INSTANCE_NAME = "art2.component.name"
   def ART2_PORT_NAME = "art2.port.name"
 
@@ -27,5 +30,11 @@ object Constants {
   def ART2_PLATFORM_REMOTE_NETWORK_TYPE = "art2.remote.network.type"
 
   def ART2_PROPERTY_OSGI_BUNDLE = "osgi.bundle"
+
+
+
+
+
+  //ART2 PARAM
 
 }

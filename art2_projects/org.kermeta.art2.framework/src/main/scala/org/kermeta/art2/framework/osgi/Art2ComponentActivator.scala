@@ -55,7 +55,10 @@ abstract class Art2ComponentActivator extends BundleActivator {
     componentActor.getArt2ComponentType.getNeededPorts.foreach{np=>np._2.asInstanceOf[Art2Port].start}
 
     /* START HOSTED ACTOR */
-    componentActor.getArt2ComponentType.getHostedPorts.foreach{hp=>hp._2.asInstanceOf[Art2Port].start}
+    componentActor.getArt2ComponentType.getHostedPorts.foreach{hp=>
+      hp._2.asInstanceOf[Art2Port].start
+      hp._2.asInstanceOf[Art2Port].pause
+    }
 
 
   }

@@ -18,6 +18,7 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
 
   override def internal_process(msg : Any) = msg match {
     case Art2StartMessage => {
+        startComponent
         //Wake Up Hosted Port
         getArt2ComponentType.getHostedPorts.foreach{hp=>
           var port = hp._2.asInstanceOf[Art2Port]
@@ -25,7 +26,6 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
             port.resume
           }
         }
-        startComponent
         reply(true)
       }
     case Art2StopMessage => {

@@ -16,7 +16,7 @@ import com.sun.mirror.util.SimpleDeclarationVisitor
 import org.kermeta.art2.framework.Art2Utility
 import scala.collection.JavaConversions._
 
-class ChannelTypeFragmentVisitor(env : AnnotationProcessorEnvironment,root : ContainerRoot) extends SimpleDeclarationVisitor {
+class ChannelTypeFragmentVisitor(env : AnnotationProcessorEnvironment,root : ContainerRoot) extends SimpleDeclarationVisitor with TypeDefinitionVisitor {
 
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
 
@@ -28,6 +28,10 @@ class ChannelTypeFragmentVisitor(env : AnnotationProcessorEnvironment,root : Con
     channelType.setName(ctname)
     channelType.setBean(classdef.getQualifiedName)
     channelType.setFactoryBean(classdef.getQualifiedName+"Factory")
+
+    //COMMON TYPE PROPERTY
+    processType(channelType,classdef,env,root)
+
 
     /* CREATE COMPONENT TYPE DEPLOY UNIT IF NEEDED */
     var unitName = env.getOptions.find({op => op._1.contains("art2.lib.id")}).getOrElse{("key=","")}._1.split('=').toList.get(1)
