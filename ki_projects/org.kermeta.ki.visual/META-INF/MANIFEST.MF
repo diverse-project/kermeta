@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.ki.visual.concretePres,
  org.kermeta.ki.malai,
  org.kermeta.ki.malai.extern.kermeta,
- org.kermeta.ki.malai.javaBinding
+ org.kermeta.ki.malai.javaBinding,
+ org.kermeta.pruning;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: INRIA Rennes, Triskell

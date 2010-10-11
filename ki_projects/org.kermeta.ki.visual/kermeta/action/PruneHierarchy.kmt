@@ -19,7 +19,7 @@ using kermeta::ki::malai::undo
 
 class PruneHierarchy inherits ActionPrune
 {
-	method setPruningParameters(pruningOperation : MetamodelPruner) : Void is do
+	method setPruningParameters(pruningOperation : VisualMetamodelPruner) : Void is do
 		pruningOperation.isHierarchicalPruning := true
 	end
 }

@@ -9,9 +9,10 @@ package kermeta::ki::visual;
 
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/operation/metamodelPruner.kmt"
+require "platform:/resource/org.kermeta.pruning/kermeta/metamodelPruner.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
 
-
+using kermeta::pruning
 using kermeta::standard
 using kermeta::language::structure
 using kermeta::ki::malai::action
@@ -38,7 +39,7 @@ class ActionPrune inherits Action, Undoable {
 	
 	
 	
-	operation setPruningParameters(pruningOperation : MetamodelPruner) : Void is do
+	operation setPruningParameters(pruningOperation : VisualMetamodelPruner) : Void is do
 		pruningOperation.isHierarchicalPruning := false
 	end
 	
@@ -67,7 +68,7 @@ class ActionPrune inherits Action, Undoable {
 		
 		metamodel.reinitView
 		
-		var pruningOp  : MetamodelPruner init MetamodelPruner.new
+		var pruningOp  : VisualMetamodelPruner init VisualMetamodelPruner.new
 		var reqClasses : Bag<RequiredClass> init Bag<RequiredClass>.new
 		var reqClass   : RequiredClass
 		
@@ -78,7 +79,7 @@ class ActionPrune inherits Action, Undoable {
 		}
 		
 		pruningOp.inputKermetaMetamodel := metamodel
-		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy, radiusEffect, card0)
+		pruningOp.initializeVisualPruning(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy, radiusEffect, card0)
 		setPruningParameters(pruningOp)
 		
 		if pruningOp.preprocess then
