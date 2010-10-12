@@ -25,7 +25,6 @@ public class App {
 
         //artpanel.loadModel("/Users/ffouquet/Desktop/AS.art2");
 
-
         jframe.pack();
         jframe.setVisible(true);
     }
