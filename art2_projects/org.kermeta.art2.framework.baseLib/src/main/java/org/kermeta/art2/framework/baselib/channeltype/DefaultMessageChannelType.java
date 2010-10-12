@@ -25,6 +25,8 @@ public class DefaultMessageChannelType extends AbstractChannelFragment {
     @Override
     public Object dispatch(Art2Message msg) {
 
+        logger.info("Local node bsize"+getBindedPorts());
+
         if(getBindedPorts().isEmpty() && getOtherFragments().isEmpty()){
             logger.warn("No consumer, msg lost="+msg.getContent());
         }
