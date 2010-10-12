@@ -5,6 +5,7 @@
 package org.kermeta.art2.ui.editor.command;
 
 import javax.swing.JFileChooser;
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.art2.Channel;
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ComponentInstance;
@@ -44,7 +45,7 @@ public class LoadModelCommandUI implements Command {
     public void execute(Object p) {
         filechooser.showOpenDialog(kernel.getModelPanel());
         if (filechooser.getSelectedFile() != null) {
-            lcommand.execute(filechooser.getSelectedFile().getAbsoluteFile());
+            lcommand.execute(URI.createFileURI(filechooser.getSelectedFile().getAbsolutePath()));
         }
     }
 }
