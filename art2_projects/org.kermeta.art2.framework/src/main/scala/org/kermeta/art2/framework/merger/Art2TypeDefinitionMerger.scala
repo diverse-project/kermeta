@@ -35,7 +35,9 @@ object Art2TypeDefinitionMerger extends Art2Merger {
                   etp.foreach{loopTP=>
                     typDef.getRequiredLibs.add(Art2DeployUnitMerger.merge(actualModel,loopTP))
                   }
-                  typDef.setDeployUnit(Art2DeployUnitMerger.merge(actualModel,typDef.getDeployUnit))
+                  if(typDef.getDeployUnit != null){
+                    typDef.setDeployUnit(Art2DeployUnitMerger.merge(actualModel,typDef.getDeployUnit))
+                  }
 
               }
               case _ =>
