@@ -4,14 +4,11 @@
  */
 package org.kermeta.art2.ui.editor.panel;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
-import org.kermeta.art2.ui.editor.command.AddChannelCommand;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
+import org.kermeta.art2.ui.editor.command.ClearModelCommand;
 import org.kermeta.art2.ui.editor.command.LoadModelCommandUI;
 import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
@@ -48,6 +45,13 @@ public class CommandPanel extends JPanel {
         btLoadLibCommandUI.setKernel(kernel);
         btLoadModel.setCommand(btLoadLibCommandUI);
 
+        
+        JCommandButton btClearModel = new JCommandButton("ClearModel");
+        ClearModelCommand btClearModelCommand = new ClearModelCommand();
+        btClearModelCommand.setKernel(kernel);
+        btClearModel.setCommand(btClearModelCommand);
+         
+        
         JCommandButton btLoadLib = new JCommandButton("LoadLib");
         LoadNewLibCommand btLoadLibCommand = new LoadNewLibCommand();
         btLoadLibCommand.setKernel(kernel);
@@ -64,6 +68,7 @@ public class CommandPanel extends JPanel {
         add(btSave);
         add(btLoadModel);
         add(btLoadLib);
+        add(btClearModel);
         add(btSynch);
 
 
