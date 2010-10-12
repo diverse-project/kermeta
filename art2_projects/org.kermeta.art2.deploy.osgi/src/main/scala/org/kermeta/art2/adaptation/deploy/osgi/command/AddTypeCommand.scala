@@ -11,6 +11,7 @@ import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import scala.collection.JavaConversions._
+import org.osgi.framework.BundleException
 import org.slf4j.LoggerFactory
 
 case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends PrimitiveCommand{
@@ -53,6 +54,11 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
             lastExecutionBundle.get.start
             true
           } catch {
+            case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
+                logger.warn("ThirdParty conflict ! ",e)
+                true
+              }
+            
             case _ @ e =>{
                 try{
                   lastExecutionBundle match {
@@ -63,7 +69,7 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
                   case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
                 }
                 false
-            }
+              }
           }
         }
       case None => false
