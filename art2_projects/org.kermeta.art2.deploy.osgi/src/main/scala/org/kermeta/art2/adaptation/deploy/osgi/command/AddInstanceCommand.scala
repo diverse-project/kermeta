@@ -102,7 +102,7 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
 
       bundle.start
       //   bundleWrapper.start
-
+      mustBeStarted = true
       true
     } catch {
       case _ @ e => e.printStackTrace;false

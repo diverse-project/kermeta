@@ -88,19 +88,19 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
 
     var executionResult = true
 
-    if(executionResult){ executionResult=phase.phase(stopCommand,"Phase 0 STOP COMPONENT",false) }
-    if(executionResult){ executionResult=phase.phase(command_remove_binding,"Phase 1 Remove Binding",false) }
-    if(executionResult){ executionResult=phase.phase(command_remove_instance,"Phase 2 Remove Instance",false) }
-    if(executionResult){ executionResult=phase.phase(command_remove_type,"Phase 3 Remove ComponentType",false) }
+    if(executionResult){ executionResult=phase.phase(stopCommand,"Phase 0 STOP COMPONENT") }
+    if(executionResult){ executionResult=phase.phase(command_remove_binding,"Phase 1 Remove Binding") }
+    if(executionResult){ executionResult=phase.phase(command_remove_instance,"Phase 2 Remove Instance") }
+    if(executionResult){ executionResult=phase.phase(command_remove_type,"Phase 3 Remove ComponentType") }
 
     //INSTALL TYPE
-    if(executionResult){ executionResult=phase.phase(executedCommandTP,"Phase 4 ThirdParty",true) }
-    if(executionResult){ executionResult=phase.phase(command_add_type,"Phase 5 Add ComponentType",true) }
+    if(executionResult){ executionResult=phase.phase(executedCommandTP,"Phase 4 ThirdParty") }
+    if(executionResult){ executionResult=phase.phase(command_add_type,"Phase 5 Add ComponentType") }
 
     //INSTALL ISTANCE
-    if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 6 install ComponentInstance",true) }
-    if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 7 install Bindings",false) }
-    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 8 START COMPONENT",false) }
+    if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 6 install ComponentInstance") }
+    if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 7 install Bindings") }
+    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 8 START COMPONENT") }
 
     if(!executionResult){phase.rollback}
 

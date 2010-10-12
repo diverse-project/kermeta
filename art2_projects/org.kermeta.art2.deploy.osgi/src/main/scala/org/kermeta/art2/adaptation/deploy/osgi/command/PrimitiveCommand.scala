@@ -15,4 +15,6 @@ trait PrimitiveCommand {
 
   def getLastExecutionBundle = lastExecutionBundle
 
+  var mustBeStarted = false
+
 }

@@ -25,15 +25,15 @@ class Art2DeployPhase {
     executed = List()
   }
 
-  def phase(cmds: List[PrimitiveCommand],desc:String,autostart:Boolean):Boolean = {
+  def phase(cmds: List[PrimitiveCommand],desc:String):Boolean = {
     logger.info(desc+"="+cmds.size)
     var intermediate = cmds.forall(c=> {
         logger.info("Execute command "+c.getClass.getName)
         try{ c.execute } catch { case _ @ e => logger.error("ART2 DEPLOY ERROR=",e);false }
       })
 
-    if(intermediate && autostart){
-      intermediate = cmds.forall(c=> {
+    if(intermediate){
+      intermediate = cmds.filter(c=> c.mustBeStarted).forall(c=> {
           try{
             c.getLastExecutionBundle match {
               case None => false

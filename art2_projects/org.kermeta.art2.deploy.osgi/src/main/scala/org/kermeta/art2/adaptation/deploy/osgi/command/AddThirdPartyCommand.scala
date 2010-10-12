@@ -18,20 +18,22 @@ case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  exten
 
   // var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
   def execute() : Boolean= {
-    println("CMD ADD ThirdParty EXECUTION");
+    println("CMD ADD ThirdParty EXECUTION => url="+ct.getUrl);
     /* Actually deploy only bundle from library  */
     try{
       lastExecutionBundle = Some(ctx.bundleContext.installBundle(ct.getUrl));
       var symbolicName : String = lastExecutionBundle.get.getSymbolicName
       ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
       // lastExecutionBundle.get.start
+      mustBeStarted = true
       true
     } catch {
       case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
-          logger.warn("ThirdParty conflict ! ",e)
+          logger.warn("ThirdParty conflict ! ")
+          mustBeStarted = false
           true
         }
-      case _ @ e => logger.error("Error installing ThirdParty",e); false
+      case _ @ e => {logger.error("Error installing ThirdParty",e); false}
     }
 
   }

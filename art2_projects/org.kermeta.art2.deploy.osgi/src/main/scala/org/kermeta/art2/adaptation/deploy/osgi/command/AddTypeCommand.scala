@@ -52,10 +52,12 @@ case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends
             var symbolicName : String = lastExecutionBundle.get.getSymbolicName
             ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
             lastExecutionBundle.get.start
+            mustBeStarted = true
             true
           } catch {
             case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
                 logger.warn("ThirdParty conflict ! ",e)
+                mustBeStarted = false
                 true
               }
             
