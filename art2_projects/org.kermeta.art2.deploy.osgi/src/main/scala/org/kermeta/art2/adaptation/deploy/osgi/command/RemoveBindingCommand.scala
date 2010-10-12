@@ -71,11 +71,18 @@ case class RemoveBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:S
                 art2ChannelFound match {
                   case None => logger.info("ChannelFragment not found in component");false
                   case Some(channelProxy) => {
+                      println(channelProxy)
                       var bindmsg = new Art2PortUnbindMessage
                       bindmsg.setNodeName(nodeName)
                       bindmsg.setComponentName(c.getPort.eContainer.asInstanceOf[ComponentInstance].getName)
                       bindmsg.setPortName(portfound.getName)
-                      (channelProxy.asInstanceOf[Art2ChannelFragment] !? bindmsg).asInstanceOf[Boolean]
+
+                      println("Send unbind msg"+bindmsg)
+
+                      var res = (channelProxy.asInstanceOf[Art2ChannelFragment] !? bindmsg).asInstanceOf[Boolean]
+
+                      println(res)
+                      res
                     }
                 }
 
