@@ -106,7 +106,13 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
         msg2.setContent(msg)
         dispatch(msg2)
       }
-    case _ @ msg => println("WTF !")
+    case _ @ msg => {
+        internal_logger.warn("Msg does not seem to be an object =>"+msg)
+        var msg2 = new Art2Message
+        msg2.setInOut(false)
+        msg2.setContent(msg)
+        dispatch(msg2)
+    }
   }
   
 
