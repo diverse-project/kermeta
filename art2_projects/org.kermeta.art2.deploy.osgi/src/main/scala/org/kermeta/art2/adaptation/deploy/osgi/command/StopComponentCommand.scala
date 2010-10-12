@@ -11,6 +11,7 @@ import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import org.kermeta.art2.framework.Art2Component
 import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.message.Art2StopMessage
+import scala.collection.JavaConversions._
 
 case class StopComponentCommand(c : Instance, ctx : Art2DeployManager,nodeName:String) extends PrimitiveCommand {
 

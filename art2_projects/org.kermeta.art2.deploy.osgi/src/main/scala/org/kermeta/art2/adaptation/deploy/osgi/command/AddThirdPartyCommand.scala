@@ -8,6 +8,7 @@ package org.kermeta.art2.adaptation.deploy.osgi.command
 import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
+import scala.collection.JavaConversions._
 
 case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  extends PrimitiveCommand {
 

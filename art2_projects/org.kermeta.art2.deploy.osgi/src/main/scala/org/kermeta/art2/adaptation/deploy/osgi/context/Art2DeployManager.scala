@@ -22,7 +22,7 @@ class Art2DeployManager {
  // var modelHandler : Art2ModelHandlerService = null;
 //  def setModelHandler(mh : Art2ModelHandlerService) = modelHandler = mh
 
-  var bundleMapping : scala.collection.mutable.ArrayBuffer[Art2OSGiBundle] = new scala.collection.mutable.ArrayBuffer[Art2OSGiBundle]();
+  var bundleMapping : java.util.List[Art2OSGiBundle] = new java.util.ArrayList[Art2OSGiBundle]();
 
   def setModelHandlerServiceTracker(st : ServiceTracker) = modelHandlerServiceTracker = st
   private var modelHandlerServiceTracker : ServiceTracker = null
