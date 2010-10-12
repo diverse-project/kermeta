@@ -38,12 +38,15 @@ class Art2BusNettyActivator extends BundleActivator {
       override def run(){
         modelHandlerServiceTracker.open
         configServiceTracker.open
+
         var mhandler = modelHandlerServiceTracker.waitForService(10000).asInstanceOf[Art2ModelHandlerService]
         var configService = configServiceTracker.waitForService(10000).asInstanceOf[ConfigurationService]
 
-
         /* create model synch service */
         var modelDispatcherPort = configService.getProperty(ConfigConstants.ART2_NODE_MODELSYNC_PORT)
+
+        println("PropFound="+modelDispatcherPort)
+
         if(modelDispatcherPort == Constants.ART2_PORT_AUTO){
           logger.info("Port Auto => search for a free port for Model Dispatcher")
           var i = 8000
