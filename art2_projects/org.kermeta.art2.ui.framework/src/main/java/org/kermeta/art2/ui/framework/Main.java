@@ -98,7 +98,6 @@ public class Main {
         mb.setTo(hub1);
         model.addBinding(mb);
 
-
         c1.setTitle("c1");
         c1.addLeft(p11);
         c1.addRight(p12);

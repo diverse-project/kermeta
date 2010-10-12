@@ -68,6 +68,7 @@ public class PortPanel extends JPanel {
         if (pt.equals(PortType.PROVIDED)) {
             borderColor = new Color(68, 68, 68, 150);
         }
+        portType =pt;
     }
 
     /**
