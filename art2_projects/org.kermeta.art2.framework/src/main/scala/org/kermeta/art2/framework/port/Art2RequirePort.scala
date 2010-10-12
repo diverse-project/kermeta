@@ -19,19 +19,11 @@ trait Art2RequiredPort extends Art2Port {
   var logger = LoggerFactory.getLogger(this.getClass);
 
   private def bind(bindmsg : Art2FragmentBindMessage) ={
-    delegate match{
-      case None =>
-      case Some(a)=> a.stop
-    }
     delegate = Some(bindmsg.getProxy)
-    delegate.get.start
   }
 
   private def unbind(unbindmsg: Art2FragmentUnbindMessage)= {
-    delegate match {
-      case None => logger.warn("Can't unbind require port "+getName)
-      case Some(d) => d.stop; delegate = None
-    }
+    delegate = None
   }
 
   override def internal_process(msg : Any) = msg match {
@@ -40,7 +32,9 @@ trait Art2RequiredPort extends Art2Port {
       /* other kind of message send */
     case _ @ msg => {
         delegate match {
-          case None => react {case bindmsg : Art2FragmentBindMessage => bind(bindmsg)}
+          case None => react {
+              case bindmsg : Art2FragmentBindMessage => bind(bindmsg)
+           }
           case Some(d) => {
               if(getInOut){
                 try { reply(d !? (10000,msg)) } catch { case _ @ e=> logger.error("error sending message  ",e) }
