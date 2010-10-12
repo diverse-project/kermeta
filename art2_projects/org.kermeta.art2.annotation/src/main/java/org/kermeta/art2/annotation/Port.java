@@ -20,5 +20,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface Port {
         String name();
-        String method() default "empty";
+        String method() default "default";
 }
