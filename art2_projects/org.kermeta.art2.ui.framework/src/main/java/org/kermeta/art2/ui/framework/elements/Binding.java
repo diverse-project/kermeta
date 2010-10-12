@@ -20,18 +20,17 @@ public class Binding extends AbstractSelectElement {
     private Color unselectedcolor = null;
 
     public enum Type {
-
-        simple, multi
+        input, ouput
     };
 
     public Binding(Type t) {
-        if (t.equals(Type.simple)) {
-            selectedcolor = new Color(243, 0, 0, 180);
-            unselectedcolor = new Color(243, 238, 39, 180);
+        if (t.equals(Type.input)) {
+            selectedcolor = new Color(254, 238, 100, 180);
+            unselectedcolor = new Color(200, 238, 39, 180);
         }
-        if (t.equals(Type.multi)) {
-            selectedcolor = new Color(243, 0, 0, 180);
-            unselectedcolor = new Color(255, 127, 36, 180);
+        if (t.equals(Type.ouput)) {
+            selectedcolor = new Color(254, 0, 0, 180);
+            unselectedcolor = new Color(200, 0, 0, 180);
         }
     }
 

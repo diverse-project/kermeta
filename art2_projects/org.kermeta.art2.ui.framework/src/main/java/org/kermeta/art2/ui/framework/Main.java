@@ -52,6 +52,8 @@ public class Main {
         PortPanel p11 = new PortPanel();
         p11.setType(PortType.PROVIDED);
         p11.setNature(PortPanel.PortNature.SERVICE);
+
+
         PortPanel p12 = new PortPanel();
         p12.setType(PortType.REQUIRED);
         p12.setNature(PortPanel.PortNature.SERVICE);
@@ -78,18 +80,20 @@ public class Main {
         p24.setTitle("P24");
 
 
-        Binding b = new Binding(Binding.Type.simple);
+        Binding b = new Binding(Binding.Type.input);
+        b.setSelected(false);
         b.setFrom(p11);
         b.setTo(p22);
         model.addBinding(b);
 
-        Binding sb = new Binding(Binding.Type.simple);
+        Binding sb = new Binding(Binding.Type.input);
         sb.setSelected(true);
         sb.setFrom(p12);
         sb.setTo(p23);
         model.addBinding(sb);
 
-        Binding mb = new Binding(Binding.Type.multi);
+        Binding mb = new Binding(Binding.Type.ouput);
+        mb.setSelected(true);
         mb.setFrom(p24);
         mb.setTo(hub1);
         model.addBinding(mb);

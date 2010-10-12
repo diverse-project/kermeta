@@ -55,6 +55,12 @@ public class PortPanel extends JPanel {
         }
     }
 
+    private PortType portType = null;
+
+    public PortType getType(){
+        return portType;
+    }
+
     public void setType(PortType pt) {
         if (pt.equals(PortType.REQUIRED)) {
             borderColor = new Color(255, 0, 0, 150);

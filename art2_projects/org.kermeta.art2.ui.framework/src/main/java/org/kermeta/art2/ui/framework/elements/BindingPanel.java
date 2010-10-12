@@ -14,7 +14,6 @@ import java.awt.RenderingHints;
 import java.awt.geom.QuadCurve2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
