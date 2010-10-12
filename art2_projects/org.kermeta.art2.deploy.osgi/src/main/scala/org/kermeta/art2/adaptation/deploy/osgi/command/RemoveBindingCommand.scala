@@ -24,7 +24,7 @@ case class RemoveBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:S
 
   def execute() : Boolean= {
 
-    logger.info("Try to remove binding portname =>"+c.getPort.getPortTypeRef.getName+", channel="+c.getHub.getName)
+    logger.info("Try to remove binding , component=>"+ c.getPort.eContainer.asInstanceOf[ComponentInstance].getName +"portname =>"+c.getPort.getPortTypeRef.getName+", channel="+c.getHub.getName)
 
     var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getHub.getClass && map.name == c.getHub.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
