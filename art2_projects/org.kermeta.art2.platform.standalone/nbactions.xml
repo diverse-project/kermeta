@@ -24,5 +24,16 @@
         </properties>
     </action>
 
+    <action>
+        <actionName>CUSTOM-RunRunEntiAuto</actionName>
+        <displayName>RunEntiAuto</displayName>
+        <goals>
+            <goal>exec:java</goal>
+        </goals>
+        <properties>
+            <node.name>entiAuto</node.name>
+        </properties>
+    </action>
+
 
 </actions>
