@@ -18,21 +18,31 @@ import scala.collection.JavaConversions._
 
 object Art2DeployUnitMerger extends Art2Merger {
 
+
+  def merge(actualModel : ContainerRoot,tp : DeployUnit) : DeployUnit = {
+    actualModel.getDeployUnits.find({atp=> atp.getName == tp.getName}) match {
+      case Some(ftp)=> {
+          //CHECK CONSISTENCY, IF NOT JUST ADD
+          if(tp.getUrl != ftp.getUrl || tp.getUnitName != ftp.getUnitName || tp.getGroupName != ftp.getGroupName || tp.getVersion != ftp.getVersion  ){
+            actualModel.getDeployUnits.add(tp);tp
+          } else {
+            ftp
+          }
+        }
+      case None => {
+          actualModel.getDeployUnits.add(tp);tp
+        }
+    }
+  }
+
+
+
+
   def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     /* STEP 0 MERGE PARTY */
     var tps : List[DeployUnit] = List()++modelToMerge.getDeployUnits.toList
     tps.foreach{tp=>
-      actualModel.getDeployUnits.find({atp=> atp.getName == tp.getName}) match {
-        case Some(ftp)=> {
-            //CHECK CONSISTENCY, IF NOT JUST ADD
-            if(tp.getUrl != ftp.getUrl || tp.getUnitName != ftp.getUnitName || tp.getGroupName != ftp.getGroupName || tp.getVersion != ftp.getVersion  ){
-              actualModel.getDeployUnits.add(tp)
-            }
-          }
-        case None => {
-            actualModel.getDeployUnits.add(tp)
-          }
-      }
+      merge(actualModel,tp)
     }
   }
 }

@@ -8,6 +8,7 @@ package org.kermeta.art2.framework.merger
 import org.kermeta.art2.ChannelType
 import org.kermeta.art2.ComponentType
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.MessagePortType
 import org.kermeta.art2.PortType
 import org.kermeta.art2.ServicePortType
@@ -24,11 +25,30 @@ object Art2TypeDefinitionMerger extends Art2Merger {
       actualModel.getTypeDefinitions.find({actualTypeDef=>actualTypeDef.getName.equals(toMergeTypeDef.getName)}) match {
         case Some(fct)=> //TODO CHECK CONSISTENCY
         case None => {
+            //COMMON PROCESS
+            toMergeTypeDef match {
+              case typDef : org.kermeta.art2.TypeDefinition => {
+
+                  //MERGE 1
+                  var etp : List[DeployUnit] = List() ++ typDef.getRequiredLibs
+                  typDef.getRequiredLibs.clear
+                  etp.foreach{loopTP=>
+                    typDef.getRequiredLibs.add(Art2DeployUnitMerger.merge(actualModel,loopTP))
+                  }
+                  typDef.setDeployUnit(Art2DeployUnitMerger.merge(actualModel,typDef.getDeployUnit))
+
+              }
+              case _ =>
+            }
+
             
             toMergeTypeDef match {
               case ct : ChannelType => { actualModel.getTypeDefinitions.add(ct) }
               case ct : ComponentType => {
                   actualModel.getTypeDefinitions.add(ct)
+
+                  
+
                   ct.getProvided.foreach{ptref=>ptref.setRef(mergePortType(actualModel,ptref.getRef))}
                   ct.getRequired.foreach{ptref=>ptref.setRef(mergePortType(actualModel,ptref.getRef))}
                 }

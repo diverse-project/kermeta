@@ -20,7 +20,7 @@ class Art2Handler {
 
   def merge(modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
-      Art2DeployUnitMerger.merge(actualModel, modelToMerge)
+     // Art2DeployUnitMerger.merge(actualModel, modelToMerge)
       Art2TypeDefinitionMerger.merge(actualModel, modelToMerge)
       Art2TypeLibraryMerger.merge(actualModel, modelToMerge)
     }
