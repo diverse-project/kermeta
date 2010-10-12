@@ -19,6 +19,14 @@ case class AddFragmentBindingCommand(c : Channel,remoteNodeName:String, ctx : Ar
 
   def execute() : Boolean= {
 
+    
+    println("Search for Bunding "+c.getClass.getName+","+c.getName)
+    ctx.bundleMapping.foreach{map=>
+
+      println("Map =>"+map.name+","+map.objClass.getName+","+map.bundle.getBundleId )
+
+    }
+
     var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getClass && map.name == c.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
       case Some(mapfound)=> {

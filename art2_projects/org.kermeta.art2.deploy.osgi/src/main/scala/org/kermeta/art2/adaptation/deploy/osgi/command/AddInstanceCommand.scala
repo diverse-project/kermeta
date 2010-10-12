@@ -95,7 +95,7 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
       // var bundleWrapper= ctx.bundleContext.installBundle("assembly:"+directoryWrapper.getAbsolutePath);
       //    executedBundles = List(bundle,bundleWrapper)
 
-      ctx.bundleMapping.append(Art2OSGiBundle(c.getName,c.getClass,bundle))
+      ctx.bundleMapping.add(Art2OSGiBundle(c.getName,c.getClass,bundle))
       // ctx.bundleMapping.append(Art2OSGiBundle(c,c.getName,c.getClass,bundleWrapper))
 
       lastExecutionBundle = Some(bundle)
