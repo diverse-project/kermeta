@@ -37,6 +37,7 @@ class Art2CoreActivator extends BundleActivator {
 
         myBean.setKompareService(kompareServiceTracker.waitForService(10000).asInstanceOf[org.kermeta.art2.api.service.core.kompare.ModelKompareService])
         myBean.setDeployService(deployServiceTracker.waitForService(10000).asInstanceOf[org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService])
+
         myBean.start
         /* TODO CHECK UNSET SERVICE */
 
