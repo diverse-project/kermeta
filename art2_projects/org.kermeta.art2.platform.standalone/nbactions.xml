@@ -8,7 +8,7 @@
         </goals>
         <properties>
             <node.name>duke</node.name>
-            <art2.config>/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.platform.standalone/src/main/resources/config/art2duke</art2.config>
+            <art2.config>src/main/resources/config/art2duke</art2.config>
         </properties>
     </action>
         
@@ -20,7 +20,7 @@
         </goals>
         <properties>
             <node.name>entimid</node.name>
-            <art2.config>/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.platform.standalone/src/main/resources/config/art2entimid</art2.config>
+            <art2.config>src/main/resources/config/art2entimid</art2.config>
         </properties>
     </action>
 
