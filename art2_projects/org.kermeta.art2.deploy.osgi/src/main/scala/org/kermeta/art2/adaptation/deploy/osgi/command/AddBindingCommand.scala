@@ -69,6 +69,10 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
                   case None => logger.info("ChannelFragment not found in component");false
                   case Some(channelProxy) => {
                       var bindmsg = new Art2PortBindMessage
+                      bindmsg.setNodeName(nodeName)
+                      bindmsg.setComponentName(c.getPort.eContainer.asInstanceOf[ComponentInstance].getName)
+                      bindmsg.setPortName(portfound.getName)
+
                       bindmsg.setProxy(portfound)
                       (channelProxy.asInstanceOf[Art2ChannelFragment] !? bindmsg).asInstanceOf[Boolean]
                     }
