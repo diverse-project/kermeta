@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
-  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultMessageChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelType"/>
-  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultServiceChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelType"/>
   <typeDefinitions xsi:type="art2:ChannelType" name="LocalBroadcastMessageChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelType"/>
+  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultServiceChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelType"/>
+  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultMessageChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelType"/>
   <libraries name="Art2BaseChannelType" subTypes="//@typeDefinitions.0 //@typeDefinitions.1 //@typeDefinitions.2"/>
   <deployUnits groupName="org.kermeta.art2" unitName="art2.framework.baseLib" version="2.2.0-SNAPSHOT"/>
 </art2:ContainerRoot>
