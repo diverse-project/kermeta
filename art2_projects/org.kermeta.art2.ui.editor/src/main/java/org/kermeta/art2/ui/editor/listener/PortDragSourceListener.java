@@ -23,6 +23,7 @@ import org.kermeta.art2.ui.editor.widget.FlightPortPanel;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortNature;
+import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
 
 /**
  * implementation of the drag source listener for the Dnd of a component
@@ -49,11 +50,11 @@ public class PortDragSourceListener extends DragSourceAdapter implements DragSou
         this.eventSourcePanel = _ct;
         this.kernel = _kernel;
 
-        if( eventSourcePanel.getNature().equals(PortNature.MESSAGE) ){
-            tempBinding = new Binding(Binding.Type.multi);
+        if( eventSourcePanel.getType().equals(PortType.PROVIDED) ){
+            tempBinding = new Binding(Binding.Type.input);
         }
-        if( eventSourcePanel.getNature().equals(PortNature.SERVICE) ){
-            tempBinding = new Binding(Binding.Type.simple);
+        if( eventSourcePanel.getType().equals(PortType.REQUIRED) ){
+            tempBinding = new Binding(Binding.Type.ouput);
         }
 
         

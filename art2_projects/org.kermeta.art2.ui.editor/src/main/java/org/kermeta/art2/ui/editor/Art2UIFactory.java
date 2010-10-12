@@ -8,6 +8,8 @@ import org.kermeta.art2.ComponentType;
 import java.awt.Component;
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
+import org.kermeta.art2.MessagePortType;
+import org.kermeta.art2.framework.aspects.PortAspect;
 import org.kermeta.art2.ui.editor.command.SelectInstanceCommand;
 import org.kermeta.art2.ui.editor.listener.ChannelTypeDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.CommandMouseListener;
@@ -26,6 +28,7 @@ import org.kermeta.art2.ui.framework.elements.ChannelTypePanel;
 import org.kermeta.art2.ui.framework.elements.ModelPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
+import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
 
 /**
  *
@@ -69,7 +72,7 @@ public class Art2UIFactory {
     public ComponentPanel createComponentInstance(ComponentInstance ci) {
         ComponentPanel cui = new ComponentPanel();
         ComponentDragSourceListener draglistener = new ComponentDragSourceListener(cui, kernel);
-        cui.setTitle(ci.getName()+" : "+ci.getTypeDefinition().getName());
+        cui.setTitle(ci.getName() + " : " + ci.getTypeDefinition().getName());
 
         CommandMouseListener listener = new CommandMouseListener();
         SelectInstanceCommand command = new SelectInstanceCommand();
@@ -83,7 +86,7 @@ public class Art2UIFactory {
     public NodePanel createComponentNode(org.kermeta.art2.ContainerNode node) {
         NodePanel nui = new NodePanel();
         ((Component) nui).setDropTarget(new NodeDragTargetListener(nui, kernel));
-        nui.setTitle(node.getName()+" : Node");
+        nui.setTitle(node.getName() + " : Node");
 
 
         CommandMouseListener listener = new CommandMouseListener();
@@ -100,7 +103,7 @@ public class Art2UIFactory {
     public ChannelPanel createHub(org.kermeta.art2.Channel hub) {
         ChannelPanel hui = new ChannelPanel();
         ((Component) hui).setDropTarget(new HubDragTargetListener(hui, kernel));
-        hui.setTitle(hub.getName()+" : \n"+hub.getTypeDefinition().getName());
+        hui.setTitle(hub.getName() + " : \n" + hub.getTypeDefinition().getName());
 
 
         /* ADD SELECT COMMAND */
@@ -122,6 +125,15 @@ public class Art2UIFactory {
         if (port.getPortTypeRef().getRef() instanceof org.kermeta.art2.ServicePortType) {
             pui.setNature(PortPanel.PortNature.SERVICE);
         }
+        PortAspect pa = new PortAspect(port);
+        if (pa.isProvidedPort()) {
+            pui.setType(PortType.PROVIDED);
+        } else {
+            if (pa.isRequiredPort()) {
+                pui.setType(PortType.REQUIRED);
+            }
+        }
+
         pui.setTitle(port.getPortTypeRef().getName());
         new PortDragSourceListener(pui, kernel);
         ((Component) pui).setDropTarget(new PortDragTargetListener(pui, kernel));
@@ -140,7 +152,16 @@ public class Art2UIFactory {
     return bui;
     }*/
     public Binding createMBinding(org.kermeta.art2.MBinding mb) {
-        Binding bui = new Binding(Binding.Type.multi);
+        Binding bui = null;
+        PortAspect pa = new PortAspect(mb.getPort());
+        if (pa.isProvidedPort()) {
+            bui = new Binding(Binding.Type.input);
+        } else {
+            if (pa.isRequiredPort()) {
+                bui = new Binding(Binding.Type.ouput);
+            }
+        }
+
         PortPanel fromPortPanel = (PortPanel) kernel.getUifactory().getMapping().get(mb.getPort());
         ChannelPanel toPortPanel = (ChannelPanel) kernel.getUifactory().getMapping().get(mb.getHub());
         bui.setFrom(fromPortPanel);
