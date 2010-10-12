@@ -18,7 +18,7 @@ case class TypedElementAspect(e : TypedElement) {
     var first = true
     e.getGenericTypes.foreach{gt=>
       res.append(gt.print(openSep,closeSep))
-      if(!first) res append ","
+      if(first) res append ","
       first = false
     }
 

@@ -8,11 +8,13 @@ package org.kermeta.art2.framework.annotation.processor.visitor
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ComponentType
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.MessagePortType
 import org.kermeta.art2.PortType
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
 import com.sun.mirror.declaration.ClassDeclaration
 import com.sun.mirror.declaration.MethodDeclaration
 import com.sun.mirror.util.SimpleDeclarationVisitor
+import org.kermeta.art2.ServicePortType
 import org.kermeta.art2.framework.Art2Utility
 import scala.collection.JavaConversions._
 
@@ -175,13 +177,24 @@ class ComponentTypeVisitor(env : AnnotationProcessorEnvironment,root : Container
         case Some(ptref) => {
             var ptREFmapping = Art2Factory.eINSTANCE.createPortTypeMapping
             ptREFmapping.setBeanMethodName(methoddef.getSimpleName)
-            ptREFmapping.setServiceMethodName(annot.method)
+
+            ptref.getRef match {
+              case mpt : MessagePortType => {
+                  ptREFmapping.setServiceMethodName("process")
+              }
+              case spt : ServicePortType => {
+                  ptREFmapping.setServiceMethodName(annot.method)
+              }
+
+            }
+
+            
             ptref.getMappings.add(ptREFmapping)
 
             //TODO GENERATED AND CHECK OPERATION
 
           }
-        case None => env.getMessager.printError("ProvidedPort not found "+annot.name)
+        case None => env.getMessager.printError("ProvidedPort not found "+annot.name);System.exit(1)
       }
     }
 
