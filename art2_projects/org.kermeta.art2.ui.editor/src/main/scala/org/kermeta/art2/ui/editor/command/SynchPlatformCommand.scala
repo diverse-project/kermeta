@@ -24,7 +24,7 @@ class SynchPlatformCommand extends Command {
 
     var client = new TcpClientRemoteActor(null,1000) {
       def getRemoteAddr : InetSocketAddress = {
-        new InetSocketAddress("localhost",8081)
+        new InetSocketAddress("localhost",8091)
       }
     }
 
