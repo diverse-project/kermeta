@@ -72,7 +72,8 @@ public class Art2UIFactory {
     public ComponentPanel createComponentInstance(ComponentInstance ci) {
         ComponentPanel cui = new ComponentPanel();
         ComponentDragSourceListener draglistener = new ComponentDragSourceListener(cui, kernel);
-        cui.setTitle(ci.getName() + " : " + ci.getTypeDefinition().getName());
+        cui.setTitle(ci.getName());
+        cui.setTypeName(ci.getTypeDefinition().getName());
 
         CommandMouseListener listener = new CommandMouseListener();
         SelectInstanceCommand command = new SelectInstanceCommand();
