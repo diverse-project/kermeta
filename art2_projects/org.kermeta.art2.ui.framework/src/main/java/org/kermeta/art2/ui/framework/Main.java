@@ -45,6 +45,8 @@ public class Main {
 
 
         ComponentPanel c1 = new ComponentPanel();
+        c1.setTypeName("MyTpe1");
+
         ComponentPanel c2 = new ComponentPanel();
         ComponentPanel c3 = new ComponentPanel();
         ComponentPanel c4 = new ComponentPanel();

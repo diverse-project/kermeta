@@ -28,6 +28,7 @@ public class ThreePartRoundedPanel extends RoundedTitledPanel {
 
         c_left.setLayout(new BoxLayout(c_left, BoxLayout.PAGE_AXIS));
         c_right.setLayout(new BoxLayout(c_right, BoxLayout.PAGE_AXIS));
+        c_center.setLayout(new BoxLayout(c_center, BoxLayout.PAGE_AXIS));
 
         this.content.setLayout(new BorderLayout());
         this.content.add(c_left, BorderLayout.WEST);

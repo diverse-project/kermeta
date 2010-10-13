@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import org.jdesktop.swingx.JXTitledSeparator;
@@ -31,6 +32,8 @@ public class RoundedTitledPanel extends RoundPanel implements TitledElement {
         layoutPanel.add(contentPanel, BorderLayout.CENTER);
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setForeground(Color.WHITE);
+
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
     }
 
     @Override
@@ -42,7 +45,6 @@ public class RoundedTitledPanel extends RoundPanel implements TitledElement {
     public void remove(Component comp) {
         contentPanel.remove(comp);
     }
-
 
     @Override
     public void setTitle(String _title) {
