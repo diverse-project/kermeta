@@ -14,14 +14,33 @@ import org.kermeta.art2.ui.editor.command.Command;
  */
 public class CommandMouseListener extends MouseAdapter {
 
-    private Command command;
+    private Command leftClickCommand, rightClickCommand;
 
-    public void setCommand(Command command) {
-        this.command = command;
+    public void setLeftClickCommand(Command command) {
+        this.leftClickCommand = command;
+    }
+
+    public void setRightClickCommand(Command command) {
+        this.rightClickCommand = command;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        command.execute(e.getComponent());
+        System.out.println("MouseListener::MouseClicked::"+e.getButton());
+        switch(e.getButton()) {
+            case MouseEvent.BUTTON1 : {
+                if(leftClickCommand != null) {
+                    System.out.println("MouseListener::MouseClicked::executeLeftClickCommand");
+                    leftClickCommand.execute(e.getComponent());
+                }
+            }break;
+            case MouseEvent.BUTTON3 : {
+                if(rightClickCommand != null) {
+                    System.out.println("MouseListener::MouseClicked::executeRightClickCommand");
+                    rightClickCommand.execute(e.getComponent());
+                }
+            }break;
+        }
+        
     }
 }

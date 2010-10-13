@@ -8,8 +8,8 @@ import org.kermeta.art2.ComponentType;
 import java.awt.Component;
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
-import org.kermeta.art2.MessagePortType;
 import org.kermeta.art2.framework.aspects.PortAspect;
+import org.kermeta.art2.ui.editor.command.ContextualMenuCommand;
 import org.kermeta.art2.ui.editor.command.SelectInstanceCommand;
 import org.kermeta.art2.ui.editor.listener.ChannelTypeDragSourceListener;
 import org.kermeta.art2.ui.editor.listener.CommandMouseListener;
@@ -50,6 +50,13 @@ public class Art2UIFactory {
     public ModelPanel createModelPanelUI(ContainerRoot ct) {
         ModelPanel mui = new ModelPanel();
         ((Component) mui).setDropTarget(new ModelDragTargetListener(mui, kernel));
+
+        CommandMouseListener listener = new CommandMouseListener();
+        ContextualMenuCommand command = new ContextualMenuCommand();
+        command.setKernel(kernel);
+        listener.setRightClickCommand(command);
+        mui.addMouseListener(listener);
+
         mapping.bind(mui, ct);
         return mui;
     }
@@ -78,7 +85,7 @@ public class Art2UIFactory {
         CommandMouseListener listener = new CommandMouseListener();
         SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
-        listener.setCommand(command);
+        listener.setLeftClickCommand(command);
         cui.addMouseListener(listener);
         mapping.bind(cui, ci);
         return cui;
@@ -93,7 +100,10 @@ public class Art2UIFactory {
         CommandMouseListener listener = new CommandMouseListener();
         SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
-        listener.setCommand(command);
+        listener.setLeftClickCommand(command);
+        ContextualMenuCommand rightClicCommand = new ContextualMenuCommand();
+        rightClicCommand.setKernel(kernel);
+        listener.setRightClickCommand(rightClicCommand);
         nui.addMouseListener(listener);
 
 
@@ -111,7 +121,7 @@ public class Art2UIFactory {
         CommandMouseListener mouse_listener = new CommandMouseListener();
         SelectInstanceCommand command = new SelectInstanceCommand();
         command.setKernel(kernel);
-        mouse_listener.setCommand(command);
+        mouse_listener.setLeftClickCommand(command);
         hui.addMouseListener(mouse_listener);
 
         mapping.bind(hui, hub);
