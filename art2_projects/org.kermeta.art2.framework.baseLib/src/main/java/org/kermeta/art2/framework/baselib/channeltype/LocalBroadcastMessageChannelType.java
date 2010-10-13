@@ -25,12 +25,12 @@ public class LocalBroadcastMessageChannelType extends AbstractChannelFragment {
     public Object dispatch(Art2Message msg) {
 
         /* WARNING FOR REMOTE BINDING */
-        if(getOtherFragments().isEmpty()){
+        if(!getOtherFragments().isEmpty()){
             logger.warn("No remote consumer allowed with this binding=");
         }
 
         /* WARNING FOR LOCAL BINDING */
-        if(getBindedPorts().isEmpty()){
+        if(!getBindedPorts().isEmpty()){
             logger.warn("No consumer, msg lost="+msg.getContent());
         }
 
