@@ -13,7 +13,7 @@ public class App
     {
         EmbeddedFelix felix = new EmbeddedFelix();
         felix.run();
-        Art2StandaloneBootstrap.performArt2BootStrap(felix.getM_fwk());
+        Art2StandaloneBootstrap.performArt2BootStrap(felix.getM_fwk().getBundleContext());
         try {
             felix.getM_fwk().waitForStop(0);
            

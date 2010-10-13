@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.art2</groupId>
     <artifactId>org.kermeta.art2.platform.standalone</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>2.2.1-SNAPSHOT</version>
     <name>ART2 :: Platform :: Standalone</name>
     <url>http://maven.apache.org</url>
@@ -218,6 +218,20 @@
 
 
                     </systemProperties>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Import-Package>!org.kermeta.art2.platform.standalone,!org.apache.*,*</Import-Package>
+                        <Bundle-Activator>org.kermeta.art2.platform.standalone.BootstrapActivator</Bundle-Activator>
+                    </instructions>
                 </configuration>
             </plugin>
 
