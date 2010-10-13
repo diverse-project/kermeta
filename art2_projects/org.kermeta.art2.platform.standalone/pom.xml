@@ -16,11 +16,6 @@
         <version>2.2.0-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <art2.node.name>duke</art2.node.name>
-        <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
