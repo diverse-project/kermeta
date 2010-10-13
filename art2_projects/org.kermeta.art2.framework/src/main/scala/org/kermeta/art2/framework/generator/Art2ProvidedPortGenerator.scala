@@ -70,7 +70,7 @@ object Art2ProvidedPortGenerator {
             op.getParameters.foreach{param=>
               wrapper.append("msgcall.getParams.put(\""+param.getName+"\","+param.getName+");\n")
             }
-            wrapper.append("this !? msgcall")
+            wrapper.append("(this !? msgcall).asInstanceOf["+op.getReturnType.getName+"]")
             wrapper.append("}\n")
           }
           /* CREATE ACTOR LOOP */
