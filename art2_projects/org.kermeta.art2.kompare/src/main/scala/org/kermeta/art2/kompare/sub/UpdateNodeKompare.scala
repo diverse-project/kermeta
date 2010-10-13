@@ -104,12 +104,10 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
 
     
 
-
-
     //FRAGMENT BINDING STEP
     //ONLY CHECK FOR HUB NO UNINSTALL
-    updateRoot.getHubs.foreach{newhub=>
-      actualRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
+    updateRoot.getHubs.filter(hub=> hub.usedByNode(updateNode.getName)).foreach{newhub=>
+      actualRoot.getHubs.filter(hub=> hub.usedByNode(updateNode.getName)).find(hub=> newhub.getName == hub.getName) match {
         case None => {
             //NEW HUB INIT BINDING
             newhub.getOtherFragment(updateNode.getName).foreach{remoteName =>
@@ -125,8 +123,8 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
           }
       }
     }
-    actualRoot.getHubs.foreach{newhub=>
-      updateRoot.getHubs.find(hub=> newhub.getName == hub.getName) match {
+    actualRoot.getHubs.filter(hub=> hub.usedByNode(updateNode.getName)).foreach{newhub=>
+      updateRoot.getHubs.filter(hub=> hub.usedByNode(updateNode.getName)).find(hub=> newhub.getName == hub.getName) match {
         case None => // NOTHING TO DO HUB WILL BE UNINSTALL, NO UNBIND IS NECESSARY
         case Some(previousHub)=> {
             //CHECK AND UPDATE MBINDING
