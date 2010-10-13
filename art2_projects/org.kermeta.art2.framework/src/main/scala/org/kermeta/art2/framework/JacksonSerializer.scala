@@ -17,7 +17,8 @@ import scala.runtime.BoxedUnit
 case class RichJSONObject(obj : Any) {
   def toJSON : String = {
 
-    if(obj.isInstanceOf[Unit] || obj.isInstanceOf[BoxedUnit]){
+    println("toMap=>"+obj)
+    if(obj.isInstanceOf[Unit] || obj.isInstanceOf[BoxedUnit] ){
       return "<void>"
     }
 
