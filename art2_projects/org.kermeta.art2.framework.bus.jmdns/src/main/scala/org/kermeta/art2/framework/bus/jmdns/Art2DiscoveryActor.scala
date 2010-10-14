@@ -113,7 +113,12 @@ class Art2DiscoveryActor(secondes:Int,modelHandler : Art2ModelHandlerService,dis
     try{
       var actualModel = modelHandler.getLastModel
       //PROCESS ART2MODEL SERVICE
-      var infos = jmdns.get(0).list(Constants.ART2_SERVICE);
+
+      var infos : List[ServiceInfo] = List()
+      jmdns.foreach{loopJMDNS=>
+        infos = infos ++ loopJMDNS.list(Constants.ART2_SERVICE, 2000)
+      }
+      
       infos.foreach{info=>
         var nodeName = info.getPropertyString(Constants.ART2_NODE_NAME)
         var typeNetwork = info.getPropertyString(Constants.ART2_PLATFORM_REMOTE_NETWORK_TYPE)
