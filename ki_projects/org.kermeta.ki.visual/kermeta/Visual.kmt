@@ -240,6 +240,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		var rep : EMFRepository init EMFRepository.new
 		var res : EMFResource
 		res ?= rep.getResource(muURI)
+		res.load()
 		metamodel ?= res.one
 	end
 
