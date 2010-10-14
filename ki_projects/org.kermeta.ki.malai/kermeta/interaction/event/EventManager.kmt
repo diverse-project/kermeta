@@ -48,18 +48,7 @@ class EventManager
 		if(event.isVoid) then
 			stdio.writeln("event is void")
 		else
-			var existStr : String
-			// We get the string corresponding to an EXIT event.
-			existStr ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapperExtern.getExitEventString(self)
-			
-			if(event.getName.equals(existStr)) then
-				// We launch an exception to stop the program.
-				var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
-				ex.message := existStr
-				raise ex
-			else
-				process(event)// The event is processed.
-			end
+			process(event)
 		end
 	end
 	

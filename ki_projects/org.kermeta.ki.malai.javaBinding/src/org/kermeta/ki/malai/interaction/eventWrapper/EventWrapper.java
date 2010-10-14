@@ -44,8 +44,6 @@ public class EventWrapper {
 	
 	public static final java.lang.String STATE_CHANGED		= "STATE_CHANGED";
 	
-	public static final java.lang.String EXIT_EVENT			= "EXIT_EVENT";
-	
 	
 	/** The name of the produced event (e.g. MOUSE_PRESSED). */
 	protected java.lang.String name;

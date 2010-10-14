@@ -282,17 +282,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 
 
-
-	public void onExitEvent() {
-		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.EXIT_EVENT, null));//FIXME provokes crash while quitting the program (info is null)
-		}
-		
-		notifyEventManager();
-	}
-	
-	
-
 	@Override
 	public void itemStateChanged(final ItemEvent e) {
 		synchronized(events) {

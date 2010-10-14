@@ -8,7 +8,6 @@ import javax.swing.JTextField;
 
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.KomprenFrame;
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 public abstract class KomprenFrameExtern {
@@ -42,11 +41,9 @@ public abstract class KomprenFrameExtern {
 	
 	
 	
-	public static void initialise(final Object appliRO, final Object mmRO, final Object tbRO, final Object viewPanelRO, 
-									final Object emwRO, final Object handButRO) {
-		EventManagerWrapper emw 	= (EventManagerWrapper) Source2TargetMap.MAP.getTargetObject(emwRO);
+	public static void initialise(final Object appliRO, final Object mmRO, final Object tbRO, final Object viewPanelRO, final Object handButRO) {
 		JPanel toolbar 				= (JPanel) Source2TargetMap.MAP.getTargetObject(tbRO);
-		KomprenFrame kompren 		= new KomprenFrame(emw, toolbar);
+		KomprenFrame kompren 		= new KomprenFrame(toolbar);
 			
 		kompren.getDiagramView().setLayoutStrategy(new ClassModelBasicStrategy(kompren.getDiagramView()));
 		kompren.getDiagramView().getHand().setHandButton((AbstractButton)Source2TargetMap.MAP.getTargetObject(handButRO));

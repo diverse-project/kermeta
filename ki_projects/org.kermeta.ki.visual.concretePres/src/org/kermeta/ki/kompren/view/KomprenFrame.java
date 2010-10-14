@@ -3,8 +3,6 @@ package org.kermeta.ki.kompren.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
@@ -19,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
-import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 
 public class KomprenFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -68,7 +65,7 @@ public class KomprenFrame extends JFrame {
 
 	
 	
-	public KomprenFrame(final EventManagerWrapper emw, final JPanel toolbar) { 
+	public KomprenFrame(final JPanel toolbar) { 
 		super("Kompren");
 		
 		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
@@ -87,15 +84,7 @@ public class KomprenFrame extends JFrame {
 		pack();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-     	addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if(emw!=null)
-					emw.onExitEvent();
-            }});
 	}
-	
 	
 	
 	

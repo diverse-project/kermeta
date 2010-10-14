@@ -225,14 +225,4 @@ public abstract class EventWrapperExtern {
 	public static String getActionPerformedEventString(final Object self) {
 		return EventWrapper.ACTION_PERFORMED;
 	}
-	
-	
-	
-	/**
-	 * @param self A Kermeta object.
-	 * @return The kermeta String of EventWrapper.EXIT_EVENT.
-	 */
-	public static String getExitEventString(final Object self) {
-		return EventWrapper.EXIT_EVENT;
-	}
 }

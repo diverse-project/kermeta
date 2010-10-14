@@ -146,7 +146,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		eventManager.initialise()
 		
 		initialiseUI
-		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialise(self, metamodel, toolbar, viewPanel, eventManager, selector.handButton)
+		extern org::kermeta::ki::kompren::KomprenFrameExtern.initialise(self, metamodel, toolbar, viewPanel, selector.handButton)
 
 		metamodel.setEventManager(eventManager)
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
