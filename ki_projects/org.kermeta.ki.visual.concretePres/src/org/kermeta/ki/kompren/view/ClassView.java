@@ -191,7 +191,7 @@ public class ClassView extends EntityView {
 
 	@Override
 	public void updateFillingColor(final int opacity) {
-		fillingColor = new Color(255,255,206, opacity);
+		fillingColor = new Color(198,218,218, opacity);
 	}
 
 	

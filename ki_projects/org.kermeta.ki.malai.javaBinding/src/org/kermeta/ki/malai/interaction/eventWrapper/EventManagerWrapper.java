@@ -13,6 +13,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +26,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.kermeta.ki.malai.dispatcherWrapper.DispatcherWrapper;
+import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 /**
  * Bridges the gap between a Kermeta EventManager and Java events. This class
  * listens to Java events and notify the Java DispatcherWrapper that an event occurred.
  * @author Arnaud Blouin
- *
  */
 public class EventManagerWrapper implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, ActionListener, ItemListener, ChangeListener {
 	/** The dispatcher to notify. */
@@ -76,6 +78,30 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		}
 	}
 	
+	
+	protected void notifyEventManager() {
+		Object obj = Source2TargetMap.MAP.getSourceObject(this);
+		
+		try {
+			Method method = obj.getClass().getMethod("run");
+			
+			if(method!=null) {
+				try {
+					method.invoke(obj);
+				} catch (IllegalArgumentException e1) {
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+				} catch (InvocationTargetException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} catch (SecurityException e1) {
+			e1.printStackTrace();
+		} catch (NoSuchMethodException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	
 	/**
@@ -134,36 +160,33 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	@Override
 	public void mouseClicked(final MouseEvent e) {
-		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.MOUSE_CLICKED, e));
-		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+//		synchronized(events) {
+//			events.add(new EventWrapper(EventWrapper.MOUSE_CLICKED, e));
+//		}
+//		
+//		notifyEventManager();
 	}
 
 	
 	
 	@Override
 	public void mouseEntered(final MouseEvent e) {
-		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.MOUSE_ENTERED, e));
-		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+//		synchronized(events) {
+//			events.add(new EventWrapper(EventWrapper.MOUSE_ENTERED, e));
+//		}
+//		
+//		notifyEventManager();
 	}
 
 	
 	
 	@Override
 	public void mouseExited(final MouseEvent e) {
-		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.MOUSE_EXITED, e));
-		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+//		synchronized(events) {
+//			events.add(new EventWrapper(EventWrapper.MOUSE_EXITED, e));
+//		}
+//		
+//		notifyEventManager();
 	}
 
 	
@@ -176,9 +199,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			
 			events.add(new EventWrapper(EventWrapper.MOUSE_PRESSED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 
@@ -188,9 +210,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_RELEASED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 	
@@ -199,9 +220,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_PRESSED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 	
@@ -210,20 +230,18 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.KEY_RELEASED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 	
 	@Override
 	public void keyTyped(final KeyEvent e) {
-		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.KEY_TYPED, e));
-		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+//		synchronized(events) {
+//			events.add(new EventWrapper(EventWrapper.KEY_TYPED, e));
+//		}
+//		
+//		notifyEventManager();
 	}
 
 	
@@ -232,9 +250,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_DRAGGED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 	
@@ -243,9 +260,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.MOUSE_MOVED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 	
@@ -254,9 +270,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {		
 			events.add(new EventWrapper(EventWrapper.MOUSE_WHEEL_MOVED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 
@@ -265,9 +280,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ACTION_PERFORMED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 
@@ -276,9 +290,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.EXIT_EVENT, null));//FIXME provokes crash while quitting the program (info is null)
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 	
 	
@@ -288,9 +301,8 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.ITEM_STATE_CHANGED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 
 
@@ -300,8 +312,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(events) {
 			events.add(new EventWrapper(EventWrapper.STATE_CHANGED, e));
 		}
-		synchronized(dispatcher) {
-			dispatcher.notifyAll();
-		}
+		
+		notifyEventManager();
 	}
 }

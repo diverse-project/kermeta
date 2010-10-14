@@ -5,6 +5,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.swing.event.ChangeEvent;
 
@@ -32,49 +34,59 @@ public abstract class EventWrapperExtern {
 	 */
 	public static Object getInfo(final Object self) {
 		Object obj = Source2TargetMap.MAP.getTargetObject(self);
-//		
+		Object info = null;
+		
 		if(obj instanceof EventWrapper) {
-			EventWrapper ew  = (EventWrapper) obj;
-//			// To create a Kermeta instance using the EventWrapper, we must get the type of the 
-//			// Java event object (e.g. ActionEvent, MouseEvent, etc.) in order to get the good
-//			// Kermeta class path to create an instance of this Kermeta class.
-			Class<?> clazz = getClass(ew.info);
+			EventWrapper ew  	= (EventWrapper) obj;
+			info 				= Source2TargetMap.MAP.getSourceObject(ew.info);
 			
-			if(clazz==null)
-				return null;
-			//FIXME dodgy
-			Object event = null;
-			
-			try {
-				event = clazz.newInstance();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
+			if(info==null) {
+				// To create a Kermeta instance using the EventWrapper, we must get the type of the 
+				// Java event object (e.g. ActionEvent, MouseEvent, etc.) in order to get the good
+				// Kermeta class path to create an instance of this Kermeta class.
+				info = createEventInstance(ew.info);
+				
+				if(info!=null)
+					Source2TargetMap.MAP.add(info, ew.info);
 			}
-			
-			Source2TargetMap.MAP.add(event, ew.info);
-			return event;
 		}
-		return null;
+		
+		return info;
 	}
 	
 	
-	public static Class<?> getClass(final Object evt) {
+	public static Object createEventInstance(final Object evt) {
+		Object instance = null;
 		String name = "";
 		
-		if(evt instanceof ActionEvent) 			name = "kermeta.ki.malai.interaction.event.ActionEvent";
-		else if(evt instanceof MouseWheelEvent)	name = "kermeta.ki.malai.interaction.event.MouseWheelEvent";
-		else if(evt instanceof MouseEvent) 		name = "kermeta.ki.malai.interaction.event.MouseEvent";
-		else if(evt instanceof KeyEvent)		name = "kermeta.ki.malai.interaction.event.KeyEvent";
-		else if(evt instanceof ItemEvent)		name = "kermeta.ki.malai.interaction.event.ItemEvent";
-		else if(evt instanceof ChangeEvent)		name = "kermeta.ki.malai.interaction.event.ChangeEvent";
+		if(evt instanceof ActionEvent) 			name = "createActionEvent";
+		else if(evt instanceof MouseWheelEvent)	name = "createMouseWheelEvent";
+		else if(evt instanceof MouseEvent) 		name = "createMouseEvent";
+		else if(evt instanceof KeyEvent)		name = "createKeyEvent";
+		else if(evt instanceof ItemEvent)		name = "createItemEvent";
+		else if(evt instanceof ChangeEvent)		name = "createChangeEvent";
 		
 		try {
-			return Class.forName(name);
+			Class<?> factoryClass = Class.forName("kermeta.ki.malai.interaction.event.RichFactory");
+			try {
+				Method method = factoryClass.getMethod(name);
+				instance = method.invoke(factoryClass);
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
-			return null;
 		}
+		
+		return instance;
 	}
 	
 	
