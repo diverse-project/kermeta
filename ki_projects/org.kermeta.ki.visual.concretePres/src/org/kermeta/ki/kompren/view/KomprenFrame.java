@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
@@ -67,6 +68,38 @@ public class KomprenFrame extends JFrame {
 
 	
 	
+	public KomprenFrame(final EventManagerWrapper emw, final JPanel toolbar) { 
+		super("Kompren");
+		
+		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
+		catch(Exception e) { /* */ }
+		
+		getContentPane().setLayout(new BorderLayout());
+		diagram = new ClassDiagramView(true);
+		JScrollPane sp = diagram.getScrollPane();
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int width  = (int)(screen.width*0.85);
+		int height = (int)(screen.height*0.8);
+		sp.setPreferredSize(new Dimension(width, height));
+		getContentPane().add(sp, BorderLayout.CENTER);
+		getContentPane().add(toolbar, BorderLayout.NORTH);
+		setLocation((screen.width-width)/2, (screen.height-height)/2);
+		pack();
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+     	addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if(emw!=null)
+					emw.onExitEvent();
+            }});
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * Updates the layout of the class diagram that the viewer displays.
@@ -84,34 +117,7 @@ public class KomprenFrame extends JFrame {
 		diagram.refresh();
 	}
 	
-	
-	
-	
-	public KomprenFrame(final EventManagerWrapper emw, final JPanel toolbar) { 
-		super("Kompren");
-		
-//		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
-//		catch(Exception e) { /* */ }
-		
-		getContentPane().setLayout(new BorderLayout());
-		diagram = new ClassDiagramView(true);
-		JScrollPane sp = diagram.getScrollPane();
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int width  = (int)(screen.width*0.85);
-		int height = (int)(screen.height*0.8);
-		sp.setPreferredSize(new Dimension(width, height));
-		getContentPane().add(sp, BorderLayout.CENTER);
-		getContentPane().add(toolbar, BorderLayout.NORTH);
-		setLocation((screen.width-width)/2, (screen.height-height)/2);
-		pack();
-		
-     	addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if(emw!=null)
-					emw.onExitEvent();
-            }});
-	}
+
 	
 	
 	
