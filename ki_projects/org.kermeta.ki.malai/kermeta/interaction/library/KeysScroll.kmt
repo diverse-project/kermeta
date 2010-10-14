@@ -158,8 +158,8 @@ class KSWheelTransition inherits WheelTransition
 	
 	
 	method action() : Void is do
-		keysScroll.px 		:= Real.clone(px)
-		keysScroll.py 		:= Real.clone(py)
+		keysScroll.px 		:= px
+		keysScroll.py 		:= py
 
 		if(keysScroll.searchPickable) then
 			keysScroll.object 	:= keysScroll.getPickableAt(px, py, source)
