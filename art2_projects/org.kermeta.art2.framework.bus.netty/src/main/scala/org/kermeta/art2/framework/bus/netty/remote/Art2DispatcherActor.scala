@@ -61,6 +61,12 @@ class Art2DispatcherActor(port : Int,bc : BundleContext) extends SimpleChannelUp
                   var resultCall = serviceTracker.getService(sr).asInstanceOf[Art2ChannelFragment] !? art2message
 
                   var callResult = new Art2ResponseMessage
+
+                  //Exception
+                  if(resultCall.isInstanceOf[scala.runtime.BoxedUnit]){
+                    resultCall = "";
+                  }
+
                   callResult.setContent(resultCall)
                   callResult.setResponseTag(art2message.getResponseTag)
 
