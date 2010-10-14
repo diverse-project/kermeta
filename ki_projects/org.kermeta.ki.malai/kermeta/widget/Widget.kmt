@@ -15,8 +15,6 @@ using kermeta::standard
 using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::interaction
-using kermeta::ki::malai::dispatcher
-
 
 
 abstract class GraphicalComponent inherits Pickable {
@@ -284,11 +282,10 @@ class Panel inherits GraphicalComponent, Picker, Eventable
 	/**
 	* The panel is created without any eventManager.
 	*/
-	operation initialiseEventManager(withEventManager : Boolean, dispatcher : ListDispatcher) : Void is do
+	operation initialiseEventManager(withEventManager : Boolean) : Void is do
 		if(withEventManager) then
 			eventManager := EventManager.new
-			eventManager.initialise(dispatcher)
-			dispatcher.processes.add(eventManager)
+			eventManager.initialise()
 		else
 			eventManager := void
 		end

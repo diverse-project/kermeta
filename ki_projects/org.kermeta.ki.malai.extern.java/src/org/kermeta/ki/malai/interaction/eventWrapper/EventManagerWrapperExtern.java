@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.kermeta.ki.malai.dispatcherWrapper.DispatcherWrapper;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 public abstract class EventManagerWrapperExtern {
@@ -27,15 +26,11 @@ public abstract class EventManagerWrapperExtern {
 
 	
 	/**
-	 * Initialises a Kermeta EventManager by encapsulating this EventManagerWrapper
-	 * into it.
+	 * Initialises a Kermeta EventManager by encapsulating this EventManagerWrapper into it.
 	 * @param self The Kermeta EventManager.
-	 * @param dispatcherRo A Kermeta AbstractDispatcher that contains the Java DispatcherWrapper.
 	 */
-	public static void initialise(final Object self, final Object dispatcherRo) {
-		EventManagerWrapper emw = new EventManagerWrapper();
-		emw.dispatcher 			= (DispatcherWrapper) Source2TargetMap.MAP.getTargetObject(dispatcherRo);
-		Source2TargetMap.MAP.add(self, emw);
+	public static void initialise(final Object self) {
+		Source2TargetMap.MAP.add(self, new EventManagerWrapper());
 	}
 	
 	

@@ -6,6 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: INRIA Rennes, Triskell
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.kermeta.ki.malai,
- org.kermeta.ki.malai.dispatcherWrapper,
  org.kermeta.ki.malai.interaction.eventWrapper,
  org.kermeta.ki.malai.kermetaMap

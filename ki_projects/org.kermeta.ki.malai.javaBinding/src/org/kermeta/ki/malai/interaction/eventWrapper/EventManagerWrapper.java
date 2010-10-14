@@ -25,7 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.kermeta.ki.malai.dispatcherWrapper.DispatcherWrapper;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 /**
@@ -33,10 +32,8 @@ import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
  * listens to Java events and notify the Java DispatcherWrapper that an event occurred.
  * @author Arnaud Blouin
  */
-public class EventManagerWrapper implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, ActionListener, ItemListener, ChangeListener {
-	/** The dispatcher to notify. */
-	protected DispatcherWrapper dispatcher;
-	
+public class EventManagerWrapper implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, 
+											ActionListener, ItemListener, ChangeListener {
 	/** The events produces by the UI but not yet analysed by the Kermeta EventManager. */
 	protected List<EventWrapper> events;
 	

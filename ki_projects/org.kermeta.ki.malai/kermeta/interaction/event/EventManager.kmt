@@ -7,7 +7,6 @@
 package kermeta::ki::malai::interaction::event;
 
 require kermeta
-require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/EventHandler.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseEvent.kmt"
@@ -17,7 +16,6 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Mouse
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ItemEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ChangeEvent.kmt"
 
-using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
 using kermeta::standard
@@ -28,28 +26,21 @@ using kermeta::standard
 	The goal of this class is to map a Java EventManagerWrapper, that gathers
 	Java event, to Kermeta.
 */
-class EventManager inherits Dispatchable
+class EventManager
 {
 	/** The objects that must be aware about new produced events. */
 	reference handlers : EventHandler[0..*]
 	
 
 	/** Initialises the EventManager. */
-	operation initialise(dispatcher : AbstractDispatcher) : Void is do
-		self.dispatcher := dispatcher
+	operation initialise() : Void is do
 		// The EventManager is mapped to an corresponding Java EventManagerWrapper and therefore to a Java DisptacherWrapper.
-		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.initialise(self, dispatcher)
-	end
-	
-
-	method isWaiting() : Boolean is do
-		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.isWaiting(self)
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.initialise(self)
 	end
 	
 	
 	
-	
-	method run() : Void is do
+	operation run() : Void is do
 		var event : Event
 		// We get the event to process.
 		event ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapperExtern.getTopEvent(self)

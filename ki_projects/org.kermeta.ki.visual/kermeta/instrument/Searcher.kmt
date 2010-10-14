@@ -21,7 +21,6 @@ using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::action
 using kermeta::ki::malai::widget
-using kermeta::ki::malai::dispatcher
 using kermeta::standard
 using kermeta::language::structure
 
@@ -37,7 +36,7 @@ class Searcher inherits Instrument {
 	
 
 	
-	operation initialiseWidgets(dispatcher : ListDispatcher) : Void is do
+	operation initialiseWidgets() : Void is do
 		textField := TextField.new
 		textField.initialise()
 		popupMenu := PopupMenu.new

@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Malai
 Bundle-SymbolicName: org.kermeta.ki.malai
 Bundle-Version: 1.0.0
-Require-Bundle: org.kermeta.ki.malai.extern.kermeta,
- org.kermeta.ki.malai.javaBinding
+Require-Bundle: org.kermeta.ki.malai.javaBinding
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: INRIA Rennes, Triskell

@@ -17,7 +17,6 @@ using kermeta::ki::malai::picking
 using kermeta::ki::visual
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::interaction
-using kermeta::ki::malai::dispatcher
 
 
 aspect class Object {
