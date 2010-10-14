@@ -56,11 +56,11 @@ public class CommandPanel extends JPanel {
         LoadNewLibCommand btLoadLibCommand = new LoadNewLibCommand();
         btLoadLibCommand.setKernel(kernel);
         btLoadLib.setCommand(btLoadLibCommand);
-
+/*
         JCommandButton btSynch = new JCommandButton("Synch");
         SynchPlatformCommand synchComd = new SynchPlatformCommand();
         synchComd.kernel_$eq(kernel);
-        btSynch.setCommand(synchComd);
+        btSynch.setCommand(synchComd);*/
 
 
         // add(btAddHub);
@@ -69,7 +69,7 @@ public class CommandPanel extends JPanel {
         add(btLoadModel);
         add(btLoadLib);
         add(btClearModel);
-        add(btSynch);
+        //add(btSynch);
 
 
     }

@@ -25,7 +25,7 @@ public class NamedElementPropertyEditor extends ThreePartRoundedPanel {
 
     private org.kermeta.art2.NamedElement namedElem = null;
     private TitledElement gui = null;
-    private Art2UIKernel kernel;
+    protected Art2UIKernel kernel;
 
     public NamedElementPropertyEditor(org.kermeta.art2.NamedElement elem, Art2UIKernel _kernel) {
         namedElem = elem;
