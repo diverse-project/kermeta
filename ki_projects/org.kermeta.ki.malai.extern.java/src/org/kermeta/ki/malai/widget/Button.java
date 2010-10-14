@@ -14,11 +14,11 @@ public abstract class Button
 {
 	public static AbstractButton createButtonInstance(final Object buttonRO) {
 		if(buttonRO==null) return null;
-		//TODO Check
+
 		final String className = buttonRO.getClass().getName();
-		System.out.println("BUTTON CREATED, NAME=" + className);
-		if("kermeta.ki.malai.widget.Button".equals(className)) 			  return new JButton();
-		else if("kermeta.ki.malai.widget.ToggleButton".equals(className)) return new JToggleButton();
+
+		if("kermeta.ki.malai.widget.RichButton".equals(className)) 			  return new JButton();
+		else if("kermeta.ki.malai.widget.RichToggleButton".equals(className)) return new JToggleButton();
 		
 		return null;
 	}
