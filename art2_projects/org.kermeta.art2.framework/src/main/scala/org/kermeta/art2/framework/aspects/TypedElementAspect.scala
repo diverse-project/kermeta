@@ -15,11 +15,10 @@ case class TypedElementAspect(e : TypedElement) {
     var res : StringBuilder = new StringBuilder
     res.append(e.getName)
     if(e.getGenericTypes.size>0){ res.append(openSep) }
-    var first = true
     e.getGenericTypes.foreach{gt=>
       res.append(gt.print(openSep,closeSep))
-      if(first) res append ","
-      first = false
+
+      if(gt != e.getGenericTypes.last ) res append ","
     }
 
     if(e.getGenericTypes.size>0){  res.append(closeSep) }
