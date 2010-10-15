@@ -57,7 +57,13 @@ object Main extends LogAspect {
 
 //additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/core.jar") ++ additionalClassPath
 //additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/directives.jar") ++ additionalClassPath
- // additionalClassPath = List("/home/barais/malai.jar") ++ additionalClassPath
+  //additionalClassPath = List("/home/barais/malai.jar") ++ additionalClassPath
+  //additionalClassPath = List("/home/barais/workspaces/movida/fr.inria.featureDiagramEditor.derivation.fdext.ui/libForCompilo/featureadresolution.jar") ++ additionalClassPath
+  /*additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.annotation_1.0.1.jar") ++ additionalClassPath
+  additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.marte.ccslmodel_1.1.0.013262.jar") ++ additionalClassPath
+  additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.trace_1.0.0.jar") ++ additionalClassPath
+  additionalClassPath = List("/home/barais/compilo/julien/jars.jar") ++ additionalClassPath
+  additionalClassPath = List("/home/barais/compilo/julien/jars2.jar") ++ additionalClassPath*/
   
 
     var inputFile : String = ""
@@ -100,8 +106,11 @@ object Main extends LogAspect {
     var compilo = new Compiler
 
 //    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
-  //    inputFile = "/home/barais/workspaces/malal/org.kermeta.ki.visual/kermeta/Visual.km"
-    if(inputFile != ""){
+   //   inputFile = "/home/barais/workspaces/malal/org.kermeta.ki.visual/kermeta/Visual.km"
+   //   inputFile = "/home/barais/workspaces/movida/fr.inria.featureDiagramEditor.derivation.fdext.ui/src/kermeta/Derivation/TextualDerivation.km"
+    //  inputFile = "/home/barais/workspaces/movida/TestCompilo/src/kermeta/010ValueTypeReflexion.km"
+  //      inputFile = "/home/barais/compilo/julien/Launcher.km"
+   if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
       CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)

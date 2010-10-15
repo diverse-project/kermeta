@@ -240,7 +240,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
                     implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf[fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect]\n"
 
                 } else {
-                    implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect]\n"
+                    implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ (Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect").replace("ScalaAspect.fr.irisa.triskell.kermeta.language.structure.ObjectAspect", "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect")+"]\n"
                 }
 
                 implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
@@ -352,7 +352,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
                                           "            cl.setTypeDefinition(cd)\n"+
                                           "          return cl\n"+
                                           "        }else\n"+
-                                          "            return null;\n}\n}\n")
+                                          "            return null;\n}\n"+
+                                          "    def clone(t:fr.irisa.triskell.kermeta.language.structure.Class, o:Any):Any={return null;\n}\n"
+                                         + "}\n")
 
         Util.generateFile("scalaUtil","Util", template.toString)
 

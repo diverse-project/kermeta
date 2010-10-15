@@ -215,7 +215,7 @@ object Util extends LogAspect {
     def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
         var baseName = typD.asInstanceOf[ObjectAspect].getQualifiedNameCompilo
         baseName = baseName match {
-            case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
+            case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]) && !baseName.equals("java.util.List") ) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
             case _ => { baseName }
         }
         return baseName

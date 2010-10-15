@@ -25,8 +25,8 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
                     this.getName match {
                         case "String" => "java.lang.String"
                         case "Boolean" => "java.lang.Boolean"
-                        case "Integer" => "Int"
-                        case "UnlimitedNatural" => "Int"
+                        case "Integer" => "scala.Int"
+                        case "UnlimitedNatural" => "scala.Int"
                         case _ => {println("default "+ this.getName); "java.lang.Object"}
                     }
                 }

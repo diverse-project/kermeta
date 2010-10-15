@@ -13,9 +13,11 @@ trait TypeLiteralAspect extends ObjectAspect {
     override def generateScalaCode(res : StringBuilder) : Unit = {
         if (this.getTyperef().getType.isInstanceOf[Class]){
             res.append("scalaUtil.Util.getMetaClass(\"")
+            res.append(_root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+
+        }else{
+            res.append("_root_." + _root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
         }
-        res.append(_root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
-         
         //this.getTyperef().getType.generateScalaCode(res)
         if (this.getTyperef().getType.isInstanceOf[Class]){
             res.append("\")")
