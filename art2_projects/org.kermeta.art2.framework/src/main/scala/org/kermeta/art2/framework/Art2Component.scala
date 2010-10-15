@@ -17,6 +17,14 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
   var logger = LoggerFactory.getLogger(this.getClass);
 
   override def internal_process(msg : Any) = msg match {
+
+    case Art2UpdateDictionaryMessage(d) => {
+        d.keySet.foreach{v=>
+          getArt2ComponentType.getDictionary.put(v, d.get(v))
+        }
+        reply(true)
+    }
+    
     case Art2StartMessage => {
         startComponent
         //Wake Up Hosted Port

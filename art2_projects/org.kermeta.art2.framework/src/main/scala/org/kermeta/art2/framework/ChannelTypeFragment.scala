@@ -60,63 +60,67 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
     }
   }
 
-  override def internal_process(msgg : Any)= {
-    println("REC=>"+msgg)
-    msgg match {
-      case msg : Art2FragmentBindMessage=> {
-          fragementBinded.put(createPortKey(msg), msg.getProxy);
-          msg.getProxy.start;
-          reply(true)
+  override def internal_process(msgg : Any)= msgg match {
+    case Art2UpdateDictionaryMessage(d) => {
+        d.keySet.foreach{v=>
+          dictionary.put(v, d.get(v))
         }
-      case msg : Art2FragmentUnbindMessage=> {
-          internal_logger.info("Try to unbind channel "+name)
-          var actorPort = fragementBinded.get(createPortKey(msg))
-          if(actorPort!=null){
-            actorPort.stop
-            fragementBinded.remove(createPortKey(msg))
-          } else {
-            println("Can't unbind Fragment "+createPortKey(msg))
-          }
-          reply(true)
+        reply(true)
+      }
+
+    case msg : Art2FragmentBindMessage=> {
+        fragementBinded.put(createPortKey(msg), msg.getProxy);
+        msg.getProxy.start;
+        reply(true)
+      }
+    case msg : Art2FragmentUnbindMessage=> {
+        internal_logger.info("Try to unbind channel "+name)
+        var actorPort = fragementBinded.get(createPortKey(msg))
+        if(actorPort!=null){
+          actorPort.stop
+          fragementBinded.remove(createPortKey(msg))
+        } else {
+          println("Can't unbind Fragment "+createPortKey(msg))
         }
-      case msg : Art2PortBindMessage => {
-          internal_logger.info("Addkey="+createPortKey(msg));
-          portsBinded.put(createPortKey(msg), msg.getProxy);
-          reply(true)
+        reply(true)
+      }
+    case msg : Art2PortBindMessage => {
+        internal_logger.info("Addkey="+createPortKey(msg));
+        portsBinded.put(createPortKey(msg), msg.getProxy);
+        reply(true)
+      }
+    case msg : Art2PortUnbindMessage => {
+        internal_logger.info("Removekey="+createPortKey(msg));
+        portsBinded.remove(createPortKey(msg));
+        reply(true)
+      }
+      //USE CASE A MSG REC BY OTHER FRAGMENT
+    case msg : Art2Message => {
+        if(msg.inOut.booleanValue){
+          reply(dispatch(msg))
+        } else {
+          dispatch(msg)
         }
-      case msg : Art2PortUnbindMessage => {
-          internal_logger.info("Removekey="+createPortKey(msg));
-          portsBinded.remove(createPortKey(msg));
-          reply(true)
-        }
-        //USE CASE A MSG REC BY OTHER FRAGMENT
-      case msg : Art2Message => {
-          if(msg.inOut.booleanValue){
-            reply(dispatch(msg))
-          } else {
-            dispatch(msg)
-          }
-        }
-      case msg : MethodCallMessage =>{
-          var msg2 = new Art2Message
-          msg2.setInOut(true)
-          msg2.setContent(msg)
-          reply(dispatch(msg2))
-        }
-      case msg : Object => {
-          var msg2 = new Art2Message
-          msg2.setInOut(false)
-          msg2.setContent(msg)
-          dispatch(msg2)
-        }
-      case _ @ msg => {
-          internal_logger.warn("Msg does not seem to be an object =>"+msg)
-          var msg2 = new Art2Message
-          msg2.setInOut(false)
-          msg2.setContent(msg)
-          dispatch(msg2)
-        }
-    }
+      }
+    case msg : MethodCallMessage =>{
+        var msg2 = new Art2Message
+        msg2.setInOut(true)
+        msg2.setContent(msg)
+        reply(dispatch(msg2))
+      }
+    case msg : Object => {
+        var msg2 = new Art2Message
+        msg2.setInOut(false)
+        msg2.setContent(msg)
+        dispatch(msg2)
+      }
+    case _ @ msg => {
+        internal_logger.warn("Msg does not seem to be an object =>"+msg)
+        var msg2 = new Art2Message
+        msg2.setInOut(false)
+        msg2.setContent(msg)
+        dispatch(msg2)
+      }
   }
   
 
