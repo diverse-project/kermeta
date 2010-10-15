@@ -42,13 +42,20 @@ public class DiagramView extends JPanel implements IDiagramView {
 	/** The relations of the diagram. */
 	protected List<IRelationView> relations;
 	
+	/** The selected entities. */
+	protected List<IEntityView> selection;
+	
 	/** The name of the font to use. */
 	protected String fontName;
 	
 	/** The strategy used to layout the diagram. */
 	protected ILayoutStrategy strategy;
 	
+	/** The hand that handles diagram elements. */
 	protected Hand hand;
+	
+	 /** The instrument that borders the selected shapes. */
+	protected SelectionBorder selectionBorder;
 	
 	
 	/**
@@ -57,10 +64,12 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public DiagramView(final boolean withScrollPane) {
 		super();
 		
-		zoom 		= 1.;
-		entities 	= new ArrayList<IEntityView>();
-		relations	= new ArrayList<IRelationView>();
-		hand		= new Hand(this);
+		zoom 			= 1.;
+		entities 		= new ArrayList<IEntityView>();
+		relations		= new ArrayList<IRelationView>();
+		selection		= new ArrayList<IEntityView>();
+		hand			= new Hand(this);
+		selectionBorder = new SelectionBorder(selection);
 		
 		addMouseListener(hand);
 		addMouseMotionListener(hand);
@@ -87,21 +96,25 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	
 	
+	@Override
 	public int getNbEntities() {
 		return entities.size();
 	}
 	
 	
+	@Override
 	public int getNbRelations() {
 		return relations.size();
 	}
 	
 	
+	@Override
 	public IEntityView getEntityAt(final int i) {
 		return entities.get(i);
 	}
 	
 	
+	@Override
 	public IRelationView getRelationAt(final int i) {
 		return relations.get(i);
 	}
@@ -167,6 +180,9 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 		for(IRelationView relation : relations)
 			relation.paint(g2);
+		
+		if(hand.isActivated() && selectionBorder.isActivated())
+			selectionBorder.paint(g2);
 	}
 	
 	
@@ -321,6 +337,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 			}
 		
 		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+		selectionBorder.update();
 	}
 	
 	
@@ -377,11 +394,13 @@ public class DiagramView extends JPanel implements IDiagramView {
 	}
 
 
+	@Override
 	public double getZoom() {
 		return zoom;
 	}
 
 
+	@Override
 	public void setZoom(final double zoom) {
 		if(zoom>0)
 			this.zoom = zoom;
@@ -394,18 +413,88 @@ public class DiagramView extends JPanel implements IDiagramView {
 	}
 
 
+	@Override
 	public void zoomDefault() {
 		zoom = 1.;
 	}
 
 
+	@Override
 	public void zoomIn(final double increment) {
 		zoom += increment;
 	}
 
 
+	@Override
 	public void zoomOut(final double decrement) {
 		if((zoom-decrement)>0.)
 			zoom -= decrement;
+	}
+	
+	
+	@Override
+	public void addToSelection(final IEntityView entity) {
+		if(entity!=null) {
+			selection.add(entity);
+			selectionBorder.update();
+		}
+	}
+
+
+	@Override
+	public void addToSelection(final List<IEntityView> newSelection) {
+		if(newSelection!=null) {
+			for(IEntityView sh : newSelection)
+				if(sh!=null)
+					selection.add(sh);
+			
+			selectionBorder.update();
+		}
+	}
+
+
+	@Override
+	public List<IEntityView> getSelection() {
+		return selection;
+	}
+
+
+	@Override
+	public void removeFromSelection(final IEntityView entity) {
+		if(entity!=null) {
+			selection.remove(entity);
+			selectionBorder.update();
+		}
+	}
+
+
+	@Override
+	public void removeSelection() {
+		selection.clear();
+	}
+
+
+	@Override
+	public void setSelection(final IEntityView entity) {
+		selection.clear();
+
+		if(entity!=null) {
+			selection.add(entity);
+			selectionBorder.update();
+		}
+	}
+
+
+	@Override
+	public void setSelection(final List<IEntityView> newSelection) {
+		selection.clear();
+
+		if(newSelection!=null) {
+			for(IEntityView sh : newSelection)
+				if(sh!=null)
+					selection.add(sh);
+			
+			selectionBorder.update();
+		}
 	}
 }

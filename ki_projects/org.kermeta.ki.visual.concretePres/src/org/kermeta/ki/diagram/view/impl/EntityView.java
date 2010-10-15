@@ -13,6 +13,8 @@ import org.kermeta.ki.diagram.view.interfaces.IEntityView;
  * @author Arnaud Blouin
  */
 public abstract class EntityView extends ComponentView implements IEntityView {
+	public static final int DEFAUT_OPACITY = 200;
+	
 	/** The colour of the filling. */
 	protected Color fillingColor;
 	
@@ -43,7 +45,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		fontName 	= "Arial";
 		fontSize	= 14.;
 		fontStyle	= Font.PLAIN;
-		updateFillingColor(255);
+		updateFillingColor(DEFAUT_OPACITY);
 		updateLineColor(255);
 		setScale(1.);
 	}
@@ -161,7 +163,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		visibility = Visibility.STANDARD;
 		setScale(1.);
 		updateLineColor(255);
-		updateFillingColor(255);
+		updateFillingColor(DEFAUT_OPACITY);
 		update();
 	}
 	

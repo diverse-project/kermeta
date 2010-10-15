@@ -3,6 +3,7 @@ package org.kermeta.ki.diagram.test;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JToggleButton;
 
 import org.kermeta.ki.diagram.view.impl.RelationView;
 import org.kermeta.ki.kompren.view.ClassDiagramView;
@@ -16,7 +17,9 @@ public class DiagramTest {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
+		JToggleButton handB = new JToggleButton();
 		ClassDiagramView diag = new ClassDiagramView(true);
+		diag.getHand().setHandButton(handB);
 		ClassView class1 = new ClassView("Class1");
 		ClassView class2 = new ClassView("Class2");
 		ClassView class3 = new ClassView("Class3");
@@ -24,6 +27,7 @@ public class DiagramTest {
 		RelationView rel2 = new InheritanceView(class2, class3);
 		RelationView rel3 = new InheritanceView(class3, class1);
 		
+		handB.setSelected(true);
 		class1.setCentre(200, 200);
 		class1.addAttribute("myAttr1", "int");
 		class1.addAttribute("thisisabigattr", "String");

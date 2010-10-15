@@ -14,6 +14,20 @@ import org.kermeta.ki.malai.Zoomable;
  * @author Arnaud Blouin
  */
 public interface IDiagramView extends Scrollable, Zoomable {
+	void setSelection(final IEntityView entity);
+	
+	void setSelection(final List<IEntityView> newSelection);
+	
+	void removeSelection();
+	
+	void removeFromSelection(final IEntityView entity);
+	
+	List<IEntityView> getSelection();
+	
+	void addToSelection(final List<IEntityView> newSelection);
+	
+	void addToSelection(final IEntityView entity);
+	
 	Hand getHand();
 	
 	void focusOnEntity(final IEntityView view);

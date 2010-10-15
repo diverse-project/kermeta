@@ -32,6 +32,11 @@ public class Hand implements MouseListener, MouseMotionListener {
 	}
 	
 	
+	public boolean isActivated() {
+		return handB.isSelected();
+	}
+	
+	
 	public void setHandButton(final AbstractButton hand) {
 		this.handB = hand;
 	}
@@ -110,6 +115,9 @@ public class Hand implements MouseListener, MouseMotionListener {
 					else
 						i--;
 				}
+				
+				diagram.setSelection(draggedShape);
+				diagram.refresh();
 //			}
 //			else {
 //				draggedLabel.setManualPosition(px, py);
