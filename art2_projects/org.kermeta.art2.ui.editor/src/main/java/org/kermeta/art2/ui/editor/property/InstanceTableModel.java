@@ -24,7 +24,11 @@ public class InstanceTableModel implements TableModel {
 
     @Override
     public int getRowCount() {
-        return instance.getTypeDefinition().getDictionaryType().getAttributes().size();
+        try {
+            return instance.getTypeDefinition().getDictionaryType().getAttributes().size();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -61,7 +65,7 @@ public class InstanceTableModel implements TableModel {
                 return att.getName();
             case 1:
                 DictionaryValue value = null;
-                if(instance.getDictionary() == null){
+                if (instance.getDictionary() == null) {
                     instance.setDictionary(Art2Factory.eINSTANCE.createDictionary());
                 }
                 for (DictionaryValue v : instance.getDictionary().getValues()) {
@@ -89,7 +93,7 @@ public class InstanceTableModel implements TableModel {
                     value = v;
                 }
             }
-            if(value == null){
+            if (value == null) {
                 value = Art2Factory.eINSTANCE.createDictionaryValue();
                 value.setAttribute(att);
                 instance.getDictionary().getValues().add(value);
