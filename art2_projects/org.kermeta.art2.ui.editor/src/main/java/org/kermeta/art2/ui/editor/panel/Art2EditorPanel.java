@@ -3,8 +3,6 @@
  * Copyright  : IRISA / INRIA / Universite de Rennes 1 */
 package org.kermeta.art2.ui.editor.panel;
 
-import org.kermeta.art2.ContainerRoot;
-import org.kermeta.art2.NamedElement;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -14,15 +12,12 @@ import javax.swing.JScrollPane;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.CompoundPainter;
 import org.jdesktop.swingx.painter.MattePainter;
-import org.kermeta.art2.framework.Art2XmiHelper;
+import org.kermeta.art2.Instance;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
-import org.kermeta.art2.ui.editor.property.ComponentPropertyEditor;
-import org.kermeta.art2.ui.editor.property.NamedElementPropertyEditor;
+import org.kermeta.art2.ui.editor.property.InstancePropertyEditor;
 import org.kermeta.art2.ui.editor.property.NodePropertyEditor;
-import org.kermeta.art2.ui.framework.SelectElement;
 import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
-import org.kermeta.art2.ui.framework.elements.ComponentTypePanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 
 /**
@@ -105,19 +100,14 @@ public class Art2EditorPanel extends JPanel {
     public void showPropertyFor(JPanel p) {
         southpanel.setVisible(true);
         southpanel.removeAll();
-        if (p instanceof ComponentPanel) {
-            org.kermeta.art2.NamedElement elem = (NamedElement) kernel.getUifactory().getMapping().get(p);
-            ComponentPropertyEditor prop = new ComponentPropertyEditor(elem, kernel);
-            southpanel.add(prop);
-        }
         if (p instanceof NodePanel) {
             org.kermeta.art2.ContainerNode elem = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
             NodePropertyEditor prop = new NodePropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
-        if (p instanceof ChannelPanel) {
-            org.kermeta.art2.Channel elem = (org.kermeta.art2.Channel) kernel.getUifactory().getMapping().get(p);
-            NamedElementPropertyEditor prop = new NamedElementPropertyEditor(elem, kernel);
+        if (p instanceof ComponentPanel || p instanceof ChannelPanel) {
+            org.kermeta.art2.Instance elem = (org.kermeta.art2.Instance) kernel.getUifactory().getMapping().get(p);
+            InstancePropertyEditor prop = new InstancePropertyEditor(elem, kernel);
             southpanel.add(prop);
         }
         southpanel.repaint();
