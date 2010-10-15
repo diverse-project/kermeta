@@ -53,6 +53,8 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     var stopCommand :List[PrimitiveCommand] = List()
     var startCommand :List[PrimitiveCommand] = List()
 
+    var updateDictionaryCommand :List[PrimitiveCommand] = List()
+
     // var listPrimitive = plan(model)
     //println("plansize="+listPrimitive.size);
     model.getAdaptations foreach{ p => p match {
@@ -65,6 +67,9 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           //Instance
         case ca : AddInstance => {
             command_add_instance = command_add_instance ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
+
+            updateDictionaryCommand = updateDictionaryCommand ++ List(UpdateDictionaryCommand(ca.getRef,ctx,nodeName))
+
             if(ca.getRef.isInstanceOf[ComponentInstance]){
               startCommand = startCommand ++ List(StartComponentCommand(ca.getRef,ctx,nodeName))
             }
@@ -100,7 +105,8 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
     //INSTALL ISTANCE
     if(executionResult){ executionResult=phase.phase(command_add_instance,"Phase 6 install ComponentInstance") }
     if(executionResult){ executionResult=phase.phase(command_add_binding,"Phase 7 install Bindings") }
-    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 8 START COMPONENT") }
+    if(executionResult){ executionResult=phase.phase(updateDictionaryCommand,"Phase 8 SET PROPERTY") }
+    if(executionResult){ executionResult=phase.phase(startCommand,"Phase 9 START COMPONENT") }
 
     if(!executionResult){phase.rollback}
 
