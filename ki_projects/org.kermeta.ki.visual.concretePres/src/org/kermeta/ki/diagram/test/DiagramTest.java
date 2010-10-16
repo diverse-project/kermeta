@@ -1,11 +1,12 @@
 package org.kermeta.ki.diagram.test;
 
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 
-import org.kermeta.ki.diagram.view.impl.RelationView;
+import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 import org.kermeta.ki.kompren.view.ClassDiagramView;
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.ClassView;
@@ -16,36 +17,22 @@ import org.kermeta.ki.kompren.view.RoleView.Cardinality;
 public class DiagramTest {
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		JToggleButton handB = new JToggleButton();
-		ClassDiagramView diag = new ClassDiagramView(true);
+		JFrame frame 			= new JFrame();
+		JToggleButton handB 	= new JToggleButton();
+		ClassDiagramView diag 	= new ClassDiagramView(true);
 		diag.getHand().setHandButton(handB);
-		ClassView class1 = new ClassView("Class1");
-		ClassView class2 = new ClassView("Class2");
-		ClassView class3 = new ClassView("Class3");
-		RelationView rel = new RelationClassView(class1, class2, true, true, null, "role2", Cardinality.ONE, Cardinality.ONE_MULTI);
-		RelationView rel2 = new InheritanceView(class2, class3);
-		RelationView rel3 = new InheritanceView(class3, class1);
-		
-		handB.setSelected(true);
-		class1.setCentre(200, 200);
-		class1.addAttribute("myAttr1", "int");
-		class1.addAttribute("thisisabigattr", "String");
-		class1.addAttribute("attr", "YourNotMyType");
-		class1.addOperation("opName", "opTypeName", true);
-		class1.update();
-		class2.setCentre(400, 400);
-		class2.update();
-		class3.addAttribute("myAttr2222", "MyType");
-		class3.addAttribute("a", "A");
-		class3.addAttribute("attribute", "YourReallyNotMyType");
-		class3.addOperation("opName", "myopTypeName", true);
-		class3.addOperation("opNameAgain", "myopTypeName2", true);
-		class3.setCentre(500, 100);
-		class3.update();
+		ClassView class1   = new ClassView("Class1");
+		ClassView class2   = new ClassView("Class2");
+		ClassView class3   = new ClassView("Class3");
+		IRelationView rel  = new RelationClassView(class1, class2, true, true, null, "role2", Cardinality.ONE, Cardinality.ONE_MULTI);
+		IRelationView rel2 = new InheritanceView(class2, class3);
+		IRelationView rel3 = new InheritanceView(class3, class1);
+		IRelationView rel4 = new RelationClassView(class1, class1, true, true, null, "role3", Cardinality.ONE, Cardinality.ZERO_ONE);
+
 		rel.update();
 		rel2.update();
 		rel3.update();
+		rel4.update();
 		
 		diag.addEntity(class1);
 		diag.addEntity(class2);
@@ -53,6 +40,21 @@ public class DiagramTest {
 		diag.addRelation(rel);
 		diag.addRelation(rel2);
 		diag.addRelation(rel3);
+		diag.addRelation(rel4);
+		
+		handB.setSelected(true);
+		class1.addAttribute("myAttr1", "int");
+		class1.addAttribute("thisisabigattr", "String");
+		class1.addAttribute("attr", "YourNotMyType");
+		class1.addOperation("opName", "opTypeName", true);
+		class1.update();
+		class2.update();
+		class3.addAttribute("myAttr2222", "MyType");
+		class3.addAttribute("a", "A");
+		class3.addAttribute("attribute", "YourReallyNotMyType");
+		class3.addOperation("opName", "myopTypeName", true);
+		class3.addOperation("opNameAgain", "myopTypeName2", true);
+		class3.update();
 		
 		diag.setPreferredSize(new Dimension(1000, 800));
 		frame.getContentPane().add(diag);
@@ -62,6 +64,10 @@ public class DiagramTest {
 		diag.refresh();
 		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
 		diag.updateLayout();
+		
+		rel2.addPoint(new Point2D.Double(109.5, 370));
+		rel2.getSegment(0).getPointTarget().setLocation(130, 360);
+		diag.refresh();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

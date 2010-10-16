@@ -293,7 +293,6 @@ public class DiagramView extends JPanel implements IDiagramView {
 	@Override
 	public void recentre() {
 		double xMin, yMin;
-		Point2D centre;
 		int i, nbEntities = entities.size();
 		Rectangle2D rec;
 		xMin = Double.MAX_VALUE;
@@ -308,14 +307,13 @@ public class DiagramView extends JPanel implements IDiagramView {
 		xMin = 10-xMin;
 		yMin = 10-yMin;
 		
-		for(IEntityView e : entities) {
-			centre = e.getCentre();
-			centre.setLocation(centre.getX()+xMin, centre.getY()+yMin);
-			e.update();
+		for(IEntityView entity : entities) {
+			entity.translate(xMin, yMin);
+			entity.update();
 		}
 		
 		for(IRelationView relation : relations)
-			relation.update();
+			relation.translate(xMin, yMin);
 	}
 	
 	
@@ -495,6 +493,33 @@ public class DiagramView extends JPanel implements IDiagramView {
 					selection.add(sh);
 			
 			selectionBorder.update();
+		}
+	}
+	
+	
+	@Override
+	public void moveEntity(final IEntityView entity, final double x, final double y) {
+		if(entity!=null)
+			translateEntity(entity, x-entity.getX(), y-entity.getY());
+	}
+	
+	
+	@Override
+	public void translateEntity(final IEntityView entity, final double tx, final double ty) {
+		if(entity!=null) {
+			Point2D pt;
+			
+			entity.translate(tx, ty);
+			
+			for(final IRelationView rel : relations)
+				if(rel.getEntitySrc()==entity || rel.getEntityTar()==entity) {
+					for(int i=0, nbSeg=rel.getNbSegment(); i<(nbSeg-1); i++) {
+						pt = rel.getSegment(i).getPointTarget();
+						pt.setLocation(pt.getX()+tx, pt.getY()+ty);
+					}
+					
+					rel.update();
+				}
 		}
 	}
 }

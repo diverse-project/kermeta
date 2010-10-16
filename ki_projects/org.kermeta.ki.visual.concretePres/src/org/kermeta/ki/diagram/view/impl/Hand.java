@@ -149,7 +149,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 //			repaint();
 //		} else
 			if(draggedShape!=null) {
-				draggedShape.setCentre((int)(draggedShape.getCentre().x + gapX), (int)(draggedShape.getCentre().y + gapY));
+				diagram.translateEntity(draggedShape, gapX, gapY);
 				startX = e.getX()/zoom;
 				startY = e.getY()/zoom;
 				

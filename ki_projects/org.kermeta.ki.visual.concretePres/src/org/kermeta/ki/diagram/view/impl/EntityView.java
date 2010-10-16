@@ -35,6 +35,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	
 	
 	
+	
 	/**
 	 * Initialises the entity.
 	 */
@@ -50,6 +51,17 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		setScale(1.);
 	}
 	
+	
+	@Override
+	public void move(final double x, final double y) {
+		translate(x-centre.getX(), y-centre.getY());
+	}
+	
+	
+	@Override
+	public void translate(final double tx, final double ty) {
+		centre.setLocation(centre.getX()+tx, centre.getY()+ty);
+	}
 	
 	
 	@Override
@@ -74,13 +86,6 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 
 
 	@Override
-	public void setCentre(final Point2D newCentre) {
-		if(newCentre!=null)
-			centre.setLocation(newCentre.getX(), newCentre.getY());
-	}
-	
-	
-	@Override
 	public Color getFillingColor() {
 		return fillingColor;
 	}
@@ -99,25 +104,6 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	public void setScale(final double scale) {
 		if(scale>0.)
 			this.scale = scale;
-	}
-	
-	
-	@Override
-	public void setX(final int x) {
-		centre.x = x;
-	}
-	
-	
-	@Override
-	public void setY(final int y) {
-		centre.y = y;
-	}
-
-	
-	@Override
-	public void setCentre(final int x, final int y) {
-		setX(x);
-		setY(y);
 	}
 	
 	

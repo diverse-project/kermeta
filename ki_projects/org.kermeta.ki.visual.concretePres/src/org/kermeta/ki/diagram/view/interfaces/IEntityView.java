@@ -9,7 +9,17 @@ import java.awt.geom.Rectangle2D;
 public interface IEntityView extends IComponentView {
 	/** The colour to use when an entity is grayed. */
 	public static Color GRAYED_COLOR = new Color(210, 210, 210, 180);
+	
+	/**
+	 * Moves the entity to the given centre.
+	 * @param x The X-coordinate of the new centre of the entity.
+	 * @param y The Y-coordinate of the new centre of the entity.
+	 */
+	void move(final double x, final double y);
+	
+	void translate(final double tx, final double ty);
 
+	
 	/**
 	 * @param x The X-coordinate of the point to test.
 	 * @param y The Y-coordinate of the point to test.
@@ -26,12 +36,6 @@ public interface IEntityView extends IComponentView {
 	 * @return The centre of the entity.
 	 */
 	Point2D.Double getCentre();
-
-	/**
-	 * Modifies the coordinates of the centre of the entity.
-	 * @param newCentre The coordinates to set. Must not be null.
-	 */
-	void setCentre(final Point2D newCentre);
 
 	/**
 	 * @return The colour of the filling of the entity.
@@ -63,25 +67,6 @@ public interface IEntityView extends IComponentView {
 	 * @param scale The new scale.
 	 */
 	void setScale(final double scale);
-
-	/**
-	 * Sets the X-coordinate of the centre of the entity.
-	 * @param x The new coordinate.
-	 */
-	void setX(final int x);
-
-	/**
-	 * Sets the Y-coordinate of the centre of the entity.
-	 * @param y The new coordinate.
-	 */
-	void setY(final int y);
-
-	/**
-	 * Sets the coordinates of the centre of the entity.
-	 * @param x The new coordinate.
-	 * @param y The new coordinate.
-	 */
-	void setCentre(final int x, final int y);
 
 	/**
 	 * @return The X-coordinate of the centre of the entity.

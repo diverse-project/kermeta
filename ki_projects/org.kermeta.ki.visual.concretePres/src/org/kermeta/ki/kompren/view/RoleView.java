@@ -112,9 +112,9 @@ public class RoleView {
 			return ;
 		
 		Point2D.Double[] pts;
-		Point2D pt 		  = source ? pointTar : pointSrc;
-		double gap 		  = 10.;
-		Font font 			  = entitySrc.getFont();
+		Point2D pt 	= source ? pointTar : pointSrc;
+		double gap 	= 10.;
+		Font font 	= entitySrc.getFont();
 		
 		if(entitySrc==entityTar) {
 			Rectangle2D rec1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds();
@@ -125,7 +125,7 @@ public class RoleView {
 			pts[1] = new Point2D.Double(pt.getX() - rec2.getWidth() - gap, pt.getY() + rec2.getHeight() + gap);
 		}
 		else {
-			Line2D line	= view.getPerpendicularLine(pt);
+			Line2D line	= source ? view.getFirstSegment().getPerpendicularLine(pt) : view.getLastSegment().getPerpendicularLine(pt);
 			pts 		= RelationView.findPoints(line, pt.getX(), pt.getY(), 20.);
 			
 			if(pts!=null && pts.length>1) {

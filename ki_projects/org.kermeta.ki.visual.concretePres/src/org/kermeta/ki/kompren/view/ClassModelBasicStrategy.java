@@ -77,7 +77,7 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 			final double gapY = bounds.getMinY() - rec.getMinY() + bounds.getHeight() + 110;
 
 			for(IEntityView entity : subForest.get(level))
-				entity.setCentre((int)(entity.getCentre().x+gapX), (int)(entity.getCentre().y-gapY));
+				diagram.translateEntity(entity, gapX, -gapY);
 			
 			bounds.setFrame(bounds.getX()+gapX, bounds.getY()-gapY, bounds.getWidth(), bounds.getHeight());
 		}
@@ -109,7 +109,8 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 			if(entityDim.height>dim.height)
 				dim.height = entityDim.height;
 			
-			entity.setCentre((int)(x2+entityDim.width/2.), (int)(y+entityDim.height/2.));
+			diagram.moveEntity(entity, x2+entityDim.width/2., y+entityDim.height/2.);
+			
 			x2 += entityDim.width;
 			dim.width += entityDim.width;
 			
