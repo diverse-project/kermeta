@@ -312,8 +312,10 @@ public class DiagramView extends JPanel implements IDiagramView {
 			entity.update();
 		}
 		
-		for(IRelationView relation : relations)
+		for(IRelationView relation : relations) {
 			relation.translate(xMin, yMin);
+			relation.update();
+		}
 	}
 	
 	
