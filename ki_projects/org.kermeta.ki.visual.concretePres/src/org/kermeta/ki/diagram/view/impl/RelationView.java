@@ -446,6 +446,41 @@ public class RelationView extends ComponentView implements IRelationView {
 		return getLastSegment().getPointTarget();
 	}
 
+	
+	
+	private void getMinMaxValues(double[] mins, double[] maxs, double x, double y) {
+		if(x<mins[0]) mins[0] = x;
+		if(y<mins[1]) mins[1] = y;
+		if(x>maxs[0]) maxs[0] = x;
+		if(y>maxs[1]) maxs[1] = y;
+	}
+	
+	
+	@Override
+	public Rectangle2D getBorders() {
+		double[] mins = { Double.MIN_VALUE, Double.MIN_VALUE};
+		double[] maxs = { Double.MAX_VALUE, Double.MAX_VALUE};
+		
+		for(final ISegmentView seg : segments) {
+			getMinMaxValues(mins, maxs, seg.getPointSource().getX(), seg.getPointSource().getY());
+			getMinMaxValues(mins, maxs, seg.getPointTarget().getX(), seg.getPointTarget().getY());
+		}
+		
+		if(sourceDecoration!=null) {
+			Rectangle2D rec = sourceDecoration.getPath().getBounds2D();
+			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
+			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
+		}
+		
+		if(targetDecoration!=null) {
+			Rectangle2D rec = targetDecoration.getPath().getBounds2D();
+			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
+			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
+		}
+		
+		return new Rectangle2D.Double(mins[0], mins[1], maxs[0]-mins[0], maxs[1]-mins[1]);
+	}
+	
 
 	
 	@Override

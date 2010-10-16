@@ -292,14 +292,18 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	@Override
 	public void recentre() {
-		double xMin, yMin;
-		int i, nbEntities = entities.size();
 		Rectangle2D rec;
-		xMin = Double.MAX_VALUE;
-		yMin = Double.MAX_VALUE;
+		double xMin = Double.MAX_VALUE;
+		double yMin = Double.MAX_VALUE;
 
-		for(i=0; i<nbEntities; i++) {
-			rec = entities.get(i).getBorders();
+		for(final IEntityView entity : entities) {
+			rec = entity.getBorders();
+			if(rec.getMinX() < xMin) xMin = rec.getMinX();
+			if(rec.getMinY() < yMin) yMin = rec.getMinY();
+		}
+		
+		for(final IRelationView relation : relations) {
+			rec = relation.getBorders();
 			if(rec.getMinX() < xMin) xMin = rec.getMinX();
 			if(rec.getMinY() < yMin) yMin = rec.getMinY();
 		}

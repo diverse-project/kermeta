@@ -1,6 +1,7 @@
 package org.kermeta.ki.diagram.view.interfaces;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  * The interface for a relation established between two entities.
@@ -58,4 +59,6 @@ public interface IRelationView extends IComponentView {
 
 	
 	void translate(final double tx, final double ty);
+
+	Rectangle2D getBorders();
 }

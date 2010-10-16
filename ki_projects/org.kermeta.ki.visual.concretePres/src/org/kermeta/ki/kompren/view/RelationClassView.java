@@ -1,6 +1,7 @@
 package org.kermeta.ki.kompren.view;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 import org.kermeta.ki.diagram.view.impl.RelationView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
@@ -41,6 +42,15 @@ public class RelationClassView extends RelationView {
 			roleTar = new RoleView(targetRole, targetCard, this, false, isComposition && compositionAtStart);
 	}
 
+	
+	@Override
+	public Rectangle2D getBorders() {
+		Rectangle2D rec = super.getBorders();
+		
+		//TODO must compute roles borders.
+		
+		return rec;
+	}
 	
 	
 	@Override
