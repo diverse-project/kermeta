@@ -25,3 +25,9 @@ NameRefAspect pas de root ni de scalaAspect  :  and((scalaUtil.Util.getMetaClass
 
 file:/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output/shipshop.kompose
 
+Passe pas
+ReflexiveSequence (conversion vers List)
+_root_ pour le qualifiedName des enums
+_root les news
+
+
