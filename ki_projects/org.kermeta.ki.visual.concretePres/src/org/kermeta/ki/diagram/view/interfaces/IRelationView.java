@@ -71,6 +71,8 @@ public interface IRelationView extends IComponentView {
 	void setTargetDecoration(final IDecorationView targetDecoration);
 
 	
+	boolean removePoint(final Point2D pt);
+	
 	void addPoint(final Point2D pt);
 
 	

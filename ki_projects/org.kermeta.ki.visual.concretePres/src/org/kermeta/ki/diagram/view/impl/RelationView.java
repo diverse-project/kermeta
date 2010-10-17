@@ -497,6 +497,40 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	
 	@Override
+	public boolean removePoint(final Point2D pt) {
+		boolean possible = entitySrc!=entityTar || handlers.size()>1;
+		boolean again = true;
+		
+		if(possible) {
+			for(int i=0, size=handlers.size(); i<size && again; i++)// Removing the handlers if possible. 
+				if(handlers.get(i).getPoint().equals(pt)) {
+					handlers.remove(i);
+					again = false;
+				}
+			
+			if(!again) {// We found the point.
+				// Removing the segment.
+				ISegmentView seg;
+				again = true;
+				
+				for(int i=0, size=segments.size(); i<size && again; i++) {
+					seg = segments.get(i);
+					
+					if(seg.getPointTarget().equals(pt)) {
+						again = false;
+						segments.remove(i);
+						segments.get(i).replacePointSource(seg.getPointSource());
+					}
+				}
+			}
+		}
+		
+		return possible && !again;
+	}
+	
+	
+	
+	@Override
 	public void addPoint(final Point2D pt) {
 		if(pt==null)
 			return ;

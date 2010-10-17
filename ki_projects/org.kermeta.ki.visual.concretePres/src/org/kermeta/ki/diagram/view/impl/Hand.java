@@ -68,8 +68,27 @@ public class Hand implements MouseListener, MouseMotionListener {
 	
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		//
+	public void mouseClicked(final MouseEvent e) {
+		if(e.getButton()==MouseEvent.BUTTON3) {
+			final double px = e.getX()/diagram.getZoom();
+			final double py = e.getY()/diagram.getZoom();
+			IHandler handler = null;
+			IRelationView rel = null;
+			
+			for(int i=0, nbRel = diagram.getNbRelations(); i<nbRel && handler==null; i++) {
+				rel = diagram.getRelationAt(i);
+				
+				if(rel.isVisible() && rel.isHandlersVisible())
+					handler = rel.getHandlersAt(px, py);
+			}
+			
+			if(handler!=null && rel!=null) {
+				boolean ok = rel.removePoint(handler.getPoint());
+				
+				if(ok)
+					diagram.refresh();
+			}
+		}
 	}
 
 	@Override
@@ -85,8 +104,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 	
 	@Override
 	public void mousePressed(final MouseEvent e) {
-		if(handB.isSelected()) {
-			
+		if(handB.isSelected() && e.getButton()==MouseEvent.BUTTON1) {
 //			draggedLabel = null;
 			final int nbRel = diagram.getNbRelations();
 			int i;
@@ -157,6 +175,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 					
 					if(rel.contains(px, py)) {
 						rel.addPoint(new Point2D.Double(px, py));
+						rel.setHandlersVisible(true);
 						draggedHandler = rel.getHandlersAt(px, py);
 						diagram.refresh();
 					}
