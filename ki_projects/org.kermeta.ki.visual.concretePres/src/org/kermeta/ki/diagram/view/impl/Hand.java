@@ -3,6 +3,7 @@ package org.kermeta.ki.diagram.view.impl;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,10 +98,9 @@ public class Hand implements MouseListener, MouseMotionListener {
 			for(i=0; i<nbRel && draggedHandler==null; i++) {
 				rel = diagram.getRelationAt(i);
 				
-				if(rel.isVisible() && rel.isHandlersVisible()) 
+				if(rel.isVisible() && rel.isHandlersVisible())
 					draggedHandler = rel.getHandlersAt(px, py);
 			}
-				
 			
 //			i = nbRel-1;
 //			while(draggedLabel==null && i>=0) {
@@ -149,6 +149,18 @@ public class Hand implements MouseListener, MouseMotionListener {
 //			else {
 //				draggedLabel.setManualPosition(px, py);
 //			}
+			
+			
+			if(draggedShape==null && draggedHandler==null)
+				for(i=0; i<nbRel && draggedHandler==null; i++) {
+					rel = diagram.getRelationAt(i);
+					
+					if(rel.contains(px, py)) {
+						rel.addPoint(new Point2D.Double(px, py));
+						draggedHandler = rel.getHandlersAt(px, py);
+						diagram.refresh();
+					}
+				}
 			
 			startX = px;
 			startY = py;
