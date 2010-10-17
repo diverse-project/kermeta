@@ -8,7 +8,21 @@ import java.awt.geom.Rectangle2D;
  * @author Arnaud Blouin
  */
 public interface IRelationView extends IComponentView {
+	/**
+	 * @return The number of segments that compose the relation.
+	 */
 	int getNbSegment();
+	
+	/**
+	 * @param x The x-coordinate of the position to test.
+	 * @param y The y-coordinate of the position to test.
+	 * @return True: the relation contains the given point. The handlers of the relation are not considered.
+	 */
+	boolean contains(final double x, final double y);
+	
+	boolean isHandlersVisible();
+	
+	void setHandlersVisible(final boolean visible);
 
 	IHandler getHandlersAt(final double x, final double y);
 	

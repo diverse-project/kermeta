@@ -3,6 +3,8 @@ package org.kermeta.ki.diagram.view.impl;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 
@@ -25,6 +27,8 @@ public class Hand implements MouseListener, MouseMotionListener {
 	protected double startX;
 	protected double startY;
 	
+	protected List<IRelationView> visibleHandlers;
+	
 	
 	public Hand(final IDiagramView diagram) {
 		super();
@@ -32,7 +36,8 @@ public class Hand implements MouseListener, MouseMotionListener {
 		if(diagram==null)
 			throw new IllegalArgumentException();
 		
-		this.diagram = diagram;
+		visibleHandlers = new ArrayList<IRelationView>();
+		this.diagram 	= diagram;
 		reinit();
 	}
 	
@@ -87,9 +92,14 @@ public class Hand implements MouseListener, MouseMotionListener {
 //			IRelationView link;
 			final double px = e.getX()/diagram.getZoom();
 			final double py = e.getY()/diagram.getZoom();
+			IRelationView rel;
 			
-			for(i=0; i<nbRel && draggedHandler==null; i++)
-				draggedHandler = diagram.getRelationAt(i).getHandlersAt(px, py);
+			for(i=0; i<nbRel && draggedHandler==null; i++) {
+				rel = diagram.getRelationAt(i);
+				
+				if(rel.isVisible() && rel.isHandlersVisible()) 
+					draggedHandler = rel.getHandlersAt(px, py);
+			}
 				
 			
 //			i = nbRel-1;
@@ -183,7 +193,29 @@ public class Hand implements MouseListener, MouseMotionListener {
 
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		//
+	public void mouseMoved(final MouseEvent e) {
+		final double zoom = diagram.getZoom();
+		final double x = e.getX()/zoom;
+		final double y = e.getY()/zoom;
+		boolean mustRefresh = !visibleHandlers.isEmpty();
+		IRelationView relation;
+		
+		for(final IRelationView rel : visibleHandlers)
+			rel.setHandlersVisible(false);
+		
+		visibleHandlers.clear();
+		
+		for(int i=0, size=diagram.getNbRelations(); i<size ; i++) {
+			relation = diagram.getRelationAt(i);
+			
+			if(relation.getNbSegment()>1 && relation.contains(x, y)) {
+				relation.setHandlersVisible(true);
+				visibleHandlers.add(diagram.getRelationAt(i));
+				mustRefresh = true;
+			}
+		}
+		
+		if(mustRefresh)
+			diagram.refresh();
 	}
 }

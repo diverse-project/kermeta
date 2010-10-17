@@ -128,41 +128,27 @@ public class SegmentView implements ISegmentView {
 
 	@Override
 	public boolean contains(final double x, final double y) {
-		final double dec = 3.;
-		boolean in = false;
+		final double dec = 5.;
+		boolean in;
 		
-		if(pointSrc.getY()<pointTar.getY()) {
-			if(y<pointSrc.getY()-dec || y>pointTar.getY()+dec)
-				in = false;	
-		}
+		if(pointSrc.getY()<=pointTar.getY())
+			in = y>=pointSrc.getY()-dec && y<=pointTar.getY()+dec;
 		else
-			if(y>pointSrc.getY()+dec || y<pointTar.getY()-dec)
-				in = false;	
+			in = y<=pointSrc.getY()+dec && y>=pointTar.getY()-dec;
 		
-		if(pointSrc.getX()<pointTar.getX()) {
-			if(x<pointSrc.getX()-dec || x>pointTar.getX()+dec)
-				in = false;	
-		}
-		else
-			if(x>pointSrc.getX()+dec || x<pointTar.getX()-dec)
-				in = false;	
+		if(in)
+			if(pointSrc.getX()<=pointTar.getX())
+				in = x>=pointSrc.getX()-dec && x<=pointTar.getX()+dec;
+			else
+				in = x<=pointSrc.getX()+dec && x>=pointTar.getX()-dec;
 
-		if(!in && (isVerticalLine() && Number.NUMBER.equals(x, pointSrc.getX(), dec) ||
+		if(in && (isVerticalLine() && Number.NUMBER.equals(x, pointSrc.getX(), dec) ||
 				isHorizontalLine() && Number.NUMBER.equals(y, pointSrc.getY(), dec)))
 			return true;
 		
-		final double a = getA();
-
-		if(in && a==0) { // If the equation is y = alpha
-			if(pointSrc.getX()<pointTar.getX())
-				in = x>=pointSrc.getX()-dec && x<=pointTar.getX()+dec;
-			else
-				in = x>=pointTar.getX()-dec && x<=pointSrc.getX()+dec;
-		}
-		
 		if(in) {
 			// Compute the equation of the line (y = ax + b)
-			final double axb = a*x+getB();
+			final double axb = getA()*x+getB();
 			in = y>=axb-dec && y<=axb+dec;
 		}
 		

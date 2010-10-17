@@ -57,6 +57,8 @@ public class RelationClassView extends RelationView {
 	public void paint(final Graphics2D g) {
 		super.paint(g);
 		
+		g.setColor(getLineColor());
+		
 		if(roleSrc!=null)
 			roleSrc.paint(g);
 		

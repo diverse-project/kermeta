@@ -35,6 +35,8 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	protected List<IHandler> handlers;
 	
+	protected boolean handlersVisible;
+	
 	
 	/**
 	 * Creates and initialises a relation established between two entities.
@@ -54,6 +56,7 @@ public class RelationView extends ComponentView implements IRelationView {
 		entityTar 			= target;
 		sourceDecoration 	= null;
 		targetDecoration 	= null;
+		handlersVisible		= false;
 		updateLineColor(255);
 		
 		if(src==target) {
@@ -108,8 +111,9 @@ public class RelationView extends ComponentView implements IRelationView {
 			paintDecoration(sourceDecoration, getFirstSegment().getPointSource(), g, getFirstSegment().getLineAngle());
 			paintDecoration(targetDecoration, getLastSegment().getPointTarget(), g, getLastSegment().getLineAngle()+Math.PI);
 			
-			for(final IHandler handler : handlers)
-				handler.paint(g);
+			if(handlersVisible)
+				for(final IHandler handler : handlers)
+					handler.paint(g);
 		}
 	}
 	
@@ -552,5 +556,29 @@ public class RelationView extends ComponentView implements IRelationView {
 				handler = handlers.get(i);
 		
 		return handler;
+	}
+	
+	
+	@Override
+	public boolean contains(final double x, final double y) {
+		boolean contains = false;
+		
+		for(int i=0, size=segments.size(); i<size && !contains; i++)
+			if(segments.get(i).contains(x, y))
+				contains = true;
+		
+		return contains; 
+	}
+	
+	
+	@Override
+	public boolean isHandlersVisible() {
+		return handlersVisible;
+	}
+	
+	
+	@Override
+	public void setHandlersVisible(final boolean visible) {
+		handlersVisible = visible;
 	}
 }
