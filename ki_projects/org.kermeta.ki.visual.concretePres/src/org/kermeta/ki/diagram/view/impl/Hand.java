@@ -8,6 +8,7 @@ import javax.swing.AbstractButton;
 
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
+import org.kermeta.ki.diagram.view.interfaces.IHandler;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
 public class Hand implements MouseListener, MouseMotionListener {
@@ -16,10 +17,13 @@ public class Hand implements MouseListener, MouseMotionListener {
 	
 	protected IDiagramView diagram;
 	
-	public IEntityView draggedShape;
-//	public FloatingText draggedLabel;
-	public double startX;
-	public double startY;
+	protected IEntityView draggedShape;
+	
+	protected IHandler draggedHandler;
+	
+//	protected FloatingText draggedLabel;
+	protected double startX;
+	protected double startY;
 	
 	
 	public Hand(final IDiagramView diagram) {
@@ -29,6 +33,16 @@ public class Hand implements MouseListener, MouseMotionListener {
 			throw new IllegalArgumentException();
 		
 		this.diagram = diagram;
+		reinit();
+	}
+	
+	
+	protected void reinit() {
+		draggedShape 	= null;
+		draggedHandler 	= null;
+//		draggedLabel 	= null;
+		startX 			= 0.;
+		startY 			= 0.;
 	}
 	
 	
@@ -68,11 +82,17 @@ public class Hand implements MouseListener, MouseMotionListener {
 		if(handB.isSelected()) {
 			
 //			draggedLabel = null;
-			int i = diagram.getNbRelations()-1;
+			final int nbRel = diagram.getNbRelations();
+			int i;
 //			IRelationView link;
 			final double px = e.getX()/diagram.getZoom();
 			final double py = e.getY()/diagram.getZoom();
 			
+			for(i=0; i<nbRel && draggedHandler==null; i++)
+				draggedHandler = diagram.getRelationAt(i).getHandlersAt(px, py);
+				
+			
+//			i = nbRel-1;
 //			while(draggedLabel==null && i>=0) {
 //				link = diagram.getRelationAt(i);
 //				
@@ -99,7 +119,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 //				i--;
 //			}
 				
-//			if(draggedLabel==null) {
+			if(draggedHandler==null) {//draggedLabel==null) {
 				IEntityView entity;
 				draggedShape = null;
 				i = diagram.getNbEntities()-1;
@@ -107,31 +127,28 @@ public class Hand implements MouseListener, MouseMotionListener {
 				while(draggedShape==null && i>=0) {
 					entity = diagram.getEntityAt(i);
 					
-					if(entity.isVisible() && entity.getBorders().contains(px, py)) {
+					if(entity.isVisible() && entity.getBorders().contains(px, py))
 						draggedShape = entity;
-						startX = px;
-						startY = py;
-					}
 					else
 						i--;
 				}
 				
 				diagram.setSelection(draggedShape);
 				diagram.refresh();
-//			}
+			}
 //			else {
 //				draggedLabel.setManualPosition(px, py);
 //			}
+			
+			startX = px;
+			startY = py;
 		}
 	}
 
 	
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		draggedShape = null;
-//		draggedLabel = null;
-		startX = 0.;
-		startY = 0.;
+	public void mouseReleased(final MouseEvent e) {
+		reinit();
 	}
 
 
@@ -141,18 +158,15 @@ public class Hand implements MouseListener, MouseMotionListener {
 		final double gapX = e.getX()/zoom - startX;
 		final double gapY = e.getY()/zoom - startY;
 		
+		if(draggedHandler!=null) {
+			draggedHandler.translate(gapX, gapY);
+			diagram.updatePreferredSize();
+			diagram.refresh();
 //		if(draggedLabel!=null) {
 //			draggedLabel.setPosition(draggedLabel.getPosition().x + gapX, draggedLabel.getPosition().y + gapY);
-//			startX = e.getX()/zoom;
-//			startY = e.getY()/zoom;
-//			
-//			repaint();
-//		} else
+		} else
 			if(draggedShape!=null) {
 				diagram.translateEntity(draggedShape, gapX, gapY);
-				startX = e.getX()/zoom;
-				startY = e.getY()/zoom;
-				
 				draggedShape.update();
 				
 				for(IRelationView relation : diagram.getRelations())
@@ -162,6 +176,9 @@ public class Hand implements MouseListener, MouseMotionListener {
 				diagram.updatePreferredSize();
 				diagram.refresh();
 			}
+		
+		startX = e.getX()/zoom;
+		startY = e.getY()/zoom;
 	}
 
 

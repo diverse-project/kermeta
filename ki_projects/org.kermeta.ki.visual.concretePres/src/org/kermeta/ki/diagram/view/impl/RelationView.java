@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.kermeta.ki.diagram.view.interfaces.IDecorationView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
+import org.kermeta.ki.diagram.view.interfaces.IHandler;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 import org.kermeta.ki.diagram.view.interfaces.ISegmentView;
 
@@ -32,6 +33,8 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	protected List<ISegmentView> segments;
 	
+	protected List<IHandler> handlers;
+	
 	
 	/**
 	 * Creates and initialises a relation established between two entities.
@@ -45,6 +48,7 @@ public class RelationView extends ComponentView implements IRelationView {
 		if(src==null || target==null)
 			throw new IllegalArgumentException();
 		
+		handlers			= new ArrayList<IHandler>();
 		segments 			= new ArrayList<ISegmentView>();
 		entitySrc 			= src;
 		entityTar 			= target;
@@ -59,9 +63,11 @@ public class RelationView extends ComponentView implements IRelationView {
 			Point2D pt3 = new Point2D.Double(pt1.getX()-100, pt1.getY());
 			Point2D pt4 = new Point2D.Double(pt2.getX()-100, pt2.getY());
 			
-			segments.add(new SegmentView(pt1, pt3));
+			segments.add(new SegmentView(pt1, pt3));//TODO should use addPoint instead
 			segments.add(new SegmentView(pt3, pt4));
 			segments.add(new SegmentView(pt4, pt2));
+			handlers.add(new Handler(pt3));
+			handlers.add(new Handler(pt4));
 		}
 		else
 			segments.add(new SegmentView(new Point2D.Double(), new Point2D.Double()));
@@ -101,6 +107,9 @@ public class RelationView extends ComponentView implements IRelationView {
 			
 			paintDecoration(sourceDecoration, getFirstSegment().getPointSource(), g, getFirstSegment().getLineAngle());
 			paintDecoration(targetDecoration, getLastSegment().getPointTarget(), g, getLastSegment().getLineAngle()+Math.PI);
+			
+			for(final IHandler handler : handlers)
+				handler.paint(g);
 		}
 	}
 	
@@ -505,10 +514,13 @@ public class RelationView extends ComponentView implements IRelationView {
 				seg.replacePointTarget(newPt);
 				newSeg = new SegmentView(newPt, oldPt);
 				
+				
 				if((i+1)>=nbSeg)
 					segments.add(newSeg);
 				else
 					segments.add(i+1, newSeg);
+				
+				handlers.add(new Handler(newPt));
 			}
 			else
 				i++;
@@ -527,5 +539,18 @@ public class RelationView extends ComponentView implements IRelationView {
 		
 		pt = getFirstSegment().getPointSource();
 		pt.setLocation(pt.getX()+tx, pt.getY()+ty);
+	}
+	
+	
+	
+	@Override
+	public IHandler getHandlersAt(final double x, final double y) {
+		IHandler handler = null;
+		
+		for(int i=0, size=handlers.size(); i<size && handler==null; i++)
+			if(handlers.get(i).contains(x, y))
+				handler = handlers.get(i);
+		
+		return handler;
 	}
 }

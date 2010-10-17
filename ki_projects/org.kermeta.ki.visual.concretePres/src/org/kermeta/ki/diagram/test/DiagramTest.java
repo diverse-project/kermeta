@@ -65,7 +65,7 @@ public class DiagramTest {
 		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
 		diag.updateLayout();
 		
-		rel2.addPoint(new Point2D.Double(109.5, 370));
+		rel2.addPoint(new Point2D.Double(144, 370));
 		rel2.getSegment(0).getPointTarget().setLocation(130, 360);
 		diag.refresh();
 		

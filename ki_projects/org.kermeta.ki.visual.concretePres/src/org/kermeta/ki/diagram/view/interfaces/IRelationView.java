@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
  */
 public interface IRelationView extends IComponentView {
 	int getNbSegment();
+
+	IHandler getHandlersAt(final double x, final double y);
 	
 	ISegmentView getLastSegment();
 	
