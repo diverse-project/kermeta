@@ -275,11 +275,11 @@ public class EcoreFactoryWrapper implements EcoreFactory, org.eclipse.emf.ecore.
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public EStore eStore() {
+    public  org.eclipse.emf.ecore.InternalEObject.EStore eStore() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void eSetStore(EStore estore) {
+    public void eSetStore( org.eclipse.emf.ecore.InternalEObject.EStore estore) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
