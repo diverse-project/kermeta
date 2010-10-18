@@ -49,7 +49,7 @@ object Art2RequiredPortGenerator {
               wrapper.append(param.getName+":"+param.getType.print('[',']'))
               if(op.getParameters.indexOf(param) != (op.getParameters.size-1)){wrapper.append(",")}
             }
-            wrapper.append(") : "+op.getReturnType.getName+" ={\n");
+            wrapper.append(") : "+op.getReturnType.print('[',']')+" ={\n");
 
             /* Generate method corpus */
             /* CREATE MSG OP CALL */
@@ -58,7 +58,8 @@ object Art2RequiredPortGenerator {
             op.getParameters.foreach{param=>
               wrapper.append("msgcall.getParams.put(\""+param.getName+"\","+param.getName+");\n")
             }
-            wrapper.append("this !? msgcall")
+
+            wrapper.append("(this !? msgcall).asInstanceOf["+op.getReturnType.print('[',']')+"]")
             wrapper.append("}\n")
           }
         }
