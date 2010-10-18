@@ -73,7 +73,7 @@ public class AbstractComponentType implements ComponentType {
     }
 
     @Override
-    public Boolean isPortBind(String portName) {
+    public Boolean isPortBinded(String portName) {
         Object port = null;
         if (this.getNeededPorts().containsKey(portName)) {
             port = this.getNeededPorts().get(portName);
