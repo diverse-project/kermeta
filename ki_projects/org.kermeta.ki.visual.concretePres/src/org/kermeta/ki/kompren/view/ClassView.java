@@ -316,16 +316,16 @@ public class ClassView extends EntityView {
 		for(final IAnchor anchor : anchors) {
 			pos = anchor.getPosition();
 			
-			if(Number.NUMBER.equals(pos.getX(), oldBorders.getMaxX()))
+			if(Number.NUMBER.equals(pos.getX(), oldBorders.getMaxX(), 2.))
 				pos.setLocation(borders.getMaxX(), pos.getY());
 			else
-				if(Number.NUMBER.equals(pos.getX(), oldBorders.getMinX()))
+				if(Number.NUMBER.equals(pos.getX(), oldBorders.getMinX(), 2.))
 						pos.setLocation(borders.getMinX(), pos.getY());
 			
-			if(Number.NUMBER.equals(pos.getY(), oldBorders.getMaxY()))
+			if(Number.NUMBER.equals(pos.getY(), oldBorders.getMaxY(), 2.))
 				pos.setLocation(pos.getX(), borders.getMaxY());
 			else
-				if(Number.NUMBER.equals(pos.getY(), oldBorders.getMinY()))
+				if(Number.NUMBER.equals(pos.getY(), oldBorders.getMinY(), 2.))
 						pos.setLocation(pos.getX(), borders.getMinY());
 			
 			//TODO manage anchors that are not at extremities.
