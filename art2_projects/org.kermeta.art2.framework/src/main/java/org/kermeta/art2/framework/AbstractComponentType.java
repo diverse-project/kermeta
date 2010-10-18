@@ -6,6 +6,7 @@ package org.kermeta.art2.framework;
 
 import java.util.HashMap;
 import java.util.Properties;
+import org.kermeta.art2.framework.port.Art2RequiredPort;
 
 /**
  *
@@ -13,25 +14,25 @@ import java.util.Properties;
  */
 public class AbstractComponentType implements ComponentType {
 
-    private HashMap<String,Object> hostedPorts = new HashMap<String,Object>();
-    private HashMap<String,Object> neededPorts = new HashMap<String,Object>();
-    private HashMap<String,Object> dictionary = new HashMap<String,Object>();
+    private HashMap<String, Object> hostedPorts = new HashMap<String, Object>();
+    private HashMap<String, Object> neededPorts = new HashMap<String, Object>();
+    private HashMap<String, Object> dictionary = new HashMap<String, Object>();
 
     @Override
-    public HashMap<String,Object> getDictionary() {
+    public HashMap<String, Object> getDictionary() {
         return this.dictionary;
     }
 
     @Override
-    public void setDictionary(HashMap<String,Object> dictionary) {
+    public void setDictionary(HashMap<String, Object> dictionary) {
         this.dictionary = dictionary;
     }
 
     @Override
-    public void setHostedPorts(HashMap<String,Object> ports) {
+    public void setHostedPorts(HashMap<String, Object> ports) {
         this.hostedPorts = ports;
-        for(Object p: this.hostedPorts.values()){
-            ((AbstractPort)p).setComponent(this);
+        for (Object p : this.hostedPorts.values()) {
+            ((AbstractPort) p).setComponent(this);
         }
     }
 
@@ -47,10 +48,10 @@ public class AbstractComponentType implements ComponentType {
 
     public Object getPortByName(String portName) {
         Object port = null;
-        if(this.getHostedPorts().containsKey(portName)){
+        if (this.getHostedPorts().containsKey(portName)) {
             port = this.getHostedPorts().get(portName);
         }
-        if(this.getNeededPorts().containsKey(portName)){
+        if (this.getNeededPorts().containsKey(portName)) {
             port = this.getNeededPorts().get(portName);
         }
         return port;
@@ -59,8 +60,8 @@ public class AbstractComponentType implements ComponentType {
     @Override
     public <T> T getPortByName(String name, Class<T> type) {
         Object retp = getPortByName(name);
-        if(retp != null){
-            return (T)retp;
+        if (retp != null) {
+            return (T) retp;
         } else {
             return null;
         }
@@ -68,9 +69,20 @@ public class AbstractComponentType implements ComponentType {
 
     @Override
     public HashMap<String, Object> getHostedPorts() {
-       return this.hostedPorts;
+        return this.hostedPorts;
     }
 
-
-
+    @Override
+    public Boolean isPortBind(String portName) {
+        Object port = null;
+        if (this.getNeededPorts().containsKey(portName)) {
+            port = this.getNeededPorts().get(portName);
+        }
+        if (port != null) {
+            Art2RequiredPort rport = (Art2RequiredPort) port;
+            return rport.getIsBind();
+        } else {
+            return false;
+        }
+    }
 }

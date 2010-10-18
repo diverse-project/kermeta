@@ -26,4 +26,6 @@ public interface ComponentType {
     public void setDictionary(HashMap<String,Object> dictionary);
 
     public <T> T getPortByName(String name, Class<T> type);
+
+    public Boolean isPortBind(String name);
 }
