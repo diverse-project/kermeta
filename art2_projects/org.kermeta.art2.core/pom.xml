@@ -76,7 +76,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Import-Package>org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                        <Import-Package>!javax.management,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
                         <Private-Package>
                             org.kermeta.art2.core.impl
                         </Private-Package>
