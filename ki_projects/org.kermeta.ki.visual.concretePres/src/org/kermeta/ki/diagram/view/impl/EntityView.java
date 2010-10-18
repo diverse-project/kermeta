@@ -77,15 +77,20 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		double distMin		= Double.MAX_VALUE;
 		Point2D pos;
 		double dist;
+		final int nbAnchors = anchors.size();
+		IAnchor anchor;
+		int posClosestAnchor = 0;
 		
 		// Looking for the closest anchor.
-		for(final IAnchor anchor : anchors) {
-			pos  = anchor.getPosition();
-			dist = pos.distance(point);
+		for(int i=0; i<nbAnchors; i++) {
+			anchor = anchors.get(i);
+			pos    = anchor.getPosition();
+			dist   = pos.distance(point);
 			
 			if(dist<distMin) {
 				distMin 	= dist;
 				closestAnch = anchor;
+				posClosestAnchor = i;
 			}
 		}
 		
@@ -101,25 +106,26 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			return null;
 		
 		// Creating a new free anchor.
-		IAnchor secondAnchor = null;
-		distMin = Double.MAX_VALUE;
-		for(final IAnchor anchor : anchors)
-			if(anchor!=closestAnch) {
-				pos  = anchor.getPosition();
-				dist = pos.distance(point);
-				
-				if(dist<distMin) {
-					distMin 	 = dist;
-					secondAnchor = anchor;
-				}
-			}
+		IAnchor secondAnchor = posClosestAnchor<(nbAnchors-1) ? anchors.get(posClosestAnchor+1) : null;
+		IAnchor thirdAnchor  = posClosestAnchor>0 ? anchors.get(posClosestAnchor-1) : null;
+		IAnchor finalAnchor = null;
 		
-		// The new anchor is created at the middle of its two closest anchors.
-		if(secondAnchor!=null)
-			if(secondAnchor.isFree())
-				closestAnch = secondAnchor;
+		if(secondAnchor==null) {
+			if(thirdAnchor!=null)
+				finalAnchor = thirdAnchor;
+		}else 
+			if(thirdAnchor==null)
+				finalAnchor = secondAnchor;
 			else
-				closestAnch = createMiddleAnchor(closestAnch, secondAnchor);
+				finalAnchor = secondAnchor.getPosition().distance(point)<thirdAnchor.getPosition().distance(point) || 
+								(secondAnchor.isFree() && !thirdAnchor.isFree()) ? secondAnchor : thirdAnchor;
+		
+		
+		if(finalAnchor!=null)
+			if(finalAnchor.isFree())
+				closestAnch = finalAnchor;
+			else
+				closestAnch = createMiddleAnchor(closestAnch, finalAnchor);
 		
 		return closestAnch;
 	}

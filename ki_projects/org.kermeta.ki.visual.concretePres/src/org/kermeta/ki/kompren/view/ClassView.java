@@ -434,7 +434,12 @@ public class ClassView extends EntityView {
 		else
 			anchor = new Anchor(pos1.getX(), (pos1.getY()+pos2.getY())/2.);
 		
-		anchors.add(anchor);
+		int index = anchors.indexOf(firstAnchor);
+		
+		if(index==(anchors.size()-1))
+			anchors.add(anchor);
+		else
+			anchors.add(index+1, anchor);
 		
 		return anchor;
 	}
