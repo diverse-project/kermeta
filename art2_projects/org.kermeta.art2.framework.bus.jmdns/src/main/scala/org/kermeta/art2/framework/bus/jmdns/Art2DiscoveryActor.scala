@@ -115,6 +115,10 @@ class Art2DiscoveryActor(secondes:Int,modelHandler : Art2ModelHandlerService,dis
 
   
   def updatePlatformModelFromJMDNS()={
+
+    
+
+
     try{
       var actualModel = modelHandler.getLastModel
       //PROCESS ART2MODEL SERVICE
