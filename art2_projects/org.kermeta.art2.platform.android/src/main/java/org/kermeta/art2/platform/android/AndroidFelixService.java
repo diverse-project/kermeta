@@ -148,7 +148,7 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
         System.setProperty("java.net.preferIPv4Addresses", "true");
         System.setProperty("java.net.preferIPv4Stack", "true");
 
-        System.setProperty("art2.node.name", "dukeTab");
+        System.setProperty("node.name", "dukeTab");
 
         new Thread() {
 
@@ -244,15 +244,15 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
                         startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"emf.lib-2.6.0.jar", true);
                         startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.collection-2.8.0.jar", false);
                         startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.library-2.8.0.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.model-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.adaptation.model-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.api-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.kompare-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.netty-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.deploy.osgi-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.core-2.1.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.jmdns-2.1.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.model-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.adaptation.model-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.api-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.kompare-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.netty-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.deploy.osgi-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.core-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.jmdns-2.2.1-SNAPSHOT.jar", true);
                         
 
                     } catch (Exception e) {
