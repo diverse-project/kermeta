@@ -152,6 +152,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
 		model2view.modelingUnit := metamodel
 		metamodel.accept(model2view)
+		metamodel.update()
 		
 		eltDisplayer.initialiseLinks()
 		eltDisplayer.interimFeedback
