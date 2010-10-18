@@ -18,12 +18,17 @@ trait Art2RequiredPort extends Art2Port {
   var delegate : Option[Art2Actor] = None
   var logger = LoggerFactory.getLogger(this.getClass);
 
+  private var isBind : Boolean = false
+  def getIsBind = isBind
+
   private def bind(bindmsg : Art2FragmentBindMessage) ={
     delegate = Some(bindmsg.getProxy)
+    isBind = true
   }
 
   private def unbind(unbindmsg: Art2FragmentUnbindMessage)= {
     delegate = None
+    isBind = false
   }
 
   override def internal_process(msg : Any) = msg match {
