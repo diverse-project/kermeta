@@ -208,7 +208,6 @@ public class Hand implements MouseListener, MouseMotionListener {
 		} else
 			if(draggedShape!=null) {
 				diagram.translateEntity(draggedShape, gapX, gapY);
-				draggedShape.update();
 				
 				for(IRelationView relation : diagram.getRelations())
 					if(relation.getEntitySrc()==draggedShape || relation.getEntityTar()==draggedShape)

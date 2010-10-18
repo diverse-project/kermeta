@@ -19,6 +19,7 @@ import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 
 import org.kermeta.ki.diagram.layout.ILayoutStrategy;
+import org.kermeta.ki.diagram.view.interfaces.IAnchor;
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
@@ -225,13 +226,6 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 
 	@Override
-	public void addRelation(final IRelationView relation) {
-		if(relation!=null)
-			relations.add(relation);
-	}
-
-
-	@Override
 	public void updateLayout() {
 		if(strategy!=null)
 			strategy.updateLayout();
@@ -378,12 +372,27 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 
 	@Override
-	public void addRelation(final int position, final IRelationView link) {
-		if(link!=null && position<entities.size() && position>=0)
-			relations.add(position, link);
-		else
-			if((position==-1 || position==entities.size()) && link!=null)
-				relations.add(link);
+	public void addRelation(final int position, final IRelationView relation) {
+		if(relation!=null && position<entities.size() && position>=0) {
+			relations.add(position, relation);
+			anchorRelation(relation);
+		}
+	}
+	
+	
+	@Override
+	public void addRelation(final IRelationView relation) {
+		if(relation!=null) {
+			relations.add(relation);
+			anchorRelation(relation);
+		}
+	}
+	
+	
+	
+	protected static void anchorRelation(final IRelationView relation) {
+		relation.getEntitySrc().anchorRelation(relation, relation.getEntityTar(), false);
+		relation.getEntityTar().anchorRelation(relation, relation.getEntitySrc(), true);
 	}
 	
 	
@@ -527,5 +536,16 @@ public class DiagramView extends JPanel implements IDiagramView {
 					rel.update();
 				}
 		}
+	}
+	
+	
+	@Override
+	public void relayoutRelations() {
+		for(final IEntityView entity : entities)
+			for(final IAnchor anchor : entity.getAnchors())
+				anchor.setFree(true);
+		
+		for(final IRelationView relation : relations)
+			anchorRelation(relation);
 	}
 }

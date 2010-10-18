@@ -8,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 import org.kermeta.ki.diagram.view.interfaces.IHandler;
 
 public class Handler implements IHandler {
-	protected static final double WIDTH = 6.;
+	protected static final double WIDTH = 10.;
 	
 	protected static final Color COLOR = new Color(20, 20, 20, 160);
 

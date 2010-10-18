@@ -296,32 +296,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	@Override
 	public void update() {
-		if(entitySrc!=null && entityTar!=null && entitySrc.isVisible() && entityTar.isVisible()) {
-			Point2D pointSrc;
-			Point2D pointTar;
-			
-			if(entitySrc==entityTar) {
-				pointSrc = new Point2D.Double();
-				pointTar = new Point2D.Double();
-				getRecursiveRelationPoints(pointSrc, pointTar);
-			}
-			else {
-				Line2D line = new Line2D.Double(entitySrc.getCentre(), entityTar.getCentre());
-				pointSrc = intersectionPoint(line, entitySrc.getBorders());
-				pointTar = intersectionPoint(line, entityTar.getBorders());
-				
-				if(pointSrc==null || pointTar==null)
-					visibility = Visibility.NONE;
-				else
-					visibility = entitySrc.getVisibility()==Visibility.GRAYED || entityTar.getVisibility()==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
-			}
-			
-			if(pointSrc!=null)
-				getFirstSegment().getPointSource().setLocation(pointSrc.getX(), pointSrc.getY());
-			
-			if(pointTar!=null)
-				getLastSegment().getPointTarget().setLocation(pointTar.getX(), pointTar.getY());
-		}
+		// Nothing to do.
 	}
 
 
@@ -570,13 +545,10 @@ public class RelationView extends ComponentView implements IRelationView {
 	public void translate(final double tx, final double ty) {
 		Point2D pt;
 		
-		for(final ISegmentView seg : segments) {
-			pt = seg.getPointTarget();
+		for(int i=0, size=segments.size()-1; i<size; i++) {
+			pt = segments.get(i).getPointTarget();
 			pt.setLocation(pt.getX()+tx, pt.getY()+ty);
 		}
-		
-		pt = getFirstSegment().getPointSource();
-		pt.setLocation(pt.getX()+tx, pt.getY()+ty);
 	}
 	
 	

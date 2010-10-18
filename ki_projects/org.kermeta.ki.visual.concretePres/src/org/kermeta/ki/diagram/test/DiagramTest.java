@@ -1,7 +1,6 @@
 package org.kermeta.ki.diagram.test;
 
 import java.awt.Dimension;
-import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
@@ -29,11 +28,6 @@ public class DiagramTest {
 		IRelationView rel3 = new InheritanceView(class3, class1);
 		IRelationView rel4 = new RelationClassView(class1, class1, true, true, null, "role3", Cardinality.ONE, Cardinality.ZERO_ONE);
 
-		rel.update();
-		rel2.update();
-		rel3.update();
-		rel4.update();
-		
 		diag.addEntity(class1);
 		diag.addEntity(class2);
 		diag.addEntity(class3);
@@ -65,8 +59,11 @@ public class DiagramTest {
 		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
 		diag.updateLayout();
 		
-		rel2.addPoint(new Point2D.Double(144, 370));
-		rel2.getSegment(0).getPointTarget().setLocation(130, 360);
+		rel.update();
+		rel2.update();
+		rel3.update();
+		rel4.update();
+		
 		diag.refresh();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

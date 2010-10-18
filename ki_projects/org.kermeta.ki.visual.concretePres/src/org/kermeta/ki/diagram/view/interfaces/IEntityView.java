@@ -5,10 +5,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 public interface IEntityView extends IComponentView {
 	/** The colour to use when an entity is grayed. */
 	public static Color GRAYED_COLOR = new Color(210, 210, 210, 180);
+	
+	
+	void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd);
+	
+	IAnchor getClosestFreeAnchor(final Point2D point, final boolean create);
 	
 	/**
 	 * Moves the entity to the given centre.
@@ -144,4 +150,7 @@ public interface IEntityView extends IComponentView {
 	 * The font used by the entity.
 	 */
 	Font getFont();
+
+	
+	List<IAnchor> getAnchors();
 }

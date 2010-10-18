@@ -8,12 +8,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kermeta.ki.diagram.view.impl.Anchor;
 import org.kermeta.ki.diagram.view.impl.EntityView;
+import org.kermeta.ki.diagram.view.impl.Number;
+import org.kermeta.ki.diagram.view.interfaces.IAnchor;
 
 /**
  * Defines an entity that corresponds to a class of a class diagram.
@@ -78,6 +82,7 @@ public class ClassView extends EntityView {
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
 		update();
+		initAnchors();
 	}
 
 	
@@ -95,7 +100,6 @@ public class ClassView extends EntityView {
 		else {
 			attr = new AttributeView(attrName, attrTypeName, this);
 			attributes.add(attr);
-			update();//FIXME should not be updated.
 		}
 		
 		return attr;
@@ -127,7 +131,6 @@ public class ClassView extends EntityView {
 		else {
 			op = new OperationView(opName, opTypeName, isAbs, this);
 			operations.add(op);
-			update();//FIXME should not be updated.
 		}
 		
 		return op;
@@ -237,12 +240,28 @@ public class ClassView extends EntityView {
 		if(operationsVisible)
 			for(OperationView op : operations)
 				op.paint(g);
+		
+//		for(IAnchor anchor : anchors)
+//			anchor.paint(g);
+	}
+	
+	
+	@Override
+	public void translate(final double tx, final double ty) {
+		super.translate(tx, ty);
+		
+		for(final OperationView op : operations)
+			op.position.setLocation(op.position.getX()+tx, op.position.getY()+ty);
+		
+		for(final AttributeView attr : attributes)
+			attr.position.setLocation(attr.position.getX()+tx, attr.position.getY()+ty);
 	}
 
 	
 	
 	@Override
 	public void update() {
+		final Rectangle2D oldBorders	= path.getBounds2D();
 		final Dimension dim    			= getPreferredSize();
 		final Rectangle2D titleBounds 	= getTitleBounds();
 		int textHeight  				= (int) titleBounds.getHeight();
@@ -283,6 +302,33 @@ public class ClassView extends EntityView {
 				op.setPosition(xAttr, yAttr);
 				yAttr += HEIGHT_GAP;
 			}
+		}
+		
+		updateAnchorsPosition(oldBorders);
+	}
+	
+	
+	
+	protected void updateAnchorsPosition(final Rectangle2D oldBorders) {
+		final Rectangle2D borders = path.getBounds2D();
+		Point2D pos;
+		
+		for(final IAnchor anchor : anchors) {
+			pos = anchor.getPosition();
+			
+			if(Number.NUMBER.equals(pos.getX(), oldBorders.getMaxX()))
+				pos.setLocation(borders.getMaxX(), pos.getY());
+			else
+				if(Number.NUMBER.equals(pos.getX(), oldBorders.getMinX()))
+						pos.setLocation(borders.getMinX(), pos.getY());
+			
+			if(Number.NUMBER.equals(pos.getY(), oldBorders.getMaxY()))
+				pos.setLocation(pos.getX(), borders.getMaxY());
+			else
+				if(Number.NUMBER.equals(pos.getY(), oldBorders.getMinY()))
+						pos.setLocation(pos.getX(), borders.getMinY());
+			
+			//TODO manage anchors that are not at extremities.
 		}
 	}
 
@@ -356,5 +402,46 @@ public class ClassView extends EntityView {
 	
 	public void setIsAbstract(final boolean isAbstract) {
 		fontStyle = isAbstract ? Font.ITALIC : Font.PLAIN;
+	}
+
+
+	@Override
+	protected void initAnchors() {
+		final Rectangle2D rec = getBorders();
+		
+		anchors.add(new Anchor(rec.getMinX(), rec.getMinY()));
+		anchors.add(new Anchor(rec.getCenterX(), rec.getMinY()));
+		anchors.add(new Anchor(rec.getMaxX(), rec.getMinY()));
+		anchors.add(new Anchor(rec.getMaxX(), rec.getCenterY()));
+		anchors.add(new Anchor(rec.getMaxX(), rec.getMaxY()));
+		anchors.add(new Anchor(rec.getCenterX(), rec.getMaxY()));
+		anchors.add(new Anchor(rec.getMinX(), rec.getMaxY()));
+		anchors.add(new Anchor(rec.getMinX(), rec.getCenterY()));
+	}
+
+
+	@Override
+	protected IAnchor createMiddleAnchor(final IAnchor firstAnchor, final IAnchor secondAnchor) {
+		if(firstAnchor==null || secondAnchor==null)
+			return null;
+		
+		IAnchor anchor;
+		final Point2D pos1 = firstAnchor.getPosition();
+		final Point2D pos2 = secondAnchor.getPosition();
+		
+		if(Number.NUMBER.equals(pos1.getY(), pos2.getY()))
+			anchor = new Anchor((pos1.getX()+pos2.getX())/2., pos1.getY());
+		else
+			anchor = new Anchor(pos1.getX(), (pos1.getY()+pos2.getY())/2.);
+		
+		anchors.add(anchor);
+		
+		return anchor;
+	}
+	
+	
+	@Override
+	public List<IAnchor> getAnchors() {
+		return anchors;
 	}
 }

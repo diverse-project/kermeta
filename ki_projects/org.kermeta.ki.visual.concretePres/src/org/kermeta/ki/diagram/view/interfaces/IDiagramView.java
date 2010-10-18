@@ -14,6 +14,8 @@ import org.kermeta.ki.malai.Zoomable;
  * @author Arnaud Blouin
  */
 public interface IDiagramView extends Scrollable, Zoomable {
+	void relayoutRelations();
+	
 	void moveEntity(final IEntityView entity, final double x, final double y);
 	
 	void translateEntity(final IEntityView entity, final double tx, final double ty);

@@ -3,10 +3,16 @@ package org.kermeta.ki.diagram.view.impl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.kermeta.ki.diagram.view.interfaces.IAnchor;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
+import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
 /**
  * An entity view is a component view that represents an entity to be used into a entity-relation diagram.
@@ -33,6 +39,8 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	/** The style of the font. */
 	protected int fontStyle;
 	
+	protected List<IAnchor> anchors;
+	
 	
 	
 	
@@ -42,6 +50,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	public EntityView() {
 		super();
 		
+		anchors		= new ArrayList<IAnchor>();
 		centre		= new Point2D.Double();
 		fontName 	= "Arial";
 		fontSize	= 14.;
@@ -49,6 +58,92 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		updateFillingColor(DEFAUT_OPACITY);
 		updateLineColor(255);
 		setScale(1.);
+	}
+	
+	
+	protected abstract void initAnchors();
+	
+	
+	protected abstract IAnchor createMiddleAnchor(final IAnchor closestAnch, final IAnchor secondAnchor);
+	
+	
+	
+	@Override
+	public IAnchor getClosestFreeAnchor(final Point2D point, final boolean create) {
+		if(point==null)
+			return null;
+		
+		IAnchor closestAnch	= null;
+		double distMin		= Double.MAX_VALUE;
+		Point2D pos;
+		double dist;
+		
+		// Looking for the closest anchor.
+		for(final IAnchor anchor : anchors) {
+			pos  = anchor.getPosition();
+			dist = pos.distance(point);
+			
+			if(dist<distMin) {
+				distMin 	= dist;
+				closestAnch = anchor;
+			}
+		}
+		
+		// If there is no anchor or if it is not free and we must not create a free anchor.
+		if(closestAnch==null || (!closestAnch.isFree() && !create))
+			return null;
+		
+		if(closestAnch.isFree())
+			return closestAnch;
+		
+		// Cannot create an anchor if we do not have two anchors.
+		if(anchors.size()<2)
+			return null;
+		
+		// Creating a new free anchor.
+		IAnchor secondAnchor = null;
+		distMin = Double.MAX_VALUE;
+		for(final IAnchor anchor : anchors)
+			if(anchor!=closestAnch) {
+				pos  = anchor.getPosition();
+				dist = pos.distance(point);
+				
+				if(dist<distMin) {
+					distMin 	 = dist;
+					secondAnchor = anchor;
+				}
+			}
+		
+		// The new anchor is created at the middle of its two closest anchors.
+		if(secondAnchor!=null)
+			if(secondAnchor.isFree())
+				closestAnch = secondAnchor;
+			else
+				closestAnch = createMiddleAnchor(closestAnch, secondAnchor);
+		
+		return closestAnch;
+	}
+	
+
+	@Override
+	public void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd) {
+		IAnchor anchor;
+		
+		if(opposite==this) {
+			Point2D pt = anchors.get(0).getPosition();
+			anchor = getClosestFreeAnchor(new Point2D.Double(pt.getX(), pt.getY()), true);
+		}
+		else
+			anchor = getClosestFreeAnchor(RelationView.intersectionPoint(new Line2D.Double(centre, opposite.getCentre()), path.getBounds2D()), true);
+		
+		if(anchor!=null) {
+			if(atEnd)
+				relation.getLastSegment().replacePointTarget(anchor.getPosition());
+			else
+				relation.getFirstSegment().replacePointSource(anchor.getPosition());
+			
+			anchor.setFree(false);
+		}
 	}
 	
 	
@@ -61,6 +156,10 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	@Override
 	public void translate(final double tx, final double ty) {
 		centre.setLocation(centre.getX()+tx, centre.getY()+ty);
+		path.transform(AffineTransform.getTranslateInstance(tx, ty));
+		
+		for(final IAnchor anchor : anchors)
+			anchor.translate(tx, ty);
 	}
 	
 	

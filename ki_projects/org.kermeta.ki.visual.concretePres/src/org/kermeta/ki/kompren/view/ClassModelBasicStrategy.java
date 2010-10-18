@@ -52,6 +52,7 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 		
 		setMetamodelPosition(forest);
 		diagram.recentre();
+		diagram.relayoutRelations();
 		diagram.updatePreferredSize();
 		diagram.refresh();
 	}

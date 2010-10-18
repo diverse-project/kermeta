@@ -73,6 +73,7 @@ public interface IRelationView extends IComponentView {
 	
 	boolean removePoint(final Point2D pt);
 	
+	
 	void addPoint(final Point2D pt);
 
 	
