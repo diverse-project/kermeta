@@ -81,20 +81,10 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	
 	@Override
-	public void updateRelations() {
-		for(IRelationView relation : relations)
-			relation.update();
-		
-		repaint();
-	}
-	
-	
-	@Override
 	public List<IEntityView> getEntities() {
 		return entities;
 	}
 
-	
 	
 	
 	@Override
@@ -305,10 +295,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 		xMin = 10-xMin;
 		yMin = 10-yMin;
 		
-		for(IEntityView entity : entities) {
+		for(IEntityView entity : entities)
 			entity.translate(xMin, yMin);
-			entity.update();
-		}
 		
 		for(IRelationView relation : relations) {
 			relation.translate(xMin, yMin);
@@ -545,7 +533,9 @@ public class DiagramView extends JPanel implements IDiagramView {
 			for(final IAnchor anchor : entity.getAnchors())
 				anchor.setFree(true);
 		
-		for(final IRelationView relation : relations)
+		for(final IRelationView relation : relations) {
 			anchorRelation(relation);
+			relation.update();
+		}
 	}
 }

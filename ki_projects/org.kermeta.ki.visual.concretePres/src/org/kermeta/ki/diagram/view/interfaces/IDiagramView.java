@@ -46,9 +46,6 @@ public interface IDiagramView extends Scrollable, Zoomable {
 	
 	boolean removeEntity(final IEntityView entity);
 	
-	void updateRelations();
-	
-	
 	double getZoom();
 
 	void setZoom(final double zoom);

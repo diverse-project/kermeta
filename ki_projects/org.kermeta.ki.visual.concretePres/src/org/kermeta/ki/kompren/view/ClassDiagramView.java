@@ -103,8 +103,10 @@ public class ClassDiagramView extends DiagramView {
 	public InheritanceView addInheritanceView(final IEntityView src, final IEntityView tar, final int position) {
 		final InheritanceView view = new InheritanceView(src, tar);
 		
-//		view.setVisibility(Visibility.STANDARD);
-		addRelation(position, view);
+		if(position==-1 || position==relations.size())
+			addRelation(view);
+		else
+			addRelation(position, view);
 		
 		return view;
 	}
@@ -140,9 +142,11 @@ public class ClassDiagramView extends DiagramView {
 		}
 		
 		final IRelationView view = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole, 
-										Cardinality.getCardinality(srcCard), Cardinality.getCardinality(targetCard));
-//		view.visibility = Visibility.STANDARD;
-		addRelation(position, view);
+														 Cardinality.getCardinality(srcCard), Cardinality.getCardinality(targetCard));
+		if(position==-1 || position==relations.size())
+			addRelation(view);
+		else
+			addRelation(position, view);
 		
 		return view;
 	}

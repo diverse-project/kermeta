@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 
+import org.kermeta.ki.diagram.view.impl.DiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 import org.kermeta.ki.kompren.view.ClassDiagramView;
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
@@ -18,8 +19,40 @@ public class DiagramTest {
 	public static void main(String[] args) {
 		JFrame frame 			= new JFrame();
 		JToggleButton handB 	= new JToggleButton();
-		ClassDiagramView diag 	= new ClassDiagramView(true);
+		DiagramView diag		= createBasicClassDiagram();
 		diag.getHand().setHandButton(handB);
+		handB.setSelected(true);
+		
+		diag.setPreferredSize(new Dimension(1000, 800));
+		frame.getContentPane().add(diag);
+		frame.setLocation(100, 100);
+		frame.setVisible(true);
+		frame.pack();
+		diag.refresh();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	
+	
+	public static DiagramView createEcoreClassDiagram() {
+		ClassDiagramView diag = new ClassDiagramView(true);
+		ClassView eclass = new ClassView("EClass");
+		IRelationView rel  = new RelationClassView(eclass, eclass, true, true, null, "supertypes", null, Cardinality.ONE_MULTI);
+		
+		diag.addEntity(eclass);
+		diag.addRelation(rel);
+		
+		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
+		diag.updateLayout();
+		
+		return diag;
+	}
+	
+	
+	
+	public static DiagramView createBasicClassDiagram() {
+		ClassDiagramView diag = new ClassDiagramView(true);
+		
 		ClassView class1   = new ClassView("Class1");
 		ClassView class2   = new ClassView("Class2");
 		ClassView class3   = new ClassView("Class3");
@@ -36,7 +69,6 @@ public class DiagramTest {
 		diag.addRelation(rel3);
 		diag.addRelation(rel4);
 		
-		handB.setSelected(true);
 		class1.addAttribute("myAttr1", "int");
 		class1.addAttribute("thisisabigattr", "String");
 		class1.addAttribute("attr", "YourNotMyType");
@@ -50,22 +82,9 @@ public class DiagramTest {
 		class3.addOperation("opNameAgain", "myopTypeName2", true);
 		class3.update();
 		
-		diag.setPreferredSize(new Dimension(1000, 800));
-		frame.getContentPane().add(diag);
-		frame.setLocation(100, 100);
-		frame.setVisible(true);
-		frame.pack();
-		diag.refresh();
 		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
 		diag.updateLayout();
 		
-		rel.update();
-		rel2.update();
-		rel3.update();
-		rel4.update();
-		
-		diag.refresh();
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		return diag;
 	}
 }
