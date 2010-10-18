@@ -58,11 +58,16 @@ class Art2DiscoveryActor(secondes:Int,modelHandler : Art2ModelHandlerService,dis
     NetworkInterface.getNetworkInterfaces.foreach{it =>
       
       //IT SPECIFIC PROP
-      props.put(Constants.ART2_PLATFORM_REMOTE_MTU, it.getMTU.toString)
+     // props.put(Constants.ART2_PLATFORM_REMOTE_MTU, it.getMTU.toString)
+     props.put(Constants.ART2_PLATFORM_REMOTE_MTU, "1500")
       props.put(Constants.ART2_PLATFORM_REMOTE_NETWORK_TYPE, it.getName)
 
+      var loopBackAddr = it.getInetAddresses.exists(itaddr=> itaddr.isLoopbackAddress)
+    //  var up = it.getInetAddresses.forall(itaddr=> itaddr.isReachable(100))
+
+
       /* DO NOT EXPOSE LOCAL HOST INTERFACE */
-      if( (!it.isLoopback) && it.isUp){
+      if( (!loopBackAddr)){
         it.getInetAddresses.foreach{addr =>
 
           var jmdnsNodeName = nodeNameProtected.toString+"-"+it.getName
