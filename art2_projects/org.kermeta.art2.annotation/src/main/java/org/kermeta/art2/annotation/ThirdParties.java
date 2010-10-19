@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
  *
  * @author ffouquet
  */
-@Inherited
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.TYPE})
 public @interface ThirdParties {

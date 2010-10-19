@@ -15,7 +15,6 @@ import java.lang.annotation.Target;
  *
  * @author ffouquet
  */
-@Inherited
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.METHOD})
 public @interface Start {
