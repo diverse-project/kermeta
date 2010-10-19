@@ -34,6 +34,14 @@ public class ServicePortTypeVisitor implements TypeVisitor {
 
     ServicePortType dataType = Art2Factory.eINSTANCE.createServicePortType();
 
+    public ServicePortType getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(ServicePortType dataType) {
+        this.dataType = dataType;
+    }
+
     @Override
     public void visitTypeMirror(TypeMirror t) {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -14,7 +14,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import org.kermeta.art2.annotation.ChannelTypeFragment;
+import org.kermeta.art2.annotation.ComponentFragment;
 import org.kermeta.art2.annotation.ComponentType;
+import org.kermeta.art2.annotation.DictionaryAttribute;
+import org.kermeta.art2.annotation.DictionaryType;
 import org.kermeta.art2.annotation.Port;
 import org.kermeta.art2.annotation.Ports;
 import org.kermeta.art2.annotation.ProvidedPort;
@@ -53,7 +56,9 @@ public class Art2AnnotationProcessorFactory implements
         stype.add(Ports.class.getName());
         stype.add(ThirdParties.class.getName());
         stype.add(ThirdParty.class.getName());
-
+        stype.add(DictionaryAttribute.class.getName());
+        stype.add(DictionaryType.class.getName());
+        stype.add(ComponentFragment.class.getName());
         return stype;
     }
 
@@ -67,7 +72,7 @@ public class Art2AnnotationProcessorFactory implements
         if (declarations.isEmpty()) {
             result = AnnotationProcessors.NO_OP;
         } else {
-            result = new Art2AnnotationProcessor(env);
+            result = new org.kermeta.art2.framework.annotation.processor.visitor.Art2AnnotationProcessor(env);
         }
         return result;
     }

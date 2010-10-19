@@ -1,15 +1,14 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package org.kermeta.art2.framework.annotation.processor;
 
 import com.sun.mirror.apt.AnnotationProcessor;
 import com.sun.mirror.apt.AnnotationProcessorEnvironment;
 import com.sun.mirror.declaration.AnnotationTypeDeclaration;
 import com.sun.mirror.declaration.Declaration;
-import java.util.ArrayList;
-import java.util.Collection;
+import com.sun.mirror.declaration.TypeDeclaration;
 import org.kermeta.art2.Art2Factory;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.annotation.ChannelTypeFragment;
@@ -22,10 +21,7 @@ import org.kermeta.art2.framework.annotation.processor.visitor.ComponentTypeVisi
 import org.kermeta.art2.framework.generator.Art2ActivatorGenerator;
 import org.kermeta.art2.framework.generator.Art2FactoryGenerator;
 
-/**
- *
- * @author ffouquet
- */
+
 public class Art2AnnotationProcessor implements AnnotationProcessor {
 
     private AnnotationProcessorEnvironment env;
@@ -43,29 +39,38 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
 
     @Override
     public void process() {
-        /* INIT DEFAULT BASE MODEL */
         ContainerRoot root = Art2Factory.eINSTANCE.createContainerRoot();
         Art2Utility.root_$eq(root);
 
 
-        /* STEP MODEL META DATA EXTRACTION */
         //GENERATE & RUN ComponentType visitor
-        Collection<ComponentTypeVisitor> ctVisitors = new ArrayList<ComponentTypeVisitor>();
+        //Collection<ComponentTypeVisitor> ctVisitors = new ArrayList<ComponentTypeVisitor>();
+        for ( TypeDeclaration type :  env.getTypeDeclarations()){
+
+            ComponentType o = type.getAnnotation(ComponentType.class);
+            System.out.println("CT="+o);
+            ChannelTypeFragment o2 = type.getAnnotation(ChannelTypeFragment.class);
+            System.out.println("C="+o2);
+
+        }
+
+
         for (Declaration decl : env.getDeclarationsAnnotatedWith(componentTypeAnnotationPortType)) {
-            ComponentTypeVisitor ctv = new ComponentTypeVisitor(env, root);
-            ctVisitors.add(ctv);
+            org.kermeta.art2.ComponentType componentType = Art2Factory.eINSTANCE.createComponentType();
+            ComponentTypeVisitor ctv = new ComponentTypeVisitor(componentType,env, root);
+            //ctVisitors.add(ctv);
             decl.accept(ctv);
         }
 
         //GENERATE & RUN ChannelTypeFragment visitor
-        Collection<ChannelTypeFragmentVisitor> channelTVisitors = new ArrayList<ChannelTypeFragmentVisitor>();
+        //Collection<ChannelTypeFragmentVisitor> channelTVisitors = new ArrayList<ChannelTypeFragmentVisitor>();
         for (Declaration decl : env.getDeclarationsAnnotatedWith(channelTypeAnnotationPortType)) {
-            ChannelTypeFragmentVisitor ctv = new ChannelTypeFragmentVisitor(env, root);
-            channelTVisitors.add(ctv);
+            org.kermeta.art2.ChannelType channelType = Art2Factory.eINSTANCE.createChannelType();
+            ChannelTypeFragmentVisitor ctv = new ChannelTypeFragmentVisitor(channelType,env, root);
+            //channelTVisitors.add(ctv);
             decl.accept(ctv);
         }
 
-        /* STEP CODE GENERATION */
 
        // Art2ProvidedPortGenerator.generatePort(root, env.getFiler());
         //Art2Generator.generatePortWrapper(root, env.getFiler());
@@ -77,3 +82,4 @@ public class Art2AnnotationProcessor implements AnnotationProcessor {
 
     }
 }
+*/
