@@ -42,7 +42,7 @@ trait PortMappingProcessor {
             }
             ptref.getMappings.add(ptREFmapping)
           }
-        case None => env.getMessager.printError("ProvidedPort not found "+annot.name);System.exit(1)
+        case None => println("ProvidedPort not found "+annot.name);env.getMessager.printError("ProvidedPort not found "+annot.name);System.exit(1)
       }
     }
 
