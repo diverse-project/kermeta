@@ -13,7 +13,7 @@
 	<property name="eclipse.build.scripts.dir" location="./eclipse_build_scripts"/>
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
-	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.tar.gz"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_linux_x86_64_base.tar.gz"/>
 	<property name="studio.archive.extension" value="tar.gz"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	
