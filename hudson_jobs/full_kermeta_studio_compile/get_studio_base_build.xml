@@ -12,7 +12,8 @@
 	<property name="env.WORKSPACE" location="C:/Temp/kermeta_hudson/workspace/studio_compile_studio"/>
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>		
 	<property name="archive.extension" value="tar.gz"/>
-	<property name="studio.base.downloaded.zip" location="${env.WORKSPACE}/studiobase.tmp/StudioBase.${archive.extension}"/>
+	<property name="studio.base.download.folder" location="${env.WORKSPACE}/eclipsebase.tmp"/>
+	<property name="studio.base.downloaded.zip" location="${studio.base.download.folder}/StudioBase.${archive.extension}"/>
 	<property name="studio.base.url" value="http://studio.gforge.inria.fr/bundle/latest_build/studioBase.${archive.extension}"/>
 	
 	<path id="ant-extensions">
