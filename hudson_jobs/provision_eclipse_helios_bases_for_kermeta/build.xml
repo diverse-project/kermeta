@@ -2,13 +2,14 @@
 
 	<property name="env.WORKSPACE" location="."/>
 	<!-- Change this according to the computer running the script -->
-	<!-- <property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk-x86_64.tar.gz"/>
-	-->
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-linux-gtk-x86_64.tar.gz"/>
+	<!--
 	<property name="eclipse.native.version.name" value="win32"/>
 	<property name="eclipse.native.archive.extension" value="zip"/>
 	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-win32.zip"/>
+	-->
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/> -->
