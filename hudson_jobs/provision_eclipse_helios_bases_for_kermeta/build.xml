@@ -59,7 +59,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-win32.zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-win32.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
