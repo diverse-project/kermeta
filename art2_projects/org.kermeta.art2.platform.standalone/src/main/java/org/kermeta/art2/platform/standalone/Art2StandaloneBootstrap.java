@@ -57,6 +57,8 @@ public class Art2StandaloneBootstrap {
             
 
 
+        } else {
+            System.out.println("Art2 BootStrap not performed => bootstrap properties not found ! ");
         }
 
 
