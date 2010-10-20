@@ -197,11 +197,11 @@
 			<fileset dir="${env.WORKSPACE}/build/dropins"></fileset>
 		</copy>
 
-		<delete file="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip" failonerror="false"/>
+		<delete file="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.${archive.extension}" failonerror="false"/>
 		<antcall target="compress.${archive.extension}"/>		
 	</target>
 	<target name="compress.tar.gz">
-			<tar dest="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" compression="gzip">
+			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" compression="gzip">
 				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
 				</fileset>
 			</tar>
