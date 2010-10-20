@@ -24,12 +24,12 @@
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
 	<target name="all" depends="">
-	    <antcall target="provision_linux_x86_base_for_kermeta"/>
 		<antcall target="provision_linux_x86_64_base_for_kermeta"/>
+	   <!-- <antcall target="provision_linux_x86_base_for_kermeta"/>
 	    <antcall target="provision_win32_base_for_kermeta"/>
 	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
-	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/> 
+	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/> --> 
 	</target>
 
 
@@ -201,7 +201,9 @@
 		<antcall target="compress.${archive.extension}"/>		
 	</target>
 	<target name="compress.tar.gz">
-			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" compression="gzip">
+			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" 
+				compression="gzip"
+				longfile="gnu">
 				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
 				</fileset>
 			</tar>
