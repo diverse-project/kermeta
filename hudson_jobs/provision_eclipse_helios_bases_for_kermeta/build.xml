@@ -8,7 +8,7 @@
 	-->
 	<property name="eclipse.native.version.name" value="win32"/>
 	<property name="eclipse.native.archive.extension" value="zip"/>
-	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-win32.zip"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-win32.zip"/>
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/> -->
@@ -36,7 +36,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-linux-gtk-x86_64.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
@@ -47,7 +47,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-linux-gtk.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-linux-gtk.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
@@ -71,7 +71,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-win32-x86_64.zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-win32-x86_64.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
@@ -83,7 +83,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-macosx-cocoa-x86_64.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
@@ -94,7 +94,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-SDK-3.6-macosx-cocoa.tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-platform-SDK-3.6.1-macosx-cocoa.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
@@ -197,6 +197,15 @@
 		</copy>
 
 		<delete file="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip" failonerror="false"/>
+		<antcall target="compress.${archive.extension}"/>		
+	</target>
+	<target name="compress.tar.gz">
+			<tar dest="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" compression="gzip">
+				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
+				</fileset>
+			</tar>
+	</target>
+	<target name="compress.zip">
 		<zip destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip">
 			<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"></fileset>
 		</zip>
