@@ -12,7 +12,8 @@
 	<property name="env.WORKSPACE" location="C:/Temp/kermeta_hudson/workspace/studio_compile_studio"/>
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>	
 	<property name="studio.base.downloaded.zip" location="${env.WORKSPACE}/studiobase.tmp/StudioBase.zip"/>
-	<property name="studio.base.url" value="http://studio.gforge.inria.fr/bundle/latest_build/studioBase.zip"/>
+	<property name="studio.base.url" value="http://studio.gforge.inria.fr/bundle/latest_build/studioBase.zip"/>	
+	<property name="archive.extension" value="tar.gz"/>
 	
 	<path id="ant-extensions">
 	    <fileset dir="${basedir}/ant-extensions" includes="**/*.jar" />
@@ -50,9 +51,10 @@
 	    </echo>
 		<delete  dir="${studio.base.dir}"/>
 		<mkdir  dir="${studio.base.dir}"/>
-		<unzip dest="${studio.base.dir}"
+		<!-- <unzip dest="${studio.base.dir}"
 			src="${studio.base.downloaded.zip}">
-		</unzip>    
+		</unzip>-->
+		<antcall target="expand.${archive.extension}"/> 
 	    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
 	        <classpath refid="ant-extensions" />
 	    </taskdef>
@@ -60,7 +62,19 @@
 		<LastModifiedMillis file="${studio.base.downloaded.zip}" property="millis" />
 		<touch file="${studio.base.dir}/studiobase.zip.tstamp" millis="${millis}" />
     </target>
-	
+	<target name="expand.tar.gz">
+		<gunzip dest="${studio.base.download.folder}" src="${studio.base.downloaded.zip}"/>
+		<untar dest="${studio.base.dir}" >
+			<fileset dir="${studio.base.download.folder}">
+        			<include name="*.tar"/>
+			</fileset>
+		</untar>
+	</target>
+	<target name="expand.zip">
+		<unzip dest="${studio.base.dir}"
+			src="${studio.base.downloaded.zip}">
+		</unzip>
+	</target>
 	<target name="clean.base" >
 		<delete  dir="${studio.base.dir}"/>
     </target>

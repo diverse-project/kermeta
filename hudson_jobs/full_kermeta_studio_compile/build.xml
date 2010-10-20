@@ -13,7 +13,8 @@
 	<property name="eclipse.build.scripts.dir" location="./eclipse_build_scripts"/>
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
-	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.tar.gz"/>
+	<property name="studio.archive.extension" value="tar.gz"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	
 	<target name="all" depends="get_studio_base, compile">
@@ -23,6 +24,7 @@
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
   			<property name="studio.base.url" value="${studio.base.url}"/>
+  			<property name="archive.extension" value="${studio.archive.extension}"/>
 			<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
 		</ant>
 	</target>
