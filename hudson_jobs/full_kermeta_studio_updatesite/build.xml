@@ -12,9 +12,9 @@
 	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
-	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.tar.gz"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
-	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.1.0.v20100507.jar"/>
 	<property name="deploy.server" value="web1.irisa.fr"/>
 	<property name="deploy.user" value="web-triskell"/>
 	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/update"/>
@@ -101,6 +101,7 @@
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
   			<property name="studio.base.url" value="${studio.base.url}"/>
+  			<property name="archive.extension" value="${studio.archive.extension}"/>
 			<property name="studio.base.dir" location="${studio.base.dir}"/>
 		</ant>
 	</target>

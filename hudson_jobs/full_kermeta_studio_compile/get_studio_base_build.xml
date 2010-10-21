@@ -51,10 +51,7 @@
 	    #####################################################
 	    </echo>
 		<delete  dir="${studio.base.dir}"/>
-		<mkdir  dir="${studio.base.dir}"/>
-		<!-- <unzip dest="${studio.base.dir}"
-			src="${studio.base.downloaded.zip}">
-		</unzip>-->
+		<mkdir  dir="${studio.base.dir}"/>		
 		<antcall target="expand.${archive.extension}"/> 
 	    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
 	        <classpath refid="ant-extensions" />

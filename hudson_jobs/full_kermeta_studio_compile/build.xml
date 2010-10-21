@@ -25,7 +25,7 @@
 		<ant antfile="get_studio_base_build.xml">
   			<property name="studio.base.url" value="${studio.base.url}"/>
   			<property name="archive.extension" value="${studio.archive.extension}"/>
-			<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+			<property name="studio.base.dir" location="${studio.base.dir}"/>
 		</ant>
 	</target>
 
