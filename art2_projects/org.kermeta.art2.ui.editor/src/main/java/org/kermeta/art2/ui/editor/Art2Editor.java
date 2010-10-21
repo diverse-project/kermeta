@@ -8,6 +8,7 @@ package org.kermeta.art2.ui.editor;
 import javax.swing.JPanel;
 import org.kermeta.art2.framework.Art2XmiHelper;
 import org.kermeta.art2.ui.editor.command.LoadModelCommand;
+import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
 import org.kermeta.art2.ui.editor.panel.Art2EditorPanel;
 
 /**
@@ -34,6 +35,10 @@ public class Art2Editor {
 
     public void saveModel(String url){
         Art2XmiHelper.save(url, panel.getKernel().getModelHandler().getActualModel());
+    }
+
+    public void setDefaultSaveLocation(String url){
+        SaveActuelModelCommand.setDefaultLocation(url);
     }
 
 }

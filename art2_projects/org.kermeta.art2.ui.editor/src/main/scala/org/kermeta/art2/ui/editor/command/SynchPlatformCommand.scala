@@ -30,19 +30,26 @@ class SynchPlatformCommand extends Command {
   def execute(p :Object) {
 
     //USE Bonjour search to discover ART2 Node IP & Port
+
+
     var netLink = IPCache.getNode(destNodeName)
+
+    /* TO REMOVE */
+   // var de = Tuple2("","")
+   //var netLink = Some(Set(de))
+
     netLink match {
       case Some(l) if(l.size > 0)=> {
           var i = 0
           var listIP = l.toList
           var client = new TcpClientRemoteActor(null,1000) {
             def getRemoteAddr : InetSocketAddress = {
-
-
-
+              
               var addr = new InetSocketAddress(listIP.get(i)._1,listIP.get(i)._2)
               i = i +1
               if(i == l.size){ i = 0 }
+              
+             //var addr = new InetSocketAddress("192.168.1.103",8000)
               addr
             }
           }

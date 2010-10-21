@@ -18,15 +18,24 @@ public class SaveActuelModelCommand implements Command {
     public void setKernel(Art2UIKernel kernel) {
         this.kernel = kernel;
     }
-
-    private Art2UIKernel kernel ;
+    private Art2UIKernel kernel;
     private JFileChooser filechooser = new JFileChooser();
+    private static String defaultLocation = null;
+
+    public static void setDefaultLocation(String uri) {
+        defaultLocation = uri;
+    }
 
     @Override
     public void execute(Object p) {
-        filechooser.showSaveDialog(kernel.getModelPanel());
-        Art2XmiHelper.save(URI.createFileURI(filechooser.getSelectedFile().getPath()).toString(), 
-        		kernel.getModelHandler().getActualModel());
-    }
+        String location = "";
+        if (defaultLocation == null) {
+            filechooser.showSaveDialog(kernel.getModelPanel());
+            location = filechooser.getSelectedFile().getPath();
+        } else {
+            location = defaultLocation;
+        }
 
+        Art2XmiHelper.save(URI.createFileURI(location).toString(),kernel.getModelHandler().getActualModel());
+    }
 }

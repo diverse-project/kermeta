@@ -32,7 +32,7 @@ object IPCache {
       if( (!it.isLoopback) && it.isUp){
         it.getInetAddresses.foreach{addr =>
           var jmdnsIT = JmDNS.create(addr,"temp"+it.getName)
-          var infos = jmdnsIT.list(Constants.ART2_SERVICE, 1000)
+          var infos = jmdnsIT.list(Constants.ART2_SERVICE,2000)
           infos.foreach{info =>
             var nodeName = info.getPropertyString(Constants.ART2_NODE_NAME)
             if(nodeName == destNodeName){
