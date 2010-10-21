@@ -23,8 +23,6 @@ public class Art2NbDataObject extends MultiDataObject {
 
 
         
-
-
         //cookies.add((Node.Cookie) DataEditorSupport.create(this, getPrimaryEntry(), cookies));
         cookies.add((Node.Cookie) new Art2OpenSupport(getPrimaryEntry()));
 

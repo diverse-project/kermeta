@@ -7,12 +7,9 @@ package org.kermeta.art2.editor.nb;
 
 import org.openide.cookies.CloseCookie;
 import org.openide.cookies.OpenCookie;
-import org.openide.filesystems.FileObject;
-import org.openide.filesystems.FileStateInvalidException;
 import org.openide.loaders.OpenSupport;
-import org.openide.util.Exceptions;
 import org.openide.windows.CloneableTopComponent;
-import org.ops4j.pax.url.mvn.Handler;
+//import org.ops4j.pax.url.mvn.Handler;
 
 /**
  *
@@ -28,14 +25,19 @@ public class Art2OpenSupport extends OpenSupport implements OpenCookie,CloseCook
     protected CloneableTopComponent createCloneableTopComponent() {
 
 
-        Handler handler =new Handler();
+        //Handler handler =new Handler();
 
+        System.out.println(this.entry.getFile());
 
 
 
         Art2NbDataObject dobj = (Art2NbDataObject) entry.getDataObject();
-        Art2NbTopComponent tc = new Art2NbTopComponent();
+        Art2NbTopComponent tc = Art2NbTopComponent.getDefault();
         tc.setDisplayName(dobj.getName());
+
+        tc.getEditor().loadModel(this.entry.getFile().getPath());
+        tc.getEditor().setDefaultSaveLocation(this.entry.getFile().getPath());
+
         return tc;
 
     }

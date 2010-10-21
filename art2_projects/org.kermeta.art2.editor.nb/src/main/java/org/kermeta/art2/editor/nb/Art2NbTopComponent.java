@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import org.kermeta.art2.ui.editor.Art2Editor;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import org.openide.util.NbBundle;
@@ -25,6 +26,16 @@ import org.openide.windows.WindowManager;
  * @author ffouquet
  */
 public class Art2NbTopComponent extends CloneableTopComponent {
+
+    public Art2Editor getEditor() {
+        return editor;
+    }
+
+    public void setEditor(Art2Editor editor) {
+        this.editor = editor;
+    }
+
+    Art2Editor editor = new Art2Editor();
 
     public Art2NbTopComponent() {
 
@@ -41,7 +52,7 @@ public class Art2NbTopComponent extends CloneableTopComponent {
 // Get all resource paths (classpath paths) of the current classloader.
             Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getSystemResources("");
 
-            System.out.println("Size  "+resources.hasMoreElements());
+            System.out.println("Size  " + resources.hasMoreElements());
 // Show them all.
             while (resources.hasMoreElements()) {
                 System.out.println(resources.nextElement());
@@ -53,8 +64,10 @@ public class Art2NbTopComponent extends CloneableTopComponent {
 
 
         setLayout(new BorderLayout());
-        org.kermeta.art2.ui.editor.panel.Art2EditorPanel panel = new org.kermeta.art2.ui.editor.panel.Art2EditorPanel();
-        add(panel, BorderLayout.CENTER);
+
+
+        //org.kermeta.art2.ui.editor.panel.Art2EditorPanel panel = new org.kermeta.art2.ui.editor.panel.Art2EditorPanel();
+        add(editor.getPanel(), BorderLayout.CENTER);
 
     }
     private static Art2NbTopComponent instance;
