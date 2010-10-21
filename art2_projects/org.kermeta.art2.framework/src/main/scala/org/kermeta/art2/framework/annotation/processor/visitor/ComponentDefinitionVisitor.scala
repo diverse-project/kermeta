@@ -14,6 +14,7 @@ import com.sun.mirror.declaration.TypeDeclaration
 import com.sun.mirror.util.SimpleDeclarationVisitor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.DeployUnitProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.DictionaryProcessor
+import org.kermeta.art2.framework.annotation.processor.visitor.sub.LibraryProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.PortMappingProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.ProvidedPortProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.RequiredPortProcessor
@@ -28,6 +29,7 @@ extends SimpleDeclarationVisitor
    with DeployUnitProcessor
    with DictionaryProcessor
    with PortMappingProcessor
+   with LibraryProcessor
 {
 
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
@@ -50,6 +52,7 @@ extends SimpleDeclarationVisitor
       var annotFragment = it.getDeclaration.getAnnotation(classOf[org.kermeta.art2.annotation.ComponentFragment])
       it.getDeclaration.accept(this)
     }
+    processLibrary(componentType,typeDecl)
     processDictionary(componentType,typeDecl)
     processDeployUnit(componentType,typeDecl,env)
     processThirdParty(componentType,typeDecl)

@@ -63,18 +63,6 @@ class Art2AnnotationProcessor(env : AnnotationProcessorEnvironment) extends Anno
     channelType.setFactoryBean(typeDecl.getQualifiedName+"Factory")
     root.getTypeDefinitions.add(channelType)
 
-    /* CREATE LIBRARY IF NEEDED */
-    var libName = channelTypeAnnotation.libName
-    root.getLibraries.find({lib=>lib.getName== libName}) match {
-      case Some(lib)=> lib.getSubTypes.add(channelType)
-      case None => {
-          var newlib = Art2Factory.eINSTANCE.createTypeLibrary
-          newlib.setName(libName)
-          newlib.getSubTypes.add(channelType)
-          root.getLibraries.add(newlib)
-        }
-    }
-
     //RUN VISITOR
     typeDecl.accept(ChannelTypeFragmentVisitor(channelType,env))
   }
@@ -88,26 +76,10 @@ class Art2AnnotationProcessor(env : AnnotationProcessorEnvironment) extends Anno
     componentType.setName(ctname)
     componentType.setBean(typeDecl.getQualifiedName)
     componentType.setFactoryBean(typeDecl.getQualifiedName+"Factory")
-    root.getTypeDefinitions.add(componentType)
-
-    /* CREATE FACTORY IF NEEDED */
-    var ctLibName = componentTypeAnnotation.libName
-    root.getLibraries.find({lib=>lib.getName.equals(ctLibName)}) match {
-      case Some(lib)=> lib.getSubTypes.add(componentType)
-      case None => {
-          var newlib = Art2Factory.eINSTANCE.createTypeLibrary
-          newlib.setName(ctLibName)
-          newlib.getSubTypes.add(componentType)
-          root.getLibraries.add(newlib)
-        }
-    }
-
-    //RUN VISITOR
-
-    typeDecl.accept(ComponentDefinitionVisitor(componentType,env))
-
     
-
+    root.getTypeDefinitions.add(componentType)
+    //RUN VISITOR
+    typeDecl.accept(ComponentDefinitionVisitor(componentType,env))
 
   }
 
