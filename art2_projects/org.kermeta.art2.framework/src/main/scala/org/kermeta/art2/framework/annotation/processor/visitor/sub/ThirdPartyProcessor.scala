@@ -19,10 +19,20 @@ trait ThirdPartyProcessor {
 
   def processThirdParty(componentType : TypeDefinition,classdef : TypeDeclaration)={
     var root : ContainerRoot = componentType.eContainer.asInstanceOf[ContainerRoot]
-    /* CHECK THIRDPARTIES */
-    if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]) != null){
-      classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties]).value.foreach{tp=>
 
+     var thirdPartyAnnotations : List[org.kermeta.art2.annotation.ThirdParty] = Nil
+
+    var annotationThirdParty = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParty])
+    if(annotationThirdParty != null){ thirdPartyAnnotations = thirdPartyAnnotations ++ List(annotationThirdParty) }
+
+    var annotationThirdParties = classdef.getAnnotation(classOf[org.kermeta.art2.annotation.ThirdParties])
+    if(annotationThirdParties != null){ thirdPartyAnnotations = thirdPartyAnnotations ++ annotationThirdParties.value.toList }
+
+
+
+    /* CHECK THIRDPARTIES */
+    thirdPartyAnnotations.foreach{tp=>
+      
         root.getDeployUnits.find({etp => etp.getName == tp.name}) match {
           case Some(e) => {
               componentType.getRequiredLibs.add(e)
@@ -35,7 +45,6 @@ trait ThirdPartyProcessor {
               componentType.getRequiredLibs.add(newThirdParty)
             }
         }
-      }
     }
   }
 }
