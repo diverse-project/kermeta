@@ -156,16 +156,16 @@
 		<antcall target="compress.${archive.extension}"/>		
 	</target>
 	<target name="compress.tar.gz">
-			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" 
+			<tar destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.tar.gz" 
 				compression="gzip"
 				longfile="gnu">
-				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
+				<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}">
 				</fileset>
 			</tar>
 	</target>
 	<target name="compress.zip">
-		<zip destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip">
-			<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"></fileset>
+		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"></fileset>
 		</zip>
 	</target>
 	<target name="provision_feature" >
