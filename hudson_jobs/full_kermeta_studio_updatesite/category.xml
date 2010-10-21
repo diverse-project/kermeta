@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/fr.irisa.triskell.kermeta_1.4.1.jar" id="fr.irisa.triskell.kermeta" version="1.4.1">
+   <feature url="features/fr.irisa.triskell.kermeta_1.4.2.jar" id="fr.irisa.triskell.kermeta" version="1.4.2">
       <category name="Kermeta IDE"/>
    </feature>
    <feature url="features/fr.irisa.triskell.kermeta.graphical_1.4.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.4.0">

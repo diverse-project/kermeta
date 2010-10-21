@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="1.4.1"
+      version="1.4.2"
       provider-name="IRISA/INRIA"
       plugin="fr.irisa.triskell.kermeta"
       image="images/kmt_32.gif">
