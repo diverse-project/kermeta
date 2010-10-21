@@ -12,11 +12,14 @@
 
 package fr.irisa.triskell.kermeta.loader.kmt.kmt2km;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -114,6 +117,13 @@ public class AbstractBuildingState implements IBuildingState {
 	public void eNotify(Notification arg0) {}
 
 	public void eSetDeliver(boolean arg0) {}
+
+	
+	public Object eInvoke(EOperation operation, EList<?> arguments)
+			throws InvocationTargetException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 

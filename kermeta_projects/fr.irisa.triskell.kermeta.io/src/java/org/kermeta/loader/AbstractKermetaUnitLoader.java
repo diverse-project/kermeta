@@ -1,5 +1,3 @@
-
-
 /*$Id: AbstractKermetaUnitLoader.java,v 1.14 2008-04-28 11:50:17 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
@@ -12,8 +10,8 @@
 
 package org.kermeta.loader;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -21,21 +19,17 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
-import org.kermeta.model.KermetaModelHelper;
 
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
 public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
@@ -47,71 +41,7 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 	protected AbstractKermetaUnitLoader(Map<String, Object> options, IProgressMonitor monitor) {
 		this.monitor = monitor;
 		this.options = options;
-	}
-	
-/*	public void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
-		
-		AbstractBuildingState state = (AbstractBuildingState) kermetaUnit.getBuildingState();
-		
-		if ( state.aspectsDone ) return;
-		state.loading = true;
-		
-		constructAspectsLists(kermetaUnit);
-		state.aspectsDone = true;
-*/		
-		/*
-		 * 
-		 * Loading the structure for the imported units.
-		 * 
-		 */
-/*		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
-		while ( iterator.hasNext() ) {
-			KermetaUnit currentUnit = iterator.next();
-			
-			AbstractBuildingState currentState = (AbstractBuildingState) currentUnit.getBuildingState();
-			if ( ! currentState.loading )
-				constructAspectsListsForAll( currentUnit );
-		}
-	
-		state.loading = false;
-		
-	}
-	
-	public void constructAspectsLists(KermetaUnit kermetaUnit) {	
-		for ( TypeDefinition t : KermetaUnitHelper.getInternalTypeDefinitions(kermetaUnit) ) {
-			if ( t.isIsAspect() ) {
-				String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(t);
-				for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) ) {
-					for ( TypeDefinition tdef : KermetaUnitHelper.getInternalTypeDefinitions(importedUnit) ) {
-						if ( ! tdef.isIsAspect() ) {
-							String s = KermetaModelHelper.NamedElement.qualifiedName(tdef);
-							if ( qualifiedName.equals(s) ) {
-								EList<TypeDefinition> l = importedUnit.getAspects().get(tdef);
-								if ( l == null ) {
-									l = new UniqueEList<TypeDefinition>();
-									importedUnit.getAspects().put(tdef, l);
-								}
-								l.add( t );
-								l = kermetaUnit.getBaseAspects().get(t);
-								if ( l == null ) {
-									l = new UniqueEList<TypeDefinition>();
-									kermetaUnit.getBaseAspects().put(t, l);
-								}
-								l.add( tdef );
-							}
-						}
-					}
-				}
-			}
-			
-	*/		
-		/*	EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
-			if ( ! l.isEmpty() )
-				kermetaUnit.getAspects().put( t, l);*/
-/*		}
-	}
-	
-	*/
+	}	
 	
 	protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
 	
@@ -231,6 +161,13 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 	public void eNotify(Notification arg0) {}
 
 	public void eSetDeliver(boolean arg0) {}
+
+	
+	public Object eInvoke(EOperation operation, EList<?> arguments)
+			throws InvocationTargetException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 
