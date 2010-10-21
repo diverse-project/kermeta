@@ -32,7 +32,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_linux_x86_64_base.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
@@ -43,7 +43,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_base.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_linux_x86_base.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
@@ -55,7 +55,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_base.zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_helios_win32_base.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
@@ -67,7 +67,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_x86_64_base.zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_helios_win32_x86_64_base.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
@@ -79,7 +79,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_macosx-cocoa_x86_64_base.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
@@ -90,7 +90,7 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_macosx-cocoa_base.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_macosx-cocoa_base.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
