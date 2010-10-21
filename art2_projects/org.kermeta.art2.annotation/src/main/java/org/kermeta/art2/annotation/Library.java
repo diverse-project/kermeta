@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.kermeta.art2.annotation;
 
 import java.lang.annotation.ElementType;
@@ -16,6 +15,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE})
-public @interface ChannelTypeFragment {
-    java.lang.String name() default "empty";
+public @interface Library {
+    java.lang.String name();
 }

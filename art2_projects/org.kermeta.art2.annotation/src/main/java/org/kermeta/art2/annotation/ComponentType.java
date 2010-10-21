@@ -18,5 +18,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface ComponentType {
     java.lang.String name() default "empty";
-    java.lang.String libName() default "default";
 }
