@@ -19,7 +19,7 @@ trait ProvidedPortProcessor {
     if(classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]) != null){
       classdef.getAnnotation(classOf[org.kermeta.art2.annotation.Provides]).value.foreach{req=>
 
-        var portAll = componentType.getRequired ++ componentType.getProvided
+        var portAll : List[org.kermeta.art2.PortTypeRef] = componentType.getRequired.toList ++ componentType.getProvided.toList
         portAll.find(alR=> alR.getName == req.name) match {
           case None => {
               var ptreqREF = Art2Factory.eINSTANCE.createPortTypeRef
