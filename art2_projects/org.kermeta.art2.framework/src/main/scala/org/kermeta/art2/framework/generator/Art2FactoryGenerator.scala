@@ -40,10 +40,10 @@ object Art2FactoryGenerator {
       wrapper.append("def createComponentActor() : Art2Component = {\n")
       wrapper.append("new Art2Component(create"+ct.getName+"()){")
 
-      if(ct.getStartMethod == null || ct.getStopMethod == null){
+      if(ct.getStartMethod == null){
         logger.error("Start method is mandatory for component name => "+ct.getName);System.exit(1)
       }
-      if(ct.getStartMethod == null || ct.getStopMethod == null){
+      if( ct.getStopMethod == null){
         logger.error("Stop method is mandatory for component name => "+ct.getName);System.exit(1)
       }
 
