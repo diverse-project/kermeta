@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  *
  * @author ffouquet
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE})
 public @interface ComponentType {
     java.lang.String name() default "empty";

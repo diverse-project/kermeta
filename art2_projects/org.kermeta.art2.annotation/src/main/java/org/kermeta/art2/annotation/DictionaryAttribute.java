@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @author ffouquet
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
 public @interface DictionaryAttribute {
 
     boolean optional() default false;

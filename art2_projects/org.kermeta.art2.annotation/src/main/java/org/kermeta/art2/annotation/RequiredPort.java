@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @author ffouquet
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
 public @interface RequiredPort {
 
     PortType type() default PortType.SERVICE;

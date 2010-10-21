@@ -5,7 +5,6 @@
 package org.kermeta.art2.annotation;
 
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -14,7 +13,7 @@ import java.lang.annotation.Target;
  *
  * @author ffouquet
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE})
 public @interface ThirdParties {
 
