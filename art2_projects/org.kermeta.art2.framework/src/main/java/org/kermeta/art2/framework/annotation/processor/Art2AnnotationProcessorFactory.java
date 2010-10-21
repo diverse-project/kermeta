@@ -18,6 +18,7 @@ import org.kermeta.art2.annotation.ComponentFragment;
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.DictionaryAttribute;
 import org.kermeta.art2.annotation.DictionaryType;
+import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.Port;
 import org.kermeta.art2.annotation.Ports;
 import org.kermeta.art2.annotation.ProvidedPort;
@@ -59,6 +60,7 @@ public class Art2AnnotationProcessorFactory implements
         stype.add(DictionaryAttribute.class.getName());
         stype.add(DictionaryType.class.getName());
         stype.add(ComponentFragment.class.getName());
+        stype.add(Library.class.getName());
         return stype;
     }
 
