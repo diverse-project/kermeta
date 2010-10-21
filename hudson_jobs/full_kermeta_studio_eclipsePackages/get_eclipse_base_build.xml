@@ -4,6 +4,10 @@
     <description>
         Get an eclipse base from its official location
     </description>
+
+	<!-- initialize env with Hudson variable -->
+	<property environment="env"/>
+	
 	<!-- these first properties are supposed to be set when called by a user, these are only default sample values -->
 	<property name="eclipse.version.name" value="linux_x86_64"/>	
 	<property name="archive.extension" value="tar.gz"/>

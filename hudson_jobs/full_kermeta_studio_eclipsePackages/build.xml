@@ -7,15 +7,15 @@
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/> -->
 	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
-	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.1.0.v20100507.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
 	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
-	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
+	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.6/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 	<property name="splash.file" location="./branding/splash.bmp"/>
-	<property name="org.eclipse.platform.version" value="org.eclipse.platform_3.3.202.v201002111343"/>
+	<property name="org.eclipse.platform.version" value="org.eclipse.platform_3.6.1.v201009090800"/>
 	
 	
 	<target name="all" depends="">
@@ -31,8 +31,8 @@
 	<target name="provision_kermeta_linux_x86_64">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
-			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
@@ -42,8 +42,8 @@
 	<target name="provision_kermeta_linux_x86">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
-			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_base.zip"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_base.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
@@ -78,8 +78,8 @@
 	<target name="provision_kermeta_macosx-cocoa_x86_64">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
-			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.zip"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
@@ -89,8 +89,8 @@
 	<target name="provision_kermeta_macosx-cocoa">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
-			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_base.zip"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_macosx-cocoa_base.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
