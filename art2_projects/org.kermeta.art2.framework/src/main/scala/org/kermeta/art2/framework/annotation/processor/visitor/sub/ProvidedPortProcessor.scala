@@ -48,7 +48,7 @@ trait ProvidedPortProcessor {
               componentType.getProvided.add(ptreqREF)
             }
           case Some(e)=> {
-              println("Port name duplicated in Component Scope => "+req.name); System.exit(1)
+              println("Port name duplicated in "+componentType.getName+" Scope => "+req.name); System.exit(1)
             }
         }
 
