@@ -1,7 +1,14 @@
 <project name="build_eclipse_bases_for_kermeta" default="all">
 
 	<property name="env.WORKSPACE" location="."/>
+	<!-- Change this according to the computer running the script -->
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<property name="eclipse.native.archive.extension" value="tar.gz"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-linux-gtk-x86_64.tar.gz"/>	
+	<!-- <property name="eclipse.native.version.name" value="win32"/>
+	<property name="eclipse.native.archive.extension" value="zip"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip"/>
+	-->
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
@@ -10,7 +17,7 @@
 	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.1.0.v20100507.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
-	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/helios"/>
 	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.6/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
@@ -55,11 +62,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_helios_win32_base.zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_win32_base.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -67,11 +74,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_helios_win32_x86_64_base.zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_win32_x86_64_base.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	
@@ -83,7 +90,7 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_kermeta_macosx-cocoa">
@@ -94,11 +101,18 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="PlatformProfile"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 
-	<target name="provision_eclipse_version">
+	<target name="get_native_eclipse">
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.native.version.name}"/>
+  			<property name="archive.extension" value="${eclipse.native.archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.native.base.url}"/>
+		</ant>
+	</target>
+	<target name="provision_eclipse_version" depends="get_native_eclipse">
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
@@ -120,7 +134,7 @@
 			<param name="feature.repository" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_updatesite/lastSuccessfulBuild/artifact/updatesite/"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
   		</antcall>
-		
+	
 		<!-- get plugin from Cyril's Emios MDE Utils  -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.emios.mde.utils4emf.feature.feature.group, org.emios.mde.utils4kermeta.feature.feature.group"/>
@@ -138,42 +152,56 @@
 			overwrite="true"/>
 
 
-		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip" failonerror="false"/>
-		<zip destfile="${env.WORKSPACE}/build/kermeta_svn_${eclipse.version.name}.zip">
-			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"></fileset>
+		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.${archive.extension}" failonerror="false"/>
+		<antcall target="compress.${archive.extension}"/>		
+	</target>
+	<target name="compress.tar.gz">
+			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" 
+				compression="gzip"
+				longfile="gnu">
+				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
+				</fileset>
+			</tar>
+	</target>
+	<target name="compress.zip">
+		<zip destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"></fileset>
 		</zip>
 	</target>
-	<target name="provision_feature">
+	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
 		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}; target.profile=${target.profile}</echo>
-		<java jar="${target.eclipse.dir}/eclipse/plugins/${equinox.jar}"
+		<java jar="${env.WORKSPACE}/eclipse_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
 		           maxmemory="128m"
 		           >
 			<arg value="-application"/>
-			<arg value="org.eclipse.equinox.p2.director"/>
+				<arg value="org.eclipse.equinox.p2.director"/>
 			<arg value="-metadataRepository"/>
-			<arg value="${feature.repository}"/>
+				<arg value="${feature.repository}"/>
 			<arg value="-artifactRepository"/>
-			<arg value="${feature.repository}"/>
+				<arg value="${feature.repository}"/>
 			<arg value="-installIU"/>
-			<arg value="${feature.name}"/>
+				<arg value="${feature.name}"/>
 			<arg value="-destination"/>
-			<arg value="${target.eclipse.dir}/eclipse"/>
+				<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-bundlepool"/>
-			<arg value="${target.eclipse.dir}/eclipse"/>
+				<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-profileProperties"/>
-			<arg value="org.eclipse.update.install.features=true"/>
+				<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
-			<arg value="${target.profile}"/> 
+				<arg value="${target.profile}"/> 
 			<arg value="-p2.os"/> 
-			<arg value="${target.os}"/> 
+				<arg value="${target.os}"/> 
 			<arg value="-p2.ws"/> 
-			<arg value="${target.ws}"/> 
+				<arg value="${target.ws}"/> 
 			<arg value="-p2.arch"/> 
-			<arg value="${target.arch}"/>   
- 			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
+				<arg value="${target.arch}"/>
+			<arg value="-shared"/>
+				<arg value="${target.eclipse.dir}/eclipse/p2"/>
+			<jvmarg value="-Declipse.p2.MD5Check=false"/>
+ 			<!-- <jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/> -->
 		</java>	
 	</target>
 	
