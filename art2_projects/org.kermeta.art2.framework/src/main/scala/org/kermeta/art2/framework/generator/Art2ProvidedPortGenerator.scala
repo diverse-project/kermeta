@@ -48,7 +48,11 @@ object Art2ProvidedPortGenerator {
                 wrapper.append(mapping.getBeanMethodName+"(msg)\n")
                 wrapper.append("}\n")
               }
-            case None => println("Error method mapping not found => process");logger.error("Error method mapping not found => process");System.exit(1)
+            case None => {
+                println("Art2ProvidedPortGenerator::No mapping found for method '"+Constants.ART2_MESSAGEPORT_DEFAULTMETHOD+"' of MessagePort '" + ref.getName + "' in component '" + ct.getName + "'")
+                logger.error("No mapping found for method '"+Constants.ART2_MESSAGEPORT_DEFAULTMETHOD+"' of MessagePort '" + ref.getName + "' in component '" + ct.getName + "'")
+                System.exit(1)
+              }
           }
         }
 
@@ -75,7 +79,7 @@ object Art2ProvidedPortGenerator {
             wrapper.append("}\n")
           }
           /* CREATE ACTOR LOOP */
-           wrapper.append("override def internal_process(msg : Any)=msg match {\n")
+          wrapper.append("override def internal_process(msg : Any)=msg match {\n")
           wrapper.append("case opcall : org.kermeta.art2.framework.MethodCallMessage => reply(opcall.getMethodName match {\n")
           sPT.getOperations.foreach{op=>
             /* FOUND METHOD MAPPING */
@@ -89,7 +93,11 @@ object Art2ProvidedPortGenerator {
                   wrapper.append(")\n")
 
                 }
-              case None => println("Error method mapping not found => process");logger.error("Error method mapping not found => "+op.getName);System.exit(1)
+              case None => {
+                  println("No mapping found for method '"+op.getName+"' of ServicePort '" + ref.getName + "' in component '" + ct.getName + "'")
+                  logger.error("No mapping found for method '"+op.getName+"' of ServicePort '" + ref.getName + "' in component '" + ct.getName + "'")
+                  System.exit(1)
+                }
             }
           }
           wrapper.append("case _ @ o => println(\"uncatch message , method not found in service declaration : \"+o);null \n")
