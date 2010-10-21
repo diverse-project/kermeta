@@ -26,7 +26,7 @@
                         <Import-Package>!org.junit.*,!org.kermeta.art2.framework.bus.jmdns.*,!junit.*,!org.easymock.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
                         <Private-Package>org.kermeta.art2.framework.bus.jmdns.*,javax.jmdns.*</Private-Package>
                         <Dynamic-ImportPackage>*</Dynamic-ImportPackage>
-                        <Export-Package></Export-Package>
+                        <Export-Package>javax.jmdns.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
