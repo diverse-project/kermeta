@@ -6,7 +6,6 @@
 package org.kermeta.art2.framework.annotation.processor.visitor.sub
 
 import com.sun.mirror.apt.AnnotationProcessorEnvironment
-import com.sun.mirror.declaration.ClassDeclaration
 import com.sun.mirror.declaration.TypeDeclaration
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ContainerRoot
@@ -35,5 +34,7 @@ trait DeployUnitProcessor {
     }
     typeDef.setDeployUnit(ctdeployunit)
   }
+
+
 
 }

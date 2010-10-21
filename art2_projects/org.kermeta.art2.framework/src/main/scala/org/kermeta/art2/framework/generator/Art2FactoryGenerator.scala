@@ -41,7 +41,7 @@ object Art2FactoryGenerator {
       wrapper.append("new Art2Component(create"+ct.getName+"()){")
 
       if(ct.getStartMethod == null){
-        logger.error("Start method is mandatory for component name => "+ct.getName);System.exit(1)
+        error("Start method is mandatory for component name => "+ct.getName);System.exit(1)
       }
       if( ct.getStopMethod == null){
         logger.error("Stop method is mandatory for component name => "+ct.getName);System.exit(1)
