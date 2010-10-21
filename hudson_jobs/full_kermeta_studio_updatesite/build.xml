@@ -13,7 +13,7 @@
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
 	<property name="studio.archive.extension" value="tar.gz"/>
-	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_linux_x86_64_base.${studio.archive.extension}"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_linux_x86_64_base.${studio.archive.extension}"/>
 
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.1.0.v20100507.jar"/>
