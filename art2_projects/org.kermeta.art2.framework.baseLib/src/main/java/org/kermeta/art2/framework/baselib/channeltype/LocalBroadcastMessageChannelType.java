@@ -6,6 +6,7 @@
 package org.kermeta.art2.framework.baselib.channeltype;
 
 import org.kermeta.art2.annotation.ChannelTypeFragment;
+import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.framework.AbstractChannelFragment;
 import org.kermeta.art2.framework.Art2Port;
 import org.kermeta.art2.framework.message.Art2Message;
@@ -16,7 +17,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author ffouquet
  */
-@ChannelTypeFragment(libName="Art2BaseChannelType")
+@Library(name ="art2baselib")
+@ChannelTypeFragment
 public class LocalBroadcastMessageChannelType extends AbstractChannelFragment {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
