@@ -146,4 +146,21 @@ public class RoleView {
 		initNamePosition(this.name, true);
 		initNamePosition(this.card, false);
 	}
+
+
+
+	public Rectangle2D getBorders() {
+		Rectangle2D border = null;
+		
+		if(card!=null)
+			border = card.getBorders();
+		
+		if(name!=null)
+			if(border==null)
+				border = name.getBorders();
+			else
+				border = border.createUnion(name.getBorders());
+		
+		return border;
+	}
 }

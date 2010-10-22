@@ -47,7 +47,22 @@ public class RelationClassView extends RelationView {
 	public Rectangle2D getBorders() {
 		Rectangle2D rec = super.getBorders();
 		
-		//TODO must compute roles borders.
+		rec = getBordersWithRole(rec, roleSrc);
+		rec = getBordersWithRole(rec, roleTar);
+		
+		return rec;
+	}
+	
+	
+	private static Rectangle2D getBordersWithRole(final Rectangle2D sourceBorder, final RoleView role) {
+		Rectangle2D rec = sourceBorder;
+		
+		if(role!=null) {
+			Rectangle2D roleBorder = role.getBorders();
+			
+			if(roleBorder!=null)
+				rec = rec.createUnion(roleBorder);
+		}
 		
 		return rec;
 	}
