@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoUIMetaInformation" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="logo" icon="icons/editor_icon.gif" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoEditor" name="EMFText logo Editor">
+			<contentTypeBinding contentTypeId="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo"/>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Logo Text Editor" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoSyntaxColoringPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoSyntaxColoringPreferencePage" category="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage">
+		</page>
+		<page name="Brackets" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoBracketPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoBracketPreferencePage" category="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoNewFileWizard" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoNewFileWizard" name="EMFText .logo file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoMarkerResolutionGenerator" markerType="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoAnnotationModelFactory" extensions="logo" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo" name=".logo File" base-type="org.eclipse.core.runtime.text" file-extensions="logo"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="logo" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.occurences" />
+		<type name="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.occurences.declaration" super="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.occurences" label="Occurrences (in .logo files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="logo.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="logo.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="logo.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="logo.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="logo.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="logo.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="logo.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="logo.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="logo.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.occurences.declaration" label="Declarations (in .logo files)" textPreferenceKey="logo.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="logo.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="logo.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="logo.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="logo.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="logo.declarationTextStyle" textStylePreferenceValue="NONE" />
+	</extension>
+	
+</plugin>
