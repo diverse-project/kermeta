@@ -7,6 +7,7 @@
 		<antcall target="org.kermeta.kmlogo.logoasm.editor.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.emftexteditor.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.model.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.samples.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.srcKermeta.zip"/>
@@ -30,6 +31,9 @@
 	</target>
 	<target name="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip" >		
 			<zip destfile="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip" basedir="../../org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.zip" basedir="../../org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui" includes="**" filesonly="false" whenempty="skip" update="false"/>
 	</target>
 	<target name="org.kermeta.kmlogo.logoasm.model.zip" >		
 			<zip destfile="org.kermeta.kmlogo.logoasm.model.zip" basedir="../../org.kermeta.kmlogo.logoasm.model" includes="**" filesonly="false" whenempty="skip" update="false"/>
