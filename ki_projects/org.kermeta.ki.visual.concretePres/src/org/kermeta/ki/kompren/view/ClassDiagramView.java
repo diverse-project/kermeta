@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.ki.diagram.view.impl.DiagramView;
+import org.kermeta.ki.diagram.view.impl.Hand;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 import org.kermeta.ki.kompren.view.RoleView.Cardinality;
@@ -23,6 +24,12 @@ public class ClassDiagramView extends DiagramView {
 		propertiesVisible = true;
 	}
 
+	
+	
+	@Override
+	protected Hand createHand() {
+		return new ClassDiagHand(this);
+	}
 	
 	
 	@Override
@@ -187,6 +194,4 @@ public class ClassDiagramView extends DiagramView {
 	public boolean isPropertiesVisible() {
 		return propertiesVisible;
 	}
-	
-	
 }

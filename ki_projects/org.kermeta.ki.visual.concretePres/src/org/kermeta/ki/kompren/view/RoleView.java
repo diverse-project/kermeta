@@ -1,15 +1,10 @@
 package org.kermeta.ki.kompren.view;
 
-import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.font.TextLayout;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import org.kermeta.ki.diagram.view.impl.Number;
-import org.kermeta.ki.diagram.view.impl.RelationView;
-import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 
 
 public class RoleView {
@@ -75,9 +70,43 @@ public class RoleView {
 		this.card 			= new FloatingText(card.getText(), this);
 		this.view 			= view;
 		this.source 		= source;
+		
+		reinitTextPositions();
+	}
+	
+	
+	
+	protected void initNamePosition(final FloatingText text, final boolean onLeft) {
+		if(text==null || text.text.length()==0)
+			return ;
+		
+		double tx;
+		double ty;
+		final double GAP = 5.;
+		Rectangle2D border = text.getBorders();
+		Rectangle2D entityBorder = source ? view.getEntitySrc().getBorders() : view.getEntityTar().getBorders();
+		Point2D ptRelation = source ? view.getPointSource() : view.getPointTarget();
+		
+		if(Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMinX(), 4)) {
+			tx = - GAP - border.getWidth();
+			ty = onLeft ? - GAP : GAP + border.getHeight();
+		}else if(Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMaxX(), 4)) {
+			tx = GAP;
+			ty = onLeft ? - GAP : GAP + border.getHeight();
+		}else if(Number.NUMBER.equals(ptRelation.getY(), entityBorder.getMinY(), 4)) {
+			tx = onLeft ? - GAP - border.getWidth() : GAP;
+			ty = - GAP;
+		}else {
+			tx = onLeft ? - GAP - border.getWidth() : GAP;
+			ty = - GAP - border.getHeight();
+		}
+		
+		text.tx = tx;
+		text.ty = ty;
 	}
 
 
+	
 	public String getName() {
 		return name.text;
 	}
@@ -99,83 +128,6 @@ public class RoleView {
 	
 	
 	
-	
-	public void update() {
-		if((!name.autoPosition && !card.autoPosition) || name==null || card==null || name.text.length()==0 || card.text.length()==0)
-			return ;
-		Point2D pointTar  = view.getPointTarget();
-		Point2D pointSrc  = view.getPointSource();
-		IEntityView entitySrc = view.getEntitySrc();
-		IEntityView entityTar = view.getEntityTar();
-		
-		if(!entitySrc.isVisible() || !entityTar.isVisible() || pointTar==null || pointSrc==null)
-			return ;
-		
-		Point2D.Double[] pts;
-		Point2D pt 	= source ? pointTar : pointSrc;
-		double gap 	= 10.;
-		Font font 	= entitySrc.getFont();
-		
-		if(entitySrc==entityTar) {
-			Rectangle2D rec1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds();
-			Rectangle2D rec2 = new TextLayout(card.text, font, ClassView.FONT_RENDER_CONT).getBounds();
-			
-			pts = new Point2D.Double[2];
-			pts[0] = new Point2D.Double(pt.getX() - rec1.getWidth() - gap, pt.getY() - gap/2.);
-			pts[1] = new Point2D.Double(pt.getX() - rec2.getWidth() - gap, pt.getY() + rec2.getHeight() + gap);
-		}
-		else {
-			Line2D line	= source ? view.getFirstSegment().getPerpendicularLine(pt) : view.getLastSegment().getPerpendicularLine(pt);
-			pts 		= RelationView.findPoints(line, pt.getX(), pt.getY(), 20.);
-			
-			if(pts!=null && pts.length>1) {
-				double xMin	= Math.min(pts[0].getX(), pts[1].getX());
-				double yMin	= Math.min(pts[0].getY(), pts[1].getY());
-				
-				if(Number.NUMBER.equals(pts[0].getX(), pts[1].getX(), 20))
-					if(xMin>(pointSrc.getX()-15) && xMin>(pointTar.getX()-15)) {
-						double w1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds().getWidth();
-						double w2 = new TextLayout(card.text, font, ClassView.FONT_RENDER_CONT).getBounds().getWidth();
-						double maxWidth = Math.max(w1, w2);
-						
-						pts[0].x -= maxWidth + gap;
-						pts[1].x -= maxWidth + gap;
-					}
-					else {
-						pts[0].x += gap;
-						pts[1].x += gap;
-					}
-				
-				if(Number.NUMBER.equals(pts[0].y, pts[1].y, 20)) {
-					pts[0].x -= gap;
-					pts[1].x -= gap;
-					
-					if(yMin<(pointSrc.getY()+15) && yMin<(pointTar.getY()+15)) {
-						double h1 = new TextLayout(name.text, font, ClassView.FONT_RENDER_CONT).getBounds().getHeight();
-						double h2 = new TextLayout(card.text, font, ClassView.FONT_RENDER_CONT).getBounds().getHeight();
-						double maxHeight = Math.max(h1, h2);
-						
-						pts[0].y += maxHeight + gap;
-						pts[1].y += maxHeight + gap;
-					}
-					else {
-						pts[0].y -= gap;
-						pts[1].y -= gap;
-					}
-				}
-			}
-		}//else
-		
-		if(name.autoPosition && pts!=null)
-			name.position.setLocation(pts[0].x, pts[0].y);
-		
-		if(card.autoPosition && pts!=null)
-			card.position.setLocation(pts[1].x, pts[1].y);
-	}
-	
-	
-	
-	
 	public void paint(final Graphics2D g) {
 		if(view.isVisible() && name!=null && card!=null && (name.text.length()>0 || card.text.length()>0)) {
 			g.setFont(view.getEntitySrc().getFont());
@@ -187,5 +139,11 @@ public class RoleView {
 
 	public boolean exists() {
 		return name.text!=null && name.text.length()>0;
+	}
+
+
+	public void reinitTextPositions() {
+		initNamePosition(this.name, true);
+		initNamePosition(this.card, false);
 	}
 }

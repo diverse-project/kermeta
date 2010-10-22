@@ -67,26 +67,21 @@ public class RelationClassView extends RelationView {
 	}
 	
 	
-	@Override
-	public void update() {
-		super.update();
-		
-		if(roleSrc!=null)
-			roleSrc.update();
-		
-		if(roleTar!=null)
-			roleTar.update();
-	}
-
-
-
 	public RoleView getRoleSrc() {
 		return roleSrc;
 	}
 
 
-
 	public RoleView getRoleTar() {
 		return roleTar;
+	}
+
+
+	public void reinitRoles() {
+		if(roleSrc!=null)
+			roleSrc.reinitTextPositions();
+		
+		if(roleTar!=null)
+			roleTar.reinitTextPositions();
 	}
 }

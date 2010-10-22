@@ -18,6 +18,8 @@ import org.kermeta.ki.diagram.view.impl.Anchor;
 import org.kermeta.ki.diagram.view.impl.EntityView;
 import org.kermeta.ki.diagram.view.impl.Number;
 import org.kermeta.ki.diagram.view.interfaces.IAnchor;
+import org.kermeta.ki.diagram.view.interfaces.IEntityView;
+import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
 /**
  * Defines an entity that corresponds to a class of a class diagram.
@@ -85,6 +87,15 @@ public class ClassView extends EntityView {
 		initAnchors();
 	}
 
+	
+	@Override
+	public void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd) {
+		super.anchorRelation(relation, opposite, atEnd);
+		
+		if(relation instanceof RelationClassView)
+			((RelationClassView)relation).reinitRoles();
+	}
+	
 	
 	/**
 	 * Adds an attribute to the class. 

@@ -24,11 +24,13 @@ public class Hand implements MouseListener, MouseMotionListener {
 	
 	protected IHandler draggedHandler;
 	
-//	protected FloatingText draggedLabel;
 	protected double startX;
+	
 	protected double startY;
 	
 	protected List<IRelationView> visibleHandlers;
+	
+	
 	
 	
 	public Hand(final IDiagramView diagram) {
@@ -46,7 +48,6 @@ public class Hand implements MouseListener, MouseMotionListener {
 	protected void reinit() {
 		draggedShape 	= null;
 		draggedHandler 	= null;
-//		draggedLabel 	= null;
 		startX 			= 0.;
 		startY 			= 0.;
 	}
@@ -105,10 +106,8 @@ public class Hand implements MouseListener, MouseMotionListener {
 	@Override
 	public void mousePressed(final MouseEvent e) {
 		if(handB.isSelected() && e.getButton()==MouseEvent.BUTTON1) {
-//			draggedLabel = null;
 			final int nbRel = diagram.getNbRelations();
 			int i;
-//			IRelationView link;
 			final double px = e.getX()/diagram.getZoom();
 			final double py = e.getY()/diagram.getZoom();
 			IRelationView rel;
@@ -120,34 +119,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 					draggedHandler = rel.getHandlersAt(px, py);
 			}
 			
-//			i = nbRel-1;
-//			while(draggedLabel==null && i>=0) {
-//				link = diagram.getRelationAt(i);
-//				
-//				if(link.isVisible()) {
-////					rel.update();
-//					if(link.endingSrc.name.contains(px, py)) {
-//						draggedLabel = rel.endingSrc.name;
-//						startX = px;
-//						startY = py;
-//					} else if(rel.endingSrc.card.contains(px, py)) {
-//						draggedLabel = rel.endingSrc.card;
-//						startX = px;
-//						startY = py;
-//					} else if(rel.endingTar.name.contains(px, py)) {
-//						draggedLabel = rel.endingTar.name;
-//						startX = px;
-//						startY = py;
-//					} else if(rel.endingTar.card.contains(px, py)) {
-//						draggedLabel = rel.endingTar.card;
-//						startX = px;
-//						startY = py;
-//					}
-//				}
-//				i--;
-//			}
-				
-			if(draggedHandler==null) {//draggedLabel==null) {
+			if(draggedHandler==null) {
 				IEntityView entity;
 				draggedShape = null;
 				i = diagram.getNbEntities()-1;
@@ -164,10 +136,6 @@ public class Hand implements MouseListener, MouseMotionListener {
 				diagram.setSelection(draggedShape);
 				diagram.refresh();
 			}
-//			else {
-//				draggedLabel.setManualPosition(px, py);
-//			}
-			
 			
 			if(draggedShape==null && draggedHandler==null)
 				for(i=0; i<nbRel && draggedHandler==null; i++) {
@@ -203,8 +171,6 @@ public class Hand implements MouseListener, MouseMotionListener {
 			draggedHandler.translate(gapX, gapY);
 			diagram.updatePreferredSize();
 			diagram.refresh();
-//		if(draggedLabel!=null) {
-//			draggedLabel.setPosition(draggedLabel.getPosition().x + gapX, draggedLabel.getPosition().y + gapY);
 		} else
 			if(draggedShape!=null) {
 				diagram.translateEntity(draggedShape, gapX, gapY);

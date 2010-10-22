@@ -20,15 +20,15 @@ public interface IDiagramView extends Scrollable, Zoomable {
 	
 	void translateEntity(final IEntityView entity, final double tx, final double ty);
 	
-	void setSelection(final IEntityView entity);
+	void setSelection(final ISelectable object);
 	
-	void setSelection(final List<IEntityView> newSelection);
+	void setSelection(final List<ISelectable> newSelection);
 	
 	void removeSelection();
 	
-	void removeFromSelection(final IEntityView entity);
+	void removeFromSelection(final ISelectable object);
 	
-	List<IEntityView> getSelection();
+	List<ISelectable> getSelection();
 	
 	void addToSelection(final List<IEntityView> newSelection);
 	

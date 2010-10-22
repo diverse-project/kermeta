@@ -6,17 +6,17 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-import org.kermeta.ki.diagram.view.interfaces.IEntityView;
+import org.kermeta.ki.diagram.view.interfaces.ISelectable;
 
 public class SelectionBorder extends Rectangle2D.Double {
 	private static final long serialVersionUID = 1L;
 	
 	protected static final BasicStroke STROKE = new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, new float[] { 5f, 5f }, 0);
 
-	protected List<IEntityView> selection;
+	protected List<ISelectable> selection;
 	
 	
-	public SelectionBorder(final List<IEntityView> selection) {
+	public SelectionBorder(final List<ISelectable> selection) {
 		super();
 		
 		if(selection==null)
@@ -50,8 +50,8 @@ public class SelectionBorder extends Rectangle2D.Double {
 		double maxy = java.lang.Double.MIN_VALUE;
 		Rectangle2D rec;
 		
-		for(final IEntityView view : selection) {
-			rec = view.getBorders();
+		for(final ISelectable sel : selection) {
+			rec = sel.getBorders();
 			
 			if(rec.getMinX()<minx)
 				minx = rec.getMinX();

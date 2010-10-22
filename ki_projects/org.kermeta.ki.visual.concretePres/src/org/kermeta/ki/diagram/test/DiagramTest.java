@@ -27,7 +27,7 @@ public class DiagramTest {
 		
 		JFrame frame 			= new JFrame();
 		JToggleButton handB 	= new JToggleButton();
-		DiagramView diag		= createEcoreClassDiagram();
+		DiagramView diag		= createBasicClassDiagram();
 		diag.getHand().setHandButton(handB);
 		handB.setSelected(true);
 		

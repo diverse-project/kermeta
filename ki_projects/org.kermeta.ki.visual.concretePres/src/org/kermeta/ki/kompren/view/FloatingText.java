@@ -1,33 +1,36 @@
 package org.kermeta.ki.kompren.view;
 
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.font.TextLayout;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class FloatingText {
+import org.kermeta.ki.diagram.view.interfaces.ISelectable;
+
+public class FloatingText implements ISelectable {
 	protected String text;
 	
-	protected boolean autoPosition;
-	
-	protected Point position;
-	
 	protected RoleView role;
+	
+	protected double tx;
+	
+	protected double ty;
 	
 	
 	public FloatingText(final String text, final RoleView role) {
 		super();
 		
-		this.role		= role;
-		this.text 		= text;
-		autoPosition 	= true;
-		position		= new Point();
+		this.role = role;
+		this.text = text;
+		tx = 0.;
+		ty = 0.;
 	}
 
 	
 	
-	public void paint(Graphics2D g) {
-		g.drawString(text, position.x, position.y);
+	public void paint(final Graphics2D g) {
+		Point2D position = getPosition();
+		g.drawString(text, (int)position.getX(), (int)position.getY());
 	}
 	
 	
@@ -37,44 +40,39 @@ public class FloatingText {
 	}
 
 
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 
 
-	public boolean isAutoPosition() {
-		return autoPosition;
+	public Point2D getPosition() {
+		Point2D ptRelation = role.source ? role.view.getPointSource() : role.view.getPointTarget();
+		return new Point2D.Double(ptRelation.getX()+tx, ptRelation.getY()+ty);
 	}
 
 
-	public void setAutoPosition() {
-		autoPosition = true;
-	}
-	
-	
-	public void setManualPosition(double x, double y) {
-		autoPosition = false;
-		setPosition(x, y);
-	}
-
-
-	public Point getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(final double x, final double y) {
-		position.setLocation(x, y);
-	}
-
-
-	
-	public boolean contains(double x, double y) {
+	public boolean contains(final double x, final double y) {
 		if(text==null || text.length()==0)
 			return false;
 		
-		Rectangle2D rec = new TextLayout(text, role.view.getEntitySrc().getFont(), ClassView.FONT_RENDER_CONT).getBounds();
-		rec.setFrame(position.x, position.y-rec.getHeight(), rec.getWidth(), rec.getHeight());
-		return rec.contains(x, y);
+		return getBorders().contains(x, y);
+	}
+
+
+
+	@Override
+	public Rectangle2D getBorders() {
+		Point2D position = getPosition();
+		final Rectangle2D rec = new TextLayout(text, role.view.getEntitySrc().getFont(), ClassView.FONT_RENDER_CONT).getBounds();
+		rec.setFrame(position.getX(), position.getY()-rec.getHeight(), rec.getWidth(), rec.getHeight());
+		
+		return rec; 
+	}
+
+
+
+	public void translate(final double gapx, final double gapy) {
+		this.tx += gapx;
+		this.ty += gapy;
 	}
 }

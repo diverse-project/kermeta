@@ -23,6 +23,7 @@ import org.kermeta.ki.diagram.view.interfaces.IAnchor;
 import org.kermeta.ki.diagram.view.interfaces.IDiagramView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
+import org.kermeta.ki.diagram.view.interfaces.ISelectable;
 
 /**
  * Implements a diagram that contains entities and relations.
@@ -43,8 +44,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 	/** The relations of the diagram. */
 	protected List<IRelationView> relations;
 	
-	/** The selected entities. */
-	protected List<IEntityView> selection;
+	/** The selected objects. */
+	protected List<ISelectable> selection;
 	
 	/** The name of the font to use. */
 	protected String fontName;
@@ -68,8 +69,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 		zoom 			= 1.;
 		entities 		= new ArrayList<IEntityView>();
 		relations		= new ArrayList<IRelationView>();
-		selection		= new ArrayList<IEntityView>();
-		hand			= new Hand(this);
+		selection		= new ArrayList<ISelectable>();
+		hand			= createHand();
 		selectionBorder = new SelectionBorder(selection);
 		
 		addMouseListener(hand);
@@ -77,6 +78,11 @@ public class DiagramView extends JPanel implements IDiagramView {
 		
 		if(withScrollPane)
 			scrollPane = new JScrollPane(this);
+	}
+	
+	
+	protected Hand createHand() {
+		return new Hand(this);
 	}
 	
 	
@@ -455,13 +461,13 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 
 	@Override
-	public List<IEntityView> getSelection() {
+	public List<ISelectable> getSelection() {
 		return selection;
 	}
 
 
 	@Override
-	public void removeFromSelection(final IEntityView entity) {
+	public void removeFromSelection(final ISelectable entity) {
 		if(entity!=null) {
 			selection.remove(entity);
 			selectionBorder.update();
@@ -476,24 +482,24 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 
 	@Override
-	public void setSelection(final IEntityView entity) {
+	public void setSelection(final ISelectable sel) {
 		selection.clear();
 
-		if(entity!=null) {
-			selection.add(entity);
+		if(sel!=null) {
+			selection.add(sel);
 			selectionBorder.update();
 		}
 	}
 
 
 	@Override
-	public void setSelection(final List<IEntityView> newSelection) {
+	public void setSelection(final List<ISelectable> newSelection) {
 		selection.clear();
 
 		if(newSelection!=null) {
-			for(IEntityView sh : newSelection)
-				if(sh!=null)
-					selection.add(sh);
+			for(ISelectable sel : newSelection)
+				if(sel!=null)
+					selection.add(sel);
 			
 			selectionBorder.update();
 		}

@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public interface IEntityView extends IComponentView {
+public interface IEntityView extends IComponentView, ISelectable {
 	/** The colour to use when an entity is grayed. */
 	public static Color GRAYED_COLOR = new Color(210, 210, 210, 180);
 	
@@ -32,11 +31,6 @@ public interface IEntityView extends IComponentView {
 	 * @return True if the given point is located into the entity.
 	 */
 	boolean contains(final double x, final double y);
-
-	/**
-	 * @return The rectangle that borders the entity.
-	 */
-	Rectangle2D getBorders();
 
 	/**
 	 * @return The centre of the entity.
