@@ -451,7 +451,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 					// get FeatureMap multiplicity
 					boolean fmIsACollection = false;
 					EClass containerClass =(EClass)prop.eContainer();
-					Iterator<EAttribute> attIt = containerClass.getEAttributes().iterator();
+					Iterator<EAttribute> attIt = containerClass.getEAllAttributes().iterator();
 					while(attIt.hasNext()){
 						EAttribute att = attIt.next();
 						if(att.getName().equals(group)){
@@ -472,7 +472,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 					else{
 						// the FeatureMap has a multiplicity = 1 and the derived prop a multiplicity = 1
 						getterbody =
-							"do "+
+							"   do "+
 							"			result ?= "+group+".~value"+
 							"	end";
 					}
@@ -484,29 +484,30 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 						if(fmIsACollection){
 							// the FeatureMap has a multiplicity > 1 and the derived prop a multiplicity = 1
 							setterbody =
-								"do "+
+								" do "+
 								"	var fme : ecore::EFeatureMapEntry"+
-								"	fme ?= self."+group+".detect{fme | fme.eStructuralFeatureName.equals(\""+elementname+"\")}"+
+								"	fme := self."+group+".detect{fme | fme.eStructuralFeatureName.equals(\""+elementname+"\")}"+
 								"	if (fme.isVoid) then"+
 								// create new entry"+
 								"		fme := ecore::EFeatureMapEntry.new"+
 								"		fme.eStructuralFeatureName := \""+elementname+"\""+
-								"		fme.~value := value"+group+".add(fme)"+
+								"		fme.~value := value "+
+								"       "+group+".add(fme)"+
 								"	else"+
 								// replace value in existing entry+
 								"		fme.~value := value"+
-								"	end"+
-								"end";
+								"	end "+
+								" end";
 						}
 						else {
 							// the FeatureMap has a multiplicity = 1 and the derived prop a multiplicity = 1
 							setterbody =
-								"do "+
+								" do "+
 								"			"+group+" := ecore::EFeatureMapEntry.new"+
 								"			"+group+".eStructuralFeatureName := \"" +elementname+"\""+  // DVK : we may have trouble here because, it seems that this must be the logical name of the effective element
 									// for example : if it is a JavaInterface, set into interaface, then it must use the name in the ExtendedMetada.name associated to JavaInterface !?
-								"			"+group+".~value := value"+
-								"end";
+								"			"+group+".~value := value "+
+								" end";
 						}
 						Expression expsetter = ExpressionParser.parse(context, kermetaUnit, setterbody, monitor);
 						currentProperty.setSetterBody(expsetter);
