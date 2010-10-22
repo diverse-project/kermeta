@@ -505,7 +505,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 								" do "+
 								"			"+group+" := ecore::EFeatureMapEntry.new"+
 								"			"+group+".eStructuralFeatureName := \"" +elementname+"\""+  // DVK : we may have trouble here because, it seems that this must be the logical name of the effective element
-									// for example : if it is a JavaInterface, set into interaface, then it must use the name in the ExtendedMetada.name associated to JavaInterface !?
+									// for example : if it is a JavaInterface, set into interface, then it must use the name in the ExtendedMetada.name associated to JavaInterface !?
 								"			"+group+".~value := value "+
 								" end";
 						}
