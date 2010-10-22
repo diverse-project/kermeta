@@ -6,34 +6,6 @@
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.ui.editors">
-		<editor class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="logo" icon="icons/editor_icon.gif" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoEditor" name="EMFText logo Editor">
-		</editor>
-	</extension>
-	
-	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferenceInitializer">
-		</initializer>
-	</extension>
-	
-	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Logo Text Editor" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
-		</page>
-		<page name="Syntax Coloring" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoSyntaxColoringPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoSyntaxColoringPreferencePage" category="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage">
-		</page>
-		<page name="Brackets" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoBracketPreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoBracketPreferencePage" category="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage">
-		</page>
-		<page name="Occurrence" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoOccurrencePreferencePage" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoOccurrencePreferencePage" category="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoPreferencePage">
-		</page>
-	</extension>
-	
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoNewFileWizard" id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoNewFileWizard" name="EMFText .logo file">
-		</wizard>
-	</extension>
-	
 	<extension id="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
 		<persistent value="true">
 		</persistent>

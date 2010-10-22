@@ -6,8 +6,9 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A basic implementation of the ITokenResolveResult interface.
-//
+/**
+ * A basic implementation of the ITokenResolveResult interface.
+ */
 public class LogoTokenResolveResult implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTokenResolveResult {
 	
 	private String errorMessage;
@@ -38,4 +39,5 @@ public class LogoTokenResolveResult implements org.kermeta.kmlogo.logoasm.model.
 		errorMessage = "Can't resolve token.";
 		resolvedToken = null;
 	}
+	
 }

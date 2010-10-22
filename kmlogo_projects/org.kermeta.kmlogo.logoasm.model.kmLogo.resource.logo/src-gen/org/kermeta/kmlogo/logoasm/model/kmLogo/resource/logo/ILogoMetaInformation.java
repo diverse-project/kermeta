@@ -6,69 +6,99 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo;
 
-// This interface provides information about a generated EMFText
-// text resource plug-in.
+/**
+ * This interface provides information about a generated EMFText text resource
+ * plug-in.
+ */
 public interface ILogoMetaInformation {
 	
 	public String getURI();
 	
-	// Returns the name of the concrete syntax. This name is used
-	// as file extension.
-	//
-	// @return
+	/**
+	 * Returns the name of the concrete syntax. This name is used as file extension.
+	 * 
+	 * @return the file extension
+	 */
 	public String getSyntaxName();
 	
-	// Returns the relative path to the .cs file within the plug-in.
-	// @return
+	/**
+	 * Returns the relative path to the .cs file within the plug-in.
+	 * 
+	 * @return relative path to the .cs specification
+	 */
 	public String getPathToCSDefinition();
 	
-	// Return a lexer capable to split the underlying text file into tokens.
-	//
-	// @return a lexer instance.
+	/**
+	 * Returns a lexer capable to split the underlying text file into tokens.
+	 * 
+	 * @return a new instance of the lexer class.
+	 */
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextScanner createLexer();
 	
-	// Returns an instance of the parser. This factory method
-	// is needed, because we can not create ANTLR parsers using
-	// the default constructor without arguments, because they
-	// expect the input stream or rather a token stream.
-	//
-	// @param inputStream
-	// @param encoding
-	// @return
+	/**
+	 * Returns an instance of the parser. This factory method is needed, because we
+	 * can not create ANTLR parsers using the default constructor without arguments,
+	 * because this constructor does expect the input stream or rather a token stream
+	 * as arguments. Furthermore, the parser implementation can be exchanged by
+	 * returning other parsers in this factory method.
+	 * 
+	 * @param inputStream the stream to read from
+	 * @param encoding the encoding of the input stream, pass null to use platform
+	 * default encoding
+	 * 
+	 * @return a new instance of the parser class
+	 */
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextParser createParser(java.io.InputStream inputStream, String encoding);
 	
-	// Returns all meta classes for which syntax was defined. This
-	// information is used both by the NewFileWizard and the code
-	// completion.
+	/**
+	 * Returns a new instance of the printer.
+	 * 
+	 * @param outputStream the stream to print to
+	 * @param resource that contains the elements that will be printed
+	 * 
+	 * @return a new instance of the printer class
+	 */
+	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextPrinter createPrinter(java.io.OutputStream ouputStream, org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextResource resource);
+	
+	/**
+	 * Returns all meta classes for which syntax was defined. This information is used
+	 * both by the NewFileWizard and the code completion.
+	 */
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax();
 	
-	// Returns an instance of the reference resolver switch class.
+	/**
+	 * Returns an instance of the reference resolver switch class.
+	 */
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolverSwitch getReferenceResolverSwitch();
 	
-	// Returns an instance of the token resolver factory.
+	/**
+	 * Returns an instance of the token resolver factory.
+	 */
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTokenResolverFactory getTokenResolverFactory();
 	
-	// Returns a list of all tokens defined in the syntax.
-	//
-	// @return
+	/**
+	 * Returns a list of the names of all tokens defined in the syntax.
+	 */
 	public String[] getTokenNames();
 	
-	// Return the default style that should be used to present tokens of the
-	// given type.
-	//
-	// @param tokenName the name of the token type
-	// @return a style object or null if not default style is set
+	/**
+	 * Returns the default style that should be used to present tokens of the given
+	 * type.
+	 * 
+	 * @param tokenName the name of the token type
+	 * 
+	 * @return a style object or null if no default style is set
+	 */
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTokenStyle getDefaultTokenStyle(String tokenName);
 	
-	// Returns the default bracket pairs.
-	//
-	// @return
+	/**
+	 * Returns the default bracket pairs.
+	 */
 	public java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoBracketPair> getBracketPairs();
 	
-	// Returns all classes for which folding should be enabled
-	// in the editor.
+	/**
+	 * Returns all classes for which folding must be enabled in the editor.
+	 */
 	public org.eclipse.emf.ecore.EClass[] getFoldableClasses();
 	
-	// @return a hover text provider which provides the hover text of an <code>EObject</code>
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoHoverTextProvider getHoverTextProvider();
 }

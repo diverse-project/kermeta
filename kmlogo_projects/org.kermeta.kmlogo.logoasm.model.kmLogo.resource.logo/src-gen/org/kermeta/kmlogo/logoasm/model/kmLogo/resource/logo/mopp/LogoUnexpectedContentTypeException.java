@@ -6,10 +6,14 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// java.lang.Exception class to represent invalid content types for parser instances.
-//
-// @see org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoOptions.RESOURCE_CONTENT_TYPE
-public class LogoUnexpectedContentTypeException extends org.antlr.runtime.RecognitionException{
+/**
+ * An Excpetion to represent invalid content types for parser instances.
+ * 
+ * @see
+ * org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoOptions.RESOURCE_CONT
+ * ENT_TYPE
+ */
+public class LogoUnexpectedContentTypeException extends org.antlr.runtime3_2_0.RecognitionException{
 	
 	private static final long serialVersionUID = 4791359811519433999L;
 	
@@ -22,4 +26,5 @@ public class LogoUnexpectedContentTypeException extends org.antlr.runtime.Recogn
 	public Object getContentType() {
 		return contentType;
 	}
+	
 }

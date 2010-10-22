@@ -6,11 +6,14 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A basic implementation of the IURIMapping interface that can
-// map identifiers to URIs.
-//
-// @param <ReferenceType> unused type parameter which is needed to implement IURIMapping.
-//
+/**
+ * A basic implementation of the
+ * org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoURIMapping interface
+ * that can map identifiers to URIs.
+ * 
+ * @param <ReferenceType> unused type parameter which is needed to implement
+ * org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoURIMapping.
+ */
 public class LogoURIMapping<ReferenceType> implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoURIMapping<ReferenceType> {
 	
 	private org.eclipse.emf.common.util.URI uri;

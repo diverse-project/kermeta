@@ -6,23 +6,41 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo;
 
-// A common interface for token styles. Text resources must
-// return style information using object implementing this
-// interface.
+/**
+ * A common interface for token styles. Text resources must return style
+ * information using classes that implement this interface.
+ */
 public interface ILogoTokenStyle {
 	
-	// Returns the color of the token as array of length 3.
+	/**
+	 * Returns the color of the token as array of length 3.
+	 */
 	public int[] getColorAsRGB();
 	
-	// Returns true if the token must be displayed in bold face.
+	/**
+	 * Returns the background color of the token as array of length 3. This method can
+	 * return <code>null</code> if no background color is set.
+	 */
+	public int[] getBackgroundColorAsRGB();
+	
+	/**
+	 * Returns true if the token must be displayed in bold face.
+	 */
 	public boolean isBold();
 	
-	// Returns true if the token must be displayed in italic face.
+	/**
+	 * Returns true if the token must be displayed in italic face.
+	 */
 	public boolean isItalic();
 	
-	// Returns true if the token must be displayed in strike through style.
+	/**
+	 * Returns true if the token must be displayed in strike through style.
+	 */
 	public boolean isStrikethrough();
 	
-	// Returns true if the token must be displayed underline.
+	/**
+	 * Returns true if the token must be displayed underlined.
+	 */
 	public boolean isUnderline();
+	
 }

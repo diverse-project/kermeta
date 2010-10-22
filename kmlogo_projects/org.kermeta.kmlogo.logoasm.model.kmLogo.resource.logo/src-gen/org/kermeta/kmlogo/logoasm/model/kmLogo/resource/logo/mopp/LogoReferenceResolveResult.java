@@ -6,11 +6,14 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A basic implementation of IResolveResult interface
-// that collects mappings in a list.
-//
-// @param <ReferenceType> the type of the references that can be contained in this result
-//
+/**
+ * A basic implementation of the
+ * org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResul
+ * t interface that collects mappings in a list.
+ * 
+ * @param <ReferenceType> the type of the references that can be contained in this
+ * result
+ */
 public class LogoReferenceResolveResult<ReferenceType> implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResult<ReferenceType> {
 	
 	private java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceMapping<ReferenceType>> mappings;

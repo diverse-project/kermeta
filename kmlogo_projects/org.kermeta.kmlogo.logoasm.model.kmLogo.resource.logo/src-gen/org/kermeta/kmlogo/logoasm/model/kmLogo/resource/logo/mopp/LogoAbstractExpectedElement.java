@@ -6,21 +6,29 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// Abstract super class for all expected elements. Provides methods to
-// add followers
+/**
+ * Abstract super class for all expected elements. Provides methods to add
+ * followers.
+ */
 public abstract class LogoAbstractExpectedElement implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement {
 	
-	private java.util.Set<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement> followers = new java.util.LinkedHashSet<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement>();
+	private org.eclipse.emf.ecore.EClass ruleMetaclass;
+	private java.util.Set<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util.LogoPair<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> followers = new java.util.LinkedHashSet<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util.LogoPair<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>>();
 	
-	public LogoAbstractExpectedElement() {
+	public LogoAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
 		super();
+		this.ruleMetaclass = ruleMetaclass;
 	}
 	
-	public void addFollower(org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement follower) {
-		followers.add(follower);
+	public org.eclipse.emf.ecore.EClass getRuleMetaclass() {
+		return ruleMetaclass;
 	}
 	
-	public java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement> getFollowers() {
+	public void addFollower(org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement follower, org.eclipse.emf.ecore.EStructuralFeature[] path) {
+		followers.add(new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util.LogoPair<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>(follower, path));
+	}
+	
+	public java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util.LogoPair<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> getFollowers() {
 		return followers;
 	}
 	

@@ -6,10 +6,13 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A basic implementation of the IElementMapping interface.
-//
-// @param <ReferenceType> the type of the reference that can be mapped to
-//
+/**
+ * A basic implementation of the
+ * org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoElementMapping
+ * interface.
+ * 
+ * @param <ReferenceType> the type of the reference that can be mapped to
+ */
 public class LogoElementMapping<ReferenceType> implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoElementMapping<ReferenceType> {
 	
 	private final ReferenceType target;
@@ -34,4 +37,5 @@ public class LogoElementMapping<ReferenceType> implements org.kermeta.kmlogo.log
 	public String getWarning() {
 		return warning;
 	}
+	
 }

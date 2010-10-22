@@ -6,13 +6,15 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util;
 
-// A utility class that provides methods to handle EClasses.
+/**
+ * A utility class that provides methods to handle EClasses.
+ */
 public class LogoEClassUtil {
 	
 	public boolean isSubClass(org.eclipse.emf.ecore.EClass subClassCandidate, org.eclipse.emf.ecore.EClass superClass) {
 		for (org.eclipse.emf.ecore.EClass superClassCandidate : subClassCandidate.getEAllSuperTypes()) {
-			// There seem to be multiple instances of meta classes when accessed
-			// through the generator model. Therefore, we compare by name.
+			// There seem to be multiple instances of meta classes when accessed through the
+			// generator model. Therefore, we compare by name.
 			if (namesAndPackageURIsAreEqual(superClassCandidate, superClass)) {
 				return true;
 			}
@@ -20,14 +22,15 @@ public class LogoEClassUtil {
 		return false;
 	}
 	
-	// Returns all subclasses of 'superClass' that are contained
-	// in 'availableClasses'.
-	//
-	// @param superClass the superclass
-	// @param availableClasses the set of classes to search in
-	// @return a list of all subclasses of 'superClass'
-	public java.util.List<org.eclipse.emf.ecore.EClass> getSubClasses(org.eclipse.emf.ecore.EClass superClass,
-	org.eclipse.emf.ecore.EClass[] availableClasses) {
+	/**
+	 * Returns all subclasses of 'superClass' that are contained in 'availableClasses'.
+	 * 
+	 * @param superClass the superclass
+	 * @param availableClasses the set of classes to search in
+	 * 
+	 * @return a list of all subclasses of 'superClass'
+	 */
+	public java.util.List<org.eclipse.emf.ecore.EClass> getSubClasses(org.eclipse.emf.ecore.EClass superClass, org.eclipse.emf.ecore.EClass[] availableClasses) {
 		
 		java.util.List<org.eclipse.emf.ecore.EClass> result = new java.util.ArrayList<org.eclipse.emf.ecore.EClass>();
 		for (org.eclipse.emf.ecore.EClass next : availableClasses) {
@@ -61,4 +64,5 @@ public class LogoEClassUtil {
 	public boolean isNotConcrete(org.eclipse.emf.ecore.EClass eClass) {
 		return !isConcrete(eClass);
 	}
+	
 }

@@ -6,11 +6,13 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A representation for a range in a document where a terminal (i.e.,
-// a placeholder or a keyword) is expected.
-// The range is expressed using two integers denoting the start of the range
-// including hidden tokens (e.g., whitespace) and excluding those token 
-// (i.e., the part of the document containing the relevant characters).
+/**
+ * A representation for a range in a document where a terminal (i.e., a
+ * placeholder or a keyword) is expected. The range is expressed using two
+ * integers denoting the start of the range including hidden tokens (e.g.,
+ * whitespace) and excluding those token (i.e., the part of the document
+ * containing the relevant characters).
+ */
 public class LogoExpectedTerminal {
 	
 	private int followSetID;
@@ -18,11 +20,13 @@ public class LogoExpectedTerminal {
 	private int startIncludingHiddenTokens;
 	private int startExcludingHiddenTokens;
 	private String prefix;
+	private org.eclipse.emf.ecore.EStructuralFeature[] containmentTrace;
 	
-	public LogoExpectedTerminal(org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement terminal, int followSetID) {
+	public LogoExpectedTerminal(org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoExpectedElement terminal, int followSetID, org.eclipse.emf.ecore.EStructuralFeature... containmentTrace) {
 		super();
 		this.terminal = terminal;
 		this.followSetID = followSetID;
+		this.containmentTrace = containmentTrace;
 	}
 	
 	public int getFollowSetID() {
@@ -62,6 +66,10 @@ public class LogoExpectedTerminal {
 	
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+	
+	public org.eclipse.emf.ecore.EStructuralFeature[] getContainmentTrace() {
+		return containmentTrace;
 	}
 	
 }

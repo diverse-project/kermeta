@@ -24,13 +24,13 @@ public class LogoReferenceResolverSwitch implements org.kermeta.kmlogo.logoasm.m
 		parameterCallParameterReferenceResolver.setOptions(options);
 	}
 	
-	public void resolveFuzzy(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
 		if (container == null) {
 			return;
 		}
 		if (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getProcCall().isInstance(container)) {
 			LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration> frr = new LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("declaration")) {
 				procCallDeclarationReferenceResolver.resolve(identifier, (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcCall) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -38,11 +38,22 @@ public class LogoReferenceResolverSwitch implements org.kermeta.kmlogo.logoasm.m
 		}
 		if (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getParameterCall().isInstance(container)) {
 			LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Parameter> frr = new LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Parameter>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("parameter")) {
 				parameterCallParameterReferenceResolver.resolve(identifier, (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ParameterCall) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 	}
+	
+	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolver<? extends org.eclipse.emf.ecore.EObject, ? extends org.eclipse.emf.ecore.EObject> getResolver(org.eclipse.emf.ecore.EStructuralFeature reference) {
+		if (reference == org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getProcCall_Declaration()) {
+			return procCallDeclarationReferenceResolver;
+		}
+		if (reference == org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getParameterCall_Parameter()) {
+			return parameterCallParameterReferenceResolver;
+		}
+		return null;
+	}
+	
 }

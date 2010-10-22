@@ -8,11 +8,11 @@ package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
 public class LogoMetaInformation implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoMetaInformation {
 	
-	public java.lang.String getSyntaxName() {
+	public String getSyntaxName() {
 		return "logo";
 	}
 	
-	public java.lang.String getURI() {
+	public String getURI() {
 		return "http://www.kermeta.org/kmLogo";
 	}
 	
@@ -20,12 +20,12 @@ public class LogoMetaInformation implements org.kermeta.kmlogo.logoasm.model.kmL
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoAntlrScanner(new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoLexer());
 	}
 	
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextParser createParser(java.io.InputStream inputStream, java.lang.String encoding) {
+	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextParser createParser(java.io.InputStream inputStream, String encoding) {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoParser().createInstance(inputStream, encoding);
 	}
 	
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextPrinter createPrinter(java.io.OutputStream outputStream, org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTextResource resource) {
-		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoPrinter(outputStream, resource);
+		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoPrinter2(outputStream, resource);
 	}
 	
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
@@ -44,15 +44,15 @@ public class LogoMetaInformation implements org.kermeta.kmlogo.logoasm.model.kmL
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoTokenResolverFactory();
 	}
 	
-	public java.lang.String getPathToCSDefinition() {
+	public String getPathToCSDefinition() {
 		return "org.kermeta.kmlogo.logoasm.emftexteditor/concrete_syntax/ASMLogo.cs";
 	}
 	
-	public java.lang.String[] getTokenNames() {
+	public String[] getTokenNames() {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoParser(null).getTokenNames();
 	}
 	
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTokenStyle getDefaultTokenStyle(java.lang.String tokenName) {
+	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoTokenStyle getDefaultTokenStyle(String tokenName) {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	
@@ -64,28 +64,12 @@ public class LogoMetaInformation implements org.kermeta.kmlogo.logoasm.model.kmL
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoFoldingInformationProvider().getFoldableClasses();
 	}
 	
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoHoverTextProvider getHoverTextProvider() {
-		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoHoverTextProvider();
-	}
-	
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoColorManager createColorManager() {
-		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoColorManager();
-	}
-	
-	public org.eclipse.jface.text.rules.ITokenScanner createTokenScanner(org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoColorManager colorManager) {
-		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.LogoTokenScanner(colorManager);
-	}
-	
 	public org.eclipse.emf.ecore.resource.Resource.Factory createResourceFactory() {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoResourceFactory();
 	}
 	
 	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoNewFileContentProvider getNewFileContentProvider() {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoNewFileContentProvider();
-	}
-	
-	public org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoCodeCompletionHelper createCodeCompletionHelper() {
-		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoCodeCompletionHelper();
 	}
 	
 }

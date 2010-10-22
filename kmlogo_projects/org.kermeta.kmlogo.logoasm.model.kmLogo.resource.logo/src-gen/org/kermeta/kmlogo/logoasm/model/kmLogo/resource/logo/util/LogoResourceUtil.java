@@ -6,15 +6,19 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util;
 
-// Class ResourceUtil can be used to perform common tasks on resources,
-// such as resolving proxy object, saving resources, as well as, checking
-// them for errors.
+/**
+ * Class ResourceUtil can be used to perform common tasks on resources, such as
+ * resolving proxy object, saving resources, as well as, checking them for errors.
+ */
 public class LogoResourceUtil {
 	
-	// Searches for all unresolved proxy object in the given resource.
-	//
-	// @param resource
-	// @return all proxy object that are not resolvable
+	/**
+	 * Searches for all unresolved proxy object in the given resource.
+	 * 
+	 * @param resource
+	 * 
+	 * @return all proxy object that are not resolvable
+	 */
 	public static java.util.List<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
 		java.util.List<org.eclipse.emf.ecore.EObject> unresolveProxies = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		
@@ -33,13 +37,15 @@ public class LogoResourceUtil {
 		return unresolveProxies;
 	}
 	
-	// Tries to resolve all unresolved proxy objects in the
-	// given resource. If all proxies were resolved true is
-	// returned. If some could not be resolved, false is
-	// returned.
-	//
-	// @param resource the resource containing the proxy object
-	// @return true on success
+	/**
+	 * Tries to resolve all unresolved proxy objects in the given resource. If all
+	 * proxies were resolved true is returned. If some could not be resolved, false is
+	 * returned.
+	 * 
+	 * @param resource the resource containing the proxy object
+	 * 
+	 * @return true on success
+	 */
 	public static boolean resolveAll(org.eclipse.emf.ecore.resource.Resource resource) {
 		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resource);
 		if (findUnresolvedProxies(resource).size() > 0) {
@@ -67,4 +73,5 @@ public class LogoResourceUtil {
 	public static boolean containsProblems(org.eclipse.emf.ecore.resource.Resource resource) {
 		return containsErrors(resource) || containsWarnings(resource);
 	}
+	
 }

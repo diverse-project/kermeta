@@ -12,7 +12,9 @@ public class LogoNature implements org.eclipse.core.resources.IProjectNature {
 	
 	private org.eclipse.core.resources.IProject project;
 	
-	// the IDs of all builders, IDs of additional builders can be added here
+	/**
+	 * the IDs of all builders, IDs of additional builders can be added here
+	 */
 	public final static String[] BUILDER_IDS = {org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoBuilderAdapter.BUILDER_ID};
 	
 	public static void activate(org.eclipse.core.resources.IProject project) {

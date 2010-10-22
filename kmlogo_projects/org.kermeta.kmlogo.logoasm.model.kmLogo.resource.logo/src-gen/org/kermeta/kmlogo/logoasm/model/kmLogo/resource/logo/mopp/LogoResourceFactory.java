@@ -15,4 +15,5 @@ public class LogoResourceFactory implements org.eclipse.emf.ecore.resource.Resou
 	public org.eclipse.emf.ecore.resource.Resource createResource(org.eclipse.emf.common.util.URI uri) {
 		return new org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoResource(uri);
 	}
+	
 }

@@ -6,31 +6,34 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// A basic implementation of the ILocationMap interface. Instances
-// store information about element locations using four maps.
-// <p>
-// The set-methods can be called multiple times by the parser that may visit
-// multiple children from which it copies the localization information for the parent
-// (i.e., the element for which set-method is called)
-// It implements the following behavior:
-// <p>
-// Line:   The lowest of all sources is used for target<br>
-// Column: The lowest of all sources is used for target<br>
-// Start:  The lowest of all sources is used for target<br>
-// End:    The highest of all sources is used for target<br>
-//
+/**
+ * A basic implementation of the ILocationMap interface. Instances store
+ * information about element locations using four maps.
+ * <p>
+ * The set-methods can be called multiple times by the parser that may visit
+ * multiple children from which it copies the localization information for the
+ * parent element (i.e., the element for which set-method is called). It
+ * implements the following behavior:
+ * <p>
+ * Line:   The lowest of all sources is used for target<br>
+ * Column: The lowest of all sources is used for target<br>
+ * Start:  The lowest of all sources is used for target<br>
+ * End:    The highest of all sources is used for target<br>
+ */
 public class LogoLocationMap implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoLocationMap {
 	
-	// A basic interface that can be implemented to select
-	// EObjects based of their location in a text resource.
+	/**
+	 * A basic interface that can be implemented to select EObjects based of their
+	 * location in a text resource.
+	 */
 	public interface ISelector {
 		boolean accept(int startOffset, int endOffset);
 	}
 	
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> columnMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> lineMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> charStartMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> charEndMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> columnMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> lineMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> charStartMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> charEndMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
 	
 	public void setLine(org.eclipse.emf.ecore.EObject element, int line) {
 		setMapValueToMin(lineMap, element, line);
@@ -64,15 +67,15 @@ public class LogoLocationMap implements org.kermeta.kmlogo.logoasm.model.kmLogo.
 		return getMapValue(charEndMap, element);
 	}
 	
-	private int getMapValue(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element) {
+	private int getMapValue(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element) {
 		if (!map.containsKey(element)) return -1;
-		java.lang.Integer value = map.get(element);
+		Integer value = map.get(element);
 		return value == null ? -1 : value.intValue();
 	}
 	
-	private void setMapValueToMin(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
-		// we need to synchronize the write access, because other threads may iterate
-		// over the map concurrently
+	private void setMapValueToMin(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
+		// We need to synchronize the write access, because other threads may iterate over
+		// the map concurrently.
 		synchronized (this) {
 			if (element == null || value < 0) return;
 			if (map.containsKey(element) && map.get(element) < value) return;
@@ -80,9 +83,9 @@ public class LogoLocationMap implements org.kermeta.kmlogo.logoasm.model.kmLogo.
 		}
 	}
 	
-	private void setMapValueToMax(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
-		// we need to synchronize the write access, because other threads may iterate
-		// over the map concurrently
+	private void setMapValueToMax(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
+		// We need to synchronize the write access, because other threads may iterate over
+		// the map concurrently.
 		synchronized (this) {
 			if (element == null || value < 0) return;
 			if (map.containsKey(element) && map.get(element) > value) return;
@@ -94,6 +97,20 @@ public class LogoLocationMap implements org.kermeta.kmlogo.logoasm.model.kmLogo.
 		java.util.List<org.eclipse.emf.ecore.EObject> result = getElements(new ISelector() {
 			public boolean accept(int start, int end) {
 				return start <= documentOffset && end >= documentOffset;
+			}
+		});
+		// sort elements according to containment hierarchy
+		java.util.Collections.sort(result, new java.util.Comparator<org.eclipse.emf.ecore.EObject>() {
+			public int compare(org.eclipse.emf.ecore.EObject objectA, org.eclipse.emf.ecore.EObject objectB) {
+				if (org.eclipse.emf.ecore.util.EcoreUtil.isAncestor(objectA, objectB)) {
+					return 1;
+				} else {
+					if (org.eclipse.emf.ecore.util.EcoreUtil.isAncestor(objectB, objectA)) {
+						return -1;
+					} else {
+						return 0;
+					}
+				}
 			}
 		});
 		return result;
@@ -109,16 +126,16 @@ public class LogoLocationMap implements org.kermeta.kmlogo.logoasm.model.kmLogo.
 	}
 	
 	private java.util.List<org.eclipse.emf.ecore.EObject> getElements(ISelector s) {
-		// there might be more than one element at the given offset
-		// thus, we collect all of them and sort them afterwards
+		// There might be more than one element at the given offset. Thus, we collect all
+		// of them and sort them afterwards.
 		java.util.List<org.eclipse.emf.ecore.EObject> result = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		
-		// we need to synchronize the iteration over the map, because
-		// other threads may write to the map concurrently
+		// We need to synchronize the write access, because other threads may iterate over
+		// the map concurrently.
 		synchronized (this) {
 			for (org.eclipse.emf.ecore.EObject next : charStartMap.keySet()) {
-				java.lang.Integer start = charStartMap.get(next);
-				java.lang.Integer end = charEndMap.get(next);
+				Integer start = charStartMap.get(next);
+				Integer end = charEndMap.get(next);
 				if (start == null || end == null) {
 					continue;
 				}

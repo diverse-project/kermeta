@@ -6,31 +6,34 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util;
 
-// A utility class that provides some common methods to work
-// with Strings.
+/**
+ * A utility class that provides some common methods to work with Strings.
+ */
 public class LogoStringUtil {
 	
 	public final static String HEX_DIGIT_REGEXP = "[0-9a-fA-F]";
-	public final static String UNICODE_SEQUENCE_REGEXP = "\\A\\\\u" + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP;
+	public final static String UNICODE_SEQUENCE_REGEXP = "\\\\u" + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP;
+	public final static String ESC_OTHER = "\\\\(n|r|t|b|f|\"|'|>)";
+	public final static String ESC_REGEXP = "\\A((" + UNICODE_SEQUENCE_REGEXP + ")|(" + ESC_OTHER + ")).*";
 	
-	// Capitalizes the first letter of the given string.
-	//
-	// @param text a string.
-	// @return the modified string.
+	/**
+	 * Capitalizes the first letter of the given string.
+	 * 
+	 * @param text the string to capitalize.
+	 * 
+	 * @return the modified string.
+	 */
 	public static String capitalize(String text) {
 		String h = text.substring(0, 1).toUpperCase();
 		String t = text.substring(1);
 		return h + t;
 	}
 	
-	// Returns the part of 'tail' that is not present at the end of
-	// 'text'. For example if text = 'abc' and tail = 'cd' this method
-	// returns 'd'. If 'tail' can not be found at the end of 'text',
-	// 'tail' is returned as is.
-	//
-	// @param text
-	// @param tail
-	// @return
+	/**
+	 * Returns the part of 'tail' that is not present at the end of 'text'. For
+	 * example if text = 'abc' and tail = 'cd' this method returns 'd'. If 'tail' can
+	 * not be found at the end of 'text', 'tail' is returned as is.
+	 */
 	public static String getMissingTail(String text, String tail) {
 		for (int i = 1; i < tail.length(); i++) {
 			int endIndex = text.length();
@@ -45,12 +48,15 @@ public class LogoStringUtil {
 		return tail;
 	}
 	
-	// Converts a string that contains upper-case letter and
-	// underscores (e.g., constant names) to a camel-case string.
-	// For example, MY_CONSTANT is converted to myConstant.
-	//
-	// @param text the string to convert
-	// @return
+	/**
+	 * Converts a string that contains upper-case letter and underscores (e.g.,
+	 * constant names) to a camel-case string. For example, MY_CONSTANT is converted
+	 * to myConstant.
+	 * 
+	 * @param text the string to convert
+	 * 
+	 * @return a camel-case version of text
+	 */
 	public static String convertAllCapsToLowerCamelCase(String text) {
 		String lowerCase = text.toLowerCase();
 		while (true) {
@@ -77,28 +83,31 @@ public class LogoStringUtil {
 		return lowerCase;
 	}
 	
-	// Concatenates the given parts and puts 'glue' between them.
-	//
-	// @param parts
-	// @param glue
-	// @return
-	public static String explode(java.util.Collection<String> parts, String glue) {
+	/**
+	 * Concatenates the given parts and puts 'glue' between them.
+	 */
+	public static String explode(java.util.Collection<? extends Object> parts, String glue) {
+		return explode(parts.toArray(new Object[parts.size()]), glue);
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them.
+	 */
+	public static String explode(Object[] parts, String glue) {
 		StringBuilder sb = new StringBuilder();
-		java.util.Iterator<String> it = parts.iterator();
-		while (it.hasNext()) {
-			String next = it.next();
-			sb.append(next);
-			if (it.hasNext()) {
+		for (int i = 0; i < parts.length; i++) {
+			Object next = parts[i];
+			sb.append(next.toString());
+			if (i < parts.length - 1) {
 				sb.append(glue);
 			}
 		}
 		return sb.toString();
 	}
 	
-	// Removes single quotes at the start and end of tokenName.
-	//
-	// @param tokenName
-	// @return
+	/**
+	 * Removes single quotes at the start and end of tokenName.
+	 */
 	public static String formatTokenName(String tokenName) {
 		if (tokenName.length() > 0 && tokenName.startsWith("'")) {
 			tokenName = tokenName.substring(1, tokenName.length());
@@ -178,56 +187,46 @@ public class LogoStringUtil {
 		return sb.toString();
 	}
 	
-	// Escapes the given text such that it can be safely embedded in a string
-	// literal in Java source code.
-	//
-	// @param text the text to escape
-	// @return the escaped text
+	/**
+	 * Escapes the given text such that it can be safely embedded in a string literal
+	 * in Java source code.
+	 * 
+	 * @param text the text to escape
+	 * 
+	 * @return the escaped text
+	 */
 	public static String escapeToJavaString(String text) {
-		//for javac: replace one backslash by two and escape double quotes
-		return text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"");
-	}
-	
-	// Escapes the given text such that it can be safely embedded in a string
-	// literal in the Java source code contained in an ANTLR grammar. This
-	// method is similar to escapeToJavaString(), but does also convert the
-	// percent character to its Unicode representation, because the percent
-	// character has special meaning in ANTLR grammars.
-	//
-	// Also, single quotes are escaped. God knows why.
-	//
-	// @param text the text to escape
-	// @return the escaped text
-	public static String escapeToJavaStringInANTLRGrammar(String text) {
-		// we must use the Unicode representation for the % character, because
-		// StringTemplate does treat % special
-		return escapeToJavaString(text.replaceAll("'", "\\'")).replace("%", "\u0025");
-	}
-	
-	// Escapes the given text such that it can be safely embedded in an
-	// ANTLR grammar as keyword (i.e., an in-line token). Single quotes
-	// are escaped using a backslash. Backslashes are escaped using a
-	// backslash.
-	//
-	// @param text the text to escape
-	// @return the escaped text
-	public static String escapeToANTLRKeyword(String value) {
-		String result = value;
-		int index = result.indexOf("\\");
-		while (index >= 0) {
-			String tail = result.substring(index);
-			if (!tail.matches(UNICODE_SEQUENCE_REGEXP)) {
-				// not Unicode - do escape backslash
-				String head = "";
-				if (index > 0) {
-					head = result.substring(0, index - 1);
-				}
-				result = head + "\\" + tail;
-			}
-			index = result.indexOf("\\", index + 2);
+		if (text == null) {
+			return null;
 		}
-		result.replaceAll("'", "\\'");
-		return result;
+		String result = text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replace("\b", "\\b").replace("\f", "\\f").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
+		StringBuilder complete = new StringBuilder();
+		for (int i = 0; i < result.length(); i++) {
+			int codePointI = result.codePointAt(i);
+			if (codePointI >= 32 && codePointI <= 127) {
+				complete.append(Character.toChars(codePointI));
+			} else {
+				// use Unicode representation
+				complete.append("\\u");
+				String hex = Integer.toHexString(codePointI);
+				complete.append(getRepeatingString(4 - hex.length(), '0'));
+				complete.append(hex);
+			}
+		}
+		return complete.toString();
+	}
+	
+	/**
+	 * Escapes the given text such that it can be safely embedded in an ANTLR grammar
+	 * as keyword (i.e., an in-line token). Single quotes are escaped using a
+	 * backslash. Backslashes are escaped using a backslash.
+	 * 
+	 * @param text the text to escape
+	 * 
+	 * @return the escaped text
+	 */
+	public static String escapeToANTLRKeyword(String value) {
+		return escapeToJavaString(value).replace("'", "\\'").replace("%", "\\u0025");
 	}
 	
 	public static boolean isUnicodeSequence(String text) {
@@ -265,4 +264,11 @@ public class LogoStringUtil {
 		}
 	}
 	
+	public static String getRepeatingString(int count, char character) {
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < count; i++) {
+			result.append(character);
+		}
+		return result.toString();
+	}
 }

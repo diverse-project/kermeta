@@ -6,12 +6,14 @@
  */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
-// An implementation of the ResolveResult interface that delegates
-// all method calls to another ResolveResult. Client may subclass
-// this class to easily create custom ResolveResults.
-//
-// @param <ReferenceType> the type of the references that can be contained in this result
-//
+/**
+ * An implementation of the ResolveResult interface that delegates all method
+ * calls to another ResolveResult. Client may subclass this class to easily create
+ * custom ResolveResults.
+ * 
+ * @param <ReferenceType> the type of the references that can be contained in this
+ * result
+ */
 public class LogoDelegatingResolveResult<ReferenceType> implements org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResult<ReferenceType> {
 	
 	private org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoReferenceResolveResult<ReferenceType> delegate;
@@ -59,4 +61,5 @@ public class LogoDelegatingResolveResult<ReferenceType> implements org.kermeta.k
 	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
 		delegate.addMapping(identifier, uri, warning);
 	}
+	
 }
