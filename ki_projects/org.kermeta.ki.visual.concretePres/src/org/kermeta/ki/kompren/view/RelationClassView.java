@@ -68,6 +68,22 @@ public class RelationClassView extends RelationView {
 	}
 	
 	
+	
+	@Override
+	public boolean contains(final double x, final double y) {
+		boolean contains = super.contains(x, y);
+		
+		if(!contains) {
+			if(roleSrc!=null)
+				contains = roleSrc.getBorders().contains(x, y);
+			if(!contains && roleTar!=null)
+				contains = roleTar.getBorders().contains(x, y);
+		}
+		
+		return contains;
+	}
+	
+	
 	@Override
 	public void paint(final Graphics2D g) {
 		super.paint(g);
