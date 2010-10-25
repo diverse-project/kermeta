@@ -41,6 +41,7 @@ public class SegmentView implements ISegmentView {
 		return pointTar;
 	}
 
+	
 	@Override
 	public boolean isWestDirection() {
 		return pointSrc.getX()>pointTar.getX();
@@ -67,7 +68,7 @@ public class SegmentView implements ISegmentView {
 	
 	@Override
 	public double getA() {
-		if(isVerticalLine())
+		if(Number.NUMBER.equals(pointSrc.getX(), pointTar.getX()))
 			return Double.NaN;
 
 		return (pointSrc.getY() - pointTar.getY())/(pointSrc.getX() - pointTar.getX());
@@ -81,74 +82,30 @@ public class SegmentView implements ISegmentView {
 	}
 	
 	
-	
-	@Override
-	public boolean isVerticalLine() {
-		if(pointSrc==null || pointTar==null)
-			return false;
-		
-		return Number.NUMBER.equals(pointSrc.getX(), pointTar.getX());
-	}
-	
-	
-	
-	@Override
-	public boolean isHorizontalLine() {
-		if(pointSrc==null || pointTar==null)
-			return false;
-		
-		return Number.NUMBER.equals(pointSrc.getY(), pointTar.getY());
-	}
-	
-	
-	
-	@Override
-	public Line2D getPerpendicularLine(final Point2D pt) {//TODO to remove
-		if(isVerticalLine())
-			return Number.NUMBER.equals(pt.getX(), pointSrc.getX()) ? new Line2D.Double(0., pt.getY(), pt.getX(), pt.getY()) : null;
-			
-		if(Number.NUMBER.equals(pt.getX(), 0.)) {
-			Point2D pt3  = new Point2D.Double(pointTar.getX(), pointTar.getY());
-			Point2D pt2  = Number.NUMBER.rotatePoint(pt3, pt, Math.PI/2.);
-			
-			return new Line2D.Double(pt2, pt);
-		}
-		
-		final double a = getA();
-		
-		if(Number.NUMBER.equals(a, 0.))
-			return new Line2D.Double(pt.getX(), pt.getY(), pt.getX(), pt.getY()-10.);
-		
-		double a2 = -1./a;
-		
-		return new Line2D.Double(0., pt.getY()-a2*pt.getX(), pt.getX(), pt.getY());
-	}
-
-
-
 	@Override
 	public boolean contains(final double x, final double y) {
 		final double dec = 5.;
 		boolean in;
+		final double y1 = pointSrc.getY();
+		final double y2 = pointTar.getY();
+		final double x1 = pointSrc.getX();
+		final double x2 = pointTar.getX();
 		
-		if(pointSrc.getY()<=pointTar.getY())
-			in = y>=pointSrc.getY()-dec && y<=pointTar.getY()+dec;
+		if(y1<=y2)
+			in = y>=y1-dec && y<=y2+dec;
 		else
-			in = y<=pointSrc.getY()+dec && y>=pointTar.getY()-dec;
+			in = y<=y1+dec && y>=y2-dec;
 		
 		if(in)
 			if(pointSrc.getX()<=pointTar.getX())
-				in = x>=pointSrc.getX()-dec && x<=pointTar.getX()+dec;
+				in = x>=x1-dec && x<=x2+dec;
 			else
-				in = x<=pointSrc.getX()+dec && x>=pointTar.getX()-dec;
-
-		if(in && (isVerticalLine() && Number.NUMBER.equals(x, pointSrc.getX(), dec) ||
-				isHorizontalLine() && Number.NUMBER.equals(y, pointSrc.getY(), dec)))
-			return true;
-		
-		if(in) {
+				in = x<=x1+dec && x>=x2-dec;
+				
+		if(in && Math.abs(x1-x2)>=dec && Math.abs(y1-y2)>=dec) {// TODO check in latexdraw if correct.
 			// Compute the equation of the line (y = ax + b)
 			final double axb = getA()*x+getB();
+			System.out.println(getA() + " " + getB() + " " + axb);
 			in = y>=axb-dec && y<=axb+dec;
 		}
 		

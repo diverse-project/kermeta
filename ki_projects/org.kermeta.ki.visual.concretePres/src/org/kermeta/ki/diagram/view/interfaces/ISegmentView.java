@@ -1,7 +1,6 @@
 package org.kermeta.ki.diagram.view.interfaces;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 public interface ISegmentView {
@@ -38,20 +37,7 @@ public interface ISegmentView {
 	 */
 	double getB();
 	
-	/**
-	 * @return True if the line is vertical.
-	 */
-	boolean isVerticalLine();
-
-	/**
-	 * @return True if the line is horizontal.
-	 */
-	boolean isHorizontalLine();
-
-	Line2D getPerpendicularLine(final Point2D pt);
-
 	boolean contains(final double x, final double y);
-
 	
 	void replacePointSource(Point2D newPt);
 	
