@@ -17,7 +17,7 @@
             hasPages="false"
             icon="icons/FSM.gif"
             id="fr.irisa.triskell.kermeta.samples.fsm.wizard"
-            name="FSM tutorial Demo"
+            name="FSM tutorial - base resources"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
    </extension>
    <extension
@@ -32,8 +32,7 @@
             hasPages="false"
             icon="icons/FSM.gif"
             id="fr.irisa.triskell.kermeta.samples.fsm.wizard2"
-            name="FSM Solutions">
-      </wizard>
+            name="FSM tutorial - solution"></wizard>
       <category
             id="fr.irisa.triskell.kermeta.samples.fsm.category2"
             name="Kermeta FSM solutions"
