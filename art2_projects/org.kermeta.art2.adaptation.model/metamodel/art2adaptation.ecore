@@ -34,4 +34,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddFragmentBinding" eSuperTypes="#//FragmentBindingAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveFragmentBinding" eSuperTypes="#//FragmentBindingAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateInstance" eSuperTypes="#//InstanceAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateDictionaryInstance" eSuperTypes="#//InstanceAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateType" eSuperTypes="#//TypeAdaptation"/>
 </ecore:EPackage>

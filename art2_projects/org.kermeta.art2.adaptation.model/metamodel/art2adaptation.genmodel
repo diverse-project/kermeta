@@ -37,5 +37,8 @@
     </genClasses>
     <genClasses ecoreClass="art2adaptation.ecore#//AddFragmentBinding"/>
     <genClasses ecoreClass="art2adaptation.ecore#//RemoveFragmentBinding"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//UpdateInstance"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//UpdateDictionaryInstance"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//UpdateType"/>
   </genPackages>
 </genmodel:GenModel>
