@@ -42,7 +42,7 @@ trait Art2RequiredPort extends Art2Port {
            }
           case Some(d) => {
               if(getInOut){
-                try { reply(d !? (10000,msg)) } catch { case _ @ e=> logger.error("error sending message  ",e) }
+                try { reply(d !? msg) } catch { case _ @ e=> logger.error("error sending message  ",e) }
               } else {
                 try { d ! msg } catch { case _ @ e=> logger.error("error sending message  ",e) }
               }
