@@ -24,4 +24,10 @@ public interface IDecorationView extends IView {
 	 */
 	void setRelation(final IRelationView relation);
 
+	
+	boolean contains(final double x, final double y);
+	
+	ISegmentView getSegment();
+	
+	void setSegment(final ISegmentView segment);
 }

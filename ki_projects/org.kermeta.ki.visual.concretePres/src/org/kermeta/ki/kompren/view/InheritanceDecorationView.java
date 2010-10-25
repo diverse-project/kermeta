@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 
 import org.kermeta.ki.diagram.view.impl.PolygonDecorationView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
+import org.kermeta.ki.diagram.view.interfaces.ISegmentView;
 
 /**
  * Defines a decoration for inheritance.
@@ -21,8 +22,8 @@ public class InheritanceDecorationView extends PolygonDecorationView {
 	/**
 	 * @see PolygonDecorationView
 	 */
-	public InheritanceDecorationView(final IRelationView relation) {
-		super(relation, new Point2D.Double(0., 0.), new Point2D.Double(LENGTH_ARROW, -LENGTH_ARROW/2.), 
+	public InheritanceDecorationView(final IRelationView relation, final ISegmentView segment, final boolean sourcePoint) {
+		super(segment, sourcePoint, relation, new Point2D.Double(0., 0.), new Point2D.Double(LENGTH_ARROW, -LENGTH_ARROW/2.), 
 				new Point2D.Double(LENGTH_ARROW, LENGTH_ARROW/2.));
 		
 		setFillColor(Color.WHITE);

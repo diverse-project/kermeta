@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 
 import org.kermeta.ki.diagram.view.interfaces.IPolygonDecorationView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
+import org.kermeta.ki.diagram.view.interfaces.ISegmentView;
 
 public class PolylineDecorationView extends DecorationView implements IPolygonDecorationView  {
 	/** The colour of the interiour of the polygon. */
@@ -21,8 +22,8 @@ public class PolylineDecorationView extends DecorationView implements IPolygonDe
 	 * @param pts The set of points that will compose the polygon decoration.
 	 * @throws IllegalArgumentException If the given relation is null or if less than 3 points are given.
 	 */
-	public PolylineDecorationView(final IRelationView relation, final Point2D ... pts) {
-		super(relation);
+	public PolylineDecorationView(final ISegmentView segment, final boolean sourcePoint, final IRelationView relation, final Point2D ... pts) {
+		super(relation, segment, sourcePoint);
 		
 		if(!setPath(pts))
 			throw new IllegalArgumentException();
@@ -56,7 +57,7 @@ public class PolylineDecorationView extends DecorationView implements IPolygonDe
 	
 	
 	@Override
-	public void paint(final Graphics2D g) {
+	protected void paintDecoration(final Graphics2D g) {
 		if(isFilled) {
 			g.setColor(fillColor);
 			g.fill(path);

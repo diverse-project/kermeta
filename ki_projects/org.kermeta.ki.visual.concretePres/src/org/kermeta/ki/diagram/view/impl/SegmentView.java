@@ -105,7 +105,6 @@ public class SegmentView implements ISegmentView {
 		if(in && Math.abs(x1-x2)>=dec && Math.abs(y1-y2)>=dec) {// TODO check in latexdraw if correct.
 			// Compute the equation of the line (y = ax + b)
 			final double axb = getA()*x+getB();
-			System.out.println(getA() + " " + getB() + " " + axb);
 			in = y>=axb-dec && y<=axb+dec;
 		}
 		

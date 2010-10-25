@@ -3,6 +3,7 @@ package org.kermeta.ki.diagram.view.impl;
 import java.awt.geom.Point2D;
 
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
+import org.kermeta.ki.diagram.view.interfaces.ISegmentView;
 
 /**
  * Implementation of a decoration with the shape of a polygon.
@@ -15,8 +16,8 @@ public class PolygonDecorationView extends PolylineDecorationView {
 	 * @param pts The set of points that will compose the polygon decoration.
 	 * @throws IllegalArgumentException If the given relation is null or if less than 3 points are given.
 	 */
-	public PolygonDecorationView(final IRelationView relation, final Point2D ... pts) {
-		super(relation, pts);
+	public PolygonDecorationView(final ISegmentView segment, final boolean sourcePoint, final IRelationView relation, final Point2D ... pts) {
+		super(segment, sourcePoint, relation, pts);
 		
 		isFilled = true;
 	}

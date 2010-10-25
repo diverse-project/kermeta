@@ -28,12 +28,12 @@ public class RelationClassView extends RelationView {
 		
 		if(isComposition)
 			if(compositionAtStart)
-				setSourceDecoration(new CompositionDecorationView(this));
+				setSourceDecoration(new CompositionDecorationView(this, getFirstSegment(), true));
 			else
-				setSourceDecoration(new CompositionDecorationView(this));
+				setSourceDecoration(new CompositionDecorationView(this, getLastSegment(), false));
 		
 		if(targetRole==null || srcRole==null || targetRole.length()==0 || srcRole.length()==0)
-			setTargetDecoration(new RelationDecorationView(this));
+			setTargetDecoration(new RelationDecorationView(this, getLastSegment(), false));
 		
 		if(srcRole!=null && srcRole.length()>0 && srcCard!=null)
 			roleSrc = new RoleView(srcRole, srcCard, this, true, isComposition && !compositionAtStart);

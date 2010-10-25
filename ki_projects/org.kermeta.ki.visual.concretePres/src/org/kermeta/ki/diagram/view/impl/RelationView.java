@@ -109,9 +109,12 @@ public class RelationView extends ComponentView implements IRelationView {
 			
 			for(final ISegmentView view : segments)
 				view.paint(g);
+
+			if(sourceDecoration!=null)
+				sourceDecoration.paint(g);
 			
-			paintDecoration(sourceDecoration, getFirstSegment().getPointSource(), g, getFirstSegment().getLineAngle());
-			paintDecoration(targetDecoration, getLastSegment().getPointTarget(), g, getLastSegment().getLineAngle()+Math.PI);
+			if(targetDecoration!=null)
+				targetDecoration.paint(g);
 			
 			if(handlersVisible)
 				for(final IHandler handler : handlers)
@@ -120,54 +123,11 @@ public class RelationView extends ComponentView implements IRelationView {
 	}
 	
 	
-	
-	protected void paintDecoration(final IDecorationView decoration, final Point2D position, final Graphics2D g, final double lineAngle) {
-		if(decoration!=null) {
-			g.translate(position.getX(), position.getY());
-			boolean okRotation = beginRotation(position, g, lineAngle)!=null;
-			
-			decoration.paint(g);
-			
-			if(okRotation)
-				endRotation(g, lineAngle);
-			
-			g.translate(-position.getX(), -position.getY());
-		}
-	}
-	
-	
-	
 	@Override
 	public void updateLineColor(final int opacity) {
 		lineColor = entitySrc.getVisibility()==Visibility.GRAYED || entityTar.getVisibility()==Visibility.GRAYED ? 
 					IEntityView.GRAYED_COLOR : new Color(0, 0, 0, opacity);
 	}
-	
-	
-	protected static Point2D beginRotation(final Point2D position, final Graphics2D g, final double angle) {
-		Point2D p = null;
-
-		if(!Number.NUMBER.equals(angle, 0.) && !Double.isInfinite(angle) && !Double.isNaN(angle)) {
-			final double cx = position.getX(), cy = position.getY();
-			final double c2x = Math.cos(angle) * cx - Math.sin(angle)* cy;
-			final double c2y = Math.sin(angle) * cx + Math.cos(angle)* cy;
-			final double c3x = Math.cos(-angle) * (cx - c2x)- Math.sin(-angle) * (cy - c2y);
-			final double c3y = Math.sin(-angle) * (cx - c2x)+ Math.cos(-angle) * (cy - c2y);
-
-			g.rotate(angle);
-			p = new Point2D.Double(c3x, c3y);
-		}
-
-		return p;
-	}
-	
-	
-	
-	protected static void endRotation(final Graphics2D g, final double angle) {
-		if(!Number.NUMBER.equals(angle, 0.) && !Double.isInfinite(angle) && !Double.isNaN(angle))
-			g.rotate(-angle);
-	}
-
 	
 	
 	protected void getRecursiveRelationPoints(final Point2D pt1, final Point2D pt2) {
@@ -359,6 +319,10 @@ public class RelationView extends ComponentView implements IRelationView {
 				seg.replacePointTarget(newPt);
 				newSeg = new SegmentView(newPt, oldPt);
 				
+				// Updating the target decoration that may use the modified segment.
+				if(targetDecoration.getSegment()==seg)
+					targetDecoration.setSegment(newSeg);
+				
 				if((i+1)>=nbSeg)
 					segments.add(newSeg);
 				else
@@ -368,7 +332,6 @@ public class RelationView extends ComponentView implements IRelationView {
 			}
 			else
 				i++;
-		
 	}
 
 
@@ -403,6 +366,12 @@ public class RelationView extends ComponentView implements IRelationView {
 		for(int i=0, size=segments.size(); i<size && !contains; i++)
 			if(segments.get(i).contains(x, y))
 				contains = true;
+
+		if(!contains && sourceDecoration!=null)
+			contains = sourceDecoration.contains(x, y);
+		
+		if(!contains && targetDecoration!=null)
+			contains = targetDecoration.contains(x, y);
 		
 		return contains; 
 	}

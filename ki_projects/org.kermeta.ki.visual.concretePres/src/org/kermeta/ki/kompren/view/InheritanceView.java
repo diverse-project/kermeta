@@ -14,7 +14,6 @@ public class InheritanceView extends RelationView {
 	public InheritanceView(final IEntityView src, final IEntityView target) {
 		super(src, target);
 		
-		setTargetDecoration(new InheritanceDecorationView(this));
+		setTargetDecoration(new InheritanceDecorationView(this, getLastSegment(), false));
 	}
-
 }

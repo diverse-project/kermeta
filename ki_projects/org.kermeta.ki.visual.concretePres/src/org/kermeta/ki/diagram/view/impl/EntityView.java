@@ -169,7 +169,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	
 	@Override
 	public boolean contains(final double x, final double y) {
-		return isVisible() && getBorders().contains(x, y);
+		return isVisible() && getBorders().contains(x, y);//TODO improve to be more general. However, ClassView must do that.
 	}
 	
 	
