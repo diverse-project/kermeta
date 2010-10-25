@@ -12,6 +12,18 @@ import Art2Aspects._
 
 case class PortAspect(p : Port) {
 
+  def removeAndUnbind()={
+    //REMOVE ALL BINDING BINDED TO
+    var root = p.eContainer.eContainer.eContainer.asInstanceOf[ContainerRoot]
+    var mbindings = root.getMBindings.filter(b=>b.getPort == p) ++ List()
+    mbindings.foreach{mb=> root.getMBindings.remove(mb)}
+
+    //REMOVE PORT
+    if(p.eContainer.asInstanceOf[ComponentInstance].getProvided.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getProvided.remove(p)}
+    if(p.eContainer.asInstanceOf[ComponentInstance].getRequired.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getRequired.remove(p)}
+
+  }
+
   def isProvidedPort() : Boolean = {
     p.eContainer.asInstanceOf[ComponentInstance].getProvided.contains(p)
   }

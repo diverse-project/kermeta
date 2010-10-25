@@ -11,6 +11,4 @@ trait Art2Merger {
 
   def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit
 
-
-
 }
