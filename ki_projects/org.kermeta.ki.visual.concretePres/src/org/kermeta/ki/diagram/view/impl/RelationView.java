@@ -530,15 +530,12 @@ public class RelationView extends ComponentView implements IRelationView {
 				seg.replacePointTarget(newPt);
 				newSeg = new SegmentView(newPt, oldPt);
 				
-				
-				if((i+1)>=nbSeg) {
+				if((i+1)>=nbSeg)
 					segments.add(newSeg);
-					handlers.add(new Handler(newPt, this));
-				}
-				else {
+				else
 					segments.add(i+1, newSeg);
-					handlers.add(i+1, new Handler(newPt, this));
-				}
+				
+				handlers.add(i+1, new Handler(newPt, this));
 			}
 			else
 				i++;
