@@ -172,14 +172,14 @@ public class Hand implements MouseListener, MouseMotionListener {
 			
 			if(draggedHandler.getHandlable() instanceof IRelationView) {
 				final IRelationView rel = (IRelationView) draggedHandler.getHandlable();
-				IEntityView entity = null;
+				IEntityView entity;
 				
-				if(rel.getHandlers(-1)==draggedHandler) {
+				if(rel.getHandlers(-1)==draggedHandler)
 					entity = rel.getEntityTar();
-				}
-				else if(rel.getHandlers(0)==draggedHandler) {
+				else if(rel.getHandlers(0)==draggedHandler)
 					entity = rel.getEntitySrc();
-				}
+				else
+					entity = null;
 				
 				if(entity!=null) {
 					Point2D pt = entity.getClosestPoint(new Point2D.Double(e.getX()/zoom, e.getY()/zoom));
