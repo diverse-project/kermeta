@@ -49,11 +49,25 @@ public class LoadNewLibCommand implements Command {
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));
                     //kernel.getEditorPanel().loadLib(path);
-                    System.out.println(path);
+                    //System.out.println(path);
 
-
+                    //Load
                     ContainerRoot nroot = Art2XmiHelper.load(path);
+
+                    //Merge
                     kernel.getModelHandler().merge(nroot);
+
+                    //CREATE TEMP FILE FROM ACTUAL MODEL
+                    File tempFile = File.createTempFile("art2editorTemp", ".art2");
+                    Art2XmiHelper.save(URI.createFileURI(tempFile.getAbsolutePath()).toString(),kernel.getModelHandler().getActualModel());
+
+                    //LOAD MODEL
+                    LoadModelCommand loadCmd = new LoadModelCommand();
+                    loadCmd.setKernel(kernel);
+                    loadCmd.execute(URI.createFileURI(tempFile.getAbsolutePath()).toString());
+
+
+                    /*
                     kernel.getEditorPanel().getPalette().clear();
                     for (org.kermeta.art2.TypeLibrary ctl : kernel.getModelHandler().getActualModel().getLibraries()) {
                         for (org.kermeta.art2.TypeDefinition ct : ctl.getSubTypes()) {
@@ -70,7 +84,7 @@ public class LoadNewLibCommand implements Command {
                     kernel.getEditorPanel().doLayout();
                     kernel.getEditorPanel().repaint();
                     kernel.getEditorPanel().revalidate();
-
+*/
 
 
                 }
