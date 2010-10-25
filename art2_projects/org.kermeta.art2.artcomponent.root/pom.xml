@@ -11,7 +11,12 @@
         <groupId>org.kermeta.art2</groupId>
         <version>2.2.1-SNAPSHOT</version>
     </parent>
-    
+
+
+    <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmSSS</maven.build.timestamp.format>
+    </properties>
+
     <build>
         <plugins>
             <!-- APT ART2 PLUGIN : ART2 JAVA ANNOTATION INTEGRATION -->
@@ -28,6 +33,7 @@
                         <value>art2.lib.group=${project.groupId}</value>
                         <value>art2.lib.version=${project.version}</value>
                         <value>art2.lib.target=${basedir}/src/main/resources/ART2-INF/art2Lib.art2</value>
+                        <value>tag=${maven.build.timestamp}</value>
                     </options>
                 </configuration>
                 <executions>
