@@ -305,9 +305,10 @@ abstract class Reader {
 
 class Child inherits Reader {
     attribute age :  kermeta::standard::Integer
-    operation initialize(age :  kermeta::standard::Integer) : Void is
-    do>
+    operation initialize(age :  kermeta::standard::Integer) : Child is
+    do
         self.age := age
+        result := self // return self so we can chain this call directly after a new
     end
     // an action which triggers an Exception
     operation read(book : ChildBook) : Void is
