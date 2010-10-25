@@ -33,7 +33,6 @@ import org.kermeta.art2.TypeDefinition;
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getFactoryBean <em>Factory Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getBean <em>Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getRequiredLibs <em>Required Libs</em>}</li>
- *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getHashcode <em>Hashcode</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.TypeDefinitionImpl#getDictionaryType <em>Dictionary Type</em>}</li>
  * </ul>
  * </p>
@@ -97,26 +96,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected EList<DeployUnit> requiredLibs;
-
-	/**
-	 * The default value of the '{@link #getHashcode() <em>Hashcode</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHashcode()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String HASHCODE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getHashcode() <em>Hashcode</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHashcode()
-	 * @generated
-	 * @ordered
-	 */
-	protected String hashcode = HASHCODE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDictionaryType() <em>Dictionary Type</em>}' containment reference.
@@ -244,27 +223,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getHashcode() {
-		return hashcode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setHashcode(String newHashcode) {
-		String oldHashcode = hashcode;
-		hashcode = newHashcode;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.TYPE_DEFINITION__HASHCODE, oldHashcode, hashcode));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public DictionaryType getDictionaryType() {
 		return dictionaryType;
 	}
@@ -334,8 +292,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return getBean();
 			case Art2Package.TYPE_DEFINITION__REQUIRED_LIBS:
 				return getRequiredLibs();
-			case Art2Package.TYPE_DEFINITION__HASHCODE:
-				return getHashcode();
 			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
 				return getDictionaryType();
 		}
@@ -364,9 +320,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				getRequiredLibs().clear();
 				getRequiredLibs().addAll((Collection<? extends DeployUnit>)newValue);
 				return;
-			case Art2Package.TYPE_DEFINITION__HASHCODE:
-				setHashcode((String)newValue);
-				return;
 			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
 				setDictionaryType((DictionaryType)newValue);
 				return;
@@ -394,9 +347,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case Art2Package.TYPE_DEFINITION__REQUIRED_LIBS:
 				getRequiredLibs().clear();
 				return;
-			case Art2Package.TYPE_DEFINITION__HASHCODE:
-				setHashcode(HASHCODE_EDEFAULT);
-				return;
 			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
 				setDictionaryType((DictionaryType)null);
 				return;
@@ -420,8 +370,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return BEAN_EDEFAULT == null ? bean != null : !BEAN_EDEFAULT.equals(bean);
 			case Art2Package.TYPE_DEFINITION__REQUIRED_LIBS:
 				return requiredLibs != null && !requiredLibs.isEmpty();
-			case Art2Package.TYPE_DEFINITION__HASHCODE:
-				return HASHCODE_EDEFAULT == null ? hashcode != null : !HASHCODE_EDEFAULT.equals(hashcode);
 			case Art2Package.TYPE_DEFINITION__DICTIONARY_TYPE:
 				return dictionaryType != null;
 		}
@@ -442,8 +390,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		result.append(factoryBean);
 		result.append(", bean: ");
 		result.append(bean);
-		result.append(", hashcode: ");
-		result.append(hashcode);
 		result.append(')');
 		return result.toString();
 	}

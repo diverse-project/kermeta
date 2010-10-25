@@ -367,6 +367,10 @@
         <element xmi:type="ecore:EAttribute" href="art.ecore#//DeployUnit/url"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_0XPKoKCHEd-sqcGCTV_N3w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_HKByUL_kEd-AxP7W46fKtw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="art.ecore#//DeployUnit/hashcode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HKByUb_kEd-AxP7W46fKtw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_NC32MZjuEd-FNaA2OH-dGA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_NC32MpjuEd-FNaA2OH-dGA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_NC32M5juEd-FNaA2OH-dGA"/>
@@ -666,10 +670,6 @@
       <children xmi:type="notation:Node" xmi:id="_unZxULzTEd-je4YQa-i5vQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="art.ecore#//TypeDefinition/bean"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_unZxUbzTEd-je4YQa-i5vQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_HKByUL_kEd-AxP7W46fKtw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="art.ecore#//TypeDefinition/hashcode"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HKByUb_kEd-AxP7W46fKtw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_RzfPIrzVEd-je4YQa-i5vQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_RzfPI7zVEd-je4YQa-i5vQ"/>
@@ -1446,7 +1446,7 @@
     <element xmi:type="ecore:EReference" href="art.ecore#//TypeDefinition/requiredLibs"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Aw2DQ6CWEd-sqcGCTV_N3w" points="[0, 0, -221, 60]$[221, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Aw5GkKCWEd-sqcGCTV_N3w" id="(0.5984848484848485,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Aw5GkaCWEd-sqcGCTV_N3w" id="(0.16666666666666666,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Aw5GkaCWEd-sqcGCTV_N3w" id="(0.045454545454545456,0.28865979381443296)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_0n-JYKoLEd-whuh9L425AQ" type="3002" source="_NC1Z9JjuEd-FNaA2OH-dGA" target="_NC1Z9JjuEd-FNaA2OH-dGA">
     <children xmi:type="notation:Node" xmi:id="_0n_-kKoLEd-whuh9L425AQ" type="4011">

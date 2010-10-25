@@ -1007,6 +1007,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeployUnit_Hashcode() {
+		return (EAttribute)deployUnitEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTypeLibrary() {
 		return typeLibraryEClass;
 	}
@@ -1421,17 +1430,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTypeDefinition_Hashcode() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTypeDefinition_DictionaryType() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(5);
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1579,6 +1579,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__UNIT_NAME);
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__VERSION);
 		createEAttribute(deployUnitEClass, DEPLOY_UNIT__URL);
+		createEAttribute(deployUnitEClass, DEPLOY_UNIT__HASHCODE);
 
 		typeLibraryEClass = createEClass(TYPE_LIBRARY);
 		createEReference(typeLibraryEClass, TYPE_LIBRARY__SUB_TYPES);
@@ -1639,7 +1640,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__FACTORY_BEAN);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__BEAN);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__REQUIRED_LIBS);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__HASHCODE);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__DICTIONARY_TYPE);
 
 		instanceEClass = createEClass(INSTANCE);
@@ -1793,6 +1793,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEAttribute(getDeployUnit_UnitName(), ecorePackage.getEString(), "unitName", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeployUnit_Version(), ecorePackage.getEString(), "version", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeployUnit_Url(), ecorePackage.getEString(), "url", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeployUnit_Hashcode(), ecorePackage.getEString(), "hashcode", null, 0, 1, DeployUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeLibraryEClass, TypeLibrary.class, "TypeLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeLibrary_SubTypes(), this.getTypeDefinition(), null, "subTypes", null, 0, -1, TypeLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1853,7 +1854,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEAttribute(getTypeDefinition_FactoryBean(), ecorePackage.getEString(), "factoryBean", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeDefinition_Bean(), ecorePackage.getEString(), "bean", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_RequiredLibs(), this.getDeployUnit(), null, "requiredLibs", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTypeDefinition_Hashcode(), ecorePackage.getEString(), "hashcode", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_DictionaryType(), this.getDictionaryType(), null, "dictionaryType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

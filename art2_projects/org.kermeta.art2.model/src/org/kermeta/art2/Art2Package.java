@@ -225,22 +225,13 @@ public interface Art2Package extends EPackage {
 	int TYPE_DEFINITION__REQUIRED_LIBS = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__HASHCODE = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__DICTIONARY_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_DEFINITION__DICTIONARY_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
@@ -249,7 +240,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.ComponentTypeImpl <em>Component Type</em>}' class.
@@ -305,15 +296,6 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_TYPE__REQUIRED_LIBS = TYPE_DEFINITION__REQUIRED_LIBS;
-
-	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
 
 	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
@@ -596,15 +578,6 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int PORT_TYPE__REQUIRED_LIBS = TYPE_DEFINITION__REQUIRED_LIBS;
-
-	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
 
 	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
@@ -957,15 +930,6 @@ public interface Art2Package extends EPackage {
 	int COMPOSITE_TYPE__REQUIRED_LIBS = COMPONENT_TYPE__REQUIRED_LIBS;
 
 	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_TYPE__HASHCODE = COMPONENT_TYPE__HASHCODE;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1185,15 +1149,6 @@ public interface Art2Package extends EPackage {
 	int SERVICE_PORT_TYPE__REQUIRED_LIBS = PORT_TYPE__REQUIRED_LIBS;
 
 	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_PORT_TYPE__HASHCODE = PORT_TYPE__HASHCODE;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1377,15 +1332,6 @@ public interface Art2Package extends EPackage {
 	int MESSAGE_PORT_TYPE__REQUIRED_LIBS = PORT_TYPE__REQUIRED_LIBS;
 
 	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_PORT_TYPE__HASHCODE = PORT_TYPE__HASHCODE;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1523,13 +1469,22 @@ public interface Art2Package extends EPackage {
 	int DEPLOY_UNIT__URL = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOY_UNIT__HASHCODE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Deploy Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOY_UNIT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int DEPLOY_UNIT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.art2.impl.TypeLibraryImpl <em>Type Library</em>}' class.
@@ -1900,15 +1855,6 @@ public interface Art2Package extends EPackage {
 	int NODE_TYPE__REQUIRED_LIBS = TYPE_DEFINITION__REQUIRED_LIBS;
 
 	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
-
-	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2136,15 +2082,6 @@ public interface Art2Package extends EPackage {
 	 * @ordered
 	 */
 	int CHANNEL_TYPE__REQUIRED_LIBS = TYPE_DEFINITION__REQUIRED_LIBS;
-
-	/**
-	 * The feature id for the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHANNEL_TYPE__HASHCODE = TYPE_DEFINITION__HASHCODE;
 
 	/**
 	 * The feature id for the '<em><b>Dictionary Type</b></em>' containment reference.
@@ -2979,6 +2916,17 @@ public interface Art2Package extends EPackage {
 	EAttribute getDeployUnit_Url();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.art2.DeployUnit#getHashcode <em>Hashcode</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hashcode</em>'.
+	 * @see org.kermeta.art2.DeployUnit#getHashcode()
+	 * @see #getDeployUnit()
+	 * @generated
+	 */
+	EAttribute getDeployUnit_Hashcode();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2.TypeLibrary <em>Type Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3469,17 +3417,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeDefinition_RequiredLibs();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.art2.TypeDefinition#getHashcode <em>Hashcode</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Hashcode</em>'.
-	 * @see org.kermeta.art2.TypeDefinition#getHashcode()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EAttribute getTypeDefinition_Hashcode();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.kermeta.art2.TypeDefinition#getDictionaryType <em>Dictionary Type</em>}'.
@@ -4149,6 +4086,14 @@ public interface Art2Package extends EPackage {
 		EAttribute DEPLOY_UNIT__URL = eINSTANCE.getDeployUnit_Url();
 
 		/**
+		 * The meta object literal for the '<em><b>Hashcode</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOY_UNIT__HASHCODE = eINSTANCE.getDeployUnit_Hashcode();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.art2.impl.TypeLibraryImpl <em>Type Library</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4543,14 +4488,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_DEFINITION__REQUIRED_LIBS = eINSTANCE.getTypeDefinition_RequiredLibs();
-
-		/**
-		 * The meta object literal for the '<em><b>Hashcode</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_DEFINITION__HASHCODE = eINSTANCE.getTypeDefinition_Hashcode();
 
 		/**
 		 * The meta object literal for the '<em><b>Dictionary Type</b></em>' containment reference feature.

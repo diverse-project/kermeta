@@ -26,6 +26,7 @@ import org.kermeta.art2.DeployUnit;
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getUnitName <em>Unit Name</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.kermeta.art2.impl.DeployUnitImpl#getHashcode <em>Hashcode</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +112,26 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 	 * @ordered
 	 */
 	protected String url = URL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHashcode() <em>Hashcode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHashcode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HASHCODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getHashcode() <em>Hashcode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHashcode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String hashcode = HASHCODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -220,6 +241,27 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getHashcode() {
+		return hashcode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHashcode(String newHashcode) {
+		String oldHashcode = hashcode;
+		hashcode = newHashcode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.DEPLOY_UNIT__HASHCODE, oldHashcode, hashcode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -231,6 +273,8 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 				return getVersion();
 			case Art2Package.DEPLOY_UNIT__URL:
 				return getUrl();
+			case Art2Package.DEPLOY_UNIT__HASHCODE:
+				return getHashcode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -254,6 +298,9 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 				return;
 			case Art2Package.DEPLOY_UNIT__URL:
 				setUrl((String)newValue);
+				return;
+			case Art2Package.DEPLOY_UNIT__HASHCODE:
+				setHashcode((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -279,6 +326,9 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 			case Art2Package.DEPLOY_UNIT__URL:
 				setUrl(URL_EDEFAULT);
 				return;
+			case Art2Package.DEPLOY_UNIT__HASHCODE:
+				setHashcode(HASHCODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -299,6 +349,8 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case Art2Package.DEPLOY_UNIT__URL:
 				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+			case Art2Package.DEPLOY_UNIT__HASHCODE:
+				return HASHCODE_EDEFAULT == null ? hashcode != null : !HASHCODE_EDEFAULT.equals(hashcode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -321,6 +373,8 @@ public class DeployUnitImpl extends NamedElementImpl implements DeployUnit {
 		result.append(version);
 		result.append(", url: ");
 		result.append(url);
+		result.append(", hashcode: ");
+		result.append(hashcode);
 		result.append(')');
 		return result.toString();
 	}

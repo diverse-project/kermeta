@@ -19,6 +19,7 @@ package org.kermeta.art2;
  *   <li>{@link org.kermeta.art2.DeployUnit#getUnitName <em>Unit Name</em>}</li>
  *   <li>{@link org.kermeta.art2.DeployUnit#getVersion <em>Version</em>}</li>
  *   <li>{@link org.kermeta.art2.DeployUnit#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.kermeta.art2.DeployUnit#getHashcode <em>Hashcode</em>}</li>
  * </ul>
  * </p>
  *
@@ -130,5 +131,31 @@ public interface DeployUnit extends NamedElement {
 	 * @generated
 	 */
 	void setUrl(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Hashcode</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hashcode</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hashcode</em>' attribute.
+	 * @see #setHashcode(String)
+	 * @see org.kermeta.art2.Art2Package#getDeployUnit_Hashcode()
+	 * @model
+	 * @generated
+	 */
+	String getHashcode();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.art2.DeployUnit#getHashcode <em>Hashcode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hashcode</em>' attribute.
+	 * @see #getHashcode()
+	 * @generated
+	 */
+	void setHashcode(String value);
 
 } // DeployUnit

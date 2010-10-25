@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.art2.TypeDefinition#getFactoryBean <em>Factory Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.TypeDefinition#getBean <em>Bean</em>}</li>
  *   <li>{@link org.kermeta.art2.TypeDefinition#getRequiredLibs <em>Required Libs</em>}</li>
- *   <li>{@link org.kermeta.art2.TypeDefinition#getHashcode <em>Hashcode</em>}</li>
  *   <li>{@link org.kermeta.art2.TypeDefinition#getDictionaryType <em>Dictionary Type</em>}</li>
  * </ul>
  * </p>
@@ -124,32 +123,6 @@ public interface TypeDefinition extends NamedElement {
 	 * @generated
 	 */
 	EList<DeployUnit> getRequiredLibs();
-
-	/**
-	 * Returns the value of the '<em><b>Hashcode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Hashcode</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Hashcode</em>' attribute.
-	 * @see #setHashcode(String)
-	 * @see org.kermeta.art2.Art2Package#getTypeDefinition_Hashcode()
-	 * @model
-	 * @generated
-	 */
-	String getHashcode();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.art2.TypeDefinition#getHashcode <em>Hashcode</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Hashcode</em>' attribute.
-	 * @see #getHashcode()
-	 * @generated
-	 */
-	void setHashcode(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Dictionary Type</b></em>' containment reference.
