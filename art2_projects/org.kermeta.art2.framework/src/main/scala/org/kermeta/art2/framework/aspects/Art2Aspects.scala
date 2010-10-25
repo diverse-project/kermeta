@@ -19,6 +19,7 @@ object Art2Aspects{
  // implicit def bindingAspect(b : Binding ) = BindingAspect(b)
   implicit def typedElementAspect(b : TypedElement ) = TypedElementAspect(b)
   implicit def channelAspect(c:Channel) = ChannelAspect(c)
+  implicit def dictionaryAspect(d:Dictionary) = DictionaryAspect(d)
 
 }
 
