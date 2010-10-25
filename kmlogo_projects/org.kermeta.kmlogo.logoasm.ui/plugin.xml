@@ -110,7 +110,7 @@
             hasPages="false"
             icon="icons/newkermetafile.png"
             id="org.kermeta.kmlogo.samples.wizard"
-            name="Km Logo samples"
+            name="Logo tutorial - Logo model samples"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
    </extension>
 </plugin>

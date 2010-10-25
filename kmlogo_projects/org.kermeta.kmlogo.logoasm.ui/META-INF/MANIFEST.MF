@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Triskell Logo Ui Plug-in
 Bundle-SymbolicName: org.kermeta.kmlogo.logoasm.ui;singleton:=true
-Bundle-Version: 1.3.2.qualifier
+Bundle-Version: 1.4.2
 Bundle-Activator: org.kermeta.kmlogo.logoasm.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

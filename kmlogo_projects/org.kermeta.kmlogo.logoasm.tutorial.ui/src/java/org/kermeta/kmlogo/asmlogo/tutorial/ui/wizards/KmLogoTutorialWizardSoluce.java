@@ -34,6 +34,7 @@ public class KmLogoTutorialWizardSoluce
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.edit.zip", "org.kermeta.kmlogo.logoasm.edit"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.editor.zip", "org.kermeta.kmlogo.logoasm.editor"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip", "org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo"));
+		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui.zip", "org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.srcKermeta.zip", "org.kermeta.kmlogo.logoasm.srcKermeta"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.zip", "org.kermeta.kmlogo.logoasm.ui"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.osspecific.zip", "org.kermeta.kmlogo.logoasm.ui.osspecific"));
