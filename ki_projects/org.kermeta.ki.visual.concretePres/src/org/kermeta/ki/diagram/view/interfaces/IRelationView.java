@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
  * The interface for a relation established between two entities.
  * @author Arnaud Blouin
  */
-public interface IRelationView extends IComponentView {
+public interface IRelationView extends IComponentView, IHandlable {
 	/**
 	 * @return The number of segments that compose the relation.
 	 */
@@ -25,6 +25,8 @@ public interface IRelationView extends IComponentView {
 	void setHandlersVisible(final boolean visible);
 
 	IHandler getHandlersAt(final double x, final double y);
+	
+	IHandler getHandlers(final int position);
 	
 	ISegmentView getLastSegment();
 	

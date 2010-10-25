@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+import org.kermeta.ki.diagram.view.interfaces.IHandlable;
 import org.kermeta.ki.diagram.view.interfaces.IHandler;
 
 public class Handler implements IHandler {
@@ -14,14 +15,17 @@ public class Handler implements IHandler {
 
 	protected Point2D point;
 	
+	protected IHandlable handlable;
 	
 	
-	public Handler(final Point2D point) {
+	
+	public Handler(final Point2D point, final IHandlable handlable) {
 		super();
 		
-		if(point==null)
+		if(point==null || handlable==null)
 			throw new IllegalArgumentException();
 		
+		setHandlable(handlable);
 		setPoint(point);
 	}
 	
@@ -63,5 +67,17 @@ public class Handler implements IHandler {
 	@Override
 	public void translate(final double tx, final double ty) {
 		point.setLocation(point.getX()+tx, point.getY()+ty);
+	}
+
+	@Override
+	public IHandlable getHandlable() {
+		return handlable;
+	}
+	
+
+	@Override
+	public void setHandlable(final IHandlable handlable) {
+		if(handlable!=null)
+			this.handlable = handlable;
 	}
 }

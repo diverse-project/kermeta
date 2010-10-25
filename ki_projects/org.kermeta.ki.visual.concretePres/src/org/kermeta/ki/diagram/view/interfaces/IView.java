@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 
 public interface IView {
+	GeneralPath getBoundPath();
+	
 	/**
 	 * @return The path used to draw the view.
 	 */

@@ -24,7 +24,7 @@ public class Anchor implements IAnchor {
 	
 	
 	@Override
-	public void paint(Graphics2D g) {
+	public void paint(final Graphics2D g) {
 		g.setColor(Color.GREEN);
 		final double width = 6.;
 		g.drawOval((int)(position.getX()-width/2.), (int)(position.getY()-width/2.), (int)width, (int)width);
@@ -53,5 +53,13 @@ public class Anchor implements IAnchor {
 	@Override
 	public void translate(final double tx, final double ty) {
 		position.setLocation(position.getX()+tx, position.getY()+ty);
+	}
+
+
+
+	@Override
+	public void setPosition(final Point2D position) {
+		if(position!=null)
+			this.position = position;
 	}
 }

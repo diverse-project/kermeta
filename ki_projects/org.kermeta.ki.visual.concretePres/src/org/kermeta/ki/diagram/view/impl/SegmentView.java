@@ -103,7 +103,7 @@ public class SegmentView implements ISegmentView {
 	
 	
 	@Override
-	public Line2D getPerpendicularLine(final Point2D pt) {
+	public Line2D getPerpendicularLine(final Point2D pt) {//TODO to remove
 		if(isVerticalLine())
 			return Number.NUMBER.equals(pt.getX(), pointSrc.getX()) ? new Line2D.Double(0., pt.getY(), pt.getX(), pt.getY()) : null;
 			

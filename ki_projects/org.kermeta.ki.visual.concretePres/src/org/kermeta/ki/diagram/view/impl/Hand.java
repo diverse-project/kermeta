@@ -169,6 +169,26 @@ public class Hand implements MouseListener, MouseMotionListener {
 		
 		if(draggedHandler!=null) {
 			draggedHandler.translate(gapX, gapY);
+			
+			if(draggedHandler.getHandlable() instanceof IRelationView) {
+				final IRelationView rel = (IRelationView) draggedHandler.getHandlable();
+				IEntityView entity = null;
+				
+				if(rel.getHandlers(-1)==draggedHandler) {
+					entity = rel.getEntityTar();
+				}
+				else if(rel.getHandlers(0)==draggedHandler) {
+					entity = rel.getEntitySrc();
+				}
+				
+				if(entity!=null) {
+					Point2D pt = entity.getClosestPoint(new Point2D.Double(e.getX()/zoom, e.getY()/zoom));
+					
+					if(pt!=null)
+						draggedHandler.getPoint().setLocation(pt);
+				}
+			}
+			
 			diagram.updatePreferredSize();
 			diagram.refresh();
 		} else
@@ -204,7 +224,7 @@ public class Hand implements MouseListener, MouseMotionListener {
 		for(int i=0, size=diagram.getNbRelations(); i<size ; i++) {
 			relation = diagram.getRelationAt(i);
 			
-			if(relation.getNbSegment()>1 && relation.contains(x, y)) {
+			if(relation.contains(x, y)) {
 				relation.setHandlersVisible(true);
 				visibleHandlers.add(diagram.getRelationAt(i));
 				mustRefresh = true;

@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -66,6 +68,9 @@ public class ClassView extends EntityView {
 	/** Defines if the operations must be visible or not. */
 	protected boolean operationsVisible;
 	
+	protected GeneralPath boundPath;
+	
+	
 	
 	/**
 	 * Initialises a class.
@@ -78,6 +83,7 @@ public class ClassView extends EntityView {
 		if(name==null)
 			throw new IllegalArgumentException();
 		
+		boundPath			= new GeneralPath();
 		operationsVisible 	= true;
 		propertiesVisible	= true;
 		this.name 			= name;
@@ -266,6 +272,8 @@ public class ClassView extends EntityView {
 		
 		for(final AttributeView attr : attributes)
 			attr.position.setLocation(attr.position.getX()+tx, attr.position.getY()+ty);
+		
+		boundPath.transform(AffineTransform.getTranslateInstance(tx, ty));
 	}
 
 	
@@ -284,12 +292,8 @@ public class ClassView extends EntityView {
 		final float xAttr 	   = cx-halfWidth + WIDTH_GAP;
 		float yAttr 		   = cy-halfHeight + textHeaderHeight + HEIGHT_GAP;
 		
-		path.reset();
-		path.moveTo(cx-halfWidth, cy-halfHeight);
-		path.lineTo(cx+halfWidth, cy-halfHeight);
-		path.lineTo(cx+halfWidth, cy+halfHeight);
-		path.lineTo(cx-halfWidth, cy+halfHeight);
-		path.closePath();
+		updateBoundPath(path, dim.width, dim.height, cx, cy);
+		updateBoundPath(boundPath, dim.width, dim.height, cx, cy);
 		path.moveTo(cx-halfWidth, cy-halfHeight+textHeaderHeight);
 		path.lineTo(cx+halfWidth, cy-halfHeight+textHeaderHeight);
 		
@@ -316,6 +320,20 @@ public class ClassView extends EntityView {
 		}
 		
 		updateAnchorsPosition(oldBorders);
+	}
+	
+	
+	
+	private static void updateBoundPath(final GeneralPath path, final double width, final double height, final double cx, final double cy) {
+		final float halfWidth  = (float) (width/2f);
+		final float halfHeight = (float) (height/2f);
+		
+		path.reset();
+		path.moveTo(cx-halfWidth, cy-halfHeight);
+		path.lineTo(cx+halfWidth, cy-halfHeight);
+		path.lineTo(cx+halfWidth, cy+halfHeight);
+		path.lineTo(cx-halfWidth, cy+halfHeight);
+		path.closePath();
 	}
 	
 	
@@ -459,5 +477,11 @@ public class ClassView extends EntityView {
 	@Override
 	public List<IAnchor> getAnchors() {
 		return anchors;
+	}
+	
+	
+	@Override
+	public GeneralPath getBoundPath() {
+		return boundPath;
 	}
 }

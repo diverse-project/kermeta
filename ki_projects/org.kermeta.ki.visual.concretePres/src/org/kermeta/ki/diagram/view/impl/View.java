@@ -20,4 +20,10 @@ public abstract class View implements IView {
 	public GeneralPath getPath() {
 		return path;
 	}
+	
+	
+	@Override
+	public GeneralPath getBoundPath() {
+		return path;
+	}
 }

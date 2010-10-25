@@ -59,21 +59,24 @@ public class RelationView extends ComponentView implements IRelationView {
 		handlersVisible		= false;
 		updateLineColor(255);
 		
+		Point2D pt1 = new Point2D.Double();
+		Point2D pt2 =  new Point2D.Double();
+		
+		handlers.add(new Handler(pt1, this));
+		handlers.add(new Handler(pt2, this));
+		
 		if(src==target) {
-			Point2D pt1 = new Point2D.Double();
-			Point2D pt2 =  new Point2D.Double();
 			getRecursiveRelationPoints(pt1, pt2);
 			Point2D pt3 = new Point2D.Double(pt1.getX()-100, pt1.getY());
 			Point2D pt4 = new Point2D.Double(pt2.getX()-100, pt2.getY());
-			
-			segments.add(new SegmentView(pt1, pt3));//TODO should use addPoint instead
+			segments.add(new SegmentView(pt1, pt3));
 			segments.add(new SegmentView(pt3, pt4));
 			segments.add(new SegmentView(pt4, pt2));
-			handlers.add(new Handler(pt3));
-			handlers.add(new Handler(pt4));
+			handlers.add(1, new Handler(pt3, this));
+			handlers.add(2, new Handler(pt4, this));
 		}
 		else
-			segments.add(new SegmentView(new Point2D.Double(), new Point2D.Double()));
+			segments.add(new SegmentView(pt1, pt2));
 	}
 
 	
@@ -372,26 +375,26 @@ public class RelationView extends ComponentView implements IRelationView {
 		double delta = B*B-4.*A*C;
 
 		if(delta>0.) {
-			double _x1, _x2, _y1, _y2;
+			double x1, x2, y1, y2;
 			Point2D.Double sol[] = new Point2D.Double[2];
 			
-			_x1 = (-B+Math.sqrt(delta))/(2*A);
-			_x2 = (-B-Math.sqrt(delta))/(2*A);
-			_y1 = a*_x1+b;
-			_y2 = a*_x2+b;
-			sol[0] = new Point2D.Double(_x1, _y1);
-			sol[1] = new Point2D.Double(_x2, _y2);
+			x1 = (-B+Math.sqrt(delta))/(2*A);
+			x2 = (-B-Math.sqrt(delta))/(2*A);
+			y1 = a*x1+b;
+			y2 = a*x2+b;
+			sol[0] = new Point2D.Double(x1, y1);
+			sol[1] = new Point2D.Double(x2, y2);
 			
 			return sol;
 		}
 		else
 			if(Number.NUMBER.equals(delta, 0.)) {
-				double _x2, _y2;
+				double x2, y2;
 				Point2D.Double sol[] = new Point2D.Double[1];
 				
-				_x2 = -B/2*A;
-				_y2 = a*_x2+b;
-				sol[0] = new Point2D.Double(_x2, _y2);
+				x2 = -B/2*A;
+				y2 = a*x2+b;
+				sol[0] = new Point2D.Double(x2, y2);
 				
 				return sol;
 			}
@@ -436,7 +439,7 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	
 	
-	private void getMinMaxValues(double[] mins, double[] maxs, double x, double y) {
+	private static void getMinMaxValues(double[] mins, double[] maxs, double x, double y) {
 		if(x<mins[0]) mins[0] = x;
 		if(y<mins[1]) mins[1] = y;
 		if(x>maxs[0]) maxs[0] = x;
@@ -446,8 +449,8 @@ public class RelationView extends ComponentView implements IRelationView {
 	
 	@Override
 	public Rectangle2D getBorders() {
-		double[] mins = { Double.MIN_VALUE, Double.MIN_VALUE};
-		double[] maxs = { Double.MAX_VALUE, Double.MAX_VALUE};
+		double[] mins = {Double.MIN_VALUE, Double.MIN_VALUE};
+		double[] maxs = {Double.MAX_VALUE, Double.MAX_VALUE};
 		
 		for(final ISegmentView seg : segments) {
 			getMinMaxValues(mins, maxs, seg.getPointSource().getX(), seg.getPointSource().getY());
@@ -528,12 +531,14 @@ public class RelationView extends ComponentView implements IRelationView {
 				newSeg = new SegmentView(newPt, oldPt);
 				
 				
-				if((i+1)>=nbSeg)
+				if((i+1)>=nbSeg) {
 					segments.add(newSeg);
-				else
+					handlers.add(new Handler(newPt, this));
+				}
+				else {
 					segments.add(i+1, newSeg);
-				
-				handlers.add(new Handler(newPt));
+					handlers.add(i+1, new Handler(newPt, this));
+				}
 			}
 			else
 				i++;
@@ -586,5 +591,18 @@ public class RelationView extends ComponentView implements IRelationView {
 	@Override
 	public void setHandlersVisible(final boolean visible) {
 		handlersVisible = visible;
+	}
+
+
+	@Override
+	public IHandler getHandlers(final int position) {
+		IHandler handler;
+		
+		if((position>=0 && position<handlers.size()) || position==-1)
+			handler = handlers.get(position==-1 ? handlers.size()-1 : position);
+		else 
+			handler = null;
+		
+		return handler;
 	}
 }

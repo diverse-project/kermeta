@@ -13,4 +13,6 @@ public interface IAnchor {
 	Point2D getPosition();
 	
 	void translate(final double tx, final double ty);
+
+	void setPosition(final Point2D position);
 }

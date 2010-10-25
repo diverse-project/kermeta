@@ -25,6 +25,8 @@ public interface IEntityView extends IComponentView, ISelectable {
 	void translate(final double tx, final double ty);
 
 	
+	Point2D getClosestPoint(final Point2D pt);
+	
 	/**
 	 * @param x The X-coordinate of the point to test.
 	 * @param y The Y-coordinate of the point to test.

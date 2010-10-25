@@ -13,4 +13,8 @@ public interface IHandler {
 	boolean contains(final double x, final double y);
 	
 	void translate(final double tx, final double ty);
+	
+	IHandlable getHandlable();
+	
+	void setHandlable(final IHandlable handlable);
 }
