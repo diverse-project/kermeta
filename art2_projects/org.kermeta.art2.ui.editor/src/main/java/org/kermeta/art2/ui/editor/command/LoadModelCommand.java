@@ -109,7 +109,7 @@ public class LoadModelCommand implements Command {
         //REFRESH UI
         kernel.getEditorPanel().doLayout();
         kernel.getEditorPanel().repaint();
-        kernel.getEditorPanel().repaint();
+        kernel.getEditorPanel().revalidate();
 
     }
 }
