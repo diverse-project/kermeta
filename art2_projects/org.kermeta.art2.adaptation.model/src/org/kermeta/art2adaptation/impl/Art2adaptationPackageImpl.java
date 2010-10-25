@@ -34,6 +34,9 @@ import org.kermeta.art2adaptation.RemoveThirdParty;
 import org.kermeta.art2adaptation.RemoveType;
 import org.kermeta.art2adaptation.ThirdPartyAdaptation;
 import org.kermeta.art2adaptation.TypeAdaptation;
+import org.kermeta.art2adaptation.UpdateDictionaryInstance;
+import org.kermeta.art2adaptation.UpdateInstance;
+import org.kermeta.art2adaptation.UpdateType;
 
 /**
  * <!-- begin-user-doc -->
@@ -160,6 +163,27 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * @generated
 	 */
 	private EClass removeFragmentBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateDictionaryInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateTypeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -446,6 +470,33 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUpdateInstance() {
+		return updateInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUpdateDictionaryInstance() {
+		return updateDictionaryInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUpdateType() {
+		return updateTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Art2adaptationFactory getArt2adaptationFactory() {
 		return (Art2adaptationFactory)getEFactoryInstance();
 	}
@@ -509,6 +560,12 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		addFragmentBindingEClass = createEClass(ADD_FRAGMENT_BINDING);
 
 		removeFragmentBindingEClass = createEClass(REMOVE_FRAGMENT_BINDING);
+
+		updateInstanceEClass = createEClass(UPDATE_INSTANCE);
+
+		updateDictionaryInstanceEClass = createEClass(UPDATE_DICTIONARY_INSTANCE);
+
+		updateTypeEClass = createEClass(UPDATE_TYPE);
 	}
 
 	/**
@@ -557,6 +614,9 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		fragmentBindingAdaptationEClass.getESuperTypes().add(this.getAdaptationPrimitive());
 		addFragmentBindingEClass.getESuperTypes().add(this.getFragmentBindingAdaptation());
 		removeFragmentBindingEClass.getESuperTypes().add(this.getFragmentBindingAdaptation());
+		updateInstanceEClass.getESuperTypes().add(this.getInstanceAdaptation());
+		updateDictionaryInstanceEClass.getESuperTypes().add(this.getInstanceAdaptation());
+		updateTypeEClass.getESuperTypes().add(this.getTypeAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(adaptationPrimitiveEClass, AdaptationPrimitive.class, "AdaptationPrimitive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -599,6 +659,12 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		initEClass(addFragmentBindingEClass, AddFragmentBinding.class, "AddFragmentBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(removeFragmentBindingEClass, RemoveFragmentBinding.class, "RemoveFragmentBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateInstanceEClass, UpdateInstance.class, "UpdateInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateDictionaryInstanceEClass, UpdateDictionaryInstance.class, "UpdateDictionaryInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateTypeEClass, UpdateType.class, "UpdateType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

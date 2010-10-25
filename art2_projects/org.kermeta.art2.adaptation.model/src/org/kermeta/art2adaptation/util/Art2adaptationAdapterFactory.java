@@ -140,6 +140,18 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 				return createRemoveFragmentBindingAdapter();
 			}
 			@Override
+			public Adapter caseUpdateInstance(UpdateInstance object) {
+				return createUpdateInstanceAdapter();
+			}
+			@Override
+			public Adapter caseUpdateDictionaryInstance(UpdateDictionaryInstance object) {
+				return createUpdateDictionaryInstanceAdapter();
+			}
+			@Override
+			public Adapter caseUpdateType(UpdateType object) {
+				return createUpdateTypeAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -394,6 +406,48 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRemoveFragmentBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.UpdateInstance <em>Update Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.UpdateInstance
+	 * @generated
+	 */
+	public Adapter createUpdateInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.UpdateDictionaryInstance <em>Update Dictionary Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.UpdateDictionaryInstance
+	 * @generated
+	 */
+	public Adapter createUpdateDictionaryInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.UpdateType <em>Update Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.UpdateType
+	 * @generated
+	 */
+	public Adapter createUpdateTypeAdapter() {
 		return null;
 	}
 

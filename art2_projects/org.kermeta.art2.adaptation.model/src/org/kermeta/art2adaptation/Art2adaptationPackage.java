@@ -556,6 +556,91 @@ public interface Art2adaptationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.UpdateInstanceImpl <em>Update Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.UpdateInstanceImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateInstance()
+	 * @generated
+	 */
+	int UPDATE_INSTANCE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_INSTANCE__REF = INSTANCE_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Update Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_INSTANCE_FEATURE_COUNT = INSTANCE_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.UpdateDictionaryInstanceImpl <em>Update Dictionary Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.UpdateDictionaryInstanceImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateDictionaryInstance()
+	 * @generated
+	 */
+	int UPDATE_DICTIONARY_INSTANCE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_DICTIONARY_INSTANCE__REF = INSTANCE_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Update Dictionary Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_DICTIONARY_INSTANCE_FEATURE_COUNT = INSTANCE_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.UpdateTypeImpl <em>Update Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.UpdateTypeImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateType()
+	 * @generated
+	 */
+	int UPDATE_TYPE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_TYPE__REF = TYPE_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Update Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_TYPE_FEATURE_COUNT = TYPE_ADAPTATION_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AdaptationPrimitive <em>Adaptation Primitive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -801,6 +886,36 @@ public interface Art2adaptationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRemoveFragmentBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.UpdateInstance <em>Update Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Update Instance</em>'.
+	 * @see org.kermeta.art2adaptation.UpdateInstance
+	 * @generated
+	 */
+	EClass getUpdateInstance();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.UpdateDictionaryInstance <em>Update Dictionary Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Update Dictionary Instance</em>'.
+	 * @see org.kermeta.art2adaptation.UpdateDictionaryInstance
+	 * @generated
+	 */
+	EClass getUpdateDictionaryInstance();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.UpdateType <em>Update Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Update Type</em>'.
+	 * @see org.kermeta.art2adaptation.UpdateType
+	 * @generated
+	 */
+	EClass getUpdateType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1049,6 +1164,36 @@ public interface Art2adaptationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REMOVE_FRAGMENT_BINDING = eINSTANCE.getRemoveFragmentBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.UpdateInstanceImpl <em>Update Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.UpdateInstanceImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateInstance()
+		 * @generated
+		 */
+		EClass UPDATE_INSTANCE = eINSTANCE.getUpdateInstance();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.UpdateDictionaryInstanceImpl <em>Update Dictionary Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.UpdateDictionaryInstanceImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateDictionaryInstance()
+		 * @generated
+		 */
+		EClass UPDATE_DICTIONARY_INSTANCE = eINSTANCE.getUpdateDictionaryInstance();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.UpdateTypeImpl <em>Update Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.UpdateTypeImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateType()
+		 * @generated
+		 */
+		EClass UPDATE_TYPE = eINSTANCE.getUpdateType();
 
 	}
 

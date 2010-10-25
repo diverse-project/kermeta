@@ -214,6 +214,30 @@ public class Art2adaptationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2adaptationPackage.UPDATE_INSTANCE: {
+				UpdateInstance updateInstance = (UpdateInstance)theEObject;
+				T result = caseUpdateInstance(updateInstance);
+				if (result == null) result = caseInstanceAdaptation(updateInstance);
+				if (result == null) result = caseAdaptationPrimitive(updateInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.UPDATE_DICTIONARY_INSTANCE: {
+				UpdateDictionaryInstance updateDictionaryInstance = (UpdateDictionaryInstance)theEObject;
+				T result = caseUpdateDictionaryInstance(updateDictionaryInstance);
+				if (result == null) result = caseInstanceAdaptation(updateDictionaryInstance);
+				if (result == null) result = caseAdaptationPrimitive(updateDictionaryInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.UPDATE_TYPE: {
+				UpdateType updateType = (UpdateType)theEObject;
+				T result = caseUpdateType(updateType);
+				if (result == null) result = caseTypeAdaptation(updateType);
+				if (result == null) result = caseAdaptationPrimitive(updateType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -470,6 +494,51 @@ public class Art2adaptationSwitch<T> {
 	 * @generated
 	 */
 	public T caseRemoveFragmentBinding(RemoveFragmentBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateInstance(UpdateInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Dictionary Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Dictionary Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateDictionaryInstance(UpdateDictionaryInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateType(UpdateType object) {
 		return null;
 	}
 

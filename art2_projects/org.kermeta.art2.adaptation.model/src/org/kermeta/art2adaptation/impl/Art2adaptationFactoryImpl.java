@@ -77,6 +77,9 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.FRAGMENT_BINDING_ADAPTATION: return createFragmentBindingAdaptation();
 			case Art2adaptationPackage.ADD_FRAGMENT_BINDING: return createAddFragmentBinding();
 			case Art2adaptationPackage.REMOVE_FRAGMENT_BINDING: return createRemoveFragmentBinding();
+			case Art2adaptationPackage.UPDATE_INSTANCE: return createUpdateInstance();
+			case Art2adaptationPackage.UPDATE_DICTIONARY_INSTANCE: return createUpdateDictionaryInstance();
+			case Art2adaptationPackage.UPDATE_TYPE: return createUpdateType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -250,6 +253,36 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public RemoveFragmentBinding createRemoveFragmentBinding() {
 		RemoveFragmentBindingImpl removeFragmentBinding = new RemoveFragmentBindingImpl();
 		return removeFragmentBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateInstance createUpdateInstance() {
+		UpdateInstanceImpl updateInstance = new UpdateInstanceImpl();
+		return updateInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateDictionaryInstance createUpdateDictionaryInstance() {
+		UpdateDictionaryInstanceImpl updateDictionaryInstance = new UpdateDictionaryInstanceImpl();
+		return updateDictionaryInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateType createUpdateType() {
+		UpdateTypeImpl updateType = new UpdateTypeImpl();
+		return updateType;
 	}
 
 	/**
