@@ -2,6 +2,7 @@ package org.kermeta.ki.diagram.view.impl;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 public class Line extends Line2D.Double {
 	private static final long serialVersionUID = 1L;
@@ -65,57 +66,30 @@ public class Line extends Line2D.Double {
 		}
 	}
 
-
-
-	public Point2D[] findPoints(final double x, final double y, final double distance) {
-		if(Number.NUMBER.equals(distance, 0.)) {
-			Point2D.Double[] sol = new Point2D.Double[1];
-			sol[0] = new Point2D.Double(x,y);
-
-			return sol;
-		}
-
-		if(isVerticalLine()) {
-			if(isHorizontalLine())// The line is a point. So no position can be computed.
-				return null;
-
-			Point2D.Double sol[] = new Point2D.Double[2];
-			sol[0] = new Point2D.Double(x, y-distance);
-			sol[1] = new Point2D.Double(x, y+distance);
-
-			return sol;
-		}
-
-		double A = a*a+1., B = -2.*(x+y*a-a*b);
-		double C = b*b-(2.*y*b)+y*y+x*x-(distance*distance);
-		double delta = B*B-4.*A*C;
-
-		if(delta>0.) {
-			double _x1, _x2, _y1, _y2;
-			Point2D.Double sol[] = new Point2D.Double[2];
-
-			_x1 = (-B+Math.sqrt(delta))/(2*A);
-			_x2 = (-B-Math.sqrt(delta))/(2*A);
-			_y1 = a*_x1+b;
-			_y2 = a*_x2+b;
-			sol[0] = new Point2D.Double(_x1, _y1);
-			sol[1] = new Point2D.Double(_x2, _y2);
-
-			return sol;
-		}
-		else
-			if(Number.NUMBER.equals(delta, 0.)) {
-				double _x2, _y2;
-				Point2D.Double sol[] = new Point2D.Double[1];
-
-				_x2 = -B/2*A;
-				_y2 = a*_x2+b;
-				sol[0] = new Point2D.Double(_x2, _y2);
-
-				return sol;
-			}
-			else
-				return null;
+	
+	
+	public Point2D intersectionPoint(final Rectangle2D rec) {
+		final double width 	= rec.getWidth();
+		final double height = rec.getHeight();
+		final double x 		= rec.getX();
+		final double y 		= rec.getY();
+		
+		Point2D pt = getIntersectionSegment(new Line(x, y, x+width, y));
+	
+		if(pt!=null)
+			return pt;
+		
+		pt = getIntersectionSegment(new Line(x+width, y, x+width, y+height));
+		
+		if(pt!=null)
+			return pt;
+		
+		pt = getIntersectionSegment(new Line(x, y+height, x+width, y+height));
+		
+		if(pt!=null)
+			return pt;
+		
+		return getIntersectionSegment(new Line(x, y, x, y+height));
 	}
 
 	
@@ -161,36 +135,36 @@ public class Line extends Line2D.Double {
 	}
 
 
-
+	
 	public Point2D.Double getIntersection(final Line l) {
-		if(l==null) return null;
-		if(Number.NUMBER.equals(a, l.getA())) return null;
+		if(l==null || Number.NUMBER.equals(a, l.getA())) 
+			return null;
 
 		boolean verticalLine1 = isVerticalLine();
 		boolean verticalLine2 = l.isVerticalLine();
+		boolean horiz1		  = isHorizontalLine();
+		boolean horiz2		  = l.isHorizontalLine();
+		
+		if((verticalLine1 && (verticalLine2 || horiz1)) || (verticalLine2 && horiz2) || (horiz1 && horiz2))
+			return null;
+		
 		double x;
 		double y;
 
-		if(verticalLine2) {
-			if(verticalLine1)// The two lines a parallels
-				return null;
-
-			if(l.isHorizontalLine())// Points of the line l are equal.
-				return null;
-
-			if(isHorizontalLine()) {
+		if(verticalLine2)
+			if(horiz1) {
 				x = l.getX1();
 				y = getY1();
 			}else {
 				y = a*l.getX1()+b;
 				x = (y-b)/a;
 			}
-		}else {
+		else {
 			double la = l.getA();
 			double lb = l.getB();
 
 			if(verticalLine1) {
-				if(l.isHorizontalLine()) {
+				if(horiz2) {
 					x = getX1();
 					y = l.getY1();
 				} else {
@@ -198,8 +172,17 @@ public class Line extends Line2D.Double {
 					x = (y-lb)/la;
 				}
 			}else {
-				x = (b-lb)/(la-a);
-				y = a*x+b;
+				if(horiz1) { //TODO backport to the latexdraw trunk + add test: does not manage horiz liens
+					x = (b-lb)/la;
+					y = getY1();
+				}else
+				if(horiz2) {
+					x = (lb-b)/a;
+					y = l.getY1();
+				}else {
+					x = (b-lb)/(la-a);
+					y = a*x+b;
+				}
 			}
 		}
 
@@ -247,7 +230,7 @@ public class Line extends Line2D.Double {
 	}
 
 
-
+	
 	public Point2D getIntersectionSegment(final Line l) {
 		Point2D p = getIntersection(l);
 

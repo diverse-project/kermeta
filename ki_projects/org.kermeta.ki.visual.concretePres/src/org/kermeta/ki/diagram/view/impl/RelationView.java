@@ -2,7 +2,6 @@ package org.kermeta.ki.diagram.view.impl;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -171,129 +170,16 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	
 	
-	
-	public static Point2D intersectionPoint(final Line2D line, final Rectangle2D rec) {
-		final double width 	= rec.getWidth();
-		final double height = rec.getHeight();
-		final double x 		= rec.getX();
-		final double y 		= rec.getY();
-		
-		Point2D pt = getIntersectionSegment(line, new Line2D.Double(x, y, x+width, y));
-
-		if(pt!=null)
-			return pt;
-		
-		pt = getIntersectionSegment(line, new Line2D.Double(x+width, y, x+width, y+height));
-		
-		if(pt!=null)
-			return pt;
-		
-		pt = getIntersectionSegment(line, new Line2D.Double(x, y+height, x+width, y+height));
-		
-		if(pt!=null)
-			return pt;
-		
-		return getIntersectionSegment(line, new Line2D.Double(x, y, x, y+height));
-	}
-	
-	
-	public static Point2D getIntersection(final Line2D l1, final Line2D l2) {
-		double a1 = (l1.getY1() -l1.getY2())/(l1.getX1() - l1.getX2());
-		double a2 = (l2.getY1() -l2.getY2())/(l2.getX1() - l2.getX2());
-		double b1 = (l1.getY1() - a1 * l1.getX1());
-		double b2 = (l2.getY1() - a2 * l2.getX1());
-		boolean verticalLine1 = l1.getX1()==l1.getX2();
-		boolean verticalLine2 = l2.getX1()==l2.getX2();
-		boolean horizLine1 = l1.getY1()==l1.getY2();
-		boolean horizLine2 = l2.getY1()==l2.getY2();
-		double x;
-		double y;
-		
-		if(verticalLine2) {
-			if(verticalLine1)// The two lines a parallels
-				return null;
-			
-			if(horizLine2)// Points of the line l are equal.
-				return null;
-			
-			if(horizLine1) {
-				x = l2.getX1();
-				y = l1.getY1();
-			}else {
-				y = a1*l2.getX1()+b1;
-				x = (y-b1)/a1;
-			}
-		}else {
-			double la = a2;
-			double lb = a2;
-			
-			if(verticalLine1) {
-				if(horizLine2) {
-					x = l1.getX1();
-					y = l2.getY1();
-				} else {
-					y = la*l1.getX1()+lb;
-					x = (y-lb)/la;
-				}
-			}else {//TODO backport to the latexdraw trunk + add test
-				if(horizLine1) {
-					if(horizLine2)
-						return null;
-					
-					x = (b1-b2)/a2;
-					y = l1.getY1();
-				} else
-					if(horizLine2) {
-						x = (b2-b1)/a1;
-						y = l2.getY1();
-					}else {
-						x = (b1-lb)/(la-a1);
-						y = a1*x+b1;
-					}
-			}
-		}
-		
-		return new Point2D.Double(x, y);
-	}
-	
-	
-	
-
-	public static Point2D getIntersectionSegment(Line2D l1, Line2D l2) {
-		Point2D p = getIntersection(l1, l2);
-
-		if(p==null) 
-			return null;
-
-		double px   = p.getX();
-		double py   = p.getY();
-		double tlx1 = l1.getX1()<l1.getX2() ? l1.getX1() : l1.getX2();
-		double brx1 = l1.getX1()>l1.getX2() ? l1.getX1() : l1.getX2();
-		double tlx2 = l2.getX1()<l2.getX2() ? l2.getX1() : l2.getX2();
-		double brx2 = l2.getX1()>l2.getX2() ? l2.getX1() : l2.getX2();
-		double tly1 = l1.getY1()<l1.getY2() ? l1.getY1() : l1.getY2();
-		double bry1 = l1.getY1()>l1.getY2() ? l1.getY1() : l1.getY2();
-		double tly2 = l2.getY1()<l2.getY2() ? l2.getY1() : l2.getY2();
-		double bry2 = l2.getY1()>l2.getY2() ? l2.getY1() : l2.getY2();
-		
-		if(((px>tlx1 || Number.NUMBER.equals(px, tlx1)) && (px<brx1 || Number.NUMBER.equals(px, brx1)) && 
-			(py>tly1 || Number.NUMBER.equals(py, tly1)) && (py<bry1 || Number.NUMBER.equals(py, bry1))) &&
-		   ((px>tlx2 || Number.NUMBER.equals(px, tlx2)) && (px<brx2 || Number.NUMBER.equals(px, brx2)) && 
-			(py>tly2 || Number.NUMBER.equals(py, tly2)) && (py<bry2 || Number.NUMBER.equals(py, bry2))))
-			return p;
-		
-		return null;
-	}
-	
-	
 	protected void getRecursiveRelationPoints(final Point2D pt1, final Point2D pt2) {
-		Rectangle2D rec  = entitySrc.getBorders();
+		final Rectangle2D rec  = entitySrc.getBorders();
 		final double heightArrow = rec.getHeight()>20. ? 15. : rec.getHeight()/2. - 2.;
+		final Line l1 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()-heightArrow), 
+							new Point2D.Double(entitySrc.getX(), entitySrc.getY()-heightArrow));
+		final Line l2 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()+heightArrow), 
+							new Point2D.Double(entitySrc.getX(), entitySrc.getY()+heightArrow));
 		
-		pt1.setLocation(intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()-heightArrow), 
-						new Point2D.Double(entitySrc.getX(), entitySrc.getY()-heightArrow)), rec));
-		pt2.setLocation(intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()+heightArrow), 
-						new Point2D.Double(entitySrc.getX(), entitySrc.getY()+heightArrow)), rec));
+		pt1.setLocation(l1.intersectionPoint(rec));
+		pt2.setLocation(l2.intersectionPoint(rec));
 	}
 	
 	
@@ -343,63 +229,6 @@ public class RelationView extends ComponentView implements IRelationView {
 	public void setTargetDecoration(final IDecorationView targetDecoration) {
 		setDecoration(this.targetDecoration, targetDecoration);
 		this.targetDecoration = targetDecoration;
-	}
-
-
-	public static Point2D.Double[] findPoints(final Line2D line, final double x, final double y, final double distance) {
-		if(line==null)
-			return null;
-		
-		if(Number.NUMBER.equals(distance, 0.)) {
-			Point2D.Double[] sol = new Point2D.Double[1];
-			sol[0] 		 		 = new Point2D.Double(x,y);
-			
-			return sol;
-		}
-		
-		if(Number.NUMBER.equals(line.getX1(), line.getX2())) {
-			if(Number.NUMBER.equals(line.getY1(), line.getY2()))// The line is a point. So no position can be computed. 
-				return null;
-			
-			Point2D.Double sol[] = new Point2D.Double[2];
-			sol[0] = new Point2D.Double(x, y-distance);
-			sol[1] = new Point2D.Double(x, y+distance);
-			
-			return sol;
-		}
-		
-		final double a = (line.getY1() - line.getY2())/(line.getX1() - line.getX2());
-		final double b = line.getY1() - a*line.getX1();
-		double A = a*a+1., B = -2.*(x+y*a-a*b);
-		double C = b*b-(2.*y*b)+y*y+x*x-(distance*distance);
-		double delta = B*B-4.*A*C;
-
-		if(delta>0.) {
-			double x1, x2, y1, y2;
-			Point2D.Double sol[] = new Point2D.Double[2];
-			
-			x1 = (-B+Math.sqrt(delta))/(2*A);
-			x2 = (-B-Math.sqrt(delta))/(2*A);
-			y1 = a*x1+b;
-			y2 = a*x2+b;
-			sol[0] = new Point2D.Double(x1, y1);
-			sol[1] = new Point2D.Double(x2, y2);
-			
-			return sol;
-		}
-		else
-			if(Number.NUMBER.equals(delta, 0.)) {
-				double x2, y2;
-				Point2D.Double sol[] = new Point2D.Double[1];
-				
-				x2 = -B/2*A;
-				y2 = a*x2+b;
-				sol[0] = new Point2D.Double(x2, y2);
-				
-				return sol;
-			}
-			else 
-				return null;
 	}
 
 

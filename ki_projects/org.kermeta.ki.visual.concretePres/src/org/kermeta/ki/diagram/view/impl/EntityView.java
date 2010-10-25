@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -141,7 +140,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			anchor = getClosestFreeAnchor(new Point2D.Double(pt.getX(), pt.getY()), true);
 		}
 		else
-			anchor = getClosestFreeAnchor(RelationView.intersectionPoint(new Line2D.Double(centre, opposite.getCentre()), path.getBounds2D()), true);
+			anchor = getClosestFreeAnchor(new Line(centre, opposite.getCentre()).intersectionPoint(path.getBounds2D()), true);
 		
 		if(anchor!=null) {
 			Point2D pt = atEnd ? relation.getLastSegment().getPointTarget() : relation.getFirstSegment().getPointSource();
