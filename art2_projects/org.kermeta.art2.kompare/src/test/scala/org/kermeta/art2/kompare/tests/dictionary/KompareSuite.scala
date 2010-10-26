@@ -26,7 +26,11 @@ trait KompareSuite extends JUnitSuite {
 
 case class RichAdaptationModel(self : AdaptationModel) {
 
-  def shouldContains[A](c:Class[A],refName:String)={
+  def verifySize(size : Int) = {
+    assert(self.getAdaptations.size == size)
+  }
+
+  def shouldContain[A](c:Class[A],refName:String)={
     assert(
       self.getAdaptations.exists(adaptation=> {
           adaptation match {
@@ -36,10 +40,9 @@ case class RichAdaptationModel(self : AdaptationModel) {
           }
         } )
     )
-
   }
 
-  def shouldNotContains(c : Class[_])={
+  def shouldNotContain(c : Class[_])={
     assert(
       self.getAdaptations.forall(adaptation=> !adaptation.getClass.getSimpleName.contains(c.getSimpleName) )
     )

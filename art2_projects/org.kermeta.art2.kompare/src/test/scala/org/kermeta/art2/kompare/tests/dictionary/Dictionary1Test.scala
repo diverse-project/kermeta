@@ -21,13 +21,14 @@ class Dictionary1Test extends AssertionsForJUnit with KompareSuite {
 
   @Test def verifyUpdateValue() {
     var kompareModel = component.kompare(model("tests_dictionary/dictionary_1"), model("tests_dictionary/dictionary_2"), "node-0")
-    kompareModel shouldContains(classOf[UpdateDictionaryInstance],"FakeSimpleLight--398723264")
-    kompareModel.shouldNotContains(classOf[RemoveBinding])
+    kompareModel verifySize 1
+    kompareModel shouldContain(classOf[UpdateDictionaryInstance],"FakeSimpleLight--398723264")
   }
 
   @Test def verifyNotUpdateValue() {
     var kompareModel = component.kompare(model("tests_dictionary/dictionary_1"), model("tests_dictionary/dictionary_1"), "node-0")
-    kompareModel.shouldNotContains(classOf[UpdateDictionaryInstance])
+    kompareModel.shouldNotContain(classOf[UpdateDictionaryInstance])
+    kompareModel verifySize 0
   }
 
 }
