@@ -37,6 +37,7 @@ public interface IComponentView extends IView {
 	/**
 	 * Updates the colour of the lines.
 	 * @param opacity The opacity The opacity to apply on the colour.
+	 * @throws IllegalArgumentException If the given opacity is not into [0,255].
 	 */
 	void updateLineColor(final int opacity);
 	
@@ -47,7 +48,7 @@ public interface IComponentView extends IView {
 	
 	/**
 	 * Sets the visibility of the component.
-	 * @param visibility The new visibility.
+	 * @param visibility The new visibility. Must not be null.
 	 */
 	void setVisibility(final Visibility visibility);
 	
