@@ -35,14 +35,14 @@ class DataTypeVisitor extends TypeVisitor {
 
   def visitPrimitiveType(t:PrimitiveType)= {
     t.getKind match {
-      case PrimitiveType.Kind.BOOLEAN => dataType.setName(scala.Boolean.getClass.getName)
-      case PrimitiveType.Kind.BYTE => dataType.setName(scala.Byte.getClass.getName)
-      case PrimitiveType.Kind.CHAR => dataType.setName(scala.Char.getClass.getName)
-      case PrimitiveType.Kind.DOUBLE => dataType.setName(scala.Double.getClass.getName)
-      case PrimitiveType.Kind.FLOAT => dataType.setName(scala.Float.getClass.getName)
-      case PrimitiveType.Kind.INT => dataType.setName(scala.Int.getClass.getName)
-      case PrimitiveType.Kind.LONG => dataType.setName(scala.Long.getClass.getName)
-      case PrimitiveType.Kind.SHORT => dataType.setName(scala.Short.getClass.getName)
+      case PrimitiveType.Kind.BOOLEAN => dataType.setName("scala.Boolean")
+      case PrimitiveType.Kind.BYTE => dataType.setName("scala.Byte")
+      case PrimitiveType.Kind.CHAR => dataType.setName("scala.Char")
+      case PrimitiveType.Kind.DOUBLE => dataType.setName("scala.Double")
+      case PrimitiveType.Kind.FLOAT => dataType.setName("scala.Float")
+      case PrimitiveType.Kind.INT => dataType.setName("scala.Int")
+      case PrimitiveType.Kind.LONG => dataType.setName("scala.Long")
+      case PrimitiveType.Kind.SHORT => dataType.setName("scala.Short")
     }
   }
 
