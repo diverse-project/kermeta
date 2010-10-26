@@ -5,11 +5,7 @@
 
 package org.kermeta.art2.framework
 
-import java.net.InetSocketAddress
-import java.util.Date
-import org.kermeta.art2.Art2Factory
-import org.kermeta.art2.ContainerRoot
-import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
+import org.kermeta.art2._
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
@@ -62,7 +58,7 @@ object Art2PlatformHelper {
       newprop
     }
     prop.setValue(value)
-    prop.setLastCheck(new Date().getTime.toString)
+    prop.setLastCheck(new java.util.Date().getTime.toString)
 
     logger.info("New node link prop registred = "+targetNodeName+","+key+","+value)
 
