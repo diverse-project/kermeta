@@ -77,6 +77,8 @@ public class Util {
         if (genmodel.exists()) {
             Resource resourceGenModel = resourceSet.getResource(URI.createFileURI(genmodel.getAbsolutePath()), true);
             genModelModel = (GenModel) resourceGenModel.getContents().get(0);
+            genModelModel.setModelDirectory("/" + outputfileName);
+            genModelModel.getForeignModel().add(ecore.getAbsolutePath());
 
         } else {
             URI genModelURI = URI.createFileURI(genmodel.getAbsolutePath());
@@ -117,6 +119,9 @@ public class Util {
         generator.setInput(genModel);
         // Generator model code.
         Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
+
+
+
         log.info(d.getMessage());
     }
 }
