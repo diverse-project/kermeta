@@ -16,8 +16,8 @@
 
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <!-- Add resources from the plugin structure -->
+     <!--   <sourceDirectory>src</sourceDirectory> -->
+        <!-- Add resources from the plugin structure 
         <resources>
             <resource>
                 <directory>.</directory>
@@ -31,9 +31,8 @@
                 <targetPath>metamodel</targetPath>
             </resource>
         </resources>
+        -->
         <plugins>
-
-<!--
             <plugin>
                 <groupId>org.kermeta.emf</groupId>
                 <artifactId>org.kermeta.emf.genmodel</artifactId>
@@ -41,47 +40,90 @@
                 <extensions>true</extensions>
                 <executions>
                     <execution>
-                        <phase>generate-sources</phase>
-                        <goals><goal>generate</goal></goals>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
                         <configuration>
                             <ecore>metamodel/art.ecore</ecore>
-                            <output>${project.build.sourceDirectory}</output>
+                            <genmodel>metamodel/art2.genmodel</genmodel>
+                            <output>${project.build.directory}/generated-sources/emf</output>
+                            <clearOutput>true</clearOutput>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
--->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/emf</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
-			<!-- Creation of the bundle jar and its manifest -->
+            <!-- Creation of the bundle jar and its manifest -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>2.1.0</version>
                 <extensions>true</extensions>
-				
-                <configuration>
-                    <instructions>
-                        <Export-Package>org.kermeta.art2,org.kermeta.art2.impl,org.kermeta.art2.util</Export-Package>
-                        <Bundle-SymbolicName>org.kermeta.art2.model;singleton:=true</Bundle-SymbolicName>
-                        <Import-Package>org.eclipse.emf.*,org.osgi.framework
-                        </Import-Package>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
+
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                        <configuration>
+                            <instructions>
+                                <Export-Package>org.kermeta.art2,org.kermeta.art2.impl,org.kermeta.art2.util</Export-Package>
+                                <Bundle-SymbolicName>org.kermeta.art2.model</Bundle-SymbolicName>
+                                <Import-Package>org.eclipse.emf.*,org.osgi.framework</Import-Package>
+                                <Bundle-ClassPath>.</Bundle-ClassPath>
                         <!-- add extra element in the manifest, copy them from this file -->
-                        <_include>resources/META-INF/MANIFEST-part.MF</_include>
-                        
-                        <!-- additional resources in the bundle -->                        
+                        <!--<_include>resources/META-INF/MANIFEST-part.MF</_include>-->
+
+                        <!-- additional resources in the bundle -->
                         <!-- <Include-Resource>{maven-resources},
                         	metamodel=metamodel,
                         	plugin.xml,
                         	plugin.properties
                         </Include-Resource> -->
-                    </instructions>
-                </configuration>
+                            </instructions>
+                        </configuration>
+
+
+                    </execution>
+                </executions>
+
+
 		
             </plugin>
 
-            
+<!--
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>  
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive> 
+                </configuration>
+            </plugin>
+-->
+
         </plugins>
     </build>
     
