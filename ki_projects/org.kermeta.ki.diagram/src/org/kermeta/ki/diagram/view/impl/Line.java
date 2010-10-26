@@ -1,8 +1,9 @@
 package org.kermeta.ki.diagram.view.impl;
 
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 public class Line extends Line2D.Double {
 	private static final long serialVersionUID = 1L;
@@ -68,28 +69,63 @@ public class Line extends Line2D.Double {
 
 	
 	
-	public Point2D intersectionPoint(final Rectangle2D rec) {
-		final double width 	= rec.getWidth();
-		final double height = rec.getHeight();
-		final double x 		= rec.getX();
-		final double y 		= rec.getY();
+	public Point2D intersectionPoint(final GeneralPath path, final Point2D referencePoint) {//TODO extract the PathIterator exploration (also used by EntityView).
+		if(path==null)
+			return null;
 		
-		Point2D pt = getIntersectionSegment(new Line(x, y, x+width, y));
-	
-		if(pt!=null)
-			return pt;
+		PathIterator pi = path.getPathIterator(null, 0.05);
+		int typeSeg;
+		final double[] coords = new double[6];
+		Point2D.Double firstPoint = new Point2D.Double();
+		Point2D.Double pt1 = new Point2D.Double();
+		Point2D.Double pt2 = new Point2D.Double();
+		Point2D intersection;
+		Point2D bestIntersection = null;
 		
-		pt = getIntersectionSegment(new Line(x+width, y, x+width, y+height));
+		if(pi.isDone() || pi.currentSegment(coords)!=PathIterator.SEG_MOVETO)
+			return null;
 		
-		if(pt!=null)
-			return pt;
+		// The first point will be used for the CLOSE segment.
+		firstPoint.setLocation(coords[0], coords[1]);
+		pt1.setLocation(coords[0], coords[1]);
+		pi.next();
 		
-		pt = getIntersectionSegment(new Line(x, y+height, x+width, y+height));
+		while(!pi.isDone()) {
+			typeSeg = pi.currentSegment(coords);
+			
+			switch(typeSeg) {
+				case PathIterator.SEG_LINETO:
+					// The second point of the line is set.
+					pt2.setLocation(coords[0], coords[1]);
+					break;
+				case PathIterator.SEG_MOVETO:
+					// first point of the line is set.
+					pt1.setLocation(coords[0], coords[1]);
+					firstPoint.setLocation(coords[0], coords[1]);
+					break;
+				case PathIterator.SEG_CLOSE:
+					// The second point of the line is set using the first point of the path.
+					pt2.setLocation(firstPoint);
+					break;
+				default:
+					return null;
+			}
+
+			if(typeSeg==PathIterator.SEG_LINETO || typeSeg==PathIterator.SEG_CLOSE) { // If we have the two points of the segment.
+				intersection = getIntersectionSegment(new Line(pt1, pt2));
+				
+				if(intersection!=null)
+					if(bestIntersection==null || intersection.distance(referencePoint)<bestIntersection.distance(referencePoint))
+						bestIntersection = intersection;
+			}
+			
+			if(typeSeg==PathIterator.SEG_LINETO)
+				pt1.setLocation(coords[0], coords[1]);
+			
+			pi.next();
+		}
 		
-		if(pt!=null)
-			return pt;
-		
-		return getIntersectionSegment(new Line(x, y, x, y+height));
+		return bestIntersection;
 	}
 
 	
@@ -243,9 +279,10 @@ public class Line extends Line2D.Double {
 		Point2D br  = getBottomRightPoint();
 		Point2D tl2 = l.getTopLeftPoint();
 		Point2D br2 = l.getBottomRightPoint();
-
-		if((px>=tl.getX() && px<=br.getX() && py>=tl.getY() && py<=br.getY()) &&
-		   (px>=tl2.getX() && px<=br2.getX() && py>=tl2.getY() && py<=br2.getY()))
+		if((px>tl.getX() || Number.NUMBER.equals(px, tl.getX())) && (px<br.getX()|| Number.NUMBER.equals(px, br.getX())) && 
+			(py>tl.getY() || Number.NUMBER.equals(py, tl.getY())) && (py<br.getY() || Number.NUMBER.equals(py, br.getY())) &&
+		    (px>tl2.getX() || Number.NUMBER.equals(px, tl2.getX())) && (px<=br2.getX() || Number.NUMBER.equals(px, br2.getX())) && 
+		    (py>tl2.getY() || Number.NUMBER.equals(py, tl2.getY())) && (py<=br2.getY() || Number.NUMBER.equals(py, br2.getY())))
 			return p;
 
 		return null;

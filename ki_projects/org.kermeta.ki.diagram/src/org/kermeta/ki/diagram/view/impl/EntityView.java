@@ -140,7 +140,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			anchor = getClosestFreeAnchor(new Point2D.Double(pt.getX(), pt.getY()), true);
 		}
 		else
-			anchor = getClosestFreeAnchor(new Line(centre, opposite.getCentre()).intersectionPoint(path.getBounds2D()), true);
+			anchor = getClosestFreeAnchor(new Line(centre, opposite.getCentre()).intersectionPoint(path, opposite.getCentre()), true);
 		
 		if(anchor!=null) {
 			Point2D pt = atEnd ? relation.getLastSegment().getPointTarget() : relation.getFirstSegment().getPointSource();
@@ -319,6 +319,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		// The first point will be used for the CLOSE segment.
 		firstPoint.setLocation(coords[0], coords[1]);
 		pt1.setLocation(coords[0], coords[1]);
+		pi.next();
 		
 		while(!pi.isDone()) {
 			typeSeg = pi.currentSegment(coords);

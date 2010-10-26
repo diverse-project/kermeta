@@ -41,6 +41,10 @@ public class Anchor implements IAnchor {
 	@Override
 	public void setFree(final boolean free) {
 		this.free = free;
+		
+		// The anchor position must not be linked to a segment anymore.
+		if(free)
+			this.position = new Point2D.Double(position.getX(), position.getY());
 	}
 
 	
@@ -61,5 +65,11 @@ public class Anchor implements IAnchor {
 	public void setPosition(final Point2D position) {
 		if(position!=null)
 			this.position = position;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return getClass().getCanonicalName() + '[' + position + ",free=" + isFree() + ']';
 	}
 }

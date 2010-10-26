@@ -130,7 +130,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	}
 	
 	
-	protected void getRecursiveRelationPoints(final Point2D pt1, final Point2D pt2) {
+	protected void getRecursiveRelationPoints(final Point2D pt1, final Point2D pt2) {//FIXME only works with rectangle entities. Code clean-up.
 		final Rectangle2D rec  = entitySrc.getBorders();
 		final double heightArrow = rec.getHeight()>20. ? 15. : rec.getHeight()/2. - 2.;
 		final Line l1 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()-heightArrow), 
@@ -138,8 +138,17 @@ public class RelationView extends ComponentView implements IRelationView {
 		final Line l2 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()+heightArrow), 
 							new Point2D.Double(entitySrc.getX(), entitySrc.getY()+heightArrow));
 		
-		pt1.setLocation(l1.intersectionPoint(rec));
-		pt2.setLocation(l2.intersectionPoint(rec));
+		pt1.setLocation(l1.intersectionPoint(entitySrc.getPath(), new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()-heightArrow)));
+		pt2.setLocation(l2.intersectionPoint(entitySrc.getPath(), new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()+heightArrow)));
+//		final Rectangle2D rec  = entitySrc.getBorders();
+//		final double heightArrow = rec.getHeight()>20. ? 15. : rec.getHeight()/2. - 2.;
+//		final Line l1 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()-heightArrow), 
+//							new Point2D.Double(entitySrc.getX(), entitySrc.getY()-heightArrow));
+//		final Line l2 = new Line(new Point2D.Double(entitySrc.getX()-300, entitySrc.getY()+heightArrow), 
+//							new Point2D.Double(entitySrc.getX(), entitySrc.getY()+heightArrow));
+//		
+//		pt1.setLocation(l1.intersectionPoint(rec));
+//		pt2.setLocation(l2.intersectionPoint(rec));
 	}
 	
 	
@@ -339,6 +348,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	public void translate(final double tx, final double ty) {
 		Point2D pt;
 		
+		// We go to segments.size-1 because the last point is the position of an anchor.
 		for(int i=0, size=segments.size()-1; i<size; i++) {
 			pt = segments.get(i).getPointTarget();
 			pt.setLocation(pt.getX()+tx, pt.getY()+ty);

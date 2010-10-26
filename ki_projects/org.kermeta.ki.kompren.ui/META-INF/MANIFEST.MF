@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kompren Concrete Presentation
+Bundle-Name: Kompren Java UI
 Bundle-SymbolicName: org.kermeta.ki.kompren.ui
 Bundle-Version: 1.0.0
 Bundle-Vendor: INRIA Rennes, Triskell
