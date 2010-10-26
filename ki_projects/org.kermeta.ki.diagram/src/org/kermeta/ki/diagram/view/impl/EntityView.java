@@ -394,4 +394,10 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		
 		return closest;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return getClass().getCanonicalName() + '[' + getName() + ',' + getCentre() + ',' + getBorders() + ']';
+	}
 }

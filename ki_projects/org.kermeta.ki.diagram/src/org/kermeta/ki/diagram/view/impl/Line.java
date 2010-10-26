@@ -326,4 +326,10 @@ public class Line extends Line2D.Double {
 		this.x2 = x;
 		this.y2 = y;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return getClass().getCanonicalName() + '[' + x1 + ',' + y1 + ';' + x2 + ',' + y2 + ';' + a + ';' + b + ']';
+	}
 }

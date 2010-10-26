@@ -410,4 +410,10 @@ public class RelationView extends ComponentView implements IRelationView {
 		
 		return handler;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return getClass().getCanonicalName() + '[' + entitySrc + ',' + entityTar + ']';
+	}
 }
