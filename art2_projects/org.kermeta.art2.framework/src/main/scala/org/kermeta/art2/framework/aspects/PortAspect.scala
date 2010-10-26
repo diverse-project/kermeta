@@ -19,8 +19,14 @@ case class PortAspect(p : Port) {
     mbindings.foreach{mb=> root.getMBindings.remove(mb)}
 
     //REMOVE PORT
-    if(p.eContainer.asInstanceOf[ComponentInstance].getProvided.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getProvided.remove(p)}
-    if(p.eContainer.asInstanceOf[ComponentInstance].getRequired.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getRequired.remove(p)}
+    if(p.isProvidedPort){
+      if(p.eContainer.asInstanceOf[ComponentInstance].getProvided.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getProvided.remove(p)}
+    } else {
+    if(p.isRequiredPort){
+      if(p.eContainer.asInstanceOf[ComponentInstance].getRequired.contains(p)){p.eContainer.asInstanceOf[ComponentInstance].getRequired.remove(p)}
+    }}
+    
+    
 
   }
 
