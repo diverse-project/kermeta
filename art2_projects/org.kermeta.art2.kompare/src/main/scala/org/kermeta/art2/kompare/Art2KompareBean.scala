@@ -11,7 +11,6 @@ import org.kermeta.art2.kompare.sub.InitNodeKompare
 import org.kermeta.art2.kompare.sub.StopNodeKompare
 import org.kermeta.art2.kompare.sub.UpdateNodeKompare
 import org.kermeta.art2adaptation._
-import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
