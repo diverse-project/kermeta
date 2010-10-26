@@ -72,7 +72,7 @@ public class DiagramTest {
 		
 		diag.addRelation(eclass, eclass, true, true, null, "supertypes", null, "0..*", -1);
 		diag.addRelation(eAnnotation, eObject, false, true, "references", null, "0..*", null, -1);
-		diag.addRelation(eAnnotation, eObject, false, true, "contents", null, "0..*", null, -1);
+		diag.addRelation(eAnnotation, eObject, true, true, "contents", null, "0..*", null, -1);
 		diag.addRelation(eAttribute, eDataType, false, true, "eAttributeType", null, "1", null, -1);
 		diag.addInheritanceView(eModelElement, eObject, -1);
 		diag.addInheritanceView(eGenericType, eObject, -1);
@@ -91,6 +91,7 @@ public class DiagramTest {
 		
 		eclass.update();
 		eObject.update();
+		eAnnotation.update();
 		eAttribute.update();
 		eDataType.update();
 		

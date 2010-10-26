@@ -30,7 +30,7 @@ public class RelationClassView extends RelationView {
 			if(compositionAtStart)
 				setSourceDecoration(new CompositionDecorationView(this, getFirstSegment(), true));
 			else
-				setSourceDecoration(new CompositionDecorationView(this, getLastSegment(), false));
+				setTargetDecoration(new CompositionDecorationView(this, getLastSegment(), false));
 		
 		if(targetRole==null || srcRole==null || targetRole.length()==0 || srcRole.length()==0)
 			setTargetDecoration(new RelationDecorationView(this, getLastSegment(), false));

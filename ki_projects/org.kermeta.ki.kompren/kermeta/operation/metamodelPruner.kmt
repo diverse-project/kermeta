@@ -18,7 +18,6 @@ using kermeta::pruning
 using kermeta::language::structure
 
 
-
 class VisualMetamodelPruner inherits MetamodelPruner {
 	reference viewPolicy : PrunerViewPolicy
 	
@@ -32,25 +31,22 @@ class VisualMetamodelPruner inherits MetamodelPruner {
 	end
 	
 	
-	
-	method onPackagePruned(pkg : Package) : Void is do // FIXME pkg never pruned by this method
-		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, pkg)
+	method onPackagePruned(pkg : Package) : Void is do
+		// Not managed
 	end
 	
 	
-	method onPropertyPruned(prop : Property) : Void is do // FIXME prop never pruned by this method
-		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
+	method onPropertyPruned(prop : Property) : Void is do
+		// Not managed
 	end
 	
 	
-	method onTagPruned(tag : Tag) : Void is do // FIXME tag never pruned by this method
-		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, tag)
+	method onTagPruned(tag : Tag) : Void is do
+		// Not managed
 	end
 	
 	
 	method onTypeDefinitionPruned(typeDef : TypeDefinition) : Void is do
 		extern org::kermeta::ki::kompren::view::EntityViewExtern.onPruning(viewPolicy==PrunerViewPolicy.hide, typeDef)
 	end
-	
-	
 }

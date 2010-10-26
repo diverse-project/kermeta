@@ -318,7 +318,7 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 			else	
 				if(classes.contains(cd)) then
 					var oppositeName : String init ""
-					var oppositeCompo : Boolean init false
+					var oppositeCompo : Boolean init p.isComposite
 					var oppositeCardString : String init ""
 					
 					if(not p.opposite.isVoid) then 

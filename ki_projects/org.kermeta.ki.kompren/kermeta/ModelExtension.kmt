@@ -290,9 +290,6 @@ aspect class Package
 }
 
 
-aspect class Operation {
-}
-
 
 aspect class Property {
 	operation getCardinalityString() : String is do

@@ -4,6 +4,8 @@ require "kermeta"
 using kermeta::language
 using kermeta::language::behavior
 using kermeta::language::structure
+
+
 abstract class KermetaVisitor
 {
 	operation visitObject(arg : language::structure::Object) : Void is
