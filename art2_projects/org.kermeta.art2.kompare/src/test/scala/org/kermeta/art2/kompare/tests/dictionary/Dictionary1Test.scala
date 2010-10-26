@@ -10,6 +10,7 @@ import org.kermeta.art2.api.service.core.kompare.ModelKompareService
 import org.kermeta.art2.kompare.Art2KompareBean
 import org.kermeta.art2adaptation._
 import org.scalatest.junit.AssertionsForJUnit
+import org.kermeta.art2.kompare.tests._
 
 class Dictionary1Test extends AssertionsForJUnit with KompareSuite {
 

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.kompare.tests.dictionary
+package org.kermeta.art2.kompare.tests
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.framework.Art2XmiHelper
@@ -48,5 +48,8 @@ case class RichAdaptationModel(self : AdaptationModel) {
     )
   }
 
+  def print() ={
+    self.getAdaptations.toArray.foreach{adapt=>System.out.println(adapt.getClass.getName)}
+  }
 
 }
