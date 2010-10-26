@@ -45,7 +45,7 @@
                         </goals>
                         <configuration>
                             <ecore>metamodel/art.ecore</ecore>
-                            <genmodel>metamodel/art2.genmodel</genmodel>
+                            <genmodel>metamodel/art.genmodel</genmodel>
                             <output>${project.build.directory}/generated-sources/emf</output>
                             <clearOutput>true</clearOutput>
                         </configuration>
