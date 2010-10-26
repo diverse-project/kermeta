@@ -329,7 +329,7 @@ public class RelationView extends ComponentView implements IRelationView {
 				newSeg = new SegmentView(newPt, oldPt);
 				
 				// Updating the target decoration that may use the modified segment.
-				if(targetDecoration.getSegment()==seg)
+				if(targetDecoration!=null && targetDecoration.getSegment()==seg)
 					targetDecoration.setSegment(newSeg);
 				
 				if((i+1)>=nbSeg)
