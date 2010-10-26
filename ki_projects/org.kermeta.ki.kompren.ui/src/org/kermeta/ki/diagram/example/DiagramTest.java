@@ -1,4 +1,4 @@
-package org.kermeta.ki.diagram.test;
+package org.kermeta.ki.diagram.example;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
