@@ -39,7 +39,8 @@ trait Art2RequiredPort extends Art2Port {
         delegate match {
           case None => react {
               case bindmsg : Art2FragmentBindMessage => bind(bindmsg)
-           }
+              case STOP_ACTOR(f) => pauseState = false ; stopRequest(f)
+            }
           case Some(d) => {
               if(getInOut){
                 try { reply(d !? msg) } catch { case _ @ e=> logger.error("error sending message  ",e) }

@@ -29,7 +29,7 @@
             <version>${art2.version}</version>
         </dependency>
 
-
+<!--
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
@@ -38,7 +38,7 @@
             <optional>true</optional>
             <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
-   
+   -->
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -65,6 +65,14 @@
             <artifactId>art2.api</artifactId>
             <version>${art2.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -79,8 +87,8 @@
                     <instructions>
                         <Private-Package></Private-Package>
                         <Bundle-SymbolicName>org.kermeta.art2.framework</Bundle-SymbolicName>
-                        <Import-Package>!org.w3c.dom.ls,!org.w3c.dom.bootstrap,!org.joda.*,!com.sun.*,!org.kermeta.art2.annotation,!org.codehaus.jackson.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
-                        <Export-Package>org.kermeta.art2.framework,org.kermeta.art2.framework.*,org.codehaus.jackson.*</Export-Package>
+                        <Import-Package>!org.w3c.dom.ls,!org.w3c.dom.bootstrap,!com.sun.*,!org.kermeta.art2.annotation,!org.joda.*,!org.codehaus.jackson.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                        <Export-Package>org.kermeta.art2.framework,org.kermeta.art2.framework.*,org.codehaus.jackson.*,org.joda.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

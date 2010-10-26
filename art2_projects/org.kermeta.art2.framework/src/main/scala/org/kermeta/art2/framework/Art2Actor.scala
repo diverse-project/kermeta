@@ -20,10 +20,10 @@ trait Art2Actor extends Actor {
   def resume = this ! RESUME_ACTOR
   def pause = this ! PAUSE_ACTOR
 
-  private var pauseState = false
+  protected var pauseState = false
   def isInPause = pauseState
 
-  private def stopRequest(force : Boolean) : Nothing = {
+  protected def stopRequest(force : Boolean) : Nothing = {
     if(force){
       exit //Simply exit
     } else {

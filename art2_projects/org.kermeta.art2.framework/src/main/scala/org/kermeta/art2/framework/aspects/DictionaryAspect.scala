@@ -17,7 +17,7 @@ case class DictionaryAspect(self : Dictionary) {
         self.getValues.exists(v=> {
             other.getValues.find(ov=> ov.getAttribute.getName == v.getAttribute.getName  ) match {
               case None => true
-              case Some(fv)=> fv.getValue != v.getValue
+              case Some(fv)=> (fv.getValue != v.getValue)
             }
           })
       } else {
@@ -26,8 +26,6 @@ case class DictionaryAspect(self : Dictionary) {
     } else {
       other != null
     }
-
-    true
   }
 
 }
