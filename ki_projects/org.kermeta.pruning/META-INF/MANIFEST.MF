@@ -3,5 +3,5 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Pruning
 Bundle-SymbolicName: org.kermeta.pruning
 Bundle-Version: 1.0.0
-Bundle-Vendor: INRIA Rennes Triskell
+Bundle-Vendor: INRIA Rennes, Triskell
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
