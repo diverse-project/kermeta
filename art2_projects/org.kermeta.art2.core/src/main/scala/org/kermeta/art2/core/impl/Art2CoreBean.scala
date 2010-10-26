@@ -58,7 +58,9 @@ class Art2CoreBean extends Art2ModelHandlerService with Art2Actor {
 
   override def stop() : Unit = {
     super[Art2Actor].forceStop
-    Art2XmiHelper.save(bundleContext.getDataFile("lastModel.xmi").getAbsolutePath(), models.head);
+    //TODO CLEAN AND REACTIVATE
+
+   // Art2XmiHelper.save(bundleContext.getDataFile("lastModel.xmi").getAbsolutePath(), models.head);
   }
 
   def internal_process(msg : Any) = msg match {
