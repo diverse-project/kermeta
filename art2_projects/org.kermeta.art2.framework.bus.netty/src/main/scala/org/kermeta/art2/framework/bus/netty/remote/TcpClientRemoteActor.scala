@@ -183,7 +183,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
 
 
   
-  var pauseState = false
+  //var pauseState = false
 override  def act() = {
     loop {
       react {
@@ -200,7 +200,7 @@ override  def act() = {
     }
   }
 
-  def stopRequest(force : Boolean) : Nothing = {
+  override def stopRequest(force : Boolean) : Nothing = {
     bootstrap match {
       case None =>
       case Some(b) =>
