@@ -116,7 +116,7 @@ public class ServicePortTypeVisitor implements TypeVisitor {
             //BUILD RETURN TYPE
             DataTypeVisitor rtv = new DataTypeVisitor();
             m.getReturnType().accept(rtv);
-            newo.setReturnType(Art2Utility.getOraddDataType(rtv.dataType));
+            newo.setReturnType(Art2Utility.getOraddDataType(rtv.getDataType()));
 
             //BUILD PARAMETER
             for (ParameterDeclaration p : m.getParameters()) {
@@ -127,7 +127,7 @@ public class ServicePortTypeVisitor implements TypeVisitor {
 
                 DataTypeVisitor ptv = new DataTypeVisitor();
                 p.getType().accept(ptv);
-                newp.setType(Art2Utility.getOraddDataType(ptv.dataType));
+                newp.setType(Art2Utility.getOraddDataType(ptv.getDataType()));
             }
         }
 
