@@ -7,7 +7,6 @@ package org.kermeta.art2.kompare.sub
 
 import org.kermeta.art2._
 import org.kermeta.art2adaptation._
-import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
@@ -24,7 +23,14 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
     //Update Type Step
     updateNode.getUsedTypeDefinition.foreach{uct=>
       actualNode.getUsedTypeDefinition.find({act=> act.isModelEquals(uct) }) match {
-        case Some(ct)=> //OK TODO CHECK HASHCODE
+        case Some(ct)=> {
+            //CHECK IF TYPE IS UPDATE
+            if(ct.isUpdated(uct)){
+              var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateType
+              adaptcmd.setRef(uct)
+              adaptationModel.getAdaptations.add(adaptcmd)
+            }
+          }
         case None => {
             var ctcmd = Art2adaptationFactory.eINSTANCE.createAddType
             ctcmd.setRef(uct)
@@ -36,13 +42,12 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
               adaptcmd.setRef(tp)
               adaptationModel.getAdaptations.add(adaptcmd)
             }
-
           }
       }
     }
     actualNode.getUsedTypeDefinition.foreach{act=>
       updateNode.getUsedTypeDefinition.find({uct=> uct.isModelEquals(act) }) match {
-        case Some(ct)=> //OK TODO CHECK HASHCODE
+        case Some(ct)=> //OK CHECK ALEADY DONE IN PREVIOUS STEP
         case None => {
             var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveType
             ctcmd.setRef(act)
@@ -58,8 +63,20 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
     updateNode.getInstances.foreach{uc=>
       actualNode.getInstances.find({ac=> ac.isModelEquals(uc) }) match {
         case Some(c)=>{
-            //OK CHECK FOR UPDATE
-            //TODO CHECK UPDATE
+            //CHECK IF INSTANCE TYPE DEFINITION IS NOT UPDATED
+            if(uc.getTypeDefinition.isUpdated(c.getTypeDefinition)){
+              var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateInstance
+              adaptcmd.setRef(uc)
+              adaptationModel.getAdaptations.add(adaptcmd)
+            } else {
+              //CHECK IS DICTIONARY IS UPDATED
+              if(uc.getDictionary.isUpdated(c.getDictionary)){
+                var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateDictionaryInstance
+                adaptcmd.setRef(uc)
+                adaptationModel.getAdaptations.add(adaptcmd)
+              }
+
+            }
           }
         case None => {
             var ccmd = Art2adaptationFactory.eINSTANCE.createAddInstance
@@ -70,7 +87,7 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
     }
     actualNode.getInstances.foreach{ac=>
       updateNode.getInstances.find({uc=> uc.isModelEquals(ac) }) match {
-        case Some(c)=> //OK
+        case Some(c)=> //OK , CASE ALREADY PROCESS BY PREVIOUS STEP
         case None => {
             var ccmd = Art2adaptationFactory.eINSTANCE.createRemoveInstance
             ccmd.setRef(ac)
