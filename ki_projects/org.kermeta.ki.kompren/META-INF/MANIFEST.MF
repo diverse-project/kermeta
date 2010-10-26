@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Visual
+Bundle-SymbolicName: org.kermeta.ki.kompren
+Bundle-Version: 1.0.0
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.kermeta.ki.kompren.ui,
+ org.kermeta.ki.malai,
+ org.kermeta.ki.malai.javaBinding,
+ org.kermeta.pruning
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: INRIA Rennes, Triskell

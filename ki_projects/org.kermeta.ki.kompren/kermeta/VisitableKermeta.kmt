@@ -1,0 +1,717 @@
+package kermeta;
+
+require "kermeta"
+using kermeta::language
+using kermeta::language::behavior
+using kermeta::language::structure
+abstract class KermetaVisitor
+{
+	operation visitObject(arg : language::structure::Object) : Void is
+		do
+		end
+
+	operation visitLoop(arg : language::behavior::Loop) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitObjectTypeVariable(arg : language::structure::ObjectTypeVariable) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitUsing(arg : language::structure::Using) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitCallValue(arg : language::behavior::CallValue) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitModel(arg : language::structure::Model) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitParameter(arg : language::structure::Parameter) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitJavaStaticCall(arg : language::behavior::JavaStaticCall) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitRequire(arg : language::structure::Require) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitConstraint(arg : language::structure::Constraint) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitRescue(arg : language::behavior::Rescue) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitAssignment(arg : language::behavior::Assignment) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitStringLiteral(arg : language::behavior::StringLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitBooleanLiteral(arg : language::behavior::BooleanLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitProperty(arg : language::structure::Property) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitType(arg : language::structure::Type) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitBlock(arg : language::behavior::Block) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitModelType(arg : language::structure::ModelType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitModelTypeVariable(arg : language::structure::ModelTypeVariable) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitTypeDefinition(arg : language::structure::TypeDefinition) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitFunctionType(arg : language::structure::FunctionType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitLambdaExpression(arg : language::behavior::LambdaExpression) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitFilter(arg : language::structure::Filter) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitModelingUnit(arg : language::structure::ModelingUnit) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitCallVariable(arg : language::behavior::CallVariable) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitEmptyExpression(arg : language::behavior::EmptyExpression) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitVoidType(arg : language::structure::VoidType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitCallResult(arg : language::behavior::CallResult) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitMultiplicityElement(arg : language::structure::MultiplicityElement) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitPrimitiveType(arg : language::structure::PrimitiveType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitCallSuperOperation(arg : language::behavior::CallSuperOperation) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitTypeVariableBinding(arg : language::structure::TypeVariableBinding) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitEnumeration(arg : language::structure::Enumeration) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitSelfExpression(arg : language::behavior::SelfExpression) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitTypeLiteral(arg : language::behavior::TypeLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitVoidLiteral(arg : language::behavior::VoidLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitTag(arg : language::structure::Tag) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitVirtualType(arg : language::structure::VirtualType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitConditional(arg : language::behavior::Conditional) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitIntegerLiteral(arg : language::behavior::IntegerLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitProductType(arg : language::structure::ProductType) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitVariableDecl(arg : language::behavior::VariableDecl) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitLambdaParameter(arg : language::behavior::LambdaParameter) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitTypeReference(arg : language::behavior::TypeReference) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitCallFeature(arg : language::behavior::CallFeature) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitClass(arg : language::structure::Class) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitOperation(arg : language::structure::Operation) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitRaise(arg : language::behavior::Raise) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitClassDefinition(arg : language::structure::ClassDefinition) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitEnumerationLiteral(arg : language::structure::EnumerationLiteral) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+	operation visitPackage(arg : language::structure::Package) : Void is
+		do
+			self.visitObject(arg)
+		end
+
+}
+package language
+{
+	package behavior
+	{
+		aspect abstract class Literal inherits Expression
+		{
+		}
+		aspect class Loop inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitLoop(self)
+				end
+
+		}
+		aspect class CallValue inherits CallExpression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitCallValue(self)
+				end
+
+		}
+		aspect class JavaStaticCall inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitJavaStaticCall(self)
+				end
+
+		}
+		aspect class Rescue
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitRescue(self)
+				end
+
+		}
+		aspect class Assignment inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitAssignment(self)
+				end
+
+		}
+		aspect class StringLiteral inherits Literal
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitStringLiteral(self)
+				end
+
+		}
+		aspect class BooleanLiteral inherits Literal
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitBooleanLiteral(self)
+				end
+
+		}
+		aspect class Block inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitBlock(self)
+				end
+
+		}
+		aspect class LambdaExpression inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitLambdaExpression(self)
+				end
+
+		}
+		aspect class CallVariable inherits CallExpression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitCallVariable(self)
+				end
+
+		}
+		aspect class EmptyExpression inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitEmptyExpression(self)
+				end
+
+		}
+		aspect class CallResult inherits CallVariable
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitCallResult(self)
+				end
+
+		}
+		aspect abstract class CallExpression inherits Expression
+		{
+		}
+		aspect class CallSuperOperation inherits CallExpression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitCallSuperOperation(self)
+				end
+
+		}
+		aspect class SelfExpression inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitSelfExpression(self)
+				end
+
+		}
+		aspect class TypeLiteral inherits Literal
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitTypeLiteral(self)
+				end
+
+		}
+		aspect class VoidLiteral inherits Literal
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitVoidLiteral(self)
+				end
+
+		}
+		aspect abstract class Expression inherits language::structure::TypeContainer
+		{
+		}
+		aspect class Conditional inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitConditional(self)
+				end
+
+		}
+		aspect class IntegerLiteral inherits Literal
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitIntegerLiteral(self)
+				end
+
+		}
+		aspect class VariableDecl inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitVariableDecl(self)
+				end
+
+		}
+		aspect class LambdaParameter
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitLambdaParameter(self)
+				end
+
+		}
+		aspect class TypeReference inherits language::structure::MultiplicityElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitTypeReference(self)
+				end
+
+		}
+		aspect class CallFeature inherits CallExpression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitCallFeature(self)
+				end
+
+		}
+		aspect class Raise inherits Expression
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitRaise(self)
+				end
+
+		}
+	}
+
+	package structure
+	{
+		aspect class ObjectTypeVariable inherits TypeVariable
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitObjectTypeVariable(self)
+				end
+
+		}
+		aspect class Using
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitUsing(self)
+				end
+
+		}
+		aspect class Model
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitModel(self)
+				end
+
+		}
+		aspect class Parameter inherits MultiplicityElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitParameter(self)
+				end
+
+		}
+		aspect class Object
+		{
+			@Overloadable "true"
+			operation accept(v : KermetaVisitor) : Void is
+				do
+					v.visitObject(self)
+				end
+
+		}
+		aspect class Require
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitRequire(self)
+				end
+
+		}
+		aspect class Constraint inherits NamedElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitConstraint(self)
+				end
+
+		}
+		aspect class Property inherits MultiplicityElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitProperty(self)
+				end
+
+		}
+		aspect class Type
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitType(self)
+				end
+
+		}
+		aspect class ModelType inherits Type, TypeDefinition
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitModelType(self)
+				end
+
+		}
+		aspect class ModelTypeVariable inherits TypeVariable
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitModelTypeVariable(self)
+				end
+
+		}
+		aspect abstract class TypeContainer
+		{
+		}
+		aspect class TypeDefinition inherits NamedElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitTypeDefinition(self)
+				end
+
+		}
+		aspect class FunctionType inherits TypeContainer, Type
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitFunctionType(self)
+				end
+
+		}
+		aspect abstract class NamedElement
+		{
+		}
+		aspect class Filter
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitFilter(self)
+				end
+
+		}
+		aspect class ModelingUnit
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitModelingUnit(self)
+				end
+
+		}
+		aspect class VoidType inherits Type
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitVoidType(self)
+				end
+
+		}
+		aspect class MultiplicityElement inherits TypedElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitMultiplicityElement(self)
+				end
+
+		}
+		aspect class PrimitiveType inherits DataType, TypeContainer
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitPrimitiveType(self)
+				end
+
+		}
+		aspect abstract class DataType inherits Type, TypeDefinition
+		{
+		}
+		aspect class TypeVariableBinding inherits TypeContainer
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitTypeVariableBinding(self)
+				end
+
+		}
+		aspect class Enumeration inherits DataType
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitEnumeration(self)
+				end
+
+		}
+		aspect class Tag
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitTag(self)
+				end
+
+		}
+		aspect class VirtualType inherits ObjectTypeVariable
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitVirtualType(self)
+				end
+
+		}
+		aspect class ProductType inherits TypeContainer, Type
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitProductType(self)
+				end
+
+		}
+		aspect abstract class TypedElement inherits TypeContainer, NamedElement
+		{
+		}
+		aspect abstract class TypeVariable inherits TypeContainer, Type, NamedElement
+		{
+		}
+		aspect abstract class ParameterizedType inherits Type
+		{
+		}
+		aspect class Class inherits ParameterizedType
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitClass(self)
+				end
+
+		}
+		aspect class Operation inherits MultiplicityElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitOperation(self)
+				end
+
+		}
+		aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitClassDefinition(self)
+				end
+
+		}
+		aspect class EnumerationLiteral inherits NamedElement
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitEnumerationLiteral(self)
+				end
+
+		}
+		aspect abstract class GenericTypeDefinition inherits TypeDefinition
+		{
+		}
+		aspect class Package inherits NamedElement, TypeDefinitionContainer
+		{
+			method accept(v : KermetaVisitor) : Void from kermeta::language::structure::Object is
+				do
+					v.visitPackage(self)
+				end
+
+		}
+		aspect abstract class TypeDefinitionContainer inherits NamedElement
+		{
+		}
+	}
+
+}
+

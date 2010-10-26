@@ -1,0 +1,45 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::kompren;
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::action
+
+
+
+class ModifyPrunerRadiusEffect inherits Action
+{
+	reference pruner : Pruner
+	
+	attribute newValue : Integer
+	
+	
+	
+	method doActionBody() : Void is do
+		pruner.radiusEffect := newValue
+		done()
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := not pruner.isVoid and not newValue.isVoid
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+}

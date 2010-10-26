@@ -1,0 +1,92 @@
+/*
+ * Creation : October 6, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin 
+ */
+package kermeta::ki::kompren;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/KeyPress.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/action/ZoomMetamodel.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::language::structure
+
+class ZoomerMetamodel inherits Zoomer {
+	reference metamodel : ModelingUnit
+
+	method initialiseLinks() : Void is do
+		addLink(KeyPress2Zoom.new, false)
+		addLink(Scroll2ZoomMetamodel.new, true)
+	end
+}
+
+
+class KeyPress2Zoom inherits Link {
+	method getActionClass() : Class is do
+		result := ZoomMetamodel
+	end
+	
+	
+	method createInteraction() : Interaction is do
+		result := KeyPress.new
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var press : KeyPress init interaction.asType(KeyPress)
+		result := press.key==107 or press.key==109 // + ou -
+	end
+	
+	
+	method createAction() : Void is do
+		var zoomIn : ZoomMetamodel init ZoomMetamodel.new
+		var zoomer : ZoomerMetamodel init instrument.asType(ZoomerMetamodel)
+		
+		zoomIn.zoomable := zoomer.zoomable
+		zoomIn.metamodel := zoomer.metamodel
+		zoomIn.initialise(instrument.actionRegistry)
+		action := zoomIn
+	end
+	
+	
+	method updateAction() : Void is do
+		var press : KeyPress init interaction.asType(KeyPress)
+		var zoom  : ZoomMetamodel init action.asType(ZoomMetamodel)
+		
+		if(press.key==107) then // +
+			zoom.increment := 1
+		else // -
+			zoom.increment := -1
+		end
+	end
+}
+
+
+
+class Scroll2ZoomMetamodel inherits Scroll2Zoom {
+
+	method createAction() : Void is do
+		action := ZoomMetamodel.new
+		initAction
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := ZoomMetamodel
+	end
+
+	
+	method initAction() : Void is do
+		super
+		var zoomIn : ZoomMetamodel init action.asType(ZoomMetamodel)
+		var zoomer : ZoomerMetamodel init instrument.asType(ZoomerMetamodel)
+		
+		zoomIn.metamodel := zoomer.metamodel
+	end
+}
+

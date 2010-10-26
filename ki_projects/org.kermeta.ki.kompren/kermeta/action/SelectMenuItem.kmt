@@ -1,0 +1,62 @@
+/*
+ * Creation : June 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes
+ * Authors  : Arnaud Blouin 
+ */
+package kermeta::ki::kompren;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/instrument/Searcher.kmt"
+
+using kermeta::ki::malai::action
+using kermeta::standard
+using kermeta::language::structure
+
+
+class SelectMenuItem inherits Action {
+	reference searcher : Searcher
+	
+	attribute isUp : Boolean
+	
+	
+	method doActionBody() : Void is do
+		searcher.popupMenu.setSelectedIndex(getNewIndex())
+		done()
+	end
+	
+	
+	operation getNewIndex() : Integer is do
+		result := searcher.popupMenu.getSelectedIndex()+ if(isUp) then -1 else 1 end
+		
+		if(result<0) then
+			result := searcher.popupMenu.menuItems.size-1
+		else
+			if(result>=searcher.popupMenu.menuItems.size) then
+				result := 0
+			end
+		end
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := not searcher.isVoid and not isUp.isVoid
+		
+		if(result) then
+			var newIndex : Integer init getNewIndex()
+			result := newIndex>=0 and newIndex<searcher.popupMenu.getNbMenuItems()
+		end
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
+}
+

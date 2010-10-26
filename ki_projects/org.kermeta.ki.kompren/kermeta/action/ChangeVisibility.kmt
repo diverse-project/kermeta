@@ -1,0 +1,58 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::kompren;
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::action
+
+
+
+abstract class ChangeVisibility inherits Action
+{
+	attribute visible : Boolean
+	
+	reference metamodel : ModelingUnit
+	
+	
+	method canDo() : Boolean is do
+		result := not metamodel.isVoid and not visible.isVoid
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+}
+
+
+class ChangeOperationsVisibility inherits ChangeVisibility
+{
+	method doActionBody() : Void is do
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setOperationsVisible(metamodel, visible)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(metamodel)
+	end
+}
+
+
+
+
+class ChangePropertiesVisibility inherits ChangeVisibility
+{
+	method doActionBody() : Void is do
+		extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.setPropertiesVisible(metamodel, visible)
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.update(metamodel)
+	end
+}
