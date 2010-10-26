@@ -69,7 +69,7 @@ public class Line extends Line2D.Double {
 
 	
 	
-	public Point2D intersectionPoint(final GeneralPath path, final Point2D referencePoint) {//TODO extract the PathIterator exploration (also used by EntityView).
+	public Point2D intersectionPoint(final GeneralPath path, final Point2D referencePoint) {
 		if(path==null)
 			return null;
 		

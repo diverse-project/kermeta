@@ -21,6 +21,9 @@ import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 public abstract class EntityView extends ComponentView implements IEntityView {
 	public static final int DEFAUT_OPACITY = 200;
 	
+	/** The name of the class. */
+	protected String name;
+	
 	/** The colour of the filling. */
 	protected Color fillingColor;
 	
@@ -47,9 +50,13 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	/**
 	 * Initialises the entity.
 	 */
-	public EntityView() {
+	public EntityView(final String name) {
 		super();
 		
+		if(name==null)
+			throw new IllegalArgumentException();
+		
+		this.name	= name;
 		anchors		= new ArrayList<IAnchor>();
 		centre		= new Point2D.Double();
 		fontName 	= "Arial";
@@ -58,6 +65,25 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		updateFillingColor(DEFAUT_OPACITY);
 		updateLineColor(255);
 		setScale(1.);
+	}
+	
+	
+	@Override
+	public List<IAnchor> getAnchors() {
+		return anchors;
+	}
+	
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	@Override
+	public void setName(final String name) {
+		if(name!=null)
+			this.name = name;
 	}
 	
 	
@@ -169,7 +195,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	
 	@Override
 	public boolean contains(final double x, final double y) {
-		return isVisible() && getBorders().contains(x, y);//TODO improve to be more general. However, ClassView must do that.
+		return isVisible() && getBorders().contains(x, y) && path.contains(x, y);
 	}
 	
 	

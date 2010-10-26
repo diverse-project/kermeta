@@ -27,7 +27,7 @@ import org.kermeta.ki.diagram.view.interfaces.IRelationView;
  * Defines an entity that corresponds to a class of a class diagram.
  * @author Arnaud Blouin
  */
-public class ClassView extends EntityView {
+public class ClassView extends EntityView {//TODO create Class RectangleEntity in the diagram library.
 	/** The gap is used to add spaces add the left and the right of the class. */
 	public static final float WIDTH_GAP = 2f;
 	
@@ -53,9 +53,6 @@ public class ClassView extends EntityView {
 	}
 	
 	
-	/** The name of the class. */
-	protected String name;
-	
 	/** The views of the attributes of the class. */
 	protected List<AttributeView> attributes; 
 	
@@ -78,15 +75,11 @@ public class ClassView extends EntityView {
 	 * @throws IllegalArgumentException If the given name is null.
 	 */
 	public ClassView(final String name) {
-		super();
-		
-		if(name==null)
-			throw new IllegalArgumentException();
+		super(name);
 		
 		boundPath			= new GeneralPath();
 		operationsVisible 	= true;
 		propertiesVisible	= true;
-		this.name 			= name;
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
 		update();
@@ -167,7 +160,7 @@ public class ClassView extends EntityView {
 	
 	@Override
 	public boolean contains(final double x, final double y) {
-		return isVisible() && getBorders().contains(x, y);//FIXME isVisible should be used in the Entity.contains function.
+		return isVisible() && getBorders().contains(x, y);
 	}
 	
 	
@@ -341,23 +334,20 @@ public class ClassView extends EntityView {
 	protected void updateAnchorsPosition(final Rectangle2D oldBorders) {
 		final Rectangle2D borders = path.getBounds2D();
 		Point2D pos;
-		
+		final double minX = borders.getMinX();
+		final double minY = borders.getMinY();
+		final double tx = minX-oldBorders.getMinX();
+		final double ty = minY-oldBorders.getMinY();
+		final double sx = borders.getWidth()/oldBorders.getWidth();
+		final double sy = borders.getHeight()/oldBorders.getHeight();
+
 		for(final IAnchor anchor : anchors) {
+			// Moving the anchors to the new position of the borders.
+			anchor.translate(tx, ty);
+			// Scaling the position of the anchor in function of the difference of dimensions between the former border
+			// and the new border.
 			pos = anchor.getPosition();
-			
-			if(Number.NUMBER.equals(pos.getX(), oldBorders.getMaxX(), 2.))
-				pos.setLocation(borders.getMaxX(), pos.getY());
-			else
-				if(Number.NUMBER.equals(pos.getX(), oldBorders.getMinX(), 2.))
-						pos.setLocation(borders.getMinX(), pos.getY());
-			
-			if(Number.NUMBER.equals(pos.getY(), oldBorders.getMaxY(), 2.))
-				pos.setLocation(pos.getX(), borders.getMaxY());
-			else
-				if(Number.NUMBER.equals(pos.getY(), oldBorders.getMinY(), 2.))
-						pos.setLocation(pos.getX(), borders.getMinY());
-			
-			//TODO manage anchors that are not at extremities.
+			pos.setLocation(minX + (pos.getX()-minX)*sx, minY + (pos.getY()-minY)*sy);
 		}
 	}
 
@@ -416,19 +406,6 @@ public class ClassView extends EntityView {
 	}
 
 
-	@Override
-	public String getName() {
-		return name;
-	}
-
-
-	@Override
-	public void setName(final String name) {
-		if(name!=null)
-			this.name = name;
-	}
-	
-	
 	public void setIsAbstract(final boolean isAbstract) {
 		fontStyle = isAbstract ? Font.ITALIC : Font.PLAIN;
 	}
@@ -471,12 +448,6 @@ public class ClassView extends EntityView {
 			anchors.add(index+1, anchor);
 		
 		return anchor;
-	}
-	
-	
-	@Override
-	public List<IAnchor> getAnchors() {
-		return anchors;
 	}
 	
 	
