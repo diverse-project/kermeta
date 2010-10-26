@@ -3,23 +3,15 @@ package org.kermeta.ki.kompren.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kermeta.ki.diagram.view.impl.Anchor;
-import org.kermeta.ki.diagram.view.impl.EntityView;
-import org.kermeta.ki.diagram.view.impl.Number;
-import org.kermeta.ki.diagram.view.interfaces.IAnchor;
+import org.kermeta.ki.diagram.view.impl.RectangleEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IEntityView;
 import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 
@@ -27,7 +19,7 @@ import org.kermeta.ki.diagram.view.interfaces.IRelationView;
  * Defines an entity that corresponds to a class of a class diagram.
  * @author Arnaud Blouin
  */
-public class ClassView extends EntityView {//TODO create Class RectangleEntity in the diagram library.
+public class ClassView extends RectangleEntityView {
 	/** The gap is used to add spaces add the left and the right of the class. */
 	public static final float WIDTH_GAP = 2f;
 	
@@ -36,22 +28,6 @@ public class ClassView extends EntityView {//TODO create Class RectangleEntity i
 	
 	/** Used to add spaces around the name of the class. */
 	public static final float HEIGHT_HEADER_GAP = 10f;
-	
-	protected static final Graphics2D		 GRAPHICS;
-	protected static final FontMetrics 		 FONT_METRICS;
-	protected static final FontRenderContext FONT_RENDER_CONT;
-	
-	static {
-		BufferedImage bufferImage = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
-		GRAPHICS = bufferImage.createGraphics();
-		GRAPHICS.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		FONT_METRICS 	 = GRAPHICS.getFontMetrics();
-		FONT_RENDER_CONT = GRAPHICS.getFontRenderContext();
-		
-		bufferImage.flush();
-		bufferImage = null;
-	}
-	
 	
 	/** The views of the attributes of the class. */
 	protected List<AttributeView> attributes; 
@@ -155,12 +131,6 @@ public class ClassView extends EntityView {//TODO create Class RectangleEntity i
 	public void removeOperation(final OperationView op) {
 		if(operations.remove(op))
 			update();
-	}
-	
-	
-	@Override
-	public boolean contains(final double x, final double y) {
-		return isVisible() && getBorders().contains(x, y);
 	}
 	
 	
@@ -329,27 +299,6 @@ public class ClassView extends EntityView {//TODO create Class RectangleEntity i
 		path.closePath();
 	}
 	
-	
-	
-	protected void updateAnchorsPosition(final Rectangle2D oldBorders) {
-		final Rectangle2D borders = path.getBounds2D();
-		Point2D pos;
-		final double minX = borders.getMinX();
-		final double minY = borders.getMinY();
-		final double tx = minX-oldBorders.getMinX();
-		final double ty = minY-oldBorders.getMinY();
-		final double sx = borders.getWidth()/oldBorders.getWidth();
-		final double sy = borders.getHeight()/oldBorders.getHeight();
-
-		for(final IAnchor anchor : anchors) {
-			// Moving the anchors to the new position of the borders.
-			anchor.translate(tx, ty);
-			// Scaling the position of the anchor in function of the difference of dimensions between the former border
-			// and the new border.
-			pos = anchor.getPosition();
-			pos.setLocation(minX + (pos.getX()-minX)*sx, minY + (pos.getY()-minY)*sy);
-		}
-	}
 
 	
 	@Override
@@ -410,46 +359,6 @@ public class ClassView extends EntityView {//TODO create Class RectangleEntity i
 		fontStyle = isAbstract ? Font.ITALIC : Font.PLAIN;
 	}
 
-
-	@Override
-	protected void initAnchors() {
-		final Rectangle2D rec = getBorders();
-		
-		anchors.add(new Anchor(rec.getMinX(), rec.getMinY()));
-		anchors.add(new Anchor(rec.getCenterX(), rec.getMinY()));
-		anchors.add(new Anchor(rec.getMaxX(), rec.getMinY()));
-		anchors.add(new Anchor(rec.getMaxX(), rec.getCenterY()));
-		anchors.add(new Anchor(rec.getMaxX(), rec.getMaxY()));
-		anchors.add(new Anchor(rec.getCenterX(), rec.getMaxY()));
-		anchors.add(new Anchor(rec.getMinX(), rec.getMaxY()));
-		anchors.add(new Anchor(rec.getMinX(), rec.getCenterY()));
-	}
-
-
-	@Override
-	protected IAnchor createMiddleAnchor(final IAnchor firstAnchor, final IAnchor secondAnchor) {
-		if(firstAnchor==null || secondAnchor==null)
-			return null;
-		
-		IAnchor anchor;
-		final Point2D pos1 = firstAnchor.getPosition();
-		final Point2D pos2 = secondAnchor.getPosition();
-		
-		if(Number.NUMBER.equals(pos1.getY(), pos2.getY()))
-			anchor = new Anchor((pos1.getX()+pos2.getX())/2., pos1.getY());
-		else
-			anchor = new Anchor(pos1.getX(), (pos1.getY()+pos2.getY())/2.);
-		
-		int index = anchors.indexOf(firstAnchor);
-		
-		if(index==(anchors.size()-1))
-			anchors.add(anchor);
-		else
-			anchors.add(index+1, anchor);
-		
-		return anchor;
-	}
-	
 	
 	@Override
 	public GeneralPath getBoundPath() {

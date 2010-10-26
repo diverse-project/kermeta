@@ -5,6 +5,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+import org.kermeta.ki.diagram.view.impl.EntityView;
 import org.kermeta.ki.diagram.view.interfaces.ISelectable;
 
 public class FloatingText implements ISelectable {
@@ -63,7 +64,7 @@ public class FloatingText implements ISelectable {
 	@Override
 	public Rectangle2D getBorders() {
 		Point2D position = getPosition();
-		final Rectangle2D rec = new TextLayout(text, role.view.getEntitySrc().getFont(), ClassView.FONT_RENDER_CONT).getBounds();
+		final Rectangle2D rec = new TextLayout(text, role.view.getEntitySrc().getFont(), EntityView.FONT_RENDER_CONT).getBounds();
 		rec.setFrame(position.getX(), position.getY()-rec.getHeight(), rec.getWidth(), rec.getHeight());
 		
 		return rec; 

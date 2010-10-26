@@ -8,6 +8,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.Point2D;
 
 import org.kermeta.ki.diagram.view.impl.ComponentView;
+import org.kermeta.ki.diagram.view.impl.EntityView;
 
 
 public abstract class ClassElementView extends ComponentView {
@@ -83,7 +84,7 @@ public abstract class ClassElementView extends ComponentView {
 	@Override
 	public void update() {
 		textCache			= getFullText();
-		final TextLayout tl = new TextLayout(textCache, getFont(), ClassView.FONT_RENDER_CONT);
+		final TextLayout tl = new TextLayout(textCache, getFont(), EntityView.FONT_RENDER_CONT);
 		textBounds 			= new Dimension((int) tl.getBounds().getWidth(), (int) tl.getBounds().getHeight());
 	}
 	

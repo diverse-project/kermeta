@@ -3,10 +3,15 @@ package org.kermeta.ki.diagram.view.impl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +25,22 @@ import org.kermeta.ki.diagram.view.interfaces.IRelationView;
  */
 public abstract class EntityView extends ComponentView implements IEntityView {
 	public static final int DEFAUT_OPACITY = 200;
+	
+	public static final FontMetrics FONT_METRICS;
+	
+	public static final FontRenderContext FONT_RENDER_CONT;
+	
+	static {
+		BufferedImage bufferImage = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphics 	  = bufferImage.createGraphics();
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		FONT_METRICS 	 		  = graphics.getFontMetrics();
+		FONT_RENDER_CONT 		  = graphics.getFontRenderContext();
+		
+		bufferImage.flush();
+		bufferImage = null;
+	}
+	
 	
 	/** The name of the class. */
 	protected String name;
