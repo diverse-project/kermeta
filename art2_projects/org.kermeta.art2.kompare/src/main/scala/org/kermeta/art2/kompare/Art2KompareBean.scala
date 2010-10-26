@@ -20,6 +20,7 @@ class Art2KompareBean extends org.kermeta.art2.api.service.core.kompare.ModelKom
 
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
     //STEP 0 - FOUND LOCAL NODE
+
     var actualLocalNode = actualModel.getNodes.find{c=> c.getName==nodeName }
     var updateLocalNode = targetModel.getNodes.find{c=> c.getName==nodeName }
     updateLocalNode match {
