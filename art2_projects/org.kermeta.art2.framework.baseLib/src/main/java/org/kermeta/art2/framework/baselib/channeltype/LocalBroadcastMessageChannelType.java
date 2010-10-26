@@ -32,7 +32,7 @@ public class LocalBroadcastMessageChannelType extends AbstractChannelFragment {
         }
 
         /* WARNING FOR LOCAL BINDING */
-        if(!getBindedPorts().isEmpty()){
+        if(getBindedPorts().isEmpty()){
             logger.warn("No consumer, msg lost="+msg.getContent());
         }
 
