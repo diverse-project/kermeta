@@ -6,6 +6,8 @@
 package org.kermeta.art2.merger.tests
 
 import java.io.File
+import java.io.FileReader
+import java.io.BufferedReader
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.framework.Art2XmiHelper
@@ -18,10 +20,26 @@ trait MergerTestSuiteHelper extends JUnitSuite {
 
   /* UTILITY METHOD */
   def model(url:String):ContainerRoot={
-    Art2XmiHelper.load(this.getClass.getClassLoader.getResource(url).getPath)
+    var modelPath = this.getClass.getClassLoader.getResource(url).getPath
+    Art2XmiHelper.load(modelPath)
   }
 
   def emptyModel = Art2Factory.eINSTANCE.createContainerRoot
+
+  def hasNoRelativeReference(path:String, file:String) = {
+    var modelPath = this.getClass.getClassLoader.getResource(path).getPath+"/"+file
+    println("FilePath:" + modelPath)
+    var bufferedReader = new BufferedReader(new FileReader(new File(modelPath)))
+
+    var stringBuffer = new StringBuffer
+    var line : String = bufferedReader.readLine
+    while( line != null) {
+      stringBuffer.append(line)
+      line = bufferedReader.readLine
+    }
+
+    !stringBuffer.toString.contains("#")
+  }
 
   implicit def utilityMerger(self : ContainerRoot) = RichContainerRoot(self)
 
@@ -45,5 +63,6 @@ case class RichContainerRoot(self : ContainerRoot) {
     }
   }
 
+  
 
 }

@@ -5,9 +5,11 @@
 
 package org.kermeta.art2.merger.tests
 
+
 import org.kermeta.art2.api.service.core.merger.MergerService
-import org.junit._
 import org.kermeta.art2.merger.Art2MergerComponent
+import org.junit._
+
 
 class InitialeMergeTest extends MergerTestSuiteHelper {
 
@@ -17,6 +19,10 @@ class InitialeMergeTest extends MergerTestSuiteHelper {
     component = new Art2MergerComponent
   }
 
+  @Test def verifyRelativePathDetected() {
+    var mergedModel = model("corrupted/MergedWithRelativeReferences.art2")
+    assert( !hasNoRelativeReference("corrupted","MergedWithRelativeReferences.art2") )
+  }
   
   @Test def verifySimpleMerge1() {
     var mergedModel = component.merge(emptyModel, model("simple/simpleEntimidLib.art2"))
@@ -31,7 +37,7 @@ class InitialeMergeTest extends MergerTestSuiteHelper {
     //mergedModel testSave
     mergedModel testSave ("artFragments","lib4test-base-MERGED.art2")
 
-
+    assert(hasNoRelativeReference("artFragments","lib4test-base-MERGED.art2"))
   }
 
 }
