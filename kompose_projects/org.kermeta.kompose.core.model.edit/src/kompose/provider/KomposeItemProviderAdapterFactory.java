@@ -398,6 +398,52 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link kompose.Destroy} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DestroyItemProvider destroyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link kompose.Destroy}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDestroyAdapter() {
+		if (destroyItemProvider == null) {
+			destroyItemProvider = new DestroyItemProvider(this);
+		}
+
+		return destroyItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link kompose.Merge} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MergeItemProvider mergeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link kompose.Merge}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMergeAdapter() {
+		if (mergeItemProvider == null) {
+			mergeItemProvider = new MergeItemProvider(this);
+		}
+
+		return mergeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,6 +556,8 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 		if (contextItemProvider != null) contextItemProvider.dispose();
 		if (composerItemProvider != null) composerItemProvider.dispose();
 		if (concatItemProvider != null) concatItemProvider.dispose();
+		if (destroyItemProvider != null) destroyItemProvider.dispose();
+		if (mergeItemProvider != null) mergeItemProvider.dispose();
 	}
 
 }

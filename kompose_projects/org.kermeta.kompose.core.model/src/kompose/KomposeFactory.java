@@ -152,6 +152,24 @@ public interface KomposeFactory extends EFactory {
 	Concat createConcat();
 
 	/**
+	 * Returns a new object of class '<em>Destroy</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Destroy</em>'.
+	 * @generated
+	 */
+	Destroy createDestroy();
+
+	/**
+	 * Returns a new object of class '<em>Merge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Merge</em>'.
+	 * @generated
+	 */
+	Merge createMerge();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

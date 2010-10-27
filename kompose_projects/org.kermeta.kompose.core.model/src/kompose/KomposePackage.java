@@ -765,6 +765,98 @@ public interface KomposePackage extends EPackage {
 	int CONCAT_FEATURE_COUNT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link kompose.impl.DestroyImpl <em>Destroy</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kompose.impl.DestroyImpl
+	 * @see kompose.impl.KomposePackageImpl#getDestroy()
+	 * @generated
+	 */
+	int DESTROY = 19;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTROY__CONTEXT = ELEMENT_DIRECTIVE__CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTROY__TARGET = ELEMENT_DIRECTIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTROY__VALUE = ELEMENT_DIRECTIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Destroy</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTROY_FEATURE_COUNT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link kompose.impl.MergeImpl <em>Merge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kompose.impl.MergeImpl
+	 * @see kompose.impl.KomposePackageImpl#getMerge()
+	 * @generated
+	 */
+	int MERGE = 20;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGE__CONTEXT = ELEMENT_DIRECTIVE__CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGE__LEFT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGE__RIGHT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Merge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGE_FEATURE_COUNT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link kompose.Modes <em>Modes</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -772,7 +864,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getModes()
 	 * @generated
 	 */
-	int MODES = 19;
+	int MODES = 21;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -782,7 +874,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 20;
+	int STRING = 22;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -792,7 +884,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 21;
+	int BOOLEAN = 23;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -802,7 +894,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 22;
+	int INTEGER = 24;
 
 
 	/**
@@ -1238,6 +1330,70 @@ public interface KomposePackage extends EPackage {
 	EReference getConcat_Value();
 
 	/**
+	 * Returns the meta object for class '{@link kompose.Destroy <em>Destroy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Destroy</em>'.
+	 * @see kompose.Destroy
+	 * @generated
+	 */
+	EClass getDestroy();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Destroy#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see kompose.Destroy#getTarget()
+	 * @see #getDestroy()
+	 * @generated
+	 */
+	EReference getDestroy_Target();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Destroy#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see kompose.Destroy#getValue()
+	 * @see #getDestroy()
+	 * @generated
+	 */
+	EReference getDestroy_Value();
+
+	/**
+	 * Returns the meta object for class '{@link kompose.Merge <em>Merge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Merge</em>'.
+	 * @see kompose.Merge
+	 * @generated
+	 */
+	EClass getMerge();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Merge#getLeft <em>Left</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left</em>'.
+	 * @see kompose.Merge#getLeft()
+	 * @see #getMerge()
+	 * @generated
+	 */
+	EReference getMerge_Left();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Merge#getRight <em>Right</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right</em>'.
+	 * @see kompose.Merge#getRight()
+	 * @see #getMerge()
+	 * @generated
+	 */
+	EReference getMerge_Right();
+
+	/**
 	 * Returns the meta object for enum '{@link kompose.Modes <em>Modes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1667,6 +1823,58 @@ public interface KomposePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONCAT__VALUE = eINSTANCE.getConcat_Value();
+
+		/**
+		 * The meta object literal for the '{@link kompose.impl.DestroyImpl <em>Destroy</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kompose.impl.DestroyImpl
+		 * @see kompose.impl.KomposePackageImpl#getDestroy()
+		 * @generated
+		 */
+		EClass DESTROY = eINSTANCE.getDestroy();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DESTROY__TARGET = eINSTANCE.getDestroy_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DESTROY__VALUE = eINSTANCE.getDestroy_Value();
+
+		/**
+		 * The meta object literal for the '{@link kompose.impl.MergeImpl <em>Merge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kompose.impl.MergeImpl
+		 * @see kompose.impl.KomposePackageImpl#getMerge()
+		 * @generated
+		 */
+		EClass MERGE = eINSTANCE.getMerge();
+
+		/**
+		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MERGE__LEFT = eINSTANCE.getMerge_Left();
+
+		/**
+		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MERGE__RIGHT = eINSTANCE.getMerge_Right();
 
 		/**
 		 * The meta object literal for the '{@link kompose.Modes <em>Modes</em>}' enum.

@@ -14,6 +14,7 @@ import kompose.CompositionDirective;
 import kompose.Concat;
 import kompose.Context;
 import kompose.Create;
+import kompose.Destroy;
 import kompose.ElementDirective;
 import kompose.ElementRef;
 import kompose.Equals;
@@ -22,6 +23,7 @@ import kompose.IntegerLiteral;
 import kompose.KomposeFactory;
 import kompose.KomposePackage;
 import kompose.Literal;
+import kompose.Merge;
 import kompose.Mergeable;
 import kompose.Modes;
 import kompose.NameRef;
@@ -179,6 +181,20 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * @generated
 	 */
 	private EClass concatEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass destroyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mergeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -643,6 +659,60 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDestroy() {
+		return destroyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDestroy_Target() {
+		return (EReference)destroyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDestroy_Value() {
+		return (EReference)destroyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMerge() {
+		return mergeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMerge_Left() {
+		return (EReference)mergeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMerge_Right() {
+		return (EReference)mergeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getModes() {
 		return modesEEnum;
 	}
@@ -762,6 +832,14 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		createEReference(concatEClass, CONCAT__TARGET);
 		createEReference(concatEClass, CONCAT__VALUE);
 
+		destroyEClass = createEClass(DESTROY);
+		createEReference(destroyEClass, DESTROY__TARGET);
+		createEReference(destroyEClass, DESTROY__VALUE);
+
+		mergeEClass = createEClass(MERGE);
+		createEReference(mergeEClass, MERGE__LEFT);
+		createEReference(mergeEClass, MERGE__RIGHT);
+
 		// Create enums
 		modesEEnum = createEEnum(MODES);
 
@@ -813,6 +891,8 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
 		voidLiteralEClass.getESuperTypes().add(this.getLiteral());
 		concatEClass.getESuperTypes().add(this.getElementDirective());
+		destroyEClass.getESuperTypes().add(this.getElementDirective());
+		mergeEClass.getESuperTypes().add(this.getElementDirective());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(elementDirectiveEClass, ElementDirective.class, "ElementDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -878,6 +958,14 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		initEAttribute(getConcat_PropertyNames(), this.getString(), "propertyNames", null, 0, -1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcat_Target(), this.getElementRef(), null, "target", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcat_Value(), this.getElementRef(), null, "value", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(destroyEClass, Destroy.class, "Destroy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDestroy_Target(), this.getElementRef(), null, "target", null, 1, 1, Destroy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDestroy_Value(), this.getElementRef(), null, "value", null, 1, 1, Destroy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mergeEClass, Merge.class, "Merge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMerge_Left(), this.getNameRef(), null, "left", null, 1, 1, Merge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMerge_Right(), this.getNameRef(), null, "right", null, 1, 1, Merge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(modesEEnum, Modes.class, "Modes");

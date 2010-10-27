@@ -73,4 +73,16 @@
     <eLiterals name="UNION"/>
     <eLiterals name="INTERSECTION" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Destroy" eSuperTypes="#//ElementDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//ElementRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ElementRef"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Merge" eSuperTypes="#//ElementDirective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//NameRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//NameRef"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

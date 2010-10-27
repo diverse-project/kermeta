@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cms"
+    nsURI="http://cccms/cms" nsPrefix="cms">
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcesses">
+    <eOperations name="captureWitnessReport" lowerBound="1">
+      <eParameters name="in" eType="#//CaptureWitnessReportRequest"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eOperations name="assignEmergencyLvl">
+      <eParameters name="" eType="#//AssignEmergencyLvlRequest"/>
+    </eOperations>
+    <eOperations name="buildCheckList" lowerBound="1" eType="#//BuildCheckListResponse">
+      <eParameters name="in" eType="#//BuildCheckListRequest"/>
+    </eOperations>
+    <eOperations name="setWitness" lowerBound="1">
+      <eParameters name="in" eType="#//SetWitnessRequest"/>
+    </eOperations>
+    <eOperations name="validateWitnessInfo" lowerBound="1" eType="#//ValidateWitnessInfoResponse">
+      <eParameters name="in" eType="#//ValidateWitnessInfoRequest"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaptureWitnessReportRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" lowerBound="1" eType="#//CrisisIdentifier"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coord" lowerBound="1" eType="#//CmsEmployee"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisIdentifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CmsEmployee"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Witness"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetWitnessRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" lowerBound="1" eType="#//CrisisIdentifier"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wi" lowerBound="1" eType="#//Witness"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValidateWitnessInfoRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pi" lowerBound="1" eType="#//PhoneInformation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wi" lowerBound="1" eType="#//Witness"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValidateWitnessInfoResponse">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exact" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhoneInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PreliminaryInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisCheckList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BuildCheckListRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ccl" lowerBound="1" eType="#//CrisisCheckList"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuildCheckListResponse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="i" lowerBound="1" eType="#//PreliminaryInformation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignEmergencyLvlRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ci" lowerBound="1" eType="#//CrisisInformation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" lowerBound="1" eType="#//CrisisIdentifier"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

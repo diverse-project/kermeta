@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/dm.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/bm.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore">
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:StringLiteral" value="domainmodel"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="domainmodel"/>
+    <value xsi:type="kompose:NameRef" qname="domainmodel::Cms::CrisisIdentifier"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Merge">
+    <left qname="domainmodel::CrisisIdentifier"/>
+    <right qname="domainmodel::UI::CrisisIdentifier"/>
+  </predirectivesPM>
+  <postdirectives xsi:type="kompose:Create" className="Type" identifier="t"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="t"/>
+    <value xsi:type="kompose:StringLiteral" value="String"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="instanceClassName">
+    <target xsi:type="kompose:IDRef" identifier="t"/>
+    <value xsi:type="kompose:StringLiteral" value="java.lang.String"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="domainmodel"/>
+    <value xsi:type="kompose:IDRef" identifier="t"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Create" className="Attribute" identifier="a"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="a"/>
+    <value xsi:type="kompose:StringLiteral" value="crisisIdentifier"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="a"/>
+    <value xsi:type="kompose:IDRef" identifier="t"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="domainmodel::Crisis"/>
+    <value xsi:type="kompose:IDRef" identifier="a"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Destroy">
+    <value xsi:type="kompose:NameRef" qname="domainmodel::CrisisIdentifier"/>
+  </postdirectives>
+</kompose:Composer>

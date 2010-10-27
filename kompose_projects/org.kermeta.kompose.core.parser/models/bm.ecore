@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="domainmodel"
+    nsURI="http://capturewitnessreport/1.0" nsPrefix="capturewitnessreport">
+  <eClassifiers xsi:type="ecore:EClass" name="CmsEmployee"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhoneInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PreliminaryInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Worker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emergencyLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="detailedInfo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="involvedW" upperBound="-1"
+        eType="#//Worker"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missionLeader" lowerBound="1"
+        eType="#//Worker"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crisis" lowerBound="1"
+        eType="#//Crisis" eOpposite="#//Crisis/missions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Medium"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Coordinator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CMSEmployee" eSuperTypes="#//Worker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MobileEmployee" eSuperTypes="#//CMSEmployee">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportedBy" eType="#//Vehicle"
+        eOpposite="#//Vehicle/transports"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vehicle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transports" upperBound="-1"
+        eType="#//MobileEmployee" eOpposite="#//MobileEmployee/transportedBy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Victim">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wasIn" eType="#//Vehicle"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crisis" upperBound="-1"
+        eType="#//Crisis" eOpposite="#//Crisis/type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="witnessCL" lowerBound="1"
+        eType="#//CheckList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmsEmployee"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PreliminaryInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisIdentifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisCheckList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhoneInformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CrisisIdentifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CarCrash" eSuperTypes="#//CrisisType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalResourceSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
+        eType="#//ExternalWorker" eOpposite="#//ExternalWorker/employer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalWorker" eSuperTypes="#//Worker">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employer" lowerBound="1"
+        eType="#//ExternalResourceSystem" eOpposite="#//ExternalResourceSystem/employees"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Witness"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Crisis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emergencyLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="affectedArea" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="detailedInfo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missions" upperBound="-1"
+        eType="#//Mission" eOpposite="#//Mission/crisis"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gatheredMedium" upperBound="-1"
+        eType="#//Medium"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedTo" lowerBound="1"
+        eType="#//Coordinator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observedBy" upperBound="-1"
+        eType="#//Witness.2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crashedVehicle" upperBound="-1"
+        eType="#//Vehicle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="involvedVictim" upperBound="-1"
+        eType="#//Victim"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//CrisisType"
+        eOpposite="#//CrisisType/crisis"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="crisisIdentifier" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Witness"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Witness">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missionCL" lowerBound="1"
+        eType="#//CrisisType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

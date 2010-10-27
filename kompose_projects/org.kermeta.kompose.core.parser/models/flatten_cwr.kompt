@@ -1,0 +1,74 @@
+// Common Metamodel URI (for now, Kompose only works with models conforming to a single metamodel)
+// Available values are "http://www.eclipse.org/emf/2002/Ecore" and "http://www.kermeta.org/rdbschema.ecore" for now
+EXT "http://www.eclipse.org/emf/2002/Ecore"
+
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/flat_cwr.ecore"
+
+// predirectives for primary model
+PMPre {
+	//packages flattening
+	//Cms
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisIdentifier
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CmsEmployee
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::PhoneInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::PreliminaryInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisCheckList
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::Cms
+	//UI
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CmsEmployee
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::PreliminaryInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisIdentifier
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisCheckList
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::UI
+	//PhoneCie
+	capturewitnessreport.eClassifiers + capturewitnessreport::PhoneCie::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::PhoneCie::PhoneInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::PhoneCie
+	//MsgBus
+	capturewitnessreport.eClassifiers + capturewitnessreport::MsgBus::CrisisIdentifier
+	capturewitnessreport.eClassifiers - capturewitnessreport::MsgBus
+}
+
+// predirectives for aspect model
+AMPre {
+	//packages flattening
+	//Cms
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisIdentifier
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CmsEmployee
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::PhoneInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::PreliminaryInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisCheckList
+	capturewitnessreport.eClassifiers + capturewitnessreport::Cms::CrisisInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::Cms
+	//UI
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CmsEmployee
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::PreliminaryInformation
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisIdentifier
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisCheckList
+	capturewitnessreport.eClassifiers + capturewitnessreport::UI::CrisisInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::UI
+	//PhoneCie
+	capturewitnessreport.eClassifiers + capturewitnessreport::PhoneCie::Witness
+	capturewitnessreport.eClassifiers + capturewitnessreport::PhoneCie::PhoneInformation
+	capturewitnessreport.eClassifiers - capturewitnessreport::PhoneCie
+	//MsgBus
+	capturewitnessreport.eClassifiers + capturewitnessreport::MsgBus::CrisisIdentifier
+	capturewitnessreport.eClassifiers - capturewitnessreport::MsgBus
+}
+
+// postdirectives 
+Post {
+}

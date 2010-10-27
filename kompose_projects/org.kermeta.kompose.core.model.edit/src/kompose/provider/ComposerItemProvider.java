@@ -309,6 +309,16 @@ public class ComposerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_PM,
+				 KomposeFactory.eINSTANCE.createDestroy()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_PM,
+				 KomposeFactory.eINSTANCE.createMerge()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__POSTDIRECTIVES,
 				 KomposeFactory.eINSTANCE.createRemove()));
 
@@ -334,6 +344,16 @@ public class ComposerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__POSTDIRECTIVES,
+				 KomposeFactory.eINSTANCE.createDestroy()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__POSTDIRECTIVES,
+				 KomposeFactory.eINSTANCE.createMerge()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
 				 KomposeFactory.eINSTANCE.createRemove()));
 
@@ -356,6 +376,16 @@ public class ComposerItemProvider
 			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
 				 KomposeFactory.eINSTANCE.createConcat()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
+				 KomposeFactory.eINSTANCE.createDestroy()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
+				 KomposeFactory.eINSTANCE.createMerge()));
 	}
 
 	/**

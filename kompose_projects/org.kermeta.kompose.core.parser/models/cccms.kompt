@@ -1,0 +1,97 @@
+// Common Metamodel URI (for now, Kompose only works with models conforming to a single metamodel)
+// Available values are "http://www.eclipse.org/emf/2002/Ecore" and "http://www.kermeta.org/rdbschema.ecore" for now
+EXT "http://www.eclipse.org/emf/2002/Ecore"
+
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/dm.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/bm.ecore"
+
+// predirectives for primary model
+PMPre {
+	//packages flattening
+	capturewitnessreport.name = "domainmodel"
+	//Cms
+	domainmodel.eClassifiers + domainmodel::Cms::CrisisIdentifier
+	//domainmodel.eClassifiers + domainmodel::Cms::CmsEmployee
+	//domainmodel.eClassifiers + domainmodel::Cms::Witness
+	//domainmodel.eClassifiers + domainmodel::Cms::PhoneInformation
+	//domainmodel.eClassifiers + domainmodel::Cms::PreliminaryInformation
+	//domainmodel.eClassifiers + domainmodel::Cms::CrisisCheckList
+	//domainmodel.eClassifiers + domainmodel::Cms::CrisisInformation
+	//domainmodel.eSubpackages - domainmodel::Cms
+	//UI
+	merge(domainmodel::CrisisIdentifier,domainmodel::UI::CrisisIdentifier)
+	//domainmodel.eClassifiers + domainmodel::UI::CmsEmployee
+	//domainmodel.eClassifiers + domainmodel::UI::Witness
+	//domainmodel.eClassifiers + domainmodel::UI::PreliminaryInformation
+	//domainmodel.eClassifiers + domainmodel::UI::CrisisIdentifier
+	//domainmodel.eClassifiers + domainmodel::UI::CrisisCheckList
+	//domainmodel.eClassifiers + domainmodel::UI::CrisisInformation
+	//domainmodel.eSubpackages - domainmodel::UI
+	//PhoneCie
+	//domainmodel.eClassifiers + domainmodel::PhoneCie::Witness
+	//domainmodel.eClassifiers + domainmodel::PhoneCie::PhoneInformation
+	//domainmodel.eSubpackages - domainmodel::PhoneCie
+	//MsgBus
+	//domainmodel.eClassifiers + domainmodel::MsgBus::CrisisIdentifier
+	//domainmodel.eSubpackages - domainmodel::MsgBus
+	
+	//CheckList
+	//	domainmodel::CrisisCheckList.name = "CheckList"
+	//CrisisInformation
+	//	domainmodel::CrisisInformation.name = "Crisis"
+	
+	
+	
+	
+	// flatten because of packages in the first model is based on services
+	// specification
+	//capturewitnessreport.eClassifiers + capturewitnessreport::Cms::BusinessProcesses
+	//capturewitnessreport.eClassifiers + capturewitnessreport::UI.eClassifiers
+	//capturewitnessreport.eClassifiers + capturewitnessreport::PhoneCie.eClassifiers
+	//capturewitnessreport.eClassifiers + capturewitnessreport::MsgBus.eClassifiers
+	//capturewitnessreport.ePackages - capturewitnessreport::Cms
+	//capturewitnessreport.ePackages - capturewitnessreport::UI
+	//capturewitnessreport.ePackages - capturewitnessreport::PhoneCie
+	//capturewitnessreport.ePackages - capturewitnessreport::MsgBus
+}
+
+// predirectives for aspect model
+AMPre { 
+	// Rename package BLP to Bank
+	
+}
+
+// postdirectives 
+Post {
+	//Unused elements
+		//destroy domainmodel::BusinessProcesses
+		//destroy domainmodel::Service
+		//destroy domainmodel::CaptureWitnessReportRequest
+		//destroy domainmodel::SetWitnessRequest
+		//destroy domainmodel::ValidateWitnessInfoRequest
+		//destroy domainmodel::ValidateWitnessInfoResponse
+		//destroy domainmodel::BuildCheckListRequest
+		//destroy domainmodel::BuildCheckListResponse
+		//destroy domainmodel::AssignEmergencyLvlRequest
+	//CrisisIdentifier
+		//create type String
+		create Type as $t
+		$t.name = "String"
+		$t.instanceClassName = "java.lang.String"
+		domainmodel.eClassifiers + $t
+	
+		//create Attribute 
+		create Attribute as $a
+		$a.name = "crisisIdentifier"
+		$a.eType = $t
+		
+		//add attribute to a class
+		domainmodel::Crisis.eStructuralFeatures + $a
+		destroy domainmodel::CrisisIdentifier
+}

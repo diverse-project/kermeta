@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/cwr.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/adore/flat_cwr.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore">
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisIdentifier"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CmsEmployee"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::Witness"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::PhoneInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::PreliminaryInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisCheckList"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CmsEmployee"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::Witness"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::PreliminaryInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisIdentifier"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisCheckList"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie::Witness"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie::PhoneInformation"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::MsgBus::CrisisIdentifier"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::MsgBus"/>
+  </predirectivesPM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisIdentifier"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CmsEmployee"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::Witness"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::PhoneInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::PreliminaryInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisCheckList"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms::CrisisInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::Cms"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CmsEmployee"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::Witness"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::PreliminaryInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisIdentifier"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisCheckList"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI::CrisisInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::UI"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie::Witness"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie::PhoneInformation"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::PhoneCie"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::MsgBus::CrisisIdentifier"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="capturewitnessreport"/>
+    <value xsi:type="kompose:NameRef" qname="capturewitnessreport::MsgBus"/>
+  </predirectivesAM>
+</kompose:Composer>

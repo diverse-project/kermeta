@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/Bank.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/BLP.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/BankBLP.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore">
+  <predirectivesPM xsi:type="kompose:Concat">
+    <propertyNames>name</propertyNames>
+    <propertyNames>&quot;tata&quot;</propertyNames>
+    <propertyNames>&quot;titi&quot;</propertyNames>
+    <propertyNames>BLP.name</propertyNames>
+    <target xsi:type="kompose:NameRef" qname="BLP::BankUser"/>
+    <value xsi:type="kompose:NameRef" qname="Bank"/>
+  </predirectivesPM>
+  <postdirectives xsi:type="kompose:Remove" propertyName="eOperations">
+    <target xsi:type="kompose:NameRef" qname="Bank::Controller"/>
+    <value xsi:type="kompose:NameRef" qname="Bank::Controller::transfer"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP"/>
+    <value xsi:type="kompose:StringLiteral" value="Bank"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="upper">
+    <target xsi:type="kompose:NameRef" qname="BLP::name"/>
+    <value xsi:type="kompose:IntegerLiteral" value="-1"/>
+  </predirectivesAM>
+</kompose:Composer>

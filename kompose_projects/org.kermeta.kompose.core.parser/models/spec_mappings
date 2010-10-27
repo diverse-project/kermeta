@@ -1,0 +1,60 @@
+Mapping specification MessageStructure Model / Domain Model
+
+Are the following sentences right?
+1)  Kompose identifies potential equivalent information such as :
+a) crisisCheckList (BM) and CheckList (DM)
+b) It also identifies that :
+- Witness (DM) and Witness (BM) don't define the same attributes
+- PhoneInformation (BM) is not defined in the domain model
+- CrisisIdentifier, CrisisInformation ... (BM) are not defined in the domain model
+
+But Kompose can't decide what to do.
+In this example, we can imagine (but Sebastien has to validate it) that users decides :
+- CrisisCheckList must be *renamed* as CheckList
+    => Kompose renames CrisisCheckList as CheckList
+---OK    
+    => it generated : rename(CrisisCheckList, CheckList) for Adore.
+---OK but more complex: the way the workflow intends to have access to this data is closer to '...'
+---MAP(CrisisCheckList)
+
+-  Witness(BM) and Witness (DM) must be /*merged*/
+   => Kompose adds /id/ identifiers to Witness
+---RENAME(Witness.id,Witness.identification)
+   => no changes at BM level....Even if Witness was defining attribute??
+
+- User decides that PhoneInformation are not useful at domain model level...
+   => nothing to do. (We probably should remember this choice?)
+--- Can't do that because PhoneInformation is used as an input for ValidateWitnessInfo
+---MAP(PhoneInformation,Person.phone)?   
+   
+- CrisisIdentifier is useful to memorize Crisis.
+The user enhances the domain model adding /CrisisHistory/ and the relation between CrisisHistory and Crisis is labelled CrisisIdentifier.
+Kompose is relaunched.
+   => Nothing to do.... really? (Mickael? an association and a class??)
+---I don't get the idea about creating a CrisisHistory... :( 
+We have decided instead to put CrisisIdentifier as an attribute of a Crisis
+---CREATE ATTRIBUTE(Crisis,identifier,String)
+---MAP(CrisisIdentifier,Crisis.identifier)
+   
+- User identifies CrisisInformation as the data corresponding to detailedInfo in Crisis (BM).
+   => We could ask Adore to set type to String? (Seb.....)
+---If CrisisInformation corresponds to detailedInfo, we need to destroy the CrisisInformation object.
+---Then we have to keep track of this modification to change the way the workflow behaves
+---DESTROY CrisisInformation
+---MAP(CrisisInformation,detailedInfo)
+
+So It seems that we could identify a set of predefined post-directives :
+- Unify
+- Merge
+- setType? link?
+
+What about:
+- BusinessProcesses/Service & Response/Request classes?
+--- We plan to remove those classes ...
+--- DESTROY BusinessProcesses/Service/*Request/*Response
+- PreliminaryInformation?
+--- Regarding its use in the workflow model, it seems that this Preliminary information
+is some data that identifies the mission of a Worker. From this mission, we are then able to get
+the right Crisis and get the corresponding CheckList.
+--- MAP(PreliminaryInformation,Worker.mission) -> problem is that we have no navigation between 
+a Worker and its Missions

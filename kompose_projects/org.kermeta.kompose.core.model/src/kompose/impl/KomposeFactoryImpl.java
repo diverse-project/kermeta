@@ -75,6 +75,8 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 			case KomposePackage.CONTEXT: return createContext();
 			case KomposePackage.COMPOSER: return createComposer();
 			case KomposePackage.CONCAT: return createConcat();
+			case KomposePackage.DESTROY: return createDestroy();
+			case KomposePackage.MERGE: return createMerge();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -260,6 +262,26 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	public Concat createConcat() {
 		ConcatImpl concat = new ConcatImpl();
 		return concat;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Destroy createDestroy() {
+		DestroyImpl destroy = new DestroyImpl();
+		return destroy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Merge createMerge() {
+		MergeImpl merge = new MergeImpl();
+		return merge;
 	}
 
 	/**

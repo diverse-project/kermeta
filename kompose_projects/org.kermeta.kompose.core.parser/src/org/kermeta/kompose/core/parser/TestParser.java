@@ -19,8 +19,8 @@ import kompose.*;
 public class TestParser {
 
 	
-	public static String input = "models/blp.comp";
-	public static String output = "models/blp_comp.xmi";
+	public static String input = "src/org/kermeta/kompose/core/parser/shipshop.kompt";
+	public static String output = "src/org/kermeta/kompose/core/parser/shishop.xmi";
 	
 	
 	/**

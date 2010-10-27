@@ -7,8 +7,6 @@ options {
 @header {
 package org.kermeta.kompose.core.parser;
 
-import java.util.ArrayList;
-
 import kompose.*;
 import kompose.impl.KomposePackageImpl;
 }
@@ -42,13 +40,6 @@ import kompose.impl.KomposePackageImpl;
 package org.kermeta.kompose.core.parser;
 }
 
-/*
-emptyRule: int_rule  
-;
-
-MINUS : '-' {System.out.println("found MINUS -");};
-*/
-
 dirUnit returns [Composer c = factory.createComposer();]
   @after{
     c.setMetamodelName($ext.text.substring(1, $ext.text.length()-1));
@@ -61,29 +52,29 @@ dirUnit returns [Composer c = factory.createComposer();]
   }
   :
   'EXT' ext=STRING_LITERAL
-  ('MODE' mode=(UNION {c.setMode(Modes.UNION);} | INTER {c.setMode(Modes.INTERSECTION);}))?
+  ('MODE' (UNION {c.setMode(Modes.UNION);} | INTER {c.setMode(Modes.INTERSECTION);}))?
   'PM' pm=STRING_LITERAL
   'AM' am=STRING_LITERAL
   'CM' cm=STRING_LITERAL
   
   'PMPre' LCURLY pmpre=directives RCURLY
   'AMPre' LCURLY ampre=directives RCURLY
+
   'Post' LCURLY post=directives RCURLY
 ;
 
-directives returns [ArrayList lst = new ArrayList()]:
+directives returns [ArrayList<ElementDirective> lst = new ArrayList<ElementDirective>()]:
   (d=directive {lst.add(d);})*
 ;
 
-/*directive returns [ElementDirective c] :
-  (changeD {$c=$changeD.d;} | concatD {$c=$concatD.d;} | createD{$c=$createD.d;})
-;*/
-
 directive returns [ElementDirective c] :
-  (propertyD {$c=$propertyD.c;} | stringD {$c=$stringD.c;} | createD{$c=$createD.d;})
+  (destroyD{$c=$destroyD.d;} | propertyD {$c=$propertyD.c;} | stringD {$c=$stringD.c;} | createD{$c=$createD.d;} | mergeD{$c=$mergeD.d;})
 ;
 
 createD returns [Create d = factory.createCreate()]
+  @init{
+    System.out.println("CREATE "+$id.text+" AS $"+$var.text);
+  } 
   @after{
     d.setClassName($id.text);
     d.setIdentifier($var.text);
@@ -92,15 +83,50 @@ createD returns [Create d = factory.createCreate()]
   CREATE id=ID AS DOLLAR var=ID
 ;
 
-propertyD returns [ElementDirective c = null]:
+mergeD returns [Merge d = factory.createMerge()]
+  @init{
+    System.out.println("MERGED ");
+  }
+  @after{
+    System.out.println("MERGE ");
+  }
+  :
+  MERGE LP refL=nameRef {d.setLeft(refL);} COMMA refR=nameRef {d.setRight(refR);} RP
+;
+
+destroyD returns [Destroy d = factory.createDestroy()]
+	@init{
+    System.out.println("DESTROYD ");
+  }
+  @after{
+    System.out.println("DESTROY "+ref.getQname());
+  }
+  :
+  DESTROY ref=nameRef {d.setValue(ref);}
+;
+propertyD returns [ElementDirective c = null]
+  @init{
+    System.out.println("PROPERTYD ");
+  }
+  @after{
+    System.out.println(" PROP "+ref.toString());
+  }
+  :
   ref=refObj DOT prop=ID (changeD[$prop.text, ref]{$c=$changeD.d;} | concatD[$prop.text, ref]{$c=$concatD.d;})
 ;
 
-stringD returns [ElementDirective c = null]:
+stringD returns [ElementDirective c = null]
+	@init{
+	  System.out.println("STRINGD "+$ref.text);
+	}
+  :
   ref=stringL concatD[$ref.text,null]{$c=$concatD.d;}
 ;
 
 changeD [String prop, ElementRef ref] returns [Change d = null]
+	@init{
+	  System.out.println("CHANGED "+$prop);
+	}
   @after{
     d.setPropertyName($prop);
     d.setTarget($ref);
@@ -113,6 +139,7 @@ concatD [String prop, ElementRef ref] returns [Concat d = factory.createConcat()
   @init{
     ArrayList<String> list = new ArrayList<String>();
     list.add($prop);
+    System.out.println("CONCAT "+$prop+" to "+$ref);
   }
   @after{
     d.setValue($target.ref);
@@ -123,37 +150,76 @@ concatD [String prop, ElementRef ref] returns [Concat d = factory.createConcat()
   (COMMA property=concat_property {list.add($property.text);})* CONCAT target=concat_property
 ;
 
-fragment concat_property returns [ElementRef ref = null]:
-  (nameRef DOT prop=ID) {$ref=$nameRef.ref;} | stringL {$ref=$stringL.ref;}
+fragment concat_property returns [ElementRef ref = null]
+  @init{
+    System.out.println("FRAGMENT CONCAT");
+  }
+  :
+  (nameRef DOT ID) {$ref=$nameRef.ref;} | stringL {$ref=$stringL.ref;}
 ;
 
-setD returns [Set d = factory.createSet()]:
+setD returns [Set d = factory.createSet()]
+  @init{
+    System.out.println("SETD ");
+  }
+  @after{
+    System.out.println("SET "+ref.toString());
+  }
+  :
   EQUALS ref=refObj {d.setValue(ref);}
 ;
 
-addD returns [Add d = factory.createAdd()]:
+addD returns [Add d = factory.createAdd()]
+  @init{
+    System.out.println("ADDD ");
+  }
+  @after{
+    System.out.println("ADD "+ref.toString());
+  }
+  :
   PLUS ref=refObj {d.setValue(ref);}
 ;
 
-removeD returns [Remove d = factory.createRemove()]:
+removeD returns [Remove d = factory.createRemove()]
+  @init{
+    System.out.println("REMOVED ");
+  }
+  @after{
+    System.out.println("REMOVE "+ref.toString());
+  }
+  :
   MINUS ref=refObj {d.setValue(ref);}
 ;
 
-refObj returns [ElementRef ref = null]:
+refObj returns [ElementRef ref = null]
+  @init{
+    System.out.println("REFOBJ ");
+  }
+  @after{
+    System.out.println("REFOBJ "+$ref.toString());
+  }
+  :
   nameRef {$ref=$nameRef.ref;} | idRef {$ref=$idRef.ref;} |
   stringL {$ref=$stringL.ref;} | booleanL {$ref=$booleanL.ref;} | 
   integerL {$ref=$integerL.ref;}
 ;
   
 nameRef returns [NameRef ref = factory.createNameRef()]
+  @init{
+    System.out.println("NAMEREF ");
+  }
   @after{
     ref.setQname(qname);
+    System.out.println("NAMEREF "+qname);
   }
   :
 	  qname=qualifiedID
 ;
 
 idRef returns [IDRef ref = factory.createIDRef()]
+  @init{
+    System.out.println("IDREF "+$id.text);
+  }
   @after{
     ref.setIdentifier($id.text);
   }
@@ -162,6 +228,9 @@ idRef returns [IDRef ref = factory.createIDRef()]
 ;
 
 stringL returns [StringLiteral ref = factory.createStringLiteral()]
+  @init{
+    System.out.println("STRINGL "+v);
+  }
   @after{
     $ref.setValue($v.text.substring(1, $v.text.length()-1));
   }
@@ -170,6 +239,9 @@ stringL returns [StringLiteral ref = factory.createStringLiteral()]
 ;
 
 integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()]
+  @init{
+    System.out.println("INTL "+str);
+  }
   @after{
     ref.setValue(Integer.parseInt($str.text));
   }
@@ -177,13 +249,18 @@ integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()]
   str=integer
 ;
 
-integer returns [Integer str = null]: 
+integer returns [Integer str = null]
+  @init{
+    System.out.println("INT ");
+  }
+  :
   (MINUS)? INT_LITERAL
 ;
 
 booleanL returns [BooleanLiteral ref = factory.createBooleanLiteral()]
   @init{
     boolean val = false;
+    System.out.println("BOOL "+val);
   }
   @after{
     ref.setValue(val);
@@ -192,10 +269,16 @@ booleanL returns [BooleanLiteral ref = factory.createBooleanLiteral()]
     (TRUE { val = true; }| FALSE)
 ;
 
-qualifiedID returns [String val = ""]:
+qualifiedID returns [String val = ""]
+  @init{
+    System.out.println("QID ");
+  }
+  @after{
+    System.out.println("QUALID "+$str1.text);
+  }
+:
   str1=ID {val+=$str1.text;} (COL_COL strn=ID {val+="::"+$strn.text;} )*
 ;
-
 
 PRE     : 'pre';
 POST    : 'post';
@@ -208,13 +291,17 @@ CONCAT  : '+=';
 EQUALS  : '=';
 DOLLAR  : '$';
 COL_COL : '::';
-AS      : 'as' ;
+AS      : 'as';
 CREATE  : 'create';
 TRUE    : 'true';
 FALSE   : 'false';
 COMMA   : ',';
 UNION   : 'UNION';
 INTER   : 'INTERSECTION';
+DESTROY : 'destroy'|'DESTROY';
+MERGE   : 'merge'|'MERGE';
+LP      : '(';
+RP      : ')';
 
 STRING_LITERAL : '"' (ESC | ~('"'|'\\'))* '"' ;
 INT_LITERAL: (DIGIT)*;

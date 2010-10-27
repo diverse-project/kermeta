@@ -228,6 +228,22 @@ public class KomposeSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KomposePackage.DESTROY: {
+				Destroy destroy = (Destroy)theEObject;
+				T result = caseDestroy(destroy);
+				if (result == null) result = caseElementDirective(destroy);
+				if (result == null) result = caseCompositionDirective(destroy);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KomposePackage.MERGE: {
+				Merge merge = (Merge)theEObject;
+				T result = caseMerge(merge);
+				if (result == null) result = caseElementDirective(merge);
+				if (result == null) result = caseCompositionDirective(merge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -514,6 +530,36 @@ public class KomposeSwitch<T> {
 	 * @generated
 	 */
 	public T caseConcat(Concat object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Destroy</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Destroy</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDestroy(Destroy object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Merge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Merge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMerge(Merge object) {
 		return null;
 	}
 

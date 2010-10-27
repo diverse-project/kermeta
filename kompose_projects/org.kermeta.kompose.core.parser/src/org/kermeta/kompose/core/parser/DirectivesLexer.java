@@ -1,4 +1,4 @@
-// $ANTLR 3.1.1 /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2009-07-31 17:16:58
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2010-06-24 12:03:27
 
 package org.kermeta.kompose.core.parser;
 
@@ -10,40 +10,44 @@ import java.util.ArrayList;
 
 public class DirectivesLexer extends Lexer {
     public static final int DOLLAR=12;
-    public static final int INT_LITERAL=19;
-    public static final int CONCAT=15;
-    public static final int SingleLineComment=28;
-    public static final int ESC=25;
-    public static final int COL_COL=22;
+    public static final int DESTROY=17;
+    public static final int T__40=40;
+    public static final int INT_LITERAL=23;
+    public static final int T__41=41;
+    public static final int SingleLineComment=32;
+    public static final int CONCAT=19;
+    public static final int RP=16;
+    public static final int ESC=29;
+    public static final int MERGE=13;
+    public static final int LP=14;
+    public static final int COL_COL=26;
     public static final int INTER=6;
     public static final int LCURLY=7;
-    public static final int PRE=23;
-    public static final int EQUALS=16;
-    public static final int MINUS=18;
+    public static final int PRE=27;
+    public static final int EQUALS=20;
+    public static final int MINUS=22;
     public static final int ID=10;
     public static final int EOF=-1;
-    public static final int TRUE=20;
+    public static final int TRUE=24;
     public static final int UNION=5;
-    public static final int T__30=30;
     public static final int AS=11;
-    public static final int T__31=31;
     public static final int CREATE=9;
-    public static final int T__32=32;
     public static final int STRING_LITERAL=4;
-    public static final int T__33=33;
-    public static final int WS=27;
+    public static final int WS=31;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
     public static final int T__37=37;
-    public static final int COMMA=14;
+    public static final int T__38=38;
+    public static final int COMMA=15;
+    public static final int T__39=39;
     public static final int RCURLY=8;
-    public static final int POST=24;
-    public static final int PLUS=17;
-    public static final int DIGIT=26;
-    public static final int DOT=13;
-    public static final int FALSE=21;
-    public static final int MultiLineComment=29;
+    public static final int POST=28;
+    public static final int PLUS=21;
+    public static final int DIGIT=30;
+    public static final int DOT=18;
+    public static final int FALSE=25;
+    public static final int MultiLineComment=33;
 
     // delegates
     // delegators
@@ -58,99 +62,15 @@ public class DirectivesLexer extends Lexer {
     }
     public String getGrammarFileName() { return "/home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g"; }
 
-    // $ANTLR start "T__30"
-    public final void mT__30() throws RecognitionException {
-        try {
-            int _type = T__30;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:7: ( 'EXT' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:9: 'EXT'
-            {
-            match("EXT"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__30"
-
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
-        try {
-            int _type = T__31;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:7: ( 'MODE' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:9: 'MODE'
-            {
-            match("MODE"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__31"
-
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
-        try {
-            int _type = T__32;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:7: ( 'PM' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:9: 'PM'
-            {
-            match("PM"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__32"
-
-    // $ANTLR start "T__33"
-    public final void mT__33() throws RecognitionException {
-        try {
-            int _type = T__33;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:7: ( 'AM' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:9: 'AM'
-            {
-            match("AM"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__33"
-
     // $ANTLR start "T__34"
     public final void mT__34() throws RecognitionException {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:7: ( 'CM' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:9: 'CM'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:7: ( 'EXT' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:9: 'EXT'
             {
-            match("CM"); 
+            match("EXT"); 
 
 
             }
@@ -168,10 +88,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:7: ( 'PMPre' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:9: 'PMPre'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:7: ( 'MODE' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:9: 'MODE'
             {
-            match("PMPre"); 
+            match("MODE"); 
 
 
             }
@@ -189,10 +109,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:7: ( 'AMPre' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:9: 'AMPre'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:7: ( 'PM' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:9: 'PM'
             {
-            match("AMPre"); 
+            match("PM"); 
 
 
             }
@@ -210,6 +130,90 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:7: ( 'AM' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:9: 'AM'
+            {
+            match("AM"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__37"
+
+    // $ANTLR start "T__38"
+    public final void mT__38() throws RecognitionException {
+        try {
+            int _type = T__38;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:7: ( 'CM' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:9: 'CM'
+            {
+            match("CM"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__38"
+
+    // $ANTLR start "T__39"
+    public final void mT__39() throws RecognitionException {
+        try {
+            int _type = T__39;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:7: ( 'PMPre' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:9: 'PMPre'
+            {
+            match("PMPre"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__39"
+
+    // $ANTLR start "T__40"
+    public final void mT__40() throws RecognitionException {
+        try {
+            int _type = T__40;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:7: ( 'AMPre' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:9: 'AMPre'
+            {
+            match("AMPre"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__40"
+
+    // $ANTLR start "T__41"
+    public final void mT__41() throws RecognitionException {
+        try {
+            int _type = T__41;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:18:7: ( 'Post' )
             // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:18:9: 'Post'
             {
@@ -224,15 +228,15 @@ public class DirectivesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__37"
+    // $ANTLR end "T__41"
 
     // $ANTLR start "PRE"
     public final void mPRE() throws RecognitionException {
         try {
             int _type = PRE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:9: ( 'pre' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:11: 'pre'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:283:9: ( 'pre' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:283:11: 'pre'
             {
             match("pre"); 
 
@@ -252,8 +256,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = POST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:9: ( 'post' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:11: 'post'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:284:9: ( 'post' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:284:11: 'post'
             {
             match("post"); 
 
@@ -273,8 +277,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:9: ( '.' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:11: '.'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:285:9: ( '.' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:285:11: '.'
             {
             match('.'); 
 
@@ -293,8 +297,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = LCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:9: ( '{' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:11: '{'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:286:9: ( '{' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:286:11: '{'
             {
             match('{'); 
 
@@ -313,8 +317,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = RCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:9: ( '}' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:11: '}'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:287:9: ( '}' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:287:11: '}'
             {
             match('}'); 
 
@@ -333,8 +337,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:205:9: ( '+' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:205:11: '+'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:288:9: ( '+' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:288:11: '+'
             {
             match('+'); 
 
@@ -353,8 +357,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:9: ( '-' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:11: '-'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:289:9: ( '-' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:289:11: '-'
             {
             match('-'); 
 
@@ -373,8 +377,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = CONCAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:9: ( '+=' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:11: '+='
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:290:9: ( '+=' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:290:11: '+='
             {
             match("+="); 
 
@@ -394,8 +398,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = EQUALS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:9: ( '=' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:11: '='
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:291:9: ( '=' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:291:11: '='
             {
             match('='); 
 
@@ -414,8 +418,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = DOLLAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:9: ( '$' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:11: '$'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:292:9: ( '$' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:292:11: '$'
             {
             match('$'); 
 
@@ -434,8 +438,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = COL_COL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:9: ( '::' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:11: '::'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:293:9: ( '::' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:293:11: '::'
             {
             match("::"); 
 
@@ -455,8 +459,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = AS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:9: ( 'as' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:11: 'as'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:294:9: ( 'as' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:294:11: 'as'
             {
             match("as"); 
 
@@ -476,8 +480,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = CREATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:9: ( 'create' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:11: 'create'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:295:9: ( 'create' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:295:11: 'create'
             {
             match("create"); 
 
@@ -497,8 +501,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:213:9: ( 'true' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:213:11: 'true'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:296:9: ( 'true' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:296:11: 'true'
             {
             match("true"); 
 
@@ -518,8 +522,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:214:9: ( 'false' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:214:11: 'false'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:297:9: ( 'false' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:297:11: 'false'
             {
             match("false"); 
 
@@ -539,8 +543,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:215:9: ( ',' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:215:11: ','
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:298:9: ( ',' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:298:11: ','
             {
             match(','); 
 
@@ -559,8 +563,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = UNION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:9: ( 'UNION' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:11: 'UNION'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:299:9: ( 'UNION' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:299:11: 'UNION'
             {
             match("UNION"); 
 
@@ -580,8 +584,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = INTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:9: ( 'INTERSECTION' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:11: 'INTERSECTION'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:300:9: ( 'INTERSECTION' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:300:11: 'INTERSECTION'
             {
             match("INTERSECTION"); 
 
@@ -596,39 +600,175 @@ public class DirectivesLexer extends Lexer {
     }
     // $ANTLR end "INTER"
 
+    // $ANTLR start "DESTROY"
+    public final void mDESTROY() throws RecognitionException {
+        try {
+            int _type = DESTROY;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:301:9: ( 'destroy' | 'DESTROY' )
+            int alt1=2;
+            int LA1_0 = input.LA(1);
+
+            if ( (LA1_0=='d') ) {
+                alt1=1;
+            }
+            else if ( (LA1_0=='D') ) {
+                alt1=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 1, 0, input);
+
+                throw nvae;
+            }
+            switch (alt1) {
+                case 1 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:301:11: 'destroy'
+                    {
+                    match("destroy"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:301:21: 'DESTROY'
+                    {
+                    match("DESTROY"); 
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "DESTROY"
+
+    // $ANTLR start "MERGE"
+    public final void mMERGE() throws RecognitionException {
+        try {
+            int _type = MERGE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:302:9: ( 'merge' | 'MERGE' )
+            int alt2=2;
+            int LA2_0 = input.LA(1);
+
+            if ( (LA2_0=='m') ) {
+                alt2=1;
+            }
+            else if ( (LA2_0=='M') ) {
+                alt2=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 2, 0, input);
+
+                throw nvae;
+            }
+            switch (alt2) {
+                case 1 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:302:11: 'merge'
+                    {
+                    match("merge"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:302:19: 'MERGE'
+                    {
+                    match("MERGE"); 
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "MERGE"
+
+    // $ANTLR start "LP"
+    public final void mLP() throws RecognitionException {
+        try {
+            int _type = LP;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:303:9: ( '(' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:303:11: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "LP"
+
+    // $ANTLR start "RP"
+    public final void mRP() throws RecognitionException {
+        try {
+            int _type = RP;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:304:9: ( ')' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:304:11: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "RP"
+
     // $ANTLR start "STRING_LITERAL"
     public final void mSTRING_LITERAL() throws RecognitionException {
         try {
             int _type = STRING_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:16: ( '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:18: '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:306:16: ( '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:306:18: '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"'
             {
             match('\"'); 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:22: ( ESC | ~ ( '\"' | '\\\\' ) )*
-            loop1:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:306:22: ( ESC | ~ ( '\"' | '\\\\' ) )*
+            loop3:
             do {
-                int alt1=3;
-                int LA1_0 = input.LA(1);
+                int alt3=3;
+                int LA3_0 = input.LA(1);
 
-                if ( (LA1_0=='\\') ) {
-                    alt1=1;
+                if ( (LA3_0=='\\') ) {
+                    alt3=1;
                 }
-                else if ( ((LA1_0>='\u0000' && LA1_0<='!')||(LA1_0>='#' && LA1_0<='[')||(LA1_0>=']' && LA1_0<='\uFFFF')) ) {
-                    alt1=2;
+                else if ( ((LA3_0>='\u0000' && LA3_0<='!')||(LA3_0>='#' && LA3_0<='[')||(LA3_0>=']' && LA3_0<='\uFFFF')) ) {
+                    alt3=2;
                 }
 
 
-                switch (alt1) {
+                switch (alt3) {
             	case 1 :
-            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:23: ESC
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:306:23: ESC
             	    {
             	    mESC(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:29: ~ ( '\"' | '\\\\' )
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:306:29: ~ ( '\"' | '\\\\' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -644,7 +784,7 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop1;
+            	    break loop3;
                 }
             } while (true);
 
@@ -665,23 +805,23 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = INT_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:12: ( ( DIGIT )* )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:14: ( DIGIT )*
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:307:12: ( ( DIGIT )* )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:307:14: ( DIGIT )*
             {
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:14: ( DIGIT )*
-            loop2:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:307:14: ( DIGIT )*
+            loop4:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt4=2;
+                int LA4_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')) ) {
-                    alt2=1;
+                if ( ((LA4_0>='0' && LA4_0<='9')) ) {
+                    alt4=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt4) {
             	case 1 :
-            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:15: DIGIT
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:307:15: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -689,7 +829,7 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop2;
+            	    break loop4;
                 }
             } while (true);
 
@@ -709,19 +849,19 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:221:4: ( ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )* )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:221:6: ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:308:4: ( ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )* )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:308:6: ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
             {
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:221:6: ( '~' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:308:6: ( '~' )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            if ( (LA3_0=='~') ) {
-                alt3=1;
+            if ( (LA5_0=='~') ) {
+                alt5=1;
             }
-            switch (alt3) {
+            switch (alt5) {
                 case 1 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:221:7: '~'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:308:7: '~'
                     {
                     match('~'); 
 
@@ -739,18 +879,18 @@ public class DirectivesLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:221:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
-            loop4:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:308:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
+            loop6:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( ((LA4_0>='0' && LA4_0<='9')||(LA4_0>='A' && LA4_0<='Z')||LA4_0=='_'||(LA4_0>='a' && LA4_0<='z')) ) {
-                    alt4=1;
+                if ( ((LA6_0>='0' && LA6_0<='9')||(LA6_0>='A' && LA6_0<='Z')||LA6_0=='_'||(LA6_0>='a' && LA6_0<='z')) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt6) {
             	case 1 :
             	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:
             	    {
@@ -768,7 +908,7 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop4;
+            	    break loop6;
                 }
             } while (true);
 
@@ -788,46 +928,46 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = ESC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:15: ( '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) ) )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:17: '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:15: ( '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:17: '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
             {
             match('\\'); 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:22: ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
-            int alt5=8;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:22: ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
+            int alt7=8;
             switch ( input.LA(1) ) {
             case 't':
                 {
-                alt5=1;
+                alt7=1;
                 }
                 break;
             case 'f':
                 {
-                alt5=2;
+                alt7=2;
                 }
                 break;
             case 'r':
                 {
-                alt5=3;
+                alt7=3;
                 }
                 break;
             case 'n':
                 {
-                alt5=4;
+                alt7=4;
                 }
                 break;
             case '\"':
                 {
-                alt5=5;
+                alt7=5;
                 }
                 break;
             case '\'':
                 {
-                alt5=6;
+                alt7=6;
                 }
                 break;
             case '\\':
                 {
-                alt5=7;
+                alt7=7;
                 }
                 break;
             case '0':
@@ -841,71 +981,71 @@ public class DirectivesLexer extends Lexer {
             case '8':
             case '9':
                 {
-                alt5=8;
+                alt7=8;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt5) {
+            switch (alt7) {
                 case 1 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:23: 't'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:23: 't'
                     {
                     match('t'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:29: 'f'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:29: 'f'
                     {
                     match('f'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:35: 'r'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:35: 'r'
                     {
                     match('r'); 
 
                     }
                     break;
                 case 4 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:41: 'n'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:41: 'n'
                     {
                     match('n'); 
 
                     }
                     break;
                 case 5 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:47: '\"'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:47: '\"'
                     {
                     match('\"'); 
 
                     }
                     break;
                 case 6 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:53: '\\''
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:53: '\\''
                     {
                     match('\''); 
 
                     }
                     break;
                 case 7 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:60: '\\\\'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:60: '\\\\'
                     {
                     match('\\'); 
 
                     }
                     break;
                 case 8 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:67: ( DIGIT DIGIT DIGIT )
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:67: ( DIGIT DIGIT DIGIT )
                     {
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:67: ( DIGIT DIGIT DIGIT )
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:222:68: DIGIT DIGIT DIGIT
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:67: ( DIGIT DIGIT DIGIT )
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:309:68: DIGIT DIGIT DIGIT
                     {
                     mDIGIT(); 
                     mDIGIT(); 
@@ -933,8 +1073,8 @@ public class DirectivesLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:223:16: ( '0' .. '9' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:223:18: '0' .. '9'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:310:16: ( '0' .. '9' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:310:18: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -951,22 +1091,22 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:228:4: ( ( ' ' | '\\t' | '\\f' | '\\n' )+ )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:228:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:315:4: ( ( ' ' | '\\t' | '\\f' | '\\n' )+ )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:315:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
             {
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:228:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
-            int cnt6=0;
-            loop6:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:315:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
+            int cnt8=0;
+            loop8:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( ((LA6_0>='\t' && LA6_0<='\n')||LA6_0=='\f'||LA6_0==' ') ) {
-                    alt6=1;
+                if ( ((LA8_0>='\t' && LA8_0<='\n')||LA8_0=='\f'||LA8_0==' ') ) {
+                    alt8=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt8) {
             	case 1 :
             	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:
             	    {
@@ -984,12 +1124,12 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt6 >= 1 ) break loop6;
+            	    if ( cnt8 >= 1 ) break loop8;
                         EarlyExitException eee =
-                            new EarlyExitException(6, input);
+                            new EarlyExitException(8, input);
                         throw eee;
                 }
-                cnt6++;
+                cnt8++;
             } while (true);
 
             _channel=HIDDEN;
@@ -1009,25 +1149,25 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = SingleLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:21: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:21: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
             {
             match("//"); 
 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:26: (~ ( '\\n' | '\\r' ) )*
-            loop7:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:26: (~ ( '\\n' | '\\r' ) )*
+            loop9:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( ((LA7_0>='\u0000' && LA7_0<='\t')||(LA7_0>='\u000B' && LA7_0<='\f')||(LA7_0>='\u000E' && LA7_0<='\uFFFF')) ) {
-                    alt7=1;
+                if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFF')) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt9) {
             	case 1 :
-            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:27: ~ ( '\\n' | '\\r' )
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:27: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1043,42 +1183,42 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop9;
                 }
             } while (true);
 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:42: ( '\\n' | '\\r' ( '\\n' )? )?
-            int alt9=3;
-            int LA9_0 = input.LA(1);
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:42: ( '\\n' | '\\r' ( '\\n' )? )?
+            int alt11=3;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA9_0=='\n') ) {
-                alt9=1;
+            if ( (LA11_0=='\n') ) {
+                alt11=1;
             }
-            else if ( (LA9_0=='\r') ) {
-                alt9=2;
+            else if ( (LA11_0=='\r') ) {
+                alt11=2;
             }
-            switch (alt9) {
+            switch (alt11) {
                 case 1 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:43: '\\n'
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:43: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:48: '\\r' ( '\\n' )?
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:48: '\\r' ( '\\n' )?
                     {
                     match('\r'); 
-                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:52: ( '\\n' )?
-                    int alt8=2;
-                    int LA8_0 = input.LA(1);
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:52: ( '\\n' )?
+                    int alt10=2;
+                    int LA10_0 = input.LA(1);
 
-                    if ( (LA8_0=='\n') ) {
-                        alt8=1;
+                    if ( (LA10_0=='\n') ) {
+                        alt10=1;
                     }
-                    switch (alt8) {
+                    switch (alt10) {
                         case 1 :
-                            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:229:53: '\\n'
+                            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:316:53: '\\n'
                             {
                             match('\n'); 
 
@@ -1110,37 +1250,37 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = MultiLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:230:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:230:20: '/*' ( options {greedy=false; } : . )* '*/'
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:317:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:317:20: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:230:25: ( options {greedy=false; } : . )*
-            loop10:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:317:25: ( options {greedy=false; } : . )*
+            loop12:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( (LA10_0=='*') ) {
-                    int LA10_1 = input.LA(2);
+                if ( (LA12_0=='*') ) {
+                    int LA12_1 = input.LA(2);
 
-                    if ( (LA10_1=='/') ) {
-                        alt10=2;
+                    if ( (LA12_1=='/') ) {
+                        alt12=2;
                     }
-                    else if ( ((LA10_1>='\u0000' && LA10_1<='.')||(LA10_1>='0' && LA10_1<='\uFFFF')) ) {
-                        alt10=1;
+                    else if ( ((LA12_1>='\u0000' && LA12_1<='.')||(LA12_1>='0' && LA12_1<='\uFFFF')) ) {
+                        alt12=1;
                     }
 
 
                 }
-                else if ( ((LA10_0>='\u0000' && LA10_0<=')')||(LA10_0>='+' && LA10_0<='\uFFFF')) ) {
-                    alt10=1;
+                else if ( ((LA12_0>='\u0000' && LA12_0<=')')||(LA12_0>='+' && LA12_0<='\uFFFF')) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt12) {
             	case 1 :
-            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:230:53: .
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:317:53: .
             	    {
             	    matchAny(); 
 
@@ -1148,7 +1288,7 @@ public class DirectivesLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop12;
                 }
             } while (true);
 
@@ -1167,63 +1307,63 @@ public class DirectivesLexer extends Lexer {
     // $ANTLR end "MultiLineComment"
 
     public void mTokens() throws RecognitionException {
-        // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:8: ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment )
-        int alt11=33;
-        alt11 = dfa11.predict(input);
-        switch (alt11) {
+        // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:8: ( T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | DESTROY | MERGE | LP | RP | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment )
+        int alt13=37;
+        alt13 = dfa13.predict(input);
+        switch (alt13) {
             case 1 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:10: T__30
-                {
-                mT__30(); 
-
-                }
-                break;
-            case 2 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:16: T__31
-                {
-                mT__31(); 
-
-                }
-                break;
-            case 3 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:22: T__32
-                {
-                mT__32(); 
-
-                }
-                break;
-            case 4 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:28: T__33
-                {
-                mT__33(); 
-
-                }
-                break;
-            case 5 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:34: T__34
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:10: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
-            case 6 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:40: T__35
+            case 2 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:16: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
-            case 7 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:46: T__36
+            case 3 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:22: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
-            case 8 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:52: T__37
+            case 4 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:28: T__37
                 {
                 mT__37(); 
+
+                }
+                break;
+            case 5 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:34: T__38
+                {
+                mT__38(); 
+
+                }
+                break;
+            case 6 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:40: T__39
+                {
+                mT__39(); 
+
+                }
+                break;
+            case 7 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:46: T__40
+                {
+                mT__40(); 
+
+                }
+                break;
+            case 8 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:52: T__41
+                {
+                mT__41(); 
 
                 }
                 break;
@@ -1354,49 +1494,77 @@ public class DirectivesLexer extends Lexer {
                 }
                 break;
             case 27 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:164: STRING_LITERAL
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:164: DESTROY
+                {
+                mDESTROY(); 
+
+                }
+                break;
+            case 28 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:172: MERGE
+                {
+                mMERGE(); 
+
+                }
+                break;
+            case 29 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:178: LP
+                {
+                mLP(); 
+
+                }
+                break;
+            case 30 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:181: RP
+                {
+                mRP(); 
+
+                }
+                break;
+            case 31 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:184: STRING_LITERAL
                 {
                 mSTRING_LITERAL(); 
 
                 }
                 break;
-            case 28 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:179: INT_LITERAL
+            case 32 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:199: INT_LITERAL
                 {
                 mINT_LITERAL(); 
 
                 }
                 break;
-            case 29 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:191: ID
+            case 33 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:211: ID
                 {
                 mID(); 
 
                 }
                 break;
-            case 30 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:194: ESC
+            case 34 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:214: ESC
                 {
                 mESC(); 
 
                 }
                 break;
-            case 31 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:198: WS
+            case 35 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:218: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 32 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:201: SingleLineComment
+            case 36 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:221: SingleLineComment
                 {
                 mSingleLineComment(); 
 
                 }
                 break;
-            case 33 :
-                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:219: MultiLineComment
+            case 37 :
+                // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:239: MultiLineComment
                 {
                 mMultiLineComment(); 
 
@@ -1408,178 +1576,212 @@ public class DirectivesLexer extends Lexer {
     }
 
 
-    protected DFA11 dfa11 = new DFA11(this);
-    static final String DFA11_eotS =
-        "\1\27\6\30\3\uffff\1\45\4\uffff\4\30\1\uffff\2\30\6\uffff\2\30\1"+
-        "\61\1\30\1\64\1\65\2\30\2\uffff\1\70\5\30\2\uffff\1\76\2\30\1\uffff"+
-        "\2\30\2\uffff\1\103\1\30\1\uffff\5\30\1\uffff\1\112\1\30\1\114\1"+
-        "\30\1\uffff\1\116\1\30\1\120\3\30\1\uffff\1\124\1\uffff\1\125\1"+
-        "\uffff\1\30\1\uffff\1\127\1\130\1\30\2\uffff\1\132\2\uffff\1\30"+
-        "\1\uffff\5\30\1\141\1\uffff";
-    static final String DFA11_eofS =
-        "\142\uffff";
-    static final String DFA11_minS =
-        "\1\11\1\130\1\117\3\115\1\157\3\uffff\1\75\4\uffff\1\163\2\162\1"+
-        "\141\1\uffff\2\116\5\uffff\1\52\1\124\1\104\1\60\1\163\2\60\1\145"+
-        "\1\163\2\uffff\1\60\1\145\1\165\1\154\1\111\1\124\2\uffff\1\60\1"+
-        "\105\1\162\1\uffff\1\164\1\162\2\uffff\1\60\1\164\1\uffff\1\141"+
-        "\1\145\1\163\1\117\1\105\1\uffff\1\60\1\145\1\60\1\145\1\uffff\1"+
-        "\60\1\164\1\60\1\145\1\116\1\122\1\uffff\1\60\1\uffff\1\60\1\uffff"+
-        "\1\145\1\uffff\2\60\1\123\2\uffff\1\60\2\uffff\1\105\1\uffff\1\103"+
-        "\1\124\1\111\1\117\1\116\1\60\1\uffff";
-    static final String DFA11_maxS =
+    protected DFA13 dfa13 = new DFA13(this);
+    static final String DFA13_eotS =
+        "\1\34\6\35\3\uffff\1\53\4\uffff\4\35\1\uffff\5\35\10\uffff\3\35"+
+        "\1\73\1\35\1\76\1\77\2\35\2\uffff\1\102\10\35\2\uffff\1\113\3\35"+
+        "\1\uffff\2\35\2\uffff\1\121\1\35\1\uffff\10\35\1\uffff\1\133\2\35"+
+        "\1\136\1\35\1\uffff\1\140\1\35\1\142\6\35\1\uffff\1\151\1\152\1"+
+        "\uffff\1\153\1\uffff\1\35\1\uffff\1\155\1\156\3\35\1\151\3\uffff"+
+        "\1\162\2\uffff\3\35\1\uffff\1\35\2\167\1\35\1\uffff\3\35\1\174\1"+
+        "\uffff";
+    static final String DFA13_eofS =
+        "\175\uffff";
+    static final String DFA13_minS =
+        "\1\11\1\130\1\105\3\115\1\157\3\uffff\1\75\4\uffff\1\163\2\162\1"+
+        "\141\1\uffff\2\116\1\145\1\105\1\145\7\uffff\1\52\1\124\1\104\1"+
+        "\122\1\60\1\163\2\60\1\145\1\163\2\uffff\1\60\1\145\1\165\1\154"+
+        "\1\111\1\124\1\163\1\123\1\162\2\uffff\1\60\1\105\1\107\1\162\1"+
+        "\uffff\1\164\1\162\2\uffff\1\60\1\164\1\uffff\1\141\1\145\1\163"+
+        "\1\117\1\105\1\164\1\124\1\147\1\uffff\1\60\1\105\1\145\1\60\1\145"+
+        "\1\uffff\1\60\1\164\1\60\1\145\1\116\1\122\1\162\1\122\1\145\1\uffff"+
+        "\2\60\1\uffff\1\60\1\uffff\1\145\1\uffff\2\60\1\123\1\157\1\117"+
+        "\1\60\3\uffff\1\60\2\uffff\1\105\1\171\1\131\1\uffff\1\103\2\60"+
+        "\1\124\1\uffff\1\111\1\117\1\116\1\60\1\uffff";
+    static final String DFA13_maxS =
         "\1\176\1\130\1\117\1\157\2\115\1\162\3\uffff\1\75\4\uffff\1\163"+
-        "\2\162\1\141\1\uffff\2\116\5\uffff\1\57\1\124\1\104\1\172\1\163"+
-        "\2\172\1\145\1\163\2\uffff\1\172\1\145\1\165\1\154\1\111\1\124\2"+
-        "\uffff\1\172\1\105\1\162\1\uffff\1\164\1\162\2\uffff\1\172\1\164"+
-        "\1\uffff\1\141\1\145\1\163\1\117\1\105\1\uffff\1\172\1\145\1\172"+
-        "\1\145\1\uffff\1\172\1\164\1\172\1\145\1\116\1\122\1\uffff\1\172"+
-        "\1\uffff\1\172\1\uffff\1\145\1\uffff\2\172\1\123\2\uffff\1\172\2"+
-        "\uffff\1\105\1\uffff\1\103\1\124\1\111\1\117\1\116\1\172\1\uffff";
-    static final String DFA11_acceptS =
+        "\2\162\1\141\1\uffff\2\116\1\145\1\105\1\145\7\uffff\1\57\1\124"+
+        "\1\104\1\122\1\172\1\163\2\172\1\145\1\163\2\uffff\1\172\1\145\1"+
+        "\165\1\154\1\111\1\124\1\163\1\123\1\162\2\uffff\1\172\1\105\1\107"+
+        "\1\162\1\uffff\1\164\1\162\2\uffff\1\172\1\164\1\uffff\1\141\1\145"+
+        "\1\163\1\117\1\105\1\164\1\124\1\147\1\uffff\1\172\1\105\1\145\1"+
+        "\172\1\145\1\uffff\1\172\1\164\1\172\1\145\1\116\1\122\1\162\1\122"+
+        "\1\145\1\uffff\2\172\1\uffff\1\172\1\uffff\1\145\1\uffff\2\172\1"+
+        "\123\1\157\1\117\1\172\3\uffff\1\172\2\uffff\1\105\1\171\1\131\1"+
+        "\uffff\1\103\2\172\1\124\1\uffff\1\111\1\117\1\116\1\172\1\uffff";
+    static final String DFA13_acceptS =
         "\7\uffff\1\13\1\14\1\15\1\uffff\1\17\1\21\1\22\1\23\4\uffff\1\30"+
-        "\2\uffff\1\33\1\34\1\35\1\36\1\37\11\uffff\1\20\1\16\6\uffff\1\40"+
-        "\1\41\3\uffff\1\3\2\uffff\1\4\1\5\2\uffff\1\24\5\uffff\1\1\4\uffff"+
-        "\1\11\6\uffff\1\2\1\uffff\1\10\1\uffff\1\12\1\uffff\1\26\3\uffff"+
-        "\1\6\1\7\1\uffff\1\27\1\31\1\uffff\1\25\6\uffff\1\32";
-    static final String DFA11_specialS =
-        "\142\uffff}>";
-    static final String[] DFA11_transitionS = {
-            "\2\32\1\uffff\1\32\23\uffff\1\32\1\uffff\1\26\1\uffff\1\15\6"+
-            "\uffff\1\12\1\23\1\13\1\7\1\33\12\uffff\1\16\2\uffff\1\14\3"+
-            "\uffff\1\4\1\30\1\5\1\30\1\1\3\30\1\25\3\30\1\2\2\30\1\3\4\30"+
-            "\1\24\5\30\1\uffff\1\31\2\uffff\1\30\1\uffff\1\17\1\30\1\20"+
-            "\2\30\1\22\11\30\1\6\3\30\1\21\6\30\1\10\1\uffff\1\11\1\30",
-            "\1\34",
-            "\1\35",
-            "\1\36\41\uffff\1\37",
-            "\1\40",
+        "\5\uffff\1\35\1\36\1\37\1\40\1\41\1\42\1\43\12\uffff\1\20\1\16\11"+
+        "\uffff\1\44\1\45\4\uffff\1\3\2\uffff\1\4\1\5\2\uffff\1\24\10\uffff"+
+        "\1\1\5\uffff\1\11\11\uffff\1\2\2\uffff\1\10\1\uffff\1\12\1\uffff"+
+        "\1\26\6\uffff\1\34\1\6\1\7\1\uffff\1\27\1\31\3\uffff\1\25\4\uffff"+
+        "\1\33\4\uffff\1\32";
+    static final String DFA13_specialS =
+        "\175\uffff}>";
+    static final String[] DFA13_transitionS = {
+            "\2\37\1\uffff\1\37\23\uffff\1\37\1\uffff\1\33\1\uffff\1\15\3"+
+            "\uffff\1\31\1\32\1\uffff\1\12\1\23\1\13\1\7\1\40\12\uffff\1"+
+            "\16\2\uffff\1\14\3\uffff\1\4\1\35\1\5\1\27\1\1\3\35\1\25\3\35"+
+            "\1\2\2\35\1\3\4\35\1\24\5\35\1\uffff\1\36\2\uffff\1\35\1\uffff"+
+            "\1\17\1\35\1\20\1\26\1\35\1\22\6\35\1\30\2\35\1\6\3\35\1\21"+
+            "\6\35\1\10\1\uffff\1\11\1\35",
             "\1\41",
-            "\1\43\2\uffff\1\42",
-            "",
-            "",
-            "",
-            "\1\44",
-            "",
-            "",
-            "",
-            "",
+            "\1\43\11\uffff\1\42",
+            "\1\44\41\uffff\1\45",
             "\1\46",
             "\1\47",
-            "\1\50",
-            "\1\51",
+            "\1\51\2\uffff\1\50",
+            "",
+            "",
             "",
             "\1\52",
-            "\1\53",
             "",
             "",
             "",
             "",
-            "",
-            "\1\55\4\uffff\1\54",
+            "\1\54",
+            "\1\55",
             "\1\56",
             "\1\57",
-            "\12\30\7\uffff\17\30\1\60\12\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "\1\60",
+            "\1\61",
             "\1\62",
-            "\12\30\7\uffff\17\30\1\63\12\30\4\uffff\1\30\1\uffff\32\30",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\66",
+            "\1\63",
+            "\1\64",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\66\4\uffff\1\65",
             "\1\67",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\70",
             "\1\71",
-            "\1\72",
-            "\1\73",
+            "\12\35\7\uffff\17\35\1\72\12\35\4\uffff\1\35\1\uffff\32\35",
             "\1\74",
-            "\1\75",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\77",
+            "\12\35\7\uffff\17\35\1\75\12\35\4\uffff\1\35\1\uffff\32\35",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\1\100",
-            "",
             "\1\101",
-            "\1\102",
             "",
             "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\103",
             "\1\104",
-            "",
             "\1\105",
             "\1\106",
             "\1\107",
             "\1\110",
             "\1\111",
+            "\1\112",
             "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\113",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\114",
             "\1\115",
+            "\1\116",
             "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\117",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\121",
+            "\1\120",
+            "",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\1\122",
+            "",
             "\1\123",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "",
+            "\1\124",
+            "\1\125",
             "\1\126",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\127",
+            "\1\130",
             "\1\131",
+            "\1\132",
             "",
-            "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "",
-            "",
-            "\1\133",
-            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\1\134",
             "\1\135",
-            "\1\136",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\1\137",
-            "\1\140",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\141",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\143",
+            "\1\144",
+            "\1\145",
+            "\1\146",
+            "\1\147",
+            "\1\150",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "",
+            "\1\154",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\157",
+            "\1\160",
+            "\1\161",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "",
+            "",
+            "",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "",
+            "",
+            "\1\163",
+            "\1\164",
+            "\1\165",
+            "",
+            "\1\166",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
+            "\1\170",
+            "",
+            "\1\171",
+            "\1\172",
+            "\1\173",
+            "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             ""
     };
 
-    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-    static final short[][] DFA11_transition;
+    static final short[] DFA13_eot = DFA.unpackEncodedString(DFA13_eotS);
+    static final short[] DFA13_eof = DFA.unpackEncodedString(DFA13_eofS);
+    static final char[] DFA13_min = DFA.unpackEncodedStringToUnsignedChars(DFA13_minS);
+    static final char[] DFA13_max = DFA.unpackEncodedStringToUnsignedChars(DFA13_maxS);
+    static final short[] DFA13_accept = DFA.unpackEncodedString(DFA13_acceptS);
+    static final short[] DFA13_special = DFA.unpackEncodedString(DFA13_specialS);
+    static final short[][] DFA13_transition;
 
     static {
-        int numStates = DFA11_transitionS.length;
-        DFA11_transition = new short[numStates][];
+        int numStates = DFA13_transitionS.length;
+        DFA13_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+            DFA13_transition[i] = DFA.unpackEncodedString(DFA13_transitionS[i]);
         }
     }
 
-    class DFA11 extends DFA {
+    class DFA13 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA13(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
-            this.eot = DFA11_eot;
-            this.eof = DFA11_eof;
-            this.min = DFA11_min;
-            this.max = DFA11_max;
-            this.accept = DFA11_accept;
-            this.special = DFA11_special;
-            this.transition = DFA11_transition;
+            this.decisionNumber = 13;
+            this.eot = DFA13_eot;
+            this.eof = DFA13_eof;
+            this.min = DFA13_min;
+            this.max = DFA13_max;
+            this.accept = DFA13_accept;
+            this.special = DFA13_special;
+            this.transition = DFA13_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment );";
+            return "1:1: Tokens : ( T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | DESTROY | MERGE | LP | RP | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment );";
         }
     }
  

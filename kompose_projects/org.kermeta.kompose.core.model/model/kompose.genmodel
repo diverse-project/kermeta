@@ -67,5 +67,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Concat/target"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Concat/value"/>
     </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Destroy">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Destroy/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Destroy/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Merge">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Merge/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Merge/right"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
