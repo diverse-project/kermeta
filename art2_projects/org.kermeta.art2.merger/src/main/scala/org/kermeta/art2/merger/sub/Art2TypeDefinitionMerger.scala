@@ -12,73 +12,53 @@ import org.kermeta.art2.ComponentType
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.Instance
-import org.kermeta.art2.MessagePortType
 import org.kermeta.art2.PortType
-import org.kermeta.art2.ServicePortType
 import org.kermeta.art2.TypeDefinition
-import org.kermeta.art2.TypedElement
 import org.kermeta.art2.ComponentType
 import org.kermeta.art2.merger.Art2Merger
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
+trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with Art2PortTypeMerger {
 
   //TYPE DEFINITION MERGER ENTRYPOINT
   def mergeTypeDefinition(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     var cts : List[TypeDefinition] = List()++modelToMerge.getTypeDefinitions.toList
     cts.foreach{toMergeTypeDef=>
+
+      println("Process =>"+toMergeTypeDef)
+
       actualModel.getTypeDefinitions.find({actualTypeDef=>actualTypeDef.isModelEquals(toMergeTypeDef)}) match {
         case Some(found_type_definition)=> {
             if(found_type_definition.isUpdated(toMergeTypeDef)){
               updateTypeDefinition(found_type_definition,toMergeTypeDef)
             }
           }
-          //SIMPLE CASE ? JUST MERGE THE NEW TYPE DEFINITION
+        //SIMPLE CASE ? JUST MERGE THE NEW TYPE DEFINITION
         case None => mergeNewTypeDefinition(actualModel,toMergeTypeDef)
       }
+
+      println("-")
+      println("-")
+      println("-")
+      println("-")
+
     }
   }
 
-  //PORT TYPE DEFINITION MERGER
-  private def mergePortType(actualModel : ContainerRoot,portType : PortType) : PortType = {
-    actualModel.getTypeDefinitions.filter({td => td.isInstanceOf[PortType]}).find({pt=>pt.getName == portType.getName}) match {
-      case Some(existPT) => existPT.asInstanceOf[PortType]
-      case None => {
-          actualModel.getTypeDefinitions.add(portType)
-          portType match {
-            case spt : ServicePortType => {
-                spt.getOperations.foreach{op=>
-                  op.setReturnType(mergeDataType(actualModel,op.getReturnType))
-                  op.getParameters.foreach{para=>para.setType(mergeDataType(actualModel,para.getType))}
-                }
-              }
-
-            case mpt : MessagePortType => {
-                mpt.getFilters.foreach{dt=>mergeDataType(actualModel,dt)}
-              }
-            case _ @ msg => println("Error uncatch type")
-          }
-          portType
-        }
-    }
-  }
-
-  //MERGE SIMPLE DATA TYPE
-  private def mergeDataType(actualModel : ContainerRoot,datatype : TypedElement) : TypedElement = {
-    actualModel.getDataTypes.find({dt=>dt.getName == datatype.getName }) match {
-      case Some(existDT) => existDT
-      case None => {
-          var dts =  actualModel.getDataTypes
-          dts.add(datatype)
-          datatype
-        }
-    }
-  }
 
 
   /* This method try to update */
   private def updateTypeDefinition(actuelTypeDefinition:TypeDefinition, newTypeDefinition:TypeDefinition) = {
+
+    println("TDEF")
+
+
+    println("Update TDef >")//+newTypeDefinition.getDeployUnit.getHashcode+"-"+actuelTypeDefinition.getDeployUnit.getHashcode)
+
+    
+    println(newTypeDefinition.getDeployUnit)
+    println(actuelTypeDefinition.getDeployUnit)
 
     var root = actuelTypeDefinition.eContainer.asInstanceOf[ContainerRoot]
 
@@ -167,7 +147,7 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
   /* MERGE A SIMPLE NEW TYPE DEFINITION */
   private def mergeNewTypeDefinition(actualModel : ContainerRoot, newTypeDefinition:TypeDefinition) = {
 
-    println("Merge new type Case")
+   // println("Merge new type Case =>"+newTypeDefinition)
 
     //MERGE TYPE REQUIRED LIB
     var etp : List[DeployUnit] = List() ++ newTypeDefinition.getRequiredLibs
@@ -188,7 +168,7 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
           ct.getProvided.foreach{ptref=>ptref.setRef(mergePortType(actualModel,ptref.getRef))}
           ct.getRequired.foreach{ptref=>ptref.setRef(mergePortType(actualModel,ptref.getRef))}
         }
-      case pt : PortType => { /* MERGE BY COMPONENT TYPE */ }
+      case pt : PortType => { /*println("PORTTYPE M ?? "+pt.toString)*//* MERGE BY COMPONENT TYPE */ }
       case _ @ msg => println("Error uncatch type") // NO RECURSIVE FOR OTHER TYPE
     }
 
