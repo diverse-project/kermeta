@@ -23,7 +23,13 @@ class InitialeMergeTest extends MergerTestSuiteHelper {
     mergedModel testSave ("simple","simpleEntimidLibMerged.art2")
 
 
-    println("Ok Model Save")
+  }
+
+   @Test def verifyArtFragmentBaseMerge() {
+    var mergedModel = component.merge(emptyModel, model("artFragments/lib4test-base.art2"))
+    //mergedModel testSave
+    mergedModel testSave ("artFragments","lib4test-base-MERGED.art2")
+
 
   }
 
