@@ -12,14 +12,64 @@ package kermeta::language::structure;
 
 
 require kermeta
+
+
+aspect class ClassDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from GenericTypeDefinition is do
+		super(context, func)
+		self.ownedAttribute.each{att | att.eachOwnedElement(context, func)}		
+	end
+}
+
+aspect class GenericTypeDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
+		super(context, func)
+		self.typeParameter.each{tp | tp.eachOwnedElement(context, func)}	
+	end
+}
+aspect class ModelingUnit
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void is do
+		super(context, func)
+		self.usings.each{u | u.eachOwnedElement(context, func)}
+		self.requires.each{r | r.eachOwnedElement(context, func)}
+		self.includeFilters.each{iFilter | iFilter.eachOwnedElement(context, func)}	
+		self.excludeFilters.each{excFilter | excFilter.eachOwnedElement(context, func)}
+		self.packages.each{p | p.eachOwnedElement(context, func)}
+	end
+}
+
+aspect class NamedElement
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void is do
+		super(context, func)
+		func(self.name)
+	end
+}
+
+
 aspect class Object
 {
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
 	operation eachOwnedElement(context : Object, func : < Object -> Object>) : Void is do
-		self.ownedTags.each{ t | t.eachOwnedElement(context, func) }
 		func( self)
+		self.ownedTags.each{ t | t.eachOwnedElement(context, func) }		
 	end
 }
 
@@ -42,40 +92,5 @@ aspect class TypeDefinitionContainer
 	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
 		super(context, func)
 		self.ownedTypeDefinition.each{ td | td.eachOwnedElement(context, func)}
-	end
-}
-
-aspect class NamedElement
-{
-	/**
-	 * Runs function func on each owned elements of this element and on self	 
-	 */
-	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void is do
-		super(context, func)
-		func(self.name)
-	end
-}
-
-aspect class ClassDefinition
-{
-	/**
-	 * Runs function func on each owned elements of this element and on self	 
-	 */
-	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from GenericTypeDefinition is do
-		super(context, func)
-		self.ownedAttribute.each{att | att.eachOwnedElement(context, func)}
-		
-	end
-}
-
-aspect class GenericTypeDefinition
-{
-	/**
-	 * Runs function func on each owned elements of this element and on self	 
-	 */
-	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
-		super(context, func)
-		self.typeParameter.each{tp | tp.eachOwnedElement(context, func)}
-		
 	end
 }

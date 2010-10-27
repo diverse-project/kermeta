@@ -14,13 +14,44 @@ package org::kermeta::language::merger;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/helper_aspect.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::language::structure
+
 class BinaryMerger
 {
 	operation main() : Void is do 
-		var cd : kermeta::language::structure::ClassDefinition init self.getMetaClass.classDefinition
+		/* var cd : kermeta::language::structure::ClassDefinition init self.getMetaClass.classDefinition
 		var topcontainer : kermeta::standard::Object
 		
-		cd.container().eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+		cd.container().container().container().container().eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)}) */
+		test_001
 		stdio.writeln("Done")
+	end
+	
+	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
+		primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+		result := void
+	end
+	
+	operation test_001() : Void is do 
+		stdio.writeln("test_001()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file1.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file2.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	merge(pmModelingUnit, amModelingUnit)
+       	
+		stdio.writeln("test_001() Done")
 	end
 }

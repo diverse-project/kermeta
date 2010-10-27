@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1"
+    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <ownedTags name="mainClass" value="test::resources::test_001::Main" object="#/"/>
+  <ownedTags name="mainOperation" value="main" object="#/"/>
+  <packages name="test">
+    <nestedPackage name="resources">
+      <nestedPackage name="test_001">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Main" superType="#//@packages.0/resources/test_001/Main/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="main" type="#//@packages.0/resources/test_001/Main/main/@containedType.0"
+              isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/resources/test_001/Main/main/@body/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="test::resources::test_001"/>
+</kermeta_language_structure:ModelingUnit>
