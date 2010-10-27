@@ -6,14 +6,12 @@
 package org.kermeta.art2.merger
 
 import org.kermeta.art2.ContainerRoot
-import org.kermeta.art2.merger.sub._
+import org.kermeta.art2.merger.sub.Art2TypeDefinitionMerger
+import org.kermeta.art2.merger.sub.Art2TypeLibraryMerger
 
-object Art2RootMerger extends Art2TypeDefinitionMerger {
+class Art2RootMerger extends Art2TypeDefinitionMerger {
 
   def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
-
-    println(actualModel.hashCode)
-
     if(modelToMerge!= null){
       // Art2DeployUnitMerger.merge(actualModel, modelToMerge)
       mergeTypeDefinition(actualModel, modelToMerge)

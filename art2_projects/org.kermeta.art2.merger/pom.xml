@@ -31,7 +31,23 @@
             <version>1.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>!org.kermeta.art2.merger.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                        <Export-Package>org.kermeta.art2.merger.*</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

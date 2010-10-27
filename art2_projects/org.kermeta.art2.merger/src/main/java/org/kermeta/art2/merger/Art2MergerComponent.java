@@ -13,9 +13,11 @@ import org.kermeta.art2.ContainerRoot;
  */
 public class Art2MergerComponent implements org.kermeta.art2.api.service.core.merger.MergerService {
 
+    private Art2RootMerger rootMerger = new Art2RootMerger();
+
     @Override
     public ContainerRoot merge(ContainerRoot actualModel, ContainerRoot targetModel) {
-        Art2RootMerger.merge(actualModel, targetModel);
+        rootMerger.merge(actualModel, targetModel);
         return actualModel;
     }
 
