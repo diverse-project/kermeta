@@ -1,0 +1,57 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisik
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+aspect class Object
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	operation eachOwnedElement(context : Object, func : < Object -> Object>) : Void is do
+		self.ownedTags.each{ t | func( t) }
+		func( self)
+	end
+}
+
+aspect class Package 
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from TypeDefinitionContainer is do
+		super(context, func)
+		self.nestedPackage.each{ p | func(p) }
+	end
+}
+
+aspect class TypeDefinitionContainer
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
+		super(context, func)
+		self.ownedTypeDefinition.each{ td | func(td) }
+	end
+}
+
+aspect class NamedElement
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void is do
+		super(context, func)
+		func(self.name)
+	end
+}
