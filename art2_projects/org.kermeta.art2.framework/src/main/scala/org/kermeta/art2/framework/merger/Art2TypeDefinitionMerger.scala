@@ -168,6 +168,8 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
   /* MERGE A SIMPLE NEW TYPE DEFINITION */
   private def mergeNewTypeDefinition(actualModel : ContainerRoot, newTypeDefinition:TypeDefinition) = {
 
+    println("Merge new type Case")
+
     //MERGE TYPE REQUIRED LIB
     var etp : List[DeployUnit] = List() ++ newTypeDefinition.getRequiredLibs
     newTypeDefinition.getRequiredLibs.clear

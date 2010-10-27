@@ -17,10 +17,14 @@ case class TypeDefinitionAspect(selfTD : TypeDefinition) {
   }
 
   def isUpdated(pTD : TypeDefinition) : Boolean = {
-    if(selfTD.getDeployUnit != null && pTD.getDeployUnit != null ){
-      selfTD.getDeployUnit.getHashcode != pTD.getDeployUnit.getHashcode
+    if(selfTD.getDeployUnit != null){
+      if(pTD.getDeployUnit != null){
+        selfTD.getDeployUnit.getHashcode != pTD.getDeployUnit.getHashcode
+      } else {
+        true
+      }
     } else {
-      true
+      pTD.getDeployUnit != null
     }
   }
 
