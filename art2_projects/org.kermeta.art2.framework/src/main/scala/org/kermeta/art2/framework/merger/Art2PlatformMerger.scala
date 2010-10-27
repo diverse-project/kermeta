@@ -9,7 +9,7 @@ import org.kermeta.art2.ContainerRoot
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
-object Art2PlatformMerger extends Art2Merger {
+object Art2PlatformMerger {
 
   var logger = LoggerFactory.getLogger(this.getClass)
 
