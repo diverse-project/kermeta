@@ -103,6 +103,10 @@
   	<xsl:variable name="label">
     	<xsl:apply-templates select="." mode="label.markup"/>
   	</xsl:variable>
+  	
+  	<xsl:variable name="titleabbrev">
+    	<xsl:apply-templates select="." mode="titleabbrev.markup"/>
+  	</xsl:variable>
 	
 	<xsl:variable name="toc.level" select="count(ancestor-or-self::section)" />		
 	<xsl:variable name="local.kind" select="local-name(.)" />	
@@ -235,7 +239,17 @@
 				        			<xsl:copy-of select="$label"/>
 				        			<xsl:value-of select="$autotoc.label.separator"/>
 				        		</xsl:if>
-								<xsl:apply-templates select="." mode="title.markup"/>
+								<!-- Toc figures|table|example|equation|procedure -->
+								<!-- TOC for those elements is based on their title and because titles may be huge  -->
+								<!-- we prefer to use titleabbrev as fo:basic-link content if it exists -->
+				        		<xsl:if test="$titleabbrev != ''">
+				        			<xsl:copy-of select="$titleabbrev"/>
+				        			<xsl:value-of select="$autotoc.label.separator"/>
+				        		</xsl:if>
+				        		<xsl:if test="$titleabbrev = ''">
+				        			<xsl:apply-templates select="." mode="title.markup"/>
+				        		</xsl:if>
+<!--								<xsl:apply-templates select="." mode="title.markup"/>-->
 								<fo:inline keep-together.within-line="always">
 		        					<xsl:text> </xsl:text>
 		        					<fo:leader leader-pattern="dots" leader-pattern-width="3pt" leader-alignment="reference-area" keep-with-next.within-line="always"/>
