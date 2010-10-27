@@ -1,0 +1,85 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisik
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+
+aspect class ClassDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method mergePass1() : Void from GenericTypeDefinition  is do
+				
+	end
+}
+
+aspect class GenericTypeDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method mergePass1() : Void is do
+				
+	end
+}
+aspect class ModelingUnit
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method mergePass1() : Void is do
+				
+	end
+}
+
+aspect class NamedElement
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method mergePass1() : Void is do
+				
+	end
+}
+
+
+aspect class Object
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	operation mergePass1() : Void is do
+				
+	end
+}
+
+aspect class Package 
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self
+	 */
+	method mergePass1() : Void from TypeDefinitionContainer is do
+				
+	end
+}
+
+aspect class TypeDefinitionContainer
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method mergePass1() : Void from NamedElement is do
+				
+	end
+}

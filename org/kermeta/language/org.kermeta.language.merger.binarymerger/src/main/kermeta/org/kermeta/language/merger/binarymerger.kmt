@@ -13,8 +13,8 @@ package org::kermeta::language::merger;
 
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/helper_aspect.kmt"
-
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/traversal_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/mergepass1_aspect.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -33,7 +33,14 @@ class BinaryMerger
 	end
 	
 	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
-		primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+		
+		aspectModelModelingUnit.eachOwnedElement(primaryModelModelingUnit, 
+			function { c : kermeta::standard::Object| c.mergePass1()})
+		
+		// control result		
+		primaryModelModelingUnit.eachOwnedElement(void, 
+			function { c : kermeta::standard::Object| stdio.writeln(c.toString)})		
 		result := void
 	end
 	

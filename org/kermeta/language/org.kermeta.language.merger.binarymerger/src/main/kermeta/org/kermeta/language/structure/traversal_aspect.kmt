@@ -21,7 +21,8 @@ aspect class ClassDefinition
 	 */
 	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from GenericTypeDefinition is do
 		super(context, func)
-		self.ownedAttribute.each{att | att.eachOwnedElement(context, func)}		
+		self.ownedAttribute.each{att | att.eachOwnedElement(context, func)}
+		self.ownedOperation.each{att | att.eachOwnedElement(context, func)}		
 	end
 }
 
