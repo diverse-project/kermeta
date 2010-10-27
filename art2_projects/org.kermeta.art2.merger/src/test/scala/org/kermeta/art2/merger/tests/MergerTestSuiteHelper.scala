@@ -28,7 +28,6 @@ trait MergerTestSuiteHelper extends JUnitSuite {
 
   def hasNoRelativeReference(path:String, file:String) = {
     var modelPath = this.getClass.getClassLoader.getResource(path).getPath+"/"+file
-    println("FilePath:" + modelPath)
     var bufferedReader = new BufferedReader(new FileReader(new File(modelPath)))
 
     var stringBuffer = new StringBuffer

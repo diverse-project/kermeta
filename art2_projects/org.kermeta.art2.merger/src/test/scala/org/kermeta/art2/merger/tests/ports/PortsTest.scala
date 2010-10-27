@@ -410,9 +410,10 @@ class PortsTest extends MergerTestSuiteHelper  {
 
 
   @Test def verifyNoPortChange() {
-    //var mergedModel = component.merge(emptyModel, model("simple/simpleEntimidLib.art2"))
-    //mergedModel testSave
-    //mergedModel testSave ("simple","simpleEntimidLibMerged.art2")
-    error("NOT IMPLEMENTED YET");
+    var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-base.art2"))
+    mergedModel testSave ("artFragments","lib4test-SameBaseLibMerged.art2")
+    if(mergedModel.getTypeDefinitions.size != 7) {
+      fail("Number of ComponentTypes should be 7, " + mergedModel.getTypeDefinitions.size +" found.")
+    }
   }
 }
