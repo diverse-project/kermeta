@@ -4,7 +4,7 @@
 
 package org.kermeta.art2.ui.editor;
 
-import org.kermeta.art2.framework.Art2Handler;
+import org.kermeta.art2.ui.Art2Handler;
 import org.kermeta.art2.ui.editor.panel.Art2EditorPanel;
 import org.kermeta.art2.ui.framework.SelectElement;
 import org.kermeta.art2.ui.framework.elements.ModelPanel;
