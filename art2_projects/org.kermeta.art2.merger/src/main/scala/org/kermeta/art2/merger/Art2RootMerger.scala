@@ -17,7 +17,7 @@ object Art2RootMerger extends Art2TypeDefinitionMerger {
     if(modelToMerge!= null){
       // Art2DeployUnitMerger.merge(actualModel, modelToMerge)
       mergeTypeDefinition(actualModel, modelToMerge)
-      //Art2TypeLibraryMerger.merge(actualModel, modelToMerge)
+      Art2TypeLibraryMerger.merge(actualModel, modelToMerge)
     }
   }
 

@@ -25,9 +25,6 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with
   def mergeTypeDefinition(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     var cts : List[TypeDefinition] = List()++modelToMerge.getTypeDefinitions.toList
     cts.foreach{toMergeTypeDef=>
-
-      println("Process =>"+toMergeTypeDef)
-
       actualModel.getTypeDefinitions.find({actualTypeDef=>actualTypeDef.isModelEquals(toMergeTypeDef)}) match {
         case Some(found_type_definition)=> {
             if(found_type_definition.isUpdated(toMergeTypeDef)){
@@ -37,12 +34,6 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with
         //SIMPLE CASE ? JUST MERGE THE NEW TYPE DEFINITION
         case None => mergeNewTypeDefinition(actualModel,toMergeTypeDef)
       }
-
-      println("-")
-      println("-")
-      println("-")
-      println("-")
-
     }
   }
 
@@ -50,24 +41,11 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with
 
   /* This method try to update */
   private def updateTypeDefinition(actuelTypeDefinition:TypeDefinition, newTypeDefinition:TypeDefinition) = {
-
-    println("TDEF")
-
-
-    println("Update TDef >")//+newTypeDefinition.getDeployUnit.getHashcode+"-"+actuelTypeDefinition.getDeployUnit.getHashcode)
-
-    
-    println(newTypeDefinition.getDeployUnit)
-    println(actuelTypeDefinition.getDeployUnit)
-
     var root = actuelTypeDefinition.eContainer.asInstanceOf[ContainerRoot]
 
     //REMOVE OLD AND ADD NEW TYPE
     root.getTypeDefinitions.remove(actuelTypeDefinition)
-
     mergeNewTypeDefinition(root,newTypeDefinition)
-
-    //root.getTypeDefinitions.add(newTypeDefinition)
 
     //UPDATE LIBRARIES
     root.getLibraries.filter(p=> p.getSubTypes.contains(actuelTypeDefinition) ).foreach{lib=>
@@ -93,10 +71,6 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with
       art2instance match {
         case c : ComponentInstance => {
             var ct = newTypeDefinition.asInstanceOf[ComponentType]
-            //RECURSIVE MERGE FOR TYPE
-          //  ct.getProvided.foreach{ptref=>ptref.setRef(mergePortType(root,ptref.getRef))}
-          //  ct.getRequired.foreach{ptref=>ptref.setRef(mergePortType(root,ptref.getRef))}
-
 
             //MERGE PORT
             var providedPort = c.getProvided.toList ++ List()

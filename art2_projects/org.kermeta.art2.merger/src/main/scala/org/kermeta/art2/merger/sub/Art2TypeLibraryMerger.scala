@@ -20,7 +20,7 @@ object Art2TypeLibraryMerger extends Art2Merger {
         case Some(elib) => {
             libtomerge.getSubTypes.filter{st=> st.isInstanceOf[ComponentType]}.foreach{libCTtomerge=>
               elib.getSubTypes.filter{st=> st.isInstanceOf[ComponentType]}.find({esublib=>esublib.getName.equals(libCTtomerge.getName)}) match {
-                case Some(subct)=> //TODO CHECK CONSISTENCY
+                case Some(subct)=> //CHECK CONSISTENCY DONE BY PREVIOUS STEP
                 case None => elib.getSubTypes.add(libCTtomerge)
               }
             }
