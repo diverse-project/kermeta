@@ -18,7 +18,7 @@ aspect class Object
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
 	operation eachOwnedElement(context : Object, func : < Object -> Object>) : Void is do
-		self.ownedTags.each{ t | func( t) }
+		self.ownedTags.each{ t | t.eachOwnedElement(context, func) }
 		func( self)
 	end
 }
@@ -30,7 +30,7 @@ aspect class Package
 	 */
 	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from TypeDefinitionContainer is do
 		super(context, func)
-		self.nestedPackage.each{ p | func(p) }
+		self.nestedPackage.each{ p | p.eachOwnedElement(context, func) }
 	end
 }
 
@@ -41,7 +41,7 @@ aspect class TypeDefinitionContainer
 	 */
 	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
 		super(context, func)
-		self.ownedTypeDefinition.each{ td | func(td) }
+		self.ownedTypeDefinition.each{ td | td.eachOwnedElement(context, func)}
 	end
 }
 
@@ -53,5 +53,29 @@ aspect class NamedElement
 	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void is do
 		super(context, func)
 		func(self.name)
+	end
+}
+
+aspect class ClassDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from GenericTypeDefinition is do
+		super(context, func)
+		self.ownedAttribute.each{att | att.eachOwnedElement(context, func)}
+		
+	end
+}
+
+aspect class GenericTypeDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method eachOwnedElement(context : Object, func : <Object -> Object>) : Void from NamedElement is do
+		super(context, func)
+		self.typeParameter.each{tp | tp.eachOwnedElement(context, func)}
+		
 	end
 }
