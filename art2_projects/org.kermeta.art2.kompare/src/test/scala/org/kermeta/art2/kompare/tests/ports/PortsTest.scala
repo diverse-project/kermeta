@@ -68,4 +68,76 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
 
   }
 
+
+  @Test def verifyProvidedServicePortRemoved() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+  @Test def verifyProvidedServicePortAdded() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+  @Test def verifyRequiredMessagePortRemoved() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+  @Test def verifyRequiredMessagePortAdded() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+  @Test def verifyRequiredServicePortRemoved() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+  @Test def verifyRequiredServicePortAdded() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+    @Test def verifyProvidedMessagePortRenamed() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+    @Test def verifyProvidedServicePortRenamed() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+      @Test def verifyRequiredMessagePortRenamed() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+      @Test def verifyRequiredServicePortRenamed() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+      @Test def verifyProvidedServicePortClassChanged() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+      @Test def verifyRequiredServicePortClassChanged() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+        @Test def verifyProvidedServicePortClassChanged() {
+    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    error("NOT IMPLEMENTED YET");
+  }
+
+
+
+  @Test def verifyNoPortChange() {
+    var kompareModel = component.kompare(model("test_ports/base.art2"), model("test_ports/base.art2"), "nodeA")
+    kompareModel verifySize 0
+  }
 }
