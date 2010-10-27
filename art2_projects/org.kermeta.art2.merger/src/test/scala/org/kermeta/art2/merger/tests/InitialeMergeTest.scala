@@ -17,14 +17,14 @@ class InitialeMergeTest extends MergerTestSuiteHelper {
     component = new Art2MergerComponent
   }
 
-  /*
+  
   @Test def verifySimpleMerge1() {
     var mergedModel = component.merge(emptyModel, model("simple/simpleEntimidLib.art2"))
     //mergedModel testSave
     mergedModel testSave ("simple","simpleEntimidLibMerged.art2")
 
 
-  }*/
+  }
 
    @Test def verifyArtFragmentBaseMerge() {
     var mergedModel = component.merge(emptyModel, model("artFragments/lib4test-base.art2"))
