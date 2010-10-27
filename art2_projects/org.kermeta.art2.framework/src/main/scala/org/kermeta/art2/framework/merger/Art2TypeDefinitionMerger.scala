@@ -87,6 +87,7 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
     root.getTypeDefinitions.remove(actuelTypeDefinition)
     root.getTypeDefinitions.add(newTypeDefinition)
 
+
     //UPDATE LIBRARIES
     root.getLibraries.filter(p=> p.getSubTypes.contains(actuelTypeDefinition) ).foreach{lib=>
       lib.getSubTypes.remove(actuelTypeDefinition);lib.getSubTypes.add(newTypeDefinition)
@@ -111,6 +112,11 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
       art2instance match {
         case c : ComponentInstance => {
             var ct = newTypeDefinition.asInstanceOf[ComponentType]
+            //RECURSIVE MERGE FOR TYPE
+            ct.getProvided.foreach{ptref=>ptref.setRef(mergePortType(root,ptref.getRef))}
+            ct.getRequired.foreach{ptref=>ptref.setRef(mergePortType(root,ptref.getRef))}
+
+
             //MERGE PORT
             var providedPort = c.getProvided.toList ++ List()
             providedPort.foreach{pport=>
@@ -154,13 +160,6 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger {
       }
 
     }
-
-
-    
-
-    //UPDATE PROPERTY
-
-    //UPDATE BINDING
 
   }
 
