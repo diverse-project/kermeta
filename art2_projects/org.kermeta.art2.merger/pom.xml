@@ -25,7 +25,12 @@
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
