@@ -26,16 +26,18 @@ class EcoreComposer inherits kompose::Composer
    		self.saveModelByUri(model, uri, "http://www.eclipse.org/emf/2002/Ecore")
    end
    
-   method loadModel(path : String) : kompose::Mergeable is do
+   method loadModel(path : String, res : EMFResource[0..*]) : kompose::Mergeable is do
     	var resource : kermeta::persistence::EMFResource
        	resource ?= repository.getResource(path)
         resource.load
-        self.resources.add(resource)
+        res.add(resource)
         result ?= resource.instances.select{i|i.isKindOf(ecore::EPackage)}.first
    end
    
-   method createContext(model : kompose::Mergeable) : kompose::Context is do
-   		result := super(model)
+   method createContext(model : kompose::Mergeable, metamodel : kompose::Mergeable) : kompose::Context is do
+  // method createContext(model : kompose::Mergeable) : kompose::Context is do
+   		result := super(model, metamodel)
+   		//result := super(model)
    		result.classes.put("Package", EPackage)
 		result.classes.put("Class", EClass)
 		result.classes.put("Attribute", EAttribute)
