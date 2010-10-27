@@ -12,7 +12,7 @@ import org.kermeta.art2adaptation._
 import org.scalatest.junit.AssertionsForJUnit
 import org.kermeta.art2.kompare.tests._
 
-class ComponentssTest extends AssertionsForJUnit with KompareSuite {
+class ComponentsTest extends AssertionsForJUnit with KompareSuite {
 
   var component : ModelKompareService = null
 

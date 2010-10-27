@@ -129,11 +129,6 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
     error("NOT IMPLEMENTED YET");
   }
 
-        @Test def verifyProvidedServicePortClassChanged() {
-    //var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
-    error("NOT IMPLEMENTED YET");
-  }
-
 
 
   @Test def verifyNoPortChange() {

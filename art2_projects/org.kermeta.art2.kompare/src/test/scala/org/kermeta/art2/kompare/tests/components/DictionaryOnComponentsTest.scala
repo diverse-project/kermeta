@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.kompare.tests.dictionary
+package org.kermeta.art2.kompare.tests.components
 
 import org.junit._
 import org.kermeta.art2.api.service.core.kompare.ModelKompareService
@@ -12,7 +12,7 @@ import org.kermeta.art2adaptation._
 import org.scalatest.junit.AssertionsForJUnit
 import org.kermeta.art2.kompare.tests._
 
-class Dictionary1Test extends AssertionsForJUnit with KompareSuite {
+class DictionaryOnComponentsTest extends AssertionsForJUnit with KompareSuite {
 
   var component : ModelKompareService = null
 
