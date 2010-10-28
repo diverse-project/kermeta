@@ -66,11 +66,7 @@ class TypeInstallAndRemoveTest extends KompareSuite {
     kompareModel shouldContain(classOf[RemoveType],"ComponentB")
     kompareModel shouldContain(classOf[RemoveInstance],"ComponentB--10313997")
     kompareModel shouldContain(classOf[RemoveInstance],"ComponentPrimitiveTypeService--791402174")
-
   }
-
-
-
 
 }
 
