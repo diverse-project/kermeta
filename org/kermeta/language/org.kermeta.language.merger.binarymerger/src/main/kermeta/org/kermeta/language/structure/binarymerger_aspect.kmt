@@ -19,8 +19,6 @@ using kermeta::standard
 
 aspect class Object
 {
-	/** This element comes from the AspectModel (may still be contained by the AspectModel) */	
-	attribute isFromAspectModel : Boolean
 	
 	/** if this element is in the AspectModel, it may have an equivalent in the MergedModel */
 	reference similarElementInMergedModel : Object#similarElementInAspectModel

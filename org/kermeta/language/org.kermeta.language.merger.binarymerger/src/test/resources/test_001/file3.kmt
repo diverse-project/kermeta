@@ -1,0 +1,17 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Didier
+ */
+
+package test::resources::test_001;
+
+
+require kermeta
+
+
+class Three
+{
+}

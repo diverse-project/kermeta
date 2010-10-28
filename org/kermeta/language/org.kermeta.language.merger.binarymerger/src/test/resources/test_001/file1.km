@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
     xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1"
-    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ file2.km#/ #/">
+    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ file2.km#/ #/ file3.km#/">
   <ownedTags name="mainClass" value="test::resources::test_001::Main" object="#/"/>
   <ownedTags name="mainOperation" value="main" object="#/"/>
   <packages name="test">

@@ -14,6 +14,7 @@ package test::resources::test_001;
 
 require kermeta
 require "file1.kmt"
+require "file3.kmt"
 class Main2
 {
 	operation main() : Void is do 
@@ -22,6 +23,7 @@ class Main2
 	
 	attribute aOne : One
 	attribute aTwo : Two
+	attribute aThree : Three
 	
 	
 	attribute aCommon1 : CommonClass1

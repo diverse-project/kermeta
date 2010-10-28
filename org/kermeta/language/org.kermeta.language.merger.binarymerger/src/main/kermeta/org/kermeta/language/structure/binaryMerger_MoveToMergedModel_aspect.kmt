@@ -20,7 +20,7 @@ aspect class ClassDefinition
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	method mergePass1() : Void from GenericTypeDefinition  is do
+	method binaryMerger_MoveToMergedModel() : Void from GenericTypeDefinition  is do
 		var mergedModelClassDefinition : ClassDefinition init self.similarElementInMergedModel.asType(ClassDefinition)
 		if (not mergedModelClassDefinition.isVoid) then
 			// Merging content of similar Package
@@ -59,7 +59,7 @@ aspect class GenericTypeDefinition
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	method mergePass1() : Void is do
+	method binaryMerger_MoveToMergedModel() : Void is do
 				stdio.writeln("   GenericTypeDefinition.mergePass1() ")
 	end
 }
@@ -68,7 +68,7 @@ aspect class ModelingUnit
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	method mergePass1() : Void is do
+	method binaryMerger_MoveToMergedModel() : Void is do
 	
 		var mergedModelModelingUnit : ModelingUnit init self.similarElementInMergedModel.asType(ModelingUnit)
 		/* self.usings.each{u | u.eachOwnedElement(context, func)}
@@ -94,7 +94,7 @@ aspect class NamedElement
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	method mergePass1() : Void is do
+	method binaryMerger_MoveToMergedModel() : Void is do
 				
 	end
 }
@@ -105,7 +105,7 @@ aspect class Object
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	operation mergePass1() : Void is do
+	operation binaryMerger_MoveToMergedModel() : Void is do
 				
 	end
 }
@@ -115,7 +115,7 @@ aspect class Package
 	/**
 	 * Runs function func on each owned elements of this element and on self
 	 */
-	method mergePass1() : Void from TypeDefinitionContainer is do
+	method binaryMerger_MoveToMergedModel() : Void from TypeDefinitionContainer is do
 		var mergedModelPackage : Package init self.similarElementInMergedModel.asType(Package)
 		if (not mergedModelPackage.isVoid) then
 			// Merging content of similar Package
@@ -143,7 +143,7 @@ aspect class TypeDefinitionContainer
 	/**
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
-	method mergePass1() : Void from NamedElement is do
+	method binaryMerger_MoveToMergedModel() : Void from NamedElement is do
 		var mergedModelTypeDefinitionContainer : TypeDefinitionContainer init self.similarElementInMergedModel.asType(TypeDefinitionContainer)
 		if (not mergedModelTypeDefinitionContainer.isVoid) then
 			// Merging content of similar Package

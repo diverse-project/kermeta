@@ -15,7 +15,8 @@ package org::kermeta::language::merger;
 require kermeta
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/traversal_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binarymerger_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/mergepass1_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binaryMerger_MoveToMergedModel_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binaryMerger_FixReferences_aspect.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -40,11 +41,13 @@ class BinaryMerger
 		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit
 		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
 		
+		
 		aspectModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
 			function { c : kermeta::standard::Object|
-			    stdio.writeln("   func called on " + c.toString)
-			    c.isFromAspectModel := true
-				c.mergePass1()})
+				c.binaryMerger_MoveToMergedModel()})
+		mergedModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
+			function { c : kermeta::standard::Object|
+				c.binaryMerger_FixReferences()})
 		
 		// control result
 		stdio.writeln("Check result")		
