@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
     xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1"
-    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ file1.km#/ #/">
   <ownedTags name="mainClass" value="test::resources::test_001::Main2" object="#/"/>
   <ownedTags name="mainOperation" value="main" object="#/"/>
   <packages name="test">
@@ -12,6 +12,22 @@
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
             name="Main2" superType="#//@packages.0/resources/test_001/Main2/@containedType.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedAttribute name="aOne" type="#//@packages.0/resources/test_001/Main2/aOne/@containedType.0"
+              isOrdered="true" upper="1" isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition file1.km#//@packages.0/resources/test_001/One"/>
+          </ownedAttribute>
+          <ownedAttribute name="aTwo" type="#//@packages.0/resources/test_001/Main2/aTwo/@containedType.0"
+              isOrdered="true" upper="1" isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/resources/test_001/Two"/>
+          </ownedAttribute>
+          <ownedAttribute name="aCommon1" type="#//@packages.0/resources/test_001/Main2/aCommon1/@containedType.0"
+              isOrdered="true" upper="1" isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/resources/test_001/CommonClass1"/>
+          </ownedAttribute>
+          <ownedAttribute name="aCommon2" type="#//@packages.0/resources/test_001/Main2/aCommon2/@containedType.0"
+              isOrdered="true" upper="1" isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/resources/test_001/CommonClass2"/>
+          </ownedAttribute>
           <ownedOperation name="main" type="#//@packages.0/resources/test_001/Main2/main/@containedType.0"
               isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
@@ -20,9 +36,22 @@
             </body>
           </ownedOperation>
         </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="CommonClass1" isAspect="true" superType="#//@packages.0/resources/test_001/CommonClass1/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="CommonClass2" superType="#//@packages.0/resources/test_001/CommonClass2/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Two" superType="#//@packages.0/resources/test_001/Two/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+        </ownedTypeDefinition>
       </nestedPackage>
     </nestedPackage>
   </packages>
   <requires uri="kermeta"/>
+  <requires uri="file1.kmt"/>
   <usings qualifiedName="test::resources::test_001"/>
 </kermeta_language_structure:ModelingUnit>

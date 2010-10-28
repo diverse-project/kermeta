@@ -13,9 +13,29 @@ package test::resources::test_001;
 
 
 require kermeta
+require "file1.kmt"
 class Main2
 {
 	operation main() : Void is do 
 		// TODO: implement 'main' operation
 	end
+	
+	attribute aOne : One
+	attribute aTwo : Two
+	
+	
+	attribute aCommon1 : CommonClass1
+	attribute aCommon2 : CommonClass2
+}
+
+aspect class CommonClass1
+{
+}
+
+class CommonClass2
+{
+}
+
+class Two
+{
 }

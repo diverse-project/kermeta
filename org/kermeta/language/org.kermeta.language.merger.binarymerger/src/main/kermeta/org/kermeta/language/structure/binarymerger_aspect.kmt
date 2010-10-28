@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+
+
+using kermeta::standard
+
+aspect class Object
+{
+	/** This element comes from the AspectModel (may still be contained by the AspectModel) */	
+	attribute isFromAspectModel : Boolean
+	
+	/** if this element is in the AspectModel, it may have an equivalent in the MergedModel */
+	reference similarElementInMergedModel : Object#similarElementInAspectModel
+	/** if this element is in the MergedModel, it may have an equivalent in the AspectModel */
+	reference similarElementInAspectModel : Object#similarElementInMergedModel
+}

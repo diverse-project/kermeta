@@ -14,6 +14,7 @@ package org::kermeta::language::merger;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/traversal_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binarymerger_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/mergepass1_aspect.kmt"
 
 using kermeta::standard
@@ -35,13 +36,21 @@ class BinaryMerger
 	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
 		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
 		
-		aspectModelModelingUnit.eachOwnedElement(primaryModelModelingUnit, 
-			function { c : kermeta::standard::Object| c.mergePass1()})
+		// primaryModelModelingUnit is now used as mergedModel
+		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit
+		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
 		
-		// control result		
+		aspectModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
+			function { c : kermeta::standard::Object|
+			    stdio.writeln("   func called on " + c.toString)
+			    c.isFromAspectModel := true
+				c.mergePass1()})
+		
+		// control result
+		stdio.writeln("Check result")		
 		primaryModelModelingUnit.eachOwnedElement(void, 
 			function { c : kermeta::standard::Object| stdio.writeln(c.toString)})		
-		result := void
+		result := primaryModelModelingUnit
 	end
 	
 	operation test_001() : Void is do 
@@ -57,8 +66,14 @@ class BinaryMerger
        	var amModelingUnit : ModelingUnit 
        	amModelingUnit ?= aspectModelResource.one
        	
-       	merge(pmModelingUnit, amModelingUnit)
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/mergedfile.km",
+       		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	mergedModelResource.save
 		stdio.writeln("test_001() Done")
 	end
 }
