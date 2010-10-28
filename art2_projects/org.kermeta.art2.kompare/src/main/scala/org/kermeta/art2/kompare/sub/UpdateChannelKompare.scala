@@ -15,9 +15,6 @@ trait UpdateChannelKompare {
   def getUpdateChannelAdaptationModel(actualChannel : Channel,updateChannel : Channel,nodeName : String) : AdaptationModel = {
     var adaptationModel = org.kermeta.art2adaptation.Art2adaptationFactory.eINSTANCE.createAdaptationModel
 
-    println(updateChannel.getName+"-"+updateChannel.getOtherFragment(nodeName))
-    println(updateChannel.getName+"-"+actualChannel.getOtherFragment(nodeName))
-
     updateChannel.getOtherFragment(nodeName).foreach{newhubBindingNodeName=>
       actualChannel.getOtherFragment(nodeName).find(b=> b == newhubBindingNodeName) match {
         case None => {
