@@ -20,6 +20,7 @@ object Art2DeployUnitMerger extends Art2Merger {
           if(tp.getUrl != ftp.getUrl || tp.getUnitName != ftp.getUnitName || tp.getGroupName != ftp.getGroupName || tp.getVersion != ftp.getVersion  ){
             actualModel.getDeployUnits.add(tp);tp
           } else {
+            ftp.setHashcode(tp.getHashcode)
             ftp
           }
         }
