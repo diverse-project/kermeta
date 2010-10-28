@@ -16,7 +16,7 @@ import scala.collection.JavaConversions._
 case class StartComponentCommand(c : Instance, ctx : Art2DeployManager,nodeName:String) extends PrimitiveCommand {
 
   def execute() : Boolean= {
-    ctx.bundleMapping.find(map=>map.objClass == c.getClass && map.name == c.getName) match {
+    ctx.bundleMapping.find(map=>map.objClassName == c.getClass.getName && map.name == c.getName) match {
       case None => false
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle

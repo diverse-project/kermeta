@@ -7,7 +7,6 @@ package org.kermeta.art2.adaptation.deploy.osgi.command
 
 import org.kermeta.art2._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
-import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import org.kermeta.art2.framework.Art2Component
 import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.message.Art2StopMessage
@@ -16,7 +15,7 @@ import scala.collection.JavaConversions._
 case class StopComponentCommand(c : Instance, ctx : Art2DeployManager,nodeName:String) extends PrimitiveCommand {
 
   def execute() : Boolean= {
-      ctx.bundleMapping.find(map=>map.objClass == c.getClass && map.name == c.getName) match {
+    ctx.bundleMapping.find(map=>map.objClassName == c.getClass.getName && map.name == c.getName) match {
       case None => false
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle
@@ -31,6 +30,5 @@ case class StopComponentCommand(c : Instance, ctx : Art2DeployManager,nodeName:S
   def undo() = {
     StartComponentCommand(c,ctx,nodeName)
   }
-
 
 }

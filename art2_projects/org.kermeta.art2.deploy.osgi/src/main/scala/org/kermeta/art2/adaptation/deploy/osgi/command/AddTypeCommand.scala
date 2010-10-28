@@ -5,85 +5,34 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.command
 
-import org.kermeta.art2.ComponentType
 import org.kermeta.art2._
-import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
 import scala.collection.JavaConversions._
-import org.osgi.framework.BundleException
 import org.slf4j.LoggerFactory
 
+/* TYPE DOES NOT INSTALL DEPLOY UNIT !! */
 case class AddTypeCommand(ct : TypeDefinition, ctx : Art2DeployManager)  extends PrimitiveCommand{
 
   var logger = LoggerFactory.getLogger(this.getClass);
-	
-  def buildQuery(du : DeployUnit) : String = {
-    var query = new StringBuilder
-    query.append("mvn:")
-    query.append(du.getGroupName)
-    query.append("/")
-    query.append(du.getUnitName)
-    du.getVersion match {
-      case "default"=>
-      case ""=>
-      case _ => query.append("/");query.append(du.getVersion)
-    }
-    query.toString
-  }
-
-  def findLib(ct : TypeDefinition) : Option[DeployUnit] = {
-    //ct.eContainer.asInstanceOf[ContainerRoot].getLibraries.find{lib=>
-    //  lib.getSubTypes.exists({sct => sct == ct})
-    //}
-    //
-    Some(ct.getDeployUnit)
-  }
 
   //var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
   def execute() : Boolean= {
     logger.info("CMD ADD CT EXECUTION ");
-    /* Actually deploy only bundle from library  */
-    findLib(ct) match {
-      case Some(l) => {
-          try{
-            logger.info("Try to install from URI, "+buildQuery(l))
-            lastExecutionBundle = Some(ctx.bundleContext.installBundle(buildQuery(l)));
-            var symbolicName : String = lastExecutionBundle.get.getSymbolicName
-            ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass,lastExecutionBundle.get))
-            lastExecutionBundle.get.start
-            mustBeStarted = true
-            true
-          } catch {
-            case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
-                logger.warn("ThirdParty conflict ! ",e)
-                mustBeStarted = false
-                true
-              }
-            
-            case _ @ e =>{
-                try{
-                  lastExecutionBundle match {
-                    case None => logger.error("failed to perform CMD ADD CT EXECUTION")
-                    case Some(bundle) => logger.error("failed to perform CMD ADD CT EXECUTION on " +bundle.getSymbolicName,e);
-                  }
-                } catch {
-                  case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
-                }
-                false
-              }
-          }
-        }
-      case None => false
+
+
+    //FOUND TYPE DEFINITION DEPLOY UNIT BUNDLE
+    var mappingFound =  ctx.bundleMapping.find({bundle =>bundle.name==CommandHelper.buildKEY(ct.getDeployUnit) && bundle.objClassName==ct.getDeployUnit.getClass.getName}) match {
+      case Some(bundle)=> bundle
+      case None => println("Deploy Unit Not Found"); return false; null;
     }
+
+    //JUST ADD NEW BUNDING
+    ctx.bundleMapping.add(Art2OSGiBundle(ct.getName,ct.getClass.getName,mappingFound.bundle))
+
+    true
   }
 
-  def undo() = {
-    lastExecutionBundle match {
-      case Some(bundle)=> bundle.stop;bundle.uninstall
-      case None=> //NOTHING CAN BE DOING HERE
-    }
-    /* TODO CALL refreshPackage */
-  }
+  def undo() = RemoveTypeCommand(ct,ctx).execute
 
 }

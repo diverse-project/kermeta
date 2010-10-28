@@ -15,8 +15,6 @@ import scala.collection.JavaConversions._
 
 case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:String) extends PrimitiveCommand {
 
-  // var executedBundles : List[org.osgi.framework.Bundle] = List()
-
   def execute() : Boolean= {
 
     /* create bundle cache structure */
@@ -34,24 +32,14 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
 
 
     //FOUND CT SYMBOLIC NAME
-    var mappingFound =  ctx.bundleMapping.find({bundle =>
-        println(bundle.name+"-"+c.getTypeDefinition.getName+"-"+c.getTypeDefinition.getClass.getName)
-        bundle.name==c.getTypeDefinition.getName && bundle.objClass.getName==c.getTypeDefinition.getClass.getName
-      }) match {
+    var mappingFound =  ctx.bundleMapping.find({bundle =>bundle.name==c.getTypeDefinition.getName && bundle.objClassName==c.getTypeDefinition.getClass.getName}) match {
       case Some(bundle)=> bundle
       case None => println("Type Not Found"); return false; null;
     }
 
-    //var OSGIINFDIR = new File(directory.getAbsolutePath+"/"+"OSGI-INF"+"/"+"blueprint")
-    //OSGIINFDIR.mkdirs
-
-
     /* STEP GENERATE COMPONENT INSTANCE BUNDLE */
     /* Generate File */
-
-
     var MANIFEST = new File(METAINFDIR+"/"+"MANIFEST.MF")
-
 
     var activatorPackage = c.getTypeDefinition.getFactoryBean().substring(0, c.getTypeDefinition.getFactoryBean().lastIndexOf("."))
     var activatorName = c.getTypeDefinition.getName()+"Activator"
@@ -95,7 +83,7 @@ case class AddInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName:Str
       // var bundleWrapper= ctx.bundleContext.installBundle("assembly:"+directoryWrapper.getAbsolutePath);
       //    executedBundles = List(bundle,bundleWrapper)
 
-      ctx.bundleMapping.add(Art2OSGiBundle(c.getName,c.getClass,bundle))
+      ctx.bundleMapping.add(Art2OSGiBundle(c.getName,c.getClass.getName,bundle))
       // ctx.bundleMapping.append(Art2OSGiBundle(c,c.getName,c.getClass,bundleWrapper))
 
       lastExecutionBundle = Some(bundle)

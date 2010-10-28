@@ -22,7 +22,7 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
 
   def execute() : Boolean= {
 
-    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getHub.getClass && map.name == c.getHub.getName) match {
+    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClassName == c.getHub.getClass.getName && map.name == c.getHub.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
       case Some(mapfound)=> {
           var channelBundle = mapfound.bundle
@@ -31,7 +31,7 @@ case class AddBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:Stri
             case Some(sr)=> Some(channelBundle.getBundleContext.getService(sr).asInstanceOf[Art2ChannelFragment])}}
     }
     
-    var art2ComponentFound = ctx.bundleMapping.find(map=>map.objClass == c.getPort.eContainer.asInstanceOf[ComponentInstance].getClass && map.name == c.getPort.eContainer.asInstanceOf[ComponentInstance].getName ) match {
+    var art2ComponentFound = ctx.bundleMapping.find(map=>map.objClassName == c.getPort.eContainer.asInstanceOf[ComponentInstance].getClass.getName && map.name == c.getPort.eContainer.asInstanceOf[ComponentInstance].getName ) match {
       case None => logger.error("Component Mapping not found");None
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle

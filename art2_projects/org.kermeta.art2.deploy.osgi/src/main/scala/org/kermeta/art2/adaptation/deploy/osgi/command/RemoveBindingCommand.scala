@@ -11,9 +11,7 @@ import org.kermeta.art2.framework.Art2ChannelFragment
 import org.kermeta.art2.framework.Art2Component
 import org.kermeta.art2.framework.Art2Port
 import org.kermeta.art2.framework.Constants
-import org.kermeta.art2.framework.message.Art2FragmentBindMessage
 import org.kermeta.art2.framework.message.Art2FragmentUnbindMessage
-import org.kermeta.art2.framework.message.Art2PortBindMessage
 import org.kermeta.art2.framework.message.Art2PortUnbindMessage
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
@@ -26,7 +24,7 @@ case class RemoveBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:S
 
     logger.info("Try to remove binding , component=>"+ c.getPort.eContainer.asInstanceOf[ComponentInstance].getName +"portname =>"+c.getPort.getPortTypeRef.getName+", channel="+c.getHub.getName)
 
-    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getHub.getClass && map.name == c.getHub.getName) match {
+    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClassName == c.getHub.getClass.getName && map.name == c.getHub.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
       case Some(mapfound)=> {
           var channelBundle = mapfound.bundle
@@ -35,7 +33,7 @@ case class RemoveBindingCommand(c : MBinding, ctx : Art2DeployManager,nodeName:S
             case Some(sr)=> Some(channelBundle.getBundleContext.getService(sr).asInstanceOf[Art2ChannelFragment])}}
     }
 
-    var art2ComponentFound = ctx.bundleMapping.find(map=>map.objClass == c.getPort.eContainer.asInstanceOf[ComponentInstance].getClass && map.name == c.getPort.eContainer.asInstanceOf[ComponentInstance].getName ) match {
+    var art2ComponentFound = ctx.bundleMapping.find(map=>map.objClassName == c.getPort.eContainer.asInstanceOf[ComponentInstance].getClass.getName && map.name == c.getPort.eContainer.asInstanceOf[ComponentInstance].getName ) match {
       case None => logger.error("Component Mapping not found");None
       case Some(mapfound)=> {
           var componentBundle = mapfound.bundle

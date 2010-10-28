@@ -5,37 +5,52 @@
 
 package org.kermeta.art2.adaptation.deploy.osgi.command
 
+import org.kermeta.art2._
 import org.kermeta.art2.DeployUnit
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2OSGiBundle
+import scala.collection.JavaConversions._
 import org.osgi.framework.BundleException
 import org.osgi.service.packageadmin.PackageAdmin
 import org.slf4j.LoggerFactory
-import scala.collection.JavaConversions._
 
-case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  extends PrimitiveCommand {
+case class AddDeployUnitCommand(deployUnit : DeployUnit, ctx : Art2DeployManager)  extends PrimitiveCommand{
 
-  var logger = LoggerFactory.getLogger(this.getClass)
-
-  // var lastExecutionBundle : Option[org.osgi.framework.Bundle] = None
+  var logger = LoggerFactory.getLogger(this.getClass);
+	
   def execute() : Boolean= {
-    println("CMD ADD ThirdParty EXECUTION => url="+ct.getUrl);
-    /* Actually deploy only bundle from library  */
+    logger.info("CMD ADD DEPLOY UNIT EXECUTION ");
+
     try{
-      lastExecutionBundle = Some(ctx.bundleContext.installBundle(ct.getUrl));
+      logger.info("Try to install from URI, "+CommandHelper.buildQuery(deployUnit))
+      lastExecutionBundle = Some(ctx.bundleContext.installBundle(CommandHelper.buildQuery(deployUnit)));
       var symbolicName : String = lastExecutionBundle.get.getSymbolicName
-      ctx.bundleMapping.append(Art2OSGiBundle(ct.getName,ct.getClass.getName,lastExecutionBundle.get))
-      // lastExecutionBundle.get.start
+
+      //FOR DEPLOY UNIT DO NOT USE ONLY NAME
+      ctx.bundleMapping.append(Art2OSGiBundle(CommandHelper.buildKEY(deployUnit),deployUnit.getClass.getName,lastExecutionBundle.get))
+      lastExecutionBundle.get.start
       mustBeStarted = true
       true
     } catch {
       case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
-          logger.warn("ThirdParty conflict ! ")
+          logger.warn("DeployUnit conflict ! ",e)
           mustBeStarted = false
           true
         }
-      case _ @ e => {logger.error("Error installing ThirdParty",e); false}
+            
+      case _ @ e =>{
+          try{
+            lastExecutionBundle match {
+              case None => logger.error("failed to perform CMD ADD CT EXECUTION")
+              case Some(bundle) => logger.error("failed to perform CMD ADD CT EXECUTION on " +bundle.getSymbolicName,e);
+            }
+          } catch {
+            case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
+          }
+          false
+        }
     }
+       
 
   }
 
@@ -52,6 +67,5 @@ case class AddThirdPartyCommand(ct : DeployUnit, ctx : Art2DeployManager)  exten
     }
     /* TODO CALL refreshPackage */
   }
-
 
 }

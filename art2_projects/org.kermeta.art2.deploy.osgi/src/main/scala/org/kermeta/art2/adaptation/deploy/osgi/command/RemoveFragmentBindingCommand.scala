@@ -9,7 +9,6 @@ import org.kermeta.art2._
 import org.kermeta.art2.adaptation.deploy.osgi.context.Art2DeployManager
 import org.kermeta.art2.framework.Art2ChannelFragment
 import org.kermeta.art2.framework.Constants
-import org.kermeta.art2.framework.message.Art2FragmentBindMessage
 import org.kermeta.art2.framework.message.Art2FragmentUnbindMessage
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
@@ -20,7 +19,7 @@ case class RemoveFragmentBindingCommand(c : Channel,remoteNodeName:String, ctx :
 
   def execute() : Boolean= {
 
-    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClass == c.getClass && map.name == c.getName) match {
+    var art2ChannelFound = ctx.bundleMapping.find(map=>map.objClassName == c.getClass.getName && map.name == c.getName) match {
       case None => logger.error("Channel Fragment Mapping not found");None
       case Some(mapfound)=> {
           var channelBundle = mapfound.bundle
@@ -33,13 +32,10 @@ case class RemoveFragmentBindingCommand(c : Channel,remoteNodeName:String, ctx :
       case None => false
       case Some(channel)=> {
           //CREATE REMOTE PROXY
-
           var unbindmsg = new Art2FragmentUnbindMessage
           unbindmsg.setChannelName(c.getName)
           unbindmsg.setFragmentNodeName(remoteNodeName)
-
           (channel !? unbindmsg).asInstanceOf[Boolean]
-
         }
     }
   }
