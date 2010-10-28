@@ -17,15 +17,11 @@ import scala.runtime.BoxedUnit
 
 case class RichJSONObject(obj : Any) {
   def toJSON : String = {
-
   //  println("toMap=>"+obj)
     if(obj.isInstanceOf[Unit] || obj.isInstanceOf[BoxedUnit] ){
       return "<void>"
     }
-
-    var out = new StringWriter
-    JacksonSerializer.mapper.writeValue(out,obj)
-    out.toString
+    JacksonSerializer.mapper.writeValueAsString(obj)
   }
 }
 

@@ -21,6 +21,9 @@ object Art2Aspects{
   implicit def channelAspect(c:Channel) = ChannelAspect(c)
   implicit def dictionaryAspect(d:Dictionary) = DictionaryAspect(d)
 
+  implicit def deployUnitAspect(d:DeployUnit) = DeployUnitAspect(d)
+
+
 }
 
 
