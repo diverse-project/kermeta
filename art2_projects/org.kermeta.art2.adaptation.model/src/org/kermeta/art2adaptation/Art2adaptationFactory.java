@@ -206,6 +206,33 @@ public interface Art2adaptationFactory extends EFactory {
 	UpdateType createUpdateType();
 
 	/**
+	 * Returns a new object of class '<em>Deploy Unit Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deploy Unit Adaptation</em>'.
+	 * @generated
+	 */
+	DeployUnitAdaptation createDeployUnitAdaptation();
+
+	/**
+	 * Returns a new object of class '<em>Add Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add Deploy Unit</em>'.
+	 * @generated
+	 */
+	AddDeployUnit createAddDeployUnit();
+
+	/**
+	 * Returns a new object of class '<em>Remove Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Remove Deploy Unit</em>'.
+	 * @generated
+	 */
+	RemoveDeployUnit createRemoveDeployUnit();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

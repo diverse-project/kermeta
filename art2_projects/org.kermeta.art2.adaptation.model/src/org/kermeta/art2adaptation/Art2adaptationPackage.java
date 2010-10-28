@@ -641,6 +641,90 @@ public interface Art2adaptationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.DeployUnitAdaptationImpl <em>Deploy Unit Adaptation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.DeployUnitAdaptationImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getDeployUnitAdaptation()
+	 * @generated
+	 */
+	int DEPLOY_UNIT_ADAPTATION = 20;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOY_UNIT_ADAPTATION__REF = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Deploy Unit Adaptation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOY_UNIT_ADAPTATION_FEATURE_COUNT = ADAPTATION_PRIMITIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.AddDeployUnitImpl <em>Add Deploy Unit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.AddDeployUnitImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddDeployUnit()
+	 * @generated
+	 */
+	int ADD_DEPLOY_UNIT = 21;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_DEPLOY_UNIT__REF = DEPLOY_UNIT_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Add Deploy Unit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_DEPLOY_UNIT_FEATURE_COUNT = DEPLOY_UNIT_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.RemoveDeployUnitImpl <em>Remove Deploy Unit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.RemoveDeployUnitImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveDeployUnit()
+	 * @generated
+	 */
+	int REMOVE_DEPLOY_UNIT = 22;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_DEPLOY_UNIT__REF = DEPLOY_UNIT_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Remove Deploy Unit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVE_DEPLOY_UNIT_FEATURE_COUNT = DEPLOY_UNIT_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AdaptationPrimitive <em>Adaptation Primitive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,6 +1000,47 @@ public interface Art2adaptationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUpdateType();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.DeployUnitAdaptation <em>Deploy Unit Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Deploy Unit Adaptation</em>'.
+	 * @see org.kermeta.art2adaptation.DeployUnitAdaptation
+	 * @generated
+	 */
+	EClass getDeployUnitAdaptation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.art2adaptation.DeployUnitAdaptation#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see org.kermeta.art2adaptation.DeployUnitAdaptation#getRef()
+	 * @see #getDeployUnitAdaptation()
+	 * @generated
+	 */
+	EReference getDeployUnitAdaptation_Ref();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AddDeployUnit <em>Add Deploy Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Add Deploy Unit</em>'.
+	 * @see org.kermeta.art2adaptation.AddDeployUnit
+	 * @generated
+	 */
+	EClass getAddDeployUnit();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.RemoveDeployUnit <em>Remove Deploy Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Remove Deploy Unit</em>'.
+	 * @see org.kermeta.art2adaptation.RemoveDeployUnit
+	 * @generated
+	 */
+	EClass getRemoveDeployUnit();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1194,6 +1319,44 @@ public interface Art2adaptationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UPDATE_TYPE = eINSTANCE.getUpdateType();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.DeployUnitAdaptationImpl <em>Deploy Unit Adaptation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.DeployUnitAdaptationImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getDeployUnitAdaptation()
+		 * @generated
+		 */
+		EClass DEPLOY_UNIT_ADAPTATION = eINSTANCE.getDeployUnitAdaptation();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEPLOY_UNIT_ADAPTATION__REF = eINSTANCE.getDeployUnitAdaptation_Ref();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.AddDeployUnitImpl <em>Add Deploy Unit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.AddDeployUnitImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getAddDeployUnit()
+		 * @generated
+		 */
+		EClass ADD_DEPLOY_UNIT = eINSTANCE.getAddDeployUnit();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.RemoveDeployUnitImpl <em>Remove Deploy Unit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.RemoveDeployUnitImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getRemoveDeployUnit()
+		 * @generated
+		 */
+		EClass REMOVE_DEPLOY_UNIT = eINSTANCE.getRemoveDeployUnit();
 
 	}
 

@@ -80,6 +80,9 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.UPDATE_INSTANCE: return createUpdateInstance();
 			case Art2adaptationPackage.UPDATE_DICTIONARY_INSTANCE: return createUpdateDictionaryInstance();
 			case Art2adaptationPackage.UPDATE_TYPE: return createUpdateType();
+			case Art2adaptationPackage.DEPLOY_UNIT_ADAPTATION: return createDeployUnitAdaptation();
+			case Art2adaptationPackage.ADD_DEPLOY_UNIT: return createAddDeployUnit();
+			case Art2adaptationPackage.REMOVE_DEPLOY_UNIT: return createRemoveDeployUnit();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -283,6 +286,36 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public UpdateType createUpdateType() {
 		UpdateTypeImpl updateType = new UpdateTypeImpl();
 		return updateType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeployUnitAdaptation createDeployUnitAdaptation() {
+		DeployUnitAdaptationImpl deployUnitAdaptation = new DeployUnitAdaptationImpl();
+		return deployUnitAdaptation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddDeployUnit createAddDeployUnit() {
+		AddDeployUnitImpl addDeployUnit = new AddDeployUnitImpl();
+		return addDeployUnit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RemoveDeployUnit createRemoveDeployUnit() {
+		RemoveDeployUnitImpl removeDeployUnit = new RemoveDeployUnitImpl();
+		return removeDeployUnit;
 	}
 
 	/**

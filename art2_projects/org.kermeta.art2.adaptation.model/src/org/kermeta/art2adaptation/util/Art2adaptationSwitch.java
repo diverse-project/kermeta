@@ -238,6 +238,29 @@ public class Art2adaptationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2adaptationPackage.DEPLOY_UNIT_ADAPTATION: {
+				DeployUnitAdaptation deployUnitAdaptation = (DeployUnitAdaptation)theEObject;
+				T result = caseDeployUnitAdaptation(deployUnitAdaptation);
+				if (result == null) result = caseAdaptationPrimitive(deployUnitAdaptation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.ADD_DEPLOY_UNIT: {
+				AddDeployUnit addDeployUnit = (AddDeployUnit)theEObject;
+				T result = caseAddDeployUnit(addDeployUnit);
+				if (result == null) result = caseDeployUnitAdaptation(addDeployUnit);
+				if (result == null) result = caseAdaptationPrimitive(addDeployUnit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Art2adaptationPackage.REMOVE_DEPLOY_UNIT: {
+				RemoveDeployUnit removeDeployUnit = (RemoveDeployUnit)theEObject;
+				T result = caseRemoveDeployUnit(removeDeployUnit);
+				if (result == null) result = caseDeployUnitAdaptation(removeDeployUnit);
+				if (result == null) result = caseAdaptationPrimitive(removeDeployUnit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -539,6 +562,51 @@ public class Art2adaptationSwitch<T> {
 	 * @generated
 	 */
 	public T caseUpdateType(UpdateType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deploy Unit Adaptation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deploy Unit Adaptation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeployUnitAdaptation(DeployUnitAdaptation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add Deploy Unit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddDeployUnit(AddDeployUnit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Remove Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Remove Deploy Unit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRemoveDeployUnit(RemoveDeployUnit object) {
 		return null;
 	}
 

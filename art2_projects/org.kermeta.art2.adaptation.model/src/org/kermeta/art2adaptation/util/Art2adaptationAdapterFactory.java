@@ -152,6 +152,18 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 				return createUpdateTypeAdapter();
 			}
 			@Override
+			public Adapter caseDeployUnitAdaptation(DeployUnitAdaptation object) {
+				return createDeployUnitAdaptationAdapter();
+			}
+			@Override
+			public Adapter caseAddDeployUnit(AddDeployUnit object) {
+				return createAddDeployUnitAdapter();
+			}
+			@Override
+			public Adapter caseRemoveDeployUnit(RemoveDeployUnit object) {
+				return createRemoveDeployUnitAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -448,6 +460,48 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUpdateTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.DeployUnitAdaptation <em>Deploy Unit Adaptation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.DeployUnitAdaptation
+	 * @generated
+	 */
+	public Adapter createDeployUnitAdaptationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.AddDeployUnit <em>Add Deploy Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.AddDeployUnit
+	 * @generated
+	 */
+	public Adapter createAddDeployUnitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.RemoveDeployUnit <em>Remove Deploy Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.RemoveDeployUnit
+	 * @generated
+	 */
+	public Adapter createRemoveDeployUnitAdapter() {
 		return null;
 	}
 
