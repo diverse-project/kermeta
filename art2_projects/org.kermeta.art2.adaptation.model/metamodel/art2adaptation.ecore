@@ -37,4 +37,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="UpdateInstance" eSuperTypes="#//InstanceAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="UpdateDictionaryInstance" eSuperTypes="#//InstanceAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="UpdateType" eSuperTypes="#//TypeAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeployUnitAdaptation" eSuperTypes="#//AdaptationPrimitive">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="ecore:EClass ../../org.kermeta.art2.model/metamodel/art.ecore#//DeployUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddDeployUnit" eSuperTypes="#//DeployUnitAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveDeployUnit" eSuperTypes="#//DeployUnitAdaptation"/>
 </ecore:EPackage>

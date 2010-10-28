@@ -40,5 +40,10 @@
     <genClasses ecoreClass="art2adaptation.ecore#//UpdateInstance"/>
     <genClasses ecoreClass="art2adaptation.ecore#//UpdateDictionaryInstance"/>
     <genClasses ecoreClass="art2adaptation.ecore#//UpdateType"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//DeployUnitAdaptation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art2adaptation.ecore#//DeployUnitAdaptation/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="art2adaptation.ecore#//AddDeployUnit"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//RemoveDeployUnit"/>
   </genPackages>
 </genmodel:GenModel>
