@@ -7,6 +7,7 @@ package org.kermeta.art2.kompare.tests
 
 import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.NamedElement
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.kermeta.art2adaptation.AdaptationModel
 import org.kermeta.art2adaptation._
@@ -61,7 +62,18 @@ case class RichAdaptationModel(self : AdaptationModel) {
   }
 
   def print ={
-    self.getAdaptations.toArray.foreach{adapt=>System.out.println(adapt.getClass.getName)}
+    self.getAdaptations.toArray.foreach{adapt=>
+      println(adapt.getClass.getName)
+      adapt match {
+        case i : TypeAdaptation => println(i.getRef.getName)
+        case i : InstanceAdaptation => println(i.getRef.getName)
+        case i : BindingAdaptation => {
+            println(i.getRef.getHub.getName+"->"+i.getRef.getPort.getPortTypeRef.getName+"-"+i.getRef.getPort.eContainer.asInstanceOf[NamedElement].getName)
+        }
+        case _ =>
+      }
+
+    }
   }
 
 }

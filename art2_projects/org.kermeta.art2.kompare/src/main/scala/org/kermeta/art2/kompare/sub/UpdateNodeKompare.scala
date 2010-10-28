@@ -7,6 +7,7 @@ package org.kermeta.art2.kompare.sub
 
 import org.kermeta.art2._
 import org.kermeta.art2adaptation._
+import org.kermeta.art2adaptation._
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
@@ -29,6 +30,18 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
               var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateType
               adaptcmd.setRef(uct)
               adaptationModel.getAdaptations.add(adaptcmd)
+
+              //ADD UPDATE DEPLOY UNIT IF NECESSARY
+              adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[UpdateDeployUnit]).find(adaptation=> adaptation.asInstanceOf[UpdateDeployUnit].getRef.isModelEquals(uct.getDeployUnit) ) match {
+                case None => {
+                    var ctcmd = Art2adaptationFactory.eINSTANCE.createUpdateDeployUnit
+                    ctcmd.setRef(uct.getDeployUnit)
+                    adaptationModel.getAdaptations.add(ctcmd)
+                  }
+                case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+              }
+
+
             }
           }
         case None => {
@@ -107,6 +120,39 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
               var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateInstance
               adaptcmd.setRef(uc)
               adaptationModel.getAdaptations.add(adaptcmd)
+
+              //UPDATE BINDING IF NECESSARY
+              uc match {
+                case i : ComponentInstance => {
+                    i.getRelatedBindings.foreach(b=>{
+                        adaptationModel.getAdaptations.filter(p=> p.isInstanceOf[UpdateBinding]).find(adaptation=> adaptation.asInstanceOf[UpdateBinding].getRef.isModelEquals(b)  ) match {
+                          case None => {
+                              var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateBinding
+                              adaptcmd.setRef(b)
+                              adaptationModel.getAdaptations.add(adaptcmd)
+                            }
+                          case Some(e)=> //UPDATE BINDING ALREADY RESGISTERED
+                        }
+                      })
+                  }
+                case i : Channel => {
+                    i.getRelatedBindings.foreach{b=>
+                      adaptationModel.getAdaptations.filter(p=> p.isInstanceOf[UpdateBinding]).find(adaptation=> adaptation.asInstanceOf[UpdateBinding].getRef.isModelEquals(b)  ) match {
+                        case None => {
+                            var adaptcmd = Art2adaptationFactory.eINSTANCE.createUpdateBinding
+                            adaptcmd.setRef(b)
+                            adaptationModel.getAdaptations.add(adaptcmd)
+                          }
+                        case Some(e)=> //UPDATE BINDING ALREADY RESGISTERED
+                      }
+                    }
+                  }
+                case _ =>
+              }
+
+
+
+
             } else {
               //CHECK IS DICTIONARY IS UPDATED
               if(uc.getDictionary.isUpdated(c.getDictionary)){
