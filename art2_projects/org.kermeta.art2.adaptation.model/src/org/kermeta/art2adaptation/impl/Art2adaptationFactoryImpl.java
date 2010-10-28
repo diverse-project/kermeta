@@ -83,6 +83,7 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.DEPLOY_UNIT_ADAPTATION: return createDeployUnitAdaptation();
 			case Art2adaptationPackage.ADD_DEPLOY_UNIT: return createAddDeployUnit();
 			case Art2adaptationPackage.REMOVE_DEPLOY_UNIT: return createRemoveDeployUnit();
+			case Art2adaptationPackage.UPDATE_DEPLOY_UNIT: return createUpdateDeployUnit();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -316,6 +317,16 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public RemoveDeployUnit createRemoveDeployUnit() {
 		RemoveDeployUnitImpl removeDeployUnit = new RemoveDeployUnitImpl();
 		return removeDeployUnit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateDeployUnit createUpdateDeployUnit() {
+		UpdateDeployUnitImpl updateDeployUnit = new UpdateDeployUnitImpl();
+		return updateDeployUnit;
 	}
 
 	/**

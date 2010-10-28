@@ -261,6 +261,14 @@ public class Art2adaptationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2adaptationPackage.UPDATE_DEPLOY_UNIT: {
+				UpdateDeployUnit updateDeployUnit = (UpdateDeployUnit)theEObject;
+				T result = caseUpdateDeployUnit(updateDeployUnit);
+				if (result == null) result = caseDeployUnitAdaptation(updateDeployUnit);
+				if (result == null) result = caseAdaptationPrimitive(updateDeployUnit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -607,6 +615,21 @@ public class Art2adaptationSwitch<T> {
 	 * @generated
 	 */
 	public T caseRemoveDeployUnit(RemoveDeployUnit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Deploy Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Deploy Unit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateDeployUnit(UpdateDeployUnit object) {
 		return null;
 	}
 

@@ -42,4 +42,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddDeployUnit" eSuperTypes="#//DeployUnitAdaptation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveDeployUnit" eSuperTypes="#//DeployUnitAdaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateDeployUnit" eSuperTypes="#//DeployUnitAdaptation"/>
 </ecore:EPackage>

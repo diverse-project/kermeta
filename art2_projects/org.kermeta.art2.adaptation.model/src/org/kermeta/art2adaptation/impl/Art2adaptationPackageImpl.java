@@ -37,6 +37,7 @@ import org.kermeta.art2adaptation.RemoveThirdParty;
 import org.kermeta.art2adaptation.RemoveType;
 import org.kermeta.art2adaptation.ThirdPartyAdaptation;
 import org.kermeta.art2adaptation.TypeAdaptation;
+import org.kermeta.art2adaptation.UpdateDeployUnit;
 import org.kermeta.art2adaptation.UpdateDictionaryInstance;
 import org.kermeta.art2adaptation.UpdateInstance;
 import org.kermeta.art2adaptation.UpdateType;
@@ -208,6 +209,13 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * @generated
 	 */
 	private EClass removeDeployUnitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateDeployUnitEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -557,6 +565,15 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUpdateDeployUnit() {
+		return updateDeployUnitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Art2adaptationFactory getArt2adaptationFactory() {
 		return (Art2adaptationFactory)getEFactoryInstance();
 	}
@@ -633,6 +650,8 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		addDeployUnitEClass = createEClass(ADD_DEPLOY_UNIT);
 
 		removeDeployUnitEClass = createEClass(REMOVE_DEPLOY_UNIT);
+
+		updateDeployUnitEClass = createEClass(UPDATE_DEPLOY_UNIT);
 	}
 
 	/**
@@ -687,6 +706,7 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		deployUnitAdaptationEClass.getESuperTypes().add(this.getAdaptationPrimitive());
 		addDeployUnitEClass.getESuperTypes().add(this.getDeployUnitAdaptation());
 		removeDeployUnitEClass.getESuperTypes().add(this.getDeployUnitAdaptation());
+		updateDeployUnitEClass.getESuperTypes().add(this.getDeployUnitAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(adaptationPrimitiveEClass, AdaptationPrimitive.class, "AdaptationPrimitive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -742,6 +762,8 @@ public class Art2adaptationPackageImpl extends EPackageImpl implements Art2adapt
 		initEClass(addDeployUnitEClass, AddDeployUnit.class, "AddDeployUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(removeDeployUnitEClass, RemoveDeployUnit.class, "RemoveDeployUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateDeployUnitEClass, UpdateDeployUnit.class, "UpdateDeployUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

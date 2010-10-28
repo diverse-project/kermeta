@@ -164,6 +164,10 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 				return createRemoveDeployUnitAdapter();
 			}
 			@Override
+			public Adapter caseUpdateDeployUnit(UpdateDeployUnit object) {
+				return createUpdateDeployUnitAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -502,6 +506,20 @@ public class Art2adaptationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRemoveDeployUnitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.art2adaptation.UpdateDeployUnit <em>Update Deploy Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.art2adaptation.UpdateDeployUnit
+	 * @generated
+	 */
+	public Adapter createUpdateDeployUnitAdapter() {
 		return null;
 	}
 
