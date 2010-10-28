@@ -35,14 +35,12 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge( model("artFragments/lib4test-ProvidedServiceMethodRemoved.art2"), model("artFragments/lib4test-base.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodAddedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
-      typeDef.asInstanceOf[TypeDefinition].getName match {
-        
+    mergedModel.getTypeDefinitions.foreach(typeDef => typeDef.getName match {
         //check if the mapping to the method is present
         case "ComponentPrimitiveTypeService" => {
-            typeDef.asInstanceOf[ComponentType].getProvided.toArray.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
+            typeDef.asInstanceOf[ComponentType].getProvided.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
               case Some(sport) => {
-                  sport.asInstanceOf[PortTypeRef].getMappings.toArray.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
+                  sport.asInstanceOf[PortTypeRef].getMappings.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
                     case None => fail("No mapping found for method 'methodInt' in component ComponentPrimitiveTypeService")
                     case Some(mapMethod) =>
                   }
@@ -52,18 +50,19 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
         }
 
         //check if operation 'methodInt' have been added to the service interface
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => fail("No method 'methodInt' found in ServicePortType")
             case Some(methodInt) =>
           }
         }
+        case _ =>
         
       }
     )
 
     //check if 'int' DataType have been added
-    mergedModel.getDataTypes.toArray.find(datatype => datatype.asInstanceOf[TypedElement].getName.equals("scala.int")) match {
+    mergedModel.getDataTypes.find(datatype => datatype.asInstanceOf[TypedElement].getName.equals("scala.Int")) match {
       case Some(dataType) =>
       case None => fail("DataType 'int' have not been added when adding 'int methodInt(int i)' in " + serviceClass)
     }
@@ -74,14 +73,13 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-ProvidedServiceMethodRemoved.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodRemovedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
-
         //check if the mapping to the method is no more present
         case "ComponentPrimitiveTypeService" => {
-            typeDef.asInstanceOf[ComponentType].getProvided.toArray.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
+            typeDef.asInstanceOf[ComponentType].getProvided.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
               case Some(sport) => {
-                  sport.asInstanceOf[PortTypeRef].getMappings.toArray.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
+                  sport.asInstanceOf[PortTypeRef].getMappings.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
                     case Some(mapMethod) => fail("Mapping found for method 'methodInt' in component ComponentPrimitiveTypeService")
                     case None =>
                   }
@@ -91,40 +89,42 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
         }
 
         //check if operation 'methodInt' have been removed from the service interface
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => 
             case Some(methodInt) => fail("Method 'methodInt' found in ServicePortType")
           }
         }
+        case _ =>
 
       }
     )
 
     //check if 'int' DataType have been removed
-    mergedModel.getDataTypes.toArray.find(datatype => datatype.asInstanceOf[TypedElement].getName.equals("scala.int")) match {
+    /*
+    mergedModel.getDataTypes.find(datatype => datatype.asInstanceOf[TypedElement].getName.equals("scala.Int")) match {
       case Some(dataType) => fail("DataType 'int' have not been removed when removing 'int methodInt(int i)' in " + serviceClass)
       case None => 
-    }
+    }*/
   }
 
   @Test def verifyProvidedServiceMethodRenamed() {
     var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-ProvidedServiceMethodRenamed.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodRenamedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
 
         //check if the mapping to the method have been renamed
         case "ComponentPrimitiveTypeService" => {
-            typeDef.asInstanceOf[ComponentType].getProvided.toArray.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
+            typeDef.asInstanceOf[ComponentType].getProvided.find(provPort => provPort.asInstanceOf[PortTypeRef].getName.equals("portPrimitiveTypes")) match {
               case Some(sport) => {
-                  sport.asInstanceOf[PortTypeRef].getMappings.toArray.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
+                  sport.asInstanceOf[PortTypeRef].getMappings.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodInt")) match {
                     case Some(mapMethod) => fail("Mapping found for method 'methodInt' in component ComponentPrimitiveTypeService")
                     case None =>
                   }
 
-                  sport.asInstanceOf[PortTypeRef].getMappings.toArray.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodIntRENAMED")) match {
+                  sport.asInstanceOf[PortTypeRef].getMappings.find(mapping => mapping.asInstanceOf[PortTypeMapping].getServiceMethodName.equals("methodIntRENAMED")) match {
                     case Some(mapMethod) =>
                     case None => fail("Mapping not found for method 'methodIntRENAMED' in component ComponentPrimitiveTypeService")
                   }
@@ -134,17 +134,18 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
         }
 
         //check if operation 'methodInt' have been removed from the service interface
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None =>
             case Some(methodInt) => fail("Method 'methodInt' found in ServicePortType")
           }
 
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodIntRENAMED")) match {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodIntRENAMED")) match {
             case None => fail("Method 'methodIntRENAMED' not found in ServicePortType")
             case Some(methodInt) =>
           }
         }
+        case _ =>
 
       }
     )
@@ -154,12 +155,12 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("artFragments/lib4test-ProvidedServiceMethodParameterRemoved.art2"), model("artFragments/lib4test-base.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodParameterAddedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
 
         //check if operation 'methodInt' have a parameter
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => error("No methodInt in " + serviceClass)
             case Some(methodInt) => {
                 if( methodInt.asInstanceOf[Operation].getParameters.size != 1 ) {
@@ -168,6 +169,7 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
             }
           }
         }
+        case _ =>
       }
     )
   }
@@ -176,12 +178,12 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-ProvidedServiceMethodParameterRemoved.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodParameterRemovedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
 
         //check if operation 'methodInt' have a parameter
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => error("No methodInt in " + serviceClass)
             case Some(methodInt : Operation) => {
                 if( methodInt.getParameters.size != 0 ) {
@@ -190,6 +192,7 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
             }
           }
         }
+        case _ =>
       }
     )
   }
@@ -198,12 +201,12 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-ProvidedServiceMethodParameterRenamed.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodParameterRenamedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
 
         //check if operation 'methodInt' have a parameter
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => error("No methodInt in " + serviceClass)
             case Some(methodInt) => {
                 methodInt.asInstanceOf[Operation].getParameters.find(param => param.getName.equals("i")) match {
@@ -217,6 +220,7 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
             }
           }
         }
+        case _ =>
       }
     )
   }
@@ -225,18 +229,19 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("artFragments/lib4test-base.art2"), model("artFragments/lib4test-ProvidedServiceMethodParameterTypeChanged.art2"))
     mergedModel testSave ("artFragments","lib4test-ProvidedServiceMethodParameterTypeChangedMerged.art2")
 
-    mergedModel.getTypeDefinitions.toArray.foreach(typeDef =>
+    mergedModel.getTypeDefinitions.foreach(typeDef =>
       typeDef.asInstanceOf[TypeDefinition].getName match {
 
         //check if operation 'methodInt' have a parameter
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => error("No methodInt in " + serviceClass)
             case Some(methodInt) => {
                 methodInt.asInstanceOf[Operation].getParameters.find(param => param.getName.equals("i")) match {
                   case Some(p : Parameter) => {
                       p.getType.getName match {
                         case "scala.Int" => fail("Parameter 'i' should be of type 'scala.boolean' found 'scala.Int'.")
+                        case _ =>
                       }
                   }
                   case None =>
@@ -245,6 +250,7 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
             }
           }
         }
+        case _ =>
       }
     )
   }
@@ -259,8 +265,8 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
       typeDef.getName match {
 
         //check if operation 'methodInt' have a parameter
-        case serviceClass => {
-          typeDef.asInstanceOf[ServicePortType].getOperations.toArray.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
+        case name : String if(name== serviceClass) => {
+          typeDef.asInstanceOf[ServicePortType].getOperations.find(op => op.asInstanceOf[Operation].getName.equals("methodInt")) match {
             case None => error("No methodInt in " + serviceClass)
             case Some(methodInt : Operation) => {
                 methodInt.getReturnType.getName match {
@@ -270,6 +276,7 @@ class ServicePortsApiTest extends MergerTestSuiteHelper  {
             }
           }
         }
+        case _ =>
       }
     )
   }

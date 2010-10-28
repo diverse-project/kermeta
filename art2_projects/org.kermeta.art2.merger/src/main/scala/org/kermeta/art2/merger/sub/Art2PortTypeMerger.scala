@@ -15,10 +15,35 @@ import org.kermeta.art2.framework.aspects.Art2Aspects._
 
 trait Art2PortTypeMerger {
 
-    //PORT TYPE DEFINITION MERGER
+  //PORT TYPE DEFINITION MERGER
   def mergePortType(actualModel : ContainerRoot,portType : PortType) : PortType = {
     actualModel.getTypeDefinitions.filter({td => td.isInstanceOf[PortType]}).find({pt=>pt.getName == portType.getName}) match {
-      case Some(existPT) => existPT.asInstanceOf[PortType]
+      case Some(existPT) => {
+
+          //CONSISTENCY CHECK
+          existPT match {
+            case spt : ServicePortType => {
+                if(portType.isInstanceOf[ServicePortType]){
+                  //CLEAR OLD METHOD , NEW DEFINITION WILL REPLACE OTHER
+
+                  spt.getOperations.clear
+                  var remoteOps = portType.asInstanceOf[ServicePortType].getOperations.toList ++ List()
+                  remoteOps.foreach{op=>
+                    op.setReturnType(mergeDataType(actualModel,op.getReturnType))
+                    op.getParameters.foreach{para=>para.setType(mergeDataType(actualModel,para.getType))}
+                    spt.getOperations.add(op)
+                  }
+
+                } else {
+                  println("New service Port Type can't replace and message port type !!!")
+                }
+              }
+            case _ => // TODO MESSAGE PORT
+          }
+
+
+          existPT.asInstanceOf[PortType]
+        }
       case None => {
           actualModel.getTypeDefinitions.add(portType)
           portType match {
@@ -38,7 +63,7 @@ trait Art2PortTypeMerger {
     }
   }
 
-    //MERGE SIMPLE DATA TYPE
+  //MERGE SIMPLE DATA TYPE
   private def mergeDataType(actualModel : ContainerRoot,datatype : TypedElement) : TypedElement = {
     actualModel.getDataTypes.find({dt=>dt.getName == datatype.getName }) match {
       case Some(existDT) => existDT
