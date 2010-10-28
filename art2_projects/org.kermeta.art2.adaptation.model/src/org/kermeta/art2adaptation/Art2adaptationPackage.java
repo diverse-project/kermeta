@@ -753,6 +753,34 @@ public interface Art2adaptationPackage extends EPackage {
 	int UPDATE_DEPLOY_UNIT_FEATURE_COUNT = DEPLOY_UNIT_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.art2adaptation.impl.UpdateBindingImpl <em>Update Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.art2adaptation.impl.UpdateBindingImpl
+	 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateBinding()
+	 * @generated
+	 */
+	int UPDATE_BINDING = 24;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_BINDING__REF = BINDING_ADAPTATION__REF;
+
+	/**
+	 * The number of structural features of the '<em>Update Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_BINDING_FEATURE_COUNT = BINDING_ADAPTATION_FEATURE_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.AdaptationPrimitive <em>Adaptation Primitive</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1081,6 +1109,16 @@ public interface Art2adaptationPackage extends EPackage {
 	EClass getUpdateDeployUnit();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.art2adaptation.UpdateBinding <em>Update Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Update Binding</em>'.
+	 * @see org.kermeta.art2adaptation.UpdateBinding
+	 * @generated
+	 */
+	EClass getUpdateBinding();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1405,6 +1443,16 @@ public interface Art2adaptationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UPDATE_DEPLOY_UNIT = eINSTANCE.getUpdateDeployUnit();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.art2adaptation.impl.UpdateBindingImpl <em>Update Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.art2adaptation.impl.UpdateBindingImpl
+		 * @see org.kermeta.art2adaptation.impl.Art2adaptationPackageImpl#getUpdateBinding()
+		 * @generated
+		 */
+		EClass UPDATE_BINDING = eINSTANCE.getUpdateBinding();
 
 	}
 

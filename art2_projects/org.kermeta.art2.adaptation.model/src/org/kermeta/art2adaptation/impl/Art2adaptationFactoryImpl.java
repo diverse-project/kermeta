@@ -84,6 +84,7 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 			case Art2adaptationPackage.ADD_DEPLOY_UNIT: return createAddDeployUnit();
 			case Art2adaptationPackage.REMOVE_DEPLOY_UNIT: return createRemoveDeployUnit();
 			case Art2adaptationPackage.UPDATE_DEPLOY_UNIT: return createUpdateDeployUnit();
+			case Art2adaptationPackage.UPDATE_BINDING: return createUpdateBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -327,6 +328,16 @@ public class Art2adaptationFactoryImpl extends EFactoryImpl implements Art2adapt
 	public UpdateDeployUnit createUpdateDeployUnit() {
 		UpdateDeployUnitImpl updateDeployUnit = new UpdateDeployUnitImpl();
 		return updateDeployUnit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateBinding createUpdateBinding() {
+		UpdateBindingImpl updateBinding = new UpdateBindingImpl();
+		return updateBinding;
 	}
 
 	/**

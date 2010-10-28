@@ -46,5 +46,6 @@
     <genClasses ecoreClass="art2adaptation.ecore#//AddDeployUnit"/>
     <genClasses ecoreClass="art2adaptation.ecore#//RemoveDeployUnit"/>
     <genClasses ecoreClass="art2adaptation.ecore#//UpdateDeployUnit"/>
+    <genClasses ecoreClass="art2adaptation.ecore#//UpdateBinding"/>
   </genPackages>
 </genmodel:GenModel>

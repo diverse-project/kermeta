@@ -242,6 +242,15 @@ public interface Art2adaptationFactory extends EFactory {
 	UpdateDeployUnit createUpdateDeployUnit();
 
 	/**
+	 * Returns a new object of class '<em>Update Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Update Binding</em>'.
+	 * @generated
+	 */
+	UpdateBinding createUpdateBinding();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
