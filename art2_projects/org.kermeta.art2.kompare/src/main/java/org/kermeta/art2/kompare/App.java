@@ -21,16 +21,18 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
-/*
+
         ContainerRoot amodel = Art2Factory.eINSTANCE.createContainerRoot();
 
         ContainerNode aNode = Art2Factory.eINSTANCE.createContainerNode();
-        aNode.setName("entimid");
+        aNode.setName("duke");
         amodel.getNodes().add(aNode);
-*/
 
-        ContainerRoot amodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/MODELTEST/dicoTest2");
-        ContainerRoot nmodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/MODELTEST/dicoTest1");
+
+
+        //ContainerRoot amodel = Art2Factory.eINSTANCE.createContainerRoot();
+        //ContainerRoot amodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/MODELTEST/dicoTest2");
+        ContainerRoot nmodel = Art2XmiHelper.load("/Users/ffouquet/Desktop/u.art2");
 
         System.out.println("new model " + nmodel);
 
@@ -39,7 +41,7 @@ public class App {
         //Art2AdaptationDeployServiceOSGi adaptationService = new Art2AdaptationDeployServiceOSGi();
         //adaptationService.setContext(new Art2DeployManager());
 
-        AdaptationModel adapModel = kompareService.kompare(amodel, nmodel, "node-0");
+        AdaptationModel adapModel = kompareService.kompare(amodel, nmodel, "duke");
 
 
 
