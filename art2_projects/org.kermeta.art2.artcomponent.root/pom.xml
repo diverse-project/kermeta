@@ -32,7 +32,7 @@
                         <value>art2.lib.id=${project.artifactId}</value>
                         <value>art2.lib.group=${project.groupId}</value>
                         <value>art2.lib.version=${project.version}</value>
-                        <value>art2.lib.target=${basedir}/src/main/resources/ART2-INF/art2Lib.art2</value>
+                        <value>art2.lib.target=${project.build.directory}/generated-sources/art2/ART2-INF/art2Lib.art2</value>
                         <value>tag=${maven.build.timestamp}</value>
                     </options>
                 </configuration>
