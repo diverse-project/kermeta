@@ -38,14 +38,22 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
             adaptationModel.getAdaptations.add(ctcmd)
 
             /* add deploy unit if necessary */
-            adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[AddDeployUnit]).find(adaptation=> adaptation.asInstanceOf[AddDeployUnit].getRef.isModelEquals(uct.getDeployUnit) ) match {
+            //CHECK IF A PREVIOUS INSTALLED TYPE DEFINITION USE THIS DEPLOY UNIT
+            actualNode.getUsedTypeDefinition.find(typeDef => typeDef.getDeployUnit.isModelEquals(uct.getDeployUnit)) match {
               case None => {
-                  var ctcmd = Art2adaptationFactory.eINSTANCE.createAddDeployUnit
-                  ctcmd.setRef(uct.getDeployUnit)
-                  adaptationModel.getAdaptations.add(ctcmd)
+                  //CHECK IF THIS DEPLOY UNIT IS ALREADY MARK AS TO BE INSTALLED
+                  adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[AddDeployUnit]).find(adaptation=> adaptation.asInstanceOf[AddDeployUnit].getRef.isModelEquals(uct.getDeployUnit) ) match {
+                    case None => {
+                        var ctcmd = Art2adaptationFactory.eINSTANCE.createAddDeployUnit
+                        ctcmd.setRef(uct.getDeployUnit)
+                        adaptationModel.getAdaptations.add(ctcmd)
+                      }
+                    case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+                  }
                 }
-              case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+              case Some(_)=> // TYPE DEFINITION ALREADY USE DEPLOY UNIT IN PREVIOUS MODEL
             }
+
 
             //ADD USED THIRDPARTY
             uct.getRequiredLibs.foreach{tp=>
@@ -66,15 +74,24 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
             ctcmd.setRef(act)
             adaptationModel.getAdaptations.add(ctcmd)
 
-            /* add deploy unit if necessary */
-            adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[RemoveDeployUnit]).find(adaptation=> adaptation.asInstanceOf[RemoveDeployUnit].getRef.isModelEquals(act.getDeployUnit) ) match {
+            /* remove deploy unit if necessary */
+            updateNode.getUsedTypeDefinition.find(typeDef => (typeDef != act) &&  typeDef.getDeployUnit.isModelEquals(act.getDeployUnit)) match {
+              case Some(_)=> // DO NOT UNINSTALL DEPLOY UNIT
               case None => {
-                  var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveDeployUnit
-                  ctcmd.setRef(act.getDeployUnit)
-                  adaptationModel.getAdaptations.add(ctcmd)
+                  adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[RemoveDeployUnit]).find(adaptation=> adaptation.asInstanceOf[RemoveDeployUnit].getRef.isModelEquals(act.getDeployUnit) ) match {
+                    case None => {
+                        var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveDeployUnit
+                        ctcmd.setRef(act.getDeployUnit)
+                        adaptationModel.getAdaptations.add(ctcmd)
+                      }
+                    case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+                  }
+
                 }
-              case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
             }
+
+
+
             //TODO REMOVE TIRDPARTY
 
           }

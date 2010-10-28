@@ -45,6 +45,12 @@ class TypeInstallAndRemoveTest extends KompareSuite {
     kompareModel verifySize 0
   }
 
+  @Test def testnoTypeDeployUnitUninstall_UPDATENODE()={
+    var kompareModel = component.kompare(model("test_type/onlyOneDeployUnitInstall.art2"), model("test_type/noTypeDeployUnitUninstall.art2"), "duke")
+    kompareModel shouldContainSize(classOf[RemoveDeployUnit],0)
+  }
+
+
   @Test def testOnlyOneDeployUnitUninstall_UPDATENODE()={
     var kompareModel = component.kompare(model("test_type/onlyOneDeployUnitInstall.art2"), model("test_type/onlyOneDeployUnitUninstall.art2"), "duke")
     kompareModel shouldContainSize(classOf[RemoveDeployUnit],1)
