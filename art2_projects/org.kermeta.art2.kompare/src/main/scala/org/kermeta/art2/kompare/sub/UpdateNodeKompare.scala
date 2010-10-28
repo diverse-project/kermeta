@@ -32,9 +32,20 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
             }
           }
         case None => {
+            //ADD TYPE
             var ctcmd = Art2adaptationFactory.eINSTANCE.createAddType
             ctcmd.setRef(uct)
             adaptationModel.getAdaptations.add(ctcmd)
+
+            /* add deploy unit if necessary */
+            adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[AddDeployUnit]).find(adaptation=> adaptation.asInstanceOf[AddDeployUnit].getRef.isModelEquals(uct.getDeployUnit) ) match {
+              case None => {
+                  var ctcmd = Art2adaptationFactory.eINSTANCE.createAddDeployUnit
+                  ctcmd.setRef(uct.getDeployUnit)
+                  adaptationModel.getAdaptations.add(ctcmd)
+                }
+              case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+            }
 
             //ADD USED THIRDPARTY
             uct.getRequiredLibs.foreach{tp=>
@@ -49,10 +60,21 @@ trait UpdateNodeKompare extends AbstractKompare with UpdateChannelKompare {
       updateNode.getUsedTypeDefinition.find({uct=> uct.isModelEquals(act) }) match {
         case Some(ct)=> //OK CHECK ALEADY DONE IN PREVIOUS STEP
         case None => {
+
+            //ADD TYPE
             var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveType
             ctcmd.setRef(act)
             adaptationModel.getAdaptations.add(ctcmd)
 
+            /* add deploy unit if necessary */
+            adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[RemoveDeployUnit]).find(adaptation=> adaptation.asInstanceOf[RemoveDeployUnit].getRef.isModelEquals(act.getDeployUnit) ) match {
+              case None => {
+                  var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveDeployUnit
+                  ctcmd.setRef(act.getDeployUnit)
+                  adaptationModel.getAdaptations.add(ctcmd)
+                }
+              case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+            }
             //TODO REMOVE TIRDPARTY
 
           }

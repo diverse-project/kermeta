@@ -55,7 +55,21 @@ trait StopNodeKompare extends AbstractKompare {
 
       /* remove all reLib */
       //TODO
+
+      /* add deploy unit if necessary */
+      adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[RemoveDeployUnit]).find(adaptation=> adaptation.asInstanceOf[RemoveDeployUnit].getRef.isModelEquals(ct.getDeployUnit) ) match {
+        case None => {
+            var ctcmd = Art2adaptationFactory.eINSTANCE.createRemoveDeployUnit
+            ctcmd.setRef(ct.getDeployUnit)
+            adaptationModel.getAdaptations.add(ctcmd)
+          }
+        case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+      }
+
+
     }
+
+
 
     adaptationModel
   }

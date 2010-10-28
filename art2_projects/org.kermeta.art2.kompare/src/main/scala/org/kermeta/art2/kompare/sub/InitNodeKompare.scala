@@ -6,6 +6,7 @@
 package org.kermeta.art2.kompare.sub
 
 import org.kermeta.art2._
+import org.kermeta.art2adaptation.AddDeployUnit
 import org.kermeta.art2adaptation._
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
@@ -32,6 +33,19 @@ trait InitNodeKompare extends AbstractKompare {
         addcttp.setRef(rLib)
         adaptationModel.getAdaptations.add(addcttp)
       }
+
+      /* add deploy unit if necessary */
+      adaptationModel.getAdaptations.filter(adaptation => adaptation.isInstanceOf[AddDeployUnit]).find(adaptation=> adaptation.asInstanceOf[AddDeployUnit].getRef.isModelEquals(ct.getDeployUnit) ) match {
+        case None => {
+            var ctcmd = Art2adaptationFactory.eINSTANCE.createAddDeployUnit
+            ctcmd.setRef(ct.getDeployUnit)
+            adaptationModel.getAdaptations.add(ctcmd)
+          }
+        case Some(e)=> //SIMILAR DEPLOY UNIT PRIMITIVE ALREADY REGISTERED
+      }
+
+
+
     }
     
     /* add component */

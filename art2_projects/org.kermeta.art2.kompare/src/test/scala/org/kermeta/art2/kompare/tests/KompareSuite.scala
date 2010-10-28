@@ -5,6 +5,7 @@
 
 package org.kermeta.art2.kompare.tests
 
+import org.kermeta.art2.Art2Factory
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.kermeta.art2adaptation.AdaptationModel
@@ -16,12 +17,16 @@ trait KompareSuite extends JUnitSuite {
 
   /* UTILITY METHOD */
   def model(url:String):ContainerRoot={
+    if(this.getClass.getClassLoader.getResource(url) == null){
+      println("Warning File not found for test !!!")
+    }
     Art2XmiHelper.load(this.getClass.getClassLoader.getResource(url).getPath)
   }
 
   implicit def utilityKompareModel(self : org.kermeta.art2adaptation.AdaptationModel) = RichAdaptationModel(self)
 
-
+  def emptyModel = Art2Factory.eINSTANCE.createContainerRoot
+  
 }
 
 case class RichAdaptationModel(self : AdaptationModel) {
@@ -42,13 +47,20 @@ case class RichAdaptationModel(self : AdaptationModel) {
     )
   }
 
+  def shouldContainSize[A](c:Class[A],nb:Int)={
+    assert(
+      self.getAdaptations.filter(adaptation=> adaptation.getClass.getSimpleName.contains(c.getSimpleName)).size == nb
+    )
+  }
+
+
   def shouldNotContain(c : Class[_])={
     assert(
       self.getAdaptations.forall(adaptation=> !adaptation.getClass.getSimpleName.contains(c.getSimpleName) )
     )
   }
 
-  def print() ={
+  def print ={
     self.getAdaptations.toArray.foreach{adapt=>System.out.println(adapt.getClass.getName)}
   }
 
