@@ -22,36 +22,6 @@ aspect class ClassDefinition
 	 */
 	method binaryMerger_MoveToMergedModel() : Void from GenericTypeDefinition  is do
 		
-		var mergedModelClassDefinition : ClassDefinition init self.similarElementInMergedModel.asType(ClassDefinition)
-		if (not mergedModelClassDefinition.isVoid) then
-			// Merging content of similar Package
-			stdio.writeln("   Merging content of similar ClassDefinition "+ mergedModelClassDefinition.name)	
-			self.ownedOperation.each{aspectOwnedOperation |
-				var equivalentOwnedOperation : Operation
-				equivalentOwnedOperation := mergedModelClassDefinition.ownedOperation.detect{ mergedOwnedOperation | aspectOwnedOperation.name ==  mergedOwnedOperation.name}
-				if (not equivalentOwnedOperation.isVoid) then
-					// mark them as similar
-					aspectOwnedOperation.similarElementInMergedModel := equivalentOwnedOperation
-					
-				else
-					// move nested package in merged model
-					mergedModelClassDefinition.ownedOperation.add(aspectOwnedOperation)
-				end
-			}
-			self.ownedAttribute.each{aspectOwnedAttribute |
-				var equivalentOwnedAttribute : Property
-				equivalentOwnedAttribute := mergedModelClassDefinition.ownedAttribute.detect{ mergedOwnedAttribute | aspectOwnedAttribute.name ==  mergedOwnedAttribute.name}
-				if (not equivalentOwnedAttribute.isVoid) then
-					// mark them as similar
-					aspectOwnedAttribute.similarElementInMergedModel := equivalentOwnedAttribute
-				else
-					// move nested package in merged model
-					mergedModelClassDefinition.ownedAttribute.add(aspectOwnedAttribute)
-				end
-			}	
-		else
-			stdio.writeln("   No similar ClassDefinition "+ mergedModelClassDefinition.name + ", all the ClassDefinition and its content should have been moved in merged model")
-		end
 		super()		
 	end
 }
@@ -149,7 +119,7 @@ aspect class TypeContainer
 			stdio.writeln("   Merging content of similar TypeContainer ")	
 			self.containedType.each{aspectOwnedType |
 				var equivalentOwnedTypeDefinition : Type
-				equivalentOwnedTypeDefinition := mergedModelTypeContainer.containedType.detect{ mergedOwnedType | aspectOwnedType.oid ==  mergedOwnedType.oid}
+				equivalentOwnedTypeDefinition := mergedModelTypeContainer.containedType.detect{ mergedOwnedType | aspectOwnedType.name ==  mergedOwnedType.name}
 				if (not equivalentOwnedTypeDefinition.isVoid) then
 					// mark them as similar
 					aspectOwnedType.similarElementInMergedModel := equivalentOwnedTypeDefinition
