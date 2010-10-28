@@ -18,6 +18,13 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/generated-sources/art2</directory>
+            </resource>
+        </resources>
+
+
         <plugins>
             <!-- APT ART2 PLUGIN : ART2 JAVA ANNOTATION INTEGRATION -->
             <plugin>
@@ -26,7 +33,7 @@
                 <version>1.0-alpha-3</version>
                 <configuration>
                     <outputFiles>
-                        <outputFile>art2Lib.xmi</outputFile>
+                        <outputFile>${project.build.directory}/generated-sources/art2/ART2-INF/art2Lib.art2</outputFile>
                     </outputFiles>
                     <options>
                         <value>art2.lib.id=${project.artifactId}</value>
