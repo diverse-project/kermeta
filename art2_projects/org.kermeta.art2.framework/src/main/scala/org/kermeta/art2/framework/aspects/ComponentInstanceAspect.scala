@@ -36,37 +36,37 @@ case class ComponentInstanceAspect(cself : ComponentInstance) {
 
     if(result) return result
 
-/*
-    //ckeck all bindings from runtime where neededPorts used
-    var neededBindingRuntime : List[Binding] = List()
-    cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getBindings.foreach{b=>
-      b.getPorts.foreach{p=>
-        cself.getRequired.foreach{np=>
-          if(np.isModelEquals(p)) { neededBindingRuntime.add(b) }
-        }
-      }
-    }
-    //check all bindings from update node where neededPorts used
-    var neededBindingUpdate : List[Binding] = List()
-    cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getBindings.foreach{b=>
-      b.getPorts.foreach{p=>
-        cself.getRequired.foreach{np=>
-          if(np.isModelEquals(p)) { neededBindingUpdate.add(b) }
-        }
-      }
-    }
+    /*
+     //ckeck all bindings from runtime where neededPorts used
+     var neededBindingRuntime : List[Binding] = List()
+     cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getBindings.foreach{b=>
+     b.getPorts.foreach{p=>
+     cself.getRequired.foreach{np=>
+     if(np.isModelEquals(p)) { neededBindingRuntime.add(b) }
+     }
+     }
+     }
+     //check all bindings from update node where neededPorts used
+     var neededBindingUpdate : List[Binding] = List()
+     cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getBindings.foreach{b=>
+     b.getPorts.foreach{p=>
+     cself.getRequired.foreach{np=>
+     if(np.isModelEquals(p)) { neededBindingUpdate.add(b) }
+     }
+     }
+     }
 
-    if (neededBindingRuntime.size == neededBindingUpdate.size )
-    {
-      //every runtime needed binding is contain in update needed binding
-      neededBindingRuntime.foreach{b=>
-        if (!neededBindingUpdate.exists{ b2 => b.isModelEquals(b2) })
-        { result = true }
-      }
-    } else {
-      result =true
-    }
-*/
+     if (neededBindingRuntime.size == neededBindingUpdate.size )
+     {
+     //every runtime needed binding is contain in update needed binding
+     neededBindingRuntime.foreach{b=>
+     if (!neededBindingUpdate.exists{ b2 => b.isModelEquals(b2) })
+     { result = true }
+     }
+     } else {
+     result =true
+     }
+     */
     
 
     result
@@ -114,6 +114,17 @@ case class ComponentInstanceAspect(cself : ComponentInstance) {
    end
 
    */
+
+
+  def getRelatedBindings : List[MBinding] = {
+    var res = new java.util.ArrayList[MBinding]();
+    cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getMBindings.foreach{b=>
+      cself.getProvided.find({p=> b.getPort == p}).map(e=>res.add(b) )
+      cself.getRequired.find({p=> b.getPort == p}).map(e=>res.add(b) )
+    }
+    res.toList
+  }
+
 
 
 }

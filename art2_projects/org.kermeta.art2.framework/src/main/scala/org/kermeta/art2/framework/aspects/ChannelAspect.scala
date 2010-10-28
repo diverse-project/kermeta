@@ -26,4 +26,14 @@ case class ChannelAspect(cself : Channel) {
     result
   }
 
+  def getRelatedBindings : List[MBinding] = {
+    var res = new java.util.ArrayList[MBinding]();
+    cself.eContainer.eContainer.asInstanceOf[ContainerRoot].getMBindings.foreach{b=>
+      if(b.getHub == cself){
+        res.add(b)
+      }
+    }
+    res.toList
+  }
+
 }
