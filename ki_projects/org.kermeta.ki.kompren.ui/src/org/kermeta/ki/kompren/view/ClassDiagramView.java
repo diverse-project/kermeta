@@ -161,6 +161,9 @@ public class ClassDiagramView extends DiagramView {
 	
 	public IEntityView addEntity(final String name, final int position, final boolean isAspect) {
 		IEntityView view = null;
+		double xMax = -Double.MAX_VALUE;
+		double x;
+		IEntityView maxEntity = null;
 		
 		if(isAspect) {
 			int i = 0;
@@ -180,6 +183,22 @@ public class ClassDiagramView extends DiagramView {
 		}
 		
 		view = new ClassView(name);
+
+		// entities must not located at the same position. Otherwise it may have problem
+		// during the anchoring of relations.
+		// So we search to maximal X-coordinate.
+		for(final IEntityView entityView : entities) {
+			x = entityView.getCentre().getX();
+			
+			if(x>xMax) {
+				xMax 		= x;
+				maxEntity 	= entityView;
+			}
+		}
+		
+		// The max coordinate plus a value is set to the view to be located
+		// at a unique position.
+		view.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), view.getCentre().getY());
 		addEntity(position, view);
 		
 		return view;

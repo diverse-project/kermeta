@@ -120,7 +120,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	@Override
 	public void focusOnEntity(final IEntityView view) {
-		final Point2D.Double centre = view.getCentre();
+		final Point2D centre = view.getCentre();
 		final JScrollBar vertSB  = scrollPane.getVerticalScrollBar();
 		final JScrollBar horizSB = scrollPane.getHorizontalScrollBar();
 
@@ -128,7 +128,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 			final BoundedRangeModel model = vertSB.getModel();
 			final int value	= model.getValue();
 			final int cy 	= scrollPane.getHeight()/2 + value;
-			int newValue 	= value+((int)(centre.y*zoom))-cy;
+			int newValue 	= value+((int)(centre.getY()*zoom))-cy;
 			
 			if(newValue>model.getMaximum())
 				newValue = model.getMaximum();
@@ -142,7 +142,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 			final BoundedRangeModel model = horizSB.getModel();
 			final int value	= model.getValue();
 			final int cx 	= scrollPane.getWidth()/2 + value;
-			int newValue 	= value+((int)(centre.x*zoom))-cx;
+			int newValue 	= value+((int)(centre.getX()*zoom))-cx;
 			
 			if(newValue>model.getMaximum())
 				newValue = model.getMaximum();

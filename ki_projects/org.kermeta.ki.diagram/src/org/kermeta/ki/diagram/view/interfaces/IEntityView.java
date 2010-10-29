@@ -10,8 +10,19 @@ public interface IEntityView extends IComponentView, ISelectable {
 	/** The colour to use when an entity is grayed. */
 	public static Color GRAYED_COLOR = new Color(210, 210, 210, 180);
 	
-	
+	/**
+	 * Anchors the given relation to the calling entity. A free is searched on the entity. 
+	 * If no anchor is free, one is created. One of the two relation extremities is linked to the found
+	 * anchor which will be no more free.<br>
+	 * If the centre of the two entities are at the same position, the relation will not be anchor and an exception
+	 * will be thrown. 
+	 * @param relation The relation to anchor.
+	 * @param opposite The opposite entity to link to the relation.
+	 * @param atEnd True: the entity will be anchored to the source point of the relation. Otherwise to its target point.
+	 * @exception IllegalArgumentException If the centre of the two entities are at the same position.
+	 */
 	void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd);
+	
 	
 	IAnchor getClosestFreeAnchor(final Point2D point, final boolean create);
 	
@@ -37,7 +48,7 @@ public interface IEntityView extends IComponentView, ISelectable {
 	/**
 	 * @return The centre of the entity.
 	 */
-	Point2D.Double getCentre();
+	Point2D getCentre();
 
 	/**
 	 * @return The colour of the filling of the entity.
@@ -52,14 +63,14 @@ public interface IEntityView extends IComponentView, ISelectable {
 
 	
 	/**
-	 * @return The name of the entity.
+	 * @return The name of the entity. Cannot be null.
 	 */
 	String getName();
 	
 	
 	/**
 	 * Sets the name of the entity.
-	 * @param name The new name of the entity. Cannot be null.
+	 * @param name The new name of the entity. If null no modification is performed.
 	 */
 	void setName(final String name);
 	

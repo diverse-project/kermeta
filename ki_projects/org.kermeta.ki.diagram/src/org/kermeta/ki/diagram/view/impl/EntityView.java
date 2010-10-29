@@ -189,12 +189,13 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		else
 			anchor = getClosestFreeAnchor(new Line(centre, opposite.getCentre()).intersectionPoint(path, opposite.getCentre()), true);
 		
-		if(anchor!=null) {
-			Point2D pt = atEnd ? relation.getLastSegment().getPointTarget() : relation.getFirstSegment().getPointSource();
-			pt.setLocation(anchor.getPosition());
-			anchor.setPosition(pt);
-			anchor.setFree(false);
-		}
+		if(anchor==null)
+			throw new IllegalArgumentException();
+		
+		Point2D pt = atEnd ? relation.getLastSegment().getPointTarget() : relation.getFirstSegment().getPointSource();
+		pt.setLocation(anchor.getPosition());
+		anchor.setPosition(pt);
+		anchor.setFree(false);
 	}
 	
 	
@@ -230,7 +231,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	
 	
 	@Override
-	public Point2D.Double getCentre() {
+	public Point2D getCentre() {
 		return centre;
 	}
 
