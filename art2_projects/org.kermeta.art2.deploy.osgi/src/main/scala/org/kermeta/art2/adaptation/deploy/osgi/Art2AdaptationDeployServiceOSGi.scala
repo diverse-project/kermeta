@@ -19,6 +19,8 @@ import org.kermeta.art2adaptation.RemoveFragmentBinding
 import org.kermeta.art2adaptation.RemoveInstance
 import org.kermeta.art2adaptation.RemoveType
 import org.kermeta.art2adaptation.RemoveThirdParty
+import org.kermeta.art2adaptation.UpdateBinding
+import org.kermeta.art2adaptation.UpdateDeployUnit
 import org.kermeta.art2adaptation.UpdateDictionaryInstance
 import org.kermeta.art2adaptation.UpdateInstance
 import org.kermeta.art2adaptation.UpdateType
@@ -71,10 +73,16 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         //ThirdParty CRUD
         case tpa : AddDeployUnit =>command_add_deployUnit = command_add_deployUnit ++ List(AddDeployUnitCommand(tpa.getRef,ctx))
         case tpa : RemoveDeployUnit =>command_remove_deployUnit = command_remove_deployUnit ++ List(RemoveDeployUnitCommand(tpa.getRef,ctx))
+          //UPDATE US MAPPED ON REMOVE INSTALL
+        case tpa : UpdateDeployUnit =>{
+            command_remove_deployUnit = command_remove_deployUnit ++ List(RemoveDeployUnitCommand(tpa.getRef,ctx))
+            command_add_deployUnit = command_add_deployUnit ++ List(AddDeployUnitCommand(tpa.getRef,ctx))
+          }
 
           //ThirdParty CRUD
         case tpa : AddThirdParty =>executedCommandTP = executedCommandTP ++ List(AddThirdPartyCommand(tpa.getRef,ctx))
         case tpa : RemoveThirdParty =>executedCommandTP = executedCommandTP ++ List(RemoveThirdPartyCommand(tpa.getRef,ctx))
+
           //Type CRUD
         case cta : AddType =>command_add_type = command_add_type ++ List(AddTypeCommand(cta.getRef,ctx))
         case cta : RemoveType =>command_remove_type = command_remove_type ++ List(RemoveTypeCommand(cta.getRef,ctx))
@@ -114,6 +122,12 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
           //Binding CRUD
         case ca : AddBinding =>command_add_binding = command_add_binding ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
         case ca : RemoveBinding =>command_remove_binding = command_remove_binding ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
+        case ca : UpdateBinding => {
+            //UPDATE MAP ON REMOVE & INSTALL
+            command_add_binding = command_add_binding ++ List(AddBindingCommand(ca.getRef,ctx,nodeName))
+            command_remove_binding = command_remove_binding ++ List(RemoveBindingCommand(ca.getRef,ctx,nodeName))
+        }
+
           //Channel binding
         case ca : AddFragmentBinding =>command_add_binding = command_add_binding ++ List(AddFragmentBindingCommand(ca.getRef,ca.getTargetNodeName,ctx,nodeName))
         case ca : RemoveFragmentBinding =>command_remove_binding = command_remove_binding ++ List(RemoveFragmentBindingCommand(ca.getRef,ca.getTargetNodeName,ctx,nodeName))

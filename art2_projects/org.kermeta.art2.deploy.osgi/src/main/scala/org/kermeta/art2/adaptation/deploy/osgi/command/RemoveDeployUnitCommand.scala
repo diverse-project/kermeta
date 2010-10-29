@@ -19,11 +19,11 @@ case class RemoveDeployUnitCommand(deployUnit : DeployUnit, ctx : Art2DeployMana
     ctx.bundleMapping.find({bundleMapping =>bundleMapping.name==CommandHelper.buildKEY(deployUnit) && bundleMapping.objClassName==deployUnit.getClass.getName}) match {
       case Some(bundleMappingFound)=> {
           var osgibundleContext = bundleMappingFound.bundle.getBundleContext
-          osgibundleContext.getBundle.uninstall
+          var bundle = osgibundleContext.getBundle
+          bundle.uninstall
           logger.info("Deploy Unit Bundle remove , try to refresh package")
-          var srPackageAdmin = osgibundleContext.getServiceReference(classOf[PackageAdmin].getName)
-          var padmin : PackageAdmin = osgibundleContext.getService(srPackageAdmin).asInstanceOf[PackageAdmin]
-          padmin.resolveBundles(Array(osgibundleContext.getBundle))
+
+          ctx.getServicePackageAdmin.refreshPackages(Array(bundle))
 
           //REMOVE BUNDLE MAPPING
           ctx.bundleMapping.remove(bundleMappingFound)

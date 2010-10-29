@@ -20,10 +20,8 @@ case class RemoveInstanceCommand(c : Instance, ctx : Art2DeployManager,nodeName 
     bundles.forall{mp=>
       mp.bundle.stop;
       mp.bundle.uninstall;
-
-      var srPackageAdmin = ctx.bundleContext.getServiceReference(classOf[PackageAdmin].getName)
-      var padmin : PackageAdmin = ctx.bundleContext.getService(srPackageAdmin).asInstanceOf[PackageAdmin]
-      padmin.resolveBundles(Array(mp.bundle))
+//REFRESH OSGI PACKAGE
+      ctx.getServicePackageAdmin.refreshPackages(Array(mp.bundle))
 
       true
     }

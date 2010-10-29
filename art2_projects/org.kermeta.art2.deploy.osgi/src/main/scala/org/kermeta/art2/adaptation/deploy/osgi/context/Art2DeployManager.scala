@@ -8,7 +8,8 @@ package org.kermeta.art2.adaptation.deploy.osgi.context
 import org.kermeta.art2.api.service.adaptation.deploy.Art2AdaptationDeployService
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;import org.osgi.util.tracker.ServiceTracker
+import org.osgi.framework.BundleContext;import org.osgi.service.packageadmin.PackageAdmin
+import org.osgi.util.tracker.ServiceTracker
 
 
 class Art2DeployManager {
@@ -18,8 +19,8 @@ class Art2DeployManager {
   var bundleContext : BundleContext = null;
   def setBundleContext(bc : BundleContext) = bundleContext = bc
   //var bundleContainer : BlueprintContainer = null;
- // def setBundleContainer(bc : BlueprintContainer) = bundleContainer = bc
- // var modelHandler : Art2ModelHandlerService = null;
+  // def setBundleContainer(bc : BlueprintContainer) = bundleContainer = bc
+  // var modelHandler : Art2ModelHandlerService = null;
 //  def setModelHandler(mh : Art2ModelHandlerService) = modelHandler = mh
 
   var bundleMapping : java.util.List[Art2OSGiBundle] = new java.util.ArrayList[Art2OSGiBundle]();
@@ -28,6 +29,10 @@ class Art2DeployManager {
   private var modelHandlerServiceTracker : ServiceTracker = null
   def getServiceHandler : Art2ModelHandlerService = modelHandlerServiceTracker.getService.asInstanceOf[Art2ModelHandlerService]
 
+
+  def setPackageAdminServiceTracker(st : ServiceTracker) = packageAdminServiceTracker = st
+  private var packageAdminServiceTracker : ServiceTracker = null
+  def getServicePackageAdmin : PackageAdmin = packageAdminServiceTracker.getService.asInstanceOf[PackageAdmin]
   
 
 }
