@@ -17,6 +17,9 @@ require kermeta
 
 using kermeta::standard
 
+// TODO : this should be replaced by the notion of Mergeable
+// By default Object cannot be Mergeable
+// As Mergeable, should also add an operation getSignature
 aspect class Object
 {
 	

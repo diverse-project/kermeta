@@ -54,6 +54,27 @@ aspect class ClassDefinition
 		else
 			stdio.writeln("   No similar ClassDefinition "+ mergedModelClassDefinition.name + ", all the ClassDefinition and its content should have been moved in merged model")
 		end
+		
+		// Due to multiple inheritance need to duplicate that part
+		var mergedModelTypeContainer : TypeContainer init self.similarElementInMergedModel.asType(TypeContainer)
+		if (not mergedModelTypeContainer.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar ClassDefinition/TypeContainer ")	
+			self.containedType.each{aspectOwnedType |
+				var equivalentOwnedTypeDefinition : Type
+				equivalentOwnedTypeDefinition := mergedModelTypeContainer.containedType.detect{ mergedOwnedType | strategy.localMatch(aspectOwnedType, mergedOwnedType)}
+				if (not equivalentOwnedTypeDefinition.isVoid) then
+					// mark them as similar
+					aspectOwnedType.similarElementInMergedModel := equivalentOwnedTypeDefinition
+				else
+					// move nested element in merged model
+					mergedModelTypeContainer.containedType.add(aspectOwnedType)
+				end
+			}	
+		else
+			stdio.writeln("   No similar ClassDefinition/TypeContainer, all the ClassDefinition/TypeContainer and its content should have been moved in merged model")
+		end
+		
 		super(strategy)		
 	end
 }
@@ -64,7 +85,7 @@ aspect class GenericTypeDefinition
 	 * Runs function func on each owned elements of this element and on self	 
 	 */
 	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void is do
-				stdio.writeln("   GenericTypeDefinition.mergePass1() ")
+				stdio.writeln("   TODO GenericTypeDefinition.mergePass1() ")
 	end
 }
 aspect class ModelingUnit
