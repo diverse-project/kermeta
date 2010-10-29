@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package org::kermeta::language::merger;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/binarymerger/Strategy.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+
+class BinaryMergerKmStrategy inherits org::kermeta::binarymerger::Strategy
+{
+	method localMatch(primaryElement : Object, aspectElement : Object) : Boolean is do
+		if(primaryElement.isInstanceOf(NamedElement)) then
+			result := primaryElement.asType(NamedElement).name == aspectElement.asType(NamedElement).name
+		else		
+			result := primaryElement == aspectElement
+		end
+	end
+}

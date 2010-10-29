@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::binarymerger;
+
+
+require kermeta
+using kermeta::standard
+abstract class Strategy
+{
+	/**
+	 * The binary merger relies on the similary of elements
+	 * This operation will be called only if the respective containers of each parameter already match (no need to check container match in the match operation
+	 * This operation will be called only on model element, not on primitive types
+	 * Parameters will have at least one common parent. (The type used in the associations in the Metamodel)
+	 *   DVK: is it possible to pass the Type directly in order to simplify the switch ? or do we simply rely on an aspect on the metamodel ?
+	 */
+	operation localMatch(primaryElement : Object, aspectElement : Object) : Boolean is abstract
+	
+	/**
+	 * Called on matching element
+	 * By default, the binary merge will keep the primaryElement. 
+	 * If for some reason, some reason a special treatment is necessary to modify the primary element from data in the aspectElement, it can be specified here.
+	 * Ex: some primitive value need to be selected or merged
+	 */
+	operation moveToMergeModelElementFix(primaryElement : Object, aspectElement : Object) : Void is do 
+	end
+}

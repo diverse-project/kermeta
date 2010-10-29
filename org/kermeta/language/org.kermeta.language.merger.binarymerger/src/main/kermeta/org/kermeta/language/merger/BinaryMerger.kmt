@@ -17,6 +17,7 @@ require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kerm
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binarymerger_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binaryMerger_MoveToMergedModel_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binaryMerger_FixReferences_aspect.kmt"
+require "BinaryMergerStrategy.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -30,7 +31,7 @@ class BinaryMerger
 		var topcontainer : kermeta::standard::Object
 		
 		cd.container().container().container().container().eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)}) */
-		test_002
+		test_001
 		stdio.writeln("Done")
 	end
 	
@@ -41,10 +42,11 @@ class BinaryMerger
 		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit
 		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
 		
+		var strategy : BinaryMergerKmStrategy init BinaryMergerKmStrategy.new
 		
 		aspectModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
 			function { c : kermeta::standard::Object|
-				c.binaryMerger_MoveToMergedModel()})
+				c.binaryMerger_MoveToMergedModel(strategy)})
 		mergedModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
 			function { c : kermeta::standard::Object|
 				c.binaryMerger_FixReferences()})
@@ -96,11 +98,11 @@ class BinaryMerger
        	var mergedModelingUnit : ModelingUnit
        	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
-       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/mergedfile.km",
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_002/mergedfile.km",
        		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)
        	mergedModelResource.save
-		stdio.writeln("test_001() Done")
+		stdio.writeln("test_002() Done")
 	end
 }
