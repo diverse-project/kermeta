@@ -107,6 +107,7 @@ class BinaryMerger
        		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
        	mergedModelResource.save
 		stdio.writeln("test_001_b() Done")
 	end
@@ -131,6 +132,7 @@ class BinaryMerger
        		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
        	mergedModelResource.save
 		stdio.writeln("test_001_c() Done")
 	end
@@ -155,6 +157,7 @@ class BinaryMerger
        		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
        	mergedModelResource.save
 		stdio.writeln("test_001_d() Done")
 	end
