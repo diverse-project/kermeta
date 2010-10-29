@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::binarymerger;
+
+
+require kermeta
+using kermeta::standard
+class UnarySelectionner
+{
+	/**
+	 * Select or create a new object from the primary element and the aspect
+	 * By default, select the primaryElement 
+	 **/
+	operation select(primaryElement : Object, aspectElement : Object) : Object is do
+		result :=  primaryElement
+	end
+		
+}
