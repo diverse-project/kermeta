@@ -19,7 +19,7 @@ using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::interaction
 
 
-aspect class Object {
+aspect class NamedElement {
 	operation isVisible() : Boolean is do
 		result ?= extern org::kermeta::ki::kompren::view::EntityViewExtern.isVisible(self)
 	end
@@ -29,13 +29,10 @@ aspect class Object {
 		var obj : Object init container()
 		
 		result := if(obj.isInstanceOf(ModelingUnit)) then obj.asType(ModelingUnit)
-					else if(obj.isInstanceOf(Object)) then obj.asType(Object).getModelingUnit()
+					else if(obj.isInstanceOf(NamedElement)) then obj.asType(NamedElement).getModelingUnit()
 					else void end end
 	end
-}
-
-
-aspect class NamedElement {
+	
 	operation getPackageName() : String is do
 		var pkg : Package
 		result := ""

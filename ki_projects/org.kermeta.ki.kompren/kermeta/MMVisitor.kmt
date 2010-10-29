@@ -24,7 +24,7 @@ class MMVisitor inherits KermetaVisitor {
 	
 	
 	method visitClass(arg : language::structure::Class) : Void is do
-		stdio.writeln("clazz[" + arg.toString + "]: " + arg.isVisible.toString + " " + arg.name + ", " + arg.isAbstract.toString)
+		stdio.writeln("clazz[" + arg.toString + "]: " + arg.name + ", " + arg.isAbstract.toString)
 		
 		arg.ownedAttribute.each{attr | attr.accept(self) }
 		arg.ownedOperation.each{op | op.accept(self) }
