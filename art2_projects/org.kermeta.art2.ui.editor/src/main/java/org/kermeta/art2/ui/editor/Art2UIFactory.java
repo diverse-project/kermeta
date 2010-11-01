@@ -6,6 +6,9 @@ package org.kermeta.art2.ui.editor;
 import org.kermeta.art2.ComponentInstance;
 import org.kermeta.art2.ComponentType;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
 import org.kermeta.art2.framework.aspects.PortAspect;
@@ -47,6 +50,8 @@ public class Art2UIFactory {
         return mapping;
     }
 
+    public List<String> registeredLib = new ArrayList<String>();
+    
     public ModelPanel createModelPanelUI(ContainerRoot ct) {
         ModelPanel mui = new ModelPanel();
         ((Component) mui).setDropTarget(new ModelDragTargetListener(mui, kernel));
@@ -179,5 +184,20 @@ public class Art2UIFactory {
         bui.setTo(toPortPanel);
         mapping.bind(bui, mb);
         return bui;
+    }
+    
+    public void registerLib(String url){
+        System.out.println("register lib => "+url);
+    	registeredLib.add(url);
+    }
+    
+    public List<String> getRegisteredLib(){
+        //System.out.println("get Libs !!!");
+    	return registeredLib;
+    }
+    
+    public void flushRegisteredLib(){
+    	System.out.println("clear registered Libs !!");
+    	registeredLib.clear();
     }
 }

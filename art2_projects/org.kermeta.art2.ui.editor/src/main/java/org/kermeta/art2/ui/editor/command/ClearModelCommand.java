@@ -42,6 +42,7 @@ public class ClearModelCommand implements Command {
         ContainerRoot previousModel = Art2Factory.eINSTANCE.createContainerRoot();
         kernel.getModelHandler().setActualModel(previousModel);
         kernel.getModelPanel().clear();
+        kernel.getUifactory().flushRegisteredLib();
         kernel.getEditorPanel().getPalette().clear();
         kernel.getEditorPanel().unshowPropertyEditor();
         kernel.getEditorPanel().revalidate();
