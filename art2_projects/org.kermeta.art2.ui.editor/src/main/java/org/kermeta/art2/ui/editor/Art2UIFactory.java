@@ -49,8 +49,6 @@ public class Art2UIFactory {
     public MappingRepository getMapping() {
         return mapping;
     }
-
-    public List<String> registeredLib = new ArrayList<String>();
     
     public ModelPanel createModelPanelUI(ContainerRoot ct) {
         ModelPanel mui = new ModelPanel();
@@ -184,20 +182,5 @@ public class Art2UIFactory {
         bui.setTo(toPortPanel);
         mapping.bind(bui, mb);
         return bui;
-    }
-    
-    public void registerLib(String url){
-        System.out.println("register lib => "+url);
-    	registeredLib.add(url);
-    }
-    
-    public List<String> getRegisteredLib(){
-        //System.out.println("get Libs !!!");
-    	return registeredLib;
-    }
-    
-    public void flushRegisteredLib(){
-    	System.out.println("clear registered Libs !!");
-    	registeredLib.clear();
     }
 }

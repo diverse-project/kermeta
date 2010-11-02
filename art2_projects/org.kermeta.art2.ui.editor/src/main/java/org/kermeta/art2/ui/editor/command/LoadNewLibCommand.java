@@ -45,8 +45,6 @@ public class LoadNewLibCommand implements Command {
             try {
 
                 jar = new JarFile(filechooser.getSelectedFile().getAbsoluteFile()); //new JarFile(filechooser.getSelectedFile().getAbsoluteFile().toURI().toString());
-                kernel.getUifactory().registerLib(filechooser.getSelectedFile().getAbsolutePath());
-                System.out.println("lib should have been registered "+filechooser.getSelectedFile().getAbsolutePath());
                 JarEntry entry = jar.getJarEntry("ART2-INF/art2Lib.art2");
                 if (entry != null) {
                     String path = convertStreamToFile(jar.getInputStream(entry));

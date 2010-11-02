@@ -11,7 +11,6 @@ import org.kermeta.art2.ui.editor.command.AddNodeCommand;
 import org.kermeta.art2.ui.editor.command.ClearModelCommand;
 import org.kermeta.art2.ui.editor.command.LoadModelCommandUI;
 import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
-import org.kermeta.art2.ui.editor.command.RefreshLibCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
 import org.kermeta.art2.ui.editor.command.SynchPlatformCommand;
 import org.kermeta.art2.ui.editor.widget.JCommandButton;
@@ -57,11 +56,6 @@ public class CommandPanel extends JPanel {
         LoadNewLibCommand btLoadLibCommand = new LoadNewLibCommand();
         btLoadLibCommand.setKernel(kernel);
         btLoadLib.setCommand(btLoadLibCommand);
-
-        JCommandButton btRefreshLib = new JCommandButton("RefreshLib");
-        RefreshLibCommand btRefreshLibCommand = new RefreshLibCommand();
-        btRefreshLibCommand.setKernel(kernel);
-        btRefreshLib.setCommand(btRefreshLibCommand);
         
         /*
         JCommandButton btSynch = new JCommandButton("Synch");
@@ -76,7 +70,6 @@ public class CommandPanel extends JPanel {
         add(btLoadModel);
         add(btLoadLib);
         add(btClearModel);
-        add(btRefreshLib);
         //add(btSynch);
 
 
