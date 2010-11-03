@@ -1,0 +1,70 @@
+system TIS;
+
+node ThalesCaseStudy
+	uri = "http://www.thales.fr/vincent"
+{
+	primitive instance ContextManager : eu.diva.tis.context.manager #ON 
+		implementation OSGiComponent : "eu.diva.tis.context.manager.ContextManager"
+	{
+	}
+	
+	primitive instance VariabilityUI : eu.diva.tis.ui.variability #ON 
+		implementation OSGiComponent : "eu.diva.tis.ui.variability.VariabilityUI"
+	{
+		bind manager to ContextManager::manager (id = "ContextManager")
+	}
+}
+
+node MySecondNode
+	uri = "http://www.ulank.co.uk/ruzanna"
+{
+	primitive instance ThinkingTool : eu.diva.tis.thinkingtool #ON 
+		implementation OSGiComponent : "eu.diva.tis.thinkingtool.ThinkingTool"
+	{
+		bind contextManager to ContextManager::contextManager (id = "ContextManager")
+	}
+
+}
+
+functional service org.ow2.wildcat.Context {
+}
+functional service eu.diva.tis.api.context.ContextManager {
+}
+functional service eu.diva.tis.wildcat.osgi.IQueryAdder {
+}
+functional service eu.diva.tis.wildcat.osgi.IAttributeAttacher {
+}
+functional service org.slf4j.Logger {
+}
+functional service eu.diva.tis.api.thinkingtool.IThinkingTool {
+}
+functional service eu.diva.tis.api.messaging.OrganizationCallback {
+}
+functional service eu.diva.tis.api.thinkingtool.IPlanner {
+}
+type TIS 
+{
+}
+type eu.diva.tis.context.manager 
+{
+	provided port contextManager : org.ow2.wildcat.Context [1..1]
+		protocol = "SOAP"
+		uri = "/contextManager?"
+	provided port manager : eu.diva.tis.api.context.ContextManager [1..1]
+	required port queries : eu.diva.tis.wildcat.osgi.IQueryAdder [0..*]
+	required port attributes : eu.diva.tis.wildcat.osgi.IAttributeAttacher [0..*]
+	required port logger : org.slf4j.Logger [1..1]
+}
+type eu.diva.tis.thinkingtool 
+{
+	provided port thinkingtool : eu.diva.tis.api.thinkingtool.IThinkingTool [1..1]
+	provided port orgCallback : eu.diva.tis.api.messaging.OrganizationCallback [1..1]
+	required port planner : eu.diva.tis.api.thinkingtool.IPlanner [0..*]
+	required port contextManager : org.ow2.wildcat.Context [1..1]
+		protocol = "SOAP"
+		uri = "/contextManager?"
+}
+type eu.diva.tis.ui.variability 
+{
+	required port manager : eu.diva.tis.api.context.ContextManager [1..1]
+}

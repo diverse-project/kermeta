@@ -21,7 +21,7 @@ TOKENS{
 		
 		DEFINE T_IMPLEM $'bundle'|'memory'$;
 		
-		DEFINE T_OPTIONAL $'optional'$;
+		//DEFINE T_OPTIONAL $'optional'$;
 		
 		//DEFINE QUALIFIED_NAME $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')*('.'('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')+)*$;
 
@@ -96,17 +96,11 @@ TOKENSTYLES {
 	
 	"datatype" COLOR #0055bb, BOLD;
 	
-
-	
-	
-	
-	
-	
 }
 
 RULES {
 		
-		System::= "system" #1 name[] ";" !0 "root" #1 ( !0 ( nodes | services | types | dataTypes | groups) )* ;
+		System::= "system" #1 name[] ";" !0 ( !0 ( nodes | services | types | dataTypes | groups) )* ;
 		
 		DataType::= "datatype" #1 name[] ";"  ;
 		
