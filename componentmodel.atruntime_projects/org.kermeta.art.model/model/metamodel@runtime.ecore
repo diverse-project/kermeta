@@ -137,10 +137,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocol" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement #//type/AbstractPort">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
-          defaultValueLiteral="false"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement #//type/AbstractPort"/>
     <eClassifiers xsi:type="ecore:EClass" name="PortCollection" eSuperTypes="#//type/AbstractPort">
       <eStructuralFeatures xsi:type="ecore:EReference" name="ids" lowerBound="1" upperBound="-1"
           eType="#//type/PortId" containment="true"/>

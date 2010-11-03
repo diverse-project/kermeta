@@ -586,22 +586,13 @@ public interface TypePackage extends EPackage {
 	int PORT__URI = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Port</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 5;
+	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
@@ -1112,17 +1103,6 @@ public interface TypePackage extends EPackage {
 	EClass getPort();
 
 	/**
-	 * Returns the meta object for the attribute '{@link art.type.Port#getIsOptional <em>Is Optional</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Optional</em>'.
-	 * @see art.type.Port#getIsOptional()
-	 * @see #getPort()
-	 * @generated
-	 */
-	EAttribute getPort_IsOptional();
-
-	/**
 	 * Returns the meta object for class '{@link art.type.PortCollection <em>Port Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1467,14 +1447,6 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PORT = eINSTANCE.getPort();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Optional</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PORT__IS_OPTIONAL = eINSTANCE.getPort_IsOptional();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.

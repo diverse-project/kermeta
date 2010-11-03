@@ -106,9 +106,11 @@ TOKENSTYLES {
 
 RULES {
 		
-		System::= "system" #1 name[] ";" !0 "root" #1 root ( !0 (services | types | dataTypes | groups) )* ;
+		System::= "system" #1 name[] ";" !0 "root" #1 ( !0 ( nodes | services | types | dataTypes | groups) )* ;
 		
 		DataType::= "datatype" #1 name[] ";"  ;
+		
+		Distrib.Node ::= "node" #1 name[] ("uri" #1 "=" #1 uri[STRING_LITERAL])? "{" !1 components*  !0 "}" ;
 		
 		Instance.PrimitiveInstance::= "primitive" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
 		
@@ -140,7 +142,7 @@ RULES {
 		
 		Type.ControlService::= "control" #1 "service" #1 name[] #1 "{" ( operation )* !0 "}"  ;
 		
-		Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]" ;
+		Type.Port::= !1 role[T_PORT_KIND] #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]" (#1 "protocol" #1 "=" #1 protocol[STRING_LITERAL])? (#1 "uri" #1 "=" #1 uri[STRING_LITERAL])?;
 		
 		Implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 		

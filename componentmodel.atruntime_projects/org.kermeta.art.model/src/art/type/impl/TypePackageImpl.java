@@ -452,15 +452,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPort_IsOptional() {
-		return (EAttribute)portEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPortCollection() {
 		return portCollectionEClass;
 	}
@@ -631,7 +622,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		createEAttribute(abstractPortEClass, ABSTRACT_PORT__URI);
 
 		portEClass = createEClass(PORT);
-		createEAttribute(portEClass, PORT__IS_OPTIONAL);
 
 		portCollectionEClass = createEClass(PORT_COLLECTION);
 		createEReference(portCollectionEClass, PORT_COLLECTION__IDS);
@@ -737,7 +727,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEAttribute(getAbstractPort_Uri(), theArtPackage.getString(), "uri", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPort_IsOptional(), theArtPackage.getBoolean(), "isOptional", "false", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portCollectionEClass, PortCollection.class, "PortCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPortCollection_Ids(), this.getPortId(), null, "ids", null, 1, -1, PortCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

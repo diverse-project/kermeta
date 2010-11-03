@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link art.type.impl.PortImpl#getRole <em>Role</em>}</li>
  *   <li>{@link art.type.impl.PortImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link art.type.impl.PortImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link art.type.impl.PortImpl#getIsOptional <em>Is Optional</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,26 +106,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @ordered
 	 */
 	protected String uri = URI_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_OPTIONAL_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isOptional = IS_OPTIONAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -253,27 +232,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsOptional() {
-		return isOptional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsOptional(Boolean newIsOptional) {
-		Boolean oldIsOptional = isOptional;
-		isOptional = newIsOptional;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.PORT__IS_OPTIONAL, oldIsOptional, isOptional));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -286,8 +244,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 				return getProtocol();
 			case TypePackage.PORT__URI:
 				return getUri();
-			case TypePackage.PORT__IS_OPTIONAL:
-				return getIsOptional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,9 +267,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 				return;
 			case TypePackage.PORT__URI:
 				setUri((String)newValue);
-				return;
-			case TypePackage.PORT__IS_OPTIONAL:
-				setIsOptional((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -339,9 +292,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 			case TypePackage.PORT__URI:
 				setUri(URI_EDEFAULT);
 				return;
-			case TypePackage.PORT__IS_OPTIONAL:
-				setIsOptional(IS_OPTIONAL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -362,8 +312,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 				return PROTOCOL_EDEFAULT == null ? protocol != null : !PROTOCOL_EDEFAULT.equals(protocol);
 			case TypePackage.PORT__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case TypePackage.PORT__IS_OPTIONAL:
-				return IS_OPTIONAL_EDEFAULT == null ? isOptional != null : !IS_OPTIONAL_EDEFAULT.equals(isOptional);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -422,8 +370,6 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		result.append(protocol);
 		result.append(", uri: ");
 		result.append(uri);
-		result.append(", isOptional: ");
-		result.append(isOptional);
 		result.append(')');
 		return result.toString();
 	}
