@@ -6,43 +6,6 @@
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.ui.editors">
-		<editor class="art.resource.artext.ui.ArtextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="artext" icon="icons/editor_icon.gif" id="art.resource.artext.ui.ArtextEditor" name="EMFText artext Editor">
-		</editor>
-	</extension>
-	
-	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="art.resource.artext.ui.ArtextPreferenceInitializer">
-		</initializer>
-	</extension>
-	
-	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Artext Text Editor" id="art.resource.artext.ui.ArtextPreferencePage" class="art.resource.artext.ui.ArtextPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
-		</page>
-		<page name="Syntax Coloring" id="art.resource.artext.ui.ArtextSyntaxColoringPreferencePage" class="art.resource.artext.ui.ArtextSyntaxColoringPreferencePage" category="art.resource.artext.ui.ArtextPreferencePage">
-		</page>
-		<page name="Brackets" id="art.resource.artext.ui.ArtextBracketPreferencePage" class="art.resource.artext.ui.ArtextBracketPreferencePage" category="art.resource.artext.ui.ArtextPreferencePage">
-		</page>
-		<page name="Occurrence" id="art.resource.artext.ui.ArtextOccurrencePreferencePage" class="art.resource.artext.ui.ArtextOccurrencePreferencePage" category="art.resource.artext.ui.ArtextPreferencePage">
-		</page>
-	</extension>
-	
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="art.resource.artext.ui.ArtextNewFileWizard" id="art.resource.artext.ui.ArtextNewFileWizard" name="EMFText .artext file">
-		</wizard>
-	</extension>
-	
-	<extension id="art.resource.artext.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
-	</extension>
-	
 	<extension id="art.resource.artext.nature" name="artext nature" point="org.eclipse.core.resources.natures">
 		<runtime>
 			<run class="art.resource.artext.mopp.ArtextNature" />
