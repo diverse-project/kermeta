@@ -9,8 +9,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" upperBound="-1"
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
-        eType="#//Metric"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" upperBound="-1"
@@ -47,6 +45,10 @@
         eType="#//DeployUnit" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeNetworks" upperBound="-1"
         eType="#//NodeNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+        eType="#//Metric" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metricTypes" upperBound="-1"
+        eType="#//MetricType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortType" abstract="true" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchrone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -54,8 +56,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Port">
     <eStructuralFeatures xsi:type="ecore:EReference" name="portTypeRef" lowerBound="1"
         eType="#//PortTypeRef"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
-        eType="#//Metric"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childs" upperBound="-1"
@@ -145,15 +145,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="portTypes" upperBound="-1"
         eType="#//PortTypeRef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Metric">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="average" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bestValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortTypeMapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beanMethodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceMethodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -204,5 +195,19 @@
         eType="#//TypeDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary" eType="#//Dictionary"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//MetricValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//MetricType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbValueMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetricType" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetricValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceMetric" eSuperTypes="#//Metric">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//Instance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortMetric" eSuperTypes="#//Metric">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//Port"/>
   </eClassifiers>
 </ecore:EPackage>
