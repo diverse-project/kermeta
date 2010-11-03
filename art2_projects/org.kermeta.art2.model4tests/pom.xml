@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.art2</groupId>
     <artifactId>art2.model4tests</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>pom</packaging>
     <name>ART2 :: Models For tests</name>
 
     <parent>
@@ -18,13 +18,11 @@
             <plugin>
                 <groupId>org.kermeta.art2</groupId>
                 <artifactId>org.kermeta.art2.merger.mavenplugin</artifactId>
-                <version>2.2.1-SNAPSHOT</version>
+                <version>${art2.version}</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
+                        <goals><goal>generate</goal></goals>
                         <configuration>
                             <model>src/main/art2</model>
                         </configuration>
@@ -39,7 +37,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.framework.baseLib</artifactId>
-            <version>2.2.1-SNAPSHOT</version>
+            <version>${art2.version}</version>
         </dependency>
     </dependencies>
     
