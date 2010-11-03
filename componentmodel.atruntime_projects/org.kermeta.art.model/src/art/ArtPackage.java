@@ -61,6 +61,25 @@ public interface ArtPackage extends EPackage {
 	ArtPackage eINSTANCE = art.impl.ArtPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link art.impl.AspectModelElementImpl <em>Aspect Model Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.impl.AspectModelElementImpl
+	 * @see art.impl.ArtPackageImpl#getAspectModelElement()
+	 * @generated
+	 */
+	int ASPECT_MODEL_ELEMENT = 6;
+
+	/**
+	 * The number of structural features of the '<em>Aspect Model Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_MODEL_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link art.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +96,7 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = 0;
+	int NAMED_ELEMENT__NAME = ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
@@ -86,7 +105,7 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+	int NAMED_ELEMENT_FEATURE_COUNT = ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link art.impl.ModelElementImpl <em>Model Element</em>}' class.
@@ -136,13 +155,13 @@ public interface ArtPackage extends EPackage {
 	int SYSTEM__NAME = MODEL_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Root</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM__ROOT = MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int SYSTEM__NODES = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
@@ -308,7 +327,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 6;
+	int STRING = 7;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -318,7 +337,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 7;
+	int BOOLEAN = 8;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -328,7 +347,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 8;
+	int INTEGER = 9;
 
 
 	/**
@@ -373,15 +392,15 @@ public interface ArtPackage extends EPackage {
 	EClass getSystem();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link art.System#getRoot <em>Root</em>}'.
+	 * Returns the meta object for the containment reference list '{@link art.System#getNodes <em>Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Root</em>'.
-	 * @see art.System#getRoot()
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see art.System#getNodes()
 	 * @see #getSystem()
 	 * @generated
 	 */
-	EReference getSystem_Root();
+	EReference getSystem_Nodes();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link art.System#getServices <em>Services</em>}'.
@@ -491,6 +510,16 @@ public interface ArtPackage extends EPackage {
 	EAttribute getCardinalityElement_Upper();
 
 	/**
+	 * Returns the meta object for class '{@link art.AspectModelElement <em>Aspect Model Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Aspect Model Element</em>'.
+	 * @see art.AspectModelElement
+	 * @generated
+	 */
+	EClass getAspectModelElement();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,12 +613,12 @@ public interface ArtPackage extends EPackage {
 		EClass SYSTEM = eINSTANCE.getSystem();
 
 		/**
-		 * The meta object literal for the '<em><b>Root</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SYSTEM__ROOT = eINSTANCE.getSystem_Root();
+		EReference SYSTEM__NODES = eINSTANCE.getSystem_Nodes();
 
 		/**
 		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
@@ -676,6 +705,16 @@ public interface ArtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CARDINALITY_ELEMENT__UPPER = eINSTANCE.getCardinalityElement_Upper();
+
+		/**
+		 * The meta object literal for the '{@link art.impl.AspectModelElementImpl <em>Aspect Model Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.impl.AspectModelElementImpl
+		 * @see art.impl.ArtPackageImpl#getAspectModelElement()
+		 * @generated
+		 */
+		EClass ASPECT_MODEL_ELEMENT = eINSTANCE.getAspectModelElement();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

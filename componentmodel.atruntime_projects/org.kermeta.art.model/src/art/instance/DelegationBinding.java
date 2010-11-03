@@ -7,7 +7,6 @@
 package art.instance;
 
 import art.type.AbstractPort;
-import art.type.Port;
 
 /**
  * <!-- begin-user-doc -->

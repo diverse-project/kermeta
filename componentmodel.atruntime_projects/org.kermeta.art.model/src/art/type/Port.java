@@ -8,8 +8,6 @@ package art.type;
 
 import art.CardinalityElement;
 
-import art.implem.PortImplementation;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Port</b></em>'.

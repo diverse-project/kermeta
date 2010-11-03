@@ -7,7 +7,6 @@
 package art.type;
 
 import art.NamedElement;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

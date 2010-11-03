@@ -3,13 +3,13 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="art"
     nsURI="http://art" nsPrefix="art">
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//AspectModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//ModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//instance/CompositeInstance"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//distrib/Node" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
         eType="#//type/Service" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
@@ -31,6 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" lowerBound="1" eType="#//Integer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AspectModelElement" abstract="true"/>
   <eSubpackages name="instance" nsURI="http://art/instance" nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
         eSuperTypes="#//ModelElement">
@@ -60,7 +61,7 @@
       <eLiterals name="OFF"/>
       <eLiterals name="ON" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true" eSuperTypes="#//AspectModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
           eType="#//instance/ComponentInstance"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
@@ -77,7 +78,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="exported" lowerBound="1"
           eType="#//type/AbstractPort"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AttributeInstance" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeInstance" abstract="true"
+        eSuperTypes="#//AspectModelElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//instance/AttributeInstance">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
           eType="#//String"/>
@@ -90,7 +92,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
           eType="#//type/Dictionary"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Entry" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="Entry" abstract="true" eSuperTypes="#//AspectModelElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
           eType="#//String"/>
     </eClassifiers>
@@ -132,6 +134,8 @@
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
           eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocol" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement #//type/AbstractPort">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
@@ -156,13 +160,14 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1"
           eType="#//type/DictionaryDefaultValue" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DictionaryDefaultValue">
+    <eClassifiers xsi:type="ecore:EClass" name="DictionaryDefaultValue" eSuperTypes="#//AspectModelElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="implem" nsURI="http://art/implem" nsPrefix="implem">
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentImplementation" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentImplementation" abstract="true"
+        eSuperTypes="#//AspectModelElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="FractalComponent" eSuperTypes="#//implem/ComponentImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" lowerBound="1"
           eType="#//String"/>
@@ -173,7 +178,8 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementingClass" lowerBound="1"
           eType="#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeImplementation" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeImplementation" abstract="true"
+        eSuperTypes="#//AspectModelElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="OSGiType" eSuperTypes="#//implem/TypeImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateInstanceBundle"
           lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
@@ -192,6 +198,13 @@
           eType="#//instance/ComponentInstance" eOpposite="#//instance/ComponentInstance/groups"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
           eType="#//group/InstanceGroup" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="distrib" nsURI="http://art/distrib" nsPrefix="distrib">
+    <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+          eType="#//instance/ComponentInstance" containment="true"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

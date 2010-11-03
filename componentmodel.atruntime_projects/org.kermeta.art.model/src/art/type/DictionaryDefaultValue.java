@@ -6,7 +6,7 @@
  */
 package art.type;
 
-import org.eclipse.emf.ecore.EObject;
+import art.AspectModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface DictionaryDefaultValue extends EObject {
+public interface DictionaryDefaultValue extends AspectModelElement {
 	/**
 	 * Returns the value of the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->

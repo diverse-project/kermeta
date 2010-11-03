@@ -6,7 +6,7 @@
  */
 package art.instance;
 
-import org.eclipse.emf.ecore.EObject;
+import art.AspectModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Entry extends EObject {
+public interface Entry extends AspectModelElement {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

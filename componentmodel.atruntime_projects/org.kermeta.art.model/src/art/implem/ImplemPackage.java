@@ -6,6 +6,8 @@
  */
 package art.implem;
 
+import art.ArtPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -75,7 +77,7 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_IMPLEMENTATION_FEATURE_COUNT = 0;
+	int COMPONENT_IMPLEMENTATION_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.implem.impl.FractalComponentImpl <em>Fractal Component</em>}' class.
@@ -159,7 +161,7 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_IMPLEMENTATION_FEATURE_COUNT = 0;
+	int TYPE_IMPLEMENTATION_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.implem.impl.OSGiTypeImpl <em>OS Gi Type</em>}' class.

@@ -6,7 +6,7 @@
  */
 package art.instance;
 
-import org.eclipse.emf.ecore.EObject;
+import art.AspectModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,5 +18,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AttributeInstance extends EObject {
+public interface AttributeInstance extends AspectModelElement {
 } // AttributeInstance

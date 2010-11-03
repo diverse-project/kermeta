@@ -370,7 +370,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING__SERVER_INSTANCE = 0;
+	int BINDING__SERVER_INSTANCE = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -379,7 +379,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING__ID = 1;
+	int BINDING__ID = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Binding</em>' class.
@@ -388,7 +388,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_FEATURE_COUNT = 2;
+	int BINDING_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.TransmissionBindingImpl <em>Transmission Binding</em>}' class.
@@ -517,7 +517,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_INSTANCE_FEATURE_COUNT = 0;
+	int ATTRIBUTE_INSTANCE_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
@@ -610,7 +610,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY__VALUE = 0;
+	int ENTRY__VALUE = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Entry</em>' class.
@@ -619,7 +619,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_FEATURE_COUNT = 1;
+	int ENTRY_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.DefaultEntryImpl <em>Default Entry</em>}' class.

@@ -6,7 +6,7 @@
  */
 package art.instance;
 
-import org.eclipse.emf.ecore.EObject;
+import art.AspectModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Binding extends EObject {
+public interface Binding extends AspectModelElement {
 	/**
 	 * Returns the value of the '<em><b>Server Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->

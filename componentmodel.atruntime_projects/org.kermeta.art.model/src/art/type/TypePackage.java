@@ -486,13 +486,31 @@ public interface TypePackage extends EPackage {
 	int ABSTRACT_PORT__ROLE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__PROTOCOL = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__URI = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Port</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.
@@ -550,13 +568,31 @@ public interface TypePackage extends EPackage {
 	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__PROTOCOL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__URI = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -565,7 +601,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
@@ -603,6 +639,24 @@ public interface TypePackage extends EPackage {
 	 * @ordered
 	 */
 	int PORT_COLLECTION__ROLE = ABSTRACT_PORT__ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__PROTOCOL = ABSTRACT_PORT__PROTOCOL;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__URI = ABSTRACT_PORT__URI;
 
 	/**
 	 * The feature id for the '<em><b>Ids</b></em>' containment reference list.
@@ -805,7 +859,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_DEFAULT_VALUE__KEY = 0;
+	int DICTIONARY_DEFAULT_VALUE__KEY = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -814,7 +868,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_DEFAULT_VALUE__VALUE = 1;
+	int DICTIONARY_DEFAULT_VALUE__VALUE = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Dictionary Default Value</em>' class.
@@ -823,7 +877,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_DEFAULT_VALUE_FEATURE_COUNT = 2;
+	int DICTIONARY_DEFAULT_VALUE_FEATURE_COUNT = ArtPackage.ASPECT_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link art.type.PortRole <em>Port Role</em>}' enum.
@@ -1024,6 +1078,28 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractPort_Role();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.AbstractPort#getProtocol <em>Protocol</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Protocol</em>'.
+	 * @see art.type.AbstractPort#getProtocol()
+	 * @see #getAbstractPort()
+	 * @generated
+	 */
+	EAttribute getAbstractPort_Protocol();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.AbstractPort#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see art.type.AbstractPort#getUri()
+	 * @see #getAbstractPort()
+	 * @generated
+	 */
+	EAttribute getAbstractPort_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link art.type.Port <em>Port</em>}'.
@@ -1365,6 +1441,22 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_PORT__ROLE = eINSTANCE.getAbstractPort_Role();
+
+		/**
+		 * The meta object literal for the '<em><b>Protocol</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_PORT__PROTOCOL = eINSTANCE.getAbstractPort_Protocol();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_PORT__URI = eINSTANCE.getAbstractPort_Uri();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.

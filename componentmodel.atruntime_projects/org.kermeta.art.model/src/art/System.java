@@ -6,9 +6,9 @@
  */
 package art;
 
-import art.group.Group;
+import art.distrib.Node;
 
-import art.instance.CompositeInstance;
+import art.group.Group;
 
 import art.type.ComponentType;
 import art.type.Service;
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link art.System#getRoot <em>Root</em>}</li>
+ *   <li>{@link art.System#getNodes <em>Nodes</em>}</li>
  *   <li>{@link art.System#getServices <em>Services</em>}</li>
  *   <li>{@link art.System#getTypes <em>Types</em>}</li>
  *   <li>{@link art.System#getDataTypes <em>Data Types</em>}</li>
@@ -37,30 +37,20 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface System extends ModelElement {
 	/**
-	 * Returns the value of the '<em><b>Root</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link art.distrib.Node}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Root</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Root</em>' containment reference.
-	 * @see #setRoot(CompositeInstance)
-	 * @see art.ArtPackage#getSystem_Root()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Nodes</em>' containment reference list.
+	 * @see art.ArtPackage#getSystem_Nodes()
+	 * @model containment="true"
 	 * @generated
 	 */
-	CompositeInstance getRoot();
-
-	/**
-	 * Sets the value of the '{@link art.System#getRoot <em>Root</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Root</em>' containment reference.
-	 * @see #getRoot()
-	 * @generated
-	 */
-	void setRoot(CompositeInstance value);
+	EList<Node> getNodes();
 
 	/**
 	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.
