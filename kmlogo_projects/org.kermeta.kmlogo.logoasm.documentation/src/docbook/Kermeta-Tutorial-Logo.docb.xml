@@ -685,7 +685,7 @@ package ASM
     <title id="chapter_contract.title.link">Contract<phrase/><anchor id="chapter_contract"/></title>
     <para>Let's now add some <emphasis role="bold">static semantic</emphasis> to our metamodel i.e.
       add missing pre/post-conditions to our .ecore in order to express the contraints specified in
-      the metamodel.</para>
+      the metamodel. From now on, we are going to learn how to weave aspects with Kermeta.</para>
     <section id="section_static_semantics.link">
       <title id="section_static_semantics.title.link">Static semantics<phrase/></title>
       <para>For this step we are going to add two contracts to our metamodel:<itemizedlist>
@@ -725,8 +725,7 @@ endpackage
         <step>
           <para>Create a new plug-in project <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.srcKermeta</emphasis> (set all by default, hit next and
-            finish, if you're not familiar with plug-in perspective choose no as answer to that
-            question). </para>
+            finish, if you're not familiar with plug-in perspective choose "no" if asked). </para>
           <para>Create a folder <emphasis role="bold">kermeta</emphasis> on the root of this
             project. This is the folder where we are going to put all kermeta sources for this
             tutorial.</para>
@@ -735,9 +734,8 @@ endpackage
           <para>Inside the folder <emphasis role="bold">kermeta</emphasis>, create a folder
               <emphasis role="bold">2.Constraints</emphasis>.</para>
           <para>Inside the folder <emphasis role="bold">2.Constraints</emphasis>, create a new
-            kermeta file <emphasis role="bold">ASMLogoStaticSemantics.kmt</emphasis> to reopen the
-            ProcDeclaration class and weave invariants as aspects into it following the listing
-            below (you may copy/paste it if you've already analysed it first): </para>
+            kermeta file <emphasis role="bold">ASMLogoStaticSemantics.kmt</emphasis>. Aanalyse the
+            content  of the following listing and then copy/paste into the newly created file : </para>
           <programlisting> 
 package kmLogo::ASM;
 require kermeta
@@ -763,6 +761,8 @@ aspect class ProcCall{
 	end 
 }
 </programlisting>
+          <para>It reopen the ProcDeclaration and ProcCall classes and weave invariants as aspects
+            into it</para>
           <note>
             <para>If you get errors on "http://www.kermeta.org/kmLogo", check your <link
                 linkend="section_package_registry.link">package registration</link>. you may hit the
@@ -790,8 +790,8 @@ aspect class ProcCall{
               >org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/2.Constraints</emphasis>.</para>
         </step>
         <step>
-          <para>Open the file <emphasis role="bold">tests/CheckModels.kmt</emphasis> and analyse its
-            purpose.</para>
+          <para>Open the file <emphasis role="bold">tests/CheckModels.kmt</emphasis>, remove the two
+            comment blocs inside and analyse its purpose.</para>
           <para>It loads the models inside the models folder and require the kermeta file that we've
             created before.</para>
         </step>
@@ -829,14 +829,14 @@ aspect class ProcCall{
     <title id="chapter_behaviour.title.link">Behaviour<anchor id="chapter_behaviour"/></title>
     <para>Let us now add some <emphasis role="bold">operational semantics</emphasis> to our
       metamodel. To do so, we are going to add the actions we wish to implement thanks to the
-      weaving mechanism in Kermeta.</para>
+      weaving mechanism in Kermeta that we've just seen before.</para>
     <section>
       <title>Preparation of the environment<phrase/></title>
       <para>First of all let's prepare the appropriate programming environment needed for this
-        implementation. The concerned project during this chapter will be <emphasis role="bold"
-          >org.kermeta.kmlogo.logoasm.srcKermeta</emphasis>. We'll setup the graphical UI with java
-        AWT and the Java Math wrapper in order add math to Kermeta and be able to call them later
-        with aspect weaving.</para>
+          implementation.<emphasis role="bold">org.kermeta.kmlogo.logoasm.srcKermeta</emphasis> will
+        be the concerned project during this chapter. We'll setup a graphical UI using <emphasis
+          role="italic">java AWT</emphasis> and a <emphasis role="italic">Java Math</emphasis>
+        wrapper in order to add an UI to our DSL and add some math operations to Kermeta.</para>
       <procedure>
         <step>
           <para>Copy/paste the folders and their content from <emphasis role="bold"
@@ -914,9 +914,9 @@ aspect class ProcCall{
     <section id="section_dynamic_semantic.link">
       <title id="section_dynamic_semantic.title.link">Dynamic semantic<phrase/><anchor
           id="dynamic_semantic"/></title>
-      <para>Here we are going to learn how to weave an aspect with Kermeta. Thanks to this weaving,
-        we are going to add some operations and properties to the ASMLogo.ecore in order to provide
-        an operational semantics to Logo. </para>
+      <para>Now, still using aspect weaving, we are going to add some operations and properties to
+        the ASMLogo.ecore in order to provide an operational semantics to Logo. We'll also see
+        additional Kermeta features on aspect weaving.</para>
       <para>We will weave an interpreter to the ASM by adding "eval" operations to the ASM metaclass
         where there's a behaviour. This eval operation will pass the actual context of the
         program.</para>
@@ -969,9 +969,8 @@ aspect class ProcCall{
         </step>
       </procedure>
       <para>At this point, you know how to weave operational semantic to Kermeta and rapidly
-        identify them from the imported one inside the Outline view. <emphasis role="bold"><emphasis
-            role="underline">Aspected classes</emphasis></emphasis> are represented in Red/Blue
-        color.</para>
+        identify them in the Outline view. <emphasis role="bold"><emphasis role="underline">Aspected
+            classes</emphasis></emphasis> are represented in Red/Blue color.</para>
     </section>
     <section id="section_virtual_machine.link">
       <title id="section_virtual_machine.title.link">Virtual machine<phrase/></title>
@@ -1052,12 +1051,11 @@ aspect class ProcCall{
             </important>
           </step>
           <step>
-            <para>So in order to use this wrapper, simply <emphasis role="bold">import</emphasis>
-              the Math.kmt file where you need it (here in <emphasis role="bold"
-                >LogoVMSemantics.kmt</emphasis>). And use it as a normal kermeta class. Since both
-              java code is contained by the same plugin, there is no need of classpath declaration.
-              If you need to use java code from another plugin, make sure that your plugin has a
-              dependency to it. </para>
+            <para>In order to use this wrapper, simply <emphasis role="bold">import</emphasis> the
+              Math.kmt (see <emphasis role="bold">LogoVMSemantics.kmt</emphasis>). Then, use it as a
+              normal kermeta class. Since both java code is contained by the same plugin, there is
+              no need of classpath declaration. If you need to use java code from another plugin,
+              make sure that your plugin has a dependency to it. </para>
           </step>
           <step>
             <para>To test this section, open the kermeta file <emphasis role="bold"
@@ -1079,8 +1077,8 @@ aspect class ProcCall{
       <section id="section_implementing_graphical_output.link">
         <title id="section_implementing_graphical_output.title.link">Implementing a graphical
           output<phrase/></title>
-        <para>This section will guide you through the implementation code of a graphical interface
-          for the logo turtle. It is similiar to the call to Java.Math previously seen.</para>
+        <para>This section will guide you through the implementation of a graphical interface for
+          the logo turtle. It is similiar to the call to Java.Math previously seen.</para>
         <procedure>
           <step>
             <para>Open the file <emphasis role="bold"
@@ -1107,8 +1105,8 @@ aspect class ProcCall{
             <tip>
               <para>Again, remember that the objects in java side must implement a RuntimeObject in
                 order to be manipulated with Kermeta. This is why all static method contains
-                Runtimeobject parameters which is the Kermeta object kept in memory at runtime, and
-                at last, must return a RuntimeObject. </para>
+                Runtimeobject parameters (which are the Kermeta object kept in memory at runtime),
+                and must return a RuntimeObject object type. </para>
               <para>Also notice that the <emphasis role="bold">initialize()</emphasis> method allow
                 the "conversion" into java side i.e.: it creates a java object from the given name
                 so as to represent the GUI (turtleGUI). Then it sets this object inside the
@@ -1238,7 +1236,7 @@ aspect class ProcCall{
             hides the language in which the transformation is written in to the end user.</para>
           <para>On the creational wizard : Be sure that you set the activator at <emphasis
               role="bold">org.kermeta.kmlogo.logoasm.ui.Activator</emphasis> then hit next.</para>
-          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and hit next, select
+          <para>Check<emphasis role="bold"> custom plug-in wizard</emphasis> and hit next, select
               <emphasis role="bold">New File Wizard</emphasis> and <emphasis role="bold">Popup
               Menu</emphasis> then hit next.</para>
         </step>
@@ -1290,7 +1288,7 @@ aspect class ProcCall{
             with, you can choose "No".</para>
         </step>
         <step>
-          <para>Copy (and replace) all the files from the folder :<itemizedlist>
+          <para>Copy (and replace) all the files :<itemizedlist>
               <listitem>
                 <para><emphasis role="bold">CompileNXCLogoK.java</emphasis>,<emphasis role="bold">
                     ExecHelper.java</emphasis>, <emphasis role="bold"
@@ -1319,6 +1317,9 @@ aspect class ProcCall{
           <para>Inside the package <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.ui.tools.wizard</emphasis>, delete the file <emphasis
               role="bold">KmLogoExampleWizardPage.java</emphasis> since we do not use it.</para>
+          <para>(<emphasis role="bold">Update</emphasis> : Inside the package <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.ui.popup.actions</emphasis>, delete the file <emphasis
+              role="bold">NewAction.java</emphasis> if it exists).</para>
           <para>It is normal that you got errors at this time just because there are needed
             libraries that we should define inside steps ahead.</para>
           <para/>
