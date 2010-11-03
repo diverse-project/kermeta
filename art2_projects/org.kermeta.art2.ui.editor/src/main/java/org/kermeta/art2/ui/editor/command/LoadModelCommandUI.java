@@ -34,6 +34,12 @@ public class LoadModelCommandUI implements Command {
     private JFileChooser filechooser = new JFileChooser();
     private LoadModelCommand lcommand = new LoadModelCommand();
 
+    private static String lastLoadedModel = null;
+
+    public static String getLastLoadedModel() {
+        return lastLoadedModel;
+    }
+
     public void setKernel(Art2UIKernel kernel) {
         this.kernel = kernel;
         lcommand.setKernel(kernel);
@@ -45,6 +51,9 @@ public class LoadModelCommandUI implements Command {
     public void execute(Object p) {
         filechooser.showOpenDialog(kernel.getModelPanel());
         if (filechooser.getSelectedFile() != null) {
+
+            lastLoadedModel = URI.createFileURI(filechooser.getSelectedFile().getAbsolutePath()).toString();
+
             lcommand.execute(URI.createFileURI(filechooser.getSelectedFile().getAbsolutePath()));
         }
     }

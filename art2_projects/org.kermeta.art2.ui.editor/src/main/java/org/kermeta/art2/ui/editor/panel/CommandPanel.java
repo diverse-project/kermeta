@@ -9,10 +9,11 @@ import javax.swing.JPanel;
 import org.kermeta.art2.ui.editor.Art2UIKernel;
 import org.kermeta.art2.ui.editor.command.AddNodeCommand;
 import org.kermeta.art2.ui.editor.command.ClearModelCommand;
+import org.kermeta.art2.ui.editor.command.LoadModelCommand;
 import org.kermeta.art2.ui.editor.command.LoadModelCommandUI;
 import org.kermeta.art2.ui.editor.command.LoadNewLibCommand;
+import org.kermeta.art2.ui.editor.command.RefreshModelCommand;
 import org.kermeta.art2.ui.editor.command.SaveActuelModelCommand;
-import org.kermeta.art2.ui.editor.command.SynchPlatformCommand;
 import org.kermeta.art2.ui.editor.widget.JCommandButton;
 
 /**
@@ -57,11 +58,11 @@ public class CommandPanel extends JPanel {
         btLoadLibCommand.setKernel(kernel);
         btLoadLib.setCommand(btLoadLibCommand);
         
-        /*
-        JCommandButton btSynch = new JCommandButton("Synch");
-        SynchPlatformCommand synchComd = new SynchPlatformCommand();
-        synchComd.kernel_$eq(kernel);
-        btSynch.setCommand(synchComd);*/
+        
+        JCommandButton btRefresh = new JCommandButton("Refresh Model");
+        RefreshModelCommand loadModel = new RefreshModelCommand();
+        loadModel.setKernel(kernel);
+        btRefresh.setCommand(loadModel);
 
 
         // add(btAddHub);
@@ -70,7 +71,7 @@ public class CommandPanel extends JPanel {
         add(btLoadModel);
         add(btLoadLib);
         add(btClearModel);
-        //add(btSynch);
+        add(btRefresh);
 
 
     }

@@ -22,6 +22,10 @@ public class SaveActuelModelCommand implements Command {
     private JFileChooser filechooser = new JFileChooser();
     private static String defaultLocation = null;
 
+    public static String getDefaultLocation() {
+        return defaultLocation;
+    }
+
     public static void setDefaultLocation(String uri) {
         defaultLocation = uri;
     }

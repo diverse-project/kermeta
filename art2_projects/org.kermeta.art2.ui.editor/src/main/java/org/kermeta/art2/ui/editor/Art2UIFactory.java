@@ -6,8 +6,6 @@ package org.kermeta.art2.ui.editor;
 import org.kermeta.art2.ComponentInstance;
 import org.kermeta.art2.ComponentType;
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.kermeta.art2.ChannelType;
 import org.kermeta.art2.ContainerRoot;
