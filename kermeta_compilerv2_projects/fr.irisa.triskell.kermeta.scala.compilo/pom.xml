@@ -33,7 +33,7 @@
             <url>http://www.kermeta.org/maven2-snapshots</url>
         </repository>
         <repository>
-            <id>kermetaPublicSnapshot</id>
+            <id>kermetaPublic</id>
             <url>http://www.kermeta.org/maven2</url>
         </repository>
         <repository>
@@ -107,30 +107,30 @@
             </plugin>
             -->
 
-           <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>truezip-maven-plugin</artifactId>
-				<version>1.0-beta-4</version>
-				<executions>
-					<execution>
-						<id>remove-a-file</id>
-						<phase>package</phase>
-						<goals>
-							<goal>remove</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<directory>target/${project.artifactId}-${project.version}.jar/META-INF
-								</directory>
-								<includes>
-									<include>**/*.RSA</include>
-									<include>**/*.SF</include>
-								</includes>
-							</fileset>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>remove-a-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>remove</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <directory>target/${project.artifactId}-${project.version}.jar/META-INF
+                                </directory>
+                                <includes>
+                                    <include>**/*.RSA</include>
+                                    <include>**/*.SF</include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
 
@@ -140,7 +140,7 @@
                 <extensions>true</extensions>
                 <version>2.0.1</version>
                 <configuration>
-                      <instructions>
+                    <instructions>
 
                         <Private-Package>*</Private-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
@@ -196,29 +196,29 @@
                 </configuration>
             </plugin>
             -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>truezip-maven-plugin</artifactId>
-        <version>1.0-beta-4</version>
-        <executions>
-          <execution>
-            <id>remove-a-file</id>
-            <phase>package</phase>
-            <goals>
-              <goal>remove</goal>
-            </goals>
-            <configuration>
-              <fileset>
-                <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
-                <includes>
-                  <include>**/*.RSA</include>
-                  <include>**/*.SF</include>
-                </includes>
-              </fileset>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>remove-a-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>remove</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
+                                <includes>
+                                    <include>**/*.RSA</include>
+                                    <include>**/*.SF</include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
         </plugins>
@@ -338,7 +338,7 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        <dependency>    
+        <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
             <version>RELEASE68</version>

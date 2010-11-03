@@ -18,7 +18,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
 class Compiler extends LogAspect {
 
-    def compile(url : String){
+    def compile(url : java.lang.String){
         log.debug("Cleaning Output Step")
         Util.cleanFolder(GlobalConfiguration.outputFolder)
         /* Init Factory Step */
