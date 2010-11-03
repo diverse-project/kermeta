@@ -74,13 +74,17 @@ public class Util {
 
         GenModel genModelModel = null;
 
-        if (genmodel.exists()) {
+        if (genmodel != null && genmodel.exists()) {
             Resource resourceGenModel = resourceSet.getResource(URI.createFileURI(genmodel.getAbsolutePath()), true);
             genModelModel = (GenModel) resourceGenModel.getContents().get(0);
             genModelModel.setModelDirectory("/" + outputfileName);
             genModelModel.getForeignModel().add(ecore.getAbsolutePath());
 
         } else {
+            if(genmodel == null){
+                genmodel = new File("outputfileName");
+            }
+
             URI genModelURI = URI.createFileURI(genmodel.getAbsolutePath());
             Resource genModelResource =
                     Resource.Factory.Registry.INSTANCE.getFactory(genModelURI).createResource(genModelURI);
