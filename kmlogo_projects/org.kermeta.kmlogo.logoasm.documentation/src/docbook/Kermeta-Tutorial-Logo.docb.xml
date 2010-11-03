@@ -76,13 +76,16 @@
   <chapter id="chapter_installation.link">
     <title id="chapter_installation.title.link">Installation<phrase/></title>
     <para>In this task you'll learn how to install the predefined logo environment, install the
-      predefined logo project for the tutorial.</para>
+      predefined logo project for the tutorial. </para>
+    <para>This tutorial was set up with Eclipse 3.5.1, Kermeta 1.3.2, EMFText 1.2.3</para>
+    <para>(<emphasis role="bold">Update</emphasis> : this tutorial was updated using Eclipse 3.6.1,
+      Kermeta 1.4.1, EMFtext 1.3.2) </para>
     <section id="section_prerequisted.link">
       <title id="section_prerequisted.title.link.title.link">Prerequisites<phrase/></title>
       <para>Below is the list of the things that you need to ensure beforehand :<itemizedlist>
           <listitem>
-            <para>You should install Kermeta 1.3.3 on eclipse modelling. Further information on
-                <ulink
+            <para>You should install an eclipse environment with Kermeta (1.3.3 and above). Further
+              information on <ulink
                 url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-install-KerMeta/index.html"
                 >how to install Kermeta</ulink> and the <ulink
                 url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-Manual/index.html"
@@ -102,15 +105,16 @@
     <section id="section_install_logo_projects.link">
       <title id="section_logo_projects.title.link">Install logo projects<phrase/></title>
       <para>Once you have an Eclipse modelling with Kermeta, get the tutorial projects by selecting
-          <emphasis role="bold">File -> New -> Example... -> Kermeta Samples -> Kermeta 2 Logo
-          tuto</emphasis>.</para>
+          <emphasis role="bold">File -> New -> Example... -> Kermeta Samples -> Logo tutorial - base
+          resources</emphasis>.</para>
       <para>At this point, you shoud have one project inside your workspace as illustrated in the
         figure below :</para>
       <itemizedlist>
         <listitem>
           <para>a project named : <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.tutorial</emphasis> containing the files necessary for
-            this tutorial.</para>
+              >org.kermeta.kmlogo.logoasm.tutorial</emphasis> with a readme and a folder
+            "parts".Inside the folder "parts" are the folders corresponding to each section of this
+            tutorial and containing the needed material for each step.</para>
         </listitem>
       </itemizedlist>
       <figure>
@@ -130,9 +134,9 @@
   <chapter id="chapter_define_metamodel.link">
     <title id="chapter_define_metamodel.title.link">Define the metamodel<phrase/><anchor
         id="chapter_MM"/></title>
-    <para>The first step of this tutorial is to define the abstract syntax. For the logo language,
-      the concepts are the instructions to be executed : pen up, pen down, go forward, rotate left
-      ... </para>
+    <para>The first step of this tutorial is to define the abstract syntax. To do so, we have to
+      define the main concepts. For the logo language, these concepts are the instructions to be
+      executed : pen up, pen down, go forward, rotate left ... </para>
     <tip>
       <para> If you want to learn more about how to create an ecore metamodel with eclipse, please
         follow the how-to in the next sections or refer to the other available <ulink
@@ -142,24 +146,20 @@
     <section id="section_from_ecore_to_generated_code.link">
       <title id="section_from_ecore_to_generated_code.title.link">From Ecore to genenerated
         code</title>
-      <para>In order to define the metamodel, we are going to process as follow : create an ecore
-        file, set up its nsURI and create its corresponding generator model (.genmodel). Then we are
-        going to define the different needed information (base package, model directory, file
-        extension, plugin ID,...). See the Example below for a step by step : </para>
+      <para>In order to define the metamodel, we are going to process as shown in the following
+        steps : create an ecore file, set up its nsURI and create its corresponding generator model
+        (.genmodel). Then, we are going to set up the needed informations (base package, model
+        directory, file extension, plugin ID,...) : </para>
       <procedure>
         <step>
           <para>Inside the project <emphasis role="bold">
               org.kermeta.kmlogo.logoasm.tutorial</emphasis>, open ther folder <emphasis role="bold"
-              >parts</emphasis> : Here you can see the folders corresponding to the sections of this
-            tutorial.</para>
-        </step>
-        <step>
-          <para>Open the folder <emphasis role="bold">1.metamodel</emphasis> and open the file
-              <emphasis role="bold">ASMLogo.ecore</emphasis> which is the metamodel of your language
-            (here logo) and look at its content. In this ecore file you'll notice the various
-            instructions supported by the DSL we are building. Some are primitives, for example :
-            Back, Forward, Left, PenUp, ... Some are expressions, for example : Plus, Minus, ... And
-            some are control structures, for example : If, while, Repeat, ...</para>
+              >parts/1.metamodel</emphasis> and open the file <emphasis role="bold"
+              >ASMLogo.ecore</emphasis> which is the metamodel of your language (here logo) and look
+            at its content. In this ecore file you'll notice the various instructions supported by
+            the DSL that we are going to build. Some are primitives, for example : Back, Forward,
+            Left, PenUp, ... Some are expressions, for example : Plus, Minus, ... And some are
+            control structures, for example : If, while, Repeat, ...</para>
         </step>
         <step>
           <para>If not already set in the property view, do not forget to set the properties of our
@@ -178,15 +178,20 @@
           </example>
         </step>
         <step>
-          <para>Then, create an <emphasis role="bold">EMF Generator Model</emphasis> (File > New..)
-            and name it <emphasis role="bold">ASMLogo.genmodel</emphasis>, hit next and chosse
-              <emphasis role="bold">Ecore model</emphasis> as model importers, hit next and import
-            the previous metamodel (<emphasis role="bold">Browse workspace</emphasis> >
+          <para>Then, we need to create the generator model for this ecore. For those who are
+            familiar with creating a genmodel, we've provided a completed one inside the folder
+              <emphasis role="bold">parts/1.metamodel</emphasis> (see the file <emphasis role="bold"
+              >ASMLogo.genmodel</emphasis>) so that you can rapidly jump to the next step. For the
+            begginers, below is a step by step guide to create one.</para>
+          <para>create an <emphasis role="bold">EMF Generator Model</emphasis> (File > New..) and
+            name it <emphasis role="bold">ASMLogo.genmodel</emphasis>, hit next and chosse <emphasis
+              role="bold">Ecore model</emphasis> as model importers, hit next and import the
+            previous metamodel (<emphasis role="bold">Browse workspace</emphasis> >
             org.kermeta.kmlogo.logoasm.tutorial/1.metamodel), <emphasis role="bold">load</emphasis>
-            it, hit next and finish. In the example below, you can see the needed properties for
-            code generation, if needed you can manually tweak them but normally you should leave
-            them as they are auto-generated (for this tutorial, these information are already
-            provided).</para>
+            it, hit next and finish. In the example below, you can set up the properties for code
+            generation, if needed you can manually tweak them but normally you should leave them as
+            they are auto-generated (you should result in a file with the same inforamtions as the
+            provided <emphasis role="bold">ASMLogo.genmodel</emphasis>).</para>
           <example>
             <title>Manually set properties of a .genmodel</title>
             <orderedlist>
@@ -268,8 +273,9 @@
         </step>
         <step>
           <para>If you have manually set up the properties, do not forget to save your generator
-            model. Let's directly generate the associated code for our metamodel. (A needed step for
-            the rest of the tutorial):</para>
+            model. Let's directly generate the associated code for our metamodel. Remember the main
+            concepts of our DSL that we've mentioned before, this is step is mandatory as it gives a
+            first implementation of our DSL with EMF :</para>
           <para>Inside the <emphasis role="bold">ASMLogo.genmodel</emphasis>, right-click on kmLogo
             package and choose <emphasis role="bold">Generate Model Code</emphasis>. This will add a
             new project <emphasis role="bold">org.kermeta.kmlogo.logoasm.model</emphasis> to your
@@ -280,10 +286,10 @@
           <para>Repeat again and choose<emphasis role="bold"> Generate Editor Code</emphasis>. This
             will add the project <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.model.editor</emphasis>.</para>
-          <para>You may <emphasis role="bold">copy</emphasis> the files ASMLogo.ecore and
-            ASMLogo.genmodel inside a folder <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.model/model</emphasis> in order to be coherent with the
-            plugin intention (store the model)</para>
+          <para><emphasis role="bold">Copy</emphasis> the files ASMLogo.ecore and ASMLogo.genmodel
+            inside a folder <emphasis role="bold">org.kermeta.kmlogo.logoasm.model/model</emphasis>
+            in order to be coherent with the plugin intention (store the model and the model
+            code)</para>
           <para>You should now have a project structure as illustrated below : <figure>
               <title>Project structure after generating the model, edit and editor code</title>
               <mediaobject>
@@ -294,10 +300,9 @@
             </figure></para>
         </step>
         <step>
-          <para>Go back to the file <emphasis role="bold"
+          <para>To have an overview of our DSL, go back to the file <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.model/model/ASMLogo.ecore</emphasis>:</para>
-          <para>Right-click on it and initialize the ecore diagram file (more information about
-            create an .ecorediag file from scratch is available here). </para>
+          <para>Right-click on it and initialize the ecore diagram file.</para>
           <para>Name it <emphasis role="bold">ASMLogo.ecorediag</emphasis>, hit next and choose
               <emphasis role="bold">ASM</emphasis> package as a root element and finish to see the
             graphical representation of your metamodel (if you choose kmLogo as a root element then
@@ -486,20 +491,23 @@ package ASM
       <para>After saving, right-click on it and choose <emphasis role="bold">Kermeta > Generate
           Ecore</emphasis>. </para>
       <para>You should retrieve our logo language's .ecore representation that we 've just seen
-        before.</para>
+        before. Congratulation you've just "written" your first kermeta program of this tutorial,
+        and you have define the famous main concepts of your DSL! </para>
     </section>
   </chapter>
   <chapter id="chapter_editor.link">
     <title id="chapter_editor.title.link">Editor<phrase/><anchor id="chapter_editor"/></title>
-    <para>In this task, you will learn how to provide editors to manipulate model instances which
-      conforms to your metamodel. There are many ways to do so, however in this tutorial we will
-      focus more on the textual editor. As these techniques are independant from each other, you can
-      experiment each of them according to your needs.</para>
+    <para>In this task, you will learn how to provide editors to your DSL in order to manipulate
+        <emphasis role="bold">model instances</emphasis> conform to your DSL's metamodel. There are
+      many ways to do so and as these techniques are independant from each other, you can experiment
+      each of them according to your needs. However in this tutorial we will focus more on the
+      textual editor. Advanced users (i.e.: those familiar with creating .xmi files from scratch)
+      can directly jump to the <link linkend="section_textual_editor">texteditor generation
+        section</link> using dedicated framework.</para>
     <section id="section_dynamic_instance.link">
       <title id="section_dynamic_instance.title.link">Dynamic instance<phrase/><anchor
           id="section_dynamic_instance"/></title>
-      <para>Before all, let's create our first model instance with the dynamic instance. To do so
-        :</para>
+      <para>Before all, let's create our first model instance with the dynamic instance :</para>
       <procedure>
         <step>
           <para>Open the file <emphasis role="bold">ASMLogo.ecorediag</emphasis> inside the folder
@@ -603,11 +611,11 @@ package ASM
         <step>
           <para>Back to the project<emphasis role="bold">
               org.kermeta.kmlogo.logoasm.tutorial</emphasis>, open the folder <emphasis role="bold"
-              >1.metamodel/concrete_syntax</emphasis> which contain the file : <emphasis role="bold"
-              >ASMLogo.cs</emphasis>.</para>
+              >1.metamodel/concrete_syntax</emphasis>. </para>
         </step>
         <step>
-          <para>Copy and paste this file into the newly created folder <emphasis role="bold"
+          <para>Copy and paste the file <emphasis role="bold">ASMLogo.cs</emphasis> into the newly
+            created folder <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.emftexteditor/concrete_syntax/</emphasis>.</para>
           <para>Right-clic on the file <emphasis role="bold">ASMLogo.cs</emphasis> and choose "Open
             With ..." > "EMFText cs editor". Analyse its content : it follows the structure of .cs
@@ -618,20 +626,26 @@ package ASM
             (through the nsUri) and define the style and the concrete rules for each meta-class
             concept that we want to map.</para>
           <tip>
-            <para>If you meet with some errors, be sure that you <link
-                linkend="section_package_registry.link">register</link> your ecore and that the path
-              to your genmodel is correct.</para>
+            <para>If you meet with some errors, be sure to <link
+                linkend="section_package_registry.link">register</link> your ecore and ensure that
+              the path to your genmodel is correct.</para>
           </tip>
         </step>
         <step><anchor id="generate_text_resource"/><para>Right-click on <emphasis role="bold"
               >ASMLogo.cs</emphasis> file and choose <emphasis role="bold">generate Text
-              Ressource</emphasis>.</para><para>This would add two project in your project structure
-            : <emphasis role="bold">org.emftext.commons.antlr3_1_1</emphasis> and <emphasis
-              role="bold"
-          >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo</emphasis>.</para></step>
+              Ressource</emphasis>.</para><para>This would add two project in your project structure : <emphasis role="bold"
+              >org.emftext.commons.antlr3_1_1</emphasis> and <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo</emphasis>.</para>
+          <para>(<emphasis role="bold">Update</emphasis> : Since EMFtext 1.3, this would add three
+            projects in your project structure : <emphasis role="bold"
+              >org.emftext.commons.antlr3_2_0</emphasis>, <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo</emphasis> (core resource for
+            texteditor) and <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui</emphasis> (eclipse ui
+            interraction).)</para></step>
       </procedure>
-      <para>You have just finished to set up your text editor. Keep going through this tutorial to
-        test it inside a real interpreter.</para>
+      <para>You have just generated the code for your text editor in "src" and "src-gen" of each
+        project. Keep going through this tutorial to test it inside a real interpreter.</para>
     </section>
     <section id="section_gmf_editor.link">
       <title id="section_gmf_editor.title.link">GMF editor<phrase/></title>
@@ -1530,8 +1544,9 @@ PenUp </programlisting>
     <note>
       <para>If you want to compare your results with the solution code deployed inside the Kermeta
         Eclipse or if you want to shortcut to the final results directly, you may launch <emphasis
-          role="bold">File -> New -> Example... -> Kermeta Samples -> Kermeta 2 Logo tuto
-          (solution)</emphasis>. You'll then get a project structure as illustrated as below : </para>
+          role="bold">File -> New -> Example... -> Kermeta Samples -> Logo tutorial -
+          solution</emphasis>. It will load a bunch of project as shown in the project structure
+        below : </para>
       <figure>
         <title>Logo solution project structure</title>
         <mediaobject>
