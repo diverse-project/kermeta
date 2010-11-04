@@ -35,10 +35,15 @@ abstract class Art2ChannelFragmentActivator extends BundleActivator {
     props.put(Constants.ART2_INSTANCE_NAME, componentName)
     bc.registerService(classOf[Art2ChannelFragment].getName(), channelActor, props);
 
+    /* PUT INITIAL PROPERTIES */
+    channelActor.getDictionary.put(Constants.ART2_PROPERTY_OSGI_BUNDLE, bc.getBundle)
+
+    //channelActor.startChannelFragment //DEPRECATED DONE BY DEPLOY
   }
 
   def stop(bc : BundleContext){
     channelActor.stop
+    //channelActor.stopChannelFragment //DEPRECATED DONE BY DEPLOY
     channelActor = null
   }
 }

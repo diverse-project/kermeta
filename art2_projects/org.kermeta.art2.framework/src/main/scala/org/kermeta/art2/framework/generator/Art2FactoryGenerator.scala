@@ -10,8 +10,6 @@ import java.io.File
 import org.kermeta.art2.ContainerRoot
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
-import org.kermeta.art2.MessagePortType
-import org.kermeta.art2.ServicePortType
 import org.kermeta.art2.ChannelType
 import org.kermeta.art2.ComponentType
 import org.kermeta.art2.framework.aspects.Art2Aspects._
@@ -46,7 +44,6 @@ object Art2FactoryGenerator {
       if( ct.getStopMethod == null){
         logger.error("Stop method is mandatory for component name => "+ct.getName);System.exit(1)
       }
-
       wrapper.append("def startComponent(){getArt2ComponentType.asInstanceOf["+componentBean+"]."+ct.getStartMethod+"()}\n")
       wrapper.append("def stopComponent(){getArt2ComponentType.asInstanceOf["+componentBean+"]."+ct.getStopMethod+"()}\n")
       wrapper.append("}}\n")
@@ -101,9 +98,17 @@ object Art2FactoryGenerator {
       wrapper.append("import org.kermeta.art2.framework._\n")
       wrapper.append("object "+factoryName+"{\n")
 
-      wrapper.append("def createChannel()={new "+ct.getBean+" with ChannelTypeFragment }\n")
+      wrapper.append("def createChannel()={new "+ct.getBean+" with ChannelTypeFragment {\n")
 
-      wrapper.append("}\n")
+
+      if(ct.getStartMethod != null){
+        wrapper.append("override def startChannelFragment(){this.asInstanceOf["+componentBean+"]."+ct.getStartMethod+"()}\n")
+      }
+      if(ct.getStopMethod != null){
+        wrapper.append("override def stopChannelFragment(){this.asInstanceOf["+componentBean+"]."+ct.getStopMethod+"()}\n")
+      }
+
+      wrapper.append("}}}\n")
     }
 
 

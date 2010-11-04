@@ -8,4 +8,10 @@ package org.kermeta.art2.framework
 trait Art2ChannelFragment extends Art2Actor {
   def getName : String
   def getNodeName : String
+
+  def startChannelFragment
+  def stopChannelFragment
+
+  def getDictionary : java.util.HashMap[String,Object]
+
 }

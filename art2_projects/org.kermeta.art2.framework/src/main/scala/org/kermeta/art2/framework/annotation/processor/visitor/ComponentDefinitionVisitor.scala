@@ -15,6 +15,7 @@ import com.sun.mirror.util.SimpleDeclarationVisitor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.DeployUnitProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.DictionaryProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.LibraryProcessor
+import org.kermeta.art2.framework.annotation.processor.visitor.sub.LifeCycleMethodProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.PortMappingProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.ProvidedPortProcessor
 import org.kermeta.art2.framework.annotation.processor.visitor.sub.RequiredPortProcessor
@@ -30,6 +31,7 @@ extends SimpleDeclarationVisitor
    with DictionaryProcessor
    with PortMappingProcessor
    with LibraryProcessor
+   with LifeCycleMethodProcessor
 {
 
   override def visitClassDeclaration(classdef : ClassDeclaration) = {
@@ -65,6 +67,7 @@ extends SimpleDeclarationVisitor
 
   override def visitMethodDeclaration(methoddef : MethodDeclaration) = {
     processPortMapping(componentType,methoddef,env)
+    processLifeCycleMethod(componentType,methoddef)
   }
 
 

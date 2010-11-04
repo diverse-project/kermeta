@@ -8,6 +8,8 @@ package org.kermeta.art2.framework
 import org.kermeta.art2.Art2Package
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.XMIResource
+import org.eclipse.emf.ecore.xmi.XMLResource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.kermeta.art2.ContainerRoot
 import java.io.InputStream
@@ -18,10 +20,13 @@ import org.eclipse.emf.common.util.URI
 object Art2XmiHelper {
   def save(uri:String,root : ContainerRoot) = {
     var rs :ResourceSetImpl = new ResourceSetImpl();
+
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
     rs.getPackageRegistry().put(Art2Package.eNS_URI, Art2Package.eINSTANCE);
     var uri1:URI   = URI.createURI(uri)
     var res : Resource = rs.createResource(uri1)
+    res.asInstanceOf[XMIResource].getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+    res.asInstanceOf[XMIResource].getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
     res.getContents.add(root)
     res.save(new HashMap());
   }
@@ -30,9 +35,12 @@ object Art2XmiHelper {
     var rs = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
     rs.getPackageRegistry().put(Art2Package.eNS_URI, Art2Package.eINSTANCE);
-    var res = rs.getResource(URI.createURI(uri), true).getContents().get(0);
+    var res = rs.getResource(URI.createURI(uri), true)
+    res.asInstanceOf[XMIResource].getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+    res.asInstanceOf[XMIResource].getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+    var result = res.getContents().get(0);
     //println(res)
-    return res.asInstanceOf[ContainerRoot];
+    return result.asInstanceOf[ContainerRoot];
   }
 
   def loadStream(input : InputStream) : ContainerRoot = {
@@ -40,6 +48,8 @@ object Art2XmiHelper {
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
     rs.getPackageRegistry().put(Art2Package.eNS_URI, Art2Package.eINSTANCE);
     var ressource = rs.createResource(URI.createURI(Art2Package.eNS_URI));
+    ressource.asInstanceOf[XMIResource].getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+    ressource.asInstanceOf[XMIResource].getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
     ressource.load(input, new HashMap());
     ressource.getContents.get(0).asInstanceOf[ContainerRoot];
   }
@@ -50,6 +60,8 @@ object Art2XmiHelper {
     rs.getPackageRegistry().put(Art2Package.eNS_URI, Art2Package.eINSTANCE);
     var uri1:URI   = URI.createURI(Art2Package.eNS_URI+"MEMORY")
     var res : Resource = rs.createResource(uri1)
+    res.asInstanceOf[XMIResource].getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+    res.asInstanceOf[XMIResource].getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
     res.getContents.add(root)
     res.save(output, new HashMap())
   }

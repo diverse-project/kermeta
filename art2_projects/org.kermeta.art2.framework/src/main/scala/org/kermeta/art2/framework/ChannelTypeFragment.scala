@@ -22,8 +22,10 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
   var nodeName : String = ""
   @BeanProperty
   var name : String = ""
-  @BeanProperty
+  //@BeanProperty
   var dictionary : HashMap[String, Object] = new HashMap[String, Object]()
+  def setDictionary(d : HashMap[String, Object]) = dictionary = d
+  override def getDictionary() : HashMap[String, Object] = dictionary
 
   override def getBindedPorts():java.util.List[Art2Port] = { portsBinded.values.toList } //OVERRIDE BY FACTORY
   override def getOtherFragments():java.util.List[Art2ChannelFragment] = { fragementBinded.values.toList }
@@ -65,6 +67,15 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
         d.keySet.foreach{v=>
           dictionary.put(v, d.get(v))
         }
+        reply(true)
+      }
+
+    case Art2StartMessage => {
+        startChannelFragment
+        reply(true)
+      }
+    case Art2StopMessage => {
+        stopChannelFragment
         reply(true)
       }
 
@@ -122,6 +133,10 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
         dispatch(msg2)
       }
   }
+
+
+  def startChannelFragment : Unit = {}
+  def stopChannelFragment : Unit = {}
   
 
 }
