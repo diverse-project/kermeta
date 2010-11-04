@@ -5,6 +5,7 @@
 
 package org.kermeta.art2.framework;
 
+import java.util.HashMap;
 import org.kermeta.art2.framework.message.Art2Message;
 
 /**
@@ -18,5 +19,7 @@ public abstract class AbstractChannelFragment implements ChannelFragment {
     public java.util.List<Art2ChannelFragment> getOtherFragments(){return null;} //OVERRIDE BY FACTORY
 
     public Object forward(Art2Actor delegate, Art2Message msg){return null;} //OVERRIDE BY FACTORY
+
+    public HashMap<String, Object> getDictionary(){return null;} //OVERRIDE BY FACTORY
 
 }

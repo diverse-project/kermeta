@@ -4,6 +4,7 @@
  */
 package org.kermeta.art2.framework;
 
+import java.util.HashMap;
 import org.kermeta.art2.framework.message.Art2Message;
 
 /**
@@ -19,4 +20,6 @@ public interface ChannelFragment {
     public java.util.List<Art2ChannelFragment> getOtherFragments();
 
     public Object forward(Art2Actor delegate, Art2Message msg);
+
+    public HashMap<String, Object> getDictionary();
 }
