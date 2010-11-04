@@ -63,6 +63,12 @@ class Art2ModelSynch(port : Int,modelHandler : Art2ModelHandlerService) extends 
             
         var msgsynch = msg.fromJSON(classOf[Art2ModelSynchMessage])
 
+        if(msgsynch == null){
+          
+          println("NULL Model Synch MEssage REC !!!!!")
+        }
+
+
         if(msgsynch.getNodeSenderName == modelHandler.getNodeName || msgsynch.passedNodes.contains(modelHandler.getNodeName) ){
           logger.info("No process msg send by me or passed by me !")
         } else {
