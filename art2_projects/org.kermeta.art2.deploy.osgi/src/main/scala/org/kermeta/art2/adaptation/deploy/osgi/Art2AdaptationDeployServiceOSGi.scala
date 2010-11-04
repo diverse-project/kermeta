@@ -95,22 +95,22 @@ class Art2AdaptationDeployServiceOSGi extends Art2AdaptationDeployService {
         case ca : AddInstance => {
             command_add_instance = command_add_instance ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
             updateDictionaryCommand = updateDictionaryCommand ++ List(UpdateDictionaryCommand(ca.getRef,ctx,nodeName))
-            if(ca.getRef.isInstanceOf[ComponentInstance]){
-              startCommand = startCommand ++ List(StartComponentCommand(ca.getRef,ctx,nodeName))
-            }
+           // if(ca.getRef.isInstanceOf[ComponentInstance]){
+              startCommand = startCommand ++ List(StartInstanceCommand(ca.getRef,ctx,nodeName))
+           // }
           }
         case ca : RemoveInstance =>{
             command_remove_instance = command_remove_instance ++ List(RemoveInstanceCommand(ca.getRef,ctx,nodeName))
-            if(ca.getRef.isInstanceOf[ComponentInstance]){
-              stopCommand = stopCommand ++ List(StopComponentCommand(ca.getRef,ctx,nodeName))
-            }
+            //if(ca.getRef.isInstanceOf[ComponentInstance]){
+              stopCommand = stopCommand ++ List(StopInstanceCommand(ca.getRef,ctx,nodeName))
+            //}
           }
         case ca : UpdateInstance => {
             //STOP & REMOVE
             command_remove_instance = command_remove_instance ++ List(RemoveInstanceCommand(ca.getRef,ctx,nodeName))
             if(ca.getRef.isInstanceOf[ComponentInstance]){
-              stopCommand = stopCommand ++ List(StopComponentCommand(ca.getRef,ctx,nodeName))
-              startCommand = startCommand ++ List(StartComponentCommand(ca.getRef,ctx,nodeName))
+              stopCommand = stopCommand ++ List(StopInstanceCommand(ca.getRef,ctx,nodeName))
+              startCommand = startCommand ++ List(StartInstanceCommand(ca.getRef,ctx,nodeName))
             }
             command_add_instance = command_add_instance ++ List(AddInstanceCommand(ca.getRef,ctx,nodeName))
             updateDictionaryCommand = updateDictionaryCommand ++ List(UpdateDictionaryCommand(ca.getRef,ctx,nodeName))
