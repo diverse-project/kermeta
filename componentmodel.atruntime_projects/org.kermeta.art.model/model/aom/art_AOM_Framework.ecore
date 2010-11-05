@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smartadapters4ART"
+    nsURI="http://SmartAdapters4ART" nsPrefix="org">
+  <eClassifiers xsi:type="ecore:EClass" name="Aspect">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointcut" eType="#//PointcutModel"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="advice" lowerBound="1"
+        eType="#//AdviceModel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategies" upperBound="-1"
+        eType="#//InstantiationStrategy" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1"
+        eType="#//Adaptation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CloneAdaptation" abstract="true" eSuperTypes="#//Adaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateAdaptation" abstract="true" eSuperTypes="#//Adaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetAdaptation" abstract="true" eSuperTypes="#//Adaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnsetAdaptation" abstract="true" eSuperTypes="#//Adaptation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdviceModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="ecore:EClass metamodel@runtime_relaxed.ecore#//AspectModelElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PointcutModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="ecore:EClass metamodel@runtime_relaxed.ecore#//AspectModelElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstantiationStrategy" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="adviceElements" upperBound="-1"
+        eType="ecore:EClass metamodel@runtime_relaxed.ecore#//AspectModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GlobalInstantiation" eSuperTypes="#//InstantiationStrategy"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedInstantiation" abstract="true"
+      eSuperTypes="#//InstantiationStrategy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointcutElements" upperBound="-1"
+        eType="ecore:EClass metamodel@runtime_relaxed.ecore#//AspectModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PerRoleMatch" eSuperTypes="#//ScopedInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PerElementMatch" eSuperTypes="#//ScopedInstantiation"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eSubpackages name="adaptations" nsURI="http://SmartAdapters4ART/adaptations" nsPrefix="adaptations">
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeNode" eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nodeToSet" lowerBound="1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//distrib_relaxed/Node"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeSystem" eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToSet" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//System"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refroot" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refservices" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/Service"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reftypes" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refdataTypes" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceComponentInstance"
+        eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToSet"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstancePrimitiveInstance"
+        eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveInstanceToSet"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/PrimitiveInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceCompositeInstance"
+        eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="CompositeInstanceToSet"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refsubComponent" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refdelegation" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/DelegationBinding"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="#//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceTransmissionBinding"
+        eSuperTypes="#//SetAdaptation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="TransmissionBindingToSet"
+          eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance" eType="ecore:EClass metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="refId" eType="#//String"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.art.model/src"
+    modelPluginID="org.kermeta.art.model" modelName="Art_AOM_Framework" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>art_AOM_Framework.ecore</foreignModel>
+  <genPackages prefix="Smartadapters4ART" disposableProviderFactory="true" ecorePackage="art_AOM_Framework.ecore#/">
+    <genDataTypes ecoreDataType="art_AOM_Framework.ecore#//String"/>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//Aspect">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//Aspect/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//Aspect/pointcut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//Aspect/advice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//Aspect/strategies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//Aspect/adapt"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//Adaptation"/>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//CloneAdaptation"/>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//CreateAdaptation"/>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//SetAdaptation"/>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//UnsetAdaptation"/>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//AdviceModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//AdviceModel/content"/>
+    </genClasses>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//PointcutModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//PointcutModel/content"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//InstantiationStrategy">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//InstantiationStrategy/adviceElements"/>
+    </genClasses>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//GlobalInstantiation"/>
+    <genClasses image="false" ecoreClass="art_AOM_Framework.ecore#//ScopedInstantiation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//ScopedInstantiation/pointcutElements"/>
+    </genClasses>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//PerRoleMatch"/>
+    <genClasses ecoreClass="art_AOM_Framework.ecore#//PerElementMatch"/>
+    <nestedGenPackages prefix="Adaptations" disposableProviderFactory="true" ecorePackage="art_AOM_Framework.ecore#//adaptations">
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeNode">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeNode/nodeToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeNode/components"/>
+      </genClasses>
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeSystem">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/SystemToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/refroot"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/refservices"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/reftypes"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/refdataTypes"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeSystem/refname"/>
+      </genClasses>
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/ComponentInstanceToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/reftype"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/refstate"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/refsuperComponent"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/refattribute"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/refbinding"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceComponentInstance/refname"/>
+      </genClasses>
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/PrimitiveInstanceToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/reftype"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/refstate"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/refsuperComponent"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/refattribute"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/refbinding"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstancePrimitiveInstance/refname"/>
+      </genClasses>
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/CompositeInstanceToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refsubComponent"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refdelegation"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/reftype"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refstate"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refsuperComponent"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refattribute"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refbinding"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceCompositeInstance/refname"/>
+      </genClasses>
+      <genClasses ecoreClass="art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding/TransmissionBindingToSet"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding/refclient"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding/refserver"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding/refserverInstance"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art_AOM_Framework.ecore#//adaptations/SetruntimeinstanceTransmissionBinding/refId"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+  <genPackages prefix="Art_relaxed" disposableProviderFactory="true" ecorePackage="metamodel@runtime_relaxed.ecore#/">
+    <genDataTypes ecoreDataType="metamodel@runtime_relaxed.ecore#//String"/>
+    <genDataTypes ecoreDataType="metamodel@runtime_relaxed.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="metamodel@runtime_relaxed.ecore#//Integer"/>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//ModelElement"/>
+    <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//System">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//System/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//System/services"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//System/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//System/dataTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//System/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//DataType"/>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//CardinalityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//CardinalityElement/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//CardinalityElement/upper"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//AspectModelElement"/>
+    <nestedGenPackages prefix="Instance_relaxed" disposableProviderFactory="true"
+        ecorePackage="metamodel@runtime_relaxed.ecore#//instance_relaxed">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime_relaxed.ecore#//instance_relaxed/InstanceState">
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime_relaxed.ecore#//instance_relaxed/InstanceState/OFF"/>
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime_relaxed.ecore#//instance_relaxed/InstanceState/ON"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/state"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/superComponent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/attribute"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/binding"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/implem"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ComponentInstance/groups"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/PrimitiveInstance"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance/subComponent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/CompositeInstance/delegation"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/Binding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/Binding/serverInstance"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//instance_relaxed/Binding/id"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding/client"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/TransmissionBinding/server"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/DelegationBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/DelegationBinding/source"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/DelegationBinding/exported"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/AttributeInstance"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute/value"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/ValuedAttribute/attribute"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/DictionaryValuedAttribute">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/DictionaryValuedAttribute/entries"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/DictionaryValuedAttribute/attribute"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/Entry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//instance_relaxed/Entry/value"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/DefaultEntry">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//instance_relaxed/DefaultEntry/key"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//instance_relaxed/OtherEntry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//instance_relaxed/OtherEntry/key"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Type_relaxed" disposableProviderFactory="true" ecorePackage="metamodel@runtime_relaxed.ecore#//type_relaxed">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime_relaxed.ecore#//type_relaxed/PortRole">
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime_relaxed.ecore#//type_relaxed/PortRole/client"/>
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime_relaxed.ecore#//type_relaxed/PortRole/server"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType/port"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType/attribute"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType/groups"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/ComponentType/implem"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/PrimitiveType"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/CompositeType"/>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Service">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/Service/operation"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Operation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/Operation/input"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/Operation/output"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Parameter"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/FunctionalService"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/ControlService"/>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort/service"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort/role"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort/protocol"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/AbstractPort/uri"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Port"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/PortCollection">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/PortCollection/ids"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/PortId"/>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Attribute"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/BasicAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/BasicAttribute/defaultValue"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/Dictionary">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/Dictionary/valueType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//type_relaxed/Dictionary/keys"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//type_relaxed/DictionaryDefaultValue">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/DictionaryDefaultValue/key"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//type_relaxed/DictionaryDefaultValue/value"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Implem_relaxed" disposableProviderFactory="true" ecorePackage="metamodel@runtime_relaxed.ecore#//implem_relaxed">
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//implem_relaxed/ComponentImplementation"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//implem_relaxed/FractalComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//implem_relaxed/FractalComponent/controllerDesc"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//implem_relaxed/FractalComponent/contentDesc"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//implem_relaxed/OSGiComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//implem_relaxed/OSGiComponent/implementingClass"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//implem_relaxed/TypeImplementation"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//implem_relaxed/OSGiType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//implem_relaxed/OSGiType/generateInstanceBundle"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Group_relaxed" disposableProviderFactory="true" ecorePackage="metamodel@runtime_relaxed.ecore#//group_relaxed">
+      <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//group_relaxed/Group"/>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//group_relaxed/TypeGroup">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//group_relaxed/TypeGroup/types"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//group_relaxed/TypeGroup/subGroups"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//group_relaxed/InstanceGroup">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//group_relaxed/InstanceGroup/instances"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//group_relaxed/InstanceGroup/subGroups"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Distrib_relaxed" disposableProviderFactory="true" ecorePackage="metamodel@runtime_relaxed.ecore#//distrib_relaxed">
+      <genClasses ecoreClass="metamodel@runtime_relaxed.ecore#//distrib_relaxed/Node">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//distrib_relaxed/Node/uri"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime_relaxed.ecore#//distrib_relaxed/Node/components"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

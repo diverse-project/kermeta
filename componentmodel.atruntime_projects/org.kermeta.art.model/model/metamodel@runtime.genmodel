@@ -28,7 +28,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/lower"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/upper"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//AspectModelElement"/>
     <nestedGenPackages prefix="Instance" disposableProviderFactory="true" ecorePackage="metamodel@runtime.ecore#//instance">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime.ecore#//instance/InstanceState">
         <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//instance/InstanceState/OFF"/>
