@@ -1,0 +1,239 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binarymerger_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/binarymerger/Strategy.kmt"
+
+using org::kermeta::binarymerger
+
+aspect class ClassDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy ) : Void from GenericTypeDefinition  is do
+		
+		var mergedModelClassDefinition : ClassDefinition init self.similarElementInMergedModel.asType(ClassDefinition)
+		if (not mergedModelClassDefinition.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar ClassDefinition "+ mergedModelClassDefinition.name)	
+			self.ownedOperation.each{aspectOwnedOperation |
+				var equivalentOwnedOperation : Operation
+				equivalentOwnedOperation := mergedModelClassDefinition.ownedOperation.detect{ mergedOwnedOperation | 
+					aspectOwnedOperation.getSignature().localMatch(aspectOwnedOperation, mergedOwnedOperation)
+					// strategy.localMatch(aspectOwnedOperation, mergedOwnedOperation)
+				}
+				if (not equivalentOwnedOperation.isVoid) then
+					// mark them as similar
+					aspectOwnedOperation.similarElementInMergedModel := equivalentOwnedOperation
+					
+				else
+					// move nested package in merged model
+					mergedModelClassDefinition.ownedOperation.add(aspectOwnedOperation)
+				end
+			}
+			self.ownedAttribute.each{aspectOwnedAttribute |
+				var equivalentOwnedAttribute : Property
+				equivalentOwnedAttribute := mergedModelClassDefinition.ownedAttribute.detect{ mergedOwnedAttribute | 
+					aspectOwnedAttribute.getSignature().localMatch(aspectOwnedAttribute, mergedOwnedAttribute)
+					//strategy.localMatch(aspectOwnedAttribute, mergedOwnedAttribute)
+				}
+				if (not equivalentOwnedAttribute.isVoid) then
+					// mark them as similar
+					aspectOwnedAttribute.similarElementInMergedModel := equivalentOwnedAttribute
+				else
+					// move nested package in merged model
+					mergedModelClassDefinition.ownedAttribute.add(aspectOwnedAttribute)
+				end
+			}	
+		else
+			stdio.writeln("   No similar ClassDefinition "+ mergedModelClassDefinition.name + ", all the ClassDefinition and its content should have been moved in merged model")
+		end
+		
+		// Due to multiple inheritance need to duplicate that part
+		var mergedModelTypeContainer : TypeContainer init self.similarElementInMergedModel.asType(TypeContainer)
+		if (not mergedModelTypeContainer.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar ClassDefinition/TypeContainer ")	
+			self.containedType.each{aspectOwnedType |
+				var equivalentOwnedTypeDefinition : Type
+				equivalentOwnedTypeDefinition := mergedModelTypeContainer.containedType.detect{ mergedOwnedType | 
+					aspectOwnedType.getSignature().localMatch(aspectOwnedType, mergedOwnedType)					
+					// strategy.localMatch(aspectOwnedType, mergedOwnedType)
+				}
+				if (not equivalentOwnedTypeDefinition.isVoid) then
+					// mark them as similar
+					aspectOwnedType.similarElementInMergedModel := equivalentOwnedTypeDefinition
+				else
+					// move nested element in merged model
+					mergedModelTypeContainer.containedType.add(aspectOwnedType)
+				end
+			}	
+		else
+			stdio.writeln("   No similar ClassDefinition/TypeContainer, all the ClassDefinition/TypeContainer and its content should have been moved in merged model")
+		end
+		
+		super(strategy)		
+	end
+}
+
+aspect class GenericTypeDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void is do
+				stdio.writeln("   TODO GenericTypeDefinition.mergePass1() ")
+	end
+}
+aspect class ModelingUnit
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void is do
+	
+		var mergedModelModelingUnit : ModelingUnit init self.similarElementInMergedModel.asType(ModelingUnit)
+		/* self.usings.each{u | u.eachOwnedElement(context, func)}
+		self.requires.each{r | r.eachOwnedElement(context, func)}
+		self.includeFilters.each{iFilter | iFilter.eachOwnedElement(context, func)}	
+		self.excludeFilters.each{excFilter | excFilter.eachOwnedElement(context, func)} */
+		self.packages.each{aspectPackage |
+			var equivalentPackage : Package
+			equivalentPackage := mergedModelModelingUnit.packages.detect{ mergedPackage | 
+				aspectPackage.getSignature().localMatch(aspectPackage, mergedPackage)										
+				// strategy.localMatch(aspectPackage, mergedPackage)
+			}
+			if (not equivalentPackage.isVoid) then
+				// mark them as similar
+				aspectPackage.similarElementInMergedModel := equivalentPackage
+			else
+				// move package in merged model
+				mergedModelModelingUnit.packages.add(aspectPackage)
+			end
+		}
+		super(strategy)	
+	end
+}
+
+aspect class NamedElement
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void is do
+		super(strategy)		
+	end
+}
+
+
+aspect class Object
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	operation binaryMerger_MoveToMergedModel(strategy : Strategy) : Void is do
+				
+	end
+}
+
+aspect class Package 
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void from TypeDefinitionContainer is do
+		var mergedModelPackage : Package init self.similarElementInMergedModel.asType(Package)
+		if (not mergedModelPackage.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar Package "+ mergedModelPackage.name)	
+			self.nestedPackage.each{aspectNestedPackage |
+				var equivalentNestedPackage : Package
+				equivalentNestedPackage := mergedModelPackage.nestedPackage.detect{ mergedNestedPackage | 
+					aspectNestedPackage.getSignature().localMatch(aspectNestedPackage, mergedNestedPackage)														
+					// strategy.localMatch(aspectNestedPackage, mergedNestedPackage)
+				}
+				if (not equivalentNestedPackage.isVoid) then
+					// mark them as similar
+					aspectNestedPackage.similarElementInMergedModel := equivalentNestedPackage
+				else
+					// move nested package in merged model
+					mergedModelPackage.nestedPackage.add(aspectNestedPackage)
+				end
+			}	
+		else
+			stdio.writeln("   No similar Package "+ mergedModelPackage.name + ", all the package and its content should have been moved in merged model")
+		end
+		super(strategy)
+	end
+}
+
+aspect class TypeContainer
+{
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void   is do
+		var mergedModelTypeContainer : TypeContainer init self.similarElementInMergedModel.asType(TypeContainer)
+		if (not mergedModelTypeContainer.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar TypeContainer ")	
+			self.containedType.each{aspectOwnedType |
+				var equivalentOwnedTypeDefinition : Type
+				equivalentOwnedTypeDefinition := mergedModelTypeContainer.containedType.detect{ mergedOwnedType | 
+					aspectOwnedType.getSignature().localMatch(aspectOwnedType, mergedOwnedType)																			
+					// strategy.localMatch(aspectOwnedType, mergedOwnedType)
+				}
+				if (not equivalentOwnedTypeDefinition.isVoid) then
+					// mark them as similar
+					aspectOwnedType.similarElementInMergedModel := equivalentOwnedTypeDefinition
+				else
+					// move nested element in merged model
+					mergedModelTypeContainer.containedType.add(aspectOwnedType)
+				end
+			}	
+		else
+			stdio.writeln("   No similar TypeContainer, all the TypeContainer and its content should have been moved in merged model")
+		end
+		super(strategy)
+	end
+}
+
+aspect class TypeDefinitionContainer
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_MoveToMergedModel(strategy : Strategy) : Void from NamedElement is do
+		var mergedModelTypeDefinitionContainer : TypeDefinitionContainer init self.similarElementInMergedModel.asType(TypeDefinitionContainer)
+		if (not mergedModelTypeDefinitionContainer.isVoid) then
+			// Merging content of similar Package
+			stdio.writeln("   Merging content of similar TypeDefinitionContainer "+ mergedModelTypeDefinitionContainer.name)	
+			self.ownedTypeDefinition.each{aspectOwnedTypeDefinition |
+				var equivalentOwnedTypeDefinition : TypeDefinition
+				equivalentOwnedTypeDefinition := mergedModelTypeDefinitionContainer.ownedTypeDefinition.detect{ mergedOwnedTypeDefinition | 
+					aspectOwnedTypeDefinition.getSignature().localMatch(aspectOwnedTypeDefinition, mergedOwnedTypeDefinition)																			
+					// strategy.localMatch(aspectOwnedTypeDefinition, mergedOwnedTypeDefinition)
+				}
+				if (not equivalentOwnedTypeDefinition.isVoid) then
+					// mark them as similar
+					aspectOwnedTypeDefinition.similarElementInMergedModel := equivalentOwnedTypeDefinition
+				else
+					// move nested element in merged model
+					mergedModelTypeDefinitionContainer.ownedTypeDefinition.add(aspectOwnedTypeDefinition)
+				end
+			}	
+		else
+			stdio.writeln("   No similar TypeDefinitionContainer "+ mergedModelTypeDefinitionContainer.name + ", all the TypeDefinitionContainer and its content should have been moved in merged model")
+		end	
+		super(strategy)	
+	end
+}

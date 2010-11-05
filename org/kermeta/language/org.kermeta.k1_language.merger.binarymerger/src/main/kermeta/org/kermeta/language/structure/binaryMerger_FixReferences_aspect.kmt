@@ -1,0 +1,155 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kermeta/org/kermeta/language/structure/binarymerger_aspect.kmt"
+
+
+aspect class ClassDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_FixReferences() : Void from GenericTypeDefinition  is do
+		// add references contained by aspect		
+		var aspectModelClassDefinition : ClassDefinition init self.similarElementInAspectModel.asType(ClassDefinition)		
+		if (not aspectModelClassDefinition.isVoid) then
+			// find reference not already present in the mergedModel
+			var referencesNotInMergedModel : kermeta::standard::Sequence<Type> 
+			referencesNotInMergedModel := aspectModelClassDefinition.superType.select{mu |
+				var doesntExistsAsSimilarElement : Boolean init true 
+				if not mu.similarElementInMergedModel.isVoid then
+					doesntExistsAsSimilarElement := not self.superType.contains(mu.similarElementInMergedModel.asType(Type))
+				end
+				
+				// doesn't exist, neither as an aspect, nor as a MergedElement
+				doesntExistsAsSimilarElement and (not self.superType.contains(mu) )
+			}
+			// add them or their equivalent in the merged model
+			referencesNotInMergedModel.each{ ref |
+				if ref.similarElementInMergedModel.isVoid then
+					self.superType.add(ref)
+				else
+					self.superType.add(ref.similarElementInMergedModel.asType(Type))
+				end
+			}
+		end
+		
+		// make sure that all references do not points to the aspectModel,
+		// find element that have an equivalent in the mergedModel
+			// replace them by their equivalent 
+		var referencesInAspectModel : kermeta::standard::Sequence<Type> 
+		referencesInAspectModel := self.superType.select{mu | not mu.similarElementInMergedModel.isVoid }
+		referencesInAspectModel.each{refToReplace | 
+			self.superType.remove(refToReplace)
+			self.superType.add(refToReplace.similarElementInMergedModel.asType(Type))
+		}		
+		super()		
+	end
+}
+
+aspect class GenericTypeDefinition
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_FixReferences() : Void is do
+		super()
+	end
+}
+aspect class ModelingUnit
+{
+	/**
+	 * fix the references to make sure they all points to the MergedModel	 
+	 */
+	method binaryMerger_FixReferences() : Void is do
+		// add references contained by aspect		
+		var aspectModelModelingUnit : ModelingUnit init self.similarElementInAspectModel.asType(ModelingUnit)		
+		if (not aspectModelModelingUnit.isVoid) then
+			// find reference not already present in the mergedModel
+			var referencesNotInMergedModel : kermeta::standard::Sequence<ModelingUnit> 
+			referencesNotInMergedModel := aspectModelModelingUnit.referencedModelingUnits.select{mu |
+				var doesntExistsAsSimilarElement : Boolean init true 
+				if not mu.similarElementInMergedModel.isVoid then
+					doesntExistsAsSimilarElement := not self.referencedModelingUnits.contains(mu.similarElementInMergedModel.asType(ModelingUnit))
+				end
+				
+				// doesn't exist, neither as an aspect, nor as a MergedElement
+				doesntExistsAsSimilarElement and (not self.referencedModelingUnits.contains(mu) )
+			}
+			// add them or their equivalent in the merged model
+			referencesNotInMergedModel.each{ ref |
+				if ref.similarElementInMergedModel.isVoid then
+					self.referencedModelingUnits.add(ref)
+				else
+					self.referencedModelingUnits.add(ref.similarElementInMergedModel.asType(ModelingUnit))
+				end
+			}
+		end
+		
+		// make sure that all references do not points to the aspectModel,
+		// find element that have an equivalent in the mergedModel
+			// replace them by their equivalent 
+		var referencesInAspectModel : kermeta::standard::Sequence<ModelingUnit> 
+		referencesInAspectModel := self.referencedModelingUnits.select{mu | not mu.similarElementInMergedModel.isVoid }
+		referencesInAspectModel.each{refToReplace | 
+			self.referencedModelingUnits.remove(refToReplace)
+			self.referencedModelingUnits.add(refToReplace.similarElementInMergedModel.asType(ModelingUnit))
+		}
+		super()
+	end
+}
+
+aspect class NamedElement
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_FixReferences() : Void is do
+			
+		super()	
+	end
+}
+
+
+aspect class Object
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	operation binaryMerger_FixReferences() : Void is do
+				
+	end
+}
+
+aspect class Package 
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self
+	 */
+	method binaryMerger_FixReferences() : Void from TypeDefinitionContainer is do
+		// ignore nestingPackage which is an opposite of nestedPackage attribute
+		super()
+	end
+}
+
+aspect class TypeDefinitionContainer
+{
+	/**
+	 * Runs function func on each owned elements of this element and on self	 
+	 */
+	method binaryMerger_FixReferences() : Void from NamedElement is do
+		
+		super()
+	end
+}
