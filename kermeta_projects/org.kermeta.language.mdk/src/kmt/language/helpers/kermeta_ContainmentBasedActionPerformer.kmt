@@ -1,3 +1,7 @@
+/* 
+ * Generated with fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt
+ */
+
 package kermeta;
 
 require kermeta
