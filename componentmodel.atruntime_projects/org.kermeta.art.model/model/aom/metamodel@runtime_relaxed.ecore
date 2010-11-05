@@ -28,7 +28,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" lowerBound="1" eType="#//Integer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" lowerBound="1" eType="#//Integer"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AspectModelElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AspectModelElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pid" eType="#//String"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>

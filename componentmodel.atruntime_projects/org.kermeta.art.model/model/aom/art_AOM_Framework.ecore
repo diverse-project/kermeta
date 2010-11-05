@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smartadapters4ART"
-    nsURI="http://SmartAdapters4ART" nsPrefix="org">
+    nsURI="http://SmartAdapters4ART" nsPrefix="smartadapters4ART">
   <eClassifiers xsi:type="ecore:EClass" name="Aspect">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pointcut" eType="#//PointcutModel"

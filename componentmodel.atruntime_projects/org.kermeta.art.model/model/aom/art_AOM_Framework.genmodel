@@ -136,7 +136,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//CardinalityElement/lower"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//CardinalityElement/upper"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//AspectModelElement"/>
+    <genClasses image="false" ecoreClass="metamodel@runtime_relaxed.ecore#//AspectModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime_relaxed.ecore#//AspectModelElement/pid"/>
+    </genClasses>
     <nestedGenPackages prefix="Instance_relaxed" disposableProviderFactory="true"
         ecorePackage="metamodel@runtime_relaxed.ecore#//instance_relaxed">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime_relaxed.ecore#//instance_relaxed/InstanceState">

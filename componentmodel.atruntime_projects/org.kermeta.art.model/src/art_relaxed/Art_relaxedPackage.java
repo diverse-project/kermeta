@@ -71,13 +71,22 @@ public interface Art_relaxedPackage extends EPackage {
 	int ASPECT_MODEL_ELEMENT = 6;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_MODEL_ELEMENT__PID = 0;
+
+	/**
 	 * The number of structural features of the '<em>Aspect Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT_MODEL_ELEMENT_FEATURE_COUNT = 0;
+	int ASPECT_MODEL_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link art_relaxed.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -88,6 +97,15 @@ public interface Art_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int NAMED_ELEMENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__PID = ASPECT_MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -118,6 +136,15 @@ public interface Art_relaxedPackage extends EPackage {
 	int MODEL_ELEMENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT__PID = NAMED_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,6 +171,15 @@ public interface Art_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int SYSTEM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -219,6 +255,15 @@ public interface Art_relaxedPackage extends EPackage {
 	int DATA_TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__PID = MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,6 +290,15 @@ public interface Art_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int TYPED_ELEMENT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -282,6 +336,15 @@ public interface Art_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int CARDINALITY_ELEMENT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARDINALITY_ELEMENT__PID = MODEL_ELEMENT__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -520,6 +583,17 @@ public interface Art_relaxedPackage extends EPackage {
 	EClass getAspectModelElement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link art_relaxed.AspectModelElement#getPid <em>Pid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pid</em>'.
+	 * @see art_relaxed.AspectModelElement#getPid()
+	 * @see #getAspectModelElement()
+	 * @generated
+	 */
+	EAttribute getAspectModelElement_Pid();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -715,6 +789,14 @@ public interface Art_relaxedPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ASPECT_MODEL_ELEMENT = eINSTANCE.getAspectModelElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Pid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASPECT_MODEL_ELEMENT__PID = eINSTANCE.getAspectModelElement_Pid();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

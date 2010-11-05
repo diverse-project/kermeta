@@ -361,6 +361,15 @@ public class Art_relaxedPackageImpl extends EPackageImpl implements Art_relaxedP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAspectModelElement_Pid() {
+		return (EAttribute)aspectModelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -433,6 +442,7 @@ public class Art_relaxedPackageImpl extends EPackageImpl implements Art_relaxedP
 		createEAttribute(cardinalityElementEClass, CARDINALITY_ELEMENT__UPPER);
 
 		aspectModelElementEClass = createEClass(ASPECT_MODEL_ELEMENT);
+		createEAttribute(aspectModelElementEClass, ASPECT_MODEL_ELEMENT__PID);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -512,6 +522,7 @@ public class Art_relaxedPackageImpl extends EPackageImpl implements Art_relaxedP
 		initEAttribute(getCardinalityElement_Upper(), this.getInteger(), "upper", null, 1, 1, CardinalityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aspectModelElementEClass, AspectModelElement.class, "AspectModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAspectModelElement_Pid(), this.getString(), "pid", null, 0, 1, AspectModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

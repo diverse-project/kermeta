@@ -73,6 +73,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int COMPONENT_INSTANCE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__PID = Art_relaxedPackage.MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,6 +173,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int PRIMITIVE_INSTANCE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_INSTANCE__PID = COMPONENT_INSTANCE__PID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -253,6 +271,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int COMPOSITE_INSTANCE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_INSTANCE__PID = COMPONENT_INSTANCE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -364,6 +391,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int BINDING = 3;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING__PID = Art_relaxedPackage.ASPECT_MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -399,6 +435,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int TRANSMISSION_BINDING = 4;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSMISSION_BINDING__PID = BINDING__PID;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -456,6 +501,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int DELEGATION_BINDING = 5;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELEGATION_BINDING__PID = BINDING__PID;
+
+	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -511,6 +565,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int ATTRIBUTE_INSTANCE = 6;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_INSTANCE__PID = Art_relaxedPackage.ASPECT_MODEL_ELEMENT__PID;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -528,6 +591,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int VALUED_ATTRIBUTE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUED_ATTRIBUTE__PID = ATTRIBUTE_INSTANCE__PID;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -567,6 +639,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int DICTIONARY_VALUED_ATTRIBUTE = 8;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE__PID = ATTRIBUTE_INSTANCE__PID;
+
+	/**
 	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -604,6 +685,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	int ENTRY = 9;
 
 	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__PID = Art_relaxedPackage.ASPECT_MODEL_ELEMENT__PID;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,6 +720,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int DEFAULT_ENTRY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_ENTRY__PID = ENTRY__PID;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -667,6 +766,15 @@ public interface Instance_relaxedPackage extends EPackage {
 	 * @generated
 	 */
 	int OTHER_ENTRY = 11;
+
+	/**
+	 * The feature id for the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OTHER_ENTRY__PID = ENTRY__PID;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.

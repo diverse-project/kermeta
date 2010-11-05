@@ -50,7 +50,7 @@ public interface Smartadapters4ARTPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "org";
+	String eNS_PREFIX = "smartadapters4ART";
 
 	/**
 	 * The singleton instance of the package.
