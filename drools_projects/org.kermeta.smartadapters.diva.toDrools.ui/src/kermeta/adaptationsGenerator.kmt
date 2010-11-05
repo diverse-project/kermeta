@@ -7,9 +7,8 @@
  */
 
 
-package org::smartadapters::core;
-require "platform:/lookup/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
-//require "http://SmartAdapters4ART/smartadapters/core"
+package smartadapters4ART;
+require "platform:/lookup/org.kermeta.art.model/model/aom/art_AOM_Framework.ecore"
 
 require kermeta
 using kermeta::standard
@@ -89,7 +88,42 @@ class Context{
 	
 }
 
-aspect class SetruntimeSystem
+aspect class SetNode
+{
+	method toDrools(ctx:Context) : Void is do
+		ctx.generateSetMany(self.nodeToSet, "Components", false, self.components, true,"art.Node","art.instance.ComponentInstance")
+	end
+}
+
+aspect class SetTransmissionBinding
+{
+	method toDrools(ctx:Context) : Void is do 
+//		ctx.generateSetOne(self.TransmissionBindingToSet, "Id", true, self.refId, false,"art.instance.TransmissionBinding","")
+//		ctx.generateSetOne(self.TransmissionBindingToSet, "Client", false, self.refclient, true,"art.instance.TransmissionBinding", "art.type.AbstractPort")
+//		ctx.generateSetOne(self.TransmissionBindingToSet, "Server", false, self.refserver, true,"art.instance.TransmissionBinding","art.type.AbstractPort")
+		ctx.generateSetOne(self.bindingToSet, "ServerInstance", false, self.serverInstance, true,"art.instance.TransmissionBinding","art.instance.ComponentInstance")
+	end
+	
+	
+}
+
+aspect class SetComponentInstance
+{
+	method toDrools(ctx:Context) : Void is do 
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "Name", true, self.refname, false,"art.instance.ComponentInstance","")
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "ContentDesc", true, self.refcontentDesc, false)
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "ControllerDesc", true, self.refcontrollerDesc, false)
+		ctx.generateSetOne(self.componentToSet, "State", true, self.state, false,"art.instance.ComponentInstance","")
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "Type", false, self.reftype, true,"art.instance.ComponentInstance","art.type.ComponentType")
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "SuperComponent", false, self.refsuperComponent, true,"art.instance.ComponentInstance","art.instance.CompositeInstance")
+		ctx.generateSetMany(self.componentToSet, "Attribute", false, self.~attribute, true,"art.instance.ComponentInstance","art.instance.AttributeInstance")
+		ctx.generateSetMany(self.componentToSet, "Binding", false, self.bindings, true,"art.instance.ComponentInstance","art.instance.TransmissionBinding")		
+	end
+	
+	
+}
+
+/*aspect class SetruntimeSystem
 {
 	method toDrools(ctx:Context) : Void is do 
 		
@@ -103,21 +137,7 @@ aspect class SetruntimeSystem
 	
 	
 }
-aspect class SetruntimeinstanceComponentInstance
-{
-	method toDrools(ctx:Context) : Void is do 
-		ctx.generateSetOne(self.ComponentInstanceToSet, "Name", true, self.refname, false,"art.instance.ComponentInstance","")
-//		ctx.generateSetOne(self.ComponentInstanceToSet, "ContentDesc", true, self.refcontentDesc, false)
-//		ctx.generateSetOne(self.ComponentInstanceToSet, "ControllerDesc", true, self.refcontrollerDesc, false)
-		ctx.generateSetOne(self.ComponentInstanceToSet, "State", true, self.refstate, false,"art.instance.ComponentInstance","")
-		ctx.generateSetOne(self.ComponentInstanceToSet, "Type", false, self.reftype, true,"art.instance.ComponentInstance","art.type.ComponentType")
-		ctx.generateSetOne(self.ComponentInstanceToSet, "SuperComponent", false, self.refsuperComponent, true,"art.instance.ComponentInstance","art.instance.CompositeInstance")
-		ctx.generateSetMany(self.ComponentInstanceToSet, "Attribute", false, self.refattribute, true,"art.instance.ComponentInstance","art.instance.AttributeInstance")
-		ctx.generateSetMany(self.ComponentInstanceToSet, "Binding", false, self.refbinding, true,"art.instance.ComponentInstance","art.instance.TransmissionBinding")		
-	end
-	
-	
-}
+
 
 aspect class SetruntimeinstanceCompositeInstance
 {
@@ -150,17 +170,5 @@ aspect class SetruntimeinstancePrimitiveInstance
 	
 	
 }
-
-aspect class SetruntimeinstanceTransmissionBinding
-{
-	method toDrools(ctx:Context) : Void is do 
-		ctx.generateSetOne(self.TransmissionBindingToSet, "Id", true, self.refId, false,"art.instance.TransmissionBinding","")
-		ctx.generateSetOne(self.TransmissionBindingToSet, "Client", false, self.refclient, true,"art.instance.TransmissionBinding", "art.type.AbstractPort")
-		ctx.generateSetOne(self.TransmissionBindingToSet, "Server", false, self.refserver, true,"art.instance.TransmissionBinding","art.type.AbstractPort")
-		ctx.generateSetOne(self.TransmissionBindingToSet, "ServerInstance", false, self.refserverInstance, true,"art.instance.TransmissionBinding","art.instance.ComponentInstance")
-	end
-	
-	
-}
-
+*/
 }
