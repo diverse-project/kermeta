@@ -24,13 +24,18 @@ with PomGenerator {
 
   def generate(root:ContainerRoot,generateAllProject:Boolean,genRootLocation:String) = {
 
+    root.getDeployUnits.foreach{du=>
+      var projectRootLocation = genRootLocation + "/" + du.getGroupName + "_" + du.getUnitName
 
-    if(generateAllProject){
-      generateProjectStructure(genRootLocation)
-      generatePom(root,genRootLocation)
+      if(generateAllProject){
+        generateProjectStructure(projectRootLocation)
+        generatePom(root,projectRootLocation,du)
+      }
+
+      generateComponentClasses(root,projectRootLocation + "/" + JAVA_SRC_FOLDER)
     }
+
     
-    generateComponentClasses(root,genRootLocation + "/" + JAVA_SRC_FOLDER)
   }
 
   private def generateProjectStructure(location:String) = {

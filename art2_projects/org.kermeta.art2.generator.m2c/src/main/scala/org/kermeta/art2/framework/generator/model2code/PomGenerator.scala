@@ -8,11 +8,12 @@ package org.kermeta.art2.framework.generator.model2code
 import java.io.File
 import java.io.FileWriter
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.DeployUnit
 import scala.collection.JavaConversions._
 
 trait PomGenerator {
 
-  def generatePom(root:ContainerRoot, location:String) = {
+  def generatePom(root:ContainerRoot, location:String, du:DeployUnit) = {
     var f = new File(location + "/pom.xml")
     if(!f.exists) {
       f.createNewFile
@@ -20,12 +21,12 @@ trait PomGenerator {
 
     var writer = new FileWriter(f)
 
-    writer.append(generateProject)
+    writer.append(generateProject(du))
     writer.flush
     writer.close
   }
 
-  private def generateProject = {
+  private def generateProject(du:DeployUnit) = {
     var buffer = new StringBuffer
     
     buffer.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" " 
@@ -33,7 +34,7 @@ trait PomGenerator {
                   + "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 "
                   + "http://maven.apache.org/maven-v4_0_0.xsd\">\n")
     buffer.append("\n")
-    buffer.append(generateMainInfo)
+    buffer.append(generateMainInfo(du))
     buffer.append("\n")
     buffer.append(generateParent)
     buffer.append("\n")
@@ -46,13 +47,14 @@ trait PomGenerator {
     buffer.toString
   }
 
-  private def generateMainInfo = {
+  private def generateMainInfo(du:DeployUnit) = {
     var buffer = new StringBuffer
 
     buffer.append("    <modelVersion>4.0.0</modelVersion>\n")
-    buffer.append("    <groupId>org.kermeta.art2.temporary</groupId>\n")
-    buffer.append("    <artifactId>TEMPORARY.LIBRARY</artifactId>\n")
-    buffer.append("    <name>%%% GENERATED LIBRARY FROM MODEL %%%</name>\n")
+    buffer.append("    <name>"+ {if(du.getName==null){du.getGroupName + "_" + du.getUnitName}else{du.getName}} + "</name>\n")
+    buffer.append("    <groupId>"+du.getGroupName+"</groupId>\n")
+    buffer.append("    <artifactId>"+du.getUnitName+"</artifactId>\n")
+    buffer.append("    <version>"+du.getVersion+"</version>\n")
 
     buffer.toString
   }
