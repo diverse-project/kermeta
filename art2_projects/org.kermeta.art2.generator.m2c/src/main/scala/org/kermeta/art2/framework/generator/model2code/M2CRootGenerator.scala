@@ -8,6 +8,7 @@ package org.kermeta.art2.framework.generator.model2code
 import java.io.File
 import org.kermeta.art2.ComponentType
 import org.kermeta.art2.ContainerRoot
+import org.kermeta.art2.DeployUnit
 import scala.collection.JavaConversions._
 
 
@@ -31,8 +32,8 @@ with PomGenerator {
         generateProjectStructure(projectRootLocation)
         generatePom(root,projectRootLocation,du)
       }
-
-      generateComponentClasses(root,projectRootLocation + "/" + JAVA_SRC_FOLDER)
+      
+        generateComponentClasses(root,du,projectRootLocation + "/" + JAVA_SRC_FOLDER)
     }
 
     
@@ -50,12 +51,13 @@ with PomGenerator {
     }
   }
 
-  private def generateComponentClasses(root:ContainerRoot,location:String) = {
-    root.getTypeDefinitions.foreach{typeDef => typeDef match {
+  private def generateComponentClasses(root:ContainerRoot,du:DeployUnit,location:String) = {
+    root.getTypeDefinitions.find(typeDef => typeDef.getDeployUnit==du).foreach{typeDefinition =>
+        typeDefinition match {
         case (componentType : ComponentType) => {
             generateComponentType(root, componentType, location)
           }
-        case _ => printf("Generation not implemented yet for type " + typeDef.getClass.getName + "\n")
+        case _ => printf("Generation not implemented yet for type " + typeDefinition.getClass.getName + "\n")
       }
     }
   }
