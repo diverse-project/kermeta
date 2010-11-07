@@ -90,6 +90,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <node.name>duke</node.name>
     <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
     <slf4j.version>1.6.1</slf4j.version>
     <slf4j.version.range>[1.5,2)</slf4j.version.range>
