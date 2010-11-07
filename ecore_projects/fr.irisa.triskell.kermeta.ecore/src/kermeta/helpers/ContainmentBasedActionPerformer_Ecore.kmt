@@ -31,9 +31,10 @@ aspect class EPackage {
 aspect class EClass {
 	operation eachOwnedElement(func : <EObject -> Object>) : Void is do
 		self.eReferences.each{ ref |
-			if ref.containment then
-				func(ref)
-			end
+			func(ref)
+		}
+		self.eAttributes.each{ ref |			
+			func(ref)
 		}
 	end
 }
