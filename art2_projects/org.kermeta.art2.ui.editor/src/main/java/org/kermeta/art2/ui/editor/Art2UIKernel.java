@@ -4,6 +4,7 @@
 
 package org.kermeta.art2.ui.editor;
 
+import org.kermeta.art2.ui.Art2Cluster;
 import org.kermeta.art2.ui.Art2Handler;
 import org.kermeta.art2.ui.editor.panel.Art2EditorPanel;
 import org.kermeta.art2.ui.framework.SelectElement;
@@ -19,6 +20,7 @@ public class Art2UIKernel {
         uifactory = new Art2UIFactory(this);
         modelHandler = new Art2Handler();
         modelPanel = uifactory.createModelPanelUI(modelHandler.getActualModel());
+        Art2Cluster.start();
     }
 
     private Art2UIFactory uifactory;
