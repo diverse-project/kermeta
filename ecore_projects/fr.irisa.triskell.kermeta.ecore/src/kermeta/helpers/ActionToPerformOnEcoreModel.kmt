@@ -66,10 +66,10 @@ aspect class EClass {
 			content.append("\toperation")
 		end
 		
-		content.append(" eachOwnedElement(func : <" + highLevelModelElement + " -> Object>) : Void")
+		content.append(" eachOwnedElement(func : <" + highLevelModelElement + " -> kermeta::standard::Object>) : Void")
 		
 		if self.eSuperTypes.size()>0 then
-			 content.append(" from " + self.eSuperTypes.one.name)
+			 content.append(" from " + EcoreHelper.new.getClassifierQualifiedName(self.eSuperTypes.one))
 		end
 		
 		content.append(" is do\n")
@@ -86,7 +86,7 @@ aspect class EClass {
 	
 	method getHighLevelModelElement(highLevelModelElement : Bag<String>) : Bag<String> is do
 		if self.eSuperTypes.size == 0 then
-			highLevelModelElement.add(self.name)
+			highLevelModelElement.add(EcoreHelper.new.getClassifierQualifiedName(self))
 		end
 		result := highLevelModelElement
 	end

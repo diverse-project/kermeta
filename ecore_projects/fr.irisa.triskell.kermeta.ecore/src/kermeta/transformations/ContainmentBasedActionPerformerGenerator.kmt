@@ -68,7 +68,7 @@ class ContainmentBasedActionPerformerGenerator
 		}
 		
 		if highLevelModelElement.size() == 0 or highLevelModelElement.size() > 1 then
-			result := "Object"
+			result := "kermeta::standard::Object"
 		else
 			result := highLevelModelElement.one()
 		end
