@@ -107,6 +107,14 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
     case _ => println("WTF !!")
   }
 
+  def getDictionary : java.util.HashMap[String,java.lang.Object] = new java.util.HashMap[String,java.lang.Object]
+
+  def startChannelFragment = {}
+  
+  def stopChannelFragment = {}
+
+
+
 
 
 }
