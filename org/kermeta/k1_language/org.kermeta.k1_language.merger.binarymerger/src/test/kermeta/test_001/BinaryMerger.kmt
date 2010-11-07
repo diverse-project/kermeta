@@ -1,0 +1,161 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Didier
+ */
+@mainClass "org::kermeta::language::merger::BinaryMerger"
+@mainOperation "main"
+
+
+package org::kermeta::language::merger;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta1/kermeta/org/kermeta/language/binarymerger/km_BinaryMergerAspect.kmt"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta1/kermeta/org/kermeta/language/binarymerger/km_BinaryMergerSignatureAspect.kmt"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta1/kermeta/org/kermeta/language/binarymerger/km_BinaryMergerMoveAspect.kmt"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt"
+require "platform:/resource/org.kermeta.k1_language.merger.binarymerger/src/main/kermeta/org/kermeta/binarymerger/kermeta_ContainmentBasedActionPerformer.kmt"
+//require "BinaryMergerStrategy.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::language::structure
+
+class BinaryMerger
+{
+	operation main() : Void is do 
+		test_001_a
+		/*test_001_b
+		test_001_c
+		test_001_d*/
+		stdio.writeln("Done")
+	end
+	
+	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
+		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+		
+		// primaryModelModelingUnit is now used as mergedModel
+		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit		
+		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
+		
+		var context : org::kermeta::ecore::binarymerger::BinaryMergerContext init org::kermeta::ecore::binarymerger::BinaryMergerContext.new
+		
+		aspectModelModelingUnit.binaryMerger_MoveToMergedModel(context)
+		/* aspectModelModelingUnit.eachOwnedElement{ c |
+				c.binaryMerger_MoveToMergedModel(context)}
+		 mergedModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
+			function { c : kermeta::standard::Object|
+				c.binaryMerger_FixReferences()})
+		*/
+		// control result
+		/* stdio.writeln("Check result")		
+		primaryModelModelingUnit.eachOwnedElement(void, 
+			function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+			*/		
+		result := primaryModelModelingUnit
+	end
+	
+	operation test_001_a() : Void is do 
+		stdio.writeln("test_001()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/src/test/resources/test_001/file1.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/src/test/resources/test_001/file2.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
+       	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_1_2.km",
+       		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
+       	mergedModelResource.save
+		stdio.writeln("test_001_a() Done")
+	end
+	
+	operation test_001_b() : Void is do 
+		stdio.writeln("test_001_b()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/src/test/resources/test_001/file1.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
+       	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_1_framework.km",
+       		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
+       	mergedModelResource.save
+		stdio.writeln("test_001_b() Done")
+	end
+	
+	operation test_001_c() : Void is do 
+		stdio.writeln("test_001_c()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/src/test/resources/test_001/file2.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
+       	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_2_framework.km",
+       		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
+       	mergedModelResource.save
+		stdio.writeln("test_001_c() Done")
+	end
+	
+	operation test_001_d() : Void is do 
+		stdio.writeln("test_001_d()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_1_framework.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_2_framework.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
+       	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.k1_language.merger.binarymerger/target/test/output/test_001/file_1_framework_2_framework.km",
+       		"http://www.kermeta.org/kermeta/1_2_0//kermeta")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
+       	mergedModelResource.save
+		stdio.writeln("test_001_d() Done")
+	end
+}
