@@ -36,6 +36,10 @@ aspect class CommonClass2
 {
 }
 
+aspect class CommonClass3
+{
+}
+
 class One
 {
 }
