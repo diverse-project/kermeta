@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::binarymerger;
+
+
+require kermeta
+require "Signature.kmt"
+
+using kermeta::standard
+
+class BinaryMergerContext
+{
+	reference defaultSignature : org::kermeta::binarymerger::Signature
+	
+	operation initialize() : BinaryMergerContext is do
+	 	result := self
+	 end
+	 
+	 operation getSignature(object : Object ) : org::kermeta::binarymerger::Signature is do
+		// default return standard Signature
+		result := org::kermeta::binarymerger::Signature.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+}
