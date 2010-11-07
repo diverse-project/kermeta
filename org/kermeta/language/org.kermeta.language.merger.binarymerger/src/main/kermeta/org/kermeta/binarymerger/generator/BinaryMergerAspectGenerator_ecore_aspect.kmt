@@ -33,9 +33,9 @@ aspect class EPackage {
 	method binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		var content : StringBuffer init StringBuffer.new
 		if not self.container.isVoid() then 
-			content.append(context.getIndentString)
+			content.append(context.indentString)
 			content.append("package " + self.name + " {")
-			context.indentLevel := context.indentLevel+1
+			context.pushIndent
 		end
 		
 		self.eachOwnedElement{ e |
@@ -43,8 +43,8 @@ aspect class EPackage {
 		}
 		
 		if not self.container.isVoid() then
-			context.indentLevel := context.indentLevel-1
-			content.append(context.getIndentString)
+			context.popIndent
+			content.append(context.indentString)
 			content.append("}\n")
 		end
 		result := content.toString()
@@ -55,18 +55,18 @@ aspect class EPackage {
 aspect class EClass {
 	method binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		var content : StringBuffer init StringBuffer.new
-		content.append(context.getIndentString)
+		content.append(context.indentString)
 		content.append("aspect class " + self.name + " {")
 		
-		context.indentLevel := context.indentLevel+1
-		content.append(context.getIndentString)
+		context.pushIndent
+		content.append(context.indentString)
 		content.append("/** if this " + self.name + " is in the AspectModel, it may have an equivalent in the MergedModel */")
-		content.append(context.getIndentString)
+		content.append(context.indentString)
 		content.append("reference similar" + self.name + "InMergedModel : "+ self.name + "#similar"+ self.name + "InAspectModel")
 		
-		content.append(context.getIndentString)
+		content.append(context.indentString)
 		content.append("/** if this " + self.name + " is in the MergedModel, it may have an equivalent in the AspectModel */")
-		content.append(context.getIndentString)
+		content.append(context.indentString)
 		content.append("reference similar" + self.name + "InAspectModel : "+ self.name + "#similar"+ self.name + "InMergedModel")
 		
 		
@@ -94,8 +94,8 @@ aspect class EClass {
 		}
 		content.append("\n\tend\n")
 		*/
-		context.indentLevel := context.indentLevel-1
-		content.append(context.getIndentString)
+		context.popIndent
+		content.append(context.indentString)
 		result := content.append("}").toString()
 	end
 	

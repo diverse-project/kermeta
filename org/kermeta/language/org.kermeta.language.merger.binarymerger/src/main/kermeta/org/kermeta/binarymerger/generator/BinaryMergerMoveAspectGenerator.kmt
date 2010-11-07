@@ -75,19 +75,3 @@ class BinaryMergerMoveAspectGenerator
 	        result ?= resource.one
    	end
 }
-class BinaryMergerAspectGeneratorContext{
-	attribute indentLevel : Integer
-	operation initialize() : BinaryMergerAspectGeneratorContext is do
-		indentLevel := 0
-		result := self
-	end
-	/**
-	 * Start a newLine indented string
-	 */
-	operation getIndentString() : String is do
-		var buff : StringBuffer init StringBuffer.new
-		buff.append("\n")
-		indentLevel.times{i | buff.append("   ")}
-		result := buff.toString
-	end
-}

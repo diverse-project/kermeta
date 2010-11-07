@@ -39,12 +39,17 @@ class BinaryMergerGeneratorContext{
 	end
 	
 	operation pushIndent() is do
+	   // stdio.writeln("indentLevel = "+indentLevel.toString + self.toString)
 		indentLevel := indentLevel + 1
 		calculateIndentString
 	end
 	
 	operation popIndent() is do
-		indentLevel := indentLevel - 1
+		if (indentLevel == 0) then
+	    	stdio.writeln("popIndent called on indentLevel = "+indentLevel.toString )
+		else
+			indentLevel := indentLevel - 1
+		end	
 		calculateIndentString
 	end
 	
