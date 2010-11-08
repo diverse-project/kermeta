@@ -24,6 +24,7 @@ object Art2Cluster {
         }
         override def setState(state : Array[Byte])= synchronized {
           println("Cluster SetState")
+          println(state)
           super.setState(state)
         }
         

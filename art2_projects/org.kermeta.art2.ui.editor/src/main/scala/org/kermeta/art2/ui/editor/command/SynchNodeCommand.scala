@@ -7,8 +7,6 @@ package org.kermeta.art2.ui.editor.command
 
 import java.io.ByteArrayOutputStream
 import java.net.InetSocketAddress
-import java.net.NetworkInterface
-import javax.jmdns.JmDNS
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.kermeta.art2.framework.bus.netty.remote.TcpClientRemoteActor
 import org.kermeta.art2.framework.message.Art2ModelSynchMessage

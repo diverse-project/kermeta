@@ -53,6 +53,9 @@ class SynchNodeIPCommand extends Command {
     msg.setNewModelAsString(outStream.toString)
     outStream.close
     client ! msg.toJSON
+
+
+
     client.stop
 
 
