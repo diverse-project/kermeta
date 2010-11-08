@@ -1,0 +1,46 @@
+/*
+ * Creation : November 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin 
+ */
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using ecore
+using kermeta::standard
+
+
+aspect class EReference {
+	operation getQualifiedName() : String is do
+		result := name
+		
+	//	if(not eReferenceType.isVoid) then
+			//result := eReferenceType.getQualifiedName() + "::" + result
+	//	end
+	end
+}
+
+
+aspect class EPackage {
+	operation getQualifiedName() : String is do
+		result := name
+		
+	//	if(not eSuperPackage.isVoid) then
+	//		result := eSuperPackage.getQualifiedName() + "::" + result
+	//	end
+	end
+}
+
+
+aspect class EClassifier {
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if(not ePackage.isVoid) then
+			result := ePackage.getQualifiedName() + "::" + result
+		end
+	end
+}

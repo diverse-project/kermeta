@@ -1,24 +1,26 @@
-/* $Id:$ 
+/*
  * Creation : November 5, 2010
- * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "org::kermeta::language::ecore2km::Ecore2km"
-@mainOperation "main"
-
-
 package org::kermeta::language::ecore2km;
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
-//require "platform:/lookup/org.kermeta.language.model/build/ecore/kermeta_java.ecore"
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreStructure2kmStructure.kmt"
 
+using ecore
+using org::kermeta::language::structure
 
-class Ecore2km
-{
-	operation main() : Void is do 
-		// TODO: implement 'main' operation
+/**
+ * Converts a given ecore model into a kermeta v2 model.
+*/
+class Ecore2km {
+	operation convert(pkg : EPackage, namespacePrefix : String) : ModelingUnit is do
+		var ecore2kmStruct : EcoreStructure2kmStructure init EcoreStructure2kmStructure.new
+		
+		result := ModelingUnit.new
+		result.namespacePrefix := namespacePrefix
+		ecore2kmStruct.convert(pkg, result)
 	end
 }

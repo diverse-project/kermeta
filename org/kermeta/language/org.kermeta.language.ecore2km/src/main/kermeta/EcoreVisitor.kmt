@@ -1,0 +1,185 @@
+/*
+ * Creation : November 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using ecore
+
+abstract class EcoreVisitor {
+	operation visitEModelElement(element : EModelElement) : Void is do
+		element.eAnnotations.each{annot | annot.accept(self) }
+	end
+
+	operation visitEPackage(pkg : EPackage) : Void is do
+	stdio.writeln("visit pkg =" + pkg.name)
+		pkg.eClassifiers.each{classif | classif.accept(self) }
+//		pkg.eSubpackages.each{subPkg  | subPkg.accept(self)  }
+	end
+	
+	operation visitEClassifier(classifier : EClassifier) : Void is do
+	end
+	
+	operation visitENamedElement(namedElt : ENamedElement) : Void is do
+	end
+	
+	operation visitETypedElement(typedElt : ETypedElement) : Void is do
+	end
+	
+	operation visitEOperation(op : EOperation) : Void is do
+		op.eParameters.each{param | param.accept(self)}
+	end
+	
+	operation visitEParameter(param : EParameter) : Void is do
+	end
+	
+	operation visitEClass(eclass : EClass) : Void is do
+		eclass.eStructuralFeatures.each{struct | struct.accept(self)}
+		eclass.eOperations.each{op | op.accept(self)}
+	end
+	
+	operation visitEDataType(dataType : EDataType) : Void is do
+	end
+	
+	operation visitEStructuralFeature(structFeature : EStructuralFeature) : Void is do
+	end
+	
+	operation visitEReference(ref : EReference) : Void is do
+	end
+	
+	operation visitEAttribute(attr : EAttribute) : Void is do
+	end
+	
+	operation visitEEnum(enum : EEnum) : Void is do
+	end
+	
+	operation visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
+	end
+	
+	operation visitEFactory(factory : EFactory) : Void is do
+	end
+	
+	operation visitEAnnotation(annot : EAnnotation) : Void is do
+	end
+}
+
+
+aspect class EModelElement {
+	operation accept(v : EcoreVisitor) : Void is do
+		v.visitEModelElement(self)	
+	end
+}
+
+
+aspect class ENamedElement {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitENamedElement(self)	
+		super(v)
+	end
+}
+
+
+aspect class ETypedElement {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitETypedElement(self)
+		super(v)
+	end
+}
+
+aspect class EStructuralFeature {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEStructuralFeature(self)	
+		super(v)
+	end
+}
+
+aspect class EPackage {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEPackage(self)
+		super(v)
+	end
+}
+
+
+aspect class EOperation {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEOperation(self)
+		super(v)
+	end
+}
+
+
+aspect class EParameter {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEParameter(self)
+		super(v)
+	end
+}
+
+
+aspect class EClass {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEClass(self)
+		super(v)
+	end
+}
+
+
+aspect class EDataType {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEDataType(self)
+		super(v)
+	end
+}
+
+
+aspect class EReference {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEReference(self)
+		super(v)
+	end
+}
+
+
+aspect class EAttribute {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEAttribute(self)
+		super(v)
+	end
+}
+
+
+aspect class EEnum {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEEnum(self)
+		super(v)
+	end
+}
+
+
+aspect class EEnumLiteral {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEEnumLiteral(self)
+		super(v)
+	end
+}
+
+
+aspect class EFactory {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEFactory(self)
+		super(v)
+	end
+}
+
+
+aspect class EAnnotation {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEAnnotation(self)
+		super(v)
+	end
+}

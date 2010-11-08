@@ -1,0 +1,223 @@
+/*
+ * Creation : November 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package org::kermeta::language::ecore2km;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreQualifiedNameAspect.kmt"
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2kmAspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+
+using ecore
+using org::kermeta::language::structure
+
+
+/**
+ * This class contains methods and operations dedicated to the conversion
+ * of the structure of an ecore model to the structure of a kermeta model.
+ */
+class EcoreStructure2kmStructure inherits EcoreVisitor {
+	/** The modeling unit where all the created elements will be inserted. */
+	reference modelingUnit : ModelingUnit
+
+
+	/**
+	 * This main operation launches the conversion. Its uses: a modeling unit where 
+	 * all the created elements will be inserted; a package that corresponds to
+	 * the root ecore package to convert.
+	 */
+	operation convert(pkg : EPackage, modelingUnit : ModelingUnit) : Void is do
+		self.modelingUnit := modelingUnit
+		
+		// Launching the conversion.
+		pkg.accept(self)
+	end
+	
+	
+	
+	method visitEPackage(pkg : EPackage) : Void is do
+	stdio.writeln(pkg.name)
+		// Creation of the kermeta package.
+		var kmPkg : Package init Package.new.initialize(pkg.name, pkg.nsURI)
+	
+		if(pkg.eSuperPackage.isVoid) then
+			// It means that this package is the root package.
+			// The kermeta package is thus the added to the modeling unit.
+			modelingUnit.packages.add(kmPkg)
+		else
+			// This package is not the root package and is contained into an other package.
+			// The kermeta package is thus added to its parent Kermeta package: to do so, the ecore
+			// super package as a reference to the parent Kermeta package.
+			if(pkg.eSuperPackage.targetKermetaObject.isKindOf(Package)) then
+				pkg.eSuperPackage.targetKermetaObject.asType(Package).nestedPackage.add(kmPkg)
+			end
+		end
+		
+		// A reference of the new Kermeta package is then added to its corresponding
+		// Ecore package. This reference will be used to create sub-packages as explained above.
+		pkg.targetKermetaObject := kmPkg
+stdio.writeln(kmPkg.name + " " + modelingUnit.packages.size.toString)
+		super(pkg)
+	end
+
+
+
+	method visitEOperation(op : EOperation) : Void is do
+		if(not op.eContainingClass.isVoid and op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+			var returnType : UnresolvedType
+			
+			// If there is a return type, an unresolved type is created.
+			if(op.eType.isVoid) then
+				returnType := void
+			else
+				returnType := UnresolvedType.new.initialize(op.eType.getQualifiedName())
+			end
+			
+			// Creation of the ouput Kermeta operation.
+			var kmOp : Operation init Operation.new.initialize(op.name, returnType, void)
+			kmOp.isOrdered := op.ordered
+			kmOp.isUnique  := op.unique
+			
+			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
+			// Linking the Kermeta operation to the Ecore operation.
+			op.targetKermetaObject := kmOp
+		end
+		
+		super(op)
+	end
+	
+	
+
+	method visitEAttribute(eAttr : EAttribute) : Void is do
+		if(eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, eAttr.lowerBound, eAttr.upperBound)
+			// Adding the created Kermeta property to its class definition.
+			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
+			// Linking the created Kermeta property to the Ecore attribute.
+			eAttr.targetKermetaObject := prop
+		end
+		
+		super(eAttr)
+	end
+	
+	
+	
+	operation addProperty(composite : Boolean, name : String, ordered : Boolean, derived : Boolean,
+							readOnly : Boolean, eType : EClassifier, lower : Integer, upper : Integer) : Property is do
+		var type : UnresolvedType
+
+		// If the attribute has a type, an unresolved type is created.
+		if(eType.isVoid) then
+			type := void
+		else
+			type := UnresolvedType.new.initialize(eType.getQualifiedName())
+		end
+		
+		// Creation of the output Kermeta property.
+		result := Property.new.initialize(name, type, lower, upper)
+		result.isComposite := composite
+		result.isOrdered   := ordered
+		result.isDerived   := derived
+		result.isReadOnly  := readOnly
+	end
+	
+	
+	
+	method visitEReference(ref : EReference) : Void is do
+		if(ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, ref.lowerBound, ref.upperBound)
+			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
+			
+			// Adding the created Kermeta property to its class definition.
+			classDef.ownedAttribute.add(prop)
+			// Linking the created Kermeta property to the Ecore attribute.
+			ref.targetKermetaObject := prop
+			
+			// If the reference has an opposite, an unresolved type is created.
+			if(not ref.eOpposite.isVoid) then
+				var unresolvProp : UnresolvedProperty init UnresolvedProperty.new.initialize(ref.eOpposite.getQualifiedName())
+				prop.opposite := unresolvProp
+				prop.ownedUnresolvedProperties.add(unresolvProp)
+			end
+		end
+		
+		super(ref)
+	end
+	
+	
+	
+	method visitEParameter(param : EParameter) : Void is do
+		if(param.eOperation.targetKermetaObject.isKindOf(Operation)) then
+	 		var op : Operation init param.eOperation.targetKermetaObject.asType(Operation)
+			var type : UnresolvedType
+			
+			// Creating the possible Kermeta type of the parameter.
+			if(param.eType.isVoid) then
+				type := void
+			else
+				type := UnresolvedType.new.initialize(param.eType.getQualifiedName())
+			end
+			
+			//Creation of the output Kermeta parameter.
+			var kmParam : Parameter init Parameter.new.initialize(param.name, param.lowerBound, param.upperBound, op, type)
+			// Adding the Kermeta parameter to its Kermeta operation.
+			op.ownedParameter.add(kmParam)
+			// Linking the created Kermeta parameter to the Ecore parameter.
+			param.targetKermetaObject := kmParam
+		end
+
+		super(param)
+	end
+	
+	
+	
+	method visitEClass(eclass : EClass) : Void is do
+		if(not eclass.ePackage.isVoid and eclass.ePackage.targetKermetaObject.isKindOf(Package)) then
+			// Creation of the Kermeta class.
+			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, void)
+
+			// A unresolved type is created for each super type.
+			eclass.eSuperTypes.each{st |
+				var type : UnresolvedType init UnresolvedType.new.initialize(st.getQualifiedName())
+				kmClassDef.containedType.add(type)
+				kmClassDef.superType.add(type)
+			}
+			
+			// The Kermeta class is added to its Kermeta package. This package is found using the reference
+			// of the ecore package that contains the given ecore class.
+			eclass.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmClassDef)
+			// The reference to the kermeta class is added to the ecore class.
+			eclass.targetKermetaObject := kmClassDef
+		end
+
+		super(eclass)
+	end
+
+
+
+	method visitEAnnotation(annot : EAnnotation) : Void is do
+ 		if(not (annot.eModelElement.isVoid or annot.eModelElement.targetKermetaObject.isVoid)) then
+			// Creation of a kermeta tag.
+			var kmTag : Tag init Tag.new.initialize(annot.source, void, annot.eModelElement.targetKermetaObject)
+			// The kermeta tag is added to the kermeta object corresponding
+			// to the container of the ecore annotation.
+			annot.eModelElement.targetKermetaObject.kTag.add(kmTag)
+			annot.eModelElement.targetKermetaObject.kOwnedTags.add(kmTag)
+			// The reference to the kermeta tag is added to the ecore annotation.
+			annot.targetKermetaObject := kmTag
+		end
+		
+		super(annot)
+	end
+	
+	
+	
+	method visitEEnum(eEnum : EEnum) : Void is do
+		stdio.writeln("eEnum " + eEnum.name)
+		super(eEnum)
+	end
+}
