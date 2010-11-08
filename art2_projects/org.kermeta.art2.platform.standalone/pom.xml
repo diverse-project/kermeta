@@ -231,7 +231,7 @@
                 file:///${project.build.directory}/art2Bundles/art2.kompare-${art2.version}.jar,
                 file:///${project.build.directory}/art2Bundles/art2.deploy.osgi-${art2.version}.jar,
                 file:///${project.build.directory}/art2Bundles/art2.core-${art2.version}.jar,
-            <!--    file:///${project.build.directory}/art2Bundles/art2.framework.bus.jmdns-${art2.version}.jar,-->
+                file:///${project.build.directory}/art2Bundles/art2.framework.bus.jmdns-${art2.version}.jar,
                 file:///${project.build.directory}/art2Bundles/art2.framework.bus.jgroups-${art2.version}.jar
                     </deployURLs>
                 </configuration>

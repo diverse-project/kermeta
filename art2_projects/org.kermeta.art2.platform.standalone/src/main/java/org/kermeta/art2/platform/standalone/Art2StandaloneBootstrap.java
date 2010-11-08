@@ -47,6 +47,7 @@ public class Art2StandaloneBootstrap {
                 bc.installBundle("file:///" + bundles + "/art2.deploy.osgi-"+version+".jar").start();
                 bc.installBundle("file:///" + bundles + "/art2.core-"+version+".jar").start();
                 bc.installBundle("file:///" + bundles + "/art2.framework.bus.jmdns-"+version+".jar").start();
+                bc.installBundle("file:///" + bundles + "/art2.framework.bus.jgroups-"+version+".jar").start();
 
                 System.out.println(bc.getBundles().length+"-Bundle installed");
                 System.out.println("Perform bootstrap OK");
