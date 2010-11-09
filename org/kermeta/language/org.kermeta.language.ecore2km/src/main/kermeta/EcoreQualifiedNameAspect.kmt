@@ -17,9 +17,9 @@ aspect class EReference {
 	operation getQualifiedName() : String is do
 		result := name
 		
-	//	if(not eReferenceType.isVoid) then
-			//result := eReferenceType.getQualifiedName() + "::" + result
-	//	end
+		if(not eContainingClass.isVoid) then
+			result := eContainingClass.getQualifiedName() + "::" + result
+		end
 	end
 }
 
@@ -28,9 +28,9 @@ aspect class EPackage {
 	operation getQualifiedName() : String is do
 		result := name
 		
-	//	if(not eSuperPackage.isVoid) then
-	//		result := eSuperPackage.getQualifiedName() + "::" + result
-	//	end
+		if(not eSuperPackage.isVoid) then
+			result := eSuperPackage.getQualifiedName() + "::" + result
+		end
 	end
 }
 

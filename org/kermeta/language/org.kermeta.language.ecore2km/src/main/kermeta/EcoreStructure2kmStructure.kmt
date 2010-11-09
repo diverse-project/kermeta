@@ -40,7 +40,6 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEPackage(pkg : EPackage) : Void is do
-	stdio.writeln(pkg.name)
 		// Creation of the kermeta package.
 		var kmPkg : Package init Package.new.initialize(pkg.name, pkg.nsURI)
 	
@@ -60,7 +59,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		// A reference of the new Kermeta package is then added to its corresponding
 		// Ecore package. This reference will be used to create sub-packages as explained above.
 		pkg.targetKermetaObject := kmPkg
-stdio.writeln(kmPkg.name + " " + modelingUnit.packages.size.toString)
+
 		super(pkg)
 	end
 

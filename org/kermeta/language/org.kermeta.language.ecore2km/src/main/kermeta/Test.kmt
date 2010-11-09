@@ -9,7 +9,6 @@
 
 package org::kermeta::language::ecore2km;
 
-require kermeta
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2km.kmt"
 
 using ecore
@@ -24,16 +23,16 @@ class Test {
 		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
 		var i : Integer init 1
 				
-		stdio.writeln(pkgs.size.toString)
-		pkgs.each{pkg | 
-			saveKmModel(ecore2km.convert(pkg, "default"), path + i.toString + ".km")
-			i := i+1
-		}
+//		pkgs.each{pkg | 
+//			saveKmModel(ecore2km.convert(pkg, "default"), path + i.toString + ".km")
+			saveKmModel(ecore2km.convert(pkgs.one, "default"), path + i.toString + ".km")
+//			i := i+1
+//		}
 	end
 	
 	
 	operation saveKmModel(modelingUnit : ModelingUnit, path : String) : Void is do
-		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0//"
+		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
 		var repository : EMFRepository init EMFRepository.new
 		var resource : Resource init repository.createResource(path, uriMM)
 		resource.add(modelingUnit)

@@ -16,9 +16,8 @@ abstract class EcoreVisitor {
 	end
 
 	operation visitEPackage(pkg : EPackage) : Void is do
-	stdio.writeln("visit pkg =" + pkg.name)
 		pkg.eClassifiers.each{classif | classif.accept(self) }
-//		pkg.eSubpackages.each{subPkg  | subPkg.accept(self)  }
+		pkg.eSubpackages.each{subPkg  | subPkg.accept(self)  }
 	end
 	
 	operation visitEClassifier(classifier : EClassifier) : Void is do
