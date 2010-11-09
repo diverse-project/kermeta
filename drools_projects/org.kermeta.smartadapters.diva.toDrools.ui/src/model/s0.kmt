@@ -10,7 +10,7 @@
 @mainOperation "main"
 
 
-package art;
+package art_relaxed;
 
 
 require kermeta
@@ -85,7 +85,7 @@ aspect class AspectModelElement {
 	operation generatePerJoinPointStrategy(ctx:Context):Void is
 		abstract					
 }
-package instance {
+package instance_relaxed {
 aspect class ComponentInstance {
 method  pass2set(ctx:Context):Void is do 
  	end
@@ -1907,7 +1907,7 @@ method  generatePerJoinPointStrategy(ctx:Context):Void is do
 end
 
 }}
-package type {
+package type_relaxed {
 aspect class ComponentType {
 method  pass2set(ctx:Context):Void is do 
  	end
@@ -4335,7 +4335,7 @@ method  generatePerJoinPointStrategy(ctx:Context):Void is do
 end
 
 }}
-package implem {
+package implem_relaxed {
 aspect class ComponentImplementation {
 method  pass2set(ctx:Context):Void is do 
  	end
@@ -4876,7 +4876,7 @@ method  generatePerJoinPointStrategy(ctx:Context):Void is do
 end
 
 }}
-package group {
+package group_relaxed {
 aspect class Group {
 method  pass2set(ctx:Context):Void is do 
  	end
@@ -5299,7 +5299,7 @@ end
 end
 
 }}
-package distrib {
+package distrib_relaxed {
 aspect class Node {
 method  pass2set(ctx:Context):Void is do 
  		if (not self.uri.isVoid()) then
