@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="action"
+    nsURI="http:///fr/eseo/gri/malan/action/model.ecore" nsPrefix="action">
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="undoable" eType="#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doIt" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="undo" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redo" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canDo" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Need">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cible" lowerBound="1" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="n1" lowerBound="1" eType="#//Need"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="n2" lowerBound="1" eType="#//Need"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ors" upperBound="-1" eType="#//Or"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="needs" upperBound="-1"
+        eType="#//Need" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceTypeName="Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceTypeName="String"/>
+</ecore:EPackage>

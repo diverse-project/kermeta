@@ -89,25 +89,6 @@ aspect class EModelElement {
 	end
 }
 
-/* 
-aspect class ENamedElement {
-	method accept(v : EcoreVisitor) : Void is do
-		v.visitENamedElement(self)	
-	end
-}
-
-
-aspect class ETypedElement {
-	method accept(v : EcoreVisitor) : Void is do
-		v.visitETypedElement(self)
-	end
-}
-
-aspect class EStructuralFeature {
-	method accept(v : EcoreVisitor) : Void is do
-		v.visitEStructuralFeature(self)	
-	end
-}*/
 
 aspect class EPackage {
 	method accept(v : EcoreVisitor) : Void is do

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interaction"
+    nsURI="http:///fr/eseo/gri/malan/interaction/model.ecore" nsPrefix="interaction">
+  <eClassifiers xsi:type="ecore:EClass" name="Interaction" eSuperTypes="#//StateMachine">
+    <eOperations name="onStart"/>
+    <eOperations name="onUpdate"/>
+    <eOperations name="onStop"/>
+    <eOperations name="onAbort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateCreation" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eOperations name="isRunning" eType="#//Boolean"/>
+    <eOperations name="reinit"/>
+    <eOperations name="executeTransition">
+      <eParameters name="t" eType="#//Transition"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" lowerBound="1"
+        upperBound="-1" eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initState" lowerBound="1"
+        eType="#//InitState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="standardStates" upperBound="-1"
+        eType="#//StandardState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminalStates" lowerBound="1"
+        upperBound="-1" eType="#//TerminalState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abortingStates" upperBound="-1"
+        eType="#//AbortingState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activated" lowerBound="1"
+        eType="#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eOperations name="action"/>
+    <eOperations name="isGuardRespected" eType="#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputState" lowerBound="1"
+        eType="#//StandardState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputState" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actions" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbortingState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminalState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InitState" eSuperTypes="#//StandardState"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceTypeName="String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceTypeName="Boolean"/>
+</ecore:EPackage>

@@ -9,6 +9,7 @@
 
 package org::kermeta::language::ecore2km;
 
+require kermeta
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2km.kmt"
 
 using ecore
@@ -18,16 +19,12 @@ using org::kermeta::language::structure
 
 class Test {
 	operation main() : Void is do
-		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/examples/instrument"
+		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/interaction"
 		var ecore2km : Ecore2km init Ecore2km.new
 		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
-		var i : Integer init 1
 				
-//		pkgs.each{pkg | 
-//			saveKmModel(ecore2km.convert(pkg, "default"), path + i.toString + ".km")
-			saveKmModel(ecore2km.convert(pkgs.one, "default"), path + i.toString + ".km")
-//			i := i+1
-//		}
+		var modelingUnit : ModelingUnit init ecore2km.convert(pkgs.one, "default")
+		saveKmModel(modelingUnit, path + "1.km")
 	end
 	
 	
