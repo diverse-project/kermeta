@@ -11,6 +11,13 @@ import Art2Aspects._
 
 case class TypedElementAspect(e : TypedElement) {
 
+  def isModelEquals(remote : TypedElement) : Boolean = {
+    var nameEquality = e.getName == remote.getName
+    var genericEquality = e.getGenericTypes.forall(p=> remote.getGenericTypes.exists(remoteP => remoteP.isModelEquals(p)  )  )
+    var sizeEquality = e.getGenericTypes.size == remote.getGenericTypes.size
+    nameEquality && genericEquality && sizeEquality
+  }
+
   def print(openSep : Char,closeSep:Char) : String = {
     var res : StringBuilder = new StringBuilder
     res.append(e.getName)

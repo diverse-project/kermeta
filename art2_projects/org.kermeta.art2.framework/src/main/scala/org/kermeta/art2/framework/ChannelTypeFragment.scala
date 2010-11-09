@@ -63,6 +63,7 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
   }
 
   override def internal_process(msgg : Any)= msgg match {
+    
     case Art2UpdateDictionaryMessage(d) => {
         d.keySet.foreach{v=>
           dictionary.put(v, d.get(v))
