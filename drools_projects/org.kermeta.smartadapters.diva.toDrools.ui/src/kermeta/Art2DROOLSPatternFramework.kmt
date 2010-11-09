@@ -44,7 +44,7 @@ class Main {
 		var res : EMFResource 
 		
 		//resource -> plugin once deployed 
-		res ?= rep.createResource(smarturl, "platform:/resource/org.kermeta.art.model/model/aom/art_AOM_Framework.ecore")
+		res ?= rep.createResource(smarturl, "platform:/plugin/org.kermeta.art.model/model/aom/art_AOM_Framework.ecore")
 		res.load
 		var asp : Aspect
 		asp ?= res.one()

@@ -20,7 +20,7 @@ import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 public class CompilerUI implements IObjectActionDelegate, Runnable {
 	
 	public static final String DIVA_KERMETA_CODE = "platform:/plugin/org.kermeta.smartadapters.diva.toDrools.ui/src/kermeta/Art2DROOLSPatternFramework.kmt";
-	public static final String ENTRY_POINT = "patternframework::Main";
+	public static final String ENTRY_POINT = "smartadapters4ART::Main";
 	
 	protected StructuredSelection currentSelection;
     protected IFile file;

@@ -32,7 +32,7 @@ class Context{
 		res := cache.getValue(obj)
 		if res == void then
 			var metaClass : kermeta::language::structure::Class init obj.getMetaClass
-			var prop : kermeta::language::structure::Property init metaClass.classDefinition.allAttribute.select{p | p.name == "aspectID"}.one
+			var prop : kermeta::language::structure::Property init metaClass.classDefinition.allAttribute.select{p | p.name == "pid"}.one
 			
 			if prop != void then
 				res := obj.get(prop).asType(String)
