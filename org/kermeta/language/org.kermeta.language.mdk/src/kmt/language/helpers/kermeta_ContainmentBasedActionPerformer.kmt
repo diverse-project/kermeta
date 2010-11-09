@@ -1,0 +1,759 @@
+package org;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::language::structure
+
+package kermeta {
+
+package language {
+
+package behavior {
+
+aspect class Assignment {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		func(self.target)
+		func(self.~value)
+
+
+	end
+}
+
+aspect class Expression {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		func(self.staticType)
+
+	end
+}
+
+aspect class CallExpression {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+		self.staticTypeVariableBindings.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class Block {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		self.statement.each{ e |
+			func(e)
+		}
+		self.rescueBlock.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class CallVariable {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
+		super(func)
+
+
+	end
+}
+
+aspect class CallFeature {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
+		super(func)
+		func(self.target)
+		func(self.staticProperty)
+		func(self.staticOperation)
+		func(self.staticEnumLiteral)
+
+
+	end
+}
+
+aspect class CallSuperOperation {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
+		super(func)
+
+	end
+}
+
+aspect class CallResult {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallVariable is do
+		super(func)
+
+	end
+}
+
+aspect class CallValue {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
+		super(func)
+
+	end
+}
+
+aspect class Conditional {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		func(self.thenBody)
+		func(self.elseBody)
+		func(self.condition)
+
+	end
+}
+
+aspect class Raise {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		func(self.expression)
+
+	end
+}
+
+aspect class Rescue {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		self.body.each{ e |
+			func(e)
+		}
+		func(self.exceptionType)
+
+
+	end
+}
+
+aspect class TypeReference {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
+		super(func)
+
+	end
+}
+
+aspect class Literal {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+
+	end
+}
+
+aspect class EmptyExpression {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+
+	end
+}
+
+aspect class JavaStaticCall {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+
+
+
+	end
+}
+
+aspect class LambdaExpression {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		self.parameters.each{ e |
+			func(e)
+		}
+		func(self.body)
+
+	end
+}
+
+aspect class LambdaParameter {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		func(self.type)
+
+
+	end
+}
+
+aspect class IntegerLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
+		super(func)
+
+
+	end
+}
+
+aspect class StringLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
+		super(func)
+
+
+	end
+}
+
+aspect class BooleanLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
+		super(func)
+
+
+	end
+}
+
+aspect class TypeLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
+		super(func)
+		func(self.typeref)
+
+	end
+}
+
+aspect class VoidLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
+		super(func)
+
+	end
+}
+
+aspect class Loop {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		func(self.initialization)
+		func(self.body)
+		func(self.stopCondition)
+
+	end
+}
+
+aspect class SelfExpression {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+
+	end
+}
+
+aspect class VariableDecl {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
+		super(func)
+		func(self.initialization)
+		func(self.type)
+
+
+	end
+}
+
+}
+
+package structure {
+
+
+
+aspect class Object {
+	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+		self.kTag.each{ e |
+			func(e)
+		}
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
+		func(self.kType)
+
+	end
+}
+
+
+aspect class Operation {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
+		super(func)
+		self.raisedException.each{ e |
+			func(e)
+		}
+		self.ownedParameter.each{ e |
+			func(e)
+		}
+		self.~pre.each{ e |
+			func(e)
+		}
+		self.~post.each{ e |
+			func(e)
+		}
+		func(self.body)
+		func(self.superOperation)
+		self.ownedUnresolvedOperations.each{ e |
+			func(e)
+		}
+		func(self.owningClass)
+		self.typeParameter.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class Property {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
+		super(func)
+		func(self.opposite)
+		func(self.getterBody)
+		func(self.setterBody)
+		self.ownedUnresolvedProperties.each{ e |
+			func(e)
+		}
+		func(self.owningClass)
+
+
+
+
+
+
+
+
+	end
+}
+
+aspect class Type {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		func(self.typeContainer)
+
+	end
+}
+
+aspect class TypeContainer {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class EnumerationLiteral {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+		super(func)
+		func(self.~enumeration)
+
+	end
+}
+
+aspect class TypeVariableBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		func(self.variable)
+		func(self.type)
+
+	end
+}
+
+aspect class MultiplicityElement {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypedElement is do
+		super(func)
+
+
+
+
+
+	end
+}
+
+aspect class TypeDefinition {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+		super(func)
+		self.superType.each{ e |
+			func(e)
+		}
+		self.typeMappings.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class Class {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ParameterizedType is do
+		super(func)
+		self.ownedAttribute.each{ e |
+			func(e)
+		}
+		self.ownedOperation.each{ e |
+			func(e)
+		}
+		self.superClass.each{ e |
+			func(e)
+		}
+
+
+
+	end
+}
+
+aspect class DataType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+		super(func)
+
+	end
+}
+
+aspect class Enumeration {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::DataType is do
+		super(func)
+		self.ownedLiteral.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class NamedElement {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+
+	end
+}
+
+aspect class Package {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+		super(func)
+		self.nestedPackage.each{ e |
+			func(e)
+		}
+		func(self.nestingPackage)
+
+
+	end
+}
+
+aspect class Parameter {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
+		super(func)
+		func(self.~operation)
+
+	end
+}
+
+aspect class PrimitiveType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::DataType is do
+		super(func)
+		func(self.instanceType)
+
+	end
+}
+
+aspect class TypedElement {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		func(self.type)
+
+	end
+}
+
+
+aspect class Tag {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		self.object.each{ e |
+			func(e)
+		}
+
+
+
+	end
+}
+
+aspect class AbstractProperty {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+	end
+}
+
+aspect class Constraint {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+		super(func)
+		func(self.body)
+		func(self.invOwner)
+		func(self.preOwner)
+		func(self.postOwner)
+
+
+
+	end
+}
+
+
+aspect class ClassDefinition {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::GenericTypeDefinition is do
+		super(func)
+		self.~inv.each{ e |
+			func(e)
+		}
+		self.ownedAttribute.each{ e |
+			func(e)
+		}
+		self.ownedOperation.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+
+aspect class ModelingUnit {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinitionContainer is do
+		super(func)
+		self.packages.each{ e |
+			func(e)
+		}
+		self.requires.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class TypeDefinitionContainer {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+		super(func)
+		self.ownedTypeDefinition.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Require {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+
+	end
+}
+
+aspect class GenericTypeDefinition {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinition is do
+		super(func)
+		self.typeParameter.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class ParameterizedType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+		super(func)
+		self.virtualTypeBinding.each{ e |
+			func(e)
+		}
+		self.typeParamBinding.each{ e |
+			func(e)
+		}
+		func(self.typeDefinition)
+
+	end
+}
+
+aspect class TypeVariable {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		func(self.supertype)
+
+	end
+}
+
+aspect class ObjectTypeVariable {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeVariable is do
+		super(func)
+
+	end
+}
+
+aspect class ModelType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+		super(func)
+
+	end
+}
+
+aspect class ModelTypeVariable {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeVariable is do
+		super(func)
+		self.virtualType.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class VirtualType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ObjectTypeVariable is do
+		super(func)
+		func(self.classDefinition)
+		func(self.modelType)
+		self.typeParamBinding.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Model {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		self.contents.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class Resource {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+	end
+}
+
+aspect class ResourceGroup {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
+		super(func)
+		self.resources.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class SimpleResource {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
+		super(func)
+		self.contents.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class AbstractOperation {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+	end
+}
+
+aspect class UnresolvedType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+		super(func)
+		self.usings.each{ e |
+			func(e)
+		}
+		self.generics.each{ e |
+			func(e)
+		}
+
+
+	end
+}
+
+aspect class Unresolved {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+	end
+}
+
+aspect class UnresolvedProperty {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::AbstractProperty is do
+		super(func)
+
+
+	end
+}
+
+aspect class UnresolvedOperation {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::AbstractOperation is do
+		super(func)
+
+
+	end
+}
+
+aspect class Using {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+
+
+	end
+}
+
+aspect class ProductType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		self.type.each{ e |
+			func(e)
+		}
+
+	end
+}
+
+aspect class FunctionType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		func(self.left)
+		func(self.right)
+
+	end
+}
+
+aspect class VoidType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+		super(func)
+
+	end
+}
+
+aspect class TypeMapping {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
+		super(func)
+		func(self.mapping)
+		func(self.targetType)
+		func(self.sourceType)
+
+	end
+}
+
+}
+
+aspect class DummyClass {
+	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+
+	end
+}
+
+}
+
+aspect class DummyClass {
+	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+
+	end
+}
+
+}
+
+aspect class DummyClass {
+	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+
+	end
+}
+
