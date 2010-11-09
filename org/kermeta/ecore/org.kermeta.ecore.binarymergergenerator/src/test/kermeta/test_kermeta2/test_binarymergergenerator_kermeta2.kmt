@@ -26,13 +26,13 @@ class Main
 		var binaryMergerSignatureAspectGenerator : BinaryMergerSignatureAspectGenerator init BinaryMergerSignatureAspectGenerator.new
 		var binaryMergerMoveAspectGenerator : BinaryMergerMoveAspectGenerator init BinaryMergerMoveAspectGenerator.new
 		
-		binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+		binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
 			"km")
-		binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+		binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
 			"km")
-		binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+		binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
 			"km")
 	end
