@@ -3,6 +3,8 @@ package org.kermeta.smartadapters.drools.standalone;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -96,11 +98,17 @@ public class SmartAdaptersDrools {
 
 		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
 
-		java.util.List<HashMap<String,EObject>> globalList = new java.util.ArrayList<HashMap<String,EObject>>( );
-		ksession.setGlobal("list", globalList);
+
 		java.util.Map<String,EObject> uniqueobjects = new java.util.HashMap<String,EObject>();
 		ksession.setGlobal("uniqueobjects", uniqueobjects);
 
+		java.util.Map<java.util.Map<String,EObject>,java.util.Map<String,EObject>> perRole = new HashMap<Map<String,EObject>, Map<String,EObject>>();
+		ksession.setGlobal("perRole", perRole);
+
+		java.util.Map<java.util.Set<EObject>, java.util.Map<String,EObject>> perElem = new java.util.HashMap<Set<EObject>, Map<String,EObject>>();
+		ksession.setGlobal("perElem", perElem);
+
+		
 		ksession.execute(new TreeIterable<EObject>(resource.getAllContents()));
 
 		//java.lang.System.err.println("Number of Join Points: "  + globalList.size());	
