@@ -177,7 +177,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	method visitEClass(eclass : EClass) : Void is do
 		if(not eclass.ePackage.isVoid and eclass.ePackage.targetKermetaObject.isKindOf(Package)) then
 			// Creation of the Kermeta class.
-			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, void)
+			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, eclass.~abstract, void)
 
 			// A unresolved type is created for each super type.
 			eclass.eSuperTypes.each{st |
