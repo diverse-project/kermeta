@@ -215,8 +215,33 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	
+	method visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
+		if(not enumLit.eEnum.isVoid and enumLit.eEnum.targetKermetaObject.isKindOf(Enumeration)) then
+			// Creation of the Kermeta literal.
+			var literal : EnumerationLiteral init EnumerationLiteral.new.initialize(enumLit.name, 
+							enumLit.eEnum.targetKermetaObject.asType(Enumeration))
+			// Linking the ecore literal to the Kermeta one.
+			enumLit.targetKermetaObject := literal
+		end
+	
+		super(enumLit)
+	end
+	
+	
+	
 	method visitEEnum(eEnum : EEnum) : Void is do
-		stdio.writeln("eEnum " + eEnum.name)
+		if(not eEnum.ePackage.isVoid and eEnum.ePackage.targetKermetaObject.isKindOf(Package)) then
+			// Creation of the Kermeta enumeration.
+			var kmEnum : Enumeration init Enumeration.new.initialize(eEnum.name)
+			
+			// The kermeta enumeration is added to its parent package found using the trace let into
+			// the ecore package of the ecore enum.
+			eEnum.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmEnum)
+			
+			// The reference to the Kermeta enumeration is added to the ecore enum.
+			eEnum.targetKermetaObject := kmEnum
+		end
+	
 		super(eEnum)
 	end
 }

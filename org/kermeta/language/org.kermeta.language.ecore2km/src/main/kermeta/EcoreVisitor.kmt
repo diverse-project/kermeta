@@ -54,6 +54,7 @@ abstract class EcoreVisitor {
 	end
 	
 	operation visitEEnum(enum : EEnum) : Void is do
+		enum.eLiterals.each{lit | lit.accept(self)}
 	end
 	
 	operation visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
