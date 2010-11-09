@@ -1,7 +1,10 @@
+/* $Id:$ */
+/* Generated using /fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt */
+
 package org;
 
 require kermeta
-require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::language::structure
 
