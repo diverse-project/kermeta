@@ -19,7 +19,7 @@ import org.kermeta.art2.merger.Art2Merger
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
-trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with Art2PortTypeMerger {
+trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with Art2PortTypeMerger with Art2DeployUnitMerger {
 
   //TYPE DEFINITION MERGER ENTRYPOINT
   def mergeTypeDefinition(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
@@ -127,11 +127,11 @@ trait Art2TypeDefinitionMerger extends Art2Merger with Art2DictionaryMerger with
     var etp : List[DeployUnit] = List() ++ newTypeDefinition.getRequiredLibs
     newTypeDefinition.getRequiredLibs.clear
     etp.foreach{loopTP=>
-      newTypeDefinition.getRequiredLibs.add(Art2DeployUnitMerger.merge(actualModel,loopTP))
+      newTypeDefinition.getRequiredLibs.add(mergeDeployUnit(actualModel,loopTP))
     }
     //MERGE TYPE DEPLOY UNIT
     if(newTypeDefinition.getDeployUnit != null){
-      newTypeDefinition.setDeployUnit(Art2DeployUnitMerger.merge(actualModel,newTypeDefinition.getDeployUnit))
+      newTypeDefinition.setDeployUnit(mergeDeployUnit(actualModel,newTypeDefinition.getDeployUnit))
     }
 
     //ADD RECUSIVE DEFINITON TO ROOT

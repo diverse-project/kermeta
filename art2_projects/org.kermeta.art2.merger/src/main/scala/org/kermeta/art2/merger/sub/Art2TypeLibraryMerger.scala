@@ -11,9 +11,9 @@ import org.kermeta.art2.TypeLibrary
 import org.kermeta.art2.merger.Art2Merger
 import scala.collection.JavaConversions._
 
-object Art2TypeLibraryMerger extends Art2Merger {
+trait Art2TypeLibraryMerger extends Art2Merger {
 
-  def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
+  def mergeLibrary(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     var ctLib : List[TypeLibrary] = List()++modelToMerge.getLibraries.toList
     ctLib.foreach{libtomerge=>
       actualModel.getLibraries.find({elib=> elib.getName.equals(libtomerge.getName) }) match {

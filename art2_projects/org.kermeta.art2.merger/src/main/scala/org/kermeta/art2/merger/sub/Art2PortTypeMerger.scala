@@ -65,11 +65,17 @@ trait Art2PortTypeMerger {
 
   //MERGE SIMPLE DATA TYPE
   private def mergeDataType(actualModel : ContainerRoot,datatype : TypedElement) : TypedElement = {
-    actualModel.getDataTypes.find({dt=>dt.getName == datatype.getName }) match {
+    actualModel.getDataTypes.find({dt=>dt.isModelEquals(datatype)}) match {
       case Some(existDT) => existDT
       case None => {
-          var dts =  actualModel.getDataTypes
-          dts.add(datatype)
+          var dts =  actualModel.getDataTypes.add(datatype)
+
+          var generics = datatype.getGenericTypes.toList ++ List()
+          datatype.getGenericTypes.clear
+          generics.foreach{dt=>
+            datatype.getGenericTypes.add(mergeDataType(actualModel,dt))
+          }
+
           datatype
         }
     }

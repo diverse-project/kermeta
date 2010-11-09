@@ -9,13 +9,16 @@ import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.merger.sub.Art2TypeDefinitionMerger
 import org.kermeta.art2.merger.sub.Art2TypeLibraryMerger
 
-class Art2RootMerger extends Art2TypeDefinitionMerger {
+class Art2RootMerger extends Art2TypeDefinitionMerger with Art2TypeLibraryMerger {
 
-  def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
+  override def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
       // Art2DeployUnitMerger.merge(actualModel, modelToMerge)
       mergeTypeDefinition(actualModel, modelToMerge)
-      Art2TypeLibraryMerger.merge(actualModel, modelToMerge)
+      mergeLibrary(actualModel, modelToMerge)
+
+      executePostProcesses
+
     }
   }
 
