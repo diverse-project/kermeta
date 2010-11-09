@@ -1,0 +1,39 @@
+/* $Id:$ 
+ * Creation : November 7, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Didier
+ */
+@mainClass "binarymergergenerator::test_binarymergergenerator_kermeta2::Main"
+@mainOperation "main"
+
+
+package binarymergergenerator::test_binarymergergenerator_kermeta2;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerAspectGenerator.kmt"
+require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerSignatureAspectGenerator.kmt"
+require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerMoveAspectGenerator.kmt"
+
+using org::kermeta::binarymerger::generator
+
+class Main
+{
+	operation main() : Void is do 
+		var binaryMergerAspectGenerator : BinaryMergerAspectGenerator init BinaryMergerAspectGenerator.new
+		var binaryMergerSignatureAspectGenerator : BinaryMergerSignatureAspectGenerator init BinaryMergerSignatureAspectGenerator.new
+		var binaryMergerMoveAspectGenerator : BinaryMergerMoveAspectGenerator init BinaryMergerMoveAspectGenerator.new
+		
+		binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
+			"km")
+		binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
+			"km")
+		binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/build/ecore/kermeta_java.ecore",
+			"platform:/resource/org.kermeta.ecore.binarymergergenerator/target/test/test_kermeta2/kermeta/org/kermeta/language/binarymerger",
+			"km")
+	end
+}

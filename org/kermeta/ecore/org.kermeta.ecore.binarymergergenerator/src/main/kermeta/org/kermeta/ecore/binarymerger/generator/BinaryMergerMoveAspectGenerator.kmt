@@ -1,0 +1,94 @@
+/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.2 2008-03-14 10:57:56 cfaucher Exp $
+ * Creation date: March 4, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+@mainClass "org::kermeta::binarymerger::generator::BinaryMergerMoveAspectGenerator"
+@mainOperation "generateBinaryMergerMoveAspect"
+
+
+package org::kermeta::binarymerger::generator;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+require "BinaryMergerMoveAspectGenerator_ecore_aspect.kmt"
+require "BinaryMergerGeneratorContext.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+
+using ecore
+using kermeta::language::structure
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+using kermeta::io
+using EcoreHelpers
+
+class BinaryMergerMoveAspectGenerator
+{
+	attribute isMMReflexiveKermeta : Boolean
+	
+	/**
+	 * Main entry point 
+	 */
+	operation generateBinaryMergerMoveAspect(inputEcoreMetamodel : String, 
+													  outputDirectory : String,  
+													  outputFilePrefix : String) : Void is do 
+		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
+		isMMReflexiveKermeta :=  false
+		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+	end
+	operation generateBinaryMergerMoveAspectForReflexiveKermeta(inputEcoreMetamodel : String, 
+													  outputDirectory : String,  
+													  outputFilePrefix : String) : Void is do 
+		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
+		isMMReflexiveKermeta :=  true
+		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+	end
+	
+	operation genBinaryMergerMoveAspect(inputEcoreMetamodel : String, 
+												 outputDirectory : String,  
+												 outputFilePrefix : String, 
+												 root : EPackage) : Void is do 
+		
+		var generatorContext : BinaryMergerGeneratorContext init BinaryMergerGeneratorContext.new.initialize
+		generatorContext.isMMReflexiveKermeta := isMMReflexiveKermeta
+		var content : StringBuffer init StringBuffer.new
+		
+		content.append("package " + EcoreHelper.new.getPackageQualifiedName(root) + ";\n\n")
+		content.append("require kermeta\n")
+		if (not isMMReflexiveKermeta) then
+			content.append("require \"" + inputEcoreMetamodel + "\"\n")
+		end
+		content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt\"\n")
+		if (not isMMReflexiveKermeta) then
+			content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/Mergeable.kmt\"\n")
+		end
+		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerSignatureAspect.kmt\"\n")
+		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerAspect.kmt\"\n\n")
+		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_ContainmentBasedActionPerformer.kmt\"\n\n")
+		content.append("using kermeta::language::structure\n")
+		content.append("using org::kermeta::ecore::binarymerger\n\n")
+		
+		content.append(root.binaryMergerMoveAspectKmtPrinter(generatorContext))
+		
+		var ioHelper : FileIO init FileIO.new
+		var filename : String init outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerMoveAspect.kmt"
+				          	
+		ioHelper.writeTextFile(filename,content.toString())
+		
+		stdio.writeln("\nThe generation is finished, you can retrieve the generated file at:\n" + filename)
+	end
+
+	
+	operation loadEcoreModel(input: String) : ecore::EPackage is do           
+	   		var resource : Resource init EMFRepository.new.getResource(input)
+	       	resource.load()
+	      	
+	      	// result is an EPackage
+	        result ?= resource.one
+   	end
+}

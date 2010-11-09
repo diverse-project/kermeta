@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::ecore::binarymerger;
+
+
+require kermeta
+
+using kermeta::standard
+
+class BinaryMergerContext
+{
+
+	operation initialize() : BinaryMergerContext is do
+	 	result := self
+	 end
+	
+}

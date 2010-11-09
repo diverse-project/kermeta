@@ -1,0 +1,258 @@
+/* $Id: ActionToPerformOnEcoreModel.kmt,v 1.1 2008-03-14 10:57:56 cfaucher Exp $
+ * Creation date: March 04, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+package ecore;
+ 
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/ContainmentBasedActionPerformer_Ecore.kmt"
+require "BinaryMergerMoveAspectGenerator.kmt"
+require "BinaryMergerGenerator_ecore_common_aspect.kmt"
+
+using ecore
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+using EcoreHelpers
+using org::kermeta::binarymerger::generator
+
+aspect class EObject {
+	operation binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
+
+aspect class EPackage {
+	method binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		if not self.container.isVoid() then 
+			content.append(context.indentString)
+			content.append("package " + self.name + " {")
+			context.pushIndent
+		end
+		
+		self.eachOwnedElement{ e |
+			content.append(e.binaryMergerMoveAspectKmtPrinter(context) + "\n")
+		}
+		
+		if not self.container.isVoid() then
+			context.popIndent
+			content.append(context.indentString)
+			content.append("}\n")
+		end
+		result := content.toString()
+	end
+	
+}
+
+aspect class EClass {
+	method binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		content.append(context.indentString)
+		content.append("aspect class " + self.name )
+		if (context.isMMReflexiveKermeta) then
+			content.append(" {")
+		else
+			content.append(" inherits Mergeable {")
+		end
+		
+		context.pushIndent
+		content.append(context.indentString)
+				
+		
+		if self.eSuperTypes.size()>0 then
+			content.append("method")
+		else if (context.isMMReflexiveKermeta) then
+			// special case of creating  methods on kermeta itself
+			if (self.name == "Object") then
+				content.append("operation")
+			else
+				content.append("method")
+			end
+			
+		else
+			content.append("operation")
+		end end
+		
+		content.append(" binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void")
+		
+		if self.eSuperTypes.size()>0 then
+			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
+		end
+		
+		content.append(" is do")
+		context.pushIndent
+		
+		if self.eSuperTypes.size()>0 then
+			content.append(context.indentString)
+			content.append("super(context)\n")
+		end
+		
+		content.append(context.indentString)
+		content.append("var mergedModelElement : " + context.ecoreHelper.getClassifierQualifiedName(self)) 
+		content.append(context.indentString)
+		content.append("mergedModelElement := self.similarElementInMergedModel.asType(" + context.ecoreHelper.getClassifierQualifiedName(self) + ")")		
+		content.append(context.indentString)
+		content.append("if (not mergedModelElement.isVoid) then")
+		context.pushIndent
+		content.append(context.indentString)
+		content.append("stdio.writeln(\"Merging content of a " + self.name + "\")")						
+		self.eachOwnedElement{ e |
+				content.append(e.binaryMergerMoveAspectKmtPrinter(context))
+		}
+		
+		
+		
+		
+		if self.eSuperTypes.size()>1 then
+			// must deal with EReference that comes from the other inheritance branch			
+			var allFirstSuperTypes : Set<EClass> init getAllFirstSuperTypes
+			self.eAllSuperTypes.each{ s |
+				if (not allFirstSuperTypes.contains(s)) then
+					s.eachOwnedElement{ e |
+						content.append(e.binaryMergerMoveAspectKmtPrinter(context))
+					}
+				end
+			}
+		end			
+		context.popIndent
+		content.append(context.indentString)
+		content.append("else")
+		context.pushIndent
+		content.append(context.indentString)
+		content.append("stdio.writeln(\"   No similar " + self.name + ", its content should have been moved in merged model\")")				
+		context.popIndent
+		content.append(context.indentString)
+		content.append("end")
+		
+		content.append(context.indentString)		
+		content.append("self.eachOwnedElement{ e | e")
+		if (not context.isMMReflexiveKermeta) then
+			content.append(".asType(Mergeable)")
+		end
+		content.append(".binaryMerger_MoveToMergedModel(context)}")
+		
+		
+		
+		context.popIndent
+		content.append(context.indentString)
+		content.append("end")
+		
+		context.popIndent
+		content.append(context.indentString)
+		result := content.append("}").toString()
+	end
+	
+}
+
+aspect class EReference {
+	method binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+
+
+		/*	// Merging content of similar Package
+			stdio.writeln("   Merging content of similar Package "+ mergedModelPackage.name)	
+			self.nestedPackage.each{aspectNestedPackage |
+				var equivalentNestedPackage : Package
+				equivalentNestedPackage := mergedModelPackage.nestedPackage.detect{ mergedNestedPackage | 
+					aspectNestedPackage.getSignature().localMatch(aspectNestedPackage, mergedNestedPackage)														
+					// strategy.localMatch(aspectNestedPackage, mergedNestedPackage)
+				}
+				if (not equivalentNestedPackage.isVoid) then
+					// mark them as similar
+					aspectNestedPackage.similarElementInMergedModel := equivalentNestedPackage
+				else
+					// move nested package in merged model
+					mergedModelPackage.nestedPackage.add(aspectNestedPackage)
+				end
+			} */
+		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name) 
+		if (self.containment) then
+			if self.upperBound==1 then
+				content.append(context.indentString)
+				content.append("stdio.writeln(\" TODO Deal with multiplicity == 1 for EReference " + self.name+"\")")
+			else	
+				content.append(context.indentString)
+				content.append("self.")				
+				content.append(mangledName)
+				content.append(".each{aspect_")
+				content.append(self.name)
+				content.append(" | ")
+				context.pushIndent
+					content.append(context.indentString)
+					content.append("var equivalent_")
+					content.append(self.name)
+					content.append(" : ")
+					content.append(context.ecoreHelper.getClassifierQualifiedName(self.eType))
+					content.append(context.indentString)
+					content.append("equivalent_"+self.name+" := mergedModelElement."+mangledName+".detect{ merged_"+self.name+" |")
+					context.pushIndent
+						content.append(context.indentString) 
+						content.append("aspect_"+self.name+".localMatch(merged_"+self.name+")")
+					context.popIndent
+					content.append(context.indentString)														
+					content.append("}")
+					content.append(context.indentString)
+					content.append("if (not equivalent_"+self.name+".isVoid) then")					
+					context.pushIndent
+						content.append(context.indentString)
+						content.append("// mark them as similar")
+						content.append(context.indentString)
+						content.append("aspect_"+self.name+".similarElementInMergedModel := equivalent_"+self.name+"")					
+					context.popIndent
+					content.append(context.indentString)
+					content.append("else")
+					context.pushIndent
+						content.append(context.indentString)
+						content.append("// move it in merged model")
+						content.append(context.indentString)
+						content.append("mergedModelElement."+mangledName+".add(aspect_"+self.name+")")
+					context.popIndent
+					content.append(context.indentString)
+				content.append("end")
+				context.popIndent
+				content.append(context.indentString)
+				content.append("}")
+			end			
+		end
+				
+
+		result := content.toString()
+	end
+}
+
+aspect class EAttribute {
+	method binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+
+
+		 
+		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name)
+		if not self.derived then  
+			if self.upperBound==1 then
+				content.append(context.indentString)
+					content.append("if (not self."+mangledName+".isVoid) and (mergedModelElement."+mangledName+".isVoid) then")
+					context.pushIndent
+					content.append(context.indentString)
+					content.append("mergedModelElement."+mangledName+" := self."+mangledName)					
+					context.popIndent
+					content.append(context.indentString)
+					content.append("end")
+			else
+			 	content.append(context.indentString)
+					content.append("stdio.writeln(\" TODO Deal with multiplicity > 1 for EAttribute " + self.name+"\")")		
+			end
+		end
+				
+
+		result := content.toString()
+	end
+}

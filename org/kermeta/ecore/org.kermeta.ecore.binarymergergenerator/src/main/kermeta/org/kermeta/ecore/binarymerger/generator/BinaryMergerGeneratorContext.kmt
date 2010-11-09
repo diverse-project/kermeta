@@ -1,0 +1,59 @@
+/* $Id: ContainmentBasedActionPerformerGenerator.kmt,v 1.2 2008-03-14 10:57:56 cfaucher Exp $
+ * Creation date: March 4, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+
+
+package org::kermeta::binarymerger::generator;
+
+require kermeta
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+
+class BinaryMergerGeneratorContext{
+	attribute indentLevel : Integer
+	attribute indentString : String
+	attribute ecoreHelper : EcoreHelpers::EcoreHelper 
+	
+	attribute isMMReflexiveKermeta : Boolean
+	
+	operation initialize() : BinaryMergerGeneratorContext is do
+		indentLevel := 0
+		indentString := ""
+	 	ecoreHelper := EcoreHelpers::EcoreHelper.new
+	 	isMMReflexiveKermeta := false
+		result := self
+	end
+	/**
+	 * Start a newLine indented string
+	 */
+	operation calculateIndentString()  is do
+		var buff : StringBuffer init StringBuffer.new
+		buff.append("\n")
+		indentLevel.times{i | buff.append("\t")}
+		indentString := buff.toString
+	end
+	
+	operation pushIndent() is do
+	   // stdio.writeln("indentLevel = "+indentLevel.toString + self.toString)
+		indentLevel := indentLevel + 1
+		calculateIndentString
+	end
+	
+	operation popIndent() is do
+		if (indentLevel == 0) then
+	    	stdio.writeln("popIndent called on indentLevel = "+indentLevel.toString )
+		else
+			indentLevel := indentLevel - 1
+		end	
+		calculateIndentString
+	end
+	
+}

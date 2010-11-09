@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::ecore::binarymerger;
+
+
+require kermeta
+require "BinaryMergerContext.kmt"
+
+class Mergeable
+{
+	/** if this element is in the AspectModel, it may have an equivalent in the MergedModel */
+	reference similarElementInMergedModel : Mergeable#similarElementInAspectModel
+	/** if this element is in the MergedModel, it may have an equivalent in the AspectModel */
+	reference similarElementInAspectModel : Mergeable#similarElementInMergedModel
+	
+	operation binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is abstract
+}

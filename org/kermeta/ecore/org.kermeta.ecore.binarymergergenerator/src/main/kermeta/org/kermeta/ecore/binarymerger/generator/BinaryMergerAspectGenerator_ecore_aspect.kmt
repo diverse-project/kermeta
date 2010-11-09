@@ -1,0 +1,136 @@
+/* $Id: ActionToPerformOnEcoreModel.kmt,v 1.1 2008-03-14 10:57:56 cfaucher Exp $
+ * Creation date: March 04, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+package ecore;
+ 
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/ContainmentBasedActionPerformer_Ecore.kmt"
+require "BinaryMergerAspectGenerator.kmt"
+
+using ecore
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+using EcoreHelpers
+using org::kermeta::binarymerger::generator
+
+aspect class EObject {
+	operation binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
+
+aspect class EPackage {
+	method binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		if not self.container.isVoid() then 
+			content.append(context.indentString)
+			content.append("package " + self.name + " {")
+			context.pushIndent
+		end
+		
+		self.eachOwnedElement{ e |
+			content.append(e.binaryMergerAspectKmtPrinter(context) + "\n")
+		}
+		
+		if not self.container.isVoid() then
+			context.popIndent
+			content.append(context.indentString)
+			content.append("}\n")
+		end
+		result := content.toString()
+	end
+	
+}
+
+aspect class EClass {
+	method binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		content.append(context.indentString)
+		content.append("aspect class " + self.name)
+		if (context.isMMReflexiveKermeta) then
+			content.append(" {")
+		else
+			content.append(" inherits org::kermeta::ecore::binarymerger::Mergeable {")
+		end
+		
+		context.pushIndent
+		
+		if (context.isMMReflexiveKermeta) then
+			if (self.name == "Object") then
+				content.append(context.indentString)
+				content.append("/** if this " + self.name + " is in the AspectModel, it may have an equivalent in the MergedModel */")
+				content.append(context.indentString)
+				content.append("reference similarElementInMergedModel : "+ self.name + "#similarElementInAspectModel")
+				
+				content.append(context.indentString)
+				content.append("/** if this " + self.name + " is in the MergedModel, it may have an equivalent in the AspectModel */")
+				content.append(context.indentString)
+				content.append("reference similarElementInAspectModel : "+ self.name + "#similarElementInMergedModel")
+			end
+		end
+		
+		/*
+		if self.eSuperTypes.size()>0 then
+			content.append("\tmethod")
+		else
+			content.append("\toperation")
+		end
+		
+		content.append(" eachOwnedElement(func : < -> Object>) : Void")
+		
+		if self.eSuperTypes.size()>0 then
+			 content.append(" from " + self.eSuperTypes.one.name)
+		end
+		
+		content.append(" is do\n")
+		
+		if self.eSuperTypes.size()>0 then
+			content.append("\t\tsuper(func)\n")
+		end
+		
+		self.eachOwnedElement{ e |
+			content.append(e.binaryMergerAspectKmtPrinter(context) + "\n")
+		}
+		content.append("\n\tend\n")
+		*/
+		context.popIndent
+		content.append(context.indentString)
+		result := content.append("}").toString()
+	end
+	
+}
+
+aspect class EReference {
+	method binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+
+		content.append("\t\t")
+		
+		if self.upperBound==1 then
+			content.append("func(")
+		end
+		
+		content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))
+				if self.upperBound==1 then
+			content.append(")")
+		end
+		
+		if self.upperBound==-1 then
+			content.append(".each{ e |\n")
+			content.append("\t\t\tfunc(e)")
+			content.append("\n\t\t}")
+		end
+
+		result := content.toString()
+	end
+}
