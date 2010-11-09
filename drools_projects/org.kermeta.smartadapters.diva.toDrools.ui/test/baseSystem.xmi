@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dart:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dart="http://dart" xmlns:instance="http://dart/instance" xmlns:type="http://dart/type" xsi:schemaLocation="http://dart ../../eu.diva.dart.model/model/metamodel@runtime.ecore http://dart/instance ../../eu.diva.dart.model/model/metamodel@runtime.ecore#//instance http://dart/type ../../eu.diva.dart.model/model/metamodel@runtime.ecore#//type">
+  <nodes name="n1">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+  </nodes>
+  <nodes name="n2">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+  </nodes>
+  <nodes name="n3">
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+  </nodes>
+  <types xsi:type="type:PrimitiveType" name="t2"/>
+  <types xsi:type="type:PrimitiveType" name="t1"/>
+</dart:System>

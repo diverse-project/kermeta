@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type" xsi:schemaLocation="http://art/instance http://art#//instance http://art/type http://art#//type">
+  <nodes name="n1" uri="http://diva/1">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1">
+      <binding serverInstance="//@nodes.0/@components.2" id="log" client="//@types.1/@port.0" server="//@types.2/@port.0"/>
+    </components>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="Logger"/>
+  </nodes>
+  <nodes name="n2" uri="http://diva/2">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1">
+      <binding serverInstance="//@nodes.1/@components.4" id="log" client="//@types.1/@port.0" server="//@types.2/@port.0"/>
+    </components>
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0">
+      <binding serverInstance="//@nodes.1/@components.4" id="log" client="//@types.1/@port.0" server="//@types.2/@port.0"/>
+    </components>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i3" type="//@types.1">
+      <binding serverInstance="//@nodes.1/@components.4" id="log" client="//@types.1/@port.0" server="//@types.2/@port.0"/>
+    </components>
+    <components xsi:type="instance:PrimitiveInstance" name="Logger"/>
+  </nodes>
+  <nodes name="n3" uri="http://notdiva/1">
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p1">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p2">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p3">
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <services xsi:type="type:FunctionalService" name="log4j.Log"/>
+  <services xsi:type="type:FunctionalService" name="log4j.Log"/>
+  <types xsi:type="type:PrimitiveType" name="t2"/>
+  <types xsi:type="type:PrimitiveType" name="t1">
+    <port xsi:type="type:Port" name="log" lower="0" upper="1" service="//@services.0" role="client" protocol=""/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="Logger">
+    <port xsi:type="type:Port" name="log" lower="0" upper="-1" service="//@services.1" role="server"/>
+  </types>
+</art:System>

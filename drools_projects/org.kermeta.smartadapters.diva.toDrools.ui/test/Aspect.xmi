@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartadapters4ART:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art_relaxed="http://art_relaxed" xmlns:instance_relaxed="http://art/instance_relaxed" xmlns:smartadapters4ART="http://SmartAdapters4ART" xmlns:type_relaxed="http://art/type_relaxed" xsi:schemaLocation="http://art_relaxed ../../org.kermeta.art.model/model/aom/metamodel@runtime_relaxed.ecore http://art/instance_relaxed ../../org.kermeta.art.model/model/aom/metamodel@runtime_relaxed.ecore#//instance_relaxed http://SmartAdapters4ART ../../org.kermeta.art.model/model/aom/art_AOM_Framework.ecore http://art/type_relaxed ../../org.kermeta.art.model/model/aom/metamodel@runtime_relaxed.ecore#//type_relaxed">
+  <pointcut>
+    <content xsi:type="art_relaxed:System">
+      <nodes>
+        <components xsi:type="instance_relaxed:PrimitiveInstance"/>
+      </nodes>
+      <types xsi:type="type_relaxed:PrimitiveType"/>
+    </content>
+  </pointcut>
+</smartadapters4ART:Aspect>

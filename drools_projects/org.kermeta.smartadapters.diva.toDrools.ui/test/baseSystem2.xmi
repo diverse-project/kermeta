@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type" xsi:schemaLocation="http://art ../../org.kermeta.art.model/model/metamodel@runtime.ecore http://art/instance ../../org.kermeta.art.model/model/metamodel@runtime.ecore#//instance http://art/type ../../org.kermeta.art.model/model/metamodel@runtime.ecore#//type">
+  <nodes name="n1" uri="http://diva/1">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="n2" uri="http://diva/2">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i3" type="//@types.1"/>
+  </nodes>
+  <nodes name="n3" uri="http://notdiva/1">
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p1">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p2">
+    <components xsi:type="instance:PrimitiveInstance" name="i1" type="//@types.1"/>
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <nodes name="p3">
+    <components xsi:type="instance:PrimitiveInstance" name="i2" type="//@types.0"/>
+    <components xsi:type="instance:PrimitiveInstance" name="j1" type="//@types.1"/>
+  </nodes>
+  <services xsi:type="type:FunctionalService" name="log4j.Log"/>
+  <types xsi:type="type:PrimitiveType" name="t2"/>
+  <types xsi:type="type:PrimitiveType" name="t1">
+    <port xsi:type="type:Port" name="log" lower="0" upper="1" service="//@services.0" role="client" protocol=""/>
+  </types>
+</art:System>
