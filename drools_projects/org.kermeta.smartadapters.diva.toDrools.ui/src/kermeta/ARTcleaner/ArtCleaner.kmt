@@ -74,7 +74,7 @@ aspect class System
 			self.types.remove(t)
 		}
 		
-		self.root.clean(context)
+		self.nodes.each{n| n.clean(context)}
 		
 		
 		
@@ -93,8 +93,24 @@ aspect class System
 	
 	operation clean2(context : CleaningContext) : Void is
 	do
-		self.root.clean2(context)
+		self.nodes.each{n| n.clean2(context)}
 	end
+}
+
+package distrib
+{
+	aspect class Node
+	{
+		operation clean(context : CleaningContext) : Void is
+		do
+			self.components.each{c | c.clean(context)}
+		end
+		
+		operation clean2(context : CleaningContext) : Void is
+		do
+			self.components.each{c | c.clean2(context)}
+		end
+	}
 }
 
 package instance

@@ -3,7 +3,7 @@
   <pointcut>
     <content xsi:type="art_relaxed:System" pid="PC_system">
       <nodes pid="PC_node" name="n*" uri="http://diva/*">
-        <components xsi:type="instance_relaxed:PrimitiveInstance" pid="PC_component" name="i*"/>
+        <components xsi:type="instance_relaxed:PrimitiveInstance" pid="PC_component" name="i*" type="//@pointcut/@content.0/@types.0"/>
       </nodes>
       <services xsi:type="type_relaxed:FunctionalService" pid="PC_service" name="*Log*"/>
       <types xsi:type="type_relaxed:PrimitiveType" pid="PC_type">
@@ -12,7 +12,7 @@
     </content>
   </pointcut>
   <advice>
-    <content xsi:type="instance_relaxed:PrimitiveInstance" pid="AD_logger" name="Logger"/>
+    <content xsi:type="instance_relaxed:PrimitiveInstance" pid="AD_logger" name="Logger" type="//@advice/@content.2"/>
     <content xsi:type="instance_relaxed:PrimitiveInstance" pid="AD_matchedComponent">
       <binding pid="AD_binding" serverInstance="//@advice/@content.0" id="log" server="//@advice/@content.2/@port.0"/>
     </content>
