@@ -24,7 +24,7 @@ using kermeta::standard
 using kermeta::language::structure
 using kermeta::persistence
 
-using art
+using art_relaxed
 
 class Main {
 	
@@ -36,7 +36,7 @@ class Main {
 	
 	operation process(smarturl:String,drl:String):Void is do
 	
-		var ctx : art::Context init art::Context.new
+		var ctx : art_relaxed::Context init art_relaxed::Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
 		
