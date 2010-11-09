@@ -44,7 +44,8 @@ class ContainmentBasedActionPerformerGenerator
 	operation genContainmentBasedActionPerformer(inputEcoreMetamodel : String, highLevelModelElement : String, root : EPackage) : Void is do 
 		
 		var content : StringBuffer init StringBuffer.new
-		
+		content.append("/* $Id:$ */\n")
+		content.append("/* Generated using /fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt */\n\n")
 		content.append("package " + EcoreHelper.new.getPackageQualifiedName(root) + ";\n\n")
 		content.append("require kermeta\nrequire \"" + inputEcoreMetamodel + "\"\n\n")
 		content.append("using kermeta::language::structure\n\n")
