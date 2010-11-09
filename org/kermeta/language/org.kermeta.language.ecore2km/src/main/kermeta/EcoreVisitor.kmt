@@ -16,54 +16,69 @@ abstract class EcoreVisitor {
 	end
 
 	operation visitEPackage(pkg : EPackage) : Void is do
+		visitENamedElement(pkg)
 		pkg.eClassifiers.each{classif | classif.accept(self) }
 		pkg.eSubpackages.each{subPkg  | subPkg.accept(self)  }
 	end
 	
 	operation visitEClassifier(classifier : EClassifier) : Void is do
+		visitENamedElement(classifier)
 	end
 	
 	operation visitENamedElement(namedElt : ENamedElement) : Void is do
+		visitEModelElement(namedElt)
 	end
 	
 	operation visitETypedElement(typedElt : ETypedElement) : Void is do
+		visitENamedElement(typedElt)
 	end
 	
 	operation visitEOperation(op : EOperation) : Void is do
+		visitETypedElement(op)
 		op.eParameters.each{param | param.accept(self)}
 	end
 	
 	operation visitEParameter(param : EParameter) : Void is do
+		visitETypedElement(param)
 	end
 	
 	operation visitEClass(eclass : EClass) : Void is do
+		visitEClassifier(eclass)
 		eclass.eStructuralFeatures.each{struct | struct.accept(self)}
 		eclass.eOperations.each{op | op.accept(self)}
 	end
 	
 	operation visitEDataType(dataType : EDataType) : Void is do
+		visitEClassifier(dataType)
 	end
 	
 	operation visitEStructuralFeature(structFeature : EStructuralFeature) : Void is do
+		visitETypedElement(structFeature)
 	end
 	
 	operation visitEReference(ref : EReference) : Void is do
+		visitEStructuralFeature(ref)
 	end
 	
 	operation visitEAttribute(attr : EAttribute) : Void is do
+		visitEStructuralFeature(attr)
 	end
 	
 	operation visitEEnum(enum : EEnum) : Void is do
+		visitEClassifier(enum)
 		enum.eLiterals.each{lit | lit.accept(self)}
 	end
 	
 	operation visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
+		visitENamedElement(enumLit)
 	end
 	
 	operation visitEFactory(factory : EFactory) : Void is do
+		visitEModelElement(factory)
 	end
 	
 	operation visitEAnnotation(annot : EAnnotation) : Void is do
+		visitEModelElement(annot)
 	end
 }
 
@@ -74,11 +89,10 @@ aspect class EModelElement {
 	end
 }
 
-
+/* 
 aspect class ENamedElement {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitENamedElement(self)	
-		super(v)
 	end
 }
 
@@ -86,21 +100,18 @@ aspect class ENamedElement {
 aspect class ETypedElement {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitETypedElement(self)
-		super(v)
 	end
 }
 
 aspect class EStructuralFeature {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEStructuralFeature(self)	
-		super(v)
 	end
-}
+}*/
 
 aspect class EPackage {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEPackage(self)
-		super(v)
 	end
 }
 
@@ -108,7 +119,6 @@ aspect class EPackage {
 aspect class EOperation {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEOperation(self)
-		super(v)
 	end
 }
 
@@ -116,7 +126,6 @@ aspect class EOperation {
 aspect class EParameter {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEParameter(self)
-		super(v)
 	end
 }
 
@@ -124,7 +133,6 @@ aspect class EParameter {
 aspect class EClass {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEClass(self)
-		super(v)
 	end
 }
 
@@ -132,7 +140,6 @@ aspect class EClass {
 aspect class EDataType {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEDataType(self)
-		super(v)
 	end
 }
 
@@ -140,7 +147,6 @@ aspect class EDataType {
 aspect class EReference {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEReference(self)
-		super(v)
 	end
 }
 
@@ -148,7 +154,6 @@ aspect class EReference {
 aspect class EAttribute {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEAttribute(self)
-		super(v)
 	end
 }
 
@@ -156,7 +161,6 @@ aspect class EAttribute {
 aspect class EEnum {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEEnum(self)
-		super(v)
 	end
 }
 
@@ -164,7 +168,6 @@ aspect class EEnum {
 aspect class EEnumLiteral {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEEnumLiteral(self)
-		super(v)
 	end
 }
 
@@ -172,7 +175,6 @@ aspect class EEnumLiteral {
 aspect class EFactory {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEFactory(self)
-		super(v)
 	end
 }
 
@@ -180,6 +182,5 @@ aspect class EFactory {
 aspect class EAnnotation {
 	method accept(v : EcoreVisitor) : Void is do
 		v.visitEAnnotation(self)
-		super(v)
 	end
 }

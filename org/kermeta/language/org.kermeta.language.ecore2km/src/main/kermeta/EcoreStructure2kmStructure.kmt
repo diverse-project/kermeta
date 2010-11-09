@@ -212,9 +212,29 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		
 		super(annot)
 	end
-	
-	
-	
+
+
+
+	method visitEDataType(dataType : EDataType) : Void is do
+		if(not dataType.ePackage.isVoid and dataType.ePackage.targetKermetaObject.isKindOf(Package)) then
+			// The type of the primitive type to create must be an unresolved type based on the type name 
+			// given by the ecore data type.
+			//TODO convert ecore name into Kermeta name
+			var type : UnresolvedType init UnresolvedType.new.initialize(dataType.instanceTypeName)
+			// Creation of the Kermeta primitive type.
+			var pt : PrimitiveType init PrimitiveType.new.initialize(dataType.name, type)
+			// Adding the primitive type to its Kermeta package.
+			dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(pt)
+			// Linking the Kermeta primitive type to the ecore data type.
+			dataType.targetKermetaObject := pt
+		end
+				
+		super(dataType)
+	end
+
+
+
+
 	method visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
 		if(not enumLit.eEnum.isVoid and enumLit.eEnum.targetKermetaObject.isKindOf(Enumeration)) then
 			// Creation of the Kermeta literal.
