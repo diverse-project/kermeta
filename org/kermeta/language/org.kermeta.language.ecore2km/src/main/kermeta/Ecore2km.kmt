@@ -9,6 +9,7 @@ package org::kermeta::language::ecore2km;
 require kermeta
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreStructure2kmStructure.kmt"
 
+using kermeta::utils
 using ecore
 using org::kermeta::language::structure
 
@@ -16,11 +17,39 @@ using org::kermeta::language::structure
  * Converts a given ecore model into a kermeta v2 model.
 */
 class Ecore2km {
+	/**
+	 * Converts the given ecore package as a Kermeta v2 modeling unit.
+	 */
 	operation convert(pkg : EPackage, namespacePrefix : String) : ModelingUnit is do
 		var ecore2kmStruct : EcoreStructure2kmStructure init EcoreStructure2kmStructure.new
 		
 		result := ModelingUnit.new
 		result.namespacePrefix := namespacePrefix
-		ecore2kmStruct.convert(pkg, result)
+		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), result)
+	end
+	
+	
+	/**
+	 * The convertion of primitive types requires that their to be also converted in Kermeta.
+	 * For instance, a java.lang.Integer Ecore primitive type will be converted as a Kermeta
+	 * org::kermeta::language::structure::Integer
+	 */
+	operation getPrimitiveTypeMappings() : Hashtable<String,String> is do
+		result := Hashtable<String,String>.new
+		
+		result.put("char", "org::kermeta::standard::Character")
+		result.put("java.lang.Integer", "org::kermeta::language::structure::Integer")
+		result.put("java.lang.Integer", "org::kermeta::language::structure::Integer")
+    	result.put("boolean", "org::kermeta::language::structure::Boolean")
+    	result.put("java.lang.Boolean", "org::kermeta::standard::Boolean")
+    	result.put("java.lang.String", "org::kermeta::language::structure::String")
+    	result.put("java.lang.Object", "org::kermeta::standard::Object")
+    	result.put("java.lang.Double", "org::kermeta::standard::Real")
+    	result.put("double", "org::kermeta::standard::Real")
+    	result.put("int", "org::kermeta::standard::Integer")
+    	result.put("string", "org::kermeta::standard::String")
+    	result.put("java.lang.Void","org::kermeta::standard::Void")
+    	result.put("java.lang.Short","org::kermeta::standard::Integer")
+    	result.put("java.lang.Byte","org::kermeta::standard::Integer")
 	end
 }

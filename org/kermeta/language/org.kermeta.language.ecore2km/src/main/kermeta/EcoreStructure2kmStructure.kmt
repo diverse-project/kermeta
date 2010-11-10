@@ -12,6 +12,7 @@ require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreVi
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2kmAspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 
+using kermeta::utils
 using ecore
 using org::kermeta::language::structure
 
@@ -23,6 +24,8 @@ using org::kermeta::language::structure
 class EcoreStructure2kmStructure inherits EcoreVisitor {
 	/** The modeling unit where all the created elements will be inserted. */
 	reference modelingUnit : ModelingUnit
+	
+	reference primitiveTypeMappings : Hashtable<String,String>
 
 
 	/**
@@ -30,9 +33,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * all the created elements will be inserted; a package that corresponds to
 	 * the root ecore package to convert.
 	 */
-	operation convert(pkg : EPackage, modelingUnit : ModelingUnit) : Void is do
+	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, modelingUnit : ModelingUnit) : Void is do
 		self.modelingUnit := modelingUnit
-		
+		self.primitiveTypeMappings := primitiveTypeMappings
 		// Launching the conversion.
 		pkg.accept(self)
 	end
@@ -217,9 +220,15 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 	method visitEDataType(dataType : EDataType) : Void is do
 		if(not dataType.ePackage.isVoid and dataType.ePackage.targetKermetaObject.isKindOf(Package)) then
+		stdio.writeln(dataType.name)
+			// Looking for a Kermeta equivalent name of the Ecore primitive type.
+			var namePrimitiveType : String init primitiveTypeMappings.getValue(dataType.instanceTypeName)
+			// If there is no equivalent the given name is used.
+			if(namePrimitiveType.isVoid) then
+				namePrimitiveType := dataType.instanceTypeName
+			end
 			// The type of the primitive type to create must be an unresolved type based on the type name 
 			// given by the ecore data type.
-			//TODO convert ecore name into Kermeta name
 			var type : UnresolvedType init UnresolvedType.new.initialize(dataType.instanceTypeName)
 			// Creation of the Kermeta primitive type.
 			var pt : PrimitiveType init PrimitiveType.new.initialize(dataType.name, type)
@@ -227,6 +236,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(pt)
 			// Linking the Kermeta primitive type to the ecore data type.
 			dataType.targetKermetaObject := pt
+			stdio.writeln(pt.containedType.size.toString)
 		end
 				
 		super(dataType)
