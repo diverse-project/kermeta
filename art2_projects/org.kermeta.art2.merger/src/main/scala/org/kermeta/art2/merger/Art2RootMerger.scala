@@ -16,7 +16,6 @@ class Art2RootMerger extends Art2TypeDefinitionMerger with Art2TypeLibraryMerger
       // Art2DeployUnitMerger.merge(actualModel, modelToMerge)
       mergeTypeDefinition(actualModel, modelToMerge)
       mergeLibrary(actualModel, modelToMerge)
-
       executePostProcesses
 
     }

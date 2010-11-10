@@ -16,6 +16,7 @@ trait Art2Merger {
   }
   def executePostProcesses = {
     postProcess.foreach{nq => nq() }
+    postProcess = List()
   }
 
 
