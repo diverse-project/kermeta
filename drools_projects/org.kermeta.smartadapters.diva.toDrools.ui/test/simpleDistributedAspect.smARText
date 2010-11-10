@@ -1,0 +1,62 @@
+pointcut
+{system <PC_system>;
+
+node n* <PC_node> uri = "http://diva/*" {
+	primitive instance i* <PC_component> : PC_type 
+{
+}
+}
+functional service *Log* <PC_service> {
+}
+type <PC_type> 
+{
+	required port <PC_port> : *Log*
+}
+}
+advice
+{
+	primitive instance Logger <AD_logger> : Logger 
+{
+}
+primitive instance <AD_matchedComponent> : ? 
+{
+	bind ? to Logger::log <AD_binding> (id = "log")
+}
+type Logger <AD_type> 
+{
+	provided port log <AD_log> : log4j.Log  [0..*]
+}
+functional service log4j.Log <AD_service> {
+}
+	
+}
+strategies
+{
+	per role PC_node : AD_logger
+	global AD_type, AD_service, AD_log
+}
+protocol
+{
+	set system PC_system
+{
+	  
+	services += AD_service
+	  
+	  
+	types += AD_type
+}
+	set node PC_node
+{
+	components = AD_logger}
+	set binding AD_binding
+{
+	requiredPort = PC_port}
+	set instance PC_component
+{
+	  
+	  
+	  
+	  
+	binding += AD_binding
+}
+}

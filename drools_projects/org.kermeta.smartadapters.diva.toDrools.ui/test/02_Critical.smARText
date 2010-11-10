@@ -1,0 +1,68 @@
+//Adapter Critical;
+
+pointcut
+{
+	//featureID : "Logging"
+	system <PC_system>;
+	composite instance <PC_root> : ? 
+	{
+		primitive instance <PC_anyComponent> : PC_type 
+		{
+		}
+	}
+	functional service org.slf4j.Logger <PC_org.slf4j.Logger> {
+	}
+	type <PC_type> 
+	{
+		required port <PC_logPort> : org.slf4j.Logger [1..1]
+	}
+}
+advice
+{
+	system <AD_System>;
+	composite instance : ? 
+	{
+		primitive instance DefaultLogger <AD_DefaultLogger> : eu.diva.tis.log 
+			implementation OSGiComponent <AD_implem> : "eu.diva.tis.log.DefaultLogger"
+		{
+			configuration := "critical"
+		}
+		primitive instance FakeLoggerClient : ? 
+		{
+			bind ? to DefaultLogger::logger <AD_binding> (id = "DefaultLogger")
+		}
+	}
+	functional service org.slf4j.Logger <AD_org.slf4j.Logger> {
+	}
+	type eu.diva.tis.log <AD_type> 
+	{
+		provided port logger <AD_port> : org.slf4j.Logger [1..1]
+		attribute configuration <AD_att> : String
+	}
+	datatype String <AD_string>;
+}
+
+strategies {
+	global AD_string, AD_org.slf4j.Logger, AD_implem, AD_port, AD_DefaultLogger, AD_type
+}
+
+protocol
+{
+	set system PC_system
+	{
+		services += AD_org.slf4j.Logger
+		types += AD_type
+		datatypes += AD_string
+	}
+	set composite component PC_root
+	{
+		component += AD_DefaultLogger
+	}
+	set binding AD_binding
+	{
+		requiredPort = PC_logPort}
+	set instance PC_anyComponent
+	{
+		binding += AD_binding
+	}
+}
