@@ -13,6 +13,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
+
 /**
  *
  * @author ffouque
@@ -20,7 +21,7 @@ import org.apache.maven.project.MavenProject;
  * @goal generate
  * @phase generate-sources
  * @requiresDependencyResolution compile
- * @author <a href="mailto:ffouquet@irisa.fr">Fouquet François</a>
+ * @author <a href="mailto:ffouquet@irisa.fr">Fouquet Francois</a>
  * @version $Id$
  *
  */
@@ -68,6 +69,7 @@ public class K2CompilerMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
 
+    	org.apache.log4j.BasicConfigurator.configure();
         Compiler compilo = new fr.irisa.triskell.kermeta.compilo.scala.Compiler();
 
         this.getLog().info(output.getAbsolutePath());
@@ -79,9 +81,20 @@ public class K2CompilerMojo extends AbstractMojo {
         GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
         GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
 
-
-
+        checkFile(model.getAbsolutePath().toString());
         compilo.compile(model.getAbsolutePath().toString());
+       
+       
 
+    }
+    
+    protected boolean checkFile(String filePath ) throws MojoExecutionException {
+    	File file = new File(filePath);
+    	if(!file.exists()){
+    		this.getLog().error("File not found : " + filePath);
+    		throw new MojoExecutionException("Failed to run kermeta compiler : File not found : " + filePath);
+    		
+    	}
+    	return true;
     }
 }
