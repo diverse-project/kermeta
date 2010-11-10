@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermeta language Mdk Plug-in
+Bundle-SymbolicName: org.kermeta.language.mdkv
+Bundle-Version: 1.4.0
+Bundle-Activator: org.kermeta.language.mdk.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.interpreter
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: org.kermeta.language.mdk.externs.math,
+ org.kermeta.language.mdk.externs.properties,
+ org.kermeta.language.mdk.externs.random,
+ org.kermeta.language.mdk.externs.time
