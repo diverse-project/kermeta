@@ -70,6 +70,8 @@ public class AbstractPortItemProvider
 
 			addServicePropertyDescriptor(object);
 			addRolePropertyDescriptor(object);
+			addProtocolPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -119,6 +121,50 @@ public class AbstractPortItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Protocol feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProtocolPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractPort_protocol_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractPort_protocol_feature", "_UI_AbstractPort_type"),
+				 TypePackage.Literals.ABSTRACT_PORT__PROTOCOL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Uri feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUriPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractPort_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractPort_uri_feature", "_UI_AbstractPort_type"),
+				 TypePackage.Literals.ABSTRACT_PORT__URI,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -145,6 +191,8 @@ public class AbstractPortItemProvider
 
 		switch (notification.getFeatureID(AbstractPort.class)) {
 			case TypePackage.ABSTRACT_PORT__ROLE:
+			case TypePackage.ABSTRACT_PORT__PROTOCOL:
+			case TypePackage.ABSTRACT_PORT__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

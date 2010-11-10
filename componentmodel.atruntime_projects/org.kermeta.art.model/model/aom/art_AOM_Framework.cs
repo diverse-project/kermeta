@@ -127,11 +127,17 @@ RULES{
 	
 //	Adapter::= "Adapter" #1 name[] ";" !0 !0 aspect !0 "protocol" !0 "{" (!1 adapt)* !0 "}" ;
 	
-	Aspect::= "pointcut" !0 "{"  pointcut !0 "}" !0 "advice"  !0 "{" (!1 advice) !0 "}"  !0 "protocol" !0 "{" (!1 adapt)* !0 "}"; //( !0 "unique elements"  ":" persistent[] ("," #1 persistent[])* )?
+	Aspect::= "pointcut" !0 "{"  pointcut !0 "}" !0 "advice"  !0 "{" (!1 advice) !0 "}" (!0 "strategies"  !0 "{" (!1 strategies)* !0 "}")? !0 "protocol" !0 "{" (!1 adapt)* !0 "}"; //( !0 "unique elements"  ":" persistent[] ("," #1 persistent[])* )?
 	
 	PointcutModel ::= (content !0)*;
 	
 	AdviceModel ::= (content !0)*;
+	
+	GlobalInstantiation ::= "global" #1 adviceElements[] ("," #1 adviceElements[])* ;
+	
+	PerRoleMatch ::= "per" #1 "role" #1 pointcutElements[] ("," #1 pointcutElements[])*  #1 ":" #1 adviceElements[] ("," #1 adviceElements[])* ;
+	
+	PerElementMatch ::= "per" #1 "elements" #1 pointcutElements[] ("," #1 pointcutElements[])*  #1 ":" #1 adviceElements[] ("," #1 adviceElements[])* ;
 	
 	//makeUnique::= "makeUnique"  "{" ( "adapter"  ":" adapter[]| "element"  ":" element[] )* "}"  ;
 	

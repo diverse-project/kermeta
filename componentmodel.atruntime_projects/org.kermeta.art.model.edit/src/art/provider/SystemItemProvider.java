@@ -10,6 +10,7 @@ package art.provider;
 import art.ArtFactory;
 import art.ArtPackage;
 
+import art.distrib.DistribFactory;
 import art.group.GroupFactory;
 
 import art.instance.InstanceFactory;
@@ -83,7 +84,7 @@ public class SystemItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ArtPackage.Literals.SYSTEM__ROOT);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__NODES);
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__SERVICES);
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__TYPES);
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__DATA_TYPES);
@@ -142,7 +143,7 @@ public class SystemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(art.System.class)) {
-			case ArtPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__NODES:
 			case ArtPackage.SYSTEM__SERVICES:
 			case ArtPackage.SYSTEM__TYPES:
 			case ArtPackage.SYSTEM__DATA_TYPES:
@@ -166,8 +167,8 @@ public class SystemItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPackage.Literals.SYSTEM__ROOT,
-				 InstanceFactory.eINSTANCE.createCompositeInstance()));
+				(ArtPackage.Literals.SYSTEM__NODES,
+				 DistribFactory.eINSTANCE.createNode()));
 
 		newChildDescriptors.add
 			(createChildParameter

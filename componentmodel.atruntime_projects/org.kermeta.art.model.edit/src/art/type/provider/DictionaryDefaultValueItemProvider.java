@@ -7,6 +7,7 @@
 package art.type.provider;
 
 
+import art.provider.AspectModelElementItemProvider;
 import art.provider.MetamodelruntimeEditPlugin;
 
 import art.type.DictionaryDefaultValue;

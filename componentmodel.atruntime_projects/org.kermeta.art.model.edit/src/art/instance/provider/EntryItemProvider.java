@@ -10,6 +10,7 @@ package art.instance.provider;
 import art.instance.Entry;
 import art.instance.InstancePackage;
 
+import art.provider.AspectModelElementItemProvider;
 import art.provider.MetamodelruntimeEditPlugin;
 
 import java.util.Collection;

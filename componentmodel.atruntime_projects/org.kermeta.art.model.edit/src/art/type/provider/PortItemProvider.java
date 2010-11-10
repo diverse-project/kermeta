@@ -7,8 +7,6 @@
 package art.type.provider;
 
 
-import art.implem.ImplemFactory;
-
 import art.provider.CardinalityElementItemProvider;
 import art.provider.MetamodelruntimeEditPlugin;
 
@@ -22,8 +20,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -72,31 +68,10 @@ public class PortItemProvider
 
 			addServicePropertyDescriptor(object);
 			addRolePropertyDescriptor(object);
-			addIsOptionalPropertyDescriptor(object);
+			addProtocolPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Is Optional feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIsOptionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Port_isOptional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Port_isOptional_feature", "_UI_Port_type"),
-				 TypePackage.Literals.PORT__IS_OPTIONAL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -144,6 +119,50 @@ public class PortItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Protocol feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProtocolPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractPort_protocol_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractPort_protocol_feature", "_UI_AbstractPort_type"),
+				 TypePackage.Literals.ABSTRACT_PORT__PROTOCOL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Uri feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUriPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractPort_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractPort_uri_feature", "_UI_AbstractPort_type"),
+				 TypePackage.Literals.ABSTRACT_PORT__URI,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Port.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,7 +200,8 @@ public class PortItemProvider
 
 		switch (notification.getFeatureID(Port.class)) {
 			case TypePackage.PORT__ROLE:
-			case TypePackage.PORT__IS_OPTIONAL:
+			case TypePackage.PORT__PROTOCOL:
+			case TypePackage.PORT__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

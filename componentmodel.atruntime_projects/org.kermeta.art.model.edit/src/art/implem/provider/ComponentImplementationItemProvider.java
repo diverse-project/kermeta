@@ -7,6 +7,7 @@
 package art.implem.provider;
 
 
+import art.provider.AspectModelElementItemProvider;
 import art.provider.MetamodelruntimeEditPlugin;
 
 import java.util.Collection;
