@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="smartadapters4ART.resource.smARText.ui.SmARTextUIMetaInformation" id="smartadapters4ART.resource.smARText.ui.SmARTextUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="smartadapters4ART.resource.smARText.ui.SmARTextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="smARText" icon="icons/editor_icon.gif" id="smartadapters4ART.resource.smARText.ui.SmARTextEditor" name="EMFText smARText Editor">
+			<contentTypeBinding contentTypeId="smartadapters4ART.resource.smARText"/>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="smartadapters4ART.resource.smARText.ui.SmARTextPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="SmARText Text Editor" id="smartadapters4ART.resource.smARText.ui.SmARTextPreferencePage" class="smartadapters4ART.resource.smARText.ui.SmARTextPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="smartadapters4ART.resource.smARText.ui.SmARTextSyntaxColoringPreferencePage" class="smartadapters4ART.resource.smARText.ui.SmARTextSyntaxColoringPreferencePage" category="smartadapters4ART.resource.smARText.ui.SmARTextPreferencePage">
+		</page>
+		<page name="Brackets" id="smartadapters4ART.resource.smARText.ui.SmARTextBracketPreferencePage" class="smartadapters4ART.resource.smARText.ui.SmARTextBracketPreferencePage" category="smartadapters4ART.resource.smARText.ui.SmARTextPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="smartadapters4ART.resource.smARText.ui.SmARTextNewFileWizard" id="smartadapters4ART.resource.smARText.ui.SmARTextNewFileWizard" name="EMFText .smARText file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="smartadapters4ART.resource.smARText.ui.SmARTextMarkerResolutionGenerator" markerType="smartadapters4ART.resource.smARText.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="smartadapters4ART.resource.smARText.ui.SmARTextAnnotationModelFactory" extensions="smARText" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="smartadapters4ART.resource.smARText" name=".smARText File" base-type="org.eclipse.core.runtime.text" file-extensions="smARText"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="smARText" id="smartadapters4ART.resource.smARText.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="smartadapters4ART.resource.smARText.ui.occurences" />
+		<type name="smartadapters4ART.resource.smARText.ui.occurences.declaration" super="smartadapters4ART.resource.smARText.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="smartadapters4ART.resource.smARText.ui.occurences" label="Occurrences (in .smARText files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="smARText.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="smARText.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="smARText.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="smARText.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="smARText.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="smARText.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="smARText.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="smARText.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="smARText.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="smartadapters4ART.resource.smARText.ui.occurences.declaration" label="Declarations (in .smARText files)" textPreferenceKey="smARText.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="smARText.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="smARText.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="smARText.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="smARText.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="smARText.declarationTextStyle" textStylePreferenceValue="NONE" />
+	</extension>
+	
+</plugin>
