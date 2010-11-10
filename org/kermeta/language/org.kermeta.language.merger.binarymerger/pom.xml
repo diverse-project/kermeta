@@ -48,7 +48,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/BinaryMerger.km</model>
+                            <model>src/generated/km/km_BinaryMerger.km</model>
                         </configuration>
                     </execution>
                 </executions>
