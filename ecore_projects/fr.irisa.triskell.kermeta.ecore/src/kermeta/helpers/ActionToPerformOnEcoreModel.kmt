@@ -12,6 +12,7 @@ require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "../ecore_behavior.kmt"
 require "EcoreHelper.kmt"
+require "EcoreHelper_aspect.kmt"
 require "ContainmentBasedActionPerformer_Ecore.kmt"
 
 using ecore
@@ -69,7 +70,7 @@ aspect class EClass {
 		content.append(" eachOwnedElement(func : <" + highLevelModelElement + " -> kermeta::standard::Object>) : Void")
 		
 		if self.eSuperTypes.size()>0 then
-			 content.append(" from " + EcoreHelper.new.getClassifierQualifiedName(self.eSuperTypes.one))
+			 content.append(" from " + EcoreHelper.new.getClassifierQualifiedName(self.eSuperTypes.first))
 		end
 		
 		content.append(" is do\n")
@@ -81,6 +82,18 @@ aspect class EClass {
 		self.eachOwnedElement{ e |
 			content.append(e.kmtPrinter(highLevelModelElement))
 		}
+		if self.eSuperTypes.size()>1 then
+			// must deal with EReference that comes from the other inheritance branch			
+			var allFirstSuperTypes : Set<EClass> init getAllFirstSuperTypes
+			self.eAllSuperTypes.each{ s |
+				if (not allFirstSuperTypes.contains(s)) then
+					s.eachOwnedElement{ e |
+						content.append(e.kmtPrinter(highLevelModelElement))
+					}
+				end
+			}
+		end	
+		
 		result := content.append("\tend\n}\n").toString()
 	end
 	
@@ -95,9 +108,9 @@ aspect class EClass {
 aspect class EReference {
 	method kmtPrinter(highLevelModelElement : String) : String is do
 		var content : StringBuffer init StringBuffer.new
-
-		content.append("\t\t")
+		
 		if self.containment then
+			content.append("\t\t")
 			if self.upperBound==1 then
 				content.append("if (not self."+ EcoreHelper.new.getMangledIdentifier(self.name)+".isVoid) then\n\t\t\t")
 				content.append("func(")		
