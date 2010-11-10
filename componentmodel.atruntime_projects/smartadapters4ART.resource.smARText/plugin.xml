@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="smartadapters4ART.resource.smARText.mopp.SmARTextMetaInformation" id="smartadapters4ART.resource.smARText.mopp.SmARTextMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="smartadapters4ART.resource.smARText.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension id="smartadapters4ART.resource.smARText.nature" name="smARText nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="smartadapters4ART.resource.smARText.mopp.SmARTextNature" />
+		</runtime>
+		<builder id="smartadapters4ART.resource.smARText.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="smartadapters4ART.resource.smARText.builder" name="smARText Builder">
+		<builder hasNature="true">
+			<run class="smartadapters4ART.resource.smARText.mopp.SmARTextBuilderAdapter" />
+		</builder>
+	</extension>
+	
+	<extension-point id="smartadapters4ART.resource.smARText.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="smartadapters4ART.resource.smARText.mopp.SmARTextResourceFactoryDelegator" type="smARText">
+		</parser>
+	</extension>
+	
+	<extension-point id="smartadapters4ART.resource.smARText.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>
