@@ -53,8 +53,8 @@ class ContainmentBasedActionPerformerGenerator
 		content.append(root.kmtPrinter(highLevelModelElement))
 		
 		var ioHelper : FileIO init FileIO.new
+		
 		var filename : String init inputEcoreMetamodel + "_ContainmentBasedActionPerformer.kmt"
-				          	
 		ioHelper.writeTextFile(filename,content.toString())
 		
 		stdio.writeln("\nThe generation is finished, you can retrieve the generated file at:\n" + filename)

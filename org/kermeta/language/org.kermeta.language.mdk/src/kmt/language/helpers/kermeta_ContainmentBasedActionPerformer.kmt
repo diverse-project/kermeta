@@ -4,7 +4,7 @@
 package org;
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::language::structure
 
@@ -17,9 +17,12 @@ package behavior {
 aspect class Assignment {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
-		func(self.target)
-		func(self.~value)
-
+		if (not self.target.isVoid) then
+			func(self.target)
+		end
+		if (not self.~value.isVoid) then
+			func(self.~value)
+		end
 
 	end
 }
@@ -27,8 +30,7 @@ aspect class Assignment {
 aspect class Expression {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		func(self.staticType)
-
+		
 	end
 }
 
@@ -38,11 +40,7 @@ aspect class CallExpression {
 		self.parameters.each{ e |
 			func(e)
 		}
-		self.staticTypeVariableBindings.each{ e |
-			func(e)
-		}
-
-
+		
 	end
 }
 
@@ -63,19 +61,16 @@ aspect class CallVariable {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
 
-
 	end
 }
 
 aspect class CallFeature {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
-		func(self.target)
-		func(self.staticProperty)
-		func(self.staticOperation)
-		func(self.staticEnumLiteral)
-
-
+		if (not self.target.isVoid) then
+			func(self.target)
+		end
+						
 	end
 }
 
@@ -103,9 +98,15 @@ aspect class CallValue {
 aspect class Conditional {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
-		func(self.thenBody)
-		func(self.elseBody)
-		func(self.condition)
+		if (not self.thenBody.isVoid) then
+			func(self.thenBody)
+		end
+		if (not self.elseBody.isVoid) then
+			func(self.elseBody)
+		end
+		if (not self.condition.isVoid) then
+			func(self.condition)
+		end
 
 	end
 }
@@ -113,7 +114,9 @@ aspect class Conditional {
 aspect class Raise {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
-		func(self.expression)
+		if (not self.expression.isVoid) then
+			func(self.expression)
+		end
 
 	end
 }
@@ -124,8 +127,9 @@ aspect class Rescue {
 		self.body.each{ e |
 			func(e)
 		}
-		func(self.exceptionType)
-
+		if (not self.exceptionType.isVoid) then
+			func(self.exceptionType)
+		end
 
 	end
 }
@@ -158,8 +162,6 @@ aspect class JavaStaticCall {
 			func(e)
 		}
 
-
-
 	end
 }
 
@@ -169,7 +171,9 @@ aspect class LambdaExpression {
 		self.parameters.each{ e |
 			func(e)
 		}
-		func(self.body)
+		if (not self.body.isVoid) then
+			func(self.body)
+		end
 
 	end
 }
@@ -177,8 +181,9 @@ aspect class LambdaExpression {
 aspect class LambdaParameter {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		func(self.type)
-
+		if (not self.type.isVoid) then
+			func(self.type)
+		end
 
 	end
 }
@@ -187,14 +192,12 @@ aspect class IntegerLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
 
-
 	end
 }
 
 aspect class StringLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
-
 
 	end
 }
@@ -203,14 +206,15 @@ aspect class BooleanLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
 
-
 	end
 }
 
 aspect class TypeLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
-		func(self.typeref)
+		if (not self.typeref.isVoid) then
+			func(self.typeref)
+		end
 
 	end
 }
@@ -225,9 +229,15 @@ aspect class VoidLiteral {
 aspect class Loop {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
-		func(self.initialization)
-		func(self.body)
-		func(self.stopCondition)
+		if (not self.initialization.isVoid) then
+			func(self.initialization)
+		end
+		if (not self.body.isVoid) then
+			func(self.body)
+		end
+		if (not self.stopCondition.isVoid) then
+			func(self.stopCondition)
+		end
 
 	end
 }
@@ -242,9 +252,12 @@ aspect class SelfExpression {
 aspect class VariableDecl {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
-		func(self.initialization)
-		func(self.type)
-
+		if (not self.initialization.isVoid) then
+			func(self.initialization)
+		end
+		if (not self.type.isVoid) then
+			func(self.type)
+		end
 
 	end
 }
@@ -257,14 +270,10 @@ package structure {
 
 aspect class Object {
 	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
-		self.kTag.each{ e |
+				self.kOwnedTags.each{ e |
 			func(e)
 		}
-		self.kOwnedTags.each{ e |
-			func(e)
-		}
-		func(self.kType)
-
+		
 	end
 }
 
@@ -272,10 +281,7 @@ aspect class Object {
 aspect class Operation {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
 		super(func)
-		self.raisedException.each{ e |
-			func(e)
-		}
-		self.ownedParameter.each{ e |
+				self.ownedParameter.each{ e |
 			func(e)
 		}
 		self.~pre.each{ e |
@@ -284,46 +290,36 @@ aspect class Operation {
 		self.~post.each{ e |
 			func(e)
 		}
-		func(self.body)
-		func(self.superOperation)
-		self.ownedUnresolvedOperations.each{ e |
+		if (not self.body.isVoid) then
+			func(self.body)
+		end
+				self.ownedUnresolvedOperations.each{ e |
 			func(e)
 		}
-		func(self.owningClass)
-		self.typeParameter.each{ e |
-			func(e)
-		}
-
-
+				
 	end
 }
 
 aspect class Property {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
 		super(func)
-		func(self.opposite)
-		func(self.getterBody)
-		func(self.setterBody)
+				if (not self.getterBody.isVoid) then
+			func(self.getterBody)
+		end
+		if (not self.setterBody.isVoid) then
+			func(self.setterBody)
+		end
 		self.ownedUnresolvedProperties.each{ e |
 			func(e)
 		}
-		func(self.owningClass)
-
-
-
-
-
-
-
-
+		
 	end
 }
 
 aspect class Type {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		func(self.typeContainer)
-
+		
 	end
 }
 
@@ -340,17 +336,14 @@ aspect class TypeContainer {
 aspect class EnumerationLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
 		super(func)
-		func(self.~enumeration)
-
+		
 	end
 }
 
 aspect class TypeVariableBinding {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		func(self.variable)
-		func(self.type)
-
+				
 	end
 }
 
@@ -358,23 +351,15 @@ aspect class MultiplicityElement {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypedElement is do
 		super(func)
 
-
-
-
-
 	end
 }
 
 aspect class TypeDefinition {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
 		super(func)
-		self.superType.each{ e |
+				self.typeMappings.each{ e |
 			func(e)
 		}
-		self.typeMappings.each{ e |
-			func(e)
-		}
-
 
 	end
 }
@@ -382,18 +367,7 @@ aspect class TypeDefinition {
 aspect class Class {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ParameterizedType is do
 		super(func)
-		self.ownedAttribute.each{ e |
-			func(e)
-		}
-		self.ownedOperation.each{ e |
-			func(e)
-		}
-		self.superClass.each{ e |
-			func(e)
-		}
-
-
-
+						
 	end
 }
 
@@ -418,7 +392,6 @@ aspect class NamedElement {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
 
-
 	end
 }
 
@@ -428,33 +401,28 @@ aspect class Package {
 		self.nestedPackage.each{ e |
 			func(e)
 		}
-		func(self.nestingPackage)
-
-
+		
 	end
 }
 
 aspect class Parameter {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
 		super(func)
-		func(self.~operation)
-
+		
 	end
 }
 
 aspect class PrimitiveType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::DataType is do
 		super(func)
-		func(self.instanceType)
-
+		
 	end
 }
 
 aspect class TypedElement {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		func(self.type)
-
+		
 	end
 }
 
@@ -462,12 +430,7 @@ aspect class TypedElement {
 aspect class Tag {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		self.object.each{ e |
-			func(e)
-		}
-
-
-
+		
 	end
 }
 
@@ -481,13 +444,10 @@ aspect class AbstractProperty {
 aspect class Constraint {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
 		super(func)
-		func(self.body)
-		func(self.invOwner)
-		func(self.preOwner)
-		func(self.postOwner)
-
-
-
+		if (not self.body.isVoid) then
+			func(self.body)
+		end
+						
 	end
 }
 
@@ -505,7 +465,6 @@ aspect class ClassDefinition {
 			func(e)
 		}
 
-
 	end
 }
 
@@ -519,7 +478,6 @@ aspect class ModelingUnit {
 		self.requires.each{ e |
 			func(e)
 		}
-
 
 	end
 }
@@ -537,7 +495,6 @@ aspect class TypeDefinitionContainer {
 aspect class Require {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-
 
 	end
 }
@@ -561,16 +518,14 @@ aspect class ParameterizedType {
 		self.typeParamBinding.each{ e |
 			func(e)
 		}
-		func(self.typeDefinition)
-
+		
 	end
 }
 
 aspect class TypeVariable {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		func(self.supertype)
-
+		
 	end
 }
 
@@ -601,9 +556,7 @@ aspect class ModelTypeVariable {
 aspect class VirtualType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ObjectTypeVariable is do
 		super(func)
-		func(self.classDefinition)
-		func(self.modelType)
-		self.typeParamBinding.each{ e |
+						self.typeParamBinding.each{ e |
 			func(e)
 		}
 
@@ -613,10 +566,7 @@ aspect class VirtualType {
 aspect class Model {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		self.contents.each{ e |
-			func(e)
-		}
-
+		
 	end
 }
 
@@ -630,21 +580,14 @@ aspect class Resource {
 aspect class ResourceGroup {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
 		super(func)
-		self.resources.each{ e |
-			func(e)
-		}
-
+		
 	end
 }
 
 aspect class SimpleResource {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
 		super(func)
-		self.contents.each{ e |
-			func(e)
-		}
-
-
+		
 	end
 }
 
@@ -656,7 +599,7 @@ aspect class AbstractOperation {
 }
 
 aspect class UnresolvedType {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Unresolved is do
 		super(func)
 		self.usings.each{ e |
 			func(e)
@@ -664,7 +607,6 @@ aspect class UnresolvedType {
 		self.generics.each{ e |
 			func(e)
 		}
-
 
 	end
 }
@@ -680,14 +622,12 @@ aspect class UnresolvedProperty {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::AbstractProperty is do
 		super(func)
 
-
 	end
 }
 
 aspect class UnresolvedOperation {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::AbstractOperation is do
 		super(func)
-
 
 	end
 }
@@ -696,26 +636,20 @@ aspect class Using {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
 
-
 	end
 }
 
 aspect class ProductType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		self.type.each{ e |
-			func(e)
-		}
-
+		
 	end
 }
 
 aspect class FunctionType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		func(self.left)
-		func(self.right)
-
+				
 	end
 }
 
@@ -729,10 +663,10 @@ aspect class VoidType {
 aspect class TypeMapping {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
 		super(func)
-		func(self.mapping)
-		func(self.targetType)
-		func(self.sourceType)
-
+		if (not self.mapping.isVoid) then
+			func(self.mapping)
+		end
+				
 	end
 }
 

@@ -79,9 +79,9 @@ aspect class EClass {
 		end
 		
 		self.eachOwnedElement{ e |
-			content.append(e.kmtPrinter(highLevelModelElement) + "\n")
+			content.append(e.kmtPrinter(highLevelModelElement))
 		}
-		result := content.append("\n\tend\n}\n").toString()
+		result := content.append("\tend\n}\n").toString()
 	end
 	
 	method getHighLevelModelElement(highLevelModelElement : Bag<String>) : Bag<String> is do
@@ -97,22 +97,21 @@ aspect class EReference {
 		var content : StringBuffer init StringBuffer.new
 
 		content.append("\t\t")
-		
-		if self.upperBound==1 then
-			content.append("func(")
+		if self.containment then
+			if self.upperBound==1 then
+				content.append("if (not self."+ EcoreHelper.new.getMangledIdentifier(self.name)+".isVoid) then\n\t\t\t")
+				content.append("func(")		
+				content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))		
+				content.append(")\n\t\t")
+				content.append("end")
+			else
+				content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))
+				content.append(".each{ e |\n")
+				content.append("\t\t\tfunc(e)")
+				content.append("\n\t\t}")
+			end
+			content.append("\n")
 		end
-		
-		content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))
-				if self.upperBound==1 then
-			content.append(")")
-		end
-		
-		if self.upperBound==-1 then
-			content.append(".each{ e |\n")
-			content.append("\t\t\tfunc(e)")
-			content.append("\n\t\t}")
-		end
-
 		result := content.toString()
 	end
 }
