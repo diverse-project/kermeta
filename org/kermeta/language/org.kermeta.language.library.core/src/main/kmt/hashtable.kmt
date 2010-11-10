@@ -1,0 +1,112 @@
+/* *************************************************
+ * Franck FLEUREY - 14/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the EPL licence
+ *
+ * Implementation of kermeta hashtable types.
+ *************************************************** */
+ 
+/** 
+ * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
+ * metamodel
+ * 
+ * <img src="./figures/utils_package.png"/>
+ */
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::exceptions
+
+
+package kermeta{
+package utils{
+
+
+
+/**
+ * An implementation of hashtable
+ * This implementation is for speed optimisation it cannot be serialized. 
+ * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
+ */
+
+@CompilerIgnore "true"
+class Hashtable<K, V>
+{
+	/**
+	 * Returns the size of this Hashtable
+	 */
+	operation size() : Integer is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Returns an iterator over the Keys of this Hashtable
+	 */
+	operation keyIterator() : Iterator<K> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns an iterator over the values of this Hashtable
+	 */
+	operation valueIterator() : Iterator<V> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns the value for key 'key' if it exists, otherwise returns Void
+	 */
+	operation getValue(key : K) : V is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Adds a entry into the Hashtable
+	 */
+	operation put(key : K, ~value : V) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Removes the entry with key equals to 'key'
+	 */
+	operation remove(key : K) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Removes all elements from the Hashtable
+	 */
+	operation clear() : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a set containing the hash keys of this Hashtable
+	 */
+	operation keys() : Set<K> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a collection containing the elements of this Hashtable
+	 */
+	operation values() : Collection<V> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**	
+	 * Returns a Boolean stating whether a key is present or not in this Hashtable
+	 */
+	operation containsKey(key : K) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	// TODO: complete this class
+	// The rest might be writable in metacore directly
+}
+
+}
+
+}
