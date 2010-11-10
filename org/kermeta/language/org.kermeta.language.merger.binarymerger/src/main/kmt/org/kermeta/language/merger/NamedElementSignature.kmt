@@ -1,0 +1,30 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package kermeta::language::structure::merger;
+
+
+require kermeta
+require "../../binarymerger/Signature.kmt"
+
+
+using kermeta::standard
+using kermeta::language::structure
+
+/**
+ * Signature for NamedElement
+ */ 
+class NamedElementSignature inherits org::kermeta::binarymerger::Signature
+{
+	
+	method localMatch(primaryElement : Object, aspectElement : Object) : Boolean is do
+		result := primaryElement.asType(NamedElement).name == aspectElement.asType(NamedElement).name
+	end
+}

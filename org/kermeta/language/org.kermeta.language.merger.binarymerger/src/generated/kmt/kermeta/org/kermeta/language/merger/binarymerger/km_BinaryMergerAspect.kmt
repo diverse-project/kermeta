@@ -1,0 +1,251 @@
+package org;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/Mergeable.kmt"
+
+using kermeta::language::structure
+
+package kermeta {
+	package language {
+		package behavior {
+			aspect class Assignment inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Expression inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallExpression inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Block inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallFeature inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallSuperOperation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallResult inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallValue inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Conditional inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Raise inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Rescue inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeReference inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Literal inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class EmptyExpression inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class JavaStaticCall inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class LambdaExpression inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class LambdaParameter inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class IntegerLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class StringLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class BooleanLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class VoidLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Loop inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SelfExpression inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class VariableDecl inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+		}
+
+
+		package structure {
+
+
+			aspect class Object inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+
+			aspect class Operation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Property inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Type inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class EnumerationLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeVariableBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class MultiplicityElement inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Class inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class DataType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Enumeration inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class NamedElement inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Package inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Parameter inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PrimitiveType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypedElement inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+
+			aspect class Tag inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class AbstractProperty inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Constraint inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+
+			aspect class ClassDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+
+			aspect class ModelingUnit inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Require inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class GenericTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ParameterizedType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ObjectTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class VirtualType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Model inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Resource inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ResourceGroup inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimpleResource inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class AbstractOperation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Unresolved inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedProperty inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedOperation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class Using inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ProductType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class FunctionType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class VoidType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TypeMapping inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+		}
+
+
+		aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
+		}
+
+	}
+
+
+	aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
+	}
+
+}
+
+
+aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
+}
