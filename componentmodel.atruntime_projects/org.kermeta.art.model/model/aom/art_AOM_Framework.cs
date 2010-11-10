@@ -30,7 +30,7 @@ TOKENS{
 		
 		DEFINE T_IMPLEM $'bundle'|'memory'$;
 		
-		DEFINE T_OPTIONAL $'optional'$;
+		//DEFINE T_OPTIONAL $'optional'$;
 		
 		//DEFINE QUALIFIED_NAME $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')*('.'('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')+)*$;
 
@@ -49,11 +49,11 @@ TOKENS{
 		
 		DEFINE TXTID $'<'('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*'>'$;
 		
-		DEFINE TEXT $('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*$;
+		DEFINE TEXT $('A'..'Z' | 'a'..'z' | '_' | '*')('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' | '*')* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' | '*')+)*$;
 }
 
 TOKENSTYLES {
-
+ 
 	"TEXT" COLOR #444444;
 
 	"SL_COMMENT"  COLOR #666666;
@@ -94,19 +94,19 @@ TOKENSTYLES {
 	"service" COLOR #CC8000, BOLD;
 	"services" COLOR #CC8000, BOLD;
 	"operation" COLOR #CC8000, BOLD;
-	"in" COLOR #CC8000, BOLD;
-	"out" COLOR #CC8000, BOLD;
+	//"in" COLOR #CC8000, BOLD;
+	//"out" COLOR #CC8000, BOLD;
 	
 	 
 	"implementation" COLOR #0055bb , BOLD;
 	"T_IMPLEM" COLOR #0055bb , BOLD;
 	"OSGiComponent" COLOR #0055bb;
-	"implementingClass" COLOR #0055bb, ITALIC;
-	"OSGiType" COLOR #0055bb;
-	"generateInstanceBundle" COLOR #0055bb , ITALIC;
-	"serviceId" COLOR #0055bb , ITALIC;
+	//"implementingClass" COLOR #0055bb, ITALIC;
+	//"OSGiType" COLOR #0055bb;
+	//"generateInstanceBundle" COLOR #0055bb , ITALIC;
+	//"serviceId" COLOR #0055bb , ITALIC;
 	
-	"groups" COLOR #444444, BOLD;
+	//"groups" COLOR #444444, BOLD;
 	"instancegroup" COLOR #444444, BOLD;
 	"typegroup" COLOR #444444, BOLD;
 	"instances" COLOR #444444, BOLD;
@@ -118,7 +118,7 @@ TOKENSTYLES {
 	"T_PORT_KIND" COLOR #A22000, BOLD;
 	"attribute" COLOR #A22000, BOLD;
 	"default" COLOR #A22000, BOLD;
-	"T_OPTIONAL" COLOR #A22000, BOLD;
+	//"T_OPTIONAL" COLOR #A22000, BOLD;
 	
 	"datatype" COLOR #0055bb, BOLD;	
 }
@@ -187,19 +187,19 @@ RULES{
 					!1 "components"  #1 "=" #1 components[]
 				)* "}"  ;
 	
-	pattern.art.System::= ("system" (#1 name[])? ( #1 pid[TXTID])? ";" )? !0 ( !0 ( nodes | services | types | dataTypes | groups) )* ;
+	pattern.art.System::= "system" ( #1 name[] )? ( #1 pid[TXTID])? ";" !0 ( !0 ( nodes | services | types | dataTypes | groups) )* ;
 	
 	pattern.art.DataType::= "datatype" (#1 name[])? ( #1 pid[TXTID])?  ";"  ;
 	
-	pattern.art.distrib.Node ::= "node" (#1 name[])? ( #1 pid[TXTID])? ("uri" #1 "=" #1 uri[STRING_LITERAL])? "{" !1 components*  !0 "}" ;
+	pattern.art.distrib.Node ::= "node" (#1 name[])? ( #1 pid[TXTID])? #1 ("uri" #1 "=" #1 uri[STRING_LITERAL])? "{" !1 components*  !0 "}" ;
 	
-	pattern.art.instance.PrimitiveInstance::= "primitive" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
+	pattern.art.instance.PrimitiveInstance::= "primitive" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ("?" | type[] ) (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
 	
-	pattern.art.instance.CompositeInstance::= "composite" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
+	pattern.art.instance.CompositeInstance::= "composite" #1 "instance"  (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ("?" | type[] ) (#1 state[T_INSTANCE_STATE])? #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
 	
-	pattern.art.instance.TransmissionBinding::= "bind" #1 ( client[] | "?" ) #1  "to" #1 ( serverInstance[] "::" server[] | "?" ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
+	pattern.art.instance.TransmissionBinding::= "bind" #1 ( "?" | client[] ) #1  "to" #1 ( "?" | serverInstance[] "::" server[]  ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
 	
-	pattern.art.instance.DelegationBinding::= "delegate" #1 ( source[] | "?" ) #1 "to" #1 ( serverInstance[] "::" exported[] | "?" ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
+	pattern.art.instance.DelegationBinding::= "delegate" #1 ( "?" | source[] ) #1 "to" #1 ( "?" | serverInstance[] "::" exported[] ) ( #1 pid[TXTID])?  ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ; 
 	
 	pattern.art.instance.ValuedAttribute::=  attribute[] #1 ":=" #1 value[STRING_LITERAL] ( #1 pid[TXTID])? ;
 	
@@ -217,13 +217,13 @@ RULES{
 	
 	pattern.art.type.Operation::= !1 "operation" #1 (#1 name[])? ( #1 pid[TXTID])? "(" (input)? ( "," #1 input )* ")" (":" output)? ( "," #1 output )* ;
 	
-	pattern.art.type.Parameter::= (type[] | "?") (#1 name[])? ( #1 pid[TXTID])?;
+	pattern.art.type.Parameter::= ("?" | type[]) (#1 name[])? ( #1 pid[TXTID])?;
 	
 	pattern.art.type.FunctionalService::= "functional" #1 "service" (#1 name[])? ( #1 pid[TXTID])? #1 "{" ( operation )* !0 "}"  ;
 	
 	pattern.art.type.ControlService::= "control" #1 "service" (#1 name[])? ( #1 pid[TXTID])? #1 "{" ( operation )* !0 "}"  ;
 	
-	pattern.art.type.Port::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( service[] | "?" )? #1 ("[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]")? ;
+	pattern.art.type.Port::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( "?" | service[] )? #1 ("[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]")? ;
 	
 	pattern.art.implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 	
@@ -231,15 +231,15 @@ RULES{
 		
 	pattern.art.implem.OSGiType::= generateInstanceBundle[T_IMPLEM]  ;
 	
-	pattern.art.type.BasicAttribute::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 (type[] | "?") ( #1 "default"  #1 defaultValue[STRING_LITERAL] )? ;
+	pattern.art.type.BasicAttribute::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ("?" | type[]) ( #1 "default"  #1 defaultValue[STRING_LITERAL] )? ;
 	
-	pattern.art.type.Dictionary::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" "[" (type[] | "?") #1 "->" #1 (valueType[] | "?") "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
+	pattern.art.type.Dictionary::= !1 "attribute" (#1 name[])? ( #1 pid[TXTID])? #1 ":" "[" ("?" | type[]) #1 "->" #1 ("?" | valueType[]) "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
 	
 	pattern.art.type.DictionaryDefaultValue::= !1 "[" #1 key[STRING_LITERAL] #1 ("->" #1 value[STRING_LITERAL] )? #1 ( #1 pid[TXTID])? "]" ;
 	
 	pattern.art.type.PortId ::= name[];
 	
-	pattern.art.type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( service[] | "?") #1 "{" ids ("," #1 ids)* "}" ;
+	pattern.art.type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" (#1 name[])? ( #1 pid[TXTID])? #1 ":" #1 ( "?" | service[]) #1 "{" ids ("," #1 ids)* "}" ;
 	
 	pattern.art.group.TypeGroup::= "typegroup" (#1 name[])? ( #1 pid[TXTID])? #1 "{" ( !1 "types" #1 ":" #1 types[] ("," #1 types[])* )?  ( !1 subGroups)* !0 "}"  ;
 		

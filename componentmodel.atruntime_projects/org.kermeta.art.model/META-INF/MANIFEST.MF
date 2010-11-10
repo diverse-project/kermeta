@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.kermeta.art.model; singleton:=true
+Bundle-SymbolicName: org.kermeta.art.model;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Vendor: INRIA
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: art,
@@ -51,4 +52,3 @@ Export-Package: art,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
