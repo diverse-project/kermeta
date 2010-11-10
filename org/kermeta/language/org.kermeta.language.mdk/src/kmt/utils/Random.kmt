@@ -1,0 +1,57 @@
+/* $Id: Random.kmt,v 1.4 2008-12-15 16:14:51 cfaucher Exp $ 
+ * Creation : December 10, 2008
+ * Licence  : EPL 
+ * Copyright: INRIA / IRISA / University of Rennes 1, France
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+package kermeta::utils;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+/**
+ * Implementation of a getter of random integers
+ */
+class Random {
+	/**
+	 * Give randomly the next integer comprised between 0 and (num-1)
+	 */
+	operation nextInteger(num : Integer) : Integer is do
+	
+		// if num==1 => result:=0
+		if num > 1 then
+			@compiledJavaExtern "org.kermeta.language.mdk.externs.random.Random.nextId(this, num)"
+        	result ?= extern org::kermeta::language::mdk::externs::random::Random.nextInteger(self, num)
+        else
+        	if num == 0 then
+        		//Should raise an exception
+        		result := void
+        	else
+        		result := 0
+        	end
+        end
+	end
+	
+	/**
+	 * Build a sequence (size==sequenceSize) of integer, each element is given randomly and comprised between 0 and (sequenceSize - the current size of the sequence - 1)
+	 */
+	operation getIntegerSequenceRandomly(sequenceSize : Integer) : Sequence<Integer> is do
+	
+		if sequenceSize > 1 then
+			@compiledJavaExtern "org.kermeta.language.mdk.externs.random.Random.getIntegerSequenceRandomly(this, sequenceSize)"
+        	result ?= extern org::kermeta::language::mdk::externs::random::Random.getIntegerSequenceRandomly(self, sequenceSize)
+        else
+        	// Optimization: if size==1 => result is a collection with one element equals to 0
+        	if sequenceSize == 0 then
+        		//Should raise an exception
+        		result := void
+        	else
+        		result := Sequence<Integer>.new()
+        		result.add(0)
+        	end
+        end
+	end
+}

@@ -1,0 +1,99 @@
+/* $Id: StringUtils.kmt,v 1.4 2009-01-14 14:21:11 dvojtise Exp $ 
+ * Creation : January 14, 2009
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek <dvojtise@irisa.fr>
+ */
+package kermeta::standard;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::utils
+
+
+/**
+ * Aspect for String providing additional functions manipulating String
+ */
+aspect class String {
+	/** 
+	 *  Creates a new String by trimming any leading or trailing whitespace and cariage return from the current String.
+	 */
+	operation trim() : String is do 
+		var sBuffer : StringBuffer init StringBuffer.new
+		var intermediateSpacesKept : String init ""
+		var firstNormalCharReached : Boolean init false
+		allCharacters.each{c |
+			if c != " ".elementAt(0) and c != "\t".elementAt(0) and c != "\n".elementAt(0) then
+				sBuffer.append(intermediateSpacesKept)
+				intermediateSpacesKept := ""
+				sBuffer.append(c.toString)
+				firstNormalCharReached := true
+			else
+				if firstNormalCharReached then
+					intermediateSpacesKept.append(c.toString)
+				end
+			end
+		}
+		result := sBuffer.toString
+	end
+	
+	/**
+	 * returns a sequence of all characters in the String
+	 */
+	operation allCharacters() : Sequence<Character> is do
+		var chars : Sequence<Character> init Sequence<Character>.new
+		from var i : Integer init 0
+		until i > self.size()-1
+		loop
+			chars.add(self.elementAt(i))
+		    i := i + 1
+		end
+		result := chars
+	end
+	
+	/**
+	 * indicates if self starts with the given string
+	 */
+	operation startsWith(str : String) : Boolean is do
+		result := false
+		if str.size <= self.size then
+			if self.substring(0,str.size) == str then
+				result := true
+			end
+		end
+	end
+	
+	/**
+	 * indicates if self ends with the given string
+	 */
+	operation endsWith(str : String) : Boolean is do
+		result := false
+		if str.size <= self.size then
+			if self.substring(self.size - str.size, self.size) == str then
+				result := true
+			end
+		end
+	end
+	
+	/**
+	 * Creates a new String by finding and replacing all occurences of the given keyword in the string	 
+	 */
+	operation replaceKeyword(keyword : String, replacement : String) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		if self.startsWith(keyword) then 
+			buf.append(replacement)
+		end
+		self.split(keyword).indexedEach{fragment, indexcontext |
+			buf.append(fragment)
+			if not indexcontext.isLast then 
+				buf.append(replacement)
+			end
+		}
+		if self.endsWith(keyword) then 
+			buf.append(replacement)
+		end 
+		result := buf.toString
+	end
+}
