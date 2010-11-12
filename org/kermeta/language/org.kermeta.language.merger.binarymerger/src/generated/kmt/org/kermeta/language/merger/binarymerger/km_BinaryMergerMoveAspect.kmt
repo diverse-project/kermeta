@@ -14,7 +14,7 @@ package kermeta {
 	package language {
 		package behavior {
 			aspect class Assignment inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Assignment
@@ -26,21 +26,52 @@ package kermeta {
 						if (not self.isCast.isVoid) and (mergedModelElement.isCast.isVoid) then
 							mergedModelElement.isCast := self.isCast
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Assignment, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Expression inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Expression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Expression)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Expression")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -58,11 +89,12 @@ package kermeta {
 						stdio.writeln("   No similar Expression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallExpression inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallExpression
@@ -85,15 +117,29 @@ package kermeta {
 						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
 							mergedModelElement.name := self.name
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Block inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Block
@@ -126,15 +172,29 @@ package kermeta {
 								mergedModelElement.rescueBlock.add(aspect_rescueBlock)
 							end
 						}
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Block, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallVariable inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::CallExpression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallVariable
@@ -144,15 +204,29 @@ package kermeta {
 						if (not self.isAtpre.isVoid) and (mergedModelElement.isAtpre.isVoid) then
 							mergedModelElement.isAtpre := self.isAtpre
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallFeature inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::CallExpression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallFeature
@@ -163,60 +237,116 @@ package kermeta {
 						if (not self.isAtpre.isVoid) and (mergedModelElement.isAtpre.isVoid) then
 							mergedModelElement.isAtpre := self.isAtpre
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallFeature, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallSuperOperation inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::CallExpression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallSuperOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallSuperOperation)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a CallSuperOperation")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallSuperOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallResult inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::CallVariable is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallVariable is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallResult
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallResult)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a CallResult")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallResult, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class CallValue inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::CallExpression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::CallValue
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallValue)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a CallValue")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar CallValue, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Conditional inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Conditional
@@ -226,15 +356,29 @@ package kermeta {
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference thenBody")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference elseBody")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference condition")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Conditional, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Raise inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Raise
@@ -242,16 +386,32 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Raise")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference expression")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Raise, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Rescue inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Rescue
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Rescue)
@@ -274,60 +434,108 @@ package kermeta {
 						if (not self.exceptionName.isVoid) and (mergedModelElement.exceptionName.isVoid) then
 							mergedModelElement.exceptionName := self.exceptionName
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Rescue, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeReference inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::MultiplicityElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::TypeReference
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::TypeReference)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeReference")
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar TypeReference, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Literal inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Literal
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Literal)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Literal")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Literal, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class EmptyExpression inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::EmptyExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::EmptyExpression)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a EmptyExpression")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar EmptyExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class JavaStaticCall inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::JavaStaticCall
@@ -353,15 +561,29 @@ package kermeta {
 						if (not self.jmethod.isVoid) and (mergedModelElement.jmethod.isVoid) then
 							mergedModelElement.jmethod := self.jmethod
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar JavaStaticCall, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class LambdaExpression inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::LambdaExpression
@@ -382,16 +604,32 @@ package kermeta {
 							end
 						}
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar LambdaExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class LambdaParameter inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::LambdaParameter
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::LambdaParameter)
@@ -401,15 +639,31 @@ package kermeta {
 						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
 							mergedModelElement.name := self.name
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar LambdaParameter, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class IntegerLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Literal is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::IntegerLiteral
@@ -419,15 +673,29 @@ package kermeta {
 						if (not self.~value.isVoid) and (mergedModelElement.~value.isVoid) then
 							mergedModelElement.~value := self.~value
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar IntegerLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class StringLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Literal is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::StringLiteral
@@ -437,15 +705,29 @@ package kermeta {
 						if (not self.~value.isVoid) and (mergedModelElement.~value.isVoid) then
 							mergedModelElement.~value := self.~value
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar StringLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class BooleanLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Literal is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::BooleanLiteral
@@ -455,15 +737,29 @@ package kermeta {
 						if (not self.~value.isVoid) and (mergedModelElement.~value.isVoid) then
 							mergedModelElement.~value := self.~value
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar BooleanLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Literal is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::TypeLiteral
@@ -471,30 +767,58 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeLiteral")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference typeref")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar TypeLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class VoidLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Literal is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::VoidLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::VoidLiteral)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a VoidLiteral")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar VoidLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Loop inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::Loop
@@ -504,30 +828,58 @@ package kermeta {
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference initialization")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference stopCondition")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar Loop, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class SelfExpression inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::SelfExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::SelfExpression)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a SelfExpression")
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar SelfExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class VariableDecl inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::behavior::Expression is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::behavior::VariableDecl
@@ -539,10 +891,24 @@ package kermeta {
 						if (not self.identifier.isVoid) and (mergedModelElement.identifier.isVoid) then
 							mergedModelElement.identifier := self.identifier
 						end
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					else
 						stdio.writeln("   No similar VariableDecl, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
@@ -553,7 +919,7 @@ package kermeta {
 
 
 			aspect class Object inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 					var mergedModelElement : org::kermeta::language::structure::Object
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Object)
 					if (not mergedModelElement.isVoid) then
@@ -575,12 +941,13 @@ package kermeta {
 						stdio.writeln("   No similar Object, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 
 			aspect class Operation inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::MultiplicityElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Operation
@@ -650,11 +1017,12 @@ package kermeta {
 						stdio.writeln("   No similar Operation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Property inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::MultiplicityElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Property
@@ -704,27 +1072,48 @@ package kermeta {
 						stdio.writeln("   No similar Property, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Type inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Type
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Type")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Type, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeContainer inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeContainer
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeContainer)
@@ -743,15 +1132,31 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar TypeContainer, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class EnumerationLiteral inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::NamedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::EnumerationLiteral
@@ -762,11 +1167,12 @@ package kermeta {
 						stdio.writeln("   No similar EnumerationLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeVariableBinding inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeVariableBinding
@@ -777,11 +1183,12 @@ package kermeta {
 						stdio.writeln("   No similar TypeVariableBinding, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class MultiplicityElement inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::MultiplicityElement
@@ -800,15 +1207,19 @@ package kermeta {
 						if (not self.upper.isVoid) and (mergedModelElement.upper.isVoid) then
 							mergedModelElement.upper := self.upper
 						end
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar MultiplicityElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeDefinition inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::NamedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeDefinition
@@ -835,11 +1246,12 @@ package kermeta {
 						stdio.writeln("   No similar TypeDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Class inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::ParameterizedType is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ParameterizedType is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Class
@@ -850,11 +1262,12 @@ package kermeta {
 						stdio.writeln("   No similar Class, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class DataType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Type is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::DataType
@@ -884,11 +1297,12 @@ package kermeta {
 						stdio.writeln("   No similar DataType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Enumeration inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::DataType is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::DataType is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Enumeration
@@ -908,16 +1322,38 @@ package kermeta {
 								mergedModelElement.ownedLiteral.add(aspect_ownedLiteral)
 							end
 						}
+						self.typeMappings.each{aspect_typeMappings | 
+							var equivalent_typeMappings : org::kermeta::language::structure::TypeMapping
+							equivalent_typeMappings := mergedModelElement.typeMappings.detect{ merged_typeMappings |
+								aspect_typeMappings.localMatch(merged_typeMappings)
+							}
+							if (not equivalent_typeMappings.isVoid) then
+								// mark them as similar
+								aspect_typeMappings.similarElementInMergedModel := equivalent_typeMappings
+							else
+								// move it in merged model
+								mergedModelElement.typeMappings.add(aspect_typeMappings)
+							end
+						}
+						if (not self.isAspect.isVoid) and (mergedModelElement.isAspect.isVoid) then
+							mergedModelElement.isAspect := self.isAspect
+						end
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar Enumeration, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class NamedElement inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::NamedElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::NamedElement)
@@ -926,15 +1362,31 @@ package kermeta {
 						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
 							mergedModelElement.name := self.name
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar NamedElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Package inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::NamedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Package
@@ -974,26 +1426,31 @@ package kermeta {
 						stdio.writeln("   No similar Package, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Parameter inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::MultiplicityElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Parameter
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Parameter)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Parameter")
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar Parameter, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class PrimitiveType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::DataType is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::DataType is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::PrimitiveType
@@ -1036,11 +1493,12 @@ package kermeta {
 						stdio.writeln("   No similar PrimitiveType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypedElement inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypedElement
@@ -1054,13 +1512,16 @@ package kermeta {
 						stdio.writeln("   No similar TypedElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 
 			aspect class Tag inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Tag
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag)
@@ -1072,30 +1533,64 @@ package kermeta {
 						if (not self.~value.isVoid) and (mergedModelElement.~value.isVoid) then
 							mergedModelElement.~value := self.~value
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Tag, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class AbstractProperty inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::AbstractProperty
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractProperty)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a AbstractProperty")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar AbstractProperty, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Constraint inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::NamedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Constraint
@@ -1113,12 +1608,13 @@ package kermeta {
 						stdio.writeln("   No similar Constraint, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 
 			aspect class ClassDefinition inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::GenericTypeDefinition is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::GenericTypeDefinition is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ClassDefinition
@@ -1184,12 +1680,13 @@ package kermeta {
 						stdio.writeln("   No similar ClassDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 
 			aspect class ModelingUnit inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeDefinitionContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinitionContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ModelingUnit
@@ -1229,11 +1726,12 @@ package kermeta {
 						stdio.writeln("   No similar ModelingUnit, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeDefinitionContainer inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::NamedElement is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeDefinitionContainer
@@ -1257,12 +1755,15 @@ package kermeta {
 						stdio.writeln("   No similar TypeDefinitionContainer, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Require inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Require
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Require)
@@ -1271,15 +1772,31 @@ package kermeta {
 						if (not self.uri.isVoid) and (mergedModelElement.uri.isVoid) then
 							mergedModelElement.uri := self.uri
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Require, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class GenericTypeDefinition inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeDefinition is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinition is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::GenericTypeDefinition
@@ -1303,11 +1820,12 @@ package kermeta {
 						stdio.writeln("   No similar GenericTypeDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ParameterizedType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Type is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ParameterizedType
@@ -1344,11 +1862,12 @@ package kermeta {
 						stdio.writeln("   No similar ParameterizedType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeVariable inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeVariable
@@ -1362,26 +1881,31 @@ package kermeta {
 						stdio.writeln("   No similar TypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ObjectTypeVariable inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeVariable is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeVariable is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ObjectTypeVariable
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ObjectTypeVariable)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a ObjectTypeVariable")
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar ObjectTypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ModelType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Type is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ModelType
@@ -1411,11 +1935,12 @@ package kermeta {
 						stdio.writeln("   No similar ModelType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ModelTypeVariable inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeVariable is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeVariable is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ModelTypeVariable
@@ -1435,15 +1960,19 @@ package kermeta {
 								mergedModelElement.virtualType.add(aspect_virtualType)
 							end
 						}
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar ModelTypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class VirtualType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::ObjectTypeVariable is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ObjectTypeVariable is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::VirtualType
@@ -1463,45 +1992,85 @@ package kermeta {
 								mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
 							end
 						}
+						if (not self.name.isVoid) and (mergedModelElement.name.isVoid) then
+							mergedModelElement.name := self.name
+						end
 					else
 						stdio.writeln("   No similar VirtualType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Model inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Model
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Model)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Model")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Model, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Resource inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Resource
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Resource)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Resource")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Resource, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ResourceGroup inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Resource is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ResourceGroup
@@ -1512,11 +2081,12 @@ package kermeta {
 						stdio.writeln("   No similar ResourceGroup, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class SimpleResource inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Resource is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::SimpleResource
@@ -1530,26 +2100,45 @@ package kermeta {
 						stdio.writeln("   No similar SimpleResource, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class AbstractOperation inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::AbstractOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractOperation)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a AbstractOperation")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar AbstractOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class UnresolvedType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Unresolved is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Unresolved is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedType
@@ -1589,26 +2178,45 @@ package kermeta {
 						stdio.writeln("   No similar UnresolvedType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Unresolved inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Unresolved
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Unresolved)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Unresolved")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Unresolved, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class UnresolvedProperty inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::AbstractProperty is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractProperty is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedProperty
@@ -1622,11 +2230,12 @@ package kermeta {
 						stdio.writeln("   No similar UnresolvedProperty, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class UnresolvedOperation inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::AbstractOperation is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractOperation is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedOperation
@@ -1640,12 +2249,15 @@ package kermeta {
 						stdio.writeln("   No similar UnresolvedOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class Using inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::Using
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Using)
@@ -1654,15 +2266,31 @@ package kermeta {
 						if (not self.qualifiedName.isVoid) and (mergedModelElement.qualifiedName.isVoid) then
 							mergedModelElement.qualifiedName := self.qualifiedName
 						end
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar Using, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class ProductType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::ProductType
@@ -1673,11 +2301,12 @@ package kermeta {
 						stdio.writeln("   No similar ProductType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class FunctionType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::TypeContainer is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::FunctionType
@@ -1688,11 +2317,12 @@ package kermeta {
 						stdio.writeln("   No similar FunctionType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class VoidType inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Type is do
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::VoidType
@@ -1703,22 +2333,41 @@ package kermeta {
 						stdio.writeln("   No similar VoidType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
 			aspect class TypeMapping inherits Mergeable {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void from org::kermeta::language::structure::Object is do
-					super(context)
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					//super(context)
 
 					var mergedModelElement : org::kermeta::language::structure::TypeMapping
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeMapping)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeMapping")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference mapping")
+						// workaround compiler V2 bug, embed code that should have been called via super 
+
+						self.kOwnedTags.each{aspect_kOwnedTags | 
+							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
+							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
+								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
+							}
+							if (not equivalent_kOwnedTags.isVoid) then
+								// mark them as similar
+								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
+							else
+								// move it in merged model
+								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+							end
+						}
 					else
 						stdio.writeln("   No similar TypeMapping, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+					result := self
 				end
 			}
 
@@ -1726,7 +2375,7 @@ package kermeta {
 
 
 		aspect class DummyClass inherits Mergeable {
-			method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is do
+			method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 				var mergedModelElement : org::kermeta::language::DummyClass
 				mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::DummyClass)
 				if (not mergedModelElement.isVoid) then
@@ -1735,6 +2384,7 @@ package kermeta {
 					stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 				end
 				self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+				result := self
 			end
 		}
 
@@ -1742,7 +2392,7 @@ package kermeta {
 
 
 	aspect class DummyClass inherits Mergeable {
-		method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is do
+		method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 			var mergedModelElement : org::kermeta::DummyClass
 			mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::DummyClass)
 			if (not mergedModelElement.isVoid) then
@@ -1751,6 +2401,7 @@ package kermeta {
 				stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 			end
 			self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+			result := self
 		end
 	}
 
@@ -1758,7 +2409,7 @@ package kermeta {
 
 
 aspect class DummyClass inherits Mergeable {
-	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is do
+	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 		var mergedModelElement : org::DummyClass
 		mergedModelElement := self.similarElementInMergedModel.asType(org::DummyClass)
 		if (not mergedModelElement.isVoid) then
@@ -1767,5 +2418,6 @@ aspect class DummyClass inherits Mergeable {
 			stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 		end
 		self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
+		result := self
 	end
 }

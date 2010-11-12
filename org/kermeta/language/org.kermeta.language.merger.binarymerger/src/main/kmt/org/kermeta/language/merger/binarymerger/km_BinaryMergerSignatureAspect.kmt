@@ -33,7 +33,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::behavior::Expression
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -147,13 +152,18 @@ package kermeta {
 					var aspectElement : org::kermeta::language::behavior::Rescue
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
 						result := result and self.exceptionType == aspectElement.exceptionType
 					end
 					if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
 						result := result and self.exceptionName == aspectElement.exceptionName
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -163,6 +173,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -216,13 +229,18 @@ package kermeta {
 					var aspectElement : org::kermeta::language::behavior::LambdaParameter
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
 						result := result and self.type == aspectElement.type
 					end
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -406,7 +424,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Type
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -415,7 +438,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::TypeContainer
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -454,6 +482,9 @@ package kermeta {
 					end
 					if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
 						result := result and self.upper == aspectElement.upper
+					end
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
 					end
 				end
 			}
@@ -506,6 +537,12 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+						result := result and self.isAspect == aspectElement.isAspect
+					end
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -514,10 +551,15 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::NamedElement
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -539,6 +581,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -575,13 +620,18 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Tag
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
 					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 						result := result and self.~value == aspectElement.~value
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -590,7 +640,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::AbstractProperty
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -652,10 +707,15 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Require
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
 						result := result and self.uri == aspectElement.uri
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -695,6 +755,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -719,6 +782,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -728,6 +794,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
 				end
 			}
 
@@ -736,7 +805,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Model
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -745,7 +819,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Resource
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -775,7 +854,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::AbstractOperation
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -796,7 +880,12 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Unresolved
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -829,10 +918,15 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::Using
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.qualifiedName.isVoid) and (not aspectElement.qualifiedName.isVoid) then
 						result := result and self.qualifiedName == aspectElement.qualifiedName
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 
@@ -868,10 +962,15 @@ package kermeta {
 					var aspectElement : org::kermeta::language::structure::TypeMapping
 					aspectElement ?= aspectElementObj
 					
-					result := super( aspectElement)
+					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+
+					// result := super( aspectElement)
+					result := true
 					if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
 						result := result and self.mapping == aspectElement.mapping
 					end
+					// workaround compiler V2 bug, embed code that should have been called via super 
+
 				end
 			}
 

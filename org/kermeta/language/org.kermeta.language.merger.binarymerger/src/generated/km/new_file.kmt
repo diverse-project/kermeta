@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Creation : November 12, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "hello::km::Main"
+@mainOperation "main"
+
+
+package hello::km;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("Hello world")
+	end
+}
