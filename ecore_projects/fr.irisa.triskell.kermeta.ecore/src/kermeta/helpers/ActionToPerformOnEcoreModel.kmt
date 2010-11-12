@@ -126,7 +126,11 @@ aspect class EReference {
 			if self.upperBound==1 then
 				content.append("if (not self."+ EcoreHelper.new.getMangledIdentifier(self.name)+".isVoid) then\n\t\t\t")
 				content.append("func(")		
-				content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))		
+				content.append("self." + EcoreHelper.new.getMangledIdentifier(self.name))
+				// force the cast if this point outside of the current metamodel
+				// TODO find a more clever way to detect if we really need it or not : however this 
+				// sound difficult since we cannot know if the pointed element will be correctly aspetized or not ...
+				content.append(".asType("+highLevelModelElement+")")		
 				content.append(")\n\t\t")
 				content.append("end")
 			else

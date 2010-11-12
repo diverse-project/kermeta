@@ -18,10 +18,10 @@ aspect class Assignment {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		if (not self.target.isVoid) then
-			func(self.target)
+			func(self.target.asType(kermeta::standard::Object))
 		end
 		if (not self.~value.isVoid) then
-			func(self.~value)
+			func(self.~value.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -83,7 +83,7 @@ aspect class CallFeature {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
 		if (not self.target.isVoid) then
-			func(self.target)
+			func(self.target.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -122,13 +122,13 @@ aspect class Conditional {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		if (not self.thenBody.isVoid) then
-			func(self.thenBody)
+			func(self.thenBody.asType(kermeta::standard::Object))
 		end
 		if (not self.elseBody.isVoid) then
-			func(self.elseBody)
+			func(self.elseBody.asType(kermeta::standard::Object))
 		end
 		if (not self.condition.isVoid) then
-			func(self.condition)
+			func(self.condition.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -140,7 +140,7 @@ aspect class Raise {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		if (not self.expression.isVoid) then
-			func(self.expression)
+			func(self.expression.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -156,7 +156,7 @@ aspect class Rescue {
 			func(e)
 		}
 		if (not self.exceptionType.isVoid) then
-			func(self.exceptionType)
+			func(self.exceptionType.asType(kermeta::standard::Object))
 		end
 	// workaround compiler V2 bug, embed code that should have been called via super 
 		self.kOwnedTags.each{ e |
@@ -208,7 +208,7 @@ aspect class LambdaExpression {
 			func(e)
 		}
 		if (not self.body.isVoid) then
-			func(self.body)
+			func(self.body.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -221,7 +221,7 @@ aspect class LambdaParameter {
 		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 		// super(func)
 		if (not self.type.isVoid) then
-			func(self.type)
+			func(self.type.asType(kermeta::standard::Object))
 		end
 	// workaround compiler V2 bug, embed code that should have been called via super 
 		self.kOwnedTags.each{ e |
@@ -261,7 +261,7 @@ aspect class TypeLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
 		if (not self.typeref.isVoid) then
-			func(self.typeref)
+			func(self.typeref.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -282,13 +282,13 @@ aspect class Loop {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		if (not self.initialization.isVoid) then
-			func(self.initialization)
+			func(self.initialization.asType(kermeta::standard::Object))
 		end
 		if (not self.body.isVoid) then
-			func(self.body)
+			func(self.body.asType(kermeta::standard::Object))
 		end
 		if (not self.stopCondition.isVoid) then
-			func(self.stopCondition)
+			func(self.stopCondition.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -309,10 +309,10 @@ aspect class VariableDecl {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		if (not self.initialization.isVoid) then
-			func(self.initialization)
+			func(self.initialization.asType(kermeta::standard::Object))
 		end
 		if (not self.type.isVoid) then
-			func(self.type)
+			func(self.type.asType(kermeta::standard::Object))
 		end
 		self.containedType.each{ e |
 			func(e)
@@ -348,7 +348,7 @@ aspect class Operation {
 			func(e)
 		}
 		if (not self.body.isVoid) then
-			func(self.body)
+			func(self.body.asType(kermeta::standard::Object))
 		end
 		self.ownedUnresolvedOperations.each{ e |
 			func(e)
@@ -360,10 +360,10 @@ aspect class Property {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::MultiplicityElement is do
 		super(func)
 		if (not self.getterBody.isVoid) then
-			func(self.getterBody)
+			func(self.getterBody.asType(kermeta::standard::Object))
 		end
 		if (not self.setterBody.isVoid) then
-			func(self.setterBody)
+			func(self.setterBody.asType(kermeta::standard::Object))
 		end
 		self.ownedUnresolvedProperties.each{ e |
 			func(e)
@@ -524,7 +524,7 @@ aspect class Constraint {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
 		super(func)
 		if (not self.body.isVoid) then
-			func(self.body)
+			func(self.body.asType(kermeta::standard::Object))
 		end
 	end
 }
@@ -687,7 +687,7 @@ aspect class AbstractOperation {
 }
 
 aspect class UnresolvedType {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Unresolved is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
 		super(func)
 		self.usings.each{ e |
 			func(e)
@@ -755,7 +755,7 @@ aspect class TypeMapping {
 		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 		// super(func)
 		if (not self.mapping.isVoid) then
-			func(self.mapping)
+			func(self.mapping.asType(kermeta::standard::Object))
 		end
 	// workaround compiler V2 bug, embed code that should have been called via super 
 		self.kOwnedTags.each{ e |
