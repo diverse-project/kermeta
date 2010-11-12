@@ -864,7 +864,7 @@ package kermeta {
 			}
 
 			aspect class UnresolvedType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::UnresolvedType
 					aspectElement ?= aspectElementObj
 					
@@ -922,8 +922,11 @@ package kermeta {
 
 					// result := super( aspectElement)
 					result := true
-					if (not self.qualifiedName.isVoid) and (not aspectElement.qualifiedName.isVoid) then
-						result := result and self.qualifiedName == aspectElement.qualifiedName
+					if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
+						result := result and self.fromQName == aspectElement.fromQName
+					end
+					if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
+						result := result and self.toName == aspectElement.toName
 					end
 					// workaround compiler V2 bug, embed code that should have been called via super 
 
