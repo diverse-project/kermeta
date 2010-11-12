@@ -23,12 +23,20 @@ aspect class Assignment {
 		if (not self.~value.isVoid) then
 			func(self.~value)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class Expression {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 		self.containedType.each{ e |
 			func(e)
 		}
@@ -39,6 +47,9 @@ aspect class CallExpression {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		self.parameters.each{ e |
+			func(e)
+		}
+		self.containedType.each{ e |
 			func(e)
 		}
 	end
@@ -53,12 +64,18 @@ aspect class Block {
 		self.rescueBlock.each{ e |
 			func(e)
 		}
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class CallVariable {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -68,24 +85,36 @@ aspect class CallFeature {
 		if (not self.target.isVoid) then
 			func(self.target)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class CallSuperOperation {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class CallResult {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallVariable is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class CallValue {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::CallExpression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -101,6 +130,9 @@ aspect class Conditional {
 		if (not self.condition.isVoid) then
 			func(self.condition)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -110,18 +142,26 @@ aspect class Raise {
 		if (not self.expression.isVoid) then
 			func(self.expression)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class Rescue {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
 		self.body.each{ e |
 			func(e)
 		}
 		if (not self.exceptionType.isVoid) then
 			func(self.exceptionType)
 		end
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -134,12 +174,18 @@ aspect class TypeReference {
 aspect class Literal {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class EmptyExpression {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -147,6 +193,9 @@ aspect class JavaStaticCall {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
 		self.parameters.each{ e |
+			func(e)
+		}
+		self.containedType.each{ e |
 			func(e)
 		}
 	end
@@ -161,33 +210,50 @@ aspect class LambdaExpression {
 		if (not self.body.isVoid) then
 			func(self.body)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class LambdaParameter {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
 		if (not self.type.isVoid) then
 			func(self.type)
 		end
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class IntegerLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class StringLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class BooleanLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -197,12 +263,18 @@ aspect class TypeLiteral {
 		if (not self.typeref.isVoid) then
 			func(self.typeref)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class VoidLiteral {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Literal is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -218,12 +290,18 @@ aspect class Loop {
 		if (not self.stopCondition.isVoid) then
 			func(self.stopCondition)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class SelfExpression {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
 		super(func)
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -236,6 +314,9 @@ aspect class VariableDecl {
 		if (not self.type.isVoid) then
 			func(self.type)
 		end
+		self.containedType.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -292,14 +373,24 @@ aspect class Property {
 
 aspect class Type {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class TypeContainer {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
 		self.containedType.each{ e |
+			func(e)
+		}
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
 			func(e)
 		}
 	end
@@ -353,12 +444,20 @@ aspect class Enumeration {
 		self.ownedLiteral.each{ e |
 			func(e)
 		}
+		self.typeMappings.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class NamedElement {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -401,13 +500,23 @@ aspect class TypedElement {
 
 aspect class Tag {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class AbstractProperty {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -463,7 +572,12 @@ aspect class TypeDefinitionContainer {
 
 aspect class Require {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -529,13 +643,23 @@ aspect class VirtualType {
 
 aspect class Model {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
 aspect class Resource {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -553,7 +677,12 @@ aspect class SimpleResource {
 
 aspect class AbstractOperation {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -571,7 +700,12 @@ aspect class UnresolvedType {
 
 aspect class Unresolved {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -589,7 +723,12 @@ aspect class UnresolvedOperation {
 
 aspect class Using {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
@@ -613,10 +752,15 @@ aspect class VoidType {
 
 aspect class TypeMapping {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Object is do
-		super(func)
+		// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+		// super(func)
 		if (not self.mapping.isVoid) then
 			func(self.mapping)
 		end
+	// workaround compiler V2 bug, embed code that should have been called via super 
+		self.kOwnedTags.each{ e |
+			func(e)
+		}
 	end
 }
 
