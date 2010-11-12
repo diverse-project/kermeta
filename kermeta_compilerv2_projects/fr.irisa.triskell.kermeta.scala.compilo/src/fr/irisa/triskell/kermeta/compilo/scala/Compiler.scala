@@ -62,6 +62,8 @@ class Compiler extends LogAspect {
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
         log.info("Compilation step complete in "+(endTime)+" millisecondes ")
+        CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
+
     }
 
 }
