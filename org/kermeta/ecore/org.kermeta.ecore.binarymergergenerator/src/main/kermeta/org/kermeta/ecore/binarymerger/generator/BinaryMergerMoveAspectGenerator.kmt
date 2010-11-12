@@ -36,22 +36,25 @@ class BinaryMergerMoveAspectGenerator
 	 */
 	operation generateBinaryMergerMoveAspect(inputEcoreMetamodel : String, 
 													  outputDirectory : String,  
-													  outputFilePrefix : String) : Void is do 
+													  outputFilePrefix : String,
+										 additionalRequireDirectives : String) : Void is do 
 		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
 		isMMReflexiveKermeta :=  false
-		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix, additionalRequireDirectives,  root)
 	end
 	operation generateBinaryMergerMoveAspectForReflexiveKermeta(inputEcoreMetamodel : String, 
 													  outputDirectory : String,  
-													  outputFilePrefix : String) : Void is do 
+													  outputFilePrefix : String,
+										 additionalRequireDirectives : String) : Void is do 
 		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
 		isMMReflexiveKermeta :=  true
-		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+		genBinaryMergerMoveAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix, additionalRequireDirectives, root)
 	end
 	
 	operation genBinaryMergerMoveAspect(inputEcoreMetamodel : String, 
 												 outputDirectory : String,  
-												 outputFilePrefix : String, 
+												 outputFilePrefix : String,
+										 additionalRequireDirectives : String, 
 												 root : EPackage) : Void is do 
 		
 		var generatorContext : BinaryMergerGeneratorContext init BinaryMergerGeneratorContext.new.initialize
@@ -67,9 +70,11 @@ class BinaryMergerMoveAspectGenerator
 		if (not isMMReflexiveKermeta) then
 			content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/Mergeable.kmt\"\n")
 		end
-		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerSignatureAspect.kmt\"\n")
-		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerAspect.kmt\"\n\n")
-		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_ContainmentBasedActionPerformer.kmt\"\n\n")
+		//content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerSignatureAspect.kmt\"\n")
+		content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_BinaryMergerAspect.kmt\"\n")
+		//content.append("require \"" + outputDirectory+ "/" +outputFilePrefix + "_ContainmentBasedActionPerformer.kmt\"\n\n")		
+		content.append(additionalRequireDirectives)
+		content.append("\n")
 		content.append("using kermeta::language::structure\n")
 		content.append("using org::kermeta::ecore::binarymerger\n\n")
 		

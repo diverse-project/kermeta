@@ -91,8 +91,17 @@ aspect class EClass {
 		content.append("aspectElement ?= aspectElementObj")
 		content.append(context.indentString)
 		if self.eSuperTypes.size()>0 then
-			content.append(context.indentString)
-			content.append("result := super( aspectElement)")
+			if(self.eSuperTypes.first().name == "Object")then
+				content.append(context.indentString)
+				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
+				content.append(context.indentString)
+				content.append("// result := super( aspectElement)")
+				content.append(context.indentString)
+				content.append("result := true")
+			else
+				content.append(context.indentString)
+				content.append("result := super( aspectElement)")
+			end
 		else 
 			content.append(context.indentString)
 			content.append("result := true")
@@ -103,7 +112,7 @@ aspect class EClass {
 		self.eachOwnedElement{ e |
 				content.append(e.binaryMergerSignatureAspectKmtPrinter(context))
 		}
-		if self.eSuperTypes.size()>1 then
+		if self.eSuperTypes.size()>=1 then
 			// must deal with EReference that comes from the other inheritance branch
 			var allFirstSuperTypes : Set<EClass> init getAllFirstSuperTypes
 			self.eAllSuperTypes.each{ s |
@@ -111,6 +120,14 @@ aspect class EClass {
 					s.eachOwnedElement{ e |
 						content.append(e.binaryMergerSignatureAspectKmtPrinter(context))
 					}
+				else					
+					if(self.eSuperTypes.first().name == "Object") then
+						content.append(context.indentString)
+						content.append("// workaround compiler V2 bug, embed code that should have been called via super \n")
+						s.eachOwnedElement{ e |
+							content.append(e.binaryMergerSignatureAspectKmtPrinter(context))
+						}
+					end
 				end
 			}
 		end			

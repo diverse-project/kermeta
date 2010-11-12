@@ -20,5 +20,5 @@ class Mergeable
 	/** if this element is in the MergedModel, it may have an equivalent in the AspectModel */
 	reference similarElementInAspectModel : Mergeable#similarElementInMergedModel
 	
-	operation binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Void is abstract
+	operation binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is abstract
 }

@@ -36,24 +36,27 @@ class BinaryMergerSignatureAspectGenerator
 	 */
 	operation generateBinaryMergerSignatureAspect(inputEcoreMetamodel : String, 
 													  outputDirectory : String,  
-													  outputFilePrefix : String) : Void is do 
+													  outputFilePrefix : String,
+										 additionalRequireDirectives : String) : Void is do 
 		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
 		isMMReflexiveKermeta :=  false
-		genBinaryMergerSignatureAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+		genBinaryMergerSignatureAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix, additionalRequireDirectives,  root)
 	end
 	
 	operation generateBinaryMergerSignatureAspectForReflexiveKermeta(inputEcoreMetamodel : String, 
 													  outputDirectory : String,  
-													  outputFilePrefix : String) : Void is do 
+													  outputFilePrefix : String,
+										 additionalRequireDirectives : String) : Void is do 
 		var root : EPackage init loadEcoreModel(inputEcoreMetamodel)
 		isMMReflexiveKermeta :=  true
-		genBinaryMergerSignatureAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix,  root)
+		genBinaryMergerSignatureAspect(inputEcoreMetamodel, outputDirectory, outputFilePrefix, additionalRequireDirectives,  root)
 	end
 	
 	operation genBinaryMergerSignatureAspect(inputEcoreMetamodel : String, 
 												 outputDirectory : String,  
-												 outputFilePrefix : String, 
-												 root : EPackage) : Void is do 
+												 outputFilePrefix : String,
+										 additionalRequireDirectives : String,
+										 root : EPackage) : Void is do 
 		
 		var generatorContext : BinaryMergerGeneratorContext init BinaryMergerGeneratorContext.new.initialize
 		generatorContext.isMMReflexiveKermeta := isMMReflexiveKermeta
@@ -65,6 +68,8 @@ class BinaryMergerSignatureAspectGenerator
 			content.append("require \"" + inputEcoreMetamodel + "\"\n")
 		end
 		content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt\"\n")
+		content.append(additionalRequireDirectives)
+		content.append("\n")
 		content.append("using kermeta::language::structure\n")
 		content.append("using org::kermeta::ecore::binarymerger\n\n")
 		
