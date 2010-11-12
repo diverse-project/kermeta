@@ -29,7 +29,26 @@ trait CallSuperOperationAspect extends ObjectAspect with LogAspect {
 
     //SEARCH THE FIRST LEVEL SUPER TYPE WHERE OPERATION COMING FROM
     var superTrait = classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).head
-                
+    /* var superTrait : Type = null
+    var maxLevel : Int = 2
+    classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).foreach{stype=>
+      log.debug("Selecting classFrom {} or {}",stype.getQualifiedNameCompilo, classFrom.getQualifiedNameCompilo)
+      if (stype.getQualifiedNameCompilo == classFrom.getQualifiedNameCompilo) {
+        superTrait = stype
+        maxLevel = 1
+        log.debug("Found stype level 1 {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+      }
+      else {
+        if (maxLevel == 2 ){
+          superTrait = stype
+          log.debug("Found stype level 2 {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+        }
+      }
+
+    }*/
+
+    log.debug("operation {} from {}",actualOperation.getName, superClassFromName)
+    log.debug(" => {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName         )
     res.append("super["+superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName+"Aspect]")
     res.append("."+Util.getEcoreRenameOperation(actualOperation.getSuperOperation))
     res.append("(")

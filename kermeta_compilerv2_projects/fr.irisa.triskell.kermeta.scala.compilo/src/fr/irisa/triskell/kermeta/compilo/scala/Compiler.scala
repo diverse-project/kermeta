@@ -1,7 +1,7 @@
 package fr.irisa.triskell.kermeta.compilo.scala
  
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
-import kermeta.utils.ReflexivityLoader
+import _root_.kermeta.utils.ReflexivityLoader
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._

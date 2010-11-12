@@ -346,7 +346,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
     def genetateUtilObject() = {
         var template = new StringTemplate("package scalaUtil\n object Util {\n    def getMetaClass(t:String):fr.irisa.triskell.kermeta.language.structure.Class={\n "+
-                                          "var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   kermeta.utils.ReflexivityLoader.getMetaClass(t);\n"+
+                                          "var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(t);\n"+
                                           "if (cd !=null){\n"+
                                           "            var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure. RichFactory.createClass\n"+
                                           "            cl.setTypeDefinition(cd)\n"+
