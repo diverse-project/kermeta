@@ -67,11 +67,11 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
 			
       var res : StringBuilder = new StringBuilder
       res.append("package "+genpackageName+"\n")
-      res.append("import kermeta.io._\n")
-      res.append("import kermeta.standard._\n")
-      res.append("import  kermeta.standard.JavaConversions._\n")
-      res.append("import kermeta.standard.PrimitiveConversion._\n")
-      res.append("import kermeta.kunit.KunitConversions._\n")
+      res.append("import _root_.kermeta.io._\n")
+      res.append("import _root_.kermeta.standard._\n")
+      res.append("import _root_.kermeta.standard.JavaConversions._\n")
+      res.append("import _root_.kermeta.standard.PrimitiveConversion._\n")
+      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
       par.generateScalaCode(res)
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
       if (!Util.hasEcoreTag(par)){
