@@ -1,0 +1,2 @@
+map in.myAtt to out.myNewAtt;
+//map myAtt => myNewAtt;
