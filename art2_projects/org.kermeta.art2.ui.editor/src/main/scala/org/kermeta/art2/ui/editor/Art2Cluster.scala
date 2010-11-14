@@ -3,10 +3,12 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.ui
+package org.kermeta.art2.ui.editor
 
+import java.io.ByteArrayInputStream
 import org.jgroups.JChannel
 import org.jgroups.Message
+import org.kermeta.art2.framework.Art2XmiHelper
 
 object Art2Cluster {
   var jchannel  : JChannel = null
@@ -23,9 +25,15 @@ object Art2Cluster {
           super.getState
         }
         override def setState(state : Array[Byte])= synchronized {
+
+          println("Set STATE")
+
+          var input = new ByteArrayInputStream(state);
+          var root = Art2XmiHelper.loadStream(input)
+
           println("Cluster SetState")
-          println(state)
-          super.setState(state)
+          println(root)
+          
         }
         
       })

@@ -66,8 +66,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Import-Package>!org.kermeta.art2.ui.aspects,!org.kermeta.art2.ui,!org.kermeta.art2.ui.editor.*,!org.kermeta.art2.ui.aspects.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
-                        <Private-Package>org.kermeta.art2.ui.editor.*,org.kermeta.art2.ui.aspects.*</Private-Package>
+                        <Import-Package>!org.kermeta.art2.ui.editor.*,org.slf4j.*;version="${slf4j.version.range}",*</Import-Package>
+                       <!-- <Private-Package>org.kermeta.art2.ui.editor.*,org.kermeta.art2.ui.aspects.*</Private-Package> -->
                     </instructions>
                 </configuration>
             </plugin>

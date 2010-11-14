@@ -40,7 +40,7 @@ class SynchNodeCommand extends Command {
       case Some(l) if(l.size > 0)=> {
           var i = 0
           var listIP = l.toList
-          var client = new TcpClientRemoteActor(null,1000) {
+          var client = new TcpClientRemoteActor(null,2000) {
             def getRemoteAddr : InetSocketAddress = {
 
               var addr = new InetSocketAddress(listIP.get(i)._1,listIP.get(i)._2)

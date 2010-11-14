@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.art2.ui
+package org.kermeta.art2.ui.editor
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.Art2Factory
@@ -17,8 +17,6 @@ class Art2Handler {
 
   def merge(modelToMerge : ContainerRoot) : Unit = {
     actualModel = merger.merge(actualModel, modelToMerge)
-
-   // merger.Art2RootMerger.merge(actualModel, modelToMerge)
   }
 
   /* ACESSOR TO MODEL */

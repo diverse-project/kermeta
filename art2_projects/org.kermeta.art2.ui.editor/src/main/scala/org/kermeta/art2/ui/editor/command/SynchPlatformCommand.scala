@@ -8,7 +8,7 @@ package org.kermeta.art2.ui.editor.command
 import java.io.ByteArrayOutputStream
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.kermeta.art2.framework.message.Art2ModelSynchMessage
-import org.kermeta.art2.ui.Art2Cluster
+import org.kermeta.art2.ui.editor.Art2Cluster
 import org.kermeta.art2.ui.editor.Art2UIKernel
 import org.kermeta.art2.framework.JacksonSerializer._
 import scala.reflect.BeanProperty

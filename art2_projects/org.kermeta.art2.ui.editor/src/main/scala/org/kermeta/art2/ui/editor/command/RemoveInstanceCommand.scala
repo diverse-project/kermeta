@@ -11,7 +11,7 @@ import org.kermeta.art2.ContainerNode
 import org.kermeta.art2.ui.editor.Art2UIKernel
 import scala.reflect.BeanProperty
 import scala.collection.JavaConversions._
-import org.kermeta.art2.ui.aspects.Art2UIAspects._
+import org.kermeta.art2.ui.editor.aspects.Art2UIAspects._
 
 class RemoveInstanceCommand(elem : org.kermeta.art2.NamedElement) extends Command {
 
