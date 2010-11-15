@@ -13,6 +13,8 @@
         <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
         <!--<java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>-->
         <node.name>duke</node.name>
+        <bootstrap.bundles>${project.build.directory}/art2Bundles</bootstrap.bundles>
+        <bootstrap.version>${art2.version}</bootstrap.version>
     </properties>
 
     <parent>
@@ -212,7 +214,7 @@
                         <param>--log=DEBUG</param>
                         <param>--workingDirectory=${project.build.directory}/paxCache_${node.name}</param>
                     </provision>
-
+<!--
                     <deployURLs>
                 file:///${project.build.directory}/art2Bundles/scala-library-2.8.0.jar,
                 file:///${project.build.directory}/art2Bundles/slf4j-api-1.6.1.jar,
@@ -233,7 +235,7 @@
                 file:///${project.build.directory}/art2Bundles/art2.core-${art2.version}.jar,
                 file:///${project.build.directory}/art2Bundles/art2.framework.bus.jmdns-${art2.version}.jar,
                 file:///${project.build.directory}/art2Bundles/art2.framework.bus.jgroups-${art2.version}.jar
-                    </deployURLs>
+                    </deployURLs> -->
                 </configuration>
             </plugin>
 

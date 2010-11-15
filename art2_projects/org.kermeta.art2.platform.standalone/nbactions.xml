@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
+    <!--
     <action>
         <actionName>CUSTOM-RunDuke</actionName>
         <displayName>RunDuke</displayName>
@@ -34,7 +35,7 @@
             <node.name>entiAuto</node.name>
         </properties>
     </action>
-
+-->
     <action>
         <actionName>CUSTOM-DukePax</actionName>
         <displayName>DukePax</displayName>
@@ -45,9 +46,6 @@
             <node.name>duke</node.name>
             <art2.config>src/main/resources/config/art2duke</art2.config>
         </properties>
-
-
     </action>
-
 
 </actions>
