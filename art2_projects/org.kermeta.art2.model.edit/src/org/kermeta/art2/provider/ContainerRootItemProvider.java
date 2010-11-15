@@ -90,6 +90,8 @@ public class ContainerRootItemProvider
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__MBINDINGS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__DEPLOY_UNITS);
 			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__NODE_NETWORKS);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__METRICS);
+			childrenFeatures.add(Art2Package.Literals.CONTAINER_ROOT__METRIC_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -150,6 +152,8 @@ public class ContainerRootItemProvider
 			case Art2Package.CONTAINER_ROOT__MBINDINGS:
 			case Art2Package.CONTAINER_ROOT__DEPLOY_UNITS:
 			case Art2Package.CONTAINER_ROOT__NODE_NETWORKS:
+			case Art2Package.CONTAINER_ROOT__METRICS:
+			case Art2Package.CONTAINER_ROOT__METRIC_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -246,6 +250,26 @@ public class ContainerRootItemProvider
 			(createChildParameter
 				(Art2Package.Literals.CONTAINER_ROOT__NODE_NETWORKS,
 				 Art2Factory.eINSTANCE.createNodeNetwork()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__METRICS,
+				 Art2Factory.eINSTANCE.createMetric()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__METRICS,
+				 Art2Factory.eINSTANCE.createInstanceMetric()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__METRICS,
+				 Art2Factory.eINSTANCE.createPortMetric()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.CONTAINER_ROOT__METRIC_TYPES,
+				 Art2Factory.eINSTANCE.createMetricType()));
 	}
 
 	/**

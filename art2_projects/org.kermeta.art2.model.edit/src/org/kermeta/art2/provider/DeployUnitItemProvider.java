@@ -65,6 +65,7 @@ public class DeployUnitItemProvider
 			addUnitNamePropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
 			addUrlPropertyDescriptor(object);
+			addHashcodePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -158,6 +159,28 @@ public class DeployUnitItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Hashcode feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHashcodePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DeployUnit_hashcode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DeployUnit_hashcode_feature", "_UI_DeployUnit_type"),
+				 Art2Package.Literals.DEPLOY_UNIT__HASHCODE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -187,6 +210,7 @@ public class DeployUnitItemProvider
 			case Art2Package.DEPLOY_UNIT__UNIT_NAME:
 			case Art2Package.DEPLOY_UNIT__VERSION:
 			case Art2Package.DEPLOY_UNIT__URL:
+			case Art2Package.DEPLOY_UNIT__HASHCODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

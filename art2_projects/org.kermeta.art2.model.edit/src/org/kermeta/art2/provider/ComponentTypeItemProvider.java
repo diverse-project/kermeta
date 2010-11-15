@@ -126,7 +126,6 @@ public class ComponentTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Art2Package.Literals.COMPONENT_TYPE__DICTIONARY);
 			childrenFeatures.add(Art2Package.Literals.COMPONENT_TYPE__REQUIRED);
 			childrenFeatures.add(Art2Package.Literals.COMPONENT_TYPE__INTEGRATION_PATTERNS);
 			childrenFeatures.add(Art2Package.Literals.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES);
@@ -189,7 +188,6 @@ public class ComponentTypeItemProvider
 			case Art2Package.COMPONENT_TYPE__STOP_METHOD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 			case Art2Package.COMPONENT_TYPE__REQUIRED:
 			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
 			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
@@ -210,11 +208,6 @@ public class ComponentTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Art2Package.Literals.COMPONENT_TYPE__DICTIONARY,
-				 Art2Factory.eINSTANCE.createDictionaryType()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -13,27 +13,23 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-import org.kermeta.art2.Art2Package;
+import org.kermeta.art2.MetricType;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.Port} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.MetricType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PortItemProvider
-	extends ItemProviderAdapter
+public class MetricTypeItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -46,7 +42,7 @@ public class PortItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PortItemProvider(AdapterFactory adapterFactory) {
+	public MetricTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,42 +57,19 @@ public class PortItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPortTypeRefPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Port Type Ref feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPortTypeRefPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Port_portTypeRef_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Port_portTypeRef_feature", "_UI_Port_type"),
-				 Art2Package.Literals.PORT__PORT_TYPE_REF,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns Port.gif.
+	 * This returns MetricType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Port"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetricType"));
 	}
 
 	/**
@@ -107,7 +80,10 @@ public class PortItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Port_type");
+		String label = ((MetricType)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_MetricType_type") :
+			getString("_UI_MetricType_type") + " " + label;
 	}
 
 	/**
@@ -133,17 +109,6 @@ public class PortItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ArtEditPlugin.INSTANCE;
 	}
 
 }

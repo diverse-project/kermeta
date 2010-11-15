@@ -15,27 +15,21 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.kermeta.art2.Art2Package;
-import org.kermeta.art2.DictionaryValue;
-
 /**
- * This is the item provider adapter for a {@link org.kermeta.art2.DictionaryValue} object.
+ * This is the item provider adapter for a {@link org.kermeta.art2.MetricValue} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DictionaryValueItemProvider
+public class MetricValueItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +43,7 @@ public class DictionaryValueItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DictionaryValueItemProvider(AdapterFactory adapterFactory) {
+	public MetricValueItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,65 +58,19 @@ public class DictionaryValueItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addAttributePropertyDescriptor(object);
-			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAttributePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DictionaryValue_attribute_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DictionaryValue_attribute_feature", "_UI_DictionaryValue_type"),
-				 Art2Package.Literals.DICTIONARY_VALUE__ATTRIBUTE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DictionaryValue_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DictionaryValue_value_feature", "_UI_DictionaryValue_type"),
-				 Art2Package.Literals.DICTIONARY_VALUE__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns DictionaryValue.gif.
+	 * This returns MetricValue.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DictionaryValue"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetricValue"));
 	}
 
 	/**
@@ -133,10 +81,7 @@ public class DictionaryValueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DictionaryValue)object).getValue();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DictionaryValue_type") :
-			getString("_UI_DictionaryValue_type") + " " + label;
+		return getString("_UI_MetricValue_type");
 	}
 
 	/**
@@ -149,12 +94,6 @@ public class DictionaryValueItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(DictionaryValue.class)) {
-			case Art2Package.DICTIONARY_VALUE__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

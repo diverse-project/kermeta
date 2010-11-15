@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -26,6 +27,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.kermeta.art2.Art2Factory;
 import org.kermeta.art2.Art2Package;
 import org.kermeta.art2.Metric;
 
@@ -64,59 +66,10 @@ public class MetricItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addValuePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
-			addAveragePropertyDescriptor(object);
-			addMinPropertyDescriptor(object);
-			addMaxPropertyDescriptor(object);
-			addBestValuePropertyDescriptor(object);
+			addNbValueMaxPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Metric_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_name_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Metric_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_value_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -136,25 +89,25 @@ public class MetricItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Average feature.
+	 * This adds a property descriptor for the Nb Value Max feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAveragePropertyDescriptor(Object object) {
+	protected void addNbValueMaxPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Metric_average_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_average_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__AVERAGE,
+				 getString("_UI_Metric_nbValueMax_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_nbValueMax_feature", "_UI_Metric_type"),
+				 Art2Package.Literals.METRIC__NB_VALUE_MAX,
 				 true,
 				 false,
 				 false,
@@ -164,69 +117,33 @@ public class MetricItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Min feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMinPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Metric_min_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_min_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__MIN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(Art2Package.Literals.METRIC__VALUES);
+		}
+		return childrenFeatures;
 	}
 
 	/**
-	 * This adds a property descriptor for the Max feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMaxPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Metric_max_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_max_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__MAX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-	/**
-	 * This adds a property descriptor for the Best Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addBestValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Metric_bestValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Metric_bestValue_feature", "_UI_Metric_type"),
-				 Art2Package.Literals.METRIC__BEST_VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -248,7 +165,8 @@ public class MetricItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Metric)object).getName();
+		Integer labelValue = ((Metric)object).getNbValueMax();
+		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Metric_type") :
 			getString("_UI_Metric_type") + " " + label;
@@ -266,14 +184,12 @@ public class MetricItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Metric.class)) {
-			case Art2Package.METRIC__NAME:
-			case Art2Package.METRIC__VALUE:
 			case Art2Package.METRIC__TYPE:
-			case Art2Package.METRIC__AVERAGE:
-			case Art2Package.METRIC__MIN:
-			case Art2Package.METRIC__MAX:
-			case Art2Package.METRIC__BEST_VALUE:
+			case Art2Package.METRIC__NB_VALUE_MAX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case Art2Package.METRIC__VALUES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -289,6 +205,11 @@ public class MetricItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Art2Package.Literals.METRIC__VALUES,
+				 Art2Factory.eINSTANCE.createMetricValue()));
 	}
 
 	/**

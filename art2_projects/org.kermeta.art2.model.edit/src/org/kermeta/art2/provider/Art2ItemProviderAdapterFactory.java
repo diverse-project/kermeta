@@ -651,6 +651,98 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.MetricType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetricTypeItemProvider metricTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.MetricType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetricTypeAdapter() {
+		if (metricTypeItemProvider == null) {
+			metricTypeItemProvider = new MetricTypeItemProvider(this);
+		}
+
+		return metricTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.MetricValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetricValueItemProvider metricValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.MetricValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetricValueAdapter() {
+		if (metricValueItemProvider == null) {
+			metricValueItemProvider = new MetricValueItemProvider(this);
+		}
+
+		return metricValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.InstanceMetric} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InstanceMetricItemProvider instanceMetricItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.InstanceMetric}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInstanceMetricAdapter() {
+		if (instanceMetricItemProvider == null) {
+			instanceMetricItemProvider = new InstanceMetricItemProvider(this);
+		}
+
+		return instanceMetricItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.PortMetric} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PortMetricItemProvider portMetricItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.art2.PortMetric}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPortMetricAdapter() {
+		if (portMetricItemProvider == null) {
+			portMetricItemProvider = new PortMetricItemProvider(this);
+		}
+
+		return portMetricItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.art2.PortTypeMapping} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1003,7 +1095,6 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 		if (integrationPatternItemProvider != null) integrationPatternItemProvider.dispose();
 		if (extraFonctionalPropertyItemProvider != null) extraFonctionalPropertyItemProvider.dispose();
-		if (metricItemProvider != null) metricItemProvider.dispose();
 		if (portTypeMappingItemProvider != null) portTypeMappingItemProvider.dispose();
 		if (channelItemProvider != null) channelItemProvider.dispose();
 		if (mBindingItemProvider != null) mBindingItemProvider.dispose();
@@ -1014,6 +1105,11 @@ public class Art2ItemProviderAdapterFactory extends Art2AdapterFactory implement
 		if (channelTypeItemProvider != null) channelTypeItemProvider.dispose();
 		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (instanceItemProvider != null) instanceItemProvider.dispose();
+		if (metricItemProvider != null) metricItemProvider.dispose();
+		if (metricTypeItemProvider != null) metricTypeItemProvider.dispose();
+		if (metricValueItemProvider != null) metricValueItemProvider.dispose();
+		if (instanceMetricItemProvider != null) instanceMetricItemProvider.dispose();
+		if (portMetricItemProvider != null) portMetricItemProvider.dispose();
 	}
 
 }

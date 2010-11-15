@@ -65,7 +65,6 @@ public class ComponentInstanceItemProvider
 
 			addTypeDefinitionPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
-			addMetricsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -115,28 +114,6 @@ public class ComponentInstanceItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Metrics feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMetricsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentInstance_metrics_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentInstance_metrics_feature", "_UI_ComponentInstance_type"),
-				 Art2Package.Literals.COMPONENT_INSTANCE__METRICS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -148,8 +125,8 @@ public class ComponentInstanceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(Art2Package.Literals.INSTANCE__DICTIONARY);
 			childrenFeatures.add(Art2Package.Literals.COMPONENT_INSTANCE__PROVIDED);
-			childrenFeatures.add(Art2Package.Literals.COMPONENT_INSTANCE__DICTIONARY);
 			childrenFeatures.add(Art2Package.Literals.COMPONENT_INSTANCE__REQUIRED);
 		}
 		return childrenFeatures;
@@ -205,8 +182,8 @@ public class ComponentInstanceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentInstance.class)) {
-			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
 			case Art2Package.COMPONENT_INSTANCE__DICTIONARY:
+			case Art2Package.COMPONENT_INSTANCE__PROVIDED:
 			case Art2Package.COMPONENT_INSTANCE__REQUIRED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -227,13 +204,13 @@ public class ComponentInstanceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.COMPONENT_INSTANCE__PROVIDED,
-				 Art2Factory.eINSTANCE.createPort()));
+				(Art2Package.Literals.INSTANCE__DICTIONARY,
+				 Art2Factory.eINSTANCE.createDictionary()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Art2Package.Literals.COMPONENT_INSTANCE__DICTIONARY,
-				 Art2Factory.eINSTANCE.createDictionary()));
+				(Art2Package.Literals.COMPONENT_INSTANCE__PROVIDED,
+				 Art2Factory.eINSTANCE.createPort()));
 
 		newChildDescriptors.add
 			(createChildParameter
