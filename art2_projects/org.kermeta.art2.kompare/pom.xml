@@ -5,9 +5,15 @@
     <artifactId>art2.kompare</artifactId>
     <packaging>bundle</packaging>
     <name>ART2 :: Kompare</name>
-
+<!--
     <parent>
         <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2.2.1-SNAPSHOT</version>
+    </parent>
+    -->
+    <parent>
+        <artifactId>art2.artcomponent.root</artifactId>
         <groupId>org.kermeta.art2</groupId>
         <version>2.2.1-SNAPSHOT</version>
     </parent>
@@ -69,12 +75,6 @@
             <artifactId>org.osgi.core</artifactId>
             <version>4.2.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.scalatest</groupId>
