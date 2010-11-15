@@ -227,10 +227,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 				
             var param : StringBuilder = new StringBuilder
             par.generateParamerterClass(param);
+            
             if (Util.hasEcoreTag(par)){
                 var  implName:String = Util.getImplPackageSuffix(packageName.toString)
                 viewDef.append(" class Rich"+par.getName()+" extends "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl"))+" with "+packageName.toString +"."+par.getName+"Aspect ")
-                if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("kermeta")){//!IsObjectClassChildren(par)){
+                if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("fr.irisa.triskell.kermeta")){//!IsObjectClassChildren(par)){
                     viewDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
                 }
                 viewDef.append("\n")
