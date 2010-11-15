@@ -106,6 +106,7 @@ public class ServicePortTypeVisitor implements TypeVisitor {
     public void visitTypeDeclaration(TypeDeclaration t) {
 
         dataType.setName(t.getQualifiedName());
+
         for (MethodDeclaration m : t.getMethods()) {
 
             //BUILD NEW OPERATION
