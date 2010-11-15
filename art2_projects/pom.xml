@@ -42,6 +42,7 @@
         <module>org.kermeta.art2.core</module>
         <module>org.kermeta.art2.framework.bus.netty</module>
         <module>org.kermeta.art2.framework.bus.jmdns</module>
+        <module>org.kermeta.art2.framework.bus.jgroups</module>
         <module>org.kermeta.art2.deploy.osgi</module>
         <module>org.kermeta.art2.kompare</module>
         <module>org.kermeta.art2.platform.felix</module>
