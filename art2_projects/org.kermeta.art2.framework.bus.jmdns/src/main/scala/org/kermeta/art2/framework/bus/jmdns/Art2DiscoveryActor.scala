@@ -27,7 +27,7 @@ class Art2DiscoveryActor(secondes:Int,modelHandler : Art2ModelHandlerService,dis
   override def act()={
     loop{
       reactWithin(secondes*1000) {
-        case STOP_ACTOR => exit
+        case STOP_ACTOR(_) => exit
           //case UPDATE_PLATFORM_MSG => updatePlatformModelFromJMDNS()
         case TIMEOUT => { logger.info("Periodic update");updatePlatformModelFromJMDNS() }
       }
