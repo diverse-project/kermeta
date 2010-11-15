@@ -7,6 +7,8 @@ package org.kermeta.art2.framework.baselib.channeltype;
 
 import org.kermeta.art2.annotation.ChannelTypeFragment;
 import org.kermeta.art2.annotation.Library;
+import org.kermeta.art2.annotation.Start;
+import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.framework.AbstractChannelFragment;
 import org.kermeta.art2.framework.Art2ChannelFragment;
 import org.kermeta.art2.framework.Art2Port;
@@ -48,6 +50,13 @@ public class DefaultMessageChannelType extends AbstractChannelFragment {
 
     }
 
-
+    @Start
+    public void startHello(){
+        System.out.println("Hello Channel");
+    }
+    @Stop
+    public void stopHello(){
+        System.out.println("Bye Channel");
+    }
     
 }
