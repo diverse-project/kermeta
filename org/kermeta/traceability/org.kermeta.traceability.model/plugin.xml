@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.7 2007-05-04 15:58:27 dtouzet Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.kermeta.org/Traceability/2.0.0" 
+       class = "org.kermeta.traceability.TraceabilityPackage"
+       genModel = "model/Traceability.genmodel" /> 
+  </extension>
+
+</plugin>
+
