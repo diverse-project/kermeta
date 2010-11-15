@@ -22,7 +22,7 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
 
 
   @Test def verifyProvidedMessagePortRemoved() {
-    var kompareModel = component.kompare(model("test_ports/base.art2"), model("test_ports/MinusProvidedMessagePort.art2"), "nodeA")
+    var kompareModel = component.kompare(model("test_ports/Base.art2"), model("test_ports/MinusProvidedMessagePort.art2"), "nodeA")
 
     //kompareModel.print
 
@@ -48,7 +48,7 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
 
 
   @Test def verifyProvidedMessagePortAdded() {
-    var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
+    var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/Base.art2"), "nodeA")
 
    // kompareModel.print
 
@@ -136,7 +136,7 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
 
 
   @Test def verifyNoPortChange() {
-    var kompareModel = component.kompare(model("test_ports/base.art2"), model("test_ports/base.art2"), "nodeA")
+    var kompareModel = component.kompare(model("test_ports/Base.art2"), model("test_ports/Base.art2"), "nodeA")
     kompareModel verifySize 0
   }
 }
