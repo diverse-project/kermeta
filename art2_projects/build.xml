@@ -72,7 +72,7 @@
 		<!-- <artifact:mvn pom="pom.xml">
 			<arg value="deploy" />
 		</artifact:mvn> -->
-		<exec executable="mvn">
+		<exec executable="mvn" failonerror="true">
 			<arg value="clean" />
 			<arg value="deploy" />
 		</exec>
@@ -80,7 +80,7 @@
 	
 	<target name="tag_release_version">
 		<echo>Committing...</echo>
-		<exec executable="svn">
+		<exec executable="svn" failonerror="true">
 			<env key="SVN_SSH" path="/usr/bin/ssh -i  /local/kermeta_bot/.ssh/id_rsa" />
 			<arg value="commit" />
 			<arg value="." />
@@ -101,7 +101,7 @@
 		</apply>
 		-->
 		<echo>Tagging...</echo>
-		<exec executable="svn">
+		<exec executable="svn" failonerror="true">
 			<env key="SVN_SSH" path="/usr/bin/ssh -i  /local/kermeta_bot/.ssh/id_rsa" />
 			<arg value="copy" />
 			<arg value="${svn.dev.url}" />
@@ -144,7 +144,7 @@
 	</target>
 	<target name="deploy_dev_version">
 		<echo>Deploying snapshot version ${next.development.version}</echo>		
-		<exec executable="mvn">
+		<exec executable="mvn" failonerror="true">
 			<arg value="clean" />
 			<arg value="deploy" />
 		</exec>
