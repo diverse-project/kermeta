@@ -38,11 +38,16 @@
     </build>
     
     <dependencies>
+
+
         <dependency>
             <groupId>org.kermeta.emf</groupId>
             <artifactId>emf.lib</artifactId>
             <version>${emf.version}</version>
         </dependency>
+
+        
+
         <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.model</artifactId>
