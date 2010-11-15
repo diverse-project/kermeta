@@ -50,7 +50,7 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
   @Test def verifyProvidedMessagePortAdded() {
     var kompareModel = component.kompare(model("test_ports/MinusProvidedMessagePort.art2"), model("test_ports/base.art2"), "nodeA")
 
-    kompareModel.print
+   // kompareModel.print
 
     /*
      * Behavior to be checked. Only one port have been added on one component type.
