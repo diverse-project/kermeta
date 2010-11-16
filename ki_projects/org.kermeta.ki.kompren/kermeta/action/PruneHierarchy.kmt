@@ -9,16 +9,13 @@ package kermeta::ki::kompren;
  
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/action/Prune.kmt"
 
-
 using kermeta::standard
 using kermeta::language::structure
 using kermeta::ki::malai::action
 using kermeta::ki::malai::undo
 
 
-
-class PruneHierarchy inherits ActionPrune
-{
+class PruneHierarchy inherits Prune {
 	method setPruningParameters(pruningOperation : VisualMetamodelPruner) : Void is do
 		pruningOperation.isHierarchicalPruning := true
 	end

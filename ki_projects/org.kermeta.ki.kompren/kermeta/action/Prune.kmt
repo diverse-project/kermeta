@@ -8,7 +8,7 @@ package kermeta::ki::kompren;
 
 
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
-require "platform:/resource/org.kermeta.ki.kompren/kermeta/operation/metamodelPruner.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/operation/VisualMetamodelPruner.kmt"
 require "platform:/resource/org.kermeta.pruning/kermeta/metamodelPruner.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
 
@@ -22,7 +22,7 @@ using kermeta::ki::malai::undo
 enumeration PrunerViewPolicy { hide; gray; }
 
 
-class ActionPrune inherits Action, Undoable {
+class Prune inherits Action, Undoable {
 	reference selection : ClassDefinition[0..*]
 	
 	reference metamodel : ModelingUnit

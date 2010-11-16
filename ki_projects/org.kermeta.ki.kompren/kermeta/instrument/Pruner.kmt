@@ -98,7 +98,7 @@ class MultiPress2Prune inherits Link
 	
 	
 	method getActionClass() : Class is do
-		result := ActionPrune
+		result := Prune
 	end
 	
 	
@@ -110,7 +110,7 @@ class MultiPress2Prune inherits Link
 	method updateAction() : Void is do
 		if(not action.isVoid) then
 			var press : CtrlMultiPress init interaction.asType(CtrlMultiPress)
-			var as    : ActionPrune init action.asType(ActionPrune)
+			var as    : Prune init action.asType(Prune)
 			
 			press.objects.each{o |
 				if((not o.isVoid).andThen{b | o.isInstanceOf(ClassDefinition)}) then
@@ -123,7 +123,7 @@ class MultiPress2Prune inherits Link
 	
 	
 	method createAction() : Void is do
-		var as : ActionPrune init ActionPrune.new
+		var as : Prune init Prune.new
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
@@ -141,14 +141,14 @@ class MultiPress2Prune inherits Link
 class Press2Prune inherits PressLink
 {
 	method getActionClass() : Class is do
-		result := ActionPrune
+		result := Prune
 	end
 	
 	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
 			var press : Press init interaction.asType(Press)
-			var as    : ActionPrune init action.asType(ActionPrune)
+			var as    : Prune init action.asType(Prune)
 			
 			if(press.target.isInstanceOf(ClassDefinition)) then
 				as.selection.clear
@@ -166,7 +166,7 @@ class Press2Prune inherits PressLink
 	
 	
 	method createAction() : Void is do
-		var as : ActionPrune init ActionPrune.new
+		var as : Prune init Prune.new
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
