@@ -26,7 +26,7 @@
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.compilo.scala</artifactId>
-            <version>0.0.2-BETA4</version>
+            <version>0.0.2-BETA5</version>
             <exclusions>
                 <exclusion>
                     <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
