@@ -16,7 +16,7 @@
     </components>
   </nodes>
   <nodes name="addedNode">
-    <components name="ComponentA--1368901950" typeDefinition="//@typeDefinitions.2">
+    <components name="ComponentA--19111725" typeDefinition="//@typeDefinitions.2">
       <provided portTypeRef="//@typeDefinitions.2/@provided.0"/>
       <provided portTypeRef="//@typeDefinitions.2/@provided.1"/>
       <required portTypeRef="//@typeDefinitions.2/@required.0"/>

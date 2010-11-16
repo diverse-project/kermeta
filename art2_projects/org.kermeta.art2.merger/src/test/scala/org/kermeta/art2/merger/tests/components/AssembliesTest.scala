@@ -245,7 +245,7 @@ class AssembliesTest extends MergerTestSuiteHelper  {
 
   @Test def verifyEmptyNodeAdded() {
     var mergedModel = component.merge(model("assemblies/base-assembly.art2"), model("assemblies/PlusNode.art2"))
-    mergedModel testSave ("assemblies","PlusEmptyNode.art2")
+    mergedModel testSave ("assemblies","PlusEmptyNodeMerged.art2")
 
     assert(mergedModel.getNodes.size == 2)
 
@@ -258,7 +258,7 @@ class AssembliesTest extends MergerTestSuiteHelper  {
 
   @Test def verifyEmptyNodeRemoved() {
     var mergedModel = component.merge(model("assemblies/PlusNode.art2"), model("assemblies/base-assembly.art2"))
-    mergedModel testSave ("assemblies","MinusEmptyNode.art2")
+    mergedModel testSave ("assemblies","MinusEmptyNodeMerged.art2")
 
     assert(mergedModel.getNodes.size == 1)
 
@@ -270,14 +270,14 @@ class AssembliesTest extends MergerTestSuiteHelper  {
 
   @Test def verifyNodeWithInstanceAdded() {
     var mergedModel = component.merge(model("assemblies/base-assembly.art2"), model("assemblies/PlusNodeAndInstance.art2"))
-    mergedModel testSave ("assemblies","PlusNodeAndInstance.art2")
+    mergedModel testSave ("assemblies","PlusNodeAndInstanceMerged.art2")
     
     assert(mergedModel.getNodes.size == 2)
 
     mergedModel.getNodes.find(node=>node.getName=="addedNode") match {
       case None => error("Node not found")
       case Some(n) => {
-          n.getComponents.find(cpt=>cpt.getName == "ComponentA--1368901950") match {
+          n.getComponents.find(cpt=>cpt.getName == "ComponentA--19111725") match {
             case None => error("Component Instance not added in 'addedNode'")
             case Some(s) =>
           }
@@ -287,14 +287,14 @@ class AssembliesTest extends MergerTestSuiteHelper  {
 
   @Test def verifyNodeWithInstanceRemoved() {
     var mergedModel = component.merge(model("assemblies/PlusNodeAndInstance.art2"), model("assemblies/base-assembly.art2"))
-    mergedModel testSave ("assemblies","MinusNodeAndInstance.art2")
+    mergedModel testSave ("assemblies","MinusNodeAndInstanceMerged.art2")
 
 
 
     mergedModel.getNodes.find(node=>node.getName=="addedNode") match {
       case None => 
       case Some(n) => {
-          n.getComponents.find(cpt=>cpt.getName == "ComponentA--1368901950") match {
+          n.getComponents.find(cpt=>cpt.getName == "ComponentA--19111725") match {
             case None => error("Node not found")
             case Some(s) => error("Component Instance found in 'addedNode' and addedNode still present. All should have been removed.")
           }
