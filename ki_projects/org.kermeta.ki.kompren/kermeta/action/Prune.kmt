@@ -57,8 +57,12 @@ class ActionPrune inherits Action, Undoable {
 					pruned := cd.isPruned
 					arePruned.add(pruned)
 	
-					if(viewPolicy.isVoid and pruned) then
-						oldViewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
+					if(oldViewPolicy.isVoid and pruned) then
+						if(cd.isVisible) then
+							oldViewPolicy := PrunerViewPolicy.gray
+						else
+							oldViewPolicy := PrunerViewPolicy.hide
+						end
 					end
 					
 					i := i + 1
