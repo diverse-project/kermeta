@@ -1,0 +1,117 @@
+/*
+ * Creation : November 16, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::kompren;
+
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/KermetaVisitor.kmt"
+
+using kermeta
+using kermeta::standard
+using kermeta::language::structure
+
+
+class Metamodel2ViewVisitor inherits KermetaVisitor {
+	attribute firstPass : Boolean
+	
+	reference modelingUnit : ModelingUnit
+
+	reference classes : ClassDefinition[0..*]
+	
+	reference links : Property[0..*]
+	
+
+	method visitModelingUnit(mu: ModelingUnit): Void is do
+		firstPass := true
+		mu.packages.each{p | p.accept(self) }
+		firstPass := false
+		mu.packages.each{p | p.accept(self) }
+	end
+	
+	
+	method visitPackage(p: Package) : Void is do
+		p.nestedPackage.each{p | p.accept(self)}
+		p.ownedTypeDefinition.each{td | td.accept(self)}
+	end
+	
+	
+	method visitOperation(o: Operation) : Void is do
+		var typeName : String init if(o.type.isInstanceOf(NamedElement)) then o.type.asType(NamedElement).name else "" end
+		var paramTypeName 	: String
+
+		extern org::kermeta::ki::kompren::view::ClassViewExtern.onOperationAdded(o.owningClass, o, o.name, typeName, o.isAbstract)
+		
+		o.ownedParameter.each{param |
+			paramTypeName := if(param.type.isInstanceOf(NamedElement)) then param.type.asType(NamedElement).name else void end
+			
+			if(not paramTypeName.isVoid) then
+				extern org::kermeta::ki::kompren::view::OperationViewExtern.onParameterAdded(o, param.name, paramTypeName)
+			end
+		}
+	end
+
+
+	
+	method visitProperty(p: Property): Void is do
+		if(p.type.isInstanceOf(Class)) then
+			var cd : ClassDefinition init p.type.asType(Class).classDefinition
+
+			if(cd.isKermetaPrimitiveType) then
+				extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, cd.name)
+			else	
+				if(classes.contains(cd)) then
+					var oppositeName : String init ""
+					var oppositeCompo : Boolean init p.isComposite
+					var oppositeCardString : String init ""
+					
+					if(not p.opposite.isVoid) then 
+						oppositeName  := p.opposite.name 
+						oppositeCompo := p.opposite.isComposite
+						oppositeCardString := p.opposite.getCardinalityString
+					end
+					extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onRelationAdded(modelingUnit, p, p.isComposite or oppositeCompo, p.owningClass, cd, 
+												p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
+				end
+			end
+			
+			links.add(p)
+		else
+			if(p.type.isInstanceOf(PrimitiveType)) then
+				var pt : PrimitiveType init p.type.asType(PrimitiveType)
+				
+				extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, pt.name)
+			else
+				if(p.type.isInstanceOf(Enumeration)) then
+					var enum : Enumeration init p.type.asType(Enumeration)
+					extern org::kermeta::ki::kompren::view::ClassViewExtern.onAttributeAdded(p.owningClass, p, p.name, enum.name)
+				end
+			end
+		end
+	end
+	
+	
+	
+	method visitClassDefinition(c: ClassDefinition) : Void is do
+		if(firstPass) then
+			classes.add(c)
+			extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onEntityAdded(modelingUnit, c, c.isAspect, -1, c.name)
+			c.entity2ViewMapping
+		else
+			c.ownedAttribute.each{p | p.accept(self)}
+			c.ownedOperation.each{o | o.accept(self)}
+			
+			c.superType.each{t |
+				if(t.isInstanceOf(Class)) then
+					var cd : ClassDefinition init t.asType(Class).classDefinition
+					
+					if(classes.contains(cd)) then
+						extern org::kermeta::ki::kompren::view::ClassDiagramViewExtern.onInheritanceAdded(modelingUnit, c, cd, -1)
+					end
+				end
+			}
+		end
+	end
+}

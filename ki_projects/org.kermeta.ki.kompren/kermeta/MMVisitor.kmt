@@ -6,7 +6,7 @@
  */
 package kermeta;
 
-require "VisitableKermeta.kmt"
+require "KermetaVisitor.kmt"
 require "ModelExtension.kmt"
 require kermeta
 
