@@ -374,40 +374,22 @@ public interface TraceabilityPackage extends EPackage {
 	int TEXT_REFERENCE__FILE_URI = FILE_REFERENCE__FILE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Line Begin At</b></em>' attribute.
+	 * The feature id for the '<em><b>Char Begin Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_REFERENCE__LINE_BEGIN_AT = FILE_REFERENCE_FEATURE_COUNT + 0;
+	int TEXT_REFERENCE__CHAR_BEGIN_OFFSET = FILE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Char Begin At</b></em>' attribute.
+	 * The feature id for the '<em><b>Char End Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_REFERENCE__CHAR_BEGIN_AT = FILE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Line End At</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_REFERENCE__LINE_END_AT = FILE_REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Char End At</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_REFERENCE__CHAR_END_AT = FILE_REFERENCE_FEATURE_COUNT + 3;
+	int TEXT_REFERENCE__CHAR_END_OFFSET = FILE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Text Reference</em>' class.
@@ -416,7 +398,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_REFERENCE_FEATURE_COUNT = FILE_REFERENCE_FEATURE_COUNT + 4;
+	int TEXT_REFERENCE_FEATURE_COUNT = FILE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.traceability.impl.XMLReferenceImpl <em>XML Reference</em>}' class.
@@ -860,48 +842,26 @@ public interface TraceabilityPackage extends EPackage {
 	EClass getTextReference();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getLineBeginAt <em>Line Begin At</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getCharBeginOffset <em>Char Begin Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Line Begin At</em>'.
-	 * @see org.kermeta.traceability.TextReference#getLineBeginAt()
+	 * @return the meta object for the attribute '<em>Char Begin Offset</em>'.
+	 * @see org.kermeta.traceability.TextReference#getCharBeginOffset()
 	 * @see #getTextReference()
 	 * @generated
 	 */
-	EAttribute getTextReference_LineBeginAt();
+	EAttribute getTextReference_CharBeginOffset();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getCharBeginAt <em>Char Begin At</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getCharEndOffset <em>Char End Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Char Begin At</em>'.
-	 * @see org.kermeta.traceability.TextReference#getCharBeginAt()
+	 * @return the meta object for the attribute '<em>Char End Offset</em>'.
+	 * @see org.kermeta.traceability.TextReference#getCharEndOffset()
 	 * @see #getTextReference()
 	 * @generated
 	 */
-	EAttribute getTextReference_CharBeginAt();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getLineEndAt <em>Line End At</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Line End At</em>'.
-	 * @see org.kermeta.traceability.TextReference#getLineEndAt()
-	 * @see #getTextReference()
-	 * @generated
-	 */
-	EAttribute getTextReference_LineEndAt();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.TextReference#getCharEndAt <em>Char End At</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Char End At</em>'.
-	 * @see org.kermeta.traceability.TextReference#getCharEndAt()
-	 * @see #getTextReference()
-	 * @generated
-	 */
-	EAttribute getTextReference_CharEndAt();
+	EAttribute getTextReference_CharEndOffset();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.traceability.XMLReference <em>XML Reference</em>}'.
@@ -1210,36 +1170,20 @@ public interface TraceabilityPackage extends EPackage {
 		EClass TEXT_REFERENCE = eINSTANCE.getTextReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Line Begin At</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Char Begin Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TEXT_REFERENCE__LINE_BEGIN_AT = eINSTANCE.getTextReference_LineBeginAt();
+		EAttribute TEXT_REFERENCE__CHAR_BEGIN_OFFSET = eINSTANCE.getTextReference_CharBeginOffset();
 
 		/**
-		 * The meta object literal for the '<em><b>Char Begin At</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Char End Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TEXT_REFERENCE__CHAR_BEGIN_AT = eINSTANCE.getTextReference_CharBeginAt();
-
-		/**
-		 * The meta object literal for the '<em><b>Line End At</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TEXT_REFERENCE__LINE_END_AT = eINSTANCE.getTextReference_LineEndAt();
-
-		/**
-		 * The meta object literal for the '<em><b>Char End At</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TEXT_REFERENCE__CHAR_END_AT = eINSTANCE.getTextReference_CharEndAt();
+		EAttribute TEXT_REFERENCE__CHAR_END_OFFSET = eINSTANCE.getTextReference_CharEndOffset();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.traceability.impl.XMLReferenceImpl <em>XML Reference</em>}' class.

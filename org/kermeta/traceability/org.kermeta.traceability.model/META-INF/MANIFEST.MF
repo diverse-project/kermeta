@@ -17,7 +17,7 @@ Bundle-Name: Kermeta :: Traceability model
 Created-By: Apache Maven Bundle Plugin
 Bundle-Version: 2.0.1.SNAPSHOT
 Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1289381211171
+Bnd-LastModified: 1290083704843
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

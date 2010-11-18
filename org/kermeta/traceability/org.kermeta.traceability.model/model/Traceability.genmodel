@@ -37,10 +37,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//FileReference/fileURI"/>
     </genClasses>
     <genClasses ecoreClass="Traceability.ecore#//TextReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/lineBeginAt"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charBeginAt"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/lineEndAt"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charEndAt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charBeginOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charEndOffset"/>
     </genClasses>
     <genClasses ecoreClass="Traceability.ecore#//XMLReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//XMLReference/xPointer"/>

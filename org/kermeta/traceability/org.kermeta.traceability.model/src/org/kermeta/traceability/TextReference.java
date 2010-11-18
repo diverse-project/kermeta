@@ -15,10 +15,8 @@ package org.kermeta.traceability;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.traceability.TextReference#getLineBeginAt <em>Line Begin At</em>}</li>
- *   <li>{@link org.kermeta.traceability.TextReference#getCharBeginAt <em>Char Begin At</em>}</li>
- *   <li>{@link org.kermeta.traceability.TextReference#getLineEndAt <em>Line End At</em>}</li>
- *   <li>{@link org.kermeta.traceability.TextReference#getCharEndAt <em>Char End At</em>}</li>
+ *   <li>{@link org.kermeta.traceability.TextReference#getCharBeginOffset <em>Char Begin Offset</em>}</li>
+ *   <li>{@link org.kermeta.traceability.TextReference#getCharEndOffset <em>Char End Offset</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,111 +27,57 @@ package org.kermeta.traceability;
  */
 public interface TextReference extends FileReference {
 	/**
-	 * Returns the value of the '<em><b>Line Begin At</b></em>' attribute.
+	 * Returns the value of the '<em><b>Char Begin Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Line Begin At</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Char Begin Offset</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Line Begin At</em>' attribute.
-	 * @see #setLineBeginAt(Integer)
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_LineBeginAt()
+	 * @return the value of the '<em>Char Begin Offset</em>' attribute.
+	 * @see #setCharBeginOffset(Integer)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_CharBeginOffset()
 	 * @model dataType="org.kermeta.traceability.Integer" required="true"
 	 *        annotation="kermeta isComposite='true' documentation='/** Starting line number \052/'"
 	 * @generated
 	 */
-	Integer getLineBeginAt();
+	Integer getCharBeginOffset();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getLineBeginAt <em>Line Begin At</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getCharBeginOffset <em>Char Begin Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Line Begin At</em>' attribute.
-	 * @see #getLineBeginAt()
+	 * @param value the new value of the '<em>Char Begin Offset</em>' attribute.
+	 * @see #getCharBeginOffset()
 	 * @generated
 	 */
-	void setLineBeginAt(Integer value);
+	void setCharBeginOffset(Integer value);
 
 	/**
-	 * Returns the value of the '<em><b>Char Begin At</b></em>' attribute.
+	 * Returns the value of the '<em><b>Char End Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Char Begin At</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Char End Offset</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Char Begin At</em>' attribute.
-	 * @see #setCharBeginAt(Integer)
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_CharBeginAt()
+	 * @return the value of the '<em>Char End Offset</em>' attribute.
+	 * @see #setCharEndOffset(Integer)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_CharEndOffset()
 	 * @model dataType="org.kermeta.traceability.Integer" required="true"
 	 *        annotation="kermeta isComposite='true' documentation='/** Starting character number \052/'"
 	 * @generated
 	 */
-	Integer getCharBeginAt();
+	Integer getCharEndOffset();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getCharBeginAt <em>Char Begin At</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getCharEndOffset <em>Char End Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Char Begin At</em>' attribute.
-	 * @see #getCharBeginAt()
+	 * @param value the new value of the '<em>Char End Offset</em>' attribute.
+	 * @see #getCharEndOffset()
 	 * @generated
 	 */
-	void setCharBeginAt(Integer value);
-
-	/**
-	 * Returns the value of the '<em><b>Line End At</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Line End At</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Line End At</em>' attribute.
-	 * @see #setLineEndAt(Integer)
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_LineEndAt()
-	 * @model dataType="org.kermeta.traceability.Integer" required="true"
-	 *        annotation="kermeta isComposite='true' documentation='/** Ending line number \052/'"
-	 * @generated
-	 */
-	Integer getLineEndAt();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getLineEndAt <em>Line End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Line End At</em>' attribute.
-	 * @see #getLineEndAt()
-	 * @generated
-	 */
-	void setLineEndAt(Integer value);
-
-	/**
-	 * Returns the value of the '<em><b>Char End At</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Char End At</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Char End At</em>' attribute.
-	 * @see #setCharEndAt(Integer)
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTextReference_CharEndAt()
-	 * @model dataType="org.kermeta.traceability.Integer" required="true"
-	 *        annotation="kermeta isComposite='true' documentation='/** Ending character number \052/'"
-	 * @generated
-	 */
-	Integer getCharEndAt();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.traceability.TextReference#getCharEndAt <em>Char End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Char End At</em>' attribute.
-	 * @see #getCharEndAt()
-	 * @generated
-	 */
-	void setCharEndAt(Integer value);
+	void setCharEndOffset(Integer value);
 
 } // TextReference

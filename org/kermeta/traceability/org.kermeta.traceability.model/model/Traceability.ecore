@@ -134,32 +134,18 @@
     <eAnnotations source="kermeta.inv">
       <details key="validTextRef" value="do&#xA;&#x9;lineEndAt.isGreater(lineBeginAt).~or(lineBeginAt.equals(lineEndAt).~and(charEndAt.isGreaterOrEqual(charBeginAt)))&#xA;end"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineBeginAt" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginOffset" lowerBound="1"
         eType="#//Integer">
       <eAnnotations source="kermeta">
         <details key="isComposite" value="true"/>
         <details key="documentation" value="/** Starting line number */"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginAt" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndOffset" lowerBound="1"
         eType="#//Integer">
       <eAnnotations source="kermeta">
         <details key="isComposite" value="true"/>
         <details key="documentation" value="/** Starting character number */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineEndAt" lowerBound="1"
-        eType="#//Integer">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** Ending line number */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndAt" lowerBound="1"
-        eType="#//Integer">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** Ending character number */"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

@@ -381,7 +381,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTextReference_LineBeginAt() {
+	public EAttribute getTextReference_CharBeginOffset() {
 		return (EAttribute)textReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -390,26 +390,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTextReference_CharBeginAt() {
+	public EAttribute getTextReference_CharEndOffset() {
 		return (EAttribute)textReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTextReference_LineEndAt() {
-		return (EAttribute)textReferenceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTextReference_CharEndAt() {
-		return (EAttribute)textReferenceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -548,10 +530,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		createEAttribute(fileReferenceEClass, FILE_REFERENCE__FILE_URI);
 
 		textReferenceEClass = createEClass(TEXT_REFERENCE);
-		createEAttribute(textReferenceEClass, TEXT_REFERENCE__LINE_BEGIN_AT);
-		createEAttribute(textReferenceEClass, TEXT_REFERENCE__CHAR_BEGIN_AT);
-		createEAttribute(textReferenceEClass, TEXT_REFERENCE__LINE_END_AT);
-		createEAttribute(textReferenceEClass, TEXT_REFERENCE__CHAR_END_AT);
+		createEAttribute(textReferenceEClass, TEXT_REFERENCE__CHAR_BEGIN_OFFSET);
+		createEAttribute(textReferenceEClass, TEXT_REFERENCE__CHAR_END_OFFSET);
 
 		xmlReferenceEClass = createEClass(XML_REFERENCE);
 		createEAttribute(xmlReferenceEClass, XML_REFERENCE__XPOINTER);
@@ -630,10 +610,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		initEAttribute(getFileReference_FileURI(), this.getString(), "fileURI", null, 1, 1, FileReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textReferenceEClass, TextReference.class, "TextReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTextReference_LineBeginAt(), this.getInteger(), "lineBeginAt", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTextReference_CharBeginAt(), this.getInteger(), "charBeginAt", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTextReference_LineEndAt(), this.getInteger(), "lineEndAt", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTextReference_CharEndAt(), this.getInteger(), "charEndAt", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTextReference_CharBeginOffset(), this.getInteger(), "charBeginOffset", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTextReference_CharEndOffset(), this.getInteger(), "charEndOffset", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xmlReferenceEClass, XMLReference.class, "XMLReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXMLReference_XPointer(), this.getString(), "xPointer", null, 1, 1, XMLReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -674,7 +652,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		   source, 
 		   new String[] {
 			 "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"
-		   });																														
+		   });																												
 	}
 
 	/**
@@ -821,32 +799,18 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 			 "documentation", "/**\r\n * This class represents a reference to a textual file concrete object\r\n */"
 		   });			
 		addAnnotation
-		  (getTextReference_LineBeginAt(), 
+		  (getTextReference_CharBeginOffset(), 
 		   source, 
 		   new String[] {
 			 "isComposite", "true",
 			 "documentation", "/** Starting line number */"
 		   });		
 		addAnnotation
-		  (getTextReference_CharBeginAt(), 
+		  (getTextReference_CharEndOffset(), 
 		   source, 
 		   new String[] {
 			 "isComposite", "true",
 			 "documentation", "/** Starting character number */"
-		   });		
-		addAnnotation
-		  (getTextReference_LineEndAt(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "true",
-			 "documentation", "/** Ending line number */"
-		   });		
-		addAnnotation
-		  (getTextReference_CharEndAt(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "true",
-			 "documentation", "/** Ending character number */"
 		   });		
 		addAnnotation
 		  (xmlReferenceEClass, 
@@ -882,7 +846,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		   source, 
 		   new String[] {
 			 "validTextRef", "do\n\tlineEndAt.isGreater(lineBeginAt).~or(lineBeginAt.equals(lineEndAt).~and(charEndAt.isGreaterOrEqual(charBeginAt)))\nend"
-		   });							
+		   });					
 	}
 
 } //TraceabilityPackageImpl

@@ -100,20 +100,12 @@
     <children xmi:type="notation:Node" xmi:id="_kt0mIY_MEd2BvpfSoI4hnQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_kt0mIo_MEd2BvpfSoI4hnQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_kt0mKo_MEd2BvpfSoI4hnQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/lineBeginAt"/>
+        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/charBeginOffset"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_kt0mK4_MEd2BvpfSoI4hnQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_kt0mLI_MEd2BvpfSoI4hnQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/charBeginAt"/>
+        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/charEndOffset"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_kt0mLY_MEd2BvpfSoI4hnQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_kt0mLo_MEd2BvpfSoI4hnQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/lineEndAt"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_kt0mL4_MEd2BvpfSoI4hnQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_kt0mMI_MEd2BvpfSoI4hnQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//TextReference/charEndAt"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_kt0mMY_MEd2BvpfSoI4hnQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_kt0mI4_MEd2BvpfSoI4hnQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_kt0mJI_MEd2BvpfSoI4hnQ"/>

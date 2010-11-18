@@ -22,10 +22,8 @@ import org.kermeta.traceability.TraceabilityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getLineBeginAt <em>Line Begin At</em>}</li>
- *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getCharBeginAt <em>Char Begin At</em>}</li>
- *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getLineEndAt <em>Line End At</em>}</li>
- *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getCharEndAt <em>Char End At</em>}</li>
+ *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getCharBeginOffset <em>Char Begin Offset</em>}</li>
+ *   <li>{@link org.kermeta.traceability.impl.TextReferenceImpl#getCharEndOffset <em>Char End Offset</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,84 +31,44 @@ import org.kermeta.traceability.TraceabilityPackage;
  */
 public class TextReferenceImpl extends FileReferenceImpl implements TextReference {
 	/**
-	 * The default value of the '{@link #getLineBeginAt() <em>Line Begin At</em>}' attribute.
+	 * The default value of the '{@link #getCharBeginOffset() <em>Char Begin Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLineBeginAt()
+	 * @see #getCharBeginOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer LINE_BEGIN_AT_EDEFAULT = null;
+	protected static final Integer CHAR_BEGIN_OFFSET_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLineBeginAt() <em>Line Begin At</em>}' attribute.
+	 * The cached value of the '{@link #getCharBeginOffset() <em>Char Begin Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLineBeginAt()
+	 * @see #getCharBeginOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer lineBeginAt = LINE_BEGIN_AT_EDEFAULT;
+	protected Integer charBeginOffset = CHAR_BEGIN_OFFSET_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCharBeginAt() <em>Char Begin At</em>}' attribute.
+	 * The default value of the '{@link #getCharEndOffset() <em>Char End Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCharBeginAt()
+	 * @see #getCharEndOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer CHAR_BEGIN_AT_EDEFAULT = null;
+	protected static final Integer CHAR_END_OFFSET_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCharBeginAt() <em>Char Begin At</em>}' attribute.
+	 * The cached value of the '{@link #getCharEndOffset() <em>Char End Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCharBeginAt()
+	 * @see #getCharEndOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer charBeginAt = CHAR_BEGIN_AT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getLineEndAt() <em>Line End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLineEndAt()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer LINE_END_AT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLineEndAt() <em>Line End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLineEndAt()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer lineEndAt = LINE_END_AT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getCharEndAt() <em>Char End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCharEndAt()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer CHAR_END_AT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getCharEndAt() <em>Char End At</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCharEndAt()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer charEndAt = CHAR_END_AT_EDEFAULT;
+	protected Integer charEndOffset = CHAR_END_OFFSET_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,8 +94,8 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getLineBeginAt() {
-		return lineBeginAt;
+	public Integer getCharBeginOffset() {
+		return charBeginOffset;
 	}
 
 	/**
@@ -145,11 +103,11 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLineBeginAt(Integer newLineBeginAt) {
-		Integer oldLineBeginAt = lineBeginAt;
-		lineBeginAt = newLineBeginAt;
+	public void setCharBeginOffset(Integer newCharBeginOffset) {
+		Integer oldCharBeginOffset = charBeginOffset;
+		charBeginOffset = newCharBeginOffset;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT, oldLineBeginAt, lineBeginAt));
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_OFFSET, oldCharBeginOffset, charBeginOffset));
 	}
 
 	/**
@@ -157,8 +115,8 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getCharBeginAt() {
-		return charBeginAt;
+	public Integer getCharEndOffset() {
+		return charEndOffset;
 	}
 
 	/**
@@ -166,53 +124,11 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCharBeginAt(Integer newCharBeginAt) {
-		Integer oldCharBeginAt = charBeginAt;
-		charBeginAt = newCharBeginAt;
+	public void setCharEndOffset(Integer newCharEndOffset) {
+		Integer oldCharEndOffset = charEndOffset;
+		charEndOffset = newCharEndOffset;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT, oldCharBeginAt, charBeginAt));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer getLineEndAt() {
-		return lineEndAt;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLineEndAt(Integer newLineEndAt) {
-		Integer oldLineEndAt = lineEndAt;
-		lineEndAt = newLineEndAt;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT, oldLineEndAt, lineEndAt));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer getCharEndAt() {
-		return charEndAt;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCharEndAt(Integer newCharEndAt) {
-		Integer oldCharEndAt = charEndAt;
-		charEndAt = newCharEndAt;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT, oldCharEndAt, charEndAt));
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TEXT_REFERENCE__CHAR_END_OFFSET, oldCharEndOffset, charEndOffset));
 	}
 
 	/**
@@ -223,14 +139,10 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
-				return getLineBeginAt();
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT:
-				return getCharBeginAt();
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT:
-				return getLineEndAt();
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT:
-				return getCharEndAt();
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_OFFSET:
+				return getCharBeginOffset();
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_OFFSET:
+				return getCharEndOffset();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,17 +155,11 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
-				setLineBeginAt((Integer)newValue);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_OFFSET:
+				setCharBeginOffset((Integer)newValue);
 				return;
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT:
-				setCharBeginAt((Integer)newValue);
-				return;
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT:
-				setLineEndAt((Integer)newValue);
-				return;
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT:
-				setCharEndAt((Integer)newValue);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_OFFSET:
+				setCharEndOffset((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -267,17 +173,11 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
-				setLineBeginAt(LINE_BEGIN_AT_EDEFAULT);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_OFFSET:
+				setCharBeginOffset(CHAR_BEGIN_OFFSET_EDEFAULT);
 				return;
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT:
-				setCharBeginAt(CHAR_BEGIN_AT_EDEFAULT);
-				return;
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT:
-				setLineEndAt(LINE_END_AT_EDEFAULT);
-				return;
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT:
-				setCharEndAt(CHAR_END_AT_EDEFAULT);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_OFFSET:
+				setCharEndOffset(CHAR_END_OFFSET_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -291,14 +191,10 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
-				return LINE_BEGIN_AT_EDEFAULT == null ? lineBeginAt != null : !LINE_BEGIN_AT_EDEFAULT.equals(lineBeginAt);
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT:
-				return CHAR_BEGIN_AT_EDEFAULT == null ? charBeginAt != null : !CHAR_BEGIN_AT_EDEFAULT.equals(charBeginAt);
-			case TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT:
-				return LINE_END_AT_EDEFAULT == null ? lineEndAt != null : !LINE_END_AT_EDEFAULT.equals(lineEndAt);
-			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT:
-				return CHAR_END_AT_EDEFAULT == null ? charEndAt != null : !CHAR_END_AT_EDEFAULT.equals(charEndAt);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_OFFSET:
+				return CHAR_BEGIN_OFFSET_EDEFAULT == null ? charBeginOffset != null : !CHAR_BEGIN_OFFSET_EDEFAULT.equals(charBeginOffset);
+			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_OFFSET:
+				return CHAR_END_OFFSET_EDEFAULT == null ? charEndOffset != null : !CHAR_END_OFFSET_EDEFAULT.equals(charEndOffset);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -313,14 +209,10 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (lineBeginAt: ");
-		result.append(lineBeginAt);
-		result.append(", charBeginAt: ");
-		result.append(charBeginAt);
-		result.append(", lineEndAt: ");
-		result.append(lineEndAt);
-		result.append(", charEndAt: ");
-		result.append(charEndAt);
+		result.append(" (charBeginOffset: ");
+		result.append(charBeginOffset);
+		result.append(", charEndOffset: ");
+		result.append(charEndOffset);
 		result.append(')');
 		return result.toString();
 	}
