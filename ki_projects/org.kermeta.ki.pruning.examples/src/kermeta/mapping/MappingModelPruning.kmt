@@ -1,0 +1,170 @@
+/* $Id:$ 
+ * Creation : November 18, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "ex::mappingModel::Test"
+@mainOperation "main"
+
+package ex::mappingModel;
+
+require kermeta
+require "MappingModelPruningAspect.kmt"
+require "ClassModelPruningAspect.kmt"
+
+using kermeta::standard
+using ex::classModel
+
+
+
+abstract class MappingModelPruning {
+	reference mappingModel : MappingModel
+	
+	reference requiredClasses : Clazz[0..*]
+	
+	attribute radius : Integer
+	
+	attribute includeLastRelations : Boolean
+	
+	reference addedClasses : Bag<Clazz>
+	
+	reference addedMappings : Bag<Mapping>
+	
+	
+	
+	operation initialise(mappingModel : MappingModel, requiredClasses : bag Clazz[0..*],
+							radius : Integer, includeLastRelations : Boolean) : MappingModelPruning is do
+		result := self
+		addedClasses := Bag<Clazz>.new
+		addedMappings := Bag<Mapping>.new
+		self.includeLastRelations := includeLastRelations
+		self.mappingModel := mappingModel
+		self.radius := radius
+		self.requiredClasses.addAll(requiredClasses)
+		initialiseOpposite()
+	end
+	
+	
+	operation initialiseOpposite() : Void is do
+		mappingModel.mappings.each{themapping | themapping.initialiseOpposite() }
+	end
+	
+	
+	
+	operation launch() : Void is do
+		preparePruning()
+		
+		var theMappings  : Bag<Mapping> init Bag<Mapping>.new
+		var theMappings2 : Bag<Mapping> init Bag<Mapping>.new
+		var currentRadius : Integer init 1
+		
+		requiredClasses.each{theClazz | theClazz.visit(self, theMappings) }
+		
+		from true
+		until theMappings.empty or currentRadius>radius
+		loop
+			theMappings.each{theMapping |
+				theMapping.visited := true
+			
+				theMapping.srcs.each{theClazz |
+					if(not theClazz.visited) then
+						theClazz.visit(self, theMappings2)
+					end
+				}
+				
+				theMapping.targets.each{theClazz |
+					if(not theClazz.visited) then
+						theClazz.visit(self, theMappings2)
+					end
+				}
+				
+				theMapping.visit(self)
+			}
+
+			theMappings.clear()
+			theMappings2.each{theMapping | theMappings.add(theMapping) }
+			theMappings2.clear()
+			currentRadius := currentRadius + 1
+		end
+		
+		if(includeLastRelations) then
+			addedClasses.each{theClazz | theClazz.includeLastRelations(self) }
+		end
+	end
+	
+	
+	operation preparePruning() : Void is do
+		mappingModel.src.classes.each{theClazz | theClazz.visited := false }
+		mappingModel.target.classes.each{theClazz | theClazz.visited := false }
+		mappingModel.mappings.each{theMapping | theMapping.visited := false }
+	end
+	
+	
+	operation onClazzAdded(theClazz : Clazz) : Void is abstract
+	
+	operation onMappingAdded(theMapping : Mapping) : Void is abstract
+}
+
+
+
+
+class PrintMappingModelPruning inherits MappingModelPruning {
+	method onClazzAdded(theClazz : Clazz) : Void is do
+		stdio.writeln("Clazz: " + theClazz.name)
+	end
+	
+	method onMappingAdded(theMapping : Mapping) : Void is do
+		stdio.writeln("Mapping: " + theMapping.name)
+	end
+}
+
+
+
+class Test {
+	operation main() : Void is do 
+		var mm : MappingModel init MappingModel.new
+		var cm1 : ClassModel init ClassModel.new
+		var cm2 : ClassModel init ClassModel.new
+		var a : Clazz init Clazz.new.initialise("a", cm1)
+		var b : Clazz init Clazz.new.initialise("b", cm1)
+		var c : Clazz init Clazz.new.initialise("c", cm1)
+		var d : Clazz init Clazz.new.initialise("d", cm1)
+		var e : Clazz init Clazz.new.initialise("e", cm2)
+		var f : Clazz init Clazz.new.initialise("f", cm2)
+		var m1 : Mapping init Mapping.new.initialise("m1", mm)
+		var m2 : Mapping init Mapping.new.initialise("m2", mm)
+		var m3 : Mapping init Mapping.new.initialise("m3", mm)
+		mm.src := cm1
+		mm.target := cm2
+		m1.srcs.add(a)
+		m1.srcs.add(b)
+		m1.targets.add(c)
+		m2.srcs.add(d)
+		m2.targets.add(c)
+		m3.srcs.add(d)
+		m3.targets.add(e)
+		
+		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
+		requiredClazzes.add(a)
+		var pruning : PrintMappingModelPruning init PrintMappingModelPruning.new.initialise(mm, requiredClazzes, 2, true).asType(PrintMappingModelPruning)
+		
+		pruning.launch()
+	end
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

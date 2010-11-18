@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : November 18, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::classModel;
+
+require kermeta
+require "MappingModel.kmt"
+require "MappingModelPruning.kmt"
+
+using kermeta::standard
+using ex::mappingModel
+
+
+aspect class Clazz {
+	reference srcsOpposite : Mapping[0..*]
+	
+	reference targetsOpposite : Mapping[0..*]
+	
+	attribute visited : Boolean
+	
+	operation visit(theMappingModelPruning : MappingModelPruning, theMappings : Bag<Mapping>) : Void is do
+		visited := true
+		theMappingModelPruning.onClazzAdded(self)
+		theMappingModelPruning.addedClasses.add(self)
+		srcsOpposite.each{theMapping | if(not theMapping.visited) then theMappings.add(theMapping) end }
+		targetsOpposite.each{theMapping | if(not theMapping.visited) then  theMappings.add(theMapping) end }
+	end
+	
+	operation includeLastRelations(pruner : MappingModelPruning) : Void is do
+	end
+}
+

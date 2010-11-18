@@ -1,0 +1,56 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::stateMachine;
+
+require kermeta
+require "StateMachine.kmt"
+require "StateMachinePruning.kmt"
+
+using kermeta::standard
+
+aspect class State {
+	attribute visited : Boolean
+	
+	operation visit(pruner : StateMachinePruning, transitions : Bag<Transition>) : Void is do
+		visited := true
+		pruner.onStateAdded(self)
+		pruner.addedStates.add(self)
+	end
+	
+	operation includeLastRelations(pruner : StateMachinePruning) : Void is do
+	end
+}
+
+
+aspect class OutputState {
+	method visit(pruner : StateMachinePruning, transitions : Bag<Transition>) : Void is do
+		super(pruner, transitions)
+		outgoingTransitions.each{t | transitions.add(t) }
+	end
+	
+	
+	method includeLastRelations(pruner : StateMachinePruning) : Void is do
+		outgoingTransitions.each{t |
+			if(not t.visited and t.source.visited and t.target.visited) then
+				pruner.onTransitionAdded(t)
+				t.visited := true
+			end
+		}
+	end
+}
+
+
+aspect class Transition {
+	attribute visited : Boolean
+	
+	operation visit(pruner : StateMachinePruning) : Void is do
+		pruner.onTransitionAdded(self)
+		pruner.addedTransitions.add(self)
+	end
+}
+

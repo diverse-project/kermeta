@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::mappingModel; // @template the package of the model
+
+require kermeta
+require "MappingModel.kmt"  // @template the true model
+require "ClassModelPruningAspect.kmt" //@template the generated pruner
+
+using kermeta::standard
+using ex::classModel // @template the package of the model
+
+
+aspect class Mapping {//
+	attribute visited : Boolean
+
+	operation initialiseOpposite() : Void is do// Only if opposiste required can related to this class
+		targets.each{theClazz | theClazz.targetsOpposite.add(self) }
+		srcs.each{theClazz | theClazz.srcsOpposite.add(self) }
+	end
+	
+	
+	operation visit(theMappingModelPruning : MappingModelPruning) : Void is do
+		theMappingModelPruning.onMappingAdded(self)
+		theMappingModelPruning.addedMappings.add(self)
+	end
+}

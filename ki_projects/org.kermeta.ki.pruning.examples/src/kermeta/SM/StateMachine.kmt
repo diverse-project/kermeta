@@ -1,0 +1,71 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::stateMachine;
+
+require kermeta
+
+using kermeta::standard
+
+
+class StateMachine {
+	reference initState : InitState
+	attribute states : State[0..*]
+	attribute transitions : Transition[0..*]
+}
+
+
+class Transition {
+	reference source : OutputState
+	reference target : InputState
+	
+	operation initialise(source : OutputState, target : InputState) : Transition is do
+		result := self
+		self.source := source
+		self.target := target
+		source.outgoingTransitions.add(self)
+		target.ingoingTransitions.add(self)
+	end
+}
+
+
+abstract class State {
+	attribute name : String
+	
+	operation initialise(name : String) : State is do
+		self.name := name
+		result := self
+	end
+}
+
+
+abstract class InputState inherits State {
+	reference ingoingTransitions : Transition[0..*]
+}
+
+
+abstract class OutputState inherits State {
+	reference outgoingTransitions : Transition[0..*]
+}
+
+
+class InitState inherits OutputState {
+}
+
+
+class StandardState inherits OutputState, InputState {
+}
+
+
+class TerminalState inherits InputState {
+}
+
+
+
+
+
+

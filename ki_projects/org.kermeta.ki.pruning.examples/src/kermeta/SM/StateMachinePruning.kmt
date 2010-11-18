@@ -1,0 +1,129 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "ex::stateMachine::Test"
+@mainOperation "main"
+
+
+package ex::stateMachine;
+
+require kermeta
+require "StateMachinePruningAspect.kmt"
+
+using kermeta::standard
+
+
+abstract class StateMachinePruning {
+	reference stateMachine : StateMachine
+	
+	reference requiredStates : State[0..*]
+	
+	attribute radius : Integer
+	
+	attribute includeLastRelations : Boolean
+	
+	reference addedStates : Bag<State>
+	
+	reference addedTransitions : Bag<Transition>
+	
+	
+	operation initialise(stateMachine : StateMachine, requiredStates : bag State[0..*],
+							radius : Integer, includeLastRelations : Boolean) : StateMachinePruning is do
+		result := self
+		addedStates := Bag<State>.new
+		addedTransitions := Bag<Transition>.new
+		self.includeLastRelations := includeLastRelations
+		self.stateMachine := stateMachine
+		self.radius := radius
+		self.requiredStates.addAll(requiredStates)
+	end
+	
+	
+	operation launch() : Void is do
+		preparePruning()
+		
+		var theTransitions  : Bag<Transition> init Bag<Transition>.new
+		var theTransitions2 : Bag<Transition> init Bag<Transition>.new
+		var currentRadius : Integer init 1
+		
+		requiredStates.each{theState | theState.visit(self, theTransitions) }
+		
+		from true
+		until theTransitions.empty or currentRadius>radius
+		loop
+			theTransitions.each{theTransition |
+				theTransition.visited := true
+					
+				if(not theTransition.target.visited) then
+					theTransition.target.visit(self, theTransitions2)
+				end
+
+				theTransition.visit(self)
+			}
+
+			theTransitions.clear()
+			theTransitions2.each{theTransition | theTransitions.add(theTransition) }
+			theTransitions2.clear()
+			currentRadius := currentRadius + 1
+		end
+		
+		if(includeLastRelations) then
+			addedStates.each{theState | theState.includeLastRelations(self) }
+		end
+	end
+
+
+	operation preparePruning() : Void is do
+		stateMachine.transitions.each{theTransition | theTransition.visited := false }
+		stateMachine.states.each{theState | theState.visited := false }
+	end
+	
+	operation onStateAdded(state : State) : Void is abstract
+	
+	operation onTransitionAdded(transition : Transition) : Void is abstract
+}
+
+
+
+class PrintStateMachinePruning inherits StateMachinePruning {
+	method onStateAdded(state : State) : Void is do
+		stdio.writeln("State: " + state.name)
+	end
+	
+	method onTransitionAdded(transition : Transition) : Void is do
+		stdio.writeln("Transition: " + transition.source.name + "->" + transition.target.name)
+	end
+}
+
+
+
+class Test {
+	operation main() : Void is do
+		var sm : StateMachine init StateMachine.new
+		var initState : InitState init InitState.new.initialise("init").asType(InitState)
+		var s1 : StandardState init StandardState.new.initialise("s1").asType(StandardState)
+		var s2 : StandardState init StandardState.new.initialise("s2").asType(StandardState)
+		var terminal : TerminalState init TerminalState.new.initialise("end").asType(TerminalState)
+		
+		sm.initState := initState
+		sm.states.add(initState)
+		sm.states.add(s1)
+		sm.states.add(s2)
+		sm.states.add(terminal)
+		sm.transitions.add(Transition.new.initialise(initState, s1))
+		sm.transitions.add(Transition.new.initialise(s1, s2))
+		sm.transitions.add(Transition.new.initialise(s2, s1))
+		sm.transitions.add(Transition.new.initialise(s2, s2))
+		sm.transitions.add(Transition.new.initialise(s2, terminal))
+		
+		var requiredStates : Bag<State> init Bag<State>.new
+		requiredStates.add(initState)
+		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2, true).asType(PrintStateMachinePruning)
+		
+		pruning.launch()
+	end
+}

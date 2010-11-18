@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::classModel;
+
+require kermeta
+require "ClassModel.kmt"
+require "ClassModelPruning.kmt"
+
+using kermeta::standard
+
+
+aspect class Clazz {
+	attribute visited : Boolean
+	
+	operation visit(theClassModelPruning : ClassModelPruning, theClazzs : Bag<Clazz>) : Void is do
+		visited := true
+		theClassModelPruning.onClazzAdded(self)
+		theClassModelPruning.addedClazzs.add(self)
+		superClasses.each{theClazz | theClazzs.add(theClazz) }
+	end
+	
+	operation includeLastRelations(theClassModelPruning : ClassModelPruning) : Void is do
+	end
+}
