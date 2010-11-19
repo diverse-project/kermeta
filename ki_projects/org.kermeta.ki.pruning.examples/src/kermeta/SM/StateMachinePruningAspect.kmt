@@ -16,41 +16,50 @@ using kermeta::standard
 aspect class State {
 	attribute visited : Boolean
 	
-	operation visit(theStateMachinePruning : StateMachinePruning, theTransitions : Bag<Transition>) : Void is do
+	operation visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
 		visited := true
 		theStateMachinePruning.onStateAdded(self)
 		theStateMachinePruning.addedStates.add(self)
 	end
 	
-	operation includeLastRelations(theStateMachinePruning : StateMachinePruning) : Void is do
+	operation addRelations(theStateMachinePruning : StateMachinePruning) : Void is do
 	end
 }
 
 
 aspect class OutputState {
-	method visit(theStateMachinePruning : StateMachinePruning, theTransitions : Bag<Transition>) : Void is do
-		super(theStateMachinePruning, theTransitions)
-		outgoingTransitions.each{theTransition | if(not theTransition.visited) then theTransitions.add(theTransition) end }
+	method visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
+		super(theStateMachinePruning, theStates)
+		outgoingTransitions.each{theTransition | theTransition.addStates(theStateMachinePruning, theStates) }
 	end
 	
 	
-	method includeLastRelations(theStateMachinePruning : StateMachinePruning) : Void is do
+	method addRelations(theStateMachinePruning : StateMachinePruning) : Void is do
 		outgoingTransitions.each{theTransition |
 			if(not theTransition.visited and theTransition.source.visited and theTransition.target.visited) then
-				theStateMachinePruning.onTransitionAdded(theTransition)
-				theTransition.visited := true
+				theTransition.visit(theStateMachinePruning)
 			end
 		}
 	end
 }
 
 
+
 aspect class Transition {
 	attribute visited : Boolean
 	
-	operation visit(pruner : StateMachinePruning) : Void is do
-		pruner.onTransitionAdded(self)
-		pruner.addedTransitions.add(self)
+	operation visit(theStateMachinePruning : StateMachinePruning) : Void is do
+		self.visited := true
+		theStateMachinePruning.onTransitionAdded(self)
+		theStateMachinePruning.addedTransitions.add(self)
+	end
+	
+	
+	operation addStates(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
+		if(not visited) then
+			if(not source.visited) then theStates.add(source) end
+			if(not target.visited) then theStates.add(target) end
+		end
 	end
 }
 

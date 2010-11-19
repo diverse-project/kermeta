@@ -26,19 +26,16 @@ abstract class FullClassModelPruning {
 	
 	attribute radius : Integer
 	
-	reference includeLastRelations : Boolean
-	
 	reference addedClazzs : Bag<Clazz>
 	
 	reference addedPropertys : Bag<Property>
 	
 	
 	operation initialise(classModel : ClassModel, requiredClazzs : bag Clazz[0..*], requiredPropertys : bag Property[0..*],
-							radius : Integer, includeLastRelations : Boolean) : FullClassModelPruning is do
+							radius : Integer) : FullClassModelPruning is do
 		result := self
 		addedClazzs := Bag<Clazz>.new
 		addedPropertys := Bag<Property>.new
-		self.includeLastRelations := includeLastRelations
 		self.classModel := classModel
 		self.radius := radius
 		self.requiredClazzs.addAll(requiredClazzs)
@@ -57,20 +54,20 @@ abstract class FullClassModelPruning {
 		var currentRadius : Integer init 0
 		
 		requiredClazzs.each{theClazz | theClazzs.add(theClazz) }
-		requiredPropertys.each{theProperty | thePropertys.add(theProperty) }
+		requiredPropertys.each{theProperty | theProperty.visit(self, theClazzs, thePropertys) }
 
 		from true
-		until (theClazzs.empty and thePropertys.empty)
+		until (theClazzs.empty and thePropertys.empty) or currentRadius>radius
 		loop
-			theClazzs.each{theClazz | 
-				if(not theClazz.visited) then 
-					theClazz.visit(self, theClazzs2, thePropertys2)
+			thePropertys.each{theProperty |
+				if(not theProperty.visited) then 
+					theProperty.visit(self, theClazzs, thePropertys2)
 				end
 			}
 			
-			thePropertys.each{theProperty |
-				if(not theProperty.visited) then 
-					theProperty.visit(self, theClazzs2, thePropertys2)
+			theClazzs.each{theClazz | 
+				if(not theClazz.visited) then 
+					theClazz.visit(self, theClazzs2, thePropertys2)
 				end
 			}
 			
@@ -80,11 +77,11 @@ abstract class FullClassModelPruning {
 			thePropertys.clear()
 			thePropertys2.each{theProperty | thePropertys.add(theProperty) }
 			thePropertys2.clear()
+			currentRadius := currentRadius + 1
+			stdio.writeln("---")
 		end
 		
-		if(includeLastRelations) then
-			addedClazzs.each{theClazz | theClazz.includeLastRelations(self) }
-		end
+		addedClazzs.each{theClazz | theClazz.addRelations(self) }
 	end
 	
 	
@@ -97,6 +94,8 @@ abstract class FullClassModelPruning {
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
 	
 	operation onPropertyAdded(theProperty : Property) : Void is abstract
+	
+	operation onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is abstract
 }
 
 
@@ -107,8 +106,14 @@ class PrintFullClassModelPruning inherits FullClassModelPruning {
 		stdio.writeln("Clazz: " + clazz.name)
 	end
 	
+	
 	method onPropertyAdded(theProperty : Property) : Void is do
 		stdio.writeln("Property: " + theProperty.name)
+	end
+	
+	
+	method onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is do
+		stdio.writeln("Inheritance: " + theClazz.name + " " + theSuperClazzes.name)
 	end
 }
 
@@ -141,8 +146,7 @@ class Test {
 		requiredClazzs.add(c7)
 		var requiredPropertys : Bag<Property> init Bag<Property>.new
 		requiredPropertys.add(p1)
-		var pruning : PrintFullClassModelPruning init 
-			PrintFullClassModelPruning.new.initialise(cm, requiredClazzs, requiredPropertys, 2, true).asType(PrintFullClassModelPruning)
+		var pruning : PrintFullClassModelPruning init PrintFullClassModelPruning.new.initialise(cm, requiredClazzs, requiredPropertys, 2).asType(PrintFullClassModelPruning)
 		
 		pruning.launch()
 	end

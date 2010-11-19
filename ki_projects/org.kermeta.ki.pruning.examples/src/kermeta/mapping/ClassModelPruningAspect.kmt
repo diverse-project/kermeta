@@ -22,15 +22,17 @@ aspect class Clazz {
 	
 	attribute visited : Boolean
 	
-	operation visit(theMappingModelPruning : MappingModelPruning, theMappings : Bag<Mapping>) : Void is do
+	operation visit(theMappingModelPruning : MappingModelPruning, theClazzs : Bag<Clazz>) : Void is do
 		visited := true
 		theMappingModelPruning.onClazzAdded(self)
 		theMappingModelPruning.addedClasses.add(self)
-		srcsOpposite.each{theMapping | if(not theMapping.visited) then theMappings.add(theMapping) end }
-		targetsOpposite.each{theMapping | if(not theMapping.visited) then  theMappings.add(theMapping) end }
+		srcsOpposite.each{theMapping | theMapping.addClazzs(theMappingModelPruning, theClazzs) }
+		targetsOpposite.each{theMapping | theMapping.addClazzs(theMappingModelPruning, theClazzs) }
 	end
 	
-	operation includeLastRelations(pruner : MappingModelPruning) : Void is do
+	operation addRelations(pruner : MappingModelPruning) : Void is do
+		srcsOpposite.each{theMapping | if(not theMapping.visited and not theMapping.srcs.exists{theClazz | not theClazz.visited} and not theMapping.targets.exists{theClazz | not theClazz.visited}) then theMapping.visit(pruner) end }
+		targetsOpposite.each{theMapping | if(not theMapping.visited) then theMapping.visit(pruner) end }
 	end
 }
 

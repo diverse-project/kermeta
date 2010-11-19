@@ -24,19 +24,15 @@ abstract class StateMachinePruning {
 	
 	attribute radius : Integer
 	
-	attribute includeLastRelations : Boolean
-	
 	reference addedStates : Bag<State>
 	
 	reference addedTransitions : Bag<Transition>
 	
 	
-	operation initialise(stateMachine : StateMachine, requiredStates : bag State[0..*],
-							radius : Integer, includeLastRelations : Boolean) : StateMachinePruning is do
+	operation initialise(stateMachine : StateMachine, requiredStates : bag State[0..*], radius : Integer) : StateMachinePruning is do
 		result := self
 		addedStates := Bag<State>.new
 		addedTransitions := Bag<Transition>.new
-		self.includeLastRelations := includeLastRelations
 		self.stateMachine := stateMachine
 		self.radius := radius
 		self.requiredStates.addAll(requiredStates)
@@ -46,34 +42,28 @@ abstract class StateMachinePruning {
 	operation launch() : Void is do
 		preparePruning()
 		
-		var theTransitions  : Bag<Transition> init Bag<Transition>.new
-		var theTransitions2 : Bag<Transition> init Bag<Transition>.new
-		var currentRadius : Integer init 1
+		var theStates  : Bag<State> init Bag<State>.new
+		var theStates2 : Bag<State> init Bag<State>.new
+		var currentRadius : Integer init 0
 		
-		requiredStates.each{theState | theState.visit(self, theTransitions) }
+		requiredStates.each{theState | theStates.add(theState) }
 		
 		from true
-		until theTransitions.empty or currentRadius>radius
+		until theStates.empty or currentRadius>radius
 		loop
-			theTransitions.each{theTransition |
-				theTransition.visited := true
-					
-				if(not theTransition.target.visited) then
-					theTransition.target.visit(self, theTransitions2)
+			theStates.each{theState |
+				if(not theState.visited) then
+					theState.visit(self, theStates2)
 				end
-
-				theTransition.visit(self)
 			}
-
-			theTransitions.clear()
-			theTransitions2.each{theTransition | theTransitions.add(theTransition) }
-			theTransitions2.clear()
+			
+			theStates.clear()
+			theStates2.each{theState | theStates.add(theState) }
+			theStates2.clear()
 			currentRadius := currentRadius + 1
 		end
 		
-		if(includeLastRelations) then
-			addedStates.each{theState | theState.includeLastRelations(self) }
-		end
+		addedStates.each{theState | theState.addRelations(self) }
 	end
 
 
@@ -122,7 +112,7 @@ class Test {
 		
 		var requiredStates : Bag<State> init Bag<State>.new
 		requiredStates.add(initState)
-		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2, true).asType(PrintStateMachinePruning)
+		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2).asType(PrintStateMachinePruning)
 		
 		pruning.launch()
 	end

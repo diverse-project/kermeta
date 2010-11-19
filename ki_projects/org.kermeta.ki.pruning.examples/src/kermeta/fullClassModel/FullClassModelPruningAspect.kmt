@@ -17,15 +17,28 @@ using kermeta::standard
 aspect class Clazz {
 	attribute visited : Boolean
 	
-	operation visit(theClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
+	operation visit(theFullClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
 		visited := true
-		theClassModelPruning.onClazzAdded(self)
-		theClassModelPruning.addedClazzs.add(self)
+		theFullClassModelPruning.onClazzAdded(self)
+		theFullClassModelPruning.addedClazzs.add(self)
 		superClasses.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
 		properties.each{theProperty | if(not theProperty.visited) then thePropertys.add(theProperty) end }
 	end
 	
-	operation includeLastRelations(theFullClassModelPruning : FullClassModelPruning) : Void is do
+	operation addRelations(theFullClassModelPruning : FullClassModelPruning) : Void is do
+		superClasses.each{theClazz |
+			if(theClazz.visited) then
+				theFullClassModelPruning.onSuperClazzesAdded(self, theClazz)
+			end
+		}
+
+		properties.each{theProperty |
+			if(not theProperty.visited and theProperty.type.visited and theProperty.owner.visited) then
+				visited := true
+				theFullClassModelPruning.onPropertyAdded(theProperty)
+				theFullClassModelPruning.addedPropertys.add(theProperty)
+			end
+		}
 	end
 }
 
@@ -33,10 +46,7 @@ aspect class Clazz {
 aspect class Property {
 	attribute visited : Boolean
 	
-	operation visit(theClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
-		visited := true
-		theClassModelPruning.onPropertyAdded(self)
-		theClassModelPruning.addedPropertys.add(self)
+	operation visit(theFullClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
 		if(not self.owner.visited) then theClazzs.add(self.owner) end
 		if(not self.type.visited) then theClazzs.add(self.type) end
 	end

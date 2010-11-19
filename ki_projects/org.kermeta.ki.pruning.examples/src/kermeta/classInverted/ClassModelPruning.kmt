@@ -24,16 +24,12 @@ abstract class ClassModelPruning {
 	
 	attribute radius : Integer
 	
-	attribute includeLastRelations : Boolean
-	
 	reference addedClazzs : Bag<Clazz>
 	
 	
-	operation initialise(classModel : ClassModel, requiredClazzs : bag Clazz[0..*],
-							radius : Integer, includeLastRelations : Boolean) : ClassModelPruning is do
+	operation initialise(classModel : ClassModel, requiredClazzs : bag Clazz[0..*], radius : Integer) : ClassModelPruning is do
 		result := self
 		addedClazzs := Bag<Clazz>.new
-		self.includeLastRelations := includeLastRelations
 		self.classModel := classModel
 		self.radius := radius
 		self.requiredClazzs.addAll(requiredClazzs)
@@ -71,9 +67,7 @@ abstract class ClassModelPruning {
 			currentRadius := currentRadius + 1
 		end
 		
-		if(includeLastRelations) then
-			addedClazzs.each{theClazz | theClazz.includeLastRelations(self) }
-		end
+		addedClazzs.each{theClazz | theClazz.addRelations(self) }
 	end
 	
 	
@@ -83,6 +77,8 @@ abstract class ClassModelPruning {
 	
 	
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
+	
+	operation onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is abstract
 }
 
 
@@ -91,6 +87,11 @@ abstract class ClassModelPruning {
 class PrintClassModelPruning inherits ClassModelPruning {
 	method onClazzAdded(clazz : Clazz) : Void is do
 		stdio.writeln("Clazz: " + clazz.name)
+	end
+
+
+	method onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is do
+		stdio.writeln("Inheritance: " + theClazz.name + " " + theSuperClazzes.name)
 	end
 }
 
@@ -114,7 +115,7 @@ class Test {
 		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
 		requiredClazzes.add(c5)
 
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(cm, requiredClazzes, 2, true).asType(PrintClassModelPruning)
+		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(cm, requiredClazzes, 2).asType(PrintClassModelPruning)
 
 		pruning.launch()
 	end

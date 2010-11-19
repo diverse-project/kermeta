@@ -26,20 +26,16 @@ abstract class MappingModelPruning {
 	
 	attribute radius : Integer
 	
-	attribute includeLastRelations : Boolean
-	
 	reference addedClasses : Bag<Clazz>
 	
 	reference addedMappings : Bag<Mapping>
 	
 	
 	
-	operation initialise(mappingModel : MappingModel, requiredClasses : bag Clazz[0..*],
-							radius : Integer, includeLastRelations : Boolean) : MappingModelPruning is do
+	operation initialise(mappingModel : MappingModel, requiredClasses : bag Clazz[0..*], radius : Integer) : MappingModelPruning is do
 		result := self
 		addedClasses := Bag<Clazz>.new
 		addedMappings := Bag<Mapping>.new
-		self.includeLastRelations := includeLastRelations
 		self.mappingModel := mappingModel
 		self.radius := radius
 		self.requiredClasses.addAll(requiredClasses)
@@ -56,42 +52,28 @@ abstract class MappingModelPruning {
 	operation launch() : Void is do
 		preparePruning()
 		
-		var theMappings  : Bag<Mapping> init Bag<Mapping>.new
-		var theMappings2 : Bag<Mapping> init Bag<Mapping>.new
-		var currentRadius : Integer init 1
+		var theClazzs  : Bag<Clazz> init Bag<Clazz>.new
+		var theClazzs2 : Bag<Clazz> init Bag<Clazz>.new
+		var currentRadius : Integer init 0
 		
-		requiredClasses.each{theClazz | theClazz.visit(self, theMappings) }
+		requiredClasses.each{theClazz | theClazzs.add(theClazz) }
 		
 		from true
-		until theMappings.empty or currentRadius>radius
+		until theClazzs.empty or currentRadius>radius
 		loop
-			theMappings.each{theMapping |
-				theMapping.visited := true
-			
-				theMapping.srcs.each{theClazz |
-					if(not theClazz.visited) then
-						theClazz.visit(self, theMappings2)
-					end
-				}
-				
-				theMapping.targets.each{theClazz |
-					if(not theClazz.visited) then
-						theClazz.visit(self, theMappings2)
-					end
-				}
-				
-				theMapping.visit(self)
+			theClazzs.each{theClazz |
+				if(not theClazz.visited) then
+					theClazz.visit(self, theClazzs2)
+				end
 			}
-
-			theMappings.clear()
-			theMappings2.each{theMapping | theMappings.add(theMapping) }
-			theMappings2.clear()
+		
+			theClazzs.clear()
+			theClazzs2.each{theClazz | theClazzs.add(theClazz) }
+			theClazzs2.clear()
 			currentRadius := currentRadius + 1
 		end
 		
-		if(includeLastRelations) then
-			addedClasses.each{theClazz | theClazz.includeLastRelations(self) }
-		end
+		addedClasses.each{theClazz | theClazz.addRelations(self) }
 	end
 	
 	
@@ -148,7 +130,7 @@ class Test {
 		
 		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
 		requiredClazzes.add(a)
-		var pruning : PrintMappingModelPruning init PrintMappingModelPruning.new.initialise(mm, requiredClazzes, 2, true).asType(PrintMappingModelPruning)
+		var pruning : PrintMappingModelPruning init PrintMappingModelPruning.new.initialise(mm, requiredClazzes, 2).asType(PrintMappingModelPruning)
 		
 		pruning.launch()
 	end
