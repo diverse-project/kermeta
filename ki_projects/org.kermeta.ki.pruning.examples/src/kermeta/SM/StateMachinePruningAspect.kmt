@@ -16,29 +16,29 @@ using kermeta::standard
 aspect class State {
 	attribute visited : Boolean
 	
-	operation visit(pruner : StateMachinePruning, transitions : Bag<Transition>) : Void is do
+	operation visit(theStateMachinePruning : StateMachinePruning, theTransitions : Bag<Transition>) : Void is do
 		visited := true
-		pruner.onStateAdded(self)
-		pruner.addedStates.add(self)
+		theStateMachinePruning.onStateAdded(self)
+		theStateMachinePruning.addedStates.add(self)
 	end
 	
-	operation includeLastRelations(pruner : StateMachinePruning) : Void is do
+	operation includeLastRelations(theStateMachinePruning : StateMachinePruning) : Void is do
 	end
 }
 
 
 aspect class OutputState {
-	method visit(pruner : StateMachinePruning, transitions : Bag<Transition>) : Void is do
-		super(pruner, transitions)
-		outgoingTransitions.each{t | transitions.add(t) }
+	method visit(theStateMachinePruning : StateMachinePruning, theTransitions : Bag<Transition>) : Void is do
+		super(theStateMachinePruning, theTransitions)
+		outgoingTransitions.each{theTransition | if(not theTransition.visited) then theTransitions.add(theTransition) end }
 	end
 	
 	
-	method includeLastRelations(pruner : StateMachinePruning) : Void is do
-		outgoingTransitions.each{t |
-			if(not t.visited and t.source.visited and t.target.visited) then
-				pruner.onTransitionAdded(t)
-				t.visited := true
+	method includeLastRelations(theStateMachinePruning : StateMachinePruning) : Void is do
+		outgoingTransitions.each{theTransition |
+			if(not theTransition.visited and theTransition.source.visited and theTransition.target.visited) then
+				theStateMachinePruning.onTransitionAdded(theTransition)
+				theTransition.visited := true
 			end
 		}
 	end

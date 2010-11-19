@@ -21,7 +21,7 @@ aspect class Clazz {
 		visited := true
 		theClassModelPruning.onClazzAdded(self)
 		theClassModelPruning.addedClazzs.add(self)
-		superClasses.each{theClazz | theClazzs.add(theClazz) }
+		superClasses.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
 	end
 	
 	operation includeLastRelations(theClassModelPruning : ClassModelPruning) : Void is do

@@ -82,9 +82,9 @@ abstract class StateMachinePruning {
 		stateMachine.states.each{theState | theState.visited := false }
 	end
 	
-	operation onStateAdded(state : State) : Void is abstract
+	operation onStateAdded(theState : State) : Void is abstract
 	
-	operation onTransitionAdded(transition : Transition) : Void is abstract
+	operation onTransitionAdded(theTransition : Transition) : Void is abstract
 }
 
 

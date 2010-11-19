@@ -82,7 +82,7 @@ abstract class ClassModelPruning {
 	end
 	
 	
-	operation onClazzAdded(clazz : Clazz) : Void is abstract
+	operation onClazzAdded(theClazz : Clazz) : Void is abstract
 }
 
 

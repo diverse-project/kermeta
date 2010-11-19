@@ -48,7 +48,7 @@ abstract class ClassModelPruning {
 		var theClazzs2 : Bag<Clazz> init Bag<Clazz>.new
 		var currentRadius : Integer init 0
 		
-		requiredClazzs.each{theClass | theClazzs.add(theClass) }
+		requiredClazzs.each{theClazz | theClazzs.add(theClazz) }
 
 		from true
 		until theClazzs.empty or currentRadius>radius
@@ -66,17 +66,17 @@ abstract class ClassModelPruning {
 		end
 		
 		if(includeLastRelations) then
-			addedClazzs.each{theClass | theClass.includeLastRelations(self) }
+			addedClazzs.each{theClazz | theClazz.includeLastRelations(self) }
 		end
 	end
 	
 	
 	operation preparePruning() : Void is do
-		classModel.classes.each{theClass | theClass.visited := false }
+		classModel.classes.each{theClazz | theClazz.visited := false }
 	end
 	
 	
-	operation onClazzAdded(clazz : Clazz) : Void is abstract
+	operation onClazzAdded(theClazz : Clazz) : Void is abstract
 }
 
 

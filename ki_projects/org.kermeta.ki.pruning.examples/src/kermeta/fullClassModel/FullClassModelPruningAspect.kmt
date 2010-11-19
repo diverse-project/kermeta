@@ -1,0 +1,44 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::fullClassModel;
+
+require kermeta
+require "FullClassModel.kmt"
+require "FullClassModelPruning.kmt"
+
+using kermeta::standard
+
+
+aspect class Clazz {
+	attribute visited : Boolean
+	
+	operation visit(theClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
+		visited := true
+		theClassModelPruning.onClazzAdded(self)
+		theClassModelPruning.addedClazzs.add(self)
+		superClasses.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
+		properties.each{theProperty | if(not theProperty.visited) then thePropertys.add(theProperty) end }
+	end
+	
+	operation includeLastRelations(theFullClassModelPruning : FullClassModelPruning) : Void is do
+	end
+}
+
+
+aspect class Property {
+	attribute visited : Boolean
+	
+	operation visit(theClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
+		visited := true
+		theClassModelPruning.onPropertyAdded(self)
+		theClassModelPruning.addedPropertys.add(self)
+		if(not self.owner.visited) then theClazzs.add(self.owner) end
+		if(not self.type.visited) then theClazzs.add(self.type) end
+	end
+}
+
