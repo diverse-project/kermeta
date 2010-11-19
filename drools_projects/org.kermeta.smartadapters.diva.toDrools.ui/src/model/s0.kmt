@@ -43,6 +43,7 @@ class Context{
 				res :="s"+ i.toString()
 				i:=i+1	
 			end	
+			res := res.replace("_", "__").replace(".", "_")
 			lastgenerateName := res
 		end
 		result := res
