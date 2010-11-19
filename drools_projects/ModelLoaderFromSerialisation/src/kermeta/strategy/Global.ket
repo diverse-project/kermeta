@@ -1,0 +1,16 @@
+<%@ket
+package="smart"
+require=""
+using=""
+isAspectClass="false"
+class="GlobalStrategy"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String, packName:String, className:String, packNameUpper:String"
+%>
+	var na : String init ctx.cache.getValue(self)
+	ctx.res.append(na +  " = (<%=classQualifiedName%>) uniqueobjects.get(\\""+na+"\\");\n")
+	ctx.res.append("if ("+" "+ na + " " + "== null){\n")
+	ctx.res.append("\t"+na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
+	ctx.res.append("\tuniqueobjects.put(\\""+na+"\\","+ na+");\n")
+	ctx.res.append("}\n")
+	

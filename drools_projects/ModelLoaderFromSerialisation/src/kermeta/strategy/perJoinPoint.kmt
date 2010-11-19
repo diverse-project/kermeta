@@ -1,0 +1,17 @@
+package smart;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class PerJoinPoint{
+operation generate(classQualifiedName:String, packName:String, className:String, packNameUpper:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tvar na : String init ctx.getGenerateName(self)\n \tctx.cache.put(self,na)\n \tctx.res.append(\"if (\"+na+\" == null)\n\")\t\n\tctx.res.append(\"\t\"+na +  \" = ")
+_res.append(packName)
+_res.append(".")
+_res.append(packNameUpper)
+_res.append("Factory.eINSTANCE.create")
+_res.append(className)
+_res.append("();\n\")\n")
+result := _res.toString
+end
+}

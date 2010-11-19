@@ -1,0 +1,19 @@
+package smart;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class PerRoleStrategy{
+operation generate(classQualifiedName:String, packName:String, className:String, packNameUpper:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tvar scopeName : String init \"scope_\"+ctx.getGenerateName(self)\n\tctx.res.append(\"java.util.Map<String, Object> \"+scopeName+\" = new java.util.HashMap<String, Object>();\n\")\n\tbaseIDs.each{id | \n\t\tctx.res.append(scopeName+\".put(\\\"\"+id+\"\\\", \"+id+\");\n\")\n\t}\n\t\t\t\n\tctx.res.append(\"if (perRole.get(\"+scopeName+\") == null){\n\")\n\tctx.res.append(\"\tperRole.put(\"+scopeName+\", new java.util.HashMap<String, Object>());\n\")\n\tctx.res.append(\"}\n\")\n\n\tvar na : String init ctx.cache.getValue(self)\t\t\t\t\n\tctx.res.append(na +  \" = (")
+_res.append(classQualifiedName)
+_res.append(") ((java.util.Map<String, Object>) perRole.get(\"+scopeName+\")).get(\\\"\"+na+\"\\\");\n\")\n\tctx.res.append(\"if (\"+\" \"+ na + \" \" + \"== null){\n\")\n\tctx.res.append(\"\t\"+na +  \" = ")
+_res.append(packName)
+_res.append(".")
+_res.append(packNameUpper)
+_res.append("Factory.eINSTANCE.create")
+_res.append(className)
+_res.append("();\n\")\n\tctx.res.append(\"\t((java.util.Map<String, Object>) perRole.get(\"+scopeName+\")).put(\\\"\"+na+\"\\\",\"+ na+\");\n\")\n\tctx.res.append(\"}\n\")\n\t")
+result := _res.toString
+end
+}

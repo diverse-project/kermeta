@@ -1,0 +1,26 @@
+<%@ket
+package="smart"
+require=""
+using=""
+isAspectClass="false"
+class="PerElementMatch"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String, packName:String, className:String, packNameUpper:String"
+%>
+	var scopeName : String init "scope_"+ctx.getGenerateName(self)
+	ctx.res.append("java.util.Set<Object> "+scopeName+" = new java.util.HashSet<Object>();\n")
+	baseIDs.each{id | 
+		ctx.res.append(scopeName+".add("+id+");\n")
+	}
+			
+	ctx.res.append("if (perElem.get("+scopeName+") == null){\n")
+	ctx.res.append("\tperElem.put("+scopeName+", new java.util.HashMap<String, Object>());\n")
+	ctx.res.append("}\n")
+
+	var na : String init ctx.cache.getValue(self)
+	ctx.res.append(na +  " = (<%=classQualifiedName%>) ((java.util.Map<String, Object>) perElem.get("+scopeName+")).get(\\""+na+"\\");\n")
+	ctx.res.append("if ("+" "+ na + " " + "== null){\n")
+	ctx.res.append("\t"+na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
+	ctx.res.append("\t((java.util.Map<String, Object>)perElem.get("+scopeName+")).put(\\""+na+"\\","+ na+");\n")
+	ctx.res.append("}\n")	
+	

@@ -1,0 +1,13 @@
+<%@ket
+package="smart"
+require=""
+using=""
+isAspectClass="false"
+class="PerJoinPoint"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String, packName:String, className:String, packNameUpper:String"
+%>
+	var na : String init ctx.getGenerateName(self)
+ 	ctx.cache.put(self,na)
+ 	ctx.res.append("if ("+na+" == null)\n")	
+	ctx.res.append("\t"+na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")

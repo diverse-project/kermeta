@@ -1,0 +1,13 @@
+package smart;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class DeclareElement{
+operation generate(classQualifiedName:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tvar na : String init ctx.getGenerateName(self)\n \tctx.cache.put(self,na)\n\tctx.res.append(\"")
+_res.append(classQualifiedName)
+_res.append("\" +\" \"+ na +  \" = null;\n\")\t")
+result := _res.toString
+end
+}

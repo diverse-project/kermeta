@@ -1,0 +1,12 @@
+<%@ket
+package="smart"
+require=""
+using=""
+isAspectClass="false"
+class="DeclareElement"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String"
+%>
+	var na : String init ctx.getGenerateName(self)
+ 	ctx.cache.put(self,na)
+	ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = null;\n")	
