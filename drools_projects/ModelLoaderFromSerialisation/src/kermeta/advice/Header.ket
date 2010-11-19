@@ -29,30 +29,6 @@ require "s1.kmt"
 using kermeta::standard
 using kermeta::persistence
 
-class Main {
-
-	operation initialize():Context is do
-		var ctx : Context init Context.new
-		ctx.res := kermeta::utils::StringBuffer.new
-		ctx.cache := kermeta::utils::Hashtable<Object,String>.new
-		result:=ctx		
-	end
-	
-	
-	
-	operation main(uri:String) : Void is do
-		var ctx : Context init self.initialize()
-		var rep : EMFRepository  init EMFRepository.new
-		var res : EMFResource 
-		res ?= rep.createResource(uri, "<%=uriecore%>")
-		res.load
-		var s : System 
-		s?= res.one()
-		s.pass1create(ctx)
-		s.pass2set(ctx)
-		stdio.writeln(ctx.res.toString) 
-	end
-}
 class Context{
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
@@ -60,11 +36,27 @@ class Context{
 	reference lastgenerateName : String
 	reference i : Integer
 	
-	operation getGenerateName():String is do
-		if (i.isVoid) then i:= 0 end
-		result :="s"+ i.toString()
-		lastgenerateName := result
-		i:=i+1
+	operation getGenerateName(obj:Object):String is do
+		var res : String
+	
+		res := cache.getValue(obj)
+		if res == void then
+			var metaClass : kermeta::language::structure::Class init obj.getMetaClass
+			var prop : kermeta::language::structure::Property init metaClass.classDefinition.allAttribute.select{p | p.name == "aspectID"}.one
+			
+			if prop != void then
+				res := obj.get(prop).asType(String)
+			end
+			
+			if res == void then
+				if (i.isVoid) then i:= 0 end
+				res :="s"+ i.toString()
+				i:=i+1	
+			end
+			res := res.replace("_", "__").replace(".", "_")
+			lastgenerateName := res
+		end
+		result := res
 	end
 	
 	operation convert(val : String) : String is 
@@ -76,3 +68,31 @@ class Context{
 	end
 }
 
+aspect class AspectModelElement {
+	operation pointcut2droolsPass1(ctx:Context):Void is 
+		abstract 
+		
+	operation pointcut2droolsPass2(ctx:Context):Void is 
+		abstract
+
+	operation  pass1create(ctx:Context):Void is
+		abstract
+		
+	operation  pass2set(ctx:Context):Void is
+		abstract	
+	
+	operation generateGlobalStrategy(ctx:Context) is
+		abstract
+		
+	operation generatePerElementStrategy(ctx:Context, ids:Set<String>) is
+		abstract
+		
+	operation generatePerRoleStrategy(ctx:Context, ids:Set<String>) is
+		abstract
+	
+	operation generateDeclare(ctx:Context):Void is
+		abstract
+		
+	operation generatePerJoinPointStrategy(ctx:Context):Void is
+		abstract					
+}

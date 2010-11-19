@@ -15,7 +15,13 @@ package ecore;
 require kermeta
 //require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
-  
+
+require "./strategy/DeclareElement.kmt"
+require "./strategy/Global.kmt"
+require "./strategy/perElementMatch.kmt"
+require "./strategy/perRoleMatch.kmt"
+require "./strategy/perJoinPoint.kmt"
+
 require "./advice/Header.kmt"  
 require "./advice/HeaderLink.kmt"  
 require "./advice/Pass1.kmt" 
@@ -36,17 +42,26 @@ require "./pointcut/ReferenceCardinalityOne.kmt"
 using kermeta::standard
 using kermeta::persistence
 using ecore
+
 class Main {
 	
 	operation main() : Void is do
-		var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+		var uriecore : String init "platform:/resource/org.kermeta.art.model/model/metamodel@runtime.ecore"
 		//var uriecore : String init "platform:/resource/GenericComposition/SequenceDiagram-Example/metamodel/SequenceDiagram.ecore"
-	
+		//var uriecore : String init "platform:/resource/java/model/java.ecore"
+		
+		
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
 		
-		ctx.pass1template := Pass1Template.new
+		ctx.declarationTemplate := smart::DeclareElement.new
+		ctx.globalTemplate := smart::GlobalStrategy.new
+		ctx.perElemTemplate := smart::PerElementMatch.new
+		ctx.perRoleTemplate := smart::PerRoleStrategy.new
+		ctx.perJoinPoint := smart::PerJoinPoint.new
+		
+		//ctx.pass1template := Pass1Template.new
 		ctx.propertytemplate := PropertyTemplate.new
 		ctx.propertytemplatemany := PropertyTemplateMany.new
 		ctx.referencetemplate := ReferenceTemplate.new
@@ -124,9 +139,18 @@ class Main {
 }
 class Context{
 	/*
+	Strategy-related references
+	*/
+	reference declarationTemplate :smart::DeclareElement
+	reference globalTemplate : smart::GlobalStrategy
+	reference perElemTemplate : smart::PerElementMatch
+	reference perRoleTemplate : smart::PerRoleStrategy
+	reference perJoinPoint : smart::PerJoinPoint
+
+	/*
 	Advice-related references
 	*/
-	reference pass1template : Pass1Template
+	//reference pass1template : Pass1Template
 	reference propertytemplate : PropertyTemplate
 	reference propertytemplatemany : PropertyTemplateMany
 	reference referencetemplate : ReferenceTemplate  
@@ -144,12 +168,20 @@ class Context{
 	
 	reference res : kermeta::utils::StringBuffer
 	reference cache : kermeta::utils::Hashtable<Object,String>
+	reference i : Integer
+	
 	operation getGenerateName():String is do
-		if (i.isVoid) then i:= 0 end
-		result :="s"+ i.toString()
-		i:=i+1
+		/*var metaClass : kermeta::language::structure::Class init obj.getMetaClass
+		var prop : kermeta::language::structure::Property init metaClass.classDefinition.allAttribute.select{p | p.name == "aspectID"}.one
+		if prop != void then
+			result := obj.get(prop).asType(String)
+		else*/
+			if (i.isVoid) then i:= 0 end
+			result :="s"+ i.toString()
+			i:=i+1
+		//end
 	end
-	reference i : Integer	
+		
 }
 
 
@@ -180,66 +212,17 @@ aspect class EClass{
 	stdio.writeln(self.name+".toGenerate")
 	
 		ctx.res.append("aspect class " + self.name + " {\n")
-		
-		if (self.eSuperTypes.size == 0) then
-			ctx.res.append("operation  ")
-		else
-			ctx.res.append("method  ")
-		end 
-		
-		ctx.res.append("pass1create(ctx:Context):Void")
-		if (self.eSuperTypes.size>1) then
-			ctx.res.append(" from " + self.eSuperTypes.one.name) 
-		end
-		ctx.res.append(" is do \n \t")
-		if (not self.~abstract) then
-		
-			stdio.writeln("not abstract")
-		
-			//classQualifiedName:String, packNameUpper:String, className:String	
-			var packNameUpper : String init self.ePackage.name.substring(0,1).toUpperCase + self.ePackage.name.substring(1,self.ePackage.name.size)
-			ctx.res.append(ctx.pass1template.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
-			
-			
-			
-			//Bug Kermeta: eAllReferences does not include eReferences!!!!!
-			/*stdio.errorln(self.name+" "+self.eReferences.size.toString)	
-			self.eReferences.each{a|
-				stdio.writeln(self.name.toUpperCase)
-				a.generateTraverse(ctx,"pass1create")
-			}*/
-			
-			
-			stdio.errorln(self.name+" "+self.eAllReferences.size.toString)			
-			self.eAllReferences.each{a|
-				stdio.writeln(self.name.toUpperCase)
-				a.generateTraverse(ctx,"pass1create")
-			}
-			//end Bug Kermeta
-			
-		end
-		ctx.res.append("end \n")
-		
-		if (self.eSuperTypes.size == 0) then
-			ctx.res.append("operation  ")
-		else
-			ctx.res.append("method  ")
-		end 
-		
+				
+		ctx.res.append("method  ")	
 		ctx.res.append("pass2set(ctx:Context):Void")
 		if (self.eSuperTypes.size>1) then
 			ctx.res.append(" from " + self.eSuperTypes.one.name) 
 		end
 		ctx.res.append(" is do \n \t")
 		if (not self.~abstract) then
-			//Bug Kermeta: eAllReferences does not include eReferences!!!!!
-			//self.eAttributes().each{a|a.toGenerate(ctx)}
 			self.eAllAttributes().each{a|a.toGenerate(ctx)}
-			//self.eReferences().each{a|a.toGenerate(ctx)}
 			self.eAllReferences().each{a|a.toGenerate(ctx)}
-			//self.eReferences.each{a|a.generateTraverse(ctx,"pass2set")}
 			self.eAllReferences().each{a|a.generateTraverse(ctx,"pass2set")}
-			//end Bug Kermeta
 		end
 		
 		
@@ -248,23 +231,17 @@ aspect class EClass{
 		
 		
 		
-		if (self.eSuperTypes.size == 0) then
-			ctx.res.append("operation  ")
-		else
-			ctx.res.append("method  ")
-		end
-		
+		ctx.res.append("\tmethod ")		
 		ctx.res.append("pointcut2droolsPass1(ctx:Context):Void")
 		if (self.eSuperTypes.size>1) then
 			ctx.res.append(" from " + self.eSuperTypes.one.name) 
 		end
-		ctx.res.append(" is do \n \t")
+		ctx.res.append(" is do \n")
 		
 		//appeler le template pointcut.Pass1
 		ctx.res.append(ctx.pass1templatePC.generate(self.getQualifiedNameGen.replace("pattern.","")))
 		
 		if (not self.~abstract) then
-			//self.eAttributes.each{a | a.pointcutToDrools(ctx)}
 			self.eAllAttributes.each{a | a.pointcutToDrools(ctx)}			
 		end
 		
@@ -276,17 +253,12 @@ aspect class EClass{
 		}
 		
 		
-		ctx.res.append("end\n")
+		ctx.res.append("\tend\n")
 		
 		
 		
 		
-		if (self.eSuperTypes.size == 0) then
-			ctx.res.append("operation  ")
-		else
-			ctx.res.append("method  ")
-		end
-		
+		ctx.res.append("method  ")
 		ctx.res.append("pointcut2droolsPass2(ctx:Context):Void")
 		if (self.eSuperTypes.size>1) then
 			ctx.res.append(" from " + self.eSuperTypes.one.name) 
@@ -309,6 +281,77 @@ aspect class EClass{
 		
 		ctx.res.append("end\n")
 		
+		
+		ctx.res.append("method  ")
+		ctx.res.append("generateDeclare(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template global strategy
+		ctx.res.append(ctx.declarationTemplate.generate(self.getQualifiedNameGen.replace("pattern.","")))
+		self.eAllReferences.each{a|
+			stdio.writeln(self.name.toUpperCase)
+			a.generateTraverse(ctx,"generateDeclare")
+		}
+		ctx.res.append("end\n")
+		
+		ctx.res.append("method  ")
+		ctx.res.append("generateGlobalStrategy(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template global strategy
+		var packNameUpper : String init self.ePackage.name.substring(0,1).toUpperCase + self.ePackage.name.substring(1,self.ePackage.name.size)
+		ctx.res.append(ctx.globalTemplate.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
+				
+		ctx.res.append("end\n")
+		
+		
+		
+		ctx.res.append("method  ")
+		ctx.res.append("generatePerElementStrategy(ctx:Context, baseIDs:Set<String>):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template global strategy
+		ctx.res.append(ctx.perElemTemplate.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
+				
+		ctx.res.append("end\n")
+		
+		
+		
+		
+		ctx.res.append("method  ")
+		ctx.res.append("generatePerRoleStrategy(ctx:Context, baseIDs:Set<String>):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template global strategy
+		ctx.res.append(ctx.perRoleTemplate.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
+				
+		ctx.res.append("end\n")
+		
+		
+		
+		ctx.res.append("method  ")
+		ctx.res.append("generatePerJoinPointStrategy(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		//appeler le template global strategy
+		ctx.res.append(ctx.perJoinPoint.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
+		self.eAllReferences.each{a|
+			stdio.writeln(self.name.toUpperCase)
+			a.generateTraverse(ctx,"generatePerJoinPointStrategy")
+		}
+		ctx.res.append("end\n")
+		
+		
 		ctx.res.append("\n}")
 		
 	end
@@ -324,14 +367,14 @@ aspect class EClass{
 aspect class EAttribute{
 		
 	method toGenerate(ctx:Context) : Void is do 
-	if self.name != "pid" then
+	if self.name != "aspectID" then
 		var propertyUpper : String init self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)
 		if (self.many) then
 			//ropertyNameUpper:String,PropertyName:String,str:Boolean
 			
-			ctx.res.append(ctx.propertytemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+			ctx.res.append(ctx.propertytemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property"),isString(self.eType)))
 		else
-			ctx.res.append(ctx.propertytemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType))  )
+			ctx.res.append(ctx.propertytemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property"),isString(self.eType))  )
 		end
 	end	
 	end
@@ -349,11 +392,11 @@ aspect class EAttribute{
 	
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
-		if self.name != "pid" then
+		if self.name != "aspectID" then
 			if (self.many) then
-				ctx.res.append(ctx.propertytemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+				ctx.res.append(ctx.propertytemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property"),isString(self.eType)))
 			else
-				ctx.res.append(ctx.propertytemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+				ctx.res.append(ctx.propertytemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property"),isString(self.eType)))
 			end
 		end
 	end
@@ -366,9 +409,9 @@ aspect class EReference{
 		var propertyUpper : String init self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)
 		if (self.many) then
 			//ropertyNameUpper:String,PropertyName:String,str:Boolean
-			ctx.res.append(ctx.referencetemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+			ctx.res.append(ctx.referencetemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")))
 		else
-			ctx.res.append(ctx.referencetemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"))  )
+			ctx.res.append(ctx.referencetemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property"))  )
 		end
 		 
 		
@@ -379,12 +422,12 @@ aspect class EReference{
  		stdio.writeln(self.name+".generateTraverse"+ methodName)
 		if (self.containment) then
 			if (self.many) then
-				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".size >0 then\n")
-				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".each{c|c."+methodName+"(ctx)}\n")
+				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".size >0 then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".each{c|c."+methodName+"(ctx)}\n")
 				ctx.res.append("end\n")
 			else
-				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".isVoid then\n")
-				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+"."+methodName+"(ctx)\n")			
+				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".isVoid then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+"."+methodName+"(ctx)\n")			
 				ctx.res.append("end\n")
 			end
 			
@@ -395,12 +438,12 @@ aspect class EReference{
 	do
 		if (self.containment) then
 			if (self.many) then
-				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".size >0 then\n")
-				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".each{c|c."+methodName+"(ctx)}\n")
+				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".size >0 then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".each{c|c."+methodName+"(ctx)}\n")
 				ctx.res.append("end\n")
 			else
-				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".isVoid then\n")
-				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+"."+methodName+"(ctx)\n")			
+				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+".isVoid then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")+"."+methodName+"(ctx)\n")			
 				ctx.res.append("end\n")
 			end
 			
@@ -410,14 +453,14 @@ aspect class EReference{
 	operation pointcutToDrools(ctx : Context) : Void is
 	do
 		if (self.many) then
-			ctx.res.append(ctx.referencetemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+			ctx.res.append(ctx.referencetemplatemanyPC.generateMany(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")))
 		else
-			ctx.res.append(ctx.referencetemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+			ctx.res.append(ctx.referencetemplatePC.generateOne(self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute").replace("property","~property")))
 		end	
 	end
 } 
 
-
+aspect class EModelElement inherits EObject{}
 
 aspect class EObject{
 		

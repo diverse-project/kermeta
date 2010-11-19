@@ -5,27 +5,7 @@ using kermeta::utils
 class Pass1Template{
 operation generate(classQualifiedName:String, packName:String, className:String, packNameUpper:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n\tvar na : String init ctx.getGenerateName\n \tctx.cache.put(self,na)\t\n\tif self.ownedTags.exists{tag | \"unique\".equals(tag.name)} then\n\t\tctx.res.append(\"")
-_res.append(classQualifiedName)
-_res.append("\" +\" \"+ na +  \" = (")
-_res.append(classQualifiedName)
-_res.append(") uniqueobjects.get(\\\"\"+na+\"\\\");\n\")\n\t\tctx.res.append(\"if (\"+\" \"+ na + \" \" + \"== null){\n\")\n\t\t\tctx.res.append(\"\t\"+na +  \" = ")
-_res.append(packName)
-_res.append(".")
-_res.append(packNameUpper)
-_res.append("Factory.eINSTANCE.create")
-_res.append(className)
-_res.append("();\n\")\n\t\t\tctx.res.append(\"\tuniqueobjects.put(\\\"\"+na+\"\\\",\"+ na+\");\n\")\n\t\tctx.res.append(\"}\n\")\t\n\telse\n\t\tif self.ownedTags.exists{tag | \"uniqueWithScope\".equals(tag.name)} then\n\t\t\tvar scopeName : String init \"scope_\"+ctx.getGenerateName\n\t\t\tctx.res.append(\"Set<EObject> \"+scopeName+\" = new HashSet<EObject>();\")\n\t\t\tself.ownedTags.detect{tag | \"uniqueWithScope\".equals(tag.name)}.~value.split(\" \").each{elt |\n\t\t\t\tctx.res.append(scopeName+\".add(\"+elt+\");\")\n\t\t\t}\n\t\t\t\n\t\t\tctx.res.append(\"if (uniqueObjectsWithScope.get(\"+scopeName+\") == null){\")\n\t\t\t\tctx.res.append(\"\tuniqueObjectsWithScope.put(\"+scopeName+\", new Hashtable<String, EObject>());\")\n\t\t\tctx.res.append(\"}\n\")\n\t\t\t\n\t\t\tctx.res.append(\"")
-_res.append(classQualifiedName)
-_res.append("\" +\" \"+ na +  \" = (")
-_res.append(classQualifiedName)
-_res.append(") uniqueObjectsWithScope.get(\"+scopeName+\").get(\\\"\"+na+\"\\\");\n\")\n\t\t\tctx.res.append(\"if (\"+\" \"+ na + \" \" + \"== null){\n\")\n\t\t\t\tctx.res.append(\"\t\"+na +  \" = ")
-_res.append(packName)
-_res.append(".")
-_res.append(packNameUpper)
-_res.append("Factory.eINSTANCE.create")
-_res.append(className)
-_res.append("();\n\")\n\t\t\t\tctx.res.append(\"\tuniqueobjectsWithScope.get(\"+scopeName+\").put(\\\"\"+na+\"\\\",\"+ na+\");\n\")\n\t\t\tctx.res.append(\"}\n\")\n\t\telse\n\t\t\tctx.res.append(\"")
+_res.append("\n\tvar na : String init ctx.getGenerateName(self)\n \tctx.cache.put(self,na)\n \tctx.res.append(\"if (!marked.contains(\"+na+\"))\")\t\n\tctx.res.append(\"\t")
 _res.append(classQualifiedName)
 _res.append("\" +\" \"+ na +  \" = ")
 _res.append(packName)
@@ -33,7 +13,7 @@ _res.append(".")
 _res.append(packNameUpper)
 _res.append("Factory.eINSTANCE.create")
 _res.append(className)
-_res.append("();\n\")\n\t\tend \n\tend\n\t")
+_res.append("();\n\")\n\t")
 result := _res.toString
 end
 }

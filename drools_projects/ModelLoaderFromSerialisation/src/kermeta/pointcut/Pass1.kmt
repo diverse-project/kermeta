@@ -5,7 +5,7 @@ using kermeta::utils
 class Pass1TemplatePC{
 operation generate(classQualifiedName:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\t\tvar i : Integer init 0\n\t\tvar varName : String init ctx.getGenerateName()\n\t\tctx.cache.put(self,\"$\"+varName)\n\t\tctx.res.append(\"$\"+varName+\"Decl: \"+\"")
+_res.append("\t\tvar i : Integer init 0\n\t\tvar varName : String init ctx.getGenerateName(self)\n\t\tctx.cache.put(self,\"$\"+varName)\n\t\tctx.res.append(\"$\"+varName+\"Decl: \"+\"")
 _res.append(classQualifiedName)
 _res.append("(\")\n\t\t")
 result := _res.toString

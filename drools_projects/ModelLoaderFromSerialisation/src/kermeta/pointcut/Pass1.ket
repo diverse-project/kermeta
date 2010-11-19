@@ -8,7 +8,7 @@ ismethod="false"operation="generate"
 parameters="classQualifiedName:String"
 %>
 		var i : Integer init 0
-		var varName : String init ctx.getGenerateName()
+		var varName : String init ctx.getGenerateName(self)
 		ctx.cache.put(self,"$"+varName)
 		ctx.res.append("$"+varName+"Decl: "+"<%=classQualifiedName%>(")
 		

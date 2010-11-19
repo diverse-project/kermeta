@@ -8,33 +8,8 @@ ismethod="false"operation="generate"
 parameters="classQualifiedName:String, packName:String, className:String, packNameUpper:String"
 %>
 
-	var na : String init ctx.getGenerateName
- 	ctx.cache.put(self,na)	
-	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = (<%=classQualifiedName%>) uniqueobjects.get(\\""+na+"\\");\n")
-		ctx.res.append("if ("+" "+ na + " " + "== null){\n")
-			ctx.res.append("\t"+na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
-			ctx.res.append("\tuniqueobjects.put(\\""+na+"\\","+ na+");\n")
-		ctx.res.append("}\n")	
-	else
-		if self.ownedTags.exists{tag | "uniqueWithScope".equals(tag.name)} then
-			var scopeName : String init "scope_"+ctx.getGenerateName
-			ctx.res.append("Set<EObject> "+scopeName+" = new HashSet<EObject>();")
-			self.ownedTags.detect{tag | "uniqueWithScope".equals(tag.name)}.~value.split(" ").each{elt |
-				ctx.res.append(scopeName+".add("+elt+");")
-			}
-			
-			ctx.res.append("if (uniqueObjectsWithScope.get("+scopeName+") == null){")
-				ctx.res.append("\tuniqueObjectsWithScope.put("+scopeName+", new Hashtable<String, EObject>());")
-			ctx.res.append("}\n")
-			
-			ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = (<%=classQualifiedName%>) uniqueObjectsWithScope.get("+scopeName+").get(\\""+na+"\\");\n")
-			ctx.res.append("if ("+" "+ na + " " + "== null){\n")
-				ctx.res.append("\t"+na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
-				ctx.res.append("\tuniqueobjectsWithScope.get("+scopeName+").put(\\""+na+"\\","+ na+");\n")
-			ctx.res.append("}\n")
-		else
-			ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
-		end 
-	end
+	var na : String init ctx.getGenerateName(self)
+ 	ctx.cache.put(self,na)
+ 	ctx.res.append("if (!marked.contains("+na+"))")	
+	ctx.res.append("\t<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
 	
