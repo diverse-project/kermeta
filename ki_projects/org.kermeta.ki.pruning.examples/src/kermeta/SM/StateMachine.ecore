@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="ex::stateMachine|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="ex" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore#/"
+      nsPrefix="ex">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+    <eSubpackages name="stateMachine" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore#/ex/stateMachine"
+        nsPrefix="stateMachine">
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="initState" eType="#/1/stateMachine/InitState"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+            eType="#/1/stateMachine/State" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+            eType="#/1/stateMachine/Transition" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Transition">
+        <eOperations name="initialise" eType="#/1/stateMachine/Transition">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self&#xA;&#x9;self.source := source&#xA;&#x9;self.target := target&#xA;&#x9;source.outgoingTransitions.add(self)&#xA;&#x9;target.ingoingTransitions.add(self)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="source" eType="#/1/stateMachine/OutputState"/>
+          <eParameters name="target" eType="#/1/stateMachine/InputState"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#/1/stateMachine/OutputState"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#/1/stateMachine/InputState"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
+        <eOperations name="initialise" eType="#/1/stateMachine/State">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;self.name := name&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="InputState" abstract="true" eSuperTypes="#/1/stateMachine/State">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ingoingTransitions"
+            upperBound="-1" eType="#/1/stateMachine/Transition"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="OutputState" abstract="true" eSuperTypes="#/1/stateMachine/State">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions"
+            upperBound="-1" eType="#/1/stateMachine/Transition"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="InitState" eSuperTypes="#/1/stateMachine/OutputState"/>
+      <eClassifiers xsi:type="ecore:EClass" name="StandardState" eSuperTypes="#/1/stateMachine/OutputState #/1/stateMachine/InputState"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TerminalState" eSuperTypes="#/1/stateMachine/InputState"/>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

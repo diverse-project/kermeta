@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|../classInverted/ClassModel.kmt|"/>
+    <details key="using" value="ex::mappingModel|kermeta::standard|ex::classModel|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="ex" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/MappingModel.ecore#/"
+      nsPrefix="ex">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+    <eSubpackages name="mappingModel" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/MappingModel.ecore#/ex/mappingModel"
+        nsPrefix="mappingModel">
+      <eClassifiers xsi:type="ecore:EClass" name="MappingModel">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+            eType="#/1/mappingModel/Mapping" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="ecore:EClass ClassModel.ecore#/1/classModel/ClassModel"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ClassModel.ecore#/1/classModel/ClassModel"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Mapping">
+        <eOperations name="initialise" eType="#/1/mappingModel/Mapping">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;self.name := name&#xA;&#x9;mappingModel.mappings.add(self)&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
+          <eParameters name="mappingModel" eType="#/1/mappingModel/MappingModel"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="srcs" lowerBound="1"
+            upperBound="-1" eType="ecore:EClass ClassModel.ecore#/1/classModel/Clazz"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
+            upperBound="-1" eType="ecore:EClass ClassModel.ecore#/1/classModel/Clazz"/>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource" references="ClassModel.ecore#/0 ClassModel.ecore#/1 ClassModel.ecore#/2"/>
+</xmi:XMI>

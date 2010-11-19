@@ -78,7 +78,6 @@ abstract class FullClassModelPruning {
 			thePropertys2.each{theProperty | thePropertys.add(theProperty) }
 			thePropertys2.clear()
 			currentRadius := currentRadius + 1
-			stdio.writeln("---")
 		end
 		
 		addedClazzs.each{theClazz | theClazz.addRelations(self) }

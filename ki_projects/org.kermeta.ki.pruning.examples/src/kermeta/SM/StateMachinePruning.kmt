@@ -20,7 +20,7 @@ using kermeta::standard
 abstract class StateMachinePruning {
 	reference stateMachine : StateMachine
 	
-	reference requiredStates : State[0..*]
+	reference requiredStates : OutputState[0..*]
 	
 	attribute radius : Integer
 	
@@ -29,7 +29,7 @@ abstract class StateMachinePruning {
 	reference addedTransitions : Bag<Transition>
 	
 	
-	operation initialise(stateMachine : StateMachine, requiredStates : bag State[0..*], radius : Integer) : StateMachinePruning is do
+	operation initialise(stateMachine : StateMachine, requiredStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do
 		result := self
 		addedStates := Bag<State>.new
 		addedTransitions := Bag<Transition>.new
@@ -110,7 +110,7 @@ class Test {
 		sm.transitions.add(Transition.new.initialise(s2, s2))
 		sm.transitions.add(Transition.new.initialise(s2, terminal))
 		
-		var requiredStates : Bag<State> init Bag<State>.new
+		var requiredStates : Bag<OutputState> init Bag<OutputState>.new
 		requiredStates.add(initState)
 		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2).asType(PrintStateMachinePruning)
 		

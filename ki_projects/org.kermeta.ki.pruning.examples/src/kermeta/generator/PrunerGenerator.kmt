@@ -1,0 +1,29 @@
+/*
+ * Creation : November 19, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "org::kermeta::pruner::generator::PrunerGenerator"
+@mainOperation "main"
+
+package org::kermeta::pruner::generator;
+
+require kermeta
+require "Pruning.ecore"
+
+using kermeta::standard
+using ecore
+
+
+class PrunerGenerator {
+	reference pruningData : Pruning	
+	
+	reference metamodel : EPackage
+	
+	attribute pathPruner : String
+
+
+	operation main() : Void is do 
+	end
+}

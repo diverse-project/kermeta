@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="ex::classModel|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="ex" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/ClassModel.ecore#/"
+      nsPrefix="ex">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eSubpackages name="classModel" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/ClassModel.ecore#/ex/classModel"
+        nsPrefix="classModel">
+      <eClassifiers xsi:type="ecore:EClass" name="ClassModel">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+            eType="#/1/classModel/Clazz" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Clazz">
+        <eOperations name="initialise" eType="#/1/classModel/Clazz">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self&#xA;&#x9;self.name := name&#xA;&#x9;classModel.classes.add(self)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
+          <eParameters name="classModel" eType="#/1/classModel/ClassModel"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superClasses" upperBound="-1"
+            eType="#/1/classModel/Clazz"/>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>
