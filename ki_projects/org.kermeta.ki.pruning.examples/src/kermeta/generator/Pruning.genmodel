@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.ki.pruning.examples.model/src"
+    editDirectory="/org.kermeta.ki.pruning.examples.edit/src" editorDirectory="/org.kermeta.ki.pruning.examples.editor/src"
+    modelPluginID="org.kermeta.ki.pruning.examples.model" modelName="Pruning" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.kermeta.ki.pruning.examples.edit"
+    editorPluginID="org.kermeta.ki.pruning.examples.editor">
+  <foreignModel>Pruning.ecore</foreignModel>
+  <genPackages prefix="PrunerGenerator" basePackage="org.kermeta.ki" disposableProviderFactory="true"
+      ecorePackage="Pruning.ecore#/">
+    <genClasses ecoreClass="Pruning.ecore#//Pruning">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/radius"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/requiredElements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//RequiredElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/srcRelations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/origins"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/targetRelations"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//SourceRelation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//SourceRelation/relation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//SourceRelation/createOpposite"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/expression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Parameter/element"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
-    nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/generator/Pruning.ecore#/"
-    nsPrefix="org">
-  <eSubpackages name="kermeta" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/generator/Pruning.ecore#/kermeta/"
-      nsPrefix="kermeta">
-    <eSubpackages name="pruner" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/generator/Pruning.ecore#/kermeta/pruner"
-        nsPrefix="pruner">
-      <eSubpackages name="generator" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/generator/Pruning.ecore#/kermeta/pruner/generator/"
-          nsPrefix="generator">
-        <eClassifiers xsi:type="ecore:EClass" name="Pruning">
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" lowerBound="1"
-              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="requiredElements"
-              lowerBound="1" upperBound="-1" eType="#//kermeta/pruner/generator/RequiredElement"
-              containment="true"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-              eType="#//kermeta/pruner/generator/Parameter" containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="RequiredElement">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="srcRelations" lowerBound="1"
-              upperBound="-1" eType="#//kermeta/pruner/generator/SourceRelation" containment="true"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="origins" lowerBound="1"
-              upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="targetRelations"
-              upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="SourceRelation">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
-              eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="Parameter">
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
-              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
-              eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
-        </eClassifiers>
-      </eSubpackages>
-    </eSubpackages>
-  </eSubpackages>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="prunerGenerator"
+    nsURI="http://pruningGenerator.org" nsPrefix="prunerGenerator">
+  <eClassifiers xsi:type="ecore:EClass" name="Pruning">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredElements" lowerBound="1"
+        upperBound="-1" eType="#//RequiredElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="srcRelations" lowerBound="1"
+        upperBound="-1" eType="#//SourceRelation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origins" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRelations" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+  </eClassifiers>
 </ecore:EPackage>
