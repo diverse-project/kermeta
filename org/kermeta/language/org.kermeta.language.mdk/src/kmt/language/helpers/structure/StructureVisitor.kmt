@@ -1,0 +1,212 @@
+/* $Id:$ 
+ * Creation : November 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+@mainClass "kmt::language::helpers::structure::StructureVisitor"
+
+package kmt::language::helpers::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+
+using org::kermeta::language::structure
+
+class StructureVisitor
+{
+	operation isVisitable(o : Object) : Boolean is do
+		if (o.isInstanceOf(Boolean) or o.isInstanceOf(Integer) or o.isInstanceOf(String) or o.isInstanceOf(UnlimitedNatural)
+			or o.isInstanceOf(ConstraintLanguage) or o.isInstanceOf(ConstraintType)) then
+			result := false
+		else
+			result := true
+		end
+	end
+	
+operation visitAbstractOperation(visited : AbstractOperation, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitAbstractProperty(visited : AbstractProperty, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitClass(visited : Class, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitClassDefinition(visited : ClassDefinition, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitConstraint(visited : Constraint, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitDataType(visited : DataType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitEnumeration(visited : Enumeration, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitEnumerationLiteral(visited : EnumerationLiteral, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitFunctionType(visited : FunctionType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitGenericTypeDefinition(visited : GenericTypeDefinition, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitModel(visited : Model, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitModelType(visited : ModelType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitModelTypeVariable(visited : ModelTypeVariable, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitModelingUnit(visited : ModelingUnit, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitMultiplicityElement(visited : MultiplicityElement, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitNamedElement(visited : NamedElement, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitObject(visited : Object, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitObjectTypeVariable(visited : ObjectTypeVariable, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitOperation(visited : Operation, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitPackage(visited : Package, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitParameter(visited : Parameter, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitParameterizedType(visited : ParameterizedType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitPrimitiveType(visited : PrimitiveType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitProductType(visited : ProductType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitProperty(visited : Property, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitRequire(visited : Require, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitResource(visited : Resource, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitResourceGroup(visited : ResourceGroup, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitSimpleResource(visited : SimpleResource, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTag(visited : Tag, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitType(visited : Type, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeContainer(visited : TypeContainer, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeDefinition(visited : TypeDefinition, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeDefinitionContainer(visited : TypeDefinitionContainer, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeMapping(visited : TypeMapping, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeVariable(visited : TypeVariable, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypeVariableBinding(visited : TypeVariableBinding, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitTypedElement(visited : TypedElement, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitUnresolved(visited : Unresolved, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitUnresolvedOperation(visited : UnresolvedOperation, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitUnresolvedProperty(visited : UnresolvedProperty, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitUnresolvedType(visited : UnresolvedType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitUsing(visited : Using, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitVirtualType(visited : VirtualType, ctxt : StructureVisitorContext) is do
+
+end
+
+operation visitVoidType(visited : VoidType, ctxt : StructureVisitorContext) is do
+
+end
+	
+}
+
+class StructureVisitorContext {
+
+}

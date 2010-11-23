@@ -1,0 +1,284 @@
+/* $Id:$ 
+ * Creation : November 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
+
+using kmt::language::helpers::structure
+
+aspect class AbstractOperation {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitAbstractOperation(self, ctxt)
+	end
+}
+
+aspect class AbstractProperty {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitAbstractProperty(self, ctxt)
+	end
+}
+
+aspect class Class {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitClass(self, ctxt)
+	end
+}
+
+aspect class ClassDefinition {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitClassDefinition(self, ctxt)
+	end
+}
+
+aspect class Constraint {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitConstraint(self, ctxt)
+	end
+}
+
+aspect class DataType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitDataType(self, ctxt)
+	end
+}
+
+aspect class Enumeration {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitEnumeration(self, ctxt)
+	end
+}
+
+aspect class EnumerationLiteral {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitEnumerationLiteral(self, ctxt)
+	end
+}
+
+aspect class FunctionType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitFunctionType(self, ctxt)
+	end
+}
+
+aspect class GenericTypeDefinition {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitGenericTypeDefinition(self, ctxt)
+	end
+}
+
+aspect class Model {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitModel(self, ctxt)
+	end
+}
+
+aspect class ModelType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitModelType(self, ctxt)
+	end
+}
+
+aspect class ModelTypeVariable {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitModelTypeVariable(self, ctxt)
+	end
+}
+
+aspect class ModelingUnit {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitModelingUnit(self, ctxt)
+	end
+}
+
+aspect class MultiplicityElement {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitMultiplicityElement(self, ctxt)
+	end
+}
+
+aspect class NamedElement {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitNamedElement(self, ctxt)
+	end
+}
+
+aspect class Object {
+	operation accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitObject(self, ctxt)
+	end
+}
+
+aspect class ObjectTypeVariable {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitObjectTypeVariable(self, ctxt)
+	end
+}
+
+aspect class Operation {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitOperation(self, ctxt)
+	end
+}
+
+aspect class Package {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitPackage(self, ctxt)
+	end
+}
+
+aspect class Parameter {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitParameter(self, ctxt)
+	end
+}
+
+aspect class ParameterizedType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitParameterizedType(self, ctxt)
+	end
+}
+
+aspect class PrimitiveType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitPrimitiveType(self, ctxt)
+	end
+}
+
+aspect class ProductType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitProductType(self, ctxt)
+	end
+}
+
+aspect class Property {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitProperty(self, ctxt)
+	end
+}
+
+aspect class Require {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitRequire(self, ctxt)
+	end
+}
+
+aspect class Resource {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitResource(self, ctxt)
+	end
+}
+
+aspect class ResourceGroup {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitResourceGroup(self, ctxt)
+	end
+}
+
+aspect class SimpleResource {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitSimpleResource(self, ctxt)
+	end
+}
+
+aspect class Tag {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTag(self, ctxt)
+	end
+}
+
+aspect class Type {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitType(self, ctxt)
+	end
+}
+
+aspect class TypeContainer {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTypeContainer(self, ctxt)
+	end
+}
+
+aspect class TypeDefinition {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTypeDefinition(self, ctxt)
+	end
+}
+
+aspect class TypeDefinitionContainer {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTypeDefinitionContainer(self, ctxt)
+	end
+}
+
+aspect class TypeMapping {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTypeMapping(self, ctxt)
+	end
+}
+
+aspect class TypeVariable {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitTypeVariable(self, ctxt)
+	end
+}
+
+aspect class TypeVariableBinding {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitTypeVariableBinding(self, ctxt)
+	end
+}
+
+aspect class TypedElement {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitTypedElement(self, ctxt)
+	end
+}
+
+aspect class Unresolved {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitUnresolved(self, ctxt)
+	end
+}
+
+aspect class UnresolvedOperation {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitUnresolvedOperation(self, ctxt)
+	end
+}
+
+aspect class UnresolvedProperty {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitUnresolvedProperty(self, ctxt)
+	end
+}
+
+aspect class UnresolvedType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+		visitor.visitUnresolvedType(self, ctxt)
+	end
+}
+
+aspect class Using {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitUsing(self, ctxt)
+	end
+}
+
+aspect class VirtualType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitVirtualType(self, ctxt)
+	end
+}
+
+aspect class VoidType {
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+		visitor.visitVoidType(self, ctxt)
+	end
+}
