@@ -10,12 +10,17 @@
 package prunerGenerator;
 
 require kermeta
+require "ECorePruningAspect.kmt"
 require "Pruning.ecore"
 require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EClassHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
+require "ModelAspectGenerator.kmt"
+require "PrunerClassGenerator.kmt"
 
 using kermeta::standard
 using ecore
 using kermeta::persistence
+using kermeta::io
 
 
 class PrunerGenerator {
@@ -23,116 +28,128 @@ class PrunerGenerator {
 	
 	reference metamodel : EPackage
 	
-	attribute pathPruner : String
-	
-	attribute prunerName : String
-	
 	attribute modelURI : String
 	
+	attribute prunerClass : EClass
+	
+	attribute aspectGenerator : ModelAspectGenerator
+	
+	attribute prunerClassGenerator : PrunerClassGenerator
+	
+	reference mainClasses : EClass[0..*]
+	
 
-	operation initialise(pruningData : Pruning, metamodel : EPackage, pathPruner : String, 
+	operation initialise(pruningData : Pruning, metamodel : EPackage,
 						prunerName : String, modelURI : String) : PrunerGenerator is do
 		result := self
 		self.pruningData := pruningData
 		self.metamodel   := metamodel
-		self.pathPruner  := pathPruner
-		self.prunerName	 := prunerName
 		self.modelURI 	 := modelURI
-	end
+		aspectGenerator  := ModelAspectGenerator.new.initialise(self)
+		prunerClassGenerator := PrunerClassGenerator.new.initialise(self)
 	
-	operation getVarName(name : String, withS : Boolean) : String is do
-		result := "the" + name
+		self.prunerClass := EClass.new
+		self.prunerClass.name := prunerName
 		
-		if(withS) then result := result + "s" end
+		self.pruningData.requiredElements.each{elt |
+			elt.srcRelations.each{src | src.relation.eContainingClass.sourceRelations.add(src.relation) }
+			elt.targetRelations.each{target | target.eContainingClass.targetRelations.add(target) }
+		}
+		
+		defineClassesToAspectise()
 	end
 	
+
 	operation getPrunerVarName() : String is do
-		result := getVarName(prunerName, false)
-	end
-	
-	operation getVarNameClassifier(classifier : EClassifier) : String is do
-		result := getVarName(classifier.name, false)
-	end
-	
-	operation getVarNameSet(classifier : EClassifier) : String is do
-		result := getVarName(classifier.name, true)
+		result := "the" + prunerClass.name
 	end
 	
 	
-	operation getClassesToAspectise() : Bag<EClass> is do
-		result := Bag<EClass>.new
-		
+	
+	operation defineClassesToAspectise() : Void is do
 		pruningData.requiredElements.each{elt | 
-			elt.srcRelations.each{src | addReferenceClass(src.relation, result, true) }
-			elt.origins.each{origin | addReferenceClass(origin, result, false) }
+			elt.srcRelations.each{src | addReferenceClass(src.relation, true) }
+			elt.origins.each{origin | addReferenceClass(origin, false) }
 		}
 	end
 	
 	
-	operation addReferenceClass(ref : EReference, classes : Bag<EClass>, withContainingClass : Boolean) : Void is do
-		if(withContainingClass and not classes.contains(ref.eContainingClass)) then
-			classes.add(ref.eContainingClass)
+	operation addReferenceClass(ref : EReference, withContainingClass : Boolean) : Void is do
+		if(withContainingClass and not mainClasses.contains(ref.eContainingClass)) then
+			mainClasses.add(ref.eContainingClass)
+			ref.eContainingClass.main := true
 		end
 		if(ref.eType.isKindOf(EClass)) then
 			var clazz : EClass init ref.eType.asType(EClass)
 			
-			if(not classes.contains(clazz)) then
-				classes.add(clazz)
+			if(not mainClasses.contains(clazz)) then
+				mainClasses.add(clazz)
+				clazz.main := false
 			end
 		end
 	end
 	
 	
 	operation generatePruner() : Void is do
-		saveFile(generatePruningCode())
-		saveFile(generateModelAspectCode())
+		prunerClassGenerator.generateCode()
+		aspectGenerator.generateCode()
 	end
 	
 	
-	operation generatePruningCode() : String is do
+	operation getPackageFromClasses(classes : EClass[0..*]) : String is do
+		var packagesName : Bag<String> init Bag<String>.new
+		var name : String
+		
 		result := ""
-	end
-	
-	
-	operation generateModelAspectCode() : String is do
-		result := "require kermeta\nrequire \"" + modelURI + "\"\nrequire \"" + pathPruner + prunerName + ".kmt\"\n\nusing kermeta::standard\n\n"
 		
-		var classes : Bag<EClass> init getClassesToAspectise()
-		classes.each{cl | result := result + generateClassAspect(cl, classes) }
-	end
-	
-	
-	
-	operation generateClassAspect(clazz : EClass, classes : Bag<EClass>) : String is do
-		var isChild : Boolean init classes.exists{cl | cl.isSuperTypeOf(clazz) }
-		var opDeclaration : String
+		classes.each{clazz | 
+			name := clazz.ePackage.getQualifiedName("::")
+			if(not packagesName.contains(name)) then
+				packagesName.add(name)
+				result := result + "package " + name + ";\n"
+			end 
+		}
 		
-		if(isChild) then opDeclaration := "method" else opDeclaration := "operation" end
-	
-		result := "aspect class " + clazz.name + " {\n"
-		result := result + "\t" + opDeclaration + " visit(" + getPrunerVarName() + " : " + prunerName + ") : void is do\n"
-		result := result + "\tend\n"
-		result := result + "}\n"
-	end
-	
-	
-	
-	operation saveFile(code : String) : Void is do
-		stdio.writeln(code)
+		if(packagesName.size()>1) then
+			stdio.writeln("FIXME: aspects from several packages is not managed yet.")
+		end
 	end
 }
 
+
+abstract class Generator {
+	reference prunerGenerator : PrunerGenerator
+
+	attribute generatedCode : String
+	
+	operation generateCode() : Void is abstract
+}
 
 
 
 class Test {
 	operation main() : Void is do
+		generateSM()
+	end
+	
+	
+	operation generateSM() : Void is do
 		var modelURI	: String init "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore"
 		var pruningSM 	: Pruning init getPruningModel("platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/SM.prunergenerator")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
-		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, "", "StateMachinePruning", modelURI)
+		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, "StateMachinePruning", modelURI)
 		
 		pruner.generatePruner()
+//		stdio.writeln(pruner.modelAspectCode)
+		stdio.writeln(pruner.prunerClassGenerator.generatedCode)
+		saveCode(pruner, "../SM/output/")
+	end
+	
+	
+	operation saveCode(pruner : PrunerGenerator, path : String) : Void is do
+		var file : FileIO init FileIO.new
+		file.writeTextFile(path + pruner.prunerClass.name + "Aspect.kmt", pruner.aspectGenerator.generatedCode)
+		file.writeTextFile(path + pruner.prunerClass.name + ".kmt", pruner.prunerClassGenerator.generatedCode)
 	end
 	
 	
@@ -206,7 +223,7 @@ class Test {
    		repository.registerEcoreFile(uriPruningMM)          
    		var resource : Resource init repository.createResource(uriPruningModel, uriPruningMM)
        	resource.load()
-		
+
 		from var it : Iterator<Object> init resource.instances.iterator
 		until it.isOff
 		loop
@@ -217,8 +234,3 @@ class Test {
 		end
 	end
 }
-
-
-
-
-

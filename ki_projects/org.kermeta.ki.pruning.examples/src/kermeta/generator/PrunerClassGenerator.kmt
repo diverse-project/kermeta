@@ -1,0 +1,76 @@
+/*
+ * Creation : November 23, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package prunerGenerator;
+
+require kermeta
+require "PrunerGenerator.kmt"
+
+using ecore
+using kermeta::standard
+
+
+class PrunerClassGenerator inherits Generator {
+
+	reference classContainer : EClass[0..*]
+
+	operation initialise(pruner : PrunerGenerator) : PrunerClassGenerator is do
+		self.prunerGenerator := pruner
+		result := self
+	end
+	
+	
+	method generateCode() : Void is do
+		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses)
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + 
+						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n\nusing kermeta::standard\n\n"
+		generatedCode := generatedCode + "abstract class " + prunerGenerator.prunerClass.name + " {\n"
+		generatedCode := generatedCode + defineContainers() + "\n"
+		
+		if(prunerGenerator.pruningData.radius) then
+			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
+		end
+		
+		generatedCode := generatedCode + defineRequiredAttributes() + "\n"
+		
+		generatedCode := generatedCode + "}\n"
+	end
+	
+	
+	
+	operation defineRequiredAttributes() : String is do
+		result := ""
+		
+/*		prunerGenerator.pruningData.requiredElements.each{req |
+			req.srcRelations.each{rel |
+				
+			}
+		}*/
+	end
+	
+	
+	
+	operation defineContainers() : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.requiredElements.each{req |
+			req.origins.each{origin |
+				if(not classContainer.contains(origin.eContainingClass)) then
+					result := result + "\treference " +  origin.eContainingClass.getVarNameClassifier() + " : " + origin.eContainingClass.name + "\n"
+					classContainer.add(origin.eContainingClass)
+				end
+			}
+		}
+	end
+}
+
+
+
+
+
+
+
+

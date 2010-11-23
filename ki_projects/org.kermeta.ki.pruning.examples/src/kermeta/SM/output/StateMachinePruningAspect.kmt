@@ -1,6 +1,6 @@
 package ex::stateMachine;
 require kermeta
-require "StateMachine.kmt"
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore"
 require "StateMachinePruning.kmt"
 
 using kermeta::standard

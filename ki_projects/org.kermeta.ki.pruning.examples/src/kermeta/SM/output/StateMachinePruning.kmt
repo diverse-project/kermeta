@@ -1,0 +1,12 @@
+package ex::stateMachine;
+require kermeta
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore"
+require "StateMachinePruningAspect.kmt"
+
+using kermeta::standard
+
+abstract class StateMachinePruning {
+	reference theStateMachine : StateMachine
+
+	attribute radius : Integer
+}

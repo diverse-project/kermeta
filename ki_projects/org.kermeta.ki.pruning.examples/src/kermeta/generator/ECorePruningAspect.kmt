@@ -1,0 +1,182 @@
+/*
+ * Creation : November 23, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EClassHelper.kmt"
+
+using kermeta::standard
+
+aspect class EClass {
+	attribute main : Boolean
+	
+	reference sourceRelations : EReference[0..*]
+	
+	reference targetRelations : EReference[0..*]
+	
+	reference visitOperation : EOperation[0..1]
+	
+	reference addOperation : EOperation[0..1]
+	
+	
+	operation getVarNameClassifier() : String is do
+		result := getVarName(name, false)
+	end
+	
+	
+	operation getVarNameSet() : String is do
+		result := getVarName(name, true)
+	end
+	
+	
+	operation getVarName(name : String, withS : Boolean) : String is do
+		result := "the" + name
+		if(withS) then result := result + "s" end
+	end
+
+
+	operation getRequiredAttributeName() : String is do
+		result := "required" + name + "s"
+	end
+
+
+	operation getAddedAttributeName() : String is do
+		result := "added" + name + "s"
+	end
+
+
+	operation addOperationToSuperTypes(op : EOperation, isAddOperation : Boolean) : Void is do
+		if(isAddOperation) then
+			addOperation := op
+			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(addOperation, isAddOperation) }
+		else
+			visitOperation := op
+			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(visitOperation, isAddOperation) }
+		end
+	end	
+
+	
+	
+	operation createVisitOperation(classes : EClass[0..*], prunerClass : EClass) : Void is do
+		if(visitOperation.isVoid) then
+			var param : EParameter
+			var bagClass : EClass
+			
+			visitOperation := EOperation.new
+			visitOperation.name := "visit"
+			param := EParameter.new
+			param.name := "the" + prunerClass.name
+			param.eType := prunerClass
+			visitOperation.eParameters.add(param)
+			
+			if(not main.isVoid and main) then
+				addParametersVisitAddMethods(visitOperation, classes)
+			end
+			
+			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(visitOperation, false) }
+		end
+	end
+	
+	
+	operation createAddOperation(classes : EClass[0..*], prunerClass : EClass) : Void is do
+		if(addOperation.isVoid) then
+			var param : EParameter
+			addOperation := EOperation.new
+			addOperation.name := "add"
+			
+			if(sourceRelations.empty()) then
+				if(not targetRelations.empty()) then
+					//FIXME What to do when several relations?
+					var ref : EReference init targetRelations.one()
+					addOperation.name := addOperation.name + ref.eType.name
+				end
+			else
+				//FIXME What to do when several relations?
+				var ref : EReference init sourceRelations.one()
+				addOperation.name := addOperation.name + ref.eType.name 
+			end
+			
+			addOperation.name := addOperation.name + "s"
+			
+			param := EParameter.new
+			param.name := "the" + prunerClass.name
+			param.eType := prunerClass
+			addOperation.eParameters.add(param)
+
+		 	if(main.isVoid or not main) then
+				addParametersVisitAddMethods(addOperation, classes)
+			end
+			
+			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(addOperation, true) }
+		end
+	end
+	
+	
+	operation addParametersVisitAddMethods(op : EOperation, classes : EClass[0..*]) : Void is do
+		var param : EParameter
+		
+		classes.each{clazz | clazz.targetRelations.each{rel |
+				var clazzRel : EClass init rel.eType.asType(EClass)
+				var varName : String init clazzRel.getVarNameSet()
+				
+				param := EParameter.new
+				param.name := varName
+				param.eType := EClass.new
+				param.eType.name := "Bag<" + clazzRel.name + ">"
+				op.eParameters.add(param)
+			}
+		}
+	end
+	
+	
+	operation getOnSomethingAddedMethodName() : String is do
+		result := "on" + name + "Added"
+	end
+	
+	
+	operation getAddedSomethingAttributeName() : String is do
+		result := "added" + name + "s"
+	end
+}
+
+
+
+aspect class EOperation {
+	operation getDeclarationHeader() : String is do
+		result := getHeader(true, false)
+	end
+	
+	operation getCallHeader() : String is do
+		result := getHeader(false, false)
+	end
+	
+	
+	operation getSuperCall() : String is do
+		result := getHeader(false, true)
+	end
+	
+	
+	operation getHeader(withClasses : Boolean, isSuper : Boolean) : String is do
+		var nbParams : Integer init eParameters.size()
+		var i : Integer init 1
+		
+		if(isSuper) then result := "super"
+		else result := name end
+		
+		result := result + "("
+		
+		eParameters.each{param |
+			result := result + param.name
+			if(withClasses) then result := result + " : " + param.eType.name end
+			if(i<nbParams) then result := result + ", " end
+			i := i + 1
+		}
+		
+		result := result + ")"
+	end
+}

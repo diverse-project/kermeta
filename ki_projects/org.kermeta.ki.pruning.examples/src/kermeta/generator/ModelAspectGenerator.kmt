@@ -1,0 +1,139 @@
+/*
+ * Creation : November 23, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package prunerGenerator;
+
+require kermeta
+require "PrunerGenerator.kmt"
+
+using ecore
+using kermeta::standard
+
+
+class ModelAspectGenerator inherits Generator {
+	operation initialise(pruner : PrunerGenerator) : ModelAspectGenerator is do
+		self.prunerGenerator := pruner
+		result := self
+	end
+	
+	
+	method generateCode() : Void is do
+		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses)
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + prunerGenerator.prunerClass.name + ".kmt\"\n\nusing kermeta::standard\n\n"
+		prunerGenerator.mainClasses.each{cl |
+			// Creation of ECore operations linked to the class.
+			cl.createVisitOperation(prunerGenerator.mainClasses, prunerGenerator.prunerClass)
+			cl.createAddOperation(prunerGenerator.mainClasses, prunerGenerator.prunerClass)
+		}
+		prunerGenerator.mainClasses.each{cl | generatedCode := generatedCode + generateClassAspect(cl) }
+	end
+	
+	
+	
+		
+	operation generateClassAspect(clazz : EClass) : String is do
+		var isChild : Boolean init prunerGenerator.mainClasses.exists{cl |
+			if(cl.isSuperTypeOf(clazz)) then
+				cl.main := true
+				true
+			else
+				false
+			end
+		}
+
+		result := "aspect class " + clazz.name + " {\n"
+
+		if(not isChild) then
+			result := result + "\tattribute visited : Boolean\n\n" 
+		end
+
+		result := result + generateVisitOperation(clazz, isChild) + "\n"
+		result := result + generateAddRelations(clazz, isChild)
+		result := result + "}\n"
+	end
+	
+	
+	
+	
+	operation generateAddRelations(clazz : EClass, isChild : Boolean) : String is do
+		var opDeclaration : String
+
+		if(isChild) then 	opDeclaration := "method"
+		else 				opDeclaration := "operation" end
+		
+		result := "\t" + opDeclaration + " " + clazz.addOperation.getDeclarationHeader() + " : Void is do\n"
+		
+		clazz.sourceRelations.each{rel |
+			var clazzRel : EClass init rel.eType.asType(EClass)
+			var varName : String init clazzRel.getVarNameClassifier()
+			result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + ".visited"
+			
+			clazzRel.targetRelations.each{tar |
+				result := result + " and " + varName + "." + tar.name + ".visited"
+			}
+			
+			result := result + ") then\n\t\t\t\t" + varName + ".visit(" + prunerGenerator.getPrunerVarName() + ")\n\t\t\tend\n\t\t}\n"
+		}
+
+		if(not clazz.targetRelations.empty) then
+			result := result + "\t\tif(not self.visited) then\n"
+			
+			clazz.targetRelations.each{rel |
+				var clazzRel : EClass init rel.eType.asType(EClass)
+				var varName : String init clazzRel.getVarNameSet()
+				
+				result := result + "\t\t\tif(not self." + rel.name + ".visited) then " + varName + ".add(self." + rel.name + ") end\n"
+			}
+			
+			result := result + "\t\tend\n"
+		end
+		
+		result := result + "\tend\n"
+	end
+
+
+
+	operation generateVisitOperation(clazz : EClass, isChild : Boolean) : String is do
+		var opDeclaration : String
+
+		// Definition of the type of the operation.
+		if(isChild) then 	opDeclaration := "method"
+		else 				opDeclaration := "operation" end
+
+		// Adding the declaration of method visit
+		result := "\t" + opDeclaration + " " + clazz.visitOperation.getDeclarationHeader() + " : Void is do\n" 
+		
+		// If the current clazz is the sub class of a class that defines method visit, the super call must be performed.
+		if(isChild) then 
+			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
+		else
+			// Adding the body of method visit
+			var prunerName : String init prunerGenerator.getPrunerVarName()
+			// Setting the class as visited.
+			result := result + "\t\tself.visited := true\n"
+			// Adding a call to the method that notify the pruner that an object of a given type has been added.
+			result := result + "\t\t" + prunerName + "." + clazz.getOnSomethingAddedMethodName() + "(self)\n"
+			// Adding the added object to its container in the pruner.
+			result := result + "\t\t" + prunerName + "." + clazz.getAddedSomethingAttributeName() + ".add(self)\n"
+		end
+		
+		clazz.sourceRelations.each{rel |
+			var clazzCalled : EClass init rel.eType.asType(EClass)
+			var varName : String init clazzCalled.getVarNameClassifier()
+			var callAddMethodHeader : String init "." +  clazzCalled.addOperation.getCallHeader()
+
+			result := result + "\t\tself." + rel.name
+			
+			if(rel.upperBound==-1 or rel.upperBound>1) then
+				result := result + ".each{" + varName + " | " + varName + callAddMethodHeader + " }\n"
+			else
+				result := result + "if(not self." + varName + ".isVoid()) then self." + varName + callAddMethodHeader + " end\n"
+			end
+		}
+		
+		result := result + "\tend\n"
+	end
+}

@@ -1,14 +1,5 @@
-/* $Id:$ 
- * Creation : November 17, 2010
- * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
- */
 @mainClass "ex::stateMachine::Test"
 @mainOperation "main"
-
-
 package ex::stateMachine;
 
 require kermeta
@@ -16,19 +7,18 @@ require "StateMachinePruningAspect.kmt"
 
 using kermeta::standard
 
-
 abstract class StateMachinePruning {
 	reference stateMachine : StateMachine
-	
-	reference requiredStates : OutputState[0..*]
-	
+
 	attribute radius : Integer
-	
+
+	reference requiredStates : OutputState[0..*]
+
 	reference addedStates : Bag<State>
-	
+
 	reference addedTransitions : Bag<Transition>
-	
-	
+
+
 	operation initialise(stateMachine : StateMachine, requiredStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do
 		result := self
 		addedStates := Bag<State>.new
@@ -37,17 +27,17 @@ abstract class StateMachinePruning {
 		self.radius := radius
 		self.requiredStates.addAll(requiredStates)
 	end
-	
-	
+
+
 	operation launch() : Void is do
 		preparePruning()
-		
+
 		var theStates  : Bag<State> init Bag<State>.new
-		var theStates2 : Bag<State> init Bag<State>.new
+		var theStates2 : Bag<InputState> init Bag<InputState>.new
 		var currentRadius : Integer init 0
-		
+
 		requiredStates.each{theState | theStates.add(theState) }
-		
+
 		from true
 		until theStates.empty or currentRadius>radius
 		loop
@@ -56,24 +46,23 @@ abstract class StateMachinePruning {
 					theState.visit(self, theStates2)
 				end
 			}
-			
+
 			theStates.clear()
 			theStates2.each{theState | theStates.add(theState) }
 			theStates2.clear()
 			currentRadius := currentRadius + 1
 		end
-		
-		addedStates.each{theState | theState.addRelations(self) }
-	end
 
+		addedStates.each{theState | theState.addTransitions(self) }
+	end
 
 	operation preparePruning() : Void is do
 		stateMachine.transitions.each{theTransition | theTransition.visited := false }
 		stateMachine.states.each{theState | theState.visited := false }
 	end
-	
+
 	operation onStateAdded(theState : State) : Void is abstract
-	
+
 	operation onTransitionAdded(theTransition : Transition) : Void is abstract
 }
 
