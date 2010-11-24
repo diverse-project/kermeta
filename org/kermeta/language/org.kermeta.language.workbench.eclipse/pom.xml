@@ -1,0 +1,96 @@
+<!-- $Id: $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.workbench.eclipse -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.workbench.eclipse</artifactId>
+    <packaging>bundle</packaging>
+    <name>K2 :: Workbench for Eclipse</name>
+
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+       <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+		<plugins>
+			<plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <!-- <Export-Package>
+                        org.kermeta.utils.logger.eclipse.*
+                        </Export-Package> -->
+                        <Import-Package>
+							org.osgi.framework;version="[1.5,2)",
+							org.slf4j;version="${slf4j.version.range}",
+							*
+                        </Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <!-- <_versionpolicy>[${version;==;${@}},${version;+;${@}})</_versionpolicy> -->
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-SymbolicName>org.kermeta.language.workbench.eclipse; singleton:=true</Bundle-SymbolicName>
+                    </instructions>
+                </configuration>
+            </plugin>
+			<!-- Synch MANIFEST for eclipse user -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/META-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/META-INF"/>
+                                </copy>
+                                <copy todir="${project.basedir}/ART2-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/ART2-INF"/>
+                                </copy>
+                                <copy todir="${project.basedir}/OSGI-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/OSGI-INF"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+    </build>
+    
+</project>
