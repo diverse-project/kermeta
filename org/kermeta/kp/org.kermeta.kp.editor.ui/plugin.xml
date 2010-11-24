@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.kermeta.kp.editor.ui.KptUIMetaInformation" id="org.kermeta.kp.editor.ui.KptUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.kermeta.kp.editor.ui.KptEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="kpt" icon="icons/editor_icon.gif" id="org.kermeta.kp.editor.ui.KptEditor" name="EMFText kpt Editor">
+		</editor>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.kermeta.kp.editor.ui.KptPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Kpt Text Editor" id="org.kermeta.kp.editor.ui.KptPreferencePage" class="org.kermeta.kp.editor.ui.KptPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.kermeta.kp.editor.ui.KptSyntaxColoringPreferencePage" class="org.kermeta.kp.editor.ui.KptSyntaxColoringPreferencePage" category="org.kermeta.kp.editor.ui.KptPreferencePage">
+		</page>
+		<page name="Brackets" id="org.kermeta.kp.editor.ui.KptBracketPreferencePage" class="org.kermeta.kp.editor.ui.KptBracketPreferencePage" category="org.kermeta.kp.editor.ui.KptPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.kermeta.kp.editor.ui.KptOccurrencePreferencePage" class="org.kermeta.kp.editor.ui.KptOccurrencePreferencePage" category="org.kermeta.kp.editor.ui.KptPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kp.editor.ui.KptNewFileWizard" id="org.kermeta.kp.editor.ui.KptNewFileWizard" name="EMFText .kpt file">
+		</wizard>
+	</extension>
+	
+</plugin>

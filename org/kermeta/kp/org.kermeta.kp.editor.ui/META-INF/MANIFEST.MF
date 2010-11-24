@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Private-Package: org.kermeta.kp.editor.ui,icons,.,css
+Ignore-Package: org.eclipse.jface.operation,org.eclipse.swt.custom,org
+ .eclipse.jface.text.rules,org.eclipse.emf.ecore.resource.impl,org.ecl
+ ipse.emf.common.notify,org.eclipse.swt.browser,org.eclipse.ui.ide,org
+ .eclipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.ui.views.co
+ ntentoutline,org.eclipse.emf.ecore.resource,org.eclipse.jface.text.so
+ urce,org.eclipse.jface.resource,org.eclipse.ui,org.antlr.runtime,org.
+ eclipse.emf.common.command,org.eclipse.ui.part,org.eclipse.swt.layout
+ ,org.eclipse.jface.preference,org.eclipse.swt.graphics,org.osgi.frame
+ work,org.eclipse.emf.edit.domain,org.eclipse.ui.editors.text,org.ecli
+ pse.jface.text.source.projection,org.eclipse.jface.text,org.eclipse.j
+ face.wizard,org.eclipse.core.runtime,org.eclipse.swt.program,org.ecli
+ pse.emf.edit.ui.provider,org.eclipse.jface.action,org.eclipse.emf.eco
+ re.provider,org.eclipse.core.resources,org.eclipse.jface.viewers,org.
+ eclipse.ui.dialogs,org.eclipse.jface.text.hyperlink,org.eclipse.ui.te
+ xteditor,org.eclipse.emf.common.util,org.eclipse.swt,org.eclipse.swt.
+ events,org.eclipse.ui.views.properties,org.eclipse.ui.plugin,org.ecli
+ pse.jface.text.contentassist,org.eclipse.core.runtime.jobs,org.eclips
+ e.jface.text.presentation,org.eclipse.jface.util,org.eclipse.emf.edit
+ .provider,org.eclipse.swt.widgets,org.eclipse.emf.edit.provider.resou
+ rce,org.eclipse.jface.dialogs
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Built-By: root
+Tool: Bnd-0.0.311
+Bundle-Localization: plugin
+Bundle-Name: Kermeta :: KP Editor UI
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: org.eclipse.core.runtime,							org.eclipse.core.resou
+ rces;visibility:=reexport,							org.eclipse.core.commands,							org
+ .eclipse.ui,							org.eclipse.ui.ide,							org.eclipse.ui.views,			
+ 				org.eclipse.jface,								org.eclipse.jface.text,							org.eclip
+ se.ui.editors,							org.eclipse.text,							org.eclipse.ui.workbench
+ ,							org.eclipse.ui.workbench.texteditor,							org.kermeta.kp.mod
+ el,							org.antlr.runtime,							org.eclipse.emf.ecore.resource;vis
+ ibility:=reexport
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1286466711961
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.kermeta.kp.editor.ui.KptUIPlugin
+Bundle-SymbolicName: org.kermeta.kp.editor.ui;singleton:=true
+Import-Package: org.eclipse.core.runtime.preferences;version="3.2",org
+ .eclipse.emf.edit.domain,org.eclipse.ui.actions,org.kermeta.kp,org.ke
+ rmeta.kp.editor,org.kermeta.kp.editor.mopp,org.kermeta.kp.editor.util
+
