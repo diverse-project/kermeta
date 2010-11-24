@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <typeDefinitions xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEclipseLogger" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLoggerFactory" bean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLogger" requiredLibs="//@deployUnits.1 //@deployUnits.2 //@deployUnits.3 //@deployUnits.4" startMethod="start" stopMethod="stop">
+    <provided name="log" ref="//@typeDefinitions.0">
+      <mappings beanMethodName="process" serviceMethodName="process"/>
+    </provided>
+  </typeDefinitions>
+  <libraries name="org.kermeta.utils" subTypes="//@typeDefinitions.1"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT"/>
+  <deployUnits name="org.kermeta.language.model" url="mvn:org.kermeta.language/language.model"/>
+  <deployUnits name="org.kermeta.language.kp.model" url="mvn:org.kermeta.kp/kp.model"/>
+  <deployUnits name="org.kermeta.language.traceability.model" url="mvn:org.kermeta.traceability/traceability.model"/>
+  <deployUnits name="org.kermeta.language.api" url="mvn:org.kermeta.language/language.api"/>
+</art2:ContainerRoot>
