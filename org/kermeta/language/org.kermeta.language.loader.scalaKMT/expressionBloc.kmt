@@ -1,0 +1,42 @@
+do
+buttonPressed.button := button
+cbPressed.checkbox := checkbox
+spinnerValueChanged.spinner := spinner
+
+keysScroll.keys.add(key)
+keysScroll.keys.remove(key)
+
+key==27
+key!=27
+keysScroll.keys.size==1
+keysScroll.keys.size>1
+true
+false
+
+       press.px     := px
+       press.py     := py
+       press.button := button
+       press.target := press.getPickableAt(press.px, press.py, source)
+
+       scrolling.increment := scrolling.increment + (if(isUp) then -increment else increment end)
+       scrolling.px        := px
+       scrolling.py        := py
+       scrolling.target    := scrolling.getPickableAt(scrolling.px, scrolling.py, source)
+
+       keysScroll.px         := px
+       keysScroll.py         := py
+       keysScroll.object     := keysScroll.getPickableAt(px, py, source)
+       keysScroll.numberUp    := keysScroll.numberUp + if(isUp) then 1 else -1 end
+
+       dnd.pxEnd  := px
+       dnd.pyEnd  := py
+       dnd.target := dnd.getPickableAt(px, py, source)
+
+       dnd.pxStart := px
+       dnd.pyStart := py
+       dnd.pxEnd   := px
+       dnd.pyEnd   := py
+       dnd.button     := button
+       dnd.source  := dnd.getPickableAt(px, py, source)
+       dnd.target     := dnd.source
+end

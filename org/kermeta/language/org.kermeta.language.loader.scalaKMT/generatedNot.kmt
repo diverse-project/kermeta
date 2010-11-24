@@ -1,0 +1,274 @@
+package GEN {
+
+@CompilerIgnore "true"
+class String {
+
+@CompilerIgnore "true"
+operation equals(arg0:Object) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation toString() : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation hashCode() : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation compareTo(arg0:String) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation compareTo(arg0:Object) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation indexOf(arg0:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation indexOf(arg0:Integer,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation indexOf(arg0:String) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation indexOf(arg0:String,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Object) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Collection<Character>) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Collection<Character>,arg1:Integer,arg2:Integer) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Boolean) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Character) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Integer) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Long) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Float) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation valueOf(arg0:Double) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation charAt(arg0:Integer) : Character is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation codePointAt(arg0:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation codePointBefore(arg0:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation codePointCount(arg0:Integer,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation compareToIgnoreCase(arg0:String) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation concat(arg0:String) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation contentEquals(arg0:StringBuffer) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation copyValueOf(arg0:Collection<Character>,arg1:Integer,arg2:Integer) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+
+@CompilerIgnore "true"
+operation copyValueOf(arg0:Collection<Character>) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation endsWith(arg0:String) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation equalsIgnoreCase(arg0:String) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation format(arg0:String,arg1:Collection<Object>) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation getChars(arg0:Integer,arg1:Integer,arg2:Collection<Character>,arg3:Integer) : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation intern() : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation isEmpty() : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation lastIndexOf(arg0:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation lastIndexOf(arg0:Integer,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation lastIndexOf(arg0:String) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation lastIndexOf(arg0:String,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation length() : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation matches(arg0:String) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation offsetByCodePoints(arg0:Integer,arg1:Integer) : Integer is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation regionMatches(arg0:Integer,arg1:String,arg2:Integer,arg3:Integer) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation regionMatches(arg0:Boolean,arg1:Integer,arg2:String,arg3:Integer,arg4:Integer) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation replace(arg0:Character,arg1:Character) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation replaceAll(arg0:String,arg1:String) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation replaceFirst(arg0:String,arg1:String) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation split(arg0:String,arg1:Integer) : Collection<String> is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation split(arg0:String) : Collection<String> is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation startsWith(arg0:String,arg1:Integer) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation startsWith(arg0:String) : Boolean is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation substring(arg0:Integer) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation substring(arg0:Integer,arg1:Integer) : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation toCharArray() : Collection<Character> is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation toLowerCase() : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation toUpperCase() : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation trim() : String is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation wait(arg0:Long) : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation wait(arg0:Long,arg1:Integer) : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation wait() : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation notify() : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+@CompilerIgnore "true"
+operation notifyAll() : Void is do
+         throw kermeta::exception::NotImplementedException.new
+ end
+}
+
+}

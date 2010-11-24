@@ -1,0 +1,95 @@
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::exceptions
+
+package kermeta{
+package io{
+
+
+
+
+/* *************************************************
+ * Franck FLEUREY - 01/03/2007
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the EPL licence
+ *
+ * Implementation of Kermeta File Helper.
+ *************************************************** */
+ 
+/**
+ * Implementation of simple helpers to read ans write text files
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
+ */
+@CompilerIgnore "true"
+class FileIO
+{
+	/**
+	 * Writes a String in a text file
+	 */ 
+	operation writeTextFile(filename : String, text : String) : Void is do
+throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Writes a String in a text file by using a specific encoding
+	 */ 
+	operation writeTextFileWithEncoding(filename : String, text : String, encoding : String) : Void is do
+throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Reads a text file
+	 */ 
+	operation readTextFile(filename : String) : String is do
+	throw kermeta::exception::NotImplementedException.new
+	end
+
+}
+
+
+@CompilerIgnore "true"
+class StdIO
+{
+	/**
+	 * Writes the object to standard output
+	 */ 
+	operation write(object : String) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Writeln the object to error output
+	 */ 
+	operation errorln(object : String) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Writes the object to error output
+	 */ 
+	operation error(object : String) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Writeln the object to standard output
+	 */ 
+	operation writeln(object : String) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Reads a String from standard input
+	 */ 
+	operation read(prompt : String) : String is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+}
+
+
+}
+}
+

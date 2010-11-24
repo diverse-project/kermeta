@@ -1,0 +1,38 @@
+/* $Id:$
+ * Creation : January 26, 2010
+ * Licence  : EPL
+ * Copyright:
+ * Authors  :
+ *            ffouquet
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+require kermeta
+
+@drop "true"
+package p1{
+    @drop "true"
+    aspect abstract class Main
+    {
+	operation main(v : org::Type1, v2 : fr::irisa::Type2) : Void is do
+		var a : kermeta::standard::Integer
+		a := 4
+		stdio.writeln("Assignment value = ","")
+
+		if(true) then
+			stdio.writeln("if(true) = success")
+		else
+			stdio.writeln("if(true) = fail")
+		end
+
+		from var i : kermeta::standard::Integer init 0
+		until 2
+		loop
+			v1 := v1
+		end
+
+
+	end
+    }
+}

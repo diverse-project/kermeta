@@ -1,0 +1,108 @@
+/* $Id$
+ * Project : org.kermeta.language.loader.scalaKMT
+ * License : EPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 2010
+ * Authors : 
+ * 		Francois Fouquet <ffouquet@irisa.fr>
+ */
+
+package org.kermeta.scala.parser.sub
+
+import org.kermeta.language.structure._
+import org.kermeta.language.behavior._
+import org.kermeta.language.structure.impl._
+import org.kermeta.language.behavior.impl._
+import scala.collection.JavaConversions._
+
+/**
+ * Sub parser dedicated to parse ClassDefinition in KMt textual syntax
+ */
+trait KClassDefinitionParser extends KAbstractParser 
+                                with KInvParser
+                                with KAttributeParser
+                                with KOperationParser
+                                with KTagParser
+                                with KGenericTypeParser{
+
+  /* SUB PARSER MINIMAL CONTRACT */
+  def invariant : Parser[Constraint]
+  def annotation : Parser[Tag]
+  def attribute : Parser[Property]
+  def operation : Parser[Operation]
+  /* END CONTRACT */
+
+  def abstractModifier = opt("abstract")
+  def aspectModifier = opt("aspect")
+  def classDecl : Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ "class" ~ ident ~ opt(classGenericParems) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ { case aspectM ~ abstractM ~ _ ~ id1 ~params ~ parents ~ _ ~ members ~ _ =>
+      var newo =StructureFactory.eINSTANCE.createClassDefinition
+      newo.setName(id1.toString)
+      aspectM match {
+        case Some(_) =>  newo.setIsAspect(true)
+        case None => newo.setIsAspect(false)
+      }
+      abstractM match {
+        case Some(_) => newo.setIsAbstract(true)
+        case None => newo.setIsAbstract(false)
+      }
+      params match {
+        case None =>
+        case Some(paramsI) => {
+            paramsI.foreach{params =>
+              var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
+              ovar.setName(params)
+              newo.getTypeParameter.add(ovar)
+              newo.getContainedType.add(ovar)
+            }
+          }
+      }
+
+      parents match {
+        case None =>
+        case Some(parentI)=> {
+            parentI.foreach{parent=>
+              var newParent =StructureFactory.eINSTANCE.createUnresolvedType
+              newParent.setTypeIdentifier(parent.toString)
+              newo.getSuperType.add(newParent)
+              newo.getContainedType.add(newParent)
+            }
+          }
+      }
+
+      members.foreach{member => {
+          member match {
+            case m : Constraint => newo.getInv.add(m)
+            case m : Operation => {
+                newo.getOwnedOperation.add(m);
+                newo.getContainedType.add(m.getType) // TODO OPTIMISATION
+              }
+            case m : Property => newo.getOwnedAttribute.add(m)
+            case _ => println("class def add new member type")
+          }
+        }}
+      newo
+  }
+
+  private def classGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+
+
+
+  private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents }
+  // private def classMemberDecls = annotableClassMemberDecl +
+  private def annotableClassMemberDecl = (annotation?) ~ classMemberDecl ^^ { case e ~ e1 =>
+      e match {
+        case Some(_ @ annotation) => e1.getKOwnedTags.add(annotation)
+        case None => //NOTHING TO DO
+      }
+      e1
+  }
+
+  def classMemberDecl = ( invariant | operation | property | attribute ) //attribute | reference | operation ;
+
+
+
+  
+
+
+}
