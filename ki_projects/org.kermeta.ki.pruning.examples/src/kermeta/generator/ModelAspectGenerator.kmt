@@ -25,8 +25,8 @@ class ModelAspectGenerator inherits Generator {
 		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + prunerGenerator.prunerClass.name + ".kmt\"\n\nusing kermeta::standard\n\n"
 		prunerGenerator.mainClasses.each{cl |
 			// Creation of ECore operations linked to the class.
-			cl.createVisitOperation(prunerGenerator.mainClasses, prunerGenerator.prunerClass)
-			cl.createAddOperation(prunerGenerator.mainClasses, prunerGenerator.prunerClass)
+			cl.createVisitOperation(prunerGenerator)
+			cl.createAddOperation(prunerGenerator)
 		}
 		prunerGenerator.mainClasses.each{cl | generatedCode := generatedCode + generateClassAspect(cl) }
 	end

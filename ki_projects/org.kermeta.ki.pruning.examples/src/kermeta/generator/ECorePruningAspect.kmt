@@ -9,8 +9,10 @@ package ecore;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EClassHelper.kmt"
+require "PrunerGenerator.kmt"
 
 using kermeta::standard
+using prunerGenerator
 
 aspect class EClass {
 	attribute main : Boolean
@@ -62,7 +64,7 @@ aspect class EClass {
 
 	
 	
-	operation createVisitOperation(classes : EClass[0..*], prunerClass : EClass) : Void is do
+	operation createVisitOperation(prunerGenerator : PrunerGenerator) : Void is do
 		if(visitOperation.isVoid) then
 			var param : EParameter
 			var bagClass : EClass
@@ -70,12 +72,12 @@ aspect class EClass {
 			visitOperation := EOperation.new
 			visitOperation.name := "visit"
 			param := EParameter.new
-			param.name := "the" + prunerClass.name
-			param.eType := prunerClass
+			param.name := "the" + prunerGenerator.prunerClass.name
+			param.eType := prunerGenerator.prunerClass
 			visitOperation.eParameters.add(param)
 			
 			if(not main.isVoid and main) then
-				addParametersVisitAddMethods(visitOperation, classes)
+				addParametersVisitAddMethods(visitOperation, prunerGenerator)
 			end
 			
 			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(visitOperation, false) }
@@ -83,7 +85,7 @@ aspect class EClass {
 	end
 	
 	
-	operation createAddOperation(classes : EClass[0..*], prunerClass : EClass) : Void is do
+	operation createAddOperation(prunerGenerator : PrunerGenerator) : Void is do
 		if(addOperation.isVoid) then
 			var param : EParameter
 			addOperation := EOperation.new
@@ -104,12 +106,12 @@ aspect class EClass {
 			addOperation.name := addOperation.name + "s"
 			
 			param := EParameter.new
-			param.name := "the" + prunerClass.name
-			param.eType := prunerClass
+			param.name := "the" + prunerGenerator.prunerClass.name
+			param.eType := prunerGenerator.prunerClass
 			addOperation.eParameters.add(param)
 
 		 	if(main.isVoid or not main) then
-				addParametersVisitAddMethods(addOperation, classes)
+				addParametersVisitAddMethods(addOperation, prunerGenerator)
 			end
 			
 			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(addOperation, true) }
@@ -117,18 +119,32 @@ aspect class EClass {
 	end
 	
 	
-	operation addParametersVisitAddMethods(op : EOperation, classes : EClass[0..*]) : Void is do
+	operation addParametersVisitAddMethods(op : EOperation, prunerGenerator : PrunerGenerator) : Void is do
 		var param : EParameter
 		
-		classes.each{clazz | clazz.targetRelations.each{rel |
-				var clazzRel : EClass init rel.eType.asType(EClass)
-				var varName : String init clazzRel.getVarNameSet()
-				
-				param := EParameter.new
-				param.name := varName
-				param.eType := EClass.new
-				param.eType.name := "Bag<" + clazzRel.name + ">"
-				op.eParameters.add(param)
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			var clazz : EClass
+			var clazz2 : EClass
+			
+			// The type of each parameter can be different of the type defined in their class.
+			// E.g., if the class type is InputState, the parameter must be a State to accept other kind of states.
+			elt.targetRelations.each{rel |
+				if(rel.eType.isKindOf(EClass)) then
+					clazz := rel.eType.asType(EClass)
+					clazz2 := clazz
+					// Looking for a more general class.
+					elt.origins.each{origin |
+						if(origin.eType.isKindOf(EClass) and origin.eType.asType(EClass).isSuperTypeOf(clazz)) then
+							clazz := origin.eType.asType(EClass)
+						end
+					}
+					// Creation of the parameter.
+					param := EParameter.new
+					param.name := clazz2.getVarNameSet() // The name created using the real type of the class.
+					param.eType := EClass.new
+					param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
+					op.eParameters.add(param)
+				end
 			}
 		}
 	end

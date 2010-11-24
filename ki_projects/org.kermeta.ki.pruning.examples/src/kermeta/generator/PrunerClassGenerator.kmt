@@ -14,46 +14,242 @@ using kermeta::standard
 
 
 class PrunerClassGenerator inherits Generator {
-
 	reference classContainer : EClass[0..*]
+
+	reference classRequired : EClass[0..*]
+
+	reference classAdded : EClass[0..*]
+
 
 	operation initialise(pruner : PrunerGenerator) : PrunerClassGenerator is do
 		self.prunerGenerator := pruner
 		result := self
 	end
-	
-	
+
+
 	method generateCode() : Void is do
 		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses)
-		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + 
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" +
 						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n\nusing kermeta::standard\n\n"
 		generatedCode := generatedCode + "abstract class " + prunerGenerator.prunerClass.name + " {\n"
-		generatedCode := generatedCode + defineContainers() + "\n"
+		generatedCode := generatedCode + generateContainers() + "\n"
 		
 		if(prunerGenerator.pruningData.radius) then
 			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
 		end
 		
-		generatedCode := generatedCode + defineRequiredAttributes() + "\n"
+		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
+						 generateIntialiseOperation() + generateLaunchOperation() + generatePreparePruningOperation() +
+						 "\n" + generateAddOperations + "}\n"
+	end
+
+
+	operation generatePreparePruningOperation() : String is do
+		result := "\toperation preparePruning() : Void is do\n"
 		
-		generatedCode := generatedCode + "}\n"
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			elt.origins.each{rel |
+				var name : String init rel.eType.asType(EClass).getVarNameClassifier
+				result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
+							".each{" + name + " | " + name +".visited := false }\n"
+			}
+		}
+		
+		result := result + "\tend\n"
 	end
 	
 	
-	
-	operation defineRequiredAttributes() : String is do
+	operation generateAddOperations() : String is do
 		result := ""
 		
-/*		prunerGenerator.pruningData.requiredElements.each{req |
-			req.srcRelations.each{rel |
-				
+		classAdded.each{clazz |
+			result := result + "\toperation on" + clazz.name + "Added(" + clazz.getVarNameClassifier() + " : " + clazz.name + ") : Void is abstract\n"
+		}
+	end
+
+	
+	operation generateLaunchOperation() : String is do
+		var varClasses : Bag<EClass> init Bag<EClass>.new
+		var i : Integer
+		result := "\toperation launch() : Void is do\n"
+		result := result + "\t\tpreparePruning()\n\n"
+		
+		// Exploring the model to prune requires some variables.
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			// For source relations which type and container is the same class.
+			elt.srcRelations.each{src |
+				if(src.relation.eType==src.relation.eContainingClass and not varClasses.contains(src.relation.eContainingClass)) then
+					varClasses.add(src.relation.eContainingClass)
+				end
 			}
-		}*/
+			
+			var clazz : EClass
+			// When the type and container is not the same, we look at the target relations and their origins.
+			// We create one variable for each target relations. The type of this variable is the most super type defined in the sources.
+			elt.targetRelations.each{rel |
+				if(rel.eType.isKindOf(EClass)) then
+					clazz := rel.eType.asType(EClass)
+	
+					elt.origins.each{origin |
+						if(origin.eType.isKindOf(EClass) and origin.eType.asType(EClass).isSuperTypeOf(clazz)) then
+							clazz := origin.eType.asType(EClass)
+						end
+					}
+					
+					if(not varClasses.contains(clazz)) then
+						varClasses.add(clazz)
+					end
+				end
+			}
+		}
+		
+		varClasses.each{clazz |
+			result := result + "\t\tvar " + clazz.getVarNameSet() + "  : Bag<" + clazz.name + "> init Bag<" + clazz.name + ">.new\n"
+			result := result + "\t\tvar " + clazz.getVarNameSet() + "2 : Bag<" + clazz.name + "> init Bag<" + clazz.name + ">.new\n"
+		}
+		
+		// Creation of the variable that will count the radius level.
+		if(prunerGenerator.pruningData.radius) then
+			result := result + "\t\tvar currentRadius : Integer init 0\n\n" 
+		end
+		
+		// Initialisation of the variables using the given required objects.
+		classRequired.each{clazz |
+			var clazz2 : EClass init varClasses.detect{cl | cl==clazz or cl.isSuperTypeOf(clazz) }
+			
+			result := result + "\t\t" + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + 
+						clazz2.getVarNameSet() + ".add(" + clazz.getVarNameClassifier() + ") }\n"
+		}
+		
+		// Creation of the loop
+		result := result + "\n\t\tfrom true\n\t\tuntil ("
+		
+		i := 0
+		varClasses.each{clazz | 
+			if(i>0) then result := result + " and " end
+			result := result + clazz.getVarNameSet() + ".empty()"
+			i := i + 1
+		}
+		
+		result := result + ")"
+		
+		if(prunerGenerator.pruningData.radius) then
+			result := result + " or currentRadius>radius "
+		end
+		
+		result := result + "\n\t\tloop\n\t\t\t"
+		
+		varClasses.each{clazz |
+			var name  : String init clazz.getVarNameClassifier()
+			result := result + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(not " +
+					  name + ".visited) then\n\t\t\t\t\t" + name + ".visit(self, " + clazz.getVarNameSet() + "2)\n\t\t\t\tend\n\t\t\t}\n"
+		}
+		
+		result := result + "\n"
+		
+		varClasses.each{clazz |
+			var name  : String init clazz.getVarNameSet()
+			result := result + "\t\t\t" + name + ".clear()\n"
+			result := result + "\t\t\t" + name + "2.each{" + clazz.getVarNameClassifier() + " | " + name + ".add(" + clazz.getVarNameClassifier() + ") }\n"
+			result := result + "\t\t\t" + name + "2.clear()\n"
+		}
+		
+		if(prunerGenerator.pruningData.radius) then
+			result := result + "\t\t\tcurrentRadius := currentRadius + 1\n"
+		end
+
+		result := result + "\t\tend\n\n"
+		
+		classAdded.each{clazz |
+			if(not clazz.main.isVoid and clazz.main) then
+				result := result + "\t\t" + clazz.getAddedAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + clazz.getVarNameClassifier() +
+							"." + clazz.addOperation.name + "(self) }\n"
+			end
+		}
+		
+		result := result + "\tend\n\n"
+	end
+
+
+
+	operation generateIntialiseOperation() : String is do
+		var i : Integer init 0
+		result := "\toperation initialise("
+
+		classContainer.each{clazz |
+			if(i>0) then result := result + ", " end
+			result := result + clazz.getVarNameClassifier() + " : " + clazz.name
+			i := i + 1
+		}
+
+		classRequired.each{clazz |
+			result := result + ", " + clazz.getRequiredAttributeName() + " : bag " + clazz.name + "[0..*]"
+		}
+
+		if(prunerGenerator.pruningData.radius) then
+			result := result + ", radius : Integer"
+		end
+
+		result := result + ") : " + prunerGenerator.prunerClass.name + " is do \n"
+		result := result + "\t\tresult := self\n"
+
+		classAdded.each{clazz |
+			result := result + "\t\tself." + clazz.getAddedAttributeName() + " := Bag<" + clazz.name + ">.new\n"
+		}
+
+		classContainer.each{clazz |
+			result := result + "\t\tself." + clazz.getVarNameClassifier() + " := " + clazz.getVarNameClassifier() + "\n"
+		}
+
+		if(prunerGenerator.pruningData.radius) then
+			result := result + "\t\tself.radius := radius\n"
+		end
+
+		classRequired.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
+		}
+
+		result := result + "\tend\n\n"
+	end
+
+
+
+	operation generateAddedAttributes() : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.requiredElements.each{req |
+			req.origins.each{rel |
+				var clazz : EClass
+				
+				if(rel.eType.isKindOf(EClass)) then clazz := rel.eType.asType(EClass)
+				else clazz := void end
+
+				if(not clazz.isVoid and not classAdded.contains(clazz)) then
+					result := result + "\treference " + clazz.getAddedAttributeName() + " : Bag<" + clazz.name + ">\n\n"
+					classAdded.add(clazz)
+				end
+			}
+		}
+	end
+	
+	
+	operation generateRequiredAttributes() : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.requiredElements.each{req |
+			req.srcRelations.each{rel |
+				if(not classRequired.contains(rel.relation.eContainingClass)) then
+					result := result + "\treference " + rel.relation.eContainingClass.getRequiredAttributeName() +
+								" : " + rel.relation.eContainingClass.name + "[0..*]\n\n"
+					classRequired.add(rel.relation.eContainingClass)
+				end
+			}
+		}
 	end
 	
 	
 	
-	operation defineContainers() : String is do
+	operation generateContainers() : String is do
 		result := ""
 		
 		prunerGenerator.pruningData.requiredElements.each{req |
@@ -66,11 +262,3 @@ class PrunerClassGenerator inherits Generator {
 		}
 	end
 }
-
-
-
-
-
-
-
-

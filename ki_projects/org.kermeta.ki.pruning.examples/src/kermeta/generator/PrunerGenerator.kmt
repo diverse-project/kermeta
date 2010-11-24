@@ -91,9 +91,10 @@ class PrunerGenerator {
 	
 	
 	operation generatePruner() : Void is do
-		prunerClassGenerator.generateCode()
 		aspectGenerator.generateCode()
+		prunerClassGenerator.generateCode()
 	end
+	
 	
 	
 	operation getPackageFromClasses(classes : EClass[0..*]) : String is do

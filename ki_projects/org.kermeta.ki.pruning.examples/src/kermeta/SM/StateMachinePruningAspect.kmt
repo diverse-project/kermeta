@@ -6,7 +6,7 @@ require "StateMachinePruning.kmt"
 using kermeta::standard
 
 aspect class OutputState {
-	method visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<InputState>) : Void is do
+	method visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
 		super(theStateMachinePruning, theInputStates)
 		self.outgoingTransitions.each{theTransition | theTransition.addInputStates(theStateMachinePruning, theInputStates) }
 	end
@@ -28,7 +28,7 @@ aspect class Transition {
 		theStateMachinePruning.addedTransitions.add(self)
 	end
 
-	operation addInputStates(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<InputState>) : Void is do
+	operation addInputStates(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
 		if(not self.visited) then
 			if(not self.target.visited) then theInputStates.add(self.target) end
 		end
@@ -37,7 +37,7 @@ aspect class Transition {
 aspect class State {
 	attribute visited : Boolean
 
-	operation visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<InputState>) : Void is do
+	operation visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
 		self.visited := true
 		theStateMachinePruning.onStateAdded(self)
 		theStateMachinePruning.addedStates.add(self)
