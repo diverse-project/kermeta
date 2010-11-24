@@ -1,0 +1,12 @@
+package testExternPackage2;
+
+require "kermeta"
+
+using kermeta::standard
+
+// operation called in another package
+class Test_opcall2 {
+    operation operation_asg() : kermeta::standard::Integer is do
+        result := 4 * 3
+    end
+}

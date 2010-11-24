@@ -1,0 +1,156 @@
+
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+using kermeta::exceptions
+
+package kermeta{
+
+package emfpersitence{
+
+
+@CompilerIgnore "true"
+class Resource {        @CompilerIgnore "true"
+         operation load(arg0:Map<Object,Object>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation save(arg0:Map<Object,Object>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation delete(arg0:Map<Object,Object>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation unload() : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getURI() : String is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation isLoaded() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getAllContents() : Iterator<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getContents() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getEObject(arg0:String) : Object is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getErrors() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getResourceSet() : ResourceSet is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getTimeStamp() : Long is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getURIFragment(arg0:Object) : String is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getWarnings() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation isModified() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation isTrackingModification() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation setModified(arg0:Boolean) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation setTimeStamp(arg0:Long) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation setTrackingModification(arg0:Boolean) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation setURI(arg0:String) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eAdapters() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eDeliver() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eSetDeliver(arg0:Boolean) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+}
+@CompilerIgnore "true"
+class ResourceSet {        @CompilerIgnore "true"
+         operation getResource(arg0:String,arg1:Boolean) : Resource is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getResources() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getAllContents() : Iterator<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getEObject(arg0:String,arg1:Boolean) : Object is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation createResource(arg0:String) : Resource is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation createResource(arg0:String,arg1:String) : Resource is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getAdapterFactories() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation getLoadOptions() : Map<Object,Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eAdapters() : OrderedSet<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eDeliver() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+        @CompilerIgnore "true"
+         operation eSetDeliver(arg0:Boolean) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+          end
+}
+
+}
+
+}

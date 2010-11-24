@@ -1,0 +1,20 @@
+package testLambdaExpressionAsCallFeature;
+
+require kermeta
+
+class Boolean
+{
+}
+class Sequence<G>
+{
+}
+class G
+{
+}
+class class1
+{
+	operation reject(rejector : < G->Boolean >) : Sequence<G> is
+		do
+			result := self.~select{elem | rejector(elem).~not}
+		end
+}

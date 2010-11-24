@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : June 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	@deprecated "ggg"
+    attribute f : kermeta::standard::String
+    
+	operation main() : Void is do 
+		f
+	end
+	
+}

@@ -1,0 +1,23 @@
+/* $Id: 030_requireEcoreUsingGenerics.kmt,v 1.1 2009-02-20 08:19:20 dvojtise Exp $ 
+ * Creation : February 19, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "pbGenericFranck::Main"
+@mainOperation "main"
+
+
+package pbGenericFranck;
+
+
+require kermeta
+require "030_required_ecore/UseGenerics.ecore"
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}

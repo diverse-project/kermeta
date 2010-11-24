@@ -1,0 +1,15 @@
+/* $Id: 003_associations_09.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* upper bound cannot be 0*/
+class A {
+    
+}
+class B {
+    reference x : A[1..0] //  must fail here
+}

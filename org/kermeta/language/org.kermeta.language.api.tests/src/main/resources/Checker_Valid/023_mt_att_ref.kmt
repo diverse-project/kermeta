@@ -1,0 +1,42 @@
+/* $Id: 023_mt_att_ref.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference versus attribute
+ */
+
+
+package mt_att_ref;
+
+
+require kermeta
+using kermeta::standard
+
+package mRef {
+  class A {
+    reference aB : B#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mRefT { mRef::A, mRef::B }
+class NeedsMRef<MT : mRefT> { }
+
+
+package mAtt {
+  class A {
+    attribute aB : B#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mAttT { mAtt::A, mAtt::B }
+class NeedsMAtt<MT : mAttT> { }
+
+  

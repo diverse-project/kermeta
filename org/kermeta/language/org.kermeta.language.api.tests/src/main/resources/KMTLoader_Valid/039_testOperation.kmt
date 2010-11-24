@@ -1,0 +1,43 @@
+package testOperation;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 inherits Boolean {
+	
+	operation operation1() is abstract
+	
+	operation operation2() : String is do void end
+	
+	operation operation3(p1 : String, p2 : Integer) : Void is abstract
+	
+}
+
+
+package package1 {
+
+	abstract class Class11 inherits Class1 {
+	
+		method operation1() : Void is do end
+		method operation2() : String is do void end
+		
+	}
+
+}
+
+class Class2<G> {
+
+	operation operationGeneric( o : G ) : G is do end
+	operation operationG2<T>( anObject : T ) : Class2<T> is do void end
+
+}
+
+class Class3 {
+
+	operation myIterator<T>(action : < T -> Boolean >) : testOperation::Class2<T> is abstract
+	operation myIterator2(action : <[String, String] -> Boolean >) : Void is do end
+	operation mySelfOp() : Class3 is do void end
+}

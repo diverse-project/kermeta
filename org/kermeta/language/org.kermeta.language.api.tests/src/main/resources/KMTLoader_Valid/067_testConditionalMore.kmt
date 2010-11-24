@@ -1,0 +1,54 @@
+require kermeta
+
+using kermeta::standard::*
+
+class TestConditional
+{
+    operation check() : Void is do
+        var a : Integer init 0
+        var b : Integer init 1
+        var c : Boolean init false
+
+        if ( a != b ) then
+            stdio.writeln(" 1 OK")
+        end
+
+        if not(  a==b ) then
+            stdio.writeln(" 2 OK")
+        end
+
+        if (not c) then
+            stdio.writeln(" 3 OK")
+        end
+
+        var d : myObject init myObject.new
+        var e : myObject init myObject.new
+
+            d.a := 1
+            e.a := 1
+
+        if e.equals(d) then
+            stdio.writeln(" then")
+        end
+        
+        if not e.equals(d) then
+            stdio.writeln(" else")
+        end
+    end
+}
+
+class myObject {
+
+    attribute a : Integer
+
+    method equals(obj : Object) : Boolean is do
+
+        if (obj.isInstanceOf(myObject)) then
+            result:= self.a==obj.asType(myObject).a
+        else
+            result:= self.asType(Object).equals(obj)
+        end
+
+
+    end
+} 

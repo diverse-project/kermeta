@@ -1,0 +1,42 @@
+/* $Id: 004_ClassSubTypingWithGenerics.kmt,v 1.1 2008-11-25 10:15:18 dvojtise Exp $ */
+
+// Simple subtyping test for simple 
+// inheritance between two generic classes 
+
+package tctest;
+
+require kermeta
+
+class X {}
+class Y inherits X {}
+
+class A<T> {}
+class B<G> inherits A<G> {}
+
+class Test {
+
+	operation test1() : Void is do
+		var a: A<X> init A<X>.new
+	end
+	
+	operation test2() : Void is do
+		var a: A<X> init B<X>.new
+	end
+	
+	operation test3() : Void is do
+		var b: B<X> init B<X>.new
+		var a: A<X>
+		a := b
+		b ?= a
+	end
+	
+	operation test4() : Void is do
+		var b: B<A<Y>> init B<A<Y>>.new
+		var a: A<A<Y>>
+		a := b
+		b ?= a
+	end
+
+}
+
+/* END OF FILE */

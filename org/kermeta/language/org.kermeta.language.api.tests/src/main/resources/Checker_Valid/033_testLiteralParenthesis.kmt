@@ -1,0 +1,37 @@
+/* $Id:$ 
+ * Creation : Oct 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Olivier Beaudoux
+ *			  Didier Vojtisek
+ * Description : this test checks a bug about using parenthesis on a literal
+ * 				 test for bug #8804
+ */
+package testLiteralParenthesis;
+
+require kermeta
+using kermeta::standard
+// Call of an operation from another class inside an operation
+class Test_testLiteralParenthesis1 {
+
+    operation main() : Void is do
+        var s: oset Integer
+        (10+1).times{ i | void } // bug here, probably due to the parser
+    end
+
+
+}
+
+class Test_testLiteralParenthesis2 {
+    
+    operation main() : Void is do
+        (10+1).times{ i | void }
+    end
+
+
+    operation main() : Void is do
+        var s: oset Integer
+        11.times{ i | void }
+    end
+}

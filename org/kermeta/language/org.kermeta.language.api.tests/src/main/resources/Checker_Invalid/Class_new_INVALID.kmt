@@ -1,0 +1,20 @@
+/* $Id $ */
+
+// new on a abstract class
+
+package tctest;
+
+require kermeta
+
+abstract class A {}
+
+
+class Test {
+
+	operation test1() : Void is do
+		A.new
+	end
+
+}
+
+/* END OF FILE */

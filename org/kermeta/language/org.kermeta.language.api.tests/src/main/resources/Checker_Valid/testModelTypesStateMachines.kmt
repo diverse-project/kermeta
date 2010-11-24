@@ -1,0 +1,68 @@
+package determinizerpkg;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+
+package BasicSM {
+  class State {
+    attribute name : String
+    reference owner : StateMachine[0..1]#states
+    reference outgoing : Transition[0..*]#source
+    reference incoming : Transition[0..*]#target
+  }
+  class Transition {
+    attribute event : String
+    attribute guard : String
+    reference owner : StateMachine[1]#transitions
+    reference source : State#outgoing
+    reference target : State#incoming
+  }
+  class StateMachine {
+    reference states : State[0..*]#owner
+    reference transitions : Transition[0..*]#owner
+    reference initialState : State[0..1]
+  }
+}
+modeltype BasicSM_type { BasicSM::State, BasicSM::Transition, BasicSM::StateMachine }
+
+
+class Determiniser<T : BasicSM_type> {
+
+  attribute equiv_classes : Hashtable<T::State, Set<T::State>>
+  
+  operation determiniseAll(input : T) : T is
+  do
+    // The bodies are silly for now
+    var machines : set T::StateMachine[0..*] init input.filter(T::StateMachine)
+    var basic_sm : BasicSM_type init BasicSM_type.new
+    basic_sm.add(BasicSM::StateMachine.new)
+    //basic_sm.add(T::StateMachine.new)
+    //basic_sm.filter(T::StateMachine)
+    determinise(T::StateMachine.new)
+    result := T.new
+    "a".equals(T::StateMachine.new)
+    var st : T::State init T::State.new
+    equiv_classes.put(st, Set<T::State>.new)
+    equiv_classes.getValue(st).add(T::State.new)
+    machines.each{ m | result.add(determinise(m)) }
+    machines.detect{ sm | sm.states.size == 0 }
+  end
+  
+  operation determinise(input : T::StateMachine) : T::StateMachine is
+  do
+  	Helper<T>.new.blah(input)
+    input.states.add(T::State.new)
+    input.transitions.add(T::Transition.new)
+    input.states.reject{ s | input.transitions.collect{t| t.target}.contains(s) and s != input.initialState }
+    result := input
+  end
+
+}
+
+class Helper<MT : BasicSM_type> {
+  operation blah(s : MT::StateMachine) : Void is do
+  	s.states
+  end
+}

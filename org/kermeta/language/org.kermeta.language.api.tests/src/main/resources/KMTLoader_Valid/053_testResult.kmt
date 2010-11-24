@@ -1,0 +1,24 @@
+package testResult;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 {
+	
+	operation operation1() : String is do
+		var ~result : String
+	
+		~result := "coucou"
+		result := ~result
+	
+	end
+	
+}
+
+
+
+package toto{
+}

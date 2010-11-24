@@ -1,0 +1,58 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "p1::Conditional2VarVarVar"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+using kermeta::standard
+
+
+class Conditional2VarVarVar
+{
+	operation main() : Void is do 
+		var a : Boolean
+		var b : Boolean
+
+		a := true
+		b := true
+		
+		if(a and b) then
+			stdio.writeln("a=trueAndb=True=success")
+		else
+			stdio.writeln("a=trueAndb=True=fail")
+		end
+		
+		b := false
+		
+		if(a and b) then
+			stdio.writeln("a=trueAndb=false=fail")
+		else
+			stdio.writeln("a=trueAndb=false=success")			
+		end
+		
+		a := false
+		
+		if(a and b) then
+			stdio.writeln("a=falseAndb=false=fail")
+		else
+			stdio.writeln("a=falseAndb=false=success")
+		end
+		
+		b := true
+		
+		if(a and b) then
+			stdio.writeln("a=falseAndb=true=fail")
+		else
+			stdio.writeln("a=falseAndb=true=success")
+		end
+	end
+}

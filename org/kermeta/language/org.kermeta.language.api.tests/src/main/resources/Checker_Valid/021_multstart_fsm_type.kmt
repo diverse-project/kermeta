@@ -1,0 +1,41 @@
+/* $Id: 021_multstart_fsm_type.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package fsm;
+
+
+require kermeta
+using kermeta::standard
+
+package multstart_fsm {
+
+  class FSM {
+    attribute alphabet : set String[0..*]
+    attribute ownedState : set State[0..*]#owningFSM
+    attribute ownedTransition : set Transition[0..*]
+    reference initialState : set State[0..*]
+    reference finalState : set State[0..*]
+  }
+
+  class State {
+  	attribute name : String
+  	reference owningFSM : FSM#ownedState
+  	reference incomingTransition : Transition[0..*]#target
+  	reference outgoingTransition : Transition[0..*]#source
+  }
+
+  class Transition {
+    attribute input : String
+    attribute output : String
+    reference source : State#outgoingTransition
+    reference target : State#incomingTransition
+  }
+
+}
+
+modeltype multstart_fsmT { multstart_fsm::FSM, multstart_fsm::State, multstart_fsm::Transition }

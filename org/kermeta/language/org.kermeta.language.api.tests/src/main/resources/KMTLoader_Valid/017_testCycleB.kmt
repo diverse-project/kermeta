@@ -1,0 +1,13 @@
+package testCycle;
+
+require kermeta
+require "testCycleA.kmt"
+
+class B {
+
+	attribute a : A
+	attribute e : E
+	attribute c : C
+	attribute b : B
+ 
+}

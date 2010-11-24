@@ -1,0 +1,81 @@
+@mainClass "helloworld::Main"
+@mainOperation "testSignature"
+
+package Signature;
+
+require kermeta
+require "013_kermetaSignature/Signature.kmt"
+using kermeta::standard
+using kermeta::io
+
+class Main inherits kermeta::kunit::Test
+{
+	attribute t  : Top		
+    attribute m  : Middle 	
+    attribute b  : Bottom	
+    attribute u  : Up		
+    attribute d  : Down		
+    attribute ud : Up 		
+	// each operation of this file must have at least one error
+    operation testSignature01() : Void is do
+        
+        t := Top.new
+        m := Middle.new
+        b := Bottom.new
+        u := Up.new
+        d := Down.new
+        ud := Down.new
+        
+        stdio.writeln("*** First column (u) ***")
+        stdio.writeln(u.cv(t))  
+        stdio.writeln(u.cv(m)) 
+        stdio.writeln(u.cv(b)) 
+        u.~inv(t)	// must have an error here
+   end
+   operation testSignature02() : Void is do
+        
+        stdio.writeln(u.~inv(m))  
+        stdio.writeln(u.~inv(b))
+        u.ctv(t)	// must have an error here
+   end
+   operation testSignature03() : Void is do
+   		u.ctv(m)	// must have an error here
+        stdio.writeln(u.ctv(b))
+        
+        stdio.writeln("*** Second column (d) ***")
+        stdio.writeln(d.cv(t)) 
+        stdio.writeln(d.cv(m))
+        stdio.writeln(d.cv(b))
+   end
+   operation testSignature05() : Void is do
+        d.~inv(t)	// must have an error here
+        stdio.writeln(d.~inv(m))
+        stdio.writeln(d.~inv(b))
+   end
+   operation testSignature06() : Void is do
+        d.ctv(t)	// must have an error here
+   end
+   operation testSignature07() : Void is do
+        d.ctv(m) // must have an error here
+        stdio.writeln(d.ctv(b))
+        
+   end
+   operation testSignature08() : Void is do
+        stdio.writeln("*** Third column (ud) ***")
+        stdio.writeln(ud.cv(t))
+        stdio.writeln(ud.cv(m))
+        stdio.writeln(ud.cv(b))
+        ud.~inv(t)	// must have an error here
+        stdio.writeln(ud.~inv(m))
+        stdio.writeln(ud.~inv(b))
+   end
+   operation testSignature09() : Void is do
+        ud.ctv(t)	// must have an error here
+   end
+   operation testSignature10() : Void is do
+        ud.ctv(m)	// must have an error here
+        stdio.writeln(ud.ctv(b))
+    end
+}
+
+

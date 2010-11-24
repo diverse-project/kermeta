@@ -1,0 +1,8 @@
+package comp_runner_test001;
+
+require kermeta
+
+// invalid because no class name
+class 
+{
+}

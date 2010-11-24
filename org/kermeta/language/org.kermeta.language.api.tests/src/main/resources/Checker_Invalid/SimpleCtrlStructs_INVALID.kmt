@@ -1,0 +1,56 @@
+/* $Id: SimpleCtrlStructs.kmt,v 1.3 2008-04-28 11:51:16 ftanguy Exp $ */
+
+// Type checking on wrong simple control stucts
+
+package tctest;
+
+require kermeta
+
+class A {}
+
+class B inherits A {}
+
+class Test {
+
+	operation test1() : Void is do
+		b := if a == b then a else b end
+	end
+	
+	operation test2() : Void is do
+		b := if a then b end
+	end
+	
+	operation test3() : Void is do
+		b := if 3 then b else void end
+	end
+	
+	operation test4() : Void is do
+		from a := b
+		until "coucou"
+		loop
+			b ?= a
+		end
+	end
+	
+	operation test5() : Void is do
+		a ?= if a.getMetaClass == A then a else B end.new
+	end
+	
+	operation test6() : Void is do
+		b := b.getMetaClass.new
+	end
+	
+	operation test7() : Void is do
+		if not a.equals(b) and 6 then
+			var x : A init a
+			a := b
+			b := x
+		end
+	end
+	
+	attribute a : A
+	attribute b : B
+
+}
+
+/* END OF FILE */

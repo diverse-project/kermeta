@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : June 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+package testGenericTypeAsReturnParameter1;
+
+
+require kermeta
+using kermeta::standard
+
+class Test<IN>
+{
+    attribute a: Integer
+   
+    operation initialize() : Test<IN> is
+    do
+    	result := self
+    	self.a := 123
+        
+    end   
+}

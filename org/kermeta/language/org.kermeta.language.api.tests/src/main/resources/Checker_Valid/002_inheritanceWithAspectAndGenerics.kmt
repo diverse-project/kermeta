@@ -1,0 +1,21 @@
+/* $Id: $
+ * Creation date: February 18, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package ~Void;
+
+require kermeta
+require "002_inheritanceWithAspectAndGenerics/generic1.kmt"
+using kermeta::standard
+
+
+aspect class BoundClass
+{
+	method test(p : String) is 
+	do
+		stdio.writeln("")
+	end
+}

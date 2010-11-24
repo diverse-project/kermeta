@@ -1,0 +1,82 @@
+/* $Id: 014_scopevisibility.kmt,v 1.2 2008-04-28 11:51:16 ftanguy Exp $
+ * Creation date: July 20, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package scopeVisibility;
+
+
+require kermeta
+using kermeta::standard
+class Main
+{
+	attribute attr_int : Integer
+	
+    /** test duplicate variable declaration in an inner block*/
+    operation test1() : Integer is do
+		var str : String init "str1"
+		
+		do
+		//	assert(str == "str1")
+			var str : String init "str2"
+		end
+	end	
+	/** test duplicate variable declaration in an inner block*/
+    operation test2() : Integer is do
+		var str : String init "str1"
+		var str : String init "str2"
+	end	
+	
+	operation test3() is do
+		var i : Integer
+		var s : String
+		
+		i := self.test1
+		s := test1 // even if a variable is define in this block as a string, the declaration is done after
+	
+		var test1 : String
+		
+		//i := test1
+		i := self.test1
+		s := test1
+	end
+	
+	operation test4() is do
+		var i : Integer
+	
+		i := test1 // Ok, this refers to the operation
+		var test1 : String
+		// now, that we have declared test1 as String, this doesn't work anymore
+		i := test1
+		
+	end
+	
+	/** same as test3 but on an attribute */
+	operation test5() is do
+		var i : Integer
+		var s : String
+		
+		i := attr_int
+		s := attr_int // even if a variable is define in this block as a string, the declaration is done after
+	
+		var attr_int : String
+		
+		//i := test1
+		i := self.attr_int
+		s := attr_int
+	end
+	
+	/** same as test4 but on an attribute */	
+	operation test6() is do
+		var i : Integer
+	
+		i := attr_int // Ok, this refers to the operation
+		var attr_int : String
+		// now, that we have declared test1 as String, this doesn't work anymore
+		i := attr_int
+		
+	end
+	
+}

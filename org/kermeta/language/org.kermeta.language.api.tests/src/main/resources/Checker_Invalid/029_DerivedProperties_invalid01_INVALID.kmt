@@ -1,0 +1,23 @@
+/* $Id: 029_DerivedProperties_invalid01.kmt,v 1.1 2008-04-09 14:40:53 dvojtise Exp $
+ * Creation date: February 04, 2008
+ * License:	EPL
+ * Copyright:
+ * Authors:
+ *     Vincent Mahe
+ */
+
+package derived_properties;
+
+require kermeta
+using kermeta::standard
+
+class Example {
+	
+	// invalid because read only means no setter
+	property readonly p2 : Integer
+		setter is do
+			stdio.writeln("")
+		end
+
+	
+}

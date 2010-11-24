@@ -1,0 +1,29 @@
+require kermeta
+package testBlock;
+
+class Class1 {
+	
+	operation operation1() is do
+		
+		do
+			do
+			
+			rescue
+			
+			end
+			
+			do end
+		
+		end
+		
+		do do do end end end
+		
+		do
+		
+		rescue
+			do end
+		end
+
+	end
+	
+}

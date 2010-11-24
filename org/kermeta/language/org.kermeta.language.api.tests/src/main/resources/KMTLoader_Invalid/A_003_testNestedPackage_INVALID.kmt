@@ -1,0 +1,21 @@
+package root1 { 
+	
+	package root1a { 
+		
+		package root1a1 { 
+			
+			package root1a2
+			} 
+		} 
+	} 
+package root2 { 
+	
+	package root2a { 
+		
+		package root2a1 { 
+			
+			package root2a1a 
+			package root2a1b 
+			} 
+		} 
+	} 

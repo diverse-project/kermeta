@@ -1,0 +1,41 @@
+/* $Id: 025_weaving_in_kermeta_aspect1.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $ */
+
+// Type checking on simple control stucts
+
+package weavinginvalidtest1;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect1/025_weaving_in_kermeta_aspect1_baseClass.kmt"
+
+using kermeta::standard
+
+
+//@aspect "true"
+//@anothertag "othertagvalue"
+
+@aspect "true"
+class B {}
+
+
+@aspect "true"
+class C {
+
+	 operation returnString() : kermeta::standard::Object is do // invalid because this is not of the return type as the original
+		result := "a string"
+	end 
+
+	
+	operation test0(param : A) : Void // must fail beacause of the returned type.
+	pre mypre is true
+	post mypost is true
+	is abstract
+		
+	attribute a : D  // must fail because the attribute has been declared with an other type.
+
+
+}
+
+@aspect "false"
+class D{
+}
+/* END OF FILE */

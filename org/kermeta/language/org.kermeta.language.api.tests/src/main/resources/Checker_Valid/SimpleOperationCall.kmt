@@ -1,0 +1,55 @@
+/* $Id: SimpleOperationCall.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Simple operation Call
+
+package tctest;
+
+require kermeta
+
+class A {
+
+	operation opa(a : A) : A is do 
+		result := void
+	end
+
+}
+
+class B inherits A {
+
+	operation opb(b : B) : B is do 
+		result := void
+	end
+ 
+}
+
+class Test {
+
+	operation test1() : Void is do
+		A.new.opa(void)
+	end
+	
+	operation test2() : Void is do
+		A.new.opa(A.new)
+	end
+	
+	operation test3() : Void is do
+		A.new.opa(B.new)
+	end
+	
+	operation test4() : Void is do
+		var a : A init B.new
+		a := a.opa(a).opa(a.opa(a))
+	end
+	
+	operation test5() : Void is do
+		var a : A init B.new
+		a := a.opa(a).opa(a.opa(a))
+	end
+	
+	operation test6() : Void is do
+		B.new.opa(A.new)
+	end
+
+}
+
+/* END OF FILE */

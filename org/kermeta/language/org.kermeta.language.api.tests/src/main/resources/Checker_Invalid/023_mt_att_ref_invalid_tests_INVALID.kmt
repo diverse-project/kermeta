@@ -1,0 +1,31 @@
+/* $Id: 023_mt_att_ref_invalid_tests.kmt,v 1.2 2008-02-14 07:13:31 uid21732 Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+@mainClass "mt_att_ref::Tester"
+@mainOperation "testNeedsMRef"
+
+
+package mt_att_ref;
+
+
+require kermeta
+require "../valid/023_mt_att_ref.kmt"
+using kermeta::standard
+
+class Tester inherits kermeta::kunit::Test{
+	operation testNeedsMRef() : Void is do
+		//NeedsMRef<mRefT>.new
+		NeedsMRef<mAttT>.new	// must fail here
+	end
+	/*operation testNeedsMAtt() : Void is do
+		//NeedsMAtt<mRefT>.new	// must fail here
+		NeedsMAtt<mAttT>.new
+	end*/
+
+}
+  

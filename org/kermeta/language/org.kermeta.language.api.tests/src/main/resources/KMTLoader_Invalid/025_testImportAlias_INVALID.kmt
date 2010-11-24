@@ -1,0 +1,16 @@
+package testPrimitiveType;
+
+require kermeta
+require "testClass.kmt"
+
+using testClass::package1
+
+alias PClass1 : Coucou ;
+
+class Coucou {
+
+ attribute toto : PClass1
+
+}
+
+alias AType : Class12 ;

@@ -1,0 +1,13 @@
+
+require kermeta
+
+package testPackDep;
+
+
+package toto {
+
+	class D {
+		attribute d : D
+	}
+
+}

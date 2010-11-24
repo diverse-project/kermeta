@@ -1,0 +1,90 @@
+/* $Id: GenericsAndFunctions.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+
+//Test interaction between function types and type variables
+
+package toto;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+
+class X<G> {
+
+	attribute g : G
+	
+	operation doit1(f : <G -> G>) : G is do
+		result := f(g)
+	end
+	
+	operation doit2<T>(f : <G -> T>) : T is do
+		result := f(g)
+	end
+	
+	operation doit3<T : Comparable>(f : <G -> T>) : T is do
+		result := f(g)
+	end
+	
+	operation doit4<T : Comparable>(f : <[G,T] -> T>) : T is do
+		result := f(g, void)
+	end
+	
+	operation doit5(f : <[G] -> Object>) : Void is do end
+	
+}
+
+class Test<G> inherits X<G> {
+	
+	operation test1() is do
+		var a : G
+		a := g
+	end
+	
+	operation test2() is do
+		var a : G
+		a := doit1 { o | o := g }
+	end
+	
+	operation test3() is do
+		var b : Boolean
+		var o : Object
+		b := o == g
+	end
+	
+	operation test4() is do
+	 	var xstr : X<String>
+		xstr := doit2 { o | xstr }
+	end
+	
+	operation test5<T>(t : T) is do
+	 	var xstr : X<T>
+		xstr := doit2 { o | xstr }
+	end
+	
+	operation test6<T : Comparable>(t : T) is do
+	 	var xstr : String
+		xstr := doit3 { o | "toto" }
+	end
+	
+	operation test7<TT : Comparable>(t : TT) is do
+	 	var xstr : TT
+		xstr := doit3 { o | xstr } 
+	end
+
+	operation test8() is do
+		doit4 { o , s | s }
+	end
+	
+	operation test9() is do
+		doit1 { o | o }
+	end 
+	
+	operation test10() is do
+		doit1 { o | void }
+	end 
+
+}
+
+/* END OF FILE */

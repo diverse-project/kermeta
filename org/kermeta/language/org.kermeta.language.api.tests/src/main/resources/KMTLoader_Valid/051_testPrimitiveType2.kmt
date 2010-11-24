@@ -1,0 +1,22 @@
+package testPrimitiveTypeDouble;
+
+require kermeta
+
+using {Coucou => PClass1}
+
+// check that we can use double alias
+using {PClass1 => A_PClass1}
+
+class Coucou {
+
+ attribute toto : A_PClass1
+ operation testdoubleAlias() : Void is do
+ 	// that that we can use alias name in the hasSubType, 
+ 	// we don't care about the result, we just check that it typecheck
+ 	Coucou.hasSubType(Coucou)
+ 	Coucou.hasSubType(PClass1)
+ 	Coucou.hasSubType(A_PClass1)
+ 	
+ end
+
+}

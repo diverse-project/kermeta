@@ -1,0 +1,26 @@
+/* $Id: genericOperationDefinition_001.kmt,v 1.1 2008-04-10 16:24:27 dvojtise Exp $
+ * Creation date: April 10, 2008
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ * test for bug #116
+ */
+
+
+
+package genericOperationDefinition;
+
+
+require kermeta
+using kermeta::standard
+class TestUnboundGenericOperation
+{
+	/* This must raise an error : the typeVariable P is not bound by a parameter or the return type.*/
+	operation callParametred1UnboundParam<P>() : Void is do
+		var p : P
+		stdio.write("unbound parameter")
+		//result := P.new
+	end
+	
+}

@@ -1,0 +1,24 @@
+/* $Id: genericOperationDefinition_002.kmt,v 1.1 2008-04-10 16:24:28 dvojtise Exp $
+ * Creation date: April 10, 2008
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ * test for bug #116
+ */
+
+
+
+package genericOperationDefinition;
+
+
+require kermeta
+using kermeta::standard
+
+class TestDoubleBoundGenericOperation<T>
+{
+	operation callParametred1DoubleParam<T>() : Void is do
+		var p : T
+		stdio.write("unbound parameter")
+	end
+}

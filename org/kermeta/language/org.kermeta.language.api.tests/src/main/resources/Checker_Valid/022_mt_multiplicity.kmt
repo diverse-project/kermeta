@@ -1,0 +1,125 @@
+/* $Id: 022_mt_multiplicity.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+
+
+package mt_multiplicity;
+
+
+require kermeta
+using kermeta::standard
+
+package m0_1 {
+  class A {
+    reference aB : B#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+
+// --------------
+modeltype m0_1T { m0_1::A, m0_1::B }
+
+class NeedsM0_1<MT : m0_1T> { }
+
+// -------------- 
+package m0 {
+  class A {
+  }
+
+  class B {
+  	reference aA : A
+  }
+}
+
+modeltype m0T { m0::A, m0::B 
+}
+class NeedsM0<MT : m0T> { }
+
+// --------------
+package m1 {
+  class A {
+    reference aB : B[1]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m1T { m1::A, m1::B }
+
+class NeedsM1<MT : m1T> { }
+
+// --------------
+package m0_n {
+  class A {
+    reference aB : B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m0_nT { m0_n::A, m0_n::B }
+class NeedsM0_n<MT : m0_nT> { }
+
+// --------------
+package m0_2 {
+  class A {
+    reference aB : B[0..2]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m0_2T { m0_2::A, m0_2::B }
+class NeedsM0_2<MT : m0_2T> { }
+
+// --------------
+package m1_n {
+  class A {
+    reference aB : B[1..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m1_nT { m1_n::A, m1_n::B }
+class NeedsM1_n<MT : m1_nT> { }
+
+// --------------
+package m1_2 {
+  class A {
+    reference aB : B[1..2]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m1_2T { m1_2::A, m1_2::B }
+class NeedsM1_2<MT : m1_2T> { }
+
+// --------------
+package m0_3 {
+  class A {
+    reference aB : B[0..3]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype m0_3T { m0_3::A, m0_3::B }
+class NeedsM0_3<MT : m0_3T> { }
+
+  

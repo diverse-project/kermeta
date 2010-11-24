@@ -1,0 +1,22 @@
+/* $Id: 027_constraint_type_boolean7.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $
+ * Creation date: August 6, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void
+	pre lapre is do 5 end
+	is do 
+		
+	end
+}

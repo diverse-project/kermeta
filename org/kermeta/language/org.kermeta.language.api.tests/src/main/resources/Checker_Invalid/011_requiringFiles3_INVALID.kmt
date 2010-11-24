@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: November 21, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+require "requiringFiles/MyUML.ecore" 
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}

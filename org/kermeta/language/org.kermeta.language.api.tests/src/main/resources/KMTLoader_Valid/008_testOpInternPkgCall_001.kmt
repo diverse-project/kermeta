@@ -1,0 +1,24 @@
+package testOpInternPkgCall;
+
+require kermeta
+
+package test_package1 
+{
+	class Test_operation_pkg1 {
+	
+	    operation operation_pkg1() : kermeta::standard::Integer is do
+	        result :=  test_package2::Test_operation_pkg2.new.operation_pkg2()
+	    end
+	}
+}
+
+package test_package2
+{
+	class Test_operation_pkg2 {
+
+		operation operation_pkg2() : kermeta::standard::Integer is do
+	        result := 4
+	    end
+	}
+}
+

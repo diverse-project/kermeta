@@ -1,0 +1,11 @@
+package testPrimitiveType;
+
+require kermeta
+
+using {Coucou => PClass1}
+
+class Coucou {
+
+ attribute toto : PClass1
+
+}

@@ -1,0 +1,23 @@
+/* $Id: 025_weaving_in_kermeta_aspect5.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+
+// Type checking of kermeta weavinf
+
+package weavinginvalidtest5;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect5/025_weaving_in_kermeta_aspect5_baseClass.kmt"
+
+using kermeta::standard
+
+@aspect "true"
+class C {
+
+
+		
+	reference a : A // invalid, should fail because this is not an attribute like it is defined in the base ...
+	attribute c : A
+	attribute d : B
+
+}
+
+/* END OF FILE */

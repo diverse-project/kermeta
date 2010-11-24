@@ -1,0 +1,23 @@
+/* $Id: 025_weaving_in_kermeta_aspect8.kmt,v 1.3 2008-02-14 07:13:30 uid21732 Exp $ */
+
+// Type checking of kermeta weavinf
+
+package weavinginvalidtest7;
+
+
+require kermeta
+require "025_weaving_in_kermeta_aspect8/025_weaving_in_kermeta_aspect8_baseClass.kmt"
+
+using kermeta::standard
+
+
+
+@aspect "true"
+class A {
+	operation amethod() : A is do // must fail here because of the multiplicity problem
+		result := A.new
+	end
+
+}
+
+/* END OF FILE */

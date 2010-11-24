@@ -1,0 +1,12 @@
+
+package MultipleDeclaration;
+
+
+require kermeta
+
+class A
+{
+}
+
+class A {
+}

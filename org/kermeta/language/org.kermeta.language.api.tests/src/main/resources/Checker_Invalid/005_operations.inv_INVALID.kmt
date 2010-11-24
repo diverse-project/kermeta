@@ -1,0 +1,85 @@
+/* $Id: 005_operations.inv.kmt,v 1.2 2007-10-16 11:49:09 ftanguy Exp $ */
+
+// Test of constraints on operations
+// This test must make specific errors to appear. 
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+
+class C1
+{
+	operation op1(a:Integer,b:String) is do
+	end
+
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis 
+{
+	operation op2() is do
+	end
+}
+
+
+class C2 inherits C1
+{
+	/** 
+	 * This method overloads the op1 defined in C1, which does not have any parameter 
+	 * This is an ERROR
+	 */
+	method op1(a:kermeta::standard::String,b:Integer) is do 
+	end
+}
+
+class C2bis inherits C1, C1bis
+{
+	/*
+	 * This method is defined in C1 and C1bis. User must tell which one of the two he
+	 * wants to "inherit"
+	 * (op2 from C1 is do)
+	 */ 
+	method op2() is do
+	end
+}
+
+class A
+{
+   operation m(x : Object) : String is do
+
+   end
+}
+
+class B inherits A
+{
+   method m(x : String) : String is do
+
+   end
+}
+
+class C inherits A
+{
+   method m(x : Object) : Void is do
+
+   end
+}
+
+class D inherits A
+{
+   method m(x : String, x2 : Object) : String is do
+
+   end
+}
+
+class E inherits A
+{
+   method m() : String is do
+
+   end
+} 

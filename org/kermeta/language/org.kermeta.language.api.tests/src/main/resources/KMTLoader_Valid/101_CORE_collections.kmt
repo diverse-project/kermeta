@@ -1,0 +1,922 @@
+/* *************************************************
+ * $Id: collections.kmt,v 1.62 2009-02-16 15:55:49 cfaucher Exp $
+ * Franck FLEUREY - 14/02/2005 
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the EPL licence
+ *
+ * Implementation of Kermeta collection types.
+ *************************************************** */
+
+/**
+ * Defines Collection types 
+ * <img src="./figures/collections_view.png"/>
+ */
+
+using kermeta::language::structure
+using kermeta::exceptions
+
+
+package kermeta{
+package standard{
+
+
+
+
+
+ 
+/**
+ * Collection is the root abstract class for all kermeta collections
+ */
+@CompilerIgnore "true"
+abstract class Collection<G> 
+{
+	/**
+	 * Returns a new Bag built from the Collection
+	 */
+	operation asBag() : Bag<G> is abstract
+	
+	/**
+	 * Returns a new Set built from the Collection
+	 */
+	operation asSet() : Set<G> is abstract
+
+	/**
+	 * Returns a new OrderedSet built from the Collection
+	 */
+	operation asOrderedSet() : OrderedSet<G> is abstract
+
+	/**
+	 * Returns a new Sequence built from the Collection
+	 */
+	operation asSequence() : Sequence<G> is abstract
+	
+	/**
+	 * Combinaison of ForAll on two elements in the collection 
+	 * result := self.forAll{x | self.forAll {y | f(x,y)}}
+	 * (where x and y are 2 elements of the Collection)
+	 * typical use sample : ownedState.forAll{s1,s2| (s1.name==s2.name)implies(s1==s2)}
+	 */
+	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end 
+
+	/**
+	 * Combinaison of exists on two elements in the collection
+	 * => result := self.exists{x | self.exists {y | f(x,y)}}
+	 */
+	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end 
+	
+	/**
+	 * Adds an element in the Collection (default implementation)
+	 */
+	operation add(element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Removes all instances of element from the Collection, based on
+	 * G.equals(Object) definition
+	 */
+	operation remove(element : G) : Void 
+	is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Removes all elements from the Collection
+	 */
+	operation clear() : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Adds all elements from the Collection elements in the current Collection
+	 */
+	operation addAll(elements : Collection<G>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Returns a Boolean stating whether the Collection contains at least one
+	 * instance of element, based on G.equals(elt : Object) definition
+	 * Note: for checking whether a physical element is contained by the collection,
+	 * make use of G.oid()
+	 */
+	operation contains(element : G) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * OCL API alignment, doeas the same as contains
+	 * See Collection<G>.contains(Object)
+	 */
+	operation includes(element :G): Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Returns true if current Collection contains all elements of Collection elements
+	 * See Collection<G>.contains(Object)
+	 */
+	operation containsAll(elements : Collection<G>) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * OCL API alignment, does the same as containsAll
+	 * See Collection<G>.containsAll(Collection<G>)
+	 */
+	operation includesAll(elements : Collection<G>) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns true if the Collection does not contain element
+	 */
+	operation excludes(element : G) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns true if the Collection contains no element of Collection elements
+	 */
+	operation excludesAll(elements : Collection<G>) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns the number of elements in the Collection
+	 */
+	operation size() : Integer is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a Boolean stating whether the Collection is empty
+	 */
+	operation empty() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * OCL alignment API, does the same as empty
+	 * See Collection<G>.empty()
+	 */
+	operation isEmpty() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * OCL alignment API
+	 * Returns a Boolean stating whether the Collection contains at least
+	 * one element 
+	 * See also Collection<G>.contains(Object)
+	 */
+	operation isNotEmpty() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns an Iterator on the Collection
+	 */
+	operation iterator() : Iterator<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns an element from the Collection or void if the Collection is empty
+	 */
+	operation one() : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Returns an element from the Collection
+	 * Raises an EmptyCollection exception if the Collection is empty
+	 */
+	operation any() : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Runs function func on each element of the Collection
+	 * example : 
+	 * aCollection.each { e | \/* do something with each element e of this collection *\/ }
+	 */
+	operation each(func : <G -> Object>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Runs function func on each element of the Collection
+	 * the eachContext contains some information about the each process that can be used in the function, 
+	 *  for example the index represents the rank in the collection, start on 0
+	 *  or boolean to indicates weither we are processing the first and/or the last element of the collection
+	 *  note that this rank is relative to the processing order. this processing order is ensured only for sequence and ordered set
+	 *
+	 * example : 
+	 * aCollection.indexedEach { e, eachContext | \/* do something with each element e of this collection *\/ }
+	 */
+	operation indexedEach(func : <[G , EachContext] -> Object>) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a Boolean stating whether no element of the Collection invalidates
+	 * the condition specified by function func
+	 * example : 
+	 * aBoolean := aCollection.forAll { e | \/* put here a condition *\/ } // return true if the condition is true for all elements in the collection.
+	 */
+	operation forAll(func : <G -> Boolean>) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+     
+    /**
+	 * Returns a Boolean stating whether at least one element of the Collection
+	 * validates the condition specified by function func
+	 * example :
+	 * aBoolean := aCollection.exists { e | \/* a condition *\/} // returns true if at least one element fulfill the condition.
+	 */
+	operation exists(func : <G -> Boolean>) : Boolean is do
+    	                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Sequence which content corresponds to the result
+	 * of running the collector function for each element of the Collection
+	 * The new collection size is the same as in the original collection, and which element types is the type of the result of the expression.
+	 * example :
+	 * aCollection2 := aCollection.collect { e | \/* put here an expression, for example e.name *\/ } 
+	 */
+	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
+	                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a Boolean stating whether the the collector function evaluates to a
+	 * different value for each element of the Collection
+	 * example :
+	 * aCollection2 := aCollection.isUnique { e | \/* put here an expression that must be unique for all elements, for example e.name *\/ }
+	 */
+	operation isUnique<T> (collector : <G -> T>) : Boolean is do
+	                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns an element of the Collection (usually the first) for which the detector function
+	 * is not false
+	 * Returns void if no elements is validated by the detector function
+	 * example : 
+	 * anObject := aCollection.detect { e | \/* a condition *\/} // returns an element that fulfill the condition.
+	 */
+	operation detect(detector : <G -> Boolean>) : G is do
+	                 throw kermeta::exception::NotImplementedException.new
+	end
+		
+	/**
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * validate the selector function
+	 * example :
+	 * aCollection2 := aCollection.select { e | 
+     *    \/* put here a condition that returns true for elements that must  be included in the resulting Collection *\/
+	 * }
+	 */
+	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * do not validate the rejector function
+	 * example :
+	 * aCollection2 := aCollection.reject { e | 
+     *     \/* put here a condition that returns true for elements that must  be exclude in the resulting Collection *\/
+     * }
+	 */
+	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns the number of instances of element in the Collection
+	 */
+	operation count(element : G) : Integer is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)
+	 */
+	operation sum(): G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+/**
+ * context used in the indexedEach of Collection
+ */
+@CompilerIgnore "true"
+class EachContext {
+	attribute index : Integer
+	attribute isFirst : Boolean
+	attribute isLast : Boolean
+	operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is do
+		index := i
+		isFirst := first
+		isLast := last
+		result := self
+	end
+}
+
+/**
+ * A Set is a non-ordered collection that contains distinct elements
+ * (with regards to the G.equals(Object) operation)
+ */
+@CompilerIgnore "true"
+class Set<G> inherits Collection<G>
+{
+	/**
+	 * Overrides Collection<G>.add(G)
+	 * Adds elt to the Set if it is not already contained by the
+	 * Set, does nothing otherwise
+	 */
+	method add(element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Collection<G>.remove(G)
+	 * Removes the element from the Set if it is contained by the Set
+	 */
+	method remove(element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Set
+	 */
+	method equals(element : Object) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set corresponding to the union of the Set elements
+	 * with the current Set
+	 */
+	operation union(elements : Set<G>) : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Bag corresponding to the union of the Bag elements
+	 * with the current Set
+	 */
+	operation unionWithBag(elements : Bag<G>) : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set corresponding to the intersection of the Set elements
+	 * with the current Set
+	 */
+	operation intersection(elements : Collection<G>) : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set corresponding to the difference between the
+	 * current Set and the Set elements, ie all elements contained by 
+	 * the current Set that do not appear in the elements Set 
+	 */
+	operation minus(elements : Set<G>) : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set composed of all elements of current Set
+	 */
+	method asSet() : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet that contains all elements of current Set
+	 */
+	method asOrderedSet() : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag composed of all elements of current Set
+	 */
+	method asBag() : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence composed of all elements of current Set
+	 */
+	method asSequence() : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set which contents corresponds to the symmetric
+	 * difference between current Set and Set s, ie all elements of
+	 * each Set that do not appear in the other one
+	 */
+	operation symmetricDifference(s : Set<G>) : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Set, as many elements as the Collection contains
+	 * Duplicates are removed
+	 */
+	operation flatten() : Set<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a ordered set of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+	/*operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
+		result := quickSort(self.asOrderedSet, comparator) 
+	end*/
+	
+	/**
+	 * Recursive sort of the given (ordered) set using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+	/*operation quickSort(q :OrderedSet<G>, comparator : <[G, G] -> Integer>) : OrderedSet<G> is do
+		 var less : OrderedSet<G> init OrderedSet<G>.new
+		 var pivotList : OrderedSet<G> init OrderedSet<G>.new
+		 var greater : OrderedSet<G> init OrderedSet<G>.new
+		   
+	     if (q.size <= 1) then   
+   		  	result := q
+	     else
+    	 	var pivot : G init q.one
+     		q.each{x| 
+     			if (comparator(x,pivot) == 1) then
+     		 		less.add(x)
+     		 	end
+     	 		if (comparator(x,pivot) == 0) then
+     	 			pivotList.add(x)
+	     	 	end
+   		  	 	if (comparator(x,pivot) == -1) then
+     		 		greater.add(x)
+     	 		end
+     	 	}
+	       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		end	
+	end*/
+	
+	/**
+	 * Internal concatenation tool for recursive 'quickSort()' method
+	 */
+	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+
+/**
+ * Bag is a concrete non-ordered Collection allowing duplicates
+ */
+@CompilerIgnore "true"
+class Bag<G> inherits Collection<G>
+{
+	/**
+	 * Overrides Object.equals(elt : Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Bag
+	 */
+	method equals(element : Object) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Returns a new Bag corresponding to the union of elements and
+	 * current Bag
+	 */
+	operation union(elements : Collection<G>) : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Bag corresponding to the intersection of elements
+	 * and the Bag
+	 */
+	operation intersection(elements : Bag<G>) : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Set corresponding to the intersection of a Set of
+	 * elements and the Bag
+	 */
+	operation intersectionWithSet(elements : Set<G>) : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Removes the element identified by the provided Oid from the Bag
+	 */
+	operation removeFromOid(elementOid : Integer) : Void 
+	is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Removes one instance of element from the Bag
+	 */
+	operation removeOne(element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set containing elements of the Bag without duplicates
+	 */
+	method asSet() : Set<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet containing elements of the Bag without duplicates
+	 */
+	method asOrderedSet() : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag containing all elements of current Bag	
+	 */
+	method asBag() : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence containing all elements of current Bag
+	 */
+	method asSequence() : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag and the element object
+	 */
+	operation including(object :G) : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+ 	/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag from which all instances of object have been
+	 * removed
+ 	 */
+	operation excluding(object :G) : Bag<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a new Bag which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Bag, as many elements as the Collection contains
+	 */
+	operation flatten() : Bag<Object> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns a sequence of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+	/*operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
+		result := quickSort(self.asSequence, comparator) 
+	end*/
+	
+	/**
+	 * Recursive sort of the given sequence using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+	/*operation quickSort(q :Sequence<G>, comparator : <[G, G] -> Integer>) : Sequence<G> is do
+		 var less : Sequence<G> init Sequence<G>.new
+		 var pivotList : Sequence<G> init Sequence<G>.new
+		 var greater : Sequence<G> init Sequence<G>.new
+		 
+	    if (q.size <= 1) then   
+   		 	result := q
+	    else
+			var pivot : G init q.one
+	     	q.each{x| 
+    	 		if (comparator(x,pivot) == 1) then
+     		 		less.add(x)
+     	 		end
+	     	 	if (comparator(x,pivot) == 0) then
+    	 	 		pivotList.add(x)
+     		 	end
+	     	 	if (comparator(x,pivot) == -1) then
+     	 			greater.add(x)
+    	 	 	end
+			}
+			result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		end	
+	end*/
+	
+	/**
+	 * Internal concatenation tool for recursive 'quickSort()' method
+	 */
+	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+
+/**
+ * An OrderedCollection is the root abstract class for all ordered Collections.
+ */
+@CompilerIgnore "true"
+abstract class OrderedCollection<G> inherits Collection<G> {
+	
+	/**
+	 * Adds element in the OrderedCollection at rank index
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+	operation addAt(index : Integer, element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Removes the element at rank index from the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+	operation removeAt(index : Integer) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns the element at rank index in the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+	operation elementAt(index : Integer) : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/** 
+	 * Returns the first element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+	operation first() : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns the last element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+	operation last() : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current OrderedCollection
+	 */
+	method equals(element : Object) : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/** 
+	 * Returns the index of the first instance of element in the OrderedCollection
+	 * or -1 if the element is not contained by the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+	operation indexOf(element : G) : Integer is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+
+/**
+ * An OrderedSet is a Set that contained ordered distinct elements
+ */
+@CompilerIgnore "true"
+class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
+{
+	/**
+	 * See Set<G>.add(G)
+	 */
+	method add(element : G) from Set is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Overrides OrderedCollection<G>.addAt(Integer, G)
+	 * Adds element in the OrderedSet at rank index if the ordered set does
+	 * not already contain the element, does nothing otherwise
+	 */
+	method addAt(index : Integer, element : G) : Void is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * See OrderedCollection<G>.equals(Object) 
+	 */
+	method equals(element : Object) : Boolean from OrderedCollection is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new OrderedSet composed of elements of current ordered
+	 * set from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the ordered set or min is larger than max
+	 */
+	operation subSet(min : Integer, max : Integer) : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in head
+	 */
+	operation append(element : G ) : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in tail
+	 */
+	operation preppend(element : G ) : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted at rank index
+	 */
+	operation insertAt(index : Integer, subject : G ) : OrderedSet<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/*
+	operation subOrderedSet(lower : Integer, upper : Integer ) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		
+		from var i : Integer init lower until i<= upper
+		loop
+			result.add(self.at(i))
+		end
+	end
+	*/
+
+	/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedSet
+	 */
+	operation at(index : Integer) : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+
+/**
+ * A Sequence is an OrderedCollection of elements allowing duplicates
+ */
+@CompilerIgnore "true"
+class Sequence<G> inherits Bag<G>, OrderedCollection<G>
+{
+	/**
+	 * Overrides OrderedCollection<G>.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Sequence	
+	 */
+	method equals(element : Object) : Boolean from OrderedCollection is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new Sequence composed of elements of current sequence
+	 * from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the sequence or min is larger than max
+	 */
+	operation subSequence(min : Integer, max : Integer) : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in head
+	 */
+	operation append(element : G ) : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in tail
+	 */
+	operation preppend(element : G ) : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted at rank index
+	 */	
+	operation insertAt(index : Integer, element : G) : Sequence<G> is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+	
+	/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the Sequence
+	 */
+	operation at(index : Integer) : G is do
+                 throw kermeta::exception::NotImplementedException.new
+	end
+}
+
+
+/**
+ * Iterator to be used with Collection
+ * See also Collection<G>.getIterator()
+ */
+@CompilerIgnore "true"
+class Iterator<G>
+{
+	/**
+	 * Returns true if the iterator is on the last element
+	 * i.e. returns not self.hasNext()
+	 */
+	operation isOff() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Returns true if the iterator has a next element
+	 */
+	operation hasNext() : Boolean is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+	
+	/**
+	 * Returns the next element of the iterator
+	 * Raises IteratorIsOff exception in case the iterator is on the last element 
+	 */
+	operation next() : G is do
+                 throw kermeta::exception::NotImplementedException.new
+
+	end
+}
+
+}
+
+
+}

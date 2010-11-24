@@ -1,0 +1,42 @@
+/* Author: Jim Steel, 30 October 2006 */
+
+package tctest;
+
+require kermeta
+
+using kermeta::standard
+
+class OddEven inherits Integer {
+	operation isOdd() : Boolean is
+	do
+		result := self.mod(2) == 1
+	end
+}
+
+class SuperOddEven inherits OddEven {
+}
+
+class OddEvenList <T : OddEven> {
+	attribute odds : set T[0..*]
+	attribute evens : set T[0..*]
+	operation add(in : T) : Void is
+	do
+		if in.isOdd
+		then
+			odds.add(in)
+		else
+			evens.add(in)
+		end
+	end
+}
+
+class User {
+	attribute myList : OddEvenList<OddEven>
+	operation test() : Void is
+	do
+		var myList2 : OddEvenList<SuperOddEven>
+		//myList := OddEvenList<Object>.new
+		myList.add( OddEven.new )
+		//OddEvenList<String>.new
+	end
+}

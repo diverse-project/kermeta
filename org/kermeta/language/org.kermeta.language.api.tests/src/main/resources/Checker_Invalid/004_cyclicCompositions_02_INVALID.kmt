@@ -1,0 +1,19 @@
+/* $Id: 004_cyclicCompositions_02.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* cyclic composition */
+class A {
+    attribute b : B[1]
+}
+class B {
+	attribute c : C[1]
+}
+class C {
+	attribute a : A[1]
+}
+

@@ -1,0 +1,39 @@
+/* $Id: ClassSubTypingWithGenericOperations.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Simple subtyping test for simple 
+// inheritance between two generic classes
+// and generic operations
+
+package tctest;
+
+require kermeta
+
+class X {}
+class Y inherits X {}
+
+class A<T> {}
+class B<G> inherits A<G> {}
+
+class Test {
+
+	operation test1<T>(t : T) : T is do
+		var x : X
+		x := test1(X.new)
+		result := t
+	end
+	
+	operation test2<T>(t : T) : T is do
+		var a : A<Y> 
+		var b : B<Y> init B<Y>.new
+		a := test1(b)
+		result := t
+	end
+	
+	operation test3<T>(t : B<T>) : T is do
+		var a : A<T> init t
+		result := void
+	end
+
+}
+
+/* END OF FILE */

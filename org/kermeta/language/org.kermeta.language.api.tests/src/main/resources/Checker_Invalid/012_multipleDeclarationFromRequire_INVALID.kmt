@@ -1,0 +1,10 @@
+
+package MultipleDeclaration;
+
+
+require kermeta
+require "003_multipleDeclarationFromRequire/My.ecore"
+
+class A
+{
+}

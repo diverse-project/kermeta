@@ -1,0 +1,15 @@
+/* $Id: 003_associations_02.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* double composition*/
+class A {
+    attribute b : B#a
+}
+class B {
+	attribute a : A#b
+}

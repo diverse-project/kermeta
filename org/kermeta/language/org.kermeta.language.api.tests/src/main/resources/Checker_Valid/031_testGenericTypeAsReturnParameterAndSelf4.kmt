@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : June 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+package testGenericTypeAsReturnParameter4;
+
+
+require kermeta
+using kermeta::standard
+
+class Test<IN>
+{
+    attribute a: Integer
+   
+    operation initialize() : Test<IN> is
+    do
+    	result := self
+    	result := self	// TYPE-CHECKER : Type mismatch, testGenericTypeAsReturnParameter4::Test<IN, IN> does not conform to required type : testGenericTypeAsReturnParameter4::Test<IN>.
+        self.a := 123
+        result := self // TYPE-CHECKER : Type mismatch, testGenericTypeAsReturnParameter4::Test<IN, IN, IN, IN> does not conform to required type : testGenericTypeAsReturnParameter4::Test<IN>.   
+		
+    end   
+}

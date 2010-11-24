@@ -1,0 +1,18 @@
+package testOpCall;
+
+require kermeta
+
+class Test_opcall {
+
+    operation operation1() : kermeta::standard::Integer is do
+        var ~result : kermeta::standard::Integer
+        ~result := operation_asg(~result)
+    end
+
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        var ~result : kermeta::standard::Integer
+        ~result := in + 3
+    end
+
+
+}

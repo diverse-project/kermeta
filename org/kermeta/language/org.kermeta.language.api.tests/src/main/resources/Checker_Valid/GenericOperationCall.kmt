@@ -1,0 +1,90 @@
+/* $Id: GenericOperationCall.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
+
+// Some operation calls involving generics
+
+package tctest;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+
+class List<T> {
+	operation one() : T is do 
+		result := void
+	end
+	operation add(element : T) is do end
+	
+	operation op() is do
+		var o : Object init one
+	end
+}
+
+class Util {
+	operation clone<T>(element : T) : T is do 
+		result := element
+	end
+	operation first<T>(lst : List<T>) : T is do 
+		result := void
+	end
+	operation asList<T>(element : T) : List<T> is do 
+		result := void
+	end
+}
+
+class A {}
+
+class B inherits A {}
+ 
+class Test {
+
+	operation test1() : Void is do
+		la := u.asList(a)
+	end
+	
+	operation test2() : Void is do
+		a := u.first(la)
+	end
+	
+	operation test3() : Void is do
+		a := u.clone(b)
+	end
+	
+	operation test4() : Void is do
+		a := lb.one
+	end
+	
+	operation test5() : Void is do
+		la.add(b)
+	end
+	
+	operation test6() : Void is do
+		la := u.clone(la)
+	end
+	
+	operation test7() : Void is do
+		a := u.first(u.first(lla))
+	end
+	
+	operation test8() : Void is do
+		la := lla.one
+	end
+	
+	operation test9() : Void is do
+		lla := u.first(u.asList(lla))
+	end
+	
+	attribute a : A
+	attribute b : B
+	
+	attribute la : List<A>
+	attribute lb : List<B>
+	
+	attribute lla : List<List<A>>
+	
+	attribute u : Util
+
+}
+
+/* END OF FILE */

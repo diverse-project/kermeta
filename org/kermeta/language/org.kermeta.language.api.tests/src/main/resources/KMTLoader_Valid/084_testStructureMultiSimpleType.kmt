@@ -1,0 +1,45 @@
+package packageDeclaration
+
+enumeration Seasons {spring; summer;}
+
+class A{
+
+	attribute a
+	operation b(b : Seasons) : Seasons is do
+	end 
+
+}
+
+class A{
+//caution same name typechecker is needed
+
+	attribute a
+	operation b(b : Seasons) : Seasons is do
+	end 
+
+}
+
+class B{
+
+	attribute a
+	operation b(b : Seasons) : Seasons is do
+	end 
+
+}
+
+class C{
+
+	attribute a
+	operation b(b : Seasons) : Seasons is do
+	end 
+
+}
+
+
+class D{
+
+	attribute a
+	operation b(b : Seasons) : Seasons is do
+	end 
+
+}

@@ -1,0 +1,29 @@
+
+package testModelTypes;
+
+require kermeta
+using kermeta::standard
+
+package basic_fsm {
+
+  class FSM {
+    property alphabet : set String[0..*]
+    attribute ownedState : oset State[0..*]
+    property readonly ownedTransition : set Transition[0..*]
+    reference initialState : State
+    reference finalState : set State[0..*]
+  }
+
+  class State {
+  	property name : String
+  }
+
+  class Transition {
+    property input : String
+    reference source : State
+    reference target : State
+  }
+
+}
+
+modeltype basic_fsmT { basic_fsm::FSM, basic_fsm::State, basic_fsm::Transition }

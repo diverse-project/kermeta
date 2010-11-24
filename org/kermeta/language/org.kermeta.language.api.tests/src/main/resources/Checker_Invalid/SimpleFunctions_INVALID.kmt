@@ -1,0 +1,168 @@
+/* $Id: SimpleFunctions.kmt,v 1.2 2008-04-28 11:51:16 ftanguy Exp $ */
+
+// Some wrong simple lambda expressions
+
+package kermeta;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+class IntegerIterator {
+	
+	attribute max : Integer
+	
+	operation times( body : <Integer -> Object> ) is do
+		from var i : Integer init 0
+		until i == max
+		loop
+			body(i)
+		end
+	end
+	
+}
+
+class A {}
+class B inherits A {}
+
+class Test {
+
+	operation test1() : Void is do
+		it := IntegerIterator.new
+		it.max := 10
+		var res : Integer
+		it.times { i | it := i}
+	end
+	
+	operation test11() : Void is do
+		it := IntegerIterator.new
+		it.max := 10
+		var res : Integer
+		it.times { i, u | res := i}
+	end
+	
+	operation test12() : Void is do
+		it := IntegerIterator.new
+		it.max := 10
+		var res : Integer
+		it.times ( function { i  : A | i } )
+	end
+
+	operation test2() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else "toto" end }
+		fact(12)
+	end
+	
+	operation test21() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k: Integer | if k == 1 then "x"	else "y" end }
+		fact(12)
+	end
+	
+	operation test22() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
+		fact("toto")
+	end
+	
+	operation test23() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
+		fact(12, 14)
+	end
+	
+	operation test3() : Void is do
+		var f1 : <B->B>
+		var f2 : <A->B>
+		
+		f2 := f1
+		
+	end
+	
+	operation test31() : Void is do
+		var f1 : < B -> A >
+		var f2 : < B -> B >
+		
+		f2 := f1
+		
+	end
+	
+	operation test32() : Void is do
+		var f1 : <B->A>
+		var f2 : <A->B>
+		
+		a := f1(a)
+		
+	end
+	
+	operation test33() : Void is do
+		var f1 : <B->A>
+		var f2 : <A->B>
+		
+		b := f1(a)
+		
+	end
+	
+	operation test4() : Void is do
+		var la : seq A[*] init Sequence<A>.new 
+		la := la.collect{ ma | a == ma }
+	end
+	
+	operation test5() : Void is do
+		var sort : < [<A -> Integer>, Collection<A>] -> Collection<A> >
+		var criterion : <A -> Integer>
+		
+		a := sort(criterion).one
+		
+		a := sort(function{ o : Object | 8}, la).one
+		
+	end
+	
+	operation test51() : Void is do
+		var sort : < [<A -> Integer>, Collection<A>] -> Collection<A> >
+		var criterion : <A -> Object>
+		
+		a := sort(criterion, la).one
+		
+		a := sort(function{ o : Object | 8}, la).one
+		
+	end
+	
+	operation test52() : Void is do
+		var sort : < [<A -> Integer>, Collection<A>] -> Collection<A> >
+		var criterion : <A -> Integer>
+		
+		a := sort(criterion, la).one
+		
+		a := sort(function{ o : Object | 8}, Collection<B>.new).one
+		
+	end
+	
+	operation test6() : Void is do
+		var names : Collection<String>
+		
+		names := self.getMetaClass.classDefinition.ownedOperation
+					.~select{ op | op.name.indexOf("test") == 0}
+					.collect{ op | op }
+	end
+	
+	operation test61() : Void is do
+		var names : Collection<String>
+		
+		names := self.getMetaClass.classDefinition
+					.~select{ op | op.name.indexOf("test") == 0}
+					.collect{ op | op.name }
+	end
+	
+	reference a : A
+	reference b : B
+	
+	reference la : A[1..*]
+	
+	attribute it : IntegerIterator
+
+}
+
+/* END OF FILE */

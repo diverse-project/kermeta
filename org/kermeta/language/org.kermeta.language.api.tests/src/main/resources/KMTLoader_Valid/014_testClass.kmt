@@ -1,0 +1,35 @@
+package testClass;
+
+require kermeta
+
+class Class1 {
+
+}
+
+
+package package1 {
+
+	abstract class Class11 inherits Class1 {
+	
+	}
+	
+	class Class12 inherits Class11, Class1 {
+	
+	}
+
+}
+
+class Class2<G> {
+
+}
+
+
+
+abstract class Class4<I,J> inherits package1::Class11 
+{
+
+}
+
+class Class3< G : Class1 > inherits Class2<G> {
+
+}

@@ -1,0 +1,15 @@
+/* $Id: 001_cyclicinheritance_01.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* cycle inheritance*/
+class A inherits B{
+    
+}
+class B inherits A {
+    
+}

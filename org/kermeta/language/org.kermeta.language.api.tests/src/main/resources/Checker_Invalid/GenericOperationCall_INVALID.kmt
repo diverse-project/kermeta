@@ -1,0 +1,74 @@
+/* $Id: GenericOperationCall.kmt,v 1.3 2008-04-28 11:51:16 ftanguy Exp $ */
+
+// Some wrong operation calls involving generics
+
+package tctest;
+
+require kermeta
+
+class List<T> {
+	operation one() : T is do end
+	operation add(element : T) is do end
+}
+
+class Util {
+	operation clone<T>(element : T) : T is do end
+	operation first<T>(lst : List<T>) : T is do end
+	operation asList<T>(element : T) : List<T> is do end
+}
+
+class A {}
+
+class B inherits A {}
+
+class Test {
+
+	operation test1() : Void is do
+		lb := u.asList(a)
+	end
+	
+	operation test2() : Void is do
+		u.first(a)
+	end
+	
+	operation test3() : Void is do
+		b := u.clone(a)
+	end
+	
+	operation test4() : Void is do
+		a := lla.one
+	end
+	
+	operation test5() : Void is do
+		lb.add(a)
+	end
+	
+	operation test6() : Void is do
+		la := u.clone(lb)
+	end
+	
+	operation test7() : Void is do
+		a := u.first(u.first(lla).one)
+	end
+	
+	operation test8() : Void is do
+		a := lla.one
+	end
+	
+	operation test9() : Void is do
+		la := u.first(u.asList(lla))
+	end
+	
+	attribute a : A
+	attribute b : B
+	
+	attribute la : List<A>
+	attribute lb : List<B>
+	
+	attribute lla : List<List<A>>
+	
+	attribute u : Util
+
+}
+
+/* END OF FILE */

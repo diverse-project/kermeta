@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : June 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	
+	
+	operation useDeprecated() : Foo is do
+		result := void
+	end
+	
+}
+
+@deprecated "do not use me anymore !"
+class Foo {
+
+}

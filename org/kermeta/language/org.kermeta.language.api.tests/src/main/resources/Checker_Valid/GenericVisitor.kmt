@@ -1,0 +1,64 @@
+/* $Id: GenericVisitor.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
+
+// A generic implementation of the Visitor DP
+// Test genericity features
+
+package toto;
+
+
+require kermeta
+
+using kermeta::standard
+//using kermeta::language::structure
+
+
+abstract class Visitor <ContextType, ResultType> {
+
+	operation visitA(node : A, ctx : ContextType) : ResultType is abstract
+	operation visitB(node : B, ctx : ContextType) : ResultType is abstract
+}
+
+
+class Visitable {
+	
+	operation accept <TCtx, TRes> 
+		(
+			visitor : Visitor <TCtx, TRes>, 
+			ctx : TCtx 
+		) 
+		: TRes is abstract
+}
+
+
+class A inherits Visitable {
+	method accept <TCtx, TRes> (visitor : Visitor <TCtx, TRes>, ctx : TCtx )	: TRes is do
+		visitor.visitA(self, ctx)
+		result := void
+	end
+}
+
+class B inherits A {
+	method accept <TCtx, TRes> (visitor : Visitor <TCtx, TRes>, ctx : TCtx )	: TRes is do
+		visitor.visitB(self, ctx)
+		result := void
+	end
+}
+
+class Test inherits Visitor <Integer, String> {
+
+	method visitA(node : A, ctx : Integer) : String is do
+		stdio.write(node.toString)
+		result := "toto"
+	end
+	
+	method visitB(node : B, ctx : Integer) : String is do
+		ctx := ctx + 1
+		result := ""
+	end
+	
+	operation test1() is do
+		var s : String init B.new.accept(self, 12)
+	end
+}
+
+/* END OF FILE */

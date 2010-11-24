@@ -1,0 +1,33 @@
+package testpackage;
+
+require kermeta
+using kermeta::standard
+using kermeta::utils
+
+
+
+
+class Determiniser<T : AnotherClass> {
+
+  attribute equiv_classes : Hashtable<T, String>
+  
+  operation determiniseAll(input : T) : T is
+  do
+    // The bodies are silly for now
+    determinise(T.new)
+    "blah".size
+    result := input
+  end
+  
+  operation determinise(input : T) : T is
+  do
+   /* input.states.add(T.new)
+    input.transitions.add(T.new)*/
+    result := input
+  end
+  
+}
+
+class AnotherClass{
+	attribute name : String
+}

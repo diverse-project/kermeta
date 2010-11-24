@@ -1,0 +1,97 @@
+/* $Id: ModelTypeOperations.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+// test verifying that some cases should raise typechecker errors 
+// see also the other file with the same name in the directory "valid"
+// has it inherits from Test, it check that all operation have one error
+
+@mainClass "invalidModelTypeOperations::tester"
+
+package invalidModelTypeOperations;
+
+require kermeta
+
+using kermeta::standard
+
+package mt1p {
+  class c1 {
+    property a : String
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+  }
+}
+modeltype mt1 { mt1p::c1, mt1p::c2 }
+
+package mt2p {
+  class c1 {
+    property a : String
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+  }
+  class c3 {
+    property c: String
+  }
+}
+modeltype mt2 { mt2p::c1, mt2p::c2, mt2p::c3 }
+
+package mt3p {
+  class c1 {
+    property a : String
+    property a2 : Boolean
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+    property b2: Boolean
+  }
+}
+modeltype mt3 { mt3p::c1, mt3p::c2 }
+
+class test1 <MT : mt1> {
+	operation transform(model : MT) : Void is
+	do
+		void
+	end
+}
+
+class test2 <MT : mt3> {
+	operation transform(model : MT) : Void is
+	do
+		void
+	end
+}
+
+class tester inherits kermeta::kunit::Test{
+	operation test1caller() : Void is
+	do
+		var m1 : mt1
+		var m2 : mt2
+		var m3 : mt3
+		
+		//ok
+		test1<mt1>.new.transform(m1) //ok
+		test1<mt2>.new.transform(m2) //ok
+		test1<mt3>.new.transform(m3) //ok
+		
+		//not ok
+		test2<mt1>.new.transform(m1) //not ok
+	end
+	operation test2caller() : Void is
+	do
+		var m1 : mt1
+		var m2 : mt2
+		var m3 : mt3
+
+		//not ok
+		test2<mt2>.new.transform(m2) //not ok
+		
+		//ok
+		test2<mt3>.new.transform(m3) //ok
+	end
+	
+}

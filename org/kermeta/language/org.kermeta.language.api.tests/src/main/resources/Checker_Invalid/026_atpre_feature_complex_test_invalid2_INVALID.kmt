@@ -1,0 +1,165 @@
+/* $Id: 026_atpre_feature_complex_test_invalid2.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $
+ * Creation date: June 22, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+	reference letoto1 : Toto
+	reference letoto2 : Toto
+	reference letiti1 : Titi
+	reference letiti2 : Titi
+	reference letiti3 : Titi
+	reference letiti4 : Titi
+	
+	operation main() : Void
+	is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation test0() : Void is do 
+		stdio.writeln("Feature:")
+		
+		letiti1 := Titi.new
+		letiti2 := Titi.new
+		letiti3 := Titi.new
+		letiti4 := Titi.new
+		
+		letoto1 := Toto.new
+		letoto1.name := "avant"
+		letoto1.letiti := letiti1
+		
+		letiti1.age := 1
+		letiti2.age := 3
+		
+		letoto2 := Toto.new
+		letoto2.name := "antes"
+		letoto2.letiti := letiti3
+		
+		letiti3.age := 5
+		letiti4.age := 7
+		
+		changetoto
+	end
+	
+	operation changetoto() : Void
+	pre lapre is do true end
+	post lapost1 is do	stdio.writeln("1, should be 'despues' :" + letoto1.name)
+		assert(letoto1.name == "despues")
+		true	end
+	/* test can not be done since letoto1.name@pre is not allowed by the constraint checker
+	post lapost2 is do	stdio.writeln("2, should be in theory 'antes' but kermeta cannot anticipate letoto1 and can only insure that it is 'avant' :" + letoto1.name@pre)
+		assert(letoto1.name@pre == "avant")
+		true	end
+	*/
+	post lapost3 is do	stdio.writeln("3, should be 'apres' :" + letoto1@pre.name)
+		assert(letoto1@pre.name == "apres")
+		true	end
+	post lapost4 is do	stdio.writeln("4, should be 'avant' :" + letoto1@pre.name@pre)
+		assert(letoto1@pre.name@pre == "avant")
+		true	end
+	post lapost5 is do	stdio.writeln("5, should be '8' :" + letoto1.letiti.age.toString)
+		assert(letoto1.letiti.age == 8)
+		true	end
+	post lapost6 is do	stdio.writeln("6, should be '4' :" + letoto1@pre.letiti.age.toString)
+		assert(letoto1@pre.letiti.age == 4)
+		true	end
+	/* test can not be done since letoto1.letiti@pre.age.toString is not allowed by the constraint checker */
+	post lapost7 is do	stdio.writeln("7, should be in theory '6' but kermeta cannot anticipate letoto1 and can only insure that it is '2':" + letoto1.letiti@pre.age.toString)
+		assert(letoto1.letiti@pre.age == 2)
+		true	end
+	
+	/* test can not be done since letoto1.letiti.age@pre.toString is not allowed by the constraint checker
+	post lapost8 is do	stdio.writeln("8, should be in theory '7' but kermeta cannot anticipate letoto1 and letiti, and can only insure that it is '1':" + letoto1.letiti.age@pre.toString)
+		assert(letoto1.letiti.age@pre == 1)
+		true	end
+	*/
+	post lapost9 is do	stdio.writeln("9, should be '2' :" + letoto1@pre.letiti@pre.age.toString)
+		assert(letoto1@pre.letiti@pre.age == 2)
+		true	end
+	/* test can not be done since letoto1@pre.letiti.age@pre.toString is not allowed by the constraint checker
+	post lapost10 is do	stdio.writeln("10, should be in theory '5' but kermeta cannot anticipate letiti and can only insure that it is '1':" + letoto1@pre.letiti.age@pre.toString)
+		assert(letoto1@pre.letiti.age@pre == 1)
+		true	end
+	*/
+	/* test can not be done since letoto1.letiti@pre.age@pre.toString is not allowed by the constraint checker
+	post lapost11 is do	stdio.writeln("11, should be in theory '5' but kermeta cannot anticipate letiti and can only insure that it is '1':" + letoto1.letiti@pre.age@pre.toString)
+		assert(letoto1.letiti@pre.age@pre == 1)
+		true	end
+	*/
+	post lapost12 is do	stdio.writeln("12, should be '1' :" + letoto1@pre.letiti@pre.age@pre.toString)
+		assert(letoto1@pre.letiti@pre.age@pre == 1)
+		true	end
+	 
+	is do
+		stdio.writeln("a, should be 'avant' :" + letoto1.name)
+		assert(letoto1.name == "avant")
+		stdio.writeln("b, should be '1' :" + letoto1.letiti.age.toString)
+		assert(letoto1.letiti.age == 1)
+		stdio.writeln("c, should be 'antes' :" + letoto2.name)
+		assert(letoto2.name == "antes")
+		stdio.writeln("d, should be '5' :" + letoto2.letiti.age.toString)
+		assert(letoto2.letiti.age == 5)
+		
+		stdio.writeln("e, should be '3' :" + letiti2.age.toString)
+		assert(letiti2.age == 3)
+		stdio.writeln("f, should be '7' :" + letiti4.age.toString)
+		assert(letiti4.age == 7)
+		
+		letoto1.name := "apres"
+		letoto1.letiti := letiti2
+		
+		letiti1.age := 2
+		letiti2.age := 4
+		
+		letoto2.name := "despues"
+		letoto2.letiti := letiti4
+		
+		letiti3.age := 6
+		letiti4.age := 8
+		
+		letoto1 := letoto2
+		
+		stdio.writeln("g, should be 'despues' :" + letoto1.name)
+		assert(letoto1.name == "despues")
+		stdio.writeln("h, should be '8' :" + letoto1.letiti.age.toString)
+		assert(letoto1.letiti.age == 8)
+		stdio.writeln("i, should be 'despues' :" + letoto2.name)
+		assert(letoto2.name == "despues")
+		stdio.writeln("j, should be '8' :" + letoto2.letiti.age.toString)
+		assert(letoto2.letiti.age == 8)
+		
+		stdio.writeln("k, should be '4' :" + letiti2.age.toString)
+		assert(letiti2.age == 4)
+		stdio.writeln("l, should be '8' :" + letiti4.age.toString)
+		assert(letiti4.age == 8)
+		
+	end
+	
+}
+
+class Toto
+{
+	reference name : String
+	reference letiti : Titi
+}
+
+class Titi
+{
+	reference age : Integer
+}

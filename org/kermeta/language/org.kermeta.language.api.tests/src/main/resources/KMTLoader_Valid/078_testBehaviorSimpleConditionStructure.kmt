@@ -1,0 +1,18 @@
+
+package a ;
+class B { 
+
+	operation opB ( ) is 
+	do 
+		if ( opB() ) then 
+			do 
+			
+			end 
+		else 
+			do 
+			
+			end 
+		end 
+	
+	end 
+} 
