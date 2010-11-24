@@ -10,7 +10,7 @@
 * Authors : paco
 */
 
-package org.kermeta.language.helpers;
+package org.kermeta.language.utilities.helpers;
 
 import java.util.Iterator;
 

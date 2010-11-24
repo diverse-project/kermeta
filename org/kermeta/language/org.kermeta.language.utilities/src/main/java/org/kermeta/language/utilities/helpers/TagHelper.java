@@ -10,7 +10,7 @@
 * Authors : paco
 */
 
-package org.kermeta.language.helpers;
+package org.kermeta.language.utilities.helpers;
 
 import org.kermeta.language.structure.Object;
 import org.kermeta.language.structure.StructureFactory;
@@ -42,7 +42,7 @@ public class TagHelper {
 	}
 	
 	static public Tag getTag(Object o, String tagName) {
-		for ( Tag t : o.getOwnedTags() ){
+		for ( Tag t : o.getKOwnedTags() ){
 			if ( t.getName() != null && t.getName().equals(tagName) ){
 				return t;
 			}

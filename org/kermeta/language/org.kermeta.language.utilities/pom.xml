@@ -30,8 +30,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>org.kermeta.language.helpers, 
-                        	org.kermeta.language.utilities
+                        <Export-Package>org.kermeta.language.utilities
                         </Export-Package>
                         <Import-Package>org.eclipse.emf.common.util,
                         	org.eclipse.emf.ecore,
@@ -41,7 +40,7 @@
 							org.kermeta.language.behavior
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-SymbolicName>org.kermeta.language.utilities;singleton:=true</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.language.utilities</Bundle-SymbolicName>
                         <!-- <Include-Resource>{maven-resources}</Include-Resource> --> 
                         
                     </instructions>
@@ -51,6 +50,11 @@
 		
 	</build>
 	<dependencies>
+        <dependency>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
