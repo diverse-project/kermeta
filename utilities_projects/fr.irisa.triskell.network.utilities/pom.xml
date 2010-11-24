@@ -8,6 +8,10 @@
     <version>1.0.0</version>
     <packaging>bundle</packaging>
     <name>Triskell - Network Utilities</name>
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://tipimouss:8091/job/fr.irisa.triskell.network.utilities/</url>
+    </ciManagement>
     <dependencies>
         <dependency>
             <groupId>org.apache.felix</groupId>
@@ -55,6 +59,20 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
