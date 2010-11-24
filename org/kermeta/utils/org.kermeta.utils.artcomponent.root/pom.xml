@@ -1,0 +1,46 @@
+<!-- $Id$ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.artcomponent.root -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.utils</groupId>
+    <artifactId>utils.artcomponent.root</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0.1-SNAPSHOT</version>
+    <name>K2 :: UTILS :: Root</name>
+
+    <parent>
+        <groupId>org.kermeta.art2</groupId>
+        <artifactId>art2.artcomponent.root</artifactId>
+        <version>2.2.1-beta1</version>
+    </parent>
+
+
+    <properties>
+        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+    </properties>
+	<profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- EXAMPLE FOR MYSQL -->
+                <sonar.jdbc.url>
+                   jdbc:derby://localhost:1507/sonar;create=true
+                </sonar.jdbc.url>
+                <sonar.jdbc.driver>org.apache.derby.jdbc.ClientDriver</sonar.jdbc.driver>
+                <sonar.jdbc.username>sonar</sonar.jdbc.username>
+                <sonar.jdbc.password>sonar</sonar.jdbc.password>
+
+                <!-- SERVER ON A REMOTE HOST -->
+                <sonar.host.url>http://tipimouss.irisa.fr:9000</sonar.host.url>
+            </properties>
+        </profile>
+    </profiles>
+</project>
