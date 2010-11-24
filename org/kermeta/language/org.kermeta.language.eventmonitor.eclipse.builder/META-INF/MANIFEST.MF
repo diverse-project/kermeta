@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.language.eventmonitor.eclipse.builder.art2
+ .impl;uses:="org.kermeta.language.api.kevent,org.kermeta.language.api
+ .messaging,org.osgi.framework,org.kermeta.art2.framework,org.kermeta.
+ language.api.port,scala.reflect,scala",org.kermeta.language.eventmoni
+ tor.eclipse.builder;uses:="org.kermeta.language.api.messaging,org.ker
+ meta.language.api.port,org.kermeta.language.eventmonitor.eclipse.buil
+ der.art2.impl,org.kermeta.language.api.kevent"
+Ignore-Package: org.eclipse.jface.action,org.eclipse.core.runtime,org.
+ eclipse.ui,org.eclipse.core.resources,org.eclipse.jface.viewers,org.e
+ clipse.core.internal.registry
+Bundle-ClassPath: .
+Built-By: hrambelo
+Tool: Bnd-0.0.357
+Bundle-Name: K2 :: EVENTMONITOR :: ECLIPSE :: BUILDER
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources,or
+ g.eclipse.ui,org.eclipse.jface,org.eclipse.ui.workbench,org.eclipse.u
+ i.ide
+Bundle-Vendor: IRISA/INRIA
+Build-Jdk: 1.6.0_18
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1284027367967
+Bundle-ManifestVersion: 2
+Import-Package: org.kermeta.art2.framework,org.kermeta.language.api.ke
+ vent,org.kermeta.language.api.messaging,org.kermeta.language.api.port
+ ,org.kermeta.language.eventmonitor.eclipse.builder,org.kermeta.langua
+ ge.eventmonitor.eclipse.builder.art2.impl,org.osgi.framework;version=
+ "[1.5,2)",scala,scala.reflect
+Bundle-SymbolicName: org.kermeta.language.eventmonitor.eclipse.builder
+ ;singleton:=true
+

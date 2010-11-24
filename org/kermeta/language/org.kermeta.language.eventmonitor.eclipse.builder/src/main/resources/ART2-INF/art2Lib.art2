@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKEvent">
+    <operations name="processKEvent" returnType="//@dataTypes.0">
+      <parameters name="arg0" type="//@dataTypes.1"/>
+    </operations>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEventMonitorEclipseBuilder" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.language.eventmonitor.eclipse.builder.art2.impl.Art2ComponentEventMonitorEclipseBuilderFactory" bean="org.kermeta.language.eventmonitor.eclipse.builder.art2.impl.Art2ComponentEventMonitorEclipseBuilder" requiredLibs="//@deployUnits.1 //@deployUnits.2 //@deployUnits.3 //@deployUnits.4 //@deployUnits.5" startMethod="start" stopMethod="stop">
+    <required name="kevent" ref="//@typeDefinitions.0"/>
+    <required name="log" ref="//@typeDefinitions.1"/>
+  </typeDefinitions>
+  <dataTypes name="void"/>
+  <dataTypes name="org.kermeta.language.api.kevent.KEvent"/>
+  <libraries name="org.kermeta.language" subTypes="//@typeDefinitions.2"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.eventmonitor.eclipse.builder" version="2.0.1-SNAPSHOT"/>
+  <deployUnits name="org.kermeta.language.model" url="mvn:org.kermeta.language/language.model"/>
+  <deployUnits name="org.kermeta.language.kp.model" url="mvn:org.kermeta.kp/kp.model"/>
+  <deployUnits name="org.kermeta.language.traceability.model" url="mvn:org.kermeta.traceability/traceability.model"/>
+  <deployUnits name="org.kermeta.language.api" url="mvn:org.kermeta.language/language.api"/>
+  <deployUnits name="org.kermeta.language.loader.scala" url="mvn:org.kermeta.language/language.loader.scala"/>
+</art2:ContainerRoot>

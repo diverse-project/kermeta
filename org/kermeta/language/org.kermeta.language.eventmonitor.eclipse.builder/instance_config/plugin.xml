@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="KermetaBuilder"
+         name="Kermeta Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="org.kermeta.language.eventmonitor.eclipse.builder.KermetaBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="KermetaNature"
+         name="Kermeta Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.kermeta.language.eventmonitor.eclipse.builder.KermetaNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.kermeta.language.eventmonitor.eclipse.builder.KermetaBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.kermeta.language.eventmonitor.eclipse.builder.contribution1">
+         <action
+               label="Add/Remove Kermeta Nature"
+               class="org.kermeta.language.eventmonitor.eclipse.builder.ToggleNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="org.kermeta.language.eventmonitor.eclipse.builder.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+	<extension point="org.eclipse.ui.ide.projectNatureImages">
+	 	<image 
+	 		id="kermetaNature" natureId="org.kermeta.language.eventmonitor.eclipse.builder.KermetaNature" icon="icons/projectNature.gif">
+	 	</image>
+	</extension>
+</plugin>
