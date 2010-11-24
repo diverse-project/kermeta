@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.language</groupId>
+	<artifactId>language.utilities</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+	<name>Kermeta - language utilities</name>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+        <plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>org.kermeta.language.helpers, 
+                        	org.kermeta.language.utilities
+                        </Export-Package>
+                        <Import-Package>org.eclipse.emf.common.util,
+                        	org.eclipse.emf.ecore,
+                        	org.eclipse.emf.ecore.impl,
+							org.osgi.framework,
+							org.kermeta.language.structure,
+							org.kermeta.language.behavior
+                        </Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-SymbolicName>org.kermeta.language.utilities;singleton:=true</Bundle-SymbolicName>
+                        <!-- <Include-Resource>{maven-resources}</Include-Resource> --> 
+                        
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+		
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.mod4j.org.eclipse.emf</groupId>
+			<artifactId>ecore</artifactId>
+			<version>2.5.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
+			<artifactId>xmi</artifactId>
+			<version>2.5.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mod4j.org.eclipse.core</groupId>
+			<artifactId>runtime</artifactId>
+			<version>3.5.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.11</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.model</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+			<type>bundle</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<repositories>        
+        <repository>
+			<id>kermetaSnapshots</id>
+			<name>Kermeta Snapshots</name>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<url>http://www.kermeta.org/maven2-snapshots</url>
+			<layout>default</layout>
+		</repository>
+     </repositories>
+	 <distributionManagement>
+		<repository>
+      		<id>tipimouss-local-maven-repository</id>
+      		<name>Tipimouss Local release repository</name>
+      		<url>file:/var/www/html/maven2</url>
+      		<uniqueVersion>false</uniqueVersion>
+    	</repository>
+    	<snapshotRepository>
+      		<id>tipimouss-local-maven-repository</id>
+      		<name>Tipimouss Local  snapshot repository</name>
+      		<url>file:/var/www/html/maven2-snapshots</url>
+      		<uniqueVersion>false</uniqueVersion>
+    	</snapshotRepository>		
+	</distributionManagement>
+</project>
