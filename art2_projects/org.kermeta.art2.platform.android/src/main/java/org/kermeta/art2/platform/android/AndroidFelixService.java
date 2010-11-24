@@ -130,7 +130,61 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
             + "org.xml.sax; "
             + "org.xml.sax.ext; "
             + "org.xml.sax.helpers; "
-            + "org.kermeta.art2.platform.android;").intern();
+            + "org.kermeta.art2.platform.android; "
+            + "scala.annotation.unchecked; "
+            + "scala.reflect.generic; "
+            + "scala.collection.interfaces; "
+            + "scala.xml.persistent; "
+            + "scala.actors.threadpool; "
+            + "scala.concurrent; "
+            + "scala.util.parsing.combinator.testing; "
+            + "scala.annotation; "
+            + "scala.concurrent.forkjoin; "
+            + "scala.io; "
+            + "scala.reflect; "
+            + "scala.util.automata; "
+            + "scala.ref; "
+            + "scala.util.parsing.syntax; "
+            + "scala.util.matching; "
+            + "scala.util.parsing.combinator; "
+            + "scala.compat; "
+            + "scala.runtime; "
+            + "scala.util.parsing.ast; "
+            + "scala.util.parsing.json; "
+            + "scala.util.logging; "
+            + "scala.xml.dtd; "
+            + "scala.util.parsing.combinator.token; "
+            + "scala.util.parsing.input; "
+            + "scala.testing; "
+            + "scala.util.grammar; "
+            + "scala.collection; "
+            + "scala.collection.immutable; "
+            + "scala.text; "
+            + "scala.actors.scheduler; "
+            + "scala; "
+            + "scala.actors; "
+            + "scala.util.continuations; "
+            + "scala.xml.include; "
+            + "scala.collection.script; "
+            + "scala.math; "
+            + "scala.util; "
+            + "scala.util.control; "
+            + "scala.actors.threadpool.helpers; "
+            + "scala.xml.parsing; "
+            + "scala.annotation.target; "
+            + "scala.xml; "
+            + "scala.actors.remote; "
+            + "scala.collection.mutable; "
+            + "scala.actors.threadpool.locks; "
+            + "scala.util.regexp; "
+            + "scala.xml.include.sax; "
+            + "scala.xml.factory; "
+            + "scala.xml.transform; "
+            + "scala.util.parsing.combinator.lexical; "
+            + "scala.util.parsing.combinator.syntactical; "
+            + "scala.xml.pull; "
+            + "scala.mobile; "
+            + "scala.collection.generic; ").intern();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -241,19 +295,17 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
                     String defaultBundlePath = sdDir.getAbsolutePath() + "/" + FELIX_BASE + "/bundle/";
 
                     try {
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"emf.lib-2.6.0.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.collection-2.8.0.jar", false);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.android.scala.library-2.8.0.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.model-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.adaptation.model-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.api-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.kompare-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.netty-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.deploy.osgi-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.core-2.2.1-SNAPSHOT.jar", true);
-                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath+"art2.framework.bus.jmdns-2.2.1-SNAPSHOT.jar", true);
-                        
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "emf.lib-2.6.0.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.model-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.adaptation.model-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.api-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.framework-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.kompare-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.framework.bus.netty-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.deploy.osgi-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.core-2.2.1-SNAPSHOT.jar", true);
+                        startDefaultBundle(felixFramework.getBundleContext(), defaultBundlePath + "art2.framework.bus.jmdns-2.2.1-SNAPSHOT.jar", true);
+
 
                     } catch (Exception e) {
                         Log.e("art2.osgi.service.logger", "Error deploying base ART2 bundles", e);
