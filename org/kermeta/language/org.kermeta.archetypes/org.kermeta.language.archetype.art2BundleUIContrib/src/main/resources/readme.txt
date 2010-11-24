@@ -1,1 +1,0 @@
-Put the resource files for the bundle here 

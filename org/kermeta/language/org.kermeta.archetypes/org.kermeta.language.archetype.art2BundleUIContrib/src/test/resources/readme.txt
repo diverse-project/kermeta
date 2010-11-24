@@ -1,1 +1,0 @@
-Put the test resource files for the bundle here
