@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.kermeta.language.texteditor.eclipse.KermetaEditor" 
+		contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" 
+		extensions="kmt" 
+		icon="platform:/plugin/org.kermeta.language.texteditor.eclipse/icons/kermeta.gif" 
+		id="org.kermeta.language.texteditor.eclipse.KermetaEditor" 
+		name="Kermeta Editor">
+		</editor>
+	</extension>
+
+</plugin>

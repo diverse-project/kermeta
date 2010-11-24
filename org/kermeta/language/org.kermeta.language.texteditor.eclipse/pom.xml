@@ -1,0 +1,214 @@
+<!-- $Id$ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.texteditor.eclipse -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>language.texteditor.eclipse</artifactId>
+	<packaging>bundle</packaging>
+	<name>K2 :: TEXTEDITOR :: ECLIPSE</name>
+
+	<parent>
+		<groupId>org.kermeta.language</groupId>
+		<artifactId>language.artcomponent.root</artifactId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- Main dependencies -->
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.model</artifactId>
+			<version>${kermeta.version}</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
+	<!-- 	not needed because already in the parent <dependency>
+			<groupId>org.kermeta.art2</groupId>
+			<artifactId>art2.framework</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency> -->
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.api</artifactId>
+			<version>${kermeta.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<!--  Eclipse Dynamic Plugin provisionning dependencies -->
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.pde.core</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<!-- Eclipse dependencies (for UI) -->
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.commands</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.jobs</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.5.1.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.registry</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.ide</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.views</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.workbench</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.swt</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface.text</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.editors</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.text</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<!-- Add resources from the plugin structure -->
+		<resources>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>icons</directory>
+				<targetPath>icons</targetPath>
+			</resource>
+			<resource>
+				<directory>instance_config</directory>
+				<targetPath>instance_config</targetPath>
+			</resource>
+			<resource>
+				<directory>target/generated-sources/art2</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+				<extensions>true</extensions>
+
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<!-- <Bundle-Activator>org.kermeta.language.texteditor.eclipse.Activator</Bundle-Activator> -->
+						<Export-Package>
+                        	org.kermeta.language.texteditor.eclipse.*
+                        </Export-Package>
+						<Require-Bundle>
+							org.eclipse.core.runtime,
+							org.eclipse.core.resources,
+							org.eclipse.core.commands,
+							org.eclipse.equinox.registry,
+							org.eclipse.ui,
+							org.eclipse.ui.ide,
+							org.eclipse.ui.views,
+							org.eclipse.jface,
+							org.eclipse.jface.text,
+							org.eclipse.ui.editors,
+							org.eclipse.text,
+							org.eclipse.ui.workbench,
+							org.eclipse.ui.workbench.texteditor
+                        </Require-Bundle>
+						<!-- 	specify the packages that should be imported to correctly build the bundle (i.e <packaging>bundle<packaging> 
+								".*" to also include sub packages
+							use the ! for avoiding to import some packages that are already 
+							there with the Require-Bundle -->
+						<Import-Package>
+							!org.eclipse.core.*,
+							!org.eclipse.ui.*,
+							!org.eclipse.jface.*,
+							!org.eclipse.swt.*,
+							!org.eclipse.text,
+							org.kermeta.*,
+							scala.*,
+							org.slf4j.*;version="${slf4j.version.range}",
+							org.osgi.framework;version="[1.5,2)"
+                        </Import-Package>
+						<!-- add extra element in the manifest, copy them from this file ex: 
+							Bundle-ActivationPolicy: lazy -->
+						<_include>resources/META-INF/MANIFEST-part.MF</_include>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
