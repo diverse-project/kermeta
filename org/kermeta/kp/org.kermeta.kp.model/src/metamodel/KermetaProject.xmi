@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.emftext.sdk.concretesyntax:ConcreteSyntax xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.emftext.sdk.concretesyntax="http://www.emftext.org/sdk/concretesyntax" name="kpt">
+  <package href="KermetaProject.genmodel#//kp"/>
+  <startSymbols href="KermetaProject.genmodel#//kp/KermetaProject"/>
+  <options type="basePackage" value="org.kermeta.kp.editor"/>
+  <tokens xsi:type="org.emftext.sdk.concretesyntax:NormalToken" name="COMMENT" regex="'//'(~('\n'|'\r'|'\uffff'))*"/>
+  <tokens xsi:type="org.emftext.sdk.concretesyntax:NormalToken" name="INTEGER" regex="('-')?('1'..'9')('0'..'9')*|'0'"/>
+  <tokens xsi:type="org.emftext.sdk.concretesyntax:NormalToken" name="FLOAT" regex="('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ "/>
+  <tokenStyles tokenName="KermetaProject" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="name" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="dependencies" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="sources" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="weaveDirectives" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="options" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="version" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="group" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="Dependency" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="project" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="SourceFolder" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="folderName" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="SourceFile" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="uri" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="SourceNSURI" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="from" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="SourceQuery" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="query" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="WeaveDirective" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="mix" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="target" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="Option" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="value" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="Expression" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="StringExpression" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="MixExpression" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="left" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <tokenStyles tokenName="right" rgb="7F0055">
+    <fontStyles>BOLD</fontStyles>
+  </tokenStyles>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="KermetaProject"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="name"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/NamedElement/name"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="dependencies"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/dependencies"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="sources"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/sources"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="weaveDirectives"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/weaveDirectives"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="options"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/options"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="version"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/version"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="group"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/KermetaProject/group"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/KermetaProject"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="dependency"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/NamedElement/name"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="project"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderUsingDefaultToken" token="//@syntheticTokens.0">
+                <feature href="KermetaProject.genmodel#//kp/Dependency/project"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="group"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/Dependency/group"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="version"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/Dependency/version"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/Dependency"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="SourceFolder"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="folderName"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/SourceFolder/folderName"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/SourceFolder"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="SourceFile"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="uri"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/SourceFile/uri"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/SourceFile"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="SourceNSURI"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="from"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderUsingDefaultToken" token="//@syntheticTokens.0">
+                <feature href="KermetaProject.genmodel#//kp/ImportedSource/from"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="uri"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/SourceNSURI/uri"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/SourceNSURI"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="SourceQuery"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="from"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderUsingDefaultToken" token="//@syntheticTokens.0">
+                <feature href="KermetaProject.genmodel#//kp/ImportedSource/from"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="query"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/SourceQuery/query"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/SourceQuery"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="WeaveDirective"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="name"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/NamedElement/name"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="mix"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/WeaveDirective/mix"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="target"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/WeaveDirective/target"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/WeaveDirective"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="Option"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="name"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/NamedElement/name"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="value"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/Option/value"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/Option"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="Expression"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/Expression"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="StringExpression"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="value"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:PlaceholderInQuotes" token="//@syntheticTokens.3" prefix="&quot;" suffix="&quot;">
+                <feature href="KermetaProject.genmodel#//kp/StringExpression/value"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/StringExpression"/>
+  </rules>
+  <rules>
+    <definition>
+      <options>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="MixExpression"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="{"/>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CompoundDefinition">
+          <cardinality xsi:type="org.emftext.sdk.concretesyntax:STAR"/>
+          <definitions>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="left"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/MixExpression/left"/>
+              </parts>
+            </options>
+            <options>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="right"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value=":"/>
+              <parts xsi:type="org.emftext.sdk.concretesyntax:Containment">
+                <feature href="KermetaProject.genmodel#//kp/MixExpression/right"/>
+              </parts>
+            </options>
+          </definitions>
+        </parts>
+        <parts xsi:type="org.emftext.sdk.concretesyntax:CsString" value="}"/>
+      </options>
+    </definition>
+    <metaclass href="KermetaProject.genmodel#//kp/MixExpression"/>
+  </rules>
+</org.emftext.sdk.concretesyntax:ConcreteSyntax>
