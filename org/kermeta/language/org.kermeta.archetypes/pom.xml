@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+	<!-- $Id: pom.xml 12028 2010-08-04 07:18:21Z francoisfouquet $ -->
+	<!-- License    : EPL 									 -->
+	<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<name>Kermeta :: Archetypes</name>
+	<artifactId>language.archetypes</artifactId>
+
+	<groupId>${parent.groupId}</groupId>
+	<version>${kermeta.version}</version>
+
+	<parent>
+		<artifactId>language.root</artifactId>
+		<groupId>org.kermeta.language</groupId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>createArchetypesUIBundle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>mvn</executable>
+							<workingDirectory>${project.build.directory}/../org.kermeta.language.archetype.art2BundleUIContrib</workingDirectory>
+							<arguments>
+								<argument>clean</argument>
+								<argument>archetype:create-from-project</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>deployArchetypesUIBundle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>mvn</executable>
+							<workingDirectory>org.kermeta.language.archetype.art2BundleUIContrib/target/generated-sources/archetype</workingDirectory>
+							<arguments>
+								<argument>clean</argument>
+								<argument>deploy</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>createArchetypesBundle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>mvn</executable>
+							<workingDirectory>${project.build.directory}/../org.kermeta.language.archetype.art2Bundle</workingDirectory>
+							<arguments>
+								<argument>clean</argument>
+								<argument>archetype:create-from-project</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>deployArchetypesBundle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>mvn</executable>
+							<workingDirectory>org.kermeta.language.archetype.art2Bundle/target/generated-sources/archetype</workingDirectory>
+							<arguments>
+								<argument>clean</argument>
+								<argument>deploy</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
