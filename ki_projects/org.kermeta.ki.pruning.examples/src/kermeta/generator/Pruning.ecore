@@ -11,6 +11,7 @@
         upperBound="-1" eType="#//RequiredElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequiredElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="srcRelations" lowerBound="1"

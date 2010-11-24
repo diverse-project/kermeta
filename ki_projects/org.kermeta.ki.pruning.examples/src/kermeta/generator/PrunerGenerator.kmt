@@ -39,8 +39,7 @@ class PrunerGenerator {
 	reference mainClasses : EClass[0..*]
 	
 
-	operation initialise(pruningData : Pruning, metamodel : EPackage,
-						prunerName : String, modelURI : String) : PrunerGenerator is do
+	operation initialise(pruningData : Pruning, metamodel : EPackage, modelURI : String) : PrunerGenerator is do
 		result := self
 		self.pruningData := pruningData
 		self.metamodel   := metamodel
@@ -49,7 +48,7 @@ class PrunerGenerator {
 		prunerClassGenerator := PrunerClassGenerator.new.initialise(self)
 	
 		self.prunerClass := EClass.new
-		self.prunerClass.name := prunerName
+		self.prunerClass.name := pruningData.name
 		
 		self.pruningData.requiredElements.each{elt |
 			elt.srcRelations.each{src | src.relation.eContainingClass.sourceRelations.add(src.relation) }
@@ -138,11 +137,11 @@ class Test {
 		var modelURI	: String init "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/StateMachine.ecore"
 		var pruningSM 	: Pruning init getPruningModel("platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/SM/SM.prunergenerator")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
-		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, "StateMachinePruning", modelURI)
+		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, modelURI)
 		
 		pruner.generatePruner()
 //		stdio.writeln(pruner.modelAspectCode)
-		stdio.writeln(pruner.prunerClassGenerator.generatedCode)
+//		stdio.writeln(pruner.prunerClassGenerator.generatedCode)
 		saveCode(pruner, "../SM/output/")
 	end
 	

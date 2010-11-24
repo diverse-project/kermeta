@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" radius="true" description="Shows the path from the states.">
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" radius="true" description="Shows the path from the states." name="StateMachinePruning">
   <requiredElements>
     <srcRelations>
       <relation href="StateMachine.ecore#//stateMachine/OutputState/outgoingTransitions"/>

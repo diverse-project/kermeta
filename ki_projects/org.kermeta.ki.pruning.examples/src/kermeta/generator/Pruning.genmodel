@@ -14,6 +14,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/requiredElements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/name"/>
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//RequiredElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/srcRelations"/>
