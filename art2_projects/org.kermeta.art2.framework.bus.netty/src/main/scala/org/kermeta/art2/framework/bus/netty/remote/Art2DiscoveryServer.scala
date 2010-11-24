@@ -50,7 +50,7 @@ class Art2DiscoveryServer(groupPort : Int) extends SimpleChannelUpstreamHandler 
 
     channel = newbootstrap.bind(new InetSocketAddress(groupPort)).asInstanceOf[DatagramChannel]
 
-    channel.w
+//    channel.w
 
 
   }
