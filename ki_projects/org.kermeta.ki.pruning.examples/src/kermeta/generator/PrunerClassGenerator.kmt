@@ -114,7 +114,7 @@ class PrunerClassGenerator inherits Generator {
 		result := result + ")"
 		
 		if(prunerGenerator.pruningData.radius) then
-			result := result + " or currentRadius>radius "
+			result := result + " or currentRadius>radius"
 		end
 		
 		result := result + "\n\t\tloop\n\t\t\t"
@@ -166,7 +166,7 @@ class PrunerClassGenerator inherits Generator {
 			result := result + ", radius : Integer"
 		end
 
-		result := result + ") : " + prunerGenerator.prunerClass.name + " is do \n"
+		result := result + ") : " + prunerGenerator.prunerClass.name + " is do\n"
 		result := result + "\t\tresult := self\n"
 
 		classAdded.each{clazz |

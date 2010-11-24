@@ -169,53 +169,7 @@ class Test {
 			end
 		}
 	end
-	/* 
-	operation createStateMachineModel(requiredStates : Bag<OutputState>) : StateMachine is do
-		result := StateMachine.new
-		
-		var initState : InitState init InitState.new
-		var s1 : StandardState init StandardState.new
-		var s2 : StandardState init StandardState.new
-		var terminal : TerminalState init TerminalState.new
-		var transition : Transition init Transition.new
-		
-		initState.name := "init"
-		s1.name := "s1"
-		s2.name := "s2"
-		terminal.name := "end"
-		
-		result.initState := initState
-		result.states.add(initState)
-		result.states.add(s1)
-		result.states.add(s2)
-		result.states.add(terminal)
-		
-		transition.source := initState
-		transition.target := s1
-		result.transitions.add(transition)
-		
-		transition := Transition.new
-		transition.source := s1
-		transition.target := s2
-		result.transitions.add(transition)
-		
-		transition := Transition.new
-		transition.source := s2
-		transition.target := s1
-		result.transitions.add(transition)
-		
-		transition := Transition.new
-		transition.source := s2
-		transition.target := s2
-		result.transitions.add(transition)
-		
-		transition := Transition.new
-		transition.source := s2
-		transition.target := terminal
-		result.transitions.add(transition)
-		
-		requiredStates.add(initState)
-	end */
+
 	
 	
 	operation getPruningModel(uriPruningModel : String) : Pruning is do

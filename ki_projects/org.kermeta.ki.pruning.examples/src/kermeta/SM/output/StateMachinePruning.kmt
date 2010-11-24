@@ -14,7 +14,7 @@ abstract class StateMachinePruning {
 
 	reference addedTransitions : Bag<Transition>
 
-	operation initialise(requiredOutputStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do 
+	operation initialise(requiredOutputStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do
 		result := self
 		self.addedStates := Bag<State>.new
 		self.addedTransitions := Bag<Transition>.new
@@ -30,7 +30,7 @@ abstract class StateMachinePruning {
 		requiredOutputStates.each{theOutputState | theStates.add(theOutputState) }
 
 		from true
-		until (theStates.empty()) or currentRadius>radius 
+		until (theStates.empty()) or currentRadius>radius
 		loop
 			theStates.each{theState |
 				if(theState.visited.isVoid) then
