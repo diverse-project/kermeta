@@ -1,0 +1,39 @@
+<!-- $Id: $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.api -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : username <usermail@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.api</artifactId>
+    <packaging>bundle</packaging>
+    <name>Kermeta :: Core :: Api</name>
+
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+   		<artifactId>language.artcomponent.root</artifactId>
+    	<version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.traceability</groupId>
+            <artifactId>traceability.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.kermeta.kp</groupId>
+        	<artifactId>kp.model</artifactId>
+        	<version>${kermeta.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

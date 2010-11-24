@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.language.api.port;uses:="org.kermeta.langu
+ age.api,org.kermeta.language.structure,org.kermeta.traceability",org.
+ kermeta.language.api;uses:="org.kermeta.traceability"
+Built-By: hrambelo
+Build-Jdk: 1.6.0_18
+Bundle-Version: 2.0.0.SNAPSHOT
+Tool: Bnd-0.0.357
+Bundle-Name: Kermeta :: Core :: Api
+Bnd-LastModified: 1280933562672
+Created-By: Apache Maven Bundle Plugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.language.api
+Import-Package: org.kermeta.language.api,org.kermeta.language.api.port
+ ,org.kermeta.language.structure,org.kermeta.traceability
+
