@@ -1,13 +1,19 @@
 Manifest-Version: 1.0
+Export-Package: org.kermeta.language.helpers;uses:="org.eclipse.emf.co
+ mmon.util,org.kermeta.language.structure,org.eclipse.emf.ecore",org.k
+ ermeta.language.utilities;uses:="org.osgi.framework,org.eclipse.emf.e
+ core,org.eclipse.emf.common.util,org.eclipse.emf.ecore.impl"
+Bundle-ClassPath: .
+Built-By: dvojtise
+Tool: Bnd-0.0.357
+Bundle-Name: Kermeta - language utilities
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 2.0.1.SNAPSHOT
+Build-Jdk: 1.6.0_17
+Bnd-LastModified: 1290615777999
 Bundle-ManifestVersion: 2
-Bundle-Name: Kermeta languages Utilities
-Bundle-SymbolicName: org.kermeta.language.utilities
-Bundle-Version: 1.4.0.qualifier
-Bundle-Activator: org.kermeta.language.utilities.Activator
-Bundle-Vendor: IRISA/INRIA
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.osgi.framework;version="1.3.0"
-Bundle-ActivationPolicy: lazy
-Require-Bundle: org.kermeta.language.model;bundle-version="1.4.0"
-Export-Package: org.kermeta.language.helpers,
- org.kermeta.language.utilities
+Import-Package: org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.
+ eclipse.emf.ecore.impl,org.kermeta.language.behavior,org.kermeta.lang
+ uage.structure,org.osgi.framework
+Bundle-SymbolicName: org.kermeta.language.utilities;singleton:=true
+
