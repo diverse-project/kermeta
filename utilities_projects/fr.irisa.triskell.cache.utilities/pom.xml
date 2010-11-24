@@ -67,7 +67,7 @@
             <properties>
                 <!-- EXAMPLE FOR MYSQL -->
                 <sonar.jdbc.url>
-                   jdbc:derby://tipimouss.irisa.fr:1507/sonar;create=true
+                   jdbc:derby://localhost:1507/sonar;create=true
                 </sonar.jdbc.url>
                 <sonar.jdbc.driver>org.apache.derby.jdbc.ClientDriver</sonar.jdbc.driver>
                 <sonar.jdbc.username>sonar</sonar.jdbc.username>
