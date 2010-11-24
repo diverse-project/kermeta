@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <componentTypes name="Art2ComponentKWF" factoryBean="org.kermeta.language.kwf.art2.impl.Art2ComponentKWFFactory" startMethod="start" stopMethod="stop">
+    <provided name="kevent" ref="//@portTypes.0">
+      <mappings beanMethodName="getKEvent" serviceMethodName="getKEvent"/>
+    </provided>
+  </componentTypes>
+  <dataTypes name="void"/>
+  <dataTypes name="org.kermeta.language.api.kevent.KEvent"/>
+  <portTypes xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKEvent">
+    <operations name="getKEvent" returnType="//@dataTypes.0">
+      <parameters name="arg0" type="//@dataTypes.1"/>
+    </operations>
+  </portTypes>
+  <libraries name="org.kermeta.language" groupName="org.kermeta.language" unitName="language.KWF" version="1.0.0-SNAPSHOT" subComponentTypes="//@componentTypes.0"/>
+</art2:ContainerRoot>

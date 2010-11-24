@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.language.kwf.art2.impl;uses:="org.kermeta.
+ language.api.kevent,org.kermeta.language.api.messaging,org.osgi.frame
+ work,org.kermeta.art2.framework,org.kermeta.language.api.port,org.ker
+ meta.art2.framework.osgi,scala.reflect,scala,scala.collection.mutable
+ ,scala.runtime,scala.actors,scala.collection.immutable,org.kermeta.ar
+ t2.framework.port,org.slf4j"
+Bundle-ClassPath: .
+Built-By: ffouquet
+Tool: Bnd-0.0.357
+Bundle-Name: K2 :: KWF
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.0.SNAPSHOT
+Bnd-LastModified: 1284562153183
+Bundle-ManifestVersion: 2
+Import-Package: org.kermeta.art2.framework,org.kermeta.art2.framework.
+ osgi,org.kermeta.art2.framework.port,org.kermeta.language.api.kevent,
+ org.kermeta.language.api.messaging,org.kermeta.language.api.port,org.
+ kermeta.language.kwf.art2.impl,org.osgi.framework;version="[1.5,2)",o
+ rg.slf4j;version="1.6",scala,scala.actors,scala.collection.immutable,
+ scala.collection.mutable,scala.reflect,scala.runtime
+Bundle-SymbolicName: org.kermeta.language.KWF;singleton:=true
+
