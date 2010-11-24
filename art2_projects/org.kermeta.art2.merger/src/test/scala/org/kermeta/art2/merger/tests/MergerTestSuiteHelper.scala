@@ -45,18 +45,21 @@ trait MergerTestSuiteHelper extends JUnitSuite {
 }
 
 
-case class RichContainerRoot(self : ContainerRoot) {
+case class RichContainerRoot(self : ContainerRoot) extends MergerTestSuiteHelper {
+  /*
   def testSave = {
     try{
-      Art2XmiHelper.save(File.createTempFile("art2temp", ".art2").getAbsolutePath, self)
+      var fileTemp = File.createTempFile("art2temp", ".art2")
+      Art2XmiHelper.save(fileTemp.getAbsolutePath, self)
     } catch {
       case _ @ e => e.printStackTrace; fail()
     }
-  }
+  }*/
 
   def testSave(path : String,file:String) = {
     try{
       Art2XmiHelper.save(this.getClass.getClassLoader.getResource(path).getPath+"/"+file, self)
+      assert(hasNoRelativeReference(path,file) )
     } catch {
       case _ @ e => e.printStackTrace; fail()
     }

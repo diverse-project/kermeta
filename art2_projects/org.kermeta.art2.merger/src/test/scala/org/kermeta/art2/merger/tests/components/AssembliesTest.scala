@@ -23,6 +23,8 @@ class AssembliesTest extends MergerTestSuiteHelper  {
     component = new Art2MergerComponent
   }
 
+
+  
   @Test def verifyComponentInstanceAdded() {
     var mergedModel = component.merge(model("assemblies/base-assembly.art2"), model("assemblies/PlusInstance.art2"))
     mergedModel testSave ("assemblies","PlusInstanceMerged.art2")
@@ -104,9 +106,9 @@ class AssembliesTest extends MergerTestSuiteHelper  {
                         case Some(port) => port
                         case None => error("Port not found")
                       }
-                  }
+                    }
                 }
-            }
+              }
             case None => error("No node named 'node' found.")
           }
 
@@ -119,9 +121,9 @@ class AssembliesTest extends MergerTestSuiteHelper  {
                         case Some(port) => port
                         case None => error("Port not found")
                       }
-                  }
+                    }
                 }
-            }
+              }
             case None => error("No node named 'node' found.")
           }
 
@@ -156,7 +158,7 @@ class AssembliesTest extends MergerTestSuiteHelper  {
           } else {
             error("Hub instance 'hub-0' found. Should have been removed.")
           }
-      }
+        }
       case None =>
     }
   }
@@ -188,9 +190,9 @@ class AssembliesTest extends MergerTestSuiteHelper  {
                         case Some(port) => port
                         case None => error("Port not found")
                       }
-                  }
+                    }
                 }
-            }
+              }
             case None => error("No node named 'node' found.")
           }
 
@@ -203,9 +205,9 @@ class AssembliesTest extends MergerTestSuiteHelper  {
                         case Some(port) => port
                         case None => error("Port not found")
                       }
-                  }
+                    }
                 }
-            }
+              }
             case None => error("No node named 'node' found.")
           }
 
@@ -238,7 +240,7 @@ class AssembliesTest extends MergerTestSuiteHelper  {
           } else {
             error("Hub instance 'hub-0' found. Should have been removed.")
           }
-      }
+        }
       case None =>
     }
   }
@@ -260,11 +262,11 @@ class AssembliesTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("assemblies/PlusNode.art2"), model("assemblies/base-assembly.art2"))
     mergedModel testSave ("assemblies","MinusEmptyNodeMerged.art2")
 
-    assert(mergedModel.getNodes.size == 1)
+    assert(mergedModel.getNodes.size == 2)
 
     mergedModel.getNodes.find(node=>node.getName=="addedNode") match {
-      case None =>
-      case Some(n) => error("Node 'addedNode' found. Should have been removed.")
+      case None => error("Node 'addedNode' not found. Should not have been removed.")
+      case Some(n) => 
     }
   }
 
@@ -281,7 +283,7 @@ class AssembliesTest extends MergerTestSuiteHelper  {
             case None => error("Component Instance not added in 'addedNode'")
             case Some(s) =>
           }
-      }
+        }
     }
   }
 
@@ -289,18 +291,17 @@ class AssembliesTest extends MergerTestSuiteHelper  {
     var mergedModel = component.merge(model("assemblies/PlusNodeAndInstance.art2"), model("assemblies/base-assembly.art2"))
     mergedModel testSave ("assemblies","MinusNodeAndInstanceMerged.art2")
 
-
-
     mergedModel.getNodes.find(node=>node.getName=="addedNode") match {
-      case None => 
+      case None => error("Node remove !")
       case Some(n) => {
           n.getComponents.find(cpt=>cpt.getName == "ComponentA--19111725") match {
-            case None => error("Node not found")
-            case Some(s) => error("Component Instance found in 'addedNode' and addedNode still present. All should have been removed.")
+            case None => error("ComponentInstance not found")
+            case Some(s) => //error("Component Instance found in 'addedNode' and addedNode still present. All should have been removed.")
           }
-      }
+        }
     }
-assert(mergedModel.getNodes.size == 1)
+    
+    assert(mergedModel.getNodes.size == 2)
 
   }
 
