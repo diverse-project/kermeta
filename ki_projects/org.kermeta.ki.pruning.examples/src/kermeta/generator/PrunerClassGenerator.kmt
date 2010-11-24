@@ -14,8 +14,6 @@ using kermeta::standard
 
 
 class PrunerClassGenerator inherits Generator {
-	reference classContainer : EClass[0..*]
-
 	reference classRequired : EClass[0..*]
 
 	reference classAdded : EClass[0..*]
@@ -32,32 +30,15 @@ class PrunerClassGenerator inherits Generator {
 		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" +
 						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n\nusing kermeta::standard\n\n"
 		generatedCode := generatedCode + "abstract class " + prunerGenerator.prunerClass.name + " {\n"
-		generatedCode := generatedCode + generateContainers() + "\n"
 		
 		if(prunerGenerator.pruningData.radius) then
 			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
 		end
 		
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
-						 generateIntialiseOperation() + generateLaunchOperation() + generatePreparePruningOperation() +
-						 "\n" + generateAddOperations + "}\n"
+						 generateIntialiseOperation() + generateLaunchOperation() + generateAddOperations + "}\n"
 	end
 
-
-	operation generatePreparePruningOperation() : String is do
-		result := "\toperation preparePruning() : Void is do\n"
-		
-		prunerGenerator.pruningData.requiredElements.each{elt |
-			elt.origins.each{rel |
-				var name : String init rel.eType.asType(EClass).getVarNameClassifier
-				result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
-							".each{" + name + " | " + name +".visited := false }\n"
-			}
-		}
-		
-		result := result + "\tend\n"
-	end
-	
 	
 	operation generateAddOperations() : String is do
 		result := ""
@@ -72,7 +53,6 @@ class PrunerClassGenerator inherits Generator {
 		var varClasses : Bag<EClass> init Bag<EClass>.new
 		var i : Integer
 		result := "\toperation launch() : Void is do\n"
-		result := result + "\t\tpreparePruning()\n\n"
 		
 		// Exploring the model to prune requires some variables.
 		prunerGenerator.pruningData.requiredElements.each{elt |
@@ -141,8 +121,8 @@ class PrunerClassGenerator inherits Generator {
 		
 		varClasses.each{clazz |
 			var name  : String init clazz.getVarNameClassifier()
-			result := result + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(not " +
-					  name + ".visited) then\n\t\t\t\t\t" + name + ".visit(self, " + clazz.getVarNameSet() + "2)\n\t\t\t\tend\n\t\t\t}\n"
+			result := result + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(" +
+					  name + ".visited.isVoid) then\n\t\t\t\t\t" + name + ".visit(self, " + clazz.getVarNameSet() + "2)\n\t\t\t\tend\n\t\t\t}\n"
 		}
 		
 		result := result + "\n"
@@ -176,14 +156,10 @@ class PrunerClassGenerator inherits Generator {
 		var i : Integer init 0
 		result := "\toperation initialise("
 
-		classContainer.each{clazz |
-			if(i>0) then result := result + ", " end
-			result := result + clazz.getVarNameClassifier() + " : " + clazz.name
-			i := i + 1
-		}
-
 		classRequired.each{clazz |
-			result := result + ", " + clazz.getRequiredAttributeName() + " : bag " + clazz.name + "[0..*]"
+			if(i>0) then result := result + ", " end
+			result := result + clazz.getRequiredAttributeName() + " : bag " + clazz.name + "[0..*]"
+			i := i + 1
 		}
 
 		if(prunerGenerator.pruningData.radius) then
@@ -195,10 +171,6 @@ class PrunerClassGenerator inherits Generator {
 
 		classAdded.each{clazz |
 			result := result + "\t\tself." + clazz.getAddedAttributeName() + " := Bag<" + clazz.name + ">.new\n"
-		}
-
-		classContainer.each{clazz |
-			result := result + "\t\tself." + clazz.getVarNameClassifier() + " := " + clazz.getVarNameClassifier() + "\n"
 		}
 
 		if(prunerGenerator.pruningData.radius) then
@@ -242,21 +214,6 @@ class PrunerClassGenerator inherits Generator {
 					result := result + "\treference " + rel.relation.eContainingClass.getRequiredAttributeName() +
 								" : " + rel.relation.eContainingClass.name + "[0..*]\n\n"
 					classRequired.add(rel.relation.eContainingClass)
-				end
-			}
-		}
-	end
-	
-	
-	
-	operation generateContainers() : String is do
-		result := ""
-		
-		prunerGenerator.pruningData.requiredElements.each{req |
-			req.origins.each{origin |
-				if(not classContainer.contains(origin.eContainingClass)) then
-					result := result + "\treference " +  origin.eContainingClass.getVarNameClassifier() + " : " + origin.eContainingClass.name + "\n"
-					classContainer.add(origin.eContainingClass)
 				end
 			}
 		}

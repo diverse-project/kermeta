@@ -69,23 +69,23 @@ class ModelAspectGenerator inherits Generator {
 		clazz.sourceRelations.each{rel |
 			var clazzRel : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzRel.getVarNameClassifier()
-			result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + ".visited"
+			result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(" + varName + ".visited.isVoid"
 			
 			clazzRel.targetRelations.each{tar |
-				result := result + " and " + varName + "." + tar.name + ".visited"
+				result := result + " and not " + varName + "." + tar.name + ".visited.isVoid"
 			}
 			
 			result := result + ") then\n\t\t\t\t" + varName + ".visit(" + prunerGenerator.getPrunerVarName() + ")\n\t\t\tend\n\t\t}\n"
 		}
 
 		if(not clazz.targetRelations.empty) then
-			result := result + "\t\tif(not self.visited) then\n"
+			result := result + "\t\tif(self.visited.isVoid) then\n"
 			
 			clazz.targetRelations.each{rel |
 				var clazzRel : EClass init rel.eType.asType(EClass)
 				var varName : String init clazzRel.getVarNameSet()
 				
-				result := result + "\t\t\tif(not self." + rel.name + ".visited) then " + varName + ".add(self." + rel.name + ") end\n"
+				result := result + "\t\t\tif(self." + rel.name + ".visited.isVoid) then " + varName + ".add(self." + rel.name + ") end\n"
 			}
 			
 			result := result + "\t\tend\n"
