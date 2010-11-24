@@ -1,0 +1,115 @@
+<!-- $Id$ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.model -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : 	Didier Vojtisek <didier.vojtisek@inria.fr>
+				Francois.Fouquet <Francois.fouquet@irisa.fr>
+				Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+				
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.model</artifactId>
+    <packaging>bundle</packaging>
+    <name>Kermeta :: Model</name>
+    
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+        <artifactId>language.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
+    <build>
+        <plugins>
+<!--
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-sources/emf</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/generatedNot</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.kermeta.emf</groupId>
+                <artifactId>org.kermeta.emf.genmodel</artifactId>
+                <version>2.6.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>gen-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <ecore>src/main/ecore/kermeta.ecore</ecore>
+                            <genmodel>src/main/ecore/kermeta.genmodel</genmodel>
+                            <output>${project.build.directory}/generated-sources/emf</output>
+                            <clearOutput>false</clearOutput>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/emf</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+
+            <!-- Creation of the bundle jar and its manifest -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>org.kermeta.*</Export-Package>
+                        <Bundle-SymbolicName>org.kermeta.language.model</Bundle-SymbolicName>
+                        <Import-Package>org.eclipse.emf.*,org.osgi.framework</Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
