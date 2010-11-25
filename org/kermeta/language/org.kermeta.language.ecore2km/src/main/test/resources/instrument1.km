@@ -4,7 +4,8 @@
     xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
   <packages name="instrument" uri="http:///fr/eseo/gri/malan/instrument/model.ecore">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        kTag="#//@packages.0/@ownedTypeDefinition.0/@kOwnedTags.0" name="Instrument">
+        kTag="#//@packages.0/@ownedTypeDefinition.0/@kOwnedTags.0" name="Instrument"
+        isAspect="false" isAbstract="false">
       <kOwnedTags name="MyAnnotation" object="#//@packages.0/@ownedTypeDefinition.0"/>
       <ownedAttribute name="links" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0"
           isOrdered="true" upper="-1">
@@ -12,11 +13,11 @@
       </ownedAttribute>
       <ownedAttribute name="description" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::java.lang.String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
       </ownedAttribute>
       <ownedAttribute name="interimFeedback" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::java.lang.String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
       </ownedAttribute>
       <ownedAttribute name="myOppositeReference" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0"
           isOrdered="true" upper="1" opposite="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3/@ownedUnresolvedProperties.0">
@@ -36,7 +37,8 @@
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Link" superType="#//@packages.0/@ownedTypeDefinition.1/@containedType.0">
+        name="Link" isAspect="false" superType="#//@packages.0/@ownedTypeDefinition.1/@containedType.0"
+        isAbstract="false">
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::MyClass"/>
       <ownedAttribute name="interaction" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
           isOrdered="true" lower="1" upper="1">
@@ -48,17 +50,14 @@
       </ownedAttribute>
       <ownedAttribute name="interimFeedback" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::java.lang.String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
       </ownedAttribute>
       <ownedOperation name="opA" isOrdered="true"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="java.lang.String">
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
-    </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="MyClass">
-      <ownedAttribute name="myReference" type="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0"
-          lower="1" upper="1" opposite="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.0/@ownedUnresolvedProperties.0"
+        name="MyClass" isAspect="false" isAbstract="true">
+      <ownedAttribute name="myReference" type="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0"
+          lower="1" upper="1" opposite="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0/@ownedUnresolvedProperties.0"
           isReadOnly="true">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::Instrument"/>
         <ownedUnresolvedProperties propertyIdentifier="instrument::Instrument::myOppositeReference"/>
@@ -67,7 +66,7 @@
     </ownedTypeDefinition>
     <nestedPackage name="nextPkg" uri="http:///fr/eseo/gri/malan/fisfd/model.ecore">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-          name="Clazz"/>
+          name="Clazz" isAspect="false" isAbstract="false"/>
     </nestedPackage>
     <nestedPackage kTag="#//@packages.0/@nestedPackage.1/@kOwnedTags.0" name="enumPackage"
         uri="http:///fr/eseo/gri/malan/enumPackage/model.ecore">

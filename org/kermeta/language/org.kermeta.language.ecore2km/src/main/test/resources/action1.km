@@ -4,30 +4,30 @@
     xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
   <packages name="action" uri="http:///fr/eseo/gri/malan/action/model.ecore">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Action">
+        name="Action" isAspect="false" isAbstract="false">
       <ownedAttribute name="undoable" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Boolean"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Boolean"/>
       </ownedAttribute>
       <ownedAttribute name="doIt" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
       </ownedAttribute>
       <ownedAttribute name="undo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
       </ownedAttribute>
       <ownedAttribute name="redo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
       </ownedAttribute>
       <ownedAttribute name="canDo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.4/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
       </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Need">
+        name="Need" isAspect="false" isAbstract="false">
       <ownedAttribute name="cible" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
           isOrdered="true" lower="1" upper="1">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
@@ -38,11 +38,11 @@
       </ownedAttribute>
       <ownedAttribute name="name" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
           isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::String"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
       </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Or">
+        name="Or" isAspect="false" isAbstract="false">
       <ownedAttribute name="n1" type="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0"
           isOrdered="true" lower="1" upper="1">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Need"/>
@@ -53,7 +53,7 @@
       </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="ActionModel">
+        name="ActionModel" isAspect="false" isAbstract="false">
       <ownedAttribute name="actions" type="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0"
           isOrdered="true" upper="-1">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
@@ -66,13 +66,6 @@
           isOrdered="true" upper="-1">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Need"/>
       </ownedAttribute>
-    </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Boolean">
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
-    </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="String">
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String"/>
     </ownedTypeDefinition>
   </packages>
 </org_kermeta_language_structure:ModelingUnit>

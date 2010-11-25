@@ -116,7 +116,19 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		if(eType.isVoid) then
 			type := void
 		else
-			type := UnresolvedType.new.initialize(eType.getQualifiedName())
+			var typeName : String 
+
+			// If the type of the attribute is a data type, we check if the data type has an equivalent Kermeta primitive type.
+			if(eType.isKindOf(EDataType)) then
+				typeName := primitiveTypeMappings.getValue(eType.name)
+			end
+
+			// If the type is not a data type or it has no Kermeta equivalence.
+			if(typeName.isVoid) then
+				typeName := eType.getQualifiedName()
+			end
+
+			type := UnresolvedType.new.initialize(typeName)
 		end
 		
 		// Creation of the output Kermeta property.
@@ -219,10 +231,11 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 
 	method visitEDataType(dataType : EDataType) : Void is do
-		if(not dataType.ePackage.isVoid and dataType.ePackage.targetKermetaObject.isKindOf(Package)) then
-		stdio.writeln(dataType.name)
-			// Looking for a Kermeta equivalent name of the Ecore primitive type.
-			var namePrimitiveType : String init primitiveTypeMappings.getValue(dataType.instanceTypeName)
+		// Looking for a Kermeta equivalent name of the Ecore primitive type.
+		var namePrimitiveType : String init primitiveTypeMappings.getValue(dataType.instanceTypeName)
+
+		// Only the data type which are not existing kermeta primitive type are created.
+		if(namePrimitiveType.isVoid and not dataType.ePackage.isVoid and dataType.ePackage.targetKermetaObject.isKindOf(Package)) then
 			// If there is no equivalent the given name is used.
 			if(namePrimitiveType.isVoid) then
 				namePrimitiveType := dataType.instanceTypeName
@@ -238,7 +251,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			dataType.targetKermetaObject := pt
 			stdio.writeln(pt.containedType.size.toString)
 		end
-				
+
 		super(dataType)
 	end
 
