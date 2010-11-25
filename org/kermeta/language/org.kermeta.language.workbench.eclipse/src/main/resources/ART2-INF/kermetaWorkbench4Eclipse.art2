@@ -65,7 +65,7 @@
   <mBindings port="//@nodes.0/@components.2/@required.0" hub="//@hubs.1"/>
   <mBindings port="//@nodes.0/@components.3/@provided.0" hub="//@hubs.1"/>
   <mBindings port="//@nodes.0/@components.4/@provided.0" hub="//@hubs.1"/>
-  <deployUnits groupName="org.kermeta.art2" unitName="art2.framework.baseLib" version="2.2.0-SNAPSHOT"/>
+  <deployUnits groupName="org.kermeta.art2" unitName="art2.framework.baseLib" version="2.2.1-beta1"/>
   <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT"/>
   <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT"/>
   <deployUnits name="org.kermeta.language.model" url="mvn:org.kermeta.language/language.model"/>
