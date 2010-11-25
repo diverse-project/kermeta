@@ -4,7 +4,9 @@
     <srcRelations>
       <relation href="ClassModel.ecore#//classModel/Clazz/superClasses"/>
     </srcRelations>
-    <origins href="ClassModel.ecore#//classModel/ClassModel/classes"/>
+    <origins>
+      <path href="ClassModel.ecore#//classModel/ClassModel/classes"/>
+    </origins>
     <targetRelations href="ClassModel.ecore#//classModel/Clazz/superClasses"/>
   </requiredElements>
 </prunerGenerator:Pruning>

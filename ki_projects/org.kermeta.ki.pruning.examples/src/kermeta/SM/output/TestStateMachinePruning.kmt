@@ -33,7 +33,7 @@ class Test {
 		var requiredStates : Bag<OutputState> init Bag<OutputState>.new
 		var sm : StateMachine init createStateMachineModel(requiredStates)
 		
-		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(requiredStates, 2).asType(PrintStateMachinePruning)
+		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2).asType(PrintStateMachinePruning)
 		
 		pruning.launch()
 	end

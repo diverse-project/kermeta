@@ -17,7 +17,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="srcRelations" lowerBound="1"
         upperBound="-1" eType="#//SourceRelation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origins" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        upperBound="-1" eType="#//Origin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetRelations" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
   </eClassifiers>
@@ -32,5 +32,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Origin">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
   </eClassifiers>
 </ecore:EPackage>

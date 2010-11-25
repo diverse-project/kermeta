@@ -18,7 +18,7 @@
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//RequiredElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/srcRelations"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/origins"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/origins"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RequiredElement/targetRelations"/>
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//SourceRelation">
@@ -29,6 +29,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/expression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Parameter/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//Origin">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Origin/path"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

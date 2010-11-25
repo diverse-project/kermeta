@@ -7,20 +7,25 @@ require "ClassModelPruningAspect.kmt"
 using kermeta::standard
 
 abstract class ClassModelPruning {
+	reference theClassModel : ClassModel
+
 	attribute radius : Integer
 
 	reference requiredClazzs : Clazz[0..*]
 
 	reference addedClazzs : Bag<Clazz>
 
-	operation initialise(requiredClazzs : bag Clazz[0..*], radius : Integer) : ClassModelPruning is do
+	operation initialise(theClassModel : ClassModel, requiredClazzs : bag Clazz[0..*], radius : Integer) : ClassModelPruning is do
 		result := self
 		self.addedClazzs := Bag<Clazz>.new
+		self.theClassModel := theClassModel
 		self.radius := radius
 		self.requiredClazzs.addAll(requiredClazzs)
 	end
 
 	operation launch() : Void is do
+		preparePruning()
+
 		var theClazzs  : Bag<Clazz> init Bag<Clazz>.new
 		var theClazzs2 : Bag<Clazz> init Bag<Clazz>.new
 		var currentRadius : Integer init 0
@@ -31,7 +36,7 @@ abstract class ClassModelPruning {
 		until (theClazzs.empty()) or currentRadius>radius
 		loop
 			theClazzs.each{theClazz |
-				if(theClazz.visited.isVoid) then
+				if(not theClazz.visited) then
 					theClazz.visit(self, theClazzs2)
 				end
 			}
@@ -43,6 +48,10 @@ abstract class ClassModelPruning {
 		end
 
 		addedClazzs.each{theClazz | theClazz.addClazzs(self) }
+	end
+
+	operation preparePruning() : Void is do
+		theClassModel.classes.each{theClazz | theClazz.visited := false }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
@@ -81,7 +90,7 @@ class Test {
 		
 		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
 		requiredClazzes.add(c1)
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(requiredClazzes, 2).asType(PrintClassModelPruning)
+		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(cm, requiredClazzes, 2).asType(PrintClassModelPruning)
 		
 		pruning.launch()
 	end

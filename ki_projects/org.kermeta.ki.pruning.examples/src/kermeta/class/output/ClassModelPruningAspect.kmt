@@ -17,7 +17,7 @@ aspect class Clazz {
 
 	operation addClazzs(theClassModelPruning : ClassModelPruning) : Void is do
 		self.superClasses.each{theClazz |
-			if(not theClazz.visited.isVoid) then
+			if(theClazz.visited) then
 				theClassModelPruning.onsuperClassesAdded(self, theClazz)
 			end
 		}

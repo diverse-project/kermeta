@@ -63,7 +63,7 @@ class PrunerGenerator {
 	operation defineClassesToAspectise() : Void is do
 		pruningData.requiredElements.each{elt | 
 			elt.srcRelations.each{src | addReferenceClass(src.relation, true) }
-			elt.origins.each{origin | addReferenceClass(origin, false) }
+			elt.origins.each{origins | addReferenceClass(origins.path.last(), false) }
 		}
 	end
 	

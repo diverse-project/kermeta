@@ -4,8 +4,12 @@
     <srcRelations>
       <relation href="StateMachine.ecore#//stateMachine/OutputState/outgoingTransitions"/>
     </srcRelations>
-    <origins href="StateMachine.ecore#//stateMachine/StateMachine/states"/>
-    <origins href="StateMachine.ecore#//stateMachine/StateMachine/transitions"/>
+    <origins>
+      <path href="StateMachine.ecore#//stateMachine/StateMachine/states"/>
+    </origins>
+    <origins>
+      <path href="StateMachine.ecore#//stateMachine/StateMachine/transitions"/>
+    </origins>
     <targetRelations href="StateMachine.ecore#//stateMachine/Transition/target"/>
   </requiredElements>
 </prunerGenerator:Pruning>

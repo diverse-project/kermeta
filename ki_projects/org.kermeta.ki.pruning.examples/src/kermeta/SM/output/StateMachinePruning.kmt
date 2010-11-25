@@ -6,6 +6,8 @@ require "StateMachinePruningAspect.kmt"
 using kermeta::standard
 
 abstract class StateMachinePruning {
+	reference theStateMachine : StateMachine
+
 	attribute radius : Integer
 
 	reference requiredOutputStates : OutputState[0..*]
@@ -14,15 +16,18 @@ abstract class StateMachinePruning {
 
 	reference addedTransitions : Bag<Transition>
 
-	operation initialise(requiredOutputStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do
+	operation initialise(theStateMachine : StateMachine, requiredOutputStates : bag OutputState[0..*], radius : Integer) : StateMachinePruning is do
 		result := self
 		self.addedStates := Bag<State>.new
 		self.addedTransitions := Bag<Transition>.new
+		self.theStateMachine := theStateMachine
 		self.radius := radius
 		self.requiredOutputStates.addAll(requiredOutputStates)
 	end
 
 	operation launch() : Void is do
+		preparePruning()
+
 		var theStates  : Bag<State> init Bag<State>.new
 		var theStates2 : Bag<State> init Bag<State>.new
 		var currentRadius : Integer init 0
@@ -33,7 +38,7 @@ abstract class StateMachinePruning {
 		until (theStates.empty()) or currentRadius>radius
 		loop
 			theStates.each{theState |
-				if(theState.visited.isVoid) then
+				if(not theState.visited) then
 					theState.visit(self, theStates2)
 				end
 			}
@@ -45,6 +50,11 @@ abstract class StateMachinePruning {
 		end
 
 		addedStates.each{theState | theState.addTransitions(self) }
+	end
+
+	operation preparePruning() : Void is do
+		theStateMachine.states.each{theState | theState.visited := false }
+		theStateMachine.transitions.each{theTransition | theTransition.visited := false }
 	end
 
 	operation onStateAdded(theState : State) : Void is abstract

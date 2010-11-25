@@ -125,7 +125,7 @@ aspect class EClass {
 		prunerGenerator.pruningData.requiredElements.each{elt |
 			var clazz : EClass
 			var clazz2 : EClass
-			
+
 			// The type of each parameter can be different of the type defined in their class.
 			// E.g., if the class type is InputState, the parameter must be a State to accept other kind of states.
 			elt.targetRelations.each{rel |
@@ -134,8 +134,10 @@ aspect class EClass {
 					clazz2 := clazz
 					// Looking for a more general class.
 					elt.origins.each{origin |
-						if(origin.eType.isKindOf(EClass) and origin.eType.asType(EClass).isSuperTypeOf(clazz)) then
-							clazz := origin.eType.asType(EClass)
+						var ref : EReference init origin.path.last()
+						
+						if(ref.eType.isKindOf(EClass) and ref.eType.asType(EClass).isSuperTypeOf(clazz)) then
+							clazz := ref.eType.asType(EClass)
 						end
 					}
 					// Creation of the parameter.

@@ -34,9 +34,9 @@ class Test {
 	operation main() : Void is do
 		var requiredClazzs : Bag<Clazz> init Bag<Clazz>.new
 		var sm : ClassModel init createClassModel(requiredClazzs)
-		
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(requiredClazzs, 2).asType(PrintClassModelPruning)
-		
+
+		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(sm, requiredClazzs, 2).asType(PrintClassModelPruning)
+
 		pruning.launch()
 	end
 	
@@ -44,7 +44,6 @@ class Test {
 	operation createClassModel(requiredClazzs : Bag<Clazz>) : ClassModel is do
 		result := ClassModel.new
 		
-		var cm : ClassModel init ClassModel.new
 		var c1 : Clazz init Clazz.new
 		var c2 : Clazz init Clazz.new
 		var c3 : Clazz init Clazz.new
@@ -52,21 +51,21 @@ class Test {
 		var c5 : Clazz init Clazz.new
 		
 		c1.name := "c1"
-		cm.classes.add(c1)
+		result.classes.add(c1)
 		c2.name := "c2"
-		cm.classes.add(c2)
+		result.classes.add(c2)
 		c3.name := "c3"
-		cm.classes.add(c3)
+		result.classes.add(c3)
 		c4.name := "c4"
-		cm.classes.add(c4)
+		result.classes.add(c4)
 		c5.name := "c5"
-		cm.classes.add(c5)
+		result.classes.add(c5)
 		
 		c1.superClasses.add(c2)
 		c2.superClasses.add(c3)
 		c3.superClasses.add(c4)
 		c4.superClasses.add(c5)
-		
+
 		requiredClazzs.add(c1)
 	end 
 }
