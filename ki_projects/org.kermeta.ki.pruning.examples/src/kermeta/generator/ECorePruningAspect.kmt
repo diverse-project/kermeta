@@ -14,6 +14,13 @@ require "PrunerGenerator.kmt"
 using kermeta::standard
 using prunerGenerator
 
+aspect class EReference {
+	operation getOppositeReferenceName() : String is do
+		result := name + "Opposite"
+	end
+}
+
+
 aspect class EClass {
 	attribute main : Boolean
 	

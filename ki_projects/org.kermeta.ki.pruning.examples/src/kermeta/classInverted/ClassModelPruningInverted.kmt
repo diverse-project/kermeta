@@ -1,97 +1,74 @@
-/* $Id:$ 
- * Creation : November 17, 2010
- * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
- */
 @mainClass "ex::classModel::Test"
 @mainOperation "main"
-
-
 package ex::classModel;
-
 require kermeta
-require "ClassModelPruningAspect.kmt"
+require "ClassModelPruningInvertedAspect.kmt"
 
 using kermeta::standard
 
+abstract class ClassModelPruningInverted {
+	reference theClassModel : ClassModel
 
-abstract class ClassModelPruning {
-	reference classModel : ClassModel
-	
-	reference requiredClazzs : Clazz[0..*]
-	
 	attribute radius : Integer
-	
+
+	reference requiredClazzs : Clazz[0..*]
+
 	reference addedClazzs : Bag<Clazz>
-	
-	
-	operation initialise(classModel : ClassModel, requiredClazzs : bag Clazz[0..*], radius : Integer) : ClassModelPruning is do
+
+	operation initialise(theClassModel : ClassModel, requiredClazzs : bag Clazz[0..*], radius : Integer) : ClassModelPruningInverted is do
 		result := self
-		addedClazzs := Bag<Clazz>.new
-		self.classModel := classModel
+		self.addedClazzs := Bag<Clazz>.new
+		self.theClassModel := theClassModel
 		self.radius := radius
 		self.requiredClazzs.addAll(requiredClazzs)
-		initialiseOpposite()
 	end
-	
-	
-	operation initialiseOpposite() : Void is do
-		classModel.classes.each{theClazz | theClazz.initialiseOpposite() }
-	end
-	
-	
-	
+
 	operation launch() : Void is do
 		preparePruning()
-		
+
 		var theClazzs  : Bag<Clazz> init Bag<Clazz>.new
 		var theClazzs2 : Bag<Clazz> init Bag<Clazz>.new
 		var currentRadius : Integer init 0
-		
+
 		requiredClazzs.each{theClazz | theClazzs.add(theClazz) }
 
 		from true
-		until theClazzs.empty or currentRadius>radius
+		until (theClazzs.empty()) or currentRadius>radius
 		loop
 			theClazzs.each{theClazz |
 				if(not theClazz.visited) then
 					theClazz.visit(self, theClazzs2)
 				end
 			}
-			
+
 			theClazzs.clear()
 			theClazzs2.each{theClazz | theClazzs.add(theClazz) }
 			theClazzs2.clear()
 			currentRadius := currentRadius + 1
 		end
-		
-		addedClazzs.each{theClazz | theClazz.addRelations(self) }
+
+		addedClazzs.each{theClazz | theClazz.addClazzs(self) }
 	end
-	
-	
+
 	operation preparePruning() : Void is do
-		classModel.classes.each{theClazz | theClazz.visited := false }
+		theClassModel.classes.each{theClazz | theClazz.visited := false  }
+		theClassModel.classes.each{theClazz | theClazz.initialisesuperClassesOpposite()	}
 	end
-	
-	
+
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
-	
-	operation onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is abstract
+	operation onsuperClassesOppositeAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is abstract
 }
 
 
 
-
-class PrintClassModelPruning inherits ClassModelPruning {
+class PrintClassModelPruningInverted inherits ClassModelPruningInverted {
 	method onClazzAdded(clazz : Clazz) : Void is do
 		stdio.writeln("Clazz: " + clazz.name)
 	end
 
 
-	method onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is do
-		stdio.writeln("Inheritance: " + theClazz.name + " " + theSuperClazzes.name)
+	method onsuperClassesOppositeAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
+		stdio.writeln("Inheritance: " + theClazzSrc.name + " " + theClazzTar.name)
 	end
 }
 
@@ -106,7 +83,7 @@ class Test {
 		var c3 : Clazz init Clazz.new.initialise("c3", cm)
 		var c4 : Clazz init Clazz.new.initialise("c4", cm)
 		var c5 : Clazz init Clazz.new.initialise("c5", cm)
-
+		
 		c1.superClasses.add(c2)
 		c2.superClasses.add(c3)
 		c3.superClasses.add(c4)
@@ -114,9 +91,8 @@ class Test {
 		
 		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
 		requiredClazzes.add(c5)
-
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(cm, requiredClazzes, 2).asType(PrintClassModelPruning)
-
+		var pruning : PrintClassModelPruningInverted init PrintClassModelPruningInverted.new.initialise(cm, requiredClazzes, 2).asType(PrintClassModelPruningInverted)
+		
 		pruning.launch()
 	end
 }

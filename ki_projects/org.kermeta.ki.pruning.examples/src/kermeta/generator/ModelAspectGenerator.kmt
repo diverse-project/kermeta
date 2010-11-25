@@ -18,11 +18,12 @@ class ModelAspectGenerator inherits Generator {
 		self.prunerGenerator := pruner
 		result := self
 	end
-	
-	
+
+
 	method generateCode() : Void is do
-		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses)
-		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + prunerGenerator.prunerClass.name + ".kmt\"\n\nusing kermeta::standard\n\n"
+		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses) + 
+						"require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + 
+						prunerGenerator.prunerClass.name + ".kmt\"\n\nusing kermeta::standard\n\n"
 		prunerGenerator.mainClasses.each{cl |
 			// Creation of ECore operations linked to the class.
 			cl.createVisitOperation(prunerGenerator)
@@ -30,10 +31,10 @@ class ModelAspectGenerator inherits Generator {
 		}
 		prunerGenerator.mainClasses.each{cl | generatedCode := generatedCode + generateClassAspect(cl) }
 	end
-	
-	
-	
-		
+
+
+
+
 	operation generateClassAspect(clazz : EClass) : String is do
 		var isChild : Boolean init prunerGenerator.mainClasses.exists{cl |
 			if(cl.isSuperTypeOf(clazz)) then
@@ -50,26 +51,64 @@ class ModelAspectGenerator inherits Generator {
 			result := result + "\tattribute visited : Boolean\n\n" 
 		end
 
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			elt.srcRelations.each{source |
+				if(source.createOpposite) then
+					var cl : EClass init source.relation.eType.asType(EClass)
+					
+					if(cl==clazz or cl.isSuperTypeOf(clazz)) then
+						result := result + "\treference " + source.relation.getOppositeReferenceName() +
+								  " : " + cl.name + "[" + source.relation.lowerBound.toString + ".."
+						if(source.relation.upperBound==-1) then
+							result := result + "*"
+						else
+							result := result + source.relation.upperBound.toString
+						end
+						
+						result := result + "]\n\n" + generateInitialiseOppositeOperation(source.relation)
+					end
+					
+					// We change the pruning data to use of the opposite.
+					var ref : EReference init EReference.new
+					ref.name := source.relation.getOppositeReferenceName()
+					ref.eType:= source.relation.eContainingClass
+					source.relation.eContainingClass.eStructuralFeatures.add(ref)
+					ref.lowerBound := source.relation.lowerBound
+					ref.upperBound := source.relation.upperBound
+					ref.containment := false
+					clazz.sourceRelations.remove(source.relation)
+					clazz.sourceRelations.add(ref)
+					source.relation := ref
+				end
+			}
+		}
+
 		result := result + generateVisitOperation(clazz, isChild) + "\n"
 		result := result + generateAddRelations(clazz, isChild)
 		result := result + "}\n"
 	end
-	
-	
-	
-	
+
+
+	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
+		var name : String init relation.eType.asType(EClass).getVarNameClassifier()
+		result := "\toperation initialise" + relation.getOppositeReferenceName() + "() : Void is do\n\t\tself." +
+					relation.name + ".each{" + name + " | " + name + "." +  relation.getOppositeReferenceName() +
+					".add(self) }\n\tend\n\n"
+	end
+
+
 	operation generateAddRelations(clazz : EClass, isChild : Boolean) : String is do
 		var opDeclaration : String
 
 		if(isChild) then 	opDeclaration := "method"
 		else 				opDeclaration := "operation" end
-		
+
 		result := "\t" + opDeclaration + " " + clazz.addOperation.getDeclarationHeader() + " : Void is do\n"
-		
+
 		clazz.sourceRelations.each{rel |
 			var clazzRel : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzRel.getVarNameClassifier()
-			
+
 			if(rel.eType==rel.eContainingClass) then
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(" + varName + 
 						  ".visited) then\n\t\t\t\t" + prunerGenerator.getPrunerVarName() + ".on" + rel.name + 
@@ -97,10 +136,10 @@ class ModelAspectGenerator inherits Generator {
 					result := result + "\t\t\tif(not self." + rel.name + ".visited) then " + varName + ".add(self." + rel.name + ") end\n"
 				end
 			}
-			
+
 			result := result + "\t\tend\n"
 		end
-		
+
 		result := result + "\tend\n"
 	end
 
@@ -115,7 +154,7 @@ class ModelAspectGenerator inherits Generator {
 
 		// Adding the declaration of method visit
 		result := "\t" + opDeclaration + " " + clazz.visitOperation.getDeclarationHeader() + " : Void is do\n" 
-		
+
 		// If the current clazz is the sub class of a class that defines method visit, the super call must be performed.
 		if(isChild) then 
 			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
@@ -129,7 +168,7 @@ class ModelAspectGenerator inherits Generator {
 			// Adding the added object to its container in the pruner.
 			result := result + "\t\t" + prunerName + "." + clazz.getAddedSomethingAttributeName() + ".add(self)\n"
 		end
-		
+
 		clazz.sourceRelations.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzCalled.getVarNameClassifier()
@@ -137,7 +176,7 @@ class ModelAspectGenerator inherits Generator {
 
 			if(rel.upperBound==-1 or rel.upperBound>1) then
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " | "
-				
+
 				if(rel.eType==rel.eContainingClass) then
 					result := result + clazzCalled.getVarNameSet() + ".add(" + varName + ") }\n" 
 				else
@@ -147,7 +186,7 @@ class ModelAspectGenerator inherits Generator {
 				result := result + "if(not self." + varName + ".isVoid()) then self." + varName + callAddMethodHeader + " end\n"
 			end
 		}
-		
+
 		result := result + "\tend\n"
 	end
 }

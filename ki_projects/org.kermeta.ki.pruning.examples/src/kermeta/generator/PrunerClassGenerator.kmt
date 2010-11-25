@@ -55,6 +55,25 @@ class PrunerClassGenerator inherits Generator {
 				result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
 							".each{" + name + " | " + name +".visited := false }\n"
 			}
+
+			// Generating of the calls that initialise the opposite relations.
+			elt.srcRelations.each{source |
+				if(source.createOpposite) then// If the opposite is created.
+					elt.origins.each{origin |
+						var rel : EReference init origin.path.last()
+						var clazz : EClass init rel.eType.asType(EClass)
+						
+						// If the current origin matches the source.
+						if(clazz==source.relation.eContainingClass or
+						   clazz.isSuperTypeOf(source.relation.eContainingClass)) then
+						  var name : String init clazz.getVarNameClassifier()
+						   
+						   result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
+							".each{" + name + " | " + name +".initialise" + source.relation.name + "()}\n"
+						end
+					}
+				end
+			}
 		}
 		
 		result := result + "\tend\n"
