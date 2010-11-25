@@ -46,6 +46,18 @@ class PrunerClassGenerator inherits Generator {
 		classAdded.each{clazz |
 			result := result + "\toperation on" + clazz.name + "Added(" + clazz.getVarNameClassifier() + " : " + clazz.name + ") : Void is abstract\n"
 		}
+		
+		var addedOperationsName : Bag<String> init Bag<String>.new
+		
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			elt.srcRelations.each{rel |
+				if(rel.relation.eType==rel.relation.eContainingClass and not addedOperationsName.contains(rel.relation.name)) then
+					result := result + "\toperation on" + rel.relation.name + "Added(" + 
+					rel.relation.eContainingClass.getVarNameClassifier() + "Src : " + rel.relation.eContainingClass.name + ", " +
+					rel.relation.eContainingClass.getVarNameClassifier() + "Tar : " + rel.relation.eContainingClass.name + ") : Void is abstract\n"
+				end
+			}
+		}
 	end
 
 	

@@ -1,6 +1,6 @@
 package ex::classModel;
 require kermeta
-require "ClassModel.kmt"
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/class/ClassModel.ecore"
 require "ClassModelPruning.kmt"
 
 using kermeta::standard

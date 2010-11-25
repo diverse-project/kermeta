@@ -1,7 +1,6 @@
-@mainClass "ex::classModel::Test"
-@mainOperation "main"
 package ex::classModel;
 require kermeta
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/class/ClassModel.ecore"
 require "ClassModelPruningAspect.kmt"
 
 using kermeta::standard
@@ -47,42 +46,4 @@ abstract class ClassModelPruning {
 
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
 	operation onsuperClassesAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is abstract
-}
-
-
-
-class PrintClassModelPruning inherits ClassModelPruning {
-	method onClazzAdded(clazz : Clazz) : Void is do
-		stdio.writeln("Clazz: " + clazz.name)
-	end
-
-
-	method onsuperClassesAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
-		stdio.writeln("Inheritance: " + theClazzSrc.name + " " + theClazzTar.name)
-	end
-}
-
-
-
-
-class Test {
-	operation main() : Void is do
-		var cm : ClassModel init ClassModel.new
-		var c1 : Clazz init Clazz.new.initialise("c1", cm)
-		var c2 : Clazz init Clazz.new.initialise("c2", cm)
-		var c3 : Clazz init Clazz.new.initialise("c3", cm)
-		var c4 : Clazz init Clazz.new.initialise("c4", cm)
-		var c5 : Clazz init Clazz.new.initialise("c5", cm)
-		
-		c1.superClasses.add(c2)
-		c2.superClasses.add(c3)
-		c3.superClasses.add(c4)
-		c4.superClasses.add(c5)
-		
-		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
-		requiredClazzes.add(c1)
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(requiredClazzes, 2).asType(PrintClassModelPruning)
-		
-		pruning.launch()
-	end
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" radius="true" description="Show the path of super types." name="ClassModelPruning">
+  <requiredElements>
+    <srcRelations>
+      <relation href="ClassModel.ecore#//classModel/Clazz/superClasses"/>
+    </srcRelations>
+    <origins href="ClassModel.ecore#//classModel/ClassModel/classes"/>
+    <targetRelations href="ClassModel.ecore#//classModel/Clazz/superClasses"/>
+  </requiredElements>
+</prunerGenerator:Pruning>

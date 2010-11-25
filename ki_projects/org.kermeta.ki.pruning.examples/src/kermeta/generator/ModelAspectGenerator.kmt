@@ -69,23 +69,33 @@ class ModelAspectGenerator inherits Generator {
 		clazz.sourceRelations.each{rel |
 			var clazzRel : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzRel.getVarNameClassifier()
-			result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(" + varName + ".visited.isVoid"
 			
-			clazzRel.targetRelations.each{tar |
-				result := result + " and not " + varName + "." + tar.name + ".visited.isVoid"
-			}
-			
-			result := result + ") then\n\t\t\t\t" + varName + ".visit(" + prunerGenerator.getPrunerVarName() + ")\n\t\t\tend\n\t\t}\n"
+			if(rel.eType==rel.eContainingClass) then
+				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + 
+						  ".visited.isVoid) then\n\t\t\t\t" + prunerGenerator.getPrunerVarName() + ".on" + rel.name + 
+						  "Added(self, " + rel.eContainingClass.getVarNameClassifier() + ")\n\t\t\tend\n\t\t}\n"
+			else
+				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(" + varName + ".visited.isVoid"
+				
+				clazzRel.targetRelations.each{tar |
+					result := result + " and not " + varName + "." + tar.name + ".visited.isVoid"
+				}
+				
+				result := result + ") then\n\t\t\t\t" + varName + ".visit(" + prunerGenerator.getPrunerVarName() + ")\n\t\t\tend\n\t\t}\n"
+			end
 		}
 
-		if(not clazz.targetRelations.empty) then
+		// This code must be generated only when there exists at least one target relation which type is different from its container.
+		if(clazz.targetRelations.exists{rel | rel.eType!=rel.eContainingClass }) then
 			result := result + "\t\tif(self.visited.isVoid) then\n"
 			
 			clazz.targetRelations.each{rel |
-				var clazzRel : EClass init rel.eType.asType(EClass)
-				var varName : String init clazzRel.getVarNameSet()
-				
-				result := result + "\t\t\tif(self." + rel.name + ".visited.isVoid) then " + varName + ".add(self." + rel.name + ") end\n"
+				if(rel.eType!=rel.eContainingClass) then
+					var clazzRel : EClass init rel.eType.asType(EClass)
+					var varName : String init clazzRel.getVarNameSet()
+					
+					result := result + "\t\t\tif(self." + rel.name + ".visited.isVoid) then " + varName + ".add(self." + rel.name + ") end\n"
+				end
 			}
 			
 			result := result + "\t\tend\n"
@@ -125,10 +135,14 @@ class ModelAspectGenerator inherits Generator {
 			var varName : String init clazzCalled.getVarNameClassifier()
 			var callAddMethodHeader : String init "." +  clazzCalled.addOperation.getCallHeader()
 
-			result := result + "\t\tself." + rel.name
-			
 			if(rel.upperBound==-1 or rel.upperBound>1) then
-				result := result + ".each{" + varName + " | " + varName + callAddMethodHeader + " }\n"
+				result := result + "\t\tself." + rel.name + ".each{" + varName + " | "
+				
+				if(rel.eType==rel.eContainingClass) then
+					result := result + clazzCalled.getVarNameSet() + ".add(" + varName + ") }\n" 
+				else
+					result := result + varName + callAddMethodHeader + " }\n"
+				end
 			else
 				result := result + "if(not self." + varName + ".isVoid()) then self." + varName + callAddMethodHeader + " end\n"
 			end
