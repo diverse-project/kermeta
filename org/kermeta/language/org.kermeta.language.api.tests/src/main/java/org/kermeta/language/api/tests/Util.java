@@ -75,6 +75,7 @@ public static void populate(TestSuite ts, String folder, Boolean valid,Class p,S
         if (dirURL.getProtocol().equals("jar")) {
             /* A JAR path */
             String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!")); //strip out only the JAR file
+            System.out.println("looking into "+jarPath + " for "+path);
             JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
             Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
             Set<String> result = new HashSet<String>(); //avoid duplicates in case it is a subdirectory
@@ -91,7 +92,43 @@ public static void populate(TestSuite ts, String folder, Boolean valid,Class p,S
         throw new UnsupportedOperationException("Cannot list files for URL " + dirURL);
     }
 
-    private static File convertStreamToFile(InputStream inputStream,String targetFileName) throws IOException {
+    public static String[] getResourceListingFullURI(Class clazz, String path) throws URISyntaxException, IOException {
+        URL dirURL = clazz.getClassLoader().getResource(path);
+        if (dirURL != null && dirURL.getProtocol().equals("file")) {
+            /* A file path: easy enough */
+            return new File(dirURL.toURI()).list();
+        }
+
+        if (dirURL == null) {
+            /*
+             * In case of a jar file, we can't actually find a directory.
+             * Have to assume the same jar as clazz.
+             */
+            String me = clazz.getName().replace(".", "/") + ".class";
+            dirURL = clazz.getClassLoader().getResource(me);
+        }
+        System.out.println("dirURL " + dirURL);
+        if (dirURL.getProtocol().equals("jar")) {
+            /* A JAR path */
+            String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!")); //strip out only the JAR file
+            System.out.println("jarPath " + jarPath);
+            JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
+            Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
+            Set<String> result = new HashSet<String>(); //avoid duplicates in case it is a subdirectory
+            while (entries.hasMoreElements()) {
+                String name = entries.nextElement().getName();
+                if (name.startsWith(path)) { //filter according to the path
+
+                    result.add(name);
+                }
+            }
+            return result.toArray(new String[result.size()]);
+        }
+
+        throw new UnsupportedOperationException("Cannot list files for URL " + dirURL);
+    }
+
+    public static File convertStreamToFile(InputStream inputStream,String targetFileName) throws IOException {
         File temp = File.createTempFile(targetFileName+"_", ".tmp");        // Delete temp file when program exits.
        // temp.deleteOnExit();
         OutputStream out = new FileOutputStream(temp);

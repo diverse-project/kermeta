@@ -30,7 +30,7 @@ public class PortResourceLoaderTest extends TestCase {
     public void test() {
 
         System.out.println("Test File => " + file.getAbsolutePath());
-        ModelingUnit result = parser.load(file.getAbsolutePath(), URIType.FILE,"");
+        ModelingUnit result = parser.load(file.getAbsolutePath(), URIType.FILE, "");
 
         System.out.println(this.valid);
 
