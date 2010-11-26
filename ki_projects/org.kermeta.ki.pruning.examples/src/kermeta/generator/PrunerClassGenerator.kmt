@@ -177,6 +177,7 @@ class PrunerClassGenerator inherits Generator {
 		// Creation of the loop
 		result := result + "\n\t\tfrom true\n\t\tuntil ("
 
+		// Creation of the loop condition
 		i := 0
 		varClasses.each{clazz | 
 			if(i>0) then result := result + " and " end
@@ -190,12 +191,16 @@ class PrunerClassGenerator inherits Generator {
 			result := result + " or currentRadius>radius"
 		end
 
-		result := result + "\n\t\tloop\n\t\t\t"
+		// Body of the loop
+		result := result + "\n\t\tloop\n"
 
 		varClasses.each{clazz |
 			var name  : String init clazz.getVarNameClassifier()
-			result := result + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(not " +
-					  name + ".visited) then\n\t\t\t\t\t" + name + ".visit(self, " + clazz.getVarNameSet() + "2)\n\t\t\t\tend\n\t\t\t}\n"
+			result := result + "\t\t\t" + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(not " +
+					  name + ".visited) then\n\t\t\t\t\t" + name + ".visit(self" 
+			// Adding the parameters to method "visit". These parameters are in fact all the classes of "varClasses"
+			varClasses.each{clazz2 | result := result + ", " + clazz2.getVarNameSet() + "2" }
+			result := result + ")\n\t\t\t\tend\n\t\t\t}\n"
 		}
 
 		result := result + "\n"
