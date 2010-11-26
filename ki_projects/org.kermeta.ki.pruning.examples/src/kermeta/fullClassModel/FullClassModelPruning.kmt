@@ -1,76 +1,60 @@
-/* $Id:$ 
- * Creation : November 17, 2010
- * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
- */
 @mainClass "ex::fullClassModel::Test"
 @mainOperation "main"
-
-
 package ex::fullClassModel;
-
 require kermeta
 require "FullClassModelPruningAspect.kmt"
 
 using kermeta::standard
 
-
 abstract class FullClassModelPruning {
-	reference classModel : ClassModel
-	
-	reference requiredClazzs : Clazz[0..*]
-	
-	reference requiredPropertys : Property[0..*]
-	
+	reference theClassModel : ClassModel
+
 	attribute radius : Integer
-	
+
+	reference requiredClazzs : Clazz[0..*]
+
+	reference requiredPropertys : Property[0..*]
+
 	reference addedClazzs : Bag<Clazz>
-	
+
 	reference addedPropertys : Bag<Property>
-	
-	
-	operation initialise(classModel : ClassModel, requiredClazzs : bag Clazz[0..*], requiredPropertys : bag Property[0..*],
-							radius : Integer) : FullClassModelPruning is do
+
+	operation initialise(theClassModel : ClassModel, requiredClazzs : bag Clazz[0..*], requiredPropertys : bag Property[0..*], radius : Integer) : FullClassModelPruning is do
 		result := self
-		addedClazzs := Bag<Clazz>.new
-		addedPropertys := Bag<Property>.new
-		self.classModel := classModel
+		self.addedClazzs := Bag<Clazz>.new
+		self.addedPropertys := Bag<Property>.new
+		self.theClassModel := theClassModel
 		self.radius := radius
 		self.requiredClazzs.addAll(requiredClazzs)
 		self.requiredPropertys.addAll(requiredPropertys)
 	end
-	
-	
-	
+
 	operation launch() : Void is do
 		preparePruning()
-		
+
 		var theClazzs  : Bag<Clazz> init Bag<Clazz>.new
 		var theClazzs2 : Bag<Clazz> init Bag<Clazz>.new
-		var thePropertys   : Bag<Property> init Bag<Property>.new
-		var thePropertys2  : Bag<Property> init Bag<Property>.new
+		var thePropertys  : Bag<Property> init Bag<Property>.new
+		var thePropertys2 : Bag<Property> init Bag<Property>.new
 		var currentRadius : Integer init 0
-		
+
 		requiredClazzs.each{theClazz | theClazzs.add(theClazz) }
 		requiredPropertys.each{theProperty | theProperty.visit(self, theClazzs, thePropertys) }
 
 		from true
-		until (theClazzs.empty and thePropertys.empty) or currentRadius>radius
+		until (theClazzs.empty() and thePropertys.empty()) or currentRadius>radius
 		loop
 			thePropertys.each{theProperty |
-				if(not theProperty.visited) then 
+				if(not theProperty.visited) then
 					theProperty.visit(self, theClazzs, thePropertys2)
 				end
 			}
-			
-			theClazzs.each{theClazz | 
-				if(not theClazz.visited) then 
+			theClazzs.each{theClazz |
+				if(not theClazz.visited) then
 					theClazz.visit(self, theClazzs2, thePropertys2)
 				end
 			}
-			
+
 			theClazzs.clear()
 			theClazzs2.each{theClazz | theClazzs.add(theClazz) }
 			theClazzs2.clear()
@@ -79,24 +63,19 @@ abstract class FullClassModelPruning {
 			thePropertys2.clear()
 			currentRadius := currentRadius + 1
 		end
-		
+
 		addedClazzs.each{theClazz | theClazz.addRelations(self) }
 	end
-	
-	
-	operation preparePruning() : Void is do
-		classModel.classes.each{theClazz | theClazz.visited := false }
-		classModel.classes.each{theClazz | theClazz.properties.each{theProperty | theProperty.visited := false } }
-	end
-	
-	
-	operation onClazzAdded(theClazz : Clazz) : Void is abstract
-	
-	operation onPropertyAdded(theProperty : Property) : Void is abstract
-	
-	operation onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is abstract
-}
 
+	operation preparePruning() : Void is do
+		theClassModel.classes.each{theClazz | theClazz.visited := false }
+		theClassModel.classes.each{theClazz | theClazz.properties.each{theProperty | theProperty.visited := false } }
+	end
+
+	operation onClazzAdded(theClazz : Clazz) : Void is abstract
+	operation onPropertyAdded(theProperty : Property) : Void is abstract
+	operation onsuperClassesAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is abstract
+}
 
 
 
@@ -111,7 +90,7 @@ class PrintFullClassModelPruning inherits FullClassModelPruning {
 	end
 	
 	
-	method onSuperClazzesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is do
+	method onsuperClassesAdded(theClazz : Clazz, theSuperClazzes : Clazz) : Void is do
 		stdio.writeln("Inheritance: " + theClazz.name + " " + theSuperClazzes.name)
 	end
 }

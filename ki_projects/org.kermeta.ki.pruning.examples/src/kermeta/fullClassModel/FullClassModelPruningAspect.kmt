@@ -1,38 +1,28 @@
-/* $Id:$ 
- * Creation : November 17, 2010
- * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
- */
 package ex::fullClassModel;
-
 require kermeta
 require "FullClassModel.kmt"
 require "FullClassModelPruning.kmt"
-
 using kermeta::standard
-
 
 aspect class Clazz {
 	attribute visited : Boolean
-	
+
 	operation visit(theFullClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
-		visited := true
+		self.visited := true
 		theFullClassModelPruning.onClazzAdded(self)
 		theFullClassModelPruning.addedClazzs.add(self)
-		superClasses.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
-		properties.each{theProperty | if(not theProperty.visited) then thePropertys.add(theProperty) end }
+		self.superClasses.each{theClazz | theClazzs.add(theClazz) }
+		self.properties.each{theProperty | thePropertys.add(theProperty) }
 	end
-	
+
 	operation addRelations(theFullClassModelPruning : FullClassModelPruning) : Void is do
-		superClasses.each{theClazz |
+		self.superClasses.each{theClazz |
 			if(theClazz.visited) then
-				theFullClassModelPruning.onSuperClazzesAdded(self, theClazz)
+				theFullClassModelPruning.onsuperClassesAdded(self, theClazz)
 			end
 		}
 
-		properties.each{theProperty |
+		self.properties.each{theProperty |
 			if(not theProperty.visited and theProperty.type.visited and theProperty.owner.visited) then
 				visited := true
 				theFullClassModelPruning.onPropertyAdded(theProperty)
@@ -41,14 +31,11 @@ aspect class Clazz {
 		}
 	end
 }
-
-
 aspect class Property {
 	attribute visited : Boolean
-	
+
 	operation visit(theFullClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>, thePropertys : Bag<Property>) : Void is do
 		if(not self.owner.visited) then theClazzs.add(self.owner) end
 		if(not self.type.visited) then theClazzs.add(self.type) end
 	end
 }
-
