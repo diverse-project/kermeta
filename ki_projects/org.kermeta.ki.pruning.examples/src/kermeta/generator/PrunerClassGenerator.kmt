@@ -289,7 +289,7 @@ class PrunerClassGenerator inherits Generator {
 		
 		prunerGenerator.pruningData.requiredElements.each{req |
 			req.origins.each{origin |
-				var ref : EReference init origin.path.last()
+				var ref : EReference init origin.path.first()
 				
 				if(not classContainer.contains(ref.eContainingClass)) then
 					result := result + "\treference " +  ref.eContainingClass.getVarNameClassifier() + " : " + ref.eContainingClass.name + "\n"
