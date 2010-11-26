@@ -48,7 +48,7 @@ import runner.MainRunner;
  */
 @Library(name = "org.kermeta.language")
 @ComponentType
-public class Art2ComponentKmBinaryMerger extends AbstractComponentType {
+public class Art2ComponentKmBinaryMerger extends AbstractComponentType implements org.kermeta.language.api.port.PortKmBinaryMerger{
 
     protected MessagePort logPort = null;
     protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();

@@ -41,7 +41,14 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>language.api</artifactId>
             <version>${kermeta.version}</version>
-        </dependency>
+        </dependency>        
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>language.api.tests</artifactId>
+			<version>${kermeta.version}</version>
+			<scope>test</scope>
+			<type>jar</type>
+		</dependency>
     </dependencies>
     
     <build>
@@ -123,7 +130,17 @@
                     </launchers>
                 </configuration>
             </plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<includes>
+						<include>**/*TestSuite.java</include>
+					</includes>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 

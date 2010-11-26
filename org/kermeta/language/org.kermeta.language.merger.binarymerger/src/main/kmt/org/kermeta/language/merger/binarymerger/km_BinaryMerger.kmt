@@ -65,6 +65,30 @@ class BinaryMerger
 		stdio.writeln("test_001()...")
 		var repository : EMFRepository init EMFRepository.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/km/001_AB.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/km/001_Aatt.km")
+       	
+       	var pmModelingUnit : ModelingUnit 
+       	pmModelingUnit ?= primaryModelResource.one
+       	
+       	var amModelingUnit : ModelingUnit 
+       	amModelingUnit ?= aspectModelResource.one
+       	
+       	var mergedModelingUnit : ModelingUnit
+       	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
+       	
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/km/001_ABatt.km",
+       		"platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+       	primaryModelResource.remove(mergedModelingUnit)
+       	mergedModelResource.add(mergedModelingUnit)
+       	stdio.writeln("Saving " + mergedModelResource.uri)
+       	mergedModelResource.save
+		stdio.writeln("test_001_a() Done")
+	end
+	operation test_001_2() : Void is do 
+		stdio.writeln("test_001()...")
+		var repository : EMFRepository init EMFRepository.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
    		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file1.km")
        	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file2.km")
        	
@@ -78,7 +102,7 @@ class BinaryMerger
        	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
        	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/file_1_2.km",
-       		"http://www.kermeta.org/kermeta/2_0_0//kermeta")
+       		"platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)
        	stdio.writeln("Saving " + mergedModelResource.uri)

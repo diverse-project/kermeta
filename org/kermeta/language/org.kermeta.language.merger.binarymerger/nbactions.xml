@@ -7,4 +7,11 @@
                 <goal>scala:compile</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-scala:run</actionName>
+            <displayName>scala:run</displayName>
+            <goals>
+                <goal>scala:run</goal>
+            </goals>
+        </action>
     </actions>
