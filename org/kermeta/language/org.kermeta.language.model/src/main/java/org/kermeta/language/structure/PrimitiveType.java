@@ -30,7 +30,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface PrimitiveType extends DataType, TypeContainer {
+public interface PrimitiveType extends DataType {
 	/**
 	 * Returns the value of the '<em><b>Instance Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

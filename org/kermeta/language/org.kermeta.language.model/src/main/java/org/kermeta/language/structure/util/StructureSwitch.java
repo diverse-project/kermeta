@@ -203,6 +203,7 @@ public class StructureSwitch<T> {
 				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
 				T result = caseTypeDefinition(typeDefinition);
 				if (result == null) result = caseNamedElement(typeDefinition);
+				if (result == null) result = caseTypeContainer(typeDefinition);
 				if (result == null) result = caseObject(typeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -222,6 +223,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseType(dataType);
 				if (result == null) result = caseTypeDefinition(dataType);
 				if (result == null) result = caseNamedElement(dataType);
+				if (result == null) result = caseTypeContainer(dataType);
 				if (result == null) result = caseObject(dataType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -233,6 +235,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseType(enumeration);
 				if (result == null) result = caseTypeDefinition(enumeration);
 				if (result == null) result = caseNamedElement(enumeration);
+				if (result == null) result = caseTypeContainer(enumeration);
 				if (result == null) result = caseObject(enumeration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -268,10 +271,10 @@ public class StructureSwitch<T> {
 				PrimitiveType primitiveType = (PrimitiveType)theEObject;
 				T result = casePrimitiveType(primitiveType);
 				if (result == null) result = caseDataType(primitiveType);
-				if (result == null) result = caseTypeContainer(primitiveType);
 				if (result == null) result = caseType(primitiveType);
 				if (result == null) result = caseTypeDefinition(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
+				if (result == null) result = caseTypeContainer(primitiveType);
 				if (result == null) result = caseObject(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -311,9 +314,9 @@ public class StructureSwitch<T> {
 				ClassDefinition classDefinition = (ClassDefinition)theEObject;
 				T result = caseClassDefinition(classDefinition);
 				if (result == null) result = caseGenericTypeDefinition(classDefinition);
-				if (result == null) result = caseTypeContainer(classDefinition);
 				if (result == null) result = caseTypeDefinition(classDefinition);
 				if (result == null) result = caseNamedElement(classDefinition);
+				if (result == null) result = caseTypeContainer(classDefinition);
 				if (result == null) result = caseObject(classDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -347,6 +350,7 @@ public class StructureSwitch<T> {
 				T result = caseGenericTypeDefinition(genericTypeDefinition);
 				if (result == null) result = caseTypeDefinition(genericTypeDefinition);
 				if (result == null) result = caseNamedElement(genericTypeDefinition);
+				if (result == null) result = caseTypeContainer(genericTypeDefinition);
 				if (result == null) result = caseObject(genericTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -387,6 +391,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(modelType);
 				if (result == null) result = caseModel(modelType);
 				if (result == null) result = caseNamedElement(modelType);
+				if (result == null) result = caseTypeContainer(modelType);
 				if (result == null) result = caseObject(modelType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

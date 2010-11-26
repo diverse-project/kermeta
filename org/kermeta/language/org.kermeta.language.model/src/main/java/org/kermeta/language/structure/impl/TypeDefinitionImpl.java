@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
+import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeMapping;
 
@@ -35,6 +36,7 @@ import org.kermeta.language.structure.TypeMapping;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getTypeMappings <em>Type Mappings</em>}</li>
@@ -44,6 +46,16 @@ import org.kermeta.language.structure.TypeMapping;
  * @generated
  */
 public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefinition {
+	/**
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> containedType;
+
 	/**
 	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -108,6 +120,18 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+		}
+		return containedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean getIsAspect() {
 		return isAspect;
 	}
@@ -157,6 +181,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeMappings()).basicAdd(otherEnd, msgs);
 		}
@@ -171,6 +197,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				return ((InternalEList<?>)getTypeMappings()).basicRemove(otherEnd, msgs);
 		}
@@ -185,6 +213,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				return getContainedType();
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return getIsAspect();
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
@@ -204,6 +234,10 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				getContainedType().clear();
+				getContainedType().addAll((Collection<? extends Type>)newValue);
+				return;
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect((Boolean)newValue);
 				return;
@@ -227,6 +261,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				getContainedType().clear();
+				return;
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
@@ -248,6 +285,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
+				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
@@ -256,6 +295,38 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return typeMappings != null && !typeMappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeContainer.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeContainer.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface TypeDefinition extends NamedElement {
+public interface TypeDefinition extends NamedElement, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,6 +67,7 @@ public interface TypeDefinition extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Classes from which this ClassDefinition inherits.
+	 * TODO after discussion this link seems not correctly named : a better name would be "extends" especially because it can be used in model type and enumeration
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getTypeDefinition_SuperType()

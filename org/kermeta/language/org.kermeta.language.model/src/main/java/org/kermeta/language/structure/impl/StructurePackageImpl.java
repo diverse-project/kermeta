@@ -2087,6 +2087,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeVariableBindingEClass.getESuperTypes().add(this.getObject());
 		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
 		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
+		typeDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
 		classEClass.getESuperTypes().add(this.getParameterizedType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
@@ -2096,14 +2097,12 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		packageEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
 		parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
-		primitiveTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		typedElementEClass.getESuperTypes().add(this.getTypeContainer());
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
 		tagEClass.getESuperTypes().add(this.getObject());
 		abstractPropertyEClass.getESuperTypes().add(this.getObject());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
-		classDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
 		modelingUnitEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
 		modelingUnitEClass.getESuperTypes().add(this.getObject());
 		typeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());

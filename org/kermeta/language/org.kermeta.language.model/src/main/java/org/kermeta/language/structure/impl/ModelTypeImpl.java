@@ -30,6 +30,7 @@ import org.kermeta.language.structure.Resource;
 import org.kermeta.language.structure.SimpleResource;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
+import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeMapping;
 
@@ -41,6 +42,7 @@ import org.kermeta.language.structure.TypeMapping;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getTypeMappings <em>Type Mappings</em>}</li>
@@ -70,6 +72,16 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> containedType;
 
 	/**
 	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
@@ -159,6 +171,18 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.MODEL_TYPE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, StructurePackage.MODEL_TYPE__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+		}
+		return containedType;
 	}
 
 	/**
@@ -260,6 +284,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE__TYPE_MAPPINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeMappings()).basicAdd(otherEnd, msgs);
 		}
@@ -274,6 +300,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE__TYPE_MAPPINGS:
 				return ((InternalEList<?>)getTypeMappings()).basicRemove(otherEnd, msgs);
 		}
@@ -290,6 +318,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				return getName();
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				return getContainedType();
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				return getIsAspect();
 			case StructurePackage.MODEL_TYPE__SUPER_TYPE:
@@ -313,6 +343,10 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				setName((String)newValue);
+				return;
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				setIsAspect((Boolean)newValue);
@@ -340,6 +374,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				return;
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
@@ -363,6 +400,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
+				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 			case StructurePackage.MODEL_TYPE__SUPER_TYPE:
@@ -385,6 +424,12 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.MODEL_TYPE__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.MODEL_TYPE__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
 				default: return -1;
 			}
 		}
@@ -415,6 +460,12 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.MODEL_TYPE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.MODEL_TYPE__CONTAINED_TYPE;
 				default: return -1;
 			}
 		}

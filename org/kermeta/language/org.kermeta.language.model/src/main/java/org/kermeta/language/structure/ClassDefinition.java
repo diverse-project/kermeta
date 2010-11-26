@@ -40,7 +40,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
+public interface ClassDefinition extends GenericTypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Constraint}.

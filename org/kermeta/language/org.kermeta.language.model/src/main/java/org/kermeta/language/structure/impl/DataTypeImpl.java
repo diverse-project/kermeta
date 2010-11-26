@@ -27,6 +27,7 @@ import org.kermeta.language.structure.DataType;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
+import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeMapping;
 
@@ -38,6 +39,7 @@ import org.kermeta.language.structure.TypeMapping;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getTypeMappings <em>Type Mappings</em>}</li>
@@ -66,6 +68,16 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> containedType;
 
 	/**
 	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
@@ -152,6 +164,18 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, StructurePackage.DATA_TYPE__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+		}
+		return containedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean getIsAspect() {
 		return isAspect;
 	}
@@ -201,6 +225,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeMappings()).basicAdd(otherEnd, msgs);
 		}
@@ -215,6 +241,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				return ((InternalEList<?>)getTypeMappings()).basicRemove(otherEnd, msgs);
 		}
@@ -231,6 +259,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				return getName();
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				return getContainedType();
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return getIsAspect();
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
@@ -252,6 +282,10 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				setName((String)newValue);
+				return;
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect((Boolean)newValue);
@@ -279,6 +313,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				return;
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
@@ -302,6 +339,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
+				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
@@ -322,6 +361,12 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.DATA_TYPE__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.DATA_TYPE__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
 				default: return -1;
 			}
 		}
@@ -346,6 +391,12 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.DATA_TYPE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.DATA_TYPE__CONTAINED_TYPE;
 				default: return -1;
 			}
 		}

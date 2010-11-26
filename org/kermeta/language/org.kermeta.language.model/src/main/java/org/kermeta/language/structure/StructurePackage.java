@@ -1060,13 +1060,22 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION__NAME = NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__CONTAINED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__IS_ASPECT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_DEFINITION__IS_ASPECT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -1075,7 +1084,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_DEFINITION__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -1084,7 +1093,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__TYPE_MAPPINGS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE_DEFINITION__TYPE_MAPPINGS = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
@@ -1093,7 +1102,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
@@ -1360,13 +1369,22 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
+	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -1375,7 +1393,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 2;
+	int DATA_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -1384,7 +1402,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 3;
+	int DATA_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -1393,7 +1411,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
+	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -1449,6 +1467,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__NAME = DATA_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__CONTAINED_TYPE = DATA_TYPE__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
@@ -1760,6 +1787,15 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__NAME = DATA_TYPE__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__CONTAINED_TYPE = DATA_TYPE__CONTAINED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1787,22 +1823,13 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__TYPE_MAPPINGS = DATA_TYPE__TYPE_MAPPINGS;
 
 	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__CONTAINED_TYPE = DATA_TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Instance Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE__INSTANCE_TYPE = DATA_TYPE_FEATURE_COUNT + 1;
+	int PRIMITIVE_TYPE__INSTANCE_TYPE = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
@@ -1811,7 +1838,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 2;
+	int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TagImpl <em>Tag</em>}' class.
@@ -2088,6 +2115,15 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2179,6 +2215,15 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION__CONTAINED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2215,22 +2260,13 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
 
 	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Inv</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__INV = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int CLASS_DEFINITION__INV = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -2239,7 +2275,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__IS_ABSTRACT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 2;
+	int CLASS_DEFINITION__IS_ABSTRACT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
@@ -2248,7 +2284,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__OWNED_ATTRIBUTE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
+	int CLASS_DEFINITION__OWNED_ATTRIBUTE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -2257,7 +2293,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
+	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Class Definition</em>' class.
@@ -2266,7 +2302,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 5;
+	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
@@ -2698,13 +2734,22 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
+	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -2713,7 +2758,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 2;
+	int MODEL_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -2722,7 +2767,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 3;
+	int MODEL_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
@@ -2731,7 +2776,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__CONTENTS = TYPE_FEATURE_COUNT + 4;
+	int MODEL_TYPE__CONTENTS = TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Model Type</em>' class.
@@ -2740,7 +2785,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 5;
+	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.

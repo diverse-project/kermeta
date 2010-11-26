@@ -627,7 +627,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//kermeta/language/structure/NamedElement">
+        <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//kermeta/language/structure/NamedElement #//kermeta/language/structure/TypeContainer">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="This boolean allows to tell if this Type definition is an aspect or not&#xA;If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xA;TypeDefinition that has exactly the same qualified name"/>
           </eAnnotations>
@@ -638,7 +638,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
               eType="#//kermeta/language/structure/Type">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Classes from which this ClassDefinition inherits."/>
+              <details key="documentation" value="Classes from which this ClassDefinition inherits.&#xD;&#xA;TODO after discussion this link seems not correctly named : a better name would be &quot;extends&quot; especially because it can be used in model type and enumeration"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="typeMappings" upperBound="-1"
@@ -746,7 +746,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//kermeta/language/structure/DataType #//kermeta/language/structure/TypeContainer">
+        <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//kermeta/language/structure/DataType">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="The class definition for kermeta aliases. Above statement defines a primitive&#xD;&#xA;type called MyString, which instanceType is &lt;code>kermeta::standard::String&lt;/code>&#xD;&#xA;&lt;pre>alias MyString : kermeta::standard::String&lt;/pre>. Another example could be: &lt;code>root::apackage::AClass&lt;/code>&#xD;&#xA;&lt;pre>alias MyClass : root::apackage::AClass&lt;/pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)."/>
           </eAnnotations>
@@ -841,7 +841,7 @@
           <eLiterals name="kermeta"/>
           <eLiterals name="ocl" value="1"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//kermeta/language/structure/GenericTypeDefinition #//kermeta/language/structure/TypeContainer">
+        <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//kermeta/language/structure/GenericTypeDefinition">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="The definition of a class definition :)&#xA; &lt;pre>class A&#xA;{ &#xA;  attribute s : String&#xA;}&#xA;  &lt;/pre> is a class definition; in :&#xA;&lt;pre>&#xA;main() : A is do end&#xA;&lt;/pre>&#xA;A is a &lt;b>Class&lt;/b> : it corresponds to the &lt;b>use&lt;/b> of the class definition of A"/>
           </eAnnotations>
