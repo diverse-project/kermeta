@@ -13,6 +13,6 @@
     <targetRelations href="StateMachine.ecore#//stateMachine/Transition/target"/>
   </requiredElements>
   <parameters xsi:type="prunerGenerator:RadiusParameter">
-    <focusedElements xsi:type="ecore:EClass" href="StateMachine.ecore#//stateMachine/State"/>
+    <focusedClasses xsi:type="ecore:EClass" href="StateMachine.ecore#//stateMachine/State"/>
   </parameters>
 </prunerGenerator:Pruning>

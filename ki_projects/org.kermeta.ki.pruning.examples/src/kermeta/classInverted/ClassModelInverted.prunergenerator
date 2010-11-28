@@ -10,6 +10,6 @@
     <targetRelations href="../class/ClassModel.ecore#//classModel/Clazz/superClasses"/>
   </requiredElements>
   <parameters xsi:type="prunerGenerator:RadiusParameter">
-    <focusedElements xsi:type="ecore:EClass" href="../class/ClassModel.ecore#//classModel/Clazz"/>
+    <focusedClasses xsi:type="ecore:EClass" href="../class/ClassModel.ecore#//classModel/Clazz"/>
   </parameters>
 </prunerGenerator:Pruning>
