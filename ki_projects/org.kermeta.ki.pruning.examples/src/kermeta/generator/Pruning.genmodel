@@ -10,7 +10,6 @@
   <genPackages prefix="PrunerGenerator" basePackage="org.kermeta.ki" disposableProviderFactory="true"
       ecorePackage="Pruning.ecore#/">
     <genClasses ecoreClass="Pruning.ecore#//Pruning">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/radius"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/requiredElements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/parameters"/>
@@ -25,10 +24,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//SourceRelation/relation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//SourceRelation/createOpposite"/>
     </genClasses>
-    <genClasses ecoreClass="Pruning.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//Parameter/expression"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Parameter/element"/>
+    <genClasses ecoreClass="Pruning.ecore#//FeatureParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/expression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//FeatureParameter/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//Parameter"/>
+    <genClasses ecoreClass="Pruning.ecore#//RadiusParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RadiusParameter/focusedElements"/>
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//Origin">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Origin/path"/>
