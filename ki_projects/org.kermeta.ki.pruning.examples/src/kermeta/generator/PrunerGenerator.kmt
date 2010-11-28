@@ -33,6 +33,8 @@ class PrunerGenerator {
 	
 	reference mainClasses : EClass[0..*]
 	
+	reference radius : RadiusParameter[0..1]
+	
 
 	operation initialise(pruningData : Pruning, metamodel : EPackage, modelURI : String) : PrunerGenerator is do
 		result := self
@@ -49,6 +51,9 @@ class PrunerGenerator {
 			elt.srcRelations.each{src | src.relation.eContainingClass.sourceRelations.add(src.relation) }
 			elt.targetRelations.each{target | target.eContainingClass.targetRelations.add(target) }
 		}
+		
+		// Looking for the radius parameter.
+		radius := self.pruningData.parameters.detect{param | param.isKindOf(RadiusParameter) }.asType(RadiusParameter)
 		
 		defineClassesToAspectise()
 	end

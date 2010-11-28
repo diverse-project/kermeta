@@ -34,7 +34,7 @@ class PrunerClassGenerator inherits Generator {
 		generatedCode := generatedCode + "abstract class " + prunerGenerator.prunerClass.name + " {\n"
 		generatedCode := generatedCode + generateContainers() + "\n"
 		
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
 		end
 		
@@ -156,7 +156,7 @@ class PrunerClassGenerator inherits Generator {
 		}
 
 		// Creation of the variable that will count the radius level.
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			result := result + "\t\tvar currentRadius : Integer init 0\n\n" 
 		end
 
@@ -187,7 +187,7 @@ class PrunerClassGenerator inherits Generator {
 
 		result := result + ")"
 
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			result := result + " or currentRadius>radius"
 		end
 
@@ -212,7 +212,7 @@ class PrunerClassGenerator inherits Generator {
 			result := result + "\t\t\t" + name + "2.clear()\n"
 		}
 
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			result := result + "\t\t\tcurrentRadius := currentRadius + 1\n"
 		end
 
@@ -246,7 +246,7 @@ class PrunerClassGenerator inherits Generator {
 			i := i + 1
 		}
 
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			result := result + ", radius : Integer"
 		end
 
@@ -261,7 +261,7 @@ class PrunerClassGenerator inherits Generator {
 			result := result + "\t\tself." + clazz.getVarNameClassifier() + " := " + clazz.getVarNameClassifier() + "\n"
 		}
 
-		if(prunerGenerator.pruningData.radius) then
+		if(not prunerGenerator.radius.isVoid) then
 			result := result + "\t\tself.radius := radius\n"
 		end
 
