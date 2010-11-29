@@ -206,7 +206,7 @@ aspect class TypeContainer {
 }
 
 aspect class TypeDefinition {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
 		visitor.visitTypeDefinition(self, ctxt)
 	end
 }
