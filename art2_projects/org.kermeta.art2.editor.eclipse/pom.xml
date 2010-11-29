@@ -81,7 +81,6 @@
 							javax.*,
 							org.jdesktop.*,
                         	org.kermeta.art2,
-                        	org.kermeta.art2.impl,
                         	org.kermeta.art2.ui.*,
                         	org.kermeta.art2.util,
                         	org.kermeta.art2.framework,
