@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
+  <packages name="instrument" uri="http:///fr/eseo/gri/malan/instrument/model.ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        kTag="#//@packages.0/@ownedTypeDefinition.0/@kOwnedTags.0" name="Instrument"
+        isAspect="false" isAbstract="false">
+      <kOwnedTags name="MyAnnotation" object="#//@packages.0/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="links" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.1"
+          isOrdered="true" upper="-1">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.1"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="description" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      </ownedAttribute>
+      <ownedAttribute name="interimFeedback" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      </ownedAttribute>
+      <ownedAttribute name="myOppositeReference" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.1"
+          isOrdered="true" upper="1" opposite="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.2"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedOperation name="myOperation" isOrdered="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
+        <ownedParameter name="param1" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
+              typeIdentifier="interaction::Transition"/>
+        </ownedParameter>
+        <ownedParameter name="param2" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
+              typeIdentifier="interaction::Transition"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="Link" isAspect="false" superType="#//@packages.0/@ownedTypeDefinition.1/@containedType.1"
+        isAbstract="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.2"/>
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.2"/>
+      <ownedAttribute name="interaction" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
+          isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Interaction"/>
+      </ownedAttribute>
+      <ownedAttribute name="action" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0"
+          isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
+      </ownedAttribute>
+      <ownedAttribute name="interimFeedback" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      </ownedAttribute>
+      <ownedOperation name="opA" isOrdered="true"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="MyClass" isAspect="false" isAbstract="true">
+      <ownedAttribute name="myReference" type="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.1"
+          lower="1" upper="1" opposite="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3"
+          isReadOnly="true">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.0"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedOperation name="opA" isOrdered="true"/>
+    </ownedTypeDefinition>
+    <nestedPackage name="nextPkg" uri="http:///fr/eseo/gri/malan/fisfd/model.ecore">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="Clazz" isAspect="false" isAbstract="false"/>
+    </nestedPackage>
+    <nestedPackage kTag="#//@packages.0/@nestedPackage.1/@kOwnedTags.0" name="enumPackage"
+        uri="http:///fr/eseo/gri/malan/enumPackage/model.ecore">
+      <kOwnedTags name="AnOtherAnnotation" object="#//@packages.0/@nestedPackage.1"/>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" name="MyFirstEnum">
+        <ownedLiteral name="ITEM_ONE"/>
+        <ownedLiteral name="ITEM_TWO"/>
+        <ownedLiteral name="ITEM_THREE"/>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

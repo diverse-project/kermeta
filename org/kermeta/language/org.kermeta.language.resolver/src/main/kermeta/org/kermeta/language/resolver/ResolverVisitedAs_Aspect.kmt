@@ -1,0 +1,154 @@
+/* $Id:$ 
+ * Creation : November 17, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
+
+using kmt::language::helpers::structure
+
+aspect class Class {
+	attribute visitedAsClass : Boolean
+}
+
+aspect class ClassDefinition {
+	attribute visitedAsClassDefinition : Boolean
+}
+
+aspect class DataType {
+	attribute visitedAsDataType : Boolean
+}
+
+aspect class Enumeration {
+	attribute visitedAsEnumeration : Boolean
+}
+
+aspect class FunctionType {
+	attribute visitedAsFunctionType : Boolean
+}
+
+aspect class GenericTypeDefinition {
+	attribute visitedAsGenericTypeDefinition : Boolean
+}
+
+aspect class Model {
+	attribute visitedAsModel : Boolean
+}
+
+aspect class ModelType {
+	attribute visitedAsModelType : Boolean
+}
+
+aspect class ModelTypeVariable {
+	attribute visitedAsModelTypeVariable : Boolean
+}	
+
+aspect class ModelingUnit {
+	attribute visitedAsModelingUnit : Boolean
+}	
+
+aspect class MultiplicityElement {
+	attribute visitedAsMultiplicityElement : Boolean
+}	
+
+aspect class ObjectTypeVariable {
+	attribute visitedAsObjectTypeVariable : Boolean
+}	
+
+aspect class Operation {
+	attribute visitedAsOperation : Boolean
+}	
+
+aspect class Package {
+	attribute visitedAsPackage : Boolean
+}
+
+aspect class Parameter {
+	attribute visitedAsParameter : Boolean
+}	
+
+aspect class ParameterizedType {
+	attribute visitedAsParameterizedType : Boolean
+}	
+
+aspect class PrimitiveType {
+	attribute visitedAsPrimitiveType : Boolean
+}	
+
+aspect class ProductType {
+	attribute visitedAsProductType : Boolean
+}	
+
+aspect class Property {
+	attribute visitedAsProperty : Boolean
+}	
+
+aspect class Require {
+	attribute visitedAsRequire : Boolean
+}
+
+aspect class Resource {
+	attribute visitedAsResource : Boolean
+}
+
+aspect class ResourceGroup {
+	attribute visitedAsResourceGroup : Boolean
+}
+
+aspect class SimpleResource {
+	attribute visitedAsSimpleResource : Boolean
+}
+
+aspect class Tag {
+	attribute visitedAsTag : Boolean
+}
+
+aspect class Type {
+	attribute visitedAsType : Boolean
+}
+
+aspect class TypeContainer {
+	attribute visitedAsTypeContainer : Boolean
+}	
+
+aspect class TypeDefinition {
+	attribute visitedAsTypeDefinition : Boolean
+}		
+
+aspect class TypeDefinitionContainer {
+	attribute visitedAsTypeDefinitionContainer : Boolean
+}	
+
+aspect class TypeMapping {
+	attribute visitedAsTypeMapping : Boolean
+}
+
+aspect class TypeVariable {
+	attribute visitedAsTypeVariable : Boolean
+}	
+
+aspect class TypeVariableBinding {
+	attribute visitedAsTypeVariableBinding : Boolean
+}
+
+aspect class TypedElement {
+	attribute visitedAsTypedElement : Boolean
+}
+
+aspect class Using {
+	attribute visitedAsUsing : Boolean
+}
+
+aspect class VirtualType {
+	attribute visitedAsVirtualType : Boolean
+}
+
+aspect class VoidType {
+	attribute visitedAsVoidType : Boolean
+}

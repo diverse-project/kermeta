@@ -1,0 +1,110 @@
+/* $Id:$ 
+ * Creation : November 10, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+@mainClass "main::kermeta::org::kermeta::language::resolver::Resolver"
+
+
+package main::kermeta::org::kermeta::language::resolver;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/Structure_Aspect_GetName.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
+
+using kermeta::language::structure
+using kmt::language::helpers::structure
+using main::kermeta::org::kermeta::language::resolver
+using kermeta::persistence
+using kermeta::standard
+
+class Resolver
+{
+	operation main() is do
+		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+	
+		var repository : EMFRepository init EMFRepository.new
+		//repository.registerEcoreFile("platform:/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/action1.km")
+		       	
+       	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	stdio.writeln("	*********************Resolving " + unresolvedModelingUnit.toString() + "*********************")
+       	
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
+       	
+        /*var report : Set<DanglingDiagnostic>
+	 	report := unresolvedModelResource.findDanglingModelElements()
+	 	report.each{ diag |
+	 		var danglingName : String init ""
+	 		var referencingName : String init ""
+	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).getName() + ")"
+	 		else
+	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).getName() + ")"
+	 			end
+	 		end
+	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).getName() + ")"
+	 		else
+	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).getName() + ")"
+	 			end
+	 		end
+			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
+			diag.referencingProperty.name + referencingName)
+		}
+        
+        stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")*/
+       	
+       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/action1Resolved.km")
+       	
+       	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " saved************************")
+       	
+	end
+	
+	operation resolveFromModelingUnit(toBeResolved : org::kermeta::language::structure::ModelingUnit) : Void is do
+		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+       	
+       	stdio.writeln("		Resolving " + toBeResolved.toString())
+       	
+       	toBeResolved.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("		" + toBeResolved.toString() + " resolved")
+	end
+	
+	operation resolveFromPath(path : String) : Void is do
+		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+		
+		var repository : EMFRepository init EMFRepository.new
+		var unresolvedModelResource : Resource init repository.getResource(path)
+		
+			var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	stdio.writeln("		Resolving " + unresolvedModelingUnit.toString())
+       	
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("		" + unresolvedModelingUnit.toString() + " resolved")
+       	
+       	var resolvedPath : String init path
+       	resolvedPath.substring(0, resolvedPath.size()-4)
+       	unresolvedModelResource.saveWithNewURI(resolvedPath + "Resolved.km")
+       	
+       	stdio.writeln("		" + unresolvedModelingUnit.toString() + " resolved " + " saved in " + resolvedPath + "Resolved.km")
+	end
+}

@@ -1,0 +1,852 @@
+/* $Id:$ 
+ * Creation : November 16, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+@mainClass "main::kermeta::org::kermeta::language::resolver::ResolverUnresolvedFinderVisitor"
+
+package main::kermeta::org::kermeta::language::resolver;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverVisitedAs_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedTypeFinder.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedPropertyFinder.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
+
+using org::kermeta::language::structure
+using kmt::language::helpers::structure
+using kermeta::exceptions
+using main::kermeta::org::kermeta::language::resolver
+using kermeta::standard
+
+/*
+* Warning : If the targetType of a TypeMapping is an UnresolvedType, it will not be resolved as TypeMapping cannot contain the new types
+*/
+class ResolverUnresolvedFinderVisitor inherits StructureVisitor
+{
+	reference resolvedTypeFinder : ResolverResolvedTypeFinder
+	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
+	reference resolvedOperationFinder : ResolverResolvedOperationFinder
+
+	operation callTypeFinder(ctxt : StructureVisitorContext) is do	
+		if (resolvedTypeFinder.isVoid()) then
+			resolvedTypeFinder := ResolverResolvedTypeFinder.new
+		end
+		if (ctxt.qualifiedPath.isEmpty()) then
+			ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
+			
+			if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
+				var i : Integer init 0
+				var use : Using
+				from var found : Boolean init not ctxt.foundType.isVoid()
+				until found
+				loop
+					use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
+					ctxt.qualifiedPath := use.fromQName.split("::")
+					if (not use.toName.isVoid()) then
+						if (use.toName.equals(ctxt.unresolvedName)) then
+							ctxt.unresolvedName := ctxt.qualifiedPath.last()
+							ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+						end
+					end
+					if (ctxt.qualifiedPath.last.equals("*")) then
+						ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+					end
+					found := not ctxt.foundType.isVoid()
+					i := i + 1
+				end
+			end
+		else
+			ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+		end
+		if (ctxt.foundType.isVoid()) then
+			var qualifiedPath : String init ""
+			ctxt.qualifiedPath.each{s|
+				qualifiedPath := qualifiedPath + s + "::"
+			}
+			
+			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType " + qualifiedPath + ctxt.unresolvedName
+			
+			stdio.writeln(error)
+			
+			/*var except : Exception init Exception.new
+			except.message := error
+			raise except*/
+		end
+		ctxt.reset()
+	end
+	
+	operation callPropertyFinder(ctxt : StructureVisitorContext) is do
+		if (resolvedPropertyFinder.isVoid()) then
+			resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
+		end
+		if (ctxt.qualifiedPath.isEmpty()) then
+			ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt)
+		else
+			ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
+		end
+		if (ctxt.foundType.isVoid()) then
+			var qualifiedPath : String init ""
+			ctxt.qualifiedPath.each{s|
+				qualifiedPath := qualifiedPath + s + "::"
+			}
+			
+			var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + qualifiedPath + ctxt.unresolvedName
+			
+			stdio.writeln(error)
+			
+			/*var except : Exception init Exception.new
+			except.message := error
+			raise except*/
+		end
+		ctxt.reset()
+	end
+	
+	operation callOperationFinder(ctxt : StructureVisitorContext) is do
+		if (resolvedOperationFinder.isVoid()) then
+			resolvedOperationFinder := ResolverResolvedOperationFinder.new
+		end
+		if (ctxt.qualifiedPath.isEmpty()) then
+			ctxt.currentPackage.accept(resolvedOperationFinder, ctxt)
+		else
+			ctxt.currentModelingUnit.accept(resolvedOperationFinder, ctxt)
+		end
+		if (ctxt.foundType.isVoid()) then
+			var qualifiedPath : String init ""
+			ctxt.qualifiedPath.each{s|
+				qualifiedPath := qualifiedPath + s + "::"
+			}
+			
+			var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + qualifiedPath + ctxt.unresolvedName
+			
+			stdio.writeln(error)
+			
+			/*var except : Exception init Exception.new
+			except.message := error
+			raise except*/
+		end
+		ctxt.reset()
+	end
+
+	method visitClass(c : Class, ctxt : StructureVisitorContext) is do
+		if (c.visitedAsClass.isVoid) then
+			c.visitedAsClass := true
+		
+			//Visiting inherited properties from ParameterizedType
+			visitParameterizedType(c, ctxt)
+		end
+	end
+	
+	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
+		if (c.visitedAsClassDefinition.isVoid) then	
+			c.visitedAsClassDefinition := true
+				
+			//Visiting inherited properties from GenericTypeDefinition
+			visitGenericTypeDefinition(c, ctxt)
+			
+			//Visiting contained Properties	and handling UnresolvedProperties
+			var propertiesToBeAdded : Collection<Property> init Set<Property>.new
+			var propertiesToBeRemoved : Collection<UnresolvedProperty> init Set<UnresolvedProperty>.new
+			var foundProperty : Property
+			c.ownedAttribute.each{a|
+				a.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callPropertyFinder(ctxt)
+					foundProperty := ctxt.getFoundProperty()
+					if not foundProperty.isVoid() then
+						propertiesToBeRemoved.add(a.asType(UnresolvedProperty))					
+						propertiesToBeAdded.add(foundProperty)
+					end
+				end
+			}
+			propertiesToBeRemoved.each{tbr|
+				c.ownedAttribute.remove(tbr.asType(Property))
+			}
+			propertiesToBeAdded.each{tba|
+				c.ownedAttribute.add(tba)
+				tba.accept(self, ctxt)
+			}
+			
+			//Visiting contained Operations	and handling UnresolvedOperations
+			var operationsToBeAdded : Collection<Operation> init Set<Operation>.new
+			var operationsToBeRemoved : Collection<UnresolvedOperation> init Set<UnresolvedOperation>.new
+			var foundOperation : Operation
+			c.ownedOperation.each{o|
+				o.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then	
+					callOperationFinder(ctxt)
+					foundOperation := ctxt.getFoundOperation()
+					if not foundProperty.isVoid() then
+						operationsToBeRemoved.add(o.asType(UnresolvedOperation))
+						operationsToBeAdded.add(foundOperation)
+					end
+				end
+			}
+			operationsToBeRemoved.each{tbr|
+				c.ownedOperation.remove(tbr.asType(Operation))
+			}
+			operationsToBeAdded.each{tba|
+				c.ownedOperation.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+		
+	method visitDataType(d : DataType, ctxt : StructureVisitorContext) is do
+		if (d.visitedAsDataType.isVoid) then
+			d.visitedAsDataType := true
+		
+			//Visiting inherited properties from TypeDefinition
+			visitTypeDefinition(d, ctxt)			
+		end
+	end
+	
+	method visitEnumeration(e : Enumeration, ctxt : StructureVisitorContext) is do
+		if (e.visitedAsEnumeration.isVoid) then
+			e.visitedAsEnumeration := true
+	
+			//Visiting inherited properties from DataType
+			visitDataType(e, ctxt)
+		end
+	end
+	
+	method visitFunctionType(f : FunctionType, ctxt : StructureVisitorContext) is do
+		if (f.visitedAsFunctionType.isVoid) then
+			f.visitedAsFunctionType := true
+
+			//Visiting inherited properties from TypeContainer
+			visitTypeContainer(f, ctxt)			
+			
+			//Visiting left and right Types and handling Unresolved
+			if (not f.right.isVoid) then
+				if (isVisitable(f.right)) then
+					f.right.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
+						if not foundType.isVoid() then
+							f.right := foundType
+							if (foundType.isInstanceOf(Class)) then
+								f.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			end
+			if (not f.left.isVoid) then
+				if (isVisitable(f.left)) then
+					f.left.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
+						if not foundType.isVoid() then
+							f.left := foundType
+							if (foundType.isInstanceOf(Class)) then
+								f.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	method visitGenericTypeDefinition(g : GenericTypeDefinition, ctxt : StructureVisitorContext) is do
+		if (g.visitedAsGenericTypeDefinition.isVoid) then
+			g.visitedAsGenericTypeDefinition := true
+		
+			//Visiting inherited properties from TypeDefinition
+			visitTypeDefinition(g, ctxt)		
+			
+			//Visiting referenced TypeVariables and handling Unresolveds
+			var typeParameterToBeAdded : Collection<TypeVariable> init Set<TypeVariable>.new
+			var typeParameterToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			g.typeParameter.each{t|
+				if (isVisitable(t)) then
+					t.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
+							typeParameterToBeAdded.add(foundType().asType(TypeVariable))
+							if (foundType.isInstanceOf(Class)) then
+								g.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			}
+			typeParameterToBeRemoved.each{tbr|
+				g.typeParameter.remove(tbr.asType(TypeVariable))
+			}
+			typeParameterToBeAdded.each{tba|
+				g.typeParameter.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitModelType(m : ModelType, ctxt : StructureVisitorContext) is do
+		if (m.visitedAsModelType.isVoid) then
+			m.visitedAsModelType := true
+		
+			//Visiting inherited properties from TypeDefinition
+			visitTypeDefinition(m, ctxt)
+		end
+	end
+	
+	method visitModelTypeVariable(m : ModelTypeVariable, ctxt : StructureVisitorContext) is do
+		if (m.visitedAsModelTypeVariable.isVoid) then
+			m.visitedAsModelTypeVariable := true
+		
+			//Visiting inherited properties from TypeVariable
+			visitTypeVariable(m, ctxt)			
+			
+			//Visiting referenced VirtualTypes and handling Unresolveds
+			var virtualTypeToBeAdded : Collection<VirtualType> init Set<VirtualType>.new
+			var virtualTypeToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			m.virtualType.each{t|
+				if (isVisitable(t)) then
+					t.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							virtualTypeToBeRemoved.add(t.asType(UnresolvedType))
+							virtualTypeToBeAdded.add(foundType.asType(VirtualType))
+							if (foundType.isInstanceOf(Class)) then
+								m.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			}
+			virtualTypeToBeRemoved.each{tbr|
+				m.virtualType.remove(tbr.asType(VirtualType))
+			}
+			virtualTypeToBeAdded.each{tba|
+				m.virtualType.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
+		if (m.visitedAsModelingUnit.isVoid) then
+			m.visitedAsModelingUnit := true
+		
+			ctxt.currentModelingUnit := m
+			//Visiting inherited properties from TypeDefinitionContainer
+			visitTypeDefinitionContainer(m, ctxt)
+						
+			//Visiting contained Packages
+			m.packages.each{p|
+				p.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitMultiplicityElement(m : MultiplicityElement, ctxt : StructureVisitorContext) is do
+		if (m.visitedAsMultiplicityElement.isVoid) then
+			m.visitedAsMultiplicityElement := true
+			
+			//Visiting inherited properties from TypedElement
+			visitTypedElement(m, ctxt)
+		end
+	end
+	
+	method visitObjectTypeVariable(o : ObjectTypeVariable, ctxt : StructureVisitorContext) is do
+		if (o.visitedAsObjectTypeVariable.isVoid) then	
+			o.visitedAsObjectTypeVariable := true
+		
+			//Visiting inherited properties from TypeVariable
+			visitTypeVariable(o, ctxt)
+		end
+	end
+	
+	method visitOperation(o : Operation, ctxt : StructureVisitorContext) is do
+		if (o.visitedAsOperation.isVoid) then
+			o.visitedAsOperation := true
+		
+			//Visiting inherited properties from MultiplicityElement
+			visitMultiplicityElement(o, ctxt)	
+			
+			//Visiting referenced Types and handling Unresolveds
+			var raisedExceptionsToBeAdded : Collection<Type> init Set<Type>.new
+			var raisedExceptionsToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			o.raisedException.each{e|
+				if (isVisitable(e)) then
+					e.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							raisedExceptionsToBeRemoved.add(e.asType(UnresolvedType))
+							raisedExceptionsToBeAdded.add(foundType)
+							if (foundType.isInstanceOf(Class)) then
+								o.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			}
+			raisedExceptionsToBeRemoved.each{tbr|
+				o.raisedException.remove(tbr)
+			}
+			raisedExceptionsToBeAdded.each{tba|
+				o.raisedException.add(tba)
+				tba.accept(self, ctxt)
+			}
+			
+			//Visiting owned Parameters
+			o.ownedParameter.each{p|
+				p.accept(self, ctxt)
+			}
+			
+			//Visiting superOperation
+			if (not o.superOperation.isVoid) then
+				o.superOperation.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callOperationFinder(ctxt)
+					var foundOperation : Operation init ctxt.getFoundOperation()
+					if not foundOperation.isVoid() then
+						o.superOperation := foundOperation
+					end
+				end
+			end
+			
+			//Deleting UnresolvedOperations (the only one is superOperation)
+			o.ownedUnresolvedOperations.clear()
+			
+			//Visiting owningClass
+			if (not o.owningClass.isVoid) then
+				o.owningClass.accept(self, ctxt)
+			end
+			
+			//Visiting referenced TypeVariables and handling Unresolved
+			var typeParameterToBeAdded : Collection<TypeVariable> init Set<TypeVariable>.new
+			var typeParameterToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			o.typeParameter.each{t|
+				if (isVisitable(t)) then
+					t.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
+							typeParameterToBeAdded.add(foundType.asType(TypeVariable))
+							if (foundType.isInstanceOf(Class)) then
+								o.containedType.add(foundType)
+							end
+						end		
+					end
+				end
+			}
+			typeParameterToBeRemoved.each{tbr|
+				o.typeParameter.remove(tbr.asType(TypeVariable))
+			}
+			typeParameterToBeAdded.each{tba|
+				o.typeParameter.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+
+	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsPackage.isVoid) then
+			p.visitedAsPackage := true
+		
+			ctxt.currentPackage := p
+			//Visiting inherited properties from TypeDefinitionContainer
+			visitTypeDefinitionContainer(p, ctxt)
+		end
+	end
+	
+	method visitParameter(p : Parameter, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsParameter.isVoid) then
+			p.visitedAsParameter := true
+		
+			//Visiting inherited properties from MultiplicityElement
+			visitMultiplicityElement(p, ctxt)
+			
+			//Visiting referenced Operation and handling Unresolved
+			if (not p.~operation.isVoid()) then
+				p.~operation.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callOperationFinder(ctxt)
+					var foundOperation : Operation init ctxt.getFoundOperation()
+					if not foundOperation.isVoid() then
+						p.~operation := foundOperation
+					end
+				end
+			end
+		end
+	end
+	
+	method visitParameterizedType(p : ParameterizedType, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsParameterizedType.isVoid) then
+			p.visitedAsParameterizedType := true
+			
+			//Visiting referenced TypeVariableBindings
+			p.virtualTypeBinding.each{v|
+				v.accept(self, ctxt)
+			}
+			
+			//Visiting referenced TypeVariableBindings
+			p.typeParamBinding.each{t|
+				t.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsPrimitiveType.isVoid) then
+			p.visitedAsPrimitiveType := true
+
+			//Visiting inherited properties from DataType
+			visitDataType(p, ctxt)
+			
+			//Visiting instanceType and handling Unresolved
+			if (not p.instanceType.isVoid) then
+				if (isVisitable(p.instanceType)) then
+					p.instanceType.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
+						if not foundType.isVoid() then
+							p.instanceType := foundType
+							if (foundType.isInstanceOf(Class)) then
+								p.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	method visitProductType(p : ProductType, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsProductType.isVoid) then
+			p.visitedAsProductType := true
+
+			//Visiting inherited properties from TypeContainer
+			visitTypeContainer(p, ctxt)
+			
+			//Visiting Types and handling Unresolved
+			var typesToBeAdded : Collection<Type> init Set<Type>.new
+			var typesToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			p.type.each{t|
+				if (isVisitable(t)) then
+					t.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							typesToBeRemoved.add(t.asType(UnresolvedType))
+							typesToBeAdded.add(foundType)
+							if (foundType.isInstanceOf(Class)) then
+								p.containedType.add(foundType)
+							end
+						end						
+					end
+				end
+			}
+			typesToBeRemoved.each{tbr|
+				p.type.remove(tbr)
+			}
+			typesToBeAdded.each{tba|
+				p.type.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitProperty(p : Property, ctxt : StructureVisitorContext) is do
+		if (p.visitedAsProperty.isVoid) then
+			p.visitedAsProperty := true
+			
+			//Visiting properties inherited from MultiplicityElement
+			visitMultiplicityElement(p, ctxt)
+		
+			//Visiting opposite and handling Unresolved
+			if (not p.opposite.isVoid) then
+				p.opposite.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callPropertyFinder(ctxt)
+					var foundProperty : Property init ctxt.getFoundProperty()
+					if not foundProperty.isVoid() then
+						p.opposite := foundProperty
+						//Deleting UnresolvedProperties (the only one is opposite)
+						p.ownedUnresolvedProperties.clear()
+					end
+				end
+			end
+			
+			//Visiting owningClass and handling Unresolved
+			if (not p.owningClass.isVoid) then
+				p.owningClass.accept(self, ctxt)
+			end
+		end
+	end
+	
+	method visitTypeContainer(t : TypeContainer, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypeContainer.isVoid) then
+			t.visitedAsTypeContainer := true
+			
+			//Visiting types and handling Unresolved
+			var typesToBeAdded : Collection<Type> init Set<Type>.new
+			var typesToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			t.containedType.each{t|
+				if (isVisitable(t)) then
+					t.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							typesToBeRemoved.add(t.asType(UnresolvedType))
+							typesToBeAdded.add(foundType)
+						end
+					end
+				end
+			}
+			typesToBeRemoved.each{tbr|
+				t.containedType.remove(tbr)
+			}
+			typesToBeAdded.each{tba|
+				t.containedType.add(tba)
+				tba.accept(self, ctxt)
+			}
+		end
+	end
+		
+	method visitTypeDefinition(t : TypeDefinition, ctxt : StructureVisitorContext) is do
+		if(t.visitedAsTypeDefinition.isVoid()) then
+			t.visitedAsTypeDefinition := true
+		
+			//Visiting contained Types
+			visitTypeContainer(t, ctxt)	
+		
+			//Visiting superTypes and handling Unresolved
+			var typesToBeAdded : Collection<Type> init Set<Type>.new
+			var typesToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
+			var foundType : Type
+			t.superType.each{y|
+				if (isVisitable(y)) then
+					y.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
+						if not foundType.isVoid() then
+							typesToBeRemoved.add(y.asType(UnresolvedType))
+							typesToBeAdded.add(foundType)
+							if (foundType.isInstanceOf(Class)) then
+								t.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			}
+			typesToBeRemoved.each{tbr|
+				t.superType.remove(tbr)
+			}
+			typesToBeAdded.each{tba|
+				t.superType.add(tba)
+				tba.accept(self, ctxt)
+			}
+			
+			//Visiting typeMappings
+			t.typeMappings.each{m|
+				m.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitTypeDefinitionContainer(t : TypeDefinitionContainer, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypeDefinitionContainer.isVoid()) then
+			t.visitedAsTypeDefinitionContainer := true
+			
+			//Visiting typeDefinitions
+			t.ownedTypeDefinition.each{o|
+				o.accept(self, ctxt)
+			}
+		end
+	end
+	
+	method visitTypeMapping(t : TypeMapping, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypeMapping.isVoid()) then
+			t.visitedAsTypeMapping := true
+			
+			//Visiting target and source Types and handling Unresolved
+			if (isVisitable(t.targetType)) then
+				t.targetType.accept(self, ctxt)
+				//We don't know who have to contain the new types
+				/*if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
+					if not foundType.isVoid() then
+						t.targetType := foundType
+					end
+				end*/
+			end
+			
+			if (isVisitable(t.sourceType)) then
+				t.sourceType.accept(self, ctxt)
+			end
+		end
+	end
+	
+	method visitTypeVariable(t : TypeVariable, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypeVariable.isVoid()) then
+			t.visitedAsTypeVariable := true
+			
+			//Visiting properties inherited from TypeContainer
+			visitTypeContainer(t, ctxt)
+			
+			//Visiting superType and handling Unresolved
+			if (not t.supertype.isVoid()) then
+				if (isVisitable(t.supertype)) then
+					t.supertype.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
+						if not foundType.isVoid() then
+							t.supertype := foundType
+							if (foundType.isInstanceOf(Class)) then
+								t.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	method visitTypeVariableBinding(t : TypeVariableBinding, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypeVariableBinding.isVoid()) then
+			t.visitedAsTypeVariableBinding := true
+			
+			//Visiting properties inherited from TypeContainer
+			visitTypeContainer(t, ctxt)
+			
+			//Visiting variable and handling Unresolved
+			if (isVisitable(t.variable)) then
+				t.variable.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
+					if not foundType.isVoid() then
+						t.variable := foundType.asType(TypeVariable)
+						if (foundType.isInstanceOf(Class)) then
+							t.containedType.add(foundType)
+						end
+					end
+				end
+			end
+			
+			//Visiting type and handling Unresolved
+			if (isVisitable(t.type)) then
+				t.type.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
+					if not foundType.isVoid() then
+						t.type := ctxt.foundType
+						if (foundType.isInstanceOf(Class)) then
+							t.containedType.add(foundType)
+						end
+					end	
+				end
+			end
+		end
+	end
+	
+	method visitTypedElement(t : TypedElement, ctxt : StructureVisitorContext) is do
+		if (t.visitedAsTypedElement.isVoid()) then
+			t.visitedAsTypedElement := true
+			
+			//Visiting properties inherited from TypeContainer
+			visitTypeContainer(t, ctxt)
+			
+			//Visiting type and handling Unresolved
+			if (not t.type.isVoid()) then
+				if (isVisitable(t.type)) then
+					t.type.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
+						if not foundType.isVoid() then
+							t.type := foundType
+							if (foundType.isInstanceOf(Class)) then
+								t.containedType.add(foundType)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	method visitUnresolvedOperation(u : UnresolvedOperation, ctxt : StructureVisitorContext) is do
+		ctxt.unresolved := u
+		ctxt.qualifiedPath := u.operationIdentifier.split("::")
+		ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+		ctxt.unresolvedName := u.operationIdentifier.split("::").last()
+		ctxt.identifierCounter := 0
+	end
+	
+	method visitUnresolvedProperty(u : UnresolvedProperty, ctxt : StructureVisitorContext) is do
+		ctxt.unresolved := u
+		ctxt.qualifiedPath := u.propertyIdentifier.split("::")
+		ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+		ctxt.unresolvedName := u.propertyIdentifier.split("::").last()
+		ctxt.identifierCounter := 0
+	end
+	
+	method visitUnresolvedType(u : UnresolvedType, ctxt : StructureVisitorContext) is do
+		ctxt.unresolved := u	
+		ctxt.qualifiedPath := u.typeIdentifier.split("::")
+		ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+		ctxt.unresolvedName := u.typeIdentifier.split("::").last()
+		ctxt.identifierCounter := 0
+	end
+	
+	method visitVirtualType(v : VirtualType, ctxt : StructureVisitorContext) is do
+		if (v.visitedAsVirtualType.isVoid) then
+			v.visitedAsVirtualType := true
+			
+			//Visiting properties inherited from ObjectTypeVariable
+			visitObjectTypeVariable(v, ctxt)
+			
+			//Visiting modelType and handling Unresolved
+			if (isVisitable(v.modelType)) then
+				v.modelType.accept(self, ctxt)
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
+					if not foundType.isVoid() then
+						v.modelType := foundType.asType(ModelTypeVariable)
+						if (foundType.isInstanceOf(Class)) then
+							v.containedType.add(foundType)
+						end
+					end
+				end
+			end
+			
+			//Visiting typeParamBindings
+			v.typeParamBinding.each{t|
+				t.accept(self, ctxt)
+			}
+		end
+	end
+}
