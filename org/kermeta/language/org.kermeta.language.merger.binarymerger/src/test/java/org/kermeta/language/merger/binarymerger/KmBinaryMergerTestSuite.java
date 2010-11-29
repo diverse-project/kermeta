@@ -8,6 +8,10 @@
  */
 package org.kermeta.language.merger.binarymerger;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import org.kermeta.language.api.tests.port.PortKmBinaryMergerTestSuite;
@@ -23,9 +27,20 @@ public class KmBinaryMergerTestSuite extends TestSuite {
    // @Override
     public static Test suite() {
 
-        initRegistry();
+        System.out.println("Initializing Registry...");
+        ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
+
+        MainRunner.init();
+       // initRegistry();
 
         PortKmBinaryMergerTestSuite.mergerClass = Art2ComponentKmBinaryMerger.class;
+        File dir1 = new File (".");
+        try {
+            System.out.println("outputFolder ? : " + dir1.getCanonicalPath());
+        } catch (IOException ex) {
+            Logger.getLogger(KmBinaryMergerTestSuite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return PortKmBinaryMergerTestSuite.suite();
     }
 
@@ -33,7 +48,7 @@ public class KmBinaryMergerTestSuite extends TestSuite {
         org.OrgPackage pack = org.impl.OrgPackageImpl.init();
 	org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.OrgPackage.eNS_URI, pack);
 	//kermeta.persistence.EcorePackages().getPacks().put(org.OrgPackage.eNS_URI, pack);
-	pack.setEFactoryInstance(org.RichFactory);
+	pack.setEFactoryInstance(ScalaAspect.org.RichFactory$.MODULE$);
 
 
 
