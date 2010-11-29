@@ -7,6 +7,7 @@ package org.kermeta.language.api.tests.port;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.port.PortResourceLoader.URIType;
@@ -42,10 +44,10 @@ public class PortKmBinaryMergerTest extends TestCase {
 
     public PortKmBinaryMergerTest(String baseName, String primaryFilePath, String aspectFilePath, String outputFilePath, String expectedOutputfilePath, Boolean _valid, Class mergerclass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         System.out.println(" creating test ");
-        System.out.println("         basename         " + baseName);
-        System.out.println("    primaryFilePath       " + primaryFilePath);
-        System.out.println("     aspectFilePath       " + aspectFilePath);
-        System.out.println("     outputFilePath       " + outputFilePath);
+        System.out.println("                 basename " + baseName);
+        System.out.println("          primaryFilePath " + primaryFilePath);
+        System.out.println("           aspectFilePath " + aspectFilePath);
+        System.out.println("           outputFilePath " + outputFilePath);
         System.out.println("   expectedOutputfilePath " + expectedOutputfilePath);
         this.primaryFilePath = primaryFilePath;
         this.aspectFilePath = aspectFilePath;
@@ -55,6 +57,10 @@ public class PortKmBinaryMergerTest extends TestCase {
         this.valid = _valid;
         merger = (PortKmBinaryMerger) mergerclass.getConstructors()[0].newInstance();
         resourceSet = new ResourceSetImpl();
+	Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+	Map<String,Object> m = f.getExtensionToFactoryMap();
+	m.put("km",new XMIResourceFactoryImpl());
+	//resourceSet.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     }
 
     public void test() throws IOException  {

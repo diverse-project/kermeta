@@ -53,7 +53,7 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
     public static void populate(TestSuite ts, String folder, Boolean valid,Class p,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String[] vfiles;
         try {
-            String folderFullURI = PortKmBinaryMergerTestSuite.class.getClassLoader().getResource(folder).getPath();
+            String folderFullURI = PortKmBinaryMergerTestSuite.class.getClassLoader().getResource(folder).toString();
             vfiles = Util.getResourceListingFullURI(PortResourceLoaderTestSuite.class, folder);
 
             // make sure the aspect, expected_output and primary are always in the same order
@@ -65,7 +65,15 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
             String currentAspectFilePath = "";
             String currentPrimaryFilePath = "";
             String currentExpectedOutputFilePath = "";
-
+            String jarPath = folderFullURI.substring(0, folderFullURI.indexOf("!")); // get only the jar url
+            // output goes into ./target/tests/ ...
+            String outputFolder = "";
+            File dir1 = new File (".");
+            try {
+                outputFolder = "file://" + dir1.getCanonicalPath() + "/target/tests/"+PortKmBinaryMergerTestSuite.class.getName()+"/output";
+            } catch (IOException ex) {
+                Logger.getLogger(PortKmBinaryMergerTestSuite.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (String uri : vfiles) {
                /* if (uri.endsWith(filter)) {
                     InputStream is = PortResourceLoaderTestSuite.class.getClassLoader().getResourceAsStream(uri);
@@ -76,7 +84,7 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
             	System.out.println("Entries list : " + uri);
 
                 if(uri.endsWith("/aspect/")){
-                    currentTestName = uri.replaceFirst("aspect/", "").replaceFirst(folder, "");
+                    currentTestName = uri.replaceFirst("/aspect/", "").replaceFirst(folder, "").replaceAll("/", "");
                 }
                 if(uri.contains("/aspect/") && uri.endsWith(".km")){
                     currentAspectFilePath = uri;
@@ -89,18 +97,20 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
                     // this is also the last entry called for a given test
                     // create the test for it
                     //this.getClass();
-                    String outputFolder = "";// p.getClassLoader().getResource("test_output").getPath();
+
+                    
+                  // System.out.println("outputFolder ? : " + ts.getClass().getClassLoader().getResource("/").getPath());
                     ts.addTest(new PortKmBinaryMergerTest(currentTestName+"_pa",
-                             currentPrimaryFilePath, 
-                             currentAspectFilePath, 
+                             jarPath+"!/"+currentPrimaryFilePath,
+                             jarPath+"!/"+currentAspectFilePath,
                              outputFolder+"/"+currentTestName+"_pa.km",
-                             currentExpectedOutputFilePath,
+                             jarPath+"!/"+currentExpectedOutputFilePath,
                              valid,p));
                      ts.addTest(new PortKmBinaryMergerTest(currentTestName+"_ap",
-                             currentPrimaryFilePath,
-                             currentAspectFilePath,
+                             jarPath+"!/"+currentPrimaryFilePath,
+                             jarPath+"!/"+currentAspectFilePath,
                              outputFolder+"/"+currentTestName+"_ap.km",
-                             currentExpectedOutputFilePath,
+                             jarPath+"!/"+currentExpectedOutputFilePath,
                              valid,p));
                 }
 
