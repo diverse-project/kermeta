@@ -49,7 +49,6 @@
                         <Export-Package>org.kermeta.art2.provider</Export-Package>
                         <Import-Package>
                         org.kermeta.art2,
-                        org.kermeta.art2.impl,
                         org.kermeta.art2.util,
 						org.eclipse.emf.*,
 						org.osgi.framework
