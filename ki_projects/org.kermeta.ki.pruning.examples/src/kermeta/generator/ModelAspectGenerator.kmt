@@ -83,8 +83,10 @@ class ModelAspectGenerator inherits Generator {
 			}
 		}
 
-		result := result + generateVisitOperation(clazz, isChild) + "\n"
-		result := result + generateAddRelations(clazz, isChild)
+		result := result + generateVisitOperation(clazz, isChild)
+		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz)}) then
+			result := result + "\n" + generateAddRelations(clazz, isChild)
+		end
 		result := result + "}\n"
 	end
 
@@ -120,7 +122,9 @@ class ModelAspectGenerator inherits Generator {
 					result := result + " and " + varName + "." + tar.name + ".visited"
 				}
 				
-				result := result + ") then\n\t\t\t\t" + varName + ".visit(" + prunerGenerator.getPrunerVarName() + ")\n\t\t\tend\n\t\t}\n"
+				result := result + ") then\n\t\t\t\t" + varName + ".visited := true\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
+							".on" + clazzRel.name + "Added(" + varName + ")\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
+							".added" + clazzRel.name + "s.add(" + varName + ")\n\t\t\tend\n\t\t}\n"
 			end
 		}
 
@@ -145,7 +149,7 @@ class ModelAspectGenerator inherits Generator {
 
 
 
-	operation generateVisitOperation(clazz : EClass, isChild : Boolean) : String is do
+	operation generateVisitOperationFocusedClass(clazz : EClass, isChild : Boolean) : String is do
 		var opDeclaration : String
 
 		// Definition of the type of the operation.
@@ -172,7 +176,6 @@ class ModelAspectGenerator inherits Generator {
 		clazz.sourceRelations.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzCalled.getVarNameClassifier()
-			var callAddMethodHeader : String init "." +  clazzCalled.addOperation.getCallHeader()
 
 			if(rel.upperBound==-1 or rel.upperBound>1) then
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " | "
@@ -180,13 +183,61 @@ class ModelAspectGenerator inherits Generator {
 				if(rel.eType==rel.eContainingClass) then
 					result := result + clazzCalled.getVarNameSet() + ".add(" + varName + ") }\n" 
 				else
-					result := result + varName + callAddMethodHeader + " }\n"
+					result := result + varName + "." + clazzCalled.visitOperation.getCallHeader() + " }\n"
 				end
 			else
-				result := result + "if(not self." + varName + ".isVoid()) then self." + varName + callAddMethodHeader + " end\n"
+				result := result + "if(not self." + varName + ".isVoid()) then self." + varName + "."
+				
+				if(rel.eType==rel.eContainingClass) then
+					result := result + clazzCalled.addOperation.getCallHeader() + " end\n"
+				else
+					result := result + clazzCalled.visitOperation.getCallHeader() + " end\n"
+				end
 			end
 		}
 
 		result := result + "\tend\n"
+	end
+
+
+
+	operation generateVisitOperationNotFocusedClass(clazz : EClass, isChild : Boolean) : String is do
+		var opDeclaration : String
+
+		// Definition of the type of the operation.
+		if(isChild) then 	opDeclaration := "method"
+		else 				opDeclaration := "operation" end
+
+		// Adding the declaration of method visit
+		result := "\t" + opDeclaration + " " + clazz.visitOperation.getDeclarationHeader() + " : Void is do\n" 
+
+		// If the current clazz is the sub class of a class that defines method visit, the super call must be performed.
+		if(isChild) then 
+			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
+		end
+
+		clazz.targetRelations.each{rel |
+			var clazzCalled : EClass init rel.eType.asType(EClass)
+
+			if(rel.upperBound==-1 or rel.upperBound>1) then
+				var varName : String init clazzCalled.getVarNameClassifier()
+				result := result + "\t\tself." + rel.name + ".each{" + varName + " | if(not " + varName + ".visited) then " +
+						  clazzCalled.getVarNameSet() + ".add(" + varName + ") end }\n"
+			else
+				result := result + "\t\tif(not self." + rel.name + ".visited) then " + clazzCalled.getVarNameSet() + ".add(self." + rel.name + ") end\n"
+			end
+		}
+
+		result := result + "\tend\n"
+	end
+
+
+
+	operation generateVisitOperation(clazz : EClass, isChild : Boolean) : String is do
+		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz) } ) then
+			result := generateVisitOperationFocusedClass(clazz, isChild)
+		else
+			result := generateVisitOperationNotFocusedClass(clazz, isChild)
+		end
 	end
 }

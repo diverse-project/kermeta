@@ -82,11 +82,7 @@ aspect class EClass {
 			param.name := "the" + prunerGenerator.prunerClass.name
 			param.eType := prunerGenerator.prunerClass
 			visitOperation.eParameters.add(param)
-			
-			if(not main.isVoid and main) then
-				addParametersVisitAddMethods(visitOperation, prunerGenerator)
-			end
-			
+			addParametersVisitAddMethods(visitOperation, prunerGenerator)
 			eSuperTypes.each{clazz | clazz.addOperationToSuperTypes(visitOperation, false) }
 		end
 	end

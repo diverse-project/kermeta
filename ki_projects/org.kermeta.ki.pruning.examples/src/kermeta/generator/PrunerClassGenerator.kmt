@@ -116,41 +116,9 @@ class PrunerClassGenerator inherits Generator {
 
 
 	operation generateLaunchOperation() : String is do
-		var varClasses : Bag<EClass> init Bag<EClass>.new
-		var i : Integer
 		result := "\toperation launch() : Void is do\n\t\tpreparePruning()\n\n"
 
-		// Exploring the model to prune requires some variables.
-		prunerGenerator.pruningData.requiredElements.each{elt |
-			// For source relations which type and container is the same class.
-			elt.srcRelations.each{src |
-				if(src.relation.eType==src.relation.eContainingClass and not varClasses.contains(src.relation.eContainingClass)) then
-					varClasses.add(src.relation.eContainingClass)
-				end
-			}
-
-			var clazz : EClass
-			// When the type and container is not the same, we look at the target relations and their origins.
-			// We create one variable for each target relations. The type of this variable is the most super type defined in the sources.
-			elt.targetRelations.each{rel |
-				if(rel.eType.isKindOf(EClass)) then
-					clazz := rel.eType.asType(EClass)
-	
-					elt.origins.each{origin |
-						var ref : EReference init origin.path.last()
-						if(ref.eType.isKindOf(EClass) and ref.eType.asType(EClass).isSuperTypeOf(clazz)) then
-							clazz := ref.eType.asType(EClass)
-						end
-					}
-
-					if(not varClasses.contains(clazz)) then
-						varClasses.add(clazz)
-					end
-				end
-			}
-		}
-
-		varClasses.each{clazz |
+		prunerGenerator.radius.focusedClasses.each{clazz |
 			result := result + "\t\tvar " + clazz.getVarNameSet() + "  : Bag<" + clazz.name + "> init Bag<" + clazz.name + ">.new\n"
 			result := result + "\t\tvar " + clazz.getVarNameSet() + "2 : Bag<" + clazz.name + "> init Bag<" + clazz.name + ">.new\n"
 		}
@@ -162,15 +130,16 @@ class PrunerClassGenerator inherits Generator {
 
 		// Initialisation of the variables using the given required objects.
 		classRequired.each{clazz |
-			var clazz2 : EClass init varClasses.detect{cl | cl==clazz or cl.isSuperTypeOf(clazz) }
+			var clazz2 : EClass init prunerGenerator.radius.focusedClasses.detect{cl | cl==clazz or cl.isSuperTypeOf(clazz) }
 
-			result := result + "\t\t" + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + 
-						clazz2.getVarNameSet()
+			result := result + "\t\t" + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | "
 
-			if(not clazz2.main.isVoid and clazz2.main) then
-				result := result + ".add(" + clazz.getVarNameClassifier() + ") }\n"
+			if(clazz2.isVoid) then
+				result := result + clazz.getVarNameClassifier() + ".visit(self"
+				prunerGenerator.radius.focusedClasses.each{cl | result := result + ", " + cl.getVarNameSet() }
+				result := result + ") }\n"
 			else
-				result := result + clazz2.visitOperation.getCallHeader() + " }\n"
+				result := result + clazz2.getVarNameSet() + ".add(" + clazz.getVarNameClassifier() + ") }\n"
 			end
 		}
 
@@ -178,8 +147,8 @@ class PrunerClassGenerator inherits Generator {
 		result := result + "\n\t\tfrom true\n\t\tuntil ("
 
 		// Creation of the loop condition
-		i := 0
-		varClasses.each{clazz | 
+		var i : Integer init 0
+		prunerGenerator.radius.focusedClasses.each{clazz | 
 			if(i>0) then result := result + " and " end
 			result := result + clazz.getVarNameSet() + ".empty()"
 			i := i + 1
@@ -194,18 +163,18 @@ class PrunerClassGenerator inherits Generator {
 		// Body of the loop
 		result := result + "\n\t\tloop\n"
 
-		varClasses.each{clazz |
+		prunerGenerator.radius.focusedClasses.each{clazz |
 			var name  : String init clazz.getVarNameClassifier()
 			result := result + "\t\t\t" + clazz.getVarNameSet() + ".each{" + name + " |\n\t\t\t\tif(not " +
 					  name + ".visited) then\n\t\t\t\t\t" + name + ".visit(self" 
 			// Adding the parameters to method "visit". These parameters are in fact all the classes of "varClasses"
-			varClasses.each{clazz2 | result := result + ", " + clazz2.getVarNameSet() + "2" }
+			prunerGenerator.radius.focusedClasses.each{clazz2 | result := result + ", " + clazz2.getVarNameSet() + "2" }
 			result := result + ")\n\t\t\t\tend\n\t\t\t}\n"
 		}
 
 		result := result + "\n"
 
-		varClasses.each{clazz |
+		prunerGenerator.radius.focusedClasses.each{clazz |
 			var name  : String init clazz.getVarNameSet()
 			result := result + "\t\t\t" + name + ".clear()\n"
 			result := result + "\t\t\t" + name + "2.each{" + clazz.getVarNameClassifier() + " | " + name + ".add(" + clazz.getVarNameClassifier() + ") }\n"
