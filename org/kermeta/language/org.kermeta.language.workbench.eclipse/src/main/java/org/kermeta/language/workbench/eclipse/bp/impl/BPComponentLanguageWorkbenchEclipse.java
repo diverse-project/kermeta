@@ -48,7 +48,7 @@ public class BPComponentLanguageWorkbenchEclipse {
 
     public void init() {
         try {
-        	String art2FileLocation = "ART2-INF/kermetaWorkbench4Eclipse.art2";
+        	String art2FileLocation = "art2/modeltodeploy/kermetaWorkbench4Eclipse.art2";
             internalLog.debug( "Updating art runtime from " +art2FileLocation +" ...");
             //FOUND XMI IN META-INF
             InputStream model = bundle.getResource(art2FileLocation).openStream();

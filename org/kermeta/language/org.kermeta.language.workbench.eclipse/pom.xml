@@ -20,24 +20,69 @@
     <dependencies>
         <dependency>
             <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.api</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.framework</artifactId>
-            <version>2.1.1</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>4.2.0</version>
+            <version>${osgi.version}</version>
         </dependency>
        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.KWF</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.texteditor.eclipse</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.scala</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.api</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.traceability</groupId>
+            <artifactId>traceability.model</artifactId>
+            <version>${traceability.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.kp</groupId>
+            <artifactId>kp.model</artifactId>
+            <version>${kp.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.utils</groupId>
+            <artifactId>utils.error.report.eclipse</artifactId>
+            <version>${utils.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.utils</groupId>
+            <artifactId>utils.logger.eclipse</artifactId>
+            <version>${utils.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework.baseLib</artifactId>
+            <version>${art2.version}</version>
+        </dependency>       
     </dependencies>
 
 
@@ -66,6 +111,7 @@
                 </configuration>
             </plugin>
 			<!-- Synch MANIFEST for eclipse user -->
+			<!-- Disable to avoid some "human" errors
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
@@ -79,13 +125,28 @@
                                 <copy todir="${project.basedir}/META-INF" failonerror="false">
                                     <fileset dir="${project.build.outputDirectory}/META-INF"/>
                                 </copy>
-                                <copy todir="${project.basedir}/ART2-INF" failonerror="false">
-                                    <fileset dir="${project.build.outputDirectory}/ART2-INF"/>
+                                <copy todir="${project.basedir}/art2/modeltodeploy" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/art2/modeltodeploy"/>
                                 </copy>
                                 <copy todir="${project.basedir}/OSGI-INF" failonerror="false">
                                     <fileset dir="${project.build.outputDirectory}/OSGI-INF"/>
                                 </copy>
                             </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+             -->
+            <plugin>
+                <groupId>org.kermeta.art2</groupId>
+                <artifactId>org.kermeta.art2.merger.mavenplugin</artifactId>
+                <version>2.2.1-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals><goal>generate</goal></goals>
+                        <configuration>
+                            <model>src/main/resources/art2/modeltodeploy</model>
                         </configuration>
                     </execution>
                 </executions>
