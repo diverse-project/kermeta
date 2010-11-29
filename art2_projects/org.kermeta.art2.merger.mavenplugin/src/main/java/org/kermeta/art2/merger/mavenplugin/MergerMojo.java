@@ -130,14 +130,17 @@ public class MergerMojo extends AbstractMojo {
                     merger.merge(root, nroot);
 
                     //CREATE TEMP FILE FROM ACTUAL MODEL
-                    
+                    /*
                     String baseDir = ("file:\\"+modelInput.getAbsolutePath()).substring(5).replace('\\', '/');
                     String result = "file:" + baseDir;
                     if (baseDir.indexOf(":") > 0) {
                     	result = "file:///" + baseDir;
-                    }
-                    this.getLog().info("modelInput is "+result);
-                    Art2XmiHelper.save(URI.create(result).toString(), root);
+                    }*/
+                    this.getLog().info("ModelOutput => "+modelInput.getCanonicalPath());
+
+                //    Art2XmiHelper.save(java.net.URLStreamHandler.toExternalForm(modelInput.getAbsoluteFile().g), root);
+
+                    Art2XmiHelper.save(URI.create(modelInput.getCanonicalPath()).toString(), root);
                 }
             } catch (IOException ex) {
                 this.getLog().error(ex);
