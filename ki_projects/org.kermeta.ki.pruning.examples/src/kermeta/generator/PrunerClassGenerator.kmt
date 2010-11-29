@@ -30,14 +30,16 @@ class PrunerClassGenerator inherits Generator {
 	method generateCode() : Void is do
 		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses)
 		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" +
-						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n\nusing kermeta::standard\n\n"
+						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n" +
+   					     prunerGenerator.getRequiresFromClasses(prunerGenerator.mainClasses) + "\nusing kermeta::standard\n\n" +
+						 prunerGenerator.getUsingsFromClasses(prunerGenerator.mainClasses)
 		generatedCode := generatedCode + "abstract class " + prunerGenerator.prunerClass.name + " {\n"
 		generatedCode := generatedCode + generateContainers() + "\n"
-		
+
 		if(not prunerGenerator.radius.isVoid) then
 			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
 		end
-		
+
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + generatePreparePruningOperation() +
 						 "\n" + generateAddOperations + "}\n"
@@ -62,8 +64,12 @@ class PrunerClassGenerator inherits Generator {
 				// For each relations of the path, a "each" closure is created to navigate into the metamodel.
 				origin.path.each{ref |
 					var name : String init ref.eType.asType(EClass).getVarNameClassifier()
-					result := result + "." + ref.name + ".each{" + name + " | " + name
-					brackets := brackets + " }"
+					result := result + "." + ref.name
+					
+					if(ref.upperBound!=1) then
+						result := result + ".each{" + name + " | " + name
+						brackets := brackets + " }"
+					end
 				}
 
 				// setting attribute "visited" and closing the closures.
@@ -76,20 +82,23 @@ class PrunerClassGenerator inherits Generator {
 					elt.origins.each{origin |
 						var rel : EReference init origin.path.last()
 						var clazz : EClass init rel.eType.asType(EClass)
-						
+
 						// If the current origin matches the source.
-						if(clazz==source.relation.eContainingClass or
-						   clazz.isSuperTypeOf(source.relation.eContainingClass)) then
-						  var name : String init clazz.getVarNameClassifier()
-						   
-						   result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
-							".each{" + name + " | " + name +".initialise" + source.relation.name + "()}\n"
+						if(clazz==source.relation.eContainingClass or clazz.isSuperTypeOf(source.relation.eContainingClass)) then
+							var name : String init clazz.getVarNameClassifier()
+							result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name
+							
+							if(source.relation.upperBound!=1) then
+								result := result + ".each{" + name + " | " + name + ".initialise" + source.relation.name + "()}\n"
+							else
+								result := result + ".initialise" + source.relation.name + "()\n" 
+							end
 						end
 					}
 				end
 			}
 		}
-		
+
 		result := result + "\tend\n"
 	end
 
