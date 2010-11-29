@@ -32,7 +32,7 @@ abstract class ClassModelPruning {
 		requiredClazzs.each{theClazz | theClazzs.add(theClazz) }
 
 		from true
-		until (theClazzs.empty()) or currentRadius>radius
+		until (theClazzs.empty()) or (currentRadius>radius and radius!=0)
 		loop
 			theClazzs.each{theClazz |
 				if(not theClazz.visited) then

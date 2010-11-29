@@ -40,7 +40,7 @@ abstract class FullClassModelPruning {
 		requiredPropertys.each{theProperty | theProperty.visit(self, theClazzs) }
 
 		from true
-		until (theClazzs.empty()) or currentRadius>radius
+		until (theClazzs.empty()) or (currentRadius>radius and radius!=0)
 		loop
 			theClazzs.each{theClazz |
 				if(not theClazz.visited) then

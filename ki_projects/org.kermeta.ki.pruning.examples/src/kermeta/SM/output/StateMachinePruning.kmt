@@ -35,7 +35,7 @@ abstract class StateMachinePruning {
 		requiredOutputStates.each{theOutputState | theStates.add(theOutputState) }
 
 		from true
-		until (theStates.empty()) or currentRadius>radius
+		until (theStates.empty()) or (currentRadius>radius and radius!=0)
 		loop
 			theStates.each{theState |
 				if(not theState.visited) then

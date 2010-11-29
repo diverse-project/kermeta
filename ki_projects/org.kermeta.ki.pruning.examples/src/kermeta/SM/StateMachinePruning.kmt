@@ -36,7 +36,7 @@ abstract class StateMachinePruning {
 		requiredOutputStates.each{theOutputState | theStates.add(theOutputState) }
 
 		from true
-		until (theStates.empty()) or currentRadius>radius
+		until (theStates.empty()) or (currentRadius>radius and radius!=0)
 		loop
 			theStates.each{theState |
 				if(not theState.visited) then
@@ -97,7 +97,7 @@ class Test {
 		
 		var requiredStates : Bag<OutputState> init Bag<OutputState>.new
 		requiredStates.add(initState)
-		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 2).asType(PrintStateMachinePruning)
+		var pruning : PrintStateMachinePruning init PrintStateMachinePruning.new.initialise(sm, requiredStates, 0).asType(PrintStateMachinePruning)
 		
 		pruning.launch()
 	end

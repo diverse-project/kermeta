@@ -157,7 +157,7 @@ class PrunerClassGenerator inherits Generator {
 		result := result + ")"
 
 		if(not prunerGenerator.radius.isVoid) then
-			result := result + " or currentRadius>radius"
+			result := result + " or (currentRadius>radius and radius!=0)"
 		end
 
 		// Body of the loop
