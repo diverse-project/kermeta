@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TypeMapping extends org.kermeta.language.structure.Object {
+public interface TypeMapping extends TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Mapping</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

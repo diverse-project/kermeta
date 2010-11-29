@@ -3782,7 +3782,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__KTAG = OBJECT__KTAG;
+	int TYPE_MAPPING__KTAG = TYPE_CONTAINER__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3791,7 +3791,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int TYPE_MAPPING__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3800,7 +3800,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__KTYPE = OBJECT__KTYPE;
+	int TYPE_MAPPING__KTYPE = TYPE_CONTAINER__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_MAPPING__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Mapping</b></em>' containment reference.
@@ -3809,7 +3818,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__MAPPING = OBJECT_FEATURE_COUNT + 0;
+	int TYPE_MAPPING__MAPPING = TYPE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target Type</b></em>' reference.
@@ -3818,7 +3827,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__TARGET_TYPE = OBJECT_FEATURE_COUNT + 1;
+	int TYPE_MAPPING__TARGET_TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' container reference.
@@ -3827,7 +3836,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING__SOURCE_TYPE = OBJECT_FEATURE_COUNT + 2;
+	int TYPE_MAPPING__SOURCE_TYPE = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Type Mapping</em>' class.
@@ -3836,7 +3845,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 3;
+	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

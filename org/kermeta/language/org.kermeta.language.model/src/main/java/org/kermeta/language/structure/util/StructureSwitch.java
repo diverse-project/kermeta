@@ -526,6 +526,7 @@ public class StructureSwitch<T> {
 			case StructurePackage.TYPE_MAPPING: {
 				TypeMapping typeMapping = (TypeMapping)theEObject;
 				T result = caseTypeMapping(typeMapping);
+				if (result == null) result = caseTypeContainer(typeMapping);
 				if (result == null) result = caseObject(typeMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

@@ -2136,7 +2136,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		functionTypeEClass.getESuperTypes().add(this.getType());
 		voidTypeEClass.getESuperTypes().add(this.getType());
-		typeMappingEClass.getESuperTypes().add(this.getObject());
+		typeMappingEClass.getESuperTypes().add(this.getTypeContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(objectEClass, org.kermeta.language.structure.Object.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

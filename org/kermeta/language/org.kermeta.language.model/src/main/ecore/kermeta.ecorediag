@@ -1029,7 +1029,7 @@
       </children>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_fcJ-GetVEd-xwMFi38iCbg" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
       <element xmi:type="ecore:EClass" href="kermeta.ecore#//kermeta/language/structure/TypeMapping"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fcJ-GutVEd-xwMFi38iCbg" x="1508" y="477"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fcJ-GutVEd-xwMFi38iCbg" x="1505" y="500"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_fcLMMOtVEd-xwMFi38iCbg" type="1003">
       <children xmi:type="notation:Node" xmi:id="_fcLzQOtVEd-xwMFi38iCbg" type="4007"/>
@@ -2319,14 +2319,6 @@
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fc3Iu-tVEd-xwMFi38iCbg" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f0LcgOtVEd-xwMFi38iCbg" id="(0.5,0.0)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f0LcgetVEd-xwMFi38iCbg" id="(0.575,1.0)"/>
-    </edges>
-    <edges xmi:type="notation:Edge" xmi:id="_fc3vxOtVEd-xwMFi38iCbg" type="3003" source="_fcJ-GOtVEd-xwMFi38iCbg" target="_fbeooutVEd-xwMFi38iCbg">
-      <styles xmi:type="notation:ConnectorStyle" xmi:id="_fc3vxetVEd-xwMFi38iCbg" routing="Rectilinear" lineColor="4210752"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_fc3vxutVEd-xwMFi38iCbg" fontName="Lucida Grande"/>
-      <element xsi:nil="true"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fc3vx-tVEd-xwMFi38iCbg" points="[0, 0, 451, 294]$[0, -30, 451, 264]$[-89, -30, 362, 264]$[-89, -139, 362, 155]$[-129, -139, 322, 155]$[-129, -264, 322, 30]$[-451, -264, 0, 30]$[-451, -294, 0, 0]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_frSmQOtVEd-xwMFi38iCbg" id="(0.24509803921568626,0.0)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_frSmQetVEd-xwMFi38iCbg" id="(0.7745098039215687,1.0)"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_jpHO0evmEd-0oYYPdgvWYA" type="3002" source="_fcD3cOtVEd-xwMFi38iCbg" target="_fbkIMOtVEd-xwMFi38iCbg">
       <children xmi:type="notation:Node" xmi:id="_jpJEAOvmEd-0oYYPdgvWYA" type="4011">

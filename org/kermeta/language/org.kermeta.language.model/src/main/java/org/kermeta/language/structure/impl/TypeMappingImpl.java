@@ -37,7 +37,7 @@ import org.kermeta.language.structure.TypeMapping;
  *
  * @generated
  */
-public class TypeMappingImpl extends ObjectImpl implements TypeMapping {
+public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	/**
 	 * The cached value of the '{@link #getMapping() <em>Mapping</em>}' containment reference.
 	 * <!-- begin-user-doc -->
