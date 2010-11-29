@@ -1,61 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0"
+<ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EAnnotation source="ModelingUnit">
-    <details key="require" value="kermeta|"/>
-    <details key="using" value="ex::fullClassModel|kermeta::standard|"/>
-  </ecore:EAnnotation>
-  <ecore:EPackage name="ex" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/fullClassModel/FullClassModel.ecore#/"
-      nsPrefix="ex">
-    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
-    <eSubpackages name="fullClassModel" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/fullClassModel/FullClassModel.ecore#/ex/fullClassModel"
-        nsPrefix="fullClassModel">
-      <eClassifiers xsi:type="ecore:EClass" name="ClassModel">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
-            eType="#/1/fullClassModel/Clazz" containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Clazz">
-        <eOperations name="initialise" eType="#/1/fullClassModel/Clazz">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self&#xA;&#x9;self.name := name&#xA;&#x9;classModel.classes.add(self)&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
-          <eParameters name="classModel" eType="#/1/fullClassModel/ClassModel"/>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
-          <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="superClasses" upperBound="-1"
-            eType="#/1/fullClassModel/Clazz"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-            eType="#/1/fullClassModel/Property" containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Property">
-        <eOperations name="initialise" eType="#/1/fullClassModel/Property">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self&#xA;&#x9;self.name := name&#xA;&#x9;self.type := type&#xA;&#x9;self.owner := owner&#xA;&#x9;self.opposite := opposite&#xA;&#x9;type.properties.add(self)&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
-          <eParameters name="type" eType="#/1/fullClassModel/Clazz"/>
-          <eParameters name="owner" eType="#/1/fullClassModel/Clazz"/>
-          <eParameters name="opposite" eType="#/1/fullClassModel/Property"/>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
-          <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
-            eType="#/1/fullClassModel/Clazz"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
-            eType="#/1/fullClassModel/Clazz"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#/1/fullClassModel/Property"/>
-      </eClassifiers>
-    </eSubpackages>
-  </ecore:EPackage>
-  <ecore:EAnnotation source="dependentResource"/>
-</xmi:XMI>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ex"
+    nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/fullClassModel/FullClassModel.ecore#/"
+    nsPrefix="ex">
+  <eSubpackages name="fullClassModel" nsURI="platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/fullClassModel/FullClassModel.ecore#/ex/fullClassModel"
+      nsPrefix="fullClassModel">
+    <eClassifiers xsi:type="ecore:EClass" name="ClassModel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+          eType="#//fullClassModel/Clazz" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Clazz">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superClasses" upperBound="-1"
+          eType="#//fullClassModel/Clazz"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//fullClassModel/Property" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Property">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
+          eType="#//fullClassModel/Clazz"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//fullClassModel/Clazz"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//fullClassModel/Property"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

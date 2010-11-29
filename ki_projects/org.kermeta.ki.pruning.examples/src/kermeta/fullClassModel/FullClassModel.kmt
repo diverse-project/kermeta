@@ -42,12 +42,12 @@ class Property {
 	
 	reference opposite : Property[0..1]
 	
-	operation initialise(name : String, type : Clazz, owner : Clazz, opposite : Property) : Property is do
+	operation initialise(name : String, owner : Clazz, type : Clazz, opposite : Property) : Property is do
 		result := self
 		self.name := name
 		self.type := type
 		self.owner := owner
 		self.opposite := opposite
-		type.properties.add(self)
+		owner.properties.add(self)
 	end
 }

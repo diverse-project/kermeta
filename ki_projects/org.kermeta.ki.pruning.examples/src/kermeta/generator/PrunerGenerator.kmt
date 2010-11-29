@@ -49,7 +49,12 @@ class PrunerGenerator {
 		
 		self.pruningData.requiredElements.each{elt |
 			elt.srcRelations.each{src | src.relation.eContainingClass.sourceRelations.add(src.relation) }
-			elt.targetRelations.each{target | target.eContainingClass.targetRelations.add(target) }
+			elt.targetRelations.each{target |
+				// Target recursive relations are useless and must be ignored.
+				if(target.eType!=target.eContainingClass) then 
+					target.eContainingClass.targetRelations.add(target)
+				end
+			}
 		}
 		
 		// Looking for the radius parameter.

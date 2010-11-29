@@ -105,9 +105,16 @@ class ModelAspectGenerator inherits Generator {
 		if(isChild) then 	opDeclaration := "method"
 		else 				opDeclaration := "operation" end
 
-		result := "\t" + opDeclaration + " " + clazz.addOperation.getDeclarationHeader() + " : Void is do\n"
+		result := "\t" + opDeclaration + " " + clazz.addOperation.getDeclarationHeader() + " : Void is do\n" +
+				  generateAddBodyRelations(clazz.sourceRelations) + generateAddBodyRelations(clazz.targetRelations) + "\tend\n"
+	end
 
-		clazz.sourceRelations.each{rel |
+
+
+	operation generateAddBodyRelations(refs : EReference[0..*]) : String is do
+		result := ""
+		
+		refs.each{rel |
 			var clazzRel : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzRel.getVarNameClassifier()
 
@@ -118,35 +125,15 @@ class ModelAspectGenerator inherits Generator {
 			else
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + ".visited"
 				
-				clazzRel.targetRelations.each{tar |
-					result := result + " and " + varName + "." + tar.name + ".visited"
-				}
+				clazzRel.targetRelations.each{tar | result := result + " and " + varName + "." + tar.name + ".visited" }
+				clazzRel.sourceRelations.each{src | result := result + " and " + varName + "." + src.name + ".visited" }
 				
 				result := result + ") then\n\t\t\t\t" + varName + ".visited := true\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".on" + clazzRel.name + "Added(" + varName + ")\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".added" + clazzRel.name + "s.add(" + varName + ")\n\t\t\tend\n\t\t}\n"
 			end
-		}
-
-		// This code must be generated only when there exists at least one target relation which type is different from its container.
-		if(clazz.targetRelations.exists{rel | rel.eType!=rel.eContainingClass }) then
-			result := result + "\t\tif(not self.visited) then\n"
-			
-			clazz.targetRelations.each{rel |
-				if(rel.eType!=rel.eContainingClass) then
-					var clazzRel : EClass init rel.eType.asType(EClass)
-					var varName : String init clazzRel.getVarNameSet()
-					
-					result := result + "\t\t\tif(not self." + rel.name + ".visited) then " + varName + ".add(self." + rel.name + ") end\n"
-				end
-			}
-
-			result := result + "\t\tend\n"
-		end
-
-		result := result + "\tend\n"
+		}		
 	end
-
 
 
 	operation generateVisitOperationFocusedClass(clazz : EClass, isChild : Boolean) : String is do
@@ -173,7 +160,16 @@ class ModelAspectGenerator inherits Generator {
 			result := result + "\t\t" + prunerName + "." + clazz.getAddedSomethingAttributeName() + ".add(self)\n"
 		end
 
-		clazz.sourceRelations.each{rel |
+		result := result + generateVisitBodyRelationsExploration(clazz.sourceRelations) +
+					generateVisitBodyRelationsExploration(clazz.targetRelations) + "\tend\n"
+	end
+
+
+
+	operation generateVisitBodyRelationsExploration(refs : EReference[0..*]) : String is do
+		result := ""
+		
+		refs.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzCalled.getVarNameClassifier()
 
@@ -195,8 +191,6 @@ class ModelAspectGenerator inherits Generator {
 				end
 			end
 		}
-
-		result := result + "\tend\n"
 	end
 
 
@@ -216,7 +210,14 @@ class ModelAspectGenerator inherits Generator {
 			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
 		end
 
-		clazz.targetRelations.each{rel |
+		result := result + generateVisitNotFocusedBody(clazz.targetRelations) + generateVisitNotFocusedBody(clazz.sourceRelations) + "\tend\n"
+	end
+
+
+	operation generateVisitNotFocusedBody(refs : EReference[0..*]) : String is do
+		result := ""
+
+		refs.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
 
 			if(rel.upperBound==-1 or rel.upperBound>1) then
@@ -227,10 +228,7 @@ class ModelAspectGenerator inherits Generator {
 				result := result + "\t\tif(not self." + rel.name + ".visited) then " + clazzCalled.getVarNameSet() + ".add(self." + rel.name + ") end\n"
 			end
 		}
-
-		result := result + "\tend\n"
 	end
-
 
 
 	operation generateVisitOperation(clazz : EClass, isChild : Boolean) : String is do

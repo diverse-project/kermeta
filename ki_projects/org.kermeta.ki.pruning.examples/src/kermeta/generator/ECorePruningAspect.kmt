@@ -134,21 +134,24 @@ aspect class EClass {
 			elt.targetRelations.each{rel |
 				if(rel.eType.isKindOf(EClass)) then
 					clazz := rel.eType.asType(EClass)
-					clazz2 := clazz
-					// Looking for a more general class.
-					elt.origins.each{origin |
-						var ref : EReference init origin.path.last()
-						
-						if(ref.eType.isKindOf(EClass) and ref.eType.asType(EClass).isSuperTypeOf(clazz)) then
-							clazz := ref.eType.asType(EClass)
-						end
-					}
-					// Creation of the parameter.
-					param := EParameter.new
-					param.name := clazz2.getVarNameSet() // The name created using the real type of the class.
-					param.eType := EClass.new
-					param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
-					op.eParameters.add(param)
+					
+					if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz) }) then
+						clazz2 := clazz
+						// Looking for a more general class.
+						elt.origins.each{origin |
+							var ref : EReference init origin.path.last()
+							
+							if(ref.eType.isKindOf(EClass) and ref.eType.asType(EClass).isSuperTypeOf(clazz)) then
+								clazz := ref.eType.asType(EClass)
+							end
+						}
+						// Creation of the parameter.
+						param := EParameter.new
+						param.name := clazz2.getVarNameSet() // The name created using the real type of the class.
+						param.eType := EClass.new
+						param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
+						op.eParameters.add(param)
+					end
 				end
 			}
 		}

@@ -1,6 +1,6 @@
 package ex::fullClassModel;
 require kermeta
-require "FullClassModel.kmt"
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/fullClassModel/FullClassModel.ecore"
 require "FullClassModelPruning.kmt"
 
 using kermeta::standard

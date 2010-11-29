@@ -187,7 +187,7 @@ class PrunerClassGenerator inherits Generator {
 
 		result := result + "\t\tend\n\n"
 
-		classAdded.each{clazz |
+		prunerGenerator.radius.focusedClasses.each{clazz |
 			if(not clazz.main.isVoid and clazz.main) then
 				result := result + "\t\t" + clazz.getAddedAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + clazz.getVarNameClassifier() +
 							"." + clazz.addOperation.name + "(self) }\n"

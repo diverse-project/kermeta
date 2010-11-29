@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:prunerGenerator="http://pruningGenerator.org" description="Prunes a class model (inheritance and relations) using properties and classes." name="FullClassModelPruning">
+  <requiredElements>
+    <srcRelations>
+      <relation href="FullClassModel.ecore#//fullClassModel/Clazz/superClasses"/>
+    </srcRelations>
+    <origins>
+      <path href="FullClassModel.ecore#//fullClassModel/ClassModel/classes"/>
+    </origins>
+    <targetRelations href="FullClassModel.ecore#//fullClassModel/Clazz/superClasses"/>
+  </requiredElements>
+  <requiredElements>
+    <srcRelations>
+      <relation href="FullClassModel.ecore#//fullClassModel/Property/owner"/>
+    </srcRelations>
+    <srcRelations>
+      <relation href="FullClassModel.ecore#//fullClassModel/Property/type"/>
+    </srcRelations>
+    <origins>
+      <path href="FullClassModel.ecore#//fullClassModel/ClassModel/classes"/>
+      <path href="FullClassModel.ecore#//fullClassModel/Clazz/properties"/>
+    </origins>
+    <targetRelations href="FullClassModel.ecore#//fullClassModel/Clazz/properties"/>
+  </requiredElements>
+  <parameters xsi:type="prunerGenerator:RadiusParameter">
+    <focusedClasses href="FullClassModel.ecore#//fullClassModel/Clazz"/>
+  </parameters>
+</prunerGenerator:Pruning>
