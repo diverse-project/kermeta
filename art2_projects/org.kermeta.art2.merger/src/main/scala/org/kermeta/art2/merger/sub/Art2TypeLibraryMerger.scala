@@ -28,7 +28,6 @@ trait Art2TypeLibraryMerger extends Art2Merger {
         case None => actualModel.getLibraries.add(libtomerge)
       }
     }
-
   }
 
 }

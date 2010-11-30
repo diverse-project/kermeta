@@ -7,10 +7,11 @@ package org.kermeta.art2.merger
 
 import org.kermeta.art2.ContainerRoot
 import org.kermeta.art2.merger.sub.Art2NodeMerger
+import org.kermeta.art2.merger.sub.Art2RepositoryMerger
 import org.kermeta.art2.merger.sub.Art2TypeDefinitionMerger
 import org.kermeta.art2.merger.sub.Art2TypeLibraryMerger
 
-class Art2RootMerger extends Art2TypeDefinitionMerger with Art2TypeLibraryMerger with Art2NodeMerger {
+class Art2RootMerger extends Art2TypeDefinitionMerger with Art2TypeLibraryMerger with Art2NodeMerger with Art2RepositoryMerger {
 
   override def merge(actualModel : ContainerRoot,modelToMerge : ContainerRoot) : Unit = {
     if(modelToMerge!= null){
@@ -19,6 +20,8 @@ class Art2RootMerger extends Art2TypeDefinitionMerger with Art2TypeLibraryMerger
       mergeLibrary(actualModel, modelToMerge)
 
       mergeAllNode(actualModel, modelToMerge)
+
+      mergeRepositories(actualModel, modelToMerge)
 
       executePostProcesses
 
