@@ -18,7 +18,7 @@
 
 	<!-- Other configuration parameters -->
 	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/traceability" />
-	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/org/kermeta/traceability/traceability-" />
+	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/org_kermeta_traceability-" />
 	<property name="parent.root" value="org.kermeta.traceability.root" />
 	<property name="synchronized.property" value="traceability.version" />
 
