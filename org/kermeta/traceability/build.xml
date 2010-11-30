@@ -17,10 +17,10 @@
 	<property name="next.development.version" value="${env.NEXT_DEVELOPMENT_VERSION}" />
 
 	<!-- Other configuration parameters -->
-	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/trunk/art2_projects" />
-	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/art2_projects-" />
-	<property name="parent.root" value="org.kermeta.art2.root" />
-	<property name="synchronized.property" value="art2.version" />
+	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/traceability" />
+	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/org/kermeta/traceability/traceability-" />
+	<property name="parent.root" value="org.kermeta.traceability.root" />
+	<property name="synchronized.property" value="traceability.version" />
 
 	<!-- Other internal properties -->
 
@@ -59,7 +59,7 @@
 			<arg value="-DnewVersion=${release.version}" />
 			<arg value="-DgenerateBackupPoms=false" />
 		</artifact:mvn>
-		<echo>Trying to update art2.version</echo>
+		<echo>Trying to update ${synchronized.property}</echo>
 		<replaceregexp>
 			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
 			<substitution expression="${synchronized.property}&gt;${release.version}&lt;/${synchronized.property}" />
@@ -124,7 +124,7 @@
 			<arg value="-DnewVersion=${next.development.version}" />
 			<arg value="-DgenerateBackupPoms=false" />
 		</artifact:mvn>
-		<echo>Trying to update art2.version</echo>
+		<echo>Trying to update ${synchronized.property}</echo>
 		<replaceregexp>
 			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
 			<substitution expression="${synchronized.property}&gt;${next.development.version}&lt;/${synchronized.property}" />

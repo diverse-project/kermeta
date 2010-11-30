@@ -3,11 +3,11 @@
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kermeta.art2</groupId>
-    <artifactId>art2_projects</artifactId>
-    <version>2.2.1-SNAPSHOT</version>
+    <groupId>org.kermeta.traceability</groupId>
+    <artifactId>traceability_projects</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Art2 :: Projects</name>
+    <name>Traceability :: Projects</name>
     <build>
         <plugins>
             <plugin>
@@ -25,37 +25,15 @@
 	
 	
     <modules>
-        <module>org.kermeta.art2.root</module>
-        <module>org.kermeta.art2.artcomponent.root</module>
-        <module>org.kermeta.art2.model</module>
-        <module>org.kermeta.art2.model.edit</module>
-        <module>org.kermeta.art2.model.editor</module>
-        <module>org.kermeta.art2.editor.eclipse</module>
-        <!-- <module>org.kermeta.art2.editor.nb</module> -->
-        <module>org.kermeta.art2.adaptation.model</module>
-        <module>org.kermeta.art2.ui.framework</module>
-        <module>org.kermeta.art2.ui.editor</module>
-        <module>org.kermeta.art2.annotation</module>
-        
-        <module>org.kermeta.art2.api</module>
-        <module>org.kermeta.art2.framework</module>
-        <module>org.kermeta.art2.core</module>
-        <module>org.kermeta.art2.framework.bus.netty</module>
-        <module>org.kermeta.art2.framework.bus.jmdns</module>
-        <module>org.kermeta.art2.framework.bus.jgroups</module>
-        <module>org.kermeta.art2.deploy.osgi</module>
-        <module>org.kermeta.art2.merger</module>
-        <module>org.kermeta.art2.kompare</module>
-        <module>org.kermeta.art2.platform.felix</module>
-        <module>org.kermeta.art2.platform.standalone</module>
-        <module>org.kermeta.art2.framework.baseLib</module>
+        <module>org.kermeta.traceability.root</module>
+        <module>org.kermeta.traceability.model</module>
     </modules>
 
 	
     <scm>
-        <connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/art2_projects</connection>
-        <developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/trunk/art2_projects</developerConnection>
-        <url>http://gforge.inria.fr/scm/viewvc.php/trunk/art2_projects?root=kermeta</url>
+        <connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/traceability</connection>
+        <developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/traceability</developerConnection>
+        <url>http://gforge.inria.fr/scm/viewvc.php/trunk/org/kermeta/traceability?root=kermeta</url>
     </scm>
 	
     <repositories>

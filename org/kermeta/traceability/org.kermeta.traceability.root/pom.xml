@@ -11,10 +11,12 @@
     <artifactId>traceability.root</artifactId>
     <packaging>pom</packaging>
     <version>2.0.1-SNAPSHOT</version>
-    <name>K2 :: TRACEABILITY :: Root</name>
+    <name>Traceability :: Root</name>
 
     <properties>
-        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <traceability.version>2.0.1-SNAPSHOT</traceability.version>
+        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <emf.version>2.6.0</emf.version>
         <scala.version>2.8.0</scala.version>
         <slf4j.version>1.6.1</slf4j.version>
