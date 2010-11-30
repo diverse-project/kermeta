@@ -24,9 +24,6 @@ using kermeta::exceptions
 using main::kermeta::org::kermeta::language::resolver
 using kermeta::standard
 
-/*
-* Warning : If the targetType of a TypeMapping is an UnresolvedType, it will not be resolved as TypeMapping cannot contain the new types
-*/
 class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 {
 	reference resolvedTypeFinder : ResolverResolvedTypeFinder
@@ -690,14 +687,14 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			//Visiting target and source Types and handling Unresolved
 			if (isVisitable(t.targetType)) then
 				t.targetType.accept(self, ctxt)
-				//We don't know who have to contain the new types
-				/*if (not ctxt.unresolved.isVoid()) then
+				if (not ctxt.unresolved.isVoid()) then
 					callTypeFinder(ctxt)
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.targetType := foundType
+						t.containedType.add(foundType)
 					end
-				end*/
+				end
 			end
 			
 			if (isVisitable(t.sourceType)) then
