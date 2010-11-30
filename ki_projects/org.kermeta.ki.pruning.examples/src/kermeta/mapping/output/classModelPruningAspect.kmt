@@ -1,7 +1,6 @@
 package ex::classModel;
 require kermeta
-require "MappingModel.kmt"
-require "MappingModelPruning.kmt"
+require "MappingModelPruningAspect.kmt"
 using kermeta::standard
 using ex::mappingModel
 

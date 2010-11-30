@@ -16,36 +16,61 @@ using kermeta::standard
 class ModelAspectGenerator inherits Generator {
 	operation initialise(pruner : PrunerGenerator) : ModelAspectGenerator is do
 		self.prunerGenerator := pruner
-		pruner.pruningData.requiredElements.each{elt | elt.srcRelations.each{src | src.transformed := false } }
 		result := self
 	end
 
 
 	method generateCode() : Void is do
-		var mainPackageName : String init prunerGenerator.mainClasses.first().ePackage.getQualifiedName("::")
+		var mainPackageName : String init prunerGenerator.mainClasses.last().ePackage.getQualifiedName("::")
+		// "packages" contains the packages correspondeing to the all the packages used by the pruner.
+		// These packages will be used to add "using" and "require" elements into files.
+		var packages : Bag<String> init Bag<String>.new
 		
+		// Getting the different packages of the pruner.
+		prunerGenerator.mainClasses.each{cl |
+			var packageName : String init cl.ePackage.getQualifiedName("::")
+			if(not packages.contains(packageName) and mainPackageName!=packageName) then
+				packages.add(packageName)
+			end
+		}
+
+		var codeUsing : String init ""
+		// Adding the header of the main aspect class.
 		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.mainClasses) + 
 						"require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + 
-						prunerGenerator.prunerClass.name + ".kmt\"\n\nusing kermeta::standard\n\n"
+						prunerGenerator.prunerClass.name + ".kmt\"\n"
+		packages.each{pkg | 
+			var subPkgs : Sequence<String> init pkg.split("::")
+			generatedCode := generatedCode + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
+			// Adding the "using" elements that refers to the other packages.
+			codeUsing := codeUsing + "using " + pkg + "\n"
+		}
+
+		generatedCode := generatedCode + codeUsing + "using kermeta::standard\n\n"
+		
+		// Creation of ECore operations linked to the class.						
 		prunerGenerator.mainClasses.each{cl |
-			// Creation of ECore operations linked to the class.
 			cl.createVisitOperation(prunerGenerator)
 			cl.createAddOperation(prunerGenerator)
 		}
+		
+		packages.add(mainPackageName)
+		
 		prunerGenerator.mainClasses.each{cl |
 			var packageName : String init cl.ePackage.getQualifiedName("::")
 			// If it is the same package, we write the code in the same file.
 			if(packageName==mainPackageName) then
 				generatedCode := generatedCode + generateClassAspect(cl)
 			else
+				packages.add(packageName)
 				// Otherwise, the code of the aspect must be write into another file dedicated to its package.
-				generateExternAspect(cl, mainPackageName)
+				generateExternAspect(cl, mainPackageName, packages)
 			end
 		}
 	end
 
 
-	operation generateExternAspect(clazz : EClass, mainPackageName : String) : Void is do
+	operation generateExternAspect(clazz : EClass, mainPackageName : String, packages : Bag<String>) : Void is do
 		var namePackage : String init clazz.ePackage.getQualifiedName("::")
 		var codeAspect : String
 		
@@ -57,11 +82,13 @@ class ModelAspectGenerator inherits Generator {
 							"require \"" + prunerGenerator.prunerClass.name + "Aspect.kmt\"\n"
 	
 			// Adding the "require" elements that refer to the other created aspect files.
-			prunerGenerator.requiredAspectFiles.keys.each{key |
-				var subPkgs : Sequence<String> init key.split("::")
-				codeAspect := codeAspect + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
-				// Adding the "using" elements that refers to the other packages.
-				codeUsing := codeUsing + "using " + key + "\n"
+	 		packages.each{pkg |
+	 			if(pkg!=namePackage and pkg!=mainPackageName) then
+					var subPkgs : Sequence<String> init pkg.split("::")
+					codeAspect := codeAspect + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
+					// Adding the "using" elements that refers to the other packages.
+					codeUsing := codeUsing + "using " + pkg + "\n"
+				end
 			}
 
 			// Adding the "using" elements.
@@ -79,7 +106,7 @@ class ModelAspectGenerator inherits Generator {
 	end
 
 
-
+	// Generation of the aspect class.
 	operation generateClassAspect(clazz : EClass) : String is do
 		var isChild : Boolean init prunerGenerator.mainClasses.exists{cl |
 			if(cl.isSuperTypeOf(clazz)) then
@@ -90,41 +117,37 @@ class ModelAspectGenerator inherits Generator {
 			end
 		}
 
+		// Creating the headers of the aspect.		
 		result := "aspect class " + clazz.name + " {\n"
 
 		if(not isChild) then
-			result := result + "\tattribute visited : Boolean\n\n" 
+			result := result + "\tattribute visited : Boolean\n\n"
 		end
 
+		// Generating the opposite attributes or initialisation methods.
 		prunerGenerator.pruningData.requiredElements.each{elt |
 			elt.srcRelations.each{source |
-				if(source.createOpposite and not source.transformed) then
-					var cl : EClass init source.relation.eType.asType(EClass)
-					
+				if(source.createOpposite) then
+					var cl : EClass init source.relation.eContainingClass
+					var etype : EClass init source.relation.eType.asType(EClass)
+
+					// Attributes corresponding to the opposites to create are now added to the aspect class.
 					if(cl==clazz or cl.isSuperTypeOf(clazz)) then
-						result := result + "\treference " + source.relation.getOppositeReferenceName() +
-								  " : " + cl.name + "[" + source.relation.lowerBound.toString + ".."
+						result := result + "\treference " + source.relation.name +
+								  " : " + source.relation.eType.asType(EClass).name + "[" + source.relation.lowerBound.toString + ".."
 						if(source.relation.upperBound==-1) then
 							result := result + "*"
 						else
 							result := result + source.relation.upperBound.toString
 						end
-						
-						result := result + "]\n\n" + generateInitialiseOppositeOperation(source.relation)
+
+						result := result + "]\n\n"
 					end
-					
-					// We change the pruning data to use of the opposite.
-					var ref : EReference init EReference.new
-					ref.name := source.relation.getOppositeReferenceName()
-					ref.eType:= source.relation.eContainingClass
-					source.relation.eType.asType(EClass).eStructuralFeatures.add(ref)
-					ref.lowerBound := source.relation.lowerBound
-					ref.upperBound := source.relation.upperBound
-					ref.containment := false
-					clazz.sourceRelations.remove(source.relation)
-					clazz.sourceRelations.add(ref)
-					source.relation := ref
-					source.transformed := true
+
+					// Initialisation methods must be added to the aspect clazz that contains the attributes which opposites are created.
+					if(etype==clazz or etype.isSuperTypeOf(clazz)) then
+						result := result + 	generateInitialiseOppositeOperation(source.relation)
+					end
 				end
 			}
 		}
@@ -137,11 +160,11 @@ class ModelAspectGenerator inherits Generator {
 	end
 
 
+	// Generates the operation that initialises a created opposite.
 	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
-		var name : String init relation.eType.asType(EClass).getVarNameClassifier()
-		result := "\toperation initialise" + relation.getOppositeReferenceName() + "() : Void is do\n\t\tself." +
-					relation.name + ".each{" + name + " | " + name + "." +  relation.getOppositeReferenceName() +
-					".add(self) }\n\tend\n\n"
+		var name : String init relation.eContainingClass.getVarNameClassifier()
+		result := "\toperation initialise" + relation.name + "() : Void is do\n\t\tself." +
+					relation.name.split("Opposite").first() + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }\n\tend\n\n"
 	end
 
 
@@ -156,29 +179,46 @@ class ModelAspectGenerator inherits Generator {
 	end
 
 
-
+	// This operation adds code that explores objects of the model that must be added.
 	operation generateAddBodyRelations(refs : EReference[0..*]) : String is do
 		result := ""
 		
+		// Exploring the relations.
 		refs.each{rel |
 			var clazzRel : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzRel.getVarNameClassifier()
 
+			// For recursive relations.
 			if(rel.eType==rel.eContainingClass) then
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(" + varName + 
 						  ".visited) then\n\t\t\t\t" + prunerGenerator.getPrunerVarName() + ".on" + rel.name + 
 						  "Added(self, " + rel.eContainingClass.getVarNameClassifier() + ")\n\t\t\tend\n\t\t}\n"
 			else
+			// For not recursive relations.
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + ".visited"
-				
-				clazzRel.targetRelations.each{tar | result := result + " and " + varName + "." + tar.name + ".visited" }
-				clazzRel.sourceRelations.each{src | result := result + " and " + varName + "." + src.name + ".visited" }
-				
+				result := result + generateCodeExists(clazzRel.targetRelations, varName) + generateCodeExists(clazzRel.sourceRelations, varName)
 				result := result + ") then\n\t\t\t\t" + varName + ".visited := true\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".on" + clazzRel.name + "Added(" + varName + ")\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".added" + clazzRel.name + "s.add(" + varName + ")\n\t\t\tend\n\t\t}\n"
 			end
 		}		
+	end
+	
+	
+	operation generateCodeExists(references : EReference[0..*], varName : String) : String is do
+		result := ""
+		references.each{ref |
+			if(ref.upperBound==1) then
+				if(ref.lowerBound==0) then
+					result := result + " and (" + varName + "." + ref.name + ".isVoid or " + varName + "." + ref.name + ".visited)"
+				else
+					result := result + " and " + varName + "." + ref.name + ".visited"
+				end
+			else //card *
+				var nameRel : String init ref.eType.asType(EClass).getVarNameClassifier()
+				result := result + " and not " + varName + "." + ref.name + ".exists{" + nameRel + " | not " + nameRel + ".visited }"
+			end
+		}
 	end
 
 
@@ -285,13 +325,3 @@ class ModelAspectGenerator inherits Generator {
 		end
 	end
 }
-
-
-/**
- * This aspect is used during the conversion of a source element which opposite must be create.
- * When the creation of the opposite is over, the source relation is tagged with transformed=true to not be transformed anymore.
-*/
-aspect class SourceRelation {
-	attribute transformed : Boolean
-}
-

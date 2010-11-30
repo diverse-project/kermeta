@@ -14,13 +14,6 @@ require "PrunerGenerator.kmt"
 using kermeta::standard
 using prunerGenerator
 
-aspect class EReference {
-	operation getOppositeReferenceName() : String is do
-		result := name + "Opposite"
-	end
-}
-
-
 aspect class EClass {
 	attribute main : Boolean
 	
@@ -145,12 +138,16 @@ aspect class EClass {
 								clazz := ref.eType.asType(EClass)
 							end
 						}
-						// Creation of the parameter.
-						param := EParameter.new
-						param.name := clazz2.getVarNameSet() // The name created using the real type of the class.
-						param.eType := EClass.new
-						param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
-						op.eParameters.add(param)
+						
+						var pName : String init clazz2.getVarNameSet()
+						if(not op.eParameters.exists{p | p.name==pName}) then
+							// Creation of the parameter.
+							param := EParameter.new
+							param.name := pName // The name created using the real type of the class.
+							param.eType := EClass.new
+							param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
+							op.eParameters.add(param)
+						end
 					end
 				end
 			}

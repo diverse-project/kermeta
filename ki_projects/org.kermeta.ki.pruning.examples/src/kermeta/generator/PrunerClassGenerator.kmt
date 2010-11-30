@@ -65,7 +65,7 @@ class PrunerClassGenerator inherits Generator {
 				origin.path.each{ref |
 					var name : String init ref.eType.asType(EClass).getVarNameClassifier()
 					result := result + "." + ref.name
-					
+
 					if(ref.upperBound!=1) then
 						result := result + ".each{" + name + " | " + name
 						brackets := brackets + " }"
@@ -84,15 +84,22 @@ class PrunerClassGenerator inherits Generator {
 						var clazz : EClass init rel.eType.asType(EClass)
 
 						// If the current origin matches the source.
-						if(clazz==source.relation.eContainingClass or clazz.isSuperTypeOf(source.relation.eContainingClass)) then
+						if(clazz==source.relation.eType or clazz.isSuperTypeOf(source.relation.eType.asType(EClass))) then
 							var name : String init clazz.getVarNameClassifier()
-							result := result + "\t\t" + rel.eContainingClass.getVarNameClassifier() + "." + rel.name
-							
-							if(source.relation.upperBound!=1) then
-								result := result + ".each{" + name + " | " + name + ".initialise" + source.relation.name + "()}\n"
-							else
-								result := result + ".initialise" + source.relation.name + "()\n" 
-							end
+							var brackets : String init ""
+							result := result + "\t\t" + origin.path.first().eContainingClass.getVarNameClassifier()
+
+							origin.path.each{ref |
+								var name2 : String init ref.eType.asType(EClass).getVarNameClassifier()
+								result := result + "." + ref.name
+
+								if(ref.upperBound!=1) then
+									result := result + ".each{" + name2 + " | " + name2
+									brackets := brackets + " }"
+								end
+							}
+
+							result := result + ".initialise" + source.relation.name + "()" + brackets + "\n"
 						end
 					}
 				end
@@ -197,10 +204,8 @@ class PrunerClassGenerator inherits Generator {
 		result := result + "\t\tend\n\n"
 
 		prunerGenerator.radius.focusedClasses.each{clazz |
-			if(not clazz.main.isVoid and clazz.main) then
-				result := result + "\t\t" + clazz.getAddedAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + clazz.getVarNameClassifier() +
-							"." + clazz.addOperation.name + "(self) }\n"
-			end
+			result := result + "\t\t" + clazz.getAddedAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " + clazz.getVarNameClassifier() +
+						"." + clazz.addOperation.name + "(self) }\n"
 		}
 
 		result := result + "\tend\n\n"

@@ -1,7 +1,8 @@
 package ex::mappingModel;
 require kermeta
-require "MappingModel.kmt"
-require "ClassModelPruningAspect.kmt"
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/MappingModel.ecore"
+require "MappingModelPruning.kmt"
+require "classModelPruningAspect.kmt"
 using ex::classModel
 using kermeta::standard
 

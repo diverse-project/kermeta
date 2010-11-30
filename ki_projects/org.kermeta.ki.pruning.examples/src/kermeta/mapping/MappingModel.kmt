@@ -8,11 +8,10 @@
 package ex::mappingModel;
 
 require kermeta
-require "../classInverted/ClassModel.kmt"
+require "../class/ClassModel.kmt"
 
 using kermeta::standard
 using ex::classModel
-
 
 class MappingModel {
 	attribute mappings : Mapping[0..*]
@@ -21,7 +20,6 @@ class MappingModel {
 	
 	attribute target : ClassModel
 }
-
 
 class Mapping {
 	attribute name : String
@@ -37,4 +35,3 @@ class Mapping {
 		result := self
 	end
 }
-

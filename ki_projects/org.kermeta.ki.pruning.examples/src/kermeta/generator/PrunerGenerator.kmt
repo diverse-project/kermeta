@@ -52,7 +52,22 @@ class PrunerGenerator {
 		self.prunerClass.name := pruningData.name
 		
 		self.pruningData.requiredElements.each{elt |
-			elt.srcRelations.each{src | src.relation.eContainingClass.sourceRelations.add(src.relation) }
+			elt.srcRelations.each{source | 
+				if(source.createOpposite) then
+					// We change the pruning data to use of the opposite.
+					var ref : EReference init EReference.new
+					ref.name := source.relation.name + "Opposite"
+					ref.eType:= source.relation.eContainingClass
+					source.relation.eType.asType(EClass).eStructuralFeatures.add(ref)
+					ref.lowerBound := source.relation.lowerBound
+					ref.upperBound := source.relation.upperBound
+					ref.containment := false
+					ref.eContainingClass.sourceRelations.add(ref)
+					source.relation := ref
+				else
+					source.relation.eContainingClass.sourceRelations.add(source.relation)
+				end
+			}
 			elt.targetRelations.each{target |
 				// Target recursive relations are useless and must be ignored.
 				if(target.eType!=target.eContainingClass) then 
@@ -109,11 +124,11 @@ class PrunerGenerator {
 
 		if(classes.size>1) then
 			var packagesName : Bag<String> init Bag<String>.new
-			packagesName.add(classes.first().ePackage.getQualifiedName("::"))
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
 
-			from var i : Integer init 1
+			from var i : Integer init classes.size()-2
 			// Skipping the first element which has been converted as the default package.
-			until i>=classes.size()
+			until i<0
 			loop
 				var name : String init classes.at(i).ePackage.getQualifiedName("::")
 
@@ -121,7 +136,7 @@ class PrunerGenerator {
 					packagesName.add(name)
 					result := result + "require \"" + classes.at(i).ePackage.name + "PruningAspect.kmt\"\n"
 				end
-				i := i + 1
+				i := i - 1
 			end
 		end
 	end
@@ -132,11 +147,11 @@ class PrunerGenerator {
 
 		if(classes.size>1) then
 			var packagesName : Bag<String> init Bag<String>.new
-			packagesName.add(classes.first().ePackage.getQualifiedName("::"))
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
 
-			from var i : Integer init 1
+			from var i : Integer init classes.size()-2
 			// Skipping the first element which has been converted as the default package.
-			until i>=classes.size()
+			until i<0
 			loop
 				var name : String init classes.at(i).ePackage.getQualifiedName("::")
 
@@ -144,7 +159,7 @@ class PrunerGenerator {
 					packagesName.add(name)
 					result := result + "using " + name + "\n"
 				end
-				i := i + 1
+				i := i - 1
 			end
 		end
 	end
@@ -154,7 +169,7 @@ class PrunerGenerator {
 		if(classes.empty()) then
 			result := ""
 		else
-			result := "package " + classes.first().ePackage.getQualifiedName("::") + ";\n"
+			result := "package " + classes.last().ePackage.getQualifiedName("::") + ";\n"
 		end
 	end
 }

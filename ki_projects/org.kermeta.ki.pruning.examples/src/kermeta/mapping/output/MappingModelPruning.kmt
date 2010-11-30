@@ -1,9 +1,8 @@
-@mainClass "ex::mappingModel::Test"
-@mainOperation "main"
 package ex::mappingModel;
 require kermeta
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/mapping/MappingModel.ecore"
 require "MappingModelPruningAspect.kmt"
-require "ClassModelPruningAspect.kmt"
+require "classModelPruningAspect.kmt"
 
 using kermeta::standard
 
@@ -66,64 +65,3 @@ abstract class MappingModelPruning {
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract
 	operation onMappingAdded(theMapping : Mapping) : Void is abstract
 }
-
-
-
-class PrintMappingModelPruning inherits MappingModelPruning {
-	method onClazzAdded(theClazz : Clazz) : Void is do
-		stdio.writeln("Clazz: " + theClazz.name)
-	end
-	
-	method onMappingAdded(theMapping : Mapping) : Void is do
-		stdio.writeln("Mapping: " + theMapping.name)
-	end
-}
-
-
-
-class Test {
-	operation main() : Void is do 
-		var mm : MappingModel init MappingModel.new
-		var cm1 : ClassModel init ClassModel.new
-		var cm2 : ClassModel init ClassModel.new
-		var a : Clazz init Clazz.new.initialise("a", cm1)
-		var b : Clazz init Clazz.new.initialise("b", cm1)
-		var c : Clazz init Clazz.new.initialise("c", cm2)
-		var d : Clazz init Clazz.new.initialise("d", cm1)
-		var e : Clazz init Clazz.new.initialise("e", cm2)
-		var f : Clazz init Clazz.new.initialise("f", cm2)
-		var m1 : Mapping init Mapping.new.initialise("m1", mm)
-		var m2 : Mapping init Mapping.new.initialise("m2", mm)
-		var m3 : Mapping init Mapping.new.initialise("m3", mm)
-		mm.src := cm1
-		mm.target := cm2
-		m1.srcs.add(a)
-		m1.srcs.add(b)
-		m1.targets.add(c)
-		m2.srcs.add(d)
-		m2.targets.add(c)
-		m3.srcs.add(d)
-		m3.targets.add(e)
-		
-		var requiredClazzes : Bag<Clazz> init Bag<Clazz>.new
-		requiredClazzes.add(a)
-		var pruning : PrintMappingModelPruning init PrintMappingModelPruning.new.initialise(mm, requiredClazzes, 1).asType(PrintMappingModelPruning)
-		
-		pruning.launch()
-	end
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
