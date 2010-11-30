@@ -105,7 +105,7 @@ public class MergerMojo extends AbstractMojo {
         //LOAD PREVIOUS MODEL OR CREATE ONE
         ContainerRoot root = null;
         if (modelInput.isFile()) {
-            root = Art2XmiHelper.load("file:///" + modelInput.getAbsolutePath());
+            root = Art2XmiHelper.load(modelInput.getAbsoluteFile().toURI().toString());
         } else {
             this.getLog().warn("Model File Empty, creating one !");
             root = Art2Factory.eINSTANCE.createContainerRoot();
@@ -140,7 +140,7 @@ public class MergerMojo extends AbstractMojo {
 
                 //    Art2XmiHelper.save(java.net.URLStreamHandler.toExternalForm(modelInput.getAbsoluteFile().g), root);
 
-                    Art2XmiHelper.save(modelInput.getAbsoluteFile().toURI()+"", root);
+                    Art2XmiHelper.save(modelInput.getAbsoluteFile().toURI().toString(), root);
                 }
             } catch (IOException ex) {
                 this.getLog().error(ex);
