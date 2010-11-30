@@ -65,8 +65,8 @@ class BinaryMerger
 		stdio.writeln("test_001()...")
 		var repository : EMFRepository init EMFRepository.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/km/001_AB.km")
-       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/km/001_Aatt.km")
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/primary/AB.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/aspect/Aatt.km")
        	
        	var pmModelingUnit : ModelingUnit 
        	pmModelingUnit ?= primaryModelResource.one
