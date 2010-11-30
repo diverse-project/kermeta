@@ -15,6 +15,7 @@
 
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmSSS</maven.build.timestamp.format>
+        <art2.repositories></art2.repositories>
     </properties>
 
     <build>
@@ -41,6 +42,7 @@
                         <value>art2.lib.version=${project.version}</value>
                         <value>art2.lib.target=${project.build.directory}/generated-sources/art2/ART2-INF/art2Lib.art2</value>
                         <value>tag=${maven.build.timestamp}</value>
+                        <value>repositories=${art2.repositories}</value>
                     </options>
                 </configuration>
                 <executions>
