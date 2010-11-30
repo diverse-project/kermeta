@@ -13,7 +13,7 @@ aspect class OutputState {
 
 	method addTransitions(theStateMachinePruning : StateMachinePruning) : Void is do
 		self.outgoingTransitions.each{theTransition |
-			if(not theTransition.visited and theTransition.target.visited) then
+			if(not theTransition.visited and (theTransition.target.isVoid or theTransition.target.visited)) then
 				theTransition.visited := true
 				theStateMachinePruning.onTransitionAdded(theTransition)
 				theStateMachinePruning.addedTransitions.add(theTransition)

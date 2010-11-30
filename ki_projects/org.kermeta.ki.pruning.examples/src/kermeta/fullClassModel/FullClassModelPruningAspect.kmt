@@ -2,7 +2,6 @@ package ex::fullClassModel;
 require kermeta
 require "FullClassModel.kmt"
 require "FullClassModelPruning.kmt"
-
 using kermeta::standard
 
 aspect class Clazz {
