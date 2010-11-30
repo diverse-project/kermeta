@@ -180,8 +180,11 @@ public class EmbeddedFelix {
 
     public void bootstrap(BundleContext context) {
 
+        System.out.println("Perform bootstrap");
+
         //startRawBundle(context, "file://xmlstack.jar", R.raw.xmlstack);
         startRawBundle(context, "file://paxurl.jar", R.raw.paxurl, true);
+        startRawBundle(context, "file://paxassembly.jar", R.raw.paxassembly, true);
         startRawBundle(context, "file://shell.jar", R.raw.shell, true);
         //startRawBundle(context,"file://shelltui.jar", R.raw.shelltui);
         startRawBundle(context, "file://shellremote.jar", R.raw.shellremote, true);

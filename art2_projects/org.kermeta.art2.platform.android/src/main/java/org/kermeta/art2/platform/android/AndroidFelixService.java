@@ -286,6 +286,7 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
 
 
                     startRawBundle(felixFramework.getBundleContext(), "file://paxurl.jar", R.raw.paxurl, true);
+                    startRawBundle(felixFramework.getBundleContext(), "file://paxassembly.jar", R.raw.paxassembly, true);
                     startRawBundle(felixFramework.getBundleContext(), "file://shell.jar", R.raw.shell, true);
                     //startRawBundle(context,"file://shelltui.jar", R.raw.shelltui);
                     startRawBundle(felixFramework.getBundleContext(), "file://shellremote.jar", R.raw.shellremote, true);
