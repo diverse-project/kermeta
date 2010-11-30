@@ -6,6 +6,7 @@
  */
 package org.kermeta.traceability.impl;
 
+import java.util.Date;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -87,6 +88,8 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 				return createIntegerFromString(eDataType, initialValue);
 			case TraceabilityPackage.OBJECT:
 				return createObjectFromString(eDataType, initialValue);
+			case TraceabilityPackage.DATE:
+				return createDateFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -106,6 +109,8 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 				return convertIntegerToString(eDataType, instanceValue);
 			case TraceabilityPackage.OBJECT:
 				return convertObjectToString(eDataType, instanceValue);
+			case TraceabilityPackage.DATE:
+				return convertDateToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -232,6 +237,24 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * @generated
 	 */
 	public String convertObjectToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date createDateFromString(EDataType eDataType, String initialValue) {
+		return (Date)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDateToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

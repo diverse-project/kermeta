@@ -10,6 +10,7 @@
     <genDataTypes ecoreDataType="Traceability.ecore#//String"/>
     <genDataTypes ecoreDataType="Traceability.ecore#//Integer"/>
     <genDataTypes ecoreDataType="Traceability.ecore#//Object"/>
+    <genDataTypes ecoreDataType="Traceability.ecore#//Date"/>
     <genClasses ecoreClass="Traceability.ecore#//TraceModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//TraceModel/traces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//TraceModel/references"/>
@@ -35,6 +36,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="Traceability.ecore#//FileReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//FileReference/fileURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//FileReference/timeStamp"/>
     </genClasses>
     <genClasses ecoreClass="Traceability.ecore#//TextReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charBeginOffset"/>

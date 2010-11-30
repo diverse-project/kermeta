@@ -6,6 +6,7 @@
  */
 package org.kermeta.traceability.impl;
 
+import java.util.Date;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -116,6 +117,13 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * @generated
 	 */
 	private EDataType objectEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType dateEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -372,6 +380,15 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFileReference_TimeStamp() {
+		return (EAttribute)fileReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTextReference() {
 		return textReferenceEClass;
 	}
@@ -480,6 +497,15 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getDate() {
+		return dateEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TraceabilityFactory getTraceabilityFactory() {
 		return (TraceabilityFactory)getEFactoryInstance();
 	}
@@ -528,6 +554,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 
 		fileReferenceEClass = createEClass(FILE_REFERENCE);
 		createEAttribute(fileReferenceEClass, FILE_REFERENCE__FILE_URI);
+		createEAttribute(fileReferenceEClass, FILE_REFERENCE__TIME_STAMP);
 
 		textReferenceEClass = createEClass(TEXT_REFERENCE);
 		createEAttribute(textReferenceEClass, TEXT_REFERENCE__CHAR_BEGIN_OFFSET);
@@ -546,6 +573,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		stringEDataType = createEDataType(STRING);
 		integerEDataType = createEDataType(INTEGER);
 		objectEDataType = createEDataType(OBJECT);
+		dateEDataType = createEDataType(DATE);
 	}
 
 	/**
@@ -608,6 +636,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 
 		initEClass(fileReferenceEClass, FileReference.class, "FileReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFileReference_FileURI(), this.getString(), "fileURI", null, 1, 1, FileReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFileReference_TimeStamp(), this.getDate(), "timeStamp", null, 0, 1, FileReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textReferenceEClass, TextReference.class, "TextReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextReference_CharBeginOffset(), this.getInteger(), "charBeginOffset", null, 1, 1, TextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -626,6 +655,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(integerEDataType, Integer.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(dateEDataType, Date.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

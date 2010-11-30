@@ -6,6 +6,8 @@
  */
 package org.kermeta.traceability;
 
+import java.util.Date;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,7 @@ package org.kermeta.traceability;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.traceability.FileReference#getFileURI <em>File URI</em>}</li>
+ *   <li>{@link org.kermeta.traceability.FileReference#getTimeStamp <em>Time Stamp</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +54,31 @@ public interface FileReference extends Reference {
 	 * @generated
 	 */
 	void setFileURI(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Time Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Time Stamp</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Time Stamp</em>' attribute.
+	 * @see #setTimeStamp(Date)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getFileReference_TimeStamp()
+	 * @model dataType="org.kermeta.traceability.Date"
+	 * @generated
+	 */
+	Date getTimeStamp();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.traceability.FileReference#getTimeStamp <em>Time Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Time Stamp</em>' attribute.
+	 * @see #getTimeStamp()
+	 * @generated
+	 */
+	void setTimeStamp(Date value);
 
 } // FileReference

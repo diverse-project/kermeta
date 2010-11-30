@@ -83,6 +83,10 @@
         <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//FileReference/fileURI"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_kt0mHY_MEd2BvpfSoI4hnQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_p3_TwflLEd-twaUSDpvULw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Traceability.ecore#//FileReference/timeStamp"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p3_TwvlLEd-twaUSDpvULw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_kt0mFY_MEd2BvpfSoI4hnQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_kt0mFo_MEd2BvpfSoI4hnQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_kt0mF4_MEd2BvpfSoI4hnQ"/>
@@ -138,7 +142,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_kt0mM4_MEd2BvpfSoI4hnQ" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="Traceability.ecore#//XMLReference"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kt0mNI_MEd2BvpfSoI4hnQ" x="575" y="265"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kt0mNI_MEd2BvpfSoI4hnQ" x="636" y="270"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_kt0mQI_MEd2BvpfSoI4hnQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_kt0mQ4_MEd2BvpfSoI4hnQ" type="4001"/>
@@ -154,7 +158,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_kt0mQY_MEd2BvpfSoI4hnQ" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="Traceability.ecore#//ModelReference"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kt0mQo_MEd2BvpfSoI4hnQ" x="575" y="135"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kt0mQo_MEd2BvpfSoI4hnQ" x="624" y="114"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_kt0mTI_MEd2BvpfSoI4hnQ" type="1004">
     <children xmi:type="notation:Node" xmi:id="_kt0mT4_MEd2BvpfSoI4hnQ" type="4008"/>
@@ -299,6 +303,13 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_RvAd0mjNEd-1loLzJxzrAw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="Traceability.ecore#//QualifiedNameReference"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RvAd02jNEd-1loLzJxzrAw" x="692" y="32"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_wgBXsPlLEd-twaUSDpvULw" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_wgCl0PlLEd-twaUSDpvULw" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_wgCl0flLEd-twaUSDpvULw" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wgBXsflLEd-twaUSDpvULw" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="Traceability.ecore#//Date"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wgBXsvlLEd-twaUSDpvULw" x="660" y="474" width="219"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ktOJIY_MEd2BvpfSoI4hnQ"/>
   <element xmi:type="ecore:EPackage" href="Traceability.ecore#/"/>

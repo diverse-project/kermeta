@@ -126,6 +126,7 @@
         <details key="documentation" value="/** URI of the file containing the referred concrete object */"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="#//Date"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="#//FileReference">
     <eAnnotations source="kermeta">
@@ -175,4 +176,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
         eType="#//String"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
 </ecore:EPackage>

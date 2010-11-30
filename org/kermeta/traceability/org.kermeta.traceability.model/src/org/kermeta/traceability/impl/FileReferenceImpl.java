@@ -6,6 +6,7 @@
  */
 package org.kermeta.traceability.impl;
 
+import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -23,6 +24,7 @@ import org.kermeta.traceability.TraceabilityPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.traceability.impl.FileReferenceImpl#getFileURI <em>File URI</em>}</li>
+ *   <li>{@link org.kermeta.traceability.impl.FileReferenceImpl#getTimeStamp <em>Time Stamp</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +50,26 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * @ordered
 	 */
 	protected String fileURI = FILE_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTimeStamp() <em>Time Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeStamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date TIME_STAMP_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTimeStamp() <em>Time Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeStamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date timeStamp = TIME_STAMP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,11 +116,34 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTimeStamp(Date newTimeStamp) {
+		Date oldTimeStamp = timeStamp;
+		timeStamp = newTimeStamp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.FILE_REFERENCE__TIME_STAMP, oldTimeStamp, timeStamp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
 				return getFileURI();
+			case TraceabilityPackage.FILE_REFERENCE__TIME_STAMP:
+				return getTimeStamp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,6 +158,9 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
 				setFileURI((String)newValue);
+				return;
+			case TraceabilityPackage.FILE_REFERENCE__TIME_STAMP:
+				setTimeStamp((Date)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,6 +177,9 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
 				setFileURI(FILE_URI_EDEFAULT);
 				return;
+			case TraceabilityPackage.FILE_REFERENCE__TIME_STAMP:
+				setTimeStamp(TIME_STAMP_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +194,8 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
 				return FILE_URI_EDEFAULT == null ? fileURI != null : !FILE_URI_EDEFAULT.equals(fileURI);
+			case TraceabilityPackage.FILE_REFERENCE__TIME_STAMP:
+				return TIME_STAMP_EDEFAULT == null ? timeStamp != null : !TIME_STAMP_EDEFAULT.equals(timeStamp);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,6 +212,8 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (fileURI: ");
 		result.append(fileURI);
+		result.append(", timeStamp: ");
+		result.append(timeStamp);
 		result.append(')');
 		return result.toString();
 	}

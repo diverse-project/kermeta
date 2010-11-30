@@ -319,13 +319,22 @@ public interface TraceabilityPackage extends EPackage {
 	int FILE_REFERENCE__FILE_URI = REFERENCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Time Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_REFERENCE__TIME_STAMP = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>File Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 1;
+	int FILE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.traceability.impl.TextReferenceImpl <em>Text Reference</em>}' class.
@@ -372,6 +381,15 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_REFERENCE__FILE_URI = FILE_REFERENCE__FILE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Time Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_REFERENCE__TIME_STAMP = FILE_REFERENCE__TIME_STAMP;
 
 	/**
 	 * The feature id for the '<em><b>Char Begin Offset</b></em>' attribute.
@@ -445,6 +463,15 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int XML_REFERENCE__FILE_URI = FILE_REFERENCE__FILE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Time Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XML_REFERENCE__TIME_STAMP = FILE_REFERENCE__TIME_STAMP;
 
 	/**
 	 * The feature id for the '<em><b>XPointer</b></em>' attribute.
@@ -603,6 +630,17 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	int OBJECT = 11;
+
+
+	/**
+	 * The meta object id for the '<em>Date</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Date
+	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getDate()
+	 * @generated
+	 */
+	int DATE = 12;
 
 
 	/**
@@ -832,6 +870,17 @@ public interface TraceabilityPackage extends EPackage {
 	EAttribute getFileReference_FileURI();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.FileReference#getTimeStamp <em>Time Stamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time Stamp</em>'.
+	 * @see org.kermeta.traceability.FileReference#getTimeStamp()
+	 * @see #getFileReference()
+	 * @generated
+	 */
+	EAttribute getFileReference_TimeStamp();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.traceability.TextReference <em>Text Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -958,6 +1007,17 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getObject();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Date <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Date</em>'.
+	 * @see java.util.Date
+	 * @model instanceClass="java.util.Date"
+	 * @generated
+	 */
+	EDataType getDate();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1160,6 +1220,14 @@ public interface TraceabilityPackage extends EPackage {
 		EAttribute FILE_REFERENCE__FILE_URI = eINSTANCE.getFileReference_FileURI();
 
 		/**
+		 * The meta object literal for the '<em><b>Time Stamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_REFERENCE__TIME_STAMP = eINSTANCE.getFileReference_TimeStamp();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.traceability.impl.TextReferenceImpl <em>Text Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1268,6 +1336,16 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType OBJECT = eINSTANCE.getObject();
+
+		/**
+		 * The meta object literal for the '<em>Date</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Date
+		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getDate()
+		 * @generated
+		 */
+		EDataType DATE = eINSTANCE.getDate();
 
 	}
 
