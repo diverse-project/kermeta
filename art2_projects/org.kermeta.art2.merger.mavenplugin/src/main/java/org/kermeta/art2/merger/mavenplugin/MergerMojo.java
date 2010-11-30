@@ -136,11 +136,11 @@ public class MergerMojo extends AbstractMojo {
                     if (baseDir.indexOf(":") > 0) {
                     	result = "file:///" + baseDir;
                     }*/
-                    this.getLog().info("ModelOutput => file:///"+modelInput.getAbsoluteFile().toURI());
+                    this.getLog().info("ModelOutput => file:///"+modelInput.getAbsolutePath());
 
                 //    Art2XmiHelper.save(java.net.URLStreamHandler.toExternalForm(modelInput.getAbsoluteFile().g), root);
 
-                    Art2XmiHelper.save("file:///"+modelInput.getAbsoluteFile().toURI(), root);
+                    Art2XmiHelper.save("file:///"+modelInput.getAbsolutePath(), root);
                 }
             } catch (IOException ex) {
                 this.getLog().error(ex);
