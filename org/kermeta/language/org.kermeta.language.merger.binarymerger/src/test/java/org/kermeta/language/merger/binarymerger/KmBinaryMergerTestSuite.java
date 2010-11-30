@@ -14,6 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.kermeta.language.api.tests.port.PortKmBinaryMergerTestSuite;
 import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger;
 import runner.MainRunner;
@@ -27,9 +32,13 @@ public class KmBinaryMergerTestSuite extends TestSuite {
    // @Override
     public static Test suite() {
 
+    	//Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put("*", new XMIResourceFactoryImpl()); 
+    	
         System.out.println("Initializing Registry...");
         ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
-
+        // force to initialize the eInstance (required for correct serialisation
+    	XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
+    	
         MainRunner.init();
        // initRegistry();
 
