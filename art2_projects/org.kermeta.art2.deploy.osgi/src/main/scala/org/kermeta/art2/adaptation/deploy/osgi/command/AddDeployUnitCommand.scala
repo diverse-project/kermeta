@@ -21,35 +21,40 @@ case class AddDeployUnitCommand(deployUnit : DeployUnit, ctx : Art2DeployManager
   def execute() : Boolean= {
     logger.info("CMD ADD DEPLOY UNIT EXECUTION ");
 
-    try{
-      logger.info("Try to install from URI, "+CommandHelper.buildQuery(deployUnit))
-      lastExecutionBundle = Some(ctx.bundleContext.installBundle(CommandHelper.buildQuery(deployUnit)));
-      var symbolicName : String = lastExecutionBundle.get.getSymbolicName
+    CommandHelper.buildAllQuery(deployUnit).exists{query=>
+      try{
+        logger.info("Try to install from URI, "+query)
+        lastExecutionBundle = Some(ctx.bundleContext.installBundle(query));
+        var symbolicName : String = lastExecutionBundle.get.getSymbolicName
 
-      //FOR DEPLOY UNIT DO NOT USE ONLY NAME
-      ctx.bundleMapping.append(Art2OSGiBundle(CommandHelper.buildKEY(deployUnit),deployUnit.getClass.getName,lastExecutionBundle.get))
-      lastExecutionBundle.get.start
-      mustBeStarted = true
-      true
-    } catch {
-      case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
-          logger.warn("DeployUnit conflict ! ",e)
-          mustBeStarted = false
-          true
-        }
-            
-      case _ @ e =>{
-          try{
-            lastExecutionBundle match {
-              case None => logger.error("failed to perform CMD ADD CT EXECUTION")
-              case Some(bundle) => logger.error("failed to perform CMD ADD CT EXECUTION on " +bundle.getSymbolicName,e);
-            }
-          } catch {
-            case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
+        //FOR DEPLOY UNIT DO NOT USE ONLY NAME
+        ctx.bundleMapping.append(Art2OSGiBundle(CommandHelper.buildKEY(deployUnit),deployUnit.getClass.getName,lastExecutionBundle.get))
+        lastExecutionBundle.get.start
+        mustBeStarted = true
+        true
+      } catch {
+        case e : BundleException if(e.getType == BundleException.DUPLICATE_BUNDLE_ERROR) => {
+            logger.warn("DeployUnit conflict ! ",e)
+            mustBeStarted = false
+            true
           }
-          false
-        }
+        case _ @ e =>{
+            try{
+              lastExecutionBundle match {
+                case None => logger.error("failed to perform CMD ADD CT EXECUTION")
+                case Some(bundle) => logger.error("failed to perform CMD ADD CT EXECUTION on " +bundle.getSymbolicName,e);
+              }
+            } catch {
+              case _=> logger.error("failed to perform CMD ADD CT EXECUTION")
+            }
+            false
+          }
+      }
+
     }
+
+
+
        
 
   }
