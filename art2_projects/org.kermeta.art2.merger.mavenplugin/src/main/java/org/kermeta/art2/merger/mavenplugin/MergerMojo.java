@@ -140,7 +140,7 @@ public class MergerMojo extends AbstractMojo {
 
                 //    Art2XmiHelper.save(java.net.URLStreamHandler.toExternalForm(modelInput.getAbsoluteFile().g), root);
 
-                    Art2XmiHelper.save(URI.create(modelInput.getCanonicalPath()).toString(), root);
+                    Art2XmiHelper.save("file:///"+modelInput.getCanonicalPath(), root);
                 }
             } catch (IOException ex) {
                 this.getLog().error(ex);
