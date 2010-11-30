@@ -24,8 +24,7 @@ import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryM
 import runner.MainRunner;
 
 /**
- *
- * @author ffouquet
+ * Test suite for KmBinaryMerger port
  */
 public class KmBinaryMergerTestSuite extends TestSuite {
 

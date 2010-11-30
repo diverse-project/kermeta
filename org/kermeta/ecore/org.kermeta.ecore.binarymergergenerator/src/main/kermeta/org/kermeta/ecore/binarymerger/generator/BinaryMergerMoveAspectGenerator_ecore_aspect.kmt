@@ -255,13 +255,10 @@ aspect class EAttribute {
 		if not self.derived then  
 			if self.upperBound==1 then
 				content.append(context.indentString)
-					content.append("if (not self."+mangledName+".isVoid) and (mergedModelElement."+mangledName+".isVoid) then")
-					context.pushIndent
-					content.append(context.indentString)
-					content.append("mergedModelElement."+mangledName+" := self."+mangledName)					
-					context.popIndent
-					content.append(context.indentString)
-					content.append("end")
+				content.append("// select value for unary attribute")
+				content.append(context.indentString)				
+				content.append("self."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+												"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")				
 			else
 			 	content.append(context.indentString)
 					content.append("stdio.writeln(\" TODO Deal with multiplicity > 1 for EAttribute " + self.name+"\")")		

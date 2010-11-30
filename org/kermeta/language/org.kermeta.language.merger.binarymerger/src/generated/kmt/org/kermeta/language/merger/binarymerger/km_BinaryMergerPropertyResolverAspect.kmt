@@ -1,0 +1,648 @@
+package org;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt"
+
+using kermeta::language::structure
+using org::kermeta::ecore::binarymerger
+
+package kermeta {
+	package language {
+		package behavior {
+			aspect class Assignment {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Expression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class CallExpression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Block {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallVariable {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallFeature {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallSuperOperation {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallResult {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallVariable is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallValue {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Conditional {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Raise {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Rescue {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class TypeReference {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Literal {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class EmptyExpression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class JavaStaticCall {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class LambdaExpression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class LambdaParameter {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class IntegerLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class StringLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class BooleanLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class VoidLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Loop {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class SelfExpression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class VariableDecl {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+		}
+
+
+		package structure {
+
+
+			aspect class Object {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+
+			aspect class Operation {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Property {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Type {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class TypeContainer {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class EnumerationLiteral {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeVariableBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class MultiplicityElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Class {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ParameterizedType is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class DataType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Enumeration {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::DataType is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class NamedElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class Package {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Parameter {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class PrimitiveType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::DataType is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypedElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+
+			aspect class Tag {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class AbstractProperty {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class Constraint {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+
+			aspect class ClassDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::GenericTypeDefinition is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+
+			aspect class ModelingUnit {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinitionContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeDefinitionContainer {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Require {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class GenericTypeDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ParameterizedType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeVariable {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ObjectTypeVariable {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeVariable is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelTypeVariable {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeVariable is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class VirtualType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ObjectTypeVariable is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Model {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class Resource {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class ResourceGroup {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Resource is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class SimpleResource {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Resource is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class AbstractOperation {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class UnresolvedType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Unresolved {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class UnresolvedProperty {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractProperty is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedOperation {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractOperation is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class Using {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+					
+					// workaround compiler V2 bug, cannot call super on a Class named "Object"
+					// result := super( propertyName, primaryValue, aspectValue)
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class ProductType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class FunctionType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class VoidType {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class TypeMapping {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+		}
+
+
+		aspect class DummyClass {
+			operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+				
+				result := primaryValue
+				// select non void value
+				if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+					result := aspectValue
+				end
+			end
+		}
+
+	}
+
+
+	aspect class DummyClass {
+		operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			
+			result := primaryValue
+			// select non void value
+			if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+				result := aspectValue
+			end
+		end
+	}
+
+}
+
+
+aspect class DummyClass {
+	operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+		
+		result := primaryValue
+		// select non void value
+		if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+			result := aspectValue
+		end
+	end
+}
