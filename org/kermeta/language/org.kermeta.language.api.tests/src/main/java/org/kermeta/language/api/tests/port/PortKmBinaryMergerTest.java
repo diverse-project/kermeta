@@ -17,9 +17,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.port.PortResourceLoader.URIType;
@@ -69,8 +72,13 @@ public class PortKmBinaryMergerTest extends TestCase {
         System.out.println("        with " + aspectFilePath);
         
         
-        ModelingUnit result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(primaryFilePath));
-
+        ModelingUnit result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(aspectFilePath));
+        
+        EcoreUtil.EqualityHelper eQH = new EcoreUtil.EqualityHelper();
+        
+        ModelingUnit expectedResult = loadModelingUnit(expectedOutputFilePath);
+        assertTrue("result model not equals to expected output", eQH.equals(result, expectedResult));
+        
         System.out.println(this.valid);
 
         if (result == null) {
@@ -109,20 +117,16 @@ public class PortKmBinaryMergerTest extends TestCase {
 		 */
 		URIConverter converter = new ExtensibleURIConverterImpl();
 		uri = converter.normalize(uri);
+	/*	XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot(); 
+		XMLNamespacePackage.eINSTANCE.getEFactoryInstance(); */
 		Resource resource = resourceSet.createResource(uri);
-                ((XMIResource)resource).getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
-                ((XMIResource)resource).getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+     /*   ((XMIResource)resource).getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
+        ((XMIResource)resource).getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");  */
 		resource.getContents().add(modelingUnit);
 		resource.save(null);		
     }
     @Override
     public String getName() {
-    	/* String primaryBase = primaryFilePath.getName().replaceAll("\\.kmt", "");
-    	primaryBase = primaryBase.replaceAll("\\.km", "");
-    	primaryBase = primaryBase.replaceAll("\\.ecore", "");
-    	String aspectBase = aspectFilePath.getName().replaceAll("\\.kmt", "");
-    	aspectBase = aspectBase.replaceAll("\\.km", "");
-    	aspectBase = aspectBase.replaceAll("\\.ecore", ""); */
         return baseName;
     }
 
