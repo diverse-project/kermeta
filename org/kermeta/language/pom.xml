@@ -33,10 +33,7 @@
         <module>org.kermeta.language.api</module>
         <module>org.kermeta.language.api.tests</module>
         <module>org.kermeta.language.loader.scalaKMT</module>
-        <module>org.kermeta.language.model</module>   
-        <module>org.kermeta.kp.model</module>        
-        <module>org.kermeta.kp.editor</module>        
-        <module>org.kermeta.kp.editor.ui</module>      
+        <module>org.kermeta.language.model</module>                         
         <!--<module>org.kermeta.language.model.edit</module>
         <module>org.kermeta.language.model.editor</module> -->
         <module>org.kermeta.language.workbench.eclipse</module>
@@ -45,20 +42,15 @@
         <!-- <module>org.kermeta.language.checker</module> --> 
         <module>org.kermeta.language.eventmonitor.eclipse.builder</module> 
         <module>org.kermeta.language.texteditor.eclipse</module>        
-        <module>org.kermeta.traceability.model</module>
-        <module>org.kermeta.utils.error.report.eclipse</module>
-        <module>org.kermeta.utils.logger.eclipse</module>
-        <module>org.kermeta.utils.logger.stdout</module>
         
         <!-- Archetype -->
-        <module>org.kermeta.language.archetype.art2Bundle</module>
     </modules>
 
 	
     <scm>
-        <connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/branches/KermetaV2</connection>
-        <developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/branches/KermetaV2</developerConnection>
-        <url>http://gforge.inria.fr/scm/viewvc.php/branches/KermetaV2?root=kermeta</url>
+        <connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/language</connection>
+        <developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/language</developerConnection>
+        <url>http://gforge.inria.fr/scm/viewvc.php/trunk/org/kermeta/language?root=kermeta</url>
     </scm>
 	
     <repositories>
