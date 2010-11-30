@@ -10,12 +10,25 @@ import scala.reflect.BeanProperty
 import scala.runtime.BoxedUnit
 import org.codehaus.jackson.annotate._
 
+
+//case class TOTO @JsonCreator()( @JsonProperty("name") name: String  )
+
 object JacksonTester {
+
+
+
+
 
   /**
    * @param args the command line arguments
    */
   def main(args: Array[String]): Unit = {
+
+//    var r = TOTO("DEDE")
+//var rjson = r.toJSON
+//println(rjson)
+
+
     println("Hello, world!")
 
     var t = new PJO
