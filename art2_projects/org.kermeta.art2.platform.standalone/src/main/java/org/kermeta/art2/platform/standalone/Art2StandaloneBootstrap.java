@@ -23,7 +23,7 @@ public class Art2StandaloneBootstrap {
         if (bundles != null && version != null) {
             System.out.println("Perform bootstrap "+bundles+"-"+version);
             try {
-                bc.installBundle("file:///" + bundles + "/scala-library-2.8.0.jar").start();
+                bc.installBundle("file:///" + bundles + "/scala-library-2.8.1.jar").start();
 
                 Bundle slf4japi = bc.installBundle("file:///" + bundles + "/slf4j-api-1.6.1.jar");
                 bc.installBundle("file:///" + bundles + "/logback-core-0.9.24.jar").start();
