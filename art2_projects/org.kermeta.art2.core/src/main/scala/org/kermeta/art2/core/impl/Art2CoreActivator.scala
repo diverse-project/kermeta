@@ -8,6 +8,7 @@ package org.kermeta.art2.core.impl
 import java.util.Hashtable
 import org.kermeta.art2.api.configuration.ConfigurationService
 import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
+import org.kermeta.art2.framework.modelService.MetricsService
 import org.osgi.framework.BundleActivator
 import org.osgi.framework.BundleContext
 import org.osgi.util.tracker.ServiceTracker
@@ -43,6 +44,12 @@ class Art2CoreActivator extends BundleActivator {
 
         /* EXPOSE SERVICE */
         bc.registerService(classOf[Art2ModelHandlerService].getName(), myBean, new Hashtable());
+
+
+        /* EXPOSE MODELHELPER SERVICES */
+        bc.registerService(classOf[MetricsService].getName(), Art2MetricsServiceBean(myBean), new Hashtable());
+
+        
 
       }
     }.start
