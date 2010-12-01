@@ -25,6 +25,7 @@ import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
+import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
@@ -91,14 +92,14 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
      * @return
      */
     @Port(name = "KmBinaryMerger", method = "merge")
-    public ModelingUnit merge(ModelingUnit first_mu, ModelingUnit second_mu) {
+    public ModelingUnitResult merge(ModelingUnit first_mu, ModelingUnit second_mu) {
         // call the init in order to make sure that the registry is correctly set
         // TODO look how to not put duplicates in the eclipse registry when run in eclipse work
         //((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap((org.eclipse.emf.ecore.EcoreFactory)ScalaAspect.org.eclipse.emf.ecore.RichFactory.createEFactory());
         MainRunner.init();
 
         BinaryMerger merger = org.kermeta.language.merger.RichFactory.createBinaryMerger();
-        return merger.merge(first_mu, second_mu);
-
+        ModelingUnitResult result = new ModelingUnitResult(merger.merge(first_mu, second_mu));
+        return result;
     }
 }
