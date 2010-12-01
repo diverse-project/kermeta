@@ -7,7 +7,7 @@ require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kerme
 require "platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerAspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerSignatureAspect.kmt"
-require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerPropertyResolverAspect.kmt"
+require "platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerPropertyResolverAspect.kmt"
 
 using kermeta::language::structure
 using org::kermeta::ecore::binarymerger
@@ -40,8 +40,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Assignment, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -86,8 +84,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Expression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -130,8 +126,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -185,8 +179,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Block, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -216,8 +208,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -248,8 +238,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallFeature, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -277,8 +265,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallSuperOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -306,8 +292,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallResult, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -335,8 +319,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar CallValue, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -367,8 +349,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Conditional, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -397,8 +377,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Raise, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -446,8 +424,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Rescue, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -464,8 +440,6 @@ package kermeta {
 						stdio.writeln("Merging content of a TypeReference")
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar TypeReference, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -493,8 +467,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Literal, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -522,8 +494,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar EmptyExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -568,8 +538,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar JavaStaticCall, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -611,8 +579,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar LambdaExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -647,8 +613,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar LambdaParameter, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -678,8 +642,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar IntegerLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -709,8 +671,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar StringLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -740,8 +700,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar BooleanLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -770,8 +728,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar TypeLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -799,8 +755,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar VoidLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -831,8 +785,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Loop, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -860,8 +812,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar SelfExpression, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -893,8 +843,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar VariableDecl, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -926,8 +874,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Object, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1000,8 +946,6 @@ package kermeta {
 						self.isAbstract ?= self.selectUnaryProperty("isAbstract", self.isAbstract, mergedModelElement.isAbstract)
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar Operation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1047,8 +991,6 @@ package kermeta {
 						self.isSetterAbstract ?= self.selectUnaryProperty("isSetterAbstract", self.isSetterAbstract, mergedModelElement.isSetterAbstract)
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar Property, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1080,8 +1022,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Type, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1126,8 +1066,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar TypeContainer, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1142,8 +1080,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::EnumerationLiteral)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a EnumerationLiteral")
-					else
-						stdio.writeln("   No similar EnumerationLiteral, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1158,8 +1094,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariableBinding)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeVariableBinding")
-					else
-						stdio.writeln("   No similar TypeVariableBinding, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1184,8 +1118,6 @@ package kermeta {
 						self.upper ?= self.selectUnaryProperty("upper", self.upper, mergedModelElement.upper)
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar MultiplicityElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1228,8 +1160,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar TypeDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1244,8 +1174,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Class)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Class")
-					else
-						stdio.writeln("   No similar Class, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1290,8 +1218,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar DataType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1349,8 +1275,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar Enumeration, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1384,8 +1308,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar NamedElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1428,8 +1350,6 @@ package kermeta {
 								mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
 							end
 						}
-					else
-						stdio.writeln("   No similar Package, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1446,8 +1366,6 @@ package kermeta {
 						stdio.writeln("Merging content of a Parameter")
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar Parameter, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1492,8 +1410,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar PrimitiveType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1510,8 +1426,6 @@ package kermeta {
 						stdio.writeln("Merging content of a TypedElement")
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar TypedElement, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1548,8 +1462,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Tag, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1581,8 +1493,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar AbstractProperty, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1599,11 +1509,15 @@ package kermeta {
 						stdio.writeln("Merging content of a Constraint")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
 						// select value for unary attribute
-						self.stereotype ?= self.selectUnaryProperty("stereotype", self.stereotype, mergedModelElement.stereotype)
+						// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
+						if (not self.stereotype.isVoid) and (mergedModelElement.stereotype.isVoid) then
+							mergedModelElement.stereotype := self.stereotype
+						end
 						// select value for unary attribute
-						self.language ?= self.selectUnaryProperty("language", self.language, mergedModelElement.language)
-					else
-						stdio.writeln("   No similar Constraint, its content should have been moved in merged model")
+						// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
+						if (not self.language.isVoid) and (mergedModelElement.language.isVoid) then
+							mergedModelElement.language := self.language
+						end
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1673,8 +1587,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar ClassDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1718,8 +1630,6 @@ package kermeta {
 						}
 						// select value for unary attribute
 						self.namespacePrefix ?= self.selectUnaryProperty("namespacePrefix", self.namespacePrefix, mergedModelElement.namespacePrefix)
-					else
-						stdio.writeln("   No similar ModelingUnit, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1747,8 +1657,6 @@ package kermeta {
 								mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
 							end
 						}
-					else
-						stdio.writeln("   No similar TypeDefinitionContainer, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1782,8 +1690,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Require, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1824,8 +1730,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar GenericTypeDefinition, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1866,8 +1770,6 @@ package kermeta {
 								mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
 							end
 						}
-					else
-						stdio.writeln("   No similar ParameterizedType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1884,8 +1786,6 @@ package kermeta {
 						stdio.writeln("Merging content of a TypeVariable")
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar TypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1902,8 +1802,6 @@ package kermeta {
 						stdio.writeln("Merging content of a ObjectTypeVariable")
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar ObjectTypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1948,8 +1846,6 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-					else
-						stdio.writeln("   No similar ModelType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -1979,8 +1875,6 @@ package kermeta {
 						}
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar ModelTypeVariable, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2010,8 +1904,6 @@ package kermeta {
 						}
 						// select value for unary attribute
 						self.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-					else
-						stdio.writeln("   No similar VirtualType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2043,8 +1935,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Model, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2076,8 +1966,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Resource, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2092,8 +1980,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ResourceGroup)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a ResourceGroup")
-					else
-						stdio.writeln("   No similar ResourceGroup, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2110,8 +1996,6 @@ package kermeta {
 						stdio.writeln("Merging content of a SimpleResource")
 						// select value for unary attribute
 						self.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
-					else
-						stdio.writeln("   No similar SimpleResource, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2143,8 +2027,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar AbstractOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2187,8 +2069,6 @@ package kermeta {
 						}
 						// select value for unary attribute
 						self.typeIdentifier ?= self.selectUnaryProperty("typeIdentifier", self.typeIdentifier, mergedModelElement.typeIdentifier)
-					else
-						stdio.writeln("   No similar UnresolvedType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2220,8 +2100,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Unresolved, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2238,8 +2116,6 @@ package kermeta {
 						stdio.writeln("Merging content of a UnresolvedProperty")
 						// select value for unary attribute
 						self.propertyIdentifier ?= self.selectUnaryProperty("propertyIdentifier", self.propertyIdentifier, mergedModelElement.propertyIdentifier)
-					else
-						stdio.writeln("   No similar UnresolvedProperty, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2256,8 +2132,6 @@ package kermeta {
 						stdio.writeln("Merging content of a UnresolvedOperation")
 						// select value for unary attribute
 						self.operationIdentifier ?= self.selectUnaryProperty("operationIdentifier", self.operationIdentifier, mergedModelElement.operationIdentifier)
-					else
-						stdio.writeln("   No similar UnresolvedOperation, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2293,8 +2167,6 @@ package kermeta {
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
 							end
 						}
-					else
-						stdio.writeln("   No similar Using, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2309,8 +2181,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ProductType)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a ProductType")
-					else
-						stdio.writeln("   No similar ProductType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2325,8 +2195,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::FunctionType)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a FunctionType")
-					else
-						stdio.writeln("   No similar FunctionType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2341,8 +2209,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::VoidType)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a VoidType")
-					else
-						stdio.writeln("   No similar VoidType, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2358,8 +2224,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeMapping")
 						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference mapping")
-					else
-						stdio.writeln("   No similar TypeMapping, its content should have been moved in merged model")
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
@@ -2375,8 +2239,6 @@ package kermeta {
 				mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::DummyClass)
 				if (not mergedModelElement.isVoid) then
 					stdio.writeln("Merging content of a DummyClass")
-				else
-					stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 				end
 				self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 				result := self
@@ -2392,8 +2254,6 @@ package kermeta {
 			mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::DummyClass)
 			if (not mergedModelElement.isVoid) then
 				stdio.writeln("Merging content of a DummyClass")
-			else
-				stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 			end
 			self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 			result := self
@@ -2409,8 +2269,6 @@ aspect class DummyClass inherits Mergeable {
 		mergedModelElement := self.similarElementInMergedModel.asType(org::DummyClass)
 		if (not mergedModelElement.isVoid) then
 			stdio.writeln("Merging content of a DummyClass")
-		else
-			stdio.writeln("   No similar DummyClass, its content should have been moved in merged model")
 		end
 		self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 		result := self

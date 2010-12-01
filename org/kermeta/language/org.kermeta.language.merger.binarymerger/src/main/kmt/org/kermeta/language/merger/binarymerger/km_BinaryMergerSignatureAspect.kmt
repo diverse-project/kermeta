@@ -495,9 +495,11 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					/* Ignore isAspect attribute
 					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 						result := result and self.isAspect == aspectElement.isAspect
-					end
+					end 
+					*/
 				end
 			}
 
