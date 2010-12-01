@@ -1,13 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* $Id: Art2ComponentTexteditorEclipse.java 13484 2010-11-15 14:35:02Z francoisfouquet $
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : November 2010
+ * Authors :
+ *			Didier Vojtisek <didier.vojtisek@inria.fr>
  */
 package org.kermeta.language.api.tests.port;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,19 +22,13 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
-import org.kermeta.language.api.port.PortResourceLoader;
-import org.kermeta.language.api.port.PortResourceLoader.URIType;
+import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
  *
- * @author ffouquet
  */
 public class PortKmBinaryMergerTest extends TestCase {
 
@@ -41,6 +39,7 @@ public class PortKmBinaryMergerTest extends TestCase {
     public String baseName;
     
     public ResourceSet resourceSet;
+    
     
     public Boolean valid;
     public org.kermeta.language.api.port.PortKmBinaryMerger merger = null;
@@ -72,22 +71,22 @@ public class PortKmBinaryMergerTest extends TestCase {
         System.out.println("        with " + aspectFilePath);
         
         
-        ModelingUnit result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(aspectFilePath));
+        ModelingUnitResult result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(aspectFilePath));
         
         EcoreUtil.EqualityHelper eQH = new EcoreUtil.EqualityHelper();
         
         ModelingUnit expectedResult = loadModelingUnit(expectedOutputFilePath);
-        assertTrue("result model not equals to expected output", eQH.equals(result, expectedResult));
+        assertTrue("result model not equals to expected output", eQH.equals(result.getModelingUnit(), expectedResult));
         
         System.out.println(this.valid);
 
-        if (result == null) {
-            assertFalse(this.valid);
+        if (this.valid) {
+            assertFalse("Merger has reported error but expecting none",result.hasSevereProblems());
         } else {
-            assertTrue(this.valid);
+            assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());
         }
         System.out.println("   saving merge result in " + outputFilePath);
-        saveModelingUnit(outputFilePath, result);
+        saveModelingUnit(outputFilePath, result.getModelingUnit());
     }
 
     protected ModelingUnit loadModelingUnit(String modelFilePath){
