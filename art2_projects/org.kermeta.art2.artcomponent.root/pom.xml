@@ -15,7 +15,7 @@
 
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmSSS</maven.build.timestamp.format>
-        <art2.repositories></art2.repositories>
+        <art2.repositories>http://www.kermeta.org/maven2</art2.repositories>
     </properties>
 
     <build>
