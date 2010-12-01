@@ -1,5 +1,5 @@
 /* $Id:$ 
- * Creation : 1 déc. 2010
+ * Creation : 1 dec. 2010
  * Licence  : EPL 
  * Copyright: IRISA/INRIA
  * Authors  : 
