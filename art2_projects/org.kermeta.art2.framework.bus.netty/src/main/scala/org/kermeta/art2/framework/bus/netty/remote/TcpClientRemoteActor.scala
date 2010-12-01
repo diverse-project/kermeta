@@ -69,12 +69,9 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
     var pipeline = Channels.pipeline()
     pipeline.addLast("deflater", new ZlibEncoder(ZlibWrapper.ZLIB))
     pipeline.addLast("inflater", new ZlibDecoder(ZlibWrapper.ZLIB))
-
     pipeline.addLast("decoder", new ObjectDecoder())
     pipeline.addLast("encoder", new ObjectEncoder())
-
     pipeline.addLast("handler", this);
-    pipeline
     pipeline
   }
 
@@ -95,6 +92,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
   override def exceptionCaught(ctx :ChannelHandlerContext, e:ExceptionEvent) {
     logger.error("Unexpected exception from downstream.",e);
   }
+  
   override def handleUpstream(ctx :ChannelHandlerContext, e: ChannelEvent) {
     e match {
       case e : ChannelStateEvent if(e.getState() != ChannelState.INTEREST_OPS) =>logger.info(e.toString())
@@ -105,6 +103,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
 
 
   def getRemoteAddr : InetSocketAddress 
+
 
   private def reconnect() = {
     try {
@@ -142,10 +141,11 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
               sended = sendMessageInternal(b.getChannel,msgi)
               nbTryTest = nbTryTest + 1
             }
-          case _ =>
+          case _ => println("Not already connected")
         }
         //try Loop
         loopWhile(!sended && nbTryTest < nbTryMax){
+          println("Reconnect LOPP")
           reconnect
           reactWithin(timeout) {
             case c : CHANNEL_CONNECTED => sended = sendMessageInternal(c.e.getChannel,msgi);
@@ -153,6 +153,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
           }
           nbTryTest = nbTryTest + 1
 
+          println(nbTryTest)
         }
 
       }
@@ -184,7 +185,7 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
 
   
   //var pauseState = false
-override  def act() = {
+  override  def act() = {
     loop {
       react {
         case PAUSE_ACTOR => {
@@ -218,7 +219,7 @@ override  def act() = {
     exit
   }
 
-  def nbTryMax : Int = 3
+  def nbTryMax : Int = 5
 
 
 }
