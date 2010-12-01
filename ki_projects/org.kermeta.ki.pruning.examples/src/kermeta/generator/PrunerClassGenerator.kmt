@@ -280,14 +280,21 @@ class PrunerClassGenerator inherits Generator {
 	operation generateRequiredAttributes() : String is do
 		result := ""
 
+		var required : Sequence<EReference> init Sequence<EReference>.new
+
+		// Gathering all the source relations.
 		prunerGenerator.pruningData.requiredElements.each{req |
-			req.srcRelations.each{rel |
-				if(not classRequired.contains(rel.relation.eContainingClass)) then
-					result := result + "\treference " + rel.relation.eContainingClass.getRequiredAttributeName() +
-								" : " + rel.relation.eContainingClass.name + "[0..*]\n\n"
-					classRequired.add(rel.relation.eContainingClass)
-				end
-			}
+			req.srcRelations.each{rel | required.add(rel.relation) }
+		}
+		// Selecting the relations: required attributes are class containers of the source relations, but if two classes A and B are sources and
+		// A inherits from B, then only B will be keep.
+		required := required.select{rel | not required.exists{rel2 | rel.eContainingClass.isSuperTypeOf(rel2.eContainingClass) } }
+		required.each{rel |
+			if(not classRequired.contains(rel.eContainingClass)) then
+				result := result + "\treference " + rel.eContainingClass.getRequiredAttributeName() +
+							" : " + rel.eContainingClass.name + "[0..*]\n\n"
+				classRequired.add(rel.eContainingClass)
+			end
 		}
 	end
 
