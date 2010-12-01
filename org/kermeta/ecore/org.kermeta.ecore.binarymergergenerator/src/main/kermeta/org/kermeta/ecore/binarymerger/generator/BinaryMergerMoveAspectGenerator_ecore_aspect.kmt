@@ -139,12 +139,14 @@ aspect class EClass {
 			}
 		end			
 		context.popIndent
+	/*
 		content.append(context.indentString)
 		content.append("else")
 		context.pushIndent
 		content.append(context.indentString)
-		content.append("stdio.writeln(\"   No similar " + self.name + ", its content should have been moved in merged model\")")				
+		content.append("stdio.writeln(\"   No similar " + self.name + ", its content should have been moved in merged model\")")	 			
 		context.popIndent
+	  */
 		content.append(context.indentString)
 		content.append("end")
 		
@@ -256,9 +258,22 @@ aspect class EAttribute {
 			if self.upperBound==1 then
 				content.append(context.indentString)
 				content.append("// select value for unary attribute")
-				content.append(context.indentString)				
-				content.append("self."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
-												"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")				
+				if self.eType.isInstanceOf(ecore::EEnum) then
+					content.append(context.indentString)
+					content.append("// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable")
+					content.append(context.indentString)
+					content.append("if (not self."+mangledName+".isVoid) and (mergedModelElement."+ mangledName + ".isVoid) then")
+					context.pushIndent
+					content.append(context.indentString)
+					content.append("mergedModelElement."+ mangledName + " := self."+mangledName)
+					context.popIndent
+					content.append(context.indentString)
+					content.append("end")
+				else				
+					content.append(context.indentString)				
+					content.append("self."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+													"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")					
+				end		
 			else
 			 	content.append(context.indentString)
 					content.append("stdio.writeln(\" TODO Deal with multiplicity > 1 for EAttribute " + self.name+"\")")		
