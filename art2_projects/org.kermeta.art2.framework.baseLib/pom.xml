@@ -12,6 +12,15 @@
         <version>2.2.1-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <android.platform.version>8</android.platform.version>
+        <android.platform>platforms/android-${android.platform.version}</android.platform>
+        <android.framework.aidl>${android.home}/${android.platform}/framework.aidl</android.framework.aidl>
+        <android.jar>${android.home}/${android.platform}/android.jar</android.jar>
+        <android.tools.aapt>${android.home}/${android.platform}/tools/aapt</android.tools.aapt>
+        <android.tools.dx>${android.home}/${android.platform}/tools/dx</android.tools.dx>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -34,6 +43,48 @@
                         <Export-Package>org.kermeta.art2.framework.baselib.channeltype.*</Export-Package>
                     </instructions>
                 </configuration>
+            </plugin>
+
+
+                <!-- android dex phase -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-dex</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${android.tools.dx}</executable>
+                            <arguments>
+                                <argument>--dex</argument>
+                                <argument>--core-library</argument>
+                                <argument>--output=${project.build.directory}/classes.dex</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.jar</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>prepare-dexed-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${android.tools.aapt}</executable>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <arguments>
+                                <argument>add</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.jar</argument>
+                                <argument>classes.dex</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
