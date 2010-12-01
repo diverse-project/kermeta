@@ -75,6 +75,12 @@ class Resolver
 	end
 	
 	operation resolveFromModelingUnit(toBeResolved : org::kermeta::language::structure::ModelingUnit) : Void is do
+		var modelingUnitName : String
+       	if toBeResolved.name.isVoid() then
+       		modelingUnitName := toBeResolved.toString()
+       	else
+       		modelingUnitName := toBeResolved.name
+       	end
 		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 		var ctxt : StructureVisitorContext init StructureVisitorContext.new
        	
@@ -85,26 +91,35 @@ class Resolver
        	stdio.writeln("		" + toBeResolved.toString() + " resolved")
 	end
 	
-	operation resolveFromPath(path : String) : Void is do
-		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : StructureVisitorContext init StructureVisitorContext.new
-		
+	operation resolveFromPath(path : String) : Void is do	
 		var repository : EMFRepository init EMFRepository.new
 		var unresolvedModelResource : Resource init repository.getResource(path)
 		
-			var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+		var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	
-       	stdio.writeln("		Resolving " + unresolvedModelingUnit.toString())
-       	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
-       	
-       	stdio.writeln("		" + unresolvedModelingUnit.toString() + " resolved")
-       	
-       	var resolvedPath : String init path
-       	resolvedPath.substring(0, resolvedPath.size()-4)
-       	unresolvedModelResource.saveWithNewURI(resolvedPath + "Resolved.km")
-       	
-       	stdio.writeln("		" + unresolvedModelingUnit.toString() + " resolved " + " saved in " + resolvedPath + "Resolved.km")
+       	if not unresolvedModelingUnit.isVoid() then
+       		var modelingUnitName : String
+       		if unresolvedModelingUnit.name.isVoid() then
+       			modelingUnitName := unresolvedModelingUnit.toString()
+       		else
+       			modelingUnitName := unresolvedModelingUnit.name
+       		end
+       		
+       		resolveFromModelingUnit(unresolvedModelingUnit)
+       		var resolvedPath : String init path
+	       	resolvedPath.substring(0, resolvedPath.size()-4)
+	       	unresolvedModelResource.saveWithNewURI(resolvedPath + "Resolved.km")
+	       	
+	       	stdio.writeln("		" + modelingUnitName + " resolved " + " saved in " + resolvedPath + "Resolved.km")
+       	else
+       		var error : String init "Resolver: ModelingUnit to be resolved is void"
+			
+			stdio.writeln(error)
+			
+			/*var except : Exception init Exception.new
+			except.message := error
+			raise except*/
+       	end
 	end
 }
