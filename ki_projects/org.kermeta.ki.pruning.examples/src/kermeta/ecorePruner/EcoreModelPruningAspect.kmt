@@ -3,6 +3,27 @@ require kermeta
 require "EcoreModelPruning.kmt"
 using kermeta::standard
 
+aspect class EClass {
+	method visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
+		super(theEcoreModelPruning, theEClassifiers)
+		self.eSuperTypes.each{theEClass | theEClassifiers.add(theEClass) }
+		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visit(theEcoreModelPruning, theEClassifiers) }
+	end
+
+	method addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
+		self.eSuperTypes.each{theEClass |
+			if(theEClass.visited) then
+				theEcoreModelPruning.oneSuperTypesAdded(self, theEClass)
+			end
+		}
+		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.add(theEcoreModelPruning) }
+	end
+
+	method preparePruning() : Void is do
+		super()
+		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.preparePruning() }
+	end	
+}
 aspect class EClassifier {
 	attribute visited : Boolean
 	
@@ -19,45 +40,26 @@ aspect class EClassifier {
 	operation addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
 	end
 }
-
-aspect class EClass {
-	method visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
-		super(theEcoreModelPruning, theEClassifiers)
-		self.eSuperTypes.each{theEClass | theEClassifiers.add(theEClass) }
-		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visit(theEcoreModelPruning, theEClassifiers) }
-	end
-
-	method preparePruning() : Void is do
-		super()
-		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.preparePruning() }
-	end
-
-	method addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
-		self.eSuperTypes.each{theEClass |
-			if(theEClass.visited) then
-				theEcoreModelPruning.oneSuperTypesAdded(self, theEClass)
-			end
-		}
-		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.add(theEcoreModelPruning) }
-	end
-}
-
-
-aspect class EStructuralFeature {
+aspect class ETypedElement {
 	attribute visited : Boolean
-	
+
 	operation visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
-			if(not self.eContainingClass.visited) then theEClassifiers.add(self.eContainingClass) end
-	end
-	
-	operation add(theEcoreModelPruning : EcoreModelPruning) : Void is do
+		if(not self.eType.visited) then theEClassifiers.add(self.eType) end
 	end
 	
 	operation preparePruning() : Void is do
 		self.visited := false
 	end
 }
-
+aspect class EStructuralFeature {
+	method visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
+		super(theEcoreModelPruning, theEClassifiers)
+		if(not self.eContainingClass.visited) then theEClassifiers.add(self.eContainingClass) end
+	end
+	
+	operation add(theEcoreModelPruning : EcoreModelPruning) : Void is do
+	end
+}
 aspect class EReference {
 	method visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
 		super(theEcoreModelPruning, theEClassifiers)
