@@ -23,5 +23,10 @@ public class ModelingUnitResult extends ErrorProneResult {
 	public void setModelingUnit(ModelingUnit modelingUnit) {
 		this.modelingUnit = modelingUnit;
 	}
+
+	public ModelingUnitResult(ModelingUnit modelingUnit) {
+		super();
+		this.modelingUnit = modelingUnit;
+	}
 	
 }
