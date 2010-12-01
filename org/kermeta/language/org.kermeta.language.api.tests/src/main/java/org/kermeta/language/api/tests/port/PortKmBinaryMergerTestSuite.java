@@ -37,6 +37,7 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
         TestSuite suite = new TestSuite("PortKmBinaryMergerTestSuite");
         try {
             populate(suite, "KmBinaryMerger_Valid", true, mergerClass,".kmt");
+            populate(suite, "KmBinaryMerger_Invalid", false, mergerClass,".kmt");
            // Util.populate(suite, "KMTLoader_Invalid", false, mergerClass,".kmt");
            // Util.populate(suite, "Checker_Valid", true, loaderClass,".kmt");
            // Util.populate(suite, "Checker_Invalid", true, loaderClass,".kmt");
@@ -103,13 +104,13 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
 
                     
                   // System.out.println("outputFolder ? : " + ts.getClass().getClassLoader().getResource("/").getPath());
-                    ts.addTest(new PortKmBinaryMergerTest(currentTestName+"_pa",
+                    ts.addTest(new PortKmBinaryMergerTest(folder+"/"+currentTestName+"_pa",
                              jarPath+"!/"+currentPrimaryFilePath,
                              jarPath+"!/"+currentAspectFilePath,
                              outputFolder+"/"+currentTestName+"_pa.km",
                              jarPath+"!/"+currentExpectedOutputFilePath,
                              valid,p));
-                     ts.addTest(new PortKmBinaryMergerTest(currentTestName+"_ap",
+                     ts.addTest(new PortKmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
                              jarPath+"!/"+currentPrimaryFilePath,
                              jarPath+"!/"+currentAspectFilePath,
                              outputFolder+"/"+currentTestName+"_ap.km",
