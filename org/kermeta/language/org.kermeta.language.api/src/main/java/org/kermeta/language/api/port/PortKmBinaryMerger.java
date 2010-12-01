@@ -8,6 +8,7 @@
 
 package org.kermeta.language.api.port;
 
+import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
@@ -15,5 +16,5 @@ import org.kermeta.language.structure.ModelingUnit;
  */
 public interface PortKmBinaryMerger {
 
-    public ModelingUnit merge(ModelingUnit first_mu, ModelingUnit second_mu);
+    public ModelingUnitResult merge(ModelingUnit first_mu, ModelingUnit second_mu);
 }
