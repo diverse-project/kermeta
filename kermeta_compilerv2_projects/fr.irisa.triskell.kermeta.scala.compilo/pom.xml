@@ -11,101 +11,38 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <scala.version>2.8.0</scala.version>
+        <scala.version>2.8.1</scala.version>
     </properties>
-    <repositories>
-        <repository>
-            <id>scala-tools.org</id>
-            <name>Scala-tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </repository>
-        <repository>
-            <id>repoNetbeans</id>
-            <url>http://bits.netbeans.org/maven2/</url>
-        </repository>
-        <repository>
-            <id>scala-tools.org</id>
-            <name>Scala-tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-snapshots</url>
-        </repository>
-        <repository>
-            <id>kermetaPublicSnapshot</id>
-            <url>http://www.kermeta.org/maven2-snapshots</url>
-        </repository>
-        <repository>
-            <id>kermetaPublic</id>
-            <url>http://www.kermeta.org/maven2</url>
-        </repository>
-        <repository>
-            <id>tipimoussSnapshot</id>
-            <url>http://tipimouss/maven2-snapshots</url>
-        </repository>
-        <repository>
-            <id>tipimouss</id>
-            <url>http://tipimouss/maven2</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>scala-tools.org</id>
-            <name>Scala-tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </pluginRepository>
-    </pluginRepositories>
+
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>resources</directory>
-            </resource>
-        </resources>
-        
-        <!-- <testSourceDirectory>src/test/scala</testSourceDirectory> -->
         <plugins>
+                        <!-- Scala plugin : allow to compile Scala file -->
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
-               
                 <executions>
                     <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
                         <goals>
+                            <goal>add-source</goal>
                             <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <args>
-                        <arg>-make:transitivenocp</arg>
-                        <arg>-dependencyfile</arg>
-                        <arg>${project.build.directory}/.scala_dependencies</arg>
-                    </args>
                     <jvmArgs>
                         <jvmArg>-Xmx1024m</jvmArg>
                     </jvmArgs>
-                    <launchers>
-                        <launcher>
-                            <id>runner</id>
-                            <mainClass>fr.irisa.triskell.kermeta.compilo.scala.Main</mainClass>
-
-                            <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
-                            </jvmArgs>
-                        </launcher>
-                    </launchers>
                 </configuration>
             </plugin>
-
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -141,61 +78,12 @@
                 <version>2.0.1</version>
                 <configuration>
                     <instructions>
-
                         <Private-Package>*</Private-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
                 </configuration>
-                <!--<executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>-->
             </plugin>
-            <!--
-            <plugin>
-                <groupId>com.pyx4me</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.0.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.proguard</groupId>
-                        <artifactId>proguard</artifactId>
-                        <version>4.4</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <proguardVersion>4.4</proguardVersion>
-                    <injar>${project.build.finalName}.jar</injar>
-                    <outjar>${project.build.finalName}_proguard.jar
-                    </outjar>
-                    <outputDirectory>${project.build.directory}
-                    </outputDirectory>
-                    <proguardInclude>${basedir}/proguard.conf
-                    </proguardInclude>
-                    <libs>
-                        <lib>${project.dependencies}
-                        </lib>
-                    </libs>
-                    <obfuscate>false</obfuscate>
-                    <skip>false</skip>
-                    <addMavenDescriptor>false</addMavenDescriptor>
-                    <options></options>
-                </configuration>
-            </plugin>
-            -->
+           
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>truezip-maven-plugin</artifactId>
@@ -314,34 +202,22 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.8.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>${scala.version}</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
-            <version>2.8.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>${scala.version}</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>fr.irisa.triskell</groupId>
-            <artifactId>kermeta.scala.framework</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.0.6</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>0.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
-            <version>RELEASE68</version>
+            <version>RELEASE691</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
@@ -352,11 +228,6 @@
 
 
     <distributionManagement>
-        <!-- <snapshotRepository>
-                        <id>triskell-snapshot</id>
-                        <name>Triskell Snapshot</name>
-                        <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/triskell-snapshots/</url>
-                </snapshotRepository> -->
         <repository>
             <id>tipimouss-local-maven-repository</id>
             <name>Tipimouss Local release repository</name>
@@ -368,6 +239,13 @@
             <url>file:/var/www/html/maven2-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>nb-maven2</id>
+            <url>http://bits.netbeans.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>
 
