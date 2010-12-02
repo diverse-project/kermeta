@@ -57,7 +57,23 @@ aspect class EClass {
 	method binaryMergerPropertyResolverAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		var content : StringBuffer init StringBuffer.new
 		content.append(context.indentString)
-		content.append("aspect class " + self.name + " {")
+		content.append("aspect class " + self.name )
+		if self.eSuperTypes.size()==0 and not context.isMMReflexiveKermeta then
+			content.append(" inherits Mergeable ")
+		end
+		if self.eSuperTypes.size()>0 then
+			content.append(" inherits ")
+			self.eSuperTypes.indexedEach{st, eachcontext|
+			 	if not eachcontext.isFirst then
+			 		content.append(", ")
+			 	end
+				content.append(context.ecoreHelper.getClassifierQualifiedName(st))
+			}
+		 /*	if not context.isMMReflexiveKermeta then
+				content.append(", Mergeable ")
+		 	end */
+		end
+		content.append(" {")
 		
 		context.pushIndent
 		content.append(context.indentString)

@@ -68,6 +68,7 @@ class BinaryMergerPropertyResolverAspectGenerator
 			content.append("require \"" + inputEcoreMetamodel + "\"\n")
 		end
 		content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt\"\n")
+		content.append("require \"platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerException.kmt\"\n")
 		content.append(additionalRequireDirectives)
 		content.append("\n")
 		content.append("using kermeta::language::structure\n")

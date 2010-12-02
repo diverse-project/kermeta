@@ -1,0 +1,32 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::ecore::binarymerger;
+
+
+require kermeta
+require "Mergeable.kmt"
+
+class BinaryMergerException inherits kermeta::exceptions::Exception
+{
+	/** optional, pointer to the primary element that cannot be merged with the aspectElement  */
+	reference primaryElement : Mergeable
+	/** optional, pointer to the aspect element that cannot be merged with the primaryElement */
+	reference aspectElement : Mergeable
+	
+	/**
+	 * build helper
+	 */
+	operation initialize(msg : kermeta::standard::String, primaryElem : Mergeable, aspectElem : Mergeable) : BinaryMergerException is do
+	    message := msg
+	    primaryElement := primaryElem
+	    aspectElement := aspectElem
+		result := self
+	end
+}
