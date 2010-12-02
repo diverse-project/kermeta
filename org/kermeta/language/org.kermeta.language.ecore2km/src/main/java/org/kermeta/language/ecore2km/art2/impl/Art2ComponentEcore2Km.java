@@ -29,10 +29,10 @@ import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortEcore2Km;
 import org.kermeta.language.api.port.PortLexer;
 import org.kermeta.language.api.port.PortResourceLoader;
-import org.kermeta.language.merger.binarymerger.art2.impl.BinaryMerger;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
 import java.util.List;
+import runner.MainRunner;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
