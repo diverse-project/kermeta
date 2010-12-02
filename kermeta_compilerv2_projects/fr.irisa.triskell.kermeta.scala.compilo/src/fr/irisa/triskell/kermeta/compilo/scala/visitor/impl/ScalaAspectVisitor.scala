@@ -66,7 +66,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       //packageName.append(".")
 			
       var res : StringBuilder = new StringBuilder
-      res.append("package "+genpackageName+"\n")
+      res.append("package "+Util.protectScalaKeyword(genpackageName.toString)+"\n")
       res.append("import _root_.kermeta.io._\n")
       res.append("import _root_.kermeta.standard._\n")
       res.append("import _root_.kermeta.standard.JavaConversions._\n")
@@ -77,9 +77,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       if (!Util.hasEcoreTag(par)){
         var res1 : StringBuilder = new StringBuilder
 
-        
-
-        res1.append("package "+genpackageName+"\n")
+        res1.append("package "+Util.protectScalaKeyword(genpackageName.toString)+"\n")
         res1.append("trait ")
         res1.append(par.getName())
 				

@@ -26,7 +26,8 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
             res.append("Aspect")
             this.generateParamerterClass(res)
             if (this.getSuperType.size == 0){//1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
-                res append " extends "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
+                res append " extends "
+                res append Util.protectScalaKeyword(fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo()))
                 // res.append(" with ScalaAspect.org.eclipse.emf.ecore.EObjectAspect")
 //                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             } else {
@@ -52,7 +53,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
                         res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
                         res.append("Aspect")
                         */
-                        res.append(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
+                       res.append(Util.protectScalaKeyword(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition)))
                         generateBindingParamerterClass(superC.asInstanceOf[Class],res)
                         /*}else{
                          res.append(" with ")
