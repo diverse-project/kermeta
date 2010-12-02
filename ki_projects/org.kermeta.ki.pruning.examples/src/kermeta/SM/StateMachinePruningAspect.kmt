@@ -2,13 +2,12 @@ package ex::stateMachine;
 require kermeta
 require "StateMachine.kmt"
 require "StateMachinePruning.kmt"
-
 using kermeta::standard
 
 aspect class OutputState {
-	method visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
-		super(theStateMachinePruning, theInputStates)
-		self.outgoingTransitions.each{theTransition | theTransition.visit(theStateMachinePruning, theInputStates) }
+	method visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
+		super(theStateMachinePruning, theStates)
+		self.outgoingTransitions.each{theTransition | theTransition.visit(theStateMachinePruning, theStates) }
 	end
 
 	method addTransitions(theStateMachinePruning : StateMachinePruning) : Void is do
@@ -24,14 +23,14 @@ aspect class OutputState {
 aspect class Transition {
 	attribute visited : Boolean
 
-	operation visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
-		if(not self.target.visited) then theInputStates.add(self.target) end
+	operation visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
+		if(not self.target.visited) then theStates.add(self.target) end
 	end
 }
 aspect class State {
 	attribute visited : Boolean
 
-	operation visit(theStateMachinePruning : StateMachinePruning, theInputStates : Bag<State>) : Void is do
+	operation visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
 		self.visited := true
 		theStateMachinePruning.onStateAdded(self)
 		theStateMachinePruning.addedStates.add(self)

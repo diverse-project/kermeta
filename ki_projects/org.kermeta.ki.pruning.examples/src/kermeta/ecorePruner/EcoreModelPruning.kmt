@@ -43,14 +43,14 @@ abstract class EcoreModelPruning {
 		from true
 		until (theEClassifiers.empty()) or (currentRadius>radius and radius!=0)
 		loop
-			theEClassifiers.each{theEClass |
-				if(not theEClass.visited) then
-					theEClass.visit(self, theEClassifiers2)
+			theEClassifiers.each{theEClassifier |
+				if(not theEClassifier.visited) then
+					theEClassifier.visit(self, theEClassifiers2)
 				end
 			}
 
 			theEClassifiers.clear()
-			theEClassifiers2.each{theEClass | theEClassifiers.add(theEClass) }
+			theEClassifiers2.each{theEClassifier | theEClassifiers.add(theEClassifier) }
 			theEClassifiers2.clear()
 			currentRadius := currentRadius + 1
 		end

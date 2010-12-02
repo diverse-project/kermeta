@@ -153,7 +153,7 @@ class ModelAspectGenerator inherits Generator {
 		}
 
 		result := result + generateVisitOperation(clazz, isChild)
-		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz)}) then
+		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or clazz.isSuperTypeOf(cl) or cl.isSuperTypeOf(clazz) }) then
 			result := result + "\n" + generateAddRelations(clazz, isChild)
 		end
 		result := result + "}\n"
@@ -246,18 +246,23 @@ class ModelAspectGenerator inherits Generator {
 			result := result + "\t\t" + prunerName + "." + clazz.getAddedSomethingAttributeName() + ".add(self)\n"
 		end
 
-		result := result + generateVisitBodyRelationsExploration(clazz.sourceRelations) +
-					generateVisitBodyRelationsExploration(clazz.targetRelations) + "\tend\n"
+		result := result + generateVisitBodyRelationsExploration(clazz, clazz.sourceRelations) +
+					generateVisitBodyRelationsExploration(clazz, clazz.targetRelations) + "\tend\n"
 	end
 
 
 
-	operation generateVisitBodyRelationsExploration(refs : EReference[0..*]) : String is do
+	operation generateVisitBodyRelationsExploration(currentClazz : EClass, refs : EReference[0..*]) : String is do
 		result := ""
 		
 		refs.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
 			var varName : String init clazzCalled.getVarNameClassifier()
+			var cl : EClass init getVariableTypeFromOperationParameters(currentClazz.visitOperation, clazzCalled)
+
+			if(not cl.isVoid) then
+				clazzCalled := cl
+			end
 
 			if(rel.upperBound==-1 or rel.upperBound>1) then
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " | "
@@ -296,18 +301,39 @@ class ModelAspectGenerator inherits Generator {
 			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
 		end
 
-		result := result + generateVisitNotFocusedBody(clazz.targetRelations) + generateVisitNotFocusedBody(clazz.sourceRelations) + "\tend\n"
+		result := result + generateVisitNotFocusedBody(clazz, clazz.targetRelations) + generateVisitNotFocusedBody(clazz, clazz.sourceRelations) + "\tend\n"
 	end
 
 
-	operation generateVisitNotFocusedBody(refs : EReference[0..*]) : String is do
+	// returns the type of a parameter of the given operation which corresponds to the given class or is a super class of the given class.
+	// In fact, only generic types of parameters are checked and not the type of the parameter.
+	operation getVariableTypeFromOperationParameters(op : EOperation, clazz : EClass) : EClass is do
+		var param : EParameter init op.eParameters.detect{param |
+			(not param.eType.genericType.isVoid).andThen{b |
+				param.eType.genericType==clazz or
+				(param.eType.genericType.isKindOf(EClass) and param.eType.genericType.asType(EClass).isSuperTypeOf(clazz)) }
+		}
+
+		if(param.isVoid) then
+			result := void
+		else
+			result := param.eType.genericType.asType(EClass)
+		end
+	end
+
+
+	operation generateVisitNotFocusedBody(currentClazz : EClass, refs : EReference[0..*]) : String is do
 		result := ""
 
 		refs.each{rel |
 			var clazzCalled : EClass init rel.eType.asType(EClass)
+			var varName : String init clazzCalled.getVarNameClassifier()
+			var cl : EClass init getVariableTypeFromOperationParameters(currentClazz.visitOperation, clazzCalled)
+			if(not cl.isVoid) then
+				clazzCalled := cl
+			end
 
 			if(rel.upperBound==-1 or rel.upperBound>1) then
-				var varName : String init clazzCalled.getVarNameClassifier()
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " | if(not " + varName + ".visited) then " +
 						  clazzCalled.getVarNameSet() + ".add(" + varName + ") end }\n"
 			else

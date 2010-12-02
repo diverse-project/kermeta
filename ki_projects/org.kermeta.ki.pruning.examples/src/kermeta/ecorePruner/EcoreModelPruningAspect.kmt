@@ -26,17 +26,17 @@ aspect class EClass {
 }
 aspect class EClassifier {
 	attribute visited : Boolean
-	
+
 	operation visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
 		self.visited := true
 		theEcoreModelPruning.onEClassifierAdded(self)
 		theEcoreModelPruning.addedEClassifiers.add(self)
 	end
-	
+
 	operation preparePruning() : Void is do
 		self.visited := false
 	end
-	
+
 	operation addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
 	end
 }

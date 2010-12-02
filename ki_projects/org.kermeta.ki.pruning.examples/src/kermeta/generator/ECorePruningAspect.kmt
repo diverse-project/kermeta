@@ -14,6 +14,10 @@ require "PrunerGenerator.kmt"
 using kermeta::standard
 using prunerGenerator
 
+aspect class EClassifier {
+	reference genericType : EClassifier
+}
+
 aspect class EClass {
 	attribute main : Boolean
 	
@@ -25,6 +29,20 @@ aspect class EClass {
 	
 	reference addOperation : EOperation[0..1]
 	
+	// Returns the more upper class compared to the calling class. If there is no upper class,
+	// the calling class is returned.
+	operation getUpperClass(classes : EClass[0..*]) : EClass is do
+		// Getting the first upper class.
+		result := classes.detect{cl | cl.isSuperTypeOf(self) }
+
+		if(result.isVoid) then
+			// If there is no upper class, the calling class is returned.
+			result := self
+		else
+			// Checking that there is no other upper class in the given set.
+			result := result.getUpperClass(classes)
+		end
+	end
 	
 	operation getVarNameClassifier() : String is do
 		result := getVarName(name, false)
@@ -139,13 +157,14 @@ aspect class EClass {
 							end
 						}
 						
-						var pName : String init clazz2.getVarNameSet()
+						var pName : String init clazz.getVarNameSet()
 						if(not op.eParameters.exists{p | p.name==pName}) then
 							// Creation of the parameter.
 							param := EParameter.new
 							param.name := pName // The name created using the real type of the class.
 							param.eType := EClass.new
 							param.eType.name := "Bag<" + clazz.name + ">" // The deduced type of the parameter.
+							param.eType.genericType := clazz
 							op.eParameters.add(param)
 						end
 					end
