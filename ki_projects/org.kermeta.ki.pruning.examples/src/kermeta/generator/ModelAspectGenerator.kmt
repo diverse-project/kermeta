@@ -199,6 +199,12 @@ class ModelAspectGenerator inherits Generator {
 			// For not recursive relations.
 				result := result + "\t\tself." + rel.name + ".each{" + varName + " |\n\t\t\tif(not " + varName + ".visited"
 				result := result + generateCodeExists(clazzRel.targetRelations, varName) + generateCodeExists(clazzRel.sourceRelations, varName)
+				// Relations of super types of the current clazz must be tested too.
+				prunerGenerator.mainClasses.each{cl |
+					if(cl.isSuperTypeOf(clazzRel)) then
+						result := result + generateCodeExists(cl.targetRelations, varName) + generateCodeExists(cl.sourceRelations, varName)
+					end
+				}
 				result := result + ") then\n\t\t\t\t" + varName + ".visited := true\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".on" + clazzRel.name + "Added(" + varName + ")\n\t\t\t\t" + prunerGenerator.getPrunerVarName() +
 							".added" + clazzRel.name + "s.add(" + varName + ")\n\t\t\tend\n\t\t}\n"
@@ -346,7 +352,7 @@ class ModelAspectGenerator inherits Generator {
 
 
 	operation generateVisitOperation(clazz : EClass, isChild : Boolean) : String is do
-		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz) } ) then
+		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or cl.isSuperTypeOf(clazz) or clazz.isSuperTypeOf(cl) } ) then
 			result := generateVisitOperationFocusedClass(clazz, isChild)
 		else
 			result := generateVisitOperationNotFocusedClass(clazz, isChild)

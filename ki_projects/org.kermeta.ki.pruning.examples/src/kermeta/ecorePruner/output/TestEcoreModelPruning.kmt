@@ -1,0 +1,99 @@
+/*
+ * Creation : November 24, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "ecore::Test"
+@mainOperation "main"
+
+package ecore;
+
+require kermeta
+require "EcoreModelPruning.kmt"
+
+using kermeta::standard
+
+
+class PrintEcoreModelPruning inherits EcoreModelPruning {
+	method onEClassifierAdded(theEClassifier : EClassifier) : Void is do
+		stdio.writeln("EClassifier:" + theEClassifier.name)
+	end
+	method onEStructuralFeatureAdded(theEStructuralFeature : EStructuralFeature) : Void is do
+		stdio.writeln("EStructuralFeature:" + theEStructuralFeature.name)
+	end
+	method oneSuperTypesAdded(theEClassSrc : EClass, theEClassTar : EClass) : Void is do
+		stdio.writeln("SuperType:" + theEClassSrc.name + " " + theEClassTar.name)
+	end
+}
+
+
+class Test {
+	operation main() : Void is do
+		var requiredClasss : Bag<EClass> init Bag<EClass>.new
+		var requiredRefs : Bag<EStructuralFeature> init Bag<EStructuralFeature>.new
+		var pkg : EPackage init createModel(requiredClasss, requiredRefs)
+		
+		var pruning : PrintEcoreModelPruning init PrintEcoreModelPruning.new.initialise(pkg, requiredClasss, requiredRefs, 1).asType(PrintEcoreModelPruning)
+		
+		pruning.launch()
+	end
+	
+	
+	operation createModel(requiredClasss : Bag<EClass>, requiredRefs : Bag<EStructuralFeature>) : EPackage is do
+		result := EPackage.new
+
+		var c1 : EClass init EClass.new
+		var c2 : EClass init EClass.new
+		var c3 : EClass init EClass.new
+		var c4 : EClass init EClass.new
+		var c5 : EClass init EClass.new
+		var c6 : EClass init EClass.new
+		var c7 : EClass init EClass.new
+		var c8 : EClass init EClass.new
+		var p1 : EReference init EReference.new
+		var p2 : EReference init EReference.new
+		var p3 : EReference init EReference.new
+		var p4 : EReference init EReference.new
+
+		c1.name := "c1"
+		result.eClassifiers.add(c1)
+		c2.name := "c2"
+		result.eClassifiers.add(c2)
+		c3.name := "c3"
+		result.eClassifiers.add(c3)
+		c4.name := "c4"
+		result.eClassifiers.add(c4)
+		c5.name := "c5"
+		result.eClassifiers.add(c5)
+		c6.name := "c6"
+		result.eClassifiers.add(c6)
+		c7.name := "c7"
+		result.eClassifiers.add(c7)
+		c8.name := "c8"
+		result.eClassifiers.add(c8)
+
+		c1.eSuperTypes.add(c2)
+		c2.eSuperTypes.add(c3)
+		c3.eSuperTypes.add(c6)
+		c7.eSuperTypes.add(c8)
+		
+		p1.name := "p1"
+		p1.eType := c2
+		c5.eStructuralFeatures.add(p1)
+		p2.name := "p2"
+		p2.eType := c3
+		c4.eStructuralFeatures.add(p2)
+		p2.eOpposite := p3
+		p3.name := "p3"
+		p3.eType := c4
+		c3.eStructuralFeatures.add(p3)
+		p3.eOpposite := p2
+		p4.name := "p4"
+		p4.eType := c4
+		c4.eStructuralFeatures.add(p4)
+		
+		requiredClasss.add(c7)
+		requiredRefs.add(p1)
+	end 
+}

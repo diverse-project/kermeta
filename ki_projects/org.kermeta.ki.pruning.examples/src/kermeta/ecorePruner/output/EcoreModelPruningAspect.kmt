@@ -1,5 +1,6 @@
 package ecore;
 require kermeta
+require "platform:/resource/org.kermeta.ki.pruning.examples/src/kermeta/ecorePruner/Ecore.ecore"
 require "EcoreModelPruning.kmt"
 using kermeta::standard
 
@@ -10,13 +11,19 @@ aspect class EClass {
 		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visit(theEcoreModelPruning, theEClassifiers) }
 	end
 
-	method addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
+	method addEClasss(theEcoreModelPruning : EcoreModelPruning) : Void is do
 		self.eSuperTypes.each{theEClass |
 			if(theEClass.visited) then
 				theEcoreModelPruning.oneSuperTypesAdded(self, theEClass)
 			end
 		}
-		self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.add(theEcoreModelPruning) }
+		self.eStructuralFeatures.each{theEStructuralFeature |
+			if(not theEStructuralFeature.visited and (theEStructuralFeature.eContainingClass.isVoid or theEStructuralFeature.eContainingClass.visited) and (theEStructuralFeature.eType.isVoid or theEStructuralFeature.eType.visited)) then
+				theEStructuralFeature.visited := true
+				theEcoreModelPruning.onEStructuralFeatureAdded(theEStructuralFeature)
+				theEcoreModelPruning.addedEStructuralFeatures.add(theEStructuralFeature)
+			end
+		}
 	end
 
 	method preparePruning() : Void is do
@@ -33,7 +40,7 @@ aspect class EClassifier {
 		theEcoreModelPruning.addedEClassifiers.add(self)
 	end
 
-	operation addEClassifiers(theEcoreModelPruning : EcoreModelPruning) : Void is do
+	operation addEClasss(theEcoreModelPruning : EcoreModelPruning) : Void is do
 	end
 
 	operation preparePruning() : Void is do
@@ -59,13 +66,5 @@ aspect class EStructuralFeature {
 
 	method preparePruning() : Void is do
 		super()
-	end
-
-	operation add(theEcoreModelPruning : EcoreModelPruning) : Void is do
-		if(not visited and eContainingClass.visited and eType.visited) then
-			visited := true
-			theEcoreModelPruning.onEStructuralFeatureAdded(self)
-			theEcoreModelPruning.addedEStructuralFeatures.add(self)
-		end
 	end
 }

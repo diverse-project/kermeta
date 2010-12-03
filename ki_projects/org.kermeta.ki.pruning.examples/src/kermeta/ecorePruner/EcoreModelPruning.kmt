@@ -59,7 +59,7 @@ abstract class EcoreModelPruning {
 	end
 
 	operation preparePruning() : Void is do
-		theEPackage.eClassifiers.each{theEClassifier | theEClassifier.preparePruning() }
+		self.theEPackage.eClassifiers.each{theEClassifier | theEClassifier.preparePruning() }
 	end
 
 	operation onEClassifierAdded(theEClassifier : EClassifier) : Void is abstract
