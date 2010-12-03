@@ -15,7 +15,7 @@ using org::kermeta::ecore::binarymerger
 package kermeta {
 	package language {
 		package behavior {
-			aspect class Assignment inherits Mergeable {
+			aspect class Assignment inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -46,7 +46,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Expression inherits Mergeable {
+			aspect class Expression inherits org::kermeta::language::structure::Object, org::kermeta::language::structure::TypeContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -90,7 +90,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallExpression inherits Mergeable {
+			aspect class CallExpression inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -132,7 +132,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Block inherits Mergeable {
+			aspect class Block inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -185,7 +185,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallVariable inherits Mergeable {
+			aspect class CallVariable inherits org::kermeta::language::behavior::CallExpression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
@@ -214,7 +214,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallFeature inherits Mergeable {
+			aspect class CallFeature inherits org::kermeta::language::behavior::CallExpression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
@@ -244,7 +244,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallSuperOperation inherits Mergeable {
+			aspect class CallSuperOperation inherits org::kermeta::language::behavior::CallExpression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
@@ -271,7 +271,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallResult inherits Mergeable {
+			aspect class CallResult inherits org::kermeta::language::behavior::CallVariable {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallVariable is do
 					super(context)
 
@@ -298,7 +298,7 @@ package kermeta {
 				end
 			}
 
-			aspect class CallValue inherits Mergeable {
+			aspect class CallValue inherits org::kermeta::language::behavior::CallExpression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallExpression is do
 					super(context)
 
@@ -325,7 +325,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Conditional inherits Mergeable {
+			aspect class Conditional inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -355,7 +355,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Raise inherits Mergeable {
+			aspect class Raise inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -383,7 +383,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Rescue inherits Mergeable {
+			aspect class Rescue inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -430,7 +430,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeReference inherits Mergeable {
+			aspect class TypeReference inherits org::kermeta::language::structure::MultiplicityElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
@@ -446,7 +446,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Literal inherits Mergeable {
+			aspect class Literal inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -473,7 +473,7 @@ package kermeta {
 				end
 			}
 
-			aspect class EmptyExpression inherits Mergeable {
+			aspect class EmptyExpression inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -500,7 +500,7 @@ package kermeta {
 				end
 			}
 
-			aspect class JavaStaticCall inherits Mergeable {
+			aspect class JavaStaticCall inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -544,7 +544,7 @@ package kermeta {
 				end
 			}
 
-			aspect class LambdaExpression inherits Mergeable {
+			aspect class LambdaExpression inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -585,7 +585,7 @@ package kermeta {
 				end
 			}
 
-			aspect class LambdaParameter inherits Mergeable {
+			aspect class LambdaParameter inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -619,7 +619,7 @@ package kermeta {
 				end
 			}
 
-			aspect class IntegerLiteral inherits Mergeable {
+			aspect class IntegerLiteral inherits org::kermeta::language::behavior::Literal {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
@@ -648,7 +648,7 @@ package kermeta {
 				end
 			}
 
-			aspect class StringLiteral inherits Mergeable {
+			aspect class StringLiteral inherits org::kermeta::language::behavior::Literal {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
@@ -677,7 +677,7 @@ package kermeta {
 				end
 			}
 
-			aspect class BooleanLiteral inherits Mergeable {
+			aspect class BooleanLiteral inherits org::kermeta::language::behavior::Literal {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
@@ -706,7 +706,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeLiteral inherits Mergeable {
+			aspect class TypeLiteral inherits org::kermeta::language::behavior::Literal {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
@@ -734,7 +734,7 @@ package kermeta {
 				end
 			}
 
-			aspect class VoidLiteral inherits Mergeable {
+			aspect class VoidLiteral inherits org::kermeta::language::behavior::Literal {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Literal is do
 					super(context)
 
@@ -761,7 +761,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Loop inherits Mergeable {
+			aspect class Loop inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -791,7 +791,7 @@ package kermeta {
 				end
 			}
 
-			aspect class SelfExpression inherits Mergeable {
+			aspect class SelfExpression inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -818,7 +818,7 @@ package kermeta {
 				end
 			}
 
-			aspect class VariableDecl inherits Mergeable {
+			aspect class VariableDecl inherits org::kermeta::language::behavior::Expression {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::Expression is do
 					super(context)
 
@@ -855,7 +855,7 @@ package kermeta {
 		package structure {
 
 
-			aspect class Object inherits Mergeable {
+			aspect class Object inherits Mergeable  {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 					var mergedModelElement : org::kermeta::language::structure::Object
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Object)
@@ -881,7 +881,7 @@ package kermeta {
 			}
 
 
-			aspect class Operation inherits Mergeable {
+			aspect class Operation inherits org::kermeta::language::structure::MultiplicityElement, org::kermeta::language::structure::AbstractOperation {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
@@ -952,7 +952,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Property inherits Mergeable {
+			aspect class Property inherits org::kermeta::language::structure::MultiplicityElement, org::kermeta::language::structure::AbstractProperty {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
@@ -997,7 +997,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Type inherits Mergeable {
+			aspect class Type inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1028,7 +1028,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeContainer inherits Mergeable {
+			aspect class TypeContainer inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1072,7 +1072,7 @@ package kermeta {
 				end
 			}
 
-			aspect class EnumerationLiteral inherits Mergeable {
+			aspect class EnumerationLiteral inherits org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
@@ -1086,7 +1086,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeVariableBinding inherits Mergeable {
+			aspect class TypeVariableBinding inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -1100,7 +1100,7 @@ package kermeta {
 				end
 			}
 
-			aspect class MultiplicityElement inherits Mergeable {
+			aspect class MultiplicityElement inherits org::kermeta::language::structure::TypedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypedElement is do
 					super(context)
 
@@ -1124,7 +1124,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeDefinition inherits Mergeable {
+			aspect class TypeDefinition inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
@@ -1166,7 +1166,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Class inherits Mergeable {
+			aspect class Class inherits org::kermeta::language::structure::ParameterizedType {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ParameterizedType is do
 					super(context)
 
@@ -1180,7 +1180,7 @@ package kermeta {
 				end
 			}
 
-			aspect class DataType inherits Mergeable {
+			aspect class DataType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::TypeDefinition {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
@@ -1224,7 +1224,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Enumeration inherits Mergeable {
+			aspect class Enumeration inherits org::kermeta::language::structure::DataType {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::DataType is do
 					super(context)
 
@@ -1281,7 +1281,7 @@ package kermeta {
 				end
 			}
 
-			aspect class NamedElement inherits Mergeable {
+			aspect class NamedElement inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1314,7 +1314,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Package inherits Mergeable {
+			aspect class Package inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinitionContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
@@ -1356,7 +1356,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Parameter inherits Mergeable {
+			aspect class Parameter inherits org::kermeta::language::structure::MultiplicityElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
 					super(context)
 
@@ -1372,7 +1372,7 @@ package kermeta {
 				end
 			}
 
-			aspect class PrimitiveType inherits Mergeable {
+			aspect class PrimitiveType inherits org::kermeta::language::structure::DataType {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::DataType is do
 					super(context)
 
@@ -1416,7 +1416,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypedElement inherits Mergeable {
+			aspect class TypedElement inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -1433,7 +1433,7 @@ package kermeta {
 			}
 
 
-			aspect class Tag inherits Mergeable {
+			aspect class Tag inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1468,7 +1468,7 @@ package kermeta {
 				end
 			}
 
-			aspect class AbstractProperty inherits Mergeable {
+			aspect class AbstractProperty inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1499,7 +1499,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Constraint inherits Mergeable {
+			aspect class Constraint inherits org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
@@ -1525,7 +1525,7 @@ package kermeta {
 			}
 
 
-			aspect class ClassDefinition inherits Mergeable {
+			aspect class ClassDefinition inherits org::kermeta::language::structure::GenericTypeDefinition {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::GenericTypeDefinition is do
 					super(context)
 
@@ -1594,7 +1594,7 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits Mergeable {
+			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinitionContainer is do
 					super(context)
 
@@ -1636,7 +1636,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeDefinitionContainer inherits Mergeable {
+			aspect class TypeDefinitionContainer inherits org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::NamedElement is do
 					super(context)
 
@@ -1663,7 +1663,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Require inherits Mergeable {
+			aspect class Require inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1696,7 +1696,7 @@ package kermeta {
 				end
 			}
 
-			aspect class GenericTypeDefinition inherits Mergeable {
+			aspect class GenericTypeDefinition inherits org::kermeta::language::structure::TypeDefinition {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinition is do
 					super(context)
 
@@ -1736,7 +1736,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ParameterizedType inherits Mergeable {
+			aspect class ParameterizedType inherits org::kermeta::language::structure::Type {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
@@ -1776,7 +1776,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeVariable inherits Mergeable {
+			aspect class TypeVariable inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Type, org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -1792,7 +1792,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ObjectTypeVariable inherits Mergeable {
+			aspect class ObjectTypeVariable inherits org::kermeta::language::structure::TypeVariable {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeVariable is do
 					super(context)
 
@@ -1808,7 +1808,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ModelType inherits Mergeable {
+			aspect class ModelType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::Model {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
@@ -1852,7 +1852,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ModelTypeVariable inherits Mergeable {
+			aspect class ModelTypeVariable inherits org::kermeta::language::structure::TypeVariable {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeVariable is do
 					super(context)
 
@@ -1881,7 +1881,7 @@ package kermeta {
 				end
 			}
 
-			aspect class VirtualType inherits Mergeable {
+			aspect class VirtualType inherits org::kermeta::language::structure::ObjectTypeVariable {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ObjectTypeVariable is do
 					super(context)
 
@@ -1910,7 +1910,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Model inherits Mergeable {
+			aspect class Model inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1941,7 +1941,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Resource inherits Mergeable {
+			aspect class Resource inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -1972,7 +1972,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ResourceGroup inherits Mergeable {
+			aspect class ResourceGroup inherits org::kermeta::language::structure::Resource {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
 					super(context)
 
@@ -1986,7 +1986,7 @@ package kermeta {
 				end
 			}
 
-			aspect class SimpleResource inherits Mergeable {
+			aspect class SimpleResource inherits org::kermeta::language::structure::Resource {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
 					super(context)
 
@@ -2002,7 +2002,7 @@ package kermeta {
 				end
 			}
 
-			aspect class AbstractOperation inherits Mergeable {
+			aspect class AbstractOperation inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -2033,7 +2033,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedType inherits Mergeable {
+			aspect class UnresolvedType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::Unresolved {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
@@ -2075,7 +2075,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Unresolved inherits Mergeable {
+			aspect class Unresolved inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -2106,7 +2106,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedProperty inherits Mergeable {
+			aspect class UnresolvedProperty inherits org::kermeta::language::structure::AbstractProperty, org::kermeta::language::structure::Unresolved {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractProperty is do
 					super(context)
 
@@ -2122,7 +2122,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedOperation inherits Mergeable {
+			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractOperation is do
 					super(context)
 
@@ -2138,7 +2138,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Using inherits Mergeable {
+			aspect class Using inherits org::kermeta::language::structure::Object {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
 					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
 
@@ -2173,7 +2173,7 @@ package kermeta {
 				end
 			}
 
-			aspect class ProductType inherits Mergeable {
+			aspect class ProductType inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Type {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -2187,7 +2187,7 @@ package kermeta {
 				end
 			}
 
-			aspect class FunctionType inherits Mergeable {
+			aspect class FunctionType inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Type {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -2201,7 +2201,7 @@ package kermeta {
 				end
 			}
 
-			aspect class VoidType inherits Mergeable {
+			aspect class VoidType inherits org::kermeta::language::structure::Type {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					super(context)
 
@@ -2215,7 +2215,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeMapping inherits Mergeable {
+			aspect class TypeMapping inherits org::kermeta::language::structure::TypeContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					super(context)
 
@@ -2233,7 +2233,7 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass inherits Mergeable {
+		aspect class DummyClass inherits Mergeable  {
 			method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 				var mergedModelElement : org::kermeta::language::DummyClass
 				mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::DummyClass)
@@ -2248,7 +2248,7 @@ package kermeta {
 	}
 
 
-	aspect class DummyClass inherits Mergeable {
+	aspect class DummyClass inherits Mergeable  {
 		method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 			var mergedModelElement : org::kermeta::DummyClass
 			mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::DummyClass)
@@ -2263,7 +2263,7 @@ package kermeta {
 }
 
 
-aspect class DummyClass inherits Mergeable {
+aspect class DummyClass inherits Mergeable  {
 	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
 		var mergedModelElement : org::DummyClass
 		mergedModelElement := self.similarElementInMergedModel.asType(org::DummyClass)

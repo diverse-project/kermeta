@@ -30,11 +30,18 @@ using org::kermeta::language::structure
 class BinaryMerger
 {
 	operation main() : Void is do 
-		test_001_a
+		//test_001_a
+		test_invalid_001
 		/*test_001_b
 		test_001_c
 		test_001_d*/
 		stdio.writeln("Done")
+	end
+	
+	reference errors : org::kermeta::ecore::binarymerger::BinaryMergerException[*]
+	
+	operation getErrors() : OrderedSet<org::kermeta::ecore::binarymerger::BinaryMergerException> is do
+		result := errors
 	end
 	
 	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
@@ -43,10 +50,12 @@ class BinaryMerger
 		// primaryModelModelingUnit is now used as mergedModel
 		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit		
 		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
-		
 		var context : org::kermeta::ecore::binarymerger::BinaryMergerContext init org::kermeta::ecore::binarymerger::BinaryMergerContext.new
-		
-		aspectModelModelingUnit.binaryMerger_MoveToMergedModel(context)
+		do 
+			aspectModelModelingUnit.binaryMerger_MoveToMergedModel(context)
+		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+			errors.add(mergeException)
+		end
 		/* aspectModelModelingUnit.eachOwnedElement{ c |
 				c.binaryMerger_MoveToMergedModel(context)}
 		 mergedModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
@@ -65,8 +74,8 @@ class BinaryMerger
 		stdio.writeln("test_001()...")
 		var repository : EMFRepository init EMFRepository.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/primary/AB.km")
-       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/test_001/aspect/Aatt.km")
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/valid_001/primary/AB.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/valid_001/aspect/Aatt.km")
        	
        	var pmModelingUnit : ModelingUnit 
        	pmModelingUnit ?= primaryModelResource.one
@@ -85,12 +94,12 @@ class BinaryMerger
        	mergedModelResource.save
 		stdio.writeln("test_001_a() Done")
 	end
-	operation test_001_2() : Void is do 
+	operation test_invalid_001() : Void is do 
 		stdio.writeln("test_001()...")
 		var repository : EMFRepository init EMFRepository.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file1.km")
-       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.merger.binarymerger/src/test/resources/test_001/file2.km")
+   		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Invalid/invalid_001_merge_non_aspect_classes/primary/AB.km")
+       	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Invalid/invalid_001_merge_non_aspect_classes/aspect/Aatt.km")
        	
        	var pmModelingUnit : ModelingUnit 
        	pmModelingUnit ?= primaryModelResource.one
@@ -101,7 +110,7 @@ class BinaryMerger
        	var mergedModelingUnit : ModelingUnit
        	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
-       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/file_1_2.km",
+       	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/invalid_001/km/001_ABatt.km",
        		"platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
        	primaryModelResource.remove(mergedModelingUnit)
        	mergedModelResource.add(mergedModelingUnit)

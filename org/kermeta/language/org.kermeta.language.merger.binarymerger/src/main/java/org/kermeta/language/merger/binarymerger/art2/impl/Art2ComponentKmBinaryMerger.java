@@ -23,11 +23,17 @@ import org.kermeta.art2.annotation.ThirdParties;
 import org.kermeta.art2.annotation.ThirdParty;
 import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
+import org.kermeta.language.api.messaging.ProblemMessage;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.merger.BinaryMerger;
+import org.kermeta.language.merger.BinaryMergerAspect;
+import org.kermeta.ecore.binarymerger.BinaryMergerException;
+import org.kermeta.ecore.binarymerger.BinaryMergerExceptionAspect;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.traceability.ModelReference;
+import org.kermeta.traceability.TraceabilityFactory;
 import org.osgi.framework.Bundle;
 import runner.MainRunner;
 
@@ -100,6 +106,19 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
 
         BinaryMerger merger = org.kermeta.language.merger.RichFactory.createBinaryMerger();
         ModelingUnitResult result = new ModelingUnitResult(merger.merge(first_mu, second_mu));
+        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
+        for (Object o : mergerAspect.getErrors()) {
+        	if(o instanceof BinaryMergerExceptionAspect){
+        		BinaryMergerExceptionAspect e = (BinaryMergerExceptionAspect) o;
+        		ModelReference modelRef = TraceabilityFactory.eINSTANCE.createModelReference();
+        		modelRef.setRefObject(e.aspectElement());
+        		// TODO bug, the nested exception isn't the correct one, I don't know how to cast the BinaryMergerExceptionAspect into a classic java Exception
+        		//ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", e, modelRef);
+        		ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", null, modelRef);
+        		result.getProblems().add(pm);
+        		// TODO also send the problem to a log port ?
+        	}
+		}
         return result;
     }
 }
