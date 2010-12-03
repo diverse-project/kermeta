@@ -15,7 +15,7 @@ using kermeta::standard
 
 class PrunerClassGenerator inherits Generator {
 	reference classContainer : EClass[0..*]
-	
+
 	reference classRequired : EClass[0..*]
 
 	reference classAdded : EClass[0..*]
@@ -49,57 +49,51 @@ class PrunerClassGenerator inherits Generator {
 	operation generatePreparePruningOperation() : String is do
 		result := "\toperation preparePruning() : Void is do\n"
 
+		var paths : Bag<String> init Bag<String>.new
+		var path : String
+		
 		// Initialisation of the "visited" attribute to false.
 		prunerGenerator.pruningData.requiredElements.each{elt |
 			elt.origins.each{origin |
-				// Adding the name of the root element of the metamodel.
-				if(origin.path.size()>0) then
-					result := result + "\t\t" + origin.path.first().eContainingClass.getVarNameClassifier()
-				end
-
-				// The brackets variable will be used to close the "each" closures used to explore the metamodel
-				// in order to initialise the "visited" attribute.
-				var brackets : String init ""
-
-				// For each relations of the path, a "each" closure is created to navigate into the metamodel.
-				origin.path.each{ref |
-					var name : String init ref.eType.asType(EClass).getVarNameClassifier()
-					result := result + "." + ref.name
-
-					if(ref.upperBound!=1) then
-						result := result + ".each{" + name + " | " + name
-						brackets := brackets + " }"
+				origin.path.each{rel |
+					if(classContainer.contains(rel.eContainingClass)) then
+						if(rel.upperBound==1) then
+							path := "\t\tif(not self." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + ".isVoid) then" + 
+									"self." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + ".preparePruning() end\n"
+						else
+							var nameVar : String init rel.eType.asType(EClass).getVarNameClassifier()
+							path := "\t\tself." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
+									".each{" + nameVar + " | " + nameVar + ".preparePruning() }\n"
+						end
+						
+						if(not paths.contains(path)) then
+							paths.add(path)
+							result := result + path
+						end
 					end
 				}
-
-				// setting attribute "visited" and closing the closures.
-				result := result + ".visited := false" + brackets + "\n"
 			}
-
+		
 			// Generating of the calls that initialise the opposite relations.
 			elt.srcRelations.each{source |
 				if(source.createOpposite) then// If the opposite is created.
 					elt.origins.each{origin |
-						var rel : EReference init origin.path.last()
-						var clazz : EClass init rel.eType.asType(EClass)
-
-						// If the current origin matches the source.
-						if(clazz==source.relation.eType or clazz.isSuperTypeOf(source.relation.eType.asType(EClass))) then
-							var name : String init clazz.getVarNameClassifier()
-							var brackets : String init ""
-							result := result + "\t\t" + origin.path.first().eContainingClass.getVarNameClassifier()
-
-							origin.path.each{ref |
-								var name2 : String init ref.eType.asType(EClass).getVarNameClassifier()
-								result := result + "." + ref.name
-
-								if(ref.upperBound!=1) then
-									result := result + ".each{" + name2 + " | " + name2
-									brackets := brackets + " }"
-								end
-							}
-
-							result := result + ".initialise" + source.relation.name + "()" + brackets + "\n"
+						var rel : EReference init origin.path.first()
+						
+						if(classContainer.contains(rel.eContainingClass)) then
+							if(rel.upperBound==1) then
+								path := "\t\tif(not self." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + ".isVoid) then " + 
+										"self." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + ".initialise" + source.relation.name + "() end\n"
+							else
+								var nameVar : String init rel.eType.asType(EClass).getVarNameClassifier()
+								path := "\t\tself." + rel.eContainingClass.getVarNameClassifier() + "." + rel.name + 
+										".each{" + nameVar + " | " + nameVar + ".initialise" + source.relation.name + "() }\n"
+							end
+							
+							if(not paths.contains(path)) then
+								paths.add(path)
+								result := result + path
+							end
 						end
 					}
 				end

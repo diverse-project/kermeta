@@ -21,4 +21,8 @@ aspect class Clazz {
 			end
 		}
 	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
+	end
 }

@@ -29,6 +29,46 @@ aspect class EClass {
 	
 	reference addOperation : EOperation[0..1]
 	
+	attribute prepareOperationCode : String
+
+
+	// Creates the operation that initialises the class.
+	operation createPrepareOperation(prunerGenerator : PrunerGenerator) : Void is do
+		var isChild : Boolean init prunerGenerator.mainClasses.exists{cl |
+			if(cl.isSuperTypeOf(self)) then
+				cl.main := true
+				true
+			else
+				false
+			end
+		}
+		if(isChild) then
+			prepareOperationCode := "\tmethod preparePruning() : Void is do\n\t\tsuper()\n"
+		else
+			prepareOperationCode := "\toperation preparePruning() : Void is do\n\t\tself.visited := false\n"
+		end
+
+		prunerGenerator.pruningData.requiredElements.each{elt |
+			elt.origins.each{origin |
+				origin.path.each{rel |
+					if(rel.eContainingClass==self) then
+						if(rel.upperBound==1) then
+							prepareOperationCode := prepareOperationCode + "\t\tif(not self." + rel.name + ".isVoid) then " + 
+													"self." + rel.name + ".preparePruning() end\n"
+						else
+							var nameVar : String init rel.eType.asType(EClass).getVarNameClassifier()
+							prepareOperationCode := prepareOperationCode + "\t\tself." + rel.name + 
+													".each{" + nameVar + " | " + nameVar + ".preparePruning() }\n"
+						end
+					end
+				}
+			}
+		}
+
+		prepareOperationCode := prepareOperationCode + "\tend\n"
+	end
+	
+	
 	// Returns the more upper class compared to the calling class. If there is no upper class,
 	// the calling class is returned.
 	operation getUpperClass(classes : EClass[0..*]) : EClass is do

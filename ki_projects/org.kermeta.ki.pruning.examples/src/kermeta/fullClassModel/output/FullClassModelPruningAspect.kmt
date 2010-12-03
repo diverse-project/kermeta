@@ -29,6 +29,11 @@ aspect class Clazz {
 			end
 		}
 	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
+		self.properties.each{theProperty | theProperty.preparePruning() }
+	end
 }
 aspect class Property {
 	attribute visited : Boolean
@@ -36,5 +41,9 @@ aspect class Property {
 	operation visit(theFullClassModelPruning : FullClassModelPruning, theClazzs : Bag<Clazz>) : Void is do
 		if(not self.owner.visited) then theClazzs.add(self.owner) end
 		if(not self.type.visited) then theClazzs.add(self.type) end
+	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
 	end
 }

@@ -50,7 +50,7 @@ abstract class ClassModelPruning {
 	end
 
 	operation preparePruning() : Void is do
-		theClassModel.classes.each{theClazz | theClazz.visited := false }
+		self.theClassModel.classes.each{theClazz | theClazz.preparePruning() }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract

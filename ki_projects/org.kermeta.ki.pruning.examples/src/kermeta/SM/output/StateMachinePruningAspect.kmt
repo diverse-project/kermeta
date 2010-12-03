@@ -19,12 +19,20 @@ aspect class OutputState {
 			end
 		}
 	end
+
+	method preparePruning() : Void is do
+		super()
+	end
 }
 aspect class Transition {
 	attribute visited : Boolean
 
 	operation visit(theStateMachinePruning : StateMachinePruning, theStates : Bag<State>) : Void is do
 		if(not self.target.visited) then theStates.add(self.target) end
+	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
 	end
 }
 aspect class State {
@@ -37,5 +45,9 @@ aspect class State {
 	end
 
 	operation addTransitions(theStateMachinePruning : StateMachinePruning) : Void is do
+	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
 	end
 }

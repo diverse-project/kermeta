@@ -55,11 +55,15 @@ abstract class MappingModelPruning {
 	end
 
 	operation preparePruning() : Void is do
-		theMappingModel.src.classes.each{theClazz | theClazz.visited := false }
-		theMappingModel.target.classes.each{theClazz | theClazz.visited := false }
-		theMappingModel.mappings.each{theMapping | theMapping.visited := false }
-		theMappingModel.mappings.each{theMapping | theMapping.initialisesrcsOpposite() }
-		theMappingModel.mappings.each{theMapping | theMapping.initialisetargetsOpposite() }
+		if(not self.theMappingModel.src.isVoid) thenself.theMappingModel.src.preparePruning() end
+		if(not self.theMappingModel.target.isVoid) thenself.theMappingModel.target.preparePruning() end
+		self.theMappingModel.mappings.each{theMapping | theMapping.preparePruning() }
+		if(not self.theMappingModel.src.isVoid) then self.theMappingModel.src.initialisesrcsOpposite() end
+		if(not self.theMappingModel.target.isVoid) then self.theMappingModel.target.initialisesrcsOpposite() end
+		self.theMappingModel.mappings.each{theMapping | theMapping.initialisesrcsOpposite() }
+		if(not self.theMappingModel.src.isVoid) then self.theMappingModel.src.initialisetargetsOpposite() end
+		if(not self.theMappingModel.target.isVoid) then self.theMappingModel.target.initialisetargetsOpposite() end
+		self.theMappingModel.mappings.each{theMapping | theMapping.initialisetargetsOpposite() }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract

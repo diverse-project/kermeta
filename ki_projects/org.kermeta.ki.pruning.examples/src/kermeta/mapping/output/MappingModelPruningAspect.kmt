@@ -21,4 +21,8 @@ aspect class Mapping {
 		self.srcs.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
 		self.targets.each{theClazz | if(not theClazz.visited) then theClazzs.add(theClazz) end }
 	end
+
+	operation preparePruning() : Void is do
+		self.visited := false
+	end
 }

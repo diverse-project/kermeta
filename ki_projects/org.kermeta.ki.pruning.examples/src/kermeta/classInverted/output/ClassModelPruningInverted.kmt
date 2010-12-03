@@ -50,8 +50,8 @@ abstract class ClassModelPruningInverted {
 	end
 
 	operation preparePruning() : Void is do
-		theClassModel.classes.each{theClazz | theClazz.visited := false }
-		theClassModel.classes.each{theClazz | theClazz.initialisesuperClassesOpposite() }
+		self.theClassModel.classes.each{theClazz | theClazz.preparePruning() }
+		self.theClassModel.classes.each{theClazz | theClazz.initialisesuperClassesOpposite() }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is abstract

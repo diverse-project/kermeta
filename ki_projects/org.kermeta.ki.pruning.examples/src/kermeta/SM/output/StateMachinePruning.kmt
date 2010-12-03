@@ -53,8 +53,8 @@ abstract class StateMachinePruning {
 	end
 
 	operation preparePruning() : Void is do
-		theStateMachine.states.each{theState | theState.visited := false }
-		theStateMachine.transitions.each{theTransition | theTransition.visited := false }
+		self.theStateMachine.states.each{theState | theState.preparePruning() }
+		self.theStateMachine.transitions.each{theTransition | theTransition.preparePruning() }
 	end
 
 	operation onStateAdded(theState : State) : Void is abstract
