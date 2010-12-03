@@ -76,13 +76,13 @@ public class PortKmBinaryMergerTest extends TestCase {
         EcoreUtil.EqualityHelper eQH = new EcoreUtil.EqualityHelper();
         
         ModelingUnit expectedResult = loadModelingUnit(expectedOutputFilePath);
-        assertTrue("result model not equals to expected output", eQH.equals(result.getModelingUnit(), expectedResult));
         
-        System.out.println(this.valid);
-
         if (this.valid) {
+        	// the merge is supposed to be valid
+        	assertTrue("result model not equals to expected output", eQH.equals(result.getModelingUnit(), expectedResult));            
             assertFalse("Merger has reported error but expecting none",result.hasSevereProblems());
         } else {
+        	// the merge is supposed to be invalid
             assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());
         }
         System.out.println("   saving merge result in " + outputFilePath);
