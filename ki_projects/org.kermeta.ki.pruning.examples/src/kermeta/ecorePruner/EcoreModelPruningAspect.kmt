@@ -44,17 +44,21 @@ aspect class ETypedElement {
 	attribute visited : Boolean
 
 	operation visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
-		if(not self.eType.visited) then theEClassifiers.add(self.eType) end
+		if(not self.eType.visited and lowerCardParameter(theEcoreModelPruning)) then theEClassifiers.add(self.eType) end
 	end
 
 	operation preparePruning() : Void is do
 		self.visited := false
 	end
+	
+	operation lowerCardParameter(theEcoreModelPruning : EcoreModelPruning) : Boolean is do
+		result := not theEcoreModelPruning.lowerCardParameter or lowerBound!=0
+	end
 }
 aspect class EStructuralFeature {
 	method visit(theEcoreModelPruning : EcoreModelPruning, theEClassifiers : Bag<EClassifier>) : Void is do
 		super(theEcoreModelPruning, theEClassifiers)
-		if(not self.eContainingClass.visited) then theEClassifiers.add(self.eContainingClass) end
+		if(not self.eContainingClass.visited and lowerBound!=0) then theEClassifiers.add(self.eContainingClass) end
 	end
 
 	method preparePruning() : Void is do
@@ -62,7 +66,7 @@ aspect class EStructuralFeature {
 	end
 
 	operation add(theEcoreModelPruning : EcoreModelPruning) : Void is do
-		if(not visited and eContainingClass.visited and eType.visited) then
+		if(not visited and eContainingClass.visited and eType.visited and lowerCardParameter(theEcoreModelPruning)) then
 			visited := true
 			theEcoreModelPruning.onEStructuralFeatureAdded(self)
 			theEcoreModelPruning.addedEStructuralFeatures.add(self)

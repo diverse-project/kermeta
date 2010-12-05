@@ -34,6 +34,8 @@
           ecoreFeature="ecore:EAttribute Pruning.ecore#//SourceRelation/createOpposite"/>
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//FeatureParameter">
+      <genFeatures createChild="false" propertyDescription="The name of the parameter. Must not contain any space."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/name"/>
       <genFeatures createChild="false" propertyDescription="The description of the parameter."
           ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/description"/>
       <genFeatures createChild="false" propertyDescription="The Kermeta boolean expression used to constraint the pruner (e.g. lowerBound==1). This contraint uses attributes of the given ECore element."

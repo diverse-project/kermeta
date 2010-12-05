@@ -25,7 +25,7 @@
   <parameters xsi:type="prunerGenerator:RadiusParameter">
     <focusedClasses href="Ecore.ecore#//EClass"/>
   </parameters>
-  <parameters xsi:type="prunerGenerator:FeatureParameter" description="Considers or not cardinality 0..*" expression="lowerBound==0">
+  <parameters xsi:type="prunerGenerator:FeatureParameter" name="lowerCardParameter" description="Considers or not cardinality 0..*" expression="lowerBound!=0">
     <element xsi:type="ecore:EAttribute" href="Ecore.ecore#//ETypedElement/lowerBound"/>
   </parameters>
 </prunerGenerator:Pruning>

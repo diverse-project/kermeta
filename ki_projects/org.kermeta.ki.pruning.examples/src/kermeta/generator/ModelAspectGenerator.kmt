@@ -158,7 +158,24 @@ class ModelAspectGenerator inherits Generator {
 		if(prunerGenerator.radius.focusedClasses.exists{cl | cl==clazz or clazz.isSuperTypeOf(cl) or cl.isSuperTypeOf(clazz) }) then
 			result := result + "\n" + generateAddRelations(clazz, isChild)
 		end
-		result := result + "\n" + clazz.prepareOperationCode + "}\n"
+		
+		// Generating the operation that prepare the class for the pruning.
+		result := result + "\n" + clazz.prepareOperationCode
+
+		// Generating the operations that check the defined parameters.
+		prunerGenerator.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				var featParam : FeatureParameter init param.asType(FeatureParameter)
+				if(featParam.element.eContainingClass==clazz) then
+					var namePruner : String init prunerGenerator.prunerClass.getVarNameClassifier()
+					result := result + "\n\toperation check" + featParam.name + "(" + namePruner + " : " + 
+							prunerGenerator.prunerClass.name + ") : Boolean is do\n\t\tresult := not " + namePruner +
+							"." + featParam.name + " or self." + featParam.expression + "\n\tend\n"
+				end
+			end
+		}
+		
+		result := result + "}\n"
 	end
 
 
@@ -240,6 +257,14 @@ class ModelAspectGenerator inherits Generator {
 		// Adding the declaration of method visit
 		result := "\t" + opDeclaration + " " + clazz.visitOperation.getDeclarationHeader() + " : Void is do\n" 
 
+		var checkParameterCode : String init generateCheckParameterConditions(clazz)
+		var endifCheck : String init ""
+		
+		if(checkParameterCode!="") then
+			result := result + "\t\tif(" + checkParameterCode + ") then\n"
+			endifCheck := "\t\telse\n\t\t\tvisited := true\n\t\tend\n"
+		end
+
 		// If the current clazz is the sub class of a class that defines method visit, the super call must be performed.
 		if(isChild) then 
 			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
@@ -255,7 +280,7 @@ class ModelAspectGenerator inherits Generator {
 		end
 
 		result := result + generateVisitBodyRelationsExploration(clazz, clazz.sourceRelations) +
-					generateVisitBodyRelationsExploration(clazz, clazz.targetRelations) + "\tend\n"
+					generateVisitBodyRelationsExploration(clazz, clazz.targetRelations) + endifCheck + "\tend\n"
 	end
 
 
@@ -293,6 +318,28 @@ class ModelAspectGenerator inherits Generator {
 	end
 
 
+	/**
+	 * Generates the code that checks if the parameters of the pruner are respected.
+	 * clazz: the current analysed clazz.
+	 */
+	operation generateCheckParameterConditions(clazz : EClass) : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				var featParam : FeatureParameter init param.asType(FeatureParameter)
+				
+				if(featParam.element.eContainingClass==clazz or
+					featParam.element.eContainingClass.isSuperTypeOf(clazz)) then
+					if(result != "") then
+						result := result + " and "
+					end
+					result := result + "self.check" + featParam.name + "(" + prunerGenerator.prunerClass.getVarNameClassifier() + ")"
+				end
+			end
+		}
+	end
+
 
 	operation generateVisitOperationNotFocusedClass(clazz : EClass, isChild : Boolean) : String is do
 		var opDeclaration : String
@@ -304,12 +351,21 @@ class ModelAspectGenerator inherits Generator {
 		// Adding the declaration of method visit
 		result := "\t" + opDeclaration + " " + clazz.visitOperation.getDeclarationHeader() + " : Void is do\n" 
 
+		var checkParameterCode : String init generateCheckParameterConditions(clazz)
+		var endifCheck : String init ""
+		
+		if(checkParameterCode!="") then
+			result := result + "\t\tif(" + checkParameterCode + ") then\n"
+			endifCheck := "\t\telse\n\t\t\tvisited := true\n\t\tend\n"
+		end
+
 		// If the current clazz is the sub class of a class that defines method visit, the super call must be performed.
 		if(isChild) then 
 			result := result + "\t\t" + clazz.visitOperation.getSuperCall() + "\n"
 		end
 
-		result := result + generateVisitNotFocusedBody(clazz, clazz.targetRelations) + generateVisitNotFocusedBody(clazz, clazz.sourceRelations) + "\tend\n"
+		result := result + generateVisitNotFocusedBody(clazz, clazz.targetRelations) + 
+				generateVisitNotFocusedBody(clazz, clazz.sourceRelations) + endifCheck + "\tend\n"
 	end
 
 

@@ -10,6 +10,8 @@ abstract class EcoreModelPruning {
 
 	attribute radius : Integer
 
+	attribute lowerCardParameter : Boolean
+
 	reference requiredEClasss : EClass[0..*]
 
 	reference requiredEStructuralFeatures : EStructuralFeature[0..*]
@@ -18,12 +20,13 @@ abstract class EcoreModelPruning {
 
 	reference addedEStructuralFeatures : Bag<EStructuralFeature>
 
-	operation initialise(theEPackage : EPackage, requiredEClasss : bag EClass[0..*], requiredEStructuralFeatures : bag EStructuralFeature[0..*], radius : Integer) : EcoreModelPruning is do
+	operation initialise(theEPackage : EPackage, requiredEClasss : bag EClass[0..*], requiredEStructuralFeatures : bag EStructuralFeature[0..*], radius : Integer, lowerCardParameter : Boolean) : EcoreModelPruning is do
 		result := self
 		self.addedEClassifiers := Bag<EClassifier>.new
 		self.addedEStructuralFeatures := Bag<EStructuralFeature>.new
 		self.theEPackage := theEPackage
 		self.radius := radius
+		self.lowerCardParameter := lowerCardParameter
 		self.requiredEClasss.addAll(requiredEClasss)
 		self.requiredEStructuralFeatures.addAll(requiredEStructuralFeatures)
 	end

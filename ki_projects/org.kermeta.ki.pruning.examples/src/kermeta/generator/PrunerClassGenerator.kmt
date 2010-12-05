@@ -39,6 +39,12 @@ class PrunerClassGenerator inherits Generator {
 		if(not prunerGenerator.radius.isVoid) then
 			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
 		end
+		
+		prunerGenerator.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				generatedCode := generatedCode + "\tattribute " + param.asType(FeatureParameter).name + " : Boolean\n\n"
+			end
+		}
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + generatePreparePruningOperation() +
@@ -235,6 +241,12 @@ class PrunerClassGenerator inherits Generator {
 			result := result + ", radius : Integer"
 		end
 
+		prunerGenerator.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				result := result + ", " + param.asType(FeatureParameter).name + " : Boolean"
+			end
+		}
+
 		result := result + ") : " + prunerGenerator.prunerClass.name + " is do\n"
 		result := result + "\t\tresult := self\n"
 
@@ -249,6 +261,13 @@ class PrunerClassGenerator inherits Generator {
 		if(not prunerGenerator.radius.isVoid) then
 			result := result + "\t\tself.radius := radius\n"
 		end
+
+		prunerGenerator.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				var name : String init param.asType(FeatureParameter).name
+				result := result + "\t\tself." + name + " := " + name + "\n"
+			end
+		}
 
 		classRequired.each{clazz |
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"

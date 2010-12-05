@@ -34,7 +34,7 @@ class Test {
 		var requiredRefs : Bag<EStructuralFeature> init Bag<EStructuralFeature>.new
 		var pkg : EPackage init createModel(requiredClasss, requiredRefs)
 		
-		var pruning : PrintEcoreModelPruning init PrintEcoreModelPruning.new.initialise(pkg, requiredClasss, requiredRefs, 1).asType(PrintEcoreModelPruning)
+		var pruning : PrintEcoreModelPruning init PrintEcoreModelPruning.new.initialise(pkg, requiredClasss, requiredRefs, 2, true).asType(PrintEcoreModelPruning)
 		
 		pruning.launch()
 	end
@@ -80,17 +80,21 @@ class Test {
 		
 		p1.name := "p1"
 		p1.eType := c2
+		p1.lowerBound := 1
 		c5.eStructuralFeatures.add(p1)
 		p2.name := "p2"
+		p2.lowerBound := 1
 		p2.eType := c3
 		c4.eStructuralFeatures.add(p2)
 		p2.eOpposite := p3
 		p3.name := "p3"
+		p3.lowerBound := 1
 		p3.eType := c4
 		c3.eStructuralFeatures.add(p3)
 		p3.eOpposite := p2
 		p4.name := "p4"
 		p4.eType := c4
+		p4.lowerBound := 1
 		c4.eStructuralFeatures.add(p4)
 		
 		requiredClasss.add(c7)
