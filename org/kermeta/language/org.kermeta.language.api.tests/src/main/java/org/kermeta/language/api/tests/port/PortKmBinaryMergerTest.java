@@ -74,6 +74,8 @@ public class PortKmBinaryMergerTest extends TestCase {
         
         
         ModelingUnitResult result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(aspectFilePath));
+
+        saveModelingUnit(outputFilePath, result.getModelingUnit());
         
         EcoreUtil.EqualityHelper eQH = new EcoreUtil.EqualityHelper();
         
@@ -88,7 +90,6 @@ public class PortKmBinaryMergerTest extends TestCase {
             assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());
         }
         System.out.println("   saving merge result in " + outputFilePath);
-        saveModelingUnit(outputFilePath, result.getModelingUnit());
     }
 
 
