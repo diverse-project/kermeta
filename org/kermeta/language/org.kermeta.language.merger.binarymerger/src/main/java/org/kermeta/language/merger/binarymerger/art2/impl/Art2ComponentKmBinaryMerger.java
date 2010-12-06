@@ -9,6 +9,17 @@
 package org.kermeta.language.merger.binarymerger.art2.impl;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.Port;
@@ -102,23 +113,64 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
         // call the init in order to make sure that the registry is correctly set
         // TODO look how to not put duplicates in the eclipse registry when run in eclipse work
         //((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap((org.eclipse.emf.ecore.EcoreFactory)ScalaAspect.org.eclipse.emf.ecore.RichFactory.createEFactory());
+    	
         MainRunner.init();
 
         BinaryMerger merger = org.kermeta.language.merger.RichFactory.createBinaryMerger();
-        ModelingUnitResult result = new ModelingUnitResult(merger.merge(first_mu, second_mu));
-        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
-        for (Object o : mergerAspect.getErrors()) {
-        	if(o instanceof BinaryMergerExceptionAspect){
-        		BinaryMergerExceptionAspect e = (BinaryMergerExceptionAspect) o;
-        		ModelReference modelRef = TraceabilityFactory.eINSTANCE.createModelReference();
-        		modelRef.setRefObject(e.aspectElement());
-        		// TODO bug, the nested exception isn't the correct one, I don't know how to cast the BinaryMergerExceptionAspect into a classic java Exception
-        		//ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", e, modelRef);
-        		ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", null, modelRef);
-        		result.getProblems().add(pm);
-        		// TODO also send the problem to a log port ?
-        	}
+        ModelingUnitResult result = new ModelingUnitResult();
+		try {
+			result.setModelingUnit(merger.merge(enforceAspect(first_mu), enforceAspect(second_mu)));
+		
+	        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
+	        for (Object o : mergerAspect.getErrors()) {
+	        	if(o instanceof BinaryMergerExceptionAspect){
+	        		BinaryMergerExceptionAspect e = (BinaryMergerExceptionAspect) o;
+	        		ModelReference modelRef = TraceabilityFactory.eINSTANCE.createModelReference();
+	        		modelRef.setRefObject(e.aspectElement());
+	        		// TODO bug, the nested exception isn't the correct one, I don't know how to cast the BinaryMergerExceptionAspect into a classic java Exception
+	        		//ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", e, modelRef);
+	        		ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", null, modelRef);
+	        		result.getProblems().add(pm);
+	        		// TODO also send the problem to a log port ?
+	        	}
+			}
+		} catch (IOException e1) {
+			ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e1.getMessage(), "org.kemeta.language.merger.binarymerger", null, null);
+    		result.getProblems().add(pm);
 		}
         return result;
+    }
+    
+    protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
+    	if(! (mu instanceof ScalaAspect.org.kermeta.language.structure.ModelingUnitAspect)){
+	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
+	    	Map<String, String> options = null;
+	    	if(mu.eResource() != null){
+		    	uri = mu.eResource().getURI();
+	    	}
+	    	else{
+	    		// let's suppose that the ModelingUnit contains everything (otherwise we would have to look for references and save them too ...)
+	    		ResourceSet resourceSet = new ResourceSetImpl();
+	    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+	    		Map<String,Object> m = f.getExtensionToFactoryMap();
+	    		m.put("km_in_memory",new XMIResourceFactoryImpl());
+				Resource resource = resourceSet.createResource(uri);
+				resource.getContents().add(mu);
+	    	}
+			mu.eResource().save(outputStream, options);
+
+	    	ResourceSet resourceSet = new ResourceSetImpl();
+    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+    		Map<String,Object> m = f.getExtensionToFactoryMap();
+    		m.put("*",new XMIResourceFactoryImpl());
+			Resource resource = resourceSet.createResource(uri);
+			resource.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
+			// let's suppose the ModelingUnit is the first element in the root
+			return (ModelingUnit)resource.getContents().get(0);
+    	}
+    	else{
+    		return mu;
+    	}
     }
 }
