@@ -9,6 +9,12 @@
  */
 package org.kermeta.scala.parser.art2.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.kermeta.art2.annotation.ComponentType;
@@ -68,7 +74,30 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
 
         String content = optionalContent;
         if (content.equals("")) {
-            content = ParserUtil.loadFile(uri);
+        	
+        	if(uri.startsWith("jar:") && uri.contains("!")){
+        		try{
+	        		// ParserUtil isn't able to load from inside a jar, so use the stream instead
+	    	    	URL jarUrl =  new URL(uri);
+	    	    	JarURLConnection juc = (JarURLConnection) jarUrl.openConnection();
+	    	    	InputStream is =  juc.getJarFile().getName().getClass().getResourceAsStream(uri.substring(uri.indexOf("!")+1));
+	    	    	BufferedReader br = new BufferedReader(new InputStreamReader(is));	    	
+	    	    	String thisLine;
+	    	    	StringBuffer sb = new StringBuffer();
+	    	        while ((thisLine = br.readLine()) != null) {
+	    	        	sb.append(thisLine+"\n");
+	    	        }
+	    	        content = sb.toString();
+        		}
+        		catch(IOException e){
+        			if (isPortBinded("log")) {
+                        getPortByName("log", MessagePort.class).process(UnifiedMessageFactory.getInstance().createErrorMessage(e.getMessage(), bundleSymbolicName, e, null));
+                    }
+        		}
+        	}
+        	else{
+        		content = ParserUtil.loadFile(uri);
+        	}
         }
 
         Option result = parser.parseSynch(content);
@@ -134,4 +163,7 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
     @Stop
     public void stop() {
     }
+    
+    
+    
 }
