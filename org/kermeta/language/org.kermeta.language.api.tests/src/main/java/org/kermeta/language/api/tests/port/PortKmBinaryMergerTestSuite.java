@@ -90,20 +90,17 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
                 if(uri.endsWith("/aspect/")){
                     currentTestName = uri.replaceFirst("/aspect/", "").replaceFirst(folder, "").replaceAll("/", "");
                 }
-                if(uri.contains("/aspect/") && uri.endsWith(".km")){
+                if(uri.contains("/aspect/") && (uri.endsWith(".km") || uri.endsWith(".kmt"))){
                     currentAspectFilePath = uri;
                 }
                 if(uri.contains("/expected_output/") && uri.endsWith(".km")){
                     currentExpectedOutputFilePath = uri;
                 }
-                if(uri.contains("/primary/") && uri.endsWith(".km")){
+                if(uri.contains("/primary/") && (uri.endsWith(".km") || uri.endsWith(".kmt"))){
                     currentPrimaryFilePath = uri;
                     // this is also the last entry called for a given test
                     // create the test for it
-                    //this.getClass();
-
                     
-                  // System.out.println("outputFolder ? : " + ts.getClass().getClassLoader().getResource("/").getPath());
                     ts.addTest(new PortKmBinaryMergerTest(folder+"/"+currentTestName+"_pa",
                              jarPath+"!/"+currentPrimaryFilePath,
                              jarPath+"!/"+currentAspectFilePath,

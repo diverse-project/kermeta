@@ -24,8 +24,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
+import org.kermeta.language.api.port.PortResourceLoader.URIType;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
 /**
  *
@@ -89,7 +91,18 @@ public class PortKmBinaryMergerTest extends TestCase {
         saveModelingUnit(outputFilePath, result.getModelingUnit());
     }
 
-    protected ModelingUnit loadModelingUnit(String modelFilePath){
+
+    protected ModelingUnit loadModelingUnit(String filePath) throws IOException{
+    	if(filePath.endsWith(".km")){
+    		return loadModelingUnitFromKm(filePath);
+    	}
+    	if(filePath.endsWith(".kmt")){
+    		return loadModelingUnitFromKMT(filePath);
+    	}
+    	return null;
+    }
+    
+    protected ModelingUnit loadModelingUnitFromKm(String modelFilePath){
     	URI uri = URI.createURI( modelFilePath );
 		/*
 		 * If the loading is not done in a workbench, then uri matching platform:/resource or platform:/plugin
@@ -105,8 +118,15 @@ public class PortKmBinaryMergerTest extends TestCase {
 			}				
 		}
 		return null;
-    }
+    }    
     
+    protected ModelingUnit loadModelingUnitFromKMT(String kmtFilePath) throws IOException{
+    
+    	Art2ComponentKMTLoader loader = new Art2ComponentKMTLoader();
+    	ModelingUnit result = loader.load(kmtFilePath, URIType.FILE, "");
+    	return result;
+    }
+        
     protected void saveModelingUnit(String modelFilePath, ModelingUnit modelingUnit) throws IOException {
     	URI uri = URI.createURI( modelFilePath );
 		/*

@@ -1,0 +1,19 @@
+package testArithm;
+
+require kermeta
+
+using kermeta::standard
+
+// assignment of the return variable
+class Test_arithm {
+
+    operation operation1() : kermeta::standard::Integer is do
+        var ~result : kermeta::standard::Integer
+        var a : kermeta::standard::Integer
+        a := 4
+        ~result := ( 3 + a ) * 2
+        result := ~result
+    end
+}
+
+

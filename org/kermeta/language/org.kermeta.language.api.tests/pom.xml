@@ -29,6 +29,11 @@
       <artifactId>language.api</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>language.loader.scala</artifactId>
+      <version>${kermeta.version}</version>
+    </dependency>
   </dependencies> 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
