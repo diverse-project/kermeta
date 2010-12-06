@@ -7,42 +7,42 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Ki :: Kompren</name>
-
+    
     <dependencies>
     
         <dependency>
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.malai.model</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.jar</systemPath>
             <scope>system</scope>
         </dependency>
         <dependency>
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.malai.javabinding</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.javaBinding.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.javaBinding.jar</systemPath>
             <scope>system</scope>
         </dependency>
         <dependency>
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.malai.extern</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.extern.java.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.malai.extern.java.jar</systemPath>
             <scope>system</scope>
         </dependency>
         <dependency>
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.kompren.ui</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.kompren.ui.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.kompren.ui.jar</systemPath>
             <scope>system</scope>
         </dependency>
         <dependency>
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.kompren.extern.java</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.kompren.extern.java.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.kompren.extern.java.jar</systemPath>
             <scope>system</scope>
         </dependency>
         
@@ -50,7 +50,7 @@
             <groupId>org.kermeta.ki</groupId>
             <artifactId>org.kermeta.ki.diagram</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/Users/ffouquet/NetBeansProjects/KiProject/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.diagram.jar</systemPath>
+            <systemPath>/home/ablouin/workspace/org.kermeta.ki.kompren.compilation/lib/org.kermeta.ki.diagram.jar</systemPath>
             <scope>system</scope>
         </dependency>
 
@@ -67,13 +67,18 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.0.6</version>
+            <version>0.0.8</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
     </dependencies>
     
     <build>
+    	<resources>
+    		<resource>
+    			<directory>${project.build.directory}/generated-sources/resources</directory>
+    		</resource>
+    	</resources>
         <plugins>
             <!-- Kermeta Compiler plugin -->
             
@@ -94,7 +99,7 @@
                 </executions>
             </plugin>
             
-            <!-- Add generated source to build cycle -->
+<!--             Add generated source to build cycle -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -144,10 +149,10 @@
                         <launcher>
                             <id>ki.kompren</id>
                             <mainClass>runner.MainRunner</mainClass>
-          <!-- args are optional
+          <!-- args are optional -->
                             <args>
-                                <arg>arg1</arg>
-                            </args> -->
+                                <arg>file:/home/ablouin/workspace/org.kermeta.ki.kompren/examples/Ecore.km</arg>
+                            </args>
                         </launcher>
                     </launchers>
                 </configuration>
