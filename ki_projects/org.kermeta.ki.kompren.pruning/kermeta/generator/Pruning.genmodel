@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="INRIA Rennes, Triskell Team"
+    modelDirectory="/org.kermeta.ki.kompren.pruning.model/src" editDirectory="/org.kermeta.ki.kompren.pruning.edit/src"
+    editorDirectory="/org.kermeta.ki.kompren.pruning.editor/src" modelPluginID="org.kermeta.ki.kompren.pruning.model"
+    modelName="Pruning" editPluginClass="org.kermeta.ki.kompren.pruning.prunerGenerator.provider.PruningEditPlugin"
+    editorPluginClass="org.kermeta.ki.kompren.pruning.prunerGenerator.presentation.PruningEditorPlugin"
+    testSuiteClass="org.kermeta.ki.kompren.pruning.prunerGenerator.tests.PruningAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" editPluginID="org.kermeta.ki.kompren.pruning.edit"
+    editorPluginID="org.kermeta.ki.kompren.pruning.editor">
+  <foreignModel>Pruning.ecore</foreignModel>
+  <genPackages prefix="PrunerGenerator" basePackage="org.kermeta.ki" disposableProviderFactory="true"
+      ecorePackage="Pruning.ecore#/">
+    <genClasses ecoreClass="Pruning.ecore#//Pruning">
+      <genFeatures createChild="false" propertyDescription="The name of the pruner. Must not contain any space."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/name"/>
+      <genFeatures createChild="false" propertyDescription="The description of the pruner."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//Pruning/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/relationsFocus"/>
+      <genFeatures property="None" children="true" createChild="true" propertyDescription="The parameters of the pruner."
+          ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/parameters"/>
+      <genFeatures notify="false" createChild="false" propertyDescription="The type of classes that can be provided to the pruner to launch the pruning."
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/requiredClasses"/>
+      <genFeatures notify="false" createChild="false" propertyDescription="Defines on which classes the pruner must focus on."
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/classesToNotify"/>
+      <genFeatures notify="false" createChild="false" propertyDescription="Defines on which relations the pruner must focus on."
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Pruning/relationsToNotify"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//Relation">
+      <genFeatures createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute Pruning.ecore#//Relation/name"/>
+      <genFeatures notify="false" createChild="false" propertyDescription="The relation that the pruner must explore."
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Relation/relation"/>
+      <genFeatures createChild="false" propertyDescription="If true, an opposite to the corresponding relation will be created and explored."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//Relation/createOpposite"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//FeatureParameter">
+      <genFeatures createChild="false" propertyDescription="The name of the parameter. Must not contain any space."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/name"/>
+      <genFeatures createChild="false" propertyDescription="The description of the parameter."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/description"/>
+      <genFeatures createChild="false" propertyDescription="The Kermeta boolean expression used to constraint the pruner (e.g. lowerBound==1). This contraint uses attributes of the given ECore element."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//FeatureParameter/expression"/>
+      <genFeatures notify="false" createChild="false" propertyDescription="The ECore element used to contraint the pruner"
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//FeatureParameter/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Pruning.ecore#//Parameter"/>
+    <genClasses ecoreClass="Pruning.ecore#//RadiusParameter">
+      <genFeatures notify="false" createChild="false" propertyDescription="The classes that the radius parameter must consider."
+          propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//RadiusParameter/focusedClasses"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
