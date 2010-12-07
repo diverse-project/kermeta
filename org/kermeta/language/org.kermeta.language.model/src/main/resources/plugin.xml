@@ -13,14 +13,14 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.kermeta.org/kermeta/2_0_0/"
-            class="org.KmPackage"
+            class="org.OrgPackage"
             genModel="src/main/ecore/kermeta.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
-            class="org.kermeta.KermetaPackage"
+            class="org.kermeta.KmPackage"
             genModel="src/main/ecore/kermeta.genmodel"/>
    </extension>
 

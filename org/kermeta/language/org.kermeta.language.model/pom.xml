@@ -95,7 +95,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>org.kermeta.*</Export-Package>
-                        <Bundle-SymbolicName>org.kermeta.language.model</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
                         <Import-Package>org.eclipse.emf.*,org.osgi.framework</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
