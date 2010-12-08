@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="org.kermeta.language.ui.eclipse.actions.GenerateExecutableKmAction"
+           objectClass="org.eclipse.core.resources.IFolder">
+        <menu
+              icon="platform:/plugin/org.kermeta.language.ui.eclipse/icons/kermeta_logo.gif"
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions">
+           <separator name="kermetagroup2"/>
+        </menu>
+       <action
+             class="org.kermeta.language.ui.eclipse.actions.GenerateExecutableKmAction"
+             icon="platform:/plugin/org.kermeta.language.ui.eclipse/icons/kermeta_logo.gif"
+             id="org.kermeta.language.ui.eclipse.actions.GenerateExecutableKmAction"
+             label="Generate executable KM"
+             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+       </action>
+     </objectContribution>     
+  </extension>  
+</plugin>

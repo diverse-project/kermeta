@@ -1,0 +1,138 @@
+<!-- $Id: pom.xml 13483 2010-11-15 14:34:45Z francoisfouquet $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.KWF -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.ui.eclipse</artifactId>
+    <packaging>bundle</packaging>
+    <name>K2 :: UI :: Eclipse</name>
+
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+        <artifactId>language.artcomponent.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+		<!-- Add resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>icons</directory>
+				<targetPath>icons</targetPath>
+			</resource>
+		</resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.ui.eclipse.*
+                        </Export-Package>
+                        <Require-Bundle> <!--  avoid splitted package issue, must require some eclipse bundle -->
+							org.eclipse.core.runtime,
+							org.eclipse.core.resources,
+							org.eclipse.core.commands,
+							org.eclipse.equinox.registry,
+							org.eclipse.ui,
+							org.eclipse.ui.ide,
+							org.eclipse.ui.views,
+							org.eclipse.jface,
+							org.eclipse.ui.workbench
+                        </Require-Bundle>
+						<!--
+							use the ! for avoiding to import some packages that are already
+							there with the Require-Bundle
+						-->
+                        <Import-Package>
+							!org.eclipse.core.*,
+							!org.eclipse.ui.*,
+							!org.eclipse.jface.*,
+							org.slf4j.*;version="${slf4j.version.range}",
+							org.kermeta.*,
+							scala.*,
+							org.eclipse.emf.*,
+							org.osgi.framework;version="[1.5,2)"
+                        </Import-Package>
+						<!--
+							add extra element in the manifest, copy them from this file ex:
+							Bundle-ActivationPolicy: lazy
+						-->
+						<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+		<!-- Main dependencies -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.api</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.ui.workbench</artifactId>
+            <version>[3.6.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.jface</artifactId>
+            <version>[3.6.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.core.resources</artifactId>
+            <version>[3.6.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.equinox.common</artifactId>
+            <version>[3.6.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.common</artifactId>
+            <version>[2.6.0.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.core.jobs</artifactId>
+            <version>[3.5.0.0,)</version>
+        </dependency>
+        
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.registry</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+
+    </dependencies>
+
+</project>
