@@ -27,6 +27,14 @@ public class KExecutableKmUserRequestEvent extends KEvent {
      */
     protected String outputURI = "";
 
+    
+	public KExecutableKmUserRequestEvent(String inputDescriptionURI,
+			String outputURI) {
+		super();
+		this.inputDescriptionURI = inputDescriptionURI;
+		this.outputURI = outputURI;
+	}
+
 	public String getInputDescriptionURI() {
 		return inputDescriptionURI;
 	}
