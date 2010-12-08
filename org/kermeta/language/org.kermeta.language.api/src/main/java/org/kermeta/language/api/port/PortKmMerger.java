@@ -9,7 +9,7 @@ package org.kermeta.language.api.port;
 
 import java.util.Collection;
 
-import org.kermeta.kp.KermetaProject;
+import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
@@ -17,6 +17,6 @@ import org.kermeta.language.structure.ModelingUnit;
  */
 public interface PortKmMerger {
 
-    public ModelingUnit merge(Collection<ModelingUnit> mus);
+    public ModelingUnitResult merge(Collection<ModelingUnit> mus);
 
 }
