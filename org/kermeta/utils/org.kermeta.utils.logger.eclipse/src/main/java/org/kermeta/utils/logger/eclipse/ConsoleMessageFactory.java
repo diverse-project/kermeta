@@ -18,6 +18,12 @@ import org.kermeta.language.api.messaging.UnifiedMessage;
 import org.kermeta.language.api.messaging.ProblemMessage.Severity;
 import org.kermeta.utils.logger.eclipse.console.message.ConsoleMessage;
 
+/**
+ * This class transforms a UnifiedMessage into the appropriate console message
+ * Ie. depending on the expected receiver they will be presented using one of the 4 available presentation levels.
+ * @author dvojtise
+ *
+ */
 public class ConsoleMessageFactory {
 
 	public static String INFO = "INFO";
