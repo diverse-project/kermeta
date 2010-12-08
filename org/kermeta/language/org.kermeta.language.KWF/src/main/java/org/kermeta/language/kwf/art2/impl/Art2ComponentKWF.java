@@ -23,11 +23,14 @@ import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.ThirdParties;
 import org.kermeta.art2.annotation.ThirdParty;
+import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.kevent.KDocumentUpdate;
 import org.kermeta.language.api.kevent.KEvent;
+import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKEvent;
 import org.kermeta.language.api.port.PortResourceLoader;
+import org.kermeta.language.kwf.actions.GenerateExecutableKMAction;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
 
@@ -59,16 +62,23 @@ public class Art2ComponentKWF extends AbstractComponentType {
 
     protected String bundleSymbolicName = "";
     protected Bundle bundle;
-    protected MessagePort logPort = null;
-    protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
-    /**
-     * As it uses UI declaration via plugin.xml, this component is a singleton in Eclipse
-     */
-    protected static Art2ComponentKWF instance;
+    
+    protected SimpleLogger logger;
 
-    public static Art2ComponentKWF getDefault() {
-        return instance;
-    }
+    public SimpleLogger getLogger() {
+		return logger;
+	}
+
+	protected PortResourceLoader kmtLoaderPort = null;
+    public PortResourceLoader getKmtLoaderPort() {
+    	if(kmtLoaderPort == null){
+    		kmtLoaderPort = getPortByName("kmtloader", PortResourceLoader.class);
+    	}
+		return kmtLoaderPort;
+	}
+
+	protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
+
 
     public String getBundleSymbolicName() {
         return bundleSymbolicName;
@@ -80,12 +90,10 @@ public class Art2ComponentKWF extends AbstractComponentType {
 
     @Start
     public void start() {
-        instance = this;
-        logPort = getPortByName("log", MessagePort.class);
         bundle = (Bundle) this.getDictionary().get("osgi.bundle");
         bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
-        System.out.println("Successfully started KWF");
-        logPort.process(mFactory.createDebugMessage("Successfully started KWF", bundleSymbolicName));
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started KWF");        
     }
 
     @Stop
@@ -95,17 +103,20 @@ public class Art2ComponentKWF extends AbstractComponentType {
     @Port(name = "kevent")
     public void processKEvent(Object event) {
 
-        //CHECK event istance of KEVENT
+        //CHECK event instance of KEVENT
         if (event instanceof KEvent) {
-            logPort.process(mFactory.createInfoMessage("KWF received new event : " + event, bundleSymbolicName));
+        	logger.info("KWF received new event : " + event);
 
             if (event instanceof KDocumentUpdate) {
                 processKDocumentUpdate((KDocumentUpdate) event);
             }
-
+            if (event instanceof KExecutableKmUserRequestEvent){
+            	GenerateExecutableKMAction action = new GenerateExecutableKMAction(this);
+            	action.process((KExecutableKmUserRequestEvent) event);
+            }
 
         } else {
-            logPort.process(mFactory.createErrorMessage("Uncatch Message " + event.getClass(), bundleSymbolicName));
+        	logger.warning("Ignored message " + event.getClass());
         }
 
     }
@@ -115,11 +126,12 @@ public class Art2ComponentKWF extends AbstractComponentType {
         ModelingUnit root = this.getPortByName("kmtloader", PortResourceLoader.class).load(event.getURI(), PortResourceLoader.URIType.INMEMORY, event.getDocument());
 
         if (root == null) {
-            logPort.process(mFactory.createErrorMessage("Parse error !", bundleSymbolicName));
+        	logger.error("Parse error !", null);
         } else {
-            logPort.process(mFactory.createInfoMessage("Parse OK", bundleSymbolicName));
+        	logger.info("Parse OK");
         }
 
 
     }
+
 }

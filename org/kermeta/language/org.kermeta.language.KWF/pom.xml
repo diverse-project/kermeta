@@ -40,6 +40,8 @@
                         <Import-Package>
 							org.slf4j.*;version="${slf4j.version.range}",
 							org.kermeta.*,
+							org.eclipse.emf.common.*,
+							org.eclipse.emf.ecore.*,
 							scala.*,
 							org.osgi.framework;version="[1.5,2)"
                         </Import-Package>
