@@ -26,13 +26,21 @@ public class KExecutableKmUserRequestEvent extends KEvent {
      * URI of where the result will be saved
      */
     protected String outputURI = "";
-
     
+    /**
+     * Used for Debug
+     * URI of where the intermediate files can be saved, if null or empty, no intermediate file will be saved
+     */
+    protected String intermediateDebugOutputURI = "";
+
+  
 	public KExecutableKmUserRequestEvent(String inputDescriptionURI,
-			String outputURI) {
+			String outputURI,
+			String intermediateDebugOutputURI) {
 		super();
 		this.inputDescriptionURI = inputDescriptionURI;
 		this.outputURI = outputURI;
+		this.intermediateDebugOutputURI = intermediateDebugOutputURI;
 	}
 
 	public String getInputDescriptionURI() {
@@ -50,4 +58,13 @@ public class KExecutableKmUserRequestEvent extends KEvent {
 	public void setOutputURI(String outputURI) {
 		this.outputURI = outputURI;
 	}
+	  
+	public String getIntermediateDebugOutputURI() {
+		return intermediateDebugOutputURI;
+	}
+
+	public void setIntermediateDebugOutputURI(String intermediateDebugOutputURI) {
+		this.intermediateDebugOutputURI = intermediateDebugOutputURI;
+	}
+
 }
