@@ -47,19 +47,24 @@ public class ConsoleMessageFactory {
 			switch (uMessage.getUserLevel()) {
 			case DEVELOPPER:
 				level = DEBUG;
-				if (severity == ProblemMessage.Severity.ERROR) {
+				if (severity == ProblemMessage.Severity.ERROR ||  severity == ProblemMessage.Severity.FATAL) {
 					adaptedMessage = "ERROR: " + uMessage.getMessage();
-				} else {
+				} else if (severity == ProblemMessage.Severity.WARNING) {
 					adaptedMessage = "WARNING: " + uMessage.getMessage();
+				} else{
+					adaptedMessage = "INFO: " + uMessage.getMessage();
 				}
 				break;
 			case ENDUSER:
 			default:
-				if (severity == ProblemMessage.Severity.ERROR) {
+				if (severity == ProblemMessage.Severity.ERROR ||  severity == ProblemMessage.Severity.FATAL) {
 					level = ERROR;
 					adaptedMessage = uMessage.getMessage();
-				} else {
+				} else if (severity == ProblemMessage.Severity.WARNING) {
 					level = WARNING;
+					adaptedMessage = uMessage.getMessage();
+				} else{
+					level = INFO;
 					adaptedMessage = uMessage.getMessage();
 				}
 				break;
