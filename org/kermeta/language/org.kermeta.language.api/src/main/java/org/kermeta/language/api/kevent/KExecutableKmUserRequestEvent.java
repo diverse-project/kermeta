@@ -33,6 +33,13 @@ public class KExecutableKmUserRequestEvent extends KEvent {
      */
     protected String intermediateDebugOutputURI = "";
 
+    public KExecutableKmUserRequestEvent(String inputDescriptionURI,
+			String outputURI) {
+		super();
+		this.inputDescriptionURI = inputDescriptionURI;
+		this.outputURI = outputURI;
+		this.intermediateDebugOutputURI = "";
+	}
   
 	public KExecutableKmUserRequestEvent(String inputDescriptionURI,
 			String outputURI,
