@@ -108,8 +108,8 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
                              jarPath+"!/"+currentExpectedOutputFilePath,
                              valid,p));
                      ts.addTest(new PortKmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
-                             jarPath+"!/"+currentPrimaryFilePath,
                              jarPath+"!/"+currentAspectFilePath,
+                             jarPath+"!/"+currentPrimaryFilePath,
                              outputFolder+"/"+currentTestName+"_ap.km",
                              jarPath+"!/"+currentExpectedOutputFilePath,
                              valid,p));
