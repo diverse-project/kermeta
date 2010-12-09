@@ -31,28 +31,24 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.mod4j.org.eclipse.emf</groupId>
-			<artifactId>ecore</artifactId>
-			<version>2.5.0</version>
-			<scope>compile</scope>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>2.6.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
-			<artifactId>xmi</artifactId>
-			<version>2.5.0</version>
-			<scope>compile</scope>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
 		</dependency>
-		<dependency>
-			<groupId>org.mod4j.org.eclipse.core</groupId>
-			<artifactId>runtime</artifactId>
-			<version>3.5.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.11</version>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
