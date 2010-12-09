@@ -91,7 +91,7 @@ class PrunerClassGenerator inherits Generator {
 		end
 
 		prunerGenerator.featureParameters.each{param |
-			result := result + ", " + param.asType(FeatureParameter).name + " : Boolean"
+			result := result + ", " + param.name + " : Boolean"
 		}
 
 		result := result + ") : " + prunerGenerator.prunerClass.name + " is do\n"
@@ -106,8 +106,7 @@ class PrunerClassGenerator inherits Generator {
 		end
 
 		prunerGenerator.featureParameters.each{param |
-			var name : String init param.asType(FeatureParameter).name
-			result := result + "\t\tself." + name + " := " + name + "\n"
+			result := result + "\t\tself." + param.name + " := " + param.name + "\n"
 		}
 
 		prunerGenerator.pruningData.requiredClasses.each{clazz |
@@ -120,7 +119,7 @@ class PrunerClassGenerator inherits Generator {
 
 	operation generateAddedAttributes() : String is do
 		result := ""
-		
+
 		prunerGenerator.pruningData.classesToNotify.each{eclass |
 			result := result + "\treference " + eclass.getAddedAttributeName() + " : Bag<" + eclass.name + ">\n\n"
 		}
@@ -129,7 +128,7 @@ class PrunerClassGenerator inherits Generator {
 
 	operation generateRequiredAttributes() : String is do
 		result := ""
-		
+
 		prunerGenerator.pruningData.requiredClasses.each{eclass |
 			result := result + "\treference " + eclass.getRequiredAttributeName() + " : " + eclass.name + "[0..*]\n\n"
 		}

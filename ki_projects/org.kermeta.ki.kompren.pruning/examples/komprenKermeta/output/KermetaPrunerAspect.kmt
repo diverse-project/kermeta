@@ -83,7 +83,7 @@ aspect class ClassDefinition {
 aspect class Property {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (not theKermetaPruner.lowerCard0 or self.lower!=0) and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
 			super(theKermetaPruner, currentRadius)
 			if(not self.addedToPruner) then
 				theKermetaPruner.onPropertyAdded(self)
@@ -96,7 +96,7 @@ aspect class Property {
 		end
 	end
 	method visitToAddRelations(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (not theKermetaPruner.lowerCard0 or self.lower!=0) and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			self.visitedForRelations := true

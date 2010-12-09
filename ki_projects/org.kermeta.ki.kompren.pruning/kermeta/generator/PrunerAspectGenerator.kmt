@@ -56,8 +56,16 @@ class PrunerAspectGenerator inherits Generator {
 
 	operation generateAspect(eclass : EClass) : String is do
 		var prunerVarName : String init prunerGenerator.prunerClass.getVarNameClassifier()
+		var paramCode : String init ""
+
+		prunerGenerator.featureParameters.each{param |
+			if(param.element.eContainingClass==eclass or param.element.eContainingClass.isSuperTypeOf(eclass)) then
+				paramCode := paramCode + " and (not " + prunerVarName + "." + param.name + " or self." + param.expression + ")"
+			end
+		}
 
 		result := "aspect class " + eclass.name
+
 		if(not prunerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }) then
 			result := result + " inherits PruningVisitorAspect"
 		end
@@ -69,7 +77,7 @@ class PrunerAspectGenerator inherits Generator {
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass"
+			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
 			end
@@ -90,7 +98,7 @@ class PrunerAspectGenerator inherits Generator {
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") : Void is do\n\t\t" + "if(not self.visitedPass"
+			result := result + ") : Void is do\n\t\t" + "if(not self.visitedPass" + paramCode
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
 			end
