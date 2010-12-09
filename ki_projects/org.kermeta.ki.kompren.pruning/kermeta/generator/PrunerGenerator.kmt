@@ -1,0 +1,182 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package prunerGenerator;
+
+require kermeta
+require "Pruning.ecore"
+require "ECorePruningAspect.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
+require "./PrunerClassGenerator.kmt"
+require "./PrunerAspectGenerator.kmt"
+
+using ecore
+using kermeta::utils
+using kermeta::standard
+
+class PrunerGenerator {
+	reference pruningData : Pruning
+
+	reference metamodel : EPackage
+
+	attribute modelURI : String
+
+	attribute prunerClass : EClass
+
+	attribute requiredAspectFiles : Hashtable<String, String>	
+
+	reference radius : RadiusParameter[0..1]
+
+	attribute prunerAspectGenerator : PrunerAspectGenerator
+
+	attribute prunerClassGenerator : PrunerClassGenerator
+
+	reference aspectisedClasses : EClass[0..*]
+
+	reference featureParameters : FeatureParameter[0..*]
+
+
+	operation initialise(pruningData : Pruning, metamodel : EPackage, modelURI : String) : PrunerGenerator is do
+		result := self
+		self.requiredAspectFiles := Hashtable<String, String>.new
+		self.pruningData := pruningData
+		self.metamodel   := metamodel
+		self.modelURI 	 := modelURI
+		prunerAspectGenerator  := PrunerAspectGenerator.new.initialise(self)
+		prunerClassGenerator := PrunerClassGenerator.new.initialise(self)
+	
+		self.prunerClass := EClass.new
+		self.prunerClass.name := pruningData.name
+		
+		self.pruningData.relationsFocus.each{rel |
+			if(rel.createOpposite) then
+				// We change the pruning data to use of the opposite.
+				var ref : EReference init EReference.new
+				ref.name := rel.relation.name + "Opposite"
+				ref.eType:= rel.relation.eContainingClass
+				rel.relation.eType.asType(EClass).eStructuralFeatures.add(ref)
+				ref.lowerBound := rel.relation.lowerBound
+				ref.upperBound := rel.relation.upperBound
+				ref.containment := false
+				ref.eContainingClass.outputFocusedRelations.add(ref)
+				rel.relation := ref
+			else
+				rel.relation.eContainingClass.outputFocusedRelations.add(rel.relation)
+			end
+		}
+
+		// Looking for the radius parameter.
+		radius := self.pruningData.parameters.detect{param | param.isKindOf(RadiusParameter) }.asType(RadiusParameter)
+		defineClassesToAspectise()
+
+		self.pruningData.parameters.each{param |
+			if(param.isKindOf(FeatureParameter)) then
+				featureParameters.add(param.asType(FeatureParameter))
+			end
+		}
+	end
+
+
+	operation getPrunerVarName() : String is do
+		result := "the" + prunerClass.name
+	end
+
+	operation defineClassesToAspectise() : Void is do
+		// Extracting the classes from the relations to focus on.
+		pruningData.relationsFocus.each{rel | 
+			if(not aspectisedClasses.contains(rel.relation.eContainingClass)) then
+				aspectisedClasses.add(rel.relation.eContainingClass)
+			end
+			if(rel.relation.eType.isKindOf(EClass)) then
+				var eclass : EClass init rel.relation.eType.asType(EClass)
+				if(not aspectisedClasses.contains(eclass)) then
+					aspectisedClasses.add(eclass)
+				end
+			end
+		}
+		// Removing the classes that are only types of relations unless they
+		// are a supertype upon the gathered classes or they are required or
+		// they must notify when visiting them.
+		aspectisedClasses.each{eclass |
+			if(eclass.outputFocusedRelations.empty() and
+				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass)} and
+				(not pruningData.requiredClasses.contains(eclass) or
+				not pruningData.classesToNotify.contains(eclass))) then
+				aspectisedClasses.remove(eclass)
+			end
+		}
+	end
+
+
+	operation generatePruner() : Void is do
+		prunerAspectGenerator.generateCode()
+		prunerClassGenerator.generateCode()
+	end
+
+
+	operation getPackageFromClasses(classes : EClass[0..*]) : String is do
+		if(classes.empty()) then
+			result := ""
+		else
+			result := "package " + classes.last().ePackage.getQualifiedName("::") + ";\n"
+		end
+	end
+
+
+	operation getRequiresFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "require \"" + classes.at(i).ePackage.name + "PruningAspect.kmt\"\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+
+
+	operation getUsingsFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "using " + name + "\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+}
+
+
+abstract class Generator {
+	reference prunerGenerator : PrunerGenerator
+
+	attribute generatedCode : String
+
+	operation generateCode() : Void is abstract
+}

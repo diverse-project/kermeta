@@ -1,0 +1,40 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "KermetaPrunerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class KermetaPruner {
+	reference requiredClassDefinitions : ClassDefinition[0..*]
+
+	reference requiredPropertys : Property[0..*]
+
+	reference addedClassDefinitions : Bag<ClassDefinition>
+
+	reference addedPropertys : Bag<Property>
+
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredPropertys : bag Property[0..*]) : KermetaPruner is do
+		result := self
+		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.addedPropertys := Bag<Property>.new
+		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
+		self.requiredPropertys.addAll(requiredPropertys)
+	end
+
+	operation launch() : Void is do
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
+		self.requiredPropertys.each{theProperty | theProperty.visitToAddClasses(self) }
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
+		self.requiredPropertys.each{theProperty | theProperty.visitToAddRelations(self) }
+	end
+
+	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
+		self.addedClassDefinitions.add(theClassDefinition)
+	end
+	operation onPropertyAdded(theProperty : Property) : Void is do
+		self.addedPropertys.add(theProperty)
+	end
+	operation onsuperTypeAdded(theTypeDefinitionSrc : TypeDefinition, theTypeTar : Type) : Void is do
+	end
+}

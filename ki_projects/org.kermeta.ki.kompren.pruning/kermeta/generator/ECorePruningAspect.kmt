@@ -1,0 +1,37 @@
+/*
+ * Creation : November 23, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EClassHelper.kmt"
+require "PrunerGenerator.kmt"
+
+using kermeta::standard
+using prunerGenerator
+
+aspect class EClass {
+	reference outputFocusedRelations : EReference[0..*]
+
+
+	operation getVarNameClassifier() : String is do
+		result := getVarName(name, false)
+	end
+
+	operation getVarName(name : String, withS : Boolean) : String is do
+		result := "the" + name
+		if(withS) then result := result + "s" end
+	end
+
+	operation getRequiredAttributeName() : String is do
+		result := "required" + name + "s"
+	end
+
+	operation getAddedAttributeName() : String is do
+		result := "added" + name + "s"
+	end
+}

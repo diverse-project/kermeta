@@ -1,0 +1,83 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::language::structure::Test"
+@mainOperation "main"
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "output/KermetaPruner.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+class Test {
+	operation main() : Void is do
+		var mu : ModelingUnit init ModelingUnit.new
+		var pkg : Package init Package.new.initialize("pkg", "pkgURI")
+		var c6 : ClassDefinition init ClassDefinition.new.initialize("c6", false, false, void)
+		var c3 : ClassDefinition init ClassDefinition.new.initialize("c3", false, false, c6)
+		var c2 : ClassDefinition init ClassDefinition.new.initialize("c2", false, false, c3)
+		var c1 : ClassDefinition init ClassDefinition.new.initialize("c1", false, false, c2)
+		var c4 : ClassDefinition init ClassDefinition.new.initialize("c4", false, false, void)
+		var c5 : ClassDefinition init ClassDefinition.new.initialize("c5", false, false, void)
+		var c8 : ClassDefinition init ClassDefinition.new.initialize("c8", false, false, void)
+		var c7 : ClassDefinition init ClassDefinition.new.initialize("c7", false, false, c8)
+		var typec4 : Class init Class.new.initializeFromAClassDefinition(c4)
+		var typec2 : Class init Class.new.initializeFromAClassDefinition(c2)
+		var typec3 : Class init Class.new.initializeFromAClassDefinition(c3)
+		var p3 : Property init Property.new.initialize("p3", typec4, 0, 1)
+		var p1 : Property init Property.new.initialize("p1", typec2, 1, 1)
+		var p2 : Property init Property.new.initialize("p2", typec3, 0, -1)
+		var p4 : Property init Property.new.initialize("p4", typec4, 0, 1)
+
+		pkg.ownedTypeDefinition.add(c1)
+		pkg.ownedTypeDefinition.add(c2)
+		pkg.ownedTypeDefinition.add(c3)
+		pkg.ownedTypeDefinition.add(c4)
+		pkg.ownedTypeDefinition.add(c5)
+		pkg.ownedTypeDefinition.add(c6)
+		pkg.ownedTypeDefinition.add(c7)
+		pkg.ownedTypeDefinition.add(c8)
+
+		c5.ownedAttribute.add(p1)
+		c4.ownedAttribute.add(p2)
+		c3.ownedAttribute.add(p3)
+		c4.ownedAttribute.add(p4)
+		p2.opposite := p3
+		p3.opposite := p2
+		
+		mu.packages.add(pkg)
+		
+		var requiredClassDefinitions : Bag<ClassDefinition> init Bag<ClassDefinition>.new
+		requiredClassDefinitions.add(c7)
+		var requiredPropertys : Bag<Property> init Bag<Property>.new
+		requiredPropertys.add(p1)
+		var pruning : PrintKermetaPruner init PrintKermetaPruner.new.initialise(requiredClassDefinitions, requiredPropertys).asType(PrintKermetaPruner)
+		
+		pruning.launch()
+	end
+}
+
+
+class PrintKermetaPruner inherits KermetaPruner {
+	method onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
+		super(theClassDefinition)
+		stdio.writeln("ClassDefinition:" + theClassDefinition.name)
+	end
+	method onPropertyAdded(theProperty : Property) : Void is do
+		super(theProperty)
+		stdio.writeln("Property:" + theProperty.name)
+	end
+	method onsuperTypeAdded(theTypeDefinitionSrc : TypeDefinition, theTypeTarget : Type) : Void is do
+		super(theTypeDefinitionSrc, theTypeTarget)
+		stdio.writeln("superType:" + theTypeDefinitionSrc.name + " -> " + theTypeTarget.asType(Class).typeDefinition.name)
+	end
+}
+

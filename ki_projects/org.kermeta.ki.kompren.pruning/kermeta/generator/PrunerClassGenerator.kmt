@@ -1,0 +1,133 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package prunerGenerator;
+
+require kermeta
+require "PrunerGenerator.kmt"
+
+using kermeta::standard
+using ecore
+
+class PrunerClassGenerator inherits Generator {
+	operation initialise(pruner : PrunerGenerator) : PrunerClassGenerator is do
+		self.prunerGenerator := pruner
+		result := self
+	end
+
+	method generateCode() : Void is do
+		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.aspectisedClasses)
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" +
+						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n" +
+   					     prunerGenerator.getRequiresFromClasses(prunerGenerator.pruningData.requiredClasses) + 
+   					     "\nusing kermeta::standard\nusing kermeta::utils\n" +
+						 prunerGenerator.getUsingsFromClasses(prunerGenerator.pruningData.requiredClasses) +
+						 "class " + prunerGenerator.prunerClass.name + " {\n"
+
+		if(not prunerGenerator.radius.isVoid) then
+			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
+		end
+
+		prunerGenerator.featureParameters.each{param |
+			generatedCode := generatedCode + "\tattribute " + param.name + " : Boolean\n\n"
+		}
+
+		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
+						 generateIntialiseOperation() + generateLaunchOperation() + "\n" + generateAddOperations() + "}\n"
+	end
+
+
+	operation generateAddOperations() : String is do
+		result := ""
+
+		prunerGenerator.pruningData.classesToNotify.each{clazz |
+			result := result + "\toperation on" + clazz.name + "Added(" + clazz.getVarNameClassifier() + " : " + clazz.name + 
+					") : Void is do\n\t\tself." + clazz.getAddedAttributeName() + ".add(" + clazz.getVarNameClassifier() + ")\n\tend\n"
+		}
+
+		prunerGenerator.pruningData.relationsToNotify.each{rel |
+			var type : EClass init rel.relation.eType.asType(EClass)
+			result := result + "\toperation on" + rel.relation.name + "Added(" + 
+			rel.relation.eContainingClass.getVarNameClassifier() + "Src : " + rel.relation.eContainingClass.name + ", " +
+			type.getVarNameClassifier() + "Tar : " + type.name + ") : Void is do\n\tend\n"
+		}
+	end
+
+
+	// Generates the "launch" operation.
+	operation generateLaunchOperation() : String is do
+		result := "\toperation launch() : Void is do\n"
+		prunerGenerator.pruningData.requiredClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+					clazz.getVarNameClassifier() + ".visitToAddClasses(self) }\n"
+		}
+		prunerGenerator.pruningData.requiredClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+					clazz.getVarNameClassifier() + ".visitToAddRelations(self) }\n"
+		}
+		result := result + "\tend\n"
+	end
+
+
+	operation generateIntialiseOperation() : String is do
+		var i : Integer init 0
+		result := "\toperation initialise("
+
+		prunerGenerator.pruningData.requiredClasses.each{clazz |
+			if(i>0) then result := result + ", " end
+			result := result + clazz.getRequiredAttributeName() + " : bag " + clazz.name + "[0..*]"
+			i := i + 1
+		}
+
+		if(not prunerGenerator.radius.isVoid) then
+			result := result + ", radius : Integer"
+		end
+
+		prunerGenerator.featureParameters.each{param |
+			result := result + ", " + param.asType(FeatureParameter).name + " : Boolean"
+		}
+
+		result := result + ") : " + prunerGenerator.prunerClass.name + " is do\n"
+		result := result + "\t\tresult := self\n"
+
+		prunerGenerator.pruningData.classesToNotify.each{clazz |
+			result := result + "\t\tself." + clazz.getAddedAttributeName() + " := Bag<" + clazz.name + ">.new\n"
+		}
+
+		if(not prunerGenerator.radius.isVoid) then
+			result := result + "\t\tself.radius := radius\n"
+		end
+
+		prunerGenerator.featureParameters.each{param |
+			var name : String init param.asType(FeatureParameter).name
+			result := result + "\t\tself." + name + " := " + name + "\n"
+		}
+
+		prunerGenerator.pruningData.requiredClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
+		}
+
+		result := result + "\tend\n\n"
+	end
+
+
+	operation generateAddedAttributes() : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.classesToNotify.each{eclass |
+			result := result + "\treference " + eclass.getAddedAttributeName() + " : Bag<" + eclass.name + ">\n\n"
+		}
+	end
+
+
+	operation generateRequiredAttributes() : String is do
+		result := ""
+		
+		prunerGenerator.pruningData.requiredClasses.each{eclass |
+			result := result + "\treference " + eclass.getRequiredAttributeName() + " : " + eclass.name + "[0..*]\n\n"
+		}
+	end
+}

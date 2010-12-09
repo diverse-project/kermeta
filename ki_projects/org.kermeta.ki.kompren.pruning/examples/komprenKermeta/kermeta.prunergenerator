@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="KermetaPruner" description="The Kermeta pruner used for the visualisation of metamodels." relationsToNotify="//@relationsFocus.0">
+  <relationsFocus name="superTypes">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </relationsFocus>
+  <relationsFocus name="attributes">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </relationsFocus>
+  <relationsFocus name="type">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </relationsFocus>
+  <relationsFocus name="owningClass">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property/owningClass"/>
+  </relationsFocus>
+  <relationsFocus name="typeDefinition">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </relationsFocus>
+  <relationsFocus name="opposite">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property/opposite"/>
+  </relationsFocus>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property"/>
+</prunerGenerator:Pruning>

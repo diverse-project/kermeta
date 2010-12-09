@@ -1,0 +1,148 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package prunerGenerator;
+
+require kermeta
+require "PrunerGenerator.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using ecore
+
+class PrunerAspectGenerator inherits Generator {
+	operation initialise(pruner : PrunerGenerator) : PrunerAspectGenerator is do
+		self.prunerGenerator := pruner
+		result := self
+	end
+
+	method generateCode() : Void is do
+		var mainPackageName : String init prunerGenerator.aspectisedClasses.last().ePackage.getQualifiedName("::")
+		// "packages" contains the packages correspondeing to the all the packages used by the pruner.
+		// These packages will be used to add "using" and "require" elements into files.
+		var packages : Bag<String> init Bag<String>.new
+		
+		// Getting the different packages of the pruner.
+		prunerGenerator.aspectisedClasses.each{cl |
+			var packageName : String init cl.ePackage.getQualifiedName("::")
+			if(not packages.contains(packageName) and mainPackageName!=packageName) then
+				packages.add(packageName)
+			end
+		}
+
+		var codeUsing : String init ""
+		// Adding the header of the main aspect class.
+		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.aspectisedClasses) + 
+						"require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" + 
+						prunerGenerator.prunerClass.name + ".kmt\"\n"
+		packages.each{pkg | 
+			var subPkgs : Sequence<String> init pkg.split("::")
+			generatedCode := generatedCode + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
+			// Adding the "using" elements that refers to the other packages.
+			codeUsing := codeUsing + "using " + pkg + "\n"
+		}
+
+		generatedCode := generatedCode + codeUsing + "using kermeta::standard\nusing kermeta::utils\n" +
+						generateVisitAspect()
+
+		prunerGenerator.aspectisedClasses.each{eclass |
+			generatedCode := generatedCode + generateAspect(eclass)
+		}
+	end
+
+
+	operation generateAspect(eclass : EClass) : String is do
+		var prunerVarName : String init prunerGenerator.prunerClass.getVarNameClassifier()
+
+		result := "aspect class " + eclass.name
+		if(not prunerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }) then
+			result := result + " inherits PruningVisitorAspect"
+		end
+		result := result + " {\n"
+
+		if(not eclass.outputFocusedRelations.empty()) then
+			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
+					" : " + prunerGenerator.prunerClass.name + ") : Void is do\n\t\tcheckInitialisation()\n\t\t" +
+					"if(not self.visitedPass) then\n\t\t\tsuper(theKermetaPruner)\n"
+
+			if(prunerGenerator.pruningData.classesToNotify.contains(eclass)) then
+				result := result + "\t\t\tif(not self.addedToPruner) then\n\t\t\t\t" + prunerVarName + ".on" +
+						eclass.name + "Added(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend"
+			end
+
+			result := result + "\t\t\tself.visitedPass := true\n" + 
+			 		generateRelationCalls(eclass, true) + "\t\t\tself.visitedPass := false\n\t\tend\n\tend\n" +
+					"\tmethod visitToAddRelations(" + prunerVarName +
+					" : " + prunerGenerator.prunerClass.name + ") : Void is do\n\t\t" +
+					"if(not self.visitedPass) then\n\t\t\tsuper(theKermetaPruner)\n\t\t\tself.visitedPass := true\n" +
+					"\t\t\tself.visitedForRelations := true\n" + generateRelationCalls(eclass, false) +
+					"\t\t\tself.visitedPass := false\n\t\tend\n\tend\n"
+		end
+
+		result := result + "}\n\n"
+	end
+
+
+	operation generateRelationCalls(eclass : EClass, classVisit : Boolean) : String is do
+		var visitMethodName : String
+		
+		if(classVisit) then
+			visitMethodName := "visitToAddClasses"
+		else
+			visitMethodName := "visitToAddRelations"
+		end
+		
+		result := ""
+		
+		eclass.outputFocusedRelations.each{relation |
+			result := result + "\t\t\t"
+			if(relation.upperBound==1) then
+				if(relation.lowerBound==0) then
+					result := result + "if(not self." + relation.name + ".isVoid) then " 
+				end
+				result := result + "self." + relation.name + "." + visitMethodName + "(" + 
+						prunerGenerator.prunerClass.getVarNameClassifier() + ")" + 
+						generateAddRelations(classVisit, relation)
+						
+				if(relation.lowerBound==0) then
+					result := result + " end"
+				end
+				result := result + "\n"
+			else
+				var nameVar : String init relation.eType.asType(EClass).getVarNameClassifier() 
+				result := result + "self." + relation.name + ".each{" + nameVar +
+						" | " + nameVar + "." + visitMethodName + "(" +
+						prunerGenerator.prunerClass.getVarNameClassifier() + ")" +
+						generateAddRelations(classVisit, relation) + "}\n" 
+			end
+		}
+	end
+
+
+	operation generateAddRelations(classVisit : Boolean, relation : EReference) : String is do
+		result := ""
+		
+		if(not classVisit and prunerGenerator.pruningData.relationsToNotify.exists{rel | rel.relation==relation}) then
+			var nameVar2 : String init relation.eType.asType(EClass).getVarNameClassifier()
+			result := result + "\n\t\t\t\tif(self.visitedForRelations and " + nameVar2 +
+					".visitedForRelations) then\n\t\t\t\t\t" + prunerGenerator.prunerClass.getVarNameClassifier() +
+					".on" + relation.name + "Added(self, " + nameVar2 + ") end "
+		end
+	end
+
+
+	operation generateVisitAspect() : String is do
+		result := "aspect class PruningVisitorAspect {\n\tattribute visitedPass : Boolean\n\n\t" + 
+				"attribute visitedForRelations : Boolean\n\n\tattribute addedToPruner : Boolean\n\n\t" +
+				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
+				"self.addedToPruner := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
+				"operation visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do\n\t\t" +
+				"self.visitedPass := true\n\tend\n\n\t" +
+				"operation visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do\n\tend\n\n\t" +
+				"operation checkInitialisation() : Void is do\n\t\t" +
+				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n}\n\n"
+	end
+}

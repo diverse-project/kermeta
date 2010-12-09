@@ -1,0 +1,152 @@
+package org::kermeta::language::structure;
+require kermeta
+require "./KermetaPruner.kmt"
+using kermeta::standard
+using KermetaPruner
+
+aspect class PruningVisitorAspect {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute addedToPruner : Boolean
+
+	operation initialiseAttributes() : Void is do
+		self.visitedPass := false
+		self.addedToPruner := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+	end
+	
+	operation checkInitialisation() : Void is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+}
+
+aspect class TypeDefinition inherits PruningVisitorAspect {
+	method visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.superType.each{theType | theType.visitToAddClasses(theKermetaPruner)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.superType.each{theType | theType.visitToAddRelations(theKermetaPruner)
+				if(self.visitedForRelations and theType.visitedForRelations) then
+					theKermetaPruner.onsuperType(self, theType) end }
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Type inherits PruningVisitorAspect {
+}
+
+aspect class ClassDefinition {
+	method visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			if(not self.addedToPruner) then
+				theKermetaPruner.onClassDefinitionAdded(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaPruner) }
+			self.visitedPass := false
+		end
+	end
+
+	method visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaPruner) }
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ParameterizedType {
+	method visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.typeDefinition.visitToAddClasses(theKermetaPruner)
+			self.visitedPass := false
+		end
+	end
+
+	method visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.typeDefinition.visitToAddRelations(theKermetaPruner)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class TypedElement inherits PruningVisitorAspect {
+	method visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			if(not self.type.isVoid) then self.type.visitToAddClasses(theKermetaPruner) end
+			self.visitedPass := false
+		end
+	end
+
+	method visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.type.isVoid) then self.type.visitToAddRelations(theKermetaPruner) end
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Property {
+	method visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			if(not self.addedToPruner) then
+				theKermetaPruner.onPropertyAdded(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			if(not self.owningClass.isVoid) then self.owningClass.visitToAddClasses(theKermetaPruner) end
+			self.visitedPass := false
+		end
+	end
+
+	method visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaPruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.owningClass.isVoid) then self.owningClass.visitToAddRelations(theKermetaPruner) end
+			self.visitedPass := false
+		end
+	end
+}
