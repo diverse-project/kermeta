@@ -38,10 +38,10 @@ abstract class KermetaPruner {
 
 
 	operation launch() : Void is do
-		requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
-		requiredPropertys.each{theProperty | theProperty.visitToAddClasses(self) }
-		requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
-		requiredPropertys.each{theProperty | theProperty.visitToAddRelations(self) }
+		requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self, 0) }
+		requiredPropertys.each{theProperty | theProperty.visitToAddClasses(self, 0) }
+		requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self, 0) }
+		requiredPropertys.each{theProperty | theProperty.visitToAddRelations(self, 0) }
 	end
 
 	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
@@ -113,7 +113,7 @@ class Test {
 		requiredClassDefinitions.add(c7)
 		var requiredPropertys : Bag<Property> init Bag<Property>.new
 		requiredPropertys.add(p1)
-		var pruning : PrintKermetaPruner init PrintKermetaPruner.new.initialise(requiredClassDefinitions, requiredPropertys, 2).asType(PrintKermetaPruner)
+		var pruning : PrintKermetaPruner init PrintKermetaPruner.new.initialise(requiredClassDefinitions, requiredPropertys, 1).asType(PrintKermetaPruner)
 		
 		pruning.launch()
 	end

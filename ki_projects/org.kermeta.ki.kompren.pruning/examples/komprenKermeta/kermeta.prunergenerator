@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="KermetaPruner" description="The Kermeta pruner used for the visualisation of metamodels." relationsToNotify="//@relationsFocus.0">
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:prunerGenerator="http://pruningGenerator.org" name="KermetaPruner" description="The Kermeta pruner used for the visualisation of metamodels." relationsToNotify="//@relationsFocus.0">
   <relationsFocus name="superTypes">
     <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
   </relationsFocus>
@@ -18,6 +18,9 @@
   <relationsFocus name="opposite">
     <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property/opposite"/>
   </relationsFocus>
+  <parameters xsi:type="prunerGenerator:RadiusParameter">
+    <focusedClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  </parameters>
   <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
   <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property"/>
   <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>

@@ -62,11 +62,15 @@ class PrunerClassGenerator inherits Generator {
 		result := "\toperation launch() : Void is do\n"
 		prunerGenerator.pruningData.requiredClasses.each{clazz |
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
-					clazz.getVarNameClassifier() + ".visitToAddClasses(self) }\n"
+					clazz.getVarNameClassifier() + ".visitToAddClasses(self"
+			if(not prunerGenerator.radius.isVoid) then result := result + ", 0" end
+			result := result + ") }\n"
 		}
 		prunerGenerator.pruningData.requiredClasses.each{clazz |
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
-					clazz.getVarNameClassifier() + ".visitToAddRelations(self) }\n"
+					clazz.getVarNameClassifier() + ".visitToAddRelations(self"
+			if(not prunerGenerator.radius.isVoid) then result := result + ", 0" end
+			result := result + ") }\n"
 		}
 		result := result + "\tend\n"
 	end

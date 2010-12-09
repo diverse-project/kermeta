@@ -65,19 +65,40 @@ class PrunerAspectGenerator inherits Generator {
 
 		if(not eclass.outputFocusedRelations.empty()) then
 			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
-					" : " + prunerGenerator.prunerClass.name + ") : Void is do\n\t\tcheckInitialisation()\n\t\t" +
-					"if(not self.visitedPass) then\n\t\t\tsuper(theKermetaPruner)\n"
+					" : " + prunerGenerator.prunerClass.name
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + ", currentRadius : Integer"
+			end
+			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass"
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
+			end
+			result := result + ") then\n\t\t\tsuper(theKermetaPruner"
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + ", currentRadius"
+			end
+			result := result + ")\n"
 
 			if(prunerGenerator.pruningData.classesToNotify.contains(eclass)) then
 				result := result + "\t\t\tif(not self.addedToPruner) then\n\t\t\t\t" + prunerVarName + ".on" +
-						eclass.name + "Added(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend"
+						eclass.name + "Added(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend\n"
 			end
 
 			result := result + "\t\t\tself.visitedPass := true\n" + 
 			 		generateRelationCalls(eclass, true) + "\t\t\tself.visitedPass := false\n\t\tend\n\tend\n" +
-					"\tmethod visitToAddRelations(" + prunerVarName +
-					" : " + prunerGenerator.prunerClass.name + ") : Void is do\n\t\t" +
-					"if(not self.visitedPass) then\n\t\t\tsuper(theKermetaPruner)\n\t\t\tself.visitedPass := true\n" +
+					"\tmethod visitToAddRelations(" + prunerVarName + " : " + prunerGenerator.prunerClass.name
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + ", currentRadius : Integer"
+			end
+			result := result + ") : Void is do\n\t\t" + "if(not self.visitedPass"
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
+			end
+			result := result + ") then\n\t\t\tsuper(theKermetaPruner"
+			if(not prunerGenerator.radius.isVoid) then
+				result := result + ", currentRadius"
+			end
+			result := result + ")\n\t\t\tself.visitedPass := true\n" +
 					"\t\t\tself.visitedForRelations := true\n" + generateRelationCalls(eclass, false) +
 					"\t\t\tself.visitedPass := false\n\t\tend\n\tend\n"
 		end
@@ -98,14 +119,25 @@ class PrunerAspectGenerator inherits Generator {
 		result := ""
 		
 		eclass.outputFocusedRelations.each{relation |
+			var radiusCode : String
+			if(not prunerGenerator.radius.isVoid) then
+				if(prunerGenerator.radius.focusedClasses.exists{cl |
+					relation.eContainingClass==cl or relation.eContainingClass.isSuperTypeOf(cl)}) then
+					radiusCode := ", currentRadius+1"
+				else
+					radiusCode := ", currentRadius"
+				end
+			else radiusCode := "" end
+		
 			result := result + "\t\t\t"
+
 			if(relation.upperBound==1) then
 				if(relation.lowerBound==0) then
 					result := result + "if(not self." + relation.name + ".isVoid) then " 
 				end
 				result := result + "self." + relation.name + "." + visitMethodName + "(" + 
-						prunerGenerator.prunerClass.getVarNameClassifier() + ")" + 
-						generateAddRelations(classVisit, relation)
+						prunerGenerator.prunerClass.getVarNameClassifier() + radiusCode + 
+						")" + generateAddRelations(classVisit, relation)
 						
 				if(relation.lowerBound==0) then
 					result := result + " end"
@@ -115,7 +147,7 @@ class PrunerAspectGenerator inherits Generator {
 				var nameVar : String init relation.eType.asType(EClass).getVarNameClassifier() 
 				result := result + "self." + relation.name + ".each{" + nameVar +
 						" | " + nameVar + "." + visitMethodName + "(" +
-						prunerGenerator.prunerClass.getVarNameClassifier() + ")" +
+						prunerGenerator.prunerClass.getVarNameClassifier() + radiusCode + ")" +
 						generateAddRelations(classVisit, relation) + "}\n" 
 			end
 		}
@@ -139,10 +171,12 @@ class PrunerAspectGenerator inherits Generator {
 				"attribute visitedForRelations : Boolean\n\n\tattribute addedToPruner : Boolean\n\n\t" +
 				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
 				"self.addedToPruner := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
-				"operation visitToAddClasses(theKermetaPruner : KermetaPruner) : Void is do\n\t\t" +
-				"self.visitedPass := true\n\tend\n\n\t" +
-				"operation visitToAddRelations(theKermetaPruner : KermetaPruner) : Void is do\n\tend\n\n\t" +
-				"operation checkInitialisation() : Void is do\n\t\t" +
+				"operation visitToAddClasses(theKermetaPruner : KermetaPruner"
+		if(not prunerGenerator.radius.isVoid) then result := result + ", currentRadius : Integer" end
+		result := result + ") : Void is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
+				"operation visitToAddRelations(theKermetaPruner : KermetaPruner"
+		if(not prunerGenerator.radius.isVoid) then result := result + ", currentRadius : Integer" end
+		result := result + ") : Void is do\n\tend\n\n\toperation checkInitialisation() : Void is do\n\t\t" +
 				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n}\n\n"
 	end
 }
