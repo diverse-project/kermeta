@@ -34,9 +34,12 @@ import org.kermeta.art2.annotation.ThirdParties;
 import org.kermeta.art2.annotation.ThirdParty;
 import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
+import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.messaging.ProblemMessage;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
+import org.kermeta.language.api.port.PortKmMerger;
+import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.merger.BinaryMergerAspect;
@@ -68,31 +71,23 @@ import runner.MainRunner;
 @ComponentType
 public class Art2ComponentKmBinaryMerger extends AbstractComponentType implements org.kermeta.language.api.port.PortKmBinaryMerger{
 
-    protected MessagePort logPort = null;
     protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
     protected String bundleSymbolicName = "";
     protected Bundle bundle;
 
-    public MessagePort getLogPort() {
-        return logPort;
-    }
 
-    public String getBundleSymbolicName() {
-        return bundleSymbolicName;
-    }
+    protected SimpleLogger logger;
+
 
     /**
      * method called when an instance of this component is instantiated and started
      */
     @Start
     public void start() {
-        System.out.println("Art2ComponentTexteditorEclipse.start ...");
-
-        // store some useful data
-        logPort = getPortByName("log", MessagePort.class);
-
         bundle = (Bundle) this.getDictionary().get("osgi.bundle");
         bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        getLogger().debug("Succesfully started "+ bundleSymbolicName);
     }
 
     /**
@@ -119,7 +114,7 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
         BinaryMerger merger = org.kermeta.language.merger.RichFactory.createBinaryMerger();
         ModelingUnitResult result = new ModelingUnitResult();
 		try {
-			result.setModelingUnit(merger.merge(enforceAspect(first_mu), enforceAspect(second_mu)));
+			result.setModelingUnit((ModelingUnit) merger.merge(enforceAspect(first_mu), enforceAspect(second_mu)));
 		
 	        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
 	        for (Object o : mergerAspect.getErrors()) {
@@ -129,6 +124,7 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
 	        		modelRef.setRefObject(e.aspectElement());
 	        		// TODO bug, the nested exception isn't the correct one, I don't know how to cast the BinaryMergerExceptionAspect into a classic java Exception
 	        		//ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", e, modelRef);
+	        		
 	        		ProblemMessage pm = (ProblemMessage) UnifiedMessageFactory.getInstance().createErrorMessage(e.message(), "org.kemeta.language.merger.binarymerger", null, modelRef);
 	        		result.getProblems().add(pm);
 	        		// TODO also send the problem to a log port ?
@@ -172,5 +168,29 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
     	else{
     		return mu;
     	}
+    }
+    
+ // --- Port accessors ---
+
+    public PortResourceLoader getKmtLoaderPort() {
+		return getPortByName("kmtLoader", PortResourceLoader.class);
+	}
+    
+    public PortKmMerger getKmMergerPort() {
+		return getPortByName("kmMerger", PortKmMerger.class);
+	}
+    
+    
+    // --- GETTERS and SETTERS ---
+    public SimpleLogger getLogger() {
+		return logger;
+	}
+
+    public String getBundleSymbolicName() {
+        return bundleSymbolicName;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
     }
 }

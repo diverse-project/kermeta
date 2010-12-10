@@ -194,6 +194,7 @@
 			org.kermeta.art2.framework,
 			org.kermeta.art2.framework.osgi,
 			org.kermeta.art2.framework.port,
+			org.kermeta.language.api.art2.port.utils,
 			org.kermeta.language.api.messaging,
 			org.kermeta.language.api.port,
 			org.kermeta.language.api.result,
