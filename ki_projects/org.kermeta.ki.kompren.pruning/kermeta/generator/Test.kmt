@@ -22,6 +22,8 @@ class Test {
 	operation main() : Void is do
 		generateKomprenKermetaModel()
 		generateSMModel()
+		generateClassModel()
+		generateInvertedClassModel()
 	end
 
 
@@ -44,6 +46,28 @@ class Test {
 
 		pruner.generatePruner()
 		saveCode(pruner, "../../examples/stateMachine/output/")
+	end
+
+
+	operation generateClassModel() : Void is do
+		var modelURI	: String init "platform:/resource/org.kermeta.ki.kompren.pruning/examples/class/ClassModel.ecore"
+		var pruningSM 	: Pruning init getPruningModel("platform:/resource/org.kermeta.ki.kompren.pruning/examples/class/class.prunergenerator")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, modelURI)
+
+		pruner.generatePruner()
+		saveCode(pruner, "../../examples/class/output/")
+	end
+
+
+	operation generateInvertedClassModel() : Void is do
+		var modelURI	: String init "platform:/resource/org.kermeta.ki.kompren.pruning/examples/class/ClassModel.ecore"
+		var pruningSM 	: Pruning init getPruningModel("platform:/resource/org.kermeta.ki.kompren.pruning/examples/classInverted/classInverted.prunergenerator")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var pruner 		: PrunerGenerator init PrunerGenerator.new.initialise(pruningSM, pkg, modelURI)
+
+		pruner.generatePruner()
+		saveCode(pruner, "../../examples/classInverted/output/")
 	end
 	
 	

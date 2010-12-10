@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="InvertedClassModelPruner" relationsToNotify="//@relationsFocus.0">
+  <relationsFocus name="invertedSuperClasses" createOpposite="true">
+    <relation href="../class/ClassModel.ecore#//classModel/Clazz/superClasses"/>
+  </relationsFocus>
+  <requiredClasses href="../class/ClassModel.ecore#//classModel/Clazz"/>
+  <classesToNotify href="../class/ClassModel.ecore#//classModel/Clazz"/>
+</prunerGenerator:Pruning>

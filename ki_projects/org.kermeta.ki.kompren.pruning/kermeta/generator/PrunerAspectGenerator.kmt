@@ -71,6 +71,32 @@ class PrunerAspectGenerator inherits Generator {
 		end
 		result := result + " {\n"
 
+		// Generating the opposite attributes or initialisation methods.
+		prunerGenerator.pruningData.relationsFocus.each{rel |
+			if(rel.createOpposite) then
+				var cl : EClass init rel.relation.eContainingClass
+				var etype : EClass init rel.relation.eType.asType(EClass)
+
+				// Attributes corresponding to the opposites to create are now added to the aspect class.
+				if(cl==eclass or cl.isSuperTypeOf(eclass)) then
+					result := result + "\treference " + rel.relation.name +
+							  " : " + rel.relation.eType.asType(EClass).name + "[" + rel.relation.lowerBound.toString + ".."
+					if(rel.relation.upperBound==-1) then
+						result := result + "*"
+					else
+						result := result + rel.relation.upperBound.toString
+					end
+
+					result := result + "]\n\n"
+				end
+
+				// Initialisation methods must be added to the aspect clazz that contains the attributes which opposites are created.
+				if(etype==eclass or etype.isSuperTypeOf(eclass)) then
+					result := result + 	generateInitialiseOppositeOperation(rel.relation)
+				end
+			end
+		}
+
 		if(not eclass.outputFocusedRelations.empty() or prunerGenerator.pruningData.requiredClasses.contains(eclass)) then
 			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
 					" : " + prunerGenerator.prunerClass.name
@@ -112,6 +138,14 @@ class PrunerAspectGenerator inherits Generator {
 		end
 
 		result := result + "}\n\n"
+	end
+
+
+	// Generates the operation that initialises a created opposite.
+	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
+		var name : String init relation.eContainingClass.getVarNameClassifier()
+		result := "\toperation initialise" + relation.name + "() : Void is do\n\t\tself." +
+					relation.name.split("Opposite").first() + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }\n\tend\n\n"
 	end
 
 
@@ -165,7 +199,6 @@ class PrunerAspectGenerator inherits Generator {
 
 	operation generateAddRelations(classVisit : Boolean, relation : EReference) : String is do
 		result := ""
-		
 		if(not classVisit and prunerGenerator.pruningData.relationsToNotify.exists{rel | rel.relation==relation}) then
 			var nameVar2 : String init relation.eType.asType(EClass).getVarNameClassifier()
 			result := result + "\n\t\t\t\tif(self.visitedForRelations and " + nameVar2 +

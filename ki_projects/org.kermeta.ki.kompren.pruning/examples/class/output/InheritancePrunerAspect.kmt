@@ -1,0 +1,58 @@
+package ex::classModel;
+require kermeta
+require "platform:/resource/org.kermeta.ki.kompren.pruning/examples/class/ClassModel.ecore"
+require "InheritancePruner.kmt"
+using kermeta::standard
+using kermeta::utils
+aspect class PruningVisitorAspect {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute addedToPruner : Boolean
+
+	operation initialiseAttributes() : Void is do
+		self.visitedPass := false
+		self.addedToPruner := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theInheritancePruner : InheritancePruner) : Void is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theInheritancePruner : InheritancePruner) : Void is do
+	end
+
+	operation checkInitialisation() : Void is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+}
+
+aspect class Clazz inherits PruningVisitorAspect {
+	method visitToAddClasses(theInheritancePruner : InheritancePruner) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theInheritancePruner)
+			if(not self.addedToPruner) then
+				theInheritancePruner.onClazzAdded(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			self.superClasses.each{theClazz | theClazz.visitToAddClasses(theInheritancePruner)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theInheritancePruner : InheritancePruner) : Void is do
+		if(not self.visitedPass) then
+			super(theInheritancePruner)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.superClasses.each{theClazz | theClazz.visitToAddRelations(theInheritancePruner)
+				if(self.visitedForRelations and theClazz.visitedForRelations) then
+					theInheritancePruner.onsuperClassesAdded(self, theClazz) end }
+			self.visitedPass := false
+		end
+	end
+}
+

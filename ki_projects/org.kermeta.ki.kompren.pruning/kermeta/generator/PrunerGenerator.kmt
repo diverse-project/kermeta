@@ -63,6 +63,13 @@ class PrunerGenerator {
 				ref.containment := false
 				ref.eContainingClass.outputFocusedRelations.add(ref)
 				rel.relation := ref
+				if(pruningData.relationsToNotify.contains(rel)) then
+					pruningData.relationsToNotify.remove(rel)
+					var relation : Relation init Relation.new
+					relation.relation := ref
+					relation.createOpposite := false
+					pruningData.relationsToNotify.add(relation)
+				end
 			else
 				rel.relation.eContainingClass.outputFocusedRelations.add(rel.relation)
 			end

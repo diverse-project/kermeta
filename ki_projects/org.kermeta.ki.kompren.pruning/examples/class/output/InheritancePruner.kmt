@@ -1,0 +1,29 @@
+package ex::classModel;
+require kermeta
+require "platform:/resource/org.kermeta.ki.kompren.pruning/examples/class/ClassModel.ecore"
+require "InheritancePrunerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class InheritancePruner {
+	reference requiredClazzs : Clazz[0..*]
+
+	reference addedClazzs : Bag<Clazz>
+
+	operation initialise(requiredClazzs : bag Clazz[0..*]) : InheritancePruner is do
+		result := self
+		self.addedClazzs := Bag<Clazz>.new
+		self.requiredClazzs.addAll(requiredClazzs)
+	end
+
+	operation launch() : Void is do
+		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
+		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
+	end
+
+	operation onClazzAdded(theClazz : Clazz) : Void is do
+		self.addedClazzs.add(theClazz)
+	end
+	operation onsuperClassesAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
+	end
+}
