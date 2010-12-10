@@ -71,7 +71,7 @@ class PrunerAspectGenerator inherits Generator {
 		end
 		result := result + " {\n"
 
-		if(not eclass.outputFocusedRelations.empty()) then
+		if(not eclass.outputFocusedRelations.empty() or prunerGenerator.pruningData.requiredClasses.contains(eclass)) then
 			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
 					" : " + prunerGenerator.prunerClass.name
 			if(not prunerGenerator.radius.isVoid) then
@@ -79,9 +79,9 @@ class PrunerAspectGenerator inherits Generator {
 			end
 			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
 			if(not prunerGenerator.radius.isVoid) then
-				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
+				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
 			end
-			result := result + ") then\n\t\t\tsuper(theKermetaPruner"
+			result := result + ") then\n\t\t\tsuper(" + prunerVarName
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + ", currentRadius"
 			end
@@ -100,9 +100,9 @@ class PrunerAspectGenerator inherits Generator {
 			end
 			result := result + ") : Void is do\n\t\t" + "if(not self.visitedPass" + paramCode
 			if(not prunerGenerator.radius.isVoid) then
-				result := result + " and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)"
+				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
 			end
-			result := result + ") then\n\t\t\tsuper(theKermetaPruner"
+			result := result + ") then\n\t\t\tsuper(" + prunerVarName
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + ", currentRadius"
 			end
@@ -130,7 +130,8 @@ class PrunerAspectGenerator inherits Generator {
 			var radiusCode : String
 			if(not prunerGenerator.radius.isVoid) then
 				if(prunerGenerator.radius.focusedClasses.exists{cl |
-					relation.eContainingClass==cl or relation.eContainingClass.isSuperTypeOf(cl)}) then
+					relation.eContainingClass==cl or cl.isSuperTypeOf(relation.eContainingClass) or 
+					relation.eContainingClass.isSuperTypeOf(cl)}) then
 					radiusCode := ", currentRadius+1"
 				else
 					radiusCode := ", currentRadius"
@@ -175,14 +176,15 @@ class PrunerAspectGenerator inherits Generator {
 
 
 	operation generateVisitAspect() : String is do
+		var prunerVarName : String init prunerGenerator.prunerClass.getVarNameClassifier()
 		result := "aspect class PruningVisitorAspect {\n\tattribute visitedPass : Boolean\n\n\t" + 
 				"attribute visitedForRelations : Boolean\n\n\tattribute addedToPruner : Boolean\n\n\t" +
 				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
 				"self.addedToPruner := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
-				"operation visitToAddClasses(theKermetaPruner : KermetaPruner"
+				"operation visitToAddClasses(" + prunerVarName + " : " + prunerGenerator.prunerClass.name
 		if(not prunerGenerator.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") : Void is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
-				"operation visitToAddRelations(theKermetaPruner : KermetaPruner"
+				"operation visitToAddRelations(" + prunerVarName + " : " + prunerGenerator.prunerClass.name
 		if(not prunerGenerator.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") : Void is do\n\tend\n\n\toperation checkInitialisation() : Void is do\n\t\t" +
 				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n}\n\n"

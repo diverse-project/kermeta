@@ -97,6 +97,11 @@ class PrunerGenerator {
 				end
 			end
 		}
+		pruningData.requiredClasses.each{eclass |
+			if(not aspectisedClasses.contains(eclass)) then
+				aspectisedClasses.add(eclass)
+			end
+		}
 		// Removing the classes that are only types of relations unless they
 		// are a supertype upon the gathered classes or they are required or
 		// they must notify when visiting them.

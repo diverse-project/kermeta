@@ -1,0 +1,36 @@
+package ex::stateMachine;
+require kermeta
+require "platform:/resource/org.kermeta.ki.kompren.pruning/examples/stateMachine/StateMachine.ecore"
+require "StateMachinePrunerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class StateMachinePruner {
+	attribute radius : Integer
+
+	reference requiredStates : State[0..*]
+
+	reference addedStates : Bag<State>
+
+	reference addedTransitions : Bag<Transition>
+
+	operation initialise(requiredStates : bag State[0..*], radius : Integer) : StateMachinePruner is do
+		result := self
+		self.addedStates := Bag<State>.new
+		self.addedTransitions := Bag<Transition>.new
+		self.radius := radius
+		self.requiredStates.addAll(requiredStates)
+	end
+
+	operation launch() : Void is do
+		self.requiredStates.each{theState | theState.visitToAddClasses(self, 0) }
+		self.requiredStates.each{theState | theState.visitToAddRelations(self, 0) }
+	end
+
+	operation onStateAdded(theState : State) : Void is do
+		self.addedStates.add(theState)
+	end
+	operation onTransitionAdded(theTransition : Transition) : Void is do
+		self.addedTransitions.add(theTransition)
+	end
+}

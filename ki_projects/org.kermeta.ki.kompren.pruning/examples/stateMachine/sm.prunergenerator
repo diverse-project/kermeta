@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:prunerGenerator="http://pruningGenerator.org" name="StateMachinePruner">
+  <relationsFocus name="outgoingTransitions">
+    <relation href="StateMachine.ecore#//stateMachine/OutputState/outgoingTransitions"/>
+  </relationsFocus>
+  <relationsFocus name="target">
+    <relation href="StateMachine.ecore#//stateMachine/Transition/target"/>
+  </relationsFocus>
+  <parameters xsi:type="prunerGenerator:RadiusParameter">
+    <focusedClasses href="StateMachine.ecore#//stateMachine/State"/>
+  </parameters>
+  <requiredClasses href="StateMachine.ecore#//stateMachine/State"/>
+  <classesToNotify href="StateMachine.ecore#//stateMachine/State"/>
+  <classesToNotify href="StateMachine.ecore#//stateMachine/Transition"/>
+</prunerGenerator:Pruning>
