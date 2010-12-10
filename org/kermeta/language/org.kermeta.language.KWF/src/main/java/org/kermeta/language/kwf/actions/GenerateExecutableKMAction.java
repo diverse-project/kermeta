@@ -64,7 +64,9 @@ public class GenerateExecutableKMAction {
 						ModelingUnit kmt2KmResult = art2ComponentKWF.getKmtLoaderPort().load(kmtFile.getCanonicalPath(), PortResourceLoader.URIType.FILE, "");
 						units.add(kmt2KmResult);
 						if(!request.getIntermediateDebugOutputURI().isEmpty()){
-							saveModelingUnit(request.getIntermediateDebugOutputURI()+"/kmt2km/"+kmtFile.getName().replace(".kmt", "")+".km", kmt2KmResult);
+							String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/kmt2km/"+kmtFile.getName().replace(".kmt", "")+".km";
+							art2ComponentKWF.getLogger().debug("saving intermediate result :" +intermediateOutputUri);
+							saveModelingUnit(intermediateOutputUri, kmt2KmResult);
 						}
 					}
 					// TODO process KM files
@@ -72,7 +74,9 @@ public class GenerateExecutableKMAction {
 					// Merge everything
 					ModelingUnitResult mergeResult = art2ComponentKWF.getKmMergerPort().merge(units);
 					if(!request.getIntermediateDebugOutputURI().isEmpty()){
-						saveModelingUnit(request.getIntermediateDebugOutputURI()+"/merge/result.km", mergeResult.getModelingUnit());
+						String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/merge/result.km";
+						art2ComponentKWF.getLogger().debug("saving intermediate result :" +intermediateOutputUri);
+						saveModelingUnit(intermediateOutputUri, mergeResult.getModelingUnit());
 					}
 					// TODO Resolve result
 
