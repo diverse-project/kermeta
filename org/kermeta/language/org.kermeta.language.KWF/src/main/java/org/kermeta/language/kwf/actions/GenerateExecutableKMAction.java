@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortResourceLoader;
+import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.kwf.art2.impl.Art2ComponentKWF;
 import org.kermeta.language.structure.ModelingUnit;
 
@@ -39,14 +40,16 @@ public class GenerateExecutableKMAction {
 	 * do the real work
 	 * TODO deal with any context of the workflow
 	 * @param request
+	 * @throws Exception 
 	 */
-	public void process(KExecutableKmUserRequestEvent request){
+	public void process(KExecutableKmUserRequestEvent request) throws Exception{
 		try {
 			
 			ModelingUnit result = null;
 			
 			String inputDescriptionURI = request.getInputDescriptionURI();
-			File f = new File(inputDescriptionURI);
+			URI uri = URI.createURI(inputDescriptionURI);
+			File f = new File(uri.toFileString());
 			if(f.exists()){	
 				if(f.isDirectory()){
 					ArrayList<ModelingUnit> units = new ArrayList<ModelingUnit>();
@@ -58,15 +61,23 @@ public class GenerateExecutableKMAction {
 					}; 
 					for (File kmtFile : f.listFiles(filterKMT)){
 						art2ComponentKWF.getLogger().debug("loading : " + kmtFile.getCanonicalPath());
-						units.add(
-								art2ComponentKWF.getKmtLoaderPort().load(kmtFile.getCanonicalPath(), PortResourceLoader.URIType.FILE, ""));
+						ModelingUnit kmt2KmResult = art2ComponentKWF.getKmtLoaderPort().load(kmtFile.getCanonicalPath(), PortResourceLoader.URIType.FILE, "");
+						units.add(kmt2KmResult);
+						if(!request.getIntermediateDebugOutputURI().isEmpty()){
+							saveModelingUnit(request.getIntermediateDebugOutputURI()+"/kmt2km/"+kmtFile.getName().replace(".kmt", "")+".km", kmt2KmResult);
+						}
 					}
 					// TODO process KM files
 					// TODO process ecore files
-					// TODO Merge everything
+					// Merge everything
+					ModelingUnitResult mergeResult = art2ComponentKWF.getKmMergerPort().merge(units);
+					if(!request.getIntermediateDebugOutputURI().isEmpty()){
+						saveModelingUnit(request.getIntermediateDebugOutputURI()+"/merge/result.km", mergeResult.getModelingUnit());
+					}
 					// TODO Resolve result
 
 					art2ComponentKWF.getLogger().error("Not fuly implemented : cannot finish request GenerateExecutableKMAction " + inputDescriptionURI, null);
+					
 				}
 				else{
 					// TODO deal with kp file description

@@ -29,6 +29,7 @@ import org.kermeta.language.api.kevent.KEvent;
 import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKEvent;
+import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.kwf.actions.GenerateExecutableKMAction;
 import org.kermeta.language.structure.ModelingUnit;
@@ -44,11 +45,12 @@ import org.osgi.framework.Bundle;
 })
 @Requires({
     //@ProvidedPort(name = "asynclog", type=PortType.MESSAGE),
-    /**
-     * Log port for sending technical messages
-     */
+    /** Log port for sending technical messages */
     @RequiredPort(name = "log", type = PortType.MESSAGE),
-    @RequiredPort(name = "kmtloader", type = PortType.SERVICE, className = PortResourceLoader.class)
+    /** port that is able to load KMT files into ModelingUnits */
+    @RequiredPort(name = "kmtLoader", type = PortType.SERVICE, className = PortResourceLoader.class),
+    /** port that is able to merge a set of ModelingUnit into one ModelingUnit */
+    @RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class)
 })
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -65,28 +67,9 @@ public class Art2ComponentKWF extends AbstractComponentType {
     
     protected SimpleLogger logger;
 
-    public SimpleLogger getLogger() {
-		return logger;
-	}
-
-	protected PortResourceLoader kmtLoaderPort = null;
-    public PortResourceLoader getKmtLoaderPort() {
-    	if(kmtLoaderPort == null){
-    		kmtLoaderPort = getPortByName("kmtloader", PortResourceLoader.class);
-    	}
-		return kmtLoaderPort;
-	}
-
 	protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
 
 
-    public String getBundleSymbolicName() {
-        return bundleSymbolicName;
-    }
-
-    public Bundle getBundle() {
-        return bundle;
-    }
 
     @Start
     public void start() {
@@ -102,21 +85,25 @@ public class Art2ComponentKWF extends AbstractComponentType {
 
     @Port(name = "kevent")
     public void processKEvent(Object event) {
-
-        //CHECK event instance of KEVENT
-        if (event instanceof KEvent) {
-        	logger.info("KWF received new event : " + event);
-
-            if (event instanceof KDocumentUpdate) {
-                processKDocumentUpdate((KDocumentUpdate) event);
-            }
-            if (event instanceof KExecutableKmUserRequestEvent){
-            	GenerateExecutableKMAction action = new GenerateExecutableKMAction(this);
-            	action.process((KExecutableKmUserRequestEvent) event);
-            }
-
-        } else {
-        	logger.warning("Ignored message " + event.getClass());
+    	try{
+	        //CHECK event instance of KEVENT
+	        if (event instanceof KEvent) {
+	        	logger.info("KWF received new event : " + event);
+	
+	            if (event instanceof KDocumentUpdate) {
+	                processKDocumentUpdate((KDocumentUpdate) event);
+	            }
+	            if (event instanceof KExecutableKmUserRequestEvent){
+	            	GenerateExecutableKMAction action = new GenerateExecutableKMAction(this);
+	            	action.process((KExecutableKmUserRequestEvent) event);
+	            }
+	
+	        } else {
+	        	logger.warning("Ignored message " + event.getClass());
+	        }
+    	}
+        catch (Exception e){
+        	logger.error("Failed to process event " + event + " due to " + e.getMessage(), e);
         }
 
     }
@@ -133,5 +120,28 @@ public class Art2ComponentKWF extends AbstractComponentType {
 
 
     }
+    
+    // --- Port accessors ---
 
+    public PortResourceLoader getKmtLoaderPort() {
+		return getPortByName("kmtLoader", PortResourceLoader.class);
+	}
+    
+    public PortKmMerger getKmMergerPort() {
+		return getPortByName("kmMerger", PortKmMerger.class);
+	}
+    
+    
+    // --- GETTERS and SETTERS ---
+    public SimpleLogger getLogger() {
+		return logger;
+	}
+
+    public String getBundleSymbolicName() {
+        return bundleSymbolicName;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
 }
