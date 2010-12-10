@@ -97,7 +97,9 @@ class PrunerAspectGenerator inherits Generator {
 			end
 		}
 
-		if(not eclass.outputFocusedRelations.empty() or prunerGenerator.pruningData.requiredClasses.contains(eclass)) then
+		if(not eclass.outputFocusedRelations.empty() or prunerGenerator.pruningData.requiredClasses.contains(eclass) or
+			prunerGenerator.pruningData.classesToNotify.contains(eclass) or
+			prunerGenerator.pruningData.relationsToNotify.exists{rel | rel.relation.eContainingClass==eclass}) then
 			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
 					" : " + prunerGenerator.prunerClass.name
 			if(not prunerGenerator.radius.isVoid) then

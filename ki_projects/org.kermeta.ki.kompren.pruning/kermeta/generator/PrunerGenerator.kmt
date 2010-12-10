@@ -109,14 +109,25 @@ class PrunerGenerator {
 				aspectisedClasses.add(eclass)
 			end
 		}
+		pruningData.classesToNotify.each{eclass |
+			if(not aspectisedClasses.contains(eclass)) then
+				aspectisedClasses.add(eclass)
+			end
+		}
+		pruningData.relationsToNotify.each{relation |
+			if(not aspectisedClasses.contains(relation.relation.eContainingClass)) then
+				aspectisedClasses.add(relation.relation.eContainingClass)
+			end
+		}
 		// Removing the classes that are only types of relations unless they
 		// are a supertype upon the gathered classes or they are required or
 		// they must notify when visiting them.
 		aspectisedClasses.each{eclass |
 			if(eclass.outputFocusedRelations.empty() and
 				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass)} and
-				(not pruningData.requiredClasses.contains(eclass) or
-				not pruningData.classesToNotify.contains(eclass))) then
+				not pruningData.requiredClasses.contains(eclass) and
+				not pruningData.relationsToNotify.exists{rel | rel.relation.eContainingClass==eclass} and
+				not pruningData.classesToNotify.contains(eclass)) then
 				aspectisedClasses.remove(eclass)
 			end
 		}

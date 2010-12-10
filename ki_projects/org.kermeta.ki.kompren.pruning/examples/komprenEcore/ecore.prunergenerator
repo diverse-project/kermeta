@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:prunerGenerator="http://pruningGenerator.org" name="EcorePruner" relationsToNotify="//@relationsFocus.1">
+  <relationsFocus name="features">
+    <relation href="Ecore.ecore#//EClass/eStructuralFeatures"/>
+  </relationsFocus>
+  <relationsFocus name="superTypes">
+    <relation href="Ecore.ecore#//EClass/eSuperTypes"/>
+  </relationsFocus>
+  <relationsFocus name="eType">
+    <relation href="Ecore.ecore#//ETypedElement/eType"/>
+  </relationsFocus>
+  <relationsFocus name="eContClass">
+    <relation href="Ecore.ecore#//EStructuralFeature/eContainingClass"/>
+  </relationsFocus>
+  <parameters xsi:type="prunerGenerator:RadiusParameter">
+    <focusedClasses href="Ecore.ecore#//EClass"/>
+  </parameters>
+  <parameters xsi:type="prunerGenerator:FeatureParameter" name="lowerCard0" description="Defines if relations with lower card 0 must be considered." expression="lowerBound!=0">
+    <element xsi:type="ecore:EAttribute" href="Ecore.ecore#//ETypedElement/lowerBound"/>
+  </parameters>
+  <requiredClasses href="Ecore.ecore#//EClass"/>
+  <classesToNotify href="Ecore.ecore#//EClass"/>
+  <classesToNotify href="Ecore.ecore#//EReference"/>
+</prunerGenerator:Pruning>
