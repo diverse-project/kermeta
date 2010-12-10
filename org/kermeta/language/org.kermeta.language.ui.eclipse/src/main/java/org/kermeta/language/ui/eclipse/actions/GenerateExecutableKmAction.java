@@ -67,7 +67,7 @@ public class GenerateExecutableKmAction  implements IObjectActionDelegate{
 	private void sendGenerateExecutableKmEvent(String uri) {
 		Art2ComponentKermetaUI4Eclipse.getDefault().getLogger().debug("Generating GenerateExecutableKmEvent for " +uri);
 		Art2ComponentKermetaUI4Eclipse.getDefault().getKEventPort().process(
-				new org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent(uri, uri+"/output/out.km"));
+				new org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent(uri, uri+"/output/out.km", uri+"/intermediate_output"));
 	}
 
 	@Override
