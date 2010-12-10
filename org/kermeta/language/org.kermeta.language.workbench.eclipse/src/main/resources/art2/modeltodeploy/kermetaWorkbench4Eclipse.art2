@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
   <nodes name="KermetaEclipseWorkbench">
-    <components name="Art2ComponentKWF-1542118163" typeDefinition="//@typeDefinitions.0">
-      <provided portTypeRef="//@typeDefinitions.0/@provided.0"/>
-      <required portTypeRef="//@typeDefinitions.0/@required.0"/>
-      <required portTypeRef="//@typeDefinitions.0/@required.1"/>
+    <components name="Art2ComponentKWF-1542118163" typeDefinition="//@typeDefinitions.15">
+      <provided portTypeRef="//@typeDefinitions.15/@provided.0"/>
+      <required portTypeRef="//@typeDefinitions.15/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.15/@required.1"/>
     </components>
-    <components name="Art2ComponentTexteditorEclipse--283421665" typeDefinition="//@typeDefinitions.3">
-      <required portTypeRef="//@typeDefinitions.3/@required.0"/>
-      <required portTypeRef="//@typeDefinitions.3/@required.1"/>
-      <required portTypeRef="//@typeDefinitions.3/@required.2"/>
+    <components name="Art2ComponentTexteditorEclipse--283421665" typeDefinition="//@typeDefinitions.10">
+      <required portTypeRef="//@typeDefinitions.10/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.10/@required.1"/>
+      <required portTypeRef="//@typeDefinitions.10/@required.2"/>
     </components>
-    <components name="Art2ComponentKMTLoader--888599433" typeDefinition="//@typeDefinitions.5">
-      <provided portTypeRef="//@typeDefinitions.5/@provided.0"/>
-      <provided portTypeRef="//@typeDefinitions.5/@provided.1"/>
-      <required portTypeRef="//@typeDefinitions.5/@required.0"/>
+    <components name="Art2ComponentKMTLoader--888599433" typeDefinition="//@typeDefinitions.9">
+      <provided portTypeRef="//@typeDefinitions.9/@provided.0"/>
+      <provided portTypeRef="//@typeDefinitions.9/@provided.1"/>
+      <required portTypeRef="//@typeDefinitions.9/@required.0"/>
     </components>
-    <components name="Art2ComponentEclipseErrorReport--1389461381" typeDefinition="//@typeDefinitions.6">
-      <provided portTypeRef="//@typeDefinitions.6/@provided.0"/>
+    <components name="Art2ComponentEclipseErrorReport--1389461381" typeDefinition="//@typeDefinitions.12">
+      <provided portTypeRef="//@typeDefinitions.12/@provided.0"/>
     </components>
-    <components name="Art2ComponentEclipseLogger--135720855" typeDefinition="//@typeDefinitions.7">
-      <provided portTypeRef="//@typeDefinitions.7/@provided.0"/>
+    <components name="Art2ComponentEclipseLogger--135720855" typeDefinition="//@typeDefinitions.13">
+      <provided portTypeRef="//@typeDefinitions.13/@provided.0"/>
+    </components>
+    <components name="Art2ComponentKermetaUI4Eclipse--627482320" typeDefinition="//@typeDefinitions.6">
+      <required portTypeRef="//@typeDefinitions.6/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.6/@required.1"/>
+    </components>
+    <components name="Art2ComponentKmMultiMerger-1210440159" typeDefinition="//@typeDefinitions.14">
+      <provided portTypeRef="//@typeDefinitions.14/@provided.0"/>
+      <required portTypeRef="//@typeDefinitions.14/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.14/@required.1"/>
+    </components>
+    <components name="Art2ComponentKmBinaryMerger--1135431681" typeDefinition="//@typeDefinitions.11">
+      <provided portTypeRef="//@typeDefinitions.11/@provided.0"/>
+      <required portTypeRef="//@typeDefinitions.11/@required.0"/>
     </components>
   </nodes>
-  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKWF" deployUnit="//@deployUnits.4" factoryBean="org.kermeta.language.kwf.art2.impl.Art2ComponentKWFFactory" bean="org.kermeta.language.kwf.art2.impl.Art2ComponentKWF" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
-    <required name="log" ref="//@typeDefinitions.1"/>
-    <required name="kmtloader" ref="//@typeDefinitions.2"/>
-    <provided name="kevent" ref="//@typeDefinitions.1">
-      <mappings beanMethodName="processKEvent" serviceMethodName="process"/>
-    </provided>
-  </typeDefinitions>
   <typeDefinitions xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
   <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortResourceLoader">
     <operations name="load" returnType="//@dataTypes.0">
@@ -38,50 +44,89 @@
       <parameters name="arg2" type="//@dataTypes.1"/>
     </operations>
   </typeDefinitions>
-  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentTexteditorEclipse" deployUnit="//@deployUnits.5" factoryBean="org.kermeta.language.texteditor.eclipse.art2.impl.Art2ComponentTexteditorEclipseFactory" bean="org.kermeta.language.texteditor.eclipse.art2.impl.Art2ComponentTexteditorEclipse" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
-    <required name="log" ref="//@typeDefinitions.1"/>
-    <required name="KMTlexer" ref="//@typeDefinitions.4"/>
-    <required name="KMEvent" ref="//@typeDefinitions.1"/>
-  </typeDefinitions>
   <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortLexer">
     <operations name="lex" returnType="//@dataTypes.3">
       <parameters name="arg0" type="//@dataTypes.1"/>
     </operations>
   </typeDefinitions>
-  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKMTLoader" deployUnit="//@deployUnits.6" factoryBean="org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoaderFactory" bean="org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
-    <required name="log" ref="//@typeDefinitions.1"/>
-    <provided name="KMTloader" ref="//@typeDefinitions.2">
-      <mappings beanMethodName="load" serviceMethodName="load"/>
-    </provided>
-    <provided name="KMTlexer" ref="//@typeDefinitions.4">
-      <mappings beanMethodName="lex" serviceMethodName="lex"/>
-    </provided>
-  </typeDefinitions>
-  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEclipseErrorReport" deployUnit="//@deployUnits.7" factoryBean="org.kermeta.utils.error.report.eclipse.art2.impl.Art2ComponentEclipseErrorReportFactory" bean="org.kermeta.utils.error.report.eclipse.art2.impl.Art2ComponentEclipseErrorReport" startMethod="start" stopMethod="stop">
-    <provided name="log" ref="//@typeDefinitions.1">
-      <mappings beanMethodName="process" serviceMethodName="process"/>
-    </provided>
-  </typeDefinitions>
-  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEclipseLogger" deployUnit="//@deployUnits.8" factoryBean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLoggerFactory" bean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLogger" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
-    <provided name="log" ref="//@typeDefinitions.1">
-      <mappings beanMethodName="process" serviceMethodName="process"/>
-    </provided>
-  </typeDefinitions>
   <typeDefinitions xsi:type="art2:ChannelType" name="DefaultServiceChannelType" deployUnit="//@deployUnits.9" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelType"/>
   <typeDefinitions xsi:type="art2:ChannelType" name="LocalBroadcastMessageChannelType" deployUnit="//@deployUnits.9" factoryBean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelType"/>
   <typeDefinitions xsi:type="art2:ChannelType" name="DefaultMessageChannelType" deployUnit="//@deployUnits.9" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelType" startMethod="startHello" stopMethod="stopHello"/>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKermetaUI4Eclipse" deployUnit="//@deployUnits.15" factoryBean="org.kermeta.language.ui.eclipse.art2.impl.Art2ComponentKermetaUI4EclipseFactory" bean="org.kermeta.language.ui.eclipse.art2.impl.Art2ComponentKermetaUI4Eclipse" requiredLibs="//@deployUnits.3" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <required name="kevent" ref="//@typeDefinitions.0"/>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKmMerger">
+    <operations name="merge" returnType="//@dataTypes.5">
+      <parameters name="arg0" type="//@dataTypes.6"/>
+    </operations>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKmBinaryMerger">
+    <operations name="merge" returnType="//@dataTypes.5">
+      <parameters name="arg0" type="//@dataTypes.0"/>
+      <parameters name="arg1" type="//@dataTypes.0"/>
+    </operations>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKMTLoader" deployUnit="//@deployUnits.26" factoryBean="org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoaderFactory" bean="org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <provided name="KMTloader" ref="//@typeDefinitions.1">
+      <mappings beanMethodName="load" serviceMethodName="load"/>
+    </provided>
+    <provided name="KMTlexer" ref="//@typeDefinitions.2">
+      <mappings beanMethodName="lex" serviceMethodName="lex"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentTexteditorEclipse" deployUnit="//@deployUnits.32" factoryBean="org.kermeta.language.texteditor.eclipse.art2.impl.Art2ComponentTexteditorEclipseFactory" bean="org.kermeta.language.texteditor.eclipse.art2.impl.Art2ComponentTexteditorEclipse" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <required name="KMTlexer" ref="//@typeDefinitions.2"/>
+    <required name="KMEvent" ref="//@typeDefinitions.0"/>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKmBinaryMerger" deployUnit="//@deployUnits.33" factoryBean="org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMergerFactory" bean="org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger" requiredLibs="//@deployUnits.0 //@deployUnits.3" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <provided name="KmBinaryMerger" ref="//@typeDefinitions.8">
+      <mappings beanMethodName="merge" serviceMethodName="merge"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEclipseErrorReport" deployUnit="//@deployUnits.35" factoryBean="org.kermeta.utils.error.report.eclipse.art2.impl.Art2ComponentEclipseErrorReportFactory" bean="org.kermeta.utils.error.report.eclipse.art2.impl.Art2ComponentEclipseErrorReport" startMethod="start" stopMethod="stop">
+    <provided name="log" ref="//@typeDefinitions.0">
+      <mappings beanMethodName="process" serviceMethodName="process"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentEclipseLogger" deployUnit="//@deployUnits.36" factoryBean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLoggerFactory" bean="org.kermeta.utils.logger.eclipse.art2.impl.Art2ComponentEclipseLogger" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
+    <provided name="log" ref="//@typeDefinitions.0">
+      <mappings beanMethodName="process" serviceMethodName="process"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKmMultiMerger" deployUnit="//@deployUnits.37" factoryBean="org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMergerFactory" bean="org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMerger" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <required name="KmBinaryMerger" ref="//@typeDefinitions.8"/>
+    <provided name="KmMerger" ref="//@typeDefinitions.7">
+      <mappings beanMethodName="merge" serviceMethodName="merge"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentKWF" deployUnit="//@deployUnits.4" factoryBean="org.kermeta.language.kwf.art2.impl.Art2ComponentKWFFactory" bean="org.kermeta.language.kwf.art2.impl.Art2ComponentKWF" requiredLibs="//@deployUnits.0 //@deployUnits.1 //@deployUnits.2 //@deployUnits.3" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.0"/>
+    <required name="kmtloader" ref="//@typeDefinitions.1"/>
+    <provided name="kevent" ref="//@typeDefinitions.0">
+      <mappings beanMethodName="processKEvent" serviceMethodName="process"/>
+    </provided>
+  </typeDefinitions>
   <dataTypes name="org.kermeta.language.structure.ModelingUnit"/>
   <dataTypes name="java.lang.String"/>
   <dataTypes name="org.kermeta.language.api.port.PortResourceLoader.URIType"/>
   <dataTypes name="java.util.List" genericTypes="//@dataTypes.4"/>
   <dataTypes name="org.kermeta.language.api.ktoken.IKToken"/>
-  <libraries name="org.kermeta.language" subTypes="//@typeDefinitions.0 //@typeDefinitions.3 //@typeDefinitions.5"/>
-  <libraries name="org.kermeta.utils" subTypes="//@typeDefinitions.6 //@typeDefinitions.7"/>
-  <libraries name="art2baselib" subTypes="//@typeDefinitions.8 //@typeDefinitions.9 //@typeDefinitions.10"/>
-  <hubs name="hub-0" typeDefinition="//@typeDefinitions.8"/>
-  <hubs name="hub-1" typeDefinition="//@typeDefinitions.8"/>
-  <hubs name="hub-2" typeDefinition="//@typeDefinitions.8"/>
-  <hubs name="hub-3" typeDefinition="//@typeDefinitions.9"/>
+  <dataTypes name="org.kermeta.language.api.result.ModelingUnitResult"/>
+  <dataTypes name="java.util.Collection" genericTypes="//@dataTypes.0"/>
+  <libraries name="org.kermeta.language" subTypes="//@typeDefinitions.6 //@typeDefinitions.9 //@typeDefinitions.10 //@typeDefinitions.11 //@typeDefinitions.14 //@typeDefinitions.15"/>
+  <libraries name="org.kermeta.utils" subTypes="//@typeDefinitions.12 //@typeDefinitions.13"/>
+  <libraries name="art2baselib" subTypes="//@typeDefinitions.3 //@typeDefinitions.4 //@typeDefinitions.5"/>
+  <hubs name="hub-0" typeDefinition="//@typeDefinitions.3"/>
+  <hubs name="hub-1" typeDefinition="//@typeDefinitions.3"/>
+  <hubs name="hub-2" typeDefinition="//@typeDefinitions.3"/>
+  <hubs name="hub-3" typeDefinition="//@typeDefinitions.4"/>
+  <hubs name="hub-4" typeDefinition="//@typeDefinitions.3"/>
+  <hubs name="hub-5" typeDefinition="//@typeDefinitions.3"/>
   <mBindings port="//@nodes.0/@components.1/@required.0" hub="//@hubs.3"/>
   <mBindings port="//@nodes.0/@components.2/@required.0" hub="//@hubs.3"/>
   <mBindings port="//@nodes.0/@components.3/@provided.0" hub="//@hubs.3"/>
@@ -89,18 +134,52 @@
   <mBindings port="//@nodes.0/@components.0/@provided.0" hub="//@hubs.0"/>
   <mBindings port="//@nodes.0/@components.1/@required.2" hub="//@hubs.0"/>
   <mBindings port="//@nodes.0/@components.2/@provided.0" hub="//@hubs.1"/>
-  <mBindings port="//@nodes.0/@components.0/@required.1" hub="//@hubs.1"/>
   <mBindings port="//@nodes.0/@components.1/@required.1" hub="//@hubs.2"/>
   <mBindings port="//@nodes.0/@components.2/@provided.1" hub="//@hubs.2"/>
   <mBindings port="//@nodes.0/@components.0/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.0/@components.5/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.0/@components.5/@required.1" hub="//@hubs.0"/>
+  <mBindings port="//@nodes.0/@components.7/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.0/@components.6/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.0/@components.6/@required.1" hub="//@hubs.4"/>
+  <mBindings port="//@nodes.0/@components.7/@provided.0" hub="//@hubs.4"/>
+  <mBindings port="//@nodes.0/@components.6/@provided.0" hub="//@hubs.5"/>
   <deployUnits name="org.kermeta.language.model" url="mvn:org.kermeta.language/language.model"/>
   <deployUnits name="org.kermeta.language.kp.model" url="mvn:org.kermeta.kp/kp.model"/>
   <deployUnits name="org.kermeta.language.traceability.model" url="mvn:org.kermeta.traceability/traceability.model"/>
   <deployUnits name="org.kermeta.language.api" url="mvn:org.kermeta.language/language.api"/>
-  <deployUnits groupName="org.kermeta.language" unitName="language.KWF" version="2.0.1-SNAPSHOT" hashcode="201011291128269"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.KWF" version="2.0.1-SNAPSHOT" hashcode="201012100221260"/>
   <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201011291129020"/>
   <deployUnits groupName="org.kermeta.language" unitName="language.loader.scala" version="2.0.1-SNAPSHOT" hashcode="201011291129270"/>
   <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201011291129215"/>
   <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201011291129001"/>
   <deployUnits groupName="org.kermeta.art2" unitName="art2.framework.baseLib" version="2.2.1-beta2" hashcode="201011291050425"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012071453225"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.loader.scala" version="2.0.1-SNAPSHOT" hashcode="201012062323044"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012071453279"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012071453186"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081227446"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.ui.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081403237"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.loader.scala" version="2.0.1-SNAPSHOT" hashcode="201012072322219"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081228240"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081228538"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081603631"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081605314"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081718541"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.multimerger" version="2.0.1-SNAPSHOT" hashcode="201012081811902"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012081807429"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.binarymerger" version="2.0.1-SNAPSHOT" hashcode="201012081126156"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012090223249"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.loader.scala" version="2.0.1-SNAPSHOT" hashcode="201012082323315"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.binarymerger" version="2.0.1-SNAPSHOT" hashcode="201012082323043"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.multimerger" version="2.0.1-SNAPSHOT" hashcode="201012090855970"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012090223574"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012090223248"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.multimerger" version="2.0.1-SNAPSHOT" hashcode="201012091059900"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.texteditor.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012100223216"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.binarymerger" version="2.0.1-SNAPSHOT" hashcode="201012101356392"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.multimerger" version="2.0.1-SNAPSHOT" hashcode="201012091723184"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.error.report.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012100223259"/>
+  <deployUnits groupName="org.kermeta.utils" unitName="utils.logger.eclipse" version="2.0.1-SNAPSHOT" hashcode="201012100224184"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.merger.multimerger" version="2.0.1-SNAPSHOT" hashcode="201012101410666"/>
 </art2:ContainerRoot>

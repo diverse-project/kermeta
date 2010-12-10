@@ -45,7 +45,23 @@
         </dependency>
        <dependency>
             <groupId>org.kermeta.language</groupId>
+            <artifactId>language.ui.eclipse</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
             <artifactId>language.loader.scala</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+        
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.merger.binarymerger</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.merger.multimerger</artifactId>
             <version>${language.version}</version>
         </dependency>
        <dependency>
