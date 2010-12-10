@@ -88,7 +88,7 @@ public class Art2ComponentKWF extends AbstractComponentType {
     	try{
 	        //CHECK event instance of KEVENT
 	        if (event instanceof KEvent) {
-	        	logger.info("KWF received new event : " + event);
+	        	logger.debug("KWF received new event : " + event);
 	
 	            if (event instanceof KDocumentUpdate) {
 	                processKDocumentUpdate((KDocumentUpdate) event);
