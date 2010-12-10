@@ -31,8 +31,10 @@ import org.kermeta.art2.annotation.ThirdParties;
 import org.kermeta.art2.annotation.ThirdParty;
 import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
+import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.ktoken.IKToken;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
+import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.port.PortLexer;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.structure.ModelingUnit;
@@ -50,7 +52,7 @@ import scala.Option;
  * @author ffouquet
  */
 @Provides({
-    @ProvidedPort(name = "KMTloader", className = PortResourceLoader.class),
+    @ProvidedPort(name = "KMTloader", type = PortType.SERVICE, className = PortResourceLoader.class),
     @ProvidedPort(name = "KMTlexer", type = PortType.SERVICE, className = PortLexer.class)
 })
 @Requires({
@@ -67,9 +69,12 @@ import scala.Option;
 @ComponentType
 public class Art2ComponentKMTLoader extends AbstractComponentType implements org.kermeta.language.api.port.PortResourceLoader {
 
+
+    protected SimpleLogger logger;
+    
     @Port(name = "KMTloader", method = "load")
     public ModelingUnit load(String uri, org.kermeta.language.api.port.PortResourceLoader.URIType type, String optionalContent) {
-
+    	logger.debug("load called " + uri );
         KParser parser = new KParser();
 
         String content = optionalContent;
@@ -77,6 +82,7 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
         	
         	if(uri.startsWith("jar:") && uri.contains("!")){
         		try{
+        	        logger.debug("Loading content from jar " + uri + " ...");
 	        		// ParserUtil isn't able to load from inside a jar, so use the stream instead
 	    	    	URL jarUrl =  new URL(uri);
 	    	    	JarURLConnection juc = (JarURLConnection) jarUrl.openConnection();
@@ -88,23 +94,26 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
 	    	        	sb.append(thisLine+"\n");
 	    	        }
 	    	        content = sb.toString();
+	    	        logger.debug("Content loaded. " + uri);
         		}
         		catch(IOException e){
-        			if (isPortBinded("log")) {
-                        getPortByName("log", MessagePort.class).process(UnifiedMessageFactory.getInstance().createErrorMessage(e.getMessage(), bundleSymbolicName, e, null));
-                    }
+        	        logger.error(e.getMessage(),e); 
         		}
         	}
         	else{
+    	        logger.debug("Loading content from " + uri + " ..."); 
         		content = ParserUtil.loadFile(uri);
+    	        logger.debug("Content loaded. " + uri);
         	}
         }
 
         Option result = parser.parseSynch(content);
+        logger.debug("Content parsed. ");
         if (result.isEmpty()) {
 
             //SEND ERROR LOG
             if (!parser.getErrors().isEmpty()) {
+
                 ParseException pe = parser.getErrors().get();
 
                 TextReference textRef = TraceabilityFactory.eINSTANCE.createTextReference();
@@ -155,9 +164,15 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
     }
     private String bundleSymbolicName = "";
 
+    protected Bundle bundle;
+
     @Start
     public void start() {
-        bundleSymbolicName = ((Bundle) this.getDictionary().get("osgi.bundle")).getHeaders().get("Bundle-SymbolicName").toString();
+
+        bundle = (Bundle) this.getDictionary().get("osgi.bundle");
+        bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started "+bundleSymbolicName); 
     }
 
     @Stop
@@ -165,5 +180,25 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
     }
     
     
+ // --- Port accessors ---
+
+    public MessagePort getLogPort() {
+		return getPortByName("log", MessagePort.class);
+	}
+    
+    
+    
+    // --- GETTERS and SETTERS ---
+    public SimpleLogger getLogger() {
+		return logger;
+	}
+
+    public String getBundleSymbolicName() {
+        return bundleSymbolicName;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
     
 }
