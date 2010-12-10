@@ -6,18 +6,34 @@
         <groupId>org.kermeta.language</groupId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
+    <!-- workaround bug apt !? -->
+    <!-- <groupId>org.kermeta.language</groupId>
+    <version>2.0.1-SNAPSHOT</version>
     <properties>
     	<kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
     	<art2.version>2.2.1-beta2</art2.version>
     </properties>
-     
+    --> 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.merger.binarymerger</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>language.merger.binarymerger :: binary merger for Kermeta 2</name>
 
     <dependencies>
-        
+    
+    	<!-- woraround pb apt all ART components will need ART2 to compile -->
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.annotation</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <!-- end workaround -->
+    
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.model</artifactId>
@@ -26,9 +42,9 @@
 
 		
         <dependency>
-            <groupId>fr.irisa.triskell.kermeta</groupId>
+            <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.model</artifactId>
-            <version>1.4.0</version>
+            <version>1.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -41,7 +57,7 @@
             <version>0.0.6</version>
             <type>jar</type>
             <scope>compile</scope>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.api</artifactId>
@@ -59,18 +75,18 @@
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>2.6.0</version>
+			<type>jar</type>
 		</dependency>
     </dependencies>
     
     <build>
         <plugins>
-        	
             <!-- Kermeta Compiler plugin -->
             
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-SNAPSHOT</version>
+                <version>1.4.1-BETA5</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -91,7 +107,7 @@
                 <version>1.5</version>
                 <executions>
                     <execution>
-                        <id>add-kermeta-scala-source</id>
+                        <id>add-source</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>add-source</goal>
@@ -105,8 +121,106 @@
                 </executions>
             </plugin>
 
-			<!-- Create a correct OSGI bundle -->
+            <!-- Scala plugin : allow to compile Scala file -->
+        <!--     <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmArgs>
+                        <jvmArg>-Xmx1024m</jvmArg>
+                    </jvmArgs>
+                    <launchers>
+                        <launcher>
+                            <id>language.merger</id>
+                            <mainClass>runner.MainRunner</mainClass>
+        -->  <!-- args are optional
+                            <args>
+                                <arg>arg1</arg>
+                            </args> -->
+       <!--                  </launcher>
+                    </launchers>
+                </configuration>
+            </plugin> -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<includes>
+						<include>**/*TestSuite.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+		  	<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>		        
+          		
+		        <configuration>
+		          <archive>
+		            <!-- <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile> -->
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.merger.binarymerger.art2.impl
+                        </Export-Package>
+                        <Import-Package>
+                        	ScalaAspect.org.kermeta.language.structure,
+			org.eclipse.emf.common.notify,
+			org.eclipse.emf.common.util,
+			org.eclipse.emf.ecore.impl,
+			org.eclipse.emf.ecore.resource,
+			org.eclipse.emf.ecore.resource.impl,
+			org.eclipse.emf.ecore.util,
+			org.eclipse.emf.ecore.xmi.impl,
+			org.kermeta.art2.framework,
+			org.kermeta.art2.framework.osgi,
+			org.kermeta.art2.framework.port,
+			org.kermeta.ecore.binarymerger,
+			org.kermeta.language.api.messaging,
+			org.kermeta.language.api.port,
+			org.kermeta.language.api.result,
+			org.kermeta.language.merger,
+			org.kermeta.language.merger.binarymerger,
+			org.kermeta.language.merger.binarymerger.art2.impl,
+			org.kermeta.language.structure,
+			org.kermeta.traceability,
+			org.osgi.framework;version="[1.5,2)",
+			org.slf4j;version="[1.5,2)",
+			runner,
+			scala,
+			scala.actors,
+			scala.collection.immutable,
+			scala.collection.mutable,
+			scala.reflect,
+			scala.runtime
+                        </Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+			<!-- Create a correct OSGI bundle -->
+			<!--  <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.1.0</version>
@@ -119,15 +233,17 @@
                         <Export-Package>
 							org.kermeta.language.merger.binarymerger.*
                         </Export-Package>
-                        <Require-Bundle> <!--  avoid splitted package issue, must require some eclipse bundle -->
+                        <Require-Bundle> -->  <!--  avoid splitted package issue, must require some eclipse bundle -->
 						<!-- 	org.eclipse. -->
-                        </Require-Bundle>
-						<!--
+                        <!-- </Require-Bundle>
+                        <Private-Package>
+                        </Private-Package>
+						--><!--
 							use the ! for avoiding to import some packages that are already
 							there with the Require-Bundle
 							Be careful some Packages does also come from framework.scala, they must be added even if present locally in this jar 
 						-->
-                        <Import-Package>                        
+                    <!--     <Import-Package>                        
 							org.kermeta.*,
 							org.eclipse.emf.*,
 							scala.*,
@@ -136,27 +252,15 @@
 							ScalaAspect.org.kermeta.language.structure,
 							runner
                         </Import-Package>
-                        
+                     -->   
 						<!--
 							add extra element in the manifest, copy them from this file ex:
 							Bundle-ActivationPolicy: lazy
 						-->
 						<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
-                    </instructions>
+               <!--       </instructions>
                 </configuration>
-            </plugin>
-            
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-					<includes>
-						<include>**/*TestSuite.java</include>
-					</includes>
-				</configuration>
-			</plugin>
+            </plugin> -->
         </plugins>
     </build>
 
