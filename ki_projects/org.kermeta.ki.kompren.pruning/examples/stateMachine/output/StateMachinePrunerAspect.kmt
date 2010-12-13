@@ -27,12 +27,16 @@ aspect class PruningVisitorAspect {
 	operation checkInitialisation() : Void is do
 		if(self.visitedPass.isVoid) then initialiseAttributes() end
 	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
 }
 
 aspect class OutputState {
 	method visitToAddClasses(theStateMachinePruner : StateMachinePruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=theStateMachinePruner.radius)) then
+		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=(theStateMachinePruner.radius+1))) then
 			super(theStateMachinePruner, currentRadius)
 			self.visitedPass := true
 			self.outgoingTransitions.each{theTransition | theTransition.visitToAddClasses(theStateMachinePruner, currentRadius+1)}
@@ -48,15 +52,18 @@ aspect class OutputState {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super()
+	end
 }
 
 aspect class Transition inherits PruningVisitorAspect {
 	method visitToAddClasses(theStateMachinePruner : StateMachinePruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=theStateMachinePruner.radius)) then
+		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=(theStateMachinePruner.radius+1))) then
 			super(theStateMachinePruner, currentRadius)
 			if(not self.addedToPruner) then
-				theStateMachinePruner.onTransitionAdded(self)
+				theStateMachinePruner.addedTransitions.add(self)
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
@@ -73,15 +80,18 @@ aspect class Transition inherits PruningVisitorAspect {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.target.isVoid.orElse{b | self.target.visitedPass.orElse{b | self.target.checkCanReallyBeAdded()}})
+	end
 }
 
 aspect class State inherits PruningVisitorAspect {
 	method visitToAddClasses(theStateMachinePruner : StateMachinePruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=theStateMachinePruner.radius)) then
+		if(not self.visitedPass and (theStateMachinePruner.radius<=0 or currentRadius<=(theStateMachinePruner.radius+1))) then
 			super(theStateMachinePruner, currentRadius)
-			if(not self.addedToPruner) then
-				theStateMachinePruner.onStateAdded(self)
+			if(not self.addedToPruner and (theStateMachinePruner.radius<=0 or currentRadius<=theStateMachinePruner.radius)) then
+				theStateMachinePruner.addedStates.add(self)
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
@@ -95,6 +105,9 @@ aspect class State inherits PruningVisitorAspect {
 			self.visitedForRelations := true
 			self.visitedPass := false
 		end
+	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := self.addedToPruner
 	end
 }
 

@@ -82,7 +82,7 @@ class Test {
 		p1.lowerBound := 1
 		c5.eStructuralFeatures.add(p1)
 		p2.name := "p2"
-		p2.lowerBound := 1
+		p2.lowerBound := 0
 		p2.eType := c3
 		c4.eStructuralFeatures.add(p2)
 		p2.eOpposite := p3

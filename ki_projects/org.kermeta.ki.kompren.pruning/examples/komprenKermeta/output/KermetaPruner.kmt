@@ -33,13 +33,13 @@ class KermetaPruner {
 		self.requiredPropertys.each{theProperty | theProperty.visitToAddClasses(self, 0) }
 		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self, 0) }
 		self.requiredPropertys.each{theProperty | theProperty.visitToAddRelations(self, 0) }
+		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
+		self.addedPropertys.each{theProperty | if(theProperty.checkCanReallyBeAdded()) then onPropertyAdded(theProperty) end }
 	end
 
 	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
-		self.addedClassDefinitions.add(theClassDefinition)
 	end
 	operation onPropertyAdded(theProperty : Property) : Void is do
-		self.addedPropertys.add(theProperty)
 	end
 	operation onsuperTypeAdded(theTypeDefinitionSrc : TypeDefinition, theTypeTar : Type) : Void is do
 	end

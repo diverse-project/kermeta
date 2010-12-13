@@ -100,14 +100,13 @@ class PrunerAspectGenerator inherits Generator {
 		if(not eclass.outputFocusedRelations.empty() or prunerGenerator.pruningData.requiredClasses.contains(eclass) or
 			prunerGenerator.pruningData.classesToNotify.contains(eclass) or
 			prunerGenerator.pruningData.relationsToNotify.exists{rel | rel.relation.eContainingClass==eclass}) then
-			result := result + "\tmethod visitToAddClasses(" + prunerVarName +
-					" : " + prunerGenerator.prunerClass.name
+			result := result + "\tmethod visitToAddClasses(" + prunerVarName + " : " + prunerGenerator.prunerClass.name
 			if(not prunerGenerator.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
 			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
 			if(not prunerGenerator.radius.isVoid) then
-				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
+				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=(" + prunerVarName + ".radius+1))"
 			end
 			result := result + ") then\n\t\t\tsuper(" + prunerVarName
 			if(not prunerGenerator.radius.isVoid) then
@@ -116,8 +115,15 @@ class PrunerAspectGenerator inherits Generator {
 			result := result + ")\n"
 
 			if(prunerGenerator.pruningData.classesToNotify.contains(eclass)) then
-				result := result + "\t\t\tif(not self.addedToPruner) then\n\t\t\t\t" + prunerVarName + ".on" +
-						eclass.name + "Added(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend\n"
+				result := result + "\t\t\tif(not self.addedToPruner"
+				if(not prunerGenerator.radius.isVoid) then
+					if(prunerGenerator.radius.focusedClasses.contains(eclass) or
+						prunerGenerator.radius.focusedClasses.exists{cl | cl.isSuperTypeOf(eclass)}) then
+							result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
+					end
+				end
+				result := result + ") then\n\t\t\t\t" + prunerVarName + "." + eclass.getAddedAttributeName() + 
+						".add(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend\n"
 			end
 
 			result := result + "\t\t\tself.visitedPass := true\n" + 
@@ -139,7 +145,39 @@ class PrunerAspectGenerator inherits Generator {
 					"\t\t\tself.visitedPass := false\n\t\tend\n\tend\n"
 		end
 
-		result := result + "}\n\n"
+		result := result + 	generateCheckOperation(eclass) + "}\n\n"
+	end
+
+
+	operation generateCheckOperation(clazz : EClass) : String is do
+		result := ""
+
+		if(not prunerGenerator.radius.isVoid) then
+			if(not prunerGenerator.radius.focusedClasses.exists{cl | clazz.isSuperTypeOf(cl)}) then
+				result := "\tmethod checkCanReallyBeAdded() : Boolean is do\n"
+	
+				if(prunerGenerator.radius.focusedClasses.contains(clazz)) then
+					result := result + "\t\tresult := self.addedToPruner\n"
+				else
+					result := result + "\t\tresult := super()"
+					if(not prunerGenerator.radius.focusedClasses.exists{cl | cl.isSuperTypeOf(clazz)}) then
+						clazz.outputFocusedRelations.each{rel |
+							result := result + " and "
+							if(rel.upperBound==1) then
+								result := result + "(self." + rel.name + ".isVoid.orElse{b | self." + rel.name + 
+										".visitedPass.orElse{b | self." + rel.name + ".checkCanReallyBeAdded()}})"
+							else
+								var varName : String init rel.eType.asType(EClass).getVarNameClassifier()
+								result := result + "self." + rel.name + ".each{" + varName + " | " + varName + 
+										".visitedPass.orElse{b | " + varName + ".checkCanReallyBeAdded()} }"
+							end
+						}
+					end
+					result := result + "\n"
+				end
+				result := result + "\tend\n"
+			end
+		end
 	end
 
 
@@ -222,6 +260,7 @@ class PrunerAspectGenerator inherits Generator {
 				"operation visitToAddRelations(" + prunerVarName + " : " + prunerGenerator.prunerClass.name
 		if(not prunerGenerator.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") : Void is do\n\tend\n\n\toperation checkInitialisation() : Void is do\n\t\t" +
-				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n}\n\n"
+				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n\toperation checkCanReallyBeAdded() : Boolean is do\n" +
+				"\t\tself.visitedPass := true\n\t\tresult := true\n\tend\n}\n\n"
 	end
 }

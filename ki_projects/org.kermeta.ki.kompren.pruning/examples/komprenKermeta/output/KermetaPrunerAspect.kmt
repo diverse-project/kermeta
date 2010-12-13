@@ -27,12 +27,16 @@ aspect class PruningVisitorAspect {
 	operation checkInitialisation() : Void is do
 		if(self.visitedPass.isVoid) then initialiseAttributes() end
 	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
 }
 
 aspect class TypeDefinition inherits PruningVisitorAspect {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			self.superType.each{theType | theType.visitToAddClasses(theKermetaPruner, currentRadius+1)}
@@ -53,15 +57,18 @@ aspect class TypeDefinition inherits PruningVisitorAspect {
 }
 
 aspect class Type inherits PruningVisitorAspect {
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super()
+	end
 }
 
 aspect class ClassDefinition {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
-			if(not self.addedToPruner) then
-				theKermetaPruner.onClassDefinitionAdded(self)
+			if(not self.addedToPruner and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+				theKermetaPruner.addedClassDefinitions.add(self)
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
@@ -78,15 +85,18 @@ aspect class ClassDefinition {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := self.addedToPruner
+	end
 }
 
 aspect class Property {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (not theKermetaPruner.lowerCard0 or self.lower!=0) and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (not theKermetaPruner.lowerCard0 or self.lower!=0) and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
 			if(not self.addedToPruner) then
-				theKermetaPruner.onPropertyAdded(self)
+				theKermetaPruner.addedPropertys.add(self)
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
@@ -105,12 +115,15 @@ aspect class Property {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.owningClass.isVoid.orElse{b | self.owningClass.visitedPass.orElse{b | self.owningClass.checkCanReallyBeAdded()}}) and (self.opposite.isVoid.orElse{b | self.opposite.visitedPass.orElse{b | self.opposite.checkCanReallyBeAdded()}})
+	end
 }
 
 aspect class TypedElement inherits PruningVisitorAspect {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			if(not self.type.isVoid) then self.type.visitToAddClasses(theKermetaPruner, currentRadius) end
@@ -126,12 +139,15 @@ aspect class TypedElement inherits PruningVisitorAspect {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.type.isVoid.orElse{b | self.type.visitedPass.orElse{b | self.type.checkCanReallyBeAdded()}})
+	end
 }
 
 aspect class ParameterizedType {
 	method visitToAddClasses(theKermetaPruner : KermetaPruner, currentRadius : Integer) : Void is do
 		checkInitialisation()
-		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=theKermetaPruner.radius)) then
+		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			self.typeDefinition.visitToAddClasses(theKermetaPruner, currentRadius)
@@ -147,8 +163,14 @@ aspect class ParameterizedType {
 			self.visitedPass := false
 		end
 	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.typeDefinition.isVoid.orElse{b | self.typeDefinition.visitedPass.orElse{b | self.typeDefinition.checkCanReallyBeAdded()}})
+	end
 }
 
 aspect class AbstractProperty inherits PruningVisitorAspect {
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super()
+	end
 }
 

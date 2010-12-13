@@ -19,10 +19,10 @@ class InvertedClassModelPruner {
 	operation launch() : Void is do
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
+		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is do
-		self.addedClazzs.add(theClazz)
 	end
 	operation onsuperClassesOppositeAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
 	end

@@ -45,7 +45,7 @@ class PrunerClassGenerator inherits Generator {
 
 		prunerGenerator.pruningData.classesToNotify.each{clazz |
 			result := result + "\toperation on" + clazz.name + "Added(" + clazz.getVarNameClassifier() + " : " + clazz.name + 
-					") : Void is do\n\t\tself." + clazz.getAddedAttributeName() + ".add(" + clazz.getVarNameClassifier() + ")\n\tend\n"
+					") : Void is do\n\tend\n"
 		}
 
 		prunerGenerator.pruningData.relationsToNotify.each{rel |
@@ -71,6 +71,21 @@ class PrunerClassGenerator inherits Generator {
 					clazz.getVarNameClassifier() + ".visitToAddRelations(self"
 			if(not prunerGenerator.radius.isVoid) then result := result + ", 0" end
 			result := result + ") }\n"
+		}
+		prunerGenerator.pruningData.classesToNotify.each{eclass |
+			var varName : String init eclass.getVarNameClassifier()
+			var endCode : String init ""
+
+			result := result + "\t\tself." + eclass.getAddedAttributeName() + ".each{" + varName + " | "
+
+			if(not prunerGenerator.radius.isVoid) then
+				if(not prunerGenerator.radius.focusedClasses.contains(eclass)) then
+					result := result + "if(" + varName + ".checkCanReallyBeAdded()) then "
+					endCode := " end"
+				end
+			end
+
+			result := result + "on" + eclass.name + "Added(" + varName + ")" + endCode + " }\n"
 		}
 		result := result + "\tend\n"
 	end

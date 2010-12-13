@@ -28,13 +28,13 @@ class EcorePruner {
 	operation launch() : Void is do
 		self.requiredEClasss.each{theEClass | theEClass.visitToAddClasses(self, 0) }
 		self.requiredEClasss.each{theEClass | theEClass.visitToAddRelations(self, 0) }
+		self.addedEClasss.each{theEClass | onEClassAdded(theEClass) }
+		self.addedEReferences.each{theEReference | if(theEReference.checkCanReallyBeAdded()) then onEReferenceAdded(theEReference) end }
 	end
 
 	operation onEClassAdded(theEClass : EClass) : Void is do
-		self.addedEClasss.add(theEClass)
 	end
 	operation onEReferenceAdded(theEReference : EReference) : Void is do
-		self.addedEReferences.add(theEReference)
 	end
 	operation oneSuperTypesAdded(theEClassSrc : EClass, theEClassTar : EClass) : Void is do
 	end

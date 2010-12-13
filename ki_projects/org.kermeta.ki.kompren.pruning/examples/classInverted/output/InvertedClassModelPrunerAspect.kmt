@@ -27,6 +27,10 @@ aspect class PruningVisitorAspect {
 	operation checkInitialisation() : Void is do
 		if(self.visitedPass.isVoid) then initialiseAttributes() end
 	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
 }
 
 aspect class Clazz inherits PruningVisitorAspect {
@@ -41,7 +45,7 @@ aspect class Clazz inherits PruningVisitorAspect {
 		if(not self.visitedPass) then
 			super(theInvertedClassModelPruner)
 			if(not self.addedToPruner) then
-				theInvertedClassModelPruner.onClazzAdded(self)
+				theInvertedClassModelPruner.addedClazzs.add(self)
 				self.addedToPruner := true
 			end
 			self.visitedPass := true

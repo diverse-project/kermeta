@@ -25,12 +25,12 @@ class StateMachinePruner {
 	operation launch() : Void is do
 		self.requiredStates.each{theState | theState.visitToAddClasses(self, 0) }
 		self.requiredStates.each{theState | theState.visitToAddRelations(self, 0) }
+		self.addedStates.each{theState | onStateAdded(theState) }
+		self.addedTransitions.each{theTransition | if(theTransition.checkCanReallyBeAdded()) then onTransitionAdded(theTransition) end }
 	end
 
 	operation onStateAdded(theState : State) : Void is do
-		self.addedStates.add(theState)
 	end
 	operation onTransitionAdded(theTransition : Transition) : Void is do
-		self.addedTransitions.add(theTransition)
 	end
 }
