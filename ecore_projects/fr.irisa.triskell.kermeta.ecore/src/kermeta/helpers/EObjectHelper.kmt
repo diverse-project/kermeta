@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : December 13, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+
+
+aspect class EObject
+{
+	/** returns the lowest container EPackage or self*/
+	operation getPackage() : EPackage is do 
+		if self.isInstanceOf(EPackage) then
+			result := self.asType(EPackage)
+		else
+			result := self.eContainer.getPackage()
+		end
+	end
+	
+	/** returns the topmost container EPackage or self*/
+	operation getRootPackage() : EPackage is do
+		var p : EPackage init self.getPackage()			
+	    if (p.eSuperPackage != void) then
+			result := p.eSuperPackage.getRootPackage()			
+		else
+			result := p
+		end
+	end
+}

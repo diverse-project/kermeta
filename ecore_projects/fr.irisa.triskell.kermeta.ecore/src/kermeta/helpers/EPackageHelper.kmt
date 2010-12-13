@@ -26,13 +26,4 @@ aspect class EPackage
 			result := self.name
 		end
 	end
-	
-	/** returns the topmost container EPackage or self*/
-	operation getRootPackage() : EPackage is do
-	    if (self.eSuperPackage != void) then
-			result := self.eSuperPackage.getRootPackage()			
-		else
-			result := self
-		end
-	end
 }
