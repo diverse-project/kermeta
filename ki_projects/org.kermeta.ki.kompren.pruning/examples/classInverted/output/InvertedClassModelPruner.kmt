@@ -10,9 +10,12 @@ class InvertedClassModelPruner {
 
 	reference addedClazzs : Bag<Clazz>
 
+	reference addedsuperClassesOpposite : Bag<ClasssuperClassesOpposite>
+
 	operation initialise(requiredClazzs : bag Clazz[0..*]) : InvertedClassModelPruner is do
 		result := self
 		self.addedClazzs := Bag<Clazz>.new
+		self.addedsuperClassesOpposite := Bag<ClasssuperClassesOpposite>.new
 		self.requiredClazzs.addAll(requiredClazzs)
 	end
 
@@ -20,10 +23,20 @@ class InvertedClassModelPruner {
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
+		self.addedsuperClassesOpposite.each{thesuperClassesOpposite | self.onsuperClassesOppositeAdded(thesuperClassesOpposite.src, thesuperClassesOpposite.tar) }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is do
 	end
-	operation onsuperClassesOppositeAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
+	operation onsuperClassesOppositeAdded(src : Clazz, tar : Clazz) : Void is do
+	end
+}
+class ClasssuperClassesOpposite {
+	reference src : Clazz
+	reference tar : Clazz
+	operation initialise(src : Clazz, tar : Clazz) : ClasssuperClassesOpposite is do
+		result := self
+		self.src := src
+		self.tar := tar
 	end
 }

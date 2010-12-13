@@ -60,7 +60,7 @@ aspect class Clazz inherits PruningVisitorAspect {
 			self.visitedForRelations := true
 			self.superClassesOpposite.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelPruner)
 				if(self.visitedForRelations and theClazz.visitedForRelations) then
-					theInvertedClassModelPruner.onsuperClassesOppositeAdded(self, theClazz) end }
+					theInvertedClassModelPruner.addedsuperClassesOpposite.add(ClasssuperClassesOpposite.new.initialise(self, theClazz)) end }
 			self.visitedPass := false
 		end
 	end

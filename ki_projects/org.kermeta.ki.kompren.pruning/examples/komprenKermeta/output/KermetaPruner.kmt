@@ -18,10 +18,13 @@ class KermetaPruner {
 
 	reference addedPropertys : Bag<Property>
 
+	reference addedsuperType : Bag<ClasssuperType>
+
 	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredPropertys : bag Property[0..*], radius : Integer, lowerCard0 : Boolean) : KermetaPruner is do
 		result := self
 		self.addedClassDefinitions := Bag<ClassDefinition>.new
 		self.addedPropertys := Bag<Property>.new
+		self.addedsuperType := Bag<ClasssuperType>.new
 		self.radius := radius
 		self.lowerCard0 := lowerCard0
 		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
@@ -35,12 +38,22 @@ class KermetaPruner {
 		self.requiredPropertys.each{theProperty | theProperty.visitToAddRelations(self, 0) }
 		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
 		self.addedPropertys.each{theProperty | if(theProperty.checkCanReallyBeAdded()) then onPropertyAdded(theProperty) end }
+		self.addedsuperType.each{thesuperType | self.onsuperTypeAdded(thesuperType.src, thesuperType.tar) }
 	end
 
 	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
 	end
 	operation onPropertyAdded(theProperty : Property) : Void is do
 	end
-	operation onsuperTypeAdded(theTypeDefinitionSrc : TypeDefinition, theTypeTar : Type) : Void is do
+	operation onsuperTypeAdded(src : TypeDefinition, tar : Type) : Void is do
+	end
+}
+class ClasssuperType {
+	reference src : TypeDefinition
+	reference tar : Type
+	operation initialise(src : TypeDefinition, tar : Type) : ClasssuperType is do
+		result := self
+		self.src := src
+		self.tar := tar
 	end
 }

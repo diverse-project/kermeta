@@ -56,7 +56,7 @@ aspect class EClass {
 			self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visitToAddRelations(theEcorePruner, currentRadius+1)}
 			self.eSuperTypes.each{theEClass | theEClass.visitToAddRelations(theEcorePruner, currentRadius+1)
 				if(self.visitedForRelations and theEClass.visitedForRelations) then
-					theEcorePruner.oneSuperTypesAdded(self, theEClass) end }
+					theEcorePruner.addedeSuperTypes.add(ClasseSuperTypes.new.initialise(self, theEClass)) end }
 			self.visitedPass := false
 		end
 	end

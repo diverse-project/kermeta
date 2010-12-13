@@ -36,7 +36,22 @@ class PrunerClassGenerator inherits Generator {
 		}
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
-						 generateIntialiseOperation() + generateLaunchOperation() + "\n" + generateAddOperations() + "}\n"
+						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
+						 generateAddOperations() + "}\n" + generateRelationClasses()
+	end
+
+
+	operation generateRelationClasses() : String is do
+		result := ""
+
+		prunerGenerator.pruningData.relationsToNotify.each{rel |
+			result := result + "class Class" + rel.relation.name + " {\n" +
+					"\treference src : " + rel.relation.eContainingClass.name + "\n" +
+					"\treference tar : " + rel.relation.eType.asType(EClass).name + "\n" +
+					"\toperation initialise(src : " + rel.relation.eContainingClass.name + ", tar : " +
+					rel.relation.eType.asType(EClass).name + ") : Class" + rel.relation.name + 
+					" is do\n\t\tresult := self\n\t\tself.src := src\n\t\tself.tar := tar\n\tend\n}\n"
+		}
 	end
 
 
@@ -44,15 +59,14 @@ class PrunerClassGenerator inherits Generator {
 		result := ""
 
 		prunerGenerator.pruningData.classesToNotify.each{clazz |
-			result := result + "\toperation on" + clazz.name + "Added(" + clazz.getVarNameClassifier() + " : " + clazz.name + 
-					") : Void is do\n\tend\n"
+			result := result + "\toperation on" + clazz.name + "Added(" + 
+					clazz.getVarNameClassifier() + " : " + clazz.name + ") : Void is do\n\tend\n"
 		}
 
 		prunerGenerator.pruningData.relationsToNotify.each{rel |
 			var type : EClass init rel.relation.eType.asType(EClass)
-			result := result + "\toperation on" + rel.relation.name + "Added(" + 
-			rel.relation.eContainingClass.getVarNameClassifier() + "Src : " + rel.relation.eContainingClass.name + ", " +
-			type.getVarNameClassifier() + "Tar : " + type.name + ") : Void is do\n\tend\n"
+			result := result + "\toperation on" + rel.relation.name + "Added(src : " + 
+					rel.relation.eContainingClass.name + ", tar : " + type.name + ") : Void is do\n\tend\n"
 		}
 	end
 
@@ -87,6 +101,11 @@ class PrunerClassGenerator inherits Generator {
 
 			result := result + "on" + eclass.name + "Added(" + varName + ")" + endCode + " }\n"
 		}
+		prunerGenerator.pruningData.relationsToNotify.each{rel |
+			var varName : String init "the" + rel.relation.name
+			result := result + "\t\tself.added" + rel.relation.name + ".each{" + varName + " | self.on" +
+					rel.relation.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
+		}
 		result := result + "\tend\n"
 	end
 
@@ -115,6 +134,9 @@ class PrunerClassGenerator inherits Generator {
 		prunerGenerator.pruningData.classesToNotify.each{clazz |
 			result := result + "\t\tself." + clazz.getAddedAttributeName() + " := Bag<" + clazz.name + ">.new\n"
 		}
+		prunerGenerator.pruningData.relationsToNotify.each{rel |
+			result := result + "\t\tself.added" + rel.relation.name + " := Bag<Class" + rel.relation.name + ">.new\n"
+		}
 
 		if(not prunerGenerator.radius.isVoid) then
 			result := result + "\t\tself.radius := radius\n"
@@ -137,6 +159,9 @@ class PrunerClassGenerator inherits Generator {
 
 		prunerGenerator.pruningData.classesToNotify.each{eclass |
 			result := result + "\treference " + eclass.getAddedAttributeName() + " : Bag<" + eclass.name + ">\n\n"
+		}
+		prunerGenerator.pruningData.relationsToNotify.each{rel |
+			result := result + "\treference added" + rel.relation.name + " : Bag<Class" + rel.relation.name + ">\n\n" 
 		}
 	end
 

@@ -50,7 +50,7 @@ aspect class TypeDefinition inherits PruningVisitorAspect {
 			self.visitedForRelations := true
 			self.superType.each{theType | theType.visitToAddRelations(theKermetaPruner, currentRadius+1)
 				if(self.visitedForRelations and theType.visitedForRelations) then
-					theKermetaPruner.onsuperTypeAdded(self, theType) end }
+					theKermetaPruner.addedsuperType.add(ClasssuperType.new.initialise(self, theType)) end }
 			self.visitedPass := false
 		end
 	end

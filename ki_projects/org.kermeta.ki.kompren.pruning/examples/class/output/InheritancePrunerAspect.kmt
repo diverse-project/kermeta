@@ -54,7 +54,7 @@ aspect class Clazz inherits PruningVisitorAspect {
 			self.visitedForRelations := true
 			self.superClasses.each{theClazz | theClazz.visitToAddRelations(theInheritancePruner)
 				if(self.visitedForRelations and theClazz.visitedForRelations) then
-					theInheritancePruner.onsuperClassesAdded(self, theClazz) end }
+					theInheritancePruner.addedsuperClasses.add(ClasssuperClasses.new.initialise(self, theClazz)) end }
 			self.visitedPass := false
 		end
 	end

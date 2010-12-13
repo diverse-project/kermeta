@@ -243,7 +243,7 @@ class PrunerAspectGenerator inherits Generator {
 			var nameVar2 : String init relation.eType.asType(EClass).getVarNameClassifier()
 			result := result + "\n\t\t\t\tif(self.visitedForRelations and " + nameVar2 +
 					".visitedForRelations) then\n\t\t\t\t\t" + prunerGenerator.prunerClass.getVarNameClassifier() +
-					".on" + relation.name + "Added(self, " + nameVar2 + ") end "
+					".added" + relation.name + ".add(Class" + relation.name + ".new.initialise(self, " + nameVar2 + ")) end "
 		end
 	end
 

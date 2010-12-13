@@ -10,9 +10,12 @@ class InheritancePruner {
 
 	reference addedClazzs : Bag<Clazz>
 
+	reference addedsuperClasses : Bag<ClasssuperClasses>
+
 	operation initialise(requiredClazzs : bag Clazz[0..*]) : InheritancePruner is do
 		result := self
 		self.addedClazzs := Bag<Clazz>.new
+		self.addedsuperClasses := Bag<ClasssuperClasses>.new
 		self.requiredClazzs.addAll(requiredClazzs)
 	end
 
@@ -20,10 +23,20 @@ class InheritancePruner {
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
+		self.addedsuperClasses.each{thesuperClasses | self.onsuperClassesAdded(thesuperClasses.src, thesuperClasses.tar) }
 	end
 
 	operation onClazzAdded(theClazz : Clazz) : Void is do
 	end
-	operation onsuperClassesAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
+	operation onsuperClassesAdded(src : Clazz, tar : Clazz) : Void is do
+	end
+}
+class ClasssuperClasses {
+	reference src : Clazz
+	reference tar : Clazz
+	operation initialise(src : Clazz, tar : Clazz) : ClasssuperClasses is do
+		result := self
+		self.src := src
+		self.tar := tar
 	end
 }

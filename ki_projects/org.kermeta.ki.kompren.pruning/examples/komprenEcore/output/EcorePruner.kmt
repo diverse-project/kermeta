@@ -16,10 +16,13 @@ class EcorePruner {
 
 	reference addedEReferences : Bag<EReference>
 
+	reference addedeSuperTypes : Bag<ClasseSuperTypes>
+
 	operation initialise(requiredEClasss : bag EClass[0..*], radius : Integer, lowerCard0 : Boolean) : EcorePruner is do
 		result := self
 		self.addedEClasss := Bag<EClass>.new
 		self.addedEReferences := Bag<EReference>.new
+		self.addedeSuperTypes := Bag<ClasseSuperTypes>.new
 		self.radius := radius
 		self.lowerCard0 := lowerCard0
 		self.requiredEClasss.addAll(requiredEClasss)
@@ -30,12 +33,22 @@ class EcorePruner {
 		self.requiredEClasss.each{theEClass | theEClass.visitToAddRelations(self, 0) }
 		self.addedEClasss.each{theEClass | onEClassAdded(theEClass) }
 		self.addedEReferences.each{theEReference | if(theEReference.checkCanReallyBeAdded()) then onEReferenceAdded(theEReference) end }
+		self.addedeSuperTypes.each{theeSuperTypes | self.oneSuperTypesAdded(theeSuperTypes.src, theeSuperTypes.tar) }
 	end
 
 	operation onEClassAdded(theEClass : EClass) : Void is do
 	end
 	operation onEReferenceAdded(theEReference : EReference) : Void is do
 	end
-	operation oneSuperTypesAdded(theEClassSrc : EClass, theEClassTar : EClass) : Void is do
+	operation oneSuperTypesAdded(src : EClass, tar : EClass) : Void is do
+	end
+}
+class ClasseSuperTypes {
+	reference src : EClass
+	reference tar : EClass
+	operation initialise(src : EClass, tar : EClass) : ClasseSuperTypes is do
+		result := self
+		self.src := src
+		self.tar := tar
 	end
 }
