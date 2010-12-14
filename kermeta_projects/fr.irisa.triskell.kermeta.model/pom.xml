@@ -16,6 +16,13 @@
 				<targetPath>../../target/filtered-sources/java</targetPath>
 				<directory>build/java</directory>
 			</resource>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+				</includes>
+			</resource>
 		</resources>
 		<sourceDirectory>target/filtered-sources/java</sourceDirectory>
 		<outputDirectory>build/class</outputDirectory>
