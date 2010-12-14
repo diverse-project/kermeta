@@ -34,11 +34,13 @@ public class SaveActuelModelCommand implements Command {
         String location = "";
         if (defaultLocation == null) {
             filechooser.showSaveDialog(kernel.getModelPanel());
-            location = "file://"+filechooser.getSelectedFile().getPath();
+            if (filechooser.getSelectedFile() != null) {
+                location = "file://" + filechooser.getSelectedFile().getPath();
+            }
         } else {
             location = defaultLocation;
         }
 
-        Art2XmiHelper.save(location.toString(),kernel.getModelHandler().getActualModel());
+        Art2XmiHelper.save(location.toString(), kernel.getModelHandler().getActualModel());
     }
 }
