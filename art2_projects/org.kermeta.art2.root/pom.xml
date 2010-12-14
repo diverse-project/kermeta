@@ -126,22 +126,13 @@
 
 
     <repositories>
-
         <repository>
             <id>triskellPublic</id>
-            <url>http://tipimouss.irisa.fr/maven2</url>
+            <url>http://www.kermeta.org/maven2</url>
         </repository>
         <repository>
             <id>triskellPublicSnapShots</id>
-            <url>http://tipimouss.irisa.fr/maven2-snapshots</url>
-        </repository>
-        <repository>
-            <id>triskellPrivate</id>
-            <url>http://tipimouss.irisa.fr/maven2private</url>
-        </repository>
-        <repository>
-            <id>triskellPrivateSnapshots</id>
-            <url>http://tipimouss.irisa.fr/maven2private-snapshots</url>
+            <url>http://www.kermeta.org/maven2-snapshots</url>
         </repository>
         <repository>
             <id>scala-tools.org</id>
