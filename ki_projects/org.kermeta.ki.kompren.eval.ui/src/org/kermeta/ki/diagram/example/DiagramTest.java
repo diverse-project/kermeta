@@ -15,6 +15,7 @@ import org.kermeta.ki.kompren.view.ClassDiagramView;
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.ClassView;
 import org.kermeta.ki.kompren.view.InheritanceView;
+import org.kermeta.ki.kompren.view.QuestionsPanel;
 import org.kermeta.ki.kompren.view.RelationClassView;
 import org.kermeta.ki.kompren.view.RoleView.Cardinality;
 
@@ -27,21 +28,23 @@ public class DiagramTest {
 		JFrame frame 			= new JFrame();
 		JToggleButton handB 	= new JToggleButton();
 		DiagramView diag		= createEcoreClassDiagram();
+		QuestionsPanel questionsPanel = new QuestionsPanel(diag);
 		diag.getHand().setHandButton(handB);
 		handB.setSelected(true);
 		
 		frame.getContentPane().setLayout(new BorderLayout());
 		JScrollPane sp = diag.getScrollPane();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int width  = (int)(screen.width*0.85);
-		int height = (int)(screen.height*0.8);
+		int width  = (int)((screen.width-500)*0.95);
+		int height = (int)(screen.height*0.85);
 		sp.setPreferredSize(new Dimension(width, height));
 		
 		frame.getContentPane().add(sp, BorderLayout.CENTER);
-		frame.setLocation(100, 100);
+		frame.getContentPane().add(questionsPanel, BorderLayout.EAST);
 		frame.setVisible(true);
 		frame.pack();
 		diag.refresh();
+		frame.setLocation((screen.width-frame.getWidth())/2, (screen.height-frame.getHeight())/2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
