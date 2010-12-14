@@ -18,6 +18,7 @@ import org.kermeta.art2.ui.editor.property.InstancePropertyEditor;
 import org.kermeta.art2.ui.editor.property.NodePropertyEditor;
 import org.kermeta.art2.ui.framework.elements.ChannelPanel;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
+import org.kermeta.art2.ui.framework.elements.EditableModelPanel;
 import org.kermeta.art2.ui.framework.elements.NodePanel;
 
 /**
@@ -32,8 +33,11 @@ public class Art2EditorPanel extends JPanel {
         return kernel;
     }
     private JXPanel leftpanel = new JXPanel();
-    private JXPanel southpanel = new JXPanel();
+    //private JXPanel southpanel = new JXPanel();
     private TypeDefinitionPalette palette = new TypeDefinitionPalette();
+
+
+    private EditableModelPanel editableModelPanel = null;
 
     public TypeDefinitionPalette getPalette() {
         return palette;
@@ -44,7 +48,7 @@ public class Art2EditorPanel extends JPanel {
         kernel.setEditorPanel(this);
 
         leftpanel.setOpaque(false);
-        southpanel.setOpaque(false);
+        //southpanel.setOpaque(false);
 
         leftpanel.setLayout(new BorderLayout());
         GradientPaint grad = new GradientPaint(new Point(0, 0), new Color(60, 60, 60), new Point(0, getHeight()), new Color(51, 51, 51));
@@ -61,10 +65,13 @@ public class Art2EditorPanel extends JPanel {
         //scrollpane.setPreferredSize(new Dimension(200, 400));
         //scrollpane.setLayout(new ScrollPaneLayout());
         scrollpane.getViewport().add(kernel.getModelPanel());
+
+        editableModelPanel = new EditableModelPanel(scrollpane);
+
         //scrollpane.setAutoscrolls(true);
 
 
-        this.add(scrollpane, BorderLayout.CENTER);
+        this.add(editableModelPanel, BorderLayout.CENTER);
 
         /* LEFT BAR GENERATION */
         commandPanel = new CommandPanel(kernel);
@@ -74,8 +81,8 @@ public class Art2EditorPanel extends JPanel {
         //leftpanel.add(trash);
 
         this.add(leftpanel, BorderLayout.WEST);
-        this.add(southpanel, BorderLayout.SOUTH);
-        southpanel.setVisible(false);
+        //this.add(southpanel, BorderLayout.SOUTH);
+        //southpanel.setVisible(false);
 
     }
 
@@ -98,24 +105,30 @@ public class Art2EditorPanel extends JPanel {
     //Art2XmiHelper.save("/Users/ffouquet/NetBeansProjects/Entimid/org.entimid.fakeStuff/art2Merged.xmi", kernel.getModelHandler().getActualModel());
     }*/
     public void showPropertyFor(JPanel p) {
-        southpanel.setVisible(true);
-        southpanel.removeAll();
+       // southpanel.setVisible(true);
+       // southpanel.removeAll();
         if (p instanceof NodePanel) {
             org.kermeta.art2.ContainerNode elem = (org.kermeta.art2.ContainerNode) kernel.getUifactory().getMapping().get(p);
             NodePropertyEditor prop = new NodePropertyEditor(elem, kernel);
-            southpanel.add(prop);
+            //southpanel.add(prop);
+            editableModelPanel.displayProperties(prop);
         }
         if (p instanceof ComponentPanel || p instanceof ChannelPanel) {
             org.kermeta.art2.Instance elem = (org.kermeta.art2.Instance) kernel.getUifactory().getMapping().get(p);
             InstancePropertyEditor prop = new InstancePropertyEditor(elem, kernel);
-            southpanel.add(prop);
+            //southpanel.add(prop);
+            editableModelPanel.displayProperties(prop);
         }
-        southpanel.repaint();
-        southpanel.revalidate();
+       // southpanel.repaint();
+       // southpanel.revalidate();
+
+
+        this.invalidate();
 
     }
+
     public void unshowPropertyEditor() {
-        southpanel.setVisible(false);
-        southpanel.removeAll();
+        editableModelPanel.undisplayProperties();
+
     }
 }
