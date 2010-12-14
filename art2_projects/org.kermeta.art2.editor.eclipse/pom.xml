@@ -15,7 +15,6 @@
         <groupId>org.kermeta.art2</groupId>
         <version>2.2.1-SNAPSHOT</version>
     </parent>
-
 	
 	
 
@@ -23,18 +22,18 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <!-- Add resources from the plugin structure -->
         <resources>
-	      	<resource>
-	        	<directory>.</directory>
-	        	<includes>
-	          		<include>plugin.xml</include>
-	          		<include>plugin.properties</include>
-	        	</includes>
-	      	</resource>
-	      	<resource>
-	        	<directory>icons</directory>
-	        	<targetPath>icons</targetPath>
-	      	</resource>
-	    </resources>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>plugin.xml</include>
+                    <include>plugin.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>icons</directory>
+                <targetPath>icons</targetPath>
+            </resource>
+        </resources>
         <plugins>
 			<!-- Creation of the bundle jar and its manifest -->
             <plugin>
@@ -44,17 +43,17 @@
                 <extensions>true</extensions>
 				
                 <configuration>
-                    <instructions>                    	
-                    	<Bundle-SymbolicName>org.kermeta.art2.editor.eclipse;singleton:=true</Bundle-SymbolicName> 
-                    	<Bundle-Activator>org.kermeta.art2.editor.eclipse.Activator</Bundle-Activator>                    	                       
+                    <instructions>
+                        <Bundle-SymbolicName>org.kermeta.art2.editor.eclipse;singleton:=true</Bundle-SymbolicName>
+                        <Bundle-Activator>org.kermeta.art2.editor.eclipse.Activator</Bundle-Activator>
                         <Export-Package>org.kermeta.art2.editor.eclipse.*</Export-Package>
                         <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>org.eclipse.ui,
                         	org.eclipse.core.runtime,
- 							org.eclipse.core.resources
+ 							org.eclipse.core.resources,org.eclipse.ui.ide
                         </Require-Bundle>
                         <!-- use the ! for avoiding to import some packages that are already there with the Require-Bundle -->
-                     	<Import-Package>
+                        <Import-Package>
 							!org.eclipse.core.resources,
 							!org.eclipse.core.runtime, 
 							!org.eclipse.ui, 
@@ -77,6 +76,7 @@
 							!org.eclipse.swt.graphics, 
 							!org.eclipse.swt.layout, 
 							!org.eclipse.swt.widgets,
+                                                        !org.eclipse.swt.*,
 							!sun.misc,
 							javax.*,
 							org.jdesktop.*,
@@ -88,7 +88,7 @@
 							org.osgi.framework,
 							org.apache.camel.*,
 							org.xml.sax.*
-                        </Import-Package>                        
+                        </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <!-- add extra element in the manifest, copy them from this file
                              ex: Bundle-ActivationPolicy: lazy -->
@@ -102,7 +102,7 @@
 				
             </plugin>
             <!-- copy generated MANIFEST in the project for eclipse user -->
-             <plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>truezip-maven-plugin</artifactId>
                 <version>1.0-beta-4</version>
@@ -124,23 +124,23 @@
                     </execution>
 
                 </executions>
-            </plugin> 
-            
+            </plugin>
+
         </plugins>
     </build>
     
     <dependencies>
     
-    	<dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.ui.editor</artifactId>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         
-    	<dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>art2.ui.framework</artifactId>
-            <version>${project.version}</version>
+            <version>${art2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kermeta.emf</groupId>
@@ -150,11 +150,11 @@
         
         
         <dependency>
-        	<groupId>org.kermeta.art2</groupId>
-        	<artifactId>art2.model</artifactId>
-        	<version>${art2.version}</version>
-        	<type>bundle</type>
-        	<scope>compile</scope>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.model</artifactId>
+            <version>${art2.version}</version>
+            <type>bundle</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
@@ -237,12 +237,13 @@
             <version>[3.5.2.M20100120-0800,)</version>
         </dependency>
         <dependency>
-        	<groupId>org.osgi</groupId>
-        	<artifactId>org.osgi.core</artifactId>
-        	<version>4.2.0</version>
-        	<type>jar</type>
-        	<scope>compile</scope>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
 </project>

@@ -2,29 +2,57 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-   <extension
+    <extension
+         point="org.eclipse.ui.editors">
+        <editor
+            name="Art2EclipseEditor"
+            extensions="art2"
+            icon="icons/art2_logo_v2_16.png"
+            contributorClass="org.kermeta.art2.editor.eclipse.editors.Art2EclipseEditorContributor"
+            class="org.kermeta.art2.editor.eclipse.editors.Art2EclipseEditor"
+            id="org.kermeta.art2.editor.eclipse.editors.Art2EclipseEditor">
+        </editor>
+    </extension>
+    <extension
+         point="org.eclipse.ui.newWizards">
+        <category
+            name="Art2 wizard"
+            id="org.kermeta.art2.editor.eclipse">
+        </category>
+        <wizard
+            name="Art2 model file"
+            icon="icons/art2_logo_v2_16.png"
+            category="org.kermeta.art2.editor.eclipse"
+            class="org.kermeta.art2.editor.eclipse.wizards.Art2Wizard"
+            id="org.kermeta.art2.editor.eclipse.wizards.Art2Wizard">
+        </wizard>
+    </extension>
+
+
+<!--
+    <extension
          point="org.eclipse.ui.popupMenus">
-      <objectContribution
+        <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
             id="org.kemeta.art2.editor.eclipse.contribution1">
-         <menu
+            <menu
                icon="icons/art2_logo_v2_16.png"
                id="org.kemeta.art2.editor.eclipse.menu1"
                label="ART2"
                path="additions">
-            <separator
+                <separator
                   name="group1">
-            </separator>
-         </menu>
-         <action
+                </separator>
+            </menu>
+            <action
                class="org.kermeta.art2.editor.eclipse.popup.actions.OpenGraphicalEditorAction"
                enablesFor="1"
                icon="icons/art2_logo_v2_16.png"
                id="org.kemeta.art2.editor.eclipse.newAction"
                label="Open in Graphical editor"
                menubarPath="org.kemeta.art2.editor.eclipse.menu1/group1">
-         </action>
-      </objectContribution>
-   </extension>
+            </action>
+        </objectContribution>
+    </extension>-->
 
 </plugin>
