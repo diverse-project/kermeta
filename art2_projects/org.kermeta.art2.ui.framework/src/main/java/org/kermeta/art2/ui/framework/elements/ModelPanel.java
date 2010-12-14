@@ -15,6 +15,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -44,7 +47,12 @@ public class ModelPanel extends JLayeredPane {
 
     }
 
+
+
+
+
     public ModelPanel() {
+
         nodePanel = new JXPanel();
         nodePanel.setLayout(new DragDropLayout());
         dragPanel = new JPanel();
@@ -72,7 +80,6 @@ public class ModelPanel extends JLayeredPane {
                 nodePanel.setBounds(0, 0, getWidth(), getHeight());
                 bindingPanel.setBounds(0, 0, getWidth(), getHeight());
                 dragPanel.setBounds(0, 0, getWidth(), getHeight());
-
                 repaint();
                 revalidate();
             }

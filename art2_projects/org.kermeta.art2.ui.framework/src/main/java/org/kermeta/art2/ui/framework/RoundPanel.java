@@ -43,7 +43,6 @@ public class RoundPanel extends JPanel {
         revalidate();
     }
 
-
     public RoundPanel() {
         this.setOpaque(false);
         setDoubleBuffered(true);
@@ -115,6 +114,8 @@ public class RoundPanel extends JPanel {
         super.setBounds(x, y, width, height);
         int w = getWidth() - (SHADOW_SIZE - 2) * 2;
         int h = getHeight() - (SHADOW_SIZE - 2) * 2;
+        if(h < 0|| w < 0) return ;
+
         int arc = 15;
         int shadowSize = SHADOW_SIZE;
         shadow =

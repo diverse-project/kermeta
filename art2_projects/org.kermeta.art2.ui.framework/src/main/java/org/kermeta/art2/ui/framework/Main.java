@@ -8,11 +8,14 @@ import org.kermeta.art2.ui.framework.elements.NodePanel;
 import org.kermeta.art2.ui.framework.elements.ModelPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import org.kermeta.art2.ui.framework.elements.Binding;
 import org.kermeta.art2.ui.framework.elements.ComponentPanel;
 import org.kermeta.art2.ui.framework.elements.ChannelPanel;
+import org.kermeta.art2.ui.framework.elements.EditableModelPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel;
 import org.kermeta.art2.ui.framework.elements.PortPanel.PortType;
 
@@ -120,12 +123,23 @@ public class Main {
 
         JScrollPane scrollPane = new JScrollPane(model, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        jframe.add(scrollPane, BorderLayout.CENTER);
+        EditableModelPanel epanel = new EditableModelPanel(scrollPane);
+
+
+        jframe.add(epanel, BorderLayout.CENTER);
+
+
+
+
+
+        JPanel prop = new JPanel();
+        prop.add(new JButton("TOTO"));
+
+        epanel.displayProperties(prop);
+
 
         jframe.pack();
         jframe.setVisible(true);
-
-
 
 
     }
