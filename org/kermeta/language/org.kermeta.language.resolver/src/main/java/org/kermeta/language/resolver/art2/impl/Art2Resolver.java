@@ -38,7 +38,7 @@ import org.osgi.framework.Bundle;
 @Library(name = "org.kermeta.language")
 
 @ComponentType
-public class Art2Resolver extends AbstractComponentType {
+public class Art2Resolver extends AbstractComponentType implements PortKmResolver {
 	
 	private String bundleSymbolicName = "";
     protected MessagePort logPort = null;
