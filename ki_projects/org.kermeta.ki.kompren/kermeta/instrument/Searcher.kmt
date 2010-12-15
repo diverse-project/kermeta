@@ -75,9 +75,9 @@ class Searcher inherits Instrument {
 	method onActionDone(link : Link, action : Action) : Void is do
 		if(link.isInstanceOf(TextChanged2SearchClasses)) then
 			if(searchedClasses.size>0) then
-				var nameStart : String init "<html>"
+				var nameStart : String init "<html><font color=\"black\">"
 				var nameEnd   : String init ")</font></html>"
-				var color     : String init "<font color=\"gray\">"
+				var color     : String init "</font><font color=\"gray\">"
 				
 				var menuItem : MenuItem
 				popupMenu.setVisible(false)
