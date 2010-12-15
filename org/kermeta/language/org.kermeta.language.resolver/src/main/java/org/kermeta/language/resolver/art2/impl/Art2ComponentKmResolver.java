@@ -22,8 +22,11 @@ import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
+import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
+import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.port.PortKmResolver;
+import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
@@ -38,17 +41,19 @@ import org.osgi.framework.Bundle;
 @Library(name = "org.kermeta.language")
 
 @ComponentType
-public class Art2Resolver extends AbstractComponentType implements PortKmResolver {
+public class Art2ComponentKmResolver extends AbstractComponentType implements PortKmResolver {
 	
 	private String bundleSymbolicName = "";
-    protected MessagePort logPort = null;
+	protected Bundle bundle;
+    protected SimpleLogger logger;
     protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
 	
 	@Start
 	public void start(){
-        bundleSymbolicName = ((Bundle) this.getDictionary().get("osgi.bundle")).getHeaders().get("Bundle-SymbolicName").toString();
-        logPort = getPortByName("log", MessagePort.class);
-        logPort.process(mFactory.createDebugMessage("Successfully started Resolver", bundleSymbolicName));
+		bundle = (Bundle) this.getDictionary().get("osgi.bundle");
+        bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started Resolver");
 	}
 	
 	@Stop
@@ -58,12 +63,32 @@ public class Art2Resolver extends AbstractComponentType implements PortKmResolve
 	
     @Port(name = "KmResolver", method = "resolve")
 	public ModelingUnitResult resolve(ModelingUnit mu) {
-
+    	logger.debug("Resolving ModelingUnit..." );
     	ModelingUnitResult result = null;
   	
     	result = new ModelingUnitResult(mu);
+    	logger.warning("Not implemented, returning input ModelingUnit" );
     	
     	return result;
 	}
+    
+    // --- Port accessors --- (helpers to access the port in a safe way)
+    public MessagePort getLogPort() {    	
+		return logger.getLogPort();
+	}
+    
+    // --- GETTERS and SETTERS ---
+    public SimpleLogger getLogger() {
+		return logger;
+	}
+
+    public String getBundleSymbolicName() {
+        return bundleSymbolicName;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
+    
 }
 
