@@ -53,7 +53,9 @@ import runner.MainRunner;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
-    @ThirdParty(name = "org.kermeta.language.api", url = "mvn:org.kermeta.language/language.api")
+    @ThirdParty(name = "org.kermeta.language.api", url = "mvn:org.kermeta.language/language.api"),
+    @ThirdParty(name = "fr.irisa.triskell.kermeta.model", url = "mvn:fr.irisa.triskell.kermeta/kermeta.model"),
+    @ThirdParty(name ="org.kermeta.language.framework.scala", url = "mvn:org.kermeta.language/language.framework.scala")
 })
 @Requires({
     /**
