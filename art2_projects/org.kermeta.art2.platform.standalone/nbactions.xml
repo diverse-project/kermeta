@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
+
+    <action>
+        <actionName>CUSTOM-RunDuke</actionName>
+        <displayName>RunDuke</displayName>
+        <goals>
+            <goal>exec:java</goal>
+        </goals>
+        <properties>
+            <node.name>duke</node.name>
+        </properties>
+    </action>
+    <action>
+        <actionName>CUSTOM-RunDuke</actionName>
+        <displayName>RunBrice</displayName>
+        <goals>
+            <goal>exec:java</goal>
+        </goals>
+        <properties>
+            <node.name>brice</node.name>
+        </properties>
+    </action>
+
     <!--
     <action>
         <actionName>CUSTOM-RunDuke</actionName>

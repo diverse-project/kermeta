@@ -79,6 +79,7 @@
   <properties>
     <node.name>duke</node.name>
     <org.osgi.framework.system.packages.extra>sun.misc</org.osgi.framework.system.packages.extra>
+    <art2.repositories>http://dhcp-153189.wlan.ntnu.no/maven2/</art2.repositories>
     <bootstrap.version>2.2.1-SNAPSHOT</bootstrap.version>
     <slf4j.version>1.6.1</slf4j.version>
     <bootstrap.bundles>/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.platform.standalone/target/art2Bundles</bootstrap.bundles>

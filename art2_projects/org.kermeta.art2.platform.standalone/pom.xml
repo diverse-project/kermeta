@@ -284,6 +284,8 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Import-Package>!org.kermeta.art2.platform.standalone,!org.apache.*,*</Import-Package>
                         <Bundle-Activator>org.kermeta.art2.platform.standalone.BootstrapActivator</Bundle-Activator>
+                        <Bundle-ActivationPolicy>auto</Bundle-ActivationPolicy>
+                        <Eclipse-LazyStart>false</Eclipse-LazyStart>
                     </instructions>
                 </configuration>
             </plugin>
