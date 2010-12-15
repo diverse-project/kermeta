@@ -1,4 +1,3 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
@@ -46,7 +45,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.0.7</version>
+            <version>0.0.9</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -75,10 +74,10 @@
         <plugins>
             <!-- Kermeta Compiler plugin -->
             
-<!--             <plugin>
+             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA5</version>
+                <version>1.4.1-BETA6</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -86,14 +85,14 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/km_resolver.km</model>
+                            <model>src/generated/km/Resolver.km</model>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>	 -->
+            </plugin>
      
             <!-- Add generated source to build cycle -->
-<!--             <plugin>
+             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.5</version>
@@ -111,7 +110,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>	 -->
+            </plugin>
 <!-- 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>

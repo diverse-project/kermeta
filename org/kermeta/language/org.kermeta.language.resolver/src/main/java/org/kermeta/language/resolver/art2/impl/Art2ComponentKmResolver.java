@@ -10,6 +10,7 @@
  */
 package org.kermeta.language.resolver.art2.impl;
 
+
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.Port;
@@ -24,12 +25,13 @@ import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
 import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
-import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.port.PortKmResolver;
-import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.result.ModelingUnitResult;
+import org.kermeta.language.resolver.Resolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
+
+import runner.MainRunner;
 
 @Provides({
     @ProvidedPort(name = "KmResolver", className = PortKmResolver.class)
@@ -65,7 +67,14 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
 	public ModelingUnitResult resolve(ModelingUnit mu) {
     	logger.debug("Resolving ModelingUnit..." );
     	ModelingUnitResult result = null;
-  	
+    	
+    	MainRunner.init();
+    	Resolver resolver = org.kermeta.language.resolver.RichFactory.createResolver();
+    	resolver.resolveFromModelingUnit(mu);
+    	
+    	logger.debug("ModelingUnit resolved..." );
+    	logger.debug("Static setting ModelingUnit..." );
+    	
     	result = new ModelingUnitResult(mu);
     	logger.warning("Not implemented, returning input ModelingUnit" );
     	
@@ -91,4 +100,3 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
     }
     
 }
-
