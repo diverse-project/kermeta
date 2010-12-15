@@ -119,15 +119,15 @@ public class Art2StandaloneBootstrap {
                 bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.framework.bus.jgroups/2.2.1-SNAPSHOT").start();
 
                 //INSTALL ART2 Editor for Eclipse if it possible
-                // bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.ui.framework/2.2.1-SNAPSHOT").start();
-                //  bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.ui.editor/2.2.1-SNAPSHOT").start();
+                 bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.ui.framework/2.2.1-SNAPSHOT").start();
+                  bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.ui.editor/2.2.1-SNAPSHOT").start();
 
-                bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.ui.framework/target/art2.ui.framework-2.2.1-SNAPSHOT.jar");
-                bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.ui.editor/target/art2.ui.editor-2.2.1-SNAPSHOT.jar");
+               // bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.ui.framework/target/art2.ui.framework-2.2.1-SNAPSHOT.jar");
+                //bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.ui.editor/target/art2.ui.editor-2.2.1-SNAPSHOT.jar");
 
                 try {
-                    bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.editor.eclipse/target/art2.editor.eclipse-2.2.1-SNAPSHOT.jar");
-                    //   bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.editor.eclipse/2.2.1-SNAPSHOT").start();
+               //     bc.installBundle("file:/Users/ffouquet/NetBeansProjects/Art2/org.kermeta.art2.editor.eclipse/target/art2.editor.eclipse-2.2.1-SNAPSHOT.jar");
+                       bc.installBundle("mvn:http://www.kermeta.org/maven2-snapshots/!org.kermeta.art2/art2.editor.eclipse/2.2.1-SNAPSHOT").start();
                 } catch (BundleException ex) {
                     Logger.getLogger(Art2StandaloneBootstrap.class.getName()).log(Level.SEVERE, "Eclipse Install Error", ex);
                 }
