@@ -79,9 +79,8 @@ public class GenerateExecutableKMAction {
 						saveModelingUnit(intermediateOutputUri, mergeResult.getModelingUnit());
 					}
 					// TODO Resolve result
-
-					art2ComponentKWF.getLogger().error("Not fuly implemented : cannot finish request GenerateExecutableKMAction " + inputDescriptionURI, null);
-					
+					art2ComponentKWF.getLogger().error("Not fully implemented : cannot finish request GenerateExecutableKMAction " + inputDescriptionURI, null);
+					return;
 				}
 				else{
 					// TODO deal with kp file description
