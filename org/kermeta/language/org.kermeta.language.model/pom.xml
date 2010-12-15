@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.model</artifactId>
     <packaging>bundle</packaging>
-    <name>Kermeta :: Model</name>
+    <name>language.model :: Kermeta2 model</name>
     
     <parent>
         <groupId>org.kermeta.language</groupId>
@@ -94,9 +94,21 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>org.kermeta.*</Export-Package>
                         <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
-                        <Import-Package>org.eclipse.emf.*,org.osgi.framework</Import-Package>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Export-Package>
+                        	org, 
+                        	org.impl,
+                        	org.kermeta, 
+                        	org.kermeta.impl,
+                        	org.kermeta.language.*,
+                        	org.kermeta.util,
+                        	org.util
+                        </Export-Package>
+                        <Import-Package>
+                        	org.eclipse.emf.*,
+                        	org.osgi.framework;version="[1.5,2)"</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
                 </configuration>
