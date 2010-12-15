@@ -47,7 +47,7 @@ class Scroll2Zoom inherits Link
 	
 	method isConditionRespected() : Boolean is do
 		var scroll : KeysScroll init interaction.asType(KeysScroll)
-		result := not scroll.keys.isEmpty and not scroll.numberUp.isVoid
+		result := not scroll.keys.isEmpty and scroll.scrolled
 	end
 	
 	

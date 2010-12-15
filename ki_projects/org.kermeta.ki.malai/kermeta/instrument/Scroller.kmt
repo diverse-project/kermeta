@@ -46,7 +46,8 @@ class Scrolling2Scroll inherits Link
 	
 	
 	method isConditionRespected() : Boolean is do
-		result := interaction.asType(KeysScroll).keys.empty
+		var scroll : KeysScroll init interaction.asType(KeysScroll)
+		result := scroll.keys.empty and scroll.scrolled
 	end
 	
 	

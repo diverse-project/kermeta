@@ -74,7 +74,7 @@
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.compilo.scala</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.2-BETA6</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -92,7 +92,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-SNAPSHOT</version>
+                <version>1.4.1-BETA6</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>

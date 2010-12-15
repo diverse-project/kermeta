@@ -25,6 +25,8 @@ class KeysScroll inherits Interaction
 	
 	attribute numberUp : Integer
 	
+	attribute scrolled : Boolean
+	
 	/** Defines if the interaction must search the object at the position of a scroll. */
 	attribute searchPickable : Boolean
 	
@@ -37,6 +39,7 @@ class KeysScroll inherits Interaction
 		px		:= void
 		py		:= void
 		numberUp:= 0
+		scrolled := false
 		searchPickable := false
 	end
 	
@@ -135,16 +138,13 @@ class EmptyKeyReleaseTransition inherits KeyReleaseTransition
 
 
 
-class KSKeyReleaseTransition inherits KeyReleaseTransition
-{
+class KSKeyReleaseTransition inherits KeyReleaseTransition {
 	reference keysScroll : KeysScroll
-	
-	
+
 	method action() : Void is do
 		keysScroll.keys.remove(key)
 	end
-	
-	
+
 	method isGuardRespected() : Boolean is do
 		result := keysScroll.keys.size>1
 	end
@@ -152,11 +152,9 @@ class KSKeyReleaseTransition inherits KeyReleaseTransition
 
 
 
-class KSWheelTransition inherits WheelTransition
-{
+class KSWheelTransition inherits WheelTransition {
 	reference keysScroll : KeysScroll
-	
-	
+
 	method action() : Void is do
 		keysScroll.px 		:= px
 		keysScroll.py 		:= py
@@ -165,11 +163,14 @@ class KSWheelTransition inherits WheelTransition
 			keysScroll.object 	:= keysScroll.getPickableAt(px, py, source)
 		end
 
-		keysScroll.numberUp	:= keysScroll.numberUp + if(isUp) then 1 else -1 end
+		var incr : Integer
+		if(isUp) then incr := 1 else incr := -1 end
+
+		keysScroll.numberUp	:= keysScroll.numberUp + incr
+		keysScroll.scrolled := true
 	end
-	
-	
-	
+
+
 	method isGuardRespected() : Boolean is do
 		result := true
 	end
