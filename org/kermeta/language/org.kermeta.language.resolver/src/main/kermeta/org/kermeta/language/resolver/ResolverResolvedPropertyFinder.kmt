@@ -5,8 +5,6 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "main::kermeta::org::kermeta::language::resolver::ResolverResolvedPropertyFinder"
-
 package main::kermeta::org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"

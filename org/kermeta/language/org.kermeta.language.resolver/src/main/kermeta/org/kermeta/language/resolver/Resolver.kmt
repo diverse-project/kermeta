@@ -5,16 +5,16 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "main::kermeta::org::kermeta::language::resolver::Resolver"
+@mainClass "org::kermeta::language::resolver::Resolver"
+@mainOperation "lancement"
 
 
-package main::kermeta::org::kermeta::language::resolver;
+package org::kermeta::language::resolver;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/Structure_Aspect_GetName.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
 
@@ -26,12 +26,12 @@ using kermeta::standard
 
 class Resolver
 {
-	operation main() is do
+	operation lancement() : Void is do
 		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 		var ctxt : StructureVisitorContext init StructureVisitorContext.new
 	
 		var repository : EMFRepository init EMFRepository.new
-		//repository.registerEcoreFile("platform:/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/action1.km")
 		       	
        	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
