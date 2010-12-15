@@ -39,6 +39,7 @@ import org.kermeta.language.api.messaging.ProblemMessage;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmMerger;
+import org.kermeta.language.api.port.PortKmResolver;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.merger.BinaryMerger;
@@ -172,17 +173,12 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
     	}
     }
     
- // --- Port accessors ---
-
-    public PortResourceLoader getKmtLoaderPort() {
-		return getPortByName("kmtLoader", PortResourceLoader.class);
+    // --- Port accessors ---
+    public MessagePort getLogPort() {
+		return getLogger().getLogPort();
 	}
     
-    public PortKmMerger getKmMergerPort() {
-		return getPortByName("kmMerger", PortKmMerger.class);
-	}
-    
-    
+   
     // --- GETTERS and SETTERS ---
     public SimpleLogger getLogger() {
 		return logger;
