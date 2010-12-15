@@ -47,8 +47,7 @@ public abstract class Panel
 	
 	public static boolean isVerticalScrollbarVisible(final Object panelRO) {
 		JScrollBar sb = getScrollbar((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO), true);
-		
-		return sb==null || ! sb.isVisible();
+		return sb!=null && sb.isVisible();
 	}
 	
 	
@@ -56,8 +55,7 @@ public abstract class Panel
 	
 	public static boolean isHorizontalScrollbarVisible(final Object panelRO) {
 		JScrollBar sb = getScrollbar((JPanel) Source2TargetMap.MAP.getTargetObject(panelRO), false);
-		
-		return sb==null || ! sb.isVisible();
+		return sb!=null && sb.isVisible();
 	}
 	
 	
