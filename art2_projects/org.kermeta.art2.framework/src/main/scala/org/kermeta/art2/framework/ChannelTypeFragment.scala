@@ -8,6 +8,7 @@ package org.kermeta.art2.framework
 import java.util.HashMap
 import org.kermeta.art2.framework.message._
 import org.slf4j.LoggerFactory
+import scala.actors.Actor
 import scala.collection.JavaConversions._
 import scala.reflect.BeanProperty
 
@@ -72,11 +73,11 @@ trait ChannelTypeFragment extends Art2ChannelFragment with ChannelFragment {
       }
 
     case Art2StartMessage => {
-        startChannelFragment
+        new Actor{ def act = startChannelFragment }.start
         reply(true)
       }
     case Art2StopMessage => {
-        stopChannelFragment
+        new Actor{ def act = stopChannelFragment }.start
         reply(true)
       }
 

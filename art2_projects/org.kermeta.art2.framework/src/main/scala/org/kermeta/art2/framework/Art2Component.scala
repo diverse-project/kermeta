@@ -7,6 +7,7 @@ package org.kermeta.art2.framework
 
 import org.kermeta.art2.framework.message._
 import org.slf4j.LoggerFactory
+import scala.actors.Actor
 import scala.collection.JavaConversions._
 import org.kermeta.art2.framework.aspects.Art2Aspects._
 
@@ -26,7 +27,7 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
     }
     
     case Art2StartMessage => {
-        startComponent
+        new Actor{ def act = startComponent }.start()
         //Wake Up Hosted Port
         getArt2ComponentType.getHostedPorts.foreach{hp=>
           var port = hp._2.asInstanceOf[Art2Port]
@@ -44,7 +45,7 @@ abstract class Art2Component(c : AbstractComponentType) extends Art2Actor {
             port.pause
           }
         }
-        stopComponent
+        new Actor{ def act= stopComponent }.start()
         reply(true)
       }
       case _ @ msg => logger.error("unknow message "+msg)
