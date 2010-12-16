@@ -61,6 +61,11 @@
         </dependency>
        <dependency>
             <groupId>org.kermeta.language</groupId>
+            <artifactId>language.resolver</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
             <artifactId>language.merger.multimerger</artifactId>
             <version>${language.version}</version>
         </dependency>
