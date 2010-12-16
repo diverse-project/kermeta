@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <componentTypes name="Art2ComponentStdOutLogger" factoryBean="org.kermeta.utils.logger.stdout.art2.impl.Art2ComponentStdOutLoggerFactory" startMethod="start" stopMethod="stop">
+    <provided name="logPort" ref="//@portTypes.0">
+      <mappings beanMethodName="process" serviceMethodName="process"/>
+    </provided>
+  </componentTypes>
+  <portTypes xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <librariy name="org.kermeta.utils" groupName="org.kermeta.utils" unitName="utils.logger.stdout" version="2.0.0-SNAPSHOT" subComponentTypes="//@componentTypes.0"/>
+</art2:ContainerRoot>
