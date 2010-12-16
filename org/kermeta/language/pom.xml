@@ -32,16 +32,21 @@
         <!-- jar | ie. inherits from org.kermeta.language.root -->
         <module>org.kermeta.language.api</module>
         <module>org.kermeta.language.api.tests</module>
-        <module>org.kermeta.language.loader.scalaKMT</module>
         <module>org.kermeta.language.model</module>                         
         <!--<module>org.kermeta.language.model.edit</module>
         <module>org.kermeta.language.model.editor</module> -->
         <module>org.kermeta.language.workbench.eclipse</module>
                 
         <!-- Art2 components -->
-        <!-- <module>org.kermeta.language.checker</module> --> 
+        <!-- <module>org.kermeta.language.checker</module> -->  
         <module>org.kermeta.language.eventmonitor.eclipse.builder</module> 
-        <module>org.kermeta.language.texteditor.eclipse</module>        
+        <module>org.kermeta.language.KWF</module> 
+        <module>org.kermeta.language.loader.scalaKMT</module>
+        <module>org.kermeta.language.merger.binarymerger</module>
+        <module>org.kermeta.language.merger.multimerger</module>   
+        <module>org.kermeta.language.resolvere</module> 
+        <module>org.kermeta.language.texteditor.eclipse</module>   
+        <module>org.kermeta.language.ui.eclipse</module>      
         
         <!-- Archetype -->
     </modules>
