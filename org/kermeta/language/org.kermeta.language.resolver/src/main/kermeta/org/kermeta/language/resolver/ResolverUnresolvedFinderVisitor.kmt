@@ -32,7 +32,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (resolvedTypeFinder.isVoid()) then
 			resolvedTypeFinder := ResolverResolvedTypeFinder.new
 		end
-		if (ctxt.qualifiedPath.isEmpty()) then
+		if (ctxt.qualifiedPath.isEmpty() or ctxt.currentPackage.isVoid()) then
 			ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
 			
 			if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
@@ -80,7 +80,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (resolvedPropertyFinder.isVoid()) then
 			resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
 		end
-		if (ctxt.qualifiedPath.isEmpty()) then
+		if (ctxt.qualifiedPath.isEmpty() or ctxt.currentPackage.isVoid()) then
 			ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt)
 		else
 			ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
@@ -106,7 +106,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (resolvedOperationFinder.isVoid()) then
 			resolvedOperationFinder := ResolverResolvedOperationFinder.new
 		end
-		if (ctxt.qualifiedPath.isEmpty()) then
+		if (ctxt.qualifiedPath.isEmpty() or ctxt.currentPackage.isVoid()) then
 			ctxt.currentPackage.accept(resolvedOperationFinder, ctxt)
 		else
 			ctxt.currentModelingUnit.accept(resolvedOperationFinder, ctxt)
