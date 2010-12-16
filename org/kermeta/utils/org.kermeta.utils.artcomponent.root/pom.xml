@@ -10,7 +10,7 @@
     <groupId>org.kermeta.utils</groupId>
     <artifactId>utils.artcomponent.root</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1-BETA1</version>
     <name>K2 :: UTILS :: Root</name>
 
     <parent>
@@ -22,7 +22,7 @@
 
     <properties>
         <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
-        <utils.version>2.0.1-SNAPSHOT</utils.version>
+        <utils.version>2.0.1-BETA1</utils.version>
         <traceability.version>2.0.1-SNAPSHOT</traceability.version>
     </properties>
 	<profiles>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.utils</groupId>
     <artifactId>utils_projects</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1-BETA1</version>
     <packaging>pom</packaging>
     <name>Utils :: Projects</name>
     <build>
