@@ -20,7 +20,7 @@ aspect class EObject
 		if self.isInstanceOf(EPackage) then
 			result := self.asType(EPackage)
 		else
-			result := self.eContainer.getPackage()
+			result := self.container().asType(EObject).getPackage()
 		end
 	end
 	
