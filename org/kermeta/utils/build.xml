@@ -1,0 +1,179 @@
+<project name="release_and_new_version" default="all" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+
+	<description>
+        change version to release a version without SNAPSHOT
+		Compile the release
+		Deploy the release
+		reopen a dev version
+    </description>
+	<!-- initialize env with Hudson environment variables -->
+	<property environment="env"/>
+	<property name="env.RELEASE_VERSION" value="1.0.0" /> <!-- default value for command line tests -->
+	<property name="env.NEXT_DEVELOPMENT_VERSION" value="1.0.1-SNAPSHOT" />
+
+
+	<!-- Parameters that should be overridden when calling this script -->
+	<property name="release.version" value="${env.RELEASE_VERSION}" />
+	<property name="next.development.version" value="${env.NEXT_DEVELOPMENT_VERSION}" />
+
+	<!-- Other configuration parameters -->
+	<property name="svn.dev.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/utils" />
+	<property name="svn.tag.url" value="svn+ssh://kermeta_bot@scm.gforge.inria.fr/svn/kermeta/tags/org_kermeta_utils-" />
+	<property name="parent.root" value="org.kermeta.utils.root" />
+	<property name="artcomponent.parent.root" value="org.kermeta.utils.artcomponent.root" />
+	<property name="synchronized.property" value="utils.version" />
+
+	<!-- Other internal properties -->
+
+
+
+	<!-- add new tasks -->
+	<path id="ant-extensions.classpath">
+		<fileset dir="${basedir}/ant-extensions" includes="**/*.jar" />
+		<pathelement path="${basedir}/ant-extensions" />
+	</path>
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="ant-extensions.classpath" />
+
+	<target name="all">
+		<antcall target="change_to_release_version">
+		</antcall>
+		<antcall target="deploy_release_version">
+		</antcall>
+		<antcall target="tag_release_version">
+		</antcall>
+		<antcall target="change_to_dev_version">
+		</antcall>
+		<antcall target="deploy_dev_version"></antcall>
+		<antcall target="commit_dev_version">
+		</antcall>
+	</target>
+
+	<target name="change_to_release_version">
+		<echo>Changing to release version ${release.version}</echo>
+		<artifact:mvn pom="pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${release.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<artifact:mvn pom="${parent.root}/pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${release.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<artifact:mvn pom="${artcomponent.parent.root}/pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${release.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<echo>Trying to update art2.version</echo>
+		<replaceregexp>
+			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
+			<substitution expression="${synchronized.property}&gt;${release.version}&lt;/${synchronized.property}" />
+			<fileset dir="${parent.root}" includes="**/pom.xml" />
+		</replaceregexp>
+		<replaceregexp>
+			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
+			<substitution expression="${synchronized.property}&gt;${release.version}&lt;/${synchronized.property}" />
+			<fileset dir="${artcomponent.parent.root}" includes="**/pom.xml" />
+		</replaceregexp>
+	</target>
+	
+	<target name="deploy_release_version">
+		<echo>Deploying release version ${release.version}</echo>
+		<!-- <artifact:mvn pom="pom.xml">
+			<arg value="deploy" />
+		</artifact:mvn> -->
+		<exec executable="mvn" failonerror="true">
+			<arg value="clean" />
+			<arg value="deploy" />
+		</exec>
+	</target>
+	
+	<target name="tag_release_version">
+		<echo>Committing...</echo>
+		<exec executable="svn"  failonerror="true">
+			<env key="SVN_SSH" path="/usr/bin/ssh -l kermeta_bot  -i  /local/kermeta_bot/.ssh/id_rsa" />
+			<arg value="commit" />
+			<arg value="." />
+			<arg value="-m" />
+			<arg value="&quot;Creating ${release.version} release version.&quot;" />
+			<arg value="--username"/>
+			<arg value="kermeta_bot"/>
+		</exec>
+		<!-- <apply executable="svn" 
+			parallel="true" 
+			relative="true" 
+			skipemptyfilesets="true">
+			<env key="SVN_SSH" path="/usr/bin/ssh -i  /local/kermeta_bot/.ssh/id_rsa"/>
+			<arg value="commit"/>
+			<arg value="-m"/>
+			<arg value="&quot;Creating ${release.version} release version.&quot;"/>
+			<fileset dir=".">
+				<patternset refid="keyword.enable.sources"/>
+			</fileset>			
+		</apply>
+		-->
+		<echo>Tagging...</echo>
+		<exec executable="svn"  failonerror="true">
+			<env key="SVN_SSH" path="/usr/bin/ssh -l kermeta_bot -i  /local/kermeta_bot/.ssh/id_rsa" />
+			<arg value="copy" />
+			<arg value="${svn.dev.url}" />
+			<arg value="${svn.tag.url}${release.version}" />
+			<arg value="--username"/>
+			<arg value="kermeta_bot"/>
+			<arg value="-m" />
+			<arg value="&quot;Tagging ${release.version} release version.&quot;" />
+		</exec>
+	</target>
+
+
+	<target name="change_to_dev_version">
+		<echo>Changing to release version ${release.version}</echo>
+		<artifact:mvn pom="pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${next.development.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<artifact:mvn pom="${parent.root}/pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${next.development.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<artifact:mvn pom="${artcomponent.parent.root}/pom.xml">
+			<arg value="versions:set" />
+			<arg value="-DnewVersion=${next.development.version}" />
+			<arg value="-DgenerateBackupPoms=false" />
+		</artifact:mvn>
+		<echo>Trying to update art2.version</echo>
+		<replaceregexp>
+			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
+			<substitution expression="${synchronized.property}&gt;${next.development.version}&lt;/${synchronized.property}" />
+			<fileset dir="${parent.root}" includes="**/pom.xml" />
+		</replaceregexp>
+		<replaceregexp>
+			<regexp pattern="${synchronized.property}&gt;(.*)&lt;/${synchronized.property}" />
+			<substitution expression="${synchronized.property}&gt;${next.development.version}&lt;/${synchronized.property}" />
+			<fileset dir="${artcomponent.parent.root}" includes="**/pom.xml" />
+		</replaceregexp>
+	</target>
+
+	<target name="commit_dev_version">
+		<echo>Committing...</echo>
+		<exec executable="svn"  failonerror="true">
+			<env key="SVN_SSH" path="/usr/bin/ssh  -l kermeta_bot  -i  /local/kermeta_bot/.ssh/id_rsa" />
+			<arg value="commit" />
+			<arg value="." />
+			<arg value="--username"/>
+			<arg value="kermeta_bot"/>
+			<arg value="-m" />
+			<arg value="&quot;Creating ${next.development.version} development version.&quot;" />
+		</exec>
+	</target>
+	<target name="deploy_dev_version">
+		<echo>Deploying snapshot version ${next.development.version}</echo>		
+		<exec executable="mvn"  failonerror="true">
+			<arg value="clean" />
+			<arg value="deploy" />
+		</exec>
+	</target>
+</project>

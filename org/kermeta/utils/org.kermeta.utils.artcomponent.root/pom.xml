@@ -22,6 +22,8 @@
 
     <properties>
         <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+        <utils.version>2.0.1-SNAPSHOT</utils.version>
+        <traceability.version>2.0.1-SNAPSHOT</traceability.version>
     </properties>
 	<profiles>
         <profile>

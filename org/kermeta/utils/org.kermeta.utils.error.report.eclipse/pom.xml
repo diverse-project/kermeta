@@ -10,11 +10,11 @@
 	<groupId>org.kermeta.utils</groupId>
 	<artifactId>utils.error.report.eclipse</artifactId>
 	<packaging>bundle</packaging>
-	<name>K2 :: ERROR REPORT :: ECLIPSE</name>
+	<name>utils.error.report.eclipse :: Error reporter for Eclipse</name>
 
 	<parent>
-        <groupId>org.kermeta.language</groupId>
-        <artifactId>language.artcomponent.root</artifactId>
+        <groupId>org.kermeta.utils</groupId>
+        <artifactId>utils.artcomponent.root</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
     
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>org.kermeta.traceability</groupId>
 			<artifactId>traceability.model</artifactId>
-			<version>${kermeta.version}</version>
+			<version>${traceability.version}</version>
 		</dependency>
 		<!-- Eclipse Core runtime -->
 		<dependency>

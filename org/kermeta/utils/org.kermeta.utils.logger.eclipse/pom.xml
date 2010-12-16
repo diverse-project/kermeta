@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>utils.logger.eclipse</artifactId>
 	<packaging>bundle</packaging>
-	<name>Utils :: Logger eclipse</name>
+	<name>utils.logger.eclipse :: Logger for eclipse</name>
 	
 	<parent>
         <groupId>org.kermeta.utils</groupId>
