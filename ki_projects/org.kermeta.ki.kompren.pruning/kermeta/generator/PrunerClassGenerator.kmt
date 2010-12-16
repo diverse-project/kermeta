@@ -35,6 +35,12 @@ class PrunerClassGenerator inherits Generator {
 			generatedCode := generatedCode + "\tattribute " + param.name + " : Boolean\n\n"
 		}
 
+		prunerGenerator.pruningData.relationsFocus.each{rel |
+			if(rel.isOption) then
+				generatedCode := generatedCode + "\tattribute consider" + rel.relation.name + " : Boolean\n\n"
+			end
+		}
+
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
 						 generateAddOperations() + "}\n" + generateRelationClasses()
@@ -128,6 +134,12 @@ class PrunerClassGenerator inherits Generator {
 			result := result + ", " + param.name + " : Boolean"
 		}
 
+		prunerGenerator.pruningData.relationsFocus.each{rel |
+			if(rel.isOption) then
+				result := result + ", consider" + rel.relation.name + " : Boolean"
+			end
+		}
+
 		result := result + ") : " + prunerGenerator.prunerClass.name + " is do\n"
 		result := result + "\t\tresult := self\n"
 
@@ -148,6 +160,12 @@ class PrunerClassGenerator inherits Generator {
 
 		prunerGenerator.pruningData.requiredClasses.each{clazz |
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
+		}
+
+		prunerGenerator.pruningData.relationsFocus.each{rel |
+			if(rel.isOption) then
+				result := result + "\t\tself.consider" + rel.relation.name + " := consider" + rel.relation.name + "\n"
+			end
 		}
 
 		result := result + "\tend\n\n"

@@ -15,7 +15,7 @@ using kermeta::standard
 using prunerGenerator
 
 aspect class EClass {
-	reference outputFocusedRelations : EReference[0..*]
+	reference outputFocusedRelations : Relation[0..*]
 
 
 	operation getVarNameClassifier() : String is do

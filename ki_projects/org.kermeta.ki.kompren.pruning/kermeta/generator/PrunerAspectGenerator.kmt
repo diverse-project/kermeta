@@ -163,11 +163,11 @@ class PrunerAspectGenerator inherits Generator {
 					if(not prunerGenerator.radius.focusedClasses.exists{cl | cl.isSuperTypeOf(clazz)}) then
 						clazz.outputFocusedRelations.each{rel |
 							result := result + " and "
-							if(rel.upperBound==1) then
+							if(rel.relation.upperBound==1) then
 								result := result + "(self." + rel.name + ".isVoid.orElse{b | self." + rel.name + 
 										".visitedPass.orElse{b | self." + rel.name + ".checkCanReallyBeAdded()}})"
 							else
-								var varName : String init rel.eType.asType(EClass).getVarNameClassifier()
+								var varName : String init rel.relation.eType.asType(EClass).getVarNameClassifier()
 								result := result + "self." + rel.name + ".each{" + varName + " | " + varName + 
 										".visitedPass.orElse{b | " + varName + ".checkCanReallyBeAdded()} }"
 							end
@@ -191,48 +191,54 @@ class PrunerAspectGenerator inherits Generator {
 
 	operation generateRelationCalls(eclass : EClass, classVisit : Boolean) : String is do
 		var visitMethodName : String
-		
+		var nameVarPruner : String init prunerGenerator.prunerClass.getVarNameClassifier()
+
 		if(classVisit) then
 			visitMethodName := "visitToAddClasses"
 		else
 			visitMethodName := "visitToAddRelations"
 		end
-		
+
 		result := ""
-		
+
 		eclass.outputFocusedRelations.each{relation |
 			var radiusCode : String
 			if(not prunerGenerator.radius.isVoid) then
 				if(prunerGenerator.radius.focusedClasses.exists{cl |
-					relation.eContainingClass==cl or cl.isSuperTypeOf(relation.eContainingClass) or 
-					relation.eContainingClass.isSuperTypeOf(cl)}) then
+					relation.relation.eContainingClass==cl or cl.isSuperTypeOf(relation.relation.eContainingClass) or 
+					relation.relation.eContainingClass.isSuperTypeOf(cl)}) then
 					radiusCode := ", currentRadius+1"
 				else
 					radiusCode := ", currentRadius"
 				end
 			else radiusCode := "" end
-		
+
 			result := result + "\t\t\t"
 
-			if(relation.upperBound==1) then
-				if(relation.lowerBound==0) then
-					result := result + "if(not self." + relation.name + ".isVoid) then " 
+			if(relation.isOption) then
+				result := result + "if(" + nameVarPruner + ".consider" + relation.relation.name + ") then "
+			end
+
+			if(relation.relation.upperBound==1) then
+				if(relation.relation.lowerBound==0) then
+					result := result + "if(not self." + relation.relation.name + ".isVoid) then " 
 				end
-				result := result + "self." + relation.name + "." + visitMethodName + "(" + 
-						prunerGenerator.prunerClass.getVarNameClassifier() + radiusCode + 
-						")" + generateAddRelations(classVisit, relation)
-						
-				if(relation.lowerBound==0) then
+				result := result + "self." + relation.relation.name + "." + visitMethodName + "(" + nameVarPruner +
+						radiusCode + ")" + generateAddRelations(classVisit, relation.relation)
+
+				if(relation.relation.lowerBound==0) then
 					result := result + " end"
 				end
-				result := result + "\n"
 			else
-				var nameVar : String init relation.eType.asType(EClass).getVarNameClassifier() 
-				result := result + "self." + relation.name + ".each{" + nameVar +
-						" | " + nameVar + "." + visitMethodName + "(" +
-						prunerGenerator.prunerClass.getVarNameClassifier() + radiusCode + ")" +
-						generateAddRelations(classVisit, relation) + "}\n" 
+				var nameVar : String init relation.relation.eType.asType(EClass).getVarNameClassifier()
+
+				result := result + "self." + relation.relation.name + ".each{" + nameVar + " | " + nameVar + 
+						"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
+						generateAddRelations(classVisit, relation.relation) + "}"
 			end
+
+			if(relation.isOption) then result := result + " end" end
+			result := result + "\n"
 		}
 	end
 

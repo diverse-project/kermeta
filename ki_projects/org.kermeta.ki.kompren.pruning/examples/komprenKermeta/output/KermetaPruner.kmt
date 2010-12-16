@@ -10,6 +10,10 @@ class KermetaPruner {
 
 	attribute lowerCard0 : Boolean
 
+	attribute considersuperType : Boolean
+
+	attribute considerownedAttribute : Boolean
+
 	reference requiredClassDefinitions : ClassDefinition[0..*]
 
 	reference requiredPropertys : Property[0..*]
@@ -20,7 +24,7 @@ class KermetaPruner {
 
 	reference addedsuperType : Bag<ClasssuperType>
 
-	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredPropertys : bag Property[0..*], radius : Integer, lowerCard0 : Boolean) : KermetaPruner is do
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredPropertys : bag Property[0..*], radius : Integer, lowerCard0 : Boolean, considersuperType : Boolean, considerownedAttribute : Boolean) : KermetaPruner is do
 		result := self
 		self.addedClassDefinitions := Bag<ClassDefinition>.new
 		self.addedPropertys := Bag<Property>.new
@@ -29,6 +33,8 @@ class KermetaPruner {
 		self.lowerCard0 := lowerCard0
 		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
 		self.requiredPropertys.addAll(requiredPropertys)
+		self.considersuperType := considersuperType
+		self.considerownedAttribute := considerownedAttribute
 	end
 
 	operation launch() : Void is do

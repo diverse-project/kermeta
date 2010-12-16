@@ -33,6 +33,8 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference Pruning.ecore#//Relation/relation"/>
       <genFeatures createChild="false" propertyDescription="If true, an opposite to the corresponding relation will be created and explored."
           ecoreFeature="ecore:EAttribute Pruning.ecore#//Relation/createOpposite"/>
+      <genFeatures createChild="false" propertyDescription="If true, the pruner will have an option to consider this relation or not."
+          ecoreFeature="ecore:EAttribute Pruning.ecore#//Relation/isOption"/>
     </genClasses>
     <genClasses ecoreClass="Pruning.ecore#//FeatureParameter">
       <genFeatures createChild="false" propertyDescription="The name of the parameter. Must not contain any space."

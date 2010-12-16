@@ -55,23 +55,24 @@ class PrunerGenerator {
 			if(rel.createOpposite) then
 				// We change the pruning data to use of the opposite.
 				var ref : EReference init EReference.new
+				var relation : Relation init Relation.new
 				ref.name := rel.relation.name + "Opposite"
 				ref.eType:= rel.relation.eContainingClass
 				rel.relation.eType.asType(EClass).eStructuralFeatures.add(ref)
 				ref.lowerBound := rel.relation.lowerBound
 				ref.upperBound := rel.relation.upperBound
 				ref.containment := false
-				ref.eContainingClass.outputFocusedRelations.add(ref)
+				relation.relation := ref
+				relation.createOpposite := false
+				relation.isOption := false
+				ref.eContainingClass.outputFocusedRelations.add(relation)
 				rel.relation := ref
 				if(pruningData.relationsToNotify.contains(rel)) then
 					pruningData.relationsToNotify.remove(rel)
-					var relation : Relation init Relation.new
-					relation.relation := ref
-					relation.createOpposite := false
 					pruningData.relationsToNotify.add(relation)
 				end
 			else
-				rel.relation.eContainingClass.outputFocusedRelations.add(rel.relation)
+				rel.relation.eContainingClass.outputFocusedRelations.add(rel)
 			end
 		}
 

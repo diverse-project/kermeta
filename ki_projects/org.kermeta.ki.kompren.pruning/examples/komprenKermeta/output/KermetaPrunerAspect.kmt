@@ -39,7 +39,7 @@ aspect class TypeDefinition inherits PruningVisitorAspect {
 		if(not self.visitedPass and (theKermetaPruner.radius<=0 or currentRadius<=(theKermetaPruner.radius+1))) then
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
-			self.superType.each{theType | theType.visitToAddClasses(theKermetaPruner, currentRadius+1)}
+			if(theKermetaPruner.considersuperType) then self.superType.each{theType | theType.visitToAddClasses(theKermetaPruner, currentRadius+1)} end
 			self.visitedPass := false
 		end
 	end
@@ -48,9 +48,9 @@ aspect class TypeDefinition inherits PruningVisitorAspect {
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.superType.each{theType | theType.visitToAddRelations(theKermetaPruner, currentRadius+1)
+			if(theKermetaPruner.considersuperType) then self.superType.each{theType | theType.visitToAddRelations(theKermetaPruner, currentRadius+1)
 				if(self.visitedForRelations and theType.visitedForRelations) then
-					theKermetaPruner.addedsuperType.add(ClasssuperType.new.initialise(self, theType)) end }
+					theKermetaPruner.addedsuperType.add(ClasssuperType.new.initialise(self, theType)) end } end
 			self.visitedPass := false
 		end
 	end
@@ -72,7 +72,7 @@ aspect class ClassDefinition {
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
-			self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaPruner, currentRadius+1)}
+			if(theKermetaPruner.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaPruner, currentRadius+1)} end
 			self.visitedPass := false
 		end
 	end
@@ -81,7 +81,7 @@ aspect class ClassDefinition {
 			super(theKermetaPruner, currentRadius)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaPruner, currentRadius+1)}
+			if(theKermetaPruner.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaPruner, currentRadius+1)} end
 			self.visitedPass := false
 		end
 	end
