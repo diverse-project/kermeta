@@ -11,6 +11,7 @@
 package org.kermeta.utils.logger.stdout.art2.impl;
 
 import org.kermeta.art2.annotation.ComponentType;
+import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.Port;
 import org.kermeta.art2.annotation.PortType;
 import org.kermeta.art2.annotation.ProvidedPort;
@@ -25,7 +26,9 @@ import org.kermeta.utils.logger.stdout.SimpleSystemOutLogger;
 @Provides({
     @ProvidedPort(name = "logPort", type=PortType.MESSAGE)
 })
-@ComponentType(libName = "org.kermeta.utils")
+
+@Library(name= "org.kermeta.utils")
+@ComponentType
 public class Art2ComponentStdOutLogger extends AbstractComponentType {
 	protected SimpleSystemOutLogger logger;
 

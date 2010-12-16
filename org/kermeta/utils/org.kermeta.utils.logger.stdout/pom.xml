@@ -33,7 +33,7 @@
                         <Export-Package>org.kermeta.utils.logger.stdout.*</Export-Package>
                         <Import-Package>
                         org.kermeta.art2,
-                        org.kermeta.art2.framework,
+                        org.kermeta.art2.framework.*,
 						org.osgi.framework,
 						org.kermeta.language.api.*,
 						scala.*
