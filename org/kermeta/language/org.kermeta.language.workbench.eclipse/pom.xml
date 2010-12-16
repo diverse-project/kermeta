@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.workbench.eclipse</artifactId>
     <packaging>bundle</packaging>
-    <name>K2 :: Workbench for Eclipse</name>
+    <name>language.workbench.eclipse :: Kermeta workbench for Eclipse</name>
 
     <parent>
         <artifactId>language.root</artifactId>
