@@ -45,6 +45,7 @@
         <module>org.kermeta.art2.framework.bus.jgroups</module>
         <module>org.kermeta.art2.deploy.osgi</module>
         <module>org.kermeta.art2.merger</module>
+        <module>org.kermeta.art2.merger.mavenplugin</module>
         <module>org.kermeta.art2.kompare</module>
         <module>org.kermeta.art2.platform.felix</module>
         <module>org.kermeta.art2.platform.standalone</module>
