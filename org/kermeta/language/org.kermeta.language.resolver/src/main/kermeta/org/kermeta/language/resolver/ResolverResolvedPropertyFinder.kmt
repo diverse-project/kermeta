@@ -5,7 +5,7 @@
  * Authors  : 
  *            cguy
  */
-package main::kermeta::org::kermeta::language::resolver;
+package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"

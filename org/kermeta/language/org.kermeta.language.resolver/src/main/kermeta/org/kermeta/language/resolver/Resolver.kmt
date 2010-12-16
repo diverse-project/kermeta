@@ -20,7 +20,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 
 using kermeta::language::structure
 using kmt::language::helpers::structure
-using main::kermeta::org::kermeta::language::resolver
+using org::kermeta::language::resolver
 using kermeta::persistence
 using kermeta::standard
 

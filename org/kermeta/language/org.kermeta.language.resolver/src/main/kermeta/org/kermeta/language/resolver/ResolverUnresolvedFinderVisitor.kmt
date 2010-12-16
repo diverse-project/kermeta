@@ -5,7 +5,7 @@
  * Authors  : 
  *            cguy
  */
-package main::kermeta::org::kermeta::language::resolver;
+package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
@@ -19,7 +19,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 using org::kermeta::language::structure
 using kmt::language::helpers::structure
 using kermeta::exceptions
-using main::kermeta::org::kermeta::language::resolver
+using org::kermeta::language::resolver
 using kermeta::standard
 
 class ResolverUnresolvedFinderVisitor inherits StructureVisitor
