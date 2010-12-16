@@ -5,7 +5,7 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "kmt::language::helpers::structure::StructureVisitor"
+
 
 package kmt::language::helpers::structure;
 
