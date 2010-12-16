@@ -30,6 +30,7 @@ import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKEvent;
 import org.kermeta.language.api.port.PortKmMerger;
+import org.kermeta.language.api.port.PortKmResolver;
 import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.kwf.actions.GenerateExecutableKMAction;
 import org.kermeta.language.structure.ModelingUnit;
@@ -47,10 +48,15 @@ import org.osgi.framework.Bundle;
     //@ProvidedPort(name = "asynclog", type=PortType.MESSAGE),
     /** Log port for sending technical messages */
     @RequiredPort(name = "log", type = PortType.MESSAGE),
+    
     /** port that is able to load KMT files into ModelingUnits */
     @RequiredPort(name = "kmtLoader", type = PortType.SERVICE, className = PortResourceLoader.class),
+    
     /** port that is able to merge a set of ModelingUnit into one ModelingUnit */
-    @RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class)
+    @RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class),
+    
+    /** port that is able to resolve and set static information of a ModelingUnit  */
+    @RequiredPort(name = "kmResolver", type = PortType.SERVICE, className = PortKmResolver.class)
 })
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -110,7 +116,7 @@ public class Art2ComponentKWF extends AbstractComponentType {
 
     private void processKDocumentUpdate(KDocumentUpdate event) {
 
-        ModelingUnit root = this.getPortByName("kmtloader", PortResourceLoader.class).load(event.getURI(), PortResourceLoader.URIType.INMEMORY, event.getDocument());
+        ModelingUnit root = this.getKmtLoaderPort().load(event.getURI(), PortResourceLoader.URIType.INMEMORY, event.getDocument());
 
         if (root == null) {
         	logger.error("Parse error !", null);
@@ -129,6 +135,10 @@ public class Art2ComponentKWF extends AbstractComponentType {
     
     public PortKmMerger getKmMergerPort() {
 		return getPortByName("kmMerger", PortKmMerger.class);
+	}
+    
+    public PortKmResolver getKmResolverPort() {
+		return getPortByName("kmResolver", PortKmResolver.class);
 	}
     
     

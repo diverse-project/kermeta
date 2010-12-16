@@ -36,6 +36,22 @@ public class GenerateExecutableKMAction {
 		this.art2ComponentKWF = art2ComponentKWF;
 	}
 
+	FilenameFilter filterKMT = new FilenameFilter(){ 
+		public boolean accept(File dir, String name) { 
+			return name.endsWith(".kmt"); 
+		} 
+	};
+	FilenameFilter filterEcore = new FilenameFilter(){ 
+		public boolean accept(File dir, String name) { 
+			return name.endsWith(".ecore"); 
+		} 
+	};
+	FilenameFilter filterKM = new FilenameFilter(){ 
+		public boolean accept(File dir, String name) { 
+			return name.endsWith(".km"); 
+		} 
+	};
+	
 	/**
 	 * do the real work
 	 * TODO deal with any context of the workflow
@@ -54,11 +70,7 @@ public class GenerateExecutableKMAction {
 				if(f.isDirectory()){
 					ArrayList<ModelingUnit> units = new ArrayList<ModelingUnit>();
 					// process KMT files
-					FilenameFilter filterKMT = new FilenameFilter(){ 
-						public boolean accept(File dir, String name) { 
-							return name.endsWith(".kmt"); 
-						} 
-					}; 
+					 
 					for (File kmtFile : f.listFiles(filterKMT)){
 						art2ComponentKWF.getLogger().debug("loading : " + kmtFile.getCanonicalPath());
 						ModelingUnit kmt2KmResult = art2ComponentKWF.getKmtLoaderPort().load(kmtFile.getCanonicalPath(), PortResourceLoader.URIType.FILE, "");
@@ -69,22 +81,31 @@ public class GenerateExecutableKMAction {
 							saveModelingUnit(intermediateOutputUri, kmt2KmResult);
 						}
 					}
-					// TODO process KM files
-					// TODO process ecore files
+					for (File kmFile : f.listFiles(filterKM)){
+						// TODO process KM files
+						art2ComponentKWF.getLogger().warning("Load of km file not implemented. Ignoring "+kmFile.getName());
+					}	
+					for (File ecoreFile : f.listFiles(filterEcore)){
+						// TODO process Ecore files
+						art2ComponentKWF.getLogger().warning("Load of ecore file not implemented. Ignoring "+ecoreFile.getName());
+					}
 					// Merge everything
 					ModelingUnitResult mergeResult = art2ComponentKWF.getKmMergerPort().merge(units);
 					if(!request.getIntermediateDebugOutputURI().isEmpty()){
 						String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/merge/result.km";
-						art2ComponentKWF.getLogger().debug("saving intermediate result :" +intermediateOutputUri);
+						art2ComponentKWF.getLogger().debug("saving intermediate result: " +intermediateOutputUri);
 						saveModelingUnit(intermediateOutputUri, mergeResult.getModelingUnit());
 					}
-					// TODO Resolve result
-					art2ComponentKWF.getLogger().error("Not fully implemented : cannot finish request GenerateExecutableKMAction " + inputDescriptionURI, null);
-					return;
+					// Resolve result
+					ModelingUnitResult resolveResult = art2ComponentKWF.getKmResolverPort().resolve(mergeResult.getModelingUnit());
+					result = resolveResult.getModelingUnit();
 				}
 				else{
 					// TODO deal with kp file description
+					art2ComponentKWF.getLogger().error("Excutable Merge from kp project description not implemented. ", null);
+					return;
 				}
+				art2ComponentKWF.getLogger().debug("saving result: " +request.getOutputURI());
 				saveModelingUnit(request.getOutputURI(),result);
 			}
 			else{
