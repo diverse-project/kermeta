@@ -39,7 +39,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				var i : Integer init 0
 				var use : Using
 				from var found : Boolean init not ctxt.foundType.isVoid()
-				until found
+				until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
 				loop
 					use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
 					ctxt.qualifiedPath := use.fromQName.split("::")
