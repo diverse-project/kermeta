@@ -162,13 +162,14 @@ class PrunerAspectGenerator inherits Generator {
 					result := result + "\t\tresult := super()"
 					if(not prunerGenerator.radius.focusedClasses.exists{cl | cl.isSuperTypeOf(clazz)}) then
 						clazz.outputFocusedRelations.each{rel |
+							var relName : String init rel.relation.getValidKermetaName
 							result := result + " and "
 							if(rel.relation.upperBound==1) then
-								result := result + "(self." + rel.name + ".isVoid.orElse{b | self." + rel.name + 
-										".visitedPass.orElse{b | self." + rel.name + ".checkCanReallyBeAdded()}})"
+								result := result + "(self." + relName + ".isVoid.orElse{b | self." + relName + 
+										".visitedPass.orElse{b | self." + relName + ".checkCanReallyBeAdded()}})"
 							else
 								var varName : String init rel.relation.eType.asType(EClass).getVarNameClassifier()
-								result := result + "self." + rel.name + ".each{" + varName + " | " + varName + 
+								result := result + "self." + relName + ".each{" + varName + " | " + varName + 
 										".visitedPass.orElse{b | " + varName + ".checkCanReallyBeAdded()} }"
 							end
 						}
@@ -185,7 +186,8 @@ class PrunerAspectGenerator inherits Generator {
 	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
 		var name : String init relation.eContainingClass.getVarNameClassifier()
 		result := "\toperation initialise" + relation.name + "() : Void is do\n\t\tself." +
-					relation.name.split("Opposite").first() + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }\n\tend\n\n"
+					"~" + relation.name.split("Opposite").first() + ".each{" + name + " | " +
+					name + "." +  relation.name + ".add(self) }\n\tend\n\n"
 	end
 
 
@@ -203,6 +205,8 @@ class PrunerAspectGenerator inherits Generator {
 
 		eclass.outputFocusedRelations.each{relation |
 			var radiusCode : String
+			var relName : String init relation.relation.getValidKermetaName()
+
 			if(not prunerGenerator.radius.isVoid) then
 				if(prunerGenerator.radius.focusedClasses.exists{cl |
 					relation.relation.eContainingClass==cl or cl.isSuperTypeOf(relation.relation.eContainingClass) or 
@@ -221,9 +225,9 @@ class PrunerAspectGenerator inherits Generator {
 
 			if(relation.relation.upperBound==1) then
 				if(relation.relation.lowerBound==0) then
-					result := result + "if(not self." + relation.relation.name + ".isVoid) then " 
+					result := result + "if(not self." + relName + ".isVoid) then " 
 				end
-				result := result + "self." + relation.relation.name + "." + visitMethodName + "(" + nameVarPruner +
+				result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
 						radiusCode + ")" + generateAddRelations(classVisit, relation.relation)
 
 				if(relation.relation.lowerBound==0) then
@@ -232,7 +236,7 @@ class PrunerAspectGenerator inherits Generator {
 			else
 				var nameVar : String init relation.relation.eType.asType(EClass).getVarNameClassifier()
 
-				result := result + "self." + relation.relation.name + ".each{" + nameVar + " | " + nameVar + 
+				result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
 						"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
 						generateAddRelations(classVisit, relation.relation) + "}"
 			end
