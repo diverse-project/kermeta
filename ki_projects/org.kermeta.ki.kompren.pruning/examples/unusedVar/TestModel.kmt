@@ -1,0 +1,16 @@
+package examples::unusedVar;
+require kermeta
+
+using kermeta::standard
+
+class TestModel {
+	attribute attr1 : String
+
+	operation main() : Void is do
+		var var1 : String
+		var var2 : String init ""
+		
+		 attr1 := "attr1"
+		 var2 := attr1
+	end
+}

@@ -1,0 +1,36 @@
+package org::kermeta::language::behavior;
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "UnusedVarDetectorAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class UnusedVarDetector {
+	reference requiredExpressions : Expression[0..*]
+
+	reference addedVariableDecls : Bag<VariableDecl>
+
+	reference addedCallVariables : Bag<CallVariable>
+
+	operation initialise(requiredExpressions : bag Expression[0..*]) : UnusedVarDetector is do
+		result := self
+		self.addedVariableDecls := Bag<VariableDecl>.new
+		self.addedCallVariables := Bag<CallVariable>.new
+		self.requiredExpressions.addAll(requiredExpressions)
+	end
+
+	operation launch() : Void is do
+		self.requiredExpressions.each{theExpression | theExpression.visitToAddClasses(self) }
+		self.requiredExpressions.each{theExpression | theExpression.visitToAddRelations(self) }
+		self.addedVariableDecls.each{theVariableDecl | onVariableDeclAdded(theVariableDecl) }
+		self.addedCallVariables.each{theCallVariable | onCallVariableAdded(theCallVariable) }
+		ended()
+	end
+
+	operation onVariableDeclAdded(theVariableDecl : VariableDecl) : Void is do
+	end
+	operation onCallVariableAdded(theCallVariable : CallVariable) : Void is do
+	end
+	operation ended() : Void is do
+	end
+}

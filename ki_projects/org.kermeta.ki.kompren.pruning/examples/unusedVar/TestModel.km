@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="examples">
+    <nestedPackage name="unusedVar">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TestModel"
+          superType="#//@packages.0/unusedVar/TestModel/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+        <ownedAttribute name="attr1" type="#//@packages.0/unusedVar/TestModel/attr1/@containedType.0"
+            isOrdered="true" upper="1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedAttribute>
+        <ownedOperation name="main" type="#//@packages.0/unusedVar/TestModel/main/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/unusedVar/TestModel/attr1/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.0/@containedType.0"
+                identifier="var1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              <type name="String" type="#//@packages.0/unusedVar/TestModel/main/@body/@statement.0/@containedType.0"
+                  isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@containedType.0"
+                identifier="var2">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              <initialization xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@initialization/@containedType.0"
+                  value="">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              </initialization>
+              <type name="String" type="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@containedType.0"
+                  isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@initialization/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/unusedVar/TestModel/attr1/@containedType.0"
+                  name="attr1" staticProperty="#//@packages.0/unusedVar/TestModel/attr1"/>
+              <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@initialization/@containedType.0"
+                  value="attr1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/unusedVar/TestModel/attr1/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/unusedVar/TestModel/main/@body/@statement.1/@containedType.0"
+                  name="var2"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/unusedVar/TestModel/attr1/@containedType.0"
+                  name="attr1" staticProperty="#//@packages.0/unusedVar/TestModel/attr1"/>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="examples::unusedVar"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>

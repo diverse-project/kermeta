@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="UnusedVarDetector" description="Allows to detect unused variables in Kermeta operations.">
+  <relationsFocus name="BlockStatement">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Block/statement"/>
+  </relationsFocus>
+  <relationsFocus name="elseBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Conditional/elseBody"/>
+  </relationsFocus>
+  <relationsFocus name="thenBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Conditional/thenBody"/>
+  </relationsFocus>
+  <relationsFocus name="RaiseExp">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Raise/expression"/>
+  </relationsFocus>
+  <relationsFocus name="LoopInit">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Loop/initialization"/>
+  </relationsFocus>
+  <relationsFocus name="LoopBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Loop/body"/>
+  </relationsFocus>
+  <relationsFocus name="LambdaExp">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/LambdaExpression/body"/>
+  </relationsFocus>
+  <relationsFocus name="RescueBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Rescue/body"/>
+  </relationsFocus>
+  <relationsFocus name="CallExpParam">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallExpression/parameters"/>
+  </relationsFocus>
+  <relationsFocus name="assignValue">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Assignment/value"/>
+  </relationsFocus>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Expression"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/VariableDecl"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallVariable"/>
+</prunerGenerator:Pruning>
