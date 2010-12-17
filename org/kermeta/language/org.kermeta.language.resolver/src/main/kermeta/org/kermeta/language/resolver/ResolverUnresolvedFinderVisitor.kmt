@@ -459,10 +459,15 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
 		if (p.visitedAsPackage.isVoid) then
 			p.visitedAsPackage := true
-		
+			
 			ctxt.currentPackage := p
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(p, ctxt)
+			
+			//Visiting contained Packages
+			p.nestedPackage.each{n|
+				n.accept(self, ctxt)
+			}
 		end
 	end
 	
