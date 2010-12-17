@@ -7,6 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,8 +30,6 @@ public class QuestionsPanel extends JPanel {
 	
 	protected EditorPaneAntiAlias answerArea;
 	
-	protected int nbQuestions;
-	
 	protected int currentNbQuestions;
 	
 	protected LabelAntiAlias questionLabel;
@@ -42,19 +45,21 @@ public class QuestionsPanel extends JPanel {
 	protected EditorPaneAntiAlias resultField;
 	
 	protected EditorPaneAntiAlias resultLabel;
+
+	protected List<Question> questions;
 	
-//	protected AntiAliasButton emailButton;
+	protected long currentTime;
+	
+	protected Sniffer sniffer;
+	
 	
 	public QuestionsPanel(final DiagramView diagram) {
 		super();
 		
-		this.diagram = diagram;
-		nbQuestions = 5;
-		currentNbQuestions = 0;
-//		emailButton = new AntiAliasButton("<html><b>Create an email</b></html>");
-//		emailButton.setAlignmentX(CENTER_ALIGNMENT);
-//		emailButton.setMaximumSize(new Dimension(200, 50));
-//		emailButton.addActionListener(new CreateEmailListener());
+		sniffer 		= new Sniffer(diagram);
+		questions 		= new ArrayList<Question>();
+		this.diagram 	= diagram;
+		currentNbQuestions = -1;
 		
 		resultLabel = new EditorPaneAntiAlias(true);
 		resultLabel.setEditable(false);
@@ -99,7 +104,6 @@ public class QuestionsPanel extends JPanel {
 		add(questionArea);
 		add(Box.createVerticalStrut(10));
 		add(resultLabel);
-//		add(emailButton);
 		add(Box.createVerticalStrut(10));
 		add(startButton);
 		add(Box.createVerticalStrut(15));
@@ -110,53 +114,44 @@ public class QuestionsPanel extends JPanel {
 		add(resultField);
 		resultLabel.setVisible(false);
 		resultField.setVisible(false);
-//		emailButton.setVisible(false);
+		initQuestions();
 		setNextQuestion();
 	}
 	
 	
+	public void initQuestions() {
+		Question question = new Question();
+		question.subject = "<html><font size=\"10\">First <b>question</b>?</font></html>";
+		questions.add(question);
+
+		question = new Question();
+		question.subject = "<html><font size=\"10\">Second <b>question</b>?</font></html>";
+		questions.add(question);
+		
+//		question = new Question();
+//		question.subject = "<html><font size=\"10\">Third <b>question</b>?</font></html>";
+//		questions.add(question);
+//		
+//		question = new Question();
+//		question.subject = "<html><font size=\"10\">Fourth <b>question</b>?</font></html>";
+//		questions.add(question);
+//		
+//		question = new Question();
+//		question.subject = "<html><font size=\"10\">Last <b>question</b>?</font></html>";
+//		questions.add(question);
+	}
+	
+	
 	public void setNextQuestion() {
-		if(currentNbQuestions<nbQuestions) {
-			currentNbQuestions++;
-			
-			switch(currentNbQuestions) {
-				case 1: setQuestion1(); break; 
-				case 2: setQuestion2(); break; 
-				case 3: setQuestion3(); break; 
-				case 4: setQuestion4(); break; 
-				case 5: setQuestion5(); break; 
-			}
-		}
+		currentNbQuestions++;
+		if(currentNbQuestions<questions.size())
+			setQuestionMode(questions.get(currentNbQuestions));
 	}
 	
-	public void setQuestion1() {
-		setQuestionMode();
-		questionArea.setText("<html><font size=\"10\">First <b>question</b>?</font></html>");
-	}
-
-	public void setQuestion2() {
-		setQuestionMode();
-		questionArea.setText("<html><font size=\"10\">Second <b>question</b>?</font></html>");
-	}
-
-	public void setQuestion3() {
-		setQuestionMode();
-		questionArea.setText("<html><font size=\"10\">Third <b>question</b>?</font></html>");
-	}
-	
-	public void setQuestion4() {
-		setQuestionMode();
-		questionArea.setText("<html><font size=\"10\">Fourth <b>question</b>?</font></html>");
-	}
-	
-	public void setQuestion5() {
-		setQuestionMode();
-		questionArea.setText("<html><font size=\"10\">Last <b>question</b>?</font></html>");
-	}
-	
-	
-	public void setQuestionMode() {
-		questionLabel.setText("<html><font size=\"+1\"><b>Question " + currentNbQuestions + "/" + nbQuestions+"</b></font></html>");
+	public void setQuestionMode(final Question question) {
+		sniffer.setQuestion(null);
+		questionArea.setText(question.subject);
+		questionLabel.setText("<html><font size=\"+1\"><b>Question " + (currentNbQuestions+1) + "/" + questions.size() + "</b></font></html>");
 		startButton.setVisible(true);
 		answerArea.setVisible(false);
 		answerLabel.setVisible(false);
@@ -164,8 +159,8 @@ public class QuestionsPanel extends JPanel {
 		diagram.setUsable(false);
 	}
 	
-	
 	public void setAnswerMode() {
+		sniffer.setQuestion(questions.get(currentNbQuestions));
 		startButton.setVisible(false);
 		answerArea.setText("");
 		answerArea.setVisible(true);
@@ -176,7 +171,6 @@ public class QuestionsPanel extends JPanel {
 	
 	
 	public void setTerminated() {
-//		emailButton.setVisible(true);
 		startButton.setVisible(false);
 		answerArea.setVisible(false);
 		answerLabel.setVisible(false);
@@ -186,28 +180,33 @@ public class QuestionsPanel extends JPanel {
 		questionLabel.setVisible(false);
 		resultField.setVisible(true);
 		resultLabel.setVisible(true);
-		resultField.setText("result");
 		resultLabel.setText("<html><center>Return the results by mail to:<br><b>arnaud.blouin@inria.fr</b><br>A backup of the results called \"data.txt\"<br>has been created near the jar file you launch.</center></html>");
 		Dimension dim = new Dimension(500, 500);
 		resultField.setPreferredSize(dim);
 		resultField.setMinimumSize(dim);
+		
+		for(Question q : questions)
+			resultField.setText(resultField.getText() + q);
+		
+		try {
+			FileWriter fw = new FileWriter("./data.txt");
+			PrintWriter out = new PrintWriter(fw);
+			
+			for(Question q : questions)
+				out.print(q);
+			
+			fw.flush();
+			fw.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
-//	class CreateEmailListener implements ActionListener {
-//		@Override
-//		public void actionPerformed(final ActionEvent e) {
-//			try {
-//			Desktop desktop = Desktop.getDesktop();
-//			desktop.mail(new URI("mailto:arnaud.blouin@inria.fr"));
-//			} catch(Exception ex) { ex.printStackTrace(); }
-//		}
-//	}
 	
 
 	class ShowAnswerFieldListener implements ActionListener {
 		@Override
 		public void actionPerformed(final ActionEvent e) {
+			QuestionsPanel.this.currentTime = System.currentTimeMillis();
 			QuestionsPanel.this.setAnswerMode();
 		}
 	}
@@ -216,9 +215,14 @@ public class QuestionsPanel extends JPanel {
 	class ShowQuestionFieldListener implements ActionListener {
 		@Override
 		public void actionPerformed(final ActionEvent e) {
-			if(QuestionsPanel.this.currentNbQuestions<QuestionsPanel.this.nbQuestions)
+			if((QuestionsPanel.this.currentNbQuestions+1)<QuestionsPanel.this.questions.size()) {
+				QuestionsPanel.this.questions.get(QuestionsPanel.this.currentNbQuestions).computeTime(
+						QuestionsPanel.this.currentTime, System.currentTimeMillis());
 				QuestionsPanel.this.setNextQuestion();
+			}
 			else {
+				QuestionsPanel.this.questions.get(QuestionsPanel.this.questions.size()-1).computeTime(
+						QuestionsPanel.this.currentTime, System.currentTimeMillis());
 				QuestionsPanel.this.setTerminated();
 			}
 		}
