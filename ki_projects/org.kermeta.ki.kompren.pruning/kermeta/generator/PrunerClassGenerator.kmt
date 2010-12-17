@@ -43,7 +43,8 @@ class PrunerClassGenerator inherits Generator {
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
-						 generateAddOperations() + "}\n" + generateRelationClasses()
+						 generateAddOperations() + "\toperation ended() : Void is do\n\tend\n}\n" +
+						 generateRelationClasses()
 	end
 
 
@@ -112,7 +113,7 @@ class PrunerClassGenerator inherits Generator {
 			result := result + "\t\tself.added" + rel.relation.name + ".each{" + varName + " | self.on" +
 					rel.relation.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
 		}
-		result := result + "\tend\n"
+		result := result + "\t\tended()\n\tend\n"
 	end
 
 
