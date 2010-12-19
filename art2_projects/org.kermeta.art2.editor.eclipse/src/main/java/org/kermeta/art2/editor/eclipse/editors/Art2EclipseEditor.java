@@ -62,6 +62,9 @@ public class Art2EclipseEditor extends MultiPageEditorPart implements IResourceC
 
         frame.add(jpanel);
 
+
+        
+
         int index = addPage(composite);
         setPageText(index, "Properties");
     }
@@ -121,6 +124,7 @@ public class Art2EclipseEditor extends MultiPageEditorPart implements IResourceC
 
         //System.out.println(selectedIFile.getLocation().toFile().getPath());
         artpanel.loadModel("file://" + input.getFile().getLocation().toString());
+        artpanel.setDefaultSaveLocation("file://" + input.getFile().getLocation().toString());
 
         jpanel = artpanel.getPanel();
 
