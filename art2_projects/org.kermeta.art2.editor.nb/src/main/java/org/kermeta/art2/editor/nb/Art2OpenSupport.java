@@ -35,8 +35,8 @@ public class Art2OpenSupport extends OpenSupport implements OpenCookie,CloseCook
         Art2NbTopComponent tc = Art2NbTopComponent.getDefault();
         tc.setDisplayName(dobj.getName());
 
-        tc.getEditor().loadModel(this.entry.getFile().getPath());
-        tc.getEditor().setDefaultSaveLocation(this.entry.getFile().getPath());
+        tc.getEditor().loadModel("file://"+this.entry.getFile().getPath());
+        tc.getEditor().setDefaultSaveLocation("file://"+this.entry.getFile().getPath());
 
         return tc;
 
