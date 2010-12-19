@@ -9,6 +9,7 @@
         </goals>
         <properties>
             <node.name>duke</node.name>
+            <art2.repo>/Users/ffouquet/.m2/repository</art2.repo>
         </properties>
     </action>
     <action>
