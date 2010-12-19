@@ -49,6 +49,8 @@
         eType="#//Metric" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metricTypes" upperBound="-1"
         eType="#//MetricType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="physicalNodes" upperBound="-1"
+        eType="#//PhysicalNode" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortType" abstract="true" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchrone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -74,6 +76,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DictionaryAttribute" eSuperTypes="#//TypedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DictionaryValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
@@ -179,6 +182,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ChannelType" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stopMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBindings" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBindings" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerFragments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperFragments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployUnit" lowerBound="1"
@@ -209,5 +216,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortMetric" eSuperTypes="#//Metric">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//Port"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalNode" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
+        eType="#//ContainerNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//PhysicalNodeType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalNodeType" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalNodeMetric" eSuperTypes="#//Metric">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//PhysicalNode"/>
   </eClassifiers>
 </ecore:EPackage>

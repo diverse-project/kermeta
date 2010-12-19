@@ -91,8 +91,9 @@
                             <instructions>
                                 <Export-Package>org.kermeta.art2,org.kermeta.art2.impl,org.kermeta.art2.util</Export-Package>
                                 <Bundle-SymbolicName>org.kermeta.art2.model</Bundle-SymbolicName>
-                                <Import-Package>org.eclipse.emf.*,org.osgi.framework</Import-Package>
+                                <Import-Package>!org.kermeta.art2.*,org.eclipse.emf.*,org.osgi.framework</Import-Package>
                                 <Bundle-ClassPath>.</Bundle-ClassPath>
+                                <Private-Package></Private-Package>
                         <!-- add extra element in the manifest, copy them from this file -->
                         <!--<_include>resources/META-INF/MANIFEST-part.MF</_include>-->
 
