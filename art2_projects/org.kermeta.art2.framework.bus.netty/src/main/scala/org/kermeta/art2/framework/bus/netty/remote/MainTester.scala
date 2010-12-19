@@ -14,15 +14,26 @@ object MainTester {
     println("Hello, world!")
 
     var srv = new Art2DiscoveryServer(6789)
+    var cli = new Art2DiscoveryClient(1000,6789,"duke",8000,8001)
     srv.start
+    cli.start
 
     new Thread(){
-      override def run = { Thread.sleep(5000);
+      override def run = {
+        Thread.sleep(10000);
 
-                          srv.stop
+        println("FIRSTY STOP")
 
-                          //      client.stop
-                          //      dispatch.stop
+        cli.stop
+
+        println("STOP")
+        
+        srv.stop
+
+        println("STOP2")
+
+        //      client.stop
+        //      dispatch.stop
 
       }
       //clientactor2.stop;

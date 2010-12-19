@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>3.2.2.Final</version>
+            <version>3.2.3.Final</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -52,8 +52,8 @@
                     <instructions>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-Activator>org.kermeta.art2.framework.bus.netty.Art2BusNettyActivator</Bundle-Activator>
-                        <Import-Package>!org.jboss.netty.*,org.kermeta.art2.*,org.slf4j.*;version="${slf4j.version.range}",*;resolution:=optional</Import-Package>
-                        <Private-Package>org.kermeta.art2.framework.bus.netty</Private-Package>
+                        <Import-Package>!org.kermeta.art2.framework.bus.netty.*,!org.jboss.netty.*,org.kermeta.art2.*,org.slf4j.*;version="${slf4j.version.range}",*;resolution:=optional</Import-Package>
+                        <Private-Package>org.kermeta.art2.framework.bus.netty,org.kermeta.art2.framework.bus.netty.fileserver</Private-Package>
                         <Dynamic-ImportPackage>*</Dynamic-ImportPackage>
                         <Export-Package>org.kermeta.art2.framework.bus.netty.remote,org.jboss.netty.*;version=3.2</Export-Package>
                         <Embed-Dependency>netty;inline=true</Embed-Dependency>

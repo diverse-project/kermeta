@@ -7,9 +7,32 @@ package org.kermeta.art2.framework.bus.netty
 
 import java.io.IOException
 import java.net.DatagramSocket
+import java.net.NetworkInterface
 import java.net.ServerSocket
+import scala.collection.JavaConversions._
 
 object NetworkUtility {
+
+  /**
+   * Build A Message for Autodiscovery
+   * Need to be improve with Cache & Interface Listener
+   */
+  def buildDiscoveryMessage(nodeName : String, modelDispatcherPort : Int, msgDispatcherPort : Int ) : Art2DiscoveryMessage = {
+    var msg = new Art2DiscoveryMessage
+    NetworkInterface.getNetworkInterfaces.foreach{it =>
+      var loopBackAddr = it.getInetAddresses.exists(itaddr=> itaddr.isLoopbackAddress)
+      /* DO NOT EXPOSE LOCAL HOST INTERFACE */
+      if( (!loopBackAddr)){
+        it.getInetAddresses.foreach{addr =>
+          msg.getIps.add(addr.getHostAddress)
+        }
+      }
+    }
+    msg.setNodeName(nodeName)
+    msg.setModel_dispatcher_port(modelDispatcherPort)
+    msg.setMsg_dispatcher_port(msgDispatcherPort)
+    msg
+  }
 
 
   /**
@@ -48,6 +71,6 @@ object NetworkUtility {
       }
     }
     return false;
- }
+  }
 
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <nodes name="brice">
+    <components name="MyServer" typeDefinition="//@typeDefinitions.5">
+      <dictionary>
+        <values attribute="//@typeDefinitions.5/@dictionaryType/@attributes.1" value="myCustomValue282"/>
+      </dictionary>
+      <provided portTypeRef="//@typeDefinitions.5/@provided.0"/>
+      <provided portTypeRef="//@typeDefinitions.5/@provided.1"/>
+    </components>
+    <components name="MyHeavyClient" typeDefinition="//@typeDefinitions.7">
+      <required portTypeRef="//@typeDefinitions.7/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.7/@required.1"/>
+    </components>
+  </nodes>
+  <nodes name="duke">
+    <components name="MyClient1" typeDefinition="//@typeDefinitions.6">
+      <required portTypeRef="//@typeDefinitions.6/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.6/@required.1"/>
+    </components>
+    <components name="MyClient-973547974" typeDefinition="//@typeDefinitions.6">
+      <required portTypeRef="//@typeDefinitions.6/@required.0"/>
+      <required portTypeRef="//@typeDefinitions.6/@required.1"/>
+    </components>
+  </nodes>
+  <typeDefinitions xsi:type="art2:ChannelType" name="LocalBroadcastMessageChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.LocalBroadcastMessageChannelType"/>
+  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultMessageChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultMessageChannelType" startMethod="startHello" stopMethod="stopHello"/>
+  <typeDefinitions xsi:type="art2:ChannelType" name="DefaultServiceChannelType" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelTypeFactory" bean="org.kermeta.art2.framework.baselib.channeltype.DefaultServiceChannelType"/>
+  <typeDefinitions xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="com.mycompany.mavenproject1.MyService"/>
+  <typeDefinitions xsi:type="art2:ComponentType" name="MyServer" deployUnit="//@deployUnits.4" factoryBean="com.mycompany.mavenproject1.MyServerFactory" bean="com.mycompany.mavenproject1.MyServer" startMethod="myStartMethod" stopMethod="myStopMethod">
+    <dictionaryType>
+      <attributes name="myKey"/>
+      <attributes name="myKey2"/>
+      <defaultValues attribute="//@typeDefinitions.5/@dictionaryType/@attributes.0" value="myDefaultValue"/>
+    </dictionaryType>
+    <provided name="myProvidedPort1" ref="//@typeDefinitions.3">
+      <mappings beanMethodName="doSomethingDifferent" serviceMethodName="process"/>
+    </provided>
+    <provided name="myProvidedPort2" ref="//@typeDefinitions.4">
+      <mappings beanMethodName="doSomething" serviceMethodName="doSomething"/>
+      <mappings beanMethodName="doSomethingElse" serviceMethodName="doSomethingElse"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="MyClient" deployUnit="//@deployUnits.4" factoryBean="com.mycompany.mavenproject1.MyClientFactory" bean="com.mycompany.mavenproject1.MyClient" startMethod="myStartMethod" stopMethod="myStopMethod">
+    <required name="myRequiredPort1" ref="//@typeDefinitions.3"/>
+    <required name="myRequiredPort2" ref="//@typeDefinitions.4"/>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ComponentType" name="MyHeavyClient" deployUnit="//@deployUnits.4" factoryBean="com.mycompany.mavenproject1.MyHeavyClientFactory" bean="com.mycompany.mavenproject1.MyHeavyClient" startMethod="myStartMethod" stopMethod="myStopMethod">
+    <required name="myRequiredPort1" ref="//@typeDefinitions.3"/>
+    <required name="myRequiredPort2" ref="//@typeDefinitions.4"/>
+  </typeDefinitions>
+  <repositories units="//@deployUnits.0 //@deployUnits.4" url="http://www.kermeta.org/maven2"/>
+  <dataTypes name="void"/>
+  <dataTypes name="java.lang.String"/>
+  <libraries name="art2baselib" subTypes="//@typeDefinitions.0 //@typeDefinitions.1 //@typeDefinitions.2"/>
+  <libraries name="myLib" subTypes="//@typeDefinitions.5 //@typeDefinitions.6 //@typeDefinitions.7"/>
+  <hubs name="hub-2" typeDefinition="//@typeDefinitions.2"/>
+  <hubs name="hub-3" typeDefinition="//@typeDefinitions.2"/>
+  <hubs name="hub-3" typeDefinition="//@typeDefinitions.2"/>
+  <hubs name="hub-3" typeDefinition="//@typeDefinitions.1"/>
+  <mBindings port="//@nodes.0/@components.0/@provided.1" hub="//@hubs.0"/>
+  <mBindings port="//@nodes.1/@components.0/@required.1" hub="//@hubs.0"/>
+  <mBindings port="//@nodes.0/@components.0/@provided.1" hub="//@hubs.1"/>
+  <mBindings port="//@nodes.1/@components.1/@required.1" hub="//@hubs.2"/>
+  <mBindings port="//@nodes.0/@components.0/@provided.1" hub="//@hubs.2"/>
+  <mBindings port="//@nodes.0/@components.1/@required.1" hub="//@hubs.1"/>
+  <mBindings port="//@nodes.0/@components.0/@provided.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.0/@components.1/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.1/@components.0/@required.0" hub="//@hubs.3"/>
+  <mBindings port="//@nodes.1/@components.1/@required.0" hub="//@hubs.3"/>
+  <deployUnits groupName="org.kermeta.art2" unitName="art2.framework.baseLib" version="2.2.1-SNAPSHOT" hashcode="201012141608959"/>
+  <deployUnits groupName="com.mycompany" unitName="mavenproject1" version="1.0-SNAPSHOT" hashcode="201012141728849"/>
+  <deployUnits groupName="com.mycompany" unitName="mavenproject1" version="1.0-SNAPSHOT" hashcode="201012141802186"/>
+  <deployUnits groupName="com.mycompany" unitName="mavenproject1" version="1.0-SNAPSHOT" hashcode="201012141835322"/>
+  <deployUnits groupName="com.mycompany" unitName="mavenproject1" version="1.0-SNAPSHOT" hashcode="201012141843687"/>
+</art2:ContainerRoot>

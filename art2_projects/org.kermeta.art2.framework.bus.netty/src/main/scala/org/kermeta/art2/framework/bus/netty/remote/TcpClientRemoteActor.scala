@@ -107,14 +107,26 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
 
   private def reconnect() = {
     try {
+
+       println("Try to previous Channel futur candlled")
+
       channelfutur match {
         case None =>
         case Some(cf) => cf.cancel ; channelfutur = None
       }
+
+      println("DEBUG ECHO")
+      println("Previous Channel futur candlled => "+me.getRemoteAddr)
+
       bootstrap match {
         case None => /* TRY TO BUILD A NEW ONE */// U  ????
-        case Some(b) => channelfutur = Some(b.connect(me.getRemoteAddr))
+        case Some(b) => {
+            channelfutur = Some(b.connect(me.getRemoteAddr))
+        }
       }
+
+      println("Connect OK")
+
     } catch {
       case _ @ e  => logger.error("Reconnection error", e)
     }
@@ -147,9 +159,10 @@ abstract class TcpClientRemoteActor(delegate : Actor,timeout : Int) extends Simp
         loopWhile(!sended && nbTryTest < nbTryMax){
           println("Reconnect LOPP")
           reconnect
+          println("Reconnection asked")
           reactWithin(timeout) {
             case c : CHANNEL_CONNECTED => sended = sendMessageInternal(c.e.getChannel,msgi);
-            case TIMEOUT => reconnect
+            case TIMEOUT => println("TIMEOUT");reconnect
           }
           nbTryTest = nbTryTest + 1
 

@@ -10,7 +10,10 @@ import org.kermeta.art2.api.service.core.handler.Art2ModelHandlerService
 import org.kermeta.art2.api.service.remote.Art2Dispatcher
 import org.kermeta.art2.api.service.remote.Art2ModelDispatcher
 import org.kermeta.art2.framework.Constants
+import org.kermeta.art2.framework.bus.netty.remote.Art2DiscoveryServer
+import org.kermeta.art2.framework.bus.netty.remote.Art2DiscoveryClient
 import org.kermeta.art2.framework.bus.netty.remote.Art2DispatcherActor
+import org.kermeta.art2.framework.bus.netty.fileserver.Art2ProvisioningServer
 import org.osgi.framework.BundleActivator
 import org.osgi.framework.BundleContext
 import org.osgi.util.tracker.ServiceTracker
@@ -23,13 +26,20 @@ class Art2BusNettyActivator extends BundleActivator {
 //  var bean : Art2KompareBean = null
   var modelHandlerServiceTracker : ServiceTracker = null
   var configServiceTracker : ServiceTracker = null
-  var discoveryActor : Art2PlatformDiscoveryActor = null
+//  var discoveryActor : Art2PlatformDiscoveryActor = null
   var modelSynchRemoteActor : Art2ModelSynch = null
   var art2dispatcher : Art2DispatcherActor = null
   var logger = LoggerFactory.getLogger(this.getClass);
 
+  var discoveryServer : Art2DiscoveryServer = null;
+  var discoveryClient : Art2DiscoveryClient = null;
+
+  var provisioningServer : Art2ProvisioningServer = null
+
   def start(bc : BundleContext){
 
+    provisioningServer= new Art2ProvisioningServer()
+provisioningServer.start
     
     modelHandlerServiceTracker = new ServiceTracker(bc,classOf[Art2ModelHandlerService].getName,null)
     configServiceTracker = new ServiceTracker(bc,classOf[ConfigurationService].getName,null)
@@ -100,6 +110,19 @@ class Art2BusNettyActivator extends BundleActivator {
           case _ @ e => logger.info("Bad Port Number => "+modelDispatcherPort,e)
         }
 
+        //START AUTO DISCOVERY
+        try{
+          discoveryServer = new Art2DiscoveryServer(6789)
+          discoveryServer.start
+
+          discoveryClient = new Art2DiscoveryClient(10000,6789,mhandler.getNodeName,Integer.parseInt(modelDispatcherPort),Integer.parseInt(msgDispatcherPort))
+          discoveryClient.start
+
+        } catch {
+          case _ @ e => logger.info("Discovery Module Error",e)
+        }
+
+
 
       }
     }.start
@@ -111,11 +134,17 @@ class Art2BusNettyActivator extends BundleActivator {
   }
 
   def stop(bc : BundleContext){
-    modelHandlerServiceTracker.close
-    configServiceTracker.close
+
+    try{ provisioningServer } catch { case _ @ e => logger.error("Art2StopError", e)}
+
+    try{ discoveryServer.stop } catch { case _ @ e => logger.error("Art2StopError", e)}
+    try{discoveryClient.stop} catch { case _ @ e => logger.error("Art2StopError", e)}
+
+    try{modelHandlerServiceTracker.close} catch { case _ @ e => logger.error("Art2StopError", e)}
+    try{configServiceTracker.close} catch { case _ @ e => logger.error("Art2StopError", e)}
     //discoveryActor.stop
-    modelSynchRemoteActor.stop
-    art2dispatcher.stop
+    try{modelSynchRemoteActor.stop} catch { case _ @ e => logger.error("Art2StopError", e)}
+    try{art2dispatcher.stop} catch { case _ @ e => logger.error("Art2StopError", e)}
   }
 }
 

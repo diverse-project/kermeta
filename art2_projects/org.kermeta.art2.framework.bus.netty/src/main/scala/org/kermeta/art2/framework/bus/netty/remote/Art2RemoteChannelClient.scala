@@ -47,7 +47,13 @@ class Art2RemoteChannelClient(remoteNodeName : String,remoteChannelName : String
     }
 
     def getRemoteAddr : InetSocketAddress = {
+
+      println("Get Last Model")
+
       var model = modelHandler.getLastModel
+
+      println("OK last model ok ");
+
       var remoteIP = Art2PlatformHelper.getProperty(model,remoteNodeName,Constants.ART2_PLATFORM_REMOTE_NODE_IP)
       var remotePORT = Art2PlatformHelper.getProperty(model,remoteNodeName,Constants.ART2_PLATFORM_REMOTE_NODE_DISPATCHER_PORT)
       if("" != remoteIP && "" != remotePORT ){
