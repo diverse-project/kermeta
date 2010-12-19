@@ -13,6 +13,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
@@ -70,8 +72,14 @@ public class EditableModelPanel extends JLayeredPane {
             previousPropertiesPanel = null;
         }
 
+        JPanel tempLayout = new JPanel();
+        tempLayout.setOpaque(false);
+        tempLayout.add(Box.createGlue());
+        tempLayout.add(prop);
+        tempLayout.add(Box.createGlue());
 
-        propertiesPanel.add(prop, BorderLayout.EAST);
+
+        propertiesPanel.add(tempLayout, BorderLayout.EAST);
         previousPropertiesPanel = prop;
 
 //        Component[] childs = previousPropertiesPanel.getComponents();
@@ -90,6 +98,8 @@ public class EditableModelPanel extends JLayeredPane {
 //            }
 //
 //        }
+
+        //propertiesPanel.setBounds(propertiesPanel.getX(), propertiesPanel.getY(), propertiesPanel.getWidth(), propertiesPanel.getHeight());
 
         propertiesPanel.doLayout();
         this.doLayout();
