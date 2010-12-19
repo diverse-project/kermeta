@@ -20,6 +20,9 @@ public class NodePropertyEditor extends NamedElementPropertyEditor {
 
         ContainerNode node = (ContainerNode) elem;
 
+        this.addCenter(new NetworkPropertyEditor(node));
+
+
         JCommandButton btPush = new JCommandButton("PushModelJgroup");
         SynchPlatformCommand send = new SynchPlatformCommand();
         send.setKernel(_kernel);
@@ -27,23 +30,23 @@ public class NodePropertyEditor extends NamedElementPropertyEditor {
         btPush.setCommand(send);
         this.addCenter(btPush);
 
-
+/*
         JCommandButton btPushNode = new JCommandButton("PushModelJMDNS");
         SynchNodeCommand sendNode = new SynchNodeCommand();
         sendNode.setKernel(_kernel);
         sendNode.setDestNodeName(node.getName());
         btPushNode.setCommand(sendNode);
         this.addCenter(btPushNode);
+*/
 
-
-        JTextField ip = new JTextField("ip:port");
-        JCommandButton btPushNodeIP = new JCommandButton("PushModelIP");
+     //   JTextField ip = new JTextField("ip:port");
+        JCommandButton btPushNodeIP = new JCommandButton("Push");
         SynchNodeIPCommand sendNodeIP = new SynchNodeIPCommand();
-        sendNodeIP.setField(ip);
+        //sendNodeIP.setField(ip);
         sendNodeIP.setKernel(_kernel);
         sendNodeIP.setDestNodeName(node.getName());
         btPushNodeIP.setCommand(sendNodeIP);
-        this.addCenter(ip);
+        //this.addCenter(ip);
         this.addCenter(btPushNodeIP);
 
 

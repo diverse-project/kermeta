@@ -8,18 +8,20 @@ package org.kermeta.art2.ui.editor.command
 import java.io.ByteArrayOutputStream
 import java.net.InetSocketAddress
 import javax.swing.JTextField
+import org.kermeta.art2.framework.Art2PlatformHelper
 import org.kermeta.art2.framework.Art2XmiHelper
 import org.kermeta.art2.framework.bus.netty.remote.TcpClientRemoteActor
 import org.kermeta.art2.framework.message.Art2ModelSynchMessage
 import org.kermeta.art2.ui.editor.Art2UIKernel
+import org.kermeta.art2.framework.Constants
 import org.kermeta.art2.framework.JacksonSerializer._
 import scala.reflect.BeanProperty
 import scala.collection.JavaConversions._
 
 class SynchNodeIPCommand extends Command {
 
-  @BeanProperty
-  var field : JTextField = null
+  //@BeanProperty
+  //var field : JTextField = null
 
   @BeanProperty
   var kernel : Art2UIKernel = null
@@ -34,8 +36,11 @@ class SynchNodeIPCommand extends Command {
     var client = new TcpClientRemoteActor(null,4000) {
       def getRemoteAddr : InetSocketAddress = {
         try{
-          var IP = field.getText.split(":").toList.get(0)
-          var PORT = field.getText.split(":").toList.get(1)
+          var IP = Art2PlatformHelper.getProperty(kernel.getModelHandler.getActualModel, destNodeName, Constants.ART2_PLATFORM_REMOTE_NODE_IP);
+          if(IP == "") {IP = "127.0.0.1"}
+          var PORT = Art2PlatformHelper.getProperty(kernel.getModelHandler.getActualModel, destNodeName, Constants.ART2_PLATFORM_REMOTE_NODE_MODELSYNCH_PORT);
+          if(PORT == "") {PORT = "8000" }
+
           println("IP="+IP+",PORT="+PORT)
           new InetSocketAddress(IP,Integer.parseInt(PORT))
         } catch {
