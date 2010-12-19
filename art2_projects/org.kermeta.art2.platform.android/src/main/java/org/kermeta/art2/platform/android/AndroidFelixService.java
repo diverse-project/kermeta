@@ -24,10 +24,12 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Properties;
 import org.apache.felix.framework.Logger;
 import org.apache.felix.framework.cache.BundleCache;
 import org.apache.felix.framework.util.FelixConstants;
 import org.apache.felix.main.AutoProcessor;
+import org.kermeta.art2.android.framework.service.Art2AndroidUI;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -38,10 +40,10 @@ import org.osgi.framework.launch.FrameworkFactory;
  *
  * @author ffouquet
  */
-public class AndroidFelixService extends Service implements Art2AndroidPlatform {
+public class AndroidFelixService extends Service {
 
     protected MulticastLock multicastLock;
-    protected Framework felixFramework;
+    protected static Framework felixFramework;
     public static final String FELIX_BASE = "OSGI";
     public static final String FELIX_CACHE_DIR = "OSGI/cache";
     private static final int ART2SERVICE_NOTIFICATION_ID = 1;
@@ -184,7 +186,9 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
             + "scala.util.parsing.combinator.syntactical; "
             + "scala.xml.pull; "
             + "scala.mobile; "
-            + "scala.collection.generic; ").intern();
+            + "scala.collection.generic; "
+            + "org.kermeta.art2.android.framework.helper; "
+            + "org.kermeta.art2.android.framework.service; ").intern();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -284,6 +288,8 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
                     //AutoProcessor.process(configMap, felixFramework.getBundleContext());
                     felixFramework.start();
 
+                    felixFramework.getBundleContext().registerService(Art2AndroidUI.class.getName(), Art2Activity.last, new Properties());
+                    
 
                     startRawBundle(felixFramework.getBundleContext(), "file://paxurl.jar", R.raw.paxurl, true);
                     startRawBundle(felixFramework.getBundleContext(), "file://paxassembly.jar", R.raw.paxassembly, true);
@@ -428,5 +434,12 @@ public class AndroidFelixService extends Service implements Art2AndroidPlatform 
             Log.e("art2.bootstrap", ex.getMessage(), ex);
         }
         return bundle;
+    }
+
+    public static BundleContext getBundleContext() {
+        if (felixFramework == null) {
+            return null;
+        }
+        return felixFramework.getBundleContext();
     }
 }
