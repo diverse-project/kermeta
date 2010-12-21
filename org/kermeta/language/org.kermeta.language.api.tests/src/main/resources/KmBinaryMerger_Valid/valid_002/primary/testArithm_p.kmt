@@ -7,6 +7,9 @@ using kermeta::standard
 // assignment of the return variable
 class Test_arithm {
 
+	/**
+	 * First documentation annotation on operation1
+	 */
     operation operation1() : kermeta::standard::Integer is do
         var ~result : kermeta::standard::Integer
         var a : kermeta::standard::Integer
