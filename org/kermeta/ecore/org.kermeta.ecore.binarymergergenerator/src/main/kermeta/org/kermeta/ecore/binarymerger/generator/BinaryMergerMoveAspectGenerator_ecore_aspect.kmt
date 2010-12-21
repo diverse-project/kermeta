@@ -283,7 +283,7 @@ aspect class EAttribute {
 					content.append("end")
 				else				
 					content.append(context.indentString)				
-					content.append("self."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+					content.append("mergedModelElement."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
 													"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")					
 				end		
 			else
