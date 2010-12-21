@@ -305,7 +305,7 @@ package kermeta {
 							raise BinaryMergerException.new.initialize("Cannot merge classes which aren\'t opened using aspect", void, self)
 						end
 						result := primaryIsAspect.asType(Boolean) and aspectIsAspect.asType(Boolean)
-						//stdio.writeln("primaryIsAspect="+primaryIsAspect.toString+"; aspectIsAspect="+aspectIsAspect.toString+ "; result="+result.toString)
+						stdio.writeln("primaryIsAspect="+primaryIsAspect.toString+"; aspectIsAspect="+aspectIsAspect.toString+ "; result="+result.toString)
 					else
 						result := super( propertyName, primaryValue, aspectValue)
 					end
