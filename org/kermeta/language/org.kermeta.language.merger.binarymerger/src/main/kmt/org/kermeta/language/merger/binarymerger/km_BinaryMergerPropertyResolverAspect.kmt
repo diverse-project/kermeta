@@ -299,14 +299,13 @@ package kermeta {
 						// DVK : workaround compiler problem : use string comparaison, cast to Boolean doesn't work correctly
 					    primaryIsAspect := primaryValue.toString.equals("true") // workaround for primaryValue.asType(Boolean)
 					    aspectIsAspect := aspectValue.toString.equals("true") // workaround for aspectValue.asType(Boolean)
-					    stdio.writeln("Typedefinition.isAspect2 ")
-					    stdio.writeln("Typedefinition.isAspect3 " + primaryIsAspect.toString + aspectIsAspect.toString)
 						if ((not primaryIsAspect) and (not aspectIsAspect)) then
 							// 2 non open classes shouldn't be merged
 					        stdio.writeln("raising BinaryMergerException for Typedefinition.isAspect...")
 							raise BinaryMergerException.new.initialize("Cannot merge classes which aren\'t opened using aspect", void, self)
 						end
-						result := primaryValue.asType(Boolean) and aspectValue.asType(Boolean)
+						result := primaryIsAspect.asType(Boolean) and aspectIsAspect.asType(Boolean)
+						//stdio.writeln("primaryIsAspect="+primaryIsAspect.toString+"; aspectIsAspect="+aspectIsAspect.toString+ "; result="+result.toString)
 					else
 						result := super( propertyName, primaryValue, aspectValue)
 					end

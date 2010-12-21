@@ -292,16 +292,8 @@ package kermeta {
 
 			aspect class TypeDefinition inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
-					// deal with isAspect
-					if (propertyName.equals("isAspect")) then
-						if ((not primaryValue.asType(Boolean)) and (not aspectValue.asType(Boolean))) then
-							// 2 non open classes shouldn't be merged
-							raise BinaryMergerException.new.initialize("Cannot merge classes which aren\'t opened using aspect", void, self)
-						end
-						result := primaryValue.asType(Boolean) and aspectValue.asType(Boolean)
-					else
-						result := super( propertyName, primaryValue, aspectValue)
-					end
+					
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
