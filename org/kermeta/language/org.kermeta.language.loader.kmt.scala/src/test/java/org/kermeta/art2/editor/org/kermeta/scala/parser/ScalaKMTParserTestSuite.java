@@ -1,24 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* $Id: Art2ComponentTexteditorEclipse.java 13484 2010-11-15 14:35:02Z francoisfouquet $
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : November 2010
+ * Authors :
+ *                  Francois Fouquet <ffouquet@irisa.fr>
+ *                  Didier Vojtisek <didier.vojtisek@inria.fr>
  */
 package org.kermeta.art2.editor.org.kermeta.scala.parser;
 
-import java.util.Enumeration;
+import java.lang.reflect.InvocationTargetException;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.port.PortResourceLoader;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortResourceLoaderTestSuite;
 import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
-/**
- *
- * @author ffouquet
- */
+
 public class ScalaKMTParserTestSuite extends TestSuite {
 
    // @Override
     public static Test suite() {
-        PortResourceLoaderTestSuite.loaderClass = Art2ComponentKMTLoader.class;
+        PortResourceLoaderTestSuite.portResourceLoaderFactory = new PortAbstractFactory(){
+
+            @Override
+            public PortResourceLoader create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException {
+                Art2ComponentKMTLoader resourceLoader = new Art2ComponentKMTLoader();
+                resourceLoader.simulatedStart(resourceLoader.getClass().getCanonicalName());
+                return resourceLoader;
+            }
+        };
         return PortResourceLoaderTestSuite.suite();
     }
 

@@ -175,6 +175,13 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
         logger.debug("Successfully started "+bundleSymbolicName); 
     }
 
+    public void simulatedStart(String bundleSymbolicName) {
+        //bundle = (Bundle) this.getDictionary().get("osgi.bundle");
+        this.bundleSymbolicName = bundleSymbolicName;
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started "+bundleSymbolicName);
+    }
+
     @Stop
     public void stop() {
     }
