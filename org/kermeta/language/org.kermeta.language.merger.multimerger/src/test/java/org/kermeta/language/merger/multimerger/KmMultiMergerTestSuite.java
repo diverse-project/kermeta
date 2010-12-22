@@ -19,6 +19,7 @@ import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger;
 import org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMerger;
+import runner.MainRunner;
 
 /**
  * Test suite for KmMultiMerger port
@@ -30,11 +31,12 @@ public class KmMultiMergerTestSuite extends TestSuite {
     	//Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put("*", new XMIResourceFactoryImpl()); 
     	
         System.out.println("Initializing Registry...");
-        ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
+     //   ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
         // force to initialize the eInstance (required for correct serialisation
     	XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
-    	
-        //MainRunner.init();
+
+        // init using BinaryMerger MainRunner.init
+        MainRunner.init();
        // initRegistry();
 
         PortKmMultiMergerTestSuite.portKmMultiMergerFactory = new PortAbstractFactory<PortKmMerger>(){
