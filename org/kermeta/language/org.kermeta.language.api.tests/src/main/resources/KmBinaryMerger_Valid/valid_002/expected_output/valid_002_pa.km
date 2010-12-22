@@ -4,7 +4,7 @@
     <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
       <usings fromQName="kermeta::standard" toName="standard"/>
     </containedType>
-    <ownedOperation name="operation1" type="//Test_arithm/@containedType.0">
+    <ownedOperation name="operation1" type="//Test_arithm/@containedType.0" isAbstract="false">
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="result">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
