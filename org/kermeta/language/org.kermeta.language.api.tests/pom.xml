@@ -11,7 +11,7 @@
   <packaging>jar</packaging>
   <name>language.api.tests ::  Kermeta2 Core API Tests</name>
   <description>Tests of components implementing Kermeta Core API</description>
-  <url>http://maven.apache.org</url>
+  <url>http://www.kermeta.org</url>
   
   <parent>
   	<groupId>org.kermeta.language</groupId>
