@@ -34,6 +34,23 @@
       <artifactId>language.loader.scala</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.emf.compare</artifactId>
+      <version>[1.0.1.v200909161031,)</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.emf.compare.diff</artifactId>
+      <version>[1.0.1.v200909161031,)</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.emf.compare.match</artifactId>
+      <version>[1.0.1.v200909161031,)</version>
+    </dependency>
   </dependencies> 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
