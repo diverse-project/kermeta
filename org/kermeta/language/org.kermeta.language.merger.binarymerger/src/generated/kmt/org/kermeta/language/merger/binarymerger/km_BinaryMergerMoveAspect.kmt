@@ -23,8 +23,8 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Assignment)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Assignment")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference target")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference value")
+						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
+						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						// select value for unary attribute
 						mergedModelElement.isCast ?= self.selectUnaryProperty("isCast", self.isCast, mergedModelElement.isCast)
 						self.containedType.each{aspect_containedType | 
@@ -222,7 +222,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallFeature)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a CallFeature")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference target")
+						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 						// select value for unary attribute
 						mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
 						self.containedType.each{aspect_containedType | 
@@ -333,9 +333,9 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Conditional)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Conditional")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference thenBody")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference elseBody")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference condition")
+						mergedModelElement.thenBody ?= self.selectUnaryProperty("thenBody", self.thenBody, mergedModelElement.thenBody)
+						mergedModelElement.elseBody ?= self.selectUnaryProperty("elseBody", self.elseBody, mergedModelElement.elseBody)
+						mergedModelElement.condition ?= self.selectUnaryProperty("condition", self.condition, mergedModelElement.condition)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -363,7 +363,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Raise)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Raise")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference expression")
+						mergedModelElement.expression ?= self.selectUnaryProperty("expression", self.expression, mergedModelElement.expression)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -406,7 +406,7 @@ package kermeta {
 								mergedModelElement.body.add(aspect_body)
 							end
 						}
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference exceptionType")
+						mergedModelElement.exceptionType ?= self.selectUnaryProperty("exceptionType", self.exceptionType, mergedModelElement.exceptionType)
 						// select value for unary attribute
 						mergedModelElement.exceptionName ?= self.selectUnaryProperty("exceptionName", self.exceptionName, mergedModelElement.exceptionName)
 						// workaround compiler V2 bug, embed code that should have been called via super 
@@ -565,7 +565,7 @@ package kermeta {
 								mergedModelElement.parameters.add(aspect_parameters)
 							end
 						}
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
+						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -595,7 +595,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::LambdaParameter)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a LambdaParameter")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference type")
+						mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						// workaround compiler V2 bug, embed code that should have been called via super 
@@ -714,7 +714,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::TypeLiteral)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeLiteral")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference typeref")
+						mergedModelElement.typeref ?= self.selectUnaryProperty("typeref", self.typeref, mergedModelElement.typeref)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -769,9 +769,9 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Loop)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Loop")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference initialization")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference stopCondition")
+						mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
+						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
+						mergedModelElement.stopCondition ?= self.selectUnaryProperty("stopCondition", self.stopCondition, mergedModelElement.stopCondition)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -826,8 +826,8 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::VariableDecl)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a VariableDecl")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference initialization")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference type")
+						mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
+						mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 						// select value for unary attribute
 						mergedModelElement.identifier ?= self.selectUnaryProperty("identifier", self.identifier, mergedModelElement.identifier)
 						self.containedType.each{aspect_containedType | 
@@ -928,7 +928,7 @@ package kermeta {
 								mergedModelElement.~post.add(aspect_post)
 							end
 						}
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
+						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						self.ownedUnresolvedOperations.each{aspect_ownedUnresolvedOperations | 
 							var equivalent_ownedUnresolvedOperations : org::kermeta::language::structure::UnresolvedOperation
 							equivalent_ownedUnresolvedOperations := mergedModelElement.ownedUnresolvedOperations.detect{ merged_ownedUnresolvedOperations |
@@ -960,8 +960,8 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Property)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Property")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference getterBody")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference setterBody")
+						mergedModelElement.getterBody ?= self.selectUnaryProperty("getterBody", self.getterBody, mergedModelElement.getterBody)
+						mergedModelElement.setterBody ?= self.selectUnaryProperty("setterBody", self.setterBody, mergedModelElement.setterBody)
 						self.ownedUnresolvedProperties.each{aspect_ownedUnresolvedProperties | 
 							var equivalent_ownedUnresolvedProperties : org::kermeta::language::structure::UnresolvedProperty
 							equivalent_ownedUnresolvedProperties := mergedModelElement.ownedUnresolvedProperties.detect{ merged_ownedUnresolvedProperties |
@@ -1507,7 +1507,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Constraint)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Constraint")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference body")
+						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						// select value for unary attribute
 						// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
 						if (not self.stereotype.isVoid) and (mergedModelElement.stereotype.isVoid) then
@@ -2223,7 +2223,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeMapping)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeMapping")
-						stdio.writeln(" TODO Deal with multiplicity == 1 for EReference mapping")
+						mergedModelElement.mapping ?= self.selectUnaryProperty("mapping", self.mapping, mergedModelElement.mapping)
 					end
 					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self

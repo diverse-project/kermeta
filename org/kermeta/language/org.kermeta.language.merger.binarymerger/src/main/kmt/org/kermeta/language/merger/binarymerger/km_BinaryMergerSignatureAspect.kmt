@@ -368,12 +368,15 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
+					/* ignore abstract and body -> will raise an exception in case of conflict */
+					/*
 					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 						result := result and self.body == aspectElement.body
 					end
 					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 						result := result and self.isAbstract == aspectElement.isAbstract
 					end
+					*/
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
@@ -874,6 +877,7 @@ package kermeta {
 					if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
 						result := result and self.typeIdentifier == aspectElement.typeIdentifier
 					end
+					stdio.writeln("Result of UnresolvedType.localMatch = " +result.toString)
 				end
 			}
 

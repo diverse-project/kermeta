@@ -231,8 +231,28 @@ package kermeta {
 
 			aspect class Operation inherits org::kermeta::language::structure::MultiplicityElement, org::kermeta::language::structure::AbstractOperation {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
+				
+					if (propertyName.equals("isAbstract")) then
+						 var primaryIsAbstract : Boolean
+						 var aspectIsAbstract : Boolean
+						// DVK : workaround compiler problem : use string comparaison, cast to Boolean doesn't work correctly
+					    primaryIsAbstract := primaryValue.toString.equals("true") // workaround for primaryValue.asType(Boolean)
+					    aspectIsAbstract := aspectValue.toString.equals("true") // workaround for aspectValue.asType(Boolean)						
+						result := primaryIsAbstract.asType(Boolean) and aspectIsAbstract.asType(Boolean)						
+					else if  (propertyName.equals("body")) then
+						if ( (not primaryValue.isVoid) and (not aspectValue.isVoid) ) then
+							// 2 operation with a body cannot be merged
+							raise BinaryMergerException.new.initialize("Cannot merge 2 operations which both provide a body", void, self)
+						end
+						if (not aspectValue.isVoid) then
+							result := aspectValue
+						else
+							result := primaryValue 
+						end
+						
+					else
+						result := super( propertyName, primaryValue, aspectValue)
+					end end
 				end
 			}
 
