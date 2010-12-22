@@ -9,7 +9,8 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>language.api.tests</artifactId>
   <packaging>jar</packaging>
-  <name>K2 :: Core API :: Tests</name>
+  <name>language.api.tests ::  Kermeta2 Core API Tests</name>
+  <description>Tests of components implementing Kermeta Core API</description>
   <url>http://maven.apache.org</url>
   
   <parent>
