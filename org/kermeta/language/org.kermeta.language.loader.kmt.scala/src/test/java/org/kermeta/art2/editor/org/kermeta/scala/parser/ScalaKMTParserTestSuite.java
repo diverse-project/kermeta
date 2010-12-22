@@ -22,7 +22,7 @@ public class ScalaKMTParserTestSuite extends TestSuite {
 
    // @Override
     public static Test suite() {
-        PortResourceLoaderTestSuite.portResourceLoaderFactory = new PortAbstractFactory(){
+        PortResourceLoaderTestSuite.portResourceLoaderFactory = new PortAbstractFactory<PortResourceLoader>(){
 
             @Override
             public PortResourceLoader create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException {

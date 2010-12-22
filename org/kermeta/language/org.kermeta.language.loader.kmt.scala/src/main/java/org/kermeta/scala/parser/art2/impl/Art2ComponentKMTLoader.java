@@ -175,6 +175,10 @@ public class Art2ComponentKMTLoader extends AbstractComponentType implements org
         logger.debug("Successfully started "+bundleSymbolicName); 
     }
 
+    /*
+     * This opertion should pass everything that ART2 initialize before calling the usual start method
+     * This is used for test purpose
+     */
     public void simulatedStart(String bundleSymbolicName) {
         //bundle = (Bundle) this.getDictionary().get("osgi.bundle");
         this.bundleSymbolicName = bundleSymbolicName;
