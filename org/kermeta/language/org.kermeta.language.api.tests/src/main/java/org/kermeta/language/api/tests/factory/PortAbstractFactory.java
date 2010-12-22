@@ -10,10 +10,9 @@ package org.kermeta.language.api.tests.factory;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.kermeta.language.api.port.PortResourceLoader;
 
-public abstract class PortAbstractFactory {
+public abstract class PortAbstractFactory<C> {
 
-	abstract public PortResourceLoader create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException;
-	
+	abstract public C create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException;
+
 }

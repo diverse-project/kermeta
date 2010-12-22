@@ -14,22 +14,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import junit.framework.TestSuite;
-import org.kermeta.language.api.tests.factory.PortAbstractFactory;
-import org.kermeta.language.api.tests.port.PortResourceLoaderTest;
-import org.kermeta.language.api.tests.port.PortResourceLoaderTestSuite;
 
 /**
  */

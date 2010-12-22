@@ -12,6 +12,7 @@ import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmMerger;
 
 import junit.framework.TestCase;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
 //import org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMergerFactory;
 
@@ -19,7 +20,7 @@ public class PortKmMultiMergerTest extends TestCase {
 
 	public boolean valid = true;
 	public PortKmMerger mmerger = null;
-	public PortKmBinaryMerger bmerger = null;
+	//public PortKmBinaryMerger bmerger = null;
 	
 	// Resource folders
     public List<String> inputFilesPath;
@@ -29,7 +30,7 @@ public class PortKmMultiMergerTest extends TestCase {
 
     public ResourceSet resourceSet;
     
-    public PortKmMultiMergerTest(String baseName, List<String> inputFilesPath, String outputFilePath, String expectedOutputfilePath, Boolean _valid, Class mergerclass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public PortKmMultiMergerTest(String baseName, List<String> inputFilesPath, String outputFilePath, String expectedOutputfilePath, Boolean _valid, PortAbstractFactory<PortKmMerger> factory) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         System.out.println(" creating test ");
         System.out.println("                 basename " + baseName);
         for (String file : inputFilesPath) {
@@ -44,7 +45,7 @@ public class PortKmMultiMergerTest extends TestCase {
         this.expectedOutputFilePath = expectedOutputfilePath;
         this.valid = _valid;
 
-        bmerger = (PortKmBinaryMerger) mergerclass.getConstructors()[0].newInstance();
+        mmerger = factory.create();
         //mmerger = (PortKmMultiMerger) mergerclass.getConstructors()[0].newInstance();
         
         //Art2ComponentKmMultiMergerFactory fff;

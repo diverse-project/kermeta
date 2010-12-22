@@ -10,8 +10,6 @@ package org.kermeta.language.api.tests.port;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.Class;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -19,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.tests.Util;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
 /**
  *
@@ -27,17 +27,17 @@ import org.kermeta.language.api.tests.Util;
 public class PortKmBinaryMergerTestSuite extends TestSuite {
 
 
-    public static Class mergerClass = null;
+    public static PortAbstractFactory<PortKmBinaryMerger> portKmBinaryMergerfactory = null;
 
     public static Test suite() {
 
-        System.out.println("Getting KmBinaryMerger test suite  "+mergerClass);
+        System.out.println("Getting KmBinaryMerger test suite  ");
         
 
         TestSuite suite = new TestSuite("PortKmBinaryMergerTestSuite");
         try {
-            populate(suite, "KmBinaryMerger_Valid", true, mergerClass,".kmt");
-            populate(suite, "KmBinaryMerger_Invalid", false, mergerClass,".kmt");
+            populate(suite, "KmBinaryMerger_Valid", true, portKmBinaryMergerfactory,".kmt");
+            populate(suite, "KmBinaryMerger_Invalid", false, portKmBinaryMergerfactory,".kmt");
            // Util.populate(suite, "KMTLoader_Invalid", false, mergerClass,".kmt");
            // Util.populate(suite, "Checker_Valid", true, loaderClass,".kmt");
            // Util.populate(suite, "Checker_Invalid", true, loaderClass,".kmt");
@@ -54,7 +54,7 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
         return suite;
     }
 
-    public static void populate(TestSuite ts, String folder, Boolean valid,Class p,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static void populate(TestSuite ts, String folder, Boolean valid,PortAbstractFactory<PortKmBinaryMerger> factory,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String[] vfiles;
         try {
             String folderFullURI = PortKmBinaryMergerTestSuite.class.getClassLoader().getResource(folder).toString();
@@ -106,13 +106,15 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
                              jarPath+"!/"+currentAspectFilePath,
                              outputFolder+"/"+currentTestName+"_pa.km",
                              jarPath+"!/"+currentExpectedOutputFilePath,
-                             valid,p));
+                             valid,
+                             factory));
                      ts.addTest(new PortKmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
                              jarPath+"!/"+currentAspectFilePath,
                              jarPath+"!/"+currentPrimaryFilePath,
                              outputFolder+"/"+currentTestName+"_ap.km",
                              jarPath+"!/"+currentExpectedOutputFilePath,
-                             valid,p));
+                             valid,
+                             factory));
                 }
 
             }

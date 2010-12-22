@@ -12,7 +12,6 @@ package org.kermeta.language.api.tests.port;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.Class;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -20,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.port.PortResourceLoader;
 import org.kermeta.language.api.tests.Util;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
@@ -30,7 +30,7 @@ public class PortResourceLoaderTestSuite extends TestSuite {
 
 
     //public static Class loaderClass = null;
-    public static PortAbstractFactory portResourceLoaderFactory = null;
+    public static PortAbstractFactory<PortResourceLoader> portResourceLoaderFactory = null;
 
     public static Test suite() {
 
@@ -56,7 +56,7 @@ public class PortResourceLoaderTestSuite extends TestSuite {
         return suite;
     }
 
-    public static void populate(TestSuite ts, String folder, Boolean valid, PortAbstractFactory factory, String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static void populate(TestSuite ts, String folder, Boolean valid, PortAbstractFactory<PortResourceLoader> factory, String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String[] vfiles;
         try {
             vfiles = Util.getResourceListing(PortResourceLoaderTestSuite.class, folder);

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+//import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortResourceLoader.URIType;
@@ -30,6 +30,7 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
 import org.kermeta.language.api.tests.comparison.EMFCompareModelHelper;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
 /**
  *
@@ -48,7 +49,7 @@ public class PortKmBinaryMergerTest extends TestCase {
     public Boolean valid;
     public org.kermeta.language.api.port.PortKmBinaryMerger merger = null;
 
-    public PortKmBinaryMergerTest(String baseName, String primaryFilePath, String aspectFilePath, String outputFilePath, String expectedOutputfilePath, Boolean _valid, Class mergerclass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public PortKmBinaryMergerTest(String baseName, String primaryFilePath, String aspectFilePath, String outputFilePath, String expectedOutputfilePath, Boolean _valid, PortAbstractFactory<PortKmBinaryMerger> factory) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         System.out.println(" creating test ");
         System.out.println("                 basename " + baseName);
         System.out.println("          primaryFilePath " + primaryFilePath);
@@ -61,7 +62,7 @@ public class PortKmBinaryMergerTest extends TestCase {
         this.baseName = baseName;
         this.expectedOutputFilePath = expectedOutputfilePath;
         this.valid = _valid;
-        merger = (PortKmBinaryMerger) mergerclass.getConstructors()[0].newInstance();
+        merger = factory.create();
         resourceSet = new ResourceSetImpl();
 	Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
 	Map<String,Object> m = f.getExtensionToFactoryMap();

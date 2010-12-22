@@ -1,13 +1,15 @@
 package org.kermeta.language.api.tests.port;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.port.PortKmMerger;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
 public class PortKmMultiMergerTestSuite extends TestSuite {
+
+
+        public static PortAbstractFactory<PortKmMerger> portKmMultiMergerFactory = null;
 
 	public static Test suite() {
         System.out.println("Getting KmMultiMerger test suite  ");

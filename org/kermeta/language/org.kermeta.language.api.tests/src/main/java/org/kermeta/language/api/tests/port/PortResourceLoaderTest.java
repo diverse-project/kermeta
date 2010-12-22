@@ -26,7 +26,7 @@ public class PortResourceLoaderTest extends TestCase {
     public Boolean valid;
     public PortResourceLoader parser = null;
 
-    public PortResourceLoaderTest(File file, Boolean _valid, PortAbstractFactory portResourceLoaderFactory) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public PortResourceLoaderTest(File file, Boolean _valid, PortAbstractFactory<PortResourceLoader> portResourceLoaderFactory) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         this.file = file;
         this.valid = _valid;
         //parser = (PortResourceLoader) parserclass.getConstructors()[0].newInstance();
