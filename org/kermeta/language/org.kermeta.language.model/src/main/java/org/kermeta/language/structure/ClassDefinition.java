@@ -96,7 +96,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @return the value of the '<em>Owned Attribute</em>' containment reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedAttribute()
 	 * @see org.kermeta.language.structure.Property#getOwningClass
-	 * @model opposite="owningClass" containment="true"
+	 * @model opposite="owningClass" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Property> getOwnedAttribute();
@@ -113,7 +113,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @return the value of the '<em>Owned Operation</em>' containment reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedOperation()
 	 * @see org.kermeta.language.structure.Operation#getOwningClass
-	 * @model opposite="owningClass" containment="true"
+	 * @model opposite="owningClass" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();

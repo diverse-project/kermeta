@@ -857,14 +857,16 @@
               <details key="documentation" value="Boolean stating whether the ClassDefinition is abstract (which means that&#xA;no instance can be allocated)"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-              eType="#//kermeta/language/structure/Property" containment="true" eOpposite="#//kermeta/language/structure/Property/owningClass">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false"
+              upperBound="-1" eType="#//kermeta/language/structure/Property" containment="true"
+              eOpposite="#//kermeta/language/structure/Property/owningClass">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Attributes, References, and derived Properties owned by this ClassDefinition."/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-              eType="#//kermeta/language/structure/Operation" containment="true" eOpposite="#//kermeta/language/structure/Operation/owningClass">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false"
+              upperBound="-1" eType="#//kermeta/language/structure/Operation" containment="true"
+              eOpposite="#//kermeta/language/structure/Operation/owningClass">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Operations owned by this ClassDefinition."/>
             </eAnnotations>
