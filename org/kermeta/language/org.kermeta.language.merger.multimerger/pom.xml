@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.merger.multimerger</artifactId>
     <packaging>bundle</packaging>
-    <name>Kermeta :: merger :: multimerger</name>
+    <name>language.merger.multimerger :: Kermeta2 multimerger</name>
 
     <dependencies>
     

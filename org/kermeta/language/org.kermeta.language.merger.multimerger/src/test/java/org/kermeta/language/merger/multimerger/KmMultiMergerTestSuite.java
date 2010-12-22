@@ -2,6 +2,7 @@ package org.kermeta.language.merger.multimerger;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,11 @@ import org.kermeta.language.api.tests.port.PortKmMultiMergerTestSuite;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.port.PortKmBinaryMerger;
+import org.kermeta.language.api.port.PortKmMerger;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
+import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger;
+import org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMerger;
 
 /**
  * Test suite for KmMultiMerger port
@@ -31,7 +37,18 @@ public class KmMultiMergerTestSuite extends TestSuite {
         //MainRunner.init();
        // initRegistry();
 
-        //PortKmMultiMergerTestSuite.mergerClass = Art2ComponentKmMultiMerger.class;
+        PortKmMultiMergerTestSuite.portKmMultiMergerFactory = new PortAbstractFactory<PortKmMerger>(){
+            @Override
+            public PortKmMerger create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException {
+                Art2ComponentKmBinaryMerger binaryMerger = new Art2ComponentKmBinaryMerger();
+                binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
+                Art2ComponentKmMultiMerger merger = new Art2ComponentKmMultiMerger();
+                merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger);
+                return merger;
+            }
+        };
+
+
         File dir1 = new File (".");
         try {
             System.out.println("outputFolder ? : " + dir1.getCanonicalPath());
