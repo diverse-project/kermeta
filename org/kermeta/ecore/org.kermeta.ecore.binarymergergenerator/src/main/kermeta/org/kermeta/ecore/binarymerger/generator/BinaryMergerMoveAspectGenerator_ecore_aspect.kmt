@@ -207,8 +207,9 @@ aspect class EReference {
 		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name) 
 		if (self.containment) then
 			if self.upperBound==1 then
-				content.append(context.indentString)
-				content.append("stdio.writeln(\" TODO Deal with multiplicity == 1 for EReference " + self.name+"\")")
+				content.append(context.indentString)				
+				content.append("mergedModelElement."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+													"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")
 			else	
 				content.append(context.indentString)
 				content.append("self.")				
