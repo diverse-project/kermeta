@@ -191,4 +191,15 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
     public Bundle getBundle() {
         return bundle;
     }
+
+    /**
+     * This opertion should pass everything that ART2 initialize before calling the usual start method
+     * This is used for test purpose
+     * @param bundleSymbolicName
+     */
+    public void simulatedStart(String bundleSymbolicName) {
+        this.bundleSymbolicName = bundleSymbolicName;
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started "+bundleSymbolicName);
+    }
 }
