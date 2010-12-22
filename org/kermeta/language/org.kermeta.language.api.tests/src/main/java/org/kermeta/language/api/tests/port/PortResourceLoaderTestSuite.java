@@ -63,13 +63,28 @@ public class PortResourceLoaderTestSuite extends TestSuite {
 
             Arrays.sort(vfiles);
 
-
+            String outputFolder = ".";
+            File dir1 = new File (".");
+            try {
+                outputFolder = "file://" + dir1.getCanonicalPath() + "/target/tests/"+PortResourceLoaderTestSuite.class.getName()+"/"+folder+"/output/";
+            } catch (IOException ex) {
+                Logger.getLogger(PortKmBinaryMergerTestSuite.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (String uri : vfiles) {
-                if (uri.endsWith(filter)) {
+                if (uri.endsWith(filter) && !uri.contains("/expected_output/")) {
                     InputStream is = PortResourceLoaderTestSuite.class.getClassLoader().getResourceAsStream(uri);
-                    File f = Util.convertStreamToFile(is,uri.substring(uri.lastIndexOf("/")+1));
+                    File inputFile = Util.convertStreamToFile(is,uri.substring(uri.lastIndexOf("/")+1));
 
-                    ts.addTest(new PortResourceLoaderTest(f, valid, factory));
+                    String fileName = uri.substring(uri.lastIndexOf("/")+1);
+                    String expectedOutputResource = uri.replace(fileName, "")+"expected_output/"+fileName.replace(filter, ".km");
+                    System.out.println("Looking for expectedOutput = " + expectedOutputResource);
+                    if(PortResourceLoaderTestSuite.class.getClassLoader().getResource(expectedOutputResource) != null){
+
+                       ts.addTest(new PortResourceLoaderTest(inputFile,outputFolder+fileName.replace(filter, ".km"), valid, factory, expectedOutputResource));
+                    }
+                    else{
+                        ts.addTest(new PortResourceLoaderTest(inputFile,outputFolder+fileName.replace(filter, ".km"), valid, factory, null));
+                    }
                 }
             }
 
