@@ -90,8 +90,12 @@ public class PortKmBinaryMergerTest extends TestCase {
         	assertTrue("result model not equals to expected output", EMFCompareModelHelper.isSimilarAndSaveDiff(result.getModelingUnit(), expectedResult, outputFilePath+".diff"));
         	
         	//assertTrue("result model not equals to expected output", EMFCompareModelHelper.isSimilar(result.getModelingUnit(), expectedResult));
-        	//assertTrue("result model not equals to expected output", eQH.equals(result.getModelingUnit(), expectedResult));            
-            assertFalse("Merger has reported error but expecting none",result.hasSevereProblems());
+        	//assertTrue("result model not equals to expected output", eQH.equals(result.getModelingUnit(), expectedResult)); 
+        	String msg ="";
+        	if(result.hasSevereProblems()){
+        		msg= result.getProblems().get(0).getMessage();
+        	}
+            assertFalse("Merger has reported error but expecting none. (first message = "+msg+")",result.hasSevereProblems());
         } else {
         	// the merge is supposed to be invalid
             assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());

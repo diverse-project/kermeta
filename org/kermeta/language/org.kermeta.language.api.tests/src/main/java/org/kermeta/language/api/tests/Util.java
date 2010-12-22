@@ -1,3 +1,12 @@
+/* $Id: Art2ComponentTexteditorEclipse.java 13484 2010-11-15 14:35:02Z francoisfouquet $
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : November 2010
+ * Authors :
+ *                  Francois Fouquet <ffouquet@irisa.fr>
+ *                  Didier Vojtisek <didier.vojtisek@inria.fr>
+ */
 package org.kermeta.language.api.tests;
 
 import java.io.File;
@@ -12,49 +21,21 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortResourceLoaderTest;
 import org.kermeta.language.api.tests.port.PortResourceLoaderTestSuite;
 
 /**
- * Hello world!
- *
  */
 public class Util
 {
     
-
-
-public static void populate(TestSuite ts, String folder, Boolean valid,Class p,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        String[] vfiles;
-        try {
-            vfiles = getResourceListing(PortResourceLoaderTestSuite.class, folder);
-
-            Arrays.sort(vfiles);
-            
-
-            for (String uri : vfiles) {
-                if (uri.endsWith(filter)) {
-                    InputStream is = PortResourceLoaderTestSuite.class.getClassLoader().getResourceAsStream(uri);
-                    File f = convertStreamToFile(is,uri.substring(uri.lastIndexOf("/")+1));
-
-                    ts.addTest(new PortResourceLoaderTest(f, valid,p));
-                }
-            }
-
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(PortResourceLoaderTestSuite.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PortResourceLoaderTestSuite.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 
     public static String[] getResourceListing(Class clazz, String path) throws URISyntaxException, IOException {
         URL dirURL = clazz.getClassLoader().getResource(path);
