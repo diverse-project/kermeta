@@ -32,7 +32,7 @@
     </dependency>
     <dependency>
       <groupId>${project.parent.groupId}</groupId>
-      <artifactId>language.loader.scala</artifactId>
+      <artifactId>language.loader.kmt.scala</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
     
