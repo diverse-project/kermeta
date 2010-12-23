@@ -17,6 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.tests.Util;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
@@ -32,7 +35,8 @@ public class PortKmBinaryMergerTestSuite extends TestSuite {
     public static Test suite() {
 
         System.out.println("Getting KmBinaryMerger test suite  ");
-        
+
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*",          new XMIResourceFactoryImpl());
 
         TestSuite suite = new TestSuite("PortKmBinaryMergerTestSuite");
         try {
