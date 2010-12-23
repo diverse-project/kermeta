@@ -14,6 +14,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.language.structure.impl._
 import org.kermeta.language.behavior.impl._
+import org.kermeta.scala.parser.KmBuildHelper
 import scala.collection.JavaConversions._
 
 /**
@@ -62,10 +63,8 @@ trait KClassDefinitionParser extends KAbstractParser
         case None =>
         case Some(parentI)=> {
             parentI.foreach{parent=>
-              var newParent =StructureFactory.eINSTANCE.createUnresolvedType
-              newParent.setTypeIdentifier(parent.toString)
+              var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, parent.toString)
               newo.getSuperType.add(newParent)
-              newo.getContainedType.add(newParent)
             }
           }
       }
@@ -75,7 +74,7 @@ trait KClassDefinitionParser extends KAbstractParser
             case m : Constraint => newo.getInv.add(m)
             case m : Operation => {
                 newo.getOwnedOperation.add(m);
-                newo.getContainedType.add(m.getType) // TODO OPTIMISATION
+               // DVK operation can own its type directly, no need to put them in the class newo.getContainedType.add(m.getType) // TODO OPTIMISATION
               }
             case m : Property => newo.getOwnedAttribute.add(m)
             case _ => println("class def add new member type")

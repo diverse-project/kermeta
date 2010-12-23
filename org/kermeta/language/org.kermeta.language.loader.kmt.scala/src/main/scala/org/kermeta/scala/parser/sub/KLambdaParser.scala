@@ -14,6 +14,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.language.structure.impl._
 import org.kermeta.language.behavior.impl._
+import org.kermeta.scala.parser.KmBuildHelper
 import scala.collection.JavaConversions._
 
 /**
@@ -40,10 +41,10 @@ trait KLambdaParser extends KAbstractParser {
 
   def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ packageName ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
       var newType = StructureFactory.eINSTANCE.createProductType
-      var unresolveType = StructureFactory.eINSTANCE.createUnresolvedType
-      unresolveType.setTypeIdentifier(res)
+      var unresolveType = KmBuildHelper.getOrCreateUnresolvedType(newType,res) //StructureFactory.eINSTANCE.createUnresolvedType
+      //unresolveType.setTypeIdentifier(res)
       newType.setKType(unresolveType)
-      newType.getContainedType.add(unresolveType)
+      //newType.getContainedType.add(unresolveType)
       newType.getType.addAll(params)
       newType.getContainedType.addAll(params)
 

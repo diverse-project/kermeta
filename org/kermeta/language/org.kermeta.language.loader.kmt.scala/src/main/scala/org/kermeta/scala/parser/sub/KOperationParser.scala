@@ -1,6 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* $Id: ParserUtil.scala 11790 2010-07-19 09:21:17Z dvojtise $
+ * Project : org.kermeta.language.loader.scalaKMT
+ * License : EPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 2010
+ * Authors :
+ * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
 package org.kermeta.scala.parser.sub
@@ -8,6 +13,7 @@ package org.kermeta.scala.parser.sub
 import org.kermeta.language.structure.Parameter
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
+import org.kermeta.scala.parser.KmBuildHelper
 
 trait KOperationParser extends KAbstractParser with KGenericTypeParser {
   /* SUB PARSER CONTRACT */
@@ -63,14 +69,15 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
 
       unresolveType match {
         case None => {
-            var newT = StructureFactory.eINSTANCE.createUnresolvedType
-            newT.setTypeIdentifier("Void")
+            var newT = KmBuildHelper.getOrCreateUnresolvedType(newo,"Void") //StructureFactory.eINSTANCE.createUnresolvedType
+            // newT.setTypeIdentifier("Void")
             newo.setType(newT)
-            newo.getContainedType.add(newT)
+            //newo.getContainedType.add(newT)
           }
         case Some(urt)=> {
-            newo.setType(urt)
-            newo.getContainedType.add(urt)
+            var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt)
+            newo.setType(selectedUnresolvedType)
+            newo.getContainedType.add(selectedUnresolvedType)
           }
       }
       newo

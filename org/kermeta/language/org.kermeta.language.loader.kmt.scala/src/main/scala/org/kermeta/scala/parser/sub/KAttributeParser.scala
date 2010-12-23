@@ -7,6 +7,7 @@ package org.kermeta.scala.parser.sub
 
 import org.kermeta.language.structure.Property
 import org.kermeta.language.structure.StructureFactory
+import org.kermeta.scala.parser.KmBuildHelper
 
 trait KAttributeParser extends KAbstractParser with KGenericTypeParser {
 
@@ -17,10 +18,10 @@ trait KAttributeParser extends KAbstractParser with KGenericTypeParser {
         case None => newo.setLower(0);newo.setUpper(1)
         case Some(bb)=> newo.setLower(bb._1);newo.setUpper(bb._2)
       }
-//      var newtype = StructureFactory.eINSTANCE.createUnresolvedType
-      newo.getContainedType.add(qType)
+      var newqType = KmBuildHelper.selectType(newo,qType)
+      newo.getContainedType.add(newqType)
       //newtype.setTypeIdentifier(name)
-      newo.setType(qType)
+      newo.setType(newqType)
       newo
   }
 
