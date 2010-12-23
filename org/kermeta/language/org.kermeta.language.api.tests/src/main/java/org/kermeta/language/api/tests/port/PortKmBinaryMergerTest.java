@@ -29,6 +29,7 @@ import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
+import org.kermeta.language.api.tests.ModelingUnitUtil;
 import org.kermeta.language.api.tests.comparison.EMFCompareModelHelper;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
@@ -76,15 +77,15 @@ public class PortKmBinaryMergerTest extends TestCase {
         System.out.println("        with " + aspectFilePath);
         
         
-        ModelingUnitResult result = merger.merge(loadModelingUnit(primaryFilePath), loadModelingUnit(aspectFilePath));
+        ModelingUnitResult result = merger.merge(ModelingUnitUtil.loadModelingUnit(primaryFilePath), ModelingUnitUtil.loadModelingUnit(aspectFilePath));
 
 
         System.out.println("   saving merge result in " + outputFilePath);
-        saveModelingUnit(outputFilePath, result.getModelingUnit());
+        ModelingUnitUtil.saveModelingUnit(outputFilePath, result.getModelingUnit());
         
        // EcoreUtil.EqualityHelper eQH = new EcoreUtil.EqualityHelper();
         
-        ModelingUnit expectedResult = loadModelingUnit(expectedOutputFilePath);
+        ModelingUnit expectedResult = ModelingUnitUtil.loadModelingUnit(expectedOutputFilePath);
         
         if (this.valid) {
         	// the merge is supposed to be valid
@@ -104,58 +105,7 @@ public class PortKmBinaryMergerTest extends TestCase {
     }
 
 
-    protected ModelingUnit loadModelingUnit(String filePath) throws IOException{
-    	if(filePath.endsWith(".km")){
-    		return loadModelingUnitFromKm(filePath);
-    	}
-    	if(filePath.endsWith(".kmt")){
-    		return loadModelingUnitFromKMT(filePath);
-    	}
-    	return null;
-    }
     
-    protected ModelingUnit loadModelingUnitFromKm(String modelFilePath){
-    	URI uri = URI.createURI( modelFilePath );
-		/*
-		 * If the loading is not done in a workbench, then uri matching platform:/resource or platform:/plugin
-		 * will be useless. Need to convert them into absolute path.
-		 * It works only if a mapping exist between platform:/resource and its concrete path. 
-		 */
-		URIConverter converter = new ExtensibleURIConverterImpl();
-		uri = converter.normalize(uri);
-		Resource resource = resourceSet.getResource(uri, true);
-		for(EObject o : resource.getContents()){
-			if( o instanceof ModelingUnit){
-				return (ModelingUnit) o;
-			}				
-		}
-		return null;
-    }    
-    
-    protected ModelingUnit loadModelingUnitFromKMT(String kmtFilePath) throws IOException{
-    
-    	Art2ComponentKMTLoader loader = new Art2ComponentKMTLoader();
-    	ModelingUnit result = loader.load(kmtFilePath, URIType.FILE, "");
-    	return result;
-    }
-        
-    protected void saveModelingUnit(String modelFilePath, ModelingUnit modelingUnit) throws IOException {
-    	URI uri = URI.createURI( modelFilePath );
-		/*
-		 * If the loading is not done in a workbench, then uri matching platform:/resource or platform:/plugin
-		 * will be useless. Need to convert them into absolute path.
-		 * It works only if a mapping exist between platform:/resource and its concrete path. 
-		 */
-		URIConverter converter = new ExtensibleURIConverterImpl();
-		uri = converter.normalize(uri);
-	/*	XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot(); 
-		XMLNamespacePackage.eINSTANCE.getEFactoryInstance(); */
-		Resource resource = resourceSet.createResource(uri);
-     /*   ((XMIResource)resource).getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
-        ((XMIResource)resource).getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");  */
-		resource.getContents().add(modelingUnit);
-		resource.save(null);		
-    }
     @Override
     public String getName() {
         return baseName;

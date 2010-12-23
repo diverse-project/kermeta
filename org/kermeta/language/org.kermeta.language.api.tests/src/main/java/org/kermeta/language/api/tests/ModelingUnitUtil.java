@@ -23,6 +23,16 @@ import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
 public class ModelingUnitUtil {
 
+	public static ModelingUnit loadModelingUnit(String filePath) throws IOException{
+    	if(filePath.endsWith(".km")){
+    		return loadModelingUnitFromKm(filePath);
+    	}
+    	if(filePath.endsWith(".kmt")){
+    		return loadModelingUnitFromKMT(filePath);
+    	}
+    	return null;
+    }
+	
 	public static ModelingUnit loadModelingUnitFromKm(String modelFilePath){
 		return loadModelingUnitFromKm(modelFilePath, new ResourceSetImpl());
 	}
@@ -47,6 +57,7 @@ public class ModelingUnitUtil {
     public static ModelingUnit loadModelingUnitFromKMT(String kmtFilePath) throws IOException{
     
     	Art2ComponentKMTLoader loader = new Art2ComponentKMTLoader();
+    	loader.simulatedStart(loader.getClass().getCanonicalName());
     	ModelingUnit result = loader.load(kmtFilePath, URIType.FILE, "");
     	return result;
     }
