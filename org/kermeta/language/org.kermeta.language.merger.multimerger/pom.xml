@@ -21,9 +21,9 @@
 
 		
         <dependency>
-            <groupId>fr.irisa.triskell</groupId>
+            <groupId>fr.irisa.triskell.kermeta</groupId>
             <artifactId>kermeta.model</artifactId>
-            <version>1.3.0</version>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -31,19 +31,19 @@
             <version>${kermeta.version}</version>
         </dependency>
 		
-		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>language.api.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>language.merger.binarymerger</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.api.tests</artifactId>
+            <version>${kermeta.version}</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.merger.binarymerger</artifactId>
+            <version>${kermeta.version}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
     
@@ -88,7 +88,7 @@
                     </execution>
                 </executions>
             </plugin>
-			<plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.1.0</version>
@@ -121,7 +121,17 @@
                     </instructions>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/*TestSuite.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
