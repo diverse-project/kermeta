@@ -50,7 +50,7 @@
         </dependency>
        <dependency>
             <groupId>org.kermeta.language</groupId>
-            <artifactId>language.loader.scala</artifactId>
+            <artifactId>language.loader.kmt.scala</artifactId>
             <version>${language.version}</version>
         </dependency>
         
