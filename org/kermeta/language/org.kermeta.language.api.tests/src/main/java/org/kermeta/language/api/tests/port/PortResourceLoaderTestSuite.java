@@ -64,6 +64,8 @@ public class PortResourceLoaderTestSuite extends TestSuite {
             Arrays.sort(vfiles);
 
             String outputFolder = ".";
+            String folderFullURI = PortResourceLoaderTestSuite.class.getClassLoader().getResource(folder).toString();
+            String jarPath = folderFullURI.substring(0, folderFullURI.indexOf("!")); // get only the jar url
             File dir1 = new File (".");
             try {
                 outputFolder = "file://" + dir1.getCanonicalPath() + "/target/tests/"+PortResourceLoaderTestSuite.class.getName()+"/"+folder+"/output/";
@@ -80,7 +82,7 @@ public class PortResourceLoaderTestSuite extends TestSuite {
                     System.out.println("Looking for expectedOutput = " + expectedOutputResource);
                     if(PortResourceLoaderTestSuite.class.getClassLoader().getResource(expectedOutputResource) != null){
 
-                       ts.addTest(new PortResourceLoaderTest(inputFile,outputFolder+fileName.replace(filter, ".km"), valid, factory, expectedOutputResource));
+                       ts.addTest(new PortResourceLoaderTest(inputFile,outputFolder+fileName.replace(filter, ".km"), valid, factory, jarPath+"!/"+expectedOutputResource));
                     }
                     else{
                         ts.addTest(new PortResourceLoaderTest(inputFile,outputFolder+fileName.replace(filter, ".km"), valid, factory, null));

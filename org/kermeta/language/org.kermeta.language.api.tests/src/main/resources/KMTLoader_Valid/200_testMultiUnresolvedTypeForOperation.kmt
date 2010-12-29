@@ -1,0 +1,19 @@
+package testArithm;
+
+require kermeta
+
+using kermeta::standard
+
+// 2 operation returning the same type => must generate only one UnresolvedType
+aspect class Test_arithm {
+
+	/**
+	 * Second documentation annotation on operation1
+	 */
+    operation operation1() : kermeta::standard::Integer is abstract 
+    operation operation2() : kermeta::standard::Integer is do        
+        result := 42
+    end
+}
+
+
