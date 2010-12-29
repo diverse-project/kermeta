@@ -103,17 +103,7 @@ aspect class EClass {
 		content.append(" is do")
 		context.pushIndent
 		
-		if self.eSuperTypes.size()>0 then
-			if(self.eSuperTypes.first().name == "Object")then
-				content.append(context.indentString)
-				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
-				content.append(context.indentString)
-				content.append("//super(context)\n")
-			else
-				content.append(context.indentString)
-				content.append("super(context)\n")
-			end
-		end
+		
 		
 		content.append(context.indentString)
 		content.append("var mergedModelElement : " + context.ecoreHelper.getClassifierQualifiedName(self)) 
@@ -162,13 +152,32 @@ aspect class EClass {
 		content.append(context.indentString)
 		content.append("end")
 		
-		content.append(context.indentString)		
-		content.append("self.eachOwnedElement{ e | e")
-		if (not context.isMMReflexiveKermeta) then
-			content.append(".asType(Mergeable)")
+		if self.eSuperTypes.size()>0 then
+			if(self.eSuperTypes.first().name == "Object")then
+				content.append(context.indentString)
+				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
+				content.append(context.indentString)
+				content.append("//super(context)\n")
+				// call eachOwnedElement only if there is no super that have already done it
+				content.append(context.indentString)		
+				content.append("self.eachOwnedElement{ e | e")
+				if (not context.isMMReflexiveKermeta) then
+					content.append(".asType(Mergeable)")
+				end
+				content.append(".binaryMerger_MoveToMergedModel(context)}")
+			else
+				content.append(context.indentString)
+				content.append("super(context)\n")
+			end
+		else
+			// call eachOwnedElement only if there is no super that have already done it
+			content.append(context.indentString)		
+			content.append("self.eachOwnedElement{ e | e")
+			if (not context.isMMReflexiveKermeta) then
+				content.append(".asType(Mergeable)")
+			end
+			content.append(".binaryMerger_MoveToMergedModel(context)}")
 		end
-		content.append(".binaryMerger_MoveToMergedModel(context)}")
-		
 		// return self in order to workaround a compiler bug
 		content.append(context.indentString)
 	    content.append("result := self")
