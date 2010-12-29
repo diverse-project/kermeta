@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.ui.eclipse</artifactId>
     <packaging>bundle</packaging>
-    <name>K2 :: UI :: Eclipse</name>
+    <name>language.ui.eclipse :: Eclipse User Interface for Kermeta 2</name>
 
     <parent>
         <groupId>org.kermeta.language</groupId>
@@ -27,6 +27,10 @@
 			<resource>
 				<directory>icons</directory>
 				<targetPath>icons</targetPath>
+			</resource>
+			<resource>
+				<directory>target/generated-sources/art2/ART2-INF</directory>
+				<targetPath>ART2-INF</targetPath>
 			</resource>
 		</resources>
         <plugins>
