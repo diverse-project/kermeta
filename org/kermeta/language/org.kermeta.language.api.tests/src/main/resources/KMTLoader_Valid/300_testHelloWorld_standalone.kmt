@@ -5,15 +5,20 @@
  * Authors  : 
  *            dvojtise
  */
-@mainClass "helloworld::HelloWorld"
-@mainOperation "main"
+
 
 
 package helloworld {
 	class HelloWorld
 	{
+		@main ""
 		operation main() : kermeta::standard::Void is do 
-			stdio.writeln("Hello World !")
+			stdio.writeln("Hello World!")
+		end
+		
+		@main "Bonjour\ tout\ le\ monde"
+		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
+			stdio.writeln(msg)
 		end
 	}
 }
