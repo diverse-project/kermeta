@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: kermeta.io;uses:="scala,scala.reflect"
+Ignore-Package: kermeta.io
+Bundle-ClassPath: .
+Built-By: ffouquet
+Tool: Bnd-0.0.357
+Bundle-Name: Kermeta :: Library :: Core
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_22
+Bundle-Version: 2.0.1.SNAPSHOT
+Bnd-LastModified: 1294063715341
+Bundle-ManifestVersion: 2
+Import-Package: scala,scala.reflect
+Bundle-SymbolicName: org.kermeta.language.library.core
+
