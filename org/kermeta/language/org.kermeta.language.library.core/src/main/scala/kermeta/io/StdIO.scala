@@ -7,10 +7,31 @@ package kermeta.io
 
 object StdIO {
 
-  def write(`object` : String) = {print(`object`)}
-  def writeln(`object` : String) ={println(`object`)}
-  def error(`object` : String) = {print(`object`)}
-  def errorln(`object` : String)={println(`object`)}
-  def read(prompt : String) : String ={"not implement"}
+  def write(obj : AnyRef) : Unit = {
+    Console.print(obj)
+  }
+
+  def errorln(obj : AnyRef) : Unit = {
+    Console.println(obj) //TODO PRINT TO ERR CONSOLE
+  }
+
+  def error(obj : AnyRef) : Unit = {
+    Console.print(obj)
+  }
+
+  def writeln(obj : AnyRef) : Unit = {
+    Console.println(obj)
+  }
+
+  def read(prompt : String) : String = {
+    if (prompt != null){
+      println(prompt);
+    }
+    var ligne_lue:String =null;
+    var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
+    var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
+    ligne_lue=entree.readLine();
+    return ligne_lue;
+  }
 
 }
