@@ -2,6 +2,8 @@ package org::kermeta::language::behavior;
 require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "UnusedVarDetector.kmt"
+require "structurePruningAspect.kmt"
+using org::kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
 aspect class PruningVisitorAspect {
@@ -55,22 +57,6 @@ aspect class Block {
 }
 
 aspect class Expression inherits PruningVisitorAspect {
-	method visitToAddClasses(theUnusedVarDetector : UnusedVarDetector) : Void is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theUnusedVarDetector)
-			self.visitedPass := true
-			self.visitedPass := false
-		end
-	end
-	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) : Void is do
-		if(not self.visitedPass) then
-			super(theUnusedVarDetector)
-			self.visitedPass := true
-			self.visitedForRelations := true
-			self.visitedPass := false
-		end
-	end
 }
 
 aspect class Conditional {

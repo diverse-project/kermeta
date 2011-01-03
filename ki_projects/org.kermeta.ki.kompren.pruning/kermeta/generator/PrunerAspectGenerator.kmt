@@ -45,12 +45,56 @@ class PrunerAspectGenerator inherits Generator {
 			codeUsing := codeUsing + "using " + pkg + "\n"
 		}
 
-		generatedCode := generatedCode + codeUsing + "using kermeta::standard\nusing kermeta::utils\n" +
-						generateVisitAspect()
+		generatedCode := generatedCode + codeUsing + "using kermeta::standard\nusing kermeta::utils\n" + generateVisitAspect()
+		packages.add(mainPackageName)
 
 		prunerGenerator.aspectisedClasses.each{eclass |
-			generatedCode := generatedCode + generateAspect(eclass)
+			var packageName : String init eclass.ePackage.getQualifiedName("::")
+
+			if(packageName==mainPackageName) then
+				generatedCode := generatedCode + generateAspect(eclass)
+			else
+				packages.add(packageName)
+				// Otherwise, the code of the aspect must be write into another file dedicated to its package.
+				generateExternAspect(eclass, mainPackageName, packages)
+			end
 		}
+	end
+	
+	
+	operation generateExternAspect(clazz : EClass, mainPackageName : String, packages : Bag<String>) : Void is do
+		var namePackage : String init clazz.ePackage.getQualifiedName("::")
+		var codeAspect : String
+		
+		// If no code has been already created for this package.
+		if(prunerGenerator.requiredAspectFiles.getValue(namePackage).isVoid) then
+			var codeUsing : String init ""
+			// Adding headers of the file.
+			codeAspect := "package " + namePackage + ";\n" + "require kermeta\n" + 
+							"require \"" + prunerGenerator.prunerClass.name + "Aspect.kmt\"\n"
+	
+			// Adding the "require" elements that refer to the other created aspect files.
+	 		packages.each{pkg |
+	 			if(pkg!=namePackage and pkg!=mainPackageName) then
+					var subPkgs : Sequence<String> init pkg.split("::")
+					codeAspect := codeAspect + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
+					// Adding the "using" elements that refers to the other packages.
+					codeUsing := codeUsing + "using " + pkg + "\n"
+				end
+			}
+
+			// Adding the "using" elements.
+			codeAspect := codeAspect + "using kermeta::standard\nusing " + mainPackageName + "\n" + codeUsing + "\n"
+		else
+			// If the file already exists, the code is extracted and removed from the hashmap.
+			codeAspect := prunerGenerator.requiredAspectFiles.getValue(namePackage)
+			prunerGenerator.requiredAspectFiles.remove(namePackage)
+		end
+		
+		// Adding the class code of the apsect.
+		codeAspect := codeAspect + generateAspect(clazz)
+		// Adding the new code to the hashmap with as key the qualified name of the package.
+		prunerGenerator.requiredAspectFiles.put(namePackage, codeAspect)
 	end
 
 

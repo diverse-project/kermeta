@@ -30,7 +30,14 @@
   <relationsFocus name="assignValue">
     <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Assignment/value"/>
   </relationsFocus>
-  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Expression"/>
+  <relationsFocus name="OpParameter">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </relationsFocus>
+  <relationsFocus name="operationBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Operation/body"/>
+  </relationsFocus>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Operation"/>
   <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/VariableDecl"/>
   <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallVariable"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Parameter"/>
 </prunerGenerator:Pruning>

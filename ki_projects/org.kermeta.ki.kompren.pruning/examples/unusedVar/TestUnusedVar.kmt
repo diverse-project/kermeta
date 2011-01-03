@@ -26,8 +26,18 @@ class Test {
 		var ifStat : Conditional init Conditional.new
 		var assign : Assignment init Assignment.new
 		var callF : CallVariable init CallVariable.new
+		var param : Parameter init Parameter.new
 		ifStat.condition := EmptyExpression.new
 		assign.target := CallResult.new
+		
+		var typeParam : Class init Class.new
+		var typeCDParam : ClassDefinition init ClassDefinition.new
+		typeCDParam.name := "Boolean"
+		typeParam.typeDefinition := typeCDParam
+		param.name := "param"
+		param.~operation := op
+		param.type := typeParam
+		op.ownedParameter.add(param)
 		 
 		var1def.identifier := "v1"
 		var2def.identifier := "v2"
@@ -43,9 +53,10 @@ class Test {
 		block.statement.add(var1def)
 		block.statement.add(ifStat)
 		block.statement.add(var2def)
-		var requiredExpressions : Bag<Expression> init Bag<Expression>.new
-		requiredExpressions.add(block)
-		var pruning : PrintUnusedVarDetector init PrintUnusedVarDetector.new.initialise(requiredExpressions).asType(PrintUnusedVarDetector)
+		op.body := block
+		var requiredOps : Bag<Operation> init Bag<Operation>.new
+		requiredOps.add(op)
+		var pruning : PrintUnusedVarDetector init PrintUnusedVarDetector.new.initialise(requiredOps).asType(PrintUnusedVarDetector)
 		pruning.launch()
 	end
 }
@@ -53,6 +64,8 @@ class Test {
 
 class PrintUnusedVarDetector inherits UnusedVarDetector {
 	reference varDecls : VariableDecl[0..*]
+	
+	reference params : Parameter[0..*]
 
 	method onVariableDeclAdded(theVariableDecl : VariableDecl) : Void is do
 		super(theVariableDecl)
@@ -65,14 +78,26 @@ class PrintUnusedVarDetector inherits UnusedVarDetector {
 				varD.containedType.contains(theCallVariable.staticType)
 			}
 			
-			if(not varDecl.isVoid) then
+			if(varDecl.isVoid) then
+				var varParam : Parameter init params.detect{param | param.type==theCallVariable.staticType }
+				if(not varParam.isVoid) then
+					params.remove(varParam)
+				end
+			else
 				varDecls.remove(varDecl)
 			end
 		end
 	end
+	
+	method onParameterAdded(theParameter : Parameter) : Void is do
+		if(theParameter.~operation.superOperation.isVoid) then
+			params.add(theParameter)
+		end
+	end
 
 	method ended() : Void is do
-		varDecls.each{varD | stdio.writeln(varD.identifier) }
+		varDecls.each{varD | stdio.writeln("Variable unused: " + varD.identifier) }
+		params.each{param | stdio.writeln("Parameter unused: " + param.name) }
 	end
 }
 

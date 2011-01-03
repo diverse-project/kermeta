@@ -22,9 +22,9 @@ class PrunerClassGenerator inherits Generator {
 		generatedCode := prunerGenerator.getPackageFromClasses(prunerGenerator.aspectisedClasses)
 		generatedCode := generatedCode + "require kermeta\nrequire \"" + prunerGenerator.modelURI + "\"\nrequire \"" +
 						 prunerGenerator.prunerClass.name + "Aspect.kmt\"\n" +
-   					     prunerGenerator.getRequiresFromClasses(prunerGenerator.pruningData.requiredClasses) + 
+   					     prunerGenerator.getRequiresFromClasses(prunerGenerator.aspectisedClasses) + 
    					     "\nusing kermeta::standard\nusing kermeta::utils\n" +
-						 prunerGenerator.getUsingsFromClasses(prunerGenerator.pruningData.requiredClasses) +
+						 prunerGenerator.getUsingsFromClasses(prunerGenerator.aspectisedClasses) +
 						 "class " + prunerGenerator.prunerClass.name + " {\n"
 
 		if(not prunerGenerator.radius.isVoid) then
