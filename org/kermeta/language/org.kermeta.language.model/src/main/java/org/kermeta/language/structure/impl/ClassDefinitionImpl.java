@@ -41,6 +41,7 @@ import org.kermeta.language.structure.TypeContainer;
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getIsSingleton <em>Is Singleton</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,6 +97,26 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @ordered
 	 */
 	protected EList<Operation> ownedOperation;
+
+	/**
+	 * The default value of the '{@link #getIsSingleton() <em>Is Singleton</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsSingleton()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_SINGLETON_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIsSingleton() <em>Is Singleton</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsSingleton()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isSingleton = IS_SINGLETON_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +199,27 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsSingleton() {
+		return isSingleton;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsSingleton(Boolean newIsSingleton) {
+		Boolean oldIsSingleton = isSingleton;
+		isSingleton = newIsSingleton;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CLASS_DEFINITION__IS_SINGLETON, oldIsSingleton, isSingleton));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -226,6 +268,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return getOwnedAttribute();
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				return getOwnedOperation();
+			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
+				return getIsSingleton();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -254,6 +298,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				getOwnedOperation().clear();
 				getOwnedOperation().addAll((Collection<? extends Operation>)newValue);
 				return;
+			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
+				setIsSingleton((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -278,6 +325,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				getOwnedOperation().clear();
 				return;
+			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
+				setIsSingleton(IS_SINGLETON_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -298,6 +348,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				return ownedOperation != null && !ownedOperation.isEmpty();
+			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
+				return IS_SINGLETON_EDEFAULT == null ? isSingleton != null : !IS_SINGLETON_EDEFAULT.equals(isSingleton);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,6 +366,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isAbstract: ");
 		result.append(isAbstract);
+		result.append(", isSingleton: ");
+		result.append(isSingleton);
 		result.append(')');
 		return result.toString();
 	}

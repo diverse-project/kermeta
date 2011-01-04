@@ -1278,6 +1278,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getClassDefinition_IsSingleton() {
+		return (EAttribute)classDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModelingUnit() {
 		return modelingUnitEClass;
 	}
@@ -1954,6 +1963,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_ABSTRACT);
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__OWNED_ATTRIBUTE);
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__OWNED_OPERATION);
+		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_SINGLETON);
 
 		modelingUnitEClass = createEClass(MODELING_UNIT);
 		createEReference(modelingUnitEClass, MODELING_UNIT__PACKAGES);
@@ -2243,6 +2253,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getClassDefinition_IsAbstract(), this.getBoolean(), "isAbstract", null, 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDefinition_OwnedAttribute(), this.getProperty(), this.getProperty_OwningClass(), "ownedAttribute", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getClassDefinition_OwnedOperation(), this.getOperation(), this.getOperation_OwningClass(), "ownedOperation", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getClassDefinition_IsSingleton(), this.getBoolean(), "isSingleton", null, 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelingUnit_Packages(), this.getPackage(), null, "packages", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

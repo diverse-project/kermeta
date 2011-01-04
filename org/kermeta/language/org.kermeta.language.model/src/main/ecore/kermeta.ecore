@@ -124,27 +124,10 @@
               <details key="documentation" value="Tells whether this CallFeature represents a call to @pre in a postcondition"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//kermeta/language/structure/Property">
-            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="The object which will be returned (property case)"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation"
-              eType="#//kermeta/language/structure/Operation">
-            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="The method which will be executed (operation case)&#xA;and the result value passed to the caller"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral"
-              eType="#//kermeta/language/structure/EnumerationLiteral">
-            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="To be written"/>
-            </eAnnotations>
-          </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="#//kermeta/language/behavior/CallExpression">
+        <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="#//kermeta/language/behavior/CallOperation">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="This class represents a call to the operataion in the parent class&#xA;&#x9;In the following example, the type of super(element) is CallSuperOperation:&#xA;&#xA;class ParentClass {&#xA;  operation op(element : Integer) : Integer is do&#xA;      result := element + 1&#xA;  end&#xA;}&#xA; *&#xA;class ChildClass {&#xA;  method op(element : Integer) : Integer is do&#xA;      result := super(element)&#xA;  end&#xA;}"/>
+            <details key="documentation" value="This class represents a call to the operation in a parent class. &#xD;&#xA;&#x9;In the following example, the type of super(element) is CallSuperOperation:&#xD;&#xA;&#xD;&#xA;class ParentClass {&#xD;&#xA;  operation op(element : Integer) : Integer is do&#xD;&#xA;      result := element + 1&#xD;&#xA;  end&#xD;&#xA;}&#xD;&#xA; *&#xD;&#xA;class ChildClass {&#xD;&#xA;  method op(element : Integer) : Integer is do&#xD;&#xA;      result := super(element)&#xD;&#xA;  end&#xD;&#xA;}"/>
           </eAnnotations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="#//kermeta/language/behavior/CallVariable">
@@ -312,7 +295,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="TypeLiteral" eSuperTypes="#//kermeta/language/behavior/Literal">
+        <eClassifiers xsi:type="ecore:EClass" name="CallTypeLiteral" eSuperTypes="#//kermeta/language/behavior/Literal">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="This expression is a literal representing a Type.&#xA;for example, in &#xA;   Integer.new&#xA;Integer is a type literal representing the type kermeta::standard::Integer"/>
           </eAnnotations>
@@ -375,6 +358,58 @@
               eType="#//kermeta/language/behavior/TypeReference" containment="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Type of the declared variable"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedCall" eSuperTypes="#//kermeta/language/structure/Unresolved #//kermeta/language/behavior/CallExpression #//kermeta/language/structure/TypeContainer">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Any callable expression that is not yet resolved due to ambiguity in the surface syntax.&#xD;&#xA;Possible expression will be&#xD;&#xA;  - CallVariable&#xD;&#xA;  - CallOperation&#xD;&#xA;  - CallSuperOperation&#xD;&#xA;  - CallProperty&#xD;&#xA;  - CallResult&#xD;&#xA;  - CallValue&#xD;&#xA;additionnaly this can be a call to a TypeLiteral."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="usings" upperBound="-1"
+              eType="#//kermeta/language/structure/Using" containment="true">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="List of Using that can be used to complement the indentifer and resolve this call in the case of TypeLiteral and EnumLiteral"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//kermeta/language/behavior/Expression"
+              containment="true">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Target Expression (the owner of the feature)"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//kermeta/language/structure/Boolean">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Tells whether this CallFeature represents a call to @pre in a postcondition"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="targetParent" eType="#//kermeta/language/structure/Type">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="In the case of a pointed parent, the Call will infer the feature from the parent instead of infering from self."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="generics" upperBound="-1"
+              eType="#//kermeta/language/structure/Type" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallOperation" eSuperTypes="#//kermeta/language/behavior/CallFeature">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation"
+              eType="#//kermeta/language/structure/Operation">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="The method which will be executed (operation case)&#xA;and the result value passed to the caller"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallProperty" eSuperTypes="#//kermeta/language/behavior/CallFeature">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//kermeta/language/structure/Property">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="The object which will be returned (property case)"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallEnumLiteral" eSuperTypes="#//kermeta/language/behavior/CallExpression">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral"
+              eType="#//kermeta/language/structure/EnumerationLiteral">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="To be written"/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
@@ -869,6 +904,11 @@
               eOpposite="#//kermeta/language/structure/Operation/owningClass">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Operations owned by this ClassDefinition."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSingleton" eType="#//kermeta/language/structure/Boolean">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Boolean stating whether the ClassDefinition is a singleton. &#xD;&#xA;&#xD;&#xA;Note: not sure is this is the right place, maybe it can be generalized to other TypeDefinition ?"/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>

@@ -40,12 +40,6 @@
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallFeature">
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallFeature/target"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/behavior/CallFeature/isAtpre"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallFeature/staticProperty"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallFeature/staticOperation"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallFeature/staticEnumLiteral"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallSuperOperation"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallResult"/>
@@ -88,8 +82,8 @@
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/BooleanLiteral">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/behavior/BooleanLiteral/value"/>
           </genClasses>
-          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/TypeLiteral">
-            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/TypeLiteral/typeref"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallTypeLiteral">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallTypeLiteral/typeref"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/VoidLiteral"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/Loop">
@@ -102,6 +96,26 @@
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/VariableDecl/initialization"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/behavior/VariableDecl/identifier"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/VariableDecl/type"/>
+          </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/UnresolvedCall">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/usings"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/target"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/isAtpre"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/targetParent"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/generics"/>
+          </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallOperation">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallOperation/staticOperation"/>
+          </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallProperty">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallProperty/staticProperty"/>
+          </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallEnumLiteral">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallEnumLiteral/staticEnumLiteral"/>
           </genClasses>
         </nestedGenPackages>
         <nestedGenPackages prefix="Structure" basePackage="org.kermeta.language" disposableProviderFactory="true"
@@ -233,6 +247,7 @@
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/ClassDefinition/isAbstract"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedOperation"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/ClassDefinition/isSingleton"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/ModelingUnit">
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ModelingUnit/packages"/>

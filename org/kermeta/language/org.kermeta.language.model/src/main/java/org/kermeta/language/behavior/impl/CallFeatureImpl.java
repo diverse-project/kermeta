@@ -31,9 +31,6 @@ import org.kermeta.language.structure.Property;
  * <ul>
  *   <li>{@link org.kermeta.language.behavior.impl.CallFeatureImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.impl.CallFeatureImpl#getIsAtpre <em>Is Atpre</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.impl.CallFeatureImpl#getStaticProperty <em>Static Property</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.impl.CallFeatureImpl#getStaticOperation <em>Static Operation</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.impl.CallFeatureImpl#getStaticEnumLiteral <em>Static Enum Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,36 +66,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @ordered
 	 */
 	protected Boolean isAtpre = IS_ATPRE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getStaticProperty() <em>Static Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStaticProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property staticProperty;
-
-	/**
-	 * The cached value of the '{@link #getStaticOperation() <em>Static Operation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStaticOperation()
-	 * @generated
-	 * @ordered
-	 */
-	protected Operation staticOperation;
-
-	/**
-	 * The cached value of the '{@link #getStaticEnumLiteral() <em>Static Enum Literal</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStaticEnumLiteral()
-	 * @generated
-	 * @ordered
-	 */
-	protected EnumerationLiteral staticEnumLiteral;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,120 +155,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property getStaticProperty() {
-		if (staticProperty != null && staticProperty.eIsProxy()) {
-			InternalEObject oldStaticProperty = (InternalEObject)staticProperty;
-			staticProperty = (Property)eResolveProxy(oldStaticProperty);
-			if (staticProperty != oldStaticProperty) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY, oldStaticProperty, staticProperty));
-			}
-		}
-		return staticProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property basicGetStaticProperty() {
-		return staticProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStaticProperty(Property newStaticProperty) {
-		Property oldStaticProperty = staticProperty;
-		staticProperty = newStaticProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY, oldStaticProperty, staticProperty));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation getStaticOperation() {
-		if (staticOperation != null && staticOperation.eIsProxy()) {
-			InternalEObject oldStaticOperation = (InternalEObject)staticOperation;
-			staticOperation = (Operation)eResolveProxy(oldStaticOperation);
-			if (staticOperation != oldStaticOperation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_OPERATION, oldStaticOperation, staticOperation));
-			}
-		}
-		return staticOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation basicGetStaticOperation() {
-		return staticOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStaticOperation(Operation newStaticOperation) {
-		Operation oldStaticOperation = staticOperation;
-		staticOperation = newStaticOperation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__STATIC_OPERATION, oldStaticOperation, staticOperation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnumerationLiteral getStaticEnumLiteral() {
-		if (staticEnumLiteral != null && staticEnumLiteral.eIsProxy()) {
-			InternalEObject oldStaticEnumLiteral = (InternalEObject)staticEnumLiteral;
-			staticEnumLiteral = (EnumerationLiteral)eResolveProxy(oldStaticEnumLiteral);
-			if (staticEnumLiteral != oldStaticEnumLiteral) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL, oldStaticEnumLiteral, staticEnumLiteral));
-			}
-		}
-		return staticEnumLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnumerationLiteral basicGetStaticEnumLiteral() {
-		return staticEnumLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStaticEnumLiteral(EnumerationLiteral newStaticEnumLiteral) {
-		EnumerationLiteral oldStaticEnumLiteral = staticEnumLiteral;
-		staticEnumLiteral = newStaticEnumLiteral;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL, oldStaticEnumLiteral, staticEnumLiteral));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -323,15 +176,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				return getTarget();
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
 				return getIsAtpre();
-			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
-				if (resolve) return getStaticProperty();
-				return basicGetStaticProperty();
-			case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
-				if (resolve) return getStaticOperation();
-				return basicGetStaticOperation();
-			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
-				if (resolve) return getStaticEnumLiteral();
-				return basicGetStaticEnumLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -349,15 +193,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				return;
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
 				setIsAtpre((Boolean)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
-				setStaticProperty((Property)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
-				setStaticOperation((Operation)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
-				setStaticEnumLiteral((EnumerationLiteral)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -377,15 +212,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
 				setIsAtpre(IS_ATPRE_EDEFAULT);
 				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
-				setStaticProperty((Property)null);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
-				setStaticOperation((Operation)null);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
-				setStaticEnumLiteral((EnumerationLiteral)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -402,12 +228,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				return target != null;
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
 				return IS_ATPRE_EDEFAULT == null ? isAtpre != null : !IS_ATPRE_EDEFAULT.equals(isAtpre);
-			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
-				return staticProperty != null;
-			case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
-				return staticOperation != null;
-			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
-				return staticEnumLiteral != null;
 		}
 		return super.eIsSet(featureID);
 	}

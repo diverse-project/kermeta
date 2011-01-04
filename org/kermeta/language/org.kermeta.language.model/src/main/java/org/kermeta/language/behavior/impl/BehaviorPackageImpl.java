@@ -26,10 +26,14 @@ import org.kermeta.language.behavior.BehaviorFactory;
 import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.Block;
 import org.kermeta.language.behavior.BooleanLiteral;
+import org.kermeta.language.behavior.CallEnumLiteral;
 import org.kermeta.language.behavior.CallExpression;
 import org.kermeta.language.behavior.CallFeature;
+import org.kermeta.language.behavior.CallOperation;
+import org.kermeta.language.behavior.CallProperty;
 import org.kermeta.language.behavior.CallResult;
 import org.kermeta.language.behavior.CallSuperOperation;
+import org.kermeta.language.behavior.CallTypeLiteral;
 import org.kermeta.language.behavior.CallValue;
 import org.kermeta.language.behavior.CallVariable;
 import org.kermeta.language.behavior.Conditional;
@@ -45,8 +49,8 @@ import org.kermeta.language.behavior.Raise;
 import org.kermeta.language.behavior.Rescue;
 import org.kermeta.language.behavior.SelfExpression;
 import org.kermeta.language.behavior.StringLiteral;
-import org.kermeta.language.behavior.TypeLiteral;
 import org.kermeta.language.behavior.TypeReference;
+import org.kermeta.language.behavior.UnresolvedCall;
 import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.behavior.VoidLiteral;
 
@@ -215,7 +219,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeLiteralEClass = null;
+	private EClass callTypeLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,6 +248,34 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * @generated
 	 */
 	private EClass variableDeclEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass callOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass callPropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass callEnumLiteralEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -480,33 +512,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 */
 	public EAttribute getCallFeature_IsAtpre() {
 		return (EAttribute)callFeatureEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCallFeature_StaticProperty() {
-		return (EReference)callFeatureEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCallFeature_StaticOperation() {
-		return (EReference)callFeatureEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCallFeature_StaticEnumLiteral() {
-		return (EReference)callFeatureEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -802,8 +807,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypeLiteral() {
-		return typeLiteralEClass;
+	public EClass getCallTypeLiteral() {
+		return callTypeLiteralEClass;
 	}
 
 	/**
@@ -811,8 +816,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeLiteral_Typeref() {
-		return (EReference)typeLiteralEClass.getEStructuralFeatures().get(0);
+	public EReference getCallTypeLiteral_Typeref() {
+		return (EReference)callTypeLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -910,6 +915,114 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnresolvedCall() {
+		return unresolvedCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedCall_Usings() {
+		return (EReference)unresolvedCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedCall_Target() {
+		return (EReference)unresolvedCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnresolvedCall_IsAtpre() {
+		return (EAttribute)unresolvedCallEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedCall_TargetParent() {
+		return (EReference)unresolvedCallEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedCall_Generics() {
+		return (EReference)unresolvedCallEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCallOperation() {
+		return callOperationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallOperation_StaticOperation() {
+		return (EReference)callOperationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCallProperty() {
+		return callPropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallProperty_StaticProperty() {
+		return (EReference)callPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCallEnumLiteral() {
+		return callEnumLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallEnumLiteral_StaticEnumLiteral() {
+		return (EReference)callEnumLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BehaviorFactory getBehaviorFactory() {
 		return (BehaviorFactory)getEFactoryInstance();
 	}
@@ -956,9 +1069,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		callFeatureEClass = createEClass(CALL_FEATURE);
 		createEReference(callFeatureEClass, CALL_FEATURE__TARGET);
 		createEAttribute(callFeatureEClass, CALL_FEATURE__IS_ATPRE);
-		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_PROPERTY);
-		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_OPERATION);
-		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_ENUM_LITERAL);
 
 		callSuperOperationEClass = createEClass(CALL_SUPER_OPERATION);
 
@@ -1007,8 +1117,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
 		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
 
-		typeLiteralEClass = createEClass(TYPE_LITERAL);
-		createEReference(typeLiteralEClass, TYPE_LITERAL__TYPEREF);
+		callTypeLiteralEClass = createEClass(CALL_TYPE_LITERAL);
+		createEReference(callTypeLiteralEClass, CALL_TYPE_LITERAL__TYPEREF);
 
 		voidLiteralEClass = createEClass(VOID_LITERAL);
 
@@ -1023,6 +1133,22 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		createEReference(variableDeclEClass, VARIABLE_DECL__INITIALIZATION);
 		createEAttribute(variableDeclEClass, VARIABLE_DECL__IDENTIFIER);
 		createEReference(variableDeclEClass, VARIABLE_DECL__TYPE);
+
+		unresolvedCallEClass = createEClass(UNRESOLVED_CALL);
+		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__USINGS);
+		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__TARGET);
+		createEAttribute(unresolvedCallEClass, UNRESOLVED_CALL__IS_ATPRE);
+		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__TARGET_PARENT);
+		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__GENERICS);
+
+		callOperationEClass = createEClass(CALL_OPERATION);
+		createEReference(callOperationEClass, CALL_OPERATION__STATIC_OPERATION);
+
+		callPropertyEClass = createEClass(CALL_PROPERTY);
+		createEReference(callPropertyEClass, CALL_PROPERTY__STATIC_PROPERTY);
+
+		callEnumLiteralEClass = createEClass(CALL_ENUM_LITERAL);
+		createEReference(callEnumLiteralEClass, CALL_ENUM_LITERAL__STATIC_ENUM_LITERAL);
 	}
 
 	/**
@@ -1063,7 +1189,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		blockEClass.getESuperTypes().add(this.getExpression());
 		callVariableEClass.getESuperTypes().add(this.getCallExpression());
 		callFeatureEClass.getESuperTypes().add(this.getCallExpression());
-		callSuperOperationEClass.getESuperTypes().add(this.getCallExpression());
+		callSuperOperationEClass.getESuperTypes().add(this.getCallOperation());
 		callResultEClass.getESuperTypes().add(this.getCallVariable());
 		callValueEClass.getESuperTypes().add(this.getCallExpression());
 		conditionalEClass.getESuperTypes().add(this.getExpression());
@@ -1078,11 +1204,17 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
-		typeLiteralEClass.getESuperTypes().add(this.getLiteral());
+		callTypeLiteralEClass.getESuperTypes().add(this.getLiteral());
 		voidLiteralEClass.getESuperTypes().add(this.getLiteral());
 		loopEClass.getESuperTypes().add(this.getExpression());
 		selfExpressionEClass.getESuperTypes().add(this.getExpression());
 		variableDeclEClass.getESuperTypes().add(this.getExpression());
+		unresolvedCallEClass.getESuperTypes().add(theStructurePackage.getUnresolved());
+		unresolvedCallEClass.getESuperTypes().add(this.getCallExpression());
+		unresolvedCallEClass.getESuperTypes().add(theStructurePackage.getTypeContainer());
+		callOperationEClass.getESuperTypes().add(this.getCallFeature());
+		callPropertyEClass.getESuperTypes().add(this.getCallFeature());
+		callEnumLiteralEClass.getESuperTypes().add(this.getCallExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1108,9 +1240,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEClass(callFeatureEClass, CallFeature.class, "CallFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallFeature_Target(), this.getExpression(), null, "target", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCallFeature_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallFeature_StaticProperty(), theStructurePackage.getProperty(), null, "staticProperty", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallFeature_StaticOperation(), theStructurePackage.getOperation(), null, "staticOperation", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallFeature_StaticEnumLiteral(), theStructurePackage.getEnumerationLiteral(), null, "staticEnumLiteral", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callSuperOperationEClass, CallSuperOperation.class, "CallSuperOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1159,8 +1288,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_Value(), theStructurePackage.getBoolean(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeLiteralEClass, TypeLiteral.class, "TypeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeLiteral_Typeref(), this.getTypeReference(), null, "typeref", null, 1, 1, TypeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(callTypeLiteralEClass, CallTypeLiteral.class, "CallTypeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallTypeLiteral_Typeref(), this.getTypeReference(), null, "typeref", null, 1, 1, CallTypeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(voidLiteralEClass, VoidLiteral.class, "VoidLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1175,6 +1304,22 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEReference(getVariableDecl_Initialization(), this.getExpression(), null, "initialization", null, 0, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDecl_Identifier(), theStructurePackage.getString(), "identifier", null, 0, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDecl_Type(), this.getTypeReference(), null, "type", null, 1, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unresolvedCallEClass, UnresolvedCall.class, "UnresolvedCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnresolvedCall_Usings(), theStructurePackage.getUsing(), null, "usings", null, 0, -1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnresolvedCall_Target(), this.getExpression(), null, "target", null, 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedCall_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnresolvedCall_TargetParent(), theStructurePackage.getType(), null, "targetParent", null, 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnresolvedCall_Generics(), theStructurePackage.getType(), null, "generics", null, 0, -1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(callOperationEClass, CallOperation.class, "CallOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallOperation_StaticOperation(), theStructurePackage.getOperation(), null, "staticOperation", null, 0, 1, CallOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(callPropertyEClass, CallProperty.class, "CallProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallProperty_StaticProperty(), theStructurePackage.getProperty(), null, "staticProperty", null, 0, 1, CallProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(callEnumLiteralEClass, CallEnumLiteral.class, "CallEnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallEnumLiteral_StaticEnumLiteral(), theStructurePackage.getEnumerationLiteral(), null, "staticEnumLiteral", null, 0, 1, CallEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //BehaviorPackageImpl

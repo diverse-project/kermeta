@@ -26,9 +26,6 @@ import org.kermeta.language.structure.Property;
  * <ul>
  *   <li>{@link org.kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.CallFeature#getIsAtpre <em>Is Atpre</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}</li>
- *   <li>{@link org.kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,81 +83,5 @@ public interface CallFeature extends CallExpression {
 	 * @generated
 	 */
 	void setIsAtpre(Boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Static Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The object which will be returned (property case)
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Static Property</em>' reference.
-	 * @see #setStaticProperty(Property)
-	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticProperty()
-	 * @model
-	 * @generated
-	 */
-	Property getStaticProperty();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Static Property</em>' reference.
-	 * @see #getStaticProperty()
-	 * @generated
-	 */
-	void setStaticProperty(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Static Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The method which will be executed (operation case)
-	 * and the result value passed to the caller
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Static Operation</em>' reference.
-	 * @see #setStaticOperation(Operation)
-	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticOperation()
-	 * @model
-	 * @generated
-	 */
-	Operation getStaticOperation();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Static Operation</em>' reference.
-	 * @see #getStaticOperation()
-	 * @generated
-	 */
-	void setStaticOperation(Operation value);
-
-	/**
-	 * Returns the value of the '<em><b>Static Enum Literal</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * To be written
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Static Enum Literal</em>' reference.
-	 * @see #setStaticEnumLiteral(EnumerationLiteral)
-	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallFeature_StaticEnumLiteral()
-	 * @model
-	 * @generated
-	 */
-	EnumerationLiteral getStaticEnumLiteral();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Static Enum Literal</em>' reference.
-	 * @see #getStaticEnumLiteral()
-	 * @generated
-	 */
-	void setStaticEnumLiteral(EnumerationLiteral value);
 
 } // CallFeature

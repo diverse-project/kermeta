@@ -78,11 +78,15 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 			case BehaviorPackage.INTEGER_LITERAL: return createIntegerLiteral();
 			case BehaviorPackage.STRING_LITERAL: return createStringLiteral();
 			case BehaviorPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-			case BehaviorPackage.TYPE_LITERAL: return createTypeLiteral();
+			case BehaviorPackage.CALL_TYPE_LITERAL: return createCallTypeLiteral();
 			case BehaviorPackage.VOID_LITERAL: return createVoidLiteral();
 			case BehaviorPackage.LOOP: return createLoop();
 			case BehaviorPackage.SELF_EXPRESSION: return createSelfExpression();
 			case BehaviorPackage.VARIABLE_DECL: return createVariableDecl();
+			case BehaviorPackage.UNRESOLVED_CALL: return createUnresolvedCall();
+			case BehaviorPackage.CALL_OPERATION: return createCallOperation();
+			case BehaviorPackage.CALL_PROPERTY: return createCallProperty();
+			case BehaviorPackage.CALL_ENUM_LITERAL: return createCallEnumLiteral();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -273,9 +277,9 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeLiteral createTypeLiteral() {
-		TypeLiteralImpl typeLiteral = new TypeLiteralImpl();
-		return typeLiteral;
+	public CallTypeLiteral createCallTypeLiteral() {
+		CallTypeLiteralImpl callTypeLiteral = new CallTypeLiteralImpl();
+		return callTypeLiteral;
 	}
 
 	/**
@@ -316,6 +320,46 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public VariableDecl createVariableDecl() {
 		VariableDeclImpl variableDecl = new VariableDeclImpl();
 		return variableDecl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedCall createUnresolvedCall() {
+		UnresolvedCallImpl unresolvedCall = new UnresolvedCallImpl();
+		return unresolvedCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallOperation createCallOperation() {
+		CallOperationImpl callOperation = new CallOperationImpl();
+		return callOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallProperty createCallProperty() {
+		CallPropertyImpl callProperty = new CallPropertyImpl();
+		return callProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallEnumLiteral createCallEnumLiteral() {
+		CallEnumLiteralImpl callEnumLiteral = new CallEnumLiteralImpl();
+		return callEnumLiteral;
 	}
 
 	/**

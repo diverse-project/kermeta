@@ -33,6 +33,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.ClassDefinition#getIsSingleton <em>Is Singleton</em>}</li>
  * </ul>
  * </p>
  *
@@ -117,5 +118,32 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();
+
+	/**
+	 * Returns the value of the '<em><b>Is Singleton</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Boolean stating whether the ClassDefinition is a singleton. 
+	 * 
+	 * Note: not sure is this is the right place, maybe it can be generalized to other TypeDefinition ?
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Singleton</em>' attribute.
+	 * @see #setIsSingleton(Boolean)
+	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_IsSingleton()
+	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	Boolean getIsSingleton();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.ClassDefinition#getIsSingleton <em>Is Singleton</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Singleton</em>' attribute.
+	 * @see #getIsSingleton()
+	 * @generated
+	 */
+	void setIsSingleton(Boolean value);
 
 } // ClassDefinition

@@ -20,7 +20,7 @@ import org.kermeta.language.behavior.CallSuperOperation;
  *
  * @generated
  */
-public class CallSuperOperationImpl extends CallExpressionImpl implements CallSuperOperation {
+public class CallSuperOperationImpl extends CallOperationImpl implements CallSuperOperation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -2296,13 +2296,22 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Singleton</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__IS_SINGLETON = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Class Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
+	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
@@ -4810,6 +4819,17 @@ public interface StructurePackage extends EPackage {
 	EReference getClassDefinition_OwnedOperation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.ClassDefinition#getIsSingleton <em>Is Singleton</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Singleton</em>'.
+	 * @see org.kermeta.language.structure.ClassDefinition#getIsSingleton()
+	 * @see #getClassDefinition()
+	 * @generated
+	 */
+	EAttribute getClassDefinition_IsSingleton();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelingUnit <em>Modeling Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6187,6 +6207,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_DEFINITION__OWNED_OPERATION = eINSTANCE.getClassDefinition_OwnedOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Singleton</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS_DEFINITION__IS_SINGLETON = eINSTANCE.getClassDefinition_IsSingleton();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelingUnitImpl <em>Modeling Unit</em>}' class.

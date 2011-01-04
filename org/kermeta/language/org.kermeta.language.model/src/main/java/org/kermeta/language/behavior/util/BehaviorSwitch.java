@@ -17,6 +17,7 @@ import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypedElement;
+import org.kermeta.language.structure.Unresolved;
 
 /**
  * <!-- begin-user-doc -->
@@ -150,6 +151,8 @@ public class BehaviorSwitch<T> {
 			case BehaviorPackage.CALL_SUPER_OPERATION: {
 				CallSuperOperation callSuperOperation = (CallSuperOperation)theEObject;
 				T result = caseCallSuperOperation(callSuperOperation);
+				if (result == null) result = caseCallOperation(callSuperOperation);
+				if (result == null) result = caseCallFeature(callSuperOperation);
 				if (result == null) result = caseCallExpression(callSuperOperation);
 				if (result == null) result = caseExpression(callSuperOperation);
 				if (result == null) result = caseTypeContainer(callSuperOperation);
@@ -287,13 +290,13 @@ public class BehaviorSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BehaviorPackage.TYPE_LITERAL: {
-				TypeLiteral typeLiteral = (TypeLiteral)theEObject;
-				T result = caseTypeLiteral(typeLiteral);
-				if (result == null) result = caseLiteral(typeLiteral);
-				if (result == null) result = caseExpression(typeLiteral);
-				if (result == null) result = caseTypeContainer(typeLiteral);
-				if (result == null) result = caseObject(typeLiteral);
+			case BehaviorPackage.CALL_TYPE_LITERAL: {
+				CallTypeLiteral callTypeLiteral = (CallTypeLiteral)theEObject;
+				T result = caseCallTypeLiteral(callTypeLiteral);
+				if (result == null) result = caseLiteral(callTypeLiteral);
+				if (result == null) result = caseExpression(callTypeLiteral);
+				if (result == null) result = caseTypeContainer(callTypeLiteral);
+				if (result == null) result = caseObject(callTypeLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -331,6 +334,49 @@ public class BehaviorSwitch<T> {
 				if (result == null) result = caseExpression(variableDecl);
 				if (result == null) result = caseTypeContainer(variableDecl);
 				if (result == null) result = caseObject(variableDecl);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.UNRESOLVED_CALL: {
+				UnresolvedCall unresolvedCall = (UnresolvedCall)theEObject;
+				T result = caseUnresolvedCall(unresolvedCall);
+				if (result == null) result = caseUnresolved(unresolvedCall);
+				if (result == null) result = caseCallExpression(unresolvedCall);
+				if (result == null) result = caseExpression(unresolvedCall);
+				if (result == null) result = caseTypeContainer(unresolvedCall);
+				if (result == null) result = caseObject(unresolvedCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.CALL_OPERATION: {
+				CallOperation callOperation = (CallOperation)theEObject;
+				T result = caseCallOperation(callOperation);
+				if (result == null) result = caseCallFeature(callOperation);
+				if (result == null) result = caseCallExpression(callOperation);
+				if (result == null) result = caseExpression(callOperation);
+				if (result == null) result = caseTypeContainer(callOperation);
+				if (result == null) result = caseObject(callOperation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.CALL_PROPERTY: {
+				CallProperty callProperty = (CallProperty)theEObject;
+				T result = caseCallProperty(callProperty);
+				if (result == null) result = caseCallFeature(callProperty);
+				if (result == null) result = caseCallExpression(callProperty);
+				if (result == null) result = caseExpression(callProperty);
+				if (result == null) result = caseTypeContainer(callProperty);
+				if (result == null) result = caseObject(callProperty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BehaviorPackage.CALL_ENUM_LITERAL: {
+				CallEnumLiteral callEnumLiteral = (CallEnumLiteral)theEObject;
+				T result = caseCallEnumLiteral(callEnumLiteral);
+				if (result == null) result = caseCallExpression(callEnumLiteral);
+				if (result == null) result = caseExpression(callEnumLiteral);
+				if (result == null) result = caseTypeContainer(callEnumLiteral);
+				if (result == null) result = caseObject(callEnumLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -654,17 +700,17 @@ public class BehaviorSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Call Type Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Call Type Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeLiteral(TypeLiteral object) {
+	public T caseCallTypeLiteral(CallTypeLiteral object) {
 		return null;
 	}
 
@@ -725,6 +771,66 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseVariableDecl(VariableDecl object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedCall(UnresolvedCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallOperation(CallOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallProperty(CallProperty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Enum Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallEnumLiteral(CallEnumLiteral object) {
 		return null;
 	}
 
@@ -800,6 +906,21 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseMultiplicityElement(MultiplicityElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolved(Unresolved object) {
 		return null;
 	}
 

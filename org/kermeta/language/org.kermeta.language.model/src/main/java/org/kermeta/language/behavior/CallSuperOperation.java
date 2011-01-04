@@ -13,7 +13,7 @@ package org.kermeta.language.behavior;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This class represents a call to the operataion in the parent class
+ * This class represents a call to the operation in a parent class. 
  * 	In the following example, the type of super(element) is CallSuperOperation:
  * 
  * class ParentClass {
@@ -34,5 +34,5 @@ package org.kermeta.language.behavior;
  * @model
  * @generated
  */
-public interface CallSuperOperation extends CallExpression {
+public interface CallSuperOperation extends CallOperation {
 } // CallSuperOperation

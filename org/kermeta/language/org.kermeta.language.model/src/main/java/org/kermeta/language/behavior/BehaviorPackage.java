@@ -598,13 +598,113 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Static Property</b></em>' reference.
+	 * The number of structural features of the '<em>Call Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 2;
+	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallOperationImpl <em>Call Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.behavior.impl.CallOperationImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallOperation()
+	 * @generated
+	 */
+	int CALL_OPERATION = 27;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__KTAG = CALL_FEATURE__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__KOWNED_TAGS = CALL_FEATURE__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__KTYPE = CALL_FEATURE__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__CONTAINED_TYPE = CALL_FEATURE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__STATIC_TYPE = CALL_FEATURE__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__PARAMETERS = CALL_FEATURE__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__NAME = CALL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__STATIC_TYPE_VARIABLE_BINDINGS = CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__TARGET = CALL_FEATURE__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION__IS_ATPRE = CALL_FEATURE__IS_ATPRE;
 
 	/**
 	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
@@ -613,25 +713,16 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 3;
+	int CALL_OPERATION__STATIC_OPERATION = CALL_FEATURE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
+	 * The number of structural features of the '<em>Call Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Call Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 5;
+	int CALL_OPERATION_FEATURE_COUNT = CALL_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
@@ -650,7 +741,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__KTAG = CALL_EXPRESSION__KTAG;
+	int CALL_SUPER_OPERATION__KTAG = CALL_OPERATION__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -659,7 +750,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
+	int CALL_SUPER_OPERATION__KOWNED_TAGS = CALL_OPERATION__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -668,7 +759,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__KTYPE = CALL_EXPRESSION__KTYPE;
+	int CALL_SUPER_OPERATION__KTYPE = CALL_OPERATION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -677,7 +768,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
+	int CALL_SUPER_OPERATION__CONTAINED_TYPE = CALL_OPERATION__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -686,7 +777,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
+	int CALL_SUPER_OPERATION__STATIC_TYPE = CALL_OPERATION__STATIC_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -695,7 +786,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
+	int CALL_SUPER_OPERATION__PARAMETERS = CALL_OPERATION__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -704,7 +795,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__NAME = CALL_EXPRESSION__NAME;
+	int CALL_SUPER_OPERATION__NAME = CALL_OPERATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
@@ -713,7 +804,34 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
+	int CALL_SUPER_OPERATION__STATIC_TYPE_VARIABLE_BINDINGS = CALL_OPERATION__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__TARGET = CALL_OPERATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__IS_ATPRE = CALL_OPERATION__IS_ATPRE;
+
+	/**
+	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__STATIC_OPERATION = CALL_OPERATION__STATIC_OPERATION;
 
 	/**
 	 * The number of structural features of the '<em>Call Super Operation</em>' class.
@@ -722,7 +840,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 0;
+	int CALL_SUPER_OPERATION_FEATURE_COUNT = CALL_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
@@ -1846,14 +1964,14 @@ public interface BehaviorPackage extends EPackage {
 	int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.TypeLiteralImpl <em>Type Literal</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallTypeLiteralImpl <em>Call Type Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.behavior.impl.TypeLiteralImpl
-	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getTypeLiteral()
+	 * @see org.kermeta.language.behavior.impl.CallTypeLiteralImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallTypeLiteral()
 	 * @generated
 	 */
-	int TYPE_LITERAL = 21;
+	int CALL_TYPE_LITERAL = 21;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -1862,7 +1980,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__KTAG = LITERAL__KTAG;
+	int CALL_TYPE_LITERAL__KTAG = LITERAL__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -1871,7 +1989,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
+	int CALL_TYPE_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -1880,7 +1998,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__KTYPE = LITERAL__KTYPE;
+	int CALL_TYPE_LITERAL__KTYPE = LITERAL__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1889,7 +2007,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__CONTAINED_TYPE = LITERAL__CONTAINED_TYPE;
+	int CALL_TYPE_LITERAL__CONTAINED_TYPE = LITERAL__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1898,7 +2016,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__STATIC_TYPE = LITERAL__STATIC_TYPE;
+	int CALL_TYPE_LITERAL__STATIC_TYPE = LITERAL__STATIC_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Typeref</b></em>' containment reference.
@@ -1907,16 +2025,16 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__TYPEREF = LITERAL_FEATURE_COUNT + 0;
+	int CALL_TYPE_LITERAL__TYPEREF = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Literal</em>' class.
+	 * The number of structural features of the '<em>Call Type Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+	int CALL_TYPE_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.VoidLiteralImpl <em>Void Literal</em>}' class.
@@ -2230,6 +2348,360 @@ public interface BehaviorPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl <em>Unresolved Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.behavior.impl.UnresolvedCallImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getUnresolvedCall()
+	 * @generated
+	 */
+	int UNRESOLVED_CALL = 26;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__KTAG = StructurePackage.UNRESOLVED__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__KOWNED_TAGS = StructurePackage.UNRESOLVED__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__KTYPE = StructurePackage.UNRESOLVED__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__CONTAINED_TYPE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__STATIC_TYPE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__PARAMETERS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__NAME = StructurePackage.UNRESOLVED_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__STATIC_TYPE_VARIABLE_BINDINGS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__USINGS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__TARGET = StructurePackage.UNRESOLVED_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__IS_ATPRE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Target Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__TARGET_PARENT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Generics</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__GENERICS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 9;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL_FEATURE_COUNT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 10;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallPropertyImpl <em>Call Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.behavior.impl.CallPropertyImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallProperty()
+	 * @generated
+	 */
+	int CALL_PROPERTY = 28;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__KTAG = CALL_FEATURE__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__KOWNED_TAGS = CALL_FEATURE__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__KTYPE = CALL_FEATURE__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__CONTAINED_TYPE = CALL_FEATURE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__STATIC_TYPE = CALL_FEATURE__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__PARAMETERS = CALL_FEATURE__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__NAME = CALL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__STATIC_TYPE_VARIABLE_BINDINGS = CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__TARGET = CALL_FEATURE__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__IS_ATPRE = CALL_FEATURE__IS_ATPRE;
+
+	/**
+	 * The feature id for the '<em><b>Static Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY__STATIC_PROPERTY = CALL_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Call Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_PROPERTY_FEATURE_COUNT = CALL_FEATURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallEnumLiteralImpl <em>Call Enum Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.behavior.impl.CallEnumLiteralImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallEnumLiteral()
+	 * @generated
+	 */
+	int CALL_ENUM_LITERAL = 29;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__KTAG = CALL_EXPRESSION__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__KTYPE = CALL_EXPRESSION__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__NAME = CALL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Call Enum Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ENUM_LITERAL_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2420,39 +2892,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCallFeature_IsAtpre();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Property</em>'.
-	 * @see org.kermeta.language.behavior.CallFeature#getStaticProperty()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticProperty();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Operation</em>'.
-	 * @see org.kermeta.language.behavior.CallFeature#getStaticOperation()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticOperation();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
-	 * @see org.kermeta.language.behavior.CallFeature#getStaticEnumLiteral()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticEnumLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallSuperOperation <em>Call Super Operation</em>}'.
@@ -2792,25 +3231,25 @@ public interface BehaviorPackage extends EPackage {
 	EAttribute getBooleanLiteral_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.behavior.TypeLiteral <em>Type Literal</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallTypeLiteral <em>Call Type Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Literal</em>'.
-	 * @see org.kermeta.language.behavior.TypeLiteral
+	 * @return the meta object for class '<em>Call Type Literal</em>'.
+	 * @see org.kermeta.language.behavior.CallTypeLiteral
 	 * @generated
 	 */
-	EClass getTypeLiteral();
+	EClass getCallTypeLiteral();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.language.behavior.TypeLiteral#getTyperef <em>Typeref</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.kermeta.language.behavior.CallTypeLiteral#getTyperef <em>Typeref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Typeref</em>'.
-	 * @see org.kermeta.language.behavior.TypeLiteral#getTyperef()
-	 * @see #getTypeLiteral()
+	 * @see org.kermeta.language.behavior.CallTypeLiteral#getTyperef()
+	 * @see #getCallTypeLiteral()
 	 * @generated
 	 */
-	EReference getTypeLiteral_Typeref();
+	EReference getCallTypeLiteral_Typeref();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.VoidLiteral <em>Void Literal</em>}'.
@@ -2917,6 +3356,134 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVariableDecl_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.UnresolvedCall <em>Unresolved Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Call</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall
+	 * @generated
+	 */
+	EClass getUnresolvedCall();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.behavior.UnresolvedCall#getUsings <em>Usings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Usings</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getUsings()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EReference getUnresolvedCall_Usings();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.language.behavior.UnresolvedCall#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getTarget()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EReference getUnresolvedCall_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.behavior.UnresolvedCall#getIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getIsAtpre()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EAttribute getUnresolvedCall_IsAtpre();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.UnresolvedCall#getTargetParent <em>Target Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Parent</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getTargetParent()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EReference getUnresolvedCall_TargetParent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.behavior.UnresolvedCall#getGenerics <em>Generics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Generics</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getGenerics()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EReference getUnresolvedCall_Generics();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallOperation <em>Call Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Operation</em>'.
+	 * @see org.kermeta.language.behavior.CallOperation
+	 * @generated
+	 */
+	EClass getCallOperation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallOperation#getStaticOperation <em>Static Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Operation</em>'.
+	 * @see org.kermeta.language.behavior.CallOperation#getStaticOperation()
+	 * @see #getCallOperation()
+	 * @generated
+	 */
+	EReference getCallOperation_StaticOperation();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallProperty <em>Call Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Property</em>'.
+	 * @see org.kermeta.language.behavior.CallProperty
+	 * @generated
+	 */
+	EClass getCallProperty();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallProperty#getStaticProperty <em>Static Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Property</em>'.
+	 * @see org.kermeta.language.behavior.CallProperty#getStaticProperty()
+	 * @see #getCallProperty()
+	 * @generated
+	 */
+	EReference getCallProperty_StaticProperty();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallEnumLiteral <em>Call Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Enum Literal</em>'.
+	 * @see org.kermeta.language.behavior.CallEnumLiteral
+	 * @generated
+	 */
+	EClass getCallEnumLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallEnumLiteral#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
+	 * @see org.kermeta.language.behavior.CallEnumLiteral#getStaticEnumLiteral()
+	 * @see #getCallEnumLiteral()
+	 * @generated
+	 */
+	EReference getCallEnumLiteral_StaticEnumLiteral();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3095,30 +3662,6 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE.getCallFeature_StaticProperty();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE.getCallFeature_StaticOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE.getCallFeature_StaticEnumLiteral();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
@@ -3407,14 +3950,14 @@ public interface BehaviorPackage extends EPackage {
 		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.TypeLiteralImpl <em>Type Literal</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallTypeLiteralImpl <em>Call Type Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.behavior.impl.TypeLiteralImpl
-		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getTypeLiteral()
+		 * @see org.kermeta.language.behavior.impl.CallTypeLiteralImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallTypeLiteral()
 		 * @generated
 		 */
-		EClass TYPE_LITERAL = eINSTANCE.getTypeLiteral();
+		EClass CALL_TYPE_LITERAL = eINSTANCE.getCallTypeLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Typeref</b></em>' containment reference feature.
@@ -3422,7 +3965,7 @@ public interface BehaviorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_LITERAL__TYPEREF = eINSTANCE.getTypeLiteral_Typeref();
+		EReference CALL_TYPE_LITERAL__TYPEREF = eINSTANCE.getCallTypeLiteral_Typeref();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.VoidLiteralImpl <em>Void Literal</em>}' class.
@@ -3511,6 +4054,110 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_DECL__TYPE = eINSTANCE.getVariableDecl_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl <em>Unresolved Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.behavior.impl.UnresolvedCallImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getUnresolvedCall()
+		 * @generated
+		 */
+		EClass UNRESOLVED_CALL = eINSTANCE.getUnresolvedCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Usings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_CALL__USINGS = eINSTANCE.getUnresolvedCall_Usings();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_CALL__TARGET = eINSTANCE.getUnresolvedCall_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNRESOLVED_CALL__IS_ATPRE = eINSTANCE.getUnresolvedCall_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Parent</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_CALL__TARGET_PARENT = eINSTANCE.getUnresolvedCall_TargetParent();
+
+		/**
+		 * The meta object literal for the '<em><b>Generics</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_CALL__GENERICS = eINSTANCE.getUnresolvedCall_Generics();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallOperationImpl <em>Call Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.behavior.impl.CallOperationImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallOperation()
+		 * @generated
+		 */
+		EClass CALL_OPERATION = eINSTANCE.getCallOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_OPERATION__STATIC_OPERATION = eINSTANCE.getCallOperation_StaticOperation();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallPropertyImpl <em>Call Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.behavior.impl.CallPropertyImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallProperty()
+		 * @generated
+		 */
+		EClass CALL_PROPERTY = eINSTANCE.getCallProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_PROPERTY__STATIC_PROPERTY = eINSTANCE.getCallProperty_StaticProperty();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallEnumLiteralImpl <em>Call Enum Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.behavior.impl.CallEnumLiteralImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallEnumLiteral()
+		 * @generated
+		 */
+		EClass CALL_ENUM_LITERAL = eINSTANCE.getCallEnumLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_ENUM_LITERAL__STATIC_ENUM_LITERAL = eINSTANCE.getCallEnumLiteral_StaticEnumLiteral();
 
 	}
 

@@ -19,6 +19,7 @@ import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypedElement;
+import org.kermeta.language.structure.Unresolved;
 
 /**
  * <!-- begin-user-doc -->
@@ -161,8 +162,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 				return createBooleanLiteralAdapter();
 			}
 			@Override
-			public Adapter caseTypeLiteral(TypeLiteral object) {
-				return createTypeLiteralAdapter();
+			public Adapter caseCallTypeLiteral(CallTypeLiteral object) {
+				return createCallTypeLiteralAdapter();
 			}
 			@Override
 			public Adapter caseVoidLiteral(VoidLiteral object) {
@@ -179,6 +180,22 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableDecl(VariableDecl object) {
 				return createVariableDeclAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedCall(UnresolvedCall object) {
+				return createUnresolvedCallAdapter();
+			}
+			@Override
+			public Adapter caseCallOperation(CallOperation object) {
+				return createCallOperationAdapter();
+			}
+			@Override
+			public Adapter caseCallProperty(CallProperty object) {
+				return createCallPropertyAdapter();
+			}
+			@Override
+			public Adapter caseCallEnumLiteral(CallEnumLiteral object) {
+				return createCallEnumLiteralAdapter();
 			}
 			@Override
 			public Adapter caseObject(org.kermeta.language.structure.Object object) {
@@ -199,6 +216,10 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
+			}
+			@Override
+			public Adapter caseUnresolved(Unresolved object) {
+				return createUnresolvedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -515,16 +536,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.TypeLiteral <em>Type Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.CallTypeLiteral <em>Call Type Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.behavior.TypeLiteral
+	 * @see org.kermeta.language.behavior.CallTypeLiteral
 	 * @generated
 	 */
-	public Adapter createTypeLiteralAdapter() {
+	public Adapter createCallTypeLiteralAdapter() {
 		return null;
 	}
 
@@ -581,6 +602,62 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableDeclAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.UnresolvedCall <em>Unresolved Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.behavior.UnresolvedCall
+	 * @generated
+	 */
+	public Adapter createUnresolvedCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.CallOperation <em>Call Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.behavior.CallOperation
+	 * @generated
+	 */
+	public Adapter createCallOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.CallProperty <em>Call Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.behavior.CallProperty
+	 * @generated
+	 */
+	public Adapter createCallPropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.CallEnumLiteral <em>Call Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.behavior.CallEnumLiteral
+	 * @generated
+	 */
+	public Adapter createCallEnumLiteralAdapter() {
 		return null;
 	}
 
@@ -651,6 +728,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMultiplicityElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Unresolved <em>Unresolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.Unresolved
+	 * @generated
+	 */
+	public Adapter createUnresolvedAdapter() {
 		return null;
 	}
 

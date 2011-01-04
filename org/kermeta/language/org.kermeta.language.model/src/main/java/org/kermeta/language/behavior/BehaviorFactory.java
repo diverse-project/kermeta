@@ -188,13 +188,13 @@ public interface BehaviorFactory extends EFactory {
 	BooleanLiteral createBooleanLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Type Literal</em>'.
+	 * Returns a new object of class '<em>Call Type Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Literal</em>'.
+	 * @return a new object of class '<em>Call Type Literal</em>'.
 	 * @generated
 	 */
-	TypeLiteral createTypeLiteral();
+	CallTypeLiteral createCallTypeLiteral();
 
 	/**
 	 * Returns a new object of class '<em>Void Literal</em>'.
@@ -231,6 +231,42 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	VariableDecl createVariableDecl();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Call</em>'.
+	 * @generated
+	 */
+	UnresolvedCall createUnresolvedCall();
+
+	/**
+	 * Returns a new object of class '<em>Call Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Operation</em>'.
+	 * @generated
+	 */
+	CallOperation createCallOperation();
+
+	/**
+	 * Returns a new object of class '<em>Call Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Property</em>'.
+	 * @generated
+	 */
+	CallProperty createCallProperty();
+
+	/**
+	 * Returns a new object of class '<em>Call Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Enum Literal</em>'.
+	 * @generated
+	 */
+	CallEnumLiteral createCallEnumLiteral();
 
 	/**
 	 * Returns the package supported by this factory.
