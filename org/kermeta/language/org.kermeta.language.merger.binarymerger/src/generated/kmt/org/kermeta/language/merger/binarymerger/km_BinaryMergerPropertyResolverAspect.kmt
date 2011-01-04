@@ -59,8 +59,8 @@ package kermeta {
 				end
 			}
 
-			aspect class CallSuperOperation inherits org::kermeta::language::behavior::CallExpression {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+			aspect class CallSuperOperation inherits org::kermeta::language::behavior::CallOperation {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallOperation is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
@@ -176,7 +176,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeLiteral inherits org::kermeta::language::behavior::Literal {
+			aspect class CallTypeLiteral inherits org::kermeta::language::behavior::Literal {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Literal is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -206,6 +206,34 @@ package kermeta {
 
 			aspect class VariableDecl inherits org::kermeta::language::behavior::Expression {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::Expression is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedCall inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::behavior::CallExpression, org::kermeta::language::structure::TypeContainer {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallOperation inherits org::kermeta::language::behavior::CallFeature {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallFeature is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallProperty inherits org::kermeta::language::behavior::CallFeature {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallFeature is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class CallEnumLiteral inherits org::kermeta::language::behavior::CallExpression {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end

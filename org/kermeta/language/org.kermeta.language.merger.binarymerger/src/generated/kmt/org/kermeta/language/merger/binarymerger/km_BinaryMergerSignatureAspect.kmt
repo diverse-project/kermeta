@@ -91,7 +91,7 @@ package kermeta {
 			}
 
 			aspect class CallSuperOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
 					var aspectElement : org::kermeta::language::behavior::CallSuperOperation
 					aspectElement ?= aspectElementObj
 					
@@ -280,9 +280,9 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeLiteral {
+			aspect class CallTypeLiteral {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::TypeLiteral
+					var aspectElement : org::kermeta::language::behavior::CallTypeLiteral
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
@@ -343,6 +343,51 @@ package kermeta {
 					if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
 						result := result and self.identifier == aspectElement.identifier
 					end
+				end
+			}
+
+			aspect class UnresolvedCall {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
+					var aspectElement : org::kermeta::language::behavior::UnresolvedCall
+					aspectElement ?= aspectElementObj
+					
+					result := super( aspectElement)
+					if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+						result := result and self.target == aspectElement.target
+					end
+					if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+						result := result and self.isAtpre == aspectElement.isAtpre
+					end
+					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						result := result and self.name == aspectElement.name
+					end
+				end
+			}
+
+			aspect class CallOperation {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					var aspectElement : org::kermeta::language::behavior::CallOperation
+					aspectElement ?= aspectElementObj
+					
+					result := super( aspectElement)
+				end
+			}
+
+			aspect class CallProperty {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					var aspectElement : org::kermeta::language::behavior::CallProperty
+					aspectElement ?= aspectElementObj
+					
+					result := super( aspectElement)
+				end
+			}
+
+			aspect class CallEnumLiteral {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+					var aspectElement : org::kermeta::language::behavior::CallEnumLiteral
+					aspectElement ?= aspectElementObj
+					
+					result := super( aspectElement)
 				end
 			}
 
@@ -676,6 +721,9 @@ package kermeta {
 					result := super( aspectElement)
 					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 						result := result and self.isAbstract == aspectElement.isAbstract
+					end
+					if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
+						result := result and self.isSingleton == aspectElement.isSingleton
 					end
 				end
 			}
