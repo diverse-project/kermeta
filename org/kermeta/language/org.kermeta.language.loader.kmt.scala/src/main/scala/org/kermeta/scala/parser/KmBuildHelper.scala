@@ -74,7 +74,7 @@ object KmBuildHelper {
 
   /**
    * indicates if a UnResolvedType is similar to another one
-   * (recursively drill into the UnresolvedType in Generics)
+   * (recursively drill into the UnresolvedType in Generic for the check)
    */
   def unresolvedTypeMatch( aUnresolvedType : UnresolvedType, bUnresolvedType : UnresolvedType) : Boolean = {
     aUnresolvedType.getTypeIdentifier.equals(bUnresolvedType.getTypeIdentifier) &&

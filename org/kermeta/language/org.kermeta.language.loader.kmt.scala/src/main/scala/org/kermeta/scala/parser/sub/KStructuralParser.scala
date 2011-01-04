@@ -24,18 +24,20 @@ trait KStructuralParser extends KAbstractParser {
   def fExpressionLst : Parser[List[Expression]] = rep(fStatement) ^^ { case list =>
       /* POST PROCESS, LINK CALLFEATURE EACH OTHER */
       var previous : Option[CallFeature] = None
-      var inverstedList : List[Expression] = List()
+      var processedList : List[Expression] = List()
+      // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
+      // recreate a hierachy for Calls that must be nested in the target of another expression
       list.toList.reverse.foreach(p=>{
           p match {
             case cf : CallFeature if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
                 previous match {
-                  case None => previous=Some(cf);inverstedList = cf::inverstedList
+                  case None => previous=Some(cf);processedList = cf::processedList
                   case Some(pe)=> pe.setTarget(cf);previous=Some(cf)
                 }
             }
             case _ @ e =>{
                 previous match {
-                  case None =>inverstedList = e::inverstedList
+                  case None =>processedList = e::processedList
                   case Some(pe)=> pe.setTarget(e);previous=None
                 }
               }
@@ -43,7 +45,7 @@ trait KStructuralParser extends KAbstractParser {
           }
 
         })
-      inverstedList.reverse
+      processedList
   }
   def pExpression : Parser[Expression] = "(" ~> fStatement <~ ")"
 

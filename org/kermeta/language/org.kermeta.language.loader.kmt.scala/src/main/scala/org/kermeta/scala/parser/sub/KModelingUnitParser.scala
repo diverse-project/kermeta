@@ -48,15 +48,17 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
           case _ @ d => println("TODO modeling unit catch some type sub elem="+d)
         }}
       /* USING POST PROCESS */
-      //ADD USING CLONE TO ALL UNRESOLVE TYPE
-      newp.eAllContents.filter(p=> p.isInstanceOf[UnresolvedType]).foreach{ut =>
-        var unr = ut.asInstanceOf[UnresolvedType]
+      //Add Using clone to all UnresolvedType and UnresolvedCall
+      newp.eAllContents.filter(p=> p.isInstanceOf[UnresolvedType] || p.isInstanceOf[UnresolvedCall]).foreach{ut =>
         var localUsings = List() ++ usings.toList //CLONE USING
         localUsings.foreach{lu=>
           var newo =StructureFactory.eINSTANCE.createUsing
           newo.setFromQName(lu.getFromQName)
           newo.setToName(lu.getToName)
-          unr.getUsings.add(newo)
+          ut match {
+            case unresolvedType : UnresolvedType => unresolvedType.getUsings.add(newo)
+            case unresolvedCall : UnresolvedCall => unresolvedCall.getUsings.add(newo)
+          }
         }
       }
       newp

@@ -27,18 +27,18 @@ trait KCallParser extends KAbstractParser {
 
 
   def nCall = "." ~> ident ~ (callFeatureParams?) ^^ { case id ~ params =>
-      var newo = BehaviorFactory.eINSTANCE.createCallFeature
+      var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
       newo.setName(id)
       params match {
-        case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
+        case Some(_ @ par) => for(p <- par) newo.getParameters().add(p)
         case None =>
       }
       newo.setTarget(NESTED_NEEDED())
       newo
   }
 
-  def firstCall : Parser[CallFeature] = packageName ~ (callFeatureParams?) ^^ { case id ~ params =>
-      var newo = BehaviorFactory.eINSTANCE.createCallFeature
+  def firstCall : Parser[UnresolvedCall] = packageName ~ (callFeatureParams?) ^^ { case id ~ params =>
+      var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
       newo.setName(id)
       params match {
         case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
