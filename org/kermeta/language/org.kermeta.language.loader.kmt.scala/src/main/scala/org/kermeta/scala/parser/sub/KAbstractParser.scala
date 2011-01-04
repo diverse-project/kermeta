@@ -23,6 +23,13 @@ import scala.util.parsing.combinator.syntactical.TokenParsers
  * Common part of all Sub parsers
  */
 trait KAbstractParser extends TokenParsers {
+
+
+  case class NESTED_NEEDED extends EmptyExpressionImpl
+
+
+  //var lastExpression : Option[Expression] = None
+
   type Tokens = org.kermeta.language.lexer.KTokens
   val lexical = new KMLexical {
     override def whitespace: Parser[Any] = rep(whitespaceChar | comment)

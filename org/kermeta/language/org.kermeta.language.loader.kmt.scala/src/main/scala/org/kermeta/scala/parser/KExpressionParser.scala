@@ -37,7 +37,7 @@ trait KExpressionParser extends KAbstractParser
   /**
    * extend the fExpression parser with sub parser
    */
-  override def fExpression : Parser[Expression] = ( fThrow | fLiteral | fBlock | pExpression | fVariableDecl | fCall | fLoop | fConditional | fLambda )
+  override def fExpression : Parser[Expression] = ( fThrow | fBlock | pExpression | fVariableDecl | fLoop | fConditional | fLambda | fCall | fLiteral )
   override def fStatement : Parser[Expression] = fAssignement
 
   def parseExpression(content : String) : Option[Expression] = {

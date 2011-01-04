@@ -21,7 +21,30 @@ import scala.collection.JavaConversions._
  */
 trait KStructuralParser extends KAbstractParser {
 
-  def fExpressionLst : Parser[List[Expression]] = rep(fStatement)
+  def fExpressionLst : Parser[List[Expression]] = rep(fStatement) ^^ { case list =>
+      /* POST PROCESS, LINK CALLFEATURE EACH OTHER */
+      var previous : Option[CallFeature] = None
+      var inverstedList : List[Expression] = List()
+      list.toList.reverse.foreach(p=>{
+          p match {
+            case cf : CallFeature if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                previous match {
+                  case None => previous=Some(cf);inverstedList = cf::inverstedList
+                  case Some(pe)=> pe.setTarget(cf);previous=Some(cf)
+                }
+            }
+            case _ @ e =>{
+                previous match {
+                  case None =>inverstedList = e::inverstedList
+                  case Some(pe)=> pe.setTarget(e);previous=None
+                }
+              }
+
+          }
+
+        })
+      inverstedList.reverse
+  }
   def pExpression : Parser[Expression] = "(" ~> fStatement <~ ")"
 
   def fBlock : Parser[Expression] = "do" ~> fExpressionLst ~ (fRescueLst?) <~ "end" ^^ { case expL ~ rescueL =>

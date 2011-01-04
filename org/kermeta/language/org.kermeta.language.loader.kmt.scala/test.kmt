@@ -1,0 +1,12 @@
+package kmt_testCase::foo;
+
+class Main
+{
+
+operation main() : Void is do
+
+(3+4).e.test(t)
+
+end
+
+}
