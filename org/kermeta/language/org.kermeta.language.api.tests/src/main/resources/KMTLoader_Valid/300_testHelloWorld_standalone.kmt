@@ -36,7 +36,7 @@ package kermeta{
 			 * Writeln the object to standard output
 			 */ 
 			operation writeln(object : kermeta::standard::String) : kermeta::standard::Void is do
-		                 throw kermeta::exception::NotImplementedException.new
+		    	raise kermeta::exception::NotImplementedException.new
 			end						
 		}
 	}
