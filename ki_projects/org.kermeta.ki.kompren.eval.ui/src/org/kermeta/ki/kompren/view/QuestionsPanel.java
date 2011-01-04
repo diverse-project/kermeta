@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -52,10 +53,13 @@ public class QuestionsPanel extends JPanel {
 	
 	protected Sniffer sniffer;
 	
+	protected String userInformations;
+	
 	
 	public QuestionsPanel(final DiagramView diagram) {
 		super();
 		
+		userInformations= "";
 		sniffer 		= new Sniffer(diagram);
 		questions 		= new ArrayList<Question>();
 		this.diagram 	= diagram;
@@ -184,6 +188,8 @@ public class QuestionsPanel extends JPanel {
 		Dimension dim = new Dimension(500, 500);
 		resultField.setPreferredSize(dim);
 		resultField.setMinimumSize(dim);
+		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		resultField.setText(((int)screenSize.getWidth()) + "\t" + ((int)screenSize.getHeight()) + "\n" + userInformations + "\n");
 		
 		for(Question q : questions)
 			resultField.setText(resultField.getText() + q);
@@ -215,17 +221,23 @@ public class QuestionsPanel extends JPanel {
 	class ShowQuestionFieldListener implements ActionListener {
 		@Override
 		public void actionPerformed(final ActionEvent e) {
-			if((QuestionsPanel.this.currentNbQuestions+1)<QuestionsPanel.this.questions.size()) {
-				QuestionsPanel.this.questions.get(QuestionsPanel.this.currentNbQuestions).computeTime(
-						QuestionsPanel.this.currentTime, System.currentTimeMillis());
+			final boolean hasNextQuestion = (QuestionsPanel.this.currentNbQuestions+1)<QuestionsPanel.this.questions.size();
+			final Question question = hasNextQuestion ? QuestionsPanel.this.questions.get(QuestionsPanel.this.currentNbQuestions) : 
+														QuestionsPanel.this.questions.get(QuestionsPanel.this.questions.size()-1);
+
+			question.computeTime(QuestionsPanel.this.currentTime, System.currentTimeMillis());
+			question.setAnswer(QuestionsPanel.this.answerArea.getText());
+			
+			if(hasNextQuestion)
 				QuestionsPanel.this.setNextQuestion();
-			}
-			else {
-				QuestionsPanel.this.questions.get(QuestionsPanel.this.questions.size()-1).computeTime(
-						QuestionsPanel.this.currentTime, System.currentTimeMillis());
+			else
 				QuestionsPanel.this.setTerminated();
-			}
 		}
+	}
+
+
+	public void setUserInformations(final String userInformations) {
+		this.userInformations = userInformations;
 	}
 }
 

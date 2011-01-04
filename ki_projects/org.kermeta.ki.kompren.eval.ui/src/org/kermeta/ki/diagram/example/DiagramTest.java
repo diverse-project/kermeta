@@ -14,6 +14,7 @@ import org.kermeta.ki.diagram.view.interfaces.IRelationView;
 import org.kermeta.ki.kompren.view.ClassDiagramView;
 import org.kermeta.ki.kompren.view.ClassModelBasicStrategy;
 import org.kermeta.ki.kompren.view.ClassView;
+import org.kermeta.ki.kompren.view.Formular;
 import org.kermeta.ki.kompren.view.InheritanceView;
 import org.kermeta.ki.kompren.view.QuestionsPanel;
 import org.kermeta.ki.kompren.view.RelationClassView;
@@ -38,9 +39,11 @@ public class DiagramTest {
 		int width  = (int)((screen.width-500)*0.95);
 		int height = (int)(screen.height*0.85);
 		sp.setPreferredSize(new Dimension(width, height));
+		Formular formular = new Formular(questionsPanel, sp, frame);
 		
 		frame.getContentPane().add(sp, BorderLayout.CENTER);
 		frame.getContentPane().add(questionsPanel, BorderLayout.EAST);
+		frame.getContentPane().add(formular, BorderLayout.SOUTH);
 		frame.setVisible(true);
 		frame.pack();
 		diag.refresh();

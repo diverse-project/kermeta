@@ -1,6 +1,8 @@
 package org.kermeta.ki.kompren.view;
 
 public class Question {
+	protected static int cpt = 0;
+	
 	protected String subject;
 	
 	protected String answer;
@@ -15,10 +17,13 @@ public class Question {
 	
 	protected long nbZooms;
 	
+	protected int id;
+	
 	
 	public Question() {
 		super();
 		
+		id 				= cpt++;
 		subject 		= "";
 		answer 			= "";
 		time 			= -1.;
@@ -36,7 +41,11 @@ public class Question {
 	
 	@Override
 	public String toString() {
-		return nbMouseDistance + "\t" + nbMousePress + '\t' + nbScrolls + '\t' + nbZooms + '\t' + time + '\n';
-		
+		return id + "\t" + nbMouseDistance + "\t" + nbMousePress + "\t" + nbScrolls + "\t" + nbZooms + "\t" + time + "\t\"" + answer + "\"\n";
+	}
+
+
+	public void setAnswer(final String answer) {
+		this.answer = answer;
 	}
 }
