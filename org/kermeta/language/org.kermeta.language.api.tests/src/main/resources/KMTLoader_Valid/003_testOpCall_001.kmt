@@ -13,6 +13,11 @@ class Test_opcall {
         var ~result : kermeta::standard::Integer
         ~result := in + 3
     end
+    
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        
+        result := in + 3
+    end
 
 
 }
