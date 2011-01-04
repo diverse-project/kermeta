@@ -27,6 +27,8 @@ public class Formular extends JPanel {
 
 	protected JFrame frame;
 	
+	protected JPanel toolbar;
+	
 	protected JSpinner ageS;
 	
 	protected JComboBox sexCB;
@@ -40,13 +42,15 @@ public class Formular extends JPanel {
 	protected JButton validateB;
 	
 	
-	public Formular(final QuestionsPanel questionsPanel, final JScrollPane scrollPane, final JFrame frame) {
+	public Formular(final QuestionsPanel questionsPanel, final JScrollPane scrollPane, final JPanel toolbar, final JFrame frame) {
 		super();
 		
+		this.toolbar		= toolbar;
 		this.frame			= frame;
 		this.questionsPanel = questionsPanel;
 		this.diagramPane	= scrollPane;
 		createFormular();
+		this.toolbar.setVisible(false);
 		this.questionsPanel.setVisible(false);
 		diagramPane.setVisible(false);
 	}
@@ -122,6 +126,7 @@ public class Formular extends JPanel {
 			Formular.this.setVisible(false);
 			Formular.this.diagramPane.setVisible(true);
 			Formular.this.questionsPanel.setVisible(true);
+			Formular.this.toolbar.setVisible(false);
 			Formular.this.frame.pack();
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 			Formular.this.frame.setLocation((screen.width-Formular.this.frame.getWidth())/2, 

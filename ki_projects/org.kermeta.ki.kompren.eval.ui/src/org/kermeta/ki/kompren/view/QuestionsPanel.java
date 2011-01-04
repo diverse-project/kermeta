@@ -39,6 +39,8 @@ public class QuestionsPanel extends JPanel {
 	
 	protected DiagramView diagram;
 	
+	protected JPanel toolbar;
+	
 	protected AntiAliasButton startButton;
 	
 	protected AntiAliasButton answerButton;
@@ -56,9 +58,10 @@ public class QuestionsPanel extends JPanel {
 	protected String userInformations;
 	
 	
-	public QuestionsPanel(final DiagramView diagram) {
+	public QuestionsPanel(final DiagramView diagram, final JPanel toolbar) {
 		super();
 		
+		this.toolbar	= toolbar;
 		userInformations= "";
 		sniffer 		= new Sniffer(diagram);
 		questions 		= new ArrayList<Question>();
@@ -161,6 +164,7 @@ public class QuestionsPanel extends JPanel {
 		answerLabel.setVisible(false);
 		answerButton.setVisible(false);
 		diagram.setUsable(false);
+		toolbar.setVisible(false);
 	}
 	
 	public void setAnswerMode() {
@@ -171,6 +175,7 @@ public class QuestionsPanel extends JPanel {
 		answerLabel.setVisible(true);
 		answerButton.setVisible(true);
 		diagram.setUsable(true);
+		toolbar.setVisible(true);
 	}
 	
 	
@@ -180,6 +185,7 @@ public class QuestionsPanel extends JPanel {
 		answerLabel.setVisible(false);
 		answerButton.setVisible(false);
 		diagram.setUsable(false);
+		toolbar.setVisible(false);
 		questionArea.setVisible(false);
 		questionLabel.setVisible(false);
 		resultField.setVisible(true);

@@ -59,6 +59,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 	 /** The instrument that borders the selected shapes. */
 	protected SelectionBorder selectionBorder;
 	
+	protected boolean usable;
+	
 	
 	/**
 	 * Initialises the diagram.
@@ -78,8 +80,16 @@ public class DiagramView extends JPanel implements IDiagramView {
 		
 		if(withScrollPane)
 			scrollPane = new JScrollPane(this);
+		
+		setUsable(true);
 	}
 	
+	
+	public void setUsable(final boolean usable) {
+		this.usable = usable;
+		hand.setUsable(usable);
+		repaint();
+	}
 	
 	protected Hand createHand() {
 		return new Hand(this);
@@ -169,17 +179,18 @@ public class DiagramView extends JPanel implements IDiagramView {
 		
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, getWidth(), getHeight());
-		
-		g2.scale(zoom, zoom);
-
-		for(IEntityView entity : entities)
-			entity.paint(g2);
-
-		for(IRelationView relation : relations)
-			relation.paint(g2);
-		
-		if(hand.isActivated() && selectionBorder.isActivated())
-			selectionBorder.paint(g2);
+		if(usable) {
+			g2.scale(zoom, zoom);
+	
+			for(IEntityView entity : entities)
+				entity.paint(g2);
+	
+			for(IRelationView relation : relations)
+				relation.paint(g2);
+			
+			if(hand.isActivated() && selectionBorder.isActivated())
+				selectionBorder.paint(g2);
+		}
 	}
 	
 	
@@ -269,12 +280,11 @@ public class DiagramView extends JPanel implements IDiagramView {
 		for(final IEntityView entity : entities)
 			entity.update();
 		
-		recentre();
-		
 		for(final IRelationView relation : relations)
 			relation.update();
 		
 		updatePreferredSize();
+		recentre();
 		refresh();
 	}
 	

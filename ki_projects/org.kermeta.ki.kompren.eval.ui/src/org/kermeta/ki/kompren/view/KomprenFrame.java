@@ -72,17 +72,24 @@ public class KomprenFrame extends JFrame {
 		catch(Exception e) { /* */ }
 		
 		getContentPane().setLayout(new BorderLayout());
-		diagram = new ClassDiagramView(true);
-		JScrollPane sp = diagram.getScrollPane();
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int width  = (int)(screen.width*0.85);
-		int height = (int)(screen.height*0.8);
+		getContentPane().add(toolbar, BorderLayout.NORTH);
+		
+		diagram 						= new ClassDiagramView(true);
+		JScrollPane sp 					= diagram.getScrollPane();
+		Dimension screen 				= Toolkit.getDefaultToolkit().getScreenSize();
+		int width  	= (int)(screen.width*0.7);
+		int height 	= (int)(screen.height*0.8);
 		sp.setPreferredSize(new Dimension(width, height));
 		getContentPane().add(sp, BorderLayout.CENTER);
-		getContentPane().add(toolbar, BorderLayout.NORTH);
-		setLocation((screen.width-width)/2, (screen.height-height)/2);
-		pack();
+
+		QuestionsPanel questionsPanel 	= new QuestionsPanel(diagram, toolbar);
+		getContentPane().add(questionsPanel, BorderLayout.EAST);
 		
+		Formular formular 				= new Formular(questionsPanel, sp, toolbar, this);
+		getContentPane().add(formular, BorderLayout.SOUTH);
+		
+		pack();
+		setLocation((screen.width-getWidth())/2, (screen.height-getHeight())/2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	

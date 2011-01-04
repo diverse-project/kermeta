@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
@@ -29,7 +30,7 @@ public class DiagramTest {
 		JFrame frame 			= new JFrame();
 		JToggleButton handB 	= new JToggleButton();
 		DiagramView diag		= createEcoreClassDiagram();
-		QuestionsPanel questionsPanel = new QuestionsPanel(diag);
+		QuestionsPanel questionsPanel = new QuestionsPanel(diag, new JPanel());
 		diag.getHand().setHandButton(handB);
 		handB.setSelected(true);
 		
@@ -39,7 +40,7 @@ public class DiagramTest {
 		int width  = (int)((screen.width-500)*0.95);
 		int height = (int)(screen.height*0.85);
 		sp.setPreferredSize(new Dimension(width, height));
-		Formular formular = new Formular(questionsPanel, sp, frame);
+		Formular formular = new Formular(questionsPanel, sp, new JPanel(), frame);
 		
 		frame.getContentPane().add(sp, BorderLayout.CENTER);
 		frame.getContentPane().add(questionsPanel, BorderLayout.EAST);
