@@ -2,8 +2,10 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1">
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1 #//@ownedTags.2 #//@ownedTags.3">
   <ownedTags name="executable" value="true" object="#/"/>
+  <ownedTags name="mainClass" value="org::kermeta::language::ecore2km::Ecore2km" object="#/"/>
+  <ownedTags name="mainOperation" value="convert" object="#/"/>
   <ownedTags name="executable" value="true" object="#/"/>
   <packages tag="#//@packages.0/@ownedTags.0" name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
     <ownedTags name="ecore" value="true" object="#//@packages.0"/>
