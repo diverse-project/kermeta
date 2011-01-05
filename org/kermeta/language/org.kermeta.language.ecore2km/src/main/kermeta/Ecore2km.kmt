@@ -4,6 +4,8 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
+@mainClass "org::kermeta::language::ecore2km::Ecore2km"
+@mainOperation "foo"
 package org::kermeta::language::ecore2km;
 
 require kermeta
@@ -17,6 +19,9 @@ using org::kermeta::language::structure
  * Converts a given ecore model into a kermeta v2 model.
 */
 class Ecore2km {
+
+	operation foo() : Void is do end
+
 	/**
 	 * Converts the given ecore package as a Kermeta v2 modeling unit.
 	 */
