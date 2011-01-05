@@ -1,0 +1,72 @@
+/* $Id:$ 
+ * Creation : December 30, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "org::kermeta::language::resolver::FullStaticResolver"
+@mainOperation "testMain"
+
+
+package org::kermeta::language::resolver;
+
+
+require kermeta
+require "Resolver.kmt"
+require "../staticsetter/StaticSetterAspect.kmt"
+require "../staticsetter/StaticSetterContext.kmt"
+require "ResolverException.kmt"
+
+using org::kermeta::language::staticsetter
+using language::helpers::structure
+
+using kermeta::persistence
+using kermeta::standard
+
+class FullStaticResolver
+{
+
+	operation testMain() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
+		var baseFileName : String init "300_testHelloWorld_standalone"
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
+       	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
+		       	
+       	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	resolve(unresolvedModelingUnit)
+       	
+       	
+       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+       	
+       	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"Resolved.km" + " saved ************************")
+	end
+	
+	reference errors : ResolverException[*]
+	
+	operation getErrors() : OrderedSet<ResolverException> is do
+		result := errors
+	end
+	
+	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
+       	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+	
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
+		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
+		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
+		
+		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
+		
+       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
+       	result := unresolvedModelingUnit
+	end
+	
+}

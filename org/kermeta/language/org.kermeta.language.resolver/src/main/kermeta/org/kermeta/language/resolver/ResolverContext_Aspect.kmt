@@ -6,13 +6,13 @@
  *            cguy
  */
 
-package kmt::language::helpers::structure;
+package language::helpers::structure;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 
 using org::kermeta::language::structure
-using kmt::language::helpers::structure
+using language::helpers::structure
 using kermeta::standard
 
 aspect class StructureVisitorContext {

@@ -17,7 +17,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
 
 using org::kermeta::language::structure
-using kmt::language::helpers::structure
+using language::helpers::structure
 using kermeta::exceptions
 using org::kermeta::language::resolver
 using kermeta::standard

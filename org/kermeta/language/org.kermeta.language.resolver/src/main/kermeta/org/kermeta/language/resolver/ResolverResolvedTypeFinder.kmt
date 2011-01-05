@@ -14,7 +14,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 
 using org::kermeta::language::structure
 using kermeta::exceptions
-using kmt::language::helpers::structure
+using language::helpers::structure
 
 class ResolverResolvedTypeFinder inherits StructureVisitor
 {

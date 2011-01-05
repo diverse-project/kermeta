@@ -13,7 +13,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
-using kmt::language::helpers::structure
+using language::helpers::structure
 
 /*
 * Visit the modelingUnit looking for the Operation corresponding to the UnresolvedOperation found by the UnresolvedFinder

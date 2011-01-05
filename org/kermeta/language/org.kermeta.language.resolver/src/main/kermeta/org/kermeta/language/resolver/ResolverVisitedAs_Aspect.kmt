@@ -11,7 +11,7 @@ package org::kermeta::language::structure;
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 
-using kmt::language::helpers::structure
+using language::helpers::structure
 
 aspect class Class {
 	attribute visitedAsClass : Boolean

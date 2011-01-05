@@ -19,7 +19,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
 
 using kermeta::language::structure
-using kmt::language::helpers::structure
+using language::helpers::structure
 using org::kermeta::language::resolver
 using kermeta::persistence
 using kermeta::standard
@@ -32,7 +32,7 @@ class Resolver
 	
 		var repository : EMFRepository init EMFRepository.new
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
-		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/result.km")
+		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/300_testHelloWorld_standalone.km")
 		       	
        	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
        	unresolvedModelingUnit ?= unresolvedModelResource.one
@@ -68,7 +68,7 @@ class Resolver
         
         stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")*/
        	
-       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/resultResolved.km")
+       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/300_testHelloWorld_standaloneResolved.km")
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " saved************************")
        	
