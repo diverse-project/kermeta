@@ -51,21 +51,8 @@ public class Art2ComponentEcore2Km extends AbstractComponentType {
     protected UnifiedMessageFactory mFactory 	= UnifiedMessageFactory.getInstance();
     protected String bundleSymbolicName 		= "";
     protected Bundle bundle;
-
     protected SimpleLogger logger;
     
-//	protected MessagePort logPort = null;
-//    protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
-//    protected String bundleSymbolicName = "";
-//    protected Bundle bundle;
-//
-//    public MessagePort getLogPort() {
-//        return logPort;
-//    }
-//
-//    public String getBundleSymbolicName() {
-//        return bundleSymbolicName;
-//    }
     
     /**
      * method called when an instance of this component is instantiated and started
@@ -76,13 +63,6 @@ public class Art2ComponentEcore2Km extends AbstractComponentType {
         bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
         logger = new SimpleLogger(this, bundleSymbolicName, "log");
         logger.debug("Succesfully started " + bundleSymbolicName);
-//        System.out.println("Art2ComponentTexteditorEclipse.start ...");
-//
-//        // store some useful data
-//        logPort = getPortByName("log", MessagePort.class);
-//
-//        bundle = (Bundle) this.getDictionary().get("osgi.bundle");
-//        bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
     }
 
     /**
