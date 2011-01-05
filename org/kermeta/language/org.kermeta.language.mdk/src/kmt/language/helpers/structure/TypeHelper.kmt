@@ -1,0 +1,62 @@
+/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+ * Creation date: May 19, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "ClassDefinitionHelper.kmt"
+
+using kermeta::standard
+
+
+aspect class Type {
+	operation getCallableOperationByName( operationName : String ) : Operation is do
+		result := void
+	end
+	
+	operation getCallablePropertyByName( attributeName : String ) : Property is do
+		result := void
+	end
+}
+aspect class ParameterizedType inherits Type {}
+
+aspect class Class inherits ParameterizedType {
+	
+	operation ownedOperation() :  OrderedSet<Operation> is do	
+		result := OrderedSet<Operation>.new // do not manipulate the real collection
+		result.addAll(self.typeDefinition.asType(ClassDefinition).ownedOperation)
+	end
+	
+	operation ownedAttribute() :  OrderedSet<Property> is do	
+		result := OrderedSet<Property>.new // do not manipulate the real collection
+		result.addAll(self.typeDefinition.asType(ClassDefinition).ownedAttribute)
+	end
+	
+	operation superClass() :  OrderedSet<Class> is do	
+		result := OrderedSet<Class>.new // do not manipulate the real collection
+		self.typeDefinition.asType(ClassDefinition).superType.each{ st |
+			result.add(st.asType(Class))
+		}
+	end
+	
+	/**
+	 * Get an Operation that can be called from an instance of this Class
+	 * return void if not found
+	 */
+	method getCallableOperationByName( operationName : String ) : Operation is do
+		result := self.typeDefinition.asType(ClassDefinition).getCallableOperationByName(operationName)
+	end
+	
+	/**
+	 * Get a Property that can be called from an instance of this Class
+	 * return void if not found
+	 */
+	method getCallablePropertyByName( attributeName : String ) : Property is do
+		result := self.typeDefinition.asType(ClassDefinition).getCallablePropertyByName(attributeName)
+	end	
+}

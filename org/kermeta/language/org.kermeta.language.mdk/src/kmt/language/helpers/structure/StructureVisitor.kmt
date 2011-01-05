@@ -7,7 +7,7 @@
  */
 
 
-package kmt::language::helpers::structure;
+package language::helpers::structure;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"

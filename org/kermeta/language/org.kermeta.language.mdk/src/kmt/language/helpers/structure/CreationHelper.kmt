@@ -193,6 +193,27 @@ aspect class Class {
 		self.typeDefinition := cd
 		result := self
 	end
+	
+	/**
+	 * Creates a new Class using generics
+	 * uses the typesForBinding types for the generics
+	 * note : the passed types, will be contained by the constructed Class
+	 * Warning, in the current implementation, it doesn't check the correctness between bindings and the ClassDefinition
+	 */
+	operation initializeFromAGenericClassDefinition(cd : ClassDefinition, typesForBinding : Sequence<Type>) : Class is do
+		self.typeDefinition := cd
+		if( not typesForBinding.isVoid) then
+			var index : Integer init 0
+			typesForBinding.each{ t |
+				var tvb : TypeVariableBinding init  TypeVariableBinding.new
+				tvb.type := t
+				tvb.containedType.add(t)
+				tvb.variable := cd.typeParameter.at(index)
+				index := index +1
+			}			
+		end
+		result := self
+	end
 }
 
 aspect class FunctionType {

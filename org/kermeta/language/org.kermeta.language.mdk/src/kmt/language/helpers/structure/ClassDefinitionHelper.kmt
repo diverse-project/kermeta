@@ -1,0 +1,49 @@
+/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+ * Creation date: May 19, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+
+aspect class ClassDefinition {
+	
+	/**
+	 * Get an Operation that can be called from an instance of this ClassDefinition
+	 * return void if not found
+	 */
+	operation getCallableOperationByName( operationName : String ) : Operation is do
+		result := self.ownedOperation.detect{o| o.name == operationName}		
+		if (result.isVoid) then
+			// not found locally, look into superclasses
+			self.superType.collect{t | t.isInstanceOf(Class) }.detect{ cl | 
+				// look into super classes and store possible candidate into result
+				result := cl.asType(Class).typeDefinition.asType(ClassDefinition).getCallableOperationByName(operationName)
+				not result.isVoid // condition for detect to stop looking in the super classes 
+			}
+		end	
+	end
+	
+	/**
+	 * Get a Property that can be called from an instance of this ClassDefinition
+	 * return void if not found
+	 */
+	operation getCallablePropertyByName( attributeName : String ) : Property is do
+		result := self.ownedAttribute.detect{o| o.name == attributeName}		
+		if (result.isVoid) then
+			// not found locally, look into superclasses
+			self.superType.collect{t | t.isInstanceOf(Class) }.detect{ cl | 
+				// look into super classes and store possible candidate into result
+				result := cl.asType(Class).typeDefinition.asType(ClassDefinition).getCallablePropertyByName(attributeName)
+				not result.isVoid // condition for detect to stop looking in the super classes 
+			}
+		end	
+	end	
+}
