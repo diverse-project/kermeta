@@ -8,16 +8,25 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.ecore2km</artifactId>
     <packaging>jar</packaging>
-    <name>Kermeta :: ecore2km</name>
+    <name>language.ecore2km :: Ecore to Kermeta 2 converter</name>
 
     <dependencies>
-    
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.annotation</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>art2.framework</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
-
 		
         <dependency>
             <groupId>fr.irisa.triskell.kermeta</groupId>
@@ -42,10 +51,17 @@
             <version>${kermeta.version}</version>
         </dependency>        
 		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>language.api.tests</artifactId>
 			<version>${kermeta.version}</version>
 			<scope>test</scope>
+			<type>jar</type>
+		</dependency>
+		       
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>2.6.0</version>
 			<type>jar</type>
 		</dependency>
     </dependencies>
@@ -65,12 +81,12 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/MainEcore2km.km</model>
+                            <model>src/generated/km/Ecore2km.km</model>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Add generated source to build cycle -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

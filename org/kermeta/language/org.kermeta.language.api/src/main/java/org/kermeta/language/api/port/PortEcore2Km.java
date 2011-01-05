@@ -6,21 +6,20 @@
  * Creation date : 1 déc. 2010
  * Authors : 
  *            Haja Rambelontsalama <hajanirina-johary.rambelontsalama@inria.fr>
+ *            Arnaud Blouin
  */
 
 package org.kermeta.language.api.port;
-
-import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.kermeta.language.structure.ModelingUnit;
 
 public interface PortEcore2Km {
-
-	
-	public ModelingUnit convertPackage(EPackage rootPackage );
-	
-	public ModelingUnit convertPackageCollection(List<EPackage> collectionOfPackage );
-	
-	public ModelingUnit convertFromUri(String file_uri );
+	/**
+	 * Converts the given ecore package into a kermeta modeling unit.
+	 * @param rootPackage The package to convert.
+	 * @param namespacePrefix The namespace prefix to set to the generated modeling unit.
+	 * @return The created modeling unit.
+	 */
+	public ModelingUnit convertPackage(final EPackage rootPackage, final String namespacePrefix);
 }
