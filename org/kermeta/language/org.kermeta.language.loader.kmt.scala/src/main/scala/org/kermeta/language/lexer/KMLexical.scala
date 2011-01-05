@@ -34,7 +34,7 @@ class KMLexical extends Lexical with KTokens {
   override def whitespace: Parser[Any] = rep(whitespaceChar)
 
 
-  val reserved : HashSet[String] = HashSet("throw","inherits","package","attribute","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var","from","until","loop","if","then","else","init","true","false")
+  val reserved : HashSet[String] = HashSet("throw","inherits","package","attribute","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var","from","until","loop","if","then","else","init","true","false", "singleton")
   val delimiters : HashSet[String] = HashSet("=",";","::","@","{","}","(",")",":",":=",".",",","|","==","!=","-","+","!","*","/","<","<=",">",">=","[","]","..","->","=>")
 
   

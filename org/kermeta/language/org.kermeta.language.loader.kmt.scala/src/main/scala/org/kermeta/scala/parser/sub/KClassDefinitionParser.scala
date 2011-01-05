@@ -36,7 +36,8 @@ trait KClassDefinitionParser extends KAbstractParser
 
   def abstractModifier = opt("abstract")
   def aspectModifier = opt("aspect")
-  def classDecl : Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ "class" ~ ident ~ opt(classGenericParems) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ { case aspectM ~ abstractM ~ _ ~ id1 ~params ~ parents ~ _ ~ members ~ _ =>
+  def singletonModifier = opt("singleton")
+  def classDecl : Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ singletonModifier ~ "class" ~ ident ~ opt(classGenericParems) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ { case aspectM ~ abstractM ~ singletonM ~ _ ~ id1 ~params ~ parents ~ _ ~ members ~ _ =>
       var newo =StructureFactory.eINSTANCE.createClassDefinition
       newo.setName(id1.toString)
       aspectM match {
@@ -46,6 +47,10 @@ trait KClassDefinitionParser extends KAbstractParser
       abstractM match {
         case Some(_) => newo.setIsAbstract(true)
         case None => newo.setIsAbstract(false)
+      }
+      singletonM match {
+        case Some(_) => newo.setIsSingleton(true)
+        case None => newo.setIsSingleton(false)
       }
       params match {
         case None =>
