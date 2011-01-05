@@ -6,21 +6,48 @@
   <packages name="helloworld">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="HelloWorld" isAspect="false" isAbstract="false">
-      <ownedOperation name="main">
+      <ownedOperation name="main" type="#//helloworld/HelloWorld/main/@containedType.1">
         <kOwnedTags name="main" value=""/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" name="writeln"
-              staticOperation="#//kermeta/io/StdIO/writeln">
+        <body xsi:type="org_kermeta_language_behavior:Block" staticType="#//helloworld/HelloWorld/main/@body/@statement.1/@containedType.0">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//helloworld/HelloWorld/main/@body/@statement.0/@containedType.0"
+              name="writeln" staticOperation="#//kermeta/io/StdIO/writeln">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
-            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" staticType="#//helloworld/HelloWorld/main/@body/@statement.0/@parameters.0/@containedType.0"
+                value="Hello World!">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="#//helloworld/HelloWorld/main/@body/@statement.0/@target/@containedType.0">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/io/StdIO"/>
-              <typeref/>
+              <typeref type="#//helloworld/HelloWorld/main/@body/@statement.0/@target/@containedType.0"/>
             </target>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+          <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="#//helloworld/HelloWorld/main/@body/@statement.1/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="main" type="#//helloworld/HelloWorld/main.1/@containedType.1">
+        <kOwnedTags name="main" value="Bonjour\ tout\ le\ monde"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+        <ownedParameter name="msg" type="#//helloworld/HelloWorld/main.1/@ownedParameter.0/@containedType.1">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block" staticType="#//helloworld/HelloWorld/main.1/@body/@statement.1/@containedType.0">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//helloworld/HelloWorld/main.1/@body/@statement.0/@containedType.0"
+              name="writeln" staticOperation="#//kermeta/io/StdIO/writeln">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallVariable" staticType="#//helloworld/HelloWorld/main.1/@ownedParameter.0/@containedType.1"
+                name="msg"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="#//helloworld/HelloWorld/main.1/@body/@statement.0/@target/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/io/StdIO"/>
+              <typeref type="#//helloworld/HelloWorld/main.1/@body/@statement.0/@target/@containedType.0"/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="#//helloworld/HelloWorld/main.1/@body/@statement.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
           </statement>
         </body>
@@ -34,18 +61,17 @@
     </nestedPackage>
     <nestedPackage name="io">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-          kTag="#//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" isAspect="false" isAbstract="false"
-          isSingleton="true">
+          kTag="#//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" isAspect="false" isAbstract="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="#//kermeta/io/StdIO"/>
-        <ownedOperation name="writeln">
+        <ownedOperation name="writeln" type="#//kermeta/io/StdIO/writeln/@containedType.1">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
-          <ownedParameter name="object">
+          <ownedParameter name="object" type="#//kermeta/io/StdIO/writeln/@ownedParameter.0/@containedType.1">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
           </ownedParameter>
-          <body xsi:type="org_kermeta_language_behavior:Block">
-            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="#//kermeta/io/StdIO/writeln/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="#//kermeta/io/StdIO/writeln/@body/@statement.0/@containedType.0">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
             </statement>
           </body>
@@ -57,11 +83,11 @@
           kTag="#//kermeta/standard/Void/@kOwnedTags.0" name="Void" isAspect="false"
           isAbstract="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="#//kermeta/standard/Void"/>
-        <ownedOperation name="toString">
+        <ownedOperation name="toString" type="#//kermeta/standard/Void/toString/@containedType.1">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
-          <body xsi:type="org_kermeta_language_behavior:Block">
-            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="#//kermeta/standard/Void/toString/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="#//kermeta/standard/Void/toString/@body/@statement.0/@containedType.0">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
             </statement>
           </body>
