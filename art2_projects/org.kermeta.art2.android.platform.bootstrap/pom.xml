@@ -1,0 +1,93 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.art2.android</groupId>
+    <artifactId>org.kermeta.art2.android.platform.bootstrap</artifactId>
+    <packaging>pom</packaging>
+    <name>ART2 :: Platform :: Android :: BootStrap</name>
+
+    <parent>
+        <artifactId>art2.root</artifactId>
+        <groupId>org.kermeta.art2</groupId>
+        <version>2.2.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <android.platform.version>8</android.platform.version>
+        <android.platform>platforms/android-${android.platform.version}</android.platform>
+        <android.framework.aidl>${android.home}/${android.platform}/framework.aidl</android.framework.aidl>
+        <android.jar>${android.home}/${android.platform}/android.jar</android.jar>
+        <android.tools.aapt>${android.home}/${android.platform}/tools/aapt</android.tools.aapt>
+        <android.tools.dx>${android.home}/${android.platform}/tools/dx</android.tools.dx>
+        <android.tools.adb>${android.home}/tools/adb</android.tools.adb>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>org.apache.felix.shell,org.apache.felix.shell.tui,emf.lib,art2.core,art2.framework,art2.model,art2.kompare,art2.framework.bus.netty,art2.framework.bus.jmdns,art2.deploy.osgi,art2.api,art2.adaptation.model</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>org.kermeta.art2.android.mavenizer.DexDir</mainClass>
+                            <arguments>
+                                <argument>${android.tools.adb}</argument>
+                                <argument>${android.tools.dx}</argument>
+                                <argument>${android.tools.aapt}</argument>
+                                <argument>/mnt/sdcard/OSGI/bundle</argument>
+                                <argument>${project.build.directory}/lib</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.art2</groupId>
+            <artifactId>org.kermeta.art2.platform.standalone</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>art2.android.mavenizer</artifactId>
+            <version>${art2.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>org.apache.felix.main</artifactId>
+            <groupId>org.apache.felix</groupId>
+            <type>jar</type>
+            <version>3.0.5</version>
+        </dependency>
+    </dependencies>
+
+    
+
+</project>
