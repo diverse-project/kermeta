@@ -46,7 +46,7 @@ import org.kermeta.language.ecore2km.Ecore2km;
 
 @Library(name = "org.kermeta.language")
 @ComponentType
-public class Art2ComponentEcore2Km extends AbstractComponentType {
+public class Art2ComponentEcore2Km extends AbstractComponentType implements PortEcore2Km {
 
     protected UnifiedMessageFactory mFactory 	= UnifiedMessageFactory.getInstance();
     protected String bundleSymbolicName 		= "";
@@ -82,6 +82,18 @@ public class Art2ComponentEcore2Km extends AbstractComponentType {
 
         Ecore2km converter = org.kermeta.language.ecore2km.RichFactory.createEcore2km();
         return converter.convert(rootPackage, namespacePrefix);
-
+    }
+    
+    
+    
+    /**
+     * This operation should pass everything that ART2 initialize before calling the usual start method
+     * This is used for test purpose
+     * @param bundleSymbName
+     */
+    public void simulatedStart(String bundleSymbName) {
+        this.bundleSymbolicName = bundleSymbName;
+        logger = new SimpleLogger(this, bundleSymbName, "log");
+        logger.debug("Successfully started "+bundleSymbName);
     }
 }
