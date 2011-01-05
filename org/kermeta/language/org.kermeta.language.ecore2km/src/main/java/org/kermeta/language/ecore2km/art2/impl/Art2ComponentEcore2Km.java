@@ -23,22 +23,14 @@ import org.kermeta.art2.annotation.Stop;
 import org.kermeta.art2.annotation.ThirdParties;
 import org.kermeta.art2.annotation.ThirdParty;
 import org.kermeta.art2.framework.AbstractComponentType;
-import org.kermeta.art2.framework.MessagePort;
 import org.kermeta.language.api.art2.port.utils.SimpleLogger;
-import org.kermeta.language.api.messaging.ProblemMessage;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortEcore2Km;
-import org.kermeta.language.api.result.ModelingUnitResult;
-import org.kermeta.language.merger.BinaryMerger;
-import org.kermeta.language.merger.BinaryMergerAspect;
-import org.kermeta.ecore.binarymerger.BinaryMergerException;
-import org.kermeta.ecore.binarymerger.BinaryMergerExceptionAspect;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.traceability.ModelReference;
-import org.kermeta.traceability.TraceabilityFactory;
 import org.osgi.framework.Bundle;
 import runner.MainRunner;
 import org.eclipse.emf.ecore.EPackage;
+import org.kermeta.language.ecore2km.Ecore2km;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -83,7 +75,7 @@ public class Art2ComponentEcore2Km extends AbstractComponentType {
         bundle = (Bundle) this.getDictionary().get("osgi.bundle");
         bundleSymbolicName = bundle.getHeaders().get("Bundle-SymbolicName").toString();
         logger = new SimpleLogger(this, bundleSymbolicName, "log");
-        getLogger().debug("Succesfully started " + bundleSymbolicName);
+        logger.debug("Succesfully started " + bundleSymbolicName);
 //        System.out.println("Art2ComponentTexteditorEclipse.start ...");
 //
 //        // store some useful data
@@ -108,7 +100,7 @@ public class Art2ComponentEcore2Km extends AbstractComponentType {
         //((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap((org.eclipse.emf.ecore.EcoreFactory)ScalaAspect.org.eclipse.emf.ecore.RichFactory.createEFactory());
         MainRunner.init();
 
-        Ecore2km converter = org.kermeta.language.RichFactory.createEcore2km();
+        Ecore2km converter = org.kermeta.language.ecore2km.RichFactory.createEcore2km();
         return converter.convert(rootPackage, namespacePrefix);
 
     }
