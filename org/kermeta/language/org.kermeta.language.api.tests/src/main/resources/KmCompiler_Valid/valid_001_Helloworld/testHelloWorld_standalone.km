@@ -34,7 +34,8 @@
     </nestedPackage>
     <nestedPackage name="io">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-          kTag="#//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" isAspect="false" isAbstract="false">
+          kTag="#//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" isAspect="false" isAbstract="false"
+          isSingleton="true">
         <kOwnedTags name="CompilerIgnore" value="true" object="#//kermeta/io/StdIO"/>
         <ownedOperation name="writeln">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
