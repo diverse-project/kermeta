@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
@@ -6,27 +6,22 @@
   <packages name="helloworld">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="HelloWorld" isAspect="false" isAbstract="false">
-      <ownedOperation name="main" type="#//helloworld/HelloWorld/main/@containedType.0">
+      <ownedOperation name="main">
         <kOwnedTags name="main" value=""/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" name="writeln"
+              staticOperation="#//kermeta/io/StdIO/writeln">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
             <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/io/StdIO"/>
+              <typeref/>
+            </target>
           </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="main" type="#//helloworld/HelloWorld/main.1/@containedType.0">
-        <kOwnedTags name="main" value="Bonjour\ tout\ le\ monde"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
-        <ownedParameter name="msg" type="#//helloworld/HelloWorld/main.1/@ownedParameter.0/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="kermeta::standard::String"/>
-        </ownedParameter>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg"/>
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio"/>
+          <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
           </statement>
         </body>
       </ownedOperation>
@@ -41,22 +36,17 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
           kTag="#//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" isAspect="false" isAbstract="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="#//kermeta/io/StdIO"/>
-        <ownedOperation name="writeln" type="#//kermeta/io/StdIO/writeln/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="kermeta::standard::Void"/>
-          <ownedParameter name="object" type="#//kermeta/io/StdIO/writeln/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="kermeta::standard::String"/>
+        <ownedOperation name="writeln">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
+          <ownedParameter name="object">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block">
-            <statement xsi:type="org_kermeta_language_behavior:Raise">
-              <expression xsi:type="org_kermeta_language_behavior:UnresolvedCall"
-                  name="kermeta::exception::NotImplementedException">
-                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall"
-                    name="new"/>
-              </expression>
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
             </statement>
-            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
@@ -66,15 +56,13 @@
           kTag="#//kermeta/standard/Void/@kOwnedTags.0" name="Void" isAspect="false"
           isAbstract="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="#//kermeta/standard/Void"/>
-        <ownedOperation name="toString" type="#//kermeta/standard/Void/toString/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="kermeta::standard::String"/>
+        <ownedOperation name="toString">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/String"/>
           <body xsi:type="org_kermeta_language_behavior:Block">
-            <statement xsi:type="org_kermeta_language_behavior:Assignment">
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result"/>
-              <value xsi:type="org_kermeta_language_behavior:StringLiteral" value="&lt;void>"/>
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//kermeta/standard/Void"/>
             </statement>
-            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
