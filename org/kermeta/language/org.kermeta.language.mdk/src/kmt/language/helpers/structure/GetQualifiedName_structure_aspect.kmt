@@ -32,7 +32,7 @@ aspect class Type
 {
 	operation getQualifiedName() : String is do
 		
-		result := "<TODO "+toString+">"
+		result := "<TODO "+ self.toString +">"
 	end
 }
 
