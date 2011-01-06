@@ -13,15 +13,34 @@ package helloworld {
 	{
 		@main ""
 		operation main() : kermeta::standard::Void is do 
-			stdio.writeln("Hello World!")
+			kermeta::io::StdIO.writeln("Hello World!")
 		end
 		
 		@main "Bonjour tout le monde"
 		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
-			stdio.writeln(msg)
+			kermeta::io::StdIO.writeln(msg)
 		end
 	}
 }
+
+// for reflexivity
+package org {
+	package kermeta {
+		package language {
+			package structure {
+				@CompilerIgnore "true"
+				class Class {
+				}
+				
+				@CompilerIgnore "true"
+				class Object {
+				}
+			}
+		}
+	}
+}
+
+// for core framework
 package kermeta{
 	package exception {
 		class NotImplementedException
@@ -30,7 +49,7 @@ package kermeta{
 	}
 	package io {
 		@CompilerIgnore "true"
-		singleton class StdIO
+		singleton StdIO
 		{			
 			/**
 			 * Writeln the object to standard output
