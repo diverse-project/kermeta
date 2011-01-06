@@ -34,7 +34,8 @@ import org.kermeta.language.ecore2km.Ecore2km;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
-    @ThirdParty(name = "org.kermeta.language.api", url = "mvn:org.kermeta.language/language.api")
+    @ThirdParty(name = "org.kermeta.language.api", url = "mvn:org.kermeta.language/language.api"),
+    @ThirdParty(name = "org.kermeta.emf", url = "mvn:org.kermeta.emf/emf.lib")
 })
 @Requires({
     @RequiredPort(name = "log", type = PortType.MESSAGE)
