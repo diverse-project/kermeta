@@ -14,7 +14,7 @@ package org::kermeta::language;
 require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
@@ -42,6 +42,18 @@ package structure {
 			context.currentClassDefinition := self			
 			super(context)
 			context.currentClassDefinition := void
+		end
+	}
+	aspect class Operation {
+		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+			context.currentOperation := self
+			context.pushContext()
+			self.ownedParameter.each{ param | 				
+				context.addSymbol( param.name, param.type)
+			}			
+			super(context)
+			context.popContext()
+			context.currentOperation := void
 		end
 	}
 }
@@ -111,6 +123,15 @@ package behavior {
 			if (target.isVoid) then
 				targetType := context.createSelfType
 				stdio.writeln("  targetType is self : targetType.typeDefinition="+targetType.asType(Class).typeDefinition.toString)
+				// look for a variable in the context
+				var symbolType : Type init context.getTypeForSymbol(self.name)
+				if not symbolType.isVoid then	
+					var callVariable : CallVariable init CallVariable.new
+					callVariable.name := self.name
+					callVariable.setInferedStaticType(symbolType)
+					//	this is the CallVariable that must replace this UnresolvedCall
+					result := callVariable
+				end
 			else	
 				
 				
@@ -129,12 +150,17 @@ package behavior {
 			self.parameters.clear
 			self.parameters.addAll(newParameters)
 			
-			// depending on the context, create the appropriate Call and return it
-			// TODO  look for a variable in the context
-				result := void
-			// if not found, look for an Operation
+			
+				
+			// if not already found, look for an Operation
 			if result.isVoid then
 				var op : Operation init targetType.getCallableOperationByName(self.name)
+				if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
+					// this is a TypeLiteral  
+					// if this is a singleteton, try to look in the typereference
+					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
+					op := callTypeLiteral.typeref.type.getCallableOperationByName(self.name)
+				end
 				if not op.isVoid then
 					var callOperation :  CallOperation init  CallOperation.new
 					// move content of UnresolvedCall into the new CallOperation
@@ -157,6 +183,12 @@ package behavior {
 			// if not found, look for a Property
 			if result.isVoid then
 				var prop : Property init targetType.getCallablePropertyByName(self.name)
+				if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
+					// this is a TypeLiteral  
+					// if this is a singleteton, try to look in the typereference
+					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
+					prop := callTypeLiteral.typeref.type.getCallablePropertyByName(self.name)
+				end
 				if not prop.isVoid then
 					var callProperty :  CallProperty init  CallProperty.new
 					// move content of UnresolvedCall into the new CallOperation
@@ -183,16 +215,17 @@ package behavior {
 				if not typeDef.isVoid then
 					var callTypeLiteral : CallTypeLiteral init CallTypeLiteral.new
 					callTypeLiteral.typeref := TypeReference.new
-					callTypeLiteral.typeref.type := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition))					
-					// TODO deal with generics
-					
-					callTypeLiteral.setInferedStaticType(callTypeLiteral.typeref.type)
+					if typeDef.isInstanceOf(ClassDefinition) then
+						callTypeLiteral.typeref.type := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition))
+						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)				
+						// TODO deal with generics
+										
+						callTypeLiteral.setInferedStaticType(context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+					end
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
-					stdio.writeln("  CallTypeLiteral "+ name + " resolved")
 					result := callTypeLiteral
 				end	
 			end
-			// TODO  if not found, deal with singleton TypeDefinition like StdIO => in CallableOperationByName
 			if result.isVoid then
 				raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to resolve UnresolvedCall "+ name, void)
 			else
@@ -232,6 +265,7 @@ package behavior {
 			result := self
 		end 
 	}
+	
 	
 	aspect class VariableDecl {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do

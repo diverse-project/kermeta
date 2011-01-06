@@ -40,6 +40,11 @@ class FullStaticResolver
        	
        	resolve(unresolvedModelingUnit)
        	
+     /*  	stdio.writeln("	********************* searching dangling elements ************************")
+       	unresolvedModelResource.findDanglingModelElements().each{ diag |
+       		stdio.writeln("Dangling element " + diag.danglingElement.toString)
+       		stdio.writeln("   referenced via " + diag.referencingElement.toString +"."+diag.referencingProperty.name)       		
+       	} */
        	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	

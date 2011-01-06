@@ -13,7 +13,7 @@ package org::kermeta::language::staticsetter;
 require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "../resolver/ResolverException.kmt"
 
 using kermeta::standard
@@ -39,7 +39,7 @@ class StaticSetterContext
 	attribute contextFrames : seq StaticSetterContextFrame[0..*]
 	
 	operation pushContext() is do
-		contextFrames.add(StaticSetterContextFrame.new)
+		contextFrames.add(StaticSetterContextFrame.new.initialize())
 	end
 	
 	operation popContext() is do
@@ -148,4 +148,9 @@ class StaticSetterContext
 class StaticSetterContextFrame
 {
 	reference symbolMap : kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>
+	
+	operation initialize() : StaticSetterContextFrame is do
+		symbolMap := kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>.new
+		result := self
+	end
 }

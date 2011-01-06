@@ -10,6 +10,7 @@ package org::kermeta::language::resolver;
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverVisitedAs_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedTypeFinder.kmt"
@@ -649,9 +650,14 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(y.asType(UnresolvedType))
-							typesToBeAdded.add(foundType)
-							if (foundType.isInstanceOf(Class)) then
-								t.containedType.add(foundType)
+							// do not introduce circular inheritance to self
+							// this deal with the special case if we are org::kermeta::language::structure::Object and points to self
+							// then do not add it, since it was introduced by the parser
+							if foundType.getQualifiedName != t.getQualifiedName then															
+								typesToBeAdded.add(foundType)
+								if (foundType.isInstanceOf(Class)) then
+									t.containedType.add(foundType)
+								end
 							end
 						end
 					end
