@@ -42,7 +42,7 @@ aspect class Class
 		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
 		buffer.append(self.typeDefinition.asType(ClassDefinition).getQualifiedName)
 		
-		self.typeParamBinding.indexedEach{ tpb, eachContext |
+		 /* self.typeParamBinding.indexedEach{ tpb, eachContext |
 			if eachContext.isFirst then
 				buffer.append("<")
 			end
@@ -52,7 +52,17 @@ aspect class Class
 		 	else
 		 		buffer.append(", ")
 			end
+		} */
+		// workaround compiler limitation
+		if not self.typeParamBinding.isEmpty then
+			buffer.append("<")
+		end
+		self.typeParamBinding.each{ tpb | 
+			buffer.append(tpb.type.getQualifiedName)
 		}
+		if not self.typeParamBinding.isEmpty then
+			buffer.append("<")
+		end
 		result := buffer.toString
 	end
 }
