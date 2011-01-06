@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="com"
+    nsURI="http://calendarGoogle/com" nsPrefix="calendarGoogle.com">
+  <eSubpackages name="google" nsURI="http://calendarGoogle/com/google" nsPrefix="calendarGoogle.com.google">
+    <eSubpackages name="calendar" nsURI="http://calendarGoogle/com/google/calendar"
+        nsPrefix="calendarGoogle.com.google.calendar">
+      <eClassifiers xsi:type="ecore:EClass" name="Calendar">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="#//google/calendar/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+            eType="#//google/calendar/CalendarEntry"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//google/calendar/Who"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CalendarEntry">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="location" upperBound="-1"
+            eType="#//google/calendar/Where"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="color" eType="#//google/calendar/Color"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="#//google/calendar/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="time" eType="#//google/calendar/When"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="#//google/calendar/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="#//google/calendar/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="authors" upperBound="-1"
+            eType="#//google/calendar/Who"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CalendarEventEntry" eSuperTypes="#//google/calendar/CalendarEntry">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
+            eType="#//google/calendar/Who"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="privateCopy" eType="#//google/calendar/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="webContent" eType="#//google/calendar/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//google/calendar/Value"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Value">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="attrName" eType="#//google/calendar/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="#//google/calendar/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//google/calendar/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="When">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="#//google/calendar/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" eType="#//google/calendar/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Where" eSuperTypes="#//google/calendar/Value"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="WhoStatus">
+        <eLiterals name="INVITED"/>
+        <eLiterals name="ACCEPTED" value="1"/>
+        <eLiterals name="TENTATIVE" value="2"/>
+        <eLiterals name="DECLINED" value="3"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="WhoType">
+        <eLiterals name="OPTIONAL"/>
+        <eLiterals name="REQUIRED" value="1"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Who">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//google/calendar/WhoStatus"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//google/calendar/WhoType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//google/calendar/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//google/calendar/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

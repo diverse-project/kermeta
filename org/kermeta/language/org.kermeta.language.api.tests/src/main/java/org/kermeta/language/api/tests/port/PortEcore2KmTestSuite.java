@@ -8,7 +8,6 @@
  */
 package org.kermeta.language.api.tests.port;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -22,7 +21,6 @@ import junit.framework.TestSuite;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortEcore2Km;
-import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.tests.Util;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 
@@ -37,12 +35,7 @@ public class PortEcore2KmTestSuite extends TestSuite {
         TestSuite suite = new TestSuite("PortEcore2KmTestSuite");
         
         try {
-            populate(suite, "Ecore2Km_Valid", true, portEcore2Kmfactory);//, ".ecore");
-//            populate(suite, "KmBinaryMerger_Invalid", false, portEcore2Kmfactory,".kmt");
-           // Util.populate(suite, "KMTLoader_Invalid", false, mergerClass,".kmt");
-           // Util.populate(suite, "Checker_Valid", true, loaderClass,".kmt");
-           // Util.populate(suite, "Checker_Invalid", true, loaderClass,".kmt");
-
+            populate(suite, "Ecore2Km_Valid", true, portEcore2Kmfactory);
         } catch (InstantiationException ex) {
             Logger.getLogger(PortKmBinaryMergerTestSuite.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -67,9 +60,7 @@ public class PortEcore2KmTestSuite extends TestSuite {
             vfiles = Util.getResourceListingFullURI(PortResourceLoaderTestSuite.class, folder);
 
             // make sure the aspect, expected_output and primary are always in the same order
-            Arrays.sort(vfiles);
             System.out.println("full URI: " + folderFullURI);
-            System.out.println("Entries list size: " + vfiles.length);
 
 //            String currentTestName = "";
 //            String currentPrimaryFilePath = "";
