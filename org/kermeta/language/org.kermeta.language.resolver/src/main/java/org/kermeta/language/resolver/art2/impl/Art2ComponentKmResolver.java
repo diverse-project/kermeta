@@ -37,7 +37,7 @@ import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmResolver;
 import org.kermeta.language.api.result.ModelingUnitResult;
-import org.kermeta.language.resolver.Resolver;
+import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
 
@@ -79,9 +79,9 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
     	ModelingUnitResult result = null;
     	
     	MainRunner.init();
-    	Resolver resolver = org.kermeta.language.resolver.RichFactory.createResolver();
+    	FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory.createFullStaticResolver();
     	try {
-			resolver.resolveFromModelingUnit(enforceAspect(mu));
+			resolver.resolve(enforceAspect(mu));
 		} catch (IOException e) {
 			logger.error(e.getMessage(),e);
 		}

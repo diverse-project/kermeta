@@ -85,7 +85,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/Resolver.km</model>
+                            <model>src/generated/km/FullStaticResolver.km</model>
                         </configuration>
                     </execution>
                 </executions>
