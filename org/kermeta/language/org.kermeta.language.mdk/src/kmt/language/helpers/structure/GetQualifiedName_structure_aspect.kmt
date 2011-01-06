@@ -1,0 +1,60 @@
+/* $Id:$ 
+ * Creation : November 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+@mainClass "org::kermeta::language::structure::NamedElement"
+@mainOperation "getName"
+
+
+package org::kermeta::language::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class NamedElement
+{
+	operation getQualifiedName() : String is do
+		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		if (not self.container().isVoid()) then
+			if self.container().isInstanceOf(NamedElement) then
+				buffer.append(self.container().asType(NamedElement).getQualifiedName())
+				buffer.append("::")
+			end
+		end
+		buffer.append(name)
+		result := buffer.toString
+	end
+}
+
+aspect class Type
+{
+	operation getQualifiedName() : String is do
+		
+		result := "<TODO "+toString+">"
+	end
+}
+
+aspect class Class
+{
+	method getQualifiedName() : String is do	
+		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		buffer.append(self.typeDefinition.asType(ClassDefinition).getQualifiedName)
+		
+		self.typeParamBinding.indexedEach{ tpb, eachContext |
+			if eachContext.isFirst then
+				buffer.append("<")
+			end
+			buffer.append(tpb.type.getQualifiedName)
+			if eachContext.isLast then
+		 		buffer.append(">")
+		 	else
+		 		buffer.append(", ")
+			end
+		}
+		result := buffer.toString
+	end
+}

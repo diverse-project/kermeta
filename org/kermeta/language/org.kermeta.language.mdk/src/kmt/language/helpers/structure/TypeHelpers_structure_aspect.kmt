@@ -9,17 +9,15 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "ClassDefinitionHelper.kmt"
 
 using kermeta::standard
 
 
+
+
 aspect class Type {
-	operation getCallableOperationByName( operationName : String ) : Operation is do
-		result := void
-	end
-	
-	operation getCallablePropertyByName( attributeName : String ) : Property is do
+
+	operation isSingleton( ) : Boolean is do
 		result := void
 	end
 }
@@ -43,20 +41,9 @@ aspect class Class inherits ParameterizedType {
 			result.add(st.asType(Class))
 		}
 	end
-	
-	/**
-	 * Get an Operation that can be called from an instance of this Class
-	 * return void if not found
-	 */
-	method getCallableOperationByName( operationName : String ) : Operation is do
-		result := self.typeDefinition.asType(ClassDefinition).getCallableOperationByName(operationName)
+		
+	method isSingleton( ) : Boolean is do
+		result := self.typeDefinition.asType(ClassDefinition).isSingleton
 	end
-	
-	/**
-	 * Get a Property that can be called from an instance of this Class
-	 * return void if not found
-	 */
-	method getCallablePropertyByName( attributeName : String ) : Property is do
-		result := self.typeDefinition.asType(ClassDefinition).getCallablePropertyByName(attributeName)
-	end	
 }
+
