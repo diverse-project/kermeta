@@ -16,7 +16,7 @@ aspect class Package {
 	operation getAllSubPackages() : OrderedSet<Package> is do
 		result := OrderedSet<Package>.new()
 				
-		var pack : Package init self.nestedPackage.each{ p |
+		self.nestedPackage.each{ p |
 			result.add(p)
 			result.addAll(p.getAllSubPackages())
 		}

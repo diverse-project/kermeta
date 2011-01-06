@@ -8,6 +8,6 @@
 package org::kermeta::language;
 
 
-require "ModelingUnitHelper.kmt"
+require "ModelingUnitHelper_structure_aspect.kmt"
 require "PackageHelper.kmt"
 require "CreationHelper.kmt"

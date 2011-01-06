@@ -48,7 +48,7 @@ aspect class ModelingUnit {
 	operation getAllPackages() : OrderedSet<Package> is do
 		result := OrderedSet<Package>.new()
 				
-		var pack : Package init self.packages.each{ p |
+		self.packages.each{ p |
 			result.add(p)
 			result.addAll(p.getAllSubPackages())
 		}
