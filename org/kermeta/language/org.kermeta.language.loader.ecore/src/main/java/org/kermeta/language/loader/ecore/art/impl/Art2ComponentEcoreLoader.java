@@ -1,4 +1,4 @@
-package org.kermeta.ecore.loader.art.impl;
+package org.kermeta.language.loader.ecore.art.impl;
 
 import java.util.List;
 
