@@ -21,5 +21,5 @@ public interface PortEcore2Km {
 	 * @param namespacePrefix The namespace prefix to set to the generated modeling unit.
 	 * @return The created modeling unit.
 	 */
-	public ModelingUnit convertPackage(final EPackage rootPackage, final String namespacePrefix);
+	ModelingUnit convertPackage(final EPackage rootPackage, final String namespacePrefix);
 }
