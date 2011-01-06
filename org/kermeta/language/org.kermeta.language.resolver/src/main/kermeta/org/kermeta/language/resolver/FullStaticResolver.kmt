@@ -14,7 +14,7 @@ package org::kermeta::language::resolver;
 
 require kermeta
 require "Resolver.kmt"
-require "../staticsetter/StaticSetterAspect.kmt"
+require "../staticsetter/StaticSetter_kermeta_aspect.kmt"
 require "../staticsetter/StaticSetterContext.kmt"
 require "ResolverException.kmt"
 
