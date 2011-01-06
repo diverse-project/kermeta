@@ -5,8 +5,6 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "org::kermeta::language::structure::NamedElement"
-@mainOperation "getName"
 
 
 package org::kermeta::language::structure;
