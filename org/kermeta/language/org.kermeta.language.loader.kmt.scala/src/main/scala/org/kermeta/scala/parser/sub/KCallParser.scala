@@ -23,8 +23,11 @@ import scala.collection.JavaConversions._
 trait KCallParser extends KAbstractParser {
 
 
-  def fCall = nCall | firstCall
+  def fCall = resultCall | nCall | firstCall
 
+  def resultCall = "result" ^^^ {
+    BehaviorFactory.eINSTANCE.createCallResult
+  }
 
   def nCall = "." ~> ident ~ (callFeatureParams?) ^^ { case id ~ params =>
       var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
