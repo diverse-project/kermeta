@@ -23,33 +23,6 @@
         <android.tools.adb>${android.home}/tools/adb</android.tools.adb>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>windows.profile</id>
-            <activation>
-                <os>
-                    <family>Windows</family>
-                </os>
-            </activation>
-            <properties>
-                <file.separator>\</file.separator>
-            </properties>
-        </profile>
-        <profile>
-            <id>non.windows.profile</id>
-            <activation>
-                <os>
-                    <family>!Windows</family>
-                </os>
-            </activation>
-            <properties>
-                <file.separator>/</file.separator>
-            </properties>
-        </profile>
-    </profiles>
-
-
-
     <build>
         <plugins>
             <plugin>
