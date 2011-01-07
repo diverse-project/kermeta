@@ -9,7 +9,7 @@ object JarDexer {
 
   def dex(dxPath:String,aaptPath:String,jarPath:String) = {
 
-    var dxCommand = List(dxPath,"--dex","--core-library","--output=classes.dex",jarPath)
+    var dxCommand = List(dxPath,"--dex","--core-library","--output="+SystemCommand.executionPath+java.io.File.separator+"classes.dex",jarPath)
 
     SystemCommand.exec(dxCommand)
 
