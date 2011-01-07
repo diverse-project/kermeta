@@ -9,7 +9,7 @@ object JarMavenizer {
 
   def mavenize(jarPath : String,groupId:String,deploymentUrl:String,deployId:String) = {
 
-    var jarAnalyser = new JarAnalyzer(jarPath.substring(jarPath.lastIndexOf("/")+1))
+    var jarAnalyser = new JarAnalyzer(jarPath.substring(jarPath.lastIndexOf(java.io.File.separator)+1))
     var command = List("mvn","deploy:deploy-file")
     command= command ++ List("-Dfile=" + jarPath);
     command= command ++ List("-DgroupId=" + groupId);

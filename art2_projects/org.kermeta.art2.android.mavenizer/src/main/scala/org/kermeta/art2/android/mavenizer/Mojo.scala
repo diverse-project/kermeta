@@ -26,7 +26,7 @@ case class Mojo(dirPath:String,dxPath:String,aaptPath:String,groupId:String,depl
     println("System command path "+SystemCommand.executionPath)
 
     dir.list.filter({file=> file.endsWith(".jar") }).foreach{file=>
-      var jarPath = dirPath+"/"+file
+      var jarPath = dirPath+java.io.File.separator+file
 
       println("process : "+jarPath)
 

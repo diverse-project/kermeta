@@ -25,7 +25,7 @@ case class DexUploadMojo(adbPath : String,dxPath:String,aaptPath:String,remotePa
     println("System command path "+SystemCommand.executionPath)
 
     dir.list.filter({file=> file.endsWith(".jar") }).foreach{file=>
-      var jarPath = dirPath+"/"+file
+      var jarPath = dirPath+java.io.File.separator+file
 
       println("process : "+jarPath)
 
