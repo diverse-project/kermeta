@@ -13,6 +13,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 using kermeta::standard
 
+
 aspect class NamedElement
 {
 	operation getQualifiedName() : String is do
@@ -53,7 +54,7 @@ aspect class Class
 		 		buffer.append(", ")
 			end
 		} */
-		// workaround compiler limitation
+		// workaround compiler/framework limitation, forget about the "," between elements :-(
 		if not self.typeParamBinding.isEmpty then
 			buffer.append("<")
 		end
@@ -64,5 +65,26 @@ aspect class Class
 			buffer.append("<")
 		end
 		result := buffer.toString
+	end
+}
+aspect class DataType
+{
+	method getQualifiedName() : String is do
+		
+		result := super()
+	end
+}
+aspect class ModelType
+{
+	method getQualifiedName() : String is do
+		
+		result := super()
+	end
+}
+aspect class TypeVariable
+{
+	method getQualifiedName() : String from NamedElement is do
+		
+		result := super()
 	end
 }
