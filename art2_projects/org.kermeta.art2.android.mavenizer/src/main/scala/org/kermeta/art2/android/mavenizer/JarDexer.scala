@@ -13,7 +13,7 @@ object JarDexer {
 
     SystemCommand.exec(dxCommand)
 
-    var aaptCommand = List(aaptPath,"add",jarPath,"classes.dex")
+    var aaptCommand = List(aaptPath,"add",jarPath,SystemCommand.executionPath+java.io.File.separator+"classes.dex")
 
     SystemCommand.exec(aaptCommand)
 
