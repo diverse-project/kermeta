@@ -25,8 +25,11 @@ public abstract class GraphicalComponent {
 		Object obj1 = Source2TargetMap.MAP.getTargetObject(compRO);
 		Object obj2 = Source2TargetMap.MAP.getTargetObject(popupRO);
 		
-		if(obj1 instanceof JComponent && obj2 instanceof JPopupMenu)
-			((JComponent)obj1).setComponentPopupMenu((JPopupMenu) obj2);
+		if(obj1 instanceof JComponent && obj2 instanceof JPopupMenu) {
+			((JComponent)obj1).setComponentPopupMenu((JPopupMenu)obj2);
+			((JPopupMenu)obj2).setInvoker((JComponent)obj1);
+			((JPopupMenu) obj2).setFocusable(false);
+		}
 	}
 	
 	

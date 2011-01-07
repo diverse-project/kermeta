@@ -16,7 +16,7 @@ public abstract class PopupMenu {
 	public static void setVisible(Object widgetRO, boolean visible) {
 		Object obj = Source2TargetMap.MAP.getTargetObject(widgetRO);
 
-		if(obj == null || !(obj instanceof JPopupMenu))
+		if(!(obj instanceof JPopupMenu))
 			System.out.println("The graphical object is null or is not a Component: " + obj + " " + widgetRO);
 		else {
 			final JPopupMenu popup = (JPopupMenu) obj;
