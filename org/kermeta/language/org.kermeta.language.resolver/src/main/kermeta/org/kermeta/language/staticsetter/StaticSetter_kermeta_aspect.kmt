@@ -15,7 +15,7 @@ require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
 
@@ -23,29 +23,35 @@ using org::kermeta::language::structure
 using org::kermeta::language::staticsetter
 
 package structure {
-	aspect class Object {
+	 aspect class Object {
 		operation inferContainedExpressionStatic(context : StaticSetterContext) is do
 						
 			// the algorithm is bottom up
 			// compute leaf then goes up in the container which can then reuse their results
-			self.eachOwnedElement{ e | 
-				if ( e.isInstanceOf(Expression)) then
-					e.asType(Expression).resolveCallAndInferStatic(context)
-				else
-					e.asType(Object).inferContainedExpressionStatic(context)
-				end				
-			}
+			// workaround compiler bug : issue when adding aspect on object
+			// put this method as helper that do the same, called by direct subclasses of Object
+			context.inferContainedExpressionStatic(self)
+		end
+	} 
+	aspect class NamedElement {
+		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+			context.inferContainedExpressionStatic(self)
+		end
+	}
+	aspect class TypeContainer {
+		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+			context.inferContainedExpressionStatic(self)
 		end
 	}
 	aspect class ClassDefinition {
-		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
 			context.currentClassDefinition := self			
 			super(context)
 			context.currentClassDefinition := void
 		end
 	}
 	aspect class Operation {
-		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement  is do
 			context.currentOperation := self
 			context.pushContext()
 			self.ownedParameter.each{ param | 				
@@ -68,11 +74,16 @@ package behavior {
 			
 			// the algorithm is bottom up
 			// compute leaf then goes up in the container which can then reuse their results
-			self.eachOwnedElement{ e | 
+			self.containedType.each{ e | 
 				if ( e.isInstanceOf(Expression)) then
 					e.asType(Expression).resolveCallAndInferStatic(context)
 				end
 			} 
+			self.kOwnedTags.each{ e | 
+				if ( e.isInstanceOf(Expression)) then
+					e.asType(Expression).resolveCallAndInferStatic(context)
+				end
+			}
 		end
 		
 		/**
@@ -167,7 +178,11 @@ package behavior {
 					callOperation.name := self.name
 					callOperation.kOwnedTags.addAll(self.kOwnedTags)
 					// infer staticType of the content (except target which has been done previously)
-					callOperation.eachOwnedElement{ e | e.asType(Object).inferContainedExpressionStatic(context)}
+					callOperation.eachOwnedElement{ e | 
+						e.asType(Object).inferContainedExpressionStatic(context)
+						e // scala compiler needs somthing to return
+					}
+					
 					// reassign target and parameters
 					callOperation.parameters.addAll(self.parameters)
 					callOperation.target := self.target 
@@ -196,7 +211,11 @@ package behavior {
 					//callProperty.parameters.addAll(self.parameters)
 					callProperty.kOwnedTags.addAll(self.kOwnedTags)
 					// infer staticType of the content (except target which has been done previously)
-					callProperty.eachOwnedElement{ e | e.asType(Object).inferContainedExpressionStatic(context)}
+					callProperty.eachOwnedElement{ e | 
+						e.asType(Object).inferContainedExpressionStatic(context)						
+						e // scala compiler needs somthing to return
+					}
+					
 					// reassign target
 					callProperty.target := self.target 
 					// set staticProperty
