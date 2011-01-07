@@ -23,6 +23,32 @@
         <android.tools.adb>${android.home}/tools/adb</android.tools.adb>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>windows.profile</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <file.separator>\</file.separator>
+            </properties>
+        </profile>
+        <profile>
+            <id>non.windows.profile</id>
+            <activation>
+                <os>
+                    <family>!Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <file.separator>/</file.separator>
+            </properties>
+        </profile>
+    </profiles>
+
+
 
     <build>
         <plugins>
@@ -58,7 +84,7 @@
                                 <argument>${android.tools.dx}</argument>
                                 <argument>${android.tools.aapt}</argument>
                                 <argument>/mnt/sdcard/OSGI/bundle</argument>
-                                <argument>${project.build.directory}/lib</argument>
+                                <argument>${project.build.directory}${file.separator}lib</argument>
                             </arguments>
                         </configuration>
                     </execution>
