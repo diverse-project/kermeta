@@ -76,9 +76,20 @@ public class PortKmBinaryMergerTest extends TestCase {
         System.out.println("Test merging " + primaryFilePath);
         System.out.println("        with " + aspectFilePath);
         
-        
-        ModelingUnitResult result = merger.merge(ModelingUnitUtil.loadModelingUnit(primaryFilePath), ModelingUnitUtil.loadModelingUnit(aspectFilePath));
+        ModelingUnit primaryModel = ModelingUnitUtil.loadModelingUnit(primaryFilePath);
+        ModelingUnit aspectModel = ModelingUnitUtil.loadModelingUnit(aspectFilePath);
+        ModelingUnitResult result = merger.merge(primaryModel, aspectModel);
 
+        if(primaryFilePath.endsWith(".kmt")){
+        	String intermediateResultPath = outputFilePath.replaceAll(".km", "") + "_intermediate_primary.xmi";
+        	System.out.println("   saving intermediate result in " + intermediateResultPath);
+            ModelingUnitUtil.saveModelingUnit(intermediateResultPath, primaryModel);
+        }
+        if(aspectFilePath.endsWith(".kmt")){
+        	String intermediateResultPath = outputFilePath.replaceAll(".km", "") + "_intermediate_aspect.xmi";
+        	System.out.println("   saving intermediate result in " + intermediateResultPath);
+            ModelingUnitUtil.saveModelingUnit(intermediateResultPath, aspectModel);
+        }
 
         System.out.println("   saving merge result in " + outputFilePath);
         ModelingUnitUtil.saveModelingUnit(outputFilePath, result.getModelingUnit());
