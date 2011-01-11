@@ -89,24 +89,33 @@ public class GenerateExecutableKMAction {
 						// TODO process Ecore files
 						art2ComponentKWF.getLogger().warning("Load of ecore file not implemented. Ignoring "+ecoreFile.getName());
 					}
-					// Merge everything
-					ModelingUnitResult mergeResult = art2ComponentKWF.getKmMergerPort().merge(units);
-					if(!request.getIntermediateDebugOutputURI().isEmpty()){
-						String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/merge/result.km";
-						art2ComponentKWF.getLogger().debug("saving intermediate result: " +intermediateOutputUri);
-						saveModelingUnit(intermediateOutputUri, mergeResult.getModelingUnit());
+					if (units.isEmpty()){
+						art2ComponentKWF.getLogger().warning("nothing to process in " +uri.toFileString());
+						
 					}
-					// Resolve result
-					ModelingUnitResult resolveResult = art2ComponentKWF.getKmResolverPort().resolve(mergeResult.getModelingUnit());
-					result = resolveResult.getModelingUnit();
+					else{
+						// Merge everything
+						ModelingUnitResult mergeResult = art2ComponentKWF.getKmMergerPort().merge(units);
+						if(!request.getIntermediateDebugOutputURI().isEmpty()){
+							String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/merge/result.km";
+							art2ComponentKWF.getLogger().debug("saving intermediate result: " +intermediateOutputUri);
+							saveModelingUnit(intermediateOutputUri, mergeResult.getModelingUnit());
+						}
+						
+						// Resolve result
+						ModelingUnitResult resolveResult = art2ComponentKWF.getKmResolverPort().resolve(mergeResult.getModelingUnit());
+						result = resolveResult.getModelingUnit();
+					}
 				}
 				else{
 					// TODO deal with kp file description
 					art2ComponentKWF.getLogger().error("Excutable Merge from kp project description not implemented. ", null);
 					return;
 				}
-				art2ComponentKWF.getLogger().debug("saving result: " +request.getOutputURI());
-				saveModelingUnit(request.getOutputURI(),result);
+				if(result != null){
+					art2ComponentKWF.getLogger().debug("saving result: " +request.getOutputURI());
+					saveModelingUnit(request.getOutputURI(),result);
+				}
 			}
 			else{
 				art2ComponentKWF.getLogger().error("file or folder doesn't exist : " + inputDescriptionURI, null);
