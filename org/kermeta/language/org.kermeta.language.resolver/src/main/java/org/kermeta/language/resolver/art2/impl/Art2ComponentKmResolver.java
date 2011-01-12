@@ -35,6 +35,7 @@ import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
 import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
+import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmResolver;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.resolver.FullStaticResolver;
@@ -111,6 +112,17 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
 
     public Bundle getBundle() {
         return bundle;
+    }
+    
+    /**
+     * This opertion should pass everything that ART2 initialize before calling the usual start method
+     * This is used for test purpose
+     * @param bundleSymbolicName
+     */
+    public void simulatedStart(String bundleSymbolicName) {
+        this.bundleSymbolicName = bundleSymbolicName;
+        logger = new SimpleLogger(this, bundleSymbolicName, "log");
+        logger.debug("Successfully started " + bundleSymbolicName);
     }
     
     protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
