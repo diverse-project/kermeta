@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : September 14, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cbouhour
+ */
+@mainClass "helloworld::HelloworldExample"
+@mainOperation "sayHello"
+
+
+package helloworld;
+
+
+require kermeta
+using kermeta::standard
+class HelloworldExample
+{
+	operation sayHello() : Void is do 
+		stdio.writeln("Coucou, c'est moi")
+	end
+}
