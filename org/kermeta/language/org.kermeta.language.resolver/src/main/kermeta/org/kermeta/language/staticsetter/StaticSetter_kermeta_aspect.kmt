@@ -159,7 +159,9 @@ package behavior {
 				newParameters.add(oldParameter.resolveCallAndInferStatic(context))
 			}
 			self.parameters.clear
-			self.parameters.addAll(newParameters)
+			
+			// self.parameters.addAll(newParameters)
+			newParameters.each{ p | self.parameters.add(p) }
 			
 			
 				

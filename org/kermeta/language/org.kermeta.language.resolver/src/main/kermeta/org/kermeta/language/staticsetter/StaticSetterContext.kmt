@@ -16,6 +16,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/each
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetter_kermeta_aspect.kmt"
+require "SimpleDuplicate_kermeta_aspect.kmt"
 require "../resolver/ResolverException.kmt"
 
 using kermeta::standard
@@ -100,7 +101,8 @@ class StaticSetterContext
 		
 		// clone the type of the multiplicity element
 		var typeCopy : org::kermeta::language::structure::Type
-			// UGLY: need a real clone
+		result := element.duplicate.asType(Type)
+		/*	// UGLY: need a real clone
 			if element.type.isInstanceOf(org::kermeta::language::structure::Class) then
 				result := org::kermeta::language::structure::Class.clone(element.type.asType(org::kermeta::language::structure::Class))
 			end
@@ -108,7 +110,7 @@ class StaticSetterContext
 				result := org::kermeta::language::structure::FunctionType.clone(element.type.asType(org::kermeta::language::structure::FunctionType))
 			end
 			// TODO deal with other concrete Type
-		
+		*/
 			 
 		if element.upper == 0 then
 			// the only type valid with upper bound == 0 is Void 

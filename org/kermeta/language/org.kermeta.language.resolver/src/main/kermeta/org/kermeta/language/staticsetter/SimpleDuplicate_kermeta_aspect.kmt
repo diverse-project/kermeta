@@ -1,0 +1,130 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ * create a copy of the given element
+ * note: if we follow this structure it would be better to have a generator ?
+ * Algorithm incomplete: in the general case internal reference should be fixed
+ * in that case we do the supposition that the type used are 
+ */
+
+
+package org::kermeta::language;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+
+using org::kermeta::language::structure
+
+package structure {
+	aspect class Object {
+		reference duplicatedIn : Object
+		operation duplicate() : Object is abstract
+		operation duplicateContentTo(destCopy : Object)  is do
+		
+			kOwnedTags.each{ t |
+				var newTag : Tag init t.duplicate.asType(Tag)
+				destCopy.kOwnedTags.add(newTag)
+				// suppostion (wrong in the general case) : the usedTag are contained by kOwnedTags of self
+				if  self.kTag.contains(t) then
+					destCopy.kTag.add(newTag)
+				end
+			}		
+			result := void
+		end
+	}
+
+	 aspect class Type {
+	 	
+		method duplicateContentTo(destCopy : Object)  is do
+						
+			result := void
+		end
+	}
+	aspect class Class {
+		method duplicate() : Object is do
+			result := Class.new
+			self.duplicateContentTo(result)
+		end
+		method duplicateContentTo(destCopy : Object)  is do
+			super(destCopy)
+			result := void
+		end
+	}
+	aspect class ParameterizedType {		
+		method duplicateContentTo(destCopy : Object)  is do
+			super(destCopy)	
+			typeParamBinding.each{ tpb |
+				destCopy.asType(ParameterizedType).typeParamBinding.add(tpb.duplicate.asType(TypeVariableBinding))
+			}	
+			virtualTypeBinding.each{ tpb |
+				destCopy.asType(ParameterizedType).virtualTypeBinding.add(tpb.duplicate.asType(TypeVariableBinding))
+			}	
+			destCopy.asType(ParameterizedType).typeDefinition := self.typeDefinition
+			result := void
+		end
+	}
+	
+	aspect class Tag {
+	
+		method duplicate() : Object is do
+			result := Tag.new
+			self.duplicateContentTo(result)
+		end
+		method duplicateContentTo(destCopy : Object)  is do
+			destCopy.asType(Tag).name := self.name
+			destCopy.asType(Tag).~value := self.~value	
+			super(destCopy)	
+			result := void
+		end
+	}
+	aspect class TypeVariable {
+		
+		method duplicateContentTo(destCopy : Object)  is do
+				
+			super(destCopy)
+			if not self.supertype.isVoid then
+				destCopy.asType(TypeVariable).supertype := self.supertype.duplicate.asType(Type)
+				destCopy.asType(TypeVariable).containedType.add(destCopy.asType(TypeVariable).supertype)
+			end	
+			result := void
+		end
+	}
+	aspect class ObjectTypeVariable {
+		method duplicate() : Object is do
+			result := ObjectTypeVariable.new
+			self.duplicateContentTo(result)
+		end
+		method duplicateContentTo(destCopy : Object)  is do
+				
+			super(destCopy)
+			result := void
+		end
+	}
+	aspect class TypeVariableBinding {
+		method duplicate() : Object is do
+			result := TypeVariableBinding.new
+			self.duplicateContentTo(result)
+		end
+		method duplicateContentTo(destCopy : Object)  is do
+				
+			super(destCopy)
+			if not self.type.isVoid then
+				destCopy.asType(TypeVariableBinding).type := self.type.duplicate.asType(Type)
+				destCopy.asType(TypeVariableBinding).containedType.add(destCopy.asType(TypeVariableBinding).type)
+			end	
+			if not self.variable.isVoid then
+				destCopy.asType(TypeVariableBinding).variable := self.variable.duplicate.asType(TypeVariable)
+				destCopy.asType(TypeVariableBinding).containedType.add(destCopy.asType(TypeVariableBinding).variable)
+			end
+			result := void
+		end
+	}
+	
+	
+}
+
