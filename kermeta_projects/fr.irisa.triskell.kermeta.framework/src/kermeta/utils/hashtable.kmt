@@ -71,6 +71,15 @@ class Hashtable<K, V>
 	end
 	
 	/**
+	 * Adds entries from an Hashtable (ht) into the Hashtable
+	 */
+	operation putAll( ht : Hashtable<K, V> ) : Void is do
+    	ht.keys().each{ k |
+    		self.put(k, ht.getValue(k))
+    	}
+    end
+	
+	/**
 	 * Removes the entry with key equals to 'key'
 	 */
 	operation remove(key : K) : Void is do
