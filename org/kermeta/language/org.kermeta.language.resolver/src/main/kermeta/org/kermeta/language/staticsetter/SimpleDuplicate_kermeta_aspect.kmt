@@ -75,10 +75,19 @@ package structure {
 			result := Tag.new
 			self.duplicateContentTo(result)
 		end
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : Object)    is do
 			destCopy.asType(Tag).name := self.name
 			destCopy.asType(Tag).~value := self.~value	
-			super(destCopy)	
+			 // super(destCopy)
+			 // workaround compiler bug, cannot super to Object
+			 kOwnedTags.each{ t |
+				var newTag : Tag init t.duplicate.asType(Tag)
+				destCopy.kOwnedTags.add(newTag)
+				// suppostion (wrong in the general case) : the usedTag are contained by kOwnedTags of self
+				if  self.kTag.contains(t) then
+					destCopy.kTag.add(newTag)
+				end
+			}	
 			result := void
 		end
 	}
