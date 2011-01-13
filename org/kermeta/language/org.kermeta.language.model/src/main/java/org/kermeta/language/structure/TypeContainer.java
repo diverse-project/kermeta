@@ -43,7 +43,7 @@ public interface TypeContainer extends org.kermeta.language.structure.Object {
 	 * @return the value of the '<em>Contained Type</em>' containment reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getTypeContainer_ContainedType()
 	 * @see org.kermeta.language.structure.Type#getTypeContainer
-	 * @model opposite="typeContainer" containment="true"
+	 * @model opposite="typeContainer" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Type> getContainedType();

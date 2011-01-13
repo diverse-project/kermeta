@@ -41,7 +41,7 @@ public interface TypeDefinitionContainer extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Type Definition</em>' containment reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getTypeDefinitionContainer_OwnedTypeDefinition()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<TypeDefinition> getOwnedTypeDefinition();
