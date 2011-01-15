@@ -541,13 +541,22 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Unique Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__UNIQUE_NAME = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
+	int OPERATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
@@ -4079,6 +4088,17 @@ public interface StructurePackage extends EPackage {
 	EReference getOperation_TypeParameter();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique Name</em>'.
+	 * @see org.kermeta.language.structure.Operation#getUniqueName()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_UniqueName();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5617,6 +5637,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION__TYPE_PARAMETER = eINSTANCE.getOperation_TypeParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Unique Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__UNIQUE_NAME = eINSTANCE.getOperation_UniqueName();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.

@@ -506,6 +506,8 @@
               <details key="documentation" value="TypeParameters of the Operation"/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueName" eType="#//kermeta/language/structure/String"
+              transient="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//kermeta/language/structure/MultiplicityElement #//kermeta/language/structure/AbstractProperty">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -902,7 +904,7 @@
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false"
               upperBound="-1" eType="#//kermeta/language/structure/Operation" containment="true"
-              eOpposite="#//kermeta/language/structure/Operation/owningClass">
+              eOpposite="#//kermeta/language/structure/Operation/owningClass" eKeys="#//kermeta/language/structure/Operation/uniqueName">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Operations owned by this ClassDefinition."/>
             </eAnnotations>

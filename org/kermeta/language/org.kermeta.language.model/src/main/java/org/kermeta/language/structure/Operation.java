@@ -32,6 +32,7 @@ import org.kermeta.language.behavior.Expression;
  *   <li>{@link org.kermeta.language.structure.Operation#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -238,5 +239,31 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();
+
+	/**
+	 * Returns the value of the '<em><b>Unique Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unique Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unique Name</em>' attribute.
+	 * @see #setUniqueName(String)
+	 * @see org.kermeta.language.structure.StructurePackage#getOperation_UniqueName()
+	 * @model dataType="org.kermeta.language.structure.String" transient="true"
+	 * @generated
+	 */
+	String getUniqueName();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unique Name</em>' attribute.
+	 * @see #getUniqueName()
+	 * @generated
+	 */
+	void setUniqueName(String value);
 
 } // Operation

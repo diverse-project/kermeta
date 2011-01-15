@@ -11,22 +11,16 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.behavior.Expression;
-
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
@@ -54,6 +48,7 @@ import org.kermeta.language.structure.UnresolvedOperation;
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getUniqueName <em>Unique Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -159,6 +154,26 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @ordered
 	 */
 	protected EList<TypeVariable> typeParameter;
+
+	/**
+	 * The default value of the '{@link #getUniqueName() <em>Unique Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUniqueName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String UNIQUE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUniqueName() <em>Unique Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUniqueName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uniqueName = UNIQUE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -397,6 +412,37 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getUniqueName() {
+		if (uniqueName==null) {
+			StringBuffer unique = new StringBuffer();
+			unique.append(this.getName());
+			unique.append(getOwnedParameter().size());
+			for (Parameter aParameter : getOwnedParameter()) {
+				unique.append(aParameter.getName());
+				unique.append(aParameter.getType());
+			}
+			setUniqueName(unique.toString());
+		}
+		return uniqueName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUniqueName(String newUniqueName) {
+		String oldUniqueName = uniqueName;
+		uniqueName = newUniqueName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.OPERATION__UNIQUE_NAME, oldUniqueName, uniqueName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -484,6 +530,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return getOwningClass();
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return getTypeParameter();
+			case StructurePackage.OPERATION__UNIQUE_NAME:
+				return getUniqueName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -533,6 +581,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				getTypeParameter().clear();
 				getTypeParameter().addAll((Collection<? extends TypeVariable>)newValue);
 				return;
+			case StructurePackage.OPERATION__UNIQUE_NAME:
+				setUniqueName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -575,6 +626,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				getTypeParameter().clear();
 				return;
+			case StructurePackage.OPERATION__UNIQUE_NAME:
+				setUniqueName(UNIQUE_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -607,6 +661,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return getOwningClass() != null;
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return typeParameter != null && !typeParameter.isEmpty();
+			case StructurePackage.OPERATION__UNIQUE_NAME:
+				return UNIQUE_NAME_EDEFAULT == null ? uniqueName != null : !UNIQUE_NAME_EDEFAULT.equals(uniqueName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -623,6 +679,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isAbstract: ");
 		result.append(isAbstract);
+		result.append(", uniqueName: ");
+		result.append(uniqueName);
 		result.append(')');
 		return result.toString();
 	}
