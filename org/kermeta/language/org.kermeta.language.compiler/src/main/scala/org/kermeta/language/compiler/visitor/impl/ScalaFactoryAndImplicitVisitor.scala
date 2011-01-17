@@ -377,6 +377,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
     c.getSuperType.foreach(e=>
       return getEcoreSuperClass(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition])
     )
+
+    if(c.getName == "Object") return c
+
+    println(c.getName)
+
     println("Je vais partir en NPE")
 		
     return null;
