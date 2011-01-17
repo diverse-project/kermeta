@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
@@ -129,9 +130,17 @@ public class EMFCompareModelHelper {
 	
 	public static boolean isSimilarAndSaveDiff(EObject model1, EObject model2, String diffModelPath) {
 		DiffModel diffModel = getDiffModel(model1, model2);
-		if(((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges()> 0) {
+			
+		//Cédric Bouhours modification.
+		//Last :
+		//if(((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges()> 0) {
+		//New :
+		if(diffModel.getDifferences().size() > 0) {
+			for (DiffElement elem : diffModel.getDifferences()) {
+				System.out.println("Difference detected : "+elem.toString()); 
+			}
 			try {
-		        URI uri = URI.createURI(diffModelPath);
+				URI uri = URI.createURI(diffModelPath);
 		        uri = new ExtensibleURIConverterImpl().normalize(uri);
 		        String uriAsString = uri.toString();//.replace("file:", "");
 		        System.out.println("Saving diff model in "+uriAsString);
