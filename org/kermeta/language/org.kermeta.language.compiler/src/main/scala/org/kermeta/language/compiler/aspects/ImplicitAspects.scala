@@ -29,6 +29,8 @@ object ImplicitAspects {
 
   implicit def richObject(c : KObject) : ObjectAspect = {
     c match {
+      case c : KPackage => RichPackage(c)
+      case c : KClassDefinition => RichClassDefinition(c)
       case c : CallVariable => RichCallVariable(c)
       case c : StringLiteral => RichStringLiteral(c)
       case c : CallTypeLiteral => RichCallTypeLiteral(c)
