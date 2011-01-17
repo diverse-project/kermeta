@@ -35,8 +35,10 @@ public class AppTest
     public void testApp() {
         assertTrue(true);
 
+        System.out.println("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/out.km");
+
         LoadModelHelper loader = new LoadModelHelper();
-        ModelingUnit model = loader.loadKM("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.api.tests/src/main/resources/KmCompiler_Valid/valid_001_Helloworld/testHelloWorld_standalone.km");
+        ModelingUnit model = loader.loadKM("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/out.km");
 
         File fb = new File("K2Output");
         fb.mkdir();
