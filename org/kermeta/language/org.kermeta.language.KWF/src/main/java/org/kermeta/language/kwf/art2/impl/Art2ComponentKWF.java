@@ -28,6 +28,8 @@ import org.kermeta.language.api.kevent.KDocumentUpdate;
 import org.kermeta.language.api.kevent.KEvent;
 import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
+import org.kermeta.language.api.port.PortEcore2Km;
+import org.kermeta.language.api.port.PortEcoreLoader;
 import org.kermeta.language.api.port.PortKEvent;
 import org.kermeta.language.api.port.PortKmLoader;
 import org.kermeta.language.api.port.PortKmMerger;
@@ -130,8 +132,16 @@ public class Art2ComponentKWF extends AbstractComponentType {
     
     // --- Port accessors ---
     
+    public PortEcore2Km getEcore2KmPort() {
+    	return getPortByName("Ecore2km", PortEcore2Km.class);
+    }
+    
+    public PortEcoreLoader getEcoreLoaderPort() {
+    	return getPortByName("EcoreLoader", PortEcoreLoader.class);
+    }
+    
     public PortKmLoader getKmLoaderPort() {
-    	return getPortByName("kmLoader", PortKmLoader.class);
+    	return getPortByName("KmLoader", PortKmLoader.class);
     }
 
     public PortResourceLoader getKmtLoaderPort() {

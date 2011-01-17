@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -66,18 +68,18 @@ public class GenerateExecutableKMAction {
 			String inputDescriptionURI = request.getInputDescriptionURI();
 			URI uri = URI.createURI(inputDescriptionURI);
 			File f = new File(uri.toFileString());
-			if(f.exists()){	
+			if(f.exists()){
 				if(f.isDirectory()){
-					ArrayList<ModelingUnit> units = new ArrayList<ModelingUnit>();
+					List<ModelingUnit> units = new ArrayList<ModelingUnit>();
+
 					// process KMT files
-					 
 					for (File kmtFile : f.listFiles(filterKMT)){
 						art2ComponentKWF.getLogger().debug("loading : " + kmtFile.getCanonicalPath());
 						ModelingUnit kmt2KmResult = art2ComponentKWF.getKmtLoaderPort().load(kmtFile.getCanonicalPath(), PortResourceLoader.URIType.FILE, "");
 						units.add(kmt2KmResult);
 						if(!request.getIntermediateDebugOutputURI().isEmpty()){
-							String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/kmt2km/"+kmtFile.getName().replace(".kmt", "")+".km";
-							art2ComponentKWF.getLogger().debug("saving intermediate result :" +intermediateOutputUri);
+							String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/kmt2km/"+kmtFile.getName().replace(".kmt", ".km");
+							art2ComponentKWF.getLogger().debug("saving intermediate result:" +intermediateOutputUri);
 							saveModelingUnit(intermediateOutputUri, kmt2KmResult);
 						}
 					}
@@ -86,13 +88,33 @@ public class GenerateExecutableKMAction {
 						// Loading Km models.
 						units.add(art2ComponentKWF.getKmLoaderPort().load(kmFile.getCanonicalPath()));
 					}	
-					for (File ecoreFile : f.listFiles(filterEcore)){
-						// TODO process Ecore files
-						art2ComponentKWF.getLogger().warning("Load of ecore file not implemented. Ignoring "+ecoreFile.getName());
+					for(final File ecoreFile : f.listFiles(filterEcore)){
+						final List<EPackage> ecorePkgs 	= new ArrayList<EPackage>();
+						final List<ModelingUnit> mus 	= new ArrayList<ModelingUnit>();
+						ModelingUnit mu;
+
+						art2ComponentKWF.getLogger().debug("loading ecore model: " + ecoreFile.getCanonicalPath());
+						// Loading ecore models.
+						ecorePkgs.addAll(art2ComponentKWF.getEcoreLoaderPort().load(ecoreFile.getCanonicalPath()));
+						// Converting the ecore model into a kermeta model.
+						for(final EPackage pkg : ecorePkgs) {
+							mu = art2ComponentKWF.getEcore2KmPort().convertPackage(pkg, inputDescriptionURI);//TODO is inputDescriptionURI?
+							mus.add(mu);
+							units.add(mu);
+						}
+						// Saving km models if needed.
+						if(!request.getIntermediateDebugOutputURI().isEmpty())
+							for(final ModelingUnit modelingUnit : mus) {
+								final String intermediateOutputUri = request.getIntermediateDebugOutputURI()+"/ecore2km/"+ecoreFile.getName().replace(".ecore", ".km");
+								art2ComponentKWF.getLogger().debug("saving intermediate ecore2km result:" +intermediateOutputUri);
+								saveModelingUnit(intermediateOutputUri, modelingUnit);
+							}
+						// Freeing lists
+						ecorePkgs.clear();
+						mus.clear();
 					}
-					if (units.isEmpty()){
+					if(units.isEmpty()){
 						art2ComponentKWF.getLogger().warning("nothing to process in " +uri.toFileString());
-						
 					}
 					else{
 						// Merge everything
@@ -117,7 +139,7 @@ public class GenerateExecutableKMAction {
 					art2ComponentKWF.getLogger().debug("saving result: " +request.getOutputURI());
 					saveModelingUnit(request.getOutputURI(),result);
 				}
-			}
+			} // if(f.exists())
 			else{
 				art2ComponentKWF.getLogger().error("file or folder doesn't exist : " + inputDescriptionURI, null);
 			}
