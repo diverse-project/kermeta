@@ -77,21 +77,20 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
     @Port(name = "KmResolver", method = "resolve")
 	public ModelingUnitResult resolve(ModelingUnit mu) {
     	logger.debug("Resolving ModelingUnit..." );
-    	ModelingUnitResult result = null;
-    	
+   	
     	MainRunner.init();
     	FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory.createFullStaticResolver();
+    	ModelingUnit muResolved = null;
     	try {
-			resolver.resolve(enforceAspect(mu));
+    		muResolved = resolver.resolve(enforceAspect(mu));
 		} catch (IOException e) {
 			logger.error(e.getMessage(),e);
 		}
     	
     	logger.debug("ModelingUnit resolved..." );
-    	logger.debug("Static setting ModelingUnit..." );
-    	
-    	result = new ModelingUnitResult(mu);
-    	logger.warning("Not implemented, returning input ModelingUnit" );
+    	ModelingUnitResult result;
+    	result = new ModelingUnitResult(muResolved);
+    	logger.warning("Resolver not completely implemented" );
     	
     	return result;
 	}
