@@ -81,9 +81,10 @@ public class GenerateExecutableKMAction {
 							saveModelingUnit(intermediateOutputUri, kmt2KmResult);
 						}
 					}
-					for (File kmFile : f.listFiles(filterKM)){
-						// TODO process KM files
-						art2ComponentKWF.getLogger().warning("Load of km file not implemented. Ignoring "+kmFile.getName());
+					for(final File kmFile : f.listFiles(filterKM)){
+						art2ComponentKWF.getLogger().debug("loading km model: " + kmFile.getCanonicalPath());
+						// Loading Km models.
+						units.add(art2ComponentKWF.getKmLoaderPort().load(kmFile.getCanonicalPath()));
 					}	
 					for (File ecoreFile : f.listFiles(filterEcore)){
 						// TODO process Ecore files

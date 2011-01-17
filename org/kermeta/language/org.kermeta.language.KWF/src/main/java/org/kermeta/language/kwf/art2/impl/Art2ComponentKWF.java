@@ -29,6 +29,7 @@ import org.kermeta.language.api.kevent.KEvent;
 import org.kermeta.language.api.kevent.KExecutableKmUserRequestEvent;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKEvent;
+import org.kermeta.language.api.port.PortKmLoader;
 import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.port.PortKmResolver;
 import org.kermeta.language.api.port.PortResourceLoader;
@@ -128,6 +129,10 @@ public class Art2ComponentKWF extends AbstractComponentType {
     }
     
     // --- Port accessors ---
+    
+    public PortKmLoader getKmLoaderPort() {
+    	return getPortByName("kmLoader", PortKmLoader.class);
+    }
 
     public PortResourceLoader getKmtLoaderPort() {
 		return getPortByName("kmtLoader", PortResourceLoader.class);
