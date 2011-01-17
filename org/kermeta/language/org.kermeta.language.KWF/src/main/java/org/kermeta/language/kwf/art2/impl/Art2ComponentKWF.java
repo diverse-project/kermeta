@@ -59,7 +59,16 @@ import org.osgi.framework.Bundle;
     @RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class),
     
     /** port that is able to resolve and set static information of a ModelingUnit  */
-    @RequiredPort(name = "kmResolver", type = PortType.SERVICE, className = PortKmResolver.class)
+    @RequiredPort(name = "kmResolver", type = PortType.SERVICE, className = PortKmResolver.class),
+    
+    /** The port that loads km models.  */
+    @RequiredPort(name = "kmLoader", type = PortType.SERVICE, className = PortKmLoader.class),
+    
+    /** The port that loads ecore models.  */
+    @RequiredPort(name = "ecoreLoader", type = PortType.SERVICE, className = PortEcoreLoader.class),
+    
+    /** The port that converts an ecore model into a km one.  */
+    @RequiredPort(name = "ecore2km", type = PortType.SERVICE, className = PortEcore2Km.class)
 })
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -133,15 +142,15 @@ public class Art2ComponentKWF extends AbstractComponentType {
     // --- Port accessors ---
     
     public PortEcore2Km getEcore2KmPort() {
-    	return getPortByName("Ecore2km", PortEcore2Km.class);
+    	return getPortByName("ecore2km", PortEcore2Km.class);
     }
     
     public PortEcoreLoader getEcoreLoaderPort() {
-    	return getPortByName("EcoreLoader", PortEcoreLoader.class);
+    	return getPortByName("ecoreLoader", PortEcoreLoader.class);
     }
     
     public PortKmLoader getKmLoaderPort() {
-    	return getPortByName("KmLoader", PortKmLoader.class);
+    	return getPortByName("kmLoader", PortKmLoader.class);
     }
 
     public PortResourceLoader getKmtLoaderPort() {
