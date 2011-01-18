@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.kermeta.utils.console.eclipse.tests.actionSet"
+            label="Sample Action Set"
+            visible="true">
+         <menu
+               id="sampleMenu"
+               label="Sample &amp;Menu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.utils.console.eclipse.tests.actions.TestConsoleUtil"
+               icon="icons/newkermetafile.png"
+               id="org.kermeta.utils.console.eclipse.tests.actions.TestConsoleUtil"
+               label="&amp;Sample Action"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               tooltip="Test ConsoleUtil">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
