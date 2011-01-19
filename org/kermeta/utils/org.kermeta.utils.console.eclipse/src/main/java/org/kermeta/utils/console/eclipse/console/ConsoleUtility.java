@@ -71,6 +71,11 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 	
 	/** 	size for which we need to split the message before passing to the stream */
 	public static final int LARGE_MESSAGE_SIZE = 10000;
+	
+	/**
+	 * String that represent input typed by the user
+	 */
+	private String readUserInput;
 
 	/**
 	 * @param name
@@ -88,6 +93,28 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 		// Initialize input/ outputStream
 		reader = new BufferedReader(new InputStreamReader(this.getInputStream()));
 		outputStream = this.newOutputStream();
+		
+		// Initialize readedInput
+		readUserInput = "";
+	}
+	
+	//--------------------------------------------------------------------------------------------------------------
+	// Readed input method
+	//--------------------------------------------------------------------------------------------------------------
+	/**
+	 * Set the input of the read method
+	 * @param input : new String input to set
+	 */
+	public void setReadUserInput(String input) {
+		this.readUserInput = input;
+	}
+	
+	/**
+	 * Get the input of the read method
+	 * @return the input for the read method
+	 */
+	public String getReadUserInput() {
+		return this.readUserInput;
 	}
 
 	//--------------------------------------------------------------------------------------------------------------
@@ -376,10 +403,8 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 
 	
 
-	/* (non-Javadoc)
-	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#read()
-	 */
-	public String read() {
+	
+	private String reading() {
 		String line = "";
 		BufferedReader reader = getReader();
 		try {
@@ -388,9 +413,42 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 				line = "";
 		} catch (IOException exception) {
 			exception.printStackTrace();
-		}
+		} 
 		return line;
+		}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#read()
+	 */
+	public String read() {
+		
+		/*new Job("Console product derivation") {
+		public IStatus run(IProgressMonitor pm) {
+			String read = reading();
+			setReadUserInput(read);
+			return Status.OK_STATUS;
+		}
+	}.schedule(); */
+		
+		//Runnable r = new Runnable() {
+			//public void run() {
+				String read = reading();
+				setReadUserInput(read);	
+			//}
+		//};
+		
+		// Execute in the same UI thread
+		//ConsolePlugin.getStandardDisplay().syncExec(r);
+
+	// Return the input read
+	return getReadUserInput();
 	}
+
+		
+		
+	
 	
 	/* (non-Javadoc)
 	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#promptAndRead()
