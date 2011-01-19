@@ -22,9 +22,11 @@ import org.kermeta.traceability.QualifiedNameReference;
 import org.kermeta.traceability.Reference;
 import org.kermeta.traceability.TextReference;
 import org.kermeta.traceability.Trace;
+import org.kermeta.traceability.TracePackage;
 import org.kermeta.traceability.TraceModel;
 import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
+import org.kermeta.traceability.Traceable;
 import org.kermeta.traceability.XMLReference;
 
 /**
@@ -39,14 +41,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass traceModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass messageEClass = null;
+	private EClass tracePackageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,6 +91,13 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * @generated
 	 */
 	private EClass qualifiedNameReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -191,8 +193,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTraceModel() {
-		return traceModelEClass;
+	public EClass getTracePackage() {
+		return tracePackageEClass;
 	}
 
 	/**
@@ -200,8 +202,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTraceModel_Traces() {
-		return (EReference)traceModelEClass.getEStructuralFeatures().get(0);
+	public EReference getTracePackage_References() {
+		return (EReference)tracePackageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -209,8 +211,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTraceModel_References() {
-		return (EReference)traceModelEClass.getEStructuralFeatures().get(1);
+	public EReference getTracePackage_Subpackage() {
+		return (EReference)tracePackageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -218,62 +220,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTraceModel_Messages() {
-		return (EReference)traceModelEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getMessage() {
-		return messageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMessage_Language() {
-		return (EAttribute)messageEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMessage_Type() {
-		return (EAttribute)messageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMessage_Value() {
-		return (EAttribute)messageEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMessage_Traces() {
-		return (EReference)messageEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMessage_TraceMdl() {
-		return (EReference)messageEClass.getEStructuralFeatures().get(4);
+	public EReference getTracePackage_Contexts() {
+		return (EReference)tracePackageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -290,7 +238,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrace_SourceReferences() {
+	public EReference getTrace_SourceElem() {
 		return (EReference)traceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -299,7 +247,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrace_TargetReferences() {
+	public EReference getTrace_TargetElem() {
 		return (EReference)traceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -308,17 +256,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrace_Description() {
+	public EReference getTrace_Context() {
 		return (EReference)traceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTrace_TraceMdl() {
-		return (EReference)traceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -335,26 +274,8 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReference_TargetTraces() {
-		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getReference_SourceTraces() {
-		return (EReference)referenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getReference_TraceMdl() {
-		return (EReference)referenceEClass.getEStructuralFeatures().get(2);
+		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -470,6 +391,33 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTraceable() {
+		return traceableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceable_Target() {
+		return (EReference)traceableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceable_Source() {
+		return (EReference)traceableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -529,27 +477,17 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		isCreated = true;
 
 		// Create classes and their features
-		traceModelEClass = createEClass(TRACE_MODEL);
-		createEReference(traceModelEClass, TRACE_MODEL__TRACES);
-		createEReference(traceModelEClass, TRACE_MODEL__REFERENCES);
-		createEReference(traceModelEClass, TRACE_MODEL__MESSAGES);
-
-		messageEClass = createEClass(MESSAGE);
-		createEAttribute(messageEClass, MESSAGE__LANGUAGE);
-		createEAttribute(messageEClass, MESSAGE__TYPE);
-		createEAttribute(messageEClass, MESSAGE__VALUE);
-		createEReference(messageEClass, MESSAGE__TRACES);
-		createEReference(messageEClass, MESSAGE__TRACE_MDL);
+		tracePackageEClass = createEClass(TRACE_PACKAGE);
+		createEReference(tracePackageEClass, TRACE_PACKAGE__REFERENCES);
+		createEReference(tracePackageEClass, TRACE_PACKAGE__SUBPACKAGE);
+		createEReference(tracePackageEClass, TRACE_PACKAGE__CONTEXTS);
 
 		traceEClass = createEClass(TRACE);
-		createEReference(traceEClass, TRACE__SOURCE_REFERENCES);
-		createEReference(traceEClass, TRACE__TARGET_REFERENCES);
-		createEReference(traceEClass, TRACE__DESCRIPTION);
-		createEReference(traceEClass, TRACE__TRACE_MDL);
+		createEReference(traceEClass, TRACE__SOURCE_ELEM);
+		createEReference(traceEClass, TRACE__TARGET_ELEM);
+		createEReference(traceEClass, TRACE__CONTEXT);
 
 		referenceEClass = createEClass(REFERENCE);
-		createEReference(referenceEClass, REFERENCE__TARGET_TRACES);
-		createEReference(referenceEClass, REFERENCE__SOURCE_TRACES);
 		createEReference(referenceEClass, REFERENCE__TRACE_MDL);
 
 		fileReferenceEClass = createEClass(FILE_REFERENCE);
@@ -568,6 +506,10 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 
 		qualifiedNameReferenceEClass = createEClass(QUALIFIED_NAME_REFERENCE);
 		createEAttribute(qualifiedNameReferenceEClass, QUALIFIED_NAME_REFERENCE__QUALIFIED_NAME);
+
+		traceableEClass = createEClass(TRACEABLE);
+		createEReference(traceableEClass, TRACEABLE__TARGET);
+		createEReference(traceableEClass, TRACEABLE__SOURCE);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -604,6 +546,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		referenceEClass.getESuperTypes().add(this.getTraceable());
 		fileReferenceEClass.getESuperTypes().add(this.getReference());
 		textReferenceEClass.getESuperTypes().add(this.getFileReference());
 		xmlReferenceEClass.getESuperTypes().add(this.getFileReference());
@@ -611,28 +554,18 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		qualifiedNameReferenceEClass.getESuperTypes().add(this.getReference());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(traceModelEClass, TraceModel.class, "TraceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTraceModel_Traces(), this.getTrace(), this.getTrace_TraceMdl(), "traces", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTraceModel_References(), this.getReference(), this.getReference_TraceMdl(), "references", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTraceModel_Messages(), this.getMessage(), this.getMessage_TraceMdl(), "messages", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMessage_Language(), this.getString(), "language", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Type(), this.getString(), "type", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Value(), this.getString(), "value", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMessage_Traces(), this.getTrace(), this.getTrace_Description(), "traces", null, 0, -1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMessage_TraceMdl(), this.getTraceModel(), this.getTraceModel_Messages(), "traceMdl", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tracePackageEClass, TracePackage.class, "TracePackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTracePackage_References(), this.getReference(), this.getReference_TraceMdl(), "references", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTracePackage_Subpackage(), this.getTracePackage(), null, "subpackage", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTracePackage_Contexts(), ecorePackage.getEObject(), null, "contexts", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceEClass, Trace.class, "Trace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTrace_SourceReferences(), this.getReference(), this.getReference_TargetTraces(), "sourceReferences", null, 0, -1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrace_TargetReferences(), this.getReference(), this.getReference_SourceTraces(), "targetReferences", null, 0, -1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrace_Description(), this.getMessage(), this.getMessage_Traces(), "description", null, 0, -1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrace_TraceMdl(), this.getTraceModel(), this.getTraceModel_Traces(), "traceMdl", null, 1, 1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrace_SourceElem(), this.getTraceable(), this.getTraceable_Target(), "sourceElem", null, 0, 1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrace_TargetElem(), this.getTraceable(), this.getTraceable_Source(), "targetElem", null, 0, 1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrace_Context(), ecorePackage.getEObject(), null, "context", null, 0, 1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceEClass, Reference.class, "Reference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReference_TargetTraces(), this.getTrace(), this.getTrace_SourceReferences(), "targetTraces", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getReference_SourceTraces(), this.getTrace(), this.getTrace_TargetReferences(), "sourceTraces", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getReference_TraceMdl(), this.getTraceModel(), this.getTraceModel_References(), "traceMdl", null, 1, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReference_TraceMdl(), this.getTracePackage(), this.getTracePackage_References(), "traceMdl", null, 1, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fileReferenceEClass, FileReference.class, "FileReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFileReference_FileURI(), this.getString(), "fileURI", null, 1, 1, FileReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -650,6 +583,10 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 
 		initEClass(qualifiedNameReferenceEClass, QualifiedNameReference.class, "QualifiedNameReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQualifiedNameReference_QualifiedName(), this.getString(), "qualifiedName", null, 1, 1, QualifiedNameReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(traceableEClass, Traceable.class, "Traceable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceable_Target(), this.getTrace(), this.getTrace_SourceElem(), "target", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceable_Source(), this.getTrace(), this.getTrace_TargetElem(), "source", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -682,7 +619,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		   source, 
 		   new String[] {
 			 "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"
-		   });																												
+		   });														
 	}
 
 	/**
@@ -694,66 +631,16 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	protected void createKermeta_1Annotations() {
 		String source = "kermeta";			
 		addAnnotation
-		  (traceModelEClass, 
+		  (tracePackageEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "/**\r\n * This class represents a trace model.\r\n * This is a set of traces, references and messages.\r\n */"
 		   });		
 		addAnnotation
-		  (getTraceModel_Traces(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Set of traces contained by the trace model */"
-		   });		
-		addAnnotation
-		  (getTraceModel_References(), 
+		  (getTracePackage_References(), 
 		   source, 
 		   new String[] {
 			 "documentation", "/** Set of references to the traced objects of the trace model */"
-		   });		
-		addAnnotation
-		  (getTraceModel_Messages(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Set of messages contained by the trace model */"
-		   });		
-		addAnnotation
-		  (messageEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "/**\r\n * This class represents a trace message, used to add some information to traces.\r\n * Typically, in order to known what had generated a given trace or provide a user\r\n * friendly message to the user.\r\n */"
-		   });		
-		addAnnotation
-		  (getMessage_Language(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "true",
-			 "documentation", "/** Language of the message (english, french, etc.) */"
-		   });		
-		addAnnotation
-		  (getMessage_Type(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "true",
-			 "documentation", "/** Message kind */"
-		   });		
-		addAnnotation
-		  (getMessage_Value(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "true"
-		   });		
-		addAnnotation
-		  (getMessage_Traces(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the traces the message is associated with */"
-		   });		
-		addAnnotation
-		  (getMessage_TraceMdl(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the containing trace model */"
 		   });		
 		addAnnotation
 		  (traceEClass, 
@@ -762,46 +649,10 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 			 "documentation", "/**\r\n * This class represents a trace element\r\n */"
 		   });		
 		addAnnotation
-		  (getTrace_SourceReferences(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the references to the trace incoming elements */"
-		   });		
-		addAnnotation
-		  (getTrace_TargetReferences(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the references to the trace outgoing elements */"
-		   });		
-		addAnnotation
-		  (getTrace_Description(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the messages describing the trace */"
-		   });		
-		addAnnotation
-		  (getTrace_TraceMdl(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the containing trace model */"
-		   });		
-		addAnnotation
 		  (referenceEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "/**\r\n * This abstract class represents a reference to a concrete object\r\n */"
-		   });		
-		addAnnotation
-		  (getReference_TargetTraces(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the reference target traces */"
-		   });		
-		addAnnotation
-		  (getReference_SourceTraces(), 
-		   source, 
-		   new String[] {
-			 "documentation", "/** Link to the reference source traces */"
 		   });		
 		addAnnotation
 		  (getReference_TraceMdl(), 
@@ -870,7 +721,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * @generated
 	 */
 	protected void createKermeta_2Annotations() {
-		String source = "kermeta.inv";																									
+		String source = "kermeta.inv";											
 		addAnnotation
 		  (textReferenceEClass, 
 		   source, 

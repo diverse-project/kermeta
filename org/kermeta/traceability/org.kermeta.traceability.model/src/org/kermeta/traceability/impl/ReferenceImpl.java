@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.traceability.Reference;
+import org.kermeta.traceability.TracePackage;
 import org.kermeta.traceability.Trace;
 import org.kermeta.traceability.TraceModel;
 import org.kermeta.traceability.TraceabilityPackage;
@@ -35,35 +36,13 @@ import org.kermeta.traceability.TraceabilityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.traceability.impl.ReferenceImpl#getTargetTraces <em>Target Traces</em>}</li>
- *   <li>{@link org.kermeta.traceability.impl.ReferenceImpl#getSourceTraces <em>Source Traces</em>}</li>
  *   <li>{@link org.kermeta.traceability.impl.ReferenceImpl#getTraceMdl <em>Trace Mdl</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class ReferenceImpl extends EObjectImpl implements Reference {
-	/**
-	 * The cached value of the '{@link #getTargetTraces() <em>Target Traces</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTargetTraces()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Trace> targetTraces;
-
-	/**
-	 * The cached value of the '{@link #getSourceTraces() <em>Source Traces</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourceTraces()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Trace> sourceTraces;
-
+public abstract class ReferenceImpl extends TraceableImpl implements Reference {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,33 +67,9 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Trace> getTargetTraces() {
-		if (targetTraces == null) {
-			targetTraces = new EObjectWithInverseResolvingEList.ManyInverse<Trace>(Trace.class, this, TraceabilityPackage.REFERENCE__TARGET_TRACES, TraceabilityPackage.TRACE__SOURCE_REFERENCES);
-		}
-		return targetTraces;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Trace> getSourceTraces() {
-		if (sourceTraces == null) {
-			sourceTraces = new EObjectWithInverseResolvingEList.ManyInverse<Trace>(Trace.class, this, TraceabilityPackage.REFERENCE__SOURCE_TRACES, TraceabilityPackage.TRACE__TARGET_REFERENCES);
-		}
-		return sourceTraces;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TraceModel getTraceMdl() {
+	public TracePackage getTraceMdl() {
 		if (eContainerFeatureID() != TraceabilityPackage.REFERENCE__TRACE_MDL) return null;
-		return (TraceModel)eContainer();
+		return (TracePackage)eContainer();
 	}
 
 	/**
@@ -122,7 +77,7 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTraceMdl(TraceModel newTraceMdl, NotificationChain msgs) {
+	public NotificationChain basicSetTraceMdl(TracePackage newTraceMdl, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newTraceMdl, TraceabilityPackage.REFERENCE__TRACE_MDL, msgs);
 		return msgs;
 	}
@@ -132,7 +87,7 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTraceMdl(TraceModel newTraceMdl) {
+	public void setTraceMdl(TracePackage newTraceMdl) {
 		if (newTraceMdl != eInternalContainer() || (eContainerFeatureID() != TraceabilityPackage.REFERENCE__TRACE_MDL && newTraceMdl != null)) {
 			if (EcoreUtil.isAncestor(this, newTraceMdl))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -140,7 +95,7 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newTraceMdl != null)
-				msgs = ((InternalEObject)newTraceMdl).eInverseAdd(this, TraceabilityPackage.TRACE_MODEL__REFERENCES, TraceModel.class, msgs);
+				msgs = ((InternalEObject)newTraceMdl).eInverseAdd(this, TraceabilityPackage.TRACE_PACKAGE__REFERENCES, TracePackage.class, msgs);
 			msgs = basicSetTraceMdl(newTraceMdl, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -157,14 +112,10 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTargetTraces()).basicAdd(otherEnd, msgs);
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSourceTraces()).basicAdd(otherEnd, msgs);
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTraceMdl((TraceModel)otherEnd, msgs);
+				return basicSetTraceMdl((TracePackage)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -177,10 +128,6 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				return ((InternalEList<?>)getTargetTraces()).basicRemove(otherEnd, msgs);
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				return ((InternalEList<?>)getSourceTraces()).basicRemove(otherEnd, msgs);
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
 				return basicSetTraceMdl(null, msgs);
 		}
@@ -196,7 +143,7 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
-				return eInternalContainer().eInverseRemove(this, TraceabilityPackage.TRACE_MODEL__REFERENCES, TraceModel.class, msgs);
+				return eInternalContainer().eInverseRemove(this, TraceabilityPackage.TRACE_PACKAGE__REFERENCES, TracePackage.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -209,10 +156,6 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				return getTargetTraces();
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				return getSourceTraces();
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
 				return getTraceMdl();
 		}
@@ -228,16 +171,8 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				getTargetTraces().clear();
-				getTargetTraces().addAll((Collection<? extends Trace>)newValue);
-				return;
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				getSourceTraces().clear();
-				getSourceTraces().addAll((Collection<? extends Trace>)newValue);
-				return;
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
-				setTraceMdl((TraceModel)newValue);
+				setTraceMdl((TracePackage)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -251,14 +186,8 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				getTargetTraces().clear();
-				return;
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				getSourceTraces().clear();
-				return;
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
-				setTraceMdl((TraceModel)null);
+				setTraceMdl((TracePackage)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -272,10 +201,6 @@ public abstract class ReferenceImpl extends EObjectImpl implements Reference {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TraceabilityPackage.REFERENCE__TARGET_TRACES:
-				return targetTraces != null && !targetTraces.isEmpty();
-			case TraceabilityPackage.REFERENCE__SOURCE_TRACES:
-				return sourceTraces != null && !sourceTraces.isEmpty();
 			case TraceabilityPackage.REFERENCE__TRACE_MDL:
 				return getTraceMdl() != null;
 		}

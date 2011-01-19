@@ -62,23 +62,14 @@ public interface TraceabilityPackage extends EPackage {
 	TraceabilityPackage eINSTANCE = org.kermeta.traceability.impl.TraceabilityPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.traceability.impl.TraceModelImpl <em>Trace Model</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.traceability.impl.TracePackageImpl <em>Trace Package</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.traceability.impl.TraceModelImpl
-	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTraceModel()
+	 * @see org.kermeta.traceability.impl.TracePackageImpl
+	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTracePackage()
 	 * @generated
 	 */
-	int TRACE_MODEL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Traces</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_MODEL__TRACES = 0;
+	int TRACE_PACKAGE = 0;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -87,89 +78,34 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_MODEL__REFERENCES = 1;
+	int TRACE_PACKAGE__REFERENCES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Messages</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subpackage</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_MODEL__MESSAGES = 2;
+	int TRACE_PACKAGE__SUBPACKAGE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Trace Model</em>' class.
+	 * The feature id for the '<em><b>Contexts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_MODEL_FEATURE_COUNT = 3;
+	int TRACE_PACKAGE__CONTEXTS = 2;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.traceability.impl.MessageImpl <em>Message</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.traceability.impl.MessageImpl
-	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getMessage()
-	 * @generated
-	 */
-	int MESSAGE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * The number of structural features of the '<em>Trace Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__LANGUAGE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__TYPE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__VALUE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Traces</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__TRACES = 3;
-
-	/**
-	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__TRACE_MDL = 4;
-
-	/**
-	 * The number of structural features of the '<em>Message</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_FEATURE_COUNT = 5;
+	int TRACE_PACKAGE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.traceability.impl.TraceImpl <em>Trace</em>}' class.
@@ -179,43 +115,34 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 2;
+	int TRACE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Source References</b></em>' reference list.
+	 * The feature id for the '<em><b>Source Elem</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE__SOURCE_REFERENCES = 0;
+	int TRACE__SOURCE_ELEM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target References</b></em>' reference list.
+	 * The feature id for the '<em><b>Target Elem</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE__TARGET_REFERENCES = 1;
+	int TRACE__TARGET_ELEM = 1;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' reference list.
+	 * The feature id for the '<em><b>Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE__DESCRIPTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE__TRACE_MDL = 3;
+	int TRACE__CONTEXT = 2;
 
 	/**
 	 * The number of structural features of the '<em>Trace</em>' class.
@@ -224,7 +151,44 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_FEATURE_COUNT = 4;
+	int TRACE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.traceability.impl.TraceableImpl <em>Traceable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.traceability.impl.TraceableImpl
+	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTraceable()
+	 * @generated
+	 */
+	int TRACEABLE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABLE__TARGET = 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABLE__SOURCE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Traceable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABLE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.traceability.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -234,25 +198,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 3;
+	int REFERENCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__TARGET_TRACES = 0;
+	int REFERENCE__TARGET = TRACEABLE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__SOURCE_TRACES = 1;
+	int REFERENCE__SOURCE = TRACEABLE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -261,7 +225,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__TRACE_MDL = 2;
+	int REFERENCE__TRACE_MDL = TRACEABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Reference</em>' class.
@@ -270,7 +234,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_FEATURE_COUNT = 3;
+	int REFERENCE_FEATURE_COUNT = TRACEABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.traceability.impl.FileReferenceImpl <em>File Reference</em>}' class.
@@ -280,25 +244,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getFileReference()
 	 * @generated
 	 */
-	int FILE_REFERENCE = 4;
+	int FILE_REFERENCE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_REFERENCE__TARGET_TRACES = REFERENCE__TARGET_TRACES;
+	int FILE_REFERENCE__TARGET = REFERENCE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_REFERENCE__SOURCE_TRACES = REFERENCE__SOURCE_TRACES;
+	int FILE_REFERENCE__SOURCE = REFERENCE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -344,25 +308,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTextReference()
 	 * @generated
 	 */
-	int TEXT_REFERENCE = 5;
+	int TEXT_REFERENCE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_REFERENCE__TARGET_TRACES = FILE_REFERENCE__TARGET_TRACES;
+	int TEXT_REFERENCE__TARGET = FILE_REFERENCE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_REFERENCE__SOURCE_TRACES = FILE_REFERENCE__SOURCE_TRACES;
+	int TEXT_REFERENCE__SOURCE = FILE_REFERENCE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -426,25 +390,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getXMLReference()
 	 * @generated
 	 */
-	int XML_REFERENCE = 6;
+	int XML_REFERENCE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XML_REFERENCE__TARGET_TRACES = FILE_REFERENCE__TARGET_TRACES;
+	int XML_REFERENCE__TARGET = FILE_REFERENCE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XML_REFERENCE__SOURCE_TRACES = FILE_REFERENCE__SOURCE_TRACES;
+	int XML_REFERENCE__SOURCE = FILE_REFERENCE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -499,25 +463,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getModelReference()
 	 * @generated
 	 */
-	int MODEL_REFERENCE = 7;
+	int MODEL_REFERENCE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_REFERENCE__TARGET_TRACES = REFERENCE__TARGET_TRACES;
+	int MODEL_REFERENCE__TARGET = REFERENCE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_REFERENCE__SOURCE_TRACES = REFERENCE__SOURCE_TRACES;
+	int MODEL_REFERENCE__SOURCE = REFERENCE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -554,25 +518,25 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getQualifiedNameReference()
 	 * @generated
 	 */
-	int QUALIFIED_NAME_REFERENCE = 8;
+	int QUALIFIED_NAME_REFERENCE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALIFIED_NAME_REFERENCE__TARGET_TRACES = REFERENCE__TARGET_TRACES;
+	int QUALIFIED_NAME_REFERENCE__TARGET = REFERENCE__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Source Traces</b></em>' reference list.
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALIFIED_NAME_REFERENCE__SOURCE_TRACES = REFERENCE__SOURCE_TRACES;
+	int QUALIFIED_NAME_REFERENCE__SOURCE = REFERENCE__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -644,112 +608,47 @@ public interface TraceabilityPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.traceability.TraceModel <em>Trace Model</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.traceability.TracePackage <em>Trace Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Trace Model</em>'.
-	 * @see org.kermeta.traceability.TraceModel
+	 * @return the meta object for class '<em>Trace Package</em>'.
+	 * @see org.kermeta.traceability.TracePackage
 	 * @generated
 	 */
-	EClass getTraceModel();
+	EClass getTracePackage();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TraceModel#getTraces <em>Traces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Traces</em>'.
-	 * @see org.kermeta.traceability.TraceModel#getTraces()
-	 * @see #getTraceModel()
-	 * @generated
-	 */
-	EReference getTraceModel_Traces();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TraceModel#getReferences <em>References</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TracePackage#getReferences <em>References</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see org.kermeta.traceability.TraceModel#getReferences()
-	 * @see #getTraceModel()
+	 * @see org.kermeta.traceability.TracePackage#getReferences()
+	 * @see #getTracePackage()
 	 * @generated
 	 */
-	EReference getTraceModel_References();
+	EReference getTracePackage_References();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TraceModel#getMessages <em>Messages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TracePackage#getSubpackage <em>Subpackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Messages</em>'.
-	 * @see org.kermeta.traceability.TraceModel#getMessages()
-	 * @see #getTraceModel()
+	 * @return the meta object for the containment reference list '<em>Subpackage</em>'.
+	 * @see org.kermeta.traceability.TracePackage#getSubpackage()
+	 * @see #getTracePackage()
 	 * @generated
 	 */
-	EReference getTraceModel_Messages();
+	EReference getTracePackage_Subpackage();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.traceability.Message <em>Message</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.TracePackage#getContexts <em>Contexts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Message</em>'.
-	 * @see org.kermeta.traceability.Message
+	 * @return the meta object for the containment reference list '<em>Contexts</em>'.
+	 * @see org.kermeta.traceability.TracePackage#getContexts()
+	 * @see #getTracePackage()
 	 * @generated
 	 */
-	EClass getMessage();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.Message#getLanguage <em>Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see org.kermeta.traceability.Message#getLanguage()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EAttribute getMessage_Language();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.Message#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.kermeta.traceability.Message#getType()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EAttribute getMessage_Type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.Message#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.kermeta.traceability.Message#getValue()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EAttribute getMessage_Value();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Message#getTraces <em>Traces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Traces</em>'.
-	 * @see org.kermeta.traceability.Message#getTraces()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EReference getMessage_Traces();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.kermeta.traceability.Message#getTraceMdl <em>Trace Mdl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Trace Mdl</em>'.
-	 * @see org.kermeta.traceability.Message#getTraceMdl()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EReference getMessage_TraceMdl();
+	EReference getTracePackage_Contexts();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.traceability.Trace <em>Trace</em>}'.
@@ -762,48 +661,37 @@ public interface TraceabilityPackage extends EPackage {
 	EClass getTrace();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Trace#getSourceReferences <em>Source References</em>}'.
+	 * Returns the meta object for the container reference '{@link org.kermeta.traceability.Trace#getSourceElem <em>Source Elem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Source References</em>'.
-	 * @see org.kermeta.traceability.Trace#getSourceReferences()
+	 * @return the meta object for the container reference '<em>Source Elem</em>'.
+	 * @see org.kermeta.traceability.Trace#getSourceElem()
 	 * @see #getTrace()
 	 * @generated
 	 */
-	EReference getTrace_SourceReferences();
+	EReference getTrace_SourceElem();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Trace#getTargetReferences <em>Target References</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.traceability.Trace#getTargetElem <em>Target Elem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Target References</em>'.
-	 * @see org.kermeta.traceability.Trace#getTargetReferences()
+	 * @return the meta object for the reference '<em>Target Elem</em>'.
+	 * @see org.kermeta.traceability.Trace#getTargetElem()
 	 * @see #getTrace()
 	 * @generated
 	 */
-	EReference getTrace_TargetReferences();
+	EReference getTrace_TargetElem();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Trace#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.traceability.Trace#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Description</em>'.
-	 * @see org.kermeta.traceability.Trace#getDescription()
+	 * @return the meta object for the reference '<em>Context</em>'.
+	 * @see org.kermeta.traceability.Trace#getContext()
 	 * @see #getTrace()
 	 * @generated
 	 */
-	EReference getTrace_Description();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.kermeta.traceability.Trace#getTraceMdl <em>Trace Mdl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Trace Mdl</em>'.
-	 * @see org.kermeta.traceability.Trace#getTraceMdl()
-	 * @see #getTrace()
-	 * @generated
-	 */
-	EReference getTrace_TraceMdl();
+	EReference getTrace_Context();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.traceability.Reference <em>Reference</em>}'.
@@ -814,28 +702,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getReference();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Reference#getTargetTraces <em>Target Traces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Target Traces</em>'.
-	 * @see org.kermeta.traceability.Reference#getTargetTraces()
-	 * @see #getReference()
-	 * @generated
-	 */
-	EReference getReference_TargetTraces();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Reference#getSourceTraces <em>Source Traces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Source Traces</em>'.
-	 * @see org.kermeta.traceability.Reference#getSourceTraces()
-	 * @see #getReference()
-	 * @generated
-	 */
-	EReference getReference_SourceTraces();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.kermeta.traceability.Reference#getTraceMdl <em>Trace Mdl</em>}'.
@@ -976,6 +842,38 @@ public interface TraceabilityPackage extends EPackage {
 	EAttribute getQualifiedNameReference_QualifiedName();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.traceability.Traceable <em>Traceable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Traceable</em>'.
+	 * @see org.kermeta.traceability.Traceable
+	 * @generated
+	 */
+	EClass getTraceable();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.traceability.Traceable#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Target</em>'.
+	 * @see org.kermeta.traceability.Traceable#getTarget()
+	 * @see #getTraceable()
+	 * @generated
+	 */
+	EReference getTraceable_Target();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.traceability.Traceable#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Source</em>'.
+	 * @see org.kermeta.traceability.Traceable#getSource()
+	 * @see #getTraceable()
+	 * @generated
+	 */
+	EReference getTraceable_Source();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1042,22 +940,14 @@ public interface TraceabilityPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.kermeta.traceability.impl.TraceModelImpl <em>Trace Model</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.traceability.impl.TracePackageImpl <em>Trace Package</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.traceability.impl.TraceModelImpl
-		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTraceModel()
+		 * @see org.kermeta.traceability.impl.TracePackageImpl
+		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTracePackage()
 		 * @generated
 		 */
-		EClass TRACE_MODEL = eINSTANCE.getTraceModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Traces</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRACE_MODEL__TRACES = eINSTANCE.getTraceModel_Traces();
+		EClass TRACE_PACKAGE = eINSTANCE.getTracePackage();
 
 		/**
 		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
@@ -1065,65 +955,23 @@ public interface TraceabilityPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACE_MODEL__REFERENCES = eINSTANCE.getTraceModel_References();
+		EReference TRACE_PACKAGE__REFERENCES = eINSTANCE.getTracePackage_References();
 
 		/**
-		 * The meta object literal for the '<em><b>Messages</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Subpackage</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACE_MODEL__MESSAGES = eINSTANCE.getTraceModel_Messages();
+		EReference TRACE_PACKAGE__SUBPACKAGE = eINSTANCE.getTracePackage_Subpackage();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.traceability.impl.MessageImpl <em>Message</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.traceability.impl.MessageImpl
-		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getMessage()
-		 * @generated
-		 */
-		EClass MESSAGE = eINSTANCE.getMessage();
-
-		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Contexts</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__LANGUAGE = eINSTANCE.getMessage_Language();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MESSAGE__TYPE = eINSTANCE.getMessage_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MESSAGE__VALUE = eINSTANCE.getMessage_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Traces</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MESSAGE__TRACES = eINSTANCE.getMessage_Traces();
-
-		/**
-		 * The meta object literal for the '<em><b>Trace Mdl</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MESSAGE__TRACE_MDL = eINSTANCE.getMessage_TraceMdl();
+		EReference TRACE_PACKAGE__CONTEXTS = eINSTANCE.getTracePackage_Contexts();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.traceability.impl.TraceImpl <em>Trace</em>}' class.
@@ -1136,36 +984,28 @@ public interface TraceabilityPackage extends EPackage {
 		EClass TRACE = eINSTANCE.getTrace();
 
 		/**
-		 * The meta object literal for the '<em><b>Source References</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Source Elem</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACE__SOURCE_REFERENCES = eINSTANCE.getTrace_SourceReferences();
+		EReference TRACE__SOURCE_ELEM = eINSTANCE.getTrace_SourceElem();
 
 		/**
-		 * The meta object literal for the '<em><b>Target References</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Target Elem</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACE__TARGET_REFERENCES = eINSTANCE.getTrace_TargetReferences();
+		EReference TRACE__TARGET_ELEM = eINSTANCE.getTrace_TargetElem();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Context</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACE__DESCRIPTION = eINSTANCE.getTrace_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Trace Mdl</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRACE__TRACE_MDL = eINSTANCE.getTrace_TraceMdl();
+		EReference TRACE__CONTEXT = eINSTANCE.getTrace_Context();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.traceability.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -1176,22 +1016,6 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REFERENCE = eINSTANCE.getReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Target Traces</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REFERENCE__TARGET_TRACES = eINSTANCE.getReference_TargetTraces();
-
-		/**
-		 * The meta object literal for the '<em><b>Source Traces</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REFERENCE__SOURCE_TRACES = eINSTANCE.getReference_SourceTraces();
 
 		/**
 		 * The meta object literal for the '<em><b>Trace Mdl</b></em>' container reference feature.
@@ -1306,6 +1130,32 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute QUALIFIED_NAME_REFERENCE__QUALIFIED_NAME = eINSTANCE.getQualifiedNameReference_QualifiedName();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.traceability.impl.TraceableImpl <em>Traceable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.traceability.impl.TraceableImpl
+		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getTraceable()
+		 * @generated
+		 */
+		EClass TRACEABLE = eINSTANCE.getTraceable();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACEABLE__TARGET = eINSTANCE.getTraceable_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACEABLE__SOURCE = eINSTANCE.getTraceable_Source();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

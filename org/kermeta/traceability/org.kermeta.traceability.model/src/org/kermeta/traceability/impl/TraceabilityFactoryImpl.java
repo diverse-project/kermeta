@@ -62,13 +62,13 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TraceabilityPackage.TRACE_MODEL: return createTraceModel();
-			case TraceabilityPackage.MESSAGE: return createMessage();
+			case TraceabilityPackage.TRACE_PACKAGE: return createTracePackage();
 			case TraceabilityPackage.TRACE: return createTrace();
 			case TraceabilityPackage.TEXT_REFERENCE: return createTextReference();
 			case TraceabilityPackage.XML_REFERENCE: return createXMLReference();
 			case TraceabilityPackage.MODEL_REFERENCE: return createModelReference();
 			case TraceabilityPackage.QUALIFIED_NAME_REFERENCE: return createQualifiedNameReference();
+			case TraceabilityPackage.TRACEABLE: return createTraceable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -121,19 +121,9 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TraceModel createTraceModel() {
-		TraceModelImpl traceModel = new TraceModelImpl();
-		return traceModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message createMessage() {
-		MessageImpl message = new MessageImpl();
-		return message;
+	public TracePackage createTracePackage() {
+		TracePackageImpl tracePackage = new TracePackageImpl();
+		return tracePackage;
 	}
 
 	/**
@@ -184,6 +174,16 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	public QualifiedNameReference createQualifiedNameReference() {
 		QualifiedNameReferenceImpl qualifiedNameReference = new QualifiedNameReferenceImpl();
 		return qualifiedNameReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Traceable createTraceable() {
+		TraceableImpl traceable = new TraceableImpl();
+		return traceable;
 	}
 
 	/**

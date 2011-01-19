@@ -18,10 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.traceability.Trace#getSourceReferences <em>Source References</em>}</li>
- *   <li>{@link org.kermeta.traceability.Trace#getTargetReferences <em>Target References</em>}</li>
- *   <li>{@link org.kermeta.traceability.Trace#getDescription <em>Description</em>}</li>
- *   <li>{@link org.kermeta.traceability.Trace#getTraceMdl <em>Trace Mdl</em>}</li>
+ *   <li>{@link org.kermeta.traceability.Trace#getSourceElem <em>Source Elem</em>}</li>
+ *   <li>{@link org.kermeta.traceability.Trace#getTargetElem <em>Target Elem</em>}</li>
+ *   <li>{@link org.kermeta.traceability.Trace#getContext <em>Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,89 +30,85 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Trace extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Source References</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.traceability.Reference}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.Reference#getTargetTraces <em>Target Traces</em>}'.
+	 * Returns the value of the '<em><b>Source Elem</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.Traceable#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source References</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Source Elem</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source References</em>' reference list.
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_SourceReferences()
-	 * @see org.kermeta.traceability.Reference#getTargetTraces
-	 * @model opposite="targetTraces"
-	 *        annotation="kermeta documentation='/** Link to the references to the trace incoming elements \052/'"
+	 * @return the value of the '<em>Source Elem</em>' container reference.
+	 * @see #setSourceElem(Traceable)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_SourceElem()
+	 * @see org.kermeta.traceability.Traceable#getTarget
+	 * @model opposite="target" transient="false"
 	 * @generated
 	 */
-	EList<Reference> getSourceReferences();
+	Traceable getSourceElem();
 
 	/**
-	 * Returns the value of the '<em><b>Target References</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.traceability.Reference}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.Reference#getSourceTraces <em>Source Traces</em>}'.
+	 * Sets the value of the '{@link org.kermeta.traceability.Trace#getSourceElem <em>Source Elem</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Elem</em>' container reference.
+	 * @see #getSourceElem()
+	 * @generated
+	 */
+	void setSourceElem(Traceable value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Elem</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.Traceable#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target References</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Target Elem</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target References</em>' reference list.
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_TargetReferences()
-	 * @see org.kermeta.traceability.Reference#getSourceTraces
-	 * @model opposite="sourceTraces"
-	 *        annotation="kermeta documentation='/** Link to the references to the trace outgoing elements \052/'"
+	 * @return the value of the '<em>Target Elem</em>' reference.
+	 * @see #setTargetElem(Traceable)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_TargetElem()
+	 * @see org.kermeta.traceability.Traceable#getSource
+	 * @model opposite="source"
 	 * @generated
 	 */
-	EList<Reference> getTargetReferences();
+	Traceable getTargetElem();
 
 	/**
-	 * Returns the value of the '<em><b>Description</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.traceability.Message}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.Message#getTraces <em>Traces</em>}'.
+	 * Sets the value of the '{@link org.kermeta.traceability.Trace#getTargetElem <em>Target Elem</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Elem</em>' reference.
+	 * @see #getTargetElem()
+	 * @generated
+	 */
+	void setTargetElem(Traceable value);
+
+	/**
+	 * Returns the value of the '<em><b>Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Description</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Context</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' reference list.
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_Description()
-	 * @see org.kermeta.traceability.Message#getTraces
-	 * @model opposite="traces"
-	 *        annotation="kermeta documentation='/** Link to the messages describing the trace \052/'"
+	 * @return the value of the '<em>Context</em>' reference.
+	 * @see #setContext(EObject)
+	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_Context()
+	 * @model
 	 * @generated
 	 */
-	EList<Message> getDescription();
+	EObject getContext();
 
 	/**
-	 * Returns the value of the '<em><b>Trace Mdl</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.traceability.TraceModel#getTraces <em>Traces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Trace Mdl</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Trace Mdl</em>' container reference.
-	 * @see #setTraceMdl(TraceModel)
-	 * @see org.kermeta.traceability.TraceabilityPackage#getTrace_TraceMdl()
-	 * @see org.kermeta.traceability.TraceModel#getTraces
-	 * @model opposite="traces" required="true" transient="false"
-	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
-	 * @generated
-	 */
-	TraceModel getTraceMdl();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.traceability.Trace#getTraceMdl <em>Trace Mdl</em>}' container reference.
+	 * Sets the value of the '{@link org.kermeta.traceability.Trace#getContext <em>Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Trace Mdl</em>' container reference.
-	 * @see #getTraceMdl()
+	 * @param value the new value of the '<em>Context</em>' reference.
+	 * @see #getContext()
 	 * @generated
 	 */
-	void setTraceMdl(TraceModel value);
+	void setContext(EObject value);
 
 } // Trace

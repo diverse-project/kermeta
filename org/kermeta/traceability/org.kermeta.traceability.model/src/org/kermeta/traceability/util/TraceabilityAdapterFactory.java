@@ -72,12 +72,8 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	protected TraceabilitySwitch<Adapter> modelSwitch =
 		new TraceabilitySwitch<Adapter>() {
 			@Override
-			public Adapter caseTraceModel(TraceModel object) {
-				return createTraceModelAdapter();
-			}
-			@Override
-			public Adapter caseMessage(Message object) {
-				return createMessageAdapter();
+			public Adapter caseTracePackage(TracePackage object) {
+				return createTracePackageAdapter();
 			}
 			@Override
 			public Adapter caseTrace(Trace object) {
@@ -108,6 +104,10 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 				return createQualifiedNameReferenceAdapter();
 			}
 			@Override
+			public Adapter caseTraceable(Traceable object) {
+				return createTraceableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -128,30 +128,16 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.traceability.TraceModel <em>Trace Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.traceability.TracePackage <em>Trace Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.traceability.TraceModel
+	 * @see org.kermeta.traceability.TracePackage
 	 * @generated
 	 */
-	public Adapter createTraceModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.traceability.Message <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.traceability.Message
-	 * @generated
-	 */
-	public Adapter createMessageAdapter() {
+	public Adapter createTracePackageAdapter() {
 		return null;
 	}
 
@@ -250,6 +236,20 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createQualifiedNameReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.traceability.Traceable <em>Traceable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.traceability.Traceable
+	 * @generated
+	 */
+	public Adapter createTraceableAdapter() {
 		return null;
 	}
 

@@ -26,22 +26,13 @@ public interface TraceabilityFactory extends EFactory {
 	TraceabilityFactory eINSTANCE = org.kermeta.traceability.impl.TraceabilityFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Trace Model</em>'.
+	 * Returns a new object of class '<em>Trace Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Trace Model</em>'.
+	 * @return a new object of class '<em>Trace Package</em>'.
 	 * @generated
 	 */
-	TraceModel createTraceModel();
-
-	/**
-	 * Returns a new object of class '<em>Message</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Message</em>'.
-	 * @generated
-	 */
-	Message createMessage();
+	TracePackage createTracePackage();
 
 	/**
 	 * Returns a new object of class '<em>Trace</em>'.
@@ -87,6 +78,15 @@ public interface TraceabilityFactory extends EFactory {
 	 * @generated
 	 */
 	QualifiedNameReference createQualifiedNameReference();
+
+	/**
+	 * Returns a new object of class '<em>Traceable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Traceable</em>'.
+	 * @generated
+	 */
+	Traceable createTraceable();
 
 	/**
 	 * Returns the package supported by this factory.

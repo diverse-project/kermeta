@@ -87,15 +87,9 @@ public class TraceabilitySwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TraceabilityPackage.TRACE_MODEL: {
-				TraceModel traceModel = (TraceModel)theEObject;
-				T result = caseTraceModel(traceModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TraceabilityPackage.MESSAGE: {
-				Message message = (Message)theEObject;
-				T result = caseMessage(message);
+			case TraceabilityPackage.TRACE_PACKAGE: {
+				TracePackage tracePackage = (TracePackage)theEObject;
+				T result = caseTracePackage(tracePackage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -108,6 +102,7 @@ public class TraceabilitySwitch<T> {
 			case TraceabilityPackage.REFERENCE: {
 				Reference reference = (Reference)theEObject;
 				T result = caseReference(reference);
+				if (result == null) result = caseTraceable(reference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -115,6 +110,7 @@ public class TraceabilitySwitch<T> {
 				FileReference fileReference = (FileReference)theEObject;
 				T result = caseFileReference(fileReference);
 				if (result == null) result = caseReference(fileReference);
+				if (result == null) result = caseTraceable(fileReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -123,6 +119,7 @@ public class TraceabilitySwitch<T> {
 				T result = caseTextReference(textReference);
 				if (result == null) result = caseFileReference(textReference);
 				if (result == null) result = caseReference(textReference);
+				if (result == null) result = caseTraceable(textReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -131,6 +128,7 @@ public class TraceabilitySwitch<T> {
 				T result = caseXMLReference(xmlReference);
 				if (result == null) result = caseFileReference(xmlReference);
 				if (result == null) result = caseReference(xmlReference);
+				if (result == null) result = caseTraceable(xmlReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,6 +136,7 @@ public class TraceabilitySwitch<T> {
 				ModelReference modelReference = (ModelReference)theEObject;
 				T result = caseModelReference(modelReference);
 				if (result == null) result = caseReference(modelReference);
+				if (result == null) result = caseTraceable(modelReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -145,6 +144,13 @@ public class TraceabilitySwitch<T> {
 				QualifiedNameReference qualifiedNameReference = (QualifiedNameReference)theEObject;
 				T result = caseQualifiedNameReference(qualifiedNameReference);
 				if (result == null) result = caseReference(qualifiedNameReference);
+				if (result == null) result = caseTraceable(qualifiedNameReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TraceabilityPackage.TRACEABLE: {
+				Traceable traceable = (Traceable)theEObject;
+				T result = caseTraceable(traceable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,32 +159,17 @@ public class TraceabilitySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Trace Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Trace Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Package</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTraceModel(TraceModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMessage(Message object) {
+	public T caseTracePackage(TracePackage object) {
 		return null;
 	}
 
@@ -284,6 +275,21 @@ public class TraceabilitySwitch<T> {
 	 * @generated
 	 */
 	public T caseQualifiedNameReference(QualifiedNameReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Traceable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Traceable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceable(Traceable object) {
 		return null;
 	}
 
