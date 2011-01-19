@@ -37,8 +37,32 @@ public class ConsoleUtilTest {
 			public IStatus run(IProgressMonitor pm) {
 				ConsoleUtility  console = (ConsoleUtility) ConsoleFactory.getInstance().getConsole();
 				setStreamToConsole(console);
-				console.writeln("Test");
-				console.promptAndRead("answer:");
+				// Test writeln
+				console.writeln("Test writeln");
+				console.writeln("");
+				
+				// Test prompt and read
+				console.writeln("Test prompt and read");
+				String answer = console.promptAndRead("answer:");
+				console.writeln("answer obtained " + answer);
+				console.writeln("");
+				
+				// Test errorln
+				//console.errorln ("Test errorln");
+				//console.writeln("");
+				
+				// Test warningln
+			//	console.warningln("Test warningln");
+				//console.writeln("");
+				
+				// Test infoln
+			//	console.infoln("Test infoln");
+				console.writeln("");
+				
+				// Test write_ok_ln
+			//	console.write_ok_ln("Test write_ok_ln ");
+			//	console.writeln("");
+				
 				return Status.OK_STATUS;
 			}
 		}.schedule();
