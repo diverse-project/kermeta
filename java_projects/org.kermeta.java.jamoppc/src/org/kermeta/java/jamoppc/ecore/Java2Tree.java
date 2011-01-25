@@ -6,15 +6,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
@@ -54,6 +60,7 @@ public class Java2Tree extends TreeVisitor{
 	private final String FLOAT = "java.lang.Float";
 	private final String VOID = "java.lang.Void";
 	private final String DATE = "java.util.Date";
+	private final String OBJECT = "java.lang.Object";
 	
 	CompilationUnit currentCompilationUnit;
 	EPackage root;
@@ -94,6 +101,7 @@ public class Java2Tree extends TreeVisitor{
 		primitive_types.put(FLOAT, "Float");
 		primitive_types.put(VOID, "Void");
 		primitive_types.put(DATE, "Date");
+		primitive_types.put(OBJECT, "Object");
 	}
 	
 	/**
@@ -104,6 +112,7 @@ public class Java2Tree extends TreeVisitor{
 		collections_types.add("java.util.Collection");
 		collections_types.add("java.util.List");
 		collections_types.add("java.util.ArrayList");
+		collections_types.add("java.util.Map");
 	}
 
 	/**
@@ -127,10 +136,15 @@ public class Java2Tree extends TreeVisitor{
 					if (lastPackage == root)
 						packageName = namespace;
 					else
-						packageName = lastPackage.getName()+"."+namespace;
+						//packageName = lastPackage.getName()+"."+namespace;
+						packageName += "."+namespace;
 					if(!(packages.containsKey(packageName))){
 						EPackage p = EcoreFactoryImpl.eINSTANCE.createEPackage();
 						p.setName(namespace);
+						p.setNsPrefix(namespace);
+						p.setNsURI("http://"+packageName);
+						//Creating tag for compiler V2
+						addTagForKermetaCompilerV2(p);
 						packages.put(packageName, p);
 						lastPackage.getESubpackages().add(p);
 						lastPackage = p;
@@ -219,6 +233,8 @@ public class Java2Tree extends TreeVisitor{
 		if(!getName(c).equals("Object")){
 			EClass cl = EcoreFactoryImpl.eINSTANCE.createEClass();
 			cl.setName(getName(c));
+			//Creating tag for compiler V2
+			addTagForKermetaCompilerV2(cl);
 			lastclass = cl;
 			classes.put(getClassifierQualifiedName(c), cl);
 			// Need to process the members of the class ot create the Enumerations
@@ -232,6 +248,21 @@ public class Java2Tree extends TreeVisitor{
 				root.getEClassifiers().add(cl);
 		}
 	}
+
+	/**
+	 * Add a tag for the kermeta compiler v2 to identify model elements 
+	 * extracted from legacy API
+	 * @param o model element with which the annotation is linked
+	 */
+	private void addTagForKermetaCompilerV2(EModelElement o) {
+		//Creating tag for compiler V2
+		EAnnotation tag = EcoreFactoryImpl.eINSTANCE.createEAnnotation();
+		EMap<String,String> details = tag.getDetails();
+		tag.setSource("kermeta");
+		details.put("ecoreFromAPI","true");
+		tag.getDetails().addAll(details.entrySet());
+		o.getEAnnotations().add(tag);
+	}
 	
 	/**
 	 * Visits an Interface
@@ -242,6 +273,7 @@ public class Java2Tree extends TreeVisitor{
 			EClass cl = EcoreFactoryImpl.eINSTANCE.createEClass();
 			cl.setName(getName(c));
 			cl.setInterface(true);
+			cl.setAbstract(true);
 			lastclass = cl;
 			classes.put(getClassifierQualifiedName(c), cl);
 			if (lastPackage != null)
@@ -344,7 +376,8 @@ public class Java2Tree extends TreeVisitor{
 				if (lastPackage == root)
 					packageName = namespace;
 				else
-					packageName = lastPackage.getName()+"."+namespace;
+					//packageName = lastPackage.getName()+"."+namespace;
+					packageName += "."+namespace;
 				lastPackage = packages.get(packageName);
 			}
 			return packageName;
@@ -423,13 +456,15 @@ public class Java2Tree extends TreeVisitor{
 	public void visitClassifierReference2(ClassifierReference e) {
 		String classifierName = getClassifierQualifiedName(e.getTarget());
 		// handle collections of objects
-		visitCollectionClassifierReference(classifierName,e);
+		//visitCollectionClassifierReference(classifierName,e);
+		visitCollection(classifierName,e);
 		//TODO to be extended to all primitive types that can be also objects in Java
 		if (primitive_types.keySet().contains(classifierName)){
-			EDataType dt = EcoreFactoryImpl.eINSTANCE.createEDataType();
+			/*EDataType dt = EcoreFactoryImpl.eINSTANCE.createEDataType();
 			dt.setName(classifierName.substring(classifierName.lastIndexOf(".")+1));
 			dt.setInstanceClassName(classifierName);
-			dt = addDatatype(dt);
+			dt = addDatatype(dt);*/
+			EDataType dt = addDatatype(classifierName.substring(classifierName.lastIndexOf(".")+1),classifierName);
 			lastElement.setEType(dt);
 		}
 		else {
@@ -486,7 +521,7 @@ public class Java2Tree extends TreeVisitor{
 			dt.setName(primitive_types.get(VOID));
 			dt.setInstanceClassName(VOID);
 		}
-		dt = addDatatype(dt);
+		dt = addDatatype(dt.getName(),dt.getInstanceClassName());
 		lastElement.setEType(dt);
 	}
 	
@@ -495,17 +530,124 @@ public class Java2Tree extends TreeVisitor{
 	 * @param classifierName the name of the type of a member
 	 * @param e the reference to the type of this member
 	 */
-	private void visitCollectionClassifierReference(String classifierName, ClassifierReference e){
+	/*private void visitCollectionClassifierReference(String classifierName, ClassifierReference e){
 		if (collections_types.contains(classifierName)){
-			System.out.println(classifierName);
+			//System.out.println(classifierName);
 			if (e.getTypeArguments().size() != 0){
+				System.out.println("if "+classifierName);
+				if (classifierName.equals("java.util.Map")){
+					EClass m = EcoreFactory.eINSTANCE.createEClass();
+					QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
+					QualifiedTypeArgument arg2 = ((QualifiedTypeArgument)e.getTypeArguments().get(1));
+					String a = getName(((NamespaceClassifierReference)arg.getType()).getClassifierReferences().get(0).getTarget());
+					String a2 = getName(((NamespaceClassifierReference)arg2.getType()).getClassifierReferences().get(0).getTarget());
+					System.out.println(a+"To"+a2);
+					m.setName(a+"To"+a2);
+					//m = addMap(m,addDatatype(a),addDatatype(a2));
+					((EReference)lastElement).setContainment(true);
+					lastElement.setEType(m);
+				}
 				QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
+				String reference_type = getName(((ClassifierReference)arg.eContainer()).getTarget());
+				System.out.println(reference_type);
+				if(reference_type.equals("List")||reference_type.equals("ArrayList")||reference_type.equals("EList"))
+					lastElement.setOrdered(true);
+				else
+					lastElement.setOrdered(false);
 				this.accept2(arg.getType());
+			}
+			else {
+				System.out.println("else for "+classifierName);
+				//collection has no declared type so we bound it to Void type
+				if (classifierName.equals("java.util.Map")){
+					EClass m = EcoreFactory.eINSTANCE.createEClass();
+					m.setName("ObjectToObject");
+					m = addMap(m,null,null);
+					((EReference)lastElement).setContainment(true);
+					lastElement.setEType(m);
+				}
 			}
 			lastElement.setUpperBound(-1);
 		}
+	}*/
+	
+	/**
+	 * Handles collections of objects
+	 * @param classifierName the name of the type of a member
+	 * @param e the reference to the type of this member
+	 * Visiting lists is pretty straightforward (visitor)
+	 * Maps have no direct mapping to ECore metaclasses:
+	 * Mapping to EMF-style declarations of Maps
+	 */
+	private void visitCollection(String classifierName, ClassifierReference e){
+		if (collections_types.contains(classifierName)){
+			// Handler for Java Maps
+			if (classifierName.equals("java.util.Map")){
+				EClass m = EcoreFactory.eINSTANCE.createEClass();
+				// Map with generic types
+				if (e.getTypeArguments().size() != 0){
+					// getting generic types
+					QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
+					QualifiedTypeArgument arg2 = ((QualifiedTypeArgument)e.getTypeArguments().get(1));
+					String a = getName(((NamespaceClassifierReference)arg.getType()).getClassifierReferences().get(0).getTarget());
+					String a2 = getName(((NamespaceClassifierReference)arg2.getType()).getClassifierReferences().get(0).getTarget());
+					// lookup generic types
+					EClassifier key = getType(arg);
+					EClassifier value = getType(arg2);
+					// Gives a name and stores the new map
+					m.setName(a+"To"+a2);
+					m = addMap(m,key,value);
+				}
+				// raw map => Map<Object,Object>
+				else {
+					m.setName("ObjectToObject");
+					m = addMap(m,null,null);
+				}
+				((EReference)lastElement).setContainment(true);
+				lastElement.setEType(m);
+			}
+			else{
+				// Handler for Java and ECore Lists
+				if (e.getTypeArguments().size() != 0){
+					QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
+					this.accept2(arg.getType());
+				}
+				// raw list
+				else {
+					EDataType dt = addDatatype(primitive_types.get(OBJECT), OBJECT);
+					lastElement.setEType(dt);
+				}
+				//Lists are ordered, Collections are not
+				if(classifierName.equals("java.util.List")||
+						classifierName.equals("java.util.ArrayList")||
+						classifierName.equals("org.eclipse.emf.common.util.EList"))
+					lastElement.setOrdered(true);
+				else
+					lastElement.setOrdered(false);
+			}
+		}
+		lastElement.setUpperBound(-1);
 	}
 	
+	/**
+	 * Retrieves type of a generic type from a List/Map
+	 * @param arg structure that references the generic type
+	 * @return an EClass or a EDataType that already exists
+	 * or a EDataType for Object
+	 */
+	private EClassifier getType(QualifiedTypeArgument arg) {
+		String typeName = getClassifierQualifiedName(((NamespaceClassifierReference)arg.getType()).getClassifierReferences().get(0).getTarget());
+		if (classes.containsKey(typeName)){
+			return classes.get(typeName);
+		}
+		else {
+			if (primitive_types.containsKey(typeName)){
+				return addDatatype(primitive_types.get(typeName), typeName);
+			}
+		}
+		return addDatatype(primitive_types.get(OBJECT),OBJECT);
+	}
+
 	/**
 	 * Checks if an attribute already exist in a superclass of c
 	 * @param c the current class
@@ -531,15 +673,64 @@ public class Java2Tree extends TreeVisitor{
 	 * @param dt datatype to add
 	 * @return dt if the dt does not exist yet, or the existing datatype otherwise
 	 */
-	private EDataType addDatatype(EDataType dt) {
-		EDataType datatype = datatypes.get(dt.getName());
+	private EDataType addDatatype(String dt_name, String dt_icn) {
+		EDataType datatype = datatypes.get(dt_name);
 		if(datatype == null){
-			lastPackage.getEClassifiers().add(dt);
-			datatypes.put(dt.getName(),dt);
+			datatype = EcoreFactory.eINSTANCE.createEDataType();
+			datatype.setInstanceClassName(dt_icn);
+			datatype.setName(dt_name);
+			lastPackage.getEClassifiers().add(datatype);
+			datatypes.put(datatype.getName(),datatype);
+		}
+		return datatype;
+	}
+	
+	/**
+	 * Adds a map to the list of Maps (special EClasses) of the Ecore model
+	 * @param m map to add
+	 * @return m if the map does not exist yet, or the existing map otherwise
+	 */
+	private EClass addMap(EClass m, EClassifier dt_key, EClassifier dt_value) {
+		EClass map = classes.get(m.getName());
+		EClassifier dt_k = dt_key;
+		EClassifier dt_v = dt_value;
+		if(map == null){
+			EStructuralFeature key = null;
+			EStructuralFeature value = null;
+			if (dt_key == null || dt_value == null){ 
+				/*dt_k = EcoreFactoryImpl.eINSTANCE.createEDataType();
+				dt_k.setName(primitive_types.get(OBJECT));
+				dt_k.setInstanceClassName(OBJECT);*/
+				dt_k = addDatatype(primitive_types.get(OBJECT),OBJECT);
+				dt_v = addDatatype(primitive_types.get(OBJECT),OBJECT);
+				key = EcoreFactory.eINSTANCE.createEAttribute();
+				value = EcoreFactory.eINSTANCE.createEAttribute();
+			}
+			else{
+				if (dt_k instanceof EClass) {
+					key = EcoreFactory.eINSTANCE.createEReference();
+				} else {
+					key = EcoreFactory.eINSTANCE.createEAttribute();
+				}
+				if (dt_v instanceof EClass) {
+					value = EcoreFactory.eINSTANCE.createEReference();
+				} else {
+					value = EcoreFactory.eINSTANCE.createEAttribute();
+				}
+			}
+			key.setName("key");
+			value.setName("value");
+			key.setEType(dt_k);
+			value.setEType(dt_v);
+			m.setInstanceClassName("java.util.Map$Entry");
+			m.getEStructuralFeatures().add(key);
+			m.getEStructuralFeatures().add(value);
+			lastPackage.getEClassifiers().add(m);
+			classes.put(m.getName(),m);
 		}
 		else
-			dt = datatype;
-		return dt;
+			m = map;
+		return m;
 	}
 	
 	/**
