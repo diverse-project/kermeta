@@ -1,4 +1,4 @@
-/* $Id: $
+/* $Id$
 * Project    : org.kermeta.utils.console.eclipse.tests
 * License    : EPL
 * Copyright  : IRISA / INRIA / Universite de Rennes 1
@@ -31,7 +31,10 @@ import org.kermeta.utils.console.eclipse.console.IConsoleUtility;
 public class ConsoleUtilTest {
 	
 	
-	
+	/**
+	 * Test of the console
+	 * To execute it we need to create a new Job
+	 */
 	public void test() {
 	new Job("Console product derivation") {
 			public IStatus run(IProgressMonitor pm) {
@@ -45,23 +48,23 @@ public class ConsoleUtilTest {
 				console.writeln("Test prompt and read");
 				String answer = console.promptAndRead("answer:");
 				console.writeln("answer obtained " + answer);
-				console.writeln("");
+				console.writeln(""); 
 				
 				// Test errorln
-				//console.errorln ("Test errorln");
-				//console.writeln("");
+				console.errorln ("Test errorln");
+				console.writeln("");
 				
 				// Test warningln
-			//	console.warningln("Test warningln");
-				//console.writeln("");
+				console.warningln("Test warningln");
+				console.writeln("");
 				
 				// Test infoln
-			//	console.infoln("Test infoln");
+				console.infoln("Test infoln");
 				console.writeln("");
 				
 				// Test write_ok_ln
-			//	console.write_ok_ln("Test write_ok_ln ");
-			//	console.writeln("");
+				console.write_ok_ln("Test write_ok_ln ");
+				console.writeln("");
 				
 				return Status.OK_STATUS;
 			}
