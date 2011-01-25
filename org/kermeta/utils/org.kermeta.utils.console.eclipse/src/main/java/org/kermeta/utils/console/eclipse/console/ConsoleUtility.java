@@ -1,4 +1,4 @@
-/* $Id: $
+/* $Id$
 * Project    : org.kermeta.utils.console.eclipse
 * License    : EPL
 * Copyright  : IRISA / INRIA / Universite de Rennes 1
@@ -60,6 +60,8 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 	 */
 	private Color okColor;
 	
+	
+	
 	//BufferedReader to read input stream
 	private BufferedReader reader;
 	
@@ -96,6 +98,13 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 		
 		// Initialize readedInput
 		readUserInput = "";
+		
+		// Initialiize Color
+		this.standardColor = ColorMessage.STANDARD;
+		this.errorColor = ColorMessage.ERROR;
+		this.infoColor = ColorMessage.INFO;
+		this.okColor = ColorMessage.OK;
+		this.warningColor = ColorMessage.WARNING;
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------
@@ -141,23 +150,7 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 		return reader;
 	}
 	
-	public void writeInOutputStream (final String message,final Color color) {
-		new Job("Console product derivation") {
-			public IStatus run(IProgressMonitor pm) {
-		//Change the color to write if necessary
-		switchColor(color);
-		
-		// write the message
-		try {
-			getOutputStream().write(message);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return Status.OK_STATUS;
-			}
-			}.schedule();
-	}
+	
 	
 	//Methods to pretty print the message
 	/**
@@ -168,7 +161,7 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 		// support for reasonnable sized string
 		Runnable r = new Runnable() {
 			public void run() {
-				changeColor(color);
+				switchColor(color);
 				String justifiedMsg = justifyMessage(message);
 				if(!((IOConsoleOutputStream)getOutputStream()).isClosed())
 					try {
@@ -327,7 +320,8 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#error(java.lang.String)
 	 */
 	public void error(String error) {
-		print (error,this.errorColor);	
+		print (error,this.errorColor);
+
 	}
 
 	/* (non-Javadoc)
@@ -403,8 +397,11 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 
 	
 
-	
-	private String reading() {
+	/* (non-Javadoc)
+	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#read()
+	 */
+	public String read() {
+		this.activate();
 		String line = "";
 		BufferedReader reader = getReader();
 		try {
@@ -420,40 +417,10 @@ public class ConsoleUtility extends IOConsole implements IConsoleUtility {
 	
 	
 	/* (non-Javadoc)
-	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#read()
-	 */
-	public String read() {
-		
-		/*new Job("Console product derivation") {
-		public IStatus run(IProgressMonitor pm) {
-			String read = reading();
-			setReadUserInput(read);
-			return Status.OK_STATUS;
-		}
-	}.schedule(); */
-		
-		//Runnable r = new Runnable() {
-			//public void run() {
-				String read = reading();
-				setReadUserInput(read);	
-			//}
-		//};
-		
-		// Execute in the same UI thread
-		//ConsolePlugin.getStandardDisplay().syncExec(r);
-
-	// Return the input read
-	return getReadUserInput();
-	}
-
-		
-		
-	
-	
-	/* (non-Javadoc)
 	 * @see org.kermeta.utils.console.eclipse.console.IConsoleUtility#promptAndRead()
 	 */
 	public String promptAndRead(String prompt) {
+		this.activate();
 		write(prompt);
 		return read();
 	}
