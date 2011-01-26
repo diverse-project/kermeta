@@ -110,6 +110,7 @@ public class KermetaTypeChecker {
 	    	t.setName(TAG_EMF_renameAs);
 	    	t.setValue(op.getName() + TAG_EMF_renameAs);
 	    	op.getOwnedTags().add(t);
+	    	op.getTag().add(t);
     	}
     }
     
