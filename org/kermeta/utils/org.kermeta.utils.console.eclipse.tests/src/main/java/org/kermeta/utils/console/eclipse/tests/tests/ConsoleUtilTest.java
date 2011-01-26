@@ -70,8 +70,8 @@ public class ConsoleUtilTest {
 			}
 		}.schedule();
 		
-		
 	}
+	
 	
 	public void setStreamToConsole (ConsoleUtility console){
 		// To display outputStream on the new console
