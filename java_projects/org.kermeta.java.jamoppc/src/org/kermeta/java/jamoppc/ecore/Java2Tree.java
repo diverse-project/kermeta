@@ -625,8 +625,8 @@ public class Java2Tree extends TreeVisitor{
 				else
 					lastElement.setOrdered(false);
 			}
+			lastElement.setUpperBound(-1);
 		}
-		lastElement.setUpperBound(-1);
 	}
 	
 	/**
