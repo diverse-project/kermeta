@@ -111,9 +111,12 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		} else if ( node.getDetails().containsKey("mainClass") ) {
 			Tag tag = KermetaModelHelper.Tag.create("mainClass", node.getDetails().get("mainClass") );
 			kermetaUnit.getModelingUnit().getOwnedTags().add( tag );
+			kermetaUnit.getModelingUnit().getTag().add(tag);
 		} else if ( node.getDetails().containsKey("mainOperation") ) {
 			Tag tag = KermetaModelHelper.Tag.create("mainOperation", node.getDetails().get("mainOperation") );
+			tag.getObject().add(kermetaUnit.getModelingUnit());
 			kermetaUnit.getModelingUnit().getOwnedTags().add( tag );
+			kermetaUnit.getModelingUnit().getTag().add(tag);
 		}
 			
 		
@@ -126,6 +129,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		Package p = kermetaUnit.addInternalPackage( EcoreHelper.getQualifiedName(node) );
 		Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 		p.getOwnedTags().add(t);
+		p.getTag().add(t);
 		// FIXME : we have to test if URI is valid as a file path or not!
 		// Was : pack.setUri(node.getNsURI());
 		// node.getNsURI() is not always valid, so by default, we will take unit.getUri();
@@ -187,15 +191,18 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	    		currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
 	    		Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 	    		currentPrimitiveType.getOwnedTags().add(t);
+	    		currentPrimitiveType.getTag().add(t);
 	    		if ( !datas.value_types.contains(EcoreHelper.getQualifiedName(node)) ) {
 		    		if ( node.getInstanceClassName() != null ) {
 		    			Tag t0 = KermetaModelHelper.Tag.create("ecore.EDataType_instanceClassName", node.getInstanceClassName());
 		    			currentPrimitiveType.getOwnedTags().add(t0);
+		    			currentPrimitiveType.getTag().add(t0);
 		    		}
 		    		
 		    		if ( node.isSerializable() ) {
 		    			Tag t1 = KermetaModelHelper.Tag.create("ecore.EDataType_isSerializable", "true");
 			    		currentPrimitiveType.getOwnedTags().add(t1);
+			    		currentPrimitiveType.getTag().add(t1);
 		    		}
 		    		
 		    		
@@ -211,6 +218,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			    		}
 			    		Tag t2 = KermetaModelHelper.Tag.create("ecore.EDataType_eTypeParameters", str_etp.toString());
 		    			currentPrimitiveType.getOwnedTags().add(t2);
+		    			currentPrimitiveType.getTag().add(t2);
 		    		}
 		    	}
 	    		
@@ -233,6 +241,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 			currentClassDefinition = StructureFactory.eINSTANCE.createClassDefinition();
 			Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 			currentClassDefinition.getOwnedTags().add(t);
+			currentClassDefinition.getTag().add(t);
 			currentClassDefinition.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 			currentClassDefinition.setIsAbstract(node.isAbstract() || node.isInterface());
 			datas.store(currentClassDefinition, node);
@@ -278,6 +287,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		datas.store(currentOperation, node);
 		Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 		currentOperation.getOwnedTags().add(t);
+		currentOperation.getTag().add(t);
 		currentOperation.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		
 		currentOperation.setIsOrdered(node.isOrdered());
@@ -332,6 +342,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		currentProperty = StructureFactory.eINSTANCE.createProperty();
 		Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 		currentProperty.getOwnedTags().add(t);
+		currentProperty.getTag().add(t);
 		datas.store(EcoreHelper.getQualifiedName(node), currentProperty);
 	
 		currentProperty.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
@@ -391,6 +402,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		datas.store(EcoreHelper.getQualifiedName(node), currentProperty);
 		Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 		currentProperty.getOwnedTags().add(t);
+		currentProperty.getTag().add(t);
 		currentProperty.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		currentProperty.setIsOrdered(node.isOrdered());
 		currentProperty.setIsUnique(node.isUnique());
@@ -432,6 +444,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				currentEnumeration = KermetaModelHelper.Enumeration.create(KMTHelper.getUnescapedIdentifier(node.getName()));
 				Tag t = KermetaModelHelper.Tag.create("ecore", "true");
 				currentEnumeration.getOwnedTags().add(t);
+				currentEnumeration.getTag().add(t);
 				datas.store(currentEnumeration, node);
 				kermetaUnit.addTypeDefinition(currentEnumeration, getCurrentPackage());
 				acceptList(node.getELiterals());
@@ -477,6 +490,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		if ( feature.isTransient() ) {
 			Tag t = KermetaModelHelper.Tag.create("ecore.isTransient", "true");
 			prop.getOwnedTags().add(t);
+			prop.getTag().add(t);
 		}
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.kermeta.io.KermetaUnit;
@@ -34,6 +35,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -63,6 +65,15 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 	 */
 	public Ecore2KMPass3(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, IProgressMonitor monitor) {
 		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
+	}
+	
+	public Object visit(EPackage node) {
+		Object o = null;
+		Package p = kermetaUnit.addInternalPackage( EcoreHelper.getQualifiedName(node) );
+		packagesStack.push(p);
+		o = super.visit(node);
+		packagesStack.pop();
+		return o;
 	}
 
 
@@ -220,6 +231,9 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		}
 		else if(node.getEModelElement() instanceof EStructuralFeature) {
 			result = (String) visitPropertyAnnotation(node);
+		}
+		else if(node.getEModelElement() instanceof EPackage){
+			result = (String) visitStandardAnnotation(node);
 		}
 		return result;
 	}
