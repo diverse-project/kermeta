@@ -11,6 +11,7 @@ package org.kermeta.io.cachemanager;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -67,7 +68,7 @@ public class KermetaUnitStore
 		return get(uri, new HashMap<String, Object>());
 	}
 	
-	public KermetaUnit get(String uri, HashMap<String, Object> additionalLoadingOptions) throws URIMalformedException, NotRegisteredURIException {
+	public KermetaUnit get(String uri, Map<String, Object> additionalLoadingOptions) throws URIMalformedException, NotRegisteredURIException {
 		assert( uri != null );
 
 		String kermetaUnitURI = uri;
