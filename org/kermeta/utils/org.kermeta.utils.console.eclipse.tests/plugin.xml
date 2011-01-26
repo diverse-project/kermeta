@@ -13,6 +13,9 @@
             <separator
                   name="sampleGroup">
             </separator>
+            <separator
+                  name="separator2">
+            </separator>
          </menu>
          <action
                class="org.kermeta.utils.console.eclipse.tests.actions.TestConsoleUtil"
@@ -22,6 +25,14 @@
                menubarPath="sampleMenu/sampleGroup"
                toolbarPath="sampleGroup"
                tooltip="Test ConsoleUtil">
+         </action>
+         <action
+               class="org.kermeta.utils.console.eclipse.tests.actions.TestArt2ComponentEclipseConsole"
+               id="org.kermeta.utils.console.eclipse.tests.action1"
+               label="Art 2 Component Test"
+               menubarPath="sampleMenu/separator2"
+               style="push"
+               toolbarPath="separator2">
          </action>
       </actionSet>
    </extension>
