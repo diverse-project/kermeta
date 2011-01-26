@@ -156,7 +156,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		while ( iterator.hasNext() ) {
 			Require require = iterator.next();
 			String tags = ppTags( require );
-			print( tags + "require \"" + require.getUri() + "\"\n" );
+			if (require.getUri().equals("kermeta"))
+				print( tags + "require " + require.getUri() + "\n" );
+			else
+				print( tags + "require \"" + require.getUri() + "\"\n" );
 		}
 	}
 	
