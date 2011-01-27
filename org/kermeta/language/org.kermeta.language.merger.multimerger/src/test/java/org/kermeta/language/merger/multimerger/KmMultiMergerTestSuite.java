@@ -46,6 +46,7 @@ public class KmMultiMergerTestSuite extends TestSuite {
                 binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
                 Art2ComponentKmMultiMerger merger = new Art2ComponentKmMultiMerger();
                 merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger);
+                merger.setBinaryMerger(binaryMerger);
                 return merger;
             }
         };

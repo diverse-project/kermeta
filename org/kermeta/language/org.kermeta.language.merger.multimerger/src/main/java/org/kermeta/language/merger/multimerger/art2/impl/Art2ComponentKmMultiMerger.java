@@ -79,21 +79,16 @@ public class Art2ComponentKmMultiMerger extends AbstractComponentType implements
             result = new ModelingUnitResult(mus.iterator().next());
         } else if (mus.size() > 1) {
 
-            // Retrieve binary merger
-            PortKmBinaryMerger binaryMerger = this.getPortByName("KmBinaryMerger", PortKmBinaryMerger.class);
-
             // Merge the first 2 elements in the collection
             Iterator<ModelingUnit> iterator = mus.iterator();
             ModelingUnit first = iterator.next();
             ModelingUnit second = iterator.next();
-
             ModelingUnitResult merged = binaryMerger.merge(first, second);
-
+        	           
             // Store the errors in globalErrors
             for (ProblemMessage pm : merged.getProblems()) {
                 globalErrors.getProblems().add(pm);
             }
-
 
             // Merge with the other elements
             while (iterator.hasNext()) {
