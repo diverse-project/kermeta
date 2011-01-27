@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.tests.Util;
@@ -25,9 +27,13 @@ public class PortKmMultiMergerTestSuite extends TestSuite {
 	public static Test suite() {
 		System.out.println("Getting KmMultiMerger test suite  ");
 
+       Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*",          new XMIResourceFactoryImpl());
+		
 		TestSuite suite = new TestSuite("PortKmMultiMergerTestSuite");
 		try {
 			populate(suite, "KmMultiMerger_Valid", true,
+					portKmMultiMergerFactory, ".kmt");
+			populate(suite, "KmMultiMerger_Invalid", false,
 					portKmMultiMergerFactory, ".kmt");
 			// populate(suite, "KmBinaryMerger_Invalid", false,
 			// mergerClass,".kmt");
@@ -126,7 +132,7 @@ public class PortKmMultiMergerTestSuite extends TestSuite {
 				if(!td.inputfiles.isEmpty()){
 					ts.addTest(new PortKmMultiMergerTest(folder + "/" + td.testName,
 						 td.inputfiles, 
-						 outputFolder + "/" + td.testName,
+						 outputFolder + "/" + td.testName + ".km",
 						 td.expected_output_file,
 						 valid, factory));
 				}

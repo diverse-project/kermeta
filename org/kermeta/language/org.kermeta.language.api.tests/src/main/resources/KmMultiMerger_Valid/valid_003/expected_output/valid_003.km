@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="testArithm">
+  <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_arithm" isAspect="false" superType="//Test_arithm/@containedType.0" isAbstract="false" isSingleton="false">
+    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Object">
+      <usings fromQName="kermeta::standard" toName="standard"/>
+    </containedType>
+    <ownedOperation name="operation1" type="//Test_arithm/operation1/@containedType.0" isAbstract="false">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+        <usings fromQName="kermeta::standard" toName="standard"/>
+      </containedType>
+      <body xsi:type="org_kermeta_language_behavior:Block">
+        <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="result">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </containedType>
+          <type name="kermeta::standard::Integer" type="//Test_arithm/operation1/@body/@statement.0/@containedType.0"/>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="a">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </containedType>
+          <type name="kermeta::standard::Integer" type="//Test_arithm/operation1/@body/@statement.1/@containedType.0"/>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:Assignment">
+          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </target>
+          <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="4"/>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:Assignment">
+          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </target>
+          <value xsi:type="org_kermeta_language_behavior:CallFeature" name="mult">
+            <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2"/>
+            <target xsi:type="org_kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <usings fromQName="kermeta::standard" toName="standard"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3"/>
+            </target>
+          </value>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:Assignment">
+          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </target>
+          <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </value>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+      </body>
+    </ownedOperation>
+    <ownedOperation name="operation2" type="//Test_arithm/operation2/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+        <usings fromQName="kermeta::standard" toName="standard"/>
+      </containedType>
+      <body xsi:type="org_kermeta_language_behavior:Block">
+        <statement xsi:type="org_kermeta_language_behavior:Assignment">
+          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
+            <usings fromQName="kermeta::standard" toName="standard"/>
+          </target>
+          <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="42"/>
+        </statement>
+        <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+      </body>
+    </ownedOperation>
+  </ownedTypeDefinition>
+  <packages name="root" uri="">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" isAspect="false" isAbstract="false">
+      <ownedAttribute name="b" type="//root/A/b/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root::B"/>
+      </ownedAttribute>
+      <ownedAttribute name="int" type="//root/A/int/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root::Integer"/>
+      </ownedAttribute>
+      <ownedAttribute name="strings" type="//root/A/strings/@containedType.0" isOrdered="true" upper="-1" isReadOnly="true" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root::String"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" isAspect="false" isAbstract="false"/>
+  </packages>
+  <requires uri="kermeta"/>
+</org_kermeta_language_structure:ModelingUnit>
