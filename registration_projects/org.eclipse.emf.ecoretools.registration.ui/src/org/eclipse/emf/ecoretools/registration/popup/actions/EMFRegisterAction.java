@@ -37,11 +37,14 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 	protected StructuredSelection currentSelection;
     protected ArrayList<IFile> ecoreFiles; 
 
+    protected ArrayList<IFile> umlFiles;
+    
 	/**
 	 * Constructor
 	 */
 	public EMFRegisterAction() {
 		ecoreFiles = new ArrayList<IFile>();
+		umlFiles = new ArrayList<IFile>();
 	}
 
 	
@@ -70,8 +73,11 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			Iterator it = currentSelection.iterator();
 
 			ecoreFiles.clear(); // remove the previous selection, else the old selected packages will be re-registered
+			umlFiles.clear();
 			while(it.hasNext()) {
-				ecoreFiles.add( (IFile) it.next() );
+				IFile file = (IFile) it.next();
+				ecoreFiles.add( file );
+				umlFiles.add( file );
 			}
 		}
 	}
@@ -80,6 +86,8 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 	 * refresh the view with the current content of the registry
 	 */
 	protected void displayRegisteredPackages() {
+		System.out.println("Displaying registered packages ...");
+		
 		try {
 			RegisteredPackageView view;
 			view = (RegisteredPackageView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView( RegisteredPackageView.ID );

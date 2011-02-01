@@ -37,6 +37,28 @@
               menubarPath="org.eclipse.emf.ecoretools.registration.epackagesregistration.subMenu/emfregistration">
         </action>       
       </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.emf.ecoretools.registration.umlregistration"
+            nameFilter="*.uml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="org.eclipse.emf.ecoretools.registration.popup.actions.UMLRegisteringAction"
+               enablesFor="*"
+               icon="images/RegisterEcoreFile.gif"
+               id="org.eclipse.emf.ecoretools.registration.UMLRegister"
+               label="Register EPackages from UML profile file"
+               menubarPath="org.eclipse.emf.ecoretools.registration.umlepackagesregistration.subMenu/umlregistration">
+         </action>
+         <menu
+               id="org.eclipse.emf.ecoretools.registration.umlepackagesregistration.subMenu"
+               label="EPackages registration"
+               path="additions">
+            <separator
+                  name="umlregistration">
+            </separator>
+         </menu>
+      </objectContribution>
 	</extension>
 
    <extension

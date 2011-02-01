@@ -85,8 +85,9 @@ public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 
 	public Object getParent(Object arg0) {
 		EPackage result = null;
+		
 		EPackage p = (EPackage) arg0;
-		if (p.eContainer() != null) {
+		if ( (p.eContainer() != null) && (p.eContainer() instanceof EPackage)) {
 			String nsURI = ((EPackage) p.eContainer()).getNsURI();
 			if (EMFRegistryHelper.isRegistered(nsURI)) {
 				result = (EPackage) p.eContainer();
