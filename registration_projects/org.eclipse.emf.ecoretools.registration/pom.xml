@@ -56,6 +56,14 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.uml2.uml</artifactId>
+			<version>3.1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		<dependency>
+			
+		</dependency>
 	</dependencies>
 	<repositories>        
         <repository>
@@ -72,6 +80,22 @@
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 			<url>http://www.kermeta.org/maven2-snapshots</url>
+			<layout>default</layout>
+		</repository>
+        <repository>
+			<id>kermeta</id>
+			<name>Kermeta</name>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<url>http://www.kermeta.org/maven2</url>
 			<layout>default</layout>
 		</repository>
      </repositories>
