@@ -56,13 +56,12 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.uml2.uml</artifactId>
 			<version>3.1.0</version>
 			<type>jar</type>
-			<scope>compile</scope>
-		<dependency>
-			
+			<scope>compile</scope>			
 		</dependency>
 	</dependencies>
 	<repositories>        
