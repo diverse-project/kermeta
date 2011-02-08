@@ -60,7 +60,7 @@
       <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a textual file concrete object&#xD;&#xA; */"/>
     </eAnnotations>
     <eAnnotations source="kermeta.inv">
-      <details key="validTextRef" value="do&#xA;&#x9;lineEndAt.isGreater(lineBeginAt).~or(lineBeginAt.equals(lineEndAt).~and(charEndAt.isGreaterOrEqual(charBeginAt)))&#xA;end"/>
+      <details key="validTextRef" value="do&#xD;&#xA;&#x9;charEndOffset.isGreaterOrEqual(charBeginOffset)&#xD;&#xA;end"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginOffset" lowerBound="1"
         eType="#//Integer">
