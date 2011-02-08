@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -201,7 +202,19 @@ public class QuestionsPanel extends JPanel {
 			resultField.setText(resultField.getText() + q);
 		
 		try {
-			FileWriter fw = new FileWriter("./data.txt");
+			String fileName = "./data";
+			String ext = ".txt";
+			
+			if(new File(fileName+ext).exists()) {
+				int i=1;
+				
+				while(new File(fileName+i+ext).exists())
+					i++;
+				
+				fileName = fileName + i;
+			}
+			
+			FileWriter fw = new FileWriter(fileName+ext);
 			PrintWriter out = new PrintWriter(fw);
 			
 			for(Question q : questions)
