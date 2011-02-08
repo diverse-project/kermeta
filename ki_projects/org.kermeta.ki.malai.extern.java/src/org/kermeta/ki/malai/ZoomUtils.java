@@ -21,6 +21,17 @@ public abstract class ZoomUtils {
 	
 	
 	
+	public static double getZoom(final Object zoomableRO) {
+		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
+
+		if(zoomable instanceof Zoomable)
+			return ((Zoomable)zoomable).getZoom();
+		
+		return 1.;
+	}
+	
+	
+	
 	public static void zoomDefault(final Object zoomableRO) {
 		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
 		

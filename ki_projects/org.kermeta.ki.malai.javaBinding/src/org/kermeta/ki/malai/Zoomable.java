@@ -7,4 +7,6 @@ public interface Zoomable {
 	void zoomOut(final double decrement);
 	
 	void zoomDefault();
+	
+	double getZoom();
 }

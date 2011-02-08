@@ -28,6 +28,8 @@ class Press inherits Interaction
 	
 	reference target : Pickable
 	
+	reference source : Object
+	
 	
 	
 	method reinit() : Void is do
@@ -35,6 +37,7 @@ class Press inherits Interaction
 		
 		button := void
 		target := void
+		source := void
 	end
 	
 	
@@ -58,6 +61,7 @@ class PressPressureTransition inherits PressureTransition
 		press.px     := px
 		press.py     := py
 		press.button := button
+		press.source := source
 		press.target := press.getPickableAt(press.px, press.py, source)
 	end
 }

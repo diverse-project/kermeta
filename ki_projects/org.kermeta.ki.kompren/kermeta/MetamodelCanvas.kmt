@@ -109,6 +109,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		flattener.initialiseLinks()
 		hand.initialiseLinks()
 		hierarcher.metamodel := metamodel
+		hierarcher.zoomer := zoomer
 		hierarcher.initialiseLinks()
 		searcher.initialiseWidgets()
 		searcher.initialiseLinks()

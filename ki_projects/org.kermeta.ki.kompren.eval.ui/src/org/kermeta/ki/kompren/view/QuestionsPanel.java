@@ -128,24 +128,24 @@ public class QuestionsPanel extends JPanel {
 	
 	public void initQuestions() {
 		Question question = new Question();
-		question.subject = "<html><font size=\"10\">First <b>question</b>?</font></html>";
+		question.subject = "<html><font size=\"10\">What are the super classes of class <b>Type</b>?</font></html>";
 		questions.add(question);
 
 		question = new Question();
-		question.subject = "<html><font size=\"10\">Second <b>question</b>?</font></html>";
+		question.subject = "<html><font size=\"10\">What is the role </font><font size=\"5\">(i.e. the name)</font><font size=\"10\"> of the relation that links class <b>State</b> to class <b>Comment</b>?</font></html>";
 		questions.add(question);
 		
-//		question = new Question();
-//		question.subject = "<html><font size=\"10\">Third <b>question</b>?</font></html>";
-//		questions.add(question);
-//		
-//		question = new Question();
-//		question.subject = "<html><font size=\"10\">Fourth <b>question</b>?</font></html>";
-//		questions.add(question);
-//		
-//		question = new Question();
-//		question.subject = "<html><font size=\"10\">Last <b>question</b>?</font></html>";
-//		questions.add(question);
+		question = new Question();
+		question.subject = "<html><font size=\"10\">What are the classes <b>directly</b> linked </font><font size=\"5\">(by inheritance, composition, and association)</font><font size=\"10\"> to class <b>Class?</b></font></html>";
+		questions.add(question);
+		
+		question = new Question();
+		question.subject = "<html><font size=\"10\">What are the name of the, native and inherited, relations and attributes of class <b>Abstraction</b>?</font></html>";
+		questions.add(question);
+		
+		question = new Question();
+		question.subject = "<html><font size=\"10\">Propose 3 <b>entry points</b> <font size=\"5\">(main classes)</font> into the UML metamodel.</font></html>";
+		questions.add(question);
 	}
 	
 	

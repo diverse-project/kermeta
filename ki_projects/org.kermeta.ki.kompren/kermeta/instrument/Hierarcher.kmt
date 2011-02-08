@@ -9,6 +9,7 @@ package kermeta::ki::kompren;
 
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/action/PruneHierarchy.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/instrument/ZoomerMetamodel.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 
 
@@ -21,6 +22,8 @@ using kermeta::language::structure
 class Hierarcher inherits Instrument
 {
 	reference metamodel : ModelingUnit
+	
+	reference zoomer : ZoomerMetamodel
 	
 	
 	method initialiseLinks() : Void is do
@@ -38,27 +41,32 @@ class Press2GetHierarchy inherits PressLink
 	end
 	
 	
+	operation getObject() : Object is do
+		var press : Press init interaction.asType(Press)
+		var zoomer : ZoomerMetamodel init instrument.asType(Hierarcher).zoomer
+		result := press.getPickableAt(zoomer.getZoomedX(press.px), zoomer.getZoomedY(press.py), press.source)
+	end
+	
+	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
 			var press : Press init interaction.asType(Press)
 			var prune : PruneHierarchy  init action.asType(PruneHierarchy)
 			
-			if(press.target.isInstanceOf(ClassDefinition)) then
-				prune.selection.add(press.target.asType(ClassDefinition))
-			end
+			prune.selection.add(getObject().asType(ClassDefinition))
 		end
 	end
 	
 	
 	
 	method isConditionRespected() : Boolean is do
-		var press : Press init interaction.asType(Press)
-		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
+		var obj : Object init getObject()
+		result := not obj.isVoid and obj.isInstanceOf(ClassDefinition)
 	end
 	
 	
 	method createAction() : Void is do
-		var prune      : PruneHierarchy      init PruneHierarchy.new
+		var prune      : PruneHierarchy init PruneHierarchy.new
 		var hierarcher : Hierarcher init instrument.asType(Hierarcher)
 		
 		prune.initialise(instrument.actionRegistry)

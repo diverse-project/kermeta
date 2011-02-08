@@ -15,6 +15,7 @@ require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::language::structure
+using kermeta::standard
 
 class ZoomerMetamodel inherits Zoomer {
 	reference metamodel : ModelingUnit
@@ -22,6 +23,19 @@ class ZoomerMetamodel inherits Zoomer {
 	method initialiseLinks() : Void is do
 		addLink(KeyPress2Zoom.new, false)
 		addLink(Scroll2ZoomMetamodel.new, true)
+	end
+
+	operation getZoom() : Real is do
+		result := extern org::kermeta::ki::malai::ZoomUtils.getZoom(zoomable).asType(Real)
+	end	
+	
+	operation getZoomedX(x : Real) : Real is do
+		result := x/getZoom()
+	end
+
+	
+	operation getZoomedY(y : Real) : Real is do
+		result := y/getZoom()
 	end
 }
 
