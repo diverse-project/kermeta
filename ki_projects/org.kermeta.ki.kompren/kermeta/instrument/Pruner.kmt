@@ -9,6 +9,7 @@ package kermeta::ki::kompren;
 
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/action/Prune.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/instrument/ZoomerMetamodel.kmt"
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/interaction/CtrlMultiPress.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
@@ -39,6 +40,8 @@ class Pruner inherits Instrument
 	attribute radiusEffect : Integer
 	
 	attribute considerCard0 : Boolean
+	
+	reference zoomer : ZoomerMetamodel
 	
 	
 	
@@ -71,7 +74,7 @@ class Pruner inherits Instrument
 	
 	
 	method initialiseLinks() : Void is do
-		addLink(MultiPress2Prune.new, false)
+//		addLink(MultiPress2Prune.new, false)
 		addLink(Press2Prune.new, false)
 	end
 	
@@ -107,17 +110,30 @@ class MultiPress2Prune inherits Link
 	end
 	
 	
+	operation getObject(x : Real, y : Real, source : Object) : Object is do
+		var zoomer : ZoomerMetamodel init instrument.asType(Pruner).zoomer
+		result := interaction.getPickableAt(zoomer.getZoomedX(x), zoomer.getZoomedY(y), source)
+	end
+	
+	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
 			var press : CtrlMultiPress init interaction.asType(CtrlMultiPress)
 			var as    : Prune init action.asType(Prune)
+			var i     : Integer init 0
+			var obj   : Object
 			
-			press.objects.each{o |
-				if((not o.isVoid).andThen{b | o.isInstanceOf(ClassDefinition)}) then
-					as.selection.add(o.asType(ClassDefinition))
+			from  var size : Integer init press.pxs.size()
+			until i>=size
+			loop
+				obj := getObject(press.pxs.at(i), press.pys.at(i), press.source)
+				
+				if(not obj.isVoid and obj.isInstanceOf(ClassDefinition)) then
+					as.selection.add(obj.asType(ClassDefinition))
 				end
-			}
-
+				
+				i := i + 1
+			end
 		end
 	end
 	
@@ -147,21 +163,23 @@ class Press2Prune inherits PressLink
 	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
-			var press : Press init interaction.asType(Press)
-			var as    : Prune init action.asType(Prune)
-			
-			if(press.target.isInstanceOf(ClassDefinition)) then
-				as.selection.clear
-				as.selection.add(press.target.asType(ClassDefinition))
-			end
+			var as : Prune init action.asType(Prune)
+			as.selection.clear
+			as.selection.add(getObject().asType(ClassDefinition))
 		end
 	end
 	
 	
+	operation getObject() : Object is do
+		var press : Press init interaction.asType(Press)
+		var zoomer : ZoomerMetamodel init instrument.asType(Pruner).zoomer
+		result := press.getPickableAt(zoomer.getZoomedX(press.px), zoomer.getZoomedY(press.py), press.source)
+	end
+	
 	
 	method isConditionRespected() : Boolean is do
-		var press : Press init interaction.asType(Press)
-		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
+		var obj : Object init getObject()
+		result := not obj.isVoid and obj.isInstanceOf(ClassDefinition)
 	end
 	
 	

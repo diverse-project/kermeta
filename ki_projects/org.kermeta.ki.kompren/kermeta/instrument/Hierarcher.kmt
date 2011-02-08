@@ -50,10 +50,7 @@ class Press2GetHierarchy inherits PressLink
 	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
-			var press : Press init interaction.asType(Press)
-			var prune : PruneHierarchy  init action.asType(PruneHierarchy)
-			
-			prune.selection.add(getObject().asType(ClassDefinition))
+			action.asType(PruneHierarchy).selection.add(getObject().asType(ClassDefinition))
 		end
 	end
 	

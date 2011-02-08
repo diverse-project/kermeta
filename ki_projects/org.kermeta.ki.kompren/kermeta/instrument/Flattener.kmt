@@ -7,6 +7,7 @@
 package kermeta::ki::kompren;
 
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.kompren/kermeta/instrument/ZoomerMetamodel.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.kompren/kermeta/action/Flat.kmt"
 
@@ -18,6 +19,8 @@ using kermeta::language::structure
 class Flattener inherits Instrument
 {
 	reference metamodel : ModelingUnit
+	
+	reference zoomer : ZoomerMetamodel
 	
 	
 	method initialiseLinks() : Void is do
@@ -37,20 +40,21 @@ class Press2Flat inherits PressLink
 	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
-			var press : Press init interaction.asType(Press)
-			var flat  : Flat  init action.asType(Flat)
-			
-			if(press.target.isInstanceOf(ClassDefinition)) then
-				flat.classToFlat := press.target.asType(ClassDefinition)
-			end
+			action.asType(Flat).classToFlat := getObject().asType(ClassDefinition)
 		end
 	end
 	
 	
+	operation getObject() : Object is do
+		var press : Press init interaction.asType(Press)
+		var zoomer : ZoomerMetamodel init instrument.asType(Flattener).zoomer
+		result := press.getPickableAt(zoomer.getZoomedX(press.px), zoomer.getZoomedY(press.py), press.source)
+	end
+	
 	
 	method isConditionRespected() : Boolean is do
-		var press : Press init interaction.asType(Press)
-		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
+		var obj : Object init getObject()
+		result := not obj.isVoid and obj.isInstanceOf(ClassDefinition)
 	end
 	
 	

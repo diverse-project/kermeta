@@ -106,6 +106,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		pruner.metamodel := metamodel
 		pruner.initialiseLinks()
 		flattener.metamodel := metamodel
+		flattener.zoomer := zoomer
 		flattener.initialiseLinks()
 		hand.initialiseLinks()
 		hierarcher.metamodel := metamodel
@@ -148,6 +149,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector.initialiseLinks()
 		selector.setIsActivated(true)
 		pruner.metamodel := metamodel
+		pruner.zoomer := zoomer
 		undoManager.undoCollector := undoCollector		
 		undoCollector.handlers.add(undoManager)
 		undoManager.initialiseLinks()

@@ -22,12 +22,15 @@ class CtrlMultiPress inherits Interaction
 	attribute pxs : Sequence<Real>
 	attribute pys : Sequence<Real>
 	
+	reference source : Object
+	
 	reference objects : Pickable[0..*]
 	
 	
 	method reinit() : Void is do
 		super
 
+		source := void
 		pxs := Sequence<Real>.new
 		pys := Sequence<Real>.new
 		objects.clear
@@ -103,6 +106,7 @@ class CtrlMultiPressPressureTransition inherits PressureTransition {
 	reference ctrlPress : CtrlMultiPress
 
 	method action() : Void is do
+	    ctrlPress.source := source
 		ctrlPress.pxs.add(px)
 		ctrlPress.pys.add(py)
 		ctrlPress.objects.add(ctrlPress.getPickableAt(px, py, source))
