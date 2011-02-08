@@ -233,6 +233,7 @@ public class QuestionsPanel extends JPanel {
 		public void actionPerformed(final ActionEvent e) {
 			QuestionsPanel.this.currentTime = System.currentTimeMillis();
 			QuestionsPanel.this.setAnswerMode();
+			diagram.requestFocusInWindow();
 		}
 	}
 	
@@ -251,6 +252,7 @@ public class QuestionsPanel extends JPanel {
 				QuestionsPanel.this.setNextQuestion();
 			else
 				QuestionsPanel.this.setTerminated();
+			diagram.requestFocusInWindow();
 		}
 	}
 
