@@ -28,12 +28,12 @@ public interface PortURIs2MergedKm {
 	 * @param URIs
 	 * @param options
 	 */
-	public void merge(List<String> URIs,  Collection<ServiceOption> options);
+	public void mergeWithOptions(List<String> URIs,  Collection<ServiceOption> options);
 	
 	/**
 	 * Loads a set of URI convert them into km model, merge them, and save the result to the given URI	 
 	 */
-	public void merge(List<String> URIs, String destURI);
+	public void mergeIntoURI(List<String> URIs, String destURI);
 	
 	/**
 	 * Same as previous but with options 
@@ -41,5 +41,5 @@ public interface PortURIs2MergedKm {
 	 * @param destURI
 	 * @param options
 	 */
-	public void merge(List<String> URIs, String destURI, Collection<ServiceOption> options);
+	public void mergeIntoURIWithOptions(List<String> URIs, String destURI, Collection<ServiceOption> options);
 }
