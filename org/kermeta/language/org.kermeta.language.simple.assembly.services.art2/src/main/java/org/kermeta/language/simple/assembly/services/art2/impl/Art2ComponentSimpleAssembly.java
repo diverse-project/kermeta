@@ -48,7 +48,7 @@ import org.osgi.framework.Bundle;
 	@RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class),
 	
 	/** port that is able to merge a set of ModelingUnit into one ModelingUnit */
-	@RequiredPort(name = "kmMerger", type = PortType.SERVICE, className = PortKmMerger.class)
+	@RequiredPort(name = "km2ScalaCompiler", type = PortType.SERVICE, className = PortKm2ScalaCompiler.class)
 
 })
 @ThirdParties({
