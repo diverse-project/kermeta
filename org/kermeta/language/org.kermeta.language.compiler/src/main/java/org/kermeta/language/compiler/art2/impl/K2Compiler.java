@@ -7,7 +7,7 @@ package org.kermeta.language.compiler.art2.impl;
 import java.util.Properties;
 import org.kermeta.art2.annotation.*;
 import org.kermeta.art2.framework.AbstractComponentType;
-import org.kermeta.language.api.port.PortKmCompiler;
+import org.kermeta.language.api.port.PortKm2ScalaCompiler;
 import org.kermeta.language.compiler.GlobalConfiguration;
 import org.kermeta.language.structure.ModelingUnit;
 
@@ -23,7 +23,7 @@ import org.kermeta.language.structure.ModelingUnit;
 //@ThirdParty(name="org.kermeta.language.loader.scala", url="mvn:org.kermeta.language/language.loader.scala")
 })
 @Provides({
-    @ProvidedPort(name = "compiler", type = PortType.SERVICE, className = PortKmCompiler.class)
+    @ProvidedPort(name = "compiler", type = PortType.SERVICE, className = PortKm2ScalaCompiler.class)
 })
 @Requires({
     @RequiredPort(name = "log", type = PortType.MESSAGE)
