@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art2:ContainerRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art2="http://art/2.0">
+  <typeDefinitions xsi:type="art2:ComponentType" name="Art2ComponentSimpleAssembly" deployUnit="//@deployUnits.0" factoryBean="org.kermeta.language.simple.assembly.services.art2.impl.Art2ComponentSimpleAssemblyFactory" bean="org.kermeta.language.simple.assembly.services.art2.impl.Art2ComponentSimpleAssembly" requiredLibs="//@deployUnits.1 //@deployUnits.2 //@deployUnits.3 //@deployUnits.4" startMethod="start" stopMethod="stop">
+    <required name="log" ref="//@typeDefinitions.2"/>
+    <required name="kmtLoader" ref="//@typeDefinitions.3"/>
+    <required name="kmMerger" ref="//@typeDefinitions.4"/>
+    <provided name="km2scala" ref="//@typeDefinitions.1">
+      <mappings beanMethodName="km2scalaCompile" serviceMethodName="compile"/>
+    </provided>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKm2ScalaCompiler">
+    <operations name="compile" returnType="//@dataTypes.0">
+      <parameters name="arg0" type="//@dataTypes.1"/>
+      <parameters name="arg1" type="//@dataTypes.2"/>
+    </operations>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:MessagePortType" name="org.kermeta.art2.framework.MessagePort"/>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortResourceLoader">
+    <operations name="load" returnType="//@dataTypes.1">
+      <parameters name="arg0" type="//@dataTypes.2"/>
+      <parameters name="arg1" type="//@dataTypes.3"/>
+      <parameters name="arg2" type="//@dataTypes.2"/>
+    </operations>
+  </typeDefinitions>
+  <typeDefinitions xsi:type="art2:ServicePortType" name="org.kermeta.language.api.port.PortKmMerger">
+    <operations name="merge" returnType="//@dataTypes.4">
+      <parameters name="arg0" type="//@dataTypes.5"/>
+    </operations>
+  </typeDefinitions>
+  <dataTypes name="void"/>
+  <dataTypes name="org.kermeta.language.structure.ModelingUnit"/>
+  <dataTypes name="java.lang.String"/>
+  <dataTypes name="org.kermeta.language.api.port.PortResourceLoader.URIType"/>
+  <dataTypes name="org.kermeta.language.api.result.ModelingUnitResult"/>
+  <dataTypes name="java.util.Collection" genericTypes="//@dataTypes.1"/>
+  <libraries name="org.kermeta.language" subTypes="//@typeDefinitions.0"/>
+  <deployUnits groupName="org.kermeta.language" unitName="language.simple.assembly.services.art2" version="2.0.1-SNAPSHOT" hashcode="201102081714431"/>
+  <deployUnits name="org.kermeta.language.model" url="mvn:org.kermeta.language/language.model"/>
+  <deployUnits name="org.kermeta.language.kp.model" url="mvn:org.kermeta.kp/kp.model"/>
+  <deployUnits name="org.kermeta.language.traceability.model" url="mvn:org.kermeta.traceability/traceability.model"/>
+  <deployUnits name="org.kermeta.language.api" url="mvn:org.kermeta.language/language.api"/>
+</art2:ContainerRoot>
