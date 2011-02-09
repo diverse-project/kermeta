@@ -28,6 +28,8 @@ import org.kermeta.art2.annotation.ThirdParty;
 import org.kermeta.art2.framework.AbstractComponentType;
 import org.kermeta.art2.framework.MessagePort;
 import org.kermeta.language.api.art2.port.utils.SimpleLogger;
+import org.kermeta.language.api.port.PortKm2ScalaCompiler;
+import org.kermeta.language.api.port.PortKmLoader;
 import org.osgi.framework.Bundle;
 
 
@@ -38,7 +40,11 @@ import org.osgi.framework.Bundle;
      * Log port for sending technical messages
      */
     @RequiredPort(name = "log", type = PortType.MESSAGE),
-    @RequiredPort(name = "kevent", type = PortType.MESSAGE)
+    @RequiredPort(name = "kevent", type = PortType.MESSAGE),
+    /** port that is able to load a ModelingUnit from an URI */
+	@RequiredPort(name = "kmLoader", type = PortType.SERVICE, className = PortKmLoader.class),
+    /** port that is able to compile a  ModelingUnit into scala code */
+	@RequiredPort(name = "km2ScalaCompiler", type = PortType.SERVICE, className = PortKm2ScalaCompiler.class)
 })
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.api", url = "mvn:org.kermeta.language/language.api")
@@ -93,6 +99,13 @@ public class Art2ComponentKermetaUI4Eclipse extends AbstractComponentType{
     
     public MessagePort getKEventPort() {
 		return getPortByName("kevent", MessagePort.class);
+	}
+    
+    public PortKmLoader getKmLoaderPort() {
+		return getPortByName("kmLoader", PortKmLoader.class);
+	}
+    public PortKm2ScalaCompiler getKm2ScalaCompilerPort() {
+		return getPortByName("km2ScalaCompiler", PortKm2ScalaCompiler.class);
 	}
     
     /**
