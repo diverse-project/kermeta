@@ -22,6 +22,25 @@
              label="Generate executable KM"
              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
        </action>
-     </objectContribution>     
+     </objectContribution>  
+     <objectContribution
+           adaptable="true"
+           id="org.kermeta.language.ui.eclipse.actions.GenerateScalaFromKmAction"
+           objectClass="org.eclipse.core.resources.IFile">
+        <menu
+              icon="platform:/plugin/org.kermeta.language.ui.eclipse/icons/kermeta_logo.gif"
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions">
+           <separator name="kermetagroup2"/>
+        </menu>
+       <action
+             class="org.kermeta.language.ui.eclipse.actions.GenerateScalaAction"
+             icon="platform:/plugin/org.kermeta.language.ui.eclipse/icons/kermeta_logo.gif"
+             id="org.kermeta.language.ui.eclipse.actions.GenerateScalaFromKmAction"
+             label="Generate scala from KM"
+             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+       </action>
+     </objectContribution>    
   </extension>  
 </plugin>
