@@ -8,97 +8,58 @@ package kermeta::ki::malai::interaction;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Scrolling.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::picking
 
 
-class KeysScroll inherits Interaction
-{
+class KeysScroll inherits Scrolling {
 	attribute keys : Integer[0..*]
-	
-	reference object : Pickable
-	
-	attribute px : Real
-	
-	attribute py : Real
-	
-	attribute numberUp : Integer
-	
-	attribute scrolled : Boolean
-	
-	/** Defines if the interaction must search the object at the position of a scroll. */
-	attribute searchPickable : Boolean
-	
 	
 	method reinit() : Void is do
 		super
-		
 		keys.clear
-		object 	:= void
-		px		:= void
-		py		:= void
-		numberUp:= 0
-		scrolled := false
-		searchPickable := false
 	end
 	
 	
 	
 	method initStateMachine() : Void is do
-		var key		: State init IntermediaryState.new
-		var scroll	: State init IntermediaryState.new
-		var ending 	: State init TerminalState.new
-		var abort	: State init AbortingState.new
+		var keyPressed : IntermediaryState init IntermediaryState.new
+		var keyReleased : AbortingState init AbortingState.new
+		var scrolled : TerminalState init TerminalState.new
+
+		keyPressed.initialise("keyPressed")
+		keyReleased.initialise("keyReleased")
+		scrolled.initialise("scrolled")
+
+		addState(keyPressed)
+		addState(keyReleased)
+		addState(scrolled)
+
+		var sst : ScrollingWheelTransition init ScrollingWheelTransition.new
+		sst.scrolling := self
+		sst.initialise(initState, scrolled)
+
+		var kpt : KSKeyPressureTransition init KSKeyPressureTransition.new
+		kpt.keysScroll := self
+		kpt.initialise(initState, keyPressed)
 		
-		ending.initialise("ending")
-		key.initialise("key")
-		scroll.initialise("scroll")
-		abort.initialise("abort")
-		addState(key)
-		addState(scroll)
-		addState(ending)
-		addState(abort)
+		kpt := KSKeyPressureTransition.new
+		kpt.keysScroll := self
+		kpt.initialise(keyPressed, keyPressed)
+
+		var krtAbort : EmptyKeyReleaseTransition init EmptyKeyReleaseTransition.new
+		krtAbort.keysScroll := self
+		krtAbort.initialise(keyPressed, keyReleased)
+
+		var krt : KSKeyReleaseTransition init KSKeyReleaseTransition.new
+		krt.keysScroll := self
+		krt.initialise(keyPressed, keyPressed)
 		
-		var kp : KSKeyPressureTransition init KSKeyPressureTransition.new
-		kp.keysScroll := self
-		kp.initialise(initState, key)
-		
-		kp := KSKeyPressureTransition.new
-		kp.keysScroll := self
-		kp.initialise(key, key)
-		
-		var krEmpty : EmptyKeyReleaseTransition init EmptyKeyReleaseTransition.new
-		krEmpty.keysScroll := self
-		krEmpty.initialise(key, abort)
-		
-		var kr : KSKeyReleaseTransition init KSKeyReleaseTransition.new
-		kr.keysScroll := self
-		kr.initialise(key, key)
-		
-		var wt : KSWheelTransition init KSWheelTransition.new
-		wt.keysScroll := self
-		wt.initialise(initState, ending)
-		
-		wt := KSWheelTransition.new
-		wt.keysScroll := self
-		wt.initialise(key, scroll)
-		
-		wt := KSWheelTransition.new
-		wt.keysScroll := self
-		wt.initialise(scroll, scroll)
-		
-		kr := KSKeyReleaseTransition.new
-		kr.keysScroll := self
-		kr.initialise(scroll, scroll)
-		
-		kp := KSKeyPressureTransition.new
-		kp.keysScroll := self
-		kp.initialise(scroll, scroll)
-		
-		krEmpty := EmptyKeyReleaseTransition.new
-		krEmpty.keysScroll := self
-		krEmpty.initialise(scroll, ending)
+		sst := ScrollingWheelTransition.new
+		sst.scrolling := self
+		sst.initialise(keyPressed, scrolled)
 	end
 }
 
@@ -108,14 +69,8 @@ class KSKeyPressureTransition inherits KeyPressureTransition
 {
 	reference keysScroll : KeysScroll
 	
-	
 	method action() : Void is do
 		keysScroll.keys.add(key)
-	end
-	
-	
-	method isGuardRespected() : Boolean is do
-		result := key!=27
 	end
 }
 
@@ -125,17 +80,10 @@ class EmptyKeyReleaseTransition inherits KeyReleaseTransition
 {
 	reference keysScroll : KeysScroll
 	
-	
-	method action() : Void is do
-		keysScroll.keys.remove(key)
-	end
-	
-	
 	method isGuardRespected() : Boolean is do
-		result := keysScroll.keys.size==1
+		result := super and keysScroll.keys.size==1
 	end
 }
-
 
 
 class KSKeyReleaseTransition inherits KeyReleaseTransition {
@@ -146,32 +94,6 @@ class KSKeyReleaseTransition inherits KeyReleaseTransition {
 	end
 
 	method isGuardRespected() : Boolean is do
-		result := keysScroll.keys.size>1
-	end
-}
-
-
-
-class KSWheelTransition inherits WheelTransition {
-	reference keysScroll : KeysScroll
-
-	method action() : Void is do
-		keysScroll.px 		:= px
-		keysScroll.py 		:= py
-
-		if(keysScroll.searchPickable) then
-			keysScroll.object 	:= keysScroll.getPickableAt(px, py, source)
-		end
-
-		var incr : Integer
-		if(isUp) then incr := 1 else incr := -1 end
-
-		keysScroll.numberUp	:= keysScroll.numberUp + incr
-		keysScroll.scrolled := true
-	end
-
-
-	method isGuardRespected() : Boolean is do
-		result := true
+		result := super and keysScroll.keys.size>1
 	end
 }

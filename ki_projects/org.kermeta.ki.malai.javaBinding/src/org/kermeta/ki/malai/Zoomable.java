@@ -9,4 +9,6 @@ public interface Zoomable {
 	void zoomDefault();
 	
 	double getZoom();
+	
+	void setZoom(final int x, final int y, final double zoomLevel);
 }

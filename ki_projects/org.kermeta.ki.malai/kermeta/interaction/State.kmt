@@ -21,7 +21,7 @@ abstract class State
 	
 	attribute transitions : Transition[0..*]
 	
-	reference stateMachine : StateMachine
+	reference stateMachine : Interaction
 	
 	
 	operation initialise(name : String) : Void is do
@@ -67,9 +67,7 @@ abstract class State
 
 class IntermediaryState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isInstanceOf(Interaction)) then
-			stateMachine.asType(Interaction).notifyHandlersOnUpdate()
-		end
+		stateMachine.onUpdating()
 	end
 }
 
@@ -79,10 +77,7 @@ class IntermediaryState inherits State {
 
 class AbortingState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isInstanceOf(Interaction)) then
-			stateMachine.asType(Interaction).notifyHandlersOnAborting()
-		end
-		stateMachine.reinit()
+		stateMachine.onAborting()
 	end
 }
 
@@ -96,9 +91,7 @@ class InitState inherits State {
 	
 	
 	method onOutgoing() : Void is do
-		if(stateMachine.isInstanceOf(Interaction)) then
-			stateMachine.asType(Interaction).notifyHandlersOnStart()
-		end
+		stateMachine.onStarting()
 	end
 }
 
@@ -106,9 +99,6 @@ class InitState inherits State {
 
 class TerminalState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isInstanceOf(Interaction)) then
-			stateMachine.asType(Interaction).notifyHandlersOnStop()
-		end
-		stateMachine.reinit()
+		stateMachine.onTerminating()
 	end
 }

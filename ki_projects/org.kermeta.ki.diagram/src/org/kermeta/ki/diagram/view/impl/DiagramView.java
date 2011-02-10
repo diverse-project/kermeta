@@ -284,7 +284,6 @@ public class DiagramView extends JPanel implements IDiagramView {
 			relation.update();
 		
 		updatePreferredSize();
-		recentre();
 		refresh();
 	}
 	
@@ -553,5 +552,12 @@ public class DiagramView extends JPanel implements IDiagramView {
 			anchorRelation(relation);
 			relation.update();
 		}
+	}
+
+
+	@Override
+	public void setZoom(final int x, final int y, final double zoomLevel) {
+		if(zoomLevel>0)
+			zoom = zoomLevel;
 	}
 }

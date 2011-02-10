@@ -3,6 +3,15 @@ package org.kermeta.ki.malai;
 import org.kermeta.ki.malai.kermetaMap.Source2TargetMap;
 
 public abstract class ZoomUtils {
+	public static void setZoom(final Object zoomableRO, final int x, final int y, final double zoomLevel) {
+		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
+		
+		if(zoomable instanceof Zoomable) {
+			((Zoomable)zoomable).setZoom(x, y, zoomLevel);
+		}
+	}
+	
+	
 	public static void zoomIn(final Object zoomableRO, final double increment) {
 		final Object zoomable = Source2TargetMap.MAP.getTargetObject(zoomableRO);
 		

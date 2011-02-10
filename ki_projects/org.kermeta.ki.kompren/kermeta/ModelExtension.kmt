@@ -182,6 +182,11 @@ aspect class ModelingUnit inherits Picker, Eventable {
 		result := (not classDef.isVoid).andThen{b | packages.exists{p | p.ownedTypeDefinition.exists{td | classDef==td }}}
 	end
 
+	
+	operation recentre() : Void is do
+		extern org::kermeta::ki::kompren::view::DiagramViewExtern.recentre(self)
+	end
+
 
 	operation organise() : Void is do
 		extern org::kermeta::ki::kompren::view::DiagramViewExtern.organise(self)

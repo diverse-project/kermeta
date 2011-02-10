@@ -11,6 +11,11 @@ public abstract class DiagramViewExtern {
 	}
 	
 	
+	public static void recentre(final Object mmRO) {
+		((IDiagramView) Source2TargetMap.MAP.getTargetObject(mmRO)).recentre();
+	}
+	
+	
 	public static void onRelationRemoved(final Object mmRO, final Object linkRO) {
 		((IDiagramView) Source2TargetMap.MAP.getTargetObject(mmRO)).removeRelation((IRelationView)Source2TargetMap.MAP.getTargetObject(linkRO));
 		Source2TargetMap.MAP.removeSourceObject(linkRO);

@@ -23,39 +23,26 @@ class Zoom inherits Action
 	attribute px : Integer
 	
 	attribute py : Integer
-	
-	attribute increment : Integer
-	
-	attribute previousIncrement : Integer
+
+	attribute zoomLevel : Real	
 	
 	
 	method canDo() : Boolean is do
-		result := not zoomable.isVoid and not increment.isVoid
+		result := not zoomable.isVoid and not zoomLevel.isVoid and zoomLevel>0
 	end
 	
-	
-	
+
 	method doActionBody() : Void is do
-		var incr : Integer
-		
-		if(previousIncrement.isVoid) then 
-			incr := increment 
-		else 
-			incr := increment-previousIncrement 
-		end
-
-		if(incr>0) then
-			extern org::kermeta::ki::malai::ZoomUtils.zoomIn(zoomable, getZoomIncrement()*incr.toReal)
-		else
-			extern org::kermeta::ki::malai::ZoomUtils.zoomOut(zoomable, getZoomIncrement()*incr.toReal*-1.toReal)
-		end
-		
+		var px2 : Integer
+		var py2 : Integer
+	
+		if(px.isVoid) then px2 := 0 else px2 := px end
+		if(py.isVoid) then py2 := 0 else py2 := py end
+	
+		extern org::kermeta::ki::malai::ZoomUtils.setZoom(zoomable, px2, py2, zoomLevel)
 		done()
-
-		previousIncrement := increment
 	end
 	
-
 
 	method cancelledBy(action : Class) : Boolean is do
 		result := false
@@ -69,9 +56,5 @@ class Zoom inherits Action
 	
 	method isRegisterable() : Boolean is do
 		result := false
-	end
-	
-	operation getZoomIncrement() : Real is do
-		result := "0.25".toReal
 	end
 }

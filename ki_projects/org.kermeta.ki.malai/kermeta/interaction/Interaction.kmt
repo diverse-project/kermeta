@@ -7,25 +7,50 @@
 package kermeta::ki::malai::interaction;
 
 require kermeta
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/StateMachine.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Eventable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
 
 using kermeta::ki::malai::picking
 using kermeta::standard
+using kermeta::ki::malai::widget
 
 /**
  * Defines an interaction as defined in the Malai model. An interaction is a state machine and a class.
  * @author Arnaud BLOUIN
  */
-abstract class Interaction inherits StateMachine {
+abstract class Interaction inherits EventHandler {
 	/**
 	 * The handlers that want to be notified when the state machine of the
 	 * interaction changed.
 	 */
 	reference handlers : InteractionHandler[0..*]
 	
+	/** The events still in process. For example when the user press key ctrl and scroll one
+	 * time using the wheel of the mouse, the interaction scrolling is finished but the event keyPressed
+	 * 'ctrl' is still in process. At the end of the interaction, these events are re-introduced into the
+	 * state machine of the interaction for processing.
+	 */
+	reference stillProcessingEvents : Event[0..*]
+	
+	attribute activated : Boolean
+
+	attribute states : State[0..*]
+	
+	reference initState : InitState
+	
+	reference currentState : State
+	
+	
+	operation initialise() : Void is do
+		activated := true
+		initState := InitState.new
+		initState.initialise("init")
+		addState(initState)
+		reinit()
+		initStateMachine	
+	end
 	
 
 	/**
@@ -122,4 +147,521 @@ abstract class Interaction inherits StateMachine {
 			result := void
 		end
 	end
+	
+	
+		/**
+	* Indicates if the state machine is running.
+	*/
+	operation isRunning() : Boolean is do
+		result := activated and currentState!=initState
+	end
+	
+	
+	
+	operation setIsActivated(activated : Boolean) : Void is do
+		self.activated := activated
+	end
+	
+	
+	
+	operation initStateMachine() : Void is abstract
+	
+	
+	operation reinit() : Void is do
+		currentState := initState
+	end
+	
+	
+	operation addState(state : State) : Void is do
+		if(state!=void) then
+			states.add(state)
+			state.stateMachine := self
+		end
+	end
+
+	
+	
+	operation executeTransition(t : Transition) : Void is do
+		if(activated and not t.isVoid) then
+    		do
+    			t.action()
+    			t.inputState.onOutgoing()
+    			currentState := t.outputState
+    			t.outputState.onIngoing()
+    		rescue(ex : kermeta::exceptions::Exception) stdio.writeln("ERROR>>>" + ex.message.toString) reinit() end
+    	end
+	end
+
+	
+	
+	method onTextChanged(textField : TextField) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			
+			currentState.transitions.exists{ t |
+				if(t.isInstanceOf(TextChangedTransition)) then
+					var tct : TextChangedTransition init t.asType(TextChangedTransition)
+	
+					tct.textField := textField
+					
+					if(t.isGuardRespected()) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+	
+	
+
+	method onButtonPressed(button : Button) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(ButtonPressedTransition)) then
+					t.asType(ButtonPressedTransition).button := button
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end		
+	end
+	
+	
+	/**
+	 * Checks if the transition can be executed and executes it if possible.
+	 * @param transition The transition to check.
+	 * @return True: the transition has been executed.
+	 * @since 0.2
+	 */
+	operation checkTransition(transition : Transition) : Boolean is do
+		if(transition.isGuardRespected()) then
+			executeTransition(transition)
+			result := true
+		else 
+			result := false
+		end
+	end
+	
+
+	method onKeyPressure(key : Integer, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			var size : Integer init currentState.transitions.size
+			
+			from var i : Integer init 0
+			until stop or i>=size
+			loop
+				t := currentState.transitions.at(i)
+				
+				if(t.isInstanceOf(KeyPressureTransition)) then
+					t.asType(KeyPressureTransition).key := key
+					stop := checkTransition(t)
+
+					if(stop) then
+						// Adding an event 'still in process'
+						addEvent(KeyPressEvent.new.initialise(idHID, key))
+					end
+				end
+				i := i + 1
+			end
+		end
+	end
+
+
+
+	method onKeyRelease(key : Integer, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			var size : Integer init currentState.transitions.size
+			
+			from var i : Integer init 0
+			until stop or i>=size
+			loop
+				t := currentState.transitions.at(i)
+
+				if(t.isInstanceOf(KeyReleaseTransition)) then
+					t.asType(KeyReleaseTransition).key := key
+					
+					if(t.isGuardRespected) then
+						// Removing from the 'still in process' list
+						removeKeyEvent(idHID, key)
+						stop := checkTransition(t)
+					end
+				end
+				i := i + 1
+			end
+						
+			if(not stop) then
+				removeKeyEvent(idHID, key)
+			end
+		end
+	end
+
+
+
+	method onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer, source : Object) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			var size : Integer init currentState.transitions.size
+			
+			from var i : Integer init 0
+			until stop or i>=size
+			loop
+				t := currentState.transitions.at(i)
+
+				if(t.isInstanceOf(MoveTransition)) then
+					var mt : MoveTransition init t.asType(MoveTransition)
+					
+					mt.px      := px
+					mt.py      := py
+					mt.button  := button
+					mt.pressed := pressed
+					mt.source  := source
+					stop       := checkTransition(t)
+				end
+				i := i + 1
+			end
+		end
+	end
+	
+	
+
+
+	method onPressure(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			var size : Integer init currentState.transitions.size
+			
+			from var i : Integer init 0
+			until stop or i>=size
+			loop
+				t := currentState.transitions.at(i)
+
+				if(t.isInstanceOf(PressureTransition)) then
+					var pt : PressureTransition init t.asType(PressureTransition)
+					
+					pt.px     := px
+					pt.py     := py
+					pt.button := button
+					pt.source := source
+					
+					stop := checkTransition(t)
+	
+					if(stop) then
+						// Adding an event 'still in process'
+						addEvent(MousePressEvent.new.initialise(idHID, px, py, button, source))
+					end
+				end
+				i := i + 1
+			end
+		end
+	end
+
+
+
+	method onRelease(button : Integer, px : Real, py : Real, idHID : Integer, source : Object) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			var size : Integer init currentState.transitions.size
+			
+			from var i : Integer init 0
+			until stop or i>=size
+			loop
+				t := currentState.transitions.at(i)
+
+				if(t.isInstanceOf(ReleaseTransition)) then
+					var rt : ReleaseTransition init t.asType(ReleaseTransition)
+					
+					rt.px     := px
+					rt.py     := py
+					rt.button := button
+					rt.source := source
+					stop      := checkTransition(t)
+
+					if(t.isGuardRespected()) then
+						// Removing from the 'still in process' list
+						removePressEvent(idHID)
+						stop := checkTransition(t)
+					end
+				end
+				i := i + 1
+			end
+
+			if(not stop) then
+				removePressEvent(idHID)
+			end
+		end
+	end
+	
+	
+	/**
+	 * Adds the given event to the events 'still in process' list.
+	 * @param event The event to add.
+	 * @since 0.2
+	 */
+	operation addEvent(event : Event) : Void is do
+		stillProcessingEvents.add(event)
+	end
+	
+	
+	/**
+	 * Removes the given KeyPress event from the events 'still in process' list.
+	 * @param idHID The identifier of the HID which produced the event.
+	 * @param key The key code of the event to remove.
+	 * @since 0.2
+	 */
+	operation removeKeyEvent(idHID : Integer, key : Integer) : Void is do
+		var removed : Boolean init false
+		var event : Event
+		var i : Integer init 0
+
+		from var size : Integer init stillProcessingEvents.size()
+		until i>=size or removed
+		loop
+			event := stillProcessingEvents.at(i)
+			if(event.isInstanceOf(KeyPressEvent) and event.idHID==idHID) then
+
+				if(event.asType(KeyPressEvent).keyCode==key) then
+					removed := true
+//					stillProcessingEvents.removeAt(i)
+					stillProcessingEvents.remove(event)
+				end
+			end
+			i := i + 1
+		end
+	end
+	
+	
+	
+	/**
+	 * Removes the given Press event from the events 'still in process' list.
+	 * @param idHID The identifier of the HID which produced the event.
+	 * @since 0.2
+	 */
+	operation removePressEvent(idHID : Integer) : Void is do
+		var removed : Boolean init false
+		var event : Event
+		var i : Integer init 0
+		
+		from var size : Integer init stillProcessingEvents.size()
+		until i>=size or removed
+		loop
+			event := stillProcessingEvents.at(i)
+			
+			if(event.isInstanceOf(MousePressEvent) and event.idHID==idHID) then
+				removed := true
+				//stillProcessingEvents.removeAt(i)
+				stillProcessingEvents.remove(event)
+			end
+			
+			i := i + 1
+		end
+	end
+	
+	
+	/**
+	 * At the end of the interaction, the events still in process must be recycled
+	 * to be reused in the interaction. For instance will the KeysScrolling interaction,
+	 * if key 'ctrl' is pressed and the user scrolls the key event 'ctrl' is re-introduced
+	 * into the state machine of the interaction to be processed.
+	 * @since 0.2
+	 */
+	operation processEvents() : Void is do
+		var event : Event
+		var size : Integer init stillProcessingEvents.size()
+
+		from var i : Integer init 0
+		until i>=size
+		loop
+			event := stillProcessingEvents.at(0)
+			//stillProcessingEvents.removeAt(0)
+			stillProcessingEvents.remove(event)
+			
+			if(event.isInstanceOf(MousePressEvent)) then
+				var press : MousePressEvent init event.asType(MousePressEvent)
+				onPressure(press.button, press.x, press.y, press.idHID, press.source)
+			else if(event.isInstanceOf(KeyPressEvent)) then
+				var key : KeyPressEvent init event.asType(KeyPressEvent)
+				onKeyPressure(key.keyCode, key.idHID)
+			end end
+			
+			i := i + 1
+		end
+	end
+	
+	
+	
+	operation onTerminating() : Void is do
+		notifyHandlersOnStop()
+		reinit()
+		processEvents()
+	end
+
+
+	operation onAborting(): Void is do
+		notifyHandlersOnAborting()
+		reinit()
+		processEvents()
+	end
+
+
+	operation onStarting() : Void is do
+		notifyHandlersOnStart()
+	end
+
+
+	operation onUpdating() : Void is do
+		notifyHandlersOnUpdate()
+	end
+	
+	
+	method onSpinnerValueModified(spinner : Spinner) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(SpinnerTransition)) then
+					var st : SpinnerTransition init t.asType(SpinnerTransition)
+				
+					st.spinner := spinner
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+	
+	
+	method onCheckBoxPressed(checkbox : CheckBox) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(CheckBoxTransition)) then
+					var cbt : CheckBoxTransition init t.asType(CheckBoxTransition)
+				
+					cbt.checkbox := checkbox
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+	
+	
+	
+	method onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer, source : Object) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(WheelTransition)) then
+					var wt : WheelTransition init t.asType(WheelTransition)
+				
+					wt.px        := px
+					wt.py        := py
+					wt.isUp      := isUp
+					wt.increment := increment
+					wt.source	 := source
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+}
+
+/**
+ * This class defines an event corresponding to the pressure of a key.
+ */
+class KeyPressEvent inherits Event {
+	/** The code of the key pressed. */
+	attribute keyCode : Integer
+
+	/**
+	 * Creates the event.
+	 * @param idHID The identifier of the HID.
+	 * @param keyCode The key code.
+	 * @since 0.2
+	 */
+	operation initialise(idHID : Integer, keyCode : Integer) : KeyPressEvent is do
+		self.idHID := idHID
+		self.keyCode := keyCode
+		result := self
+	end
+}
+
+
+/**
+ * This class defines an event corresponding to the pressure of a button of a mouse.
+ */
+class MousePressEvent inherits Event {
+	/** The x coordinate of the pressure. */
+	attribute x : Real
+
+	/** The y coordinate of the pressure. */
+	attribute y : Real
+
+	/** The object targeted during the pressure. */
+	attribute source : Object
+
+	/** The button used to perform the pressure. */
+	attribute button : Integer
+
+	/**
+	 * Creates the event.
+	 * @param idHID The identifier of the HID.
+	 * @param x The x coordinate of the pressure.
+	 * @param y The y coordinate of the pressure.
+	 * @param button The button used to perform the pressure.
+	 * @param source The object targeted during the pressure.
+	 * @since 0.2
+	 */
+	operation initialise(idHID : Integer, x : Real, y : Real, button : Integer, source : Object) : MousePressEvent is do
+		self.idHID := idHID
+		self.x := x
+		self.y := y
+		self.button := button
+		self.source := source
+		result := self
+	end
+}
+
+
+abstract class Event {
+	attribute idHID : Integer
 }

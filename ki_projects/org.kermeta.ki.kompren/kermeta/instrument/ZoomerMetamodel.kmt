@@ -21,8 +21,8 @@ class ZoomerMetamodel inherits Zoomer {
 	reference metamodel : ModelingUnit
 
 	method initialiseLinks() : Void is do
-		addLink(KeyPress2Zoom.new, false)
-		addLink(Scroll2ZoomMetamodel.new, true)
+//		addLink(KeyPress2Zoom.new, false)
+		addLink(Scroll2ZoomMetamodel.new, false)
 	end
 
 	operation getZoom() : Real is do
@@ -39,7 +39,7 @@ class ZoomerMetamodel inherits Zoomer {
 	end
 }
 
-
+/*
 class KeyPress2Zoom inherits Link {
 	method getActionClass() : Class is do
 		result := ZoomMetamodel
@@ -79,7 +79,7 @@ class KeyPress2Zoom inherits Link {
 		end
 	end
 }
-
+*/
 
 
 class Scroll2ZoomMetamodel inherits Scroll2Zoom {
@@ -97,10 +97,7 @@ class Scroll2ZoomMetamodel inherits Scroll2Zoom {
 	
 	method initAction() : Void is do
 		super
-		var zoomIn : ZoomMetamodel init action.asType(ZoomMetamodel)
-		var zoomer : ZoomerMetamodel init instrument.asType(ZoomerMetamodel)
-		
-		zoomIn.metamodel := zoomer.metamodel
+		action.asType(ZoomMetamodel).metamodel := instrument.asType(ZoomerMetamodel).metamodel
 	end
 }
 

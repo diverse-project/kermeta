@@ -18,9 +18,10 @@ using kermeta::standard
 
 
 
-class Scrolling inherits Interaction
-{
+class Scrolling inherits Interaction {
 	attribute increment : Integer
+	
+ 	attribute numberUp : Integer
 	
 	attribute px : Real
 	
@@ -31,11 +32,11 @@ class Scrolling inherits Interaction
 	
 	method reinit() : Void is do
 		super
-		
 		px 		  := void
 		py		  := void
 		target	  := void
 		increment := 0
+		numberUp  := 0
 	end
 	
 	
@@ -55,13 +56,18 @@ class Scrolling inherits Interaction
 
 
 
-class ScrollingWheelTransition inherits WheelTransition
-{
+class ScrollingWheelTransition inherits WheelTransition {
 	reference scrolling : Scrolling
 	
-	
 	method action() : Void is do
-		scrolling.increment := scrolling.increment + (if(isUp) then -increment else increment end)
+		if(isUp) then
+			scrolling.increment := scrolling.increment - increment
+			scrolling.numberUp  := scrolling.numberUp - 1
+		else
+			scrolling.increment := scrolling.increment + increment
+			scrolling.numberUp  := scrolling.numberUp + 1
+		end
+
 		scrolling.px        := px
 		scrolling.py        := py
 		scrolling.target    := scrolling.getPickableAt(scrolling.px, scrolling.py, source)

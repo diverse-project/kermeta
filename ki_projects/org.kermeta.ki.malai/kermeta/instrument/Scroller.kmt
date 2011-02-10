@@ -19,11 +19,8 @@ using kermeta::ki::malai::interaction
 using kermeta::language::structure
 
 
-
-class Scroller inherits Instrument
-{
+class Scroller inherits Instrument {
 	reference panel : Panel
-	
 	
 	method initialiseLinks() : Void is do
 		addLink(Scrolling2Scroll.new, false)
@@ -32,9 +29,7 @@ class Scroller inherits Instrument
 
 
 
-
-class Scrolling2Scroll inherits Link
-{
+class Scrolling2Scroll inherits Link {
 	method createInteraction() : Interaction is do
 		result := KeysScroll.new
 	end
@@ -46,18 +41,15 @@ class Scrolling2Scroll inherits Link
 	
 	
 	method isConditionRespected() : Boolean is do
-		var scroll : KeysScroll init interaction.asType(KeysScroll)
-		result := scroll.keys.empty and scroll.scrolled
+		result := interaction.asType(KeysScroll).keys.empty()
 	end
 	
 	
 	method createAction() : Void is do
 		var scroll    : Scroll     init Scroll.new
-		var scrolling : KeysScroll init interaction.asType(KeysScroll)
-		var scroller  : Scroller   init instrument.asType(Scroller)
 		
-		scroll.panel     := scroller.panel 
-		scroll.increment := scrolling.numberUp*20
+		scroll.panel     := instrument.asType(Scroller).panel 
+		scroll.increment := -interaction.asType(KeysScroll).increment*20
 		action 		     := scroll
 		action.initialise(instrument.actionRegistry)
 	end

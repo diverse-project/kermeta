@@ -26,7 +26,7 @@ class Zoomer inherits Instrument
 	reference zoomable : Picker
 	
 	method initialiseLinks() : Void is do
-		addLink(Scroll2Zoom.new, true)
+		addLink(Scroll2Zoom.new, false)
 	end
 }
 
@@ -47,13 +47,16 @@ class Scroll2Zoom inherits Link
 	
 	method isConditionRespected() : Boolean is do
 		var scroll : KeysScroll init interaction.asType(KeysScroll)
-		result := not scroll.keys.isEmpty and scroll.scrolled
+		if(scroll.keys.size()==1) then
+			result := scroll.keys.at(0)==17 // ctrl
+		else
+			result := false
+		end
 	end
 	
 	
 	method createAction() : Void is do
 		action := Zoom.new
-		
 		initAction
 	end
 
@@ -70,7 +73,7 @@ class Scroll2Zoom inherits Link
 	method updateAction() : Void is do
 		var scroll : KeysScroll init interaction.asType(KeysScroll)
 		var zoom   : Zoom 		init action.asType(Zoom)
-		
-		zoom.increment := scroll.numberUp
+		var currentZoom : Real  init extern org::kermeta::ki::malai::ZoomUtils.getZoom(instrument.asType(Zoomer).zoomable).asType(Real)
+		zoom.zoomLevel := currentZoom + -1.toReal*scroll.numberUp.toReal*("0.25".toReal)
 	end
 }
