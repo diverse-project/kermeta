@@ -152,7 +152,7 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Export-Package>
-							org.kermeta.language.loader.km.art2.impl
+							org.kermeta.language.loader.km.art.impl
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
