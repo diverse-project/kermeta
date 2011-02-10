@@ -146,6 +146,59 @@
                     </launchers>
                 </configuration>
             </plugin>
+            <!-- Generate Manifest -->
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>		        
+          		
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.loader.ecore.art.impl
+                        </Export-Package>
+                        <Require-Bundle>
+            fr.irisa.triskell.kermeta.model,
+            org.kermeta.language.model,
+            org.kermeta.language.framework.scala
+                        </Require-Bundle>
+                        <Import-Package>
+            kermeta.persistence,
+			org.eclipse.emf.common.notify,
+			org.eclipse.emf.common.util,
+			org.eclipse.emf.ecore,
+			org.eclipse.emf.ecore.impl,
+			org.eclipse.emf.ecore.resource,
+			org.eclipse.emf.ecore.util,
+			org.eclipse.emf.ecore.xmi,
+			org.eclipse.emf.ecore.xmi.impl,
+			org.kermeta.art2.framework,
+			org.kermeta.art2.framework.osgi,
+			org.kermeta.art2.framework.port,
+			org.kermeta.language.api.art2.port.utils,
+			org.kermeta.language.api.messaging,
+			org.kermeta.language.api.port,
+			org.kermeta.language.api.result,
+			org.kermeta.language.structure,
+			org.kermeta.traceability,
+			org.osgi.framework;version="[1.5,2)",
+			org.slf4j;version="[1.5,2)",
+			scala,
+			scala.actors,
+			scala.collection,
+			scala.collection.immutable,
+			scala.collection.mutable,
+			scala.reflect,
+			scala.runtime
+                        </Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
