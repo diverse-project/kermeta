@@ -66,9 +66,9 @@ public class Formular extends JPanel {
      	constraint.anchor = GridBagConstraints.WEST;
      	
      	JPanel questionsP = new JPanel();
-     	questionsP.setBorder(new TitledBorder("Informations Requises"));
+     	questionsP.setBorder(new TitledBorder("Required Information"));
      	questionsP.setLayout(new GridBagLayout());
-     	questionsP.add(new JLabel("Age :"), constraint);
+     	questionsP.add(new JLabel("Age:"), constraint);
      	constraint.gridx++;
      	
 		ageS = new JSpinner(new SpinnerNumberModel(20, 1, 200, 1));
@@ -76,34 +76,34 @@ public class Formular extends JPanel {
 		constraint.gridx=0;
 		constraint.gridy++;
 		
-		questionsP.add(new JLabel("Sexe :"), constraint);
+		questionsP.add(new JLabel("Gender:"), constraint);
 		constraint.gridx++;
 		
-		sexCB = new JComboBox(new String[]{"Homme", "Femme"});
+		sexCB = new JComboBox(new String[]{"Male", "Female"});
 		questionsP.add(sexCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
 		
-		questionsP.add(new JLabel("Status :"), constraint);
+		questionsP.add(new JLabel("Status:"), constraint);
 		constraint.gridx++;
 		
-		statusCB = new JComboBox(new String[]{"Etudiant", "Ingénieur", "Chercheur", "Doctorant"});
+		statusCB = new JComboBox(new String[]{"Student", "Ph.D. student", "Engineer", "Researcher"});
 		questionsP.add(statusCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
 		
-		questionsP.add(new JLabel("Expérience IDM :"), constraint);
+		questionsP.add(new JLabel("MDE background:"), constraint);
 		constraint.gridx++;
 		
-		xpMdeCB = new JComboBox(new String[]{"Aucune", "0 à 2 ans", "2 à 5 ans", "5 à 10 ans", "+10 ans"});
+		xpMdeCB = new JComboBox(new String[]{"None", "0-2 years", "2-5 years", "5-10 years", "+10 years"});
 		questionsP.add(xpMdeCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
 		
-		questionsP.add(new JLabel("Connaissance UML :"), constraint);
+		questionsP.add(new JLabel("UML background:"), constraint);
 		constraint.gridx++;
 		
-		xpUmlCB = new JComboBox(new String[]{"Aucune", "Un peu", "Expert"});
+		xpUmlCB = new JComboBox(new String[]{"No knowledge", "Few knowledge", "Some knowledge", "Expert"});
 		questionsP.add(xpUmlCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
@@ -111,7 +111,7 @@ public class Formular extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		JPanel buttonP = new JPanel();
-		validateB = new JButton("Valider");
+		validateB = new JButton("Validate");
 		buttonP.add(validateB);
 		validateB.addActionListener(new ValideListener());
 		
