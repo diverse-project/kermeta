@@ -71,6 +71,26 @@
         </dependency>
        <dependency>
             <groupId>org.kermeta.language</groupId>
+            <artifactId>language.compiler</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.km</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.ecore2km</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.ecore</artifactId>
+            <version>${language.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>org.kermeta.language</groupId>
             <artifactId>language.api</artifactId>
             <version>${language.version}</version>
         </dependency>
