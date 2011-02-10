@@ -87,6 +87,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	public void setUsable(final boolean usable) {
 		this.usable = usable;
+		updatePreferredSize();
+		revalidate();
 		hand.setUsable(usable);
 		repaint();
 	}
@@ -323,22 +325,26 @@ public class DiagramView extends JPanel implements IDiagramView {
 	
 	@Override
 	public void updatePreferredSize() {
-		double maxX = Double.MIN_VALUE;
-		double maxY = Double.MIN_VALUE;
-		Rectangle2D dim;
-		
-		for(IEntityView entity : entities)
-			if(entity.isVisible()) {
-				dim = entity.getBorders();
-				
-				if(dim.getMaxX()>maxX)
-					maxX = dim.getMaxX();
-				if(dim.getMaxY()>maxY)
-					maxY = dim.getMaxY();
-			}
-		
-		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
-		selectionBorder.update();
+		if(usable) {
+			double maxX = Double.MIN_VALUE;
+			double maxY = Double.MIN_VALUE;
+			Rectangle2D dim;
+			
+			for(IEntityView entity : entities)
+				if(entity.isVisible()) {
+					dim = entity.getBorders();
+					
+					if(dim.getMaxX()>maxX)
+						maxX = dim.getMaxX();
+					if(dim.getMaxY()>maxY)
+						maxY = dim.getMaxY();
+				}
+			
+			setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+			selectionBorder.update();
+		}
+		else
+			setPreferredSize(new Dimension(0, 0));
 	}
 	
 	
