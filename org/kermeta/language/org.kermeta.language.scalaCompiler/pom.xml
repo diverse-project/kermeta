@@ -1,0 +1,39 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.scalacompiler</artifactId>
+    <packaging>bundle</packaging>
+    <name>Kermeta :: Core :: ScalaCompiler</name>
+
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+        <artifactId>language.artcomponent.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.api</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>kermeta</id>
+            <url>http://www.kermeta.org/maven2</url>
+        </repository>
+        <repository>
+            <id>kermetaSnap</id>
+            <url>http://www.kermeta.org/maven2-snapshots</url>
+        </repository>
+    </repositories>
+
+</project>
