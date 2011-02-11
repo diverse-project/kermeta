@@ -18,7 +18,7 @@ import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 public class SimpleLogger {
 	protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
 	
-	protected AbstractComponentType artComponent;
+	protected AbstractComponentType artComponent = null;
 	protected String bundleSymbolicName = "";
 	protected String logPortName = "log";
 	
@@ -31,6 +31,7 @@ public class SimpleLogger {
 	}
 	
 	public MessagePort getLogPort() {
+		if( artComponent == null) return null;
 		return artComponent.getPortByName(logPortName, MessagePort.class);
 	}
     /**
