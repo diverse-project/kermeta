@@ -2,6 +2,7 @@ package org.kermeta.language.compiler
 
 import scala.collection.JavaConversions._
 import org.kermeta.language.structure._
+import org.kermeta.language.api.art2.port.utils.SimpleLogger
 import org.kermeta.language.behavior._
 import org.kermeta.language.compiler.visitor._
 import org.kermeta.language.compiler.visitor.impl._
@@ -10,7 +11,9 @@ import java.util.concurrent.Executors
 import java.io.File
 import org.kermeta.language.compiler.aspects.ImplicitAspects._
 
-class Compiler {
+class Compiler(_logger : SimpleLogger) {
+
+    var logger : SimpleLogger = _logger        
 
     def compile(model : ModelingUnit){
         //log.debug("Cleaning Output Step")
@@ -39,6 +42,7 @@ class Compiler {
         fo.createNewFile
         //ReflexivityLoader.copyFile(fi, fo);
         var midTime= System.currentTimeMillis() - startTime
+        logger.debug("Loading KM model step complete in "+(midTime)+" ms ")
         //log.info("Loading KM model step complete in "+(midTime)+" millisecondes ")
         startTime = System.currentTimeMillis
         /* Target Model Aspect Generation */
@@ -56,6 +60,7 @@ class Compiler {
         Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
+        logger.debug("Compilation step complete in "+(endTime)+" ms ")
         //log.info("Compilation step complete in "+(endTime)+" millisecondes ")
         //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
 

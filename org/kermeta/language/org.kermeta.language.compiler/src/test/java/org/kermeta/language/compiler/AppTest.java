@@ -5,6 +5,7 @@ import java.util.Properties;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.kermeta.language.api.art2.port.utils.SimpleLogger;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
@@ -53,7 +54,7 @@ public class AppTest
         GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
         GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
 
-        Compiler c = new Compiler();
+        Compiler c = new Compiler(new SimpleLogger());
         c.compile(model);
 
     }
