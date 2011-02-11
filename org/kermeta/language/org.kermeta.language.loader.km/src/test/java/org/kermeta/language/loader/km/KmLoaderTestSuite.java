@@ -19,22 +19,22 @@ import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcoreFactoryWrapper;
+//import org.eclipse.emf.ecore.EcoreFactoryWrapper;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.kermeta.language.api.port.PortKmLoader;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortKmLoaderTestSuite;
 import org.kermeta.language.loader.km.art.impl.Art2ComponentKmLoader;
-import runner.MainRunner;
+//import runner.MainRunner;
 
 public class KmLoaderTestSuite extends TestSuite {
     public static Test suite() {
-    	((EcoreFactoryWrapper)EcoreFactory.eINSTANCE).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$);
+  //  	((EcoreFactoryWrapper)EcoreFactory.eINSTANCE).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$);
     	
     	XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
     	EcoreFactory ef = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE;
     	EPackage p = org.eclipse.emf.ecore.EcorePackage.eINSTANCE;
-        MainRunner.init();
+       // MainRunner.init();
 
         PortKmLoaderTestSuite.portKmLoaderfactory = new PortAbstractFactory<PortKmLoader>(){
             @Override

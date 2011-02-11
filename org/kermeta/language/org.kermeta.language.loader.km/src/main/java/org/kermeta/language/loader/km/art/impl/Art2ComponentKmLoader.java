@@ -1,7 +1,16 @@
 package org.kermeta.language.loader.km.art.impl;
 
-import java.util.List;
 
+
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.art2.annotation.ComponentType;
 import org.kermeta.art2.annotation.Library;
 import org.kermeta.art2.annotation.Port;
@@ -20,8 +29,8 @@ import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortKmLoader;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
-import runner.MainRunner;
-import org.kermeta.language.loader.KmLoader;
+//import runner.MainRunner;
+//import org.kermeta.language.loader.KmLoader;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -65,13 +74,18 @@ public class Art2ComponentKmLoader extends AbstractComponentType implements Port
     
     @Port(name = "KmLoader", method = "load")
     public ModelingUnit load(final String uriKmModel) {
-        // call the init in order to make sure that the registry is correctly set
-        // TODO look how to not put duplicates in the eclipse registry when run in eclipse work
-        //((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap((org.eclipse.emf.ecore.EcoreFactory)ScalaAspect.org.eclipse.emf.ecore.RichFactory.createEFactory());
-        MainRunner.init();
+    	ResourceSet resourceSet 		  = new ResourceSetImpl();
+		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+		Map<String,Object> m 		= f.getExtensionToFactoryMap();
+		m.put("km",new XMIResourceFactoryImpl());
+		
+		URI uri = URI.createURI(uriKmModel);
+		Resource resource		= resourceSet.getResource(uri, true);
 
-        KmLoader loader = org.kermeta.language.loader.RichFactory.createKmLoader();
-        return loader.load(uriKmModel);
+		for(EObject o : resource.getContents())
+			if(o instanceof ModelingUnit)
+				return (ModelingUnit)o;
+		return null;
     }
     
     
