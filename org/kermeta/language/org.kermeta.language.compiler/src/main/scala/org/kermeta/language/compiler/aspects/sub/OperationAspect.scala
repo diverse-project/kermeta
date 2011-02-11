@@ -174,7 +174,7 @@ trait OperationAspect extends ObjectAspect {
         //TO Improve
         /*case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]
          && (
-         "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
+         "org.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
          "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) )
          ) => "Boolean"*/
       case booleanRegex() => "java.lang.Boolean"

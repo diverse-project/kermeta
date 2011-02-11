@@ -154,7 +154,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 
   def generategetQualifiedName(res:StringBuilder) = {
     var qualifiedName = ReflexivityLoader.qualifiedName(ClassDefinitionAspect_self)
-    var template = new StringTemplate("override def getMetaClass():fr.irisa.triskell.kermeta.language.structure.Class={\n var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure.RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+    var template = new StringTemplate("override def getMetaClass():org.kermeta.language.structure.Class={\n var cd : org.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = ScalaAspect.org.kermeta.language.structure.RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
     template.setAttribute("ClassName", qualifiedName)
     res.append(template.toString)
   }
@@ -235,7 +235,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
     return baseName
 
     /*
-     if(baseName.contains("fr.irisa.triskell.kermeta.language.structure.Object")){
+     if(baseName.contains("org.kermeta.language.structure.Object")){
      log.error("=====INFO "+Util.hasEcoreTag(this)+" "+Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]))
      }
 

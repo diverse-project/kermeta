@@ -109,10 +109,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
     implicitDef = new StringBuilder
     implicitDef append "package "+GlobalConfiguration.frameworkGeneratedPackageName+"\n"
     implicitDef append "object "+GlobalConfiguration.implicitConvTraitName+" {\n"
-    implicitDef.append(" implicit def richAspect(v : _root_.java.lang.Object) :fr.irisa.triskell.kermeta.language.structure.Object = v.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]\n")
-//    implicitDef.append(" implicit def richAspect1(v : _root_.java.lang.Object) : ScalaAspect.fr.irisa.triskell.kermeta.language.structure.ObjectAspect = v.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]\n")
+    implicitDef.append(" implicit def richAspect(v : _root_.java.lang.Object) :org.kermeta.language.structure.Object = v.asInstanceOf[org.kermeta.language.structure.Object]\n")
+//    implicitDef.append(" implicit def richAspect1(v : _root_.java.lang.Object) : ScalaAspect.org.kermeta.language.structure.ObjectAspect = v.asInstanceOf[org.kermeta.language.structure.Object]\n")
 
-    implicitDef.append("      implicit def richAspect1(o : _root_.java.lang.Object) : fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect = {\n")
+    implicitDef.append("      implicit def richAspect1(o : _root_.java.lang.Object) : kermeta.standard.ObjectAspect = {\n")
      
     implicitDef.append("     if (o != null && o.isInstanceOf[java.lang.String]){\n")
     implicitDef.append("       return new kermeta.standard.RichString(o.asInstanceOf[java.lang.String])\n")
@@ -127,13 +127,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
     implicitDef.append("       return new kermeta.standard.JavaConversions.RichKermetaList(o.asInstanceOf[java.util.List[_]])\n")
     implicitDef.append("     }\n")
         
-    implicitDef.append("     if ( o.isInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object])\n")
-    implicitDef.append("       return o.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]\n")
+    implicitDef.append("     if ( o.isInstanceOf[org.kermeta.language.structure.Object])\n")
+    implicitDef.append("       return o.asInstanceOf[org.kermeta.language.structure.Object]\n")
     implicitDef.append("     else if (o!=null)\n")
     implicitDef.append("     {\n")
     implicitDef.append("      return new kermeta.standard.RichEnum(o)\n}\n")
     implicitDef.append("     else\n")
-    implicitDef.append("       null.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]\n")
+    implicitDef.append("       null.asInstanceOf[org.kermeta.language.structure.Object]\n")
     implicitDef.append("   }\n")
         
     factoryDefClass = new StringBuilder
@@ -309,16 +309,16 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
 
 
 
-        if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("fr.irisa.triskell.kermeta")){//!IsObjectClassChildren(par)){
-          viewDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
+        if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("org.kermeta")){//!IsObjectClassChildren(par)){
+          viewDef.append("with " + "kermeta.standard.DefaultObjectImplementation")
         }
         viewDef.append("\n")
 
 
         if("EObject".equals(par.getName)){
-          implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf[fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect]\n"
+          implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf[kermeta.standard.ObjectAspect]\n"
         } else {
-          implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ (Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect").replace("ScalaAspect.fr.irisa.triskell.kermeta.language.structure.ObjectAspect", "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect")+"]\n"
+          implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ (Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect").replace("ScalaAspect.org.kermeta.language.structure.ObjectAspect", "kermeta.standard.ObjectAspect")+"]\n"
         }
 
         implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(packageName.toString+"."+par.getName())+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[Object].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
@@ -338,7 +338,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
           var superClassName = cd.eContainer().asInstanceOf[Object].getQualifiedNameCompilo + "."+ cd.getName
           if (!(classOf[Object].getCanonicalName.equals(superClassName)
                 || classOf[org.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName)) ){
-            viewDef.append(" with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
+            viewDef.append(" with " + "org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
           }else{
             //println(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName)
           }
@@ -431,15 +431,15 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
   }
 
   def genetateUtilObject() = {
-    var template = new StringTemplate("package scalaUtil\n object Util {\n    def getMetaClass(t:String):fr.irisa.triskell.kermeta.language.structure.Class={\n "+
-                                      "var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(t);\n"+
+    var template = new StringTemplate("package scalaUtil\n object Util {\n    def getMetaClass(t:String):org.kermeta.language.structure.Class={\n "+
+                                      "var cd : org.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(t);\n"+
                                       "if (cd !=null){\n"+
-                                      "            var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure. RichFactory.createClass\n"+
+                                      "            var cl = ScalaAspect.org.kermeta.language.structure. RichFactory.createClass\n"+
                                       "            cl.setTypeDefinition(cd)\n"+
                                       "          return cl\n"+
                                       "        }else\n"+
                                       "            return null;\n}\n"+
-                                      "    def clone(t:fr.irisa.triskell.kermeta.language.structure.Class, o:Any):Any={return null;\n}\n"
+                                      "    def clone(t:org.kermeta.language.structure.Class, o:Any):Any={return null;\n}\n"
                                       + "}\n")
 
     Util.generateFile("scalaUtil","Util", template.toString)

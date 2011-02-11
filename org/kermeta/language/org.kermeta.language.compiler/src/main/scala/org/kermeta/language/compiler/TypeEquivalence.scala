@@ -9,13 +9,13 @@ object TypeEquivalence {
     pack1.put("ecore","org.eclipse.emf.ecore");
     pack1.put("trace","fr.inria.aoste.trace");
     pack1.put("uml","org.eclipse.uml2.uml");
-    //pack1.put("fr.irisa.triskell.kermeta.language.structure","fr.irisa.triskell.kermeta.language.structure")
-    pack1.put("kermeta","fr.irisa.triskell.kermeta")
-    pack1.put("kermeta.language","fr.irisa.triskell.kermeta.language")
+    //pack1.put("org.kermeta.language.structure","org.kermeta.language.structure")
+    pack1.put("kermeta","org.kermeta")
+    pack1.put("kermeta.language","org.kermeta.language")
 				
-    pack1.put("kermeta.language.structure","fr.irisa.triskell.kermeta.language.structure")
-    //pack1.put("language.structure","fr.irisa.triskell.kermeta.language.structure")
-    pack1.put("kermeta.language.behavior", "fr.irisa.triskell.kermeta.language.behavior")
+    pack1.put("kermeta.language.structure","org.kermeta.language.structure")
+    //pack1.put("language.structure","org.kermeta.language.structure")
+    pack1.put("kermeta.language.behavior", "org.kermeta.language.behavior")
     //pack1.put("kermeta.kunit","junit.framework")
     pack1;
   }
@@ -41,7 +41,7 @@ object TypeEquivalence {
                                                              typeEquivelence.put("kermeta.standard.Sequence", "java.util.List");
                                                              typeEquivelence.put("kermeta.standard.Bag", "java.util.List");
                                                              typeEquivelence.put("kermeta.standard.String", "java.lang.String");
-                                                             //typeEquivelence.put(" fr.irisa.triskell.kermeta.language.structure.String", "java.lang.String");
+                                                             //typeEquivelence.put(" org.kermeta.language.structure.String", "java.lang.String");
                                                              typeEquivelence.put("kermeta.standard.Integer", "java.lang.Integer");
                                                              typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
                                                              typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
@@ -53,9 +53,9 @@ object TypeEquivalence {
                                                              typeEquivelence.put("boolean", "java.lang.Boolean");
                                                              typeEquivelence.put("kermeta.standard.Boolean", "java.lang.Boolean");
                                                              typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
-                                                             typeEquivelence.put("ScalaAspect.fr.irisa.triskell.kermeta.language.ReflectiveSequence", "java.util.List")
-                                                             typeEquivelence.put("fr.irisa.triskell.kermeta.language.ReflectiveSequence", "java.util.List")
-//                                                             typeEquivelence.put("fr.irisa.triskell.kermeta.language.structure.Object","java.lang.Object")
+                                                             typeEquivelence.put("ScalaAspect.org.kermeta.language.ReflectiveSequence", "java.util.List")
+                                                             typeEquivelence.put("org.kermeta.language.ReflectiveSequence", "java.util.List")
+//                                                             typeEquivelence.put("org.kermeta.language.structure.Object","java.lang.Object")
                                                                typeEquivelence;
   };
 		
@@ -92,7 +92,7 @@ object TypeEquivalence {
 		methodEquivalence.put("java.util.List", Collection);*/
 		var ClassDefinition : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		ClassDefinition.put("allAttribute", "eAllAttributes")
-		methodEquivalence.put("_root_.fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
+		methodEquivalence.put("_root_.org.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
 		
 		
    		//methodEquivalence

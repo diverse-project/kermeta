@@ -10,8 +10,8 @@ import java.io._
 object CopyEcoreFile {
 
       def main(args : Array[String]) : Unit = {
-          CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactory.java", "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output/src")
-        CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactoryWrapper.java", "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output/src")
+          CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactory.java", "/home/barais/NetBeansProjects/org.kermeta.scala.compilo.output/src")
+        CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactoryWrapper.java", "/home/barais/NetBeansProjects/org.kermeta.scala.compilo.output/src")
         
       }
     

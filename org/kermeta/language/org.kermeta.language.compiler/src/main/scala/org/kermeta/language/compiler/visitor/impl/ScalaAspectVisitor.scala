@@ -69,7 +69,6 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor  {
       res.append("import _root_.kermeta.standard._\n")
       res.append("import _root_.kermeta.standard.JavaConversions._\n")
       res.append("import _root_.kermeta.standard.PrimitiveConversion._\n")
-      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
       par.generateScalaCode(res)
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
       if (!Util.hasEcoreTag(par)){

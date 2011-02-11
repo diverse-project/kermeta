@@ -185,7 +185,7 @@ object Util {
     def doesGeneratePackage(packQualifiedName : String) : Boolean = {
         var hasToGenerate : Boolean = true
         if(GlobalConfiguration.props.getProperty("use.default.aspect.km")==true){
-            hasToGenerate && !packQualifiedName.startsWith("fr.irisa.triskell.kermeta.language")
+            hasToGenerate && !packQualifiedName.startsWith("org.kermeta.language")
         }
         if(GlobalConfiguration.props.getProperty("use.default.aspect.uml")==true){
             hasToGenerate && !packQualifiedName.startsWith("")
