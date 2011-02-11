@@ -54,7 +54,7 @@ public class GenerateScalaAction implements IObjectActionDelegate{
 					URI uri = URI.createFileURI(file.getLocation().toString());
 					file.getParent().getLocation().toString();
 					Job j = new CompilerJob("Generate scala code", 
-							file.getLocation().toString(),
+							uri.toString(),
 							file.getParent().getLocation().toString());
 					j.schedule();
 
