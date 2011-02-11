@@ -22,6 +22,13 @@ public class SimpleLogger {
 	protected String bundleSymbolicName = "";
 	protected String logPortName = "log";
 	
+	/**
+	 * Specific constructor to be used by standalone programs that are able to run without ART
+	 */
+	public SimpleLogger() {
+		super();
+		this.artComponent = null;
+	}
 	public SimpleLogger(AbstractComponentType artComponent,
 			String bundleSymbolicName, String logPortName) {
 		super();
