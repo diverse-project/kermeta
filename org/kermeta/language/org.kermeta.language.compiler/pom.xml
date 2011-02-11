@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.compiler</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>language.compiler : Kermeta2 scala compiler</name>
 
     <parent>
@@ -27,8 +27,21 @@
         </dependency>
     </dependencies>
     <build>
+    	<!-- Add resources -->
+		<resources>
+			
+			<resource>
+				<directory>resources/lib</directory>
+				<targetPath>lib</targetPath>
+			</resource>
+			<resource>
+				<directory>target/generated-sources/art2/ART2-INF</directory>
+				<targetPath>ART2-INF</targetPath>
+			</resource>
+		</resources>
         <plugins>
-            <plugin>
+        
+             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -37,9 +50,10 @@
                             <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                             <Bundle-Name>${project.name}</Bundle-Name>
                             <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                            <Bundle-ClassPath>.</Bundle-ClassPath>
+                            <Bundle-ClassPath>.,
+                                lib/org.antlr.stringtemplate-3.2.1.jar</Bundle-ClassPath>
                             <Export-Package>
-                                org.kermeta.language.compiler.art2.impl
+                                org.kermeta.language.compiler.art2.impl 
                             </Export-Package>
                             <Require-Bundle>
                                 org.kermeta.language.model
@@ -70,12 +84,14 @@
                                 scala.collection.immutable,
                                 scala.collection.mutable,
                                 scala.reflect,
-                                scala.runtime
+                                scala.runtime,
+                                scala.util.matching
                             </Import-Package>
                         </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
