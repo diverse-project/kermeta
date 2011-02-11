@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.compiler</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>language.compiler : Kermeta2 scala compiler</name>
 
     <parent>
@@ -28,7 +28,7 @@
     </dependencies>
     <build>
     	<!-- Add resources -->
-		<resources>
+	 	<resources>
 			
 			<resource>
 				<directory>resources/lib</directory>
@@ -38,10 +38,10 @@
 				<directory>target/generated-sources/art2/ART2-INF</directory>
 				<targetPath>ART2-INF</targetPath>
 			</resource>
-		</resources>
+		</resources> 
         <plugins>
         
-             <plugin>
+               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
