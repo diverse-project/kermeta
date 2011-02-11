@@ -1,5 +1,11 @@
 Manifest-Version: 1.0
-Export-Package: kermeta.io;uses:="scala,scala.reflect"
+Export-Package: kermeta.io;uses:="scala.collection.mutable,scala.runti
+ me,scala,scala.reflect",kermeta.standard;uses:="scala.reflect,scala,o
+ rg.eclipse.emf.ecore",kermeta.utils;uses:="org.kermeta.language.struc
+ ture,scala.runtime,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resour
+ ce,org.eclipse.emf.ecore.xmi.impl,scala.collection,org.eclipse.emf.co
+ mmon.util,scala.collection.mutable,org.eclipse.emf.ecore.resource.imp
+ l,scala,scala.reflect"
 Ignore-Package: kermeta.io
 Bundle-ClassPath: .
 Built-By: ffouquet
@@ -8,8 +14,12 @@ Bundle-Name: Kermeta :: Library :: Core
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_22
 Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1294063715341
+Bnd-LastModified: 1295375111177
 Bundle-ManifestVersion: 2
-Import-Package: scala,scala.reflect
+Import-Package: kermeta.standard,kermeta.utils,org.eclipse.emf.common.
+ util,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resource,org.eclipse
+ .emf.ecore.resource.impl,org.eclipse.emf.ecore.xmi.impl,org.kermeta.l
+ anguage.structure,scala,scala.collection,scala.collection.mutable,sca
+ la.reflect,scala.runtime
 Bundle-SymbolicName: org.kermeta.language.library.core
 

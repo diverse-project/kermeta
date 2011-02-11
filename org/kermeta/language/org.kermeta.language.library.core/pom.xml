@@ -21,7 +21,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>kermeta.io</Export-Package>
+                        <Export-Package>kermeta.io,kermeta.standard,kermeta.utils</Export-Package>
                         <Bundle-SymbolicName>org.kermeta.language.library.core</Bundle-SymbolicName>
                         <Import-Package>!kermeta.io,*</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
@@ -30,5 +30,21 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.api</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+    </dependencies>
+
+
+<repositories>
+    <repository>
+        <id>kermeta</id>
+        <url>http://www.kermeta.org/maven2-snapshots</url>
+    </repository>
+</repositories>
 
 </project>
