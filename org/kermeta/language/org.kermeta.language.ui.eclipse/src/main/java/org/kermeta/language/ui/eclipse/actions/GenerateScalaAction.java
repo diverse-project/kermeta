@@ -55,7 +55,7 @@ public class GenerateScalaAction implements IObjectActionDelegate{
 					file.getParent().getLocation().toString();
 					Job j = new CompilerJob("Generate scala code", 
 							uri.toString(),
-							file.getParent().getLocation().toString());
+							file.getParent().getLocation().toString()+"/scala");
 					j.schedule();
 
 					//sendGenerateExecutableKmEvent(uri.toString());
