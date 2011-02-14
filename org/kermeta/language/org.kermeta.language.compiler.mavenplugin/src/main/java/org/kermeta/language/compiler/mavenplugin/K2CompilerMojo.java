@@ -71,6 +71,15 @@ public class K2CompilerMojo extends AbstractMojo {
      */
     private File output;
 
+
+    /**
+     * Prefix Kermeta Compiler
+     *
+     * @parameter expression="${project.groupId}-${projectArtefactID}"
+     * @readonly
+     */
+    private String prefix;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         org.apache.log4j.BasicConfigurator.configure();
@@ -85,6 +94,7 @@ public class K2CompilerMojo extends AbstractMojo {
             GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
             GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
             GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
+
             checkFile(model.getAbsolutePath().toString());
             compilo.compile(model.getAbsolutePath().toString());
             try {
