@@ -27,30 +27,6 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
-
-		Main m = new Main();
-		// Parse framework and test File
-		List<String> uris = new ArrayList<String>();
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.loader.kmt.scala/test.kmt");
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.library.core/src/main/kmt/kermeta/emfpersistence/emfpersitence.kmt");
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt");
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.library.core/src/main/kmt/kermeta/standard/baseType.kmt");
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.library.core/src/main/kmt/kermeta/standard/collections.kmt");
-		uris
-				.add("/home/barais/workspaces/movida2/org.kermeta.language.library.core/src/main/kmt/kermeta/utils/hashtable.kmt");
-
-		uris
-		.add("/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/model/My.ecore");
-		m.k2Compile(uris, null, null);
-		
-		
-	}
 
 	
 	private URI uri;
@@ -133,14 +109,16 @@ public class Main {
 		// End of Convert Resulting Modellingunit For TypeSetter
 		
 		//Resolving
-		org.kermeta.language.resolver.Resolver resolver = org.kermeta.language.resolver.RichFactory
-		.createResolver();
-		resolver.resolveFromModelingUnit(mergedMU);
+		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
+		.createFullStaticResolver();
+		resolver.resolve(mergedMU);
 		//End of Resolving
 		
 
 		// Convert Resulting Modellingunit For TypeChecker
 		mergedMU_ser = this.saveMu(mergedMU);
+		
+		System.out.println(mergedMU_ser.toString());
 		/*typeCheckerrunner.MainRunner.init4eclipse();
 		mergedMU = this.LoadMu(mergedMU_ser);*/
 		// End of Convert Resulting Modellingunit For TypeSetter
