@@ -42,9 +42,24 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	
+	/**
+	* This method adds a tag to the given object. The added tag flags ecore object conversion.
+	*/
+	operation addEcoreTag(object : Object) : Void is do
+		if(not object.isVoid) then
+			var kmTag : Tag init Tag.new.initialize("ecore", "true", object)
+			object.kTag.add(kmTag)
+			object.kOwnedTags.add(kmTag)
+		end
+	end
+	
+	
 	method visitEPackage(pkg : EPackage) : Void is do
 		// Creation of the kermeta package.
 		var kmPkg : Package init Package.new.initialize(pkg.name, pkg.nsURI)
+		
+		// Each ecore package must be associated a tag.
+		addEcoreTag(kmPkg)
 	
 		if(pkg.eSuperPackage.isVoid) then
 			// It means that this package is the root package.
@@ -83,6 +98,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			var kmOp : Operation init Operation.new.initialize(op.name, returnType, void)
 			kmOp.isOrdered := op.ordered
 			kmOp.isUnique  := op.unique
+			
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmOp)
 			
 			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
 			// Linking the Kermeta operation to the Ecore operation.
@@ -137,6 +155,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		result.isOrdered   := ordered
 		result.isDerived   := derived
 		result.isReadOnly  := readOnly
+		
+		// Each ecore attribute must be associated a tag.
+		addEcoreTag(result)
 	end
 	
 	
@@ -194,6 +215,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			// Creation of the Kermeta class.
 			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, eclass.~abstract, void)
 
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmClassDef)
+		
 			// A unresolved type is created for each super type.
 			eclass.eSuperTypes.each{st |
 				var type : UnresolvedType init UnresolvedType.new.initialize(st.getQualifiedName())
@@ -245,11 +269,12 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			var type : UnresolvedType init UnresolvedType.new.initialize(dataType.instanceTypeName)
 			// Creation of the Kermeta primitive type.
 			var pt : PrimitiveType init PrimitiveType.new.initialize(dataType.name, type)
+			// Each ecore class must be associated a tag.
+			addEcoreTag(pt)
 			// Adding the primitive type to its Kermeta package.
 			dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(pt)
 			// Linking the Kermeta primitive type to the ecore data type.
 			dataType.targetKermetaObject := pt
-			stdio.writeln(pt.containedType.size.toString)
 		end
 
 		super(dataType)
