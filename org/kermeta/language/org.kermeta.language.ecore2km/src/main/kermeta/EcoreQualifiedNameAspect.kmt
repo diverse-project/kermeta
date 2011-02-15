@@ -13,6 +13,17 @@ using ecore
 using kermeta::standard
 
 
+aspect class EGenericType {
+	operation getQualifiedName() : String is do
+		result := eTypeParameter.name
+
+		if((not eTypeParameter.isVoid).andThen{b | eTypeParameter.container().isInstanceOf(EClassifier)}) then
+			result := eTypeParameter.container().asType(EClassifier).getQualifiedName() + "::" + result
+		end
+	end
+}
+
+
 aspect class EReference {
 	operation getQualifiedName() : String is do
 		result := name

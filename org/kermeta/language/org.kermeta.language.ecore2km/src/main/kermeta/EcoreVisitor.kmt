@@ -23,6 +23,7 @@ abstract class EcoreVisitor {
 	
 	operation visitEClassifier(classifier : EClassifier) : Void is do
 		visitENamedElement(classifier)
+		classifier.eTypeParameters.each{tp | tp.accept(self)}
 	end
 	
 	operation visitENamedElement(namedElt : ENamedElement) : Void is do
@@ -80,12 +81,23 @@ abstract class EcoreVisitor {
 	operation visitEAnnotation(annot : EAnnotation) : Void is do
 		visitEModelElement(annot)
 	end
+	
+	operation visitETypeParameter(typeParam : ETypeParameter) : Void is do
+		visitEModelElement(typeParam)
+	end
 }
 
 
 aspect class EModelElement {
 	operation accept(v : EcoreVisitor) : Void is do
 		v.visitEModelElement(self)	
+	end
+}
+
+
+aspect class ETypeParameter {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitETypeParameter(self)	
 	end
 }
 

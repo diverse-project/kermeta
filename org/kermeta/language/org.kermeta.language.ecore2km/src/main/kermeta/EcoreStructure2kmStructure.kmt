@@ -85,14 +85,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 	method visitEOperation(op : EOperation) : Void is do
 		if(not op.eContainingClass.isVoid and op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
-			var returnType : UnresolvedType
-			
-			// If there is a return type, an unresolved type is created.
-			if(op.eType.isVoid) then
-				returnType := void
-			else
-				returnType := UnresolvedType.new.initialize(op.eType.getQualifiedName())
-			end
+			// Getting the type of the operation.
+			var returnType : UnresolvedType init getUnresolvedType(op.eGenericType, op.eType)
 			
 			// Creation of the ouput Kermeta operation.
 			var kmOp : Operation init Operation.new.initialize(op.name, returnType, void)
@@ -114,7 +108,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 	method visitEAttribute(eAttr : EAttribute) : Void is do
 		if(eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
-			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, eAttr.lowerBound, eAttr.upperBound)
+			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, 
+												 eAttr.eGenericType, eAttr.lowerBound, eAttr.upperBound)
 			// Adding the created Kermeta property to its class definition.
 			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
 			// Linking the created Kermeta property to the Ecore attribute.
@@ -126,29 +121,36 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	
-	operation addProperty(composite : Boolean, name : String, ordered : Boolean, derived : Boolean,
-							readOnly : Boolean, eType : EClassifier, lower : Integer, upper : Integer) : Property is do
-		var type : UnresolvedType
-
-		// If the attribute has a type, an unresolved type is created.
-		if(eType.isVoid) then
-			type := void
-		else
-			var typeName : String 
-
-			// If the type of the attribute is a data type, we check if the data type has an equivalent Kermeta primitive type.
-			if(eType.isKindOf(EDataType)) then
-				typeName := primitiveTypeMappings.getValue(eType.name)
+	/**
+	 * This function returns the unresolved type coresponding to the given generic type or the given type if the first is not valid.
+	 * If both of the arguments are not valid, void is returned.
+	 */
+	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
+		// Generic type must be managed. The type of the method is a generic type if:
+		if(genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid}) then
+			if(type.isVoid) then
+				result := void
+			else // If there is a return type, an unresolved type is created.
+				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
+				if(type.isKindOf(EDataType)) then
+					result := UnresolvedType.new.initialize(primitiveTypeMappings.getValue(type.name))
+				else
+					result := UnresolvedType.new.initialize(type.getQualifiedName())
+				end
 			end
-
-			// If the type is not a data type or it has no Kermeta equivalence.
-			if(typeName.isVoid) then
-				typeName := eType.getQualifiedName()
-			end
-
-			type := UnresolvedType.new.initialize(typeName)
+		else // If there is a return generic type, an unresolved type is created.
+			result := UnresolvedType.new.initialize(genericType.getQualifiedName())
 		end
-		
+	end
+
+
+	
+	operation addProperty(composite : Boolean, name : String, ordered : Boolean, derived : Boolean,
+							readOnly : Boolean, eType : EClassifier, eGenericType : EGenericType,
+							lower : Integer, upper : Integer) : Property is do
+		// Getting the type of the property.
+		var type : UnresolvedType init getUnresolvedType(eGenericType, eType)
+
 		// Creation of the output Kermeta property.
 		result := Property.new.initialize(name, type, lower, upper)
 		result.isComposite := composite
@@ -164,7 +166,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	method visitEReference(ref : EReference) : Void is do
 		if(ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
-			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, ref.lowerBound, ref.upperBound)
+			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
+												 ref.eGenericType, ref.lowerBound, ref.upperBound)
 			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
 			
 			// Adding the created Kermeta property to its class definition.
@@ -187,15 +190,10 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	method visitEParameter(param : EParameter) : Void is do
 		if(param.eOperation.targetKermetaObject.isKindOf(Operation)) then
+			// Getting the kermeta operation.
 	 		var op : Operation init param.eOperation.targetKermetaObject.asType(Operation)
-			var type : UnresolvedType
-			
-			// Creating the possible Kermeta type of the parameter.
-			if(param.eType.isVoid) then
-				type := void
-			else
-				type := UnresolvedType.new.initialize(param.eType.getQualifiedName())
-			end
+	 		// Getting the type of the parameter.
+			var type : UnresolvedType init getUnresolvedType(param.eGenericType, param.eType)
 			
 			//Creation of the output Kermeta parameter.
 			var kmParam : Parameter init Parameter.new.initialize(param.name, param.lowerBound, param.upperBound, op, type)
@@ -250,6 +248,23 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		end
 		
 		super(annot)
+	end
+
+
+
+	method visitETypeParameter(typeParam : ETypeParameter) : Void is do
+		// Getting the classifier that contains the type parameter.
+		var classifier : EClassifier init typeParam.container().asType(EClassifier)
+
+		// Checking the target Kermeta object.
+		if(classifier.targetKermetaObject.isInstanceOf(GenericTypeDefinition)) then
+			var gtd : GenericTypeDefinition init classifier.targetKermetaObject.asType(GenericTypeDefinition)
+			// Creating the Kermeta object type variable.
+			var typeVar : ObjectTypeVariable init ObjectTypeVariable.new		
+			typeVar.name := typeParam.name
+			// Adding the type variable into the generic type definition.
+			gtd.typeParameter.add(typeVar)
+		end
 	end
 
 
