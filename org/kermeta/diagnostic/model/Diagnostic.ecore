@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
+    nsURI="http://diagnostic/1.0/" nsPrefix="org">
+  <eSubpackages name="kermeta" nsURI="http://diagnostic/1.0/org/kermeta" nsPrefix="org_kermeta">
+    <eSubpackages name="diagnostic" nsURI="http://diagnostic/1.0/org/kermeta/diagnostic"
+        nsPrefix="org_kermeta_diagnostic">
+      <eClassifiers xsi:type="ecore:EClass" name="DiagnosticModel">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="diagnostics" upperBound="-1"
+            eType="#//kermeta/diagnostic/ConstraintDiagnostic" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+            eType="#//kermeta/diagnostic/Reference" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+            eType="#//kermeta/diagnostic/Constraint"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ConstraintDiagnostic">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="appliesTo" lowerBound="1"
+            eType="#//kermeta/diagnostic/Reference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="failedConstraint" lowerBound="1"
+            eType="#//kermeta/diagnostic/Constraint"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelReference" eSuperTypes="#//kermeta/diagnostic/Reference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="referencedObject" lowerBound="1"
+            eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Invariant" abstract="true" eSuperTypes="#//kermeta/diagnostic/Constraint"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PreCondition" abstract="true" eSuperTypes="#//kermeta/diagnostic/Constraint"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PostCondition" abstract="true" eSuperTypes="#//kermeta/diagnostic/Constraint"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InvariantProxy" eSuperTypes="#//kermeta/diagnostic/Invariant">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaclassQualifiedName"
+            lowerBound="1" eType="#//kermeta/diagnostic/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="invariantName" lowerBound="1"
+            eType="#//kermeta/diagnostic/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="mmUri" lowerBound="1"
+            eType="#//kermeta/diagnostic/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
