@@ -11,7 +11,9 @@
 
 package org.kermeta.language.lexer
 
+import scala.annotation.tailrec
 import scala.collection.mutable.HashSet
+import scala.collection.mutable.ListBuffer
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.combinator.lexical.Lexical
 import scala.util.parsing.combinator.lexical.Scanners
@@ -40,17 +42,38 @@ class KMLexical extends Lexical with KTokens {
   
 
   def comment : Parser[KToken] = (
-   positioned('/' ~ '*' ~ mlcomment ^^ { case _ ~ _ ~ mlcomment => mlcomment })
-   |
-   positioned('/' ~> '/' ~> rep( chrExcept(EofCh, '\n') ) ^^ { case content => Comment(content.mkString) })
-   )
-
-
-  protected def mlcomment: Parser[MLComment] = (
-    '*' ~ '/'  ^^ { case _ => MLComment("")  }
-    | 
-    chrExcept(EofCh) ~ mlcomment ^^ { case c ~ rc => var ml = MLComment(c+rc.chars) ; ml  }
+    positioned('/' ~> '/' ~> rep( chrExcept(EofCh, '\n') ) ^^ { case content => Comment(content.mkString) })
+    |
+    positioned(beginML ~ commentBody ^^ {case _ ~ body => MLComment("/*"+body.mkString)})
+    
   )
+
+
+  def commentBody[T]: Parser[List[Elem]] = Parser { in =>
+    val elems = new ListBuffer[Elem]
+    var startFound = false
+
+    if(in.first == '*') startFound = true
+    elems += in.first
+    var tok = in.rest
+    while(!  (tok.first=='/'&&startFound)||(tok.first == EofCh)   ){
+      startFound = ( tok.first == '*')
+      elems += tok.first
+      tok = tok.rest
+    }
+    elems += tok.first
+    Success(elems.toList, tok.rest)
+  }
+
+
+
+
+ // def mlSuite : Parser[String] =  commentBody ~ endML ^^ { case bodyml ~endml =>
+  //    bodyml+"*/"
+ // }
+  def beginML = '/' ~ '*'
+  //def endML = '*' ~ '/'
+  //def bodyML : Parser[String] = rep( endML ^^^ { "*/" } | chrExcept(EofCh)^^ {case _ => ""} ) ^^ { case s => s.mkString }
 
   // legal identifier chars other than digits
   def identChar = letter | elem('_')
@@ -81,18 +104,18 @@ class KMLexical extends Lexical with KTokens {
 // see `token' in `Scanners'
   def token: Parser[KToken] = (
     positioned( '~' ~ identChar ~ rep( identChar | digit ) ^^ { case _ ~ first ~ rest => Identifier(first :: rest mkString "") } )
-     |positioned( identChar ~ rep( identChar | digit ) ^^ { case first ~ rest => kident(first :: rest mkString "") } )
-     | positioned(comment ^^{ case c => c })
-     | positioned(digit ~ rep( digit )                              ^^ { case first ~ rest => NumericLit(first :: rest mkString "") })
-     | positioned('\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") })
-     | positioned('\"' ~ rep( chrExcept('\"', '\n', EofCh) ) ~ '\"' ^^ { case '\"' ~ chars ~ '\"' => StringLit(chars mkString "") })
-     | positioned(eof ^^ {case _ => KEOF() })
-     | positioned('\'' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) // ~> failure("unclosed string literal") )
-     | positioned('\"' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) //~> failure("unclosed string literal") )
-     | positioned(delim)
-     /* | floatingToken*/
-     |  positioned( elem("illegal character", p => true ) ^^^KError("illegal character") ) //  failure("illegal character"))
-    )
+    |positioned( identChar ~ rep( identChar | digit ) ^^ { case first ~ rest => kident(first :: rest mkString "") } )
+    | positioned(comment ^^{ case c => c })
+    | positioned(digit ~ rep( digit )                              ^^ { case first ~ rest => NumericLit(first :: rest mkString "") })
+    | positioned('\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") })
+    | positioned('\"' ~ rep( chrExcept('\"', '\n', EofCh) ) ~ '\"' ^^ { case '\"' ~ chars ~ '\"' => StringLit(chars mkString "") })
+    | positioned(eof ^^ {case _ => KEOF() })
+    | positioned('\'' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) // ~> failure("unclosed string literal") )
+    | positioned('\"' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) //~> failure("unclosed string literal") )
+    | positioned(delim)
+    /* | floatingToken*/
+    |  positioned( elem("illegal character", p => true ) ^^^KError("illegal character") ) //  failure("illegal character"))
+  )
 
   private lazy val _delim: Parser[KToken] = {
     // construct parser for delimiters by |'ing together the parsers for the individual delimiters,
@@ -107,7 +130,7 @@ class KMLexical extends Lexical with KTokens {
   }
   protected def delim: Parser[KToken] = _delim
 
- // private def lift[T](f: String => T)(xs: List[Char]): T = f(xs.mkString("", "", ""))
+  // private def lift[T](f: String => T)(xs: List[Char]): T = f(xs.mkString("", "", ""))
 //  private def lift2[T](f: String => T)(p: ~[Char, List[Char]]): T = lift(f)(p._1 :: p._2)
 
 
