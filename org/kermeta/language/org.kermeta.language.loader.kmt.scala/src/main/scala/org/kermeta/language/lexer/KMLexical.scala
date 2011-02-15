@@ -35,8 +35,7 @@ class KMLexical extends Lexical with KTokens {
   protected def kident(name: String) : KToken = if (reserved contains name) Keyword(name) else Identifier(name)
   override def whitespace: Parser[Any] = rep(whitespaceChar)
 
-
-  val reserved : HashSet[String] = HashSet("throw","inherits","package","attribute","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var","from","until","loop","if","then","else","init","true","false", "singleton")
+  val reserved : HashSet[String] = HashSet("abstract","aspect", "attribute","class" , "do", "end","else","false", "from", "init", "inherits","if","inv","is","loop","method","operation","package","until","then","true", "raise", "result","require", "singleton","throw", "using","var")
   val delimiters : HashSet[String] = HashSet("=",";","::","@","{","}","(",")",":",":=",".",",","|","==","!=","-","+","!","*","/","<","<=",">",">=","[","]","..","->","=>")
 
   
