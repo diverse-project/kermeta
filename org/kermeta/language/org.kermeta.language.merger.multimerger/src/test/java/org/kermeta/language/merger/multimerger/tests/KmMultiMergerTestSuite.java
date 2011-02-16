@@ -17,8 +17,8 @@ import junit.framework.TestSuite;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
-import org.kermeta.language.merger.binarymerger.art2.impl.*;
-import org.kermeta.language.merger.multimerger.art2.impl.*;
+import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger;
+import org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMerger;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 
 /**
@@ -34,7 +34,7 @@ public class KmMultiMergerTestSuite extends TestSuite {
         ((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
 		.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
         // force to initialize the eInstance (required for correct serialisation
-    	//XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
+    	 XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
 
         // init using BinaryMerger MainRunner.init
         MainRunner.init();
@@ -43,15 +43,11 @@ public class KmMultiMergerTestSuite extends TestSuite {
         PortKmMultiMergerTestSuite.portKmMultiMergerFactory = new PortAbstractFactory<PortKmMerger>(){
             @Override
             public PortKmMerger create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException {
-                /* Art2ComponentKmBinaryMerger binaryMerger = new Art2ComponentKmBinaryMerger();
+                Art2ComponentKmBinaryMerger binaryMerger = new Art2ComponentKmBinaryMerger();
                 binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
                 Art2ComponentKmMultiMerger merger = new Art2ComponentKmMultiMerger();
-                merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger); */
-            	Art2ComponentKmBinaryMerger binaryMerger = Art2ComponentKmBinaryMergerFactory.createArt2ComponentKmBinaryMerger();
-                //binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
-                Art2ComponentKmMultiMerger merger = Art2ComponentKmMultiMergerFactory.createArt2ComponentKmMultiMerger();
-
-                merger.start();
+                merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger);
+                merger.setBinaryMerger(binaryMerger);
                 return merger;
             }
         };

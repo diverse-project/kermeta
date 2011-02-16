@@ -12,6 +12,16 @@
     <name>language.merger.multimerger :: Kermeta2 multimerger</name>
 
     <dependencies>
+        
+        <!--  be careful , binray merger must be early in the dependencies because of the classpath order, it must be before EMFLib -->
+        <!--  otherwise you'll get java.lang.IllegalAccessError: tried to access method org.eclipse.emf.ecore.impl.EcorePackageImpl.<init>()V from class org.kermeta.language.language.merger.binarymergerrunner.MainRunner -->
+        <!-- This is because an EMF bug : EcorePackage has its constructor set as private ... -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.merger.binarymerger</artifactId>
+            <version>${kermeta.version}</version>
+            <scope>test</scope>
+        </dependency>
     
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
@@ -37,12 +47,6 @@
             <version>${kermeta.version}</version>
             <scope>test</scope>
             <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>language.merger.binarymerger</artifactId>
-            <version>${kermeta.version}</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>
