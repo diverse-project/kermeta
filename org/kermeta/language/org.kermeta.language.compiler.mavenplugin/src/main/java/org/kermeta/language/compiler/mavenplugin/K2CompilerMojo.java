@@ -1,6 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Francois Fouquet
+ *            Didier Vojtisek
+ * 
  */
 package org.kermeta.language.compiler.mavenplugin;
 
@@ -19,9 +23,10 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 /**
- *
- * @author ffouque
- *
+ * This class implement a maven plugin that compiles a kermeta km model into scala files
+ * 
+ * Be careful annotations in the comments are used by maven...
+ * 
  * @goal generate
  * @phase generate-sources
  * @requiresDependencyResolution compile
@@ -56,7 +61,7 @@ public class K2CompilerMojo extends AbstractMojo {
      */
     protected MavenProject project;
     /**
-     * Ecore file
+     * Input km file
      *
      * @parameter
      * @required
@@ -73,12 +78,17 @@ public class K2CompilerMojo extends AbstractMojo {
 
 
     /**
-     * Prefix Kermeta Compiler
+     * GroupId : used to prefix generated code by the  Kermeta Compiler
      *
-     * @parameter expression="${project.groupId}-${projectArtefactID}"
-     * @readonly
+     * @parameter expression="${project.groupId}"
      */
-    private String prefix;
+    private String targetGroupId;
+    /**
+     * artifactId : used to prefix generated code by the  Kermeta Compiler
+     *
+     * @parameter expression="${project.artifactId}"
+     */
+    private String targetArtifactId;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
 
@@ -94,6 +104,11 @@ public class K2CompilerMojo extends AbstractMojo {
             GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
             GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
             GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
+                // GroupId and ArtifactId are used to prefix the generated code
+            GlobalConfiguration.props().setProperty("project.group.id", targetGroupId);
+            GlobalConfiguration.props().setProperty("project.artefact.id", targetArtifactId);
+            //GlobalConfiguration.load(GlobalConfiguration.props());
+            GlobalConfiguration.setScalaAspectPrefix(targetGroupId+"."+targetArtifactId);
 
             checkFile(model.getAbsolutePath().toString());
             compilo.compile(model.getAbsolutePath().toString());
