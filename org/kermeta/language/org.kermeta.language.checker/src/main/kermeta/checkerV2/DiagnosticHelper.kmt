@@ -1,0 +1,51 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::checker;
+
+
+require kermeta
+require "platform:/lookup/kermetaV2Checker/metamodel/Diagnostic.kmt"
+
+
+using diagnostic
+using kermeta::exceptions
+using kermeta::standard
+
+class DiagnosticHelper
+{
+	operation initDiagnosticModel() : DiagnosticModel is do
+		var diagnostic : DiagnosticModel init DiagnosticModel.new
+		//var myDiagnosticsBag : Bag<ConstraintDiagnostic> init Bag<ConstraintDiagnostic>.new
+		//diagnostic.diagnostics := myDiagnosticsBag
+		//diagnostic.diagnostics := myDiagnosticsBag
+		
+		result := diagnostic
+	end
+
+	operation transformConstraintViolatedInv(cvi : ConstraintViolatedInv, obj : Object) : ConstraintDiagnostic is do
+	
+		var cDiagnostic : ConstraintDiagnostic init ConstraintDiagnostic.new
+						
+		// get the referenced object
+		var modRef : ModelReference init ModelReference.new
+		modRef.referencedObject := cvi.constraintAppliedTo
+		cDiagnostic.appliesTo := modRef
+	
+		// get the constraint
+		var constraint : InvariantProxy init InvariantProxy.new
+		constraint.invariantName := cvi.failedConstraint.name
+		constraint.metaclassQualifiedName := obj.containingResource.uri
+		constraint.mmUri := obj.containingResource.uri
+	 
+	 	result := cDiagnostic
+	end
+	
+	
+}

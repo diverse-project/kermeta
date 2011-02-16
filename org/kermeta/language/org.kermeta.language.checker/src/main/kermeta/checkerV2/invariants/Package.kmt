@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : September 14, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+
+require "platform:/lookup/kermetaV2Checker/metamodel/kermeta.ecore"
+
+aspect class Package
+{
+	inv no_underscore is do
+		not self.name.contains("_")
+	end
+
+}
+

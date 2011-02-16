@@ -1,0 +1,38 @@
+/* $Id:$ 
+ * Creation : October 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::checker;
+
+
+require kermeta
+
+//require "platform:/lookup/kermetaV2Checker/metamodel/kermeta_java.ecore"
+//require "platform:/lookup/kermetaV2Checker/metamodel/Diagnostic.kmt"
+
+require "platform:/lookup/kermetaV2Checker/src/kermetav2/MDKChecker.kmt"
+require "platform:/lookup/kermetaV2Checker/src/kermetav2/invariants/Package.kmt"
+
+using diagnostic
+using org::kermeta::language::structure
+
+class Checker
+{
+	operation check(mu : ModelingUnit) : DiagnosticModel is do 
+		
+		var diagnosticModel : DiagnosticModel init mu.getAllViolatedConstraints 
+		result := diagnosticModel
+		
+	end
+	
+	operation checkObject(obj : Object) : DiagnosticModel is do
+		
+		var diagnosticModel : DiagnosticModel init obj.getAllViolatedConstraints 
+		result := diagnosticModel
+		
+	end
+}

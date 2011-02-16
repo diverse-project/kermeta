@@ -1,0 +1,149 @@
+/* $Id:$ 
+ * Creation : October 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+//@mainClass "kermetav2::Main"
+//@mainOperation "main"
+
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/kermetaV2Checker/metamodel/kermeta.ecore"
+require "platform:/lookup/kermetaV2Checker/src/kermetav2/DiagnosticHelper.kmt"
+
+using diagnostic
+using org::kermeta::language::checker
+
+using kermeta::standard
+using kermeta::exceptions
+
+
+aspect class Object
+{
+	operation getAllViolatedConstraints() : DiagnosticModel is do 
+
+		stdio.writeln(">> getAllViolatedConstraints")
+
+		var diagnosticHelper : DiagnosticHelper init DiagnosticHelper.new
+
+		// init result
+		var diagnostic : DiagnosticModel init diagnosticHelper.initDiagnosticModel
+		
+		stdio.writeln("        " + self.toString +".getViolatedConstraints()")
+		
+		stdio.writeln( "self.kType : " + self.kType.toString  )
+		
+		var cd : kermeta::language::structure::ClassDefinition 
+		cd := self.getMetaClass().classDefinition
+
+		stdio.writeln( "self.cd : " + cd.name  )
+		
+		//self.kType.asType(Class).typeDefinition
+		
+		
+		stdio.writeln(" >> getAllViolatedConstraints, Class def : " + cd.name )
+		
+		if ( not cd.isVoid ) then
+			
+			// Checking invariants
+			cd.~inv.each{invariant |
+				do
+					checkInvariant(invariant)
+					rescue (e : ConstraintViolatedInv) 
+					    stdio.writeln("    " + e.message)
+						//contraintes.add(e)
+						
+						var diag : ConstraintDiagnostic init diagnosticHelper.transformConstraintViolatedInv(e,self)
+						diagnostic.diagnostics.add(diag)
+
+				end
+			}
+			
+			
+			// Checking properties and drill down into the contained objects
+			cd.getCachedAllAttribute.each{ prop |
+				
+				//stdio.writeln("  checking " + prop.name + ", composite " + prop.isComposite.toString )			
+				if not prop.tag.exists{t| t.name == "ecore.isTransient"} and
+				   not prop.isDerived
+				then
+					// build a constraint with the property
+					var constraint : kermeta::language::structure::PropertyConstraint init prop.propertyConstraint
+					if constraint.isVoid then
+						constraint := kermeta::language::structure::PropertyConstraint.new
+						if prop.type.isInstanceOf(ParameterizedType) then
+							constraint.name := cd.name + "_" + prop.name + "_" + prop.type.asType(ParameterizedType).typeDefinition.name
+						else
+							constraint.name := cd.name + "_" + prop.name + "_" + prop.type.toString
+						end
+						//constraint.invOwner := cd // ajout pour les markers
+						constraint.~property := prop
+					end
+					do
+						checkInvariant(constraint)
+						rescue (e : ConstraintViolatedInv)
+							// add the violated constraint to the report 
+							//contraintes.add(e)
+							var diag : ConstraintDiagnostic init diagnosticHelper.transformConstraintViolatedInv(e,self)
+							diagnostic.diagnostics.add(diag)
+							
+					end		
+			
+					// Recursivity
+					if ( prop.isComposite and prop.getViolatedConstraintsMustDrillDown) 
+					then
+					    var propValue : kermeta::language::structure::Object init self.get(prop)
+					    // need to ignore ValueType and EnumerationLiteral for performance sake 					    	
+						if not propValue.isVoid() 
+						then
+							stdio.writeln("prop.upper : " + prop.upper.toString())
+								
+							
+							if prop.upper.equals(1)
+							then
+								if not propValue.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+									propValue.getViolatedConstraints.setConstraints.each{v|
+										stdio.writeln("    " + v.message)																				
+										//contraintes.add(v)
+										var diag : ConstraintDiagnostic init diagnosticHelper.transformConstraintViolatedInv(v,self)
+										diagnostic.diagnostics.add(diag)
+										
+										}
+								end							
+							else
+								var subObjInstances : kermeta::standard::Collection<Object>
+								subObjInstances ?= propValue
+								
+								subObjInstances.each { aSubObjInstance |
+									if not aSubObjInstance.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then 
+										aSubObjInstance.getViolatedConstraints
+																			.setConstraints. each{v|
+																				stdio.writeln("    " + v.message)
+																				//contraintes.add(v)
+																				var diag : ConstraintDiagnostic init diagnosticHelper.transformConstraintViolatedInv(v,self)
+																				diagnostic.diagnostics.add(diag)
+																				
+																			}
+									end 
+									}
+							end
+						end
+					end
+				end
+				
+				
+			}
+			
+			
+			
+		end
+	
+		result := diagnostic
+	end
+}
