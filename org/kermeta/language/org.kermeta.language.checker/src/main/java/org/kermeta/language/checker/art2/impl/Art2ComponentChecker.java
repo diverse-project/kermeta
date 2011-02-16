@@ -22,9 +22,11 @@ import org.kermeta.art2.annotation.Requires;
 import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
 
+import org.kermeta.language.api.Diagnostic;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
-import org.kermeta.language.api.port.PortKEvent;
+import org.kermeta.language.api.port.PortChecker;
 import org.kermeta.language.api.port.PortLog;
+import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
 
 /**
@@ -39,7 +41,7 @@ import org.osgi.framework.Bundle;
 	 * Kevent port for handling kermeta events
 	 */
 	// @ProvidedPort(name = "asynclog", type=PortType.MESSAGE),
-	@ProvidedPort(name = "kevent", type = PortType.SERVICE, className = PortKEvent.class) 
+	@ProvidedPort(name = "kcheck", type = PortType.SERVICE, className = PortChecker.class) 
 	}
 )
 
@@ -52,7 +54,7 @@ import org.osgi.framework.Bundle;
 )
 @Library(name= "org.kermeta.language")
 @ComponentType
-public class Art2ComponentProto extends AbstractComponentType {
+public class Art2ComponentChecker extends AbstractComponentType implements PortChecker {
 
 	/**
 	 * The log port used to send technical log messages
@@ -82,11 +84,17 @@ public class Art2ComponentProto extends AbstractComponentType {
 	 * @param o the received kermeta event (Kevent)
 	 */
 	// @port(name="asynclog", method="process")
-	@Port(name = "kevent", method = "processKEvent")
+	/*@Port(name = "kevent", method = "processKEvent")
 	public void processKEvent(Object o) {
 		//TODO
-	}
+	}*/
 
+	@Port(name = "kcheck", method="check")
+	public Diagnostic check(ModelingUnit mu) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	/**
 	 * Start this bundle dynamically
 	 */
@@ -132,4 +140,6 @@ public class Art2ComponentProto extends AbstractComponentType {
 	public PortLog getLogPort() {
 		return logPort;
 	}
+
+
 }
