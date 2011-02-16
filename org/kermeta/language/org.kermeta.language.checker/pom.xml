@@ -4,7 +4,7 @@
 	<artifactId>language.checker</artifactId>
 	<packaging>bundle</packaging>
 	<groupId>org.kermeta.language</groupId>
-	<name>K2 :: ART2COMPONENT-NAME</name>
+	<name>K2 :: Checker</name>
 	
 	<parent>
 		<groupId>org.kermeta.language</groupId>
