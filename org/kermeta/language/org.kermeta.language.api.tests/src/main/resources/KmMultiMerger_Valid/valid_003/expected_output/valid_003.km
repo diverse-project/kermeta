@@ -42,9 +42,7 @@
           </value>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
-          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
-            <usings fromQName="kermeta::standard" toName="standard"/>
-          </target>
+          <target xsi:type="org_kermeta_language_behavior:CallResult"/>
           <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
             <usings fromQName="kermeta::standard" toName="standard"/>
           </value>
@@ -58,9 +56,7 @@
       </containedType>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
-          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
-            <usings fromQName="kermeta::standard" toName="standard"/>
-          </target>
+          <target xsi:type="org_kermeta_language_behavior:CallResult"/>
           <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="42"/>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
