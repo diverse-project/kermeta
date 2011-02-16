@@ -50,7 +50,7 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.traceability.ModelReference;
 import org.kermeta.traceability.TraceabilityFactory;
 import org.osgi.framework.Bundle;
-import runner.MainRunner;
+import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 
 @ThirdParties({
     @ThirdParty(name = "org.kermeta.language.model", url = "mvn:org.kermeta.language/language.model"),
@@ -141,7 +141,7 @@ public class Art2ComponentKmBinaryMerger extends AbstractComponentType implement
     }
     
     protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
-    	if(! (mu instanceof ScalaAspect.org.kermeta.language.structure.ModelingUnitAspect)){
+    	if(! (mu instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.ModelingUnitAspect)){
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
 	    	Map<String, String> options = null;
