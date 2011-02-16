@@ -1,4 +1,4 @@
-package org.kermeta.language.merger.multimerger;
+package org.kermeta.language.merger.multimerger.tests;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import junit.framework.TestSuite;
 import org.kermeta.language.api.port.PortKmBinaryMerger;
 import org.kermeta.language.api.port.PortKmMerger;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
-import org.kermeta.language.merger.binarymerger.art2.impl.Art2ComponentKmBinaryMerger;
-import org.kermeta.language.merger.multimerger.art2.impl.Art2ComponentKmMultiMerger;
+import org.kermeta.language.merger.binarymerger.art2.impl.*;
+import org.kermeta.language.merger.multimerger.art2.impl.*;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 
 /**
@@ -42,11 +42,15 @@ public class KmMultiMergerTestSuite extends TestSuite {
         PortKmMultiMergerTestSuite.portKmMultiMergerFactory = new PortAbstractFactory<PortKmMerger>(){
             @Override
             public PortKmMerger create() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException {
-                Art2ComponentKmBinaryMerger binaryMerger = new Art2ComponentKmBinaryMerger();
+                /* Art2ComponentKmBinaryMerger binaryMerger = new Art2ComponentKmBinaryMerger();
                 binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
                 Art2ComponentKmMultiMerger merger = new Art2ComponentKmMultiMerger();
-                merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger);
-                merger.setBinaryMerger(binaryMerger);
+                merger.simulatedStart(merger.getClass().getCanonicalName(), binaryMerger); */
+            	Art2ComponentKmBinaryMerger binaryMerger = Art2ComponentKmBinaryMergerFactory.createArt2ComponentKmBinaryMerger();
+                //binaryMerger.simulatedStart(binaryMerger.getClass().getCanonicalName());
+                Art2ComponentKmMultiMerger merger = Art2ComponentKmMultiMergerFactory.createArt2ComponentKmMultiMerger();
+
+                merger.start();
                 return merger;
             }
         };
