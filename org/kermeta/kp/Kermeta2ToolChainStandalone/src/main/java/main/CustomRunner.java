@@ -15,10 +15,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kermeta.language.structure.ModelingUnit;
+
 public class CustomRunner {
 	public static void main(String[] args) throws IOException {
 
 		Main m = new Main();
+		
+		MainLoadUnit mainLoad = new MainLoadUnit();
+		MainMerger mainMerger = new MainMerger();
+		MainTypeSetter mainTypeSetter = new MainTypeSetter();
+		
 		// Parse framework and test File
 		List<String> uris = new ArrayList<String>();
 		uris
@@ -36,7 +43,19 @@ public class CustomRunner {
 
 		uris
 				.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/Kermeta2ToolChainStandalone/model/My.ecore");
+		// use global main
 		m.k2Compile(uris, null, null);
+		
+		// Use each main separately
+	// Loader
+	//List<ModelingUnit> loadModelingUnits =	 mainLoad.k2CompileLoadUnit(uris,null, null);
+	
+	// Merger
+	//ModelingUnit mergedMU = mainMerger.k2CompileMerger(uris, null, null, loadModelingUnits);
+	
+	// Type Setter
+	//mainTypeSetter.k2CompileTypeSetter(uris, null, null, mergedMU);
+		
 
 	}
 }
