@@ -29,10 +29,17 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
 	reference resolvedOperationFinder : ResolverResolvedOperationFinder
 
-	operation callTypeFinder(ctxt : StructureVisitorContext) is do	
+	operation callTypeFinder(ctxt : StructureVisitorContext) is do
+	
+		var initialQualifiedPath : String init ""
+		ctxt.qualifiedPath.each{s|
+			initialQualifiedPath := initialQualifiedPath + s + "::"
+		}
+	
 		if (resolvedTypeFinder.isVoid()) then
 			resolvedTypeFinder := ResolverResolvedTypeFinder.new
 		end
+		
 		if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
 			ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
 			
@@ -61,12 +68,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 		end
 		if (ctxt.foundType.isVoid()) then
-			var qualifiedPath : String init ""
-			ctxt.qualifiedPath.each{s|
-				qualifiedPath := qualifiedPath + s + "::"
-			}
-			
-			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType " + qualifiedPath + ctxt.unresolvedName
+			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType " + initialQualifiedPath + ctxt.unresolvedName
 			
 			stdio.writeln(error)
 			
