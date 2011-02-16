@@ -1510,6 +1510,14 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Object/@kOwnedTags.0" name="Object" isAspect="false" superType="//kermeta/standard/Object/@containedType.0" isAbstract="false" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Object"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Object">
+          <usings fromQName="kermeta::standard" toName="standard"/>
+          <usings fromQName="kermeta::language::structure" toName="structure"/>
+          <usings fromQName="kermeta::exceptions" toName="exceptions"/>
+        </containedType>
+      </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Integer/@kOwnedTags.0" name="Integer" isAspect="false" superType="//kermeta/standard/Integer/@containedType.0" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Integer"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Object">
@@ -12291,7 +12299,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Set/@kOwnedTags.0" name="Set" isAspect="false" superType="//kermeta/standard/Set/@containedType.1" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Set"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@722d95b3 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@f284fd4 (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName="structure"/>
           <usings fromQName="kermeta::exceptions" toName="exceptions"/>
         </containedType>
@@ -12707,7 +12715,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Bag/@kOwnedTags.0" name="Bag" isAspect="false" superType="//kermeta/standard/Bag/@containedType.1" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Bag"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@ebf5555 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@643f96ee (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName="structure"/>
           <usings fromQName="kermeta::exceptions" toName="exceptions"/>
         </containedType>
@@ -13115,7 +13123,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedCollection/@kOwnedTags.0" name="OrderedCollection" isAspect="false" superType="//kermeta/standard/OrderedCollection/@containedType.1" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedCollection"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@337b4703 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@ace16ad (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName="structure"/>
           <usings fromQName="kermeta::exceptions" toName="exceptions"/>
         </containedType>
@@ -13292,7 +13300,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedSet/@kOwnedTags.0" name="OrderedSet" isAspect="false" superType="//kermeta/standard/OrderedSet/@containedType.1" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedSet"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@1408a92 (typeIdentifier: Set)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@6e5a3923 (typeIdentifier: Set)">
           <usings fromQName="kermeta::language::structure" toName="structure"/>
           <usings fromQName="kermeta::exceptions" toName="exceptions"/>
         </containedType>
@@ -13536,7 +13544,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Sequence/@kOwnedTags.0" name="Sequence" isAspect="false" superType="//kermeta/standard/Sequence/@containedType.1" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Sequence"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@3c1fc1a6 (typeIdentifier: Bag)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@55a7b0bf (typeIdentifier: Bag)">
           <usings fromQName="kermeta::language::structure" toName="structure"/>
           <usings fromQName="kermeta::exceptions" toName="exceptions"/>
         </containedType>
