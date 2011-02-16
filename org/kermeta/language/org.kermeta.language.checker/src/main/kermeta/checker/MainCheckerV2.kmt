@@ -11,18 +11,19 @@
 
 package org::kermeta::language::checker;
 
-require "platform:/lookup/kermetaV2Checker/src/kermetav2/checkerv2.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/checkerv2.kmt"
 //require kermeta
 
+using org::kermeta::language::structure
 using kermeta::standard
 
 class MainCheckerV2
 {
-	operation check() : Void is do 
+	operation check(mu:ModelingUnit) : Void is do 
 		
-		/*
+		
 		// load 		
-		var mu : org::kermeta::language::structure::ModelingUnit //init org::kermeta::language::structure::ModelingUnit.new
+		/*var mu : org::kermeta::language::structure::ModelingUnit //init org::kermeta::language::structure::ModelingUnit.new
 		
 		var inputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var inputRes : kermeta::persistence::EMFResource
@@ -40,63 +41,14 @@ class MainCheckerV2
 		}
 		*/
 		
-		var a : Integer init 0
-		var b : Integer init 1
 		
-		var c : Boolean init false
-	
-		
-		if ( a != b ) then
-			stdio.writeln(" 1 OK")
-		end
-		
-		if not(  a==b ) then
-			stdio.writeln(" 2 OK")
-		end
-
-		if (not c) then
-			stdio.writeln(" 3 OK")
-		end
-
-
-		var d : myObject init myObject.new
-		var e : myObject init myObject.new
-			
-			d.a := 1
-			e.a := 1
-			
-		if e.equals(d) then
-			stdio.writeln(" then")
-		else
-			stdio.writeln(" else")
-		end
-		
-		/*
 	
 		var myChecker : Checker init Checker.new
 		
 		// test only packages :
 		mu.packages.each{ p | myChecker.checkObject(p) }
 		
-		*/	
-	end
-}
-
-
-class myObject {
-
-	attribute a : Integer
-	
-	method equals(obj : Object) : Boolean is do
 		
-		if (obj.isInstanceOf(myObject)) then
-			result:= self.a==obj.asType(myObject).a
-		else
-			result:= self.asType(Object).equals(obj)
-		end
-		
-
 	end
-	
 
 }

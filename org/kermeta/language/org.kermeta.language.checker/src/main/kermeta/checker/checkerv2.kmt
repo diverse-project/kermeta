@@ -14,10 +14,10 @@ require kermeta
 //require "platform:/lookup/kermetaV2Checker/metamodel/kermeta_java.ecore"
 //require "platform:/lookup/kermetaV2Checker/metamodel/Diagnostic.kmt"
 
-require "platform:/lookup/kermetaV2Checker/src/kermetav2/MDKChecker.kmt"
-require "platform:/lookup/kermetaV2Checker/src/kermetav2/invariants/Package.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/MDKChecker.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/invariants/Package.kmt"
 
-using diagnostic
+using org::kermeta::diagnostic
 using org::kermeta::language::structure
 
 class Checker

@@ -14,10 +14,10 @@ package org::kermeta::language::structure;
 
 require kermeta
 
-require "platform:/lookup/kermetaV2Checker/metamodel/kermeta.ecore"
-require "platform:/lookup/kermetaV2Checker/src/kermetav2/DiagnosticHelper.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/DiagnosticHelper.kmt"
 
-using diagnostic
+using org::kermeta::diagnostic
 using org::kermeta::language::checker
 
 using kermeta::standard

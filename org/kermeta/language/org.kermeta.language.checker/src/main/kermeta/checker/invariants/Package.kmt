@@ -11,7 +11,7 @@ package org::kermeta::language::structure;
 
 require kermeta
 
-require "platform:/lookup/kermetaV2Checker/metamodel/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 aspect class Package
 {

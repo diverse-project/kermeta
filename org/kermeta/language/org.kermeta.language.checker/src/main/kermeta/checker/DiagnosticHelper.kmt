@@ -11,10 +11,10 @@ package org::kermeta::language::checker;
 
 
 require kermeta
-require "platform:/lookup/kermetaV2Checker/metamodel/Diagnostic.kmt"
+require "platform:/lookup/org.kermeta.diagnostic.model/model/Diagnostic.ecore"
 
 
-using diagnostic
+using org::kermeta::diagnostic
 using kermeta::exceptions
 using kermeta::standard
 
@@ -35,7 +35,7 @@ class DiagnosticHelper
 						
 		// get the referenced object
 		var modRef : ModelReference init ModelReference.new
-		modRef.referencedObject := cvi.constraintAppliedTo
+		modRef.referencedObject := cvi.constraintAppliedTo.asType(ecore::EObject)
 		cDiagnostic.appliesTo := modRef
 	
 		// get the constraint
