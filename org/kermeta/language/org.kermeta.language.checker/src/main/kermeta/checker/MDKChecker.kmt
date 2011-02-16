@@ -15,7 +15,7 @@ package org::kermeta::language::structure;
 require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/DiagnosticHelper.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/DiagnosticHelper.kmt"
 
 using org::kermeta::diagnostic
 using org::kermeta::language::checker

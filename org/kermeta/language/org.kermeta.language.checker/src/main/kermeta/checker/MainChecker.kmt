@@ -11,7 +11,7 @@
 
 package org::kermeta::language::checker;
 
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/checkerv2.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/Checker.kmt"
 //require kermeta
 
 using org::kermeta::language::structure
