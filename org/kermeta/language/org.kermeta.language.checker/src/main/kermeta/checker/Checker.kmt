@@ -15,7 +15,7 @@ require kermeta
 //require "platform:/lookup/kermetaV2Checker/metamodel/Diagnostic.kmt"
 
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/MDKChecker.kmt"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/invariants/Package.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/Package.kmt"
 
 using org::kermeta::diagnostic
 using org::kermeta::language::structure
