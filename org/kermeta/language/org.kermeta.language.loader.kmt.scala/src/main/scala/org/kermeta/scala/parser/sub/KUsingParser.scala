@@ -39,11 +39,11 @@ trait KUsingParser extends KAbstractParser {
   def usingStatment : Parser[Tuple2[String,String]] = ident ~ rep(usingIdent) ~ opt(usingWildcard) ~ opt(usingRename) ^^{ case id ~ ids ~ wild ~ rename =>
       var resTuple : Tuple2[String,String] = (id,id)
       ids.foreach{nid =>
-        resTuple = (resTuple._1+"::"+nid,nid)
+        resTuple = (resTuple._1+"::"+nid,"")
       }
       wild match {
         case None =>
-        case Some(w)=> resTuple = (resTuple._1+"::"+w,w)
+        case Some(w)=> resTuple = (resTuple._1+"::"+w,"")
       }
       rename match {
         case None =>
