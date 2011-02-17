@@ -22,9 +22,13 @@ package standard{
 
 
 
-
-
- 
+/**
+ * TODO : miss operations 
+ */
+@CompilerIgnore "true"
+abstract class Map<G> 
+{
+}
 /**
  * Collection is the root abstract class for all kermeta collections
  */

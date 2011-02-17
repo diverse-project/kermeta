@@ -6,6 +6,24 @@ using kermeta::exceptions
 package kermeta{
 package standard{
 
+/**
+ * TODO : miss operations 
+ */
+@CompilerIgnore "true"
+class Object{
+}
+/**
+ * TODO : miss operations 
+ */
+@CompilerIgnore "true"
+class Void {
+}
+/**
+ * TODO : miss operations 
+ */
+@CompilerIgnore "true"
+class Long {
+}
 @CompilerIgnore "true"
 class String {        
 	@CompilerIgnore "true"
