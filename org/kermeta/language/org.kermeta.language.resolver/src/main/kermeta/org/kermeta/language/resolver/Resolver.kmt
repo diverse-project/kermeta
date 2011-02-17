@@ -32,7 +32,7 @@ class Resolver
 	
 		var repository : EMFRepository init EMFRepository.new
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
-		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/300_testHelloWorld_standalone.km")
+		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/miniframework.km")
 		       	
        	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
        	unresolvedModelingUnit ?= unresolvedModelResource.one
@@ -68,7 +68,7 @@ class Resolver
         
         stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")*/
        	
-       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/300_testHelloWorld_standaloneResolved.km")
+       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/miniframeworkResolved.km")
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " saved************************")
        	

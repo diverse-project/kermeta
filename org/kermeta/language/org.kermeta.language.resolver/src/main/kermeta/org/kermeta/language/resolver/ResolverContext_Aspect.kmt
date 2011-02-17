@@ -76,7 +76,12 @@ aspect class StructureVisitorContext {
 	operation reset() : Void is do
 		unresolved := void
 		unresolvedName := void
-		qualifiedPath.clear()
+		resetCompleteName("", Sequence<String>.new)
+	end
+	
+	operation resetCompleteName(n : String, q : Sequence<String>) : Void is do
+		unresolvedName := n
+		qualifiedPath := q
 		identifierCounter := 0
 	end
 }

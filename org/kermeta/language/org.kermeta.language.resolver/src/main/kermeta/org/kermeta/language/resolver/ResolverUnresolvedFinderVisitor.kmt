@@ -22,6 +22,7 @@ using language::helpers::structure
 using kermeta::exceptions
 using org::kermeta::language::resolver
 using kermeta::standard
+using kermeta::utils
 
 class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 {
@@ -29,12 +30,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
 	reference resolvedOperationFinder : ResolverResolvedOperationFinder
 
-	operation callTypeFinder(ctxt : StructureVisitorContext) is do
-	
-		var initialQualifiedPath : String init ""
-		ctxt.qualifiedPath.each{s|
-			initialQualifiedPath := initialQualifiedPath + s + "::"
-		}
+	operation callTypeFinder(ctxt : StructureVisitorContext) is do	
+		var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
+		var initialUnresolvedName : String init ctxt.unresolvedName
 	
 		if (resolvedTypeFinder.isVoid()) then
 			resolvedTypeFinder := ResolverResolvedTypeFinder.new
@@ -50,28 +48,49 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
 				loop
 					use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
-					ctxt.qualifiedPath := use.fromQName.split("::")
-					if (not use.toName.isVoid()) then
-						if (use.toName.equals(ctxt.unresolvedName)) then
+					//If the using does not define an alias
+					if (use.toName.isVoid() or use.toName == "") then
+						//We now look for a type which the same name and which qualifiedPath is the fromQName
+						ctxt.qualifiedPath := use.fromQName.split("::")
+						ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)						
+					else
+						//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
+						//If the alias is name of the type we are looking for
+						if (use.toName.equals(initialUnresolvedName)) then
+							//We now look for a type which name is the last part of the fromQName and which qualifiedPath is the rest of the fromQName
+							ctxt.qualifiedPath := use.fromQName.split("::")
 							ctxt.unresolvedName := ctxt.qualifiedPath.last()
 							ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+							ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+						else
+							//Else if the alias is the first part of the qualifiedPath we are looking for
+							if (not ctxt.qualifiedPath.isEmpty()) then
+								if (use.toName.equals(ctxt.qualifiedPath.first())) then
+									//We now look for a type which the same name and which qualifiedPath is the fromQName
+									ctxt.qualifiedPath := use.fromQName.split("::")
+									ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+								end
+							end
 						end
 					end
-					if (ctxt.qualifiedPath.last.equals("*")) then
-						ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-					end
+					
 					found := not ctxt.foundType.isVoid()
 					i := i + 1
+					ctxt.resetCompleteName(initialUnresolvedName, initialQualifiedPath)
 				end
 			end
 		else
 			ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 		end
 		if (ctxt.foundType.isVoid()) then
-			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType " + initialQualifiedPath + ctxt.unresolvedName
-			
+			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType "
+			initialQualifiedPath.each{s|
+				error := error + s + "::"
+			}
+			error := error + initialUnresolvedName
 			stdio.writeln(error)
-			
+						
 			/*var except : Exception init Exception.new
 			except.message := error
 			raise except*/
@@ -340,7 +359,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
 		if (m.visitedAsModelingUnit.isVoid) then
 			m.visitedAsModelingUnit := true
-		
+			
 			ctxt.currentModelingUnit := m
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(m, ctxt)

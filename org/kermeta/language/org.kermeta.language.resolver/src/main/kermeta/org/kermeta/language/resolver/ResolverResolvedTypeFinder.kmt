@@ -24,7 +24,15 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 		
 		if (ctxt.unresolved.asType(UnresolvedType).generics.size() != c.typeParameter.size()) then
 			var except : Exception init Exception.new
-			except.message := "Resolver: No the same number of parameters in UnresolvedType " + ctxt.unresolved.toString() + " and in ClassDefinition" + c.toString()
+			except.message := "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.unresolved.asType(UnresolvedType).typeIdentifier + "<"
+			ctxt.unresolved.asType(UnresolvedType).generics.each{ g |
+				except.message := except.message + g.toString + " "
+			}
+			except.message := except.message+ "> and in ClassDefinition " + c.name +"<"
+			c.typeParameter.each{ tp |
+				except.message := except.message + tp.toString + " "
+			}
+			except.message := except.message + ">"
 			raise except
 		end
 		var typeParamBinding : TypeVariableBinding
