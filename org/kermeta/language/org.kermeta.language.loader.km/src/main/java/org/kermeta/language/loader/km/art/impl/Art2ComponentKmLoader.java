@@ -74,6 +74,7 @@ public class Art2ComponentKmLoader extends AbstractComponentType implements Port
     
     @Port(name = "KmLoader", method = "load")
     public ModelingUnit load(final String uriKmModel) {
+    	enforceInitPackage();
     	ResourceSet resourceSet 		  = new ResourceSetImpl();
 		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
 		Map<String,Object> m 		= f.getExtensionToFactoryMap();
@@ -88,6 +89,14 @@ public class Art2ComponentKmLoader extends AbstractComponentType implements Port
 		return null;
     }
     
+    protected void enforceInitPackage(){
+    	org.OrgPackage p1 = org.OrgPackage.eINSTANCE;
+    	org.kermeta.KmPackage p2 = org.kermeta.KmPackage.eINSTANCE;
+    	org.kermeta.language.LanguagePackage p3 = org.kermeta.language.LanguagePackage.eINSTANCE;
+    	org.kermeta.language.behavior.BehaviorPackage p4 = org.kermeta.language.behavior.BehaviorPackage.eINSTANCE;
+    	org.kermeta.language.structure.StructurePackage p5 = org.kermeta.language.structure.StructurePackage.eINSTANCE;
+    	
+    }
     
     
     /**
