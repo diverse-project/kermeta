@@ -507,7 +507,7 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueName" eType="#//kermeta/language/structure/String"
-              transient="true"/>
+              derived="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//kermeta/language/structure/MultiplicityElement #//kermeta/language/structure/AbstractProperty">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
