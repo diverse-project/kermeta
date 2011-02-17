@@ -98,8 +98,9 @@ public class K2CompilerMojo extends AbstractMojo {
         /* CHECK IF GENERATION IF OK */
         if (!CheckSumFileUtils.compareCheckSum(model.getAbsolutePath(), output.getAbsolutePath())) {
             Compiler compilo = new fr.irisa.triskell.kermeta.compilo.scala.Compiler();
-            GlobalConfiguration.outputFolder_$eq(output.getAbsolutePath());
-            GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit.generated");
+
+                        GlobalConfiguration.outputFolder_$eq(output.getAbsolutePath());
+            GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."+targetGroupId+"."+targetArtifactId);
             GlobalConfiguration.props_$eq(new Properties());
             GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
             GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
@@ -109,7 +110,7 @@ public class K2CompilerMojo extends AbstractMojo {
             GlobalConfiguration.props().setProperty("project.artefact.id", targetArtifactId);
             //GlobalConfiguration.load(GlobalConfiguration.props());
             GlobalConfiguration.setScalaAspectPrefix(targetGroupId+"."+targetArtifactId);
-
+            
             checkFile(model.getAbsolutePath().toString());
             compilo.compile(model.getAbsolutePath().toString());
             try {
