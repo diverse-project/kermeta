@@ -980,7 +980,7 @@
             <details key="documentation" value="Abstracts the definition of generic type definitions (i.e. type definitions that&#xA;can be parameterized), namely, for ClassDefinition and ModelTypeDefinition."/>
           </eAnnotations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
-              eType="#//kermeta/language/structure/TypeVariable" containment="true">
+              eType="#//kermeta/language/structure/TypeVariable">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Type variables defined for the GenericTypeDefinition"/>
             </eAnnotations>

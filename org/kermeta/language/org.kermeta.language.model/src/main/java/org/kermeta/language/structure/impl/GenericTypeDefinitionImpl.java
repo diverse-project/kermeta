@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -37,7 +38,7 @@ import org.kermeta.language.structure.TypeVariable;
  */
 public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements GenericTypeDefinition {
 	/**
-	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
+	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTypeParameter()
@@ -72,23 +73,9 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 */
 	public EList<TypeVariable> getTypeParameter() {
 		if (typeParameter == null) {
-			typeParameter = new EObjectContainmentEList<TypeVariable>(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
+			typeParameter = new EObjectResolvingEList<TypeVariable>(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 		}
 		return typeParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
-				return ((InternalEList<?>)getTypeParameter()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

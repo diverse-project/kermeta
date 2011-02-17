@@ -31,16 +31,16 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface GenericTypeDefinition extends TypeDefinition {
 	/**
-	 * Returns the value of the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Type Parameter</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.TypeVariable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Type variables defined for the GenericTypeDefinition
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
+	 * @return the value of the '<em>Type Parameter</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();

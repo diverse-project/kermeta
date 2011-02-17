@@ -2160,7 +2160,7 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__TYPE_MAPPINGS = TYPE_DEFINITION__TYPE_MAPPINGS;
 
 	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2260,7 +2260,7 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__TYPE_MAPPINGS = GENERIC_TYPE_DEFINITION__TYPE_MAPPINGS;
 
 	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4945,10 +4945,10 @@ public interface StructurePackage extends EPackage {
 	EClass getGenericTypeDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.GenericTypeDefinition#getTypeParameter <em>Type Parameter</em>}'.
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.GenericTypeDefinition#getTypeParameter <em>Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Parameter</em>'.
+	 * @return the meta object for the reference list '<em>Type Parameter</em>'.
 	 * @see org.kermeta.language.structure.GenericTypeDefinition#getTypeParameter()
 	 * @see #getGenericTypeDefinition()
 	 * @generated
@@ -6325,7 +6325,7 @@ public interface StructurePackage extends EPackage {
 		EClass GENERIC_TYPE_DEFINITION = eINSTANCE.getGenericTypeDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Parameter</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type Parameter</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
