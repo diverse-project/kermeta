@@ -55,7 +55,7 @@ public class PortKmLoaderTestSuite extends TestSuite {
         String[] vfiles;
         try {
             String folderFullURI = PortEcore2KmTestSuite.class.getClassLoader().getResource(folder).toString();
-            folderFullURI =folderFullURI.replace("file:/", "file:///");
+            //folderFullURI =folderFullURI.replace("file:/", "file:///");
             vfiles = Util.getResourceListingFullURI(PortResourceLoaderTestSuite.class, folder);
 
             System.out.println("full URI: " + folderFullURI);
