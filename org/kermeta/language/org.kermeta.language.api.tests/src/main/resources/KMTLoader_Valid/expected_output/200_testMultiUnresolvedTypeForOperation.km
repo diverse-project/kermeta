@@ -3,12 +3,12 @@
   <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_arithm" isAspect="true" isAbstract="false">
     <ownedOperation name="operation1" type="//Test_arithm/operation1/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
-        <usings fromQName="kermeta::standard" toName="standard"/>
+        <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
     </ownedOperation>
     <ownedOperation name="operation2" type="//Test_arithm/operation2/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
-        <usings fromQName="kermeta::standard" toName="standard"/>
+        <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
