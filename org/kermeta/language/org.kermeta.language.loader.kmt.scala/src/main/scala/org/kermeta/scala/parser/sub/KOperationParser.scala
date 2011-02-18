@@ -35,7 +35,15 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
               case None =>
               case Some(ft)=> {
                   var newsuperO = StructureFactory.eINSTANCE.createUnresolvedOperation
-                  newsuperO.setOperationIdentifier(ft)
+                  newsuperO.setOperationIdentifier(opName)
+                  newsuperO.setFromClassName(ft)
+                 // newsuperO.set
+
+                  //UNREaoslveType
+                  //var newsuperOType = StructureFactory.eINSTANCE.createUnresolvedType
+                  //newsuperOType.setTypeIdentifier(ft)
+
+                 // newsuperO.
                   newo.setSuperOperation(newsuperO)
                   newo.getOwnedUnresolvedOperations.add(newsuperO)
               }
