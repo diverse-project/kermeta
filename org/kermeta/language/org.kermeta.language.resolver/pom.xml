@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
+            <version>0.12.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -77,7 +77,7 @@
              <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA6</version>
+                <version>1.4.1-BETA8</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -86,6 +86,8 @@
                         </goals>
                         <configuration>
                             <model>src/generated/km/FullStaticResolver.km</model>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
                         </configuration>
                     </execution>
                 </executions>

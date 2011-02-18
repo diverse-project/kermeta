@@ -42,7 +42,7 @@ import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
 
-import runner.MainRunner;
+import org.kermeta.language.language.resolverrunner.MainRunner;
 
 @Provides({
     @ProvidedPort(name = "KmResolver", className = PortKmResolver.class)
@@ -125,7 +125,7 @@ public class Art2ComponentKmResolver extends AbstractComponentType implements Po
     }
     
     protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
-    	if(! (mu instanceof ScalaAspect.org.kermeta.language.structure.ModelingUnitAspect)){
+    	if(! (mu instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.ModelingUnitAspect)){
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
 	    	Map<String, String> options = null;

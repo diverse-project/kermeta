@@ -16,7 +16,7 @@ import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortKmResolverTestSuite;
 import org.kermeta.language.resolver.art2.impl.Art2ComponentKmResolver;
 
-import runner.MainRunner;
+import org.kermeta.language.language.resolverrunner.MainRunner;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,7 +29,7 @@ public class KmResolverTestSuite extends TestSuite {
 	// @Override
 	public static Test suite() {
 
-		((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
+		((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(org.kermeta.language.language.resolver.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
 		// force to initialize the eInstance (required for correct serialisation
 		XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
 
