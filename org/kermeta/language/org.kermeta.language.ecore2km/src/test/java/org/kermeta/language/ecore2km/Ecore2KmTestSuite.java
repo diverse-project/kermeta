@@ -23,7 +23,7 @@ import org.kermeta.language.api.port.PortEcore2Km;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortEcore2KmTestSuite;
 import org.kermeta.language.ecore2km.art2.impl.Art2ComponentEcore2Km;
-import runner.MainRunner;
+import org.kermeta.language.language.ecore2kmrunner.MainRunner;
 
 /**
  * Test suite for Ecore2Km port
@@ -31,7 +31,7 @@ import runner.MainRunner;
 public class Ecore2KmTestSuite extends TestSuite {
 
     public static Test suite() {
-        ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
+        ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
         // force to initialize the eInstance (required for correct serialisation
     	XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
     	EcoreFactory ef = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE;

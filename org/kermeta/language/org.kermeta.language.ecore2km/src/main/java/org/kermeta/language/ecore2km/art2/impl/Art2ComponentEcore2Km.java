@@ -28,7 +28,7 @@ import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortEcore2Km;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
-import runner.MainRunner;
+import org.kermeta.language.language.ecore2kmrunner.MainRunner;
 import org.eclipse.emf.ecore.EPackage;
 import org.kermeta.language.ecore2km.Ecore2km;
 

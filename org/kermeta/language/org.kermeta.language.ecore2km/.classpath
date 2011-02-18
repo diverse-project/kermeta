@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry kind="src" output="target/classes" path="src/main/kermeta"/>
 	<classpathentry kind="src" output="target/classes" path="target/generated-sources/kermeta"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="target/generated-sources/art2"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
