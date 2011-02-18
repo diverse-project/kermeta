@@ -30,7 +30,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
 	reference resolvedOperationFinder : ResolverResolvedOperationFinder
 
-	operation callTypeFinder(ctxt : StructureVisitorContext) is do	
+	operation callTypeFinder(ctxt : StructureVisitorContext) is do
 		var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
 		var initialUnresolvedName : String init ctxt.unresolvedName
 	
@@ -44,7 +44,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
 				var i : Integer init 0
 				var use : Using
-				from var found : Boolean init not ctxt.foundType.isVoid()
+				var found : Boolean init not ctxt.foundType.isVoid()
+				from found				
 				until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
 				loop
 					use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
@@ -89,6 +90,11 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				error := error + s + "::"
 			}
 			error := error + initialUnresolvedName
+			error := error + " (in " + ctxt.currentPackage.getQualifiedName()
+			ctxt.unresolved.asType(UnresolvedType).usings.each{u|
+				error := error + ", " + u.fromQName
+			}
+			error := error + ")"
 			stdio.writeln(error)
 						
 			/*var except : Exception init Exception.new

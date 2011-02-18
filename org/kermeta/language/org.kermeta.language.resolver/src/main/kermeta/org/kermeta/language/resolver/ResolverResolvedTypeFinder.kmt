@@ -56,7 +56,7 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 		ctxt.foundType := m
 	end
 	
-	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is	do		
+	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is	do
 		ctxt.foundType := p
 	end
 	
@@ -84,9 +84,14 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 		var typeDef : TypeDefinition
 		//If there is no qualified path we are looking only in this package
 		if ctxt.qualifiedPath.isEmpty() then
+			//If p contains a TypeDefinition which name is the unresolvedName
 			typeDef := p.ownedTypeDefinition.detect{t|
-				t.name.equals(ctxt.unresolvedName)
+				t.name.equals(ctxt.unresolvedName)				
 			}
+			//We found the good TypeDefinition
+			if not typeDef.isVoid then
+				typeDef.accept(self, ctxt)
+			end
 		//Else we search also in the nested packages
 		else
 			//If the last identifier of the qualified path is the name of the UnresolvedType we are looking for and if p contains a TypeDefinition with this name
