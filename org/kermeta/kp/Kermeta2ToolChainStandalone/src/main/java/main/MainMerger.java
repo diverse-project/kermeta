@@ -8,7 +8,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.structure.ModelingUnit;
 
-import binaryMergerrunner.MainRunner;
+import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 
 public class MainMerger {
 	
@@ -25,7 +25,7 @@ public class MainMerger {
 		modelingunit = new ArrayList<ModelingUnit>();
 		modelingunit_ser = new ArrayList<ByteArrayOutputStream>();
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
-				.setWrap(binaryMerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
+				.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
 		loadMethod = new LoadMethod();
 		ecore2kmrunner.MainRunner.init();
 	}

@@ -28,6 +28,7 @@ public class CustomRunner {
 		
 		// Parse framework and test File
 		List<String> uris = new ArrayList<String>();
+		//uris.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.api.tests/src/main/resources/KMTLoader_Valid/300_testHelloWorld_standalone.kmt");
 		uris
 				.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.loader.kmt.scala/test.kmt");
 		uris
@@ -42,7 +43,7 @@ public class CustomRunner {
 				.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.library.core/src/main/kmt/kermeta/utils/hashtable.kmt");
 
 		uris
-				.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/Kermeta2ToolChainStandalone/model/My.ecore");
+				.add("C:/Users/dvojtise/workspaces/kermetaV2_svn_3/Kermeta2ToolChainStandalone/model/My.ecore");				
 		// use global main
 		m.k2Compile(uris, null, null);
 		

@@ -21,7 +21,7 @@ import org.kermeta.scala.parser.KParser;
 import scala.Option;
 import scala.collection.Iterator;
 import scala.io.Source;
-import binaryMergerrunner.MainRunner;
+import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 
@@ -41,7 +41,7 @@ public class Main {
 		modelingunit = new ArrayList<ModelingUnit>();
 		modelingunit_ser = new ArrayList<ByteArrayOutputStream>();
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
-				.setWrap(binaryMerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
+				.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
 		ecore2kmrunner.MainRunner.init();
 	}
 
