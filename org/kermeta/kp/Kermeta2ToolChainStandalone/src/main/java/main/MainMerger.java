@@ -27,7 +27,7 @@ public class MainMerger {
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
 				.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
 		loadMethod = new LoadMethod();
-		ecore2kmrunner.MainRunner.init();
+		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 	}
 	
 	public ModelingUnit k2CompileMerger(List<String> urls, List<String> jars_uri,

@@ -25,7 +25,7 @@ public class MainLoadUnit {
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
 				.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
 		loadMethod = new LoadMethod();
-		ecore2kmrunner.MainRunner.init();
+		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 	}
 	
 	
@@ -41,7 +41,7 @@ public class MainLoadUnit {
 				}
 			}else if (uri.endsWith(".ecore")) {
 				System.out.println("load ecore");
-				ecore2kmrunner.MainRunner.init4eclipse();
+				org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
 				System.out.println(StructurePackage.eINSTANCE.getEFactoryInstance());
 				ModelingUnit mu = loadMethod.loadEcore(uri);
 				if (mu != null) {

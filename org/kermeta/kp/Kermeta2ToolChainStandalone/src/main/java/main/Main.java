@@ -41,8 +41,8 @@ public class Main {
 		modelingunit = new ArrayList<ModelingUnit>();
 		modelingunit_ser = new ArrayList<ByteArrayOutputStream>();
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
-				.setWrap(org.kermeta.language.language.merger.binarymerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);
-		ecore2kmrunner.MainRunner.init();
+				.setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.RichFactory$.MODULE$);
+		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 	}
 
 	public void k2Compile(List<String> urls, List<String> jars_uri,
@@ -56,14 +56,15 @@ public class Main {
 					this.modelingunit.add(mu);
 				}
 			}else if (uri.endsWith(".ecore")) {
-				System.out.println("load ecore");
-				ecore2kmrunner.MainRunner.init4eclipse();
+				System.out.println("loading ecore");
+				org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
 				System.out.println(StructurePackage.eINSTANCE.getEFactoryInstance());
 				ModelingUnit mu = this.loadEcore(uri);
 				if (mu != null) {
 					
 					this.modelingunit.add(mu);
 				}
+				System.out.println("ecore loaded");
 			}else if (uri.endsWith(".km")) {
 				ModelingUnit mu = this.loadKM(uri);
 				if (mu != null) {
@@ -104,7 +105,7 @@ public class Main {
 
 		// Convert Resulting Modellingunit For TypeSetter
 		mergedMU_ser = this.saveMu(mergedMU);
-		typeSetterrunner.MainRunner.init4eclipse();
+		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		mergedMU = this.LoadMu(mergedMU_ser);
 		// End of Convert Resulting Modellingunit For TypeSetter
 		
