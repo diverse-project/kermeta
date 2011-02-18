@@ -7,12 +7,22 @@
  */
 package org::kermeta::language::resolver;
 
+//Kermeta metamodel
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+//Visitor of org::kermeta::language::structure
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+//Aspect of org::kermeta::language::structure elements to get their qualified name
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+//Aspect of StructureVisitor for the Resolver
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+//Aspects of Unresolveds to store the Resolved found by the Resolver
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedOperation_Aspect_CorrespondingResolvedOperation.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedProperty_Aspect_CorrespondingResolvedProperty.kmt"
+//Aspect to prevent the Resolver from visiting several time the same object
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverVisitedAs_Aspect.kmt"
+//Resolved finders
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedTypeFinder.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedPropertyFinder.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
@@ -29,132 +39,188 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference resolvedTypeFinder : ResolverResolvedTypeFinder
 	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
 	reference resolvedOperationFinder : ResolverResolvedOperationFinder
+	
+	reference unresolvedTypesToBeRemoved : Collection<UnresolvedType>
+	
+	/*
+	* ResolvedFinders call operations
+	*/
 
 	operation callTypeFinder(ctxt : StructureVisitorContext) is do
-		var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
-		var initialUnresolvedName : String init ctxt.unresolvedName
-	
-		if (resolvedTypeFinder.isVoid()) then
-			resolvedTypeFinder := ResolverResolvedTypeFinder.new
-		end
+		if (ctxt.unresolved.asType(UnresolvedType).correspondingType.isVoid()) then
+			var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
+			var initialUnresolvedName : String init ctxt.unresolvedName
 		
-		if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-			ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
+			if (resolvedTypeFinder.isVoid()) then
+				resolvedTypeFinder := ResolverResolvedTypeFinder.new
+			end
+			/*
+			//If the type we are looking for is in an operation, it can be a typeParameter
+			if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Operation)) then
+				//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+				ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).typeParameter.detect{t|
+					t.name.equals(ctxt.unresolvedName)
+				}
+				if (ctxt.foundType.isVoid()) then
+					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+						t.name.equals(ctxt.unresolvedName)
+					}
+				end
+			end
 			
-			if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
-				var i : Integer init 0
-				var use : Using
-				var found : Boolean init not ctxt.foundType.isVoid()
-				from found				
-				until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
-				loop
-					use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
-					//If the using does not define an alias
-					if (use.toName.isVoid() or use.toName == "") then
-						//We now look for a type which the same name and which qualifiedPath is the fromQName
-						ctxt.qualifiedPath := use.fromQName.split("::")
-						ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)						
-					else
-						//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
-						//If the alias is name of the type we are looking for
-						if (use.toName.equals(initialUnresolvedName)) then
-							//We now look for a type which name is the last part of the fromQName and which qualifiedPath is the rest of the fromQName
-							ctxt.qualifiedPath := use.fromQName.split("::")
-							ctxt.unresolvedName := ctxt.qualifiedPath.last()
-							ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-							ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
-						else
-							//Else if the alias is the first part of the qualifiedPath we are looking for
-							if (not ctxt.qualifiedPath.isEmpty()) then
-								if (use.toName.equals(ctxt.qualifiedPath.first())) then
-									//We now look for a type which the same name and which qualifiedPath is the fromQName
+			//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
+			if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(ClassDefinition)) then
+				var typeVar : TypeVariable
+				//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+				typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(ClassDefinition).typeParameter.detect{t|
+					t.name.equals(ctxt.unresolvedName)
+				}
+				ctxt.foundType := typeVar
+			end
+			*/
+			if (ctxt.foundType.isVoid()) then
+				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
+					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
+					
+					if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
+						var i : Integer init 0
+						var use : Using
+						var found : Boolean init not ctxt.foundType.isVoid()
+						from found				
+						until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
+						loop
+							use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
+							//If the using does not define an alias
+							if (use.toName.isVoid() or use.toName == "") then
+								//We now look for a type which the same name and which qualifiedPath is the fromQName
+								ctxt.qualifiedPath := use.fromQName.split("::")
+								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)						
+							else
+								//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
+								//If the alias is name of the type we are looking for
+								if (use.toName.equals(initialUnresolvedName)) then
+									//We now look for a type which name is the last part of the fromQName and which qualifiedPath is the rest of the fromQName
 									ctxt.qualifiedPath := use.fromQName.split("::")
+									ctxt.unresolvedName := ctxt.qualifiedPath.last()
 									ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
 									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+								else
+									//Else if the alias is the first part of the qualifiedPath we are looking for
+									if (not ctxt.qualifiedPath.isEmpty()) then
+										if (use.toName.equals(ctxt.qualifiedPath.first())) then
+											//We now look for a type which the same name and which qualifiedPath is the fromQName
+											ctxt.qualifiedPath := use.fromQName.split("::")
+											ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+										end
+									end
 								end
 							end
+							
+							found := not ctxt.foundType.isVoid()
+							i := i + 1
+							ctxt.resetCompleteName(initialUnresolvedName, initialQualifiedPath)
 						end
 					end
-					
-					found := not ctxt.foundType.isVoid()
-					i := i + 1
-					ctxt.resetCompleteName(initialUnresolvedName, initialQualifiedPath)
+				else
+					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
+				end
+	
+				if (ctxt.foundType.isVoid()) then
+					var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType "
+					initialQualifiedPath.each{s|
+						error := error + s + "::"
+					}
+					error := error + initialUnresolvedName
+					error := error + " (in packages : " + ctxt.currentPackage.getQualifiedName()
+					ctxt.unresolved.asType(UnresolvedType).usings.each{u|
+						error := error + ", " + u.fromQName
+					}
+					error := error + ")"
+					stdio.writeln(error)
+								
+					/*var except : Exception init Exception.new
+					except.message := error
+					raise except*/
+				else
+					ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 				end
 			end
 		else
-			ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
-		end
-		if (ctxt.foundType.isVoid()) then
-			var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType "
-			initialQualifiedPath.each{s|
-				error := error + s + "::"
-			}
-			error := error + initialUnresolvedName
-			error := error + " (in " + ctxt.currentPackage.getQualifiedName()
-			ctxt.unresolved.asType(UnresolvedType).usings.each{u|
-				error := error + ", " + u.fromQName
-			}
-			error := error + ")"
-			stdio.writeln(error)
-						
-			/*var except : Exception init Exception.new
-			except.message := error
-			raise except*/
+			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
 		end
 		ctxt.reset()
 	end
 	
 	operation callPropertyFinder(ctxt : StructureVisitorContext) is do
-		if (resolvedPropertyFinder.isVoid()) then
-			resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
-		end
-		if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-			ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt)
+		if (ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty.isVoid()) then
+			if (resolvedPropertyFinder.isVoid()) then
+				resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
+			end
+			if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
+				ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt)
+			else
+				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
+			end
+			if (ctxt.foundType.isVoid()) then
+				var qualifiedPath : String init ""
+				ctxt.qualifiedPath.each{s|
+					qualifiedPath := qualifiedPath + s + "::"
+				}
+				
+				var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + qualifiedPath + ctxt.unresolvedName
+				
+				stdio.writeln(error)
+				
+				/*var except : Exception init Exception.new
+				except.message := error
+				raise except*/
+			else
+				ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty := ctxt.foundProperty
+			end
 		else
-			ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
-		end
-		if (ctxt.foundType.isVoid()) then
-			var qualifiedPath : String init ""
-			ctxt.qualifiedPath.each{s|
-				qualifiedPath := qualifiedPath + s + "::"
-			}
-			
-			var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + qualifiedPath + ctxt.unresolvedName
-			
-			stdio.writeln(error)
-			
-			/*var except : Exception init Exception.new
-			except.message := error
-			raise except*/
+			ctxt.foundProperty := ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty
 		end
 		ctxt.reset()
 	end
 	
 	operation callOperationFinder(ctxt : StructureVisitorContext) is do
-		if (resolvedOperationFinder.isVoid()) then
-			resolvedOperationFinder := ResolverResolvedOperationFinder.new
-		end
-		if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-			ctxt.currentPackage.accept(resolvedOperationFinder, ctxt)
+		if (ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
+			if (resolvedOperationFinder.isVoid()) then
+				resolvedOperationFinder := ResolverResolvedOperationFinder.new
+			end
+			if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
+				ctxt.currentPackage.accept(resolvedOperationFinder, ctxt)
+			else
+				ctxt.currentModelingUnit.accept(resolvedOperationFinder, ctxt)
+			end
+			if (ctxt.foundType.isVoid()) then
+				var qualifiedPath : String init ""
+				ctxt.qualifiedPath.each{s|
+					qualifiedPath := qualifiedPath + s + "::"
+				}
+				
+				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + qualifiedPath + ctxt.unresolvedName
+				
+				stdio.writeln(error)
+				
+				/*var except : Exception init Exception.new
+				except.message := error
+				raise except*/
+			else
+				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation
+			end
 		else
-			ctxt.currentModelingUnit.accept(resolvedOperationFinder, ctxt)
-		end
-		if (ctxt.foundType.isVoid()) then
-			var qualifiedPath : String init ""
-			ctxt.qualifiedPath.each{s|
-				qualifiedPath := qualifiedPath + s + "::"
-			}
-			
-			var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + qualifiedPath + ctxt.unresolvedName
-			
-			stdio.writeln(error)
-			
-			/*var except : Exception init Exception.new
-			except.message := error
-			raise except*/
+			ctxt.foundOperation := ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation
 		end
 		ctxt.reset()
 	end
+
+
+	/*
+	* Visit methods
+	*/
 
 	method visitClass(c : Class, ctxt : StructureVisitorContext) is do
 		if (c.visitedAsClass.isVoid) then
@@ -366,6 +432,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (m.visitedAsModelingUnit.isVoid) then
 			m.visitedAsModelingUnit := true
 			
+			unresolvedTypesToBeRemoved := Set<UnresolvedType>.new
+			
 			ctxt.currentModelingUnit := m
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(m, ctxt)
@@ -374,6 +442,15 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			m.packages.each{p|
 				p.accept(self, ctxt)
 			}
+			
+			//When we have visited all the elements of the modeling unit, for each UnresolvedType which has been resolved
+			unresolvedTypesToBeRemoved.each{u|
+				//We add the corresponding resolved type to the typeContainer of u
+				u.typeContainer.containedType.add(u.correspondingType)
+				//And we remove u
+				u.typeContainer.containedType.remove(u)
+			}
+			
 		end
 	end
 	
@@ -633,7 +710,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			
 			//Visiting types and handling Unresolved
 			var typesToBeAdded : Collection<Type> init Set<Type>.new
-			var typesToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
 			var foundType : Type
 			t.containedType.each{t|
 				if (isVisitable(t)) then
@@ -642,14 +718,11 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						callTypeFinder(ctxt)
 						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
-							typesToBeRemoved.add(t.asType(UnresolvedType))
+							unresolvedTypesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
 						end
 					end
 				end
-			}
-			typesToBeRemoved.each{tbr|
-				t.containedType.remove(tbr)
 			}
 			typesToBeAdded.each{tba|
 				t.containedType.add(tba)

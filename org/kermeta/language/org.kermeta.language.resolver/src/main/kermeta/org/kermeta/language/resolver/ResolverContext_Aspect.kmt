@@ -10,6 +10,7 @@ package language::helpers::structure;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
 
 using org::kermeta::language::structure
 using language::helpers::structure
@@ -78,7 +79,7 @@ aspect class StructureVisitorContext {
 		unresolvedName := void
 		resetCompleteName("", Sequence<String>.new)
 	end
-	
+		
 	operation resetCompleteName(n : String, q : Sequence<String>) : Void is do
 		unresolvedName := n
 		qualifiedPath := q
