@@ -3501,13 +3501,22 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = ABSTRACT_OPERATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>From Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_OPERATION__FROM_CLASS_NAME = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Unresolved Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
+	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.
@@ -5293,6 +5302,17 @@ public interface StructurePackage extends EPackage {
 	EAttribute getUnresolvedOperation_OperationIdentifier();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.UnresolvedOperation#getFromClassName <em>From Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>From Class Name</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedOperation#getFromClassName()
+	 * @see #getUnresolvedOperation()
+	 * @generated
+	 */
+	EAttribute getUnresolvedOperation_FromClassName();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Using <em>Using</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6617,6 +6637,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = eINSTANCE.getUnresolvedOperation_OperationIdentifier();
+
+		/**
+		 * The meta object literal for the '<em><b>From Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNRESOLVED_OPERATION__FROM_CLASS_NAME = eINSTANCE.getUnresolvedOperation_FromClassName();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.

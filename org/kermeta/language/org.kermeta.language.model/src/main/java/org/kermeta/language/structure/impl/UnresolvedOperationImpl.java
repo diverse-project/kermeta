@@ -23,6 +23,7 @@ import org.kermeta.language.structure.UnresolvedOperation;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedOperationImpl#getOperationIdentifier <em>Operation Identifier</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.UnresolvedOperationImpl#getFromClassName <em>From Class Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +49,26 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 	 * @ordered
 	 */
 	protected String operationIdentifier = OPERATION_IDENTIFIER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFromClassName() <em>From Class Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFromClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FROM_CLASS_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFromClassName() <em>From Class Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFromClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String fromClassName = FROM_CLASS_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,11 +115,34 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFromClassName() {
+		return fromClassName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFromClassName(String newFromClassName) {
+		String oldFromClassName = fromClassName;
+		fromClassName = newFromClassName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.UNRESOLVED_OPERATION__FROM_CLASS_NAME, oldFromClassName, fromClassName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				return getOperationIdentifier();
+			case StructurePackage.UNRESOLVED_OPERATION__FROM_CLASS_NAME:
+				return getFromClassName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,6 +157,9 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 		switch (featureID) {
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				setOperationIdentifier((String)newValue);
+				return;
+			case StructurePackage.UNRESOLVED_OPERATION__FROM_CLASS_NAME:
+				setFromClassName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,6 +176,9 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				setOperationIdentifier(OPERATION_IDENTIFIER_EDEFAULT);
 				return;
+			case StructurePackage.UNRESOLVED_OPERATION__FROM_CLASS_NAME:
+				setFromClassName(FROM_CLASS_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +193,8 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 		switch (featureID) {
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				return OPERATION_IDENTIFIER_EDEFAULT == null ? operationIdentifier != null : !OPERATION_IDENTIFIER_EDEFAULT.equals(operationIdentifier);
+			case StructurePackage.UNRESOLVED_OPERATION__FROM_CLASS_NAME:
+				return FROM_CLASS_NAME_EDEFAULT == null ? fromClassName != null : !FROM_CLASS_NAME_EDEFAULT.equals(fromClassName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,6 +211,8 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (operationIdentifier: ");
 		result.append(operationIdentifier);
+		result.append(", fromClassName: ");
+		result.append(fromClassName);
 		result.append(')');
 		return result.toString();
 	}

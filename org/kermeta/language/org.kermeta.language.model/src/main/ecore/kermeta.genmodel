@@ -320,6 +320,7 @@
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedOperation">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedOperation/operationIdentifier"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedOperation/fromClassName"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Using">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Using/fromQName"/>

@@ -1674,6 +1674,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getUnresolvedOperation_FromClassName() {
+		return (EAttribute)unresolvedOperationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUsing() {
 		return usingEClass;
 	}
@@ -2035,6 +2044,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		unresolvedOperationEClass = createEClass(UNRESOLVED_OPERATION);
 		createEAttribute(unresolvedOperationEClass, UNRESOLVED_OPERATION__OPERATION_IDENTIFIER);
+		createEAttribute(unresolvedOperationEClass, UNRESOLVED_OPERATION__FROM_CLASS_NAME);
 
 		usingEClass = createEClass(USING);
 		createEAttribute(usingEClass, USING__FROM_QNAME);
@@ -2336,6 +2346,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(unresolvedOperationEClass, UnresolvedOperation.class, "UnresolvedOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnresolvedOperation_OperationIdentifier(), this.getString(), "operationIdentifier", null, 0, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedOperation_FromClassName(), this.getString(), "fromClassName", null, 0, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(usingEClass, Using.class, "Using", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUsing_FromQName(), this.getString(), "fromQName", null, 1, 1, Using.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

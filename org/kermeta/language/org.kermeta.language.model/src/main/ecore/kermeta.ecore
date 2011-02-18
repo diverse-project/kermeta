@@ -1146,6 +1146,7 @@
               <details key="documentation" value="String that identifies the Operation.&#xD;&#xA;The container of the UnresolvedOperation  is considered as the context."/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromClassName" eType="#//kermeta/language/structure/String"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Using" eSuperTypes="#//kermeta/language/structure/Object">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
