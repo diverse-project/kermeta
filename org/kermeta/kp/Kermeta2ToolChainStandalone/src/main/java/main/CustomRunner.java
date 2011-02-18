@@ -22,9 +22,9 @@ public class CustomRunner {
 
 		Main m = new Main();
 		
-		MainLoadUnit mainLoad = new MainLoadUnit();
+		/*MainLoadUnit mainLoad = new MainLoadUnit();
 		MainMerger mainMerger = new MainMerger();
-		MainTypeSetter mainTypeSetter = new MainTypeSetter();
+		MainTypeSetter mainTypeSetter = new MainTypeSetter(); */
 		
 		// Parse framework and test File
 		List<String> uris = new ArrayList<String>();
