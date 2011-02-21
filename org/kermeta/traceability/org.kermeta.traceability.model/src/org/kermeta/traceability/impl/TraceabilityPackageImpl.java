@@ -7,23 +7,20 @@
 package org.kermeta.traceability.impl;
 
 import java.util.Date;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.kermeta.traceability.FileReference;
-import org.kermeta.traceability.Message;
 import org.kermeta.traceability.ModelReference;
 import org.kermeta.traceability.QualifiedNameReference;
 import org.kermeta.traceability.Reference;
 import org.kermeta.traceability.TextReference;
 import org.kermeta.traceability.Trace;
 import org.kermeta.traceability.TracePackage;
-import org.kermeta.traceability.TraceModel;
 import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
 import org.kermeta.traceability.Traceable;
@@ -584,7 +581,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		initEClass(qualifiedNameReferenceEClass, QualifiedNameReference.class, "QualifiedNameReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQualifiedNameReference_QualifiedName(), this.getString(), "qualifiedName", null, 1, 1, QualifiedNameReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(traceableEClass, Traceable.class, "Traceable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(traceableEClass, Traceable.class, "Traceable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceable_Target(), this.getTrace(), this.getTrace_SourceElem(), "target", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTraceable_Source(), this.getTrace(), this.getTrace_TargetElem(), "source", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -726,7 +723,7 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		  (textReferenceEClass, 
 		   source, 
 		   new String[] {
-			 "validTextRef", "do\n\tlineEndAt.isGreater(lineBeginAt).~or(lineBeginAt.equals(lineEndAt).~and(charEndAt.isGreaterOrEqual(charBeginAt)))\nend"
+			 "validTextRef", "do\r\n\tcharEndOffset.isGreaterOrEqual(charBeginOffset)\r\nend"
 		   });					
 	}
 

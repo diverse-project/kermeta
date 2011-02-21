@@ -39,7 +39,7 @@ import org.kermeta.traceability.Traceable;
  *
  * @generated
  */
-public class TraceableImpl extends EObjectImpl implements Traceable {
+public abstract class TraceableImpl extends EObjectImpl implements Traceable {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

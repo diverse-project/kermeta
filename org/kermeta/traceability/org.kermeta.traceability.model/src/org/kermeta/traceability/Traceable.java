@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.kermeta.traceability.TraceabilityPackage#getTraceable()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Traceable extends EObject {

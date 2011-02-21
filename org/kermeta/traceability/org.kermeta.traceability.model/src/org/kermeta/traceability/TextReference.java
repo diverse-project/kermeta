@@ -22,7 +22,7 @@ package org.kermeta.traceability;
  *
  * @see org.kermeta.traceability.TraceabilityPackage#getTextReference()
  * @model annotation="kermeta documentation='/**\r\n * This class represents a reference to a textual file concrete object\r\n \052/'"
- *        annotation="kermeta.inv validTextRef='do\n\tlineEndAt.isGreater(lineBeginAt).~or(lineBeginAt.equals(lineEndAt).~and(charEndAt.isGreaterOrEqual(charBeginAt)))\nend'"
+ *        annotation="kermeta.inv validTextRef='do\r\n\tcharEndOffset.isGreaterOrEqual(charBeginOffset)\r\nend'"
  * @generated
  */
 public interface TextReference extends FileReference {

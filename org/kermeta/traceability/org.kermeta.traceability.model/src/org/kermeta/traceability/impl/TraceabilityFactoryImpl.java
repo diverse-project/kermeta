@@ -68,7 +68,6 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 			case TraceabilityPackage.XML_REFERENCE: return createXMLReference();
 			case TraceabilityPackage.MODEL_REFERENCE: return createModelReference();
 			case TraceabilityPackage.QUALIFIED_NAME_REFERENCE: return createQualifiedNameReference();
-			case TraceabilityPackage.TRACEABLE: return createTraceable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -174,16 +173,6 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	public QualifiedNameReference createQualifiedNameReference() {
 		QualifiedNameReferenceImpl qualifiedNameReference = new QualifiedNameReferenceImpl();
 		return qualifiedNameReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Traceable createTraceable() {
-		TraceableImpl traceable = new TraceableImpl();
-		return traceable;
 	}
 
 	/**
