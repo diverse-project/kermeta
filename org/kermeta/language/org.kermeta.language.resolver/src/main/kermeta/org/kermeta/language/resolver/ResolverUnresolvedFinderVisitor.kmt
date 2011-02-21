@@ -54,31 +54,69 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			if (resolvedTypeFinder.isVoid()) then
 				resolvedTypeFinder := ResolverResolvedTypeFinder.new
 			end
-			/*
-			//If the type we are looking for is in an operation, it can be a typeParameter
-			if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Operation)) then
-				//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).typeParameter.detect{t|
-					t.name.equals(ctxt.unresolvedName)
-				}
-				if (ctxt.foundType.isVoid()) then
-					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+			
+			if (not ctxt.unresolved.asType(UnresolvedType).typeContainer.isVoid()) then
+				//If the type we are looking for is in a parameter, it can be a typeParameter
+				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Parameter)) then			
+					//If the Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(Operation).typeParameter.detect{t|
 						t.name.equals(ctxt.unresolvedName)
 					}
+					if (ctxt.foundType.isVoid()) then
+						//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+						ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+							t.name.equals(ctxt.unresolvedName)
+						}
+					end
 				end
+				
+				//If the type we are looking for is in an operation, it can be a typeParameter
+				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Operation)) then			
+					//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).typeParameter.detect{t|
+						t.name.equals(ctxt.unresolvedName)
+					}
+					if (ctxt.foundType.isVoid()) then
+						//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+						ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+							t.name.equals(ctxt.unresolvedName)
+						}
+					end
+				end
+				
+				//If the type we are looking for is contained by a Property, it can be a typeParameter
+				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Property)) then
+					var typeVar : TypeVariable
+					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+					typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(ClassDefinition).typeParameter.detect{t|
+						t.name.equals(ctxt.unresolvedName)
+					}
+					ctxt.foundType := typeVar
+				end
+				
+				//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
+				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(ClassDefinition)) then
+					var typeVar : TypeVariable
+					//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+					typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(ClassDefinition).typeParameter.detect{t|
+						t.name.equals(ctxt.unresolvedName)
+					}
+					ctxt.foundType := typeVar
+				end
+			else
+				var error : String init "Resolver: UnresolvedType "
+					initialQualifiedPath.each{s|
+						error := error + s + "::"
+					}
+					error := error + initialUnresolvedName
+					error := error + " has no TypeContainer"
+					stdio.writeln(error)
+					
+					/*var except : Exception init Exception.new
+					except.message := error
+					raise except*/
 			end
 			
-			//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
-			if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(ClassDefinition)) then
-				var typeVar : TypeVariable
-				//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(ClassDefinition).typeParameter.detect{t|
-					t.name.equals(ctxt.unresolvedName)
-				}
-				ctxt.foundType := typeVar
-			end
-			*/
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
 					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
@@ -187,12 +225,22 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	
 	operation callOperationFinder(ctxt : StructureVisitorContext) is do
 		if (ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
+			//If the resolvedOperationFinder is not yet implemented
 			if (resolvedOperationFinder.isVoid()) then
+				//Implement it
 				resolvedOperationFinder := ResolverResolvedOperationFinder.new
 			end
-			if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
+			
+			//
+			if (not ctxt.unresolved.asType(UnresolvedOperation).fromClassName.isVoid() and not (ctxt.unresolved.asType(UnresolvedOperation).fromClassName == "")) then
+				ctxt.qualifiedPath.add(ctxt.unresolved.asType(UnresolvedOperation).fromClassName)
+			end
+			//If the only element of the QualifiedPath is the fromClassName or if the QualifiedPath is empty and if we are in a package
+			if ((ctxt.qualifiedPath.isEmpty() or ctxt.qualifiedPath.first == ctxt.unresolved.asType(UnresolvedOperation).fromClassName) and not ctxt.currentPackage.isVoid()) then
+				//We look for the Operation in the currentPackage
 				ctxt.currentPackage.accept(resolvedOperationFinder, ctxt)
 			else
+				//We look for the Operation in the currentModelingUnit
 				ctxt.currentModelingUnit.accept(resolvedOperationFinder, ctxt)
 			end
 			if (ctxt.foundType.isVoid()) then
@@ -202,6 +250,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				}
 				
 				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + qualifiedPath + ctxt.unresolvedName
+				if (not ctxt.unresolved.asType(UnresolvedOperation).fromClassName.isVoid() and not (ctxt.unresolved.asType(UnresolvedOperation).fromClassName == "")) then
+					error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).fromClassName
+				end
 				
 				stdio.writeln(error)
 				
@@ -709,7 +760,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			t.visitedAsTypeContainer := true
 			
 			//Visiting types and handling Unresolved
-			var typesToBeAdded : Collection<Type> init Set<Type>.new
+			var typesToVisit : Collection<Type> init Set<Type>.new
 			var foundType : Type
 			t.containedType.each{t|
 				if (isVisitable(t)) then
@@ -719,13 +770,12 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							unresolvedTypesToBeRemoved.add(t.asType(UnresolvedType))
-							typesToBeAdded.add(foundType)
+							typesToVisit.add(foundType)
 						end
 					end
 				end
 			}
-			typesToBeAdded.each{tba|
-				t.containedType.add(tba)
+			typesToVisit.each{tba|
 				tba.accept(self, ctxt)
 			}
 		end
