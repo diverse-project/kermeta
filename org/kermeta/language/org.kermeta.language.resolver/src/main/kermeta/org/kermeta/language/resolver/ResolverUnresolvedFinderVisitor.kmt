@@ -103,13 +103,13 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					}
 					ctxt.foundType := typeVar
 				end
-			else
+			else			
 				var error : String init "Resolver: UnresolvedType "
 					initialQualifiedPath.each{s|
 						error := error + s + "::"
 					}
 					error := error + initialUnresolvedName
-					error := error + " has no TypeContainer"
+					error := error + " has no TypeContainer, but is contained by " + ctxt.unresolved.asType(UnresolvedType).container.toString()
 					stdio.writeln(error)
 					
 					/*var except : Exception init Exception.new
