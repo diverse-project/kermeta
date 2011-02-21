@@ -1,0 +1,152 @@
+@uri "http://www.kermeta.org/Traceability/2.0.0"
+package traceability;
+
+require "kermeta"
+//require "http://www.eclipse.org/emf/2002/Ecore"
+using kermeta::standard
+using kermeta::language::structure
+/**
+ * This class represents a trace model.
+ * This is a set of traces, references and messages.
+ */
+class TracePackage
+{
+	/** Set of references to the traced objects of the trace model */
+	attribute references : set Reference[0..*]#traceMdl
+
+	attribute subpackage : TracePackage[0..*]
+
+	attribute contexts : Object[0..*]
+
+}
+/**
+ * This class represents a trace element
+ */
+class Trace
+{
+	reference sourceElem : Traceable#target
+
+	reference targetElem : Traceable#source
+
+	reference context : Object
+
+}
+/**
+ * This abstract class represents a reference to a concrete object
+ */
+abstract class Reference inherits Traceable
+{
+	/** Link to the containing trace model */
+	reference traceMdl : TracePackage[1..1]#references
+
+}
+/**
+ * This class represents a reference to a concrete object contained by a file
+ */
+abstract class FileReference inherits Reference
+{
+	/** URI of the file containing the referred concrete object */
+	attribute fileURI : String[1..1]
+
+	attribute timeStamp : Date
+
+}
+alias String : kermeta::standard::String;
+alias Date : kermeta::language::structure::Object;
+/**
+ * This class represents a reference to a textual file concrete object
+ */
+class TextReference inherits FileReference
+{
+	inv validTextRef is
+		do
+			(charEndOffset) >= (charBeginOffset)
+		end
+	/** Starting line number */
+	attribute charBeginOffset : Integer[1..1]
+
+	/** Starting character number */
+	attribute charEndOffset : Integer[1..1]
+
+}
+alias Integer : kermeta::standard::Integer;
+/**
+ * This class represents a reference to a XML concrete object
+ */
+class XMLReference inherits FileReference
+{
+	/** XML link to the referred XML concrete object */
+	attribute xPointer : String[1..1]
+
+}
+/**
+ * This class represents a reference to a model element
+ */
+class ModelReference inherits Reference
+{
+	reference refObject : Object[1..1]
+
+}
+alias Object : kermeta::standard::Object;
+class QualifiedNameReference inherits Reference
+{
+	attribute qualifiedName : String[1..1]
+
+}
+abstract class Traceable
+{
+	attribute target : Trace[0..*]#sourceElem
+
+	reference source : Trace[0..*]#targetElem
+
+	operation addTarget( context : Object , targetElem : Traceable) : Void is do 
+		var targetTrace : Trace init Trace.new
+		targetTrace.sourceElem:=self
+		targetTrace.targetElem:=targetElem
+		targetTrace.context:=context
+	end
+	
+	operation resolveAll() : Sequence<Traceable>  is do
+		result:=target.collect{x|x.targetElem}
+	end
+	
+	
+	operation resolveOne(t:Class) : Traceable is do
+		
+		from var i : Integer init 0
+			until target.size() <= i
+				loop
+		
+    			if target.elementAt(i).targetElem.isKindOf(t) then 
+    	
+    				result:=target.elementAt(i).targetElem
+    				i:=target.size()
+    			end
+    			i:=i+1
+			end
+	end
+	
+	
+	operation resolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=target.select{trace|trace.context.equals(aContext)}.collect{x|x.targetElem}
+	end
+	operation invResolveAll() : Sequence<Traceable>  is do
+		result:=source.collect{x|x.sourceElem}
+	end
+	
+	
+	operation invResolveOne(t:Class) : Traceable is do
+		from var i : Integer init 0
+			until source.size() == i
+				loop
+    			if source.elementAt(i).sourceElem.isKindOf(t) then 
+    				result:=source.elementAt(i).sourceElem
+    				end
+			end
+	end
+	
+	operation invResolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=source.select{trace|trace.context.equals(aContext)}.collect{x|x.sourceElem}
+	end
+	
+}

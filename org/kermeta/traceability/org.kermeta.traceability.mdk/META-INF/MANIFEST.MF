@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.traceability.util;uses:="org.eclipse.emf.e
+ core,org.eclipse.emf.common.notify,org.kermeta.traceability,org.eclip
+ se.emf.common.notify.impl,org.eclipse.emf.common.util",org.kermeta.tr
+ aceability.impl;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.n
+ otify,org.eclipse.emf.ecore.impl,org.kermeta.traceability,org.eclipse
+ .emf.ecore.util,org.eclipse.emf.common.util,org.eclipse.emf.ecore.plu
+ gin,org.eclipse.emf.ecore.resource",org.kermeta.traceability;uses:="o
+ rg.eclipse.emf.ecore,org.eclipse.emf.common.util,org.kermeta.traceabi
+ lity.impl"
+Private-Package: java.org.kermeta.traceability.mdk,
+Bundle-ClassPath: .
+Built-By: xdolques
+Tool: Bnd-0.0.311
+Bundle-Name: Traceability model development kit
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 2.0.2.SNAPSHOT
+Build-Jdk: 1.6.0_23
+Bnd-LastModified: 1298292823468
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
+ otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
+ pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
+ .resource,org.eclipse.emf.ecore.util,org.osgi.framework;version="[1.5
+ ,2)"
+Bundle-SymbolicName: org.kermeta.traceability.model
+

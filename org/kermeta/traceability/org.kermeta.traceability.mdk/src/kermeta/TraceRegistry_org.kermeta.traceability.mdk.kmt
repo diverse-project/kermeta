@@ -1,0 +1,128 @@
+/* $Id:$ 
+ * Creation : February 7, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            xdolques
+ */
+
+package org::kermeta::traceability::mdk;
+
+require "MetaModel_org.kermeta.traceability.model.kmt"
+require kermeta
+using kermeta::standard
+using kermeta::utils
+using traceability
+using kermeta::language::structure
+
+
+
+class TraceRegistry
+{	
+	
+	attribute registry : Hashtable<Object,ModelReference>
+	
+	operation getRegistry() : Hashtable<Object,ModelReference> is do
+		if registry==void then
+			self.registry:=Hashtable<Object,ModelReference>.new
+		end
+		result:= registry
+	end
+	operation addTrace(source : Object , target : Object , context : Object) : Void is do
+		
+		var sourceRef : ModelReference 
+		if not getRegistry.containsKey(source) then
+			sourceRef:=ModelReference.new
+			sourceRef.refObject := source
+			getRegistry.put(source, sourceRef)
+			else
+			sourceRef:=registry.getValue(source)
+			end
+		
+		var targetRef : ModelReference 
+		if not getRegistry.containsKey(target) then
+			targetRef:=ModelReference.new
+			targetRef.refObject := target
+			getRegistry.put(target,targetRef)
+			else
+			targetRef:=registry.getValue(target)
+			end
+		sourceRef.addTarget(context, targetRef)
+	end
+	
+	operation resolveAllTargets(source : Object) : Sequence<Object>  is do
+		if not getRegistry.containsKey(source) then
+			result:=void
+			else
+			var sourceRef : ModelReference init registry.getValue(source)
+			result:=sourceRef.resolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}
+		end
+	end
+	
+	
+	operation resolveOneTarget(source : Object, t:Class) : Object is do
+		if not getRegistry.containsKey(source) then
+			result:=void
+			else
+			var sourceRef : ModelReference init getRegistry.getValue(source)
+			if sourceRef==void then 
+			stdio.writeln("sourcRef est void")
+			end
+			if sourceRef.resolveOne(t)==void then
+			stdio.writeln("targetRef est void")
+			end
+			result:=sourceRef.resolveOne(t).asType(ModelReference).refObject
+		end
+	end
+	
+	
+	operation resolveTargetsIn(source : Object, aContext : Object) : Sequence<Object> is do
+		if not getRegistry.containsKey(source) then
+			result:=void
+			else
+			var sourceRef : ModelReference init getRegistry.getValue(source)
+			result:=sourceRef.resolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}
+		end
+	end
+	
+	operation resolveAllSources(target : Object) : Sequence<Object>  is do
+		if not getRegistry.containsKey(target) then
+			result:=void
+			else
+			var targetRef : ModelReference init getRegistry.getValue(target)
+			result:=targetRef.invResolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}
+		end
+	end
+	
+	
+	operation resolveOneSource(target : Object, t:Class) : Object is do
+		if not getRegistry.containsKey(target) then
+			result:=void
+			else
+			var targetRef : ModelReference init getRegistry.getValue(target)
+			result:=targetRef.invResolveOne(t).asType(ModelReference).refObject
+		end
+	end
+	
+	operation resolveSourcesIn(target : Object,aContext : Object) : Sequence<Object> is do
+		if not getRegistry.containsKey(target) then
+			result:=void
+			else
+			var targetRef : ModelReference init getRegistry.getValue(target)
+			result:=targetRef.invResolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}
+		end
+	end
+	
+	operation getTracePackage() : TracePackage is do
+		var root : TracePackage init TracePackage.new
+		getRegistry.values().each{v|root.references.add(v.asType(ModelReference)) v.target.each{x| x.context:=void } }
+		result:=root
+	end
+	
+	
+	
+	operation size(): Integer is do
+	 result:=getRegistry.size()
+	end
+
+}
