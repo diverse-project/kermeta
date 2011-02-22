@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="">
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="kermeta">
     <nestedPackage name="emfpersitence">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/emfpersitence/Resource/@kOwnedTags.0" name="Resource" isAspect="false" superType="//kermeta/emfpersitence/Resource/@containedType.0" isAbstract="false" isSingleton="false">
@@ -14163,11 +14163,11 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Set/@kOwnedTags.0" name="Set" isAspect="false" superType="//kermeta/standard/Set/@containedType.1" typeParameter="//kermeta/standard/Set/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Set"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@6f347124 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@1d98a (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
-        <ownedOperation name="add" type="//kermeta/standard/Set/add/@containedType.0">
+        <ownedOperation name="add" type="//kermeta/standard/Set/add/@containedType.0" superOperation="//kermeta/standard/Set/add/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14191,8 +14191,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="add"/>
         </ownedOperation>
-        <ownedOperation name="remove" type="//kermeta/standard/Set/remove/@containedType.0">
+        <ownedOperation name="remove" type="//kermeta/standard/Set/remove/@containedType.0" superOperation="//kermeta/standard/Set/remove/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14216,8 +14217,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="remove"/>
         </ownedOperation>
-        <ownedOperation name="equals" type="//kermeta/standard/Set/equals/@containedType.0">
+        <ownedOperation name="equals" type="//kermeta/standard/Set/equals/@containedType.0" superOperation="//kermeta/standard/Set/equals/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14241,6 +14243,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Set/union/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
@@ -14374,7 +14377,7 @@
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="asSet" type="//kermeta/standard/Set/asSet/@containedType.0">
+        <ownedOperation name="asSet" type="//kermeta/standard/Set/asSet/@containedType.0" superOperation="//kermeta/standard/Set/asSet/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14396,8 +14399,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asSet"/>
         </ownedOperation>
-        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Set/asOrderedSet/@containedType.0">
+        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Set/asOrderedSet/@containedType.0" superOperation="//kermeta/standard/Set/asOrderedSet/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedSet">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14419,8 +14423,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asOrderedSet"/>
         </ownedOperation>
-        <ownedOperation name="asBag" type="//kermeta/standard/Set/asBag/@containedType.0">
+        <ownedOperation name="asBag" type="//kermeta/standard/Set/asBag/@containedType.0" superOperation="//kermeta/standard/Set/asBag/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Bag">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14442,8 +14447,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asBag"/>
         </ownedOperation>
-        <ownedOperation name="asSequence" type="//kermeta/standard/Set/asSequence/@containedType.0">
+        <ownedOperation name="asSequence" type="//kermeta/standard/Set/asSequence/@containedType.0" superOperation="//kermeta/standard/Set/asSequence/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Sequence">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14465,6 +14471,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asSequence"/>
         </ownedOperation>
         <ownedOperation name="symmetricDifference" type="//kermeta/standard/Set/symmetricDifference/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
@@ -14579,11 +14586,11 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Bag/@kOwnedTags.0" name="Bag" isAspect="false" superType="//kermeta/standard/Bag/@containedType.1" typeParameter="//kermeta/standard/Bag/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Bag"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@5bf02b85 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@6397eb (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
-        <ownedOperation name="equals" type="//kermeta/standard/Bag/equals/@containedType.0">
+        <ownedOperation name="equals" type="//kermeta/standard/Bag/equals/@containedType.0" superOperation="//kermeta/standard/Bag/equals/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14607,6 +14614,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Bag/union/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Bag">
@@ -14757,7 +14765,7 @@
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="asSet" type="//kermeta/standard/Bag/asSet/@containedType.0">
+        <ownedOperation name="asSet" type="//kermeta/standard/Bag/asSet/@containedType.0" superOperation="//kermeta/standard/Bag/asSet/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14779,8 +14787,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asSet"/>
         </ownedOperation>
-        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Bag/asOrderedSet/@containedType.0">
+        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Bag/asOrderedSet/@containedType.0" superOperation="//kermeta/standard/Bag/asOrderedSet/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedSet">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14802,8 +14811,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asOrderedSet"/>
         </ownedOperation>
-        <ownedOperation name="asBag" type="//kermeta/standard/Bag/asBag/@containedType.0">
+        <ownedOperation name="asBag" type="//kermeta/standard/Bag/asBag/@containedType.0" superOperation="//kermeta/standard/Bag/asBag/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Bag">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14825,8 +14835,9 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asBag"/>
         </ownedOperation>
-        <ownedOperation name="asSequence" type="//kermeta/standard/Bag/asSequence/@containedType.0">
+        <ownedOperation name="asSequence" type="//kermeta/standard/Bag/asSequence/@containedType.0" superOperation="//kermeta/standard/Bag/asSequence/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Sequence">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -14848,6 +14859,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="asSequence"/>
         </ownedOperation>
         <ownedOperation name="including" type="//kermeta/standard/Bag/including/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Bag">
@@ -14987,7 +14999,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedCollection/@kOwnedTags.0" name="OrderedCollection" isAspect="false" superType="//kermeta/standard/OrderedCollection/@containedType.1" typeParameter="//kermeta/standard/OrderedCollection/G" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedCollection"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@74b957ea (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@f892a4 (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15110,7 +15122,7 @@
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="equals" type="//kermeta/standard/OrderedCollection/equals/@containedType.0">
+        <ownedOperation name="equals" type="//kermeta/standard/OrderedCollection/equals/@containedType.0" superOperation="//kermeta/standard/OrderedCollection/equals/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -15134,6 +15146,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="indexOf" type="//kermeta/standard/OrderedCollection/indexOf/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
@@ -15164,7 +15177,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedSet/@kOwnedTags.0" name="OrderedSet" isAspect="false" superType="//kermeta/standard/OrderedSet/@containedType.1" typeParameter="//kermeta/standard/OrderedSet/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedSet"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@68a53de4 (typeIdentifier: Set)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@988707 (typeIdentifier: Set)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15192,9 +15205,14 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="add" fromClassName="Set"/>
+          <ownedUnresolvedOperations operationIdentifier="add" from="//kermeta/standard/OrderedSet/add/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
+              <usings fromQName="kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="addAt" type="//kermeta/standard/OrderedSet/addAt/@containedType.0">
+        <ownedOperation name="addAt" type="//kermeta/standard/OrderedSet/addAt/@containedType.0" superOperation="//kermeta/standard/OrderedSet/addAt/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="kermeta::language::structure" toName=""/>
             <usings fromQName="kermeta::exceptions" toName=""/>
@@ -15224,6 +15242,7 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="addAt"/>
         </ownedOperation>
         <ownedOperation name="equals" type="//kermeta/standard/OrderedSet/equals/@containedType.0" superOperation="//kermeta/standard/OrderedSet/equals/@ownedUnresolvedOperations.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
@@ -15249,7 +15268,12 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="equals" fromClassName="OrderedCollection"/>
+          <ownedUnresolvedOperations operationIdentifier="equals" from="//kermeta/standard/OrderedSet/equals/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedCollection">
+              <usings fromQName="kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
         <ownedOperation name="subSet" type="//kermeta/standard/OrderedSet/subSet/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedSet">
@@ -15408,7 +15432,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Sequence/@kOwnedTags.0" name="Sequence" isAspect="false" superType="//kermeta/standard/Sequence/@containedType.1" typeParameter="//kermeta/standard/Sequence/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Sequence"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@46b4be3d (typeIdentifier: Bag)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@b0a3f5 (typeIdentifier: Bag)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15436,7 +15460,12 @@
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="equals" fromClassName="OrderedCollection"/>
+          <ownedUnresolvedOperations operationIdentifier="equals" from="//kermeta/standard/Sequence/equals/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedCollection">
+              <usings fromQName="kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
         <ownedOperation name="subSequence" type="//kermeta/standard/Sequence/subSequence/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Sequence">
@@ -15945,15 +15974,5 @@
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-  </packages>
-  <packages kTag="//p1/@kOwnedTags.0" name="p1" uri="http://p1">
-    <kOwnedTags name="ecore" value="true" object="//p1"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//p1/A/@kOwnedTags.0" name="A" isAspect="false" isAbstract="false">
-      <kOwnedTags name="ecore" value="true" object="//p1/A"/>
-      <ownedAttribute kTag="//p1/A/a/@kOwnedTags.0" name="a" type="//p1/A/a/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <kOwnedTags name="ecore" value="true" object="//p1/A/a"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"/>
-      </ownedAttribute>
-    </ownedTypeDefinition>
   </packages>
 </org_kermeta_language_structure:ModelingUnit>
