@@ -1,0 +1,19 @@
+/* $Id:$ 
+ * Creation : February 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+aspect class Unresolved
+{
+	@Scope "RESOLVED"
+	inv no_unresolved is do
+		false
+	end
+}

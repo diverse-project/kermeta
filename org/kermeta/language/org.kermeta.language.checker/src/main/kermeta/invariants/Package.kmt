@@ -15,6 +15,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 aspect class Package
 {
+	@Scope "LOADER"
 	inv no_underscore is do
 		not self.name.contains("_")
 	end
