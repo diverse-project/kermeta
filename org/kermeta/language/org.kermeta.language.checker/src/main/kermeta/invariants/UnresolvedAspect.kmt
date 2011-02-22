@@ -10,6 +10,9 @@ package org::kermeta::language::structure;
 
 
 require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
 aspect class Unresolved
 {
 	@Scope "RESOLVED"
