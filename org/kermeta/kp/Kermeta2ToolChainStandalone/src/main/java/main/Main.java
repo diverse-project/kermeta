@@ -2,6 +2,8 @@ package main;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,10 +103,15 @@ public class Main {
 				
 			}			
 		}
-		//End Merged ModellingUnit
-
+		//End Merged ModellingUnit		
+				
 		// Convert Resulting Modellingunit For TypeSetter
 		mergedMU_ser = this.saveMu(mergedMU);
+		// Save intermediate file
+		/*	FileWriter interm = new FileWriter(new File("miniframework.km"));
+			interm.write(mergedMU_ser.toString());
+			interm.close();
+			*/
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		mergedMU = this.LoadMu(mergedMU_ser);
 		// End of Convert Resulting Modellingunit For TypeSetter

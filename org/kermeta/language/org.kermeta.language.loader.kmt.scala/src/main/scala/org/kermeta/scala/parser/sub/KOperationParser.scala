@@ -24,7 +24,7 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
 
   def operationParameters = repsep(operationParameter,",")
   def operationReturnType = opt(":" ~> genericQualifiedType)
-  def methodFromType = opt("from" ~> ident )
+  def methodFromType = opt("from" ~> genericQualifiedType )
 
   def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
@@ -32,18 +32,17 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
         case "operation" => //TODO ERROR IF FROM TYPE
         case "method" => {
             fromType match {
-              case None =>
+              case None => {
+                  var newsuperO = StructureFactory.eINSTANCE.createUnresolvedOperation
+                  newsuperO.setOperationIdentifier(opName)
+                  newo.setSuperOperation(newsuperO)
+                  newo.getOwnedUnresolvedOperations.add(newsuperO)
+              }
               case Some(ft)=> {
                   var newsuperO = StructureFactory.eINSTANCE.createUnresolvedOperation
                   newsuperO.setOperationIdentifier(opName)
-                  newsuperO.setFromClassName(ft)
-                 // newsuperO.set
-
-                  //UNREaoslveType
-                  //var newsuperOType = StructureFactory.eINSTANCE.createUnresolvedType
-                  //newsuperOType.setTypeIdentifier(ft)
-
-                 // newsuperO.
+                  newsuperO.getContainedType.add(ft)
+                  newsuperO.setFrom(ft)
                   newo.setSuperOperation(newsuperO)
                   newo.getOwnedUnresolvedOperations.add(newsuperO)
               }
