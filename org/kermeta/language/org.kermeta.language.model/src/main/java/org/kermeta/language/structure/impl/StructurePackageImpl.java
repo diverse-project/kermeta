@@ -1674,8 +1674,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getUnresolvedOperation_FromClassName() {
-		return (EAttribute)unresolvedOperationEClass.getEStructuralFeatures().get(1);
+	public EReference getUnresolvedOperation_From() {
+		return (EReference)unresolvedOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2044,7 +2044,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		unresolvedOperationEClass = createEClass(UNRESOLVED_OPERATION);
 		createEAttribute(unresolvedOperationEClass, UNRESOLVED_OPERATION__OPERATION_IDENTIFIER);
-		createEAttribute(unresolvedOperationEClass, UNRESOLVED_OPERATION__FROM_CLASS_NAME);
+		createEReference(unresolvedOperationEClass, UNRESOLVED_OPERATION__FROM);
 
 		usingEClass = createEClass(USING);
 		createEAttribute(usingEClass, USING__FROM_QNAME);
@@ -2160,6 +2160,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		unresolvedPropertyEClass.getESuperTypes().add(this.getUnresolved());
 		unresolvedOperationEClass.getESuperTypes().add(this.getAbstractOperation());
 		unresolvedOperationEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedOperationEClass.getESuperTypes().add(this.getTypeContainer());
 		usingEClass.getESuperTypes().add(this.getObject());
 		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		productTypeEClass.getESuperTypes().add(this.getType());
@@ -2335,18 +2336,18 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(abstractOperationEClass, AbstractOperation.class, "AbstractOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unresolvedTypeEClass, UnresolvedType.class, "UnresolvedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnresolvedType_TypeIdentifier(), this.getString(), "typeIdentifier", null, 0, 1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedType_TypeIdentifier(), this.getString(), "typeIdentifier", null, 1, 1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedType_Usings(), this.getUsing(), null, "usings", null, 0, -1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedType_Generics(), this.getType(), null, "generics", null, 0, -1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unresolvedEClass, Unresolved.class, "Unresolved", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unresolvedPropertyEClass, UnresolvedProperty.class, "UnresolvedProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnresolvedProperty_PropertyIdentifier(), this.getString(), "propertyIdentifier", null, 0, 1, UnresolvedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedProperty_PropertyIdentifier(), this.getString(), "propertyIdentifier", null, 1, 1, UnresolvedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unresolvedOperationEClass, UnresolvedOperation.class, "UnresolvedOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnresolvedOperation_OperationIdentifier(), this.getString(), "operationIdentifier", null, 0, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getUnresolvedOperation_FromClassName(), this.getString(), "fromClassName", null, 0, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedOperation_OperationIdentifier(), this.getString(), "operationIdentifier", null, 1, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnresolvedOperation_From(), this.getType(), null, "from", null, 0, 1, UnresolvedOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(usingEClass, Using.class, "Using", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUsing_FromQName(), this.getString(), "fromQName", null, 1, 1, Using.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

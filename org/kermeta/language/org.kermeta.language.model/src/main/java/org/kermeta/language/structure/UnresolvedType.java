@@ -43,7 +43,7 @@ public interface UnresolvedType extends Type, Unresolved {
 	 * @return the value of the '<em>Type Identifier</em>' attribute.
 	 * @see #setTypeIdentifier(String)
 	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedType_TypeIdentifier()
-	 * @model dataType="org.kermeta.language.structure.String"
+	 * @model dataType="org.kermeta.language.structure.String" required="true"
 	 * @generated
 	 */
 	String getTypeIdentifier();

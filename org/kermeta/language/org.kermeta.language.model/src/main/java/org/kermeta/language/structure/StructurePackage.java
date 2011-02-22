@@ -3492,22 +3492,31 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_OPERATION__KTYPE = ABSTRACT_OPERATION__KTYPE;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_OPERATION__CONTAINED_TYPE = ABSTRACT_OPERATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Operation Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = ABSTRACT_OPERATION_FEATURE_COUNT + 0;
+	int UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>From Class Name</b></em>' attribute.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_OPERATION__FROM_CLASS_NAME = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
+	int UNRESOLVED_OPERATION__FROM = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved Operation</em>' class.
@@ -3516,7 +3525,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
+	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.
@@ -5302,15 +5311,15 @@ public interface StructurePackage extends EPackage {
 	EAttribute getUnresolvedOperation_OperationIdentifier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.UnresolvedOperation#getFromClassName <em>From Class Name</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From Class Name</em>'.
-	 * @see org.kermeta.language.structure.UnresolvedOperation#getFromClassName()
+	 * @return the meta object for the reference '<em>From</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedOperation#getFrom()
 	 * @see #getUnresolvedOperation()
 	 * @generated
 	 */
-	EAttribute getUnresolvedOperation_FromClassName();
+	EReference getUnresolvedOperation_From();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Using <em>Using</em>}'.
@@ -6639,12 +6648,12 @@ public interface StructurePackage extends EPackage {
 		EAttribute UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = eINSTANCE.getUnresolvedOperation_OperationIdentifier();
 
 		/**
-		 * The meta object literal for the '<em><b>From Class Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute UNRESOLVED_OPERATION__FROM_CLASS_NAME = eINSTANCE.getUnresolvedOperation_FromClassName();
+		EReference UNRESOLVED_OPERATION__FROM = eINSTANCE.getUnresolvedOperation_From();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.

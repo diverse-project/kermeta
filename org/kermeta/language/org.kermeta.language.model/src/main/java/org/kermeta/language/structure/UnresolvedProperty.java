@@ -35,7 +35,7 @@ public interface UnresolvedProperty extends AbstractProperty, Unresolved {
 	 * @return the value of the '<em>Property Identifier</em>' attribute.
 	 * @see #setPropertyIdentifier(String)
 	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedProperty_PropertyIdentifier()
-	 * @model dataType="org.kermeta.language.structure.String"
+	 * @model dataType="org.kermeta.language.structure.String" required="true"
 	 * @generated
 	 */
 	String getPropertyIdentifier();

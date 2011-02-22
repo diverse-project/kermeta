@@ -1112,7 +1112,8 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;The reference string is used to create a real Type that points to the correct TypeDefinition"/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeIdentifier" eType="#//kermeta/language/structure/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeIdentifier" lowerBound="1"
+              eType="#//kermeta/language/structure/String">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="String that identifies the Type.&#xD;&#xA;The container of the UnresolvedType  is considered as the context."/>
             </eAnnotations>
@@ -1133,20 +1134,20 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnresolvedProperty" eSuperTypes="#//kermeta/language/structure/AbstractProperty #//kermeta/language/structure/Unresolved">
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyIdentifier"
-              eType="#//kermeta/language/structure/String">
+              lowerBound="1" eType="#//kermeta/language/structure/String">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="String that identifies the Property.&#xD;&#xA;The container of the UnresolvedProperty  is considered as the context."/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedOperation" eSuperTypes="#//kermeta/language/structure/AbstractOperation #//kermeta/language/structure/Unresolved">
+        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedOperation" eSuperTypes="#//kermeta/language/structure/AbstractOperation #//kermeta/language/structure/Unresolved #//kermeta/language/structure/TypeContainer">
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationIdentifier"
-              eType="#//kermeta/language/structure/String">
+              lowerBound="1" eType="#//kermeta/language/structure/String">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="String that identifies the Operation.&#xD;&#xA;The container of the UnresolvedOperation  is considered as the context."/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromClassName" eType="#//kermeta/language/structure/String"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//kermeta/language/structure/Type"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Using" eSuperTypes="#//kermeta/language/structure/Object">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

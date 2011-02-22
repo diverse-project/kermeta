@@ -486,6 +486,7 @@ public class StructureSwitch<T> {
 				T result = caseUnresolvedOperation(unresolvedOperation);
 				if (result == null) result = caseAbstractOperation(unresolvedOperation);
 				if (result == null) result = caseUnresolved(unresolvedOperation);
+				if (result == null) result = caseTypeContainer(unresolvedOperation);
 				if (result == null) result = caseObject(unresolvedOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

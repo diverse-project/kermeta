@@ -16,7 +16,7 @@ package org.kermeta.language.structure;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.UnresolvedOperation#getOperationIdentifier <em>Operation Identifier</em>}</li>
- *   <li>{@link org.kermeta.language.structure.UnresolvedOperation#getFromClassName <em>From Class Name</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,7 +24,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedOperation extends AbstractOperation, Unresolved {
+public interface UnresolvedOperation extends AbstractOperation, Unresolved, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Operation Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public interface UnresolvedOperation extends AbstractOperation, Unresolved {
 	 * @return the value of the '<em>Operation Identifier</em>' attribute.
 	 * @see #setOperationIdentifier(String)
 	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedOperation_OperationIdentifier()
-	 * @model dataType="org.kermeta.language.structure.String"
+	 * @model dataType="org.kermeta.language.structure.String" required="true"
 	 * @generated
 	 */
 	String getOperationIdentifier();
@@ -52,29 +52,29 @@ public interface UnresolvedOperation extends AbstractOperation, Unresolved {
 	void setOperationIdentifier(String value);
 
 	/**
-	 * Returns the value of the '<em><b>From Class Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>From Class Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>From</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From Class Name</em>' attribute.
-	 * @see #setFromClassName(String)
-	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedOperation_FromClassName()
-	 * @model dataType="org.kermeta.language.structure.String"
+	 * @return the value of the '<em>From</em>' reference.
+	 * @see #setFrom(Type)
+	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedOperation_From()
+	 * @model
 	 * @generated
 	 */
-	String getFromClassName();
+	Type getFrom();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.UnresolvedOperation#getFromClassName <em>From Class Name</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>From Class Name</em>' attribute.
-	 * @see #getFromClassName()
+	 * @param value the new value of the '<em>From</em>' reference.
+	 * @see #getFrom()
 	 * @generated
 	 */
-	void setFromClassName(String value);
+	void setFrom(Type value);
 
 } // UnresolvedOperation
