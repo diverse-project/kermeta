@@ -1,5 +1,5 @@
 @uri "http://www.kermeta.org/Traceability/2.0.0"
-package traceability;
+package org::kermeta::traceability::mdk;
 
 require "kermeta"
 //require "http://www.eclipse.org/emf/2002/Ecore"

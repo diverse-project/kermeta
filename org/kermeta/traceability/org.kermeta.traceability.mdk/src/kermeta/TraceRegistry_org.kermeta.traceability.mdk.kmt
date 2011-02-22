@@ -5,6 +5,9 @@
  * Authors  : 
  *            xdolques
  */
+//@mainClass "org::kermeta::traceability::mdk::TraceRegistry"
+//@mainOperation "size"
+
 
 package org::kermeta::traceability::mdk;
 
@@ -12,7 +15,7 @@ require "MetaModel_org.kermeta.traceability.model.kmt"
 require kermeta
 using kermeta::standard
 using kermeta::utils
-using traceability
+
 using kermeta::language::structure
 
 
@@ -55,7 +58,7 @@ class TraceRegistry
 			result:=void
 			else
 			var sourceRef : ModelReference init registry.getValue(source)
-			result:=sourceRef.resolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}
+			result:=sourceRef.resolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
@@ -81,7 +84,7 @@ class TraceRegistry
 			result:=void
 			else
 			var sourceRef : ModelReference init getRegistry.getValue(source)
-			result:=sourceRef.resolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}
+			result:=sourceRef.resolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
@@ -90,7 +93,7 @@ class TraceRegistry
 			result:=void
 			else
 			var targetRef : ModelReference init getRegistry.getValue(target)
-			result:=targetRef.invResolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}
+			result:=targetRef.invResolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
@@ -109,7 +112,7 @@ class TraceRegistry
 			result:=void
 			else
 			var targetRef : ModelReference init getRegistry.getValue(target)
-			result:=targetRef.invResolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}
+			result:=targetRef.invResolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
