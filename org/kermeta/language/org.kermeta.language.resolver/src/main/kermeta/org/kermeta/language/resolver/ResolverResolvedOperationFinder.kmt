@@ -24,45 +24,4 @@ class ResolverResolvedOperationFinder inherits StructureVisitor
 		//We are looking for an operation with the same name as the UnresolvedOperation
 		ctxt.foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.unresolvedName)}
 	end
-	
-	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do		
-		if not ctxt.currentIdentifierIsLast() then
-			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.getCurrentIdentifier()
-			var containingClass : TypeDefinition init m.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
-			}
-			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
-			if not containingClass.isVoid then
-				containingClass.accept(self, ctxt)
-			//Else we are looking for a package
-			else
-				var ~package : Package init m.packages.detect{p|p.name.equals(lookingFor)}
-				if not ~package.isVoid() then
-					~package.accept(self, ctxt)
-				end
-			end
-		end
-	end
-	
-	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
-		if not ctxt.currentIdentifierIsLast() then
-			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.getCurrentIdentifier()
-			
-			var containingClass : TypeDefinition init p.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
-			}
-			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
-			if not containingClass.isVoid then
-				containingClass.accept(self, ctxt)
-			//Else we are looking for a package
-			else
-				var ~package : Package init p.nestedPackage.detect{n|n.name.equals(lookingFor)}
-				if not ~package.isVoid() then
-					~package.accept(self, ctxt)
-				end
-			end
-		end
-	end
 }

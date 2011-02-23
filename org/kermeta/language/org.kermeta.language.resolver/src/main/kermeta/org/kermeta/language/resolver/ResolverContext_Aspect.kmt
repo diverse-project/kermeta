@@ -17,6 +17,16 @@ using language::helpers::structure
 using kermeta::standard
 
 aspect class StructureVisitorContext {
+	//Verbose mode :
+	//0 = mute
+	//1 = ResolvedType not found + Other messages on UnresolvedTypes
+	//2 = ResolvedProperties not found + Other messages on UnresolvedProperties
+	//3 = ResolvedOperations not found + Other messages on UnresolvedOperations
+	//4 = AllResolved not found
+	//5 = All messages
+	attribute verbose : Integer
+	//Allow exceptions
+	attribute exceptions : Boolean
 	//Modeling unit the UnresolvedFinder is currently visiting
 	reference currentModelingUnit : ModelingUnit
 	//Package the UnresolvedFinder is currently visiting
