@@ -20,6 +20,7 @@ aspect class Operation
 	 * must point to one and only one Operation
 	 */
 	@Scope "MERGED"
+	@IsWarning "true"
 	inv unresolved_super_must_not_conflict is do
 		// TODO
 		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)

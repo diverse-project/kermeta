@@ -15,8 +15,9 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 aspect class Unresolved
 {
-	@Scope "RESOLVED"
+	@Scope "RESOLVER"
 	inv no_unresolved is do
 		false
 	end
+	
 }

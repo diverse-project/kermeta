@@ -23,6 +23,7 @@ import org.kermeta.art2.annotation.Start;
 import org.kermeta.art2.annotation.Stop;
 
 import org.kermeta.language.api.Diagnostic;
+import org.kermeta.language.api.CheckerScope;
 import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.api.port.PortChecker;
 import org.kermeta.language.api.port.PortLog;
@@ -90,7 +91,7 @@ public class Art2ComponentChecker extends AbstractComponentType implements PortC
 	}*/
 
 	@Port(name = "kcheck", method="check")
-	public Diagnostic check(ModelingUnit mu) {
+	public Diagnostic check(ModelingUnit mu, CheckerScope scope) {
 		// TODO Auto-generated method stub
 		return null;
 	}
