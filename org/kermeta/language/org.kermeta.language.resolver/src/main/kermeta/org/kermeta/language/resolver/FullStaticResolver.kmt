@@ -61,6 +61,10 @@ class FullStaticResolver
 		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
        	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+		//Display all messages from Resolver
+		ctxt.verbose := 5
+		//Do not raise exceptions for these messages
+		ctxt.exceptions := false
 	
        	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
        	
