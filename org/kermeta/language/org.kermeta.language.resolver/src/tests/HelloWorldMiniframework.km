@@ -14185,7 +14185,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Set/@kOwnedTags.0" name="Set" isAspect="false" superType="//kermeta/standard/Set/@containedType.1" typeParameter="//kermeta/standard/Set/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Set"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@74b957ea (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@343aff84 (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -14608,7 +14608,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Bag/@kOwnedTags.0" name="Bag" isAspect="false" superType="//kermeta/standard/Bag/@containedType.1" typeParameter="//kermeta/standard/Bag/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Bag"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@343aff84 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@46b4be3d (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15021,7 +15021,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedCollection/@kOwnedTags.0" name="OrderedCollection" isAspect="false" superType="//kermeta/standard/OrderedCollection/@containedType.1" typeParameter="//kermeta/standard/OrderedCollection/G" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedCollection"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@d5d4de6 (typeIdentifier: Collection)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@435bb0f (typeIdentifier: Collection)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15199,7 +15199,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedSet/@kOwnedTags.0" name="OrderedSet" isAspect="false" superType="//kermeta/standard/OrderedSet/@containedType.1" typeParameter="//kermeta/standard/OrderedSet/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedSet"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@68a53de4 (typeIdentifier: Set)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@638bd7f1 (typeIdentifier: Set)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15454,7 +15454,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Sequence/@kOwnedTags.0" name="Sequence" isAspect="false" superType="//kermeta/standard/Sequence/@containedType.1" typeParameter="//kermeta/standard/Sequence/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Sequence"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@46b4be3d (typeIdentifier: Bag)">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org.kermeta.language.structure.impl.UnresolvedTypeImpl@5f1eb199 (typeIdentifier: Bag)">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15996,16 +15996,6 @@
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-  </packages>
-  <packages kTag="//p1/@kOwnedTags.0" name="p1" uri="http://p1">
-    <kOwnedTags name="ecore" value="true" object="//p1"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//p1/A/@kOwnedTags.0" name="A" isAspect="false" isAbstract="false">
-      <kOwnedTags name="ecore" value="true" object="//p1/A"/>
-      <ownedAttribute kTag="//p1/A/a/@kOwnedTags.0" name="a" type="//p1/A/a/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <kOwnedTags name="ecore" value="true" object="//p1/A/a"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"/>
-      </ownedAttribute>
-    </ownedTypeDefinition>
   </packages>
   <packages kTag="//org/@kOwnedTags.0" name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
     <kOwnedTags name="ecore" value="true" object="//org"/>
