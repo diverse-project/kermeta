@@ -286,8 +286,27 @@ package behavior {
 			result := self
 		end 
 	}
+
+	aspect class IntegerLiteral {
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Integer"))								
+			result := self
+		end 
+	}	
 	
+	aspect class VoidLiteral {
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))								
+			result := self
+		end 
+	}
 	
+	aspect class BooleanLiteral {
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Boolean"))								
+			result := self
+		end 
+	}
 	aspect class VariableDecl {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			// compute contained expressions
