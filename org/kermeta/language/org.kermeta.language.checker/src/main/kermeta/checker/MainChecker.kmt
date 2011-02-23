@@ -11,42 +11,60 @@
 
 package org::kermeta::language::checker;
 
+require kermeta
+
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/Checker.kmt"
-//require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
 
 using org::kermeta::language::structure
 using kermeta::standard
 
+using org::kermeta::diagnostic
+
 class MainCheckerV2
 {
-	operation check(mu:ModelingUnit) : Void is do 
+	operation check(/*mu:ModelingUnit*/) : Void is do 
+		
+		
+		//org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km
+		var file : String init "platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km"
 		
 		
 		// load 		
-		/*var mu : org::kermeta::language::structure::ModelingUnit //init org::kermeta::language::structure::ModelingUnit.new
-		
 		var inputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var inputRes : kermeta::persistence::EMFResource
 		
-		inputRes ?= inputRep.createResource("platform:/resource/kermetaV2Checker/model/test.km",
+		inputRep.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		
+		inputRes ?= inputRep.createResource(file,
 						"http://www.kermeta.org/kermeta/2_0_0/")
 		
 		inputRes.load()
 		
+		var mu : org::kermeta::language::structure::ModelingUnit
 		mu ?= inputRes.one
-		
-		stdio.writeln("Loaded modeling unit : " + mu.toString)
-		mu.packages.each{p|
-			stdio.writeln(" -> package :"  + p.name)
-		}
-		*/
-		
 		
 	
 		var myChecker : Checker init Checker.new
 		
-		// test only packages :
-		mu.packages.each{ p | myChecker.checkObject(p) }
+		// test mu
+		var diagModel : DiagnosticModel init myChecker.checkObject(mu, "LOADER")
+		
+		stdio.writeln("Number of failed constraints : " + diagModel.diagnostics.size.toString)
+		
+		diagModel.diagnostics.each{ diag |
+			stdio.writeln("------------------------------")
+			stdio.writeln("Invariant " + diag.failedConstraint.asType(InvariantProxy).invariantName 
+					+ " for Class " + diag.failedConstraint.asType(InvariantProxy).metaclassQualifiedName
+					+ " in " + diag.failedConstraint.asType(InvariantProxy).mmUri)
+			stdio.writeln(" on object : " + diag.appliesTo.asType(ModelReference).referencedObject.toString)
+			
+			
+		}
+		
+		// test packages :
+		//mu.packages.each{ p | myChecker.checkObject(p) }
 		
 		
 	end
