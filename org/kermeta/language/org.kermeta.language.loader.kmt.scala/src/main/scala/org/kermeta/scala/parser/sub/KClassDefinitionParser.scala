@@ -81,7 +81,8 @@ trait KClassDefinitionParser extends KAbstractParser
         }
         case Some(parentI)=> {
             parentI.foreach{parent=>
-              var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, parent.toString)
+              var newParent = KmBuildHelper.selectType(newo, parent)
+              newo.getContainedType.add(newParent)
               newo.getSuperType.add(newParent)
             }
           }
@@ -105,7 +106,8 @@ trait KClassDefinitionParser extends KAbstractParser
 
 
 
-  private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents }
+  private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents
+  }
   // private def classMemberDecls = annotableClassMemberDecl +
   private def annotableClassMemberDecl = (annotation?) ~ classMemberDecl ^^ { case e ~ e1 =>
       e match {
