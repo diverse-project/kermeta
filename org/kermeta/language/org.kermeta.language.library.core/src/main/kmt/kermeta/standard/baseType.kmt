@@ -10,12 +10,6 @@ package standard{
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
-class Object{
-}
-/**
- * TODO : miss operations 
- */
-@CompilerIgnore "true"
 class Void {
 }
 /**
