@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 
@@ -39,7 +40,7 @@ import org.kermeta.language.structure.Tag;
  *
  * @generated
  */
-public class TagImpl extends ObjectImpl implements Tag {
+public class TagImpl extends KermetaModelElementImpl implements Tag {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -88,7 +89,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.kermeta.language.structure.Object> object;
+	protected EList<KermetaModelElement> object;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,9 +157,9 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.kermeta.language.structure.Object> getObject() {
+	public EList<KermetaModelElement> getObject() {
 		if (object == null) {
-			object = new EObjectWithInverseResolvingEList.ManyInverse<org.kermeta.language.structure.Object>(org.kermeta.language.structure.Object.class, this, StructurePackage.TAG__OBJECT, StructurePackage.OBJECT__KTAG);
+			object = new EObjectWithInverseResolvingEList.ManyInverse<KermetaModelElement>(KermetaModelElement.class, this, StructurePackage.TAG__OBJECT, StructurePackage.KERMETA_MODEL_ELEMENT__KTAG);
 		}
 		return object;
 	}
@@ -227,7 +228,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 				return;
 			case StructurePackage.TAG__OBJECT:
 				getObject().clear();
-				getObject().addAll((Collection<? extends org.kermeta.language.structure.Object>)newValue);
+				getObject().addAll((Collection<? extends KermetaModelElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -7,6 +7,7 @@
 package org.kermeta.language.behavior;
 
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.language.structure.KermetaModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Rescue extends org.kermeta.language.structure.Object {
+public interface Rescue extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.behavior.Expression}.

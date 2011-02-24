@@ -26,13 +26,13 @@ public interface StructureFactory extends EFactory {
 	StructureFactory eINSTANCE = org.kermeta.language.structure.impl.StructureFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Object</em>'.
+	 * Returns a new object of class '<em>Kermeta Model Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object</em>'.
+	 * @return a new object of class '<em>Kermeta Model Element</em>'.
 	 * @generated
 	 */
-	Object createObject();
+	KermetaModelElement createKermetaModelElement();
 
 	/**
 	 * Returns a new object of class '<em>Operation</em>'.
@@ -330,6 +330,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	TypeMapping createTypeMapping();
+
+	/**
+	 * Returns a new object of class '<em>Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Object</em>'.
+	 * @generated
+	 */
+	kermeta.standard.Object createObject();
 
 	/**
 	 * Returns the package supported by this factory.

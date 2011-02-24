@@ -20,7 +20,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class AbstractOperationImpl extends ObjectImpl implements AbstractOperation {
+public abstract class AbstractOperationImpl extends KermetaModelElementImpl implements AbstractOperation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

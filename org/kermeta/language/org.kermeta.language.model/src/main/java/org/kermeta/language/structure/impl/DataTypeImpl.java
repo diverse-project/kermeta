@@ -40,9 +40,9 @@ import org.kermeta.language.structure.TypeMapping;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getContainedType <em>Contained Type</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getTypeMappings <em>Type Mappings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.DataTypeImpl#getIsAspect <em>Is Aspect</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,26 +80,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	protected EList<Type> containedType;
 
 	/**
-	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAspect()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ASPECT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAspect()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,6 +98,26 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @ordered
 	 */
 	protected EList<TypeMapping> typeMappings;
+
+	/**
+	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ASPECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,12 +261,12 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return getName();
 			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
 				return getContainedType();
-			case StructurePackage.DATA_TYPE__IS_ASPECT:
-				return getIsAspect();
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
 				return getSuperType();
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				return getTypeMappings();
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				return getIsAspect();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,9 +287,6 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				getContainedType().clear();
 				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
-			case StructurePackage.DATA_TYPE__IS_ASPECT:
-				setIsAspect((Boolean)newValue);
-				return;
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
 				getSuperType().clear();
 				getSuperType().addAll((Collection<? extends Type>)newValue);
@@ -297,6 +294,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				getTypeMappings().clear();
 				getTypeMappings().addAll((Collection<? extends TypeMapping>)newValue);
+				return;
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				setIsAspect((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,14 +316,14 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
 				getContainedType().clear();
 				return;
-			case StructurePackage.DATA_TYPE__IS_ASPECT:
-				setIsAspect(IS_ASPECT_EDEFAULT);
-				return;
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
 				getSuperType().clear();
 				return;
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				getTypeMappings().clear();
+				return;
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -341,12 +341,12 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.DATA_TYPE__IS_ASPECT:
-				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 			case StructurePackage.DATA_TYPE__SUPER_TYPE:
 				return superType != null && !superType.isEmpty();
 			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				return typeMappings != null && !typeMappings.isEmpty();
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -372,9 +372,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.DATA_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
 				case StructurePackage.DATA_TYPE__SUPER_TYPE: return StructurePackage.TYPE_DEFINITION__SUPER_TYPE;
 				case StructurePackage.DATA_TYPE__TYPE_MAPPINGS: return StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS;
+				case StructurePackage.DATA_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
 				default: return -1;
 			}
 		}
@@ -402,9 +402,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
 				case StructurePackage.TYPE_DEFINITION__SUPER_TYPE: return StructurePackage.DATA_TYPE__SUPER_TYPE;
 				case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS: return StructurePackage.DATA_TYPE__TYPE_MAPPINGS;
+				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
 				default: return -1;
 			}
 		}

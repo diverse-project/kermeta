@@ -28,7 +28,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface TypeVariableBinding extends TypeContainer, org.kermeta.language.structure.Object {
+public interface TypeVariableBinding extends TypeContainer, KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->

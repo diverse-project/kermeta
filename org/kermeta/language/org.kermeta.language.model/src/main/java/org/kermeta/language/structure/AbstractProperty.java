@@ -17,5 +17,5 @@ package org.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractProperty extends org.kermeta.language.structure.Object {
+public interface AbstractProperty extends KermetaModelElement {
 } // AbstractProperty

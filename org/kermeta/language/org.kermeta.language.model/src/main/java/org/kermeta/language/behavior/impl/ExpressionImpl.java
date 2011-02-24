@@ -28,6 +28,7 @@ import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 
+import org.kermeta.language.structure.impl.KermetaModelElementImpl;
 import org.kermeta.language.structure.impl.ObjectImpl;
 
 /**
@@ -44,7 +45,7 @@ import org.kermeta.language.structure.impl.ObjectImpl;
  *
  * @generated
  */
-public abstract class ExpressionImpl extends ObjectImpl implements Expression {
+public abstract class ExpressionImpl extends KermetaModelElementImpl implements Expression {
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

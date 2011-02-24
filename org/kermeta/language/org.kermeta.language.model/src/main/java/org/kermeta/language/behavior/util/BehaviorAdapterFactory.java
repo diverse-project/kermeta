@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.kermeta.language.behavior.*;
 
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.TypeContainer;
@@ -198,8 +199,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 				return createCallEnumLiteralAdapter();
 			}
 			@Override
-			public Adapter caseObject(org.kermeta.language.structure.Object object) {
-				return createObjectAdapter();
+			public Adapter caseKermetaModelElement(KermetaModelElement object) {
+				return createKermetaModelElementAdapter();
 			}
 			@Override
 			public Adapter caseTypeContainer(TypeContainer object) {
@@ -662,16 +663,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Object <em>Object</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.KermetaModelElement <em>Kermeta Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.Object
+	 * @see org.kermeta.language.structure.KermetaModelElement
 	 * @generated
 	 */
-	public Adapter createObjectAdapter() {
+	public Adapter createKermetaModelElementAdapter() {
 		return null;
 	}
 

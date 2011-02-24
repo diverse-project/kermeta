@@ -20,6 +20,7 @@ import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeVariable;
@@ -129,9 +130,9 @@ public class StructureSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case StructurePackage.OBJECT: {
-				org.kermeta.language.structure.Object object = (org.kermeta.language.structure.Object)theEObject;
-				T result = caseObject(object);
+			case StructurePackage.KERMETA_MODEL_ELEMENT: {
+				KermetaModelElement kermetaModelElement = (KermetaModelElement)theEObject;
+				T result = caseKermetaModelElement(kermetaModelElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,7 +144,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = caseTypeContainer(operation);
 				if (result == null) result = caseNamedElement(operation);
-				if (result == null) result = caseObject(operation);
+				if (result == null) result = caseKermetaModelElement(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,21 +156,21 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypedElement(property);
 				if (result == null) result = caseTypeContainer(property);
 				if (result == null) result = caseNamedElement(property);
-				if (result == null) result = caseObject(property);
+				if (result == null) result = caseKermetaModelElement(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.TYPE: {
 				Type type = (Type)theEObject;
 				T result = caseType(type);
-				if (result == null) result = caseObject(type);
+				if (result == null) result = caseKermetaModelElement(type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.TYPE_CONTAINER: {
 				TypeContainer typeContainer = (TypeContainer)theEObject;
 				T result = caseTypeContainer(typeContainer);
-				if (result == null) result = caseObject(typeContainer);
+				if (result == null) result = caseKermetaModelElement(typeContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,7 +178,7 @@ public class StructureSwitch<T> {
 				EnumerationLiteral enumerationLiteral = (EnumerationLiteral)theEObject;
 				T result = caseEnumerationLiteral(enumerationLiteral);
 				if (result == null) result = caseNamedElement(enumerationLiteral);
-				if (result == null) result = caseObject(enumerationLiteral);
+				if (result == null) result = caseKermetaModelElement(enumerationLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,7 +186,7 @@ public class StructureSwitch<T> {
 				TypeVariableBinding typeVariableBinding = (TypeVariableBinding)theEObject;
 				T result = caseTypeVariableBinding(typeVariableBinding);
 				if (result == null) result = caseTypeContainer(typeVariableBinding);
-				if (result == null) result = caseObject(typeVariableBinding);
+				if (result == null) result = caseKermetaModelElement(typeVariableBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -195,7 +196,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypedElement(multiplicityElement);
 				if (result == null) result = caseTypeContainer(multiplicityElement);
 				if (result == null) result = caseNamedElement(multiplicityElement);
-				if (result == null) result = caseObject(multiplicityElement);
+				if (result == null) result = caseKermetaModelElement(multiplicityElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -204,7 +205,7 @@ public class StructureSwitch<T> {
 				T result = caseTypeDefinition(typeDefinition);
 				if (result == null) result = caseNamedElement(typeDefinition);
 				if (result == null) result = caseTypeContainer(typeDefinition);
-				if (result == null) result = caseObject(typeDefinition);
+				if (result == null) result = caseKermetaModelElement(typeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,7 +214,7 @@ public class StructureSwitch<T> {
 				T result = caseClass(class_);
 				if (result == null) result = caseParameterizedType(class_);
 				if (result == null) result = caseType(class_);
-				if (result == null) result = caseObject(class_);
+				if (result == null) result = caseKermetaModelElement(class_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -224,7 +225,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(dataType);
 				if (result == null) result = caseNamedElement(dataType);
 				if (result == null) result = caseTypeContainer(dataType);
-				if (result == null) result = caseObject(dataType);
+				if (result == null) result = caseKermetaModelElement(dataType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,14 +237,14 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(enumeration);
 				if (result == null) result = caseNamedElement(enumeration);
 				if (result == null) result = caseTypeContainer(enumeration);
-				if (result == null) result = caseObject(enumeration);
+				if (result == null) result = caseKermetaModelElement(enumeration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
-				if (result == null) result = caseObject(namedElement);
+				if (result == null) result = caseKermetaModelElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -252,7 +253,7 @@ public class StructureSwitch<T> {
 				T result = casePackage(package_);
 				if (result == null) result = caseTypeDefinitionContainer(package_);
 				if (result == null) result = caseNamedElement(package_);
-				if (result == null) result = caseObject(package_);
+				if (result == null) result = caseKermetaModelElement(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -263,7 +264,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypedElement(parameter);
 				if (result == null) result = caseTypeContainer(parameter);
 				if (result == null) result = caseNamedElement(parameter);
-				if (result == null) result = caseObject(parameter);
+				if (result == null) result = caseKermetaModelElement(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -275,7 +276,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
 				if (result == null) result = caseTypeContainer(primitiveType);
-				if (result == null) result = caseObject(primitiveType);
+				if (result == null) result = caseKermetaModelElement(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -284,21 +285,21 @@ public class StructureSwitch<T> {
 				T result = caseTypedElement(typedElement);
 				if (result == null) result = caseTypeContainer(typedElement);
 				if (result == null) result = caseNamedElement(typedElement);
-				if (result == null) result = caseObject(typedElement);
+				if (result == null) result = caseKermetaModelElement(typedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.TAG: {
 				Tag tag = (Tag)theEObject;
 				T result = caseTag(tag);
-				if (result == null) result = caseObject(tag);
+				if (result == null) result = caseKermetaModelElement(tag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.ABSTRACT_PROPERTY: {
 				AbstractProperty abstractProperty = (AbstractProperty)theEObject;
 				T result = caseAbstractProperty(abstractProperty);
-				if (result == null) result = caseObject(abstractProperty);
+				if (result == null) result = caseKermetaModelElement(abstractProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -306,7 +307,7 @@ public class StructureSwitch<T> {
 				Constraint constraint = (Constraint)theEObject;
 				T result = caseConstraint(constraint);
 				if (result == null) result = caseNamedElement(constraint);
-				if (result == null) result = caseObject(constraint);
+				if (result == null) result = caseKermetaModelElement(constraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -317,7 +318,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(classDefinition);
 				if (result == null) result = caseNamedElement(classDefinition);
 				if (result == null) result = caseTypeContainer(classDefinition);
-				if (result == null) result = caseObject(classDefinition);
+				if (result == null) result = caseKermetaModelElement(classDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -326,7 +327,7 @@ public class StructureSwitch<T> {
 				T result = caseModelingUnit(modelingUnit);
 				if (result == null) result = caseTypeDefinitionContainer(modelingUnit);
 				if (result == null) result = caseNamedElement(modelingUnit);
-				if (result == null) result = caseObject(modelingUnit);
+				if (result == null) result = caseKermetaModelElement(modelingUnit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -334,14 +335,14 @@ public class StructureSwitch<T> {
 				TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer)theEObject;
 				T result = caseTypeDefinitionContainer(typeDefinitionContainer);
 				if (result == null) result = caseNamedElement(typeDefinitionContainer);
-				if (result == null) result = caseObject(typeDefinitionContainer);
+				if (result == null) result = caseKermetaModelElement(typeDefinitionContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.REQUIRE: {
 				Require require = (Require)theEObject;
 				T result = caseRequire(require);
-				if (result == null) result = caseObject(require);
+				if (result == null) result = caseKermetaModelElement(require);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -351,7 +352,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeDefinition(genericTypeDefinition);
 				if (result == null) result = caseNamedElement(genericTypeDefinition);
 				if (result == null) result = caseTypeContainer(genericTypeDefinition);
-				if (result == null) result = caseObject(genericTypeDefinition);
+				if (result == null) result = caseKermetaModelElement(genericTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -359,7 +360,7 @@ public class StructureSwitch<T> {
 				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
 				T result = caseParameterizedType(parameterizedType);
 				if (result == null) result = caseType(parameterizedType);
-				if (result == null) result = caseObject(parameterizedType);
+				if (result == null) result = caseKermetaModelElement(parameterizedType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -369,7 +370,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeContainer(typeVariable);
 				if (result == null) result = caseType(typeVariable);
 				if (result == null) result = caseNamedElement(typeVariable);
-				if (result == null) result = caseObject(typeVariable);
+				if (result == null) result = caseKermetaModelElement(typeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -380,7 +381,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeContainer(objectTypeVariable);
 				if (result == null) result = caseType(objectTypeVariable);
 				if (result == null) result = caseNamedElement(objectTypeVariable);
-				if (result == null) result = caseObject(objectTypeVariable);
+				if (result == null) result = caseKermetaModelElement(objectTypeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -392,7 +393,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseModel(modelType);
 				if (result == null) result = caseNamedElement(modelType);
 				if (result == null) result = caseTypeContainer(modelType);
-				if (result == null) result = caseObject(modelType);
+				if (result == null) result = caseKermetaModelElement(modelType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -403,7 +404,7 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeContainer(modelTypeVariable);
 				if (result == null) result = caseType(modelTypeVariable);
 				if (result == null) result = caseNamedElement(modelTypeVariable);
-				if (result == null) result = caseObject(modelTypeVariable);
+				if (result == null) result = caseKermetaModelElement(modelTypeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -415,21 +416,21 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseTypeContainer(virtualType);
 				if (result == null) result = caseType(virtualType);
 				if (result == null) result = caseNamedElement(virtualType);
-				if (result == null) result = caseObject(virtualType);
+				if (result == null) result = caseKermetaModelElement(virtualType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.MODEL: {
 				Model model = (Model)theEObject;
 				T result = caseModel(model);
-				if (result == null) result = caseObject(model);
+				if (result == null) result = caseKermetaModelElement(model);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.RESOURCE: {
 				Resource resource = (Resource)theEObject;
 				T result = caseResource(resource);
-				if (result == null) result = caseObject(resource);
+				if (result == null) result = caseKermetaModelElement(resource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -437,7 +438,7 @@ public class StructureSwitch<T> {
 				ResourceGroup resourceGroup = (ResourceGroup)theEObject;
 				T result = caseResourceGroup(resourceGroup);
 				if (result == null) result = caseResource(resourceGroup);
-				if (result == null) result = caseObject(resourceGroup);
+				if (result == null) result = caseKermetaModelElement(resourceGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -445,14 +446,14 @@ public class StructureSwitch<T> {
 				SimpleResource simpleResource = (SimpleResource)theEObject;
 				T result = caseSimpleResource(simpleResource);
 				if (result == null) result = caseResource(simpleResource);
-				if (result == null) result = caseObject(simpleResource);
+				if (result == null) result = caseKermetaModelElement(simpleResource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.ABSTRACT_OPERATION: {
 				AbstractOperation abstractOperation = (AbstractOperation)theEObject;
 				T result = caseAbstractOperation(abstractOperation);
-				if (result == null) result = caseObject(abstractOperation);
+				if (result == null) result = caseKermetaModelElement(abstractOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -461,14 +462,14 @@ public class StructureSwitch<T> {
 				T result = caseUnresolvedType(unresolvedType);
 				if (result == null) result = caseType(unresolvedType);
 				if (result == null) result = caseUnresolved(unresolvedType);
-				if (result == null) result = caseObject(unresolvedType);
+				if (result == null) result = caseKermetaModelElement(unresolvedType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.UNRESOLVED: {
 				Unresolved unresolved = (Unresolved)theEObject;
 				T result = caseUnresolved(unresolved);
-				if (result == null) result = caseObject(unresolved);
+				if (result == null) result = caseKermetaModelElement(unresolved);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -477,7 +478,7 @@ public class StructureSwitch<T> {
 				T result = caseUnresolvedProperty(unresolvedProperty);
 				if (result == null) result = caseAbstractProperty(unresolvedProperty);
 				if (result == null) result = caseUnresolved(unresolvedProperty);
-				if (result == null) result = caseObject(unresolvedProperty);
+				if (result == null) result = caseKermetaModelElement(unresolvedProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -487,14 +488,14 @@ public class StructureSwitch<T> {
 				if (result == null) result = caseAbstractOperation(unresolvedOperation);
 				if (result == null) result = caseUnresolved(unresolvedOperation);
 				if (result == null) result = caseTypeContainer(unresolvedOperation);
-				if (result == null) result = caseObject(unresolvedOperation);
+				if (result == null) result = caseKermetaModelElement(unresolvedOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.USING: {
 				Using using = (Using)theEObject;
 				T result = caseUsing(using);
-				if (result == null) result = caseObject(using);
+				if (result == null) result = caseKermetaModelElement(using);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -503,7 +504,7 @@ public class StructureSwitch<T> {
 				T result = caseProductType(productType);
 				if (result == null) result = caseTypeContainer(productType);
 				if (result == null) result = caseType(productType);
-				if (result == null) result = caseObject(productType);
+				if (result == null) result = caseKermetaModelElement(productType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -512,7 +513,7 @@ public class StructureSwitch<T> {
 				T result = caseFunctionType(functionType);
 				if (result == null) result = caseTypeContainer(functionType);
 				if (result == null) result = caseType(functionType);
-				if (result == null) result = caseObject(functionType);
+				if (result == null) result = caseKermetaModelElement(functionType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -520,7 +521,7 @@ public class StructureSwitch<T> {
 				VoidType voidType = (VoidType)theEObject;
 				T result = caseVoidType(voidType);
 				if (result == null) result = caseType(voidType);
-				if (result == null) result = caseObject(voidType);
+				if (result == null) result = caseKermetaModelElement(voidType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -528,7 +529,7 @@ public class StructureSwitch<T> {
 				TypeMapping typeMapping = (TypeMapping)theEObject;
 				T result = caseTypeMapping(typeMapping);
 				if (result == null) result = caseTypeContainer(typeMapping);
-				if (result == null) result = caseObject(typeMapping);
+				if (result == null) result = caseKermetaModelElement(typeMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -537,17 +538,17 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Object</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Kermeta Model Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Object</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Kermeta Model Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseObject(org.kermeta.language.structure.Object object) {
+	public T caseKermetaModelElement(KermetaModelElement object) {
 		return null;
 	}
 
@@ -1208,6 +1209,21 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeMapping(TypeMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseObject(kermeta.standard.Object object) {
 		return null;
 	}
 

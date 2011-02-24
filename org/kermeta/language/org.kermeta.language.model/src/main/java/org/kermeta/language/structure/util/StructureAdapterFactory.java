@@ -22,6 +22,7 @@ import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeVariable;
@@ -114,8 +115,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	protected StructureSwitch<Adapter> modelSwitch =
 		new StructureSwitch<Adapter>() {
 			@Override
-			public Adapter caseObject(org.kermeta.language.structure.Object object) {
-				return createObjectAdapter();
+			public Adapter caseKermetaModelElement(KermetaModelElement object) {
+				return createKermetaModelElementAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {
@@ -294,6 +295,10 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createTypeMappingAdapter();
 			}
 			@Override
+			public Adapter caseObject(kermeta.standard.Object object) {
+				return createObjectAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -314,16 +319,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Object <em>Object</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.KermetaModelElement <em>Kermeta Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.Object
+	 * @see org.kermeta.language.structure.KermetaModelElement
 	 * @generated
 	 */
-	public Adapter createObjectAdapter() {
+	public Adapter createKermetaModelElementAdapter() {
 		return null;
 	}
 
@@ -940,6 +945,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Object
+	 * @generated
+	 */
+	public Adapter createObjectAdapter() {
 		return null;
 	}
 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.Resource;
 import org.kermeta.language.structure.SimpleResource;
@@ -30,7 +31,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class ModelImpl extends ObjectImpl implements Model {
+public class ModelImpl extends KermetaModelElementImpl implements Model {
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -39,7 +40,7 @@ public class ModelImpl extends ObjectImpl implements Model {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.kermeta.language.structure.Object> contents;
+	protected EList<KermetaModelElement> contents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,9 +66,9 @@ public class ModelImpl extends ObjectImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.kermeta.language.structure.Object> getContents() {
+	public EList<KermetaModelElement> getContents() {
 		if (contents == null) {
-			contents = new EObjectResolvingEList<org.kermeta.language.structure.Object>(org.kermeta.language.structure.Object.class, this, StructurePackage.MODEL__CONTENTS);
+			contents = new EObjectResolvingEList<KermetaModelElement>(KermetaModelElement.class, this, StructurePackage.MODEL__CONTENTS);
 		}
 		return contents;
 	}

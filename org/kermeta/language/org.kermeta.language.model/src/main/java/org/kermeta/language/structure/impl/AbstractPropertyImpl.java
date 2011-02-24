@@ -20,7 +20,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class AbstractPropertyImpl extends ObjectImpl implements AbstractProperty {
+public abstract class AbstractPropertyImpl extends KermetaModelElementImpl implements AbstractProperty {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

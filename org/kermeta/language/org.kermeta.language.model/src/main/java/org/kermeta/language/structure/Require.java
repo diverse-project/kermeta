@@ -27,7 +27,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface Require extends org.kermeta.language.structure.Object {
+public interface Require extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

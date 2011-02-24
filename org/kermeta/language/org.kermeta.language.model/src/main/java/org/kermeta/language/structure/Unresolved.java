@@ -24,5 +24,5 @@ package org.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface Unresolved extends org.kermeta.language.structure.Object {
+public interface Unresolved extends KermetaModelElement {
 } // Unresolved

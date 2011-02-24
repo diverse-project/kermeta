@@ -42,6 +42,7 @@ import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeVariable;
@@ -90,7 +91,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass objectEClass = null;
+	private EClass kermetaModelElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -405,6 +406,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass objectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum constraintLanguageEEnum = null;
 
 	/**
@@ -522,8 +530,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getObject() {
-		return objectEClass;
+	public EClass getKermetaModelElement() {
+		return kermetaModelElementEClass;
 	}
 
 	/**
@@ -531,8 +539,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getObject_KTag() {
-		return (EReference)objectEClass.getEStructuralFeatures().get(0);
+	public EReference getKermetaModelElement_KTag() {
+		return (EReference)kermetaModelElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -540,8 +548,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getObject_KOwnedTags() {
-		return (EReference)objectEClass.getEStructuralFeatures().get(1);
+	public EReference getKermetaModelElement_KOwnedTags() {
+		return (EReference)kermetaModelElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -549,8 +557,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getObject_KType() {
-		return (EReference)objectEClass.getEStructuralFeatures().get(2);
+	public EReference getKermetaModelElement_KType() {
+		return (EReference)kermetaModelElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -919,7 +927,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EAttribute getTypeDefinition_IsAspect() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -928,7 +936,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getTypeDefinition_SuperType() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -937,7 +945,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getTypeDefinition_TypeMappings() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1603,7 +1611,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EAttribute getUnresolvedType_TypeIdentifier() {
-		return (EAttribute)unresolvedTypeEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)unresolvedTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1612,7 +1620,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getUnresolvedType_Usings() {
-		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(1);
+		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1621,7 +1629,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getUnresolvedType_Generics() {
-		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(2);
+		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1800,6 +1808,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getObject() {
+		return objectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintLanguage() {
 		return constraintLanguageEEnum;
 	}
@@ -1877,10 +1894,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		isCreated = true;
 
 		// Create classes and their features
-		objectEClass = createEClass(OBJECT);
-		createEReference(objectEClass, OBJECT__KTAG);
-		createEReference(objectEClass, OBJECT__KOWNED_TAGS);
-		createEReference(objectEClass, OBJECT__KTYPE);
+		kermetaModelElementEClass = createEClass(KERMETA_MODEL_ELEMENT);
+		createEReference(kermetaModelElementEClass, KERMETA_MODEL_ELEMENT__KTAG);
+		createEReference(kermetaModelElementEClass, KERMETA_MODEL_ELEMENT__KOWNED_TAGS);
+		createEReference(kermetaModelElementEClass, KERMETA_MODEL_ELEMENT__KTYPE);
 
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
@@ -1929,9 +1946,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UPPER);
 
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__SUPER_TYPE);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__TYPE_MAPPINGS);
+		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
 
 		classEClass = createEClass(CLASS);
 		createEReference(classEClass, CLASS__OWNED_ATTRIBUTE);
@@ -2033,9 +2050,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		abstractOperationEClass = createEClass(ABSTRACT_OPERATION);
 
 		unresolvedTypeEClass = createEClass(UNRESOLVED_TYPE);
-		createEAttribute(unresolvedTypeEClass, UNRESOLVED_TYPE__TYPE_IDENTIFIER);
 		createEReference(unresolvedTypeEClass, UNRESOLVED_TYPE__USINGS);
 		createEReference(unresolvedTypeEClass, UNRESOLVED_TYPE__GENERICS);
+		createEAttribute(unresolvedTypeEClass, UNRESOLVED_TYPE__TYPE_IDENTIFIER);
 
 		unresolvedEClass = createEClass(UNRESOLVED);
 
@@ -2063,6 +2080,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(typeMappingEClass, TYPE_MAPPING__MAPPING);
 		createEReference(typeMappingEClass, TYPE_MAPPING__TARGET_TYPE);
 		createEReference(typeMappingEClass, TYPE_MAPPING__SOURCE_TYPE);
+
+		objectEClass = createEClass(OBJECT);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2110,11 +2129,11 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		operationEClass.getESuperTypes().add(this.getAbstractOperation());
 		propertyEClass.getESuperTypes().add(this.getMultiplicityElement());
 		propertyEClass.getESuperTypes().add(this.getAbstractProperty());
-		typeEClass.getESuperTypes().add(this.getObject());
-		typeContainerEClass.getESuperTypes().add(this.getObject());
+		typeEClass.getESuperTypes().add(this.getKermetaModelElement());
+		typeContainerEClass.getESuperTypes().add(this.getKermetaModelElement());
 		enumerationLiteralEClass.getESuperTypes().add(this.getNamedElement());
 		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
-		typeVariableBindingEClass.getESuperTypes().add(this.getObject());
+		typeVariableBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
 		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
 		typeDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
@@ -2122,21 +2141,21 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
-		namedElementEClass.getESuperTypes().add(this.getObject());
+		namedElementEClass.getESuperTypes().add(this.getKermetaModelElement());
 		packageEClass.getESuperTypes().add(this.getNamedElement());
 		packageEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
 		parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
 		typedElementEClass.getESuperTypes().add(this.getTypeContainer());
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
-		tagEClass.getESuperTypes().add(this.getObject());
-		abstractPropertyEClass.getESuperTypes().add(this.getObject());
+		tagEClass.getESuperTypes().add(this.getKermetaModelElement());
+		abstractPropertyEClass.getESuperTypes().add(this.getKermetaModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
 		modelingUnitEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
-		modelingUnitEClass.getESuperTypes().add(this.getObject());
+		modelingUnitEClass.getESuperTypes().add(this.getKermetaModelElement());
 		typeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
-		requireEClass.getESuperTypes().add(this.getObject());
+		requireEClass.getESuperTypes().add(this.getKermetaModelElement());
 		genericTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
@@ -2148,20 +2167,20 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		modelTypeEClass.getESuperTypes().add(this.getModel());
 		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
-		modelEClass.getESuperTypes().add(this.getObject());
-		resourceEClass.getESuperTypes().add(this.getObject());
+		modelEClass.getESuperTypes().add(this.getKermetaModelElement());
+		resourceEClass.getESuperTypes().add(this.getKermetaModelElement());
 		resourceGroupEClass.getESuperTypes().add(this.getResource());
 		simpleResourceEClass.getESuperTypes().add(this.getResource());
-		abstractOperationEClass.getESuperTypes().add(this.getObject());
+		abstractOperationEClass.getESuperTypes().add(this.getKermetaModelElement());
 		unresolvedTypeEClass.getESuperTypes().add(this.getType());
 		unresolvedTypeEClass.getESuperTypes().add(this.getUnresolved());
-		unresolvedEClass.getESuperTypes().add(this.getObject());
+		unresolvedEClass.getESuperTypes().add(this.getKermetaModelElement());
 		unresolvedPropertyEClass.getESuperTypes().add(this.getAbstractProperty());
 		unresolvedPropertyEClass.getESuperTypes().add(this.getUnresolved());
 		unresolvedOperationEClass.getESuperTypes().add(this.getAbstractOperation());
 		unresolvedOperationEClass.getESuperTypes().add(this.getUnresolved());
 		unresolvedOperationEClass.getESuperTypes().add(this.getTypeContainer());
-		usingEClass.getESuperTypes().add(this.getObject());
+		usingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		productTypeEClass.getESuperTypes().add(this.getType());
 		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
@@ -2170,10 +2189,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeMappingEClass.getESuperTypes().add(this.getTypeContainer());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(objectEClass, org.kermeta.language.structure.Object.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getObject_KTag(), this.getTag(), this.getTag_Object(), "kTag", null, 0, -1, org.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_KOwnedTags(), this.getTag(), null, "kOwnedTags", null, 0, -1, org.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_KType(), this.getType(), null, "kType", null, 1, 1, org.kermeta.language.structure.Object.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKermetaModelElement_KTag(), this.getTag(), this.getTag_Object(), "kTag", null, 0, -1, KermetaModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaModelElement_KOwnedTags(), this.getTag(), null, "kOwnedTags", null, 0, -1, KermetaModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaModelElement_KType(), this.getType(), null, "kType", null, 1, 1, KermetaModelElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_IsAbstract(), this.getBoolean(), "isAbstract", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2222,9 +2241,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getMultiplicityElement_Upper(), this.getUnlimitedNatural(), "upper", null, 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeDefinition_IsAspect(), this.getBoolean(), "isAspect", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_SuperType(), this.getType(), null, "superType", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_TypeMappings(), this.getTypeMapping(), this.getTypeMapping_SourceType(), "typeMappings", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypeDefinition_IsAspect(), this.getBoolean(), "isAspect", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, org.kermeta.language.structure.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClass_OwnedAttribute(), this.getProperty(), null, "ownedAttribute", null, 0, -1, org.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2232,6 +2251,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getClass_SuperClass(), this.getClass_(), null, "superClass", null, 0, -1, org.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_IsAbstract(), this.getBoolean(), "isAbstract", "false", 0, 1, org.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Name(), this.getString(), "name", null, 0, 1, org.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(classEClass, null, "EOperation0", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2258,7 +2279,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTag_Name(), this.getString(), "name", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Value(), this.getString(), "value", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTag_Object(), this.getObject(), this.getObject_KTag(), "object", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTag_Object(), this.getKermetaModelElement(), this.getKermetaModelElement_KTag(), "object", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractPropertyEClass, AbstractProperty.class, "AbstractProperty", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2316,7 +2337,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getVirtualType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModel_Contents(), this.getObject(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModel_Contents(), this.getKermetaModelElement(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(modelEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getResource(), "resource", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -2336,9 +2357,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(abstractOperationEClass, AbstractOperation.class, "AbstractOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unresolvedTypeEClass, UnresolvedType.class, "UnresolvedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnresolvedType_TypeIdentifier(), this.getString(), "typeIdentifier", null, 1, 1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedType_Usings(), this.getUsing(), null, "usings", null, 0, -1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedType_Generics(), this.getType(), null, "generics", null, 0, -1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedType_TypeIdentifier(), this.getString(), "typeIdentifier", null, 1, 1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unresolvedEClass, Unresolved.class, "Unresolved", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2366,6 +2387,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getTypeMapping_Mapping(), ecorePackage.getEObject(), null, "mapping", null, 0, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeMapping_TargetType(), this.getType(), null, "targetType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeMapping_SourceType(), this.getTypeDefinition(), this.getTypeDefinition_TypeMappings(), "sourceType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(objectEClass, kermeta.standard.Object.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

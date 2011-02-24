@@ -1183,7 +1183,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		// Add supertypes to classes
 		assignmentEClass.getESuperTypes().add(this.getExpression());
-		expressionEClass.getESuperTypes().add(theStructurePackage.getObject());
+		expressionEClass.getESuperTypes().add(theStructurePackage.getKermetaModelElement());
 		expressionEClass.getESuperTypes().add(theStructurePackage.getTypeContainer());
 		callExpressionEClass.getESuperTypes().add(this.getExpression());
 		blockEClass.getESuperTypes().add(this.getExpression());
@@ -1194,13 +1194,13 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		callValueEClass.getESuperTypes().add(this.getCallExpression());
 		conditionalEClass.getESuperTypes().add(this.getExpression());
 		raiseEClass.getESuperTypes().add(this.getExpression());
-		rescueEClass.getESuperTypes().add(theStructurePackage.getObject());
+		rescueEClass.getESuperTypes().add(theStructurePackage.getKermetaModelElement());
 		typeReferenceEClass.getESuperTypes().add(theStructurePackage.getMultiplicityElement());
 		literalEClass.getESuperTypes().add(this.getExpression());
 		emptyExpressionEClass.getESuperTypes().add(this.getExpression());
 		javaStaticCallEClass.getESuperTypes().add(this.getExpression());
 		lambdaExpressionEClass.getESuperTypes().add(this.getExpression());
-		lambdaParameterEClass.getESuperTypes().add(theStructurePackage.getObject());
+		lambdaParameterEClass.getESuperTypes().add(theStructurePackage.getKermetaModelElement());
 		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());

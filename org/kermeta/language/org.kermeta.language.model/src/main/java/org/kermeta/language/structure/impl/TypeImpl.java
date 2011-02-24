@@ -33,7 +33,7 @@ import org.kermeta.language.structure.TypeContainer;
  *
  * @generated
  */
-public abstract class TypeImpl extends ObjectImpl implements Type {
+public abstract class TypeImpl extends KermetaModelElementImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

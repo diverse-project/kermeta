@@ -33,7 +33,7 @@ import org.kermeta.language.structure.util.EncodingHelper;
  *
  * @generated
  */
-public abstract class NamedElementImpl extends ObjectImpl implements NamedElement {
+public abstract class NamedElementImpl extends KermetaModelElementImpl implements NamedElement {
 
     /**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.

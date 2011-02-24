@@ -6,6 +6,8 @@
  */
 package org.kermeta.language.behavior;
 
+import org.kermeta.language.structure.KermetaModelElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +30,7 @@ package org.kermeta.language.behavior;
  * @model
  * @generated
  */
-public interface LambdaParameter extends org.kermeta.language.structure.Object {
+public interface LambdaParameter extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

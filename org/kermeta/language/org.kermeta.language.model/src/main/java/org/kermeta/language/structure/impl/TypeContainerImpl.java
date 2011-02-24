@@ -35,7 +35,7 @@ import org.kermeta.language.structure.TypeContainer;
  *
  * @generated
  */
-public abstract class TypeContainerImpl extends ObjectImpl implements TypeContainer {
+public abstract class TypeContainerImpl extends KermetaModelElementImpl implements TypeContainer {
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

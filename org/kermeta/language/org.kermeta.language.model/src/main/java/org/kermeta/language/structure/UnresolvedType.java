@@ -21,9 +21,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.UnresolvedType#getTypeIdentifier <em>Type Identifier</em>}</li>
  *   <li>{@link org.kermeta.language.structure.UnresolvedType#getUsings <em>Usings</em>}</li>
  *   <li>{@link org.kermeta.language.structure.UnresolvedType#getGenerics <em>Generics</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.UnresolvedType#getTypeIdentifier <em>Type Identifier</em>}</li>
  * </ul>
  * </p>
  *

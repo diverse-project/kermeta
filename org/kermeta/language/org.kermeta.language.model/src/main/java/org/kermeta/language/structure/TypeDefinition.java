@@ -23,9 +23,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.TypeDefinition#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.TypeDefinition#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.TypeDefinition#getTypeMappings <em>Type Mappings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.TypeDefinition#getIsAspect <em>Is Aspect</em>}</li>
  * </ul>
  * </p>
  *

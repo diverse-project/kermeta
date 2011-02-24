@@ -6,6 +6,7 @@
  */
 package org.kermeta.language.behavior;
 
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 
@@ -29,7 +30,7 @@ import org.kermeta.language.structure.TypeContainer;
  * @model abstract="true"
  * @generated
  */
-public interface Expression extends org.kermeta.language.structure.Object, TypeContainer {
+public interface Expression extends KermetaModelElement, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Static Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

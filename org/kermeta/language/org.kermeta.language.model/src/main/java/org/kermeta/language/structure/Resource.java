@@ -17,5 +17,5 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface Resource extends org.kermeta.language.structure.Object {
+public interface Resource extends KermetaModelElement {
 } // Resource

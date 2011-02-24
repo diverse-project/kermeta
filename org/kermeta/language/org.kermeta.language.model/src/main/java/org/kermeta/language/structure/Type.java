@@ -27,7 +27,7 @@ package org.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface Type extends org.kermeta.language.structure.Object {
+public interface Type extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Type Container</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.TypeContainer#getContainedType <em>Contained Type</em>}'.

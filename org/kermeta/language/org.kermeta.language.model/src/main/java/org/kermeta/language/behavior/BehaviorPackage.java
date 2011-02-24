@@ -24,14 +24,6 @@ import org.kermeta.language.structure.StructurePackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
- * Contains all the classes that define the behavior of Kermeta (i.e the model representation
- * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta 
- * metamodel, viewed as a model.
- * You can also find some information about the behavior package here : <a href="http://www.kermeta.org/documents/manual/html.single">KermetaManual</a>
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png">
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png">
- * <!-- end-model-doc -->
  * @see org.kermeta.language.behavior.BehaviorFactory
  * @model kind="package"
  * @generated
@@ -86,7 +78,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__KTAG = StructurePackage.OBJECT__KTAG;
+	int EXPRESSION__KTAG = StructurePackage.KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -95,7 +87,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__KOWNED_TAGS = StructurePackage.OBJECT__KOWNED_TAGS;
+	int EXPRESSION__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -104,7 +96,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__KTYPE = StructurePackage.OBJECT__KTYPE;
+	int EXPRESSION__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -113,7 +105,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__CONTAINED_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int EXPRESSION__CONTAINED_TYPE = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -122,7 +114,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__STATIC_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+	int EXPRESSION__STATIC_TYPE = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -131,7 +123,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+	int EXPRESSION_FEATURE_COUNT = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -1214,7 +1206,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__KTAG = StructurePackage.OBJECT__KTAG;
+	int RESCUE__KTAG = StructurePackage.KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -1223,7 +1215,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__KOWNED_TAGS = StructurePackage.OBJECT__KOWNED_TAGS;
+	int RESCUE__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -1232,7 +1224,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__KTYPE = StructurePackage.OBJECT__KTYPE;
+	int RESCUE__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
@@ -1241,7 +1233,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__BODY = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int RESCUE__BODY = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Exception Type</b></em>' containment reference.
@@ -1250,7 +1242,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__EXCEPTION_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+	int RESCUE__EXCEPTION_TYPE = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exception Name</b></em>' attribute.
@@ -1259,7 +1251,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+	int RESCUE__EXCEPTION_NAME = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Rescue</em>' class.
@@ -1268,7 +1260,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 3;
+	int RESCUE_FEATURE_COUNT = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
@@ -1697,7 +1689,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__KTAG = StructurePackage.OBJECT__KTAG;
+	int LAMBDA_PARAMETER__KTAG = StructurePackage.KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -1706,7 +1698,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__KOWNED_TAGS = StructurePackage.OBJECT__KOWNED_TAGS;
+	int LAMBDA_PARAMETER__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -1715,7 +1707,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__KTYPE = StructurePackage.OBJECT__KTYPE;
+	int LAMBDA_PARAMETER__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1724,7 +1716,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__NAME = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int LAMBDA_PARAMETER__NAME = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1733,7 +1725,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+	int LAMBDA_PARAMETER__TYPE = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Lambda Parameter</em>' class.
@@ -1742,7 +1734,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+	int LAMBDA_PARAMETER_FEATURE_COUNT = StructurePackage.KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.

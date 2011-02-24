@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface TypeContainer extends org.kermeta.language.structure.Object {
+public interface TypeContainer extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Contained Type</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Type}.

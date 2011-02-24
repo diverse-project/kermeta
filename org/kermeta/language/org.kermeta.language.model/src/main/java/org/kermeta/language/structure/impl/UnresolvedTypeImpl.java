@@ -33,35 +33,15 @@ import org.kermeta.language.structure.Using;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getTypeIdentifier <em>Type Identifier</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getUsings <em>Usings</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getGenerics <em>Generics</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getTypeIdentifier <em>Type Identifier</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
-	/**
-	 * The default value of the '{@link #getTypeIdentifier() <em>Type Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeIdentifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TYPE_IDENTIFIER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTypeIdentifier() <em>Type Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeIdentifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected String typeIdentifier = TYPE_IDENTIFIER_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getUsings() <em>Usings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -81,6 +61,26 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	 * @ordered
 	 */
 	protected EList<Type> generics;
+
+	/**
+	 * The default value of the '{@link #getTypeIdentifier() <em>Type Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_IDENTIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTypeIdentifier() <em>Type Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String typeIdentifier = TYPE_IDENTIFIER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -170,12 +170,12 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
-				return getTypeIdentifier();
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				return getUsings();
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
 				return getGenerics();
+			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
+				return getTypeIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,9 +189,6 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
-				setTypeIdentifier((String)newValue);
-				return;
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				getUsings().clear();
 				getUsings().addAll((Collection<? extends Using>)newValue);
@@ -199,6 +196,9 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
 				getGenerics().clear();
 				getGenerics().addAll((Collection<? extends Type>)newValue);
+				return;
+			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
+				setTypeIdentifier((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -212,14 +212,14 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
-				setTypeIdentifier(TYPE_IDENTIFIER_EDEFAULT);
-				return;
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				getUsings().clear();
 				return;
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
 				getGenerics().clear();
+				return;
+			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
+				setTypeIdentifier(TYPE_IDENTIFIER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -233,12 +233,12 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
-				return TYPE_IDENTIFIER_EDEFAULT == null ? typeIdentifier != null : !TYPE_IDENTIFIER_EDEFAULT.equals(typeIdentifier);
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				return usings != null && !usings.isEmpty();
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
 				return generics != null && !generics.isEmpty();
+			case StructurePackage.UNRESOLVED_TYPE__TYPE_IDENTIFIER:
+				return TYPE_IDENTIFIER_EDEFAULT == null ? typeIdentifier != null : !TYPE_IDENTIFIER_EDEFAULT.equals(typeIdentifier);
 		}
 		return super.eIsSet(featureID);
 	}

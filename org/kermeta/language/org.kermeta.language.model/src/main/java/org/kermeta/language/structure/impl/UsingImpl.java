@@ -29,7 +29,7 @@ import org.kermeta.language.structure.Using;
  *
  * @generated
  */
-public class UsingImpl extends ObjectImpl implements Using {
+public class UsingImpl extends KermetaModelElementImpl implements Using {
 	/**
 	 * The default value of the '{@link #getFromQName() <em>From QName</em>}' attribute.
 	 * <!-- begin-user-doc -->

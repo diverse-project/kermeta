@@ -28,7 +28,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class RequireImpl extends ObjectImpl implements Require {
+public class RequireImpl extends KermetaModelElementImpl implements Require {
 	/**
 	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->

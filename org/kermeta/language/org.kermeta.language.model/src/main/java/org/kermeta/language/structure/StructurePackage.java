@@ -68,14 +68,14 @@ public interface StructurePackage extends EPackage {
 	StructurePackage eINSTANCE = org.kermeta.language.structure.impl.StructurePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.KermetaModelElementImpl <em>Kermeta Model Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ObjectImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+	 * @see org.kermeta.language.structure.impl.KermetaModelElementImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getKermetaModelElement()
 	 * @generated
 	 */
-	int OBJECT = 0;
+	int KERMETA_MODEL_ELEMENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -84,7 +84,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT__KTAG = 0;
+	int KERMETA_MODEL_ELEMENT__KTAG = 0;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -93,7 +93,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT__KOWNED_TAGS = 1;
+	int KERMETA_MODEL_ELEMENT__KOWNED_TAGS = 1;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -102,16 +102,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT__KTYPE = 2;
+	int KERMETA_MODEL_ELEMENT__KTYPE = 2;
 
 	/**
-	 * The number of structural features of the '<em>Object</em>' class.
+	 * The number of structural features of the '<em>Kermeta Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_FEATURE_COUNT = 3;
+	int KERMETA_MODEL_ELEMENT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.
@@ -130,7 +130,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER__KTAG = OBJECT__KTAG;
+	int TYPE_CONTAINER__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -139,7 +139,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int TYPE_CONTAINER__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -148,7 +148,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER__KTYPE = OBJECT__KTYPE;
+	int TYPE_CONTAINER__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -157,7 +157,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER__CONTAINED_TYPE = OBJECT_FEATURE_COUNT + 0;
+	int TYPE_CONTAINER__CONTAINED_TYPE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type Container</em>' class.
@@ -166,7 +166,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int TYPE_CONTAINER_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -792,7 +792,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__KTAG = OBJECT__KTAG;
+	int TYPE__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -801,7 +801,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int TYPE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -810,7 +810,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__KTYPE = OBJECT__KTYPE;
+	int TYPE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -819,7 +819,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__TYPE_CONTAINER = OBJECT_FEATURE_COUNT + 0;
+	int TYPE__TYPE_CONTAINER = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -828,7 +828,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int TYPE_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -847,7 +847,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__KTAG = OBJECT__KTAG;
+	int NAMED_ELEMENT__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -856,7 +856,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int NAMED_ELEMENT__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -865,7 +865,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__KTYPE = OBJECT__KTYPE;
+	int NAMED_ELEMENT__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -874,7 +874,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = OBJECT_FEATURE_COUNT + 0;
+	int NAMED_ELEMENT__NAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
@@ -883,7 +883,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int NAMED_ELEMENT_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -1078,22 +1078,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION__CONTAINED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__IS_ASPECT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE_DEFINITION__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -1102,7 +1093,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__TYPE_MAPPINGS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_DEFINITION__TYPE_MAPPINGS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__IS_ASPECT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
@@ -1387,22 +1387,13 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 3;
+	int DATA_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -1411,7 +1402,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 4;
+	int DATA_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -1487,15 +1487,6 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION__CONTAINED_TYPE = DATA_TYPE__CONTAINED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__IS_ASPECT = DATA_TYPE__IS_ASPECT;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1512,6 +1503,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__TYPE_MAPPINGS = DATA_TYPE__TYPE_MAPPINGS;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__IS_ASPECT = DATA_TYPE__IS_ASPECT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
@@ -1805,15 +1805,6 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__CONTAINED_TYPE = DATA_TYPE__CONTAINED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__IS_ASPECT = DATA_TYPE__IS_ASPECT;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1830,6 +1821,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__TYPE_MAPPINGS = DATA_TYPE__TYPE_MAPPINGS;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__IS_ASPECT = DATA_TYPE__IS_ASPECT;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type</b></em>' reference.
@@ -1866,7 +1866,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__KTAG = OBJECT__KTAG;
+	int TAG__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -1875,7 +1875,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int TAG__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -1884,7 +1884,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__KTYPE = OBJECT__KTYPE;
+	int TAG__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1893,7 +1893,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__NAME = OBJECT_FEATURE_COUNT + 0;
+	int TAG__NAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1902,7 +1902,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__VALUE = OBJECT_FEATURE_COUNT + 1;
+	int TAG__VALUE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Object</b></em>' reference list.
@@ -1911,7 +1911,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__OBJECT = OBJECT_FEATURE_COUNT + 2;
+	int TAG__OBJECT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Tag</em>' class.
@@ -1920,7 +1920,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 3;
+	int TAG_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.AbstractPropertyImpl <em>Abstract Property</em>}' class.
@@ -1939,7 +1939,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PROPERTY__KTAG = OBJECT__KTAG;
+	int ABSTRACT_PROPERTY__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -1948,7 +1948,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PROPERTY__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int ABSTRACT_PROPERTY__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -1957,7 +1957,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PROPERTY__KTYPE = OBJECT__KTYPE;
+	int ABSTRACT_PROPERTY__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Property</em>' class.
@@ -1966,7 +1966,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PROPERTY_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
+	int ABSTRACT_PROPERTY_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -2133,15 +2133,6 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2158,6 +2149,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_TYPE_DEFINITION__TYPE_MAPPINGS = TYPE_DEFINITION__TYPE_MAPPINGS;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
@@ -2233,15 +2233,6 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION__CONTAINED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__IS_ASPECT = GENERIC_TYPE_DEFINITION__IS_ASPECT;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2258,6 +2249,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DEFINITION__TYPE_MAPPINGS = GENERIC_TYPE_DEFINITION__TYPE_MAPPINGS;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__IS_ASPECT = GENERIC_TYPE_DEFINITION__IS_ASPECT;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
@@ -2494,7 +2494,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE__KTAG = OBJECT__KTAG;
+	int REQUIRE__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2503,7 +2503,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int REQUIRE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2512,7 +2512,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE__KTYPE = OBJECT__KTYPE;
+	int REQUIRE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -2521,7 +2521,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE__URI = OBJECT_FEATURE_COUNT + 0;
+	int REQUIRE__URI = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Require</em>' class.
@@ -2530,7 +2530,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int REQUIRE_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeVariableImpl <em>Type Variable</em>}' class.
@@ -2761,22 +2761,13 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 3;
+	int MODEL_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
@@ -2785,7 +2776,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 4;
+	int MODEL_TYPE__TYPE_MAPPINGS = TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
@@ -3022,7 +3022,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__KTAG = OBJECT__KTAG;
+	int MODEL__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3031,7 +3031,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int MODEL__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3040,7 +3040,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__KTYPE = OBJECT__KTYPE;
+	int MODEL__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
@@ -3049,7 +3049,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__CONTENTS = OBJECT_FEATURE_COUNT + 0;
+	int MODEL__CONTENTS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Model</em>' class.
@@ -3058,7 +3058,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int MODEL_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ResourceImpl <em>Resource</em>}' class.
@@ -3077,7 +3077,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__KTAG = OBJECT__KTAG;
+	int RESOURCE__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3086,7 +3086,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int RESOURCE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3095,7 +3095,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__KTYPE = OBJECT__KTYPE;
+	int RESOURCE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The number of structural features of the '<em>Resource</em>' class.
@@ -3104,7 +3104,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
+	int RESOURCE_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ResourceGroupImpl <em>Resource Group</em>}' class.
@@ -3242,7 +3242,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OPERATION__KTAG = OBJECT__KTAG;
+	int ABSTRACT_OPERATION__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3251,7 +3251,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OPERATION__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int ABSTRACT_OPERATION__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3260,7 +3260,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OPERATION__KTYPE = OBJECT__KTYPE;
+	int ABSTRACT_OPERATION__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Operation</em>' class.
@@ -3269,7 +3269,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OPERATION_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
+	int ABSTRACT_OPERATION_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl <em>Unresolved Type</em>}' class.
@@ -3318,22 +3318,13 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Type Identifier</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_TYPE__TYPE_IDENTIFIER = TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE__USINGS = TYPE_FEATURE_COUNT + 1;
+	int UNRESOLVED_TYPE__USINGS = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Generics</b></em>' containment reference list.
@@ -3342,7 +3333,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE__GENERICS = TYPE_FEATURE_COUNT + 2;
+	int UNRESOLVED_TYPE__GENERICS = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE__TYPE_IDENTIFIER = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved Type</em>' class.
@@ -3370,7 +3370,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KTAG = OBJECT__KTAG;
+	int UNRESOLVED__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3379,7 +3379,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int UNRESOLVED__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3388,7 +3388,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KTYPE = OBJECT__KTYPE;
+	int UNRESOLVED__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved</em>' class.
@@ -3397,7 +3397,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
+	int UNRESOLVED_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedPropertyImpl <em>Unresolved Property</em>}' class.
@@ -3544,7 +3544,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING__KTAG = OBJECT__KTAG;
+	int USING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3553,7 +3553,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING__KOWNED_TAGS = OBJECT__KOWNED_TAGS;
+	int USING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3562,7 +3562,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING__KTYPE = OBJECT__KTYPE;
+	int USING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>From QName</b></em>' attribute.
@@ -3571,7 +3571,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING__FROM_QNAME = OBJECT_FEATURE_COUNT + 0;
+	int USING__FROM_QNAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>To Name</b></em>' attribute.
@@ -3580,7 +3580,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING__TO_NAME = OBJECT_FEATURE_COUNT + 1;
+	int USING__TO_NAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Using</em>' class.
@@ -3589,7 +3589,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USING_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 2;
+	int USING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
@@ -3884,6 +3884,25 @@ public interface StructurePackage extends EPackage {
 	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ObjectImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+	 * @generated
+	 */
+	int OBJECT = 45;
+
+	/**
+	 * The number of structural features of the '<em>Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3891,7 +3910,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 45;
+	int CONSTRAINT_LANGUAGE = 46;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -3901,7 +3920,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 46;
+	int CONSTRAINT_TYPE = 47;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -3911,7 +3930,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 47;
+	int STRING = 48;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -3921,7 +3940,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 48;
+	int BOOLEAN = 49;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -3930,7 +3949,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 49;
+	int INTEGER = 50;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -3939,51 +3958,51 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 50;
+	int UNLIMITED_NATURAL = 51;
 
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.Object <em>Object</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.KermetaModelElement <em>Kermeta Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Object</em>'.
-	 * @see org.kermeta.language.structure.Object
+	 * @return the meta object for class '<em>Kermeta Model Element</em>'.
+	 * @see org.kermeta.language.structure.KermetaModelElement
 	 * @generated
 	 */
-	EClass getObject();
+	EClass getKermetaModelElement();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.Object#getKTag <em>KTag</em>}'.
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.KermetaModelElement#getKTag <em>KTag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>KTag</em>'.
-	 * @see org.kermeta.language.structure.Object#getKTag()
-	 * @see #getObject()
+	 * @see org.kermeta.language.structure.KermetaModelElement#getKTag()
+	 * @see #getKermetaModelElement()
 	 * @generated
 	 */
-	EReference getObject_KTag();
+	EReference getKermetaModelElement_KTag();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.Object#getKOwnedTags <em>KOwned Tags</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.KermetaModelElement#getKOwnedTags <em>KOwned Tags</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>KOwned Tags</em>'.
-	 * @see org.kermeta.language.structure.Object#getKOwnedTags()
-	 * @see #getObject()
+	 * @see org.kermeta.language.structure.KermetaModelElement#getKOwnedTags()
+	 * @see #getKermetaModelElement()
 	 * @generated
 	 */
-	EReference getObject_KOwnedTags();
+	EReference getKermetaModelElement_KOwnedTags();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.Object#getKType <em>KType</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.KermetaModelElement#getKType <em>KType</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>KType</em>'.
-	 * @see org.kermeta.language.structure.Object#getKType()
-	 * @see #getObject()
+	 * @see org.kermeta.language.structure.KermetaModelElement#getKType()
+	 * @see #getKermetaModelElement()
 	 * @generated
 	 */
-	EReference getObject_KType();
+	EReference getKermetaModelElement_KType();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Operation <em>Operation</em>}'.
@@ -5460,6 +5479,17 @@ public interface StructurePackage extends EPackage {
 	EReference getTypeMapping_SourceType();
 
 	/**
+	 * Returns the meta object for class '{@link kermeta.standard.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Object</em>'.
+	 * @see kermeta.standard.Object
+	 * @model instanceClass="kermeta.standard.Object"
+	 * @generated
+	 */
+	EClass getObject();
+
+	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5544,14 +5574,14 @@ public interface StructurePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.KermetaModelElementImpl <em>Kermeta Model Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ObjectImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+		 * @see org.kermeta.language.structure.impl.KermetaModelElementImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getKermetaModelElement()
 		 * @generated
 		 */
-		EClass OBJECT = eINSTANCE.getObject();
+		EClass KERMETA_MODEL_ELEMENT = eINSTANCE.getKermetaModelElement();
 
 		/**
 		 * The meta object literal for the '<em><b>KTag</b></em>' reference list feature.
@@ -5559,7 +5589,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OBJECT__KTAG = eINSTANCE.getObject_KTag();
+		EReference KERMETA_MODEL_ELEMENT__KTAG = eINSTANCE.getKermetaModelElement_KTag();
 
 		/**
 		 * The meta object literal for the '<em><b>KOwned Tags</b></em>' containment reference list feature.
@@ -5567,7 +5597,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OBJECT__KOWNED_TAGS = eINSTANCE.getObject_KOwnedTags();
+		EReference KERMETA_MODEL_ELEMENT__KOWNED_TAGS = eINSTANCE.getKermetaModelElement_KOwnedTags();
 
 		/**
 		 * The meta object literal for the '<em><b>KType</b></em>' reference feature.
@@ -5575,7 +5605,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OBJECT__KTYPE = eINSTANCE.getObject_KType();
+		EReference KERMETA_MODEL_ELEMENT__KTYPE = eINSTANCE.getKermetaModelElement_KType();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
@@ -6768,6 +6798,16 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_MAPPING__SOURCE_TYPE = eINSTANCE.getTypeMapping_SourceType();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ObjectImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+		 * @generated
+		 */
+		EClass OBJECT = eINSTANCE.getObject();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

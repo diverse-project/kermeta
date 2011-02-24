@@ -23,6 +23,7 @@ import org.kermeta.language.structure.ConstraintType;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeVariable;
@@ -96,7 +97,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case StructurePackage.OBJECT: return createObject();
+			case StructurePackage.KERMETA_MODEL_ELEMENT: return createKermetaModelElement();
 			case StructurePackage.OPERATION: return createOperation();
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
@@ -130,6 +131,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.TYPE_MAPPING: return createTypeMapping();
+			case StructurePackage.OBJECT: return (EObject)createObject();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -190,9 +192,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.kermeta.language.structure.Object createObject() {
-		ObjectImpl object = new ObjectImpl();
-		return object;
+	public KermetaModelElement createKermetaModelElement() {
+		KermetaModelElementImpl kermetaModelElement = new KermetaModelElementImpl();
+		return kermetaModelElement;
 	}
 
 	/**
@@ -523,6 +525,16 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public TypeMapping createTypeMapping() {
 		TypeMappingImpl typeMapping = new TypeMappingImpl();
 		return typeMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.Object createObject() {
+		ObjectImpl object = new ObjectImpl();
+		return object;
 	}
 
 	/**

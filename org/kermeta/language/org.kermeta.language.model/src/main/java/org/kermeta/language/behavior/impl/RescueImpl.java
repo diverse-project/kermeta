@@ -26,6 +26,7 @@ import org.kermeta.language.behavior.Expression;
 import org.kermeta.language.behavior.Rescue;
 import org.kermeta.language.behavior.TypeReference;
 
+import org.kermeta.language.structure.impl.KermetaModelElementImpl;
 import org.kermeta.language.structure.impl.ObjectImpl;
 
 /**
@@ -43,7 +44,7 @@ import org.kermeta.language.structure.impl.ObjectImpl;
  *
  * @generated
  */
-public class RescueImpl extends ObjectImpl implements Rescue {
+public class RescueImpl extends KermetaModelElementImpl implements Rescue {
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

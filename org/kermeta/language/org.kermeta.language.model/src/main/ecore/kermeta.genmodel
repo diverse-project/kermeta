@@ -133,12 +133,12 @@
           <genDataTypes ecoreDataType="kermeta.ecore#//kermeta/language/structure/Boolean"/>
           <genDataTypes ecoreDataType="kermeta.ecore#//kermeta/language/structure/Integer"/>
           <genDataTypes ecoreDataType="kermeta.ecore#//kermeta/language/structure/UnlimitedNatural"/>
-          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Object">
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/KermetaModelElement">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Object/kTag"/>
-            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Object/kOwnedTags"/>
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kTag"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kOwnedTags"/>
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Object/kType"/>
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kType"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Operation">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Operation/isAbstract"/>
@@ -193,10 +193,10 @@
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/MultiplicityElement/upper"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/TypeDefinition">
-            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/TypeDefinition/isAspect"/>
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeDefinition/typeMappings"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/TypeDefinition/isAspect"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Class">
             <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Class/ownedAttribute"/>
@@ -204,6 +204,7 @@
             <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Class/superClass"/>
             <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Class/isAbstract"/>
             <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Class/name"/>
+            <genOperations ecoreOperation="kermeta.ecore#//kermeta/language/structure/Class/EOperation0"/>
           </genClasses>
           <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/DataType"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Enumeration">
@@ -310,9 +311,9 @@
           </genClasses>
           <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/AbstractOperation"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedType">
-            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedType/typeIdentifier"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/UnresolvedType/usings"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/UnresolvedType/generics"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedType/typeIdentifier"/>
           </genClasses>
           <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/Unresolved"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedProperty">
@@ -344,6 +345,7 @@
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/targetType"/>
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/sourceType"/>
           </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Object"/>
         </nestedGenPackages>
       </nestedGenPackages>
     </nestedGenPackages>

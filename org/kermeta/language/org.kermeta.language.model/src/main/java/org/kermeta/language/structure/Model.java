@@ -29,10 +29,10 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Model extends org.kermeta.language.structure.Object {
+public interface Model extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.Object}.
+	 * The list contents are of type {@link org.kermeta.language.structure.KermetaModelElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -43,7 +43,7 @@ public interface Model extends org.kermeta.language.structure.Object {
 	 * @model changeable="false"
 	 * @generated
 	 */
-	EList<org.kermeta.language.structure.Object> getContents();
+	EList<KermetaModelElement> getContents();
 
 	/**
 	 * <!-- begin-user-doc -->

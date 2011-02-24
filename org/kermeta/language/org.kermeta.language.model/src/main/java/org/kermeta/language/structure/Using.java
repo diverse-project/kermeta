@@ -28,7 +28,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface Using extends org.kermeta.language.structure.Object {
+public interface Using extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>From QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->

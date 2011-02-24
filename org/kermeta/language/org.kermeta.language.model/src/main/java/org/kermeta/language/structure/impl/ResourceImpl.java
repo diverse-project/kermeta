@@ -20,7 +20,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class ResourceImpl extends ObjectImpl implements Resource {
+public class ResourceImpl extends KermetaModelElementImpl implements Resource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

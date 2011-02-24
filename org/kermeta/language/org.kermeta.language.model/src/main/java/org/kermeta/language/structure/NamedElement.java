@@ -28,7 +28,7 @@ package org.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface NamedElement extends org.kermeta.language.structure.Object {
+public interface NamedElement extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

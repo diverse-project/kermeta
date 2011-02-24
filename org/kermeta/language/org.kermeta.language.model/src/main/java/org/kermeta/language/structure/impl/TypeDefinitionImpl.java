@@ -37,9 +37,9 @@ import org.kermeta.language.structure.TypeMapping;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getContainedType <em>Contained Type</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getTypeMappings <em>Type Mappings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.TypeDefinitionImpl#getIsAspect <em>Is Aspect</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,26 +55,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected EList<Type> containedType;
-
-	/**
-	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAspect()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ASPECT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAspect()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
@@ -95,6 +75,26 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected EList<TypeMapping> typeMappings;
+
+	/**
+	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ASPECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -215,12 +215,12 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
 				return getContainedType();
-			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
-				return getIsAspect();
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
 				return getSuperType();
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				return getTypeMappings();
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				return getIsAspect();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,9 +238,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				getContainedType().clear();
 				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
-			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
-				setIsAspect((Boolean)newValue);
-				return;
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
 				getSuperType().clear();
 				getSuperType().addAll((Collection<? extends Type>)newValue);
@@ -248,6 +245,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				getTypeMappings().clear();
 				getTypeMappings().addAll((Collection<? extends TypeMapping>)newValue);
+				return;
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				setIsAspect((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -264,14 +264,14 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
 				getContainedType().clear();
 				return;
-			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
-				setIsAspect(IS_ASPECT_EDEFAULT);
-				return;
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
 				getSuperType().clear();
 				return;
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				getTypeMappings().clear();
+				return;
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -287,12 +287,12 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
-				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 			case StructurePackage.TYPE_DEFINITION__SUPER_TYPE:
 				return superType != null && !superType.isEmpty();
 			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				return typeMappings != null && !typeMappings.isEmpty();
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
 		}
 		return super.eIsSet(featureID);
 	}

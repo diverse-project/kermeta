@@ -18,6 +18,7 @@ import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.LambdaParameter;
 import org.kermeta.language.behavior.TypeReference;
 
+import org.kermeta.language.structure.impl.KermetaModelElementImpl;
 import org.kermeta.language.structure.impl.ObjectImpl;
 
 /**
@@ -34,7 +35,7 @@ import org.kermeta.language.structure.impl.ObjectImpl;
  *
  * @generated
  */
-public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
+public class LambdaParameterImpl extends KermetaModelElementImpl implements LambdaParameter {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
