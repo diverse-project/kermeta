@@ -17,19 +17,13 @@ import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcoreFactoryWrapper;
 import org.kermeta.language.api.port.PortEcoreLoader;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
 import org.kermeta.language.api.tests.port.PortEcoreLoaderTestSuite;
 import org.kermeta.language.loader.ecore.art.impl.Art2ComponentEcoreLoader;
-import runner.MainRunner;
 
 public class EcoreLoaderTestSuite extends TestSuite {
     public static Test suite() {
-    	((EcoreFactoryWrapper)EcoreFactory.eINSTANCE).setWrap(ScalaAspect.org.eclipse.emf.ecore.RichFactory$.MODULE$);
-        MainRunner.init();
-
         PortEcoreLoaderTestSuite.portEcoreLoaderfactory = new PortAbstractFactory<PortEcoreLoader>(){
             @Override
             public PortEcoreLoader create() throws IllegalArgumentException, SecurityException, InstantiationException, 
