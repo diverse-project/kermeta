@@ -24,9 +24,6 @@
       </eClassifiers>
       <eSubpackages name="behavior" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
           nsPrefix="org_kermeta_language_behavior">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xA;of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xA;metamodel, viewed as a model.&#xA;You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png&quot;>&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png&quot;>"/>
-        </eAnnotations>
         <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//kermeta/language/behavior/Expression">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xA;&lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>"/>
@@ -672,7 +669,6 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit&#xA;this class)"/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//kermeta/language/structure/Boolean"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
               eType="#//kermeta/language/structure/Type">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -686,11 +682,13 @@
               <details key="documentation" value="These mappings define how we can substitute the target Type with this TypeDefinition "/>
             </eAnnotations>
           </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//kermeta/language/structure/Boolean"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//kermeta/language/structure/ParameterizedType">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
           </eAnnotations>
+          <eOperations name="EOperation0"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
               eType="#//kermeta/language/structure/Property" changeable="false" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1112,12 +1110,6 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;The reference string is used to create a real Type that points to the correct TypeDefinition"/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeIdentifier" lowerBound="1"
-              eType="#//kermeta/language/structure/String">
-            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="String that identifies the Type.&#xD;&#xA;The container of the UnresolvedType  is considered as the context."/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="usings" upperBound="-1"
               eType="#//kermeta/language/structure/Using" containment="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1126,6 +1118,12 @@
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="generics" upperBound="-1"
               eType="#//kermeta/language/structure/Type" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeIdentifier" lowerBound="1"
+              eType="#//kermeta/language/structure/String">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="String that identifies the Type.&#xD;&#xA;The container of the UnresolvedType  is considered as the context."/>
+            </eAnnotations>
+          </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Unresolved" abstract="true" eSuperTypes="#//kermeta/language/structure/Object">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
