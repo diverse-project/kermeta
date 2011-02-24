@@ -1195,7 +1195,6 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" lowerBound="1"
               eType="#//kermeta/language/structure/TypeDefinition" eOpposite="#//kermeta/language/structure/TypeDefinition/typeMappings"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="Object" instanceClassName="kermeta.standard.Object"/>
       </eSubpackages>
     </eSubpackages>
   </eSubpackages>

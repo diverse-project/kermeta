@@ -332,15 +332,6 @@ public interface StructureFactory extends EFactory {
 	TypeMapping createTypeMapping();
 
 	/**
-	 * Returns a new object of class '<em>Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Object createObject();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
