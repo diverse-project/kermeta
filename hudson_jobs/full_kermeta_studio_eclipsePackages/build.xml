@@ -4,7 +4,7 @@
 	<!-- Change this according to the computer running the script -->
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-linux-gtk-x86_64.tar.gz"/>	
+	<property name="eclipse.native.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_helios_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_helios_bases_for_kermeta/build/kermeta_helios_linux_x86_64_base.tar.gz"/>	
 	<!-- <property name="eclipse.native.version.name" value="win32"/>
 	<property name="eclipse.native.archive.extension" value="zip"/>
 	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip"/>
