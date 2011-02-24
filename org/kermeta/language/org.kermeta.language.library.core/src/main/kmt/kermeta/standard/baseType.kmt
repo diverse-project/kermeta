@@ -19,6 +19,305 @@ class Void {
 class Long {
 }
 @CompilerIgnore "true"
+class Object
+{
+	/**
+	 * Returns the Class object that is the metaclass of current Object
+	 */
+	 @CompilerIgnore "true"
+	operation getMetaClass() : Class from Object is do
+		//@compiledJavaExtern "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass( this.getClass().getName() )"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( this )"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
+	end
+
+	/**
+	 * Returns the Object that contains current Object, void if the Object has
+	 * no container
+	 */
+	@CompilerIgnore "true"
+	operation container() : Object from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this)"
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
+	end
+
+	/**
+	 * Runs checking of invariants defined for the metaclass of the Object
+	 * Also check the multiplicity of attributes (except derived and transient attributes)
+	 */
+	@CompilerIgnore "true"
+	operation checkInvariants() : Void from Object is do
+		var cd : ClassDefinition init self.getMetaClass.classDefinition
+		if ( not cd.isVoid ) then
+			cd.allAttribute.each{ p |
+			    if not p.tag.exists{t | t.name == "ecore.isTransient"} and
+			       not p.isDerived 
+			    then
+					var v : Object init self.get(p)
+					if ( (not v.isVoid).andThen{ f| v.isInstanceOf(Collection<Object>)} ) then
+						var c : Collection<Object> init v.asType(Collection<Object>)
+						// A collection that does not respect the defined bounds raises an exception.
+						if ( p.upper != -1 and c.size() > p.upper ) then
+							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self.asType(Object) // this cast to object is used to workaround a bug in compiler V1
+							e.message := "Inv upper bound of " + cd.name + "." + p.name + " violated on " + self.toString
+							raise e
+						end
+						if ( c.size() < p.lower ) then
+							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self.asType(Object) // this cast to object is used to workaround a bug in compiler V1
+							e.message := "Inv lower bound of " + cd.name + "." + p.name + " violated on " + self.toString
+							raise e
+						end
+					else 
+						// A required property that is void raises an exception.
+						if ( p.lower == 1 and v.isVoid ) then
+							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self.asType(Object) // this cast to object is used to workaround a bug in compiler V1
+							e.message := "Inv lower bound of " + cd.name + "." + p.name + " violated on " + self.toString
+							raise e
+						end
+					end
+			    end
+			}
+		end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this)"
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
+	end
+	
+	/**
+	 * Recursively runs checking of invariants defined for the metaclass of the Object
+	 * and its supertypes
+	 * Ignores derived attributes. 
+	 */	
+	@CompilerIgnore "true"
+	operation checkAllInvariants() : Void from Object is do
+		if(self!=void) then
+			// Call the invariant verification
+			self.checkInvariants
+			// Invariant checking on each value of self properties			
+			var cd : ClassDefinition
+			cd ?= self.getMetaClass.typeDefinition
+			cd.allAttribute.each { prop |
+				if ( prop.isComposite and not prop.isDerived) then
+					if not self.get(prop).isVoid() then
+						if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+							if t.isInstanceOf(ParameterizedType) then
+								t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
+							else
+								false
+							end } then
+						
+						/*
+						if ( self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
+							or self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then
+						*/
+						
+							var subObjInstances : kermeta::standard::Collection<Object>
+							subObjInstances ?= self.get(prop)
+							subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
+						else
+							self.get(prop).checkAllInvariants
+						end
+					end
+				end
+			}
+		end
+	end
+
+	/**
+	 * semantic equality,
+	 * if you wish to test for object identity you need to use the method oid
+	 * ex: x.oid == y.oid
+	 * by default, (ie. if not overloaded), the equals method for class Object implements 
+	 * the most discriminating possible equivalence relation on objects; that is, for any non-null 
+	 * reference values x and y, this method returns true if and only if x and y refer to the same 
+	 * object (x.oid == y.oid has the value true). 
+	 *
+	 * note1: the operator == is mapped to this 
+	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
+	 */
+	@CompilerIgnore "true"
+	operation equals(element : Object) : Boolean from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(this, element)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
+	end
+	
+	/**
+	 * See kermeta::language::structure::Object.equals(Object)
+	 */
+	@CompilerIgnore "true"
+	operation isNotEqual(element : Object) : Boolean from Object is do
+		result := not equals(element)
+	end		
+	
+	/**
+	 * Returns a Boolean stating whether the current Object is an instance of the given Class
+	 */
+	//@CompilerIgnore "true"
+	operation isKindOf(cl : Class) : Boolean is do
+		result := (self.getMetaClass.equals(cl))
+	end
+	
+	/** 
+	 * Returns the instances of the given property for this Object.
+	 *
+	 * Example : 
+	 * <pre>
+	 * class A { reference attr : String }
+	 * </pre>
+	 * Using A :
+	 * <pre>
+	 * operation getAProp() is do
+	 *    var a : A
+	 *    var s : String
+	 *    var the_attr : Property init self.getMetaClass.ownedAttribute.one
+	 *    s ?= a.get(the_attr)
+	 * end
+	 * </pre>
+	 * The user has to cast
+	 * the result of this method according to the type and the upper multiplicity
+	 * of this property. If upper multiplicity > 1, than the effective type of the 
+	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
+	 * the name of the given Property (i.e the type of the property instance).
+	 */
+	@CompilerIgnore "true"
+	operation get(~property : Property) : Object from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, property)"
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
+	end
+	
+	/**
+	 * Sets the <code>element</code> to the <code>~property</code> of the object 
+	 */
+	@CompilerIgnore "true"
+	operation ~set(~property : Property, element : Object) : Void from Object is do
+		if element.isInstanceOf(~property.type) then
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element)"
+			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
+		else
+			var v : kermeta::language::structure::EnumerationLiteral
+			v ?= element
+			if (v != void).andThen{ e | ~property.type == v.~enumeration } then
+				@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, v)"
+				extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, v)
+			else
+				var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
+				e.message := "IncompatibleTypeError : Cannot set property " + ~property.name + " of object " + self.toString + " to " + element.toString + "."
+				raise e
+			end
+		end
+	end
+	
+	/**
+	 * True if the <code>~property</code> of the object has been set
+	 */
+	@CompilerIgnore "true"
+	operation isSet(~property : Property) : Boolean from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(this, property)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
+	end
+	
+	/**
+	 * Remove the element set as the <code>~property</code> of the object.
+	 * The <code>isSet(~property)</code> method will then return False
+	 */
+	@CompilerIgnore "true"
+	operation unset(~property : Property) : Void from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(this, property)"
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
+	end
+	
+	/**
+	 * Returns the unique Oid of the Object
+	 */
+	@CompilerIgnore "true"
+	operation oid() : Integer is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(this)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
+	end
+	
+	/**
+ 	 * Implements Object.toString()
+ 	 * Returns a String of form [qn:oid] where 'qn' is the qualified name of
+ 	 * the object type, and oid the unique ID of the object
+ 	 */
+	@CompilerIgnore "true"
+	operation toString() : String is do
+		result := "[" + self.getMetaClass.typeDefinition.qualifiedName + ":" + oid.toString + "]"
+	end
+
+	/**
+	 * Returns a Boolean stating whether the Object is currently in a
+	 * frozen state
+	 */
+	@CompilerIgnore "true"
+	operation isFrozen() : Boolean is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(this)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
+	end
+
+	/**
+	 * Returns a Boolean stating whether the Object is Void
+	 */
+	@CompilerIgnore "true"
+	operation isVoid() : Boolean is do
+		result := false
+	end
+
+	/**
+	 * code used in hashtable in order to identify an object in the hashtable keys
+	 * This system is similar to the hashcode used in java. Please refer to java documentation
+	 * for more information about hashcode
+	 */
+	@CompilerIgnore "true"
+	operation hashcode() : Integer is do		
+		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
+		// which fall back here only if the method is not redefined
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(this)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
+	end
+
+	/**
+	 * Freeze the Object
+	 */
+	@CompilerIgnore "true"
+	operation freeze() : Void is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(this)"
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
+	end
+
+	/**
+	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
+	 */
+	@CompilerIgnore "true"
+	operation asType(type : Class) : Object is do
+		if isInstanceOf(type) then result := self
+		else raise kermeta::exceptions::TypeCastError.new
+		end
+	end
+
+	/**
+	 * Returns a Boolean stating whether the current Object conforms to given Type
+	 * This means: is this object an instance of this type, or is it an instance of its subtype 
+	 */
+	@CompilerIgnore "true"
+	operation isInstanceOf(type : Type) : Boolean is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, type.getClass().getName())"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
+	end
+	
+	/**
+	 * Returns the Resource currently containing (directly or indirectly) the Object 
+	 * or void if the object belongs to no Resource
+	 */
+	@CompilerIgnore "true"
+	operation containingResource() : kermeta::persistence::Resource is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(this)"
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
+	end
+}
+@CompilerIgnore "true"
 class String {        
 	@CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
