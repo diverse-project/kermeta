@@ -5,13 +5,14 @@
  * Authors  : 
  *            xdolques
  */
-//@mainClass "org::kermeta::traceability::mdk::TraceRegistry"
-//@mainOperation "size"
+@mainClass "org::kermeta::traceability::mdk::TraceRegistry"
+@mainOperation "size"
 
 
 package org::kermeta::traceability::mdk;
 
-require "MetaModel_org.kermeta.traceability.model.kmt"
+require "Behavior_org.kermeta.traceability.model_aspect.kmt"
+//require "MetaModel_org.kermeta.traceability.model.kmt"
 require kermeta
 using kermeta::standard
 using kermeta::utils
@@ -23,109 +24,248 @@ using kermeta::language::structure
 class TraceRegistry
 {	
 	
-	attribute registry : Hashtable<Object,ModelReference>
+	attribute objectRegistry : Hashtable<Object,ModelReference>
 	
-	operation getRegistry() : Hashtable<Object,ModelReference> is do
-		if registry==void then
-			self.registry:=Hashtable<Object,ModelReference>.new
+	attribute registry : Hashtable<Reference,Reference>
+	
+	attribute traces : TracePackage
+	
+	//return the map between runtime objects and ModelReference, initialize it if it isn't
+	operation getObjectRegistry() : Hashtable<Object,ModelReference> is do
+		if objectRegistry==void then
+			self.objectRegistry:=Hashtable<Object,ModelReference>.new
 		end
-		result:= registry
-	end
-	operation addTrace(source : Object , target : Object , context : Object) : Void is do
-		
-		var sourceRef : ModelReference 
-		if not getRegistry.containsKey(source) then
-			sourceRef:=ModelReference.new
-			sourceRef.refObject := source
-			getRegistry.put(source, sourceRef)
-			else
-			sourceRef:=registry.getValue(source)
-			end
-		
-		var targetRef : ModelReference 
-		if not getRegistry.containsKey(target) then
-			targetRef:=ModelReference.new
-			targetRef.refObject := target
-			getRegistry.put(target,targetRef)
-			else
-			targetRef:=registry.getValue(target)
-			end
-		sourceRef.addTarget(context, targetRef)
+		result:= objectRegistry
 	end
 	
+	operation getRegistry() : Hashtable<Reference,Reference> is do
+		if registry==void then 
+			self.registry:=Hashtable<Reference,Reference>.new
+		end
+		result := registry
+	end
+	
+	operation getCorrespondingReference(initRef : Reference) : Reference is do
+		if not getRegistry.containsKey(initRef) then
+			result:= cloneReference(initRef)
+			result.target.clear
+			getRegistry.put(result,result)
+			getTracePackage.references.add(result)
+		else
+			result:=getRegistry.getValue(initRef)
+		end
+	end
+	
+	
+	//return modelReference for an object or create one if it does not exist
+	operation getModelReference(o : Object) : ModelReference is do
+		if not getObjectRegistry.containsKey(o) then
+			result:=ModelReference.new
+			result.refObject := o
+			getObjectRegistry.put(o, result)
+			getTracePackage.references.add(result)
+		else
+			result:=objectRegistry.getValue(o)
+		end
+	end
+	
+	
+	//add trace while keeping optimized storage of references
+	operation addTrace(trace : Trace) : Void is do
+		
+		var sourceRef : Reference init trace.sourceElem.asType(Reference)
+		var targetRef : Reference init trace.targetElem.asType(Reference)
+		var context : Object init trace.context
+		
+		var newTrace : Trace init Trace.clone(trace)
+		
+		getCorrespondingReference(sourceRef).target.add(newTrace)
+		getCorrespondingReference(targetRef).source.add(newTrace)
+		/*
+		if  sourceRef.isInstanceOf(ModelReference) and targetRef.isInstanceOf(ModelReference) then
+			addObjectToObjectTrace(sourceRef.asType(ModelReference).refObject,targetRef.asType(ModelReference).refObject,context)
+		else
+		if not sourceRef.isInstanceOf(ModelReference) and not targetRef.isInstanceOf(ModelReference) then
+			getTracePackage.addOptimizedTrace(trace)
+		else
+			if not sourceRef.isInstanceOf(ModelReference) then
+				var srcRef : Reference init getTracePackage.findReference(trace.sourceElem.asType(Reference))
+				if(srcRef == void) then
+					getTracePackage.references.add(trace.sourceElem.asType(Reference))
+				srcRef := trace.sourceElem.asType(Reference)
+				else
+					trace.sourceElem:=srcRef
+				end
+				var tgtRef : Reference init getModelReference(targetRef.asType(ModelReference).refObject)
+				trace.targetElem:=tgtRef
+			else
+				if  not targetRef.isInstanceOf(ModelReference) then
+					var tgtRef : Reference init getTracePackage.findReference(trace.sourceElem.asType(Reference))
+					if(tgtRef == void) then
+						getTracePackage.references.add(trace.targetElem.asType(Reference))
+						tgtRef := trace.targetElem.asType(Reference)
+					else
+						trace.targetElem:=tgtRef
+					end
+					var srcRef : Reference init getModelReference(sourceRef.asType(ModelReference).refObject)
+					trace.sourceElem:=srcRef
+				end
+			
+			end
+			getTracePackage.addTrace(trace)
+		end
+		end*/
+	end
+		 
+	
+	
+	
+	//add a new trace from 2 objects and a context
+	/*operation addObjectToObjectTrace(source : Object , target : Object , context : Object) : Void is do
+		
+		var sourceRef : ModelReference init getModelReference(source)
+		var targetRef : ModelReference init getModelReference(target) 
+		sourceRef.addTarget(context, targetRef)
+	end*/
+	/*
+	//resolve all objects that have been created from source
 	operation resolveAllTargets(source : Object) : Sequence<Object>  is do
-		if not getRegistry.containsKey(source) then
+		if not getObjectRegistry.containsKey(source) then
 			result:=void
 			else
-			var sourceRef : ModelReference init registry.getValue(source)
+			var sourceRef : ModelReference init objectRegistry.getValue(source)
 			result:=sourceRef.resolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
-	
+	//resolve an object of type t that has been created from source
 	operation resolveOneTarget(source : Object, t:Class) : Object is do
-		if not getRegistry.containsKey(source) then
+		if not getObjectRegistry.containsKey(source) then
 			result:=void
-			else
-			var sourceRef : ModelReference init getRegistry.getValue(source)
+		else
+			var sourceRef : ModelReference init getObjectRegistry.getValue(source)
 			if sourceRef==void then 
-			stdio.writeln("sourcRef est void")
+				stdio.writeln("sourceRef est void")
 			end
 			if sourceRef.resolveOne(t)==void then
-			stdio.writeln("targetRef est void")
+				stdio.writeln("targetRef est void")
 			end
 			result:=sourceRef.resolveOne(t).asType(ModelReference).refObject
 		end
 	end
 	
-	
+	//resolve the objects that have been created from source in aContext
 	operation resolveTargetsIn(source : Object, aContext : Object) : Sequence<Object> is do
-		if not getRegistry.containsKey(source) then
+		if not getObjectRegistry.containsKey(source) then
 			result:=void
-			else
-			var sourceRef : ModelReference init getRegistry.getValue(source)
+		else
+			var sourceRef : ModelReference init getObjectRegistry.getValue(source)
 			result:=sourceRef.resolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
+	
+	// resolve all the creators of target
 	operation resolveAllSources(target : Object) : Sequence<Object>  is do
-		if not getRegistry.containsKey(target) then
+		if not getObjectRegistry.containsKey(target) then
 			result:=void
 			else
-			var targetRef : ModelReference init getRegistry.getValue(target)
+			var targetRef : ModelReference init getObjectRegistry.getValue(target)
 			result:=targetRef.invResolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
 	
-	
+	// resolve one creator of target of type t
 	operation resolveOneSource(target : Object, t:Class) : Object is do
-		if not getRegistry.containsKey(target) then
+		if not getObjectRegistry.containsKey(target) then
 			result:=void
 			else
-			var targetRef : ModelReference init getRegistry.getValue(target)
+			var targetRef : ModelReference init getObjectRegistry.getValue(target)
 			result:=targetRef.invResolveOne(t).asType(ModelReference).refObject
 		end
 	end
 	
+	// resolve the creators of target in aContext
 	operation resolveSourcesIn(target : Object,aContext : Object) : Sequence<Object> is do
-		if not getRegistry.containsKey(target) then
+		if not getObjectRegistry.containsKey(target) then
 			result:=void
 			else
-			var targetRef : ModelReference init getRegistry.getValue(target)
+			var targetRef : ModelReference init getObjectRegistry.getValue(target)
 			result:=targetRef.invResolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
 		end
 	end
-	
+	*/
+	//return the tracepackage that stores all the traces
 	operation getTracePackage() : TracePackage is do
-		var root : TracePackage init TracePackage.new
-		getRegistry.values().each{v|root.references.add(v.asType(ModelReference)) v.target.each{x| x.context:=void } }
-		result:=root
-	end
-	
-	
-	
-	operation size(): Integer is do
-	 result:=getRegistry.size()
+		if traces==void then
+			self.traces:=TracePackage.new
+		end
+		result:= traces
 	end
 
+	operation cloneReference(ref : Reference) : Reference is do
+		if ref.isInstanceOf(ModelReference) then
+			result := ModelReference.clone(ref.asType(ModelReference))
+		else
+			if ref.isInstanceOf(TextReference) then
+				result:= TextReference.clone(ref.asType(TextReference))
+			else
+					if ref.isInstanceOf(XMLReference) then
+					result:= XMLReference.clone(ref.asType(XMLReference))
+				else
+					if ref.isInstanceOf(QualifiedNameReference) then
+						result:= QualifiedNameReference.clone(ref.asType(QualifiedNameReference))
+					end
+				end
+			end
+		end
+	end 
+
+	//return the sources that created ref
+	operation getRelatedSources(ref :Reference) : TracePackage is do
+		result:= TracePackage.new
+		var newRef : Reference init cloneReference(ref)
+		result.references.add(newRef)
+		ref.source.each{trc| 
+			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference)) 
+			if sourceRef == void then
+				sourceRef := cloneReference(trc.sourceElem.asType(Reference))
+				var keptTraces : Collection<Trace>
+				keptTraces:= sourceRef.target.select{trc2| trc2.targetElem.asType(Reference).equals(newRef)}
+				sourceRef.target.clear()
+				sourceRef.target.addAll(keptTraces)
+				sourceRef.target.each{trc2|trc2.targetElem:=newRef}
+				result.references.add(sourceRef)
+			end
+			}
+	end
+
+	//return the targets created by ref
+	operation getRelatedTarget(ref : Reference) : TracePackage is do
+		result := TracePackage.new
+		var newRef : Reference init cloneReference(ref)
+		result.references.add(newRef)
+		
+		newRef.target.each{trc|
+			var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
+			if targetRef == void then
+				targetRef:=cloneReference(trc.targetElem.asType(Reference))
+				result.references.add(targetRef)
+			end
+			trc.targetElem:=targetRef
+		}
+	end
+	
+	//add all the traces from aTracePackage 
+	operation addAllTraces(aTracePackage : TracePackage) : Void is do
+		
+		aTracePackage.references.each{ref| ref.target.each{trc|addTrace(trc)}}
+	
+	end
+
+	//return the number of traces
+	operation size() : Integer is do 
+		result:=0
+		getTracePackage.references.each{ref| result := result + ref.target.size()} 
+	end
 }
