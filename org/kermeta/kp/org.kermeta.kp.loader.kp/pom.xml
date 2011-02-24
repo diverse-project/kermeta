@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.kp</groupId>
+	<artifactId>kp.loader.kp</artifactId>
+	<name>kp.loader.kp :: Kp loader for Kermeta 2</name>
+	<packaging>bundle</packaging>
+
+	<parent>
+		<groupId>org.kermeta.language</groupId>
+		<artifactId>language.artcomponent.root</artifactId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Require-Bundle>
+							org.eclipse.core.resources,
+							org.eclipse.core.runtime
+						</Require-Bundle>
+						<Export-Package>
+							org.kermeta.kp.loader.*
+	          </Export-Package>
+						<Private-Package>
+							org.kermeta.kp.editor.*
+						</Private-Package>
+						<!--
+							use the ! for avoiding to import some packages that are already
+							there with the Require-Bundle
+						-->
+						<Import-Package>
+							org.slf4j.*;version="${slf4j.version.range}",
+							org.kermeta.language.*,
+							org.kermeta.art2.*,
+							org.eclipse.emf.ecore.*,
+							org.eclipse.emf.common.*,
+							 org.eclipse.emf.validation.*,
+							org.kermeta.kp.*,
+							org.antlr.*,
+							scala.*,
+							org.osgi.framework;version="[1.5,2)",
+							!org.eclipse.core.*
+				    </Import-Package>
+						<!--
+							add extra element in the manifest, copy them from this file ex:
+							Bundle-ActivationPolicy: lazy
+						-->
+						<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.art2</groupId>
+			<artifactId>art2.framework</artifactId>
+			<version>${art2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>language.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.editor</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+	</dependencies>
+</project>
