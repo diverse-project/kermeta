@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Export-Package: org.antlr.runtime3_2_0;uses:="org.antlr.runtime3_2_0.t
+ ree",org.antlr.runtime3_2_0.tree;uses:="org.antlr.runtime3_2_0,org.an
+ tlr.runtime3_2_0.misc",org.antlr.runtime3_2_0.debug;uses:="org.antlr.
+ runtime3_2_0,org.antlr.runtime3_2_0.tree,org.antlr.runtime3_2_0.misc"
+ ,org.antlr.runtime3_2_0.misc
+Bundle-ClassPath: .
+Built-By: hrambelo
+Tool: Bnd-0.0.357
+Bundle-Name: ANTLR for kp loader/editor using emftext
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: IRISA/INRIA
+Bundle-Version: 2.0.1.SNAPSHOT
+Build-Jdk: 1.6.0_20
+Bnd-LastModified: 1295966110200
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.kermeta.commons.antlr3_2_0;singleton:=true
+
