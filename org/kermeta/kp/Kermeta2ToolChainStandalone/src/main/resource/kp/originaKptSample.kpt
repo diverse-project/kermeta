@@ -1,0 +1,30 @@
+KermetaProject :"new_file.kpt" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "src" 
+	source = "foo" 
+	source = "*/org/eclipse/uml2.ecore" from "uml2" 
+	source = ECORE_NSURI from "ecore" 
+	// import the same ecore file in 2 variants : uml2 and uml2.1 
+	source = "**/uml2.ecore um2" from "uml2_dep"
+	source = "**/uml2.ecore um2.1" from "uml2_dep" 
+	
+	dependency "new_file.kp" 
+	dependency "uml2" = "uml2.ref" 
+	dependency "uml2_dep" = "uml2.jar" 
+	dependency "ecore" = "ecore.ref"  
+	
+	weaver-directive = ( "getsetinjector" "class *" ) "* +GetSetAspect" 
+	
+	merger-option = "quickfix" 
+	merger-option = "javabridge" 
+} 
+
+ref { 
+	"group1" :"MAVEN_NAME" [ "1.3" ] 
+	"group2" :"new_file.kp" [ "2.0" ] 
+	"group3" :"ecore.ref" [ "1.0" ] 
+	"group4" :"uml2.ref" [ "2.0" ] 
+	"group5" :"uml2.jar" [ "2.0" ] 
+} 

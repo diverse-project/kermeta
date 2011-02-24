@@ -1,0 +1,38 @@
+KermetaProject :"new_file.kpt" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "src/main/kermeta/001_testHelloWorld_standalone.kmt" 
+	//source = "foo" 
+	//source = "*/org/eclipse/uml2.ecore" from "uml2" 
+	//source = ECORE_NSURI from "ecore" 
+	// import the same ecore file in 2 variants : uml2 and uml2.1 
+	//source = "**/uml2.ecore um2" from "uml2_dep"
+	//source = "**/uml2.ecore um2.1" from "uml2_dep" 
+	
+	//dependency "new_file.kp" 
+	dependency "emflib" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/emf.lib-2.6.0.jar" 
+	dependency "kermeta1_3_0" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/kermeta.model-1.3.0.jar" 
+	dependency "kermeta1_4_0" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/kermeta.model-1.4.0.jar"  
+	dependency "lg_scala" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/language.framework.scala-0.10.0-SNAPSHOTS.jar"  
+	dependency "runtime" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/org.eclipse.core.runtime-3.5.0.v20090525.jar" 
+	dependency "osgi" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/org.osgi.core-4.2.0.jar"  
+	dependency "scala_lib" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/scala-library-2.8.1.jar"  
+	dependency "slf4j" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/slf4j-api-1.5.9.RC1.jar" 
+	dependency "slf4j_log4j" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/slf4j-api-1.5.9.RC1.jar"  
+	dependency "ecore2Xml" = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/lib/org.eclipse.emf.mapping.ecore2xml_2.5.0.v200906151043.jar"  
+	
+	weaver-directive = ( "getsetinjector" "class *" ) "* +GetSetAspect" 
+	
+	//merger-option = "quickfix" 
+  merger-option =  "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/properties/Compiler.properties"
+	//merger-option = "javabridge" 
+} 
+
+ref { 
+	"group1" :"MAVEN_NAME" [ "1.3" ] 
+	"group2" :"new_file.kp" [ "2.0" ] 
+	"group3" :"ecore.ref" [ "1.0" ] 
+	"group4" :"uml2.ref" [ "2.0" ] 
+	"group5" :"uml2.jar" [ "2.0" ] 
+} 
