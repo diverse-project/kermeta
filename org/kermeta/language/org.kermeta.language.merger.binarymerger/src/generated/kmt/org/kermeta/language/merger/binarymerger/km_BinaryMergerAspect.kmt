@@ -72,7 +72,7 @@ package kermeta {
 			aspect class BooleanLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class TypeLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class CallTypeLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class VoidLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -87,13 +87,25 @@ package kermeta {
 			aspect class VariableDecl inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
+			aspect class UnresolvedCall inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallOperation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallProperty inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class CallEnumLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
 		}
 
 
 		package structure {
 
 
-			aspect class Object inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class KermetaModelElement inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 
@@ -231,6 +243,7 @@ package kermeta {
 
 			aspect class TypeMapping inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
+
 
 		}
 

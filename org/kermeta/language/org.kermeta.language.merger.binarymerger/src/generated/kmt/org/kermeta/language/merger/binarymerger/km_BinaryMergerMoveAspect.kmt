@@ -45,27 +45,12 @@ package kermeta {
 				end
 			}
 
-			aspect class Expression inherits org::kermeta::language::structure::Object, org::kermeta::language::structure::TypeContainer {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Expression inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::TypeContainer {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::behavior::Expression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Expression)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Expression")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -80,11 +65,8 @@ package kermeta {
 							end
 						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -373,8 +355,8 @@ package kermeta {
 				end
 			}
 
-			aspect class Rescue inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Rescue inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::behavior::Rescue
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Rescue)
 					if (not mergedModelElement.isVoid) then
@@ -395,27 +377,9 @@ package kermeta {
 						mergedModelElement.exceptionType ?= self.selectUnaryProperty("exceptionType", self.exceptionType, mergedModelElement.exceptionType)
 						// select value for unary attribute
 						mergedModelElement.exceptionName ?= self.selectUnaryProperty("exceptionName", self.exceptionName, mergedModelElement.exceptionName)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -570,8 +534,8 @@ package kermeta {
 				end
 			}
 
-			aspect class LambdaParameter inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class LambdaParameter inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::behavior::LambdaParameter
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::LambdaParameter)
 					if (not mergedModelElement.isVoid) then
@@ -579,27 +543,9 @@ package kermeta {
 						mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -980,12 +926,12 @@ package kermeta {
 		package structure {
 
 
-			aspect class Object inherits Mergeable  {
+			aspect class KermetaModelElement inherits Mergeable  {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
-					var mergedModelElement : org::kermeta::language::structure::Object
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Object)
+					var mergedModelElement : org::kermeta::language::structure::KermetaModelElement
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Object")
+						stdio.writeln("Merging content of a KermetaModelElement")
 						self.kOwnedTags.each{aspect_kOwnedTags | 
 							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
 							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
@@ -1120,39 +1066,21 @@ package kermeta {
 				end
 			}
 
-			aspect class Type inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Type inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Type
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Type")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
 
-			aspect class TypeContainer inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class TypeContainer inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::TypeContainer
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeContainer)
 					if (not mergedModelElement.isVoid) then
@@ -1170,27 +1098,9 @@ package kermeta {
 								mergedModelElement.containedType.add(aspect_containedType)
 							end
 						}
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -1208,7 +1118,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeVariableBinding inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Object {
+			aspect class TypeVariableBinding inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::KermetaModelElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeContainer is do
 					var mergedModelElement : org::kermeta::language::structure::TypeVariableBinding
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariableBinding)
@@ -1397,35 +1307,17 @@ package kermeta {
 				end
 			}
 
-			aspect class NamedElement inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class NamedElement inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::NamedElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::NamedElement)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a NamedElement")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -1545,8 +1437,8 @@ package kermeta {
 			}
 
 
-			aspect class Tag inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Tag inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Tag
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag)
 					if (not mergedModelElement.isVoid) then
@@ -1555,58 +1447,22 @@ package kermeta {
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						// select value for unary attribute
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
 
-			aspect class AbstractProperty inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class AbstractProperty inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::AbstractProperty
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractProperty)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a AbstractProperty")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -1706,7 +1562,7 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::Object {
+			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::KermetaModelElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinitionContainer is do
 					var mergedModelElement : org::kermeta::language::structure::ModelingUnit
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelingUnit)
@@ -1773,35 +1629,17 @@ package kermeta {
 				end
 			}
 
-			aspect class Require inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Require inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Require
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Require)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Require")
 						// select value for unary attribute
 						mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -1812,19 +1650,6 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::GenericTypeDefinition)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a GenericTypeDefinition")
-						self.typeParameter.each{aspect_typeParameter | 
-							var equivalent_typeParameter : org::kermeta::language::structure::TypeVariable
-							equivalent_typeParameter := mergedModelElement.typeParameter.detect{ merged_typeParameter |
-								aspect_typeParameter.localMatch(merged_typeParameter)
-							}
-							if (not equivalent_typeParameter.isVoid) then
-								// mark them as similar
-								aspect_typeParameter.similarElementInMergedModel := equivalent_typeParameter
-							else
-								// move it in merged model
-								mergedModelElement.typeParameter.add(aspect_typeParameter)
-							end
-						}
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2013,64 +1838,28 @@ package kermeta {
 				end
 			}
 
-			aspect class Model inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Model inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Model
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Model)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Model")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
 
-			aspect class Resource inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Resource inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Resource
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Resource)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Resource")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -2103,33 +1892,15 @@ package kermeta {
 				end
 			}
 
-			aspect class AbstractOperation inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class AbstractOperation inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::AbstractOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractOperation)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a AbstractOperation")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -2175,33 +1946,15 @@ package kermeta {
 				end
 			}
 
-			aspect class Unresolved inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Unresolved inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Unresolved
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Unresolved)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a Unresolved")
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -2221,7 +1974,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved {
+			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractOperation is do
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedOperation)
@@ -2229,6 +1982,19 @@ package kermeta {
 						stdio.writeln("Merging content of a UnresolvedOperation")
 						// select value for unary attribute
 						mergedModelElement.operationIdentifier ?= self.selectUnaryProperty("operationIdentifier", self.operationIdentifier, mergedModelElement.operationIdentifier)
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					end
 					super(context)
 
@@ -2236,8 +2002,8 @@ package kermeta {
 				end
 			}
 
-			aspect class Using inherits org::kermeta::language::structure::Object {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Object is do
+			aspect class Using inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Using
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Using)
 					if (not mergedModelElement.isVoid) then
@@ -2246,27 +2012,9 @@ package kermeta {
 						mergedModelElement.fromQName ?= self.selectUnaryProperty("fromQName", self.fromQName, mergedModelElement.fromQName)
 						// select value for unary attribute
 						mergedModelElement.toName ?= self.selectUnaryProperty("toName", self.toName, mergedModelElement.toName)
-						// workaround compiler V2 bug, embed code that should have been called via super 
-
-						self.kOwnedTags.each{aspect_kOwnedTags | 
-							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
-							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
-								aspect_kOwnedTags.localMatch(merged_kOwnedTags)
-							}
-							if (not equivalent_kOwnedTags.isVoid) then
-								// mark them as similar
-								aspect_kOwnedTags.similarElementInMergedModel := equivalent_kOwnedTags
-							else
-								// move it in merged model
-								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-							end
-						}
 					end
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
+					super(context)
 
-					//super(context)
-
-					self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 					result := self
 				end
 			}
@@ -2323,6 +2071,7 @@ package kermeta {
 					result := self
 				end
 			}
+
 
 		}
 

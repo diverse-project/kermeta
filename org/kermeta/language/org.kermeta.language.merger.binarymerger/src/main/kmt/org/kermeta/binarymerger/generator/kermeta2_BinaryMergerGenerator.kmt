@@ -31,12 +31,12 @@ class Main
 		var binaryMergerMoveAspectGenerator : BinaryMergerMoveAspectGenerator init BinaryMergerMoveAspectGenerator.new
 		var binaryMergerPropertyResolverAspectGenerator : BinaryMergerPropertyResolverAspectGenerator init BinaryMergerPropertyResolverAspectGenerator.new
 		
-	/*	binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+		binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			""
 			)
-	*/	binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+		binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			"") 

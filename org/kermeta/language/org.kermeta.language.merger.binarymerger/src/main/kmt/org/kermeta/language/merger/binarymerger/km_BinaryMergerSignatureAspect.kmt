@@ -29,16 +29,11 @@ package kermeta {
 			}
 
 			aspect class Expression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::Expression
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -148,22 +143,17 @@ package kermeta {
 			}
 
 			aspect class Rescue {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::Rescue
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
 						result := result and self.exceptionType == aspectElement.exceptionType
 					end
 					if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
 						result := result and self.exceptionName == aspectElement.exceptionName
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
@@ -225,22 +215,17 @@ package kermeta {
 			}
 
 			aspect class LambdaParameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::LambdaParameter
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
 						result := result and self.type == aspectElement.type
 					end
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
@@ -397,9 +382,9 @@ package kermeta {
 		package structure {
 
 
-			aspect class Object {
+			aspect class KermetaModelElement {
 				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-					var aspectElement : org::kermeta::language::structure::Object
+					var aspectElement : org::kermeta::language::structure::KermetaModelElement
 					aspectElement ?= aspectElementObj
 					
 					result := true
@@ -420,6 +405,9 @@ package kermeta {
 					end
 					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 						result := result and self.isAbstract == aspectElement.isAbstract
+					end
+					if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
+						result := result and self.uniqueName == aspectElement.uniqueName
 					end
 					*/
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
@@ -468,30 +456,20 @@ package kermeta {
 			}
 
 			aspect class Type {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Type
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
 			aspect class TypeContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::TypeContainer
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -597,19 +575,14 @@ package kermeta {
 			}
 
 			aspect class NamedElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::NamedElement
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
@@ -666,36 +639,26 @@ package kermeta {
 
 
 			aspect class Tag {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Tag
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 						result := result and self.name == aspectElement.name
 					end
 					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 						result := result and self.~value == aspectElement.~value
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
 			aspect class AbstractProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::AbstractProperty
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -756,19 +719,14 @@ package kermeta {
 			}
 
 			aspect class Require {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Require
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
 						result := result and self.uri == aspectElement.uri
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
@@ -854,30 +812,20 @@ package kermeta {
 			}
 
 			aspect class Model {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Model
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
 			aspect class Resource {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Resource
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -903,16 +851,11 @@ package kermeta {
 			}
 
 			aspect class AbstractOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::AbstractOperation
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -930,16 +873,11 @@ package kermeta {
 			}
 
 			aspect class Unresolved {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Unresolved
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					result := super( aspectElement)
 				end
 			}
 
@@ -968,22 +906,17 @@ package kermeta {
 			}
 
 			aspect class Using {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Using
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
 						result := result and self.fromQName == aspectElement.fromQName
 					end
 					if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
 						result := result and self.toName == aspectElement.toName
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
 				end
 			}
 
@@ -1015,19 +948,15 @@ package kermeta {
 			}
 
 			aspect class TypeMapping {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Object is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::TypeMapping
 					aspectElement ?= aspectElementObj
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object" 
-
-					// result := super( aspectElement)
-					result := true
+					result := super( aspectElement)
 					if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
 						result := result and self.mapping == aspectElement.mapping
 					end
-					// workaround compiler V2 bug, embed code that should have been called via super 
-
+					
 				end
 			}
 

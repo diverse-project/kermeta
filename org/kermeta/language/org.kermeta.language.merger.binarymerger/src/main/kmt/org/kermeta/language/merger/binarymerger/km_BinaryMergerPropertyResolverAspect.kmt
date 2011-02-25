@@ -18,16 +18,10 @@ package kermeta {
 				end
 			}
 
-			aspect class Expression inherits org::kermeta::language::structure::Object, org::kermeta::language::structure::TypeContainer {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Expression inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::TypeContainer {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -60,7 +54,7 @@ package kermeta {
 			}
 
 			aspect class CallSuperOperation inherits org::kermeta::language::behavior::CallOperation {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallExpression is do
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallOperation is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
@@ -94,16 +88,10 @@ package kermeta {
 				end
 			}
 
-			aspect class Rescue inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Rescue inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -142,16 +130,10 @@ package kermeta {
 				end
 			}
 
-			aspect class LambdaParameter inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class LambdaParameter inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -209,7 +191,7 @@ package kermeta {
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
-			}
+			}		
 			aspect class UnresolvedCall inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::behavior::CallExpression, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
 					
@@ -244,7 +226,7 @@ package kermeta {
 		package structure {
 
 
-			aspect class Object inherits Mergeable  {
+			aspect class KermetaModelElement inherits Mergeable  {
 				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
 					
 					result := primaryValue
@@ -290,29 +272,17 @@ package kermeta {
 				end
 			}
 
-			aspect class Type inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Type inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class TypeContainer inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class TypeContainer inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -323,7 +293,7 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeVariableBinding inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::Object {
+			aspect class TypeVariableBinding inherits org::kermeta::language::structure::TypeContainer, org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -380,16 +350,10 @@ package kermeta {
 				end
 			}
 
-			aspect class NamedElement inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class NamedElement inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -422,29 +386,17 @@ package kermeta {
 			}
 
 
-			aspect class Tag inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Tag inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class AbstractProperty inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class AbstractProperty inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -464,7 +416,7 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::Object {
+			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinitionContainer is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -478,16 +430,10 @@ package kermeta {
 				end
 			}
 
-			aspect class Require inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Require inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -540,29 +486,17 @@ package kermeta {
 				end
 			}
 
-			aspect class Model inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Model inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class Resource inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Resource inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -580,16 +514,10 @@ package kermeta {
 				end
 			}
 
-			aspect class AbstractOperation inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class AbstractOperation inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -600,16 +528,10 @@ package kermeta {
 				end
 			}
 
-			aspect class Unresolved inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Unresolved inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -620,23 +542,17 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved {
+			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractOperation is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class Using inherits org::kermeta::language::structure::Object {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Object is do
+			aspect class Using inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					// workaround compiler V2 bug, cannot call super on a Class named "Object"
-					// result := super( propertyName, primaryValue, aspectValue)
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
