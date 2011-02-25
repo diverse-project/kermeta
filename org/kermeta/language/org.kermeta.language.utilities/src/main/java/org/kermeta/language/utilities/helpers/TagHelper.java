@@ -12,7 +12,7 @@
 
 package org.kermeta.language.utilities.helpers;
 
-import org.kermeta.language.structure.Object;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.Tag;
 
@@ -41,7 +41,7 @@ public class TagHelper {
 		return tag;
 	}
 	
-	static public Tag getTag(Object o, String tagName) {
+	static public Tag getTag(KermetaModelElement o, String tagName) {
 		for ( Tag t : o.getKOwnedTags() ){
 			if ( t.getName() != null && t.getName().equals(tagName) ){
 				return t;
