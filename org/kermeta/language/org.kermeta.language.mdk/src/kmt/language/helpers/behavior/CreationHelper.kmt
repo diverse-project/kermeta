@@ -77,7 +77,7 @@ aspect class CallFeature {
 	operation initializeForANew(name : String, type : Type) : CallFeature is do
 		self.initialize(name)
 		self.containedType.add(type)
-		var tl : TypeLiteral init TypeLiteral.new.initialize(type)
+		var tl : CallTypeLiteral init CallTypeLiteral.new
 		tl.typeref := TypeReference.new.initialize(type)
 		self.target := tl
 		result := self
@@ -231,15 +231,17 @@ aspect class CallFeature {
 	 */
 	operation initializeForAnIsKindOf(propertyName : String, typeTest : ClassDefinition, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
 		self.initialize("isKindOf")
-		var cl_tl : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Class"))
-		var cl_tr : Class init Class.new.initializeFromAClassDefinition(typeTest)
-		var cl_pt : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Class"))
-		var cl_ft : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::Boolean"))
-		var pt : ProductType init ProductType.new.initialize(cl_pt)
-		var ft : FunctionType init FunctionType.new.initialize(pt, cl_ft)
-		var tl : TypeLiteral init TypeLiteral.new.initializeTypeRef(cl_tl,cl_tr)
+		//var cl_tl : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("org::kermeta::language::structure::Class"))
+		//var cl_tr : Class init Class.new.initializeFromAClassDefinition(typeTest)
+		//var cl_pt : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("org::kermeta::language::structure::Class"))
+		//var cl_ft : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::Boolean"))
+		//var pt : ProductType init ProductType.new.initialize(cl_pt)
+		//var ft : FunctionType init FunctionType.new.initialize(pt, cl_ft)
+		//var tl : TypeLiteral init TypeLiteral.new.initializeTypeRef(cl_tl,cl_tr)
+		var tl : CallTypeLiteral init CallTypeLiteral.new
 		
-		self.containedType.add(ft)
+		//??!!?? CallFeature has not a containedType
+		//self.containedType.add(ft)
 		self.parameters.add(tl)
 		self.target := CallFeature.new.initialize(propertyName)
 		result := self
@@ -274,16 +276,17 @@ aspect class TypeReference {
 	end
 }
 
-aspect class TypeLiteral {
+//There is no TypeLiteral in new metamodel
+//aspect class TypeLiteral {
 	/**
 	 * Creates a new TypeLiteral
 	 * 
 	 * @param type
 	 *            type of the TypeLiteral
 	 */
-	operation initialize(type : Type) : TypeLiteral is do
+/*	operation initialize(type : Type) : TypeLiteral is do
 		result := self
-	end
+	end*/
 	
 	/**
 	 * Creates a new TypeLiteral with an associated TypeReference
@@ -293,13 +296,13 @@ aspect class TypeLiteral {
 	 * @param type_ref
 	 *            type of the TypeReference
 	 */
-	operation initializeTypeRef(type : Type, type_ref : Type) : TypeLiteral is do
+/*	operation initializeTypeRef(type : Type, type_ref : Type) : TypeLiteral is do
 		var tr : TypeReference init TypeReference.new.initialize(type_ref)
 		self.typeref := tr
 		self.containedType.add(type)
 		result := self
 	end
-}	
+}	*/
 
 aspect class Assignment {
 	/**
