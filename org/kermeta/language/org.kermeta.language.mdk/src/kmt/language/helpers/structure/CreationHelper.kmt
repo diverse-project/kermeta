@@ -60,7 +60,7 @@ aspect class Parameter {
 }
 
 aspect class Tag {
-	operation initialize(name : String, ~value : String, object : Object) : Tag is do
+	operation initialize(name : String, ~value : String, object : KermetaModelElement) : Tag is do
 		self.name 	:= name
 		self.~value := ~value
 		self.object.add(object)
