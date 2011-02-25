@@ -19,7 +19,7 @@ aspect class NamedElement
 	operation getQualifiedName() : String is do
 		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
 		if (not self.container().isVoid()) then
-			if self.container().isInstanceOf(NamedElement) then
+			if self.container().isInstanceOf(NamedElement) and not self.container().isInstanceOf(ModelingUnit) then
 				buffer.append(self.container().asType(NamedElement).getQualifiedName())
 				buffer.append("::")
 			end
@@ -55,15 +55,18 @@ aspect class Class
 			end
 		} */
 		// workaround compiler/framework limitation, forget about the "," between elements :-(
-		if not self.typeParamBinding.isEmpty then
-			buffer.append("<")
-		end
-		self.typeParamBinding.each{ tpb | 
-			buffer.append(tpb.type.getQualifiedName)
-		}
-		if not self.typeParamBinding.isEmpty then
-			buffer.append("<")
-		end
+		
+			if not self.typeParamBinding.isEmpty then
+				buffer.append("<")
+			end
+			self.typeParamBinding.each{ tpb | 
+				if not tpb.type.isVoid() then
+					buffer.append(tpb.type.getQualifiedName)
+				end
+			}
+			if not self.typeParamBinding.isEmpty then
+				buffer.append("<")
+			end
 		result := buffer.toString
 	end
 }
