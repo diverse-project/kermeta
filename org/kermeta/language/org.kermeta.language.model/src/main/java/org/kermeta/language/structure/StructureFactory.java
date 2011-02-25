@@ -7,7 +7,6 @@
 package org.kermeta.language.structure;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -331,15 +330,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	TypeMapping createTypeMapping();
-
-	/**
-	 * Returns a new object of class '<em>Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object</em>'.
-	 * @generated
-	 */
-	EObject createObject();
 
 	/**
 	 * Returns the package supported by this factory.

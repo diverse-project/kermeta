@@ -131,7 +131,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.TYPE_MAPPING: return createTypeMapping();
-			case StructurePackage.OBJECT: return (EObject)createObject();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -525,16 +524,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public TypeMapping createTypeMapping() {
 		TypeMappingImpl typeMapping = new TypeMappingImpl();
 		return typeMapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject createObject() {
-		ObjectImpl object = new ObjectImpl();
-		return object;
 	}
 
 	/**
