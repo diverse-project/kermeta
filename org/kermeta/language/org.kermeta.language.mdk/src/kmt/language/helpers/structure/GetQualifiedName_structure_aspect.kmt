@@ -60,9 +60,9 @@ aspect class Class
 				buffer.append("<")
 			end
 			self.typeParamBinding.each{ tpb | 
-				if not tpb.type.isVoid() then
+				//if not tpb.type.isVoid() then
 					buffer.append(tpb.type.getQualifiedName)
-				end
+				//end
 			}
 			if not self.typeParamBinding.isEmpty then
 				buffer.append("<")
