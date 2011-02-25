@@ -76,7 +76,7 @@ trait KClassDefinitionParser extends KAbstractParser
       parents match {
         case None => {
             // by default if there is no inherits, inherits from Object
-            var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "org::kermeta::language::structure::Object")
+            var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "language::standard::Object")
             newo.getSuperType.add(newParent)
         }
         case Some(parentI)=> {
