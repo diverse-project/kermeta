@@ -24,22 +24,22 @@ import org.kermeta.kp.Source;
  */
 public abstract class SourceImpl extends EObjectImpl implements Source {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected SourceImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return KpPackage.Literals.SOURCE;
-	}
+    return KpPackage.Literals.SOURCE;
+  }
 
 } //SourceImpl

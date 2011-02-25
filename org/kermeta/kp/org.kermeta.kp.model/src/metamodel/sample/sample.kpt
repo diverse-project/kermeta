@@ -2,18 +2,19 @@ KermetaProject :"new_file.kpt"
 version :  "someVersion" 
 group :"group" 
 { 
-	source = "src" 
-	source = "foo" 
-	source = "*/org/eclipse/uml2.ecore" from "uml2" 
-	source = ECORE_NSURI from "ecore" 
+	srcDir = "src" 
+	srcDir = "foo" 
+	srcFile = "*/org/eclipse/uml2.ecore" from "uml2" 
+	srcNSURI = ECORE_NSURI from "ecore" 
 	// import the same ecore file in 2 variants : uml2 and uml2.1 
-	source = "**/uml2.ecore um2" from "uml2_dep"
-	source = "**/uml2.ecore um2.1" from "uml2_dep" 
+	srcQuery = "**/uml2.ecore um2" from "uml2_dep"
+	srcQuery = "**/uml2.ecore um2.1" from "uml2_dep" 
 	
 	dependency "new_file.kp" 
 	dependency "uml2" = "uml2.ref" 
 	dependency "uml2_dep" = "uml2.jar" 
 	dependency "ecore" = "ecore.ref"  
+	dependency "slf4j" = "mvn:http://www.kermeta.org/maven2!org.kermeta.utils/utils.slf4j.eclipse/2.2.1-beta2"  
 	
 	weaver-directive = ( "getsetinjector" "class *" ) "* +GetSetAspect" 
 	

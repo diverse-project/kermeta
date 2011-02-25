@@ -16,5 +16,5 @@ Build-Jdk: 1.6.0_20
 Bundle-Version: 2.0.1.SNAPSHOT
 Bnd-LastModified: 1289381150643
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.kermeta.kp.model
+Bundle-SymbolicName: org.kermeta.kp.model;singleton:=true
 
