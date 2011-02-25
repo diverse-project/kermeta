@@ -26,6 +26,18 @@ aspect class Operation
 		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
 		true
 	end
+	
+	/**
+	 * If the from field in UnresolvedOperation points on a generic ClassDefinition
+	 * it must contains the generics (from Set<G> and not from Set)
+	 */
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv unresolved_generic_super_must_contain_type_parameters is do
+		// TODO
+		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
+		true
+	end
 
 }
 
