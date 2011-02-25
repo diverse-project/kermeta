@@ -45,7 +45,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	/**
 	* This method adds a tag to the given object. The added tag flags ecore object conversion.
 	*/
-	operation addEcoreTag(object : Object) : Void is do
+	operation addEcoreTag(object : KermetaModelElement) : Void is do
 		if(not object.isVoid) then
 			var kmTag : Tag init Tag.new.initialize("ecore", "true", object)
 			object.kTag.add(kmTag)

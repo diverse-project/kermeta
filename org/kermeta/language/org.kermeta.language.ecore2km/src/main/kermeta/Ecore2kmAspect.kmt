@@ -24,5 +24,5 @@ aspect class EModelElement {
 	/** The trace used to type the output Kermeta model. Corresponds to the created
 	  * Kermeta class definition.
 	 */
-	reference targetKermetaObject : Object
+	reference targetKermetaObject : KermetaModelElement
 }
