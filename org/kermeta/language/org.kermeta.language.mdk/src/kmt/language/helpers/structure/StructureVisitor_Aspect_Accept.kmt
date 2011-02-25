@@ -32,7 +32,7 @@ aspect class Class {
 }
 
 aspect class ClassDefinition {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitClassDefinition(self, ctxt)
 	end
 }
@@ -44,7 +44,7 @@ aspect class Constraint {
 }
 
 aspect class DataType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitDataType(self, ctxt)
 	end
 }
@@ -62,7 +62,7 @@ aspect class EnumerationLiteral {
 }
 
 aspect class FunctionType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitFunctionType(self, ctxt)
 	end
 }
@@ -80,7 +80,7 @@ aspect class Model {
 }
 
 aspect class ModelType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitModelType(self, ctxt)
 	end
 }
@@ -109,9 +109,9 @@ aspect class NamedElement {
 	end
 }
 
-aspect class Object {
+aspect class KermetaModelElement {
 	operation accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
-		visitor.visitObject(self, ctxt)
+		visitor.visitKermetaModelElement(self, ctxt)
 	end
 }
 
@@ -122,13 +122,13 @@ aspect class ObjectTypeVariable {
 }
 
 aspect class Operation {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitOperation(self, ctxt)
 	end
 }
 
 aspect class Package {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitPackage(self, ctxt)
 	end
 }
@@ -146,19 +146,19 @@ aspect class ParameterizedType {
 }
 
 aspect class PrimitiveType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitPrimitiveType(self, ctxt)
 	end
 }
 
 aspect class ProductType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitProductType(self, ctxt)
 	end
 }
 
 aspect class Property {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitProperty(self, ctxt)
 	end
 }
@@ -206,7 +206,7 @@ aspect class TypeContainer {
 }
 
 aspect class TypeDefinition {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitTypeDefinition(self, ctxt)
 	end
 }
@@ -224,7 +224,7 @@ aspect class TypeMapping {
 }
 
 aspect class TypeVariable {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitTypeVariable(self, ctxt)
 	end
 }
@@ -236,7 +236,7 @@ aspect class TypeVariableBinding {
 }
 
 aspect class TypedElement {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitTypedElement(self, ctxt)
 	end
 }
@@ -248,19 +248,19 @@ aspect class Unresolved {
 }
 
 aspect class UnresolvedOperation {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitUnresolvedOperation(self, ctxt)
 	end
 }
 
 aspect class UnresolvedProperty {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitUnresolvedProperty(self, ctxt)
 	end
 }
 
 aspect class UnresolvedType {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from Object is do
+	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) from KermetaModelElement is do
 		visitor.visitUnresolvedType(self, ctxt)
 	end
 }

@@ -16,7 +16,7 @@ using org::kermeta::language::structure
 
 class StructureVisitor
 {
-	operation isVisitable(o : Object) : Boolean is do
+	operation isVisitable(o : KermetaModelElement) : Boolean is do
 		if (o.isInstanceOf(Boolean) or o.isInstanceOf(Integer) or o.isInstanceOf(String) or o.isInstanceOf(UnlimitedNatural)
 			or o.isInstanceOf(ConstraintLanguage) or o.isInstanceOf(ConstraintType)) then
 			result := false
@@ -89,7 +89,7 @@ operation visitNamedElement(visited : NamedElement, ctxt : StructureVisitorConte
 
 end
 
-operation visitObject(visited : Object, ctxt : StructureVisitorContext) is do
+operation visitKermetaModelElement(visited : KermetaModelElement, ctxt : StructureVisitorContext) is do
 
 end
 
