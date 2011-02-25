@@ -5,7 +5,7 @@
 
 package org.kermeta.language.compiler.aspects.sub
 
-import org.kermeta.language.structure.{Object => KObject}
+import org.kermeta.language.structure.{KermetaModelElement => KObject}
 
 trait ObjectAspect extends BaseAspect {
   

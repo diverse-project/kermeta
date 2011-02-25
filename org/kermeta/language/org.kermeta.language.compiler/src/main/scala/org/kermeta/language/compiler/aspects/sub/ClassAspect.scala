@@ -27,7 +27,7 @@ trait ClassAspect extends ObjectAspect {
       self.asInstanceOf[KClass].getTypeParamBinding.foreach(e=> {
           var res1: StringBuilder = new StringBuilder
           e.generateScalaCode(res1)
-          if (false && res1.toString.contains(classOf[org.kermeta.language.structure.Object].getCanonicalName))
+          if (false && res1.toString.contains(classOf[org.kermeta.language.structure.KermetaModelElement].getCanonicalName))
             res.append("_ <: _root_.java.lang.Object")
           else
             res.append(res1.toString)

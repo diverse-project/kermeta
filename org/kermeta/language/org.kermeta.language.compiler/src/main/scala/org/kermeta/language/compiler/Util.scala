@@ -10,7 +10,7 @@ package org.kermeta.language.compiler
  
 import org.kermeta.language._
 import org.kermeta.language.structure._
-import org.kermeta.language.structure.{Object => KObject}
+import org.kermeta.language.structure.{KermetaModelElement => KObject}
 import org.kermeta.language.behavior._
 import java.io.File
 import java.io.IOException
@@ -27,7 +27,7 @@ object Util {
      * @param obj model element to test
      * @return true if ecore tag is found
      */
-    def hasEcoreTag(obj : Object) : Boolean = {
+    def hasEcoreTag(obj : KObject) : Boolean = {
         obj.getKOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
     }
     /**
@@ -35,7 +35,7 @@ object Util {
      * @param obj model element to test
      * @return true if CompilerIgnore tag is found
      */
-    def hasCompilerIgnoreTag(obj : Object) : Boolean = {
+    def hasCompilerIgnoreTag(obj : KObject) : Boolean = {
         obj.getKOwnedTags.exists(e=> "CompilerIgnore".equals(e.asInstanceOf[Tag].getName()))
     }
 
@@ -145,21 +145,21 @@ object Util {
     var threadExecutor : ExecutorService = null
    
    
-    def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
+    def generateScalaCodeEach[A <: KObject](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
-                e.asInstanceOf[Object].generateScalaCode(res)
+                e.asInstanceOf[KObject].generateScalaCode(res)
             })
     }
    
    
-    def generateProtectedScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
+    def generateProtectedScalaCodeEach[A <: KObject](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
                 var temp = new StringBuilder
-                e.asInstanceOf[Object].generateScalaCode(temp)
+                e.asInstanceOf[KObject].generateScalaCode(temp)
                 res.append(protectScalaKeyword(temp.toString))
             })
         //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
@@ -199,7 +199,7 @@ object Util {
 
 
     def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String = {
-        var baseName = typD.asInstanceOf[Object].getQualifiedNameCompilo
+        var baseName = typD.asInstanceOf[KObject].getQualifiedNameCompilo
 
         //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
       //  log.debug(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]))
@@ -208,7 +208,7 @@ object Util {
         baseName = baseName match {
             //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
             //case _ if(Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
-            case _ if(!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
+            case _ if(!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[KObject])) => baseName
             case _ => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
         }
         return baseName+"Aspect"
@@ -217,7 +217,7 @@ object Util {
     def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
         var baseName = typD.asInstanceOf[KObject].getQualifiedNameCompilo
         baseName = baseName match {
-            case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]) && !baseName.equals("java.util.List") ) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
+            case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KObject]) && !baseName.equals("java.util.List") ) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
             case _ => { baseName }
         }
         return baseName

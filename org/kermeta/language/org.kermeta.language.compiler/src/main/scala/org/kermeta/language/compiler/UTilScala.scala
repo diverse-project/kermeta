@@ -20,7 +20,7 @@ object UTilScala {
         return false;
     }
     
-    def newInstance(o:org.kermeta.language.structure.Class): org.kermeta.language.structure.Object ={
+    def newInstance(o:org.kermeta.language.structure.Class): org.kermeta.language.structure.KermetaModelElement ={
        // println("newInstance " + o + " " +o.getName)
         var name: String = getQualifiedNamePackage(o.getTypeDefinition.eContainer.asInstanceOf[org.kermeta.language.structure.Package],".")
         var factoryName = "ScalaAspect." + TypeEquivalence.getPackageEquivalence(name) + ".RichFactory$"
@@ -30,7 +30,7 @@ object UTilScala {
         var meth :java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodName)).first
         //println(meth.getName + " " + meth.getParameterTypes.size)
         val numbers = Array()
-        return meth.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.Object]
+        return meth.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.KermetaModelElement]
     }
 
 

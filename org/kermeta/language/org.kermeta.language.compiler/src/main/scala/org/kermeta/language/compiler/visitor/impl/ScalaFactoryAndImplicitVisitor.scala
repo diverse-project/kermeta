@@ -321,7 +321,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
           implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ (Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect").replace("ScalaAspect.org.kermeta.language.structure.ObjectAspect", "kermeta.standard.ObjectAspect")+"]\n"
         }
 
-        implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(packageName.toString+"."+par.getName())+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[Object].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
+        implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(packageName.toString+"."+par.getName())+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[KermetaModelElement].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
       }else{
 
         //Tisse la class d'implem ecore hérité'
@@ -332,10 +332,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor {
 
         if(cd != null){
           if (!IsAnExceptionChildren(par)){
-            viewDef.append(cd.eContainer().asInstanceOf[Object].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with ")
+            viewDef.append(cd.eContainer().asInstanceOf[KermetaModelElement].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with ")
           }
           viewDef.append(TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString )
-          var superClassName = cd.eContainer().asInstanceOf[Object].getQualifiedNameCompilo + "."+ cd.getName
+          var superClassName = cd.eContainer().asInstanceOf[KermetaModelElement].getQualifiedNameCompilo + "."+ cd.getName
           if (!(classOf[Object].getCanonicalName.equals(superClassName)
                 || classOf[org.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName)) ){
             viewDef.append(" with " + "org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")

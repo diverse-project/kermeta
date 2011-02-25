@@ -231,7 +231,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 	
   override def getQualifiedNameCompilo():String = {
 
-    var baseName : String = TypeEquivalence.getTypeEquivalence(ClassDefinitionAspect_self.eContainer().asInstanceOf[Object].getQualifiedNameCompilo() + "."+ ClassDefinitionAspect_self.getName())
+    var baseName : String = TypeEquivalence.getTypeEquivalence(ClassDefinitionAspect_self.eContainer().asInstanceOf[KermetaModelElement].getQualifiedNameCompilo() + "."+ ClassDefinitionAspect_self.getName())
     return baseName
 
     /*

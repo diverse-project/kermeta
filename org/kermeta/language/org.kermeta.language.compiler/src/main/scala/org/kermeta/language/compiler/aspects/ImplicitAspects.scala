@@ -11,7 +11,7 @@ import org.kermeta.language.compiler.aspects.sub._
 import org.kermeta.language.structure.ModelingUnit
 import org.kermeta.language.structure.{Class => KClass}
 import org.kermeta.language.structure.{ClassDefinition => KClassDefinition}
-import org.kermeta.language.structure.{Object => KObject}
+import org.kermeta.language.structure.{KermetaModelElement => KObject}
 import org.kermeta.language.structure.{Operation => KOpertation}
 import org.kermeta.language.structure.{Package => KPackage}
 import org.kermeta.language.structure.{Enumeration => KEnumeration}

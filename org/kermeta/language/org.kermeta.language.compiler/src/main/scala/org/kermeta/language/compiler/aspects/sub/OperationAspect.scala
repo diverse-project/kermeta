@@ -103,7 +103,7 @@ trait OperationAspect extends ObjectAspect {
       res.append("]; \n")
       if (OperationAspect_self.getBody!= null){
 				
-        OperationAspect_self.getBody().asInstanceOf[Object].generateScalaCode(res)
+        OperationAspect_self.getBody().asInstanceOf[KermetaModelElement].generateScalaCode(res)
       }
       res append " return result\n}\n"
       //this.getType.generateScalaCode(res)
@@ -119,7 +119,7 @@ trait OperationAspect extends ObjectAspect {
                                                           var ii = 0;
                                                           OperationAspect_self.getTypeParameter.foreach{param=>
         if (ii>0) {res1.append(",")}
-        res1.append(param.asInstanceOf[Object].getQualifiedNameCompilo())
+        res1.append(param.asInstanceOf[KermetaModelElement].getQualifiedNameCompilo())
         ii= ii+1
       }
                                                           res1.append("]")
@@ -137,11 +137,11 @@ trait OperationAspect extends ObjectAspect {
         //TODO gestion des SETs
         res.append("org.eclipse.emf.common.util.EList[")
       }
-      OperationAspect_self.getType().asInstanceOf[Object].generateScalaCode(res1)
+      OperationAspect_self.getType().asInstanceOf[KermetaModelElement].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
     } else {
-      OperationAspect_self.getType().asInstanceOf[Object].generateScalaCode(res1)
+      OperationAspect_self.getType().asInstanceOf[KermetaModelElement].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
     }
   }
@@ -155,11 +155,11 @@ trait OperationAspect extends ObjectAspect {
         //TODO gestion des SETs
         res.append("org.eclipse.emf.common.util.EList[")
       }
-      param.getType().asInstanceOf[Object].generateScalaCode(res1)
+      param.getType().asInstanceOf[KermetaModelElement].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
     } else {
-      param.getType().asInstanceOf[Object].generateScalaCode(res1)
+      param.getType().asInstanceOf[KermetaModelElement].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
     }
 
