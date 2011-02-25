@@ -101,7 +101,7 @@ class StaticSetterContext
 		
 		// clone the type of the multiplicity element
 		var typeCopy : org::kermeta::language::structure::Type
-		result := element.duplicate.asType(Type)
+		//result := element.duplicate.asType(Type)
 		/*	// UGLY: need a real clone
 			if element.type.isInstanceOf(org::kermeta::language::structure::Class) then
 				result := org::kermeta::language::structure::Class.clone(element.type.asType(org::kermeta::language::structure::Class))
@@ -152,8 +152,8 @@ class StaticSetterContext
 	end
 	
 	// workaround compiler bug : issue when adding aspect on object
-	// put this method as helper that do the same, called by direct subclasses of Object
-	operation inferContainedExpressionStatic(obj : org::kermeta::language::structure::Object) is do
+	// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
+	operation inferContainedExpressionStatic(obj : KermetaModelElement) is do
 						
 			// the algorithm is bottom up
 			// compute leaf then goes up in the container which can then reuse their results
@@ -161,8 +161,8 @@ class StaticSetterContext
 			obj.eachOwnedElement{ e |
 				if ( e.isInstanceOf(Expression)) then
 					e.asType(Expression).resolveCallAndInferStatic(self)
-				else if ( e.isInstanceOf(org::kermeta::language::structure::Object)) then
-					e.asType(org::kermeta::language::structure::Object).inferContainedExpressionStatic(self)
+				else if ( e.isInstanceOf(KermetaModelElement)) then
+					e.asType(KermetaModelElement).inferContainedExpressionStatic(self)
 				end end
 				e // must return somthing for scala compiler to work
 			}

@@ -23,13 +23,13 @@ using org::kermeta::language::structure
 using org::kermeta::language::staticsetter
 
 package structure {
-	 aspect class Object {
+	 aspect class KermetaModelElement {
 		operation inferContainedExpressionStatic(context : StaticSetterContext) is do
 						
 			// the algorithm is bottom up
 			// compute leaf then goes up in the container which can then reuse their results
 			// workaround compiler bug : issue when adding aspect on object
-			// put this method as helper that do the same, called by direct subclasses of Object
+			// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
 			context.inferContainedExpressionStatic(self)
 		end
 	} 
@@ -181,7 +181,7 @@ package behavior {
 					callOperation.kOwnedTags.addAll(self.kOwnedTags)
 					// infer staticType of the content (except target which has been done previously)
 					callOperation.eachOwnedElement{ e | 
-						e.asType(Object).inferContainedExpressionStatic(context)
+						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
 						e // scala compiler needs somthing to return
 					}
 					
@@ -214,7 +214,7 @@ package behavior {
 					callProperty.kOwnedTags.addAll(self.kOwnedTags)
 					// infer staticType of the content (except target which has been done previously)
 					callProperty.eachOwnedElement{ e | 
-						e.asType(Object).inferContainedExpressionStatic(context)						
+						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)						
 						e // scala compiler needs somthing to return
 					}
 					

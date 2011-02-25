@@ -21,10 +21,10 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/each
 using org::kermeta::language::structure
 
 package structure {
-	aspect class Object {
-		reference duplicatedIn : Object
-		operation duplicate() : Object is abstract
-		operation duplicateContentTo(destCopy : Object)  is do
+	aspect class KermetaModelElement {
+		reference duplicatedIn : KermetaModelElement
+		operation duplicate() : KermetaModelElement is abstract
+		operation duplicateContentTo(destCopy : KermetaModelElement)  is do
 		
 			kOwnedTags.each{ t |
 				var newTag : Tag init t.duplicate.asType(Tag)
@@ -40,23 +40,23 @@ package structure {
 
 	 aspect class Type {
 	 	
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 						
 			result := void
 		end
 	}
 	aspect class Class {
-		method duplicate() : Object is do
+		method duplicate() : KermetaModelElement is do
 			result := Class.new
 			self.duplicateContentTo(result)
 		end
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 			super(destCopy)
 			result := void
 		end
 	}
 	aspect class ParameterizedType {		
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 			super(destCopy)	
 			typeParamBinding.each{ tpb |
 				destCopy.asType(ParameterizedType).typeParamBinding.add(tpb.duplicate.asType(TypeVariableBinding))
@@ -71,11 +71,11 @@ package structure {
 	
 	aspect class Tag {
 	
-		method duplicate() : Object is do
+		method duplicate() : KermetaModelElement is do
 			result := Tag.new
 			self.duplicateContentTo(result)
 		end
-		method duplicateContentTo(destCopy : Object)    is do
+		method duplicateContentTo(destCopy : KermetaModelElement)    is do
 			destCopy.asType(Tag).name := self.name
 			destCopy.asType(Tag).~value := self.~value	
 			 // super(destCopy)
@@ -93,7 +93,7 @@ package structure {
 	}
 	aspect class TypeVariable {
 		
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 				
 			super(destCopy)
 			if not self.supertype.isVoid then
@@ -104,22 +104,22 @@ package structure {
 		end
 	}
 	aspect class ObjectTypeVariable {
-		method duplicate() : Object is do
+		method duplicate() : KermetaModelElement is do
 			result := ObjectTypeVariable.new
 			self.duplicateContentTo(result)
 		end
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 				
 			super(destCopy)
 			result := void
 		end
 	}
 	aspect class TypeVariableBinding {
-		method duplicate() : Object is do
+		method duplicate() : KermetaModelElement is do
 			result := TypeVariableBinding.new
 			self.duplicateContentTo(result)
 		end
-		method duplicateContentTo(destCopy : Object)  is do
+		method duplicateContentTo(destCopy : KermetaModelElement)  is do
 				
 			super(destCopy)
 			if not self.type.isVoid then
