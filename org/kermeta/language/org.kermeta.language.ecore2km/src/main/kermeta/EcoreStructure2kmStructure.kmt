@@ -133,7 +133,13 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			else // If there is a return type, an unresolved type is created.
 				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
 				if(type.isKindOf(EDataType)) then
-					result := UnresolvedType.new.initialize(primitiveTypeMappings.getValue(type.name))
+					var s : String 
+					s := primitiveTypeMappings.getValue(type.name)
+					if s.isVoid then
+						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
+						s := "kermeta::standard::Object" 
+					end 
+					result := UnresolvedType.new.initialize(s)
 				else
 					result := UnresolvedType.new.initialize(type.getQualifiedName())
 				end
