@@ -43,6 +43,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference unresolvedTypesToBeRemoved : Collection<UnresolvedType>
 	
 	//The first pass does not resolve UnresolvedOperation (UnresolvedOperation need all ClassDefinition resolved)
+	//This should probably be rewrite in two separate passes
 	attribute secondPass : Boolean
 	
 	/*
@@ -59,49 +60,52 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			end
 			
 			if (not ctxt.unresolved.asType(UnresolvedType).typeContainer.isVoid()) then
+			
+				var notTypeTypeContainer : TypeContainer init recursiveGetTypeContainer(ctxt.unresolved.asType(UnresolvedType))
+			
 				//If the type we are looking for is in a parameter, it can be a typeParameter
-				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Parameter)) then			
+				if (notTypeTypeContainer.isInstanceOf(Parameter)) then			
 					//If the Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(Operation).typeParameter.detect{t|
+					ctxt.foundType := notTypeTypeContainer.container.asType(Operation).typeParameter.detect{t|
 						t.name.equals(ctxt.unresolvedName)
 					}
 					if (ctxt.foundType.isVoid()) then
 						//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-						ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+						ctxt.foundType := notTypeTypeContainer.container.asType(Operation).container.asType(ClassDefinition).typeParameter.detect{t|
 							t.name.equals(ctxt.unresolvedName)
 						}
 					end
 				end
 				
 				//If the type we are looking for is in an operation, it can be a typeParameter
-				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Operation)) then			
+				if (notTypeTypeContainer.isInstanceOf(Operation)) then			
 					//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).typeParameter.detect{t|
+					ctxt.foundType := notTypeTypeContainer.asType(Operation).typeParameter.detect{t|
 						t.name.equals(ctxt.unresolvedName)
 					}
 					if (ctxt.foundType.isVoid()) then
 						//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-						ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+						ctxt.foundType := notTypeTypeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
 							t.name.equals(ctxt.unresolvedName)
 						}
 					end
 				end
 				
 				//If the type we are looking for is contained by a Property, it can be a typeParameter
-				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(Property)) then
+				if (notTypeTypeContainer.isInstanceOf(Property)) then
 					var typeVar : TypeVariable
 					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.container.asType(ClassDefinition).typeParameter.detect{t|
+					typeVar := notTypeTypeContainer.container.asType(ClassDefinition).typeParameter.detect{t|
 						t.name.equals(ctxt.unresolvedName)
 					}
 					ctxt.foundType := typeVar
 				end
 				
 				//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
-				if (ctxt.unresolved.asType(UnresolvedType).typeContainer.isInstanceOf(ClassDefinition)) then
+				if (notTypeTypeContainer.isInstanceOf(ClassDefinition)) then
 					var typeVar : TypeVariable
 					//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					typeVar := ctxt.unresolved.asType(UnresolvedType).typeContainer.asType(ClassDefinition).typeParameter.detect{t|
+					typeVar := notTypeTypeContainer.asType(ClassDefinition).typeParameter.detect{t|
 						t.name.equals(ctxt.unresolvedName)
 					}
 					ctxt.foundType := typeVar
@@ -178,10 +182,20 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					initialQualifiedPath.each{s|
 						error := error + s + "::"
 					}
-					error := error + initialUnresolvedName + " in " + ctxt.unresolved.container.toString()
-					error := error + "\n	(looked for in packages: " + ctxt.currentPackage.getQualifiedName()
+					error := error + initialUnresolvedName + " in "
+					
+					if (ctxt.unresolved.container.isInstanceOf(NamedElement)) then
+						error := error + ctxt.unresolved.container.asType(NamedElement).getQualifiedName
+					else
+						error := error + ctxt.unresolved.container.toString()
+					end
+					
+					error := error + "\n	(looked for in current package: " + ctxt.currentPackage.getQualifiedName() + " and in packages: "
 					ctxt.unresolved.asType(UnresolvedType).usings.each{u|
-						error := error + ", " + u.fromQName
+						error := error + u.fromQName
+						if (not u.equals(ctxt.unresolved.asType(UnresolvedType).usings.last())) then
+							error := error + ", "
+						end
 					}
 					error := error + ")"
 					if (ctxt.exceptions) then
@@ -200,6 +214,21 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
 		end
 		ctxt.reset()
+	end
+	
+	/*
+	* Return the first Container of t which is not a Type
+	*/
+	operation recursiveGetTypeContainer(t : Type) : TypeContainer is do
+		if (not t.container.isVoid()) then
+			if (not t.typeContainer.isInstanceOf(Type)) then
+				result := t.typeContainer
+			else
+				result := recursiveGetTypeContainer(t.typeContainer.asType(Type))
+			end
+		else
+			result := void
+		end
 	end
 	
 	operation callPropertyFinder(ctxt : StructureVisitorContext) is do
@@ -849,7 +878,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 							// do not introduce circular inheritance to self
 							// this deal with the special case if we are org::kermeta::language::structure::Object and points to self
 							// then do not add it, since it was introduced by the parser
-							if foundType.getQualifiedName != t.getQualifiedName then															
+							if foundType.getQualifiedName != t.getQualifiedName then
 								typesToBeAdded.add(foundType)
 								if (foundType.isInstanceOf(Class)) then
 									t.containedType.add(foundType)
