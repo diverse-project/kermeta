@@ -121,8 +121,8 @@ aspect class ClassDefinition {
 	 * @param opName
 	 *            the name of the operation to look for
 	 */
-	operation getOperation(opName : String) : Set<Object> is do
-		var t : Set<Object> init Set<Object>.new
+	operation getOperation(opName : String) : Set<kermeta::standard::Object> is do
+		var t : Set<kermeta::standard::Object> init Set<kermeta::standard::Object>.new
 		self.ownedOperation.each{o|
 			if o.name.equals(opName) then
 				t.add(o)
@@ -137,8 +137,8 @@ aspect class ClassDefinition {
 	 * @param pName
 	 *            the name of the property to look for
 	 */
-	operation getProperty(pName : String) : Object is do
-		var t : Set<Object> init Set<Object>.new
+	operation getProperty(pName : String) : kermeta::standard::Object is do
+		var t : Set<kermeta::standard::Object> init Set<kermeta::standard::Object>.new
 		self.ownedAttribute.each{o|
 			if o.name.equals(pName) then
 				t.add(o)
