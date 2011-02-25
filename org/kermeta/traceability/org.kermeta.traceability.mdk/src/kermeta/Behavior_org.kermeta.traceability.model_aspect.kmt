@@ -15,6 +15,7 @@ require "MetaModel_org.kermeta.traceability.model.kmt"
 using kermeta::standard
 
 
+
 /**
  * This class represents a trace model.
  * This is a set of traces, references and messages.
@@ -44,8 +45,8 @@ aspect class TracePackage {
 	 * which breaks the trace model optimized status
 	 */
 	operation addTrace(trc : Trace) is do
-		references.addAll(trc.sourceElem.asType(Collection<Reference>))
-		references.addAll(trc.targetElem.asType(Collection<Reference>))
+		references.add(trc.sourceElem.asType(Reference))
+		references.add(trc.targetElem.asType(Reference))
 	end
 
 	/**
@@ -124,6 +125,17 @@ aspect class TracePackage {
 		references.clear
 		references.addAll(newRefs)
 	end
+	
+	
+	operation size() : Integer is do 
+		result :=0 
+		references.each{refer| 
+			if refer == void then
+				stdio.writeln("the ref is void")
+			else
+				result :=result + refer.target.size()
+			end }
+	end 
 }
 
 

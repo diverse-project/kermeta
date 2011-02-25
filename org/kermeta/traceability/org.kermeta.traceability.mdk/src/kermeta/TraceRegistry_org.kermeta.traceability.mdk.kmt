@@ -11,8 +11,9 @@
 
 package org::kermeta::traceability::mdk;
 
-require "Behavior_org.kermeta.traceability.model_aspect.kmt"
 //require "MetaModel_org.kermeta.traceability.model.kmt"
+require "Behavior_org.kermeta.traceability.model_aspect.kmt"
+
 require kermeta
 using kermeta::standard
 using kermeta::utils
@@ -24,20 +25,11 @@ using kermeta::language::structure
 class TraceRegistry
 {	
 	
-	attribute objectRegistry : Hashtable<Object,ModelReference>
-	
 	attribute registry : Hashtable<Reference,Reference>
 	
 	attribute traces : TracePackage
 	
-	//return the map between runtime objects and ModelReference, initialize it if it isn't
-	operation getObjectRegistry() : Hashtable<Object,ModelReference> is do
-		if objectRegistry==void then
-			self.objectRegistry:=Hashtable<Object,ModelReference>.new
-		end
-		result:= objectRegistry
-	end
-	
+	//return the hashtable providing the link to the references with traces	
 	operation getRegistry() : Hashtable<Reference,Reference> is do
 		if registry==void then 
 			self.registry:=Hashtable<Reference,Reference>.new
@@ -57,18 +49,14 @@ class TraceRegistry
 	end
 	
 	
-	//return modelReference for an object or create one if it does not exist
-	operation getModelReference(o : Object) : ModelReference is do
-		if not getObjectRegistry.containsKey(o) then
-			result:=ModelReference.new
-			result.refObject := o
-			getObjectRegistry.put(o, result)
-			getTracePackage.references.add(result)
-		else
-			result:=objectRegistry.getValue(o)
-		end
-	end
 	
+	
+	//add a trace from references
+	operation addTraceFromReferences(source : Reference, target : Reference, context : Object) : Void is do
+		var sourceRef : Reference init getCorrespondingReference(source)
+		var targetRef : Reference init getCorrespondingReference(target)
+		sourceRef.addTarget(context,targetRef)
+	end
 	
 	//add trace while keeping optimized storage of references
 	operation addTrace(trace : Trace) : Void is do
@@ -81,40 +69,7 @@ class TraceRegistry
 		
 		getCorrespondingReference(sourceRef).target.add(newTrace)
 		getCorrespondingReference(targetRef).source.add(newTrace)
-		/*
-		if  sourceRef.isInstanceOf(ModelReference) and targetRef.isInstanceOf(ModelReference) then
-			addObjectToObjectTrace(sourceRef.asType(ModelReference).refObject,targetRef.asType(ModelReference).refObject,context)
-		else
-		if not sourceRef.isInstanceOf(ModelReference) and not targetRef.isInstanceOf(ModelReference) then
-			getTracePackage.addOptimizedTrace(trace)
-		else
-			if not sourceRef.isInstanceOf(ModelReference) then
-				var srcRef : Reference init getTracePackage.findReference(trace.sourceElem.asType(Reference))
-				if(srcRef == void) then
-					getTracePackage.references.add(trace.sourceElem.asType(Reference))
-				srcRef := trace.sourceElem.asType(Reference)
-				else
-					trace.sourceElem:=srcRef
-				end
-				var tgtRef : Reference init getModelReference(targetRef.asType(ModelReference).refObject)
-				trace.targetElem:=tgtRef
-			else
-				if  not targetRef.isInstanceOf(ModelReference) then
-					var tgtRef : Reference init getTracePackage.findReference(trace.sourceElem.asType(Reference))
-					if(tgtRef == void) then
-						getTracePackage.references.add(trace.targetElem.asType(Reference))
-						tgtRef := trace.targetElem.asType(Reference)
-					else
-						trace.targetElem:=tgtRef
-					end
-					var srcRef : Reference init getModelReference(sourceRef.asType(ModelReference).refObject)
-					trace.sourceElem:=srcRef
-				end
-			
-			end
-			getTracePackage.addTrace(trace)
-		end
-		end*/
+
 	end
 		 
 	
@@ -221,38 +176,38 @@ class TraceRegistry
 		end
 	end 
 
+	
+
 	//return the sources that created ref
 	operation getRelatedSources(ref :Reference) : TracePackage is do
 		result:= TracePackage.new
 		var newRef : Reference init cloneReference(ref)
 		result.references.add(newRef)
-		ref.source.each{trc| 
+		getCorrespondingReference(ref).source.each{trc| 
 			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference)) 
 			if sourceRef == void then
 				sourceRef := cloneReference(trc.sourceElem.asType(Reference))
-				var keptTraces : Collection<Trace>
-				keptTraces:= sourceRef.target.select{trc2| trc2.targetElem.asType(Reference).equals(newRef)}
-				sourceRef.target.clear()
-				sourceRef.target.addAll(keptTraces)
-				sourceRef.target.each{trc2|trc2.targetElem:=newRef}
+				sourceRef.target.clear
 				result.references.add(sourceRef)
 			end
+			sourceRef.addTarget(trc.context,newRef)
 			}
 	end
 
 	//return the targets created by ref
-	operation getRelatedTarget(ref : Reference) : TracePackage is do
+	operation getRelatedTargets(ref : Reference) : TracePackage is do
 		result := TracePackage.new
-		var newRef : Reference init cloneReference(ref)
+		var newRef : Reference init cloneReference(getCorrespondingReference(ref))
+		newRef.target.clear()
 		result.references.add(newRef)
 		
-		newRef.target.each{trc|
+		getCorrespondingReference(ref).target.each{trc|
 			var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
 			if targetRef == void then
 				targetRef:=cloneReference(trc.targetElem.asType(Reference))
 				result.references.add(targetRef)
 			end
-			trc.targetElem:=targetRef
+			newRef.addTarget(trc.context,targetRef)
 		}
 	end
 	
