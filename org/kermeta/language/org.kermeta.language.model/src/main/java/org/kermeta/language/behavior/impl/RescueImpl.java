@@ -27,7 +27,6 @@ import org.kermeta.language.behavior.Rescue;
 import org.kermeta.language.behavior.TypeReference;
 
 import org.kermeta.language.structure.impl.KermetaModelElementImpl;
-import org.kermeta.language.structure.impl.ObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

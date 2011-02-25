@@ -29,7 +29,6 @@ import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 
 import org.kermeta.language.structure.impl.KermetaModelElementImpl;
-import org.kermeta.language.structure.impl.ObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
