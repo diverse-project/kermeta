@@ -345,6 +345,7 @@
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/targetType"/>
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/sourceType"/>
           </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Object"/>
         </nestedGenPackages>
       </nestedGenPackages>
     </nestedGenPackages>

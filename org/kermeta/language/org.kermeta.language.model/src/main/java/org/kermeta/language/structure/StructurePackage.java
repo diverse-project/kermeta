@@ -3884,6 +3884,25 @@ public interface StructurePackage extends EPackage {
 	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ObjectImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+	 * @generated
+	 */
+	int OBJECT = 45;
+
+	/**
+	 * The number of structural features of the '<em>Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3891,7 +3910,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 45;
+	int CONSTRAINT_LANGUAGE = 46;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -3901,7 +3920,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 46;
+	int CONSTRAINT_TYPE = 47;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -3911,7 +3930,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 47;
+	int STRING = 48;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -3921,7 +3940,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 48;
+	int BOOLEAN = 49;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -3930,7 +3949,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 49;
+	int INTEGER = 50;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -3939,7 +3958,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 50;
+	int UNLIMITED_NATURAL = 51;
 
 
 	/**
@@ -5460,6 +5479,17 @@ public interface StructurePackage extends EPackage {
 	EReference getTypeMapping_SourceType();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.ecore.EObject <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Object</em>'.
+	 * @see org.eclipse.emf.ecore.EObject
+	 * @model instanceClass="org.eclipse.emf.ecore.EObject"
+	 * @generated
+	 */
+	EClass getObject();
+
+	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6768,6 +6798,16 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_MAPPING__SOURCE_TYPE = eINSTANCE.getTypeMapping_SourceType();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ObjectImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+		 * @generated
+		 */
+		EClass OBJECT = eINSTANCE.getObject();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
