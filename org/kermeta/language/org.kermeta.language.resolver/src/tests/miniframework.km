@@ -4,7 +4,7 @@
     <nestedPackage name="emfpersitence">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/emfpersitence/Resource/@kOwnedTags.0" name="Resource" superType="//kermeta/emfpersitence/Resource/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/emfpersitence/Resource"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::utils" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
@@ -757,7 +757,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/emfpersitence/ResourceSet/@kOwnedTags.0" name="ResourceSet" superType="//kermeta/emfpersitence/ResourceSet/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/emfpersitence/ResourceSet"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::utils" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
@@ -1154,7 +1154,7 @@
     <nestedPackage name="io">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/FileIO/@kOwnedTags.0" name="FileIO" superType="//kermeta/io/FileIO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/io/FileIO"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -1234,7 +1234,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" superType="//kermeta/io/StdIO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/io/StdIO"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -1389,7 +1389,7 @@
     <nestedPackage name="standard">
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Object/@kOwnedTags.0" name="Object" superType="//kermeta/standard/Object/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Object"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -1397,7 +1397,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Void/@kOwnedTags.0" name="Void" superType="//kermeta/standard/Void/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Void"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -1405,7 +1405,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Long/@kOwnedTags.0" name="Long" superType="//kermeta/standard/Long/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Long"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -1413,7 +1413,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/String/@kOwnedTags.0" name="String" superType="//kermeta/standard/String/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/String"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -3378,7 +3378,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Integer/@kOwnedTags.0" name="Integer" superType="//kermeta/standard/Integer/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Integer"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -4542,7 +4542,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Boolean/@kOwnedTags.0" name="Boolean" superType="//kermeta/standard/Boolean/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Boolean"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -4995,7 +4995,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Date/@kOwnedTags.0" name="Date" superType="//kermeta/standard/Date/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Date"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -5916,7 +5916,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Short/@kOwnedTags.0" name="Short" superType="//kermeta/standard/Short/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Short"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -6565,7 +6565,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Double/@kOwnedTags.0" name="Double" superType="//kermeta/standard/Double/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Double"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -7343,7 +7343,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Float/@kOwnedTags.0" name="Float" superType="//kermeta/standard/Float/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Float"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -8121,7 +8121,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/StringBuffer/@kOwnedTags.0" name="StringBuffer" superType="//kermeta/standard/StringBuffer/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/StringBuffer"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -10752,7 +10752,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Character/@kOwnedTags.0" name="Character" superType="//kermeta/standard/Character/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Character"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -13210,7 +13210,7 @@
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Map"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -13218,7 +13218,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Collection/@kOwnedTags.0" name="Collection" superType="//kermeta/standard/Collection/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Collection/G" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Collection"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -14073,7 +14073,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/EachContext/@kOwnedTags.0" name="EachContext" superType="//kermeta/standard/EachContext/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/EachContext"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15233,6 +15233,10 @@
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
               <usings fromQName="kermeta::language::structure" toName=""/>
               <usings fromQName="kermeta::exceptions" toName=""/>
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
+                <usings fromQName="kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::exceptions" toName=""/>
+              </generics>
             </containedType>
           </ownedUnresolvedOperations>
         </ownedOperation>
@@ -15296,6 +15300,10 @@
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedCollection">
               <usings fromQName="kermeta::language::structure" toName=""/>
               <usings fromQName="kermeta::exceptions" toName=""/>
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
+                <usings fromQName="kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::exceptions" toName=""/>
+              </generics>
             </containedType>
           </ownedUnresolvedOperations>
         </ownedOperation>
@@ -15500,6 +15508,10 @@
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="OrderedCollection">
               <usings fromQName="kermeta::language::structure" toName=""/>
               <usings fromQName="kermeta::exceptions" toName=""/>
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
+                <usings fromQName="kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::exceptions" toName=""/>
+              </generics>
             </containedType>
           </ownedUnresolvedOperations>
         </ownedOperation>
@@ -15660,7 +15672,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Iterator/@kOwnedTags.0" name="Iterator" superType="//kermeta/standard/Iterator/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Iterator/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Iterator"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
@@ -15728,7 +15740,7 @@
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/utils/Hashtable"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="language::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
