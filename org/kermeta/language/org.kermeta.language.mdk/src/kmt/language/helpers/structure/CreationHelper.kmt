@@ -86,6 +86,16 @@ aspect class UnresolvedType {
 	 * Initialises the calling UnresolvedType instance using the type identifier.
 	 */
 	operation initialize(typeIdentifier : String) : UnresolvedType is do
+		if typeIdentifier.isVoid then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with void typeIdentifier" + 
+			raise e
+		end
+		if typeIdentifier == "" then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with empty string typeIdentifier"
+			raise e
+		end
 		self.typeIdentifier := typeIdentifier
 		result := self
 	end
