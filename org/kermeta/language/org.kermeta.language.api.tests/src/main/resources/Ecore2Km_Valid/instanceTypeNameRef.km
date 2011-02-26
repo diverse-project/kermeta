@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
+  <packages kTag="#//@packages.0/@kOwnedTags.0" name="test" uri="http://test">
+    <kOwnedTags name="ecore" value="true" object="#//@packages.0"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        kTag="#//@packages.0/@ownedTypeDefinition.0/@kOwnedTags.0" name="NoInstanceClassName"
+        isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.0"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        kTag="#//@packages.0/@ownedTypeDefinition.1/@kOwnedTags.0" name="StillNotInstanceClassName"
+        superType="#//@packages.0/@ownedTypeDefinition.1/@containedType.0" isAspect="false"
+        isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.1"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+      <ownedAttribute kTag="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@kOwnedTags.0"
+          name="myAttr2" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.1/@kOwnedTags.0"
+          name="myRef" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0"
+          isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@kOwnedTags.0"
+          name="myAttr1" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedOperation kTag="#//@packages.0/@ownedTypeDefinition.1/@ownedOperation[uniqueName=null]/@kOwnedTags.0"
+          name="myOp" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.1/@ownedOperation[uniqueName=null]"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="chabada.oto"/>
+        <ownedParameter name="p1" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
+              typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" kTag="#//@packages.0/@ownedTypeDefinition.2/@kOwnedTags.0"
+        name="MustBeGenerated">
+      <kOwnedTags name="ecore" value="true" object="#//@packages.0/@ownedTypeDefinition.2"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ThisisNotAKnowITN"/>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

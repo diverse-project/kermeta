@@ -13,6 +13,17 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 using org::kermeta::language::structure
 using ecore
 
+
+aspect class EClassifier {
+	/**
+	 * @return True if the classifier has an instance class name, and false otherwise.
+	*/
+	operation hasInstanceClassName() : Boolean is do
+		result := (not instanceClassName.isVoid).andThen{b | instanceClassName!="" }
+	end
+}
+
+
 /**
  * This aspect is used to type the created Kermeta model: each classifier instance
  * of the source ecore model is completed during the first pass with the created

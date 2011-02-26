@@ -84,10 +84,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 
 	method visitEOperation(op : EOperation) : Void is do
-		if(not op.eContainingClass.isVoid and op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+		if((not op.eContainingClass.isVoid).andThen{b | op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			// Getting the type of the operation.
 			var returnType : UnresolvedType init getUnresolvedType(op.eGenericType, op.eType)
-			
 			// Creation of the ouput Kermeta operation.
 			var kmOp : Operation init Operation.new.initialize(op.name, returnType, void)
 			kmOp.isOrdered := op.ordered
@@ -132,17 +131,24 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				result := void
 			else // If there is a return type, an unresolved type is created.
 				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
+				var typeName : String
+				
 				if(type.isKindOf(EDataType)) then
-					var s : String 
-					s := primitiveTypeMappings.getValue(type.name)
-					if s.isVoid then
+					typeName := primitiveTypeMappings.getValue(type.name)
+					if typeName.isVoid then 
+						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
 						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
-						s := "kermeta::standard::Object" 
+						typeName := "kermeta::standard::Object"
 					end 
-					result := UnresolvedType.new.initialize(s)
 				else
-					result := UnresolvedType.new.initialize(type.getQualifiedName())
+					if(type.hasInstanceClassName) then
+						typeName := type.instanceClassName
+					else
+						typeName := type.getQualifiedName()
+					end
 				end
+
+				result := UnresolvedType.new.initialize(typeName)
 			end
 		else // If there is a return generic type, an unresolved type is created.
 			result := UnresolvedType.new.initialize(genericType.getQualifiedName())
@@ -215,7 +221,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEClass(eclass : EClass) : Void is do
-		if(not eclass.ePackage.isVoid and eclass.ePackage.targetKermetaObject.isKindOf(Package)) then
+		// If the class has a instance class name or does not have a package, it is no created.
+		if((not eclass.ePackage.isVoid).andThen{ b | eclass.ePackage.targetKermetaObject.isKindOf(Package) and 
+			not eclass.hasInstanceClassName()}) then
 			// Creation of the Kermeta class.
 			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, eclass.~abstract, void)
 
@@ -224,7 +232,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		
 			// A unresolved type is created for each super type.
 			eclass.eSuperTypes.each{st |
-				var type : UnresolvedType init UnresolvedType.new.initialize(st.getQualifiedName())
+				var type : UnresolvedType init getUnresolvedType(void, st)
 				kmClassDef.containedType.add(type)
 				kmClassDef.superType.add(type)
 			}
@@ -242,7 +250,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 
 	method visitEAnnotation(annot : EAnnotation) : Void is do
- 		if(not (annot.eModelElement.isVoid or annot.eModelElement.targetKermetaObject.isVoid)) then
+ 		if((not annot.eModelElement.isVoid).andThen{b | not annot.eModelElement.targetKermetaObject.isVoid}) then
 			// Creation of a kermeta tag.
 			var kmTag : Tag init Tag.new.initialize(annot.source, void, annot.eModelElement.targetKermetaObject)
 			// The kermeta tag is added to the kermeta object corresponding
@@ -280,14 +288,11 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		var namePrimitiveType : String init primitiveTypeMappings.getValue(dataType.instanceTypeName)
 
 		// Only the data type which are not existing kermeta primitive type are created.
-		if(namePrimitiveType.isVoid and not dataType.ePackage.isVoid and dataType.ePackage.targetKermetaObject.isKindOf(Package)) then
-			// If there is no equivalent the given name is used.
-			if(namePrimitiveType.isVoid) then
-				namePrimitiveType := dataType.instanceTypeName
-			end
+		if(namePrimitiveType.isVoid and (not dataType.ePackage.isVoid).andThen{b | dataType.ePackage.targetKermetaObject.isKindOf(Package)}) then
+			namePrimitiveType := dataType.instanceTypeName
 			// The type of the primitive type to create must be an unresolved type based on the type name 
 			// given by the ecore data type.
-			var type : UnresolvedType init UnresolvedType.new.initialize(dataType.instanceTypeName)
+			var type : UnresolvedType init UnresolvedType.new.initialize(namePrimitiveType)
 			// Creation of the Kermeta primitive type.
 			var pt : PrimitiveType init PrimitiveType.new.initialize(dataType.name, type)
 			// Each ecore class must be associated a tag.
@@ -305,7 +310,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 
 	method visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
-		if(not enumLit.eEnum.isVoid and enumLit.eEnum.targetKermetaObject.isKindOf(Enumeration)) then
+		if((not enumLit.eEnum.isVoid).andThen{b | enumLit.eEnum.targetKermetaObject.isKindOf(Enumeration)}) then
 			// Creation of the Kermeta literal.
 			var literal : EnumerationLiteral init EnumerationLiteral.new.initialize(enumLit.name, 
 							enumLit.eEnum.targetKermetaObject.asType(Enumeration))
@@ -319,7 +324,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEEnum(eEnum : EEnum) : Void is do
-		if(not eEnum.ePackage.isVoid and eEnum.ePackage.targetKermetaObject.isKindOf(Package)) then
+		if((not eEnum.ePackage.isVoid).andThen{b | eEnum.ePackage.targetKermetaObject.isKindOf(Package)}) then
 			// Creation of the Kermeta enumeration.
 			var kmEnum : Enumeration init Enumeration.new.initialize(eEnum.name)
 			
