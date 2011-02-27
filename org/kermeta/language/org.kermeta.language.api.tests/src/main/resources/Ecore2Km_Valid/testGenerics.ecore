@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="test"
+    nsURI="http://test" nsPrefix="test">
+  <eClassifiers xsi:type="ecore:EClass" name="A">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="B">
+    <eTypeParameters name="S"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref">
+      <eGenericType eClassifier="#//A">
+        <eTypeArguments eClassifier="#//C"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2">
+      <eGenericType eTypeParameter="#//B/S"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref3">
+      <eGenericType eClassifier="#//A">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref4">
+      <eGenericType eClassifier="#//A">
+        <eTypeArguments eClassifier="#//B">
+          <eTypeArguments eClassifier="#//A">
+            <eTypeArguments eTypeParameter="#//B/S"/>
+          </eTypeArguments>
+        </eTypeArguments>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref5">
+      <eGenericType eClassifier="#//D">
+        <eTypeArguments eClassifier="#//D">
+          <eTypeArguments eClassifier="#//C"/>
+          <eTypeArguments eClassifier="#//B">
+            <eTypeArguments eTypeParameter="#//B/S"/>
+          </eTypeArguments>
+          <eTypeArguments eClassifier="#//D">
+            <eTypeArguments eClassifier="#//B">
+              <eTypeArguments eClassifier="#//C"/>
+            </eTypeArguments>
+            <eTypeArguments eTypeParameter="#//B/S"/>
+            <eTypeArguments eClassifier="#//C"/>
+          </eTypeArguments>
+        </eTypeArguments>
+        <eTypeArguments eClassifier="#//A">
+          <eTypeArguments eClassifier="#//C"/>
+        </eTypeArguments>
+        <eTypeArguments eTypeParameter="#//B/S"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C"/>
+  <eClassifiers xsi:type="ecore:EClass" name="D">
+    <eTypeParameters name="X"/>
+    <eTypeParameters name="Y"/>
+    <eTypeParameters name="Z"/>
+  </eClassifiers>
+</ecore:EPackage>

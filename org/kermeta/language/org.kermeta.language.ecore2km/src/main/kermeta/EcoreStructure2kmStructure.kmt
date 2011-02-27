@@ -126,7 +126,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 */
 	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
 		// Generic type must be managed. The type of the method is a generic type if:
-		if(genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid}) then
+		if(genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and genericType.eClassifier.isVoid}) then
 			if(type.isVoid) then
 				result := void
 			else // If there is a return type, an unresolved type is created.
@@ -149,13 +149,51 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				end
 
 				result := UnresolvedType.new.initialize(typeName)
+				if(not genericType.isVoid) then
+					genericType.targetKermetaObject := result
+				end
 			end
 		else // If there is a return generic type, an unresolved type is created.
-			result := UnresolvedType.new.initialize(genericType.getQualifiedName())
+			var typeName : String
+
+			if(genericType.eTypeParameter.isVoid) then
+				typeName := genericType.eClassifier.getQualifiedName()
+			else
+				typeName := genericType.getQualifiedName()
+			end
+
+			result := UnresolvedType.new.initialize(typeName)
+			genericType.targetKermetaObject := result
 		end
 	end
 
 
+
+	method visitEGenericType(genType : EGenericType) : Void is do
+		// The following code is dedicated to support complex generics, e.g. A<B<C,D,E>,C,B<C,D,E>>
+		// The root generics is generated when visiting typed element, e.g. references. So this code only consider generic types
+		// which container is a generic type (not a typed element such as a reference).
+		if(genType.container().isInstanceOf(EGenericType)) then
+			var object : EGenericType init genType.container().asType(EGenericType)
+
+			// Checking that the corresponding kermeta objet has been created and mapped.
+			if((not object.targetKermetaObject.isVoid).andThen{b | object.targetKermetaObject.isInstanceOf(UnresolvedType)}) then
+				// Creating the unresolved type.
+				var type : UnresolvedType init getUnresolvedType(genType, void)
+				
+				// It can be null, e.g. A<?>
+				if(not type.isVoid) then
+					// Mapping ecore to kermeta.
+					genType.targetKermetaObject := type
+					// Adding the created unresolved type to its parent.
+					object.targetKermetaObject.asType(UnresolvedType).generics.add(type)
+				end
+			end
+		end
+		super(genType)
+	end
+	
+	
 	
 	operation addProperty(composite : Boolean, name : String, ordered : Boolean, derived : Boolean,
 							readOnly : Boolean, eType : EClassifier, eGenericType : EGenericType,

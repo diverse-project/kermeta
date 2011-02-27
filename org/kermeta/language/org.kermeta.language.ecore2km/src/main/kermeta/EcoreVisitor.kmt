@@ -32,6 +32,9 @@ abstract class EcoreVisitor {
 	
 	operation visitETypedElement(typedElt : ETypedElement) : Void is do
 		visitENamedElement(typedElt)
+		if(not typedElt.eGenericType.isVoid) then
+			typedElt.eGenericType.accept(self)
+		end
 	end
 	
 	operation visitEOperation(op : EOperation) : Void is do
@@ -84,6 +87,17 @@ abstract class EcoreVisitor {
 	
 	operation visitETypeParameter(typeParam : ETypeParameter) : Void is do
 		visitEModelElement(typeParam)
+	end
+	
+	operation visitEGenericType(genType : EGenericType) : Void is do
+		genType.eTypeArguments.each{typeArg | typeArg.accept(self) }
+	end
+}
+
+
+aspect class EGenericType {
+	operation accept(v : EcoreVisitor) : Void is do
+		v.visitEGenericType(self)	
 	end
 }
 

@@ -37,3 +37,10 @@ aspect class EModelElement {
 	 */
 	reference targetKermetaObject : KermetaModelElement
 }
+
+
+/** See aspect EModelElement. */
+aspect class EGenericType {
+	/** See aspect EModelElement. */
+	reference targetKermetaObject : KermetaModelElement
+}
