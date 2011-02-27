@@ -278,6 +278,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			typeVar.name := typeParam.name
 			// Adding the type variable into the generic type definition.
 			gtd.typeParameter.add(typeVar)
+			gtd.containedType.add(typeVar)
 		end
 	end
 
