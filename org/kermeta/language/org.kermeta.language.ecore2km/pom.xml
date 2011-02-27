@@ -109,44 +109,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- Scala plugin : allow to compile Scala file -->
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
-                    <launchers>
-                        <launcher>
-                            <id>ecore2km.runner</id>
-                            <mainClass>runner.MainRunner</mainClass>
-          <!-- args are optional
-                            <args>
-                                <arg>arg1</arg>
-                            </args> -->
-                        </launcher>
-                    </launchers>
-                </configuration>
-            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -158,6 +120,101 @@
 					</includes>
 				</configuration>
 			</plugin>
+		  	<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>		        
+          		
+		        <configuration>
+		          <archive>
+		            <!-- <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile> -->
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.ecore2km.art2.impl
+                        </Export-Package>
+                        <Require-Bundle>
+            fr.irisa.triskell.kermeta.model,
+            org.kermeta.language.model,
+            org.kermeta.language.framework.scala
+                        </Require-Bundle>
+                        <Import-Package>
+            kermeta.persistence,
+			org.eclipse.emf.common.notify,
+			org.eclipse.emf.common.util,
+			org.eclipse.emf.ecore,
+			org.eclipse.emf.ecore.impl,
+			org.eclipse.emf.ecore.resource,
+			org.eclipse.emf.ecore.util,
+			org.eclipse.emf.ecore.xmi,
+			org.eclipse.emf.ecore.xmi.impl,
+			org.kermeta.art2.framework,
+			org.kermeta.art2.framework.osgi,
+			org.kermeta.art2.framework.port,
+			org.kermeta.language.api.art2.port.utils,
+			org.kermeta.language.api.messaging,
+			org.kermeta.language.api.port,
+			org.kermeta.language.api.result,
+			org.kermeta.language.structure,
+			org.kermeta.traceability,
+			org.osgi.framework;version="[1.5,2)",
+			org.slf4j;version="[1.5,2)",
+			scala,
+			scala.actors,
+			scala.collection,
+			scala.collection.immutable,
+			scala.collection.mutable,
+			scala.reflect,
+			scala.runtime
+                        </Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+			<!-- Create a correct OSGI bundle -->
+			<!--  <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.merger.binarymerger.*
+                        </Export-Package>
+                        <Require-Bundle> -->  <!--  avoid splitted package issue, must require some eclipse bundle -->
+						<!-- 	org.eclipse. -->
+                        <!-- </Require-Bundle>
+                        <Private-Package>
+                        </Private-Package>
+						--><!--
+							use the ! for avoiding to import some packages that are already
+							there with the Require-Bundle
+							Be careful some Packages does also come from framework.scala, they must be added even if present locally in this jar 
+						-->
+                    <!--     <Import-Package>                        
+							org.kermeta.*,
+							org.eclipse.emf.*,
+							scala.*,
+                            org.slf4j.*;version="${slf4j.version.range}",
+							org.osgi.framework;version="[1.5,2)",
+							ScalaAspect.org.kermeta.language.structure,
+							runner
+                        </Import-Package>
+                     -->   
+						<!--
+							add extra element in the manifest, copy them from this file ex:
+							Bundle-ActivationPolicy: lazy
+						-->
+						<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+               <!--       </instructions>
+                </configuration>
+            </plugin> -->
         </plugins>
     </build>
 
