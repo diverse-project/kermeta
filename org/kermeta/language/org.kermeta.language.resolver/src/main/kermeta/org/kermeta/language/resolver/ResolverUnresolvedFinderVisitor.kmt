@@ -196,9 +196,10 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					else
 						stdio.writeln(error)
 					end
-				else
-					ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 				end
+			end
+			if not ctxt.foundType.isVoid() then
+					ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			end
 		else
 			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
@@ -235,7 +236,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			else
 				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
 			end
-			if (ctxt.foundProperty.isVoid() and (ctxt.verbose == 2 or ctxt.verbose == 5 or ctxt.verbose == 4)) then
+			if (ctxt.foundProperty.isVoid() and (ctxt.verbose == 2 or ctxt.verbose >= 4)) then
 				var qualifiedPath : String init ""
 				ctxt.qualifiedPath.each{s|
 					qualifiedPath := qualifiedPath + s + "::"
@@ -251,7 +252,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				else
 					stdio.writeln(error)
 				end
-			else
+			end
+			if not ctxt.foundProperty.isVoid() then
 				ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty := ctxt.foundProperty
 			end
 		else
@@ -300,7 +302,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				}
 			end
 
-			if (ctxt.foundOperation.isVoid() and (ctxt.verbose == 3 or ctxt.verbose == 4 or ctxt.verbose == 5)) then			
+			if (ctxt.foundOperation.isVoid() and ctxt.verbose >= 3) then			
 				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName
 				error := error + " in " + ctxt.unresolved.container.asType(Operation).container.asType(ClassDefinition).name
 				if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
@@ -314,7 +316,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				else
 					stdio.writeln(error)
 				end
-			else
+			end
+			if not ctxt.foundOperation.isVoid() then
 				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation
 			end
 		else
