@@ -5,8 +5,6 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "org::kermeta::language::structure::UnresolvedType"
-
 package org::kermeta::language::structure;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"

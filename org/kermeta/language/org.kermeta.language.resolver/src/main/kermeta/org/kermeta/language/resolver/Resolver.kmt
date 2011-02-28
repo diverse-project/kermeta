@@ -5,9 +5,6 @@
  * Authors  : 
  *            cguy
  */
-@mainClass "org::kermeta::language::resolver::Resolver"
-@mainOperation "lancement"
-
 
 package org::kermeta::language::resolver;
 

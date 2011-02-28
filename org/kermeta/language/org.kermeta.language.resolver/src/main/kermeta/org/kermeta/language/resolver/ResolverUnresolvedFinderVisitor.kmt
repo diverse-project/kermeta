@@ -927,6 +927,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 							// do not introduce circular inheritance to self
 							// this deal with the special case if we are org::kermeta::language::structure::Object and points to self
 							// then do not add it, since it was introduced by the parser
+							
 							if foundType.getQualifiedName != t.getQualifiedName then
 								typesToBeAdded.add(foundType)
 								if (foundType.isInstanceOf(Class)) then
