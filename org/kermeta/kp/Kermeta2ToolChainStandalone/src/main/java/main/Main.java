@@ -35,7 +35,10 @@ public class Main {
 	List<ModelingUnit> modelingunit;
 	List<ByteArrayOutputStream> modelingunit_ser;
 	ModelingUnit mergedMU;
-	ByteArrayOutputStream mergedMU_ser;
+	ModelingUnit resolvedMU;
+	ModelingUnit staticsettedMU;
+	ByteArrayOutputStream ModelingUnit_serialized;
+	FileWriter writer;
 
 	
 	
@@ -106,40 +109,39 @@ public class Main {
 		//End Merged ModellingUnit		
 				
 		// Convert Resulting Modellingunit For TypeSetter
-		mergedMU_ser = this.saveMu(mergedMU);
+		ModelingUnit_serialized = this.saveMu(mergedMU);
 		// Save intermediate file
-		/*	FileWriter interm = new FileWriter(new File("miniframework.km"));
-			interm.write(mergedMU_ser.toString());
-			interm.close();
-			*/
+		writer = new FileWriter(new File("AfterMerging_HelloWorldMiniframework.km"));
+		writer.write(ModelingUnit_serialized.toString());
+		writer.close();
+			
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
-		mergedMU = this.LoadMu(mergedMU_ser);
+		mergedMU = this.LoadMu(ModelingUnit_serialized);
 		// End of Convert Resulting Modellingunit For TypeSetter
 		
 		//Resolving
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
 		.createFullStaticResolver();
-		resolver.resolve(mergedMU);
+		resolvedMU = resolver.doResolving(mergedMU);
 		//End of Resolving
+		ModelingUnit_serialized = this.saveMu(resolvedMU);
+		// Save intermediate file
+		writer = new FileWriter(new File("AfterResolving_HelloWorldMiniframework.km"));
+		writer.write(ModelingUnit_serialized.toString());
+		writer.close();
+		
+		//StaticSetting
+		staticsettedMU = resolver.doStaticSetting(resolvedMU);
+		//End of Resolving
+		ModelingUnit_serialized = this.saveMu(staticsettedMU);
+		// Save intermediate file
+		writer = new FileWriter(new File("AfterStaticSetting_HelloWorldMiniframework.km"));
+		writer.write(ModelingUnit_serialized.toString());
+		writer.close();
 		
 
 		// Convert Resulting Modellingunit For TypeChecker
-		mergedMU_ser = this.saveMu(mergedMU);
-		
-		System.out.println(mergedMU_ser.toString());
-		/*typeCheckerrunner.MainRunner.init4eclipse();
-		mergedMU = this.LoadMu(mergedMU_ser);*/
-		// End of Convert Resulting Modellingunit For TypeSetter
-		
-
-		
-		// Convert Resulting Modellingunit For Compiler
-		/*mergedMU_ser = this.saveMu(mergedMU);
-		compilerrunner.MainRunner.init4eclipse();
-		mergedMU = this.LoadMu(mergedMU_ser);*/
-		// End of Convert Resulting Modellingunit For TypeSetter
-
-
+		ModelingUnit_serialized = this.saveMu(mergedMU);
 	}
 
 	
