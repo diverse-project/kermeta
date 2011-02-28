@@ -31,6 +31,8 @@ aspect class StructureVisitorContext {
 	reference currentModelingUnit : ModelingUnit
 	//Package the UnresolvedFinder is currently visiting
 	reference currentPackage : Package
+	//KermetaModelElement the UnresolvedFinder is currently visiting (except Unresolved)
+	reference currentElement : KermetaModelElement
 	//Unresolved object we want to replace
 	reference unresolved : Unresolved
 	//Name of the unresolved object we want to replace

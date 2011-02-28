@@ -42,12 +42,10 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 			//Create a new TypeVariableBinding
 			typeParamBinding := TypeVariableBinding.new
 			//Link it with the correspondant TypeVariable of c and the UnresolvedType
-			typeParamBinding.variable := c.typeParameter.at(i)
-			typeParamBinding.type := g	
+			typeParamBinding.variable := c.typeParameter.at(i)						
+			typeParamBinding.type := g		
 			//Add the new TypeVariable to the newClass
 			newClass.typeParamBinding.add(typeParamBinding)
-			//And add the UnresolvedType to the containedType of the found TypeDefinition
-			c.containedType.add(g)
 			i := i + 1
 		}
 		
