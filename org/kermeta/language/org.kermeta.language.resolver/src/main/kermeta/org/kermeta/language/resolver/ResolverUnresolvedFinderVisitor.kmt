@@ -43,7 +43,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference unresolvedTypesToBeRemoved : Collection<UnresolvedType>
 	
 	//The first pass does not resolve UnresolvedOperation (UnresolvedOperation need all ClassDefinition resolved)
-	//This should probably be rewrite in two separate passes
+	//The second pass does not resolve some UnresolvedType (UnresolvedType may need all Operations resolved)
+	//This should probably be rewrite in three really separate passes
 	attribute pass : Integer
 	
 	/*
