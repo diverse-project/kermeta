@@ -234,6 +234,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		end
 	end
 	
+	/*
+	* ResolvedPropertyFinder call operations
+	*/
 	operation callPropertyFinder(ctxt : StructureVisitorContext) is do
 		if (ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty.isVoid()) then
 			if (resolvedPropertyFinder.isVoid()) then
@@ -271,9 +274,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	/*
-	*
+	* ResolvedOperationFinder call operations
 	*/
-	
 	operation callOperationFinder(ctxt : StructureVisitorContext) is do
 		//If we have already found the corresponding operation
 		if (not ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
@@ -451,9 +453,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.right := foundType
-							if (foundType.isInstanceOf(Class)) then
-								f.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -469,9 +468,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.left := foundType
-							if (foundType.isInstanceOf(Class)) then
-								f.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -502,9 +498,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType().asType(TypeVariable))
-							if (foundType.isInstanceOf(Class)) then
-								g.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -551,9 +544,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							virtualTypeToBeRemoved.add(t.asType(UnresolvedType))
 							virtualTypeToBeAdded.add(foundType.asType(VirtualType))
-							if (foundType.isInstanceOf(Class)) then
-								m.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -651,9 +641,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							raisedExceptionsToBeRemoved.add(e.asType(UnresolvedType))
 							raisedExceptionsToBeAdded.add(foundType)
-							if (foundType.isInstanceOf(Class)) then
-								o.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -711,9 +698,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType.asType(TypeVariable))
-							if (foundType.isInstanceOf(Class)) then
-								o.containedType.add(foundType)
-							end
 						end		
 					end
 				end
@@ -802,9 +786,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							p.instanceType := foundType
-							if (foundType.isInstanceOf(Class)) then
-								p.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -835,9 +816,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
-							if (foundType.isInstanceOf(Class)) then
-								p.containedType.add(foundType)
-							end
 						end						
 					end
 				end
@@ -943,9 +921,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 							
 							if foundType.getQualifiedName != t.getQualifiedName then
 								typesToBeAdded.add(foundType)
-								if (foundType.isInstanceOf(Class)) then
-									t.containedType.add(foundType)
-								end
 							end
 						end
 					end
@@ -981,6 +956,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (t.visitedAsTypeMapping.isVoid()) then
 			t.visitedAsTypeMapping := true
 			
+			//Visiting contained Types
+			visitTypeContainer(t, ctxt)
+			
 			//Visiting target and source Types and handling Unresolved
 			if (isVisitable(t.targetType)) then
 				
@@ -992,7 +970,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.targetType := foundType
-						t.containedType.add(foundType)
 					end
 				end
 			end
@@ -1022,9 +999,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.supertype := foundType
-							if (foundType.isInstanceOf(Class)) then
-								t.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -1050,9 +1024,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.variable := foundType.asType(TypeVariable)
-						if (foundType.isInstanceOf(Class)) then
-							t.containedType.add(foundType)
-						end
 					end
 				end
 			end
@@ -1068,9 +1039,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.type := ctxt.foundType
-						if (foundType.isInstanceOf(Class)) then
-							t.containedType.add(foundType)
-						end
 					end	
 				end
 			end
@@ -1096,9 +1064,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.type := foundType
-							if (foundType.isInstanceOf(Class)) then
-								t.containedType.add(foundType)
-							end
 						end
 					end
 				end
@@ -1164,9 +1129,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						v.modelType := foundType.asType(ModelTypeVariable)
-						if (foundType.isInstanceOf(Class)) then
-							v.containedType.add(foundType)
-						end
 					end
 				end
 			end
