@@ -48,6 +48,12 @@
     </build>
 
     <dependencies>
+    	<!--  be careful to the order this has impacts on the classpath !!! -->
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.ecore2km</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.kermeta.emf</groupId>
             <artifactId>emf.lib</artifactId>
@@ -65,11 +71,6 @@
         </dependency>
         <dependency>
             <groupId>org.kermeta.language</groupId>
-            <artifactId>language.ecore2km</artifactId>
-            <version>${kermeta.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.language</groupId>
             <artifactId>language.merger.binarymerger</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
@@ -82,6 +83,13 @@
             <groupId>org.kermeta.kp</groupId>
             <artifactId>kp.loader.kp</artifactId>
             <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>commons-cli</groupId>
+        	<artifactId>commons-cli</artifactId>
+        	<version>1.2</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -28,6 +28,17 @@ public class KermetaCompiler {
 	public String targetFolder;
 	
 	/**
+	 * Constructor
+	 * @param targetFolder
+	 * @param saveIntermediateFiles
+	 */
+	public KermetaCompiler(String targetFolder, Boolean saveIntermediateFiles) {
+		super();
+		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.targetFolder = targetFolder;
+	}
+
+	/**
 	 * This initialization must be called before everything related to eclipse 
 	 */
 	public static void initializeFactory(){
