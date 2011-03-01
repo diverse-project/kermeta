@@ -117,9 +117,25 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		
 		super(eAttr)
 	end
-	
-	
-	
+
+
+	/**
+	 * This operation checks if the given type name corresponds to type EObject. If it is the case,
+	 * string kermeta::standard::Object is returned; otherwise, the given type name is returned. 
+	 */
+	operation checkEObjectType(typeName : String) : String is do
+		if(typeName.isVoid) then
+			result := void
+		else
+			if(typeName=="ecore::EObject" or typeName=="ecore::EJavaObject" or typeName=="org.eclipse.emf.ecore.EObject") then
+				result := "kermeta::standard::Object"
+			else
+				result := typeName
+			end
+		end
+	end
+
+
 	/**
 	 * This function returns the unresolved type coresponding to the given generic type or the given type if the first is not valid.
 	 * If both of the arguments are not valid, void is returned.
@@ -128,7 +144,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
 
 		// Generic type must be managed. The type of the method is a generic type if:
-		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and genericType.eClassifier.isVoid}) then
+		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and 
+		   (genericType.eClassifier.isVoid or genericType.eClassifier==type)}) then
 			if(type.isVoid) then
 				result := void
 			else // If there is a return type, an unresolved type is created.
@@ -137,6 +154,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				
 				if(isDataType) then
 					typeName := primitiveTypeMappings.getValue(type.instanceClassName)
+
 					if typeName.isVoid then 
 						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
 						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
@@ -144,9 +162,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 					end 
 				else
 					if(type.hasInstanceClassName) then
-						typeName := type.instanceClassName
+						typeName := checkEObjectType(type.instanceClassName)
 					else
-						typeName := type.getQualifiedName()
+						typeName := checkEObjectType(type.getQualifiedName())
 					end
 				end
 
@@ -157,14 +175,13 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			end
 		else // If there is a return generic type, an unresolved type is created.
 			var typeName : String
-
 			if(genericType.eTypeParameter.isVoid) then
 				typeName := genericType.eClassifier.getQualifiedName()
 			else
 				typeName := genericType.getQualifiedName()
 			end
 
-			result := UnresolvedType.new.initialize(typeName)
+			result := UnresolvedType.new.initialize(checkEObjectType(typeName))
 			genericType.targetKermetaObject := result
 		end
 	end
