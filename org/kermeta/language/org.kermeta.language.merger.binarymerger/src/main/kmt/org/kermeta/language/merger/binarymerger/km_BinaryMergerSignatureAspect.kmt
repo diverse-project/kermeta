@@ -953,9 +953,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
-					//if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
-					//	result := result and self.mapping == aspectElement.mapping
-					//end
+					if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
+						result := result and self.mapping == aspectElement.mapping
+					end
 					
 				end
 			}
