@@ -662,23 +662,23 @@ aspect class Model {
 	end
 }
 
-aspect class Resource {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
-		super(func)
-	end
-}
+//aspect class Resource {
+//	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+//		super(func)
+//	end
+//}
 
-aspect class ResourceGroup {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
-		super(func)
-	end
-}
+//aspect class ResourceGroup {
+//	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
+//		super(func)
+//	end
+//}
 
-aspect class SimpleResource {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
-		super(func)
-	end
-}
+//aspect class SimpleResource {
+//	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Resource is do
+//		super(func)
+//	end
+//}
 
 aspect class AbstractOperation {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
@@ -746,9 +746,9 @@ aspect class VoidType {
 aspect class TypeMapping {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		if (not self.mapping.isVoid) then
-			func(self.mapping.asType(kermeta::standard::Object))
-		end
+		//if (not self.mapping.isVoid) then
+		//	func(self.mapping.asType(kermeta::standard::Object))
+		//end
 	end
 }
 
