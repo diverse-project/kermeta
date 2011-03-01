@@ -316,27 +316,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass resourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass resourceGroupEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleResourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass abstractOperationEClass = null;
 
 	/**
@@ -401,13 +380,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass typeMappingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass objectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1539,60 +1511,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getResource() {
-		return resourceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getResourceGroup() {
-		return resourceGroupEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getResourceGroup_Resources() {
-		return (EReference)resourceGroupEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSimpleResource() {
-		return simpleResourceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSimpleResource_Uri() {
-		return (EAttribute)simpleResourceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleResource_Contents() {
-		return (EReference)simpleResourceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getAbstractOperation() {
 		return abstractOperationEClass;
 	}
@@ -1782,7 +1700,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeMapping_Mapping() {
+	public EReference getTypeMapping_TargetType() {
 		return (EReference)typeMappingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1791,26 +1709,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeMapping_TargetType() {
-		return (EReference)typeMappingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTypeMapping_SourceType() {
-		return (EReference)typeMappingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getObject() {
-		return objectEClass;
+		return (EReference)typeMappingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2039,15 +1939,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		modelEClass = createEClass(MODEL);
 		createEReference(modelEClass, MODEL__CONTENTS);
 
-		resourceEClass = createEClass(RESOURCE);
-
-		resourceGroupEClass = createEClass(RESOURCE_GROUP);
-		createEReference(resourceGroupEClass, RESOURCE_GROUP__RESOURCES);
-
-		simpleResourceEClass = createEClass(SIMPLE_RESOURCE);
-		createEAttribute(simpleResourceEClass, SIMPLE_RESOURCE__URI);
-		createEReference(simpleResourceEClass, SIMPLE_RESOURCE__CONTENTS);
-
 		abstractOperationEClass = createEClass(ABSTRACT_OPERATION);
 
 		unresolvedTypeEClass = createEClass(UNRESOLVED_TYPE);
@@ -2078,11 +1969,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		voidTypeEClass = createEClass(VOID_TYPE);
 
 		typeMappingEClass = createEClass(TYPE_MAPPING);
-		createEReference(typeMappingEClass, TYPE_MAPPING__MAPPING);
 		createEReference(typeMappingEClass, TYPE_MAPPING__TARGET_TYPE);
 		createEReference(typeMappingEClass, TYPE_MAPPING__SOURCE_TYPE);
-
-		objectEClass = createEClass(OBJECT);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2169,9 +2057,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
 		modelEClass.getESuperTypes().add(this.getKermetaModelElement());
-		resourceEClass.getESuperTypes().add(this.getKermetaModelElement());
-		resourceGroupEClass.getESuperTypes().add(this.getResource());
-		simpleResourceEClass.getESuperTypes().add(this.getResource());
 		abstractOperationEClass.getESuperTypes().add(this.getKermetaModelElement());
 		unresolvedTypeEClass.getESuperTypes().add(this.getType());
 		unresolvedTypeEClass.getESuperTypes().add(this.getUnresolved());
@@ -2326,9 +2211,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(modelTypeEClass, this.getModel(), "load", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getResource(), "resource", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(modelTypeVariableEClass, ModelTypeVariable.class, "ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelTypeVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_ModelType(), "virtualType", null, 0, -1, ModelTypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2339,21 +2221,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModel_Contents(), this.getKermetaModelElement(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(modelEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getResource(), "resource", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelEClass, this.getSimpleResource(), "createSimpleResource", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(resourceEClass, Resource.class, "Resource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(resourceGroupEClass, ResourceGroup.class, "ResourceGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getResourceGroup_Resources(), this.getResource(), null, "resources", null, 0, -1, ResourceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(simpleResourceEClass, SimpleResource.class, "SimpleResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSimpleResource_Uri(), this.getString(), "uri", null, 1, 1, SimpleResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleResource_Contents(), ecorePackage.getEObject(), null, "contents", null, 0, -1, SimpleResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractOperationEClass, AbstractOperation.class, "AbstractOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2385,11 +2252,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeMappingEClass, TypeMapping.class, "TypeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeMapping_Mapping(), ecorePackage.getEObject(), null, "mapping", null, 0, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeMapping_TargetType(), this.getType(), null, "targetType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeMapping_SourceType(), this.getTypeDefinition(), this.getTypeDefinition_TypeMappings(), "sourceType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(objectEClass, EObject.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

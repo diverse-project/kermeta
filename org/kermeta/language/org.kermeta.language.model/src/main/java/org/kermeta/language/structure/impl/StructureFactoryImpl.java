@@ -120,9 +120,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.MODEL: return createModel();
-			case StructurePackage.RESOURCE: return createResource();
-			case StructurePackage.RESOURCE_GROUP: return createResourceGroup();
-			case StructurePackage.SIMPLE_RESOURCE: return createSimpleResource();
 			case StructurePackage.UNRESOLVED_TYPE: return createUnresolvedType();
 			case StructurePackage.UNRESOLVED_PROPERTY: return createUnresolvedProperty();
 			case StructurePackage.UNRESOLVED_OPERATION: return createUnresolvedOperation();
@@ -414,36 +411,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public Model createModel() {
 		ModelImpl model = new ModelImpl();
 		return model;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Resource createResource() {
-		ResourceImpl resource = new ResourceImpl();
-		return resource;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ResourceGroup createResourceGroup() {
-		ResourceGroupImpl resourceGroup = new ResourceGroupImpl();
-		return resourceGroup;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimpleResource createSimpleResource() {
-		SimpleResourceImpl simpleResource = new SimpleResourceImpl();
-		return simpleResource;
 	}
 
 	/**

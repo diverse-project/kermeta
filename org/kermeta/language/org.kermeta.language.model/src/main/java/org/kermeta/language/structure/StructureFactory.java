@@ -233,33 +233,6 @@ public interface StructureFactory extends EFactory {
 	Model createModel();
 
 	/**
-	 * Returns a new object of class '<em>Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resource</em>'.
-	 * @generated
-	 */
-	Resource createResource();
-
-	/**
-	 * Returns a new object of class '<em>Resource Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resource Group</em>'.
-	 * @generated
-	 */
-	ResourceGroup createResourceGroup();
-
-	/**
-	 * Returns a new object of class '<em>Simple Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Resource</em>'.
-	 * @generated
-	 */
-	SimpleResource createSimpleResource();
-
-	/**
 	 * Returns a new object of class '<em>Unresolved Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

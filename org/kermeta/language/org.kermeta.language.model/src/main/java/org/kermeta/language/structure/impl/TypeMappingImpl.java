@@ -29,7 +29,6 @@ import org.kermeta.language.structure.TypeMapping;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
@@ -38,16 +37,6 @@ import org.kermeta.language.structure.TypeMapping;
  * @generated
  */
 public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
-	/**
-	 * The cached value of the '{@link #getMapping() <em>Mapping</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMapping()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject mapping;
-
 	/**
 	 * The cached value of the '{@link #getTargetType() <em>Target Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -75,49 +64,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_MAPPING;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject getMapping() {
-		return mapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMapping(EObject newMapping, NotificationChain msgs) {
-		EObject oldMapping = mapping;
-		mapping = newMapping;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_MAPPING__MAPPING, oldMapping, newMapping);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMapping(EObject newMapping) {
-		if (newMapping != mapping) {
-			NotificationChain msgs = null;
-			if (mapping != null)
-				msgs = ((InternalEObject)mapping).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.TYPE_MAPPING__MAPPING, null, msgs);
-			if (newMapping != null)
-				msgs = ((InternalEObject)newMapping).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.TYPE_MAPPING__MAPPING, null, msgs);
-			msgs = basicSetMapping(newMapping, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_MAPPING__MAPPING, newMapping, newMapping));
 	}
 
 	/**
@@ -223,8 +169,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.TYPE_MAPPING__MAPPING:
-				return basicSetMapping(null, msgs);
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				return basicSetSourceType(null, msgs);
 		}
@@ -253,8 +197,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.TYPE_MAPPING__MAPPING:
-				return getMapping();
 			case StructurePackage.TYPE_MAPPING__TARGET_TYPE:
 				if (resolve) return getTargetType();
 				return basicGetTargetType();
@@ -272,9 +214,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.TYPE_MAPPING__MAPPING:
-				setMapping((EObject)newValue);
-				return;
 			case StructurePackage.TYPE_MAPPING__TARGET_TYPE:
 				setTargetType((Type)newValue);
 				return;
@@ -293,9 +232,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.TYPE_MAPPING__MAPPING:
-				setMapping((EObject)null);
-				return;
 			case StructurePackage.TYPE_MAPPING__TARGET_TYPE:
 				setTargetType((Type)null);
 				return;
@@ -314,8 +250,6 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.TYPE_MAPPING__MAPPING:
-				return mapping != null;
 			case StructurePackage.TYPE_MAPPING__TARGET_TYPE:
 				return targetType != null;
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:

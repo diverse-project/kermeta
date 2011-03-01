@@ -24,12 +24,5 @@ package org.kermeta.language.structure;
  * @generated
  */
 public interface ModelType extends Type, TypeDefinition, Model {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model resourceRequired="true"
-	 * @generated
-	 */
-	Model load(Resource resource);
 
 } // ModelType

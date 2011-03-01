@@ -37,6 +37,8 @@ public interface Model extends KermetaModelElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Contents of this model...
+	 * DVK : must be instance of Objuect not KermetaModelElement
+	 * should this be defined in the kermeta.ecore or in the framework only (there is no way to serialize instances of that !?)
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Contents</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getModel_Contents()
@@ -44,27 +46,5 @@ public interface Model extends KermetaModelElement {
 	 * @generated
 	 */
 	EList<KermetaModelElement> getContents();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Save this model using this Resource pattern
-	 * <!-- end-model-doc -->
-	 * @model resourceRequired="true"
-	 * @generated
-	 */
-	void save(Resource resource);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Create a SimpleResource and fill it with this model content
-	 * <!-- end-model-doc -->
-	 * @model uriDataType="org.kermeta.language.structure.String"
-	 * @generated
-	 */
-	SimpleResource createSimpleResource(String uri);
 
 } // Model

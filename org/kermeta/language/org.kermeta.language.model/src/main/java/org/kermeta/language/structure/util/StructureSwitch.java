@@ -427,29 +427,6 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.RESOURCE: {
-				Resource resource = (Resource)theEObject;
-				T result = caseResource(resource);
-				if (result == null) result = caseKermetaModelElement(resource);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.RESOURCE_GROUP: {
-				ResourceGroup resourceGroup = (ResourceGroup)theEObject;
-				T result = caseResourceGroup(resourceGroup);
-				if (result == null) result = caseResource(resourceGroup);
-				if (result == null) result = caseKermetaModelElement(resourceGroup);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.SIMPLE_RESOURCE: {
-				SimpleResource simpleResource = (SimpleResource)theEObject;
-				T result = caseSimpleResource(simpleResource);
-				if (result == null) result = caseResource(simpleResource);
-				if (result == null) result = caseKermetaModelElement(simpleResource);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.ABSTRACT_OPERATION: {
 				AbstractOperation abstractOperation = (AbstractOperation)theEObject;
 				T result = caseAbstractOperation(abstractOperation);
@@ -1018,51 +995,6 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resource</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseResource(Resource object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resource Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resource Group</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseResourceGroup(ResourceGroup object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Resource</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleResource(SimpleResource object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Abstract Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1209,21 +1141,6 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeMapping(TypeMapping object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Object</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObject(EObject object) {
 		return null;
 	}
 
