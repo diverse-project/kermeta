@@ -51,13 +51,13 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	* ResolvedTypeFinder call operations
 	*/
 	operation callTypeFinder(ctxt : StructureVisitorContext) is do
+		var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
+		var initialUnresolvedName : String init ctxt.unresolvedName
+	
 		//If we have already found the corresponding type
 		if (ctxt.unresolved.asType(UnresolvedType).correspondingType.isVoid()) then
 			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
 		else
-			var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
-			var initialUnresolvedName : String init ctxt.unresolvedName
-		
 			if (resolvedTypeFinder.isVoid()) then
 				resolvedTypeFinder := ResolverResolvedTypeFinder.new
 			end
@@ -167,52 +167,56 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				else
 					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 				end
-	
-				if (ctxt.foundType.isVoid() and pass == 3 and (ctxt.verbose == 1 or ctxt.verbose == 5 or ctxt.verbose == 4)) then
-					var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType "
-					initialQualifiedPath.each{s|
-						error := error + s + "::"
-					}
-					error := error + initialUnresolvedName + " referenced by "
-					
-					if (ctxt.currentElement.isInstanceOf(NamedElement)) then
-						error := error + ctxt.currentElement.asType(NamedElement).getQualifiedName
-					else
-						error := error + ctxt.currentElement.toString()
-					end
-					
-					error := error + " and contained by "
-					
-					if (ctxt.unresolved.container.isInstanceOf(NamedElement)) then
-						error := error + ctxt.unresolved.container.asType(NamedElement).getQualifiedName
-					else
-						error := error + ctxt.unresolved.container.toString()
-					end
-					
-					error := error + "\n	(looked for in current package: " + ctxt.currentPackage.getQualifiedName() + " and in packages: "
-					ctxt.unresolved.asType(UnresolvedType).usings.each{u|
-						error := error + u.fromQName
-						if (not u.equals(ctxt.unresolved.asType(UnresolvedType).usings.last())) then
-							error := error + ", "
-						end
-					}
-					error := error + ")"
-					
-					if (ctxt.exceptions) then
-						
-						var except : Exception init Exception.new
-						except.message := error
-						raise except
-					else
-						stdio.writeln(error)
-					end
-				end
-			end
-			if not ctxt.foundType.isVoid() then
-				ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			end
 		end
+		
+		if ctxt.foundType.isVoid() then
+			if (pass == 3 and (ctxt.verbose == 1 or ctxt.verbose >= 4)) then
+				errorMsg(initialUnresolvedName, initialQualifiedPath, ctxt)
+			end
+		else
+			ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
+				unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
+		end		
 		ctxt.reset()
+	end
+	
+	operation errorMsg(initialUnresolvedName : String, initialQualifiedPath : Sequence<String>, ctxt : StructureVisitorContext) is do
+		var error : String init "Resolver (Pass " + pass.toString() + "): No corresponding TypeDefinition found for UnresolvedType "
+		initialQualifiedPath.each{s|
+			error := error + s + "::"
+		}
+		
+		error := error + initialUnresolvedName + " referenced by "
+		if (ctxt.currentElement.isInstanceOf(NamedElement)) then
+			error := error + ctxt.currentElement.asType(NamedElement).getQualifiedName
+		else
+			error := error + ctxt.currentElement.toString()
+		end
+			
+		error := error + " and contained by "				
+		if (ctxt.unresolved.container.isInstanceOf(NamedElement)) then
+			error := error + ctxt.unresolved.container.asType(NamedElement).getQualifiedName
+		else
+			error := error + ctxt.unresolved.container.toString()
+		end
+					
+		error := error + "\n	(looked for in current package: " + ctxt.currentPackage.getQualifiedName() + " and in packages: "
+		ctxt.unresolved.asType(UnresolvedType).usings.each{u|
+			error := error + u.fromQName
+			if (not u.equals(ctxt.unresolved.asType(UnresolvedType).usings.last())) then
+				error := error + ", "
+			end
+			}
+		error := error + ")"
+											
+		if (ctxt.exceptions) then				
+			var except : Exception init Exception.new
+			except.message := error
+			raise except
+		else
+			stdio.writeln(error)
+		end
 	end
 	
 	/*
@@ -234,9 +238,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		end
 	end
 	
-	/*
-	* ResolvedPropertyFinder call operations
-	*/
 	operation callPropertyFinder(ctxt : StructureVisitorContext) is do
 		if (ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty.isVoid()) then
 			if (resolvedPropertyFinder.isVoid()) then
@@ -274,8 +275,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	/*
-	* ResolvedOperationFinder call operations
+	*
 	*/
+	
 	operation callOperationFinder(ctxt : StructureVisitorContext) is do
 		//If we have already found the corresponding operation
 		if (not ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
@@ -453,6 +455,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.right := foundType
+							if (foundType.isInstanceOf(Class)) then
+								f.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -468,6 +473,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.left := foundType
+							if (foundType.isInstanceOf(Class)) then
+								f.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -498,6 +506,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType().asType(TypeVariable))
+							if (foundType.isInstanceOf(Class)) then
+								g.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -544,6 +555,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							virtualTypeToBeRemoved.add(t.asType(UnresolvedType))
 							virtualTypeToBeAdded.add(foundType.asType(VirtualType))
+							if (foundType.isInstanceOf(Class)) then
+								m.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -641,6 +655,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							raisedExceptionsToBeRemoved.add(e.asType(UnresolvedType))
 							raisedExceptionsToBeAdded.add(foundType)
+							if (foundType.isInstanceOf(Class)) then
+								o.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -698,6 +715,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType.asType(TypeVariable))
+							if (foundType.isInstanceOf(Class)) then
+								o.containedType.add(foundType)
+							end
 						end		
 					end
 				end
@@ -786,6 +806,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							p.instanceType := foundType
+							if (foundType.isInstanceOf(Class)) then
+								p.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -816,6 +839,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
+							if (foundType.isInstanceOf(Class)) then
+								p.containedType.add(foundType)
+							end
 						end						
 					end
 				end
@@ -881,7 +907,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						callTypeFinder(ctxt)
 						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
-							unresolvedTypesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToVisit.add(foundType)
 						end
 					end
@@ -921,6 +946,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 							
 							if foundType.getQualifiedName != t.getQualifiedName then
 								typesToBeAdded.add(foundType)
+								if (foundType.isInstanceOf(Class)) then
+									t.containedType.add(foundType)
+								end
 							end
 						end
 					end
@@ -956,9 +984,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		if (t.visitedAsTypeMapping.isVoid()) then
 			t.visitedAsTypeMapping := true
 			
-			//Visiting contained Types
-			visitTypeContainer(t, ctxt)
-			
 			//Visiting target and source Types and handling Unresolved
 			if (isVisitable(t.targetType)) then
 				
@@ -970,6 +995,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.targetType := foundType
+						t.containedType.add(foundType)
 					end
 				end
 			end
@@ -999,6 +1025,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.supertype := foundType
+							if (foundType.isInstanceOf(Class)) then
+								t.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -1024,6 +1053,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.variable := foundType.asType(TypeVariable)
+						if (foundType.isInstanceOf(Class)) then
+							t.containedType.add(foundType)
+						end
 					end
 				end
 			end
@@ -1039,6 +1071,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.type := ctxt.foundType
+						if (foundType.isInstanceOf(Class)) then
+							t.containedType.add(foundType)
+						end
 					end	
 				end
 			end
@@ -1064,6 +1099,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.type := foundType
+							if (foundType.isInstanceOf(Class)) then
+								t.containedType.add(foundType)
+							end
 						end
 					end
 				end
@@ -1129,6 +1167,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						v.modelType := foundType.asType(ModelTypeVariable)
+						if (foundType.isInstanceOf(Class)) then
+							v.containedType.add(foundType)
+						end
 					end
 				end
 			end
