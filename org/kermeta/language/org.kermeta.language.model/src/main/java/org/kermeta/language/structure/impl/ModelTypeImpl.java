@@ -27,8 +27,6 @@ import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.NamedElement;
-import org.kermeta.language.structure.Resource;
-import org.kermeta.language.structure.SimpleResource;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;

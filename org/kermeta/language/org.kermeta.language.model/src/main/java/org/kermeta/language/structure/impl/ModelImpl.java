@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
-import org.kermeta.language.structure.Resource;
-import org.kermeta.language.structure.SimpleResource;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
