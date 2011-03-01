@@ -27,7 +27,7 @@ import org.kermeta.kp.loader.kp.KpLoader;
 public class RunWithKp {
 
 	public static void main(String[] args) {
-
+		Main runner = new Main();
 		List<String> uris = new ArrayList<String>();
 		List<String> classpath = new ArrayList<String>();
 		String propertiesfilePath = "";
@@ -58,7 +58,7 @@ public class RunWithKp {
 		}
 		propertiesfilePath = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/properties/Compiler.properties";
 		
-		Main runner = new Main();
+		
 		try {
 			runner.k2Compile(uris, classpath, propertiesfilePath);
 		} catch (IOException e) {
