@@ -28,7 +28,7 @@ public class CustomRunner {
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/src/001_testHelloWorld.kmt");
 		uris
-				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/emfpersistence/emfpersitence.kmt");
+				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt");
 		uris
