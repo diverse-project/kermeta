@@ -95,9 +95,15 @@ class FullStaticResolver
 				p.asType(org::kermeta::language::structure::TypeContainer).containedType.each{tc |
 					if (tc.isInstanceOf(org::kermeta::language::structure::UnresolvedType)) then
 						stdio.writeln("UNRESOLVED_TYPE -- typeIdentifier: " + tc.asType(org::kermeta::language::structure::UnresolvedType).typeIdentifier.toString)
+						tc.asType(org::kermeta::language::structure::UnresolvedType).usings.each{ us |
+							stdio.writeln("|-------------usings: " + us.toString)
+						}
 						tc.asType(org::kermeta::language::structure::UnresolvedType).generics.each{g |
 							if (g.isInstanceOf(org::kermeta::language::structure::UnresolvedType)) then
 								stdio.writeln("UNRESOLVED_TYPE on GENERICS -- typeIdentifier: " + g.asType(org::kermeta::language::structure::UnresolvedType).typeIdentifier.toString)
+								g.asType(org::kermeta::language::structure::UnresolvedType).usings.each{ us |
+									stdio.writeln("|-------------usings: " + us.toString)
+								}
 							end
 						}
 					end

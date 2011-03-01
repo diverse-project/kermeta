@@ -93,17 +93,17 @@ aspect class Require {
 	attribute visitedAsRequire : Boolean
 }
 
-aspect class Resource {
-	attribute visitedAsResource : Boolean
-}
+//aspect class Resource {
+//	attribute visitedAsResource : Boolean
+//}
 
-aspect class ResourceGroup {
-	attribute visitedAsResourceGroup : Boolean
-}
+//aspect class ResourceGroup {
+//	attribute visitedAsResourceGroup : Boolean
+//}
 
-aspect class SimpleResource {
-	attribute visitedAsSimpleResource : Boolean
-}
+//aspect class SimpleResource {
+//	attribute visitedAsSimpleResource : Boolean
+//}
 
 aspect class Tag {
 	attribute visitedAsTag : Boolean
