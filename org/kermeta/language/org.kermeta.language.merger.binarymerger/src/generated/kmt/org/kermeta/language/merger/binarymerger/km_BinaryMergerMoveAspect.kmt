@@ -1851,31 +1851,31 @@ package kermeta {
 				end
 			}
 
-			aspect class Resource inherits org::kermeta::language::structure::KermetaModelElement {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
-					var mergedModelElement : org::kermeta::language::structure::Resource
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Resource)
-					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Resource")
-					end
-					super(context)
+			//aspect class Resource inherits org::kermeta::language::structure::KermetaModelElement {
+			//	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
+			//		var mergedModelElement : org::kermeta::language::structure::Resource
+			//		mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Resource)
+			//		if (not mergedModelElement.isVoid) then
+			//			stdio.writeln("Merging content of a Resource")
+			//		end
+			//		super(context)
 
-					result := self
-				end
-			}
+			//		result := self
+			//	end
+			//}
 
-			aspect class ResourceGroup inherits org::kermeta::language::structure::Resource {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
-					var mergedModelElement : org::kermeta::language::structure::ResourceGroup
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ResourceGroup)
-					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ResourceGroup")
-					end
-					super(context)
+			//aspect class ResourceGroup inherits org::kermeta::language::structure::Resource {
+			//	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
+			//		var mergedModelElement : org::kermeta::language::structure::ResourceGroup
+			//		mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ResourceGroup)
+			//		if (not mergedModelElement.isVoid) then
+			//			stdio.writeln("Merging content of a ResourceGroup")
+			//		end
+			//		super(context)
 
-					result := self
-				end
-			}
+			//		result := self
+			//	end
+			//}
 
 			//aspect class SimpleResource inherits org::kermeta::language::structure::Resource {
 			//	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
