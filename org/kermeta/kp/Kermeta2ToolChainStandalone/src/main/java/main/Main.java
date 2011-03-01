@@ -124,7 +124,7 @@ public class Main {
 		.createFullStaticResolver();
 		
 		resolvedMU = resolver.doResolving(mergedMU);
-		resolver.checkUnresolvedType(resolvedMU);
+		resolver.checkUnresolved(resolvedMU);
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
 		// Save intermediate file
