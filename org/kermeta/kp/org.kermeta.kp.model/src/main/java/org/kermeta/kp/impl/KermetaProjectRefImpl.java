@@ -24,7 +24,7 @@ import org.kermeta.kp.KpPackage;
  * <ul>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectRefImpl#getGroup <em>Group</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectRefImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectRefImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectRefImpl#getUrl <em>Url</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,247 +32,243 @@ import org.kermeta.kp.KpPackage;
  */
 public class KermetaProjectRefImpl extends NamedElementImpl implements KermetaProjectRef {
 	/**
-   * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getGroup()
-   * @generated
-   * @ordered
-   */
+	 * @see #getGroup()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String GROUP_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getGroup()
-   * @generated
-   * @ordered
-   */
+	 * @see #getGroup()
+	 * @generated
+	 * @ordered
+	 */
 	protected String group = GROUP_EDEFAULT;
 
 	/**
-   * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getVersion()
-   * @generated
-   * @ordered
-   */
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String VERSION_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getVersion()
-   * @generated
-   * @ordered
-   */
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
 	protected String version = VERSION_EDEFAULT;
 
 	/**
-   * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
-	protected static final String URI_EDEFAULT = null;
+	 * @see #getUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URL_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
-	protected String uri = URI_EDEFAULT;
+	 * @see #getUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected String url = URL_EDEFAULT;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected KermetaProjectRefImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return KpPackage.Literals.KERMETA_PROJECT_REF;
-  }
+		return KpPackage.Literals.KERMETA_PROJECT_REF;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public String getGroup() {
-    return group;
-  }
+		return group;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setGroup(String newGroup) {
-    String oldGroup = group;
-    group = newGroup;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__GROUP, oldGroup, group));
-  }
+		String oldGroup = group;
+		group = newGroup;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__GROUP, oldGroup, group));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public String getVersion() {
-    return version;
-  }
+		return version;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setVersion(String newVersion) {
-    String oldVersion = version;
-    version = newVersion;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__VERSION, oldVersion, version));
-  }
+		String oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__VERSION, oldVersion, version));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public String getUri() {
-    return uri;
-  }
+	 * @generated
+	 */
+	public String getUrl() {
+		return url;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setUri(String newUri) {
-    String oldUri = uri;
-    uri = newUri;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__URI, oldUri, uri));
-  }
+	 * @generated
+	 */
+	public void setUrl(String newUrl) {
+		String oldUrl = url;
+		url = newUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT_REF__URL, oldUrl, url));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case KpPackage.KERMETA_PROJECT_REF__GROUP:
-        return getGroup();
-      case KpPackage.KERMETA_PROJECT_REF__VERSION:
-        return getVersion();
-      case KpPackage.KERMETA_PROJECT_REF__URI:
-        return getUri();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case KpPackage.KERMETA_PROJECT_REF__GROUP:
+				return getGroup();
+			case KpPackage.KERMETA_PROJECT_REF__VERSION:
+				return getVersion();
+			case KpPackage.KERMETA_PROJECT_REF__URL:
+				return getUrl();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case KpPackage.KERMETA_PROJECT_REF__GROUP:
-        setGroup((String)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT_REF__VERSION:
-        setVersion((String)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT_REF__URI:
-        setUri((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case KpPackage.KERMETA_PROJECT_REF__GROUP:
+				setGroup((String)newValue);
+				return;
+			case KpPackage.KERMETA_PROJECT_REF__VERSION:
+				setVersion((String)newValue);
+				return;
+			case KpPackage.KERMETA_PROJECT_REF__URL:
+				setUrl((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case KpPackage.KERMETA_PROJECT_REF__GROUP:
-        setGroup(GROUP_EDEFAULT);
-        return;
-      case KpPackage.KERMETA_PROJECT_REF__VERSION:
-        setVersion(VERSION_EDEFAULT);
-        return;
-      case KpPackage.KERMETA_PROJECT_REF__URI:
-        setUri(URI_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case KpPackage.KERMETA_PROJECT_REF__GROUP:
+				setGroup(GROUP_EDEFAULT);
+				return;
+			case KpPackage.KERMETA_PROJECT_REF__VERSION:
+				setVersion(VERSION_EDEFAULT);
+				return;
+			case KpPackage.KERMETA_PROJECT_REF__URL:
+				setUrl(URL_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case KpPackage.KERMETA_PROJECT_REF__GROUP:
-        return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
-      case KpPackage.KERMETA_PROJECT_REF__VERSION:
-        return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-      case KpPackage.KERMETA_PROJECT_REF__URI:
-        return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case KpPackage.KERMETA_PROJECT_REF__GROUP:
+				return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
+			case KpPackage.KERMETA_PROJECT_REF__VERSION:
+				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case KpPackage.KERMETA_PROJECT_REF__URL:
+				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (group: ");
-    result.append(group);
-    result.append(", version: ");
-    result.append(version);
-    result.append(", uri: ");
-    result.append(uri);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (group: ");
+		result.append(group);
+		result.append(", version: ");
+		result.append(version);
+		result.append(", url: ");
+		result.append(url);
+		result.append(')');
+		return result.toString();
+	}
 
 } //KermetaProjectRefImpl

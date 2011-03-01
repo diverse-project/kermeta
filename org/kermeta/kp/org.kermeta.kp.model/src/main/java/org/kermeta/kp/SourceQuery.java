@@ -25,29 +25,29 @@ package org.kermeta.kp;
  */
 public interface SourceQuery extends ImportedSource {
 	/**
-   * Returns the value of the '<em><b>Query</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Query</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Query</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Query</em>' attribute.
-   * @see #setQuery(String)
-   * @see org.kermeta.kp.KpPackage#getSourceQuery_Query()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Query</em>' attribute.
+	 * @see #setQuery(String)
+	 * @see org.kermeta.kp.KpPackage#getSourceQuery_Query()
+	 * @model
+	 * @generated
+	 */
 	String getQuery();
 
 	/**
-   * Sets the value of the '{@link org.kermeta.kp.SourceQuery#getQuery <em>Query</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.kermeta.kp.SourceQuery#getQuery <em>Query</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Query</em>' attribute.
-   * @see #getQuery()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Query</em>' attribute.
+	 * @see #getQuery()
+	 * @generated
+	 */
 	void setQuery(String value);
 
 } // SourceQuery

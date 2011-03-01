@@ -25,29 +25,29 @@ package org.kermeta.kp;
  */
 public interface SourceFolder extends Source {
 	/**
-   * Returns the value of the '<em><b>Folder Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Folder Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Folder Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Folder Name</em>' attribute.
-   * @see #setFolderName(String)
-   * @see org.kermeta.kp.KpPackage#getSourceFolder_FolderName()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Folder Name</em>' attribute.
+	 * @see #setFolderName(String)
+	 * @see org.kermeta.kp.KpPackage#getSourceFolder_FolderName()
+	 * @model
+	 * @generated
+	 */
 	String getFolderName();
 
 	/**
-   * Sets the value of the '{@link org.kermeta.kp.SourceFolder#getFolderName <em>Folder Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.kermeta.kp.SourceFolder#getFolderName <em>Folder Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Folder Name</em>' attribute.
-   * @see #getFolderName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Folder Name</em>' attribute.
+	 * @see #getFolderName()
+	 * @generated
+	 */
 	void setFolderName(String value);
 
 } // SourceFolder

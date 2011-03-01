@@ -14,7 +14,7 @@ Bundle-Name: Kermeta :: KP MODEL
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_20
 Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1289381150643
+Bnd-LastModified: 1299001118248
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.kermeta.kp.model;singleton:=true
+Bundle-SymbolicName: org.kermeta.kp.model
 

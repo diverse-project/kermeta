@@ -24,22 +24,22 @@ import org.kermeta.kp.KpPackage;
  */
 public class ExpressionImpl extends EObjectImpl implements Expression {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ExpressionImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return KpPackage.Literals.EXPRESSION;
-  }
+		return KpPackage.Literals.EXPRESSION;
+	}
 
 } //ExpressionImpl

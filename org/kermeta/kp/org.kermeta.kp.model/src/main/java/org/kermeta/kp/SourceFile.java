@@ -15,7 +15,7 @@ package org.kermeta.kp;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.kp.SourceFile#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.kp.SourceFile#getFileName <em>File Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package org.kermeta.kp;
  */
 public interface SourceFile extends Source {
 	/**
-   * Returns the value of the '<em><b>Uri</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
+	 * If the meaning of the '<em>File Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Uri</em>' attribute.
-   * @see #setUri(String)
-   * @see org.kermeta.kp.KpPackage#getSourceFile_Uri()
-   * @model
-   * @generated
-   */
-	String getUri();
+	 * @return the value of the '<em>File Name</em>' attribute.
+	 * @see #setFileName(String)
+	 * @see org.kermeta.kp.KpPackage#getSourceFile_FileName()
+	 * @model
+	 * @generated
+	 */
+	String getFileName();
 
 	/**
-   * Sets the value of the '{@link org.kermeta.kp.SourceFile#getUri <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.kermeta.kp.SourceFile#getFileName <em>File Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Uri</em>' attribute.
-   * @see #getUri()
-   * @generated
-   */
-	void setUri(String value);
+	 * @param value the new value of the '<em>File Name</em>' attribute.
+	 * @see #getFileName()
+	 * @generated
+	 */
+	void setFileName(String value);
 
 } // SourceFile

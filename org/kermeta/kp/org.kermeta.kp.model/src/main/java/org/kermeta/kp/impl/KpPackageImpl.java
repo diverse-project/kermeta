@@ -39,725 +39,725 @@ import org.kermeta.kp.WeaveDirective;
  */
 public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass kermetaProjectEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass dependencyEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass namedElementEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass sourceEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass sourceFolderEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass sourceFileEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass sourceNSURIEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass sourceQueryEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass importedSourceEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass weaveDirectiveEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass optionEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass expressionEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass stringExpressionEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass mixExpressionEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private EClass kermetaProjectRefEClass = null;
 
 	/**
-   * Creates an instance of the model <b>Package</b>, registered with
-   * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-   * package URI value.
-   * <p>Note: the correct way to create the package is via the static
-   * factory method {@link #init init()}, which also performs
-   * initialization of the package, or returns the registered package,
-   * if one already exists.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see org.eclipse.emf.ecore.EPackage.Registry
-   * @see org.kermeta.kp.KpPackage#eNS_URI
-   * @see #init()
-   * @generated
-   */
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see org.kermeta.kp.KpPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
 	private KpPackageImpl() {
-    super(eNS_URI, KpFactory.eINSTANCE);
-  }
+		super(eNS_URI, KpFactory.eINSTANCE);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private static boolean isInited = false;
 
 	/**
-   * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
-   * <p>This method is used to initialize {@link KpPackage#eINSTANCE} when that field is accessed.
-   * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
-   * <!-- begin-user-doc -->
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link KpPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #eNS_URI
-   * @see #createPackageContents()
-   * @see #initializePackageContents()
-   * @generated
-   */
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
 	public static KpPackage init() {
-    if (isInited) return (KpPackage)EPackage.Registry.INSTANCE.getEPackage(KpPackage.eNS_URI);
+		if (isInited) return (KpPackage)EPackage.Registry.INSTANCE.getEPackage(KpPackage.eNS_URI);
 
-    // Obtain or create and register package
-    KpPackageImpl theKpPackage = (KpPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KpPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KpPackageImpl());
+		// Obtain or create and register package
+		KpPackageImpl theKpPackage = (KpPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KpPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KpPackageImpl());
 
-    isInited = true;
+		isInited = true;
 
-    // Create package meta-data objects
-    theKpPackage.createPackageContents();
+		// Create package meta-data objects
+		theKpPackage.createPackageContents();
 
-    // Initialize created meta-data
-    theKpPackage.initializePackageContents();
+		// Initialize created meta-data
+		theKpPackage.initializePackageContents();
 
-    // Mark meta-data to indicate it can't be changed
-    theKpPackage.freeze();
+		// Mark meta-data to indicate it can't be changed
+		theKpPackage.freeze();
 
   
-    // Update the registry and return the package
-    EPackage.Registry.INSTANCE.put(KpPackage.eNS_URI, theKpPackage);
-    return theKpPackage;
-  }
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(KpPackage.eNS_URI, theKpPackage);
+		return theKpPackage;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getKermetaProject() {
-    return kermetaProjectEClass;
-  }
+		return kermetaProjectEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getKermetaProject_Dependencies() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getKermetaProject_Sources() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(1);
-  }
+		return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(1);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getKermetaProject_WeaveDirectives() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(2);
-  }
+		return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(2);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getKermetaProject_Options() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(3);
-  }
+		return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(3);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getKermetaProject_Version() {
-    return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(4);
-  }
+		return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(4);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getKermetaProject_Group() {
-    return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(5);
-  }
+		return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(5);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getKermetaProject_Ref() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
-  }
+		return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getDependency() {
-    return dependencyEClass;
-  }
+		return dependencyEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getDependency_Group() {
-    return (EAttribute)dependencyEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)dependencyEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getDependency_Version() {
-    return (EAttribute)dependencyEClass.getEStructuralFeatures().get(1);
-  }
+		return (EAttribute)dependencyEClass.getEStructuralFeatures().get(1);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getDependency_DepRef() {
-    return (EReference)dependencyEClass.getEStructuralFeatures().get(2);
-  }
+		return (EReference)dependencyEClass.getEStructuralFeatures().get(2);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getDependency_Uri() {
-    return (EAttribute)dependencyEClass.getEStructuralFeatures().get(3);
-  }
+	 * @generated
+	 */
+	public EAttribute getDependency_Url() {
+		return (EAttribute)dependencyEClass.getEStructuralFeatures().get(3);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getNamedElement() {
-    return namedElementEClass;
-  }
+		return namedElementEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getNamedElement_Name() {
-    return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getSource() {
-    return sourceEClass;
-  }
+		return sourceEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
+	public EAttribute getSource_Url() {
+		return (EAttribute)sourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSourceFolder() {
-    return sourceFolderEClass;
-  }
+		return sourceFolderEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getSourceFolder_FolderName() {
-    return (EAttribute)sourceFolderEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)sourceFolderEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getSourceFile() {
-    return sourceFileEClass;
-  }
+		return sourceFileEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getSourceFile_Uri() {
-    return (EAttribute)sourceFileEClass.getEStructuralFeatures().get(0);
-  }
+	 * @generated
+	 */
+	public EAttribute getSourceFile_FileName() {
+		return (EAttribute)sourceFileEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getSourceNSURI() {
-    return sourceNSURIEClass;
-  }
+		return sourceNSURIEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getSourceNSURI_Uri() {
-    return (EAttribute)sourceNSURIEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getSourceQuery() {
-    return sourceQueryEClass;
-  }
+		return sourceQueryEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getSourceQuery_Query() {
-    return (EAttribute)sourceQueryEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)sourceQueryEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getImportedSource() {
-    return importedSourceEClass;
-  }
+		return importedSourceEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getImportedSource_From() {
-    return (EReference)importedSourceEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)importedSourceEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getWeaveDirective() {
-    return weaveDirectiveEClass;
-  }
+		return weaveDirectiveEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getWeaveDirective_Mix() {
-    return (EReference)weaveDirectiveEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)weaveDirectiveEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getWeaveDirective_Target() {
-    return (EReference)weaveDirectiveEClass.getEStructuralFeatures().get(1);
-  }
+		return (EReference)weaveDirectiveEClass.getEStructuralFeatures().get(1);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getOption() {
-    return optionEClass;
-  }
+		return optionEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getOption_Value() {
-    return (EAttribute)optionEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)optionEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getExpression() {
-    return expressionEClass;
-  }
+		return expressionEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getStringExpression() {
-    return stringExpressionEClass;
-  }
+		return stringExpressionEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getStringExpression_Value() {
-    return (EAttribute)stringExpressionEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)stringExpressionEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getMixExpression() {
-    return mixExpressionEClass;
-  }
+		return mixExpressionEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getMixExpression_Left() {
-    return (EReference)mixExpressionEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)mixExpressionEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EReference getMixExpression_Right() {
-    return (EReference)mixExpressionEClass.getEStructuralFeatures().get(1);
-  }
+		return (EReference)mixExpressionEClass.getEStructuralFeatures().get(1);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EClass getKermetaProjectRef() {
-    return kermetaProjectRefEClass;
-  }
+		return kermetaProjectRefEClass;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getKermetaProjectRef_Group() {
-    return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(0);
-  }
+		return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getKermetaProjectRef_Version() {
-    return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(1);
-  }
+		return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(1);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getKermetaProjectRef_Uri() {
-    return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(2);
-  }
+	 * @generated
+	 */
+	public EAttribute getKermetaProjectRef_Url() {
+		return (EAttribute)kermetaProjectRefEClass.getEStructuralFeatures().get(2);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public KpFactory getKpFactory() {
-    return (KpFactory)getEFactoryInstance();
-  }
+		return (KpFactory)getEFactoryInstance();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private boolean isCreated = false;
 
 	/**
-   * Creates the meta-model objects for the package.  This method is
-   * guarded to have no affect on any invocation but its first.
-   * <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void createPackageContents() {
-    if (isCreated) return;
-    isCreated = true;
+		if (isCreated) return;
+		isCreated = true;
 
-    // Create classes and their features
-    kermetaProjectEClass = createEClass(KERMETA_PROJECT);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__DEPENDENCIES);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__SOURCES);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__WEAVE_DIRECTIVES);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__OPTIONS);
-    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__VERSION);
-    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__GROUP);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__REF);
+		// Create classes and their features
+		kermetaProjectEClass = createEClass(KERMETA_PROJECT);
+		createEReference(kermetaProjectEClass, KERMETA_PROJECT__DEPENDENCIES);
+		createEReference(kermetaProjectEClass, KERMETA_PROJECT__SOURCES);
+		createEReference(kermetaProjectEClass, KERMETA_PROJECT__WEAVE_DIRECTIVES);
+		createEReference(kermetaProjectEClass, KERMETA_PROJECT__OPTIONS);
+		createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__VERSION);
+		createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__GROUP);
+		createEReference(kermetaProjectEClass, KERMETA_PROJECT__REF);
 
-    dependencyEClass = createEClass(DEPENDENCY);
-    createEAttribute(dependencyEClass, DEPENDENCY__GROUP);
-    createEAttribute(dependencyEClass, DEPENDENCY__VERSION);
-    createEReference(dependencyEClass, DEPENDENCY__DEP_REF);
-    createEAttribute(dependencyEClass, DEPENDENCY__URI);
+		dependencyEClass = createEClass(DEPENDENCY);
+		createEAttribute(dependencyEClass, DEPENDENCY__GROUP);
+		createEAttribute(dependencyEClass, DEPENDENCY__VERSION);
+		createEReference(dependencyEClass, DEPENDENCY__DEP_REF);
+		createEAttribute(dependencyEClass, DEPENDENCY__URL);
 
-    namedElementEClass = createEClass(NAMED_ELEMENT);
-    createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		namedElementEClass = createEClass(NAMED_ELEMENT);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
-    sourceEClass = createEClass(SOURCE);
+		sourceEClass = createEClass(SOURCE);
+		createEAttribute(sourceEClass, SOURCE__URL);
 
-    sourceFolderEClass = createEClass(SOURCE_FOLDER);
-    createEAttribute(sourceFolderEClass, SOURCE_FOLDER__FOLDER_NAME);
+		sourceFolderEClass = createEClass(SOURCE_FOLDER);
+		createEAttribute(sourceFolderEClass, SOURCE_FOLDER__FOLDER_NAME);
 
-    sourceFileEClass = createEClass(SOURCE_FILE);
-    createEAttribute(sourceFileEClass, SOURCE_FILE__URI);
+		sourceFileEClass = createEClass(SOURCE_FILE);
+		createEAttribute(sourceFileEClass, SOURCE_FILE__FILE_NAME);
 
-    sourceNSURIEClass = createEClass(SOURCE_NSURI);
-    createEAttribute(sourceNSURIEClass, SOURCE_NSURI__URI);
+		sourceNSURIEClass = createEClass(SOURCE_NSURI);
 
-    sourceQueryEClass = createEClass(SOURCE_QUERY);
-    createEAttribute(sourceQueryEClass, SOURCE_QUERY__QUERY);
+		sourceQueryEClass = createEClass(SOURCE_QUERY);
+		createEAttribute(sourceQueryEClass, SOURCE_QUERY__QUERY);
 
-    importedSourceEClass = createEClass(IMPORTED_SOURCE);
-    createEReference(importedSourceEClass, IMPORTED_SOURCE__FROM);
+		importedSourceEClass = createEClass(IMPORTED_SOURCE);
+		createEReference(importedSourceEClass, IMPORTED_SOURCE__FROM);
 
-    weaveDirectiveEClass = createEClass(WEAVE_DIRECTIVE);
-    createEReference(weaveDirectiveEClass, WEAVE_DIRECTIVE__MIX);
-    createEReference(weaveDirectiveEClass, WEAVE_DIRECTIVE__TARGET);
+		weaveDirectiveEClass = createEClass(WEAVE_DIRECTIVE);
+		createEReference(weaveDirectiveEClass, WEAVE_DIRECTIVE__MIX);
+		createEReference(weaveDirectiveEClass, WEAVE_DIRECTIVE__TARGET);
 
-    optionEClass = createEClass(OPTION);
-    createEAttribute(optionEClass, OPTION__VALUE);
+		optionEClass = createEClass(OPTION);
+		createEAttribute(optionEClass, OPTION__VALUE);
 
-    expressionEClass = createEClass(EXPRESSION);
+		expressionEClass = createEClass(EXPRESSION);
 
-    stringExpressionEClass = createEClass(STRING_EXPRESSION);
-    createEAttribute(stringExpressionEClass, STRING_EXPRESSION__VALUE);
+		stringExpressionEClass = createEClass(STRING_EXPRESSION);
+		createEAttribute(stringExpressionEClass, STRING_EXPRESSION__VALUE);
 
-    mixExpressionEClass = createEClass(MIX_EXPRESSION);
-    createEReference(mixExpressionEClass, MIX_EXPRESSION__LEFT);
-    createEReference(mixExpressionEClass, MIX_EXPRESSION__RIGHT);
+		mixExpressionEClass = createEClass(MIX_EXPRESSION);
+		createEReference(mixExpressionEClass, MIX_EXPRESSION__LEFT);
+		createEReference(mixExpressionEClass, MIX_EXPRESSION__RIGHT);
 
-    kermetaProjectRefEClass = createEClass(KERMETA_PROJECT_REF);
-    createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__GROUP);
-    createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__VERSION);
-    createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__URI);
-  }
+		kermetaProjectRefEClass = createEClass(KERMETA_PROJECT_REF);
+		createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__GROUP);
+		createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__VERSION);
+		createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__URL);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	private boolean isInitialized = false;
 
 	/**
-   * Complete the initialization of the package and its meta-model.  This
-   * method is guarded to have no affect on any invocation but its first.
-   * <!-- begin-user-doc -->
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void initializePackageContents() {
-    if (isInitialized) return;
-    isInitialized = true;
+		if (isInitialized) return;
+		isInitialized = true;
 
-    // Initialize package
-    setName(eNAME);
-    setNsPrefix(eNS_PREFIX);
-    setNsURI(eNS_URI);
+		// Initialize package
+		setName(eNAME);
+		setNsPrefix(eNS_PREFIX);
+		setNsURI(eNS_URI);
 
-    // Create type parameters
+		// Create type parameters
 
-    // Set bounds for type parameters
+		// Set bounds for type parameters
 
-    // Add supertypes to classes
-    kermetaProjectEClass.getESuperTypes().add(this.getNamedElement());
-    dependencyEClass.getESuperTypes().add(this.getNamedElement());
-    sourceFolderEClass.getESuperTypes().add(this.getSource());
-    sourceFileEClass.getESuperTypes().add(this.getSource());
-    sourceNSURIEClass.getESuperTypes().add(this.getImportedSource());
-    sourceQueryEClass.getESuperTypes().add(this.getImportedSource());
-    importedSourceEClass.getESuperTypes().add(this.getSource());
-    weaveDirectiveEClass.getESuperTypes().add(this.getNamedElement());
-    optionEClass.getESuperTypes().add(this.getNamedElement());
-    stringExpressionEClass.getESuperTypes().add(this.getExpression());
-    mixExpressionEClass.getESuperTypes().add(this.getExpression());
-    kermetaProjectRefEClass.getESuperTypes().add(this.getNamedElement());
+		// Add supertypes to classes
+		kermetaProjectEClass.getESuperTypes().add(this.getNamedElement());
+		dependencyEClass.getESuperTypes().add(this.getNamedElement());
+		sourceFolderEClass.getESuperTypes().add(this.getSource());
+		sourceFileEClass.getESuperTypes().add(this.getSource());
+		sourceNSURIEClass.getESuperTypes().add(this.getImportedSource());
+		sourceQueryEClass.getESuperTypes().add(this.getImportedSource());
+		importedSourceEClass.getESuperTypes().add(this.getSource());
+		weaveDirectiveEClass.getESuperTypes().add(this.getNamedElement());
+		optionEClass.getESuperTypes().add(this.getNamedElement());
+		stringExpressionEClass.getESuperTypes().add(this.getExpression());
+		mixExpressionEClass.getESuperTypes().add(this.getExpression());
+		kermetaProjectRefEClass.getESuperTypes().add(this.getNamedElement());
 
-    // Initialize classes and features; add operations and parameters
-    initEClass(kermetaProjectEClass, KermetaProject.class, "KermetaProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getKermetaProject_Dependencies(), this.getDependency(), null, "dependencies", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_Sources(), this.getSource(), null, "sources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_WeaveDirectives(), this.getWeaveDirective(), null, "weaveDirectives", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_Options(), this.getOption(), null, "options", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKermetaProject_Version(), ecorePackage.getEString(), "version", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKermetaProject_Group(), ecorePackage.getEString(), "group", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_Ref(), this.getKermetaProjectRef(), null, "ref", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		// Initialize classes and features; add operations and parameters
+		initEClass(kermetaProjectEClass, KermetaProject.class, "KermetaProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKermetaProject_Dependencies(), this.getDependency(), null, "dependencies", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaProject_Sources(), this.getSource(), null, "sources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaProject_WeaveDirectives(), this.getWeaveDirective(), null, "weaveDirectives", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaProject_Options(), this.getOption(), null, "options", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaProject_Version(), ecorePackage.getEString(), "version", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaProject_Group(), ecorePackage.getEString(), "group", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaProject_Ref(), this.getKermetaProjectRef(), null, "ref", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDependency_Group(), ecorePackage.getEString(), "group", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getDependency_Version(), ecorePackage.getEString(), "version", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getDependency_DepRef(), this.getKermetaProjectRef(), null, "depRef", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getDependency_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDependency_Group(), ecorePackage.getEString(), "group", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDependency_Version(), ecorePackage.getEString(), "version", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDependency_DepRef(), this.getKermetaProjectRef(), null, "depRef", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDependency_Url(), ecorePackage.getEString(), "url", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(sourceEClass, Source.class, "Source", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSource_Url(), ecorePackage.getEString(), "url", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(sourceFolderEClass, SourceFolder.class, "SourceFolder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSourceFolder_FolderName(), ecorePackage.getEString(), "folderName", null, 0, 1, SourceFolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sourceFolderEClass, SourceFolder.class, "SourceFolder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSourceFolder_FolderName(), ecorePackage.getEString(), "folderName", null, 0, 1, SourceFolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(sourceFileEClass, SourceFile.class, "SourceFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSourceFile_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sourceFileEClass, SourceFile.class, "SourceFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSourceFile_FileName(), ecorePackage.getEString(), "FileName", null, 0, 1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(sourceNSURIEClass, SourceNSURI.class, "SourceNSURI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSourceNSURI_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, SourceNSURI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sourceNSURIEClass, SourceNSURI.class, "SourceNSURI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(sourceQueryEClass, SourceQuery.class, "SourceQuery", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSourceQuery_Query(), ecorePackage.getEString(), "query", null, 0, 1, SourceQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sourceQueryEClass, SourceQuery.class, "SourceQuery", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSourceQuery_Query(), ecorePackage.getEString(), "query", null, 0, 1, SourceQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(importedSourceEClass, ImportedSource.class, "ImportedSource", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getImportedSource_From(), this.getDependency(), null, "from", null, 0, 1, ImportedSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(importedSourceEClass, ImportedSource.class, "ImportedSource", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImportedSource_From(), this.getDependency(), null, "from", null, 0, 1, ImportedSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(weaveDirectiveEClass, WeaveDirective.class, "WeaveDirective", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getWeaveDirective_Mix(), this.getExpression(), null, "mix", null, 1, 1, WeaveDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getWeaveDirective_Target(), this.getExpression(), null, "target", null, 1, 1, WeaveDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(weaveDirectiveEClass, WeaveDirective.class, "WeaveDirective", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWeaveDirective_Mix(), this.getExpression(), null, "mix", null, 1, 1, WeaveDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWeaveDirective_Target(), this.getExpression(), null, "target", null, 1, 1, WeaveDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getOption_Value(), ecorePackage.getEString(), "value", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOption_Value(), ecorePackage.getEString(), "value", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(stringExpressionEClass, StringExpression.class, "StringExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStringExpression_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(stringExpressionEClass, StringExpression.class, "StringExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringExpression_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(mixExpressionEClass, MixExpression.class, "MixExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMixExpression_Left(), this.getExpression(), null, "left", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMixExpression_Right(), this.getExpression(), null, "right", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(mixExpressionEClass, MixExpression.class, "MixExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMixExpression_Left(), this.getExpression(), null, "left", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMixExpression_Right(), this.getExpression(), null, "right", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(kermetaProjectRefEClass, KermetaProjectRef.class, "KermetaProjectRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getKermetaProjectRef_Group(), ecorePackage.getEString(), "group", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKermetaProjectRef_Version(), ecorePackage.getEString(), "version", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKermetaProjectRef_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kermetaProjectRefEClass, KermetaProjectRef.class, "KermetaProjectRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKermetaProjectRef_Group(), ecorePackage.getEString(), "group", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaProjectRef_Version(), ecorePackage.getEString(), "version", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaProjectRef_Url(), ecorePackage.getEString(), "url", null, 0, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    // Create resource
-    createResource(eNS_URI);
-  }
+		// Create resource
+		createResource(eNS_URI);
+	}
 
 } //KpPackageImpl
