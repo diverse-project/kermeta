@@ -13,7 +13,7 @@
  * <img src="./figures/collections_view.png"/>
  */
 
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::exceptions
 
 

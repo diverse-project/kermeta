@@ -2,12 +2,12 @@
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::exceptions
 
 package kermeta{
 
-package emfpersitence{
+package emfpersistence{
 
 
 @CompilerIgnore "true"

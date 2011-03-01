@@ -1,5 +1,5 @@
 using kermeta::standard
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::exceptions
 
 

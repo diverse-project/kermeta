@@ -1,5 +1,5 @@
 using kermeta::standard
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::exceptions
 
 
@@ -198,7 +198,7 @@ class Object
 	 * or void if the object belongs to no Resource
 	 */
 	@CompilerIgnore "true"
-	operation containingResource() : kermeta::persistence::Resource is do
+	operation containingResource() : kermeta::emfpersistence::Resource is do
 	end
 }
 @CompilerIgnore "true"
