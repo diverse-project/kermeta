@@ -122,7 +122,9 @@ public class Main {
 		//Resolving
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
 		.createFullStaticResolver();
+		
 		resolvedMU = resolver.doResolving(mergedMU);
+		resolver.checkUnresolvedType(resolvedMU);
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
 		// Save intermediate file
