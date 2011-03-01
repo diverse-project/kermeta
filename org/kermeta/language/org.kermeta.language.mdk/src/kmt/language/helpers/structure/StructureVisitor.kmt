@@ -129,17 +129,17 @@ operation visitRequire(visited : Require, ctxt : StructureVisitorContext) is do
 
 end
 
-operation visitResource(visited : Resource, ctxt : StructureVisitorContext) is do
+//operation visitResource(visited : Resource, ctxt : StructureVisitorContext) is do
 
-end
+//end
 
-operation visitResourceGroup(visited : ResourceGroup, ctxt : StructureVisitorContext) is do
+//operation visitResourceGroup(visited : ResourceGroup, ctxt : StructureVisitorContext) is do
 
-end
+//end
 
-operation visitSimpleResource(visited : SimpleResource, ctxt : StructureVisitorContext) is do
+//operation visitSimpleResource(visited : SimpleResource, ctxt : StructureVisitorContext) is do
 
-end
+//end
 
 operation visitTag(visited : Tag, ctxt : StructureVisitorContext) is do
 

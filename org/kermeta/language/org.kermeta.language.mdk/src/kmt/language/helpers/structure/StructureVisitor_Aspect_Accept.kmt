@@ -169,23 +169,23 @@ aspect class Require {
 	end
 }
 
-aspect class Resource {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
-		visitor.visitResource(self, ctxt)
-	end
-}
+//aspect class Resource {
+//	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+//		visitor.visitResource(self, ctxt)
+//	end
+//}
 
-aspect class ResourceGroup {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
-		visitor.visitResourceGroup(self, ctxt)
-	end
-}
+//aspect class ResourceGroup {
+//	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+//		visitor.visitResourceGroup(self, ctxt)
+//	end
+//}
 
-aspect class SimpleResource {
-	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
-		visitor.visitSimpleResource(self, ctxt)
-	end
-}
+//aspect class SimpleResource {
+//	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
+//		visitor.visitSimpleResource(self, ctxt)
+//	end
+//}
 
 aspect class Tag {
 	method accept(visitor : StructureVisitor, ctxt : StructureVisitorContext) is do
