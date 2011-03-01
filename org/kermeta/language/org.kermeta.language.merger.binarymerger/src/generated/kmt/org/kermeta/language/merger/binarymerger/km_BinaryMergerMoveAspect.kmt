@@ -1877,20 +1877,20 @@ package kermeta {
 				end
 			}
 
-			aspect class SimpleResource inherits org::kermeta::language::structure::Resource {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
-					var mergedModelElement : org::kermeta::language::structure::SimpleResource
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::SimpleResource)
-					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a SimpleResource")
+			//aspect class SimpleResource inherits org::kermeta::language::structure::Resource {
+			//	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Resource is do
+			//		var mergedModelElement : org::kermeta::language::structure::SimpleResource
+			//		mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::SimpleResource)
+			//		if (not mergedModelElement.isVoid) then
+			//			stdio.writeln("Merging content of a SimpleResource")
 						// select value for unary attribute
-						mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
-					end
-					super(context)
-
-					result := self
-				end
-			}
+			//			mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
+			//		end
+			//		super(context)
+			//
+			//		result := self
+			//	end
+			//}
 
 			aspect class AbstractOperation inherits org::kermeta::language::structure::KermetaModelElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
@@ -2064,7 +2064,7 @@ package kermeta {
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeMapping)
 					if (not mergedModelElement.isVoid) then
 						stdio.writeln("Merging content of a TypeMapping")
-						mergedModelElement.mapping ?= self.selectUnaryProperty("mapping", self.mapping, mergedModelElement.mapping)
+						//mergedModelElement.mapping ?= self.selectUnaryProperty("mapping", self.mapping, mergedModelElement.mapping)
 					end
 					super(context)
 

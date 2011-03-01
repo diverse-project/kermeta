@@ -820,35 +820,35 @@ package kermeta {
 				end
 			}
 
-			aspect class Resource {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Resource
-					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-				end
-			}
+			//aspect class Resource {
+			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+			//		var aspectElement : org::kermeta::language::structure::Resource
+			//		aspectElement ?= aspectElementObj
+			//		
+			//		result := super( aspectElement)
+			//	end
+			//}
 
-			aspect class ResourceGroup {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
-					var aspectElement : org::kermeta::language::structure::ResourceGroup
-					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-				end
-			}
+			//aspect class ResourceGroup {
+			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
+			//		var aspectElement : org::kermeta::language::structure::ResourceGroup
+			//		aspectElement ?= aspectElementObj
+			//		
+			//		result := super( aspectElement)
+			//	end
+			//}
 
-			aspect class SimpleResource {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
-					var aspectElement : org::kermeta::language::structure::SimpleResource
-					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-						result := result and self.uri == aspectElement.uri
-					end
-				end
-			}
+			//aspect class SimpleResource {
+			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
+			//		var aspectElement : org::kermeta::language::structure::SimpleResource
+			//		aspectElement ?= aspectElementObj
+			//		
+			//		result := super( aspectElement)
+			//		if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+			//			result := result and self.uri == aspectElement.uri
+			//		end
+			//	end
+			//}
 
 			aspect class AbstractOperation {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
@@ -953,9 +953,9 @@ package kermeta {
 					aspectElement ?= aspectElementObj
 					
 					result := super( aspectElement)
-					if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
-						result := result and self.mapping == aspectElement.mapping
-					end
+					//if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
+					//	result := result and self.mapping == aspectElement.mapping
+					//end
 					
 				end
 			}
