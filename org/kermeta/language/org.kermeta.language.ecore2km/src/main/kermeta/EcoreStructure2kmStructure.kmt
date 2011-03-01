@@ -125,15 +125,17 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * If both of the arguments are not valid, void is returned.
 	 */
 	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
+		var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
+
 		// Generic type must be managed. The type of the method is a generic type if:
-		if(genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and genericType.eClassifier.isVoid}) then
+		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and genericType.eClassifier.isVoid}) then
 			if(type.isVoid) then
 				result := void
 			else // If there is a return type, an unresolved type is created.
 				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
 				var typeName : String
 				
-				if(type.isKindOf(EDataType)) then
+				if(isDataType) then
 					typeName := primitiveTypeMappings.getValue(type.name)
 					if typeName.isVoid then 
 						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
