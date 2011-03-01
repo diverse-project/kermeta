@@ -746,9 +746,9 @@ aspect class VoidType {
 aspect class TypeMapping {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
 		super(func)
-		//if (not self.mapping.isVoid) then
-		//	func(self.mapping.asType(kermeta::standard::Object))
-		//end
+		if (not self.mapping.isVoid) then
+			func(self.mapping.asType(kermeta::standard::Object))
+		end
 	end
 }
 
