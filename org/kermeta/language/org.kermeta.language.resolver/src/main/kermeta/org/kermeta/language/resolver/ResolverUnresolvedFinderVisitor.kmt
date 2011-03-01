@@ -48,11 +48,13 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	attribute pass : Integer
 	
 	/*
-	* ResolvedFinders call operations
+	* ResolvedTypeFinder call operations
 	*/
-
 	operation callTypeFinder(ctxt : StructureVisitorContext) is do
+		//If we have already found the corresponding type
 		if (ctxt.unresolved.asType(UnresolvedType).correspondingType.isVoid()) then
+			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
+		else
 			var initialQualifiedPath : Sequence<String> init ctxt.qualifiedPath
 			var initialUnresolvedName : String init ctxt.unresolvedName
 		
@@ -61,6 +63,10 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			end
 			
 			var notTypeTypeContainer : TypeContainer init recursiveGetTypeContainer(ctxt.unresolved.asType(UnresolvedType))
+		
+			/*
+			* TypeParameters cases
+			*/
 		
 			//If the type we are looking for is in a parameter, it can be a typeParameter
 			if (notTypeTypeContainer.isInstanceOf(Parameter)) then
@@ -109,6 +115,10 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				}
 				ctxt.foundType := typeVar
 			end
+			
+			/*
+			* If we have not found a corresponding TypeParameter
+			*/
 			
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
@@ -199,10 +209,8 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				end
 			end
 			if not ctxt.foundType.isVoid() then
-					ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
+				ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			end
-		else
-			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
 		end
 		ctxt.reset()
 	end
@@ -262,8 +270,15 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		ctxt.reset()
 	end
 	
+	/*
+	*
+	*/
+	
 	operation callOperationFinder(ctxt : StructureVisitorContext) is do
-		if (ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
+		//If we have already found the corresponding operation
+		if (not ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation.isVoid()) then
+			ctxt.foundOperation := ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation
+		else
 			//If the resolvedOperationFinder is not yet implemented
 			if (resolvedOperationFinder.isVoid()) then
 				//Implement it
@@ -289,16 +304,13 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 						end
 					end
 				end
+				
 			//If there is no from
 			else
 				//We look for the Operation in all the superTypes of the of the container of the UnresolvedOperation			
 				var containingClassDef : ClassDefinition init ctxt.unresolved.asType(UnresolvedOperation).container.container.asType(ClassDefinition)
 				containingClassDef.superType.each{st|
-					st.accept(resolvedOperationFinder, ctxt)
-					
-					stdio.writeln(st.toString())
-					stdio.writeln(st.asType(ClassDefinition).name)
-					
+					st.accept(resolvedOperationFinder, ctxt)					
 				}
 			end
 
@@ -320,8 +332,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			if not ctxt.foundOperation.isVoid() then
 				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation
 			end
-		else
-			ctxt.foundOperation := ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation
 		end
 		ctxt.reset()
 	end
