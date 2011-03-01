@@ -136,7 +136,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				var typeName : String
 				
 				if(isDataType) then
-					typeName := primitiveTypeMappings.getValue(type.name)
+					typeName := primitiveTypeMappings.getValue(type.instanceClassName)
 					if typeName.isVoid then 
 						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
 						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
@@ -321,32 +321,6 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			gtd.containedType.add(typeVar)
 		end
 	end
-
-
-
-	method visitEDataType(dataType : EDataType) : Void is do
-		// Looking for a Kermeta equivalent name of the Ecore primitive type.
-		var namePrimitiveType : String init primitiveTypeMappings.getValue(dataType.instanceTypeName)
-
-		// Only the data type which are not existing kermeta primitive type are created.
-		if(namePrimitiveType.isVoid and (not dataType.ePackage.isVoid).andThen{b | dataType.ePackage.targetKermetaObject.isKindOf(Package)}) then
-			namePrimitiveType := dataType.instanceTypeName
-			// The type of the primitive type to create must be an unresolved type based on the type name 
-			// given by the ecore data type.
-			var type : UnresolvedType init UnresolvedType.new.initialize(namePrimitiveType)
-			// Creation of the Kermeta primitive type.
-			var pt : PrimitiveType init PrimitiveType.new.initialize(dataType.name, type)
-			// Each ecore class must be associated a tag.
-			addEcoreTag(pt)
-			// Adding the primitive type to its Kermeta package.
-			dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(pt)
-			// Linking the Kermeta primitive type to the ecore data type.
-			dataType.targetKermetaObject := pt
-		end
-
-		super(dataType)
-	end
-
 
 
 
