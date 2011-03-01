@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.TypeMapping#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.TypeMapping#getSourceType <em>Source Type</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.TypeMapping#getMapping <em>Mapping</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,5 +80,31 @@ public interface TypeMapping extends TypeContainer {
 	 * @generated
 	 */
 	void setSourceType(TypeDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Mapping</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mapping</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mapping</em>' containment reference.
+	 * @see #setMapping(EObject)
+	 * @see org.kermeta.language.structure.StructurePackage#getTypeMapping_Mapping()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EObject getMapping();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.TypeMapping#getMapping <em>Mapping</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mapping</em>' containment reference.
+	 * @see #getMapping()
+	 * @generated
+	 */
+	void setMapping(EObject value);
 
 } // TypeMapping

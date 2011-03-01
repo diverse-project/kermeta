@@ -3701,13 +3701,22 @@ public interface StructurePackage extends EPackage {
 	int TYPE_MAPPING__SOURCE_TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Mapping</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_MAPPING__MAPPING = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Type Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
@@ -5212,6 +5221,17 @@ public interface StructurePackage extends EPackage {
 	EReference getTypeMapping_SourceType();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.language.structure.TypeMapping#getMapping <em>Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Mapping</em>'.
+	 * @see org.kermeta.language.structure.TypeMapping#getMapping()
+	 * @see #getTypeMapping()
+	 * @generated
+	 */
+	EReference getTypeMapping_Mapping();
+
+	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6458,6 +6478,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_MAPPING__SOURCE_TYPE = eINSTANCE.getTypeMapping_SourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_MAPPING__MAPPING = eINSTANCE.getTypeMapping_Mapping();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

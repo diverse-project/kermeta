@@ -1715,6 +1715,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypeMapping_Mapping() {
+		return (EReference)typeMappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintLanguage() {
 		return constraintLanguageEEnum;
 	}
@@ -1968,6 +1977,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeMappingEClass = createEClass(TYPE_MAPPING);
 		createEReference(typeMappingEClass, TYPE_MAPPING__TARGET_TYPE);
 		createEReference(typeMappingEClass, TYPE_MAPPING__SOURCE_TYPE);
+		createEReference(typeMappingEClass, TYPE_MAPPING__MAPPING);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2251,6 +2261,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(typeMappingEClass, TypeMapping.class, "TypeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeMapping_TargetType(), this.getType(), null, "targetType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeMapping_SourceType(), this.getTypeDefinition(), this.getTypeDefinition_TypeMappings(), "sourceType", null, 1, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeMapping_Mapping(), ecorePackage.getEObject(), null, "mapping", null, 0, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

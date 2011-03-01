@@ -31,6 +31,7 @@ import org.kermeta.language.structure.TypeMapping;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getSourceType <em>Source Type</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.TypeMappingImpl#getMapping <em>Mapping</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,6 +47,16 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	 * @ordered
 	 */
 	protected Type targetType;
+
+	/**
+	 * The cached value of the '{@link #getMapping() <em>Mapping</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMapping()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject mapping;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,6 +161,49 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EObject getMapping() {
+		return mapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMapping(EObject newMapping, NotificationChain msgs) {
+		EObject oldMapping = mapping;
+		mapping = newMapping;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_MAPPING__MAPPING, oldMapping, newMapping);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMapping(EObject newMapping) {
+		if (newMapping != mapping) {
+			NotificationChain msgs = null;
+			if (mapping != null)
+				msgs = ((InternalEObject)mapping).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.TYPE_MAPPING__MAPPING, null, msgs);
+			if (newMapping != null)
+				msgs = ((InternalEObject)newMapping).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.TYPE_MAPPING__MAPPING, null, msgs);
+			msgs = basicSetMapping(newMapping, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_MAPPING__MAPPING, newMapping, newMapping));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -171,6 +225,8 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 		switch (featureID) {
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				return basicSetSourceType(null, msgs);
+			case StructurePackage.TYPE_MAPPING__MAPPING:
+				return basicSetMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -202,6 +258,8 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 				return basicGetTargetType();
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				return getSourceType();
+			case StructurePackage.TYPE_MAPPING__MAPPING:
+				return getMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,6 +277,9 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 				return;
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				setSourceType((TypeDefinition)newValue);
+				return;
+			case StructurePackage.TYPE_MAPPING__MAPPING:
+				setMapping((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,6 +299,9 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				setSourceType((TypeDefinition)null);
 				return;
+			case StructurePackage.TYPE_MAPPING__MAPPING:
+				setMapping((EObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -254,6 +318,8 @@ public class TypeMappingImpl extends TypeContainerImpl implements TypeMapping {
 				return targetType != null;
 			case StructurePackage.TYPE_MAPPING__SOURCE_TYPE:
 				return getSourceType() != null;
+			case StructurePackage.TYPE_MAPPING__MAPPING:
+				return mapping != null;
 		}
 		return super.eIsSet(featureID);
 	}
