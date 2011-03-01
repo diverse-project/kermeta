@@ -1,0 +1,88 @@
+<!-- $Id: pom.xml 13871 2010-12-15 08:47:33Z dvojtise $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.model -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : 	Didier Vojtisek <didier.vojtisek@inria.fr>
+				Francois.Fouquet <Francois.fouquet@irisa.fr>
+				Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+				
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.compiler.commandline</artifactId>
+    <packaging>bundle</packaging>
+    <name>language.compiler.commandline :: CommandLine interface for Kermeta 2 bytecode</name>
+    
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+        <artifactId>language.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
+    <build>
+        <plugins>
+
+
+            <!-- Creation of the bundle jar and its manifest -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.kermeta.language.compiler.commandline</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Export-Package>
+                        	org.kermeta.language.compiler.commandline
+                        </Export-Package>
+                        <Import-Package>
+                        	org.eclipse.emf.*,
+                        	org.osgi.framework;version="[1.5,2)"</Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.kmt.scala</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.ecore2km</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.merger.binarymerger</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.resolver</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.kp</groupId>
+            <artifactId>kp.loader.kp</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
