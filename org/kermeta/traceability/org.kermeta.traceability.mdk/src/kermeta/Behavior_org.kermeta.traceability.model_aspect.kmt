@@ -6,8 +6,7 @@
  * 		Didier Vojtisek
  *		David Touzet
  */
-@mainClass "traceability::TracePackage"
-@mainOperation "size"
+
 
 package org::kermeta::traceability;
 
