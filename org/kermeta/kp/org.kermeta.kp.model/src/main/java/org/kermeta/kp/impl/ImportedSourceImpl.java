@@ -32,129 +32,135 @@ import org.kermeta.kp.KpPackage;
  */
 public abstract class ImportedSourceImpl extends SourceImpl implements ImportedSource {
 	/**
-	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFrom()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFrom()
+   * @generated
+   * @ordered
+   */
 	protected Dependency from;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ImportedSourceImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return KpPackage.Literals.IMPORTED_SOURCE;
-	}
+    return KpPackage.Literals.IMPORTED_SOURCE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Dependency getFrom() {
-		if (from != null && from.eIsProxy()) {
-			InternalEObject oldFrom = (InternalEObject)from;
-			from = (Dependency)eResolveProxy(oldFrom);
-			if (from != oldFrom) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.IMPORTED_SOURCE__FROM, oldFrom, from));
-			}
-		}
-		return from;
-	}
+    if (from != null && from.eIsProxy())
+    {
+      InternalEObject oldFrom = (InternalEObject)from;
+      from = (Dependency)eResolveProxy(oldFrom);
+      if (from != oldFrom)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.IMPORTED_SOURCE__FROM, oldFrom, from));
+      }
+    }
+    return from;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Dependency basicGetFrom() {
-		return from;
-	}
+    return from;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setFrom(Dependency newFrom) {
-		Dependency oldFrom = from;
-		from = newFrom;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.IMPORTED_SOURCE__FROM, oldFrom, from));
-	}
+    Dependency oldFrom = from;
+    from = newFrom;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.IMPORTED_SOURCE__FROM, oldFrom, from));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KpPackage.IMPORTED_SOURCE__FROM:
-				if (resolve) return getFrom();
-				return basicGetFrom();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case KpPackage.IMPORTED_SOURCE__FROM:
+        if (resolve) return getFrom();
+        return basicGetFrom();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KpPackage.IMPORTED_SOURCE__FROM:
-				setFrom((Dependency)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case KpPackage.IMPORTED_SOURCE__FROM:
+        setFrom((Dependency)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KpPackage.IMPORTED_SOURCE__FROM:
-				setFrom((Dependency)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.IMPORTED_SOURCE__FROM:
+        setFrom((Dependency)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KpPackage.IMPORTED_SOURCE__FROM:
-				return from != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.IMPORTED_SOURCE__FROM:
+        return from != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //ImportedSourceImpl

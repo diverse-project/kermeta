@@ -16,9 +16,6 @@ TOKENS{
     DEFINE ML_COMMENT $'/*'.*'*/'$ ;
     DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
     DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-    DEFINE NSURI$('A'..'Z')(('_')?('A'..'Z'))*$;
-    DEFINE MVNURI$'"''mvn:'.*'"'$;
-  
 }
 
 TOKENSTYLES{
@@ -27,40 +24,43 @@ TOKENSTYLES{
     "merger-option" COLOR #CC8000, BOLD;
     "SL_COMMENT" COLOR #348017;
     "ML_COMMENT" COLOR #348017;
-    "MVNURI" COLOR #2554C7, BOLD;
-    "NSURI" COLOR #2554C7, BOLD;
 }
 
 RULES{
     
     KermetaProject::= 
     "KermetaProject" ":" name['"','"'] !0
-    "version" ": " version['"','"'] !0
-    "group"  ":" group['"','"'] !0
+    ("version" ": " version['"','"'] !0)?
+    ("group"  ":" group['"','"'] !0)?
     "{"
         (!1sources!0 | !1dependencies!0 |  !1options!0 | !1weaveDirectives )*!0
     "}"!0
     "ref" "{" (!1ref)*!0 "}" 
     ;
     
+    Source::=
+    "source" "=" url['"','"']
+    ;
+    
     SourceFolder::=  
-    "srcDir" "=" folderName['"','"']   
+    "srcDir" "=" (folderName['"','"'] | url['"','"'] )  
     ;
     
     SourceFile::= 
-    "srcFile" "=" uri['"','"'] 
+    "srcFile" "=" (fileName['"','"'] | url['"','"'] ) 
     ;
     
     SourceNSURI::=  
-    "srcNSURI" "=" uri[NSURI]  "from" from['"','"']  
+    "srcNSURI" "=" url['"','"']  ("from" from['"','"'])?  
     ;
     
     SourceQuery::=  
-    "srcQuery" "=" query['"','"'] "from" from['"','"']  
+    "srcQuery" "=" query['"','"'] ("from" from['"','"'] ("URL" "=" url['"','"'])?)?  
     ;
     
     Dependency::=  
-    "dependency" name['"','"'] "=" (uri[MVNURI] | depRef['"','"']) | "dependency" depRef['"','"']
+    "dependency" name['"','"'] "URL" "=" url['"','"'] |
+    "dependency" name['"','"'] "=" depRef['"','"'] group['"','"']? version['"','"']?
     ;
     
     WeaveDirective::= 
@@ -79,12 +79,8 @@ RULES{
     "(" left  right ")" 
     ;
     
-    NamedElement ::= 
-    name[] 
-    ;
-    
     KermetaProjectRef ::= 
-    group['"','"']  ":" name['"','"'] uri[MVNURI]? ("[" version['"','"'] "]")?
+    group['"','"']  ":" name['"','"'] ("URL" "=" url['"','"'])? ("[" version['"','"'] "]")?
     ;
     
 }

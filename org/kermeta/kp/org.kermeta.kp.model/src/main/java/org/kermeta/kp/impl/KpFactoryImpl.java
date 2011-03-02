@@ -24,219 +24,223 @@ import org.kermeta.kp.*;
  */
 public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static KpFactory init() {
-		try {
-			KpFactory theKpFactory = (KpFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kp/1.0.0"); 
-			if (theKpFactory != null) {
-				return theKpFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new KpFactoryImpl();
-	}
+    try
+    {
+      KpFactory theKpFactory = (KpFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kp/1.0.0"); 
+      if (theKpFactory != null)
+      {
+        return theKpFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new KpFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KpFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case KpPackage.KERMETA_PROJECT: return createKermetaProject();
-			case KpPackage.DEPENDENCY: return createDependency();
-			case KpPackage.NAMED_ELEMENT: return createNamedElement();
-			case KpPackage.SOURCE: return createSource();
-			case KpPackage.SOURCE_FOLDER: return createSourceFolder();
-			case KpPackage.SOURCE_FILE: return createSourceFile();
-			case KpPackage.SOURCE_NSURI: return createSourceNSURI();
-			case KpPackage.SOURCE_QUERY: return createSourceQuery();
-			case KpPackage.WEAVE_DIRECTIVE: return createWeaveDirective();
-			case KpPackage.OPTION: return createOption();
-			case KpPackage.EXPRESSION: return createExpression();
-			case KpPackage.STRING_EXPRESSION: return createStringExpression();
-			case KpPackage.MIX_EXPRESSION: return createMixExpression();
-			case KpPackage.KERMETA_PROJECT_REF: return createKermetaProjectRef();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case KpPackage.KERMETA_PROJECT: return createKermetaProject();
+      case KpPackage.DEPENDENCY: return createDependency();
+      case KpPackage.NAMED_ELEMENT: return createNamedElement();
+      case KpPackage.SOURCE: return createSource();
+      case KpPackage.SOURCE_FOLDER: return createSourceFolder();
+      case KpPackage.SOURCE_FILE: return createSourceFile();
+      case KpPackage.SOURCE_NSURI: return createSourceNSURI();
+      case KpPackage.SOURCE_QUERY: return createSourceQuery();
+      case KpPackage.WEAVE_DIRECTIVE: return createWeaveDirective();
+      case KpPackage.OPTION: return createOption();
+      case KpPackage.EXPRESSION: return createExpression();
+      case KpPackage.STRING_EXPRESSION: return createStringExpression();
+      case KpPackage.MIX_EXPRESSION: return createMixExpression();
+      case KpPackage.KERMETA_PROJECT_REF: return createKermetaProjectRef();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KermetaProject createKermetaProject() {
-		KermetaProjectImpl kermetaProject = new KermetaProjectImpl();
-		return kermetaProject;
-	}
+    KermetaProjectImpl kermetaProject = new KermetaProjectImpl();
+    return kermetaProject;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Dependency createDependency() {
-		DependencyImpl dependency = new DependencyImpl();
-		return dependency;
-	}
+    DependencyImpl dependency = new DependencyImpl();
+    return dependency;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
-	}
+    NamedElementImpl namedElement = new NamedElementImpl();
+    return namedElement;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Source createSource() {
-		SourceImpl source = new SourceImpl();
-		return source;
-	}
+    SourceImpl source = new SourceImpl();
+    return source;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public SourceFolder createSourceFolder() {
-		SourceFolderImpl sourceFolder = new SourceFolderImpl();
-		return sourceFolder;
-	}
+    SourceFolderImpl sourceFolder = new SourceFolderImpl();
+    return sourceFolder;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public SourceFile createSourceFile() {
-		SourceFileImpl sourceFile = new SourceFileImpl();
-		return sourceFile;
-	}
+    SourceFileImpl sourceFile = new SourceFileImpl();
+    return sourceFile;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public SourceNSURI createSourceNSURI() {
-		SourceNSURIImpl sourceNSURI = new SourceNSURIImpl();
-		return sourceNSURI;
-	}
+    SourceNSURIImpl sourceNSURI = new SourceNSURIImpl();
+    return sourceNSURI;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public SourceQuery createSourceQuery() {
-		SourceQueryImpl sourceQuery = new SourceQueryImpl();
-		return sourceQuery;
-	}
+    SourceQueryImpl sourceQuery = new SourceQueryImpl();
+    return sourceQuery;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public WeaveDirective createWeaveDirective() {
-		WeaveDirectiveImpl weaveDirective = new WeaveDirectiveImpl();
-		return weaveDirective;
-	}
+    WeaveDirectiveImpl weaveDirective = new WeaveDirectiveImpl();
+    return weaveDirective;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Option createOption() {
-		OptionImpl option = new OptionImpl();
-		return option;
-	}
+    OptionImpl option = new OptionImpl();
+    return option;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
-	}
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public StringExpression createStringExpression() {
-		StringExpressionImpl stringExpression = new StringExpressionImpl();
-		return stringExpression;
-	}
+    StringExpressionImpl stringExpression = new StringExpressionImpl();
+    return stringExpression;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MixExpression createMixExpression() {
-		MixExpressionImpl mixExpression = new MixExpressionImpl();
-		return mixExpression;
-	}
+    MixExpressionImpl mixExpression = new MixExpressionImpl();
+    return mixExpression;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KermetaProjectRef createKermetaProjectRef() {
-		KermetaProjectRefImpl kermetaProjectRef = new KermetaProjectRefImpl();
-		return kermetaProjectRef;
-	}
+    KermetaProjectRefImpl kermetaProjectRef = new KermetaProjectRefImpl();
+    return kermetaProjectRef;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KpPackage getKpPackage() {
-		return (KpPackage)getEPackage();
-	}
+    return (KpPackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static KpPackage getPackage() {
-		return KpPackage.eINSTANCE;
-	}
+    return KpPackage.eINSTANCE;
+  }
 
 } //KpFactoryImpl

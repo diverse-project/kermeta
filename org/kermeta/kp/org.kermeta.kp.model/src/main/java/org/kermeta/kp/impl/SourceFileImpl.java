@@ -30,137 +30,141 @@ import org.kermeta.kp.SourceFile;
  */
 public class SourceFileImpl extends SourceImpl implements SourceFile {
 	/**
-	 * The default value of the '{@link #getFileName() <em>File Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFileName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFileName()
+   * @generated
+   * @ordered
+   */
 	protected static final String FILE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFileName() <em>File Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFileName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFileName()
+   * @generated
+   * @ordered
+   */
 	protected String fileName = FILE_NAME_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected SourceFileImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return KpPackage.Literals.SOURCE_FILE;
-	}
+    return KpPackage.Literals.SOURCE_FILE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getFileName() {
-		return fileName;
-	}
+    return fileName;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setFileName(String newFileName) {
-		String oldFileName = fileName;
-		fileName = newFileName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.SOURCE_FILE__FILE_NAME, oldFileName, fileName));
-	}
+    String oldFileName = fileName;
+    fileName = newFileName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.SOURCE_FILE__FILE_NAME, oldFileName, fileName));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KpPackage.SOURCE_FILE__FILE_NAME:
-				return getFileName();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case KpPackage.SOURCE_FILE__FILE_NAME:
+        return getFileName();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KpPackage.SOURCE_FILE__FILE_NAME:
-				setFileName((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case KpPackage.SOURCE_FILE__FILE_NAME:
+        setFileName((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KpPackage.SOURCE_FILE__FILE_NAME:
-				setFileName(FILE_NAME_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.SOURCE_FILE__FILE_NAME:
+        setFileName(FILE_NAME_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KpPackage.SOURCE_FILE__FILE_NAME:
-				return FILE_NAME_EDEFAULT == null ? fileName != null : !FILE_NAME_EDEFAULT.equals(fileName);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.SOURCE_FILE__FILE_NAME:
+        return FILE_NAME_EDEFAULT == null ? fileName != null : !FILE_NAME_EDEFAULT.equals(fileName);
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (FileName: ");
-		result.append(fileName);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (fileName: ");
+    result.append(fileName);
+    result.append(')');
+    return result.toString();
+  }
 
 } //SourceFileImpl

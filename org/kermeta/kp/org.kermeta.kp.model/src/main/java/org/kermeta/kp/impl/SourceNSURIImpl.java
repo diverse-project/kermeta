@@ -26,22 +26,22 @@ import org.kermeta.kp.SourceNSURI;
  */
 public class SourceNSURIImpl extends ImportedSourceImpl implements SourceNSURI {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected SourceNSURIImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return KpPackage.Literals.SOURCE_NSURI;
-	}
+    return KpPackage.Literals.SOURCE_NSURI;
+  }
 
 } //SourceNSURIImpl

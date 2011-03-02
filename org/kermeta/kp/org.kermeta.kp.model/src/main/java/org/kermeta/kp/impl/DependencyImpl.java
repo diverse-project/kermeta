@@ -35,302 +35,308 @@ import org.kermeta.kp.KpPackage;
  */
 public class DependencyImpl extends NamedElementImpl implements Dependency {
 	/**
-	 * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGroup()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getGroup()
+   * @generated
+   * @ordered
+   */
 	protected static final String GROUP_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGroup()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getGroup()
+   * @generated
+   * @ordered
+   */
 	protected String group = GROUP_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVersion()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getVersion()
+   * @generated
+   * @ordered
+   */
 	protected static final String VERSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVersion()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getVersion()
+   * @generated
+   * @ordered
+   */
 	protected String version = VERSION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDepRef() <em>Dep Ref</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDepRef() <em>Dep Ref</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDepRef()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDepRef()
+   * @generated
+   * @ordered
+   */
 	protected KermetaProjectRef depRef;
 
 	/**
-	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUrl()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUrl()
+   * @generated
+   * @ordered
+   */
 	protected static final String URL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUrl()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUrl()
+   * @generated
+   * @ordered
+   */
 	protected String url = URL_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected DependencyImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return KpPackage.Literals.DEPENDENCY;
-	}
+    return KpPackage.Literals.DEPENDENCY;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getGroup() {
-		return group;
-	}
+    return group;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setGroup(String newGroup) {
-		String oldGroup = group;
-		group = newGroup;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__GROUP, oldGroup, group));
-	}
+    String oldGroup = group;
+    group = newGroup;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__GROUP, oldGroup, group));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getVersion() {
-		return version;
-	}
+    return version;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setVersion(String newVersion) {
-		String oldVersion = version;
-		version = newVersion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__VERSION, oldVersion, version));
-	}
+    String oldVersion = version;
+    version = newVersion;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__VERSION, oldVersion, version));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KermetaProjectRef getDepRef() {
-		if (depRef != null && depRef.eIsProxy()) {
-			InternalEObject oldDepRef = (InternalEObject)depRef;
-			depRef = (KermetaProjectRef)eResolveProxy(oldDepRef);
-			if (depRef != oldDepRef) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.DEPENDENCY__DEP_REF, oldDepRef, depRef));
-			}
-		}
-		return depRef;
-	}
+    if (depRef != null && depRef.eIsProxy())
+    {
+      InternalEObject oldDepRef = (InternalEObject)depRef;
+      depRef = (KermetaProjectRef)eResolveProxy(oldDepRef);
+      if (depRef != oldDepRef)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.DEPENDENCY__DEP_REF, oldDepRef, depRef));
+      }
+    }
+    return depRef;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public KermetaProjectRef basicGetDepRef() {
-		return depRef;
-	}
+    return depRef;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setDepRef(KermetaProjectRef newDepRef) {
-		KermetaProjectRef oldDepRef = depRef;
-		depRef = newDepRef;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__DEP_REF, oldDepRef, depRef));
-	}
+    KermetaProjectRef oldDepRef = depRef;
+    depRef = newDepRef;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__DEP_REF, oldDepRef, depRef));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getUrl() {
-		return url;
-	}
+    return url;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setUrl(String newUrl) {
-		String oldUrl = url;
-		url = newUrl;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__URL, oldUrl, url));
-	}
+    String oldUrl = url;
+    url = newUrl;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__URL, oldUrl, url));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KpPackage.DEPENDENCY__GROUP:
-				return getGroup();
-			case KpPackage.DEPENDENCY__VERSION:
-				return getVersion();
-			case KpPackage.DEPENDENCY__DEP_REF:
-				if (resolve) return getDepRef();
-				return basicGetDepRef();
-			case KpPackage.DEPENDENCY__URL:
-				return getUrl();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case KpPackage.DEPENDENCY__GROUP:
+        return getGroup();
+      case KpPackage.DEPENDENCY__VERSION:
+        return getVersion();
+      case KpPackage.DEPENDENCY__DEP_REF:
+        if (resolve) return getDepRef();
+        return basicGetDepRef();
+      case KpPackage.DEPENDENCY__URL:
+        return getUrl();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KpPackage.DEPENDENCY__GROUP:
-				setGroup((String)newValue);
-				return;
-			case KpPackage.DEPENDENCY__VERSION:
-				setVersion((String)newValue);
-				return;
-			case KpPackage.DEPENDENCY__DEP_REF:
-				setDepRef((KermetaProjectRef)newValue);
-				return;
-			case KpPackage.DEPENDENCY__URL:
-				setUrl((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case KpPackage.DEPENDENCY__GROUP:
+        setGroup((String)newValue);
+        return;
+      case KpPackage.DEPENDENCY__VERSION:
+        setVersion((String)newValue);
+        return;
+      case KpPackage.DEPENDENCY__DEP_REF:
+        setDepRef((KermetaProjectRef)newValue);
+        return;
+      case KpPackage.DEPENDENCY__URL:
+        setUrl((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KpPackage.DEPENDENCY__GROUP:
-				setGroup(GROUP_EDEFAULT);
-				return;
-			case KpPackage.DEPENDENCY__VERSION:
-				setVersion(VERSION_EDEFAULT);
-				return;
-			case KpPackage.DEPENDENCY__DEP_REF:
-				setDepRef((KermetaProjectRef)null);
-				return;
-			case KpPackage.DEPENDENCY__URL:
-				setUrl(URL_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.DEPENDENCY__GROUP:
+        setGroup(GROUP_EDEFAULT);
+        return;
+      case KpPackage.DEPENDENCY__VERSION:
+        setVersion(VERSION_EDEFAULT);
+        return;
+      case KpPackage.DEPENDENCY__DEP_REF:
+        setDepRef((KermetaProjectRef)null);
+        return;
+      case KpPackage.DEPENDENCY__URL:
+        setUrl(URL_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KpPackage.DEPENDENCY__GROUP:
-				return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
-			case KpPackage.DEPENDENCY__VERSION:
-				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case KpPackage.DEPENDENCY__DEP_REF:
-				return depRef != null;
-			case KpPackage.DEPENDENCY__URL:
-				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case KpPackage.DEPENDENCY__GROUP:
+        return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
+      case KpPackage.DEPENDENCY__VERSION:
+        return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+      case KpPackage.DEPENDENCY__DEP_REF:
+        return depRef != null;
+      case KpPackage.DEPENDENCY__URL:
+        return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (group: ");
-		result.append(group);
-		result.append(", version: ");
-		result.append(version);
-		result.append(", url: ");
-		result.append(url);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (group: ");
+    result.append(group);
+    result.append(", version: ");
+    result.append(version);
+    result.append(", url: ");
+    result.append(url);
+    result.append(')');
+    return result.toString();
+  }
 
 } //DependencyImpl

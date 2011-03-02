@@ -34,7 +34,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="folderName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SourceFile" eSuperTypes="#//Source">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SourceNSURI" eSuperTypes="#//ImportedSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="SourceQuery" eSuperTypes="#//ImportedSource">

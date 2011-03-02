@@ -34,7 +34,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//SourceFolder/folderName"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//SourceFile">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//SourceFile/FileName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//SourceFile/fileName"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//SourceNSURI"/>
     <genClasses ecoreClass="KermetaProject.ecore#//SourceQuery">
