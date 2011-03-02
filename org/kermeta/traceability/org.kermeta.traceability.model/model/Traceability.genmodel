@@ -2,54 +2,55 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.traceability.model/src"
-    modelPluginID="org.kermeta.traceability.model" modelName="Traceability" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false">
+    modelPluginID="org.kermeta.traceability.model" modelName="Traceability" featureMapWrapperInterface=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
   <foreignModel>Traceability.ecore</foreignModel>
-  <genPackages prefix="Traceability" basePackage="org.kermeta" disposableProviderFactory="true"
-      ecorePackage="Traceability.ecore#/">
-    <genDataTypes ecoreDataType="Traceability.ecore#//String"/>
-    <genDataTypes ecoreDataType="Traceability.ecore#//Integer"/>
-    <genDataTypes ecoreDataType="Traceability.ecore#//Object"/>
-    <genDataTypes ecoreDataType="Traceability.ecore#//Date"/>
-    <genClasses ecoreClass="Traceability.ecore#//TraceModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//TraceModel/traces"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//TraceModel/references"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//TraceModel/messages"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//Message">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//Message/language"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//Message/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//Message/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Message/traces"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Traceability.ecore#//Message/traceMdl"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//Trace">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Trace/sourceReferences"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Trace/targetReferences"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Trace/description"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Traceability.ecore#//Trace/traceMdl"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="Traceability.ecore#//Reference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Reference/targetTraces"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//Reference/sourceTraces"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Traceability.ecore#//Reference/traceMdl"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="Traceability.ecore#//FileReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//FileReference/fileURI"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//FileReference/timeStamp"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//TextReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charBeginOffset"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//TextReference/charEndOffset"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//XMLReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//XMLReference/xPointer"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//ModelReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Traceability.ecore#//ModelReference/refObject"/>
-    </genClasses>
-    <genClasses ecoreClass="Traceability.ecore#//QualifiedNameReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//QualifiedNameReference/qualifiedName"/>
-    </genClasses>
+  <genPackages prefix="Traceability" disposableProviderFactory="true" ecorePackage="Traceability.ecore#/">
+    <nestedGenPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="Traceability.ecore#//kermeta">
+      <nestedGenPackages prefix="Traceability" disposableProviderFactory="true" ecorePackage="Traceability.ecore#//kermeta/traceability">
+        <genDataTypes ecoreDataType="Traceability.ecore#//kermeta/traceability/String"/>
+        <genDataTypes ecoreDataType="Traceability.ecore#//kermeta/traceability/Integer"/>
+        <genDataTypes ecoreDataType="Traceability.ecore#//kermeta/traceability/Object"/>
+        <genDataTypes ecoreDataType="Traceability.ecore#//kermeta/traceability/Date"/>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/TracePackage">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/TracePackage/references"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/TracePackage/subpackage"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/TracePackage/contexts"/>
+        </genClasses>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/Trace">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Trace/sourceElem"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Trace/targetElem"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Trace/context"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="Traceability.ecore#//kermeta/traceability/Reference">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Reference/traceMdl"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="Traceability.ecore#//kermeta/traceability/FileReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/FileReference/fileURI"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/FileReference/timeStamp"/>
+        </genClasses>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/TextReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/TextReference/charBeginOffset"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/TextReference/charEndOffset"/>
+        </genClasses>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/XMLReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/XMLReference/xPointer"/>
+        </genClasses>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/ModelReference">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/ModelReference/refObject"/>
+        </genClasses>
+        <genClasses ecoreClass="Traceability.ecore#//kermeta/traceability/QualifiedNameReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Traceability.ecore#//kermeta/traceability/QualifiedNameReference/qualifiedName"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="Traceability.ecore#//kermeta/traceability/Traceable">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Traceable/target"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference Traceability.ecore#//kermeta/traceability/Traceable/source"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

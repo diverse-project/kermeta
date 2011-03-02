@@ -1,113 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="traceability"
-    nsURI="http://www.kermeta.org/Traceability/2.0.0" nsPrefix="traceability">
-  <eAnnotations source="kermeta.req">
-    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
-  </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="TracePackage">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a trace model.&#xD;&#xA; * This is a set of traces, references and messages.&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" ordered="false"
-        upperBound="-1" eType="#//Reference" containment="true" eOpposite="#//Reference/traceMdl">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Set of references to the traced objects of the trace model */"/>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
+    nsURI="http://www.kermeta.org/Traceability/2.0.0/" nsPrefix="org">
+  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/Traceability/2.0.0//org/kermeta"
+      nsPrefix="org_kermeta">
+    <eSubpackages name="traceability" nsURI="http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
+        nsPrefix="org_kermeta_traceability">
+      <eAnnotations source="kermeta.req">
+        <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"
+            value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
       </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subpackage" upperBound="-1"
-        eType="#//TracePackage" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contexts" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Trace">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a trace element&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElem" eType="#//Traceable"
-        eOpposite="#//Traceable/target"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetElem" eType="#//Traceable"
-        eOpposite="#//Traceable/source"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true" eSuperTypes="#//Traceable">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This abstract class represents a reference to a concrete object&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="traceMdl" lowerBound="1"
-        eType="#//TracePackage" eOpposite="#//TracePackage/references">
-      <eAnnotations source="kermeta">
-        <details key="documentation" value="/** Link to the containing trace model */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FileReference" abstract="true" eSuperTypes="#//Reference">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a concrete object contained by a file&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileURI" lowerBound="1"
-        eType="#//String">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** URI of the file containing the referred concrete object */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="#//Date"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="#//FileReference">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a textual file concrete object&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eAnnotations source="kermeta.inv">
-      <details key="validTextRef" value="do&#xD;&#xA;&#x9;charEndOffset.isGreaterOrEqual(charBeginOffset)&#xD;&#xA;end"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginOffset" lowerBound="1"
-        eType="#//Integer">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** Starting line number */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndOffset" lowerBound="1"
-        eType="#//Integer">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** Starting character number */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XMLReference" eSuperTypes="#//FileReference">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a XML concrete object&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPointer" lowerBound="1"
-        eType="#//String">
-      <eAnnotations source="kermeta">
-        <details key="isComposite" value="true"/>
-        <details key="documentation" value="/** XML link to the referred XML concrete object */"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelReference" eSuperTypes="#//Reference">
-    <eAnnotations source="kermeta">
-      <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a model element&#xD;&#xA; */"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
-  <eClassifiers xsi:type="ecore:EClass" name="QualifiedNameReference" eSuperTypes="#//Reference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
-        eType="#//String"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Traceable" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
-        eType="#//Trace" containment="true" eOpposite="#//Trace/sourceElem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
-        eType="#//Trace" eOpposite="#//Trace/targetElem"/>
-  </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TracePackage">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a trace model.&#xD;&#xA; * This is a set of traces, references and messages.&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="references" ordered="false"
+            upperBound="-1" eType="#//kermeta/traceability/Reference" containment="true"
+            eOpposite="#//kermeta/traceability/Reference/traceMdl">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** Set of references to the traced objects of the trace model */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="subpackage" upperBound="-1"
+            eType="#//kermeta/traceability/TracePackage" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="contexts" upperBound="-1"
+            eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Trace">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a trace element&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElem" eType="#//kermeta/traceability/Traceable"
+            eOpposite="#//kermeta/traceability/Traceable/target"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="targetElem" eType="#//kermeta/traceability/Traceable"
+            eOpposite="#//kermeta/traceability/Traceable/source"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true" eSuperTypes="#//kermeta/traceability/Traceable">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This abstract class represents a reference to a concrete object&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="traceMdl" lowerBound="1"
+            eType="#//kermeta/traceability/TracePackage" eOpposite="#//kermeta/traceability/TracePackage/references">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** Link to the containing trace model */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="FileReference" abstract="true" eSuperTypes="#//kermeta/traceability/Reference">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a concrete object contained by a file&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileURI" lowerBound="1"
+            eType="#//kermeta/traceability/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/** URI of the file containing the referred concrete object */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="#//kermeta/traceability/Date"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="#//kermeta/traceability/FileReference">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a textual file concrete object&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.inv">
+          <details key="validTextRef" value="do&#xD;&#xA;&#x9;charEndOffset.isGreaterOrEqual(charBeginOffset)&#xD;&#xA;end"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginOffset" lowerBound="1"
+            eType="#//kermeta/traceability/Integer">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/** Starting line number */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndOffset" lowerBound="1"
+            eType="#//kermeta/traceability/Integer">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/** Starting character number */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="XMLReference" eSuperTypes="#//kermeta/traceability/FileReference">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a XML concrete object&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPointer" lowerBound="1"
+            eType="#//kermeta/traceability/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/** XML link to the referred XML concrete object */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelReference" eSuperTypes="#//kermeta/traceability/Reference">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a model element&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" lowerBound="1"
+            eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+      <eClassifiers xsi:type="ecore:EClass" name="QualifiedNameReference" eSuperTypes="#//kermeta/traceability/Reference">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+            eType="#//kermeta/traceability/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Traceable" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+            eType="#//kermeta/traceability/Trace" containment="true" eOpposite="#//kermeta/traceability/Trace/sourceElem"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
+            eType="#//kermeta/traceability/Trace" eOpposite="#//kermeta/traceability/Trace/targetElem"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
 </ecore:EPackage>
