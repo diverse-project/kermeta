@@ -31,7 +31,9 @@ public class RunWithKp {
 		List<String> uris = new ArrayList<String>();
 		List<String> classpath = new ArrayList<String>();
 		String propertiesfilePath = "";
-		String kpUrlFile = "src/main/resource/kp/sample.kpt";
+		//String kpUrlFile = "src/main/resource/kp/sample.kpt";
+		String kpUrlFile = "src/main/resource/kp/newSample.kpt";
+		
 		
 		/*((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
 		.setWrap(binaryMerger.org.eclipse.emf.ecore.RichFactory$.MODULE$);*/
@@ -52,8 +54,8 @@ public class RunWithKp {
 		
 		List<Source> srcs = kp.getSources();
 		for (Source src : srcs ){
-			String uri = ((SourceFolder) src).getFolderName();
-			System.out.println("URI IS : " + uri);
+			String uri = src.getUrl();
+			System.out.println("URI IS : " + uri +" from : "+ src.toString());
 			uris.add(uri);
 		}
 		propertiesfilePath = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/compileProject/properties/Compiler.properties";
