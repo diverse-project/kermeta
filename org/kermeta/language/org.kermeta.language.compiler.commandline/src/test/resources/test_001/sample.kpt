@@ -1,0 +1,17 @@
+KermetaProject :"new_file.kpt" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "src/test/resources/test_001/001_testHelloWorld_standalone.kmt" 
+	//source = "foo" 
+	//source = "*/org/eclipse/uml2.ecore" from "uml2" 
+	//source = ECORE_NSURI from "ecore" 
+	// import the same ecore file in 2 variants : uml2 and uml2.1 
+	//source = "**/uml2.ecore um2" from "uml2_dep"
+	//source = "**/uml2.ecore um2.1" from "uml2_dep" 
+	
+	//dependency "new_file.kp" 
+	 
+} 
+
+ 
