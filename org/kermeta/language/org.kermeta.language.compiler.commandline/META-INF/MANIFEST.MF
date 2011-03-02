@@ -12,5 +12,5 @@ Bundle-Version: 2.0.1.SNAPSHOT
 Bnd-LastModified: 1298985761062
 Bundle-ManifestVersion: 2
 Import-Package: org.osgi.framework;version="[1.5,2)"
-Bundle-SymbolicName: org.kermeta.language.compiler.commandline
+Bundle-SymbolicName: org.kermeta.kp.compiler.commandline
 

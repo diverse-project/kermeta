@@ -9,9 +9,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>language.compiler.commandline</artifactId>
+    <groupId>org.kermeta.kp</groupId>
+    <artifactId>kp.compiler.commandline</artifactId>
     <packaging>bundle</packaging>
-    <name>language.compiler.commandline :: CommandLine interface for Kermeta 2 bytecode</name>
+    <name>kp.compiler.commandline :: CommandLine interface for Kermeta 2 bytecode</name>
     
     <parent>
         <groupId>org.kermeta.language</groupId>
