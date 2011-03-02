@@ -7,31 +7,18 @@
  */
 package org.kermeta.language.compiler.commandline;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceFolder;
 import org.kermeta.kp.loader.kp.KpLoader;
-import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.scala.parser.KParser;
-
-import scala.Option;
-import scala.collection.Iterator;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
 /**
  * Basic compilation process for Kermeta2
@@ -80,6 +67,16 @@ public class KermetaCompiler {
 		
 		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp);
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
+		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
+		//save resolvedUnit to the META-INF/kermeta/merged.km
+		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+		FileWriter writer = new FileWriter(new File(targetFolder+"/META-INF/kermeta/merged.km"));
+		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
+		writer.close();
+		
+		
+		// TODO deal with km to scala
+		// TODO deal with scala to bytecode
 	}	
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp) throws IOException {
@@ -108,64 +105,46 @@ public class KermetaCompiler {
 	}
 	
 	public ModelingUnit mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
-
-		List<ByteArrayOutputStream> modelingunit_ser = new ArrayList<ByteArrayOutputStream>();
+		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		// Convert Modellingunit For Merger
-		MainRunner.init4eclipse();
-		for (ModelingUnit mu : modelingUnits){
-			modelingunit_ser.add( this.saveMu(mu));
+		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
+		for (ModelingUnit mu : modelingUnits){			
+			convertedModellingUnits.add( new ModelingUnitConverter().convert(mu));
 		}
-		MainRunner.init4eclipse();
+		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
 		
-		
-		return null;
+		// merge
+		ModelingUnit mergedMU = convertedModellingUnits.get(0);		
+		if (convertedModellingUnits.size()>1){
+			org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.RichFactory
+			.createBinaryMerger();
+			for (int i = 1;i<convertedModellingUnits.size();i++){
+				mergedMU = b.merge(mergedMU, convertedModellingUnits.get(i));
+			}			
+		}
+
+		return mergedMU;
 	}
 	
 	
-	// used to convert Modeling unit from an aspect to another
-	protected ByteArrayOutputStream saveMu(ModelingUnit mu) throws IOException {
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		URI uri = URI
-				.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km_in_memory")
-						.replaceAll("::", "."));
-		Map<String, String> options = null;
-		if (mu.eResource() != null) {
-			uri = mu.eResource().getURI();
-		} else {
-			// let's suppose that the ModelingUnit contains everything
-			// (otherwise we would have to look for references and save them too
-			// ...)
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
-			resourceSet.getPackageRegistry().put(BehaviorPackage.eNS_URI, BehaviorPackage.eINSTANCE);
-			Resource.Factory.Registry f = resourceSet
-					.getResourceFactoryRegistry();
-			Map<String, Object> m = f.getExtensionToFactoryMap();
-			m.put("km_in_memory", new XMIResourceFactoryImpl());
-			Resource resource = resourceSet.createResource(uri);
-			resource.getContents().add(mu);
-		}
-		mu.eResource().save(outputStream, options);
-
-		return outputStream;
+	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
+		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetFolder+"/intermediate/beforeResolving.km").convert(mu);
+		
+		//Resolving
+		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
+		.createFullStaticResolver();
+		
+		ModelingUnit resolvedMU = resolver.doResolving(convertedModelingUnit);
+		resolver.checkUnresolved(resolvedMU);
+				
+		
+		//StaticSetting
+		ModelingUnit staticsettedMU = resolver.doStaticSetting(resolvedMU);
+		//End of Resolving
+		return staticsettedMU;
 	}
-
-	protected ModelingUnit LoadMu(ByteArrayOutputStream mu) throws IOException {
-
-		Map<String, String> options = null;
-		// Call init;
-
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(BehaviorPackage.eNS_URI, BehaviorPackage.eINSTANCE);
-
-		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-		Map<String, Object> m = f.getExtensionToFactoryMap();
-		m.put("*", new XMIResourceFactoryImpl());
-		Resource resource = resourceSet.createResource(uri);
-		resource.load(new ByteArrayInputStream(mu.toByteArray()), options);
-		// let's suppose the ModelingUnit is the first element in the root
-		return (ModelingUnit) resource.getContents().get(0);
-
-	}
+	
+	
+	
 }
