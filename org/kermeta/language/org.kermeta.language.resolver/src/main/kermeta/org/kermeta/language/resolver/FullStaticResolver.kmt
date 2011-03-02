@@ -76,6 +76,9 @@ class FullStaticResolver
        	       	
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
+       	checkDangling(unresolvedModelingUnit.containingResource())       	
+
+       	
        	result := unresolvedModelingUnit
 	end
 	
@@ -116,6 +119,31 @@ class FullStaticResolver
 				checkUnresolved(p.asType(org::kermeta::language::structure::NamedElement))
 			end
 			p
+		}
+	end
+	
+	operation checkDangling(unresolvedModelResource : Resource) : Void is do
+		var report : Set<DanglingDiagnostic>
+	 	report := unresolvedModelResource.findDanglingModelElements()
+	 	report.each{ diag |
+	 		var danglingName : String init ""
+	 		var referencingName : String init ""
+	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
+			diag.referencingProperty.name + referencingName)
 		}
 	end
 	
