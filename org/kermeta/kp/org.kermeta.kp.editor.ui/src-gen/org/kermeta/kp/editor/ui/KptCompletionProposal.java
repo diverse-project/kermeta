@@ -10,35 +10,53 @@ package org.kermeta.kp.editor.ui;
  * A proposal for completing an incomplete document.
  */
 public class KptCompletionProposal implements java.lang.Comparable<KptCompletionProposal> {
-	private java.lang.String insertString;
-	private java.lang.String prefix;
-	private boolean startsWithPrefix;
-	private boolean structuralFeature;
+	private String insertString;
+	private String displayString;
+	private String prefix;
+	private boolean matchesPrefix;
+	private org.eclipse.emf.ecore.EStructuralFeature structuralFeature;
+	private org.eclipse.emf.ecore.EObject container;
 	private org.eclipse.swt.graphics.Image image;
 	
-	public KptCompletionProposal(java.lang.String insertString, java.lang.String prefix, boolean startsWithPrefix, boolean structuralFeature, org.eclipse.swt.graphics.Image image) {
-		this(insertString, prefix, startsWithPrefix, structuralFeature);
-		this.image = image;
-	}
-	
-	public KptCompletionProposal(java.lang.String insertString, java.lang.String prefix, boolean startsWithPrefix, boolean structuralFeature) {
+	public KptCompletionProposal(String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container) {
 		super();
 		this.insertString = insertString;
 		this.prefix = prefix;
-		this.startsWithPrefix = startsWithPrefix;
+		this.matchesPrefix = matchesPrefix;
 		this.structuralFeature = structuralFeature;
+		this.container = container;
 	}
 	
-	public java.lang.String getInsertString() {
+	public KptCompletionProposal(String insertString, String prefix, boolean startsWithPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image) {
+		this(insertString, prefix, startsWithPrefix, structuralFeature, container);
+		this.image = image;
+	}
+	
+	public KptCompletionProposal(String insertString, String prefix, boolean startsWithPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image, String displayString) {
+		this(insertString, prefix, startsWithPrefix, structuralFeature, container, image);
+		this.displayString = displayString;
+	}
+	
+	public String getInsertString() {
 		return insertString;
 	}
 	
-	public java.lang.String getPrefix() {
+	public String getDisplayString() {
+		return displayString;
+	}
+	
+	public String getPrefix() {
 		return prefix;
 	}
 	
-	public boolean getStartsWithPrefix() {
-		return startsWithPrefix;
+	/**
+	 * Returns true if this proposal matched the prefix. This does not imply that the
+	 * proposal exactly starts with the prefix, it can also match case-insensitive or
+	 * using the camel case style. Only proposals that return true will be considered
+	 * for the final list of proposals that is presented in the editor.
+	 */
+	public boolean getMatchesPrefix() {
+		return matchesPrefix;
 	}
 	
 	public org.eclipse.swt.graphics.Image getImage() {
@@ -46,7 +64,15 @@ public class KptCompletionProposal implements java.lang.Comparable<KptCompletion
 	}
 	
 	public boolean isStructuralFeature() {
+		return structuralFeature != null;
+	}
+	
+	public org.eclipse.emf.ecore.EStructuralFeature getStructuralFeature() {
 		return structuralFeature;
+	}
+	
+	public org.eclipse.emf.ecore.EObject getContainer() {
+		return container;
 	}
 	
 	public boolean equals(Object object) {
@@ -65,7 +91,7 @@ public class KptCompletionProposal implements java.lang.Comparable<KptCompletion
 		if (object instanceof KptCompletionProposal) {
 			KptCompletionProposal other = (KptCompletionProposal) object;
 			// proposals that start with the prefix are preferred over the ones that do not
-			int startCompare = (startsWithPrefix ? 1 : 0) - (other.getStartsWithPrefix() ? 1 : 0);
+			int startCompare = (matchesPrefix ? 1 : 0) - (other.getMatchesPrefix() ? 1 : 0);
 			// if both proposals start with the prefix of both do not the insert string is
 			// compared
 			return startCompare == 0 ? getInsertString().compareTo(other.getInsertString()) : -startCompare;

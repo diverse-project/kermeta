@@ -23,13 +23,6 @@ public class KptPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		store.setDefault(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR, "192,192,192");
 		store.setDefault(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX, true);
 		
-		// Set default value for occurrences
-		store.setDefault(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_OCCURRENCE_CHECKBOX, true);
-		store.setDefault(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_DEFINITION_COLOR, "240,216,168");
-		store.setDefault(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_PROXY_COLOR, "212,212,212");
-		
-		// store.setDefault(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_OVERVIEW_
-		// RULER, true);
 	}
 	
 	private void initializeDefaultBrackets() {

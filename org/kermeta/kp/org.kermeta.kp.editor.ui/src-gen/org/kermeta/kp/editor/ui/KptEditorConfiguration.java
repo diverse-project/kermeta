@@ -14,6 +14,7 @@ public class KptEditorConfiguration extends org.eclipse.jface.text.source.Source
 	
 	private org.kermeta.kp.editor.ui.KptColorManager colorManager;
 	private org.kermeta.kp.editor.ui.KptEditor theEditor;
+	private org.kermeta.kp.editor.ui.KptQuickAssistAssistant quickAssistAssistant;
 	
 	/**
 	 * Creates a new editor configuration.
@@ -45,7 +46,7 @@ public class KptEditorConfiguration extends org.eclipse.jface.text.source.Source
 	}
 	
 	protected org.eclipse.jface.text.rules.ITokenScanner getScanner(String fileName) {
-		return new org.kermeta.kp.editor.ui.KptTokenScanner(colorManager);
+		return new org.kermeta.kp.editor.ui.KptTokenScanner(theEditor.getResource(), colorManager);
 	}
 	
 	public org.eclipse.jface.text.presentation.IPresentationReconciler getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
@@ -73,6 +74,13 @@ public class KptEditorConfiguration extends org.eclipse.jface.text.source.Source
 			return null;
 		}
 		return new org.eclipse.jface.text.hyperlink.IHyperlinkDetector[] { new org.kermeta.kp.editor.ui.KptHyperlinkDetector(theEditor.getResource()) };
+	}
+	
+	public org.eclipse.jface.text.quickassist.IQuickAssistAssistant getQuickAssistAssistant(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
+		if (quickAssistAssistant == null) {
+			quickAssistAssistant = new org.kermeta.kp.editor.ui.KptQuickAssistAssistant(theEditor);
+		}
+		return quickAssistAssistant;
 	}
 	
 }

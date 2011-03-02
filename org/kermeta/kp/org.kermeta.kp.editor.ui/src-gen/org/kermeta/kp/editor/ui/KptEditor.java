@@ -23,25 +23,13 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	private org.kermeta.kp.editor.ui.KptPropertySheetPage propertySheetPage;
 	private org.eclipse.emf.edit.domain.EditingDomain editingDomain;
 	private org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory;
-	private org.eclipse.swt.widgets.Display display;
 	private org.kermeta.kp.editor.ui.IKptBracketHandler bracketHandler;
 	
 	public KptEditor() {
 		super();
-		setDocumentProvider(new org.eclipse.ui.editors.text.FileDocumentProvider());
 		setSourceViewerConfiguration(new org.kermeta.kp.editor.ui.KptEditorConfiguration(this, colorManager));
 		initializeEditingDomain();
-		addBackgroundParsingListener(new MarkerUpdateListener());
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
-	}
-	
-	private final class MarkerUpdateListener implements org.kermeta.kp.editor.IKptBackgroundParsingListener {
-		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource parsedResource) {
-			if (parsedResource != null && parsedResource.getErrors().isEmpty()) {
-				org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(parsedResource);
-			}
-			refreshMarkers(parsedResource);
-		}
 	}
 	
 	/**
@@ -88,7 +76,6 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 								if (currentResource != null && currentResource.getErrors().isEmpty()) {
 									org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(currentResource);
 								}
-								refreshMarkers(currentResource);
 								// reset the selected element in outline and properties by text position
 								if (highlighting != null) {
 									highlighting.setEObjectSelection();
@@ -113,7 +100,7 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		setEditorContextMenuId("org.kermeta.kp.editor.EditorContext");
 	}
 	
-	public java.lang.Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
 		if (org.eclipse.ui.views.contentoutline.IContentOutlinePage.class.equals(required)) {
 			return getOutlinePage();
 		} else if (required.equals(org.eclipse.ui.views.properties.IPropertySheetPage.class)) {
@@ -124,10 +111,6 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
 		super.createPartControl(parent);
-		display = parent.getShell().getDisplay();
-		// we might need to refresh the markers, because the display was not set before,
-		// which prevents updates of the markers
-		refreshMarkers(getResource());
 		
 		// Code Folding
 		org.eclipse.jface.text.source.projection.ProjectionViewer viewer = (org.eclipse.jface.text.source.projection.ProjectionViewer) getSourceViewer();
@@ -177,7 +160,7 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 					// close this editor because it can not present the resource
 					close(false);
 				}
-			} catch (java.lang.Exception e) {
+			} catch (Exception e) {
 				org.kermeta.kp.editor.ui.KptUIPlugin.logError("Exception while loading resource in " + this.getClass().getSimpleName() + ".", e);
 			}
 		} else {
@@ -193,8 +176,6 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	protected void performSave(boolean overwrite, org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		
 		super.performSave(overwrite, progressMonitor);
-		// update markers after the resource has been reloaded
-		refreshMarkers(getResource());
 		
 		// Save code folding state
 		codeFoldingManager.saveCodeFoldingStateFile(getResource().getURI().toString());
@@ -249,7 +230,7 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				if (newFile.getErrors().isEmpty()) {
 					newFile.save(null);
 				}
-			} catch (java.lang.Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -270,10 +251,9 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		if (this.resource.getErrors().isEmpty()) {
 			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.resource);
 		}
-		refreshMarkers(this.resource);
 	}
 	
-	private java.lang.Object getOutlinePage() {
+	private Object getOutlinePage() {
 		if (outlinePage == null) {
 			outlinePage = new org.kermeta.kp.editor.ui.KptOutlinePage(this);
 			outlinePage.addSelectionChangedListener(highlighting);
@@ -286,9 +266,9 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		if (propertySheetPage == null) {
 			propertySheetPage = new org.kermeta.kp.editor.ui.KptPropertySheetPage();
 			// add a slightly modified adapter factory that does not return any editors for
-			// properties. this way, a model can never be modified through the propertiesview.
+			// properties. this way, a model can never be modified through the properties view.
 			propertySheetPage.setPropertySourceProvider(new org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider(adapterFactory) {
-				protected org.eclipse.ui.views.properties.IPropertySource createPropertySource(java.lang.Object object, org.eclipse.emf.edit.provider.IItemPropertySource itemPropertySource) {
+				protected org.eclipse.ui.views.properties.IPropertySource createPropertySource(Object object, org.eclipse.emf.edit.provider.IItemPropertySource itemPropertySource) {
 					return new org.eclipse.emf.edit.ui.provider.PropertySource(object, itemPropertySource) {
 						protected org.eclipse.ui.views.properties.IPropertyDescriptor createPropertyDescriptor(org.eclipse.emf.edit.provider.IItemPropertyDescriptor itemPropertyDescriptor) {
 							return new org.eclipse.emf.edit.ui.provider.PropertyDescriptor(object, itemPropertyDescriptor) {
@@ -357,8 +337,8 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				destination = 0;
 			}
 			viewer.getTextWidget().setSelection(destination);
-		} catch (java.lang.Exception e) {
-			org.kermeta.kp.editor.ui.KptUIPlugin.logError("java.lang.Exception in setCaret()", e);
+		} catch (Exception e) {
+			org.kermeta.kp.editor.ui.KptUIPlugin.logError("Exception in setCaret()", e);
 		}
 	}
 	
@@ -379,30 +359,76 @@ public class KptEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		}
 	}
 	
-	private void refreshMarkers(final org.eclipse.emf.ecore.resource.Resource resourceToRefresh) {
-		if (resourceToRefresh == null) {
-			return;
-		}
-		if (display != null) {
-			display.asyncExec(new java.lang.Runnable() {
-				public void run() {
-					try {
-						org.kermeta.kp.editor.ui.KptMarkerHelper.unmark(resourceToRefresh);
-						org.kermeta.kp.editor.ui.KptMarkerHelper.mark(resourceToRefresh);
-					} catch (org.eclipse.core.runtime.CoreException e) {
-						org.kermeta.kp.editor.ui.KptUIPlugin.logError("Exception while updating markers on resource", e);
-					}
-				}
-			});
-		}
-	}
-	
 	public org.kermeta.kp.editor.ui.IKptBracketHandler getBracketHandler() {
 		return bracketHandler;
 	}
 	
 	public void setBracketHandler(org.kermeta.kp.editor.ui.IKptBracketHandler bracketHandler) {
 		this.bracketHandler = bracketHandler;
+	}
+	
+	public void createActions() {
+		super.createActions();
+		java.util.ResourceBundle resourceBundle = new java.util.ResourceBundle() {
+			public java.util.Enumeration<String> getKeys() {
+				java.util.List<String> keys = new java.util.ArrayList<String>(3);
+				keys.add("SelectAnnotationRulerAction.QuickFix.label");
+				keys.add("SelectAnnotationRulerAction.QuickFix.tooltip");
+				keys.add("SelectAnnotationRulerAction.QuickFix.description");
+				return java.util.Collections.enumeration(keys);
+			}
+			public Object handleGetObject(String key) {
+				if (key.equals("SelectAnnotationRulerAction.QuickFix.label")) return "&Quick Fix";
+				if (key.equals("SelectAnnotationRulerAction.QuickFix.tooltip")) return "Quick Fix";
+				if (key.equals("SelectAnnotationRulerAction.QuickFix.description")) return "Runs Quick Fix on the annotation's line";
+				return null;
+			}
+		};
+		setAction(org.eclipse.ui.texteditor.ITextEditorActionConstants.RULER_CLICK, new org.eclipse.ui.texteditor.SelectMarkerRulerAction(resourceBundle, "SelectAnnotationRulerAction.", this, getVerticalRuler()) {
+			public void run() {
+				runWithEvent(null);
+			}
+			
+			public void runWithEvent(org.eclipse.swt.widgets.Event event) {
+				org.eclipse.jface.text.ITextOperationTarget operation = (org.eclipse.jface.text.ITextOperationTarget) getAdapter(org.eclipse.jface.text.ITextOperationTarget.class);
+				final int opCode = org.eclipse.jface.text.source.ISourceViewer.QUICK_ASSIST;
+				if (operation != null && operation.canDoOperation(opCode)) {
+					org.eclipse.jface.text.Position position = getPosition();
+					if (position != null) {
+						selectAndReveal(position.getOffset(), position.getLength());
+					}
+					operation.doOperation(opCode);
+				}
+			}
+			
+			private org.eclipse.jface.text.Position getPosition() {
+				org.eclipse.ui.texteditor.AbstractMarkerAnnotationModel model = getAnnotationModel();
+				org.eclipse.jface.text.source.IAnnotationAccessExtension  annotationAccess = getAnnotationAccessExtension();
+				
+				org.eclipse.jface.text.IDocument document = getDocument();
+				if (model == null)				return null;
+				
+				java.util.Iterator<?> iter = model.getAnnotationIterator();
+				int layer = Integer.MIN_VALUE;
+				
+				while (iter.hasNext()) {
+					org.eclipse.jface.text.source.Annotation annotation = (org.eclipse.jface.text.source.Annotation) iter.next();
+					if (annotation.isMarkedDeleted())					continue;
+					
+					int annotationLayer = annotationAccess.getLayer(annotation);
+					if (annotationAccess != null)					if (annotationLayer < layer)					continue;
+					
+					org.eclipse.jface.text.Position position = model.getPosition(annotation);
+					if (!includesRulerLine(position, document)) {
+						continue;
+					}
+					
+					return position;
+				}
+				return null;
+			}
+			
+		});
 	}
 	
 }

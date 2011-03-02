@@ -51,7 +51,7 @@ public class KptTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		public void setSelection(org.eclipse.jface.viewers.ISelection selection) {
 			this.selection = selection;
 			
-			java.lang.Object[] listeners = selectionChangedListeners.getListeners();
+			Object[] listeners = selectionChangedListeners.getListeners();
 			for (int i = 0; i < listeners.length; i++) {
 				((org.eclipse.jface.viewers.ISelectionChangedListener) listeners[i]).selectionChanged(new org.eclipse.jface.viewers.SelectionChangedEvent(this, selection));
 			}
@@ -119,12 +119,12 @@ public class KptTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 				final SimpleSelectionProvider selectionProvider = new SimpleSelectionProvider();
 				
 				org.eclipse.jface.text.IInputChangedListener inputChangeListener = new org.eclipse.jface.text.IInputChangedListener() {
-					public void inputChanged(java.lang.Object newInput) {
+					public void inputChanged(Object newInput) {
 						if (newInput == null) {
 							selectionProvider.setSelection(new org.eclipse.jface.viewers.StructuredSelection());
 						} else if (newInput instanceof org.kermeta.kp.editor.ui.KptDocBrowserInformationControlInput) {
 							org.kermeta.kp.editor.ui.KptDocBrowserInformationControlInput input = (org.kermeta.kp.editor.ui.KptDocBrowserInformationControlInput) newInput;
-							java.lang.Object inputElement = input.getInputElement();
+							Object inputElement = input.getInputElement();
 							selectionProvider.setSelection(new org.eclipse.jface.viewers.StructuredSelection(inputElement));
 							// If there is an element of type EObject in the input element, the button to open
 							// the declaration will be set enable
@@ -229,7 +229,7 @@ public class KptTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		return presenterControlCreator;
 	}
 	
-	public java.lang.Object getHoverInfo2(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
+	public Object getHoverInfo2(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
 		return hoverTextProvider == null ? null : internalGetHoverInfo(textViewer, hoverRegion);
 	}
 	

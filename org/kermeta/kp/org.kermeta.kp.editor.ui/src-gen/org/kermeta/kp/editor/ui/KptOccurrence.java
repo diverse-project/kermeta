@@ -11,14 +11,17 @@ package org.kermeta.kp.editor.ui;
  */
 public class KptOccurrence {
 	
+	public final static String OCCURRENCE_ANNOTATION_ID = "org.kermeta.kp.editor.ui.occurences";
+	public final static String DECLARATION_ANNOTATION_ID = "org.kermeta.kp.editor.ui.occurences.declaration";
+	
 	private final static org.kermeta.kp.editor.ui.KptPositionHelper positionHelper = new org.kermeta.kp.editor.ui.KptPositionHelper();
+	
 	private org.kermeta.kp.editor.ui.KptTokenScanner tokenScanner;
 	private java.util.List<String> quotedTokenArray;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
 	private org.kermeta.kp.editor.IKptTextResource textResource;
 	private String tokenText = "";
 	private org.eclipse.jface.text.Region tokenRegion;
-	private boolean isPositionsChanged = true;
 	
 	/**
 	 * Creates the Occurrence class to find position to highlight.
@@ -126,7 +129,6 @@ public class KptOccurrence {
 		}
 		int tokenRegionOffset = tokenRegion.getOffset();
 		if (caretOffset >= tokenRegionOffset && caretOffset <= tokenRegionOffset + tokenRegion.getLength()) {
-			isPositionsChanged = false;
 			return;
 		}
 		tokenRegion = new org.eclipse.jface.text.Region(-1,0);
@@ -155,7 +157,7 @@ public class KptOccurrence {
 				}
 				tokenText = text;
 				tokenRegion = new org.eclipse.jface.text.Region(tokenOffset, tokenLength);
-				isPositionsChanged = true;
+				removeAnnotations();
 				break;
 			}
 			token = tokenScanner.nextToken();
@@ -195,7 +197,7 @@ public class KptOccurrence {
 				String text = tokenScanner.getTokenText();
 				if (text.equals(tokenText)) {
 					defPosition = tokenScanner.getTokenOffset();
-					addPosition(document, org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION.toString());
+					addAnnotation(document, org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION, text);
 					break;
 				}
 				token = tokenScanner.nextToken();
@@ -210,7 +212,7 @@ public class KptOccurrence {
 				occEO = tryToResolve(locationMap.getElementsAt(tokenScanner.getTokenOffset()));
 				if (occEO != null) {
 					if ((isNull && elementsAtDefinition.contains(occEO)) || !isNull && definitionElement.equals(occEO)) {
-						addPosition(document, org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString());
+						addAnnotation(document, org.kermeta.kp.editor.ui.KptPositionCategory.PROXY, text);
 					}
 				}
 			}
@@ -218,10 +220,45 @@ public class KptOccurrence {
 		}
 	}
 	
-	private void addPosition(org.eclipse.jface.text.IDocument document, String positionCategory) {
+	private void addAnnotation(org.eclipse.jface.text.IDocument document, org.kermeta.kp.editor.ui.KptPositionCategory type, String text) {
 		int tokenOffset = tokenScanner.getTokenOffset();
 		int tokenLength = tokenScanner.getTokenLength();
-		positionHelper.addPosition(document, positionCategory, tokenOffset, tokenLength);
+		// for declarations and occurrences we do not need to add the position to the
+		// document
+		org.eclipse.jface.text.Position position = positionHelper.createPosition(tokenOffset, tokenLength);
+		// instead, an annotation is created
+		org.eclipse.jface.text.source.Annotation annotation = new org.eclipse.jface.text.source.Annotation(false);
+		if (type == org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION) {
+			annotation.setText("Declaration of " + text);
+			annotation.setType(DECLARATION_ANNOTATION_ID);
+		} else {
+			annotation.setText("Occurrence of " + text);
+			annotation.setType(OCCURRENCE_ANNOTATION_ID);
+		}
+		projectionViewer.getAnnotationModel().addAnnotation(annotation, position);
+	}
+	
+	private void removeAnnotations() {
+		removeAnnotations(org.kermeta.kp.editor.ui.KptOccurrence.OCCURRENCE_ANNOTATION_ID);
+		removeAnnotations(org.kermeta.kp.editor.ui.KptOccurrence.DECLARATION_ANNOTATION_ID);
+	}
+	
+	private void removeAnnotations(String annotationTypeID) {
+		java.util.List<org.eclipse.jface.text.source.Annotation> annotationsToRemove = new java.util.ArrayList<org.eclipse.jface.text.source.Annotation>();
+		org.eclipse.jface.text.source.IAnnotationModel annotationModel = projectionViewer.getAnnotationModel();
+		java.util.Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
+		while (annotationIterator.hasNext()) {
+			Object object = (Object) annotationIterator.next();
+			if (object instanceof org.eclipse.jface.text.source.Annotation) {
+				org.eclipse.jface.text.source.Annotation annotation = (org.eclipse.jface.text.source.Annotation) object;
+				if (annotationTypeID.equals(annotation.getType())) {
+					annotationsToRemove.add(annotation);
+				}
+			}
+		}
+		for (org.eclipse.jface.text.source.Annotation annotation : annotationsToRemove) {
+			annotationModel.removeAnnotation(annotation);
+		}
 	}
 	
 	/**
@@ -237,15 +274,6 @@ public class KptOccurrence {
 			return false;
 		}
 		return true;
-	}
-	
-	/**
-	 * Check whether the token region changed to decide to highlight or not.
-	 * 
-	 * @return <code>true</code> if the occurrences should be highlighted
-	 */
-	public boolean isPositionsChanged() {
-		return isPositionsChanged;
 	}
 	
 	/**

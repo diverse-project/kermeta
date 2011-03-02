@@ -15,7 +15,7 @@ public class KptBracketSet {
 	 * the separator between a bracket pair, should not contain escape needed
 	 * character, it will be used as regular expression
 	 */
-	public final static java.lang.String BRACKET_SEPARATOR = " and ";
+	public final static String BRACKET_SEPARATOR = " and ";
 	private final static org.kermeta.kp.editor.ui.KptPositionHelper positionHelper = new org.kermeta.kp.editor.ui.KptPositionHelper();
 	private java.util.ArrayList<org.kermeta.kp.editor.IKptBracketPair> bracketPairs;
 	private org.eclipse.jface.text.source.ISourceViewer viewer;
@@ -28,19 +28,19 @@ public class KptBracketSet {
 	 */
 	private class BracketPair implements org.kermeta.kp.editor.IKptBracketPair {
 		
-		private final java.lang.String[] brackets;
+		private final String[] brackets;
 		private boolean closingEnabledInside;
 		
-		public BracketPair(java.lang.String opening, java.lang.String closing, boolean closingEnabledInside) {
-			brackets = new java.lang.String[] { opening, closing };
+		public BracketPair(String opening, String closing, boolean closingEnabledInside) {
+			brackets = new String[] { opening, closing };
 			this.closingEnabledInside = closingEnabledInside;
 		}
 		
-		public java.lang.String getClosingBracket() {
+		public String getClosingBracket() {
 			return brackets[1];
 		}
 		
-		public java.lang.String getOpeningBracket() {
+		public String getOpeningBracket() {
 			return brackets[0];
 		}
 		
@@ -199,7 +199,7 @@ public class KptBracketSet {
 	public org.kermeta.kp.editor.IKptBracketPair getBracketPair(int index) {
 		try {
 			return bracketPairs.get(index);
-		} catch (java.lang.Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -328,13 +328,13 @@ public class KptBracketSet {
 	 * 
 	 * @see org.eclipse.jface.preference.IPreferenceStore
 	 */
-	public java.lang.String getBracketString() {
+	public String getBracketString() {
 		if (bracketPairs.size() < 1) {
 			return "";
 		}
-		java.lang.String result = "";
+		String result = "";
 		for (org.kermeta.kp.editor.IKptBracketPair bracketPair : bracketPairs) {
-			java.lang.String isClosingStr = "0";
+			String isClosingStr = "0";
 			if (bracketPair.isClosingEnabledInside()) {
 				isClosingStr = "1";
 			}

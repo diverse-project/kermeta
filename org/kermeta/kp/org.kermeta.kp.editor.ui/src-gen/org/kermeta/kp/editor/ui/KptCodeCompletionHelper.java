@@ -35,7 +35,7 @@ public class KptCodeCompletionHelper {
 		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(content.getBytes());
 		org.kermeta.kp.editor.IKptMetaInformation metaInformation = resource.getMetaInformation();
 		org.kermeta.kp.editor.IKptTextParser parser = metaInformation.createParser(inputStream, null);
-		org.kermeta.kp.editor.mopp.KptExpectedTerminal[] expectedElements = parseToExpectedElements(parser, resource);
+		org.kermeta.kp.editor.mopp.KptExpectedTerminal[] expectedElements = parseToExpectedElements(parser, resource, cursorOffset);
 		if (expectedElements == null) {
 			return new org.kermeta.kp.editor.ui.KptCompletionProposal[0];
 		}
@@ -46,29 +46,30 @@ public class KptCodeCompletionHelper {
 		java.util.List<org.kermeta.kp.editor.mopp.KptExpectedTerminal> expectedBeforeCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset - 1));
 		setPrefixes(expectedAfterCursor, content, cursorOffset);
 		setPrefixes(expectedBeforeCursor, content, cursorOffset);
-		// first we derive all possible proposals from the set of elements that are
-		// expected at the cursor position
+		// First, we derive all possible proposals from the set of elements that are
+		// expected at the cursor position.
 		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> allProposals = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KptCompletionProposal>();
 		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
 		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
-		// second, the set of left proposals (i.e., the ones before the cursor) is checked
-		// for emptiness. if the set is empty, the right proposals (i.e., the ones after
-		// the cursor are removed, because it does not make sense to propose them until
-		// the element before the cursor was completed
+		// Second, the set of left proposals (i.e., the ones before the cursor) is checked
+		// for emptiness. If the set is empty, the right proposals (i.e., the ones after
+		// the cursor) are also considered. If the set is not empty, the right proposal
+		// are discarded, because it does not make sense to propose them until the element
+		// before the cursor was completed.
 		allProposals.addAll(leftProposals);
 		if (leftProposals.isEmpty()) {
 			allProposals.addAll(rightProposals);
 		}
-		// third, the proposals are sorted according to their relevance proposals that
-		// matched the prefix are preferred over ones that did not afterward proposals are
-		// sorted alphabetically
+		// Third, the proposals are sorted according to their relevance. Proposals that
+		// matched the prefix are preferred over ones that did not. Finally, proposals are
+		// sorted alphabetically.
 		final java.util.List<org.kermeta.kp.editor.ui.KptCompletionProposal> sortedProposals = new java.util.ArrayList<org.kermeta.kp.editor.ui.KptCompletionProposal>(allProposals);
 		java.util.Collections.sort(sortedProposals);
 		return sortedProposals.toArray(new org.kermeta.kp.editor.ui.KptCompletionProposal[sortedProposals.size()]);
 	}
 	
-	public org.kermeta.kp.editor.mopp.KptExpectedTerminal[] parseToExpectedElements(org.kermeta.kp.editor.IKptTextParser parser, org.kermeta.kp.editor.IKptTextResource resource) {
-		final java.util.List<org.kermeta.kp.editor.mopp.KptExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource);
+	public org.kermeta.kp.editor.mopp.KptExpectedTerminal[] parseToExpectedElements(org.kermeta.kp.editor.IKptTextParser parser, org.kermeta.kp.editor.IKptTextResource resource, int cursorOffset) {
+		final java.util.List<org.kermeta.kp.editor.mopp.KptExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource, cursorOffset);
 		if (expectedElements == null) {
 			return new org.kermeta.kp.editor.mopp.KptExpectedTerminal[0];
 		}
@@ -140,7 +141,10 @@ public class KptCodeCompletionHelper {
 		org.kermeta.kp.editor.IKptExpectedElement expectedElement = (org.kermeta.kp.editor.IKptExpectedElement) expectedTerminal.getTerminal();
 		if (expectedElement instanceof org.kermeta.kp.editor.mopp.KptExpectedCsString) {
 			org.kermeta.kp.editor.mopp.KptExpectedCsString csString = (org.kermeta.kp.editor.mopp.KptExpectedCsString) expectedElement;
-			return deriveProposal(csString, content, expectedTerminal.getPrefix(), cursorOffset);
+			return handleKeyword(csString, expectedTerminal.getPrefix());
+		} else if (expectedElement instanceof org.kermeta.kp.editor.mopp.KptExpectedBooleanTerminal) {
+			org.kermeta.kp.editor.mopp.KptExpectedBooleanTerminal expectedBooleanTerminal = (org.kermeta.kp.editor.mopp.KptExpectedBooleanTerminal) expectedElement;
+			return handleBooleanTerminal(expectedBooleanTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.kermeta.kp.editor.mopp.KptExpectedStructuralFeature) {
 			org.kermeta.kp.editor.mopp.KptExpectedStructuralFeature expectedFeature = (org.kermeta.kp.editor.mopp.KptExpectedStructuralFeature) expectedElement;
 			org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
@@ -231,14 +235,13 @@ public class KptCodeCompletionHelper {
 			org.kermeta.kp.editor.IKptTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
 			org.kermeta.kp.editor.IKptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(expectedFeature.getTokenName());
 			String resolvedLiteral = tokenResolver.deResolve(unResolvedLiteral, expectedFeature.getFeature(), container);
-			if (matches(resolvedLiteral, prefix)) {
-				result.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(resolvedLiteral, prefix, !"".equals(prefix), true));
-			}
+			boolean matchesPrefix = matches(resolvedLiteral, prefix);
+			result.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(resolvedLiteral, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 		}
 		return result;
 	}
 	
-	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleNCReference(org.kermeta.kp.editor.IKptMetaInformation metaInformation, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, java.lang.String prefix, java.lang.String tokenName) {
+	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleNCReference(org.kermeta.kp.editor.IKptMetaInformation metaInformation, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
 		// proposals for non-containment references are derived by calling the reference
 		// resolver switch in fuzzy mode.
 		org.kermeta.kp.editor.IKptReferenceResolverSwitch resolverSwitch = metaInformation.getReferenceResolverSwitch();
@@ -252,17 +255,15 @@ public class KptCodeCompletionHelper {
 				org.eclipse.swt.graphics.Image image = null;
 				if (mapping instanceof org.kermeta.kp.editor.mopp.KptElementMapping<?>) {
 					org.kermeta.kp.editor.mopp.KptElementMapping<?> elementMapping = (org.kermeta.kp.editor.mopp.KptElementMapping<?>) mapping;
-					java.lang.Object target = elementMapping.getTargetElement();
+					Object target = elementMapping.getTargetElement();
 					// de-resolve reference to obtain correct identifier
 					org.kermeta.kp.editor.IKptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 					final String identifier = tokenResolver.deResolve(elementMapping.getIdentifier(), reference, container);
 					if (target instanceof org.eclipse.emf.ecore.EObject) {
 						image = getImage((org.eclipse.emf.ecore.EObject) target);
 					}
-					// check the prefix. return only matching references
-					if (matches(identifier, prefix)) {
-						resultSet.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(identifier, prefix, true, true, image));
-					}
+					boolean matchesPrefix = matches(identifier, prefix);
+					resultSet.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(identifier, prefix, matchesPrefix, reference, container, image));
 				}
 			}
 			return resultSet;
@@ -270,9 +271,9 @@ public class KptCodeCompletionHelper {
 		return java.util.Collections.emptyList();
 	}
 	
-	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleAttribute(org.kermeta.kp.editor.IKptMetaInformation metaInformation, org.kermeta.kp.editor.mopp.KptExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, java.lang.String prefix) {
+	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleAttribute(org.kermeta.kp.editor.IKptMetaInformation metaInformation, org.kermeta.kp.editor.mopp.KptExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
 		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> resultSet = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KptCompletionProposal>();
-		java.lang.Object[] defaultValues = attributeValueProvider.getDefaultValues(attribute);
+		Object[] defaultValues = attributeValueProvider.getDefaultValues(attribute);
 		if (defaultValues != null) {
 			for (Object defaultValue : defaultValues) {
 				if (defaultValue != null) {
@@ -282,9 +283,8 @@ public class KptCodeCompletionHelper {
 						org.kermeta.kp.editor.IKptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 						if (tokenResolver != null) {
 							String defaultValueAsString = tokenResolver.deResolve(defaultValue, attribute, container);
-							if (matches(defaultValueAsString, prefix)) {
-								resultSet.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(defaultValueAsString, prefix, !"".equals(prefix), true));
-							}
+							boolean matchesPrefix = matches(defaultValueAsString, prefix);
+							resultSet.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(defaultValueAsString, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 						}
 					}
 				}
@@ -293,13 +293,26 @@ public class KptCodeCompletionHelper {
 		return resultSet;
 	}
 	
-	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> deriveProposal(org.kermeta.kp.editor.mopp.KptExpectedCsString csString, String content, String prefix, int cursorOffset) {
+	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleKeyword(org.kermeta.kp.editor.mopp.KptExpectedCsString csString, String prefix) {
 		String proposal = csString.getValue();
-		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> result = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KptCompletionProposal>();
-		if (matches(proposal, prefix)) {
-			result.add(new org.kermeta.kp.editor.ui.KptCompletionProposal(proposal, prefix, !"".equals(prefix), false));
-		}
+		boolean matchesPrefix = matches(proposal, prefix);
+		return java.util.Collections.singleton(new org.kermeta.kp.editor.ui.KptCompletionProposal(proposal, prefix, matchesPrefix, null, null));
+	}
+	
+	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleBooleanTerminal(org.kermeta.kp.editor.mopp.KptExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
+		java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> result = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KptCompletionProposal>(2);
+		org.kermeta.kp.editor.grammar.KptBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
+		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
+		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
 		return result;
+	}
+	
+	private java.util.Collection<org.kermeta.kp.editor.ui.KptCompletionProposal> handleBooleanLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+		if ("".equals(literal)) {
+			return java.util.Collections.emptySet();
+		}
+		boolean matchesPrefix = matches(literal, prefix);
+		return java.util.Collections.singleton(new org.kermeta.kp.editor.ui.KptCompletionProposal(literal, prefix, matchesPrefix, null, null));
 	}
 	
 	/**
@@ -312,7 +325,7 @@ public class KptCodeCompletionHelper {
 			return;
 		}
 		for (org.kermeta.kp.editor.mopp.KptExpectedTerminal expectedElement : expectedElements) {
-			java.lang.String prefix = findPrefix(expectedElements, expectedElement, content, cursorOffset);
+			String prefix = findPrefix(expectedElements, expectedElement, content, cursorOffset);
 			expectedElement.setPrefix(prefix);
 		}
 	}
@@ -345,7 +358,7 @@ public class KptCodeCompletionHelper {
 		return Integer.MAX_VALUE;
 	}
 	
-	private boolean matches(java.lang.String proposal, java.lang.String prefix) {
+	private boolean matches(String proposal, String prefix) {
 		return (proposal.toLowerCase().startsWith(prefix.toLowerCase()) || org.kermeta.kp.editor.util.KptStringUtil.matchCamelCase(prefix, proposal) != null) && !proposal.equals(prefix);
 	}
 	

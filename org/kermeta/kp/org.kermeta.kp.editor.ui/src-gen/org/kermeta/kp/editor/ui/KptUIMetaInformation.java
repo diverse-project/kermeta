@@ -12,12 +12,25 @@ public class KptUIMetaInformation extends org.kermeta.kp.editor.mopp.KptMetaInfo
 		return new org.kermeta.kp.editor.ui.KptHoverTextProvider();
 	}
 	
+	public org.kermeta.kp.editor.ui.KptImageProvider getImageProvider() {
+		return org.kermeta.kp.editor.ui.KptImageProvider.INSTANCE;
+	}
+	
 	public org.kermeta.kp.editor.ui.KptColorManager createColorManager() {
 		return new org.kermeta.kp.editor.ui.KptColorManager();
 	}
 	
+	/**
+	 * @deprecated this method is only provided to preserve API compatibility. Use
+	 * createTokenScanner(org.kermeta.kp.editor.IKptTextResource,
+	 * org.kermeta.kp.editor.ui.KptColorManager) instead.
+	 */
 	public org.kermeta.kp.editor.ui.KptTokenScanner createTokenScanner(org.kermeta.kp.editor.ui.KptColorManager colorManager) {
-		return new org.kermeta.kp.editor.ui.KptTokenScanner(colorManager);
+		return createTokenScanner(null, colorManager);
+	}
+	
+	public org.kermeta.kp.editor.ui.KptTokenScanner createTokenScanner(org.kermeta.kp.editor.IKptTextResource resource, org.kermeta.kp.editor.ui.KptColorManager colorManager) {
+		return new org.kermeta.kp.editor.ui.KptTokenScanner(resource, colorManager);
 	}
 	
 	public org.kermeta.kp.editor.ui.KptCodeCompletionHelper createCodeCompletionHelper() {

@@ -7,9 +7,9 @@
 package org.kermeta.kp.editor.ui;
 
 /**
- * The NewWizardPage allows setting the container for the new file, as well as the
- * file name. The page will only accept file names without extension OR with an
- * extension that matches the expected one.
+ * The NewFileWizardPage allows setting the container for the new file, as well as
+ * the file name. The page will only accept file names without extension OR with
+ * an extension that matches the expected one.
  */
 public class KptNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	
@@ -19,7 +19,7 @@ public class KptNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	private org.eclipse.jface.viewers.ISelection selection;
 	
 	/**
-	 * Constructor for NewWizardPage.
+	 * Constructor for the NewFileWizardPage.
 	 */
 	public KptNewFileWizardPage(org.eclipse.jface.viewers.ISelection selection, String fileExtension) {
 		super("wizardPage");

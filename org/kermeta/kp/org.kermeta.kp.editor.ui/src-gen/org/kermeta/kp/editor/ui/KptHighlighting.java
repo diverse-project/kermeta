@@ -15,11 +15,8 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	private org.eclipse.jface.viewers.ISelection selection = null;
 	private final static org.kermeta.kp.editor.ui.KptPositionHelper positionHelper = new org.kermeta.kp.editor.ui.KptPositionHelper();
 	private boolean isHighlightBrackets = true;
-	private boolean isHighlightOccurrences = true;
 	private org.kermeta.kp.editor.ui.KptTokenScanner scanner;
 	private org.kermeta.kp.editor.ui.KptColorManager colorManager;
-	private org.eclipse.swt.graphics.Color definitionColor;
-	private org.eclipse.swt.graphics.Color proxyColor;
 	private org.eclipse.swt.graphics.Color bracketColor;
 	private org.eclipse.swt.graphics.Color black;
 	private org.eclipse.swt.custom.StyledText textWidget;
@@ -110,14 +107,11 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 		preferenceStore = org.kermeta.kp.editor.ui.KptUIPlugin.getDefault().getPreferenceStore();
 		textWidget = sourceviewer.getTextWidget();
 		projectionViewer = sourceviewer;
-		scanner = new org.kermeta.kp.editor.ui.KptTokenScanner(colorManager);
+		scanner = new org.kermeta.kp.editor.ui.KptTokenScanner(textResource, colorManager);
 		occurrence = new org.kermeta.kp.editor.ui.KptOccurrence(textResource, sourceviewer, scanner);
 		bracketSet = new org.kermeta.kp.editor.ui.KptBracketSet(editor, sourceviewer);
 		this.colorManager = colorManager;
 		isHighlightBrackets = preferenceStore.getBoolean(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
-		isHighlightOccurrences = preferenceStore.getBoolean(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_OCCURRENCE_CHECKBOX);
-		definitionColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_DEFINITION_COLOR));
-		proxyColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_PROXY_COLOR));
 		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
 		black = colorManager.getColor(new org.eclipse.swt.graphics.RGB(0, 0, 0));
 		
@@ -137,76 +131,36 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 		if (isHighlightBrackets) {
 			bracketSet.matchingBrackets();
 		}
-		if (isHighlightOccurrences) {
-			occurrence.handleOccurrenceHighlighting(bracketSet);
-		}
-		if (occurrence.isPositionsChanged()) {
-			setCategoryHighlighting(document,
-			org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION.toString());
-			setCategoryHighlighting(document,
-			org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString());
-		}
-		setCategoryHighlighting(document, org.kermeta.kp.editor.ui.KptPositionCategory.BRACKET.toString());
+		occurrence.handleOccurrenceHighlighting(bracketSet);
+		setBracketHighlighting(document);
 	}
 	
-	private void setCategoryHighlighting(org.eclipse.jface.text.IDocument document, String category) {
+	private void setBracketHighlighting(org.eclipse.jface.text.IDocument document) {
 		org.eclipse.swt.custom.StyleRange styleRange = null;
-		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, category);
+		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, org.kermeta.kp.editor.ui.KptPositionCategory.BRACKET.toString());
 		
-		if (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString())) {
-			if (positions.length > 0) {
-				styleRange = getStyleRangeAtPosition(positions[0]);
-				if (styleRange.foreground == null) {
-					styleRange.foreground = black;
-				}
-			}
-			if (styleRange != null) {
-				styleRange.background = proxyColor;
-			}
-		}
 		for (org.eclipse.jface.text.Position position : positions) {
 			org.eclipse.jface.text.Position tmpPosition = convertToWidgetPosition(position);
 			if (tmpPosition != null) {
-				if (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION.toString())) {
-					styleRange = getStyleRangeAtPosition(tmpPosition);
-					if (styleRange.foreground == null) {
-						styleRange.foreground = black;
-					}
-					styleRange.background = definitionColor;
-					textWidget.setStyleRange(styleRange);
+				styleRange = getStyleRangeAtPosition(tmpPosition);
+				styleRange.borderStyle = org.eclipse.swt.SWT.BORDER_SOLID;
+				styleRange.borderColor = bracketColor;
+				if (styleRange.foreground == null) {
+					styleRange.foreground = black;
 				}
-				if (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString())) {
-					if (styleRange == null) {
-						return;
-					}
-					styleRange.start = tmpPosition.offset;
-					textWidget.setStyleRange(styleRange);
-				}
-				if (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.BRACKET.toString())) {
-					styleRange = getStyleRangeAtPosition(tmpPosition);
-					styleRange.borderStyle = org.eclipse.swt.SWT.BORDER_SOLID;
-					styleRange.borderColor = bracketColor;
-					if (styleRange.foreground == null) {
-						styleRange.foreground = black;
-					}
-					textWidget.setStyleRange(styleRange);
-				}
+				textWidget.setStyleRange(styleRange);
 			}
 		}
 	}
 	
 	private void removeHighlighting() {
 		org.eclipse.jface.text.IDocument document = projectionViewer.getDocument();
+		// remove highlighted matching brackets
 		removeHighlightingCategory(document, org.kermeta.kp.editor.ui.KptPositionCategory.BRACKET.toString());
-		if (occurrence.isToRemoveHighlighting()) {
-			removeHighlightingCategory(document, org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION.toString());
-			removeHighlightingCategory(document, org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString());
-		}
 	}
 	
 	private void removeHighlightingCategory(org.eclipse.jface.text.IDocument document, String category) {
 		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, category);
-		boolean isOccurrence = (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.DEFINTION.toString()) || category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.PROXY.toString()));
 		if (category.equals(org.kermeta.kp.editor.ui.KptPositionCategory.BRACKET.toString())) {
 			org.eclipse.swt.custom.StyleRange styleRange;
 			for (org.eclipse.jface.text.Position position : positions) {
@@ -220,17 +174,6 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 				}
 			}
 		}
-		
-		if (isOccurrence) {
-			for (org.eclipse.jface.text.Position position : positions) {
-				org.eclipse.jface.text.Position tmpPosition = convertToWidgetPosition(position);
-				if (tmpPosition != null) {
-					textWidget.setStyleRange(new org.eclipse.swt.custom.StyleRange(tmpPosition.offset, tmpPosition.length, null, null));
-					projectionViewer.invalidateTextPresentation(tmpPosition.offset, tmpPosition.length);
-				}
-			}
-		}
-		
 		positionHelper.removePositions(document, category);
 	}
 	
@@ -250,10 +193,7 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	 */
 	public void resetValues() {
 		isHighlightBrackets = preferenceStore.getBoolean(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
-		isHighlightOccurrences = preferenceStore.getBoolean(org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_OCCURRENCE_CHECKBOX);
 		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
-		definitionColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_DEFINITION_COLOR));
-		proxyColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.kermeta.kp.editor.ui.KptPreferenceConstants.EDITOR_PROXY_COLOR));
 		bracketSet.resetBrackets();
 	}
 	
@@ -310,7 +250,7 @@ public class KptHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	
 	private void handleContentOutlineSelection(org.eclipse.jface.viewers.ISelection selection) {
 		if (!selection.isEmpty()) {
-			java.lang.Object selectedElement = ((org.eclipse.jface.viewers.IStructuredSelection) selection).getFirstElement();
+			Object selectedElement = ((org.eclipse.jface.viewers.IStructuredSelection) selection).getFirstElement();
 			if (selectedElement instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject selectedEObject = (org.eclipse.emf.ecore.EObject) selectedElement;
 				org.eclipse.emf.ecore.resource.Resource resource = selectedEObject.eResource();
