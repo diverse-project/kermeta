@@ -43,7 +43,7 @@ class Resolver
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
        	
-		var report : Set<DanglingDiagnostic>
+		/*var report : Set<DanglingDiagnostic>
 	 	report := unresolvedModelResource.findDanglingModelElements()
 	 	report.each{ diag |
 	 		var danglingName : String init ""
@@ -64,7 +64,7 @@ class Resolver
 	 		end
 			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
 			diag.referencingProperty.name + referencingName)
-		}
+		}*/
         
         stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")
        	

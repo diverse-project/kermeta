@@ -76,7 +76,7 @@ class FullStaticResolver
        	       	
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
-       	checkDangling(unresolvedModelingUnit.containingResource())       	
+       	//checkDangling(unresolvedModelingUnit.containingResource())       	
 
        	
        	result := unresolvedModelingUnit
@@ -121,10 +121,10 @@ class FullStaticResolver
 			p
 		}
 	end
-	
-	operation checkDangling(unresolvedModelResource : Resource) : Void is do
-		var report : Set<DanglingDiagnostic>
-	 	report := unresolvedModelResource.findDanglingModelElements()
+
+	/*operation checkDangling(unresolvedModelResource : Resource) : Void is do
+		var report : Set<org::kermeta::language::resolver::DanglingDiagnosticBIS>
+	 	report := findDanglingModelElementsBIS(unresolvedModelResource)
 	 	report.each{ diag |
 	 		var danglingName : String init ""
 	 		var referencingName : String init ""
@@ -145,6 +145,5 @@ class FullStaticResolver
 			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
 			diag.referencingProperty.name + referencingName)
 		}
-	end
-	
+	end*/	
 }
