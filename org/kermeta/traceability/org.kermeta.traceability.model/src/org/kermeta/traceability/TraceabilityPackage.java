@@ -43,7 +43,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org/Traceability/2.0.0";
+	String eNS_URI = "http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability";
 
 	/**
 	 * The package namespace name.
@@ -51,7 +51,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "traceability";
+	String eNS_PREFIX = "org_kermeta_traceability";
 
 	/**
 	 * The singleton instance of the package.

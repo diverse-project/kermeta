@@ -13,7 +13,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import org.impl.orgPackageImpl;
+
+import org.kermeta.KermetaPackage;
+
+import org.kermeta.impl.KermetaPackageImpl;
+
 import org.kermeta.traceability.FileReference;
 import org.kermeta.traceability.ModelReference;
 import org.kermeta.traceability.QualifiedNameReference;
@@ -25,6 +33,8 @@ import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
 import org.kermeta.traceability.Traceable;
 import org.kermeta.traceability.XMLReference;
+
+import org.orgPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -170,11 +180,19 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		orgPackageImpl theorgPackage = (orgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) instanceof orgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) : orgPackage.eINSTANCE);
+		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KermetaPackage.eNS_URI) : KermetaPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theTraceabilityPackage.createPackageContents();
+		theorgPackage.createPackageContents();
+		theKermetaPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTraceabilityPackage.initializePackageContents();
+		theorgPackage.initializePackageContents();
+		theKermetaPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTraceabilityPackage.freeze();
@@ -590,9 +608,6 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		initEDataType(integerEDataType, Integer.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateEDataType, Date.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 
 		// Create annotations
 		// kermeta.req
