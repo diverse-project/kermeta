@@ -22,7 +22,7 @@ public class KptSyntaxElementDecorator {
 	/**
 	 * a list of the indices that must be printed
 	 */
-	private java.util.List<java.lang.Integer> indicesToPrint = new java.util.ArrayList<java.lang.Integer>();
+	private java.util.List<Integer> indicesToPrint = new java.util.ArrayList<Integer>();
 	
 	public KptSyntaxElementDecorator(org.kermeta.kp.editor.grammar.KptSyntaxElement decoratedElement, KptSyntaxElementDecorator[] childDecorators) {
 		super();
@@ -30,7 +30,7 @@ public class KptSyntaxElementDecorator {
 		this.childDecorators = childDecorators;
 	}
 	
-	public void addIndexToPrint(java.lang.Integer index) {
+	public void addIndexToPrint(Integer index) {
 		indicesToPrint.add(index);
 	}
 	
@@ -42,7 +42,7 @@ public class KptSyntaxElementDecorator {
 		return childDecorators;
 	}
 	
-	public java.lang.Integer getNextIndexToPrint() {
+	public Integer getNextIndexToPrint() {
 		if (indicesToPrint.size() == 0) {
 			return null;
 		}

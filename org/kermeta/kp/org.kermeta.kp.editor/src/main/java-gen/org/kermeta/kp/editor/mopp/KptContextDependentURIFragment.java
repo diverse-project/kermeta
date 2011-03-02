@@ -65,7 +65,7 @@ public abstract class KptContextDependentURIFragment<ContainerType extends org.e
 	
 	private void handleMultipleResults() {
 		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = null;
-		java.lang.Object temp = container.eGet(reference);
+		Object temp = container.eGet(reference);
 		if (temp instanceof org.eclipse.emf.common.util.EList<?>) {
 			list = org.kermeta.kp.editor.util.KptCastUtil.cast(temp);
 		}

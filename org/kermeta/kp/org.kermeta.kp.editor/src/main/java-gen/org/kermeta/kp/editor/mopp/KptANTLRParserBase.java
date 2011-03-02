@@ -6,13 +6,13 @@
  */
 package org.kermeta.kp.editor.mopp;
 
-public abstract class KptANTLRParserBase extends org.antlr.runtime.Parser implements org.kermeta.kp.editor.IKptTextParser {
+public abstract class KptANTLRParserBase extends org.antlr.runtime3_2_0.Parser implements org.kermeta.kp.editor.IKptTextParser {
 	
-	public KptANTLRParserBase(org.antlr.runtime.TokenStream input) {
+	public KptANTLRParserBase(org.antlr.runtime3_2_0.TokenStream input) {
 		super(input);
 	}
 	
-	public KptANTLRParserBase(org.antlr.runtime.TokenStream input, org.antlr.runtime.RecognizerSharedState state) {
+	public KptANTLRParserBase(org.antlr.runtime3_2_0.TokenStream input, org.antlr.runtime3_2_0.RecognizerSharedState state) {
 		super(input, state);
 	}
 	

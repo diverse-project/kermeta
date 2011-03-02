@@ -14,7 +14,7 @@ public class KptDefaultTokenResolver implements org.kermeta.kp.editor.IKptTokenR
 	
 	private java.util.Map<?, ?> options;
 	
-	public String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		if (value == null) {
 			return "null";
 		}
@@ -38,6 +38,16 @@ public class KptDefaultTokenResolver implements org.kermeta.kp.editor.IKptTokenR
 					result.setResolvedToken(org.eclipse.emf.ecore.util.EcoreUtil.createFromString((org.eclipse.emf.ecore.EDataType) feature.getEType(), lexem));
 				} catch (Exception e) {
 					result.setErrorMessage("Could not convert '" + lexem + "' to '" + feature.getEType().getName() + "'.");
+				}
+				String typeName = feature.getEType().getInstanceClassName();
+				if (typeName.equals("boolean") || java.lang.Boolean.class.getName().equals(typeName)) {
+					String featureName = feature.getName();
+					boolean featureNameMatchesLexem = featureName.equals(lexem);
+					if (featureName.length() > 2 && featureName.startsWith("is")) {
+						featureNameMatchesLexem |= (featureName.substring(2, 3).toLowerCase() + featureName.substring(3)).equals(lexem);
+					}
+					result.setResolvedToken(Boolean.parseBoolean(lexem) || featureNameMatchesLexem);
+					return;
 				}
 			} else {
 				assert false;

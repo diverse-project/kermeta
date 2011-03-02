@@ -26,10 +26,13 @@ public interface IKptTextParser extends org.kermeta.kp.editor.IKptConfigurable {
 	 * element covers a range in the input stream.
 	 * If the parser implementation can not determine expected elements null can be
 	 * returned. This method is used by the code completion to figure out which
-	 * proposals can be shown to users for a given cursor position. The class 'type'
-	 * is used as start symbol.
+	 * proposals can be shown to users for a given cursor position. The class
+	 * <code>type</code> is used as start symbol. If <code>type</code> is
+	 * <code>null</code>, the start symbols from the syntax specification are used.
+	 * The <code>cursorPosition</code> is used to discard expected elements, which
+	 * will not be needed.
 	 */
-	public java.util.List<org.kermeta.kp.editor.mopp.KptExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.kermeta.kp.editor.IKptTextResource dummyResource);
+	public java.util.List<org.kermeta.kp.editor.mopp.KptExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.kermeta.kp.editor.IKptTextResource dummyResource, int cursorOffset);
 	
 	/**
 	 * Signals the parse to terminate parsing as soon as possible. This method must be

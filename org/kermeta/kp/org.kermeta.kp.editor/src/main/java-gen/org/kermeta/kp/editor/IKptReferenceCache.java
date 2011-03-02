@@ -7,6 +7,6 @@
 package org.kermeta.kp.editor;
 
 public interface IKptReferenceCache {
-	public java.lang.Object get(java.lang.String identifier);
-	public void put(java.lang.String identifier, java.lang.Object target);
+	public Object get(String identifier);
+	public void put(String identifier, Object target);
 }

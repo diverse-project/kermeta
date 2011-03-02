@@ -8,54 +8,62 @@ package org.kermeta.kp.editor.mopp;
 public class KptTextToken implements org.kermeta.kp.editor.IKptTextToken {
 	
 	private final org.kermeta.kp.editor.IKptMetaInformation metaInformation = new org.kermeta.kp.editor.mopp.KptMetaInformation();
-	private final org.antlr.runtime.Token antlrToken;
+	private final org.antlr.runtime3_2_0.Token antlrToken;
 	
-	public KptTextToken(org.antlr.runtime.Token antlrToken) {
+	public KptTextToken(org.antlr.runtime3_2_0.Token antlrToken) {
 		super();
 		this.antlrToken = antlrToken;
 	}
 	
-	public java.lang.String getName() {
+	public String getName() {
 		return getTokenName(metaInformation.getTokenNames(), antlrToken.getType());
 	}
 	
 	public int getOffset() {
-		return ((org.antlr.runtime.CommonToken) antlrToken).getStartIndex();
+		return ((org.antlr.runtime3_2_0.CommonToken) antlrToken).getStartIndex();
 	}
 	
 	public int getLength() {
-		return ((org.antlr.runtime.CommonToken) antlrToken).getStopIndex() - ((org.antlr.runtime.CommonToken) antlrToken).getStartIndex() + 1;
+		return ((org.antlr.runtime3_2_0.CommonToken) antlrToken).getStopIndex() - ((org.antlr.runtime3_2_0.CommonToken) antlrToken).getStartIndex() + 1;
+	}
+	
+	public int getLine() {
+		return antlrToken.getLine();
+	}
+	
+	public int getColumn() {
+		return antlrToken.getCharPositionInLine();
 	}
 	
 	public boolean canBeUsedForSyntaxHighlighting() {
 		int tokenType = antlrToken.getType();
-		if (tokenType == org.antlr.runtime.Token.EOF) {
+		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime.Token.UP) {
+		if (tokenType == org.antlr.runtime3_2_0.Token.UP) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime.Token.DOWN) {
+		if (tokenType == org.antlr.runtime3_2_0.Token.DOWN) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime.Token.EOR_TOKEN_TYPE) {
+		if (tokenType == org.antlr.runtime3_2_0.Token.EOR_TOKEN_TYPE) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime.Token.INVALID_TOKEN_TYPE) {
+		if (tokenType == org.antlr.runtime3_2_0.Token.INVALID_TOKEN_TYPE) {
 			return false;
 		}
 		return true;
 	}
 	
-	public java.lang.String getText() {
+	public String getText() {
 		return antlrToken.getText();
 	}
 	
-	public java.lang.String getTokenName(java.lang.String[] tokenNames, int index) {
+	public String getTokenName(String[] tokenNames, int index) {
 		if (tokenNames == null) {
 			return null;
 		}
-		java.lang.String tokenName = tokenNames[index];
+		String tokenName = tokenNames[index];
 		if (tokenName != null && tokenName.startsWith("'")) {
 			tokenName = tokenName.substring(1, tokenName.length() - 1).trim();
 		}

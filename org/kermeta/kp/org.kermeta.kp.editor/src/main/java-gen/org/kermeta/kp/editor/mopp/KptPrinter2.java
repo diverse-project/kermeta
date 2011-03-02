@@ -28,7 +28,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		
 	}
 	
-	public final static java.lang.String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
+	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
 	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
@@ -50,14 +50,15 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	 */
 	private boolean startedPrintingObject = false;
 	/**
-	 * The number of tab characters the were printed before the current line. This
-	 * number is used to calculate the relative indendation when printing contained
-	 * objects.
+	 * The number of tab characters that were printed before the current line. This
+	 * number is used to calculate the relative indentation when printing contained
+	 * objects, because all contained objects must start with this indentation
+	 * (tabsBeforeCurrentObject + currentTabs).
 	 */
 	private int currentTabs;
 	/**
 	 * The number of tab characters that must be printed before the current object.
-	 * This number is used to calculate the indendation of new lines, when line breaks
+	 * This number is used to calculate the indentation of new lines, when line breaks
 	 * are printed within one object.
 	 */
 	private int tabsBeforeCurrentObject;
@@ -97,47 +98,47 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 			return;
 		}
 		if (element instanceof org.kermeta.kp.SourceFolder) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_1, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.SourceFile) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.SourceNSURI) {
+		if (element instanceof org.kermeta.kp.SourceFile) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.SourceQuery) {
+		if (element instanceof org.kermeta.kp.SourceNSURI) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Dependency) {
+		if (element instanceof org.kermeta.kp.SourceQuery) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.WeaveDirective) {
+		if (element instanceof org.kermeta.kp.Dependency) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_6, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Option) {
+		if (element instanceof org.kermeta.kp.WeaveDirective) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_7, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.StringExpression) {
+		if (element instanceof org.kermeta.kp.Option) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_8, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.MixExpression) {
+		if (element instanceof org.kermeta.kp.StringExpression) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_9, foundFormattingElements);
+			return;
+		}
+		if (element instanceof org.kermeta.kp.MixExpression) {
+			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_10, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.KermetaProjectRef) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_11, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.NamedElement) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_10, foundFormattingElements);
+		if (element instanceof org.kermeta.kp.Source) {
+			printInternal(element, org.kermeta.kp.editor.grammar.KptGrammarInformationProvider.KPT_1, foundFormattingElements);
 			return;
 		}
 		
@@ -172,7 +173,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	}
 	
 	public void decorateTree(org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = initializePrintCountingMap(eObject);
+		java.util.Map<String, Integer> printCountingMap = initializePrintCountingMap(eObject);
 		java.util.List<org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator>();
 		decorateTreeBasic(decorator, eObject, printCountingMap, keywordsToPrint);
 		for (org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
@@ -186,7 +187,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	 * Tries to decorate the decorator with an attribute value, or reference holded by
 	 * eObject. Returns true if an attribute value or reference was found.
 	 */
-	public boolean decorateTreeBasic(org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap, java.util.List<org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator> keywordsToPrint) {
+	public boolean decorateTreeBasic(org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap, java.util.List<org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator> keywordsToPrint) {
 		boolean foundFeatureToPrint = false;
 		org.kermeta.kp.editor.grammar.KptSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		org.kermeta.kp.editor.grammar.KptCardinality cardinality = syntaxElement.getCardinality();
@@ -262,7 +263,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	 * multiple choices are available. We pick the choice that prints at least one
 	 * attribute or reference.
 	 */
-	public boolean doesPrintFeature(org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap) {
+	public boolean doesPrintFeature(org.kermeta.kp.editor.mopp.KptSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap) {
 		org.kermeta.kp.editor.grammar.KptSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		if (syntaxElement instanceof org.kermeta.kp.editor.grammar.KptTerminal) {
 			org.kermeta.kp.editor.grammar.KptTerminal terminal = (org.kermeta.kp.editor.grammar.KptTerminal) syntaxElement;
@@ -293,7 +294,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		boolean foundSomethingToPrint;
 		while (true) {
 			foundSomethingToPrint = false;
-			java.lang.Integer indexToPrint = decorator.getNextIndexToPrint();
+			Integer indexToPrint = decorator.getNextIndexToPrint();
 			if (indexToPrint != null) {
 				if (printElement instanceof org.kermeta.kp.editor.grammar.KptKeyword) {
 					printKeyword(eObject, (org.kermeta.kp.editor.grammar.KptKeyword) printElement, foundFormattingElements, layoutInformations);
@@ -305,6 +306,10 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 				} else if (printElement instanceof org.kermeta.kp.editor.grammar.KptContainment) {
 					org.kermeta.kp.editor.grammar.KptContainment containment = (org.kermeta.kp.editor.grammar.KptContainment) printElement;
 					printContainedObject(eObject, containment, indexToPrint, foundFormattingElements, layoutInformations);
+					foundSomethingToPrint = true;
+				} else if (printElement instanceof org.kermeta.kp.editor.grammar.KptBooleanTerminal) {
+					org.kermeta.kp.editor.grammar.KptBooleanTerminal booleanTerminal = (org.kermeta.kp.editor.grammar.KptBooleanTerminal) printElement;
+					printBooleanTerminal(eObject, booleanTerminal, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
 				}
 			}
@@ -356,10 +361,10 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	}
 	
 	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, org.kermeta.kp.editor.grammar.KptPlaceholder placeholder, int count, java.util.List<org.kermeta.kp.editor.grammar.KptFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations) {
-		java.lang.String result;
-		java.lang.Object attributeValue = getValue(eObject, attribute, count);
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
 		org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
-		java.lang.String visibleTokenText = getVisibleTokenText(layoutInformation);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
@@ -368,7 +373,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 			// representation
 			org.kermeta.kp.editor.IKptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
 			tokenResolver.setOptions(getOptions());
-			java.lang.String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
+			String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
 			result = deResolvedValue;
 		}
 		if (result != null && !"".equals(result)) {
@@ -378,9 +383,34 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
 	}
 	
+	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KptBooleanTerminal booleanTerminal, int count, java.util.List<org.kermeta.kp.editor.grammar.KptFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations) {
+		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
+		// if there is text for the attribute we use it
+		if (visibleTokenText != null) {
+			result = visibleTokenText;
+		} else {
+			// if no text is available, the boolean attribute is converted to its textual
+			// representation using the literals of the boolean terminal
+			if (Boolean.TRUE.equals(attributeValue)) {
+				result = booleanTerminal.getTrueLiteral();
+			} else {
+				result = booleanTerminal.getFalseLiteral();
+			}
+		}
+		if (result != null && !"".equals(result)) {
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			// write result to the output stream
+			tokenOutputStream.add(new PrintToken(result, "'" + org.kermeta.kp.editor.util.KptStringUtil.escapeToANTLRKeyword(result) + "'"));
+		}
+	}
+	
 	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KptContainment containment, int count, java.util.List<org.kermeta.kp.editor.grammar.KptFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
-		java.lang.Object o = getValue(eObject, reference, count);
+		Object o = getValue(eObject, reference, count);
 		// save current number of tabs to restore them after printing the contained object
 		int oldTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		int oldCurrentTabs = currentTabs;
@@ -392,11 +422,12 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		doPrint((org.eclipse.emf.ecore.EObject) o, foundFormattingElements);
 		// restore number of tabs after printing the contained object
 		tabsBeforeCurrentObject = oldTabsBeforeCurrentObject;
+		newTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		currentTabs = oldCurrentTabs;
 	}
 	
 	public void printFormattingElements(java.util.List<org.kermeta.kp.editor.grammar.KptFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations, org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation) {
-		java.lang.String hiddenTokenText = getHiddenTokenText(layoutInformation);
+		String hiddenTokenText = getHiddenTokenText(layoutInformation);
 		if (hiddenTokenText != null) {
 			// removed used information
 			layoutInformations.remove(layoutInformation);
@@ -441,7 +472,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	
 	private Object getValue(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, int count) {
 		// get value of feature
-		java.lang.Object o = eObject.eGet(feature);
+		Object o = eObject.eGet(feature);
 		if (o instanceof java.util.List<?>) {
 			java.util.List<?> list = (java.util.List<?>) o;
 			int index = list.size() - count;
@@ -452,7 +483,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 	
 	@SuppressWarnings("unchecked")	
 	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, org.kermeta.kp.editor.grammar.KptPlaceholder placeholder, int count, java.util.List<org.kermeta.kp.editor.grammar.KptFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations) {
-		java.lang.Object referencedObject = getValue(eObject, reference, count);
+		Object referencedObject = getValue(eObject, reference, count);
 		org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
 		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 		// NC-References must always be printed by deresolving the reference. We cannot
@@ -464,23 +495,23 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		@SuppressWarnings("rawtypes")		
 		org.kermeta.kp.editor.IKptReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
 		referenceResolver.setOptions(getOptions());
-		java.lang.String deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
-		java.lang.String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
+		String deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
+		String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
 		// write result to output stream
 		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName));
 	}
 	
-	public java.util.Map<java.lang.String, java.lang.Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
+	public java.util.Map<String, Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>();
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>();
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = eObject.eClass().getEAllStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
 			int count = 0;
-			java.lang.Object featureValue = eObject.eGet(feature);
+			Object featureValue = eObject.eGet(feature);
 			if (featureValue != null) {
 				if (featureValue instanceof java.util.List<?>) {
 					count = ((java.util.List<?>) featureValue).size();
@@ -509,7 +540,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		return (org.kermeta.kp.editor.mopp.KptReferenceResolverSwitch) new org.kermeta.kp.editor.mopp.KptMetaInformation().getReferenceResolverSwitch();
 	}
 	
-	protected void addWarningToResource(final java.lang.String errorMessage, org.eclipse.emf.ecore.EObject cause) {
+	protected void addWarningToResource(final String errorMessage, org.eclipse.emf.ecore.EObject cause) {
 		org.kermeta.kp.editor.IKptTextResource resource = getResource();
 		if (resource == null) {
 			// the resource can be null if the printer is used stand alone
@@ -529,7 +560,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		return newAdapter;
 	}
 	
-	private org.kermeta.kp.editor.mopp.KptLayoutInformation getLayoutInformation(java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations, org.kermeta.kp.editor.grammar.KptSyntaxElement syntaxElement, java.lang.Object object, org.eclipse.emf.ecore.EObject container) {
+	private org.kermeta.kp.editor.mopp.KptLayoutInformation getLayoutInformation(java.util.List<org.kermeta.kp.editor.mopp.KptLayoutInformation> layoutInformations, org.kermeta.kp.editor.grammar.KptSyntaxElement syntaxElement, Object object, org.eclipse.emf.ecore.EObject container) {
 		for (org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation : layoutInformations) {
 			if (syntaxElement == layoutInformation.getSyntaxElement()) {
 				if (object == null) {
@@ -542,7 +573,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		return null;
 	}
 	
-	private java.lang.String getHiddenTokenText(org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation) {
+	private String getHiddenTokenText(org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getHiddenTokenText();
 		} else {
@@ -550,7 +581,7 @@ public class KptPrinter2 implements org.kermeta.kp.editor.IKptTextPrinter {
 		}
 	}
 	
-	private java.lang.String getVisibleTokenText(org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation) {
+	private String getVisibleTokenText(org.kermeta.kp.editor.mopp.KptLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getVisibleTokenText();
 		} else {

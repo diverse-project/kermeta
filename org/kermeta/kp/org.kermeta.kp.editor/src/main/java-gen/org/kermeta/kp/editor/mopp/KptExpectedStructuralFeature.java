@@ -27,11 +27,15 @@ public class KptExpectedStructuralFeature extends org.kermeta.kp.editor.mopp.Kpt
 		return placeholder.getTokenName();
 	}
 	
-	public java.lang.String toString() {
+	public java.util.Set<String> getTokenNames() {
+		return java.util.Collections.singleton(getTokenName());
+	}
+	
+	public String toString() {
 		return "EFeature " + getFeature().getEContainingClass().getName() + "." + getFeature().getName();
 	}
 	
-	public boolean equals(java.lang.Object o) {
+	public boolean equals(Object o) {
 		if (o instanceof KptExpectedStructuralFeature) {
 			return getFeature().equals(((KptExpectedStructuralFeature) o).getFeature());
 		}

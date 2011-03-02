@@ -12,13 +12,13 @@ public class KptNewFileContentProvider {
 		return new org.kermeta.kp.editor.mopp.KptMetaInformation();
 	}
 	
-	public java.lang.String getNewFileContent(java.lang.String newFileName) {
+	public String getNewFileContent(String newFileName) {
 		return getExampleContent(new org.eclipse.emf.ecore.EClass[] {
 			org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject(),
 		}, getMetaInformation().getClassesWithSyntax(), newFileName);
 	}
 	
-	protected String getExampleContent(org.eclipse.emf.ecore.EClass[] startClasses, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, java.lang.String newFileName) {
+	protected String getExampleContent(org.eclipse.emf.ecore.EClass[] startClasses, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, String newFileName) {
 		String content = "";
 		for (org.eclipse.emf.ecore.EClass next : startClasses) {
 			content = getExampleContent(next, allClassesWithSyntax, newFileName);
@@ -29,7 +29,7 @@ public class KptNewFileContentProvider {
 		return content;
 	}
 	
-	protected String getExampleContent(org.eclipse.emf.ecore.EClass eClass, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, java.lang.String newFileName) {
+	protected String getExampleContent(org.eclipse.emf.ecore.EClass eClass, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, String newFileName) {
 		// create a minimal model
 		org.eclipse.emf.ecore.EObject root = new org.kermeta.kp.editor.util.KptMinimalModelHelper().getMinimalModel(eClass, allClassesWithSyntax, newFileName);
 		// use printer to get text for model

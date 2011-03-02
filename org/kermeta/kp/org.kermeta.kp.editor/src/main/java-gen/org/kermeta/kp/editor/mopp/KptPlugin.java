@@ -15,7 +15,7 @@ public class KptPlugin extends org.eclipse.core.runtime.Plugin {
 	/**
 	 * The version of EMFText that was used to generate this plug-in.
 	 */
-	public static final String EMFTEXT_SDK_VERSION = "1.3.0";
+	public static final String EMFTEXT_SDK_VERSION = "1.3.2";
 	/**
 	 * The ID of the extension point to register default options to be used when
 	 * loading resources with this plug-in.

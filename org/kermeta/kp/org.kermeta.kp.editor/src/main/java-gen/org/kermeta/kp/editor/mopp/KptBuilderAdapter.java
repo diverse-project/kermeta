@@ -26,6 +26,9 @@ public class KptBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 		}
 		delta.accept(new org.eclipse.core.resources.IResourceDeltaVisitor() {
 			public boolean visit(org.eclipse.core.resources.IResourceDelta delta) throws org.eclipse.core.runtime.CoreException {
+				if (delta.getKind() == org.eclipse.core.resources.IResourceDelta.REMOVED) {
+					return false;
+				}
 				org.eclipse.core.resources.IResource resource = delta.getResource();
 				if (resource instanceof org.eclipse.core.resources.IFile && "kpt".equals(resource.getFileExtension())) {
 					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);

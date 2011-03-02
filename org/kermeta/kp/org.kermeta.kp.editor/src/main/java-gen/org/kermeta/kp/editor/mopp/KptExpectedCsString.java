@@ -23,8 +23,8 @@ public class KptExpectedCsString extends org.kermeta.kp.editor.mopp.KptAbstractE
 		return keyword.getValue();
 	}
 	
-	public String getTokenName() {
-		return "'" + getValue() + "'";
+	public java.util.Set<String> getTokenNames() {
+		return java.util.Collections.singleton("'" + getValue() + "'");
 	}
 	
 	public String toString() {

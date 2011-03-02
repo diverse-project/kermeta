@@ -8,11 +8,11 @@ package org.kermeta.kp.editor.mopp;
 
 public class KptMetaInformation implements org.kermeta.kp.editor.IKptMetaInformation {
 	
-	public java.lang.String getSyntaxName() {
+	public String getSyntaxName() {
 		return "kpt";
 	}
 	
-	public java.lang.String getURI() {
+	public String getURI() {
 		return "http://www.kermeta.org/kp/1.0.0";
 	}
 	
@@ -20,7 +20,7 @@ public class KptMetaInformation implements org.kermeta.kp.editor.IKptMetaInforma
 		return new org.kermeta.kp.editor.mopp.KptAntlrScanner(new org.kermeta.kp.editor.mopp.KptLexer());
 	}
 	
-	public org.kermeta.kp.editor.IKptTextParser createParser(java.io.InputStream inputStream, java.lang.String encoding) {
+	public org.kermeta.kp.editor.IKptTextParser createParser(java.io.InputStream inputStream, String encoding) {
 		return new org.kermeta.kp.editor.mopp.KptParser().createInstance(inputStream, encoding);
 	}
 	
@@ -44,15 +44,15 @@ public class KptMetaInformation implements org.kermeta.kp.editor.IKptMetaInforma
 		return new org.kermeta.kp.editor.mopp.KptTokenResolverFactory();
 	}
 	
-	public java.lang.String getPathToCSDefinition() {
+	public String getPathToCSDefinition() {
 		return "org.kermeta.kp.model/src/metamodel/KermetaProject.cs";
 	}
 	
-	public java.lang.String[] getTokenNames() {
+	public String[] getTokenNames() {
 		return new org.kermeta.kp.editor.mopp.KptParser(null).getTokenNames();
 	}
 	
-	public org.kermeta.kp.editor.IKptTokenStyle getDefaultTokenStyle(java.lang.String tokenName) {
+	public org.kermeta.kp.editor.IKptTokenStyle getDefaultTokenStyle(String tokenName) {
 		return new org.kermeta.kp.editor.mopp.KptTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	

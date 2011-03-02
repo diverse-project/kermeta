@@ -24,13 +24,13 @@ public class KptReferenceResolverSwitch implements org.kermeta.kp.editor.IKptRef
 		dependencyDepRefReferenceResolver.setOptions(options);
 	}
 	
-	public void resolveFuzzy(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.kermeta.kp.editor.IKptReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.kermeta.kp.editor.IKptReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
 		if (container == null) {
 			return;
 		}
 		if (org.kermeta.kp.KpPackage.eINSTANCE.getImportedSource().isInstance(container)) {
 			KptFuzzyResolveResult<org.kermeta.kp.Dependency> frr = new KptFuzzyResolveResult<org.kermeta.kp.Dependency>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("from")) {
 				importedSourceFromReferenceResolver.resolve(identifier, (org.kermeta.kp.ImportedSource) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -38,7 +38,7 @@ public class KptReferenceResolverSwitch implements org.kermeta.kp.editor.IKptRef
 		}
 		if (org.kermeta.kp.KpPackage.eINSTANCE.getDependency().isInstance(container)) {
 			KptFuzzyResolveResult<org.kermeta.kp.KermetaProjectRef> frr = new KptFuzzyResolveResult<org.kermeta.kp.KermetaProjectRef>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("depRef")) {
 				dependencyDepRefReferenceResolver.resolve(identifier, (org.kermeta.kp.Dependency) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
