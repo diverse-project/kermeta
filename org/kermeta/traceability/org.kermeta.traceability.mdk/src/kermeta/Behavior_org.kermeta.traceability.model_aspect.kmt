@@ -6,22 +6,22 @@
  * 		Didier Vojtisek
  *		David Touzet
  */
+@mainClass "traceability::TracePackage"
+@mainOperation "size"
 
-package org::kermeta::traceability::mdk;
+package org::kermeta::traceability;
 
 require kermeta
-require "MetaModel_org.kermeta.traceability.model.kmt"
 
+require "MetaModel_org.kermeta.traceability.model.kmt"
 using kermeta::standard
 
-
-
-/**
+/*
  * This class represents a trace model.
  * This is a set of traces, references and messages.
  */
 aspect class TracePackage {
-	/** Boolean stating whether contained references are optimized */
+	/* Boolean stating whether contained references are optimized */
 	property readonly optimizedReferences : Boolean getter is do
 		result := true
 
@@ -40,7 +40,7 @@ aspect class TracePackage {
 	end
 
 
-	/**
+	/*
 	 * This operation adds a new trace to the trace model with references duplication,
 	 * which breaks the trace model optimized status
 	 */
@@ -49,7 +49,7 @@ aspect class TracePackage {
 		references.add(trc.targetElem.asType(Reference))
 	end
 
-	/**
+	/*
 	 * This operation adds a new trace to the trace model with references optimization
 	 */
 	operation addOptimizedTrace(trc: Trace) is do
@@ -73,7 +73,7 @@ aspect class TracePackage {
 
 	end
 
-	/**
+	/*
 	 * This operation searches a reference among the set of references already
 	 * contained by the trace model.
 	 * Search is based on the isSameAs operation implemented by reference elements
@@ -85,14 +85,14 @@ aspect class TracePackage {
 		from var ref_It : Iterator<Reference> init references.iterator
 		until found or ref_It.isOff loop
 			var crtRef : Reference init ref_It.next
-			if(crtRef.equals(ref)) then
+			if(crtRef.signature ==ref.signature ) then
 				found := true
 				result := crtRef
 			end
 		end
 	end
 
-	/**
+	/*
 	 * This operation optimizes the set of contained references my merging simlar
 	 * references into a single one.
 	 * Concerned traces are updated consequently
@@ -138,17 +138,27 @@ aspect class TracePackage {
 	end 
 }
 
+/*
+ * This abstract class represents a reference to a concrete object
+ */
+aspect abstract class Reference {
+	/*
+	 * This abstract operation allows testing reference equivalence
+	 */
+	operation isSameAs(obj: Object) : Boolean is abstract
+}
 
 
 
-/**
+/*
  * This class represents a reference to a concrete object contained by a file
  */
-aspect abstract class FileReference inherits Reference {
-	/**
+aspect abstract class FileReference inherits Reference{
+	
+	/*
 	 * This operation defines equivalency between FileReference elements
 	 */
-	method equals(obj: Object) : Boolean is do
+	method isSameAs(obj: Object) : Boolean is do
 		result := false
 		if(obj != void and FileReference.isInstance(obj)) then
 			var fileRef : FileReference
@@ -157,85 +167,100 @@ aspect abstract class FileReference inherits Reference {
 		end
 	end
 	
-	method hashcode() : Integer is do
-		result := fileURI.hashcode()
-	end
 	
 }
 
 
-/**
+/*
  * This class represents a reference to a textual file concrete object
  */
 aspect class TextReference inherits FileReference {
-	/**
+	/*
 	 * This operation defines equivalency between TextReference elements
 	 */
-	method equals(obj: Object) : Boolean from FileReference is do
+	method isSameAs(obj: Object) : Boolean from FileReference is do
 		result := false
-		if(obj != void and obj.getMetaClass == TextReference) then
+		
+		//if(obj != void and obj.getMetaClass == TextReference) then
+		if(obj != void and obj.isInstanceOf(TextReference)) then
 			var txtRef : TextReference
 			txtRef ?= obj
 			result := super(obj) and
 				self.charBeginOffset == txtRef.charBeginOffset and
 				self.charEndOffset == txtRef.charEndOffset
-
+			
 		end
 	end
-
-	/** This method returns a string representation of the TextReference */
+	
+	
+	/* This method returns a string representation of the TextReference */
 	method toString() : String is do
 		result := fileURI + "#" + charBeginOffset.toString
 			+ "#" + charEndOffset.toString
 	end
+	
+	method signature(): String is do 
+		result:="TextReference:"+fileURI+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
+	end
 }
 
 
-/**
+/*
  * This class represents a reference to a XML concrete object
  */
 aspect class XMLReference inherits FileReference {
-	/**
+	/*
 	 * This operation defines equivalency between XMLReference elements
 	 */
-	method equals(obj: Object) : Boolean from FileReference is do
+	method isSameAs(obj: Object) : Boolean from FileReference is do
 		result := false
-		if(obj != void and obj.getMetaClass == XMLReference) then
+		//if(obj != void and obj.getMetaClass == XMLReference) then
+		if(obj != void and obj.isInstanceOf(XMLReference)) then
 			var xmlRef : XMLReference
 			xmlRef ?= obj
 			result := super(obj) and self.xPointer == xmlRef.xPointer
 		end
 	end
 
-	/** This method returns a string representation of the XMLReference */
+	/* This method returns a string representation of the XMLReference */
 	method toString() : String is do
 		result := fileURI + "#" + xPointer
+	end
+	method signature(): String is do 
+		result:="XMLReference:"+fileURI+",xp:"+xPointer
 	end
 }
 
 
-/**
+/*
  * This class represents a reference to a model element
  */
 aspect class ModelReference inherits Reference {
-	/**
+	/*
 	 * This operation defines equivalency between ModelReference elements
 	 */
-	method equals(obj: Object) : Boolean is do
+	method isSameAs(obj: Object) : Boolean is do
 		result := false
-		if(obj != void and obj.getMetaClass == ModelReference) then
+		if(obj != void and obj.isInstanceOf(ModelReference)) then
 			var mdlRef : ModelReference
 			mdlRef ?= obj
 			result := self.refObject == mdlRef.refObject
 		end
 	end
 
-	/** This method returns a string representation of the ModelReference */
+	/* This method returns a string representation of the ModelReference */
 	method toString() : String is do
 		result := refObject.toString
 	end
 	
-	method hashcode() : Integer is do 
-		result := refObject.hashcode()
+	method signature() : String is do 
+		var i : Integer 
+		result:="ModelReference:"+refObject.oid.toString
+		//result:=""
 	end
+	
 }
+
+
+
+

@@ -5,19 +5,18 @@
  * Authors  : 
  *            xdolques
  */
-@mainClass "org::kermeta::traceability::mdk::TraceRegistry"
+@mainClass "org::kermeta::traceability::TraceRegistry"
 @mainOperation "size"
 
 
-package org::kermeta::traceability::mdk;
+package org::kermeta::traceability;
 
-//require "MetaModel_org.kermeta.traceability.model.kmt"
 require "Behavior_org.kermeta.traceability.model_aspect.kmt"
 
 require kermeta
 using kermeta::standard
 using kermeta::utils
-
+//using traceability
 using kermeta::language::structure
 
 
@@ -25,26 +24,26 @@ using kermeta::language::structure
 class TraceRegistry
 {	
 	
-	attribute registry : Hashtable<Reference,Reference>
+	attribute registry : Hashtable<String,Reference>
 	
 	attribute traces : TracePackage
 	
 	//return the hashtable providing the link to the references with traces	
-	operation getRegistry() : Hashtable<Reference,Reference> is do
+	operation getRegistry() : Hashtable<String,Reference> is do
 		if registry==void then 
-			self.registry:=Hashtable<Reference,Reference>.new
+			self.registry:=Hashtable<String,Reference>.new
 		end
 		result := registry
 	end
 	
 	operation getCorrespondingReference(initRef : Reference) : Reference is do
-		if not getRegistry.containsKey(initRef) then
+		if not getRegistry.containsKey(initRef.signature) then
 			result:= cloneReference(initRef)
 			result.target.clear
-			getRegistry.put(result,result)
+			getRegistry.put(result.signature,result)
 			getTracePackage.references.add(result)
 		else
-			result:=getRegistry.getValue(initRef)
+			result:=getRegistry.getValue(initRef.signature)
 		end
 	end
 	
@@ -75,81 +74,7 @@ class TraceRegistry
 	
 	
 	
-	//add a new trace from 2 objects and a context
-	/*operation addObjectToObjectTrace(source : Object , target : Object , context : Object) : Void is do
-		
-		var sourceRef : ModelReference init getModelReference(source)
-		var targetRef : ModelReference init getModelReference(target) 
-		sourceRef.addTarget(context, targetRef)
-	end*/
-	/*
-	//resolve all objects that have been created from source
-	operation resolveAllTargets(source : Object) : Sequence<Object>  is do
-		if not getObjectRegistry.containsKey(source) then
-			result:=void
-			else
-			var sourceRef : ModelReference init objectRegistry.getValue(source)
-			result:=sourceRef.resolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
-		end
-	end
 	
-	//resolve an object of type t that has been created from source
-	operation resolveOneTarget(source : Object, t:Class) : Object is do
-		if not getObjectRegistry.containsKey(source) then
-			result:=void
-		else
-			var sourceRef : ModelReference init getObjectRegistry.getValue(source)
-			if sourceRef==void then 
-				stdio.writeln("sourceRef est void")
-			end
-			if sourceRef.resolveOne(t)==void then
-				stdio.writeln("targetRef est void")
-			end
-			result:=sourceRef.resolveOne(t).asType(ModelReference).refObject
-		end
-	end
-	
-	//resolve the objects that have been created from source in aContext
-	operation resolveTargetsIn(source : Object, aContext : Object) : Sequence<Object> is do
-		if not getObjectRegistry.containsKey(source) then
-			result:=void
-		else
-			var sourceRef : ModelReference init getObjectRegistry.getValue(source)
-			result:=sourceRef.resolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
-		end
-	end
-	
-	
-	// resolve all the creators of target
-	operation resolveAllSources(target : Object) : Sequence<Object>  is do
-		if not getObjectRegistry.containsKey(target) then
-			result:=void
-			else
-			var targetRef : ModelReference init getObjectRegistry.getValue(target)
-			result:=targetRef.invResolveAll().collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
-		end
-	end
-	
-	// resolve one creator of target of type t
-	operation resolveOneSource(target : Object, t:Class) : Object is do
-		if not getObjectRegistry.containsKey(target) then
-			result:=void
-			else
-			var targetRef : ModelReference init getObjectRegistry.getValue(target)
-			result:=targetRef.invResolveOne(t).asType(ModelReference).refObject
-		end
-	end
-	
-	// resolve the creators of target in aContext
-	operation resolveSourcesIn(target : Object,aContext : Object) : Sequence<Object> is do
-		if not getObjectRegistry.containsKey(target) then
-			result:=void
-			else
-			var targetRef : ModelReference init getObjectRegistry.getValue(target)
-			result:=targetRef.invResolveIn(aContext).collect{modelRef|modelRef.asType(ModelReference).refObject}.asType(Sequence<Object>)
-		end
-	end
-	*/
 	//return the tracepackage that stores all the traces
 	operation getTracePackage() : TracePackage is do
 		if traces==void then
@@ -158,6 +83,8 @@ class TraceRegistry
 		result:= traces
 	end
 
+	//utility operation for cloning a Reference depending on its type
+	//TODO move as a clone() method to class Reference
 	operation cloneReference(ref : Reference) : Reference is do
 		if ref.isInstanceOf(ModelReference) then
 			result := ModelReference.clone(ref.asType(ModelReference))
@@ -178,13 +105,15 @@ class TraceRegistry
 
 	
 
-	//return the sources that created ref
+	/**return the sources that created ref*/
+	//TODO for efficiency should create a TraceRegistry, add all elements and return theTracePackage
 	operation getRelatedSources(ref :Reference) : TracePackage is do
 		result:= TracePackage.new
 		var newRef : Reference init cloneReference(ref)
 		result.references.add(newRef)
 		getCorrespondingReference(ref).source.each{trc| 
-			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference)) 
+			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference))
+			
 			if sourceRef == void then
 				sourceRef := cloneReference(trc.sourceElem.asType(Reference))
 				sourceRef.target.clear
@@ -194,7 +123,7 @@ class TraceRegistry
 			}
 	end
 
-	//return the targets created by ref
+	/**return the targets created by ref*/
 	operation getRelatedTargets(ref : Reference) : TracePackage is do
 		result := TracePackage.new
 		var newRef : Reference init cloneReference(getCorrespondingReference(ref))
@@ -203,6 +132,7 @@ class TraceRegistry
 		
 		getCorrespondingReference(ref).target.each{trc|
 			var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
+			
 			if targetRef == void then
 				targetRef:=cloneReference(trc.targetElem.asType(Reference))
 				result.references.add(targetRef)
