@@ -7,6 +7,8 @@
  */
 package org::kermeta::language::resolver;
 
+//TODO : getAllSuperTypes
+
 //Kermeta metamodel
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 //Visitor of org::kermeta::language::structure
@@ -26,6 +28,8 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedTypeFinder.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedPropertyFinder.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
+//Aspect for getAllSuperTypes in ClassDefinition
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_Aspect_ClassDefinition.kmt"
 
 using org::kermeta::language::structure
 using language::helpers::structure
@@ -55,71 +59,19 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		var initialUnresolvedName : String init ctxt.unresolvedName
 	
 		//If we have already found the corresponding type
-		if (ctxt.unresolved.asType(UnresolvedType).correspondingType.isVoid()) then
+		if (not ctxt.unresolved.asType(UnresolvedType).correspondingType.isVoid()) then
 			ctxt.foundType := ctxt.unresolved.asType(UnresolvedType).correspondingType
 		else
 			if (resolvedTypeFinder.isVoid()) then
 				resolvedTypeFinder := ResolverResolvedTypeFinder.new
 			end
 			
-			var notTypeTypeContainer : TypeContainer init recursiveGetTypeContainer(ctxt.unresolved.asType(UnresolvedType))
-		
-			/*
-			* TypeParameters cases
-			*/
-		
-			//If the type we are looking for is in a parameter, it can be a typeParameter
-			if (notTypeTypeContainer.isInstanceOf(Parameter)) then
-				//If the Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				ctxt.foundType := notTypeTypeContainer.container.asType(Operation).typeParameter.detect{t|
-					t.name.equals(initialUnresolvedName)
-				}
-				if (ctxt.foundType.isVoid()) then
-					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					ctxt.foundType := notTypeTypeContainer.container.asType(Operation).container.asType(ClassDefinition).typeParameter.detect{t|
-						t.name.equals(ctxt.unresolvedName)
-					}
-				end
-			end
-			
-			//If the type we are looking for is in an operation, it can be a typeParameter
-			if (notTypeTypeContainer.isInstanceOf(Operation)) then	
-				//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				ctxt.foundType := notTypeTypeContainer.asType(Operation).typeParameter.detect{t|
-					t.name.equals(ctxt.unresolvedName)
-				}
-				if (ctxt.foundType.isVoid()) then
-					//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-					ctxt.foundType := notTypeTypeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
-						t.name.equals(ctxt.unresolvedName)
-					}
-				end
-			end
-		
-			//If the type we are looking for is contained by a Property, it can be a typeParameter
-			if (notTypeTypeContainer.isInstanceOf(Property)) then
-				var typeVar : TypeVariable
-				//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				typeVar := notTypeTypeContainer.container.asType(ClassDefinition).typeParameter.detect{t|
-					t.name.equals(ctxt.unresolvedName)
-				}
-				ctxt.foundType := typeVar
-			end
-			
-			//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
-			if (notTypeTypeContainer.isInstanceOf(ClassDefinition)) then									
-				var typeVar : TypeVariable
-				//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
-				typeVar := notTypeTypeContainer.asType(ClassDefinition).typeParameter.detect{t|
-					t.name.equals(ctxt.unresolvedName)
-				}
-				ctxt.foundType := typeVar
-			end
+			//Search for a corresponding TypeParameter
+			callTypeParameterFinder(ctxt)
 			
 			/*
 			* If we have not found a corresponding TypeParameter
-			*/
-			
+			*/			
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
 					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
@@ -171,7 +123,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		end
 		
 		if ctxt.foundType.isVoid() then
-			if (pass == 3 and (ctxt.verbose == 1 or ctxt.verbose >= 4)) then
+			if (pass == 3 and (ctxt.verbose == 1 or ctxt.verbose >= 4)) then				
 				errorMsg(initialUnresolvedName, initialQualifiedPath, ctxt)
 			end
 		else
@@ -179,6 +131,67 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
 		end		
 		ctxt.reset()
+	end
+	
+	/*
+	* Decomposition of callTypeFinder
+	*/
+	
+	operation callTypeParameterFinder(ctxt : StructureVisitorContext) is do
+		var initialUnresolvedName : String init ctxt.unresolvedName
+		var notTypeTypeContainer : TypeContainer init recursiveGetTypeContainer(ctxt.unresolved.asType(UnresolvedType))
+		
+		/*
+		* TypeParameters cases
+		*/
+	
+		//If the type we are looking for is in a parameter, it can be a typeParameter
+		if (notTypeTypeContainer.isInstanceOf(Parameter)) then
+		//If the Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+			ctxt.foundType := notTypeTypeContainer.container.asType(Operation).typeParameter.detect{t|
+				t.name.equals(initialUnresolvedName)
+			}
+			if (ctxt.foundType.isVoid()) then
+				//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+				ctxt.foundType := notTypeTypeContainer.container.asType(Operation).container.asType(ClassDefinition).typeParameter.detect{t|
+					t.name.equals(ctxt.unresolvedName)
+				}
+			end
+		end
+		
+		//If the type we are looking for is in an operation, it can be a typeParameter
+		if (notTypeTypeContainer.isInstanceOf(Operation)) then	
+			//If the containing Operation contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+			ctxt.foundType := notTypeTypeContainer.asType(Operation).typeParameter.detect{t|
+				t.name.equals(ctxt.unresolvedName)
+			}
+		if (ctxt.foundType.isVoid()) then
+				//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+				ctxt.foundType := notTypeTypeContainer.asType(Operation).container().asType(ClassDefinition).typeParameter.detect{t|
+					t.name.equals(ctxt.unresolvedName)
+				}
+			end
+		end
+	
+		//If the type we are looking for is contained by a Property, it can be a typeParameter
+		if (notTypeTypeContainer.isInstanceOf(Property)) then
+			var typeVar : TypeVariable
+			//If the ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+			typeVar := notTypeTypeContainer.container.asType(ClassDefinition).typeParameter.detect{t|
+				t.name.equals(ctxt.unresolvedName)
+			}
+			ctxt.foundType := typeVar
+		end
+		
+		//If the type we are looking for is contained by a ClassDefinition, it can be a typeParameter
+		if (notTypeTypeContainer.isInstanceOf(ClassDefinition)) then									
+			var typeVar : TypeVariable
+			//If the containing ClassDefinition contains a TypeVariable which name is the unresolvedName, we found the good TypeVariable
+			typeVar := notTypeTypeContainer.asType(ClassDefinition).typeParameter.detect{t|
+				t.name.equals(ctxt.unresolvedName)
+			}
+			ctxt.foundType := typeVar
+		end
 	end
 	
 	operation errorMsg(initialUnresolvedName : String, initialQualifiedPath : Sequence<String>, ctxt : StructureVisitorContext) is do
@@ -201,13 +214,16 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			error := error + ctxt.unresolved.container.toString()
 		end
 					
-		error := error + "\n	(looked for in current package: " + ctxt.currentPackage.getQualifiedName() + " and in packages: "
-		ctxt.unresolved.asType(UnresolvedType).usings.each{u|
-			error := error + u.fromQName
-			if (not u.equals(ctxt.unresolved.asType(UnresolvedType).usings.last())) then
-				error := error + ", "
-			end
+		error := error + "\n	(looked for in current package: " + ctxt.currentPackage.getQualifiedName()
+		if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
+			error := error + " and in packages: "
+			ctxt.unresolved.asType(UnresolvedType).usings.each{u|
+				error := error + u.fromQName
+				if (not u.equals(ctxt.unresolved.asType(UnresolvedType).usings.last())) then
+					error := error + ", "
+				end
 			}
+		end
 		error := error + ")"
 											
 		if (ctxt.exceptions) then				
@@ -296,7 +312,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					//We look for the Operation in the ClassDefinition of this Class
 					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt)
 				else
-					if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isInstanceOf(UnresolvedType) and (ctxt.verbose == 3 or ctxt.verbose == 5)) then
+					if (ctxt.verbose == 3 or ctxt.verbose == 5) then
 						var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
 						
 						if (ctxt.exceptions) then
@@ -311,16 +327,19 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				
 			//If there is no from
 			else
-				//We look for the Operation in all the superTypes of the of the container of the UnresolvedOperation			
-				var containingClassDef : ClassDefinition init ctxt.unresolved.asType(UnresolvedOperation).container.container.asType(ClassDefinition)
-				containingClassDef.superType.each{st|
-					st.accept(resolvedOperationFinder, ctxt)					
+				//We look for the Operation in all the typedefinitions of the superTypes of the container of the UnresolvedOperation
+				var containingOperation : Operation init ctxt.currentElement.asType(Operation)
+				var containingClassDef : ClassDefinition init containingOperation.container.asType(ClassDefinition)
+				containingClassDef.getAllSuperTypes.each{st|
+					if (st.isInstanceOf(Class)) then
+						st.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt)
+					end
 				}
 			end
 
 			if (ctxt.foundOperation.isVoid() and ctxt.verbose >= 3) then			
 				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName
-				error := error + " in " + ctxt.unresolved.container.asType(Operation).container.asType(ClassDefinition).name
+				error := error + " in " + ctxt.currentElement.asType(Operation).container.asType(ClassDefinition).name + "::" + ctxt.currentElement.asType(Operation).name
 				if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
 					error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
 				end
@@ -346,8 +365,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	*/
 
 	method visitClass(c : Class, ctxt : StructureVisitorContext) is do
-		if (c.visitedAsClass.isVoid) then
-			c.visitedAsClass := true
+		if (c.toBeVisitedAsClass(pass)) then
 		
 			//Visiting inherited properties from ParameterizedType
 			visitParameterizedType(c, ctxt)
@@ -355,8 +373,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
-		if (c.visitedAsClassDefinition.isVoid) then	
-			c.visitedAsClassDefinition := true
+		if (c.toBeVisitedAsClassDefinition(pass)) then
 				
 			//Visiting inherited properties from GenericTypeDefinition
 			visitGenericTypeDefinition(c, ctxt)
@@ -419,8 +436,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 		
 	method visitDataType(d : DataType, ctxt : StructureVisitorContext) is do
-		if (d.visitedAsDataType.isVoid) then
-			d.visitedAsDataType := true
+		if (d.toBeVisitedAsDataType(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
 			visitTypeDefinition(d, ctxt)			
@@ -428,8 +444,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitEnumeration(e : Enumeration, ctxt : StructureVisitorContext) is do
-		if (e.visitedAsEnumeration.isVoid) then
-			e.visitedAsEnumeration := true
+		if (e.toBeVisitedAsEnumeration(pass)) then
 	
 			//Visiting inherited properties from DataType
 			visitDataType(e, ctxt)
@@ -437,8 +452,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitFunctionType(f : FunctionType, ctxt : StructureVisitorContext) is do
-		if (f.visitedAsFunctionType.isVoid) then
-			f.visitedAsFunctionType := true
+		if (f.toBeVisitedAsFunctionType(pass)) then
 
 			//Visiting inherited properties from TypeContainer
 			visitTypeContainer(f, ctxt)			
@@ -484,8 +498,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitGenericTypeDefinition(g : GenericTypeDefinition, ctxt : StructureVisitorContext) is do
-		if (g.visitedAsGenericTypeDefinition.isVoid) then
-			g.visitedAsGenericTypeDefinition := true
+		if (g.toBeVisitedAsGenericTypeDefinition(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
 			visitTypeDefinition(g, ctxt)		
@@ -524,8 +537,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitModelType(m : ModelType, ctxt : StructureVisitorContext) is do
-		if (m.visitedAsModelType.isVoid) then
-			m.visitedAsModelType := true
+		if (m.toBeVisitedAsModelType(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
 			visitTypeDefinition(m, ctxt)
@@ -533,8 +545,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitModelTypeVariable(m : ModelTypeVariable, ctxt : StructureVisitorContext) is do
-		if (m.visitedAsModelTypeVariable.isVoid) then
-			m.visitedAsModelTypeVariable := true
+		if (m.toBeVisitedAsModelTypeVariable(pass)) then
 		
 			//Visiting inherited properties from TypeVariable
 			visitTypeVariable(m, ctxt)			
@@ -573,16 +584,18 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
-		if (m.visitedAsModelingUnit.isVoid) then
-			m.visitedAsModelingUnit := true
+		
+		pass := 1
+	
+		if (m.toBeVisitedAsModelingUnit(pass)) then
+		
+			
 			
 			unresolvedTypesToBeRemoved := Set<UnresolvedType>.new
 			
 			ctxt.currentModelingUnit := m
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(m, ctxt)
-			
-			pass := 1
 			
 			//Visiting contained Packages
 			m.packages.each{p|
@@ -615,8 +628,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitMultiplicityElement(m : MultiplicityElement, ctxt : StructureVisitorContext) is do
-		if (m.visitedAsMultiplicityElement.isVoid) then
-			m.visitedAsMultiplicityElement := true
+		if (m.toBeVisitedAsMultiplicityElement(pass)) then
 			
 			//Visiting inherited properties from TypedElement
 			visitTypedElement(m, ctxt)
@@ -624,8 +636,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitObjectTypeVariable(o : ObjectTypeVariable, ctxt : StructureVisitorContext) is do
-		if (o.visitedAsObjectTypeVariable.isVoid) then	
-			o.visitedAsObjectTypeVariable := true
+		if (o.toBeVisitedAsObjectTypeVariable(pass)) then
 		
 			//Visiting inherited properties from TypeVariable
 			visitTypeVariable(o, ctxt)
@@ -633,8 +644,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitOperation(o : Operation, ctxt : StructureVisitorContext) is do
-		if (o.visitedAsOperation.isVoid) then
-			o.visitedAsOperation := true
+		if (o.toBeVisitedAsOperation(pass)) then
 		
 			//Visiting inherited properties from MultiplicityElement
 			visitMultiplicityElement(o, ctxt)	
@@ -733,8 +743,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 
 	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsPackage.isVoid) then
-			p.visitedAsPackage := true
+		if (p.toBeVisitedAsPackage(pass)) then
 			
 			ctxt.currentPackage := p
 			//Visiting inherited properties from TypeDefinitionContainer
@@ -748,8 +757,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitParameter(p : Parameter, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsParameter.isVoid) then
-			p.visitedAsParameter := true
+		if (p.toBeVisitedAsParameter(pass)) then
 		
 			//Visiting inherited properties from MultiplicityElement
 			visitMultiplicityElement(p, ctxt)
@@ -772,8 +780,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitParameterizedType(p : ParameterizedType, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsParameterizedType.isVoid) then
-			p.visitedAsParameterizedType := true
+		if (p.toBeVisitedAsParameterizedType(pass)) then
 			
 			//Visiting referenced TypeVariableBindings
 			p.virtualTypeBinding.each{v|
@@ -788,8 +795,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsPrimitiveType.isVoid) then
-			p.visitedAsPrimitiveType := true
+		if (p.toBeVisitedAsPrimitiveType(pass)) then
 
 			//Visiting inherited properties from DataType
 			visitDataType(p, ctxt)
@@ -817,8 +823,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitProductType(p : ProductType, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsProductType.isVoid) then
-			p.visitedAsProductType := true
+		if (p.toBeVisitedAsProductType(pass)) then
 
 			//Visiting inherited properties from TypeContainer
 			visitTypeContainer(p, ctxt)
@@ -857,8 +862,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitProperty(p : Property, ctxt : StructureVisitorContext) is do
-		if (p.visitedAsProperty.isVoid) then
-			p.visitedAsProperty := true
+		if (p.toBeVisitedAsProperty(pass)) then
 			
 			//Visiting properties inherited from MultiplicityElement
 			visitMultiplicityElement(p, ctxt)
@@ -891,8 +895,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypeContainer(tc : TypeContainer, ctxt : StructureVisitorContext) is do
-		if (tc.visitedAsTypeContainer.isVoid) then
-			tc.visitedAsTypeContainer := true
+		if (tc.toBeVisitedAsTypeContainer(pass)) then
 			
 			//Visiting types and handling Unresolved
 			var typesToVisit : Collection<Type> init Set<Type>.new
@@ -919,8 +922,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 		
 	method visitTypeDefinition(t : TypeDefinition, ctxt : StructureVisitorContext) is do
-		if(t.visitedAsTypeDefinition.isVoid()) then
-			t.visitedAsTypeDefinition := true
+		if(t.toBeVisitedAsTypeDefinition(pass)) then
 		
 			//Visiting contained Types
 			visitTypeContainer(t, ctxt)	
@@ -970,8 +972,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypeDefinitionContainer(t : TypeDefinitionContainer, ctxt : StructureVisitorContext) is do
-		if (t.visitedAsTypeDefinitionContainer.isVoid()) then
-			t.visitedAsTypeDefinitionContainer := true
+		if (t.toBeVisitedAsTypeDefinitionContainer(pass)) then
 			
 			//Visiting typeDefinitions
 			t.ownedTypeDefinition.each{o|
@@ -981,8 +982,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypeMapping(t : TypeMapping, ctxt : StructureVisitorContext) is do
-		if (t.visitedAsTypeMapping.isVoid()) then
-			t.visitedAsTypeMapping := true
+		if (t.toBeVisitedAsTypeMapping(pass)) then
 			
 			//Visiting target and source Types and handling Unresolved
 			if (isVisitable(t.targetType)) then
@@ -1007,8 +1007,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypeVariable(t : TypeVariable, ctxt : StructureVisitorContext) is do
-		if (t.visitedAsTypeVariable.isVoid()) then
-			t.visitedAsTypeVariable := true
+		if (t.toBeVisitedAsTypeVariable(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
 			visitTypeContainer(t, ctxt)
@@ -1036,8 +1035,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypeVariableBinding(t : TypeVariableBinding, ctxt : StructureVisitorContext) is do
-		if (t.visitedAsTypeVariableBinding.isVoid()) then
-			t.visitedAsTypeVariableBinding := true
+		if (t.toBeVisitedAsTypeVariableBinding(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
 			visitTypeContainer(t, ctxt)
@@ -1081,8 +1079,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitTypedElement(t : TypedElement, ctxt : StructureVisitorContext) is do
-		if (t.visitedAsTypedElement.isVoid()) then
-			t.visitedAsTypedElement := true
+		if (t.toBeVisitedAsTypedElement(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
 			visitTypeContainer(t, ctxt)
@@ -1124,6 +1121,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 					if not foundType.isVoid() then
 						unresolvedTypesToBeRemoved.add(u.~from.asType(UnresolvedType))
 						foundType.accept(self, ctxt)
+						u.~from := foundType
 					end
 				end
 			end
@@ -1150,8 +1148,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	end
 	
 	method visitVirtualType(v : VirtualType, ctxt : StructureVisitorContext) is do
-		if (v.visitedAsVirtualType.isVoid) then
-			v.visitedAsVirtualType := true
+		if (v.toBeVisitedAsVirtualType(pass)) then
 			
 			//Visiting properties inherited from ObjectTypeVariable
 			visitObjectTypeVariable(v, ctxt)
