@@ -9,7 +9,7 @@ package org.kermeta.kp.editor.mopp;
 /**
  * A singleton class for the text resource plug-in.
  */
-public class KptPlugin extends org.eclipse.core.runtime.Plugin {
+public class KptPlugin /*extends org.eclipse.core.runtime.Plugin*/ {
 	
 	public static final String PLUGIN_ID = "org.kermeta.kp.editor";
 	/**
@@ -26,17 +26,17 @@ public class KptPlugin extends org.eclipse.core.runtime.Plugin {
 	private static KptPlugin plugin;
 	
 	public KptPlugin() {
-		super();
+		//super();
 	}
 	
 	public void start(org.osgi.framework.BundleContext context) throws Exception {
-		super.start(context);
+		//super.start(context);
 		plugin = this;
 	}
 	
 	public void stop(org.osgi.framework.BundleContext context) throws Exception {
 		plugin = null;
-		super.stop(context);
+		//super.stop(context);
 	}
 	
 	public static KptPlugin getDefault() {
@@ -51,8 +51,8 @@ public class KptPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable exception) {
-		org.eclipse.core.runtime.IStatus status;
+	public static void /*org.eclipse.core.runtime.IStatus*/ logError(String message, Throwable exception) {
+		/*org.eclipse.core.runtime.IStatus status;
 		if (exception != null) {
 			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, KptPlugin.PLUGIN_ID, 0, message, exception);
 		} else {
@@ -67,6 +67,6 @@ public class KptPlugin extends org.eclipse.core.runtime.Plugin {
 		} else {
 			pluginInstance.getLog().log(status);
 		}
-		return status;
+		return status;*/
 	}
 }

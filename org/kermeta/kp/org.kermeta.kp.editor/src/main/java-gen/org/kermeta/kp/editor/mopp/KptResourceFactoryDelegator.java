@@ -18,7 +18,7 @@ public class KptResourceFactoryDelegator implements org.eclipse.emf.ecore.resour
 		if (factories == null) {
 			factories = new java.util.LinkedHashMap<String, org.eclipse.emf.ecore.resource.Resource.Factory>();
 		}
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
+		/*if (org.eclipse.core.runtime.Platform.isRunning()) {
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
 			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.kermeta.kp.editor.mopp.KptPlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
 			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
@@ -46,7 +46,7 @@ public class KptResourceFactoryDelegator implements org.eclipse.emf.ecore.resour
 					org.kermeta.kp.editor.mopp.KptPlugin.logError("Exception while getting default options.", ce);
 				}
 			}
-		}
+		}*/
 		if (factories.get("") == null) {
 			factories.put("", new org.kermeta.kp.editor.mopp.KptResourceFactory());
 		}

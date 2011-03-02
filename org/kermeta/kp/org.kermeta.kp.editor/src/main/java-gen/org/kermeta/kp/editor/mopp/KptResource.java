@@ -391,7 +391,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 						try {
 							postProcessor.process(this);
 						} catch (Exception e) {
-							org.kermeta.kp.editor.mopp.KptPlugin.logError("Exception while running a post-processor.", e);
+							//org.kermeta.kp.editor.mopp.KptPlugin.logError("Exception while running a post-processor.", e);
 						}
 					}
 				}
@@ -420,7 +420,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
 		getDiagnostics(problem.getType()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
-			org.kermeta.kp.editor.mopp.KptMarkerHelper.mark(this, diagnostic);
+			//org.kermeta.kp.editor.mopp.KptMarkerHelper.mark(this, diagnostic);
 		}
 		java.util.Collection<org.kermeta.kp.editor.IKptQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
@@ -436,7 +436,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
 		getDiagnostics(problem.getType()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
-			org.kermeta.kp.editor.mopp.KptMarkerHelper.mark(this, diagnostic);
+			//org.kermeta.kp.editor.mopp.KptMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
@@ -458,7 +458,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	
 	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
 		java.util.Map<Object, Object> loadOptionsCopy = org.kermeta.kp.editor.util.KptMapUtil.copySafelyToObjectToObjectMap(loadOptions);
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
+		/*if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// find default load option providers
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
 			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.kermeta.kp.editor.mopp.KptPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
@@ -474,7 +474,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 					org.kermeta.kp.editor.mopp.KptPlugin.logError("Exception while getting default options.", ce);
 				}
 			}
-		}
+		}*/
 		return loadOptionsCopy;
 	}
 	
@@ -524,7 +524,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		getErrors().clear();
 		getWarnings().clear();
 		if (isMarkerCreationEnabled()) {
-			org.kermeta.kp.editor.mopp.KptMarkerHelper.unmark(this);
+			//org.kermeta.kp.editor.mopp.KptMarkerHelper.unmark(this);
 		}
 		proxyCounter = 0;
 		resolverSwitch = null;
@@ -551,7 +551,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		// The EMF validation framework code throws a NPE if the validation plug-in is not
 		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
 		// need to catch the exception here.
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
+		/*if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// The EMF validation framework code throws a NPE if the validation plug-in is not
 			// loaded. This is a workaround for bug 322079.
 			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
@@ -565,10 +565,10 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 					org.kermeta.kp.editor.mopp.KptPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
 				}
 			}
-		}
+		}*/
 	}
 	
-	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
+	/*private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
 		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		causes.add(root);
 		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
@@ -590,7 +590,7 @@ public class KptResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
 			addStatus(child, root);
 		}
-	}
+	}*/
 	
 	public org.kermeta.kp.editor.IKptQuickFix getQuickFix(String quickFixContext) {
 		return quickFixMap.get(quickFixContext);

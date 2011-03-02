@@ -6,7 +6,7 @@
  */
 package org.kermeta.kp.editor.mopp;
 
-public class KptBuilderAdapter extends org.eclipse.core.resources.IncrementalProjectBuilder {
+public class KptBuilderAdapter/* extends org.eclipse.core.resources.IncrementalProjectBuilder*/ {
 	
 	/**
 	 * the ID of the default, generated builder
@@ -15,11 +15,11 @@ public class KptBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 	
 	private org.kermeta.kp.editor.IKptBuilder builder = new org.kermeta.kp.editor.mopp.KptBuilder();
 	
-	public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+	/*public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
 		return build(kind, args, monitor, builder, getProject());
-	}
+	}*/
 	
-	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<?,?> args, final org.eclipse.core.runtime.IProgressMonitor monitor, final org.kermeta.kp.editor.IKptBuilder builder, org.eclipse.core.resources.IProject project) throws org.eclipse.core.runtime.CoreException {
+	/*public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<?,?> args, final org.eclipse.core.runtime.IProgressMonitor monitor, final org.kermeta.kp.editor.IKptBuilder builder, org.eclipse.core.resources.IProject project) throws org.eclipse.core.runtime.CoreException {
 		org.eclipse.core.resources.IResourceDelta delta = getDelta(project);
 		if (delta == null) {
 			return null;
@@ -42,6 +42,6 @@ public class KptBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 			}
 		});
 		return null;
-	}
+	}*/
 	
 }

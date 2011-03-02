@@ -12,9 +12,9 @@ package org.kermeta.kp.editor.util;
  */
 public class KptTextResourceUtil {
 	
-	public static org.kermeta.kp.editor.mopp.KptResource getResource(org.eclipse.core.resources.IFile file) {
+	public static org.kermeta.kp.editor.mopp.KptResource getResource(/*org.eclipse.core.resources.IFile file*/) {
 		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
+		org.eclipse.emf.ecore.resource.Resource csResource = null; //rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
 		return (org.kermeta.kp.editor.mopp.KptResource) csResource;
 	}
 	

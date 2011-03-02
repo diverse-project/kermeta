@@ -31,7 +31,7 @@ public class KptMarkerHelper {
 	 * @param resource The resource that is the file to mark.
 	 * @param diagnostic The diagnostic with information for the marker.
 	 */
-	public static void mark(org.eclipse.emf.ecore.resource.Resource resource, final org.kermeta.kp.editor.IKptTextDiagnostic diagnostic) {
+	/*public static void mark(org.eclipse.emf.ecore.resource.Resource resource, final org.kermeta.kp.editor.IKptTextDiagnostic diagnostic) {
 		if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
 			return;
 		}
@@ -51,9 +51,9 @@ public class KptMarkerHelper {
 				return org.eclipse.core.runtime.Status.OK_STATUS;
 			}
 		}.schedule();
-	}
+	}*/
 	
-	private static void createMarkerFromDiagnostic(org.eclipse.core.resources.IFile file, final org.kermeta.kp.editor.IKptTextDiagnostic diagnostic) {
+	/*private static void createMarkerFromDiagnostic(org.eclipse.core.resources.IFile file, final org.kermeta.kp.editor.IKptTextDiagnostic diagnostic) {
 		try {
 			if (file.findMarkers(MARKER_TYPE, false, org.eclipse.core.resources.IResource.DEPTH_ZERO).length >= MAXIMUM_MARKERS) {
 				return;
@@ -90,15 +90,15 @@ public class KptMarkerHelper {
 				org.kermeta.kp.editor.mopp.KptPlugin.logError("Error marking resource:", ce);
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * Removes all markers from a given resource.
 	 * 
 	 * @param resource The resource where to delete markers from
 	 */
-	public static void unmark(org.eclipse.emf.ecore.resource.Resource resource) {
-		if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
+	public static void unmark(/*org.eclipse.emf.ecore.resource.Resource resource*/) {
+		/*if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
 			return;
 		}
 		String platformString = resource.getURI().toPlatformString(true);
@@ -123,6 +123,6 @@ public class KptMarkerHelper {
 				}
 				return org.eclipse.core.runtime.Status.OK_STATUS;
 			}
-		}.schedule();
+		}.schedule();*/
 	}
 }
