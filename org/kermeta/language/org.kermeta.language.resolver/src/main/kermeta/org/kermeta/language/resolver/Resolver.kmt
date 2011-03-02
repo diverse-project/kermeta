@@ -32,7 +32,7 @@ class Resolver
 	
 		var repository : EMFRepository init EMFRepository.new
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
-		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/miniframework.km")
+		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/AfterMerging_HelloWorldMiniframework.km")
 		       	
        	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
        	unresolvedModelingUnit ?= unresolvedModelResource.one
@@ -43,32 +43,32 @@ class Resolver
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
        	
-        /*var report : Set<DanglingDiagnostic>
+		var report : Set<DanglingDiagnostic>
 	 	report := unresolvedModelResource.findDanglingModelElements()
 	 	report.each{ diag |
 	 		var danglingName : String init ""
 	 		var referencingName : String init ""
 	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
-	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).getName() + ")"
+	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
 	 		else
 	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
-	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).getName() + ")"
+	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).name() + ")"
 	 			end
 	 		end
 	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
-	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).getName() + ")"
+	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
 	 		else
 	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
-	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).getName() + ")"
+	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).name() + ")"
 	 			end
 	 		end
 			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
 			diag.referencingProperty.name + referencingName)
 		}
         
-        stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")*/
+        stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")
        	
-       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/miniframeworkResolved.km")
+       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/AfterMerging_HelloWorldMiniframeworkResolved.km")
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " saved************************")
        	

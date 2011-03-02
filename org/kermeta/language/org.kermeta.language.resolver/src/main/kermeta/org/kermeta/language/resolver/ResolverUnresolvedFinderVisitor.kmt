@@ -176,13 +176,13 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			end
 		else
 			ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
-				unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
+			unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
 		end		
 		ctxt.reset()
 	end
 	
 	operation errorMsg(initialUnresolvedName : String, initialQualifiedPath : Sequence<String>, ctxt : StructureVisitorContext) is do
-		var error : String init "Resolver (Pass " + pass.toString() + "): No corresponding TypeDefinition found for UnresolvedType "
+		var error : String init "Resolver: No corresponding TypeDefinition found for UnresolvedType "
 		initialQualifiedPath.each{s|
 			error := error + s + "::"
 		}
