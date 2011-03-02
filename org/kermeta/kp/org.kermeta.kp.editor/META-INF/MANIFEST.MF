@@ -1,24 +1,35 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: EMFText Parser Plugin: kpt
-Bundle-SymbolicName: org.kermeta.kp.editor;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.resources,
-  org.eclipse.emf,
-  org.eclipse.emf.codegen.ecore,
-  org.eclipse.emf.ecore,
-  org.eclipse.emf.ecore.edit,
-  org.eclipse.emf.validation,
-  org.eclipse.emf.workspace,
-  org.emftext.access;resolution:=optional,
-  org.emftext.commons.antlr3_2_0,
-  org.kermeta.kp.model
+Export-Package: org.kermeta.kp.editor;uses:="org.kermeta.kp.editor.mop
+ p,org.kermeta.kp.editor.util",org.kermeta.kp.editor.analysis;uses:="o
+ rg.kermeta.kp,org.kermeta.kp.editor,org.kermeta.kp.editor.util",org.k
+ ermeta.kp.editor.grammar;uses:="org.kermeta.kp.editor.util,org.kermet
+ a.kp,org.kermeta.kp.editor,org.kermeta.kp.editor.mopp",org.kermeta.kp
+ .editor.mopp;uses:="org.kermeta.kp.editor,org.kermeta.kp.editor.util,
+ org.kermeta.kp.editor.grammar,org.kermeta.kp,org.kermeta.kp.editor.an
+ alysis",org.kermeta.kp.editor.util;uses:="org.kermeta.kp,org.kermeta.
+ kp.editor.mopp"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.core.runtim
+ e,org.eclipse.emf.validation.internal,org.eclipse.emf.common.util,org
+ .eclipse.emf.ecore.resource.impl,org.eclipse.emf.common.notify,org.ec
+ lipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.core.runtime.j
+ obs,org.eclipse.emf.validation.model,org.eclipse.core.resources,org.e
+ clipse.emf.validation.service,org.osgi.framework,org.eclipse.emf.ecor
+ e.impl
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.kermeta.kp.editor,
-  org.kermeta.kp.editor.analysis,
-  org.kermeta.kp.editor.mopp,
-  org.kermeta.kp.editor.grammar,
-  org.kermeta.kp.editor.util
-Bundle-Activator: org.kermeta.kp.editor.mopp.KptPlugin
+Bundle-ClassPath: .
+Built-By: hrambelo
+Tool: Bnd-0.0.357
+Bundle-Name: Kermeta :: KP Editor for Kermeta 2
+Bundle-Localization: plugin
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources
+Bundle-Vendor: IRISA/INRIA
+Build-Jdk: 1.6.0_20
+Bundle-Version: 2.0.1.SNAPSHOT
+Bnd-LastModified: 1299081126849
+Bundle-ManifestVersion: 2
+Import-Package: org.kermeta.kp,org.kermeta.kp.editor,org.kermeta.kp.ed
+ itor.analysis,org.kermeta.kp.editor.grammar,org.kermeta.kp.editor.mop
+ p,org.kermeta.kp.editor.util
+Bundle-SymbolicName: org.kermeta.kp.editor;singleton:=true
+
