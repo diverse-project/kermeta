@@ -9,9 +9,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
 	<artifactId>kp.editor.ui</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
 	<name>Kermeta :: KP Editor UI</name>
 	<packaging>bundle</packaging>
+	
+	<parent>
+    <groupId>org.kermeta.language</groupId>
+    <artifactId>language.root</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+  </parent>
+  
 	<build>
 		<!-- Manage mutli-source java project. Copy the src files inside the targetPath, the unique location for maven compiling
 		Drawback : once compiled the sources are not visible as java packages -->
@@ -54,7 +60,7 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.0.0</version>
+				<version>2.1.0</version>
 				<extensions>true</extensions>
 
 				<configuration>
@@ -74,8 +80,9 @@
 							org.eclipse.ui.workbench,
 							org.eclipse.ui.workbench.texteditor,
 							org.kermeta.kp.model,
-							org.antlr.runtime,
-							org.eclipse.emf.ecore.resource;visibility:=reexport
+							org.antlr.runtime3_2_0,
+							org.eclipse.emf.ecore.resource;visibility:=reexport,
+							org.eclipse.core.filebuffers
 						</Require-Bundle>
 						<Export-Package>
 						</Export-Package>
@@ -84,224 +91,170 @@
 							use the ! for avoiding to import some packages that are already 
 							there with the Require-Bundle -->
 						<Import-Package>
-							!org.eclipse.core.resources,
-							!org.eclipse.core.runtime, 
-							!org.eclipse.core.runtime.jobs, 
-							!org.eclipse.ui, 
-							org.eclipse.ui.actions, 
-							!org.eclipse.ui.dialogs, 
-							!org.eclipse.ui.ide, 
-							org.kermeta.kp,
+							!org.eclipse.ui.*
 							org.kermeta.kp.*,
-							org.kermeta.kp.editor,
-							!org.antlr.runtime,
+							org.kermeta.kp.editor, 
+							org.kermeta.kp.editor.grammar, 
+							org.kermeta.kp.editor.mopp, 
+							org.kermeta.kp.editor.util,
+							org.antlr.*,
 							!org.eclipse.emf.*,
-							!org.eclipse.emf.resource,
-							org.eclipse.emf.edit.domain,
 							!org.eclipse.jface.*, 
 							!org.eclipse.swt.*,
 							!org.eclipse.ui.*, 
 							!org.osgi.framework,
-							org.eclipse.core.runtime.preferences
+							!org.eclipse.core.*
 						</Import-Package>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<!-- add extra element in the manifest, copy them from this file ex: 
-							Bundle-ActivationPolicy: lazy -->
-						<_include>resources/META-INF/MANIFEST-part.MF</_include>
+							Bundle-ActivationPolicy: lazy 
+						<_include>resources/META-INF/MANIFEST-part.MF</_include>-->
 					</instructions>
 				</configuration>
 			</plugin>
-			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>copy-out-files</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>${project.build.outputDirectory}/META-INF/MANIFEST.MF</source>
-                                    <outputDirectory>${project.basedir}/META-INF</outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
-                    </execution>
-
-                </executions>
-            </plugin>     
+		  
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui</artifactId>
-			<version>[3.5.2.M20100120-0800,)</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.workbench</artifactId>
-			<version>3.5.2.M20100113-0800</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.editors</artifactId>
-			<version>[3.5.0.v20090527-2000,)</version>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.ide</artifactId>
-			<version>3.5.2.M20100113-0800</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.jface</artifactId>
-			<version>[3.5.2.M20100120-0800,)</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.jface.text</artifactId>
-			<version>[3.5.2.M20100120-0800,)</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.text</artifactId>
-			<version>[3.5.0.v20090513-2000,)</version>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.swt</artifactId>
-			<version>[3.5.2.v3557f,)</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
-			<version>3.5.2.v3557f</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
-			<version>[3.5.0.v20090513-2000,)</version>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.views</artifactId>
-			<version>[3.4.1.M20090826-0800,)</version>
+			<version>[3.4.1.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.runtime</artifactId>
-			<version>[3.5.0.v20090525,)</version>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.commands</artifactId>
-			<version>[3.5.0.I20090525-2000,)</version>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.resources</artifactId>
-			<version>[3.5.2.R35x_v20091203-1235,)</version>
+			<version>[3.5.2.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.jobs</artifactId>
-			<version>[3.4.100.v20090429-1800,)</version>
+			<version>[3.4.100.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
-			<version>[3.5.1.R35x_v20090807-1100,)</version>
+			<version>[3.5.1.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.registry</artifactId>
-			<version>[3.4.100.v20090520-1800,)</version>
+			<version>[3.4.100.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
-			<version>2.6.0</version>
-			<scope>compile</scope>
-			<optional>false</optional>
+      <version>${emf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.emf.edit</artifactId>
-			<version>2.5.0.v200906151043</version>
-			<scope>compile</scope>
-			<type>jar</type>
+			<version>[2.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.emf.edit.ui</artifactId>
-			<version>2.5.0.v200906151043</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>[2.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.emf.ecore.edit</artifactId>
-			<version>2.5.0.v200906151043</version>
+			<version>[2.5.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
-			<version>2.5.0.v200906151043</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>[2.5.0.0,)</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.kp</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>kp.editor</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<type>bundle</type>
-			<scope>compile</scope>
+			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.kp</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>kp.model</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
-			<type>bundle</type>
-			<scope>compile</scope>
+			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>4.2.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.antlr.runtime</artifactId>
-			<version>3.0.0.v200803061811</version>
-			<scope>compile</scope>
+			<version>[3.0.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.preferences</artifactId>
-			<version>3.2.301.R35x_v20091117</version>
-			<type>bundle</type>
-			<scope>compile</scope>
+			<version>[3.2.301.0,)</version>
 		</dependency>
+		<dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.core.filebuffers</artifactId>
+      <version>[3.5.100.0,)</version>
+    </dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>tipimouss-local-maven-repository</id>
-			<name>Tipimouss Local release repository</name>
-			<url>file:/var/www/html/maven2</url>
-			<uniqueVersion>false</uniqueVersion>
-		</repository>
-		<snapshotRepository>
-			<id>tipimouss-local-maven-snapshot-repository</id>
-			<name>Tipimouss Local snapshot repository</name>
-			<url>file:/var/www/html/maven2-snapshots</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
 </project>
