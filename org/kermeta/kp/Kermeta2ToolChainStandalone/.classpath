@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="lib" path="lib/language.ecore2km-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/language.merger.binarymerger-2.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/language.loader.kmt.scala-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/commons.antlr3_2_0-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/kp.editor-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/kp.model-2.0.1-SNAPSHOT.jar"/>
@@ -33,5 +32,6 @@
 	<classpathentry kind="lib" path="K2dependencies/logback-core-0.9.24.jar"/>
 	<classpathentry kind="lib" path="K2dependencies/org.osgi.compendium-4.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/language.resolver-2.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/language.loader.kmt.scala-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

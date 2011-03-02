@@ -125,6 +125,7 @@ public class Main {
 		
 		resolvedMU = resolver.doResolving(mergedMU);
 		resolver.checkUnresolved(resolvedMU);
+		CheckDangling.doCheck(resolvedMU);
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
 		// Save intermediate file
