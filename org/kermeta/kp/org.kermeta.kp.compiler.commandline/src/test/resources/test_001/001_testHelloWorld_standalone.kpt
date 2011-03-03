@@ -1,4 +1,4 @@
-KermetaProject :"new_file.kpt" 
+KermetaProject :"001_testHelloWorld_standalone" 
 version :  "someVersion" 
 group :"group" 
 { 

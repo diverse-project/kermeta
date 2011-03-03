@@ -28,6 +28,7 @@ public class KermetaCompiler {
 	
 	public Boolean saveIntermediateFiles = false;
 	public String targetFolder;
+	public String projectName = "project";
 	
 	/**
 	 * Constructor
@@ -64,13 +65,15 @@ public class KermetaCompiler {
 	public void kp2bytecode(String kpFileURL) throws IOException {
 		KpLoader ldr = new KpLoader();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
-		
+		if(!kp.getName().isEmpty()){
+			projectName = kp.getName();
+		}
 		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp);
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		File mergedFile = new File("./"+targetFolder+"/META-INF/kermeta/merged.km");		
+		File mergedFile = new File("./"+targetFolder+"/META-INF/kermeta/"+projectName+".km");		
 		if(!mergedFile.getParentFile().exists()){
 			mergedFile.getParentFile().mkdirs();
 		}

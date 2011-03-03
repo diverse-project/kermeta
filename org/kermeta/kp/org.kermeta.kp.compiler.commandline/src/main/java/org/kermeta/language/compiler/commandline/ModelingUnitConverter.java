@@ -89,7 +89,11 @@ public class ModelingUnitConverter {
 
 		if (mustSaveToFile){
 			System.out.println("Saving stream to file "+saveToFile);
-			FileWriter writer = new FileWriter(new File(saveToFile));
+			File fileToSave = new File(saveToFile);
+			if(!fileToSave.getParentFile().exists()){
+				fileToSave.getParentFile().mkdirs();
+			}
+			FileWriter writer = new FileWriter(fileToSave);
 			writer.write(outputStream.toString());
 			writer.close();
 		}
