@@ -37,6 +37,11 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
+                        	org.util,
+                        	org.impl,
+                        	org,
+                        	org.kermeta.util,
+                        	org.kermeta.impl,
                         	org.kermeta.traceability.util,
                         	org.kermeta.traceability.impl,
                         	org.kermeta.traceability
