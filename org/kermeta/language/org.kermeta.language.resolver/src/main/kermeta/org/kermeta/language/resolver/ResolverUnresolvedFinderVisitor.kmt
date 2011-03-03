@@ -305,7 +305,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				resolvedOperationFinder := ResolverResolvedOperationFinder.new
 			end
 			
-			//If there is a from			
+			//If there is a from
 			if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
 				//And it is a Class
 				if (ctxt.unresolved.asType(UnresolvedOperation).~from.isInstanceOf(Class)) then
@@ -330,29 +330,38 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				//We look for the Operation in all the typedefinitions of the superTypes of the container of the UnresolvedOperation
 				var containingOperation : Operation init ctxt.currentElement.asType(Operation)
 				var containingClassDef : ClassDefinition init containingOperation.container.asType(ClassDefinition)
-				containingClassDef.getAllSuperTypes.each{st|
-					if (st.isInstanceOf(Class)) then
-						st.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt)
+				var i : Integer init 0
+				var superType : Type
+				var found : Boolean init false
+				from found				
+				until found or i == containingClassDef.getAllSuperTypes().size()
+				loop
+					superType := containingClassDef.getAllSuperTypes().at(i)
+					if (superType.isInstanceOf(Class)) then
+						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt)						
+						found := not ctxt.foundOperation.isVoid()
+						i := i +1
 					end
-				}
+				end
 			end
 
-			if (ctxt.foundOperation.isVoid() and ctxt.verbose >= 3) then			
-				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName
-				error := error + " in " + ctxt.currentElement.asType(Operation).container.asType(ClassDefinition).name + "::" + ctxt.currentElement.asType(Operation).name
-				if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
-					error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
+			if (ctxt.foundOperation.isVoid()) then
+				if (ctxt.verbose >= 3) then			
+					var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName
+					error := error + " in " + ctxt.currentElement.asType(Operation).container.asType(ClassDefinition).name + "::" + ctxt.currentElement.asType(Operation).name
+					if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
+						error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
+					end
+					
+					if (ctxt.exceptions) then
+						var except : Exception init Exception.new
+						except.message := error
+						raise except
+					else
+						stdio.writeln(error)
+					end
 				end
-				
-				if (ctxt.exceptions) then
-					var except : Exception init Exception.new
-					except.message := error
-					raise except
-				else
-					stdio.writeln(error)
-				end
-			end
-			if not ctxt.foundOperation.isVoid() then
+			else
 				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation
 			end
 		end
