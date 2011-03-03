@@ -70,7 +70,11 @@ public class KermetaCompiler {
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		FileWriter writer = new FileWriter(new File(targetFolder+"/META-INF/kermeta/merged.km"));
+		File mergedFile = new File("./"+targetFolder+"/META-INF/kermeta/merged.km");		
+		if(!mergedFile.getParentFile().exists()){
+			mergedFile.getParentFile().mkdirs();
+		}
+		FileWriter writer = new FileWriter(mergedFile);
 		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
 		writer.close();
 		
@@ -85,14 +89,14 @@ public class KermetaCompiler {
 		
 		List<Source> srcs = kp.getSources();
 		for (Source src : srcs ){
-			String sourceLocation = ((SourceFolder) src).getFolderName();
-			String sourceURL = sourceLocation;
-			System.out.println("source is : " + sourceLocation);
-			if (sourceLocation.contains("${")){
+			String sourceURLWithVariable = ((Source) src).getUrl();
+			String sourceURL = sourceURLWithVariable;
+			System.out.println("source is : " + sourceURLWithVariable);
+			if (sourceURLWithVariable.contains("${")){
 				// TODO deal with variable expansion
-				System.out.println("source : " + sourceLocation + " is expanded to " +sourceURL);
+				System.out.println("source : " + sourceURLWithVariable + " is expanded to " +sourceURL);
 			}
-			ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceLocation);
+			ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURLWithVariable);
 			if (mu != null) {
 				modelingUnits.add(mu);
 			}
