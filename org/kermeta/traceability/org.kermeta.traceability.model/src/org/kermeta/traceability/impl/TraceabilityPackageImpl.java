@@ -8,20 +8,16 @@ package org.kermeta.traceability.impl;
 
 import java.util.Date;
 
+import org.OrgPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.impl.orgPackageImpl;
-
+import org.impl.OrgPackageImpl;
 import org.kermeta.KermetaPackage;
-
 import org.kermeta.impl.KermetaPackageImpl;
-
 import org.kermeta.traceability.FileReference;
 import org.kermeta.traceability.ModelReference;
 import org.kermeta.traceability.QualifiedNameReference;
@@ -33,8 +29,6 @@ import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
 import org.kermeta.traceability.Traceable;
 import org.kermeta.traceability.XMLReference;
-
-import org.orgPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,17 +175,17 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		orgPackageImpl theorgPackage = (orgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) instanceof orgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) : orgPackage.eINSTANCE);
+		OrgPackageImpl theOrgPackage = (OrgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) instanceof OrgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) : OrgPackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KermetaPackage.eNS_URI) : KermetaPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTraceabilityPackage.createPackageContents();
-		theorgPackage.createPackageContents();
+		theOrgPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTraceabilityPackage.initializePackageContents();
-		theorgPackage.initializePackageContents();
+		theOrgPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed

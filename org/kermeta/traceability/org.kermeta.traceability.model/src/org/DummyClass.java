@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see org.orgPackage#getDummyClass()
+ * @see org.OrgPackage#getDummyClass()
  * @model
  * @generated
  */

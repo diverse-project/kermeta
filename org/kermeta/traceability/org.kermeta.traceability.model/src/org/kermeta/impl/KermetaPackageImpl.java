@@ -6,12 +6,13 @@
  */
 package org.kermeta.impl;
 
+import org.OrgPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.impl.orgPackageImpl;
+import org.impl.OrgPackageImpl;
 
 import org.kermeta.DummyClass;
 import org.kermeta.KermetaFactory;
@@ -21,7 +22,6 @@ import org.kermeta.traceability.TraceabilityPackage;
 
 import org.kermeta.traceability.impl.TraceabilityPackageImpl;
 
-import org.orgPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,17 +84,17 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		orgPackageImpl theorgPackage = (orgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) instanceof orgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI) : orgPackage.eINSTANCE);
+		OrgPackageImpl theOrgPackage = (OrgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) instanceof OrgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) : OrgPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TraceabilityPackage.eNS_URI) : TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theKermetaPackage.createPackageContents();
-		theorgPackage.createPackageContents();
+		theOrgPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theKermetaPackage.initializePackageContents();
-		theorgPackage.initializePackageContents();
+		theOrgPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed

@@ -12,9 +12,25 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.kermeta.org/Traceability/2.0.0" 
+       uri = "http://www.kermeta.org/Traceability/2.0.0/" 
        class = "org.orgPackage"
        genModel = "model/Traceability.genmodel" /> 
+  </extension>
+  <extension
+        point="org.eclipse.emf.ecore.generated_package">
+     <package
+           class="org.kermeta.KermetaPackage"
+           genModel="model/Traceability.genmodel"
+           uri="http://www.kermeta.org/Traceability/2.0.0//org/kermeta">
+     </package>
+  </extension>
+  <extension
+        point="org.eclipse.emf.ecore.generated_package">
+     <package
+           class="org.kermeta.traceability.TraceabilityPackage"
+           genModel="model/Traceability.genmodel"
+           uri="http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability">
+     </package>
   </extension>
 
 </plugin>

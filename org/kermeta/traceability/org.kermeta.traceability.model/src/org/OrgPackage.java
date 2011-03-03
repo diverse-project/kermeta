@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.orgFactory
+ * @see org.OrgFactory
  * @model kind="package"
  * @generated
  */
-public interface orgPackage extends EPackage {
+public interface OrgPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -55,14 +55,14 @@ public interface orgPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	orgPackage eINSTANCE = org.impl.orgPackageImpl.init();
+	OrgPackage eINSTANCE = org.impl.OrgPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.impl.DummyClassImpl <em>Dummy Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.impl.DummyClassImpl
-	 * @see org.impl.orgPackageImpl#getDummyClass()
+	 * @see org.impl.OrgPackageImpl#getDummyClass()
 	 * @generated
 	 */
 	int DUMMY_CLASS = 0;
@@ -94,7 +94,7 @@ public interface orgPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	orgFactory getorgFactory();
+	OrgFactory getOrgFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +114,11 @@ public interface orgPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.impl.DummyClassImpl
-		 * @see org.impl.orgPackageImpl#getDummyClass()
+		 * @see org.impl.OrgPackageImpl#getDummyClass()
 		 * @generated
 		 */
 		EClass DUMMY_CLASS = eINSTANCE.getDummyClass();
 
 	}
 
-} //orgPackage
+} //OrgPackage

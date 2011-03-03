@@ -8,11 +8,11 @@ package org.impl;
 
 import org.DummyClass;
 
+import org.OrgPackage;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.orgPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class DummyClassImpl extends EObjectImpl implements DummyClass {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return orgPackage.Literals.DUMMY_CLASS;
+		return OrgPackage.Literals.DUMMY_CLASS;
 	}
 
 } //DummyClassImpl

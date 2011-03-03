@@ -20,17 +20,17 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.orgPackage
+ * @see org.OrgPackage
  * @generated
  */
-public class orgAdapterFactory extends AdapterFactoryImpl {
+public class OrgAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static orgPackage modelPackage;
+	protected static OrgPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -38,9 +38,9 @@ public class orgAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public orgAdapterFactory() {
+	public OrgAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = orgPackage.eINSTANCE;
+			modelPackage = OrgPackage.eINSTANCE;
 		}
 	}
 
@@ -69,8 +69,8 @@ public class orgAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected orgSwitch<Adapter> modelSwitch =
-		new orgSwitch<Adapter>() {
+	protected OrgSwitch<Adapter> modelSwitch =
+		new OrgSwitch<Adapter>() {
 			@Override
 			public Adapter caseDummyClass(DummyClass object) {
 				return createDummyClassAdapter();
@@ -121,4 +121,4 @@ public class orgAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //orgAdapterFactory
+} //OrgAdapterFactory

@@ -7,6 +7,8 @@
 package org.impl;
 
 import org.DummyClass;
+import org.OrgFactory;
+import org.OrgPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,16 +23,13 @@ import org.kermeta.traceability.TraceabilityPackage;
 
 import org.kermeta.traceability.impl.TraceabilityPackageImpl;
 
-import org.orgFactory;
-import org.orgPackage;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
  * @generated
  */
-public class orgPackageImpl extends EPackageImpl implements orgPackage {
+public class OrgPackageImpl extends EPackageImpl implements OrgPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,12 +48,12 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.orgPackage#eNS_URI
+	 * @see org.OrgPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private orgPackageImpl() {
-		super(eNS_URI, orgFactory.eINSTANCE);
+	private OrgPackageImpl() {
+		super(eNS_URI, OrgFactory.eINSTANCE);
 	}
 
 	/**
@@ -67,7 +66,7 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link orgPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link OrgPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,11 +75,11 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static orgPackage init() {
-		if (isInited) return (orgPackage)EPackage.Registry.INSTANCE.getEPackage(orgPackage.eNS_URI);
+	public static OrgPackage init() {
+		if (isInited) return (OrgPackage)EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI);
 
 		// Obtain or create and register package
-		orgPackageImpl theorgPackage = (orgPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof orgPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new orgPackageImpl());
+		OrgPackageImpl theOrgPackage = (OrgPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OrgPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OrgPackageImpl());
 
 		isInited = true;
 
@@ -89,22 +88,22 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TraceabilityPackage.eNS_URI) : TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theorgPackage.createPackageContents();
+		theOrgPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theorgPackage.initializePackageContents();
+		theOrgPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theorgPackage.freeze();
+		theOrgPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(orgPackage.eNS_URI, theorgPackage);
-		return theorgPackage;
+		EPackage.Registry.INSTANCE.put(OrgPackage.eNS_URI, theOrgPackage);
+		return theOrgPackage;
 	}
 
 	/**
@@ -121,8 +120,8 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public orgFactory getorgFactory() {
-		return (orgFactory)getEFactoryInstance();
+	public OrgFactory getOrgFactory() {
+		return (OrgFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -189,4 +188,4 @@ public class orgPackageImpl extends EPackageImpl implements orgPackage {
 		createResource(eNS_URI);
 	}
 
-} //orgPackageImpl
+} //OrgPackageImpl

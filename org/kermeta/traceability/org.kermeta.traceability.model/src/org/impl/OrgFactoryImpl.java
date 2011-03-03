@@ -22,24 +22,24 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class orgFactoryImpl extends EFactoryImpl implements orgFactory {
+public class OrgFactoryImpl extends EFactoryImpl implements OrgFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static orgFactory init() {
+	public static OrgFactory init() {
 		try {
-			orgFactory theorgFactory = (orgFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/Traceability/2.0.0/"); 
-			if (theorgFactory != null) {
-				return theorgFactory;
+			OrgFactory theOrgFactory = (OrgFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/Traceability/2.0.0/"); 
+			if (theOrgFactory != null) {
+				return theOrgFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new orgFactoryImpl();
+		return new OrgFactoryImpl();
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class orgFactoryImpl extends EFactoryImpl implements orgFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public orgFactoryImpl() {
+	public OrgFactoryImpl() {
 		super();
 	}
 
@@ -60,7 +60,7 @@ public class orgFactoryImpl extends EFactoryImpl implements orgFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case orgPackage.DUMMY_CLASS: return createDummyClass();
+			case OrgPackage.DUMMY_CLASS: return createDummyClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,8 +81,8 @@ public class orgFactoryImpl extends EFactoryImpl implements orgFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public orgPackage getorgPackage() {
-		return (orgPackage)getEPackage();
+	public OrgPackage getOrgPackage() {
+		return (OrgPackage)getEPackage();
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class orgFactoryImpl extends EFactoryImpl implements orgFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static orgPackage getPackage() {
-		return orgPackage.eINSTANCE;
+	public static OrgPackage getPackage() {
+		return OrgPackage.eINSTANCE;
 	}
 
-} //orgFactoryImpl
+} //OrgFactoryImpl

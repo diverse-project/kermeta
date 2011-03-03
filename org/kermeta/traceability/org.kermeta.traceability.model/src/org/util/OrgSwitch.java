@@ -23,17 +23,17 @@ import org.eclipse.emf.ecore.EObject;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.orgPackage
+ * @see org.OrgPackage
  * @generated
  */
-public class orgSwitch<T> {
+public class OrgSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static orgPackage modelPackage;
+	protected static OrgPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -41,9 +41,9 @@ public class orgSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public orgSwitch() {
+	public OrgSwitch() {
 		if (modelPackage == null) {
-			modelPackage = orgPackage.eINSTANCE;
+			modelPackage = OrgPackage.eINSTANCE;
 		}
 	}
 
@@ -87,7 +87,7 @@ public class orgSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case orgPackage.DUMMY_CLASS: {
+			case OrgPackage.DUMMY_CLASS: {
 				DummyClass dummyClass = (DummyClass)theEObject;
 				T result = caseDummyClass(dummyClass);
 				if (result == null) result = defaultCase(theEObject);
@@ -127,4 +127,4 @@ public class orgSwitch<T> {
 		return null;
 	}
 
-} //orgSwitch
+} //OrgSwitch

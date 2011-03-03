@@ -5,7 +5,7 @@
     modelPluginID="org.kermeta.traceability.model" modelName="Traceability" featureMapWrapperInterface=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
   <foreignModel>Traceability.ecore</foreignModel>
-  <genPackages prefix="org" disposableProviderFactory="true" ecorePackage="Traceability.ecore#/">
+  <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="Traceability.ecore#/">
     <genClasses ecoreClass="Traceability.ecore#//DummyClass"/>
     <nestedGenPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="Traceability.ecore#//kermeta">
       <genClasses ecoreClass="Traceability.ecore#//kermeta/DummyClass"/>
