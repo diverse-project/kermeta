@@ -15,8 +15,8 @@ using kermeta::standard
 
 aspect class ClassDefinition
 {
-	operation getAllSuperTypes() : Set<Type> is do 
-		var superTypes : Set<Type> init Set<Type>.new
+	operation getAllSuperTypes() : OrderedSet<Type> is do 
+		var superTypes : OrderedSet<Type> init OrderedSet<Type>.new
 		self.superType.each{st|
 			superTypes.add(st)
 			if (st.isInstanceOf(Class)) then
