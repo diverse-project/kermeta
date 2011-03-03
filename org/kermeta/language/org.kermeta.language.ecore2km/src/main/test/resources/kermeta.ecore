@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
+    nsURI="http://www.kermeta.org/kermeta/2_0_0/" nsPrefix="org">
+  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
+      nsPrefix="org_kermeta">
+    <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language"
+        nsPrefix="org_kermeta_language">
+      <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure"
+          nsPrefix="org_kermeta_language_structure">
+        <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//kermeta/language/structure/ConstraintType"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//kermeta/language/structure/ConstraintLanguage"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage">
+          <eLiterals name="kermeta"/>
+          <eLiterals name="ocl" value="1"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
+          <eLiterals name="inv"/>
+          <eLiterals name="pre" value="1"/>
+          <eLiterals name="post" value="2"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
