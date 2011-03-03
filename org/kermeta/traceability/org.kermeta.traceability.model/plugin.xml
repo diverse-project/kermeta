@@ -13,7 +13,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.kermeta.org/Traceability/2.0.0/" 
-       class = "org.orgPackage"
+       class = "org.OrgPackage"
        genModel = "model/Traceability.genmodel" /> 
   </extension>
   <extension
