@@ -77,7 +77,7 @@ class FullStaticResolver
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
        	//checkDangling(unresolvedModelingUnit.containingResource())       	
-
+		checkUnresolved(unresolvedModelingUnit)
        	
        	result := unresolvedModelingUnit
 	end
