@@ -202,7 +202,7 @@ class Object
 	end
 	
 	@CompilerIgnore "true"
-	operation invoke(arg0:Operation,args:OrderedCollection<Object>) is do
+	operation invoke(op:Operation,args:OrderedCollection<Object>) is do
 	end
 }
 @CompilerIgnore "true"
