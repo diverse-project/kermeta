@@ -6,14 +6,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.behavior.impl.BehaviorFactoryImpl;
 import org.kermeta.language.structure.ModelingUnit;
@@ -123,9 +126,17 @@ public class Main {
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
 		.createFullStaticResolver();
 		
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(Calendar.getInstance().getTimeInMillis());		
 		resolvedMU = resolver.doResolving(mergedMU);
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(Calendar.getInstance().getTimeInMillis());
 		resolver.checkUnresolved(resolvedMU);
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(Calendar.getInstance().getTimeInMillis());
 		CheckDangling.doCheck(resolvedMU);
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(Calendar.getInstance().getTimeInMillis());
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
 		// Save intermediate file
