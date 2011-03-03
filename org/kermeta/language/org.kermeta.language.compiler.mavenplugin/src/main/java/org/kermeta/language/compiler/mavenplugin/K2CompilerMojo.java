@@ -119,12 +119,13 @@ public class K2CompilerMojo extends AbstractMojo {
             //GlobalConfiguration.load(GlobalConfiguration.props());
             GlobalConfiguration.setScalaAspectPrefix(targetGroupId+"."+targetArtifactId);
             
-            
-            for (int i = 0; i < packageEquivalences.length; i++) {
-				PackageEquivalence equivalence = packageEquivalences[i];
-				this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
-				kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
-			}
+            if(packageEquivalences != null){
+	            for (int i = 0; i < packageEquivalences.length; i++) {
+					PackageEquivalence equivalence = packageEquivalences[i];
+					this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
+					kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
+				}
+            }
             
             
             checkFile(model.getAbsolutePath().toString());
