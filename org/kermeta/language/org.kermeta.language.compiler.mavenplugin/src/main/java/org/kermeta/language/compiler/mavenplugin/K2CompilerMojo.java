@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Properties;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -89,6 +90,13 @@ public class K2CompilerMojo extends AbstractMojo {
      * @parameter expression="${project.artifactId}"
      */
     private String targetArtifactId;
+    
+    /**
+     * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
+     *
+     * @parameter 
+     */
+    private PackageEquivalence[] packageEquivalences;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
 
@@ -111,6 +119,14 @@ public class K2CompilerMojo extends AbstractMojo {
             //GlobalConfiguration.load(GlobalConfiguration.props());
             GlobalConfiguration.setScalaAspectPrefix(targetGroupId+"."+targetArtifactId);
             
+            
+            for (int i = 0; i < packageEquivalences.length; i++) {
+				PackageEquivalence equivalence = packageEquivalences[i];
+				this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
+				kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
+			}
+            
+            
             checkFile(model.getAbsolutePath().toString());
             compilo.compile(model.getAbsolutePath().toString());
             try {
@@ -129,4 +145,5 @@ public class K2CompilerMojo extends AbstractMojo {
         }
         return true;
     }
+        
 }
