@@ -56,35 +56,35 @@ class StdIO
 	 * Writes the object to standard output
 	 */ 
 	operation write(object : String) : Void is do
-                 throw kermeta::exception::NotImplementedException.new
+
 	end
 	
 	/**
 	 * Writeln the object to error output
 	 */ 
 	operation errorln(object : String) : Void is do
-                 throw kermeta::exception::NotImplementedException.new
+
 	end
 	
 	/**
 	 * Writes the object to error output
 	 */ 
 	operation error(object : String) : Void is do
-                 throw kermeta::exception::NotImplementedException.new
+
 	end
 	
 	/**
 	 * Writeln the object to standard output
 	 */ 
 	operation writeln(object : String) : Void is do
-                 throw kermeta::exception::NotImplementedException.new
+
 	end
 	
 	/**
 	 * Reads a String from standard input
 	 */ 
 	operation read(prompt : String) : String is do
-                 throw kermeta::exception::NotImplementedException.new
+
 	end
 	
 }
