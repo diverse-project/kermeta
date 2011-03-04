@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
+  <packages kTag="#//org/@kOwnedTags.0" name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
+    <kOwnedTags name="ecore" value="true" object="#//org"/>
+    <nestedPackage kTag="#//org/kermeta/@kOwnedTags.0" name="kermeta" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta">
+      <kOwnedTags name="ecore" value="true" object="#//org/kermeta"/>
+      <nestedPackage kTag="#//org/kermeta/language/@kOwnedTags.0" name="language"
+          uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language">
+        <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language"/>
+        <nestedPackage kTag="#//org/kermeta/language/structure/@kOwnedTags.0" name="structure"
+            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+          <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure"/>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+              kTag="#//org/kermeta/language/structure/Constraint/@kOwnedTags.0" name="Constraint"
+              isAspect="false" isAbstract="false">
+            <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint"/>
+            <ownedAttribute kTag="#//org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.0"
+                name="stereotype" type="#//org/kermeta/language/structure/Constraint/stereotype/@containedType.0"
+                isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint/stereotype"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
+                  typeIdentifier="org::kermeta::language::structure::ConstraintType"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="#//org/kermeta/language/structure/Constraint/language/@kOwnedTags.0"
+                name="language" type="#//org/kermeta/language/structure/Constraint/language/@containedType.0"
+                isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint/language"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
+                  typeIdentifier="org::kermeta::language::structure::ConstraintLanguage"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
+              name="ConstraintLanguage">
+            <ownedLiteral name="kermeta"/>
+            <ownedLiteral name="ocl"/>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
+              name="ConstraintType">
+            <ownedLiteral name="inv"/>
+            <ownedLiteral name="pre"/>
+            <ownedLiteral name="post"/>
+          </ownedTypeDefinition>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>
