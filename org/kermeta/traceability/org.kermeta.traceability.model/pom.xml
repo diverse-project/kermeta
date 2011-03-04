@@ -20,6 +20,18 @@
 	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		
+		<resources>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+				</includes>
+			</resource>
+			
+		</resources>
+		
+		
 		<plugins>
 			<!-- plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
