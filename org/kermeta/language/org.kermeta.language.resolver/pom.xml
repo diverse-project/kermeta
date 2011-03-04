@@ -71,6 +71,11 @@
     </dependencies>
     
     <build>
+		  <resources>
+		    <resource>
+		      <directory>${project.build.directory}/generated-sources/resources</directory>
+		    </resource>
+		  </resources>
         <plugins>
             <!-- Kermeta Compiler plugin -->
             
