@@ -142,7 +142,6 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 */
 	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
 		var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
-		//stdio.writeln(isDataType.toString + " " + (not type.isVoid).toString + " " + type.isKindOf(EDataType).toString + " " + type.name)//TODO TO REMOVE
 		// Generic type must be managed. The type of the method is a generic type if:
 		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and 
 		   (genericType.eClassifier.isVoid or genericType.eClassifier==type)}) then
