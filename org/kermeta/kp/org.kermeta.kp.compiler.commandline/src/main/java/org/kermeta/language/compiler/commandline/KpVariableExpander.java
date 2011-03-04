@@ -18,8 +18,7 @@ public class KpVariableExpander {
 
 	public KpVariableExpander(String kpFileURL) {
 		File f = new File(kpFileURL);
-		
-		projectUri = f.getParent();
+		projectUri = f.getParentFile().toURI().toString();
 	}
 
 	public String expandVariables(String input) {

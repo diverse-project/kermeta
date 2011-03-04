@@ -96,9 +96,8 @@ public class ModelingUnitLoader {
 		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
 		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
 
-		KParser parser = new KParser();
-		//Source.
-		Iterator<String> src = scala.io.Source.fromFile(new java.io.File(fileuri),
+		KParser parser = new KParser();		
+		Iterator<String> src = scala.io.Source.fromFile(new java.io.File(java.net.URI.create(fileuri)),
 				"UTF8").getLines();
 
 		StringBuffer buf = new StringBuffer();
