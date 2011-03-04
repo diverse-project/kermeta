@@ -65,6 +65,7 @@ public class Main {
 				}
 			}else if (uri.endsWith(".ecore")) {
 				System.out.println("loading ecore");
+				utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
 				org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
 				System.out.println(StructurePackage.eINSTANCE.getEFactoryInstance());
 				ModelingUnit mu = this.loadEcore(uri);
@@ -88,6 +89,7 @@ public class Main {
 		for (ModelingUnit mu : this.modelingunit){
 			this.modelingunit_ser.add( this.saveMu(mu));
 		}
+		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
 		MainRunner.init4eclipse();
 
 		List<ModelingUnit> newmodellingUnit = new ArrayList<ModelingUnit>();
@@ -117,7 +119,8 @@ public class Main {
 		writer = new FileWriter(new File("AfterMerging_HelloWorldMiniframework.km"));
 		writer.write(ModelingUnit_serialized.toString());
 		writer.close();
-			
+		
+		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		mergedMU = this.LoadMu(ModelingUnit_serialized);
 		// End of Convert Resulting Modellingunit For TypeSetter
