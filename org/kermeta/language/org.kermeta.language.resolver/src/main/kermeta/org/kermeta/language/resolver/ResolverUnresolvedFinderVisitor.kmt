@@ -1076,13 +1076,16 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			end
 			
 			//Visiting type and handling Unresolved
+			if (t.type.isVoid) then
+					stdio.writeln("WARNING1 ---- t.type.isVoid with t:"+t.toString)			
+			end
 			if (isVisitable(t.type)) then
 				
 				ctxt.currentElement := t
 				
 				if (t.type.isVoid) then
-					stdio.writeln("WARNING ---- t.type.isVoid with t:"+t.toString)			
-				end
+					stdio.writeln("WARNING2 ---- t.type.isVoid with t:"+t.toString)			
+				end	
 				
 				t.type.accept(self, ctxt)
 								
