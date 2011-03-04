@@ -40,7 +40,7 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := resolve(unresolvedModelingUnit)
+        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
               	
      /*  	stdio.writeln("	********************* searching dangling elements ************************")
        	unresolvedModelResource.findDanglingModelElements().each{ diag |
