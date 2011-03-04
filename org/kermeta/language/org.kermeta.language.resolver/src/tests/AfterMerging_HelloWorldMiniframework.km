@@ -10349,7 +10349,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/Assignment/isCast/@kOwnedTags.0 //org/kermeta/language/behavior/Assignment/isCast/@kOwnedTags.1" name="isCast" type="//org/kermeta/language/behavior/Assignment/isCast/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/Assignment/isCast"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/Assignment/isCast"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/Expression/@kOwnedTags.0 //org/kermeta/language/behavior/Expression/@kOwnedTags.1" name="Expression" superType="//org/kermeta/language/behavior/Expression/@containedType.0 //org/kermeta/language/behavior/Expression/@containedType.1" isAspect="false" isAbstract="true">
@@ -10375,7 +10375,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/CallExpression/name/@kOwnedTags.0 //org/kermeta/language/behavior/CallExpression/name/@kOwnedTags.1" name="name" type="//org/kermeta/language/behavior/CallExpression/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/CallExpression/name"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/CallExpression/name"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/behavior/CallExpression/staticTypeVariableBindings/@kOwnedTags.0 //org/kermeta/language/behavior/CallExpression/staticTypeVariableBindings/@kOwnedTags.1" name="staticTypeVariableBindings" type="//org/kermeta/language/behavior/CallExpression/staticTypeVariableBindings/@containedType.0" isOrdered="true" upper="-1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/CallExpression/staticTypeVariableBindings"/>
@@ -10405,7 +10405,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/CallVariable/isAtpre/@kOwnedTags.0 //org/kermeta/language/behavior/CallVariable/isAtpre/@kOwnedTags.1" name="isAtpre" type="//org/kermeta/language/behavior/CallVariable/isAtpre/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/CallVariable/isAtpre"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/CallVariable/isAtpre"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/CallFeature/@kOwnedTags.0 //org/kermeta/language/behavior/CallFeature/@kOwnedTags.1" name="CallFeature" superType="//org/kermeta/language/behavior/CallFeature/@containedType.0" isAspect="false" isAbstract="false">
@@ -10420,7 +10420,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/CallFeature/isAtpre/@kOwnedTags.0 //org/kermeta/language/behavior/CallFeature/isAtpre/@kOwnedTags.1" name="isAtpre" type="//org/kermeta/language/behavior/CallFeature/isAtpre/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/CallFeature/isAtpre"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/CallFeature/isAtpre"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/CallSuperOperation/@kOwnedTags.0 //org/kermeta/language/behavior/CallSuperOperation/@kOwnedTags.1" name="CallSuperOperation" superType="//org/kermeta/language/behavior/CallSuperOperation/@containedType.0" isAspect="false" isAbstract="false">
@@ -10485,7 +10485,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/Rescue/exceptionName/@kOwnedTags.0 //org/kermeta/language/behavior/Rescue/exceptionName/@kOwnedTags.1" name="exceptionName" type="//org/kermeta/language/behavior/Rescue/exceptionName/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/Rescue/exceptionName"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/Rescue/exceptionName"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/TypeReference/@kOwnedTags.0 //org/kermeta/language/behavior/TypeReference/@kOwnedTags.1" name="TypeReference" superType="//org/kermeta/language/behavior/TypeReference/@containedType.0" isAspect="false" isAbstract="false">
@@ -10515,12 +10515,12 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/JavaStaticCall/jclass/@kOwnedTags.0 //org/kermeta/language/behavior/JavaStaticCall/jclass/@kOwnedTags.1" name="jclass" type="//org/kermeta/language/behavior/JavaStaticCall/jclass/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/JavaStaticCall/jclass"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/JavaStaticCall/jclass"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/behavior/JavaStaticCall/jmethod/@kOwnedTags.0 //org/kermeta/language/behavior/JavaStaticCall/jmethod/@kOwnedTags.1" name="jmethod" type="//org/kermeta/language/behavior/JavaStaticCall/jmethod/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/JavaStaticCall/jmethod"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/JavaStaticCall/jmethod"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/LambdaExpression/@kOwnedTags.0 //org/kermeta/language/behavior/LambdaExpression/@kOwnedTags.1" name="LambdaExpression" superType="//org/kermeta/language/behavior/LambdaExpression/@containedType.0" isAspect="false" isAbstract="false">
@@ -10545,7 +10545,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/LambdaParameter/name/@kOwnedTags.0 //org/kermeta/language/behavior/LambdaParameter/name/@kOwnedTags.1" name="name" type="//org/kermeta/language/behavior/LambdaParameter/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/LambdaParameter/name"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/LambdaParameter/name"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/behavior/LambdaParameter/type/@kOwnedTags.0 //org/kermeta/language/behavior/LambdaParameter/type/@kOwnedTags.1" name="type" type="//org/kermeta/language/behavior/LambdaParameter/type/@containedType.0" isOrdered="true" lower="1" upper="1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/LambdaParameter/type"/>
@@ -10560,7 +10560,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/IntegerLiteral/value/@kOwnedTags.0 //org/kermeta/language/behavior/IntegerLiteral/value/@kOwnedTags.1" name="value" type="//org/kermeta/language/behavior/IntegerLiteral/value/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/IntegerLiteral/value"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/IntegerLiteral/value"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="int"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/StringLiteral/@kOwnedTags.0 //org/kermeta/language/behavior/StringLiteral/@kOwnedTags.1" name="StringLiteral" superType="//org/kermeta/language/behavior/StringLiteral/@containedType.0" isAspect="false" isAbstract="false">
@@ -10570,7 +10570,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/StringLiteral/value/@kOwnedTags.0 //org/kermeta/language/behavior/StringLiteral/value/@kOwnedTags.1" name="value" type="//org/kermeta/language/behavior/StringLiteral/value/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/StringLiteral/value"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/StringLiteral/value"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/BooleanLiteral/@kOwnedTags.0 //org/kermeta/language/behavior/BooleanLiteral/@kOwnedTags.1" name="BooleanLiteral" superType="//org/kermeta/language/behavior/BooleanLiteral/@containedType.0" isAspect="false" isAbstract="false">
@@ -10580,7 +10580,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/BooleanLiteral/value/@kOwnedTags.0 //org/kermeta/language/behavior/BooleanLiteral/value/@kOwnedTags.1" name="value" type="//org/kermeta/language/behavior/BooleanLiteral/value/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/BooleanLiteral/value"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/BooleanLiteral/value"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/CallTypeLiteral/@kOwnedTags.0 //org/kermeta/language/behavior/CallTypeLiteral/@kOwnedTags.1" name="CallTypeLiteral" superType="//org/kermeta/language/behavior/CallTypeLiteral/@containedType.0" isAspect="false" isAbstract="false">
@@ -10635,7 +10635,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/VariableDecl/identifier/@kOwnedTags.0 //org/kermeta/language/behavior/VariableDecl/identifier/@kOwnedTags.1" name="identifier" type="//org/kermeta/language/behavior/VariableDecl/identifier/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/VariableDecl/identifier"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/VariableDecl/identifier"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/behavior/VariableDecl/type/@kOwnedTags.0 //org/kermeta/language/behavior/VariableDecl/type/@kOwnedTags.1" name="type" type="//org/kermeta/language/behavior/VariableDecl/type/@containedType.0" isOrdered="true" lower="1" upper="1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/VariableDecl/type"/>
@@ -10662,7 +10662,7 @@
             <ownedAttribute kTag="//org/kermeta/language/behavior/UnresolvedCall/isAtpre/@kOwnedTags.0 //org/kermeta/language/behavior/UnresolvedCall/isAtpre/@kOwnedTags.1" name="isAtpre" type="//org/kermeta/language/behavior/UnresolvedCall/isAtpre/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/UnresolvedCall/isAtpre"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/behavior/UnresolvedCall/isAtpre"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/behavior/UnresolvedCall/targetParent/@kOwnedTags.0 //org/kermeta/language/behavior/UnresolvedCall/targetParent/@kOwnedTags.1" name="targetParent" type="//org/kermeta/language/behavior/UnresolvedCall/targetParent/@containedType.0" isOrdered="true" upper="1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/UnresolvedCall/targetParent"/>
@@ -10733,7 +10733,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Operation/isAbstract/@kOwnedTags.0 //org/kermeta/language/structure/Operation/isAbstract/@kOwnedTags.1" name="isAbstract" type="//org/kermeta/language/structure/Operation/isAbstract/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Operation/isAbstract"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Operation/isAbstract"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Operation/raisedException/@kOwnedTags.0 //org/kermeta/language/structure/Operation/raisedException/@kOwnedTags.1" name="raisedException" type="//org/kermeta/language/structure/Operation/raisedException/@containedType.0" isOrdered="true" upper="-1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Operation/raisedException"/>
@@ -10785,7 +10785,7 @@
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Operation/uniqueName/@kOwnedTags.0" name="uniqueName" type="//org/kermeta/language/structure/Operation/uniqueName/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true" isDerived="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Operation/uniqueName"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Property/@kOwnedTags.0 //org/kermeta/language/structure/Property/@kOwnedTags.1" name="Property" superType="//org/kermeta/language/structure/Property/@containedType.0 //org/kermeta/language/structure/Property/@containedType.1" isAspect="false" isAbstract="false">
@@ -10801,27 +10801,27 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isReadOnly/@kOwnedTags.0 //org/kermeta/language/structure/Property/isReadOnly/@kOwnedTags.1" name="isReadOnly" type="//org/kermeta/language/structure/Property/isReadOnly/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isReadOnly"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isReadOnly"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/default/@kOwnedTags.0 //org/kermeta/language/structure/Property/default/@kOwnedTags.1" name="default" type="//org/kermeta/language/structure/Property/default/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/default"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/default"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isComposite/@kOwnedTags.0 //org/kermeta/language/structure/Property/isComposite/@kOwnedTags.1" name="isComposite" type="//org/kermeta/language/structure/Property/isComposite/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isComposite"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isComposite"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isDerived/@kOwnedTags.0 //org/kermeta/language/structure/Property/isDerived/@kOwnedTags.1" name="isDerived" type="//org/kermeta/language/structure/Property/isDerived/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isDerived"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isDerived"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isID/@kOwnedTags.0 //org/kermeta/language/structure/Property/isID/@kOwnedTags.1" name="isID" type="//org/kermeta/language/structure/Property/isID/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isID"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isID"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/getterBody/@kOwnedTags.0 //org/kermeta/language/structure/Property/getterBody/@kOwnedTags.1" name="getterBody" type="//org/kermeta/language/structure/Property/getterBody/@containedType.0" isOrdered="true" upper="1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/getterBody"/>
@@ -10836,12 +10836,12 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isGetterAbstract/@kOwnedTags.0 //org/kermeta/language/structure/Property/isGetterAbstract/@kOwnedTags.1" name="isGetterAbstract" type="//org/kermeta/language/structure/Property/isGetterAbstract/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isGetterAbstract"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isGetterAbstract"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/isSetterAbstract/@kOwnedTags.0 //org/kermeta/language/structure/Property/isSetterAbstract/@kOwnedTags.1" name="isSetterAbstract" type="//org/kermeta/language/structure/Property/isSetterAbstract/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/isSetterAbstract"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Property/isSetterAbstract"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Property/ownedUnresolvedProperties/@kOwnedTags.0" name="ownedUnresolvedProperties" type="//org/kermeta/language/structure/Property/ownedUnresolvedProperties/@containedType.0" isOrdered="true" upper="-1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Property/ownedUnresolvedProperties"/>
@@ -10912,22 +10912,22 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/MultiplicityElement/isOrdered/@kOwnedTags.0 //org/kermeta/language/structure/MultiplicityElement/isOrdered/@kOwnedTags.1" name="isOrdered" type="//org/kermeta/language/structure/MultiplicityElement/isOrdered/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/MultiplicityElement/isOrdered"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/MultiplicityElement/isOrdered"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/MultiplicityElement/isUnique/@kOwnedTags.0 //org/kermeta/language/structure/MultiplicityElement/isUnique/@kOwnedTags.1" name="isUnique" type="//org/kermeta/language/structure/MultiplicityElement/isUnique/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/MultiplicityElement/isUnique"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/MultiplicityElement/isUnique"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/MultiplicityElement/lower/@kOwnedTags.0 //org/kermeta/language/structure/MultiplicityElement/lower/@kOwnedTags.1" name="lower" type="//org/kermeta/language/structure/MultiplicityElement/lower/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/MultiplicityElement/lower"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/MultiplicityElement/lower"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="int"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/MultiplicityElement/upper/@kOwnedTags.0 //org/kermeta/language/structure/MultiplicityElement/upper/@kOwnedTags.1" name="upper" type="//org/kermeta/language/structure/MultiplicityElement/upper/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/MultiplicityElement/upper"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/MultiplicityElement/upper"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="int"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/TypeDefinition/@kOwnedTags.0 //org/kermeta/language/structure/TypeDefinition/@kOwnedTags.1 //org/kermeta/language/structure/TypeDefinition/@kOwnedTags.2" name="TypeDefinition" superType="//org/kermeta/language/structure/TypeDefinition/@containedType.0 //org/kermeta/language/structure/TypeDefinition/@containedType.1" isAspect="false" isAbstract="false">
@@ -10949,7 +10949,7 @@
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/TypeDefinition/isAspect/@kOwnedTags.0" name="isAspect" type="//org/kermeta/language/structure/TypeDefinition/isAspect/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeDefinition/isAspect"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Class/@kOwnedTags.0 //org/kermeta/language/structure/Class/@kOwnedTags.1" name="Class" superType="//org/kermeta/language/structure/Class/@containedType.0" isAspect="false" isAbstract="false">
@@ -10974,12 +10974,12 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Class/isAbstract/@kOwnedTags.0 //org/kermeta/language/structure/Class/isAbstract/@kOwnedTags.1" name="isAbstract" type="//org/kermeta/language/structure/Class/isAbstract/@containedType.0" isOrdered="true" upper="1" isComposite="true" isDerived="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Class/isAbstract"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Class/isAbstract"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Class/name/@kOwnedTags.0 //org/kermeta/language/structure/Class/name/@kOwnedTags.1" name="name" type="//org/kermeta/language/structure/Class/name/@containedType.0" isOrdered="true" upper="1" isComposite="true" isDerived="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Class/name"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Class/name"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedOperation kTag="//org/kermeta/language/structure/Class/EOperation0/@kOwnedTags.0" name="EOperation0" isOrdered="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Class/EOperation0"/>
@@ -11009,7 +11009,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/NamedElement/name/@kOwnedTags.0 //org/kermeta/language/structure/NamedElement/name/@kOwnedTags.1" name="name" type="//org/kermeta/language/structure/NamedElement/name/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/NamedElement/name"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/NamedElement/name"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Package/@kOwnedTags.0 //org/kermeta/language/structure/Package/@kOwnedTags.1" name="Package" superType="//org/kermeta/language/structure/Package/@containedType.0 //org/kermeta/language/structure/Package/@containedType.1" isAspect="false" isAbstract="false">
@@ -11032,7 +11032,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Package/uri/@kOwnedTags.0 //org/kermeta/language/structure/Package/uri/@kOwnedTags.1" name="uri" type="//org/kermeta/language/structure/Package/uri/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Package/uri"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Package/uri"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Parameter/@kOwnedTags.0 //org/kermeta/language/structure/Parameter/@kOwnedTags.1" name="Parameter" superType="//org/kermeta/language/structure/Parameter/@containedType.0" isAspect="false" isAbstract="false">
@@ -11074,12 +11074,12 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Tag/name/@kOwnedTags.0 //org/kermeta/language/structure/Tag/name/@kOwnedTags.1" name="name" type="//org/kermeta/language/structure/Tag/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Tag/name"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Tag/name"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Tag/value/@kOwnedTags.0 //org/kermeta/language/structure/Tag/value/@kOwnedTags.1" name="value" type="//org/kermeta/language/structure/Tag/value/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Tag/value"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Tag/value"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Tag/object/@kOwnedTags.0 //org/kermeta/language/structure/Tag/object/@kOwnedTags.1" name="object" type="//org/kermeta/language/structure/Tag/object/@containedType.0" isOrdered="true" lower="1" upper="-1" opposite="//org/kermeta/language/structure/Tag/object/@ownedUnresolvedProperties.0">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Tag/object"/>
@@ -11148,7 +11148,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/ClassDefinition/isAbstract/@kOwnedTags.0 //org/kermeta/language/structure/ClassDefinition/isAbstract/@kOwnedTags.1" name="isAbstract" type="//org/kermeta/language/structure/ClassDefinition/isAbstract/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ClassDefinition/isAbstract"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ClassDefinition/isAbstract"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/ClassDefinition/ownedAttribute/@kOwnedTags.0 //org/kermeta/language/structure/ClassDefinition/ownedAttribute/@kOwnedTags.1" name="ownedAttribute" type="//org/kermeta/language/structure/ClassDefinition/ownedAttribute/@containedType.0" upper="-1" opposite="//org/kermeta/language/structure/ClassDefinition/ownedAttribute/@ownedUnresolvedProperties.0">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ClassDefinition/ownedAttribute"/>
@@ -11165,7 +11165,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/ClassDefinition/isSingleton/@kOwnedTags.0 //org/kermeta/language/structure/ClassDefinition/isSingleton/@kOwnedTags.1" name="isSingleton" type="//org/kermeta/language/structure/ClassDefinition/isSingleton/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ClassDefinition/isSingleton"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ClassDefinition/isSingleton"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.Boolean"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintType/@kOwnedTags.0" name="ConstraintType">
@@ -11189,7 +11189,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/ModelingUnit/namespacePrefix/@kOwnedTags.0 //org/kermeta/language/structure/ModelingUnit/namespacePrefix/@kOwnedTags.1" name="namespacePrefix" type="//org/kermeta/language/structure/ModelingUnit/namespacePrefix/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ModelingUnit/namespacePrefix"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ModelingUnit/namespacePrefix"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/ModelingUnit/requires/@kOwnedTags.0 //org/kermeta/language/structure/ModelingUnit/requires/@kOwnedTags.1" name="requires" type="//org/kermeta/language/structure/ModelingUnit/requires/@containedType.0" isOrdered="true" upper="-1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ModelingUnit/requires"/>
@@ -11214,7 +11214,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/Require/uri/@kOwnedTags.0 //org/kermeta/language/structure/Require/uri/@kOwnedTags.1" name="uri" type="//org/kermeta/language/structure/Require/uri/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Require/uri"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Require/uri"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/GenericTypeDefinition/@kOwnedTags.0 //org/kermeta/language/structure/GenericTypeDefinition/@kOwnedTags.1" name="GenericTypeDefinition" superType="//org/kermeta/language/structure/GenericTypeDefinition/@containedType.0" isAspect="false" isAbstract="true">
@@ -11334,7 +11334,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/UnresolvedType/typeIdentifier/@kOwnedTags.0 //org/kermeta/language/structure/UnresolvedType/typeIdentifier/@kOwnedTags.1" name="typeIdentifier" type="//org/kermeta/language/structure/UnresolvedType/typeIdentifier/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/UnresolvedType/typeIdentifier"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/UnresolvedType/typeIdentifier"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Unresolved/@kOwnedTags.0 //org/kermeta/language/structure/Unresolved/@kOwnedTags.1" name="Unresolved" superType="//org/kermeta/language/structure/Unresolved/@containedType.0" isAspect="false" isAbstract="true">
@@ -11349,7 +11349,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/UnresolvedProperty/propertyIdentifier/@kOwnedTags.0 //org/kermeta/language/structure/UnresolvedProperty/propertyIdentifier/@kOwnedTags.1" name="propertyIdentifier" type="//org/kermeta/language/structure/UnresolvedProperty/propertyIdentifier/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/UnresolvedProperty/propertyIdentifier"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/UnresolvedProperty/propertyIdentifier"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/UnresolvedOperation/@kOwnedTags.0" name="UnresolvedOperation" superType="//org/kermeta/language/structure/UnresolvedOperation/@containedType.0 //org/kermeta/language/structure/UnresolvedOperation/@containedType.1 //org/kermeta/language/structure/UnresolvedOperation/@containedType.2" isAspect="false" isAbstract="false">
@@ -11360,7 +11360,7 @@
             <ownedAttribute kTag="//org/kermeta/language/structure/UnresolvedOperation/operationIdentifier/@kOwnedTags.0 //org/kermeta/language/structure/UnresolvedOperation/operationIdentifier/@kOwnedTags.1" name="operationIdentifier" type="//org/kermeta/language/structure/UnresolvedOperation/operationIdentifier/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/UnresolvedOperation/operationIdentifier"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/UnresolvedOperation/operationIdentifier"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/UnresolvedOperation/from/@kOwnedTags.0" name="from" type="//org/kermeta/language/structure/UnresolvedOperation/from/@containedType.0" isOrdered="true" upper="1">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/UnresolvedOperation/from"/>
@@ -11373,11 +11373,11 @@
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::KermetaModelElement"/>
             <ownedAttribute kTag="//org/kermeta/language/structure/Using/fromQName/@kOwnedTags.0" name="fromQName" type="//org/kermeta/language/structure/Using/fromQName/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Using/fromQName"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Using/toName/@kOwnedTags.0" name="toName" type="//org/kermeta/language/structure/Using/toName/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Using/toName"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="java.lang.String"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/ProductType/@kOwnedTags.0 //org/kermeta/language/structure/ProductType/@kOwnedTags.1" name="ProductType" superType="//org/kermeta/language/structure/ProductType/@containedType.0 //org/kermeta/language/structure/ProductType/@containedType.1" isAspect="false" isAbstract="false">
@@ -11423,10 +11423,6 @@
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/sourceType"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::TypeDefinition"/>
               <ownedUnresolvedProperties propertyIdentifier="org::kermeta::language::structure::TypeDefinition::typeMappings"/>
-            </ownedAttribute>
-            <ownedAttribute kTag="//org/kermeta/language/structure/TypeMapping/mapping/@kOwnedTags.0" name="mapping" type="//org/kermeta/language/structure/TypeMapping/mapping/@containedType.0" isOrdered="true" upper="1">
-              <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/mapping"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
             </ownedAttribute>
           </ownedTypeDefinition>
         </nestedPackage>
