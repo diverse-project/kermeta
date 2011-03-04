@@ -29,6 +29,7 @@ public class KermetaCompiler {
 	public Boolean saveIntermediateFiles = false;
 	public String targetFolder;
 	public String projectName = "project";
+	public KpVariableExpander variableExpander;
 	
 	/**
 	 * Constructor
@@ -73,7 +74,7 @@ public class KermetaCompiler {
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		File mergedFile = new File("./"+targetFolder+"/META-INF/kermeta/"+projectName+".km");		
+		File mergedFile = new File(targetFolder+"/META-INF/kermeta/"+projectName+".km");		
 		if(!mergedFile.getParentFile().exists()){
 			mergedFile.getParentFile().mkdirs();
 		}
@@ -90,6 +91,7 @@ public class KermetaCompiler {
 		
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 		
+		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
 		for (Source src : srcs ){
 			String sourceURLWithVariable = ((Source) src).getUrl();
@@ -114,6 +116,7 @@ public class KermetaCompiler {
 	public ModelingUnit mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		// Convert Modellingunit For Merger
+		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
 		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
 		for (ModelingUnit mu : modelingUnits){			
 			convertedModellingUnits.add( new ModelingUnitConverter().convert(mu));
@@ -135,6 +138,7 @@ public class KermetaCompiler {
 	
 	
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
+		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetFolder+"/intermediate/beforeResolving.km").convert(mu);
 		
