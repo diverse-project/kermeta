@@ -1080,7 +1080,12 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				
 				ctxt.currentElement := t
 				
-				t.type.accept(self, ctxt)
+				if (t.type.isVoid) then
+					stdio.writeln("WARNING ---- t.type.isVoid with t:"+t.toString)
+				else
+					t.type.accept(self, ctxt)
+				end
+								
 				if (not ctxt.unresolved.isVoid()) then
 					callTypeFinder(ctxt)
 					var foundType : Type init ctxt.getFoundType
