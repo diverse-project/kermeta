@@ -17,11 +17,16 @@ using org::kermeta::language::structure
 class StructureVisitor
 {
 	operation isVisitable(o : KermetaModelElement) : Boolean is do
-		if (o.isInstanceOf(Boolean) or o.isInstanceOf(Integer) or o.isInstanceOf(String) or o.isInstanceOf(UnlimitedNatural)
-			or o.isInstanceOf(ConstraintLanguage) or o.isInstanceOf(ConstraintType)) then
+		//Compilo BUG : Void.isInstanceOf return true in compiled mode	
+		if (o.isVoid) then
 			result := false
 		else
-			result := true
+			if (o.isInstanceOf(Boolean) or o.isInstanceOf(Integer) or o.isInstanceOf(String) or o.isInstanceOf(UnlimitedNatural)
+				or o.isInstanceOf(ConstraintLanguage) or o.isInstanceOf(ConstraintType)) then
+				result := false
+			else
+				result := true
+			end
 		end
 	end
 	
