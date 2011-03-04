@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
-import org.kermeta.kp.SourceFolder;
 import org.kermeta.kp.loader.kp.KpLoader;
 import org.kermeta.language.structure.ModelingUnit;
 
@@ -69,7 +68,7 @@ public class KermetaCompiler {
 		if(!kp.getName().isEmpty()){
 			projectName = kp.getName();
 		}
-		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp);
+		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, new KpVariableExpander(kpFileURL));
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
@@ -87,7 +86,7 @@ public class KermetaCompiler {
 		// TODO deal with scala to bytecode
 	}	
 
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp) throws IOException {
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 		
@@ -95,13 +94,14 @@ public class KermetaCompiler {
 		List<Source> srcs = kp.getSources();
 		for (Source src : srcs ){
 			String sourceURLWithVariable = ((Source) src).getUrl();
-			String sourceURL = sourceURLWithVariable;
+			String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
 			System.out.println("source is : " + sourceURLWithVariable);
 			if (sourceURLWithVariable.contains("${")){
 				// TODO deal with variable expansion
+				
 				System.out.println("source : " + sourceURLWithVariable + " is expanded to " +sourceURL);
 			}
-			ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURLWithVariable);
+			ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURL);
 			if (mu != null) {
 				modelingUnits.add(mu);
 			}
