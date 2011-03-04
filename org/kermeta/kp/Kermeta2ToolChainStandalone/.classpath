@@ -32,6 +32,6 @@
 	<classpathentry kind="lib" path="lib/language.resolver-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/language.loader.kmt.scala-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="K2dependencies/language.framework.scala-0.12.1.jar"/>
-	<classpathentry kind="lib" path="lib/language.ecore2km-2.0.1-SNAPSHOT.jar" sourcepath="/org.kermeta.language.ecore2km/target/generated-sources/kermeta"/>
+	<classpathentry kind="lib" path="lib/language.ecore2km-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
