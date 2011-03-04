@@ -635,10 +635,12 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			
 			//When we have visited all the elements of the modeling unit, for each UnresolvedType which has been resolved
 			unresolvedTypesToBeRemoved.each{u|
-				//We add the corresponding resolved type to the typeContainer of u
-				u.typeContainer.containedType.add(u.correspondingType)
-				//And we remove u
-				u.typeContainer.containedType.remove(u)
+				if (not u.typeContainer.isVoid) then	
+					//We add the corresponding resolved type to the typeContainer of u
+					u.typeContainer.containedType.add(u.correspondingType)
+					//And we remove u
+					u.typeContainer.containedType.remove(u)
+				end
 			}
 			
 		end
@@ -1076,16 +1078,9 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			end
 			
 			//Visiting type and handling Unresolved
-			if (t.type.isVoid) then
-					stdio.writeln("WARNING1 ---- t.type.isVoid with t:"+t.toString)			
-			end
 			if (isVisitable(t.type)) then
 				
 				ctxt.currentElement := t
-				
-				if (t.type.isVoid) then
-					stdio.writeln("WARNING2 ---- t.type.isVoid with t:"+t.toString)			
-				end	
 				
 				t.type.accept(self, ctxt)
 								
