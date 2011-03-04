@@ -141,7 +141,14 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * If both of the arguments are not valid, void is returned.
 	 */
 	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
-		var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
+	    /* workarounf Compilerbug !! */
+	    // var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
+	    var eDataType : EDataType 
+	    eDataType ?= type
+	    var eEnum : EEnum
+	    eEnum ?= type
+		var isDataType : Boolean init (not type.isVoid) and (not eDataType.isVoid) and (eEnum.isVoid)
+		/* end workaround*/
 		// Generic type must be managed. The type of the method is a generic type if:
 		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and 
 		   (genericType.eClassifier.isVoid or genericType.eClassifier==type)}) then
