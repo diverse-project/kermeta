@@ -16,7 +16,6 @@ require "Behavior_org.kermeta.traceability.model_aspect.kmt"
 require kermeta
 using kermeta::standard
 using kermeta::utils
-//using traceability
 using kermeta::language::structure
 
 

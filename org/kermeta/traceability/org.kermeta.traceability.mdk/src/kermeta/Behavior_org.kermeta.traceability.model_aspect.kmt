@@ -5,16 +5,88 @@
  * Authors:
  * 		Didier Vojtisek
  *		David Touzet
+ *		Xavier Dolques (adaptation for kermeta version 2)
  */
 
 
+@uri "http://www.kermeta.org/Traceability/2.0.0/"
 package org::kermeta::traceability;
-
-require kermeta
-
-require "MetaModel_org.kermeta.traceability.model.kmt"
+require "http://www.kermeta.org/Traceability/2.0.0/"
+require "kermeta"
 using kermeta::standard
+using kermeta::language::structure
 
+
+
+
+aspect abstract class Traceable
+{
+	operation addTarget( context : Object , targetElem : Traceable) : Void is do 
+		var targetTrace : Trace init Trace.new
+		targetTrace.sourceElem:=self
+		targetTrace.targetElem:=targetElem
+		targetTrace.context?=context
+	end
+	
+	operation resolveAll() : Sequence<Traceable>  is do
+		result:=target.collect{x|x.targetElem}
+	end
+	
+	
+	operation resolveOne(t:Class) : Traceable is do
+		
+		from var i : Integer init 0
+			until target.size() <= i
+				loop
+		
+    			if target.elementAt(i).targetElem.isKindOf(t) then 
+    	
+    				result:=target.elementAt(i).targetElem
+    				i:=target.size()
+    			end
+    			i:=i+1
+			end
+	end
+	
+	
+	operation resolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=target.select{trace|trace.context.equals(aContext)}.collect{x|x.targetElem}
+	end
+	
+	operation invResolveAll() : Sequence<Traceable>  is do
+		result:=source.collect{x|x.sourceElem}
+	end
+	
+	
+	operation invResolveOne(t:Class) : Traceable is do
+		from var i : Integer init 0
+			until source.size() == i
+				loop
+    			if source.elementAt(i).sourceElem.isKindOf(t) then 
+    				result:=source.elementAt(i).sourceElem
+    				end
+			end
+	end
+	
+	operation invResolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=source.select{trace|trace.context.equals(aContext)}.collect{x|x.sourceElem}
+	end
+	
+}
+
+
+/**
+ * This abstract class represents a reference to a concrete object
+ */
+aspect abstract class Reference inherits Traceable
+{
+	/**return a copy of the reference with same signature and r.clone().isSameAs(r) return true*/
+	operation cloneRef() : Reference is abstract
+	/**return a unique signature for equivalents references*/
+	operation signature() : String is abstract
+	/** This abstract operation allows testing reference equivalence*/
+	operation isSameAs(obj: Object) : Boolean is abstract
+}
 /*
  * This class represents a trace model.
  * This is a set of traces, references and messages.
@@ -137,17 +209,6 @@ aspect class TracePackage {
 	end 
 }
 
-/*
- * This abstract class represents a reference to a concrete object
- */
-aspect abstract class Reference {
-	/*
-	 * This abstract operation allows testing reference equivalence
-	 */
-	operation isSameAs(obj: Object) : Boolean is abstract
-}
-
-
 
 /*
  * This class represents a reference to a concrete object contained by a file
@@ -198,6 +259,10 @@ aspect class TextReference inherits FileReference {
 			+ "#" + charEndOffset.toString
 	end
 	
+	method cloneRef() : Reference is do
+		 result:=TextReference.clone(self)
+	end
+	
 	method signature(): String is do 
 		result:="TextReference:"+fileURI+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
 	end
@@ -225,6 +290,11 @@ aspect class XMLReference inherits FileReference {
 	method toString() : String is do
 		result := fileURI + "#" + xPointer
 	end
+	
+	method cloneRef() : Reference is do
+		result:=XMLReference.clone(self)
+	end
+
 	method signature(): String is do 
 		result:="XMLReference:"+fileURI+",xp:"+xPointer
 	end
@@ -252,14 +322,15 @@ aspect class ModelReference inherits Reference {
 		result := refObject.toString
 	end
 	
+	method cloneRef() : Reference is do
+		result:=ModelReference.clone(self)
+	
+	end
+	
 	method signature() : String is do 
 		var i : Integer 
 		result:="ModelReference:"+refObject.oid.toString
-		//result:=""
 	end
 	
+	
 }
-
-
-
-
