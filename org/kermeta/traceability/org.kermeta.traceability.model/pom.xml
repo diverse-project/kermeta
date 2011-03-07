@@ -26,9 +26,13 @@
 				<directory>.</directory>
 				<includes>
 					<include>plugin.xml</include>
+					<include>plugin.properties</include>
 				</includes>
 			</resource>
-			
+			<resource>
+				<directory>model</directory>
+				<targetPath>model</targetPath>
+			</resource>
 		</resources>
 		
 		
@@ -48,6 +52,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                     <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
                         <Export-Package>
                         	org.util,
                         	org.impl,

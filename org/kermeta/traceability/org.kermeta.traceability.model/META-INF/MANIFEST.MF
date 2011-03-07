@@ -1,28 +1,39 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.traceability.util;uses:="org.eclipse.emf.e
- core,org.eclipse.emf.common.notify,org.kermeta.traceability,org.eclip
- se.emf.common.notify.impl,org.eclipse.emf.common.util",org.kermeta.tr
- aceability.impl;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.n
- otify,org.eclipse.emf.ecore.impl,org.kermeta.traceability,org.eclipse
- .emf.ecore.util,org.eclipse.emf.common.util,org.eclipse.emf.ecore.plu
- gin,org.eclipse.emf.ecore.resource",org.kermeta.traceability;uses:="o
- rg.eclipse.emf.ecore,org.eclipse.emf.common.util,org.kermeta.traceabi
- lity.impl"
-Private-Package: org.kermeta.traceability.util,org.kermeta.traceabilit
- y.impl,org.kermeta.traceability,
+Export-Package: org.util;uses:="org.eclipse.emf.ecore,org.eclipse.emf.
+ common.notify,org,org.eclipse.emf.common.notify.impl,org.eclipse.emf.
+ common.util",org.impl;uses:="org.eclipse.emf.ecore,org,org.eclipse.em
+ f.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resou
+ rce,org.kermeta.impl,org.eclipse.emf.common.util,org.kermeta.traceabi
+ lity.impl,org.kermeta,org.kermeta.traceability",org;uses:="org.eclips
+ e.emf.ecore,org.impl",org.kermeta.util;uses:="org.eclipse.emf.ecore,o
+ rg.kermeta,org.eclipse.emf.common.notify,org.eclipse.emf.common.notif
+ y.impl,org.eclipse.emf.common.util",org.kermeta.impl;uses:="org.eclip
+ se.emf.ecore,org.kermeta,org.eclipse.emf.ecore.impl,org.eclipse.emf.e
+ core.plugin,org.impl,org.eclipse.emf.common.util,org.kermeta.traceabi
+ lity.impl,org,org.kermeta.traceability",org.kermeta;uses:="org.eclips
+ e.emf.ecore,org.kermeta.impl",org.kermeta.traceability.util;uses:="or
+ g.eclipse.emf.ecore,org.eclipse.emf.common.notify,org.kermeta.traceab
+ ility,org.eclipse.emf.common.notify.impl,org.eclipse.emf.common.util"
+ ,org.kermeta.traceability.impl;uses:="org.eclipse.emf.ecore,org.eclip
+ se.emf.common.notify,org.eclipse.emf.ecore.impl,org.kermeta.traceabil
+ ity,org.eclipse.emf.ecore.util,org.eclipse.emf.common.util,org.eclips
+ e.emf.ecore.plugin,org.impl,org.kermeta.impl,org.kermeta,org",org.ker
+ meta.traceability;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common
+ .util,org.kermeta.traceability.impl"
+Private-Package: model,.
 Bundle-ClassPath: .
-Built-By: kermeta_bot
+Built-By: xdolques
 Tool: Bnd-0.0.311
 Bundle-Name: Traceability model
 Created-By: Apache Maven Bundle Plugin
-Bundle-Version: 2.0.1
-Build-Jdk: 1.6.0_20
-Bnd-LastModified: 1291197011129
+Build-Jdk: 1.6.0_23
+Bundle-Version: 2.0.2.SNAPSHOT
+Bnd-LastModified: 1299490024929
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
  pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
  .resource,org.eclipse.emf.ecore.util,org.osgi.framework;version="[1.5
  ,2)"
-Bundle-SymbolicName: org.kermeta.traceability.model
+Bundle-SymbolicName: org.kermeta.traceability.model;singleton:=true
 
