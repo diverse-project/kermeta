@@ -12,8 +12,9 @@ package helloworld {
 	class HelloWorld
 	{
 		@main ""
-		operation main() : kermeta::standard::Void is do 
-			kermeta::io::StdIO.writeln("Hello World!")
+		operation main() : kermeta::standard::Void is do
+			var toto : kermeta::standard::String init "Hello World!" 
+			kermeta::io::StdIO.writeln(toto)
 		end
 		
 		@main "Bonjour tout le monde"
