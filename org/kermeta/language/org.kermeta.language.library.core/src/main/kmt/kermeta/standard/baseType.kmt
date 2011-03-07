@@ -78,9 +78,10 @@ class Object
 	
 	/**
 	 * Returns a Boolean stating whether the current Object is an instance of the given Class
+	 * This is the new version of the former isKindOf
 	 */
 	//@CompilerIgnore "true"
-	operation isKindOf(cl : Class) : Boolean is do
+	operation isDirectInstanceOf(cl : Class) : Boolean is do
 	end
 	
 	/** 
