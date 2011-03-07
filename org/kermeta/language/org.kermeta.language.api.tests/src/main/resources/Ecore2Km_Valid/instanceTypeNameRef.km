@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//test/@kOwnedTags.0" name="test" uri="http://test">
+    <kOwnedTags name="ecore" value="true" object="//test"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/NoInstanceClassName/@kOwnedTags.0" name="NoInstanceClassName" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/NoInstanceClassName"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/StillNotInstanceClassName/@kOwnedTags.0" name="StillNotInstanceClassName" superType="//test/StillNotInstanceClassName/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/StillNotInstanceClassName"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+      <ownedAttribute kTag="//test/StillNotInstanceClassName/myAttr1/@kOwnedTags.0" name="myAttr1" type="//test/StillNotInstanceClassName/myAttr1/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//test/StillNotInstanceClassName/myAttr1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/StillNotInstanceClassName/myAttr2/@kOwnedTags.0" name="myAttr2" type="//test/StillNotInstanceClassName/myAttr2/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//test/StillNotInstanceClassName/myAttr2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/StillNotInstanceClassName/myRef/@kOwnedTags.0" name="myRef" type="//test/StillNotInstanceClassName/myRef/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/StillNotInstanceClassName/myRef"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//test/StillNotInstanceClassName/myOp/@kOwnedTags.0" name="myOp" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//test/StillNotInstanceClassName/myOp"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="chabada.oto"/>
+        <ownedParameter name="p1" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="thisIsMyInstanceClassName.toto.titi"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

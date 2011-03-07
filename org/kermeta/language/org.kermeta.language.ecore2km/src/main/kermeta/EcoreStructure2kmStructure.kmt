@@ -84,7 +84,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 
 	method visitEOperation(op : EOperation) : Void is do
-		if((not op.eContainingClass.isVoid).andThen{b | op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
+		if((not op.eContainingClass.targetKermetaObject.isVoid).andThen{b | op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			// Getting the type of the operation.
 			var returnType : UnresolvedType init getUnresolvedType(op.eGenericType, op.eType)
 			// Creation of the ouput Kermeta operation.
@@ -106,7 +106,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 
 	method visitEAttribute(eAttr : EAttribute) : Void is do
-		if(eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+		// If the target kermeta object is null, it means that is has not been created. Thus, the attribute must be ignored.
+		if((not eAttr.eContainingClass.targetKermetaObject.isVoid).andThen{b | eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, 
 												 eAttr.eGenericType, eAttr.lowerBound, eAttr.upperBound)
 			// Adding the created Kermeta property to its class definition.
@@ -240,7 +241,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEReference(ref : EReference) : Void is do
-		if(ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)) then
+		// If the target kermeta object is null, it means that is has not been created. Thus, the reference must be ignored.
+		if((not ref.eContainingClass.targetKermetaObject.isVoid).andThen{b | ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
 												 ref.eGenericType, ref.lowerBound, ref.upperBound)
 			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
@@ -264,7 +266,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEParameter(param : EParameter) : Void is do
-		if(param.eOperation.targetKermetaObject.isKindOf(Operation)) then
+		// If the target kermeta object is null, it means that is has not been created. Thus, the paramter must be ignored.
+		if((not param.eOperation.targetKermetaObject.isVoid).andThen{b | param.eOperation.targetKermetaObject.isKindOf(Operation)}) then
 			// Getting the kermeta operation.
 	 		var op : Operation init param.eOperation.targetKermetaObject.asType(Operation)
 	 		// Getting the type of the parameter.
