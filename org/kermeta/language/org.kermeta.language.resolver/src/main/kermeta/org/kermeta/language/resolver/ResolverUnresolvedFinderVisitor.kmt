@@ -44,7 +44,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 	reference resolvedPropertyFinder : ResolverResolvedPropertyFinder
 	reference resolvedOperationFinder : ResolverResolvedOperationFinder
 	
-	reference unresolvedTypesToBeRemoved : Collection<UnresolvedType>
+	reference unresolvedTypesToBeRemoved : Set<UnresolvedType>
 	
 	//The first pass does not resolve UnresolvedOperation (UnresolvedOperation need all ClassDefinition resolved)
 	//The second pass does not resolve some UnresolvedType (UnresolvedType may need all Operations resolved)
@@ -605,8 +605,6 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 		pass := 1
 	
 		if (m.toBeVisitedAsModelingUnit(pass)) then
-		
-			
 			
 			unresolvedTypesToBeRemoved := Set<UnresolvedType>.new
 			
@@ -634,13 +632,11 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 			}
 			
 			//When we have visited all the elements of the modeling unit, for each UnresolvedType which has been resolved
-			unresolvedTypesToBeRemoved.each{u|
-				if (not u.typeContainer.isVoid) then	
-					//We add the corresponding resolved type to the typeContainer of u
-					u.typeContainer.containedType.add(u.correspondingType)
-					//And we remove u
-					u.typeContainer.containedType.remove(u)
-				end
+			unresolvedTypesToBeRemoved.each{u|			
+				//We add the corresponding resolved type to the typeContainer of u
+				u.typeContainer.containedType.add(u.correspondingType)
+				//And we remove u
+				u.typeContainer.containedType.remove(u)
 			}
 			
 		end
@@ -1083,7 +1079,7 @@ class ResolverUnresolvedFinderVisitor inherits StructureVisitor
 				ctxt.currentElement := t
 				
 				t.type.accept(self, ctxt)
-								
+				
 				if (not ctxt.unresolved.isVoid()) then
 					callTypeFinder(ctxt)
 					var foundType : Type init ctxt.getFoundType
