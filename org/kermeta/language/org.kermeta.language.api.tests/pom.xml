@@ -35,7 +35,13 @@
       <artifactId>language.loader.kmt.scala</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
-    
+	<dependency>
+		<groupId>org.kermeta.language</groupId>
+		<artifactId>language.framework.scala</artifactId>
+		<version>0.12.1</version>
+		<type>jar</type>
+		<scope>compile</scope>
+	</dependency>   
     <dependency>
       <groupId>org.kermeta.eclipse</groupId>
       <artifactId>org.eclipse.emf.compare</artifactId>

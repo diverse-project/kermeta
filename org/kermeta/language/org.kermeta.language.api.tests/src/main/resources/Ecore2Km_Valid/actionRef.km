@@ -1,69 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
-  <packages name="action" uri="http:///fr/eseo/gri/malan/action/model.ecore">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Action" isAspect="false" isAbstract="false">
-      <ownedAttribute name="undoable" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Boolean"/>
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//action/@kOwnedTags.0" name="action" uri="http:///fr/eseo/gri/malan/action/model.ecore">
+    <kOwnedTags name="ecore" value="true" object="//action"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//action/Action/@kOwnedTags.0" name="Action" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//action/Action"/>
+      <ownedAttribute kTag="//action/Action/undoable/@kOwnedTags.0" name="undoable" type="//action/Action/undoable/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Action/undoable"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       </ownedAttribute>
-      <ownedAttribute name="doIt" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
+      <ownedAttribute kTag="//action/Action/doIt/@kOwnedTags.0" name="doIt" type="//action/Action/doIt/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Action/doIt"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       </ownedAttribute>
-      <ownedAttribute name="undo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
+      <ownedAttribute kTag="//action/Action/undo/@kOwnedTags.0" name="undo" type="//action/Action/undo/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Action/undo"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       </ownedAttribute>
-      <ownedAttribute name="redo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
+      <ownedAttribute kTag="//action/Action/redo/@kOwnedTags.0" name="redo" type="//action/Action/redo/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Action/redo"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       </ownedAttribute>
-      <ownedAttribute name="canDo" type="#//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.4/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
-      </ownedAttribute>
-    </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Need" isAspect="false" isAbstract="false">
-      <ownedAttribute name="cible" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
-      </ownedAttribute>
-      <ownedAttribute name="source" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
-      </ownedAttribute>
-      <ownedAttribute name="name" type="#//@packages.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::standard::String"/>
+      <ownedAttribute kTag="//action/Action/canDo/@kOwnedTags.0" name="canDo" type="//action/Action/canDo/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Action/canDo"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       </ownedAttribute>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Or" isAspect="false" isAbstract="false">
-      <ownedAttribute name="n1" type="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//action/Need/@kOwnedTags.0" name="Need" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//action/Need"/>
+      <ownedAttribute kTag="//action/Need/cible/@kOwnedTags.0" name="cible" type="//action/Need/cible/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//action/Need/cible"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//action/Need/source/@kOwnedTags.0" name="source" type="//action/Need/source/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//action/Need/source"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//action/Need/name/@kOwnedTags.0" name="name" type="//action/Need/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//action/Need/name"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//action/Or/@kOwnedTags.0" name="Or" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//action/Or"/>
+      <ownedAttribute kTag="//action/Or/n1/@kOwnedTags.0" name="n1" type="//action/Or/n1/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//action/Or/n1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Need"/>
       </ownedAttribute>
-      <ownedAttribute name="n2" type="#//@packages.0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
+      <ownedAttribute kTag="//action/Or/n2/@kOwnedTags.0" name="n2" type="//action/Or/n2/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//action/Or/n2"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Need"/>
       </ownedAttribute>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="ActionModel" isAspect="false" isAbstract="false">
-      <ownedAttribute name="actions" type="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0"
-          isOrdered="true" upper="-1">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//action/ActionModel/@kOwnedTags.0" name="ActionModel" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//action/ActionModel"/>
+      <ownedAttribute kTag="//action/ActionModel/actions/@kOwnedTags.0" name="actions" type="//action/ActionModel/actions/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//action/ActionModel/actions"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
       </ownedAttribute>
-      <ownedAttribute name="ors" type="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.1/@containedType.0"
-          isOrdered="true" upper="-1">
+      <ownedAttribute kTag="//action/ActionModel/ors/@kOwnedTags.0" name="ors" type="//action/ActionModel/ors/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//action/ActionModel/ors"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Or"/>
       </ownedAttribute>
-      <ownedAttribute name="needs" type="#//@packages.0/@ownedTypeDefinition.3/@ownedAttribute.2/@containedType.0"
-          isOrdered="true" upper="-1">
+      <ownedAttribute kTag="//action/ActionModel/needs/@kOwnedTags.0" name="needs" type="//action/ActionModel/needs/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//action/ActionModel/needs"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Need"/>
       </ownedAttribute>
     </ownedTypeDefinition>

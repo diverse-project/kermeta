@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//test/@kOwnedTags.0" name="test" uri="http://test">
+    <kOwnedTags name="ecore" value="true" object="//test"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/MustBeGenerated1/@kOwnedTags.0" name="MustBeGenerated1" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated1"/>
+      <ownedAttribute kTag="//test/MustBeGenerated1/mustBeGenRef1/@kOwnedTags.0" name="mustBeGenRef1" type="//test/MustBeGenerated1/mustBeGenRef1/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated1/mustBeGenRef1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/MustBeGenerated2/@kOwnedTags.0" name="MustBeGenerated2" superType="//test/MustBeGenerated2/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated2"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/MustBeGenerated3/@kOwnedTags.0" name="MustBeGenerated3" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated3"/>
+      <ownedOperation kTag="//test/MustBeGenerated3/op1/@kOwnedTags.0" name="op1" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated3/op1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+        <ownedParameter name="p1" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+        </ownedParameter>
+        <ownedParameter name="p2" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/MustBeGenerated5/@kOwnedTags.0" name="MustBeGenerated5" isAspect="false" typeParameter="//test/MustBeGenerated5/T" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated5"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/MustBeGenerated4/@kOwnedTags.0" name="MustBeGenerated4" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated4"/>
+      <ownedAttribute kTag="//test/MustBeGenerated4/ref1/@kOwnedTags.0" name="ref1" type="//test/MustBeGenerated4/ref1/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated4/ref1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::MustBeGenerated5">
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/MustBeGenerated4/ref2/@kOwnedTags.0" name="ref2" type="//test/MustBeGenerated4/ref2/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated4/ref2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::MustBeGenerated5">
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/MustBeGenerated4/ref3/@kOwnedTags.0" name="ref3" type="//test/MustBeGenerated4/ref3/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/MustBeGenerated4/ref3"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::MustBeGenerated1"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

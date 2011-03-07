@@ -1,163 +1,134 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
-  <packages name="com">
-    <nestedPackage name="google">
-      <nestedPackage name="calendar">
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="Calendar" isAspect="false" isAbstract="false">
-          <ownedAttribute name="hidden" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::language::structure::Boolean"/>
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//com/@kOwnedTags.0" name="com" uri="http://calendarGoogle/com">
+    <kOwnedTags name="ecore" value="true" object="//com"/>
+    <nestedPackage kTag="//com/google/@kOwnedTags.0" name="google" uri="http://calendarGoogle/com/google">
+      <kOwnedTags name="ecore" value="true" object="//com/google"/>
+      <nestedPackage kTag="//com/google/calendar/@kOwnedTags.0" name="calendar" uri="http://calendarGoogle/com/google/calendar">
+        <kOwnedTags name="ecore" value="true" object="//com/google/calendar"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/Calendar/@kOwnedTags.0" name="Calendar" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Calendar"/>
+          <ownedAttribute kTag="//com/google/calendar/Calendar/hidden/@kOwnedTags.0" name="hidden" type="//com/google/calendar/Calendar/hidden/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Calendar/hidden"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
           </ownedAttribute>
-          <ownedAttribute name="entries" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="-1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::CalendarEntry"/>
+          <ownedAttribute kTag="//com/google/calendar/Calendar/entries/@kOwnedTags.0" name="entries" type="//com/google/calendar/Calendar/entries/@containedType.0" isOrdered="true" upper="-1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Calendar/entries"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::CalendarEntry"/>
           </ownedAttribute>
-          <ownedAttribute name="owner" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0"
-              isOrdered="true" upper="1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::Who"/>
+          <ownedAttribute kTag="//com/google/calendar/Calendar/owner/@kOwnedTags.0" name="owner" type="//com/google/calendar/Calendar/owner/@containedType.0" isOrdered="true" upper="1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Calendar/owner"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Who"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="CalendarEntry" isAspect="false" isAbstract="false">
-          <ownedAttribute name="location" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="-1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::Where"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/CalendarEntry/@kOwnedTags.0" name="CalendarEntry" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/location/@kOwnedTags.0" name="location" type="//com/google/calendar/CalendarEntry/location/@containedType.0" isOrdered="true" upper="-1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/location"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Where"/>
           </ownedAttribute>
-          <ownedAttribute name="color" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::Color"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/color/@kOwnedTags.0" name="color" type="//com/google/calendar/CalendarEntry/color/@containedType.0" isOrdered="true" upper="1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/color"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Color"/>
           </ownedAttribute>
-          <ownedAttribute name="hidden" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::language::structure::Boolean"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/hidden/@kOwnedTags.0" name="hidden" type="//com/google/calendar/CalendarEntry/hidden/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/hidden"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
           </ownedAttribute>
-          <ownedAttribute name="time" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.3/@containedType.0"
-              isOrdered="true" upper="1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::When"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/time/@kOwnedTags.0" name="time" type="//com/google/calendar/CalendarEntry/time/@containedType.0" isOrdered="true" upper="1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/time"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::When"/>
           </ownedAttribute>
-          <ownedAttribute name="title" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.4/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/title/@kOwnedTags.0" name="title" type="//com/google/calendar/CalendarEntry/title/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/title"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
-          <ownedAttribute name="summary" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.5/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/summary/@kOwnedTags.0" name="summary" type="//com/google/calendar/CalendarEntry/summary/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/summary"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
-          <ownedAttribute name="authors" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.6/@containedType.0"
-              isOrdered="true" upper="-1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::Who"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEntry/authors/@kOwnedTags.0" name="authors" type="//com/google/calendar/CalendarEntry/authors/@containedType.0" isOrdered="true" upper="-1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEntry/authors"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Who"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="CalendarEventEntry" isAspect="false" superType="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.2/@containedType.0"
-            isAbstract="false">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="com::google::calendar::CalendarEntry"/>
-          <ownedAttribute name="participants" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="-1">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::Who"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/CalendarEventEntry/@kOwnedTags.0" name="CalendarEventEntry" superType="//com/google/calendar/CalendarEventEntry/@containedType.0" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEventEntry"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::CalendarEntry"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEventEntry/participants/@kOwnedTags.0" name="participants" type="//com/google/calendar/CalendarEventEntry/participants/@containedType.0" isOrdered="true" upper="-1">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEventEntry/participants"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Who"/>
           </ownedAttribute>
-          <ownedAttribute name="privateCopy" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::language::structure::Boolean"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEventEntry/privateCopy/@kOwnedTags.0" name="privateCopy" type="//com/google/calendar/CalendarEventEntry/privateCopy/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEventEntry/privateCopy"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
           </ownedAttribute>
-          <ownedAttribute name="webContent" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.2/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/CalendarEventEntry/webContent/@kOwnedTags.0" name="webContent" type="//com/google/calendar/CalendarEventEntry/webContent/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/CalendarEventEntry/webContent"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="Color" isAspect="false" superType="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.3/@containedType.0"
-            isAbstract="false">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="com::google::calendar::Value"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/Color/@kOwnedTags.0" name="Color" superType="//com/google/calendar/Color/@containedType.0" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Color"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Value"/>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="Value" isAspect="false" isAbstract="false">
-          <ownedAttribute name="attrName" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.4/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/Value/@kOwnedTags.0" name="Value" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Value"/>
+          <ownedAttribute kTag="//com/google/calendar/Value/attrName/@kOwnedTags.0" name="attrName" type="//com/google/calendar/Value/attrName/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Value/attrName"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
-          <ownedAttribute name="required" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.4/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::language::structure::Boolean"/>
+          <ownedAttribute kTag="//com/google/calendar/Value/required/@kOwnedTags.0" name="required" type="//com/google/calendar/Value/required/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Value/required"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
           </ownedAttribute>
-          <ownedAttribute name="value" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.4/@ownedAttribute.2/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/Value/value/@kOwnedTags.0" name="value" type="//com/google/calendar/Value/value/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Value/value"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="When" isAspect="false" isAbstract="false">
-          <ownedAttribute name="startTime" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/When/@kOwnedTags.0" name="When" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/When"/>
+          <ownedAttribute kTag="//com/google/calendar/When/startTime/@kOwnedTags.0" name="startTime" type="//com/google/calendar/When/startTime/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/When/startTime"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
-          <ownedAttribute name="endTime" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/When/endTime/@kOwnedTags.0" name="endTime" type="//com/google/calendar/When/endTime/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/When/endTime"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="Where" isAspect="false" superType="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.6/@containedType.0"
-            isAbstract="false">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="com::google::calendar::Value"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/Where/@kOwnedTags.0" name="Where" superType="//com/google/calendar/Where/@containedType.0" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Where"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::Value"/>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
-            name="WhoStatus">
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" name="WhoStatus">
           <ownedLiteral name="INVITED"/>
           <ownedLiteral name="ACCEPTED"/>
           <ownedLiteral name="TENTATIVE"/>
           <ownedLiteral name="DECLINED"/>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
-            name="WhoType">
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" name="WhoType">
           <ownedLiteral name="OPTIONAL"/>
           <ownedLiteral name="REQUIRED"/>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-            name="Who" isAspect="false" isAbstract="false">
-          <ownedAttribute name="status" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.9/@ownedAttribute.0/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::WhoStatus"/>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//com/google/calendar/Who/@kOwnedTags.0" name="Who" isAspect="false" isAbstract="false">
+          <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Who"/>
+          <ownedAttribute kTag="//com/google/calendar/Who/status/@kOwnedTags.0" name="status" type="//com/google/calendar/Who/status/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Who/status"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::WhoStatus"/>
           </ownedAttribute>
-          <ownedAttribute name="type" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.9/@ownedAttribute.1/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="com::google::calendar::WhoType"/>
+          <ownedAttribute kTag="//com/google/calendar/Who/type/@kOwnedTags.0" name="type" type="//com/google/calendar/Who/type/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Who/type"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="com::google::calendar::WhoType"/>
           </ownedAttribute>
-          <ownedAttribute name="email" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.9/@ownedAttribute.2/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/Who/email/@kOwnedTags.0" name="email" type="//com/google/calendar/Who/email/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Who/email"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
-          <ownedAttribute name="name" type="#//@packages.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.9/@ownedAttribute.3/@containedType.0"
-              isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-                typeIdentifier="org::kermeta::standard::String"/>
+          <ownedAttribute kTag="//com/google/calendar/Who/name/@kOwnedTags.0" name="name" type="//com/google/calendar/Who/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+            <kOwnedTags name="ecore" value="true" object="//com/google/calendar/Who/name"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
           </ownedAttribute>
         </ownedTypeDefinition>
       </nestedPackage>

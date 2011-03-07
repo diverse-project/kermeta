@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//test/@kOwnedTags.0" name="test" uri="http://test">
+    <kOwnedTags name="ecore" value="true" object="//test"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/TestClass/@kOwnedTags.0" name="TestClass" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/TestClass"/>
+      <ownedAttribute kTag="//test/TestClass/attr1/@kOwnedTags.0" name="attr1" type="//test/TestClass/attr1/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//test/TestClass/attr1"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/TestClass/attr2/@kOwnedTags.0" name="attr2" type="//test/TestClass/attr2/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//test/TestClass/attr2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

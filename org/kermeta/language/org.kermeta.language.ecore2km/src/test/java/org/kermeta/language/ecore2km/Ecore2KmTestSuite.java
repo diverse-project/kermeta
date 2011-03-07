@@ -18,6 +18,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.kermeta.language.api.port.PortEcore2Km;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
@@ -32,12 +33,9 @@ public class Ecore2KmTestSuite extends TestSuite {
 
     public static Test suite() {
         ((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.RichFactory$.MODULE$) ;
-        // force to initialize the eInstance (required for correct serialisation
-    	XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
-    	EcoreFactory ef = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE;
-    	EPackage p = org.eclipse.emf.ecore.EcorePackage.eINSTANCE;
-    	
         MainRunner.init();
+        XMLNamespacePackage einstance = org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage.eINSTANCE;
+    	EPackage pkg = EcorePackage.eINSTANCE;
 
         PortEcore2KmTestSuite.portEcore2Kmfactory = new PortAbstractFactory<PortEcore2Km>(){
             @Override

@@ -1,76 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
-  <packages name="instrument" uri="http:///fr/eseo/gri/malan/instrument/model.ecore">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        kTag="#//instrument/Instrument/@kOwnedTags.0" name="Instrument" isAspect="false"
-        isAbstract="false">
-      <kOwnedTags name="MyAnnotation" object="#//instrument/Instrument"/>
-      <ownedAttribute name="links" type="#//instrument/Instrument/links/@containedType.0"
-          isOrdered="true" upper="-1">
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//instrument/@kOwnedTags.0" name="instrument" uri="http:///fr/eseo/gri/malan/instrument/model.ecore">
+    <kOwnedTags name="ecore" value="true" object="//instrument"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//instrument/Instrument/@kOwnedTags.0 //instrument/Instrument/@kOwnedTags.1" name="Instrument" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//instrument/Instrument"/>
+      <kOwnedTags name="MyAnnotation" object="//instrument/Instrument"/>
+      <ownedAttribute kTag="//instrument/Instrument/links/@kOwnedTags.0" name="links" type="//instrument/Instrument/links/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Instrument/links"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::Link"/>
       </ownedAttribute>
-      <ownedAttribute name="description" type="#//instrument/Instrument/description/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      <ownedAttribute kTag="//instrument/Instrument/description/@kOwnedTags.0" name="description" type="//instrument/Instrument/description/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Instrument/description"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
       </ownedAttribute>
-      <ownedAttribute name="interimFeedback" type="#//instrument/Instrument/interimFeedback/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      <ownedAttribute kTag="//instrument/Instrument/interimFeedback/@kOwnedTags.0" name="interimFeedback" type="//instrument/Instrument/interimFeedback/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Instrument/interimFeedback"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
       </ownedAttribute>
-      <ownedAttribute name="myOppositeReference" type="#//instrument/Instrument/myOppositeReference/@containedType.0"
-          isOrdered="true" upper="1" opposite="#//instrument/Instrument/myOppositeReference/@ownedUnresolvedProperties.0">
+      <ownedAttribute kTag="//instrument/Instrument/myOppositeReference/@kOwnedTags.0" name="myOppositeReference" type="//instrument/Instrument/myOppositeReference/@containedType.0" isOrdered="true" upper="1" opposite="//instrument/Instrument/myOppositeReference/@ownedUnresolvedProperties.0">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Instrument/myOppositeReference"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::MyClass"/>
         <ownedUnresolvedProperties propertyIdentifier="instrument::MyClass::myReference"/>
       </ownedAttribute>
-      <ownedOperation name="myOperation" isOrdered="true">
+      <ownedOperation kTag="//instrument/Instrument/myOperation/@kOwnedTags.0" name="myOperation" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Instrument/myOperation"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
         <ownedParameter name="param1" upper="1">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="interaction::Transition"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Transition"/>
         </ownedParameter>
         <ownedParameter name="param2" upper="1">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
-              typeIdentifier="interaction::Transition"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Transition"/>
         </ownedParameter>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="Link" isAspect="false" superType="#//instrument/Link/@containedType.0"
-        isAbstract="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//instrument/Link/@kOwnedTags.0" name="Link" superType="//instrument/Link/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//instrument/Link"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::MyClass"/>
-      <ownedAttribute name="interaction" type="#//instrument/Link/interaction/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
+      <ownedAttribute kTag="//instrument/Link/interaction/@kOwnedTags.0" name="interaction" type="//instrument/Link/interaction/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Link/interaction"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Interaction"/>
       </ownedAttribute>
-      <ownedAttribute name="action" type="#//instrument/Link/action/@containedType.0"
-          isOrdered="true" lower="1" upper="1">
+      <ownedAttribute kTag="//instrument/Link/action/@kOwnedTags.0" name="action" type="//instrument/Link/action/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Link/action"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="action::Action"/>
       </ownedAttribute>
-      <ownedAttribute name="interimFeedback" type="#//instrument/Link/interimFeedback/@containedType.0"
-          isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::String"/>
+      <ownedAttribute kTag="//instrument/Link/interimFeedback/@kOwnedTags.0" name="interimFeedback" type="//instrument/Link/interimFeedback/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Link/interimFeedback"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
       </ownedAttribute>
-      <ownedOperation name="opA" isOrdered="true"/>
+      <ownedOperation kTag="//instrument/Link/opA/@kOwnedTags.0" name="opA" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/Link/opA"/>
+      </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="MyClass" isAspect="false" isAbstract="true">
-      <ownedAttribute name="myReference" type="#//instrument/MyClass/myReference/@containedType.0"
-          lower="1" upper="1" opposite="#//instrument/MyClass/myReference/@ownedUnresolvedProperties.0"
-          isReadOnly="true">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//instrument/MyClass/@kOwnedTags.0" name="MyClass" isAspect="false" isAbstract="true">
+      <kOwnedTags name="ecore" value="true" object="//instrument/MyClass"/>
+      <ownedAttribute kTag="//instrument/MyClass/myReference/@kOwnedTags.0" name="myReference" type="//instrument/MyClass/myReference/@containedType.0" lower="1" upper="1" opposite="//instrument/MyClass/myReference/@ownedUnresolvedProperties.0" isReadOnly="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/MyClass/myReference"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="instrument::Instrument"/>
         <ownedUnresolvedProperties propertyIdentifier="instrument::Instrument::myOppositeReference"/>
       </ownedAttribute>
-      <ownedOperation name="opA" isOrdered="true"/>
+      <ownedOperation kTag="//instrument/MyClass/opA/@kOwnedTags.0" name="opA" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//instrument/MyClass/opA"/>
+      </ownedOperation>
     </ownedTypeDefinition>
-    <nestedPackage name="nextPkg" uri="http:///fr/eseo/gri/malan/fisfd/model.ecore">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-          name="Clazz" isAspect="false" isAbstract="false"/>
+    <nestedPackage kTag="//instrument/nextPkg/@kOwnedTags.0" name="nextPkg" uri="http:///fr/eseo/gri/malan/fisfd/model.ecore">
+      <kOwnedTags name="ecore" value="true" object="//instrument/nextPkg"/>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//instrument/nextPkg/Clazz/@kOwnedTags.0" name="Clazz" isAspect="false" isAbstract="false">
+        <kOwnedTags name="ecore" value="true" object="//instrument/nextPkg/Clazz"/>
+      </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage kTag="#//instrument/enumPackage/@kOwnedTags.0" name="enumPackage"
-        uri="http:///fr/eseo/gri/malan/enumPackage/model.ecore">
-      <kOwnedTags name="AnOtherAnnotation" object="#//instrument/enumPackage"/>
+    <nestedPackage kTag="//instrument/enumPackage/@kOwnedTags.0 //instrument/enumPackage/@kOwnedTags.1" name="enumPackage" uri="http:///fr/eseo/gri/malan/enumPackage/model.ecore">
+      <kOwnedTags name="ecore" value="true" object="//instrument/enumPackage"/>
+      <kOwnedTags name="AnOtherAnnotation" object="//instrument/enumPackage"/>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" name="MyFirstEnum">
         <ownedLiteral name="ITEM_ONE"/>
         <ownedLiteral name="ITEM_TWO"/>

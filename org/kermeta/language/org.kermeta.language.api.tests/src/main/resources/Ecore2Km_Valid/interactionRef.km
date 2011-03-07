@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//interaction/@kOwnedTags.0" name="interaction" uri="http:///fr/eseo/gri/malan/interaction/model.ecore">
+    <kOwnedTags name="ecore" value="true" object="//interaction"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/Interaction/@kOwnedTags.0" name="Interaction" superType="//interaction/Interaction/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/Interaction"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::StateMachine"/>
+      <ownedAttribute kTag="//interaction/Interaction/description/@kOwnedTags.0" name="description" type="//interaction/Interaction/description/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/description"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Interaction/author/@kOwnedTags.0" name="author" type="//interaction/Interaction/author/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/author"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Interaction/dateCreation/@kOwnedTags.0" name="dateCreation" type="//interaction/Interaction/dateCreation/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/dateCreation"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Interaction/version/@kOwnedTags.0" name="version" type="//interaction/Interaction/version/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/version"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//interaction/Interaction/onStart/@kOwnedTags.0" name="onStart" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/onStart"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/Interaction/onUpdate/@kOwnedTags.0" name="onUpdate" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/onUpdate"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/Interaction/onStop/@kOwnedTags.0" name="onStop" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/onStop"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/Interaction/onAbort/@kOwnedTags.0" name="onAbort" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Interaction/onAbort"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/StateMachine/@kOwnedTags.0" name="StateMachine" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine"/>
+      <ownedAttribute kTag="//interaction/StateMachine/transitions/@kOwnedTags.0" name="transitions" type="//interaction/StateMachine/transitions/@containedType.0" isOrdered="true" lower="1" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/transitions"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Transition"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/initState/@kOwnedTags.0" name="initState" type="//interaction/StateMachine/initState/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/initState"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::InitState"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/standardStates/@kOwnedTags.0" name="standardStates" type="//interaction/StateMachine/standardStates/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/standardStates"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::StandardState"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/terminalStates/@kOwnedTags.0" name="terminalStates" type="//interaction/StateMachine/terminalStates/@containedType.0" isOrdered="true" lower="1" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/terminalStates"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::TerminalState"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/abortingStates/@kOwnedTags.0" name="abortingStates" type="//interaction/StateMachine/abortingStates/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/abortingStates"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::AbortingState"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/currentState/@kOwnedTags.0" name="currentState" type="//interaction/StateMachine/currentState/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/currentState"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::State"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/StateMachine/activated/@kOwnedTags.0" name="activated" type="//interaction/StateMachine/activated/@containedType.0" isOrdered="true" lower="1" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/activated"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//interaction/StateMachine/isRunning/@kOwnedTags.0" name="isRunning" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/isRunning"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/StateMachine/reinit/@kOwnedTags.0" name="reinit" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/reinit"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/StateMachine/executeTransition/@kOwnedTags.0" name="executeTransition" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/StateMachine/executeTransition"/>
+        <ownedParameter name="t" upper="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::Transition"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/Transition/@kOwnedTags.0" name="Transition" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/Transition"/>
+      <ownedAttribute kTag="//interaction/Transition/inputState/@kOwnedTags.0" name="inputState" type="//interaction/Transition/inputState/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/inputState"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::StandardState"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Transition/outputState/@kOwnedTags.0" name="outputState" type="//interaction/Transition/outputState/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/outputState"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::State"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Transition/description/@kOwnedTags.0" name="description" type="//interaction/Transition/description/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/description"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Transition/condition/@kOwnedTags.0" name="condition" type="//interaction/Transition/condition/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/condition"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Transition/actions/@kOwnedTags.0" name="actions" type="//interaction/Transition/actions/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/actions"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/Transition/name/@kOwnedTags.0" name="name" type="//interaction/Transition/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/name"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//interaction/Transition/action/@kOwnedTags.0" name="action" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/action"/>
+      </ownedOperation>
+      <ownedOperation kTag="//interaction/Transition/isGuardRespected/@kOwnedTags.0" name="isGuardRespected" isOrdered="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/Transition/isGuardRespected"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/State/@kOwnedTags.0" name="State" isAspect="false" isAbstract="true">
+      <kOwnedTags name="ecore" value="true" object="//interaction/State"/>
+      <ownedAttribute kTag="//interaction/State/name/@kOwnedTags.0" name="name" type="//interaction/State/name/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/State/name"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//interaction/State/description/@kOwnedTags.0" name="description" type="//interaction/State/description/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+        <kOwnedTags name="ecore" value="true" object="//interaction/State/description"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/AbortingState/@kOwnedTags.0" name="AbortingState" superType="//interaction/AbortingState/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/AbortingState"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::State"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/TerminalState/@kOwnedTags.0" name="TerminalState" superType="//interaction/TerminalState/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/TerminalState"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::State"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/StandardState/@kOwnedTags.0" name="StandardState" superType="//interaction/StandardState/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/StandardState"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::State"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//interaction/InitState/@kOwnedTags.0" name="InitState" superType="//interaction/InitState/@containedType.0" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//interaction/InitState"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="interaction::StandardState"/>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

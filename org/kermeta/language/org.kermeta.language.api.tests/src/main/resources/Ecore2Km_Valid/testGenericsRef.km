@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="namespace">
+  <packages kTag="//test/@kOwnedTags.0" name="test" uri="http://test">
+    <kOwnedTags name="ecore" value="true" object="//test"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/A/@kOwnedTags.0" name="A" isAspect="false" typeParameter="//test/A/T" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/A"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/B/@kOwnedTags.0" name="B" isAspect="false" typeParameter="//test/B/S" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/B"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="S"/>
+      <ownedAttribute kTag="//test/B/ref/@kOwnedTags.0" name="ref" type="//test/B/ref/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/B/ref"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::A">
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::C"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/B/ref2/@kOwnedTags.0" name="ref2" type="//test/B/ref2/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/B/ref2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B::S"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/B/ref3/@kOwnedTags.0" name="ref3" type="//test/B/ref3/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/B/ref3"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::A"/>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/B/ref4/@kOwnedTags.0" name="ref4" type="//test/B/ref4/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/B/ref4"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::A">
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B">
+            <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::A">
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B::S"/>
+            </generics>
+          </generics>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute kTag="//test/B/ref5/@kOwnedTags.0" name="ref5" type="//test/B/ref5/@containedType.0" isOrdered="true" upper="1">
+        <kOwnedTags name="ecore" value="true" object="//test/B/ref5"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::D">
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::D">
+            <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::C"/>
+            <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B">
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B::S"/>
+            </generics>
+            <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::D">
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B">
+                <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::C"/>
+              </generics>
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B::S"/>
+              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::C"/>
+            </generics>
+          </generics>
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::A">
+            <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::C"/>
+          </generics>
+          <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="test::B::S"/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/C/@kOwnedTags.0" name="C" isAspect="false" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/C"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//test/D/@kOwnedTags.0" name="D" isAspect="false" typeParameter="//test/D/X //test/D/Y //test/D/Z" isAbstract="false">
+      <kOwnedTags name="ecore" value="true" object="//test/D"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Z"/>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

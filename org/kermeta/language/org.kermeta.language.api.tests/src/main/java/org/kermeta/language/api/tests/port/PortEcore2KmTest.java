@@ -8,14 +8,17 @@
  */
 package org.kermeta.language.api.tests.port;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,95 +27,112 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.api.port.PortEcore2Km;
-import org.kermeta.language.api.tests.ModelingUnitUtil;
 import org.kermeta.language.api.tests.comparison.EMFCompareModelHelper;
 import org.kermeta.language.api.tests.factory.PortAbstractFactory;
+import org.kermeta.language.behavior.BehaviorPackage;
+import org.kermeta.language.behavior.impl.BehaviorFactoryImpl;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.structure.impl.StructureFactoryImpl;
+
 
 public class PortEcore2KmTest extends TestCase {
-//    public String fileInputPath;
-//    public String fileExpectedPath;
-//    public String fileOutputPath;
+	private static ResourceSet resourceSet;
+    private static kermeta.persistence.EMFRepository rep;
+    private static URIConverter converter;
+    
+    public EPackage pkg;
+    public String fileOutputPath;
     public String baseName;
-    public ResourceSet resourceSet;
     
     public Boolean valid;
     public org.kermeta.language.api.port.PortEcore2Km ecore2km = null;
     
+    static {
+		StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
+		BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
+
+    	resourceSet = new ResourceSetImpl();
+		resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(BehaviorPackage.eNS_URI, BehaviorPackage.eINSTANCE);
+    	Resource.Factory.Registry fac = resourceSet.getResourceFactoryRegistry();
+    	Map<String,Object> m = fac.getExtensionToFactoryMap();
+		m.put("ecore",new XMIResourceFactoryImpl());
+		m.put("km", new XMIResourceFactoryImpl());
+		m.put("*", new XMIResourceFactoryImpl());
+	
+		rep = kermeta.persistence.RichFactory.createEMFRepository();
+		converter = new ExtensibleURIConverterImpl();
+    }
+    
     
     public PortEcore2KmTest(final String baseName, //final String fileInputPath, final String fileExpectedPath, 
-    						//final String fileOutputPath, 
+    						final String fileOutputPath, final EPackage pkg,
     						Boolean valid, PortAbstractFactory<PortEcore2Km> factory) 
     					throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         System.out.println(" creating test ");
         System.out.println("\tbasename " + baseName);
-//        System.out.println("           fileInputPath " + fileInputPath);
-//        System.out.println("        fileExpectedPath " + fileExpectedPath);
-//        System.out.println("          fileOutputPath " + fileOutputPath);
-//        this.fileInputPath    = fileInputPath;
-//        this.fileExpectedPath = fileExpectedPath;
-//        this.fileOutputPath   = fileOutputPath;
+        System.out.println("\tfileOutputPath " + fileOutputPath);
+        this.pkg			  = pkg;
+        this.fileOutputPath   = fileOutputPath;
         this.baseName 		  = baseName;
         this.valid 			  = valid;
         ecore2km 			  = factory.create();
-        resourceSet 		  = new ResourceSetImpl();
-		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-		Map<String,Object> m 		= f.getExtensionToFactoryMap();
-		m.put("km",new XMIResourceFactoryImpl());
-		m.put("ecore",new XMIResourceFactoryImpl());
     }
     
     
+	protected static ByteArrayOutputStream saveMu(ModelingUnit mu) throws IOException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		URI	uri = URI.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km").replaceAll("::", "."));
+		Map<String, String> options = null;
+		if (mu.eResource() != null) {
+			uri = mu.eResource().getURI();
+		} else {
+			Resource resource = resourceSet.createResource(uri);
+			resource.getContents().add(mu);
+		}
+		mu.eResource().save(outputStream, options);
+		return outputStream;
+	}
+    
+	
+	protected static ModelingUnit loadKM(String uri) throws IOException {
+		URI ruri =  URI.createURI(uri);
+		Resource resource = resourceSet.createResource(ruri);
+		resource.load(null);
+		return (ModelingUnit) resource.getContents().get(0);
+	}
+	
+    
     public static EPackage loadEcoreModel(String modelFilePath){
     	URI uri = URI.createURI(modelFilePath);
-    	
-    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-    			  Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-    	Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(
-    				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-//    	ResourceSet resourceSet = new ResourceSetImpl();
-//    	URI fileURI = URI.createFileURI(modelFilePath);
-//    	Resource resource = resourceSet.getResource(fileURI, true);
-    	
-		/*
-		 * If the loading is not done in a workbench, then uri matching platform:/resource or platform:/plugin
-		 * will be useless. Need to convert them into absolute path.
-		 * It works only if a mapping exist between platform:/resource and its concrete path. 
-		 */
-		URIConverter converter	= new ExtensibleURIConverterImpl();
-		uri 					= converter.normalize(uri);
-		Resource resource		= new ResourceSetImpl().getResource(uri, true);
+		uri		= converter.normalize(uri);
+    	kermeta.persistence.Resource r = rep.getResource(uri.toString()); 
+        r.load();
 
-		for(EObject o : resource.getContents())
-			if(o instanceof EPackage)
-				return (EPackage)o;
+        for(Object obj : r) {
+        	System.out.println("Obj= " + obj);
+        	if(obj instanceof EPackage)
+        		return (EPackage) obj;
+        }
 		return null;
     }  
     
     
     public void test() throws IOException  {
         System.out.println("Test ecore2km " + baseName + ".ecore");
-        EPackage pkg = loadEcoreModel(baseName+".ecore");
         System.out.println("pkg="+pkg);
         ModelingUnit result = ecore2km.convertPackage(pkg, "namespace");
-        System.out.println("res="+pkg);
-        System.out.println("   saving merge result in " + baseName + ".km");
-        ModelingUnitUtil.saveModelingUnit(baseName + ".km", result);
-        ModelingUnit expectedResult = ModelingUnitUtil.loadModelingUnit(baseName + "Ref.km");
+        System.out.println("res="+result);
+        System.out.println("   saving ecore2km result in " + fileOutputPath);
+        Writer out = new OutputStreamWriter(new FileOutputStream(fileOutputPath));
+        out.append(saveMu(result).toString());
+		out.close();
+        ModelingUnit expectedResult = loadKM(baseName + "Ref.km");
+        System.out.println("   expectedResult " + expectedResult);
         
-        if(valid) {
-        	// the merge is supposed to be valid
-        	assertTrue("result model not equals to expected output", 
-        			EMFCompareModelHelper.isSimilarAndSaveDiff(result, expectedResult, baseName + ".diff"));
-//        	String msg ="";
-//        	if(result.hasSevereProblems()){
-//        		msg= result.getProblems().get(0).getMessage();
-//        	}
-//            assertFalse("Merger has reported error but expecting none. (first message = "+msg+")",result.hasSevereProblems());
-        } else {
-        	// the merge is supposed to be invalid
-//            assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());
-        }
+        if(valid)
+        	assertTrue("result model not equals to expected output", EMFCompareModelHelper.isSimilarAndSaveDiff(result, expectedResult, baseName + ".diff"));
     }
     
     
