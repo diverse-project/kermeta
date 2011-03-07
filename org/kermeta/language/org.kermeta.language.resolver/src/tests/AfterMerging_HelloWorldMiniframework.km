@@ -7,8 +7,13 @@
         <kOwnedTags name="main" value=""/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="toto">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
+            <type name="kermeta::standard::String" type="//helloworld/HelloWorld/main/@body/@statement.0/@containedType.0"/>
+          </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
@@ -11423,6 +11428,10 @@
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/sourceType"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::TypeDefinition"/>
               <ownedUnresolvedProperties propertyIdentifier="org::kermeta::language::structure::TypeDefinition::typeMappings"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org/kermeta/language/structure/TypeMapping/mapping/@kOwnedTags.0" name="mapping" type="//org/kermeta/language/structure/TypeMapping/mapping/@containedType.0" isOrdered="true" upper="1">
+              <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/mapping"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
             </ownedAttribute>
           </ownedTypeDefinition>
         </nestedPackage>
