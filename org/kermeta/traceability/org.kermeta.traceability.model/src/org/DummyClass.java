@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see org.OrgPackage#getDummyClass()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface DummyClass extends EObject {

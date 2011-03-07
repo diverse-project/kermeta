@@ -3,10 +3,10 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
     nsURI="http://www.kermeta.org/Traceability/2.0.0/" nsPrefix="org">
-  <eClassifiers xsi:type="ecore:EClass" name="DummyClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true"/>
   <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/Traceability/2.0.0//org/kermeta"
       nsPrefix="org_kermeta">
-    <eClassifiers xsi:type="ecore:EClass" name="DummyClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true"/>
     <eSubpackages name="traceability" nsURI="http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
         nsPrefix="org_kermeta_traceability">
       <eAnnotations source="kermeta.req">

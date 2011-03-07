@@ -60,20 +60,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KermetaPackage.DUMMY_CLASS: return createDummyClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DummyClass createDummyClass() {
-		DummyClassImpl dummyClass = new DummyClassImpl();
-		return dummyClass;
 	}
 
 	/**

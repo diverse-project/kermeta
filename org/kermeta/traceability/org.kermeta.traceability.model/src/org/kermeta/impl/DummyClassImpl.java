@@ -22,7 +22,7 @@ import org.kermeta.KermetaPackage;
  *
  * @generated
  */
-public class DummyClassImpl extends EObjectImpl implements DummyClass {
+public abstract class DummyClassImpl extends EObjectImpl implements DummyClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

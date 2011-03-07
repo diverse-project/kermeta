@@ -26,15 +26,6 @@ public interface KermetaFactory extends EFactory {
 	KermetaFactory eINSTANCE = org.kermeta.impl.KermetaFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Dummy Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dummy Class</em>'.
-	 * @generated
-	 */
-	DummyClass createDummyClass();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

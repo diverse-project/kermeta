@@ -7,12 +7,11 @@
 package org.impl;
 
 import org.DummyClass;
-
 import org.OrgPackage;
+
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class DummyClassImpl extends EObjectImpl implements DummyClass {
+public abstract class DummyClassImpl extends EObjectImpl implements DummyClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
