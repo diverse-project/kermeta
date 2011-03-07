@@ -30,7 +30,7 @@ class FullStaticResolver
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
-		var baseFileName : String init "AfterMerging_HelloWorldMiniframework"
+		var baseFileName : String init "AfterResolving_HelloWorldMiniframework"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
@@ -40,7 +40,7 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
+        resolvedModelingUnit := doStaticSetting(unresolvedModelingUnit)
               	
      /*  	stdio.writeln("	********************* searching dangling elements ************************")
        	unresolvedModelResource.findDanglingModelElements().each{ diag |
@@ -92,8 +92,8 @@ class FullStaticResolver
        	result := unresolvedModelingUnit
 	end
 	
-	operation checkUnresolved(aNamedElement : org::kermeta::language::structure::NamedElement) : Void is do
-		aNamedElement.eachOwnedElement{p |
+	operation checkUnresolved(aKermetaModelElement : org::kermeta::language::structure::KermetaModelElement) : Void is do
+		aKermetaModelElement.eachOwnedElement{p |
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedType) then
 				stdio.writeln("UNRESOLVED_TYPE -- typeIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedType).typeIdentifier.toString)
 				p.asType(org::kermeta::language::structure::UnresolvedType).usings.each{ us |
@@ -115,8 +115,8 @@ class FullStaticResolver
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedProperty) then
 				stdio.writeln("UNRESOLVED_PROPERTY -- peropertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)
 			end
-			if p.isInstanceOf(org::kermeta::language::structure::NamedElement) then
-				checkUnresolved(p.asType(org::kermeta::language::structure::NamedElement))
+			if p.isInstanceOf(org::kermeta::language::structure::KermetaModelElement) then
+				checkUnresolved(p.asType(org::kermeta::language::structure::KermetaModelElement))
 			end
 			p
 		}
