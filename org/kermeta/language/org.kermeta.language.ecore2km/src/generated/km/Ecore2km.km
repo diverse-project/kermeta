@@ -5652,11 +5652,8 @@
                                     </target>
                                   </parameters>
                                   <target xsi:type="kermeta_language_behavior:CallVariable"
-                                      staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
-                                      name="stdio">
-                                    <containedType xsi:type="kermeta_language_structure:Class"
-                                        typeDefinition="#//@packages.1/io/StdIO"/>
-                                  </target>
+                                      staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
+                                      name="stdio"/>
                                 </statement>
                                 <statement xsi:type="kermeta_language_behavior:Assignment"
                                     staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0">
@@ -5678,6 +5675,139 @@
                             </statement>
                           </thenBody>
                           <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0">
+                            <statement xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+                                name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+                              <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                  left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@containedType.0/@containedType.0"
+                                  right="#//@packages.1/io/StdIO/writeln/@containedType.0">
+                                <containedType xsi:type="kermeta_language_structure:ProductType"
+                                    type="#//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                              </containedType>
+                              <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                  staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                  name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                    left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                                    right="#//@packages.1/standard/String/plus/@containedType.0">
+                                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                                      type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                </containedType>
+                                <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                    staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0"
+                                    name="checkEObjectType" staticOperation="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/checkEObjectType">
+                                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                      left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@parameters.0/@containedType.0/@containedType.0"
+                                      right="#//@packages.0/kermeta/language/structure/String/@containedType.0">
+                                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                                        type="#//@packages.0/kermeta/language/structure/String/@containedType.0"/>
+                                  </containedType>
+                                  <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                      staticType="#//@packages.2/EClassifier/getQualifiedName/@containedType.0"
+                                      name="getQualifiedName" staticOperation="#//@packages.2/EClassifier/getQualifiedName">
+                                    <target xsi:type="kermeta_language_behavior:CallVariable"
+                                        staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@ownedParameter.1/@containedType.0"
+                                        name="type"/>
+                                  </parameters>
+                                </parameters>
+                                <target xsi:type="kermeta_language_behavior:CallFeature"
+                                    staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                    name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                      left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                                      right="#//@packages.1/standard/String/plus/@containedType.0">
+                                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                                        type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                  </containedType>
+                                  <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                      staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
+                                      value=" "/>
+                                  <target xsi:type="kermeta_language_behavior:CallFeature"
+                                      staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                      name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@target/@containedType.0/@containedType.0"
+                                        right="#//@packages.1/standard/String/plus/@containedType.0">
+                                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                                          type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                    </containedType>
+                                    <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                        staticType="#//@packages.2/EClassifier/getQualifiedName/@containedType.0"
+                                        name="getQualifiedName" staticOperation="#//@packages.2/EClassifier/getQualifiedName">
+                                      <target xsi:type="kermeta_language_behavior:CallVariable"
+                                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@ownedParameter.1/@containedType.0"
+                                          name="type"/>
+                                    </parameters>
+                                    <target xsi:type="kermeta_language_behavior:CallFeature"
+                                        staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                        name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                          left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@target/@target/@containedType.0/@containedType.0"
+                                          right="#//@packages.1/standard/String/plus/@containedType.0">
+                                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                                            type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                      </containedType>
+                                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                          staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
+                                          value=" "/>
+                                      <target xsi:type="kermeta_language_behavior:CallFeature"
+                                          staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                          name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                            left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@target/@target/@target/@containedType.0/@containedType.0"
+                                            right="#//@packages.1/standard/String/plus/@containedType.0">
+                                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                                              type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                        </containedType>
+                                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                            staticType="#//@packages.2/EString/@containedType.0"
+                                            name="name" staticProperty="#//@packages.2/ENamedElement/name">
+                                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                                              staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@ownedParameter.1/@containedType.0"
+                                              name="type"/>
+                                        </parameters>
+                                        <target xsi:type="kermeta_language_behavior:CallFeature"
+                                            staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                            name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                              left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@target/@target/@target/@target/@containedType.0/@containedType.0"
+                                              right="#//@packages.1/standard/String/plus/@containedType.0">
+                                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                                type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                          </containedType>
+                                          <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                              staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
+                                              value=" "/>
+                                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                                              staticType="#//@packages.1/standard/String/plus/@containedType.0"
+                                              name="plus" staticOperation="#//@packages.1/standard/String/plus">
+                                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                                left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@parameters.0/@target/@target/@target/@target/@target/@target/@containedType.0/@containedType.0"
+                                                right="#//@packages.1/standard/String/plus/@containedType.0">
+                                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                                  type="#//@packages.1/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                                            </containedType>
+                                            <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                                                staticType="#//@packages.1/language/structure/String/@containedType.0"
+                                                name="toString" staticOperation="#//@packages.1/language/structure/Object/toString">
+                                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                                  staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@ownedParameter.1/@containedType.0"
+                                                  name="type"/>
+                                            </parameters>
+                                            <target xsi:type="kermeta_language_behavior:StringLiteral"
+                                                staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
+                                                value="TEMP_LOG="/>
+                                          </target>
+                                        </target>
+                                      </target>
+                                    </target>
+                                  </target>
+                                </target>
+                              </parameters>
+                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
+                                  name="stdio"/>
+                            </statement>
                             <statement xsi:type="kermeta_language_behavior:Conditional"
                                 staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0">
                               <thenBody xsi:type="kermeta_language_behavior:Block"
@@ -5691,7 +5821,7 @@
                                       staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0"
                                       name="checkEObjectType" staticOperation="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/checkEObjectType">
                                     <containedType xsi:type="kermeta_language_structure:FunctionType"
-                                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@thenBody/@statement.0/@value/@containedType.0/@containedType.0"
+                                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.1/@thenBody/@statement.0/@value/@containedType.0/@containedType.0"
                                         right="#//@packages.0/kermeta/language/structure/String/@containedType.0">
                                       <containedType xsi:type="kermeta_language_structure:ProductType"
                                           type="#//@packages.0/kermeta/language/structure/String/@containedType.0"/>
@@ -5717,7 +5847,7 @@
                                       staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0"
                                       name="checkEObjectType" staticOperation="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/checkEObjectType">
                                     <containedType xsi:type="kermeta_language_structure:FunctionType"
-                                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.0/@elseBody/@statement.0/@value/@containedType.0/@containedType.0"
+                                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@elseBody/@statement.1/@elseBody/@statement.0/@value/@containedType.0/@containedType.0"
                                         right="#//@packages.0/kermeta/language/structure/String/@containedType.0">
                                       <containedType xsi:type="kermeta_language_structure:ProductType"
                                           type="#//@packages.0/kermeta/language/structure/String/@containedType.0"/>
@@ -6022,181 +6152,6 @@
                 </statement>
               </body>
             </ownedOperation>
-            <ownedOperation name="visitETypeParameter" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@containedType.0"
-                isOrdered="true" upper="1" superOperation="#//@packages.2/EcoreVisitor/visitETypeParameter">
-              <containedType xsi:type="kermeta_language_structure:VoidType"/>
-              <ownedParameter name="typeParam" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
-                  isOrdered="true" upper="1">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.2/ETypeParameter"/>
-              </ownedParameter>
-              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/standard/Set/add/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
-                    identifier="classifier">
-                  <initialization xsi:type="kermeta_language_behavior:CallFeature"
-                      staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
-                      name="asType" staticOperation="#//@packages.1/language/structure/Object/asType">
-                    <containedType xsi:type="kermeta_language_structure:FunctionType"
-                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@containedType.0/@containedType.0"
-                        right="#//@packages.1/language/structure/Object/asType/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:ProductType"
-                          type="#//@packages.1/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
-                    </containedType>
-                    <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
-                      <typeref name="EClassifier" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
-                          upper="1">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.2/EClassifier"/>
-                      </typeref>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/container/@containedType.0"
-                        name="container" staticOperation="#//@packages.1/language/structure/Object/container">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
-                          name="typeParam"/>
-                    </target>
-                  </initialization>
-                  <type name="EClassifier" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
-                      isOrdered="true" upper="1">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.2/EClassifier"/>
-                  </type>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.1/standard/Set/add/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/standard/Set/add/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
-                        identifier="gtd">
-                      <initialization xsi:type="kermeta_language_behavior:CallFeature"
-                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
-                          name="asType" staticOperation="#//@packages.1/language/structure/Object/asType">
-                        <containedType xsi:type="kermeta_language_structure:FunctionType"
-                            left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0/@containedType.0"
-                            right="#//@packages.1/language/structure/Object/asType/@containedType.0">
-                          <containedType xsi:type="kermeta_language_structure:ProductType"
-                              type="#//@packages.1/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
-                        </containedType>
-                        <parameters xsi:type="kermeta_language_behavior:TypeLiteral"
-                            staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
-                          <typeref name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
-                              upper="1">
-                            <containedType xsi:type="kermeta_language_structure:Class"
-                                typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
-                          </typeref>
-                        </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EModelElement/targetKermetaObject/@containedType.0"
-                            name="targetKermetaObject" staticProperty="#//@packages.2/EModelElement/targetKermetaObject">
-                          <target xsi:type="kermeta_language_behavior:CallVariable"
-                              staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
-                              name="classifier"/>
-                        </target>
-                      </initialization>
-                      <type name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
-                          isOrdered="true" upper="1">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
-                      </type>
-                    </statement>
-                    <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
-                        identifier="typeVar">
-                      <initialization xsi:type="kermeta_language_behavior:CallFeature"
-                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@initialization/@target/@typeref/@containedType.0"
-                          name="new" staticOperation="#//@packages.1/language/structure/Class/new">
-                        <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
-                          <typeref name="ObjectTypeVariable" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@initialization/@target/@typeref/@containedType.0"
-                              upper="1">
-                            <containedType xsi:type="kermeta_language_structure:Class"
-                                typeDefinition="#//@packages.0/kermeta/language/structure/ObjectTypeVariable"/>
-                          </typeref>
-                        </target>
-                      </initialization>
-                      <type name="ObjectTypeVariable" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
-                          isOrdered="true" upper="1">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.0/kermeta/language/structure/ObjectTypeVariable"/>
-                      </type>
-                    </statement>
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.2/EString/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0"
-                          name="name" staticProperty="#//@packages.0/kermeta/language/structure/NamedElement/name">
-                        <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
-                            name="typeVar"/>
-                      </target>
-                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EString/@containedType.0"
-                          name="name" staticProperty="#//@packages.2/ENamedElement/name">
-                        <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
-                            name="typeParam"/>
-                      </value>
-                    </statement>
-                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/OrderedSet/add/@containedType.0"
-                        name="add" staticOperation="#//@packages.1/standard/OrderedSet/add">
-                      <containedType xsi:type="kermeta_language_structure:FunctionType"
-                          left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.3/@containedType.0/@containedType.0"
-                          right="#//@packages.1/standard/OrderedSet/add/@containedType.0">
-                        <containedType xsi:type="kermeta_language_structure:ProductType"
-                            type="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter/@containedType.0"/>
-                      </containedType>
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable"
-                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
-                          name="typeVar"/>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.3/@target/@containedType.0"
-                          name="typeParameter" staticProperty="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.1/standard/OrderedSet">
-                          <typeParamBinding variable="#//@packages.1/standard/OrderedSet/G"
-                              type="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter/@containedType.0"/>
-                        </containedType>
-                        <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
-                            name="gtd"/>
-                      </target>
-                    </statement>
-                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Set/add/@containedType.0"
-                        name="add" staticOperation="#//@packages.1/standard/Set/add">
-                      <containedType xsi:type="kermeta_language_structure:FunctionType"
-                          left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.4/@containedType.0/@containedType.0"
-                          right="#//@packages.1/standard/Set/add/@containedType.0">
-                        <containedType xsi:type="kermeta_language_structure:ProductType"
-                            type="#//@packages.0/kermeta/language/structure/TypeContainer/containedType/@containedType.0"/>
-                      </containedType>
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable"
-                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
-                          name="typeVar"/>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.4/@target/@containedType.0"
-                          name="containedType" staticProperty="#//@packages.0/kermeta/language/structure/TypeContainer/containedType">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.1/standard/Set">
-                          <typeParamBinding variable="#//@packages.1/standard/Set/G"
-                              type="#//@packages.0/kermeta/language/structure/TypeContainer/containedType/@containedType.0"/>
-                        </containedType>
-                        <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
-                            name="gtd"/>
-                      </target>
-                    </statement>
-                  </thenBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Boolean/@containedType.0"
-                      name="isInstanceOf" staticOperation="#//@packages.1/language/structure/Object/isInstanceOf">
-                    <containedType xsi:type="kermeta_language_structure:FunctionType"
-                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@condition/@containedType.0/@containedType.0"
-                        right="#//@packages.1/language/structure/Boolean/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:ProductType"
-                          type="#//@packages.1/language/structure/Object/isInstanceOf/@ownedParameter.0/@containedType.0"/>
-                    </containedType>
-                    <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
-                      <typeref name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@condition/@parameters.0/@typeref/@containedType.0"
-                          upper="1">
-                        <containedType xsi:type="kermeta_language_structure:Class"
-                            typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
-                      </typeref>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EModelElement/targetKermetaObject/@containedType.0"
-                        name="targetKermetaObject" staticProperty="#//@packages.2/EModelElement/targetKermetaObject">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
-                          name="classifier"/>
-                    </target>
-                  </condition>
-                </statement>
-              </body>
-            </ownedOperation>
             <ownedOperation name="visitEParameter" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitEParameter/@containedType.0"
                 isOrdered="true" upper="1" superOperation="#//@packages.2/EcoreVisitor/visitEParameter">
               <containedType xsi:type="kermeta_language_structure:VoidType"/>
@@ -6447,6 +6402,181 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitEParameter/@ownedParameter.0/@containedType.0"
                       name="param"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="visitETypeParameter" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@containedType.0"
+                isOrdered="true" upper="1" superOperation="#//@packages.2/EcoreVisitor/visitETypeParameter">
+              <containedType xsi:type="kermeta_language_structure:VoidType"/>
+              <ownedParameter name="typeParam" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
+                  isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.2/ETypeParameter"/>
+              </ownedParameter>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/standard/Set/add/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
+                    identifier="classifier">
+                  <initialization xsi:type="kermeta_language_behavior:CallFeature"
+                      staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
+                      name="asType" staticOperation="#//@packages.1/language/structure/Object/asType">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@containedType.0/@containedType.0"
+                        right="#//@packages.1/language/structure/Object/asType/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="#//@packages.1/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
+                      <typeref name="EClassifier" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
+                          upper="1">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.2/EClassifier"/>
+                      </typeref>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/container/@containedType.0"
+                        name="container" staticOperation="#//@packages.1/language/structure/Object/container">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
+                          name="typeParam"/>
+                    </target>
+                  </initialization>
+                  <type name="EClassifier" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
+                      isOrdered="true" upper="1">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.2/EClassifier"/>
+                  </type>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.1/standard/Set/add/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/standard/Set/add/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
+                        identifier="gtd">
+                      <initialization xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
+                          name="asType" staticOperation="#//@packages.1/language/structure/Object/asType">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@containedType.0/@containedType.0"
+                            right="#//@packages.1/language/structure/Object/asType/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="#//@packages.1/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:TypeLiteral"
+                            staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
+                          <typeref name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@initialization/@parameters.0/@typeref/@containedType.0"
+                              upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class"
+                                typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
+                          </typeref>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EModelElement/targetKermetaObject/@containedType.0"
+                            name="targetKermetaObject" staticProperty="#//@packages.2/EModelElement/targetKermetaObject">
+                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
+                              name="classifier"/>
+                        </target>
+                      </initialization>
+                      <type name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
+                          isOrdered="true" upper="1">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
+                      </type>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
+                        identifier="typeVar">
+                      <initialization xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@initialization/@target/@typeref/@containedType.0"
+                          name="new" staticOperation="#//@packages.1/language/structure/Class/new">
+                        <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
+                          <typeref name="ObjectTypeVariable" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@initialization/@target/@typeref/@containedType.0"
+                              upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class"
+                                typeDefinition="#//@packages.0/kermeta/language/structure/ObjectTypeVariable"/>
+                          </typeref>
+                        </target>
+                      </initialization>
+                      <type name="ObjectTypeVariable" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
+                          isOrdered="true" upper="1">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.0/kermeta/language/structure/ObjectTypeVariable"/>
+                      </type>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.2/EString/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/structure/String/@containedType.0"
+                          name="name" staticProperty="#//@packages.0/kermeta/language/structure/NamedElement/name">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
+                            name="typeVar"/>
+                      </target>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EString/@containedType.0"
+                          name="name" staticProperty="#//@packages.2/ENamedElement/name">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@ownedParameter.0/@containedType.0"
+                            name="typeParam"/>
+                      </value>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/OrderedSet/add/@containedType.0"
+                        name="add" staticOperation="#//@packages.1/standard/OrderedSet/add">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.3/@containedType.0/@containedType.0"
+                          right="#//@packages.1/standard/OrderedSet/add/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
+                          name="typeVar"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.3/@target/@containedType.0"
+                          name="typeParameter" staticProperty="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.1/standard/OrderedSet">
+                          <typeParamBinding variable="#//@packages.1/standard/OrderedSet/G"
+                              type="#//@packages.0/kermeta/language/structure/GenericTypeDefinition/typeParameter/@containedType.0"/>
+                        </containedType>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
+                            name="gtd"/>
+                      </target>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Set/add/@containedType.0"
+                        name="add" staticOperation="#//@packages.1/standard/Set/add">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.4/@containedType.0/@containedType.0"
+                          right="#//@packages.1/standard/Set/add/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="#//@packages.0/kermeta/language/structure/TypeContainer/containedType/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                          staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.1/@type/@containedType.0"
+                          name="typeVar"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.4/@target/@containedType.0"
+                          name="containedType" staticProperty="#//@packages.0/kermeta/language/structure/TypeContainer/containedType">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.1/standard/Set">
+                          <typeParamBinding variable="#//@packages.1/standard/Set/G"
+                              type="#//@packages.0/kermeta/language/structure/TypeContainer/containedType/@containedType.0"/>
+                        </containedType>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0"
+                            name="gtd"/>
+                      </target>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Boolean/@containedType.0"
+                      name="isInstanceOf" staticOperation="#//@packages.1/language/structure/Object/isInstanceOf">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@condition/@containedType.0/@containedType.0"
+                        right="#//@packages.1/language/structure/Boolean/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="#//@packages.1/language/structure/Object/isInstanceOf/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/kermeta/language/structure/Class/initializeFromAGenericClassDefinition/@body/@statement.1/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@containedType.0">
+                      <typeref name="GenericTypeDefinition" type="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.1/@condition/@parameters.0/@typeref/@containedType.0"
+                          upper="1">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="#//@packages.0/kermeta/language/structure/GenericTypeDefinition"/>
+                      </typeref>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.2/EModelElement/targetKermetaObject/@containedType.0"
+                        name="targetKermetaObject" staticProperty="#//@packages.2/EModelElement/targetKermetaObject">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/visitETypeParameter/@body/@statement.0/@type/@containedType.0"
+                          name="classifier"/>
+                    </target>
+                  </condition>
                 </statement>
               </body>
             </ownedOperation>
@@ -10486,8 +10616,10 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                   value="&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;"/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
-                  name="stdio"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
+                  name="stdio">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+              </target>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.1/standard/Collection/each/@containedType.0">
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/standard/Collection/each/@containedType.0">
@@ -10501,7 +10633,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                       value="&#xA;Failures: "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -10556,7 +10688,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -10600,7 +10732,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                       value="&#xA;Errors: "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -10655,7 +10787,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -10699,7 +10831,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                       value="&#xA;Errors from setUp or tearDown : "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -10754,7 +10886,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -10794,7 +10926,7 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                   value="&#xA; Summary: "/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -10822,7 +10954,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                     value="   Number of launched tests : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -10857,7 +10989,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                     value="   Number of failures : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -10892,7 +11024,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                     value="   Number of errors : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -10927,7 +11059,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                     value="   Number of errors in setUp or tearDown: "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -10938,7 +11070,7 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                   value="&#xA;-------------------------------------------------------------------------------------------------------------------------------&#xA;"/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
           </body>
@@ -15699,7 +15831,7 @@
                                   value="    "/>
                             </parameters>
                             <target xsi:type="kermeta_language_behavior:CallVariable"
-                                staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                                staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                                 name="stdio"/>
                           </body>
                           <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/exceptions/ConstraintsDiagnostic/add/@containedType.0"
@@ -16172,7 +16304,7 @@
                                                           value="    "/>
                                                     </parameters>
                                                     <target xsi:type="kermeta_language_behavior:CallVariable"
-                                                        staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                                                        staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                                                         name="stdio"/>
                                                   </statement>
                                                   <statement xsi:type="kermeta_language_behavior:CallFeature"
@@ -16349,7 +16481,7 @@
                                                                 value="    "/>
                                                           </parameters>
                                                           <target xsi:type="kermeta_language_behavior:CallVariable"
-                                                              staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                                                              staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                                                               name="stdio"/>
                                                         </statement>
                                                         <statement xsi:type="kermeta_language_behavior:CallFeature"
@@ -31207,7 +31339,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                       value="Resource load failed!"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.1/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@type/@containedType.0"
@@ -31337,7 +31469,7 @@
                     <parameters xsi:type="kermeta_language_behavior:StringLiteral"
                         staticType="#//@packages.0/kermeta/language/structure/UnresolvedType/initialize/@body/@statement.0/@thenBody/@statement.1/@value/@target/@containedType.0"
                         value="DVK ! another resource of the same repository was containing this element"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                         name="stdio"/>
                   </statement>
                   <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Set/remove/@containedType.0"
@@ -34207,7 +34339,7 @@
                         </target>
                       </target>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/kermeta/language/ecore2km/EcoreStructure2kmStructure/getUnresolvedType/@body/@statement.5/@thenBody/@statement.0/@elseBody/@statement.1/@thenBody/@statement.1/@thenBody/@statement.0/@target/@containedType.0"
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/kunit/TestRunner/printTestResult/@body/@statement.0/@target/@containedType.0"
                         name="stdio"/>
                   </statement>
                   <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/persistence/EMFResource/mark/@containedType.0"
@@ -38250,11 +38382,11 @@
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/language/structure/Object"/>
     </ownedTypeDefinition>
   </packages>
+  <usings qualifiedName="ecore"/>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="org::kermeta::language::structure"/>
   <usings qualifiedName="org::kermeta::language::ecore2km"/>
   <usings qualifiedName="kermeta::utils"/>
-  <usings qualifiedName="ecore"/>
-  <usings qualifiedName="org::kermeta::language::structure"/>
-  <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::kunit"/>
   <usings qualifiedName="kermeta"/>
   <usings qualifiedName="kermeta::language::structure"/>

@@ -168,6 +168,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 						typeName := "kermeta::standard::Object"
 					end 
 				else
+stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQualifiedName() + " " + checkEObjectType(type.getQualifiedName()))
 					if(type.hasInstanceClassName) then
 						typeName := checkEObjectType(type.instanceClassName)
 					else
