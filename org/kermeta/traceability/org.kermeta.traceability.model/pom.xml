@@ -52,8 +52,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                     <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
-                        <Export-Package>
+                       <Export-Package>
                         	org.util,
                         	org.impl,
                         	org,
@@ -69,7 +68,7 @@
 							org.osgi.framework;version="[1.5,2)"
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-SymbolicName>org.kermeta.traceability.model</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.traceability.model; singleton=true</Bundle-SymbolicName>
                     </instructions>
                 </configuration>
             </plugin>

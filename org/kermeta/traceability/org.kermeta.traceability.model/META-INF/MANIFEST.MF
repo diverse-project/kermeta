@@ -28,12 +28,12 @@ Bundle-Name: Traceability model
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_23
 Bundle-Version: 2.0.2.SNAPSHOT
-Bnd-LastModified: 1299490024929
+Bnd-LastModified: 1299491044844
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
  pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
  .resource,org.eclipse.emf.ecore.util,org.osgi.framework;version="[1.5
  ,2)"
-Bundle-SymbolicName: org.kermeta.traceability.model;singleton:=true
+Bundle-SymbolicName: org.kermeta.traceability.model; singleton=true
 
