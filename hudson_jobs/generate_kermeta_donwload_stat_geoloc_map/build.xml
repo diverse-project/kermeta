@@ -29,7 +29,7 @@
 			<arg value="compile" />
 			<arg value="exec:java" />
 			<arg value="-e" />
-			<arg value="-Dexec.mainClass='fr.inria.ipstat.geoloc.mapper.MapperCLI'"/>
+			<arg value="-Dexec.mainClass=&quot;fr.inria.ipstat.geoloc.mapper.MapperCLI&quot;"/>
 		</exec>
 		
 	</target>
