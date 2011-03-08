@@ -14,9 +14,14 @@
 		<!-- <delete>
 			<fileset dir="${data.folder}" includes="*"/>
 		</delete> -->
-		<mkdir dir="${data.folder}"/>
-		<get src="http://www.kermeta.org//awstats_data/kermeta_update/" 
-							dest="${data.folder}"/>
+		<!-- <mkdir dir="${data.folder}"/>-->
+		<exec executable="wget" failonerror="true">
+			<arg value="-nv"/>
+			<arg value="-r"/>
+			<arg value="-l"/>
+			<arg value="2"/>
+			<arg value="http://www.kermeta.org//awstats_data/kermeta_update/"/>
+		</exec>
 	</target>
 	<target name="generate_map">
 		<echo>Step 2 - Preparation the map</echo>
