@@ -42,7 +42,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
   def fLogicalExpression : Parser[Expression] = fRelationalExpression ~ rep(fLogicalOp ~ fRelationalExpression ) ^^{ case exp ~ bexp =>
       var result : Expression  = exp
       bexp.foreach{bexpp=>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
         newo.setTarget(result)
         bexpp match {
           case "and" ~ e => newo.setName("and");newo.getParameters.add(e)
@@ -56,7 +56,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
   def fRelationalExpression : Parser[Expression] = fAddExpression ~ rep(fRelationalOp ~ fAddExpression ) ^^{ case exp ~ bexp =>
       var result : Expression  = exp
       bexp.foreach{bexpp=>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
         newo.setTarget(result)
         bexpp match {
           case "==" ~ e => newo.setName("equals");newo.getParameters.add(e)
@@ -74,7 +74,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
   def fAddExpression : Parser[Expression] = fMultExpression ~ rep(fAddOp ~ fMultExpression ) ^^{ case exp ~ bexp =>
       var result : Expression  = exp
       bexp.foreach{bexpp=>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
         newo.setTarget(result)
         bexpp match {
           case "+" ~ e => newo.setName("plus");newo.getParameters.add(e)
@@ -88,7 +88,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
   def fMultExpression : Parser[Expression] = fUnaryExpression ~ rep(fMultOp ~ fUnaryExpression ) ^^{ case exp ~ bexp =>
       var result : Expression  = exp
       bexp.foreach{bexpp=>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
         newo.setTarget(result)
         bexpp match {
           case "*" ~ e => newo.setName("mult");newo.getParameters.add(e)
@@ -103,7 +103,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
     case op ~ stat => {
         op match {
           case Some(op) => {
-              var newo = BehaviorFactory.eINSTANCE.createCallFeature
+              var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
               newo.setTarget(stat)
               op match {
                 case "!" => newo.setName("not")
