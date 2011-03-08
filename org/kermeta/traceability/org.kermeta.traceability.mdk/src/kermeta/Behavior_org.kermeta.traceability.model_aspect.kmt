@@ -260,7 +260,14 @@ aspect class TextReference inherits FileReference {
 	end
 	
 	method cloneRef() : Reference is do
-		 result:=TextReference.clone(self)
+		 var clone : TextReference init TextReference.new
+		 clone.fileURI := fileURI
+		 clone.timeStamp := timeStamp
+		 clone.charBeginOffset := charBeginOffset
+		 clone.charEndOffset := charEndOffset
+		 result:=clone
+		 
+		 //result:=TextReference.clone(self)
 	end
 	
 	method signature(): String is do 
@@ -292,7 +299,12 @@ aspect class XMLReference inherits FileReference {
 	end
 	
 	method cloneRef() : Reference is do
-		result:=XMLReference.clone(self)
+		var clone : XMLReference init XMLReference.new
+		clone.fileURI := fileURI
+		clone.timeStamp := timeStamp
+		clone.xPointer := xPointer
+		result:=clone
+		//result:=XMLReference.clone(self)
 	end
 
 	method signature(): String is do 
@@ -323,8 +335,10 @@ aspect class ModelReference inherits Reference {
 	end
 	
 	method cloneRef() : Reference is do
-		result:=ModelReference.clone(self)
-	
+		//result:=ModelReference.clone(self)
+		var clone : ModelReference init ModelReference.new
+		clone.refObject := refObject
+		result:=clone
 	end
 	
 	method signature() : String is do 
