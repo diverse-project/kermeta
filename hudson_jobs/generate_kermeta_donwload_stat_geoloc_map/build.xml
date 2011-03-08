@@ -24,9 +24,9 @@
 		</exec>
 	</target>
 	<target name="generate_map">
-		<echo>Step 2 - Preparation the map</echo>
+		<echo>Step 2 - Preparation of the map</echo>
 		<exec executable="mvn" failonerror="true">
-			<arg value="exec:java" />
+			<arg value="compile exec:java" />
 			<arg value="-Dexec.mainClass='fr.inria.ipstat.geoloc.mapper.MapperCLI'"/>
 		</exec>
 		
