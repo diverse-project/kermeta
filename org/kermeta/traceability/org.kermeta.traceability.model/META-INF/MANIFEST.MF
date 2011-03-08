@@ -28,7 +28,7 @@ Bundle-Name: Traceability model
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_23
 Bundle-Version: 2.0.2.SNAPSHOT
-Bnd-LastModified: 1299491044844
+Bnd-LastModified: 1299502590459
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

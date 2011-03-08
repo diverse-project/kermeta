@@ -597,17 +597,6 @@ public interface TraceabilityPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>Date</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Date
-	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getDate()
-	 * @generated
-	 */
-	int DATE = 12;
-
-
-	/**
 	 * Returns the meta object for class '{@link org.kermeta.traceability.TracePackage <em>Trace Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -907,17 +896,6 @@ public interface TraceabilityPackage extends EPackage {
 	EDataType getObject();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Date <em>Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Date</em>'.
-	 * @see java.util.Date
-	 * @model instanceClass="java.util.Date"
-	 * @generated
-	 */
-	EDataType getDate();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1186,16 +1164,6 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType OBJECT = eINSTANCE.getObject();
-
-		/**
-		 * The meta object literal for the '<em>Date</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Date
-		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getDate()
-		 * @generated
-		 */
-		EDataType DATE = eINSTANCE.getDate();
 
 	}
 

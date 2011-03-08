@@ -61,7 +61,7 @@
             <details key="documentation" value="/** URI of the file containing the referred concrete object */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="#//kermeta/traceability/Date"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="#//kermeta/traceability/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="#//kermeta/traceability/FileReference">
         <eAnnotations source="kermeta">
@@ -111,7 +111,6 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
             eType="#//kermeta/traceability/String"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
       <eClassifiers xsi:type="ecore:EClass" name="Traceable" abstract="true">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
             eType="#//kermeta/traceability/Trace" containment="true" eOpposite="#//kermeta/traceability/Trace/sourceElem"/>

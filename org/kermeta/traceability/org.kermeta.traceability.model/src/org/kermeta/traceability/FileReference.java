@@ -64,12 +64,12 @@ public interface FileReference extends Reference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Time Stamp</em>' attribute.
-	 * @see #setTimeStamp(Date)
+	 * @see #setTimeStamp(String)
 	 * @see org.kermeta.traceability.TraceabilityPackage#getFileReference_TimeStamp()
-	 * @model dataType="org.kermeta.traceability.Date"
+	 * @model dataType="org.kermeta.traceability.String"
 	 * @generated
 	 */
-	Date getTimeStamp();
+	String getTimeStamp();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.traceability.FileReference#getTimeStamp <em>Time Stamp</em>}' attribute.
@@ -79,6 +79,6 @@ public interface FileReference extends Reference {
 	 * @see #getTimeStamp()
 	 * @generated
 	 */
-	void setTimeStamp(Date value);
+	void setTimeStamp(String value);
 
 } // FileReference

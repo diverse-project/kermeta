@@ -59,7 +59,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date TIME_STAMP_EDEFAULT = null;
+	protected static final String TIME_STAMP_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getTimeStamp() <em>Time Stamp</em>}' attribute.
@@ -69,7 +69,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * @generated
 	 * @ordered
 	 */
-	protected Date timeStamp = TIME_STAMP_EDEFAULT;
+	protected String timeStamp = TIME_STAMP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,7 +116,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
@@ -125,8 +125,8 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTimeStamp(Date newTimeStamp) {
-		Date oldTimeStamp = timeStamp;
+	public void setTimeStamp(String newTimeStamp) {
+		String oldTimeStamp = timeStamp;
 		timeStamp = newTimeStamp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.FILE_REFERENCE__TIME_STAMP, oldTimeStamp, timeStamp));
@@ -160,7 +160,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 				setFileURI((String)newValue);
 				return;
 			case TraceabilityPackage.FILE_REFERENCE__TIME_STAMP:
-				setTimeStamp((Date)newValue);
+				setTimeStamp((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
