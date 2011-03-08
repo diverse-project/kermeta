@@ -11,9 +11,9 @@
 	</target>	
 	<target name="get_stat_raw_data">
 		<echo>Step 1 - Retrieve latest version of the raw stat data</echo>
-		<delete>
+		<!-- <delete>
 			<fileset dir="${data.folder}" includes="*"/>
-		</delete>
+		</delete> -->
 		<mkdir dir="${data.folder}"/>
 		<get src="http://www.kermeta.org//awstats_data/kermeta_update/" 
 							dest="${data.folder}"/>
