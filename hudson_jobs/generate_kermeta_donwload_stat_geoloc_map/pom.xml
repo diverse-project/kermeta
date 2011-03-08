@@ -1,0 +1,32 @@
+<!-- $Id: pom.xml 13871 2010-12-15 08:47:33Z dvojtise $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.model -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : 	Didier Vojtisek <didier.vojtisek@inria.fr>
+				Francois.Fouquet <Francois.fouquet@irisa.fr>
+				Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+				
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.ipstat</groupId>
+    <artifactId>ipstat.geoloc.mapper.</artifactId>
+    
+    
+    <version>1.0.0-SNAPSHOT</version>
+    <description>Map creation from ip statistics of kermeta download </description>
+    <build>
+        <plugins>
+        </plugins>
+    </build>
+
+    <dependencies>
+    	
+        <dependency>
+        	<groupId>fr.inria.triskell.ipstat</groupId>
+        	<artifactId>ipstat.geoloc.mapper</artifactId>
+        	<type>jar</type>
+        </dependency>
+        
+	</dependencies>
+</project>

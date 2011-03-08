@@ -1,0 +1,55 @@
+<project name="build_eclipse_bases_for_kermeta" default="all">
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="lib.folder" location="${env.WORKSPACE}/lib"/>
+	<property name="fr.inria.ipstat.geoloc.jar" value="ipstat.geoloc-1.0.0-SNAPSHOT.jar"/>
+	<property name="simple.maven.osgi.file.deploy.url" value="http://tipimouss.irisa.fr/maven2-snapshots/org/kermeta/tools/tools.simple.maven.osgi.file.deploy/1.0.0-SNAPSHOT/tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
+	<property name="jars.folder" location="${env.WORKSPACE}/eclipse_galileo_${eclipse.native.version.name}_base/eclipse/plugins"/>
+	<property name="deployment.url" value="file:///var/www/html/maven2"/>
+	
+	<property name="group.id" value="org.kermeta.eclipse"/>
+	<property name="repository.id" value="tipimouss"/>
+	
+	<target name="all" depends="">
+	    <antcall target="get_executable_libs"/>
+	    <antcall target="get_deployable_jars"/>
+	    <antcall target="deploy"/>
+	</target>	
+	<target name="get_executable_libs">
+		<echo>Step 1 - Retrieve latest version of the executables</echo>
+		<mkdir dir="${lib.folder}"/>
+		<get src="${simple.maven.osgi.file.deploy.url}" 
+							dest="${lib.folder}/${smofd.jar}"
+							usetimestamp="true"/>
+	</target>
+	<target name="get_deployable_jars">
+		<echo>Step 2 - Preparation of the jars that will be deployed</echo>
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.native.version.name}"/>
+  			<property name="archive.extension" value="${eclipse.native.archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.native.base.url}"/>
+		</ant>
+		<delete>
+			<fileset dir="${jars.folder}" includes="org.eclipse.text.source_*.jar"/>
+		</delete>
+	</target>
+	
+	<target name="deploy" >
+		<echo>Step 3 - Deploy jars to the repository</echo>
+		<java jar="${lib.folder}/${smofd.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="256m"
+		           >
+			<arg value="-simulate"/>
+			<arg value="-jarfolder"/>
+			<arg value="${jars.folder}"/>
+			<arg value="-groupid"/>
+			<arg value="${group.id}"/>
+			<arg value="-repositoryid"/>
+			<arg value="${repository.id}"/>
+			<arg value="-url"/>
+			<arg value="${deployment.url}"/>
+		</java>
+	</target>
+</project>
