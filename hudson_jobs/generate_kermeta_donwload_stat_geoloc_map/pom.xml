@@ -27,6 +27,7 @@
         	<artifactId>ipstat.geoloc.mapper</artifactId>
         	<version>1.0.0-SNAPSHOT</version>
         	<type>jar</type>
+        	<scope>runtime</scope>
         </dependency>
 	</dependencies>
 	<repositories>
