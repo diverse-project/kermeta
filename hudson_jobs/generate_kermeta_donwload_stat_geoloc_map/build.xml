@@ -11,15 +11,15 @@
 	</target>	
 	<target name="get_stat_raw_data">
 		<echo>Step 1 - Retrieve latest version of the raw stat data</echo>
-		<!-- <delete>
-			<fileset dir="${data.folder}" includes="*"/>
-		</delete> -->
+		<delete>
+			<fileset dir="www.kermeta.org" includes="*"/>
+		</delete>
 		<!-- <mkdir dir="${data.folder}"/>-->
 		<exec executable="wget" failonerror="true">
 			<arg value="-nv"/>
 			<arg value="-r"/>
-			<arg value="-l"/>
-			<arg value="2"/>
+			<arg value="-l 2"/>
+			<arg value="-A txt"/>
 			<arg value="http://www.kermeta.org//awstats_data/kermeta_update/"/>
 		</exec>
 	</target>
