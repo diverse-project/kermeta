@@ -1,0 +1,226 @@
+/* $Id:$ 
+ * Creation : March 8, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::behavior;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/BehaviorVisitor.kmt"
+
+using language::helpers::behavior
+
+aspect class Assignment
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitAssignment(self, ctxt)
+	end
+}
+
+aspect class Block
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitBlock(self, ctxt)
+	end
+}
+
+aspect class BooleanLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitBooleanLiteral(self, ctxt)
+	end
+}
+
+aspect class CallEnumLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallEnumLiteral(self, ctxt)
+	end
+}
+
+aspect class CallExpression
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallExpression(self, ctxt)
+	end
+}
+	
+aspect class CallFeature
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallFeature(self, ctxt)
+	end
+}
+
+aspect class CallOperation
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallOperation(self, ctxt)
+	end
+}
+
+aspect class CallProperty
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallProperty(self, ctxt)
+	end
+}
+	
+aspect class CallResult
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallResult(self, ctxt)
+	end
+}
+	
+aspect class CallSuperOperation
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallSuperOperation(self, ctxt)
+	end
+}
+	
+aspect class CallTypeLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallTypeLiteral(self, ctxt)
+	end
+}
+
+aspect class CallValue
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallValue(self, ctxt)
+	end
+}
+
+aspect class CallVariable
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitCallVariable(self, ctxt)
+	end
+}
+
+aspect class Conditional
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitConditional(self, ctxt)
+	end
+}
+
+aspect class EmptyExpression
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitEmptyExpression(self, ctxt)
+	end
+}
+
+aspect class Expression
+{
+	operation accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitExpression(self, ctxt)
+	end
+}
+	
+aspect class IntegerLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitIntegerLiteral(self, ctxt)
+	end
+}
+	
+aspect class JavaStaticCall
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitJavaStaticCall(self, ctxt)
+	end
+}
+		
+aspect class LambdaExpression
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitLambdaExpression(self, ctxt)
+	end
+}
+	
+aspect class LambdaParameter
+{
+	operation accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitLambdaParameter(self, ctxt)
+	end
+}
+
+aspect class Literal
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitLiteral(self, ctxt)
+	end
+}
+
+aspect class Loop
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitLoop(self, ctxt)
+	end
+}
+	
+aspect class Raise
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitRaise(self, ctxt)
+	end
+}
+	
+aspect class Rescue
+{
+	operation accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitRescue(self, ctxt)
+	end
+}
+
+aspect class SelfExpression
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitSelfExpression(self, ctxt)
+	end
+}
+	
+aspect class StringLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitStringLiteral(self, ctxt)
+	end
+}
+	
+aspect class TypeReference
+{
+	operation accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitTypeReference(self, ctxt)
+	end
+}
+	
+aspect class UnresolvedCall
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitUnresolvedCall(self, ctxt)
+	end
+}
+	
+aspect class VariableDecl
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitVariableDecl(self, ctxt)
+	end
+}
+
+aspect class VoidLiteral
+{
+	method accept(visitor : BehaviorVisitor, ctxt : BehaviorVisitorContext) : Void is do 
+		visitor.visitVoidLiteral(self, ctxt)
+	end
+}

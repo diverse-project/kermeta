@@ -1,0 +1,70 @@
+/* $Id:$ 
+ * Creation : March 8, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package language::helpers;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/BehaviorVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+
+using language::helpers::behavior
+using language::helpers::structure
+using org::kermeta::language::behavior
+using org::kermeta::language::structure
+
+class LanguageVisitor inherits BehaviorVisitor, StructureVisitor
+{
+	/*
+	* Extension of visit methods from BehaviorVisitor to visit contained elements from language::structure
+	*/
+	method visitExpression(visited : Expression, ctxt : BehaviorVisitorContext) : Void is do 
+		super(visited, ctxt)
+		visited.containedType.each{cT|
+			cT.accept(self, ctxt.asType(StructureVisitorContext))
+		}
+	end
+	
+	method visitUnresolvedCall(visited : UnresolvedCall, ctxt : BehaviorVisitorContext) : Void is do 
+		super(visited, ctxt)
+		visited.containedType.each{cT|
+			cT.accept(self, ctxt.asType(StructureVisitorContext))
+		}
+	end
+	
+	/*
+	* Extension of visit methods from StructureVisitor to visit contained elements from language::behavior
+	*/
+	method visitConstraint(visited : Constraint, ctxt : StructureVisitorContext) : Void is do
+		super(visited, ctxt)
+		visited.body.accept(self, ctxt.asType(BehaviorVisitorContext))
+	end
+	
+	method visitOperation(visited : Operation, ctxt : StructureVisitorContext) : Void is do
+		super(visited, ctxt)
+		if (not visited.body.isVoid()) then
+			visited.body.accept(self, ctxt.asType(BehaviorVisitorContext))
+		end
+	end
+	
+	method visitProperty(visited : Property, ctxt : StructureVisitorContext) : Void is do
+		super(visited, ctxt)
+		if (not visited.getterBody.isVoid()) then
+			visited.getterBody.accept(self, ctxt.asType(BehaviorVisitorContext))
+		end
+		if (not visited.setterBody.isVoid()) then
+			visited.setterBody.accept(self, ctxt.asType(BehaviorVisitorContext))
+		end
+	end
+}
+
+/*
+* Context for the LanguageVisitor, accepted as parameter by visit and accept methods in structure and behavior
+*/
+class LanguageVisitorContext inherits BehaviorVisitorContext, StructureVisitorContext
+{
+}
