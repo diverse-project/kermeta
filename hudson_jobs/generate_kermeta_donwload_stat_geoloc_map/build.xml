@@ -11,7 +11,7 @@
 	</target>	
 	<target name="get_stat_raw_data">
 		<echo>Step 1 - Retrieve latest version of the raw stat data</echo>
-		<delete>
+		<delete failonerror="false">
 			<fileset dir="www.kermeta.org" includes="*"/>
 		</delete>
 		<!-- <mkdir dir="${data.folder}"/>-->
