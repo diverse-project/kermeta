@@ -17,8 +17,16 @@ using kermeta::standard
 using kermeta::language::structure
 
 
-
-
+aspect class Trace
+{
+	operation cloneTrace() : Trace is do
+		var clone : Trace init Trace.new
+		clone.sourceElem:=sourceElem
+		clone.targetElem:=targetElem
+		clone.context:=context
+		result:=clone
+	end
+}
 aspect abstract class Traceable
 {
 	operation addTarget( context : Object , targetElem : Traceable) : Void is do 
@@ -223,7 +231,7 @@ aspect abstract class FileReference inherits Reference{
 		if(obj != void and FileReference.isInstance(obj)) then
 			var fileRef : FileReference
 			fileRef ?= obj
-			result := self.fileURI == fileRef.fileURI
+			result := self.fileURI == fileRef.fileURI and self.timeStamp == fileRef.timeStamp
 		end
 	end
 	
@@ -241,7 +249,6 @@ aspect class TextReference inherits FileReference {
 	method isSameAs(obj: Object) : Boolean from FileReference is do
 		result := false
 		
-		//if(obj != void and obj.getMetaClass == TextReference) then
 		if(obj != void and obj.isInstanceOf(TextReference)) then
 			var txtRef : TextReference
 			txtRef ?= obj
@@ -271,7 +278,7 @@ aspect class TextReference inherits FileReference {
 	end
 	
 	method signature(): String is do 
-		result:="TextReference:"+fileURI+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
+		result:="TextReference:"+fileURI+",ts:"+timeStamp+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
 	end
 }
 
@@ -308,7 +315,7 @@ aspect class XMLReference inherits FileReference {
 	end
 
 	method signature(): String is do 
-		result:="XMLReference:"+fileURI+",xp:"+xPointer
+		result:="XMLReference:"+fileURI+",ts:"+timeStamp+",xp:"+xPointer
 	end
 }
 
@@ -345,6 +352,5 @@ aspect class ModelReference inherits Reference {
 		var i : Integer 
 		result:="ModelReference:"+refObject.oid.toString
 	end
-	
 	
 }

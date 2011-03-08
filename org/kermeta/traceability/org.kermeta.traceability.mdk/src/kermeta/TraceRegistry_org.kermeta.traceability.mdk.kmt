@@ -38,7 +38,6 @@ class TraceRegistry
 	operation getCorrespondingReference(initRef : Reference) : Reference is do
 		if not getRegistry.containsKey(initRef.signature) then
 			result:= initRef.cloneRef()
-			result.target.clear
 			getRegistry.put(result.signature,result)
 			getTracePackage.references.add(result)
 		else
@@ -61,9 +60,8 @@ class TraceRegistry
 		
 		var sourceRef : Reference init trace.sourceElem.asType(Reference)
 		var targetRef : Reference init trace.targetElem.asType(Reference)
-		var context : Object init trace.context
-		
-		var newTrace : Trace init Trace.clone(trace)
+				
+		var newTrace : Trace init trace.cloneTrace()
 		
 		getCorrespondingReference(sourceRef).target.add(newTrace)
 		getCorrespondingReference(targetRef).source.add(newTrace)
@@ -89,37 +87,42 @@ class TraceRegistry
 	/**return the sources that created ref*/
 	//TODO for efficiency should create a TraceRegistry, add all elements and return theTracePackage
 	operation getRelatedSources(ref :Reference) : TracePackage is do
-		result:= TracePackage.new
-		var newRef : Reference init ref.cloneRef()
-		result.references.add(newRef)
-		getCorrespondingReference(ref).source.each{trc| 
-			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference))
+		var resultRegistry : TraceRegistry init TraceRegistry.new
+		var newRef : Reference init resultRegistry.getCorrespondingReference(ref)
+		//result.references.add(newRef)
+		getCorrespondingReference(ref).source.each{trc|
+			resultRegistry.addTrace(trc) 
+			/*var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference))
 			
 			if sourceRef == void then
 				sourceRef := trc.sourceElem.asType(Reference).cloneRef()
 				sourceRef.target.clear
 				result.references.add(sourceRef)
 			end
-			sourceRef.addTarget(trc.context,newRef)
+			sourceRef.addTarget(trc.context,newRef)*/
 			}
+		result:= resultRegistry.getTracePackage
 	end
 
 	/**return the targets created by ref*/
 	operation getRelatedTargets(ref : Reference) : TracePackage is do
-		result := TracePackage.new
-		var newRef : Reference init getCorrespondingReference(ref).cloneRef()
-		newRef.target.clear()
-		result.references.add(newRef)
+		//result := TracePackage.new
+		var resultRegistry : TraceRegistry init TraceRegistry.new
+		var newRef : Reference init resultRegistry.getCorrespondingReference(ref)
+		//newRef.target.clear()
+		//result.references.add(newRef)
 		
 		getCorrespondingReference(ref).target.each{trc|
-			var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
+			resultRegistry.addTrace(trc)
+			/*var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
 			
 			if targetRef == void then
 				targetRef:=trc.targetElem.asType(Reference).cloneRef()
 				result.references.add(targetRef)
 			end
-			newRef.addTarget(trc.context,targetRef)
+			newRef.addTarget(trc.context,targetRef)*/
 		}
+		result:= resultRegistry.getTracePackage
 	end
 	
 	//add all the traces from aTracePackage 
