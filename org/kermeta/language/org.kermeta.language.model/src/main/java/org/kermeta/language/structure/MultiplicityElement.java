@@ -86,6 +86,7 @@ public interface MultiplicityElement extends TypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Lower</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -94,7 +95,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(int)
 	 * @see org.kermeta.language.structure.StructurePackage#getMultiplicityElement_Lower()
-	 * @model dataType="org.kermeta.language.structure.Integer"
+	 * @model default="0" dataType="org.kermeta.language.structure.Integer"
 	 * @generated
 	 */
 	int getLower();
@@ -111,6 +112,7 @@ public interface MultiplicityElement extends TypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Upper</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -119,7 +121,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(int)
 	 * @see org.kermeta.language.structure.StructurePackage#getMultiplicityElement_Upper()
-	 * @model dataType="org.kermeta.language.structure.UnlimitedNatural"
+	 * @model default="1" dataType="org.kermeta.language.structure.UnlimitedNatural"
 	 * @generated
 	 */
 	int getUpper();

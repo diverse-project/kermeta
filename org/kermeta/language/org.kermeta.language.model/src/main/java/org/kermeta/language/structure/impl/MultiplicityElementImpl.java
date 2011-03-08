@@ -102,7 +102,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int UPPER_EDEFAULT = 0;
+	protected static final int UPPER_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
