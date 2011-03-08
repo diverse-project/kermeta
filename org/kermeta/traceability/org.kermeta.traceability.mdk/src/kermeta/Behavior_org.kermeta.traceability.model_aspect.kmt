@@ -278,7 +278,7 @@ aspect class TextReference inherits FileReference {
 	end
 	
 	method signature(): String is do 
-		result:="TextReference:"+fileURI+",ts:"+timeStamp+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
+		result:="TextReference:"+fileURI.size.toString+":"+fileURI+",ts:"+timeStamp.size.toString+":"+timeStamp+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
 	end
 }
 
@@ -315,7 +315,7 @@ aspect class XMLReference inherits FileReference {
 	end
 
 	method signature(): String is do 
-		result:="XMLReference:"+fileURI+",ts:"+timeStamp+",xp:"+xPointer
+		result:="XMLReference:"+fileURI.size.toString+":"+fileURI+",ts:"+timeStamp.size.toString+":"+timeStamp+",xp:"+xPointer
 	end
 }
 
