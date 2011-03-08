@@ -37,7 +37,7 @@ class TraceRegistry
 	
 	operation getCorrespondingReference(initRef : Reference) : Reference is do
 		if not getRegistry.containsKey(initRef.signature) then
-			result:= cloneReference(initRef)
+			result:= initRef.cloneRef()
 			result.target.clear
 			getRegistry.put(result.signature,result)
 			getTracePackage.references.add(result)
@@ -82,25 +82,7 @@ class TraceRegistry
 		result:= traces
 	end
 
-	//utility operation for cloning a Reference depending on its type
-	//TODO move as a clone() method to class Reference
-	operation cloneReference(ref : Reference) : Reference is do
-		if ref.isInstanceOf(ModelReference) then
-			result := ModelReference.clone(ref.asType(ModelReference))
-		else
-			if ref.isInstanceOf(TextReference) then
-				result:= TextReference.clone(ref.asType(TextReference))
-			else
-					if ref.isInstanceOf(XMLReference) then
-					result:= XMLReference.clone(ref.asType(XMLReference))
-				else
-					if ref.isInstanceOf(QualifiedNameReference) then
-						result:= QualifiedNameReference.clone(ref.asType(QualifiedNameReference))
-					end
-				end
-			end
-		end
-	end 
+	
 
 	
 
@@ -108,13 +90,13 @@ class TraceRegistry
 	//TODO for efficiency should create a TraceRegistry, add all elements and return theTracePackage
 	operation getRelatedSources(ref :Reference) : TracePackage is do
 		result:= TracePackage.new
-		var newRef : Reference init cloneReference(ref)
+		var newRef : Reference init ref.cloneRef()
 		result.references.add(newRef)
 		getCorrespondingReference(ref).source.each{trc| 
 			var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference))
 			
 			if sourceRef == void then
-				sourceRef := cloneReference(trc.sourceElem.asType(Reference))
+				sourceRef := trc.sourceElem.asType(Reference).cloneRef()
 				sourceRef.target.clear
 				result.references.add(sourceRef)
 			end
@@ -125,7 +107,7 @@ class TraceRegistry
 	/**return the targets created by ref*/
 	operation getRelatedTargets(ref : Reference) : TracePackage is do
 		result := TracePackage.new
-		var newRef : Reference init cloneReference(getCorrespondingReference(ref))
+		var newRef : Reference init getCorrespondingReference(ref).cloneRef()
 		newRef.target.clear()
 		result.references.add(newRef)
 		
@@ -133,7 +115,7 @@ class TraceRegistry
 			var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
 			
 			if targetRef == void then
-				targetRef:=cloneReference(trc.targetElem.asType(Reference))
+				targetRef:=trc.targetElem.asType(Reference).cloneRef()
 				result.references.add(targetRef)
 			end
 			newRef.addTarget(trc.context,targetRef)

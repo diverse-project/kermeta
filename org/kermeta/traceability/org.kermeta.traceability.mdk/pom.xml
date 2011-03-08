@@ -107,7 +107,8 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Export-Package>
-							org.kermeta.traceability.mdk
+							org.kermeta.traceability.mdk,
+							org.kermeta.traceability
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
