@@ -18,8 +18,8 @@
 		<exec executable="wget" failonerror="true">
 			<arg value="-nv"/>
 			<arg value="-r"/>
-			<arg value="-l 2"/>
-			<arg value="-A txt"/>
+			<arg value="-l"/><arg value="2"/>
+			<arg value="-A"/><arg value="txt"/>
 			<arg value="http://www.kermeta.org//awstats_data/kermeta_update/"/>
 		</exec>
 	</target>
