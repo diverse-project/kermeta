@@ -21,14 +21,18 @@ import scala.collection.JavaConversions._
  */
 trait KLoopParser extends KAbstractParser {
 
-  def fLoop : Parser[Expression] = "from" ~ fStatement ~ "until" ~ fStatement ~ "loop" ~ fStatement ~ "end" ^^ { case _ ~ init ~ _ ~ stop ~ _ ~ body ~ _ =>
+  def fLoop : Parser[Expression] = "from" ~ rep(fStatement) ~ "until" ~ fStatement ~ "loop" ~ rep(fStatement) ~ "end" ^^ { case _ ~ init ~ _ ~ stop ~ _ ~ body ~ _ =>
 
 
 
       var newo = BehaviorFactory.eINSTANCE.createLoop
-      newo.setInitialization(init)
+      var newLoopBlock = BehaviorFactory.eINSTANCE.createBlock
+      newLoopBlock.getStatement.addAll(init)
+      newo.setInitialization(newLoopBlock)
       newo.setStopCondition(stop)
-      newo.setBody(body)
+      newLoopBlock = BehaviorFactory.eINSTANCE.createBlock
+      newLoopBlock.getStatement.addAll(body)
+      newo.setBody(newLoopBlock)
       newo
   }
 
