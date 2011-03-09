@@ -19,6 +19,7 @@ require "../staticsetter/StaticSetterContext.kmt"
 require "ResolverException.kmt"
 
 using org::kermeta::language::staticsetter
+using language::helpers
 using language::helpers::structure
 
 using kermeta::persistence
@@ -64,13 +65,13 @@ class FullStaticResolver
 	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
        	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
 		//Display all messages from Resolver
 		ctxt.verbose := 5
 		//Do not raise exceptions for these messages
 		ctxt.exceptions := false
 	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
        	       	
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
