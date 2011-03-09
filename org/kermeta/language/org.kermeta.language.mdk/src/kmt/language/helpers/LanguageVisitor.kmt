@@ -9,65 +9,419 @@
 package language::helpers;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/BehaviorVisitor_Aspect_Accept.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 
-using language::helpers::behavior
-using language::helpers::structure
 using org::kermeta::language::behavior
 using org::kermeta::language::structure
 
 using kermeta::standard
 
-class LanguageVisitor inherits BehaviorVisitor, StructureVisitor
+class LanguageVisitor
 {
-	/*
-	* Extension of visit methods from BehaviorVisitor to visit contained elements from language::structure
-	*/
-	method visitExpression(visited : Expression, ctxt : BehaviorVisitorContext) : Void is do 
-		super(visited, ctxt)
-		visited.containedType.each{cT|
-			cT.accept(self, ctxt.asType(StructureVisitorContext))
-		}
-	end
-	
-	method visitUnresolvedCall(visited : UnresolvedCall, ctxt : BehaviorVisitorContext) : Void is do 
-		super(visited, ctxt)
-		visited.containedType.each{cT|
-			cT.accept(self, ctxt.asType(StructureVisitorContext))
-		}
-	end
-	
-	/*
-	* Extension of visit methods from StructureVisitor to visit contained elements from language::behavior
-	*/
-	method visitConstraint(visited : Constraint, ctxt : StructureVisitorContext) : Void is do
-		super(visited, ctxt)
-		visited.body.accept(self, ctxt.asType(BehaviorVisitorContext))
-	end
-	
-	method visitOperation(visited : Operation, ctxt : StructureVisitorContext) : Void is do
-		super(visited, ctxt)
-		if (not visited.body.isVoid()) then
-			visited.body.accept(self, ctxt.asType(BehaviorVisitorContext))
+	operation isVisitable(o : KermetaModelElement) : Boolean is do
+		if (o.isVoid) then
+			result := false
+		else
+			if (o.isInstanceOf(Boolean) or o.isInstanceOf(Integer) or o.isInstanceOf(String) or o.isInstanceOf(UnlimitedNatural)
+				or o.isInstanceOf(ConstraintLanguage) or o.isInstanceOf(ConstraintType)) then
+				result := false
+			else
+				result := true
+			end
 		end
 	end
 	
-	method visitProperty(visited : Property, ctxt : StructureVisitorContext) : Void is do
-		super(visited, ctxt)
+	/*
+	* Visit methods for behavior elements with contained elements from language::structure
+	*/
+	operation visitExpression(visited : Expression, ctxt : LanguageVisitorContext) : Void is do 
+		visited.containedType.each{cT|
+			cT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitUnresolvedCall(visited : UnresolvedCall, ctxt : LanguageVisitorContext) : Void is do 
+		visited.containedType.each{cT|
+			cT.accept(self, ctxt)
+		}
+	end
+	
+	/*
+	* Visit methods for structure elements with contained elements from language::behavior
+	*/
+	operation visitConstraint(visited : Constraint, ctxt : LanguageVisitorContext) : Void is do
+		visited.body.accept(self, ctxt)
+	end
+	
+	operation visitOperation(visited : Operation, ctxt : LanguageVisitorContext) : Void is do
+		visited.ownedParameter.each{oP|
+			oP.accept(self, ctxt)
+		}
+		visited.ownedUnresolvedOperations.each{oU|
+			oU.accept(self, ctxt)
+		}
+		visited.~post.each{p|
+			p.accept(self, ctxt)
+		}
+		visited.~pre.each{p|
+			p.accept(self, ctxt)
+		}
+		if (not visited.body.isVoid()) then
+			visited.body.accept(self, ctxt)
+		end
+	end
+	
+	operation visitProperty(visited : org::kermeta::language::structure::Property, ctxt : LanguageVisitorContext) : Void is do
+		visited.ownedUnresolvedProperties.each{uP|
+			uP.accept(self, ctxt)
+		}
 		if (not visited.getterBody.isVoid()) then
-			visited.getterBody.accept(self, ctxt.asType(BehaviorVisitorContext))
+			visited.getterBody.accept(self, ctxt)
 		end
 		if (not visited.setterBody.isVoid()) then
-			visited.setterBody.accept(self, ctxt.asType(BehaviorVisitorContext))
+			visited.setterBody.accept(self, ctxt)
 		end
+	end
+	
+	/*
+	* Visit methods for structure elements without contained behavior elements
+	*/
+	operation visitAbstractOperation(visited : AbstractOperation, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitAbstractProperty(visited : AbstractProperty, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitClass(visited : Class, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitClassDefinition(visited : ClassDefinition, ctxt : LanguageVisitorContext) is do
+	
+	end
+		
+	operation visitDataType(visited : DataType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitEnumeration(visited : Enumeration, ctxt : LanguageVisitorContext) is do
+		visited.ownedLiteral.each{oL|
+			oL.accept(self, ctxt)
+		}
+	end
+	
+	operation visitEnumerationLiteral(visited : EnumerationLiteral, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitFunctionType(visited : FunctionType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitGenericTypeDefinition(visited : GenericTypeDefinition, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitKermetaModelElement(visited : KermetaModelElement, ctxt : LanguageVisitorContext) is do
+		visited.kOwnedTags.each{kT|
+			kT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitModel(visited : Model, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitModelType(visited : ModelType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitModelTypeVariable(visited : ModelTypeVariable, ctxt : LanguageVisitorContext) is do
+		visited.virtualType.each{vT|
+			vT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitModelingUnit(visited : ModelingUnit, ctxt : LanguageVisitorContext) is do
+		visited.packages.each{p|
+			p.accept(self, ctxt)
+		}
+		visited.requires.each{r|
+			r.accept(self, ctxt)
+		}
+	end
+	
+	operation visitMultiplicityElement(visited : MultiplicityElement, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitNamedElement(visited : NamedElement, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitObjectTypeVariable(visited : ObjectTypeVariable, ctxt : LanguageVisitorContext) is do
+	
+	end
+		
+	operation visitPackage(visited : Package, ctxt : LanguageVisitorContext) is do
+		visited.nestedPackage.each{nP|
+			nP.accept(self, ctxt)
+		}
+	end
+	
+	operation visitParameter(visited : Parameter, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitParameterizedType(visited : ParameterizedType, ctxt : LanguageVisitorContext) is do
+		visited.typeParamBinding.each{tP|
+			tP.accept(self, ctxt)
+		}
+		visited.virtualTypeBinding.each{vT|
+			vT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitPrimitiveType(visited : PrimitiveType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitProductType(visited : ProductType, ctxt : LanguageVisitorContext) is do
+	
+	end
+
+	operation visitRequire(visited : Require, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitTag(visited : Tag, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitType(visited : Type, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitTypeContainer(visited : TypeContainer, ctxt : LanguageVisitorContext) is do
+		visited.containedType.each{cT|
+			cT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitTypeDefinition(visited : TypeDefinition, ctxt : LanguageVisitorContext) is do
+		visited.typeMappings.each{tM|
+			tM.accept(self, ctxt)	
+		}
+	end
+	
+	operation visitTypeDefinitionContainer(visited : TypeDefinitionContainer, ctxt : LanguageVisitorContext) is do
+		visited.ownedTypeDefinition.each{oT|
+			oT.accept(self, ctxt)
+		}
+	end
+	
+	operation visitTypeMapping(visited : TypeMapping, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitTypeVariable(visited : TypeVariable, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitTypeVariableBinding(visited : TypeVariableBinding, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitTypedElement(visited : TypedElement, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitUnresolved(visited : Unresolved, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitUnresolvedOperation(visited : UnresolvedOperation, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitUnresolvedProperty(visited : UnresolvedProperty, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitUnresolvedType(visited : UnresolvedType, ctxt : LanguageVisitorContext) is do
+		visited.generics.each{g|
+			g.accept(self, ctxt)
+		}
+		visited.usings.each{u|
+			u.accept(self, ctxt)
+		}
+	end
+	
+	operation visitUsing(visited : Using, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	operation visitVirtualType(visited : VirtualType, ctxt : LanguageVisitorContext) is do
+		visited.typeParamBinding.each{tP|
+			tP.accept(self, ctxt)
+		}
+	end
+	
+	operation visitVoidType(visited : VoidType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
+	/*
+	* Visit methods for behavior elements without contained structure elements
+	*/
+	operation visitAssignment(visited : Assignment, ctxt : LanguageVisitorContext) : Void is do 
+		visited.target.accept(self, ctxt)
+		visited.~value.accept(self, ctxt)
+	end
+	
+	operation visitBlock(visited : Block, ctxt : LanguageVisitorContext) : Void is do 
+		visited.rescueBlock.each{rB|
+			rB.accept(self, ctxt)
+		}
+		visited.statement.each{s|
+			s.accept(self, ctxt)
+		}
+	end
+	
+	operation visitBooleanLiteral(visited : BooleanLiteral, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallEnumLiteral(visited : CallEnumLiteral, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallExpression(visited : CallExpression, ctxt : LanguageVisitorContext) : Void is do 
+		visited.parameters.each{p|
+			p.accept(self, ctxt)
+		}
+	end
+		
+	operation visitCallFeature(visited : CallFeature, ctxt : LanguageVisitorContext) : Void is do 
+		visited.target.accept(self, ctxt)
+	end
+	
+	operation visitCallOperation(visited : CallOperation, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallProperty(visited : CallProperty, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallResult(visited : CallResult, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallSuperOperation(visited : CallSuperOperation, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+		
+	operation visitCallTypeLiteral(visited : CallTypeLiteral, ctxt : LanguageVisitorContext) : Void is do
+		visited.typeref.accept(self, ctxt)
+	end
+	
+	operation visitCallValue(visited : CallValue, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitCallVariable(visited : CallVariable, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitConditional(visited : Conditional, ctxt : LanguageVisitorContext) : Void is do 
+		visited.condition.accept(self, ctxt)
+		if (not visited.elseBody.isVoid()) then
+			visited.elseBody.accept(self, ctxt)
+		end
+		visited.thenBody.accept(self, ctxt)
+	end
+	
+	operation visitEmptyExpression(visited : EmptyExpression, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+		
+	operation visitIntegerLiteral(visited : IntegerLiteral, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitJavaStaticCall(visited : JavaStaticCall, ctxt : LanguageVisitorContext) : Void is do 
+		visited.parameters.each{p|
+			p.accept(self, ctxt)
+		}
+	end
+	
+	operation visitLambdaExpression(visited : LambdaExpression, ctxt : LanguageVisitorContext) : Void is do 
+		visited.body.accept(self, ctxt)
+		visited.parameters.each{p|
+			p.accept(self, ctxt)
+		}
+	end
+	
+	operation visitLambdaParameter(visited : LambdaParameter, ctxt : LanguageVisitorContext) : Void is do
+		visited.type.accept(self, ctxt)
+	end
+	
+	operation visitLiteral(visited : Literal, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitLoop(visited : Loop, ctxt : LanguageVisitorContext) : Void is do
+		if (not visited.body.isVoid()) then
+			visited.body.accept(self, ctxt)
+		end
+		if (not visited.initialization.isVoid()) then
+			visited.initialization.accept(self, ctxt)
+		end
+		visited.stopCondition.accept(self, ctxt)
+	end
+	
+	operation visitRaise(visited : Raise, ctxt : LanguageVisitorContext) : Void is do
+		visited.expression.accept(self, ctxt)
+	end
+	
+	operation visitRescue(visited : Rescue, ctxt : LanguageVisitorContext) : Void is do
+		visited.body.each{b|
+			b.accept(self, ctxt)
+		}
+		visited.exceptionType.accept(self, ctxt)
+	end
+		
+	operation visitSelfExpression(visited : SelfExpression, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitStringLiteral(visited : StringLiteral, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+	
+	operation visitTypeReference(visited : TypeReference, ctxt : LanguageVisitorContext) : Void is do 
+		
+	end
+		
+	operation visitVariableDecl(visited : VariableDecl, ctxt : LanguageVisitorContext) : Void is do
+		if (not visited.initialization.isVoid()) then
+			visited.initialization.accept(self, ctxt)
+		end
+		visited.type.accept(self, ctxt)
+	end
+	
+	operation visitVoidLiteral(visited : VoidLiteral, ctxt : LanguageVisitorContext) : Void is do 
+		
 	end
 }
 
 /*
-* Context for the LanguageVisitor, accepted as parameter by visit and accept methods in structure and behavior
+* Context for the LanguageVisitor
 */
-class LanguageVisitorContext inherits BehaviorVisitorContext, StructureVisitorContext
+class LanguageVisitorContext
 {
 
 }
