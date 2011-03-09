@@ -113,7 +113,7 @@ public class Main {
 		// Convert Resulting Modellingunit For TypeSetter
 		ModelingUnit_serialized = this.saveMu(mergedMU);
 		// Save intermediate file
-		writer = new FileWriter(new File("AfterMerging_HelloWorldMiniframework.km"));
+		writer = new FileWriter(new File("AfterMerging_"+CustomRunner.SUFFIX_SAVE+".km"));
 		writer.write(ModelingUnit_serialized.toString());
 		writer.close();
 		
@@ -132,7 +132,7 @@ public class Main {
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
 		// Save intermediate file
-		writer = new FileWriter(new File("AfterResolving_HelloWorldMiniframework.km"));
+		writer = new FileWriter(new File("AfterResolving_"+CustomRunner.SUFFIX_SAVE+".km"));
 		writer.write(ModelingUnit_serialized.toString());
 		writer.close();
 		
@@ -141,7 +141,7 @@ public class Main {
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(staticsettedMU);
 		// Save intermediate file
-		writer = new FileWriter(new File("AfterStaticSetting_HelloWorldMiniframework.km"));
+		writer = new FileWriter(new File("AfterStaticSetting_"+CustomRunner.SUFFIX_SAVE+".km"));
 		writer.write(ModelingUnit_serialized.toString());
 		writer.close();
 		
