@@ -25,11 +25,10 @@ package helloworldandif {
 				"Une chaîne"
 				16
 			end
-			from var i : kermeta::standard::Integer init toto until i == 0 
-			loop do
+			from var i : kermeta::standard::Integer init toto until i == 0 loop
 				kermeta::io::StdIO.writeln(i)
 				i := i - 1
-			end end	
+			end	
 		end
 	}
 }

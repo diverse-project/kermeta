@@ -51,15 +51,18 @@
             </value>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Loop">
-            <initialization xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="i">
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
-              <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
-              <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0"/>
+            <initialization xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="i">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+                <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
+                <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0"/>
+              </statement>
             </initialization>
             <body xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
               <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
                 <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i"/>
-                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
+                <target xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
               </statement>
               <statement xsi:type="org_kermeta_language_behavior:Assignment">
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i"/>
@@ -68,7 +71,6 @@
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i"/>
                 </value>
               </statement>
-              <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
             </body>
             <stopCondition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
               <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral"/>
