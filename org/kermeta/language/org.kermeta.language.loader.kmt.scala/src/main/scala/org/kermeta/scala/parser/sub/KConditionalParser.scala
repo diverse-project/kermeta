@@ -21,7 +21,7 @@ import scala.collection.JavaConversions._
  */
 trait KConditionalParser extends KAbstractParser {
 
-  def fConditional : Parser[Expression] = "if"~fStatement~"then"~rep(fStatement)~( opt("else"~rep(fStatement) ))~"end" ^^ { case _~cond~_~thenBody~elseBody~_=>
+  def fConditional : Parser[Expression] = "if"~fStatement~"then"~fExpressionLst~( opt("else"~fExpressionLst ))~"end" ^^ { case _~cond~_~thenBody~elseBody~_=>
       var newo = BehaviorFactory.eINSTANCE.createConditional
       newo.setCondition(cond)
 
