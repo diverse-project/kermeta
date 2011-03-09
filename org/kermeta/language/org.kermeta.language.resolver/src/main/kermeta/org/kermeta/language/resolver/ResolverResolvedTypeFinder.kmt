@@ -8,18 +8,17 @@
 package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
 using kermeta::exceptions
 using language::helpers
-using language::helpers::structure
 
-class ResolverResolvedTypeFinder inherits StructureVisitor
+class ResolverResolvedTypeFinder inherits LanguageVisitor
 {
-	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
 		var newClass : Class init Class.new
 		newClass.typeDefinition := c
 		
@@ -54,19 +53,19 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 		ctxt.asType(LanguageVisitorContext).foundType := newClass
 	end
 	
-	method visitEnumeration(e : Enumeration, ctxt : StructureVisitorContext) is do
+	method visitEnumeration(e : Enumeration, ctxt : LanguageVisitorContext) is do
 		ctxt.asType(LanguageVisitorContext).foundType := e
 	end
 	
-	method visitModelType(m : ModelType, ctxt : StructureVisitorContext) is do
+	method visitModelType(m : ModelType, ctxt : LanguageVisitorContext) is do
 		ctxt.asType(LanguageVisitorContext).foundType := m
 	end
 	
-	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is	do
+	method visitPrimitiveType(p : PrimitiveType, ctxt : LanguageVisitorContext) is	do
 		ctxt.asType(LanguageVisitorContext).foundType := p
 	end
 	
-	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
+	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
 		var typeDef : TypeDefinition init m.ownedTypeDefinition.detect{t|
 			t.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
 		}
@@ -86,7 +85,7 @@ class ResolverResolvedTypeFinder inherits StructureVisitor
 		end
 	end
 	
-	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
+	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
 		var typeDef : TypeDefinition
 		//If there is no qualified path we are looking only in this package
 		if ctxt.asType(LanguageVisitorContext).qualifiedPath.isEmpty() then

@@ -8,24 +8,23 @@
 package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
 using language::helpers
-using language::helpers::structure
 /*
 * Visit the modelingUnit looking for the Property corresponding to the UnresolvedProperty found by the UnresolvedFinder
 */
-class ResolverResolvedPropertyFinder inherits StructureVisitor
+class ResolverResolvedPropertyFinder inherits LanguageVisitor
 {
-	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
 		//We are looking for a property with the same name as the UnresolvedProperty
 		ctxt.asType(LanguageVisitorContext).foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)}
 	end
 	
-	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
+	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
 		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
 			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
@@ -46,7 +45,7 @@ class ResolverResolvedPropertyFinder inherits StructureVisitor
 		end
 	end
 	
-	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
+	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
 		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
 			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()

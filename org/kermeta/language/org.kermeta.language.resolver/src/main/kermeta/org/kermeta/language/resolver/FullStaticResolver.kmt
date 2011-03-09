@@ -71,7 +71,7 @@ class FullStaticResolver
 		//Do not raise exceptions for these messages
 		ctxt.exceptions := false
 	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
        	       	
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	

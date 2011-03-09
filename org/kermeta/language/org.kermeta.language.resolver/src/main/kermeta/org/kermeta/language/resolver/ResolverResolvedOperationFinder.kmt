@@ -8,21 +8,20 @@
 package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
 using language::helpers
-using language::helpers::structure
 
 /*
 * Visit the modelingUnit looking for the Operation corresponding to the UnresolvedOperation found by the UnresolvedFinder
 */
-class ResolverResolvedOperationFinder inherits StructureVisitor
+class ResolverResolvedOperationFinder inherits LanguageVisitor
 {
-	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
+	method visitClassDefinition(c : org::kermeta::language::structure::ClassDefinition, ctxt : language::helpers::LanguageVisitorContext) is do
 		//We are looking for an operation with the same name as the UnresolvedOperation
-		ctxt.asType(LanguageVisitorContext).foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)}
+		ctxt.foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.unresolvedName)}
 	end
 }

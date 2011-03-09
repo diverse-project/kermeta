@@ -37,8 +37,6 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using language::helpers
-using language::helpers::structure
-using language::helpers::behavior
 using kermeta::exceptions
 using kermeta::standard
 using kermeta::utils
@@ -79,7 +77,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			*/			
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt.asType(StructureVisitorContext))
+					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
 					
 					if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
 						var i : Integer init 0
@@ -93,7 +91,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 							if (use.toName.isVoid() or use.toName == "") then
 								//We now look for a type which the same name and which qualifiedPath is the fromQName
 								ctxt.qualifiedPath := use.fromQName.split("::")
-								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(StructureVisitorContext))						
+								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))						
 							else
 								//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
 								//If the alias is name of the type we are looking for
@@ -102,7 +100,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 									ctxt.qualifiedPath := use.fromQName.split("::")
 									ctxt.unresolvedName := ctxt.qualifiedPath.last()
 									ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(StructureVisitorContext))
+									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
 								else
 									//Else if the alias is the first part of the qualifiedPath we are looking for
 									if (not ctxt.qualifiedPath.isEmpty()) then
@@ -110,7 +108,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 											//We now look for a type which the same name and which qualifiedPath is the fromQName
 											ctxt.qualifiedPath := use.fromQName.split("::")
 											ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(StructureVisitorContext))
+											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
 										end
 									end
 								end
@@ -122,7 +120,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						end
 					end
 				else
-					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(StructureVisitorContext))
+					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
 				end
 			end
 		end
@@ -273,9 +271,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
 			end
 			if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-				ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt.asType(StructureVisitorContext))
+				ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt.asType(LanguageVisitorContext))
 			else
-				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt.asType(StructureVisitorContext))
+				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt.asType(LanguageVisitorContext))
 			end
 			if (ctxt.foundProperty.isVoid() and (ctxt.verbose == 2 or ctxt.verbose >= 4)) then
 				var qualifiedPath : String init ""
@@ -323,7 +321,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				//And it is a Class
 				if (ctxt.unresolved.asType(UnresolvedOperation).~from.isInstanceOf(Class)) then
 					//We look for the Operation in the ClassDefinition of this Class
-					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt.asType(StructureVisitorContext))
+					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt.asType(LanguageVisitorContext))
 				else
 					if (ctxt.verbose == 3 or ctxt.verbose == 5) then
 						var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
@@ -351,7 +349,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				loop
 					superType := containingClassDef.getAllSuperTypes().at(i)
 					if (superType.isInstanceOf(Class)) then
-						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt.asType(StructureVisitorContext))						
+						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt.asType(LanguageVisitorContext))						
 						found := not ctxt.foundOperation.isVoid()
 						i := i +1
 					end
@@ -385,7 +383,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	/*
 	* Visit methods for org::kermeta::language::structure elements
 	*/
-	method visitClass(c : Class, ctxt : StructureVisitorContext) is do
+	method visitClass(c : Class, ctxt : LanguageVisitorContext) is do
 		if (c.toBeVisitedAsClass(pass)) then
 		
 			//Visiting inherited properties from ParameterizedType
@@ -393,7 +391,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
 		if (c.toBeVisitedAsClassDefinition(pass)) then
 				
 			//Visiting inherited properties from GenericTypeDefinition
@@ -456,7 +454,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 		
-	method visitDataType(d : DataType, ctxt : StructureVisitorContext) is do
+	method visitDataType(d : DataType, ctxt : LanguageVisitorContext) is do
 		if (d.toBeVisitedAsDataType(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
@@ -464,7 +462,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitEnumeration(e : Enumeration, ctxt : StructureVisitorContext) is do
+	method visitEnumeration(e : Enumeration, ctxt : LanguageVisitorContext) is do
 		if (e.toBeVisitedAsEnumeration(pass)) then
 	
 			//Visiting inherited properties from DataType
@@ -472,7 +470,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitFunctionType(f : FunctionType, ctxt : StructureVisitorContext) is do
+	method visitFunctionType(f : FunctionType, ctxt : LanguageVisitorContext) is do
 		if (f.toBeVisitedAsFunctionType(pass)) then
 
 			//Visiting inherited properties from TypeContainer
@@ -518,7 +516,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitGenericTypeDefinition(g : GenericTypeDefinition, ctxt : StructureVisitorContext) is do
+	method visitGenericTypeDefinition(g : GenericTypeDefinition, ctxt : LanguageVisitorContext) is do
 		if (g.toBeVisitedAsGenericTypeDefinition(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
@@ -557,7 +555,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitModelType(m : ModelType, ctxt : StructureVisitorContext) is do
+	method visitModelType(m : ModelType, ctxt : LanguageVisitorContext) is do
 		if (m.toBeVisitedAsModelType(pass)) then
 		
 			//Visiting inherited properties from TypeDefinition
@@ -565,7 +563,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitModelTypeVariable(m : ModelTypeVariable, ctxt : StructureVisitorContext) is do
+	method visitModelTypeVariable(m : ModelTypeVariable, ctxt : LanguageVisitorContext) is do
 		if (m.toBeVisitedAsModelTypeVariable(pass)) then
 		
 			//Visiting inherited properties from TypeVariable
@@ -604,7 +602,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
+	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
 		
 		pass := 1
 	
@@ -646,7 +644,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitMultiplicityElement(m : MultiplicityElement, ctxt : StructureVisitorContext) is do
+	method visitMultiplicityElement(m : MultiplicityElement, ctxt : LanguageVisitorContext) is do
 		if (m.toBeVisitedAsMultiplicityElement(pass)) then
 			
 			//Visiting inherited properties from TypedElement
@@ -654,7 +652,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitObjectTypeVariable(o : ObjectTypeVariable, ctxt : StructureVisitorContext) is do
+	method visitObjectTypeVariable(o : ObjectTypeVariable, ctxt : LanguageVisitorContext) is do
 		if (o.toBeVisitedAsObjectTypeVariable(pass)) then
 		
 			//Visiting inherited properties from TypeVariable
@@ -662,7 +660,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitOperation(o : Operation, ctxt : StructureVisitorContext) is do
+	method visitOperation(o : Operation, ctxt : LanguageVisitorContext) is do
 		if (o.toBeVisitedAsOperation(pass)) then
 		
 			//Visiting inherited properties from MultiplicityElement
@@ -761,7 +759,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 
-	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
+	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsPackage(pass)) then
 			
 			ctxt.asType(LanguageVisitorContext).currentPackage := p
@@ -775,7 +773,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitParameter(p : Parameter, ctxt : StructureVisitorContext) is do
+	method visitParameter(p : Parameter, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsParameter(pass)) then
 		
 			//Visiting inherited properties from MultiplicityElement
@@ -798,7 +796,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitParameterizedType(p : ParameterizedType, ctxt : StructureVisitorContext) is do
+	method visitParameterizedType(p : ParameterizedType, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsParameterizedType(pass)) then
 			
 			//Visiting referenced TypeVariableBindings
@@ -813,7 +811,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitPrimitiveType(p : PrimitiveType, ctxt : StructureVisitorContext) is do
+	method visitPrimitiveType(p : PrimitiveType, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsPrimitiveType(pass)) then
 
 			//Visiting inherited properties from DataType
@@ -841,7 +839,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitProductType(p : ProductType, ctxt : StructureVisitorContext) is do
+	method visitProductType(p : ProductType, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsProductType(pass)) then
 
 			//Visiting inherited properties from TypeContainer
@@ -880,7 +878,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitProperty(p : Property, ctxt : StructureVisitorContext) is do
+	method visitProperty(p : Property, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsProperty(pass)) then
 			
 			//Visiting properties inherited from MultiplicityElement
@@ -913,7 +911,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypeContainer(tc : TypeContainer, ctxt : StructureVisitorContext) is do
+	method visitTypeContainer(tc : TypeContainer, ctxt : LanguageVisitorContext) is do
 		if (tc.toBeVisitedAsTypeContainer(pass)) then
 			
 			//Visiting types and handling Unresolved
@@ -940,7 +938,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 		
-	method visitTypeDefinition(t : TypeDefinition, ctxt : StructureVisitorContext) is do
+	method visitTypeDefinition(t : TypeDefinition, ctxt : LanguageVisitorContext) is do
 		if(t.toBeVisitedAsTypeDefinition(pass)) then
 		
 			//Visiting contained Types
@@ -990,7 +988,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypeDefinitionContainer(t : TypeDefinitionContainer, ctxt : StructureVisitorContext) is do
+	method visitTypeDefinitionContainer(t : TypeDefinitionContainer, ctxt : LanguageVisitorContext) is do
 		if (t.toBeVisitedAsTypeDefinitionContainer(pass)) then
 			
 			//Visiting typeDefinitions
@@ -1000,7 +998,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypeMapping(t : TypeMapping, ctxt : StructureVisitorContext) is do
+	method visitTypeMapping(t : TypeMapping, ctxt : LanguageVisitorContext) is do
 		if (t.toBeVisitedAsTypeMapping(pass)) then
 			
 			//Visiting target and source Types and handling Unresolved
@@ -1025,7 +1023,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypeVariable(t : TypeVariable, ctxt : StructureVisitorContext) is do
+	method visitTypeVariable(t : TypeVariable, ctxt : LanguageVisitorContext) is do
 		if (t.toBeVisitedAsTypeVariable(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
@@ -1053,7 +1051,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypeVariableBinding(t : TypeVariableBinding, ctxt : StructureVisitorContext) is do
+	method visitTypeVariableBinding(t : TypeVariableBinding, ctxt : LanguageVisitorContext) is do
 		if (t.toBeVisitedAsTypeVariableBinding(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
@@ -1098,7 +1096,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitTypedElement(t : TypedElement, ctxt : StructureVisitorContext) is do
+	method visitTypedElement(t : TypedElement, ctxt : LanguageVisitorContext) is do
 		if (t.toBeVisitedAsTypedElement(pass)) then
 			
 			//Visiting properties inherited from TypeContainer
@@ -1126,7 +1124,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 
-	method visitUnresolvedOperation(u : UnresolvedOperation, ctxt : StructureVisitorContext) is do
+	method visitUnresolvedOperation(u : UnresolvedOperation, ctxt : LanguageVisitorContext) is do
 		//Visiting u.from and handling Unresolved
 		if (not u.~from.isVoid()) then
 			var foundType : Type
@@ -1151,7 +1149,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
 	end
 	
-	method visitUnresolvedProperty(u : UnresolvedProperty, ctxt : StructureVisitorContext) is do
+	method visitUnresolvedProperty(u : UnresolvedProperty, ctxt : LanguageVisitorContext) is do
 		ctxt.asType(LanguageVisitorContext).unresolved := u
 		ctxt.asType(LanguageVisitorContext).qualifiedPath := u.propertyIdentifier.split("::")
 		ctxt.asType(LanguageVisitorContext).qualifiedPath.remove(ctxt.asType(LanguageVisitorContext).qualifiedPath.last())
@@ -1159,7 +1157,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
 	end
 	
-	method visitUnresolvedType(u : UnresolvedType, ctxt : StructureVisitorContext) is do
+	method visitUnresolvedType(u : UnresolvedType, ctxt : LanguageVisitorContext) is do
 		ctxt.asType(LanguageVisitorContext).unresolved := u
 		ctxt.asType(LanguageVisitorContext).qualifiedPath := u.typeIdentifier.split("::")
 		ctxt.asType(LanguageVisitorContext).qualifiedPath.remove(ctxt.asType(LanguageVisitorContext).qualifiedPath.last())
@@ -1167,7 +1165,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
 	end
 	
-	method visitVirtualType(v : VirtualType, ctxt : StructureVisitorContext) is do
+	method visitVirtualType(v : VirtualType, ctxt : LanguageVisitorContext) is do
 		if (v.toBeVisitedAsVirtualType(pass)) then
 			
 			//Visiting properties inherited from ObjectTypeVariable
@@ -1202,7 +1200,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	/*
 	* Visit methods for org::kermeta::language::behavior elements
 	*/	
-	method visitAssignment(visited : Assignment, ctxt : BehaviorVisitorContext) : Void is do
+	method visitAssignment(visited : Assignment, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsAssignment(pass)) then			
 			visitExpression(visited, ctxt)
 		
@@ -1211,7 +1209,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitBlock(visited : Block, ctxt : BehaviorVisitorContext) : Void is do
+	method visitBlock(visited : Block, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsBlock(pass)) then			
 			visitExpression(visited, ctxt)
 		
@@ -1224,30 +1222,30 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitBooleanLiteral(visited : BooleanLiteral, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitBooleanLiteral(visited : BooleanLiteral, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsLiteral(pass)) then			
 			visitLiteral(visited, ctxt)		
 		end
 	end
 	
-	method visitCallEnumLiteral(visited : CallEnumLiteral, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallEnumLiteral(visited : CallEnumLiteral, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallEnumLiteral(pass)) then			
 			visitCallExpression(visited, ctxt)			
 		end
 	end
 	
-	method visitCallExpression(visited : CallExpression, ctxt : BehaviorVisitorContext) is do
+	method visitCallExpression(visited : CallExpression, ctxt : LanguageVisitorContext) is do
 		if (visited.toBeVisitedAsCallExpression(pass)) then			
 			visitExpression(visited, ctxt)
 			
 			super(visited, ctxt)
 			visited.staticTypeVariableBindings.each{sT|
-				sT.accept(self, ctxt.asType(StructureVisitorContext))
+				sT.accept(self, ctxt.asType(LanguageVisitorContext))
 			}
 		end
 	end
 		
-	method visitCallFeature(visited : CallFeature, ctxt : BehaviorVisitorContext) : Void is do
+	method visitCallFeature(visited : CallFeature, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsCallFeature(pass)) then			
 			visitCallExpression(visited, ctxt)
 			
@@ -1255,39 +1253,39 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitCallOperation(visited : CallOperation, ctxt : BehaviorVisitorContext) : Void is do
+	method visitCallOperation(visited : CallOperation, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsCallOperation(pass)) then			
 			visitCallFeature(visited, ctxt)
 		
 			if (not visited.staticOperation.isVoid()) then
-				visited.staticOperation.accept(self, ctxt.asType(StructureVisitorContext))
+				visited.staticOperation.accept(self, ctxt.asType(LanguageVisitorContext))
 			end
 		end
 	end
 	
-	method visitCallProperty(visited : CallProperty, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallProperty(visited : CallProperty, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallProperty(pass)) then			
 			visitCallFeature(visited, ctxt)
 		
 			if (not visited.staticProperty.isVoid()) then
-				visited.staticProperty.accept(self, ctxt.asType(StructureVisitorContext))
+				visited.staticProperty.accept(self, ctxt.asType(LanguageVisitorContext))
 			end
 		end
 	end
 	
-	method visitCallResult(visited : CallResult, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallResult(visited : CallResult, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallResult(pass)) then			
 			visitCallVariable(visited, ctxt)		
 		end
 	end
 	
-	method visitCallSuperOperation(visited : CallSuperOperation, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallSuperOperation(visited : CallSuperOperation, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallSuperOperation(pass)) then			
 			visitCallOperation(visited, ctxt)		
 		end
 	end
 		
-	method visitCallTypeLiteral(visited : CallTypeLiteral, ctxt : BehaviorVisitorContext) : Void is do
+	method visitCallTypeLiteral(visited : CallTypeLiteral, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsCallTypeLiteral(pass)) then			
 			visitLiteral(visited, ctxt)
 			
@@ -1295,19 +1293,19 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitCallValue(visited : CallValue, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallValue(visited : CallValue, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallValue(pass)) then			
 			visitCallExpression(visited, ctxt)		
 		end
 	end
 	
-	method visitCallVariable(visited : CallVariable, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitCallVariable(visited : CallVariable, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsCallVariable(pass)) then			
 			visitCallExpression(visited, ctxt)		
 		end
 	end
 	
-	method visitConditional(visited : Conditional, ctxt : BehaviorVisitorContext) : Void is do
+	method visitConditional(visited : Conditional, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsConditional(pass)) then			
 			visitExpression(visited, ctxt)
 			
@@ -1319,29 +1317,29 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitEmptyExpression(visited : EmptyExpression, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitEmptyExpression(visited : EmptyExpression, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsEmptyExpression(pass)) then			
 			visitExpression(visited, ctxt)			
 		end
 	end
 	
-	method visitExpression(visited : Expression, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitExpression(visited : Expression, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsExpression(pass)) then			
-			visitTypeContainer(visited, ctxt.asType(StructureVisitorContext))
+			visitTypeContainer(visited, ctxt.asType(LanguageVisitorContext))
 			
 			if (not visited.staticType.isVoid()) then
-				visited.staticType.accept(self, ctxt.asType(StructureVisitorContext))
+				visited.staticType.accept(self, ctxt.asType(LanguageVisitorContext))
 			end
 		end
 	end
 	
-	method visitIntegerLiteral(visited : IntegerLiteral, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitIntegerLiteral(visited : IntegerLiteral, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsIntegerLiteral(pass)) then			
 			visitLiteral(visited, ctxt)			
 		end
 	end
 	
-	method visitJavaStaticCall(visited : JavaStaticCall, ctxt : BehaviorVisitorContext) : Void is do
+	method visitJavaStaticCall(visited : JavaStaticCall, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsJavaStaticCall(pass)) then			
 			visitExpression(visited, ctxt)
 			
@@ -1351,7 +1349,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitLambdaExpression(visited : LambdaExpression, ctxt : BehaviorVisitorContext) : Void is do
+	method visitLambdaExpression(visited : LambdaExpression, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsLambdaExpression(pass)) then			
 			visitExpression(visited, ctxt)
 			
@@ -1362,19 +1360,19 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitLambdaParameter(visited : LambdaParameter, ctxt : BehaviorVisitorContext) : Void is do
+	method visitLambdaParameter(visited : LambdaParameter, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsLambdaParameter(pass)) then
 			visited.type.accept(self, ctxt)
 		end
 	end
 	
-	method visitLiteral(visited : Literal, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitLiteral(visited : Literal, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsLiteral(pass)) then			
 			visitExpression(visited, ctxt)			
 		end
 	end
 	
-	method visitLoop(visited : Loop, ctxt : BehaviorVisitorContext) : Void is do
+	method visitLoop(visited : Loop, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsLoop(pass)) then			
 			visitExpression(visited, ctxt)
 			
@@ -1388,7 +1386,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitRaise(visited : Raise, ctxt : BehaviorVisitorContext) : Void is do
+	method visitRaise(visited : Raise, ctxt : LanguageVisitorContext) : Void is do
 	if (visited.toBeVisitedAsRaise(pass)) then			
 			visitExpression(visited, ctxt)
 			
@@ -1396,7 +1394,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitRescue(visited : Rescue, ctxt : BehaviorVisitorContext) : Void is do
+	method visitRescue(visited : Rescue, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsRescue(pass)) then
 			visited.body.each{b|
 				b.accept(self, ctxt)
@@ -1405,29 +1403,29 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 		
-	method visitSelfExpression(visited : SelfExpression, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitSelfExpression(visited : SelfExpression, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsSelfExpression(pass)) then			
 			visitExpression(visited, ctxt)			
 		end
 	end
 	
-	method visitStringLiteral(visited : StringLiteral, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitStringLiteral(visited : StringLiteral, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsStringLiteral(pass)) then			
 			visitLiteral(visited, ctxt)			
 		end
 	end
 	
-	method visitTypeReference(visited : TypeReference, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitTypeReference(visited : TypeReference, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsTypeReference(pass)) then			
-			visitMultiplicityElement(visited, ctxt.asType(StructureVisitorContext))			
+			visitMultiplicityElement(visited, ctxt.asType(LanguageVisitorContext))			
 		end
 	end
 	
-	method visitUnresolvedCall(visited : UnresolvedCall, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitUnresolvedCall(visited : UnresolvedCall, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsUnresolvedCall(pass)) then			
 			visitCallExpression(visited, ctxt)
 			
-			visitTypeContainer(visited, ctxt.asType(StructureVisitorContext))
+			visitTypeContainer(visited, ctxt.asType(LanguageVisitorContext))
 			
 			/*
 			* Not sure how the Resolver will handle these types, probably have to rewrite it later, with tests and examples
@@ -1440,7 +1438,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				
 					ctxt.asType(LanguageVisitorContext).currentElement := visited
 				
-					g.accept(self, ctxt.asType(StructureVisitorContext))
+					g.accept(self, ctxt.asType(LanguageVisitorContext))
 					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
 						callTypeFinder(ctxt.asType(LanguageVisitorContext))
 						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
@@ -1459,16 +1457,16 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			}
 			typesToBeAdded.each{tba|
 				visited.generics.add(tba)
-				tba.accept(self, ctxt.asType(StructureVisitorContext))
+				tba.accept(self, ctxt.asType(LanguageVisitorContext))
 			}
 			
 			if (isVisitable(visited.targetParent)) then
-				visited.targetParent.accept(self, ctxt.asType(StructureVisitorContext))
+				visited.targetParent.accept(self, ctxt.asType(LanguageVisitorContext))
 			end
 		end
 	end
 		
-	method visitVariableDecl(visited : VariableDecl, ctxt : BehaviorVisitorContext) : Void is do
+	method visitVariableDecl(visited : VariableDecl, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsVariableDecl(pass)) then
 			visitExpression(visited, ctxt)
 			
@@ -1479,7 +1477,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-	method visitVoidLiteral(visited : VoidLiteral, ctxt : BehaviorVisitorContext) : Void is do 
+	method visitVoidLiteral(visited : VoidLiteral, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsVoidLiteral(pass)) then
 			visitLiteral(visited, ctxt)
 		end

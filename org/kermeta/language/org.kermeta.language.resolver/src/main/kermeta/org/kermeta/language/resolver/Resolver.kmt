@@ -10,15 +10,12 @@ package org::kermeta::language::resolver;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
 
-using kermeta::language::structure
 using language::helpers
-using language::helpers::structure
-using org::kermeta::language::resolver
 using kermeta::persistence
 using kermeta::standard
 
@@ -40,7 +37,7 @@ class Resolver
        	
        	stdio.writeln("	*********************Resolving " + unresolvedModelingUnit.toString() + "*********************")
        	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
        	
@@ -83,11 +80,11 @@ class Resolver
        		modelingUnitName := toBeResolved.name
        	end
 		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
+		var ctxt : language::helpers::LanguageVisitorContext init language::helpers::LanguageVisitorContext.new
        	
        	stdio.writeln("		Resolving " + toBeResolved.toString())
        	
-       	toBeResolved.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
+       	toBeResolved.accept(unresolvedFinder, ctxt)
        	
        	stdio.writeln("		" + toBeResolved.toString() + " resolved")
 	end
