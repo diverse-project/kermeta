@@ -79,41 +79,43 @@
               </condition>
             </value>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:Loop" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.2/@containedType.0">
-            <initialization xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.1" identifier="i">
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-              <initialization xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.1/@containedType.0" name="toto"/>
-              <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0"/>
+          <statement xsi:type="org_kermeta_language_behavior:Loop" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0">
+            <initialization xsi:type="org_kermeta_language_behavior:Block" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.1">
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.1" identifier="i">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
+                <initialization xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.1/@containedType.0" name="toto"/>
+                <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0"/>
+              </statement>
             </initialization>
-            <body xsi:type="org_kermeta_language_behavior:Block" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.2/@containedType.0">
-              <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//kermeta/io/StdIO/writeln/@containedType.0" name="writeln" staticOperation="//kermeta/io/StdIO/writeln">
-                <parameters xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0" name="i"/>
-                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.0/@target/@containedType.0">
-                  <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/Class"/>
-                  <typeref type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.0/@target/@typeref/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/io/StdIO"/>
-                  </typeref>
+            <body xsi:type="org_kermeta_language_behavior:Block" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0">
+              <statement xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.0/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/Class"/>
+                <typeref type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.0/@typeref/@containedType.0">
+                  <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/io/StdIO"/>
+                </typeref>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
+                <parameters xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0" name="i"/>
+                <target xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.1/@target/@containedType.0">
+                  <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
                 </target>
               </statement>
-              <statement xsi:type="org_kermeta_language_behavior:Assignment" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0">
-                <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0" name="i"/>
+              <statement xsi:type="org_kermeta_language_behavior:Assignment" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0" name="i"/>
                 <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="minus">
-                  <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.1/@value/@parameters.0/@containedType.0" value="1">
+                  <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.2/@value/@parameters.0/@containedType.0" value="1">
                     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
                   </parameters>
-                  <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0" name="i"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0" name="i"/>
                 </value>
-              </statement>
-              <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@body/@statement.2/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
               </statement>
             </body>
             <stopCondition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
               <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@stopCondition/@parameters.0/@containedType.0">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
               </parameters>
-              <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@containedType.0" name="i"/>
+              <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0" name="i"/>
             </stopCondition>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.4/@containedType.0">
