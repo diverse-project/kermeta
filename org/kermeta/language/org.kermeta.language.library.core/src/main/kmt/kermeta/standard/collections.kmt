@@ -334,10 +334,7 @@ class EachContext {
 	attribute isFirst : Boolean
 	attribute isLast : Boolean
 	operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is do
-		index := i
-		isFirst := first
-		isLast := last
-		result := self
+
 	end
 }
 
