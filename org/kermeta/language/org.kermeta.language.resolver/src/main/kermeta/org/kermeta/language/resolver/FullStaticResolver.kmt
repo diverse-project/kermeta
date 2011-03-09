@@ -30,7 +30,7 @@ class FullStaticResolver
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
-		var baseFileName : String init "AfterResolving_HelloWorldMiniframework"
+		var baseFileName : String init "AfterMerging__HelloWorldMiniframework"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
@@ -40,17 +40,15 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doStaticSetting(unresolvedModelingUnit)
-              	
-     /*  	stdio.writeln("	********************* searching dangling elements ************************")
-       	unresolvedModelResource.findDanglingModelElements().each{ diag |
-       		stdio.writeln("Dangling element " + diag.danglingElement.toString)
-       		stdio.writeln("   referenced via " + diag.referencingElement.toString +"."+diag.referencingProperty.name)       		
-       	} */
-      	
+        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
+              	    	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
-       	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"Resolved.km" + " saved ************************")
+       	resolvedModelingUnit := doStaticSetting(unresolvedModelingUnit)
+       	
+       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
+       	
+       	stdio.writeln("	********************* " + folder+"results/....km" + " saved ************************")
 	end
 	
 	reference errors : ResolverException[*]
