@@ -101,7 +101,7 @@ class StaticSetterContext
 		
 		// clone the type of the multiplicity element
 		var typeCopy : org::kermeta::language::structure::Type
-		//result := element.duplicate.asType(Type)
+		typeCopy := element.type
 		/*	// UGLY: need a real clone
 			if element.type.isInstanceOf(org::kermeta::language::structure::Class) then
 				result := org::kermeta::language::structure::Class.clone(element.type.asType(org::kermeta::language::structure::Class))
@@ -115,8 +115,10 @@ class StaticSetterContext
 		if element.upper == 0 then
 			// the only type valid with upper bound == 0 is Void 
 			result := createTypeFromQualifiedName("kermeta::standard::Void")
+			//stdio.writeln("createTypeFromMultiplicityElement typeCopy = VOID")
 		else if element.upper == 1 then
 			result := typeCopy
+			//stdio.writeln("createTypeFromMultiplicityElement typeCopy = "+result.toString)
 		else
 			var typeParams : Sequence<org::kermeta::language::structure::Type> init Sequence<org::kermeta::language::structure::Type>.new
 			typeParams.add(typeCopy)
@@ -127,28 +129,30 @@ class StaticSetterContext
 					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::OrderedSet", void)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 			else if (element.isUnique() and not element.isOrdered()) then
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
 				if cd.isVoid then 
 					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Set", void)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
-			
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 			else if ( not element.isUnique() and element.isOrdered()) then
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
 				if cd.isVoid then 
 					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Sequence", void)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 			else
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
 				if cd.isVoid then 
 					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Bag", void)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Bag<"+result.toString+">")
 			end end end
 		end end
-		
 	end
 	
 	// workaround compiler bug : issue when adding aspect on object
