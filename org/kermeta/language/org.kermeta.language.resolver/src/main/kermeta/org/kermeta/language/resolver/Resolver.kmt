@@ -16,6 +16,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
 
 using kermeta::language::structure
+using language::helpers
 using language::helpers::structure
 using org::kermeta::language::resolver
 using kermeta::persistence
@@ -25,7 +26,7 @@ class Resolver
 {
 	operation lancement() : Void is do
 		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
 		//Display all messages, do not raise exceptions
 		ctxt.verbose := 5
 		ctxt.exceptions := false
@@ -39,7 +40,7 @@ class Resolver
        	
        	stdio.writeln("	*********************Resolving " + unresolvedModelingUnit.toString() + "*********************")
        	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
        	
        	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
        	
@@ -82,11 +83,11 @@ class Resolver
        		modelingUnitName := toBeResolved.name
        	end
 		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : StructureVisitorContext init StructureVisitorContext.new
+		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
        	
        	stdio.writeln("		Resolving " + toBeResolved.toString())
        	
-       	toBeResolved.accept(unresolvedFinder, ctxt)
+       	toBeResolved.accept(unresolvedFinder, ctxt.asType(StructureVisitorContext))
        	
        	stdio.writeln("		" + toBeResolved.toString() + " resolved")
 	end

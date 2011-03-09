@@ -6,17 +6,15 @@
  *            cguy
  */
 
-package language::helpers::structure;
+package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/StructureVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
 
 using org::kermeta::language::structure
-using language::helpers::structure
 using kermeta::standard
 
-aspect class StructureVisitorContext {
+aspect class LanguageVisitorContext {
 	//Verbose mode :
 	//0 = mute
 	//1 = ResolvedType not found + Other messages on UnresolvedTypes

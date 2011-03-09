@@ -13,6 +13,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
+using language::helpers
 using language::helpers::structure
 
 /*
@@ -22,6 +23,6 @@ class ResolverResolvedOperationFinder inherits StructureVisitor
 {
 	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
 		//We are looking for an operation with the same name as the UnresolvedOperation
-		ctxt.foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.unresolvedName)}
+		ctxt.asType(LanguageVisitorContext).foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)}
 	end
 }

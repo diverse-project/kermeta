@@ -13,6 +13,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
 
 using org::kermeta::language::structure
+using language::helpers
 using language::helpers::structure
 /*
 * Visit the modelingUnit looking for the Property corresponding to the UnresolvedProperty found by the UnresolvedFinder
@@ -21,16 +22,16 @@ class ResolverResolvedPropertyFinder inherits StructureVisitor
 {
 	method visitClassDefinition(c : ClassDefinition, ctxt : StructureVisitorContext) is do
 		//We are looking for a property with the same name as the UnresolvedProperty
-		ctxt.foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.unresolvedName)}
+		ctxt.asType(LanguageVisitorContext).foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)}
 	end
 	
 	method visitModelingUnit(m : ModelingUnit, ctxt : StructureVisitorContext) is do
-		if not ctxt.currentIdentifierIsLast() then
+		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.getCurrentIdentifier()
+			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
 			
 			var containingClass : TypeDefinition init m.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
 			}
 			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
 			if not containingClass.isVoid then
@@ -46,12 +47,12 @@ class ResolverResolvedPropertyFinder inherits StructureVisitor
 	end
 	
 	method visitPackage(p : Package, ctxt : StructureVisitorContext) is do
-		if not ctxt.currentIdentifierIsLast() then
+		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.getCurrentIdentifier()
+			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
 			
 			var containingClass : TypeDefinition init p.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
 			}
 			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
 			if not containingClass.isVoid then
