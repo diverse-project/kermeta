@@ -21,16 +21,16 @@ class ResolverResolvedPropertyFinder inherits LanguageVisitor
 {
 	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
 		//We are looking for a property with the same name as the UnresolvedProperty
-		ctxt.asType(LanguageVisitorContext).foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)}
+		ctxt.foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.unresolvedName)}
 	end
 	
 	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
-		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
+		if not ctxt.currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
+			var lookingFor : String init ctxt.getCurrentIdentifier()
 			
 			var containingClass : TypeDefinition init m.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
 			}
 			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
 			if not containingClass.isVoid then
@@ -46,12 +46,12 @@ class ResolverResolvedPropertyFinder inherits LanguageVisitor
 	end
 	
 	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
-		if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
+		if not ctxt.currentIdentifierIsLast() then
 			//Name of the object we are currently looking for
-			var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
+			var lookingFor : String init ctxt.getCurrentIdentifier()
 			
 			var containingClass : TypeDefinition init p.ownedTypeDefinition.detect{t|
-				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
 			}
 			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
 			if not containingClass.isVoid then

@@ -22,10 +22,10 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		var newClass : Class init Class.new
 		newClass.typeDefinition := c
 		
-		if (ctxt.asType(LanguageVisitorContext).unresolved.asType(UnresolvedType).generics.size() != c.typeParameter.size()) then
+		if (ctxt.unresolved.asType(UnresolvedType).generics.size() != c.typeParameter.size()) then
 			var except : Exception init Exception.new
-			except.message := "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.asType(LanguageVisitorContext).unresolved.asType(UnresolvedType).typeIdentifier + "<"
-			ctxt.asType(LanguageVisitorContext).unresolved.asType(UnresolvedType).generics.each{ g |
+			except.message := "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.unresolved.asType(UnresolvedType).typeIdentifier + "<"
+			ctxt.unresolved.asType(UnresolvedType).generics.each{ g |
 				except.message := except.message + g.toString + " "
 			}
 			except.message := except.message+ "> and in ClassDefinition " + c.name +"<"
@@ -38,7 +38,7 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		var typeParamBinding : TypeVariableBinding
 		var i : Integer init 0
 		//For each UnresolvedType in generics
-		ctxt.asType(LanguageVisitorContext).unresolved.asType(UnresolvedType).generics.each{g|g
+		ctxt.unresolved.asType(UnresolvedType).generics.each{g|g
 			//Create a new TypeVariableBinding
 			typeParamBinding := TypeVariableBinding.new
 			//Link it with the correspondant TypeVariable of c and the UnresolvedType
@@ -50,24 +50,24 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 			i := i + 1
 		}
 		
-		ctxt.asType(LanguageVisitorContext).foundType := newClass
+		ctxt.foundType := newClass
 	end
 	
 	method visitEnumeration(e : Enumeration, ctxt : LanguageVisitorContext) is do
-		ctxt.asType(LanguageVisitorContext).foundType := e
+		ctxt.foundType := e
 	end
 	
 	method visitModelType(m : ModelType, ctxt : LanguageVisitorContext) is do
-		ctxt.asType(LanguageVisitorContext).foundType := m
+		ctxt.foundType := m
 	end
 	
 	method visitPrimitiveType(p : PrimitiveType, ctxt : LanguageVisitorContext) is	do
-		ctxt.asType(LanguageVisitorContext).foundType := p
+		ctxt.foundType := p
 	end
 	
 	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
 		var typeDef : TypeDefinition init m.ownedTypeDefinition.detect{t|
-			t.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
+			t.name.equals(ctxt.unresolvedName) and ctxt.currentIdentifierIsLast()
 		}
 		//If the last identifier we had is the last of the qualified path and typeDef have the same name than the UnresolvedType, we found the good TypeDefinition
 		if not typeDef.isVoid then
@@ -75,8 +75,8 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		//Else
 		else
 			//If we did not reach the end of the qualifiedPath we are looking for a package
-			if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
-				var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
+			if not ctxt.currentIdentifierIsLast() then
+				var lookingFor : String init ctxt.getCurrentIdentifier()
 				var ~package : Package init m.packages.detect{p|p.name.equals(lookingFor)}
 				if not ~package.isVoid() then
 					~package.accept(self, ctxt)
@@ -88,10 +88,10 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
 		var typeDef : TypeDefinition
 		//If there is no qualified path we are looking only in this package
-		if ctxt.asType(LanguageVisitorContext).qualifiedPath.isEmpty() then
+		if ctxt.qualifiedPath.isEmpty() then
 			//If p contains a TypeDefinition which name is the unresolvedName
 			typeDef := p.ownedTypeDefinition.detect{t|
-				t.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName)				
+				t.name.equals(ctxt.unresolvedName)				
 			}
 			//We found the good TypeDefinition
 			if not typeDef.isVoid then
@@ -101,15 +101,15 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		else
 			//If the last identifier of the qualified path is the name of the UnresolvedType we are looking for and if p contains a TypeDefinition with this name
 			//Case using x::x::Class
-			if (ctxt.asType(LanguageVisitorContext).nextIdentifierIsLast()) then
+			if (ctxt.nextIdentifierIsLast()) then
 				typeDef := p.ownedTypeDefinition.detect{t|
-					t.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName) and t.name.equals(ctxt.asType(LanguageVisitorContext).getLastIdentifier)
+					t.name.equals(ctxt.unresolvedName) and t.name.equals(ctxt.getLastIdentifier)
 				}
 			//Or if the last identifier we had is the last of the qualified path and if p contains a TypeDefinition with the same name than the UnresolvedType
 			//Case using x::x
 			else
 				typeDef := p.ownedTypeDefinition.detect{t|
-					t.name.equals(ctxt.asType(LanguageVisitorContext).unresolvedName) and ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast()
+					t.name.equals(ctxt.unresolvedName) and ctxt.currentIdentifierIsLast()
 				}
 			end
 			//We found the good TypeDefinition
@@ -118,8 +118,8 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 			//Else
 			else
 				//If we did not reach the end of the qualifiedPath we are looking for a package
-				if not ctxt.asType(LanguageVisitorContext).currentIdentifierIsLast() then
-					var lookingFor : String init ctxt.asType(LanguageVisitorContext).getCurrentIdentifier()
+				if not ctxt.currentIdentifierIsLast() then
+					var lookingFor : String init ctxt.getCurrentIdentifier()
 					var ~package : Package init p.nestedPackage.detect{n|n.name.equals(lookingFor)}
 					if not ~package.isVoid() then
 						~package.accept(self, ctxt)

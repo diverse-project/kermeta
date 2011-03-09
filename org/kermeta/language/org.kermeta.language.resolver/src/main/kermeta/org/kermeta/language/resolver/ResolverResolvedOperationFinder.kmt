@@ -20,7 +20,7 @@ using language::helpers
 */
 class ResolverResolvedOperationFinder inherits LanguageVisitor
 {
-	method visitClassDefinition(c : org::kermeta::language::structure::ClassDefinition, ctxt : language::helpers::LanguageVisitorContext) is do
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
 		//We are looking for an operation with the same name as the UnresolvedOperation
 		ctxt.foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.unresolvedName)}
 	end

@@ -77,7 +77,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			*/			
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
+					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
 					
 					if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
 						var i : Integer init 0
@@ -91,7 +91,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 							if (use.toName.isVoid() or use.toName == "") then
 								//We now look for a type which the same name and which qualifiedPath is the fromQName
 								ctxt.qualifiedPath := use.fromQName.split("::")
-								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))						
+								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)						
 							else
 								//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
 								//If the alias is name of the type we are looking for
@@ -100,7 +100,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 									ctxt.qualifiedPath := use.fromQName.split("::")
 									ctxt.unresolvedName := ctxt.qualifiedPath.last()
 									ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
+									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 								else
 									//Else if the alias is the first part of the qualifiedPath we are looking for
 									if (not ctxt.qualifiedPath.isEmpty()) then
@@ -108,7 +108,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 											//We now look for a type which the same name and which qualifiedPath is the fromQName
 											ctxt.qualifiedPath := use.fromQName.split("::")
 											ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
+											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 										end
 									end
 								end
@@ -120,7 +120,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						end
 					end
 				else
-					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt.asType(LanguageVisitorContext))
+					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 				end
 			end
 		end
@@ -271,9 +271,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				resolvedPropertyFinder := ResolverResolvedPropertyFinder.new
 			end
 			if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-				ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt.asType(LanguageVisitorContext))
+				ctxt.currentPackage.accept(resolvedPropertyFinder, ctxt)
 			else
-				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt.asType(LanguageVisitorContext))
+				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
 			end
 			if (ctxt.foundProperty.isVoid() and (ctxt.verbose == 2 or ctxt.verbose >= 4)) then
 				var qualifiedPath : String init ""
@@ -321,7 +321,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				//And it is a Class
 				if (ctxt.unresolved.asType(UnresolvedOperation).~from.isInstanceOf(Class)) then
 					//We look for the Operation in the ClassDefinition of this Class
-					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt.asType(LanguageVisitorContext))
+					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt)
 				else
 					if (ctxt.verbose == 3 or ctxt.verbose == 5) then
 						var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
@@ -349,7 +349,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				loop
 					superType := containingClassDef.getAllSuperTypes().at(i)
 					if (superType.isInstanceOf(Class)) then
-						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt.asType(LanguageVisitorContext))						
+						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt)						
 						found := not ctxt.foundOperation.isVoid()
 						i := i +1
 					end
@@ -403,12 +403,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			var foundProperty : Property
 			c.ownedAttribute.each{a|
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := c
+				ctxt.currentElement := c
 				
 				a.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callPropertyFinder(ctxt.asType(LanguageVisitorContext))
-					foundProperty := ctxt.asType(LanguageVisitorContext).getFoundProperty()
+				if (not ctxt.unresolved.isVoid()) then
+					callPropertyFinder(ctxt)
+					foundProperty := ctxt.getFoundProperty()
 					if not foundProperty.isVoid() then
 						propertiesToBeRemoved.add(a.asType(UnresolvedProperty))					
 						propertiesToBeAdded.add(foundProperty)
@@ -429,14 +429,14 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			var foundOperation : Operation
 			c.ownedOperation.each{o|
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := c
+				ctxt.currentElement := c
 				
 				o.accept(self, ctxt)
 				
 				if (pass >= 2) then
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then	
-						callOperationFinder(ctxt.asType(LanguageVisitorContext))
-						foundOperation := ctxt.asType(LanguageVisitorContext).getFoundOperation()
+					if (not ctxt.unresolved.isVoid()) then	
+						callOperationFinder(ctxt)
+						foundOperation := ctxt.getFoundOperation()
 						if not foundProperty.isVoid() then
 							operationsToBeRemoved.add(o.asType(UnresolvedOperation))
 							operationsToBeAdded.add(foundOperation)
@@ -480,12 +480,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			if (not f.right.isVoid) then
 				if (isVisitable(f.right)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := f
+					ctxt.currentElement := f
 				
 					f.right.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.right := foundType
 							/*if (foundType.isInstanceOf(Class)) then
@@ -498,12 +498,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			if (not f.left.isVoid) then
 				if (isVisitable(f.left)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := f
+					ctxt.currentElement := f
 				
 					f.left.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.left := foundType
 							/*if (foundType.isInstanceOf(Class)) then
@@ -529,12 +529,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			g.typeParameter.each{t|
 				if (isVisitable(t)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := g
+					ctxt.currentElement := g
 				
 					t.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType().asType(TypeVariable))
@@ -576,12 +576,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			m.virtualType.each{t|
 				if (isVisitable(t)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := m
+					ctxt.currentElement := m
 				
 					t.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then						
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							virtualTypeToBeRemoved.add(t.asType(UnresolvedType))
 							virtualTypeToBeAdded.add(foundType.asType(VirtualType))
@@ -610,7 +610,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			
 			unresolvedTypesToBeRemoved := Set<UnresolvedType>.new
 			
-			ctxt.asType(LanguageVisitorContext).currentModelingUnit := m
+			ctxt.currentModelingUnit := m
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(m, ctxt)
 			
@@ -673,12 +673,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			o.raisedException.each{e|
 				if (isVisitable(e)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := o
+					ctxt.currentElement := o
 				
 					e.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then						
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							raisedExceptionsToBeRemoved.add(e.asType(UnresolvedType))
 							raisedExceptionsToBeAdded.add(foundType)
@@ -705,13 +705,13 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting superOperation
 			if (not o.superOperation.isVoid) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := o
+				ctxt.currentElement := o
 				
 				o.superOperation.accept(self, ctxt)
 				if (pass >= 2) then
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callOperationFinder(ctxt.asType(LanguageVisitorContext))
-						var foundOperation : Operation init ctxt.asType(LanguageVisitorContext).getFoundOperation()
+					if (not ctxt.unresolved.isVoid()) then
+						callOperationFinder(ctxt)
+						var foundOperation : Operation init ctxt.getFoundOperation()
 						/*if not foundOperation.isVoid() then
 							o.superOperation := foundOperation
 						end*/
@@ -733,12 +733,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			o.typeParameter.each{t|
 				if (isVisitable(t)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := o
+					ctxt.currentElement := o
 				
 					t.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType.asType(TypeVariable))
@@ -762,7 +762,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
 		if (p.toBeVisitedAsPackage(pass)) then
 			
-			ctxt.asType(LanguageVisitorContext).currentPackage := p
+			ctxt.currentPackage := p
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(p, ctxt)
 			
@@ -782,12 +782,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting referenced Operation and handling Unresolved
 			if (not p.~operation.isVoid()) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := p
+				ctxt.currentElement := p
 				
 				p.~operation.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callOperationFinder(ctxt.asType(LanguageVisitorContext))
-					var foundOperation : Operation init ctxt.asType(LanguageVisitorContext).getFoundOperation()
+				if (not ctxt.unresolved.isVoid()) then
+					callOperationFinder(ctxt)
+					var foundOperation : Operation init ctxt.getFoundOperation()
 					if not foundOperation.isVoid() then
 						p.~operation := foundOperation
 					end
@@ -821,12 +821,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			if (not p.instanceType.isVoid) then
 				if (isVisitable(p.instanceType)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := p
+					ctxt.currentElement := p
 				
 					p.instanceType.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							p.instanceType := foundType
 							/*if (foundType.isInstanceOf(Class)) then
@@ -852,12 +852,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			p.type.each{t|
 				if (isVisitable(t)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := p
+					ctxt.currentElement := p
 				
 					t.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then						
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
@@ -887,12 +887,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting opposite and handling Unresolved
 			if (not p.opposite.isVoid) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := p
+				ctxt.currentElement := p
 				
 				p.opposite.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callPropertyFinder(ctxt.asType(LanguageVisitorContext))
-					var foundProperty : Property init ctxt.asType(LanguageVisitorContext).getFoundProperty()
+				if (not ctxt.unresolved.isVoid()) then
+					callPropertyFinder(ctxt)
+					var foundProperty : Property init ctxt.getFoundProperty()
 					if not foundProperty.isVoid() then
 						p.opposite := foundProperty
 						//Deleting UnresolvedProperties (the only one is opposite)
@@ -904,7 +904,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting owningClass and handling Unresolved
 			if (not p.owningClass.isVoid) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := p
+				ctxt.currentElement := p
 				
 				p.owningClass.accept(self, ctxt)
 			end
@@ -920,12 +920,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			tc.containedType.each{t|
 				if (isVisitable(t)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := tc
+					ctxt.currentElement := tc
 				
 					t.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then						
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then						
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typesToVisit.add(foundType)
 						end
@@ -951,12 +951,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			t.superType.each{y|
 				if (isVisitable(y)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := t
+					ctxt.currentElement := t
 				
 					y.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(y.asType(UnresolvedType))
 							// do not introduce circular inheritance to self
@@ -1004,12 +1004,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting target and source Types and handling Unresolved
 			if (isVisitable(t.targetType)) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := t
+				ctxt.currentElement := t
 				
 				t.targetType.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callTypeFinder(ctxt.asType(LanguageVisitorContext))
-					var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.targetType := foundType
 						//t.containedType.add(foundType)
@@ -1033,12 +1033,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			if (not t.supertype.isVoid()) then
 				if (isVisitable(t.supertype)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := t
+					ctxt.currentElement := t
 				
 					t.supertype.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.supertype := foundType
 							/*if (foundType.isInstanceOf(Class)) then
@@ -1060,12 +1060,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting variable and handling Unresolved
 			if (isVisitable(t.variable)) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := t
+				ctxt.currentElement := t
 				
 				t.variable.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callTypeFinder(ctxt.asType(LanguageVisitorContext))
-					var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.variable := foundType.asType(TypeVariable)
 						/*if (foundType.isInstanceOf(Class)) then
@@ -1078,15 +1078,15 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting type and handling Unresolved
 			if (isVisitable(t.type)) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := t
+				ctxt.currentElement := t
 				
 				t.type.accept(self, ctxt)
 				
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callTypeFinder(ctxt.asType(LanguageVisitorContext))
-					var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
-						t.type := ctxt.asType(LanguageVisitorContext).foundType
+						t.type := ctxt.foundType
 						/*if (foundType.isInstanceOf(Class)) then
 							t.containedType.add(foundType)
 						end*/
@@ -1106,12 +1106,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			if (not t.type.isVoid()) then
 				if (isVisitable(t.type)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := t
+					ctxt.currentElement := t
 				
 					t.type.accept(self, ctxt)
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.type := foundType
 							/*if (foundType.isInstanceOf(Class)) then
@@ -1130,12 +1130,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			var foundType : Type
 			if (isVisitable(u.~from)) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := u
+				ctxt.currentElement := u
 				
 				u.~from.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then						
-					callTypeFinder(ctxt.asType(LanguageVisitorContext))
-					foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+				if (not ctxt.unresolved.isVoid()) then						
+					callTypeFinder(ctxt)
+					foundType := ctxt.getFoundType
 					if not foundType.isVoid() then
 						unresolvedTypesToBeRemoved.add(u.~from.asType(UnresolvedType))
 						foundType.accept(self, ctxt)
@@ -1144,25 +1144,25 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				end
 			end
 		end
-		ctxt.asType(LanguageVisitorContext).unresolved := u
-		ctxt.asType(LanguageVisitorContext).unresolvedName := u.operationIdentifier
-		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
+		ctxt.unresolved := u
+		ctxt.unresolvedName := u.operationIdentifier
+		ctxt.identifierCounter := 0
 	end
 	
 	method visitUnresolvedProperty(u : UnresolvedProperty, ctxt : LanguageVisitorContext) is do
-		ctxt.asType(LanguageVisitorContext).unresolved := u
-		ctxt.asType(LanguageVisitorContext).qualifiedPath := u.propertyIdentifier.split("::")
-		ctxt.asType(LanguageVisitorContext).qualifiedPath.remove(ctxt.asType(LanguageVisitorContext).qualifiedPath.last())
-		ctxt.asType(LanguageVisitorContext).unresolvedName := u.propertyIdentifier.split("::").last()
-		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
+		ctxt.unresolved := u
+		ctxt.qualifiedPath := u.propertyIdentifier.split("::")
+		ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+		ctxt.unresolvedName := u.propertyIdentifier.split("::").last()
+		ctxt.identifierCounter := 0
 	end
 	
 	method visitUnresolvedType(u : UnresolvedType, ctxt : LanguageVisitorContext) is do
-		ctxt.asType(LanguageVisitorContext).unresolved := u
-		ctxt.asType(LanguageVisitorContext).qualifiedPath := u.typeIdentifier.split("::")
-		ctxt.asType(LanguageVisitorContext).qualifiedPath.remove(ctxt.asType(LanguageVisitorContext).qualifiedPath.last())
-		ctxt.asType(LanguageVisitorContext).unresolvedName := u.typeIdentifier.split("::").last()
-		ctxt.asType(LanguageVisitorContext).identifierCounter := 0
+		ctxt.unresolved := u
+		ctxt.qualifiedPath := u.typeIdentifier.split("::")
+		ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
+		ctxt.unresolvedName := u.typeIdentifier.split("::").last()
+		ctxt.identifierCounter := 0
 	end
 	
 	method visitVirtualType(v : VirtualType, ctxt : LanguageVisitorContext) is do
@@ -1174,12 +1174,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			//Visiting modelType and handling Unresolved
 			if (isVisitable(v.modelType)) then
 				
-				ctxt.asType(LanguageVisitorContext).currentElement := v
+				ctxt.currentElement := v
 				
 				v.modelType.accept(self, ctxt)
-				if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-					callTypeFinder(ctxt.asType(LanguageVisitorContext))
-					var foundType : Type init ctxt.asType(LanguageVisitorContext).getFoundType
+				if (not ctxt.unresolved.isVoid()) then
+					callTypeFinder(ctxt)
+					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						v.modelType := foundType.asType(ModelTypeVariable)
 						/*if (foundType.isInstanceOf(Class)) then
@@ -1240,7 +1240,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			
 			super(visited, ctxt)
 			visited.staticTypeVariableBindings.each{sT|
-				sT.accept(self, ctxt.asType(LanguageVisitorContext))
+				sT.accept(self, ctxt)
 			}
 		end
 	end
@@ -1258,7 +1258,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			visitCallFeature(visited, ctxt)
 		
 			if (not visited.staticOperation.isVoid()) then
-				visited.staticOperation.accept(self, ctxt.asType(LanguageVisitorContext))
+				visited.staticOperation.accept(self, ctxt)
 			end
 		end
 	end
@@ -1268,7 +1268,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			visitCallFeature(visited, ctxt)
 		
 			if (not visited.staticProperty.isVoid()) then
-				visited.staticProperty.accept(self, ctxt.asType(LanguageVisitorContext))
+				visited.staticProperty.accept(self, ctxt)
 			end
 		end
 	end
@@ -1325,10 +1325,10 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	
 	method visitExpression(visited : Expression, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsExpression(pass)) then			
-			visitTypeContainer(visited, ctxt.asType(LanguageVisitorContext))
+			visitTypeContainer(visited, ctxt)
 			
 			if (not visited.staticType.isVoid()) then
-				visited.staticType.accept(self, ctxt.asType(LanguageVisitorContext))
+				visited.staticType.accept(self, ctxt)
 			end
 		end
 	end
@@ -1417,7 +1417,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	
 	method visitTypeReference(visited : TypeReference, ctxt : LanguageVisitorContext) : Void is do 
 		if (visited.toBeVisitedAsTypeReference(pass)) then			
-			visitMultiplicityElement(visited, ctxt.asType(LanguageVisitorContext))			
+			visitMultiplicityElement(visited, ctxt)			
 		end
 	end
 	
@@ -1425,7 +1425,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		if (visited.toBeVisitedAsUnresolvedCall(pass)) then			
 			visitCallExpression(visited, ctxt)
 			
-			visitTypeContainer(visited, ctxt.asType(LanguageVisitorContext))
+			visitTypeContainer(visited, ctxt)
 			
 			/*
 			* Not sure how the Resolver will handle these types, probably have to rewrite it later, with tests and examples
@@ -1436,12 +1436,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			visited.generics.each{g|
 				if (isVisitable(g)) then
 				
-					ctxt.asType(LanguageVisitorContext).currentElement := visited
+					ctxt.currentElement := visited
 				
-					g.accept(self, ctxt.asType(LanguageVisitorContext))
-					if (not ctxt.asType(LanguageVisitorContext).unresolved.isVoid()) then
-						callTypeFinder(ctxt.asType(LanguageVisitorContext))
-						foundType := ctxt.asType(LanguageVisitorContext).getFoundType
+					g.accept(self, ctxt)
+					if (not ctxt.unresolved.isVoid()) then
+						callTypeFinder(ctxt)
+						foundType := ctxt.getFoundType
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(g.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
@@ -1457,11 +1457,11 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			}
 			typesToBeAdded.each{tba|
 				visited.generics.add(tba)
-				tba.accept(self, ctxt.asType(LanguageVisitorContext))
+				tba.accept(self, ctxt)
 			}
 			
 			if (isVisitable(visited.targetParent)) then
-				visited.targetParent.accept(self, ctxt.asType(LanguageVisitorContext))
+				visited.targetParent.accept(self, ctxt)
 			end
 		end
 	end
