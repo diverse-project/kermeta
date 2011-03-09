@@ -2,7 +2,7 @@ KermetaProject :"001_testHelloWorld_standalone"
 version :  "someVersion" 
 group :"group" 
 { 
-	source = "src/test/resources/test_001/001_testHelloWorld_standalone.kmt" 
+	source = "${project.baseUri}/001_testHelloWorld_standalone.kmt" 
 	//source = "foo" 
 	//source = "*/org/eclipse/uml2.ecore" from "uml2" 
 	//source = ECORE_NSURI from "ecore" 
