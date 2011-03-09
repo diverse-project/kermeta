@@ -58,6 +58,7 @@ aspect class BooleanLiteral {
 	end
 }
 
+
 aspect class CallEnumLiteral {
 	attribute visitedAsCallEnumLiteral : Integer
 	operation toBeVisitedAsCallEnumLiteral(passNumber : Integer) : Boolean is do
