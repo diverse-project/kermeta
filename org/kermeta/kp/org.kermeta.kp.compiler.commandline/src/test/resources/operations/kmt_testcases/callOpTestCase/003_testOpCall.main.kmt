@@ -1,0 +1,28 @@
+
+using kermeta::standard
+
+package testOpCall{
+
+
+
+class Test_opcall {
+
+	@main "main"
+	operation main() : Void is do 
+		 testOpCall()
+	end
+	
+    operation testOpCall() : kermeta::standard::Integer is do
+        result := operation_asg(1234)
+        stdio.writeln(result.toString)
+    end
+
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        result := in + 3
+    end
+
+
+}
+
+}
+

@@ -1,0 +1,16 @@
+
+using kermeta::standard
+package testOpPkgCall{
+
+
+
+// call an operation from another package 
+class Test_opcall1 {
+	
+	@main "operation1"
+    operation operation1() : kermeta::standard::Integer is do
+        result := testExternPackage::Test_opcall.new.operation_asg()
+        stdio.writeln(result.toString)
+    end
+}
+}

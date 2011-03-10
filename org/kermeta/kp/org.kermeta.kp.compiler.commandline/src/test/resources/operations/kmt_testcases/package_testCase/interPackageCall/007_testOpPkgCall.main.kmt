@@ -1,0 +1,26 @@
+
+package testOpPackage;
+
+require kermeta
+require "007_testInterPackageCall.kmt"
+
+// This test calls an operation of another package, which itself calls an operation
+// of this package.
+class Test_opcall {
+
+	@main "operation2"
+    operation operation2() : kermeta::standard::Integer is do
+
+        result := testInterPackage::Test_intercall.new.operation1()
+        stdio.writeln(result.toString)
+
+    end
+    
+    operation operation2() : kermeta::standard::Integer is do
+
+    	var n  : kermeta::standard::Integer
+    	n := 2
+    	result := ( 4 + n ) * n
+
+    end
+}

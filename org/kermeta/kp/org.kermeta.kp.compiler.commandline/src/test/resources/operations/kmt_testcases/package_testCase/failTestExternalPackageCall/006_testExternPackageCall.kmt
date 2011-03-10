@@ -1,0 +1,15 @@
+using kermeta::standard
+
+package testExternPackage{
+
+
+
+alias Integer : kermeta::standard::Integer;
+//alias Test_opcall2 : testExternPackage2::Test_opcall;
+// operation called in another package
+class Test_opcall {
+    operation operation_asg() : Integer is do
+       result := testExternPackage2::Test_opcall2.new.operation_asg()
+    end
+}
+}
