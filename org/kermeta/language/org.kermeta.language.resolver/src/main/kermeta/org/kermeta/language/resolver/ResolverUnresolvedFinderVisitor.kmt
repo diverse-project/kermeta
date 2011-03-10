@@ -486,9 +486,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.right := foundType
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								f.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -504,9 +504,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							f.left := foundType
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								f.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -536,9 +536,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType().asType(TypeVariable))
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								g.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -583,9 +583,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							virtualTypeToBeRemoved.add(t.asType(UnresolvedType))
 							virtualTypeToBeAdded.add(foundType.asType(VirtualType))
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								m.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -680,9 +680,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							raisedExceptionsToBeRemoved.add(e.asType(UnresolvedType))
 							raisedExceptionsToBeAdded.add(foundType)
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								o.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -710,9 +710,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					if (not ctxt.unresolved.isVoid()) then
 						callOperationFinder(ctxt)
 						var foundOperation : Operation init ctxt.getFoundOperation()
-						/*if not foundOperation.isVoid() then
+						if not foundOperation.isVoid() then
 							o.superOperation := foundOperation
-						end*/
+						end
 					end
 				end
 			end
@@ -740,9 +740,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							typeParameterToBeRemoved.add(t.asType(UnresolvedType))
 							typeParameterToBeAdded.add(foundType.asType(TypeVariable))
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								o.containedType.add(foundType)
-							end*/
+							end
 						end		
 					end
 				end
@@ -827,9 +827,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							p.instanceType := foundType
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								p.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -859,9 +859,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(t.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								p.containedType.add(foundType)
-							end*/
+							end
 						end						
 					end
 				end
@@ -963,9 +963,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 							
 							if foundType.getQualifiedName != t.getQualifiedName then
 								typesToBeAdded.add(foundType)
-								/*if (foundType.isInstanceOf(Class)) then
+								if (foundType.isInstanceOf(Class)) then
 									t.containedType.add(foundType)
-								end*/
+								end
 							end
 						end
 					end
@@ -1039,9 +1039,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.supertype := foundType
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								t.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -1066,9 +1066,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.variable := foundType.asType(TypeVariable)
-						/*if (foundType.isInstanceOf(Class)) then
+						if (foundType.isInstanceOf(Class)) then
 							t.containedType.add(foundType)
-						end*/
+						end
 					end
 				end
 			end
@@ -1085,9 +1085,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						t.type := ctxt.foundType
-						/*if (foundType.isInstanceOf(Class)) then
+						if (foundType.isInstanceOf(Class)) then
 							t.containedType.add(foundType)
-						end*/
+						end
 					end	
 				end
 			end
@@ -1112,9 +1112,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
 							t.type := foundType
-							/*if (foundType.isInstanceOf(Class)) then
+							if (foundType.isInstanceOf(Class)) then
 								t.containedType.add(foundType)
-							end*/
+							end
 						end
 					end
 				end
@@ -1180,9 +1180,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
 						v.modelType := foundType.asType(ModelTypeVariable)
-						/*if (foundType.isInstanceOf(Class)) then
+						if (foundType.isInstanceOf(Class)) then
 							v.containedType.add(foundType)
-						end*/
+						end
 					end
 				end
 			end
@@ -1443,9 +1443,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						if not foundType.isVoid() then
 							typesToBeRemoved.add(g.asType(UnresolvedType))
 							typesToBeAdded.add(foundType)
-							/*if (foundType.isInstanceOf(Class)) then
-								t.containedType.add(foundType)
-							end*/
+							if (foundType.isInstanceOf(Class)) then
+								visited.containedType.add(foundType)
+							end
 						end
 					end
 				end
