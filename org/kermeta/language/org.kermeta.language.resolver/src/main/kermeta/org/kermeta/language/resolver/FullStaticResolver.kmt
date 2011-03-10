@@ -20,7 +20,6 @@ require "ResolverException.kmt"
 
 using org::kermeta::language::staticsetter
 using language::helpers
-using language::helpers::structure
 
 using kermeta::persistence
 using kermeta::standard

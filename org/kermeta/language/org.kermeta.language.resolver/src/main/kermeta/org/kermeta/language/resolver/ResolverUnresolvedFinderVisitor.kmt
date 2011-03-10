@@ -7,8 +7,6 @@
  */
 package org::kermeta::language::resolver;
 
-//TODO : getAllSuperTypes
-
 //Kermeta metamodel
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 //Visitor of org::kermeta::language

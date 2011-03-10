@@ -8,9 +8,7 @@
 package org::kermeta::language::behavior;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/BehaviorVisitor.kmt"
 
-using language::helpers::behavior
 using org::kermeta::language::structure
 
 aspect class Assignment {
