@@ -35,7 +35,7 @@
 			<arg value="-Dexec.mainClass=fr.inria.ipstat.geoloc.mapper.MapperCLI"/>
 			<arg value="-Dexec.executableDependency=true"/>
 			<!-- <arg value="-Dexec.args=www.kermeta.org/awstats_data/kermeta_update"/> -->
-			<arg value="-Dexec.args=&quot;www.kermeta.org/awstats_data/kermeta_updatet&quot;&quot;"/>
+			<arg value="-Dexec.args=&quot;www.kermeta.org/awstats_data/kermeta_update&quot;&quot;"/>
 		</exec>
 		
 	</target>
