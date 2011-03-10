@@ -9,9 +9,9 @@
  */
 
 
-@uri "http://www.kermeta.org/Traceability/2.0.0/"
+@uri "http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
 package org::kermeta::traceability;
-require "http://www.kermeta.org/Traceability/2.0.0/"
+require "http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
 require "kermeta"
 using kermeta::standard
 using kermeta::language::structure

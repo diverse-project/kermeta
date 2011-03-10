@@ -35,6 +35,7 @@ class TraceRegistry
 		result := registry
 	end
 	
+	//return the unique Reference in the traceRegistry referencing the same element as initRef and create it if does not exist 
 	operation getCorrespondingReference(initRef : Reference) : Reference is do
 		if not getRegistry.containsKey(initRef.signature) then
 			result:= initRef.cloneRef()
@@ -44,10 +45,7 @@ class TraceRegistry
 			result:=getRegistry.getValue(initRef.signature)
 		end
 	end
-	
-	
-	
-	
+
 	//add a trace from references
 	operation addTraceFromReferences(source : Reference, target : Reference, context : Object) : Void is do
 		var sourceRef : Reference init getCorrespondingReference(source)
@@ -67,10 +65,7 @@ class TraceRegistry
 		getCorrespondingReference(targetRef).source.add(newTrace)
 
 	end
-		 
-	
-	
-	
+
 	
 	//return the tracepackage that stores all the traces
 	operation getTracePackage() : TracePackage is do
@@ -80,26 +75,12 @@ class TraceRegistry
 		result:= traces
 	end
 
-	
-
-	
-
 	/**return the sources that created ref*/
-	//TODO for efficiency should create a TraceRegistry, add all elements and return theTracePackage
 	operation getRelatedSources(ref :Reference) : TracePackage is do
 		var resultRegistry : TraceRegistry init TraceRegistry.new
 		var newRef : Reference init resultRegistry.getCorrespondingReference(ref)
-		//result.references.add(newRef)
 		getCorrespondingReference(ref).source.each{trc|
 			resultRegistry.addTrace(trc) 
-			/*var sourceRef : Reference init result.findReference(trc.sourceElem.asType(Reference))
-			
-			if sourceRef == void then
-				sourceRef := trc.sourceElem.asType(Reference).cloneRef()
-				sourceRef.target.clear
-				result.references.add(sourceRef)
-			end
-			sourceRef.addTarget(trc.context,newRef)*/
 			}
 		result:= resultRegistry.getTracePackage
 	end
@@ -114,13 +95,6 @@ class TraceRegistry
 		
 		getCorrespondingReference(ref).target.each{trc|
 			resultRegistry.addTrace(trc)
-			/*var targetRef : Reference init result.findReference(trc.targetElem.asType(Reference))
-			
-			if targetRef == void then
-				targetRef:=trc.targetElem.asType(Reference).cloneRef()
-				result.references.add(targetRef)
-			end
-			newRef.addTarget(trc.context,targetRef)*/
 		}
 		result:= resultRegistry.getTracePackage
 	end
