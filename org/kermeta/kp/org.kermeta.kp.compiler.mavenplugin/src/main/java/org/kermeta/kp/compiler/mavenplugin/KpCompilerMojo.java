@@ -11,11 +11,15 @@ package org.kermeta.kp.compiler.mavenplugin;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Properties;
+
+import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -63,19 +67,27 @@ public class KpCompilerMojo extends AbstractMojo {
     protected MavenProject project;
     /**
      * Input kermeta project (kp) file
-     * @parameter expression="${project.directory}/project.kp"
+     * @parameter expression="${basedir}/project.kp"
      * @parameter
      * @required
      */
     private File kp;
+    
     /**
-     * Output Directory file
-     *
-     * @parameter expression="${project.build.directory}/generated-sources/kermeta"
-     * @readonly
-     * @required
-     */
-    private File output;
+    * The directory to place processor and generated resources files. 
+    * for apt.
+    *
+    * @parameter default-value="${project.build.directory}/generated-resources/kermeta"
+    */
+   private File resourceOutputDirectory;
+
+   /**
+    * The directory root under which generated source files will be placed; files are placed in
+    * subdirectories based on package namespace. 
+    *
+    * @parameter default-value="${project.build.directory}/generated-sources/kermeta"
+    */
+   private File sourceOutputDirectory;
 
 
     /**
@@ -105,23 +117,33 @@ public class KpCompilerMojo extends AbstractMojo {
     private PackageEquivalence[] packageEquivalences;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-
-        org.apache.log4j.BasicConfigurator.configure();
-
-        this.getLog().info(output.getAbsolutePath());
-        
-        checkFile(kp.getAbsolutePath().toString());
-        KermetaCompiler compiler = new KermetaCompiler(output.toString(), intermediateFilesRequired);
-		try {
+    	try {
+	        org.apache.log4j.BasicConfigurator.configure();
+	
+	        this.getLog().info("Generating sources in "+sourceOutputDirectory.getAbsolutePath());
+	        
+	        checkFile(kp.getAbsolutePath().toString());
+	        KermetaCompiler compiler = new KermetaCompiler(sourceOutputDirectory.toString(), intermediateFilesRequired);
+			
 			compiler.kp2bytecode(kp.toString());
-		} catch (IOException e) {
+			
+	        // Add kp file and resolved km files in the resulting jar
+			// tell maven to include generated META-INF
+			Resource resource = new Resource();
+	        resource.setDirectory(resourceOutputDirectory.getPath() + "/META-INF");
+	        resource.setTargetPath("META-INF");
+	        project.getResources().add(resource);
+	        
+	        // copy kp in the resources
+	        copyFile(kp, new File(resourceOutputDirectory, "/META-INF/kermeta/project.kp"));
+	        
+	        
+	        
+	        
+    	} catch (IOException e) {
 			this.getLog().error(e);
 			e.printStackTrace();
 		}
-        
-        
-        
-        
         /* CHECK IF GENERATION IF OK */
        /* if (!CheckSumFileUtils.compareCheckSum(model.getAbsolutePath(), output.getAbsolutePath())) {
             Compiler compilo = new fr.irisa.triskell.kermeta.compilo.scala.Compiler();
@@ -166,5 +188,17 @@ public class KpCompilerMojo extends AbstractMojo {
         }
         return true;
     }
-        
+     
+    protected void copyFile(File inputFile, File outputFile) throws IOException{
+    	FileReader in = new FileReader(inputFile);
+        FileWriter out = new FileWriter(outputFile);
+        int c;
+
+        while ((c = in.read()) != -1)
+          out.write(c);
+
+        in.close();
+        out.close();
+    }
+    
 }
