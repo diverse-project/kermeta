@@ -3,6 +3,9 @@
 	<property name="env.WORKSPACE" location="."/>
 	<property name="simple.maven.osgi.file.deploy.url" value="http://tipimouss.irisa.fr/maven2-snapshots/org/kermeta/tools/tools.simple.maven.osgi.file.deploy/1.0.0-SNAPSHOT/tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
 	<property name="data.folder" location="${env.WORKSPACE}/data"/>
+	<property name="deploy.server" value="web1.irisa.fr"/>
+	<property name="deploy.user" value="web-triskell"/>
+	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/docs"/>
 	
 	
 	<target name="all" depends="">
@@ -31,9 +34,21 @@
 			<arg value="-e" />
 			<arg value="-Dexec.mainClass=fr.inria.ipstat.geoloc.mapper.MapperCLI"/>
 			<arg value="-Dexec.executableDependency=true"/>
-			<arg value="-Dexec.args=www.kermeta.org/awstats_data/kermeta_update"/>
+			<!-- <arg value="-Dexec.args=www.kermeta.org/awstats_data/kermeta_update"/> -->
+			<arg value="-Dexec.args=www.kermeta.org/awstats_data/kermeta_update/awstats012011.kermeta-org-update.txt"/>
 		</exec>
 		
 	</target>
-	
+	<!-- <target name="publish_kml" >
+			<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.documentation/build"
+				keyfile="${key.file}"
+				passphrase=""
+			    trust="yes">
+			    <fileset dir="imported_projects/fr.irisa.triskell.kermeta.documentation/build">
+			      		<include name="**/**"/>
+				      	<exclude name="**/docboo42/**"/>
+					  	<exclude name="**/eclipse.help/**"/>
+			    </fileset>
+			</scp>
+		</target> -->
 </project>
