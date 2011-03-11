@@ -40,6 +40,21 @@ aspect class ClassDefinition {
 	end
 }
 
+aspect class Constraint {
+	attribute visitedAsConstraint : Integer
+	operation toBeVisitedAsConstraint(passNumber : Integer) : Boolean is do
+		if visitedAsConstraint.isVoid() then
+			visitedAsConstraint := 0
+		end
+		if visitedAsConstraint < passNumber then
+			visitedAsConstraint := visitedAsConstraint + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
 aspect class DataType {
 	attribute visitedAsDataType : Integer
 	operation toBeVisitedAsDataType(passNumber : Integer) : Boolean is do

@@ -452,6 +452,12 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 		
+	method visitConstraint(visited : Constraint, ctxt : LanguageVisitorContext) : Void is do
+		if (visited.toBeVisitedAsConstraint(pass)) then
+			visited.body.accept(self, ctxt)
+		end
+	end
+		
 	method visitDataType(d : DataType, ctxt : LanguageVisitorContext) is do
 		if (d.toBeVisitedAsDataType(pass)) then
 		
@@ -754,6 +760,16 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				o.typeParameter.add(tba)
 				tba.accept(self, ctxt)
 			}
+			
+			o.~post.each{p|
+				p.accept(self, ctxt)
+			}
+			o.~pre.each{p|
+				p.accept(self, ctxt)
+			}
+			if (not o.body.isVoid()) then
+				o.body.accept(self, ctxt)
+			end
 		end
 	end
 
@@ -905,6 +921,13 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				ctxt.currentElement := p
 				
 				p.owningClass.accept(self, ctxt)
+			end
+			
+			if (not p.getterBody.isVoid()) then
+				p.getterBody.accept(self, ctxt)
+			end
+			if (not p.setterBody.isVoid()) then
+				p.setterBody.accept(self, ctxt)
 			end
 		end
 	end
@@ -1414,7 +1437,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	end
 	
 	method visitTypeReference(visited : TypeReference, ctxt : LanguageVisitorContext) : Void is do 
-		if (visited.toBeVisitedAsTypeReference(pass)) then			
+		if (visited.toBeVisitedAsTypeReference(pass)) then
 			visitMultiplicityElement(visited, ctxt)			
 		end
 	end
