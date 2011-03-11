@@ -27,9 +27,12 @@ using org::kermeta::language::behavior
 class StaticSetterContext
 {
 
+	attribute verbose : Boolean
+
 	operation initialize(mu : org::kermeta::language::structure::ModelingUnit) : StaticSetterContext is do
 	 	result := self
 	 	currentModelingUnit := mu
+	 	verbose := false
 	end
 	
 	/**
@@ -77,6 +80,15 @@ class StaticSetterContext
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
 		if result.isVoid then
 			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create type for "+ classDefinitionQualifiedName, void)
+		end
+	end
+	
+	operation createClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String ) : org::kermeta::language::structure::ClassDefinition is do
+		var cd : org::kermeta::language::structure::ClassDefinition
+		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+		result := cd
+		if result.isVoid then
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create ClassDefinition for "+ classDefinitionQualifiedName, void)
 		end
 	end
 	
