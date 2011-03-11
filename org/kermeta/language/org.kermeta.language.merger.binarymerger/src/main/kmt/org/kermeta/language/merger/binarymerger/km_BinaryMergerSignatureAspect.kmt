@@ -14,16 +14,21 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Assignment
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
-						result := result and self.target == aspectElement.target
-					end
-					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-						result := result and self.~value == aspectElement.~value
-					end
-					if (not self.isCast.isVoid) and (not aspectElement.isCast.isVoid) then
-						result := result and self.isCast == aspectElement.isCast
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+							result := result and self.target == aspectElement.target
+						end
+						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+							result := result and self.~value == aspectElement.~value
+						end
+						if (not self.isCast.isVoid) and (not aspectElement.isCast.isVoid) then
+							result := result and self.isCast == aspectElement.isCast
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -32,8 +37,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::Expression
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -41,10 +51,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::CallExpression
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -53,8 +68,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Block
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -62,10 +82,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					var aspectElement : org::kermeta::language::behavior::CallVariable
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-						result := result and self.isAtpre == aspectElement.isAtpre
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+							result := result and self.isAtpre == aspectElement.isAtpre
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -74,13 +99,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					var aspectElement : org::kermeta::language::behavior::CallFeature
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
-						result := result and self.target == aspectElement.target
-					end
-					if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-						result := result and self.isAtpre == aspectElement.isAtpre
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+							result := result and self.target == aspectElement.target
+						end
+						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+							result := result and self.isAtpre == aspectElement.isAtpre
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -89,8 +119,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
 					var aspectElement : org::kermeta::language::behavior::CallSuperOperation
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -98,8 +133,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallVariable is do
 					var aspectElement : org::kermeta::language::behavior::CallResult
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -107,8 +147,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					var aspectElement : org::kermeta::language::behavior::CallValue
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -116,16 +161,21 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Conditional
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.thenBody.isVoid) and (not aspectElement.thenBody.isVoid) then
-						result := result and self.thenBody == aspectElement.thenBody
-					end
-					if (not self.elseBody.isVoid) and (not aspectElement.elseBody.isVoid) then
-						result := result and self.elseBody == aspectElement.elseBody
-					end
-					if (not self.condition.isVoid) and (not aspectElement.condition.isVoid) then
-						result := result and self.condition == aspectElement.condition
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.thenBody.isVoid) and (not aspectElement.thenBody.isVoid) then
+							result := result and self.thenBody == aspectElement.thenBody
+						end
+						if (not self.elseBody.isVoid) and (not aspectElement.elseBody.isVoid) then
+							result := result and self.elseBody == aspectElement.elseBody
+						end
+						if (not self.condition.isVoid) and (not aspectElement.condition.isVoid) then
+							result := result and self.condition == aspectElement.condition
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -134,10 +184,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Raise
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.expression.isVoid) and (not aspectElement.expression.isVoid) then
-						result := result and self.expression == aspectElement.expression
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.expression.isVoid) and (not aspectElement.expression.isVoid) then
+							result := result and self.expression == aspectElement.expression
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -146,13 +201,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::Rescue
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
-						result := result and self.exceptionType == aspectElement.exceptionType
-					end
-					if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
-						result := result and self.exceptionName == aspectElement.exceptionName
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
+							result := result and self.exceptionType == aspectElement.exceptionType
+						end
+						if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
+							result := result and self.exceptionName == aspectElement.exceptionName
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -161,10 +221,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					var aspectElement : org::kermeta::language::behavior::TypeReference
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -173,8 +238,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Literal
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -182,8 +252,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::EmptyExpression
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -191,13 +266,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::JavaStaticCall
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.jclass.isVoid) and (not aspectElement.jclass.isVoid) then
-						result := result and self.jclass == aspectElement.jclass
-					end
-					if (not self.jmethod.isVoid) and (not aspectElement.jmethod.isVoid) then
-						result := result and self.jmethod == aspectElement.jmethod
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.jclass.isVoid) and (not aspectElement.jclass.isVoid) then
+							result := result and self.jclass == aspectElement.jclass
+						end
+						if (not self.jmethod.isVoid) and (not aspectElement.jmethod.isVoid) then
+							result := result and self.jmethod == aspectElement.jmethod
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -206,10 +286,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::LambdaExpression
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-						result := result and self.body == aspectElement.body
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -218,13 +303,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::behavior::LambdaParameter
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
-						result := result and self.type == aspectElement.type
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
+							result := result and self.type == aspectElement.type
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -233,10 +323,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					var aspectElement : org::kermeta::language::behavior::IntegerLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-						result := result and self.~value == aspectElement.~value
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+							result := result and self.~value == aspectElement.~value
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -245,10 +340,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					var aspectElement : org::kermeta::language::behavior::StringLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-						result := result and self.~value == aspectElement.~value
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+							result := result and self.~value == aspectElement.~value
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -257,10 +357,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					var aspectElement : org::kermeta::language::behavior::BooleanLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-						result := result and self.~value == aspectElement.~value
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+							result := result and self.~value == aspectElement.~value
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -269,10 +374,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					var aspectElement : org::kermeta::language::behavior::CallTypeLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.typeref.isVoid) and (not aspectElement.typeref.isVoid) then
-						result := result and self.typeref == aspectElement.typeref
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.typeref.isVoid) and (not aspectElement.typeref.isVoid) then
+							result := result and self.typeref == aspectElement.typeref
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -281,8 +391,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					var aspectElement : org::kermeta::language::behavior::VoidLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -290,16 +405,21 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Loop
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
-						result := result and self.initialization == aspectElement.initialization
-					end
-					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-						result := result and self.body == aspectElement.body
-					end
-					if (not self.stopCondition.isVoid) and (not aspectElement.stopCondition.isVoid) then
-						result := result and self.stopCondition == aspectElement.stopCondition
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
+							result := result and self.initialization == aspectElement.initialization
+						end
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
+						if (not self.stopCondition.isVoid) and (not aspectElement.stopCondition.isVoid) then
+							result := result and self.stopCondition == aspectElement.stopCondition
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -308,8 +428,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::SelfExpression
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -317,33 +442,44 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::VariableDecl
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
-						result := result and self.initialization == aspectElement.initialization
-					end
-					if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
-						result := result and self.type == aspectElement.type
-					end
-					if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
-						result := result and self.identifier == aspectElement.identifier
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
+							result := result and self.initialization == aspectElement.initialization
+						end
+						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
+							result := result and self.type == aspectElement.type
+						end
+						if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
+							result := result and self.identifier == aspectElement.identifier
+						end
+					else
+						result := false
 					end
 				end
 			}
+
 			aspect class UnresolvedCall {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
 					var aspectElement : org::kermeta::language::behavior::UnresolvedCall
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
-						result := result and self.target == aspectElement.target
-					end
-					if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-						result := result and self.isAtpre == aspectElement.isAtpre
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+							result := result and self.target == aspectElement.target
+						end
+						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+							result := result and self.isAtpre == aspectElement.isAtpre
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -352,8 +488,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
 					var aspectElement : org::kermeta::language::behavior::CallOperation
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -361,8 +502,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
 					var aspectElement : org::kermeta::language::behavior::CallProperty
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -370,11 +516,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					var aspectElement : org::kermeta::language::behavior::CallEnumLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
-
 
 		}
 
@@ -386,8 +536,13 @@ package kermeta {
 				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
 					var aspectElement : org::kermeta::language::structure::KermetaModelElement
 					aspectElement ?= aspectElementObj
-					
-					result := true
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
 				end
 			}
 
@@ -396,22 +551,27 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					var aspectElement : org::kermeta::language::structure::Operation
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					/* ignore abstract and body -> will raise an exception in case of conflict */
-					/*
-					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-						result := result and self.body == aspectElement.body
-					end
-					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-						result := result and self.isAbstract == aspectElement.isAbstract
-					end
-					if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
-						result := result and self.uniqueName == aspectElement.uniqueName
-					end
-					*/
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						/* ignore abstract and body -> will raise an exception in case of conflict */
+					    /*
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
+						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+							result := result and self.isAbstract == aspectElement.isAbstract
+						end
+						if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
+							result := result and self.uniqueName == aspectElement.uniqueName
+						end
+						*/
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -420,37 +580,42 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					var aspectElement : org::kermeta::language::structure::Property
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
-						result := result and self.getterBody == aspectElement.getterBody
-					end
-					if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
-						result := result and self.setterBody == aspectElement.setterBody
-					end
-					if (not self.isReadOnly.isVoid) and (not aspectElement.isReadOnly.isVoid) then
-						result := result and self.isReadOnly == aspectElement.isReadOnly
-					end
-					if (not self.default.isVoid) and (not aspectElement.default.isVoid) then
-						result := result and self.default == aspectElement.default
-					end
-					if (not self.isComposite.isVoid) and (not aspectElement.isComposite.isVoid) then
-						result := result and self.isComposite == aspectElement.isComposite
-					end
-					if (not self.isDerived.isVoid) and (not aspectElement.isDerived.isVoid) then
-						result := result and self.isDerived == aspectElement.isDerived
-					end
-					if (not self.isID.isVoid) and (not aspectElement.isID.isVoid) then
-						result := result and self.isID == aspectElement.isID
-					end
-					if (not self.isGetterAbstract.isVoid) and (not aspectElement.isGetterAbstract.isVoid) then
-						result := result and self.isGetterAbstract == aspectElement.isGetterAbstract
-					end
-					if (not self.isSetterAbstract.isVoid) and (not aspectElement.isSetterAbstract.isVoid) then
-						result := result and self.isSetterAbstract == aspectElement.isSetterAbstract
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
+							result := result and self.getterBody == aspectElement.getterBody
+						end
+						if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
+							result := result and self.setterBody == aspectElement.setterBody
+						end
+						if (not self.isReadOnly.isVoid) and (not aspectElement.isReadOnly.isVoid) then
+							result := result and self.isReadOnly == aspectElement.isReadOnly
+						end
+						if (not self.default.isVoid) and (not aspectElement.default.isVoid) then
+							result := result and self.default == aspectElement.default
+						end
+						if (not self.isComposite.isVoid) and (not aspectElement.isComposite.isVoid) then
+							result := result and self.isComposite == aspectElement.isComposite
+						end
+						if (not self.isDerived.isVoid) and (not aspectElement.isDerived.isVoid) then
+							result := result and self.isDerived == aspectElement.isDerived
+						end
+						if (not self.isID.isVoid) and (not aspectElement.isID.isVoid) then
+							result := result and self.isID == aspectElement.isID
+						end
+						if (not self.isGetterAbstract.isVoid) and (not aspectElement.isGetterAbstract.isVoid) then
+							result := result and self.isGetterAbstract == aspectElement.isGetterAbstract
+						end
+						if (not self.isSetterAbstract.isVoid) and (not aspectElement.isSetterAbstract.isVoid) then
+							result := result and self.isSetterAbstract == aspectElement.isSetterAbstract
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -459,8 +624,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Type
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -468,8 +638,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::TypeContainer
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -477,8 +652,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					var aspectElement : org::kermeta::language::structure::EnumerationLiteral
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -486,8 +666,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::TypeVariableBinding
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -495,22 +680,27 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
 					var aspectElement : org::kermeta::language::structure::MultiplicityElement
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isOrdered.isVoid) and (not aspectElement.isOrdered.isVoid) then
-						result := result and self.isOrdered == aspectElement.isOrdered
-					end
-					if (not self.isUnique.isVoid) and (not aspectElement.isUnique.isVoid) then
-						result := result and self.isUnique == aspectElement.isUnique
-					end
-					if (not self.lower.isVoid) and (not aspectElement.lower.isVoid) then
-						result := result and self.lower == aspectElement.lower
-					end
-					if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
-						result := result and self.upper == aspectElement.upper
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isOrdered.isVoid) and (not aspectElement.isOrdered.isVoid) then
+							result := result and self.isOrdered == aspectElement.isOrdered
+						end
+						if (not self.isUnique.isVoid) and (not aspectElement.isUnique.isVoid) then
+							result := result and self.isUnique == aspectElement.isUnique
+						end
+						if (not self.lower.isVoid) and (not aspectElement.lower.isVoid) then
+							result := result and self.lower == aspectElement.lower
+						end
+						if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
+							result := result and self.upper == aspectElement.upper
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -519,13 +709,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					var aspectElement : org::kermeta::language::structure::TypeDefinition
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					/* Ignore isAspect attribute
-					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-						result := result and self.isAspect == aspectElement.isAspect
-					end 
-					*/
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						/* Ignore isAspect attribute
+						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+							result := result and self.isAspect == aspectElement.isAspect
+						end
+						*/
+					else
+						result := false
+					end
 				end
 			}
 
@@ -533,13 +728,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterizedType is do
 					var aspectElement : org::kermeta::language::structure::Class
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-						result := result and self.isAbstract == aspectElement.isAbstract
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+							result := result and self.isAbstract == aspectElement.isAbstract
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -548,13 +748,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::DataType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-						result := result and self.isAspect == aspectElement.isAspect
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+							result := result and self.isAspect == aspectElement.isAspect
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -563,13 +768,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
 					var aspectElement : org::kermeta::language::structure::Enumeration
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-						result := result and self.isAspect == aspectElement.isAspect
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+							result := result and self.isAspect == aspectElement.isAspect
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -578,10 +788,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::NamedElement
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -590,10 +805,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					var aspectElement : org::kermeta::language::structure::Package
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-						result := result and self.uri == aspectElement.uri
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+							result := result and self.uri == aspectElement.uri
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -602,10 +822,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					var aspectElement : org::kermeta::language::structure::Parameter
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -614,13 +839,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
 					var aspectElement : org::kermeta::language::structure::PrimitiveType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-						result := result and self.isAspect == aspectElement.isAspect
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+							result := result and self.isAspect == aspectElement.isAspect
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -629,10 +859,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::TypedElement
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -642,13 +877,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Tag
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
-					end
-					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-						result := result and self.~value == aspectElement.~value
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+							result := result and self.~value == aspectElement.~value
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -657,8 +897,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::AbstractProperty
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -666,16 +911,21 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					var aspectElement : org::kermeta::language::structure::Constraint
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-						result := result and self.body == aspectElement.body
-					end
-					if (not self.stereotype.isVoid) and (not aspectElement.stereotype.isVoid) then
-						result := result and self.stereotype == aspectElement.stereotype
-					end
-					if (not self.language.isVoid) and (not aspectElement.language.isVoid) then
-						result := result and self.language == aspectElement.language
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
+						if (not self.stereotype.isVoid) and (not aspectElement.stereotype.isVoid) then
+							result := result and self.stereotype == aspectElement.stereotype
+						end
+						if (not self.language.isVoid) and (not aspectElement.language.isVoid) then
+							result := result and self.language == aspectElement.language
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -685,13 +935,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::GenericTypeDefinition is do
 					var aspectElement : org::kermeta::language::structure::ClassDefinition
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-						result := result and self.isAbstract == aspectElement.isAbstract
-					end
-					if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
-						result := result and self.isSingleton == aspectElement.isSingleton
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+							result := result and self.isAbstract == aspectElement.isAbstract
+						end
+						if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
+							result := result and self.isSingleton == aspectElement.isSingleton
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -701,10 +956,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinitionContainer is do
 					var aspectElement : org::kermeta::language::structure::ModelingUnit
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.namespacePrefix.isVoid) and (not aspectElement.namespacePrefix.isVoid) then
-						result := result and self.namespacePrefix == aspectElement.namespacePrefix
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.namespacePrefix.isVoid) and (not aspectElement.namespacePrefix.isVoid) then
+							result := result and self.namespacePrefix == aspectElement.namespacePrefix
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -713,8 +973,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					var aspectElement : org::kermeta::language::structure::TypeDefinitionContainer
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -722,10 +987,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Require
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-						result := result and self.uri == aspectElement.uri
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+							result := result and self.uri == aspectElement.uri
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -734,8 +1004,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
 					var aspectElement : org::kermeta::language::structure::GenericTypeDefinition
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -743,8 +1018,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::ParameterizedType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -752,10 +1032,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::TypeVariable
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -764,10 +1049,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
 					var aspectElement : org::kermeta::language::structure::ObjectTypeVariable
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -776,13 +1066,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::ModelType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-						result := result and self.isAspect == aspectElement.isAspect
-					end
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+							result := result and self.isAspect == aspectElement.isAspect
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -791,10 +1086,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
 					var aspectElement : org::kermeta::language::structure::ModelTypeVariable
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -803,10 +1103,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeVariable is do
 					var aspectElement : org::kermeta::language::structure::VirtualType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-						result := result and self.name == aspectElement.name
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -815,47 +1120,27 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Model
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
-
-			//aspect class Resource {
-			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-			//		var aspectElement : org::kermeta::language::structure::Resource
-			//		aspectElement ?= aspectElementObj
-			//		
-			//		result := super( aspectElement)
-			//	end
-			//}
-
-			//aspect class ResourceGroup {
-			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
-			//		var aspectElement : org::kermeta::language::structure::ResourceGroup
-			//		aspectElement ?= aspectElementObj
-			//		
-			//		result := super( aspectElement)
-			//	end
-			//}
-
-			//aspect class SimpleResource {
-			//	method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Resource is do
-			//		var aspectElement : org::kermeta::language::structure::SimpleResource
-			//		aspectElement ?= aspectElementObj
-			//		
-			//		result := super( aspectElement)
-			//		if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-			//			result := result and self.uri == aspectElement.uri
-			//		end
-			//	end
-			//}
 
 			aspect class AbstractOperation {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::AbstractOperation
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -863,12 +1148,16 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::UnresolvedType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
-						result := result and self.typeIdentifier == aspectElement.typeIdentifier
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
+							result := result and self.typeIdentifier == aspectElement.typeIdentifier
+						end
+					else
+						result := false
 					end
-					stdio.writeln("Result of UnresolvedType.localMatch = " +result.toString)
 				end
 			}
 
@@ -876,8 +1165,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Unresolved
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -885,10 +1179,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractProperty is do
 					var aspectElement : org::kermeta::language::structure::UnresolvedProperty
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.propertyIdentifier.isVoid) and (not aspectElement.propertyIdentifier.isVoid) then
-						result := result and self.propertyIdentifier == aspectElement.propertyIdentifier
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.propertyIdentifier.isVoid) and (not aspectElement.propertyIdentifier.isVoid) then
+							result := result and self.propertyIdentifier == aspectElement.propertyIdentifier
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -897,10 +1196,15 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractOperation is do
 					var aspectElement : org::kermeta::language::structure::UnresolvedOperation
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.operationIdentifier.isVoid) and (not aspectElement.operationIdentifier.isVoid) then
-						result := result and self.operationIdentifier == aspectElement.operationIdentifier
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.operationIdentifier.isVoid) and (not aspectElement.operationIdentifier.isVoid) then
+							result := result and self.operationIdentifier == aspectElement.operationIdentifier
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -909,13 +1213,18 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					var aspectElement : org::kermeta::language::structure::Using
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
-						result := result and self.fromQName == aspectElement.fromQName
-					end
-					if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
-						result := result and self.toName == aspectElement.toName
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
+							result := result and self.fromQName == aspectElement.fromQName
+						end
+						if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
+							result := result and self.toName == aspectElement.toName
+						end
+					else
+						result := false
 					end
 				end
 			}
@@ -924,8 +1233,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::ProductType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -933,8 +1247,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::FunctionType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -942,8 +1261,13 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					var aspectElement : org::kermeta::language::structure::VoidType
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
 				end
 			}
 
@@ -951,12 +1275,16 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					var aspectElement : org::kermeta::language::structure::TypeMapping
 					aspectElement ?= aspectElementObj
-					
-					result := super( aspectElement)
-					if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
-						result := result and self.mapping == aspectElement.mapping
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
+							result := result and self.mapping == aspectElement.mapping
+						end
+					else
+						result := false
 					end
-					
 				end
 			}
 
@@ -967,8 +1295,13 @@ package kermeta {
 			operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
 				var aspectElement : org::kermeta::language::DummyClass
 				aspectElement ?= aspectElementObj
-				
-				result := true
+				if not aspectElement.isVoid then
+
+					
+					result := true
+				else
+					result := false
+				end
 			end
 		}
 
@@ -979,8 +1312,13 @@ package kermeta {
 		operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
 			var aspectElement : org::kermeta::DummyClass
 			aspectElement ?= aspectElementObj
-			
-			result := true
+			if not aspectElement.isVoid then
+
+				
+				result := true
+			else
+				result := false
+			end
 		end
 	}
 
@@ -991,7 +1329,12 @@ aspect class DummyClass {
 	operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
 		var aspectElement : org::DummyClass
 		aspectElement ?= aspectElementObj
-		
-		result := true
+		if not aspectElement.isVoid then
+
+			
+			result := true
+		else
+			result := false
+		end
 	end
 }
