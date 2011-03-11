@@ -8,9 +8,9 @@ package org.kermeta.scala.parser.sub
 import org.kermeta.language.behavior.BehaviorFactory
 import org.kermeta.language.behavior.Expression
 
-trait KThrowParser extends KAbstractParser {
+trait KRaiseParser extends KAbstractParser {
 
-  def fThrow : Parser[Expression] = "throw" ~ fStatement ^^ { case _ ~ exp =>
+  def fRaise : Parser[Expression] = "raise" ~ fStatement ^^ { case _ ~ exp =>
       var newo = BehaviorFactory.eINSTANCE.createRaise
       newo.setExpression(exp)
       newo
