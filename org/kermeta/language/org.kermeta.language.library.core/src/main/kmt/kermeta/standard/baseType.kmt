@@ -447,7 +447,7 @@ class String {
           end
 }
 @CompilerIgnore "true"
-class Integer {        @CompilerIgnore "true"
+class Integer inherits Summable {        @CompilerIgnore "true"
          operation numberOfLeadingZeros(arg0:Integer) : Integer is do
 
           end
@@ -805,7 +805,7 @@ class Date {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Short {        @CompilerIgnore "true"
+class Short inherits Summable {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -899,7 +899,7 @@ class Short {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Double {        @CompilerIgnore "true"
+class Double inherits Summable {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1013,7 +1013,7 @@ class Double {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Float {        @CompilerIgnore "true"
+class Float inherits Summable {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1751,7 +1751,51 @@ class Character {        @CompilerIgnore "true"
           end
 }
 
- 
+@CompilerIgnore "true"
+abstract class Summable<G> {
+	operation plus(other : G) : G is abstract
+	operation minus(other : G) : G is abstract
+}
+
+@CompilerIgnore "true"
+abstract class Comparable {
+	
+	/**
+	 * This method should be implemented by any class that inherits
+	 * from Comparable.
+	 * returns 0 if self = other
+	 * returns > 0 if  self > other
+	 * returns < 0 if  self < other
+	 */
+	operation compareTo(other : Object) : Integer is abstract
+	
+	/**
+	 * return true if self > other
+	 */
+	operation isGreater(other : Object) : Boolean is do
+	end
+	
+	/**
+	 * return true if self < other
+	 */
+	operation isLower(other : Object) : Boolean is do
+	end
+	
+	/**
+	 * return true if self <= other
+	 */
+	operation isLowerOrEqual(other : Object) : Boolean is do
+	end
+	
+	/**
+	 * return true if self >= other
+	 */
+	operation isGreaterOrEqual(other : Object) : Boolean is do
+	end
+}
+@CompilerIgnore "true"
+abstract class Numeric inherits Comparable, Summable {
+}
 }
 }
 
