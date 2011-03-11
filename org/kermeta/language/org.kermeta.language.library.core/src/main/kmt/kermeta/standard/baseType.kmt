@@ -1752,9 +1752,9 @@ class Character {        @CompilerIgnore "true"
 }
 
 @CompilerIgnore "true"
-abstract class Summable<G> {
-	operation plus(other : G) : G is abstract
-	operation minus(other : G) : G is abstract
+abstract class Summable {
+	operation plus(other : Summable) : Summable is abstract
+	operation minus(other : Summable) : Summable is abstract
 }
 
 @CompilerIgnore "true"
@@ -1794,7 +1794,7 @@ abstract class Comparable {
 	end
 }
 @CompilerIgnore "true"
-abstract class Numeric inherits Comparable, Summable {
+abstract class Numeric inherits Summable {
 }
 }
 }
