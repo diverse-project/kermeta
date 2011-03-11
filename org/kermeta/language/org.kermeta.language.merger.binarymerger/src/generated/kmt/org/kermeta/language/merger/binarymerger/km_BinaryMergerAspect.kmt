@@ -205,15 +205,6 @@ package kermeta {
 			aspect class Model inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			//aspect class Resource inherits org::kermeta::ecore::binarymerger::Mergeable {
-			//}
-
-			//aspect class ResourceGroup inherits org::kermeta::ecore::binarymerger::Mergeable {
-			//}
-
-			//aspect class SimpleResource inherits org::kermeta::ecore::binarymerger::Mergeable {
-			//}
-
 			aspect class AbstractOperation inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
@@ -243,7 +234,6 @@ package kermeta {
 
 			aspect class TypeMapping inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
-
 
 		}
 
