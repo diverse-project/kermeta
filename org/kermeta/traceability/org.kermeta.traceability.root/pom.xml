@@ -10,7 +10,7 @@
     <groupId>org.kermeta.traceability</groupId>
     <artifactId>traceability.root</artifactId>
     <packaging>pom</packaging>
-    <version>${traceability.version}</version>
+    <version>2.0.2-SNAPSHOT</version>
     <name>Traceability :: Root</name>
 
     <properties>
