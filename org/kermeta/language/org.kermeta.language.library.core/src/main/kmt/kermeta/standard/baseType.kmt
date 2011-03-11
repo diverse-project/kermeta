@@ -447,7 +447,7 @@ class String {
           end
 }
 @CompilerIgnore "true"
-class Integer inherits Summable {        @CompilerIgnore "true"
+class Integer inherits Numeric {        @CompilerIgnore "true"
          operation numberOfLeadingZeros(arg0:Integer) : Integer is do
 
           end
@@ -671,7 +671,7 @@ class Boolean {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Date {        @CompilerIgnore "true"
+class Date inherits Comparable {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -805,7 +805,7 @@ class Date {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Short inherits Summable {        @CompilerIgnore "true"
+class Short inherits Numeric {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -899,7 +899,7 @@ class Short inherits Summable {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Double inherits Summable {        @CompilerIgnore "true"
+class Double inherits Numeric {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1013,7 +1013,7 @@ class Double inherits Summable {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Float inherits Summable {        @CompilerIgnore "true"
+class Float inherits Numeric {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1794,7 +1794,8 @@ abstract class Comparable {
 	end
 }
 @CompilerIgnore "true"
-abstract class Numeric inherits Summable {
+//We propose to put a concrete Numeric in order to allow Numeric.new to create an implicit Float.new
+class Numeric inherits Summable,Comparable {
 }
 }
 }
