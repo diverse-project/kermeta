@@ -76,7 +76,7 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
 
       unresolveType match {
         case None => {
-            var newT = KmBuildHelper.getOrCreateUnresolvedType(newo,"Void") //StructureFactory.eINSTANCE.createUnresolvedType
+            var newT = KmBuildHelper.getOrCreateUnresolvedType(newo,"kermeta::standard::Void") //StructureFactory.eINSTANCE.createUnresolvedType
             // newT.setTypeIdentifier("Void")
             newo.setType(newT)
             //newo.getContainedType.add(newT)

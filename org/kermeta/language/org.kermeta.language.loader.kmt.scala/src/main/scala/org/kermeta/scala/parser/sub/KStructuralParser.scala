@@ -49,14 +49,28 @@ trait KStructuralParser extends KAbstractParser {
   }
   def pExpression : Parser[Expression] = "(" ~> fStatement <~ ")"
 
-  def fBlock : Parser[Expression] = "do" ~> fExpressionLst ~ (fRescueLst?) <~ "end" ^^ { case expL ~ rescueL =>
+  def fBlock : Parser[Expression] = "do" ~> fExpressionLst ~ rep(fRescue) <~ "end" ^^ { case expL ~ rescueL =>
 
       var newo = BehaviorFactory.eINSTANCE.createBlock
       newo.getStatement.addAll(expL)
-      newo.getStatement.add(rescueL getOrElse BehaviorFactory.eINSTANCE.createEmptyExpression)
+      newo.getRescueBlock.addAll(rescueL)
       newo
   }
 
-  def fRescueLst = ident ^^^ { BehaviorFactory.eINSTANCE.createEmptyExpression }
+  def fRescue : Parser[Rescue] = "rescue"~"(" ~> ident ~ ":" ~ packageName ~ ")" ~ fExpressionLst ^^ { case rIdent~_~rPname~_~rescueL =>
+
+      var newo = BehaviorFactory.eINSTANCE.createRescue
+      newo.setExceptionName(rIdent)
+      var newtyperef = BehaviorFactory.eINSTANCE.createTypeReference
+      var newtype = StructureFactory.eINSTANCE.createUnresolvedType
+      newtype.setTypeIdentifier(rPname)
+      newtyperef.setName(rPname)
+      newtyperef.setType(newtype)
+      newtyperef.getContainedType.add(newtype)
+      newo.setExceptionType(newtyperef)
+      newo.getBody.addAll(rescueL)
+
+      newo
+  }
   
 }

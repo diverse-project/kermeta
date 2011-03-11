@@ -10,9 +10,11 @@ import org.kermeta.language.behavior.Expression
 
 trait KRaiseParser extends KAbstractParser {
 
-  def fRaise : Parser[Expression] = "raise" ~ fStatement ^^ { case _ ~ exp =>
+  def fRaise : Parser[Expression] = "raise" ~ fExpressionLst ^^ { case _ ~ exp =>
       var newo = BehaviorFactory.eINSTANCE.createRaise
-      newo.setExpression(exp)
+      if (exp.iterator.hasNext) {
+        newo.setExpression(exp.iterator.next)
+      }
       newo
   }
 
