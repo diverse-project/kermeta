@@ -8,7 +8,7 @@
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block" staticType="//helloworldandif/HelloWorld/main/@body/@statement.2/@containedType.0">
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="//helloworldandif/HelloWorld/main/@body/@statement.0/@containedType.1" identifier="toto">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
             <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" staticType="//helloworldandif/HelloWorld/main/@body/@statement.0/@initialization/@containedType.0" value="Hello World!">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
@@ -46,7 +46,7 @@
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.1/@containedType.1" identifier="toto">
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
             <initialization xsi:type="org_kermeta_language_behavior:IntegerLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.1/@initialization/@containedType.0" value="15">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
@@ -71,7 +71,7 @@
                   <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
+              <condition xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//kermeta/standard/Integer/equals/@containedType.0" name="equals" staticOperation="//kermeta/standard/Integer/equals">
                 <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" staticType="//helloworldandif/HelloWorld/main.1/@body/@statement.2/@value/@condition/@parameters.0/@containedType.0" value="15">
                   <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
                 </parameters>
@@ -1688,7 +1688,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Integer/@kOwnedTags.0" name="Integer" superType="//kermeta/standard/Integer/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Integer"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
         <ownedOperation name="numberOfLeadingZeros" type="//kermeta/standard/Integer/numberOfLeadingZeros/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
@@ -2702,7 +2702,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Short/@kOwnedTags.0" name="Short" superType="//kermeta/standard/Short/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Short"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
         <ownedOperation name="equals" type="//kermeta/standard/Short/equals/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -2961,7 +2961,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Double/@kOwnedTags.0" name="Double" superType="//kermeta/standard/Double/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Double"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
         <ownedOperation name="equals" type="//kermeta/standard/Double/equals/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -3271,7 +3271,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Float/@kOwnedTags.0" name="Float" superType="//kermeta/standard/Float/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Float"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
         <ownedOperation name="equals" type="//kermeta/standard/Float/equals/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -5658,6 +5658,80 @@
             </statement>
           </body>
         </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Summable/@kOwnedTags.0" name="Summable" superType="//kermeta/standard/Summable/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Summable"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <ownedOperation name="plus" type="//kermeta/standard/Summable/plus/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          <ownedParameter name="other" type="//kermeta/standard/Summable/plus/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation name="minus" type="//kermeta/standard/Summable/minus/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          <ownedParameter name="other" type="//kermeta/standard/Summable/minus/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          </ownedParameter>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Comparable/@kOwnedTags.0" name="Comparable" superType="//kermeta/standard/Comparable/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Comparable"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+        <ownedOperation name="compareTo" type="//kermeta/standard/Comparable/compareTo/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/compareTo/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation name="isGreater" type="//kermeta/standard/Comparable/isGreater/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isGreater/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Comparable/isGreater/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//kermeta/standard/Comparable/isGreater/@body/@statement.0/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isLower" type="//kermeta/standard/Comparable/isLower/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isLower/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Comparable/isLower/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//kermeta/standard/Comparable/isLower/@body/@statement.0/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isLowerOrEqual" type="//kermeta/standard/Comparable/isLowerOrEqual/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isLowerOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Comparable/isLowerOrEqual/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//kermeta/standard/Comparable/isLowerOrEqual/@body/@statement.0/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isGreaterOrEqual" type="//kermeta/standard/Comparable/isGreaterOrEqual/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isGreaterOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Comparable/isGreaterOrEqual/@body/@statement.0/@containedType.0">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression" staticType="//kermeta/standard/Comparable/isGreaterOrEqual/@body/@statement.0/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Numeric/@kOwnedTags.0" name="Numeric" superType="//kermeta/standard/Numeric/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Numeric"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Map/@kOwnedTags.0" name="Map" superType="//kermeta/standard/Map/@containedType.2" isAspect="false" typeParameter="//kermeta/standard/Map/K //kermeta/standard/Map/V" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Map"/>

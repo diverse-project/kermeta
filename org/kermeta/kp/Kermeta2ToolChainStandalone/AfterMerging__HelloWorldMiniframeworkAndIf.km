@@ -2500,7 +2500,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Integer/@kOwnedTags.0" name="Integer" superType="//kermeta/standard/Integer/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Integer"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -3982,7 +3982,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Short/@kOwnedTags.0" name="Short" superType="//kermeta/standard/Short/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Short"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -4355,7 +4355,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Double/@kOwnedTags.0" name="Double" superType="//kermeta/standard/Double/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Double"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -4797,7 +4797,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Float/@kOwnedTags.0" name="Float" superType="//kermeta/standard/Float/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Float"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
@@ -8463,6 +8463,140 @@
             <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
           </body>
         </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Summable/@kOwnedTags.0" name="Summable" superType="//kermeta/standard/Summable/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Summable"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="org::kermeta::language::structure" toName=""/>
+          <usings fromQName="kermeta::exceptions" toName=""/>
+        </containedType>
+        <ownedOperation name="plus" type="//kermeta/standard/Summable/plus/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Summable/plus/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation name="minus" type="//kermeta/standard/Summable/minus/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Summable/minus/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Comparable/@kOwnedTags.0" name="Comparable" superType="//kermeta/standard/Comparable/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Comparable"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="org::kermeta::language::structure" toName=""/>
+          <usings fromQName="kermeta::exceptions" toName=""/>
+        </containedType>
+        <ownedOperation name="compareTo" type="//kermeta/standard/Comparable/compareTo/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/compareTo/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation name="isGreater" type="//kermeta/standard/Comparable/isGreater/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isGreater/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isLower" type="//kermeta/standard/Comparable/isLower/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isLower/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isLowerOrEqual" type="//kermeta/standard/Comparable/isLowerOrEqual/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isLowerOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="isGreaterOrEqual" type="//kermeta/standard/Comparable/isGreaterOrEqual/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::exceptions" toName=""/>
+          </containedType>
+          <ownedParameter name="other" type="//kermeta/standard/Comparable/isGreaterOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Numeric/@kOwnedTags.0" name="Numeric" superType="//kermeta/standard/Numeric/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
+        <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Numeric"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Summable">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="org::kermeta::language::structure" toName=""/>
+          <usings fromQName="kermeta::exceptions" toName=""/>
+        </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Map/@kOwnedTags.0" name="Map" superType="//kermeta/standard/Map/@containedType.2" isAspect="false" typeParameter="//kermeta/standard/Map/K //kermeta/standard/Map/V" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Map"/>
