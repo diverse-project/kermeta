@@ -1,0 +1,13 @@
+package org{
+package kermeta{
+package language{
+package structure{
+@CompilerIgnore "true"
+aspect class Class {
+	method new() : org::kermeta::language::structure::Class is do
+	end
+}
+}
+}
+}
+}
