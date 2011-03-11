@@ -90,6 +90,9 @@ aspect class EClass {
 		content.append(context.indentString)
 		content.append("aspectElement ?= aspectElementObj")
 		content.append(context.indentString)
+		content.append("if not aspectElement.isVoid then\n")
+		context.pushIndent
+		content.append(context.indentString)
 		if self.eSuperTypes.size()>0 then
 			if(self.eSuperTypes.first().name == "Object")then
 				content.append(context.indentString)
@@ -132,13 +135,16 @@ aspect class EClass {
 			}
 		end			
 		
+		context.popIndent
+		content.append("else\n")
+		context.pushIndent
+		content.append("result := false\n")
+		context.popIndent
+		content.append("end\n")
+		context.popIndent
+		content.append("end\n")
 		
 		context.popIndent
-		content.append(context.indentString)
-		content.append("end")
-		
-		context.popIndent
-		content.append(context.indentString)
 		result := content.append("}").toString()
 	end
 	
