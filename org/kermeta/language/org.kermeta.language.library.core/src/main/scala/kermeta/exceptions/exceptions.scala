@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore._
 import kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
  
-trait Exception extends ExceptionAspect with kermeta.standard.DefaultObjectImplementation{}
-trait ExceptionAspect extends _root_.java.lang.Throwable with kermeta.standard.ObjectAspect{
+trait Exception extends ExceptionAspect with kermeta.standard.KermetaObject{}
+trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ecore.EObject{
 var message:String=null;
 var nestedException:Exception=null; 
 var stackTrace:String=null;

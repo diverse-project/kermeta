@@ -48,7 +48,7 @@ object JavaConversions {
     import scala.collection.{ generic, immutable, mutable, Traversable }
     import scala.reflect.ClassManifest
   
-    class RichKermetaList[A] ( value : ju.List[A]) extends  _root_.kermeta.standard.DefaultObjectImplementation with  EObjectImplForPrimitive with EList[A] with  _root_.kermeta.standard.KermetaObject{
+    class RichKermetaList[A] ( value : ju.List[A]) extends   EObjectImplForPrimitive with EList[A] with  _root_.kermeta.standard.KermetaObject{
 	
         
      

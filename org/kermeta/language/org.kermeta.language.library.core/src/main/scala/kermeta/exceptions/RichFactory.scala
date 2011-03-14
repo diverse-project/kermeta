@@ -1,5 +1,4 @@
 package kermeta.exceptions
-import kermeta.standard.DefaultObjectImplementation
 
 object RichFactory {
  def createException : Exception = { new Throwable with Exception }
