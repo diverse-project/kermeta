@@ -22,16 +22,16 @@ aspect class ClassDefinition {
 	 */
 	operation getCallableOperationByName( operationName : String ) : Operation is do
 		//stdio.writeln("ClassDefinition.getCallableOperationByName=" + operationName)
-		result := self.ownedOperation.detect{o| o.name == operationName}		
+		result := self.ownedOperation.detect{o|o.name == operationName}
 		if (result.isVoid) then
 			// not found locally, look into superclasses
-			self.superType.select{t | t.isInstanceOf(Class) }.detect{ cl | 
-				//stdio.writeln("cl=" + cl.toString)
+			self.superType.select{t | t.isInstanceOf(Class)}.detect{ cl | 
+				//stdio.writeln("cl=" + cl.asType(Class).toString)
 				// look into super classes and store possible candidate into result
 				result := cl.asType(Class).typeDefinition.asType(ClassDefinition).getCallableOperationByName(operationName)
-				not result.isVoid // condition for detect to stop looking in the super classes 
+				not result.isVoid
 			}
-		end	
+		end
 	end
 	
 	/**
@@ -43,7 +43,7 @@ aspect class ClassDefinition {
 		result := self.ownedAttribute.detect{o| o.name == attributeName}		
 		if (result.isVoid) then
 			// not found locally, look into superclasses
-			self.superType.select{t | t.isInstanceOf(Class) }.detect{ cl | 
+			self.superType.select{t | t.isInstanceOf(Class)}.detect{ cl | 
 				// look into super classes and store possible candidate into result
 				result := cl.asType(Class).typeDefinition.asType(ClassDefinition).getCallablePropertyByName(attributeName)
 				not result.isVoid // condition for detect to stop looking in the super classes 
