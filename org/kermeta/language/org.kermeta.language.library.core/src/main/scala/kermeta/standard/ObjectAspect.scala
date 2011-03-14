@@ -9,6 +9,4 @@ import org.kermeta.language.behavior._
 
 trait ObjectAspect extends EObject {
 
- 
-	
 }

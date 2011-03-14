@@ -5,7 +5,7 @@
 
 package kermeta.standard
 
-trait DefaultObjectImplementation extends org.kermeta.language.structure.impl.ObjectImpl with ObjectAspect{
+trait DefaultObjectImplementation extends ObjectAspect{
 
 /*
   var ownedTags : org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag] = new org.eclipse.emf.common.util.BasicEList[org.kermeta.language.structure.Tag]

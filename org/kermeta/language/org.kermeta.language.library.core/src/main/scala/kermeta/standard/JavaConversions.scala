@@ -47,8 +47,8 @@ object JavaConversions {
     import java.util.{ concurrent => juc }
     import scala.collection.{ generic, immutable, mutable, Traversable }
     import scala.reflect.ClassManifest
-  /*
-    class RichKermetaList[A] ( value : ju.List[A]) extends DefaultObjectImplementation with  EObjectImplForPrimitive with EList[A] with org.kermeta.language.structure.Object{
+  
+    class RichKermetaList[A] ( value : ju.List[A]) extends  _root_.kermeta.standard.DefaultObjectImplementation with  EObjectImplForPrimitive with EList[A] with  _root_.kermeta.standard.KermetaObject{
 	
         
      
@@ -197,22 +197,25 @@ object JavaConversions {
         }
 
         def addAllUnique(a: ju.Collection[A]) :Unit = {
-            var i : ju.Iterator[A] = a.iterator
+            
+           
+            // create a temporary collection for safe iteration
+            var tempColl : java.util.List[A] = new java.util.ArrayList[A];
+            tempColl.addAll(a)
+            var i : ju.Iterator[A] = tempColl.iterator
             while (i.hasNext){
                 var element:A  = i.next
                 if (!value.contains(element))
                     value.add(element)
             }
-            //var res : java.util.List[A] = new java.util.ArrayList[A];
-            //this.each{e=> res.add(e)}
-            //return res
+            
         }
 
         def addAt(arg:Int,elem : A){
             value.add(arg, elem)
         }
-        def removeAt(arg:Int){
-            value.remove(arg)
+        def removeAt(index:Int){
+            value.remove(value.get(index))
         }
 
         def add(e:A) :Boolean= {
@@ -225,13 +228,13 @@ object JavaConversions {
         }
 
 
-        def addAll(c : ju.Collection[_<:A]):Boolean ={
+        def addAll(c : ju.Collection[_ <: A]):Boolean ={
 
             return value.addAll(c);
         }
 
 
-        def addAll(index:Int, c: ju.Collection[_<:A]):Boolean ={
+        def addAll(index:Int, c: ju.Collection[_ <: A]):Boolean ={
             return value.addAll(index, c);
         }
 
@@ -249,8 +252,10 @@ object JavaConversions {
 
 
         def contains( o:Object) :Boolean = {
-
-            return value.contains(o);
+            if (value == null)
+                return false
+            else
+                return value.contains(o);
         }
 
 
@@ -280,9 +285,11 @@ object JavaConversions {
         }
 
 
-        def remove(index:Int):A= {
-
-            return value.remove(index);
+        def remove(obj:Int):A= {
+            this.remove(new java.lang.Integer(obj));
+            if(obj.isInstanceOf[A])
+            	return obj.asInstanceOf[A];
+            return null.asInstanceOf[A];
         }
 
 
@@ -409,7 +416,7 @@ object JavaConversions {
         }
         //TODO
         def excludes(element : A) :java.lang.Boolean={return true;}
-        def one() :A={
+        def one() : A={
 
             if (value.iterator.hasNext)
                 return  value.iterator.next
@@ -426,7 +433,7 @@ object JavaConversions {
         //TODO
         def excludesAll(elements : ju.Collection[A]) :Boolean={/*TODO*/return true}
         def isUnique(a : A) :Boolean={return this.countElement(a)==1}
-        def any() :A={return one()}
+        def any() : A={return one()}
         //TODO
         def empty() :Boolean={return value.size==0}
         //TODO
@@ -500,7 +507,7 @@ object JavaConversions {
     implicit def asBuffer[A](l : ju.List[A]) = new RichKermetaList(l)//l match {
     implicit def asSet[A](l : ju.Set[A]) = new RichKermetaSet(l)//l match {
     implicit def asCol[A](l : ju.Collection[A]) = new RichKermetaCol(l)//l match {
-  	*/
+  	
   
   
 }
