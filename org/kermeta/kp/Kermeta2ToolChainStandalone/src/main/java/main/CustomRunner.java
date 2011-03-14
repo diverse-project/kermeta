@@ -38,8 +38,8 @@ public class CustomRunner {
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/standard/collections.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/utils/hashtable.kmt");
-		//uris
-		//		.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt");
+		uris
+				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.model/src/main/ecore/kermeta.ecore");
 		

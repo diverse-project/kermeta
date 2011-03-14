@@ -127,7 +127,6 @@ public class Main {
 		.createFullStaticResolver();
 			
 		resolvedMU = resolver.doResolving(mergedMU);
-		resolver.checkUnresolved(resolvedMU);
 		CheckDangling.doCheck(resolvedMU);
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(resolvedMU);
@@ -138,6 +137,7 @@ public class Main {
 		
 		//StaticSetting
 		staticsettedMU = resolver.doStaticSetting(resolvedMU);
+		resolver.checkUnresolved(staticsettedMU);
 		//End of Resolving
 		ModelingUnit_serialized = this.saveMu(staticsettedMU);
 		// Save intermediate file
