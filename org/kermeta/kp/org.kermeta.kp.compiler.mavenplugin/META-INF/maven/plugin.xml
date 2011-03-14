@@ -37,7 +37,7 @@ Be careful annotations in the comments are used by maven...</description>
         <parameter>
           <name>kp</name>
           <type>java.io.File</type>
-          <required>true</required>
+          <required>false</required>
           <editable>true</editable>
           <description>Input kermeta project (kp) file</description>
         </parameter>
@@ -47,13 +47,6 @@ Be careful annotations in the comments are used by maven...</description>
           <required>true</required>
           <editable>false</editable>
           <description>Location of the local repository.</description>
-        </parameter>
-        <parameter>
-          <name>output</name>
-          <type>java.io.File</type>
-          <required>true</required>
-          <editable>false</editable>
-          <description>Output Directory file</description>
         </parameter>
         <parameter>
           <name>packageEquivalences</name>
@@ -77,6 +70,22 @@ Be careful annotations in the comments are used by maven...</description>
           <description>List of Remote Repositories used by the resolver</description>
         </parameter>
         <parameter>
+          <name>resourceOutputDirectory</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The directory to place processor and generated resources files. 
+for apt.</description>
+        </parameter>
+        <parameter>
+          <name>sourceOutputDirectory</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>The directory root under which generated source files will be placed; files are placed in
+subdirectories based on package namespace.</description>
+        </parameter>
+        <parameter>
           <name>targetArtifactId</name>
           <type>java.lang.String</type>
           <required>false</required>
@@ -93,11 +102,12 @@ Be careful annotations in the comments are used by maven...</description>
       </parameters>
       <configuration>
         <intermediateFilesRequired implementation="java.lang.Boolean">true</intermediateFilesRequired>
-        <kp implementation="java.io.File">${project.directory}/project.kp</kp>
+        <kp implementation="java.io.File" default-value="${basedir}/project.kp"/>
         <local implementation="org.apache.maven.artifact.repository.ArtifactRepository">${localRepository}</local>
-        <output implementation="java.io.File">${project.build.directory}/generated-sources/kermeta</output>
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
         <remoteRepos implementation="java.util.List">${project.remoteArtifactRepositories}</remoteRepos>
+        <resourceOutputDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-resources/kermeta"/>
+        <sourceOutputDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-sources/kermeta"/>
         <targetArtifactId implementation="java.lang.String">${project.artifactId}</targetArtifactId>
         <targetGroupId implementation="java.lang.String">${project.groupId}</targetGroupId>
       </configuration>
