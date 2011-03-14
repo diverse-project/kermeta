@@ -30,7 +30,7 @@ class FullStaticResolver
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
-		var baseFileName : String init "AfterResolving__HelloWorldMiniframeworkAndLoop"
+		var baseFileName : String init "AfterResolving__HelloWorldMiniframeworkAndRaise"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
@@ -114,6 +114,14 @@ class FullStaticResolver
 			end
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedProperty) then
 				stdio.writeln("UNRESOLVED_PROPERTY -- peropertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)
+			end
+			if p.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+				stdio.writeln("UNRESOLVED_CALL -- name: " + p.asType(org::kermeta::language::behavior::UnresolvedCall).name)
+			end
+			if p.isInstanceOf(org::kermeta::language::behavior::Expression) then
+				if p.asType(org::kermeta::language::behavior::Expression).staticType.isVoid then
+					stdio.writeln("-*-*-STATIC_TYPE VOID FOUND")
+				end
 			end
 			if p.isInstanceOf(org::kermeta::language::structure::KermetaModelElement) then
 				checkUnresolved(p.asType(org::kermeta::language::structure::KermetaModelElement))

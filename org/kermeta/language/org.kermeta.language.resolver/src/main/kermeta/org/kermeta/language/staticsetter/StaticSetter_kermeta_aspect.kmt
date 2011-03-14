@@ -120,12 +120,16 @@ package behavior {
 			self.statement.addAll(newStatements)
 			
 			self.rescueBlock.each{ r |
-				r.inferContainedExpressionStatic(context)
+				r.resolveCallAndInferStatic(context)
 			} 
 			
 			// TODO should we drill down into the other content of Block (for example: tag, ...)
 			
-			setInferedStaticType(self.statement.last.staticType)
+			if (not self.statement.isEmpty()) then
+				setInferedStaticType(self.statement.last.staticType)
+			else
+				setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))
+			end
 			// type of the block is the same as the one of the last instruction of the block 
 			result := self
 		end 
@@ -190,7 +194,7 @@ package behavior {
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if (op.isVoid) then
-					stdio.writeln("Implicit inheritance to Object to find : "+self.name)
+					stdio.writeln("Implicit inheritance to Object to find operation : "+self.name)
 					var objectAny : ClassDefinition
 					objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 					op := objectAny.getCallableOperationByName(self.name)
@@ -231,7 +235,7 @@ package behavior {
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if (prop.isVoid) then
-					stdio.writeln("Implicit inheritance to Object to find : "+self.name)
+					stdio.writeln("Implicit inheritance to Object to find property : "+self.name)
 					var objectAny : ClassDefinition
 					objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 					prop := objectAny.getCallablePropertyByName(self.name)
@@ -467,4 +471,20 @@ package behavior {
 			result := self
 		end 
 	}	
+	
+	aspect class Rescue {
+		operation resolveCallAndInferStatic(context : StaticSetterContext) is do
+			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Rescue") end
+				
+				
+			var newBody : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+
+			self.body.each{rb |
+				newBody.add(rb.resolveCallAndInferStatic(context))
+			}
+			
+			self.body.clear
+			self.body.addAll(newBody) 
+		end 
+	}
 }
