@@ -31,6 +31,21 @@ package helloworldandif {
 				kermeta::io::StdIO.writeln(i)
 				i := i - 1
 			end
+			pleaseNeverCall()
+		rescue (myException : helloworldandif::MyException	)
+			kermeta::io::StdIO.writeln("Good managment of Raise and Rescue")
+			kermeta::io::StdIO.writeln("A seconde instruction for fun")
+		rescue (myException : kermeta::standard::Object	)
+			kermeta::io::StdIO.writeln("Rescue on Object")
 		end
+		
+		operation pleaseNeverCall() is do
+			//there is no Exception type in the current miniframework
+			raise helloworldandif::MyException.new
+		end
+	}
+	
+	class MyException
+	{
 	}
 }
