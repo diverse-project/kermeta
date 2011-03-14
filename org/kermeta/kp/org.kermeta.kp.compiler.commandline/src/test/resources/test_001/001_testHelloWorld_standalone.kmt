@@ -32,7 +32,7 @@ package org {
 				}
 				
 				@CompilerIgnore "true"
-				class Object {
+				class KermetaModelElement {
 				}
 			}
 		}
@@ -62,14 +62,18 @@ package kermeta{
 		@CompilerIgnore "true"
 		class ~Void {
 				
-			/**
+			/* *
 			 * Returns the String identifier '<void>'
 			 */
-			method toString() : kermeta::standard::String is do
-			end			
+			// method toString() : kermeta::standard::String is do
+			// end			
 		}
 
-
+		@CompilerIgnore "true"
+		class Object {        
+			
+		}
+		
 		@CompilerIgnore "true"
 		class String {        
 			
