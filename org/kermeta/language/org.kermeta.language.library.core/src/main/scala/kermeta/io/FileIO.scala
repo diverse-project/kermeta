@@ -7,7 +7,7 @@ package kermeta.io
 
 import java.io._
 
-object FileIO {
+object FileIO  extends kermeta.standard.EObjectImplForPrimitive{
 
   def writeTextFile(file : String, text : String) : Unit = {
     var filename = ""

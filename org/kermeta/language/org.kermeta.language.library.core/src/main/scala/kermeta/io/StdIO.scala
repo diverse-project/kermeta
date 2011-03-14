@@ -5,7 +5,7 @@
 
 package kermeta.io
 
-class StdIOClass {
+class StdIOClass extends kermeta.standard.EObjectImplForPrimitive {
 
     var _console : org.kermeta.console.Console = null
     def console_=(arg : _root_.org.kermeta.console.Console) = {_console = arg}

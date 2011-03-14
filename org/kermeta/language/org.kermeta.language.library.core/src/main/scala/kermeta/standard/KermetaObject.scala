@@ -10,6 +10,7 @@ import scala.collection.JavaConversions._
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.{EStructuralFeature, EClass}
 import org.eclipse.emf.ecore.EObject
+import kermeta.persistence.RichResource
 
 trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def equals(element : Any) : Boolean
