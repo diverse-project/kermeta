@@ -143,8 +143,17 @@ object JavaConversions {
         def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
         def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
         def detect(detector : A=> Boolean) :A={
-            val res = this.select(e=> detector(e))
-            if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+            //val res = this.select(e=> detector(e))
+            //if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+            var it : ju.Iterator[A] = value.iterator
+            var elem : A = null.asInstanceOf[A]
+            while (it.hasNext) {
+              elem = it.next
+              if (detector(elem)) {
+                return elem
+              }
+            }
+            return null.asInstanceOf[A]
         }
         //def iterator() :java.laIterator[A]={return value.iterator}
         /*TODO*/def includesAll(elements : ju.Collection[A]) :Boolean={return true}
