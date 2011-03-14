@@ -147,11 +147,11 @@ public class KermetaCompiler {
 		.createFullStaticResolver();
 		
 		ModelingUnit resolvedMU = resolver.doResolving(convertedModelingUnit);
-		resolver.checkUnresolved(resolvedMU);
 				
 		
 		//StaticSetting
 		ModelingUnit staticsettedMU = resolver.doStaticSetting(resolvedMU);
+		resolver.checkUnresolved(resolvedMU);
 		//End of Resolving
 		return staticsettedMU;
 	}
