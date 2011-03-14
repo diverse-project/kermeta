@@ -144,7 +144,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
 	        
 	        
-    	} catch (IOException e) {
+    	} catch (Exception e) {
 			this.getLog().error(e);
 			throw new MojoFailureException(e.toString());
 		}
