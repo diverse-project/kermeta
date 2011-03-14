@@ -67,9 +67,7 @@ public class KpCompilerMojo extends AbstractMojo {
     protected MavenProject project;
     /**
      * Input kermeta project (kp) file
-     * @parameter expression="${basedir}/project.kp"
-     * @parameter
-     * @required
+     * @parameter default-value="${basedir}/project.kp"
      */
     private File kp;
     
@@ -121,8 +119,10 @@ public class KpCompilerMojo extends AbstractMojo {
 	        org.apache.log4j.BasicConfigurator.configure();
 	
 	        this.getLog().info("Generating sources in "+sourceOutputDirectory.getAbsolutePath());
+	        this.getLog().info("Generating other resources in "+resourceOutputDirectory.getAbsolutePath());
 	        
 	        checkFile(kp.getAbsolutePath().toString());
+	        KermetaCompiler.initializeFactory();
 	        KermetaCompiler compiler = new KermetaCompiler(sourceOutputDirectory.toString(), intermediateFilesRequired);
 			
 			compiler.kp2bytecode(kp.toString());
@@ -131,6 +131,10 @@ public class KpCompilerMojo extends AbstractMojo {
 			// tell maven to include generated META-INF
 			Resource resource = new Resource();
 	        resource.setDirectory(resourceOutputDirectory.getPath() + "/META-INF");
+	        resource.setTargetPath("META-INF");
+	        project.getResources().add(resource);
+	        resource = new Resource();
+	        resource.setDirectory(sourceOutputDirectory.getPath() + "/META-INF");
 	        resource.setTargetPath("META-INF");
 	        project.getResources().add(resource);
 	        
@@ -142,7 +146,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
     	} catch (IOException e) {
 			this.getLog().error(e);
-			e.printStackTrace();
+			throw new MojoFailureException(e.toString());
 		}
         /* CHECK IF GENERATION IF OK */
        /* if (!CheckSumFileUtils.compareCheckSum(model.getAbsolutePath(), output.getAbsolutePath())) {
