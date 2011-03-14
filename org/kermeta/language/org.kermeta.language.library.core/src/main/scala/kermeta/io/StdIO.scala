@@ -5,33 +5,58 @@
 
 package kermeta.io
 
-object StdIO {
+class StdIOClass {
 
-  def write(obj : AnyRef) : Unit = {
-    Console.print(obj)
-  }
+    var _console : org.kermeta.console.Console = null
+    def console_=(arg : _root_.org.kermeta.console.Console) = {_console = arg}
 
-  def errorln(obj : AnyRef) : Unit = {
-    Console.println(obj) //TODO PRINT TO ERR CONSOLE
-  }
-
-  def error(obj : AnyRef) : Unit = {
-    Console.print(obj)
-  }
-
-  def writeln(obj : AnyRef) : Unit = {
-    Console.println(obj)
-  }
-
-  def read(prompt : String) : String = {
-    if (prompt != null){
-      println(prompt);
+    def write(obj : AnyRef) : Unit = {
+        if (_console == null){
+            Console.print(obj)
+        }else
+            _console.write(obj.toString)
     }
-    var ligne_lue:String =null;
-    var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
-    var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
-    ligne_lue=entree.readLine();
-    return ligne_lue;
-  }
 
+    def errorln(obj : AnyRef) : Unit = {
+        if (_console == null){
+            Console.println(obj) //TODO PRINT TO ERR CONSOLE
+        }else
+            _console.errorln(obj.toString)
+
+    }
+
+    def error(obj : AnyRef) : Unit = {
+        if (_console == null){
+            Console.print(obj)
+        }else
+            _console.errorln(obj.toString)
+    }
+
+    def writeln(obj : AnyRef) : Unit = {
+        if (_console == null){
+            Console.println(obj)
+        }else
+            _console.writeln(obj.toString)
+    }
+
+    def read(prompt : String) : String = {
+        if (_console == null){
+            if (prompt != null){
+                println(prompt);
+            }
+            var ligne_lue:String =null;
+            var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
+            var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
+            ligne_lue=entree.readLine();
+            return ligne_lue;
+        }else
+        {
+            _console.writeln(prompt)
+            return _console.readln()
+        }
+    }
+
+}
+
+object stdio extends StdIOClass{
 }
