@@ -54,7 +54,16 @@ public class KermetaCompiler {
 
 	private void registerMVNUrlHandler() {
 		StringBuffer results = new StringBuffer();
-		
+		try {
+			results.append("Trying to get java.protocol.handler.pkgs\r\n");
+			String s = System.getProperty("java.protocol.handler.pkgs");
+			if (s == null) s = "no such property";
+			s += "; get succeeded\r\n";
+			results.append(s);
+		}
+		catch (Throwable e) {
+			results.append(e.toString() + "\r\n");
+		}
 		try {
 			results.append("Trying to set java.protocol.handler.pkgs with protocols from org.ops4j.pax.url\r\n");
 			System.setProperty("java.protocol.handler.pkgs", "org.ops4j.pax.url");
