@@ -50,7 +50,7 @@ class FileIO
 
 
 @CompilerIgnore "true"
-class StdIO
+singleton StdIO
 {
 	/**
 	 * Writes the object to standard output
