@@ -18,7 +18,7 @@ import java.util.List;
 public class CustomRunner {
 	
 	public static final String CUSTOM_PATH = "C:/Users/cbouhour/WorkspaceJAVA_DEV_K2/";
-	public static final String SUFFIX_SAVE = "_HelloWorldMiniframework";
+	public static final String SUFFIX_SAVE = "_HelloWorldMiniframeworkAndRaise";
 	
 	public static void main(String[] args) throws IOException {
 
@@ -27,7 +27,9 @@ public class CustomRunner {
 		// Parse framework and test File
 		List<String> uris = new ArrayList<String>();
 		uris
-				.add(CUSTOM_PATH+"org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/src/001_testHelloWorld.kmt");
+				.add(CUSTOM_PATH+"org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/src/001_testHelloWorldAndRaise.kmt");
+		//uris
+		//		.add(CUSTOM_PATH+"org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/src/001_testHelloWorld_standalone.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt");
 		uris
@@ -40,6 +42,10 @@ public class CustomRunner {
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/utils/hashtable.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt");
+		uris
+				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/exceptions/exceptions.kmt");
+		uris
+				.add(CUSTOM_PATH+"org.kermeta.language.library.core/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt");
 		uris
 				.add(CUSTOM_PATH+"org.kermeta.language.model/src/main/ecore/kermeta.ecore");
 		
