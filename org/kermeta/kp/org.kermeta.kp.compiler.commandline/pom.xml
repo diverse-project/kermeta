@@ -95,7 +95,6 @@
         	<groupId>org.ops4j.pax.url</groupId>
         	<artifactId>pax-url-mvn</artifactId>
         	<version>1.2.5</version>
-        	<type>bundle</type>
         </dependency>
     </dependencies>
 
