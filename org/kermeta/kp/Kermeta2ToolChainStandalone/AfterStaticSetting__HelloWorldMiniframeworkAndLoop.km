@@ -207,7 +207,7 @@
         <ownedOperation name="getAllContents" type="//kermeta/emfpersistence/Resource/getAllContents/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Iterator">
-            <typeParamBinding variable="//kermeta/standard/Iterator/next/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Iterator/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -218,7 +218,7 @@
         <ownedOperation name="getContents" type="//kermeta/emfpersistence/Resource/getContents/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -239,7 +239,7 @@
         <ownedOperation name="getErrors" type="//kermeta/emfpersistence/Resource/getErrors/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -274,7 +274,7 @@
         <ownedOperation name="getWarnings" type="//kermeta/emfpersistence/Resource/getWarnings/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -339,7 +339,7 @@
         <ownedOperation name="eAdapters" type="//kermeta/emfpersistence/Resource/eAdapters/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -384,7 +384,7 @@
         <ownedOperation name="getResources" type="//kermeta/emfpersistence/ResourceSet/getResources/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -395,7 +395,7 @@
         <ownedOperation name="getAllContents" type="//kermeta/emfpersistence/ResourceSet/getAllContents/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Iterator">
-            <typeParamBinding variable="//kermeta/standard/Iterator/next/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Iterator/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -442,7 +442,7 @@
         <ownedOperation name="getAdapterFactories" type="//kermeta/emfpersistence/ResourceSet/getAdapterFactories/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -467,7 +467,7 @@
         <ownedOperation name="eAdapters" type="//kermeta/emfpersistence/ResourceSet/eAdapters/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -774,7 +774,7 @@
           </ownedParameter>
           <ownedParameter name="args" type="//kermeta/standard/Object/invoke/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedCollection">
-              <typeParamBinding variable="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/OrderedCollection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
               </typeParamBinding>
             </containedType>
@@ -892,7 +892,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="arg0" type="//kermeta/standard/String/valueOf.1/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -906,7 +906,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="arg0" type="//kermeta/standard/String/valueOf.2/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -1059,7 +1059,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="arg0" type="//kermeta/standard/String/copyValueOf/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -1079,7 +1079,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="arg0" type="//kermeta/standard/String/copyValueOf.1/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -1116,7 +1116,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/String/format/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
               </typeParamBinding>
             </containedType>
@@ -1136,7 +1136,7 @@
           </ownedParameter>
           <ownedParameter name="arg2" type="//kermeta/standard/String/getChars/@ownedParameter.2/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -1321,7 +1321,7 @@
         <ownedOperation name="split" type="//kermeta/standard/String/split/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-            <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
             </typeParamBinding>
           </containedType>
@@ -1338,7 +1338,7 @@
         <ownedOperation name="split" type="//kermeta/standard/String/split.1/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-            <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
             </typeParamBinding>
           </containedType>
@@ -1398,7 +1398,7 @@
         <ownedOperation name="toCharArray" type="//kermeta/standard/String/toCharArray/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-            <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
             </typeParamBinding>
           </containedType>
@@ -3076,7 +3076,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/StringBuffer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/StringBuffer/append.3/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3090,7 +3090,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/StringBuffer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/StringBuffer/append.4/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3230,7 +3230,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/StringBuffer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/StringBuffer/append.17/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3250,7 +3250,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/StringBuffer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/StringBuffer/append.18/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3366,7 +3366,7 @@
           </ownedParameter>
           <ownedParameter name="arg2" type="//kermeta/standard/StringBuffer/getChars/@ownedParameter.2/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3567,7 +3567,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/StringBuffer/insert/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3616,7 +3616,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/StringBuffer/insert.3/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3789,7 +3789,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/StringBuffer/insert.16/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -3832,7 +3832,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/StringBuffer/insert.19/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4092,7 +4092,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/codePointAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4109,7 +4109,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/codePointAt.1/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4129,7 +4129,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/codePointBefore/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4146,7 +4146,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/codePointBefore.1/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4166,7 +4166,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/codePointCount/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4186,7 +4186,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           <ownedParameter name="arg0" type="//kermeta/standard/Character/offsetByCodePoints/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4215,7 +4215,7 @@
           </ownedParameter>
           <ownedParameter name="arg1" type="//kermeta/standard/Character/toChars/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="//kermeta/standard/Collection/G">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
               </typeParamBinding>
             </containedType>
@@ -4230,7 +4230,7 @@
         <ownedOperation name="toChars" type="//kermeta/standard/Character/toChars.1/@containedType.0">
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-            <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Character"/>
             </typeParamBinding>
           </containedType>
@@ -4874,33 +4874,34 @@
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Collection/@kOwnedTags.0" name="Collection" superType="//kermeta/standard/Collection/@containedType.0" isAspect="false" typeParameter="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="true" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Collection/@kOwnedTags.0" name="Collection" superType="//kermeta/standard/Collection/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Collection/G" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Collection"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
         <ownedOperation name="asBag" type="//kermeta/standard/Collection/asBag/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
         </ownedOperation>
         <ownedOperation name="asSet" type="//kermeta/standard/Collection/asSet/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
         </ownedOperation>
         <ownedOperation name="asOrderedSet" type="//kermeta/standard/Collection/asOrderedSet/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
         </ownedOperation>
         <ownedOperation name="asSequence" type="//kermeta/standard/Collection/asSequence/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
         </ownedOperation>
         <ownedOperation name="forAllCpl" type="//kermeta/standard/Collection/forAllCpl/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="f" type="//kermeta/standard/Collection/forAllCpl/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0 //kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G //kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -4911,7 +4912,7 @@
         <ownedOperation name="existsCpl" type="//kermeta/standard/Collection/existsCpl/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="f" type="//kermeta/standard/Collection/existsCpl/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0 //kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G //kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -4921,14 +4922,14 @@
         </ownedOperation>
         <ownedOperation name="add" type="//kermeta/standard/Collection/add/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/add/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="remove" type="//kermeta/standard/Collection/remove/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/remove/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -4943,7 +4944,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="elements" type="//kermeta/standard/Collection/addAll/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/addAll/@body/@containedType.0">
@@ -4952,14 +4953,14 @@
         </ownedOperation>
         <ownedOperation name="contains" type="//kermeta/standard/Collection/contains/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/contains/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="includes" type="//kermeta/standard/Collection/includes/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/includes/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -4968,7 +4969,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="elements" type="//kermeta/standard/Collection/containsAll/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/containsAll/@body/@containedType.0">
@@ -4979,7 +4980,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="elements" type="//kermeta/standard/Collection/includesAll/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/includesAll/@body/@containedType.0">
@@ -4988,7 +4989,7 @@
         </ownedOperation>
         <ownedOperation name="excludes" type="//kermeta/standard/Collection/excludes/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/excludes/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -4997,7 +4998,7 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="elements" type="//kermeta/standard/Collection/excludesAll/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/excludesAll/@body/@containedType.0">
@@ -5030,18 +5031,18 @@
         </ownedOperation>
         <ownedOperation name="iterator" type="//kermeta/standard/Collection/iterator/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Iterator">
-            <typeParamBinding variable="//kermeta/standard/Iterator/next/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Iterator/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/iterator/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="one" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="one" type="//kermeta/standard/Collection/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/one/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="any" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="any" type="//kermeta/standard/Collection/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/any/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5049,7 +5050,7 @@
         <ownedOperation name="each" type="//kermeta/standard/Collection/each/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="func" type="//kermeta/standard/Collection/each/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </containedType>
           </ownedParameter>
@@ -5060,7 +5061,7 @@
         <ownedOperation name="indexedEach" type="//kermeta/standard/Collection/indexedEach/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="func" type="//kermeta/standard/Collection/indexedEach/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0 //kermeta/standard/Collection/indexedEach/@ownedParameter.0/@containedType.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G //kermeta/standard/Collection/indexedEach/@ownedParameter.0/@containedType.0/@containedType.0">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/EachContext"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </containedType>
@@ -5072,7 +5073,7 @@
         <ownedOperation name="forAll" type="//kermeta/standard/Collection/forAll/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="func" type="//kermeta/standard/Collection/forAll/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -5083,7 +5084,7 @@
         <ownedOperation name="exists" type="//kermeta/standard/Collection/exists/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="func" type="//kermeta/standard/Collection/exists/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -5091,33 +5092,31 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="collect" type="//kermeta/standard/Collection/collect/@containedType.0" typeParameter="//kermeta/standard/Collection/collect/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="collect" type="//kermeta/standard/Collection/collect/@containedType.1" typeParameter="//kermeta/standard/Collection/collect/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="collector" type="//kermeta/standard/Collection/collect/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/collect/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="isUnique" type="//kermeta/standard/Collection/isUnique/@containedType.0" typeParameter="//kermeta/standard/Collection/isUnique/@ownedParameter.0/@containedType.0/@containedType.0">
+        <ownedOperation name="isUnique" type="//kermeta/standard/Collection/isUnique/@containedType.1" typeParameter="//kermeta/standard/Collection/isUnique/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
           <ownedParameter name="collector" type="//kermeta/standard/Collection/isUnique/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
-            </containedType>
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/isUnique/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="detect" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="detect" type="//kermeta/standard/Collection/G">
           <ownedParameter name="detector" type="//kermeta/standard/Collection/detect/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -5127,10 +5126,10 @@
         </ownedOperation>
         <ownedOperation name="select" type="//kermeta/standard/Collection/select/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="selector" type="//kermeta/standard/Collection/select/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -5140,12 +5139,10 @@
         </ownedOperation>
         <ownedOperation name="reject" type="//kermeta/standard/Collection/reject/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="rejector" type="//kermeta/standard/Collection/reject/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:ProductType" type="//kermeta/standard/Collection/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </containedType>
           </ownedParameter>
@@ -5155,12 +5152,12 @@
         </ownedOperation>
         <ownedOperation name="count" type="//kermeta/standard/Collection/count/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
-          <ownedParameter name="element" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Collection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/count/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="sum" type="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="sum" type="//kermeta/standard/Collection/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Collection/sum/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5194,21 +5191,22 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Set/@kOwnedTags.0" name="Set" superType="//kermeta/standard/Set/@containedType.0" isAspect="false" typeParameter="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Set/@kOwnedTags.0" name="Set" superType="//kermeta/standard/Set/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Set/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Set"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-          <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/Collection/G"/>
         </containedType>
         <ownedOperation name="add" type="//kermeta/standard/Set/add/@containedType.0" superOperation="//kermeta/standard/Collection/add">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Set/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/add/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="remove" type="//kermeta/standard/Set/remove/@containedType.0" superOperation="//kermeta/standard/Collection/remove">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Set/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/remove/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5224,11 +5222,11 @@
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Set/union/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Set/union/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-              <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Set/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/union/@body/@containedType.0">
@@ -5237,11 +5235,11 @@
         </ownedOperation>
         <ownedOperation name="unionWithBag" type="//kermeta/standard/Set/unionWithBag/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Set/unionWithBag/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-              <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Bag/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/unionWithBag/@body/@containedType.0">
@@ -5250,11 +5248,11 @@
         </ownedOperation>
         <ownedOperation name="intersection" type="//kermeta/standard/Set/intersection/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Set/intersection/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/intersection/@body/@containedType.0">
@@ -5263,11 +5261,11 @@
         </ownedOperation>
         <ownedOperation name="minus" type="//kermeta/standard/Set/minus/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Set/minus/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-              <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Set/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/minus/@body/@containedType.0">
@@ -5276,7 +5274,7 @@
         </ownedOperation>
         <ownedOperation name="asSet" type="//kermeta/standard/Set/asSet/@containedType.0" superOperation="//kermeta/standard/Collection/asSet">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/asSet/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5284,7 +5282,7 @@
         </ownedOperation>
         <ownedOperation name="asOrderedSet" type="//kermeta/standard/Set/asOrderedSet/@containedType.0" superOperation="//kermeta/standard/Collection/asOrderedSet">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/asOrderedSet/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5292,7 +5290,7 @@
         </ownedOperation>
         <ownedOperation name="asBag" type="//kermeta/standard/Set/asBag/@containedType.0" superOperation="//kermeta/standard/Collection/asBag">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/asBag/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5300,7 +5298,7 @@
         </ownedOperation>
         <ownedOperation name="asSequence" type="//kermeta/standard/Set/asSequence/@containedType.0" superOperation="//kermeta/standard/Collection/asSequence">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/asSequence/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5308,11 +5306,11 @@
         </ownedOperation>
         <ownedOperation name="symmetricDifference" type="//kermeta/standard/Set/symmetricDifference/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <ownedParameter name="s" type="//kermeta/standard/Set/symmetricDifference/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-              <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Set/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/symmetricDifference/@body/@containedType.0">
@@ -5321,7 +5319,7 @@
         </ownedOperation>
         <ownedOperation name="flatten" type="//kermeta/standard/Set/flatten/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Set/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -5331,23 +5329,21 @@
         </ownedOperation>
         <ownedOperation name="concatenate" type="//kermeta/standard/Set/concatenate/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
           <ownedParameter name="less" type="//kermeta/standard/Set/concatenate/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-              <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="pivot" type="//kermeta/standard/Set/concatenate/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-              <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="greater" type="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-              <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-              </typeParamBinding>
+              <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Set/concatenate/@body/@containedType.0">
@@ -5355,10 +5351,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Bag/@kOwnedTags.0" name="Bag" superType="//kermeta/standard/Bag/@containedType.0" isAspect="false" typeParameter="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Bag/@kOwnedTags.0" name="Bag" superType="//kermeta/standard/Bag/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Bag/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Bag"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-          <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/Collection/G"/>
         </containedType>
         <ownedOperation name="equals" type="//kermeta/standard/Bag/equals/@containedType.0" superOperation="//kermeta/standard/Object/equals">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -5371,11 +5368,11 @@
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Bag/union/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Bag/union/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-              <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/union/@body/@containedType.0">
@@ -5384,11 +5381,11 @@
         </ownedOperation>
         <ownedOperation name="intersection" type="//kermeta/standard/Bag/intersection/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Bag/intersection/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-              <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Bag/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/intersection/@body/@containedType.0">
@@ -5397,11 +5394,11 @@
         </ownedOperation>
         <ownedOperation name="intersectionWithSet" type="//kermeta/standard/Bag/intersectionWithSet/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <ownedParameter name="elements" type="//kermeta/standard/Bag/intersectionWithSet/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-              <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Set/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/intersectionWithSet/@body/@containedType.0">
@@ -5419,14 +5416,14 @@
         </ownedOperation>
         <ownedOperation name="removeOne" type="//kermeta/standard/Bag/removeOne/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Bag/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/removeOne/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="asSet" type="//kermeta/standard/Bag/asSet/@containedType.0" superOperation="//kermeta/standard/Collection/asSet">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/asSet/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5434,7 +5431,7 @@
         </ownedOperation>
         <ownedOperation name="asOrderedSet" type="//kermeta/standard/Bag/asOrderedSet/@containedType.0" superOperation="//kermeta/standard/Collection/asOrderedSet">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/asOrderedSet/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5442,7 +5439,7 @@
         </ownedOperation>
         <ownedOperation name="asBag" type="//kermeta/standard/Bag/asBag/@containedType.0" superOperation="//kermeta/standard/Collection/asBag">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/asBag/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5450,7 +5447,7 @@
         </ownedOperation>
         <ownedOperation name="asSequence" type="//kermeta/standard/Bag/asSequence/@containedType.0" superOperation="//kermeta/standard/Collection/asSequence">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/asSequence/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5458,25 +5455,25 @@
         </ownedOperation>
         <ownedOperation name="including" type="//kermeta/standard/Bag/including/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
-          <ownedParameter name="object" type="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="object" type="//kermeta/standard/Bag/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/including/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="excluding" type="//kermeta/standard/Bag/excluding/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Bag/G"/>
           </containedType>
-          <ownedParameter name="object" type="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="object" type="//kermeta/standard/Bag/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/excluding/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="flatten" type="//kermeta/standard/Bag/flatten/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-            <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <typeParamBinding variable="//kermeta/standard/Bag/G">
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
             </typeParamBinding>
           </containedType>
@@ -5486,23 +5483,21 @@
         </ownedOperation>
         <ownedOperation name="concatenate" type="//kermeta/standard/Bag/concatenate/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="less" type="//kermeta/standard/Bag/concatenate/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-              <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="pivot" type="//kermeta/standard/Bag/concatenate/@ownedParameter.1/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-              <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+              <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="greater" type="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-              <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-              </typeParamBinding>
+              <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Bag/concatenate/@body/@containedType.0">
@@ -5510,19 +5505,18 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedCollection/@kOwnedTags.0" name="OrderedCollection" superType="//kermeta/standard/OrderedCollection/@containedType.0" isAspect="false" typeParameter="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="true" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedCollection/@kOwnedTags.0" name="OrderedCollection" superType="//kermeta/standard/OrderedCollection/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/OrderedCollection/G" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedCollection"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-          <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-          </typeParamBinding>
+          <typeParamBinding variable="//kermeta/standard/Collection/G"/>
         </containedType>
         <ownedOperation name="addAt" type="//kermeta/standard/OrderedCollection/addAt/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="index" type="//kermeta/standard/OrderedCollection/addAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedCollection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedCollection/addAt/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5536,7 +5530,7 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="elementAt" type="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="elementAt" type="//kermeta/standard/OrderedCollection/G">
           <ownedParameter name="index" type="//kermeta/standard/OrderedCollection/elementAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
@@ -5544,12 +5538,12 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="first" type="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="first" type="//kermeta/standard/OrderedCollection/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedCollection/first/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="last" type="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="last" type="//kermeta/standard/OrderedCollection/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedCollection/last/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5565,23 +5559,24 @@
         </ownedOperation>
         <ownedOperation name="indexOf" type="//kermeta/standard/OrderedCollection/indexOf/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedCollection/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedCollection/indexOf/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedSet/@kOwnedTags.0" name="OrderedSet" superType="//kermeta/standard/OrderedSet/@containedType.0 //kermeta/standard/OrderedSet/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/OrderedSet/@kOwnedTags.0" name="OrderedSet" superType="//kermeta/standard/OrderedSet/@containedType.1 //kermeta/standard/OrderedSet/@containedType.2" isAspect="false" typeParameter="//kermeta/standard/OrderedSet/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/OrderedSet"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-          <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/Set/G"/>
         </containedType>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedCollection">
-          <typeParamBinding variable="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/OrderedCollection/G"/>
         </containedType>
         <ownedOperation name="add" type="//kermeta/standard/OrderedSet/add/@containedType.0" superOperation="//kermeta/standard/Set/add">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedSet/add/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5591,7 +5586,7 @@
           <ownedParameter name="index" type="//kermeta/standard/OrderedSet/addAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedSet/addAt/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5607,7 +5602,7 @@
         </ownedOperation>
         <ownedOperation name="subSet" type="//kermeta/standard/OrderedSet/subSet/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
           <ownedParameter name="min" type="//kermeta/standard/OrderedSet/subSet/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
@@ -5621,37 +5616,35 @@
         </ownedOperation>
         <ownedOperation name="append" type="//kermeta/standard/OrderedSet/append/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedSet/append/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="preppend" type="//kermeta/standard/OrderedSet/preppend/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
-          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/OrderedSet/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedSet/preppend/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="insertAt" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedSet">
-            <typeParamBinding variable="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/OrderedSet/G"/>
           </containedType>
           <ownedParameter name="index" type="//kermeta/standard/OrderedSet/insertAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
-          <ownedParameter name="subject" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="subject" type="//kermeta/standard/OrderedSet/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/OrderedSet/insertAt/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="at" type="//kermeta/standard/OrderedSet/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="at" type="//kermeta/standard/OrderedSet/G">
           <ownedParameter name="index" type="//kermeta/standard/OrderedSet/at/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
@@ -5660,13 +5653,14 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Sequence/@kOwnedTags.0" name="Sequence" superType="//kermeta/standard/Sequence/@containedType.0 //kermeta/standard/Sequence/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Sequence/@kOwnedTags.0" name="Sequence" superType="//kermeta/standard/Sequence/@containedType.1 //kermeta/standard/Sequence/@containedType.2" isAspect="false" typeParameter="//kermeta/standard/Sequence/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Sequence"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Bag">
-          <typeParamBinding variable="//kermeta/standard/Bag/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/Bag/G"/>
         </containedType>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/OrderedCollection">
-          <typeParamBinding variable="//kermeta/standard/OrderedCollection/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <typeParamBinding variable="//kermeta/standard/OrderedCollection/G"/>
         </containedType>
         <ownedOperation name="equals" type="//kermeta/standard/Sequence/equals/@containedType.0" superOperation="//kermeta/standard/OrderedCollection/equals">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -5679,7 +5673,7 @@
         </ownedOperation>
         <ownedOperation name="subSequence" type="//kermeta/standard/Sequence/subSequence/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="min" type="//kermeta/standard/Sequence/subSequence/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
@@ -5693,37 +5687,35 @@
         </ownedOperation>
         <ownedOperation name="append" type="//kermeta/standard/Sequence/append/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
-          <ownedParameter name="element" type="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Sequence/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Sequence/append/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="preppend" type="//kermeta/standard/Sequence/preppend/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
-          <ownedParameter name="element" type="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Sequence/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Sequence/preppend/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="insertAt" type="//kermeta/standard/Sequence/insertAt/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Sequence">
-            <typeParamBinding variable="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/Sequence/G"/>
           </containedType>
           <ownedParameter name="index" type="//kermeta/standard/Sequence/insertAt/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
-          <ownedParameter name="element" type="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="element" type="//kermeta/standard/Sequence/G"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Sequence/insertAt/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="at" type="//kermeta/standard/Sequence/insertAt/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <ownedOperation name="at" type="//kermeta/standard/Sequence/G">
           <ownedParameter name="index" type="//kermeta/standard/Sequence/at/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
           </ownedParameter>
@@ -5732,8 +5724,9 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Iterator/@kOwnedTags.0" name="Iterator" superType="//kermeta/standard/Iterator/@containedType.0" isAspect="false" typeParameter="//kermeta/standard/Iterator/next/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Iterator/@kOwnedTags.0" name="Iterator" superType="//kermeta/standard/Iterator/@containedType.1" isAspect="false" typeParameter="//kermeta/standard/Iterator/G" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Iterator"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
         <ownedOperation name="isOff" type="//kermeta/standard/Iterator/isOff/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
@@ -5747,8 +5740,7 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="next" type="//kermeta/standard/Iterator/next/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
+        <ownedOperation name="next" type="//kermeta/standard/Iterator/G">
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/standard/Iterator/next/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5756,8 +5748,10 @@
       </ownedTypeDefinition>
     </nestedPackage>
     <nestedPackage name="utils">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/utils/Hashtable/@kOwnedTags.0" name="Hashtable" superType="//kermeta/utils/Hashtable/@containedType.0" isAspect="false" typeParameter="//kermeta/utils/Hashtable/keys/@containedType.0/@typeParamBinding.0/@containedType.0 //kermeta/utils/Hashtable/values/@containedType.0/@typeParamBinding.0/@containedType.0" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/utils/Hashtable/@kOwnedTags.0" name="Hashtable" superType="//kermeta/utils/Hashtable/@containedType.2" isAspect="false" typeParameter="//kermeta/utils/Hashtable/K //kermeta/utils/Hashtable/V" isAbstract="false" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/utils/Hashtable"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="K"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
         <ownedOperation name="size" type="//kermeta/utils/Hashtable/size/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Integer"/>
@@ -5767,7 +5761,7 @@
         </ownedOperation>
         <ownedOperation name="keyIterator" type="//kermeta/utils/Hashtable/keyIterator/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Iterator">
-            <typeParamBinding variable="//kermeta/standard/Iterator/next/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Iterator/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/keyIterator/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5775,29 +5769,29 @@
         </ownedOperation>
         <ownedOperation name="valueIterator" type="//kermeta/utils/Hashtable/valueIterator/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Iterator">
-            <typeParamBinding variable="//kermeta/standard/Iterator/next/@containedType.0"/>
+            <typeParamBinding variable="//kermeta/standard/Iterator/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/valueIterator/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="getValue" type="//kermeta/utils/Hashtable/values/@containedType.0/@typeParamBinding.0/@containedType.0">
-          <ownedParameter name="key" type="//kermeta/utils/Hashtable/keys/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+        <ownedOperation name="getValue" type="//kermeta/utils/Hashtable/V">
+          <ownedParameter name="key" type="//kermeta/utils/Hashtable/K"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/getValue/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="put" type="//kermeta/utils/Hashtable/put/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="key" type="//kermeta/utils/Hashtable/keys/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-          <ownedParameter name="value" type="//kermeta/utils/Hashtable/values/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="key" type="//kermeta/utils/Hashtable/K"/>
+          <ownedParameter name="value" type="//kermeta/utils/Hashtable/V"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/put/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="remove" type="//kermeta/utils/Hashtable/remove/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
-          <ownedParameter name="key" type="//kermeta/utils/Hashtable/keys/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="key" type="//kermeta/utils/Hashtable/K"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/remove/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -5810,9 +5804,7 @@
         </ownedOperation>
         <ownedOperation name="keys" type="//kermeta/utils/Hashtable/keys/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Set">
-            <typeParamBinding variable="//kermeta/standard/Set/concatenate/@ownedParameter.2/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="K"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/Set/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/keys/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5820,9 +5812,7 @@
         </ownedOperation>
         <ownedOperation name="values" type="//kermeta/utils/Hashtable/values/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Collection">
-            <typeParamBinding variable="//kermeta/standard/Collection/reject/@containedType.0/@typeParamBinding.0/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
-            </typeParamBinding>
+            <typeParamBinding variable="//kermeta/standard/Collection/G"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/values/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
@@ -5830,7 +5820,7 @@
         </ownedOperation>
         <ownedOperation name="containsKey" type="//kermeta/utils/Hashtable/containsKey/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
-          <ownedParameter name="key" type="//kermeta/utils/Hashtable/keys/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+          <ownedParameter name="key" type="//kermeta/utils/Hashtable/K"/>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/utils/Hashtable/containsKey/@body/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
@@ -6248,24 +6238,13 @@
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/body"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/behavior/Expression"/>
             </ownedAttribute>
-            <ownedAttribute kTag="//org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.0 //org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.1" name="stereotype" type="//org/kermeta/language/structure/Constraint/stereotype/@containedType.0" isOrdered="true" isReadOnly="true" isComposite="true">
+            <ownedAttribute kTag="//org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.0 //org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.1" name="stereotype" type="//org/kermeta/language/structure/ConstraintType" isOrdered="true" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Constraint/stereotype"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/stereotype"/>
-              <containedType xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/Constraint/stereotype/@containedType.0/@kOwnedTags.0" name="ConstraintType">
-                <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/stereotype/@containedType.0"/>
-                <ownedLiteral name="inv"/>
-                <ownedLiteral name="pre"/>
-                <ownedLiteral name="post"/>
-              </containedType>
             </ownedAttribute>
-            <ownedAttribute kTag="//org/kermeta/language/structure/Constraint/language/@kOwnedTags.0 //org/kermeta/language/structure/Constraint/language/@kOwnedTags.1" name="language" type="//org/kermeta/language/structure/Constraint/language/@containedType.0" isOrdered="true" isReadOnly="true" isComposite="true">
+            <ownedAttribute kTag="//org/kermeta/language/structure/Constraint/language/@kOwnedTags.0 //org/kermeta/language/structure/Constraint/language/@kOwnedTags.1" name="language" type="//org/kermeta/language/structure/ConstraintLanguage" isOrdered="true" isReadOnly="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Constraint/language"/>
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/language"/>
-              <containedType xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/Constraint/language/@containedType.0/@kOwnedTags.0" name="ConstraintLanguage">
-                <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/language/@containedType.0"/>
-                <ownedLiteral name="kermeta"/>
-                <ownedLiteral name="ocl"/>
-              </containedType>
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/Constraint/invOwner/@kOwnedTags.0 //org/kermeta/language/structure/Constraint/invOwner/@kOwnedTags.1" name="invOwner" type="//org/kermeta/language/structure/Constraint/invOwner/@containedType.0" isOrdered="true" opposite="//org/kermeta/language/structure/ClassDefinition/inv">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Constraint/invOwner"/>
@@ -6282,6 +6261,11 @@
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/Constraint/postOwner"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/Operation"/>
             </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintLanguage/@kOwnedTags.0" name="ConstraintLanguage">
+            <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ConstraintLanguage"/>
+            <ownedLiteral name="kermeta"/>
+            <ownedLiteral name="ocl"/>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/ClassDefinition/@kOwnedTags.0 //org/kermeta/language/structure/ClassDefinition/@kOwnedTags.1" name="ClassDefinition" superType="//org/kermeta/language/structure/ClassDefinition/@containedType.0" isAspect="false" isAbstract="false">
             <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ClassDefinition"/>
@@ -6312,6 +6296,12 @@
               <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ClassDefinition/isSingleton"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintType/@kOwnedTags.0" name="ConstraintType">
+            <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ConstraintType"/>
+            <ownedLiteral name="inv"/>
+            <ownedLiteral name="pre"/>
+            <ownedLiteral name="post"/>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/ModelingUnit/@kOwnedTags.0 //org/kermeta/language/structure/ModelingUnit/@kOwnedTags.1 //org/kermeta/language/structure/ModelingUnit/@kOwnedTags.2" name="ModelingUnit" superType="//org/kermeta/language/structure/ModelingUnit/@containedType.0 //org/kermeta/language/structure/ModelingUnit/@containedType.1" isAspect="false" isAbstract="false">
             <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ModelingUnit"/>
