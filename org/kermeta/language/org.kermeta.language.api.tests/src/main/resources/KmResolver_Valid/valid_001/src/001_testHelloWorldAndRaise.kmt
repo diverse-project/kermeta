@@ -45,7 +45,7 @@ package helloworldandif {
 		end
 	}
 	
-	class MyException
+	class MyException inherits kermeta::exceptions::Exception
 	{
 	}
 }
