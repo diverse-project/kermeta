@@ -20,6 +20,15 @@
     </parent>
     
     <build>
+    	<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/ecore</directory>
+	        	<targetPath>src/main/ecore</targetPath>
+			</resource>
+		</resources>
         <plugins>
 <!--
             <plugin>
