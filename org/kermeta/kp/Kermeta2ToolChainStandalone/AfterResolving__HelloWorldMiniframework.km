@@ -5082,7 +5082,8 @@
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/Operation"/>
             </ownedAttribute>
           </ownedTypeDefinition>
-          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintLanguage/@kOwnedTags.0" name="ConstraintLanguage">
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintLanguage/@kOwnedTags.0 //org/kermeta/language/structure/ConstraintLanguage/@kOwnedTags.1" name="ConstraintLanguage">
+            <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ConstraintLanguage"/>
             <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ConstraintLanguage"/>
             <ownedLiteral name="kermeta"/>
             <ownedLiteral name="ocl"/>
@@ -5117,7 +5118,8 @@
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Boolean"/>
             </ownedAttribute>
           </ownedTypeDefinition>
-          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintType/@kOwnedTags.0" name="ConstraintType">
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="//org/kermeta/language/structure/ConstraintType/@kOwnedTags.0 //org/kermeta/language/structure/ConstraintType/@kOwnedTags.1" name="ConstraintType">
+            <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/ConstraintType"/>
             <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/structure/ConstraintType"/>
             <ownedLiteral name="inv"/>
             <ownedLiteral name="pre"/>
