@@ -370,12 +370,16 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			// Creation of the Kermeta enumeration.
 			var kmEnum : Enumeration init Enumeration.new.initialize(eEnum.name)
 			
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmEnum)
+			
 			// The kermeta enumeration is added to its parent package found using the trace let into
 			// the ecore package of the ecore enum.
 			eEnum.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmEnum)
 			
 			// The reference to the Kermeta enumeration is added to the ecore enum.
 			eEnum.targetKermetaObject := kmEnum
+			
 		end
 	
 		super(eEnum)
