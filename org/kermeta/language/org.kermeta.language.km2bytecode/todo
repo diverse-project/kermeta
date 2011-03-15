@@ -1,0 +1,12 @@
+generic Ecore
+ implicit def richAspect[T,k](v : `MARTE_Library`.`MARTE_DataTypes`.Array[T,k]) = v.asInstanceOf[ScalaAspect.`MARTE_Library`.`MARTE_DataTypes`.ArrayAspect[T,k]]
+ implicit def richAspect[T,k](v : ScalaAspect.`MARTE_Library`.`MARTE_DataTypes`.ArrayAspect[T,k]) = v.asInstanceOf[`MARTE_Library`.`MARTE_DataTypes`.impl.ArrayImpl[T,k]]
+
+trait ArrayAspect[T,k] extends ScalaAspect.fr.irisa.triskell.kermeta.language.structure.ObjectAspect with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect with `_root_`.`MARTE_Library`.`MARTE_DataTypes`.Array{
+=> trait ArrayAspect[T,k] extends ScalaAspect.fr.irisa.triskell.kermeta.language.structure.ObjectAspect with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect with `_root_`.`MARTE_Library`.`MARTE_DataTypes`.Array[T,k]{
+
+override def createArray[T,k] : `MARTE_Library`.`MARTE_DataTypes`.Array[T,k] = { new ScalaAspect.`MARTE_Library`.`MARTE_DataTypes`.RichArray[T,k] }
+ => override def createArray[T,k]() : `MARTE_Library`.`MARTE_DataTypes`.Array[T,k] = { new ScalaAspect.`MARTE_Library`.`MARTE_DataTypes`.RichArray[T,k] }
+ 
+
+get => is boolean marth

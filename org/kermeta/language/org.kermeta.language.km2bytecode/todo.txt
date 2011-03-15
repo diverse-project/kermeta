@@ -1,0 +1,23 @@
+ implicit def richAspect(v : ScalaAspect.system.corporate.EmployeeAspect) = v.asInstanceOf[system.corporate.impl.EmployeeImpl]
+=>  implicit def richAspect(v : ScalaAspect.system.corporate.EmployeeAspect) = v.asInstanceOf[system.corporate.Employee]
+
+
+trait PersonAspect extends ScalaAspect.org.kermeta.language.structure.ObjectAspect with org.kermeta.language.structureScalaAspect.aspect.ObjectAspect with `_root_`.system.lab.Person
+=> with `_root_`.system.corporate.itf.CorporateItf
+
+
+object RichFactory {
+  def createPerson : system.lab.Person = { new ScalaAspect.system.lab.RichPerson }
+  def createPublication : system.lab.Publication = { new ScalaAspect.system.lab.RichPublication }
+  def createLab : system.lab.Lab = { new ScalaAspect.system.lab.RichLab }
+  def createTool : system.lab.Tool = { new ScalaAspect.system.lab.RichTool }
+  def createPaper : system.lab.Paper = { new ScalaAspect.system.lab.RichPaper }
+}
+
+ class RichPerson extends system.lab.impl.PersonImpl with ScalaAspect.system.lab.PersonAspect with org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation
+=> class RichPerson extends system.lab.Person with ScalaAspect.system.lab.PersonAspect with org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with kermeta.standard.EObjectImplForPrimitive
+
+def Scalaemployees : java.util.List[_root_.system.corporate.Employee]={new RichKermetaList(this.getEmployees())}.asInstanceOf[java.util.List[_root_.system.corporate.Employee]]
+=> def Scalaemployees : java.util.List[_root_.system.corporate.Employee]={if (this.getEmployees()==null) this.setEmployees(new java.util.ArrayList[_root_.system.corporate.Employee]); new RichKermetaList(this.getEmployees())}.asInstanceOf[java.util.List[_root_.system.corporate.Employee]]
+
++ génération Itf
