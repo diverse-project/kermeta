@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.compilo.scala.loader;
+package org.kermeta.compilo.scala.loader;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EcorePackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,9 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import org.kermeta.KmPackage;
-import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.language.structure.StructurePackage;
 
 public class LoadModelHelper {
 

@@ -8,11 +8,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore._
-
+ 
 import kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
  
-trait Exception extends ExceptionAspect with kermeta.standard.KermetaObject{}
+trait Exception extends ExceptionAspect with kermeta.standard.KermetaObject
 trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ecore.EObject{
 var message:String=null;
 var nestedException:Exception=null; 

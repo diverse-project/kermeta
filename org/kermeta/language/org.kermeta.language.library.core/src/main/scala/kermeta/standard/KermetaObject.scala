@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.{EStructuralFeature, EClass}
 import org.eclipse.emf.ecore.EObject
 import kermeta.persistence.RichResource
 
+trait KermetaObjectAspect extends    KermetaObject
 trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def equals(element : Any) : Boolean
 	//def isNotEqual(element : Any) : Boolean = !this.equals(element)
@@ -63,8 +64,8 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
 
 
-//	 def getOwnedTags():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
-//	 def getTag():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
+//	 def getOwnedTags():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=null;
+//	 def getTag():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=null;
 
   def getMetaClass() : org.kermeta.language.structure.Class= null//this.eClass()
   //def classDefinition = this.asInstanceOf[EClass]
@@ -99,13 +100,13 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
       return new kermeta.standard.RichInteger(o.asInstanceOf[java.lang.Integer].intValue)
     }
 
-    if ( o.isInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object])
-      return o.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]
+    if ( o.isInstanceOf[org.kermeta.language.structure.Object])
+      return o.asInstanceOf[org.kermeta.language.structure.Object]
     else if (o!=null)
     {println("cannot convert " + o.getClass + " for property " + prop.getName)
-     null.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]}
+     null.asInstanceOf[org.kermeta.language.structure.Object]}
     else
-      null.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]*/
+      null.asInstanceOf[org.kermeta.language.structure.Object]*/
   }
 
   def set(prop : org.kermeta.language.structure.Property,o : java.lang.Object) = {
@@ -154,15 +155,15 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	/*
-  def Scalatag : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag]={this.getTag()}
-  def Scalatag_=(arg : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag])={this.getTag().clear
+  def Scalatag : java.util.List[org.kermeta.language.structure.Tag]={this.getTag()}
+  def Scalatag_=(arg : java.util.List[org.kermeta.language.structure.Tag])={this.getTag().clear
                                                                                           this.getTag().addAll(arg)
   }
-  def ScalaownedTags : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag]={this.getOwnedTags()}
-  def ScalaownedTags_=(arg : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag])={this.getOwnedTags().clear
+  def ScalaownedTags : java.util.List[org.kermeta.language.structure.Tag]={this.getOwnedTags()}
+  def ScalaownedTags_=(arg : java.util.List[org.kermeta.language.structure.Tag])={this.getOwnedTags().clear
                                                                                                 this.getOwnedTags().addAll(arg)
   }*/
- //def ScalaownedTags : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag]={this.asInstanceOf[EModelElement].getEAnnotations}
+ //def ScalaownedTags : java.util.List[org.kermeta.language.structure.Tag]={this.asInstanceOf[EModelElement].getEAnnotations}
  // this.asInstanceOf[EModelElement].e
  //
  //

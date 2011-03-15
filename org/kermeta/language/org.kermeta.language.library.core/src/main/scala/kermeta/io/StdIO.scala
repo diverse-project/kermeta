@@ -58,5 +58,5 @@ class StdIOClass extends kermeta.standard.EObjectImplForPrimitive {
 
 }
 
-object stdio extends StdIOClass{
+object StdIO extends StdIOClass{
 }

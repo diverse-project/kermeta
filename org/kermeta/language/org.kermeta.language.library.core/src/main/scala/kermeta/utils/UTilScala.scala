@@ -14,7 +14,7 @@ object UTilScala {
             if ( typ.asInstanceOf[org.kermeta.language.structure.PrimitiveType].getName.equals("EString") && o.getClass.getName.equals("kermeta.standard.RichString") )
             return true
                 
-           // println("toto " + typ.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.PrimitiveType].getName)
+           // println("toto " + typ.asInstanceOf[org.kermeta.language.structure.PrimitiveType].getName)
         }
        // println(o + "" + typ)
         return false;

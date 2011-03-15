@@ -1,6 +1,7 @@
 package kermeta.persistence
 
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.EPackage
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,6 +10,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet
  * Time: 17:53
  * To change this template use File | Settings | File Templates.
  */
+
+
+object EcorePackages{
+    private var packs : java.util.HashMap[String,EPackage]= new java.util.HashMap[String,EPackage]()
+
+    def getPacks() : java.util.HashMap[String,EPackage] = {
+        packs
+    }
+    var workspaceURI : String = _
+    var pluginURI : String = _
+
+
+}
 
 
 class RichResource(value: _root_.org.eclipse.emf.ecore.resource.Resource) extends kermeta.standard.EObjectImplForKO{
