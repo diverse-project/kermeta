@@ -765,7 +765,7 @@
           <body xsi:type="org_kermeta_language_behavior:Block"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" superType="//kermeta/io/StdIO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/StdIO/@kOwnedTags.0" name="StdIO" superType="//kermeta/io/StdIO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="true">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/io/StdIO"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
           <usings fromQName="kermeta::standard" toName=""/>
