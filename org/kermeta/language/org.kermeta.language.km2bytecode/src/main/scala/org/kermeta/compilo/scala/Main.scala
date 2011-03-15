@@ -169,7 +169,7 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
 //   inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndLoop.km"
     //inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndIf.km"
 
-inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndRaise.km"
+//inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndRaise.km"
 
         if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
