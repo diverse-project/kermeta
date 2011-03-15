@@ -1,0 +1,23 @@
+using kermeta::standard
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+using kermeta::exceptions
+
+package kermeta{
+package exceptions{
+
+@CompilerIgnore "true"
+class ConstraintsDiagnostic 
+{
+	attribute setConstraints : Bag<ConstraintViolatedInv>
+	
+	operation initialize() : ConstraintsDiagnostic is do
+	end
+	
+	operation add(cons : ConstraintViolatedInv) is do
+	end
+	
+	operation prettyPrint() : Void is do
+	end
+}
+}}

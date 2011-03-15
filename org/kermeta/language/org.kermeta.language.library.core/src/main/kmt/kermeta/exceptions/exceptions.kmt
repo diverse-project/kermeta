@@ -1,0 +1,104 @@
+using kermeta::standard
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+using kermeta::exceptions
+
+package kermeta{
+package exceptions{
+
+@CompilerIgnore "true"
+class Exception
+{
+    attribute message : String
+    attribute nestedException : Exception
+    attribute stackTrace : String
+}
+
+@CompilerIgnore "true"
+class RuntimeError inherits Exception {
+	
+	attribute expression : Expression
+}
+
+@CompilerIgnore "true"
+class CallOnVoidTarget inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class TypeCastError inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class NotImplementedException inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class UpperBoundReachedError inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class AbstractClassInstantiationError inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class IncompatibleTypeError inherits RuntimeError {}
+
+@CompilerIgnore "true"
+class DivisionByZero inherits Exception {}
+
+@CompilerIgnore "true"
+class OverflowError inherits Exception {}
+
+@CompilerIgnore "true"
+class VoidOperandError inherits Exception {}
+ 
+@CompilerIgnore "true"
+class StringIndexOutOfBound inherits Exception {}
+
+@CompilerIgnore "true"
+class StringFormatException inherits Exception {}
+
+@CompilerIgnore "true"
+class IndexOutOfBound inherits Exception {}
+
+@CompilerIgnore "true"
+class EmptyCollection inherits Exception {}
+
+@CompilerIgnore "true"
+class IteratorIsOff inherits Exception {}
+
+@CompilerIgnore "true"
+class IOException inherits Exception {}
+
+@CompilerIgnore "true"
+class FileNotFoundException inherits IOException {}
+
+@CompilerIgnore "true"
+class ConstraintViolatedException inherits Exception {}
+
+@CompilerIgnore "true"
+class ConstraintViolatedPre inherits ConstraintViolatedException {}
+
+@CompilerIgnore "true"
+class ConstraintViolatedPost inherits ConstraintViolatedException {}
+
+@CompilerIgnore "true"
+class ConstraintViolatedInv inherits ConstraintViolatedException {}
+
+@CompilerIgnore "true"
+class ResourceLoadException inherits Exception { }
+
+@CompilerIgnore "true"
+class ResourceSaveException inherits Exception {
+}
+
+@CompilerIgnore "true"
+class ResourceMixedLevelsException inherits ResourceSaveException { }
+
+@CompilerIgnore "true"
+class ResourceCreateException inherits Exception { }
+
+@CompilerIgnore "true"
+class ResourceUnconformityException inherits Exception { }
+
+@CompilerIgnore "true"
+class UnregisteredMetamodelException inherits Exception { }
+
+@CompilerIgnore "true"
+class DynamicExpressionException inherits Exception { }
+}}
