@@ -194,6 +194,7 @@ public class KpCompilerMojo extends AbstractMojo {
     }
      
     protected void copyFile(File inputFile, File outputFile) throws IOException{
+    	outputFile.createNewFile();
     	FileReader in = new FileReader(inputFile);
         FileWriter out = new FileWriter(outputFile);
         int c;
