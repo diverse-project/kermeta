@@ -67,7 +67,7 @@ public class KpCompilerMojo extends AbstractMojo {
     protected MavenProject project;
     /**
      * Input kermeta project (kp) file
-     * @parameter default-value="${basedir}/project.kp"
+     * @parameter default-value="${basedir}/project.kpt"
      */
     private File kp;
     
@@ -194,7 +194,7 @@ public class KpCompilerMojo extends AbstractMojo {
     }
      
     protected void copyFile(File inputFile, File outputFile) throws IOException{
-    	outputFile.createNewFile();
+    	outputFile.getParentFile().mkdirs();
     	FileReader in = new FileReader(inputFile);
         FileWriter out = new FileWriter(outputFile);
         int c;
