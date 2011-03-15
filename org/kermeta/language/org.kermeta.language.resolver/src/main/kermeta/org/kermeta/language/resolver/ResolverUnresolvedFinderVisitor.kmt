@@ -639,8 +639,10 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			
 			//When we have visited all the elements of the modeling unit, for each UnresolvedType which has been resolved
 			unresolvedTypesToBeRemoved.each{u|
-				//We add the corresponding resolved type to the typeContainer of u
-				u.typeContainer.containedType.add(u.correspondingType)
+				if u.correspondingType.isInstanceOf(Class) then
+					//We add the corresponding resolved type to the typeContainer of u
+					u.typeContainer.containedType.add(u.correspondingType)
+				end
 				//And we remove u
 				u.typeContainer.containedType.remove(u)
 			}
