@@ -139,7 +139,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        project.getResources().add(resource);
 	        
 	        // copy kp in the resources
-	        copyFile(kp, new File(resourceOutputDirectory, "/META-INF/kermeta/project.kpt"));
+	        copyFile(kp, new File(resourceOutputDirectory, KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR));
 	        
 	        
 	        
