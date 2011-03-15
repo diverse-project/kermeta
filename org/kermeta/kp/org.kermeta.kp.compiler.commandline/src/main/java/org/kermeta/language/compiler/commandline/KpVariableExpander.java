@@ -12,6 +12,10 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Supported special Variables (in additio to system variables
+ * ${project.baseUri}
+ */
 public class KpVariableExpander {
 
 	protected String projectUri;
@@ -23,6 +27,8 @@ public class KpVariableExpander {
 
 	public String expandVariables(String input) {
 
+		
+		if(input == null || input.isEmpty()) return input;
 		// TODO write a real parser ....
 		Pattern p = Pattern.compile("\\$\\{(\\w|\\.)*\\}");
 		Matcher m = p.matcher(input);

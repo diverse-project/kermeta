@@ -10,12 +10,17 @@ package org.kermeta.language.compiler.commandline;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
+import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.loader.kp.KpLoader;
 import org.kermeta.language.structure.ModelingUnit;
 
@@ -24,6 +29,10 @@ import org.kermeta.language.structure.ModelingUnit;
  * This class is a facade for producing bytecode from a kermeta2 project
  */
 public class KermetaCompiler {
+
+	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
+	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kpt";
+	
 	
 	public Boolean saveIntermediateFiles = false;
 	public String targetFolder;
@@ -39,6 +48,22 @@ public class KermetaCompiler {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetFolder = targetFolder;
+		
+		registerMVNUrlHandler();
+	}
+
+	private void registerMVNUrlHandler() {
+		StringBuffer results = new StringBuffer();
+		
+		try {
+			results.append("Trying to set java.protocol.handler.pkgs with protocols from org.ops4j.pax.url\r\n");
+			System.setProperty("java.protocol.handler.pkgs", "org.ops4j.pax.url");
+		}
+		catch (Throwable e) {
+			results.append(e.toString() + "\r\n");
+		}
+		System.out.println(results);
+		
 	}
 
 	/**
@@ -73,7 +98,7 @@ public class KermetaCompiler {
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		File mergedFile = new File(targetFolder+"/META-INF/kermeta/"+projectName+".km");		
+		File mergedFile = new File(targetFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
 		if(!mergedFile.getParentFile().exists()){
 			mergedFile.getParentFile().mkdirs();
 		}
@@ -93,25 +118,89 @@ public class KermetaCompiler {
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
 		for (Source src : srcs ){
-			String sourceURLWithVariable = ((Source) src).getUrl();
-			String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
-			System.out.println("source is : " + sourceURLWithVariable);
-			if (sourceURLWithVariable.contains("${")){
-				// TODO deal with variable expansion
+			
+			if (src instanceof SourceQuery){
+				// deal with srcQuery
+				SourceQuery srcQuery = (SourceQuery) src;
+				String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
+				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
+				System.out.println("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")");
 				
-				System.out.println("source : " + sourceURLWithVariable + " is expanded to " +sourceURL);
+				ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(indirectURL);
+				if (mu != null) {
+					modelingUnits.add(mu);
+				}
+				else {
+					System.err.println("Empty ModelingUnit, failed to load " +indirectURL);
+				}
 			}
-			ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURL);
-			if (mu != null) {
-				modelingUnits.add(mu);
-			}
-			else {
-				System.err.println("Empty ModelingUnit, failed to load " +sourceURL);
+			else{
+				String sourceURLWithVariable = ((Source) src).getUrl();
+				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
+				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
+				if (sourceURLWithVariable.contains("${")){
+					// deal with variable expansion
+					
+					System.out.println("sourceURL : " + sourceURLWithVariable + " (expanded to : " +sourceURL +")");
+				}
+				else{
+					System.out.println("sourceURL : " + sourceURLWithVariable);
+				}
+				// usual internal source
+				ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURL);
+				if (mu != null) {
+					modelingUnits.add(mu);
+				}
+				else {
+					System.err.println("Empty ModelingUnit, failed to load " +sourceURL);
+				}
 			}
 		}
-				
+			
+		// get dependencies
+		List<Dependency> dependencies = kp.getDependencies();
+		for(Dependency  dep : dependencies){
+			String dependencyURLWithVariable =  dep.getUrl();
+			String dependencyURL = varExpander.expandVariables(dependencyURLWithVariable);
+			if (dependencyURLWithVariable.contains("${")){
+				// deal with variable expansion
+				System.out.println("dependency : " + dependencyURLWithVariable + " ( expanded to : " +dependencyURL+")");
+			}
+			else{
+				System.out.println("dependency : " + dependencyURLWithVariable);
+			}
+			URL jar = new  URL(dependencyURL);
+			ZipInputStream zip = new ZipInputStream(jar.openStream());
+			
+		    ZipEntry ze;
+		    KermetaProject dependencyKP = null;
+		    while ((ze = zip.getNextEntry()) != null){
+		    	if(ze.getName().equals(DEFAULT_KP_LOCATION_IN_JAR)){
+		    		// load dependencyKP
+		    		KpLoader ldr = new KpLoader();
+		    		dependencyKP = ldr.loadKp("jar:"+dependencyURL+"!"+ze.getName());
+		    	}
+		    }
+		    // try to load the associated merged km
+		    if(dependencyKP == null){
+		    	System.out.println("   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ");
+		    }
+		    else{
+		    	// load the km file resulting from the merge of the dependency
+		    	String dependencyMergedKMUrl = "jar:"+dependencyURL+"!"+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+dependencyKP.getName()+".km";
+		    	ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(dependencyMergedKMUrl);
+				if (mu != null) {
+					modelingUnits.add(mu);
+				}
+				else {
+					System.err.println("Empty ModelingUnit, failed to load " +dependencyMergedKMUrl);
+				}
+		    }
+		}
 		return modelingUnits;
 	}
+	
+	
 	
 	public ModelingUnit mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
