@@ -86,7 +86,7 @@ public class ModelingUnitLoader {
 		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
 		org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.RichFactory.createEcore2km();
         kermeta.persistence.EMFRepository rep = kermeta.persistence.RichFactory.createEMFRepository();
-        kermeta.persistence.Resource r = rep.getResource("file:"+ uri);
+        kermeta.persistence.Resource r = rep.getResource( uri);
         r.load();    
         
         return   converter.convert((EPackage) r.get(0), "");
