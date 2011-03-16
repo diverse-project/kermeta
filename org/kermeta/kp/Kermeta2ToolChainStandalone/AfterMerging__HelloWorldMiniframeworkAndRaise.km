@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="">
-  <packages name="helloworldandif">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="HelloWorld" superType="//helloworldandif/HelloWorld/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+  <packages name="helloworldAndRaise">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="HelloWorld" superType="//helloworldAndRaise/HelloWorld/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
-      <ownedOperation name="main" type="//helloworldandif/HelloWorld/main/@containedType.0">
+      <ownedOperation name="main" type="//helloworldAndRaise/HelloWorld/main/@containedType.0">
         <kOwnedTags name="main" value=""/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="toto">
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="msg">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
             <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
-            <type name="kermeta::standard::String" type="//helloworldandif/HelloWorld/main/@body/@statement.0/@containedType.0"/>
+            <type name="kermeta::standard::String" type="//helloworldAndRaise/HelloWorld/main/@body/@statement.0/@containedType.0"/>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="main" type="//helloworldandif/HelloWorld/main.1/@containedType.0">
-        <kOwnedTags name="main" value="Bonjour tout le monde"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
-        <ownedParameter name="msg" type="//helloworldandif/HelloWorld/main.1/@ownedParameter.0/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
-        </ownedParameter>
-        <body xsi:type="org_kermeta_language_behavior:Block">
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
             <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg"/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
@@ -32,7 +19,7 @@
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="toto">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
             <initialization xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="15"/>
-            <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.1/@containedType.0"/>
+            <type name="kermeta::standard::Integer" type="//helloworldAndRaise/HelloWorld/main/@body/@statement.2/@containedType.0"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
@@ -41,10 +28,10 @@
                 <statement xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="10"/>
                 <statement xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="11"/>
                 <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
-                  <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Une cha&#xee;ne"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Une chaine"/>
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
                 </statement>
-                <statement xsi:type="org_kermeta_language_behavior:StringLiteral" value="Une cha&#xee;ne"/>
+                <statement xsi:type="org_kermeta_language_behavior:StringLiteral" value="Une chaine"/>
                 <statement xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="16"/>
               </thenBody>
               <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
@@ -58,7 +45,7 @@
               <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="i">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
                 <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto"/>
-                <type name="kermeta::standard::Integer" type="//helloworldandif/HelloWorld/main.1/@body/@statement.3/@initialization/@statement.0/@containedType.0"/>
+                <type name="kermeta::standard::Integer" type="//helloworldAndRaise/HelloWorld/main/@body/@statement.4/@initialization/@statement.0/@containedType.0"/>
               </statement>
             </initialization>
             <body xsi:type="org_kermeta_language_behavior:Block">
@@ -86,11 +73,11 @@
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
             </body>
             <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
-              <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="A seconde instruction for fun"/>
+              <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="A second instruction for fun"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
             </body>
-            <exceptionType name="helloworldandif::MyException" type="//helloworldandif/HelloWorld/main.1/@body/@rescueBlock.0/@exceptionType/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="helloworldandif::MyException"/>
+            <exceptionType name="helloworldAndRaise::MyException" type="//helloworldAndRaise/HelloWorld/main/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="helloworldAndRaise::MyException"/>
             </exceptionType>
           </rescueBlock>
           <rescueBlock exceptionName="myException">
@@ -98,24 +85,24 @@
               <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Rescue on Object"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO"/>
             </body>
-            <exceptionType name="kermeta::standard::Object" type="//helloworldandif/HelloWorld/main.1/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+            <exceptionType name="kermeta::standard::Object" type="//helloworldAndRaise/HelloWorld/main/@body/@rescueBlock.1/@exceptionType/@containedType.0">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
             </exceptionType>
           </rescueBlock>
         </body>
       </ownedOperation>
-      <ownedOperation name="pleaseNeverCall" type="//helloworldandif/HelloWorld/pleaseNeverCall/@containedType.0">
+      <ownedOperation name="pleaseNeverCall" type="//helloworldAndRaise/HelloWorld/pleaseNeverCall/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
           <statement xsi:type="org_kermeta_language_behavior:Raise">
             <expression xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="helloworldandif::MyException"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="helloworldAndRaise::MyException"/>
             </expression>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MyException" superType="//helloworldandif/MyException/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MyException" superType="//helloworldAndRaise/MyException/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::exceptions::Exception"/>
     </ownedTypeDefinition>
   </packages>
