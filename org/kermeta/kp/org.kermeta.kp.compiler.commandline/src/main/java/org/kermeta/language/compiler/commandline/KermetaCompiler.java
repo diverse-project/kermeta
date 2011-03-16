@@ -22,6 +22,7 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.loader.kp.KpLoader;
+import org.kermeta.language.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
@@ -71,6 +72,9 @@ public class KermetaCompiler {
 		catch (Throwable e) {
 			results.append(e.toString() + "\r\n");
 		}
+		org.ops4j.pax.url.mvn.Handler h =new org.ops4j.pax.url.mvn.Handler();
+		ExtensibleURLStreamHandlerFactory.installUrlStreamHandlerFactory();
+		ExtensibleURLStreamHandlerFactory.registerHandler("mvn", h);
 		System.out.println(results);
 		
 	}
