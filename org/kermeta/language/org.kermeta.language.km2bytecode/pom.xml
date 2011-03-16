@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.language</groupId>
-    <artifactId>km2bytecode</artifactId>
+    <artifactId>language.km2bytecode</artifactId>
     <name>org.kermeta.language.km2bytecode</name>
     <version>2.0.1-SNAPSHOT</version>
     <description>K2 Compiler</description>
