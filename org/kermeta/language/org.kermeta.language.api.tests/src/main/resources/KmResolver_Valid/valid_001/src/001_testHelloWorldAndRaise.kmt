@@ -6,24 +6,19 @@
  *            cbouhour
  */
 
-package helloworldandif {
+package helloworldAndRaise {
 	class HelloWorld
 	{
 		@main ""
-		operation main() : kermeta::standard::Void is do 
-			var toto : kermeta::standard::String init "Hello World!"
-			kermeta::io::StdIO.writeln(toto)
-		end
-		
-		@main "Bonjour tout le monde"
-		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
+		operation main() : kermeta::standard::Void is do
+			var msg : kermeta::standard::String init "Hello World!"
 			kermeta::io::StdIO.writeln(msg)
 			var toto : kermeta::standard::Integer init 15
 			toto := if (toto == 15) then
 				10
 				11
-				kermeta::io::StdIO.writeln("Une chaîne")
-				"Une chaîne"
+				kermeta::io::StdIO.writeln("Une chaine")
+				"Une chaine"
 				16
 			end
 			from var i : kermeta::standard::Integer init toto until i == 0 
@@ -32,16 +27,16 @@ package helloworldandif {
 				i := i - 1
 			end
 			pleaseNeverCall()
-		rescue (myException : helloworldandif::MyException	)
+		rescue (myException : helloworldAndRaise::MyException	)
 			kermeta::io::StdIO.writeln("Good managment of Raise and Rescue")
-			kermeta::io::StdIO.writeln("A seconde instruction for fun")
+			kermeta::io::StdIO.writeln("A second instruction for fun")
 		rescue (myException : kermeta::standard::Object	)
 			kermeta::io::StdIO.writeln("Rescue on Object")
 		end
 		
 		operation pleaseNeverCall() is do
 			//there is no Exception type in the current miniframework
-			raise helloworldandif::MyException.new
+			raise helloworldAndRaise::MyException.new
 		end
 	}
 	

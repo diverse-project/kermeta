@@ -6,24 +6,19 @@
  *            cbouhour
  */
 
-package helloworldandif {
+package helloworldAndLoop {
 	class HelloWorld
 	{
 		@main ""
-		operation main() : kermeta::standard::Void is do 
-			var toto : kermeta::standard::String init "Hello World!"
-			kermeta::io::StdIO.writeln(toto)
-		end
-		
-		@main "Bonjour tout le monde"
-		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
+		operation main() : kermeta::standard::Void is do
+			var msg : kermeta::standard::String init "Hello World!"
 			kermeta::io::StdIO.writeln(msg)
 			var toto : kermeta::standard::Integer init 15
 			toto := if (toto == 15) then
 				10
 				11
-				kermeta::io::StdIO.writeln("Une chaîne")
-				"Une chaîne"
+				kermeta::io::StdIO.writeln("Une chaine")
+				"Une chaine"
 				16
 			end
 			from var i : kermeta::standard::Integer init toto until i == 0 
