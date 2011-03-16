@@ -14,6 +14,28 @@
 
     <build>
         <plugins>
+        	<!-- Kermeta Compiler plugin -->
+            <plugin>
+                <groupId>org.kermeta.kp</groupId>
+                <artifactId>kp.compiler.mavenplugin</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <kp>project.kpt</kp>
+                            <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- package into a jar for OSGI -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
