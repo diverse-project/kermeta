@@ -11,10 +11,10 @@ import java.io.IOException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 
 /**
  * Command line interface for Kermeta2 compiler
@@ -71,7 +71,7 @@ public class KermetaCompilerCLI {
 	 * @param args String[] args as featured in public static void main()
 	 */
 	private void loadArgs(String[] args){
-		CommandLineParser parser = new PosixParser();
+		CommandLineParser parser = new GnuParser();
 		try {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
