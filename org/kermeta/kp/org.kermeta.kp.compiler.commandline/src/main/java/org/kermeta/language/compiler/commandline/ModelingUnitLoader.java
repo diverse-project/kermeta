@@ -46,7 +46,7 @@ public class ModelingUnitLoader {
 
 			MainRunner.init4eclipse();
 			try {
-				this.loadKM(url);
+				mu = this.loadKM(url);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

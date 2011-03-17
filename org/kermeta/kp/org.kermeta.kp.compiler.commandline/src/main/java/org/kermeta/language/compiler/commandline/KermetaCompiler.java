@@ -11,12 +11,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
@@ -24,6 +32,7 @@ import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.loader.kp.KpLoader;
 import org.kermeta.language.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.language.structure.ModelingUnit;
+
 
 /**
  * Basic compilation process for Kermeta2
@@ -33,10 +42,13 @@ public class KermetaCompiler {
 
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kpt";
+	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
+	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER+ "/scala";
 	
 	
 	public Boolean saveIntermediateFiles = false;
 	public String targetFolder;
+	public String targetIntermediateFolder;
 	public String projectName = "project";
 	public KpVariableExpander variableExpander;
 	
@@ -106,7 +118,8 @@ public class KermetaCompiler {
 		if(!kp.getName().isEmpty()){
 			projectName = kp.getName();
 		}
-		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, new KpVariableExpander(kpFileURL));
+		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
+		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander);
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
@@ -120,9 +133,13 @@ public class KermetaCompiler {
 		writer.close();
 		
 		
-		// TODO deal with km to scala
-		// TODO deal with scala to bytecode
+		// deal with km to scala
+			// compiler require a file location not an URL
+		String fileLocation = mergedFile.toURI().toURL().getFile();
+		km2Scala(kp, varExpander, fileLocation);
+		// deal with scala to bytecode
 	}	
+
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		
@@ -162,6 +179,10 @@ public class KermetaCompiler {
 				// usual internal source
 				ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURL);
 				if (mu != null) {
+					if(mu.getName() == null){
+						// force ModelingUnit name to the one provided in the kp
+						mu.setName(kp.getName());
+					}
 					modelingUnits.add(mu);
 				}
 				else {
@@ -182,18 +203,20 @@ public class KermetaCompiler {
 			else{
 				System.out.println("dependency : " + dependencyURLWithVariable);
 			}
+			
+			KermetaProject dependencyKP = null;
+			
 			URL jar = new  URL(dependencyURL);
 			ZipInputStream zip = new ZipInputStream(jar.openStream());
-			
 		    ZipEntry ze;
-		    KermetaProject dependencyKP = null;
 		    while ((ze = zip.getNextEntry()) != null){
-		    	if(ze.getName().equals(DEFAULT_KP_LOCATION_IN_JAR)){
+		    	if(("/"+ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)){
 		    		// load dependencyKP
 		    		KpLoader ldr = new KpLoader();
-		    		dependencyKP = ldr.loadKp("jar:"+dependencyURL+"!"+ze.getName());
+		    		dependencyKP = ldr.loadKp(URI.createURI("jar:"+dependencyURL+"!/"+ze.getName()));
 		    	}
 		    }
+		    
 		    // try to load the associated merged km
 		    if(dependencyKP == null){
 		    	System.out.println("   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ");
@@ -242,7 +265,7 @@ public class KermetaCompiler {
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
 		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetFolder+"/intermediate/beforeResolving.km").convert(mu);
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetFolder+"/"+INTERMEDIATE_SUBFOLDER+"/beforeResolving.km").convert(mu);
 		
 		//Resolving
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
@@ -259,5 +282,30 @@ public class KermetaCompiler {
 	}
 	
 	
+
+	public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL) {
+		GlobalConfiguration.outputFolder_$eq(targetFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
+		
+        GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."+kp.getGroup()+"."+kp.getName());
+        GlobalConfiguration.props_$eq(new Properties());
+        GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
+        GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
+        GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
+            // GroupId and ArtifactId are used to prefix the generated code
+        GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
+        GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
+        //GlobalConfiguration.load(GlobalConfiguration.props());
+        GlobalConfiguration.setScalaAspectPrefix(kp.getGroup()+"."+kp.getName());
+      /*  
+        if(packageEquivalences != null){
+            for (int i = 0; i < packageEquivalences.length; i++) {
+				PackageEquivalence equivalence = packageEquivalences[i];
+				this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
+				kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
+			}
+        }*/
+		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
+		km2ScalaCompiler.compile(kmFileURL);
+	}
 	
 }

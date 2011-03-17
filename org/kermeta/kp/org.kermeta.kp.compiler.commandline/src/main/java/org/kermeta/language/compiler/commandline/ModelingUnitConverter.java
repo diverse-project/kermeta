@@ -58,7 +58,7 @@ public class ModelingUnitConverter {
 	public ModelingUnit convert(ModelingUnit mu) throws IOException{
 		URI uri = URI.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km_in_memory")
 				.replaceAll("::", "."));
-		if (mu.eResource() != null) {
+		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
 			uri = mu.eResource().getURI();
 		} 
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
