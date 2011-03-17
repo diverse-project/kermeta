@@ -28,6 +28,11 @@ public class KpLoader {
 	 * @param uriKpResource
 	 */
 	public KermetaProject loadKp(String uriKpResource) {
+		
+		return loadKp(URI.createFileURI(uriKpResource));
+		
+	}
+	public KermetaProject loadKp(URI uriKpResource) {
 		KermetaProject result = null;
 		KptResourceFactory factory = new KptResourceFactory();
 		System.out.println("factory reached : " + factory.toString());
@@ -35,7 +40,7 @@ public class KpLoader {
 		ResourceSet rs = new ResourceSetImpl() ;
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("kpt", factory);
 		
-		Resource resource = rs.createResource(URI.createFileURI(uriKpResource));
+		Resource resource = rs.createResource(uriKpResource);
 		System.out.println("Call to EMF  on : "+resource.toString()+" from repository : ");
 		
 		try {
