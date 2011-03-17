@@ -31,8 +31,14 @@ public class CommandLineKermetaCompilerTestSuite extends TestSuite {
 
 		KermetaCompiler.initializeFactory();
     	TestSuite suite = new TestSuite("CommandLineKermetaCompilerTestSuite");
-    	suite.addTest(new CommandLineKermetaCompilerTest("src/test/resources/test_001/001_testHelloWorld_standalone.kpt",
-    													  "target/test/test_001"));
+    	suite.addTest(new CommandLineKermetaCompilerTest("src/test/resources/kp_testcases/test_001/001_testHelloWorld_standalone.kpt",
+		  												"target/kp_testcases/test_001"));
+		suite.addTest(new CommandLineKermetaCompilerTest("src/test/resources/kp_testcases/test_002/002_testDependency.kpt",
+														"target/kp_testcases/test_002"));
+		suite.addTest(new CommandLineKermetaCompilerTest("src/test/resources/kp_testcases/test_003/003_testDependency.kpt",
+														"target/kp_testcases/test_003"));
+		suite.addTest(new CommandLineKermetaCompilerTest("src/test/resources/kp_testcases/test_004/004_testLibraryDependency.kpt",
+														"target/kp_testcases/test_004"));
         return suite;
     }
 
