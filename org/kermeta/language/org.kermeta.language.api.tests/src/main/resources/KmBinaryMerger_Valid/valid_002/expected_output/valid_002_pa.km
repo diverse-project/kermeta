@@ -31,12 +31,14 @@
           <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
             <usings fromQName="kermeta::standard" toName=""/>
           </target>
-          <value xsi:type="org_kermeta_language_behavior:CallFeature" name="mult">
+          <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
             <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2"/>
-            <target xsi:type="org_kermeta_language_behavior:CallFeature" name="plus">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
               <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
                 <usings fromQName="kermeta::standard" toName=""/>
               </parameters>
+              <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3"/>
             </target>
           </value>
@@ -47,7 +49,6 @@
             <usings fromQName="kermeta::standard" toName=""/>
           </value>
         </statement>
-        <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
       </body>
     </ownedOperation>
     <ownedOperation name="operation2" type="//Test_arithm/operation2/@containedType.0">
@@ -59,7 +60,6 @@
           <target xsi:type="org_kermeta_language_behavior:CallResult"/>
           <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="42"/>
         </statement>
-        <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
       </body>
     </ownedOperation>
   </ownedTypeDefinition>
