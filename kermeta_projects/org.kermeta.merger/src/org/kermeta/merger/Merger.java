@@ -156,9 +156,17 @@ public class Merger {
 		internalLog.debug("processInMemory " + outputFile);
 		IOPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
-		Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
-		kermetaUnit.getModelingUnit().getOwnedTags().add(t);
-		kermetaUnit.getModelingUnit().getTag().add(t);
+		// trying to prevent multiple executable tags in merged files
+		boolean tag_executable_exists = false;
+		for (Tag tag : kermetaUnit.getModelingUnit().getOwnedTags()) {
+			if (tag.getName().equals("executable"))
+				tag_executable_exists = true;
+		}
+		if (!tag_executable_exists){
+			Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
+			kermetaUnit.getModelingUnit().getOwnedTags().add(t);
+			kermetaUnit.getModelingUnit().getTag().add(t);
+		}
 		
 		MergeContext context = null;
 		if ( trace ) {
