@@ -42,7 +42,6 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.types.Void;
 
 /**
  * Class that implements and runs the Visitor Pattern on a Tree structure.
@@ -61,6 +60,20 @@ public class Java2Tree extends TreeVisitor{
 	private final String VOID = "java.lang.Void";
 	private final String DATE = "java.util.Date";
 	private final String OBJECT = "java.lang.Object";
+	private final String BYTE = "java.lang.Byte";
+	private final String SHORT = "java.lang.Short";
+	private final String LONG = "java.lang.Long";
+	
+	private final String _BOOLEAN = "boolean";
+	
+	private final String _BYTE = "byte";
+	private final String _INTEGER = "int";
+	private final String _CHAR = "char";
+	private final String _DOUBLE = "double";
+	private final String _FLOAT = "float";
+	private final String _LONG = "long";
+	private final String _SHORT = "short";
+	private final String _VOID = "void";
 	
 	CompilationUnit currentCompilationUnit;
 	EPackage root;
@@ -102,6 +115,9 @@ public class Java2Tree extends TreeVisitor{
 		primitive_types.put(VOID, "Void");
 		primitive_types.put(DATE, "Date");
 		primitive_types.put(OBJECT, "Object");
+		primitive_types.put(BYTE, "Byte");
+		primitive_types.put(LONG, "Long");
+		primitive_types.put(SHORT, "Short");
 	}
 	
 	/**
@@ -485,41 +501,38 @@ public class Java2Tree extends TreeVisitor{
 	public void visitPrimitiveType2(PrimitiveType e) {
 		// TODO primitives types have been checked to cope with Kermeta primitives types
 		EDataType dt = EcoreFactoryImpl.eINSTANCE.createEDataType();
+		// TODO Hack 15.03.2011 for KompilerV2
 		if (e instanceof Boolean){
-			dt.setName(primitive_types.get(BOOLEAN));
-			dt.setInstanceClassName(BOOLEAN);
+			dt.setName(_BOOLEAN);
+			dt.setInstanceClassName(_BOOLEAN);
 		}
 		else if (e instanceof org.emftext.language.java.types.Byte){
-			dt.setName(primitive_types.get(INTEGER));
-			dt.setInstanceClassName(INTEGER);
+			dt.setName(_BYTE);
+			dt.setInstanceClassName(_BYTE);
 		}
 		else if (e instanceof Char){
-			dt.setName(primitive_types.get(CHAR));
-			dt.setInstanceClassName(CHAR);
+			dt.setName(_CHAR);
+			dt.setInstanceClassName(_CHAR);
 		}
 		else if (e instanceof Double){
-			dt.setName(primitive_types.get(DOUBLE));
-			dt.setInstanceClassName(DOUBLE);
+			dt.setName(_DOUBLE);
+			dt.setInstanceClassName(_DOUBLE);
 		}
 		else if (e instanceof org.emftext.language.java.types.Float){
-			dt.setName(primitive_types.get(FLOAT));
-			dt.setInstanceClassName(FLOAT);
+			dt.setName(_FLOAT);
+			dt.setInstanceClassName(_FLOAT);
 		}
 		else if (e instanceof Int){
-			dt.setName(primitive_types.get(INTEGER));
-			dt.setInstanceClassName(INTEGER);
+			dt.setName(_INTEGER);
+			dt.setInstanceClassName(_INTEGER);
 		}
 		else if (e instanceof Long){
-			dt.setName(primitive_types.get(INTEGER));
-			dt.setInstanceClassName(INTEGER);
+			dt.setName(_LONG);
+			dt.setInstanceClassName(_LONG);
 		}
 		else if (e instanceof Short){
-			dt.setName(primitive_types.get(INTEGER));
-			dt.setInstanceClassName(INTEGER);
-		}
-		else if (e instanceof Void){
-			dt.setName(primitive_types.get(VOID));
-			dt.setInstanceClassName(VOID);
+			dt.setName(_SHORT);
+			dt.setInstanceClassName(_SHORT);
 		}
 		dt = addDatatype(dt.getName(),dt.getInstanceClassName());
 		lastElement.setEType(dt);
