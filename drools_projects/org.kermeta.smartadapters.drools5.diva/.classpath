@@ -12,12 +12,12 @@
 	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
 	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
 	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.kermeta.art.model_1.1.1.jar"/>
 	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.osgi.compendium-4.1.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.component"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.reasoner.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.service"/>
 	<classpathentry kind="lib" path="/diva.model.osgi/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.kermeta.art.model_1.2.1.jar" sourcepath="/org.kermeta.art.model"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
