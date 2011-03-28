@@ -1,4 +1,4 @@
-package org.kermeta.language.scalacompiler.sub
+package org.kermeta.scala.scala2bytecode.sub
 
 import java.io.File
 

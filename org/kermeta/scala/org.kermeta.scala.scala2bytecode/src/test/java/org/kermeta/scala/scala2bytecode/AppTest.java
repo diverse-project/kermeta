@@ -1,10 +1,10 @@
-package org.kermeta.language.scalacompiler;
+package org.kermeta.scala.scala2bytecode;
 
 import java.util.Arrays;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.kermeta.language.scalacompiler.sub.ScalaCompiler;
+import org.kermeta.scala.scala2bytecode.sub.ScalaCompiler;
 
 /**
  * Unit test for simple App.
@@ -39,7 +39,8 @@ public class AppTest
 
 
         ScalaCompiler compiler = new ScalaCompiler();
-        compiler.compile("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/K2Output", "/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/K2OutputBin", Arrays.asList("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.library.core/target/language.library.core-2.0.1-SNAPSHOT.jar"));
+        // TODO add real test here that are really standalone
+        //compiler.compile("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/K2Output", "/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.compiler/K2OutputBin", Arrays.asList("/Users/ffouquet/NetBeansProjects/KermetaV2Trunk/org.kermeta.language.library.core/target/language.library.core-2.0.1-SNAPSHOT.jar"));
 
 
     }

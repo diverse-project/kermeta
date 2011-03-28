@@ -1,6 +1,6 @@
-package org.kermeta.language.scalacompiler.sub
+package org.kermeta.scala.scala2bytecode.sub
 
-object EmbettedScalaRunner {
+object EmbeddedScalaRunner {
 	
 	def run(classpath : String, mainRunner : String , _params : List[String]){	
 		var startTime = System.currentTimeMillis

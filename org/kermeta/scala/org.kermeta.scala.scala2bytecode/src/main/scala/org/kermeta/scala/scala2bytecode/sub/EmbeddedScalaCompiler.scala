@@ -1,8 +1,8 @@
-package org.kermeta.language.scalacompiler.sub
+package org.kermeta.scala.scala2bytecode.sub
 
 import java.io.File
 
-object EmbettedScalaCompiler {
+object EmbeddedScalaCompiler {
 	
   def getActualClasspath = {
     var classpath = List[String]()
