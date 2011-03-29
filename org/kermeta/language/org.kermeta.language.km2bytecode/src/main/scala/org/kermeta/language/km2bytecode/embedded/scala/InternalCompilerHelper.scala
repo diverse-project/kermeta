@@ -1,4 +1,4 @@
-package org.embedded
+package org.kermeta.language.km2bytecode.embedded.scala
 
 
 

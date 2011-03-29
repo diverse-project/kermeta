@@ -1,10 +1,11 @@
-package org.embedded
+package org.kermeta.language.km2bytecode.embedded.scala
 
 import org.kermeta.compilo.scala.LogAspect
+import scala.collection.JavaConversions._
 
-object EmbettedScalaRunner extends LogAspect {
+object EmbeddedScalaRunner extends LogAspect {
 	
-	def run(classpath : String, mainRunner : String , _params : List[String]){
+	def run(classpath : String, mainRunner : String , _params : java.util.List[String]){
 		
 		var startTime = System.currentTimeMillis
 		log.info("Scala Running step begin")

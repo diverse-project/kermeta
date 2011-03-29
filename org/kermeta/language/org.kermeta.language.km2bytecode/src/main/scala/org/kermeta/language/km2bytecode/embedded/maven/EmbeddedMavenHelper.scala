@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.embedded
+package org.kermeta.language.km2bytecode.embedded.maven
 
 import org.kermeta.compilo.scala.GlobalConfiguration
 import java.io.FileWriter

@@ -20,7 +20,8 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl._
-import org.embedded._
+import org.kermeta.language.km2bytecode.embedded.maven._
+import org.kermeta.language.km2bytecode.embedded.scala._
 import org.slf4j.{Logger,LoggerFactory}
 
 object Main extends LogAspect {
@@ -185,7 +186,7 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
 
     if (scalacompile){
       if (false && GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
-        var classpath =EmbettedScalaCompiler.getActualClasspath
+        var classpath =EmbeddedScalaCompiler.getActualClasspath
         
         if (additionalClassPath != null)
           classpath = additionalClassPath ++ classpath
@@ -198,14 +199,14 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
           System.setErr(new java.io.PrintStream(outputStream))
         }
                 
-        var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+        var compilationResult = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
         result = compilationResult
 
         
         //Scala runner
         if(compilationResult == 0){
 
-          EmbettedScalaRunner.run(classpath+File.pathSeparator+GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
+          EmbeddedScalaRunner.run(classpath+File.pathSeparator+GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
         }
         if (outputStream != null){
           System.setOut(new PrintStream(oldOut))

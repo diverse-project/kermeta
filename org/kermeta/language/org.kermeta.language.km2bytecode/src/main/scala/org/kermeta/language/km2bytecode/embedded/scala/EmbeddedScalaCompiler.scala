@@ -1,10 +1,11 @@
-package org.embedded
+package org.kermeta.language.km2bytecode.embedded.scala
 
 
 import org.kermeta.compilo.scala.LogAspect
 import java.io.File
+import scala.collection.JavaConversions._
 
-object EmbettedScalaCompiler extends LogAspect {
+object EmbeddedScalaCompiler extends LogAspect {
 	
   def getActualClasspath = {
     var classpath = List[String]()
@@ -17,8 +18,8 @@ object EmbettedScalaCompiler extends LogAspect {
     classpath
   }
 	
-  def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : List[String], fsc : Boolean) : Int = {
-		
+  def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : java.util.List[String], fsc : Boolean) : Int = {
+
     var startTime = System.currentTimeMillis
     var compilationResult = 0
 
