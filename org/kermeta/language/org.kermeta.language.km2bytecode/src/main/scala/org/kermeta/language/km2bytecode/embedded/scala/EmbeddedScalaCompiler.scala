@@ -33,7 +33,7 @@ object EmbeddedScalaCompiler extends LogAspect {
     var listSrcFiles = InternalCompilerHelper.listFile(new File(srcPATH))
     /* Build class path */
 		
-    log.info("Scala compilation step begin on "+listSrcFiles.size+" files")
+    log.info("Scala2bytecode compilation step begin on "+listSrcFiles.size+" files")
 		
     var classpath : StringBuilder = new StringBuilder("."+File.pathSeparator)
     for(path <- jars) {
@@ -52,7 +52,7 @@ object EmbeddedScalaCompiler extends LogAspect {
     }
 		
     var endTime= System.currentTimeMillis() - startTime
-    log.info("Scala compilation step complete in "+(endTime)+" millisecondes ")
+    log.info("Scala2bytecode compilation step complete in "+(endTime)+" millisecondes ")
 		
     return compilationResult
   }
