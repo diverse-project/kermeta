@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
+//import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -31,7 +32,11 @@ import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.loader.kp.KpLoader;
 import org.kermeta.language.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
+import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
+//import scala.collection.JavaConversions.JListWrapper;
+//import scala.collection.JavaConversions.JListWrapper;
+//import org.embedded.EmbeddedMavenHelper;
 
 
 /**
@@ -51,6 +56,7 @@ public class KermetaCompiler {
 	public String targetIntermediateFolder;
 	public String projectName = "project";
 	public KpVariableExpander variableExpander;
+        public Boolean useFSC = false;  // separate compilation server
 	
 	/**
 	 * Constructor
@@ -138,8 +144,11 @@ public class KermetaCompiler {
 		String fileLocation = mergedFile.toURI().toURL().getFile();
 		km2Scala(kp, varExpander, fileLocation);
 		// deal with scala to bytecode
+		scala2bytecode();
 	}	
 
+
+	
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		
@@ -284,28 +293,45 @@ public class KermetaCompiler {
 	
 
 	public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL) {
-		GlobalConfiguration.outputFolder_$eq(targetFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
-		
-        GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."+kp.getGroup()+"."+kp.getName());
-        GlobalConfiguration.props_$eq(new Properties());
-        GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
-        GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
-        GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
-            // GroupId and ArtifactId are used to prefix the generated code
-        GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
-        GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
-        //GlobalConfiguration.load(GlobalConfiguration.props());
-        GlobalConfiguration.setScalaAspectPrefix(kp.getGroup()+"."+kp.getName());
-      /*  
-        if(packageEquivalences != null){
-            for (int i = 0; i < packageEquivalences.length; i++) {
-				PackageEquivalence equivalence = packageEquivalences[i];
-				this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
-				kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
-			}
-        }*/
-		org.kermeta.compilo.km2bytecode_shaded.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.km2bytecode_shaded.scala.Compiler();
-		km2ScalaCompiler.compile(kmFileURL);
+            GlobalConfiguration.outputFolder_$eq(targetFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
+            GlobalConfiguration.outputProject_$eq(targetFolder+"/"+INTERMEDIATE_SUBFOLDER);
+            GlobalConfiguration.outputBinFolder_$eq(targetFolder+"/classes");
+            GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."+kp.getGroup()+"."+kp.getName());
+            GlobalConfiguration.props_$eq(new Properties());
+            GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
+            GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
+            GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
+                // GroupId and ArtifactId are used to prefix the generated code
+            GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
+            GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
+            //GlobalConfiguration.load(GlobalConfiguration.props());
+            GlobalConfiguration.setScalaAspectPrefix(kp.getGroup()+"."+kp.getName());
+          /*
+            if(packageEquivalences != null){
+                for (int i = 0; i < packageEquivalences.length; i++) {
+                                    PackageEquivalence equivalence = packageEquivalences[i];
+                                    this.getLog().info("   PackageEquivalence found: " + equivalence.getEcorePackageName() + " -> " +equivalence.getJavaPackageName());
+                                    kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
+                            }
+            }*/
+            org.kermeta.compilo.km2bytecode_shaded.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.km2bytecode_shaded.scala.Compiler();
+            km2ScalaCompiler.compile(kmFileURL);
 	}
 	
+    private void scala2bytecode() {
+       // scala.collection.immutable.List<String> classpath = org.embedded.EmbettedScalaCompiler.getActualClasspath();
+       java.util.List<String> additionalClassPath = new java.util.ArrayList<String>();
+       // s1.add("titi");
+       // s1.add("toto");
+      
+        /*EmbeddedMavenHelper.run(GlobalConfiguration.clean(),
+                                GlobalConfiguration.createPackage(),
+                                GlobalConfiguration.standalone(),
+                                GlobalConfiguration.exec(),
+                                additionalClassPathWrapper.toList(),
+                                System.out);
+        */   
+        EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC);
+        
+    }
 }
