@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.language</groupId>
 	<artifactId>language.km2bytecode.shaded</artifactId>
-	<name>org.kermeta.language.km2bytecode</name>
+	<name>org.kermeta.language.km2bytecode.shaded</name>
 	<version>2.0.1-SNAPSHOT</version>
 	<description>K2 Compiler</description>
 	<packaging>jar</packaging>
