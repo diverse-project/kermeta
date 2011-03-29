@@ -330,7 +330,8 @@ public class KermetaCompiler {
                                 GlobalConfiguration.exec(),
                                 additionalClassPathWrapper.toList(),
                                 System.out);
-        */   
+        */  
+       System.out.println("Compiling generated scala to bytecode in "+GlobalConfiguration.outputBinFolder());
         EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC);
         
     }
