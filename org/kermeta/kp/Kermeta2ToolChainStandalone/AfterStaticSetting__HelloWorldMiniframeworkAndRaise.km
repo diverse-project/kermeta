@@ -4848,15 +4848,15 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/standard/Summable/@kOwnedTags.0" name="Summable" superType="//kermeta/standard/Summable/@containedType.0" isAspect="false" isAbstract="true" isSingleton="false">
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/standard/Summable"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
-        <ownedOperation name="minus" type="//kermeta/standard/Summable/minus/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
-          <ownedParameter name="other" type="//kermeta/standard/Summable/minus/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
-          </ownedParameter>
-        </ownedOperation>
         <ownedOperation name="plus" type="//kermeta/standard/Summable/plus/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
           <ownedParameter name="other" type="//kermeta/standard/Summable/plus/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation name="minus" type="//kermeta/standard/Summable/minus/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
+          <ownedParameter name="other" type="//kermeta/standard/Summable/minus/@ownedParameter.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Summable"/>
           </ownedParameter>
         </ownedOperation>

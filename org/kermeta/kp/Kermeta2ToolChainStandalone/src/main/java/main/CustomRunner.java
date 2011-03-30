@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CustomRunner {
 	
-	public static final String CUSTOM_PATH = "C:/Users/cbouhour/WorkspaceJAVA_DEV_K2/";
+	public static final String CUSTOM_PATH = "C:/Users/dvojtise/workspaces/kermetaV2_svn_5/";
 	public static final String SUFFIX_SAVE = "_HelloWorldMiniframeworkAndRaise";
 	
 	public static void main(String[] args) throws IOException {
