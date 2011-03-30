@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.merger.binarymerger</artifactId>
     <packaging>jar</packaging>
-    <name>language.merger.binarymerger :: binary merger for Kermeta 2</name>
+    <name>language.merger.binarymerger.art2 :: art2 binary merger for Kermeta 2</name>
 
     <dependencies>
     
