@@ -1,0 +1,69 @@
+/* $Id:$ 
+ * Creation : October 27, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek
+ */
+
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+require "../../binarymerger/Signature.kmt"
+require "../merger/ClassSignature.kmt"
+require "../merger/NamedElementSignature.kmt"
+require "../../binarymerger/UnarySelectionner.kmt"
+
+
+using kermeta::standard
+
+// TODO : this should be replaced by the notion of Mergeable
+// By default Object cannot be Mergeable
+// As Mergeable, should also add an operation getSignature
+aspect class Object
+{
+	
+	/** if this element is in the AspectModel, it may have an equivalent in the MergedModel */
+	reference similarElementInMergedModel : Object#similarElementInAspectModel
+	/** if this element is in the MergedModel, it may have an equivalent in the AspectModel */
+	reference similarElementInAspectModel : Object#similarElementInMergedModel
+	
+	operation getSignature() : org::kermeta::binarymerger::Signature is do
+		// default return standard Signature
+		result := org::kermeta::binarymerger::Signature.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+	
+	operation getUnarySelectionnerForAttribute(attributeName : String): org::kermeta::binarymerger::UnarySelectionner is do
+		// default return a Selectionner that always return the primary model element
+		result := org::kermeta::binarymerger::UnarySelectionner.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+	
+	operation getUnarySelectionnerForReference(referenceName : String) : org::kermeta::binarymerger::UnarySelectionner  is do
+		// default return a Selectionner that always return the primary model element
+		result := org::kermeta::binarymerger::UnarySelectionner.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+}
+
+aspect class Class
+{
+	method getSignature() : org::kermeta::binarymerger::Signature is do
+		// default return standard Signature
+		result := kermeta::language::structure::merger::ClassSignature.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+}
+
+aspect class NamedElement
+{
+	method getSignature() : org::kermeta::binarymerger::Signature is do
+		// default return standard Signature
+		result := kermeta::language::structure::merger::NamedElementSignature.new
+		// DVK : is it possible to not create it and always reuse the same instance ?
+	end
+}

@@ -1,0 +1,54 @@
+/* $Id:$ 
+ * Creation : December 15, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package test::exceptions;
+
+
+require kermeta
+using kermeta::standard
+
+class Main
+{
+	reference errors : MyException[*]
+	
+	operation main() : Void is do 
+	
+		do 
+			doSomethingWithException
+			
+		rescue (mergeException : MyException)
+			errors.add(mergeException)
+		end
+	end
+	
+	operation doSomethingWithException() is do
+		raise MyException.new.initialize("Cannot merge classes which aren\'t opened using aspect",  self)
+	end
+	
+	operation getErrors() : OrderedSet<MyException> is do
+		result := errors
+	end
+}
+
+class MyException inherits kermeta::exceptions::Exception {
+
+	/** optional, pointer to the primary element that cannot be merged with the aspectElement  */
+	reference erroneousElement : Object
+	
+	/**
+	 * build helper
+	 */
+	operation initialize(msg : kermeta::standard::String, erroneousElem : Object) : MyException is do
+	    message := msg
+	    erroneousElement := erroneousElem
+		result := self
+	end
+	
+}
