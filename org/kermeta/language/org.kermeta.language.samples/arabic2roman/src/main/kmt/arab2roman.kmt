@@ -1,0 +1,168 @@
+/* $Id: arab2roman.kmt,v 1.3 2006-10-31 12:29:47 rdelamar Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : arab2roman.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Authors : 
+ *        Jean-Marc Jézéquel <jezequel@irisa.fr>
+ * Description : 
+ *       Sample of transformation in Kermeta that transform roman number into arabic number  
+ */
+
+using kermeta::standard
+using kermeta::utils
+
+
+package root_package{
+
+class ArabicNumber
+{
+
+reference content : Digit[0..*]
+
+method toString() : String is do
+	    result := ""
+		content.each{digit  | result := result + digit.~value.toString()}
+	end
+	operation getValue() : Integer is do
+		result := 0
+		content.each{n  | result := result*10 + n.~value}
+	end
+	
+	// precondition newValue < 10000
+	operation setValue(newValue : Integer) is do
+		var rest : Integer init newValue
+		var digit : Digit
+		content.clear
+		from var i : Integer init 1000
+		until i == 0
+		loop
+			digit := Digit.new  digit.~value := rest / i
+			rest := rest - digit.~value * i
+			content.add(digit)
+			i := i / 10
+		end		
+		var i_digit : Integer 
+		i_digit := rest / 1000
+	end
+
+}
+
+class Digit 
+{
+	attribute ~value : Integer
+}
+
+
+class RomanNumber
+{
+	reference content : seq Letter[0..*]
+	method toString() : String is do
+	    result := ""
+		content.each{letter  | result := result + letter.~value}
+	end
+	operation getValue() : Integer is do
+		var previous : Integer init 0
+		result := 0
+		content.each{letter  | do
+			if (result == 0 ) or (previous >= letter.getValue) then  
+				result := result + letter.getValue
+			else 
+				// since we wrongly added 'previous' in the previous iteration
+				// we now have to remove it twice
+				result := result + letter.getValue - 2 * previous 
+			end
+			previous := letter.getValue
+		end
+		}
+	end
+}
+
+class Letter
+{
+	attribute ~value : String
+	operation getValue() : Integer is do
+		if ~value == "I" then result := 1 
+		else if ~value == "V" then result := 5
+		else if ~value == "X" then result := 10 
+		else if ~value == "L" then result := 50
+		else if ~value == "C" then result := 100
+		else if ~value == "D" then result := 500
+		else if ~value == "M" then result := 1000 end
+		end end end end end end		
+	end
+}
+
+class Main
+{
+	// convert a roman number to an arabic one
+	operation roman2arab(r : RomanNumber) : ArabicNumber is do
+	    result := ArabicNumber.new()
+		result.setValue(r.getValue())
+	end
+	// convert an arab number to a roman one
+	// precondition : a < 3999
+	operation arab2roman(a : ArabicNumber) : RomanNumber is do
+	     result := RomanNumber.new()
+	     var position : Integer init a.content.size
+	     // assertion: position <= 4
+	     if position == 4 then  
+		 	addDigit2roman(result,a.content.elementAt(0),"M"," overflow"," overflow")
+		 	position := position - 1
+		 end
+	     if position == 3 then  
+		 	addDigit2roman(result,a.content.elementAt(a.content.size-3),"C","D","M")
+		 	position := position - 1
+		 end
+	     if position == 2 then  
+		 	addDigit2roman(result,a.content.elementAt(a.content.size-2),"X","L","C")
+		 	position := position - 1
+		 end
+	     if position == 1 then  
+		 	addDigit2roman(result,a.content.elementAt(a.content.size-1),"I","V","X")
+		 end
+	end
+	// convert a single digit to roman style, depending on its position
+	operation addDigit2roman(r: RomanNumber, d : Digit, unit : String, five : String, ten : String) is do
+		if d.~value < 4 then addLetters(r,d.~value, unit)
+		else if d.~value == 4 then addLetters(r,1,unit) addLetters(r,1,five) 
+		else if d.~value < 9 then do
+			addLetters(r,1,five)
+			addLetters(r,d.~value-5, unit)
+			end
+		else if d.~value == 9 then do addLetters(r,1,unit) addLetters(r,1,ten) end
+		end end end end
+	end 
+	// add letter 'l' 'times' times
+	operation addLetters(r: RomanNumber, times : Integer, l : String) is do
+		var aLetter : Letter init Letter.new()
+		aLetter.~value := l
+		from var i : Integer init 0
+		until i >= times
+		loop
+			r.content.add(aLetter)
+			i := i + 1
+		end		
+	end
+
+    operation main() : Void is do 
+       	var a : ArabicNumber init ArabicNumber.new()
+   	    var r : RomanNumber init RomanNumber.new()
+       	from var i : Integer init 0
+		until i > 3999
+		loop
+			a.setValue(i)
+			r := arab2roman(a)
+			if r.getValue != i then 
+				stdio.writeln(i.toString + ": " + r.toString + "!=" + roman2arab(r).toString)
+			end
+			i := i + 93
+		end		
+       stdio.writeln(a.toString + "=" + r.toString)
+    end
+}
+
+
+}

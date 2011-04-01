@@ -1,0 +1,16 @@
+KermetaProject :"arabic2roman" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "C:/Users/mgouyett/Marie/Work/workspaceDevKermeta10/workspace/org.kermeta.language.samples/arabic2roman/src/main/kmt/arab2roman.kmt" 
+	//source = "foo" 
+	//source = "*/org/eclipse/uml2.ecore" from "uml2" 
+	//source = ECORE_NSURI from "ecore" 
+	// import the same ecore file in 2 variants : uml2 and uml2.1 
+	//source = "**/uml2.ecore um2" from "uml2_dep"
+	//source = "**/uml2.ecore um2.1" from "uml2_dep" 
+	
+	// Need later to add dependency on little framework
+	//dependency "new_file.kp" 
+	 
+} 
