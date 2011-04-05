@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -122,8 +123,17 @@ public class KpCompilerMojo extends AbstractMojo {
 	        this.getLog().info("Generating other resources in "+resourceOutputDirectory.getAbsolutePath());
 	        
 	        checkFile(kp.getAbsolutePath().toString());
+	        
+	        List<String> mavenClassPathList = project.getCompileClasspathElements();
+	        List<String> classPathList = new ArrayList<String>(); 
+	        if(mavenClassPathList.size() >=1){
+	        	// ignore first entry wich correspond to current project target class folder
+	        	classPathList.addAll(mavenClassPathList.subList(1, mavenClassPathList.size()));
+	        }
+	        
+	        
 	        KermetaCompiler.initializeFactory();
-	        KermetaCompiler compiler = new KermetaCompiler(sourceOutputDirectory.toString(), intermediateFilesRequired);
+	        KermetaCompiler compiler = new KermetaCompiler(sourceOutputDirectory.toString(), intermediateFilesRequired, classPathList);
 			
 			compiler.kp2bytecode(kp.toString());
 			

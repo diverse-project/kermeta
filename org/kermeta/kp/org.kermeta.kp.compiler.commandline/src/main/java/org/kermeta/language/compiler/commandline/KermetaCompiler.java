@@ -54,6 +54,7 @@ public class KermetaCompiler {
 	public Boolean saveIntermediateFiles = false;
 	public String targetFolder;
 	public String targetIntermediateFolder;
+	public List<String> additionalClassPath = new java.util.ArrayList<String>();
 	public String projectName = "project";
 	public KpVariableExpander variableExpander;
         public Boolean useFSC = false;  // separate compilation server
@@ -67,6 +68,18 @@ public class KermetaCompiler {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetFolder = targetFolder;
+		registerMVNUrlHandler();
+	}
+	/**
+	 * Constructor
+	 * @param targetFolder
+	 * @param saveIntermediateFiles
+	 */
+	public KermetaCompiler(String targetFolder, Boolean saveIntermediateFiles, List<String> additionalClassPath) {
+		super();
+		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.targetFolder = targetFolder;
+		this.additionalClassPath.addAll(additionalClassPath);
 		
 		registerMVNUrlHandler();
 	}
@@ -320,8 +333,9 @@ public class KermetaCompiler {
 	
     private void scala2bytecode() {
        // scala.collection.immutable.List<String> classpath = org.embedded.EmbettedScalaCompiler.getActualClasspath();
-       java.util.List<String> additionalClassPath = new java.util.ArrayList<String>();
-       // s1.add("titi");
+       //java.util.List<String> additionalClassPath = new java.util.ArrayList<String>();
+      // additionalClassPath.add("mvn:org.scala-lang/scala-library/2.8.1");
+      // additionalClassPath.add("C:/Users/dvojtise/.m2/repository/org/scala-lang/scala-library/2.8.1/scala-library-2.8.1.jar");
        // s1.add("toto");
       
         /*EmbeddedMavenHelper.run(GlobalConfiguration.clean(),
@@ -330,9 +344,14 @@ public class KermetaCompiler {
                                 GlobalConfiguration.exec(),
                                 additionalClassPathWrapper.toList(),
                                 System.out);
-        */  
+        */
+       
        System.out.println("Compiling generated scala to bytecode in "+GlobalConfiguration.outputBinFolder());
-        EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC);
+       System.out.println("Classpath:");
+       for(String path : additionalClassPath){
+           System.out.println("\t"+path);
+       }
+       EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC);
         
     }
 }
