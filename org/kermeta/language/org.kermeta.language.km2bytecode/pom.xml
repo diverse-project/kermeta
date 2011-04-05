@@ -4,7 +4,7 @@
     <groupId>org.kermeta.language</groupId>
     <artifactId>language.km2bytecode</artifactId>
     <name>org.kermeta.language.km2bytecode</name>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1-BETA1</version>
     <description>K2 Compiler</description>
     <packaging>jar</packaging>
     <properties>
@@ -203,7 +203,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.library.core</artifactId>
-	    <version>2.0.1-SNAPSHOT</version>
+	    <version>2.0.1-BETA1</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
