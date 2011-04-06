@@ -43,9 +43,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>kermeta.io,kermeta.standard,kermeta.utils,kermeta.exceptions</Export-Package>
-                        <Bundle-SymbolicName>org.kermeta.language.library.core</Bundle-SymbolicName>
-                        <Import-Package>!kermeta.io,*</Import-Package>
+                        <Export-Package>k2.io,k2.standard,k2.persistence,k2.exceptions,k2.utils</Export-Package>
+                        <Bundle-SymbolicName>org.k2.language.library.core</Bundle-SymbolicName>
+                        <Import-Package>!k2.io,*</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
                 </configuration>
