@@ -68,7 +68,7 @@ public class KpCompilerMojo extends AbstractMojo {
     protected MavenProject project;
     /**
      * Input kermeta project (kp) file
-     * @parameter default-value="${basedir}/project.kpt"
+     * @parameter default-value="${basedir}/project.kp"
      */
     private File kp;
     

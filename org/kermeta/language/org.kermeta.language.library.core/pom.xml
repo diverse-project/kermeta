@@ -26,7 +26,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <kp>project.kpt</kp>
+                            <kp>project.kp</kp>
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
