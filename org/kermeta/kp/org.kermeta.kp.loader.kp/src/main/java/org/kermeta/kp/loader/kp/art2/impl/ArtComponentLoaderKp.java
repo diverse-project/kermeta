@@ -39,7 +39,7 @@ import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 //import org.kermeta.language.api.port.PortKpLoader;
 import org.kermeta.language.structure.ModelingUnit;
 import org.osgi.framework.Bundle;
-import org.kermeta.kp.editor.mopp.KptResourceFactory;
+import org.kermeta.kp.editor.mopp.KpResourceFactory;
 
 @ThirdParties( { 
 		@ThirdParty(name = "org.kermeta.kp.model", url = "mvn:org.kermeta.kp/kp.model")
@@ -85,7 +85,7 @@ public class ArtComponentLoaderKp extends AbstractComponentType  {
 	public KermetaProject load(final String uriKpResource) {
 		logger.debug("Loading resouce at : " + uriKpResource);
 		KermetaProject result = null;
-		KptResourceFactory factory = new KptResourceFactory();
+		KpResourceFactory factory = new KpResourceFactory();
 		logger.debug("factory reached : " + factory.toString());
 		// create resource set
 		ResourceSet rs = new ResourceSetImpl() ;

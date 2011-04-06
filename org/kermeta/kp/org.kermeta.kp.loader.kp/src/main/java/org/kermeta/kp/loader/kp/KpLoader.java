@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.editor.mopp.KptResourceFactory;
+import org.kermeta.kp.editor.mopp.KpResourceFactory;
 
 public class KpLoader {
 
@@ -34,7 +34,7 @@ public class KpLoader {
 	}
 	public KermetaProject loadKp(URI uriKpResource) {
 		KermetaProject result = null;
-		KptResourceFactory factory = new KptResourceFactory();
+		KpResourceFactory factory = new KpResourceFactory();
 		System.out.println("factory reached : " + factory.toString());
 		// create resource set
 		ResourceSet rs = new ResourceSetImpl() ;
