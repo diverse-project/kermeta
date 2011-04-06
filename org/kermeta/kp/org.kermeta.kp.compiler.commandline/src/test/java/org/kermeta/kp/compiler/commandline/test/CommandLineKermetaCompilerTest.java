@@ -56,7 +56,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         System.out.println("            to " + targetFolder);
         
         // Phase 1 : compiles without crashing
-        KermetaCompiler compiler = new KermetaCompiler(targetFolder, true);
+        KermetaCompiler compiler = new KermetaCompiler(targetFolder, targetFolder,false,true);
 		compiler.kp2bytecode(kpFile);
 		
 		

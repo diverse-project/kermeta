@@ -49,7 +49,7 @@ public class KermetaCompilerCLI {
 	}
 		
 	private void run() throws IOException {
-		KermetaCompiler compiler = new KermetaCompiler(outputFolder, intermediateFilesRequired);
+		KermetaCompiler compiler = new KermetaCompiler(outputFolder,outputFolder,false, intermediateFilesRequired);
 		compiler.kp2bytecode(kpFile);
 	}
 

@@ -87,6 +87,13 @@ public class KpCompilerMojo extends AbstractMojo {
     * @parameter default-value="${project.build.directory}/generated-sources/kermeta"
     */
    private File sourceOutputDirectory;
+   
+   /**
+    * The directory root under which generated class files will be placed;  
+    *
+    * @parameter default-value="${project.build.directory}"
+    */
+   private File targetDirectory;
 
 
     /**
@@ -108,6 +115,15 @@ public class KpCompilerMojo extends AbstractMojo {
      * @parameter expression="true"
      */
     private Boolean intermediateFilesRequired;
+    
+    
+    /**
+     * generateKmOnly : generate only the km, will not compile the final bytecode classes, default is false
+     *
+     * @parameter expression="false"
+     */
+    private Boolean generateKmOnly;
+    
     /**
      * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
      *
@@ -133,7 +149,10 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
 	        
 	        KermetaCompiler.initializeFactory();
-	        KermetaCompiler compiler = new KermetaCompiler(sourceOutputDirectory.toString(), intermediateFilesRequired, classPathList);
+	        KermetaCompiler compiler = new KermetaCompiler(targetDirectory.toString(), 
+	        		sourceOutputDirectory.toString(),
+	        		generateKmOnly,
+	        		intermediateFilesRequired, classPathList);
 			
 			compiler.kp2bytecode(kp.toString());
 			

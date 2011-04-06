@@ -52,7 +52,9 @@ public class KermetaCompiler {
 	
 	
 	public Boolean saveIntermediateFiles = false;
+	public Boolean generateKmOnly = false;
 	public String targetFolder;
+	public String targetGeneratedSourceFolder;
 	public String targetIntermediateFolder;
 	public List<String> additionalClassPath = new java.util.ArrayList<String>();
 	public String projectName = "project";
@@ -64,9 +66,11 @@ public class KermetaCompiler {
 	 * @param targetFolder
 	 * @param saveIntermediateFiles
 	 */
-	public KermetaCompiler(String targetFolder, Boolean saveIntermediateFiles) {
+	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles) {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.generateKmOnly = generateKmOnly;
+		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
 		this.targetFolder = targetFolder;
 		registerMVNUrlHandler();
 	}
@@ -75,10 +79,12 @@ public class KermetaCompiler {
 	 * @param targetFolder
 	 * @param saveIntermediateFiles
 	 */
-	public KermetaCompiler(String targetFolder, Boolean saveIntermediateFiles, List<String> additionalClassPath) {
+	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, List<String> additionalClassPath) {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.generateKmOnly = generateKmOnly;
 		this.targetFolder = targetFolder;
+		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
 		this.additionalClassPath.addAll(additionalClassPath);
 		
 		registerMVNUrlHandler();
@@ -143,7 +149,7 @@ public class KermetaCompiler {
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		File mergedFile = new File(targetFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
+		File mergedFile = new File(targetGeneratedSourceFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
 		if(!mergedFile.getParentFile().exists()){
 			mergedFile.getParentFile().mkdirs();
 		}
@@ -287,7 +293,7 @@ public class KermetaCompiler {
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
 		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetFolder+"/"+INTERMEDIATE_SUBFOLDER+"/beforeResolving.km").convert(mu);
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetGeneratedSourceFolder+"/"+INTERMEDIATE_SUBFOLDER+"/beforeResolving.km").convert(mu);
 		
 		//Resolving
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
@@ -306,8 +312,8 @@ public class KermetaCompiler {
 	
 
 	public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL) {
-            GlobalConfiguration.outputFolder_$eq(targetFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
-            GlobalConfiguration.outputProject_$eq(targetFolder+"/"+INTERMEDIATE_SUBFOLDER);
+            GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
+            GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder+"/"+INTERMEDIATE_SUBFOLDER);
             GlobalConfiguration.outputBinFolder_$eq(targetFolder+"/classes");
             GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."+kp.getGroup()+"."+kp.getName());
             GlobalConfiguration.props_$eq(new Properties());
