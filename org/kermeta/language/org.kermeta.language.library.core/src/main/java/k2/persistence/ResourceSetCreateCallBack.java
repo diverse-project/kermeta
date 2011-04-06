@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package kermeta.persistence;
+package k2.persistence;
 
 /**
  *

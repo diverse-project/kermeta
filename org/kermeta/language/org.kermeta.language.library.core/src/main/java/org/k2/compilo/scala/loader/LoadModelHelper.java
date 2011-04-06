@@ -1,4 +1,4 @@
-package org.kermeta.compilo.scala.loader;
+package org.k2.compilo.scala.loader;
 
 import java.io.File;
 import java.io.IOException;

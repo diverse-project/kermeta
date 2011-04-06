@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.kermeta.console;
+package org.k2.console;
 
 /**
  *
