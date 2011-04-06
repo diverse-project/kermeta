@@ -157,13 +157,17 @@ public class KermetaCompiler {
 		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
 		writer.close();
 		
-		
-		// deal with km to scala
-			// compiler require a file location not an URL
-		String fileLocation = mergedFile.toURI().toURL().getFile();
-		km2Scala(kp, varExpander, fileLocation);
-		// deal with scala to bytecode
-		scala2bytecode();
+		if(!generateKmOnly){
+			// deal with km to scala
+				// compiler require a file location not an URL
+			String fileLocation = mergedFile.toURI().toURL().getFile();
+			km2Scala(kp, varExpander, fileLocation);
+			// deal with scala to bytecode
+			scala2bytecode();
+		}
+		else{
+			System.out.println("generateKmOnly flag set => Ignore scala generation");
+		}
 	}	
 
 
