@@ -25,7 +25,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.kermeta.compilo.km2bytecode_shaded.scala.GlobalConfiguration;
+import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
@@ -327,7 +327,7 @@ public class KermetaCompiler {
                                     kermeta.utils.TypeEquivalence.packageEquivelence().put(equivalence.getEcorePackageName(), equivalence.getJavaPackageName());
                             }
             }*/
-            org.kermeta.compilo.km2bytecode_shaded.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.km2bytecode_shaded.scala.Compiler();
+            org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
             km2ScalaCompiler.compile(kmFileURL);
 	}
 	
