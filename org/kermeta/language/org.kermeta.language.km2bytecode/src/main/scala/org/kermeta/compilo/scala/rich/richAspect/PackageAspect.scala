@@ -17,7 +17,7 @@ trait PackageAspect extends ObjectAspect with IVisitable with LogAspect {
     visitor.visit(this)
   }
 
-  override def getQualifiedNameCompilo():String ={kermeta.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName()) }
+  override def getQualifiedNameCompilo():String ={k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName()) }
 	
   def getQualifiedName():String ={
     var res : String=""

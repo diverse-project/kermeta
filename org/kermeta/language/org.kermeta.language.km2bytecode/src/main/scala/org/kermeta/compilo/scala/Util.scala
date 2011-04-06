@@ -112,7 +112,7 @@ object Util extends LogAspect {
 	
     /*
      def getProtectedQualifiedName(p : Package) : String = {
-     var genpackageName = kermeta.utils.TypeEquivalence.getPackageEquivalence(p.getQualifiedNameCompilo)
+     var genpackageName = k2.utils.TypeEquivalence.getPackageEquivalence(p.getQualifiedNameCompilo)
      if (Util.hasEcoreTag(p)){
      //problem qualifiedname can finish by `
      if(genpackageName.endsWith("`")){

@@ -1,8 +1,7 @@
 package org.kermeta.compilo.scala
 
-import loader._
 import org.kermeta.compilo.scala.rich._
-import _root_.kermeta.utils.ReflexivityLoader
+import _root_.k2.utils.ReflexivityLoader
 import scala.collection.JavaConversions._
 import org.kermeta.language._
 import org.kermeta.language.structure._
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.Executors
 import java.io.File
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
-import org.kermeta.compilo.scala.loader.LoadModelHelper
+import org.k2.compilo.scala.loader.LoadModelHelper
 
 class Compiler extends LogAspect {
 

@@ -14,9 +14,9 @@ trait EnumerationAspect extends ObjectAspect {
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (!Util.hasEcoreTag(this)){
                   	//res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
-			res.append("_root_."+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())
+			res.append("_root_."+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())
 		}else{
-			res.append("_root_."+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())	
+			res.append("_root_."+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
 		}
 	}
 	
@@ -24,10 +24,10 @@ trait EnumerationAspect extends ObjectAspect {
 		
 		if (!Util.hasEcoreTag(this)){
 			var res : StringBuilder = new StringBuilder
-			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
-			res.append("import kermeta.io._\n")			
-			res.append("import kermeta.standard._\n")
-			res.append("import kermeta.standard.JavaConversions._\n")
+			res.append("package "+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
+			res.append("import k2.io._\n")
+			res.append("import k2.standard._\n")
+			res.append("import k2.standard.JavaConversions._\n")
 			res append "object "+this.getName()+" extends scala.Enumeration {\n"
 			res append "type "+this.getName()+" = Value\n"
 			res append "val "
@@ -38,7 +38,7 @@ trait EnumerationAspect extends ObjectAspect {
 				i=i+1
 			}
 			res append " = Value\n"+"}"
-			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())			
+			Util.generateFile(k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())
 		}
 
 	}

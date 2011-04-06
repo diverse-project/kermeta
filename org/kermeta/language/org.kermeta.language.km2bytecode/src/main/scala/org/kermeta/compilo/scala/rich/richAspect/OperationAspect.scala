@@ -45,7 +45,7 @@ trait OperationAspect extends ObjectAspect with LogAspect {
       res.append(") : ")
       var res1 = new StringBuilder
       this.getListorType(res1)
-      if ("_root_.kermeta.standard.Void".equals(res1.toString)){
+      if ("_root_.k2.standard.Void".equals(res1.toString)){
         res.append("Unit")
       }else{
         res.append(res1)
@@ -87,7 +87,7 @@ trait OperationAspect extends ObjectAspect with LogAspect {
       /* Return Type Declaration */
      var res1 = new StringBuilder
       this.getListorType(res1)
-      if ("_root_.kermeta.standard.Void".equals(res1.toString)){
+      if ("_root_.k2.standard.Void".equals(res1.toString)){
         res.append("Unit")
       }else{
         res.append(res1)
@@ -177,7 +177,7 @@ trait OperationAspect extends ObjectAspect with LogAspect {
   def getLocalTypeEquivalence(t : String ) : String = {
     val booleanRegex = ".*Boolean".r
     t match {
-        case "kermeta.standard.Void" => "Unit"
+        case "k2.standard.Void" => "Unit"
         case "Int" => "java.lang.Integer"
         //TO Improve
                 /*case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]

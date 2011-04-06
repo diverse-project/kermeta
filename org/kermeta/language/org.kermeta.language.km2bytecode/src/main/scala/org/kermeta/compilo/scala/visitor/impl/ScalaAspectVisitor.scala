@@ -54,7 +54,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
 
      // println(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo)
 
-      genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo))
+      genpackageName.append(k2.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo))
 	
       //og.error("AspectVisitor ClassDef Gen | {} | {}",genpackageName.toString,par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameNoRoot)
 			
@@ -66,10 +66,10 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
 			
       var res : StringBuilder = new StringBuilder
       res.append("package "+Util.protectScalaKeyword(genpackageName.toString)+"\n")
-      res.append("import _root_.kermeta.io._\n")
-      res.append("import _root_.kermeta.standard._\n")
-      res.append("import _root_.kermeta.standard.JavaConversions._\n")
-      res.append("import _root_.kermeta.standard.PrimitiveConversion._\n")
+      res.append("import _root_.k2.io._\n")
+      res.append("import _root_.k2.standard._\n")
+      res.append("import _root_.k2.standard.JavaConversions._\n")
+      res.append("import _root_.k2.standard.PrimitiveConversion._\n")
 //      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
       par.generateScalaCode(res)
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())

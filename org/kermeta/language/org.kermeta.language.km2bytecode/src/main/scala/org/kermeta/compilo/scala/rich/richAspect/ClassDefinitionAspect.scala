@@ -1,7 +1,7 @@
 package org.kermeta.compilo.scala.rich.richAspect
 
 import org.kermeta.compilo.scala.rich._
-import _root_.kermeta.utils.ReflexivityLoader
+import _root_.k2.utils.ReflexivityLoader
 import org.antlr.stringtemplate.StringTemplate
 import org.eclipse.emf.common.util.EList
 import scala.collection.JavaConversions._
@@ -27,7 +27,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
             this.generateParamerterClass(res)
             if (this.getSuperType.size == 0){//1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
                 res append " extends "
-                res.append("_root_.kermeta.standard.KermetaObject")
+                res.append("_root_.k2.standard.KermetaObject")
                 // res.append(" with ScalaAspect.org.eclipse.emf.ecore.EObjectAspect")
 //                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             } else {
@@ -65,7 +65,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
                         i=i+1
                     })
 				
-                res.append(" with "+ "_root_.kermeta.standard.KermetaObject")
+                res.append(" with "+ "_root_.k2.standard.KermetaObject")
 //                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
             
@@ -156,7 +156,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 
     def generategetQualifiedName(res:StringBuilder) = {
         var qualifiedName = ReflexivityLoader.qualifiedName(this)
-        var template = new StringTemplate("override def getMetaClass(): _root_.org.kermeta.language.structure.Class={\n var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure.RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+        var template = new StringTemplate("override def getMetaClass(): _root_.org.kermeta.language.structure.Class={\n var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure.RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
         template.setAttribute("ClassName", qualifiedName)
         res.append(template.toString)
     }
@@ -233,7 +233,7 @@ trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 	
     override def getQualifiedNameCompilo():String = {
 
-      var baseName : String = kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
+      var baseName : String = k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
       return baseName
 
     /*

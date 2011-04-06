@@ -20,8 +20,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl._
-import org.kermeta.language.km2bytecode.embedded.maven._
-import org.kermeta.language.km2bytecode.embedded.scala._
+import org.embedded._
 import org.slf4j.{Logger,LoggerFactory}
 
 object Main extends LogAspect {
@@ -145,7 +144,7 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
       case _ =>
     }
 	  
-	   
+	    
     var compilo = new Compiler
 
 //    inputFile = "/home/barais/NetBeansProjects/org.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
@@ -171,7 +170,7 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
     //inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndIf.km"
 
 //inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndRaise.km"
-
+//inputFile = "/home/barais/cours/TAA20102011/hello.world.km"
         if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)

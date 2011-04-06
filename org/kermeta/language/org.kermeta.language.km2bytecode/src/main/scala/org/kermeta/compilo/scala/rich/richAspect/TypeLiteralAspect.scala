@@ -17,13 +17,13 @@ trait CallTypeLiteralAspect extends ObjectAspect {
              .getTypeDefinition.asInstanceOf[ClassDefinition].getIsSingleton.booleanValue
           if (singleton)
            {
-              res.append("_root_."+kermeta.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+              res.append("_root_."+k2.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
            }else{
                 res.append("scalaUtil.Util.getMetaClass(\"")
-                res.append(kermeta.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+                res.append(k2.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
            }
         }else{
-            res.append("_root_." + kermeta.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+            res.append("_root_." + k2.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
         }
         //this.getTyperef().getType.generateScalaCode(res)
         if (this.getTyperef().getType.isInstanceOf[Class] && !singleton){

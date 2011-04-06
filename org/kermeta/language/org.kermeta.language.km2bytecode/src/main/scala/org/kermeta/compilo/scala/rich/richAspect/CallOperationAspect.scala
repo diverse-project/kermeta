@@ -23,7 +23,7 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
                     if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package])){
                         res.append(GlobalConfiguration.scalaAspectPrefix+".")
                     }
-                    res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedNameCompilo))
+                    res.append(k2.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedNameCompilo))
                     res.append(".RichFactory.create")
                     res.append(ty.getName())
                     var ty1 : ParameterizedType = this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]
@@ -85,11 +85,11 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
             //if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
             //  res.append(Util.protectScalaKeyword(ops.get(0).getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
             //}else{
-            res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
+            res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
 
             //}
         }else{
-            res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(this.getStaticOperation))))
+            res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(this.getStaticOperation))))
 
         }
     }
@@ -175,7 +175,7 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
             if (this.getTarget.isInstanceOf[CallTypeLiteral]){
                 res.append(".asInstanceOf[")
                // if (this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType.isInstanceOf[Class]){
-                    res.append("_root_." +kermeta.utils.TypeEquivalence.getTypeEquivalence(kermeta.utils.UTilScala.getQualifiedNameType(this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType, ".")))
+                    res.append("_root_." +k2.utils.TypeEquivalence.getTypeEquivalence(k2.utils.UTilScala.getQualifiedNameType(this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType, ".")))
                     res.append("]")
                 //}else{
                  //   res.append("_root_." + _root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
@@ -209,7 +209,7 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
                     case "isInstanceOf" => generateIsInstanceOf(res,this.getParameters.get(0) )
         
       
-                    case "isVoid" => { res.append("_root_.kermeta.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
+                    case "isVoid" => { res.append("_root_.k2.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
                     case "add"
                         if (this.getTarget != null && this.getTarget.getStaticType != null && this.getTarget.getStaticType.isInstanceOf[org.kermeta.language.structure.Class]
                             && (this.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("OrderedSet")

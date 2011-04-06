@@ -15,7 +15,7 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
 
     override def generateScalaCode(res : StringBuilder) : Unit = {
 		
-        log.debug("PrimitiveType="+this.getName+"|"+Util.hasEcoreTag(this)+"|"+kermeta.utils.TypeEquivalence.getTypeEquivalence(this.getName))
+        log.debug("PrimitiveType="+this.getName+"|"+Util.hasEcoreTag(this)+"|"+k2.utils.TypeEquivalence.getTypeEquivalence(this.getName))
         if (Util.hasEcoreTag(this)){
             var t1 = this.getKOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName))
             var t =
@@ -31,11 +31,11 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
                     }
                 }
             //   println("primitive " + t)
-            res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
-            log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+            res.append(k2.utils.TypeEquivalence.getTypeEquivalence(t))
+            log.debug("PrimitiveTypeComplement="+k2.utils.TypeEquivalence.getTypeEquivalence(t))
             /* Check Generique Param */
             try{
-                var c = java.lang.Class.forName(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+                var c = java.lang.Class.forName(k2.utils.TypeEquivalence.getTypeEquivalence(t))
                 if(c.getTypeParameters.size > 0){
                     res.append("[")
                     for(i <- 0 until c.getTypeParameters.length ){
@@ -57,7 +57,7 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
                 this.getInstanceType.asInstanceOf[ObjectAspect].generateScalaCode(res)
             }
             else
-                res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
+                res.append(k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
         }
 
 		
@@ -72,7 +72,7 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
     }
 
         def whichBoolean():String ={
-        var res =  kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
+        var res =  k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
        //var res = new StringBuilder
        //this.generateScalaCode(res)
       // println(res)
