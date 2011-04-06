@@ -20,7 +20,8 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl._
-import org.embedded._
+import org.kermeta.language.km2bytecode.embedded.maven._
+import org.kermeta.language.km2bytecode.embedded.scala._
 import org.slf4j.{Logger,LoggerFactory}
 
 object Main extends LogAspect {
