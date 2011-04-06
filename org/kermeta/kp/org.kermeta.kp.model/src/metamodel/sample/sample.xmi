@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org.kermeta.kp:KermetaProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.kermeta.kp="http://www.kermeta.org/kp/1.0.0" name="new_file.kpt" version="someVersion" group="group">
-  <dependencies depRef="//@ref.1"/>
+<org.kermeta.kp:KermetaProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.kermeta.kp="http://www.kermeta.org/kp/1.0.0" name="new_file.kp" version="someVersion" group="group">
   <dependencies name="uml2" depRef="//@ref.3"/>
   <dependencies name="uml2_dep" depRef="//@ref.4"/>
   <dependencies name="ecore" depRef="//@ref.2"/>
   <sources xsi:type="org.kermeta.kp:SourceFolder" folderName="src"/>
   <sources xsi:type="org.kermeta.kp:SourceFolder" folderName="foo"/>
-  <sources xsi:type="org.kermeta.kp:SourceQuery" from="//@dependencies.1" query="*/org/eclipse/uml2.ecore"/>
-  <sources xsi:type="org.kermeta.kp:SourceNSURI" from="//@dependencies.3" uri="ECORE_NSURI"/>
-  <sources xsi:type="org.kermeta.kp:SourceQuery" from="//@dependencies.2" query="**/uml2.ecore um2"/>
-  <sources xsi:type="org.kermeta.kp:SourceQuery" from="//@dependencies.2" query="**/uml2.ecore um2.1"/>
+  <sources xsi:type="org.kermeta.kp:SourceQuery" from="//@dependencies.1" query="**/uml2.ecore um2"/>
+  <sources xsi:type="org.kermeta.kp:SourceQuery" from="//@dependencies.1" query="**/uml2.ecore um2.1"/>
   <weaveDirectives>
     <mix xsi:type="org.kermeta.kp:MixExpression">
       <left xsi:type="org.kermeta.kp:StringExpression" value="getsetinjector"/>

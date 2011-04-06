@@ -1,6 +1,6 @@
 
 
-SYNTAXDEF kpt
+SYNTAXDEF kp
 FOR <http://www.kermeta.org/kp/1.0.0>
 START KermetaProject
 OPTIONS { 
