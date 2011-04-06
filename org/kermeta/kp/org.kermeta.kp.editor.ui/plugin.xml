@@ -2,51 +2,51 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.emftext.access.syntax.ui">
-		<metaInformationProvider class="org.kermeta.kp.editor.ui.KptUIMetaInformation" id="org.kermeta.kp.editor.ui.KptUIMetaInformation">
+		<metaInformationProvider class="org.kermeta.kp.editor.ui.KpUIMetaInformation" id="org.kermeta.kp.editor.ui.KpUIMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.kermeta.kp.editor.ui.KptEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="kpt" icon="icons/editor_icon.gif" id="org.kermeta.kp.editor.ui.KptEditor" name="EMFText kpt Editor">
+		<editor class="org.kermeta.kp.editor.ui.KpEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="kp" icon="icons/editor_icon.gif" id="org.kermeta.kp.editor.ui.KpEditor" name="EMFText kp Editor">
 			<contentTypeBinding contentTypeId="org.kermeta.kp.editor"/>
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="org.kermeta.kp.editor.ui.KptPreferenceInitializer">
+		<initializer class="org.kermeta.kp.editor.ui.KpPreferenceInitializer">
 		</initializer>
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Kpt Text Editor" id="org.kermeta.kp.editor.ui.KptPreferencePage" class="org.kermeta.kp.editor.ui.KptPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Kp Text Editor" id="org.kermeta.kp.editor.ui.KpPreferencePage" class="org.kermeta.kp.editor.ui.KpPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
 		</page>
-		<page name="Syntax Coloring" id="org.kermeta.kp.editor.ui.KptSyntaxColoringPreferencePage" class="org.kermeta.kp.editor.ui.KptSyntaxColoringPreferencePage" category="org.kermeta.kp.editor.ui.KptPreferencePage">
+		<page name="Syntax Coloring" id="org.kermeta.kp.editor.ui.KpSyntaxColoringPreferencePage" class="org.kermeta.kp.editor.ui.KpSyntaxColoringPreferencePage" category="org.kermeta.kp.editor.ui.KpPreferencePage">
 		</page>
-		<page name="Brackets" id="org.kermeta.kp.editor.ui.KptBracketPreferencePage" class="org.kermeta.kp.editor.ui.KptBracketPreferencePage" category="org.kermeta.kp.editor.ui.KptPreferencePage">
+		<page name="Brackets" id="org.kermeta.kp.editor.ui.KpBracketPreferencePage" class="org.kermeta.kp.editor.ui.KpBracketPreferencePage" category="org.kermeta.kp.editor.ui.KpPreferencePage">
 		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kp.editor.ui.KptNewFileWizard" id="org.kermeta.kp.editor.ui.KptNewFileWizard" name="EMFText .kpt file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kp.editor.ui.KpNewFileWizard" id="org.kermeta.kp.editor.ui.KpNewFileWizard" name="EMFText .kp file">
 		</wizard>
 	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="org.kermeta.kp.editor.ui.KptMarkerResolutionGenerator" markerType="org.kermeta.kp.editor.problem" />
+		<markerResolutionGenerator class="org.kermeta.kp.editor.ui.KpMarkerResolutionGenerator" markerType="org.kermeta.kp.editor.problem" />
 	</extension>
 	
 	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
-		<factory class="org.kermeta.kp.editor.ui.KptAnnotationModelFactory" extensions="kpt" />
+		<factory class="org.kermeta.kp.editor.ui.KpAnnotationModelFactory" extensions="kp" />
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.kermeta.kp.editor" name=".kpt File" base-type="org.eclipse.core.runtime.text" file-extensions="kpt"/>
+		<content-type id="org.kermeta.kp.editor" name=".kp File" base-type="org.eclipse.core.runtime.text" file-extensions="kp"/>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="kpt" id="org.kermeta.kp.editor.ui.provider" />
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="kp" id="org.kermeta.kp.editor.ui.provider" />
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.annotationTypes">
@@ -55,8 +55,8 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
-		<specification annotationType="org.kermeta.kp.editor.ui.occurences" label="Occurrences (in .kpt files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="kpt.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="kpt.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="kpt.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kpt.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kpt.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="kpt.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="kpt.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="kpt.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="kpt.occurrenceTextStyle" textStylePreferenceValue="NONE" />
-		<specification annotationType="org.kermeta.kp.editor.ui.occurences.declaration" label="Declarations (in .kpt files)" textPreferenceKey="kpt.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="kpt.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="kpt.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kpt.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kpt.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="kpt.declarationTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.kermeta.kp.editor.ui.occurences" label="Occurrences (in .kp files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="kp.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="kp.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="kp.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="kp.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="kp.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="kp.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="kp.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.kermeta.kp.editor.ui.occurences.declaration" label="Declarations (in .kp files)" textPreferenceKey="kp.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="kp.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="kp.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="kp.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
