@@ -18,6 +18,7 @@ public class KpReferenceResolveResult<ReferenceType> implements org.kermeta.kp.e
 	private java.util.Collection<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>> mappings;
 	private String errorMessage;
 	private boolean resolveFuzzy;
+	private java.util.Set<org.kermeta.kp.editor.IKpQuickFix> quickFixes;
 	
 	public KpReferenceResolveResult(boolean resolveFuzzy) {
 		super();
@@ -26,6 +27,20 @@ public class KpReferenceResolveResult<ReferenceType> implements org.kermeta.kp.e
 	
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+	
+	public java.util.Collection<org.kermeta.kp.editor.IKpQuickFix> getQuickFixes() {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<org.kermeta.kp.editor.IKpQuickFix>();
+		}
+		return java.util.Collections.unmodifiableSet(quickFixes);
+	}
+	
+	public void addQuickFix(org.kermeta.kp.editor.IKpQuickFix quickFix) {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<org.kermeta.kp.editor.IKpQuickFix>();
+		}
+		quickFixes.add(quickFix);
 	}
 	
 	public java.util.Collection<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>> getMappings() {

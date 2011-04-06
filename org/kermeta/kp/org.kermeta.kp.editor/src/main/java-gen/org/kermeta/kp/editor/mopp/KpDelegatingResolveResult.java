@@ -62,4 +62,12 @@ public class KpDelegatingResolveResult<ReferenceType> implements org.kermeta.kp.
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
+	public java.util.Collection<org.kermeta.kp.editor.IKpQuickFix> getQuickFixes() {
+		return delegate.getQuickFixes();
+	}
+	
+	public void addQuickFix(org.kermeta.kp.editor.IKpQuickFix quickFix) {
+		delegate.addQuickFix(quickFix);
+	}
+	
 }

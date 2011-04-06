@@ -9,13 +9,13 @@ package org.kermeta.kp.editor.mopp;
 /**
  * A singleton class for the text resource plug-in.
  */
-public class KpPlugin /*extends org.eclipse.core.runtime.Plugin */{
+public class KpPlugin extends org.eclipse.core.runtime.Plugin {
 	
 	public static final String PLUGIN_ID = "org.kermeta.kp.editor";
 	/**
 	 * The version of EMFText that was used to generate this plug-in.
 	 */
-	public static final String EMFTEXT_SDK_VERSION = "1.3.2";
+	public static final String EMFTEXT_SDK_VERSION = "1.3.3";
 	/**
 	 * The ID of the extension point to register default options to be used when
 	 * loading resources with this plug-in.
@@ -26,17 +26,17 @@ public class KpPlugin /*extends org.eclipse.core.runtime.Plugin */{
 	private static KpPlugin plugin;
 	
 	public KpPlugin() {
-		//super();
+		super();
 	}
 	
 	public void start(org.osgi.framework.BundleContext context) throws Exception {
-		//super.start(context);
+		super.start(context);
 		plugin = this;
 	}
 	
 	public void stop(org.osgi.framework.BundleContext context) throws Exception {
 		plugin = null;
-		//super.stop(context);
+		super.stop(context);
 	}
 	
 	public static KpPlugin getDefault() {
@@ -51,8 +51,8 @@ public class KpPlugin /*extends org.eclipse.core.runtime.Plugin */{
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static void /*org.eclipse.core.runtime.IStatus*/ logError(String message, Throwable exception) {
-		/*org.eclipse.core.runtime.IStatus status;
+	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable exception) {
+		org.eclipse.core.runtime.IStatus status;
 		if (exception != null) {
 			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, KpPlugin.PLUGIN_ID, 0, message, exception);
 		} else {
@@ -67,6 +67,6 @@ public class KpPlugin /*extends org.eclipse.core.runtime.Plugin */{
 		} else {
 			pluginInstance.getLog().log(status);
 		}
-		return status;*/
+		return status;
 	}
 }

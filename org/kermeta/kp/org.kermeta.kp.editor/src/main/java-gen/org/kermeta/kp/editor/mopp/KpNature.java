@@ -6,19 +6,19 @@
  */
 package org.kermeta.kp.editor.mopp;
 
-public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
+public class KpNature implements org.eclipse.core.resources.IProjectNature {
 	
 	public static final String NATURE_ID = "org.kermeta.kp.editor.nature";
 	
-	/*private org.eclipse.core.resources.IProject project;*/
+	private org.eclipse.core.resources.IProject project;
 	
 	/**
 	 * the IDs of all builders, IDs of additional builders can be added here
 	 */
 	public final static String[] BUILDER_IDS = {org.kermeta.kp.editor.mopp.KpBuilderAdapter.BUILDER_ID};
 	
-	public static void activate(/*org.eclipse.core.resources.IProject project*/) {
-		/*try {
+	public static void activate(org.eclipse.core.resources.IProject project) {
+		try {
 			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			
@@ -35,11 +35,11 @@ public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (org.eclipse.core.runtime.CoreException e) {
-		}*/
+		}
 	}
 	
-	public static void deactivate(/*org.eclipse.core.resources.IProject project*/) {
-		/*try {
+	public static void deactivate(org.eclipse.core.resources.IProject project) {
+		try {
 			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			
@@ -55,11 +55,11 @@ public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
 				}
 			}
 		} catch (org.eclipse.core.runtime.CoreException e) {
-		}*/
+		}
 	}
 	
-	public static boolean hasNature(/*org.eclipse.core.resources.IProject project*/) {
-		/*try {
+	public static boolean hasNature(org.eclipse.core.resources.IProject project) {
+		try {
 			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			for (int i = 0; i < natures.length; ++i) {
@@ -68,11 +68,11 @@ public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
 				}
 			}
 		} catch (org.eclipse.core.runtime.CoreException e) {
-		}*/
+		}
 		return false;
 	}
 	
-	/*public void configure() throws org.eclipse.core.runtime.CoreException {
+	public void configure() throws org.eclipse.core.runtime.CoreException {
 		org.eclipse.core.resources.IProjectDescription desc = project.getDescription();
 		org.eclipse.core.resources.ICommand[] commands = desc.getBuildSpec();
 		
@@ -99,9 +99,9 @@ public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
 			desc.setBuildSpec(newCommands);
 			project.setDescription(desc, null);
 		}
-	}*/
+	}
 	
-	/*public void deconfigure() throws org.eclipse.core.runtime.CoreException {
+	public void deconfigure() throws org.eclipse.core.runtime.CoreException {
 		org.eclipse.core.resources.IProjectDescription description = getProject().getDescription();
 		org.eclipse.core.resources.ICommand[] commands = description.getBuildSpec();
 		org.eclipse.core.resources.ICommand[] newCommands = commands;
@@ -127,6 +127,6 @@ public class KpNature /*implements org.eclipse.core.resources.IProjectNature*/ {
 	
 	public void setProject(org.eclipse.core.resources.IProject project) {
 		this.project = project;
-	}*/
+	}
 	
 }

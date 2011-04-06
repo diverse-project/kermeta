@@ -25,6 +25,18 @@ public interface IKpReferenceResolveResult<ReferenceType> {
 	public String getErrorMessage();
 	
 	/**
+	 * Returns an unmodifiable collection of the quick fixes that can be used to
+	 * resolve the resolving error.
+	 */
+	public java.util.Collection<org.kermeta.kp.editor.IKpQuickFix> getQuickFixes();
+	
+	/**
+	 * Adds a quick fix to the set of quick fixes that can be used to resolve the
+	 * resolving error.
+	 */
+	public void addQuickFix(org.kermeta.kp.editor.IKpQuickFix quickFix);
+	
+	/**
 	 * Sets the error message that describes what went wrong while resolving a
 	 * reference. If a mapping for the reference was already found (i.e., addMapping()
 	 * was called before), the call to this method is ignored. If addMapping() is
@@ -77,7 +89,7 @@ public interface IKpReferenceResolveResult<ReferenceType> {
 	 * information is available (e.g., the error message is only set if the resolve
 	 * operation failed).
 	 * 
-	 * @return true if the reference was sucessfully resolved
+	 * @return true if the reference was successfully resolved
 	 */
 	public boolean wasResolved();
 	

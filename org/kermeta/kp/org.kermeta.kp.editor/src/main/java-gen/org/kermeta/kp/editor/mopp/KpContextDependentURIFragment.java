@@ -53,7 +53,7 @@ public abstract class KpContextDependentURIFragment<ContainerType extends org.ec
 			
 			// EMFText allows proxies to resolve to multiple objects. The first one is
 			// returned, the others are added here to the reference.
-			if(result.wasResolvedMultiple()) {
+			if (result.wasResolvedMultiple()) {
 				handleMultipleResults();
 			}
 		}
@@ -71,7 +71,7 @@ public abstract class KpContextDependentURIFragment<ContainerType extends org.ec
 		}
 		
 		boolean first = true;
-		for(org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType> mapping : result.getMappings()) {
+		for (org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType> mapping : result.getMappings()) {
 			if (first) {
 				first = false;
 			} else if (list != null) {

@@ -6,7 +6,7 @@
  */
 package org.kermeta.kp.editor.mopp;
 
-public class KpBuilderAdapter /*extends org.eclipse.core.resources.IncrementalProjectBuilder*/ {
+public class KpBuilderAdapter extends org.eclipse.core.resources.IncrementalProjectBuilder {
 	
 	/**
 	 * the ID of the default, generated builder
@@ -15,11 +15,11 @@ public class KpBuilderAdapter /*extends org.eclipse.core.resources.IncrementalPr
 	
 	private org.kermeta.kp.editor.IKpBuilder builder = new org.kermeta.kp.editor.mopp.KpBuilder();
 	
-	/*public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+	public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
 		return build(kind, args, monitor, builder, getProject());
-	}*/
+	}
 	
-	/*public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<?,?> args, final org.eclipse.core.runtime.IProgressMonitor monitor, final org.kermeta.kp.editor.IKpBuilder builder, org.eclipse.core.resources.IProject project) throws org.eclipse.core.runtime.CoreException {
+	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<?,?> args, final org.eclipse.core.runtime.IProgressMonitor monitor, final org.kermeta.kp.editor.IKpBuilder builder, org.eclipse.core.resources.IProject project) throws org.eclipse.core.runtime.CoreException {
 		org.eclipse.core.resources.IResourceDelta delta = getDelta(project);
 		if (delta == null) {
 			return null;
@@ -34,6 +34,7 @@ public class KpBuilderAdapter /*extends org.eclipse.core.resources.IncrementalPr
 					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 					if (builder.isBuildingNeeded(uri)) {
 						org.kermeta.kp.editor.mopp.KpResource customResource = (org.kermeta.kp.editor.mopp.KpResource) new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl().getResource(uri, true);
+						org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(customResource, org.kermeta.kp.editor.KpEProblemType.BUILDER_ERROR);
 						builder.build(customResource, monitor);
 					}
 					return false;
@@ -42,6 +43,6 @@ public class KpBuilderAdapter /*extends org.eclipse.core.resources.IncrementalPr
 			}
 		});
 		return null;
-	}*/
+	}
 	
 }

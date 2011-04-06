@@ -51,6 +51,10 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			return Math.max(0, locationMap.getLine(element));
 		}
 		
+		public org.eclipse.emf.ecore.EObject getElement() {
+			return element;
+		}
+		
 		public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element) {
 			if (this.element == null) {
 				return false;
@@ -162,12 +166,12 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		referenceResolverSwitch.setOptions(options);
 		org.kermeta.kp.editor.IKpParseResult result = parser.parse();
 		clearState();
-		getContents().clear();
+		getContentsInternal().clear();
 		org.eclipse.emf.ecore.EObject root = null;
 		if (result != null) {
 			root = result.getRoot();
 			if (root != null) {
-				getContents().add(root);
+				getContentsInternal().add(root);
 			}
 			java.util.Collection<org.kermeta.kp.editor.IKpCommand<org.kermeta.kp.editor.IKpTextResource>> commands = result.getPostParseCommands();
 			if (commands != null) {
@@ -205,7 +209,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		org.kermeta.kp.editor.IKpTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 		org.kermeta.kp.editor.IKpReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		referenceResolverSwitch.setOptions(options);
-		for(org.eclipse.emf.ecore.EObject root : getContents()) {
+		for (org.eclipse.emf.ecore.EObject root : getContentsInternal()) {
 			printer.print(root);
 		}
 	}
@@ -233,14 +237,10 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		internalURIFragmentMap.put(internalURIFragment, uriFragment);
 	}
 	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(org.kermeta.kp.editor.IKpContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement) {
-		int pos = -1;
-		if (reference.isMany()) {
-			pos = ((java.util.List<?>)container.eGet(reference)).size();
-		}
+	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(org.kermeta.kp.editor.IKpContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement, int position) {
 		org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) proxyElement;
 		String internalURIFragment = org.kermeta.kp.editor.IKpContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX + (proxyCounter++) + "_" + id;
-		org.kermeta.kp.editor.IKpContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, pos, proxy);
+		org.kermeta.kp.editor.IKpContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, position, proxy);
 		proxy.eSetProxyURI(getURI().appendFragment(internalURIFragment));
 		addURIFragment(internalURIFragment, uriFragment);
 	}
@@ -255,7 +255,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 				return null;
 			}
 			if (!wasResolvedBefore && !result.wasResolved()) {
-				attachErrors(result, uriFragment.getProxy());
+				attachResolveError(result, uriFragment.getProxy());
 				return null;
 			} else if (!result.wasResolved()) {
 				return null;
@@ -265,7 +265,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 				removeDiagnostics(proxy, getErrors());
 				// remove old warnings and attach new
 				removeDiagnostics(proxy, getWarnings());
-				attachWarnings(result, proxy);
+				attachResolveWarnings(result, proxy);
 				org.kermeta.kp.editor.IKpReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping = result.getMappings().iterator().next();
 				org.eclipse.emf.ecore.EObject resultElement = getResultElement(uriFragment, mapping, proxy, result.getErrorMessage());
 				org.eclipse.emf.ecore.EObject container = uriFragment.getContainer();
@@ -302,7 +302,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 					if (errorMessage == null) {
 						assert(false);
 					} else {
-						addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.ERROR), proxy);
+						addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.UNRESOLVED_REFERENCE, org.kermeta.kp.editor.KpEProblemSeverity.ERROR), proxy);
 					}
 				}
 				return result;
@@ -334,23 +334,24 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			if (errorCand instanceof org.kermeta.kp.editor.IKpTextDiagnostic) {
 				if (((org.kermeta.kp.editor.IKpTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
+					org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, cause);
 				}
 			}
 		}
 	}
 	
-	private void attachErrors(org.kermeta.kp.editor.IKpReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveError(org.kermeta.kp.editor.IKpReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
 		if (errorMessage == null) {
 			assert(false);
 		} else {
-			addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.ERROR), proxy);
+			addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.UNRESOLVED_REFERENCE, org.kermeta.kp.editor.KpEProblemSeverity.ERROR, result.getQuickFixes()), proxy);
 		}
 	}
 	
-	private void attachWarnings(org.kermeta.kp.editor.IKpReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveWarnings(org.kermeta.kp.editor.IKpReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
@@ -359,7 +360,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 				if (warningMessage == null) {
 					continue;
 				}
-				addProblem(new org.kermeta.kp.editor.mopp.KpProblem(warningMessage, org.kermeta.kp.editor.KpEProblemType.ERROR), proxy);
+				addProblem(new org.kermeta.kp.editor.mopp.KpProblem(warningMessage, org.kermeta.kp.editor.KpEProblemType.UNRESOLVED_REFERENCE, org.kermeta.kp.editor.KpEProblemSeverity.WARNING), proxy);
 			}
 		}
 	}
@@ -378,24 +379,29 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		if (loadOptions == null) {
 			return;
 		}
+		org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.ANALYSIS_PROBLEM);
 		Object resourcePostProcessorProvider = loadOptions.get(org.kermeta.kp.editor.IKpOptions.RESOURCE_POSTPROCESSOR_PROVIDER);
 		if (resourcePostProcessorProvider != null) {
 			if (resourcePostProcessorProvider instanceof org.kermeta.kp.editor.IKpResourcePostProcessorProvider) {
-				((org.kermeta.kp.editor.IKpResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor().process(this);
+				runPostProcessor(((org.kermeta.kp.editor.IKpResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor());
 			} else if (resourcePostProcessorProvider instanceof java.util.Collection<?>) {
 				java.util.Collection<?> resourcePostProcessorProviderCollection = (java.util.Collection<?>) resourcePostProcessorProvider;
 				for (Object processorProvider : resourcePostProcessorProviderCollection) {
 					if (processorProvider instanceof org.kermeta.kp.editor.IKpResourcePostProcessorProvider) {
 						org.kermeta.kp.editor.IKpResourcePostProcessorProvider csProcessorProvider = (org.kermeta.kp.editor.IKpResourcePostProcessorProvider) processorProvider;
 						org.kermeta.kp.editor.IKpResourcePostProcessor postProcessor = csProcessorProvider.getResourcePostProcessor();
-						try {
-							postProcessor.process(this);
-						} catch (Exception e) {
-							//org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while running a post-processor.", e);
-						}
+						runPostProcessor(postProcessor);
 					}
 				}
 			}
+		}
+	}
+	
+	protected void runPostProcessor(org.kermeta.kp.editor.IKpResourcePostProcessor postProcessor) {
+		try {
+			postProcessor.process(this);
+		} catch (Exception e) {
+			org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while running a post-processor.", e);
 		}
 	}
 	
@@ -418,9 +424,9 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	
 	public void addProblem(org.kermeta.kp.editor.IKpProblem problem, org.eclipse.emf.ecore.EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
-		getDiagnostics(problem.getType()).add(diagnostic);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
-			//org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
+			org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
 		}
 		java.util.Collection<org.kermeta.kp.editor.IKpQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
@@ -434,22 +440,32 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	
 	public void addProblem(org.kermeta.kp.editor.IKpProblem problem, int column, int line, int charStart, int charEnd) {
 		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
-		getDiagnostics(problem.getType()).add(diagnostic);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
-			//org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
+			org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
+	@Deprecated	
 	public void addError(String message, org.eclipse.emf.ecore.EObject cause) {
-		addProblem(new org.kermeta.kp.editor.mopp.KpProblem(message, org.kermeta.kp.editor.KpEProblemType.ERROR), cause);
+		addError(message, org.kermeta.kp.editor.KpEProblemType.UNKNOWN, cause);
 	}
 	
+	public void addError(String message, org.kermeta.kp.editor.KpEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+		addProblem(new org.kermeta.kp.editor.mopp.KpProblem(message, type, org.kermeta.kp.editor.KpEProblemSeverity.ERROR), cause);
+	}
+	
+	@Deprecated	
 	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause) {
-		addProblem(new org.kermeta.kp.editor.mopp.KpProblem(message, org.kermeta.kp.editor.KpEProblemType.WARNING), cause);
+		addWarning(message, org.kermeta.kp.editor.KpEProblemType.UNKNOWN, cause);
 	}
 	
-	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.kermeta.kp.editor.KpEProblemType type) {
-		if (type == org.kermeta.kp.editor.KpEProblemType.ERROR) {
+	public void addWarning(String message, org.kermeta.kp.editor.KpEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+		addProblem(new org.kermeta.kp.editor.mopp.KpProblem(message, type, org.kermeta.kp.editor.KpEProblemSeverity.WARNING), cause);
+	}
+	
+	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.kermeta.kp.editor.KpEProblemSeverity severity) {
+		if (severity == org.kermeta.kp.editor.KpEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
 			return getWarnings();
@@ -458,7 +474,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	
 	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
 		java.util.Map<Object, Object> loadOptionsCopy = org.kermeta.kp.editor.util.KpMapUtil.copySafelyToObjectToObjectMap(loadOptions);
-		/*if (org.eclipse.core.runtime.Platform.isRunning()) {
+		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// find default load option providers
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
 			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.kermeta.kp.editor.mopp.KpPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
@@ -474,7 +490,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 					org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while getting default options.", ce);
 				}
 			}
-		}*/
+		}
 		return loadOptionsCopy;
 	}
 	
@@ -524,14 +540,29 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		getErrors().clear();
 		getWarnings().clear();
 		if (isMarkerCreationEnabled()) {
-			//org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this);
+			org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.UNKNOWN);
+			org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.SYNTAX_ERROR);
+			org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.UNRESOLVED_REFERENCE);
 		}
 		proxyCounter = 0;
 		resolverSwitch = null;
 	}
 	
+	/**
+	 * Returns a copy of the contents of this resource wrapped in a list that
+	 * propagates changes to the original resource list. Wrapping is required to make
+	 * sure that clients which obtain a reference to the list of contents do not
+	 * interfere when changing the list.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContents() {
 		return new org.kermeta.kp.editor.util.KpCopiedEObjectInternalEList((org.eclipse.emf.ecore.util.InternalEList<org.eclipse.emf.ecore.EObject>) super.getContents());
+	}
+	
+	/**
+	 * Returns the raw contents of this resource.
+	 */
+	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
+		return super.getContents();
 	}
 	
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {
@@ -551,7 +582,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		// The EMF validation framework code throws a NPE if the validation plug-in is not
 		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
 		// need to catch the exception here.
-		/*if (org.eclipse.core.runtime.Platform.isRunning()) {
+		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// The EMF validation framework code throws a NPE if the validation plug-in is not
 			// loaded. This is a workaround for bug 322079.
 			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
@@ -565,10 +596,10 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 					org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
 				}
 			}
-		}*/
+		}
 	}
 	
-	/*private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
+	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
 		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		causes.add(root);
 		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
@@ -591,7 +622,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			addStatus(child, root);
 		}
 	}
-	*/
+	
 	public org.kermeta.kp.editor.IKpQuickFix getQuickFix(String quickFixContext) {
 		return quickFixMap.get(quickFixContext);
 	}

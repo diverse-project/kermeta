@@ -6,6 +6,15 @@
  */
 package org.kermeta.kp.editor.mopp;
 
+/**
+ * A KpLayoutInformation is used to store layout information that is found while
+ * parsing text files. Layout information does include all unused tokens. Usually,
+ * these are whitespace characters, line breaks and comments, but depending on the
+ * concrete syntax definition it can also include other tokens.
+ * KpLayoutInformations are aggregated in LayoutInformationAdapters. One
+ * KpLayoutInformation contains the layout that was found before a keyword,
+ * attribute or reference.
+ */
 public class KpLayoutInformation {
 	
 	private final org.kermeta.kp.editor.grammar.KpSyntaxElement syntaxElement;

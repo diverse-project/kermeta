@@ -72,4 +72,8 @@ public class KpMetaInformation implements org.kermeta.kp.editor.IKpMetaInformati
 		return new org.kermeta.kp.editor.mopp.KpNewFileContentProvider();
 	}
 	
+	public void registerResourceFactory() {
+		org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.kermeta.kp.editor.mopp.KpResourceFactory());
+	}
+	
 }

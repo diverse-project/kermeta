@@ -9,12 +9,15 @@ package org.kermeta.kp.editor.mopp;
 public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 	
 	protected org.kermeta.kp.editor.IKpTokenResolverFactory tokenResolverFactory = new org.kermeta.kp.editor.mopp.KpTokenResolverFactory();
+	
 	protected java.io.OutputStream outputStream;
+	
 	/**
-	 * Holds the resource that is associated with this printer. may be null if the
-	 * printer is used stand alone.
+	 * Holds the resource that is associated with this printer. This may be null if
+	 * the printer is used stand alone.
 	 */
 	private org.kermeta.kp.editor.IKpTextResource resource;
+	
 	private java.util.Map<?, ?> options;
 	
 	public KpPrinter(java.io.OutputStream outputStream, org.kermeta.kp.editor.IKpTextResource resource) {
@@ -23,12 +26,12 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		this.resource = resource;
 	}
 	
-	protected static int matchCount(java.util.Map<String, Integer> featureCounter, java.util.Collection<String> needed){
+	protected int matchCount(java.util.Map<String, Integer> featureCounter, java.util.Collection<String> needed) {
 		int pos = 0;
 		int neg = 0;
 		
-		for(String featureName:featureCounter.keySet()){
-			if(needed.contains(featureName)){
+		for (String featureName : featureCounter.keySet()) {
+			if (needed.contains(featureName)) {
 				int value = featureCounter.get(featureName);
 				if (value == 0) {
 					neg += 1;
@@ -110,7 +113,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			// the resource can be null if the printer is used stand alone
 			return;
 		}
-		resource.addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.ERROR), cause);
+		resource.addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.PRINT_PROBLEM, org.kermeta.kp.editor.KpEProblemSeverity.WARNING), cause);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
@@ -273,7 +276,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.print("}");
 		out.print(" ");
 	}
-	public void print_org_kermeta_kp_KermetaProject_0(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProject_0(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
@@ -298,7 +302,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.println();
 		out.print(localtab);
 	}
-	public void print_org_kermeta_kp_KermetaProject_1(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProject_1(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
@@ -323,24 +328,25 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.println();
 		out.print(localtab);
 	}
-	public void print_org_kermeta_kp_KermetaProject_2(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProject_2(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"sources"		));
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"sources"		));
 		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"dependencies"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"dependencies"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
 		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"options"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"options"		));
 		if (tempMatchCount > matches) {
 			alt = 2;
 			matches = tempMatchCount;
 		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"weaveDirectives"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"weaveDirectives"		));
 		if (tempMatchCount > matches) {
 			alt = 3;
 			matches = tempMatchCount;
@@ -446,7 +452,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			out.print(localtab);
 		}
 	}
-	public void print_org_kermeta_kp_KermetaProject_3(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProject_3(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (LineBreak)
@@ -470,6 +477,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.put("ref", count - 1);
 		}
 	}
+	
 	
 	public void print_org_kermeta_kp_Source(org.kermeta.kp.Source element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -503,6 +511,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
 	public void print_org_kermeta_kp_SourceFolder(org.kermeta.kp.SourceFolder element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -526,13 +535,14 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_org_kermeta_kp_SourceFolder_0(element, localtab, out, printCountingMap);
 	}
-	public void print_org_kermeta_kp_SourceFolder_0(org.kermeta.kp.SourceFolder element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_SourceFolder_0(org.kermeta.kp.SourceFolder element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"folderName"		));
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"folderName"		));
 		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"url"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"url"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
@@ -568,6 +578,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
 	public void print_org_kermeta_kp_SourceFile(org.kermeta.kp.SourceFile element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -591,13 +602,14 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_org_kermeta_kp_SourceFile_0(element, localtab, out, printCountingMap);
 	}
-	public void print_org_kermeta_kp_SourceFile_0(org.kermeta.kp.SourceFile element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_SourceFile_0(org.kermeta.kp.SourceFile element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"fileName"		));
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"fileName"		));
 		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"url"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"url"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
@@ -632,6 +644,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			}
 		}
 	}
+	
 	
 	public void print_org_kermeta_kp_SourceNSURI(org.kermeta.kp.SourceNSURI element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
@@ -683,7 +696,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_org_kermeta_kp_SourceNSURI_0(org.kermeta.kp.SourceNSURI element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_SourceNSURI_0(org.kermeta.kp.SourceNSURI element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("from");
@@ -701,6 +715,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.put("from", count - 1);
 		}
 	}
+	
 	
 	public void print_org_kermeta_kp_SourceQuery(org.kermeta.kp.SourceQuery element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
@@ -754,7 +769,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_org_kermeta_kp_SourceQuery_0(org.kermeta.kp.SourceQuery element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_SourceQuery_0(org.kermeta.kp.SourceQuery element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		java.io.StringWriter sWriter = null;
@@ -789,7 +805,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_org_kermeta_kp_SourceQuery_0_0(org.kermeta.kp.SourceQuery element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_SourceQuery_0_0(org.kermeta.kp.SourceQuery element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("URL");
@@ -810,6 +827,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.put("url", count - 1);
 		}
 	}
+	
 	
 	public void print_org_kermeta_kp_Dependency(org.kermeta.kp.Dependency element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -832,11 +850,11 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// print collected hidden tokens
 		int count;
 		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		,
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		,
 		"url"		));
 		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		,
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		,
 		"depRef"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
@@ -936,6 +954,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
 	public void print_org_kermeta_kp_WeaveDirective(org.kermeta.kp.WeaveDirective element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -991,6 +1010,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
 	public void print_org_kermeta_kp_Option(org.kermeta.kp.Option element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
@@ -1037,6 +1057,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
 	public void print_org_kermeta_kp_StringExpression(org.kermeta.kp.StringExpression element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
@@ -1062,6 +1083,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.put("value", count - 1);
 		}
 	}
+	
 	
 	public void print_org_kermeta_kp_MixExpression(org.kermeta.kp.MixExpression element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
@@ -1103,6 +1125,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.print(")");
 		out.print(" ");
 	}
+	
 	
 	public void print_org_kermeta_kp_KermetaProjectRef(org.kermeta.kp.KermetaProjectRef element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
@@ -1180,7 +1203,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_org_kermeta_kp_KermetaProjectRef_0(org.kermeta.kp.KermetaProjectRef element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProjectRef_0(org.kermeta.kp.KermetaProjectRef element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("URL");
@@ -1201,7 +1225,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			printCountingMap.put("url", count - 1);
 		}
 	}
-	public void print_org_kermeta_kp_KermetaProjectRef_1(org.kermeta.kp.KermetaProjectRef element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+	
+	public void print_org_kermeta_kp_KermetaProjectRef_1(org.kermeta.kp.KermetaProjectRef element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("[");
@@ -1222,5 +1247,6 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.print("]");
 		out.print(" ");
 	}
+	
 	
 }

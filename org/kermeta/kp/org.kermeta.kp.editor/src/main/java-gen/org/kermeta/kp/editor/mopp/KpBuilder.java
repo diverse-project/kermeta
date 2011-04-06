@@ -13,9 +13,9 @@ public class KpBuilder implements org.kermeta.kp.editor.IKpBuilder {
 		return false;
 	}
 	
-	/*public org.eclipse.core.runtime.IStatus build(org.kermeta.kp.editor.mopp.KpResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public org.eclipse.core.runtime.IStatus build(org.kermeta.kp.editor.mopp.KpResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		// set option overrideBuilder to 'false' and then perform build here
 		return org.eclipse.core.runtime.Status.OK_STATUS;
-	}*/
+	}
 	
 }

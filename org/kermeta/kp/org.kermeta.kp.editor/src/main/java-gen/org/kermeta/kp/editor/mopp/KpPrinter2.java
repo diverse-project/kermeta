@@ -8,7 +8,7 @@ package org.kermeta.kp.editor.mopp;
 
 public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	
-	private class PrintToken {
+	protected class PrintToken {
 		
 		private String text;
 		private String tokenName;
@@ -30,6 +30,10 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	
 	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
 	
+	private final PrintToken SPACE_TOKEN = new PrintToken(" ", null);
+	private final PrintToken TAB_TOKEN = new PrintToken("\t", null);
+	private final PrintToken NEW_LINE_TOKEN = new PrintToken(NEW_LINE, null);
+	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
 	 * printer is used stand alone.
@@ -38,15 +42,15 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	
 	private java.util.Map<?, ?> options;
 	private java.io.OutputStream outputStream;
-	private java.util.List<PrintToken> tokenOutputStream;
+	protected java.util.List<PrintToken> tokenOutputStream;
 	private org.kermeta.kp.editor.IKpTokenResolverFactory tokenResolverFactory = new org.kermeta.kp.editor.mopp.KpTokenResolverFactory();
 	private boolean handleTokenSpaceAutomatically = true;
 	private int tokenSpace = 1;
 	/**
-	 * A flag that indicates whether token have already been printed for the some
-	 * object. The flag is set to false whenever printing of an EObject tree is
-	 * started. The status of the flag is used to avoid printing default token space
-	 * in front of the root object.
+	 * A flag that indicates whether tokens have already been printed for some object.
+	 * The flag is set to false whenever printing of an EObject tree is started. The
+	 * status of the flag is used to avoid printing default token space in front of
+	 * the root object.
 	 */
 	private boolean startedPrintingObject = false;
 	/**
@@ -62,7 +66,13 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	 * are printed within one object.
 	 */
 	private int tabsBeforeCurrentObject;
-	private int newTabsBeforeCurrentObject;
+	/**
+	 * This flag is used to indicate whether the number of tabs before the current
+	 * object has been set for the current object. The flag is needed, because setting
+	 * the number of tabs must be performed when the first token of the contained
+	 * element is printed.
+	 */
+	private boolean startedPrintingContainedObject;
 	
 	public KpPrinter2(java.io.OutputStream outputStream, org.kermeta.kp.editor.IKpTextResource resource) {
 		super();
@@ -75,7 +85,13 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 		currentTabs = 0;
 		tabsBeforeCurrentObject = 0;
 		startedPrintingObject = true;
-		doPrint(element, new java.util.ArrayList<org.kermeta.kp.editor.grammar.KpFormattingElement>());
+		startedPrintingContainedObject = false;
+		java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement>  formattingElements = new java.util.ArrayList<org.kermeta.kp.editor.grammar.KpFormattingElement>();
+		doPrint(element, formattingElements);
+		// print all remaining formatting elements
+		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations = getCopyOfLayoutInformation(element);
+		org.kermeta.kp.editor.mopp.KpLayoutInformation eofLayoutInformation = getLayoutInformation(layoutInformations, null, null, null);
+		printFormattingElements(formattingElements, layoutInformations, eofLayoutInformation);
 		java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.BufferedOutputStream(outputStream));
 		if (handleTokenSpaceAutomatically) {
 			printSmart(writer);
@@ -146,12 +162,7 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	}
 	
 	public void printInternal(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KpSyntaxElement ruleElement, java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement> foundFormattingElements) {
-		org.kermeta.kp.editor.mopp.KpLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(eObject);
-		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> originalLayoutInformations = layoutInformationAdapter.getLayoutInformations();
-		// create a copy of the original list of layout information object in order to be
-		// able to remove used informations during printing
-		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations = new java.util.ArrayList<org.kermeta.kp.editor.mopp.KpLayoutInformation>(originalLayoutInformations.size());
-		layoutInformations.addAll(originalLayoutInformations);
+		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations = getCopyOfLayoutInformation(eObject);
 		org.kermeta.kp.editor.mopp.KpSyntaxElementDecorator decoratorTree = getDecoratorTree(ruleElement);
 		decorateTree(decoratorTree, eObject);
 		printTree(decoratorTree, eObject, foundFormattingElements, layoutInformations);
@@ -311,6 +322,10 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 					org.kermeta.kp.editor.grammar.KpBooleanTerminal booleanTerminal = (org.kermeta.kp.editor.grammar.KpBooleanTerminal) printElement;
 					printBooleanTerminal(eObject, booleanTerminal, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
+				} else if (printElement instanceof org.kermeta.kp.editor.grammar.KpEnumerationTerminal) {
+					org.kermeta.kp.editor.grammar.KpEnumerationTerminal enumTerminal = (org.kermeta.kp.editor.grammar.KpEnumerationTerminal) printElement;
+					printEnumerationTerminal(eObject, enumTerminal, indexToPrint, foundFormattingElements, layoutInformations);
+					foundSomethingToPrint = true;
 				}
 			}
 			if (foundSomethingToPrint) {
@@ -378,10 +393,11 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 		if (result != null && !"".equals(result)) {
 			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			// write result to the output stream
+			tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
 		}
-		// write result to the output stream
-		tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
 	}
+	
 	
 	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KpBooleanTerminal booleanTerminal, int count, java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
@@ -408,6 +424,30 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 		}
 	}
 	
+	
+	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KpEnumerationTerminal enumTerminal, int count, java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations) {
+		org.eclipse.emf.ecore.EAttribute attribute = enumTerminal.getAttribute();
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		org.kermeta.kp.editor.mopp.KpLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
+		// if there is text for the attribute we use it
+		if (visibleTokenText != null) {
+			result = visibleTokenText;
+		} else {
+			// if no text is available, the enumeration attribute is converted to its textual
+			// representation using the literals of the enumeration terminal
+			assert attributeValue instanceof org.eclipse.emf.common.util.Enumerator;
+			result = enumTerminal.getText(((org.eclipse.emf.common.util.Enumerator) attributeValue).getName());
+		}
+		if (result != null && !"".equals(result)) {
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			// write result to the output stream
+			tokenOutputStream.add(new PrintToken(result, "'" + org.kermeta.kp.editor.util.KpStringUtil.escapeToANTLRKeyword(result) + "'"));
+		}
+	}
+	
+	
 	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, org.kermeta.kp.editor.grammar.KpContainment containment, int count, java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
 		Object o = getValue(eObject, reference, count);
@@ -417,12 +457,11 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 		// use current number of tabs to indent contained object. we do not directly set
 		// 'tabsBeforeCurrentObject' because the first element of the new object must be
 		// printed with the old number of tabs.
-		newTabsBeforeCurrentObject = tabsBeforeCurrentObject + currentTabs;
+		startedPrintingContainedObject = false;
 		currentTabs = 0;
 		doPrint((org.eclipse.emf.ecore.EObject) o, foundFormattingElements);
 		// restore number of tabs after printing the contained object
 		tabsBeforeCurrentObject = oldTabsBeforeCurrentObject;
-		newTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		currentTabs = oldCurrentTabs;
 	}
 	
@@ -430,26 +469,30 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 		String hiddenTokenText = getHiddenTokenText(layoutInformation);
 		if (hiddenTokenText != null) {
 			// removed used information
-			layoutInformations.remove(layoutInformation);
+			if (layoutInformations != null) {
+				layoutInformations.remove(layoutInformation);
+			}
 			tokenOutputStream.add(new PrintToken(hiddenTokenText, null));
 			foundFormattingElements.clear();
 			startedPrintingObject = false;
-			tabsBeforeCurrentObject = newTabsBeforeCurrentObject;
+			setTabsBeforeCurrentObject(0);
 			return;
 		}
+		int printedTabs = 0;
 		if (foundFormattingElements.size() > 0) {
 			for (org.kermeta.kp.editor.grammar.KpFormattingElement foundFormattingElement : foundFormattingElements) {
 				if (foundFormattingElement instanceof org.kermeta.kp.editor.grammar.KpWhiteSpace) {
 					int amount = ((org.kermeta.kp.editor.grammar.KpWhiteSpace) foundFormattingElement).getAmount();
 					for (int i = 0; i < amount; i++) {
-						tokenOutputStream.add(new PrintToken(" ", null));
+						tokenOutputStream.add(SPACE_TOKEN);
 					}
 				}
 				if (foundFormattingElement instanceof org.kermeta.kp.editor.grammar.KpLineBreak) {
 					currentTabs = ((org.kermeta.kp.editor.grammar.KpLineBreak) foundFormattingElement).getTabs();
-					tokenOutputStream.add(new PrintToken(NEW_LINE, null));
+					printedTabs += currentTabs;
+					tokenOutputStream.add(NEW_LINE_TOKEN);
 					for (int i = 0; i < tabsBeforeCurrentObject + currentTabs; i++) {
-						tokenOutputStream.add(new PrintToken("\t", null));
+						tokenOutputStream.add(TAB_TOKEN);
 					}
 				}
 			}
@@ -467,7 +510,15 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			}
 		}
 		// after printing the first element, we can use the new number of tabs.
-		tabsBeforeCurrentObject = newTabsBeforeCurrentObject;
+		setTabsBeforeCurrentObject(printedTabs);
+	}
+	
+	private void setTabsBeforeCurrentObject(int tabs) {
+		if (startedPrintingContainedObject) {
+			return;
+		}
+		tabsBeforeCurrentObject = tabsBeforeCurrentObject + tabs;
+		startedPrintingContainedObject = true;
 	}
 	
 	private Object getValue(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, int count) {
@@ -483,19 +534,34 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	
 	@SuppressWarnings("unchecked")	
 	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, org.kermeta.kp.editor.grammar.KpPlaceholder placeholder, int count, java.util.List<org.kermeta.kp.editor.grammar.KpFormattingElement> foundFormattingElements, java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations) {
+		String tokenName = placeholder.getTokenName();
 		Object referencedObject = getValue(eObject, reference, count);
+		// first add layout before the reference
 		org.kermeta.kp.editor.mopp.KpLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
 		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
-		// NC-References must always be printed by deresolving the reference. We cannot
-		// use the visible token information, because deresolving usually depends on
-		// attribute values of the referenced object instead of the object itself.
-		String tokenName = placeholder.getTokenName();
+		// proxy objects must be printed differently
+		String deresolvedReference = null;
+		if (referencedObject instanceof org.eclipse.emf.ecore.EObject) {
+			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) referencedObject;
+			if (eObjectToDeResolve.eIsProxy()) {
+				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				if (deresolvedReference != null && deresolvedReference.startsWith(org.kermeta.kp.editor.IKpContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+					deresolvedReference = deresolvedReference.substring(org.kermeta.kp.editor.IKpContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
+				}
+			}
+		}
+		if (deresolvedReference == null) {
+			// NC-References must always be printed by deresolving the reference. We cannot
+			// use the visible token information, because deresolving usually depends on
+			// attribute values of the referenced object instead of the object itself.
+			@SuppressWarnings("rawtypes")			
+			org.kermeta.kp.editor.IKpReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
+			referenceResolver.setOptions(getOptions());
+			deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
+		}
 		org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 		tokenResolver.setOptions(getOptions());
-		@SuppressWarnings("rawtypes")		
-		org.kermeta.kp.editor.IKpReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
-		referenceResolver.setOptions(getOptions());
-		String deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
 		String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
 		// write result to output stream
 		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName));
@@ -546,7 +612,7 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			// the resource can be null if the printer is used stand alone
 			return;
 		}
-		resource.addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.ERROR), cause);
+		resource.addProblem(new org.kermeta.kp.editor.mopp.KpProblem(errorMessage, org.kermeta.kp.editor.KpEProblemType.PRINT_PROBLEM, org.kermeta.kp.editor.KpEProblemSeverity.WARNING), cause);
 	}
 	
 	protected org.kermeta.kp.editor.mopp.KpLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
@@ -571,6 +637,16 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			}
 		}
 		return null;
+	}
+	
+	public java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> getCopyOfLayoutInformation(org.eclipse.emf.ecore.EObject eObject) {
+		org.kermeta.kp.editor.mopp.KpLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(eObject);
+		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> originalLayoutInformations = layoutInformationAdapter.getLayoutInformations();
+		// create a copy of the original list of layout information object in order to be
+		// able to remove used informations during printing
+		java.util.List<org.kermeta.kp.editor.mopp.KpLayoutInformation> layoutInformations = new java.util.ArrayList<org.kermeta.kp.editor.mopp.KpLayoutInformation>(originalLayoutInformations.size());
+		layoutInformations.addAll(originalLayoutInformations);
+		return layoutInformations;
 	}
 	
 	private String getHiddenTokenText(org.kermeta.kp.editor.mopp.KpLayoutInformation layoutInformation) {
