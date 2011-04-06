@@ -6,15 +6,15 @@
  */
 package org.kermeta.kp.editor.analysis;
 
-public class DependencyDepRefReferenceResolver implements org.kermeta.kp.editor.IKptReferenceResolver<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef> {
+public class DependencyDepRefReferenceResolver implements org.kermeta.kp.editor.IKpReferenceResolver<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef> {
 	
-	private org.kermeta.kp.editor.analysis.KptDefaultResolverDelegate<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef> delegate = new org.kermeta.kp.editor.analysis.KptDefaultResolverDelegate<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef>();
+	private org.kermeta.kp.editor.analysis.KpDefaultResolverDelegate<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef> delegate = new org.kermeta.kp.editor.analysis.KpDefaultResolverDelegate<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef>();
 	
-	public void resolve(java.lang.String identifier, org.kermeta.kp.Dependency container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.kermeta.kp.editor.IKptReferenceResolveResult<org.kermeta.kp.KermetaProjectRef> result) {
+	public void resolve(String identifier, org.kermeta.kp.Dependency container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.kermeta.kp.editor.IKpReferenceResolveResult<org.kermeta.kp.KermetaProjectRef> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.kermeta.kp.KermetaProjectRef element, org.kermeta.kp.Dependency container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.kermeta.kp.KermetaProjectRef element, org.kermeta.kp.Dependency container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

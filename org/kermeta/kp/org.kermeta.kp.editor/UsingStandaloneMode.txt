@@ -1,0 +1,383 @@
+To use parser and pretty printer in standalone mode you should comment the following classes:
+
+IKpBuilder 
+//public org.eclipse.core.runtime.IStatus build(org.kermeta.kp.editor.mopp.KpResource resource, org.eclipse.core.runtime.IProgressMonitor monitor);
+
+KpBuilder
+/*public org.eclipse.core.runtime.IStatus build(org.kermeta.kp.editor.mopp.KpResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+        // set option overrideBuilder to 'false' and then perform build here
+        return org.eclipse.core.runtime.Status.OK_STATUS;
+}*/
+
+KpBuilderAdapter
+/* extends org.eclipse.core.resources.IncrementalProjectBuilder*/
+
+/*public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+        return build(kind, args, monitor, builder, getProject());
+    }*/
+    
+    /*public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<?,?> args, final org.eclipse.core.runtime.IProgressMonitor monitor, final org.kermeta.kp.editor.IKpBuilder builder, org.eclipse.core.resources.IProject project) throws org.eclipse.core.runtime.CoreException {
+        org.eclipse.core.resources.IResourceDelta delta = getDelta(project);
+        if (delta == null) {
+            return null;
+        }
+        delta.accept(new org.eclipse.core.resources.IResourceDeltaVisitor() {
+            public boolean visit(org.eclipse.core.resources.IResourceDelta delta) throws org.eclipse.core.runtime.CoreException {
+                if (delta.getKind() == org.eclipse.core.resources.IResourceDelta.REMOVED) {
+                    return false;
+                }
+                org.eclipse.core.resources.IResource resource = delta.getResource();
+                if (resource instanceof org.eclipse.core.resources.IFile && "Kp".equals(resource.getFileExtension())) {
+                    org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
+                    if (builder.isBuildingNeeded(uri)) {
+                        org.kermeta.kp.editor.mopp.KpResource customResource = (org.kermeta.kp.editor.mopp.KpResource) new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl().getResource(uri, true);
+                        builder.build(customResource, monitor);
+                    }
+                    return false;
+                }
+                return true;
+            }
+        });
+        return null;
+}*/
+
+
+KpMarkerHelper
+/*public static void mark(org.eclipse.emf.ecore.resource.Resource resource, final org.kermeta.kp.editor.IKpTextDiagnostic diagnostic) {
+        if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
+            return;
+        }
+        String platformString = resource.getURI().toPlatformString(true);
+        if (platformString == null) {
+            return;
+        }
+        final org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+        // URI might not point at a platform file
+        if (file == null) {
+            return;
+        }
+        new org.eclipse.core.runtime.jobs.Job("marking") {
+            @Override           
+            protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
+                createMarkerFromDiagnostic(file, diagnostic);
+                return org.eclipse.core.runtime.Status.OK_STATUS;
+            }
+        }.schedule();
+    }*/
+    
+    /*private static void createMarkerFromDiagnostic(org.eclipse.core.resources.IFile file, final org.kermeta.kp.editor.IKpTextDiagnostic diagnostic) {
+        try {
+            if (file.findMarkers(MARKER_TYPE, false, org.eclipse.core.resources.IResource.DEPTH_ZERO).length >= MAXIMUM_MARKERS) {
+                return;
+            }
+            
+            org.eclipse.core.resources.IMarker marker = file.createMarker(MARKER_TYPE);
+            if (diagnostic.getProblem().getType() == org.kermeta.kp.editor.KpEProblemType.ERROR) {
+                marker.setAttribute(org.eclipse.core.resources.IMarker.SEVERITY, org.eclipse.core.resources.IMarker.SEVERITY_ERROR);
+            }
+            else {
+                marker.setAttribute(org.eclipse.core.resources.IMarker.SEVERITY, org.eclipse.core.resources.IMarker.SEVERITY_WARNING);
+            }
+            marker.setAttribute(org.eclipse.core.resources.IMarker.MESSAGE, diagnostic.getMessage());
+            org.kermeta.kp.editor.IKpTextDiagnostic textDiagnostic = (org.kermeta.kp.editor.IKpTextDiagnostic) diagnostic;
+            marker.setAttribute(org.eclipse.core.resources.IMarker.LINE_NUMBER, textDiagnostic.getLine());
+            marker.setAttribute(org.eclipse.core.resources.IMarker.CHAR_START, textDiagnostic.getCharStart());
+            marker.setAttribute(org.eclipse.core.resources.IMarker.CHAR_END, textDiagnostic.getCharEnd() + 1);
+            java.util.Collection<org.kermeta.kp.editor.IKpQuickFix> quickFixes = textDiagnostic.getProblem().getQuickFixes();
+            java.util.Collection<Object> sourceIDs = new java.util.ArrayList<Object>();
+            if (quickFixes != null) {
+                for (org.kermeta.kp.editor.IKpQuickFix quickFix : quickFixes) {
+                    if (quickFix != null) {
+                        sourceIDs.add(quickFix.getContextAsString());
+                    }
+                }
+            }
+            if (!sourceIDs.isEmpty()) {
+                marker.setAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID, org.kermeta.kp.editor.util.KpStringUtil.explode(sourceIDs, "|"));
+            }
+        } catch (org.eclipse.core.runtime.CoreException ce) {
+            if (ce.getMessage().matches("Marker.*not found.")) {
+                // ignore
+            } else {
+                org.kermeta.kp.editor.mopp.KpPlugin.logError("Error marking resource:", ce);
+            }
+        }
+    }*/
+  
+public static void unmark(/*org.eclipse.emf.ecore.resource.Resource resource*/) {
+        /*if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
+            return;
+        }
+        String platformString = resource.getURI().toPlatformString(true);
+        if (platformString == null) {
+            return;
+        }
+        final org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+        if (file == null) {
+            return;
+        }
+        new org.eclipse.core.runtime.jobs.Job("unmarking") {
+            @Override           
+            protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
+                try {
+                    file.deleteMarkers(MARKER_TYPE, false, org.eclipse.core.resources.IResource.DEPTH_ZERO);
+                } catch (org.eclipse.core.runtime.CoreException ce) {
+                    if (ce.getMessage().matches("Marker.*not found.")) {
+                        // ignore
+                    } else {
+                        org.kermeta.kp.editor.mopp.KpPlugin.logError("Error marking resource:", ce);
+                    }
+                }
+                return org.eclipse.core.runtime.Status.OK_STATUS;
+            }
+        }.schedule();*/
+}
+
+KpNature
+/*implements org.eclipse.core.resources.IProjectNature*/
+
+/*private org.eclipse.core.resources.IProject project;*/
+
+public static void activate(/*org.eclipse.core.resources.IProject project*/) {
+        /*try {
+            org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+            String[] natures = description.getNatureIds();
+            
+            for (int i = 0; i < natures.length; ++i) {
+                if (NATURE_ID.equals(natures[i])) {
+                    // already active
+                    return;
+                }
+            }
+            // Add the nature
+            String[] newNatures = new String[natures.length + 1];
+            System.arraycopy(natures, 0, newNatures, 0, natures.length);
+            newNatures[natures.length] = NATURE_ID;
+            description.setNatureIds(newNatures);
+            project.setDescription(description, null);
+        } catch (org.eclipse.core.runtime.CoreException e) {
+        }*/
+}
+
+public static void deactivate(/*org.eclipse.core.resources.IProject project*/) {
+        /*try {
+            org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+            String[] natures = description.getNatureIds();
+            
+            for (int i = 0; i < natures.length; ++i) {
+                if (NATURE_ID.equals(natures[i])) {
+                    // Remove the nature
+                    String[] newNatures = new String[natures.length - 1];
+                    System.arraycopy(natures, 0, newNatures, 0, i);
+                    System.arraycopy(natures, i + 1, newNatures, i, natures.length - i - 1);
+                    description.setNatureIds(newNatures);
+                    project.setDescription(description, null);
+                    return;
+                }
+            }
+        } catch (org.eclipse.core.runtime.CoreException e) {
+        }*/
+    }
+    
+    public static boolean hasNature(/*org.eclipse.core.resources.IProject project*/) {
+        /*try {
+            org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+            String[] natures = description.getNatureIds();
+            for (int i = 0; i < natures.length; ++i) {
+                if (NATURE_ID.equals(natures[i])) {
+                    return true;
+                }
+            }
+        } catch (org.eclipse.core.runtime.CoreException e) {
+        }*/
+        return false;
+    }
+    
+    /*public void configure() throws org.eclipse.core.runtime.CoreException {
+        org.eclipse.core.resources.IProjectDescription desc = project.getDescription();
+        org.eclipse.core.resources.ICommand[] commands = desc.getBuildSpec();
+        
+        for (int i = 0; i < commands.length; ++i) {
+            if (commands[i].getBuilderName().equals(org.kermeta.kp.editor.mopp.KptBuilderAdapter.BUILDER_ID)) {
+                return;
+            }
+        }
+        org.eclipse.core.resources.ICommand[] newCommands = commands;
+        outer: for (int j = 0; j < BUILDER_IDS.length; j++) {
+            for (int i = 0; i < commands.length; ++i) {
+                if (commands[i].getBuilderName().equals(BUILDER_IDS[j])) {
+                    continue outer;
+                }
+            }
+            org.eclipse.core.resources.ICommand[] tempCommands = new org.eclipse.core.resources.ICommand[newCommands.length + 1];
+            System.arraycopy(newCommands, 0, tempCommands, 0, newCommands.length);
+            org.eclipse.core.resources.ICommand command = desc.newCommand();
+            command.setBuilderName(BUILDER_IDS[j]);
+            tempCommands[tempCommands.length - 1] = command;
+            newCommands = tempCommands;
+        }
+        if (newCommands != commands) {
+            desc.setBuildSpec(newCommands);
+            project.setDescription(desc, null);
+        }
+    }*/
+    
+    /*public void deconfigure() throws org.eclipse.core.runtime.CoreException {
+        org.eclipse.core.resources.IProjectDescription description = getProject().getDescription();
+        org.eclipse.core.resources.ICommand[] commands = description.getBuildSpec();
+        org.eclipse.core.resources.ICommand[] newCommands = commands;
+        for (int j = 0; j < BUILDER_IDS.length; j++) {
+            for (int i = 0; i < newCommands.length; ++i) {
+                if (newCommands[i].getBuilderName().equals(BUILDER_IDS[j])) {
+                    org.eclipse.core.resources.ICommand[] tempCommands = new org.eclipse.core.resources.ICommand[newCommands.length - 1];
+                    System.arraycopy(newCommands, 0, tempCommands, 0, i);
+                    System.arraycopy(newCommands, i + 1, tempCommands, i, newCommands.length - i - 1);
+                    newCommands = tempCommands;
+                    break;
+                }
+            }
+        }
+        if (newCommands != commands) {
+            description.setBuildSpec(newCommands);
+        }
+    }*/
+    
+    /*public org.eclipse.core.resources.IProject getProject() {
+        return project;
+    }*/
+    
+    /*public void setProject(org.eclipse.core.resources.IProject project) {
+        this.project = project;
+    }*/
+
+KpPlugin 
+/*extends org.eclipse.core.runtime.Plugin*/
+
+//super()
+
+public static void /*org.eclipse.core.runtime.IStatus*/ logError(String message, Throwable exception) {
+        /*org.eclipse.core.runtime.IStatus status;
+        if (exception != null) {
+            status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, KpPlugin.PLUGIN_ID, 0, message, exception);
+        } else {
+            status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, KpPlugin.PLUGIN_ID, message);
+        }
+        final KpPlugin pluginInstance = KpPlugin.getDefault();
+        if (pluginInstance == null) {
+            System.err.println(message);
+            if (exception != null) {
+                exception.printStackTrace();
+            }
+        } else {
+            pluginInstance.getLog().log(status);
+        }
+        return status;*/
+    }
+    
+KpResource
+//org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while running a post-processor.", e);
+
+//org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
+
+//org.kermeta.kp.editor.mopp.KpMarkerHelper.mark(this, diagnostic);
+
+/*if (org.eclipse.core.runtime.Platform.isRunning()) {
+            // find default load option providers
+            org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
+            org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.kermeta.kp.editor.mopp.KpPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
+            for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
+                try {
+                    org.kermeta.kp.editor.IKpOptionProvider provider = (org.kermeta.kp.editor.IKpOptionProvider) element.createExecutableExtension("class");
+                    final java.util.Map<?, ?> options = provider.getOptions();
+                    final java.util.Collection<?> keys = options.keySet();
+                    for (Object key : keys) {
+                        addLoadOption(loadOptionsCopy, key, options.get(key));
+                    }
+                } catch (org.eclipse.core.runtime.CoreException ce) {
+                    org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while getting default options.", ce);
+                }
+            }
+        }*/
+        
+//org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this);
+
+/*if (org.eclipse.core.runtime.Platform.isRunning()) {
+            // The EMF validation framework code throws a NPE if the validation plug-in is not
+            // loaded. This is a workaround for bug 322079.
+            if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
+                try {
+                    org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
+                    org.eclipse.emf.validation.service.IBatchValidator validator = (org.eclipse.emf.validation.service.IBatchValidator) service.newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
+                    validator.setIncludeLiveConstraints(true);
+                    org.eclipse.core.runtime.IStatus status = validator.validate(root);
+                    addStatus(status, root);
+                } catch (Throwable t) {
+                    org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
+                }
+            }
+        }*/
+        
+/*private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
+        java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+        causes.add(root);
+        if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
+            org.eclipse.emf.validation.model.ConstraintStatus constraintStatus = (org.eclipse.emf.validation.model.ConstraintStatus) status;
+            java.util.Set<org.eclipse.emf.ecore.EObject> resultLocus = constraintStatus.getResultLocus();
+            causes.clear();
+            causes.addAll(resultLocus);
+        }
+        if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
+            for (org.eclipse.emf.ecore.EObject cause : causes) {
+                addError(status.getMessage(), cause);
+            }
+        }
+        if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
+            for (org.eclipse.emf.ecore.EObject cause : causes) {
+                addWarning(status.getMessage(), cause);
+            }
+        }
+        for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
+            addStatus(child, root);
+        }
+    }*/
+    
+KpResourceFactoryDelegator
+/*if (org.eclipse.core.runtime.Platform.isRunning()) {
+            org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
+            org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.kermeta.kp.editor.mopp.KpPlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
+            for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
+                try {
+                    String type = element.getAttribute("type");
+                    org.eclipse.emf.ecore.resource.Resource.Factory factory = (org.eclipse.emf.ecore.resource.Resource.Factory) element.createExecutableExtension("class");
+                    if (type == null) {
+                        type = "";
+                    }
+                    org.eclipse.emf.ecore.resource.Resource.Factory otherFactory = factories.get(type);
+                    if (otherFactory != null) {
+                        Class<?> superClass = factory.getClass().getSuperclass();
+                        while(superClass != Object.class) {
+                            if (superClass.equals(otherFactory.getClass())) {
+                                factories.put(type, factory);
+                                break;
+                            }
+                            superClass = superClass.getClass();
+                        }
+                    }
+                    else {
+                        factories.put(type, factory);
+                    }
+                } catch (org.eclipse.core.runtime.CoreException ce) {
+                    org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while getting default options.", ce);
+                }
+            }
+        }*/
+
+        
+KpTextResourceUtil
+/*org.eclipse.core.resources.IFile file*/
+
+org.eclipse.emf.ecore.resource.Resource csResource = null; //rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);            
+
+
+  
+

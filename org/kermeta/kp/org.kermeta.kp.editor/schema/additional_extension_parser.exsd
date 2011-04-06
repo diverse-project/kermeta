@@ -5,7 +5,7 @@
 			<meta.schema plugin="org.kermeta.kp.editor" id="org.kermeta.kp.editor.additional_extension_parser" name="Additional Extension Parser"/>
 		</appinfo>
 		<documentation>
-			This extension point can be used to add another parser for 'kpt' files.		</documentation>
+			This extension point can be used to add another parser for 'kp' files.		</documentation>
 	</annotation>
 	
 	<element name="extension">

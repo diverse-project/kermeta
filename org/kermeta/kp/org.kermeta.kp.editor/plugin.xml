@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.kermeta.kp.editor.mopp.KptMetaInformation" id="org.kermeta.kp.editor.mopp.KptMetaInformation">
+		<metaInformationProvider class="org.kermeta.kp.editor.mopp.KpMetaInformation" id="org.kermeta.kp.editor.mopp.KpMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
@@ -15,23 +15,23 @@
 		</super>
 	</extension>
 	
-	<extension id="org.kermeta.kp.editor.nature" name="kpt nature" point="org.eclipse.core.resources.natures">
+	<extension id="org.kermeta.kp.editor.nature" name="kp nature" point="org.eclipse.core.resources.natures">
 		<runtime>
-			<run class="org.kermeta.kp.editor.mopp.KptNature" />
+			<run class="org.kermeta.kp.editor.mopp.KpNature" />
 		</runtime>
 		<builder id="org.kermeta.kp.editor.builder" />
 	</extension>
 	
-	<extension point="org.eclipse.core.resources.builders" id="org.kermeta.kp.editor.builder" name="kpt Builder">
+	<extension point="org.eclipse.core.resources.builders" id="org.kermeta.kp.editor.builder" name="kp Builder">
 		<builder hasNature="true">
-			<run class="org.kermeta.kp.editor.mopp.KptBuilderAdapter" />
+			<run class="org.kermeta.kp.editor.mopp.KpBuilderAdapter" />
 		</builder>
 	</extension>
 	
 	<extension-point id="org.kermeta.kp.editor.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
 	
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.kermeta.kp.editor.mopp.KptResourceFactoryDelegator" type="kpt">
+		<parser class="org.kermeta.kp.editor.mopp.KpResourceFactoryDelegator" type="kp">
 		</parser>
 	</extension>
 	
