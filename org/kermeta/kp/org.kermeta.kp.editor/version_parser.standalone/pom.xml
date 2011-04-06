@@ -25,6 +25,32 @@
       compiled the sources are not visible as java packages
     -->
     <sourceDirectory>../src/main/java</sourceDirectory>
+    
+    <resources>
+	     <resource>
+	         <targetPath>${project.build.directory}/filtered-sources/java</targetPath>
+	         <filtering>true</filtering>
+	         <directory>../src/main/java-gen</directory>
+	         <excludes>
+	             <exclude>**/editor/IKpBuilder.java</exclude>
+	             <exclude>**/editor/mopp/KpBuilder.java</exclude>
+	             <exclude>**/editor/mopp/KpBuilderAdpater.java</exclude>
+	             <exclude>**/editor/mopp/KpMarkerHelper.java</exclude>
+	             <exclude>**/editor/mopp/KpNature.java</exclude>
+	             <exclude>**/editor/mopp/KpPlugin.java</exclude>
+	             <exclude>**/editor/mopp/KpResource.java</exclude>
+	             <exclude>**/editor/mopp/KpResourceFactoryDelegator.java</exclude>
+	             <exclude>**/editor/util/KpTextResourceUtil.java</exclude>
+	         </excludes>
+	     </resource>
+	     <resource>
+	         <targetPath>${project.build.directory}/filtered-sources/java</targetPath>
+	         <filtering>true</filtering>
+	         <directory>src/main/java-gen-cleaned</directory>
+	         <excludes>
+	         </excludes>
+	     </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -49,7 +75,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>../src/main/java-gen</source>
+                <source>${project.build.directory}/filtered-sources/java</source>
               </sources>
             </configuration>
           </execution>
