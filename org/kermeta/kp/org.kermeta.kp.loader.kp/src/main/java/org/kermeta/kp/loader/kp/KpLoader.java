@@ -38,7 +38,7 @@ public class KpLoader {
 		System.out.println("factory reached : " + factory.toString());
 		// create resource set
 		ResourceSet rs = new ResourceSetImpl() ;
-		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("kpt", factory);
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("kp", factory);
 		
 		Resource resource = rs.createResource(uriKpResource);
 		System.out.println("Call to EMF  on : "+resource.toString()+" from repository : ");
