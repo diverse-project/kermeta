@@ -22,6 +22,8 @@ package kermeta
 
 			reference failedConstraint : Constraint[1..1]
 
+			attribute isWarning : ecore::EBoolean[1..1]
+
 		}
 		abstract class Reference
 		{

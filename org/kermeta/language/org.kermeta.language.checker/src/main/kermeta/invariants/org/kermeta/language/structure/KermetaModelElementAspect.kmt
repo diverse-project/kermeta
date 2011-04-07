@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : March 1, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+aspect class KermetaModelElement
+{
+	/**
+	 * Fake invariant for testing purposes
+	 */
+	@Scope "LOADED MERGED RESOLVED"
+	inv fake_super_invariant is do
+		true
+	end
+}

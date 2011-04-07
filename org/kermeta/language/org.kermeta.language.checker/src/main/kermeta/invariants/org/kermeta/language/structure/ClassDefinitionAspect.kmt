@@ -1,0 +1,33 @@
+/* $Id:$ 
+ * Creation : March 1, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class ClassDefinition {
+
+	/**
+	 * An operation cannot be defined twice in the same class
+	 */
+	@Scope "RESOLVED"
+	inv operation_not_defined_twice is do
+	
+		not self.ownedOperation.exists{ op |
+			self.ownedOperation.collect{ opbis |
+				opbis.uniqueName.equals(op.uniqueName)			
+			}.size > 1 
+		}
+	end
+
+
+}

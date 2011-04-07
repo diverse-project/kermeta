@@ -1,0 +1,33 @@
+/* $Id:$ 
+ * Creation : March 1, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+aspect class Package
+{
+	/**
+	 * A package must have a non empty name
+	 */
+	@Scope "LOADED"
+	inv non_empty_name is do
+	
+		if self.name.isVoid() 
+		then
+			false
+		else
+			self.name.size > 0
+		end
+	end
+	
+}

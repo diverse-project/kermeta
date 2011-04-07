@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : February 24, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class Constraint
+{
+	/**
+	 * A Constraint must have a body
+	 */
+	@Scope "LOADED"
+	inv must_have_body is do
+		not(self.body.isVoid())
+	end
+	
+	/**
+	 * The type of a constraint must be Boolean
+	 */
+	@Scope "RESOLVED"
+	inv type_must_be_boolean is do
+		self.body.isKindOf(org::kermeta::language::behavior::BooleanLiteral)
+		true
+	end
+	
+}

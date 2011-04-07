@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : April 5, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::checker::invariants;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ConstraintAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/KermetaModelElementAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelingUnitAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/OperationAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/PackageAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/PropertyAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/UnresolvedAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/UnresolvedTypeAspect.kmt"

@@ -14,12 +14,12 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 
-//require "platform:/lookup/org.kermeta.diagnostic.model/model/Diagnostic.ecore"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/Diagnostic.kmt"
+require "platform:/lookup/org.kermeta.diagnostic.model/model/Diagnostic.ecore"
+//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/Diagnostic.kmt"
 
 
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/checker/CheckerInvariants.kmt"
-
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/AllInvariants.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/PropertyV1Helper.kmt"
 using org::kermeta::diagnostic
 using kermeta::language::structure
 using kermeta::standard
@@ -38,9 +38,33 @@ class Checker
 	end
 	*/
 	
+	
+	/*
+	
+	attribute number : Integer
+	
+	operation initialize() : Void is do
+		number := 0
+	end
+	
+	operation checkStatus() : Void is do
+		updateStatus
+		if (number.mod(100) == 0)
+		then
+			stdio.writeln(number.toString + " objects checked")
+		end
+	end
+	
+	operation updateStatus() : Void is do
+		number := number + 1
+	end
+	
+	*/
+	
 	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
 
-		//stdio.writeln("--------------------------\n>> checkObject " + obj.toString)
+		//stdio.writeln("-- checkObject " + obj.toString)
+		
 		
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
 
@@ -58,7 +82,9 @@ class Checker
 					
 			allConstraints.addAll(cd.~inv)
 
+			//stdio.writeln("  - size of allConstraints before super : " + allConstraints.size().toString())
 			//browse superClasses...
+			
 			obj.getMetaClass().superClass.collect{ sC | sC.classDefinition}
 										 .each{classDef |
 				//stdio.writeln("   - superType : " + classDef.name)
@@ -67,6 +93,8 @@ class Checker
 					allConstraints.add(in) 
 				}
 			}
+			
+
 			//stdio.writeln("  - size of allConstraints after super : " + allConstraints.size().toString())
 		
 			
@@ -127,7 +155,8 @@ class Checker
 					end		
 			
 					// Recursivity
-					if ( prop.isComposite and prop.getViolatedConstraintsMustDrillDown) 
+					//if ( prop.isComposite and prop.getViolatedConstraintsMustDrillDown)
+					if ( prop.isComposite and prop.mustDrillDown) 
 					then
 					    var propValue : kermeta::language::structure::Object init obj.get(prop)//self.get(prop)
 					    // need to ignore ValueType and EnumerationLiteral for performance sake 					    	
@@ -189,11 +218,13 @@ class Checker
 		
 		//stdio.writeln("<< checkObject")
 		
+		//checkStatus
+		
 		result := diagnosticModel
 		
 	end
 	
-	//@(CompilerIgnore)
+	//@CompilerIgnore "true"
 	operation checkClassInvariant(obj : kermeta::language::structure::Object, 
 								  ~inv : kermeta::language::structure::Constraint,
 								  scope : String) : ConstraintDiagnostic is do
@@ -201,45 +232,72 @@ class Checker
 		
 		var consDiag : ConstraintDiagnostic
 			
-		//stdio.writeln("Checking invariant " + ~inv.name + " on class " + obj.getMetaClass.classDefinition.name )
-		var test : Boolean init filterInvariant(~inv, scope)
+		//stdio.writeln("  -- Checking invariant " + ~inv.name)
+		//stdio.writeln("   -> on class " + obj.getMetaClass.classDefinition.name )
 		
+		var test : Boolean init filterInvariant(~inv, scope)
 		//stdio.writeln(" filtering result : " + test.toString)
 		
 		// Is it the right scope ?
 		if filterInvariant(~inv,scope)
 		then
+			stdio.writeln("Checking invariant " + ~inv.name + " for scope " + scope +" on object " + obj.toString)
 			// If so, check the class invariant
 			do
-				obj.checkInvariant(~inv)
+				//obj.checkInvariant(~inv)
+/*				evaluateInvariant(obj,~inv)
 				rescue (e : ConstraintViolatedInv)
 					//stdio.writeln("ERROR : " + e.message)
-
 					// Build the ConstraintDiagnostic Report 					
-					consDiag := ConstraintDiagnostic.new
-					var modelReference : ModelReference init ModelReference.new
-					modelReference.referencedObject := obj
-					consDiag.appliesTo := modelReference
+					consDiag := buildConstraintDiagnostic(obj, ~inv)
 					
-					var invProxy : InvariantProxy init InvariantProxy.new
-					invProxy.metaclassQualifiedName := obj.getMetaClass.classDefinition.name
-					invProxy.invariantName := ~inv.name
-					invProxy.mmUri :=  obj.containingResource.metaModelURI
-					consDiag.failedConstraint := invProxy
-							// add the violated constraint to the report 
-							//contraintes.add(e)
-							//var diag : ConstraintDiagnostic init diagnosticHelper.transformConstraintViolatedInv(e,self)
-							//diagnostic.diagnostics.add(diag)
+*/
 			end	
 		end
 		
 		result := consDiag
 	end
 	
+	@CompilerIgnore "true"
+	operation evaluateInvariant(obj : kermeta::language::structure::Object, ~inv : kermeta::language::structure::Constraint) : Void is do
+		obj.checkInvariant(~inv)
+		rescue (e : ConstraintViolatedInv)
+			raise e
+	end
 	
+	operation buildConstraintDiagnostic(obj : kermeta::language::structure::Object,
+				invariant : kermeta::language::structure::Constraint) : ConstraintDiagnostic is do
+				
+			var constraintDiagnostic : ConstraintDiagnostic init ConstraintDiagnostic.new
 
+			var modelReference : ModelReference init ModelReference.new
+			modelReference.referencedObject /*:=*/ ?= obj
+			constraintDiagnostic.appliesTo := modelReference
+			constraintDiagnostic.isWarning := getWarningStatus(invariant)
+					
+			var invProxy : InvariantProxy init InvariantProxy.new
+			invProxy.metaclassQualifiedName := obj.getMetaClass.classDefinition.name
+			invProxy.invariantName := invariant.name
+			invProxy.mmUri :=  obj.containingResource.metaModelURI
+			constraintDiagnostic.failedConstraint := invProxy
+			
+			result := constraintDiagnostic
+	end
+	
+	operation getWarningStatus(invariant : kermeta::language::structure::Constraint) : Boolean is do
+		result := invariant.ownedTags.exists{t|
+			t.name=="IsWarning" and t.~value.equals("true")
+		}
+	end
 	
 	operation filterInvariant(invariant : kermeta::language::structure::Constraint, scope : String) : Boolean is do
+		
+		//stdio.writeln("   filtering invariant for scope " + scope)
+		/*
+		invariant.ownedTags.each{t|
+			stdio.writeln("   tag : " + t.name + " - value : " + t.~value)
+		}
+		*/
 		result := invariant.ownedTags.exists{ t |
 			t.name=="Scope" and t.~value.contains(scope)
 		}

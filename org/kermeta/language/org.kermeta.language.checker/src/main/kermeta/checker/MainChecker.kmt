@@ -28,8 +28,8 @@ class MainCheckerV2
 		
 		
 		//org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km
-		var file : String init "platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km"
-		
+		//var file : String init "platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km"
+		var file : String init "platform:/resource/org.kermeta.language.resolver/src/tests/HelloWorldMiniframework.km"
 		
 		// load 		
 		var inputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
@@ -48,8 +48,10 @@ class MainCheckerV2
 	
 		var myChecker : Checker init Checker.new
 		
+		//myChecker.initialize()
+		
 		// test mu
-		var diagModel : DiagnosticModel init myChecker.checkObject(mu, "LOADER")
+		var diagModel : DiagnosticModel init myChecker.checkObject(mu, "MERGER")
 		
 		stdio.writeln("Number of failed constraints : " + diagModel.diagnostics.size.toString)
 		

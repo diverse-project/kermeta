@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : September 14, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+aspect class ModelingUnit
+{
+	/**
+	 * Fake invariant for testing purposes
+	 */
+	@Scope "LOADED MERGED RESOLVED"
+	@IsWarning "true"
+	inv fake_invariant is do
+		// TODO
+		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
+		true
+	end
+}
