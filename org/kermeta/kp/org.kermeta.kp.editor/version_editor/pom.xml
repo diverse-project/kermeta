@@ -25,6 +25,23 @@
       compiled the sources are not visible as java packages
     -->
     <sourceDirectory>../src/main/java</sourceDirectory>
+    <resources>
+			<resource>
+				<directory>..</directory>
+				<includes>
+					<include>plugin.properties</include>
+					<include>plugin.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>../icons</directory>
+				<targetPath>icons</targetPath>
+			</resource>
+			<resource>
+				<directory>../css</directory>
+				<targetPath>css</targetPath>
+			</resource>
+		</resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -69,8 +86,16 @@
              <!-- Dependency used for compiling all the bundle (with dependecy to org.eclipse.core.* -->
              
             <Require-Bundle>
-              org.eclipse.core.runtime,
-              org.eclipse.core.resources
+              	org.eclipse.core.resources,
+				org.eclipse.emf,
+				org.eclipse.emf.codegen.ecore,
+				org.eclipse.emf.ecore,
+				org.eclipse.emf.ecore.edit,
+				org.eclipse.emf.validation,
+				org.eclipse.emf.workspace,
+				org.emftext.access;resolution:=optional,
+				org.emftext.commons.antlr3_2_0,
+				org.kermeta.kp.model
             </Require-Bundle>
             
             <Export-Package>
@@ -90,11 +115,11 @@
               are already there with the Require-Bundle
             -->
             <Import-Package>
-              !org.eclipse.emf.*,
+              !org.eclipse.*,
+              !org.emftext.*,
+              !org.antlr.*,
               !org.osgi.framework.*,
-              org.kermeta.kp.*
-               <!-- Dependency used for compiling all the bundle (with dependecy to org.eclipse.core.* -->
-               ,!org.eclipse.core.*  
+              !org.kermeta.kp.* 
             </Import-Package>
 
             <!--
