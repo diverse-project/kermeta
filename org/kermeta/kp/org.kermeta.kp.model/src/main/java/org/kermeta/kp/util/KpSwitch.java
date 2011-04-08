@@ -210,6 +210,14 @@ public class KpSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case KpPackage.FREESTYLE_SOURCE:
+      {
+        FreestyleSource freestyleSource = (FreestyleSource)theEObject;
+        T result = caseFreestyleSource(freestyleSource);
+        if (result == null) result = caseSource(freestyleSource);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -440,6 +448,22 @@ public class KpSwitch<T> {
   }
 
 	/**
+   * Returns the result of interpreting the object as an instance of '<em>Freestyle Source</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Freestyle Source</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFreestyleSource(FreestyleSource object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;

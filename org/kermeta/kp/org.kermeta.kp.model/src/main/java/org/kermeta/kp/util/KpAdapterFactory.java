@@ -151,6 +151,11 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createKermetaProjectRefAdapter();
       }
       @Override
+      public Adapter caseFreestyleSource(FreestyleSource object)
+      {
+        return createFreestyleSourceAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -382,6 +387,21 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.FreestyleSource <em>Freestyle Source</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.FreestyleSource
+   * @generated
+   */
+  public Adapter createFreestyleSourceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for the default case.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null.

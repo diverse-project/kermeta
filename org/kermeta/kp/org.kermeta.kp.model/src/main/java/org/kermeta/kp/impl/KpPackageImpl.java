@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.Expression;
+import org.kermeta.kp.FreestyleSource;
 import org.kermeta.kp.ImportedSource;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KermetaProjectRef;
@@ -144,6 +145,13 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	private EClass kermetaProjectRefEClass = null;
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass freestyleSourceEClass = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -269,11 +277,31 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKermetaProject_DefaultMainClass()
+  {
+    return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKermetaProject_DefaultMainOperation()
+  {
+    return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
 	public EReference getKermetaProject_Ref() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(8);
   }
 
 	/**
@@ -575,6 +603,16 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFreestyleSource()
+  {
+    return freestyleSourceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -608,6 +646,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__OPTIONS);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__VERSION);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__GROUP);
+    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_CLASS);
+    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_OPERATION);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__REF);
 
     dependencyEClass = createEClass(DEPENDENCY);
@@ -656,6 +696,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__GROUP);
     createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__VERSION);
     createEAttribute(kermetaProjectRefEClass, KERMETA_PROJECT_REF__URL);
+
+    freestyleSourceEClass = createEClass(FREESTYLE_SOURCE);
   }
 
 	/**
@@ -698,6 +740,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     stringExpressionEClass.getESuperTypes().add(this.getExpression());
     mixExpressionEClass.getESuperTypes().add(this.getExpression());
     kermetaProjectRefEClass.getESuperTypes().add(this.getNamedElement());
+    freestyleSourceEClass.getESuperTypes().add(this.getSource());
 
     // Initialize classes and features; add operations and parameters
     initEClass(kermetaProjectEClass, KermetaProject.class, "KermetaProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -707,6 +750,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEReference(getKermetaProject_Options(), this.getOption(), null, "options", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_Version(), ecorePackage.getEString(), "version", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_Group(), ecorePackage.getEString(), "group", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getKermetaProject_DefaultMainClass(), ecorePackage.getEString(), "defaultMainClass", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getKermetaProject_DefaultMainOperation(), ecorePackage.getEString(), "defaultMainOperation", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_Ref(), this.getKermetaProjectRef(), null, "ref", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -755,6 +800,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEAttribute(getKermetaProjectRef_Group(), ecorePackage.getEString(), "group", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProjectRef_Version(), ecorePackage.getEString(), "version", null, 1, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProjectRef_Url(), ecorePackage.getEString(), "url", null, 0, 1, KermetaProjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(freestyleSourceEClass, FreestyleSource.class, "FreestyleSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

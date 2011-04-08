@@ -78,6 +78,7 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
       case KpPackage.STRING_EXPRESSION: return createStringExpression();
       case KpPackage.MIX_EXPRESSION: return createMixExpression();
       case KpPackage.KERMETA_PROJECT_REF: return createKermetaProjectRef();
+      case KpPackage.FREESTYLE_SOURCE: return createFreestyleSource();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -224,6 +225,17 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FreestyleSource createFreestyleSource()
+  {
+    FreestyleSourceImpl freestyleSource = new FreestyleSourceImpl();
+    return freestyleSource;
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
