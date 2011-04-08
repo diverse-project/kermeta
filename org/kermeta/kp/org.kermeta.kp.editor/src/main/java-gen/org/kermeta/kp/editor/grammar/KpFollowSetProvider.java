@@ -32,10 +32,10 @@ public class KpFollowSetProvider {
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_17 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8_0_0_0);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_18 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_0);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_19 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_9);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_20 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_11);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_21 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_12);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_20 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_11_0_0_0);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_21 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_11_0_0_1);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_22 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_0);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_23 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_15);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_23 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_11_0_0_4);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_24 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_1);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_25 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_26 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_1);

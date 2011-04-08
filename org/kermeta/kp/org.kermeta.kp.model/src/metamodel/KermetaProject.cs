@@ -35,7 +35,7 @@ RULES{
     "{"
         (!1sources!0 | !1dependencies!0 |  !1options!0 | !1weaveDirectives )*!0
     "}"!0
-    "ref" "{" (!1ref)*!0 "}" 
+    ("ref" "{" (!1ref)*!0 "}")? 
     ;
     
     Source::=
