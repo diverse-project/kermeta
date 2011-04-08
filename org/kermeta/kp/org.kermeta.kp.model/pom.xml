@@ -59,7 +59,7 @@
 
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Export-Package>org.kermeta.kp.*</Export-Package>
 						<Import-Package>
 							!org.eclipse.emf.*
