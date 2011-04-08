@@ -13,6 +13,43 @@
 		</super>
 		<super type="org.eclipse.core.resources.textmarker">
 		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.kermeta.kp.editor.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.kermeta.kp.editor.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.kermeta.kp.editor.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.kermeta.kp.editor.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.kermeta.kp.editor.problem">
+		</super>
 	</extension>
 	
 	<extension id="org.kermeta.kp.editor.nature" name="kp nature" point="org.eclipse.core.resources.natures">
