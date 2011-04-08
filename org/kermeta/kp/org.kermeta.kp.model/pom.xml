@@ -63,7 +63,8 @@
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Export-Package>org.kermeta.kp.*</Export-Package>
 						<Import-Package>
-							!org.eclipse.emf.*
+							!org.eclipse.core.*,
+							org.eclipse.emf.*
 						</Import-Package>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<!-- add extra element in the manifest, copy them from this file ex: 
