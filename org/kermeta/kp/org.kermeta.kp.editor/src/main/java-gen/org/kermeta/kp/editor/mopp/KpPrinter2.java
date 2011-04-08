@@ -44,8 +44,8 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	private java.io.OutputStream outputStream;
 	protected java.util.List<PrintToken> tokenOutputStream;
 	private org.kermeta.kp.editor.IKpTokenResolverFactory tokenResolverFactory = new org.kermeta.kp.editor.mopp.KpTokenResolverFactory();
-	private boolean handleTokenSpaceAutomatically = true;
-	private int tokenSpace = 1;
+	private boolean handleTokenSpaceAutomatically = false;
+	private int tokenSpace = 0;
 	/**
 	 * A flag that indicates whether tokens have already been printed for some object.
 	 * The flag is set to false whenever printing of an EObject tree is started. The

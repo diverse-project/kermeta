@@ -44,6 +44,12 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
+		if (object instanceof org.kermeta.kp.FreestyleSource) {
+			result = interprete_org_kermeta_kp_FreestyleSource((org.kermeta.kp.FreestyleSource) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.kermeta.kp.KermetaProjectRef) {
 			result = interprete_org_kermeta_kp_KermetaProjectRef((org.kermeta.kp.KermetaProjectRef) object, context);
 		}
@@ -194,6 +200,10 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_kermeta_kp_KermetaProjectRef(org.kermeta.kp.KermetaProjectRef object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_FreestyleSource(org.kermeta.kp.FreestyleSource object, ContextType context) {
 		return null;
 	}
 	
