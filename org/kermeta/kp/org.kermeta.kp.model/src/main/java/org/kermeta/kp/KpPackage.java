@@ -161,13 +161,31 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+   * The feature id for the '<em><b>Default Main Class</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KERMETA_PROJECT__DEFAULT_MAIN_CLASS = NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+  /**
+   * The feature id for the '<em><b>Default Main Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KERMETA_PROJECT__DEFAULT_MAIN_OPERATION = NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+  /**
    * The feature id for the '<em><b>Ref</b></em>' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__REF = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int KERMETA_PROJECT__REF = NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
@@ -176,7 +194,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.DependencyImpl <em>Dependency</em>}' class.
@@ -688,6 +706,35 @@ public interface KpPackage extends EPackage {
 
 
 	/**
+   * The meta object id for the '{@link org.kermeta.kp.impl.FreestyleSourceImpl <em>Freestyle Source</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.kermeta.kp.impl.FreestyleSourceImpl
+   * @see org.kermeta.kp.impl.KpPackageImpl#getFreestyleSource()
+   * @generated
+   */
+  int FREESTYLE_SOURCE = 15;
+
+  /**
+   * The feature id for the '<em><b>Url</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FREESTYLE_SOURCE__URL = SOURCE__URL;
+
+  /**
+   * The number of structural features of the '<em>Freestyle Source</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FREESTYLE_SOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 0;
+
+
+  /**
    * Returns the meta object for class '{@link org.kermeta.kp.KermetaProject <em>Kermeta Project</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -764,6 +811,28 @@ public interface KpPackage extends EPackage {
 	EAttribute getKermetaProject_Group();
 
 	/**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Default Main Class</em>'.
+   * @see org.kermeta.kp.KermetaProject#getDefaultMainClass()
+   * @see #getKermetaProject()
+   * @generated
+   */
+  EAttribute getKermetaProject_DefaultMainClass();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Default Main Operation</em>'.
+   * @see org.kermeta.kp.KermetaProject#getDefaultMainOperation()
+   * @see #getKermetaProject()
+   * @generated
+   */
+  EAttribute getKermetaProject_DefaultMainOperation();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getRef <em>Ref</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1124,6 +1193,16 @@ public interface KpPackage extends EPackage {
 	EAttribute getKermetaProjectRef_Url();
 
 	/**
+   * Returns the meta object for class '{@link org.kermeta.kp.FreestyleSource <em>Freestyle Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Freestyle Source</em>'.
+   * @see org.kermeta.kp.FreestyleSource
+   * @generated
+   */
+  EClass getFreestyleSource();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1204,6 +1283,22 @@ public interface KpPackage extends EPackage {
 		EAttribute KERMETA_PROJECT__GROUP = eINSTANCE.getKermetaProject_Group();
 
 		/**
+     * The meta object literal for the '<em><b>Default Main Class</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KERMETA_PROJECT__DEFAULT_MAIN_CLASS = eINSTANCE.getKermetaProject_DefaultMainClass();
+
+    /**
+     * The meta object literal for the '<em><b>Default Main Operation</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KERMETA_PROJECT__DEFAULT_MAIN_OPERATION = eINSTANCE.getKermetaProject_DefaultMainOperation();
+
+    /**
      * The meta object literal for the '<em><b>Ref</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1502,6 +1597,16 @@ public interface KpPackage extends EPackage {
      * @generated
      */
 		EAttribute KERMETA_PROJECT_REF__URL = eINSTANCE.getKermetaProjectRef_Url();
+
+    /**
+     * The meta object literal for the '{@link org.kermeta.kp.impl.FreestyleSourceImpl <em>Freestyle Source</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.kermeta.kp.impl.FreestyleSourceImpl
+     * @see org.kermeta.kp.impl.KpPackageImpl#getFreestyleSource()
+     * @generated
+     */
+    EClass FREESTYLE_SOURCE = eINSTANCE.getFreestyleSource();
 
 	}
 

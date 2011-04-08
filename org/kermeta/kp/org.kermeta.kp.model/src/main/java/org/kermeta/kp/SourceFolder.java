@@ -12,6 +12,10 @@ package org.kermeta.kp;
  * A representation of the model object '<em><b>Source Folder</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * source pointing to all the content of a folder
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

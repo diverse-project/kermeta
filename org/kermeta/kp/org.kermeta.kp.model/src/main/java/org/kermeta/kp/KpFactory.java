@@ -152,6 +152,15 @@ public interface KpFactory extends EFactory {
 	KermetaProjectRef createKermetaProjectRef();
 
 	/**
+   * Returns a new object of class '<em>Freestyle Source</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Freestyle Source</em>'.
+   * @generated
+   */
+  FreestyleSource createFreestyleSource();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

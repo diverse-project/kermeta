@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.kp.KermetaProject#getOptions <em>Options</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getVersion <em>Version</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
@@ -148,6 +150,58 @@ public interface KermetaProject extends NamedElement {
 	void setGroup(String value);
 
 	/**
+   * Returns the value of the '<em><b>Default Main Class</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Default Main Class</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Default Main Class</em>' attribute.
+   * @see #setDefaultMainClass(String)
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_DefaultMainClass()
+   * @model
+   * @generated
+   */
+  String getDefaultMainClass();
+
+  /**
+   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Default Main Class</em>' attribute.
+   * @see #getDefaultMainClass()
+   * @generated
+   */
+  void setDefaultMainClass(String value);
+
+  /**
+   * Returns the value of the '<em><b>Default Main Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Default Main Operation</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Default Main Operation</em>' attribute.
+   * @see #setDefaultMainOperation(String)
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_DefaultMainOperation()
+   * @model
+   * @generated
+   */
+  String getDefaultMainOperation();
+
+  /**
+   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Default Main Operation</em>' attribute.
+   * @see #getDefaultMainOperation()
+   * @generated
+   */
+  void setDefaultMainOperation(String value);
+
+  /**
    * Returns the value of the '<em><b>Ref</b></em>' containment reference list.
    * The list contents are of type {@link org.kermeta.kp.KermetaProjectRef}.
    * <!-- begin-user-doc -->

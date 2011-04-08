@@ -12,6 +12,10 @@ package org.kermeta.kp;
  * A representation of the model object '<em><b>Source File</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * source pointing to a file in the current project
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
