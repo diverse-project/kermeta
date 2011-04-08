@@ -92,18 +92,18 @@
 							use the ! for avoiding to import some packages that are already 
 							there with the Require-Bundle -->
 						<Import-Package>
-							!org.eclipse.ui.*,,
+							!org.eclipse.ui.*,
 							!org.eclipse.emf.*,
 							!org.eclipse.jface.*, 
 							!org.eclipse.swt.*,
 							!org.osgi.framework,
 							!org.eclipse.core.*,
-							org.kermeta.kp.*,
-							org.kermeta.kp.editor, 
-							org.kermeta.kp.editor.grammar, 
-							org.kermeta.kp.editor.mopp, 
-							org.kermeta.kp.editor.util,
-							org.antlr.*
+							!org.kermeta.kp.*,
+							!org.kermeta.kp.editor, 
+							!org.kermeta.kp.editor.grammar, 
+							!org.kermeta.kp.editor.mopp, 
+							!org.kermeta.kp.editor.util,
+							!org.antlr.*
 						</Import-Package>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<!-- add extra element in the manifest, copy them from this file ex: 

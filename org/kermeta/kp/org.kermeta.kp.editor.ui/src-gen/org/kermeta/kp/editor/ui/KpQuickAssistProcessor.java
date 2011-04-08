@@ -24,7 +24,7 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 		return quickFixes.size() > 0;
 	}
 	
-	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeQuickAssistProposals(	org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext invocationContext) {
+	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeQuickAssistProposals(org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext invocationContext) {
 		org.eclipse.jface.text.source.ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		int offset = -1;
 		int length = 0;
@@ -45,7 +45,6 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 		return new org.eclipse.jface.text.contentassist.ICompletionProposal() {
 			
 			public org.eclipse.swt.graphics.Point getSelection(org.eclipse.jface.text.IDocument document) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 			
@@ -58,12 +57,10 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 			}
 			
 			public org.eclipse.jface.text.contentassist.IContextInformation getContextInformation() {
-				// TODO Auto-generated method stub
 				return null;
 			}
 			
 			public String getAdditionalProposalInfo() {
-				// TODO Auto-generated method stub
 				return null;
 			}
 			
@@ -71,8 +68,6 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 				String currentContent = sourceViewer.getDocument().get();
 				String newContent = quickFix.apply(currentContent);
 				if (newContent != null) {
-					// TODO maybe it is better to replace only the changed
-					// part of the document
 					sourceViewer.getDocument().set(newContent);
 				}
 			}
@@ -124,7 +119,6 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 	}
 	
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

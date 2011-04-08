@@ -145,6 +145,9 @@ public class KpCodeCompletionHelper {
 		} else if (expectedElement instanceof org.kermeta.kp.editor.mopp.KpExpectedBooleanTerminal) {
 			org.kermeta.kp.editor.mopp.KpExpectedBooleanTerminal expectedBooleanTerminal = (org.kermeta.kp.editor.mopp.KpExpectedBooleanTerminal) expectedElement;
 			return handleBooleanTerminal(expectedBooleanTerminal, expectedTerminal.getPrefix());
+		} else if (expectedElement instanceof org.kermeta.kp.editor.mopp.KpExpectedEnumerationTerminal) {
+			org.kermeta.kp.editor.mopp.KpExpectedEnumerationTerminal expectedEnumerationTerminal = (org.kermeta.kp.editor.mopp.KpExpectedEnumerationTerminal) expectedElement;
+			return handleEnumerationTerminal(expectedEnumerationTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature) {
 			org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature expectedFeature = (org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature) expectedElement;
 			org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
@@ -302,12 +305,22 @@ public class KpCodeCompletionHelper {
 	private java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> handleBooleanTerminal(org.kermeta.kp.editor.mopp.KpExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
 		java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> result = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KpCompletionProposal>(2);
 		org.kermeta.kp.editor.grammar.KpBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
-		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
-		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
 		return result;
 	}
 	
-	private java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> handleBooleanLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+	private java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> handleEnumerationTerminal(org.kermeta.kp.editor.mopp.KpExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
+		java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> result = new java.util.LinkedHashSet<org.kermeta.kp.editor.ui.KpCompletionProposal>(2);
+		org.kermeta.kp.editor.grammar.KpEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
+		java.util.Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
+		for (String literalName : literalMapping.keySet()) {
+			result.addAll(handleLiteral(enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
+		}
+		return result;
+	}
+	
+	private java.util.Collection<org.kermeta.kp.editor.ui.KpCompletionProposal> handleLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
 		if ("".equals(literal)) {
 			return java.util.Collections.emptySet();
 		}

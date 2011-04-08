@@ -203,7 +203,7 @@ public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference
 		
 		public Object[] getElements(Object inputElement) {
 			java.util.List<HighlightingColorListItem> contentsList = new java.util.ArrayList<HighlightingColorListItem>();
-			for(java.util.List<HighlightingColorListItem> l : content.values()) {
+			for (java.util.List<HighlightingColorListItem> l : content.values()) {
 				contentsList.addAll(l);
 			}
 			return contentsList.toArray();
