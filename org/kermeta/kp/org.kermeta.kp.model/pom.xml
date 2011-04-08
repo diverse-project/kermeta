@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
 	<artifactId>kp.model</artifactId>
-	<name>Kermeta :: KP MODEL</name>
+	<name>kp.model :: KP MODEL</name>
 	<packaging>bundle</packaging>
 	
 	<parent>
@@ -21,10 +21,10 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
-			<resource>
+			<!-- <resource>
 				<filtering>false</filtering>
 				<directory>src/main/java</directory>
-			</resource>
+			</resource> -->
 			<resource>
 				<directory>.</directory>
 				<includes>
