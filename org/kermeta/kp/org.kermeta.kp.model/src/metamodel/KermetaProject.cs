@@ -9,13 +9,15 @@ OPTIONS {
     srcFolder = "src/main/java";
     srcGenFolder = "src/main/java-gen";
     generateCodeFromGeneratorModel = "true";
+    tokenspace="0";
+    
 }
 
 TOKENS{
     DEFINE SL_COMMENT$'//'(~('\n'|'\r'))*$;
     DEFINE ML_COMMENT $'/*'.*'*/'$ ;
     DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
-    DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
+    DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;  
 }
 
 TOKENSTYLES{
@@ -29,9 +31,16 @@ TOKENSTYLES{
 RULES{
     
     KermetaProject::= 
-    "KermetaProject" ":" name['"','"'] !0
-    ("version" ": " version['"','"'] !0)?
-    ("group"  ":" group['"','"'] !0)?
+   // "KermetaProject" _[WHITESPACE]* ":" _[WHITESPACE]* name['"','"'] _[WHITESPACE]* !0
+    "KermetaProject" ":"  name['"','"']  !0
+    (
+    	(
+	    	("version"  ":"  version['"','"']  ) |
+	    	("group"  ":"   group['"','"']  ) |
+	    	("defaultMainClass"  ":"   defaultMainClass['"','"']  ) |
+	    	("defaultMainOperation"  ":"  defaultMainOperation['"','"']  )
+	    ) !0
+    )*
     "{"
         (!1sources!0 | !1dependencies!0 |  !1options!0 | !1weaveDirectives )*!0
     "}"!0
@@ -39,7 +48,7 @@ RULES{
     ;
     
     Source::=
-    "source" "=" url['"','"']
+    "source"  "=" url['"','"']
     ;
     
     SourceFolder::=  

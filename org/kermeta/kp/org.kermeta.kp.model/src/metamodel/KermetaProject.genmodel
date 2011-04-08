@@ -16,6 +16,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/options"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainOperation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/ref"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//Dependency">
@@ -63,5 +65,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProjectRef/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProjectRef/url"/>
     </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//FreestyleSource"/>
   </genPackages>
 </genmodel:GenModel>
