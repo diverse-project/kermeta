@@ -1,31 +1,24 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.kp.editor;uses:="org.kermeta.kp.editor.uti
- l,org.kermeta.kp.editor.mopp",org.kermeta.kp.editor.analysis;uses:="o
- rg.kermeta.kp,org.kermeta.kp.editor,org.kermeta.kp.editor.util",org.k
- ermeta.kp.editor.grammar;uses:="org.kermeta.kp.editor.util,org.kermet
- a.kp,org.kermeta.kp.editor,org.kermeta.kp.editor.mopp",org.kermeta.kp
- .editor.mopp;uses:="org.kermeta.kp.editor,org.kermeta.kp.editor.util,
- org.kermeta.kp.editor.grammar,org.kermeta.kp,org.kermeta.kp.editor.an
- alysis",org.kermeta.kp.editor.util;uses:="org.kermeta.kp,org.kermeta.
- kp.editor.mopp"
-Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.u
- til,org.eclipse.emf.ecore,org.eclipse.emf.common.util,org.osgi.framew
- ork,org.eclipse.emf.ecore.impl,org.eclipse.emf.ecore.resource.impl,or
- g.eclipse.emf.common.notify
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Built-By: hrambelo
-Tool: Bnd-0.0.357
-Bundle-Name: Kermeta :: KP Editor for Kermeta 2
-Bundle-Localization: plugin
-Created-By: Apache Maven Bundle Plugin
-Bundle-Vendor: IRISA/INRIA
-Build-Jdk: 1.6.0_20
-Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1299083108909
 Bundle-ManifestVersion: 2
-Import-Package: org.kermeta.kp,org.kermeta.kp.editor,org.kermeta.kp.ed
- itor.analysis,org.kermeta.kp.editor.grammar,org.kermeta.kp.editor.mop
- p,org.kermeta.kp.editor.util
+Bundle-Name: EMFText Parser Plugin: kp
 Bundle-SymbolicName: org.kermeta.kp.editor;singleton:=true
-
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.resources,
+  org.eclipse.emf,
+  org.eclipse.emf.codegen.ecore,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.edit,
+  org.eclipse.emf.validation,
+  org.eclipse.emf.workspace,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_2_0,
+  org.kermeta.kp.model
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.kermeta.kp.editor,
+  org.kermeta.kp.editor.analysis,
+  org.kermeta.kp.editor.mopp,
+  org.kermeta.kp.editor.grammar,
+  org.kermeta.kp.editor.util
+Bundle-Activator: org.kermeta.kp.editor.mopp.KpPlugin
