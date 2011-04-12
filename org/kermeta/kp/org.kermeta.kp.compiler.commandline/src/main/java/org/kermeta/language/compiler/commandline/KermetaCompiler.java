@@ -327,6 +327,15 @@ public class KermetaCompiler {
                 // GroupId and ArtifactId are used to prefix the generated code
             GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
             GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
+
+            // default baseClass and baseOperation
+            if(kp.getDefaultMainClass() != null){
+            	GlobalConfiguration.props().setProperty("baseClass", kp.getDefaultMainClass());
+            }
+            if(kp.getDefaultMainOperation() != null){
+            	GlobalConfiguration.props().setProperty("baseOperation", kp.getDefaultMainOperation());
+            }
+            
             //GlobalConfiguration.load(GlobalConfiguration.props());
             GlobalConfiguration.setScalaAspectPrefix(kp.getGroup()+"."+kp.getName());
           /*
