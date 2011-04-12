@@ -11,7 +11,7 @@
 package org.kermeta.language.loader.kmt.scala.internal.lexer
 
 import scala.util.parsing.input._
-import org.kermeta.language.api.ktoken.IKToken
+import org.kermeta.language.loader.kmt.scala.api.IKToken
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.combinator.token.Tokens
 import scala.util.parsing.input.OffsetPosition
