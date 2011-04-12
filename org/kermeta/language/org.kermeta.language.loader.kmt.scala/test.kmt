@@ -1,0 +1,16 @@
+package kmt_testCase::foo;
+
+class Main
+{
+
+operation main() : Void is do
+
+// stdio.writeln("Hello World!")
+// (3+4).e.test(t)
+
+result := "foo"
+~result := 42
+
+end
+
+}

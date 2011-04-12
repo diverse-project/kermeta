@@ -1,0 +1,47 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            juancadavid
+ */
+@mainClass "kmt_testCase::Main"
+@mainOperation "main"
+
+
+package kmt_testCase::foo;
+
+
+require kermeta
+
+using kermeta::standard::*
+using kermeta::standard::A
+using kermeta
+using kermeta::standard::{A => MyA}
+
+
+class Main
+{
+	 attribute s : kermeta::standard::String [0..*]
+         attribute s2 : kermeta::standard::String
+         attribute s3 : kermeta::standard::String [1]
+         attribute s4 : kermeta::standard::String [*]
+
+       /*  var myVar : String  */
+//inherits
+
+
+	operation main() : Void is do
+
+            var ~inherits : String
+
+            var myVar : String init ""
+            var myBool : kermeta::standard::Boolean init true
+            var myBool2 : Boolean init true
+
+		s.add("hello")
+		s.add("moto")
+		s.each({ s2 , s3 , s4 | stdio.writeln(s2) })
+	end
+}
+
