@@ -66,10 +66,10 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.kermeta.language.lexer,
+							org.kermeta.language.loader.kmt.scala.internal.lexer,
 							org.kermeta.scala.parser.art2.impl,
-							org.kermeta.scala.parser.sub,
-							org.kermeta.scala.parser
+							org.kermeta.language.loader.kmt.scala.internal.parser.sub,
+							org.kermeta.language.loader.kmt.scala.internal.parser
                         </Export-Package>
 						<Import-Package>
 							org.kermeta.*,
