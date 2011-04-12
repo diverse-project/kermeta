@@ -2,7 +2,7 @@
 <!-- License    : EPL                                    -->
 <!-- Project    : org.kermeta.language.loader.kmt.scala -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
-<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+<!-- Authors : Cédric Bouhours <cedric.bouhours@irisa.fr> --> 
 
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
