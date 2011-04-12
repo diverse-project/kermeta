@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore">
+  <classifier xsi:type="ClassMM:Class" name="Toto" is_persistent="true">
+    <attrs type="//@classifier.1" name="titi" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:PrimitiveDataType" name="string"/>
+  <classifier xsi:type="ClassMM:Class" name="Blah">
+    <attrs type="//@classifier.0" name="b"/>
+  </classifier>
+  <association name="blah" src="//@classifier.0" dest="//@classifier.2"/>
+</ClassMM:ClassModel>

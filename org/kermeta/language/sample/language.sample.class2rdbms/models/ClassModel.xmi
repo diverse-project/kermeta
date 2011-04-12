@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore">
+  <classifier xsi:type="ClassMM:Class" name="Customer" is_persistent="true">
+    <attrs type="//@classifier.4" name="name" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:Class" name="Order" is_persistent="true">
+    <attrs type="//@classifier.3" name="order_no" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:Class" name="Address">
+    <attrs type="//@classifier.4" name="addr" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:PrimitiveDataType" name="int"/>
+  <classifier xsi:type="ClassMM:PrimitiveDataType" name="string"/>
+  <association name="customer" src="//@classifier.1" dest="//@classifier.0"/>
+  <association name="address" src="//@classifier.0" dest="//@classifier.2"/>
+</ClassMM:ClassModel>

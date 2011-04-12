@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore" xsi:schemaLocation="platform:/resource/mtip/kermeta/metamodels/ClassMM.ecore ../metamodels/ClassMM.ecore">
+  <classifier xsi:type="ClassMM:Class" name="A">
+    <attrs type="//@classifier.4" name="attA" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:Class" name="B" is_persistent="true" parent="//@classifier.0">
+    <attrs type="//@classifier.4" name="attB"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:Class" name="C" parent="//@classifier.1">
+    <attrs type="//@classifier.4" name="attC"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:Class" name="D" is_persistent="true" parent="//@classifier.1">
+    <attrs type="//@classifier.4" name="attD"/>
+  </classifier>
+  <classifier xsi:type="ClassMM:PrimitiveDataType" name="String"/>
+  <association name="assoDC" src="//@classifier.3" dest="//@classifier.2"/>
+</ClassMM:ClassModel>

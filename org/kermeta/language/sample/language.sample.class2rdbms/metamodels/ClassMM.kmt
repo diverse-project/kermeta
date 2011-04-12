@@ -1,0 +1,45 @@
+package ClassMM;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+abstract class Classifier
+{
+	attribute name : ecore::EString
+
+}
+class Association
+{
+	attribute name : ecore::EString
+
+	reference src : Class[1..1]
+
+	reference dest : Class[1..1]
+
+}
+class Attribute
+{
+	reference type : Classifier[1..1]
+
+	attribute name : ecore::EString
+
+	attribute is_primary : ecore::EBoolean
+
+}
+class Class inherits Classifier
+{
+	attribute is_persistent : ecore::EBoolean
+
+	attribute attrs : Attribute[1..*]
+
+	reference parent : Class
+
+}
+class PrimitiveDataType inherits Classifier
+{
+}
+class ClassModel
+{
+	attribute classifier : Classifier[0..*]
+
+	attribute association : Association[0..*]
+
+}

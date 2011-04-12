@@ -1,0 +1,251 @@
+@mainClass "class2RDBMS::Main"
+@mainOperation "main"
+
+package class2RDBMS;
+
+require kermeta
+require "trace.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using trace
+using ClassMM
+using RDBMSMM
+
+
+class Class2RDBMS 
+{
+	/** The trace of the transformation */
+	reference class2table : Trace<Class, Table>
+	/** Set of keys of the output model */
+	reference fkeys : Collection<FKey>
+	
+	operation transform(inputModel : ClassModel) : RDBMSModel is do
+		// Initialize the trace
+		class2table := Trace<Class, Table>.new
+		class2table.create
+		fkeys := Set<FKey>.new
+		result := RDBMSModel.new
+		
+		// Create tables
+		 getAllClasses(inputModel).select{ c | c.is_persistent }.each{ c | 
+		 	stdio.writeln("Create Table " + c.name)
+		 	var table : Table init Table.new
+		 	table.name := c.name
+		 	class2table.storeTrace(c, table)
+		 	result.table.add(table)
+		 }
+		// Create columns
+		getAllClasses(inputModel).select{ c | c.is_persistent }.each{ c | 
+			stdio.writeln("Create Columns for table " + c.name)
+			createColumns(class2table.getTargetElem(c), c, "")
+		}
+		// Create fkeys
+		fkeys.each{ k | k.createFKeyColumns }
+	
+	end
+	
+	
+	operation createColumns(table : Table, cls : Class, prefix : String) is do
+    	// add all attributes
+    	getAllAttributes(cls).each{ att | 
+       		createColumnsForAttribute(table, att, prefix)
+        }
+        // add all associations
+        getAllAssociation(cls).each{ asso | 
+        	createColumnsForAssociation(table, asso, prefix)
+        }
+    end
+	
+	operation createColumnsForAttribute(table : Table, att : Attribute, prefix : String) is do
+    	// The type is primitive : create a simple column
+    	stdio.writeln("Create column for attribute " + att.name + ", prefix = " + prefix)
+    	if PrimitiveDataType.isInstance(att.type) then 
+    		var c : Column init Column.new
+    		c.name := prefix + att.name
+    		c.type := att.type.name
+    		table.cols.add(c)
+    		if att.is_primary then table.pkey.add(c) end
+    	else
+    		var type : Class	type ?= att.type
+    		// The type is persitant
+    		if isPersistentClass(type) then
+    			// Create a FKey
+				var fk : FKey init FKey.new
+				fk.prefix := prefix + att.name
+				table.fkeys.add(fk)
+				fk.references := class2table.getTargetElem(getPersistentClass(type))
+				fkeys.add(fk)
+    		else
+    			// Recusively include all attributes and asso of the non persistent table
+    			createColumns(table, type, prefix + att.name)
+    		end
+    		
+    	end
+    end
+    
+    operation createColumnsForAssociation(table : Table, asso : Association, prefix : String) is do
+    	stdio.writeln("Create column for association " + asso.name + ", prefix = " + prefix)
+    	if isPersistentClass(asso.dest) then
+			// Create a FKey
+			var fk : FKey init FKey.new
+			fk.prefix := prefix + asso.name
+			table.fkeys.add(fk)
+			fk.references := class2table.getTargetElem(getPersistentClass(asso.dest))
+			fkeys.add(fk)
+		else
+			// Recusively include all attributes and asso of the non persistent table
+			createColumns(table, asso.dest, prefix + asso.name)
+		end
+    end
+	
+	/**
+     * return true if the class or one of its super class is persistent
+     */
+    operation isPersistentClass(cls : Class) : Boolean is do
+    	result := getPersistentClass(cls) != void
+    end
+    
+    /**
+     * Return the top persistent class for the class given as parameter
+     */
+    operation getPersistentClass(cls : Class) : Class is do
+    	if cls.is_persistent then
+    		result := cls
+    	else if cls.parent != void then
+    		result := getPersistentClass(cls.parent)
+    	end end
+    end
+    
+    operation getAllClasses(cmodel : ClassModel) : Class[0..*] is do
+   	result := OrderedSet<Class>.new
+    	cmodel.classifier.each{ c | 
+    		// select only classes (not primitive types)
+    		if c.getMetaClass == Class then
+    			var cls : Class cls ?= c	// cast the Classifier to Class
+    			result.add(cls) 
+    		end
+    	}
+   end
+   
+    /**
+     * Get the set of attributes of a persistent class
+     */
+    operation getAllAttributes(cls : Class) : Attribute[0..*] is do
+    	
+    	// get inherited attributes
+    	if cls.parent == void then 
+    		result := OrderedSet<Attribute>.new
+    	else
+    		result := getAllAttributes(cls.parent)
+    	end
+    	// add class attributes (override existing attributes)
+    	cls.attrs.each{ att | 
+    		// check for overiding attributes
+    		var other_att : Attribute init result.detect{ a | a.name == att.name }
+    		if  other_att != void then
+    			result.remove(other_att)
+    		end
+    		result.add(att)
+    	}
+    	// Add attributes from the subclasses
+    	result.addAll(getSubClassesAttributes(cls))
+    	
+    end
+    
+    operation getSubClassesAttributes(cls : Class) : Attribute[0..*] is do
+    	var model : ClassModel model ?= cls.container
+    	result := OrderedSet<Attribute>.new
+    	// get all the sub-classes
+    	getAllClasses(model).select{ c | c.parent == cls }.each{ c | 
+    		result.addAll(c.attrs) 
+    		result.addAll(getSubClassesAttributes(c))
+    	}
+    end
+    
+    /**
+     * Get the set of association of a persistent class
+     */
+    operation getAllAssociation(cls : Class) : Association[0..*] is do
+    	var model : ClassModel model ?= cls.container
+    	//stdio.writeln("Model = " + cls.container.toString)
+    	// get inherited attributes
+    	if cls.parent == void then 
+    		result := OrderedSet<Association>.new
+    	else
+    		result := getAllAssociation(cls.parent)
+    	end
+    	// add class attributes
+    	model.association.select{ asso | asso.src == cls }.each{ asso | 
+    		// check for overiding attributes
+    		var other_att : Association init result.detect{ a | a.name == asso.name }
+    		if  other_att != void then
+    			result.remove(other_att)
+    		end
+    		result.add(asso)	
+    	}
+    	// Add association defined in subclasses
+    	result.addAll(getSubClassesAssociation(cls))
+    end
+    
+    operation getSubClassesAssociation(cls : Class) : Association[0..*] is do
+    	var model : ClassModel model ?= cls.container
+    	result := OrderedSet<Association>.new
+    	// get all the sub-classes
+    	getAllClasses(model).select{ c | c.parent == cls }.each{ c | 
+    		result.addAll(model.association.select{ asso | asso.src == c })
+    		result.addAll(getSubClassesAssociation(c))
+    	}
+    end
+
+}
+
+class Main
+{
+    operation main() : Void is do 
+        var inputModel : ClassModel init loadClassModel
+        var tranfo : Class2RDBMS init Class2RDBMS.new
+        var outputModel : RDBMSModel init tranfo.transform(inputModel)
+        
+        var repository : EMFRepository init EMFRepository.new
+        repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+        var resource : Resource init 
+        	repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
+        							 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+	 	// Define a Root ...
+	 	resource.instances.add(outputModel)
+	 		 	
+	 	resource.save()
+       
+       rescue (e : kermeta::exceptions::ResourceLoadException)
+           metamodelRegistration(e)
+    end
+    
+    operation loadClassModel() : ClassModel is do             
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
+   																									"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
+       	resource.load()
+      
+       // result ?= resource.instances.one
+       
+       from var it : Iterator<Object> init resource.instances.iterator
+       until it.isOff
+       loop
+           var next : Object init it.next
+           if (ClassModel.isInstance(next)) then                 
+           		result ?= next
+           end
+       end
+   end
+   
+   operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
+            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THE METAMODELS !\n"
+                     +"You can find additional information about thise sample on Kermeta web site : http://kermeta.org/examples")
+            raise e
+   end
+}
