@@ -1,7 +1,7 @@
 KermetaProject :"hello.world" 
 version :  "2.0.1-SNAPSHOT" 
 group :"org.kermeta.language.sample" 
-defaultMainClass : "org.kermeta.language.sample.hello.worldrunner.MainRunner"
+defaultMainClass :"helloworld.HelloWorld"
 defaultMainOperation : "main"
 { 
 	
