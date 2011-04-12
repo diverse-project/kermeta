@@ -1,0 +1,64 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.language.sample</groupId>
+    <artifactId>language.sample.class2rdbms</artifactId>
+    <packaging>bundle</packaging>
+    <name>language.sample.class2rdbms</name>
+
+    <parent>
+        <groupId>org.kermeta.language</groupId>
+        <artifactId>language.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.library.core</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+    <build>
+        <plugins>
+        	<!-- Kermeta Compiler plugin -->
+            <plugin>
+                <groupId>org.kermeta.kp</groupId>
+                <artifactId>kp.compiler.mavenplugin</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <kp>project.kp</kp>
+                            <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- package into a jar for OSGI -->
+          <!--  <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>kermeta.io,kermeta.standard,kermeta.utils,kermeta.exceptions</Export-Package>
+                        <Bundle-SymbolicName>org.kermeta.language.library.core</Bundle-SymbolicName>
+                        <Import-Package>!kermeta.io,*</Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                    </instructions>
+                </configuration>
+            </plugin> -->
+        </plugins>
+    </build>
+
+
+</project>

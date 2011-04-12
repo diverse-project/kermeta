@@ -1,0 +1,18 @@
+KermetaProject :"language.sample.class2rdbms" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language.sample" 
+defaultMainClass :"class2RDBMS::Main"
+defaultMainOperation : "main"
+{ 
+	
+	source = "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  
+	source = "${project.baseUri}/src/main/kmt/trace.kmt"
+	source = "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
+	source = "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
+	
+	// depends on library.core	
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+		 
+} 
+
+ 
