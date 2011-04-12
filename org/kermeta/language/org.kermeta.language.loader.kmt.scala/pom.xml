@@ -59,7 +59,7 @@
 							org.kermeta.language.loader.kmt.scala
                         </Export-Package>
                         <Require-Bundle>
-            				org.kermeta.language.model
+            				org.kermeta.language.model,
             				org.kermeta.language.loader.kmt.scala.api
                         </Require-Bundle>
                         <Import-Package>
@@ -71,14 +71,23 @@
 							org.eclipse.emf.ecore.util,
 							org.eclipse.emf.ecore.xmi,
 							org.eclipse.emf.ecore.xmi.impl,
-							org.osgi.framework;version="[1.5,2)",
+							org.osgi.framework;version="[1.5,2)",					
 							scala,
 							scala.actors,
 							scala.collection,
+							scala.collection.generic,
 							scala.collection.immutable,
 							scala.collection.mutable,
+							scala.io,
+							scala.math,
 							scala.reflect,
-							scala.runtime
+							scala.runtime,
+							scala.util,
+							scala.util.parsing.combinator,
+							scala.util.parsing.combinator.lexical,
+							scala.util.parsing.combinator.syntactical,
+							scala.util.parsing.combinator.token,
+							scala.util.parsing.input
                         </Import-Package>
 		            </manifestEntries>		            
 		          </archive>
