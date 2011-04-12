@@ -1,21 +1,21 @@
-<!-- $Id: pom.xml 14833 2011-04-12 07:44:32Z bouhours $ -->
+<!-- $Id: pom.xml 14766 2011-03-31 07:30:48Z dvojtise $ -->
 <!-- License    : EPL                                    -->
 <!-- Project    : org.kermeta.language.loader.kmt.scala -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
-<!-- Authors : Cédric Bouhours <cedric.bouhours@irisa.fr> --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
 
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>bundle</packaging>
-	<name>language.loader.kmt.scala :: KMT files loader</name>
+	<packaging>jar</packaging>
+	<name>language.loader.kmt.scala :: Lexer and KMT files loader</name>
 	<artifactId>language.loader.kmt.scala</artifactId>
 
-	 <parent>
+    <parent>
+        <artifactId>language.root</artifactId>
         <groupId>org.kermeta.language</groupId>
-   		<artifactId>language.artcomponent.root</artifactId>
-    	<version>2.0.1-SNAPSHOT</version>
+        <version>2.0.1-SNAPSHOT</version>
     </parent>
 
 	<dependencies>
@@ -25,29 +25,15 @@
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>language.loader.kmt.scala.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>${emf.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>language.api.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>language.api</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.framework</artifactId>
-			<version>${art2.version}</version>
-		</dependency>
-		
-		<!-- overide scala dependency from art2 -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -57,45 +43,47 @@
 	</dependencies>
 
 	<build>
-
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Export-Package>
-							org.kermeta.language.loader.kmt.scala.internal.lexer,
-							org.kermeta.scala.parser.art2.impl,
-							org.kermeta.language.loader.kmt.scala.internal.parser.sub,
-							org.kermeta.language.loader.kmt.scala.internal.parser
-                        </Export-Package>
-						<Import-Package>
-							org.kermeta.*,
-							org.eclipse.emf.*,
-                                                        org.slf4j.*;version="${slf4j.version.range}",
-							org.osgi.framework;version="[1.5,2)",
-							scala.*
-                        </Import-Package>
-
-					</instructions>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-					<includes>
-						<include>**/*TestSuite.java</include>
-					</includes>
-				</configuration>
-			</plugin>
+		        <artifactId>maven-jar-plugin</artifactId>
 
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Export-Package>
+							org.kermeta.language.loader.kmt.scala
+                        </Export-Package>
+                        <Require-Bundle>
+            				org.kermeta.language.model
+            				org.kermeta.language.loader.kmt.scala.api
+                        </Require-Bundle>
+                        <Import-Package>
+							org.eclipse.emf.common.notify,
+							org.eclipse.emf.common.util,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.impl,
+							org.eclipse.emf.ecore.resource,
+							org.eclipse.emf.ecore.util,
+							org.eclipse.emf.ecore.xmi,
+							org.eclipse.emf.ecore.xmi.impl,
+							org.osgi.framework;version="[1.5,2)",
+							scala,
+							scala.actors,
+							scala.collection,
+							scala.collection.immutable,
+							scala.collection.mutable,
+							scala.reflect,
+							scala.runtime
+                        </Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
 		</plugins>
 	</build>
 
