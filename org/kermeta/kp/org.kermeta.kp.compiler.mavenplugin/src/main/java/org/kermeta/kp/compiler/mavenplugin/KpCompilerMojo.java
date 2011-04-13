@@ -155,7 +155,9 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		intermediateFilesRequired, classPathList);
 			
 			compiler.kp2bytecode(kp.toString());
-			
+		if(compiler.hasFailed)	{
+                    throw new MojoExecutionException(compiler.errorMessage);
+                }
 	        // Add kp file and resolved km files in the resulting jar
 			// tell maven to include generated META-INF
 			Resource resource = new Resource();
