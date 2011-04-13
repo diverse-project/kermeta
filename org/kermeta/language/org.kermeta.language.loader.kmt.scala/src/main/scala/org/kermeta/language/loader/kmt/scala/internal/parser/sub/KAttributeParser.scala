@@ -16,9 +16,15 @@ import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 
 trait KAttributeParser extends KAbstractParser with KGenericTypeParser {
 
-  def attribute : Parser[Property] = "attribute" ~> ident ~ ":" ~ genericQualifiedType ~ opt(attributeBound|attributeBounds) ^^ { case id ~ _ ~ qType ~ bounds =>
+  def propertyDeclKeyword = ( "attribute" | "reference" )
+  
+  def attribute : Parser[Property] = propertyDeclKeyword ~ ident ~ ":" ~ genericQualifiedType ~ opt(attributeBound|attributeBounds) ^^ { case propertyKeyword ~ id ~ _ ~ qType ~ bounds =>
       var newo = StructureFactory.eINSTANCE.createProperty
       newo.setName(id)
+      propertyKeyword match {
+        case "attribute" => newo.setIsComposite(true)
+        case "reference" => newo.setIsComposite(false)
+      }
       bounds match {
         case None => newo.setLower(0);newo.setUpper(1)
         case Some(bb)=> newo.setLower(bb._1);newo.setUpper(bb._2)
