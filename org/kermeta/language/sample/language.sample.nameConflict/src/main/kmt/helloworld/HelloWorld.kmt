@@ -1,0 +1,38 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+@mainClass "helloworld.HelloWorld"
+@mainOperation "main"
+
+package helloworld {
+	class HelloWorld
+	{
+		@main ""
+		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
+			kermeta::io::StdIO.writeln("Hello World!")
+		end
+		
+		
+	}
+
+	class Factory
+	{
+	}
+	class RichFactory
+	{
+	}
+	class RichHelloWorld
+	{
+	}
+	
+	class HelloWorldAspect
+	{
+	}
+	
+}
+
