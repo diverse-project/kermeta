@@ -28,7 +28,7 @@ import org.kermeta.language.api.port.PortResourceLoader.URIType;
 import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
+//import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 
 
 
