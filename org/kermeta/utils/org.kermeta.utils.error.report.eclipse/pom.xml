@@ -8,9 +8,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.utils</groupId>
-	<artifactId>utils.error.report.eclipse</artifactId>
+	<artifactId>utils.error.report.eclipse.art2</artifactId>
 	<packaging>bundle</packaging>
-	<name>utils.error.report.eclipse :: Error reporter for Eclipse</name>
+	<name>utils.error.report.eclipse :: Error reporter for Eclipse with art2 connection</name>
 
 	<parent>
         <groupId>org.kermeta.utils</groupId>

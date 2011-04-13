@@ -24,6 +24,5 @@ Import-Package: org.kermeta.art2.framework,org.kermeta.language.api.me
  rmeta.utils.error.report.eclipse,org.kermeta.utils.error.report.eclip
  se.art2.impl,org.osgi.framework;version="[1.5,2)",scala,scala.collect
  ion.mutable,scala.reflect
-Bundle-SymbolicName: org.kermeta.utils.error.report.eclipse;singleton:
- =true
+Bundle-SymbolicName: org.kermeta.utils.error.report.eclipse.art2;singleton:=true
 
