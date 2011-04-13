@@ -55,7 +55,7 @@ class KMLexical extends Lexical with KTokens {
     if(in.first == '*') startFound = true
     elems += in.first
     var tok = in.rest
-    while(!  (tok.first=='/'&&startFound)||(tok.first == EofCh)   ){
+    while(!  ((tok.first=='/'&&startFound)||(tok.first == EofCh))   ){
       startFound = ( tok.first == '*')
       elems += tok.first
       tok = tok.rest
