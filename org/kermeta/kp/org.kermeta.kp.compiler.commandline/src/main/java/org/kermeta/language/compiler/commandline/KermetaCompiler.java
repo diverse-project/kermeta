@@ -60,6 +60,9 @@ public class KermetaCompiler {
 	public String projectName = "project";
 	public KpVariableExpander variableExpander;
         public Boolean useFSC = false;  // separate compilation server
+
+        public Boolean hasFailed = false;
+        public String errorMessage = "";
 	
 	/**
 	 * Constructor
@@ -370,7 +373,10 @@ public class KermetaCompiler {
        for(String path : additionalClassPath){
            System.out.println("\t"+path);
        }
-       EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC);
+       if (EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC) != 0){
+           hasFailed = true;
+           errorMessage = "Failed to generate bytecode from intermediate scala";
+       }
         
     }
 }
