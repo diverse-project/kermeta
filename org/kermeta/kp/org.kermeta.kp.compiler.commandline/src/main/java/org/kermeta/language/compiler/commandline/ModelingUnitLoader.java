@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.scala.parser.KParser;
+import org.kermeta.language.loader.kmt.scala.internal.parser.KParser;
+import org.kermeta.language.loader.kmt.scala.api.KMTparser;
 
 import scala.Option;
 import scala.collection.Iterator;

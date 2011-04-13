@@ -60,6 +60,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.loader.kmt.scala.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.loader.kmt.scala</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
