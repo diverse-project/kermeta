@@ -11,8 +11,10 @@ package org.kermeta.utils.messagingsystem.api;
 import java.net.URL;
 
 public class TextReference extends org.kermeta.utils.messagingsystem.api.FileReference {
-	protected Integer beginOffset;
-	protected Integer endOffset;
+	protected Integer beginOffset = 0;
+	protected Integer endOffset = 0;
+	protected Integer beginLine = 0;
+	protected Integer endLine = 0;
 	
 		
 	public TextReference(URL fileURL, Integer beginOffset, Integer endOffset) {
@@ -34,6 +36,20 @@ public class TextReference extends org.kermeta.utils.messagingsystem.api.FileRef
 	public void setEndOffset(Integer endOffset) {
 		this.endOffset = endOffset;
 	}
-	
+	public Integer getBeginLine() {
+		return beginLine;
+	}
+
+	public void setBeginLine(Integer beginLine) {
+		this.beginLine = beginLine;
+	}
+
+	public Integer getEndLine() {
+		return endLine;
+	}
+
+	public void setEndLine(Integer endLine) {
+		this.endLine = endLine;
+	}	
 	
 }
