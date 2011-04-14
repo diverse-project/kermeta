@@ -24,6 +24,11 @@
 			<artifactId>language.model</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.messagingsystem.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
 	</dependencies>
     
 	<build>
@@ -43,7 +48,8 @@
 							org.kermeta.language.loader.kmt.scala.api
                         </Export-Package>
                         <Require-Bundle>
-            				org.kermeta.language.model
+            				org.kermeta.language.model,
+            				org.kermeta.utils.messagingsystem.api
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
