@@ -8,7 +8,7 @@
  *            Haja Rambelontsalama <hajanirina-johary.rambelontsalama@inria.fr>
  */
 
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 /**
  * Interface in charge of adding behaviour to Kermeta Scanner 

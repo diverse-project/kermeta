@@ -1,4 +1,4 @@
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 import org.eclipse.ui.editors.text.TextEditor;
 

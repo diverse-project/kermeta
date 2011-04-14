@@ -7,7 +7,7 @@
  * Authors : 
  *           Francois Fouquet 
  */
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;

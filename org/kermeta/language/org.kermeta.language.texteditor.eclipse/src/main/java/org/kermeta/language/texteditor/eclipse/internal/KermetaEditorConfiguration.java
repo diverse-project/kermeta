@@ -7,21 +7,21 @@
  * Authors : 
  *           Francois Fouquet 
  */
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 
-	private org.kermeta.language.texteditor.eclipse.KermetaColorManager colorManager;
-	private org.kermeta.language.texteditor.eclipse.KermetaEditor theEditor;
+	private org.kermeta.language.texteditor.eclipse.internal.KermetaColorManager colorManager;
+	private org.kermeta.language.texteditor.eclipse.internal.KermetaEditor theEditor;
 	
 	// Create a new editor configuration.
 	//
 	// @param editor
 	// @param colorManager
 	///
-	public KermetaEditorConfiguration(org.kermeta.language.texteditor.eclipse.KermetaEditor editor, org.kermeta.language.texteditor.eclipse.KermetaColorManager colorManager) {
+	public KermetaEditorConfiguration(org.kermeta.language.texteditor.eclipse.internal.KermetaEditor editor, org.kermeta.language.texteditor.eclipse.internal.KermetaColorManager colorManager) {
 		this.theEditor = editor;
 		this.colorManager = colorManager;
 	}
@@ -38,8 +38,8 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 	
 	// @param fileExtension
 	// @return
-	protected org.kermeta.language.texteditor.eclipse.KermetaTokenScanner getScanner() {
-		return new org.kermeta.language.texteditor.eclipse.KermetaScanner(colorManager,theEditor);
+	protected org.kermeta.language.texteditor.eclipse.internal.KermetaTokenScanner getScanner() {
+		return new org.kermeta.language.texteditor.eclipse.internal.KermetaScanner(colorManager,theEditor);
 	}
 	
 	

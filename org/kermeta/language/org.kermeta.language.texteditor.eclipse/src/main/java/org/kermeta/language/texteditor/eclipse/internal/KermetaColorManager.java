@@ -1,4 +1,4 @@
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 import java.util.HashMap;
 import java.util.Iterator;

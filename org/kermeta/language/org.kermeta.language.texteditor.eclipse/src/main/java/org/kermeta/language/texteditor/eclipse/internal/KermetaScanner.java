@@ -7,7 +7,7 @@
  * Authors : 
  *           Francois Fouquet 
  */
-package org.kermeta.language.texteditor.eclipse;
+package org.kermeta.language.texteditor.eclipse.internal;
 
 import java.util.List;
 import org.eclipse.core.resources.IFile;
@@ -33,7 +33,7 @@ public class KermetaScanner implements KermetaTokenScanner {
 
     //protected UnifiedMessageFactory mFactory = UnifiedMessageFactory.getInstance();
     private KermetaColorManager colorManager;
-    private org.kermeta.language.texteditor.eclipse.KermetaEditor editor;
+    private org.kermeta.language.texteditor.eclipse.internal.KermetaEditor editor;
     //private int estimatedOffset;
     //private KMLexer lexer = null;
     //protected KParser parser = null;
@@ -42,7 +42,7 @@ public class KermetaScanner implements KermetaTokenScanner {
     private Integer actualTokenPosition = -1;
     private IKToken actualToken = null;
 
-    public KermetaScanner(KermetaColorManager _colorManager, org.kermeta.language.texteditor.eclipse.KermetaEditor _editor) {
+    public KermetaScanner(KermetaColorManager _colorManager, org.kermeta.language.texteditor.eclipse.internal.KermetaEditor _editor) {
         colorManager = _colorManager;
         editor = _editor;
     }
@@ -57,8 +57,7 @@ public class KermetaScanner implements KermetaTokenScanner {
 
             //Art2ComponentTexteditorEclipse.getDefault().getLogPort().process("Parser Text = "+content);
             
-            Lexer toto = new Lexer();
-            tokens = toto.lex(content);
+            tokens = new Lexer().lex(content);
             //System.out.println("LEXER got it => "+tokens.size());
             //Art2ComponentTexteditorEclipse.getDefault().getLogPort().process("Size"+tokens.size());
 
