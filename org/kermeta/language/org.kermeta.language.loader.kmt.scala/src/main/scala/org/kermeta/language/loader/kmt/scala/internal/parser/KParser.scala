@@ -34,7 +34,7 @@ class KParser extends KExpressionParser
     result match {
       case Success(tree, _) => {Some(tree) }
       case e: NoSuccess => {
-          println(e)
+          //println(e)
           lastNoSucess = Some(e)
           None
         }
