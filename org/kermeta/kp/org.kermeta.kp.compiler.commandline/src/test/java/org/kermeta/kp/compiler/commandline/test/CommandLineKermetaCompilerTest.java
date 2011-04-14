@@ -29,6 +29,7 @@ import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
 //import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
+import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
 
 
 
@@ -56,7 +57,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         System.out.println("            to " + targetFolder);
         
         // Phase 1 : compiles without crashing
-        KermetaCompiler compiler = new KermetaCompiler(targetFolder, targetFolder,false,true);
+        KermetaCompiler compiler = new KermetaCompiler(targetFolder, targetFolder,false,true, new StdioSimpleMessagingSystem());
 		compiler.kp2bytecode(kpFile);
 		
 		

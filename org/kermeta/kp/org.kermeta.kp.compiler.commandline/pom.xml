@@ -107,6 +107,13 @@
 			<artifactId>pax-url-mvn</artifactId>
 			<version>1.2.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.messagingsystem.api</artifactId>
+			<version>${kermeta.version}</version>
+			<type>bundle</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 </project>

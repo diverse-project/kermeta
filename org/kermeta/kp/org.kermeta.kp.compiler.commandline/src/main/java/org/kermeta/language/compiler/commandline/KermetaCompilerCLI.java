@@ -15,6 +15,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
 
 /**
  * Command line interface for Kermeta2 compiler
@@ -49,7 +50,7 @@ public class KermetaCompilerCLI {
 	}
 		
 	private void run() throws IOException {
-		KermetaCompiler compiler = new KermetaCompiler(outputFolder,outputFolder,false, intermediateFilesRequired);
+		KermetaCompiler compiler = new KermetaCompiler(outputFolder,outputFolder,false, intermediateFilesRequired, new StdioSimpleMessagingSystem());
 		compiler.kp2bytecode(kpFile);
 	}
 

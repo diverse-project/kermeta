@@ -37,6 +37,7 @@ import org.kermeta.language.structure.ModelingUnit;
 //import scala.collection.JavaConversions.JListWrapper;
 //import scala.collection.JavaConversions.JListWrapper;
 //import org.embedded.EmbeddedMavenHelper;
+import org.kermeta.utils.messagingsystem.api.MessagingSystem;
 
 
 /**
@@ -56,6 +57,7 @@ public class KermetaCompiler {
 	public String targetFolder;
 	public String targetGeneratedSourceFolder;
 	public String targetIntermediateFolder;
+	public MessagingSystem logger;
 	public List<String> additionalClassPath = new java.util.ArrayList<String>();
 	public String projectName = "project";
 	public KpVariableExpander variableExpander;
@@ -69,12 +71,13 @@ public class KermetaCompiler {
 	 * @param targetFolder
 	 * @param saveIntermediateFiles
 	 */
-	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles) {
+	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, MessagingSystem logger) {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.generateKmOnly = generateKmOnly;
 		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
 		this.targetFolder = targetFolder;
+		this.logger = logger;
 		registerMVNUrlHandler();
 	}
 	/**
@@ -82,13 +85,14 @@ public class KermetaCompiler {
 	 * @param targetFolder
 	 * @param saveIntermediateFiles
 	 */
-	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, List<String> additionalClassPath) {
+	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, List<String> additionalClassPath, MessagingSystem logger) {
 		super();
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.generateKmOnly = generateKmOnly;
 		this.targetFolder = targetFolder;
 		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
 		this.additionalClassPath.addAll(additionalClassPath);
+		this.logger = logger;
 		
 		registerMVNUrlHandler();
 	}
