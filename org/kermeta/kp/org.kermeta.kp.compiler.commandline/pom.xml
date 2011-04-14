@@ -111,8 +111,6 @@
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.messagingsystem.api</artifactId>
 			<version>${kermeta.version}</version>
-			<type>bundle</type>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

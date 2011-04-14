@@ -145,7 +145,7 @@ public class KermetaCompiler {
 	 * @throws IOException
 	 */
 	public void kp2bytecode(String kpFileURL) throws IOException {
-		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 4);
+		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
 		KpLoader ldr = new KpLoader();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		if(!kp.getName().isEmpty()){
