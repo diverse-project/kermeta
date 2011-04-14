@@ -42,6 +42,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.messagingsystem.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

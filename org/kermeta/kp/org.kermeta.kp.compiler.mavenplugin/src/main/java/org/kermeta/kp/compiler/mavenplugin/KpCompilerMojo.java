@@ -26,6 +26,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.kermeta.language.compiler.commandline.KermetaCompiler;
+import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
 
 /**
  * This class implement a maven plugin that compiles a kermeta project into scala files and then bytecode
@@ -152,7 +153,8 @@ public class KpCompilerMojo extends AbstractMojo {
 	        KermetaCompiler compiler = new KermetaCompiler(targetDirectory.toString(), 
 	        		sourceOutputDirectory.toString(),
 	        		generateKmOnly,
-	        		intermediateFilesRequired, classPathList);
+	        		intermediateFilesRequired, classPathList, 
+	        		new StdioSimpleMessagingSystem());
 			
 			compiler.kp2bytecode(kp.toString());
 		if(compiler.hasFailed)	{
