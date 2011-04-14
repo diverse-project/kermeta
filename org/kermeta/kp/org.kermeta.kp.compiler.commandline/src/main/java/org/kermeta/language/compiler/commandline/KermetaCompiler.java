@@ -145,6 +145,7 @@ public class KermetaCompiler {
 	 * @throws IOException
 	 */
 	public void kp2bytecode(String kpFileURL) throws IOException {
+		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 4);
 		KpLoader ldr = new KpLoader();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		if(!kp.getName().isEmpty()){
@@ -152,6 +153,7 @@ public class KermetaCompiler {
 		}
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
 		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander);
+		logger.progress("KermetaCompiler.kp2bytecode", "Merging "+ modelingUnits.size()+" files...", this.getClass().getName(), 1);
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
@@ -161,20 +163,25 @@ public class KermetaCompiler {
 			mergedFile.getParentFile().mkdirs();
 		}
 		FileWriter writer = new FileWriter(mergedFile);
+
+		logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", this.getClass().getName(), 1);
 		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
 		writer.close();
 		
 		if(!generateKmOnly){
 			// deal with km to scala
 				// compiler require a file location not an URL
+			logger.progress("KermetaCompiler.kp2bytecode", "Generating scala...", this.getClass().getName(), 1);
 			String fileLocation = mergedFile.toURI().toURL().getFile();
 			km2Scala(kp, varExpander, fileLocation);
+			logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", this.getClass().getName(), 1);
 			// deal with scala to bytecode
 			scala2bytecode();
 		}
 		else{
 			System.out.println("generateKmOnly flag set => Ignore scala generation");
 		}
+		logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", this.getClass().getName());
 	}	
 
 
