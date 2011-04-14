@@ -12,20 +12,29 @@ public class Reporter implements org.kermeta.utils.error.report.eclipse.api.Repo
 
 	@Override
 	public void flushAllKermetaProblemMarkers(URL theConcernedFile) throws CoreException {
-		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(theConcernedFile.toString());
+		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(theConcernedFile));
 		file.deleteMarkers(KERMETA_PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);		
 	}
 
 	@Override
 	public void flushAllMarkers(URL theConcernedFile) throws CoreException {
-		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(theConcernedFile.toString());
+		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(theConcernedFile));
 		file.deleteMarkers(null, true, IResource.DEPTH_INFINITE);		
 	}
 
 	@Override
 	public void reportProblem(URL theConcernedFile, String message, Integer lineNumber, Integer beginChar, Integer endChar) {
-		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(theConcernedFile.toString());
+		IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(theConcernedFile));
 		KermetaReporter.addMarker(KERMETA_PROBLEM_MARKER,file,message,lineNumber,beginChar,endChar);
 	}
 
+	private String cleanString(URL toClean) {
+		String cleanString = toClean.toString();
+		if (cleanString.startsWith("file://")) {
+			cleanString = cleanString.replaceFirst("file://", "");
+		}
+		cleanString = cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
+		return cleanString;
+	}
 }
+
