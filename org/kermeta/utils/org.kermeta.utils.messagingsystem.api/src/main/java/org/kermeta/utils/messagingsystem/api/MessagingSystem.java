@@ -19,6 +19,8 @@ public abstract class MessagingSystem {
 		UserINFO, UserWARNING, UserERROR, DevDEBUG, DevINFO, DevWARNING, DevERROR 
 	}
 	
+	public static int UNKNOWN_NBWORKUNIT = -1;
+	
 	public abstract void log(Kind msgKind, String message, String messageGroup);
 	public abstract void log(Kind msgKind, String message, String messageGroup, Throwable senderTrace);
 	public abstract void log(Kind msgKind, String message, String messageGroup, Reference causeObject);
