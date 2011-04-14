@@ -10,6 +10,8 @@
 
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.core.resources.IFile;
+
 /**
  * Interface in charge of adding behaviour to Kermeta Scanner 
  */
@@ -36,4 +38,9 @@ public interface KermetaTokenScanner extends org.eclipse.jface.text.rules.IToken
 	 * @param fileHasError the new boolean value
 	 */
 	public void setFileHasError(boolean fileHasError);
+	
+	/**
+	 * Return the current IFile
+	 */
+	public IFile getCurrentFile();
 }

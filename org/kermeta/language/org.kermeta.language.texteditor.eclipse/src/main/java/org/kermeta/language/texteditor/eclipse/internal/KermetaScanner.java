@@ -195,4 +195,8 @@ public class KermetaScanner implements KermetaTokenScanner {
     public boolean isFileOnError() {
         return fileHasError;
     }
+    
+    public IFile getCurrentFile() {
+    	return ((FileEditorInput)editor.getEditorInput()).getFile();
+    }
 }

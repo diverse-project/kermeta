@@ -112,6 +112,21 @@
 			<artifactId>language.loader.kmt.scala.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.messagingsystem.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.error.report.eclipse</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.error.report.eclipse.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -145,7 +160,10 @@
 							org.eclipse.ui.workbench.texteditor,
 							org.kermeta.language.model,
 							org.kermeta.language.loader.kmt.scala,
-							org.kermeta.language.loader.kmt.scala.api
+							org.kermeta.language.loader.kmt.scala.api,
+							org.kermeta.utils.error.report.eclipse,
+							org.kermeta.utils.error.report.eclipse.api,
+							org.kermeta.utils.messagingsystem.api
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

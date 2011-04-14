@@ -10,12 +10,12 @@
 
 	<extension point="org.eclipse.ui.editors">
 		<editor
-        class="org.kermeta.language.texteditor.eclipse.KermetaEditor"
+        class="org.kermeta.language.texteditor.eclipse.internal.KermetaEditor"
         contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
         default="true"
         extensions="kmt"
         icon="icons/kermeta.gif"
-        id="org.kermeta.language.texteditor.eclipse.KermetaEditor"
+        id="org.kermeta.language.texteditor.eclipse.internal.KermetaEditor"
         name="Kermeta Editor">
 		</editor>
 	</extension>
