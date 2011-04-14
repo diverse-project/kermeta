@@ -11,6 +11,7 @@ import java.net.URL;
 //import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.loader.kmt.scala.internal.parser.*;
+import org.kermeta.utils.messagingsystem.api.MessagingSystem;
 //import org.kermeta.traceability.TextReference;
 //import org.kermeta.traceability.TraceabilityFactory;
 
@@ -18,7 +19,7 @@ import scala.Option;
 
 public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTparser {
 
-    public ModelingUnit load(String uri, String optionalContent) {
+    public ModelingUnit load(String uri, String optionalContent, MessagingSystem logger) {
         KParser parser = new KParser();
 
         String content = optionalContent;
