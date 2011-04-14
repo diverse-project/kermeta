@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <requires>
+      <import plugin="org.eclipse.core.resources" version="3.5.2"/>
+   </requires>
+   <extension
+         id="Kermeta2ProblemMarker"
+         name="Problem marker"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="false">
+      </persistent>
+      <attribute
+            name="kermeta2_marker">
+      </attribute>
+   </extension>
+
+
+</plugin>
