@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.JarURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 //import org.kermeta.art2.framework.MessagePort;
@@ -12,6 +13,8 @@ import java.net.URL;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.loader.kmt.scala.internal.parser.*;
 import org.kermeta.utils.messagingsystem.api.MessagingSystem;
+import org.kermeta.utils.messagingsystem.api.TextReference;
+import org.kermeta.utils.messagingsystem.api.MessagingSystem.Kind;
 //import org.kermeta.traceability.TextReference;
 //import org.kermeta.traceability.TraceabilityFactory;
 
@@ -50,6 +53,25 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
 
         Option result = parser.parseSynch(content);
         if (result.isEmpty()) {
+            //SEND ERROR LOG
+            if (!parser.getErrors().isEmpty()) {
+
+                ParseException pe = parser.getErrors().get();
+
+                try {
+                	URL fileURL =  new URL(uri);
+                	TextReference textRef = new TextReference(fileURL,pe.offsetBegin(),pe.offsetEnd());
+
+                	textRef.setBeginLine(pe.line());
+                	textRef.setEndLine(pe.line());//TODO
+                	//textRef.setCharBeginOffset(pe.getErrorOffset());
+                	//textRef.setCharBeginOffset(pe.line);
+                	//textRef.setCharEndOffset(pe.colonne);
+                	logger.log(Kind.UserERROR, "Mon message", "MessageGROUP" , textRef);
+                } catch(MalformedURLException e) {
+                	logger.error("Malformed URL of file in parsing", "MessageGROUP", e);
+                }
+            }
             return null;
         } else {
 
