@@ -44,6 +44,26 @@ aspect class ModelingUnit {
 		end
 	end
 	
+	/*
+	 * Return all the ClassDefinitions which are contained by the ModelingUnit or its Packages
+	*/
+	operation getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
+		var classDefinitions : OrderedSet<org::kermeta::language::structure::ClassDefinition> init OrderedSet<org::kermeta::language::structure::ClassDefinition>.new
+		
+		self.ownedTypeDefinition.each{td|
+			if td.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+				classDefinitions.add(td.asType(org::kermeta::language::structure::ClassDefinition))
+			end
+		}
+		getAllPackages.each{p|
+			p.ownedTypeDefinition.each{td|
+				if td.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+					classDefinitions.add(td.asType(org::kermeta::language::structure::ClassDefinition))
+				end
+			}
+		}
+		result := classDefinitions
+	end
 	
 	operation getAllPackages() : OrderedSet<Package> is do
 		result := OrderedSet<Package>.new()
