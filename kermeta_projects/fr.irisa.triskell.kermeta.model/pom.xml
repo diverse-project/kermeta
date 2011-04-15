@@ -94,36 +94,18 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	<repositories>        
+	<distributionManagement>
         <repository>
-			<id>kermetaSnapshots</id>
-			<name>Kermeta Snapshots</name>
-			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<url>http://www.kermeta.org/maven2-snapshots</url>
-			<layout>default</layout>
-		</repository>
-     </repositories>
-	 <distributionManagement>
-		<repository>
-      		<id>tipimouss-local-maven-repository</id>
-      		<name>Tipimouss Local release repository</name>
-      		<url>file:/var/www/html/maven2</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</repository>
-    	<snapshotRepository>
-      		<id>tipimouss-local-maven-repository</id>
-      		<name>Tipimouss Local  snapshot repository</name>
-      		<url>file:/var/www/html/maven2-snapshots</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</snapshotRepository>		
-	</distributionManagement>
+            <id>kermeta-public-release</id>
+            <name>Kermeta public release repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>kermeta-public-snapshot</id>
+            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
