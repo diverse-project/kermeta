@@ -126,15 +126,15 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2</url>
+            <id>kermeta-public-release</id>
+            <name>Kermeta public release repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
         <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2-snapshots</url>
+            <id>kermeta-public-snapshot</id>
+            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
