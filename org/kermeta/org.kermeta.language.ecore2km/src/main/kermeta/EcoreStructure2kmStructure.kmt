@@ -1,0 +1,387 @@
+/*
+ * Creation : November 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package org::kermeta::language::ecore2km;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreQualifiedNameAspect.kmt"
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2kmAspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+
+using kermeta::utils
+using ecore
+using org::kermeta::language::structure
+
+
+/**
+ * This class contains methods and operations dedicated to the conversion
+ * of the structure of an ecore model to the structure of a kermeta model.
+ */
+class EcoreStructure2kmStructure inherits EcoreVisitor {
+	/** The modeling unit where all the created elements will be inserted. */
+	reference modelingUnit : ModelingUnit
+	
+	reference primitiveTypeMappings : Hashtable<String,String>
+
+
+	/**
+	 * This main operation launches the conversion. Its uses: a modeling unit where 
+	 * all the created elements will be inserted; a package that corresponds to
+	 * the root ecore package to convert.
+	 */
+	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, modelingUnit : ModelingUnit) : Void is do
+		self.modelingUnit := modelingUnit
+		self.primitiveTypeMappings := primitiveTypeMappings
+		// Launching the conversion.
+		pkg.accept(self)
+	end
+	
+	
+	
+	/**
+	* This method adds a tag to the given object. The added tag flags ecore object conversion.
+	*/
+	operation addEcoreTag(object : KermetaModelElement) : Void is do
+		if(not object.isVoid) then
+			var kmTag : Tag init Tag.new.initialize("ecore", "true", object)
+			object.kTag.add(kmTag)
+			object.kOwnedTags.add(kmTag)
+		end
+	end
+	
+	
+	method visitEPackage(pkg : EPackage) : Void is do
+		// Creation of the kermeta package.
+		var kmPkg : Package init Package.new.initialize(pkg.name, pkg.nsURI)
+		
+		// Each ecore package must be associated a tag.
+		addEcoreTag(kmPkg)
+	
+		if(pkg.eSuperPackage.isVoid) then
+			// It means that this package is the root package.
+			// The kermeta package is thus the added to the modeling unit.
+			modelingUnit.packages.add(kmPkg)
+		else
+			// This package is not the root package and is contained into an other package.
+			// The kermeta package is thus added to its parent Kermeta package: to do so, the ecore
+			// super package as a reference to the parent Kermeta package.
+			if(pkg.eSuperPackage.targetKermetaObject.isKindOf(Package)) then
+				pkg.eSuperPackage.targetKermetaObject.asType(Package).nestedPackage.add(kmPkg)
+			end
+		end
+		
+		// A reference of the new Kermeta package is then added to its corresponding
+		// Ecore package. This reference will be used to create sub-packages as explained above.
+		pkg.targetKermetaObject := kmPkg
+
+		super(pkg)
+	end
+
+
+
+	method visitEOperation(op : EOperation) : Void is do
+		if((not op.eContainingClass.targetKermetaObject.isVoid).andThen{b | op.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
+			// Getting the type of the operation.
+			var returnType : UnresolvedType init getUnresolvedType(op.eGenericType, op.eType)
+			// Creation of the ouput Kermeta operation.
+			var kmOp : Operation init Operation.new.initialize(op.name, returnType, void)
+			kmOp.isOrdered := op.ordered
+			kmOp.isUnique  := op.unique
+			
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmOp)
+			
+			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
+			// Linking the Kermeta operation to the Ecore operation.
+			op.targetKermetaObject := kmOp
+		end
+		
+		super(op)
+	end
+	
+	
+
+	method visitEAttribute(eAttr : EAttribute) : Void is do
+		// If the target kermeta object is null, it means that is has not been created. Thus, the attribute must be ignored.
+		if((not eAttr.eContainingClass.targetKermetaObject.isVoid).andThen{b | eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
+			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, 
+												 eAttr.eGenericType, eAttr.lowerBound, eAttr.upperBound)
+			// Adding the created Kermeta property to its class definition.
+			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
+			// Linking the created Kermeta property to the Ecore attribute.
+			eAttr.targetKermetaObject := prop
+		end
+		
+		super(eAttr)
+	end
+
+
+	/**
+	 * This operation checks if the given type name corresponds to type EObject. If it is the case,
+	 * string kermeta::standard::Object is returned; otherwise, the given type name is returned. 
+	 */
+	operation checkEObjectType(typeName : String) : String is do
+		if(typeName.isVoid) then
+			result := void
+		else
+			if(typeName=="ecore::EObject" or typeName=="ecore::EJavaObject" or typeName=="org.eclipse.emf.ecore.EObject") then
+				result := "kermeta::standard::Object"
+			else
+				result := typeName
+			end
+		end
+	end
+
+
+	/**
+	 * This function returns the unresolved type coresponding to the given generic type or the given type if the first is not valid.
+	 * If both of the arguments are not valid, void is returned.
+	 */
+	operation getUnresolvedType(genericType : EGenericType, type : EClassifier) : UnresolvedType is do
+	    /* workarounf Compilerbug !! */
+	    // var isDataType : Boolean init (not type.isVoid).andThen{b | type.isKindOf(EDataType)}
+	    var eDataType : EDataType 
+	    eDataType ?= type
+	    var eEnum : EEnum
+	    eEnum ?= type
+		var isDataType : Boolean init (not type.isVoid) and (not eDataType.isVoid) and (eEnum.isVoid)
+		/* end workaround*/
+		// Generic type must be managed. The type of the method is a generic type if:
+		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and 
+		   (genericType.eClassifier.isVoid or genericType.eClassifier==type)}) then
+			if(type.isVoid) then
+				result := void
+			else // If there is a return type, an unresolved type is created.
+				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
+				var typeName : String
+				
+				if(isDataType) then
+					typeName := primitiveTypeMappings.getValue(type.instanceClassName)
+
+					if typeName.isVoid then 
+						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
+						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
+						typeName := "kermeta::standard::Object"
+					end 
+				else
+stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQualifiedName() + " " + checkEObjectType(type.getQualifiedName()))
+					if(type.hasInstanceClassName) then
+						typeName := checkEObjectType(type.instanceClassName)
+					else
+						typeName := checkEObjectType(type.getQualifiedName())
+					end
+				end
+
+				result := UnresolvedType.new.initialize(typeName)
+				if(not genericType.isVoid) then
+					genericType.targetKermetaObject := result
+				end
+			end
+		else // If there is a return generic type, an unresolved type is created.
+			var typeName : String
+			if(genericType.eTypeParameter.isVoid) then
+				typeName := genericType.eClassifier.getQualifiedName()
+			else
+				typeName := genericType.getQualifiedName()
+			end
+
+			result := UnresolvedType.new.initialize(checkEObjectType(typeName))
+			genericType.targetKermetaObject := result
+		end
+	end
+
+
+
+	method visitEGenericType(genType : EGenericType) : Void is do
+		// The following code is dedicated to support complex generics, e.g. A<B<C,D,E>,C,B<C,D,E>>
+		// The root generics is generated when visiting typed element, e.g. references. So this code only consider generic types
+		// which container is a generic type (not a typed element such as a reference).
+		if(genType.container().isInstanceOf(EGenericType)) then
+			var object : EGenericType init genType.container().asType(EGenericType)
+
+			// Checking that the corresponding kermeta objet has been created and mapped.
+			if((not object.targetKermetaObject.isVoid).andThen{b | object.targetKermetaObject.isInstanceOf(UnresolvedType)}) then
+				// Creating the unresolved type.
+				var type : UnresolvedType init getUnresolvedType(genType, void)
+				
+				// It can be null, e.g. A<?>
+				if(not type.isVoid) then
+					// Mapping ecore to kermeta.
+					genType.targetKermetaObject := type
+					// Adding the created unresolved type to its parent.
+					object.targetKermetaObject.asType(UnresolvedType).generics.add(type)
+				end
+			end
+		end
+		super(genType)
+	end
+	
+	
+	
+	operation addProperty(composite : Boolean, name : String, ordered : Boolean, derived : Boolean,
+							readOnly : Boolean, eType : EClassifier, eGenericType : EGenericType,
+							lower : Integer, upper : Integer) : Property is do
+		// Getting the type of the property.
+		var type : UnresolvedType init getUnresolvedType(eGenericType, eType)
+
+		// Creation of the output Kermeta property.
+		result := Property.new.initialize(name, type, lower, upper)
+		result.isComposite := composite
+		result.isOrdered   := ordered
+		result.isDerived   := derived
+		result.isReadOnly  := readOnly
+		
+		// Each ecore attribute must be associated a tag.
+		addEcoreTag(result)
+	end
+	
+	
+	
+	method visitEReference(ref : EReference) : Void is do
+		// If the target kermeta object is null, it means that is has not been created. Thus, the reference must be ignored.
+		if((not ref.eContainingClass.targetKermetaObject.isVoid).andThen{b | ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
+			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
+												 ref.eGenericType, ref.lowerBound, ref.upperBound)
+			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
+			
+			// Adding the created Kermeta property to its class definition.
+			classDef.ownedAttribute.add(prop)
+			// Linking the created Kermeta property to the Ecore attribute.
+			ref.targetKermetaObject := prop
+			
+			// If the reference has an opposite, an unresolved type is created.
+			if(not ref.eOpposite.isVoid) then
+				var unresolvProp : UnresolvedProperty init UnresolvedProperty.new.initialize(ref.eOpposite.getQualifiedName())
+				prop.opposite := unresolvProp
+				prop.ownedUnresolvedProperties.add(unresolvProp)
+			end
+		end
+		
+		super(ref)
+	end
+	
+	
+	
+	method visitEParameter(param : EParameter) : Void is do
+		// If the target kermeta object is null, it means that is has not been created. Thus, the paramter must be ignored.
+		if((not param.eOperation.targetKermetaObject.isVoid).andThen{b | param.eOperation.targetKermetaObject.isKindOf(Operation)}) then
+			// Getting the kermeta operation.
+	 		var op : Operation init param.eOperation.targetKermetaObject.asType(Operation)
+	 		// Getting the type of the parameter.
+			var type : UnresolvedType init getUnresolvedType(param.eGenericType, param.eType)
+			
+			//Creation of the output Kermeta parameter.
+			var kmParam : Parameter init Parameter.new.initialize(param.name, param.lowerBound, param.upperBound, op, type)
+			// Adding the Kermeta parameter to its Kermeta operation.
+			op.ownedParameter.add(kmParam)
+			// Linking the created Kermeta parameter to the Ecore parameter.
+			param.targetKermetaObject := kmParam
+		end
+
+		super(param)
+	end
+	
+	
+	
+	method visitEClass(eclass : EClass) : Void is do
+		// If the class has a instance class name or does not have a package, it is no created.
+		if((not eclass.ePackage.isVoid).andThen{ b | eclass.ePackage.targetKermetaObject.isKindOf(Package) and 
+			not eclass.hasInstanceClassName()}) then
+			// Creation of the Kermeta class.
+			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, eclass.~abstract, void)
+
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmClassDef)
+		
+			// A unresolved type is created for each super type.
+			eclass.eSuperTypes.each{st |
+				var type : UnresolvedType init getUnresolvedType(void, st)
+				kmClassDef.containedType.add(type)
+				kmClassDef.superType.add(type)
+			}
+			
+			// The Kermeta class is added to its Kermeta package. This package is found using the reference
+			// of the ecore package that contains the given ecore class.
+			eclass.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmClassDef)
+			// The reference to the kermeta class is added to the ecore class.
+			eclass.targetKermetaObject := kmClassDef
+		end
+
+		super(eclass)
+	end
+
+
+
+	method visitEAnnotation(annot : EAnnotation) : Void is do
+ 		if((not annot.eModelElement.isVoid).andThen{b | not annot.eModelElement.targetKermetaObject.isVoid}) then
+			// Creation of a kermeta tag.
+			var kmTag : Tag init Tag.new.initialize(annot.source, void, annot.eModelElement.targetKermetaObject)
+			// The kermeta tag is added to the kermeta object corresponding
+			// to the container of the ecore annotation.
+			annot.eModelElement.targetKermetaObject.kTag.add(kmTag)
+			annot.eModelElement.targetKermetaObject.kOwnedTags.add(kmTag)
+			// The reference to the kermeta tag is added to the ecore annotation.
+			annot.targetKermetaObject := kmTag
+		end
+		
+		super(annot)
+	end
+
+
+
+	method visitETypeParameter(typeParam : ETypeParameter) : Void is do
+		// Getting the classifier that contains the type parameter.
+		var classifier : EClassifier init typeParam.container().asType(EClassifier)
+
+		// Checking the target Kermeta object.
+		if(classifier.targetKermetaObject.isInstanceOf(GenericTypeDefinition)) then
+			var gtd : GenericTypeDefinition init classifier.targetKermetaObject.asType(GenericTypeDefinition)
+			// Creating the Kermeta object type variable.
+			var typeVar : ObjectTypeVariable init ObjectTypeVariable.new		
+			typeVar.name := typeParam.name
+			// Adding the type variable into the generic type definition.
+			gtd.typeParameter.add(typeVar)
+			gtd.containedType.add(typeVar)
+		end
+	end
+
+
+
+	method visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
+		if((not enumLit.eEnum.isVoid).andThen{b | enumLit.eEnum.targetKermetaObject.isKindOf(Enumeration)}) then
+			// Creation of the Kermeta literal.
+			var literal : EnumerationLiteral init EnumerationLiteral.new.initialize(enumLit.name, 
+							enumLit.eEnum.targetKermetaObject.asType(Enumeration))
+			// Linking the ecore literal to the Kermeta one.
+			enumLit.targetKermetaObject := literal
+		end
+	
+		super(enumLit)
+	end
+	
+	
+	
+	method visitEEnum(eEnum : EEnum) : Void is do
+		if((not eEnum.ePackage.isVoid).andThen{b | eEnum.ePackage.targetKermetaObject.isKindOf(Package)}) then
+			// Creation of the Kermeta enumeration.
+			var kmEnum : Enumeration init Enumeration.new.initialize(eEnum.name)
+			
+			// Each ecore class must be associated a tag.
+			addEcoreTag(kmEnum)
+			
+			// The kermeta enumeration is added to its parent package found using the trace let into
+			// the ecore package of the ecore enum.
+			eEnum.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmEnum)
+			
+			// The reference to the Kermeta enumeration is added to the ecore enum.
+			eEnum.targetKermetaObject := kmEnum
+			
+		end
+	
+		super(eEnum)
+	end
+}

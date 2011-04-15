@@ -1,0 +1,193 @@
+/*
+ * Creation : November 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using ecore
+
+abstract class EcoreVisitor {
+	operation visitEModelElement(element : EModelElement) : Void is do
+		element.eAnnotations.each{annot | annot.accept(self) }
+	end
+
+	operation visitEPackage(pkg : EPackage) : Void is do
+		visitENamedElement(pkg)
+		pkg.eClassifiers.each{classif | classif.accept(self) }
+		pkg.eSubpackages.each{subPkg  | subPkg.accept(self)  }
+	end
+	
+	operation visitEClassifier(classifier : EClassifier) : Void is do
+		visitENamedElement(classifier)
+		classifier.eTypeParameters.each{tp | tp.accept(self)}
+	end
+	
+	operation visitENamedElement(namedElt : ENamedElement) : Void is do
+		visitEModelElement(namedElt)
+	end
+	
+	operation visitETypedElement(typedElt : ETypedElement) : Void is do
+		visitENamedElement(typedElt)
+		if(not typedElt.eGenericType.isVoid) then
+			typedElt.eGenericType.accept(self)
+		end
+	end
+	
+	operation visitEOperation(op : EOperation) : Void is do
+		visitETypedElement(op)
+		op.eParameters.each{param | param.accept(self)}
+	end
+	
+	operation visitEParameter(param : EParameter) : Void is do
+		visitETypedElement(param)
+	end
+	
+	operation visitEClass(eclass : EClass) : Void is do
+		visitEClassifier(eclass)
+		eclass.eStructuralFeatures.each{struct | struct.accept(self)}
+		eclass.eOperations.each{op | op.accept(self)}
+	end
+	
+	operation visitEDataType(dataType : EDataType) : Void is do
+		visitEClassifier(dataType)
+	end
+	
+	operation visitEStructuralFeature(structFeature : EStructuralFeature) : Void is do
+		visitETypedElement(structFeature)
+	end
+	
+	operation visitEReference(ref : EReference) : Void is do
+		visitEStructuralFeature(ref)
+	end
+	
+	operation visitEAttribute(attr : EAttribute) : Void is do
+		visitEStructuralFeature(attr)
+	end
+	
+	operation visitEEnum(enum : EEnum) : Void is do
+		visitEClassifier(enum)
+		enum.eLiterals.each{lit | lit.accept(self)}
+	end
+	
+	operation visitEEnumLiteral(enumLit : EEnumLiteral) : Void is do
+		visitENamedElement(enumLit)
+	end
+	
+	operation visitEFactory(factory : EFactory) : Void is do
+		visitEModelElement(factory)
+	end
+	
+	operation visitEAnnotation(annot : EAnnotation) : Void is do
+		visitEModelElement(annot)
+	end
+	
+	operation visitETypeParameter(typeParam : ETypeParameter) : Void is do
+		visitEModelElement(typeParam)
+	end
+	
+	operation visitEGenericType(genType : EGenericType) : Void is do
+		genType.eTypeArguments.each{typeArg | typeArg.accept(self) }
+	end
+}
+
+
+aspect class EGenericType {
+	operation accept(v : EcoreVisitor) : Void is do
+		v.visitEGenericType(self)	
+	end
+}
+
+
+aspect class EModelElement {
+	operation accept(v : EcoreVisitor) : Void is do
+		v.visitEModelElement(self)	
+	end
+}
+
+
+aspect class ETypeParameter {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitETypeParameter(self)	
+	end
+}
+
+
+aspect class EPackage {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEPackage(self)
+	end
+}
+
+
+aspect class EOperation {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEOperation(self)
+	end
+}
+
+
+aspect class EParameter {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEParameter(self)
+	end
+}
+
+
+aspect class EClass {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEClass(self)
+	end
+}
+
+
+aspect class EDataType {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEDataType(self)
+	end
+}
+
+
+aspect class EReference {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEReference(self)
+	end
+}
+
+
+aspect class EAttribute {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEAttribute(self)
+	end
+}
+
+
+aspect class EEnum {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEEnum(self)
+	end
+}
+
+
+aspect class EEnumLiteral {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEEnumLiteral(self)
+	end
+}
+
+
+aspect class EFactory {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEFactory(self)
+	end
+}
+
+
+aspect class EAnnotation {
+	method accept(v : EcoreVisitor) : Void is do
+		v.visitEAnnotation(self)
+	end
+}

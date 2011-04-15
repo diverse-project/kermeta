@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="instrument"
+    nsURI="http:///fr/eseo/gri/malan/instrument/model.ecore" nsPrefix="instrument">
+  <eClassifiers xsi:type="ecore:EClass" name="Instrument">
+    <eAnnotations source="MyAnnotation"/>
+    <eOperations name="myOperation" eType="ecore:EClass action.ecore#//Action">
+      <eParameters name="param1" eType="ecore:EClass interaction.ecore#//Transition"/>
+      <eParameters name="param2" eType="ecore:EClass interaction.ecore#//Transition"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+        eType="#//Link" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//java.lang.String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interimFeedback" eType="#//java.lang.String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="myOppositeReference" eType="#//MyClass"
+        eOpposite="#//MyClass/myReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//MyClass">
+    <eOperations name="opA"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interaction" lowerBound="1"
+        eType="ecore:EClass interaction.ecore#//Interaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="ecore:EClass action.ecore#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interimFeedback" eType="#//java.lang.String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="java.lang.String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MyClass" abstract="true">
+    <eOperations name="opA"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="myReference" ordered="false"
+        lowerBound="1" eType="#//Instrument" changeable="false" eOpposite="#//Instrument/myOppositeReference"/>
+  </eClassifiers>
+  <eSubpackages name="nextPkg" nsURI="http:///fr/eseo/gri/malan/fisfd/model.ecore"
+      nsPrefix="nextPkg">
+    <eClassifiers xsi:type="ecore:EClass" name="Clazz"/>
+  </eSubpackages>
+  <eSubpackages name="enumPackage" nsURI="http:///fr/eseo/gri/malan/enumPackage/model.ecore"
+      nsPrefix="enumPackage">
+    <eAnnotations source="AnOtherAnnotation"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="MyFirstEnum">
+      <eLiterals name="ITEM_ONE"/>
+      <eLiterals name="ITEM_TWO" value="1"/>
+      <eLiterals name="ITEM_THREE" value="2"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,46 @@
+/*
+ * Creation : November 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
+using ecore
+
+
+aspect class EClassifier {
+	/**
+	 * @return True if the classifier has an instance class name, and false otherwise.
+	*/
+	operation hasInstanceClassName() : Boolean is do
+		result := (not instanceClassName.isVoid).andThen{b | instanceClassName!="" }
+	end
+}
+
+
+/**
+ * This aspect is used to type the created Kermeta model: each classifier instance
+ * of the source ecore model is completed during the first pass with the created
+ * Kermeta class definition. During the second pass these traces are used to type
+ * properties, super classes, operations, etc. with local type. Types defined outside
+ * the given ecore model are set to unresolved.
+*/
+aspect class EModelElement {
+	/** The trace used to type the output Kermeta model. Corresponds to the created
+	  * Kermeta class definition.
+	 */
+	reference targetKermetaObject : KermetaModelElement
+}
+
+
+/** See aspect EModelElement. */
+aspect class EGenericType {
+	/** See aspect EModelElement. */
+	reference targetKermetaObject : KermetaModelElement
+}

@@ -1,0 +1,57 @@
+/*
+ * Creation : November 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin 
+ */
+package ecore;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using ecore
+using kermeta::standard
+
+
+aspect class EGenericType {
+	operation getQualifiedName() : String is do
+		result := eTypeParameter.name
+
+		if((not eTypeParameter.isVoid).andThen{b | eTypeParameter.container().isInstanceOf(EClassifier)}) then
+			result := eTypeParameter.container().asType(EClassifier).getQualifiedName() + "::" + result
+		end
+	end
+}
+
+
+aspect class EReference {
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if(not eContainingClass.isVoid) then
+			result := eContainingClass.getQualifiedName() + "::" + result
+		end
+	end
+}
+
+
+aspect class EPackage {
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if(not eSuperPackage.isVoid) then
+			result := eSuperPackage.getQualifiedName() + "::" + result
+		end
+	end
+}
+
+
+aspect class EClassifier {
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if(not ePackage.isVoid) then
+			result := ePackage.getQualifiedName() + "::" + result
+		end
+	end
+}

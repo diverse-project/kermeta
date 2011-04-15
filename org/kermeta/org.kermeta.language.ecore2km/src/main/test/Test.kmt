@@ -1,0 +1,59 @@
+/*
+ * Creation : November 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "org::kermeta::language::ecore2km::Test"
+@mainOperation "main"
+
+package org::kermeta::language::ecore2km;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2km.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+//require "../kermeta/MMVisitor.kmt"
+
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using org::kermeta::language::structure
+
+class Test {
+	operation main() : Void is do
+		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/kermeta"
+		var ecore2km : Ecore2km init Ecore2km.new
+		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
+				
+		var modelingUnit : ModelingUnit init ecore2km.convert(pkgs.one, "default")
+//		var visitor : MMVisitor init MMVisitor.new
+//		modelingUnit.accept(visitor)
+		saveKmModel(modelingUnit, path + "1.km")
+	end
+	
+	
+	operation saveKmModel(modelingUnit : ModelingUnit, path : String) : Void is do
+		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource(path, uriMM)
+		resource.add(modelingUnit)
+		resource.save()
+	end
+	
+	
+	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
+		var uriMM : String init "http://www.eclipse.org/emf/2002/Ecore"
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile(uriMM)          
+   		var resource : Resource init repository.createResource(uriEcoreModel, uriMM)
+       	resource.load()
+		
+		result := Bag<EPackage>.new
+		
+		resource.contents.each{obj |
+			if(EPackage.isInstance(obj)) then
+				result.add(obj.asType(EPackage))        
+			end
+		}
+	end
+}
