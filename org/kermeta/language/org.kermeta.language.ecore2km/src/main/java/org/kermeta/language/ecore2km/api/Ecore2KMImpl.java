@@ -8,7 +8,7 @@
  *            Haja Rambelontsalama <hajanirina-johary.rambelontsalama@inria.fr>
  *            Arnaud Blouin
  */
-package org.kermeta.language.ecore2km;
+package org.kermeta.language.ecore2km.api;
 
 
 /*import org.kermeta.language.api.messaging.UnifiedMessageFactory;
@@ -19,7 +19,7 @@ import org.kermeta.language.language.ecore2kmrunner.MainRunner;
 import org.eclipse.emf.ecore.EPackage;
 import org.kermeta.language.ecore2km.Ecore2km;
 */
-public class Ecore2KM  implements org.kermeta.language.ecore2km.api.Ecore2KM {
+public class Ecore2KMImpl  implements org.kermeta.language.ecore2km.api.Ecore2KM {
 
   
     
