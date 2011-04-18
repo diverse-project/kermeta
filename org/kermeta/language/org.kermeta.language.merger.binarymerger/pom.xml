@@ -32,6 +32,12 @@
             <groupId>fr.irisa.triskell.kermeta</groupId>
             <artifactId>kermeta.model</artifactId>
             <version>1.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.kermeta.eclipse</groupId>
+					<artifactId>org.eclipse.core.runtime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -41,7 +47,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.3</version>
+            <version>0.12.4</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -73,7 +79,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA10</version>
+                <version>1.4.1-BETA11</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
