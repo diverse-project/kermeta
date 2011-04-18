@@ -32,6 +32,10 @@
                     <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
                     <groupId>org.netbeans.external</groupId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.kermeta.eclipse</groupId>
+					<artifactId>org.eclipse.core.runtime</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         
