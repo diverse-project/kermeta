@@ -6,7 +6,7 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.utils.messagingsystem.api;
+package org.kermeta.utils.systemservices.api.reference;
 
 import java.net.URL;
 

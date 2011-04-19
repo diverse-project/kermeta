@@ -5,13 +5,13 @@
  * Authors  : 
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
-package org.kermeta.utils.messagingsystem.api;
+package org.kermeta.utils.systemservices.api.result;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.kermeta.utils.messagingsystem.api.ResultProblemMessage.Severity;
+import org.kermeta.utils.systemservices.api.result.ResultProblemMessage.Severity;
 
 
 /**

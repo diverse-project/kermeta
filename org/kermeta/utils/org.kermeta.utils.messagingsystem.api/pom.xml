@@ -8,10 +8,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.utils</groupId>
-	<artifactId>utils.messagingsystem.api</artifactId>
+	<artifactId>utils.systemservices.api</artifactId>
     <version>2.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
-	<name>utils.messagingsystem.api</name>
+	<name>utils.systemservices.api</name>
 	
 	<properties>
         <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
@@ -23,6 +23,8 @@
         <bundle.vendor>IRISA/INRIA</bundle.vendor>
     </properties>
 	
+	<description>This component provides an api for abstracting system services such as logging, progession reporting, cancellation, reporting result with error
+that are useful for any program manipulating models.</description>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		
@@ -46,7 +48,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                        org.kermeta.utils.messagingsystem.api.*
+                        org.kermeta.utils.systemservices.api.*
                         </Export-Package>
                         <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <!-- <Require-Bundle>
@@ -55,7 +57,7 @@
                         </Import-Package> -->
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                        <Bundle-SymbolicName>org.kermeta.utils.messagingsystem.api</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                     </instructions>
                 </configuration>
             </plugin>

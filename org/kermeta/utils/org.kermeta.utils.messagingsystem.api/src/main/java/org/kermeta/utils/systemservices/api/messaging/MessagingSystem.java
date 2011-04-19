@@ -7,7 +7,9 @@
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
 
-package org.kermeta.utils.messagingsystem.api;
+package org.kermeta.utils.systemservices.api.messaging;
+
+import org.kermeta.utils.systemservices.api.reference.Reference;
 
 /**
  * MessagingSystem API

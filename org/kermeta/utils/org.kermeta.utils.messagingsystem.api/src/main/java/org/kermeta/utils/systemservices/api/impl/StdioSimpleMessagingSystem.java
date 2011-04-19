@@ -6,10 +6,10 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.utils.messagingsystem.api.impl;
+package org.kermeta.utils.systemservices.api.impl;
 
-import org.kermeta.utils.messagingsystem.api.MessagingSystem;
-import org.kermeta.utils.messagingsystem.api.Reference;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.Reference;
 
 /**
  * Very basic implementation of MessagingSystem that uses System.out and System.err
