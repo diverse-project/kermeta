@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
-	<artifactId>kp.loader.kp</artifactId>
-	<name>kp.loader.kp :: Kp loader for Kermeta 2</name>
+	<artifactId>kp.loader.kp.art2</artifactId>
+	<name>kp.loader.kp.art2 :: Kp loader for Kermeta 2 (ART2 version)</name>
 	<packaging>bundle</packaging>
 
 	<parent>
