@@ -6,7 +6,7 @@
     <name>org.kermeta.language.km2bytecode</name>
     <version>2.0.1-SNAPSHOT</version>
     <description>K2 Compiler</description>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     
     <parent>
         <artifactId>language.root</artifactId>
