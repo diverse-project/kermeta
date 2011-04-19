@@ -14,9 +14,9 @@ import java.net.URL;
 //import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.loader.kmt.scala.internal.parser.*;
-import org.kermeta.utils.messagingsystem.api.MessagingSystem;
-import org.kermeta.utils.messagingsystem.api.TextReference;
-import org.kermeta.utils.messagingsystem.api.MessagingSystem.Kind;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.TextReference;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 //import org.kermeta.traceability.TextReference;
 //import org.kermeta.traceability.TraceabilityFactory;
 
