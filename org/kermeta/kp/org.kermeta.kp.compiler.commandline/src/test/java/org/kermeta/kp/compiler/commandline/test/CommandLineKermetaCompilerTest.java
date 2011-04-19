@@ -23,13 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 //import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.api.port.PortKmBinaryMerger;
-import org.kermeta.language.api.port.PortResourceLoader.URIType;
-import org.kermeta.language.api.result.ModelingUnitResult;
 import org.kermeta.language.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
 //import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
-import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 
 
