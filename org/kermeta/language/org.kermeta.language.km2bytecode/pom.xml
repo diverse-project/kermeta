@@ -6,7 +6,7 @@
     <name>org.kermeta.language.km2bytecode</name>
     <version>2.0.1-SNAPSHOT</version>
     <description>K2 Compiler</description>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
