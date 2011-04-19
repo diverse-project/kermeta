@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.language.api.CheckerScope;
 import org.kermeta.language.behavior.impl.BehaviorFactoryImpl;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
@@ -35,13 +38,18 @@ public class Main {
 	List<ModelingUnit> modelingunit;
 	List<ByteArrayOutputStream> modelingunit_ser;
 	ModelingUnit mergedMU;
+	ModelingUnit checkedMU;
 	ModelingUnit resolvedMU;
 	ModelingUnit staticsettedMU;
 	ByteArrayOutputStream ModelingUnit_serialized;
 	FileWriter writer;
 
+	boolean check;
 	
-	
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
+
 	public Main() {
 		modelingunit = new ArrayList<ModelingUnit>();
 		modelingunit_ser = new ArrayList<ByteArrayOutputStream>();
@@ -109,13 +117,25 @@ public class Main {
 			}			
 		}
 		//End Merged ModellingUnit		
-				
+		
+		//------------------------------------------------
+		
+		// Checking
+		if (check) {
+			System.out.println("Checking modeling unit for MERGED scope");
+			checkMu(mergedMU, CheckerScope.MERGED);
+		}
+		
+		
+		// End check unit
+		
 		// Convert Resulting Modellingunit For TypeSetter
 		ModelingUnit_serialized = this.saveMu(mergedMU);
 		// Save intermediate file
 		writer = new FileWriter(new File("AfterMerging_"+CustomRunner.SUFFIX_SAVE+".km"));
 		writer.write(ModelingUnit_serialized.toString());
 		writer.close();
+		
 		
 		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
@@ -139,6 +159,14 @@ public class Main {
 		staticsettedMU = resolver.doStaticSetting(resolvedMU);
 		resolver.checkUnresolved(staticsettedMU);
 		//End of Resolving
+
+		// Checking for scope RESOLVED
+		if (check) {
+			System.out.println("Checking modeling unit for RESOLVED scope");
+			checkMu(staticsettedMU, CheckerScope.RESOLVED);
+		}
+		
+		
 		ModelingUnit_serialized = this.saveMu(staticsettedMU);
 		// Save intermediate file
 		writer = new FileWriter(new File("AfterStaticSetting_"+CustomRunner.SUFFIX_SAVE+".km"));
@@ -252,6 +280,25 @@ public class Main {
 		resource.load(new ByteArrayInputStream(mu.toByteArray()), options);
 		// let's suppose the ModelingUnit is the first element in the root
 		return (ModelingUnit) resource.getContents().get(0);
+
+	}
+	
+	protected void checkMu(ModelingUnit mu, CheckerScope scope) throws IOException {
+
+		// Convert Modeling unit for Checker
+		ModelingUnit_serialized = this.saveMu(mu);
+		
+		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.checker");
+		utils.UTilScala.setScalaAspectPrefix("org.kermeta.language.language.checker");
+		org.kermeta.language.language.checkerrunner.MainRunner.init4eclipse();
+		
+		System.err.println(StructurePackage.eINSTANCE.getEFactoryInstance().getClass());
+		ModelingUnit muToCheck = this.LoadMu(ModelingUnit_serialized);
+		
+		// Checking
+		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.RichFactory.createChecker();
+		checker.checkObject(muToCheck, scope.toString());
+		
 
 	}
 

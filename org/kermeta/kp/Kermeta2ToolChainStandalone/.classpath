@@ -7,6 +7,9 @@
 	<classpathentry kind="lib" path="lib/language.ecore2km-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/language.merger.binarymerger-2.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/language.resolver-2.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/language.checker-2.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/diagnostic.model-2.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="K2dependencies/language.framework.scala-0.12.4-SNAPSHOT.jar"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="K2dependencies/emf.lib-2.6.0.jar" sourcepath="C:/Program Files/eclipseJAVA/plugins/org.eclipse.emf.ecore.source_2.5.0.v200906151043.jar"/>
@@ -32,6 +35,5 @@
 	<classpathentry kind="lib" path="K2dependencies/logback-core-0.9.24.jar"/>
 	<classpathentry kind="lib" path="K2dependencies/org.osgi.compendium-4.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/language.loader.kmt.scala-2.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="K2dependencies/language.framework.scala-0.12.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

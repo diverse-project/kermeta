@@ -19,10 +19,12 @@ public class CustomRunner {
 	
 	public static final String CUSTOM_PATH = "C:/Users/dvojtise/workspaces/kermetaV2_svn_5/";
 	public static final String SUFFIX_SAVE = "_HelloWorldMiniframeworkAndRaise";
+	public static final boolean CHECK = false; // Set this boolean to true if you wish to check your modeling units
 	
 	public static void main(String[] args) throws IOException {
 
 		Main m = new Main();
+		m.setCheck(CHECK);
 			
 		// Parse framework and test File
 		List<String> uris = new ArrayList<String>();
