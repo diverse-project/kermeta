@@ -23,6 +23,8 @@ public class ErrorProneResult<G> {
 	
 	protected G result;
 	
+	public ErrorProneResult() {
+	}
 	public ErrorProneResult(G result) {
 		super();
 		this.result = result;

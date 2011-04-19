@@ -63,7 +63,12 @@
 	</build>
 	<dependencies>
 		<!-- Main dependencies -->
-		
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>2.6.0</version>
+			<type>jar</type>
+		</dependency>
 		
 		
 	</dependencies>
