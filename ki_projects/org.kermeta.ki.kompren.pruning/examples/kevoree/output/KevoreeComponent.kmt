@@ -1,0 +1,30 @@
+package kevoree;
+require kermeta
+require "platform:/resource/org.kermeta.ki.kompren.pruning/examples/kevoree/kevoree.ecore"
+require "KevoreeComponentAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class KevoreeComponent {
+	reference requiredContainerRoots : ContainerRoot[0..*]
+
+	reference addedComponentInstances : Bag<ComponentInstance>
+
+	operation initialise(requiredContainerRoots : bag ContainerRoot[0..*]) : KevoreeComponent is do
+		result := self
+		self.addedComponentInstances := Bag<ComponentInstance>.new
+		self.requiredContainerRoots.addAll(requiredContainerRoots)
+	end
+
+	operation launch() : Void is do
+		self.requiredContainerRoots.each{theContainerRoot | theContainerRoot.visitToAddClasses(self) }
+		self.requiredContainerRoots.each{theContainerRoot | theContainerRoot.visitToAddRelations(self) }
+		self.addedComponentInstances.each{theComponentInstance | onComponentInstanceAdded(theComponentInstance) }
+		ended()
+	end
+
+	operation onComponentInstanceAdded(theComponentInstance : ComponentInstance) : Void is do
+	end
+	operation ended() : Void is do
+	end
+}

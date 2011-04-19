@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="KevoreeComponent">
+  <relationsFocus name="nodes">
+    <relation href="kevoree.ecore#//ContainerRoot/nodes"/>
+  </relationsFocus>
+  <relationsFocus name="components">
+    <relation href="kevoree.ecore#//ContainerNode/components"/>
+  </relationsFocus>
+  <requiredClasses href="kevoree.ecore#//ContainerRoot"/>
+  <classesToNotify href="kevoree.ecore#//ComponentInstance"/>
+</prunerGenerator:Pruning>

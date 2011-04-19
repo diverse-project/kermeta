@@ -1,0 +1,65 @@
+/*
+ * Creation : November 25, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "kevoree::Test"
+@mainOperation "main"
+
+
+package kevoree;
+
+
+require kermeta
+require "./output/KevoreeComponent.kmt"
+
+using kermeta::standard
+
+
+class PrintmyPruner inherits KevoreeComponent {
+	method onComponentInstanceAdded(theComponentInstance : ComponentInstance) : Void is do
+		stdio.writeln(theComponentInstance.name)
+	end
+}
+
+
+
+class Test {
+	operation main() : Void is do
+		var requiredBs : Bag<ContainerRoot> init Bag<ContainerRoot>.new
+		createContainerRoot(requiredBs)
+
+		var pruning : PrintmyPruner init PrintmyPruner.new.initialise(requiredBs).asType(PrintmyPruner)
+
+		pruning.launch()
+	end
+	
+	
+	operation createContainerRoot(requiredContainerRoots : Bag<ContainerRoot>) : ContainerRoot is do
+		result := ContainerRoot.new
+		
+		var cn1 : ContainerNode init ContainerNode.new
+		var cn2 : ContainerNode init ContainerNode.new
+		
+		result.nodes.add(cn1)
+		result.nodes.add(cn2)
+		
+		var ci1 : ComponentInstance init ComponentInstance.new
+		var ci2 : ComponentInstance init ComponentInstance.new
+		var ci3 : ComponentInstance init ComponentInstance.new
+		var ci4 : ComponentInstance init ComponentInstance.new
+		
+		ci1.name := "ci1"
+		ci2.name := "ci2"
+		ci3.name := "ci3"
+		ci4.name := "ci4"
+		
+		cn1.components.add(ci1)
+		cn1.components.add(ci2)
+		cn2.components.add(ci3)
+		cn2.components.add(ci4)
+		
+		requiredContainerRoots.add(result)
+	end 
+}

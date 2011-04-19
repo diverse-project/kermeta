@@ -1,0 +1,100 @@
+package kevoree;
+require kermeta
+require "platform:/resource/org.kermeta.ki.kompren.pruning/examples/kevoree/kevoree.ecore"
+require "KevoreeComponent.kmt"
+using kermeta::standard
+using kermeta::utils
+aspect class PruningVisitorAspect {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute addedToPruner : Boolean
+
+	operation initialiseAttributes() : Void is do
+		self.visitedPass := false
+		self.addedToPruner := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theKevoreeComponent : KevoreeComponent) : Void is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theKevoreeComponent : KevoreeComponent) : Void is do
+	end
+
+	operation checkInitialisation() : Void is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+}
+
+aspect class ContainerRoot inherits PruningVisitorAspect {
+	method visitToAddClasses(theKevoreeComponent : KevoreeComponent) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			self.visitedPass := true
+			self.nodes.each{theContainerNode | theContainerNode.visitToAddClasses(theKevoreeComponent)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKevoreeComponent : KevoreeComponent) : Void is do
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.nodes.each{theContainerNode | theContainerNode.visitToAddRelations(theKevoreeComponent)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ContainerNode inherits PruningVisitorAspect {
+	method visitToAddClasses(theKevoreeComponent : KevoreeComponent) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			self.visitedPass := true
+			self.components.each{theComponentInstance | theComponentInstance.visitToAddClasses(theKevoreeComponent)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKevoreeComponent : KevoreeComponent) : Void is do
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.components.each{theComponentInstance | theComponentInstance.visitToAddRelations(theKevoreeComponent)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ComponentInstance inherits PruningVisitorAspect {
+	method visitToAddClasses(theKevoreeComponent : KevoreeComponent) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			if(not self.addedToPruner) then
+				theKevoreeComponent.addedComponentInstances.add(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKevoreeComponent : KevoreeComponent) : Void is do
+		if(not self.visitedPass) then
+			super(theKevoreeComponent)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
