@@ -48,7 +48,6 @@
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
             <version>0.12.3</version>
-            <type>jar</type>
         </dependency>
         <!-- <dependency>
             <groupId>${project.groupId}</groupId>
@@ -67,13 +66,11 @@
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>2.6.0</version>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.merger.binarymerger.api</artifactId>
 			<version>${kermeta.version}</version>
-			<type>jar</type>
 		</dependency>
 		<!-- <dependency>
 			<groupId>org.kermeta.language</groupId>
