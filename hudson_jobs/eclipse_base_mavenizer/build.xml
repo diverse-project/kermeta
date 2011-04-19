@@ -4,7 +4,8 @@
 	<property name="lib.folder" location="${env.WORKSPACE}/lib"/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url" value="http://www.kermeta.org/integration_build/base_packages/kermeta_helios_linux_x86_64_base.tar.gz"/>
+	<!--<property name="eclipse.native.base.url" value="http://www.kermeta.org/integration_build/base_packages/kermeta_helios_linux_x86_64_base.tar.gz"/>-->
+	<property name="eclipse.native.base.url" value="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-SDK-3.6.2-linux-gtk-x86_64.tar.gz"/>
 	<property name="smofd.jar" value="tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
 	<property name="simple.maven.osgi.file.deploy.url" value="http://tipimouss.irisa.fr/maven2-snapshots/org/kermeta/tools/tools.simple.maven.osgi.file.deploy/1.0.0-SNAPSHOT/tools.simple.maven.osgi.file.deploy-1.0.0-SNAPSHOT.jar"/>
 	<property name="jars.folder" location="${env.WORKSPACE}/eclipse_galileo_${eclipse.native.version.name}_base/eclipse/plugins"/>
