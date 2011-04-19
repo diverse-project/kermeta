@@ -26,7 +26,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.kermeta.language.compiler.commandline.KermetaCompiler;
-import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 /**
  * This class implement a maven plugin that compiles a kermeta project into scala files and then bytecode
