@@ -10,6 +10,7 @@
 
 package org.kermeta.kp.loader.kp.api;
 
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.kp.KermetaProject;
 
 public interface KpLoader {
@@ -18,5 +19,7 @@ public interface KpLoader {
 	 * @param uriKpResource
 	 */
 	public KermetaProject loadKp(String uriKpResource);
+	
+	public KermetaProject loadKp(URI uriKpResource);
 	
 }

@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.editor.mopp.KpResourceFactory;
 
-public class KpLoader {
+public class KpLoader implements org.kermeta.kp.loader.kp.api.KpLoader{
 
 	/**
 	 * @param uriKpResource
