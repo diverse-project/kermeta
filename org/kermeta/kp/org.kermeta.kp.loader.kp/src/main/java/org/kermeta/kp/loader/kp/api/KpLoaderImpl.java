@@ -8,7 +8,7 @@
  *            Haja Rambelontsalama <hajanirina-johary.rambelontsalama@inria.fr>
  */
 
-package org.kermeta.kp.loader.kp;
+package org.kermeta.kp.loader.kp.api;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.editor.mopp.KpResourceFactory;
 
-public class KpLoader implements org.kermeta.kp.loader.kp.api.KpLoader{
+public class KpLoaderImpl implements org.kermeta.kp.loader.kp.api.KpLoader{
 
 	/**
 	 * @param uriKpResource

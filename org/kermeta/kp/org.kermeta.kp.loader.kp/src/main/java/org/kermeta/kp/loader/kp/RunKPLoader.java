@@ -10,13 +10,15 @@
 
 package org.kermeta.kp.loader.kp;
 
+import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
+
 public class RunKPLoader {
 
 	public static void main(String[] args) {
 		System.out.println("Run KP Loader");
 		//System.out.println("Loading resouce at : " + uriKpResource);
 		String uriKpResource = "/home/hrambelo/application/Eclipse/64/EGalileoBase/workspace/org.kermeta.kp.model/src/metamodel/sample/sample.kpt";
-		KpLoader ldr = new KpLoader();
+		KpLoaderImpl ldr = new KpLoaderImpl();
 		ldr.loadKp(uriKpResource);
 	}
 }

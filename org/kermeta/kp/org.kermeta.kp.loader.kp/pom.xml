@@ -25,10 +25,10 @@
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
-						<Require-Bundle>
+					<!-- 	<Require-Bundle>
 							org.eclipse.core.resources,
 							org.eclipse.core.runtime
-						</Require-Bundle>
+						</Require-Bundle> -->
 						<Export-Package>
 							org.kermeta.kp.loader.*
 	          </Export-Package>
