@@ -7,6 +7,13 @@
     <version>2.0.1-SNAPSHOT</version>
     <description>K2 Compiler</description>
     <packaging>bundle</packaging>
+    
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -203,7 +210,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.library.core</artifactId>
-	    <version>2.0.1-SNAPSHOT</version>
+	    <version>${kermeta.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
@@ -217,19 +224,7 @@
         </dependency>
     </dependencies>
 
-
-    <distributionManagement>
-        <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+    
 
     <repositories>
         <repository>
