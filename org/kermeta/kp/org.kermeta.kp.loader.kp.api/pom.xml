@@ -1,0 +1,59 @@
+<!-- $Id: pom.xml  $ -->
+<!-- License    : EPL                                    -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Didier Vojtisek <didier.vojtisek@inria.fr> --> 
+
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+	<name>kp.loader.kp.api :: API for KP loader</name>
+	<groupId>org.kermeta.kp</groupId>
+	<artifactId>kp.loader.kp.api</artifactId>
+
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>kp.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.systemservices.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+	</dependencies>
+    
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Export-Package>
+							org.kermeta.language.ecore2km.api
+                        </Export-Package>
+                        <Require-Bundle>
+            				org.kermeta.language.model
+                        </Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
