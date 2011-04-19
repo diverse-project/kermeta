@@ -15,7 +15,7 @@
     <build>
         <plugins>
         	<!-- Kermeta Compiler plugin -->
-            <plugin>
+      <!--       <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
                 <version>2.0.1-SNAPSHOT</version>
@@ -35,7 +35,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+        -->    
             <!-- package into a jar for OSGI -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -55,11 +55,16 @@
     </build>
 
     <dependencies>
-        <dependency>
+    	<dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <!-- <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>language.api</artifactId>
             <version>${kermeta.version}</version>
-        </dependency>
+        </dependency> -->
     </dependencies>
 
 
