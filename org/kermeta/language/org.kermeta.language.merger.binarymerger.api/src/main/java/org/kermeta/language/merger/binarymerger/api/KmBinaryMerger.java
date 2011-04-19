@@ -10,7 +10,7 @@ package org.kermeta.language.merger.binarymerger.api;
 
 
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.utils.messagingsystem.api.ErrorProneResult;
+import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 
 
 public interface KmBinaryMerger {
