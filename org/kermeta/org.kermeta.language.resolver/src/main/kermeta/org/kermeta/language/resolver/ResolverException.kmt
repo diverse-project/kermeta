@@ -1,0 +1,30 @@
+/* $Id:$ 
+ * Creation : December 30, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package org::kermeta::language::resolver;
+
+
+require kermeta
+using kermeta::standard
+
+class ResolverException inherits kermeta::exceptions::Exception
+{	
+	/** optional, pointer to the element that caused the issue  */
+	reference cause : Object
+	
+	/**
+	 * build helper
+	 */
+	operation initialize(msg : kermeta::standard::String, causeElem : Object) : ResolverException is do
+	    message := msg
+	    cause := causeElem
+		result := self
+	end
+}

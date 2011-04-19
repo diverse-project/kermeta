@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : November 16, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::resolver;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+
+using org::kermeta::language::structure
+using language::helpers
+
+/*
+* Visit the modelingUnit looking for the Operation corresponding to the UnresolvedOperation found by the UnresolvedFinder
+*/
+class ResolverResolvedOperationFinder inherits LanguageVisitor
+{
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
+		//We are looking for an operation with the same name as the UnresolvedOperation
+		ctxt.foundOperation := c.ownedOperation.detect{o|o.name.equals(ctxt.unresolvedName)}
+	end
+}

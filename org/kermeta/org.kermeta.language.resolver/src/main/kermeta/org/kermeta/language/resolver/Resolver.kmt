@@ -1,0 +1,123 @@
+/* $Id:$ 
+ * Creation : November 10, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::resolver;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverUnresolvedFinderVisitor.kmt"
+
+using language::helpers
+using kermeta::persistence
+using kermeta::standard
+
+class Resolver
+{
+	operation lancement() : Void is do
+		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
+		//Display all messages, do not raise exceptions
+		ctxt.verbose := 5
+		ctxt.exceptions := false
+	
+		var repository : EMFRepository init EMFRepository.new
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var unresolvedModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.resolver/src/tests/AfterMerging_HelloWorldMiniframework.km")
+		       	
+       	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	stdio.writeln("	*********************Resolving " + unresolvedModelingUnit.toString() + "*********************")
+       	
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " resolved*********************")
+       	
+		/*var report : Set<DanglingDiagnostic>
+	 	report := unresolvedModelResource.findDanglingModelElements()
+	 	report.each{ diag |
+	 		var danglingName : String init ""
+	 		var referencingName : String init ""
+	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
+			diag.referencingProperty.name + referencingName)
+		}*/
+        
+        stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " checked**********************")
+       	
+       	unresolvedModelResource.saveWithNewURI("platform:/resource/org.kermeta.language.resolver/src/tests/results/AfterMerging_HelloWorldMiniframeworkResolved.km")
+       	
+       	stdio.writeln("	*********************" + unresolvedModelingUnit.toString() + " saved************************")
+       	
+	end
+	
+	operation resolveFromModelingUnit(toBeResolved : org::kermeta::language::structure::ModelingUnit) : Void is do
+		var modelingUnitName : String
+       	if toBeResolved.name.isVoid() then
+       		modelingUnitName := toBeResolved.toString()
+       	else
+       		modelingUnitName := toBeResolved.name
+       	end
+		var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : language::helpers::LanguageVisitorContext init language::helpers::LanguageVisitorContext.new
+       	
+       	stdio.writeln("		Resolving " + toBeResolved.toString())
+       	
+       	toBeResolved.accept(unresolvedFinder, ctxt)
+       	
+       	stdio.writeln("		" + toBeResolved.toString() + " resolved")
+	end
+	
+	operation resolveFromPath(path : String) : Void is do	
+		var repository : EMFRepository init EMFRepository.new
+		var unresolvedModelResource : Resource init repository.getResource(path)
+		
+		var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	if not unresolvedModelingUnit.isVoid() then
+       		var modelingUnitName : String
+       		if unresolvedModelingUnit.name.isVoid() then
+       			modelingUnitName := unresolvedModelingUnit.toString()
+       		else
+       			modelingUnitName := unresolvedModelingUnit.name
+       		end
+       		
+       		resolveFromModelingUnit(unresolvedModelingUnit)
+       		var resolvedPath : String init path
+	       	resolvedPath.substring(0, resolvedPath.size()-4)
+	       	unresolvedModelResource.saveWithNewURI(resolvedPath + "Resolved.km")
+	       	
+	       	stdio.writeln("		" + modelingUnitName + " resolved " + " saved in " + resolvedPath + "Resolved.km")
+       	else
+       		var error : String init "Resolver: ModelingUnit to be resolved is void"
+			
+			stdio.writeln(error)
+			
+			/*var except : Exception init Exception.new
+			except.message := error
+			raise except*/
+       	end
+	end
+}

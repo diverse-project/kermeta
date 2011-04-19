@@ -1,0 +1,196 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package org::kermeta::language::staticsetter;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "StaticSetter_kermeta_aspect.kmt"
+require "SimpleDuplicate_kermeta_aspect.kmt"
+require "../resolver/ResolverException.kmt"
+
+using kermeta::standard
+
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+
+class StaticSetterContext
+{
+
+	attribute verbose : Boolean
+
+	operation initialize(mu : org::kermeta::language::structure::ModelingUnit) : StaticSetterContext is do
+	 	result := self
+	 	currentModelingUnit := mu
+	 	verbose := false
+	end
+	
+	/**
+	 * ModelingUnit we are processing 
+	 */
+	reference currentModelingUnit : org::kermeta::language::structure::ModelingUnit
+	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
+	reference currentOperation : org::kermeta::language::structure::Operation
+	
+	/**
+	 * contextFrames is used to organize symbols using scopes. 
+	 */
+	attribute contextFrames : seq StaticSetterContextFrame[0..*]
+	
+	operation pushContext() is do
+		contextFrames.add(StaticSetterContextFrame.new.initialize())
+	end
+	
+	operation popContext() is do
+		contextFrames.remove(contextFrames.last)
+	end
+	
+	operation addSymbol(symbol : String, type : org::kermeta::language::structure::Type) is do
+		contextFrames.last.symbolMap.put(symbol, type)
+	end
+	
+	operation getTypeForSymbol(symbol : String) : org::kermeta::language::structure::Type is do
+		result := void
+		// search in the contextFrame the deepest symbol that matches
+		// TODO find a more efficient way, I currently don't know how to acheive a each in reverse other than doing a loop, I'm not sure, the overhead of the curent algorithm if so important  
+		contextFrames.each{ f |
+			var res :  org::kermeta::language::structure::Type
+			res := f.symbolMap.getValue(symbol)
+			if not res.isVoid then
+				result := res
+			end
+		}
+	end		
+	
+	// end of code about symbols
+	
+	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String ) : org::kermeta::language::structure::Type is do
+		var cd : org::kermeta::language::structure::ClassDefinition
+		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
+		if result.isVoid then
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create type for "+ classDefinitionQualifiedName, void)
+		end
+	end
+	
+	operation createClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String ) : org::kermeta::language::structure::ClassDefinition is do
+		var cd : org::kermeta::language::structure::ClassDefinition
+		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+		result := cd
+		if result.isVoid then
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create ClassDefinition for "+ classDefinitionQualifiedName, void)
+		end
+	end
+	
+	/**
+	 * Return the type of self.
+	 * The Type parameters are bound with least derived admitable type
+	 */
+	operation createSelfType() : org::kermeta::language::structure::Type is do
+		var selfType : org::kermeta::language::structure::Class  init org::kermeta::language::structure::Class.new
+		selfType.typeDefinition := currentClassDefinition
+		if selfType.typeDefinition.isVoid then
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create SelfType ", void)
+		end		
+		result := selfType
+	end
+	
+	operation createTypeFromMultiplicityElement(element : org::kermeta::language::structure::MultiplicityElement ) : org::kermeta::language::structure::Type is do
+		if (element.upper.isVoid) then
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid upperbound void", void)
+		end 
+		
+		
+		// clone the type of the multiplicity element
+		var typeCopy : org::kermeta::language::structure::Type
+		typeCopy := element.type
+		/*	// UGLY: need a real clone
+			if element.type.isInstanceOf(org::kermeta::language::structure::Class) then
+				result := org::kermeta::language::structure::Class.clone(element.type.asType(org::kermeta::language::structure::Class))
+			end
+			if element.type.isInstanceOf(org::kermeta::language::structure::FunctionType) then
+				result := org::kermeta::language::structure::FunctionType.clone(element.type.asType(org::kermeta::language::structure::FunctionType))
+			end
+			// TODO deal with other concrete Type
+		*/
+			 
+		if element.upper == 0 then
+			// the only type valid with upper bound == 0 is Void 
+			result := createTypeFromQualifiedName("kermeta::standard::Void")
+			//stdio.writeln("createTypeFromMultiplicityElement typeCopy = VOID")
+		else if element.upper == 1 then
+			result := typeCopy
+			//stdio.writeln("createTypeFromMultiplicityElement typeCopy = "+result.toString)
+		else
+			var typeParams : Sequence<org::kermeta::language::structure::Type> init Sequence<org::kermeta::language::structure::Type>.new
+			typeParams.add(typeCopy)
+			var cd : org::kermeta::language::structure::ClassDefinition
+			if (element.isUnique() and element.isOrdered()) then 
+				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
+				if cd.isVoid then 
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::OrderedSet", void)
+				end
+				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
+			else if (element.isUnique() and not element.isOrdered()) then
+				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
+				if cd.isVoid then 
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Set", void)
+				end
+				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
+			else if ( not element.isUnique() and element.isOrdered()) then
+				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
+				if cd.isVoid then 
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Sequence", void)
+				end
+				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
+			else
+				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
+				if cd.isVoid then 
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Bag", void)
+				end
+				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
+				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Bag<"+result.toString+">")
+			end end end
+		end end
+	end
+	
+	// workaround compiler bug : issue when adding aspect on object
+	// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
+	operation inferContainedExpressionStatic(obj : KermetaModelElement) is do
+						
+			// the algorithm is bottom up
+			// compute leaf then goes up in the container which can then reuse their results
+		
+			obj.eachOwnedElement{ e |
+				if ( e.isInstanceOf(Expression)) then
+					e.asType(Expression).resolveCallAndInferStatic(self)
+				else if ( e.isInstanceOf(KermetaModelElement)) then
+					e.asType(KermetaModelElement).inferContainedExpressionStatic(self)
+				end end
+				e // must return somthing for scala compiler to work
+			}
+		end
+}
+
+class StaticSetterContextFrame
+{
+	reference symbolMap : kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>
+	
+	operation initialize() : StaticSetterContextFrame is do
+		symbolMap := kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>.new
+		result := self
+	end
+}

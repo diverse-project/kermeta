@@ -1,0 +1,16 @@
+/* $Id:$ 
+ * Creation : February 18, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class UnresolvedProperty
+{
+	reference correspondingProperty : Property
+}

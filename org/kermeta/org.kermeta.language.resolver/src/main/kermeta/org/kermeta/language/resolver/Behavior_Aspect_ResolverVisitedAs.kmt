@@ -1,0 +1,478 @@
+/* $Id:$ 
+ * Creation : March 8, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::behavior;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
+
+aspect class Assignment {
+	attribute visitedAsAssignment : Integer
+	operation toBeVisitedAsAssignment(passNumber : Integer) : Boolean is do
+		if visitedAsAssignment.isVoid() then
+			visitedAsAssignment := 0
+		end
+		if visitedAsAssignment < passNumber then
+			visitedAsAssignment := visitedAsAssignment + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Block {
+	attribute visitedAsBlock : Integer
+	operation toBeVisitedAsBlock(passNumber : Integer) : Boolean is do
+		if visitedAsBlock.isVoid() then
+			visitedAsBlock := 0
+		end
+		if visitedAsBlock < passNumber then
+			visitedAsBlock := visitedAsBlock + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class BooleanLiteral {
+	attribute visitedAsBooleanLiteral : Integer
+	operation toBeVisitedAsBooleanLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsBooleanLiteral.isVoid() then
+			visitedAsBooleanLiteral := 0
+		end
+		if visitedAsBooleanLiteral < passNumber then
+			visitedAsBooleanLiteral := visitedAsBooleanLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+
+aspect class CallEnumLiteral {
+	attribute visitedAsCallEnumLiteral : Integer
+	operation toBeVisitedAsCallEnumLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsCallEnumLiteral.isVoid() then
+			visitedAsCallEnumLiteral := 0
+		end
+		if visitedAsCallEnumLiteral < passNumber then
+			visitedAsCallEnumLiteral := visitedAsCallEnumLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallExpression {
+	attribute visitedAsCallExpression : Integer
+	operation toBeVisitedAsCallExpression(passNumber : Integer) : Boolean is do
+		if visitedAsCallExpression.isVoid() then
+			visitedAsCallExpression := 0
+		end
+		if visitedAsCallExpression < passNumber then
+			visitedAsCallExpression := visitedAsCallExpression + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallFeature {
+	attribute visitedAsCallFeature : Integer
+	operation toBeVisitedAsCallFeature(passNumber : Integer) : Boolean is do
+		if visitedAsCallFeature.isVoid() then
+			visitedAsCallFeature := 0
+		end
+		if visitedAsCallFeature < passNumber then
+			visitedAsCallFeature := visitedAsCallFeature + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallOperation {
+	attribute visitedAsCallOperation : Integer
+	operation toBeVisitedAsCallOperation(passNumber : Integer) : Boolean is do
+		if visitedAsCallOperation.isVoid() then
+			visitedAsCallOperation := 0
+		end
+		if visitedAsCallOperation < passNumber then
+			visitedAsCallOperation := visitedAsCallOperation + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallProperty {
+	attribute visitedAsCallProperty : Integer
+	operation toBeVisitedAsCallProperty(passNumber : Integer) : Boolean is do
+		if visitedAsCallProperty.isVoid() then
+			visitedAsCallProperty := 0
+		end
+		if visitedAsCallProperty < passNumber then
+			visitedAsCallProperty := visitedAsCallProperty + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallResult {
+	attribute visitedAsCallResult : Integer
+	operation toBeVisitedAsCallResult(passNumber : Integer) : Boolean is do
+		if visitedAsCallResult.isVoid() then
+			visitedAsCallResult := 0
+		end
+		if visitedAsCallResult < passNumber then
+			visitedAsCallResult := visitedAsCallResult + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallSuperOperation {
+	attribute visitedAsCallSuperOperation : Integer
+	operation toBeVisitedAsCallSuperOperation(passNumber : Integer) : Boolean is do
+		if visitedAsCallSuperOperation.isVoid() then
+			visitedAsCallSuperOperation := 0
+		end
+		if visitedAsCallSuperOperation < passNumber then
+			visitedAsCallSuperOperation := visitedAsCallSuperOperation + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallTypeLiteral {
+	attribute visitedAsCallTypeLiteral : Integer
+	operation toBeVisitedAsCallTypeLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsCallTypeLiteral.isVoid() then
+			visitedAsCallTypeLiteral := 0
+		end
+		if visitedAsCallTypeLiteral < passNumber then
+			visitedAsCallTypeLiteral := visitedAsCallTypeLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallValue {
+	attribute visitedAsCallValue : Integer
+	operation toBeVisitedAsCallValue(passNumber : Integer) : Boolean is do
+		if visitedAsCallValue.isVoid() then
+			visitedAsCallValue := 0
+		end
+		if visitedAsCallValue < passNumber then
+			visitedAsCallValue := visitedAsCallValue + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class CallVariable {
+	attribute visitedAsCallVariable : Integer
+	operation toBeVisitedAsCallVariable(passNumber : Integer) : Boolean is do
+		if visitedAsCallVariable.isVoid() then
+			visitedAsCallVariable := 0
+		end
+		if visitedAsCallVariable < passNumber then
+			visitedAsCallVariable := visitedAsCallVariable + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Conditional {
+	attribute visitedAsConditional : Integer
+	operation toBeVisitedAsConditional(passNumber : Integer) : Boolean is do
+		if visitedAsConditional.isVoid() then
+			visitedAsConditional := 0
+		end
+		if visitedAsConditional < passNumber then
+			visitedAsConditional := visitedAsConditional + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class EmptyExpression {
+	attribute visitedAsEmptyExpression : Integer
+	operation toBeVisitedAsEmptyExpression(passNumber : Integer) : Boolean is do
+		if visitedAsEmptyExpression.isVoid() then
+			visitedAsEmptyExpression := 0
+		end
+		if visitedAsEmptyExpression < passNumber then
+			visitedAsEmptyExpression := visitedAsEmptyExpression + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Expression {
+	attribute visitedAsExpression : Integer
+	operation toBeVisitedAsExpression(passNumber : Integer) : Boolean is do
+		if visitedAsExpression.isVoid() then
+			visitedAsExpression := 0
+		end
+		if visitedAsExpression < passNumber then
+			visitedAsExpression := visitedAsExpression + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class IntegerLiteral {
+	attribute visitedAsIntegerLiteral : Integer
+	operation toBeVisitedAsIntegerLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsIntegerLiteral.isVoid() then
+			visitedAsIntegerLiteral := 0
+		end
+		if visitedAsIntegerLiteral < passNumber then
+			visitedAsIntegerLiteral := visitedAsIntegerLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class JavaStaticCall {
+	attribute visitedAsJavaStaticCall : Integer
+	operation toBeVisitedAsJavaStaticCall(passNumber : Integer) : Boolean is do
+		if visitedAsJavaStaticCall.isVoid() then
+			visitedAsJavaStaticCall := 0
+		end
+		if visitedAsJavaStaticCall < passNumber then
+			visitedAsJavaStaticCall := visitedAsJavaStaticCall + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class LambdaExpression {
+	attribute visitedAsLambdaExpression : Integer
+	operation toBeVisitedAsLambdaExpression(passNumber : Integer) : Boolean is do
+		if visitedAsLambdaExpression.isVoid() then
+			visitedAsLambdaExpression := 0
+		end
+		if visitedAsLambdaExpression < passNumber then
+			visitedAsLambdaExpression := visitedAsLambdaExpression + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class LambdaParameter {
+	attribute visitedAsLambdaParameter : Integer
+	operation toBeVisitedAsLambdaParameter(passNumber : Integer) : Boolean is do
+		if visitedAsLambdaParameter.isVoid() then
+			visitedAsLambdaParameter := 0
+		end
+		if visitedAsLambdaParameter < passNumber then
+			visitedAsLambdaParameter := visitedAsLambdaParameter + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Literal {
+	attribute visitedAsLiteral : Integer
+	operation toBeVisitedAsLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsLiteral.isVoid() then
+			visitedAsLiteral := 0
+		end
+		if visitedAsLiteral < passNumber then
+			visitedAsLiteral := visitedAsLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Loop {
+	attribute visitedAsLoop : Integer
+	operation toBeVisitedAsLoop(passNumber : Integer) : Boolean is do
+		if visitedAsLoop.isVoid() then
+			visitedAsLoop := 0
+		end
+		if visitedAsLoop < passNumber then
+			visitedAsLoop := visitedAsLoop + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Raise {
+	attribute visitedAsRaise : Integer
+	operation toBeVisitedAsRaise(passNumber : Integer) : Boolean is do
+		if visitedAsRaise.isVoid() then
+			visitedAsRaise := 0
+		end
+		if visitedAsRaise < passNumber then
+			visitedAsRaise := visitedAsRaise + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class Rescue {
+	attribute visitedAsRescue : Integer
+	operation toBeVisitedAsRescue(passNumber : Integer) : Boolean is do
+		if visitedAsRescue.isVoid() then
+			visitedAsRescue := 0
+		end
+		if visitedAsRescue < passNumber then
+			visitedAsRescue := visitedAsRescue + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class SelfExpression {
+	attribute visitedAsSelfExpression : Integer
+	operation toBeVisitedAsSelfExpression(passNumber : Integer) : Boolean is do
+		if visitedAsSelfExpression.isVoid() then
+			visitedAsSelfExpression := 0
+		end
+		if visitedAsSelfExpression < passNumber then
+			visitedAsSelfExpression := visitedAsSelfExpression + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class StringLiteral {
+	attribute visitedAsStringLiteral : Integer
+	operation toBeVisitedAsStringLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsStringLiteral.isVoid() then
+			visitedAsStringLiteral := 0
+		end
+		if visitedAsStringLiteral < passNumber then
+			visitedAsStringLiteral := visitedAsStringLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class TypeReference {
+	attribute visitedAsTypeReference : Integer
+	operation toBeVisitedAsTypeReference(passNumber : Integer) : Boolean is do
+		if visitedAsTypeReference.isVoid() then
+			visitedAsTypeReference := 0
+		end
+		if visitedAsTypeReference < passNumber then
+			visitedAsTypeReference := visitedAsTypeReference + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class UnresolvedCall {
+	attribute visitedAsUnresolvedCall : Integer
+	operation toBeVisitedAsUnresolvedCall(passNumber : Integer) : Boolean is do
+		if visitedAsUnresolvedCall.isVoid() then
+			visitedAsUnresolvedCall := 0
+		end
+		if visitedAsUnresolvedCall < passNumber then
+			visitedAsUnresolvedCall := visitedAsUnresolvedCall + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class VariableCall {
+	attribute visitedAsVariableCall : Integer
+	operation toBeVisitedAsVariableCall(passNumber : Integer) : Boolean is do
+		if visitedAsVariableCall.isVoid() then
+			visitedAsVariableCall := 0
+		end
+		if visitedAsVariableCall < passNumber then
+			visitedAsVariableCall := visitedAsVariableCall + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class VariableDecl {
+	attribute visitedAsVariableDecl : Integer
+	operation toBeVisitedAsVariableDecl(passNumber : Integer) : Boolean is do
+		if visitedAsVariableDecl.isVoid() then
+			visitedAsVariableDecl := 0
+		end
+		if visitedAsVariableDecl < passNumber then
+			visitedAsVariableDecl := visitedAsVariableDecl + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}
+
+aspect class VoidLiteral {
+	attribute visitedAsVoidLiteral : Integer
+	operation toBeVisitedAsVoidLiteral(passNumber : Integer) : Boolean is do
+		if visitedAsVoidLiteral.isVoid() then
+			visitedAsVoidLiteral := 0
+		end
+		if visitedAsVoidLiteral < passNumber then
+			visitedAsVoidLiteral := visitedAsVoidLiteral + 1
+			result := true
+		else
+			result := false
+		end
+	end
+}

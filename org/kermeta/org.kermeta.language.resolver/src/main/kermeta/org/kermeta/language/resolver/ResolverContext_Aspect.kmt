@@ -1,0 +1,99 @@
+/* $Id:$ 
+ * Creation : November 16, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package language::helpers;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
+
+using org::kermeta::language::structure
+using kermeta::standard
+
+aspect class LanguageVisitorContext {
+	//Verbose mode :
+	//0 = mute
+	//1 = ResolvedType not found + Other messages on UnresolvedTypes
+	//2 = ResolvedProperties not found + Other messages on UnresolvedProperties
+	//3 = ResolvedOperations not found + Other messages on UnresolvedOperations
+	//4 = AllResolved not found
+	//5 = All messages
+	attribute verbose : Integer
+	//Allow exceptions
+	attribute exceptions : Boolean
+	//Modeling unit the UnresolvedFinder is currently visiting
+	reference currentModelingUnit : ModelingUnit
+	//Package the UnresolvedFinder is currently visiting
+	reference currentPackage : Package
+	//KermetaModelElement the UnresolvedFinder is currently visiting (except Unresolved)
+	reference currentElement : KermetaModelElement
+	//Unresolved object we want to replace
+	reference unresolved : Unresolved
+	//Name of the unresolved object we want to replace
+	attribute unresolvedName : String
+	//Qualified path to resolved object
+	attribute qualifiedPath : Sequence<String>
+	//Counter pointing the object name currently visited by the ResolvedFinder
+	attribute identifierCounter : Integer
+	
+	//Resolved objects found by the ResolvedFinder
+	reference foundType : Type
+	reference foundOperation : Operation
+	reference foundProperty : Property
+	
+	//Return the name of the Object currently pointed by identifierCounter
+	operation getCurrentIdentifier() : String is do
+		result := qualifiedPath.at(identifierCounter)
+		identifierCounter := identifierCounter+1
+	end
+	
+	//Return true if the last returned identifier is the last of the qualified path
+	operation currentIdentifierIsLast() : Boolean is do
+		result := (identifierCounter == qualifiedPath.size())
+	end
+	
+	//Return true if the next returned identifier is the last of the qualified path
+	operation nextIdentifierIsLast() : Boolean is do
+		result := (identifierCounter == qualifiedPath.size()-1)
+	end
+	
+	//Return the last identifier of the qualified path
+	operation getLastIdentifier() : String is do
+		result := qualifiedPath.last()
+	end
+	
+	//Return the found type before resetting it
+	operation getFoundType() : Type is do
+		result := foundType
+		foundType := void
+	end
+	
+	//Return the found property before resetting it
+	operation getFoundProperty() : Property is do
+		result := foundProperty
+		foundProperty := void
+	end
+	
+	//Return the found operation before resetting it
+	operation getFoundOperation() : Operation is do
+		result := foundOperation
+		foundOperation := void
+	end
+	
+	operation reset() : Void is do
+		unresolved := void
+		unresolvedName := void
+		resetCompleteName("", Sequence<String>.new)
+	end
+		
+	operation resetCompleteName(n : String, q : Sequence<String>) : Void is do
+		unresolvedName := n
+		qualifiedPath := q
+		identifierCounter := 0
+	end
+}

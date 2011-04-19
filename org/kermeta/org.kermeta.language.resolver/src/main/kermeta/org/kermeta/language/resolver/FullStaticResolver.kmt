@@ -1,0 +1,157 @@
+/* $Id:$ 
+ * Creation : December 30, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "org::kermeta::language::resolver::FullStaticResolver"
+@mainOperation "testMain"
+
+
+package org::kermeta::language::resolver;
+
+
+require kermeta
+require "Resolver.kmt"
+require "../staticsetter/StaticSetter_kermeta_aspect.kmt"
+require "../staticsetter/StaticSetterContext.kmt"
+require "ResolverException.kmt"
+
+using org::kermeta::language::staticsetter
+using language::helpers
+
+using kermeta::persistence
+using kermeta::standard
+
+class FullStaticResolver
+{
+
+	operation testMain() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
+		var baseFileName : String init "AfterResolving__HelloWorldMiniframeworkAndRaise"
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
+       	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
+		       	
+       	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit
+       	var resolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
+       	unresolvedModelingUnit ?= unresolvedModelResource.one
+       	
+       	//checkUnresolved(unresolvedModelingUnit)
+        //resolvedModelingUnit := doResolving(unresolvedModelingUnit)
+              	    	
+       	//unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+       	
+       	resolvedModelingUnit := unresolvedModelingUnit
+       	//checkUnresolved(resolvedModelingUnit)
+       	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
+       	
+       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
+       	
+       	stdio.writeln("	********************* " + folder+"results/....km" + " saved ************************")
+	end
+	
+	reference errors : ResolverException[*]
+	
+	operation getErrors() : OrderedSet<ResolverException> is do
+		result := errors
+	end
+
+	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		result := doStaticSetting(doResolving(unresolvedModelingUnit))
+	end
+
+	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
+       	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
+		//Display all messages from Resolver
+		ctxt.verbose := 5
+		//Do not raise exceptions for these messages
+		ctxt.exceptions := false
+	
+       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	       	
+       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
+       	
+       	//checkDangling(unresolvedModelingUnit.containingResource())       	
+		//checkUnresolved(unresolvedModelingUnit)
+       	
+       	result := unresolvedModelingUnit
+	end
+	
+	operation doStaticSetting(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do      	
+		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
+		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
+		
+		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
+		
+       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
+       	result := unresolvedModelingUnit
+	end
+	
+	operation checkUnresolved(aKermetaModelElement : org::kermeta::language::structure::KermetaModelElement) : Void is do
+		aKermetaModelElement.eachOwnedElement{p |
+			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedType) then
+				stdio.writeln("UNRESOLVED_TYPE -- typeIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedType).typeIdentifier.toString)
+				p.asType(org::kermeta::language::structure::UnresolvedType).usings.each{ us |
+					stdio.writeln("|-------------usings: " + us.toString)
+				}
+				p.asType(org::kermeta::language::structure::UnresolvedType).generics.each{g |
+					if (g.isInstanceOf(org::kermeta::language::structure::UnresolvedType)) then
+						stdio.writeln("UNRESOLVED_TYPE on GENERICS -- typeIdentifier: " + g.asType(org::kermeta::language::structure::UnresolvedType).typeIdentifier.toString)
+						g.asType(org::kermeta::language::structure::UnresolvedType).usings.each{ us |
+							stdio.writeln("|-------------usings: " + us.toString)
+						}
+					end
+				}
+			end
+			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedOperation) then
+				stdio.writeln("UNRESOLVED_OPERATION -- operationIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedOperation).operationIdentifier.toString)
+				stdio.writeln("|-------------from: " + p.asType(org::kermeta::language::structure::UnresolvedOperation).~from.toString)
+			end
+			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedProperty) then
+				stdio.writeln("UNRESOLVED_PROPERTY -- peropertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)
+			end
+			if p.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+				stdio.writeln("UNRESOLVED_CALL -- name: " + p.asType(org::kermeta::language::behavior::UnresolvedCall).name)
+			end
+			if p.isInstanceOf(org::kermeta::language::behavior::Expression) then
+				if p.asType(org::kermeta::language::behavior::Expression).staticType.isVoid then
+					stdio.writeln("-*-*-STATIC_TYPE VOID FOUND")
+				end
+			end
+			if p.isInstanceOf(org::kermeta::language::structure::KermetaModelElement) then
+				checkUnresolved(p.asType(org::kermeta::language::structure::KermetaModelElement))
+			end
+			p
+		}
+	end
+
+	/*operation checkDangling(unresolvedModelResource : Resource) : Void is do
+		var report : Set<org::kermeta::language::resolver::DanglingDiagnosticBIS>
+	 	report := findDanglingModelElementsBIS(unresolvedModelResource)
+	 	report.each{ diag |
+	 		var danglingName : String init ""
+	 		var referencingName : String init ""
+	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
+	 		else
+	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
+	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).name() + ")"
+	 			end
+	 		end
+			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
+			diag.referencingProperty.name + referencingName)
+		}
+	end*/	
+}

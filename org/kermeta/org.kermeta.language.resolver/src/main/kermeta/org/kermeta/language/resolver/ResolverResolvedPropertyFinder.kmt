@@ -1,0 +1,68 @@
+/* $Id:$ 
+ * Creation : November 16, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::resolver;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+
+using org::kermeta::language::structure
+using language::helpers
+/*
+* Visit the modelingUnit looking for the Property corresponding to the UnresolvedProperty found by the UnresolvedFinder
+*/
+class ResolverResolvedPropertyFinder inherits LanguageVisitor
+{
+	method visitClassDefinition(c : ClassDefinition, ctxt : LanguageVisitorContext) is do
+		//We are looking for a property with the same name as the UnresolvedProperty
+		ctxt.foundProperty := c.ownedAttribute.detect{o|o.name.equals(ctxt.unresolvedName)}
+	end
+	
+	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
+		if not ctxt.currentIdentifierIsLast() then
+			//Name of the object we are currently looking for
+			var lookingFor : String init ctxt.getCurrentIdentifier()
+			
+			var containingClass : TypeDefinition init m.ownedTypeDefinition.detect{t|
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
+			}
+			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
+			if not containingClass.isVoid then
+				containingClass.accept(self, ctxt)
+			//Else we are looking for a package
+			else
+				var ~package : Package init m.packages.detect{p|p.name.equals(lookingFor)}
+				if not ~package.isVoid() then
+					~package.accept(self, ctxt)
+				end
+			end
+		end
+	end
+	
+	method visitPackage(p : Package, ctxt : LanguageVisitorContext) is do
+		if not ctxt.currentIdentifierIsLast() then
+			//Name of the object we are currently looking for
+			var lookingFor : String init ctxt.getCurrentIdentifier()
+			
+			var containingClass : TypeDefinition init p.ownedTypeDefinition.detect{t|
+				t.isInstanceOf(ClassDefinition) and t.name.equals(lookingFor) and ctxt.currentIdentifierIsLast()
+			}
+			//If the last identifier we had is the last of the qualified path, we are looking for a classDefinition
+			if not containingClass.isVoid then
+				containingClass.accept(self, ctxt)
+			//Else we are looking for a package
+			else
+				var ~package : Package init p.nestedPackage.detect{n|n.name.equals(lookingFor)}
+				if not ~package.isVoid() then
+					~package.accept(self, ctxt)
+				end
+			end
+		end
+	end
+}
