@@ -6,9 +6,9 @@
         <version>2.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>language.resolver</artifactId>
+    <artifactId>language.resolver.art2</artifactId>
     <packaging>jar</packaging>
-    <name>language.resolver :: resolving and static setting</name>
+    <name>language.resolverart2 :: resolving and static setting version for art2</name>
 
     <dependencies>
     
