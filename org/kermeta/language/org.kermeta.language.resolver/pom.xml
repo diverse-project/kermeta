@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>language.artcomponent.root</artifactId>
+        <artifactId>language.root</artifactId>
         <groupId>org.kermeta.language</groupId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
@@ -10,20 +10,7 @@
     <packaging>jar</packaging>
     <name>language.resolver :: resolving and static setting</name>
 
-    <dependencies>
-    
-    	<!-- woraround pb apt all ART components will need ART2 to compile -->
-        <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.annotation</artifactId>
-            <version>${art2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.framework</artifactId>
-            <version>${art2.version}</version>
-        </dependency>
-        <!-- end workaround -->
+    <dependencies>    
     
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -51,16 +38,9 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>language.api</artifactId>
+            <artifactId>language.resolver.api</artifactId>
             <version>${kermeta.version}</version>
-        </dependency>        
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.api.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency>
+        </dependency> 
 		       
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
