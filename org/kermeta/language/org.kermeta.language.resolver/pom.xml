@@ -33,7 +33,6 @@
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
             <version>0.12.3</version>
-            <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -46,7 +45,6 @@
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>2.6.0</version>
-			<type>jar</type>
 		</dependency>
     </dependencies>
     
