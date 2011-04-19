@@ -30,14 +30,14 @@ import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
-import org.kermeta.kp.loader.kp.KpLoader;
+import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
 import org.kermeta.language.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
 //import scala.collection.JavaConversions.JListWrapper;
 //import scala.collection.JavaConversions.JListWrapper;
 //import org.embedded.EmbeddedMavenHelper;
-import org.kermeta.utils.messagingsystem.api.MessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 
 /**
@@ -146,7 +146,7 @@ public class KermetaCompiler {
 	 */
 	public void kp2bytecode(String kpFileURL) throws IOException {
 		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
-		KpLoader ldr = new KpLoader();
+		KpLoaderImpl ldr = new KpLoaderImpl();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		if(!kp.getName().isEmpty()){
 			projectName = kp.getName();
@@ -258,7 +258,7 @@ public class KermetaCompiler {
 		    while ((ze = zip.getNextEntry()) != null){
 		    	if(("/"+ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)){
 		    		// load dependencyKP
-		    		KpLoader ldr = new KpLoader();
+		    		KpLoaderImpl ldr = new KpLoaderImpl();
 		    		dependencyKP = ldr.loadKp(URI.createURI("jar:"+dependencyURL+"!/"+ze.getName()));
 		    	}
 		    }

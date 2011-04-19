@@ -15,7 +15,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.kermeta.utils.messagingsystem.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 /**
  * Command line interface for Kermeta2 compiler
