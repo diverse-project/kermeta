@@ -114,7 +114,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.messagingsystem.api</artifactId>
+			<artifactId>utils.systemservices.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
@@ -162,8 +162,8 @@
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
 							org.kermeta.utils.error.report.eclipse,
-							org.kermeta.utils.error.report.eclipse.api,
-							org.kermeta.utils.messagingsystem.api
+							org.kermeta.utils.error.report.api,
+							org.kermeta.utils.systemservices.api
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
