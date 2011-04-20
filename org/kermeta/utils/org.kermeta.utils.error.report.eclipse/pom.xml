@@ -71,7 +71,7 @@
 							org.eclipse.core.resources,
 							org.eclipse.core.runtime,
 							org.eclipse.core.runtime,
-							org.kermeta.utils.error.report.eclipse.api
+							org.kermeta.utils.error.report.api
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
