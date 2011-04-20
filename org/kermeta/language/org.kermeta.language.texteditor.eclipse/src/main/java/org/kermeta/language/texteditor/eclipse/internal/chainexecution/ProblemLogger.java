@@ -1,9 +1,9 @@
 package org.kermeta.language.texteditor.eclipse.internal.chainexecution;
 
 import org.kermeta.utils.error.report.eclipse.Reporter;
-import org.kermeta.utils.messagingsystem.api.MessagingSystem;
-import org.kermeta.utils.messagingsystem.api.Reference;
-import org.kermeta.utils.messagingsystem.api.TextReference;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.Reference;
+import org.kermeta.utils.systemservices.api.reference.TextReference;
 
 public class ProblemLogger extends MessagingSystem {
 
