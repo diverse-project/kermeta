@@ -37,7 +37,7 @@ public class Ecore2KMImpl  implements org.kermeta.language.ecore2km.api.Ecore2KM
         //((org.eclipse.emf.ecore.EcoreFactoryWrapper)(org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)).setWrap((org.eclipse.emf.ecore.EcoreFactory)ScalaAspect.org.eclipse.emf.ecore.RichFactory.createEFactory());
     	org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 
-        org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.RichFactory.createEcore2km();
+        org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
         return converter.convert(rootPackage, namespacePrefix);
     }
     
