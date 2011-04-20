@@ -47,7 +47,7 @@ public class KmBinaryMergerImpl  implements org.kermeta.language.merger.binaryme
 		
 		MainRunner.init();
 
-        BinaryMerger merger = org.kermeta.language.merger.RichFactory.createBinaryMerger();
+        BinaryMerger merger = org.kermeta.language.merger.KerRichFactory.createBinaryMerger();
         ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
 		try {
 			result.setResult((ModelingUnit) merger.merge(enforceAspect(first_mu), enforceAspect(second_mu)));
