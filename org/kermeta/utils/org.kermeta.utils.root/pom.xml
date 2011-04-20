@@ -11,7 +11,7 @@
     <artifactId>utils.root</artifactId>
     <packaging>pom</packaging>
     <version>2.0.1-SNAPSHOT</version>
-    <name>K2 :: UTILS :: Root</name>
+    <name>utils.root :: root parent for utils components</name>
 
     <properties>
         <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
