@@ -117,6 +117,11 @@
 			<artifactId>language.texteditor.eclipse</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		<dependency>
+   			<groupId>org.osgi</groupId>
+   			<artifactId>org.osgi.core</artifactId>
+   			<version>4.2.0</version>
+  		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -131,6 +136,7 @@
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-Activator>org.kermeta.${project.artifactId}.Activator</Bundle-Activator>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -140,7 +146,7 @@
 							org.eclipse.ui,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
-							org.kermeta.language.texteditor.eclipse							
+							org.kermeta.language.texteditor.eclipse					
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

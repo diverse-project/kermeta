@@ -17,6 +17,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 	class SampleDeltaVisitor implements IResourceDeltaVisitor {
 
 		public boolean visit(IResourceDelta delta) throws CoreException {
+			System.out.println("VISITE1");
 			IResource resource = delta.getResource();
 			switch (delta.getKind()) {
 			case IResourceDelta.ADDED:
@@ -38,6 +39,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 
 	class SampleResourceVisitor implements IResourceVisitor {
 		public boolean visit(IResource resource) {
+			System.out.println("VISITE2");
 			ParserCaller.specificParsing(resource);
 			//return true to continue visiting children.
 			return true;
@@ -49,6 +51,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
+		System.out.println("VISITE3");
 		if (kind == FULL_BUILD) {
 			fullBuild(monitor);
 		} else {
@@ -65,6 +68,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 	protected void fullBuild(final IProgressMonitor monitor)
 			throws CoreException {
 		try {
+			System.out.println("VISITE4");
 			getProject().accept(new SampleResourceVisitor());
 		} catch (CoreException e) {
 		}
@@ -73,6 +77,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 	protected void incrementalBuild(IResourceDelta delta,
 			IProgressMonitor monitor) throws CoreException {
 		// the visitor does the work.
+		System.out.println("VISITE5");
 		delta.accept(new SampleDeltaVisitor());
 	}
 }

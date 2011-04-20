@@ -2,6 +2,7 @@ package org.kermeta.language.eclipse.builder;
 
 import java.util.Iterator;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
@@ -66,6 +67,11 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	 *            to have sample nature added or removed
 	 */
 	private void toggleNature(IProject project) {
+		//---------------------------
+		//The code commented here is needed to activate the Kermeta nature
+		//Since this component is provisioned, the nature does not work
+		//When this component will be deployed normaly, decoment this code and comment the following
+		//---------------------------
 		try {
 			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
@@ -79,7 +85,6 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 							natures.length - i - 1);
 					description.setNatureIds(newNatures);
 					project.setDescription(description, null);
-					System.out.println("DESACTIVE");
 					return;
 				}
 			}
@@ -90,7 +95,6 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			newNatures[natures.length] = KermetaNature.NATURE_ID;
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
-			System.out.println("ACTIVE");
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
