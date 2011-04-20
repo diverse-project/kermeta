@@ -28,7 +28,7 @@ public class KmResolverImpl implements org.kermeta.language.resolver.api.KmResol
 		//logger.debug("Resolving ModelingUnit..." );
 	   	
     	MainRunner.init();
-    	FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory.createFullStaticResolver();
+    	FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory.createFullStaticResolver();
     	ModelingUnit muResolved = null;
     	try {
     		muResolved = (ModelingUnit) resolver.resolve(enforceAspect(mu));

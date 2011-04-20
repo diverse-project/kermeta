@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.3</version>
+            <version>0.12.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -60,7 +60,7 @@
              <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA10</version>
+                <version>1.4.1-BETA12</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
