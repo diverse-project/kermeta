@@ -41,7 +41,7 @@
 				<configuration>
 		          <archive>
 		            <manifestEntries>
-						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Manifest-Version>1.0</Manifest-Version>
 						<Export-Package>
@@ -49,7 +49,7 @@
                         </Export-Package>
                         <Require-Bundle>
             				org.kermeta.language.model,
-            				org.kermeta.utils.messagingsystem.api
+            				org.kermeta.utils.systemservices.api
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
