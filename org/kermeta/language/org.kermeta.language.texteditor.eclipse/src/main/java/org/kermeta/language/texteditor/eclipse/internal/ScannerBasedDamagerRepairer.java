@@ -24,7 +24,6 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.custom.StyleRange;
-import org.kermeta.language.texteditor.eclipse.internal.chainexecution.ParserCaller;
 
 /**
  * Simple PresentationRepairer based on a Scanner
@@ -125,7 +124,6 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 	public void createPresentation(TextPresentation presentation,
 			ITypedRegion region) {
 
-		//ParserCaller.specificParsing(fScanner.getCurrentFile());
 		fScanner.setRange(fDocument, 0, fDocument.getLength());
 		fScanner.setFileHasError(false);
 		while (true) {

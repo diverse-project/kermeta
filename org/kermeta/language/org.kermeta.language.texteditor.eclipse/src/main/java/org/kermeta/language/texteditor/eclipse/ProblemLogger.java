@@ -1,11 +1,10 @@
-package org.kermeta.language.texteditor.eclipse.internal.chainexecution;
+package org.kermeta.language.texteditor.eclipse;
 
 import org.kermeta.utils.error.report.eclipse.Reporter;
-import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
 
-public class ProblemLogger extends MessagingSystem {
+public class ProblemLogger extends org.kermeta.language.texteditor.api.ProblemLogger{
 
 	@Override
 	public void doneProgress(String progressGroup, String message, String messageGroup) {
