@@ -125,7 +125,7 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 	public void createPresentation(TextPresentation presentation,
 			ITypedRegion region) {
 
-		ParserCaller.specificParsing(fScanner.getCurrentFile());
+		//ParserCaller.specificParsing(fScanner.getCurrentFile());
 		fScanner.setRange(fDocument, 0, fDocument.getLength());
 		fScanner.setFileHasError(false);
 		while (true) {
