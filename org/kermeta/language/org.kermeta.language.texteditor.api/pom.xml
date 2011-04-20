@@ -13,8 +13,8 @@
 	<artifactId>language.texteditor.api</artifactId>
 
     <parent>
-        <artifactId>utils.root</artifactId>
-        <groupId>org.kermeta.utils</groupId>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
     
