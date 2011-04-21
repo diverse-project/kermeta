@@ -80,6 +80,18 @@ public class KermetaCompiler {
 		this.logger = logger;
 		registerMVNUrlHandler();
 	}
+	
+	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, Boolean registerProtocols, MessagingSystem logger) {
+		super();
+		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.generateKmOnly = generateKmOnly;
+		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
+		this.targetFolder = targetFolder;
+		this.logger = logger;
+		if(registerProtocols){
+			registerMVNUrlHandler();
+		}
+	}
 	/**
 	 * Constructor
 	 * @param targetFolder
@@ -128,7 +140,7 @@ public class KermetaCompiler {
 	 */
 	public static void initializeFactory(){
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
-				.setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.RichFactory$.MODULE$);
+				.setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.KerRichFactory$.MODULE$);
 		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();		
 	}
 	
@@ -202,7 +214,7 @@ public class KermetaCompiler {
 				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
 				System.out.println("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")");
 				
-				ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(indirectURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(indirectURL);
 				if (mu != null) {
 					modelingUnits.add(mu);
 				}
@@ -223,7 +235,7 @@ public class KermetaCompiler {
 					System.out.println("sourceURL : " + sourceURLWithVariable);
 				}
 				// usual internal source
-				ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(sourceURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(sourceURL);
 				if (mu != null) {
 					if(mu.getName() == null){
 						// force ModelingUnit name to the one provided in the kp
@@ -270,7 +282,7 @@ public class KermetaCompiler {
 		    else{
 		    	// load the km file resulting from the merge of the dependency
 		    	String dependencyMergedKMUrl = "jar:"+dependencyURL+"!"+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+dependencyKP.getName()+".km";
-		    	ModelingUnit mu = new ModelingUnitLoader().loadModelingUnitFromURL(dependencyMergedKMUrl);
+		    	ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(dependencyMergedKMUrl);
 				if (mu != null) {
 					modelingUnits.add(mu);
 				}
@@ -297,7 +309,7 @@ public class KermetaCompiler {
 		// merge
 		ModelingUnit mergedMU = convertedModellingUnits.get(0);		
 		if (convertedModellingUnits.size()>1){
-			org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.RichFactory
+			org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.KerRichFactory
 			.createBinaryMerger();
 			for (int i = 1;i<convertedModellingUnits.size();i++){
 				mergedMU = b.merge(mergedMU, convertedModellingUnits.get(i));

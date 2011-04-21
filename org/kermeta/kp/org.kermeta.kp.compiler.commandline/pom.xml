@@ -41,8 +41,15 @@
 						<Require-Bundle>
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.language.loader.kmt.scala,
+							org.kermeta.language.merger.binarymerger,
 							org.kermeta.kp.model,
-							org.kermeta.kp.loader.kp						
+							org.kermeta.kp.loader.kp,
+            				fr.irisa.triskell.kermeta.model,
+							org.kermeta.language.model,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.xmi,
+							org.scala-ide.scala.library,
+							org.ops4j.pax.url.mvn						
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.loader.kmt.scala.internal.parser.KParser;
+import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+
 import scala.Option;
 import scala.collection.Iterator;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
@@ -30,6 +32,16 @@ import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
  */
 public class ModelingUnitLoader {
 
+	MessagingSystem logger;
+	
+	
+	
+	public ModelingUnitLoader(MessagingSystem logger) {
+		super();
+		this.logger = logger;
+	}
+	
+	
 	public ModelingUnit loadModelingUnitFromURL(String url){
 		ModelingUnit mu = null;
 		if (url.endsWith(".kmt")) {
@@ -83,8 +95,8 @@ public class ModelingUnitLoader {
 
 	protected ModelingUnit loadEcore(String uri) {
 		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
-		org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.RichFactory.createEcore2km();
-        kermeta.persistence.EMFRepository rep = kermeta.persistence.RichFactory.createEMFRepository();
+		org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
+        kermeta.persistence.EMFRepository rep = kermeta.persistence.KerRichFactory.createEMFRepository();
         kermeta.persistence.Resource r = rep.getResource( uri);
         r.load();    
         
@@ -95,7 +107,7 @@ public class ModelingUnitLoader {
 		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
 		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
 
-		KParser parser = new KParser();		
+		KMTparser parser = new KMTparser();		
 		Iterator<String> src = scala.io.Source.fromFile(new java.io.File(java.net.URI.create(fileuri)),
 				"UTF8").getLines();
 
@@ -104,13 +116,9 @@ public class ModelingUnitLoader {
 			buf.append(src.next() + "\n");
 		}
 
-		Option<ModelingUnit> mutest = parser.parse(buf.toString());
+		ModelingUnit mu = parser.load(fileuri, buf.toString(), logger);
 
-		if (!mutest.isEmpty()) {
-			ModelingUnit mu = mutest.get();
-			return mu;
-		}
-		return null;
+		return mu;
 
 	}
 }
