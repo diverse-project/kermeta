@@ -45,10 +45,10 @@
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Manifest-Version>1.0</Manifest-Version>
 						<Export-Package>
-							org.kermeta.language.ecore2km.api
+							org.kermeta.language.kp.loader.kp.api
                         </Export-Package>
                         <Require-Bundle>
-            				org.kermeta.language.model
+            				org.kermeta.kp.model
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

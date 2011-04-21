@@ -40,17 +40,11 @@
 							there with the Require-Bundle
 						-->
 						<Import-Package>
-							org.slf4j.*;version="${slf4j.version.range}",
-							org.kermeta.language.*,
-							org.kermeta.art2.*,
 							org.eclipse.emf.ecore.*,
 							org.eclipse.emf.common.*,
-							 org.eclipse.emf.validation.*,
 							org.kermeta.kp.*,
 							org.antlr.*,
-							scala.*,
-							org.osgi.framework;version="[1.5,2)",
-							!org.eclipse.core.*
+							org.osgi.framework;version="[1.5,2)"
 				    </Import-Package>
 						<!--
 							add extra element in the manifest, copy them from this file ex:
