@@ -73,7 +73,8 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
                 	//textRef.setCharBeginOffset(pe.getErrorOffset());
                 	//textRef.setCharBeginOffset(pe.line);
                 	//textRef.setCharEndOffset(pe.colonne);
-                	logger.logProblem(Kind.UserERROR, pe.getMessage(), "org.kermeta.language.loader.kmt.scala" , textRef);
+                	
+                	logger.logProblem(Kind.UserERROR, pe.errMsg(), "org.kermeta.language.loader.kmt.scala", pe , textRef);
                 } catch(MalformedURLException e) {
                 	logger.error("Malformed URL of file in parsing : "+uri, "MessageGROUP", e);
                 }
