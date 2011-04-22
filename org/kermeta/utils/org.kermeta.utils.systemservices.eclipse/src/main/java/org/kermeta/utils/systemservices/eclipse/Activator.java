@@ -7,7 +7,7 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.utils.systemservices.eclipse.api;
+package org.kermeta.utils.systemservices.eclipse;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;

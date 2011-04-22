@@ -52,6 +52,9 @@ that are useful for any program manipulating models.</description>
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
+							<Bundle-Activator>org.kermeta.utils.systemservices.eclipse.Activator</Bundle-Activator>
+							<Bundle-Localization>plugin</Bundle-Localization>
+							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Export-Package>								
                         org.kermeta.utils.systemservices.eclipse,
                         org.kermeta.utils.systemservices.eclipse.api

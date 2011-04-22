@@ -8,13 +8,13 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
+import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
 
 
@@ -56,6 +56,20 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup) {
 		// TODO Auto-generated method stub
+		// some error message should go to the eclipse error view
+		switch (msgKind) {
+		case UserWARNING:
+		case DevWARNING:
+			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",null));
+			break;
+		case UserERROR:
+		case DevERROR:
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",null));
+			break;
+		default:
+			break;
+		}
+		
 		// currently redirect to stdio
 		StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		stdioRedirect.log(msgKind, message, messageGroup);
@@ -64,6 +78,19 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup, Throwable exception) {
 		// TODO Auto-generated method stub
+		// some error message should go to the eclipse error view
+		switch (msgKind) {
+		case UserWARNING:
+		case DevWARNING:
+			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",null));
+			break;
+		case UserERROR:
+		case DevERROR:
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",null));
+			break;
+		default:
+			break;
+		}
 		// currently redirect to stdio
 		StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		stdioRedirect.log(msgKind, message, messageGroup, exception);

@@ -1,6 +1,5 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.resources.IFile;
@@ -14,7 +13,7 @@ import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
-import org.kermeta.utils.systemservices.eclipse.api.Activator;
+import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 
 public class EclipseReporter {
