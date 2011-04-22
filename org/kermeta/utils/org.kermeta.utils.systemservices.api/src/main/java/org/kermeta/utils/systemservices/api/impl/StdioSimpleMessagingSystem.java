@@ -36,7 +36,7 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
-	public void log(Kind msgKind, String message, String messageGroup,
+	public void logProblem(Kind msgKind, String message, String messageGroup,
 			Reference causeObject) {
 		
 		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message + " " + causeObject + " "+getCallerString());
@@ -44,7 +44,7 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
-	public void log(Kind msgKind, String message, String messageGroup,
+	public void logProblem(Kind msgKind, String message, String messageGroup,
 			Throwable throwable, Reference causeObject) {
 
 		StringWriter sw = new StringWriter();
@@ -109,6 +109,18 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 			// not able to get the caller 
 			return "";		
 		}
+	}
+
+	@Override
+	public void flushProblem(String messageGroup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void flushProblem(String messageGroup, Reference causeObject) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

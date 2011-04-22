@@ -25,8 +25,10 @@ public abstract class MessagingSystem {
 	
 	public abstract void log(Kind msgKind, String message, String messageGroup);
 	public abstract void log(Kind msgKind, String message, String messageGroup, Throwable senderTrace);
-	public abstract void log(Kind msgKind, String message, String messageGroup, Reference causeObject);
-	public abstract void log(Kind msgKind, String message, String messageGroup, Throwable senderTrace, Reference causeObject);
+	public abstract void logProblem(Kind msgKind, String message, String messageGroup, Reference causeObject);
+	public abstract void logProblem(Kind msgKind, String message, String messageGroup, Throwable senderTrace, Reference causeObject);
+	public abstract void flushProblem(String messageGroup);
+	public abstract void flushProblem(String messageGroup, Reference causeObject);
 	
 	
 	
