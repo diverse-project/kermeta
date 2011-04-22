@@ -119,11 +119,14 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Export-Package>
-							org.kermeta.language.resolver.art2.impl
+			org.kermeta.language.resolver.api,
+			org.kermeta.language.language.resolverrunner
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
-            org.kermeta.language.model,
+            org.kermeta.language.model,            
+            org.kermeta.language.resolver.api,
+			org.kermeta.utils.systemservices.api,
             org.kermeta.language.framework.scala
                         </Require-Bundle>
                         <Import-Package>
@@ -136,17 +139,8 @@
 			org.eclipse.emf.ecore.util,
 			org.eclipse.emf.ecore.xmi,
 			org.eclipse.emf.ecore.xmi.impl,
-			org.kermeta.art2.framework,
-			org.kermeta.art2.framework.osgi,
-			org.kermeta.art2.framework.port,
-			org.kermeta.language.api.art2.port.utils,
-			org.kermeta.language.api.messaging,
-			org.kermeta.language.api.port,
-			org.kermeta.language.api.result,
 			org.kermeta.language.structure,
-			org.kermeta.traceability,
 			org.osgi.framework;version="[1.5,2)",
-			org.slf4j;version="[1.5,2)",
 			scala,
 			scala.actors,
 			scala.collection,
