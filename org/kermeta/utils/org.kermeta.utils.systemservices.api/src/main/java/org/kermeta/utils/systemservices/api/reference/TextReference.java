@@ -51,6 +51,14 @@ public class TextReference extends org.kermeta.utils.systemservices.api.referenc
 
 		public void setEndLine(Integer endLine) {
 			this.endLine = endLine;
+		}
+
+		@Override
+		public String toString() {
+			
+			return this.getClass().getCanonicalName()+"("+fileURL+",offset["+beginOffset+","+endOffset+"],line["+beginLine+","+endLine+"])";
 		}	
 		
 	}
+
+	
