@@ -52,9 +52,12 @@ public class KPBuilder {
 		}
 	}
 	synchronized public void build(){
-		Job job = new Job("Kermeta builder root job") {
+		Job job = new Job("Kermeta builder job for "+kpProjectFile.getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
+					// currently don't know how to selectively put and flush markers, need to find a way to create dynamically markers or add an attribute in it ?
+					// or calculate where the marker may be put and remove only those ones ?
+					Activator.getDefault().getMessaggingSystem().flushProblem(Activator.PLUGIN_ID);
 					String kpFileURL = kpProjectFile.getRawLocation().toString();
 					File f = new File(kpFileURL);
 					String projectUri = f.getParentFile().getCanonicalPath();
