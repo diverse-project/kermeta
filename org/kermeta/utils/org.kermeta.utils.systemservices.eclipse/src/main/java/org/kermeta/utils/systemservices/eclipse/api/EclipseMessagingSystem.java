@@ -116,7 +116,19 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	@Override
 	public void logProblem(Kind kind, String msg, String msgGroup, Throwable exception,
 			Reference ref) {
-		logProblem(kind, msg + "\n"+exception.getStackTrace()[0], msgGroup, ref);
+		switch (kind) {
+		case UserWARNING:
+			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg);
+			break;
+		case UserERROR:
+			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg);
+			break;
+		default:
+			break;
+		}
+		// forward all message to usual log too, here we can use the stacktrace 
+		log(kind, msg + " "+ref, msgGroup, exception);
+		
 	}
 
 	@Override
