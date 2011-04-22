@@ -101,7 +101,7 @@ public class K2CompilerMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         org.apache.log4j.BasicConfigurator.configure();
-
+        //System.out.println("K2CompilerMojo.execute");
         this.getLog().info(output.getAbsolutePath());
         /* CHECK IF GENERATION IF OK */
         if (!CheckSumFileUtils.compareCheckSum(model.getAbsolutePath(), output.getAbsolutePath())) {
