@@ -26,6 +26,7 @@ public class KermetaBuilder extends IncrementalProjectBuilder {
 				break;
 			case IResourceDelta.REMOVED:
 				// handle removed resource
+				ParserCaller.specificParsing(resource);
 				break;
 			case IResourceDelta.CHANGED:
 				// handle changed resource

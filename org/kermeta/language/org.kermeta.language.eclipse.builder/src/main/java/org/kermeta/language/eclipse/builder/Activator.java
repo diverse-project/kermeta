@@ -1,8 +1,30 @@
+
+/*$Id:  $
+* License : EPL
+* Copyright : IRISA / INRIA 
+* ----------------------------------------------------------------------------
+* Creation date : 20 avr. 2011
+* Authors : 
+*      Didier Vojtisek <didier.vojtisek@inria.fr>
+*/
 package org.kermeta.language.eclipse.builder;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import java.io.InputStream;
+import java.net.URL;
+
+import org.eclipse.core.internal.registry.ExtensionRegistry;
+import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.ContributorFactoryOSGi;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.osgi.framework.BundleContext;
+
+
 
 /**
  * The activator class controls the plug-in life cycle
@@ -10,10 +32,14 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "ergzdfg";
+	public static final String PLUGIN_ID = "org.kermeta.language.eclipse.builder"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
+	
+	protected MessagingSystem messaggingSystem;
+
+	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
 	
 	/**
 	 * The constructor
@@ -28,6 +54,9 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		messaggingSystem = new StdioSimpleMessagingSystem();
+		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 	}
 
 	/*
@@ -48,14 +77,11 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	public MessagingSystem getMessaggingSystem() {
+		return messaggingSystem;
 	}
+
+
+	
+
 }
