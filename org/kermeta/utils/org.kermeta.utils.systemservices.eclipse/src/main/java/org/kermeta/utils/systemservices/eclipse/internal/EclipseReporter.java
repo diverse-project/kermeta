@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -76,5 +77,14 @@ public class EclipseReporter {
 		}
 		cleanString = cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
 		return cleanString;
+	}
+
+	public void flushProblem(String problemGroup) {
+		try {
+			IResource file = ResourcesPlugin.getWorkspace().getRoot();		
+			file.deleteMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE);
+		} catch (CoreException e) {
+			ms.log(Kind.DevERROR, "Failed to flush markers for group "+problemGroup, Activator.PLUGIN_ID, e);
+		}	
 	}
 }

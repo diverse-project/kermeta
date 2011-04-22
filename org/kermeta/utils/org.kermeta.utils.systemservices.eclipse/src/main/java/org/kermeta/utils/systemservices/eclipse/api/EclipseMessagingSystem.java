@@ -10,6 +10,7 @@ package org.kermeta.utils.systemservices.eclipse.api;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -99,9 +100,8 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
-	public void flushProblem(String arg0) {
-		// TODO Auto-generated method stub
-		
+	public void flushProblem(String problemGroup) {
+		eclipseReporter.flushProblem(problemGroup);
 	}
 
 	@Override
