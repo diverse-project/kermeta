@@ -192,12 +192,14 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Export-Package>
-							org.kermeta.language.merger.merger,
-							org.kermeta.language.language.merger.binarymergerrunner,
+							org.kermeta.language.merger.binarymerger.api,
+							org.kermeta.language.merger,
+							org.kermeta.language.language.merger.binarymergerrunner
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
             org.kermeta.language.model,
+			org.kermeta.language.merger.binarymerger.api,
             org.kermeta.language.framework.scala
                         </Require-Bundle>
                         <Import-Package>
@@ -211,7 +213,6 @@
 			org.eclipse.emf.ecore.xmi,
 			org.eclipse.emf.ecore.xmi.impl,
 			org.kermeta.language.structure,
-			org.kermeta.traceability,
 			org.osgi.framework;version="[1.5,2)",
 			org.slf4j;version="[1.5,2)",
 			scala,
