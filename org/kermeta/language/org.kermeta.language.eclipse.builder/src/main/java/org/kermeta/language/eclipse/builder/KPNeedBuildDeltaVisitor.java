@@ -56,6 +56,9 @@ public class KPNeedBuildDeltaVisitor implements IResourceDeltaVisitor {
 		IResource res = delta.getResource();
 		switch( delta.getResource().getType() ) {
 		case IResource.FILE :
+			if ((delta.getFlags() & IResourceDelta.CONTENT) == 0)
+				  // we care only about content change
+                return false;
 			try {
 				for(URL concernedURL : concernedURLs){
 					if (res.getRawLocationURI().toURL().sameFile(concernedURL)){

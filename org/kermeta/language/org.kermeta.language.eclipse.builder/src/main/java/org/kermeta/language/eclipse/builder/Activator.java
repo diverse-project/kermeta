@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.osgi.framework.BundleContext;
 
 
@@ -54,7 +55,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		messaggingSystem = new StdioSimpleMessagingSystem();
+		messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "Kermeta builder console");
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 	}
