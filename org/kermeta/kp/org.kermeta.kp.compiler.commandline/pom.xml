@@ -40,11 +40,14 @@
                         </Export-Package>
 						<Require-Bundle>
 							org.kermeta.utils.systemservices.api,
+							
+            				fr.irisa.triskell.kermeta.model,
+							org.kermeta.language.framework.scala,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.merger.binarymerger,
+							org.kermeta.language.resolver,
 							org.kermeta.kp.model,
 							org.kermeta.kp.loader.kp,
-            				fr.irisa.triskell.kermeta.model,
 							org.kermeta.language.model,
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.xmi,

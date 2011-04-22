@@ -299,7 +299,7 @@ public class KermetaCompiler {
 	public ModelingUnit mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		// Convert Modellingunit For Merger
-		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
+		// not useful now ? utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
 		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
 		for (ModelingUnit mu : modelingUnits){			
 			convertedModellingUnits.add( new ModelingUnitConverter().convert(mu));
@@ -321,12 +321,12 @@ public class KermetaCompiler {
 	
 	
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
-		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
+		//utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetGeneratedSourceFolder+"/"+INTERMEDIATE_SUBFOLDER+"/beforeResolving.km").convert(mu);
 		
 		//Resolving
-		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.RichFactory
+		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory
 		.createFullStaticResolver();
 		
 		ModelingUnit resolvedMU = resolver.doResolving(convertedModelingUnit);
