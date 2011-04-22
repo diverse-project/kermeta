@@ -8,6 +8,9 @@
 */
 package org.kermeta.utils.systemservices.api.impl;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 
@@ -19,27 +22,35 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup) {
-		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message);
+		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message +" "+getCallerString());
 	}
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup,
-			Throwable senderTrace) {
-		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message + " "+ senderTrace.getStackTrace().toString());		
+			Throwable throwable) {
+		StringWriter sw = new StringWriter();
+		throwable.printStackTrace(new PrintWriter(sw));
+		String stackTrace = sw.toString();
+		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message + " "+getCallerString()+"\n"+ stackTrace);
+		
 	}
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup,
 			Reference causeObject) {
 		
-		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message + " " + causeObject);
+		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message + " " + causeObject + " "+getCallerString());
 
 	}
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup,
-			Throwable senderTrace, Reference causeObject) {
-		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message+ " " + causeObject + " "+ senderTrace.getStackTrace().toString());
+			Throwable throwable, Reference causeObject) {
+
+		StringWriter sw = new StringWriter();
+		throwable.printStackTrace(new PrintWriter(sw));
+		String stackTrace = sw.toString();
+		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message+ " " + causeObject + " "+getCallerString()+"\n"+ stackTrace);
 
 	}
 
@@ -83,6 +94,21 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 		}
 		return "";
 	}
-	
+	/**
+	 * identify the caller of this message
+	 * @return
+	 */
+	protected String getCallerString(){
+		Exception e = new Exception();
+		
+		StackTraceElement[] stackTraceElements = e.getStackTrace();
+		if (stackTraceElements.length > 2){
+			return stackTraceElements[2].toString();
+		}
+		else {
+			// not able to get the caller 
+			return "";		
+		}
+	}
 	
 }
