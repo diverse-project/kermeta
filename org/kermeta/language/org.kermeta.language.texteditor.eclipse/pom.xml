@@ -122,16 +122,6 @@
 			<artifactId>utils.systemservices.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.error.report.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.error.report.eclipse.api</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -167,8 +157,6 @@
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
 							org.kermeta.language.texteditor.api,
-							org.kermeta.utils.error.report.eclipse,
-							org.kermeta.utils.error.report.api,
 							org.kermeta.utils.systemservices.api
                         </Require-Bundle>
 		            </manifestEntries>		            
