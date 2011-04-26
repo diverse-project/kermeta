@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="KermetaSlicer" relationsToNotify="//@relationsFocus.1 //@relationsFocus.0">
+  <relationsFocus name="superType" isOption="true">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </relationsFocus>
+  <relationsFocus name="lowerType" createOpposite="true" isOption="true">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </relationsFocus>
+  <relationsFocus name="typeDefinition" isOption="true">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </relationsFocus>
+  <relationsFocus name="ownedAttribute" isOption="true">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </relationsFocus>
+  <relationsFocus name="type">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </relationsFocus>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Property"/>
+</prunerGenerator:Pruning>

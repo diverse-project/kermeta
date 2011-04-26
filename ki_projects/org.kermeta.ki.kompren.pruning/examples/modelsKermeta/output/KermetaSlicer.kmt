@@ -1,0 +1,81 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "KermetaSlicerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class KermetaSlicer {
+	attribute considersuperType : Boolean
+
+	attribute considersuperTypeOpposite : Boolean
+
+	attribute considertypeDefinition : Boolean
+
+	attribute considerownedAttribute : Boolean
+
+	attribute considercontainedType : Boolean
+
+	reference requiredClassDefinitions : ClassDefinition[0..*]
+
+	reference addedClassDefinitions : Bag<ClassDefinition>
+
+	reference addedPropertys : Bag<Property>
+
+	reference addedsuperType : Bag<ClasssuperType>
+
+	reference addedsuperTypeOpposite : Bag<ClasssuperTypeOpposite>
+
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], considersuperType : Boolean, considersuperTypeOpposite : Boolean, considertypeDefinition : Boolean, considerownedAttribute : Boolean, considercontainedType : Boolean) : KermetaSlicer is do
+		result := self
+		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.addedPropertys := Bag<Property>.new
+		self.addedsuperType := Bag<ClasssuperType>.new
+		self.addedsuperTypeOpposite := Bag<ClasssuperTypeOpposite>.new
+		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
+		self.considersuperType := considersuperType
+		self.considersuperTypeOpposite := considersuperTypeOpposite
+		self.considertypeDefinition := considertypeDefinition
+		self.considerownedAttribute := considerownedAttribute
+		self.considercontainedType := considercontainedType
+	end
+
+	operation launch() : Void is do
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
+		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
+		self.addedPropertys.each{theProperty | onPropertyAdded(theProperty) }
+		self.addedsuperType.each{thesuperType | self.onsuperTypeAdded(thesuperType.src, thesuperType.tar) }
+		self.addedsuperTypeOpposite.each{thesuperTypeOpposite | self.onsuperTypeOppositeAdded(thesuperTypeOpposite.src, thesuperTypeOpposite.tar) }
+		ended()
+	end
+
+	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
+	end
+	operation onPropertyAdded(theProperty : Property) : Void is do
+	end
+	operation onsuperTypeAdded(src : TypeDefinition, tar : Type) : Void is do
+	end
+	operation onsuperTypeOppositeAdded(src : Type, tar : TypeDefinition) : Void is do
+	end
+	operation ended() : Void is do
+	end
+}
+class ClasssuperType {
+	reference src : TypeDefinition
+	reference tar : Type
+	operation initialise(src : TypeDefinition, tar : Type) : ClasssuperType is do
+		result := self
+		self.src := src
+		self.tar := tar
+	end
+}
+class ClasssuperTypeOpposite {
+	reference src : Type
+	reference tar : TypeDefinition
+	operation initialise(src : Type, tar : TypeDefinition) : ClasssuperTypeOpposite is do
+		result := self
+		self.src := src
+		self.tar := tar
+	end
+}
