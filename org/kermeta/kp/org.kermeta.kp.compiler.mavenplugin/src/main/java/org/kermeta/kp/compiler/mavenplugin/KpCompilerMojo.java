@@ -25,7 +25,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import org.kermeta.language.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
@@ -151,13 +151,13 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
 	        
 	        KermetaCompiler.initializeFactory();
-	        KermetaCompiler compiler = new KermetaCompiler(targetDirectory.toString(), 
-	        		sourceOutputDirectory.toString(),
-	        		generateKmOnly,
-	        		intermediateFilesRequired, classPathList, 
-	        		new StdioSimpleMessagingSystem());
+	        KermetaCompiler compiler = new KermetaCompiler(true,
+	        		new StdioSimpleMessagingSystem(),
+	        		intermediateFilesRequired,
+	        		sourceOutputDirectory.toString()
+	        		 );
 			
-			compiler.kp2bytecode(kp.toString());
+			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
                     throw new MojoExecutionException(compiler.errorMessage);
                 }
