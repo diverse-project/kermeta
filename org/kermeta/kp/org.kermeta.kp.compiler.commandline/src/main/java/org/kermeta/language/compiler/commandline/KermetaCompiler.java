@@ -53,61 +53,35 @@ public class KermetaCompiler {
 	
 	
 	public Boolean saveIntermediateFiles = false;
-	public Boolean generateKmOnly = false;
-	public String targetFolder;
-	public String targetGeneratedSourceFolder;
 	public String targetIntermediateFolder;
 	public MessagingSystem logger;
-	public List<String> additionalClassPath = new java.util.ArrayList<String>();
-	public String projectName = "project";
+	// public List<String> additionalClassPath = new java.util.ArrayList<String>();
+	// public String projectName = "project";
 	public KpVariableExpander variableExpander;
         public Boolean useFSC = false;  // separate compilation server
 
         public Boolean hasFailed = false;
         public String errorMessage = "";
 	
-	/**
-	 * Constructor
-	 * @param targetFolder
-	 * @param saveIntermediateFiles
-	 */
-	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, MessagingSystem logger) {
-		super();
-		this.saveIntermediateFiles = saveIntermediateFiles;
-		this.generateKmOnly = generateKmOnly;
-		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
-		this.targetFolder = targetFolder;
-		this.logger = logger;
-		registerMVNUrlHandler();
-	}
+
 	
-	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, Boolean registerProtocols, MessagingSystem logger) {
+	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger) {
 		super();
-		this.saveIntermediateFiles = saveIntermediateFiles;
-		this.generateKmOnly = generateKmOnly;
-		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
-		this.targetFolder = targetFolder;
 		this.logger = logger;
 		if(registerProtocols){
 			registerMVNUrlHandler();
 		}
 	}
-	/**
-	 * Constructor
-	 * @param targetFolder
-	 * @param saveIntermediateFiles
-	 */
-	public KermetaCompiler(String targetFolder, String targetGeneratedSourceFolder, Boolean generateKmOnly, Boolean saveIntermediateFiles, List<String> additionalClassPath, MessagingSystem logger) {
+	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder) {
 		super();
-		this.saveIntermediateFiles = saveIntermediateFiles;
-		this.generateKmOnly = generateKmOnly;
-		this.targetFolder = targetFolder;
-		this.targetGeneratedSourceFolder = targetGeneratedSourceFolder;
-		this.additionalClassPath.addAll(additionalClassPath);
 		this.logger = logger;
-		
-		registerMVNUrlHandler();
+		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.targetIntermediateFolder = targetIntermediateFolder;
+		if(registerProtocols){
+			registerMVNUrlHandler();
+		}
 	}
+
 
 	private void registerMVNUrlHandler() {
 		StringBuffer results = new StringBuffer();
@@ -131,7 +105,7 @@ public class KermetaCompiler {
 		org.ops4j.pax.url.mvn.Handler h =new org.ops4j.pax.url.mvn.Handler();
 		ExtensibleURLStreamHandlerFactory.installUrlStreamHandlerFactory();
 		ExtensibleURLStreamHandlerFactory.registerHandler("mvn", h);
-		System.out.println(results);
+		logger.debug(results.toString(), this.getClass().getName());
 		
 	}
 
@@ -144,19 +118,21 @@ public class KermetaCompiler {
 		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();		
 	}
 	
-	public KermetaCompiler(String targetFolder){
+/*	public KermetaCompiler(String targetFolder){
 		// make sure initialize has been call : note that if some other EMF related things have 
 		// been done before, the initialize should be done earlier too
 		initializeFactory();
 		this.targetFolder = targetFolder;
-	}
+	}*/
 	
 	/**
 	 * Main process
 	 * @param kpFileURL
 	 * @throws IOException
 	 */
-	public void kp2bytecode(String kpFileURL) throws IOException {
+	public void kp2bytecode(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+		String projectName = "project";
+		
 		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
@@ -185,13 +161,13 @@ public class KermetaCompiler {
 				// compiler require a file location not an URL
 			logger.progress("KermetaCompiler.kp2bytecode", "Generating scala...", this.getClass().getName(), 1);
 			String fileLocation = mergedFile.toURI().toURL().getFile();
-			km2Scala(kp, varExpander, fileLocation);
+			km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
 			logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", this.getClass().getName(), 1);
 			// deal with scala to bytecode
-			scala2bytecode();
+			scala2bytecode(additionalClassPath);
 		}
 		else{
-			System.out.println("generateKmOnly flag set => Ignore scala generation");
+			logger.info("generateKmOnly flag set => Ignore scala generation", this.getClass().getName());
 		}
 		logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", this.getClass().getName());
 	}	
@@ -212,14 +188,14 @@ public class KermetaCompiler {
 				SourceQuery srcQuery = (SourceQuery) src;
 				String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
 				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
-				System.out.println("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")");
+				logger.debug("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")", this.getClass().getName());
 				
 				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(indirectURL);
 				if (mu != null) {
 					modelingUnits.add(mu);
 				}
 				else {
-					System.err.println("Empty ModelingUnit, failed to load " +indirectURL);
+					logger.error("Empty ModelingUnit, failed to load " +indirectURL, this.getClass().getName(), new Exception());
 				}
 			}
 			else{
@@ -229,10 +205,10 @@ public class KermetaCompiler {
 				if (sourceURLWithVariable.contains("${")){
 					// deal with variable expansion
 					
-					System.out.println("sourceURL : " + sourceURLWithVariable + " (expanded to : " +sourceURL +")");
+					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " +sourceURL +")", this.getClass().getName());
 				}
 				else{
-					System.out.println("sourceURL : " + sourceURLWithVariable);
+					logger.debug("sourceURL : " + sourceURLWithVariable, this.getClass().getName());
 				}
 				// usual internal source
 				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(sourceURL);
@@ -244,7 +220,7 @@ public class KermetaCompiler {
 					modelingUnits.add(mu);
 				}
 				else {
-					System.err.println("Empty ModelingUnit, failed to load " +sourceURL);
+					logger.error("Empty ModelingUnit, failed to load " +sourceURL, this.getClass().getName(), new Exception());
 				}
 			}
 		}
@@ -256,10 +232,10 @@ public class KermetaCompiler {
 			String dependencyURL = varExpander.expandVariables(dependencyURLWithVariable);
 			if (dependencyURLWithVariable.contains("${")){
 				// deal with variable expansion
-				System.out.println("dependency : " + dependencyURLWithVariable + " ( expanded to : " +dependencyURL+")");
+				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " +dependencyURL+")", this.getClass().getName());
 			}
 			else{
-				System.out.println("dependency : " + dependencyURLWithVariable);
+				logger.debug("dependency : " + dependencyURLWithVariable, this.getClass().getName());
 			}
 			
 			KermetaProject dependencyKP = null;
@@ -277,7 +253,7 @@ public class KermetaCompiler {
 		    
 		    // try to load the associated merged km
 		    if(dependencyKP == null){
-		    	System.out.println("   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ");
+		    	logger.warn("   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", this.getClass().getName(), new Exception());
 		    }
 		    else{
 		    	// load the km file resulting from the merge of the dependency
@@ -323,7 +299,7 @@ public class KermetaCompiler {
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
 		//utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetGeneratedSourceFolder+"/"+INTERMEDIATE_SUBFOLDER+"/beforeResolving.km").convert(mu);
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeResolving.km").convert(mu);
 		
 		//Resolving
 		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory
@@ -341,7 +317,7 @@ public class KermetaCompiler {
 	
 	
 
-	public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL) {
+	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder) {
             GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder+"/"+INTERMEDIATE_SCALA_SUBFOLDER);
             GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder+"/"+INTERMEDIATE_SUBFOLDER);
             GlobalConfiguration.outputBinFolder_$eq(targetFolder+"/classes");
@@ -376,7 +352,7 @@ public class KermetaCompiler {
             km2ScalaCompiler.compile(kmFileURL);
 	}
 	
-    private void scala2bytecode() {
+    private void scala2bytecode(List<String> additionalClassPath) {
        // scala.collection.immutable.List<String> classpath = org.embedded.EmbettedScalaCompiler.getActualClasspath();
        //java.util.List<String> additionalClassPath = new java.util.ArrayList<String>();
       // additionalClassPath.add("mvn:org.scala-lang/scala-library/2.8.1");
@@ -391,10 +367,10 @@ public class KermetaCompiler {
                                 System.out);
         */
        
-       System.out.println("Compiling generated scala to bytecode in "+GlobalConfiguration.outputBinFolder());
-       System.out.println("Classpath:");
+       logger.info("Compiling generated scala to bytecode in "+GlobalConfiguration.outputBinFolder(), this.getClass().getName());
+       logger.debug("Classpath:",this.getClass().getName());
        for(String path : additionalClassPath){
-           System.out.println("\t"+path);
+           logger.debug("\t"+path, this.getClass().getName());
        }
        if (EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(),true,additionalClassPath,useFSC) != 0){
            hasFailed = true;
