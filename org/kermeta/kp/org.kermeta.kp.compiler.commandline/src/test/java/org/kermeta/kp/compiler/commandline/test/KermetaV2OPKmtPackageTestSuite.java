@@ -3,7 +3,7 @@ package org.kermeta.kp.compiler.commandline.test;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.kermeta.language.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 
 public class KermetaV2OPKmtPackageTestSuite extends TestSuite {
 	

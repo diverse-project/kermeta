@@ -5,7 +5,7 @@
  * Authors  : 
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
-package org.kermeta.language.compiler.commandline.urlhandler;
+package org.kermeta.kp.compiler.commandline.urlhandler;
 
 import java.net.URL;
 import java.net.URLStreamHandler;

@@ -5,7 +5,7 @@
  * Authors  : 
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
-package org.kermeta.language.compiler.commandline;
+package org.kermeta.kp.compiler.commandline;
 
 import java.io.IOException;
 import java.util.Map;

@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.kermeta.language.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

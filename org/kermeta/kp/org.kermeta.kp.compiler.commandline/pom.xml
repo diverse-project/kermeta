@@ -36,7 +36,7 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 						<Export-Package>
-								org.kermeta.language.compiler.commandline
+								org.kermeta.kp.compiler.commandline
                         </Export-Package>
 						<Require-Bundle>
 							org.kermeta.utils.systemservices.api,

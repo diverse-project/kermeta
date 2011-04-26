@@ -5,7 +5,7 @@
  * Authors  : 
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
-package org.kermeta.language.compiler.commandline;
+package org.kermeta.kp.compiler.commandline;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,8 +30,8 @@ import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
+import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
-import org.kermeta.language.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.structure.ModelingUnit;
 //import scala.collection.JavaConversions.JListWrapper;
