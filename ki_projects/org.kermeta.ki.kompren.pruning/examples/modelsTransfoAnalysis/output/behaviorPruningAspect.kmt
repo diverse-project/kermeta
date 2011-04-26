@@ -1,0 +1,275 @@
+package org::kermeta::language::behavior;
+require kermeta
+require "KermetaStaticAnalysisAspect.kmt"
+using kermeta::standard
+using org::kermeta::language::structure
+
+aspect class Expression inherits PruningVisitorAspect {
+}
+
+aspect class VariableDecl {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.type.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.type.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class CallTypeLiteral {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.typeref.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.typeref.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class LambdaExpression {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.body.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.body.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class LambdaParameter inherits PruningVisitorAspect {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.type.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.type.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Conditional {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.condition.visitToAddClasses(theKermetaStaticAnalysis)
+			if(not self.elseBody.isVoid) then self.elseBody.visitToAddClasses(theKermetaStaticAnalysis) end
+			self.thenBody.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.condition.visitToAddRelations(theKermetaStaticAnalysis)
+			if(not self.elseBody.isVoid) then self.elseBody.visitToAddRelations(theKermetaStaticAnalysis) end
+			self.thenBody.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Raise {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.expression.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.expression.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Loop {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			if(not self.initialization.isVoid) then self.initialization.visitToAddClasses(theKermetaStaticAnalysis) end
+			if(not self.body.isVoid) then self.body.visitToAddClasses(theKermetaStaticAnalysis) end
+			self.stopCondition.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.initialization.isVoid) then self.initialization.visitToAddRelations(theKermetaStaticAnalysis) end
+			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaStaticAnalysis) end
+			self.stopCondition.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Block {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.statement.each{theExpression | theExpression.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.rescueBlock.each{theRescue | theRescue.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.statement.each{theExpression | theExpression.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.rescueBlock.each{theRescue | theRescue.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class CallExpression {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.parameters.each{theExpression | theExpression.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.parameters.each{theExpression | theExpression.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Assignment {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.target.visitToAddClasses(theKermetaStaticAnalysis)
+			self.~value.visitToAddClasses(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.target.visitToAddRelations(theKermetaStaticAnalysis)
+			self.~value.visitToAddRelations(theKermetaStaticAnalysis)
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class CallFeature {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			if(not self.target.isVoid) then self.target.visitToAddClasses(theKermetaStaticAnalysis) end
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.target.isVoid) then self.target.visitToAddRelations(theKermetaStaticAnalysis) end
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Rescue inherits PruningVisitorAspect {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.body.each{theExpression | theExpression.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) : Void is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.body.each{theExpression | theExpression.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+

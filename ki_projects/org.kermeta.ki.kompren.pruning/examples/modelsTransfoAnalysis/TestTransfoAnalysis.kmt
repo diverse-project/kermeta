@@ -1,0 +1,68 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::language::structure::Test"
+@mainOperation "main"
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "output/KermetaStaticAnalysis.kmt"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+
+
+class Test {
+	operation main() : Void is do
+		var inputRep : EMFRepository init EMFRepository.new
+		var inputRes : EMFResource
+		inputRes ?= inputRep.createResource("./AfterStaticSetting__HelloWorldMiniframework.km", 
+							"platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		inputRes.load()
+		var mu : org::kermeta::language::structure::ModelingUnit
+		mu ?= inputRes.one
+		stdio.writeln(inputRes.one.toString)
+		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
+		requiredMU.add(mu)
+		var pruning : PrintKermetaPruner init PrintKermetaPruner.new.initialise(requiredMU).asType(PrintKermetaPruner)
+		
+		pruning.launch()
+	end
+}
+
+
+class PrintKermetaPruner inherits KermetaStaticAnalysis {
+	reference inputClassDefs : ClassDefinition[0..*]
+	reference umlMetamodel : ModelingUnit
+	
+	operation initialisation() : Void is do
+		var inputRep : EMFRepository init EMFRepository.new
+		var inputRes : EMFResource
+		inputRes ?= inputRep.createResource("./UML.km", "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		inputRes.load()
+		umlMetamodel ?= inputRes.one
+	end
+	
+	operation addClassDefinition(cd : ClassDefinition) : Void is do
+		//if(umlMetamodel.contains(cd)) then inputClassDefs.add(cd) end
+		inputClassDefs.add(cd)
+	end
+
+	method onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
+		super(theClassDefinition)
+		stdio.writeln("ClassDefinition:" + theClassDefinition.name)
+		addClassDefinition(theClassDefinition)
+	end
+	method onEnumerationAdded(theEnum : Enumeration) : Void is do
+		super(theEnum)
+		stdio.writeln("theEnum:" + theEnum.name)
+	end
+}
+
+

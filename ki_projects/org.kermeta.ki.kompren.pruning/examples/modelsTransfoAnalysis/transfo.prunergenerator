@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prunerGenerator:Pruning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:prunerGenerator="http://pruningGenerator.org" name="KermetaStaticAnalysis">
+  <relationsFocus name="packages">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ModelingUnit/packages"/>
+  </relationsFocus>
+  <relationsFocus name="nestedPackage">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Package/nestedPackage"/>
+  </relationsFocus>
+  <relationsFocus name="ownedTypeDefinition">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+  </relationsFocus>
+  <relationsFocus name="ownedOperation">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Class/ownedOperation"/>
+  </relationsFocus>
+  <relationsFocus name="ownedParameter">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </relationsFocus>
+  <relationsFocus name="type">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </relationsFocus>
+  <relationsFocus name="typeDefinition">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </relationsFocus>
+  <relationsFocus name="ownedAttribute">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </relationsFocus>
+  <relationsFocus name="superType">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </relationsFocus>
+  <relationsFocus name="body">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Operation/body"/>
+  </relationsFocus>
+  <relationsFocus name="type">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/VariableDecl/type"/>
+  </relationsFocus>
+  <relationsFocus name="typeref">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallTypeLiteral/typeref"/>
+  </relationsFocus>
+  <relationsFocus name="parameters">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/LambdaExpression/parameters"/>
+  </relationsFocus>
+  <relationsFocus name="body">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/LambdaExpression/body"/>
+  </relationsFocus>
+  <relationsFocus name="type">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/LambdaParameter/type"/>
+  </relationsFocus>
+  <relationsFocus name="condition">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Conditional/condition"/>
+  </relationsFocus>
+  <relationsFocus name="elseBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Conditional/elseBody"/>
+  </relationsFocus>
+  <relationsFocus name="thenBody">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Conditional/thenBody"/>
+  </relationsFocus>
+  <relationsFocus name="expression">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Raise/expression"/>
+  </relationsFocus>
+  <relationsFocus name="initialization">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Loop/initialization"/>
+  </relationsFocus>
+  <relationsFocus name="body">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Loop/body"/>
+  </relationsFocus>
+  <relationsFocus name="stopCondition">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Loop/stopCondition"/>
+  </relationsFocus>
+  <relationsFocus name="statement">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Block/statement"/>
+  </relationsFocus>
+  <relationsFocus name="parameters">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallExpression/parameters"/>
+  </relationsFocus>
+  <relationsFocus name="target">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Assignment/target"/>
+  </relationsFocus>
+  <relationsFocus name="value">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Assignment/value"/>
+  </relationsFocus>
+  <relationsFocus name="target">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/CallFeature/target"/>
+  </relationsFocus>
+  <relationsFocus name="rescueBlock">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Block/rescueBlock"/>
+  </relationsFocus>
+  <relationsFocus name="body">
+    <relation href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/behavior/Rescue/body"/>
+  </relationsFocus>
+  <requiredClasses href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ModelingUnit"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/Enumeration"/>
+  <classesToNotify href="../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+</prunerGenerator:Pruning>

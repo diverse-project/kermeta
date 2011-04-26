@@ -1,0 +1,38 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "KermetaStaticAnalysisAspect.kmt"
+require "behaviorPruningAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::behavior
+class KermetaStaticAnalysis {
+	reference requiredModelingUnits : ModelingUnit[0..*]
+
+	reference addedEnumerations : Bag<Enumeration>
+
+	reference addedClassDefinitions : Bag<ClassDefinition>
+
+	operation initialise(requiredModelingUnits : bag ModelingUnit[0..*]) : KermetaStaticAnalysis is do
+		result := self
+		self.addedEnumerations := Bag<Enumeration>.new
+		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.requiredModelingUnits.addAll(requiredModelingUnits)
+	end
+
+	operation launch() : Void is do
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
+		self.addedEnumerations.each{theEnumeration | onEnumerationAdded(theEnumeration) }
+		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
+		ended()
+	end
+
+	operation onEnumerationAdded(theEnumeration : Enumeration) : Void is do
+	end
+	operation onClassDefinitionAdded(theClassDefinition : ClassDefinition) : Void is do
+	end
+	operation ended() : Void is do
+	end
+}
