@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>fr.irisa.triskell.cache.utilities</groupId>
-  <artifactId>fr.irisa.triskell.cache.utilities</artifactId>
+  <groupId>fr.irisa.triskell.utilities</groupId>
+  <artifactId>cache.utilities</artifactId>
   <version>0.1.0</version>
   <name>Triskell - Cache Utilities</name>
 	<repositories>
@@ -36,6 +36,7 @@
 					<instructions>
 					<!-- <Include-Resource>resources</Include-Resource> -->
 					<Bundle-Classpath>.</Bundle-Classpath>
+					<Bundle-SymbolicName>fr.irisa.triskell.cache.utilities</Bundle-SymbolicName>
 					<Export-Package>fr.irisa.triskell.cache.utilities</Export-Package>
 					<!-- <Bundle-Activator>org.entimid.ui.inf.Main</Bundle-Activator> -->
 					<Import-Package>*</Import-Package>
