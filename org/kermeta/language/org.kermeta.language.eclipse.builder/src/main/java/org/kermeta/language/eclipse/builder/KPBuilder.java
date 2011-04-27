@@ -10,6 +10,8 @@ package org.kermeta.language.eclipse.builder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceDelta;
@@ -18,7 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.kermeta.language.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
@@ -62,9 +64,9 @@ public class KPBuilder {
 					File f = new File(kpFileURL);
 					String projectUri = f.getParentFile().getCanonicalPath();
 					String outputFolder = projectUri+"/target";
-					KermetaCompiler compiler = new KermetaCompiler(outputFolder,outputFolder,true, true,false, Activator.getDefault().getMessaggingSystem());
+					KermetaCompiler compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), true,outputFolder );
 				
-					compiler.kp2bytecode(kpFileURL);
+					compiler.kp2bytecode(kpFileURL, outputFolder,outputFolder, new ArrayList<String>(),true);
 				} catch (IOException e) {
 					Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
 				}
