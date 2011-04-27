@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.irisa.triskell.cache.utilities</groupId>
   <artifactId>fr.irisa.triskell.cache.utilities</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0</version>
   <name>Triskell - Cache Utilities</name>
 	<repositories>
 		<repository>
@@ -45,19 +45,19 @@
 		</plugins>
 	</build>
 	<distributionManagement>
-		<repository>
-      		<id>tipimouss-local-maven-repository</id>
-      		<name>Tipimouss Local release repository</name>
-      		<url>file:/var/www/html/maven2</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</repository>
-    	<snapshotRepository>
-      		<id>tipimouss-local-maven-snapshot-repository</id>
-      		<name>Tipimouss Local  snapshot repository</name>
-      		<url>file:/var/www/html/maven2-snapshots</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</snapshotRepository>
-	</distributionManagement>
+        <repository>
+            <id>kermeta-public-release</id>
+            <name>Kermeta public release repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>kermeta-public-snapshot</id>
+            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 	<profiles>
         <profile>
             <id>sonar</id>
