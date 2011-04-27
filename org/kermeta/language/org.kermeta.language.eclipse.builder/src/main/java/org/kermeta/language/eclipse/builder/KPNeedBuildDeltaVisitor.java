@@ -21,8 +21,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
-import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
+import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
 
