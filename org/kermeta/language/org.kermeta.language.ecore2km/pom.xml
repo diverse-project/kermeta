@@ -56,6 +56,11 @@
 			<artifactId>language.ecore2km.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+			<artifactId>traceability.mdk</artifactId>
+			<version>2.0.2-SNAPSHOT</version>
+		</dependency>
 		<!--  <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>language.api.tests</artifactId>

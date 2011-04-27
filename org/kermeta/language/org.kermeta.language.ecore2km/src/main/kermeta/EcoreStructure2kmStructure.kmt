@@ -11,10 +11,12 @@ require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreQu
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2kmAspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.traceability.mdk/src/kermeta/TraceRegistry_org.kermeta.traceability.mdk.kmt"
 
 using kermeta::utils
 using ecore
 using org::kermeta::language::structure
+using org::kermeta::traceability
 
 
 /**
@@ -26,6 +28,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	reference modelingUnit : ModelingUnit
 	
 	reference primitiveTypeMappings : Hashtable<String,String>
+	
+	reference traceRegistry : TraceRegistry
 
 
 	/**
@@ -33,9 +37,11 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * all the created elements will be inserted; a package that corresponds to
 	 * the root ecore package to convert.
 	 */
-	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, modelingUnit : ModelingUnit) : Void is do
+	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, 
+					  modelingUnit : ModelingUnit, traceRegistry : TraceRegistry) : Void is do
 		self.modelingUnit := modelingUnit
 		self.primitiveTypeMappings := primitiveTypeMappings
+		self.traceRegistry := traceRegistry
 		// Launching the conversion.
 		pkg.accept(self)
 	end
@@ -77,6 +83,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		// A reference of the new Kermeta package is then added to its corresponding
 		// Ecore package. This reference will be used to create sub-packages as explained above.
 		pkg.targetKermetaObject := kmPkg
+		traceRegistry.addTraceFromObjects(pkg, kmPkg, void)
 
 		super(pkg)
 	end
@@ -98,6 +105,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
 			// Linking the Kermeta operation to the Ecore operation.
 			op.targetKermetaObject := kmOp
+			traceRegistry.addTraceFromObjects(op, kmOp, void)
 		end
 		
 		super(op)
@@ -114,6 +122,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
 			// Linking the created Kermeta property to the Ecore attribute.
 			eAttr.targetKermetaObject := prop
+			traceRegistry.addTraceFromObjects(eAttr, prop, void)
 		end
 		
 		super(eAttr)
@@ -168,7 +177,6 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 						typeName := "kermeta::standard::Object"
 					end 
 				else
-stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQualifiedName() + " " + checkEObjectType(type.getQualifiedName()))
 					if(type.hasInstanceClassName) then
 						typeName := checkEObjectType(type.instanceClassName)
 					else
@@ -214,6 +222,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 					genType.targetKermetaObject := type
 					// Adding the created unresolved type to its parent.
 					object.targetKermetaObject.asType(UnresolvedType).generics.add(type)
+					traceRegistry.addTraceFromObjects(genType, type, void)
 				end
 			end
 		end
@@ -252,6 +261,8 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			classDef.ownedAttribute.add(prop)
 			// Linking the created Kermeta property to the Ecore attribute.
 			ref.targetKermetaObject := prop
+
+			traceRegistry.addTraceFromObjects(ref, prop, void)
 			
 			// If the reference has an opposite, an unresolved type is created.
 			if(not ref.eOpposite.isVoid) then
@@ -280,6 +291,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			op.ownedParameter.add(kmParam)
 			// Linking the created Kermeta parameter to the Ecore parameter.
 			param.targetKermetaObject := kmParam
+			traceRegistry.addTraceFromObjects(param, kmParam, void)
 		end
 
 		super(param)
@@ -309,6 +321,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			eclass.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmClassDef)
 			// The reference to the kermeta class is added to the ecore class.
 			eclass.targetKermetaObject := kmClassDef
+			traceRegistry.addTraceFromObjects(eclass, kmClassDef, void)
 		end
 
 		super(eclass)
@@ -326,6 +339,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			annot.eModelElement.targetKermetaObject.kOwnedTags.add(kmTag)
 			// The reference to the kermeta tag is added to the ecore annotation.
 			annot.targetKermetaObject := kmTag
+			traceRegistry.addTraceFromObjects(annot, kmTag, void)
 		end
 		
 		super(annot)
@@ -346,6 +360,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			// Adding the type variable into the generic type definition.
 			gtd.typeParameter.add(typeVar)
 			gtd.containedType.add(typeVar)
+			traceRegistry.addTraceFromObjects(typeParam, typeVar, void)
 		end
 	end
 
@@ -358,6 +373,7 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 							enumLit.eEnum.targetKermetaObject.asType(Enumeration))
 			// Linking the ecore literal to the Kermeta one.
 			enumLit.targetKermetaObject := literal
+			traceRegistry.addTraceFromObjects(enumLit, literal, void)
 		end
 	
 		super(enumLit)
@@ -379,9 +395,10 @@ stdio.writeln("TEMP_LOG=" + type.toString +" " + type.name + " " + type.getQuali
 			
 			// The reference to the Kermeta enumeration is added to the ecore enum.
 			eEnum.targetKermetaObject := kmEnum
-			
+			traceRegistry.addTraceFromObjects(eEnum, kmEnum, void)
 		end
 	
 		super(eEnum)
 	end
 }
+

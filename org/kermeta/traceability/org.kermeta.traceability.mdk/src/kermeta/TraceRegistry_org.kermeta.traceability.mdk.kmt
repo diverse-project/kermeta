@@ -65,6 +65,16 @@ class TraceRegistry
 		getCorrespondingReference(targetRef).source.add(newTrace)
 
 	end
+	
+		
+	operation addTraceFromObjects(src : kermeta::language::structure::Object, tar : kermeta::language::structure::Object, 
+								  context : kermeta::language::structure::Object) : Void is do
+		var srcRef : ModelReference init ModelReference.new
+		var tarRef : ModelReference init ModelReference.new
+		srcRef.refObject ?= src
+		tarRef.refObject ?= tar
+		addTraceFromReferences(srcRef, tarRef, context)
+	end
 
 	
 	//return the tracepackage that stores all the traces

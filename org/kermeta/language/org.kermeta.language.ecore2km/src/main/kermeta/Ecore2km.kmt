@@ -10,15 +10,18 @@ package org::kermeta::language::ecore2km;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.ecore2km/src/main/kermeta/EcoreStructure2kmStructure.kmt"
+require "platform:/lookup/org.kermeta.traceability.mdk/src/kermeta/TraceRegistry_org.kermeta.traceability.mdk.kmt"
 
 using kermeta::utils
 using ecore
 using org::kermeta::language::structure
+using org::kermeta::traceability
 
 /**
  * Converts a given ecore model into a kermeta v2 model.
 */
 class Ecore2km {
+	attribute traceRegistry : TraceRegistry
 
 	operation foo() : Void is do end
 
@@ -27,10 +30,12 @@ class Ecore2km {
 	 */
 	operation convert(pkg : EPackage, namespacePrefix : String) : ModelingUnit is do
 		var ecore2kmStruct : EcoreStructure2kmStructure init EcoreStructure2kmStructure.new
-		
+
+		traceRegistry := TraceRegistry.new
 		result := ModelingUnit.new
 		result.namespacePrefix := namespacePrefix
-		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), result)
+		traceRegistry.addTraceFromObjects(pkg, result, void)
+		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), result, traceRegistry)
 	end
 	
 	
@@ -69,3 +74,4 @@ class Ecore2km {
     	result.put("java.lang.Byte","kermeta::standard::Integer")
 	end
 }
+
