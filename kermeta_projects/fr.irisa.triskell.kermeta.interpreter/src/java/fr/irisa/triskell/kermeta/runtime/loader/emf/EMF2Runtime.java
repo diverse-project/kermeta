@@ -520,13 +520,16 @@ public class EMF2Runtime {
     	else if (instance_classname.equals("java.lang.Double")||instance_classname.equals("double")) {
     		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Real.create(fvalue!=null?(Double)fvalue:0.0, rofactory);
     	}
+    	else if (instance_classname.equals("java.lang.Float")||instance_classname.equals("float")) {
+    		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Real.create(fvalue!=null?(Double)fvalue:0.0, rofactory);
+    	}
     	// Integer
     	else if (instance_classname.equals("java.lang.Integer")||instance_classname.equals("int")) {
     	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(
     	    		(fvalue == null)?0:((Integer)fvalue).intValue(), rofactory);
     	}
     	// String
-    	else if (instance_classname.equals("java.lang.String")) {
+    	else if (instance_classname.equals("java.lang.String")||instance_classname.equals("String")) {
     	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fvalue!=null?(String)fvalue:"", rofactory);
     	}
     	else if (instance_classname.equals("java.lang.Character")||instance_classname.equals("char")) 
