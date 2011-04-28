@@ -33,6 +33,7 @@ import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
+import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.structure.ModelingUnit;
 //import scala.collection.JavaConversions.JListWrapper;
 //import scala.collection.JavaConversions.JListWrapper;
@@ -173,7 +174,10 @@ public class KermetaCompiler {
 	}	
 
 
-	
+	public ModelingUnit parse(String uri){
+		KMTparser theParser = new KMTparser();
+		return theParser.load(uri, "", logger);
+	}
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		
