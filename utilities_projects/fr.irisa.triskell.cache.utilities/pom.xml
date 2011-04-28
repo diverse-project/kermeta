@@ -3,6 +3,7 @@
   <groupId>fr.irisa.triskell.utilities</groupId>
   <artifactId>cache.utilities</artifactId>
   <version>0.1.0</version>
+  <packaging>bundle</packaging>
   <name>Triskell - Cache Utilities</name>
 	<repositories>
 		<repository>
