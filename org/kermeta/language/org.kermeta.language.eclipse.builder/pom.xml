@@ -7,9 +7,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>language.eclipse.builder</artifactId>
+	<artifactId>language.builder.eclipse</artifactId>
 	<packaging>jar</packaging>
-	<name>language.eclipse.builder :: kermeta builder</name>
+	<name>language.builder.eclipse :: kermeta builder</name>
 
     <parent>
         <artifactId>language.root</artifactId>
