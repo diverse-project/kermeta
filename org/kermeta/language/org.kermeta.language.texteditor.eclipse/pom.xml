@@ -119,8 +119,23 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.systemservices.api</artifactId>
+			<artifactId>utils.systemservices.eclipse</artifactId>
 			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.eclipse.builder</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.builder.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -139,6 +154,7 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Activator>org.kermeta.language.texteditor.eclipse.internal.Activator</Bundle-Activator>
 						<Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.core.resources,
@@ -157,7 +173,12 @@
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
 							org.kermeta.language.texteditor.api,
-							org.kermeta.utils.systemservices.api
+							org.kermeta.utils.systemservices.api,
+							org.kermeta.utils.systemservices.eclipse,
+							fr.irisa.triskell.cache.utilities,
+							org.kermeta.language.builder.api,
+							org.kermeta.language.eclipse.builder,
+							org.kermeta.language.model
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

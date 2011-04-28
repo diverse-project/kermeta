@@ -9,6 +9,7 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -21,6 +22,8 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.swt.custom.StyleRange;
+import org.kermeta.language.eclipse.builder.KermetaBuilder;
+import org.kermeta.language.structure.ModelingUnit;
 
 /**
  * Simple PresentationRepairer based on a Scanner
@@ -84,9 +87,23 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 	 */
 	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent event,
 			boolean documentPartitioningChanged) {
+
 		if (!documentPartitioningChanged) {
 			try {
-				//System.out.println("EVENT FROM DAMAGER : " + event.toString());
+			
+				IFile currentFile = fScanner.getCurrentFile();
+				
+				//If the IFile is in the list, it seams that the file is in modification
+				if (Activator.getDefault().dirtyFiles.containsKey(currentFile)) {
+					//Here, I compare the containment of the document to call parser only when containment is modified
+					//this test avoids infinite loop due to marking
+					if (! fDocument.get().equals(Activator.getDefault().containmentFiles.get(currentFile))) {
+						Activator.getDefault().containmentFiles.put(currentFile, fDocument.get());
+						ModelingUnit currentModelingUnit = KermetaBuilder.getDefault().parseSpecificFile(currentFile, true);
+						Activator.getDefault().dirtyFiles.put(fScanner.getCurrentFile(), currentModelingUnit);
+					}
+				}
+				
 				IRegion info = fDocument.getLineInformationOfOffset(event
 						.getOffset());
 				int start = Math.max(partition.getOffset(), info.getOffset());
