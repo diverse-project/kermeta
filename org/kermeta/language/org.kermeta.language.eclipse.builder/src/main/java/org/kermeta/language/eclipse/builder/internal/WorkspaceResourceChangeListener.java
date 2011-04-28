@@ -6,7 +6,7 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.language.eclipse.builder;
+package org.kermeta.language.eclipse.builder.internal;
 
 import java.util.HashMap;
 import java.util.Map;

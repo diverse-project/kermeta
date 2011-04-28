@@ -118,9 +118,19 @@
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>language.builder.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.eclipse</artifactId>
 			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell.utilities</groupId>
+			<artifactId>cache.utilities</artifactId>
+			<version>0.1.0</version>
 		</dependency>
         <dependency>
             <groupId>org.kermeta.kp</groupId>
@@ -132,13 +142,7 @@
                     <groupId>org.netbeans.external</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.texteditor.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		
+        </dependency>	
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -156,7 +160,10 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-Activator>org.kermeta.language.eclipse.builder.Activator</Bundle-Activator>
+						<Bundle-Activator>org.kermeta.language.eclipse.builder.internal.Activator</Bundle-Activator>
+						<Export-Package>
+							org.kermeta.language.eclipse.builder
+						</Export-Package>
 						<Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.core.resources,
@@ -172,7 +179,8 @@
 							org.kermeta.kp.loader.kp,
 							org.kermeta.kp.compiler.commandline,
 							org.kermeta.language.model,
-							org.kermeta.language.texteditor.eclipse							
+							org.kermeta.language.builder.api,
+							fr.irisa.triskell.cache.utilities				
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>

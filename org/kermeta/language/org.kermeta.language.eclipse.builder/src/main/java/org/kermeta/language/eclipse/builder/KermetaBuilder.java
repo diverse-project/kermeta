@@ -1,84 +1,71 @@
+/*$Id:  $
+* License : EPL
+* Copyright : IRISA / INRIA 
+* ----------------------------------------------------------------------------
+* Creation date : 27 avr. 2011
+* Authors : 
+*      Cédric Bouhours <cedric.bouhours@inria.fr>
+*/
+
 package org.kermeta.language.eclipse.builder;
 
-import java.util.Map;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.kermeta.language.eclipse.builder.chainexecution.ParserCaller;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.language.builder.api.Builder;
+import org.kermeta.language.eclipse.builder.internal.Activator;
+import org.kermeta.language.eclipse.builder.internal.ResourceIdentifier;
+import org.kermeta.language.structure.ModelingUnit;
 
-public class KermetaBuilder extends IncrementalProjectBuilder {
+import fr.irisa.triskell.cache.utilities.SoftReferenceMapCache;
 
-	class SampleDeltaVisitor implements IResourceDeltaVisitor {
+public class KermetaBuilder extends Builder{
+	
+	public SoftReferenceMapCache<ResourceIdentifier, ModelingUnit> currentModelingUnits = new SoftReferenceMapCache<ResourceIdentifier, ModelingUnit>();
+	
+	private static KermetaBuilder instance = null;
 
-		public boolean visit(IResourceDelta delta) throws CoreException {
-			System.out.println("VISITE1");
-			IResource resource = delta.getResource();
-			switch (delta.getKind()) {
-			case IResourceDelta.ADDED:
-				// handle added resource
-				ParserCaller.specificParsing(resource);
-				break;
-			case IResourceDelta.REMOVED:
-				// handle removed resource
-				ParserCaller.specificParsing(resource);
-				break;
-			case IResourceDelta.CHANGED:
-				// handle changed resource
-				ParserCaller.specificParsing(resource);
-				break;
-			}
-			//return true to continue visiting children.
-			return true;
-		}
+	private KermetaBuilder(){
+		super();
 	}
-
-	class SampleResourceVisitor implements IResourceVisitor {
-		public boolean visit(IResource resource) {
-			System.out.println("VISITE2");
-			ParserCaller.specificParsing(resource);
-			//return true to continue visiting children.
-			return true;
+	
+	public static Builder getDefault() {
+		if (instance == null) {
+			instance = new KermetaBuilder();
 		}
+		return instance;
 	}
-
-	public static final String BUILDER_ID = "org.kermeta.language.eclipse.builder.kermetaBuilderID";
-
-
-	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
-			throws CoreException {
-		System.out.println("VISITE3");
-		if (kind == FULL_BUILD) {
-			fullBuild(monitor);
-		} else {
-			IResourceDelta delta = getDelta(getProject());
-			if (delta == null) {
-				fullBuild(monitor);
-			} else {
-				incrementalBuild(delta, monitor);
+	
+	@Override
+	public ModelingUnit parseSpecificFile(IResource toParse, boolean inModification) {
+		System.out.println("Coucou 0");
+		String cleanURI = toParse.getLocationURI().toString();
+		if (cleanURI.startsWith("file:/")) {
+			cleanURI = cleanURI.replaceFirst("file:/", "");
+		}
+		System.out.println("Coucou 1");
+		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
+		System.out.println("Coucou 2");
+		
+		ModelingUnit freshModelingUnit = theCompiler.parse(cleanURI);
+		System.out.println("Coucou 3");
+		
+		ResourceIdentifier theCurrentResourceIdentifier = getResourceIdentifier(toParse.getFullPath().toOSString());
+		System.out.println("Coucou 4");
+		if (theCurrentResourceIdentifier==null) {
+			theCurrentResourceIdentifier = new ResourceIdentifier(toParse.getFullPath().toOSString(), inModification);
+		}
+		currentModelingUnits.put(theCurrentResourceIdentifier, freshModelingUnit);
+		System.out.println("Coucou 5");
+		return freshModelingUnit;
+	}
+	
+	public ResourceIdentifier getResourceIdentifier(String key) {
+		for (ResourceIdentifier anElement : currentModelingUnits.keySet()) {
+			if (anElement.key.equals(key)) {
+				return anElement;
 			}
 		}
 		return null;
 	}
 
-	protected void fullBuild(final IProgressMonitor monitor)
-			throws CoreException {
-		try {
-			System.out.println("VISITE4");
-			getProject().accept(new SampleResourceVisitor());
-		} catch (CoreException e) {
-		}
-	}
-
-	protected void incrementalBuild(IResourceDelta delta,
-			IProgressMonitor monitor) throws CoreException {
-		// the visitor does the work.
-		System.out.println("VISITE5");
-		delta.accept(new SampleDeltaVisitor());
-	}
 }
