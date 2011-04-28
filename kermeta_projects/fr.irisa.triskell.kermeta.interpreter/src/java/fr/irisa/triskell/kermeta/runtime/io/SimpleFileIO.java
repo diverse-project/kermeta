@@ -23,11 +23,15 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -49,7 +53,7 @@ public class SimpleFileIO {
 	
 	public static RuntimeObject fileExists(RuntimeObject filename)
     {
-		java.lang.String fname = getOSFileLocation(String.getValue(filename));
+		/* java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		
 		java.lang.String filePath = fname;
 		
@@ -60,6 +64,19 @@ public class SimpleFileIO {
     	}
 		
 		File file = new File(filePath.replace("file://", "").replace("file:/", ""));
+		URL url;
+		try {
+			url = new URL(String.getValue(filename));
+		
+			file = new File(FileLocator.toFileURL(url).getFile());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		File file = getFileFromURI(filename);
 		if ( file.exists() ) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -68,6 +85,7 @@ public class SimpleFileIO {
 	
 	public static RuntimeObject fileIsDirectory(RuntimeObject filename)
     {
+		/*
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		
 		java.lang.String filePath = fname;
@@ -79,6 +97,8 @@ public class SimpleFileIO {
     	}
 		
 		File file = new File(filePath.replace("file://", "").replace("file:/", ""));
+		*/
+		File file = getFileFromURI(filename);
 		if (file.isDirectory()) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -187,8 +207,8 @@ public class SimpleFileIO {
         java.lang.String ligne;
        	try {
        		//convert windows delimiter into /    		
-    		java.lang.String sfileName = getOSFileLocation(String.getValue(filename));
-    		
+    	//	java.lang.String sfileName = getOSFileLocation(String.getValue(filename));
+    	/*	
     		java.lang.String sfilePath = sfileName;
     		
     		if ( sfileName.startsWith("platform:/resource") ) {
@@ -196,8 +216,15 @@ public class SimpleFileIO {
         		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFname) );
         		sfilePath = folder.getLocation().toString();
         	}
-    		
-			br = new BufferedReader(new FileReader(sfilePath.replace("file://", "").replace("file:/", "")));
+    	*/
+    		/*
+    		//URL url = new URL(String.getValue(filename));
+    		java.net.URI uri = new java.net.URI(String.getValue(filename));  //URI.createURI(String.getValue(filename));
+    		//File file = new File(FileLocator.toFileURL(url).getFile());
+    		File file = new File(uri);
+    		*/
+    		File file = getFileFromURI(filename);
+			br = new BufferedReader(new FileReader(file));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -206,6 +233,10 @@ public class SimpleFileIO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+	/*	} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			*/
 		}
         RuntimeObject result = String.create(builder.toString(), filename.getFactory());
         return result;
@@ -249,6 +280,35 @@ public class SimpleFileIO {
 			//cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
 		}
 		return cleanPath;
+	}
+	
+	static public File getFileFromURI(RuntimeObject filename){
+		java.net.URI uri;
+		File file;
+		try {
+			uri = new java.net.URI(String.getValue(filename));
+			file = new File(FileLocator.toFileURL(uri.toURL()).getFile());
+		} catch (URISyntaxException e) {
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
+	    			"Unsupported URI syntax '" + String.getValue(filename) + "' ",
+	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	    			filename.getFactory().getMemory(),
+	    			e);
+		} catch (MalformedURLException e) {
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
+	    			"Unsupported URI syntax '" + String.getValue(filename) + "' ",
+	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	    			filename.getFactory().getMemory(),
+	    			e);
+		} catch (IOException e) {
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
+	    			"Unsupported URI syntax '" + String.getValue(filename) + "' ",
+	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	    			filename.getFactory().getMemory(),
+	    			e);
+		} 
+		//File file = new File(uri);
+		return file;
 	}
 
 }
