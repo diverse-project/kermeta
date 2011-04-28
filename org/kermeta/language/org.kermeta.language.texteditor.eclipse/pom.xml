@@ -113,11 +113,6 @@
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.texteditor.api</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.eclipse</artifactId>
 			<version>${kermeta.version}</version>
