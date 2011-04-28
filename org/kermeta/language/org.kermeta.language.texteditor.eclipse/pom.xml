@@ -124,7 +124,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.eclipse.builder</artifactId>
+			<artifactId>language.builder.eclipse</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
@@ -177,7 +177,7 @@
 							org.kermeta.utils.systemservices.eclipse,
 							fr.irisa.triskell.cache.utilities,
 							org.kermeta.language.builder.api,
-							org.kermeta.language.eclipse.builder,
+							org.kermeta.language.builder.eclipse,
 							org.kermeta.language.model
                         </Require-Bundle>
 		            </manifestEntries>		            
