@@ -167,7 +167,6 @@
 							org.kermeta.language.model,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
-							org.kermeta.language.texteditor.api,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.systemservices.eclipse,
 							fr.irisa.triskell.cache.utilities,
