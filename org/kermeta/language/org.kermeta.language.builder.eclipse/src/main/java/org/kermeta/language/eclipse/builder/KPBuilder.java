@@ -64,7 +64,7 @@ public class KPBuilder {
 					File f = new File(kpFileURL);
 					String projectUri = f.getParentFile().getCanonicalPath();
 					String outputFolder = projectUri+"/target";
-					KermetaCompiler compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), true,outputFolder );
+					KermetaCompiler compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), true,outputFolder, true );
 					Activator.getDefault().getMessaggingSystem().flushAllProblems(FileHelpers.StringToURL(kpFileURL));				
 					compiler.kp2bytecode(kpFileURL, outputFolder,outputFolder, new ArrayList<String>(),true);
 				} catch (IOException e) {

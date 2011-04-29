@@ -58,13 +58,20 @@ public class KermetaBuilder extends Builder{
 	
 	@Override
 	public ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification) {
-		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
-				
-		ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse),content);
+		
+		try {
+			KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
 					
-		saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
-	
-		return freshModelingUnit;
+			ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse),content);
+						
+			saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
+		
+			return freshModelingUnit;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	private void saveParsingResult(ModelingUnit result, String identifier, boolean inModification) {
