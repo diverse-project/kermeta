@@ -47,7 +47,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
         		}
         	}
         	else{
-        		content = ParserUtil.loadFile(uri.toString());
+        		content = ParserUtil.loadFile(uri.toString().replaceFirst("file:/", ""));
         	}
         }
 
