@@ -36,14 +36,17 @@
 				<configuration>
 		          <archive>
 		            <manifestEntries>
-							<Bundle-SymbolicName>org.kermeta.${project.artifactId}; singleton=true</Bundle-SymbolicName>
+							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-Localization>plugin</Bundle-Localization>
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Export-Package>								
-                        		org.kermeta.utils.systemservices.api.*
+                        		org.kermeta.utils.systemservices.api.impl,
+                        		org.kermeta.utils.systemservices.api.messaging,
+                        		org.kermeta.utils.systemservices.api.reference,
+                        		org.kermeta.utils.systemservices.api.result
                         	</Export-Package>
 							<Require-Bundle>
 								org.eclipse.core.resources,
