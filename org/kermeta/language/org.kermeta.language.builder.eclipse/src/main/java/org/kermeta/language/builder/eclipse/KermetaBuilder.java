@@ -46,12 +46,7 @@ public class KermetaBuilder extends Builder{
 					
 			ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse));
 						
-			ResourceIdentifier theCurrentResourceIdentifier = getResourceIdentifier(toParse.getFullPath().toOSString());
-		
-			if (theCurrentResourceIdentifier==null) {
-				theCurrentResourceIdentifier = new ResourceIdentifier(toParse.getFullPath().toOSString(), inModification);
-			}
-			currentModelingUnits.put(theCurrentResourceIdentifier, freshModelingUnit);
+			saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
 		
 			return freshModelingUnit;
 		} catch (MalformedURLException e) {
@@ -59,6 +54,26 @@ public class KermetaBuilder extends Builder{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification) {
+		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
+				
+		ModelingUnit freshModelingUnit = theCompiler.parse(content);
+					
+		saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
+	
+		return freshModelingUnit;
+	}
+	
+	private void saveParsingResult(ModelingUnit result, String identifier, boolean inModification) {
+		ResourceIdentifier theCurrentResourceIdentifier = getResourceIdentifier(identifier);
+		
+		if (theCurrentResourceIdentifier==null) {
+			theCurrentResourceIdentifier = new ResourceIdentifier(identifier, inModification);
+		}
+		currentModelingUnits.put(theCurrentResourceIdentifier, result);
 	}
 	
 	public ResourceIdentifier getResourceIdentifier(String key) {
