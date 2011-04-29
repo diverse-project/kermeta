@@ -170,22 +170,22 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	protected ConsoleMessage getConsoleMessageFor(Kind msgKind, String message) {
 		switch (msgKind) {
 		case DevDEBUG:
-			return new DebugMessage(message);
+			return new DebugMessage(message+"\n");
 		case UserINFO:
-			return new InfoMessage(message);
+			return new InfoMessage(message+"\n");
 		case DevINFO:
-			return new DebugMessage(message);
+			return new DebugMessage(message+"\n");
 		case UserWARNING:
-			return new WarningMessage(message);
+			return new WarningMessage(message+"\n");
 		case DevWARNING:
-			return new DebugWarningMessage(message);
+			return new DebugWarningMessage(message+"\n");
 		case UserERROR:
-			return new ErrorMessage(message);
+			return new ErrorMessage(message+"\n");
 		case DevERROR:
-			return new DebugErrorMessage(message);
+			return new DebugErrorMessage(message+"\n");
 			
 		default:
-			return new DebugMessage(message);
+			return new DebugMessage(message+"\n");
 		}
 	}
 
