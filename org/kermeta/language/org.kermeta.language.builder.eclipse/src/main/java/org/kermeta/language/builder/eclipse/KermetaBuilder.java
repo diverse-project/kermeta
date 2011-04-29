@@ -60,7 +60,7 @@ public class KermetaBuilder extends Builder{
 	public ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification) {
 		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
 				
-		ModelingUnit freshModelingUnit = theCompiler.parse(content);
+		ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse),content);
 					
 		saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
 	
