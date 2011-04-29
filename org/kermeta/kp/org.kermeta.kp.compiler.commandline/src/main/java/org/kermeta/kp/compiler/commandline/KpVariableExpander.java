@@ -23,7 +23,8 @@ public class KpVariableExpander {
 	public KpVariableExpander(String kpFileURL) {
 		File f = new File(kpFileURL);
 		projectUri = f.getParentFile().toURI().toString();
-		projectUri = projectUri.substring(0, projectUri.length()); // remove the trailing slash because we want the user to add it manually (more readable)
+		projectUri = projectUri.substring(0, projectUri.length()-1); // remove the trailing slash because we want the user to add it manually (more readable)
+		
 	}
 
 	public String expandVariables(String input) {
