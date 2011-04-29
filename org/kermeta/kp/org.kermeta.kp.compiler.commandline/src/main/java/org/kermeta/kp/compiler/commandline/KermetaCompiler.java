@@ -174,7 +174,7 @@ public class KermetaCompiler {
 	}	
 
 
-	public ModelingUnit parse(String uri){
+	public ModelingUnit parse(URL uri){
 		KMTparser theParser = new KMTparser();
 		return theParser.load(uri, "", logger);
 	}

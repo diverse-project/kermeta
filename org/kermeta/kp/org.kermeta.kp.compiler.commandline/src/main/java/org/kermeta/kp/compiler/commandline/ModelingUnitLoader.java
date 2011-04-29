@@ -8,6 +8,8 @@
 package org.kermeta.kp.compiler.commandline;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -20,6 +22,7 @@ import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 import scala.Option;
@@ -45,7 +48,15 @@ public class ModelingUnitLoader {
 	public ModelingUnit loadModelingUnitFromURL(String url){
 		ModelingUnit mu = null;
 		if (url.endsWith(".kmt")) {
-			mu = this.loadKMT(url);
+			try {
+				mu = this.loadKMT(url);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}else if (url.endsWith(".ecore")) {
 			
@@ -103,12 +114,12 @@ public class ModelingUnitLoader {
         return   converter.convert((EPackage) r.get(0), "");
 	}
 
-	protected ModelingUnit loadKMT(String fileuri) {
+	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {
 		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
 		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
 
 		KMTparser parser = new KMTparser();		
-		Iterator<String> src = scala.io.Source.fromFile(new java.io.File(java.net.URI.create(fileuri)),
+		Iterator<String> src = scala.io.Source.fromFile( new java.io.File(FileHelpers.StringToURI(fileuri)),
 				"UTF8").getLines();
 
 		StringBuffer buf = new StringBuffer();
@@ -116,7 +127,8 @@ public class ModelingUnitLoader {
 			buf.append(src.next() + "\n");
 		}
 
-		ModelingUnit mu = parser.load(fileuri, buf.toString(), logger);
+
+		ModelingUnit mu = parser.load(FileHelpers.StringToURL(fileuri), buf.toString(), logger);
 
 		return mu;
 

@@ -40,7 +40,7 @@
                         </Export-Package>
 						<Require-Bundle>
 							org.kermeta.utils.systemservices.api,
-							
+							org.kermeta.utils.helpers,
             				fr.irisa.triskell.kermeta.model,
 							org.kermeta.language.framework.scala,
 							org.kermeta.language.loader.kmt.scala,
@@ -150,6 +150,11 @@
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 	</dependencies>
