@@ -1,12 +1,14 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
 import java.net.URL;
+import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
@@ -47,6 +49,24 @@ public class EclipseReporter {
 	
 	public void addMarker(int markerSeverity, String Marker,IFile file, String message, Integer lineNumber, Integer beginChar, Integer endChar, String msgGroup) {
 		try {
+			HashMap<String, java.lang.Object> datas = new HashMap<String, java.lang.Object>();
+	        datas.put( IMarker.MESSAGE, message != null ? message : "<null>" );
+	        datas.put( IMarker.SEVERITY, markerSeverity );
+	        
+	        if ( beginChar != null )
+	        	datas.put( IMarker.CHAR_START, beginChar );
+	        else
+	        	datas.put( IMarker.CHAR_START, 0 );
+	 
+	        if ( endChar != null )
+	           	datas.put( IMarker.CHAR_END, endChar );
+	       	else
+	       		datas.put( IMarker.CHAR_END, 0 );
+	        if(lineNumber != null)
+	        	datas.put(IMarker.LINE_NUMBER, lineNumber);
+	        datas.put(KERMETA_MARKER_ATTRIBUTE, msgGroup);
+	        MarkerUtilities.createMarker( file, datas, IMarker.PROBLEM );
+		/*
 			IMarker marker = file.createMarker(Marker);
 			marker.setAttribute(IMarker.MESSAGE, message != null ? message : "<null>");
 			marker.setAttribute(IMarker.SEVERITY, markerSeverity);
@@ -57,20 +77,14 @@ public class EclipseReporter {
 			marker.setAttribute(IMarker.CHAR_START, beginChar);
 			marker.setAttribute(IMarker.CHAR_END, endChar);
 			marker.setAttribute(KERMETA_MARKER_ATTRIBUTE, msgGroup);
+		*/
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to mark TextFile", Activator.PLUGIN_ID, e);
 		}
 	}
 	
 	public void addMarker(int markerSeverity, String Marker,IFile file, String message, String msgGroup) {
-		try {
-			IMarker marker = file.createMarker(Marker);
-			marker.setAttribute(IMarker.MESSAGE, message != null ? message : "<null>");
-			marker.setAttribute(IMarker.SEVERITY, markerSeverity);
-			marker.setAttribute(KERMETA_MARKER_ATTRIBUTE, msgGroup);
-		} catch (CoreException e) {
-			ms.log(Kind.DevERROR, "Failed to mark TextFile", Activator.PLUGIN_ID, e);
-		}
+		addMarker(markerSeverity, Marker, file, message, 0, 0,0, msgGroup);
 	}
 	
 	private String cleanString(URL toClean) {

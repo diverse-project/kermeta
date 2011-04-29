@@ -86,6 +86,11 @@
 			<artifactId>org.eclipse.ui.console</artifactId>
 			<version>[3.4.0.0,)</version>
 		</dependency>
+        <dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.editors</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.workbench</artifactId>
@@ -122,7 +127,8 @@
                     		org.eclipse.emf.ecore,
                         	org.eclipse.jface.text,
                     		org.eclipse.ui,
-                    		org.eclipse.ui.console
+                    		org.eclipse.ui.console,
+                    		org.eclipse.ui.editors
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
