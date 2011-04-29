@@ -99,7 +99,7 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 					//this test avoids infinite loop due to marking
 					if (! fDocument.get().equals(Activator.getDefault().containmentFiles.get(currentFile))) {
 						Activator.getDefault().containmentFiles.put(currentFile, fDocument.get());
-						ModelingUnit currentModelingUnit = KermetaBuilder.getDefault().parseSpecificFile(currentFile, true);
+						ModelingUnit currentModelingUnit = KermetaBuilder.getDefault().parseSpecificFile(currentFile, fDocument.get(), true);
 						Activator.getDefault().dirtyFiles.put(fScanner.getCurrentFile(), currentModelingUnit);
 					}
 				}
