@@ -8,6 +8,8 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 
 import org.eclipse.core.resources.IMarker;
@@ -64,7 +66,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup) {
-		// TODO Auto-generated method stub
+		
 		// some error message should go to the eclipse error view
 		switch (msgKind) {
 		case UserWARNING:
@@ -88,8 +90,8 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 
 	@Override
-	public void log(Kind msgKind, String message, String messageGroup, Throwable exception) {
-		// TODO Auto-generated method stub
+	public void log(Kind msgKind, String message, String messageGroup, Throwable throwable) {
+		
 		// some error message should go to the eclipse error view
 		switch (msgKind) {
 		case UserWARNING:
@@ -103,8 +105,10 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		default:
 			break;
 		}
-		
-		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message));
+		StringWriter sw = new StringWriter();
+		throwable.printStackTrace(new PrintWriter(sw));
+		String stackTrace = sw.toString();
+		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message+"\n"+stackTrace));
 		// currently redirect to stdio
 		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		//stdioRedirect.log(msgKind, message, messageGroup, exception);
