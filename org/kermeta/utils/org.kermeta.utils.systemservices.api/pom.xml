@@ -1,90 +1,60 @@
-<!-- $Id: pom.xml 13923 2010-12-16 15:29:21Z kermeta_bot $ -->
+<!-- $Id: pom.xml 14766 2011-03-31 07:30:48Z cbouhour $ -->
 <!-- License    : EPL                                    -->
-<!-- Project    : org.kermeta.utils.logger.eclipse -->
+<!-- Project    : utils.error.report.eclipse.api         -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
-<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> --> 
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-    <groupId>org.kermeta.utils</groupId>
+	<packaging>jar</packaging>
+	<name>utils.systemservices.api :: API for all eclipse systemservices for kermeta V2</name>
 	<artifactId>utils.systemservices.api</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
-	<packaging>bundle</packaging>
-	<name>utils.systemservices.api</name>
-	
-	<properties>
-        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <emf.version>2.6.0</emf.version>
-        <scala.version>2.8.1</scala.version>
-        <slf4j.version>1.6.1</slf4j.version>
-        <slf4j.version.range>[1.5,2)</slf4j.version.range>
-        <bundle.vendor>IRISA/INRIA</bundle.vendor>
-    </properties>
-	
-	<description>This component provides an api for abstracting system services such as logging, progession reporting, cancellation, reporting result with error
-that are useful for any program manipulating models.</description>
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		
-		<plugins>
-			<!-- Java compiler plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-			<plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.1.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Export-Package>
-                        org.kermeta.utils.systemservices.api.*
-                        </Export-Package>
-                        <!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
-                        <!-- <Require-Bundle>
-                        </Require-Bundle>
-                        <Import-Package>
-                        </Import-Package> -->
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                        <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
-                    </instructions>
-                </configuration>
-            </plugin>
-		</plugins>
-	</build>
+
+    <parent>
+        <artifactId>utils.root</artifactId>
+        <groupId>org.kermeta.utils</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
 	<dependencies>
-		<!-- Main dependencies -->
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>${emf.version}</version>
 		</dependency>
-		
-		
 	</dependencies>
-	<distributionManagement>
-        <repository>
-            <id>kermeta-public-release</id>
-            <name>Kermeta public release repository on maven.irisa.fr</name>
-            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>kermeta-public-snapshot</id>
-            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
-            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
+    
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+							<Bundle-SymbolicName>org.kermeta.${project.artifactId}; singleton=true</Bundle-SymbolicName>
+							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+							<Bundle-ClassPath>.</Bundle-ClassPath>
+							<Bundle-Localization>plugin</Bundle-Localization>
+							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+							<Export-Package>								
+                        		org.kermeta.utils.systemservices.api.*
+                        	</Export-Package>
+							<Require-Bundle>
+								org.eclipse.core.resources,
+								org.eclipse.core.runtime,
+								org.eclipse.ui.workbench,
+                    			org.eclipse.emf.ecore
+                        	</Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

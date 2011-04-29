@@ -9,6 +9,8 @@
 
 package org.kermeta.utils.systemservices.api.messaging;
 
+import java.net.URL;
+
 import org.kermeta.utils.systemservices.api.reference.Reference;
 
 /**
@@ -27,8 +29,8 @@ public abstract class MessagingSystem {
 	public abstract void log(Kind msgKind, String message, String messageGroup, Throwable senderTrace);
 	public abstract void logProblem(Kind msgKind, String message, String messageGroup, Reference causeObject);
 	public abstract void logProblem(Kind msgKind, String message, String messageGroup, Throwable senderTrace, Reference causeObject);
-	public abstract void flushProblem(String messageGroup);
-	public abstract void flushProblem(String messageGroup, Reference causeObject);
+	public abstract void flushProblem(String messageGroup, URL uri);
+	public abstract void flushAllProblems(URL uri);
 	
 	
 	

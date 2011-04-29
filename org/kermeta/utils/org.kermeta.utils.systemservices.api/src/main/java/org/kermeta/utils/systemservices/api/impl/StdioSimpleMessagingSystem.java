@@ -10,6 +10,7 @@ package org.kermeta.utils.systemservices.api.impl;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
 
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
@@ -112,13 +113,13 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
-	public void flushProblem(String messageGroup) {
+	public void flushAllProblems(URL uri) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void flushProblem(String messageGroup, Reference causeObject) {
+	public void flushProblem(String messageGroup, URL uri) {
 		// TODO Auto-generated method stub
 		
 	}
