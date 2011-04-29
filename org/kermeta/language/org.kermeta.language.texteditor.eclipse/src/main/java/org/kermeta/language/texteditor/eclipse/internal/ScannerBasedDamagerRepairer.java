@@ -22,7 +22,7 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.swt.custom.StyleRange;
-import org.kermeta.language.eclipse.builder.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
 
 /**
