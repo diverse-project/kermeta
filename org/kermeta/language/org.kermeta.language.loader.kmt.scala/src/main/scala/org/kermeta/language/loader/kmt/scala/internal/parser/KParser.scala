@@ -61,7 +61,7 @@ class KParser extends KExpressionParser
           except.colonne = pos.column
           except.errMsg = err.msg
           pos match {
-            case opos : OffsetPosition=> except.offsetBegin_=(opos.offset);except.offsetEnd_=(opos.offset+opos.lineContents.size)
+            case opos : OffsetPosition=> except.offsetBegin_=(opos.offset);except.offsetEnd_=(opos.offset+opos.lineContents.size-opos.column)
             case _ => println("Warning Position Not Offset")
           }
 

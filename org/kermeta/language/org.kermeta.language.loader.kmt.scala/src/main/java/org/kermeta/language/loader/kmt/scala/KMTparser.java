@@ -24,18 +24,16 @@ import scala.Option;
 
 public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTparser {
 
-    public ModelingUnit load(String uri, String optionalContent, MessagingSystem logger) {
+    public ModelingUnit load(URL uri, String optionalContent, MessagingSystem logger) {
         KParser parser = new KParser();
 
         String content = optionalContent;
         if (content.equals("")) {
-        	
-        	if(uri.startsWith("jar:") && uri.contains("!")){
+        	if(uri.getProtocol().equals("jar")){
         		try{
 	        		// ParserUtil isn't able to load from inside a jar, so use the stream instead
-	    	    	URL jarUrl =  new URL(uri);
-	    	    	JarURLConnection juc = (JarURLConnection) jarUrl.openConnection();
-	    	    	InputStream is =  juc.getJarFile().getName().getClass().getResourceAsStream(uri.substring(uri.indexOf("!")+1));
+	    	    	JarURLConnection juc = (JarURLConnection) uri.openConnection();
+	    	    	InputStream is =  juc.getJarFile().getName().getClass().getResourceAsStream(uri.getFile().substring(uri.getFile().indexOf("!")+1));
 	    	    	BufferedReader br = new BufferedReader(new InputStreamReader(is));	    	
 	    	    	String thisLine;
 	    	    	StringBuffer sb = new StringBuffer();
@@ -49,7 +47,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
         		}
         	}
         	else{
-        		content = ParserUtil.loadFile(uri);
+        		content = ParserUtil.loadFile(uri.toString());
         	}
         }
 
@@ -59,25 +57,16 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
             if (!parser.getErrors().isEmpty()) {
 
                 ParseException pe = parser.getErrors().get();
+              	
+            	TextReference textRef = new TextReference(uri,pe.offsetBegin(),pe.offsetEnd());
 
-                try {
-                	if (!uri.startsWith("file://")) {
-                		uri = "file://"+uri;
-                	}
-                	
-                	URL fileURL = new URL(uri);
-                	TextReference textRef = new TextReference(fileURL,pe.offsetBegin(),pe.offsetEnd());
-
-                	textRef.setBeginLine(pe.line());
-                	textRef.setEndLine(pe.line());//TODO
-                	//textRef.setCharBeginOffset(pe.getErrorOffset());
-                	//textRef.setCharBeginOffset(pe.line);
-                	//textRef.setCharEndOffset(pe.colonne);
-                	
-                	logger.logProblem(Kind.UserERROR, pe.errMsg(), "org.kermeta.language.loader.kmt.scala", pe , textRef);
-                } catch(MalformedURLException e) {
-                	logger.error("Malformed URL of file in parsing : "+uri, "MessageGROUP", e);
-                }
+            	textRef.setBeginLine(pe.line());
+            	textRef.setEndLine(pe.line());//TODO
+            	//textRef.setCharBeginOffset(pe.getErrorOffset());
+            	//textRef.setCharBeginOffset(pe.line);
+            	//textRef.setCharEndOffset(pe.colonne);
+            	
+            	logger.logProblem(Kind.UserERROR, pe.errMsg(), KMTparser.LOG_MESSAGE_GROUP, pe , textRef);
             }
             return null;
         } else {
