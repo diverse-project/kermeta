@@ -18,7 +18,8 @@ import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 
 public class EclipseReporter {
 	
-	public static final String PROBLEM_MARKER_ID = "org.kermeta.utils.system.eclipse.ProblemMarker";
+	public static final String PROBLEM_MARKER_ID = "org.kermeta.utils.system.eclipse.Kermeta2ProblemMarker";
+	public static final String KERMETA_MARKER_ATTRIBUTE = "kermeta2_marker";
 	
 	protected MessagingSystem ms;
 	
@@ -26,11 +27,11 @@ public class EclipseReporter {
 		ms = eclipseMessagingSystem;
 	}
 
-	public void addMarker( int markerSeverity, Reference ref, String msg){
+	public void addMarker( int markerSeverity, Reference ref, String msg, String msgGroup){
 		if(ref instanceof TextReference){
 			try {
-				IFile iFile = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(((TextReference)ref).getFileURL()));			
-				addMarker(markerSeverity, PROBLEM_MARKER_ID, iFile,msg, ((TextReference) ref).getBeginLine(), ((TextReference) ref).getBeginOffset(), ((TextReference) ref).getEndOffset());
+				IFile iFile = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(((TextReference)ref).getFileURL()));
+				addMarker(markerSeverity, PROBLEM_MARKER_ID, iFile,msg, ((TextReference) ref).getBeginLine(), ((TextReference) ref).getBeginOffset(), ((TextReference) ref).getEndOffset(),msgGroup);
 				ms.log(Kind.DevDEBUG, "File marked ("+iFile+")", Activator.PLUGIN_ID);
 			} catch (Exception e) {
 				ms.log(Kind.DevERROR, "Failed to mark TextFile ("+((TextReference)ref).getFileURL().getPath()+")", Activator.PLUGIN_ID, e);
@@ -44,7 +45,7 @@ public class EclipseReporter {
 		}
 	}
 	
-	public void addMarker(int markerSeverity, String Marker,IFile file, String message, Integer lineNumber, Integer beginChar, Integer endChar) {
+	public void addMarker(int markerSeverity, String Marker,IFile file, String message, Integer lineNumber, Integer beginChar, Integer endChar, String msgGroup) {
 		try {
 			IMarker marker = file.createMarker(Marker);
 			marker.setAttribute(IMarker.MESSAGE, message != null ? message : "<null>");
@@ -55,15 +56,18 @@ public class EclipseReporter {
 			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 			marker.setAttribute(IMarker.CHAR_START, beginChar);
 			marker.setAttribute(IMarker.CHAR_END, endChar);
+			marker.setAttribute(KERMETA_MARKER_ATTRIBUTE, msgGroup);
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to mark TextFile", Activator.PLUGIN_ID, e);
 		}
 	}
-	public void addMarker(int markerSeverity, String Marker,IFile file, String message) {
+	
+	public void addMarker(int markerSeverity, String Marker,IFile file, String message, String msgGroup) {
 		try {
 			IMarker marker = file.createMarker(Marker);
 			marker.setAttribute(IMarker.MESSAGE, message != null ? message : "<null>");
-			marker.setAttribute(IMarker.SEVERITY, markerSeverity);			
+			marker.setAttribute(IMarker.SEVERITY, markerSeverity);
+			marker.setAttribute(KERMETA_MARKER_ATTRIBUTE, msgGroup);
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to mark TextFile", Activator.PLUGIN_ID, e);
 		}
@@ -78,12 +82,25 @@ public class EclipseReporter {
 		return cleanString;
 	}
 
-	public void flushProblem(String problemGroup) {
+	public void flushProblem(String problemGroup,URL uri) {
 		try {
-			IResource file = ResourcesPlugin.getWorkspace().getRoot();		
-			file.deleteMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE);
+			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
+			for (IMarker aMarker : file.findMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE)) {
+				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
+					aMarker.delete();
+				}
+			}
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to flush markers for group "+problemGroup, Activator.PLUGIN_ID, e);
+		}	
+	}
+	
+	public void flushAllProblems(URL uri) {
+		try {
+			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
+			file.deleteMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE);
+		} catch (CoreException e) {
+			ms.log(Kind.DevERROR, "Failed to flush all markers", Activator.PLUGIN_ID, e);
 		}	
 	}
 }

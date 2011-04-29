@@ -8,6 +8,8 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
+import java.net.URL;
+
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -101,10 +103,10 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void logProblem(Kind kind, String msg, String msgGroup, Reference ref) {
 		switch (kind) {
 		case UserWARNING:
-			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg);
+			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
 			break;
 		case UserERROR:
-			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg);
+			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
 			break;
 		default:
 			break;
@@ -118,10 +120,10 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			Reference ref) {
 		switch (kind) {
 		case UserWARNING:
-			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg);
+			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
 			break;
 		case UserERROR:
-			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg);
+			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
 			break;
 		default:
 			break;
@@ -139,16 +141,15 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
-	public void flushProblem(String problemGroup) {
-		eclipseReporter.flushProblem(problemGroup);
+	public void flushAllProblems(URL uri) {
+		eclipseReporter.flushAllProblems(uri);		
 	}
 
 	@Override
-	public void flushProblem(String arg0, Reference arg1) {
-		// TODO Auto-generated method stub
+	public void flushProblem(String messageGroup, URL uri) {
+		eclipseReporter.flushProblem(messageGroup,uri);	
 		
 	}
-
 
 
 }
