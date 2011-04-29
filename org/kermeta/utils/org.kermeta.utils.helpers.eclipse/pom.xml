@@ -1,0 +1,92 @@
+<!-- $Id: pom.xml 14766 2011-03-31 07:30:48Z cbouhour $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : utils.error.report.eclipse.api         -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> --> 
+
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+	<name>utils.helpers.eclipse :: helpers for eclipse</name>
+	<artifactId>utils.helpers.eclipse</artifactId>
+
+    <parent>
+        <artifactId>utils.root</artifactId>
+        <groupId>org.kermeta.utils</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.5.1.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.registry</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.jobs</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+							<Bundle-SymbolicName>org.kermeta.${project.artifactId}; singleton=true</Bundle-SymbolicName>
+							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+							<Bundle-ClassPath>.</Bundle-ClassPath>
+							<Bundle-Localization>plugin</Bundle-Localization>
+							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+							<Export-Package>								
+                        		org.kermeta.utils.helpers.eclipse
+                        	</Export-Package>
+                        	<Require-Bundle>
+								org.eclipse.core.runtime,
+								org.eclipse.core.resources,
+							</Require-Bundle>
+                        	<Import-Package>
+								org.eclipse.emf.common.notify,
+								org.eclipse.emf.common.util,
+								org.eclipse.emf.ecore,
+								org.eclipse.emf.ecore.impl,
+								org.eclipse.emf.ecore.resource,
+								org.eclipse.emf.ecore.util,
+								org.eclipse.emf.ecore.xmi,
+								org.eclipse.emf.ecore.xmi.impl,
+							</Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
