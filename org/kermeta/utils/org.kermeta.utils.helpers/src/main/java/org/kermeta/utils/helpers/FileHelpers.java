@@ -8,6 +8,7 @@
 */
 package org.kermeta.utils.helpers;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,14 +23,8 @@ public class FileHelpers {
 		if ( !unifiedSepratorResourcePath.matches("file:/.*") ){
 			unifiedSepratorResourcePath = "file:/" + unifiedSepratorResourcePath;
 		}
-		if ( unifiedSepratorResourcePath.matches("file:/.*") ){
-			// deal with windows path
-			if ( unifiedSepratorResourcePath.matches("file:/.:/.+") ) {
-				unifiedSepratorResourcePath = "file:/" + unifiedSepratorResourcePath.replaceAll(" ", "%20");
-			} else {
-				unifiedSepratorResourcePath = "file:" + unifiedSepratorResourcePath;
-			}
-		}
+		unifiedSepratorResourcePath = unifiedSepratorResourcePath.replaceAll(" ", "%20");
+			
 		return unifiedSepratorResourcePath;
 	}
 	
@@ -39,6 +34,10 @@ public class FileHelpers {
 	
 	public static URI StringToURI(String url) throws URISyntaxException {
 		return new URI(cleanIfNecessaryPath(url));
+	}
+	
+	public static URL FileToURL(File file) throws MalformedURLException {
+		return file.toURI().toURL();
 	}
 
 }

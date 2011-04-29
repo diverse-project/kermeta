@@ -9,8 +9,8 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
-	<name>utils.systemservices.api :: API for all eclipse systemservices for kermeta V2</name>
-	<artifactId>utils.systemservices.api</artifactId>
+	<name>utils.helpers :: helpers</name>
+	<artifactId>utils.helpers</artifactId>
 
     <parent>
         <artifactId>utils.root</artifactId>
