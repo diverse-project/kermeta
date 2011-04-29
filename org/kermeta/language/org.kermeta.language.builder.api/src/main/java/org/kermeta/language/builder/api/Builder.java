@@ -10,6 +10,6 @@ public abstract class Builder {
 	}
 	
 	public abstract ModelingUnit parseSpecificFile(IResource toParse, boolean inModification);
-	public abstract ModelingUnit parseSpecificFile(String toParse, boolean inModification);
+	public abstract ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification);
 
 }
