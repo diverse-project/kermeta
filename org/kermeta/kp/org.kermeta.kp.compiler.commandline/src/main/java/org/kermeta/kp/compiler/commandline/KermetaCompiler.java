@@ -195,9 +195,9 @@ public class KermetaCompiler {
 		return theParser.load(uri, "", logger);
 	}
 	
-	public ModelingUnit parse(String content){
+	public ModelingUnit parse(URL uri, String content){
 		KMTparser theParser = new KMTparser();
-		return theParser.load(null, content, logger);
+		return theParser.load(uri, content, logger);
 	}
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
