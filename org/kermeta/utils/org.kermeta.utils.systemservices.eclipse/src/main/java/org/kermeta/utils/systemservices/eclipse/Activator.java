@@ -12,6 +12,8 @@ package org.kermeta.utils.systemservices.eclipse;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.eclipse.internal.console.ConsoleIO;
+import org.kermeta.utils.systemservices.eclipse.internal.console.EclipseConsoleIOFactory;
 import org.osgi.framework.BundleContext;
 
 
@@ -28,8 +30,11 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	
 	protected MessagingSystem messaggingSystem;
+	protected ConsoleIO consoleIO;
 
 	
+	
+
 	/**
 	 * The constructor
 	 */
@@ -44,6 +49,11 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		messaggingSystem = new StdioSimpleMessagingSystem();
+		
+		// currently use only  one Console for everything, maybe later we can use a better strategy for having several consoles
+		String bundleSymbolicName = this.getBundle().getHeaders().get("Bundle-SymbolicName").toString();
+		String consoleUId = bundleSymbolicName+this.hashCode();
+		consoleIO = EclipseConsoleIOFactory.getInstance().getConsoleIO(consoleUId, "Default kermeta console");
 	}
 
 	/*
@@ -68,7 +78,9 @@ public class Activator extends AbstractUIPlugin {
 		return messaggingSystem;
 	}
 
-
+	public ConsoleIO getConsoleIO() {
+		return consoleIO;
+	}
 	
 
 }

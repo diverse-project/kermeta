@@ -18,6 +18,13 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugErrorMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugWarningMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.ErrorMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.InfoMessage;
+import org.kermeta.utils.systemservices.eclipse.internal.console.message.WarningMessage;
 
 
 
@@ -72,10 +79,13 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			break;
 		}
 		
+		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message));
 		// currently redirect to stdio
-		StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
-		stdioRedirect.log(msgKind, message, messageGroup);
+		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
+		//stdioRedirect.log(msgKind, message, messageGroup);
 	}
+
+	
 
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup, Throwable exception) {
@@ -93,9 +103,11 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		default:
 			break;
 		}
+		
+		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message));
 		// currently redirect to stdio
-		StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
-		stdioRedirect.log(msgKind, message, messageGroup, exception);
+		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
+		//stdioRedirect.log(msgKind, message, messageGroup, exception);
 		
 	}
 
@@ -151,5 +163,26 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		
 	}
 
+	protected ConsoleMessage getConsoleMessageFor(Kind msgKind, String message) {
+		switch (msgKind) {
+		case DevDEBUG:
+			return new DebugMessage(message);
+		case UserINFO:
+			return new InfoMessage(message);
+		case DevINFO:
+			return new DebugMessage(message);
+		case UserWARNING:
+			return new WarningMessage(message);
+		case DevWARNING:
+			return new DebugWarningMessage(message);
+		case UserERROR:
+			return new ErrorMessage(message);
+		case DevERROR:
+			return new DebugErrorMessage(message);
+			
+		default:
+			return new DebugMessage(message);
+		}
+	}
 
 }
