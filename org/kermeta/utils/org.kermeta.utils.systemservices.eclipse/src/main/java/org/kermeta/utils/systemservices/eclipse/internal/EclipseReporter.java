@@ -18,7 +18,7 @@ import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 
 public class EclipseReporter {
 	
-	public static final String PROBLEM_MARKER_ID = "org.kermeta.utils.system.eclipse.Kermeta2ProblemMarker";
+	public static final String PROBLEM_MARKER_ID = Activator.PLUGIN_ID+".Kermeta2ProblemMarker";
 	public static final String KERMETA_MARKER_ATTRIBUTE = "kermeta2_marker";
 	
 	protected MessagingSystem ms;
