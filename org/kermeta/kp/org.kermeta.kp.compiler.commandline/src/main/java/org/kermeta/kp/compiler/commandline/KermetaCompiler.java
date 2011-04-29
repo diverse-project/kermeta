@@ -52,7 +52,7 @@ public class KermetaCompiler {
 	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER+ "/scala";
 	
-	
+	public boolean runInEclipse = false;
 	public Boolean saveIntermediateFiles = false;
 	public String targetIntermediateFolder;
 	public MessagingSystem logger;
@@ -66,6 +66,11 @@ public class KermetaCompiler {
 	
 
 	
+	/**
+	 * Simple constructor 
+	 * @param registerProtocols if set to true, the constructor will take care to register some URL handler
+	 * @param logger is the MessagingSystem that must be used to log message, problem and progression
+	 */
 	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger) {
 		super();
 		this.logger = logger;
@@ -73,11 +78,21 @@ public class KermetaCompiler {
 			registerMVNUrlHandler();
 		}
 	}
-	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder) {
+	
+	/**
+	 * 
+	 * @param registerProtocols if set to true, the constructor will take care to register some URL handler
+	 * @param logger is the MessagingSystem that must be used to log message, problem and progression 
+	 * @param saveIntermediateFiles indicates if the compilation must also produce intermediate files  
+	 * @param targetIntermediateFolder indicates where the intermediate files must be generated
+	 * @param willRunInEclipse indicates if it is run in eclipse
+	 */
+	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetIntermediateFolder = targetIntermediateFolder;
+		this.runInEclipse = willRunInEclipse;
 		if(registerProtocols){
 			registerMVNUrlHandler();
 		}
@@ -111,12 +126,13 @@ public class KermetaCompiler {
 	}
 
 	/**
-	 * This initialization must be called before everything related to eclipse 
+	 * This initialization must be called before everything related to eclipse when run outside of eclipse 
 	 */
 	public static void initializeFactory(){
 		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
 				.setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.KerRichFactory$.MODULE$);
-		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();		
+		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
+		
 	}
 	
 /*	public KermetaCompiler(String targetFolder){
@@ -199,7 +215,7 @@ public class KermetaCompiler {
 				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
 				logger.debug("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")", this.getClass().getName());
 				
-				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(indirectURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(indirectURL);
 				if (mu != null) {
 					modelingUnits.add(mu);
 				}
@@ -220,7 +236,7 @@ public class KermetaCompiler {
 					logger.debug("sourceURL : " + sourceURLWithVariable, this.getClass().getName());
 				}
 				// usual internal source
-				ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(sourceURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(sourceURL);
 				if (mu != null) {
 					if(mu.getName() == null){
 						// force ModelingUnit name to the one provided in the kp
@@ -267,7 +283,7 @@ public class KermetaCompiler {
 		    else{
 		    	// load the km file resulting from the merge of the dependency
 		    	String dependencyMergedKMUrl = "jar:"+dependencyURL+"!"+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+dependencyKP.getName()+".km";
-		    	ModelingUnit mu = new ModelingUnitLoader(logger).loadModelingUnitFromURL(dependencyMergedKMUrl);
+		    	ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(dependencyMergedKMUrl);
 				if (mu != null) {
 					modelingUnits.add(mu);
 				}

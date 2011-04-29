@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.language.ecore2km.api.Ecore2KM;
+import org.kermeta.language.ecore2km.api.Ecore2KMImpl;
+import org.kermeta.language.ecore2km.api.Ecore2KMImpl4Eclipse;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
@@ -36,12 +39,13 @@ import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 public class ModelingUnitLoader {
 
 	MessagingSystem logger;
+	Boolean runInEclipse;
 	
 	
-	
-	public ModelingUnitLoader(MessagingSystem logger) {
+	public ModelingUnitLoader(MessagingSystem logger, Boolean runInEclipse) {
 		super();
 		this.logger = logger;
+		this.runInEclipse = runInEclipse;
 	}
 	
 	
@@ -105,13 +109,20 @@ public class ModelingUnitLoader {
 	}
 
 	protected ModelingUnit loadEcore(String uri) {
-		utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
-		org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
+		// utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
+		// org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
+		Ecore2KM converter;
+		if(runInEclipse){
+			converter = new Ecore2KMImpl4Eclipse(); 
+		}
+		else{
+			converter = new Ecore2KMImpl();
+		}
         kermeta.persistence.EMFRepository rep = kermeta.persistence.KerRichFactory.createEMFRepository();
         kermeta.persistence.Resource r = rep.getResource( uri);
         r.load();    
         
-        return   converter.convert((EPackage) r.get(0), "");
+        return   converter.convertPackage((EPackage) r.get(0), "");
 	}
 
 	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {
