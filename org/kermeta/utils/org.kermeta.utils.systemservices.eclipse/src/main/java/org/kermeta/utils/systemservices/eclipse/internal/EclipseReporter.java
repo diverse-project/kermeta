@@ -101,7 +101,6 @@ public class EclipseReporter {
 	public void flushProblem(final String problemGroup,final URL uri) {
 		try {
 			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
-			System.out.println(file.getName());
 			for (IMarker aMarker : file.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
 				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
 					aMarker.delete();
