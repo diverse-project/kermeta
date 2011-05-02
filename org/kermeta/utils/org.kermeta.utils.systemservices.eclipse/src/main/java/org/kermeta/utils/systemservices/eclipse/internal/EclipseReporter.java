@@ -103,9 +103,7 @@ public class EclipseReporter {
 			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
 			System.out.println(file.getName());
 			for (IMarker aMarker : file.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
-				System.out.println("Coucou1");
 				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
-					System.out.println("Coucou2");
 					aMarker.delete();
 				}
 			}
