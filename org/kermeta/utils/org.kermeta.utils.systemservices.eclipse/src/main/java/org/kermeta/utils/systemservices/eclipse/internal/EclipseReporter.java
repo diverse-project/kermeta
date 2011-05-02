@@ -1,14 +1,19 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
@@ -86,35 +91,39 @@ public class EclipseReporter {
 	public void addMarker(int markerSeverity, String Marker,IFile file, String message, String msgGroup) {
 		addMarker(markerSeverity, Marker, file, message, 0, 0,0, msgGroup);
 	}
-	
-	private String cleanString(URL toClean) {
-		String cleanString = toClean.toString();
-		if (cleanString.startsWith("file://")) {
-			cleanString = cleanString.replaceFirst("file://", "");
-		}
+
+	private String cleanString(URL toClean) throws URISyntaxException {
+		String cleanString = FileHelpers.URLToStringWithoutFile(toClean);
 		cleanString = cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
 		return cleanString;
 	}
-
-	public void flushProblem(String problemGroup,URL uri) {
+	
+	public void flushProblem(final String problemGroup,final URL uri) {
 		try {
 			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
-			for (IMarker aMarker : file.findMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE)) {
+			System.out.println(file.getName());
+			for (IMarker aMarker : file.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
+				System.out.println("Coucou1");
 				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
+					System.out.println("Coucou2");
 					aMarker.delete();
 				}
 			}
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to flush markers for group "+problemGroup, Activator.PLUGIN_ID, e);
-		}	
+		} catch (URISyntaxException e) {
+			ms.log(Kind.DevERROR, "URI exceptions during flushing markers for group "+problemGroup, Activator.PLUGIN_ID, e);
+		}
 	}
 	
 	public void flushAllProblems(URL uri) {
 		try {
 			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
-			file.deleteMarkers(PROBLEM_MARKER_ID, true, IResource.DEPTH_INFINITE);
+			file.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to flush all markers", Activator.PLUGIN_ID, e);
-		}	
+		} catch (URISyntaxException e) {
+			ms.log(Kind.DevERROR, "URI exceptions during flushing all markers", Activator.PLUGIN_ID, e);
+		}
 	}
 }

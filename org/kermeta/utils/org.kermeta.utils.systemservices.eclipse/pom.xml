@@ -34,6 +34,11 @@
 			<artifactId>utils.systemservices.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
 		
 		<!-- Eclipse dependencies -->
 		<dependency>
@@ -128,7 +133,8 @@
                         	org.eclipse.jface.text,
                     		org.eclipse.ui,
                     		org.eclipse.ui.console,
-                    		org.eclipse.ui.editors
+                    		org.eclipse.ui.editors,
+                    		org.kermeta.utils.helpers
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
