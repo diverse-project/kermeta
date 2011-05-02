@@ -8,8 +8,7 @@ public abstract class Builder {
 	protected Builder(){
 		super();
 	}
-	
-	public abstract ModelingUnit parseSpecificFile(IResource toParse, boolean inModification);
+
 	public abstract ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification);
 
 }
