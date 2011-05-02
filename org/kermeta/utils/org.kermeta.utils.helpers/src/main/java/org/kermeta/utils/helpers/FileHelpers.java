@@ -39,5 +39,8 @@ public class FileHelpers {
 	public static URL FileToURL(File file) throws MalformedURLException {
 		return file.toURI().toURL();
 	}
-
+	
+	public static String URLToStringWithoutFile(URL url) throws URISyntaxException {
+		return url.toString().replaceFirst("file:/", "");
+	}
 }
