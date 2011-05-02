@@ -182,7 +182,7 @@ public class KermetaScanner implements KermetaTokenScanner {
         //textRef.setFileURI(url);
         //textRef.setCharBeginOffset(getTokenOffset());
         //textRef.setCharEndOffset(getTokenOffset() + getTokenLength());
-        System.err.println("File is clear ");
+        //System.err.println("File is clear ");
         //System.err.println("Resource at : " + textRef.getFileURI() + " should not be marked");
     }
 
