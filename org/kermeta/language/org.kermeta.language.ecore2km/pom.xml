@@ -152,13 +152,14 @@
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Export-Package>
-								org.kermeta.language.ecore2km.art2.impl
-                        </Export-Package>
+								org.kermeta.language.ecore2km.api
+                        	</Export-Package>
 							<Require-Bundle>
 								fr.irisa.triskell.kermeta.model,
 								org.kermeta.language.model,
-								org.kermeta.language.framework.scala
-                        </Require-Bundle>
+								org.kermeta.language.framework.scala,
+								org.kermeta.language.ecore2km.api
+                        	</Require-Bundle>
 							<Import-Package>
 								kermeta.persistence,
 								org.eclipse.emf.common.notify,
@@ -169,15 +170,9 @@
 								org.eclipse.emf.ecore.util,
 								org.eclipse.emf.ecore.xmi,
 								org.eclipse.emf.ecore.xmi.impl,
-								org.kermeta.art2.framework,
-								org.kermeta.art2.framework.osgi,
-								org.kermeta.art2.framework.port,
-								org.kermeta.language.api.art2.port.utils,
-								org.kermeta.language.api.messaging,
-								org.kermeta.language.api.port,
-								org.kermeta.language.api.result,
+								org.kermeta.utils.systemservices.api.messaging,
+								org.kermeta.utils.systemservices.api.result,
 								org.kermeta.language.structure,
-								org.kermeta.traceability,
 								org.osgi.framework;version="[1.5,2)",
 								org.slf4j;version="[1.5,2)",
 								scala,
