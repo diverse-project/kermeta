@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IResource;
 
-public class KermetaRunner<G> implements Runnable {
+public class KermetaRunner<G> extends Thread{
 	
 	final private Map<IResource,G> waitingList;
 	final private Map<IResource,G> runningList;

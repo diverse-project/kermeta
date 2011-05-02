@@ -47,7 +47,7 @@ public class KermetaBuilder extends Builder{
 	@Override
 	public ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification) {
 		KermetaRunner<String> theRunner = new KermetaRunner<String>(parsingInPending, parsingInProgress, toParse, content, new KermetaParser(inModification));
-		theRunner.run();
+		theRunner.start();
 		return currentModelingUnits.get(toParse.getFullPath().toOSString());
 	}
 
