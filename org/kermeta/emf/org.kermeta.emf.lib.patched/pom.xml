@@ -99,6 +99,10 @@
 								org.xml.sax.ext,
 								org.xml.sax.helpers
  							</Import-Package>
+ 							<Private-Package>
+ 							org.eclipse.emf.ecore,
+ 							org.eclipse.emf.ecore.impl,
+ 							</Private-Package>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -108,7 +112,7 @@
 				<goals> <goal>unpack-dependencies</goal> </goals> </execution> </executions> 
 				</plugin> -->
 
-			<plugin>
+		 <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>             
 				<version>2.2</version>
@@ -118,19 +122,20 @@
 						<goals>
 							<goal>unpack-dependencies</goal>
 						</goals>
-						<phase>generate-resources</phase>
+						<!-- <phase>generate-resources</phase> -->
+						<phase>process-classes</phase>
 						<configuration>
-							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
-							<!-- <includeArtifacIds>shared-resources</includeArtifacIds> -->
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
 							<includeGroupIds>org.kermeta.eclipse</includeGroupIds>
 							<excludeTransitive>true</excludeTransitive>
-							<excludes>org\/eclipse\/emf\/ecore\/EcoreFactory.class,org\/eclipse\/emf\/ecore\/impl\/EcorePackageImpl.class,</excludes>
-							<!--use as much as needed to be specific...also scope,type,classifier 
-								etc -->
+							<excludes>org\/eclipse\/emf\/ecore\/EcoreFactory.class,
+								org\/eclipse\/emf\/ecore\/impl\/EcorePackageImpl.class
+								META-INF\/*.*</excludes>							
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			
 		</plugins>
 
 	</build>
