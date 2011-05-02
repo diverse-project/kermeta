@@ -14,8 +14,8 @@ import java.net.MalformedURLException;
 import org.eclipse.core.resources.IResource;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.api.Builder;
-import org.kermeta.language.eclipse.builder.internal.Activator;
-import org.kermeta.language.eclipse.builder.internal.ResourceIdentifier;
+import org.kermeta.language.builder.eclipse.internal.Activator;
+import org.kermeta.language.builder.eclipse.internal.ResourceIdentifier;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 

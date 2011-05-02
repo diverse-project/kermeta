@@ -7,7 +7,7 @@
 *      Cédric Bouhours <cedric.bouhours@inria.fr>
 */
 
-package org.kermeta.language.eclipse.builder.internal;
+package org.kermeta.language.builder.eclipse.internal;
 
 public class ResourceIdentifier {
 	

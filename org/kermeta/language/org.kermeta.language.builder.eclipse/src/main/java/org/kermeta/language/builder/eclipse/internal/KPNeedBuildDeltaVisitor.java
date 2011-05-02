@@ -6,7 +6,7 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.language.eclipse.builder.internal;
+package org.kermeta.language.builder.eclipse.internal;
 
 import java.net.MalformedURLException;
 import java.net.URL;
