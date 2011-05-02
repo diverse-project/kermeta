@@ -117,35 +117,45 @@ public class EclipseMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void logProblem(Kind kind, String msg, String msgGroup, Reference ref) {
+		Kind log_kind = kind;
 		switch (kind) {
 		case UserWARNING:
 			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
+			// since the message is in the problem view, downgrade log_kind to dev so it can be filtered
+			log_kind = Kind.DevDEBUG;
 			break;
 		case UserERROR:
 			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
+			// downgrade log_kind to dev
+			log_kind = Kind.DevDEBUG;
 			break;
 		default:
 			break;
 		}
 		// forward all message to usual log too
-		log(kind, msg + " "+ref, msgGroup);
+		log(log_kind, msg + " "+ref, msgGroup);
 	}
 
 	@Override
 	public void logProblem(Kind kind, String msg, String msgGroup, Throwable exception,
 			Reference ref) {
+		Kind log_kind = kind;
 		switch (kind) {
 		case UserWARNING:
 			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
+			//  since the message is in the problem view, downgrade log_kind to dev so it can be filtered
+			log_kind = Kind.DevDEBUG;
 			break;
 		case UserERROR:
 			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
+			// downgrade log_kind to dev
+			log_kind = Kind.DevDEBUG;
 			break;
 		default:
 			break;
 		}
 		// forward all message to usual log too, here we can use the stacktrace 
-		log(kind, msg + " "+ref, msgGroup, exception);
+		log(log_kind, msg + " "+ref, msgGroup, exception);
 		
 	}
 
