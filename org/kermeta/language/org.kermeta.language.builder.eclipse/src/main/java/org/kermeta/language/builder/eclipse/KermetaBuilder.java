@@ -9,15 +9,16 @@
 
 package org.kermeta.language.builder.eclipse;
 
-import java.net.MalformedURLException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
-import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.api.Builder;
-import org.kermeta.language.builder.eclipse.internal.Activator;
+import org.kermeta.language.builder.eclipse.internal.KermetaParser;
 import org.kermeta.language.builder.eclipse.internal.ResourceIdentifier;
+import org.kermeta.language.builder.eclipse.internal.executionner.KermetaRunner;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 
 import fr.irisa.triskell.cache.utilities.SoftReferenceMapCache;
 
@@ -26,8 +27,13 @@ public class KermetaBuilder extends Builder{
 	public SoftReferenceMapCache<ResourceIdentifier, ModelingUnit> currentModelingUnits = new SoftReferenceMapCache<ResourceIdentifier, ModelingUnit>();
 	
 	private static KermetaBuilder instance = null;
+	private static Map<IResource,String> _parsingInProgress = new HashMap<IResource,String>();
+	private static Map<IResource,String> _parsingInPending = new HashMap<IResource,String>();
+	private static Map<IResource,String> parsingInProgress = Collections.synchronizedMap(_parsingInProgress);
+	private static Map<IResource,String> parsingInPending = Collections.synchronizedMap(_parsingInPending);
+	
 
-	private KermetaBuilder(){
+	private KermetaBuilder(){	
 		super();
 	}
 	
@@ -37,51 +43,14 @@ public class KermetaBuilder extends Builder{
 		}
 		return instance;
 	}
-	
-	@Override
-	public ModelingUnit parseSpecificFile(IResource toParse, boolean inModification) {
-						
-		try {
-			KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
-					
-			ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse));
-						
-			saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
 		
-			return freshModelingUnit;
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	@Override
 	public ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification) {
-		
-		try {
-			KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
-					
-			ModelingUnit freshModelingUnit = theCompiler.parse(ResourceHelpers.IResourceToURL(toParse),content);
-						
-			saveParsingResult(freshModelingUnit, toParse.getFullPath().toOSString(),inModification);
-		
-			return freshModelingUnit;
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		KermetaRunner<String> theRunner = new KermetaRunner<String>(parsingInPending, parsingInProgress, toParse, content, new KermetaParser(inModification));
+		theRunner.run();
+		return currentModelingUnits.get(toParse.getFullPath().toOSString());
 	}
-	
-	private void saveParsingResult(ModelingUnit result, String identifier, boolean inModification) {
-		ResourceIdentifier theCurrentResourceIdentifier = getResourceIdentifier(identifier);
-		
-		if (theCurrentResourceIdentifier==null) {
-			theCurrentResourceIdentifier = new ResourceIdentifier(identifier, inModification);
-		}
-		currentModelingUnits.put(theCurrentResourceIdentifier, result);
-	}
+
 	
 	public ResourceIdentifier getResourceIdentifier(String key) {
 		for (ResourceIdentifier anElement : currentModelingUnits.keySet()) {
