@@ -191,11 +191,13 @@ public class KermetaCompiler {
 
 
 	public ModelingUnit parse(URL uri){
+		logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP, uri);
 		KMTparser theParser = new KMTparser();
 		return theParser.load(uri, "", logger);
 	}
 	
 	public ModelingUnit parse(URL uri, String content){
+		logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP, uri);
 		KMTparser theParser = new KMTparser();
 		return theParser.load(uri, content, logger);
 	}
