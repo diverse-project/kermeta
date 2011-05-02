@@ -1,0 +1,138 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.emf</groupId>
+	<artifactId>emf.lib.patched</artifactId>
+	<packaging>jar</packaging>
+	<url>http://maven.apache.org</url>
+
+	<name>emf.lib.patched</name>
+	<version>2.6.0</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.6.0.v20100914-1218</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.6.1.v20100914-1218</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>2.5.0.v20100521-1846</version>
+		</dependency>
+	</dependencies>
+	<build>
+
+		<!-- <resources> <resource> <directory>${basedir}/target/dependency/org/eclipse/emf</directory> 
+			<targetPath>org/eclipse/emf</targetPath> </resource> </resources> -->
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Vendor>Eclipse repackaged by ${bundle.vendor}</Bundle-Vendor>
+							<Bundle-ClassPath>.</Bundle-ClassPath>
+							<Export-Package>
+								org.eclipse.emf.common,
+								org.eclipse.emf.common.archive,
+								org.eclipse.emf.common.command,
+								org.eclipse.emf.common.notify,
+								org.eclipse.emf.common.notify.impl,
+								org.eclipse.emf.common.util,
+								org.eclipse.emf.ecore,
+								org.eclipse.emf.ecore.impl,
+								org.eclipse.emf.ecore.plugin,
+								org.eclipse.emf.ecore.resource,
+								org.eclipse.emf.ecore.resource.impl,
+								org.eclipse.emf.ecore.util,
+								org.eclipse.emf.ecore.xmi,
+								org.eclipse.emf.ecore.xmi.impl,
+								org.eclipse.emf.ecore.xmi.util,
+								org.eclipse.emf.ecore.xml.namespace,
+								org.eclipse.emf.ecore.xml.namespace.impl,
+								org.eclipse.emf.ecore.xml.namespace.util,
+								org.eclipse.emf.ecore.xml.type,
+								org.eclipse.emf.ecore.xml.type.impl,
+								org.eclipse.emf.ecore.xml.type.internal,
+								org.eclipse.emf.ecore.xml.type.util
+                        	</Export-Package>
+							<Import-Package>
+								javax.xml.datatype,
+								javax.xml.namespace,
+								javax.xml.parsers,
+								org.w3c.dom,
+								org.xml.sax,
+								org.xml.sax.ext,
+								org.xml.sax.helpers
+ 							</Import-Package>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>unpack-dependencies</id> <phase>generate-resources</phase> 
+				<goals> <goal>unpack-dependencies</goal> </goals> </execution> </executions> 
+				</plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>             
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>unpack-shared-resources</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+							<!-- <includeArtifacIds>shared-resources</includeArtifacIds> -->
+							<includeGroupIds>org.kermeta.eclipse</includeGroupIds>
+							<excludeTransitive>true</excludeTransitive>
+							<!--use as much as needed to be specific...also scope,type,classifier 
+								etc -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>kermeta-public-release</id>
+			<name>Kermeta public release repository on maven.irisa.fr</name>
+			<url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>kermeta-public-snapshot</id>
+			<name>Kermeta public snapshot repository on maven.irisa.fr</name>
+			<url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>
