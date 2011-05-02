@@ -10,6 +10,9 @@
 	<name>emf.lib.patched</name>
 	<version>2.6.0</version>
 
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
@@ -41,6 +44,17 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!-- Java compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -110,6 +124,7 @@
 							<!-- <includeArtifacIds>shared-resources</includeArtifacIds> -->
 							<includeGroupIds>org.kermeta.eclipse</includeGroupIds>
 							<excludeTransitive>true</excludeTransitive>
+							<excludes>org\/eclipse\/emf\/ecore\/EcoreFactory.class,org\/eclipse\/emf\/ecore\/impl\/EcorePackageImpl.class,</excludes>
 							<!--use as much as needed to be specific...also scope,type,classifier 
 								etc -->
 						</configuration>
