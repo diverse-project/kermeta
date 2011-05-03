@@ -123,13 +123,17 @@
 							<goal>unpack-dependencies</goal>
 						</goals>
 						<!-- <phase>generate-resources</phase> -->
+						<!-- Do it late so it won't interfere with compilation(java version problem ?) must make sure to not include the classes that will be overridden -->
 						<phase>process-classes</phase>
 						<configuration>
 							<outputDirectory>${project.build.directory}/classes</outputDirectory>
 							<includeGroupIds>org.kermeta.eclipse</includeGroupIds>
 							<excludeTransitive>true</excludeTransitive>
+							<!-- make sure to use our own classes -->
+							<!-- avoid plugin.xml (registration conflict with official emf in eclipse )-->
 							<excludes>org\/eclipse\/emf\/ecore\/EcoreFactory.class,
-								org\/eclipse\/emf\/ecore\/impl\/EcorePackageImpl.class
+								org\/eclipse\/emf\/ecore\/impl\/EcorePackageImpl.class,
+								plugin.xml,
 								META-INF\/*.*</excludes>							
 						</configuration>
 					</execution>
