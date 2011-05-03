@@ -9,6 +9,7 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -57,7 +58,9 @@ public class KermetaScanner implements KermetaTokenScanner {
 
             //Art2ComponentTexteditorEclipse.getDefault().getLogPort().process("Parser Text = "+content);
             
+            //System.out.println(System.currentTimeMillis());
             tokens = new Lexer().lex(content);
+            //System.out.println(System.currentTimeMillis());
             //System.out.println("LEXER got it => "+tokens.size());
             //Art2ComponentTexteditorEclipse.getDefault().getLogPort().process("Size"+tokens.size());
 
