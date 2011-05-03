@@ -154,8 +154,8 @@ public class KpCompilerMojo extends AbstractMojo {
 	        KermetaCompiler compiler = new KermetaCompiler(true,
 	        		new StdioSimpleMessagingSystem(),
 	        		intermediateFilesRequired,
-	        		sourceOutputDirectory.toString()
-	        		 );
+	        		sourceOutputDirectory.toString(),
+	        		 false);
 			
 			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
