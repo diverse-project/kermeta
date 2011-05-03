@@ -18,12 +18,12 @@ import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 import scala.collection.JavaConversions._
 
 /**
- * Sub parser dedicated to parse Conditional expression in KMT textual syntax
+ * Sub parser dedicated to parse Lambda expression in KMT textual syntax
  */
 trait KLambdaParser extends KAbstractParser {
 
-  def fLambda : Parser[Expression] = "{" ~ repsep(ident, ",") ~ "|" ~ fExpression ~ "}" ^^ { 
-    case ob1 ~ params ~ pipe ~ exp ~ cb1 => {
+  def fLambda : Parser[Expression] = "{" ~ repsep(ident, ",") ~ "|" ~ fExpressionLst ~ "}" ^^ {
+    case ob1 ~ params ~ pipe ~ exps ~ cb1 => {
 	 	  
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
 	 	  
@@ -32,8 +32,9 @@ trait KLambdaParser extends KAbstractParser {
           newLambdaP.setName(pname)
           newLambdaExp.getParameters.add(newLambdaP)
         }
-	 	  
-        newLambdaExp.setBody(exp)
+	var newBlock = BehaviorFactory.eINSTANCE.createBlock
+        newBlock.getStatement.addAll(exps)
+        newLambdaExp.setBody(newBlock)
         newLambdaExp
       }
 	  
