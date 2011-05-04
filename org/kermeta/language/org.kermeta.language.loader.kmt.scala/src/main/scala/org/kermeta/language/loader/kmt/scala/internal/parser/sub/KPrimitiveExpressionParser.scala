@@ -19,7 +19,7 @@ import scala.collection.JavaConversions._
 /**
  * Sub parser dedicated to parse Assignment expression and operators in KMT textual syntax  
  */
-trait KPrimitiveExpressionParser extends KAbstractParser {
+trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser {
 
    // override def fStatement : Parser[Expression] = fAssignement
    //override def fStatement : Parser[Expression] = fLiteral | fBlock | pExpression | fVariableDecl | fCall | fLoop | fConditional
@@ -99,7 +99,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser {
       result
   }
   def fMultOp = "*" | "/"
-  def fUnaryExpression : Parser[Expression] = (fUnaryOp?) ~ fExpression   ^^ {
+  def fUnaryExpression : Parser[Expression] = (fUnaryOp?) ~ fExpressionMergedCall   ^^ {
     case op ~ stat => {
         op match {
           case Some(op) => {

@@ -21,17 +21,17 @@ import scala.collection.JavaConversions._
  */
 trait KStructuralParser extends KAbstractParser {
 
-  def fExpressionLst : Parser[List[Expression]] = rep(fStatement) ^^ { case list =>
-      /* POST PROCESS, LINK UnresolvedCall to each other */
+  def fExpressionMergedCall : Parser[Expression] = rep1(fExpression) ^^ { case l =>
       var previousUnresolvedCall : Option[UnresolvedCall] = None
       var processedList : List[Expression] = List()
       // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
       // recreate a hierachy for Calls that must be nested in the target of another expression
-      list.toList.reverse.foreach(p=>{
+      l.reverse.foreach(p=>{
           p match {
             case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
                 previousUnresolvedCall match {
                   case None => previousUnresolvedCall=Some(cf);processedList = cf::processedList
+
                   case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
                 }
             }
@@ -45,6 +45,41 @@ trait KStructuralParser extends KAbstractParser {
           }
 
         })
+      if(processedList.size > 1){
+        println("fail")
+        println(processedList.mkString)
+
+      }
+      processedList.head
+  }
+
+
+  def fExpressionLst : Parser[List[Expression]] = rep(fStatement) ^^ { case list =>
+      /* POST PROCESS, LINK UnresolvedCall to each other */
+      var previousUnresolvedCall : Option[UnresolvedCall] = None
+      var processedList : List[Expression] = List()
+      // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
+      // recreate a hierachy for Calls that must be nested in the target of another expression
+      list.toList.reverse.foreach(p=>{
+          p match {
+            case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                previousUnresolvedCall match {
+                  case None => previousUnresolvedCall=Some(cf);processedList = cf::processedList
+                  
+                  case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
+                }
+            } 
+            case _ @ e =>{
+                previousUnresolvedCall match {
+                  case None =>processedList = e::processedList
+                  case Some(pe)=> pe.setTarget(e);previousUnresolvedCall=None
+                }
+              }
+
+          }
+
+        })
+      
       processedList
   }
   def pExpression : Parser[Expression] = "(" ~> fStatement <~ ")"
