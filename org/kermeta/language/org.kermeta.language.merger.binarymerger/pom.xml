@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.7</version>
+            <version>0.12.8</version>
         </dependency>
         <!-- <dependency>
             <groupId>${project.groupId}</groupId>
@@ -94,7 +94,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA14</version>
+                <version>1.4.1-BETA15</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
