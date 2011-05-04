@@ -165,7 +165,8 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-Activator>org.kermeta.language.builder.eclipse.internal.Activator</Bundle-Activator>
+						<Bundle-Activator>org.kermeta.language.builder.eclipse.internal.Activator</Bundle-Activator>						
+						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Export-Package>
 							org.kermeta.language.builder.eclipse
 						</Export-Package>
@@ -176,10 +177,13 @@
 							org.eclipse.ui.workbench,
 							org.eclipse.ui.ide,
 							org.eclipse.equinox.registry,
+							org.kermeta.language.framework.scala,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.systemservices.eclipse,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
+							org.kermeta.language.ecore2km,
+							org.kermeta.language.ecore2km.api,
 							org.kermeta.kp.model,
 							org.kermeta.kp.loader.kp,
 							org.kermeta.kp.compiler.commandline,

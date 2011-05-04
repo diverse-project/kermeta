@@ -19,7 +19,7 @@ public class KermetaParser extends KermetaExecutionner<String> {
 	
 	@Override
 	public void execute(IResource concernedResource, String content) {
-		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem());
+		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), true);
 		ModelingUnit freshModelingUnit = null;
 		if (content.equals("")) {
 			try {
