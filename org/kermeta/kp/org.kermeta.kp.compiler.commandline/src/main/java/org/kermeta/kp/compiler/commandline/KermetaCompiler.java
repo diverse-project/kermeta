@@ -71,12 +71,13 @@ public class KermetaCompiler {
 	 * @param registerProtocols if set to true, the constructor will take care to register some URL handler
 	 * @param logger is the MessagingSystem that must be used to log message, problem and progression
 	 */
-	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger) {
+	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
 		if(registerProtocols){
 			registerMVNUrlHandler();
 		}
+		this.runInEclipse = willRunInEclipse;
 	}
 	
 	/**

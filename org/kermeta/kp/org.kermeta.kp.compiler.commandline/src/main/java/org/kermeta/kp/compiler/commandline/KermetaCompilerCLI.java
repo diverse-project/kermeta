@@ -50,7 +50,7 @@ public class KermetaCompilerCLI {
 	}
 		
 	private void run() throws IOException {
-		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem());
+		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), false);
 		compiler.kp2bytecode(kpFile, outputFolder,outputFolder,new java.util.ArrayList<String>(), false);
 	}
 

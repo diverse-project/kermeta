@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.ecore2km.api.Ecore2KM;
-import org.kermeta.language.ecore2km.api.Ecore2KMImpl;
-import org.kermeta.language.ecore2km.api.Ecore2KMImpl4Eclipse;
+import org.kermeta.language.ecore2km.Ecore2KMImpl;
+import org.kermeta.language.ecore2km.Ecore2KMImpl4Eclipse;
 import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
@@ -28,7 +28,7 @@ import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
-import scala.Option;
+//import scala.Option;
 import scala.collection.Iterator;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
@@ -49,7 +49,7 @@ public class ModelingUnitLoader {
 	}
 	
 	
-	public ModelingUnit loadModelingUnitFromURL(String url){
+	public ModelingUnit loadModelingUnitFromURL(String url) throws IOException{
 		ModelingUnit mu = null;
 		if (url.endsWith(".kmt")) {
 			try {
@@ -108,7 +108,7 @@ public class ModelingUnitLoader {
 		return (ModelingUnit) resource.getContents().get(0);
 	}
 
-	protected ModelingUnit loadEcore(String uri) {
+	protected ModelingUnit loadEcore(String uri) throws IOException {
 		// utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
 		// org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
 		Ecore2KM converter;
@@ -118,11 +118,20 @@ public class ModelingUnitLoader {
 		else{
 			converter = new Ecore2KMImpl();
 		}
-        kermeta.persistence.EMFRepository rep = kermeta.persistence.KerRichFactory.createEMFRepository();
-        kermeta.persistence.Resource r = rep.getResource( uri);
-        r.load();    
-        
-        return   converter.convertPackage((EPackage) r.get(0), "");
+       // kermeta.persistence.EMFRepository rep = kermeta.persistence.KerRichFactory.createEMFRepository();
+       // kermeta.persistence.Resource r = rep.getResource( uri);
+		Map<String, String> options = null;
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+		Map<String, Object> m = f.getExtensionToFactoryMap();
+		m.put("*", new XMIResourceFactoryImpl());
+		m.put("ecore", new XMIResourceFactoryImpl());
+		URI ruri =  URI.createURI(uri);
+		Resource resource = resourceSet.createResource(ruri);
+		resource.load(options);
+        //r.load();    
+		
+        return   converter.convertPackage((EPackage) resource.getContents().get(0), "");
 	}
 
 	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {

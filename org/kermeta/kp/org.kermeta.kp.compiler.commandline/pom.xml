@@ -35,6 +35,7 @@
 						<Manifest-Version>1.0</Manifest-Version>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Export-Package>
 								org.kermeta.kp.compiler.commandline
                         </Export-Package>
