@@ -40,12 +40,20 @@ public class ModelingUnitLoader {
 
 	MessagingSystem logger;
 	Boolean runInEclipse;
-	
+	public Boolean saveIntermediateFiles = false;
+	public String targetIntermediateFolder;
 	
 	public ModelingUnitLoader(MessagingSystem logger, Boolean runInEclipse) {
 		super();
 		this.logger = logger;
 		this.runInEclipse = runInEclipse;
+	}
+	public ModelingUnitLoader(MessagingSystem logger, Boolean runInEclipse, Boolean saveIntermediateFiles, String targetIntermediateFolder) {
+		super();
+		this.logger = logger;
+		this.runInEclipse = runInEclipse;
+		this.saveIntermediateFiles = saveIntermediateFiles;
+		this.targetIntermediateFolder = targetIntermediateFolder;
 	}
 	
 	
@@ -54,6 +62,11 @@ public class ModelingUnitLoader {
 		if (url.endsWith(".kmt")) {
 			try {
 				mu = this.loadKMT(url);
+				if(saveIntermediateFiles && mu != null){
+					URI ruri =  URI.createURI(url);
+					URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
+					new ModelingUnitConverter(true,targetIntermediateFolder+"/kmt2km"+ruri.path()+".km").saveMu(mu, ruri);
+				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,7 +80,11 @@ public class ModelingUnitLoader {
 			//org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
 			StructurePackage.eINSTANCE.getEFactoryInstance();
 			mu = this.loadEcore(url);
-			
+			if(saveIntermediateFiles && mu != null){
+				URI ruri =  URI.createURI(url);
+				logger.debug(targetIntermediateFolder, this.getClass().getName());
+				new ModelingUnitConverter(true,targetIntermediateFolder+"/ecore2km"+ruri.path()+".km").saveMu(mu, ruri);
+			}
 		}else if (url.endsWith(".km")) {
 
 			MainRunner.init4eclipse();

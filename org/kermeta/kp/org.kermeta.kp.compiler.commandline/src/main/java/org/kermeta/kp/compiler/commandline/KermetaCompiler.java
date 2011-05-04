@@ -218,9 +218,12 @@ public class KermetaCompiler {
 				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
 				logger.debug("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")", this.getClass().getName());
 				
-				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(indirectURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse,this.saveIntermediateFiles, this.targetIntermediateFolder+"/"+srcQuery.getFrom().getName()).loadModelingUnitFromURL(indirectURL);
 				if (mu != null) {
 					modelingUnits.add(mu);
+					if(this.saveIntermediateFiles){
+						
+					}
 				}
 				else {
 					logger.error("Empty ModelingUnit, failed to load " +indirectURL, this.getClass().getName(), new Exception());
@@ -239,7 +242,7 @@ public class KermetaCompiler {
 					logger.debug("sourceURL : " + sourceURLWithVariable, this.getClass().getName());
 				}
 				// usual internal source
-				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(sourceURL);
+				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse,this.saveIntermediateFiles, this.targetIntermediateFolder).loadModelingUnitFromURL(sourceURL);
 				if (mu != null) {
 					if(mu.getName() == null){
 						// force ModelingUnit name to the one provided in the kp
