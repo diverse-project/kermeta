@@ -11,17 +11,13 @@
 	<name>language.ecore2km :: Ecore to Kermeta 2 converter</name>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.annotation</artifactId>
-			<version>${art2.version}</version>
-		</dependency>
+		
 		<dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.framework</artifactId>
-			<version>${art2.version}</version>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib.patched</artifactId>
+			<version>${emf.version}</version>
+			<type>jar</type>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>language.model</artifactId>
@@ -47,7 +43,7 @@
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.framework.scala</artifactId>
-			<version>0.12.7</version>
+			<version>0.12.8</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -69,16 +65,13 @@
 			<type>jar</type>
 		</dependency> -->
 
-		<dependency>
-			<groupId>org.kermeta.emf</groupId>
-			<artifactId>emf.lib</artifactId>
-			<version>${emf.version}</version>
-			<type>jar</type>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
 			<resource>
 				<directory>${project.build.directory}/generated-sources/resources</directory>
 			</resource>
@@ -89,7 +82,7 @@
 			<plugin>
 				<groupId>org.kermeta.language</groupId>
 				<artifactId>language.compiler.mavenplugin</artifactId>
-				<version>1.4.1-BETA14</version>
+				<version>1.4.1-BETA15</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>
@@ -152,11 +145,13 @@
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Export-Package>
-								org.kermeta.language.ecore2km.api
+								org.kermeta.language.ecore2km,
+								org.kermeta.language.language.ecore2kmrunner
                         	</Export-Package>
 							<Require-Bundle>
 								fr.irisa.triskell.kermeta.model,
 								org.kermeta.language.model,
+								org.kermeta.traceability.model,
 								org.kermeta.language.framework.scala,
 								org.kermeta.language.ecore2km.api
                         	</Require-Bundle>
@@ -169,7 +164,7 @@
 								org.eclipse.emf.ecore.resource,
 								org.eclipse.emf.ecore.util,
 								org.eclipse.emf.ecore.xmi,
-								org.eclipse.emf.ecore.xmi.impl,
+								org.eclipse.emf.ecore.xmi.impl,								
 								org.kermeta.utils.systemservices.api.messaging,
 								org.kermeta.utils.systemservices.api.result,
 								org.kermeta.language.structure,
