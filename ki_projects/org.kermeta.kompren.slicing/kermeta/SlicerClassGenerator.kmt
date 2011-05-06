@@ -182,7 +182,9 @@ class SlicerClassGenerator inherits Generator {
 			result := result + "\t\tself." + clazz.domain.getAddedAttributeName() + " := Bag<" + clazz.domain.name + ">.new\n"
 		}
 		slicerGenerator.slicerModel.slicedProperties.each{rel |
-			result := result + "\t\tself.added" + rel.domain.name + " := Bag<Class" + rel.domain.name + ">.new\n"
+			if(not rel.expression.isVoid) then
+				result := result + "\t\tself.added" + rel.domain.name + " := Bag<Class" + rel.domain.name + ">.new\n"
+			end
 		}
 
 		if(not slicerGenerator.slicerModel.radius.isVoid) then
@@ -214,7 +216,9 @@ class SlicerClassGenerator inherits Generator {
 			result := result + "\treference " + clazz.domain.getAddedAttributeName() + " : Bag<" + clazz.domain.name + ">\n\n"
 		}
 		slicerGenerator.slicerModel.slicedProperties.each{rel |
-			result := result + "\treference added" + rel.domain.name + " : Bag<Class" + rel.domain.name + ">\n\n" 
+			if(not rel.expression.isVoid) then
+				result := result + "\treference added" + rel.domain.name + " : Bag<Class" + rel.domain.name + ">\n\n"
+			end 
 		}
 	end
 

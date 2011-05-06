@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="KevoreeComponentSlicer" uriMetamodel="platform:/org.kermeta.kompren.slicing/examples/kevoree/kevoree.ecore">
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="stdio.writeln(&quot;component: &quot; + comp.name)">
+    <ctx varName="comp">
+      <type href="kevoree.ecore#//ComponentInstance"/>
+    </ctx>
+    <domain href="kevoree.ecore#//ComponentInstance"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kevoree.ecore#//ContainerNode/components"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kevoree.ecore#//ContainerRoot/nodes"/>
+  </slicedElements>
+  <inputClasses href="kevoree.ecore#//ContainerRoot"/>
+</org.kermeta.kompren.slicing:Slicer>

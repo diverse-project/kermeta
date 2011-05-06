@@ -1,0 +1,68 @@
+package ex::classModel;
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassModel.ecore"
+require "InvertedClassModelSlicer.kmt"
+using kermeta::standard
+using kermeta::utils
+aspect class PruningVisitorAspect {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute addedToPruner : Boolean
+
+	operation initialiseAttributes() : Void is do
+		self.visitedPass := false
+		self.addedToPruner := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
+	end
+
+	operation checkInitialisation() : Void is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+}
+
+aspect class Clazz inherits PruningVisitorAspect {
+	reference superClassesOpposite : Clazz[0..*]
+
+	operation initialisesuperClassesOpposite() : Void is do
+		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
+	end
+
+	method visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theInvertedClassModelSlicer)
+			if(not self.addedToPruner) then
+				theInvertedClassModelSlicer.addedClazzs.add(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			self.superClassesOpposite.each{theClazz | theClazz.visitToAddClasses(theInvertedClassModelSlicer)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
+		if(not self.visitedPass) then
+			super(theInvertedClassModelSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.superClassesOpposite.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelSlicer)
+				if(self.visitedForRelations and theClazz.visitedForRelations) then
+					theInvertedClassModelSlicer.addedsuperClassesOpposite.add(ClasssuperClassesOpposite.new.initialise(self, theClazz)) end }
+			self.visitedPass := false
+		end
+	end
+}
+

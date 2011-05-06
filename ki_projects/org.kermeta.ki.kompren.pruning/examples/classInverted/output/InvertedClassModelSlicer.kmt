@@ -1,0 +1,44 @@
+package ex::classModel;
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassModel.ecore"
+require "InvertedClassModelSlicerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class InvertedClassModelSlicer {
+	reference requiredClazzs : Clazz[0..*]
+
+	reference addedClazzs : Bag<Clazz>
+
+	reference addedsuperClassesOpposite : Bag<ClasssuperClassesOpposite>
+
+	operation initialise(requiredClazzs : bag Clazz[0..*]) : InvertedClassModelSlicer is do
+		result := self
+		self.addedClazzs := Bag<Clazz>.new
+		self.addedsuperClassesOpposite := Bag<ClasssuperClassesOpposite>.new
+		self.requiredClazzs.addAll(requiredClazzs)
+	end
+
+	operation launch() : Void is do
+		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
+		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
+		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
+		self.addedsuperClassesOpposite.each{thesuperClassesOpposite | self.onsuperClassesOppositeAdded(thesuperClassesOpposite.src, thesuperClassesOpposite.tar) }
+	end
+
+	operation onClazzAdded(clazz : Clazz) : Void is do
+stdio.writeln("class: " + clazz.name)
+	end
+	operation onsuperClassesOppositeAdded(src : Clazz, tgt : Clazz) : Void is do
+stdio.writeln(tgt.name + "subclass of" + src.name)
+	end
+}
+class ClasssuperClassesOpposite {
+	reference src : Clazz
+	reference tar : Clazz
+	operation initialise(src : Clazz, tar : Clazz) : ClasssuperClassesOpposite is do
+		result := self
+		self.src := src
+		self.tar := tar
+	end
+}

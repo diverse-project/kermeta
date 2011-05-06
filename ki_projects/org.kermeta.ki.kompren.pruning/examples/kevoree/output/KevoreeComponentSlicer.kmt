@@ -1,0 +1,28 @@
+package kevoree;
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/kevoree/kevoree.ecore"
+require "KevoreeComponentSlicerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class KevoreeComponentSlicer {
+	reference requiredContainerRoots : ContainerRoot[0..*]
+
+	reference addedComponentInstances : Bag<ComponentInstance>
+
+	operation initialise(requiredContainerRoots : bag ContainerRoot[0..*]) : KevoreeComponentSlicer is do
+		result := self
+		self.addedComponentInstances := Bag<ComponentInstance>.new
+		self.requiredContainerRoots.addAll(requiredContainerRoots)
+	end
+
+	operation launch() : Void is do
+		self.requiredContainerRoots.each{theContainerRoot | theContainerRoot.visitToAddClasses(self) }
+		self.requiredContainerRoots.each{theContainerRoot | theContainerRoot.visitToAddRelations(self) }
+		self.addedComponentInstances.each{theComponentInstance | onComponentInstanceAdded(theComponentInstance) }
+	end
+
+	operation onComponentInstanceAdded(comp : ComponentInstance) : Void is do
+stdio.writeln("component: " + comp.name)
+	end
+}

@@ -296,7 +296,7 @@ class SlicerAspectGenerator inherits Generator {
 	operation generateAddRelations(classVisit : Boolean, relation : EReference) : String is do
 		result := ""
 		if(not classVisit and slicerGenerator.slicerModel.slicedProperties.exists{rel | 
-			rel.asType(SlicedProperty).domain==relation }) then
+			rel.asType(SlicedProperty).domain==relation and not rel.asType(SlicedProperty).expression.isVoid }) then
 			var nameVar2 : String init relation.eType.asType(EClass).getVarNameClassifier()
 			result := result + "\n\t\t\t\tif(self.visitedForRelations and " + nameVar2 +
 					".visitedForRelations) then\n\t\t\t\t\tthe" + slicerGenerator.slicerModel.name +
