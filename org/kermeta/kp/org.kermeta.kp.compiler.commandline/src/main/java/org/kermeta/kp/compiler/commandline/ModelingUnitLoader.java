@@ -57,15 +57,16 @@ public class ModelingUnitLoader {
 	}
 	
 	
-	public ModelingUnit loadModelingUnitFromURL(String url) throws IOException{
+	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
+		URI uri =  URI.createURI(urlString);
 		ModelingUnit mu = null;
-		if (url.endsWith(".kmt")) {
+		if (urlString.endsWith(".kmt")) {
 			try {
-				mu = this.loadKMT(url);
+				mu = this.loadKMT(urlString);
 				if(saveIntermediateFiles && mu != null){
-					URI ruri =  URI.createURI(url);
 					URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
-					new ModelingUnitConverter(true,targetIntermediateFolder+"/kmt2km"+ruri.path()+".km").saveMu(mu, ruri);
+					URI saveKMURI = URI.createURI(targetIntermediateFolder+"/kmt2km"+uri.path()+".km");
+					new ModelingUnitConverter(true,saveKMURI.toString()).saveMu(mu, saveKMURI);
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -75,21 +76,22 @@ public class ModelingUnitLoader {
 				e.printStackTrace();
 			}
 			
-		}else if (url.endsWith(".ecore")) {
+		}else if (urlString.endsWith(".ecore")) {
 			
 			//org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
 			StructurePackage.eINSTANCE.getEFactoryInstance();
-			mu = this.loadEcore(url);
+			mu = this.loadEcore(urlString);
 			if(saveIntermediateFiles && mu != null){
-				URI ruri =  URI.createURI(url);
-				logger.debug(targetIntermediateFolder, this.getClass().getName());
-				new ModelingUnitConverter(true,targetIntermediateFolder+"/ecore2km"+ruri.path()+".km").saveMu(mu, ruri);
+				URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
+				URI saveKMURI = URI.createURI(targetIntermediateFolder+"/kmt2km"+uri.path()+".km");
+				logger.debug(saveKMURI.toString(), this.getClass().getName());
+				new ModelingUnitConverter(true,saveKMURI.toString()).saveMu(mu, saveKMURI);
 			}
-		}else if (url.endsWith(".km")) {
+		}else if (urlString.endsWith(".km")) {
 
 			MainRunner.init4eclipse();
 			try {
-				mu = this.loadKM(url);
+				mu = this.loadKM(urlString);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
