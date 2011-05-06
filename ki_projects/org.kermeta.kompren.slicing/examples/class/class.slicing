@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="InheritanceSlicer" uriMetamodel="platform:/org.kermeta.kompren.slicing/examples/class/ClassModel.ecore" onStart="stdio.writeln(&quot;Slicing starting&quot;)" onEnd="stdio.writeln(&quot;Slicing ended&quot;)">
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" expression="stdio.writeln(&quot;Inheritance: &quot; + srcClass.name + &quot; &quot; + tgtClass.name)">
+    <src varName="srcClass">
+      <type href="ClassModel.ecore#//classModel/Clazz"/>
+    </src>
+    <tgt varName="tgtClass">
+      <type href="ClassModel.ecore#//classModel/Clazz"/>
+    </tgt>
+    <domain xsi:type="ecore:EReference" href="ClassModel.ecore#//classModel/Clazz/superClasses"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="stdio.writeln(&quot;Clazz: &quot; + clazz.name)">
+    <ctx varName="clazz">
+      <type href="ClassModel.ecore#//classModel/Clazz"/>
+    </ctx>
+    <domain href="ClassModel.ecore#//classModel/Clazz"/>
+  </slicedElements>
+  <inputClasses href="ClassModel.ecore#//classModel/Clazz"/>
+</org.kermeta.kompren.slicing:Slicer>

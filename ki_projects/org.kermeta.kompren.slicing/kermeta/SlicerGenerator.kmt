@@ -1,0 +1,200 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package org::kermeta::kompren::slicing;
+
+
+//require kermeta
+require "./SlicerHelpers.kmt"
+require "ECoreSlicingAspect.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
+require "./SlicerClassGenerator.kmt"
+require "./SlicerAspectGenerator.kmt"
+
+
+using ecore
+using kermeta::utils
+using kermeta::standard
+using kermeta::io
+
+
+class SlicerGenerator {
+	reference metamodel : EPackage
+
+	attribute modelURI : String
+
+	attribute requiredAspectFiles : Hashtable<String, String>
+	
+	reference slicerModel : Slicer
+	
+	reference aspectisedClasses : EClass[0..*]
+	
+	attribute slicerAspectGenerator : SlicerAspectGenerator
+
+	attribute slicerClassGenerator : SlicerClassGenerator
+	
+	
+	
+	operation initialise(slicerModel : Slicer, metamodel : EPackage, modelURI : String) : SlicerGenerator is do
+		result := self
+		self.requiredAspectFiles := Hashtable<String, String>.new
+		self.slicerModel := slicerModel
+		self.metamodel   := metamodel
+		self.modelURI 	 := modelURI
+		slicerAspectGenerator:= SlicerAspectGenerator.new.initialise(self)
+		slicerClassGenerator := SlicerClassGenerator.new.initialise(self)
+		
+		self.slicerModel.slicedElements.each{se |
+			if(se.isInstanceOf(SlicedProperty)) then
+				var rel : SlicedProperty init se.asType(SlicedProperty)
+				if(not rel.opposite.isVoid) then
+					// We change the pruning data to use of the opposite.
+					var ref : EReference init EReference.new
+					var relation : SlicedProperty init SlicedProperty.new
+					ref.name := rel.domain.name + "Opposite"
+					ref.eType:= rel.domain.eContainingClass
+					rel.domain.eType.asType(EClass).eStructuralFeatures.add(ref)
+					ref.lowerBound := rel.domain.lowerBound
+					ref.upperBound := rel.domain.upperBound
+					ref.containment := false
+					relation.domain := ref
+					relation.opposite := void
+					relation.isOption := false
+					ref.eContainingClass.outputFocusedRelations.add(relation)
+					rel.domain := ref
+					//FIXME and about expression?
+				else
+					rel.domain.eContainingClass.outputFocusedRelations.add(rel)
+				end
+			end
+		}
+		
+		defineClassesToAspectise()
+	end
+	
+	
+	operation defineClassesToAspectise() : Void is do
+		// Extracting the classes from the relations to focus on.
+		slicerModel.slicedProperties.each{rel |
+			if(not aspectisedClasses.contains(rel.domain.eContainingClass)) then
+				aspectisedClasses.add(rel.domain.eContainingClass)
+			end
+			if(rel.domain.eType.isKindOf(EClass)) then
+				var eclass : EClass init rel.domain.eType.asType(EClass)
+				if(not aspectisedClasses.contains(eclass)) then
+					aspectisedClasses.add(eclass)
+				end
+			end
+		}
+		slicerModel.inputClasses.each{eclass |
+			if(not aspectisedClasses.contains(eclass)) then
+				aspectisedClasses.add(eclass)
+			end
+		}
+		slicerModel.slicedClasses.each{clazz |
+			if(not aspectisedClasses.contains(clazz.domain)) then
+				aspectisedClasses.add(clazz.domain)
+			end
+		}
+		// Removing the classes that are only types of relations unless they
+		// are a supertype upon the gathered classes or they are required or
+		// they must notify when visiting them.
+		aspectisedClasses.each{eclass |
+			if(eclass.outputFocusedRelations.empty() and
+				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass)} and
+				not slicerModel.inputClasses.contains(eclass) and
+				not slicerModel.slicedClasses.exists{sc | sc.domain==eclass}) then
+				aspectisedClasses.remove(eclass)
+			end
+		}
+	end
+	
+	
+	operation generateSlicer() : Void is do
+		slicerAspectGenerator.generateCode()
+		slicerClassGenerator.generateCode()
+	end
+	
+	
+	operation getRequiresFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "require \"" + classes.at(i).ePackage.name + "PruningAspect.kmt\"\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+	
+	
+	
+	operation getUsingsFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "using " + name + "\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+	
+	
+	
+	operation getPackageFromClasses(classes : EClass[0..*]) : String is do
+		if(classes.empty()) then
+			result := ""
+		else
+			result := "package " + classes.last().ePackage.getQualifiedName("::") + ";\n"
+		end
+	end
+	
+	
+	
+	operation saveCode(path : String) : Void is do
+		var file : FileIO init FileIO.new
+		file.writeTextFile(path + slicerModel.name + "Aspect.kmt",slicerAspectGenerator.generatedCode)
+		file.writeTextFile(path + slicerModel.name + ".kmt", slicerClassGenerator.generatedCode)
+		
+		requiredAspectFiles.keys.each{key |
+			var subPkgs : Sequence<String> init key.split("::")
+			file.writeTextFile(path + subPkgs.last() + "PruningAspect.kmt", requiredAspectFiles.getValue(key))
+		}
+	end
+}
+
+abstract class Generator {
+	reference slicerGenerator : SlicerGenerator
+
+	attribute generatedCode : String
+
+	operation generateCode() : Void is abstract
+}
+
+

@@ -1,0 +1,229 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package org::kermeta::kompren::slicing;
+
+require kermeta
+require "SlicerGenerator.kmt"
+require "ECoreSlicingAspect.kmt"
+
+using kermeta::standard
+using ecore
+
+class SlicerClassGenerator inherits Generator {
+	operation initialise(slicer : SlicerGenerator) : SlicerClassGenerator is do
+		self.slicerGenerator := slicer
+		result := self
+	end
+
+	method generateCode() : Void is do
+		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses)
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + slicerGenerator.modelURI + "\"\nrequire \"" +
+						 slicerGenerator.slicerModel.name + "Aspect.kmt\"\n" +
+   					     slicerGenerator.getRequiresFromClasses(slicerGenerator.aspectisedClasses) + 
+   					     "\nusing kermeta::standard\nusing kermeta::utils\n" +
+						 slicerGenerator.getUsingsFromClasses(slicerGenerator.aspectisedClasses) +
+						 "class " + slicerGenerator.slicerModel.name + " {\n"
+
+		if(not slicerGenerator.slicerModel.radius.isVoid) then
+			generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
+		end
+
+		slicerGenerator.slicerModel.constraints.each{const |
+			generatedCode := generatedCode + "\tattribute " + const.name + " : Boolean\n\n"
+		}
+
+		slicerGenerator.slicerModel.slicedProperties.each{elt |
+			if((not elt.isOption).andThen{b | elt.isOption}) then
+				generatedCode := generatedCode + "\tattribute consider" + elt.domain.name + " : Boolean\n\n"
+			end
+		}
+
+		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
+						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
+						 generateAddOperations() + generateOnEndMethod() + generateOnStartMethod() + "}\n" +
+						 generateRelationClasses()
+	end
+	
+	
+	operation generateOnEndMethod() : String is do
+		if(slicerGenerator.slicerModel.onEnd.isVoid) then
+			result := ""
+		else
+			result := "\toperation onEnd() : Void is do\n" + slicerGenerator.slicerModel.onEnd + "\n\tend\n"
+		end
+	end
+	
+	operation generateOnStartMethod() : String is do
+		if(slicerGenerator.slicerModel.onStart.isVoid) then
+			result := ""
+		else
+			result := "\toperation onStart() : Void is do\n" + slicerGenerator.slicerModel.onStart + "\n\tend\n"
+		end
+	end
+
+
+	operation generateRelationClasses() : String is do
+		result := ""
+
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			if(not rel.expression.isVoid) then
+				result := result + "class Class" + rel.domain.name + " {\n" +
+						"\treference src : " + rel.domain.eContainingClass.name + "\n" +
+						"\treference tar : " + rel.domain.eType.asType(EClass).name + "\n" +
+						"\toperation initialise(src : " + rel.domain.eContainingClass.name + ", tar : " +
+						rel.domain.eType.asType(EClass).name + ") : Class" + rel.domain.name + 
+						" is do\n\t\tresult := self\n\t\tself.src := src\n\t\tself.tar := tar\n\tend\n}\n"
+			end
+		}
+	end
+
+
+	operation generateAddOperations() : String is do
+		result := ""
+
+		slicerGenerator.slicerModel.slicedClasses.each{clazz |
+			if(not clazz.expression.isVoid) then
+				result := result + "\toperation on" + clazz.domain.name + "Added(" + 
+						clazz.ctx.varName + " : " + clazz.domain.name + ") : Void is do\n" +
+						clazz.expression + "\n\tend\n"
+			end
+		}
+
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			if(not rel.expression.isVoid) then
+				var type : EClass init rel.domain.eType.asType(EClass)
+				result := result + "\toperation on" + rel.domain.name + "Added(" + rel.src.varName + " : " + 
+						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") : Void is do\n" +
+						rel.expression + "\n\tend\n"
+			end
+		}
+	end
+
+
+	// Generates the "launch" operation.
+	operation generateLaunchOperation() : String is do
+		result := "\toperation launch() : Void is do\n"
+		if(not slicerGenerator.slicerModel.onStart.isVoid) then
+			result := result + "\t\tonStart()\n"
+		end
+		slicerGenerator.slicerModel.inputClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+					clazz.getVarNameClassifier() + ".visitToAddClasses(self"
+			if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", 0" end
+			result := result + ") }\n"
+		}
+		slicerGenerator.slicerModel.inputClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+					clazz.getVarNameClassifier() + ".visitToAddRelations(self"
+			if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", 0" end
+			result := result + ") }\n"
+		}
+		slicerGenerator.slicerModel.slicedClasses.each{eclass |
+			var varName : String init eclass.domain.getVarNameClassifier()
+			var endCode : String init ""
+
+			result := result + "\t\tself." + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
+
+			if(not slicerGenerator.slicerModel.radius.isVoid) then
+				if(not slicerGenerator.slicerModel.radius.focusedClasses.contains(eclass)) then
+					result := result + "if(" + varName + ".checkCanReallyBeAdded()) then "
+					endCode := " end"
+				end
+			end
+
+			result := result + "on" + eclass.domain.name + "Added(" + varName + ")" + endCode + " }\n"
+		}
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			if(not rel.expression.isVoid) then
+				var varName : String init "the" + rel.domain.name
+				result := result + "\t\tself.added" + rel.domain.name + ".each{" + varName + " | self.on" +
+						rel.domain.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
+			end
+		}
+		if(not slicerGenerator.slicerModel.onEnd.isVoid) then
+			result := result + "\t\tonEnd()\n"
+		end
+		result := result + "\tend\n"
+	end
+
+
+	operation generateIntialiseOperation() : String is do
+		var i : Integer init 0
+		result := "\toperation initialise("
+
+		slicerGenerator.slicerModel.inputClasses.each{clazz |
+			if(i>0) then result := result + ", " end
+			result := result + clazz.getRequiredAttributeName() + " : bag " + clazz.name + "[0..*]"
+			i := i + 1
+		}
+
+		if(not slicerGenerator.slicerModel.radius.isVoid) then
+			result := result + ", radius : Integer"
+		end
+
+		slicerGenerator.slicerModel.constraints.each{param |
+			result := result + ", " + param.name + " : Boolean"
+		}
+
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			if((not rel.isVoid).andThen{b | rel.isOption}) then
+				result := result + ", consider" + rel.domain.name + " : Boolean"
+			end
+		}
+
+		result := result + ") : " + slicerGenerator.slicerModel.name + " is do\n"
+		result := result + "\t\tresult := self\n"
+
+		slicerGenerator.slicerModel.slicedClasses.each{clazz |
+			result := result + "\t\tself." + clazz.domain.getAddedAttributeName() + " := Bag<" + clazz.domain.name + ">.new\n"
+		}
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			result := result + "\t\tself.added" + rel.domain.name + " := Bag<Class" + rel.domain.name + ">.new\n"
+		}
+
+		if(not slicerGenerator.slicerModel.radius.isVoid) then
+			result := result + "\t\tself.radius := radius\n"
+		end
+
+		slicerGenerator.slicerModel.constraints.each{param |
+			result := result + "\t\tself." + param.name + " := " + param.name + "\n"
+		}
+
+		slicerGenerator.slicerModel.inputClasses.each{clazz |
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
+		}
+
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			if((not rel.isOption.isVoid).andThen{b|rel.isOption}) then
+				result := result + "\t\tself.consider" + rel.domain.name + " := consider" + rel.domain.name + "\n"
+			end
+		}
+
+		result := result + "\tend\n\n"
+	end
+
+
+	operation generateAddedAttributes() : String is do
+		result := ""
+
+		slicerGenerator.slicerModel.slicedClasses.each{clazz |
+			result := result + "\treference " + clazz.domain.getAddedAttributeName() + " : Bag<" + clazz.domain.name + ">\n\n"
+		}
+		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			result := result + "\treference added" + rel.domain.name + " : Bag<Class" + rel.domain.name + ">\n\n" 
+		}
+	end
+
+
+	operation generateRequiredAttributes() : String is do
+		result := ""
+
+		slicerGenerator.slicerModel.inputClasses.each{eclass |
+			result := result + "\treference " + eclass.getRequiredAttributeName() + " : " + eclass.name + "[0..*]\n\n"
+		}
+	end
+}
