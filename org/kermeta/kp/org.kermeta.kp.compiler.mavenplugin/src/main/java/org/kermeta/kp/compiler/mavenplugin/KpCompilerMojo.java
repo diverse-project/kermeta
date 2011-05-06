@@ -157,7 +157,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		sourceOutputDirectory.toString(),
 	        		 false);
 			
-			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), classPathList, generateKmOnly);
+			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), resourceOutputDirectory.toString(), classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
                     throw new MojoExecutionException(compiler.errorMessage);
                 }

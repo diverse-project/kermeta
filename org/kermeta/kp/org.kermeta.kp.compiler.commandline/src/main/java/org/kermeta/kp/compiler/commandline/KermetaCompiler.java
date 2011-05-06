@@ -148,7 +148,7 @@ public class KermetaCompiler {
 	 * @param kpFileURL
 	 * @throws IOException
 	 */
-	public void kp2bytecode(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+	public void kp2bytecode(String kpFileURL, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
 		String projectName = "project";
 		
 		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
@@ -164,7 +164,7 @@ public class KermetaCompiler {
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-		File mergedFile = new File(targetGeneratedSourceFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
+		File mergedFile = new File(targetGeneratedResourcesFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
 		if(!mergedFile.getParentFile().exists()){
 			mergedFile.getParentFile().mkdirs();
 		}
@@ -226,7 +226,7 @@ public class KermetaCompiler {
 					}
 				}
 				else {
-					logger.error("Empty ModelingUnit, failed to load " +indirectURL, this.getClass().getName(), new Exception());
+					logger.log(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " +indirectURL, this.getClass().getName());
 				}
 			}
 			else{
@@ -251,7 +251,7 @@ public class KermetaCompiler {
 					modelingUnits.add(mu);
 				}
 				else {
-					logger.error("Empty ModelingUnit, failed to load " +sourceURL, this.getClass().getName(), new Exception());
+					logger.log(MessagingSystem.Kind.UserERROR,"Empty ModelingUnit, failed to load " +sourceURL, this.getClass().getName());
 				}
 			}
 		}
@@ -284,7 +284,7 @@ public class KermetaCompiler {
 		    
 		    // try to load the associated merged km
 		    if(dependencyKP == null){
-		    	logger.warn("   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", this.getClass().getName(), new Exception());
+		    	logger.log(MessagingSystem.Kind.UserWARNING,"   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", this.getClass().getName());
 		    }
 		    else{
 		    	// load the km file resulting from the merge of the dependency
@@ -294,7 +294,8 @@ public class KermetaCompiler {
 					modelingUnits.add(mu);
 				}
 				else {
-					System.err.println("Empty ModelingUnit, failed to load " +dependencyMergedKMUrl);
+					logger.log(MessagingSystem.Kind.UserWARNING," Empty ModelingUnit, failed to load " +dependencyMergedKMUrl, this.getClass().getName());
+					
 				}
 		    }
 		}
