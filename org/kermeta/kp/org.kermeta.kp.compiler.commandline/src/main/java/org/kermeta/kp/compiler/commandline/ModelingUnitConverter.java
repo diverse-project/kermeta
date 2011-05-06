@@ -82,8 +82,12 @@ public class ModelingUnitConverter {
 				.getResourceFactoryRegistry();
 		Map<String, Object> m = f.getExtensionToFactoryMap();
 		m.put("km_in_memory", new XMIResourceFactoryImpl());
+		m.put("km", new XMIResourceFactoryImpl());
 		Resource resource = resourceSet.createResource(uri);
-		resource.getContents().add(mu);
+		if(resource != null)
+			resource.getContents().add(mu);
+		else
+			System.out.println("cannot create resource for  "+uri);
 		Map<String, String> options = null;
 		mu.eResource().save(outputStream, options);
 
