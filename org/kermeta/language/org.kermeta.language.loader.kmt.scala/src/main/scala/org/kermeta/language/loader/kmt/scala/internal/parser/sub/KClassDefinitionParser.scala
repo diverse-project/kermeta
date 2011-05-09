@@ -117,7 +117,7 @@ trait KClassDefinitionParser extends KAbstractParser
       e1
   }
 
-  def classMemberDecl = ( invariant | operation | property | attribute ) //attribute | reference | operation ;
+  def classMemberDecl = kpositioned ( invariant | operation | property | attribute ) //attribute | reference | operation ;
 
 
 

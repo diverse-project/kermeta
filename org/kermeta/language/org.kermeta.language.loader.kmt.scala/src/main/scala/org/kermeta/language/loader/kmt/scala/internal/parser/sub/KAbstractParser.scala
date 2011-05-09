@@ -41,6 +41,8 @@ trait KAbstractParser extends TokenParsers {
   def fExpressionLst : Parser[List[Expression]]
   def fLiteral : Parser[Expression]
   def packageName : Parser[String]
+  
+  def kpositioned[T](p : Parser[T]) : Parser[T]
 
   protected val keywordCache : HashMap[String, Parser[String]] = HashMap.empty
   protected val delimCache : HashMap[String, Parser[String]] = HashMap.empty

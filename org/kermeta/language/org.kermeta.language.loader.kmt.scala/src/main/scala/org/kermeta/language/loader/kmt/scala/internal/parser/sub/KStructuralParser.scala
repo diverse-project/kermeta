@@ -14,14 +14,66 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.language.structure.impl._
 import org.kermeta.language.behavior.impl._
+import scala.annotation.tailrec
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
 
 /**
  * Sub parser dedicated to parse Block and Expression lists (using parenthesis) in KMT textual syntax  
  */
 trait KStructuralParser extends KAbstractParser {
 
-  def fExpressionMergedCall : Parser[Expression] = rep1(fExpression) ^^ { case l =>
+  def fExpressionExpressionWithCallParser = Parser { in =>
+    val elems = new ListBuffer[Expression]
+    val p0 = fExpression    // avoid repeatedly re-evaluating by-name parser     
+    @tailrec def applyp(in0: Input): ParseResult[List[Expression]] = 
+      p0(in0) match {
+        case Success(x, rest)   => {
+            x match {
+              case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                  elems += x ; applyp(rest)
+                }
+              case cf : UnresolvedCall if(!cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {                 
+                  if(elems.size == 0){
+                    elems += x ; applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
+                }
+              case _ @ e => {
+
+                  if(elems.size > 0){
+                    Error("kermeta expression expected",in0)
+                  }  else {
+                    elems += x ;
+                    Success(elems.toList, rest)
+                  }
+                  
+                  
+                  //SI ELEMS > 0
+                  // SUCESS
+                  // otherwise 
+                  //  NoSucess
+                }  
+            }
+          }
+        case ns: NoSuccess      => {
+                      
+            
+            if(elems.size > 0){
+              //Success((), in)
+              Success(elems.toList, in0)
+            } else {
+              ns
+            }
+          }
+      }
+	     
+    applyp(in)
+  }
+  
+  
+  def fExpressionMergedCall : Parser[Expression] = fExpressionExpressionWithCallParser ^^ { case l =>
       var previousUnresolvedCall : Option[UnresolvedCall] = None
       var processedList : List[Expression] = List()
       // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
@@ -34,7 +86,7 @@ trait KStructuralParser extends KAbstractParser {
 
                   case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
                 }
-            }
+              }
             case _ @ e =>{
                 previousUnresolvedCall match {
                   case None =>processedList = e::processedList
@@ -48,7 +100,7 @@ trait KStructuralParser extends KAbstractParser {
       if(processedList.size > 1){
         println("fail")
         println(processedList.mkString)
-
+        failure("Chain expression failed !")
       }
       processedList.head
   }
@@ -68,7 +120,7 @@ trait KStructuralParser extends KAbstractParser {
                   
                   case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
                 }
-            } 
+              } 
             case _ @ e =>{
                 previousUnresolvedCall match {
                   case None =>processedList = e::processedList
@@ -79,7 +131,6 @@ trait KStructuralParser extends KAbstractParser {
           }
 
         })
-      
       processedList
   }
   def pExpression : Parser[Expression] = "(" ~> fStatement <~ ")"
@@ -92,7 +143,7 @@ trait KStructuralParser extends KAbstractParser {
       newo
   }
 
-  def fRescue : Parser[Rescue] = "rescue"~"(" ~> ident ~ ":" ~ packageName ~ ")" ~ fExpressionLst ^^ { case rIdent~_~rPname~_~rescueL =>
+  def fRescue : Parser[Rescue] = "rescue" ~ "(" ~> ident ~ ":" ~ packageName ~ ")" ~ fExpressionLst ^^ { case rIdent~_~rPname~_~rescueL =>
 
       var newo = BehaviorFactory.eINSTANCE.createRescue
       newo.setExceptionName(rIdent)

@@ -37,8 +37,10 @@ object Runner{
  //     println(lexResult.nextToken)
  //   }
 
+    val parser = new KParser()
+    
 
-    var result = new KParser().parse(input)
+    var result = parser.parse(input)
    // var result = new KParser().parseExpression(input)
     // var result = org.kermeta.language.POC.test(input)
     
@@ -48,7 +50,7 @@ object Runner{
       case Some(_ @ res) =>{
           LoadSaveKM.saveKmModelingUnit("parsed.km", res)
         }
-      case None =>
+      case None => println(parser.lastNoSucess)
     }
   }
 }

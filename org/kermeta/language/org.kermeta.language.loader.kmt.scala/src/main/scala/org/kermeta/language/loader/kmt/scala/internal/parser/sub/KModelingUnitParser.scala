@@ -64,9 +64,48 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       newp
   }
 
+  /*
+  def positionedScompUnit = Parser { in =>
+    scompUnit(in) match {
+      case Success(x,rest) => {
+          var positionedResult = x
+          
+          in.first match {
+            case positionedToken : Positional => {
+                
+                x match {
+                  
+                  case l : List[_] => {
+                      l.foreach{ elem =>  elem match {                                         
+                          case me : KermetaModelElement => {
+                              //TODO IMPROVE
+                              var newtag= StructureFactory.eINSTANCE.createTag
+                              newtag.setName("source.line")
+                              newtag.setValue(positionedToken.pos.line.toString)
+                              me.getKOwnedTags.add(newtag)
+                      
+                              println(me)
+                            }
+                          case _ @ e=> println(e)
+                        }
+                      }
+                    }
+                  case _ @ e => println(e)
+                }  
+              }
+            case _ => println("warning unpositioned token !")
+          }
+
+          Success(positionedResult,rest)
+        }
+      case _ @ v => v
+    }
+  }*/
+  
+  
   def kermetaUnit = scompUnit+
 
-  def scompUnit = (packageDecl|importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
+  def scompUnit = kpositioned (packageDecl|importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
   /* DEPRECATED */
   
   def packageDecl : Parser[NameSpacePrefix] = positioned( "package" ~> packageName <~ ";" ^^ { case p =>  NameSpacePrefix(p)} )
@@ -104,7 +143,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
    newo.setValue(st1.toString)
    newo
    }*/
-  def annotableElement = (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
+  def annotableElement = kpositioned (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
   def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
       newp.setName(packageName)

@@ -1,16 +1,29 @@
+
 package kmt_testCase::foo;
 
+package MYPACK {
 class Main
 {
+    
+    operation main() : Void is do
 
-operation main() : Void is do
 
-// stdio.writeln("Hello World!")
-// (3+4).e.test(t)
+a.b.f.g := c.d.k.l.m.n.b.V.C.X.S.Z
 
-result := "foo"
-~result := 42
+a+3 := 4 - ( 3 + 2 + 3 +3 ) - 3
 
-end
+a a a 
+
+e.toto
+
+
+    end
+
+}
+
+class TOTO {
+
+
+}
 
 }

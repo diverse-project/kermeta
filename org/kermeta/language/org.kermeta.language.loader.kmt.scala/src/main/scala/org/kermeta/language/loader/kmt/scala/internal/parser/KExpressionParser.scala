@@ -32,12 +32,13 @@ trait KExpressionParser extends KAbstractParser
                            with KCallParser
                            with KPrimitiveExpressionParser
                            with KLambdaParser
-                           with KRaiseParser{
+                           with KRaiseParser
+                           with KPositionedParser {
 
   /**
    * extend the fExpression parser with sub parser
    */
-  override def fExpression : Parser[Expression] = ( fRaise | fBlock | pExpression | fVariableDecl | fLoop | fConditional | fLambda | fCall | fLiteral )
+  override def fExpression : Parser[Expression] = kpositioned ( fRaise | fBlock | pExpression | fVariableDecl | fLoop | fConditional | fLambda | fCall | fLiteral )
   override def fStatement : Parser[Expression] = fAssignement
 
   def parseExpression(content : String) : Option[Expression] = {

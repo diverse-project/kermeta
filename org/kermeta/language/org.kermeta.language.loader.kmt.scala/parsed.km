@@ -1,20 +1,125 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="kmt_testCase::foo">
-  <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" isAspect="false" isAbstract="false">
-    <ownedOperation name="main" type="//Main/main/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void"/>
-      <body xsi:type="org_kermeta_language_behavior:Block">
-        <statement xsi:type="org_kermeta_language_behavior:CallFeature" name="test">
-          <parameters xsi:type="org_kermeta_language_behavior:CallFeature" name="t"/>
-          <target xsi:type="org_kermeta_language_behavior:CallFeature" name="e">
-            <target xsi:type="org_kermeta_language_behavior:CallFeature" name="plus">
-              <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="4"/>
-              <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3"/>
+  <packages name="MYPACK">
+    <kOwnedTags name="source.line" value="4"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//MYPACK/Main/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <kOwnedTags name="source.line" value="5"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      <ownedOperation name="main" type="//MYPACK/Main/main/@containedType.0">
+        <kOwnedTags name="source.line" value="8"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="source.line" value="8"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="g">
+              <kOwnedTags name="source.line" value="11"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="f">
+                <kOwnedTags name="source.line" value="11"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b">
+                  <kOwnedTags name="source.line" value="11"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                    <kOwnedTags name="source.line" value="11"/>
+                  </target>
+                </target>
+              </target>
             </target>
-          </target>
-        </statement>
-        <statement xsi:type="org_kermeta_language_behavior:EmptyExpression"/>
-      </body>
-    </ownedOperation>
-  </ownedTypeDefinition>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Z">
+              <kOwnedTags name="source.line" value="11"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="S">
+                <kOwnedTags name="source.line" value="11"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="X">
+                  <kOwnedTags name="source.line" value="11"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="C">
+                    <kOwnedTags name="source.line" value="11"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="V">
+                      <kOwnedTags name="source.line" value="11"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b">
+                        <kOwnedTags name="source.line" value="11"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="n">
+                          <kOwnedTags name="source.line" value="11"/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="m">
+                            <kOwnedTags name="source.line" value="11"/>
+                            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="l">
+                              <kOwnedTags name="source.line" value="11"/>
+                              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="k">
+                                <kOwnedTags name="source.line" value="11"/>
+                                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="d">
+                                  <kOwnedTags name="source.line" value="11"/>
+                                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
+                                    <kOwnedTags name="source.line" value="11"/>
+                                  </target>
+                                </target>
+                              </target>
+                            </target>
+                          </target>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+              <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3">
+                <kOwnedTags name="source.line" value="13"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <kOwnedTags name="source.line" value="13"/>
+              </target>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="minus">
+              <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3">
+                <kOwnedTags name="source.line" value="13"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="minus">
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                  <kOwnedTags name="source.line" value="13"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3">
+                    <kOwnedTags name="source.line" value="13"/>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                    <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3">
+                      <kOwnedTags name="source.line" value="13"/>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2">
+                        <kOwnedTags name="source.line" value="13"/>
+                      </parameters>
+                      <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="3">
+                        <kOwnedTags name="source.line" value="13"/>
+                      </target>
+                    </target>
+                  </target>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="4">
+                  <kOwnedTags name="source.line" value="13"/>
+                </target>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+            <kOwnedTags name="source.line" value="15"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+            <kOwnedTags name="source.line" value="15"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+            <kOwnedTags name="source.line" value="15"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto">
+            <kOwnedTags name="source.line" value="17"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="e">
+              <kOwnedTags name="source.line" value="17"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="TOTO" superType="//MYPACK/TOTO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <kOwnedTags name="source.line" value="24"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+  </packages>
 </org_kermeta_language_structure:ModelingUnit>
