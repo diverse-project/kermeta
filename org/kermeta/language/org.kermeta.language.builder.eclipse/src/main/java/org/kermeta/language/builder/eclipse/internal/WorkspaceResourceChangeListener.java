@@ -125,11 +125,13 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 				
 				break;
 			case IResource.FILE :
-				if(resource.getFileExtension().equals(KP_FILE_EXTENSION)){
-					// ignore kp in target folder
-					if(!resource.getProjectRelativePath().segments()[0].equals("target")){
-						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
-						kpBuilders.put(resource.getFullPath().toString(),new KPBuilder((IFile) resource));
+				if (resource.getFileExtension()!=null) {
+					if(resource.getFileExtension().equals(KP_FILE_EXTENSION)){
+						// ignore kp in target folder
+						if(!resource.getProjectRelativePath().segments()[0].equals("target")){
+							Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
+							kpBuilders.put(resource.getFullPath().toString(),new KPBuilder((IFile) resource));
+						}
 					}
 				}
 				processResourceChildren = false;
