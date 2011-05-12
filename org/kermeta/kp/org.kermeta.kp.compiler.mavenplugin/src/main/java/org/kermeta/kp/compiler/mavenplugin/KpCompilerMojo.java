@@ -125,6 +125,20 @@ public class KpCompilerMojo extends AbstractMojo {
      * @parameter expression="false"
      */
     private Boolean generateKmOnly;
+
+    /**
+     * checkingEnabled : check modeling units
+     *
+     * @parameter expression="true"
+     */
+    private Boolean checkingEnabled;
+    
+    /**
+     * stopOnError : stop compilation process when an error occurs
+     * 
+     * @parameter expression="true"
+     */
+    private Boolean stopOnError;
     
     /**
      * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
@@ -155,7 +169,9 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		new StdioSimpleMessagingSystem(),
 	        		intermediateFilesRequired,
 	        		sourceOutputDirectory.toString(),
-	        		 false);
+	        		false,
+	        		checkingEnabled,
+	        		stopOnError);
 			
 			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), resourceOutputDirectory.toString(), classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
