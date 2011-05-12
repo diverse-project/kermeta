@@ -26,7 +26,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-jar-plugin</artifactId>
-				
+
 		        <version>2.3.1</version>
 		        <configuration>
 		          <archive>
@@ -49,6 +49,9 @@
 							org.kermeta.language.ecore2km.api,
 							org.kermeta.language.loader.kmt.scala.api,
 							org.kermeta.language.loader.kmt.scala,
+							org.kermeta.language.checker,
+							org.kermeta.language.checker.api,
+							org.kermeta.diagnostic.model,
 							org.kermeta.language.merger.binarymerger,
 							org.kermeta.language.resolver,
 							org.kermeta.kp.model,
@@ -162,6 +165,24 @@
 			<artifactId>utils.helpers</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.checker.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.checker</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.diagnostic</groupId>
+			<artifactId>diagnostic.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 </project>
