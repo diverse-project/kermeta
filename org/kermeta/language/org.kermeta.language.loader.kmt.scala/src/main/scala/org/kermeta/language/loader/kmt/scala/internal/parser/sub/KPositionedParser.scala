@@ -7,15 +7,22 @@ package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import org.kermeta.language.structure.KermetaModelElement
 import org.kermeta.language.structure.StructureFactory
+import scala.util.parsing.input.OffsetPosition
 import scala.util.parsing.input.Positional
 
 trait KPositionedParser extends KAbstractParser {
 
-  def addPosition(modelElem: KermetaModelElement,posToken : Positional) : KermetaModelElement = {
+  def addPosition(modelElem: KermetaModelElement,posToken : Positional,posTokenEnd : Positional) : KermetaModelElement = {
     var newtag= StructureFactory.eINSTANCE.createTag
     newtag.setName("traceability_text_reference")
     println(posToken + "/" + posToken.pos.column.toString)
-    newtag.setValue(posToken.pos.line.toString + ";" + posToken.pos.column.toString)
+    
+    var beginOffset = posToken.pos.asInstanceOf[OffsetPosition].offset
+    var endOffset = posTokenEnd.pos.asInstanceOf[OffsetPosition].offset
+    println(posToken+"="+beginOffset+"=>"+endOffset+"="+posTokenEnd)
+    
+    
+    newtag.setValue(posToken.pos.line.toString + ";" + posToken.pos.column.toString+";"+posTokenEnd.pos.line.toString + ";" + posTokenEnd.pos.column.toString)
     modelElem.getKOwnedTags.add(newtag)
     modelElem
   }
@@ -28,7 +35,20 @@ trait KPositionedParser extends KAbstractParser {
             case positionedToken : Positional => { 
                 x match {
                   case me : KermetaModelElement => {
-                      positionedResult = addPosition(me,positionedToken).asInstanceOf[T]
+                      /*
+                      var tokenEnd = in.rest
+                      while(tokenEnd.rest.first != rest.first){
+                        println(tokenEnd.first)
+                        tokenEnd = tokenEnd.rest
+                      }*/
+                      
+                      rest.first match {
+                        case positionedEndToken : Positional => {
+                            positionedResult = addPosition(me,positionedToken,positionedEndToken).asInstanceOf[T]  
+                        }
+                        case _ => //positionedResult = addPosition(me,positionedToken).asInstanceOf[T]
+                      }
+                      
                     }
                   case _ @ e=> println(e)
                 }
