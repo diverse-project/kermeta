@@ -62,10 +62,11 @@ public class KPBuilder {
 					File f = new File(kpFileURL);
 					String projectUri = f.getParentFile().getCanonicalPath();
 					String outputFolder = projectUri+"/target";
+					String outputResourceFolder = outputFolder+"/resources";
 					// for reflexivity set the bundle context
 					kermeta.utils.ReflexivityLoader.bundleCtx_(Activator.getDefault().getBundle().getBundleContext());
-					KermetaCompiler compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),true,outputFolder, true);
-					compiler.kp2bytecode(kpFileURL,outputFolder,outputFolder,new ArrayList<String>(),true);
+					KermetaCompiler compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),true,outputFolder, true, true, true);
+					compiler.kp2bytecode(kpFileURL,outputFolder,outputFolder,outputResourceFolder, new ArrayList<String>(),true);
 				} catch (IOException e) {
 					Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
 				}
