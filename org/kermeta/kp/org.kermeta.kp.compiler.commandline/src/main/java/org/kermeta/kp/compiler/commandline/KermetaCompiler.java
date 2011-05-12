@@ -10,6 +10,7 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -25,20 +26,31 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.kermeta.compilo.scala.GlobalConfiguration;
+import org.kermeta.diagnostic.Constraint;
+import org.kermeta.diagnostic.ConstraintDiagnostic;
+import org.kermeta.diagnostic.DiagnosticModel;
+import org.kermeta.diagnostic.InvariantProxy;
+import org.kermeta.diagnostic.ModelReference;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
+import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Tag;
 //import scala.collection.JavaConversions.JListWrapper;
 //import scala.collection.JavaConversions.JListWrapper;
 //import org.embedded.EmbeddedMavenHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.TextReference;
+import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 
 
 /**
@@ -51,6 +63,10 @@ public class KermetaCompiler {
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER+ "/scala";
+	
+	
+	public boolean checkingEnabled = true;
+	public boolean stopOnError = true;
 	
 	public boolean runInEclipse = false;
 	public Boolean saveIntermediateFiles = false;
@@ -87,13 +103,18 @@ public class KermetaCompiler {
 	 * @param saveIntermediateFiles indicates if the compilation must also produce intermediate files  
 	 * @param targetIntermediateFolder indicates where the intermediate files must be generated
 	 * @param willRunInEclipse indicates if it is run in eclipse
+	 * @param checkingEnabled indicates wether modeling units will be checked or not
+	 * @param stopOnError indicates wether the process should be stopped when an error occurs or not
 	 */
-	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse) {
+	public KermetaCompiler( Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
 		super();
+		System.err.println("checking enabled ("+checkingEnabled+") stop on error ("+ stopOnError +")" );
 		this.logger = logger;
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetIntermediateFolder = targetIntermediateFolder;
 		this.runInEclipse = willRunInEclipse;
+		this.checkingEnabled = checkingEnabled;
+		this.stopOnError = stopOnError;
 		if(registerProtocols){
 			registerMVNUrlHandler();
 		}
@@ -160,8 +181,40 @@ public class KermetaCompiler {
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
 		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander);
 		logger.progress("KermetaCompiler.kp2bytecode", "Merging "+ modelingUnits.size()+" files...", this.getClass().getName(), 1);
+		
 		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
+	
+		if (mergedUnit instanceof ErrorProneResult<?>) {
+			System.err.println("This is a errorproneresult");
+		}
+		else {
+			System.err.println("This is no error prone result");
+		}
+		
+		// Check mergedUnit for scope MERGED
+		if (checkingEnabled) {
+			DiagnosticModel results = checkModelingUnit(mergedUnit, CheckerScope.MERGED);
+			processCheckingDiagnostics(results);
+			
+			if (stopOnError && results.getDiagnostics().size()>0) {
+				logger.info("Errors have risen during check for scope MERGED, stop compilation process", this.getClass().getName());
+				return;
+			}
+			
+		}
+		
 		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
+		// Check resolvedUnit for scope RESOLVED
+		if (checkingEnabled) {
+			DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
+			processCheckingDiagnostics(results);
+			
+			if (stopOnError && results.getDiagnostics().size()>0) {
+				logger.info("Errors have risen during check for scope RESOLVED, stop compilation process", this.getClass().getName());
+				return;
+			}		
+		}
+		
 		//save resolvedUnit to the META-INF/kermeta/merged.km
 		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
 		File mergedFile = new File(targetGeneratedResourcesFolder+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+projectName+".km");		
@@ -382,6 +435,126 @@ public class KermetaCompiler {
             }*/
             org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
             km2ScalaCompiler.compile(kmFileURL);
+	}
+	
+	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
+		
+		org.kermeta.language.language.checkerrunner.MainRunner.init4eclipse();
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeMerged.km").convert(mu);
+		
+		//Checking
+		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory
+		.createChecker();
+				
+		DiagnosticModel diags = checker.checkObject(convertedModelingUnit, scope.toString());
+		
+		/*
+		//Display check results
+		logger.log(MessagingSystem.Kind.UserINFO,"There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
+
+		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
+			
+			String message = "";
+			Constraint failedConstraint = diag.getFailedConstraint();
+			if ( failedConstraint instanceof InvariantProxy ) {
+				message = message + "Invariant " + ((InvariantProxy)failedConstraint).getInvariantName() 
+						+ " on object " + ((ModelReference)diag.getAppliesTo()).getReferencedObject().toString();
+			}
+			//String message = diag.getFailedConstraint().;
+			if (diag.isIsWarning()) {
+				logger.log(MessagingSystem.Kind.UserWARNING, message, this.getClass().getName());
+			} 
+			else {
+				logger.log(MessagingSystem.Kind.UserERROR, message, this.getClass().getName());
+			}
+				
+			
+			// retrieve the referenced EObject tag sourceLocation
+			EObject myObject = ((ModelReference)diag.getAppliesTo()).getReferencedObject();
+			KermetaModelElement kme = (KermetaModelElement) myObject;
+			
+			// Check if there is a sourceLocation tag
+			for (Tag t : kme.getKOwnedTags() ) {
+				
+				//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+				if (t.getName().equals("source.location")) {
+					//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
+					createTextReference(t);
+				}
+			}
+			
+			
+			
+		}*/
+		
+		return diags;
+	}
+	
+	private void processCheckingDiagnostics(DiagnosticModel diags) {
+
+		//Display check results
+		logger.log(MessagingSystem.Kind.UserINFO,"There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
+
+		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
+			
+			String message = "";
+			Constraint failedConstraint = diag.getFailedConstraint();
+			if ( failedConstraint instanceof InvariantProxy ) {
+				message = message + "Invariant " + ((InvariantProxy)failedConstraint).getInvariantName() 
+						+ " on object " + ((ModelReference)diag.getAppliesTo()).getReferencedObject().toString();
+			}
+			//String message = diag.getFailedConstraint().;
+			if (diag.isIsWarning()) {
+				logger.log(MessagingSystem.Kind.UserWARNING, message, this.getClass().getName());
+			} 
+			else {
+				logger.log(MessagingSystem.Kind.UserERROR, message, this.getClass().getName());
+			}
+				
+			
+			// retrieve the referenced EObject tag sourceLocation
+			EObject myObject = ((ModelReference)diag.getAppliesTo()).getReferencedObject();
+			KermetaModelElement kme = (KermetaModelElement) myObject;
+			
+			// Check if there is a sourceLocation tag
+			for (Tag t : kme.getKOwnedTags() ) {
+				
+				//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+				if (t.getName().equals("source.location")) {
+					//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
+					createTextReference(t);
+				}
+			}
+			
+			
+			
+		}
+		
+		
+	}
+	
+	
+	private void createTextReference(Tag tag) {
+		
+		String value = tag.getValue();
+		String[] values = value.split(";");
+		
+		logger.log(MessagingSystem.Kind.UserINFO, "Source File (" + values[0] + ")", "");
+		logger.log(MessagingSystem.Kind.UserINFO, "Line   (" + values[1] + ")", "");
+		logger.log(MessagingSystem.Kind.UserINFO, "Column (" + values[2] + ")", "");
+	
+		try {
+			TextReference ref = new TextReference(new URL(values[0]),new Integer(values[1]),new Integer(values[2]));
+			logger.logProblem(MessagingSystem.Kind.UserERROR, "error on", this.getClass().getName(), ref);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
     private void scala2bytecode(List<String> additionalClassPath) {
