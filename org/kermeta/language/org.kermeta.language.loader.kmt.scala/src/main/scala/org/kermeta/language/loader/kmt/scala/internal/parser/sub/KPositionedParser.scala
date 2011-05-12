@@ -13,8 +13,9 @@ trait KPositionedParser extends KAbstractParser {
 
   def addPosition(modelElem: KermetaModelElement,posToken : Positional) : KermetaModelElement = {
     var newtag= StructureFactory.eINSTANCE.createTag
-    newtag.setName("source.line")       
-    newtag.setValue(posToken.pos.line.toString)
+    newtag.setName("traceability_text_reference")
+    println(posToken + "/" + posToken.pos.column.toString)
+    newtag.setValue(posToken.pos.line.toString + ";" + posToken.pos.column.toString)
     modelElem.getKOwnedTags.add(newtag)
     modelElem
   }
