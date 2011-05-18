@@ -10,6 +10,7 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -62,6 +63,12 @@ public class ModelingUnitLoader {
 		ModelingUnit mu = null;
 		if (urlString.endsWith(".kmt")) {
 			try {
+				// Flush all problems marked on the file
+				System.err.println("flushing all problems on the file");
+				logger.flushAllProblems(new URL(urlString));
+				System.err.println("flushing done!");
+				
+				
 				mu = this.loadKMT(urlString);
 				if(saveIntermediateFiles && mu != null){
 					URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
