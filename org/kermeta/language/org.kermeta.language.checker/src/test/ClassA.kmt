@@ -1,0 +1,46 @@
+@mainClass "a::B"
+@mainOperation "main"
+
+package a;
+
+
+require "kermeta"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::exceptions
+	class A
+	{
+		inv toto is do 
+			self.a.size <5
+		end
+		
+		attribute a : String
+	}
+
+
+	class B{
+		operation main() :Void is do
+			var a : A init A.new
+			a.a := "toto"
+			var invariant : Constraint init a.getMetaClass.classDefinition.~inv.first
+			do 
+			a.checkInvariant(invariant)
+			stdio.writeln("ok")
+			rescue (e:ConstraintViolatedInv)
+			stdio.writeln("nok")
+			
+			end
+
+			a.a := "tototo"
+			do 
+			a.checkInvariant(invariant)
+			stdio.writeln("ok1")
+			rescue (e:ConstraintViolatedInv)
+			stdio.writeln("nok1")
+			
+			end
+
+		end
+	}
+	

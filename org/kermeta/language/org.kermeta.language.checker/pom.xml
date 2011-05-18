@@ -15,18 +15,7 @@
 	<dependencies>
 		<!-- Main dependencies -->
 
-		<!-- woraround pb apt all ART components will need ART2 to compile -->
-		<dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.annotation</artifactId>
-			<version>${art2.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.art2</groupId>
-			<artifactId>art2.framework</artifactId>
-			<version>${art2.version}</version>
-		</dependency>
-		<!-- end workaround -->
+
 		<dependency>
 			<groupId>org.kermeta.diagnostic</groupId>
 			<artifactId>diagnostic.model</artifactId>
@@ -39,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>language.api</artifactId>
+			<artifactId>language.checker.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 
@@ -57,7 +46,8 @@
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.framework.scala</artifactId>
 			<!--version>0.12.0</version-->
-			<version>0.12.4-SNAPSHOT</version>
+			<!--version>0.12.4-SNAPSHOT</version-->
+			<version>0.12.8-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -96,7 +86,8 @@
 			<plugin>
 				<groupId>org.kermeta.language</groupId>
 				<artifactId>language.compiler.mavenplugin</artifactId>
-				<version>1.4.1-BETA10</version>
+				<!--version>1.4.1-BETA10</version-->
+				<version>1.4.1-BETA15-SNAPSHOT</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>

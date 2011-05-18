@@ -39,5 +39,47 @@ aspect class Operation
 		true
 	end
 
+	/**
+	 * The @main tag is used to declare an operation which can provide a command line
+	 * runnable operation. This means that these operations will be correctly typed only 
+	 * if they take no parameter, or a series of String or a collection of String.
+	 */
+	@Scope "LOADED"
+	inv main_tag_validity is do
+	
+		if self.ownedTags.exists{ t | t.name.equals("main") }
+		then
+			//true
+			// The parameters should be of type String
+			self.ownedParameter.forAll{ p | p.getMetaClass.equals(kermeta::standard::String) } or
+			( if (self.ownedParameter.size.equals(1))
+			  then
+			  	self.ownedParameter.one.getMetaClass.equals(kermeta::standard::Collection<kermeta::standard::String>)
+			  else
+			 	false
+			  end
+			)
+		else
+			true
+		end
+	end
+	
+	
+	/*
+	 * Check use of deprecated
+	 *
+	 
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv use_deprecated is do
+		// Check return Type of operation
+		not (self.type.getMetaClass.typeDefinition.ownedTags.exists{ t | t.name.equals("deprecated") } )
+		
+		and
+		// Check parameter types
+		not (self.ownedParameter.exists{ p | p.type.getMetaClass.typeDefinition.ownedTags.exists{ t | t.name.equals("deprecated") } } )
+		
+	end
+	*/
 }
 

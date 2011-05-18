@@ -14,6 +14,11 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/StructureHelper.kmt"
+
+using kermeta::utils
+using kermeta::standard
+
 aspect class ClassDefinition {
 
 	/**
@@ -28,6 +33,129 @@ aspect class ClassDefinition {
 			}.size > 1 
 		}
 	end
+	
+	/*
+	 * Bug 1784
+	 * In case of multiple inheritance, if there are 2 operations with similar
+	 * signature then there must be an operation with this signature in the current
+	 * children class 
+	 */
+	 
+	
+	 
+	@Scope "RESOLVED"
+	inv multiple_inheritance_operation_redefinition is do
+		
+		//var allSuperOperations : Hashtable<Operation, Type> init Hashtable<Operation, Type>.new
+		var invResult : Boolean init true
+		
+		var test : Hashtable<String, Set<Type>> init getAllSuperOperationsByType
+		
+		// Browse operations unique names
+		test.keys.each{ opUN |
+		
+			if (test.getValue(opUN).size > 1)
+			then
+				// This means that at least 2 super types define the very same operation
+				// We must check wether those supertypes have an inheritance link or that
+				// self defines the same operation using from.
+				var typeSet : Set<Type> init test.getValue(opUN)
+				
+				var typeSetBis : Set<Type> init Set<Type>.new
+				typeSetBis.addAll(typeSet)
+				
+				typeSet.each{ t |
+					typeSetBis.remove(t)
+					typeSetBis.each{ tbis |
+						if true //not(t.checkInheritanceLink(tbis))
+						then
+							// self must define the operation using from
+							var myOp : Operation init self.ownedOperation.detect{ o | 
+																o.uniqueName.equals(opUN) }
+							
+							if (myOp.isVoid)
+							then
+								invResult := false
+							else
+								// The superOperation of the operation must point
+								// to one of the two types or to one of their subtypes
+								if (myOp.superOperation.isInstanceOf(UnresolvedOperation))
+								then
+									var myFrom : Type init myOp.superOperation.asType(UnresolvedOperation).~from
+									if (not (myFrom.equals(t) or 
+											myFrom.equals(tbis) /* or
+											myFrom.isSubTypeOf(t) or
+											myFrom.isSubTypeOf(tbis)*/ ) )
+									then
+										invResult:=false
+									end
+								else
+									invResult:=false
+								end
+							
+							end
 
+						end
+					}
+				}
+			end
+		}
+		
+		invResult
+	end
+	
+	operation getAllSuperOperationsByType() : Hashtable<String, Set<Type>> is do
+	
+		var res : Hashtable<String, Set<Type>> init Hashtable<String, Set<Type>>.new
+		
+		allSuperTypes.each{ supTyp |
+		
+			if supTyp.isInstanceOf(ParameterizedType)
+			then
+				if supTyp.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition)
+				then
+					supTyp.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.each{ op |
+						if res.containsKey(op.uniqueName)
+						then
+							res.getValue(op.uniqueName).add(supTyp)
+						else
+							var setOfTypes : Set<Type> init Set<Type>.new
+							setOfTypes.add(supTyp)
+							res.put(op.uniqueName, setOfTypes)
+						end
+					}
+				end
+			end
+		}
+		
+		result := res
+	
+	end
+	
+		operation allSuperTypes() : Set<Type> is do
+	 
+		var allSuperClasses : Set<Type> init Set<Type>.new
+        var superClasses : Set<Type> init Set<Type>.new
+        superClasses.addAll(self.superType)
+        
+        from  not superClasses.isEmpty
+        until superClasses.isEmpty
+        loop
+            allSuperClasses.addAll(superClasses)
+            var temp : Set<Type> init Set<Type>.new
+             superClasses.each{ s |
+             	if s.isInstanceOf(ParameterizedType) then
+					if s.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+                		temp.addAll(s.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType)
+                	end
+                end
+             }
+             superClasses.clear()
+             superClasses.addAll(temp)
+        end
+        
+        result := allSuperClasses
+	end
+	
 
 }

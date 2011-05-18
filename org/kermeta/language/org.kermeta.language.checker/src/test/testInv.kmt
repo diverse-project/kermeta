@@ -1,0 +1,56 @@
+/* $Id:$ 
+ * Creation : May 2, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "test::Main"
+@mainOperation "main"
+
+
+package test;
+
+
+require kermeta
+
+using kermeta::exceptions
+using kermeta::language::structure
+
+class myClass {
+
+	attribute att : String
+
+	inv no_myClass is do
+		false
+	end
+	
+	inv myClass_ok is do
+		true
+	end
+	
+
+}
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+		
+		var obj : myClass init myClass.new
+		
+		//var invariant : Constraint init myClass.getMetaClass.classDefinition.~inv.first
+		
+		obj.getMetaClass.classDefinition.~inv.each{ invariant |
+		
+			stdio.writeln("Checking invariant " + invariant.name)
+			do 
+				obj.checkInvariant(invariant)
+				stdio.writeln("ok")
+				rescue (e:ConstraintViolatedInv)
+					stdio.writeln("nok")
+			
+			end
+		}
+	end
+}

@@ -19,8 +19,8 @@ aspect class KermetaModelElement
 	/**
 	 * Fake invariant for testing purposes
 	 */
-	@Scope "LOADED MERGED RESOLVED"
+	@Scope "MERGED"
 	inv fake_super_invariant is do
-		true
+		false
 	end
 }

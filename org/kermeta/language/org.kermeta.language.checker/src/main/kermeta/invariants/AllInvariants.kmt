@@ -11,7 +11,7 @@ package org::kermeta::checker::invariants;
 
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
+//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ConstraintAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/KermetaModelElementAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelingUnitAspect.kmt"

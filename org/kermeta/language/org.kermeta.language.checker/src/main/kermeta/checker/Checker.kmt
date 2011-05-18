@@ -241,32 +241,37 @@ class Checker
 		// Is it the right scope ?
 		if filterInvariant(~inv,scope)
 		then
-			stdio.writeln("Checking invariant " + ~inv.name + " for scope " + scope +" on object " + obj.toString)
+			//stdio.writeln("Checking invariant " + ~inv.name + " for scope " + scope +" on object " + obj.toString)
 			// If so, check the class invariant
 			do
 				//obj.checkInvariant(~inv)
-/*				evaluateInvariant(obj,~inv)
+				evaluateInvariant(obj,~inv)
 				rescue (e : ConstraintViolatedInv)
 					//stdio.writeln("ERROR : " + e.message)
 					// Build the ConstraintDiagnostic Report 					
 					consDiag := buildConstraintDiagnostic(obj, ~inv)
 					
-*/
+
 			end	
 		end
 		
 		result := consDiag
 	end
 	
-	@CompilerIgnore "true"
+	//@CompilerIgnore "true"
 	operation evaluateInvariant(obj : kermeta::language::structure::Object, ~inv : kermeta::language::structure::Constraint) : Void is do
-		obj.checkInvariant(~inv)
-		rescue (e : ConstraintViolatedInv)
-			raise e
+		do
+			obj.checkInvariant(~inv)
+			rescue (e : ConstraintViolatedInv)
+				//stdio.writeln("constraint is violated, raising e " + e.message )
+				raise e
+		end
 	end
 	
 	operation buildConstraintDiagnostic(obj : kermeta::language::structure::Object,
 				invariant : kermeta::language::structure::Constraint) : ConstraintDiagnostic is do
+			
+			//stdio.writeln("Building constraint diagnostic for " + invariant.name + " on object : " + obj.toString)
 				
 			var constraintDiagnostic : ConstraintDiagnostic init ConstraintDiagnostic.new
 
@@ -276,9 +281,13 @@ class Checker
 			constraintDiagnostic.isWarning := getWarningStatus(invariant)
 					
 			var invProxy : InvariantProxy init InvariantProxy.new
+			
 			invProxy.metaclassQualifiedName := obj.getMetaClass.classDefinition.name
 			invProxy.invariantName := invariant.name
-			invProxy.mmUri :=  obj.containingResource.metaModelURI
+			if (not(obj.containingResource.isVoid))
+			then
+				invProxy.mmUri :=  obj.containingResource.metaModelURI
+			end
 			constraintDiagnostic.failedConstraint := invProxy
 			
 			result := constraintDiagnostic
