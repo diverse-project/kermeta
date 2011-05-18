@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<packaging>jar</packaging>
+  	<name>language.checker.api :: API for K2 Checker</name>
+  	<artifactId>language.checker.api</artifactId>
+
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>language.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.systemservices.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.diagnostic</groupId>
+			<artifactId>diagnostic.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Export-Package>
+							org.kermeta.language.checker.api
+                        </Export-Package>
+                        <Require-Bundle>
+            				org.kermeta.language.model,
+            				org.kermeta.utils.systemservices.api
+                        </Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
