@@ -6,40 +6,58 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   	<modelVersion>4.0.0</modelVersion>
-  	<groupId>org.kermeta.diagnostic</groupId>
-  	<artifactId>diagnostic.model</artifactId>
 	<packaging>bundle</packaging>
 	<name>Kermeta :: Diagnostic model</name>
-	
-	<parent>
-        <groupId>org.kermeta.language</groupId>
+  	<artifactId>diagnostic.model</artifactId>
+
+    <parent>
         <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
         <version>2.0.1-SNAPSHOT</version>
-    </parent>
+    </parent>	
 	
-		<build>
+	<build>
+
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>model</directory>
+				<targetPath>model</targetPath>
+			</resource>
+		</resources>
+
 		<plugins>
-			<plugin>
+
+		
+			<!--plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
+			</plugin-->
 			<plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.1.0</version>
+                <version>2.0.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>org.kermeta.diagnostic.model;singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                         <Export-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
                         	org,
                         	org.kermeta,
                         	org.kermeta.diagnostic,
@@ -51,8 +69,7 @@
 							org.eclipse.emf.*,
 							org.osgi.framework;version="[1.5,2)"
                         </Import-Package>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-SymbolicName>org.kermeta.diagnostic.model;singleton:=true</Bundle-SymbolicName>
+                       
                     </instructions>
                 </configuration>
             </plugin>
