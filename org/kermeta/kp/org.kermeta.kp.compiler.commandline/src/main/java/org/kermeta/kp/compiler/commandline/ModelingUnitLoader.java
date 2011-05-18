@@ -64,11 +64,8 @@ public class ModelingUnitLoader {
 		if (urlString.endsWith(".kmt")) {
 			try {
 				// Flush all problems marked on the file
-				System.err.println("flushing all problems on the file");
 				logger.flushAllProblems(new URL(urlString));
-				System.err.println("flushing done!");
-				
-				
+
 				mu = this.loadKMT(urlString);
 				if(saveIntermediateFiles && mu != null){
 					URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
