@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : February 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class UnresolvedType
+{
+	/**
+	 * The information in the using
+	 * must point to one and only one Type
+	 */
+	@Scope "MERGED"
+	inv using_must_not_conflict_for_resolution is do
+		// TODO
+		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
+		// A variant can be coded directly on Using to make sure that a set of using doesn't contains possibly conflicting definition
+		true
+	end
+}

@@ -1,0 +1,15 @@
+/* $Id:$ 
+ * Creation : February 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::checker;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/UnresolvedAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/ModelingUnitAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/KermetaModelElementAspect.kmt"

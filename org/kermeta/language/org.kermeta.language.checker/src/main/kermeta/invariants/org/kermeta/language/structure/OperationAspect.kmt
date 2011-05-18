@@ -1,0 +1,85 @@
+/* $Id:$ 
+ * Creation : September 14, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class Operation
+{
+	/**
+	 * The information in the super (or lack of information in super)
+	 * must point to one and only one Operation
+	 */
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv unresolved_super_must_not_conflict is do
+		// TODO
+		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
+		true
+	end
+	
+	/**
+	 * If the from field in UnresolvedOperation points on a generic ClassDefinition
+	 * it must contains the generics (from Set<G> and not from Set)
+	 */
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv unresolved_generic_super_must_contain_type_parameters is do
+		// TODO
+		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
+		true
+	end
+
+	/**
+	 * The @main tag is used to declare an operation which can provide a command line
+	 * runnable operation. This means that these operations will be correctly typed only 
+	 * if they take no parameter, or a series of String or a collection of String.
+	 */
+	@Scope "LOADED"
+	inv main_tag_validity is do
+	
+		if self.ownedTags.exists{ t | t.name.equals("main") }
+		then
+			//true
+			// The parameters should be of type String
+			self.ownedParameter.forAll{ p | p.getMetaClass.equals(kermeta::standard::String) } or
+			( if (self.ownedParameter.size.equals(1))
+			  then
+			  	self.ownedParameter.one.getMetaClass.equals(kermeta::standard::Collection<kermeta::standard::String>)
+			  else
+			 	false
+			  end
+			)
+		else
+			true
+		end
+	end
+	
+	
+	/*
+	 * Check use of deprecated
+	 *
+	 
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv use_deprecated is do
+		// Check return Type of operation
+		not (self.type.getMetaClass.typeDefinition.ownedTags.exists{ t | t.name.equals("deprecated") } )
+		
+		and
+		// Check parameter types
+		not (self.ownedParameter.exists{ p | p.type.getMetaClass.typeDefinition.ownedTags.exists{ t | t.name.equals("deprecated") } } )
+		
+	end
+	*/
+}
+

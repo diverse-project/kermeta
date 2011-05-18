@@ -1,0 +1,116 @@
+/* $Id:$ 
+ * Creation : April 12, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+
+aspect class ClassDefinition {
+
+	/**
+	 * Returns all the types directly and indirectly inherited by this ClasDefinition 
+	 */
+	operation allSuperTypes() : Set<Type> is do
+	 
+		var allSuperClasses : Set<Type> init Set<Type>.new
+        var superClasses : Set<Type> init Set<Type>.new
+        superClasses.addAll(self.superType)
+        
+        from  not superClasses.isEmpty
+        until superClasses.isEmpty
+        loop
+            allSuperClasses.addAll(superClasses)
+            var temp : Set<Type> init Set<Type>.new
+             superClasses.each{ s |
+             	if s.isInstanceOf(ParameterizedType) then
+					if s.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+                		temp.addAll(s.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType)
+                	end
+                end
+             }
+             superClasses.clear()
+             superClasses.addAll(temp)
+        end
+        
+        result := allSuperClasses
+	end
+
+	operation getAllSuperOperationsByType() : Hashtable<String, Set<Type>> is do
+	
+		var res : Hashtable<String, Set<Type>> init Hashtable<String, Set<Type>>.new
+		
+		allSuperTypes.each{ supTyp |
+		
+			if supTyp.isInstanceOf(ParameterizedType)
+			then
+				if supTyp.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition)
+				then
+					supTyp.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.each{ op |
+						if res.containsKey(op.uniqueName)
+						then
+							res.getValue(op.uniqueName).add(supTyp)
+						else
+							var setOfTypes : Set<Type> init Set<Type>.new
+							setOfTypes.add(supTyp)
+							res.put(op.uniqueName, setOfTypes)
+						end
+					}
+				end
+			end
+		}
+		
+		result := res
+	
+	end
+
+}
+
+
+
+
+aspect class Type {
+
+	operation allSuperTypes() : Set<Type> is do
+	 
+	 	var allSuperClasses : Set<Type> init Set<Type>.new
+	 
+	 	if (self.isInstanceOf(ParameterizedType)) then
+	 		if (self.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition))
+	 		then
+	 			allSuperClasses.addAll(self.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).allSuperTypes)
+	 		end
+	 	end
+	         
+        result := allSuperClasses
+	end
+
+	
+	operation isSuperTypeOf(t : Type) : Boolean is do
+		result := t.allSuperTypes().contains(self)
+	end
+	
+	operation isSubTypeOf(t : Type) : Boolean is do
+		result := self.allSuperTypes().contains(t)
+	end
+
+	operation checkInheritanceLink(t : Type) : Boolean is do
+		
+		result := self.isSuperTypeOf(t) or self.isSubTypeOf(t)
+			
+	end
+	
+	
+}
+

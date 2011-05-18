@@ -1,0 +1,61 @@
+@uri "http://diagnostic/1.0/"
+package org;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+package kermeta
+{
+	package diagnostic
+	{
+		class DiagnosticModel
+		{
+			attribute diagnostics : ConstraintDiagnostic[0..*]
+
+			attribute references : Reference[0..*]
+
+			reference constraints : Constraint[0..*]
+
+		}
+		class ConstraintDiagnostic
+		{
+			reference appliesTo : Reference[1..1]
+
+			reference failedConstraint : Constraint[1..1]
+
+			attribute isWarning : ecore::EBoolean[1..1]
+
+		}
+		abstract class Reference
+		{
+		}
+		class ModelReference inherits Reference
+		{
+			reference referencedObject : /*ecore::EObject*/kermeta::language::structure::Object[1..1]
+
+		}
+		abstract class Constraint
+		{
+		}
+		abstract class Invariant inherits Constraint
+		{
+		}
+		abstract class PreCondition inherits Constraint
+		{
+		}
+		abstract class PostCondition inherits Constraint
+		{
+		}
+		class InvariantProxy inherits Invariant
+		{
+			attribute metaclassQualifiedName : String[1..1]
+
+			attribute invariantName : String[1..1]
+
+			attribute mmUri : String[1..1]
+
+		}
+		alias String : kermeta::standard::String;
+	}
+
+}
+

@@ -1,0 +1,63 @@
+/* $Id:$ 
+ * Creation : March 1, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package org::kermeta::language::structure;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class Property {
+	
+	/* SOME OTHER CONSTRAINTS IN PropertyChecker.java from fr.irisa.triskell.kermeta.io */
+
+	/**
+	 * A *not* derived property cannot have neither getterBody nor setterBody
+	 */ 
+	@Scope "MERGED"
+	inv not_derived_implies_no_getter_setter is do
+		
+		self.isDerived or (self.getterBody.isVoid and self.setterBody.isVoid)
+	end
+	
+	/**
+	 * A derived property with a readonly cannot define a setter
+	 */
+	@Scope "MERGED"
+	inv derived_and_readonly_implies_no_setter is do
+		not(self.isDerived and self.isReadOnly) or self.setterBody.isVoid 
+	end
+	
+	/**
+	 * A derived property with a multiplicity greater than 1 cannot define a setter
+	 */
+	@Scope "MERGED"
+	inv derived_and_collection_implies_no_setter is do
+		not(self.isDerived and (self.upper>1 or self.upper<0)) or self.setterBody.isVoid
+	end
+	
+	/**
+	 * The upper bound cannot be lower than the lower bound
+	 */
+	@Scope "LOADED"
+	inv upper_must_be_greater_than_lower is do
+		(self.upper<0) or (self.upper>=self.lower)
+	end
+	
+	/**
+	 * The upper bound cannot be zero
+	 */
+	@Scope "LOADED"
+	inv upper_cannot_be_zero is do
+		not(self.upper!=0)
+	end
+	
+	
+
+	
+}
