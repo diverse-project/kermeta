@@ -63,19 +63,19 @@ class Checker
 	
 	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
 
-		stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
 		
 		
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
 
 
-		stdio.writeln("--  DiagnosticModel created")
+		//stdio.writeln("--  DiagnosticModel created")
 
 		// Retrieve obj classDefinition	
 		var cd : kermeta::language::structure::ClassDefinition 
 		cd := obj.getMetaClass().classDefinition
 
-		stdio.writeln("-- Object's ClassDefinition is " + cd.name  )
+		//stdio.writeln("-- Object's ClassDefinition is " + cd.name  )
 		
 		if ( not cd.isVoid ) then
 			
@@ -85,20 +85,20 @@ class Checker
 					
 			allConstraints.addAll(cd.~inv)
 
-			stdio.writeln("-- size of allConstraints before super : " + allConstraints.size().toString())
+			//stdio.writeln("-- size of allConstraints before super : " + allConstraints.size().toString())
 			//browse superClasses...
 			
 			obj.getMetaClass().superClass.collect{ sC | sC.classDefinition}
 										 .each{classDef |
-				stdio.writeln("-- superType : " + classDef.name)
+				//stdio.writeln("-- superType : " + classDef.name)
 				classDef.~inv.each{ in | 
-					stdio.writeln("    -> need to check invariant : " + in.name)
+					//stdio.writeln("    -> need to check invariant : " + in.name)
 					allConstraints.add(in) 
 				}
 			}
 			
 
-			stdio.writeln("-- size of allConstraints after super : " + allConstraints.size().toString())
+			//stdio.writeln("-- size of allConstraints after super : " + allConstraints.size().toString())
 		
 			
 			// Checking invariants of the class
@@ -235,8 +235,8 @@ class Checker
 		
 		var consDiag : ConstraintDiagnostic
 			
-		stdio.writeln("  -- Checking invariant " + ~inv.name)
-		stdio.writeln("   -> on class " + obj.getMetaClass.classDefinition.name )
+		//stdio.writeln("  -- Checking invariant " + ~inv.name)
+		//stdio.writeln("   -> on class " + obj.getMetaClass.classDefinition.name )
 		
 		var test : Boolean init filterInvariant(~inv, scope)
 		//stdio.writeln(" filtering result : " + test.toString)
