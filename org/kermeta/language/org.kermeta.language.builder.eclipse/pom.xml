@@ -190,7 +190,10 @@
 							org.kermeta.language.model,
 							org.kermeta.language.builder.api,
 							org.kermeta.utils.helpers.eclipse,
-							fr.irisa.triskell.cache.utilities				
+							fr.irisa.triskell.cache.utilities,
+							org.kermeta.language.checker.api,
+							org.kermeta.language.checker,
+							org.kermeta.diagnostic.model				
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
