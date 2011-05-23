@@ -9,6 +9,8 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
@@ -42,5 +44,11 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 		return new org.kermeta.language.texteditor.eclipse.internal.KermetaScanner(colorManager,theEditor);
 	}
 	
+	@Override
+	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+		if ( theEditor.getFile() == null )
+			return null;
+		return new EditorTextHover(theEditor);
+	}
 	
 }

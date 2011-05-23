@@ -1,5 +1,6 @@
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.TextEditor;
 
@@ -34,4 +35,11 @@ public class KermetaEditor extends TextEditor {
 		}
 	}
 	
+    public IFile getFile() {
+    	if( getEditorInput() instanceof IFileEditorInput ) {
+            IFileEditorInput input = (IFileEditorInput)getEditorInput();
+            return input.getFile();
+        }
+    	return null;
+    }
 }
