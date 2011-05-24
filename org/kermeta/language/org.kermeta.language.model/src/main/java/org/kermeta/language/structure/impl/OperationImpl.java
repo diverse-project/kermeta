@@ -420,7 +420,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			unique.append(this.getName());
 			unique.append(getOwnedParameter().size());
 			for (Parameter aParameter : getOwnedParameter()) {
-				unique.append(aParameter.getName());
 				unique.append(aParameter.getType());
 			}
 			setUniqueName(unique.toString());
