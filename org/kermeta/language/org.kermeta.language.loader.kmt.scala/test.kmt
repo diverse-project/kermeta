@@ -8,13 +8,14 @@ class Main
     operation main() : Void is do
 
 
-a.b.f.g := c.d.k.l.m.n.b.V.C.X.S.Z
 
-a+3 := 4 - ( 3 + 2 + 3 +3 ) - 3
-
-a a a 
-
-e.toto
+                 if toto then
+                 	bar
+                 end
+                 foo
+                 if toto then
+                 	bar
+                 end  
 
 
     end
