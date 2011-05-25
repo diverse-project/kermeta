@@ -80,4 +80,12 @@ public interface TracePackage extends EObject {
 	 */
 	EList<EObject> getContexts();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void convertReferences();
+
 } // TracePackage

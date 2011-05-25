@@ -13,9 +13,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.kermeta.traceability.ModelReference;
+import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
+import org.kermeta.traceability.UriReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,6 +99,19 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 		refObject = newRefObject;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.MODEL_REFERENCE__REF_OBJECT, oldRefObject, refObject));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public UriReference toUriReference() {
+		UriReference result = TraceabilityFactory.eINSTANCE.createUriReference();
+		result.getSource().addAll(getSource());
+		result.getTarget().addAll(getTarget());
+		result.setUri(EcoreUtil.getURI(this).toString());
+		return result;
 	}
 
 	/**

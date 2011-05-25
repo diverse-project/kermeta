@@ -28,6 +28,7 @@ import org.kermeta.traceability.TracePackage;
 import org.kermeta.traceability.TraceabilityFactory;
 import org.kermeta.traceability.TraceabilityPackage;
 import org.kermeta.traceability.Traceable;
+import org.kermeta.traceability.UriReference;
 import org.kermeta.traceability.XMLReference;
 
 /**
@@ -99,6 +100,13 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * @generated
 	 */
 	private EClass traceableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass uriReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -420,6 +428,24 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUriReference() {
+		return uriReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUriReference_Uri() {
+		return (EAttribute)uriReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -504,6 +530,9 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		createEReference(traceableEClass, TRACEABLE__TARGET);
 		createEReference(traceableEClass, TRACEABLE__SOURCE);
 
+		uriReferenceEClass = createEClass(URI_REFERENCE);
+		createEAttribute(uriReferenceEClass, URI_REFERENCE__URI);
+
 		// Create data types
 		stringEDataType = createEDataType(STRING);
 		integerEDataType = createEDataType(INTEGER);
@@ -544,12 +573,15 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		xmlReferenceEClass.getESuperTypes().add(this.getFileReference());
 		modelReferenceEClass.getESuperTypes().add(this.getReference());
 		qualifiedNameReferenceEClass.getESuperTypes().add(this.getReference());
+		uriReferenceEClass.getESuperTypes().add(this.getReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(tracePackageEClass, TracePackage.class, "TracePackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTracePackage_References(), this.getReference(), this.getReference_TraceMdl(), "references", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTracePackage_Subpackage(), this.getTracePackage(), null, "subpackage", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTracePackage_Contexts(), ecorePackage.getEObject(), null, "contexts", null, 0, -1, TracePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(tracePackageEClass, null, "convertReferences", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(traceEClass, Trace.class, "Trace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrace_SourceElem(), this.getTraceable(), this.getTraceable_Target(), "sourceElem", null, 0, 1, Trace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -573,12 +605,17 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		initEClass(modelReferenceEClass, ModelReference.class, "ModelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelReference_RefObject(), ecorePackage.getEObject(), null, "refObject", null, 1, 1, ModelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(modelReferenceEClass, this.getUriReference(), "toUriReference", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(qualifiedNameReferenceEClass, QualifiedNameReference.class, "QualifiedNameReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQualifiedNameReference_QualifiedName(), this.getString(), "qualifiedName", null, 1, 1, QualifiedNameReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceableEClass, Traceable.class, "Traceable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceable_Target(), this.getTrace(), this.getTrace_SourceElem(), "target", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTraceable_Source(), this.getTrace(), this.getTrace_TargetElem(), "source", null, 0, -1, Traceable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(uriReferenceEClass, UriReference.class, "UriReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUriReference_Uri(), this.getString(), "uri", null, 0, 1, UriReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

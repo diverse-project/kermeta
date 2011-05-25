@@ -108,6 +108,10 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 				return createTraceableAdapter();
 			}
 			@Override
+			public Adapter caseUriReference(UriReference object) {
+				return createUriReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -250,6 +254,20 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTraceableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.traceability.UriReference <em>Uri Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.traceability.UriReference
+	 * @generated
+	 */
+	public Adapter createUriReferenceAdapter() {
 		return null;
 	}
 

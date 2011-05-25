@@ -51,4 +51,12 @@ public interface ModelReference extends Reference {
 	 */
 	void setRefObject(EObject value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	UriReference toUriReference();
+
 } // ModelReference

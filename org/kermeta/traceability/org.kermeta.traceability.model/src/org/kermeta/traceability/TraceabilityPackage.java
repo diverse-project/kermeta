@@ -566,6 +566,61 @@ public interface TraceabilityPackage extends EPackage {
 	int QUALIFIED_NAME_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.traceability.impl.UriReferenceImpl <em>Uri Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.traceability.impl.UriReferenceImpl
+	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getUriReference()
+	 * @generated
+	 */
+	int URI_REFERENCE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URI_REFERENCE__TARGET = REFERENCE__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URI_REFERENCE__SOURCE = REFERENCE__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URI_REFERENCE__TRACE_MDL = REFERENCE__TRACE_MDL;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URI_REFERENCE__URI = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Uri Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URI_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '<em>String</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -573,7 +628,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 9;
+	int STRING = 10;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -583,7 +638,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 10;
+	int INTEGER = 11;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -593,7 +648,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 11;
+	int OBJECT = 12;
 
 
 	/**
@@ -861,6 +916,27 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTraceable_Source();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.traceability.UriReference <em>Uri Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Uri Reference</em>'.
+	 * @see org.kermeta.traceability.UriReference
+	 * @generated
+	 */
+	EClass getUriReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.traceability.UriReference#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.kermeta.traceability.UriReference#getUri()
+	 * @see #getUriReference()
+	 * @generated
+	 */
+	EAttribute getUriReference_Uri();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
@@ -1134,6 +1210,24 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACEABLE__SOURCE = eINSTANCE.getTraceable_Source();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.traceability.impl.UriReferenceImpl <em>Uri Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.traceability.impl.UriReferenceImpl
+		 * @see org.kermeta.traceability.impl.TraceabilityPackageImpl#getUriReference()
+		 * @generated
+		 */
+		EClass URI_REFERENCE = eINSTANCE.getUriReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute URI_REFERENCE__URI = eINSTANCE.getUriReference_Uri();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

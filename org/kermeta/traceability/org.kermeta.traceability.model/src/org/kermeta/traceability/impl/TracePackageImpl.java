@@ -6,6 +6,7 @@
  */
 package org.kermeta.traceability.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,9 +23,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.traceability.ModelReference;
 import org.kermeta.traceability.Reference;
 import org.kermeta.traceability.TracePackage;
 import org.kermeta.traceability.TraceabilityPackage;
+import org.kermeta.traceability.UriReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,6 +128,27 @@ public class TracePackageImpl extends EObjectImpl implements TracePackage {
 			contexts = new EObjectContainmentEList<EObject>(EObject.class, this, TraceabilityPackage.TRACE_PACKAGE__CONTEXTS);
 		}
 		return contexts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void convertReferences() {
+		ArrayList<UriReference> toAdd= new ArrayList<UriReference>();
+		ArrayList<Reference> toRemove= new ArrayList<Reference>();
+		for (Reference ref : getReferences())
+		{
+			if (ref instanceof ModelReference)
+			{
+				toRemove.add(ref);
+				toAdd.add(((ModelReference)ref).toUriReference());
+			}
+		}
+		getReferences().removeAll(toRemove);
+		getReferences().addAll(toAdd);
+
 	}
 
 	/**

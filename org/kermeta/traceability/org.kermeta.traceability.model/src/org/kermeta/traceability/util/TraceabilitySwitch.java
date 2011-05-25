@@ -154,6 +154,14 @@ public class TraceabilitySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TraceabilityPackage.URI_REFERENCE: {
+				UriReference uriReference = (UriReference)theEObject;
+				T result = caseUriReference(uriReference);
+				if (result == null) result = caseReference(uriReference);
+				if (result == null) result = caseTraceable(uriReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -290,6 +298,21 @@ public class TraceabilitySwitch<T> {
 	 * @generated
 	 */
 	public T caseTraceable(Traceable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Uri Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Uri Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUriReference(UriReference object) {
 		return null;
 	}
 

@@ -80,6 +80,15 @@ public interface TraceabilityFactory extends EFactory {
 	QualifiedNameReference createQualifiedNameReference();
 
 	/**
+	 * Returns a new object of class '<em>Uri Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Uri Reference</em>'.
+	 * @generated
+	 */
+	UriReference createUriReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

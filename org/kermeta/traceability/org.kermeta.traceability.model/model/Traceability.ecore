@@ -17,6 +17,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * This class represents a trace model.&#xD;&#xA; * This is a set of traces, references and messages.&#xD;&#xA; */"/>
         </eAnnotations>
+        <eOperations name="convertReferences"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="references" ordered="false"
             upperBound="-1" eType="#//kermeta/traceability/Reference" containment="true"
             eOpposite="#//kermeta/traceability/Reference/traceMdl">
@@ -101,6 +102,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * This class represents a reference to a model element&#xD;&#xA; */"/>
         </eAnnotations>
+        <eOperations name="toUriReference" eType="#//kermeta/traceability/UriReference"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" lowerBound="1"
             eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       </eClassifiers>
@@ -116,6 +118,9 @@
             eType="#//kermeta/traceability/Trace" containment="true" eOpposite="#//kermeta/traceability/Trace/sourceElem"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
             eType="#//kermeta/traceability/Trace" eOpposite="#//kermeta/traceability/Trace/targetElem"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="UriReference" eSuperTypes="#//kermeta/traceability/Reference">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//kermeta/traceability/String"/>
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
