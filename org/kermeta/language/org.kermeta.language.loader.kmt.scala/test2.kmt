@@ -1,0 +1,18 @@
+
+package kmt_testCase::foo;
+
+package MYPACK {
+class Main
+{
+    
+    operation main() : Void is do
+
+
+
+                var foo : String init toto
+                var foo2 : String 
+
+
+    end
+
+}
