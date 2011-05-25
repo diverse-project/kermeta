@@ -41,9 +41,10 @@ trait KStructuralParser extends KAbstractParser {
                   }
                 }
               case _ @ e => {
-
                   if(elems.size > 0){
-                    Error("kermeta expression expected",in0)
+                   // Error("kermeta expression expected",in0)
+                   Success(elems.toList, in0)
+                    
                   }  else {
                     elems += x ;
                     Success(elems.toList, rest)

@@ -33,6 +33,7 @@ trait KPositionedParser extends KAbstractParser {
   def kpositioned[T](p : Parser[T]) : Parser[T] = Parser { in =>
     p(in) match {
       case Success(x,rest) => {
+          println(x)
           var positionedResult = x
           in.first match {
             case positionedToken : Positional => { 
