@@ -30,7 +30,7 @@ class FullStaticResolver
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
-		var baseFileName : String init "AfterResolving__HelloWorldMiniframeworkAndRaise"
+		var baseFileName : String init "beforeSetting"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
@@ -45,7 +45,7 @@ class FullStaticResolver
        	//unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
        	resolvedModelingUnit := unresolvedModelingUnit
-       	//checkUnresolved(resolvedModelingUnit)
+       	checkUnresolved(resolvedModelingUnit)
        	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
        	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")

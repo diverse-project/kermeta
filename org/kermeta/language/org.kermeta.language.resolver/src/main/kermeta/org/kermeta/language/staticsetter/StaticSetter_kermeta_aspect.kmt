@@ -60,7 +60,7 @@ package structure {
 			super(context)
 			context.popContext()
 			context.currentOperation := void
-		end
+		end		
 	}
 }
 
@@ -470,7 +470,7 @@ package behavior {
 			
 			result := self
 		end 
-	}	
+	}
 	
 	aspect class Rescue {
 		operation resolveCallAndInferStatic(context : StaticSetterContext) is do
@@ -486,5 +486,33 @@ package behavior {
 			self.body.clear
 			self.body.addAll(newBody) 
 		end 
+	}
+	
+	aspect class CallResult {
+		operation findOperation(currentContainer : KermetaModelElement) : Operation is do
+			if currentContainer.isInstanceOf(Operation) then
+				result := currentContainer.asType(Operation)
+			else
+				if currentContainer.container.isVoid then
+					result := void
+				else
+					result := findOperation(currentContainer.container.asType(KermetaModelElement))
+				end
+			end
+		end
+	
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallResult") end  
+			
+			var operationContainer : Operation init findOperation(self.container().asType(KermetaModelElement))
+			
+			if (operationContainer.isVoid) then
+				raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid CallResult : no operation container", void)
+			else
+				self.setInferedStaticType(operationContainer.type)
+			end
+			
+			result := self
+		end
 	}
 }
