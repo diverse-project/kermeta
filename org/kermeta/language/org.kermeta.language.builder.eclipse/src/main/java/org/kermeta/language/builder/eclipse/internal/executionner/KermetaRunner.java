@@ -48,7 +48,6 @@ public class KermetaRunner<G> extends Thread{
 					boolean endProcess = false;
 					while (!endProcess) {
 						runningList.put(concernedResource, currentElement);
-						this.sleep(2000);
 						concernedExecution.execute(concernedResource,currentElement);
 						if (! waitingList.containsKey(concernedResource)) {
 							runningList.remove(concernedResource);
@@ -58,9 +57,6 @@ public class KermetaRunner<G> extends Thread{
 							waitingList.remove(concernedResource);
 						}
 					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} finally {
 					lock.unlock();
 				}
