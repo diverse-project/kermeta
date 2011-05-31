@@ -1,0 +1,15 @@
+KermetaProject :"language.sample.simplecontrolstructure" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language.sample" 
+defaultMainClass :"root_package::Main"
+defaultMainOperation : "main"
+{ 
+	  
+	source = "${project.baseUri}/src/main/kmt/simplecontrolstructure.kmt" 
+	
+	// depends on library.core	
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+		 
+} 
+
+ 
