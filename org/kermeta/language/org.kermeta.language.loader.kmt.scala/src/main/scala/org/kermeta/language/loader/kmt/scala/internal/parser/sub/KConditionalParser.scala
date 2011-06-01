@@ -33,7 +33,7 @@ trait KConditionalParser extends KAbstractParser {
         case Some(_ @ parser) => parser match {
             case "else"~elseBody =>{
                 var newElseBlock = BehaviorFactory.eINSTANCE.createBlock
-                newElseBlock.getStatement.addAll(thenBody)
+                newElseBlock.getStatement.addAll(elseBody)
                 newo.setElseBody(newElseBlock)
               }
           }
