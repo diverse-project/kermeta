@@ -11,7 +11,6 @@ package org.kermeta.language.ecore2km.api;
 import org.eclipse.emf.ecore.EPackage;
 import org.kermeta.language.structure.ModelingUnit;
 
-
 public interface Ecore2KM {
 	
 	/**
@@ -20,5 +19,6 @@ public interface Ecore2KM {
 	 * @param namespacePrefix The namespace prefix to set to the generated modeling unit.
 	 * @return The created modeling unit.
 	 */
-	ModelingUnit convertPackage(final EPackage rootPackage, final String namespacePrefix); 
+	public ModelingUnit convertPackage(final EPackage rootPackage, final String namespacePrefix);
+
 }

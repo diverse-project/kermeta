@@ -7,17 +7,17 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
-	<name>language.ecore2kma.api :: API for ecore2km</name>
-	<artifactId>language.ecore2km.api</artifactId>
-
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+  <name>language.ecore2kma.api :: API for ecore2km</name>
+  <artifactId>language.ecore2km.api</artifactId>
+  
     <parent>
-        <artifactId>language.root</artifactId>
-        <groupId>org.kermeta.language</groupId>
-        <version>2.0.1-SNAPSHOT</version>
+      <artifactId>language.root</artifactId>
+      <groupId>org.kermeta.language</groupId>
+      <version>2.0.1-SNAPSHOT</version>
     </parent>
-    
+   
 	<dependencies>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
@@ -25,7 +25,7 @@
 			<version>${kermeta.version}</version>
 		</dependency>
 	</dependencies>
-    
+  
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -39,11 +39,15 @@
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+ 						<Bundle-Localization>plugin</Bundle-Localization>
+ 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>					
+						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Export-Package>
 							org.kermeta.language.ecore2km.api
-                        </Export-Package>
-                        <Require-Bundle>
-            				org.kermeta.language.model
+						</Export-Package>
+						<Require-Bundle>
+							org.kermeta.language.model				
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
@@ -51,4 +55,5 @@
 			</plugin>
 		</plugins>
 	</build>
+  
 </project>
