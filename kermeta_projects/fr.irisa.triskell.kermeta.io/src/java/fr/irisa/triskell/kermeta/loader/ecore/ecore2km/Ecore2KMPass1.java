@@ -488,7 +488,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	
 	private void addTransientTag(EStructuralFeature feature, Property prop) {
 		if ( feature.isTransient() ) {
-			Tag t = KermetaModelHelper.Tag.create("ecore.isTransient", "true");
+			Tag t = KermetaModelHelper.Tag.create("ecore_isTransient", "true");
 			prop.getOwnedTags().add(t);
 			prop.getTag().add(t);
 		}

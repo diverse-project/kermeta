@@ -108,6 +108,9 @@ public class KMTOutputBuilder {
 			uri = rep + kermetaUnit.getUri().substring(index+1) + ".km";
 		} else if ( kermetaUnit.getUri().startsWith("platform:/resource") ) {
 			uri = kermetaUnit.getUri();			
+		} else if ( kermetaUnit.getUri().startsWith("platform:/plugin") ) {
+			uri = uri.replace("platform:/plugin/", "");
+			uri = rep + uri;
 		} else {
 			uri = uri.replace(pathToRemove + "/", "");
 			uri = rep + uri;

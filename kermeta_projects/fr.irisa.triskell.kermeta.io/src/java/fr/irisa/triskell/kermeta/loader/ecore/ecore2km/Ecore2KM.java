@@ -70,6 +70,7 @@ public class Ecore2KM {
     	primitive_types_mapping.put("java.lang.Void","kermeta::standard::Void");
     	primitive_types_mapping.put("java.lang.Short","kermeta::standard::Integer");
     	primitive_types_mapping.put("java.lang.Byte","kermeta::standard::Integer");
+    	primitive_types_mapping.put("java.util.Date","kermeta::utils::Date");
     }
 	
 }
