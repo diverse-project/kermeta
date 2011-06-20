@@ -219,3 +219,19 @@ aspect class Package {
 		result := self
 	end
 }
+
+aspect class Tag {
+	/**
+	 * Creates a new Package
+	 * 
+	 * @param name
+	 *            name of the Package
+	 * @param uri
+	 *            type of the Package
+	 */
+	 operation initialize(name : String, ~value : String) : Tag is do
+	 	self.name := name
+	 	self.~value := ~value
+	 	result := self
+	 end
+}

@@ -16,6 +16,10 @@ using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
 
+aspect class Expression {
+	operation isEqualTo(other : Expression) : Boolean is abstract
+}
+
 aspect class Block {
 	/**
 	 * Creates a new Block of expression
@@ -61,6 +65,29 @@ aspect class VariableDecl {
 			self.type := TypeReference.new.initialize(type)
 		end
 		result := self
+	end
+	
+	method isEqualTo(other : Expression) : Boolean is do
+		var b : Boolean init true
+		if other.isKindOf(VariableDecl) then
+			b.andThen{e|self.identifier.equals(other.asType(VariableDecl).identifier)}
+			if(self.initialization != void).andThen{e|other.asType(VariableDecl).initialization != void} then
+				b.andThen{e|self.initialization.isEqualTo(other.asType(VariableDecl).initialization)}
+			end
+			if(self.initialization == void).andThen{e|other.asType(VariableDecl).initialization == void} then
+				b := b and true
+			end
+			// no isEqualTo method for structure yet
+			/*if(self.type != void).andThen{e|other.asType(VariableDecl).type != void} then
+				b.andThen{e|self.type.isEqualTo(other.asType(VariableDecl).type)}
+			end
+			if(self.type == void).andThen{e|other.asType(VariableDecl).type == void} then
+				b := b and true
+			end*/
+		else
+			b := false
+		end
+		result := b
 	end
 }
 
@@ -245,6 +272,22 @@ aspect class CallFeature {
 		self.target := CallFeature.new.initialize(propertyName)
 		result := self
 	end
+	
+	method isEqualTo(other : Expression) : Boolean is do
+		var b : Boolean init true
+		if other.isKindOf(CallFeature) then
+			b.andThen{e|self.name.equals(other.asType(CallFeature).name)}
+			if(self.target != void).andThen{e|other.asType(CallFeature).target != void} then
+				b.andThen{e|self.target.isEqualTo(other.asType(CallFeature).target)}
+			end
+			if(self.target == void).andThen{e|other.asType(CallFeature).target == void} then
+				b := b and true
+			end
+		else
+			b := false
+		end
+		result := b
+	end
 }
 
 aspect class TypeReference {
@@ -272,6 +315,17 @@ aspect class TypeReference {
 		self.name := pt.name
 		self.containedType.add(pt)
 		result := self
+	end
+	
+	operation isEqualTo(other : Expression) : Boolean is do
+		var b : Boolean init true
+		if other.isKindOf(TypeReference) then
+			b.andThen{e|self.upper.equals(other.asType(TypeReference).upper)}
+			.andThen{e|self.name.equals(other.asType(TypeReference).name)}
+		else
+			b := false
+		end
+		result := b
 	end
 }
 
@@ -319,6 +373,18 @@ aspect class Assignment {
 		self.isCast := isCast
 		result := self
 	end
+	
+	method isEqualTo(other : Expression) : Boolean is do
+		var b : Boolean init true
+		if other.isKindOf(Assignment) then
+			b.andThen{e|self.target.isEqualTo(other.asType(Assignment).target)}
+			.andThen{e|self.~value.isEqualTo(other.asType(Assignment).~value)}
+			.andThen{e|self.isCast.equals(other.asType(Assignment).isCast)}
+		else
+			b := false
+		end
+		result := b
+	end
 }
 
 aspect class CallVariable {
@@ -331,6 +397,16 @@ aspect class CallVariable {
 	operation initialize(name : String) : CallVariable is do
 		self.name := name
 		result := self
+	end
+	
+	method isEqualTo(other : Expression) : Boolean is do
+		var b : Boolean init true
+		if other.isKindOf(CallVariable) then
+			b.andThen{e|self.name.equals(other.asType(CallVariable).name)}
+		else
+			b := false
+		end
+		result := b
 	end
 }
 
