@@ -1,0 +1,25 @@
+package Pkg{
+	class MultiInherit{
+		@main ""
+		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do
+			var ct : CapitalText.new
+			ct.addOp("coucou")
+		end
+	}
+	class CapitalText inherits LeftHand, RightHand {
+		method addOp(textToAdd : kermeta::standard::String) from LeftHand is
+		do
+			super(textToAdd)
+		end
+	}
+	class LeftHand {
+		method addOp(textToAdd : kermeta::standard::String) is do
+			kermeta::io::StdIO.writeln("left")
+		end
+	}
+	class RightHand {
+		method addOp(textToAdd : kermeta::standard::String) is do
+			kermeta::io::StdIO.writeln("right")
+		end
+	}
+}

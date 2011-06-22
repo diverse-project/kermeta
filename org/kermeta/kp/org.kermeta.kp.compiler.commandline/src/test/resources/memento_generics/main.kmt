@@ -1,0 +1,21 @@
+package Pkg{
+	class Genericity{
+		@main ""
+		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
+			var toto : Queue<kermeta::standard::String>.new
+			toto.enqueue(kermeta::standard::String.new)
+			kermeta::io::StdIO.writeln(toto.dequeue().toString)
+		end
+	}
+	
+	class Queue<G> {
+		reference elements : oset G[*]
+		operation enqueue(e : G) : Void is do
+			elements.add(e)
+		end
+		operation dequeue() : G is do
+			result := elements.first
+			elements.removeAt(0)
+		end
+	}
+}

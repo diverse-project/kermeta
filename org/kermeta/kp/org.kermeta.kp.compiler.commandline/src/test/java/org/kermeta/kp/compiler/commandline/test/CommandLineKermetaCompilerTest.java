@@ -9,36 +9,17 @@
 package org.kermeta.kp.compiler.commandline.test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-//import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
-import org.kermeta.language.structure.ModelingUnit;
-//import org.kermeta.scala.parser.art2.impl.Art2ComponentKMTLoader;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 
-
-/**
- *
- */
 public class CommandLineKermetaCompilerTest extends TestCase {
-
 	String kpFile;
 	String targetFolder;
 
-    
 
     public CommandLineKermetaCompilerTest(String kpFile, String targetFolder) {
 		super();
@@ -49,7 +30,6 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 
 
 	public void test() throws IOException  {
-
         System.out.println("Test compiling " + kpFile);
         System.out.println("            to " + targetFolder);
         
@@ -63,7 +43,6 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         //assert(true);
     }
 
-
     
     @Override
     public String getName() {
@@ -73,13 +52,11 @@ public class CommandLineKermetaCompilerTest extends TestCase {
     @Override
     public void runTest() throws Throwable  {
         test();
-
-
     }
 
     @Override
     protected void tearDown() throws Exception {
-        
-
+        //
     }
 }
+
