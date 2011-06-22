@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.framework.scala</artifactId>
-			<version>0.12.8</version>
+			<version>0.12.10</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -144,6 +144,9 @@
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
+							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+							<Bundle-Localization>plugin</Bundle-Localization>
+							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 							<Export-Package>
 								org.kermeta.language.ecore2km,
 								org.kermeta.language.language.ecore2kmrunner
@@ -176,7 +179,8 @@
 								scala.collection.immutable,
 								scala.collection.mutable,
 								scala.reflect,
-								scala.runtime
+								scala.runtime,
+								utils
                         </Import-Package>
 						</manifestEntries>
 					</archive>
