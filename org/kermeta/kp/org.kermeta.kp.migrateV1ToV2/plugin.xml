@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.kp.migrateV1ToV2.contribution1"
+            nameFilter="*.kmt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.kermeta.kp.migrateV1ToV2.menu1"
+               label="Migrate 2"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kp.migratev1tov2.popup.actions.MigrateRequireToKPAction"
+               enablesFor="1"
+               id="org.kermeta.kp.migrateV1ToV2.newAction"
+               label="Kp"
+               menubarPath="org.kermeta.kp.migrateV1ToV2.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
