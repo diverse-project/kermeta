@@ -24,6 +24,7 @@
 					<instructions>
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 					<!-- 	<Require-Bundle>
 							org.eclipse.core.resources,
