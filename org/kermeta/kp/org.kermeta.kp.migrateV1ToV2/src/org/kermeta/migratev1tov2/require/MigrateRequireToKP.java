@@ -99,13 +99,12 @@ public class MigrateRequireToKP {
 		else {
 			
 			if (t[0].equals("platform:")) {
-				/*String endPath ="";
+				String endPath ="";
 				for (int i = 2; i < t.length; i++) {
 					endPath = endPath + "\\" + t[i] ;
 				}
 				result = baseWorkspace  + endPath;
-				System.out.println("result " + result); */
-				result = "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\metamodels\\RDBMSMM.kmt";
+				
 			}
 			else {
 				result =s;
@@ -114,14 +113,14 @@ public class MigrateRequireToKP {
 		return result;
 	}
 	
-	public void migrateRequireInKP (String pathFile, String baseProject, String baseWorkspace) throws FileNotFoundException, IOException {
+	public void migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Parse kmt main file
 		List<String> reqFiles = allRequires( pathFile, baseProject, baseWorkspace);
 		
 		// Manage source in the kp (change the String)
-		List<String> requiredFiles = sourcesInKP (baseProject, "${project.baseUri}", reqFiles );
+		List<String> requiredFiles = sourcesInKP (baseProject, baseProjectNotation, reqFiles );
 		// Create new KP file :
-		createNewKpFile ( pathFile, baseProject,requiredFiles);
+		createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
 		
 		
 	}
@@ -133,12 +132,8 @@ public class MigrateRequireToKP {
 			for (String s : reqFiles) {
 				String sourceF =s.substring(2, s.length()-1);
 				String source ="";
-				System.out.println(sourceF);
-				System.out.println(bproject);
-				System.out.println();
 				
 				
-				// PB TO RESOLVE
 				if (sourceF.contains(bproject)) {
 					// source = baseProject + endPath
 					String endPath = sourceF.substring(bproject.length(),sourceF.length() -1 );
@@ -158,7 +153,7 @@ public class MigrateRequireToKP {
 		return sourceFiles;
 	}
 	
-	public void createNewKpFile (String pathFile, String baseProject, List<String> requiredFiles) throws FileNotFoundException, IOException {
+	public void createNewKpFile (String pathFile, String baseProject,String baseProjectNotation, List<String> requiredFiles, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Obtain annotation values : 
 		RequireParser parser = new RequireParser (pathFile);
 		String mainClass = parser.parseAnnotation("@mainClass");
@@ -169,7 +164,8 @@ public class MigrateRequireToKP {
 		// Create KP model
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//String pathKp = getPathKp(pathFile, baseProject);
-		String pathKp = "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\project.kp";
+		//String pathKp2 = "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\project.kp";
+		String pathKp = baseProject + "/project.kp";
 		
 		
 		URI uri = URI.createFileURI(pathKp);
@@ -179,8 +175,16 @@ public class MigrateRequireToKP {
 		kp.setDefaultMainClass(mainClass);
 		kp.setDefaultMainOperation(mainOperation);
 		// to improve
-		kp.setName("projectName");
-		kp.setGroup("projectGroup");
+		kp.setName(projectName);
+		kp.setGroup(groupName);
+		
+		//Add kmt file as source
+		String [] splitPath = pathFile.split("/");
+		String kmtName = splitPath[splitPath.length-1]; // --/--/name.kmt (name is the last)
+		String mainKmt = baseProjectNotation + "/" + kmtName;
+		Source sourceMainKmt = KpFactory.eINSTANCE.createSource();
+		sourceMainKmt.setUrl(mainKmt);
+		kp.getSources().add(sourceMainKmt);
 		
 		// Iterate on required files
 		if (! requiredFiles.isEmpty()) {
@@ -201,15 +205,7 @@ public class MigrateRequireToKP {
 			resource.save(null);
 	}
 	
-	public String getPathKp(String pathKMTFile, String baseProject) {
-		String kpPath ="";
-		String [] splitpathKMT = pathKMTFile.split("\\");
-		String fileName = splitpathKMT[splitpathKMT.length-1];
-		String [] obtainOnlyName = fileName.split(".");
-		String name = obtainOnlyName[0];
-		kpPath = baseProject + "\\" + name;
-		return kpPath;
-	}
+	
 	
 	
 	public static void main(String [] arg) {

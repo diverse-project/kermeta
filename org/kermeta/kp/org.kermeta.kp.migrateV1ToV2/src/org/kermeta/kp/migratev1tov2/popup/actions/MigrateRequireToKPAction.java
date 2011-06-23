@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
@@ -47,41 +48,42 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		/*MessageDialog.openInformation(
-			shell,
-			"MigrateV1ToV2",
-			"Create Kp file was executed."); */
-		MigrateRequireToKP migrate = new MigrateRequireToKP();
-		try {
-			migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace" );
-			// Later refresh
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-	/*	try {
-			List<String> requiredFiles = new ArrayList();
-			MigrateRequireToKP migrate = new MigrateRequireToKP();
-			//requiredFiles = migrate.parseKMTFile("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt");
-			requiredFiles = migrate.allRequires("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace"  );
-			migrate.displayList(requiredFiles);
-			List <String> l = new ArrayList <String> ();
-			try {
-				migrate.createNewKpFile ("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\project.kp", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS", l);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
+		if ((selection instanceof IStructuredSelection)) {
+			IStructuredSelection structured = (IStructuredSelection)selection;
+            Object object = structured.getFirstElement();
+            IFile kmtFile = (IFile) object;
+            // "file:/"
+            String kmtPathFile =  kmtFile.getLocation().toString().replace("\\", "/");
+            String baseDirectory = kmtFile.getParent().getLocation().toString().replace("\\", "/");
+            String workspaceDirectory = kmtFile.getWorkspace().getRoot().getLocation().toString().replace("\\", "/");
+            String projectName = kmtFile.getProject().getName();
+            String groupName = "group";
+            
+            
+            if (object instanceof IFile) {
+            	MigrateRequireToKP migrate = new MigrateRequireToKP();
+            	try {
+            		//migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
+            		migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
+            		// Later refresh
+            	} catch (FileNotFoundException e) {
+            		e.printStackTrace();
+            	} catch (IOException e) {
+            		// TODO Auto-generated catch block
+            		e.printStackTrace();
+            	} 
+            } else {
+                throw new IllegalArgumentException(
+                        "Object is not Instance of IFile");
+            }
+        } else {
+            throw new IllegalArgumentException(
+                    "Selection is not an IStructuredSelection");
+        }
 		
 	}
+		
+	
 
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
