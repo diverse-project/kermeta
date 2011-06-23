@@ -69,6 +69,7 @@
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-SymbolicName>org.kermeta.traceability.model; singleton=true</Bundle-SymbolicName>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                     </instructions>
                 </configuration>
             </plugin>
