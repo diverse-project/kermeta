@@ -2,11 +2,11 @@
 * License : EPL
 * Copyright : IRISA / INRIA 
 * ----------------------------------------------------------------------------
-* Creation date : 19 avr. 2011
+* Creation date : 23 june 2011
 * Authors : 
-*      Didier Vojtisek <didier.vojtisek@inria.fr>
+*      Cédric Bouhours <cedric.bouhours@inria.fr>
 */
-package org.kermeta.language.resolver.api;
+package org.kermeta.language.resolver.internal;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,29 +19,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
+import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
-import org.kermeta.language.language.resolverrunner.MainRunner;
 
-public class KmResolverImpl implements org.kermeta.language.resolver.api.KmResolver {
-	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu){
-		//logger.debug("Resolving ModelingUnit..." );
-	   	
-    	MainRunner.init();
-    	FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory.createFullStaticResolver();
-    	ModelingUnit muResolved = null;
-    	try {
-    		muResolved = (ModelingUnit) resolver.resolve(enforceAspect(mu));
-		} catch (IOException e) {
-			//logger.error(e.getMessage(),e);
-		}
-    	
-    	//logger.debug("ModelingUnit resolved..." );
-		ErrorProneResult<ModelingUnit> result;
-    	result = new ErrorProneResult<ModelingUnit>(muResolved);
-    	//logger.warning("Resolver not completely implemented" );
-    	
-    	return result;
+public class KmResolverOperations {
+
+	FullStaticResolver resolver = null;
+	
+	public KmResolverOperations(FullStaticResolver resolver){   	
+		this.resolver = resolver;
 	}
 	
 	protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
@@ -76,4 +63,46 @@ public class KmResolverImpl implements org.kermeta.language.resolver.api.KmResol
     		return mu;
     	}
     }
+
+	public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu) {	
+		ModelingUnit muResolved = null;
+    	try {
+    		muResolved = (ModelingUnit) resolver.doResolving(enforceAspect(mu));
+		} catch (IOException e) {
+			return null;
+		}
+
+		ErrorProneResult<ModelingUnit> result;
+    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	
+    	return result;
+	}
+
+	public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu) {		
+		ModelingUnit muResolved = null;
+    	try {
+    		muResolved = (ModelingUnit) resolver.doStaticSetting(enforceAspect(mu));
+		} catch (IOException e) {
+			return null;
+		}
+
+		ErrorProneResult<ModelingUnit> result;
+    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	
+    	return result;
+	}
+
+	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu) {
+		ModelingUnit muResolved = null;
+    	try {
+    		muResolved = (ModelingUnit) resolver.resolve(enforceAspect(mu));
+		} catch (IOException e) {
+			return null;
+		}
+
+		ErrorProneResult<ModelingUnit> result;
+    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	
+    	return result;
+	}
 }

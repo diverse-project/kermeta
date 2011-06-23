@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.8</version>
+            <version>0.12.10</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -60,7 +60,7 @@
              <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA15</version>
+                <version>1.4.1-BETA16</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -117,11 +117,11 @@
 			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Activator>org.kermeta.language.resolver.internal.Activator</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-			org.kermeta.language.resolver.api,
-			org.kermeta.language.resolver,
-			org.kermeta.language.language.resolverrunner
+			org.kermeta.language.resolver
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
