@@ -16,5 +16,7 @@ import org.kermeta.language.structure.ModelingUnit;
 public interface KmResolver {
 
     public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu);
+    public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu);
+    public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu);
 
 }
