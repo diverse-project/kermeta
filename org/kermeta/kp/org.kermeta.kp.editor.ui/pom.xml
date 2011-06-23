@@ -66,6 +66,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 						<Bundle-Activator>org.kermeta.kp.editor.ui.KpUIPlugin</Bundle-Activator>
 						<Require-Bundle>org.eclipse.core.resources,
 							org.emftext.access;resolution:=optional,
