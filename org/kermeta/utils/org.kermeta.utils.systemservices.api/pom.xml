@@ -42,6 +42,7 @@
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-Localization>plugin</Bundle-Localization>
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 							<Export-Package>								
                         		org.kermeta.utils.systemservices.api.impl,
                         		org.kermeta.utils.systemservices.api.messaging,
