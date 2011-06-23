@@ -106,6 +106,7 @@
                         <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
                         	org, 
                         	org.impl,
