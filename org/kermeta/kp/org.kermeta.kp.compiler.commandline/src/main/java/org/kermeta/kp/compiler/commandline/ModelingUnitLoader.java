@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.ecore2km.api.Ecore2KM;
 import org.kermeta.language.ecore2km.Ecore2KMImpl;
 import org.kermeta.language.ecore2km.Ecore2KMImpl4Eclipse;
-import org.kermeta.language.language.merger.binarymergerrunner.MainRunner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
@@ -93,7 +92,6 @@ public class ModelingUnitLoader {
 			}
 		}else if (urlString.endsWith(".km")) {
 
-			MainRunner.init4eclipse();
 			try {
 				mu = this.loadKM(urlString);
 			} catch (IOException e) {

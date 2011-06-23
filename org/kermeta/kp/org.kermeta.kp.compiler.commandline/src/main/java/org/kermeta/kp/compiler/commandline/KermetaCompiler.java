@@ -12,16 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashSet;
-//import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -38,18 +32,23 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
+import org.kermeta.kp.editor.util.KpMinimalModelHelper;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
+import org.kermeta.language.checker.CheckerImpl;
+import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
+import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl4Eclipse;
 import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
+import org.kermeta.language.resolver.KmResolverImpl;
+import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
+import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
-//import scala.collection.JavaConversions.JListWrapper;
-//import scala.collection.JavaConversions.JListWrapper;
-//import org.embedded.EmbeddedMavenHelper;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
@@ -69,7 +68,7 @@ public class KermetaCompiler {
 	
 	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 	
-	public boolean checkingEnabled = true;
+	public boolean checkingEnabled = false;
 	public boolean stopOnError = true;
 	
 	public boolean runInEclipse = false;
@@ -167,13 +166,9 @@ public class KermetaCompiler {
 		initializeFactory();
 		this.targetFolder = targetFolder;
 	}*/
+		
 	
-	/**
-	 * Main process
-	 * @param kpFileURL
-	 * @throws IOException
-	 */
-	public void kp2bytecode(String kpFileURL, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+	public ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL,ModelingUnit> dirtyMU, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
 		String projectName = "project";
 		
 		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
@@ -185,9 +180,8 @@ public class KermetaCompiler {
 			projectName = kp.getName();
 		}
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
-		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander);
-
-		// Merge modeling units
+		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander, dirtyMU);
+		
 		logger.progress("KermetaCompiler.kp2bytecode", "Merging "+ modelingUnits.size()+" files...", this.getClass().getName(), 1);
 		ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
 		
@@ -196,28 +190,25 @@ public class KermetaCompiler {
 			processErrors(mergedUnit);
 			if (stopOnError) {
 				logger.info("Errors have occured during merge, stop compilation process", this.getClass().getName());
-				return;
+				return null;
 			}
 		}
 		
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeChecking_afterMerging.km").convert(mergedUnit.getResult());
 		
 		// Check mergedUnit for scope MERGED
 		if (checkingEnabled) {
-			logger.log(MessagingSystem.Kind.UserINFO,"Checking modeling unit for scope MERGED", this.getClass().getName());
-			
-			DiagnosticModel results = checkModelingUnit(mergedUnit.getResult(), CheckerScope.MERGED);
+			DiagnosticModel results = checkModelingUnit(convertedModelingUnit, CheckerScope.MERGED);
 			processCheckingDiagnostics(results);
 			
 			if (stopOnError && results.getDiagnostics().size()>0) {
 				logger.info("Errors have occured during check for scope MERGED, stop compilation process", this.getClass().getName());
-				return;
+				return null;
 			}
 			
 		}
 		
-		// Resolve modeling unit
-		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult());
-		
+		ModelingUnit resolvedUnit = resolveModelingUnit(convertedModelingUnit);
 		
 		// Check resolvedUnit for scope RESOLVED
 		if (checkingEnabled) {
@@ -228,7 +219,7 @@ public class KermetaCompiler {
 			
 			if (stopOnError && results.getDiagnostics().size()>0) {
 				logger.info("Errors have occured during check for scope RESOLVED, stop compilation process", this.getClass().getName());
-				return;
+				return null;
 			}		
 		}
 		
@@ -258,6 +249,16 @@ public class KermetaCompiler {
 			logger.info("generateKmOnly flag set => Ignore scala generation", this.getClass().getName());
 		}
 		logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", this.getClass().getName());
+		return resolvedUnit;
+	}
+	
+	/**
+	 * Main process
+	 * @param kpFileURL
+	 * @throws IOException
+	 */
+	public ModelingUnit kp2bytecode(String kpFileURL, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder,List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+		return kp2bytecode(kpFileURL, new HashMap<URL,ModelingUnit>(), targetFolder, targetGeneratedSourceFolder, targetGeneratedResourcesFolder,additionalClassPath,generateKmOnly);
 	}	
 
 
@@ -273,12 +274,17 @@ public class KermetaCompiler {
 		return theParser.load(uri, content, logger);
 	}
 
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
-		
-		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
-		
+	public ArrayList<URL> getSources(String kpString) throws IOException {
+		KpLoaderImpl ldr = new KpLoaderImpl();
+		KermetaProject kp = ldr.loadKp(kpString);
+		return getSources(kp, new KpVariableExpander(kpString));
+	}
+	
+	public ArrayList<URL> getSources(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+		KpLoaderImpl ldr = new KpLoaderImpl();
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
+		ArrayList<URL> kpSources = new ArrayList<URL>();
 		for (Source src : srcs ){
 			
 			if (src instanceof SourceQuery){
@@ -287,17 +293,7 @@ public class KermetaCompiler {
 				String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
 				String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
 				logger.debug("SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")", this.getClass().getName());
-				
-				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse,this.saveIntermediateFiles, this.targetIntermediateFolder+"/"+srcQuery.getFrom().getName()).loadModelingUnitFromURL(indirectURL);
-				if (mu != null) {
-					modelingUnits.add(mu);
-					if(this.saveIntermediateFiles){
-						
-					}
-				}
-				else {
-					logger.log(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " +indirectURL, this.getClass().getName());
-				}
+				kpSources.add(FileHelpers.StringToURL(indirectURL));
 			}
 			else{
 				String sourceURLWithVariable = ((Source) src).getUrl();
@@ -305,24 +301,12 @@ public class KermetaCompiler {
 				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
 				if (sourceURLWithVariable.contains("${")){
 					// deal with variable expansion
-					
 					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " +sourceURL +")", this.getClass().getName());
 				}
 				else{
 					logger.debug("sourceURL : " + sourceURLWithVariable, this.getClass().getName());
 				}
-				// usual internal source
-				ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse,this.saveIntermediateFiles, this.targetIntermediateFolder).loadModelingUnitFromURL(sourceURL);
-				if (mu != null) {
-					if(mu.getName() == null){
-						// force ModelingUnit name to the one provided in the kp
-						mu.setName(kp.getName());
-					}
-					modelingUnits.add(mu);
-				}
-				else {
-					logger.log(MessagingSystem.Kind.UserERROR,"Empty ModelingUnit, failed to load " +sourceURL, this.getClass().getName());
-				}
+				kpSources.add(FileHelpers.StringToURL(sourceURL));
 			}
 		}
 			
@@ -347,58 +331,78 @@ public class KermetaCompiler {
 		    while ((ze = zip.getNextEntry()) != null){
 		    	if(("/"+ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)){
 		    		// load dependencyKP
-		    		KpLoaderImpl ldr = new KpLoaderImpl();
+		    		ldr = new KpLoaderImpl();
 		    		dependencyKP = ldr.loadKp(URI.createURI("jar:"+dependencyURL+"!/"+ze.getName()));
 		    	}
 		    }
 		    
-		    // try to load the associated merged km
 		    if(dependencyKP == null){
 		    	logger.log(MessagingSystem.Kind.UserWARNING,"   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", this.getClass().getName());
 		    }
 		    else{
-		    	// load the km file resulting from the merge of the dependency
 		    	String dependencyMergedKMUrl = "jar:"+dependencyURL+"!"+DEFAULT_KP_METAINF_LOCATION_IN_JAR+"/"+dependencyKP.getName()+".km";
-		    	ModelingUnit mu = new ModelingUnitLoader(logger,this.runInEclipse).loadModelingUnitFromURL(dependencyMergedKMUrl);
+		    	kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
+		    }
+		}
+		
+		return kpSources;
+	}
+	
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL,ModelingUnit> dirtyMU) throws IOException {
+		ArrayList<URL> kpSources = getSources(kp,varExpander);
+		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
+		
+		for (URL oneURL : kpSources) {
+			if (dirtyMU.get(oneURL) != null) {
+				modelingUnits.add(dirtyMU.get(oneURL));
+			} else {
+				ModelingUnit mu = null;
+				mu = new ModelingUnitLoader(logger,this.runInEclipse,this.saveIntermediateFiles, this.targetIntermediateFolder).loadModelingUnitFromURL(oneURL.toString());
 				if (mu != null) {
+					if(mu.getName() == null){
+						// force ModelingUnit name to the one provided in the kp
+						mu.setName(kp.getName());
+					}
 					modelingUnits.add(mu);
 				}
 				else {
-					logger.log(MessagingSystem.Kind.UserWARNING," Empty ModelingUnit, failed to load " +dependencyMergedKMUrl, this.getClass().getName());
-					
+					logger.log(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " +oneURL, this.getClass().getName());
 				}
-		    }
+			}
 		}
+		
 		return modelingUnits;
+	}
+	
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+		return getSourceModelingUnits(kp, varExpander, new HashMap<URL,ModelingUnit>());
 	}
 	
 	
 	
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
-		// Convert Modellingunit For Merger
-		// not useful now ? utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
-		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
+		KmBinaryMerger theMerger = null;
+		
+		if (runInEclipse) {
+			theMerger = new KmBinaryMergerImpl4Eclipse();
+		} else {
+			theMerger = new KmBinaryMergerImpl();
+		}
+		
 		for (ModelingUnit mu : modelingUnits){			
 			convertedModellingUnits.add( new ModelingUnitConverter().convert(mu));
 		}
-		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
-		
 		// merge
-		//ModelingUnit beforeMergedMU = convertedModellingUnits.get(0);
 		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(convertedModellingUnits.get(0));
 		
 		if (convertedModellingUnits.size()>1){
 			// Use KmBinaryMerger to be able to use ErrorProneResults to track problems
-			//org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.KerRichFactory.createBinaryMerger();
-			System.err.println("Trying to create binary merger");
-			KmBinaryMerger b = new KmBinaryMergerImpl();
-			System.err.println("Done !!");
 			
 			List<ResultProblemMessage> problems = new ArrayList<ResultProblemMessage>();
 			
 			for (int i = 1;i<convertedModellingUnits.size();i++){
-				mergedMU = b.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
+				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
 				
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
@@ -417,23 +421,26 @@ public class KermetaCompiler {
 	
 	
 	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException{
-		//utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.resolver");
-		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
+		KmResolver theResolver;
+		
+		if (runInEclipse) {
+			theResolver = new KmResolverImpl4Eclipse();
+		} else {
+			theResolver = new KmResolverImpl();
+		}
+		
 		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeResolving.km").convert(mu);
 		
 		//Resolving
-		org.kermeta.language.resolver.FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory
-		.createFullStaticResolver();
-		
-		ModelingUnit resolvedMU = resolver.doResolving(convertedModelingUnit);
+		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
 				
-		 convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeSetting.km").convert(resolvedMU);
+		convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeSetting.km").convert(resolvedMU.getResult()); 
 		
 		//StaticSetting
-		ModelingUnit staticsettedMU = resolver.doStaticSetting(resolvedMU);
-		resolver.checkUnresolved(resolvedMU);
+		ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
+		
 		//End of Resolving
-		return staticsettedMU;
+		return staticsettedMU.getResult();
 	}
 	
 	
@@ -475,29 +482,10 @@ public class KermetaCompiler {
 	
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 		
+		Checker theChecker = new CheckerImpl();
 		
-		System.err.println("Checking modeling unit for scope " +scope.toString());
-		org.kermeta.language.language.checkerrunner.MainRunner.init4eclipse();
-		//System.err.println("Init4eclipse done");
-		
-		ModelingUnit convertedModelingUnit;
-		if (scope.equals(CheckerScope.MERGED)) {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeMerged.km").convert(mu);
-		} else if (scope.equals(CheckerScope.RESOLVED)) {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeResolved.km").convert(mu);
-		} else {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeLoaded.km").convert(mu);
-		}
-			
 		//Checking
-		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory
-		.createChecker();
-				
-		//System.err.println("Checker created");
-		
-		DiagnosticModel diags = checker.checkObject(convertedModelingUnit, scope.toString());
-		
-		//System.err.println("diagnostic done");
+		DiagnosticModel diags = theChecker.check(mu, scope, "", logger);
 		
 		/*
 		//Display check results
