@@ -82,7 +82,7 @@
 			<plugin>
 				<groupId>org.kermeta.language</groupId>
 				<artifactId>language.compiler.mavenplugin</artifactId>
-				<version>1.4.1-BETA15</version>
+				<version>1.4.1-BETA16</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>
@@ -147,6 +147,7 @@
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Bundle-Localization>plugin</Bundle-Localization>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+							<Bundle-Activator>org.kermeta.language.ecore2km.Activator</Bundle-Activator>
 							<Export-Package>
 								org.kermeta.language.ecore2km,
 								org.kermeta.language.language.ecore2kmrunner
