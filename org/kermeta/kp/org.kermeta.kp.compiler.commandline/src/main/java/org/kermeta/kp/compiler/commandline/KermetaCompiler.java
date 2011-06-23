@@ -42,6 +42,8 @@ import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
+import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
@@ -51,6 +53,7 @@ import org.kermeta.language.structure.Tag;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
+import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
 
 
 /**
@@ -64,6 +67,7 @@ public class KermetaCompiler {
 	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER+ "/scala";
 	
+	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 	
 	public boolean checkingEnabled = true;
 	public boolean stopOnError = true;
@@ -174,43 +178,56 @@ public class KermetaCompiler {
 		
 		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "+kpFileURL, this.getClass().getName(), 6);
 		KpLoaderImpl ldr = new KpLoaderImpl();
+		
+		// Load KP file
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		if(!kp.getName().isEmpty()){
 			projectName = kp.getName();
 		}
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
 		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander);
+
+		// Merge modeling units
 		logger.progress("KermetaCompiler.kp2bytecode", "Merging "+ modelingUnits.size()+" files...", this.getClass().getName(), 1);
+		ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
 		
-		ModelingUnit mergedUnit = mergeModelingUnits(modelingUnits);
-	
-		if (mergedUnit instanceof ErrorProneResult<?>) {
-			System.err.println("This is a errorproneresult");
+		// Did errors occur during the merge ?
+		if (mergedUnit.getProblems().size() > 0 ) {
+			processErrors(mergedUnit);
+			if (stopOnError) {
+				logger.info("Errors have occured during merge, stop compilation process", this.getClass().getName());
+				return;
+			}
 		}
-		else {
-			System.err.println("This is no error prone result");
-		}
+		
 		
 		// Check mergedUnit for scope MERGED
 		if (checkingEnabled) {
-			DiagnosticModel results = checkModelingUnit(mergedUnit, CheckerScope.MERGED);
+			logger.log(MessagingSystem.Kind.UserINFO,"Checking modeling unit for scope MERGED", this.getClass().getName());
+			
+			DiagnosticModel results = checkModelingUnit(mergedUnit.getResult(), CheckerScope.MERGED);
 			processCheckingDiagnostics(results);
 			
 			if (stopOnError && results.getDiagnostics().size()>0) {
-				logger.info("Errors have risen during check for scope MERGED, stop compilation process", this.getClass().getName());
+				logger.info("Errors have occured during check for scope MERGED, stop compilation process", this.getClass().getName());
 				return;
 			}
 			
 		}
 		
-		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit);
+		// Resolve modeling unit
+		ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult());
+		
+		
 		// Check resolvedUnit for scope RESOLVED
 		if (checkingEnabled) {
+			logger.log(MessagingSystem.Kind.UserINFO,"Checking modeling unit for scope RESOLVED", this.getClass().getName());
+
 			DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 			processCheckingDiagnostics(results);
 			
 			if (stopOnError && results.getDiagnostics().size()>0) {
-				logger.info("Errors have risen during check for scope RESOLVED, stop compilation process", this.getClass().getName());
+				logger.info("Errors have occured during check for scope RESOLVED, stop compilation process", this.getClass().getName());
 				return;
 			}		
 		}
@@ -357,7 +374,7 @@ public class KermetaCompiler {
 	
 	
 	
-	public ModelingUnit mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
+	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		// Convert Modellingunit For Merger
 		// not useful now ? utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.merger.binarymerger");
@@ -368,15 +385,33 @@ public class KermetaCompiler {
 		org.kermeta.language.language.merger.binarymergerrunner.MainRunner.init4eclipse();
 		
 		// merge
-		ModelingUnit mergedMU = convertedModellingUnits.get(0);		
+		//ModelingUnit beforeMergedMU = convertedModellingUnits.get(0);
+		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(convertedModellingUnits.get(0));
+		
 		if (convertedModellingUnits.size()>1){
-			org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.KerRichFactory
-			.createBinaryMerger();
+			// Use KmBinaryMerger to be able to use ErrorProneResults to track problems
+			//org.kermeta.language.merger.BinaryMerger b = org.kermeta.language.merger.KerRichFactory.createBinaryMerger();
+			System.err.println("Trying to create binary merger");
+			KmBinaryMerger b = new KmBinaryMergerImpl();
+			System.err.println("Done !!");
+			
+			List<ResultProblemMessage> problems = new ArrayList<ResultProblemMessage>();
+			
 			for (int i = 1;i<convertedModellingUnits.size();i++){
-				mergedMU = b.merge(mergedMU, convertedModellingUnits.get(i));
-			}			
+				mergedMU = b.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
+				
+				// Save previous problems
+				for (ResultProblemMessage prob : mergedMU.getProblems()) {
+					problems.add(prob);
+				}
+			}
+			
+			//Add all previous problems to the last mergedMU ErrorProneResult.
+			mergedMU.getProblems().addAll(problems);
+		
 		}
-
+		
+		//return mergedMU.getResult();
 		return mergedMU;
 	}
 	
@@ -392,6 +427,7 @@ public class KermetaCompiler {
 		
 		ModelingUnit resolvedMU = resolver.doResolving(convertedModelingUnit);
 				
+		 convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeSetting.km").convert(resolvedMU);
 		
 		//StaticSetting
 		ModelingUnit staticsettedMU = resolver.doStaticSetting(resolvedMU);
@@ -439,14 +475,29 @@ public class KermetaCompiler {
 	
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 		
-		org.kermeta.language.language.checkerrunner.MainRunner.init4eclipse();
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeMerged.km").convert(mu);
 		
+		System.err.println("Checking modeling unit for scope " +scope.toString());
+		org.kermeta.language.language.checkerrunner.MainRunner.init4eclipse();
+		//System.err.println("Init4eclipse done");
+		
+		ModelingUnit convertedModelingUnit;
+		if (scope.equals(CheckerScope.MERGED)) {
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeMerged.km").convert(mu);
+		} else if (scope.equals(CheckerScope.RESOLVED)) {
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeResolved.km").convert(mu);
+		} else {
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeCheckingScopeLoaded.km").convert(mu);
+		}
+			
 		//Checking
 		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory
 		.createChecker();
 				
+		//System.err.println("Checker created");
+		
 		DiagnosticModel diags = checker.checkObject(convertedModelingUnit, scope.toString());
+		
+		//System.err.println("diagnostic done");
 		
 		/*
 		//Display check results
@@ -490,8 +541,57 @@ public class KermetaCompiler {
 		return diags;
 	}
 	
+	private void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
+		//TODO Retrieve faulty objects text reference and logProblem
+		
+		for (ResultProblemMessage prob : eprMu.getProblems()) {
+			logger.log(MessagingSystem.Kind.UserERROR, prob.getMessage(), this.getClass().getName());
+			
+			// retrieve faulty object
+			//KermetaModelElement kme = (Kermeprob.getCauseObject();
+			System.err.println("faultyObject is : " + prob.getCauseObject().toString());
+			
+			org.kermeta.utils.systemservices.api.reference.ModelReference mref = 
+					(org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
+			
+			System.err.println(mref.getModelRef().toString());
+			
+			// The object is a KermetaModelElement
+			KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
+
+			System.err.println("The error involves " + kme.toString());
+
+			// Check if there is a sourceLocation tag
+			Boolean tagFound = false;
+			
+			for (Tag t : kme.getKOwnedTags() ) {
+				
+				System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
+				
+				//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
+					tagFound = true;
+					//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
+					TextReference ref = createTextReference(t);
+
+					
+					if (ref != null) {
+						logger.logProblem(MessagingSystem.Kind.UserERROR,
+								prob.getMessage(), 
+								this.getClass().getName(), ref);
+					}
+					
+				}
+			}
+			
+		}
+	}
+	
 	private void processCheckingDiagnostics(DiagnosticModel diags) {
 
+		//System.err.println("processing diagnostics : " + diags.getDiagnostics().size());
+		
+		
 		//Display check results
 		logger.log(MessagingSystem.Kind.UserINFO,"There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
 
@@ -516,14 +616,48 @@ public class KermetaCompiler {
 			EObject myObject = ((ModelReference)diag.getAppliesTo()).getReferencedObject();
 			KermetaModelElement kme = (KermetaModelElement) myObject;
 			
+			//System.err.println("The diagnostic involves " + kme.toString());
+			
+			//System.err.println("KermetaModelElement succesfully casted !!");
+			
 			// Check if there is a sourceLocation tag
+			Boolean tagFound = false;
+			
 			for (Tag t : kme.getKOwnedTags() ) {
 				
-				//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
-				if (t.getName().equals("source.location")) {
-					//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
-					createTextReference(t);
+				//System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
+				
+				logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
+					tagFound = true;
+					logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
+					TextReference ref = createTextReference(t);
+
+					if (ref != null) {
+						logger.logProblem(MessagingSystem.Kind.UserERROR,
+								((InvariantProxy)failedConstraint).getMessage(), 
+								this.getClass().getName(), ref);
+					}
 				}
+			}
+			
+			if (!tagFound) {
+				// Try to retrieve the model element's container
+				Tag t = searchForNearestTaggedContainingKME(kme);
+				
+				if (t==null) {
+					System.err.println("Impossible to retrieve a container with text traceability");
+				}
+				else {
+					TextReference ref = createTextReference(t);
+					if (ref != null) {
+						logger.logProblem(MessagingSystem.Kind.UserERROR,
+								((InvariantProxy)failedConstraint).getMessage(), 
+								this.getClass().getName(), ref);
+					}
+					
+				}
+				
 			}
 			
 			
@@ -533,19 +667,50 @@ public class KermetaCompiler {
 		
 	}
 	
+	private Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
+		
+		KermetaModelElement currentElement = null;
+		KermetaModelElement container = (KermetaModelElement)kme.eContainer();
+		
+		while (container != null) {
+			
+			for (Tag t : container.getKOwnedTags()) {
+				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE) ) {
+					return t;
+				}
+			}
+			// Tag hasn't been found, keep on searching higher in the model
+			
+			currentElement = container;
+			container = (KermetaModelElement)currentElement.eContainer();
+		}
+		
+		return null;
+	}
 	
-	private void createTextReference(Tag tag) {
+	
+	private TextReference createTextReference(Tag tag) {
 		
 		String value = tag.getValue();
+		
+		//System.err.println(tag.getValue());
+		
 		String[] values = value.split(";");
 		
-		logger.log(MessagingSystem.Kind.UserINFO, "Source File (" + values[0] + ")", "");
-		logger.log(MessagingSystem.Kind.UserINFO, "Line   (" + values[1] + ")", "");
-		logger.log(MessagingSystem.Kind.UserINFO, "Column (" + values[2] + ")", "");
+		//logger.log(MessagingSystem.Kind.UserINFO, "Source File (" + values[0] + ")", "");
+		//logger.log(MessagingSystem.Kind.UserINFO, "beginOffset (" + values[1] + ")", "");
+		//logger.log(MessagingSystem.Kind.UserINFO, "endOffset   (" + values[2] + ")", "");
 	
+		TextReference ref = null;
+		
 		try {
-			TextReference ref = new TextReference(new URL(values[0]),new Integer(values[1]),new Integer(values[2]));
-			logger.logProblem(MessagingSystem.Kind.UserERROR, "error on", this.getClass().getName(), ref);
+			ref = new TextReference(new URL(values[0]),new Integer(values[1]),new Integer(values[2]));
+			//ref.setBeginLine(new Integer(values[1]));
+			//ref.setBeginOffset(new Integer(values[2]));
+			
+		
+			//new TextReference()
+
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -554,7 +719,7 @@ public class KermetaCompiler {
 			e.printStackTrace();
 		}
 		
-		
+		return ref;
 	}
 	
     private void scala2bytecode(List<String> additionalClassPath) {
