@@ -44,6 +44,7 @@
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 						<Export-Package>
 							org.kermeta.language.kp.loader.kp.api
                         </Export-Package>
