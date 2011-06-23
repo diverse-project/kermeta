@@ -5,10 +5,12 @@ defaultMainClass :"helloworld::HelloWorld"
 defaultMainOperation : "main"
 { 
 	
-	source = "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"  
+	source = "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"
+	//srcQuery = "/src/main/ecore/kermeta.ecore" from "language.model" 
 	
 	// depends on library.core	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+	dependency "language.library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	//dependency "language.model" URL="mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT"    
 		 
 } 
 

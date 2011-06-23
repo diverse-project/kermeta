@@ -37,6 +37,7 @@
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
+                            <checkingEnabled>false</checkingEnabled>
                         </configuration>
                     </execution>
                 </executions>
