@@ -9,6 +9,12 @@ public abstract class Builder {
 		super();
 	}
 
-	public abstract ModelingUnit parseSpecificFile(IResource toParse, String content, boolean inModification);
+	public abstract void parseSpecificFile(IResource toParse, String content);
+	public abstract void buildFromKP(String kpIdentifier);
+	public abstract void compileFromKP(String kpIdentifier);
+	public abstract String findKPidentifierFromKMT(IResource kmt);
+	public abstract void setDirty(IResource kmt, boolean dirty);
+	
+	public abstract String generateIdentifier(IResource element);
 
 }
