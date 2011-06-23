@@ -38,6 +38,7 @@
             eType="#//kermeta/diagnostic/String"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="mmUri" lowerBound="1"
             eType="#//kermeta/diagnostic/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="#//kermeta/diagnostic/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     </eSubpackages>

@@ -162,6 +162,10 @@
         <element xmi:type="ecore:EAttribute" href="Diagnostic.ecore#//kermeta/diagnostic/InvariantProxy/invariantName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_F_K6weKsEd-64vK3TC7lIg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_d7ipoYLkEeCXv8T__4DaXg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Diagnostic.ecore#//kermeta/diagnostic/InvariantProxy/message"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d7ipooLkEeCXv8T__4DaXg"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_JidbUOKsEd-64vK3TC7lIg" type="2001">
         <element xmi:type="ecore:EAttribute" href="Diagnostic.ecore#//kermeta/diagnostic/InvariantProxy/mmUri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_JidbUeKsEd-64vK3TC7lIg"/>

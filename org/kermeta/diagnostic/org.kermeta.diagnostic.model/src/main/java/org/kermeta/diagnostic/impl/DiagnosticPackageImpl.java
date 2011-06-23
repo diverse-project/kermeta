@@ -340,6 +340,15 @@ public class DiagnosticPackageImpl extends EPackageImpl implements DiagnosticPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getInvariantProxy_Message() {
+		return (EAttribute)invariantProxyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -399,6 +408,7 @@ public class DiagnosticPackageImpl extends EPackageImpl implements DiagnosticPac
 		createEAttribute(invariantProxyEClass, INVARIANT_PROXY__METACLASS_QUALIFIED_NAME);
 		createEAttribute(invariantProxyEClass, INVARIANT_PROXY__INVARIANT_NAME);
 		createEAttribute(invariantProxyEClass, INVARIANT_PROXY__MM_URI);
+		createEAttribute(invariantProxyEClass, INVARIANT_PROXY__MESSAGE);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -466,6 +476,7 @@ public class DiagnosticPackageImpl extends EPackageImpl implements DiagnosticPac
 		initEAttribute(getInvariantProxy_MetaclassQualifiedName(), this.getString(), "metaclassQualifiedName", null, 1, 1, InvariantProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInvariantProxy_InvariantName(), this.getString(), "invariantName", null, 1, 1, InvariantProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInvariantProxy_MmUri(), this.getString(), "mmUri", null, 1, 1, InvariantProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInvariantProxy_Message(), this.getString(), "message", null, 0, 1, InvariantProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -25,6 +25,7 @@ import org.kermeta.diagnostic.InvariantProxy;
  *   <li>{@link org.kermeta.diagnostic.impl.InvariantProxyImpl#getMetaclassQualifiedName <em>Metaclass Qualified Name</em>}</li>
  *   <li>{@link org.kermeta.diagnostic.impl.InvariantProxyImpl#getInvariantName <em>Invariant Name</em>}</li>
  *   <li>{@link org.kermeta.diagnostic.impl.InvariantProxyImpl#getMmUri <em>Mm Uri</em>}</li>
+ *   <li>{@link org.kermeta.diagnostic.impl.InvariantProxyImpl#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,6 +91,26 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 	 * @ordered
 	 */
 	protected String mmUri = MM_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMessage() <em>Message</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMessage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MESSAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMessage() <em>Message</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMessage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String message = MESSAGE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +199,27 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMessage(String newMessage) {
+		String oldMessage = message;
+		message = newMessage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DiagnosticPackage.INVARIANT_PROXY__MESSAGE, oldMessage, message));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -187,6 +229,8 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 				return getInvariantName();
 			case DiagnosticPackage.INVARIANT_PROXY__MM_URI:
 				return getMmUri();
+			case DiagnosticPackage.INVARIANT_PROXY__MESSAGE:
+				return getMessage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,6 +251,9 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 				return;
 			case DiagnosticPackage.INVARIANT_PROXY__MM_URI:
 				setMmUri((String)newValue);
+				return;
+			case DiagnosticPackage.INVARIANT_PROXY__MESSAGE:
+				setMessage((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,6 +276,9 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 			case DiagnosticPackage.INVARIANT_PROXY__MM_URI:
 				setMmUri(MM_URI_EDEFAULT);
 				return;
+			case DiagnosticPackage.INVARIANT_PROXY__MESSAGE:
+				setMessage(MESSAGE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -247,6 +297,8 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 				return INVARIANT_NAME_EDEFAULT == null ? invariantName != null : !INVARIANT_NAME_EDEFAULT.equals(invariantName);
 			case DiagnosticPackage.INVARIANT_PROXY__MM_URI:
 				return MM_URI_EDEFAULT == null ? mmUri != null : !MM_URI_EDEFAULT.equals(mmUri);
+			case DiagnosticPackage.INVARIANT_PROXY__MESSAGE:
+				return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -267,6 +319,8 @@ public class InvariantProxyImpl extends InvariantImpl implements InvariantProxy 
 		result.append(invariantName);
 		result.append(", mmUri: ");
 		result.append(mmUri);
+		result.append(", message: ");
+		result.append(message);
 		result.append(')');
 		return result.toString();
 	}

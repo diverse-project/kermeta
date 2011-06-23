@@ -313,13 +313,22 @@ public interface DiagnosticPackage extends EPackage {
 	int INVARIANT_PROXY__MM_URI = INVARIANT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVARIANT_PROXY__MESSAGE = INVARIANT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Invariant Proxy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INVARIANT_PROXY_FEATURE_COUNT = INVARIANT_FEATURE_COUNT + 3;
+	int INVARIANT_PROXY_FEATURE_COUNT = INVARIANT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -533,6 +542,17 @@ public interface DiagnosticPackage extends EPackage {
 	EAttribute getInvariantProxy_MmUri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.diagnostic.InvariantProxy#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.kermeta.diagnostic.InvariantProxy#getMessage()
+	 * @see #getInvariantProxy()
+	 * @generated
+	 */
+	EAttribute getInvariantProxy_Message();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,6 +754,14 @@ public interface DiagnosticPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INVARIANT_PROXY__MM_URI = eINSTANCE.getInvariantProxy_MmUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVARIANT_PROXY__MESSAGE = eINSTANCE.getInvariantProxy_Message();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.
