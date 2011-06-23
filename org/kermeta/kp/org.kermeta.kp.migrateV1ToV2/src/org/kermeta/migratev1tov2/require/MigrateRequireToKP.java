@@ -128,22 +128,29 @@ public class MigrateRequireToKP {
 	
 	public List<String> sourcesInKP (String baseProject, String baseProjectNotation,List<String> reqFiles ){
 		List<String> sourceFiles = new ArrayList<String> ();
+		String bproject = baseProject.replace("\\", "/");
 		if (! reqFiles.isEmpty()) {
 			for (String s : reqFiles) {
 				String sourceF =s.substring(2, s.length()-1);
 				String source ="";
+				System.out.println(sourceF);
+				System.out.println(bproject);
+				System.out.println();
+				
 				
 				// PB TO RESOLVE
-				if (sourceF.startsWith(" "+baseProject)) {
+				if (sourceF.contains(bproject)) {
 					// source = baseProject + endPath
-					String endPath = sourceF.substring(baseProject.length(),sourceF.length() -1 );
+					String endPath = sourceF.substring(bproject.length(),sourceF.length() -1 );
 					 source = baseProjectNotation + "/" + endPath;
-					 System.out.println("SOURCE " +source);
 				}
 				else {
-					source = sourceF;
-					System.out.println(source);
-					System.out.println("NOT Start " +source);
+					if (!sourceF.contains("platform:")) {
+					source = baseProjectNotation + "/" + sourceF;
+					}
+					else {
+						source = sourceF;
+					}
 				}
 				sourceFiles.add(source);
 			}
@@ -156,6 +163,8 @@ public class MigrateRequireToKP {
 		RequireParser parser = new RequireParser (pathFile);
 		String mainClass = parser.parseAnnotation("@mainClass");
 		String mainOperation = parser.parseAnnotation("@mainOperation");
+		
+		
 		
 		// Create KP model
 		ResourceSet resourceSet = new ResourceSetImpl();
