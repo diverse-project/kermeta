@@ -200,7 +200,8 @@
             fr.irisa.triskell.kermeta.model,
             org.kermeta.language.model,
 			org.kermeta.language.merger.binarymerger.api,
-            org.kermeta.language.framework.scala
+            org.kermeta.language.framework.scala,
+            org.kermeta.utils.systemservices.api
                         </Require-Bundle>
                         <Import-Package>
             kermeta.persistence,
