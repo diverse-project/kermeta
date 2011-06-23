@@ -8,12 +8,10 @@
 */
 package org.kermeta.language.builder.eclipse.internal;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -26,6 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
 /**
@@ -37,9 +36,7 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 
 	public static final String KP_FILE_EXTENSION = "kp";
-	
-	protected Map<String,KPBuilder> kpBuilders = new HashMap<String,KPBuilder>(); 
-
+	private KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
 	
 	public WorkspaceResourceChangeListener() {
 		super();
@@ -72,14 +69,13 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 					case IResourceDelta.ADDED:
 						// add a new visitor dedicated to this Kermeta project file
 						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
-						kpBuilders.put(resource.getFullPath().toString(), new KPBuilder((IFile) resource));
+						kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource),new KPBuilder((IFile) resource));
 						break;
 					case IResourceDelta.REMOVED:
 						// handle removed resource
 						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "removing builder for "+resource.getFullPath(), this.getClass().getName());
-						builder = findKPBuilderFor((IFile) resource);
 						if(builder != null){
-							kpBuilders.remove(builder);
+							kermetaBuilder.kpBuilders.remove(kermetaBuilder.generateIdentifier(resource));
 						}
 						else{
 							Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to remove builder for "+resource.getFullPath(), this.getClass().getName());							
@@ -90,9 +86,14 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 							  // we care only about content change
 			                  return false;
 						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "refreshing builder for "+resource.getFullPath(), this.getClass().getName());
-						builder = findKPBuilderFor((IFile) resource);
+						builder = kermetaBuilder.kpBuilders.get(kermetaBuilder.generateIdentifier(resource));
 						if(builder != null){
-							builder.refreshFileIndex();
+							try {
+								builder.refreshFileIndex();
+								builder.compile();
+							} catch (IOException e) {
+								Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for "+resource.getFullPath(), this.getClass().getName());
+							}
 						}
 						else{
 							Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for "+resource.getFullPath(), this.getClass().getName());							
@@ -130,7 +131,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 						// ignore kp in target folder
 						if(!resource.getProjectRelativePath().segments()[0].equals("target")){
 							Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
-							kpBuilders.put(resource.getFullPath().toString(),new KPBuilder((IFile) resource));
+							kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource),new KPBuilder((IFile) resource));
 						}
 					}
 				}
@@ -157,7 +158,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 						Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, "failed to process delta with KPFileDeltaVisitor", e));
 					}
 					/* see if the event is related to one of our builders */
-					for(KPBuilder builder : kpBuilders.values()){
+					for(KPBuilder builder : kermetaBuilder.kpBuilders.values()){
 						builder.conditionalBuild(delta);
 					}
 		            return Status.OK_STATUS;
@@ -167,10 +168,5 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 		    job.schedule(); // start as soon as possible
 			
 		}
-	}
-
-	
-	protected KPBuilder findKPBuilderFor(IFile file){
-		return kpBuilders.get(file.getFullPath().toString());
 	}
 }

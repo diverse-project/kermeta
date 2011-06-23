@@ -109,16 +109,6 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>language.loader.kmt.scala.api</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.loader.kmt.scala</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>language.builder.api</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
@@ -180,10 +170,6 @@
 							org.kermeta.language.framework.scala,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.systemservices.eclipse,
-							org.kermeta.language.loader.kmt.scala,
-							org.kermeta.language.loader.kmt.scala.api,
-							org.kermeta.language.ecore2km,
-							org.kermeta.language.ecore2km.api,
 							org.kermeta.kp.model,
 							org.kermeta.kp.loader.kp,
 							org.kermeta.kp.compiler.commandline,
@@ -193,6 +179,8 @@
 							fr.irisa.triskell.cache.utilities,
 							org.kermeta.language.checker.api,
 							org.kermeta.language.checker,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.xmi,
 							org.kermeta.diagnostic.model				
                         </Require-Bundle>
 		            </manifestEntries>		            

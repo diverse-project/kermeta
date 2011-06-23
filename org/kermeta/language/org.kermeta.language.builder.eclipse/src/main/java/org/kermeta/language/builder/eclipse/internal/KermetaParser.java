@@ -9,13 +9,7 @@ import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecuti
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 
-public class KermetaParser extends KermetaExecutionner<String> {
-
-	boolean inModification;
-	
-	public KermetaParser(boolean inModification) {
-		this.inModification = inModification;
-	}
+public class KermetaParser extends KermetaExecutionner<IResource,String> {
 	
 	@Override
 	public void execute(IResource concernedResource, String content) {
@@ -36,16 +30,9 @@ public class KermetaParser extends KermetaExecutionner<String> {
 		}
 					
 		if (freshModelingUnit != null) {
-			saveParsingResult(freshModelingUnit, concernedResource.getFullPath().toOSString(),inModification);
+			KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
+			kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)).kpFiles.get(kermetaBuilder.generateIdentifier(concernedResource)).modelingUnit = freshModelingUnit;
+			kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(concernedResource));
 		}
-	}
-	
-	public void saveParsingResult(ModelingUnit result, String identifier, boolean inModification) {
-		ResourceIdentifier theCurrentResourceIdentifier = ((KermetaBuilder)KermetaBuilder.getDefault()).getResourceIdentifier(identifier);
-		
-		if (theCurrentResourceIdentifier==null) {
-			theCurrentResourceIdentifier = new ResourceIdentifier(identifier, inModification);
-		}
-		((KermetaBuilder)KermetaBuilder.getDefault()).currentModelingUnits.put(theCurrentResourceIdentifier, result);
 	}
 }

@@ -1,9 +1,7 @@
 package org.kermeta.language.builder.eclipse.internal.executionner;
 
-import org.eclipse.core.resources.IResource;
-
-public abstract class KermetaExecutionner<G>{
+public abstract class KermetaExecutionner<G,H>{
 	
-	public abstract void execute(IResource concernedResource, G content);
+	public abstract void execute(G concernedResource, H content);
 
 }

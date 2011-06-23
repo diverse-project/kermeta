@@ -18,11 +18,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
-import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.Source;
-import org.kermeta.kp.SourceQuery;
-import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
-import org.kermeta.kp.compiler.commandline.KpVariableExpander;
+import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
 
@@ -34,18 +30,18 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
  */
 public class KPNeedBuildDeltaVisitor implements IResourceDeltaVisitor {
 
-
-
 	protected IFile kpProjectFile;
 	
 	protected boolean buildNeeded = false;
 	
 	protected List<URL> concernedURLs = new ArrayList<URL>();
 	
+	private KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
+	
 	public KPNeedBuildDeltaVisitor(IFile kpProjectFile) {
 		super();
 		this.kpProjectFile = kpProjectFile;
-		refreshFileIndex();
+		kermetaBuilder.kpBuilders.get(kermetaBuilder.generateIdentifier(kpProjectFile));
 	}
 
 
@@ -79,46 +75,6 @@ public class KPNeedBuildDeltaVisitor implements IResourceDeltaVisitor {
 		return processResourceChildren;
 	}
 
-	/**
-	 * Refreshes the list of files that are concerned by this visitor according to the KP definition
-	 */
-	public void refreshFileIndex(){
-		String kpFileURL = kpProjectFile.getRawLocation().toString();
-		KpLoaderImpl ldr = new KpLoaderImpl();
-		KermetaProject kp = ldr.loadKp(kpFileURL);
-		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
-		if(kp == null){
-			Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG,"kp file empty or incorrect " + kpProjectFile, this.getClass().getName());
-			return;
-		}
-		List<Source> srcs = kp.getSources();
-		for (Source src : srcs ){
-			try {
-				if (src instanceof SourceQuery){
-					// deal with srcQuery
-				/*	SourceQuery srcQuery = (SourceQuery) src;
-					String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
-					String indirectURL = "jar:"+fromDependencyUrl+"!"+varExpander.expandVariables(srcQuery.getQuery());
-					Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG,"SourceQuery : " + srcQuery + " from "+srcQuery.getFrom().getUrl()+" (expanded to : " +indirectURL +")", this.getClass().getName());
-					concernedURLs.add(new URL(indirectURL));
-					*/
-				}
-				else{
-					String sourceURLWithVariable = ((Source) src).getUrl();
-					sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
-					String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
-					Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG,"sourceURL : " + sourceURLWithVariable + " (expanded to : " +sourceURL +")", this.getClass().getName());
-					concernedURLs.add(new URL(sourceURL));
-				}
-			} catch (MalformedURLException e) {
-				Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"ignoring source that doesn't resolve to an URL", this.getClass().getName(), e);
-				
-			}
-		}
-		
-	}
-
-
 	public IFile getKpProjectFile() {
 		return kpProjectFile;
 	}
@@ -131,8 +87,4 @@ public class KPNeedBuildDeltaVisitor implements IResourceDeltaVisitor {
 	public void setBuildNeeded(boolean buildNeeded) {
 		this.buildNeeded = buildNeeded;
 	}
-
-	
-	
-	
 }

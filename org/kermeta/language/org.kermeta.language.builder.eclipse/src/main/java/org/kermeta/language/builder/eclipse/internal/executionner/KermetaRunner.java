@@ -4,15 +4,13 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.eclipse.core.resources.IResource;
-
-public class KermetaRunner<G> extends Thread{
+public class KermetaRunner<G,H> extends Thread{
 	
-	final private Map<IResource,G> waitingList;
-	final private Map<IResource,G> runningList;
-	final private IResource concernedResource;
-	final private G concernedElement;
-	final private KermetaExecutionner<G> concernedExecution;
+	final private Map<G,H> waitingList;
+	final private Map<G,H> runningList;
+	final private G concernedResource;
+	final private H concernedElement;
+	final private KermetaExecutionner<G,H> concernedExecution;
 	
 	
 	/**
@@ -24,7 +22,7 @@ public class KermetaRunner<G> extends Thread{
 	 * @param concernedElement Object representing data needed by the execution
 	 * @param concernedExecution KermetaExecutionned containing the execution
 	 */
-	public KermetaRunner(Map<IResource,G> waitingList,Map<IResource,G> runningList,IResource concernedResource,G concernedElement,KermetaExecutionner<G> concernedExecution) {
+	public KermetaRunner(Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
 		this.waitingList = waitingList;
 		this.runningList = runningList;
 		this.concernedResource = concernedResource;
@@ -36,7 +34,7 @@ public class KermetaRunner<G> extends Thread{
 	public void run() {
 		final Lock lock = new ReentrantLock();
 		
-		G currentElement = concernedElement;
+		H currentElement = concernedElement;
 		if (waitingList.containsKey(concernedResource)) {
 			waitingList.put(concernedResource, currentElement);
 		} else {
