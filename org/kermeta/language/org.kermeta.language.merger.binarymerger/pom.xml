@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.8</version>
+            <version>0.12.10</version>
         </dependency>
         <!-- <dependency>
             <groupId>${project.groupId}</groupId>
@@ -94,7 +94,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA15</version>
+                <version>1.4.1-BETA16</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -191,10 +191,10 @@
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Activator>org.kermeta.language.merger.binarymerger.internal.Activator</Bundle-Activator>
                         <Export-Package>
-							org.kermeta.language.merger.binarymerger.api,
-							org.kermeta.language.merger,
-							org.kermeta.language.language.merger.binarymergerrunner
+			org.kermeta.language.merger.binarymerger
                         </Export-Package>
                         <Require-Bundle>
             fr.irisa.triskell.kermeta.model,
