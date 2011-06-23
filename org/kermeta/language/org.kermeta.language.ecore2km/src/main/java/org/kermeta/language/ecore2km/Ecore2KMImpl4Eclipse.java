@@ -11,6 +11,7 @@
 package org.kermeta.language.ecore2km;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.kermeta.language.ecore2km.internal.Activator;
 import org.kermeta.language.structure.ModelingUnit;
 
 

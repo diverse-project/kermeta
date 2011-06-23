@@ -147,7 +147,7 @@
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Bundle-Localization>plugin</Bundle-Localization>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-							<Bundle-Activator>org.kermeta.language.ecore2km.Activator</Bundle-Activator>
+							<Bundle-Activator>org.kermeta.language.ecore2km.internal.Activator</Bundle-Activator>
 							<Export-Package>
 								org.kermeta.language.ecore2km,
 								org.kermeta.language.language.ecore2kmrunner

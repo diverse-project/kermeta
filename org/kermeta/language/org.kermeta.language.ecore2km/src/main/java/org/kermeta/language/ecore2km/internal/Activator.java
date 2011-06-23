@@ -6,7 +6,7 @@
 * Authors : 
 *      Cédric Bouhours <cedric.bouhours@inria.fr>
 */
-package org.kermeta.language.ecore2km;
+package org.kermeta.language.ecore2km.internal;
 
 
 import org.osgi.framework.BundleActivator;
