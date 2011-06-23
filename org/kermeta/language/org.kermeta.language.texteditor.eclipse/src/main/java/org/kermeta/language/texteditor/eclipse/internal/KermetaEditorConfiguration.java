@@ -9,7 +9,11 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
@@ -28,6 +32,22 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 		this.colorManager = colorManager;
 	}
 	
+	@Override
+	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+		
+		// Create content assistant
+	   ContentAssistant assistant = new ContentAssistant();
+	   
+	   // Create content assistant processor
+	   IContentAssistProcessor processor = new KermetaContentAssistProcessor();
+	   
+	   // Set this processor for each supported content type
+	   assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+	         
+	   // Return the content assistant   
+	   return assistant;
+	}
+
 	public org.eclipse.jface.text.presentation.IPresentationReconciler getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		org.eclipse.jface.text.presentation.PresentationReconciler reconciler = new org.eclipse.jface.text.presentation.PresentationReconciler();
 		

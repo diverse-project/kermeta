@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.osgi.framework.BundleContext;
@@ -32,8 +31,7 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	
 	// The IFile dirty
-	public Map<IFile,ModelingUnit> dirtyFiles = new HashMap<IFile,ModelingUnit>();
-	public Map<IFile,String> containmentFiles = new HashMap<IFile,String>();
+	public Map<IFile,String> dirtyFilesContainment = new HashMap<IFile,String>();
 	
 	protected MessagingSystem messaggingSystem;
 	

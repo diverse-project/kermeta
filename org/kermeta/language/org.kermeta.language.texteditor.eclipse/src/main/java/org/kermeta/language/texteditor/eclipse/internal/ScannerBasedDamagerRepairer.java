@@ -94,13 +94,12 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 				IFile currentFile = fScanner.getCurrentFile();
 				
 				//If the IFile is in the list, it seams that the file is in modification
-				if (Activator.getDefault().dirtyFiles.containsKey(currentFile)) {
+				if (Activator.getDefault().dirtyFilesContainment.containsKey(currentFile)) {
 					//Here, I compare the containment of the document to call parser only when containment is modified
 					//this test avoids infinite loop due to marking
-					if (! fDocument.get().equals(Activator.getDefault().containmentFiles.get(currentFile))) {
-						Activator.getDefault().containmentFiles.put(currentFile, fDocument.get());
-						ModelingUnit currentModelingUnit = KermetaBuilder.getDefault().parseSpecificFile(currentFile, fDocument.get(), true);
-						Activator.getDefault().dirtyFiles.put(fScanner.getCurrentFile(), currentModelingUnit);
+					if (! fDocument.get().equals(Activator.getDefault().dirtyFilesContainment.get(currentFile))) {
+						Activator.getDefault().dirtyFilesContainment.put(currentFile, fDocument.get());
+						KermetaBuilder.getDefault().parseSpecificFile(currentFile, fDocument.get());
 					}
 				}
 				
