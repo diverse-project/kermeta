@@ -17,7 +17,7 @@ public class CheckerImpl implements Checker {
 	public DiagnosticModel check(ModelingUnit mu, CheckerScope scope,
 			String optionalContent, MessagingSystem logger) {
 			
-		logger.error("Checking modeling unit for scope " + scope.toString(), "checkermessagegroup", new Throwable());
+		logger.info("Checking modeling unit for scope " + scope.toString(), "checkermessagegroup", new Throwable());
 		
 		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory.createChecker();
 				
