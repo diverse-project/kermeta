@@ -86,7 +86,6 @@ public class KPBuilder {
 	synchronized public void compile(){
 		try {		
 			// for reflexivity set the bundle context
-			Activator.getDefault().getMessaggingSystem().error("ASK for compiling", "CEDRIC", new Throwable());
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, new ArrayList<String>(),true);
 			if (result != null) {
 				kp_last_modelingunit = result;
