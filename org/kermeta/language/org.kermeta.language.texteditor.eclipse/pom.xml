@@ -151,6 +151,9 @@
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 						<Bundle-Activator>org.kermeta.language.texteditor.eclipse.internal.Activator</Bundle-Activator>						
 						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Export-Package>
+							org.kermeta.language.texteditor.eclipse
+						</Export-Package>
 						<Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.core.resources,
