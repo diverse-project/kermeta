@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <requires>
-      <import plugin="org.eclipse.ui.workbench.texteditor" version="3.5.1"/>
-      <import plugin="org.eclipse.ui.editors" version="3.5.0"/>
-      <import plugin="org.eclipse.ui" version="3.5.2"/>
-      <import plugin="org.eclipse.core.runtime" version="3.5.0"/>
-   </requires>
-
 	<extension point="org.eclipse.ui.editors">
 		<editor
         class="org.kermeta.language.texteditor.eclipse.internal.KermetaEditor"
@@ -18,6 +11,29 @@
         id="org.kermeta.language.texteditor.eclipse.internal.KermetaEditor"
         name="Kermeta Editor">
 		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+	     <objectContribution
+            adaptable="true"
+            id="org.kermeta.language.texteditor.eclipse.internal.BuildKP"
+            nameFilter="*.kp"
+            objectClass="org.eclipse.core.resources.IFile">
+	        <menu
+	              icon="icons/kermeta.gif"
+	              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	              label="Kermeta"
+	              path="additions">
+	           <separator name="kermetagroup2"/>
+	        </menu>
+	       <action
+	             class="org.kermeta.language.texteditor.eclipse.internal.BuildKP"
+	             icon="icons/kermeta.gif"
+	             id="org.kermeta.language.texteditor.eclipse.internal.BuildKP"
+	             label="Build Kermeta Project"
+	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	       </action>
+	     </objectContribution> 
 	</extension>
 
 </plugin>
