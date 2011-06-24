@@ -1,148 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kermeta.language</groupId>
-    <artifactId>language.km2bytecode</artifactId>
-    <name>org.kermeta.language.km2bytecode</name>
-    <version>2.0.1-SNAPSHOT</version>
-    <description>K2 Compiler</description>
-    <packaging>jar</packaging>
-    
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>language.root</artifactId>
         <groupId>org.kermeta.language</groupId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.km2bytecode</artifactId>
+    <packaging>jar</packaging>
+    <name>language.km2bytecode :: compilo v2</name>
     
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <scala.version>2.8.1</scala.version>
-    </properties>
-
-    <build>
-        <plugins>
-                        <!-- Scala plugin : allow to compile Scala file -->
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
-                                           <launchers>
-                        <launcher>
-                            <id>runner</id>
-                            <mainClass>org.kermeta.compilo.scala.Main</mainClass>
-
-                            <jvmArgs>
-                                <jvmArg>-Xmx1024m</jvmArg>
-                            </jvmArgs>
-                        </launcher>
-                    </launchers>
-
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>remove-a-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>remove</goal>
-                        </goals>
-                        <configuration>
-                            <fileset>
-                                <directory>target/${project.artifactId}-${project.version}.jar/META-INF
-                                </directory>
-                                <includes>
-                                    <include>**/*.RSA</include>
-                                    <include>**/*.SF</include>
-                                </includes>
-                            </fileset>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-
-
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <version>2.0.1</version>
-                <configuration>
-                    <instructions>
-                        <Private-Package>*    [0]  'dependencies.dependency.version' is missing for org.kermeta.language:language.library.core:jar
-</Private-Package>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                    </instructions>
-                </configuration>
-            </plugin>
-           
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>remove-a-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>remove</goal>
-                        </goals>
-                        <configuration>
-                            <fileset>
-                                <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
-                                <includes>
-                                    <include>**/*.RSA</include>
-                                    <include>**/*.SF</include>
-                                </includes>
-                            </fileset>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-      <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration><outputDirectory>${project.build.directory}/K2dependencies</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-
-        </plugins>
-
-    </build>
     <dependencies>
         <dependency>
             <groupId>org.kermeta.language</groupId>
@@ -152,7 +19,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.9.RC1</version>
+            <version>${slf4j.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -162,7 +29,6 @@
             <version>1.2.15</version>
             <type>jar</type>
             <scope>compile</scope>
-
             <exclusions>
                 <exclusion>
                     <groupId>javax.mail</groupId>
@@ -181,14 +47,6 @@
                     <artifactId>jmxri</artifactId>
                 </exclusion>
             </exclusions>
-
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.5.9.RC1</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -198,9 +56,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
+            <version>RELEASE691</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -210,27 +68,66 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.library.core</artifactId>
-	    <version>${kermeta.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
-            <version>RELEASE691</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>truezip-maven-plugin</artifactId>
-            <version>1.0-beta-5</version>
+	    	<version>${kermeta.version}</version>
         </dependency>
     </dependencies>
-
     
-
-    <repositories>
-        <repository>
-            <id>nb-maven2</id>
-            <url>http://bits.netbeans.org/maven2/</url>
-        </repository>
-    </repositories>
+    <build>
+    	<plugins>
+    		<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>		        
+          		
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Export-Package>
+			org.kermeta.compilo.scala,
+			org.kermeta.language.km2bytecode.embedded,
+			org.kermeta.language.km2bytecode.embedded.scala
+                        </Export-Package>
+                        <Require-Bundle>
+            org.kermeta.language.model            
+                        </Require-Bundle>
+                        <Import-Package>
+            org.kermeta.language,
+			org.kermeta.language.structure,
+			org.kermeta.language.behavior,
+			scala,
+			scala.actors,
+			scala.collection,
+			scala.collection.immutable,
+			scala.collection.mutable,
+			scala.reflect,
+			scala.runtime,
+			scala.util.matching,
+			scala.util,
+			k2.io,
+			k2.standard,
+			k2.persistence,
+			k2.exceptions,
+			k2.utils,
+			org.eclipse.emf.common.notify,
+			org.eclipse.emf.common.util,
+			org.eclipse.emf.ecore,
+			org.eclipse.emf.ecore.impl,
+			org.eclipse.emf.ecore.resource,
+			org.eclipse.emf.ecore.util,
+			org.eclipse.emf.ecore.xmi,
+			org.eclipse.emf.ecore.xmi.impl,
+			org.slf4j,
+			org.k2.compilo.scala.loader,
+			org.antlr.stringtemplate
+                        </Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+        </plugins>
+	</build>    
 </project>
-
