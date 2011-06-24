@@ -14,7 +14,7 @@
 
     <build>
         <plugins>
-        	<!-- Kermeta Compiler plugin -->
+           <!-- Kermeta Compiler plugin -->
             <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
@@ -36,7 +36,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
             <!-- package into a jar for OSGI -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -45,7 +44,15 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>k2.io,k2.standard,k2.persistence,k2.exceptions,k2.utils</Export-Package>
+                        <Export-Package>
+                        k2.io,
+                        k2.standard,
+                        k2.persistence,
+                        k2.exceptions,
+                        k2.utils,
+                        org.k2.compilo.scala.loader,
+                        org.k2.console
+                        </Export-Package>
                         <Bundle-SymbolicName>org.k2.language.library.core</Bundle-SymbolicName>
                         <Import-Package>!k2.io,*</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
