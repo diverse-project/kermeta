@@ -70,9 +70,13 @@ class FullStaticResolver
 		//Display all messages from Resolver
 		ctxt.verbose := 5
 		//Do not raise exceptions for these messages
-		ctxt.exceptions := false
+		ctxt.exceptions := true
 	
-       	unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	do
+       		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+       	rescue (resolverException : ResolverException)
+		    errors.add(resolverException)
+		end
        	       	
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
@@ -86,7 +90,11 @@ class FullStaticResolver
 		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
 		
-		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
+		do
+			unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
+		rescue (resolverException : ResolverException)
+		    errors.add(resolverException)
+		end
 		
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
        	result := unresolvedModelingUnit

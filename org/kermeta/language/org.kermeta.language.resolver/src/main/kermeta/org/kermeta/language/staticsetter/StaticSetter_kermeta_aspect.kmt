@@ -94,7 +94,7 @@ package behavior {
 		 */
 		operation setInferedStaticType(type : Type) : Type is do
 			if type.isVoid then
-				raise org::kermeta::language::resolver::ResolverException.new
+				raise org::kermeta::language::resolver::ResolverException.new.initialize("Unable to static set this element",  self)
 			end
 			self.staticType := type
 			if(type.container.isVoid) then
@@ -194,7 +194,7 @@ package behavior {
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if (op.isVoid) then
-					stdio.writeln("Implicit inheritance to Object to find operation : "+self.name)
+					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
 					var objectAny : ClassDefinition
 					objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 					op := objectAny.getCallableOperationByName(self.name)
@@ -235,7 +235,7 @@ package behavior {
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if (prop.isVoid) then
-					stdio.writeln("Implicit inheritance to Object to find property : "+self.name)
+					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find property : "+self.name)  end
 					var objectAny : ClassDefinition
 					objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 					prop := objectAny.getCallablePropertyByName(self.name)
@@ -507,7 +507,7 @@ package behavior {
 			var operationContainer : Operation init findOperation(self.container().asType(KermetaModelElement))
 			
 			if (operationContainer.isVoid) then
-				raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid CallResult : no operation container", void)
+				raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid CallResult : no operation container", self)
 			else
 				self.setInferedStaticType(operationContainer.type)
 			end

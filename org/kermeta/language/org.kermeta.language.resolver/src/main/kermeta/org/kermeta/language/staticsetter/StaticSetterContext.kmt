@@ -79,7 +79,7 @@ class StaticSetterContext
 		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
 		if result.isVoid then
-			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create type for "+ classDefinitionQualifiedName, void)
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create type for "+ classDefinitionQualifiedName, self)
 		end
 	end
 	
@@ -88,7 +88,7 @@ class StaticSetterContext
 		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
 		result := cd
 		if result.isVoid then
-			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create ClassDefinition for "+ classDefinitionQualifiedName, void)
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create ClassDefinition for "+ classDefinitionQualifiedName, self)
 		end
 	end
 	
@@ -100,14 +100,14 @@ class StaticSetterContext
 		var selfType : org::kermeta::language::structure::Class  init org::kermeta::language::structure::Class.new
 		selfType.typeDefinition := currentClassDefinition
 		if selfType.typeDefinition.isVoid then
-			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create SelfType ", void)
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to create SelfType ", self)
 		end		
 		result := selfType
 	end
 	
 	operation createTypeFromMultiplicityElement(element : org::kermeta::language::structure::MultiplicityElement ) : org::kermeta::language::structure::Type is do
 		if (element.upper.isVoid) then
-			raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid upperbound void", void)
+			raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid upperbound void", self)
 		end 
 		
 		
@@ -138,28 +138,28 @@ class StaticSetterContext
 			if (element.isUnique() and element.isOrdered()) then 
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
 				if cd.isVoid then 
-					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::OrderedSet", void)
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::OrderedSet", self)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 			else if (element.isUnique() and not element.isOrdered()) then
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
 				if cd.isVoid then 
-					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Set", void)
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Set", self)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 			else if ( not element.isUnique() and element.isOrdered()) then
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
 				if cd.isVoid then 
-					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Sequence", void)
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Sequence", self)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 			else
 				cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
 				if cd.isVoid then 
-					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Bag", void)
+					raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to find  kermeta::standard::Bag", self)
 				end
 				result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Bag<"+result.toString+">")

@@ -11,6 +11,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor_Aspect_Accept.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverContext_Aspect.kmt"
+require "ResolverException.kmt"
 
 using org::kermeta::language::structure
 using kermeta::exceptions
@@ -23,7 +24,7 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		newClass.typeDefinition := c
 		
 		if (ctxt.unresolved.asType(UnresolvedType).generics.size() != c.typeParameter.size()) then
-			var except : Exception init Exception.new
+			var except : ResolverException init ResolverException.new
 			except.message := "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.unresolved.asType(UnresolvedType).typeIdentifier + "<"
 			ctxt.unresolved.asType(UnresolvedType).generics.each{ g |
 				except.message := except.message + g.toString + " "

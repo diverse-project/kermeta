@@ -32,6 +32,8 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedPropertyFinder.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
 
+require "ResolverException.kmt"
+
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using language::helpers
@@ -228,7 +230,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		error := error + ")"
 											
 		if (ctxt.exceptions) then				
-			var except : Exception init Exception.new
+			var except : ResolverException init ResolverException.new
 			except.message := error
 			raise except
 		else
@@ -283,7 +285,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				error := error + " in " + ctxt.unresolved.container.toString()
 				
 				if (ctxt.exceptions) then
-					var except : Exception init Exception.new
+					var except : ResolverException init ResolverException.new
 					except.message := error
 					raise except
 				else
@@ -325,7 +327,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
 						
 						if (ctxt.exceptions) then
-							var except : Exception init Exception.new
+							var except : ResolverException init ResolverException.new
 							except.message := error
 							raise except
 						else
@@ -363,7 +365,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					end
 					
 					if (ctxt.exceptions) then
-						var except : Exception init Exception.new
+						var except : ResolverException init ResolverException.new
 						except.message := error
 						raise except
 					else

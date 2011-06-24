@@ -17,14 +17,18 @@ using kermeta::standard
 class ResolverException inherits kermeta::exceptions::Exception
 {	
 	/** optional, pointer to the element that caused the issue  */
-	reference cause : Object
+	reference objectCause : Object
 	
 	/**
 	 * build helper
 	 */
 	operation initialize(msg : kermeta::standard::String, causeElem : Object) : ResolverException is do
 	    message := msg
-	    cause := causeElem
+	    objectCause := causeElem
 		result := self
+	end
+	
+	operation getObjectCause() : Object is do
+		result := objectCause
 	end
 }

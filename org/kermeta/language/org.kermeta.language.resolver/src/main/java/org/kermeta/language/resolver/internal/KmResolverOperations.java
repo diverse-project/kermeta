@@ -19,9 +19,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
-import org.kermeta.language.resolver.api.KmResolver;
+import org.kermeta.language.resolver.ResolverException;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
+import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
+import org.kermeta.utils.systemservices.api.result.ResultProblemMessage.Severity;
 
 public class KmResolverOperations {
 
@@ -66,42 +68,66 @@ public class KmResolverOperations {
 
 	public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu) {	
 		ModelingUnit muResolved = null;
+		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = (ModelingUnit) resolver.doResolving(enforceAspect(mu));
-		} catch (IOException e) {
-			return null;
+    		muResolved = resolver.doResolving(enforceAspect(mu));
+		} catch (Exception e) {
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+    		result.getProblems().add(pm);
 		}
 
-		ErrorProneResult<ModelingUnit> result;
-    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	result.setResult(muResolved);
+    	for (Object o : resolver.getErrors()) {
+    		if (o instanceof ResolverException) {
+    			ResolverException theError = (ResolverException) o;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			result.getProblems().add(pm);
+    		}
+    	}
     	
     	return result;
 	}
 
 	public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu) {		
 		ModelingUnit muResolved = null;
+		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = (ModelingUnit) resolver.doStaticSetting(enforceAspect(mu));
-		} catch (IOException e) {
-			return null;
+    		muResolved = resolver.doStaticSetting(enforceAspect(mu));
+		} catch (Exception e) {
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+    		result.getProblems().add(pm);
 		}
 
-		ErrorProneResult<ModelingUnit> result;
-    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	result.setResult(muResolved);
+    	for (Object o : resolver.getErrors()) {
+    		if (o instanceof ResolverException) {
+    			ResolverException theError = (ResolverException) o;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			result.getProblems().add(pm);
+    		}
+    	}
     	
     	return result;
 	}
 
 	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu) {
 		ModelingUnit muResolved = null;
+		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = (ModelingUnit) resolver.resolve(enforceAspect(mu));
-		} catch (IOException e) {
-			return null;
+    		muResolved = resolver.resolve(enforceAspect(mu));
+		} catch (Exception e) {
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+    		result.getProblems().add(pm);
 		}
 
-		ErrorProneResult<ModelingUnit> result;
-    	result = new ErrorProneResult<ModelingUnit>(muResolved);
+    	result.setResult(muResolved);
+    	for (Object o : resolver.getErrors()) {
+    		if (o instanceof ResolverException) {
+    			ResolverException theError = (ResolverException) o;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			result.getProblems().add(pm);
+    		}
+    	}
     	
     	return result;
 	}
