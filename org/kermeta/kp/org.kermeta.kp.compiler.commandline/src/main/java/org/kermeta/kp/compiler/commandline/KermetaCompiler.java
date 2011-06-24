@@ -383,6 +383,7 @@ public class KermetaCompiler {
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
+		ModelingUnitConverter muc = new ModelingUnitConverter();
 		
 		if (runInEclipse) {
 			theMerger = new KmBinaryMergerImpl4Eclipse();
@@ -391,7 +392,7 @@ public class KermetaCompiler {
 		}
 		
 		for (ModelingUnit mu : modelingUnits){			
-			convertedModellingUnits.add( new ModelingUnitConverter().convert(mu));
+			convertedModellingUnits.add(muc.convert(mu));
 		}
 		// merge
 		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(convertedModellingUnits.get(0));
