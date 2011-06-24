@@ -35,6 +35,7 @@ import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandler
 import org.kermeta.kp.editor.util.KpMinimalModelHelper;
 import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
 import org.kermeta.language.checker.CheckerImpl;
+import org.kermeta.language.checker.CheckerImpl4Eclipse;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
@@ -212,7 +213,6 @@ public class KermetaCompiler {
 		
 		// Check resolvedUnit for scope RESOLVED
 		if (checkingEnabled) {
-			logger.log(MessagingSystem.Kind.UserINFO,"Checking modeling unit for scope RESOLVED", this.getClass().getName());
 
 			DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 			processCheckingDiagnostics(results);
@@ -434,14 +434,37 @@ public class KermetaCompiler {
 		
 		//Resolving
 		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
+		
+		// Did errors occur during the resolving ?
+		if (resolvedMU.getProblems().size() > 0 ) {
+			processErrors(resolvedMU);
+			if (stopOnError) {
+				logger.error("Errors have occured during resolving, stop compilation process", this.getClass().getName(), new Throwable());
+				return null;
+			}
+		}
 				
-		convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeSetting.km").convert(resolvedMU.getResult()); 
+		if (resolvedMU.getResult() != null) {
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles,targetIntermediateFolder+"/beforeSetting.km").convert(resolvedMU.getResult()); 
 		
-		//StaticSetting
-		ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
+			//StaticSetting
+			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
 		
-		//End of Resolving
-		return staticsettedMU.getResult();
+			// Did errors occur during the resolving ?
+			if (staticsettedMU.getProblems().size() > 0 ) {
+				processErrors(staticsettedMU);
+				if (stopOnError) {
+					logger.error("Errors have occured during static setting, stop compilation process", this.getClass().getName(), new Throwable());
+					return null;
+				}
+			}
+			
+			//End of Resolving
+			return staticsettedMU.getResult();
+		} else {
+			logger.error("Errors have occured during resolve. StaticSetting not executable", this.getClass().getName(), new Throwable());
+			return convertedModelingUnit;
+		}
 	}
 	
 	
@@ -483,7 +506,13 @@ public class KermetaCompiler {
 	
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 		
-		Checker theChecker = new CheckerImpl();
+		Checker theChecker;
+		
+		if (runInEclipse) {
+			theChecker = new CheckerImpl4Eclipse();
+		} else {
+			theChecker = new CheckerImpl();
+		}
 		
 		//Checking
 		DiagnosticModel diags = theChecker.check(mu, scope, "", logger);
@@ -538,41 +567,43 @@ public class KermetaCompiler {
 			
 			// retrieve faulty object
 			//KermetaModelElement kme = (Kermeprob.getCauseObject();
-			System.err.println("faultyObject is : " + prob.getCauseObject().toString());
+			if (prob.getCauseObject() != null) {
+				System.err.println("faultyObject is : " + prob.getCauseObject().toString());
 			
-			org.kermeta.utils.systemservices.api.reference.ModelReference mref = 
-					(org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
-			
-			System.err.println(mref.getModelRef().toString());
-			
-			// The object is a KermetaModelElement
-			KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
-
-			System.err.println("The error involves " + kme.toString());
-
-			// Check if there is a sourceLocation tag
-			Boolean tagFound = false;
-			
-			for (Tag t : kme.getKOwnedTags() ) {
+				org.kermeta.utils.systemservices.api.reference.ModelReference mref = 
+						(org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
 				
-				System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
+				if (mref.getModelRef() != null) {
+					System.err.println(mref.getModelRef().toString());
 				
-				//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
-				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-					tagFound = true;
-					//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
-					TextReference ref = createTextReference(t);
+					//The object is a KermetaModelElement
+					KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
 
+					System.err.println("The error involves " + kme.toString());
+
+					// Check if there is a sourceLocation tag
+					Boolean tagFound = false;
+				
+					for (Tag t : kme.getKOwnedTags() ) {
 					
-					if (ref != null) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR,
-								prob.getMessage(), 
-								this.getClass().getName(), ref);
+						System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
+					
+						//logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+						if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
+							tagFound = true;
+							//logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() +")   ", "");
+							TextReference ref = createTextReference(t);
+
+						
+							if (ref != null) {
+								logger.logProblem(MessagingSystem.Kind.UserERROR,
+										prob.getMessage(), 
+										this.getClass().getName(), ref);
+							}
+						}
 					}
-					
 				}
 			}
-			
 		}
 	}
 	
@@ -582,7 +613,9 @@ public class KermetaCompiler {
 		
 		
 		//Display check results
-		logger.log(MessagingSystem.Kind.UserINFO,"There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
+		if (diags.getDiagnostics().size() > 0) {
+			logger.log(MessagingSystem.Kind.UserINFO,"There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
+		}
 
 		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
 			
