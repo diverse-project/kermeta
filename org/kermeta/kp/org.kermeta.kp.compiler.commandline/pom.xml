@@ -41,6 +41,9 @@
 								org.kermeta.kp.compiler.commandline
                         </Export-Package>
 						<Require-Bundle>
+							org.kermeta.language.km2bytecode,
+							org.kermeta.language.km2bytecode.embedded,
+							org.kermeta.language.km2bytecode.embedded.scala,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.helpers,
             				fr.irisa.triskell.kermeta.model,
@@ -62,7 +65,7 @@
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.xmi,
 							org.scala-ide.scala.library,
-							org.ops4j.pax.url.mvn						
+							org.ops4j.pax.url.mvn
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
