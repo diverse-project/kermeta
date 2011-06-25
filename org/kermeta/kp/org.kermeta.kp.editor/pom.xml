@@ -12,12 +12,10 @@
 	<version>2.0.1-SNAPSHOT</version>
 	<name>kp.editor.multimodule :: KP Editor and parser for kermeta 2</name>
 	<packaging>pom</packaging>
-
 	<modules>
 		<module>version_parser.standalone</module>
 		<module>version_editor</module>
 	</modules>
-
 	<distributionManagement>
         <repository>
             <id>tipimouss-local-maven-repository</id>
