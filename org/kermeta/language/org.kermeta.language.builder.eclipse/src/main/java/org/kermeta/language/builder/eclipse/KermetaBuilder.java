@@ -9,16 +9,17 @@
 
 package org.kermeta.language.builder.eclipse;
 
-import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
-import org.kermeta.language.builder.eclipse.internal.BuilderFromKP;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.language.builder.eclipse.internal.CompilerFromKP;
 import org.kermeta.language.builder.eclipse.internal.KPBuilder;
-import org.kermeta.language.builder.eclipse.internal.KPFilesContainer;
 import org.kermeta.language.builder.eclipse.internal.KermetaParser;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaRunner;
 
@@ -35,10 +36,6 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	private static Map<HashMap<String,KPBuilder>,String> _compilingInPending = new HashMap<HashMap<String,KPBuilder>,String>();
 	private static Map<HashMap<String,KPBuilder>,String> compilingInProgress = Collections.synchronizedMap(_compilingInProgress);
 	private static Map<HashMap<String,KPBuilder>,String> compilingInPending = Collections.synchronizedMap(_compilingInPending);
-	private static Map<HashMap<String,KPBuilder>,String> _buildingInProgress = new HashMap<HashMap<String,KPBuilder>,String>();
-	private static Map<HashMap<String,KPBuilder>,String> _buildingInPending = new HashMap<HashMap<String,KPBuilder>,String>();
-	private static Map<HashMap<String,KPBuilder>,String> buildingInProgress = Collections.synchronizedMap(_buildingInProgress);
-	private static Map<HashMap<String,KPBuilder>,String> buildingInPending = Collections.synchronizedMap(_buildingInPending);
 	
 
 	private KermetaBuilder(){	
@@ -58,9 +55,17 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	}
 
 	@Override
-	public void buildFromKP(String kpIdentifier) {
-		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>(buildingInPending, buildingInProgress, kpBuilders, kpIdentifier, new BuilderFromKP());
-		theRunner.start();
+	public synchronized void buildFromKP(final String kpIdentifier) {
+		
+		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+			protected IStatus run(IProgressMonitor monitor) {
+				kpBuilders.get(kpIdentifier).build();
+				return Status.OK_STATUS;
+	        }
+	    };
+	    job.setPriority(Job.LONG);
+	    job.schedule();	
+
 	}
 	
 	@Override

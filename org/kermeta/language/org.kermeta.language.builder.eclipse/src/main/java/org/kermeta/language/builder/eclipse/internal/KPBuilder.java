@@ -31,6 +31,7 @@ public class KPBuilder {
 	
 	protected KermetaCompiler compiler = null;
 	protected IFile kpProjectFile;
+	
 	protected KPNeedBuildDeltaVisitor needBuildVisitor;
 	
 	public ModelingUnit kp_last_modelingunit = null;
@@ -138,5 +139,9 @@ public class KPBuilder {
 				}
 			}
 		}
+	}
+	
+	public IFile getKpProjectFile() {
+		return kpProjectFile;
 	}
 }
