@@ -9,27 +9,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
 	<artifactId>kp.editor.multimodule</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
 	<name>kp.editor.multimodule :: KP Editor and parser for kermeta 2</name>
 	<packaging>pom</packaging>
+	
+  <parent>
+    <groupId>org.kermeta.language</groupId>
+    <artifactId>language.root</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+  </parent>
 
 	<modules>
 		<module>version_parser.standalone</module>
 		<module>version_editor</module>
 	</modules>
-
-	<distributionManagement>
-        <repository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local release repository</name>
-            <url>file:/var/www/html/maven2</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>tipimouss-local-maven-repository</id>
-            <name>Tipimouss Local  snapshot repository</name>
-            <url>file:/var/www/html/maven2-snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
