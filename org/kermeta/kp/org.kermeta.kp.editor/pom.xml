@@ -8,14 +8,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
-	<artifactId>kp.editor</artifactId>
+	<artifactId>kp.editor.multimodule</artifactId>
 	<version>2.0.1-SNAPSHOT</version>
-	<name>kp.editor :: KP Editor and parser for kermeta 2</name>
+	<name>kp.editor.multimodule :: KP Editor and parser for kermeta 2</name>
 	<packaging>pom</packaging>
+
 	<modules>
 		<module>version_parser.standalone</module>
 		<module>version_editor</module>
 	</modules>
+
 	<distributionManagement>
         <repository>
             <id>tipimouss-local-maven-repository</id>
