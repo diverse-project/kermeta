@@ -4,7 +4,7 @@
 	<groupId>org.kermeta.kp</groupId>
 	<artifactId>kp.loader.kp</artifactId>
 	<name>kp.loader.kp :: Kp loader for Kermeta 2</name>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.kermeta.language</groupId>
@@ -15,46 +15,40 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.1.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-ClassPath>.</Bundle-ClassPath>
-					<!-- 	<Require-Bundle>
-							org.eclipse.core.resources,
-							org.eclipse.core.runtime
-						</Require-Bundle> -->
-						<Export-Package>
-							org.kermeta.kp.loader.*
-	          </Export-Package>
-						<Private-Package>
-							org.kermeta.kp.editor.*
-						</Private-Package>
-						<!--
-							use the ! for avoiding to import some packages that are already
-							there with the Require-Bundle
-						-->
-						<Import-Package>
-							org.eclipse.emf.ecore.*,
-							org.eclipse.emf.common.*,
-							org.kermeta.kp.*,
-							org.antlr.*,
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Export-Package>
+                        	org.kermeta.kp.loader.kp.api,
+                        	org.kermeta.kp.loader.kp
+                        </Export-Package>
+                        <Import-Package>
+							org.antlr.runtime3_2_0,
+							org.eclipse.emf.common.notify,
+							org.eclipse.emf.common.util,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.impl,
+							org.eclipse.emf.ecore.resource,
+							org.eclipse.emf.ecore.resource.impl,
+							org.eclipse.emf.ecore.util,
+							org.kermeta.kp,
+							org.kermeta.kp.loader.kp,
+							org.kermeta.kp.loader.kp.api,
 							org.osgi.framework;version="[1.5,2)"
-				    </Import-Package>
-						<!--
-							add extra element in the manifest, copy them from this file ex:
-							Bundle-ActivationPolicy: lazy
-						-->
-						<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
-					</instructions>
-				</configuration>
-			</plugin>
+						</Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
 		</plugins>
 	</build>
 
