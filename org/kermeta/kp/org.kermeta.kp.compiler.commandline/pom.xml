@@ -42,8 +42,6 @@
                         </Export-Package>
 						<Require-Bundle>
 							org.kermeta.language.km2bytecode,
-							org.kermeta.language.km2bytecode.embedded,
-							org.kermeta.language.km2bytecode.embedded.scala,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.helpers,
             				fr.irisa.triskell.kermeta.model,
