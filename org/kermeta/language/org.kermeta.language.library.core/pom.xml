@@ -38,27 +38,54 @@
             </plugin>
             <!-- package into a jar for OSGI -->
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.1.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Export-Package>
-                        k2.io,
-                        k2.standard,
-                        k2.persistence,
-                        k2.exceptions,
-                        k2.utils,
-                        org.k2.compilo.scala.loader,
-                        org.k2.console
-                        </Export-Package>
-                        <Bundle-SymbolicName>org.k2.language.library.core</Bundle-SymbolicName>
-                        <Import-Package>!k2.io,*</Import-Package>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                    </instructions>
-                </configuration>
-            </plugin>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Export-Package>
+                        	k2.io,
+                        	k2.standard,
+                        	k2.persistence,
+                        	k2.exceptions,
+                        	k2.utils,
+                        	org.k2.compilo.scala.loader,
+                        	org.k2.console
+                        </Export-Package>
+                        <Import-Package>
+							k2.exceptions,
+							k2.persistence,
+							k2.standard,
+							k2.utils,org.eclipse.emf.common.notify,
+							org.eclipse.emf.common.util,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.impl,
+							org.eclipse.emf.ecore.resource,
+							org.eclipse.emf.ecore.resource.impl,
+							org.eclipse.emf.ecore.xmi,
+							org.eclipse.emf.ecore.xmi.impl,
+							org.k2.compilo.scala.loader,
+							org.k2.console,
+							org.kermeta,
+							org.kermeta.language.behavior,
+							org.kermeta.language.structure,
+							scala,
+							scala.collection,
+							scala.collection.immutable,
+							scala.collection.mutable,
+							scala.reflect,
+							scala.runtime
+						</Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
         </plugins>
     </build>
 
