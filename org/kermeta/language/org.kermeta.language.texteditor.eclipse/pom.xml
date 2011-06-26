@@ -128,6 +128,16 @@
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.autocompletion.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.autocompletion</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>4.2.0</version>
@@ -136,6 +146,8 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
+		
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-jar-plugin</artifactId>
@@ -173,8 +185,14 @@
 							fr.irisa.triskell.cache.utilities,
 							org.kermeta.language.builder.api,
 							org.kermeta.language.builder.eclipse,
-							org.kermeta.language.model
+							org.kermeta.language.model,
+							org.kermeta.language.autocompletion.api,
+							org.kermeta.language.autocompletion
                         </Require-Bundle>
+                        <Import-Packages>
+                        	org.kermeta.language.structure,
+							org.kermeta.language.behavior
+                        </Import-Packages>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>

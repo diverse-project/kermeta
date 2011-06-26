@@ -16,6 +16,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.kermeta.language.texteditor.eclipse.internal.autocompletion.KermetaContentAssistProcessor;
 
 public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 
@@ -39,10 +40,10 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 	   ContentAssistant assistant = new ContentAssistant();
 	   
 	   // Create content assistant processor
-	   //IContentAssistProcessor processor = new KermetaContentAssistProcessor();
+	   IContentAssistProcessor processor = new KermetaContentAssistProcessor(theEditor);
 	   
 	   // Set this processor for each supported content type
-	   //assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+	   assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 	         
 	   // Return the content assistant   
 	   return assistant;
