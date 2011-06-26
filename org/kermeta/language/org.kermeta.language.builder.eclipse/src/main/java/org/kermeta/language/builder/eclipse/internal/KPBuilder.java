@@ -127,7 +127,7 @@ public class KPBuilder {
 		//This list allow to preserve old files ever parsed
 		HashMap<String,KPFilesContainer> oldKpFiles = kpFiles;
 		kpFiles = new HashMap<String, KPFilesContainer>();
-		for (URL uneSource : kpSources) {	
+		for (URL uneSource : kpSources) {
 			KPFilesContainer container = new KPFilesContainer(uneSource, false, null);
 			IFile resource = ResourceHelpers.getIFile(uneSource.toString());
 			if (resource != null) {
