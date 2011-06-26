@@ -1,0 +1,61 @@
+/* $Id:$ 
+ * Creation : June 25, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cbouhour
+ */
+@mainClass "org::kermeta::language::autocompletion::metamodelaccessor::MetaModelAccessor"
+@mainOperation "testMain"
+
+
+package org::kermeta::language::autocompletion::metamodelaccessor;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+class MetaModelAccessor
+{
+	operation testMain() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		var folder : String init "platform:/resource/org.kermeta.language.autocompletion/src/tests/"
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var aModelResource : Resource init repository.getResource(folder+"tentative.km")
+       	stdio.writeln("	********************* " + folder+"tentative.km" + " loaded ************************")
+		       	
+       	var aModelingUnit : org::kermeta::language::structure::ModelingUnit
+        aModelingUnit ?= aModelResource.one
+        var theResult : OrderedSet<String> init getAllVariableDecl(aModelingUnit)
+        
+        theResult.each{e |
+        	stdio.writeln(e.toString)
+        }
+	end
+	
+	operation getAllVariableDecl(aModelingUnit : org::kermeta::language::structure::ModelingUnit) : OrderedSet<String> is do
+	
+		var theResult : OrderedSet<String> init OrderedSet<String>.new	
+	
+		aModelingUnit.eachOwnedElement{m|
+			findAllVariableDecl(m.asType(org::kermeta::language::structure::KermetaModelElement),theResult)
+			m
+		}
+	
+		result := theResult
+	end
+	
+	operation findAllVariableDecl(currentElement : org::kermeta::language::structure::KermetaModelElement, currentList : OrderedSet<String>) : Void is do
+		currentElement.eachOwnedElement{current | 
+			if (current.isInstanceOf(org::kermeta::language::behavior::VariableDecl)) then
+				currentList.add(current.asType(org::kermeta::language::behavior::VariableDecl).identifier)
+			end
+			findAllVariableDecl(current.asType(org::kermeta::language::structure::KermetaModelElement),currentList)
+			current
+		}
+	end
+}
