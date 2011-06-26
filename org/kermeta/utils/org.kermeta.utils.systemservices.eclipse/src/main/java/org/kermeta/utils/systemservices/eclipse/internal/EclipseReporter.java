@@ -121,6 +121,6 @@ public class EclipseReporter {
 			ms.log(Kind.DevERROR, "Failed to flush all markers", Activator.PLUGIN_ID, e);
 		} catch (URISyntaxException e) {
 			ms.log(Kind.DevERROR, "URI exceptions during flushing all markers", Activator.PLUGIN_ID, e);
-		}
+		} catch (NullPointerException e) {}
 	}
 }
