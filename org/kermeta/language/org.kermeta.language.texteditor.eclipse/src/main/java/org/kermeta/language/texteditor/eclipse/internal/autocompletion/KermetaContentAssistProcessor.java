@@ -98,6 +98,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		   List<String> reserved = theLexer.getReservedWords();
 		   List<String> delimiters = theLexer.getDelimiters();
 		   List<String> theVariables = null;
+		   List<String> theOperations = null;
 
 		   if (editor.getFile() != null) {	   
 			   String kpIdentifier = KermetaBuilder.getDefault().findKPidentifierFromKMT(editor.getFile());
@@ -105,6 +106,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			   if (KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier) != null) {
 				   Autocompletion myAutocompletion = new AutocompletionImpl(Activator.getDefault().getMessaggingSystem(),KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier));		   
 				   theVariables = myAutocompletion.getAllVariableDecl();
+				   theOperations = myAutocompletion.getAllOperations();
 			   }
 		   }
 		   
@@ -136,11 +138,20 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		   if (theVariables != null) {
 			   for (String aVariable : theVariables) {
 				   int cursor = aVariable.length();
-				   KermetaCompletionProposal proposal = new KermetaCompletionProposal(aVariable, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/green/property.png"));
+				   KermetaCompletionProposal proposal = new KermetaCompletionProposal(aVariable, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/specific/VariableDecl.gif"));
 
 				   propList.add(proposal);
 			   }
 		   }
+		   
+		   /*if (theOperations != null) {
+			   for (String anOperation : theOperations) {
+				   int cursor = anOperation.length();
+				   KermetaCompletionProposal proposal = new KermetaCompletionProposal(anOperation, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/green/operation.png"));
+
+				   propList.add(proposal);
+			   }
+		   }*/
 		}
 	
 	@Override
