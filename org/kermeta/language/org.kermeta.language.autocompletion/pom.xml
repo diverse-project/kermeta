@@ -34,11 +34,6 @@
 			<artifactId>utils.systemservices.eclipse</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>4.2.0</version>
-		</dependency>
     </dependencies>
     
     <build>
@@ -54,7 +49,6 @@
 			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-						<Bundle-Activator>org.kermeta.language.autocompletion.internal.Activator</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
