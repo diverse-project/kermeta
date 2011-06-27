@@ -10,6 +10,7 @@ import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.Package;
 
 
 public class MetaModelAccessor {
@@ -64,6 +65,18 @@ public class MetaModelAccessor {
 		try {
 			for (EObject oneClassDef : metamodelObjects.get("ClassDefinition")) {
 				result.add(((ClassDefinition)oneClassDef).getName());
+			}
+			return result;
+		} catch (NullPointerException e) {
+			return result;
+		}
+	}
+	
+	public List<String> getAllPackages() {
+		List<String> result = new ArrayList<String>();
+		try {
+			for (EObject onePackage : metamodelObjects.get("Package")) {
+				result.add(((Package)onePackage).getName());
 			}
 			return result;
 		} catch (NullPointerException e) {
