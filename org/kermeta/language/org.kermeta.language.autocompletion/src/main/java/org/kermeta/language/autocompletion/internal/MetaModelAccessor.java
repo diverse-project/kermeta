@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Operation;
 
 
 public class MetaModelAccessor {
@@ -43,7 +44,20 @@ public class MetaModelAccessor {
 		} catch (NullPointerException e) {
 			return result;
 		}
-		
 	}
+	
+	public List<String> getAllOperations() {
+		List<String> result = new ArrayList<String>();
+		try {
+			for (EObject oneOperation : metamodelObjects.get("Operation")) {
+				result.add(((Operation)oneOperation).getName());
+			}
+			return result;
+		} catch (NullPointerException e) {
+			return result;
+		}
+	}
+	
+	
 
 }

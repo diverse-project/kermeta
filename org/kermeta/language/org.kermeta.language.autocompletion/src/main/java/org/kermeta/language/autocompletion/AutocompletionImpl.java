@@ -22,4 +22,9 @@ public class AutocompletionImpl implements Autocompletion {
 		return accessor.getAllVariableDecl();
 	}
 
+	@Override
+	public List<String> getAllOperations() {
+		return accessor.getAllOperations();
+	}
+
 }
