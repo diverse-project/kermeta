@@ -28,13 +28,18 @@ public class AutocompletionImpl implements Autocompletion {
 	}
 
 	@Override
-	public List<String> getAllClassDefinition() {
-		return accessor.getAllClassDefinition();
+	public List<String> getAllClassDefinition(String thePackages) {
+		return accessor.getAllClassDefinition(thePackages);
 	}
 	
 	@Override
 	public List<String> getAllPackages() {
 		return accessor.getAllPackages();
+	}
+	
+	@Override
+	public List<String> getSubPackages(String thePackages) {
+		return accessor.getSubPackages(thePackages);
 	}
 
 }

@@ -11,6 +11,7 @@ import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Package;
+import org.kermeta.language.structure.Using;
 
 
 public class MetaModelAccessor {
@@ -60,12 +61,19 @@ public class MetaModelAccessor {
 		}
 	}
 	
-	public List<String> getAllClassDefinition() {
+	public List<String> getAllClassDefinition(String thePackages) {
 		List<String> result = new ArrayList<String>();
 		try {
-			for (EObject oneClassDef : metamodelObjects.get("ClassDefinition")) {
-				result.add(((ClassDefinition)oneClassDef).getName());
+			Package concernedPackage = getPackage(thePackages);
+			
+			TreeIterator<EObject> objects = concernedPackage.eAllContents(); 
+			while (objects.hasNext()) {
+				EObject anObject = objects.next();
+				if (anObject.eClass().getName().equals("ClassDefinition")) {
+					result.add(((ClassDefinition)anObject).getName());
+				}
 			}
+			
 			return result;
 		} catch (NullPointerException e) {
 			return result;
@@ -76,12 +84,71 @@ public class MetaModelAccessor {
 		List<String> result = new ArrayList<String>();
 		try {
 			for (EObject onePackage : metamodelObjects.get("Package")) {
-				result.add(((Package)onePackage).getName());
+				if (((Package)onePackage).getNestingPackage() == null) {
+					result.add(((Package)onePackage).getName());
+				}
 			}
 			return result;
 		} catch (NullPointerException e) {
 			return result;
 		}
+	}
+		
+	public List<String> getSubPackages(String thePackage) {
+		List<String> result = new ArrayList<String>();
+				
+		try {
+					
+			for (EObject aPackage : getSubPackagesPackage(thePackage,false)) {
+				result.add(((Package)aPackage).getName());
+			}
+			
+			return result;
+		} catch (NullPointerException e) {
+			return result;
+		}
+	}
+	
+	private Package getPackage(String packageToFind) {
+		
+		String[] temp = packageToFind.split("::");
+		String packageToGet = temp[temp.length-1];
+		
+		List<EObject> thePackages = getSubPackagesPackage(packageToFind,true);
+		for (EObject onePackage : thePackages) {
+			if (((Package)onePackage).getName().equals(packageToGet)) {
+				return ((Package)onePackage);
+			}
+		}
+		
+		return null;		
+	}
+	
+	private List<EObject> findSubPackages(String packageToFind, List<EObject> packagesToUse) {
+		
+		List<EObject> result = new ArrayList<EObject>();
+		
+		for (EObject aPackageToUse : packagesToUse) {
+			if (((Package)aPackageToUse).getName().equals(packageToFind)) {
+				result.addAll(((Package)aPackageToUse).getNestedPackage());
+			}
+		}
+		
+		return result;
+	}
+	
+	private List<EObject> getSubPackagesPackage(String thePackage, boolean removeTheLast) {
+		String[] allPackages = thePackage.split("::");
+
+		List<EObject> listToUse = metamodelObjects.get("Package");
+		int limit = removeTheLast?allPackages.length-1:allPackages.length;
+		for (int i=0;i<=limit-1;i++) {
+			String packageToFind = allPackages[i];
+			List<EObject> temp = findSubPackages(packageToFind, listToUse);
+			listToUse = temp;
+		}
+		
+		return listToUse;
 	}
 
 }
