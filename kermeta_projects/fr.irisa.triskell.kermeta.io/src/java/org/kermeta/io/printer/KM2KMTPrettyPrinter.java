@@ -628,7 +628,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		if (node.getElseBody() != null) {
 			result += getPrefix() + "else\n";
 			pushPrefix();
-			if(node.getThenBody() instanceof Block)
+			if(node.getElseBody() instanceof Block)
 				result += this.ppCRSeparatedNode(((Block)node.getElseBody()).getStatement()) + "\n";
 			else
 				result += this.accept(node.getElseBody());
