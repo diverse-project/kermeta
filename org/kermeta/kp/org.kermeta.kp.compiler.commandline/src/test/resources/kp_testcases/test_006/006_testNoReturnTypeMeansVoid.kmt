@@ -1,0 +1,7 @@
+package pkg{
+	class A {
+		operation main() is do // No return type defined means that return type is Void
+			kermeta::io::StdIO.writeln("hello")
+		end
+	}
+}
