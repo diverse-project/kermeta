@@ -402,22 +402,28 @@ abstract class Collection<G>
 	 * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)
 	 */
 	operation sum(): G is do
-		var res : G 
+		var res : G
 		var tmp : Summable<G>
 		var o : G
 		o := self.one
 		tmp ?= o
 		result := void
 		if (tmp != void) then
+			var index : Integer init 0
 			self.each{ elem  | 
 				o := elem
 				tmp ?= o
-				if (tmp != void) then
-					res := tmp + res 
+				if (index == 0) then
+					res := tmp.asType(G)
+				else 
+					if (tmp != void) then
+						res := tmp + res 
+					end
 				end
+				index := index + 1
 			}
 		end
-		result := res		
+		result := res
 	end
 }
 
