@@ -1,0 +1,49 @@
+package pkg{
+	// persons who write documents
+	class Writer {
+		attribute name : kermeta::standard::String
+	}
+	// generic concept for every document
+	abstract class Document {
+		reference author : Writer
+		attribute text : kermeta::standard::String
+	}
+	// a "Document" from the real world
+	class Book inherits Document {}
+	// a specialized "Book"
+	class ChildBook inherits Book {
+		attribute minimalAge : kermeta::standard::Integer
+	}
+
+	class AgeException inherits kermeta::exceptions::Exception {}
+	abstract class Reader {
+		operation read(book : ChildBook) : Void is abstract
+	}
+	class Child inherits Reader {
+		attribute age : kermeta::standard::Integer
+		operation initialize(age : kermeta::standard::Integer) : Void is
+		do
+		self.age := age
+		end
+	// an action which triggers an Exception...
+		operation read(book : ChildBook) : Void is
+		do
+			if age < book.minimalAge then
+			raise AgeException.new
+		end
+	end
+}
+
+	class Main {
+		operation main() : Void is do
+			var writer : Writer init Writer.new
+			var childBook : ChildBook init ChildBook.new
+			book.author := writer
+			book.minimalAge := 5
+			book.text := "coucou"
+			var child : Child init Child.new
+			child.initialize(10)
+			child.read(book)
+		end
+	}
+}

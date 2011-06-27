@@ -1,4 +1,4 @@
-package Pkg{
+package pkg{
 	class ObjectLanguage{
 		@main ""
 		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
