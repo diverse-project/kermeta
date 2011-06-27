@@ -4,6 +4,6 @@ group :"pkg"
 defaultMainClass :"pkg::A"
 defaultMainOperation : "main"
 {
-	source = "${project.baseUri}/005_testNoReturnTypeMeansVoid.kmt"
+	source = "${project.baseUri}/006_testNoReturnTypeMeansVoid.kmt"
 	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 }

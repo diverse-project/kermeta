@@ -4,7 +4,7 @@ package pkg{
 		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
 			main_method()
 		end
-		operation main_method() : Void is do
+		operation main_method() : kermeta::standard::Void is do
 			kermeta::io::StdIO.writeln("My first kermeta run")
 		end
 	}
