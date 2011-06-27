@@ -23,16 +23,15 @@ package pkg{
 		attribute age : kermeta::standard::Integer
 		operation initialize(age : kermeta::standard::Integer) : Void is
 		do
-		self.age := age
+			self.age := age
 		end
-	// an action which triggers an Exception...
+		// an action which triggers an Exception...
 		operation read(book : ChildBook) : Void is
 		do
 			if age < book.minimalAge then
 			raise AgeException.new
 		end
-	end
-}
+	}
 
 	class Main {
 		operation main() : Void is do

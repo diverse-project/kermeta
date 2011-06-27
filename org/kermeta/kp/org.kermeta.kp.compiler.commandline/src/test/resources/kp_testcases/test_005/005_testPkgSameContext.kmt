@@ -1,0 +1,12 @@
+package pkg{
+	class A {
+		reference myB : B
+		
+		operation main() : Void is do
+			myB := B.new
+		end
+	}
+	
+	class B {
+	}
+}
