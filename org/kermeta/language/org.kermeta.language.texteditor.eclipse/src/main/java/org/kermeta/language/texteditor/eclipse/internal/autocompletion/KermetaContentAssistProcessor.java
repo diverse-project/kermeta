@@ -213,14 +213,16 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	private void proposeClassDefinition(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> theClassDefinition) {
 		String lastQualifier = getLastIdentifier(qualifier);
 
-		for (String aClassDef : theClassDefinition) {
-			int cursor = aClassDef.length();
-			if (lastQualifier.length() > 0) {
-				if (aClassDef.startsWith(lastQualifier)) {
+		if (theClassDefinition != null) {
+			for (String aClassDef : theClassDefinition) {
+				int cursor = aClassDef.length();
+				if (lastQualifier.length() > 0) {
+					if (aClassDef.startsWith(lastQualifier)) {
+						propList.add(new KermetaCompletionProposal(aClassDef, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/specific/ClassDefinition.gif")));
+					}					   
+				} else {			   
 					propList.add(new KermetaCompletionProposal(aClassDef, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/specific/ClassDefinition.gif")));
-				}					   
-			} else {			   
-				propList.add(new KermetaCompletionProposal(aClassDef, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/specific/ClassDefinition.gif")));
+				}
 			}
 		}
 	}
