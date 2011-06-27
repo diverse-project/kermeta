@@ -27,4 +27,9 @@ public class AutocompletionImpl implements Autocompletion {
 		return accessor.getAllOperations();
 	}
 
+	@Override
+	public List<String> getAllClassDefinition() {
+		return accessor.getAllClassDefinition();
+	}
+
 }

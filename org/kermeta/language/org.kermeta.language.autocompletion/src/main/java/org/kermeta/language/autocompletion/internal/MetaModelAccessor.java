@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.behavior.VariableDecl;
+import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Operation;
 
@@ -58,6 +59,16 @@ public class MetaModelAccessor {
 		}
 	}
 	
-	
+	public List<String> getAllClassDefinition() {
+		List<String> result = new ArrayList<String>();
+		try {
+			for (EObject oneClassDef : metamodelObjects.get("ClassDefinition")) {
+				result.add(((ClassDefinition)oneClassDef).getName());
+			}
+			return result;
+		} catch (NullPointerException e) {
+			return result;
+		}
+	}
 
 }
