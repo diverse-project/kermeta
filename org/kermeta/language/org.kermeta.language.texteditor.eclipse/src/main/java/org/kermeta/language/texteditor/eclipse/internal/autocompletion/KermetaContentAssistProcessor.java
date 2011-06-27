@@ -36,8 +36,9 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
-	KermetaEditor editor;
+	private KermetaEditor editor;
 	private org.kermeta.language.loader.kmt.scala.api.Lexer theLexer = new Lexer();
+	private Autocompletion myAutocompletion = null;
 
 	public KermetaContentAssistProcessor(KermetaEditor editor) {
 		this.editor = editor;
@@ -137,6 +138,46 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 		return "";
 	}
+	
+	private String getLastCompletePackageChain(List<IKToken> qualifier, boolean withTheLast) {
+		StringBuffer result = new StringBuffer();
+		boolean current = false;
+		for (int i = 0;i<qualifier.size();i++) {
+			if (qualifier.get(i).getClass().getSimpleName().equals("Identifier")) {
+				if (i+1<qualifier.size()) {
+					if (qualifier.get(i+1).getClass().getSimpleName().equals("Delimiter")) {
+						if (qualifier.get(i+1).toString().equals("::")) {
+							current = true;
+							result.append(qualifier.get(i));
+							result.append(qualifier.get(i+1));
+						} else {
+							if (current) {
+								current = false;
+								result = new StringBuffer();
+							}
+						}
+					} else {
+						if (current) {
+							current = false;
+							result = new StringBuffer();
+						}
+					}
+				}
+			} else {
+				if (current && !qualifier.get(i).getClass().getSimpleName().equals("Delimiter")) {
+					current = false;
+					result = new StringBuffer();
+				}
+			}
+		}
+		
+		if (!withTheLast && !result.toString().equals("")) {
+			result = result.delete(result.lastIndexOf("::"), result.length());
+			result = result.delete(result.lastIndexOf("::")+2, result.length());
+		}
+		
+		return result.toString();
+	}
 
 	private void computeProposals(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList) { 
 
@@ -147,16 +188,15 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		List<String> theOperations = null;
 		List<String> theClassDefinition = null;
 		List<String> thePackages = null;
+		
 
 		if (editor.getFile() != null) {	   
 			String kpIdentifier = KermetaBuilder.getDefault().findKPidentifierFromKMT(editor.getFile());
 
-			if (KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier) != null) {
-				Autocompletion myAutocompletion = new AutocompletionImpl(Activator.getDefault().getMessaggingSystem(),KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier));		   
-				theVariables = myAutocompletion.getAllVariableDecl();
-				theOperations = myAutocompletion.getAllOperations();
-				theClassDefinition = myAutocompletion.getAllClassDefinition();
-				thePackages = myAutocompletion.getAllPackages();
+			ModelingUnit theCurrentMU = KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier); 
+			
+			if (theCurrentMU != null) {
+				myAutocompletion = new AutocompletionImpl(Activator.getDefault().getMessaggingSystem(),KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier));
 			}
 		}
 
@@ -166,6 +206,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
 		} else if (! isTerminatedbyKeyword(qualifier)) {
 			//Proposal of Keywords and Variables
+			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
 			proposeKeywords(qualifier, documentOffset, propList, qlen, reserved);
 		} else {
@@ -180,15 +221,6 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
 			}
 		}
-
-		/*if (theOperations != null) {
-			   for (String anOperation : theOperations) {
-				   int cursor = anOperation.length();
-				   KermetaCompletionProposal proposal = new KermetaCompletionProposal(anOperation, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/green/operation.png"));
-
-				   propList.add(proposal);
-			   }
-		   }*/
 	}
 
 	private void proposeKeywords(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> reserved) {
@@ -209,6 +241,10 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	private void proposeVariable(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> theVariables) {
 		String lastQualifier = getLastIdentifier(qualifier);
 
+		if (myAutocompletion != null) {
+			theVariables = myAutocompletion.getAllVariableDecl();
+		}
+		
 		if (theVariables != null) {
 			for (String aVariable : theVariables) {
 				int cursor = aVariable.length();
@@ -225,7 +261,13 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	private void proposeClassDefinition(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> theClassDefinition) {
 		String lastQualifier = getLastIdentifier(qualifier);
+		String thePackageToUse = getLastCompletePackageChain(qualifier,false);
 
+		if (myAutocompletion != null) {
+
+			theClassDefinition = myAutocompletion.getAllClassDefinition(thePackageToUse);
+		}
+		
 		if (theClassDefinition != null) {
 			for (String aClassDef : theClassDefinition) {
 				int cursor = aClassDef.length();
@@ -242,7 +284,16 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	private void proposePackages(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> thePackages) {
 		String lastQualifier = getLastIdentifier(qualifier);
-
+		String thePackageToUse = getLastCompletePackageChain(qualifier,true);
+		
+		if (myAutocompletion != null) {
+			if (thePackageToUse.equals("")) {
+				thePackages = myAutocompletion.getAllPackages();
+			} else {
+				thePackages = myAutocompletion.getSubPackages(thePackageToUse);
+			}
+		}
+		
 		if (thePackages != null) {
 			for (String aPackage : thePackages) {
 				int cursor = aPackage.length();
@@ -260,7 +311,6 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer arg0,
 			int arg1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -271,19 +321,16 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public char[] getContextInformationAutoActivationCharacters() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public IContextInformationValidator getContextInformationValidator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
