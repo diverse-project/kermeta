@@ -615,7 +615,7 @@ class Set<G> inherits Collection<G>
 	 */
 	operation flatten() : Set<Object> is do
 		var res: Set<Object> init Set<Object>.new
-		if (G.isKindOf(Collection<Object>)) then
+		if (G.isSubTypeOf(Collection<Object>)) then
 			var col : Collection<Object>
 			var o : Object 
 			self.each{e |
@@ -856,7 +856,7 @@ class Bag<G> inherits Collection<G>
 	 */
 	operation flatten() : Bag<Object> is do
 		var res: Bag<Object> init Bag<Object>.new
-		if (G.isKindOf(Collection<Object>)) then
+		if (G.isSubTypeOf(Collection<Object>)) then
 			var col : Collection<Object>
 			var o : Object 
 			self.each{e |
