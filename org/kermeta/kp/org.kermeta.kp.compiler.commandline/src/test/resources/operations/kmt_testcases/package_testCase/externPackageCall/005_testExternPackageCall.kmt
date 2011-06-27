@@ -1,8 +1,0 @@
-package testExternPackage{
-	// operation called in another package
-	class TestOpcall {
-	    operation operationAsg() : kermeta::standard::Integer is do
-	        result := 2
-	    end
-	}
-}

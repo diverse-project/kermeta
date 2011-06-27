@@ -1,0 +1,10 @@
+package testInterPackage;
+
+// operation called in another package
+class TestIntercall {
+	@main ""
+    operation main(str : kermeta::standard::String) : kermeta::standard::Void is do
+    	var opCall : testOpPackage::TestOpcall init testOpPackage::TestOpcall.new
+    	kermeta::io::StdIO.writeln(opCall.foo().toString)
+    end
+}

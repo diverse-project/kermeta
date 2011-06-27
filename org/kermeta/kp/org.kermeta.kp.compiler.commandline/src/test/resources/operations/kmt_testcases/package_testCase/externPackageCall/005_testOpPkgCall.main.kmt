@@ -1,9 +1,0 @@
-package testOpPkgCall;
-
-// call an operation from another package 
-class TestOpcall {
-	@main ""
-    operation main(str : kermeta::standard::String) : kermeta::standard::Void is do
-     //  kermeta::io::StdIO.writeln(testExternPackage::TestOpcall.new.operationAsg())//TODO to uncomment
-    end
-}

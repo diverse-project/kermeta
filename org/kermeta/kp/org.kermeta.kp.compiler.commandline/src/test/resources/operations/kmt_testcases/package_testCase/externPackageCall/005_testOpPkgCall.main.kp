@@ -1,9 +1,0 @@
-KermetaProject :"001_testHelloWorld_standalone" 
-version :  "2.0.1-SNAPSHOT"
-group :"test" 
-defaultMainClass :"testOpPkgCall::TestOpcall"
-defaultMainOperation : "main"
-{
-	source = "${project.baseUri}/005_testExternPackageCall.kmt" 
-	source = "${project.baseUri}/005_testOpPkgCall.main.kmt"
-} 
