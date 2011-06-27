@@ -21,7 +21,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
-public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2 {
+public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2, Comparable<KermetaCompletionProposal> {
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;
@@ -50,7 +50,7 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 	 * @param cursorPosition the position of the cursor following the insert relative to replacementOffset
 	 */
 	public KermetaCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition) {
-		this(replacementString, replacementOffset, replacementLength, cursorPosition, null, null, null, null);
+		this(replacementString, replacementOffset, replacementLength, cursorPosition, null, replacementString, null, null);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 	 * @param image the image to display for this proposal
 	 */
 	public KermetaCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition, Image image) {
-		this(replacementString, replacementOffset, replacementLength, cursorPosition, image, null, null, null);
+		this(replacementString, replacementOffset, replacementLength, cursorPosition, image, replacementString, null, null);
 	}
 
 	/**
@@ -80,6 +80,7 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 	 */
 	public KermetaCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition, Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo) {
 		Assert.isNotNull(replacementString);
+		Assert.isNotNull(displayString);
 		Assert.isTrue(replacementOffset >= 0);
 		Assert.isTrue(replacementLength >= 0);
 		Assert.isTrue(cursorPosition >= 0);
@@ -168,5 +169,11 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 			fReplacementLength++;
 		
 		return result;
+	}
+
+	@Override
+	public int compareTo(KermetaCompletionProposal o) {
+		
+		return this.fDisplayString.toLowerCase().compareTo(o.fDisplayString.toLowerCase());
 	}
 }
