@@ -158,7 +158,7 @@
 		<dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.0</version>
+            <version>0.12.10</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
