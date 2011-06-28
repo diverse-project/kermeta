@@ -1,0 +1,10 @@
+package pkg{
+	class Test {
+		attribute foo : kermeta::standard::Integer
+	
+		@main ""
+		operation main() is do
+			self.foo := 1
+		end
+	}
+}
