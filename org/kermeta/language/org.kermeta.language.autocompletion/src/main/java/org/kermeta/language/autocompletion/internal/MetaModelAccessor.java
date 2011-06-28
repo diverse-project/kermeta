@@ -2,8 +2,10 @@ package org.kermeta.language.autocompletion.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.behavior.VariableDecl;
@@ -66,9 +68,10 @@ public class MetaModelAccessor {
 		try {
 			Package concernedPackage = getPackage(thePackages);
 			
-			TreeIterator<EObject> objects = concernedPackage.eAllContents(); 
-			while (objects.hasNext()) {
-				EObject anObject = objects.next();
+			EList<EObject> objects = concernedPackage.eContents();
+			Iterator<EObject> theIterator = objects.iterator();
+			while (theIterator.hasNext()) {
+				EObject anObject = theIterator.next();
 				if (anObject.eClass().getName().equals("ClassDefinition")) {
 					result.add(((ClassDefinition)anObject).getName());
 				}
