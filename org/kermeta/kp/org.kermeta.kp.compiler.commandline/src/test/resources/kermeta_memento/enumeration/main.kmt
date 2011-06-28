@@ -1,0 +1,15 @@
+package pkg{
+	enumeration Seasons { spring; summer; automn; winter; }
+	
+	class Test {
+		@main ""
+		operation main() is do
+			x(pkg::Seasons.spring)
+		end
+		
+		operation x ( val : pkg::Seasons) is do
+			if val == pkg::Seasons.spring
+			then stdio.writeln("It's Spring") end
+		end
+	}
+}

@@ -1,0 +1,17 @@
+package pkg{
+	class Test {
+		@main ""
+		operation main() is do
+			var boolCond : kermeta::standard::Boolean init true
+			// conditional block
+			if boolCond then
+				kermeta::io::StdIO.writeln("true")
+			else
+				kermeta::io::StdIO.writeln("false")
+			end
+			// conditional expression => affectation
+			var s : kermeta::standard::String
+			s := if boolCond then "its true !" else "its a joke ;-)" end
+		end
+	}
+}

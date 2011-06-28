@@ -1,0 +1,78 @@
+package my_package::subpackage {
+	class Main {
+		@main ""
+		operation main() is do
+			var rec : my_package::subpackage::Rectangle
+			rec := my_package::subpackage::Rectangle.new
+			rec.length := 10
+			rec.width := 5
+			kermeta::io::StdIO.writeln(rec.surface.toString)
+			kermeta::io::StdIO.writeln(my_package::subpackage::X.new.toString)
+			
+			var cube : my_package::subpackage::Cube
+			cube := my_package::subpackage::Cube.new
+			cube.edge := 2
+			//TODO add exceptions to test the getter and the setter
+		end
+	}
+	
+	class SyntaxClass {
+		// composition attributes
+		attribute myAtt : my_package::subpackage::X
+		// pointer-like attributes
+		reference myObj : my_package::subpackage::X
+		// affectation to an "attribute" deletes former
+		// container attribute
+		operation main() is do
+			// temporary variable declaration
+			// + initialization
+			var v1 : SyntaxClass init my_package::subpackage::SyntaxClass.new
+			var v2 : SyntaxClass init my_package::subpackage::SyntaxClass.new
+			var anObj : my_package::subpackage::X // declaration without
+			// initialization
+			anObj := my_package::subpackage::X.new // affectation with a new object
+		
+			v1.myAtt := anObj
+			// v1 has an attribute
+			stdio.writeln(v1.myAtt.toString)
+			v2.myAtt := v1.myAtt // transfert of "anObj"
+			// from v1 to v2
+			// v1 has loose its attribute (print <void>)
+			stdio.writeln(v1.myAtt.toString)
+		end
+	}
+	
+	class X {
+		method toString() : kermeta::standard::String is do
+			result := "I'm an X object"
+		end
+	}
+	
+	class Rectangle {
+		attribute length : kermeta::standard::Integer
+		attribute width : kermeta::standard::Integer
+		// read-only property derived from length/width
+		property surface : kermeta::standard::Integer
+		getter is do
+			result := length * width
+		end
+	}
+	
+	class Cube {
+		attribute width : kermeta::standard::Integer
+		attribute surface : kermeta::standard::Integer
+		attribute volume : kermeta::standard::Integer
+		// read-write property
+		property edge : kermeta::standard::Integer
+		getter is do
+			result := width
+		end
+		setter is do
+			width := value
+			surface := value * value * 6
+			volume := value * value * value
+		end
+	}
+}
+
+	

@@ -1,0 +1,16 @@
+package pkg{
+	class Test {
+		@main ""
+		operation main() is do
+			from
+			var i : kermeta::standard::Integer init 0
+			until
+			i == 10
+			loop
+			/* code to be done 10 times
+			.... */
+			i := i + 1 // don't forget to increment
+			end
+		end
+	}
+}

@@ -1,0 +1,11 @@
+package pkg {
+	class Test {
+		@main ""
+		operation main() is do
+			10.times { i |
+				kermeta::io::StdIO.writeln(i.toString)
+			/* code to execute 10 times */
+			}
+		end
+	}
+}

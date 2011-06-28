@@ -1,0 +1,28 @@
+package pkg {
+	class Test {
+		@main ""
+		operation main() is do
+			var aCollection : kermeta::standard::Sequence<kermeta::standard::Integer>
+			var aCollection2 : kermeta::standard::Sequence<kermeta::standard::Integer> 
+			var anObject : kermeta::standard::Integer
+			var aBoolean : kermeta::standard::Boolean
+
+			aCollection := kermeta::standard::Sequence<kermeta::standard::Integer>.new
+			aCollection.add(2)
+			aCollection.add(1)
+			aCollection.add(10)
+
+			aCollection.each { e | true }
+			aBoolean := aCollection.forAll { e | true }
+			aCollection2 := aCollection.select { e | true }
+			aCollection2 := aCollection.reject { e | false
+			/* condition */ }
+			aCollection2 := aCollection.collect { e | 1
+			/* value */ }
+			anObject := aCollection.detect { e | false
+			/* condition */ }
+			aBoolean := aCollection.exists { e | false
+			/* condition */ }
+		end
+	}
+}

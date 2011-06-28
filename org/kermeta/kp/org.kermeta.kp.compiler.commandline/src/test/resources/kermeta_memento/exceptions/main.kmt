@@ -1,0 +1,19 @@
+package pkg{
+	class Test {
+		@main ""
+		operation main() is do
+			handleException()
+		end
+		
+		operation raiseException() is do
+			raise kermeta::exceptions::Exception.new
+		end
+		
+		operation handleException() is do
+			// some code which raise an exception
+			self.raiseException
+			rescue (e : kermeta::exceptions::Exception)
+			// do something if an Exception has been raised
+		end
+	}
+}
