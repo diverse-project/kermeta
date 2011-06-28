@@ -11,7 +11,7 @@
     [2009/02/05 0.1 listings language file for Kermeta]
 
 
-\lstdefinelanguage{kermeta_bw}
+\lstdefinelanguage{kermeta}
 {
 morekeywords=[0]{ require, using, extern, pre, post, inv},
 morekeywords=[1]{ package, inherits, class, attribute, reference, property, readonly, getter, is, setter, alias, enumeration, operation, method },
@@ -26,16 +26,17 @@ morecomment=[s]{/*}{*/},
 morestring=[b]",
 }
 
-\lstset{language=kermeta_bw,
+\lstset{%language=kermeta,
    basicstyle=\ttfamily,
    keywordstyle=[0]\bf,
    keywordstyle=[1]\bf,
+   %keywordstyle=[2]\bf,
    keywordstyle=[2]\textit\bf,
    keywordstyle=[3]\bf,
    keywordstyle=[4]\textit\bf,
    keywordstyle=[5]\bf,
    keywordstyle=[6]\bf,
-   commentstyle=\textit,
+   commentstyle=\color{black}\textit,
    tabsize=2,
    breaklines=true,
 %   frame=single,
