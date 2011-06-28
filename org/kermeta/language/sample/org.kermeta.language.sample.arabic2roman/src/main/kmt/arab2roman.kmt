@@ -10,15 +10,9 @@
  * Description : 
  *       Sample of transformation in Kermeta that transform roman number into arabic number  
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
-
-
 package root_package;
 
-require kermeta
 using kermeta::standard
-using kermeta::utils
 
 class ArabicNumber
 {
@@ -155,10 +149,10 @@ class Main
 			a.setValue(i)
 			r := arab2roman(a)
 			if r.getValue != i then 
-				stdio.writeln(i.toString + ": " + r.toString + "!=" + roman2arab(r).toString)
+				kermeta::io::StdIO.writeln(i.toString + ": " + r.toString + "!=" + roman2arab(r).toString)
 			end
 			i := i + 93
 		end		
-       stdio.writeln(a.toString + "=" + r.toString)
+       kermeta::io::StdIO.writeln(a.toString + "=" + r.toString)
     end
 }

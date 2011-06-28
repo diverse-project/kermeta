@@ -11,7 +11,7 @@ package pkg{
 		
 		operation handleException() is do
 			// some code which raise an exception
-			self.raiseException
+			raiseException
 			rescue (e : kermeta::exceptions::Exception)
 			// do something if an Exception has been raised
 		end
