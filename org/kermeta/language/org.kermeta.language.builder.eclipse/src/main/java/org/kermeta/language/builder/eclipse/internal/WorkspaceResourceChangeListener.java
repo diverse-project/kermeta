@@ -131,9 +131,16 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 						// ignore kp in target folder
 						if(!resource.getProjectRelativePath().segments()[0].equals("target")){
 							Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
-							KPBuilder aBuilder = new KPBuilder((IFile) resource);
+							final KPBuilder aBuilder = new KPBuilder((IFile) resource);
 							kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource),aBuilder);
-							aBuilder.compile();							
+							Job job = new Job("Kermeta builder initializer for "+aBuilder.getKpProjectFile().getRawLocation()) {
+								protected IStatus run(IProgressMonitor monitor) {
+									aBuilder.compile();
+									return Status.OK_STATUS;
+						        }
+						    };
+						    job.setPriority(Job.LONG);
+						    job.schedule();						
 						}
 					}
 				}
