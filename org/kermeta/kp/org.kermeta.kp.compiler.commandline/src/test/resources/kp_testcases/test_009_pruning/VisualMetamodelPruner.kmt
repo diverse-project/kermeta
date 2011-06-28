@@ -1,0 +1,48 @@
+/*
+ * Creation : March 16, 2009
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : 
+ *            Sagar Sen
+ *            Arnaud Blouin
+ */
+package kermeta::ki::kompren;
+
+using kermeta::pruning
+using kermeta::language::structure
+using kermeta::standard
+
+
+class Test {
+	operation main() is do
+		var pruner : VisualMetamodelPruner init VisualMetamodelPruner.new
+	end
+}
+
+class VisualMetamodelPruner inherits MetamodelPruner {
+	operation initializeVisualPruning(requiredClasses : bag RequiredClass[0..*], requiredProperties : bag RequiredProperty[0..*], 
+						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, radiusEffect : Integer, card0 : Boolean) : Void is do
+						
+		initialize(requiredClasses, requiredProperties, requiredEnumerations, numberOfPasses, radiusEffect, card0)
+	end
+	
+	
+	method onPackagePruned(pkg : Package) : Void is do
+		// Not managed
+	end
+	
+	
+	method onPropertyPruned(prop : Property) : Void is do
+		// Not managed
+	end
+	
+	
+	method onTagPruned(tag : Tag) : Void is do
+		// Not managed
+	end
+	
+	
+	method onTypeDefinitionPruned(typeDef : TypeDefinition) : Void is do
+		kermeta::io::StdIO.writeln(typeDef.toString)
+	end
+}

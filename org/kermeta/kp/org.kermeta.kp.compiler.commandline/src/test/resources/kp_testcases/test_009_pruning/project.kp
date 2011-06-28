@@ -1,0 +1,10 @@
+KermetaProject :"test.pruner" 
+version :  "2.0.1-SNAPSHOT" 
+group :"kermeta::ki::kompren"
+defaultMainClass :"kermeta::ki::kompren::Test"
+defaultMainOperation : "main"
+{
+	source = "${project.baseUri}/metamodelPruner.kmt"
+	source = "${project.baseUri}/VisualMetamodelPruner.kmt"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}
