@@ -261,7 +261,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	private void proposeClassDefinition(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> theClassDefinition) {
 		String lastQualifier = getLastIdentifier(qualifier);
-		String thePackageToUse = getLastCompletePackageChain(qualifier,false);
+		String thePackageToUse = getLastCompletePackageChain(qualifier,true);
 
 		if (myAutocompletion != null) {
 
