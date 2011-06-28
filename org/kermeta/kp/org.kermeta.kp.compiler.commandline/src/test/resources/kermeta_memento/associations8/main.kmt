@@ -1,0 +1,17 @@
+package pkg {
+	class A {
+		reference sub : pkg::A[0..*]#up
+		reference up : pkg::A#sub
+	}
+
+	class Test {
+		@main ""
+		operation main() is do
+			var a1 : pkg::A init pkg::A.new
+			var a2 : pkg::A init pkg::A.new
+			a1.sub.add(a2)
+			var a3 : pkg::A
+			a3 := a2.up
+		end
+	}
+}

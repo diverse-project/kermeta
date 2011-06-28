@@ -1,0 +1,49 @@
+package CollegeMM {
+	class Test {
+		@main ""
+		operation main() is do
+			var coll : CollegeMM::College init CollegeMM::College.new
+			var student : CollegeMM::Student init CollegeMM::Student.new
+			var matter : CollegeMM::Matter init CollegeMM::Matter.new
+			var note : CollegeMM::Note init CollegeMM::Note.new
+			
+			note.~value := "11".toReal
+			student.notes.add(note)
+			
+			student.name := "s1"
+			matter.level := CollegeMM::Level.expert
+			matter.title := "title"
+			coll.students.add(student)
+			coll.matters.add(matter)
+		end
+	}
+	
+	aspect class Note {
+		attribute ~value : kermeta::standard::Real
+		// add the opposite for managing notes from students/matters
+		reference student : Student#notes
+		reference matter : Matter#notes
+	}
+
+	aspect class Student {
+		reference notes : Note[0..*]#student
+		property average : kermeta::standard::Real
+		getter is do
+			var total : kermeta::standard::Real
+			notes.each{ n | total := total + n.~value }
+			result := total / notes.size.toReal
+		end
+	}
+	
+	aspect class Matter {
+		reference notes : Note[0..*]#matter
+		property average : kermeta::standard::Real
+		getter is do
+			var total : kermeta::standard::Real
+			notes.each{ n | total := total + n.~value }
+			result := total / notes.size.toReal
+		end
+	}
+}
+	
+	

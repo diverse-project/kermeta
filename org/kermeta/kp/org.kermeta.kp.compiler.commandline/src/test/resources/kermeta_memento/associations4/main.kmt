@@ -1,0 +1,17 @@
+package pkg {
+	class A { }
+	class B {
+		reference a : pkg::A
+	}
+
+	class Test {
+		@main ""
+		operation main() is do
+			var a1 : pkg::A init pkg::A.new
+			var b1 : pkg::B init pkg::B.new
+			b1.a := a1
+			var a2 : pkg::A
+			a2 := b1.a
+		end
+	}
+}

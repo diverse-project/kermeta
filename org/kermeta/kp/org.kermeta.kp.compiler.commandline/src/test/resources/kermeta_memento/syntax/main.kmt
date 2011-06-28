@@ -1,0 +1,27 @@
+package pkg {
+	class StringTool {
+		reference stringTable : kermeta::standard::Collection<kermeta::standard::String>
+		// an invariant constraint
+		inv noVoidTable is
+		do stringTable != void end
+		// an operation with contracts
+		operation concatenate(first : kermeta::standard::String, second : kermeta::standard::String) : kermeta::standard::String
+			pre noVoidInput is
+			do first != void and second != void end
+		
+			post noVoidOutput is
+			do result != void end
+			// operation body
+			is do
+			result := first
+			result.append(second)
+		end
+	}
+
+	class Test {
+		@main ""
+		operation main() is do
+			var st : pkg::StringTool init pkg::StringTool.new
+		end
+	}
+}

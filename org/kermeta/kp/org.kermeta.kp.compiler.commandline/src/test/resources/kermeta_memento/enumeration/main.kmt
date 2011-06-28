@@ -9,7 +9,7 @@ package pkg{
 		
 		operation x ( val : pkg::Seasons) is do
 			if val == pkg::Seasons.spring
-			then stdio.writeln("It's Spring") end
+			then kermeta::io::StdIO.writeln("It's Spring") end
 		end
 	}
 }

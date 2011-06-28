@@ -1,0 +1,25 @@
+package pkg {
+	class Main {
+		@main ""
+		operation main() is do
+			// new tool : its stringTable must be initialized
+			var st1 : pkg::StringTool init pkg::StringTool.new
+			st1.stringTable := kermeta::standard::Set<kermeta::standard::String>.new
+			var s1 : kermeta::standard::String
+			var s2 : kermeta::standard::String
+			do
+				// void strings should raise exception
+				st1.concatenate(s1, s2)
+				rescue (err : kermeta::exceptions::ConstraintViolatedPre)
+				kermeta::io::StdIO.writeln("expected err " + err.toString)
+			end
+			do
+				// new tool without table
+				var st2 : pkg::StringTool init pkg::StringTool.new
+				st2.checkInvariants
+				rescue (err : kermeta::exceptions::ConstraintViolatedInv)
+				kermeta::io::StdIO.writeln("expected err " + err.toString)
+			end
+		end
+	}
+}

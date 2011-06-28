@@ -1,0 +1,16 @@
+package pkg {
+	class A {
+		attribute sub : pkg::A[0..*]
+	}
+
+	class Test {
+		@main ""
+		operation main() is do
+			var a1 : pkg::A init pkg::A.new
+			var a2 : pkg::A init pkg::A.new
+			a1.sub.add(a2)
+			var a3 : pkg::A
+			a3 := a1.sub.first
+		end
+	}
+}

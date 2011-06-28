@@ -1,0 +1,19 @@
+package pkg {
+	class A {
+		attribute b : pkg::B[0..*]#a
+	}
+	class B {
+		reference a : pkg::A[1..1]#b
+	}
+
+	class Test {
+		@main ""
+		operation main() is do
+			var a1 : pkg::A init pkg::A.new
+			var b1 : pkg::B init pkg::B.new
+			a1.b.add(b1)
+			var a2 : pkg::A
+			a2 := b1.a
+		end
+	}
+}
