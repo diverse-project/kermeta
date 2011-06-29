@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>org.kermeta.language</groupId>
-        <artifactId>language.artcomponent.root</artifactId>
+        <artifactId>language.root</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
 
@@ -25,6 +25,11 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+			<artifactId>traceability.model</artifactId>
+			<version>${traceability.version}</version>
+		</dependency>
     </dependencies>
     <build>
     	<!-- Add resources -->
@@ -52,9 +57,6 @@
                             <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                             <Bundle-ClassPath>.,
                                 lib/org.antlr.stringtemplate-3.2.1.jar</Bundle-ClassPath>
-                            <Export-Package>
-                                org.kermeta.language.compiler.art2.impl 
-                            </Export-Package>
                             <Require-Bundle>
                                 org.kermeta.language.model
                             </Require-Bundle>
@@ -67,9 +69,6 @@
                                 org.eclipse.emf.ecore.util,
                                 org.eclipse.emf.ecore.xmi,
                                 org.eclipse.emf.ecore.xmi.impl,
-                                org.kermeta.art2.framework,
-                                org.kermeta.art2.framework.osgi,
-                                org.kermeta.art2.framework.port,
                                 org.kermeta.language.api.art2.port.utils,
                                 org.kermeta.language.api.messaging,
                                 org.kermeta.language.api.port,

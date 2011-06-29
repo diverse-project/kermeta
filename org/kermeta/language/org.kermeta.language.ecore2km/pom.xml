@@ -11,7 +11,6 @@
 	<name>language.ecore2km :: Ecore to Kermeta 2 converter</name>
 
 	<dependencies>
-		
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib.patched</artifactId>
@@ -23,11 +22,10 @@
 			<artifactId>language.model</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>fr.irisa.triskell.kermeta</groupId>
 			<artifactId>kermeta.model</artifactId>
-			<version>1.4.0</version>
+			<version>${kermeta.model.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.kermeta.eclipse</groupId>
@@ -43,7 +41,7 @@
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.framework.scala</artifactId>
-			<version>0.12.10</version>
+			<version>${framework.scala.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -54,17 +52,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.traceability</groupId>
-			<artifactId>traceability.mdk</artifactId>
+			<artifactId>traceability.model</artifactId>
 			<version>${traceability.version}</version>
 		</dependency>
-		<!--  <dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.api.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency> -->
-
 	</dependencies>
 
 	<build>
@@ -82,7 +72,7 @@
 			<plugin>
 				<groupId>org.kermeta.language</groupId>
 				<artifactId>language.compiler.mavenplugin</artifactId>
-				<version>1.4.1-BETA16</version>
+				<version>${language.compiler.version}</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>
@@ -225,5 +215,4 @@
 			-->
 		</plugins>
 	</build>
-
 </project>
