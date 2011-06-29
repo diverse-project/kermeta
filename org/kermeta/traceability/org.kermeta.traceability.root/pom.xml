@@ -18,6 +18,6 @@
     <artifactId>traceability.root</artifactId>
     <packaging>pom</packaging>
     <version>{$kermeta.version}</version>
-    <name>language.root :: Root for kermeta language</name>
+    <name>traceability.root :: Root for traceability language</name>
 	
 </project>
