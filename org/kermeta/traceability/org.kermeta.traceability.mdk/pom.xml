@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA8</version>
+                <version>1.4.1-BETA16</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -125,13 +125,6 @@
 			org.eclipse.emf.ecore.util,
 			org.eclipse.emf.ecore.xmi,
 			org.eclipse.emf.ecore.xmi.impl,
-			org.kermeta.art2.framework,
-			org.kermeta.art2.framework.osgi,
-			org.kermeta.art2.framework.port,
-			org.kermeta.language.api.art2.port.utils,
-			org.kermeta.language.api.messaging,
-			org.kermeta.language.api.port,
-			org.kermeta.language.api.result,
 			org.kermeta.language.structure,
 			org.kermeta.traceability,
 			org.osgi.framework;version="[1.5,2)",

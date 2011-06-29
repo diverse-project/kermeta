@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
 	  	<groupId>org.kermeta.language</groupId>
-	  	<artifactId>language.artcomponent.root</artifactId>
+	  	<artifactId>language.root</artifactId>
 	  	<version>2.0.1-SNAPSHOT</version>
   	</parent>
   
@@ -12,7 +12,7 @@
     <name>language.loader.km :: Kermeta Loader</name>
 
     <dependencies>
-        <dependency>
+ <!--        <dependency>
             <groupId>org.kermeta.art2</groupId>
             <artifactId>art2.annotation</artifactId>
             <version>${art2.version}</version>
@@ -22,7 +22,7 @@
             <artifactId>art2.framework</artifactId>
             <version>${art2.version}</version>
         </dependency>
-
+ -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.model</artifactId>
