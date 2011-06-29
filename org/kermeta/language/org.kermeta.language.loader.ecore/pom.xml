@@ -28,6 +28,11 @@
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+    		<artifactId>traceability.model</artifactId>
+			<version>${traceability.version}</version>
+		</dependency>
 		
       <!--   <dependency>
             <groupId>fr.irisa.triskell.kermeta</groupId>

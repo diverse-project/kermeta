@@ -58,6 +58,11 @@
 			<scope>test</scope>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+    		<artifactId>traceability.model</artifactId>
+			<version>${traceability.version}</version>
+		</dependency>
     </dependencies>
     
     <build>
