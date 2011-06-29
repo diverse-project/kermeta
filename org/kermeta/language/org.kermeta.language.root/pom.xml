@@ -17,7 +17,7 @@
     <groupId>org.kermeta.language</groupId>
     <artifactId>language.root</artifactId>
     <packaging>pom</packaging>
-    <version>{$kermeta.version}</version>
+    <version>${kermeta.version}</version>
     <name>language.root :: Root for kermeta language</name>
 	
 </project>
