@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.kermeta.language</groupId>
                 <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA16</version>
+                <version>${language.compiler.version}</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -146,26 +146,23 @@
 		</plugins>
 	</build>
 	<dependencies>
-	
-        
 		<dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.framework.scala</artifactId>
-            <version>0.12.10</version>
+            <version>${framework.scala.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
 		<dependency>
             <groupId>fr.irisa.triskell.kermeta</groupId>
             <artifactId>kermeta.model</artifactId>
-            <version>1.4.0</version>
+            <version>${kermeta.model.version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
     		<artifactId>emf.lib</artifactId>
 			<version>${emf.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.kermeta.traceability</groupId>
     		<artifactId>traceability.model</artifactId>
