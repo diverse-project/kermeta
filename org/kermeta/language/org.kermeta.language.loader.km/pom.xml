@@ -12,136 +12,48 @@
     <name>language.loader.km :: Kermeta Loader</name>
 
     <dependencies>
- <!--        <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.annotation</artifactId>
-            <version>${art2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.framework</artifactId>
-            <version>${art2.version}</version>
-        </dependency>
- -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
-		
-      <!--   <dependency>
-            <groupId>fr.irisa.triskell.kermeta</groupId>
-            <artifactId>kermeta.model</artifactId>
-            <version>1.4.0</version>
-        </dependency> -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-   <!--     <dependency>
-            <groupId>org.kermeta.language</groupId>
-            <artifactId>language.framework.scala</artifactId>
-            <version>0.0.9</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency> -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>language.api</artifactId>
-            <version>${kermeta.version}</version>
-        </dependency>        
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>language.api.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency>
 		<dependency>
 			<groupId>org.kermeta.traceability</groupId>
     		<artifactId>traceability.model</artifactId>
 			<version>${traceability.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.loader.km.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>${emf.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.framework.scala</artifactId>
+			<version>${framework.scala.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
     </dependencies>
     
     <build>
         <plugins>
-            <!-- Kermeta Compiler plugin -->
-         <!--    
-            <plugin>
-                <groupId>org.kermeta.language</groupId>
-                <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>1.4.1-BETA6</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <model>src/generated/km/KmLoader.km</model>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
-            <!-- Add generated source to build cycle -->
-    <!--          <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/kermeta</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
-            <!-- Scala plugin : allow to compile Scala file -->
-        <!--     <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
-                    <launchers>
-                        <launcher>
-                            <id>ecoreloader.runner</id>
-                            <mainClass>runner.MainRunner</mainClass>
-          
-                        </launcher>
-                    </launchers>
-                </configuration>
-            </plugin>
-            -->
             <!-- Generate Manifest -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
@@ -154,42 +66,33 @@
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+						<Bundle-Localization>plugin</Bundle-Localization>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Activator>org.kermeta.language.loader.km.internal.Activator</Bundle-Activator>
                         <Export-Package>
-							org.kermeta.language.loader.km.art.impl
+							org.kermeta.language.loader.km
                         </Export-Package>
                         <Require-Bundle>
-            fr.irisa.triskell.kermeta.model,
-            org.kermeta.language.model,
-            org.kermeta.language.framework.scala
+				            org.kermeta.language.model,
+				            org.kermeta.traceability.model,
+				            org.kermeta.language.framework.scala,
+				            org.kermeta.language.loader.km.api
                         </Require-Bundle>
                         <Import-Package>
-            kermeta.persistence,
-			org.eclipse.emf.common.notify,
-			org.eclipse.emf.common.util,
-			org.eclipse.emf.ecore,
-			org.eclipse.emf.ecore.impl,
-			org.eclipse.emf.ecore.resource,
-			org.eclipse.emf.ecore.util,
-			org.eclipse.emf.ecore.xmi,
-			org.eclipse.emf.ecore.xmi.impl,
-			org.kermeta.art2.framework,
-			org.kermeta.art2.framework.osgi,
-			org.kermeta.art2.framework.port,
-			org.kermeta.language.api.art2.port.utils,
-			org.kermeta.language.api.messaging,
-			org.kermeta.language.api.port,
-			org.kermeta.language.api.result,
-			org.kermeta.language.structure,
-			org.kermeta.traceability,
-			org.osgi.framework;version="[1.5,2)",
-			org.slf4j;version="[1.5,2)",
-			scala,
-			scala.actors,
-			scala.collection,
-			scala.collection.immutable,
-			scala.collection.mutable,
-			scala.reflect,
-			scala.runtime
+				            kermeta.persistence,
+							org.eclipse.emf.common.notify,
+							org.eclipse.emf.common.util,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.impl,
+							org.eclipse.emf.ecore.resource,
+							org.eclipse.emf.ecore.util,
+							org.eclipse.emf.ecore.xmi,
+							org.eclipse.emf.ecore.xmi.impl,
+							org.kermeta.language.structure,
+							org.kermeta.traceability,
+							org.kermeta.language.loader
+							org.osgi.framework;version="[1.5,2)"
                         </Import-Package>
 		            </manifestEntries>		            
 		          </archive>
