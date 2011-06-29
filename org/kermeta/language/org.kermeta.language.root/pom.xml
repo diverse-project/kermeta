@@ -21,7 +21,7 @@
         <scala.version>2.9.0-1</scala.version>
         <osgi.version>4.2.0</osgi.version>
         <utils.version>2.0.1-SNAPSHOT</utils.version>
-        <traceability.version>2.0.1-SNAPSHOT</traceability.version>
+        <traceability.version>2.0.2-SNAPSHOT</traceability.version>
         <kp.version>2.0.1-SNAPSHOT</kp.version>
         <slf4j.version>1.6.1</slf4j.version>
         <slf4j.version.range>[1.5,2)</slf4j.version.range>
