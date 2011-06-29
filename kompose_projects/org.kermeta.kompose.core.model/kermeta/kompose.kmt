@@ -44,8 +44,10 @@ class KomposeMain {
         result.composedModelURI := c.composedModelURI
         result.metamodelName := c.metamodelName
         result.repository := EMFRepository.new
-        KLogger.getDefault().asType(KLogger).initialize
-        KLogger.getDefault().asType(KLogger).enableLog(logging)
+        result.logger := KLogger.new
+        result.logger.initialize
+        result.logger.enableLog(logging)
+        result.trace := TraceModel.new
         result.mode := c.mode
      end
 }
@@ -56,6 +58,8 @@ class KomposeMain {
 aspect abstract class Composer {
 
 	reference resources: kermeta::persistence::EMFResource [0..*]
+	reference logger : KLogger
+	reference trace : TraceModel
 	reference repository : EMFRepository
 	reference meta_resources : kermeta::persistence::EMFResource [0..*]
 	
@@ -64,12 +68,11 @@ aspect abstract class Composer {
 	 * param path : path of the model to load
 	 * returns the root of the model as a Mergeable element
 	 */
-	operation loadModel(path : String, res : kermeta::persistence::EMFResource[0..*]) : kompose::Mergeable is do
+	operation loadModel(path : String) : kompose::Mergeable is do
     	var resource : kermeta::persistence::EMFResource
        	resource ?= repository.getResource(path)
         resource.load
-        //self.resources.add(resource)
-        res.add(resource)
+        self.resources.add(resource)
     	result ?= resource.instances.one
    end
    
@@ -139,51 +142,51 @@ aspect abstract class Composer {
 	 */
 	operation compose() : Mergeable is do
 		// load models to compose
-		KLogger.getDefault().asType(KLogger).printInfo("Loading models...")
+		self.logger.printInfo("Loading models...")
 		var pm : Mergeable init loadModel(primaryModelURI, self.resources)
 		var am : Mergeable init loadModel(aspectModelURI, self.resources)
 		stdio.writeln("KOMPOSE DEBUG: metamodel "+metamodelName)
 		var mm : Mergeable init loadModel(metamodelName, self.meta_resources)
 		var cm : Mergeable
-		KLogger.getDefault().asType(KLogger).printInfo("OK")
+		self.logger.printInfo("OK")
 		
 		// execute pre-directives
-		KLogger.getDefault().asType(KLogger).printInfo("Executing predirectives on primary model...")
+		self.logger.printInfo("Executing predirectives on primary model...")
 		executeDirectives(pm, mm, predirectivesPM)
 		//executeDirectives(pm, predirectivesPM)
-		KLogger.getDefault().asType(KLogger).printInfo("OK")
-		KLogger.getDefault().asType(KLogger).printInfo("Executing predirectives on aspect model...")
+		self.logger.printInfo("OK")
+		self.logger.printInfo("Executing predirectives on aspect model...")
 		executeDirectives(am, mm, predirectivesAM)
 		//executeDirectives(am, predirectivesAM)
-		KLogger.getDefault().asType(KLogger).printInfo("OK")
+		self.logger.printInfo("OK")
 		
 		// perform the composition
-		KLogger.getDefault().asType(KLogger).printInfo("Composing models...")
+		self.logger.printInfo("Composing models...")
 		var composer : ModelElementComposer init ModelElementComposer.new
 		composer.resources.addAll(self.resources)
 		cm := composer.compose(pm, am, self)
 		
 		// execute post-directives
-		KLogger.getDefault().asType(KLogger).printInfo("Executing postdirectives on composed model...")
+		self.logger.printInfo("Executing postdirectives on composed model...")
 		executeDirectives(cm, mm, postdirectives)
 		//executeDirectives(cm, postdirectives)
-		KLogger.getDefault().asType(KLogger).printInfo("OK")
+		self.logger.printInfo("OK")
 		
 		// save the result
 		//cm := pm
 		if cm.isVoid() then
-			KLogger.getDefault().asType(KLogger).printError("Saving composed model is impossible...")
-			KLogger.getDefault().asType(KLogger).printError("See previous errors for explanations.")
+			self.logger.printError("Saving composed model is impossible...")
+			self.logger.printError("See previous errors for explanations.")
 		else
-			KLogger.getDefault().asType(KLogger).printInfo("Saving composed model...")
+			self.logger.printInfo("Saving composed model...")
 			saveModel(cm, composedModelURI)
 		end
-        KLogger.getDefault().asType(KLogger).printInfo("OK")
+        self.logger.printInfo("OK")
         result := cm
         
     rescue (ex : DirectiveRuntimeException)
-   		KLogger.getDefault().asType(KLogger).printError("\n" + ex.toString)
-   		KLogger.getDefault().asType(KLogger).printInfo("composition aborded.")
+   		self.logger.printError("\n" + ex.toString)
+   		self.logger.printInfo("composition aborded.")
 	end
 }
 
