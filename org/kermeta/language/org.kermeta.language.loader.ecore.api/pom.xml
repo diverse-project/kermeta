@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+	  	<groupId>org.kermeta.language</groupId>
+	  	<artifactId>language.root</artifactId>
+	  	<version>2.0.1-SNAPSHOT</version>
+  	</parent>
+  
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.loader.ecore.api</artifactId>
+    <packaging>jar</packaging>
+    <name>language.loader.ecore.api :: Ecore Loader</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+    	<sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>		        
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+ 						<Bundle-Localization>plugin</Bundle-Localization>
+ 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>					
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Export-Package>
+							org.kermeta.language.loader.ecore.api
+                        </Export-Package>
+                        <Require-Bundle>
+            				org.kermeta.language.model
+                        </Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+        </plugins>
+    </build>
+</project>
