@@ -46,7 +46,11 @@
 			<artifactId>art2.framework</artifactId>
 			<version>${art2.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+    		<artifactId>traceability.model</artifactId>
+			<version>${traceability.version}</version>
+		</dependency>
 		<!-- overide scala dependency from art2 -->
         <dependency>
             <groupId>org.scala-lang</groupId>
