@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>4.2.0</version>
+			<version>${osgi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.art2</groupId>
@@ -92,7 +92,12 @@
 		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
-			<version>2.6.0</version>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.traceability</groupId>
+    		<artifactId>traceability.model</artifactId>
+			<version>${traceability.version}</version>
 		</dependency>
 	</dependencies>
 </project>

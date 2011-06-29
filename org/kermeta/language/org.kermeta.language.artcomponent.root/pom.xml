@@ -23,6 +23,7 @@
     <properties>
         <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
         <traceability.version>2.0.2-SNAPSHOT</traceability.version>
+        <osgi.version>4.2.0</osgi.version>
     </properties>
 	<dependencies>
         <dependency>
