@@ -2,7 +2,7 @@ package pkg{
 	class A {
 		reference myB : B
 		
-		operation main() : Void is do
+		operation main() : kermeta::standard::Void is do
 			myB := B.new
 		end
 	}
