@@ -11,14 +11,11 @@
     <name>language.autocompletion :: classes to deal with autocompletion</name>
 
     <dependencies>    
-    
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
-
-		
          <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>language.autocompletion.api</artifactId>
@@ -27,7 +24,7 @@
  		<dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
-			<version>2.6.0</version>
+			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
@@ -79,5 +76,5 @@
       		</plugin>
         </plugins>
     </build>
-
 </project>
+
