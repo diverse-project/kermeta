@@ -17,7 +17,7 @@
     <groupId>org.kermeta.utils</groupId>
     <artifactId>utils.root</artifactId>
     <packaging>pom</packaging>
-    <version>{$kermeta.version}</version>
+    <version>{$utils.version}</version>
     <name>utils.root :: Root for kermeta utils</name>
 	
 </project>
