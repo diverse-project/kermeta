@@ -17,7 +17,7 @@
     <groupId>org.kermeta.traceability</groupId>
     <artifactId>traceability.root</artifactId>
     <packaging>pom</packaging>
-    <version>{$kermeta.version}</version>
+    <version>{$traceability.version}</version>
     <name>traceability.root :: Root for traceability language</name>
 	
 </project>
