@@ -26,10 +26,10 @@ public class CommandLineTestSuite extends TestSuite {
 		
 		getFiles(new File(folderFullURI), files, filter);
 		
-//		for(File file : files) {
-//			System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
-//			suite.addTest(new CommandLineKermetaCompilerTest(file.getPath(), file.getParent()));
-//		}
+		for(File file : files) {
+			System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
+			suite.addTest(new CommandLineKermetaCompilerTest(file.getPath(), file.getParent()));
+		}
 		
         return suite;
     }
