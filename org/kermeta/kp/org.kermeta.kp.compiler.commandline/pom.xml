@@ -57,6 +57,7 @@
 							org.kermeta.language.resolver.api,
 							org.kermeta.kp.model,
 							org.kermeta.kp.loader.kp,
+							org.kermeta.kp.loader.kp.api,
 							org.kermeta.language.model,
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.xmi,
