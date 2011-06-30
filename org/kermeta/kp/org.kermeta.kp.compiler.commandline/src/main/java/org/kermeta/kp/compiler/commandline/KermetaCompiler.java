@@ -32,8 +32,7 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
-import org.kermeta.kp.editor.util.KpMinimalModelHelper;
-import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
+import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.checker.CheckerImpl;
 import org.kermeta.language.checker.CheckerImpl4Eclipse;
 import org.kermeta.language.checker.api.Checker;
@@ -296,7 +295,7 @@ public class KermetaCompiler {
 				kpSources.add(FileHelpers.StringToURL(indirectURL));
 			}
 			else{
-				String sourceURLWithVariable = ((Source) src).getUrl();
+				String sourceURLWithVariable = src.getUrl();
 				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
 				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
 				if (sourceURLWithVariable.contains("${")){
@@ -461,10 +460,9 @@ public class KermetaCompiler {
 			
 			//End of Resolving
 			return staticsettedMU.getResult();
-		} else {
-			logger.error("Errors have occured during resolve. StaticSetting not executable", this.getClass().getName(), new Throwable());
-			return convertedModelingUnit;
 		}
+		logger.error("Errors have occured during resolve. StaticSetting not executable", this.getClass().getName(), new Throwable());
+		return convertedModelingUnit;
 	}
 	
 	

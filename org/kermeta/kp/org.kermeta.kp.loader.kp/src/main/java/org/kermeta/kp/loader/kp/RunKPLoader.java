@@ -10,7 +10,6 @@
 
 package org.kermeta.kp.loader.kp;
 
-import org.kermeta.kp.loader.kp.api.KpLoaderImpl;
 
 public class RunKPLoader {
 

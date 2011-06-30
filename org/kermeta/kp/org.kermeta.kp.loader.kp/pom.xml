@@ -28,7 +28,6 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-                        	org.kermeta.kp.loader.kp.api,
                         	org.kermeta.kp.loader.kp
                         </Export-Package>
                         <Import-Package>
@@ -41,7 +40,6 @@
 							org.eclipse.emf.ecore.resource.impl,
 							org.eclipse.emf.ecore.util,
 							org.kermeta.kp,
-							org.kermeta.kp.loader.kp,
 							org.kermeta.kp.loader.kp.api,
 							org.osgi.framework;version="[1.5,2)"
 						</Import-Package>
