@@ -10,7 +10,7 @@
 package org::kermeta::language::loader;
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "http://www.kermeta.org/kermeta/2_0_0/"
 
 using kermeta::standard
 using kermeta::persistence
@@ -19,7 +19,7 @@ using org::kermeta::language::structure
 
 class KmLoader {
 	operation load(uriModelKm : String) : ModelingUnit is do
-		var uriMM : String init "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"//FIXME ? http://.....
+		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
    		var repository : EMFRepository init EMFRepository.new
    		repository.registerEcoreFile(uriMM)          
    		var resource : Resource init repository.createResource(uriModelKm, uriMM)
