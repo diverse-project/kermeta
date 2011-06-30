@@ -41,6 +41,7 @@
 							org.eclipse.emf.ecore.util,
 							org.kermeta.kp,
 							org.kermeta.kp.loader.kp.api,
+							org.kermeta.kp.editor.mopp,
 							org.osgi.framework;version="[1.5,2)"
 						</Import-Package>
 		            </manifestEntries>		            

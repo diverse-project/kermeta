@@ -23,16 +23,15 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.editor.mopp.KpResourceFactory;
 import org.kermeta.kp.loader.kp.api.KpLoader;
 
-public class KpLoaderImpl implements org.kermeta.kp.loader.kp.api.KpLoader{
-
+public class KpLoaderImpl implements KpLoader{
 	/**
 	 * @param uriKpResource
 	 */
 	public KermetaProject loadKp(String uriKpResource) {
-		
 		return loadKp(URI.createFileURI(uriKpResource));
-		
 	}
+
+
 	public KermetaProject loadKp(URI uriKpResource) {
 		KermetaProject result = null;
 		KpResourceFactory factory = new KpResourceFactory();
@@ -55,18 +54,16 @@ public class KpLoaderImpl implements org.kermeta.kp.loader.kp.api.KpLoader{
 					result = (KermetaProject) o;
 				}
 			}
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		if (result != null){
-			System.out.println("Succesfully loaded " + result.toString());
-		}else {
+		if(result == null)
 			System.out.println("KermetaProject model result is null");
-		}
+		else
+			System.out.println("Succesfully loaded " + result.toString());
 		return result;
 	}
-	
 }
+
