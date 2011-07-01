@@ -3,8 +3,5 @@ version :  "someVersion"
 group :"group" 
 { 
 	source = "${project.baseUri}/004_HelloWorld.kmt" 
-	
 	dependency "language.library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
 } 
-
- 
