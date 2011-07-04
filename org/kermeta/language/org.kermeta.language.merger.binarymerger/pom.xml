@@ -193,6 +193,7 @@
 			org.kermeta.language.merger.binarymerger
                         </Export-Package>
                         <Require-Bundle>
+            org.kermeta.scala.scala-library,
             fr.irisa.triskell.kermeta.model,
             org.kermeta.language.model,
 			org.kermeta.language.merger.binarymerger.api,
@@ -211,14 +212,7 @@
 			org.eclipse.emf.ecore.xmi.impl,
 			org.kermeta.language.structure,
 			org.osgi.framework;version="[1.5,2)",
-			org.slf4j;version="[1.5,2)",
-			scala,
-			scala.actors,
-			scala.collection,
-			scala.collection.immutable,
-			scala.collection.mutable,
-			scala.reflect,
-			scala.runtime
+			org.slf4j;version="[1.5,2)"
                         </Import-Package>
 		            </manifestEntries>		            
 		          </archive>

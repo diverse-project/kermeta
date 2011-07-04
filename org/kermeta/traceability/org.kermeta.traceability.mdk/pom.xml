@@ -111,6 +111,7 @@
 							org.kermeta.traceability
                         </Export-Package>
                         <Require-Bundle>
+            org.kermeta.scala.scala-library,
             fr.irisa.triskell.kermeta.model,
             org.kermeta.language.model,
             org.kermeta.language.framework.scala
@@ -128,14 +129,7 @@
 			org.kermeta.language.structure,
 			org.kermeta.traceability,
 			org.osgi.framework;version="[1.5,2)",
-			org.slf4j;version="[1.5,2)",
-			scala,
-			scala.actors,
-			scala.collection,
-			scala.collection.immutable,
-			scala.collection.mutable,
-			scala.reflect,
-			scala.runtime
+			org.slf4j;version="[1.5,2)"
                         </Import-Package>
 		            </manifestEntries>		            
 		          </archive>

@@ -143,6 +143,7 @@
 								org.kermeta.language.language.ecore2kmrunner
                         	</Export-Package>
 							<Require-Bundle>
+								org.kermeta.scala.scala-library,
 								fr.irisa.triskell.kermeta.model,
 								org.kermeta.language.model,
 								org.kermeta.traceability.model,
@@ -164,13 +165,6 @@
 								org.kermeta.language.structure,
 								org.osgi.framework;version="[1.5,2)",
 								org.slf4j;version="[1.5,2)",
-								scala,
-								scala.actors,
-								scala.collection,
-								scala.collection.immutable,
-								scala.collection.mutable,
-								scala.reflect,
-								scala.runtime,
 								utils
                         </Import-Package>
 						</manifestEntries>
