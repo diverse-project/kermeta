@@ -99,21 +99,14 @@
 			org.kermeta.language.km2bytecode.embedded.scala
                         </Export-Package>
                         <Require-Bundle>
-            org.kermeta.language.model            
+            org.kermeta.language.model,
+            org.kermeta.scala.scala-library,
+            org.kermeta.scala.scala-compiler
                         </Require-Bundle>
                         <Import-Package>
             org.kermeta.language,
 			org.kermeta.language.structure,
 			org.kermeta.language.behavior,
-			scala,
-			scala.actors,
-			scala.collection,
-			scala.collection.immutable,
-			scala.collection.mutable,
-			scala.reflect,
-			scala.runtime,
-			scala.util.matching,
-			scala.util,
 			k2.io,
 			k2.standard,
 			k2.persistence,
@@ -128,7 +121,6 @@
 			org.eclipse.emf.ecore.xmi,
 			org.eclipse.emf.ecore.xmi.impl,
 			org.slf4j,
-			org.k2.compilo.scala.loader,
 			org.antlr.stringtemplate
                         </Import-Package>
 		            </manifestEntries>		            

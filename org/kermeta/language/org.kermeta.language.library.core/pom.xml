@@ -49,6 +49,9 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Require-Bundle>
+                            org.kermeta.scala.scala-library
+                        </Require-Bundle>
                         <Export-Package>
                         	k2.io,
                         	k2.standard,
@@ -74,13 +77,7 @@
 							org.k2.console,
 							org.kermeta,
 							org.kermeta.language.behavior,
-							org.kermeta.language.structure,
-							scala,
-							scala.collection,
-							scala.collection.immutable,
-							scala.collection.mutable,
-							scala.reflect,
-							scala.runtime
+							org.kermeta.language.structure
 						</Import-Package>
 		            </manifestEntries>		            
 		          </archive>
