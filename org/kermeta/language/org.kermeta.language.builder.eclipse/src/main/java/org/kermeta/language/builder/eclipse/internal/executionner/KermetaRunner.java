@@ -45,14 +45,17 @@ public class KermetaRunner<G,H> extends Thread{
 				try {
 					boolean endProcess = false;
 					while (!endProcess) {
-						runningList.put(concernedResource, currentElement);
-						concernedExecution.execute(concernedResource,currentElement);
-						if (! waitingList.containsKey(concernedResource)) {
-							runningList.remove(concernedResource);
-							endProcess = true;
-						} else {
-							currentElement = waitingList.get(concernedResource);
-							waitingList.remove(concernedResource);
+						try {
+							runningList.put(concernedResource, currentElement);
+							concernedExecution.execute(concernedResource,currentElement);
+						} finally {
+							if (! waitingList.containsKey(concernedResource)) {
+								runningList.remove(concernedResource);
+								endProcess = true;
+							} else {
+								currentElement = waitingList.get(concernedResource);
+								waitingList.remove(concernedResource);
+							}
 						}
 					}
 				} finally {
