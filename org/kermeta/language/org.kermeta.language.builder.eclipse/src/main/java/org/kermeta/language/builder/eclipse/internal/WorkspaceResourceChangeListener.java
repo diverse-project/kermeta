@@ -69,12 +69,24 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener{
 					case IResourceDelta.ADDED:
 						// add a new visitor dedicated to this Kermeta project file
 						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for "+resource.getFullPath(), this.getClass().getName());
-						kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource),new KPBuilder((IFile) resource));
+						final KPBuilder aBuilder = new KPBuilder((IFile) resource);
+						
+						kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource),aBuilder);
+						
+						Job job = new Job("Kermeta builder initializer for "+aBuilder.getKpProjectFile().getRawLocation()) {
+							protected IStatus run(IProgressMonitor monitor) {
+								aBuilder.compile();
+								return Status.OK_STATUS;
+					        }
+					    };
+					    job.setPriority(Job.LONG);
+					    job.schedule();	
+						
 						break;
 					case IResourceDelta.REMOVED:
 						// handle removed resource
 						Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "removing builder for "+resource.getFullPath(), this.getClass().getName());
-						if(builder != null){
+						if(kermetaBuilder != null){
 							kermetaBuilder.kpBuilders.remove(kermetaBuilder.generateIdentifier(resource));
 						}
 						else{
