@@ -25,7 +25,6 @@
         <language.compiler.version>1.4.1-BETA16</language.compiler.version>
         <osgi.version>4.2.0</osgi.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <slf4j.version.range>[1.5,2)</slf4j.version.range>
         <bundle.vendor>IRISA/INRIA</bundle.vendor>
     </properties>
 	
