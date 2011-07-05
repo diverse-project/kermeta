@@ -46,7 +46,7 @@ package structure {
 	aspect class ClassDefinition {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
 			context.currentClassDefinition := self			
-			super(context)
+			super(context)		
 			context.currentClassDefinition := void
 		end
 	}
@@ -268,6 +268,12 @@ package behavior {
 			if result.isVoid then
 				if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
 				var typeDef : TypeDefinition init context.currentModelingUnit.getTypeDefinitionByQualifiedName(self.name)
+				
+				//trying with the package
+				if (typeDef.isVoid) then
+					typeDef := context.currentModelingUnit.getTypeDefinitionByQualifiedName(getQualifiedName(self)+"::"+self.name)
+				end
+				
 				// TODO deal with using
 				if not typeDef.isVoid then
 					var callTypeLiteral : CallTypeLiteral init CallTypeLiteral.new
@@ -288,6 +294,30 @@ package behavior {
 				//raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to resolve UnresolvedCall "+ name, void)
 				stdio.writeln("--------------FAILED to resolve UnresolvedCall "+ name)
 				result := self		
+			end
+		end
+		
+		/**
+		* return the qualified name
+		*/
+		operation getQualifiedName(toFind : KermetaModelElement) : String is do
+			if (not toFind.isVoid) then
+				if (not toFind.container().isInstanceOf(Package)) then
+					result := getQualifiedName(toFind.container().asType(KermetaModelElement))
+				else
+					if (not toFind.container().isVoid) then
+						result := getQualifiedName(toFind.container().asType(KermetaModelElement))
+						if (result != "") then
+							result := result + "::"
+						end
+						result := result + toFind.container().asType(Package).name
+					end
+				end
+				if (result.isVoid()) then
+					result := ""
+				end
+			else
+				result := ""
 			end
 		end
 	}
