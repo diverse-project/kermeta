@@ -47,8 +47,14 @@ object EmbeddedScalaCompiler extends LogAspect {
     if(fsc){
       try scala.tools.nsc.CompileClient.main(compilParams.toArray) catch { case e : Exception => compilationResult = 1 }
     } else {
-      _root_.scala.tools.nsc.Main.process(compilParams.toArray)
-      compilationResult = if (scala.tools.nsc.Main.reporter.hasErrors) 1 else 0
+      try {
+        _root_.scala.tools.nsc.Main.process(compilParams.toArray)
+        compilationResult = if (scala.tools.nsc.Main.reporter.hasErrors) 1 else 0
+      }
+      catch {
+        case e : Exception =>
+          compilationResult = 1
+      }      
     }
 		
     var endTime= System.currentTimeMillis() - startTime
