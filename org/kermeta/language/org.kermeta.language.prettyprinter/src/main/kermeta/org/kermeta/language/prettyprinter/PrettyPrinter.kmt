@@ -1,0 +1,37 @@
+/* $Id:$ 
+ * Creation : July 6, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cbouhour
+ */
+@mainClass "org::kermeta::language::prettyprinter::PrettyPrinter"
+@mainOperation "testMain"
+
+
+package org::kermeta::language::prettyprinter;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "PrettyPrinterAspect.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+class PrettyPrinter
+{
+	operation testMain() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		var folder : String init "platform:/resource/org.kermeta.language.prettyprinter/src/tests/"
+		var baseFileName : String init "toPrettyPrint"
+		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var theModelResource : Resource init repository.getResource(folder+baseFileName+".km")
+       	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
+		       	
+       	var theModelingUnit : org::kermeta::language::structure::ModelingUnit
+       	theModelingUnit ?= theModelResource.one
+       	
+       	stdio.writeln(theModelingUnit.prettyPrint())
+       	
+	end
+}

@@ -1,0 +1,217 @@
+/* $Id:$ 
+ * Creation : July 6, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cbouhour
+ */
+package org::kermeta::language;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+
+package structure{
+
+	aspect class KermetaModelElement{
+		operation prettyPrint() : String is do
+			result := ""
+		end
+	}
+
+	aspect class ModelingUnit{
+		method prettyPrint() : String is do
+			result := ""
+			self.packages.each{ onePackage |
+				result := result + onePackage.prettyPrint()
+			}
+		end
+	}
+	
+	aspect class Package{
+		method prettyPrint() : String is do
+			result := "package "+self.name()+" {\n"
+			self.eachOwnedElement{ oneElement |
+				result := result + oneElement.asType(KermetaModelElement).prettyPrint()
+			}
+			result := result + "}\n"
+		end
+	}
+	
+	aspect class ClassDefinition{
+		method prettyPrint() : String is do
+			result := "class "+self.name()+" {\n"
+			self.eachOwnedElement{ oneElement |
+				result := result + oneElement.asType(KermetaModelElement).prettyPrint()
+			}
+			result := result + "}\n"
+		end
+	}
+	
+	aspect class Property{
+			method prettyPrint() : String is do
+			result := self.name()+" : "+self.type.toString() + "\n"
+		end
+	}
+	
+	aspect class Operation{
+		method prettyPrint() : String is do
+			result := "operation "+self.name()+"("
+			if (not self.ownedParameter.isVoid) then
+				var i : Integer init 0
+				self.ownedParameter.each{ oneParam |
+					if (i!=0) then
+						result := result + ","
+					end 
+					result := result + oneParam.name() + ":" + oneParam.type.toString()
+					i := i + 1
+				}
+			end
+			result := result + ")"
+			result := result + ":" + self.type.toString
+			result := result + " is\n"
+			if (not self.body.isVoid) then
+				result := result + self.body.prettyPrint()
+			end
+			result := result + "\n"
+		end
+	}
+	
+}
+
+package behavior {
+	
+	aspect class Expression {
+		method prettyPrint() : String is do
+			result := ""
+		end
+	}
+	
+	aspect class Block {
+		method prettyPrint() : String is do
+			result := "do\n"
+			if (not self.statement.isVoid) then
+				self.statement.each{ one |
+					result := result + one.prettyPrint()
+				}
+			end
+			result := result + "end\n"
+		end
+	}
+	
+	aspect class VariableDecl {
+		method prettyPrint() : String is do
+			result := "var "+self.identifier+" : "+self.type.toString()
+			if (not self.initialization.isVoid) then
+				result := result + " init " + self.initialization.prettyPrint()
+			end
+			result := result + "\n"
+		end
+	}
+	
+	aspect class Conditional {
+		method prettyPrint() : String is do
+			result := "if ("+self.condition.prettyPrint()+") then\n"
+			result := result + self.thenBody.prettyPrint()
+			if (not self.elseBody.isVoid) then
+				result := result + "else\n"
+				result := result + self.elseBody.prettyPrint()
+			end
+			result := result + "end\n" 
+		end
+	}
+	
+	aspect class Loop {
+		method prettyPrint() : String is do
+			if (not self.initialization.isVoid) then
+				result := "from "+self.initialization.prettyPrint()
+			end
+			result := " until "+self.stopCondition.prettyPrint()+" loop\n"
+			if (not self.body.isVoid) then
+				result := result + self.body.prettyPrint()
+			end
+			result := result + "\n"
+		end
+	}
+	
+	aspect class LambdaExpression{
+		method prettyPrint() : String is do
+			result := "{ "
+			
+			if (not self.parameters.isVoid) then
+				var i : Integer init 0
+				self.parameters.each{ oneParam |
+					if (i!=0) then
+						result := result + ","
+					end 
+					result := result + oneParam.name() + ":" + oneParam.type.toString()
+					i := i + 1
+				}
+			end
+			
+			result := result + " | \n"
+			
+			result := result + self.body.prettyPrint
+			
+			result := result + "}\n"
+		end
+	}
+	
+	aspect class IntegerLiteral {
+		method prettyPrint() : String is do
+			result := self.~value.toString() +"\n"
+		end
+	}
+	
+	aspect class StringLiteral {
+		method prettyPrint() : String is do
+			result := "\""+self.~value +"\"\n"
+		end
+	}
+	
+	aspect class BooleanLiteral {
+		method prettyPrint() : String is do
+			result := self.~value.toString() +"\n"
+		end
+	}
+	
+	aspect class VoidLiteral {
+		method prettyPrint() : String is do
+			result := "Void \n"
+		end
+	}
+	
+	aspect class CallExpression {
+		method prettyPrint() : String is do
+			result := "."+self.name
+			if (not self.parameters.isVoid) then
+				result := result + "("
+				var i : Integer init 0
+				self.parameters.each{ oneParam |
+					if (i!=0) then
+						result := result + ","
+					end 
+					result := result + oneParam.prettyPrint()
+					i := i + 1
+				}
+				
+				result := result + ")"
+			end
+			result := result  + "\n"
+		end
+	}
+	
+	aspect class UnresolvedCall {
+		method prettyPrint() : String is do
+			result := ""
+			if (not self.target.isVoid) then
+				result := self.target.prettyPrint()
+			end
+			result := result + "." + self.name + "\n"
+		end
+	}
+}
