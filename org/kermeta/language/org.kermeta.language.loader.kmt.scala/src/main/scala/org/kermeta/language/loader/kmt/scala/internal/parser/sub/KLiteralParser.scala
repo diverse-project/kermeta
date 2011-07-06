@@ -22,7 +22,7 @@ import scala.collection.JavaConversions._
  */
 trait KLiteralParser extends KAbstractParser {
 
-  def fLiteral : Parser[Expression] = (fVoidLiteral|fStringLiteral|fBooleanLiteral|fNumericLiteral)
+  def fLiteral : Parser[Expression] = (fVoidLiteral|fSuperLiteral|fSelfLiteral|fStringLiteral|fBooleanLiteral|fNumericLiteral)
   def fBooleanLiteral : Parser[Expression] = ("true" ^^^ {
       var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral;newo.setValue(true)
       newo
@@ -30,6 +30,8 @@ trait KLiteralParser extends KAbstractParser {
       var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral;newo.setValue(false)
       newo
     } )
+  private def fSelfLiteral : Parser[Expression] = ( "self" ) ^^^ { BehaviorFactory.eINSTANCE.createSelfExpression() }
+  private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
   private def fVoidLiteral : Parser[Expression] = ( "Void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
