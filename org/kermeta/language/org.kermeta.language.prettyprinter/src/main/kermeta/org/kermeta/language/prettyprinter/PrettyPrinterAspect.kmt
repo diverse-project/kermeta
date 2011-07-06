@@ -37,6 +37,7 @@ package structure{
 			result := "package "+self.name()+" {\n"
 			self.eachOwnedElement{ oneElement |
 				result := result + oneElement.asType(KermetaModelElement).prettyPrint()
+				oneElement
 			}
 			result := result + "}\n"
 		end
@@ -47,6 +48,7 @@ package structure{
 			result := "class "+self.name()+" {\n"
 			self.eachOwnedElement{ oneElement |
 				result := result + oneElement.asType(KermetaModelElement).prettyPrint()
+				oneElement
 			}
 			result := result + "}\n"
 		end

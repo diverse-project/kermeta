@@ -31,7 +31,11 @@ class PrettyPrinter
        	var theModelingUnit : org::kermeta::language::structure::ModelingUnit
        	theModelingUnit ?= theModelResource.one
        	
-       	stdio.writeln(theModelingUnit.prettyPrint())
+       	stdio.writeln(prettyPrint(theModelingUnit))
        	
+	end
+	
+	operation prettyPrint(aModelingUnit : org::kermeta::language::structure::ModelingUnit) : String is do
+		result := aModelingUnit.prettyPrint()
 	end
 }
