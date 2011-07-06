@@ -59,7 +59,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/PRettyPrinter.km</model>
+                            <model>src/generated/km/PrettyPrinter.km</model>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
                         </configuration>
