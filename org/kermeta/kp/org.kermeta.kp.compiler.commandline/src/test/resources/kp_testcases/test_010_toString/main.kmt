@@ -1,0 +1,12 @@
+package pkg{
+	class Test {
+		@main ""
+		operation main() is do
+			toString()
+		end
+		
+		method toString() : kermeta::standard::String is do
+			result := ""
+		end
+	}
+}
