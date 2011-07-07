@@ -39,6 +39,27 @@
 	
 	<build>
         <plugins>
+            <plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+		        <artifactId>gmaven-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <phase>initialize</phase>
+		            <goals>
+		              <goal>execute</goal>
+		            </goals>
+		            <configuration>
+		              <source>
+		                String scalaVersionNoSuffix = "${scala.version}"
+                        int index = "${scala.version}".indexOf("-")
+                        if(index!=-1)
+                          scalaVersionNoSuffix = "${scala.version}".substring(0,index)
+                        project.properties.setProperty('scala.version.nosuffix', scalaVersionNoSuffix)
+		              </source>
+		            </configuration>
+		          </execution>
+		        </executions>
+	   	   </plugin>
             
             <!-- Java compiler plugin -->
             <plugin>
