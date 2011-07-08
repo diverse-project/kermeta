@@ -6,9 +6,7 @@
  * -------------------------------------------------------------------
  * Creation date : 27 juil. 2005
  * Authors : 
- *        Jean-Marc Jezequel <jezequel@irisa.fr>
- * Description : 
- *       Sample of transformation in Kermeta that transform roman number into arabic number  
+ *        Didier Vojtisek 
  */
 
 
@@ -19,7 +17,7 @@ package root_package{
 	{
 		
 	
-	    operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
+	    operation main(str : String) : Void is do 
 	       	
 	       	from var i : Integer init 10
 			until i < 0
@@ -28,10 +26,13 @@ package root_package{
 				kermeta::io::StdIO.write(i.toString)
 				if (i < 5) then
 					kermeta::io::StdIO.writeln(" < 5")
+					if  i == 0  then
+						kermeta::io::StdIO.writeln("Zero reached")
+					end
 				else
 					kermeta::io::StdIO.writeln(" >= 5")
 				end
-				// kermeta::io::StdIO.writeln("   i=" + i.toString)
+				kermeta::io::StdIO.writeln("   i=" + i.toString)
 				i := i - 1 
 			end	 	
 	       kermeta::io::StdIO.writeln("The end")
