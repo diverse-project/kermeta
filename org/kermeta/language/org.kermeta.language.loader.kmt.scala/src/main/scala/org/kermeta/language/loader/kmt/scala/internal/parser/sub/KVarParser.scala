@@ -19,18 +19,16 @@ import scala.collection.JavaConversions._
 /**
  * Sub parser dedicated to parse VariableDecl in KMT textual syntax  
  */
-trait KVarParser extends KAbstractParser {
+trait KVarParser extends KAbstractParser with KGenericTypeParser {
 
-  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ packageName ~ (("init" ~ fStatement)?) ^^ { case id1 ~ _ ~ name ~ initStat  =>
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ genericQualifiedTypeObject ~ (("init" ~ fStatement)?) ^^ { case id1 ~ _ ~ unresType ~ initStat  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       //TYPE GESTURE
       var newtyperef = BehaviorFactory.eINSTANCE.createTypeReference
-      var newtype = StructureFactory.eINSTANCE.createUnresolvedType
-      newo.getContainedType.add(newtype)
-      newtyperef.setName(name)
-      newtype.setTypeIdentifier(name)
-      newtyperef.setType(newtype)
+      newo.getContainedType.add(unresType)
+      newtyperef.setName(unresType.getTypeIdentifier())
+      newtyperef.setType(unresType)
 
       newo.setType(newtyperef)
       initStat match {

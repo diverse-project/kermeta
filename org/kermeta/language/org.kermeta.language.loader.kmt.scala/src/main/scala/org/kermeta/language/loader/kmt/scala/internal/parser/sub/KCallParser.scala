@@ -20,7 +20,7 @@ import scala.collection.JavaConversions._
  * Sub parser dedicated to parse the various way to call something in KMt textual syntax
  *
  */
-trait KCallParser extends KAbstractParser {
+trait KCallParser extends KAbstractParser with KGenericTypeParser {
 
 
   def fCall = resultCall | nCall | firstCall
@@ -40,9 +40,10 @@ trait KCallParser extends KAbstractParser {
       newo
   }
 
-  def firstCall : Parser[UnresolvedCall] = packageName ~ (callFeatureParams?) ^^ { case id ~ params =>
+  def firstCall : Parser[UnresolvedCall] = genericQualifiedTypeObject ~ (callFeatureParams?) ^^ { case unresType ~ params =>
       var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
-      newo.setName(id)
+      newo.setName(unresType.getTypeIdentifier())
+      newo.getGenerics().addAll(unresType.getGenerics())
       params match {
         case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
         case None => 
