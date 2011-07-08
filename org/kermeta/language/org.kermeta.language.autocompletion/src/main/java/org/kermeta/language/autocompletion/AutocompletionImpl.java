@@ -1,5 +1,7 @@
 package org.kermeta.language.autocompletion;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.kermeta.language.autocompletion.api.Autocompletion;
@@ -23,11 +25,6 @@ public class AutocompletionImpl implements Autocompletion {
 	}
 
 	@Override
-	public List<String> getAllOperations() {
-		return accessor.getAllOperations();
-	}
-
-	@Override
 	public List<String> getAllClassDefinition(String thePackages) {
 		return accessor.getAllClassDefinition(thePackages);
 	}
@@ -40,6 +37,11 @@ public class AutocompletionImpl implements Autocompletion {
 	@Override
 	public List<String> getSubPackages(String thePackages) {
 		return accessor.getSubPackages(thePackages);
+	}
+
+	@Override
+	public HashMap<String,ArrayList<String>> getCallExpression(ArrayList<String> theIdentifiers,String thePackage) {
+		return accessor.getCallExpression(theIdentifiers, thePackage);
 	}
 
 }

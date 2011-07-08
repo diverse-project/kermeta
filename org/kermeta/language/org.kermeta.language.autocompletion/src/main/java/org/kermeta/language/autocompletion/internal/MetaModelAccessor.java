@@ -10,7 +10,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Package;
 import org.kermeta.language.structure.Using;
@@ -51,27 +53,13 @@ public class MetaModelAccessor {
 		}
 	}
 	
-	public List<String> getAllOperations() {
-		List<String> result = new ArrayList<String>();
-		try {
-			for (EObject oneOperation : metamodelObjects.get("Operation")) {
-				result.add(((Operation)oneOperation).getName());
-			}
-			return result;
-		} catch (NullPointerException e) {
-			return result;
-		}
-	}
-	
 	public List<String> getAllClassDefinition(String thePackages) {
 		List<String> result = new ArrayList<String>();
 		try {
 			Package concernedPackage = getPackage(thePackages);
 			
 			EList<EObject> objects = concernedPackage.eContents();
-			Iterator<EObject> theIterator = objects.iterator();
-			while (theIterator.hasNext()) {
-				EObject anObject = theIterator.next();
+			for (EObject anObject : objects) {
 				if (anObject.eClass().getName().equals("ClassDefinition")) {
 					result.add(((ClassDefinition)anObject).getName());
 				}
@@ -110,6 +98,44 @@ public class MetaModelAccessor {
 		} catch (NullPointerException e) {
 			return result;
 		}
+	}
+	
+	public HashMap<String,ArrayList<String>> getCallExpression(ArrayList<String> theIdentifiers,String thePackage) {
+
+		HashMap<String,ArrayList<String>> result = new HashMap<String,ArrayList<String>>();
+		
+		Package theCurrentPackage = getPackage(thePackage);
+		List<EObject> theContent = theCurrentPackage.eContents();
+		List<EObject> theNewContent = null;
+		
+		for (int i = theIdentifiers.size()-1;i>=0;i--) {
+			theNewContent = new ArrayList<EObject>();
+			for (EObject anElement : theContent) {
+				if (anElement instanceof NamedElement) {
+					if (((NamedElement)anElement).getName().equals(theIdentifiers.get(i))) {
+						theNewContent.add(anElement);
+					}
+				}
+			}
+			
+			theContent = new  ArrayList<EObject>();
+			for (EObject anElement : theNewContent) {
+				theContent.addAll(anElement.eContents());
+			}
+		}
+		
+		for (EObject anElement : theNewContent) {
+			for (EObject aSubElement : anElement.eContents()) {
+				if (result.get(aSubElement.eClass().getName()) == null) {
+					result.put(aSubElement.eClass().getName(), new ArrayList<String>());
+				}
+				if (aSubElement instanceof NamedElement) {
+					result.get(aSubElement.eClass().getName()).add(((NamedElement)aSubElement).getName());
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	private Package getPackage(String packageToFind) {
