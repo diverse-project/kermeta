@@ -1,15 +1,15 @@
-package pkg{
+package pkg {
 	class Genericity{
 		@main ""
 		operation main() is do 
-			var toto : pkg::Queue<kermeta::standard::String>.new
-			toto.enqueue(kermeta::standard::String.new)
+			var toto : Queue<kermeta::standard::String> init Queue<kermeta::standard::String>.new
+			toto.enqueue("hello world")
 			kermeta::io::StdIO.writeln(toto.dequeue().toString)
 		end
 	}
 	
 	class Queue<G> {
-		reference elements : kermeta::standard::oset G[*]
+		reference elements : kermeta::standard::OrderedSet<G>
 		operation enqueue(e : G) : kermeta::standard::Void is do
 			elements.add(e)
 		end
