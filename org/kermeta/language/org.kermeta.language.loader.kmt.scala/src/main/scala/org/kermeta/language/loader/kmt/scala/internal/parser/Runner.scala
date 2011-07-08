@@ -23,6 +23,7 @@ object Runner{
 
         val input = Source.fromFile(new java.io.File("test.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
 
+        
   //  val input = Source.fromFile(new java.io.File("022_testExpression.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
    //val input = Source.fromFile(new java.io.File("callExpr.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
    //val input = Source.fromFile(new java.io.File("expressionBloc.kmt")).getLines().reduceLeft[String](_ + '\n' + _)

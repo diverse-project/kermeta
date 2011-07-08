@@ -20,7 +20,7 @@ import scala.collection.JavaConversions._
  * Sub parser dedicated to parse the various way to call something in KMt textual syntax
  *
  */
-trait KCallParser extends KAbstractParser with KGenericTypeParser {
+trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser{
 
 
   def fCall = resultCall | nCall | firstCall
@@ -51,6 +51,6 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser {
       newo
   }
 
-  def callFeatureParams = "(" ~> repsep( fStatement,",") <~ ")"
+  def callFeatureParams = "(" ~> repsep( fStatement,",") <~ ")" |  repsep( fLambda,",")  
 
 }

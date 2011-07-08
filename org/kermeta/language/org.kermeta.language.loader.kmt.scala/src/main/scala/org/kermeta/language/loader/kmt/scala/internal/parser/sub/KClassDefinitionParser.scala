@@ -32,12 +32,14 @@ trait KClassDefinitionParser extends KAbstractParser
   def annotation : Parser[Tag]
   def attribute : Parser[Property]
   def operation : Parser[Operation]
+
   /* END CONTRACT */
 
   def abstractModifier = opt("abstract")
   def aspectModifier = opt("aspect")
   def singletonModifier = opt("singleton")
 
+  
   def classDeclKeyword = ( "class" | "singleton" )
 
   def classDecl : Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ classDeclKeyword ~ ident ~ opt(classGenericParems) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ { case aspectM ~ abstractM ~ classKeyword ~ id1 ~params ~ parents ~ _ ~ members ~ _ =>

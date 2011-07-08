@@ -1,30 +1,9 @@
 package org.kermeta.language.loader.kmt.scala;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.JarURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
-//import org.kermeta.art2.framework.MessagePort;
-//import org.kermeta.language.api.messaging.UnifiedMessageFactory;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.language.structure.Tag;
-import org.kermeta.language.loader.kmt.scala.internal.parser.*;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
-import org.kermeta.utils.systemservices.api.reference.TextReference;
-import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
-//import org.kermeta.traceability.TextReference;
-//import org.kermeta.traceability.TraceabilityFactory;
-
-import scala.Option;
 
 public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTparser {
 
@@ -98,6 +77,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
         	return mu;
         }
 
+    	return null;
     }
 	
 }
