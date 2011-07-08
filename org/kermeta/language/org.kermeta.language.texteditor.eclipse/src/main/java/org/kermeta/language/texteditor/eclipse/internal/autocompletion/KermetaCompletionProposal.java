@@ -21,7 +21,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
-public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2, Comparable<KermetaCompletionProposal> {
+public class KermetaCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2, Comparable<KermetaCompletionProposal>{
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;

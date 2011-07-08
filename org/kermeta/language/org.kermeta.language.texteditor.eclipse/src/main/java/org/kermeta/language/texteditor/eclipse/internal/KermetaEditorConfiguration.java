@@ -9,6 +9,9 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import org.eclipse.jface.bindings.keys.KeySequence;
+import org.eclipse.jface.bindings.keys.KeySequenceText;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -44,6 +47,12 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 	   
 	   // Set this processor for each supported content type
 	   assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+	   assistant.enableAutoActivation(true);
+	   //assistant.setAutoActivationDelay(400);
+	   assistant.enableAutoInsert(true);
+	   assistant.setRepeatedInvocationMode(true);
+	   assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
+	   assistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_BELOW);
 	         
 	   // Return the content assistant   
 	   return assistant;

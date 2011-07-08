@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jface.text.BadLocationException;
@@ -23,6 +24,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.graphics.Image;
 import org.kermeta.language.autocompletion.AutocompletionImpl;
 import org.kermeta.language.autocompletion.api.Autocompletion;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
@@ -128,7 +130,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		return "";
 	}
 
-	private String getLastKeywordk(List<IKToken> qualifier) {
+	private String getLastKeyword(List<IKToken> qualifier) {
 		int i = qualifier.size();
 		while (--i >= 0) {
 			if (qualifier.get(i).getClass().getSimpleName().equals("Keyword")) {
@@ -147,26 +149,26 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				if (i+1<qualifier.size()) {
 					if (qualifier.get(i+1).getClass().getSimpleName().equals("Delimiter")) {
 						if (qualifier.get(i+1).toString().equals("::")) {
+							if (!current) {
+								result = new StringBuffer();
+							}
 							current = true;
 							result.append(qualifier.get(i));
 							result.append(qualifier.get(i+1));
 						} else {
 							if (current) {
 								current = false;
-								result = new StringBuffer();
 							}
 						}
 					} else {
 						if (current) {
 							current = false;
-							result = new StringBuffer();
 						}
 					}
 				}
 			} else {
 				if (current && !qualifier.get(i).getClass().getSimpleName().equals("Delimiter")) {
 					current = false;
-					result = new StringBuffer();
 				}
 			}
 		}
@@ -185,7 +187,6 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 		List<String> reserved = theLexer.getReservedWords();   
 		List<String> theVariables = null;
-		List<String> theOperations = null;
 		List<String> theClassDefinition = null;
 		List<String> thePackages = null;
 		
@@ -200,21 +201,23 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			}
 		}
 
-		if (getDelimiter(qualifier).equals("::") || getDelimiter(qualifier).equals(":") || getLastKeywordk(qualifier).equals("init")) {
+		if (getDelimiter(qualifier).equals("::") || getDelimiter(qualifier).equals(":") || getLastKeyword(qualifier).equals("init")) {
 			//Proposal of ClassDef
 			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
+		} else if (getDelimiter(qualifier).equals(".")) {
+			proposeCallExpression(qualifier, documentOffset, propList, qlen);
 		} else if (! isTerminatedbyKeyword(qualifier)) {
 			//Proposal of Keywords and Variables
 			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
 			proposeKeywords(qualifier, documentOffset, propList, qlen, reserved);
 		} else {
-			if (getLastKeywordk(qualifier).equals("reference")) {
+			if (getLastKeyword(qualifier).equals("reference")) {
 				//Proposal of ClassDef
 				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
-			} else if (getLastKeywordk(qualifier).equals("init")) {
+			} else if (getLastKeyword(qualifier).equals("init")) {
 				//Proposal of ClassDef
 				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
@@ -299,10 +302,53 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				int cursor = aPackage.length();
 				if (lastQualifier.length() > 0) {
 					if (aPackage.startsWith(lastQualifier)) {
-						propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/green/package.png"),aPackage,null,null));
+						propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
 					}					   
 				} else {			   
-					propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/green/package.png"),aPackage,null,null));
+					propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
+				}
+			}
+		}
+	}
+	
+	private ArrayList<String> explodeCallExpression(List<IKToken> elements) {
+		
+		ArrayList<String> result = new ArrayList<String>();
+		
+		int i = elements.size()-1;
+		
+		while (i>=0) {
+			if (elements.get(i).getClass().getSimpleName().equals("Delimiter")) {
+				if (! elements.get(i).toString().equals(".")) {
+					return result;
+				}
+			}
+			if (elements.get(i).getClass().getSimpleName().equals("Identifier")) {
+				result.add(elements.get(i).toString());
+			}
+			i--;
+		}
+		
+		return result;
+		
+	}
+	
+	private void proposeCallExpression(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen) {
+		HashMap<String,ArrayList<String>> theCallExpression = null;
+		theCallExpression = myAutocompletion.getCallExpression(explodeCallExpression(qualifier), getLastCompletePackageChain(qualifier, true));
+		if (theCallExpression != null) {
+			for (String currentMetaClass : theCallExpression.keySet()) {
+				System.out.println(currentMetaClass);
+				Image theImage = KermetaImage.getImage("/icons/specific/EmptyExpression.gif");
+				if (currentMetaClass.equals("Operation")) {
+					theImage = KermetaImage.getImage("/icons/red/operation.png");
+				}
+				if (currentMetaClass.equals("Property")) {
+					theImage = KermetaImage.getImage("/icons/red/property.png");
+				}
+				for (String anElement : theCallExpression.get(currentMetaClass)) {
+					int cursor = anElement.length();
+					propList.add(new KermetaCompletionProposal(anElement, documentOffset - qlen, qlen, cursor, theImage));
 				}
 			}
 		}
@@ -316,7 +362,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public char[] getCompletionProposalAutoActivationCharacters() {
-		return new char[] { '.', ' ' };
+		return new char[] { '.', ' ', ':' };
 	}
 
 	@Override
@@ -331,7 +377,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public String getErrorMessage() {
-		return null;
+		return "An error unables Kermeta to assist your content";
 	}
 
 }
