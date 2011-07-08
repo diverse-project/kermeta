@@ -78,13 +78,36 @@ aspect class Operation {
 	 * @param parent
 	 *            the parent of the Operation
 	 */
-	operation initialize(name : String, returnType : Type, parent : Operation) : Operation is do
+	operation initialize(name : String, returnType : Type, parent : Operation, params : kermeta::utils::Hashtable<String,Object>) : Operation is do
 		self.name := name
 		self.superOperation := parent
 		var c : Class
 		self.containedType.add(returnType)
+		params.keys.each{k|
+			var p : Parameter init Parameter.new.initialize(k,params.getValue(k).asType(Type),1)
+			self.ownedParameter.add(p)
+		}
 		result := self
 	end
+}
+
+aspect class Parameter {
+	/**
+	 * Creates a new Parameter for an Operation
+	 * @param name
+	 *			the name of the Parameter
+	 * @param type
+	 *			the type of the Parameter
+	 * @param upper
+	 *			the upper bound of the Parameter
+	 */
+	 operation initialize(name : String, type : Type, upper : Integer) : Parameter is do
+	 	self.name := name
+	 	self.type := type
+	 	self.upper := upper
+	 	self.containedType.add(type)
+	 	result := self
+	 end
 }
 
 aspect class Require {
