@@ -603,6 +603,11 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
          operation notifyAll() : Void is do
 
           end
+          
+        @CompilerIgnore "true"
+         operation times(body : <Integer->Object>) : Void is do
+
+          end
 }
 @CompilerIgnore "true"
 class Boolean {        @CompilerIgnore "true"
