@@ -26,7 +26,7 @@ trait KLambdaParser extends KAbstractParser {
     case ob1 ~ params ~ pipe ~ exps ~ cb1 => {
 	 	  
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
-	 	  
+	 	 
         params.foreach{pname=>
           var newLambdaP = BehaviorFactory.eINSTANCE.createLambdaParameter
           newLambdaP.setName(pname)
@@ -41,13 +41,19 @@ trait KLambdaParser extends KAbstractParser {
   }
 
   def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ packageName ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
-      var newType = StructureFactory.eINSTANCE.createProductType
+      var newType = StructureFactory.eINSTANCE.createFunctionType
       var unresolveType = KmBuildHelper.getOrCreateUnresolvedType(newType,res) //StructureFactory.eINSTANCE.createUnresolvedType
       //unresolveType.setTypeIdentifier(res)
       newType.setKType(unresolveType)
       //newType.getContainedType.add(unresolveType)
-      newType.getType.addAll(params)
-      newType.getContainedType.addAll(params)
+      //newType.getType.addAll(params)
+      var left = StructureFactory.eINSTANCE.createProductType
+      newType.getContainedType.add(left)
+      left.getType.addAll(params) 
+      newType.setLeft(left)
+      newType.setRight(unresolveType)
+      
+      left.getContainedType.addAll(params)
 
       newType
   }

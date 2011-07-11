@@ -34,7 +34,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo.setName(id)
       params match {
         case Some(_ @ par) => for(p <- par) newo.getParameters().add(p)
-        case None =>
+        case None => 
       }
       newo.setTarget(NESTED_NEEDED())
       newo
