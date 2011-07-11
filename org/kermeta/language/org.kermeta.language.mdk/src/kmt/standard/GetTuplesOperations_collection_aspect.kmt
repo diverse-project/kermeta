@@ -1,0 +1,146 @@
+/* $Id:$ 
+ * Creation : April 14, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kermeta::standard;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/standard/RemoveOneOccurrenceOperation_collection_aspect.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsKindOfClassDefinition_object_aspect.kmt"
+
+using kermeta::language::structure
+
+/*
+* Return tuples of elements of self with respect to a collection of class definition
+* NOTE: It seems there is a problem with the addAll operation
+*/
+
+aspect class Collection<G>
+{
+	/*
+	* Return one tuple containing exactly one instance of each ClassDefinition in cdColl or void
+	*/
+	operation getOneCompleteTuple(cdColl : Collection<ClassDefinition>) : Set<G> is do
+		//Final result
+		var tuple : Set<G> init self.getOneTuple(cdColl)
+		if tuple.size() == self.size() then
+			result := tuple
+		else
+			result := void
+		end		
+	end
+	
+	/*
+	* Return one tuple containing one instance of each ClassDefinition in cdColl
+	*/
+	operation getOneTuple(cdColl : Collection<ClassDefinition>) : Set<G> is do
+		//Final result
+		var tuple : Set<G> init OrderedSet<G>.new
+		var cdInstance : G
+		cdColl.each{cd|
+			tuple.add(self.detect{g|g.getMetaClass().classDefinition.qualifiedName == cd.asType(ClassDefinition).qualifiedName})
+		}
+		result := tuple
+	end
+	
+	/*
+	* Return a set of tuples, each tuple containing exactly one instance of each ClassDefinition in cdColl
+	*/
+	operation getUniqueTuples(cdColl : Collection<ClassDefinition>) : Set<Set<G>> is do
+		//Copy of self
+		var selfCopy : Collection<G> init Collection<G>.new
+		//Final result	
+		var tuples : Set<Set<G>> init OrderedSet<Set<G>>.new
+		
+		//TODO problem with selfCopy.addAll() in Collection
+		self.each{g|
+			selfCopy.add(g)
+		}
+		
+		from var foundTuple : Set<G>
+		until selfCopy.size() < cdColl.size()
+		loop
+			foundTuple := selfCopy.getOneCompleteTuple(cdColl)
+			tuples.add(foundTuple)
+			foundTuple.each{g|
+				selfCopy.remove(g)
+			}
+		end
+		
+		//Return the set of tuples
+		result := tuples
+	end
+	
+	/*
+	* Return a set of complte tuples, each tuple containing exactly one instance of each ClassDefinition contained in cdColl
+	*/
+	operation getAllPossibleTuples(cdColl : Collection<ClassDefinition>) : Set<Set<G>> is do
+		//Final result, set of tuples
+		var tuples : Set<Set<G>> init OrderedSet<Set<G>>.new
+		//Collection of ClassDefinition on which call the next iteration, subset of cdColl
+		var nextCdColl : Collection<ClassDefinition> init Collection<ClassDefinition>.new
+		//TODO problem with selfCopy.addAll() in Collection
+		cdColl.each{cd|
+			nextCdColl.add(cd)
+		}
+		//Collection of G on which call the next iteration, subset of self
+		var nextGColl : Collection<G> init Collection<G>.new
+		//TODO problem with selfCopy.addAll() in Collection
+		self.each{g|
+			nextGColl.add(g)
+		}
+	
+		if (not self.isEmpty() and not cdColl.isEmpty()) then
+			var tuple : Set<G>
+			//Take the first ClassDefinition in cdColl
+			var currentCd : ClassDefinition init cdColl.one()
+			//Remove this occurence of the ClassDefinition from nextCdColl
+			nextCdColl.removeOneOccurrence(currentCd)			
+			
+			//Create a new set of tuples (in this case, "1-uples")		
+			var currentIterationResult : Set<Set<G>> init OrderedSet<Set<G>>.new
+			//Look in self for each instance of currentCd
+			self.each{g|
+				if g.isKinfOdClassDefinition(currentCd) then
+					//Add each instance to a new tuple
+					tuple := OrderedSet<G>.new
+					tuple.add(g)
+					
+					//If nextCdColl do not contains currentCd, g cannot appear in the result of the next iterations
+					if not nextCdColl.contains(currentCd) then
+						nextGColl.remove(g)
+					end
+					
+					//Add the new tuple to the set of tuples
+					currentIterationResult.add(tuple)
+				end
+			}
+			//Call recursively eachOfOne on nextGColl with nextCdColl
+			var nextIterationResult : Set<Set<G>> init self.eachOfOne(nextCdColl)
+			
+			//For each tuples created
+			currentIterationResult.each{cIR|
+				//And for each tuples result of the recursive call
+				nextIterationResult.each{nIR|
+					//Create a new tuple containing the elements of each one
+					tuple := OrderedSet<G>.new
+					tuple.addAll(cIR)
+					tuple.addAll(nIR)
+					//If this new tuple contains one element for each ClassDefinition of cdColl
+					if tuple.size() == cdColl.size() then
+						//Then add it to the final result
+						tuples.add(tuple)
+					end
+				}
+			}
+		end
+		
+		//Return the set of tuples
+		result := tuples
+	end
+}
+}

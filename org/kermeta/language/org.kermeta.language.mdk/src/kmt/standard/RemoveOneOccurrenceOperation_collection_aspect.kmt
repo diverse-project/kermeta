@@ -1,0 +1,43 @@
+/* $Id:$ 
+ * Creation : May 26, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package kermeta::standard;
+
+require kermeta
+
+using kermeta::utils
+
+/*
+* Remove one occurrence of element
+*/
+aspect class Collection<G>
+{
+	operation removeOneOccurrence(element : G) is do
+		var nbOccurrencesToAdd : Integer init self.count(element) - 1
+		self.remove(element)
+		from var i : Integer init nbOccurrencesToAdd
+		until i == 0
+		loop
+			self.add(element)
+			i := i - 1
+		end
+	end
+}
+
+aspect class OrderedCollection<G>
+{
+	method removeOneOccurrence(element : G) is do
+		self.removeAt(self.indexOf(self.detect{g|g.equals(element)}))
+	end
+}
+
+aspect class Set<G>
+{
+	method removeOneOccurrence(element : G) is do
+		self.remove(element)
+	end
+}

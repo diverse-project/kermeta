@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : April 14, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kermeta::standard;
+
+require kermeta
+
+using kermeta::language::structure
+
+aspect class Collection<G>
+{
+	/*
+	* Return the subset of self made up of the instances of the ClassDefinitions contained in cdColl
+	*/
+	operation filter(cdColl : Collection<ClassDefinition>) : Set<G> is do
+		var res : Set<G> init OrderedSet<G>.new
+		//For each element g of self
+		self.each{g|
+			cdColl.each{cd|
+				//If g is an instance of one of the ClassDefinition contained in cdColl
+				if g.getMetaClass().typeDefinition.qualifiedName() == cd.asType(ClassDefinition).qualifiedName() then
+					//Then add it to the result set
+					res.add(g)
+				end
+			}
+		}
+		result := res
+	end
+}

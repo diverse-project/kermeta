@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : May 18, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+ 
+package kermeta::standard::helpers;
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::standard
+
+class StringSequenceHelpers
+{
+	/*
+	* NOTE : This operation should be bubbleSort for any Sequence<G : Comparable> but this syntax is currently not accepted by the parser
+	* Return a sorted sequence of strings containing the same strings than the parameter sequence
+	*/
+	operation stringBubbleSort(toSort : Sequence<String>) : Sequence<String> is do
+		from var noChange : Boolean init false
+		until noChange
+		loop
+			noChange := true
+			from var i : Integer init 0
+			until i == toSort.size()-2
+			loop
+				if toSort.at(i) > toSort.at(i+1) then
+					var removed : String init toSort.at(i+1)
+					toSort.removeAt(i+1)
+					toSort.addAt(i, removed)
+					noChange := false
+				end
+			end
+		end
+		result := toSort
+	end
+}
