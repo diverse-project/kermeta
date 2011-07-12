@@ -1,0 +1,38 @@
+package pkg{
+	class Test {
+		attribute attr : kermeta::standard::Integer
+		attribute attr2 : A
+		
+		operation main() is do
+			result := "hello"
+			result.concat(" world")
+			result.concat(" world").concat(" yo")
+			"hello".concat(" world")
+			"hello".concat(" world").concat(" yo")
+			12.plus(15)
+			12.plus(15).plus(100)
+			self.fooTest()
+			self.fooTest().attrA
+			self.attr := 1
+			self.attr := self.attr
+			
+			attr2 := A.new
+			attr2.attrA := B.new
+			
+			attr2.attrA.attrB := 1
+			attr2.attrA.attrB := attr2.attrA.attrB
+		end
+		
+		operation fooTest() : A is do
+			result := A.new
+		end
+	}
+	
+	class A {
+			attribute attrA : B
+	}
+	
+	class B {
+			attribute attrB : kermeta::standard::Integer
+	}
+}
