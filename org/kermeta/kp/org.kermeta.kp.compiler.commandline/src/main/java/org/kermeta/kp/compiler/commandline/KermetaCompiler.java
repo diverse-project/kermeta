@@ -600,6 +600,24 @@ public class KermetaCompiler {
 							}
 						}
 					}
+					if (!tagFound) {
+						// Try to retrieve the model element's container
+						Tag t = searchForNearestTaggedContainingKME(kme);
+						
+						if (t==null) {
+							System.err.println("Impossible to retrieve a container with text traceability");
+						}
+						else {
+							TextReference ref = createTextReference(t);
+							if (ref != null) {
+								logger.logProblem(MessagingSystem.Kind.UserERROR,
+										prob.getMessage(), 
+										this.getClass().getName(), ref);
+							}
+							
+						}
+						
+					}
 				}
 			}
 		}
