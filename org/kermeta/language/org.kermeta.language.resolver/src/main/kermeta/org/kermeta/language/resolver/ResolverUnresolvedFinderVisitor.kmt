@@ -230,8 +230,8 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		error := error + ")"
 											
 		if (ctxt.exceptions) then				
-			var except : ResolverException init ResolverException.new
-			except.message := error
+			var except : ResolverException init ResolverException.new.initialize(error, ctxt.unresolved)
+			//except.message := error
 			raise except
 		else
 			stdio.writeln(error)

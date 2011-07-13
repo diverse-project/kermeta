@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.resolver.ResolverException;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage.Severity;
@@ -80,7 +82,7 @@ public class KmResolverOperations {
     	for (Object o : resolver.getErrors()) {
     		if (o instanceof ResolverException) {
     			ResolverException theError = (ResolverException) o;
-    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by "+theError.getObjectCause(), null,  null) ;
     			result.getProblems().add(pm);
     		}
     	}
@@ -102,7 +104,8 @@ public class KmResolverOperations {
     	for (Object o : resolver.getErrors()) {
     		if (o instanceof ResolverException) {
     			ResolverException theError = (ResolverException) o;
-    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by "+theError.getObjectCause(), null,  
+    					theError.getObjectCause() != null ? new ModelReference((EObject)theError.getObjectCause()) : null) ;
     			result.getProblems().add(pm);
     		}
     	}
@@ -124,7 +127,8 @@ public class KmResolverOperations {
     	for (Object o : resolver.getErrors()) {
     		if (o instanceof ResolverException) {
     			ResolverException theError = (ResolverException) o;
-    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by"+theError.getObjectCause(), null,  null) ;
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by "+theError.getObjectCause(), null,  
+    					theError.getObjectCause() != null ? new ModelReference((EObject)theError.getObjectCause()) : null) ;
     			result.getProblems().add(pm);
     		}
     	}

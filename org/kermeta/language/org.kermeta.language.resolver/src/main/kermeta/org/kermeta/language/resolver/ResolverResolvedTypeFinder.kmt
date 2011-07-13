@@ -34,6 +34,7 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 				except.message := except.message + tp.toString + " "
 			}
 			except.message := except.message + ">"
+			except.objectCause := self
 			raise except
 		end
 		var typeParamBinding : TypeVariableBinding
