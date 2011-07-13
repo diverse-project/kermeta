@@ -1,0 +1,139 @@
+<!-- $Id$  -->
+<!-- License    : EPL 									 -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.kermeta.utilities.eclipse</groupId>
+  <artifactId>utilities.eclipse.jface</artifactId>
+  <version>2.0.1-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+  <name>Jface Utilities</name>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources><resource><directory>src/main/resources</directory></resource></resources>
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin> 
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+					<Bundle-SymbolicName>org.kermeta.utilities.eclipse.jface</Bundle-SymbolicName> 
+                   	<Bundle-Classpath>.</Bundle-Classpath>
+					<Export-Package>org.kermeta.utilities.eclipse.jface.*</Export-Package>
+					<Require-Bundle>
+							org.eclipse.core.runtime,
+							org.eclipse.ui
+                    </Require-Bundle>
+					<Import-Package>
+							!org.eclipse.core.resources,
+							!org.eclipse.core.runtime, 
+							!org.eclipse.ui.*,
+							!org.eclipse.jface.*,
+							*
+					</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<!-- Synch MANIFEST for eclipse user -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/META-INF" failonerror="false">
+                                    <fileset dir="${project.build.outputDirectory}/META-INF" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+		</plugins>
+	</build>
+	
+	<dependencies>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.core.runtime</artifactId>
+            <version>[3.5.0.v20090525,4.0.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.equinox.common</artifactId>
+            <version>[3.5.1.R35x_v20090807-1100,4.0.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.jface</artifactId>
+            <version>[3.5.2.M20100120-0800,4.0.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.swt</artifactId>
+            <version>[3.5.2.v3557f,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+            <version>3.5.2.v3557f</version>
+        </dependency>
+		<dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.ui</artifactId>
+            <version>[3.5.2.M20100120-0800,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.ui.workbench</artifactId>
+            <version>[3.5.2.M20100113-0800,)</version>
+        </dependency>
+	</dependencies>
+	
+	
+    <scm>
+    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</connection>
+    	<developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</developerConnection>
+    	<url>http://gforge.inria.fr/scm/viewvc.php/tags/utilities.eclipse.jface-2.0.0?root=kermeta</url>
+  	</scm>
+	
+	<repositories>
+        <repository>
+            <id>kermeta Public</id>
+            <url>http://www.kermeta.org/maven2</url>
+        </repository>
+        <repository>
+            <id>kermeta PublicSnapShots</id>
+            <url>http://www.kermeta.org/maven2-snapshots</url>
+        </repository>
+     </repositories>
+	<distributionManagement>
+		<repository>
+      		<id>tipimouss-local-maven-repository</id>
+      		<name>Tipimouss Local release repository</name>
+      		<url>file:/var/www/html/maven2</url>
+      		<uniqueVersion>false</uniqueVersion>
+    	</repository>
+    	<snapshotRepository>
+      		<id>tipimouss-local-maven-snapshot-repository</id>
+      		<name>Tipimouss Local  snapshot repository</name>
+      		<url>file:/var/www/html/maven2-snapshots</url>
+      		<uniqueVersion>false</uniqueVersion>
+    	</snapshotRepository>
+	</distributionManagement>
+</project>
