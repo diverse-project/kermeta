@@ -63,7 +63,7 @@ public class ModelingUnitLoader {
 		if (urlString.endsWith(".kmt")) {
 			try {
 				// Flush all problems marked on the file
-				logger.flushAllProblems(new URL(urlString));
+				// done in a more clever way  // logger.flushAllProblems(new URL(urlString));
 
 				mu = this.loadKMT(urlString);
 				if(saveIntermediateFiles && mu != null){

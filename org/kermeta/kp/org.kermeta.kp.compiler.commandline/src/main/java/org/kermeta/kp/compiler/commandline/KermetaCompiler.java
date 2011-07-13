@@ -180,7 +180,9 @@ public class KermetaCompiler {
 			projectName = kp.getName();
 		}
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
-		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, varExpander, dirtyMU);
+		ArrayList<URL> kpSources = getSources(kp,varExpander);		
+		flushProblems(kpSources);
+		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kpSources,kp.getName(), dirtyMU);
 		
 		logger.progress("KermetaCompiler.kp2bytecode", "Merging "+ modelingUnits.size()+" files...", this.getClass().getName(), 1);
 		ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
@@ -347,8 +349,7 @@ public class KermetaCompiler {
 		return kpSources;
 	}
 	
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL,ModelingUnit> dirtyMU) throws IOException {
-		ArrayList<URL> kpSources = getSources(kp,varExpander);
+	public List<ModelingUnit> getSourceModelingUnits(ArrayList<URL> kpSources, String projectName, HashMap<URL,ModelingUnit> dirtyMU) throws IOException {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 		
 		for (URL oneURL : kpSources) {
@@ -360,7 +361,7 @@ public class KermetaCompiler {
 				if (mu != null) {
 					if(mu.getName() == null){
 						// force ModelingUnit name to the one provided in the kp
-						mu.setName(kp.getName());
+						mu.setName(projectName);
 					}
 					modelingUnits.add(mu);
 				}
@@ -371,6 +372,10 @@ public class KermetaCompiler {
 		}
 		
 		return modelingUnits;
+	}
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL,ModelingUnit> dirtyMU) throws IOException {
+		ArrayList<URL> kpSources = getSources(kp,varExpander);		
+		return getSourceModelingUnits(kpSources,kp.getName(), dirtyMU);
 	}
 	
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
@@ -557,7 +562,7 @@ public class KermetaCompiler {
 		return diags;
 	}
 	
-	private void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
+	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
 		//TODO Retrieve faulty objects text reference and logProblem
 		
 		for (ResultProblemMessage prob : eprMu.getProblems()) {
@@ -623,7 +628,7 @@ public class KermetaCompiler {
 		}
 	}
 	
-	private void processCheckingDiagnostics(DiagnosticModel diags) {
+	protected void processCheckingDiagnostics(DiagnosticModel diags) {
 
 		//System.err.println("processing diagnostics : " + diags.getDiagnostics().size());
 		
@@ -704,8 +709,25 @@ public class KermetaCompiler {
 		
 		
 	}
+	/**
+	 * Flush the problems marker related to this kp
+	 */
+	protected void flushProblems(ArrayList<URL> kpSources){
+		
+		for (URL oneURL : kpSources) {
+			// flush compiler general problems
+			logger.flushProblem(this.getClass().getName(),oneURL);
+			// flush parser problems
+			logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP,oneURL);
+			// flush merger problems
+			// flush resolver problems
+			logger.flushProblem(KmResolver.LOG_MESSAGE_GROUP,oneURL);
+			// flush km2scala problems
+			// flush scala2bytecode problems
+		}
+	}
 	
-	private Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
+	protected Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
 		
 		KermetaModelElement currentElement = null;
 		KermetaModelElement container = (KermetaModelElement)kme.eContainer();
