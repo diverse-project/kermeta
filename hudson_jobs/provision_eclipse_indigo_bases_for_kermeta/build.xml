@@ -7,7 +7,7 @@
 	<property name="eclipse.native.base.url.release.folder" value="R-3.7-201106131736"/>
 	<property name="eclipse.native.base.url.release.number" value="3.7"/>
 	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-linux-gtk-x86_64.tar.gz"/>
-	<property name="eclipse.native.equinox.version" value="1.1.1.R36x_v20101122_1400"/>
+	<property name="eclipse.native.equinox.version" value="1.2.0.v20110502"/>
 	<property name="eclipse.code.name" value="indigo"/>
 	<!--
 	<property name="eclipse.native.version.name" value="win32"/>
