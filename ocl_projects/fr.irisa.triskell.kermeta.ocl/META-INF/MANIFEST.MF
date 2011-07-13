@@ -8,7 +8,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.interpreter,
- net.sourceforge.lpg.lpgjavaruntime,
  org.eclipse.ui.ide,
  org.kermeta.eclipse.ocl.parser
 Bundle-ActivationPolicy: lazy

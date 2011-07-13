@@ -3,8 +3,7 @@ Ant-Version: Apache Ant 1.7.0
 Created-By: 1.5.0_10-b03 (Sun Microsystems Inc.)
 Bundle-Activator: org.eclipse.ocl.internal.OCLPlugin$Implementation
 Import-Package: com.ibm.icu.lang;version="[4.0.0,5.0.0)";resolution:=optional,
- com.ibm.icu.text;version="[4.0.0,5.0.0)";resolution:=optional,
- lpg.lpgjavaruntime;version="[1.0.0,3.0.0)"
+ com.ibm.icu.text;version="[4.0.0,5.0.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.ocl,
  org.eclipse.ocl.cst,
@@ -34,7 +33,8 @@ Export-Package: org.eclipse.ocl,
 Bundle-Version: 1.4.0
 Bundle-ActivationPolicy: lazy
 Bundle-Name: %Plugin.name
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200803061910.jar
 Bundle-ManifestVersion: 2
 Bundle-Vendor: %Plugin.providerName
 Bundle-SymbolicName: org.kermeta.eclipse.ocl.parser;singleton:=true
