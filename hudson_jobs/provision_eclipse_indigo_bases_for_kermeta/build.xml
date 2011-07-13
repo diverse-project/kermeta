@@ -4,10 +4,11 @@
 	<!-- Change this according to the computer running the script -->
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url.release.folder" value="R-3.6.2-201102101200"/>
-	<property name="eclipse.native.base.url.release.number" value="3.6.2"/>
+	<property name="eclipse.native.base.url.release.folder" value="R-3.7-201106131736"/>
+	<property name="eclipse.native.base.url.release.number" value="3.7"/>
 	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-linux-gtk-x86_64.tar.gz"/>
 	<property name="eclipse.native.equinox.version" value="1.1.1.R36x_v20101122_1400"/>
+	<property name="eclipse.code.name" value="indigo"/>
 	<!--
 	<property name="eclipse.native.version.name" value="win32"/>
 	<property name="eclipse.native.archive.extension" value="zip"/>
@@ -15,13 +16,13 @@
 	-->
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
-	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/> -->
-	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip"/> -->
+	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/> -->
+	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base.zip"/> -->
 	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
 	<property name="equinox.jar" value="org.eclipse.equinox.launcher_${eclipse.native.equinox.version}.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
-	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/helios"/>
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/${eclipse.code.name}"/>
 	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.6/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
@@ -148,14 +149,14 @@
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<antcall target="create_target_base">
 			<param name="eclipse.base.dir" value="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
 		</antcall>
 		
 		<!-- get log4j plugin from Kermeta site -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.apache.log4j"/>
 			<param name="feature.repository" value="http://www.kermeta.org/update"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
   		</antcall>
 		
 		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
@@ -164,56 +165,56 @@
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.eclipse.sdk.feature.group, org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt.feature.group, org.eclipse.zest.feature.group, org.eclipse.stp.sca.feature.feature.group, org.eclipse.stp.sca.feature.xmleditors.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
   		</antcall>
 		
 		<!-- FROM TOPCASED -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.topcased.modeler.uml.feature.group, org.topcased.dependencies.feature.group"/>
 			<param name="feature.repository" value="${topcased.official.repository}"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
   		</antcall>
 		
 		<!-- FIND BUGS -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
 			<param name="feature.repository" value="http://findbugs.cs.umd.edu/eclipse"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
   		</antcall>
 
 		<!-- FROM EMFTEXT -->
 		<antcall target="provision_feature">
 		    		<param name="feature.name" value="org.emftext.access.feature.group, org.emftext.sdk.feature.group, org.emftext.commons.antlr3_1_1.feature.group"/>
 					<param name="feature.repository" value="http://reuseware.org/update"/>
-					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
 		</antcall>
 		<!-- FROM m2eclipse.sonatype.org -->
 		<antcall target="provision_feature">
 		    		<param name="feature.name" value="org.maven.ide.eclipse.feature.feature.group"/>
 					<param name="feature.repository" value="http://m2eclipse.sonatype.org/sites/m2e"/>
-					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
 		</antcall>
 		<!-- FROM OTHER UPDATE SITE -->
 
 		<echo>Additional install in the dropin folder - should be replaced later by proper installation </echo>			
-		<copy todir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base/eclipse/dropins">
+		<copy todir="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base/eclipse/dropins">
 			<fileset dir="${env.WORKSPACE}/build/dropins"></fileset>
 		</copy>
 
-		<delete file="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.${archive.extension}" failonerror="false"/>
+		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base.${archive.extension}" failonerror="false"/>
 		<antcall target="compress.${archive.extension}"/>		
 	</target>
 	<target name="compress.tar.gz">
-			<tar destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.tar.gz" 
+			<tar destfile="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base.tar.gz" 
 				compression="gzip"
 				longfile="gnu">
-				<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base">
+				<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base">
 				</fileset>
 			</tar>
 	</target>
 	<target name="compress.zip">
-		<zip destfile="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base.zip">
-			<fileset dir="${env.WORKSPACE}/build/kermeta_helios_${eclipse.version.name}_base"></fileset>
+		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"></fileset>
 		</zip>
 	</target>
 	<target name="provision_feature" >
