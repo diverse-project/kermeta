@@ -121,7 +121,7 @@
 		<!-- <get src="http://repo1.maven.org/maven2/org/apache/aries/blueprint/org.apache.aries.blueprint/0.1-incubating/org.apache.aries.blueprint-0.1-incubating.jar" 
 						dest="${env.WORKSPACE}/build/dropins/org.apache.aries.blueprint-0.1-incubating.jar"
 						usetimestamp="true"/> -->
-		<get src="http://maven.irisa.fr/artifactory/org/kermeta/utils/utils.slf4j.eclipse/2.0.1-SNAPSHOT/utils.slf4j.eclipse-2.0.1-SNAPSHOT.jar" 
+		<get src="http://maven.irisa.fr/artifactory/repo/org/kermeta/utils/utils.slf4j.eclipse/2.0.1-SNAPSHOT/utils.slf4j.eclipse-2.0.1-SNAPSHOT.jar" 
 						dest="${env.WORKSPACE}/build/dropins/org.kermeta.utils.slf4j.eclipse-2.0.1-SNAPSHOT.jar"
 						usetimestamp="true"/>
 		<get src="http://maven.irisa.fr/artifactory/repo/org/kermeta/utils/utils.provisionner4eclipse/2.0.1-SNAPSHOT/utils.provisionner4eclipse-2.0.1-SNAPSHOT.jar" 
