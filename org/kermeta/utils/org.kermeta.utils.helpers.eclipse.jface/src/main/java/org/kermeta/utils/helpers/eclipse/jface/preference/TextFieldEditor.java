@@ -10,7 +10,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.kermeta.utilities.eclipse.jface.preference;
+package org.kermeta.utils.helpers.eclipse.jface.preference;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.core.runtime.Assert;

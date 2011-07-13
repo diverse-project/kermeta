@@ -1,7 +1,7 @@
 /*
     Created on 27-May-2004
  */
-package org.kermeta.utilities.eclipse.jface.preference;
+package org.kermeta.utils.helpers.eclipse.jface.preference;
 
 
 import org.eclipse.jface.preference.FileFieldEditor;

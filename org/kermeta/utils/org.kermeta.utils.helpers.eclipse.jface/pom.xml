@@ -3,11 +3,17 @@
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.kermeta.utilities.eclipse</groupId>
-  <artifactId>utilities.eclipse.jface</artifactId>
+  <groupId>org.kermeta.utils</groupId>
+  <artifactId>utils.helpers.eclipse.jface</artifactId>
+  <packaging>bundle</packaging>  
+  <name>Jface helpers Utilities</name>
   <version>2.0.1-SNAPSHOT</version>
-  <packaging>bundle</packaging>
-  <name>Jface Utilities</name>
+  <parent>
+		<artifactId>kermeta.root</artifactId>
+		<groupId>org.kermeta</groupId>
+		<version>2.0-SNAPSHOT</version>
+	</parent>
+    
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources><resource><directory>src/main/resources</directory></resource></resources>
@@ -28,9 +34,9 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-					<Bundle-SymbolicName>org.kermeta.utilities.eclipse.jface</Bundle-SymbolicName> 
+					<Bundle-SymbolicName>org.kermeta.utils.helpers.eclipse.jface</Bundle-SymbolicName> 
                    	<Bundle-Classpath>.</Bundle-Classpath>
-					<Export-Package>org.kermeta.utilities.eclipse.jface.*</Export-Package>
+					<Export-Package>org.kermeta.utils.helpers.eclipse.jface.*</Export-Package>
 					<Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.ui
@@ -91,7 +97,7 @@
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
-            <version>3.5.2.v3557f</version>
+            <version>[3.5.2.v3557f,)</version>
         </dependency>
 		<dependency>
             <groupId>org.kermeta.eclipse</groupId>
@@ -112,16 +118,7 @@
     	<url>http://gforge.inria.fr/scm/viewvc.php/tags/utilities.eclipse.jface-2.0.0?root=kermeta</url>
   	</scm>
 	
-	<repositories>
-        <repository>
-            <id>kermeta Public</id>
-            <url>http://www.kermeta.org/maven2</url>
-        </repository>
-        <repository>
-            <id>kermeta PublicSnapShots</id>
-            <url>http://www.kermeta.org/maven2-snapshots</url>
-        </repository>
-     </repositories>
+	
 	<distributionManagement>
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
