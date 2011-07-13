@@ -4,10 +4,15 @@
     <artifactId>utils.provisionner4eclipse</artifactId>
     <packaging>bundle</packaging>
     <name>Provisionner for Eclipse</name>
-    <url>http://maven.apache.org</url>
 
     <groupId>org.kermeta.utils</groupId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.1-SNAPSHOT</version>
+
+	<parent>
+		<artifactId>kermeta.root</artifactId>
+		<groupId>org.kermeta</groupId>
+		<version>2.0-SNAPSHOT</version>
+	</parent>
 
     <build>
     	<!-- Add resources from the plugin structure -->
@@ -56,7 +61,7 @@
 							!org.eclipse.ui.*,
 							!org.eclipse.jface.*,
 							!org.eclipse.swt.*,
-							org.kermeta.utilities.eclipse.jface.preference,
+							org.kermeta.utils.helpers.eclipse.jface.preference,
                         	org.osgi.framework;version="[1.0,3.0)",
                         	org.ops4j.pax.url.mvn;version="[1.0,3.0)"
                         </Import-Package>
@@ -91,8 +96,8 @@
     <dependencies>
         
         <dependency>
-            <groupId>org.kermeta.utilities.eclipse</groupId>
-            <artifactId>utilities.eclipse.jface</artifactId>
+            <groupId>org.kermeta.utils</groupId>
+            <artifactId>utils.helpers.eclipse.jface</artifactId>
             <version>[2.0.0-SNAPSHOT,)</version>
         </dependency>
        
@@ -151,7 +156,7 @@
         <dependency>
             <groupId>org.kermeta.eclipse</groupId>
             <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
-            <version>3.5.2.v3557f</version>
+            <version>[3.5.2.v3557f,)</version>
         </dependency>
 		<dependency>
             <groupId>org.kermeta.eclipse</groupId>
@@ -166,34 +171,12 @@
     </dependencies>
     
     
-    <repositories>
-        <repository>
-            <id>kermeta Public</id>
-            <url>http://www.kermeta.org/maven2</url>
-        </repository>
-        <repository>
-            <id>kermeta PublicSnapShots</id>
-            <url>http://www.kermeta.org/maven2-snapshots</url>
-        </repository>
-    </repositories>
+    
     <scm>
-    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse</connection>
-    	<developerConnection>scm:svn:svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse</developerConnection>
-    	<url>http://gforge.inria.fr/scm/viewvc.php/trunk/utilities_projects/org.kermeta.utils.provisionner4eclipse/?root=kermeta</url>
+    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/utils/org.kermeta.utils.provisionner4eclipse</connection>
+    	<developerConnection>scm:svn:svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/utils/org.kermeta.utils.provisionner4eclipse</developerConnection>
+    	<url>http://gforge.inria.fr/scm/viewvc.php/trunk/org/kermeta/utils/org.kermeta.utils.provisionner4eclipse/?root=kermeta</url>
   	</scm>
     
-	<distributionManagement>
-		<repository>
-      		<id>tipimouss-local-maven-repository</id>
-      		<name>Tipimouss Local release repository</name>
-      		<url>file:/var/www/html/maven2</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</repository>
-    	<snapshotRepository>
-      		<id>tipimouss-local-maven-snapshot-repository</id>
-      		<name>Tipimouss Local  snapshot repository</name>
-      		<url>file:/var/www/html/maven2-snapshots</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</snapshotRepository>
-	</distributionManagement>
+	
 </project>

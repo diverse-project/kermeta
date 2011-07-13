@@ -14,7 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
-import org.kermeta.utilities.eclipse.jface.preference.HelpfulTextFieldEditor;
+import org.kermeta.utils.helpers.eclipse.jface.preference.HelpfulTextFieldEditor;
 import org.kermeta.utils.provisionner4eclipse.Activator;
 import org.kermeta.utils.provisionner4eclipse.Provisionner;
 

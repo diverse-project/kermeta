@@ -3,7 +3,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 10 août 2010
+* Creation date : 10 aout 2010
 * Authors : 
 *			Didier Vojtisek <didier.vojtisek@inria.fr>
 */
