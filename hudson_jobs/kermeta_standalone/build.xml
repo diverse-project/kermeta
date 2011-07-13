@@ -41,8 +41,8 @@
 		<delete dir="${latest.full.kermeta.dir}/eclipse"></delete>
 	</target>
 	<target name="get_latest">	
-		<mkdir dir="${latest.full.kermeta.dir}"/>			
-		<get src="http://tipimouss.irisa.fr:8090/view/KermetaRelease/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip" 
+		<mkdir dir="${latest.full.kermeta.dir}"/>		          
+		<get src="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip" 
 			dest="${latest.full.kermeta.dir}/org.kermeta.studio.main.feature-DevelopmentBuild.zip"
 			usetimestamp="true"/>
 		<unzip dest="${latest.full.kermeta.dir}">
