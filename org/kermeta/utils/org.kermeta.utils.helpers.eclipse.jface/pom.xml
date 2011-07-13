@@ -111,26 +111,6 @@
         </dependency>
 	</dependencies>
 	
-	
-    <scm>
-    	<connection>scm:svn:http://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</connection>
-    	<developerConnection>scm:svn:https://scm.gforge.inria.fr/svn/kermeta/tags/utilities.eclipse.jface-2.0.0</developerConnection>
-    	<url>http://gforge.inria.fr/scm/viewvc.php/tags/utilities.eclipse.jface-2.0.0?root=kermeta</url>
-  	</scm>
-	
-	
-	<distributionManagement>
-		<repository>
-      		<id>tipimouss-local-maven-repository</id>
-      		<name>Tipimouss Local release repository</name>
-      		<url>file:/var/www/html/maven2</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</repository>
-    	<snapshotRepository>
-      		<id>tipimouss-local-maven-snapshot-repository</id>
-      		<name>Tipimouss Local  snapshot repository</name>
-      		<url>file:/var/www/html/maven2-snapshots</url>
-      		<uniqueVersion>false</uniqueVersion>
-    	</snapshotRepository>
-	</distributionManagement>
+
+		
 </project>
