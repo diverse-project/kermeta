@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.kermeta.language</groupId>
+	<artifactId>language.documentation</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>language.documentation</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+			<!-- exemple : http://www.springsurf.org/sites/1.0.0-RC2/spring-surf-devtools/spring-surf-doc-plugin/examples/springsurf.html -->
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<version>2.0.13</version>
+				<executions>
+					<execution>
+						<id>single-page</id>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<configuration>
+							<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html.xsl</htmlCustomization> 
+								<postProcess> <move todir="${basedir}/target/site/reference/html-single"> 
+								<fileset dir="${basedir}/target/docbkx/html"> <include name="index.html" 
+								/> </fileset> </move> <copy todir="${basedir}/target/site/reference/html-single"> 
+								<fileset dir="${basedir}/src/docbkx/resources"> <include name="**/*.css" 
+								/> <include name="**/*.png" /> <include name="**/*.gif" /> <include name="**/*.jpg" 
+								/> </fileset> </copy> <copy todir="${basedir}/target/site/reference/html-single"> 
+								<fileset dir="${basedir}/src/site/docbook/reference"> <include name="**/*.png" 
+								/> <include name="**/*.gif" /> <include name="**/*.jpg" /> </fileset> </copy> 
+								</postProcess> -->
+							<preProcess>
+								<copy todir="target/docbkx/html/KerMeta-Manual_figures">
+									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
+								</copy>
+								<!-- <copy todir="target/docbkx/html/css" file="${project.basedir}/../../ow2-style.css" 
+									/> -->
+							</preProcess>
+						</configuration>
+						<phase>pre-site</phase>
+					</execution>
+					<execution>
+						<id>single-pdf</id>
+						<goals>
+							<goal>generate-pdf</goal>
+						</goals>
+						<configuration>
+							<imgSrcPath>src/docbkx/</imgSrcPath>
+							<admonGraphicsPath>src/docbkx/resources/admonitions/</admonGraphicsPath>
+							<!-- <postProcess> <copy file="${basedir}/target/docbkx/pdf/index.pdf" 
+								tofile="${basedir}/target/site/reference/pdf/spring-surf-docs.pdf" failonerror="false" 
+								/> </postProcess> -->
+						</configuration>
+						<phase>pre-site</phase>
+					</execution>
+					<execution>
+						<id>multi-page</id>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<configuration>
+							<chunkedOutput>true</chunkedOutput>
+							<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html_chunk.xsl</htmlCustomization> 
+								<postProcess> <move todir="${basedir}/target/site/reference"> <fileset dir="${basedir}/target/docbkx"> 
+								<include name="**/*.html" /> </fileset> </move> <copy todir="${basedir}/target/site/reference/html"> 
+								<fileset dir="${basedir}/src/docbkx/resources"> <include name="**/*.css" 
+								/> <include name="**/*.png" /> <include name="**/*.gif" /> <include name="**/*.jpg" 
+								/> </fileset> </copy> <copy todir="${basedir}/target/site/reference/html"> 
+								<fileset dir="${basedir}/src/site/docbook/reference"> <include name="**/*.png" 
+								/> <include name="**/*.gif" /> <include name="**/*.jpg" /> </fileset> </copy> 
+								</postProcess> -->
+						</configuration>
+						<phase>pre-site</phase>
+					</execution>
+					<!-- <execution> <goals> <goal>generate-html</goal> <goal>generate-pdf</goal> 
+						<goal>generate-eclipse</goal> </goals> <phase>pre-site</phase> <configuration> 
+						<includes>*.docb.xml</includes> -->
+					<!-- This copies content (images, etc) for the HTML version -->
+					<!-- <preProcess> <copy todir="target/docbkx/html/KerMeta-Manual_figures"> 
+						<fileset dir="src/docbkx/KerMeta-Manual_figures" /> </copy> -->
+					<!-- <copy todir="target/docbkx/html/css" file="${project.basedir}/../../ow2-style.css" 
+						/> -->
+					<!-- </preProcess> -->
+					<!-- Any parameters specific to HTML version go here -->
+					<!-- <htmlStylesheet>css/ow2-style.css</htmlStylesheet> <imgSrcPath>images/</imgSrcPath> -->
+					<!-- </configuration> </execution> -->
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.docbook</groupId>
+						<artifactId>docbook-xml</artifactId>
+						<version>4.4</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.xmlgraphics</groupId>
+						<artifactId>fop</artifactId>
+						<version>1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
