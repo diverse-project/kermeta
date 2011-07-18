@@ -111,6 +111,12 @@ public class KMTOutputBuilder {
 		} else if ( kermetaUnit.getUri().startsWith("platform:/plugin") ) {
 			uri = uri.replace("platform:/plugin/", "");
 			uri = rep + uri;
+		} else if ( kermetaUnit.getUri().startsWith("file:/") ) {
+			int index = kermetaUnit.getUri().lastIndexOf(":/");
+			uri = rep + kermetaUnit.getUri().substring(index+2);
+		} else if ( kermetaUnit.getUri().startsWith("jar:file:/") ) {
+			int index = kermetaUnit.getUri().lastIndexOf(":/");
+			uri = rep + kermetaUnit.getUri().substring(index+2);
 		} else {
 			uri = uri.replace(pathToRemove + "/", "");
 			uri = rep + uri;
