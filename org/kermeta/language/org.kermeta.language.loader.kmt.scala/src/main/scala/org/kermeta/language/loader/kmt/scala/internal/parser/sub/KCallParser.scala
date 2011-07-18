@@ -23,11 +23,7 @@ import scala.collection.JavaConversions._
 trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser{
 
 
-  def fCall = resultCall | nCall | firstCall
-
-  def resultCall = "result" ^^^ {
-    BehaviorFactory.eINSTANCE.createCallResult
-  }
+  def fCall = nCall | firstCall
 
   def nCall = "." ~> ident ~ (callFeatureParams?) ^^ { case id ~ params =>
       var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
@@ -51,6 +47,6 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo
   }
 
-  def callFeatureParams = "(" ~> repsep( fStatement,",") <~ ")" |  repsep( fLambda,",")  
+  def callFeatureParams = "(" ~> repsep( fStatement,",") <~ ")"  | ( fLambda ^^ { case l => List(l) } )
 
 }

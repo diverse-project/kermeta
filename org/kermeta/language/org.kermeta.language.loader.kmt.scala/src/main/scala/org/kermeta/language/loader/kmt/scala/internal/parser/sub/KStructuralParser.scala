@@ -30,6 +30,9 @@ trait KStructuralParser extends KAbstractParser {
       p0(in0) match {
         case Success(x, rest)   => {
             x match {
+              case cf : Literal => {
+                  elems += x ; applyp(rest)
+                }
               case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
                   elems += x ; applyp(rest)
                 }
@@ -72,8 +75,12 @@ trait KStructuralParser extends KAbstractParser {
 	     
     applyp(in)
   }
-  
-  
+
+
+  /**
+   * Parses a one or several expressions but returns only one expression. This method thus link the input
+   * expressions.
+   */
   def fExpressionMergedCall : Parser[Expression] = fExpressionExpressionWithCallParser ^^ { case l =>
       var previousUnresolvedCall : Option[UnresolvedCall] = None
       var processedList : List[Expression] = List()
@@ -84,7 +91,6 @@ trait KStructuralParser extends KAbstractParser {
             case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
                 previousUnresolvedCall match {
                   case None => previousUnresolvedCall=Some(cf);processedList = cf::processedList
-
                   case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
                 }
               }
@@ -107,30 +113,31 @@ trait KStructuralParser extends KAbstractParser {
   }
 
 
+  /**
+   * Parses a list of statements and expressions that can contain unresolved and unlinked calls. THis method
+   * also contains a process to link these unresolved calls.
+   */
   def fExpressionLst : Parser[List[Expression]] = rep(fStatement) ^^ { case list =>
       /* POST PROCESS, LINK UnresolvedCall to each other */
       var previousUnresolvedCall : Option[UnresolvedCall] = None
       var processedList : List[Expression] = List()
-      // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
-      // recreate a hierachy for Calls that must be nested in the target of another expression
+      // navigate the original list in the reverse order and rebuild a list with the correct expression,
+      // recreate a hierarchy for Calls that must be nested in the target of another expression
       list.toList.reverse.foreach(p=>{
           p match {
             case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
                 previousUnresolvedCall match {
                   case None => previousUnresolvedCall=Some(cf);processedList = cf::processedList
-                  
                   case Some(pe)=> pe.setTarget(cf);previousUnresolvedCall=Some(cf)
                 }
-              } 
+              }
             case _ @ e =>{
                 previousUnresolvedCall match {
                   case None =>processedList = e::processedList
                   case Some(pe)=> pe.setTarget(e);previousUnresolvedCall=None
                 }
               }
-
           }
-
         })
       processedList
   }

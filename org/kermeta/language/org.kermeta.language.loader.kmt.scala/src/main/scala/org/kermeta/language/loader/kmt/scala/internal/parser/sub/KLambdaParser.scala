@@ -40,18 +40,15 @@ trait KLambdaParser extends KAbstractParser {
 	  
   }
 
-  def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ packageName ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
+  def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ genericQualifiedType ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
       var newType = StructureFactory.eINSTANCE.createFunctionType
-      var unresolveType = KmBuildHelper.getOrCreateUnresolvedType(newType,res) //StructureFactory.eINSTANCE.createUnresolvedType
-      //unresolveType.setTypeIdentifier(res)
-      newType.setKType(unresolveType)
-      //newType.getContainedType.add(unresolveType)
-      //newType.getType.addAll(params)
+      newType.setKType(res)
+      newType.getContainedType.add(res)
       var left = StructureFactory.eINSTANCE.createProductType
       newType.getContainedType.add(left)
       left.getType.addAll(params) 
       newType.setLeft(left)
-      newType.setRight(unresolveType)
+      newType.setRight(res)
       
       left.getContainedType.addAll(params)
 
@@ -63,12 +60,8 @@ trait KLambdaParser extends KAbstractParser {
       newType.setTypeIdentifier(name)
       List(newType)
   }
-  def lambdaTypeParam : Parser[List[UnresolvedType]] = "[" ~ rep1sep(packageName,",") ~ "]" ^^ { case _ ~ unresolvedType ~ _ =>
-      for(name <- unresolvedType) yield {
-        var newType = StructureFactory.eINSTANCE.createUnresolvedType
-        newType.setTypeIdentifier(name)
-        newType
-      }
+  def lambdaTypeParam : Parser[List[Type]] = "[" ~ rep1sep(genericQualifiedType,",") ~ "]" ^^ { case _ ~ unresolvedType ~ _ =>
+    unresolvedType
   }
 
   

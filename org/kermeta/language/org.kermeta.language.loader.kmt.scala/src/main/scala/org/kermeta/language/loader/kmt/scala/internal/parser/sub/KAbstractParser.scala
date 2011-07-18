@@ -39,6 +39,7 @@ trait KAbstractParser extends TokenParsers {
   def fStatement : Parser[Expression]
   def fExpression : Parser[Expression] = fLiteral
   def fExpressionLst : Parser[List[Expression]]
+  def genericQualifiedType : Parser[Type]
   def fLiteral : Parser[Expression]
   def packageName : Parser[String]
   
