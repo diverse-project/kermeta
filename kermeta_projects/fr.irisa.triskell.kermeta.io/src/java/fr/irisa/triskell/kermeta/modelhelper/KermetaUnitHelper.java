@@ -237,6 +237,12 @@ public class KermetaUnitHelper {
 		for ( KermetaUnit unit : s ) {
 			if ( unit.getModelingUnit() == cu )
 				return unit;
+			if ((unit.getModelingUnit()) != null && (cu != null)){
+				if ((unit.getModelingUnit().eResource() != null)&&(cu.eResource() != null)){
+					if (unit.getModelingUnit().eResource().getURI().equals(cu.eResource().getURI()))
+						return unit;
+				}
+			}
 		}
 		return null;
 	}
