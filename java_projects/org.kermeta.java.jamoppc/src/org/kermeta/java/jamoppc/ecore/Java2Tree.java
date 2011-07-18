@@ -308,6 +308,7 @@ public class Java2Tree extends TreeVisitor{
 		if (!enumerations.containsKey(enumName)){
 			EEnum enu = EcoreFactoryImpl.eINSTANCE.createEEnum();
 			enu.setName(getName(e));
+			addTagForKermetaCompilerV2(enu);
 			enumerations.put(enumName, enu);
 			lastenum = enu;
 			for (EObject l : e.getConstants()) {
