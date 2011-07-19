@@ -74,7 +74,7 @@ public class KmResolverOperations {
     	try {
     		muResolved = resolver.doResolving(enforceAspect(mu));
 		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString() , e, null);
     		result.getProblems().add(pm);
 		}
 
@@ -96,7 +96,7 @@ public class KmResolverOperations {
     	try {
     		muResolved = resolver.doStaticSetting(enforceAspect(mu));
 		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString(), e, null);
     		result.getProblems().add(pm);
 		}
 
@@ -119,7 +119,7 @@ public class KmResolverOperations {
     	try {
     		muResolved = resolver.resolve(enforceAspect(mu));
 		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage(), e, null);
+			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString(), e, null);
     		result.getProblems().add(pm);
 		}
 
