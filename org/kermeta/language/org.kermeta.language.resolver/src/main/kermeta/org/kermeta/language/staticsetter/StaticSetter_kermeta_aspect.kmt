@@ -471,9 +471,10 @@ package behavior {
 	aspect class SelfExpression {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of SelfExpression") end
-			
-			super(context)
-			
+			// Creation of a type based on the current class definition corresponding to the self.
+			var type : Class init Class.new
+			type.typeDefinition := context.currentClassDefinition
+			self.setInferedStaticType(type)
 			result := self
 		end
 	}
