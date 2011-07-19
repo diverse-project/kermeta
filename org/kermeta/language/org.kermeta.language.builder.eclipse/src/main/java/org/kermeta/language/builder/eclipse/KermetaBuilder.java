@@ -19,11 +19,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.kermeta.language.builder.eclipse.internal.Activator;
 import org.kermeta.language.builder.eclipse.internal.CompilerFromKP;
 import org.kermeta.language.builder.eclipse.internal.KPBuilder;
 import org.kermeta.language.builder.eclipse.internal.KermetaParser;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaRunner;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
@@ -117,7 +119,12 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 
 	@Override
 	public void setDirty(IResource kmt, boolean dirty) {
-		kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
+		if (kpBuilders.get(findKPidentifierFromKMT(kmt)) != null) {
+			kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
+		}
+		else{
+			Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", this.getClass().getCanonicalName());
+		}
 	}
 	
 	public ModelingUnit getKpLastModelingunit(String kpIdentifier) {
