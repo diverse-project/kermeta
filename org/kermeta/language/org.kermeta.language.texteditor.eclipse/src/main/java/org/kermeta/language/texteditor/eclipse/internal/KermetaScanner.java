@@ -9,8 +9,8 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.IDocument;
@@ -22,13 +22,8 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
-//import org.kermeta.language.api.kevent.KDocumentUpdate;
-//import org.kermeta.language.api.ktoken.IKToken;
-//import org.kermeta.language.api.messaging.UnifiedMessageFactory;
 import org.kermeta.language.loader.kmt.scala.Lexer;
 import org.kermeta.language.loader.kmt.scala.api.IKToken;
-//import org.kermeta.traceability.TextReference;
-//import org.kermeta.traceability.TraceabilityFactory;
 
 public class KermetaScanner implements KermetaTokenScanner {
 

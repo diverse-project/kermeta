@@ -9,9 +9,6 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
-import org.eclipse.jface.bindings.keys.KeySequence;
-import org.eclipse.jface.bindings.keys.KeySequenceText;
-import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.ContentAssistant;

@@ -23,7 +23,6 @@ import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.swt.custom.StyleRange;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
-import org.kermeta.language.structure.ModelingUnit;
 
 /**
  * Simple PresentationRepairer based on a Scanner

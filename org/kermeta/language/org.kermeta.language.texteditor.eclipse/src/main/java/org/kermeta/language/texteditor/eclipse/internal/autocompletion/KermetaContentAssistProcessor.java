@@ -10,9 +10,7 @@
 
 package org.kermeta.language.texteditor.eclipse.internal.autocompletion;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +31,6 @@ import org.kermeta.language.loader.kmt.scala.api.IKToken;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.Activator;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
-import org.kermeta.language.texteditor.eclipse.internal.autocompletion.KermetaImage;
-import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
