@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
+  <model href="VMLogo.ecore#/"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="VMLogo.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="9,10" size="590,345">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="VMLogo.ecore#//VM"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" position="430,243" size="150,-1">
+        <anchorage graphEdge="//@diagrams.0/@contained.0/@contained.5 //@diagrams.0/@contained.0/@contained.6 //@diagrams.0/@contained.0/@contained.7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Turtle"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Turtle"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="VMLogo.ecore#//VM/Turtle/heading"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="VMLogo.ecore#//VM/Turtle/penUp"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Turtle"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="430,11" size="150,-1">
+        <anchorage graphEdge="//@diagrams.0/@contained.0/@contained.5 //@diagrams.0/@contained.0/@contained.6 //@diagrams.0/@contained.0/@contained.8 //@diagrams.0/@contained.0/@contained.9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Point"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Point"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="VMLogo.ecore#//VM/Point/x"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="VMLogo.ecore#//VM/Point/y"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Point"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="285,142" size="150,-1">
+        <anchorage graphEdge="//@diagrams.0/@contained.0/@contained.7 //@diagrams.0/@contained.0/@contained.8 //@diagrams.0/@contained.0/@contained.9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Segment"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Segment"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="VMLogo.ecore#//VM/Segment"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="10,11" size="150,-1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Integer"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="220,11" size="150,-1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Boolean"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Turtle/position"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Turtle/points"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Turtle/drawings"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Segment/origin"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="VMLogo.ecore#//VM/Segment/destination"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

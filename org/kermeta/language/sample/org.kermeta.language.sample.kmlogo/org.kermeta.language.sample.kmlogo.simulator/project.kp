@@ -1,0 +1,13 @@
+KermetaProject :"language.sample.kmlogo.simulator" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language.sample" 
+{ 
+	  
+	source = "${project.baseUri}/src/main/kermeta/LogoDynSemantics.kmt"
+	source = "${project.baseUri}/src/main/kermeta/LogoSimulator.kmt" 
+	
+	// depends on library.core	
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+	dependency "language.sample.kmlogo.vm" URL="mvn:org.kermeta.language.sample/language.sample.kmlogo.vm/2.0.1-SNAPSHOT"   
+		  
+} 

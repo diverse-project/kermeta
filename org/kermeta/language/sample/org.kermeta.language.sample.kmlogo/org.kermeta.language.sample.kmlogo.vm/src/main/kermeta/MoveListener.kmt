@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Creation : August 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package kmLogo::listener;
+
+
+require kermeta
+require "VMLogo.ecore"
+
+class TurtleMoveListener
+{
+	operation turtleHasMoved(newSegment : kmLogo::VM::Segment) : Void is abstract
+	operation turtleHasRotated() : Void is abstract
+}
