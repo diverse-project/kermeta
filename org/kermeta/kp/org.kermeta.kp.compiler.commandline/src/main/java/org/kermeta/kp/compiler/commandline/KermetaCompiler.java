@@ -176,6 +176,10 @@ public class KermetaCompiler {
 		
 		// Load KP file
 		KermetaProject kp = ldr.loadKp(kpFileURL);
+		if (kp == null) {
+			return null;
+		}
+		
 		if(!kp.getName().isEmpty()){
 			projectName = kp.getName();
 		}
@@ -278,7 +282,11 @@ public class KermetaCompiler {
 	public ArrayList<URL> getSources(String kpString) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		KermetaProject kp = ldr.loadKp(kpString);
-		return getSources(kp, new KpVariableExpander(kpString));
+		if (kp != null) {
+			return getSources(kp, new KpVariableExpander(kpString));
+		} else {
+			return new ArrayList<URL>();
+		}
 	}
 	
 	public ArrayList<URL> getSources(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
