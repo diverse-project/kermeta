@@ -41,6 +41,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	private KermetaEditor editor;
 	private org.kermeta.language.loader.kmt.scala.api.Lexer theLexer = new Lexer();
 	private Autocompletion myAutocompletion = null;
+	private IDocument doc = null;
 
 	public KermetaContentAssistProcessor(KermetaEditor editor) {
 		this.editor = editor;
@@ -49,15 +50,17 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer,	int documentOffset) {
 		// Retrieve current document
-		IDocument doc = viewer.getDocument();
+		doc = viewer.getDocument();
 
 		ArrayList<KermetaCompletionProposal> propList = new ArrayList<KermetaCompletionProposal>();
 
 		// Retrieve qualifier
 		List<IKToken> qualifier = getQualifier(doc, documentOffset);
 
-		// Compute completion proposals
-		computeProposals(qualifier, documentOffset, propList);
+		if (!getLast(qualifier).getClass().getSimpleName().equals("Comment") && !getLast(qualifier).getClass().getSimpleName().equals("MLComment")) {
+			// Compute completion proposals only if it is not a comment
+			computeProposals(qualifier, documentOffset, propList);
+		}
 
 		//Sort propList
 		Collections.sort(propList);
@@ -122,6 +125,10 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		return "";
 	}
 
+	private IKToken getLast(List<IKToken> qualifier) {
+		return qualifier.get(qualifier.size()-1);
+	}
+	
 	private String getLastIdentifier(List<IKToken> qualifier) {
 		if (qualifier.get(qualifier.size()-1).getClass().getSimpleName().equals("Identifier")) {
 			return qualifier.get(qualifier.size()-1).toString();
@@ -354,6 +361,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		}
 	}
 
+
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer arg0,
 			int arg1) {
@@ -362,7 +370,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public char[] getCompletionProposalAutoActivationCharacters() {
-		return new char[] { '.', ' ', ':' };
+		return new char[] { '.', ' ', ':'};
 	}
 
 	@Override

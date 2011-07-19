@@ -14,27 +14,11 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 public class EditorTextHover implements ITextHover {
 
 	private KermetaEditor textEditor;
-	
-	//////////////////////////
-	//////////////////////////
-	//		Constructor		//
-	//////////////////////////
-	//////////////////////////	
+
 	public EditorTextHover(KermetaEditor editor) {
 		super();
 		textEditor = editor;
 	}
-	//////////////////////////////////
-	//////////////////////////////////
-	//		End of Constructor		//
-	//////////////////////////////////
-	//////////////////////////////////
-
-	/*
-	private KermetaUnit getKermetaUnit() {
-		return textEditor.getKermetaUnit();
-	}
-	*/
 	
 	private IFile getFile() {
 		return ((IFileEditorInput) textEditor.getEditorInput()).getFile();
