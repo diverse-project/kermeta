@@ -2,8 +2,10 @@ package pkg{
 	class Test {
 		attribute attr : kermeta::standard::Integer
 		attribute attr2 : A
+		attribute attr3 : kermeta::standard::String
+		attribute attr4 : kermeta::standard::Boolean
 		
-		operation main() is do
+		operation main() : kermeta::standard::String is do
 			result := "hello"
 			result.concat(" world")
 			result.concat(" world").concat(" yo")
@@ -15,6 +17,11 @@ package pkg{
 			self.fooTest().attrA
 			self.attr := 1
 			self.attr := self.attr
+			
+			attr := 1
+			attr3 := "hello world!"
+			attr4 := false
+			attr4 := true
 			
 			attr2 := A.new
 			attr2.attrA := B.new
