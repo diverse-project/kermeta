@@ -8,6 +8,7 @@ import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KermetaParser extends KermetaExecutionner<IResource,String> {
 	
@@ -31,8 +32,16 @@ public class KermetaParser extends KermetaExecutionner<IResource,String> {
 					
 		if (freshModelingUnit != null) {
 			KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
-			kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)).kpFiles.get(kermetaBuilder.generateIdentifier(concernedResource)).modelingUnit = freshModelingUnit;
-			kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(concernedResource));
+			if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)) != null) {
+				kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)).kpFiles.get(kermetaBuilder.generateIdentifier(concernedResource)).modelingUnit = freshModelingUnit;
+				if (kermetaBuilder.findKPidentifierFromKMT(concernedResource) != null) {
+					kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(concernedResource));
+				} else {
+					Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+concernedResource+ ", no kp referenced", this.getClass().getCanonicalName());
+				}
+			} else {
+					Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+concernedResource+ ", no kp referenced", this.getClass().getCanonicalName());
+				}
 		}
 	}
 }

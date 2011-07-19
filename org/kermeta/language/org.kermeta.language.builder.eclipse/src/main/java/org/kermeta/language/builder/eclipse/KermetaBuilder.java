@@ -120,7 +120,11 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	@Override
 	public void setDirty(IResource kmt, boolean dirty) {
 		if (kpBuilders.get(findKPidentifierFromKMT(kmt)) != null) {
-			kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
+			if (kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)) != null) {
+				kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
+			} else {
+				Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", this.getClass().getCanonicalName());
+			}
 		}
 		else{
 			Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", this.getClass().getCanonicalName());
