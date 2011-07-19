@@ -22,8 +22,8 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
   /* END SUB PARSER CONTRACT */
 
 
-  def operationParameters = repsep(operationParameter,",")
-  def operationReturnType = opt(":" ~> genericQualifiedType)
+  def operationParameters = repsep(operationParameter ~ opt(attributeBound|attributeBounds) ,",")
+  def operationReturnType = opt(":" ~> genericQualifiedType ~ opt(attributeBound|attributeBounds))
   def methodFromType = opt("from" ~> genericQualifiedType )
 
   def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>
@@ -71,7 +71,7 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
        case None => // DO NOTHING
        }*/
       params.foreach{par=>
-        newo.getOwnedParameter.add(par)
+        newo.getOwnedParameter.add(par._1)
       }
 
       unresolveType match {
@@ -82,7 +82,7 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
             //newo.getContainedType.add(newT)
           }
         case Some(urt)=> {
-            var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt)
+            var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt._1)
             newo.setType(selectedUnresolvedType)
             newo.getContainedType.add(selectedUnresolvedType)
           }

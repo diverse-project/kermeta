@@ -23,7 +23,7 @@ import scala.collection.mutable.ListBuffer
  */
 trait KStructuralParser extends KAbstractParser {
 
-  def fExpressionExpressionWithCallParser = Parser { in =>
+ def fExpressionExpressionWithCallParser = Parser { in =>
     val elems = new ListBuffer[Expression]
     val p0 = fExpression    // avoid repeatedly re-evaluating by-name parser     
     @tailrec def applyp(in0: Input): ParseResult[List[Expression]] = 
@@ -45,7 +45,6 @@ trait KStructuralParser extends KAbstractParser {
                 }
               case _ @ e => {
                   if(elems.size > 0){
-                   // Error("kermeta expression expected",in0)
                    Success(elems.toList, in0)
                     
                   }  else {
@@ -86,6 +85,7 @@ trait KStructuralParser extends KAbstractParser {
       var processedList : List[Expression] = List()
       // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
       // recreate a hierachy for Calls that must be nested in the target of another expression
+      println(l.size + " " + l.mkString("\n"))
       l.reverse.foreach(p=>{
           p match {
             case cf : UnresolvedCall if(cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
@@ -111,6 +111,10 @@ trait KStructuralParser extends KAbstractParser {
       }
       processedList.head
   }
+  
+/*  def fExpressionMergedCall : Parser[Expression] = fCall ^^ {
+    case _@e => e	
+  }*/
 
 
   /**

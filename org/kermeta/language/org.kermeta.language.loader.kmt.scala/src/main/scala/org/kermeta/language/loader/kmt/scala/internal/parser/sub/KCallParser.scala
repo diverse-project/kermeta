@@ -23,7 +23,7 @@ import scala.collection.JavaConversions._
 trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser{
 
 
-  def fCall = nCall | firstCall
+  def fCall : Parser[Expression] = nCall | firstCallLiteral | firstCall
 
   def nCall = "." ~> ident ~ (callFeatureParams?) ^^ { case id ~ params =>
       var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
@@ -36,7 +36,23 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo
   }
 
-  def firstCall : Parser[UnresolvedCall] = genericQualifiedTypeObject ~ (callFeatureParams?) ^^ { case unresType ~ params =>
+  def firstCallLiteral : Parser[Expression] = fLiteral ~ (callFeatureParams?) ^^ { case unresType ~ params =>
+    println("pass par la")
+    unresType match {
+      case e : CallSuperOperation => {
+    	  params match {
+    	  case Some(_ @ par) => for(p <- par) e.getParameters.add(p)
+    	  case None => 
+    	  }        
+      }
+      case _ => {}
+
+    }
+      unresType
+  
+  }
+  
+  def firstCall : Parser[Expression] = genericQualifiedTypeObject ~ (callFeatureParams?) ^^ { case unresType ~ params =>
       var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
       newo.setName(unresType.getTypeIdentifier())
       newo.getGenerics().addAll(unresType.getGenerics())
@@ -45,8 +61,13 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
         case None => 
       }
       newo
+      
+      
   }
+  
+  
+  
 
-  def callFeatureParams = "(" ~> repsep( fStatement,",") <~ ")"  | ( fLambda ^^ { case l => List(l) } )
+  def callFeatureParams = "(" ~> repsep( fStatement,",")  <~ ")"  | ( fLambda ^^ { case l => List(l) } ) |   ( "(" ~  ")" ^^ {case l =>List()  }  )
 
 }

@@ -42,6 +42,10 @@ trait KAbstractParser extends TokenParsers {
   def genericQualifiedType : Parser[Type]
   def fLiteral : Parser[Expression]
   def packageName : Parser[String]
+  def attributeBound : Parser[Tuple2[Int,Int]] 
+  def attributeBounds : Parser[Tuple2[Int,Int]]
+  
+  def fCall : Parser[Expression] 
   
   def kpositioned[T](p : Parser[T]) : Parser[T]
 
