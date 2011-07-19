@@ -25,13 +25,19 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
    //override def fStatement : Parser[Expression] = fLiteral | fBlock | pExpression | fVariableDecl | fCall | fLoop | fConditional
 
 
-    def fAssignement : Parser[Expression] = fLogicalExpression ~ opt(":=" ~ fLogicalExpression) ^^ { case target ~ statment =>
+    def fAssignement : Parser[Expression] = fLogicalExpression ~ opt(  (":=" | "?=") ~ fLogicalExpression) ^^ { case target ~ statment =>
       statment match {
         case Some(e) => {
             var newo = BehaviorFactory.eINSTANCE.createAssignment //TODO CHECK CALL FEATURE
             newo.setTarget(target.asInstanceOf[CallExpression])
             e match {
-              case ":=" ~ t => newo.setValue(t)
+              case ":=" ~ t => {
+                newo.setValue(t)
+              }
+             case "?=" ~ t => {
+                newo.setValue(t)
+                newo.setIsCast(true)
+              }
             }
             newo
           }
@@ -115,6 +121,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
         }
       }
   }
+  
   def fUnaryOp = "!" | "-"
 
 }
