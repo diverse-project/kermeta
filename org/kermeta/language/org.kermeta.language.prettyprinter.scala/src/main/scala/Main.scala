@@ -36,6 +36,7 @@ object Main {
     o match {
       case m : ModelingUnit =>{
         m.getPackages.foreach(p=>print(p,res))
+        m.getOwnedTypeDefinition.foreach(p=>print(p,res))
       }
       case p: Package => {
         res.append("package " + p.getName() + " {\n")
@@ -65,9 +66,17 @@ object Main {
           res.append("\t\treference ")
         res.append(p.getName + " : ")
         print(p.getType, res)
-        res.append("\n")
+        if ((p.getUpper != 1) || p.getLower != 0){
+          res.append("[")
+          res.append(p.getLower)
+          res.append("..")
+          res.append((""+p.getUpper).replace("-1","*"))
+          res.append("]")
+        }
+          
         //TODO opposite
         //TODO getter setter for derived
+        res.append("\n")
       }
       case op: Operation => {
         res.append("\t\toperation " + op.getName + "(")
@@ -94,7 +103,13 @@ object Main {
       case p : Parameter =>{
         res.append(p.getName + " : " )
         print(p.getType,res)
-        //Upper lower
+          if ((p.getUpper != 1) || p.getLower != 0){
+          res.append("[")
+          res.append(p.getLower)
+          res.append("..")
+          res.append((""+p.getUpper).replace("-1","*"))
+          res.append("]")
+        }
       }
       case p :UnresolvedType=>{
         res.append(p.getTypeIdentifier)
@@ -199,6 +214,8 @@ object Main {
       case i: BooleanLiteral => {
         res.append(i.getValue)
       }
+
+
       case i: VoidLiteral => {
         res.append("void")
       
