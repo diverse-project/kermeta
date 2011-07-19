@@ -38,6 +38,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	private org.kermeta.language.loader.kmt.scala.api.Lexer theLexer = new Lexer();
 	private Autocompletion myAutocompletion = null;
 	private IDocument doc = null;
+	private StringBuffer identation = new StringBuffer();
 
 	public KermetaContentAssistProcessor(KermetaEditor editor) {
 		this.editor = editor;
@@ -71,6 +72,18 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		return proposals; 
 	}
 
+	private void initializeIdentation(String line) {
+		this.identation = new StringBuffer();
+		for (int i=0;i<line.length();i++) {
+			if (line.charAt(i) == '\u0020' || line.charAt(i) == '\t') {
+				this.identation.append(line.charAt(i));
+			} else {
+				return;
+			}
+		}
+		
+	}
+	
 	private List<IKToken> getQualifier(IDocument doc, int documentOffset) {
 
 		// Use string buffer to collect characters
@@ -85,6 +98,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 		currentLine = currentLine.reverse();
 
+		initializeIdentation(currentLine.toString());
 		List<IKToken> temp = theLexer.lex(currentLine.toString().trim());
 
 		if (temp.size() == 0) {
@@ -233,13 +247,17 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		String lastQualifier = getLastIdentifier(qualifier);
 		
 		for (String oneWord : reserved) {
-			int cursor = oneWord.length();
+			int cursor = oneWord.length()+1;
 			if (lastQualifier.length() > 0) {
 				if (oneWord.startsWith(lastQualifier)) {
-					propList.add(new KermetaCompletionProposal(oneWord, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/kermeta.gif")));
+					if (!proposeStructure(oneWord, documentOffset, propList, qlen)) {					
+						propList.add(new KermetaCompletionProposal(oneWord+" ", documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/kermeta.gif")));
+					}
 				}
 			} else {
-				propList.add(new KermetaCompletionProposal(oneWord, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/kermeta.gif")));
+				if (!proposeStructure(oneWord, documentOffset, propList, qlen)) {
+					propList.add(new KermetaCompletionProposal(oneWord+" ", documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/kermeta.gif")));
+				}
 			}
 		}
 	}
@@ -341,7 +359,6 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		theCallExpression = myAutocompletion.getCallExpression(explodeCallExpression(qualifier), getLastCompletePackageChain(qualifier, true));
 		if (theCallExpression != null) {
 			for (String currentMetaClass : theCallExpression.keySet()) {
-				System.out.println(currentMetaClass);
 				Image theImage = KermetaImage.getImage("/icons/specific/EmptyExpression.gif");
 				if (currentMetaClass.equals("Operation")) {
 					theImage = KermetaImage.getImage("/icons/red/operation.png");
@@ -357,6 +374,39 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		}
 	}
 
+	private boolean proposeStructure(String qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen) {
+		boolean result = false;
+		int cursor = 0;
+		String proposition = "";
+		if (qualifier.equals("do")) {
+			proposition = "do\n"+this.identation+"\t\n"+this.identation+"end";
+			cursor = 3 + this.identation.length() + 1;
+			propList.add(new KermetaCompletionProposal(proposition, documentOffset - qlen, qlen, cursor,KermetaImage.getImage("/icons/specific/Block.gif"),"do...end",null,null));
+			result = true;
+		}
+		if (qualifier.equals("if")) {
+			proposition = "if () then\n"+this.identation+"end";
+			cursor = 4;
+			propList.add(new KermetaCompletionProposal(proposition, documentOffset - qlen, qlen, cursor,KermetaImage.getImage("/icons/specific/Conditional.gif"),"if...then...end",null,null));
+			proposition = "if () then\n"+this.identation+"else\n"+this.identation+"end";
+			propList.add(new KermetaCompletionProposal(proposition, documentOffset - qlen, qlen, cursor,KermetaImage.getImage("/icons/specific/Conditional.gif"),"if...then...else...end",null,null));
+			result = true;
+		}
+		if (qualifier.equals("loop")) {
+			proposition = "loop\n"+this.identation+"\t\n"+this.identation+"end";
+			cursor = 5 + this.identation.length() + 1;
+			propList.add(new KermetaCompletionProposal(proposition, documentOffset - qlen, qlen, cursor,KermetaImage.getImage("/icons/specific/Loop.gif"),"loop...end",null,null));
+			result = true;
+		}
+		if (qualifier.equals("from")) {
+			proposition = "from \n"+this.identation+"loop\n"+this.identation+"end";
+			cursor = 5 ;
+			propList.add(new KermetaCompletionProposal(proposition, documentOffset - qlen, qlen, cursor,KermetaImage.getImage("/icons/specific/Loop.gif"),"from...loop...end",null,null));
+			result = true;
+		}
+		return result;
+	}
+	
 
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer arg0,
