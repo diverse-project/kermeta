@@ -350,6 +350,16 @@ object PrettyPrinter {
         }
       }
 
+      case c: Rescue => {
+        res.append("(" + c.getExceptionName + " : ")
+        print(c.getExceptionType, res)
+        res.append(")\n\tdo\n")
+        c.getBody.foreach{exp => {
+          print(exp, res)
+          res.append("\n")
+        }}
+        res.append("\tend\n")
+      }
       
       case c: CallEnumLiteral =>{
         print(c.getStaticEnumLiteral,res)
