@@ -1,17 +1,13 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -92,10 +88,9 @@ public class EclipseReporter {
 		addMarker(markerSeverity, Marker, file, message, 0, 0,0, msgGroup);
 	}
 
-	private String cleanString(URL toClean) throws URISyntaxException {
+	private String cleanString(URL toClean) {
 		String cleanString = FileHelpers.URLToStringWithoutFile(toClean);
-		cleanString = cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
-		return cleanString;
+		return cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
 	}
 	
 	public void flushProblem(final String problemGroup,final URL uri) {
@@ -108,8 +103,6 @@ public class EclipseReporter {
 			}
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to flush markers for group "+problemGroup, Activator.PLUGIN_ID, e);
-		} catch (URISyntaxException e) {
-			ms.log(Kind.DevERROR, "URI exceptions during flushing markers for group "+problemGroup, Activator.PLUGIN_ID, e);
 		} catch (NullPointerException e) {}
 	}
 	
@@ -119,8 +112,6 @@ public class EclipseReporter {
 			file.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 		} catch (CoreException e) {
 			ms.log(Kind.DevERROR, "Failed to flush all markers", Activator.PLUGIN_ID, e);
-		} catch (URISyntaxException e) {
-			ms.log(Kind.DevERROR, "URI exceptions during flushing all markers", Activator.PLUGIN_ID, e);
 		} catch (NullPointerException e) {}
 	}
 }

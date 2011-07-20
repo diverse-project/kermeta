@@ -15,7 +15,6 @@ import java.net.URL;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
