@@ -1,19 +1,21 @@
-package pkg{
-   class Test {
-       attribute attr : kermeta::standard::Integer
-       attribute attr2 : A
-       attribute attr3 : kermeta::standard::String
-       attribute attr4 : kermeta::standard::Boolean
+using kermeta::standard
 
-       operation main() : kermeta::standard::String is do
-           result := "hello"
-           result.concat(" world")
-           result.concat(" world").concat(" yo")
-           "hello".concat(" world")
-           "hello".concat(" world").concat(" yo")
+package testOpOpCall{
+   // Call of an operation from another class inside an operation
+   class Test_opopcall {
+       attribute e : kermeta::standard::Integer
 
+       operation operation1() : kermeta::standard::Integer is do
+           result := Test_opcalled.new.operation_asg()
+           stdio.writeln(result.toString)
        end
+
 
    }
 
+   class Test_opcalled {
+       operation operation_asg(): kermeta::standard::Integer is do
+           result := 5
+       end
+   }
 }

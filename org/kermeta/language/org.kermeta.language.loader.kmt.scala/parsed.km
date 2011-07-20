@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
-  <packages name="pkg">
-    <kOwnedTags name="traceability_text_reference" value="0;488"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test" superType="//pkg/Test/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="16;487"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
-      <ownedAttribute name="attr" type="//pkg/Test/attr/@containedType.0" isOrdered="true" isComposite="true">
-        <kOwnedTags name="traceability_text_reference" value="36;87"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+  <packages name="testOpOpCall">
+    <kOwnedTags name="traceability_text_reference" value="25;500"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_opopcall" superType="//testOpOpCall/Test_opopcall/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <kOwnedTags name="traceability_text_reference" value="116;371"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="e" type="//testOpOpCall/Test_opopcall/e/@containedType.0" isOrdered="true" isComposite="true">
+        <kOwnedTags name="traceability_text_reference" value="145;194"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
       </ownedAttribute>
-      <ownedAttribute name="attr2" type="//pkg/Test/attr2/@containedType.0" isOrdered="true" isComposite="true">
-        <kOwnedTags name="traceability_text_reference" value="87;114"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A"/>
-      </ownedAttribute>
-      <ownedAttribute name="attr3" type="//pkg/Test/attr3/@containedType.0" isOrdered="true" isComposite="true">
-        <kOwnedTags name="traceability_text_reference" value="114;165"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
-      </ownedAttribute>
-      <ownedAttribute name="attr4" type="//pkg/Test/attr4/@containedType.0" isOrdered="true" isComposite="true">
-        <kOwnedTags name="traceability_text_reference" value="165;218"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
-      </ownedAttribute>
-      <ownedOperation name="main" type="//pkg/Test/main/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="218;484"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+      <ownedOperation name="operation1" type="//testOpOpCall/Test_opopcall/operation1/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="194;365"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="266;484"/>
+          <kOwnedTags name="traceability_text_reference" value="249;365"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:CallResult">
-              <kOwnedTags name="traceability_text_reference" value="280;287"/>
+              <kOwnedTags name="traceability_text_reference" value="263;270"/>
             </target>
-            <value xsi:type="org_kermeta_language_behavior:StringLiteral" value="hello">
-              <kOwnedTags name="traceability_text_reference" value="290;309"/>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="operation_asg">
+              <kOwnedTags name="traceability_text_reference" value="290;318"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <kOwnedTags name="traceability_text_reference" value="286;290"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Test_opcalled">
+                  <kOwnedTags name="traceability_text_reference" value="273;286"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
+              </target>
             </value>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-            <kOwnedTags name="traceability_text_reference" value="315;344"/>
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" world">
-              <kOwnedTags name="traceability_text_reference" value="323;331"/>
-            </parameters>
-            <target xsi:type="org_kermeta_language_behavior:CallResult">
-              <kOwnedTags name="traceability_text_reference" value="309;315"/>
-              <kOwnedTags name="traceability_text_reference" value="344;350"/>
-            </target>
-          </statement>
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-            <kOwnedTags name="traceability_text_reference" value="367;393"/>
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" yo">
-              <kOwnedTags name="traceability_text_reference" value="375;380"/>
-            </parameters>
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-              <kOwnedTags name="traceability_text_reference" value="350;367"/>
-              <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" world">
-                <kOwnedTags name="traceability_text_reference" value="358;366"/>
-              </parameters>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln">
+            <kOwnedTags name="traceability_text_reference" value="323;356"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
+              <kOwnedTags name="traceability_text_reference" value="338;347"/>
+              <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:CallResult">
-                <kOwnedTags name="traceability_text_reference" value="344;350"/>
+                <kOwnedTags name="traceability_text_reference" value="332;338"/>
               </target>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio">
+              <kOwnedTags name="traceability_text_reference" value="318;323"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-            <kOwnedTags name="traceability_text_reference" value="400;429"/>
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" world">
-              <kOwnedTags name="traceability_text_reference" value="408;416"/>
-            </parameters>
-            <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="hello">
-              <kOwnedTags name="traceability_text_reference" value="393;400"/>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_opcalled" superType="//testOpOpCall/Test_opcalled/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <kOwnedTags name="traceability_text_reference" value="371;499"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedOperation name="operation_asg" type="//testOpOpCall/Test_opcalled/operation_asg/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="400;497"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="457;497"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="471;478"/>
             </target>
-          </statement>
-          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-            <kOwnedTags name="traceability_text_reference" value="453;476"/>
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" yo">
-              <kOwnedTags name="traceability_text_reference" value="461;466"/>
-            </parameters>
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
-              <kOwnedTags name="traceability_text_reference" value="436;453"/>
-              <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" world">
-                <kOwnedTags name="traceability_text_reference" value="444;452"/>
-              </parameters>
-              <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="hello">
-                <kOwnedTags name="traceability_text_reference" value="429;436"/>
-              </target>
-            </target>
+            <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="5">
+              <kOwnedTags name="traceability_text_reference" value="481;490"/>
+            </value>
           </statement>
         </body>
       </ownedOperation>
