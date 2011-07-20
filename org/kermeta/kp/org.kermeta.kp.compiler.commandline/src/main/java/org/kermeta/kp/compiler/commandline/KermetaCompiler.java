@@ -51,6 +51,7 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
@@ -61,12 +62,12 @@ import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
  */
 public class KermetaCompiler {
 
+	public final static String LOG_MESSAGE_GROUP = "org.kermeta.kp.compiler.commandline";
+	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
-	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR
-			+ "/project.kp";
+	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
-	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER
-			+ "/scala";
+	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
 	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 
@@ -96,8 +97,7 @@ public class KermetaCompiler {
 	 *            is the MessagingSystem that must be used to log message,
 	 *            problem and progression
 	 */
-	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger,
-			Boolean willRunInEclipse) {
+	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
 		if (registerProtocols) {
@@ -127,13 +127,9 @@ public class KermetaCompiler {
 	 *            indicates wether the process should be stopped when an error
 	 *            occurs or not
 	 */
-	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger,
-			Boolean saveIntermediateFiles, String targetIntermediateFolder,
-			Boolean willRunInEclipse, Boolean checkingEnabled,
-			Boolean stopOnError) {
+	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
 		super();
-		System.err.println("checking enabled (" + checkingEnabled
-				+ ") stop on error (" + stopOnError + ")");
+		System.err.println("checking enabled (" + checkingEnabled + ") stop on error (" + stopOnError + ")");
 		this.logger = logger;
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetIntermediateFolder = targetIntermediateFolder;
@@ -159,8 +155,7 @@ public class KermetaCompiler {
 		}
 		try {
 			results.append("Trying to set java.protocol.handler.pkgs with protocols from org.ops4j.pax.url\r\n");
-			System.setProperty("java.protocol.handler.pkgs",
-					"org.ops4j.pax.url");
+			System.setProperty("java.protocol.handler.pkgs", "org.ops4j.pax.url");
 		} catch (Throwable e) {
 			results.append(e.toString() + "\r\n");
 		}
@@ -176,8 +171,7 @@ public class KermetaCompiler {
 	 * when run outside of eclipse
 	 */
 	public static void initializeFactory() {
-		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE)
-				.setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.KerRichFactory$.MODULE$);
+		((org.eclipse.emf.ecore.EcoreFactoryWrapper) org.eclipse.emf.ecore.EcoreFactory.eINSTANCE).setWrap(org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore.KerRichFactory$.MODULE$);
 		org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 
 	}
@@ -189,16 +183,11 @@ public class KermetaCompiler {
 	 * this.targetFolder = targetFolder; }
 	 */
 
-	public ModelingUnit kp2bytecode(String kpFileURL,
-			HashMap<URL, ModelingUnit> dirtyMU, String targetFolder,
-			String targetGeneratedSourceFolder,
-			String targetGeneratedResourcesFolder,
-			List<String> additionalClassPath, Boolean generateKmOnly)
-			throws IOException {
+	public ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+		logger.flushProblem(LOG_MESSAGE_GROUP, FileHelpers.StringToURL(kpFileURL));
 		String projectName = "project";
 
-		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling "
-				+ kpFileURL, this.getClass().getName(), 6);
+		logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling " + kpFileURL, this.getClass().getName(), 6);
 		KpLoaderImpl ldr = new KpLoaderImpl();
 
 		// Load KP file
@@ -212,41 +201,33 @@ public class KermetaCompiler {
 		}
 		KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
 		ArrayList<URL> kpSources = getSources(kp, varExpander);
+		if (kpSources.size() == 0) {
+			return null;
+		}
 		flushProblems(kpSources);
-		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kpSources,
-				kp.getName(), dirtyMU);
+		List<ModelingUnit> modelingUnits = getSourceModelingUnits(kpSources, kp.getName(), dirtyMU);
 
-		logger.progress("KermetaCompiler.kp2bytecode", "Merging "
-				+ modelingUnits.size() + " files...",
-				this.getClass().getName(), 1);
+		logger.progress("KermetaCompiler.kp2bytecode", "Merging " + modelingUnits.size() + " files...", this.getClass().getName(), 1);
 		ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
 
 		// Did errors occur during the merge ?
 		if (mergedUnit.getProblems().size() > 0) {
 			processErrors(mergedUnit);
 			if (stopOnError) {
-				logger.info(
-						"Errors have occured during merge, stop compilation process",
-						this.getClass().getName());
+				logger.info("Errors have occured during merge, stop compilation process", this.getClass().getName());
 				return null;
 			}
 		}
 
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(
-				saveIntermediateFiles, targetIntermediateFolder
-						+ "/beforeChecking_afterMerging.km").convert(mergedUnit
-				.getResult());
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeChecking_afterMerging.km").convert(mergedUnit.getResult());
 
 		// Check mergedUnit for scope MERGED
 		if (checkingEnabled) {
-			DiagnosticModel results = checkModelingUnit(convertedModelingUnit,
-					CheckerScope.MERGED);
+			DiagnosticModel results = checkModelingUnit(convertedModelingUnit, CheckerScope.MERGED);
 			processCheckingDiagnostics(results);
 
 			if (stopOnError && results.getDiagnostics().size() > 0) {
-				logger.info(
-						"Errors have occured during check for scope MERGED, stop compilation process",
-						this.getClass().getName());
+				logger.info("Errors have occured during check for scope MERGED, stop compilation process", this.getClass().getName());
 				return null;
 			}
 
@@ -257,54 +238,40 @@ public class KermetaCompiler {
 		// Check resolvedUnit for scope RESOLVED
 		if (checkingEnabled) {
 
-			DiagnosticModel results = checkModelingUnit(resolvedUnit,
-					CheckerScope.RESOLVED);
+			DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 			processCheckingDiagnostics(results);
 
 			if (stopOnError && results.getDiagnostics().size() > 0) {
-				logger.info(
-						"Errors have occured during check for scope RESOLVED, stop compilation process",
-						this.getClass().getName());
+				logger.info("Errors have occured during check for scope RESOLVED, stop compilation process", this.getClass().getName());
 				return null;
 			}
 		}
 
 		// save resolvedUnit to the META-INF/kermeta/merged.km
-		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "."
-				+ resolvedUnit.getName() + ".km_in_memory").replaceAll("::",
-				"."));
-		File mergedFile = new File(targetGeneratedResourcesFolder
-				+ DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + projectName
-				+ ".km");
+		URI uri = URI.createURI((resolvedUnit.getNamespacePrefix() + "." + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+		File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + projectName + ".km");
 		if (!mergedFile.getParentFile().exists()) {
 			mergedFile.getParentFile().mkdirs();
 		}
 		FileWriter writer = new FileWriter(mergedFile);
 
-		logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", this
-				.getClass().getName(), 1);
-		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri)
-				.toString());
+		logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", this.getClass().getName(), 1);
+		writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
 		writer.close();
 
 		if (!generateKmOnly) {
 			// deal with km to scala
 			// compiler require a file location not an URL
-			logger.progress("KermetaCompiler.kp2bytecode",
-					"Generating scala...", this.getClass().getName(), 1);
+			logger.progress("KermetaCompiler.kp2bytecode", "Generating scala...", this.getClass().getName(), 1);
 			String fileLocation = mergedFile.toURI().toURL().getFile();
-			km2Scala(kp, varExpander, fileLocation,
-					targetGeneratedSourceFolder, targetFolder);
-			logger.progress("KermetaCompiler.kp2bytecode",
-					"Generating bytecode...", this.getClass().getName(), 1);
+			km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
+			logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", this.getClass().getName(), 1);
 			// deal with scala to bytecode
 			scala2bytecode(additionalClassPath);
 		} else {
-			logger.info("generateKmOnly flag set => Ignore scala generation",
-					this.getClass().getName());
+			logger.info("generateKmOnly flag set => Ignore scala generation", this.getClass().getName());
 		}
-		logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL
-				+ " has been compiled", this.getClass().getName());
+		logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", this.getClass().getName());
 		return resolvedUnit;
 	}
 
@@ -314,15 +281,8 @@ public class KermetaCompiler {
 	 * @param kpFileURL
 	 * @throws IOException
 	 */
-	public ModelingUnit kp2bytecode(String kpFileURL, String targetFolder,
-			String targetGeneratedSourceFolder,
-			String targetGeneratedResourcesFolder,
-			List<String> additionalClassPath, Boolean generateKmOnly)
-			throws IOException {
-		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(),
-				targetFolder, targetGeneratedSourceFolder,
-				targetGeneratedResourcesFolder, additionalClassPath,
-				generateKmOnly);
+	public ModelingUnit kp2bytecode(String kpFileURL, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), targetFolder, targetGeneratedSourceFolder, targetGeneratedResourcesFolder, additionalClassPath, generateKmOnly);
 	}
 
 	public ModelingUnit parse(URL uri) {
@@ -347,8 +307,7 @@ public class KermetaCompiler {
 		}
 	}
 
-	public ArrayList<URL> getSources(KermetaProject kp,
-			KpVariableExpander varExpander) throws IOException {
+	public ArrayList<URL> getSources(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
@@ -358,28 +317,25 @@ public class KermetaCompiler {
 			if (src instanceof SourceQuery) {
 				// deal with srcQuery
 				SourceQuery srcQuery = (SourceQuery) src;
-				String fromDependencyUrl = varExpander.expandVariables(srcQuery
-						.getFrom().getUrl());
-				String indirectURL = "jar:" + fromDependencyUrl + "!"
-						+ varExpander.expandVariables(srcQuery.getQuery());
-				logger.debug("SourceQuery : " + srcQuery + " from "
-						+ srcQuery.getFrom().getUrl() + " (expanded to : "
-						+ indirectURL + ")", this.getClass().getName());
+				String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
+				String indirectURL = "jar:" + fromDependencyUrl + "!" + varExpander.expandVariables(srcQuery.getQuery());
+				logger.debug("SourceQuery : " + srcQuery + " from " + srcQuery.getFrom().getUrl() + " (expanded to : " + indirectURL + ")", this.getClass().getName());
 				kpSources.add(FileHelpers.StringToURL(indirectURL));
 			} else {
 				String sourceURLWithVariable = src.getUrl();
-				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable
-						: ""; // default set to emptyString rather than null
-				String sourceURL = varExpander
-						.expandVariables(sourceURLWithVariable);
+				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default
+																									// set
+																									// to
+																									// emptyString
+																									// rather
+																									// than
+																									// null
+				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
 				if (sourceURLWithVariable.contains("${")) {
 					// deal with variable expansion
-					logger.debug("sourceURL : " + sourceURLWithVariable
-							+ " (expanded to : " + sourceURL + ")", this
-							.getClass().getName());
+					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURL + ")", this.getClass().getName());
 				} else {
-					logger.debug("sourceURL : " + sourceURLWithVariable, this
-							.getClass().getName());
+					logger.debug("sourceURL : " + sourceURLWithVariable, this.getClass().getName());
 				}
 				kpSources.add(FileHelpers.StringToURL(sourceURL));
 			}
@@ -389,51 +345,44 @@ public class KermetaCompiler {
 		List<Dependency> dependencies = kp.getDependencies();
 		for (Dependency dep : dependencies) {
 			String dependencyURLWithVariable = dep.getUrl();
-			String dependencyURL = varExpander
-					.expandVariables(dependencyURLWithVariable);
+			String dependencyURL = varExpander.expandVariables(dependencyURLWithVariable);
 			if (dependencyURLWithVariable.contains("${")) {
 				// deal with variable expansion
-				logger.debug("dependency : " + dependencyURLWithVariable
-						+ " ( expanded to : " + dependencyURL + ")", this
-						.getClass().getName());
+				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", this.getClass().getName());
 			} else {
-				logger.debug("dependency : " + dependencyURLWithVariable, this
-						.getClass().getName());
+				logger.debug("dependency : " + dependencyURLWithVariable, this.getClass().getName());
 			}
 
 			KermetaProject dependencyKP = null;
 
 			URL jar = new URL(dependencyURL);
-			ZipInputStream zip = new ZipInputStream(jar.openStream());
-			ZipEntry ze;
-			while ((ze = zip.getNextEntry()) != null) {
-				if (("/" + ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)) {
-					// load dependencyKP
-					ldr = new KpLoaderImpl();
-					dependencyKP = ldr.loadKp(URI.createURI("jar:"
-							+ dependencyURL + "!/" + ze.getName()));
+			try {
+				ZipInputStream zip = new ZipInputStream(jar.openStream());
+				ZipEntry ze;
+				while ((ze = zip.getNextEntry()) != null) {
+					if (("/" + ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)) {
+						// load dependencyKP
+						ldr = new KpLoaderImpl();
+						dependencyKP = ldr.loadKp(URI.createURI("jar:" + dependencyURL + "!/" + ze.getName()));
+					}
 				}
-			}
 
-			if (dependencyKP == null) {
-				logger.log(
-						MessagingSystem.Kind.UserWARNING,
-						"   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ",
-						this.getClass().getName());
-			} else {
-				String dependencyMergedKMUrl = "jar:" + dependencyURL + "!"
-						+ DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/"
-						+ dependencyKP.getName() + ".km";
-				kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
+				if (dependencyKP == null) {
+					logger.log(MessagingSystem.Kind.UserWARNING, "   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", this.getClass().getName());
+				} else {
+					String dependencyMergedKMUrl = "jar:" + dependencyURL + "!" + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
+					kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
+				}
+			} catch (Exception e) {
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Dependency "+dependencyURL+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+				return  new ArrayList<URL>();
 			}
 		}
 
 		return kpSources;
 	}
 
-	public List<ModelingUnit> getSourceModelingUnits(ArrayList<URL> kpSources,
-			String projectName, HashMap<URL, ModelingUnit> dirtyMU)
-			throws IOException {
+	public List<ModelingUnit> getSourceModelingUnits(ArrayList<URL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
 		for (URL oneURL : kpSources) {
@@ -441,10 +390,7 @@ public class KermetaCompiler {
 				modelingUnits.add(dirtyMU.get(oneURL));
 			} else {
 				ModelingUnit mu = null;
-				mu = new ModelingUnitLoader(logger, this.runInEclipse,
-						this.saveIntermediateFiles,
-						this.targetIntermediateFolder)
-						.loadModelingUnitFromURL(oneURL.toString());
+				mu = new ModelingUnitLoader(logger, this.runInEclipse, this.saveIntermediateFiles, this.targetIntermediateFolder).loadModelingUnitFromURL(oneURL.toString());
 				if (mu != null) {
 					if (mu.getName() == null) {
 						// force ModelingUnit name to the one provided in the kp
@@ -452,9 +398,7 @@ public class KermetaCompiler {
 					}
 					modelingUnits.add(mu);
 				} else {
-					logger.log(MessagingSystem.Kind.UserERROR,
-							"Empty ModelingUnit, failed to load " + oneURL,
-							this.getClass().getName());
+					logger.log(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + oneURL, this.getClass().getName());
 				}
 			}
 		}
@@ -462,21 +406,16 @@ public class KermetaCompiler {
 		return modelingUnits;
 	}
 
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp,
-			KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU)
-			throws IOException {
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
 		ArrayList<URL> kpSources = getSources(kp, varExpander);
 		return getSourceModelingUnits(kpSources, kp.getName(), dirtyMU);
 	}
 
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp,
-			KpVariableExpander varExpander) throws IOException {
-		return getSourceModelingUnits(kp, varExpander,
-				new HashMap<URL, ModelingUnit>());
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+		return getSourceModelingUnits(kp, varExpander, new HashMap<URL, ModelingUnit>());
 	}
 
-	public ErrorProneResult<ModelingUnit> mergeModelingUnits(
-			List<ModelingUnit> modelingUnits) throws IOException {
+	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
 		ModelingUnitConverter muc = new ModelingUnitConverter();
@@ -491,8 +430,7 @@ public class KermetaCompiler {
 			convertedModellingUnits.add(muc.convert(mu));
 		}
 		// merge
-		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(
-				convertedModellingUnits.get(0));
+		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(convertedModellingUnits.get(0));
 
 		if (convertedModellingUnits.size() > 1) {
 			// Use KmBinaryMerger to be able to use ErrorProneResults to track
@@ -501,8 +439,7 @@ public class KermetaCompiler {
 			List<ResultProblemMessage> problems = new ArrayList<ResultProblemMessage>();
 
 			for (int i = 1; i < convertedModellingUnits.size(); i++) {
-				mergedMU = theMerger.merge(mergedMU.getResult(),
-						convertedModellingUnits.get(i));
+				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
 
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
@@ -528,42 +465,31 @@ public class KermetaCompiler {
 			theResolver = new KmResolverImpl();
 		}
 
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(
-				saveIntermediateFiles, targetIntermediateFolder
-						+ "/beforeResolving.km").convert(mu);
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeResolving.km").convert(mu);
 
 		// Resolving
-		ErrorProneResult<ModelingUnit> resolvedMU = theResolver
-				.doResolving(convertedModelingUnit);
+		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
 
 		// Did errors occur during the resolving ?
 		if (resolvedMU.getProblems().size() > 0) {
 			processErrors(resolvedMU);
 			if (stopOnError) {
-				logger.error(
-						"Errors have occured during resolving, stop compilation process",
-						this.getClass().getName(), new Throwable());
+				logger.error("Errors have occured during resolving, stop compilation process", this.getClass().getName(), new Throwable());
 				return null;
 			}
 		}
 
 		if (resolvedMU.getResult() != null) {
-			convertedModelingUnit = new ModelingUnitConverter(
-					saveIntermediateFiles, targetIntermediateFolder
-							+ "/beforeSetting.km").convert(resolvedMU
-					.getResult());
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km").convert(resolvedMU.getResult());
 
 			// StaticSetting
-			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver
-					.doStaticSetting(convertedModelingUnit);
+			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
 
 			// Did errors occur during the resolving ?
 			if (staticsettedMU.getProblems().size() > 0) {
 				processErrors(staticsettedMU);
 				if (stopOnError) {
-					logger.error(
-							"Errors have occured during static setting, stop compilation process",
-							this.getClass().getName(), new Throwable());
+					logger.error("Errors have occured during static setting, stop compilation process", this.getClass().getName(), new Throwable());
 					return null;
 				}
 			}
@@ -571,48 +497,33 @@ public class KermetaCompiler {
 			// End of Resolving
 			return staticsettedMU.getResult();
 		}
-		logger.error(
-				"Errors have occured during resolve. StaticSetting not executable",
-				this.getClass().getName(), new Throwable());
+		logger.error("Errors have occured during resolve. StaticSetting not executable", this.getClass().getName(), new Throwable());
 		return convertedModelingUnit;
 	}
 
-	synchronized public void km2Scala(KermetaProject kp,
-			KpVariableExpander varExpander, String kmFileURL,
-			String targetGeneratedSourceFolder, String targetFolder) {
-		GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder + "/"
-				+ INTERMEDIATE_SCALA_SUBFOLDER);
-		GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder + "/"
-				+ INTERMEDIATE_SUBFOLDER);
+	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder) {
+		GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SCALA_SUBFOLDER);
+		GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SUBFOLDER);
 		GlobalConfiguration.outputBinFolder_$eq(targetFolder + "/classes");
-		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit."
-				+ kp.getGroup() + "." + kp.getName());
+		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getGroup() + "." + kp.getName());
 		GlobalConfiguration.props_$eq(new Properties());
-		GlobalConfiguration.props().setProperty("use.default.aspect.uml",
-				"false");
-		GlobalConfiguration.props().setProperty("use.default.aspect.ecore",
-				"false");
-		GlobalConfiguration.props().setProperty("use.default.aspect.km",
-				"false");
+		GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
+		GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
+		GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
 		// GroupId and ArtifactId are used to prefix the generated code
-		GlobalConfiguration.props().setProperty("project.group.id",
-				kp.getGroup());
-		GlobalConfiguration.props().setProperty("project.artefact.id",
-				kp.getName());
+		GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
+		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
 
 		// default baseClass and baseOperation
 		if (kp.getDefaultMainClass() != null) {
-			GlobalConfiguration.props().setProperty("baseClass",
-					kp.getDefaultMainClass());
+			GlobalConfiguration.props().setProperty("baseClass", kp.getDefaultMainClass());
 		}
 		if (kp.getDefaultMainOperation() != null) {
-			GlobalConfiguration.props().setProperty("baseOperation",
-					kp.getDefaultMainOperation());
+			GlobalConfiguration.props().setProperty("baseOperation", kp.getDefaultMainOperation());
 		}
 
 		// GlobalConfiguration.load(GlobalConfiguration.props());
-		GlobalConfiguration.setScalaAspectPrefix(kp.getGroup() + "."
-				+ kp.getName());
+		GlobalConfiguration.setScalaAspectPrefix(kp.getGroup() + "." + kp.getName());
 		/*
 		 * if(packageEquivalences != null){ for (int i = 0; i <
 		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
@@ -628,8 +539,7 @@ public class KermetaCompiler {
 		km2ScalaCompiler.compile(kmFileURL);
 	}
 
-	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope)
-			throws IOException {
+	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 
 		Checker theChecker;
 
@@ -688,24 +598,20 @@ public class KermetaCompiler {
 		// TODO Retrieve faulty objects text reference and logProblem
 
 		for (ResultProblemMessage prob : eprMu.getProblems()) {
-			logger.log(MessagingSystem.Kind.UserERROR, prob.getMessage(), this
-					.getClass().getName());
+			logger.log(MessagingSystem.Kind.UserERROR, prob.getMessage(), this.getClass().getName());
 
 			// retrieve faulty object
 			// KermetaModelElement kme = (Kermeprob.getCauseObject();
 			if (prob.getCauseObject() != null) {
-				System.err.println("faultyObject is : "
-						+ prob.getCauseObject().toString());
+				System.err.println("faultyObject is : " + prob.getCauseObject().toString());
 
-				org.kermeta.utils.systemservices.api.reference.ModelReference mref = (org.kermeta.utils.systemservices.api.reference.ModelReference) prob
-						.getCauseObject();
+				org.kermeta.utils.systemservices.api.reference.ModelReference mref = (org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
 
 				if (mref.getModelRef() != null) {
 					System.err.println(mref.getModelRef().toString());
 
 					// The object is a KermetaModelElement
-					KermetaModelElement kme = (KermetaModelElement) mref
-							.getModelRef();
+					KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
 
 					System.err.println("The error involves " + kme.toString());
 
@@ -714,8 +620,7 @@ public class KermetaCompiler {
 
 					for (Tag t : kme.getKOwnedTags()) {
 
-						System.err.println("Tag found. Name : " + t.getName()
-								+ ", value : (" + t.getValue() + ")");
+						System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
 
 						// logger.log(MessagingSystem.Kind.UserINFO, "Tag : " +
 						// t.getName(), "");
@@ -726,10 +631,7 @@ public class KermetaCompiler {
 							TextReference ref = createTextReference(t);
 
 							if (ref != null) {
-								logger.logProblem(
-										MessagingSystem.Kind.UserERROR, prob
-												.getMessage(), this.getClass()
-												.getName(), ref);
+								logger.logProblem(MessagingSystem.Kind.UserERROR, prob.getMessage(), this.getClass().getName(), ref);
 							}
 						}
 					}
@@ -738,15 +640,11 @@ public class KermetaCompiler {
 						Tag t = searchForNearestTaggedContainingKME(kme);
 
 						if (t == null) {
-							System.err
-									.println("Impossible to retrieve a container with text traceability");
+							System.err.println("Impossible to retrieve a container with text traceability");
 						} else {
 							TextReference ref = createTextReference(t);
 							if (ref != null) {
-								logger.logProblem(
-										MessagingSystem.Kind.UserERROR, prob
-												.getMessage(), this.getClass()
-												.getName(), ref);
+								logger.logProblem(MessagingSystem.Kind.UserERROR, prob.getMessage(), this.getClass().getName(), ref);
 							}
 
 						}
@@ -764,9 +662,7 @@ public class KermetaCompiler {
 
 		// Display check results
 		if (diags.getDiagnostics().size() > 0) {
-			logger.log(MessagingSystem.Kind.UserINFO, "There are "
-					+ diags.getDiagnostics().size() + " failed constraints",
-					this.getClass().getName());
+			logger.log(MessagingSystem.Kind.UserINFO, "There are " + diags.getDiagnostics().size() + " failed constraints", this.getClass().getName());
 		}
 
 		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
@@ -774,26 +670,17 @@ public class KermetaCompiler {
 			String message = "";
 			Constraint failedConstraint = diag.getFailedConstraint();
 			if (failedConstraint instanceof InvariantProxy) {
-				message = message
-						+ "Invariant "
-						+ ((InvariantProxy) failedConstraint)
-								.getInvariantName()
-						+ " on object "
-						+ ((ModelReference) diag.getAppliesTo())
-								.getReferencedObject().toString();
+				message = message + "Invariant " + ((InvariantProxy) failedConstraint).getInvariantName() + " on object " + ((ModelReference) diag.getAppliesTo()).getReferencedObject().toString();
 			}
 			// String message = diag.getFailedConstraint().;
 			if (diag.isIsWarning()) {
-				logger.log(MessagingSystem.Kind.UserWARNING, message, this
-						.getClass().getName());
+				logger.log(MessagingSystem.Kind.UserWARNING, message, this.getClass().getName());
 			} else {
-				logger.log(MessagingSystem.Kind.UserERROR, message, this
-						.getClass().getName());
+				logger.log(MessagingSystem.Kind.UserERROR, message, this.getClass().getName());
 			}
 
 			// retrieve the referenced EObject tag sourceLocation
-			EObject myObject = ((ModelReference) diag.getAppliesTo())
-					.getReferencedObject();
+			EObject myObject = ((ModelReference) diag.getAppliesTo()).getReferencedObject();
 			KermetaModelElement kme = (KermetaModelElement) myObject;
 
 			// System.err.println("The diagnostic involves " + kme.toString());
@@ -808,19 +695,14 @@ public class KermetaCompiler {
 				// System.err.println("Tag found. Name : " + t.getName() +
 				// ", value : (" + t.getValue() + ")");
 
-				logger.log(MessagingSystem.Kind.UserINFO,
-						"Tag : " + t.getName(), "");
+				logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
 				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
 					tagFound = true;
-					logger.log(MessagingSystem.Kind.UserINFO, "   -> value :("
-							+ t.getValue() + ")   ", "");
+					logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() + ")   ", "");
 					TextReference ref = createTextReference(t);
 
 					if (ref != null) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR,
-								((InvariantProxy) failedConstraint)
-										.getMessage(), this.getClass()
-										.getName(), ref);
+						logger.logProblem(MessagingSystem.Kind.UserERROR, ((InvariantProxy) failedConstraint).getMessage(), this.getClass().getName(), ref);
 					}
 				}
 			}
@@ -830,15 +712,11 @@ public class KermetaCompiler {
 				Tag t = searchForNearestTaggedContainingKME(kme);
 
 				if (t == null) {
-					System.err
-							.println("Impossible to retrieve a container with text traceability");
+					System.err.println("Impossible to retrieve a container with text traceability");
 				} else {
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR,
-								((InvariantProxy) failedConstraint)
-										.getMessage(), this.getClass()
-										.getName(), ref);
+						logger.logProblem(MessagingSystem.Kind.UserERROR, ((InvariantProxy) failedConstraint).getMessage(), this.getClass().getName(), ref);
 					}
 
 				}
@@ -906,8 +784,7 @@ public class KermetaCompiler {
 		TextReference ref = null;
 
 		try {
-			ref = new TextReference(new URL(values[0]), new Integer(values[1]),
-					new Integer(values[2]));
+			ref = new TextReference(new URL(values[0]), new Integer(values[1]), new Integer(values[2]));
 			// ref.setBeginLine(new Integer(values[1]));
 			// ref.setBeginOffset(new Integer(values[2]));
 
@@ -960,67 +837,40 @@ public class KermetaCompiler {
 		 * additionalClassPathWrapper.toList(), System.out);
 		 */
 
-		logger.info("Compiling generated scala to bytecode in "
-				+ GlobalConfiguration.outputBinFolder(), this.getClass()
-				.getName());
-		logger.debug("Classpath: " + classpath.size(), this.getClass()
-				.getName());
+		logger.info("Compiling generated scala to bytecode in " + GlobalConfiguration.outputBinFolder(), this.getClass().getName());
+		logger.debug("Classpath: " + classpath.size(), this.getClass().getName());
 		for (String path : classpath) {
 
 			logger.debug("\t" + path, this.getClass().getName());
 		}
-		logger.debug("End Classpath: " + classpath.size(), this.getClass()
-				.getName());
+		logger.debug("End Classpath: " + classpath.size(), this.getClass().getName());
 
-		int result = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(),
-				GlobalConfiguration.outputBinFolder(), true, classpath, useFSC);
+		int result = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder(), GlobalConfiguration.outputBinFolder(), true, classpath, useFSC);
 		if (result != 0) {
 			hasFailed = true;
 			errorMessage = "Failed to generate bytecode from intermediate scala";
-		}		
+		}
 		return result;
 	}
-	
 
-	public void runK2Program(List<String> classpath, List<String> params){
-				StringBuffer f = new StringBuffer();
-				for (String s : classpath) {
-					f.append(s);
-					f.append(File.pathSeparator);
+	public void runK2Program(List<String> classpath, List<String> params) {
+		StringBuffer f = new StringBuffer();
+		for (String s : classpath) {
+			f.append(s);
+			f.append(File.pathSeparator);
 
-				}
-				EmbeddedScalaRunner.run(
-						f.toString() + GlobalConfiguration.outputBinFolder(),
-						GlobalConfiguration.scalaAspectPrefix()
-								+ "runner.MainRunner", params);
-				
+		}
+		EmbeddedScalaRunner.run(f.toString() + GlobalConfiguration.outputBinFolder(), GlobalConfiguration.scalaAspectPrefix() + "runner.MainRunner", params);
 
-				if (GlobalConfiguration.createPackage()){
-				File fo;
-				try {
-					fo = new File(GlobalConfiguration.outputProject()
-							+ File.separator + "target").getCanonicalFile();
-					fo.mkdirs();
-					org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala
-							.run(GlobalConfiguration.outputBinFolder(),
-									GlobalConfiguration.outputProject()
-											+ File.separator
-											+ "target"
-											+ File.separator
-											+ GlobalConfiguration
-													.scalaAspectPrefix() + ".jar",
-									GlobalConfiguration.outputFolder()
-											+ File.separator
-											+ ".."
-											+ File.separator
-											+ "resources"
-											+ File.separator
-											+ GlobalConfiguration
-													.scalaAspectPrefix()
-											+ "Reflexivity.km");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				}
-	}	
+		if (GlobalConfiguration.createPackage()) {
+			File fo;
+			try {
+				fo = new File(GlobalConfiguration.outputProject() + File.separator + "target").getCanonicalFile();
+				fo.mkdirs();
+				org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder(), GlobalConfiguration.outputProject() + File.separator + "target" + File.separator + GlobalConfiguration.scalaAspectPrefix() + ".jar", GlobalConfiguration.outputFolder() + File.separator + ".." + File.separator + "resources" + File.separator + GlobalConfiguration.scalaAspectPrefix() + "Reflexivity.km");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
