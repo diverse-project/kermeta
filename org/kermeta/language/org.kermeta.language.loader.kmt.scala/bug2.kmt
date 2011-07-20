@@ -1,0 +1,9 @@
+package pkg{
+   class Test {
+       operation main() is do
+           result.concat(" world")
+           
+            "hello".foo(" foo")
+       end
+   }
+}

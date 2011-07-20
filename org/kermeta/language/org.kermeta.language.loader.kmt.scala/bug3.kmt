@@ -1,0 +1,8 @@
+package pkg{
+   class Test {
+       operation main() is do
+           super()
+           result
+       end
+   }
+}
