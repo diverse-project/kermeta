@@ -1,7 +1,18 @@
 package pkg{
    class Test {
        operation main() is do
-           super()
+
+
+           self.foo := toot
+           self.foo := toot
+           self.foo := 1
+
+
+           titi.toot
+
+           super
+           super.tiit
+           super(toto)
            result
        end
    }

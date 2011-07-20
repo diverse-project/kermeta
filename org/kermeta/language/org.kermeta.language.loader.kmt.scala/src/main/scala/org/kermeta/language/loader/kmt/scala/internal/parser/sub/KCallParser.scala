@@ -20,54 +20,49 @@ import scala.collection.JavaConversions._
  * Sub parser dedicated to parse the various way to call something in KMt textual syntax
  *
  */
-trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser{
+trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser {
 
 
-  def fCall : Parser[Expression] = nCall | firstCallLiteral | firstCall
+  def fCall: Parser[Expression] = nCall /*| firstCallLiteral*/ | firstCall
 
-  def nCall = "." ~> ident ~ (callFeatureParams?) ^^ { case id ~ params =>
-      var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
+  //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
+
+
+  def nCall = "." ~> ident ~ (callFeatureParams ?) ^^ {
+    case id ~ params =>
+      val newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
       newo.setName(id)
       params match {
-        case Some(_ @ par) => for(p <- par) newo.getParameters().add(p)
-        case None => 
+        case Some(_@par) => for (p <- par) newo.getParameters().add(p)
+        case None =>
       }
       newo.setTarget(NESTED_NEEDED())
       newo
   }
 
-  def firstCallLiteral : Parser[Expression] = fLiteral ~ (callFeatureParams?) ^^ { case unresType ~ params =>
-    println("pass par la")
-    unresType match {
-      case e : CallSuperOperation => {
-    	  params match {
-    	  case Some(_ @ par) => for(p <- par) e.getParameters.add(p)
-    	  case None => 
-    	  }        
-      }
-      case _ => {}
+  def firstCall: Parser[Expression] = (genericQualifiedTypeObject | "super") ~ (callFeatureParams ?) ^^ {
+    case unresType ~ params =>
 
-    }
-      unresType
-  
-  }
-  
-  def firstCall : Parser[Expression] = genericQualifiedTypeObject ~ (callFeatureParams?) ^^ { case unresType ~ params =>
-      var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
-      newo.setName(unresType.getTypeIdentifier())
-      newo.getGenerics().addAll(unresType.getGenerics())
+      val newo = unresType match {
+        case "super" => BehaviorFactory.eINSTANCE.createCallSuperOperation()
+        case typeRef: UnresolvedType => {
+          val newoo = BehaviorFactory.eINSTANCE.createUnresolvedCall
+          newoo.setName(typeRef.getTypeIdentifier())
+          newoo.getGenerics().addAll(typeRef.getGenerics())
+          newoo
+        }
+      }
+
       params match {
-        case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
-        case None => 
+        case Some(_@par) => for (p <- par) newo.getParameters.add(p)
+        case None =>
       }
       newo
-      
-      
-  }
-  
-  
-  
 
-  def callFeatureParams = "(" ~> repsep( fStatement,",")  <~ ")"  | ( fLambda ^^ { case l => List(l) } ) |   ( "(" ~  ")" ^^ {case l =>List()  }  )
+
+  }
+
+
+  def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
 
 }

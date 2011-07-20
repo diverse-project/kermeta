@@ -1,46 +1,35 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="kmt_testCase::foo">
-  <packages name="MYPACK">
-    <kOwnedTags name="traceability_text_reference" value="29;303"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//MYPACK/Main/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="46;284"/>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="pkg">
+    <kOwnedTags name="traceability_text_reference" value="0;155"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test" superType="//pkg/Test/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
+      <kOwnedTags name="traceability_text_reference" value="16;154"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
-      <ownedOperation name="main" type="//MYPACK/Main/main/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="68;281"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void"/>
+      <ownedOperation name="main" type="//pkg/Test/main/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="36;152"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="95;281"/>
-          <statement xsi:type="org_kermeta_language_behavior:Conditional">
-            <kOwnedTags name="traceability_text_reference" value="118;191"/>
-            <thenBody xsi:type="org_kermeta_language_behavior:Block">
-              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bar">
-                <kOwnedTags name="traceability_text_reference" value="149;170"/>
-              </statement>
-            </thenBody>
-            <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto">
-              <kOwnedTags name="traceability_text_reference" value="121;126"/>
-            </condition>
+          <kOwnedTags name="traceability_text_reference" value="56;152"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="concat">
+            <kOwnedTags name="traceability_text_reference" value="76;118"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" world">
+              <kOwnedTags name="traceability_text_reference" value="84;92"/>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="70;76"/>
+            </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo">
-            <kOwnedTags name="traceability_text_reference" value="191;212"/>
-          </statement>
-          <statement xsi:type="org_kermeta_language_behavior:Conditional">
-            <kOwnedTags name="traceability_text_reference" value="212;276"/>
-            <thenBody xsi:type="org_kermeta_language_behavior:Block">
-              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bar">
-                <kOwnedTags name="traceability_text_reference" value="243;264"/>
-              </statement>
-            </thenBody>
-            <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toto">
-              <kOwnedTags name="traceability_text_reference" value="215;220"/>
-            </condition>
+            <kOwnedTags name="traceability_text_reference" value="125;145"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" foo">
+              <kOwnedTags name="traceability_text_reference" value="130;136"/>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="hello">
+              <kOwnedTags name="traceability_text_reference" value="118;125"/>
+            </target>
           </statement>
         </body>
       </ownedOperation>
-    </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="TOTO" superType="//MYPACK/TOTO/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="284;302"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
   </packages>
 </org_kermeta_language_structure:ModelingUnit>
