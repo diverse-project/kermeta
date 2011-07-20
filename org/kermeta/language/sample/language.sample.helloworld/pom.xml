@@ -18,6 +18,11 @@
 			<artifactId>language.library.core</artifactId>
 			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.9.0-1</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
@@ -38,6 +43,8 @@
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
                             <checkingEnabled>false</checkingEnabled>
+                            <run>true</run>
+                            <params><param>toto</param></params>
                         </configuration>
                     </execution>
                 </executions>
