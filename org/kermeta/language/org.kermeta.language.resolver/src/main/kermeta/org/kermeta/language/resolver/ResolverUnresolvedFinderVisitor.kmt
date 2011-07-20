@@ -1387,7 +1387,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	
 	method visitLambdaParameter(visited : LambdaParameter, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsLambdaParameter(pass)) then
-			visited.type.accept(self, ctxt)
+			if (not visited.type.isVoid) then
+				visited.type.accept(self, ctxt)
+			end
 		end
 	end
 	
