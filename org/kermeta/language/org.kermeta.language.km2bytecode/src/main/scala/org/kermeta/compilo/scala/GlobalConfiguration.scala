@@ -142,8 +142,12 @@ object GlobalConfiguration extends LogAspect{
     var outputBinFolder : String = null
     var scalaPrefix : String = "Scala"
    
+      
       var scalaAspectPrefix : String = k2.utils.UTilScala.scalaAspectPrefix
-    var workspaceURI : String = null
+      def setScalaAspectPrefix(arg:String)={
+      scalaAspectPrefix = arg
+    }
+      var workspaceURI : String = null
     var pluginURI : String = null
     var withRich : Boolean = true
 
