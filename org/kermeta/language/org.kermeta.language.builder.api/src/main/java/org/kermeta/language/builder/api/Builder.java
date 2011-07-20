@@ -8,6 +8,8 @@ public abstract class Builder {
 		super();
 	}
 
+	public final static String LOG_MESSAGE_GROUP = "org.kermeta.language.builder";
+	
 	public abstract void parseSpecificFile(IResource toParse, String content);
 	public abstract void buildFromKP(String kpIdentifier);
 	public abstract void compileFromKP(String kpIdentifier);
