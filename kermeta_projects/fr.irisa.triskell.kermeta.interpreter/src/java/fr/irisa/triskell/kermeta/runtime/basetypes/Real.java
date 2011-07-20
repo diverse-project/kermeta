@@ -11,15 +11,30 @@ public class Real {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::compareTo(other)*/
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, ((java.lang.Double)self.getJavaNativeObject()).compareTo((java.lang.Double)param0.getJavaNativeObject()));
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			Integer.setValue(result, getDoubleValue(self).compareTo(getDoubleValue(param0)));
+		}
+		// if not, set the result to 0
+		else {
+			Integer.setValue(result, 0);
+		}
 		return result;
 	}
 	
 	/** Implementation of method equals called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::equals(element) */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)==getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 	
 	// Implementation of method plus called as :
@@ -74,10 +89,15 @@ public class Real {
 	}
 	
 	public static double getValue(RuntimeObject real) {
-		if (!RuntimeObject.NUMERIC_VALUE.equals(real.getPrimitiveType()) )
-			setValue(real, 0);
-		return ((Double)real.getJavaNativeObject()).doubleValue();
+		return getDoubleValue(real).doubleValue();
 	}
+	
+	public static java.lang.Double getDoubleValue(RuntimeObject real) {
+		if (!RuntimeObject.NUMERIC_VALUE.equals(real.getPrimitiveType())) 
+			setValue(real,0);
+		return ((java.lang.Double)real.getJavaNativeObject());
+	}
+	
 	
 	public static RuntimeObject create(double value, RuntimeObjectFactory factory)
 	{

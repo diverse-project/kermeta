@@ -18,15 +18,30 @@ public class Integer {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::compareTo(other)*/
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, ((java.lang.Integer)self.getJavaNativeObject()).compareTo((java.lang.Integer)param0.getJavaNativeObject()));
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			Integer.setValue(result, getIntegerValue(self).compareTo(getIntegerValue(param0)));
+		}
+		// if not, set the result to 0
+		else {
+			Integer.setValue(result, 0);
+		}
 		return result;
 	}
 
 	/** Implementation of method equals called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::equals(element) */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)==getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 	
 	/** Implementation of method plus called as :
@@ -78,32 +93,64 @@ public class Integer {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isGreater(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) > getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)>getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isLower(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) < getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)<getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isGreaterOrEqual(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) >= getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)>=getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 	
 	/** Implementation of method mod called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
 	 */
 	public static RuntimeObject isLowerOrEqual(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) <= getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a number, then makes the test
+		if(RuntimeObject.NUMERIC_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self)<=getValue(param0);
+		}
+		// if not, sets the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 
 	/** Implementation of method toReal called as :
@@ -127,9 +174,13 @@ public class Integer {
 	}
 	
 	public static int getValue(RuntimeObject integer) {
-		if (!RuntimeObject.NUMERIC_VALUE.equals(integer.getPrimitiveType()))
-			setValue(integer, 0);
-	    return ((java.lang.Integer)integer.getJavaNativeObject()).intValue();
+		return getIntegerValue(integer).intValue();
+	}
+	
+	public static java.lang.Integer getIntegerValue(RuntimeObject in) {
+		if (!RuntimeObject.NUMERIC_VALUE.equals(in.getPrimitiveType())) 
+			setValue(in,0);
+		return ((java.lang.Integer)in.getJavaNativeObject());
 	}
 	
 

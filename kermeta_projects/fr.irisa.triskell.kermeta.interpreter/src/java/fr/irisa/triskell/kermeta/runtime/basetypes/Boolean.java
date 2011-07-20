@@ -12,38 +12,49 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 public class Boolean {
 
-	
+
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::equals(element)
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) == getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a boolean, then makes the test
+		if(RuntimeObject.BOOLEAN_VALUE.equals(param0.getPrimitiveType())) {
+			result = getValue(self) == getValue(param0);
+		}
+		// if not, set the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 
 	// Implementation of method isNotEqual called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::isNotEqual(element)
 	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) == getValue(param0)) return self.getFactory().getMemory().falseINSTANCE;
-		else return self.getFactory().getMemory().trueINSTANCE;
+		// if param0 is effectively a boolean, then makes the test
+		if(RuntimeObject.BOOLEAN_VALUE.equals(param0.getPrimitiveType())) 
+			return self.getFactory().getMemory().getRuntimeObjectForBoolean(getValue(self) != getValue(param0));
+		// if not, returns true
+		else return self.getFactory().getMemory().getRuntimeObjectForBoolean(true);
 	}
 
 	// Implementation of method and called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::and(other)
 	public static RuntimeObject and(RuntimeObject self, RuntimeObject param0) {
-	    if ( param0 == self.getFactory().getMemory().voidINSTANCE )
-	    	return self.getFactory().getMemory().voidINSTANCE;
+		if ( param0 == self.getFactory().getMemory().voidINSTANCE )
+			return self.getFactory().getMemory().voidINSTANCE;
 		if (getValue(self) && getValue(param0))
-		    return self.getFactory().getMemory().trueINSTANCE;
+			return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
 	// Implementation of method or called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::or(other)
 	public static RuntimeObject or(RuntimeObject self, RuntimeObject param0) {
-	    if ( param0 == self.getFactory().getMemory().voidINSTANCE )
-	    	return self.getFactory().getMemory().voidINSTANCE;
+		if ( param0 == self.getFactory().getMemory().voidINSTANCE )
+			return self.getFactory().getMemory().voidINSTANCE;
 		if (getValue(self) || getValue(param0))
-		    return self.getFactory().getMemory().trueINSTANCE;
+			return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
@@ -55,12 +66,12 @@ public class Boolean {
 	}
 
 	public static boolean getValue(RuntimeObject bool) {
-	    return ((java.lang.Boolean)bool.getJavaNativeObject()).booleanValue();
+		return ((java.lang.Boolean)bool.getJavaNativeObject()).booleanValue();
 	}
-	
+
 	public static void setValue(RuntimeObject bool, boolean value) {
 		bool.setPrimitiveType(RuntimeObject.BOOLEAN_VALUE);
-		
+
 		bool.setJavaNativeObject( new java.lang.Boolean(value)); 
 	}
 
@@ -68,22 +79,22 @@ public class Boolean {
 	 * 
 	 */
 	public static void createTrue(RuntimeObjectFactory factory, RuntimeObject result) {
-	    
+
 		fr.irisa.triskell.kermeta.language.structure.Class bool_class = StructureFactory.eINSTANCE.createClass();
-	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
-	    
-	    result.setMetaclass(factory.createMetaClass(bool_class));
-	    setValue(result, true);
+		bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
+
+		result.setMetaclass(factory.createMetaClass(bool_class));
+		setValue(result, true);
 	}
-	
+
 	public static void createFalse(RuntimeObjectFactory factory, RuntimeObject result) {
-	    
+
 		fr.irisa.triskell.kermeta.language.structure.Class bool_class = StructureFactory.eINSTANCE.createClass();
-	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
-	    
-	    result.setMetaclass(factory.createMetaClass(bool_class));
-	    setValue(result, false);
+		bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
+
+		result.setMetaclass(factory.createMetaClass(bool_class));
+		setValue(result, false);
 	}
-	
+
 }
 /* END OF FILE */

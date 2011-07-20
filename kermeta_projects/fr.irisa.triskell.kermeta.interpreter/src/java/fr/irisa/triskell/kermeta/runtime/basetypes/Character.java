@@ -11,7 +11,14 @@ public class Character {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::compareTo(other)
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, getCharacterValue(self).compareTo(getCharacterValue(param0)));
+		// if param0 is effectively a Character, then makes the test
+		if(RuntimeObject.CHARACTER_VALUE.equals(param0.getPrimitiveType())) {
+			Integer.setValue(result, getCharacterValue(self).compareTo(getCharacterValue(param0)));
+		}
+		// if not, set the result to 0
+		else {
+			Integer.setValue(result, 0);
+		}
 		return result;
 	}
 	
@@ -25,15 +32,31 @@ public class Character {
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::equals(element)
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		if(getCharacterValue(self).equals(getCharacterValue(param0))) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
+		boolean result;
+		// if param0 is effectively a Character, then makes the test
+		if(RuntimeObject.CHARACTER_VALUE.equals(param0.getPrimitiveType())) {
+			result = getCharacterValue(self).equals(getCharacterValue(param0));
+		}
+		// if not, set the result to false
+		else {
+			result = false;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 
 	// Implementation of method isNotEqual called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::isNotEqual(element)
 	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
-		if(getCharacterValue(self).equals(getCharacterValue(param0))) return self.getFactory().getMemory().falseINSTANCE;
-		else return self.getFactory().getMemory().trueINSTANCE;
+		boolean result;
+		// if param0 is effectively a Character, then makes the test
+		if(RuntimeObject.CHARACTER_VALUE.equals(param0.getPrimitiveType())) {
+			result = !getCharacterValue(self).equals(getCharacterValue(param0));
+		}
+		// if not, set the result to true
+		else {
+			result = true;
+		}
+		return self.getFactory().getMemory().getRuntimeObjectForBoolean(result);
 	}
 
 	public static void setValue(RuntimeObject ch, char value) {
