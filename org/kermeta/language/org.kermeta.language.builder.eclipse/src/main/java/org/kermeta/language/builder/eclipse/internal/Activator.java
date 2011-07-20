@@ -38,6 +38,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
+	private BundleContext myContext = null;
 	
 	protected MessagingSystem messaggingSystem;
 
@@ -60,6 +61,7 @@ public class Activator extends AbstractUIPlugin {
 		messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "Kermeta builder console");
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
+		this.setMyContext(context);
 	}
 
 	/*
@@ -82,6 +84,14 @@ public class Activator extends AbstractUIPlugin {
 
 	public MessagingSystem getMessaggingSystem() {
 		return messaggingSystem;
+	}
+
+	public BundleContext getMyContext() {
+		return myContext;
+	}
+
+	public void setMyContext(BundleContext myContext) {
+		this.myContext = myContext;
 	}
 
 

@@ -10,6 +10,8 @@ package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +19,11 @@ import java.util.HashMap;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
@@ -26,6 +31,7 @@ import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
+import org.osgi.framework.Bundle;
 
 public class KPBuilder {
 	
@@ -86,8 +92,10 @@ public class KPBuilder {
 	
 	synchronized public void compile(){
 		try {		
+			ArrayList<String> additionalCalssPath = new ArrayList<String>();		
+			
 			// for reflexivity set the bundle context
-			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, new ArrayList<String>(),true);
+			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, additionalCalssPath,true);
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
@@ -108,14 +116,32 @@ public class KPBuilder {
 
 	synchronized public void build(){
 		try {		
-			// for reflexivity set the bundle context
-			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, new ArrayList<String>(),false);
+			ArrayList<String> additionalClassPath = new ArrayList<String>();
+			
+			try {
+				File theFile = findBundleLocationForClassPath("org.kermeta.scala.scala-library");
+				additionalClassPath.add(theFile.getAbsolutePath());
+				theFile = findBundleLocationForClassPath("org.kermeta.language.library.core");
+				additionalClassPath.add(theFile.getAbsolutePath());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
 		}
+	}
+
+
+	private File findBundleLocationForClassPath(String bundleSymbolicName) throws IOException, URISyntaxException {
+		StringBuffer thePath = new StringBuffer(FileLocator.resolve(Platform.getBundle(bundleSymbolicName).getEntry("/")).getFile());
+		thePath = thePath.replace(thePath.length()-2, thePath.length(), "");
+		File theFile = new File(new URI(thePath.toString()));
+		return theFile;
 	}
 	
 	/**
