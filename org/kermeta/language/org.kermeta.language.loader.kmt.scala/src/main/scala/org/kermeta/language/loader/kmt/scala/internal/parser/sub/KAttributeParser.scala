@@ -17,10 +17,10 @@ import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 trait KAttributeParser extends KAbstractParser with KGenericTypeParser {
 
   def propertyDeclKeyword = ( "attribute" | "reference" )
-  def collectionModifierKeyword = ("seq" | "seq" | "oset" |"bag")
+  def collectionModifierKeyword = ("set" | "seq" | "oset" |"bag")
   
-  def attribute : Parser[Property] = propertyDeclKeyword ~ ident ~ ":" ~ opt(collectionModifierKeyword) ~ genericQualifiedType ~ opt(attributeBound|attributeBounds) ^^ { case propertyKeyword ~ id ~ _ ~ collectionModifier ~ qType ~ bounds =>
-      var newo = StructureFactory.eINSTANCE.createProperty
+  def attribute : Parser[Property] = propertyDeclKeyword ~ ident ~ ":" ~ opt(collectionModifierKeyword) ~ genericQualifiedType ~ opt("#" ~> ident) ~ opt(attributeBounds) ^^ { case propertyKeyword ~ id ~ _ ~ collectionModifier ~ qType ~ ooposite ~ bounds =>
+      val newo = StructureFactory.eINSTANCE.createProperty
       newo.setName(id)
       propertyKeyword match {
         case "attribute" => newo.setIsComposite(true)
@@ -39,25 +39,26 @@ trait KAttributeParser extends KAbstractParser with KGenericTypeParser {
         case None => newo.setLower(0);newo.setUpper(1)
         case Some(bb)=> newo.setLower(bb._1);newo.setUpper(bb._2)
       }
-      var newqType = KmBuildHelper.selectType(newo,qType)
+      ooposite match {
+        case Some(opositeName)=>{
+          val unresolveProp = StructureFactory.eINSTANCE.createUnresolvedProperty()
+          unresolveProp.setPropertyIdentifier(opositeName)
+          newo.getOwnedUnresolvedProperties.add(unresolveProp)
+          newo.setOpposite(unresolveProp)
+        }
+        case None =>
+      }
+
+      val newqType = KmBuildHelper.selectType(newo,qType)
       newo.getContainedType.add(newqType)
       //newtype.setTypeIdentifier(name)
       newo.setType(newqType)
       newo
   }
 
-  def attributeBound : Parser[Tuple2[Int,Int]] = "[" ~ ( numericLit | "*" ) ~ "]" ^^ { case _ ~ bound ~ _ =>
-      bound match {
-        case "*" => (-1,-1)
-        case s : String => (Integer.parseInt(s),Integer.parseInt(s))
-      }
-      
-  }
-  def attributeBounds : Parser[Tuple2[Int,Int]] = "[" ~> numericLit ~ ".." ~ (numericLit | "*" ) <~ "]" ^^{ case lower ~_ ~upper =>
-      upper match {
-        case "*"=> Tuple2(Integer.parseInt(lower),-1)
-        case upper : String => Tuple2(Integer.parseInt(lower),Integer.parseInt(upper))
-      }
-  }
+
+
+
+
 
 }

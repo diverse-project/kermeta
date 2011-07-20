@@ -19,7 +19,7 @@ class KMLexer(content : String) extends KMLexical {
  // def getAllToken = tokens
 
   def nextToken : Token = {
-    var tok = tokens.first
+    val tok = tokens.first
     //tokens.
     tokens = tokens.rest
     
@@ -37,19 +37,4 @@ class KMLexer(content : String) extends KMLexical {
 
   def atEnd = tokens.atEnd
 
-}
-
-
-object Main1 extends scala.Application
-{
-  println(scala.io.Source.fromFile(new File("/home/barais/workspaces/compiloV2/org.kermeta.language.loader.kmt.scala/sample.kmt")).getLines.size);
-  var buffer = new StringBuffer
-  scala.io.Source.fromFile(new File("/home/barais/workspaces/compiloV2/org.kermeta.language.loader.kmt.scala/sample.kmt")).getLines.foreach(eq=>
-    buffer.append(eq + " ")
-  )
-  var lex =  new KMLexer(buffer.toString)
-  var v =lex.nextToken
-//  new KMLexer(buffer.toString).
-
-//  println("toto")
 }

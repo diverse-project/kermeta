@@ -22,8 +22,8 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
   /* END SUB PARSER CONTRACT */
 
 
-  def operationParameters = repsep(operationParameter ~ opt(attributeBound|attributeBounds) ,",")
-  def operationReturnType = opt(":" ~> genericQualifiedType ~ opt(attributeBound|attributeBounds))
+  def operationParameters = repsep(operationParameter ~ opt(attributeBounds) ,",")
+  def operationReturnType = opt(":" ~> genericQualifiedType ~ opt(attributeBounds))
   def methodFromType = opt("from" ~> genericQualifiedType )
 
   def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>

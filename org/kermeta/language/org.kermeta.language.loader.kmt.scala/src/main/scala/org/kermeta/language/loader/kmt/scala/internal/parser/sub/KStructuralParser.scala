@@ -25,72 +25,72 @@ trait KStructuralParser extends KAbstractParser {
 
   def fExpressionExpressionWithCallParser = Parser {
     in =>
-      val elems = new ListBuffer[Expression]
-      val p0 = fExpression // avoid repeatedly re-evaluating by-name parser
-      @tailrec def applyp(in0: Input): ParseResult[List[Expression]] =
-        p0(in0) match {
-          case Success(x, rest) => {
+    val elems = new ListBuffer[Expression]
+    val p0 = fExpression // avoid repeatedly re-evaluating by-name parser
+    @tailrec def applyp(in0: Input): ParseResult[List[Expression]] =
+      p0(in0) match {
+        case Success(x, rest) => {
             x match {
 
 
               case self: SelfExpression => {
-                if (elems.size == 0) {
-                  elems += x;
-                  applyp(rest)
-                } else {
-                  Success(elems.toList, in0)
+                  if (elems.size == 0) {
+                    elems += x;
+                    applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
                 }
-              }
 
               case cf: Literal => {
-                if (elems.size == 0) {
-                  elems += x;
-                  applyp(rest)
-                } else {
-                  Success(elems.toList, in0)
+                  if (elems.size == 0) {
+                    elems += x;
+                    applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
                 }
-              }
               case cf: CallResult => {
-                if (elems.size == 0) {
-                  elems += x;
-                  applyp(rest)
-                } else {
-                  Success(elems.toList, in0)
+                  if (elems.size == 0) {
+                    elems += x;
+                    applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
                 }
-              }
 
 
 
               case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
-                elems += x;
-                applyp(rest)
-              }
-              case cf: UnresolvedCall if (!cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
-                if (elems.size == 0) {
                   elems += x;
                   applyp(rest)
-                } else {
-                  Success(elems.toList, in0)
                 }
-              }
+              case cf: UnresolvedCall if (!cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                  if (elems.size == 0) {
+                    elems += x;
+                    applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
+                }
               case _@e => {
-                if (elems.size > 0) {
-                  Success(elems.toList, in0)
+                  if (elems.size > 0) {
+                    Success(elems.toList, in0)
 
-                } else {
-                  elems += x;
-                  Success(elems.toList, rest)
+                  } else {
+                    elems += x;
+                    Success(elems.toList, rest)
+                  }
+
+
+                  //SI ELEMS > 0
+                  // SUCESS
+                  // otherwise
+                  //  NoSucess
                 }
-
-
-                //SI ELEMS > 0
-                // SUCESS
-                // otherwise
-                //  NoSucess
-              }
             }
           }
-          case ns: NoSuccess => {
+        case ns: NoSuccess => {
 
 
             if (elems.size > 0) {
@@ -100,9 +100,9 @@ trait KStructuralParser extends KAbstractParser {
               ns
             }
           }
-        }
+      }
 
-      applyp(in)
+    applyp(in)
   }
 
 
@@ -118,23 +118,23 @@ trait KStructuralParser extends KAbstractParser {
       // recreate a hierachy for Calls that must be nested in the target of another expression
       println(l.size + " " + l.mkString("\n"))
       l.reverse.foreach(p => {
-        p match {
-          case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
-            previousUnresolvedCall match {
-              case None => previousUnresolvedCall = Some(cf); processedList = cf :: processedList
-              case Some(pe) => pe.setTarget(cf); previousUnresolvedCall = Some(cf)
-            }
-          }
-          case _@e => {
-            previousUnresolvedCall match {
-              case None => processedList = e :: processedList
-              case Some(pe) => pe.setTarget(e); previousUnresolvedCall = None
-            }
+          p match {
+            case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                previousUnresolvedCall match {
+                  case None => previousUnresolvedCall = Some(cf); processedList = cf :: processedList
+                  case Some(pe) => pe.setTarget(cf); previousUnresolvedCall = Some(cf)
+                }
+              }
+            case _@e => {
+                previousUnresolvedCall match {
+                  case None => processedList = e :: processedList
+                  case Some(pe) => pe.setTarget(e); previousUnresolvedCall = None
+                }
+              }
+
           }
 
-        }
-
-      })
+        })
       if (processedList.size > 1) {
         println("fail")
         println(processedList.mkString)
@@ -144,8 +144,8 @@ trait KStructuralParser extends KAbstractParser {
   }
 
   /*  def fExpressionMergedCall : Parser[Expression] = fCall ^^ {
-    case _@e => e	
-  }*/
+   case _@e => e	
+   }*/
 
 
   /**
@@ -160,21 +160,21 @@ trait KStructuralParser extends KAbstractParser {
       // navigate the original list in the reverse order and rebuild a list with the correct expression,
       // recreate a hierarchy for Calls that must be nested in the target of another expression
       list.toList.reverse.foreach(p => {
-        p match {
-          case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
-            previousUnresolvedCall match {
-              case None => previousUnresolvedCall = Some(cf); processedList = cf :: processedList
-              case Some(pe) => pe.setTarget(cf); previousUnresolvedCall = Some(cf)
-            }
+          p match {
+            case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                previousUnresolvedCall match {
+                  case None => previousUnresolvedCall = Some(cf); processedList = cf :: processedList
+                  case Some(pe) => pe.setTarget(cf); previousUnresolvedCall = Some(cf)
+                }
+              }
+            case _@e => {
+                previousUnresolvedCall match {
+                  case None => processedList = e :: processedList
+                  case Some(pe) => pe.setTarget(e); previousUnresolvedCall = None
+                }
+              }
           }
-          case _@e => {
-            previousUnresolvedCall match {
-              case None => processedList = e :: processedList
-              case Some(pe) => pe.setTarget(e); previousUnresolvedCall = None
-            }
-          }
-        }
-      })
+        })
       processedList
   }
 
@@ -205,5 +205,23 @@ trait KStructuralParser extends KAbstractParser {
 
       newo
   }
+  
+  private def attributeBound : Parser[Tuple2[Int,Int]] = "[" ~ ( numericLit | "*" ) ~ "]" ^^ { case _ ~ bound ~ _ =>
+      bound match {
+        case "*" => (-1,-1)
+        case s : String => (Integer.parseInt(s),Integer.parseInt(s))
+      }
+
+  }
+  private def biattributeBounds : Parser[Tuple2[Int,Int]] = "[" ~> numericLit ~ ".." ~ (numericLit | "*" ) <~ "]" ^^{ case lower ~_ ~upper =>
+      upper match {
+        case "*" => Tuple2(Integer.parseInt(lower),-1)
+        case upperS : String => Tuple2(Integer.parseInt(lower),Integer.parseInt(upperS))
+      }
+  }
+
+  def attributeBounds = ( biattributeBounds | attributeBound )
+  
+  
 
 }
