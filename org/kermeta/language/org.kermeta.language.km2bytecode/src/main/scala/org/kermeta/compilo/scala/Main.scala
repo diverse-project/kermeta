@@ -172,6 +172,7 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
 
 //inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndRaise.km"
 //inputFile = "/home/barais/cours/TAA20102011/hello.world.km"
+   // inputFile = "/home/barais/workspaces/compiloV2/org.kermeta.language.km2bytecode/hello.world.km"
         if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
@@ -184,13 +185,12 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
     /* Scalac compilation step */
 
 
-    if (scalacompile){
-      if (false && GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
+   if (scalacompile){
+      if (!GlobalConfiguration.useMaven){
         var classpath =EmbeddedScalaCompiler.getActualClasspath
         
         if (additionalClassPath != null)
           classpath = additionalClassPath ++ classpath
-        //  classpath = classpath ++ List("/home/barais/NetBeansProjects/org.kermeta.scala.compilo/target/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar")
         var oldOut : java.io.OutputStream = System.out
         var oldErr : java.io.OutputStream = System.err
 
@@ -201,17 +201,21 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
                 
         var compilationResult = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
         result = compilationResult
-
-        
         //Scala runner
-        if(compilationResult == 0){
+        if(compilationResult == 0 && GlobalConfiguration.exec){
 
-          EmbeddedScalaRunner.run(classpath+File.pathSeparator+GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
+          EmbeddedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
+        }
+        if (GlobalConfiguration.createPackage ){
+        	var fo =  new File(GlobalConfiguration.outputProject +File.separator + "target").getCanonicalFile
+        	fo.mkdirs
+        	_root_.org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.scalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
         }
         if (outputStream != null){
           System.setOut(new PrintStream(oldOut))
           System.setErr(new PrintStream(oldErr))
         }
+        
       }else{
         result = EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
       }

@@ -1,5 +1,5 @@
 package org.kermeta.compilo.scala
-
+ 
 import org.kermeta.compilo.scala.rich._
 import _root_.k2.utils.ReflexivityLoader
 import scala.collection.JavaConversions._

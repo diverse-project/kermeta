@@ -110,7 +110,12 @@ object GlobalConfiguration extends LogAspect{
                             else
                                 return true
     }
-
+    def useMaven() : Boolean = {var  exec = props.getProperty("usemaven")
+                            if ("false".equals(exec))
+                                return false
+                            else
+                                return true
+    }
   def baseClass() : String = {var  baseClass = props.getProperty("baseClass")
                           if (baseClass != null)
                               return baseClass
@@ -136,8 +141,8 @@ object GlobalConfiguration extends LogAspect{
     var outputFolder : String = null
     var outputBinFolder : String = null
     var scalaPrefix : String = "Scala"
-       @scala.reflect.BeanProperty
-    var scalaAspectPrefix : String = k2.utils.UTilScala.scalaAspectPrefix
+   
+      var scalaAspectPrefix : String = k2.utils.UTilScala.scalaAspectPrefix
     var workspaceURI : String = null
     var pluginURI : String = null
     var withRich : Boolean = true
