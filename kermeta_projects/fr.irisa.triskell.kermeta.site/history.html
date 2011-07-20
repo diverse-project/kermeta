@@ -20,7 +20,9 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 <ul>
 	<li>Fixed a problem when saving using a metamodel splitted in several ecore files.	
 	</li>
-	<li>#11318; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=11318&group_id=32&atid=205">Pb with XSD generated ecore with simple property hold by a complex mixed attribute.</a> Now we correctly deal with ecore files that use this structure.</li>	
+	<li>#11318; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=11318&group_id=32&atid=205">Pb with XSD generated ecore with simple property hold by a complex mixed attribute.</a> Now we correctly deal with ecore files that use this structure.</li>
+	<li>Fixed a problem in comparison methods of some basic types that inherit from Object and/or Comparable classes. Concerns operations equals, isNotEqual, isLower, isGreaterOrEqual, compareTo, isLowerOrEqual, isGreater in classes Boolean, Character, Integer, Real and String.
+	</li>	
 </ul>
 <h3>Improved features</h3>
 <ul>
