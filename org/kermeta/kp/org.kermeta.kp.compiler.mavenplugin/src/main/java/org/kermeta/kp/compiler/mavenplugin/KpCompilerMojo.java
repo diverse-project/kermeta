@@ -9,16 +9,12 @@
 package org.kermeta.kp.compiler.mavenplugin;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
@@ -27,7 +23,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
-import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 /**
  * This class implement a maven plugin that compiles a kermeta project into scala files and then bytecode
@@ -127,6 +122,14 @@ public class KpCompilerMojo extends AbstractMojo {
     private Boolean generateKmOnly;
 
     /**
+     * run : run K2 programs, default is false
+     *
+     * @parameter expression="false"
+     */
+    private Boolean run;
+
+    
+    /**
      * checkingEnabled : check modeling units
      *
      * @parameter expression="true"
@@ -147,6 +150,14 @@ public class KpCompilerMojo extends AbstractMojo {
      */
     private PackageEquivalence[] packageEquivalences;
 
+    /**
+     * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
+     *
+     * @parameter 
+     */
+    private String[] params;
+
+    
     public void execute() throws MojoExecutionException, MojoFailureException {
     	try {
 	        org.apache.log4j.BasicConfigurator.configure();
@@ -177,6 +188,12 @@ public class KpCompilerMojo extends AbstractMojo {
 		if(compiler.hasFailed)	{
                     throw new MojoExecutionException(compiler.errorMessage);
                 }
+		else{
+			if (run){
+				
+				compiler.runK2Program(classPathList,  Arrays.asList(params));
+			}
+		}
 	        // Add kp file and resolved km files in the resulting jar
 			// tell maven to include generated META-INF
 			Resource resource = new Resource();
