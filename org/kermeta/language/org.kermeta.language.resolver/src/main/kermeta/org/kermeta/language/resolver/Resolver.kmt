@@ -26,7 +26,6 @@ class Resolver
 		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
 		//Display all messages, do not raise exceptions
 		ctxt.verbose := 5
-		ctxt.exceptions := false
 	
 		var repository : EMFRepository init EMFRepository.new
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")

@@ -11,11 +11,14 @@ package language::helpers;
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/LanguageVisitor.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
+require "ResolverException.kmt"
 
 using org::kermeta::language::structure
+using org::kermeta::language::resolver
 using kermeta::standard
 
 aspect class LanguageVisitorContext {
+	attribute errors : OrderedSet<ResolverException>
 	//Verbose mode :
 	//0 = mute
 	//1 = ResolvedType not found + Other messages on UnresolvedTypes
@@ -24,8 +27,6 @@ aspect class LanguageVisitorContext {
 	//4 = AllResolved not found
 	//5 = All messages
 	attribute verbose : Integer
-	//Allow exceptions
-	attribute exceptions : Boolean
 	//Modeling unit the UnresolvedFinder is currently visiting
 	reference currentModelingUnit : ModelingUnit
 	//Package the UnresolvedFinder is currently visiting
@@ -45,6 +46,12 @@ aspect class LanguageVisitorContext {
 	reference foundType : Type
 	reference foundOperation : Operation
 	reference foundProperty : Property
+	
+	
+	operation initialise() : LanguageVisitorContext is do
+		errors := OrderedSet<ResolverException>.new
+		result := self
+	end
 	
 	//Return the name of the Object currently pointed by identifierCounter
 	operation getCurrentIdentifier() : String is do
@@ -86,6 +93,7 @@ aspect class LanguageVisitorContext {
 	end
 	
 	operation reset() : Void is do
+		errors.clear()
 		unresolved := void
 		unresolvedName := void
 		resetCompleteName("", Sequence<String>.new)

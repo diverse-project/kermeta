@@ -227,15 +227,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				end
 			}
 		end
+
 		error := error + ")"
-											
-		if (ctxt.exceptions) then				
-			var except : ResolverException init ResolverException.new.initialize(error, ctxt.unresolved)
-			//except.message := error
-			raise except
-		else
-			stdio.writeln(error)
-		end
+		ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolved))
 	end
 	
 	/*
@@ -283,14 +277,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				
 				var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + qualifiedPath + ctxt.unresolvedName
 				error := error + " in " + ctxt.unresolved.container.toString()
-				
-				if (ctxt.exceptions) then
-					var except : ResolverException init ResolverException.new
-					except.message := error
-					raise except
-				else
-					stdio.writeln(error)
-				end
+				ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolvedName))
 			end
 			if not ctxt.foundProperty.isVoid() then
 				ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty := ctxt.foundProperty
@@ -323,17 +310,8 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					//We look for the Operation in the ClassDefinition of this Class
 					ctxt.unresolved.asType(UnresolvedOperation).~from.asType(Class).typeDefinition.asType(ClassDefinition).accept(resolvedOperationFinder, ctxt)
 				else
-					if (ctxt.verbose == 3 or ctxt.verbose == 5) then
-						var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
-						
-						if (ctxt.exceptions) then
-							var except : ResolverException init ResolverException.new
-							except.message := error
-							raise except
-						else
-							stdio.writeln(error)
-						end
-					end
+					var error : String init "Resolver: UnresolvedOperation " + ctxt.unresolvedName + " is inherited from a Type which is not a class:" + ctxt.unresolved.asType(UnresolvedOperation).~from.getMetaClass().toString()
+					ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolvedName))
 				end
 				
 			//If there is no from
@@ -364,13 +342,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
 					end
 					
-					if (ctxt.exceptions) then
-						var except : ResolverException init ResolverException.new
-						except.message := error
-						raise except
-					else
-						stdio.writeln(error)
-					end
+					ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolved))
 				end
 			else
 				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation

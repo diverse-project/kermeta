@@ -24,18 +24,15 @@ class ResolverResolvedTypeFinder inherits LanguageVisitor
 		newClass.typeDefinition := c
 		
 		if (ctxt.unresolved.asType(UnresolvedType).generics.size() != c.typeParameter.size()) then
-			var except : ResolverException init ResolverException.new
-			except.message := "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.unresolved.asType(UnresolvedType).typeIdentifier + "<"
+			var message : String init "Resolver: Not the same number of parameters in UnresolvedType " + ctxt.unresolved.asType(UnresolvedType).typeIdentifier + "<"
+			
 			ctxt.unresolved.asType(UnresolvedType).generics.each{ g |
-				except.message := except.message + g.toString + " "
+				message := message + g.toString + " "
 			}
-			except.message := except.message+ "> and in ClassDefinition " + c.name +"<"
-			c.typeParameter.each{ tp |
-				except.message := except.message + tp.toString + " "
-			}
-			except.message := except.message + ">"
-			except.objectCause := self
-			raise except
+			message := message+ "> and in ClassDefinition " + c.name +"<"
+			c.typeParameter.each{ tp | message := message + tp.toString + " " }
+			message := message + ">"
+			ctxt.errors.add(ResolverException.new.initialize(message, self))
 		end
 		var typeParamBinding : TypeVariableBinding
 		var i : Integer init 0

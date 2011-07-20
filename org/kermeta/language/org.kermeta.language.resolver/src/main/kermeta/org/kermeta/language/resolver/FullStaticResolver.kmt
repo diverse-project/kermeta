@@ -26,6 +26,7 @@ using kermeta::standard
 
 class FullStaticResolver
 {
+	attribute ctxt : LanguageVisitorContext
 
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
@@ -53,10 +54,8 @@ class FullStaticResolver
        	stdio.writeln("	********************* " + folder+"results/....km" + " saved ************************")
 	end
 	
-	reference errors : ResolverException[*]
-	
 	operation getErrors() : OrderedSet<ResolverException> is do
-		result := errors
+		result := ctxt.errors
 	end
 
 	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
@@ -66,18 +65,12 @@ class FullStaticResolver
 	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
        	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-		var ctxt : LanguageVisitorContext init LanguageVisitorContext.new
+
+		ctxt := LanguageVisitorContext.new.initialise()
 		//Display all messages from Resolver
 		ctxt.verbose := 5
-		//Do not raise exceptions for these messages
-		ctxt.exceptions := true
 	
-       	do
-       		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
-       	rescue (resolverException : ResolverException)
-		    errors.add(resolverException)
-		end
-       	       	
+   		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
        	//checkDangling(unresolvedModelingUnit.containingResource())       	
@@ -91,12 +84,9 @@ class FullStaticResolver
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
 		
 		staticSetterContext.verbose := false
+		staticSetterContext.errors  := ctxt.errors
 		
-		do
-			unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
-		rescue (resolverException : ResolverException)
-		    errors.add(resolverException)
-		end
+		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
 		
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
        	result := unresolvedModelingUnit

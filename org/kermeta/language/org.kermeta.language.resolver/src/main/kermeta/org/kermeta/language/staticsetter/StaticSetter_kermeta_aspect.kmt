@@ -19,6 +19,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
 
+using org::kermeta::language::resolver
 using org::kermeta::language::structure
 using org::kermeta::language::staticsetter
 
@@ -93,14 +94,13 @@ package behavior {
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
 		 */
 		operation setInferedStaticType(type : Type) : Type is do
-			if type.isVoid then
-				raise org::kermeta::language::resolver::ResolverException.new.initialize("Unable to static set this element",  self)
+			if not type.isVoid then
+				self.staticType := type
+				if(type.container.isVoid) then
+					self.containedType.add(self.staticType)
+				end
+				result := self.staticType
 			end
-			self.staticType := type
-			if(type.container.isVoid) then
-				self.containedType.add(self.staticType)
-			end
-			result := self.staticType
 		end
 	}
 	
@@ -290,9 +290,7 @@ package behavior {
 				end	
 			end
 			if result.isVoid then
-				//FIXME To remove -- only to debug
-				//raise org::kermeta::language::resolver::ResolverException.new.initialize("failed to resolve UnresolvedCall "+ name, void)
-				stdio.writeln("--------------FAILED to resolve UnresolvedCall "+ name)
+				context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined.", self))
 				result := self		
 			end
 		end
@@ -538,7 +536,7 @@ package behavior {
 			var operationContainer : Operation init findOperation(self.container().asType(KermetaModelElement))
 			
 			if (operationContainer.isVoid) then
-				raise org::kermeta::language::resolver::ResolverException.new.initialize("invalid CallResult : no operation container", self)
+				context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
 			else
 				self.setInferedStaticType(operationContainer.type)
 			end
