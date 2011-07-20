@@ -15,15 +15,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class FileHelpers {
-	
 	private static String cleanIfNecessaryPath(String resourcePath) {
 		// deal with windows \\ delimiter
-		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/");
+		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/").replaceAll(" ", "%20");
 				
-		if ( !unifiedSepratorResourcePath.startsWith("file:") && !unifiedSepratorResourcePath.startsWith("jar:") ){
+		if(!unifiedSepratorResourcePath.startsWith("file:") && !unifiedSepratorResourcePath.startsWith("jar:"))
 			unifiedSepratorResourcePath = "file:/" + unifiedSepratorResourcePath;
-		}
-		unifiedSepratorResourcePath = unifiedSepratorResourcePath.replaceAll(" ", "%20");
 			
 		return unifiedSepratorResourcePath;
 	}
@@ -40,7 +37,7 @@ public class FileHelpers {
 		return file.toURI().toURL();
 	}
 	
-	public static String URLToStringWithoutFile(URL url) throws URISyntaxException {
-		return url.toString().replaceFirst("file:/", "");
+	public static String URLToStringWithoutFile(final URL url) {
+		return url.getFile();
 	}
 }
