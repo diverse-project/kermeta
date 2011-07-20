@@ -50,6 +50,15 @@ trait KStructuralParser extends KAbstractParser {
                   Success(elems.toList, in0)
                 }
               }
+              case cf: CallResult => {
+                if (elems.size == 0) {
+                  elems += x;
+                  applyp(rest)
+                } else {
+                  Success(elems.toList, in0)
+                }
+              }
+
 
 
               case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {

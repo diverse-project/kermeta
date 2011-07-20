@@ -23,7 +23,7 @@ object Runner {
 
   def main(args: Array[String]): Unit = {
 
-    val input = Source.fromFile(new java.io.File("bug2.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
+    val input = Source.fromFile(new java.io.File("sample.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
 
 
     //  val input = Source.fromFile(new java.io.File("022_testExpression.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
