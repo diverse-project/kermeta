@@ -1273,8 +1273,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	method visitCallFeature(visited : CallFeature, ctxt : LanguageVisitorContext) : Void is do
 		if (visited.toBeVisitedAsCallFeature(pass)) then			
 			visitCallExpression(visited, ctxt)
-			
-			visited.target.accept(self, ctxt)
+			if (not visited.target.isVoid()) then
+				visited.target.accept(self, ctxt)
+			end
 		end
 	end
 	
