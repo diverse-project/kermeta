@@ -14,7 +14,7 @@ class Test_opcall {
 	
     operation testOpCall() : kermeta::standard::Integer is do
         result := operation_asg(1234)
-        stdio.writeln(result.toString)
+        kermeta::io::StdIO.writeln(result.toString)
     end
 
     operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
