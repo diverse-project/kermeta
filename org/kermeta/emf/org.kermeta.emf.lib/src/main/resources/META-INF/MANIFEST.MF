@@ -12,7 +12,7 @@ Export-Package: org.eclipse.emf.common,org.eclipse.emf.common.archive,
  emf.ecore.xml.type.util
 Bundle-Vendor: Eclipse
 Bundle-ClassPath: .
-Bundle-Version: 2.6.0
+Bundle-Version: 2.7.0
 Bundle-Name: EMF
 Bundle-ManifestVersion: 2
 Created-By: 1.6.0_0 (Sun Microsystems Inc.)

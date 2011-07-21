@@ -8,7 +8,7 @@
     <name>Kermeta :: Emf :: Lib</name>
     <url>http://maven.apache.org</url>
 
-    <version>2.6.0</version>
+    <version>2.7.0</version>
 
     <build>
         <plugins>
@@ -20,22 +20,6 @@
                     </archive>
                 </configuration>
             </plugin>
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-dependencies</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>truezip-maven-plugin</artifactId>
@@ -50,15 +34,15 @@
                         <configuration>
                             <filesets>
                                 <fileset>
-                                    <directory>lib/org.eclipse.emf.common_2.6.0.v20100614-1136.jar</directory>
+                                    <directory>lib/org.eclipse.emf.common_2.7.0.v20110605-0747.jar</directory>
                                     <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                                 </fileset>
                                 <fileset>
-                                    <directory>lib/org.eclipse.emf.ecore.xmi_2.5.0.v20100521-1846.jar</directory>
+                                    <directory>lib/org.eclipse.emf.ecore_2.7.0.v20110605-0747.jar</directory>
                                     <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                                 </fileset>
                                 <fileset>
-                                    <directory>lib/org.eclipse.emf.ecore_2.6.0.v20100614-1136.jar</directory>
+                                    <directory>lib/org.eclipse.emf.ecore.xmi_2.7.0.v20110520-1406.jar</directory>
                                     <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                                 </fileset>
                             </filesets>
