@@ -95,11 +95,11 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		switch (msgKind) {
 		case UserWARNING:
 		case DevWARNING:
-			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",null));
+			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",throwable));
 			break;
 		case UserERROR:
 		case DevERROR:
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",null));
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",throwable));
 			break;
 		default:
 			break;
