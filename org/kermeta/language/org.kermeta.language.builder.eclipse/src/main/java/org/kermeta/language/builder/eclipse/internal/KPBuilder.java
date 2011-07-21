@@ -117,15 +117,13 @@ public class KPBuilder {
 	synchronized public void build(){
 		try {		
 			ArrayList<String> additionalClassPath = new ArrayList<String>();
-			
-			try {
-				File theFile = findBundleLocationForClassPath("org.kermeta.scala.scala-library");
-				additionalClassPath.add(theFile.getAbsolutePath());
-				theFile = findBundleLocationForClassPath("org.kermeta.language.library.core");
-				additionalClassPath.add(theFile.getAbsolutePath());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+
+			findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
+			findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
+			findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
+			findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
+			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
+			findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
 
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 			if (result != null) {
@@ -137,11 +135,17 @@ public class KPBuilder {
 	}
 
 
-	private File findBundleLocationForClassPath(String bundleSymbolicName) throws IOException, URISyntaxException {
-		StringBuffer thePath = new StringBuffer(FileLocator.resolve(Platform.getBundle(bundleSymbolicName).getEntry("/")).getFile());
-		thePath = thePath.replace(thePath.length()-2, thePath.length(), "");
-		File theFile = new File(new URI(thePath.toString()));
-		return theFile;
+	private void findBundleLocationForClassPath(String bundleSymbolicName, ArrayList<String> additionalClassPath) {
+		try {
+			StringBuffer thePath = new StringBuffer(FileLocator.resolve(Platform.getBundle(bundleSymbolicName).getEntry("/")).getFile());
+			thePath = thePath.replace(thePath.length()-2, thePath.length(), "");
+			File theFile = new File(new URI(thePath.toString().replaceAll(" ", "%20")));
+			if (theFile!=null) {
+				additionalClassPath.add(theFile.getAbsolutePath());
+			}
+		} catch (Exception e) {
+			
+		}
 	}
 	
 	/**
