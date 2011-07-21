@@ -63,7 +63,7 @@ class FullStaticResolver
 	end
 
 	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
+	do	stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
        	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
 		ctxt := LanguageVisitorContext.new.initialise()
@@ -75,10 +75,13 @@ class FullStaticResolver
 		//checkUnresolved(unresolvedModelingUnit)
        	
        	result := unresolvedModelingUnit
+    rescue (e : kermeta::exceptions::Exception)
+    	raise e
+    end
 	end
 	
 	operation doStaticSetting(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do      	
-		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
+	do	stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
 		
 		staticSetterContext.verbose := false
@@ -88,6 +91,9 @@ class FullStaticResolver
 		
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
        	result := unresolvedModelingUnit
+    rescue (e : kermeta::exceptions::Exception)
+    	raise e
+    end 
 	end
 	
 	operation checkUnresolved(aKermetaModelElement : org::kermeta::language::structure::KermetaModelElement) : Void is do
