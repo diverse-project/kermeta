@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -43,6 +45,8 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	private static Map<HashMap<String,KPBuilder>,String> _compilingInPending = new HashMap<HashMap<String,KPBuilder>,String>();
 	private static Map<HashMap<String,KPBuilder>,String> compilingInProgress = Collections.synchronizedMap(_compilingInProgress);
 	private static Map<HashMap<String,KPBuilder>,String> compilingInPending = Collections.synchronizedMap(_compilingInPending);
+	private final static Lock lockForParse = new ReentrantLock();
+	private final static Lock lockForCompile = new ReentrantLock();
 	
 
 	private KermetaBuilder(){	
@@ -77,13 +81,13 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
 	@Override
 	public void compileFromKP(String kpIdentifier) {
-		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>(compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
+		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>(lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
 		theRunner.start();
 	}
 
 	@Override
 	public void parseSpecificFile(IResource toParse, String content) {
-		KermetaRunner<IResource,String> theRunner = new KermetaRunner<IResource,String>(parsingInPending, parsingInProgress, toParse, content, new KermetaParser());
+		KermetaRunner<IResource,String> theRunner = new KermetaRunner<IResource,String>(lockForParse, parsingInPending, parsingInProgress, toParse, content, new KermetaParser());
 		theRunner.start();		
 	}
 

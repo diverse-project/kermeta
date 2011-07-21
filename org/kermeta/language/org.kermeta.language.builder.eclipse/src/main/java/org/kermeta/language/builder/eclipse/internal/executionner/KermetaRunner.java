@@ -2,7 +2,6 @@ package org.kermeta.language.builder.eclipse.internal.executionner;
 
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class KermetaRunner<G,H> extends Thread{
 	
@@ -11,6 +10,7 @@ public class KermetaRunner<G,H> extends Thread{
 	final private G concernedResource;
 	final private H concernedElement;
 	final private KermetaExecutionner<G,H> concernedExecution;
+	Lock lock = null;
 	
 	
 	/**
@@ -22,17 +22,17 @@ public class KermetaRunner<G,H> extends Thread{
 	 * @param concernedElement Object representing data needed by the execution
 	 * @param concernedExecution KermetaExecutionned containing the execution
 	 */
-	public KermetaRunner(Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
+	public KermetaRunner(Lock theLocker,Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
 		this.waitingList = waitingList;
 		this.runningList = runningList;
 		this.concernedResource = concernedResource;
 		this.concernedElement = concernedElement;
 		this.concernedExecution = concernedExecution;
+		this.lock = theLocker;
 	}
 
 	@Override
 	public void run() {
-		final Lock lock = new ReentrantLock();
 		
 		H currentElement = concernedElement;
 		if (waitingList.containsKey(concernedResource)) {
