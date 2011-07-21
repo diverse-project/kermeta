@@ -1,0 +1,96 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.emf</groupId>
+    <artifactId>emf.lib</artifactId>
+    <packaging>jar</packaging>
+    <name>Kermeta :: Emf :: Lib</name>
+    <url>http://maven.apache.org</url>
+
+    <version>2.6.0</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+<!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>copy-out-files</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.common_2.6.0.v20100614-1136.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.ecore.xmi_2.5.0.v20100521-1846.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.ecore_2.6.0.v20100614-1136.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                            </filesets>
+
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>          
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/target/dependency/org/eclipse/emf</directory>
+                <targetPath>org/eclipse/emf</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+	<distributionManagement>
+        <repository>
+            <id>kermeta-public-release</id>
+            <name>Kermeta public release repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>kermeta-public-snapshot</id>
+            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
