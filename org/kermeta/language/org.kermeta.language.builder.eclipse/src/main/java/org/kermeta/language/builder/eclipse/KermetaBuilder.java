@@ -10,6 +10,7 @@
 package org.kermeta.language.builder.eclipse;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,9 @@ import org.kermeta.language.builder.eclipse.internal.KPBuilder;
 import org.kermeta.language.builder.eclipse.internal.KermetaParser;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaRunner;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
@@ -119,15 +122,28 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 
 	@Override
 	public void setDirty(IResource kmt, boolean dirty) {
+		try {
+			Activator.getDefault().getMessaggingSystem().flushProblem(LOG_MESSAGE_GROUP, kmt.getLocationURI().toURL());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		if (kpBuilders.get(findKPidentifierFromKMT(kmt)) != null) {
 			if (kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)) != null) {
 				kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
 			} else {
-				Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", this.getClass().getCanonicalName());
+				try {				
+					Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		else{
-			Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", this.getClass().getCanonicalName());
+			try {
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
