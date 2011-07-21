@@ -14,16 +14,21 @@ import org.kermeta.language.resolver.internal.Activator;
 import org.kermeta.language.resolver.internal.KmResolverOperations;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KmResolverImpl4Eclipse implements KmResolver {
 
 	KmResolverOperations operations = null;
-
-	public KmResolverImpl4Eclipse(){   	
+		
+	/** constructor for use in standalone mode, where we must set the MessagingSystem for internal logging
+	 * 
+	 * @param logger, if null will use the default System.out MessagingSystem
+	 */
+	public KmResolverImpl4Eclipse(MessagingSystem logger){ 
 		org.kermeta.language.language.resolverrunner.MainRunner.init4eclipse();
 		Activator.getDefault().reflexivityLoaderContext();
 		FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory.createFullStaticResolver();
-		operations = new KmResolverOperations(resolver);
+		operations = new KmResolverOperations(resolver, logger);
 	}
 
 	@Override

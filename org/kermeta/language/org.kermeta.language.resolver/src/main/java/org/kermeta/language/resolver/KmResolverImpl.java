@@ -13,15 +13,20 @@ import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.resolver.internal.KmResolverOperations;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KmResolverImpl implements KmResolver {
 
 	KmResolverOperations operations = null;
 	
-	public KmResolverImpl(){   	
+	/** constructor for use in standalone mode, where we must set the MessagingSystem for internal logging
+	 * 
+	 * @param logger, if null will use the default System.out MessagingSystem
+	 */
+	public KmResolverImpl(MessagingSystem logger){   	
 		org.kermeta.language.language.resolverrunner.MainRunner.init();
 		FullStaticResolver resolver = org.kermeta.language.resolver.KerRichFactory.createFullStaticResolver();
-    	operations = new KmResolverOperations(resolver);
+    	operations = new KmResolverOperations(resolver, logger);
 	}
 	
 	@Override

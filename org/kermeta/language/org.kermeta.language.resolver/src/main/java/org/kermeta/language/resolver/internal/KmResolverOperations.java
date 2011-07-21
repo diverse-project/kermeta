@@ -21,18 +21,27 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.resolver.ResolverException;
+import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage.Severity;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KmResolverOperations {
 
 	FullStaticResolver resolver = null;
+	MessagingSystem logger = null;
 	
-	public KmResolverOperations(FullStaticResolver resolver){   	
+	public KmResolverOperations(FullStaticResolver resolver, MessagingSystem logger){   	
 		this.resolver = resolver;
+		if (logger == null) {
+			this.logger = new org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem();
+		}
+		else{
+			this.logger = logger;
+		}
 	}
 	
 	protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
@@ -72,10 +81,10 @@ public class KmResolverOperations {
 		ModelingUnit muResolved = null;
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = resolver.doResolving(enforceAspect(mu));
-		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString() , e, null);
-    		result.getProblems().add(pm);
+    		muResolved = resolver.doResolving(enforceAspect(mu));	
+    	}
+    	catch (Exception e) {
+    		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
 		}
 
     	result.setResult(muResolved);
@@ -95,9 +104,9 @@ public class KmResolverOperations {
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved = resolver.doStaticSetting(enforceAspect(mu));
-		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString(), e, null);
-    		result.getProblems().add(pm);
+		}
+    	catch (Exception e) {
+    		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
 		}
 
     	result.setResult(muResolved);
@@ -119,8 +128,7 @@ public class KmResolverOperations {
     	try {
     		muResolved = resolver.resolve(enforceAspect(mu));
 		} catch (Exception e) {
-			ResultProblemMessage pm = new ResultProblemMessage(Severity.FATAL, e.getMessage() != null ? e.getMessage() : e.toString(), e, null);
-    		result.getProblems().add(pm);
+			logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
 		}
 
     	result.setResult(muResolved);
