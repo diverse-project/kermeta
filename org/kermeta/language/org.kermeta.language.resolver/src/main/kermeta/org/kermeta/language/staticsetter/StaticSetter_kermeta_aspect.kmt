@@ -177,13 +177,14 @@ package behavior {
 				// replace current target by the possibly resolved one
 				target := target.resolveCallAndInferStatic(context)
 				targetType := target.staticType
-				if (context.verbose) then stdio.writeln("             targetType is infered as "+ targetType.toString) end
+				if (context.verbose) then stdio.writeln("             targetType is infered as "+ targetType.toString + " for UnresolvedCall " + name) end
 			end 
 			
 			super(context)		
 				
 			// if not already found, look for an Operation
 			if result.isVoid then
+				if (targetType.isVoid) then stdio.writeln("warning targetType is void "+ name ) end
 				var op : Operation init targetType.getCallableOperationByName(self.name)
 				if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
@@ -276,9 +277,11 @@ package behavior {
 				
 				// TODO deal with using
 				if not typeDef.isVoid then
+					if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found typeDef " + typeDef.name) end
 					var callTypeLiteral : CallTypeLiteral init CallTypeLiteral.new
 					callTypeLiteral.typeref := TypeReference.new
 					if typeDef.isInstanceOf(ClassDefinition) then
+						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found a ClassDefinition " + typeDef.name) end
 						callTypeLiteral.typeref.type := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition))
 						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)				
 						// TODO deal with generics
