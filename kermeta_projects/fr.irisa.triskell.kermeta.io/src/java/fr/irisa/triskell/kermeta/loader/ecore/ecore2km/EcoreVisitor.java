@@ -43,6 +43,7 @@ import org.kermeta.io.plugin.IOPlugin;
  * @author Franck Fleurey
  * IRISA / INRIA / University of rennes 1
  * Distributed under the terms of the EPL license
+ * Bug 13044 fixed
  */
 public class EcoreVisitor {
 	
