@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Export-Package: org.eclipse.emf.compare
+Bundle-Vendor: INRIA
+Bundle-ClassPath: .
+Bundle-Version: 2.6.0
+Bundle-Name: EMF :: Compare
+Bundle-ManifestVersion: 2
+Created-By: 1.6.0_0 (Sun Microsystems Inc.)
+Bundle-SymbolicName: org.eclipse.emf
+Import-Package: javax.xml.datatype,javax.xml.namespace,javax.xml.parse
+ rs,org.w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers
+

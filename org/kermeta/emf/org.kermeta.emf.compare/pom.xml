@@ -1,0 +1,107 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.emf</groupId>
+    <artifactId>emf.compare</artifactId>
+    <packaging>jar</packaging>
+    <version>2.6.0</version>
+    <name>Kermeta :: Emf :: Compare</name>
+    <url>http://maven.apache.org</url>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+<!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>copy-out-files</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.compare.diff_1.1.0.v201006150400.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.compare.doc_1.1.0.v201006150400.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.compare.epatch_1.1.0.v201006150400.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.compare.match_1.1.0.v201006150400.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+                                <fileset>
+                                    <directory>lib/org.eclipse.emf.compare_1.1.0.v201006150400.jar</directory>
+                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                                </fileset>
+
+                            </filesets>
+
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/target/dependency/org/eclipse/emf</directory>
+                <targetPath>org/eclipse/emf</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+
+    <distributionManagement>
+        <repository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local release repository</name>
+            <url>file:/var/www/html/maven2</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>tipimouss-local-maven-repository</id>
+            <name>Tipimouss Local  snapshot repository</name>
+            <url>file:/var/www/html/maven2-snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
