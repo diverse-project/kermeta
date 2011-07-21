@@ -45,7 +45,7 @@ public class KermetaEditorConfiguration extends TextSourceViewerConfiguration {
 	   // Set this processor for each supported content type
 	   assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 	   assistant.enableAutoActivation(true);
-	   //assistant.setAutoActivationDelay(400);
+	   assistant.setAutoActivationDelay(400);
 	   assistant.enableAutoInsert(true);
 	   assistant.setRepeatedInvocationMode(true);
 	   assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);

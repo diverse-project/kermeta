@@ -9,6 +9,11 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -46,6 +51,9 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 		fScanner = scanner;
 	}
 
+	private Timer myTimer = new Timer();
+	private ArrayList<TimerTask> theTasks = new ArrayList<TimerTask>();
+	
 	/**
 	 * @see IPresentationRepairer#setDocument(IDocument)
 	 */
@@ -90,15 +98,28 @@ public class ScannerBasedDamagerRepairer implements IPresentationDamager,
 		if (!documentPartitioningChanged) {
 			try {
 			
-				IFile currentFile = fScanner.getCurrentFile();
+				final IFile currentFile = fScanner.getCurrentFile();
 				
 				//If the IFile is in the list, it seams that the file is in modification
 				if (Activator.getDefault().dirtyFilesContainment.containsKey(currentFile)) {
 					//Here, I compare the containment of the document to call parser only when containment is modified
 					//this test avoids infinite loop due to marking
 					if (! fDocument.get().equals(Activator.getDefault().dirtyFilesContainment.get(currentFile))) {
-						Activator.getDefault().dirtyFilesContainment.put(currentFile, fDocument.get());
-						KermetaBuilder.getDefault().parseSpecificFile(currentFile, fDocument.get());
+						for (TimerTask aWaitingTask : theTasks) {
+							aWaitingTask.cancel();
+						}
+						theTasks.clear();						
+						TimerTask aNewTask = new TimerTask() {
+							@Override
+							public void run() {
+								Activator.getDefault().dirtyFilesContainment.put(currentFile, fDocument.get());
+								KermetaBuilder.getDefault().parseSpecificFile(currentFile, fDocument.get());
+							}							
+						};
+						
+						theTasks.add(aNewTask);
+						myTimer.schedule(aNewTask, 500);
+						myTimer.purge();
 					}
 				}
 				
