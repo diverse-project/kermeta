@@ -1,0 +1,7 @@
+KermetaProject :"012_lambdaExpr" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/012_lambdaExpr.kmt" 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+} 
