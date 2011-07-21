@@ -460,9 +460,9 @@ public class KermetaCompiler {
 		KmResolver theResolver;
 
 		if (runInEclipse) {
-			theResolver = new KmResolverImpl4Eclipse();
+			theResolver = new KmResolverImpl4Eclipse(logger);
 		} else {
-			theResolver = new KmResolverImpl();
+			theResolver = new KmResolverImpl(logger);
 		}
 
 		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeResolving.km").convert(mu);
