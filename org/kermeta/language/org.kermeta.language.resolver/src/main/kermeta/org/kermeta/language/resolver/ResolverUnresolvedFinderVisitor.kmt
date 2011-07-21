@@ -124,11 +124,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				end
 			end
 		end
-		
+
 		if ctxt.foundType.isVoid() then
-			if (pass == 3 and (ctxt.verbose == 1 or ctxt.verbose >= 4)) then				
-				errorMsg(initialUnresolvedName, initialQualifiedPath, ctxt)
-			end
+			ctxt.errors.add(ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement))		
 		else
 			ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
@@ -269,15 +267,13 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			else
 				ctxt.currentModelingUnit.accept(resolvedPropertyFinder, ctxt)
 			end
-			if (ctxt.foundProperty.isVoid() and (ctxt.verbose == 2 or ctxt.verbose >= 4)) then
+			if ctxt.foundProperty.isVoid() then
 				var qualifiedPath : String init ""
-				ctxt.qualifiedPath.each{s|
-					qualifiedPath := qualifiedPath + s + "::"
-				}
+				ctxt.qualifiedPath.each{s | qualifiedPath := qualifiedPath + s + "::" }
 				
-				var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + qualifiedPath + ctxt.unresolvedName
-				error := error + " in " + ctxt.unresolved.container.toString()
-				ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolvedName))
+				var error : String init "Resolver: No corresponding Property found for UnresolvedProperty " + 
+							qualifiedPath + ctxt.unresolvedName + " in " + ctxt.unresolved.container.toString()
+				ctxt.errors.add(ResolverException.new.initialize(error, ctxt.currentElement))
 			end
 			if not ctxt.foundProperty.isVoid() then
 				ctxt.unresolved.asType(UnresolvedProperty).correspondingProperty := ctxt.foundProperty
@@ -335,15 +331,15 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			end
 
 			if (ctxt.foundOperation.isVoid()) then
-				if (ctxt.verbose >= 3) then			
-					var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName
-					error := error + " in " + ctxt.currentElement.asType(Operation).container.asType(ClassDefinition).name + "::" + ctxt.currentElement.asType(Operation).name
-					if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
-						error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
-					end
-					
-					ctxt.errors.add(ResolverException.new.initialize(error, ctxt.unresolved))
+				var error : String init "Resolver: No corresponding Operation found for UnresolvedOperation " + ctxt.unresolvedName +
+										" in " + ctxt.currentElement.asType(Operation).container.asType(ClassDefinition).name + 
+										"::" + ctxt.currentElement.asType(Operation).name
+
+				if (not ctxt.unresolved.asType(UnresolvedOperation).~from.isVoid()) then
+					error := error + " from " + ctxt.unresolved.asType(UnresolvedOperation).~from.toString()
 				end
+				
+				ctxt.errors.add(ResolverException.new.initialize(error, ctxt.currentElement))
 			else
 				ctxt.unresolved.asType(UnresolvedOperation).correspondingOperation := ctxt.foundOperation
 			end

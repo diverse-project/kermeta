@@ -30,7 +30,7 @@ class FullStaticResolver
 
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
-		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/tests/"
+		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/test/"
 		var baseFileName : String init "beforeResolving"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
@@ -43,10 +43,10 @@ class FullStaticResolver
        	//checkUnresolved(unresolvedModelingUnit)
         resolvedModelingUnit := doResolving(unresolvedModelingUnit)
               	    	
-       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+ //      	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
        	//resolvedModelingUnit := unresolvedModelingUnit
-       	checkUnresolved(resolvedModelingUnit)
+  //     	checkUnresolved(resolvedModelingUnit)
        	//resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
        	
        	//unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
@@ -67,8 +67,6 @@ class FullStaticResolver
        	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
 		ctxt := LanguageVisitorContext.new.initialise()
-		//Display all messages from Resolver
-		ctxt.verbose := 5
 	
    		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
