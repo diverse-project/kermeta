@@ -1,0 +1,41 @@
+/* $Id:$ 
+ * Creation : July 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+class Main
+{
+
+	operation Add():<[Integer,Integer]->Integer> is do
+     	var f:<[Integer,Integer]->Integer>
+     	f:=function {i1:Integer,i2:Integer|i1+i2}
+     	result:=f
+   	end 
+
+ 	operation BinaryOp(opd1:Integer,opd2:Integer,op:<[Integer,Integer]->Integer>):Integer is do
+    	result:= op(opd1,opd2)
+	end
+	operation main() : Void is do     
+		var rs:Integer
+		rs:= BinaryOp(12,21,Add()) 
+	    stdio.writeln(rs.toString())  // Prints 33
+	    if rs != 33 then
+	    	var e : Exception init Exception.new
+	    	e.message := "rs="+rs.toString + " but it should have been = 33"
+	    	raise e
+	    end
+	end
+}
