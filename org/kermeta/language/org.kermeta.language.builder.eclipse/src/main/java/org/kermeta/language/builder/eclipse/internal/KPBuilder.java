@@ -114,7 +114,7 @@ public class KPBuilder {
 		return dirtyFiles;
 	}
 
-	synchronized public void build(){
+	synchronized public void build(boolean andRun){
 		try {		
 			ArrayList<String> additionalClassPath = new ArrayList<String>();
 
@@ -128,10 +128,17 @@ public class KPBuilder {
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 			if (result != null) {
 				kp_last_modelingunit = result;
+				if (andRun) {
+					compiler.runK2Program(additionalClassPath, new ArrayList<String>());
+				}
 			}
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
 		}
+	}
+	
+	synchronized public void build(){
+		build(false);
 	}
 
 

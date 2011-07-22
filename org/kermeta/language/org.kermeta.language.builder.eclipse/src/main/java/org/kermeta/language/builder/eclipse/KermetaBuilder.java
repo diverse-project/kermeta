@@ -66,17 +66,22 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	}
 
 	@Override
-	public synchronized void buildFromKP(final String kpIdentifier) {
+	public synchronized void buildFromKP(final String kpIdentifier, final boolean andRun) {
 		
 		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
-				kpBuilders.get(kpIdentifier).build();
+				kpBuilders.get(kpIdentifier).build(andRun);
 				return Status.OK_STATUS;
 	        }
 	    };
 	    job.setPriority(Job.LONG);
 	    job.schedule();	
-
+	}
+	
+	@Override
+	public synchronized void buildFromKP(final String kpIdentifier) {
+		
+		buildFromKP(kpIdentifier,false);
 	}
 	
 	@Override
