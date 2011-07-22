@@ -429,7 +429,7 @@ public class KermetaCompiler {
 					} else {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + oneURL, LOG_MESSAGE_GROUP, new FileReference(oneURL));
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					try {					
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "Source "+oneURL+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 					} catch (MalformedURLException f) {}
