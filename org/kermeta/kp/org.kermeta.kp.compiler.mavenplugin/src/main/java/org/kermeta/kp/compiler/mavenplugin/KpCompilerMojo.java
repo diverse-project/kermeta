@@ -151,7 +151,7 @@ public class KpCompilerMojo extends AbstractMojo {
     private PackageEquivalence[] packageEquivalences;
 
     /**
-     * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
+     * params : list of parameter strings that will be passed by default when running the kermeta program
      *
      * @parameter 
      */
