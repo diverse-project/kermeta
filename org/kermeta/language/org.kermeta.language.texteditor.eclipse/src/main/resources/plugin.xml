@@ -33,6 +33,13 @@
 	             label="Build Kermeta Project"
 	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
 	       </action>
+	       <action
+	             class="org.kermeta.language.texteditor.eclipse.internal.BuildAndRunKP"
+	             id="org.kermeta.language.texteditor.eclipse.internal.BuildAndRunKPID"
+	             icon="icons/kermeta.gif"
+	             label="Build and Run Kermeta Project"
+	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	       </action>
 	     </objectContribution>
 	     <objectContribution
             adaptable="true"
