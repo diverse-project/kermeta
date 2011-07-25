@@ -509,6 +509,8 @@ public class KermetaCompiler {
 			processErrors(resolvedMU);
 			if (stopOnError) {
 				logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
+				this.hasFailed = true; // message for the caller of the compiler
+				this.errorMessage = "Errors have occured during resolving";
 				return null;
 			}
 		}
@@ -524,6 +526,8 @@ public class KermetaCompiler {
 				processErrors(staticsettedMU);
 				if (stopOnError) {
 					logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
+					this.hasFailed = true; // message for the caller of the compiler
+					this.errorMessage = "Errors have occured during static setting";
 					return null;
 				}
 			}
@@ -532,6 +536,8 @@ public class KermetaCompiler {
 			return staticsettedMU.getResult();
 		}
 		logger.error("Errors have occured during resolve. StaticSetting not executable", LOG_MESSAGE_GROUP, new Throwable());
+		this.hasFailed = true; // message for the caller of the compiler
+		this.errorMessage = "Errors have occured during static setting";
 		return convertedModelingUnit;
 	}
 
@@ -588,7 +594,12 @@ public class KermetaCompiler {
 		try {
 			diags = theChecker.check(mu, scope, "", logger);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
+			logger.error("Internal error in the checker; ", LOG_MESSAGE_GROUP,e);
+			
+			this.hasFailed = true; // message for the caller of the compiler
+			this.errorMessage = "Internal error in the checker; " +e.getMessage();
 		}
 
 		/*
