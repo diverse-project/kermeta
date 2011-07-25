@@ -29,8 +29,11 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
+import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.osgi.framework.Bundle;
 
 public class KPBuilder {
@@ -99,8 +102,12 @@ public class KPBuilder {
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
-		} catch (IOException e) {
-			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
+		} catch (Exception e) {
+			try {
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Compilation failed : "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			} catch (Exception f) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -132,8 +139,12 @@ public class KPBuilder {
 					compiler.runK2Program(additionalClassPath, new ArrayList<String>());
 				}
 			}
-		} catch (IOException e) {
-			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"builder failed", this.getClass().getName(), e);
+		} catch (Exception e) {
+			try {
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Build failed : "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			} catch (Exception f) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -180,5 +191,9 @@ public class KPBuilder {
 	
 	public IFile getKpProjectFile() {
 		return kpProjectFile;
+	}
+	
+	public String getKpFileURL() {
+		return kpFileURL;
 	}
 }

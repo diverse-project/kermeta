@@ -70,7 +70,15 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 		
 		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
-				kpBuilders.get(kpIdentifier).build(andRun);
+				try {
+					kpBuilders.get(kpIdentifier).build(andRun);
+				} catch (Exception e) {
+					try {
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+					} catch (Exception u) {
+						e.printStackTrace();
+					}
+				}
 				return Status.OK_STATUS;
 	        }
 	    };
