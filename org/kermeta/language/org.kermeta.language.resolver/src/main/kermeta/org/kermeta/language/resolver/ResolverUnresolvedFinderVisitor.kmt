@@ -33,6 +33,7 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
 
 require "ResolverException.kmt"
+require "Resolver_Aspect_Error.kmt"
 
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
@@ -126,10 +127,27 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 
 		if ctxt.foundType.isVoid() then
-			ctxt.errors.add(ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement))		
+			// If the type has been already not resolved, the corresponding exception has been added to the current element.
+			// If it is the case, the error must not be reported once again.
+			if(ctxt.currentElement.resolverException.isVoid) then // The error has not been already reported.
+				// Adding the exception to the current element.
+				ctxt.currentElement.resolverException := ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement)
+				ctxt.errors.add(ctxt.currentElement.resolverException)
+			end		
 		else
 			ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
+
+			// If an exception has been already reported on the current element, it must be removed from the list of errors. 
+			if(not ctxt.currentElement.resolverException.isVoid) then
+				// Looking for the corresponding exception.
+				var exception : ResolverException init ctxt.errors.detect{error | error.objectCause==ctxt.currentElement }
+				if(not exception.isVoid) then // Removing the exception from the list.
+					ctxt.errors.remove(exception)
+				end
+				// Unlinking the current element to the exception.
+				ctxt.currentElement.resolverException := void
+			end
 		end		
 		ctxt.reset()
 	end
