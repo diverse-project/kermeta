@@ -46,7 +46,7 @@ public class EclipseReporter {
 				addMarker(markerSeverity, PROBLEM_MARKER_ID, iFile,msg,msgGroup);
 				ms.log(Kind.DevDEBUG, "File marked ("+iFile+")", Activator.PLUGIN_ID);
 			} catch (Exception e) {
-				ms.log(Kind.DevERROR, "Failed to mark TextFile ("+((TextReference)ref).getFileURL().getPath()+")", Activator.PLUGIN_ID, e);
+				ms.log(Kind.DevERROR, "Failed to mark TextFile ("+((FileReference)ref).getFileURL().getPath()+")", Activator.PLUGIN_ID, e);
 			}
 		}
 		else if(ref instanceof ModelReference){
