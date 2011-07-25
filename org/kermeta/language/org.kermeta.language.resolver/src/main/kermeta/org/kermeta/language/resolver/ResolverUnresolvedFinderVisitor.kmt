@@ -33,7 +33,6 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverResolvedOperationFinder.kmt"
 
 require "ResolverException.kmt"
-require "Resolver_Aspect_Error.kmt"
 
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
@@ -55,6 +54,10 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	//This should probably be rewrite in three really separate passes
 	attribute pass : Integer
 	
+	/* The number of passes. */
+	attribute nbPasses : Integer
+
+
 	/*
 	* ResolvedTypeFinder call operation
 	*/
@@ -127,27 +130,14 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 
 		if ctxt.foundType.isVoid() then
-			// If the type has been already not resolved, the corresponding exception has been added to the current element.
-			// If it is the case, the error must not be reported once again.
-			if(ctxt.currentElement.resolverException.isVoid) then // The error has not been already reported.
+			// Adding an error only during the last pass.
+			if(pass==nbPasses) then
 				// Adding the exception to the current element.
-				ctxt.currentElement.resolverException := ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement)
-				ctxt.errors.add(ctxt.currentElement.resolverException)
+				ctxt.errors.add(ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement))
 			end		
 		else
 			ctxt.unresolved.asType(UnresolvedType).correspondingType := ctxt.foundType
 			unresolvedTypesToBeRemoved.add(ctxt.unresolved.asType(UnresolvedType))
-
-			// If an exception has been already reported on the current element, it must be removed from the list of errors. 
-			if(not ctxt.currentElement.resolverException.isVoid) then
-				// Looking for the corresponding exception.
-				var exception : ResolverException init ctxt.errors.detect{error | error.objectCause==ctxt.currentElement }
-				if(not exception.isVoid) then // Removing the exception from the list.
-					ctxt.errors.remove(exception)
-				end
-				// Unlinking the current element to the exception.
-				ctxt.currentElement.resolverException := void
-			end
 		end		
 		ctxt.reset()
 	end
@@ -594,10 +584,18 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
+/*
+	operation launchPass(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
+		//Visiting contained Packages
+		m.packages.each{p| p.accept(self, ctxt) }
+		pass := pass + 1
+	end
+*/
+
 	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
-		
-		pass := 1
-	
+		nbPasses := 3
+		pass     := 1
+
 		if (m.toBeVisitedAsModelingUnit(pass)) then
 			
 			unresolvedTypesToBeRemoved := Set<UnresolvedType>.new
@@ -605,24 +603,10 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			ctxt.currentModelingUnit := m
 			//Visiting inherited properties from TypeDefinitionContainer
 			visitTypeDefinitionContainer(m, ctxt)
-			
-			//Visiting contained Packages
-			m.packages.each{p|
-				p.accept(self, ctxt)
-			}
-			
-			pass := 2
-			
-			//Visiting contained Packages
-			m.packages.each{p|
-				p.accept(self, ctxt)
-			}
-			
-			pass := 3
-			
-			//Visiting contained Packages
-			m.packages.each{p|
-				p.accept(self, ctxt)
+
+			nbPasses.times{t | 
+				m.packages.each{p| p.accept(self, ctxt) }
+				pass := pass + 1
 			}
 			
 			//When we have visited all the elements of the modeling unit, for each UnresolvedType which has been resolved
