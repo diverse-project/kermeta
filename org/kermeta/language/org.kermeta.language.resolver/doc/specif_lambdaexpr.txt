@@ -1,0 +1,83 @@
+pb : 
+résoudre le type des paramètres d'une lambda expression
+
+expl : 
+***
+operation foo(f:<Integer,Integer->Integer>):Void is do
+...
+end
+
+operation bar(): Void is do
+foo{i1,i2|i1+i2}
+end
+***
+
+Comment assigner un type au paramètres i1 et i2 ?
+
+
+État des lieux dans la v1
+
+le type des paramètres est obligatoire à chaque fois qu'une lambda est définie par le mot clef function : 
+
+expl : 
+***
+foo(function {i1:Integer,i2:Integer|i1+i2})
+var f:<Integer,Integer->Integer> init function {i1:Integer,i2:Integer|i1+i2}
+***
+
+Donc pour le moment, si on se calque sur le comportement de la v1, le type setter de la v2 a à inférer les types des paramètres des lambda seulement dans le cas d'un calloperation.
+
+Pb : la résolution des paramètres s'effectue avant la résolution du calloperation qui les contient -> il n'est alors pas possible d'inférer les types lambdaparameters en fonction de l'operation appelée.
+
+Mais pourquoi la résolution des paramètres s'effectue avant, et ne pourrait-on pas changer l'ordre ?
+Non, car la v2 devra autoriser la surcharge des operations et donc choisir l'operation à appeler en fonction du type de ses paramètres. 
+
+les solutions possibles sont : 
+
+-forcer le typage des paramètres des lambdas dans le langage pour pouvoir les résoudre avant la résolution de l'appel d'operation. -> on casse alors la rétro-compatibilité avec la v1 et on alourdit la syntaxe des appels à each, collect, select ...
+
+-ne pas prendre en compte les lambda dans la résolution des appels d'opération et de ce fait on interdit la surcharge d'operation n'ayant qu'un paramètre de type fonction. ->on peut alors laisser la résolution des lambdas pour plus tard en les laissant unresolved avant la résolution des appels d'opération.
+
+---------
+à discuter
+
+Au niveau des lambda, quelles type de fonctions accepter quand le type demandé est <A->B> ?
+
+- <Agen->B> (où Agen est une généralisation de A)
+
+- <A->Bspe> (où Bspe est une specialisation de B)
+
+- <Aspe->B> (où Aspe est une specialisation de A) NON !
+
+contre-expl : 
+***
+class A{}
+class Aspe{
+reference x:Object}
+class Bar{
+reference foobar : A
+operation foo(f:<A->String>):String is do
+	result:= f(foobar)
+end
+}
+
+//il n'est pas possible d'appeler
+foo{a:Aspe|a.x.toString()}
+//car la ref x n'existe pas pour foobar qui est de type A
+***
+
+- <A->Bgen> (où Bgen est une généralisation de B) NON !
+
+contre-expl : 
+***
+class Bar{
+reference foobar : A
+operation foo(f:<A->String>):String is do
+	result:= f(foobar)
+end
+}
+
+//il n'est pas possible d'appeler
+foo{a:A|a.asType(Object)}
+//car dans foo result attend un type de retour String
+***
