@@ -175,6 +175,7 @@
 							org.kermeta.kp.compiler.commandline,
 							org.kermeta.language.model,
 							org.kermeta.language.builder.api,
+							org.kermeta.utils.helpers,
 							org.kermeta.utils.helpers.eclipse,
 							fr.irisa.triskell.cache.utilities,
 							org.kermeta.language.checker.api,
