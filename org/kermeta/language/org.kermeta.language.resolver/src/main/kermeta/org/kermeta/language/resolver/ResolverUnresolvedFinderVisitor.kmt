@@ -130,8 +130,8 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 
 		if ctxt.foundType.isVoid() then
-			// Adding an error only during the last pass.
-			if(pass==nbPasses) then
+			// Adding an error only during the last pass and if no resolving error tag the current element.
+			if((pass==nbPasses).andThen{b | not ctxt.errors.exists{err | err.objectCause==ctxt.currentElement }}) then
 				// Adding the exception to the current element.
 				ctxt.errors.add(ResolverException.new.initialize("Type " + initialUnresolvedName + " does not exist.", ctxt.currentElement))
 			end		
@@ -1099,26 +1099,15 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				t.type.accept(self, ctxt)
 
 				if not ctxt.unresolved.isVoid then
-					// At this point, the contained types of the current element have been resolved, ie
-					// UnresolvedType were replaced by Class (if resolved).
-					// So the type of the current element, contained in the contained types, must not
-					// be checked if its corresponding type (contained in containedType) is still unresolved
-					// (because we will have two errors reported). To test if the type has been resolved, we
-					// test if it is contained in containedType. If it is not the case, that means the 
-					// UnresolvedType was replaced by a Class and t.type must be replaced as well.
-					// Otherwise, we must not resolved the type because it is still and Unresolved.
-		//			if not t.containedType.contains(t.type) then
-						callTypeFinder(ctxt) 
-						var foundType : Type init ctxt.getFoundType
-						if not foundType.isVoid() then
-							t.type := foundType
-							if (foundType.isInstanceOf(Class)) then
-								t.containedType.add(foundType)
-							end
+					callTypeFinder(ctxt) 
+					var foundType : Type init ctxt.getFoundType
+					stdio.writeln(foundType.toString)
+					if not foundType.isVoid() then
+						t.type := foundType
+						if (foundType.isInstanceOf(Class)) then
+							t.containedType.add(foundType)
 						end
-					//else // The context must be cleared (see the end of callTypeFinder)
-				//		ctxt.reset()
-				 //	end
+					end
 				end
 			end
 		end
