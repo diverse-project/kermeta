@@ -584,13 +584,6 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 		end
 	end
 	
-/*
-	operation launchPass(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
-		//Visiting contained Packages
-		m.packages.each{p| p.accept(self, ctxt) }
-		pass := pass + 1
-	end
-*/
 
 	method visitModelingUnit(m : ModelingUnit, ctxt : LanguageVisitorContext) is do
 		nbPasses := 3
@@ -1114,7 +1107,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					// test if it is contained in containedType. If it is not the case, that means the 
 					// UnresolvedType was replaced by a Class and t.type must be replaced as well.
 					// Otherwise, we must not resolved the type because it is still and Unresolved.
-					if not t.containedType.contains(t.type) then
+		//			if not t.containedType.contains(t.type) then
 						callTypeFinder(ctxt) 
 						var foundType : Type init ctxt.getFoundType
 						if not foundType.isVoid() then
@@ -1123,9 +1116,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 								t.containedType.add(foundType)
 							end
 						end
-					else // The context must be cleared (see the end of callTypeFinder)
-						ctxt.reset()
-				 	end
+					//else // The context must be cleared (see the end of callTypeFinder)
+				//		ctxt.reset()
+				 //	end
 				end
 			end
 		end
