@@ -37,7 +37,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(),false);
 		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,new java.util.ArrayList<String>(), false);
 		
-		
+		assert(!compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?
 		
         //assert(true);
