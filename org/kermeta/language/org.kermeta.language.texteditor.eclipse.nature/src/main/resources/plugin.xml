@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="KermetaNatureID"
+         name="Kermeta V2 Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.kermeta.language.texteditor.eclipse.nature.internal.KermetaNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.kermeta.language.texteditor.eclipse.nature.contribution1">
+         <action
+               label="Add/Remove Kermeta V2 Nature"
+               class="org.kermeta.language.texteditor.eclipse.nature.internal.ToggleNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="org.kermeta.language.texteditor.eclipse.nature.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/kermetaproject.gif"
+            id="org.kermeta.language.texteditor.eclipse.nature.kermetaNatureImageID"
+            natureId="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID">
+      </image>
+   </extension>
+
+</plugin>

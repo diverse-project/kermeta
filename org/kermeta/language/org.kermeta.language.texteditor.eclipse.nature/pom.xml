@@ -1,0 +1,97 @@
+<!-- $Id: pom.xml 14801 2011-04-06 13:27:44Z bouhours $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.texteditor.eclipse -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>language.texteditor.eclipse.nature</artifactId>
+	<packaging>jar</packaging>
+	<name>language.texteditor.eclipse.nature :: nature for km2</name>
+
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.jobs</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.5.1.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.ide</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.workbench</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name> 
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Version>1.0.0</Bundle-Version>
+						<Bundle-Activator>org.kermeta.language.texteditor.eclipse.nature.Activator</Bundle-Activator>
+						<Bundle-Vendor>IRISA</Bundle-Vendor>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+						<Bundle-Localization>plugin</Bundle-Localization>
+						<Require-Bundle>
+							org.eclipse.ui,
+ 							org.eclipse.core.runtime,
+ 							org.eclipse.core.resources,
+ 							org.eclipse.ui.ide;bundle-version="3.7.0"
+                        </Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
