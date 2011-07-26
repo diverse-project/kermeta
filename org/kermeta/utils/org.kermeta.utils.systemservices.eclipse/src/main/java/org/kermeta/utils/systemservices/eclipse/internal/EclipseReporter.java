@@ -1,13 +1,16 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -34,6 +37,7 @@ public class EclipseReporter {
 		if(ref instanceof TextReference){
 			try {
 				IFile iFile = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(((TextReference)ref).getFileURL()));
+				iFile = check(iFile,((TextReference)ref).getFileURL());
 				addMarker(markerSeverity, PROBLEM_MARKER_ID, iFile,msg, ((TextReference) ref).getBeginLine(), ((TextReference) ref).getBeginOffset(), ((TextReference) ref).getEndOffset(),msgGroup);
 				ms.log(Kind.DevDEBUG, "File marked ("+iFile+")", Activator.PLUGIN_ID);
 			} catch (Exception e) {
@@ -43,6 +47,7 @@ public class EclipseReporter {
 		else if(ref instanceof FileReference){
 			try {
 				IFile iFile = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(((FileReference)ref).getFileURL()));
+				iFile = check(iFile,((FileReference)ref).getFileURL());
 				addMarker(markerSeverity, PROBLEM_MARKER_ID, iFile,msg,msgGroup);
 				ms.log(Kind.DevDEBUG, "File marked ("+iFile+")", Activator.PLUGIN_ID);
 			} catch (Exception e) {
@@ -97,6 +102,20 @@ public class EclipseReporter {
 	private String cleanString(URL toClean) {
 		String cleanString = FileHelpers.URLToStringWithoutFile(toClean);
 		return cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
+	}
+	
+	private IFile check(IFile iFile, URL theRef) {
+		if (iFile != null) {
+			return iFile;
+		}
+		for (IProject aProject : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			IFile attempt = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(FileHelpers.URLToStringWithoutFile(theRef).replaceFirst(aProject.getLocation().toString().substring(0, aProject.getLocation().toString().lastIndexOf(aProject.getName())), ""));
+			if (attempt != null) {
+				return attempt;
+			}
+			
+		}
+		return null;
 	}
 	
 	public void flushProblem(final String problemGroup,final URL uri) {
