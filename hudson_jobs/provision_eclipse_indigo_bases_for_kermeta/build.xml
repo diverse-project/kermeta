@@ -137,6 +137,9 @@
 		<get src="http://repo1.maven.org/maven2/org/ops4j/pax/url/pax-url-assembly/1.3.4/pax-url-assembly-1.3.4.jar" 
 						dest="${env.WORKSPACE}/build/dropins/org.ops4j.pax-url-assembly-1.3.4.jar"
 						usetimestamp="true"/>
+		<get src="http://maven.irisa.fr/artifactory/repo/org/kermeta/language/language.texteditor.eclipse.nature/2.0.1-SNAPSHOT/language.texteditor.eclipse.nature-2.0.1-SNAPSHOT.jar" 
+								dest="${env.WORKSPACE}/build/dropins/org.kermeta.language.texteditor.eclipse.nature-2.0.1-SNAPSHOT.jar"
+								usetimestamp="true"/>
 	</target>
 	
 	<target name="provision_eclipse_version" depends="get_native_eclipse, get_dropins">
