@@ -82,6 +82,7 @@
 						<Bundle-Vendor>IRISA</Bundle-Vendor>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
+						<Export-Package>org.kermeta.language.texteditor.eclipse.nature</Export-Package>
 						<Require-Bundle>
 							org.eclipse.ui,
  							org.eclipse.core.runtime,

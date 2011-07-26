@@ -6,11 +6,6 @@ import org.eclipse.core.runtime.CoreException;
 
 public class KermetaNature implements IProjectNature {
 
-	/**
-	 * ID of this project nature
-	 */
-	public static final String NATURE_ID = "org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID";
-
 	private IProject project;
 
 	/*

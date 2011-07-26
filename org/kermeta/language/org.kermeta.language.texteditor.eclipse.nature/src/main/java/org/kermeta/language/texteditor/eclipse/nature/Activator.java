@@ -12,6 +12,11 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.kermeta.language.texteditor.eclipse.nature"; //$NON-NLS-1$
 
+	/**
+	 * ID of this project nature
+	 */
+	public static final String NATURE_ID = "org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID";
+	
 	// The shared instance
 	private static Activator plugin;
 	

@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.language.texteditor.eclipse.nature.Activator;
 
 public class ToggleNatureAction implements IObjectActionDelegate {
 
@@ -71,7 +72,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			String[] natures = description.getNatureIds();
 
 			for (int i = 0; i < natures.length; ++i) {
-				if (KermetaNature.NATURE_ID.equals(natures[i])) {
+				if (Activator.NATURE_ID.equals(natures[i])) {
 					// Remove the nature
 					String[] newNatures = new String[natures.length - 1];
 					System.arraycopy(natures, 0, newNatures, 0, i);
@@ -86,7 +87,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			// Add the nature
 			String[] newNatures = new String[natures.length + 1];
 			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = KermetaNature.NATURE_ID;
+			newNatures[natures.length] = Activator.NATURE_ID;
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (CoreException e) {
