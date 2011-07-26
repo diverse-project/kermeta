@@ -19,11 +19,8 @@ public class FileHelpers {
 		// deal with windows \\ delimiter
 		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/").replaceAll(" ", "%20");
 				
-		if(unifiedSepratorResourcePath.startsWith("file:/") && !unifiedSepratorResourcePath.startsWith("file://")) {
-			unifiedSepratorResourcePath = unifiedSepratorResourcePath.replaceFirst("file:/", "file:///");
-		}
-		if(!unifiedSepratorResourcePath.startsWith("file://") && !unifiedSepratorResourcePath.startsWith("jar:"))
-			unifiedSepratorResourcePath = "file://" + unifiedSepratorResourcePath;
+		if(!unifiedSepratorResourcePath.startsWith("file:/") && !unifiedSepratorResourcePath.startsWith("jar:"))
+			unifiedSepratorResourcePath = "file:/" + unifiedSepratorResourcePath;
 			
 		return unifiedSepratorResourcePath;
 	}
