@@ -31,19 +31,49 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   /* */
   def classDecl : Parser[ClassDefinition]
 
-  def program = kermetaUnit ^^ { case unit =>
+  def program = opt(kpositioned(packageDecl)) ~ kermetaUnit ^^ { case decl ~ unit =>
       var newp =StructureFactory.eINSTANCE.createModelingUnit
       var usings : List[Using] = List()
+
+      var lastPackageRoot : Option[Package] = None
+
+      decl match{
+        case Some(d)=> {
+
+           d.name.split("::").foreach{ topPackage =>
+               var newPackage = StructureFactory.eINSTANCE.createPackage()
+               newPackage.setName(topPackage)
+               lastPackageRoot match {
+                 case Some(previous)=> previous.getNestedPackage.add(newPackage)
+                 case None => newp.getPackages.add(newPackage)
+               }
+               lastPackageRoot = Some(newPackage)
+           }
+        }
+        case None =>
+      }
+
+
       unit.foreach{elem => elem match {  	  
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
                 case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
                 case r : Require => newp.getRequires.add(r)
-                case p : Package => newp.getPackages.add(p)
+                case p : Package => {
+                  lastPackageRoot match {
+                    case Some(previous)=> previous.getNestedPackage.add(p)
+                    case None => newp.getPackages.add(p)
+                  }
+                }
                 case u : Using => usings = usings ++ List(u) //newp.getUsings.add(u)
-                case cd : ClassDefinition => newp.getOwnedTypeDefinition.add(cd)
+                case cd : ClassDefinition => {
+                   lastPackageRoot match {
+                    case Some(previous)=> previous.getOwnedTypeDefinition.add(cd)
+                    case None => newp.getOwnedTypeDefinition.add(cd)
+                  }
+                }
                 case _ @ elem => println("unknow elem" + elem)
               }}
-          case np : NameSpacePrefix => newp.setNamespacePrefix(np.name) //; var pos2 = np.pos.asInstanceOf[OffsetPosition] ; println(pos2.productArity+"-"+pos2.source.subSequence(0, pos2.offset.toInt))
+          //case np : NameSpacePrefix => newp.setNamespacePrefix(np.name) //; var pos2 = np.pos.asInstanceOf[OffsetPosition] ; println(pos2.productArity+"-"+pos2.source.subSequence(0, pos2.offset.toInt))
           case u : Using => usings = usings ++ List(u)
           case _ @ d => println("TODO modeling unit catch some type sub elem="+d)
         }}
@@ -103,9 +133,9 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   }*/
   
   
-  def kermetaUnit = scompUnit+
+  def kermetaUnit = (scompUnit+)
 
-  def scompUnit = kpositioned (packageDecl|importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
+  def scompUnit = kpositioned ( importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
   /* DEPRECATED */
   
   def packageDecl : Parser[NameSpacePrefix] = positioned( "package" ~> packageName <~ ";" ^^ { case p =>  NameSpacePrefix(p)} )
