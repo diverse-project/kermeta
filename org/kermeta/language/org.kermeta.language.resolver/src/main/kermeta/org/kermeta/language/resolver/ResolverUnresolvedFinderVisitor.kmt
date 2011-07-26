@@ -675,11 +675,10 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			
 			//Visiting superOperation
 			if (not o.superOperation.isVoid) then
-				
 				ctxt.currentElement := o
-				
 				o.superOperation.accept(self, ctxt)
-				if (pass >= 2) then
+
+				if (pass > 1) then
 					if (not ctxt.unresolved.isVoid()) then
 						callOperationFinder(ctxt)
 						var foundOperation : Operation init ctxt.getFoundOperation()
@@ -687,6 +686,8 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 							o.superOperation := foundOperation
 						end
 					end
+				else
+					ctxt.reset()
 				end
 			end
 			
