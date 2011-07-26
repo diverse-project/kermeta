@@ -1101,7 +1101,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				if not ctxt.unresolved.isVoid then
 					callTypeFinder(ctxt) 
 					var foundType : Type init ctxt.getFoundType
-					stdio.writeln(foundType.toString)
+
 					if not foundType.isVoid() then
 						t.type := foundType
 						if (foundType.isInstanceOf(Class)) then
