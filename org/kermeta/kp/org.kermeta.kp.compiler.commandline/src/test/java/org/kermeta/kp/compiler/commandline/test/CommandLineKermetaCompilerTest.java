@@ -36,8 +36,8 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         // Phase 1 : compiles without crashing
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(),false);
 		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,new java.util.ArrayList<String>(), false);
-		
-		assert(!compiler.hasFailed);
+				
+		assertTrue(compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?
 		
         //assert(true);
