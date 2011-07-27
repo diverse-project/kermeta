@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : July 11, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+
+aspect class Object
+{
+	operation getRootContainer() : Object is do
+		var container : Object init self.container()
+		from var i : Integer init 0
+		until container.container.isVoid()
+		loop
+			container := container.container()
+		end
+		result := container
+	end
+}

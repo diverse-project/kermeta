@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : May 24, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+
+/**
+* Returns a Boolean stating whether the current Object conforms to a Class which ClassDefinition is the given ClassDefinition
+* This means: is this object an instance of such a class, or is it an instance of its subtype 
+*/
+aspect class Object
+{
+	operation isInstanceOfClassDefinition(classDef : ClassDefinition) : Boolean is do 
+		var isInstanceOf : Boolean init self.getMetaClass().classDefinition.equals(classDef)
+		self.getMetaClass().superClass.each{sC |
+			isInstanceOf := isInstanceOf or sC.classDefinition.equals(classDef)
+		}
+		result := isInstanceOf
+	end
+}

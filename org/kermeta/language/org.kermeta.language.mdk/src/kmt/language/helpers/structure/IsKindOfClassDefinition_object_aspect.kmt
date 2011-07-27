@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Creation : May 24, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package kermeta::language::structure;
+
+require kermeta
+
+/**
+* Returns a Boolean stating whether the current Object is an instance of a Class which ClassDefinition is the given ClassDefinition
+*/
+aspect class Object
+{
+	operation isKindOfClassDefinition(classDef : ClassDefinition) : Boolean is do
+		result := self.getMetaClass().classDefinition.equals(classDef)
+	end
+}
