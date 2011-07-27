@@ -88,8 +88,17 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
-                        <Import-Package>*</Import-Package>
-                        <Export-Package>org.kermeta.utils.aether</Export-Package>
+                        <Import-Package>!org.kermeta.utils.aether.*,*</Import-Package>
+                        <Export-Package>org.kermeta.utils.aether.*</Export-Package>
+                        <Private-Package>
+                        	org.sonatype.*,
+                            org.apache.maven.repository.*,
+                            org.apache.maven.model.*,
+                            org.apache.maven.artifact.*,
+                            org.codehaus.plexus.interpolation.*,
+                            org.codehaus.plexus.util.*,
+                            com.ning.http.*
+                        </Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
