@@ -12,6 +12,16 @@ package pkg{
 			
 			foo1.plus(1)
 			foo2.plus(2)
+			
+			from
+			var foo1: String
+			until
+			foo1 == "coucou"
+			loop
+				foo1 := "coucou"
+			end
+			
+			foo1.plus(2)
 		end
 	}
 }
