@@ -62,7 +62,8 @@
 							org.kermeta.language.model,
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.xmi,
-							org.ops4j.pax.url.mvn
+							org.ops4j.pax.url.mvn,
+							org.kermeta.utils.aether
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
@@ -182,6 +183,11 @@
 		<dependency>
 			<groupId>org.kermeta.diagnostic</groupId>
 			<artifactId>diagnostic.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.aether</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 	</dependencies>

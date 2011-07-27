@@ -9,11 +9,14 @@
 package org.kermeta.kp.compiler.commandline.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.aether.AetherUtil;
+import java.io.File;
 
 
 public class CommandLineKermetaCompilerTest extends TestCase {
@@ -35,14 +38,22 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         
         // Phase 1 : compiles without crashing
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(),false);
-		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,new java.util.ArrayList<String>(), false);
+                
+		ArrayList<String> additionalClassPath = new ArrayList<String>();
+        
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.library.core", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.model", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		
+		
+		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,additionalClassPath, false);
 				
 		assertTrue(compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?
 		
         //assert(true);
     }
-
     
     @Override
     public String getName() {
