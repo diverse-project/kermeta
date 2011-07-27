@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : July 11, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+require "ModelingUnitHelperV1_structure_aspect.kmt"
+require "GetRootContainer_object_aspect.kmt"
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+using org::kermeta::language::structure
+
+aspect class KermetaModelElement
+{
+	operation getMetamodelClassDefinitions() : Set<ClassDefinition> is do
+		var rootContainer : Object init self.getMetaClass().getRootContainer()
+		result := Set<ClassDefinition>.new
+		if rootContainer.isInstanceOf(ModelingUnit) then
+			var collec : Collection<TypeDefinition> init Set<TypeDefinition>.new
+			result.addAll( rootContainer.asType(ModelingUnit).getClassDefinitions() )			
+		end
+	end
+}

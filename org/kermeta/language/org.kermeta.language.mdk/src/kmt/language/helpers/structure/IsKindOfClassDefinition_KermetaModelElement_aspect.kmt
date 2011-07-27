@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : May 24, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+/**
+* Returns a Boolean stating whether the current Object is an instance of a Class which ClassDefinition is the given ClassDefinition
+*/
+aspect class KermetaModelElement
+{
+	operation isKindOfClassDefinition(classDef : ClassDefinition) : Boolean is do
+		result := self.getMetaClass().classDefinition.equals(classDef)
+	end
+}
