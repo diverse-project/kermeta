@@ -690,7 +690,6 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
           </eAnnotations>
-          <eOperations name="EOperation0"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
               eType="#//kermeta/language/structure/Property" changeable="false" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
