@@ -693,7 +693,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			
 			//Deleting UnresolvedOperations (the only one is superOperation)
 			o.ownedUnresolvedOperations.clear()
-			if o.superOperation.isInstanceOf(UnresolvedOperation) then
+			if (not o.superOperation.isVoid).andThen{b | o.superOperation.isInstanceOf(UnresolvedOperation)} then
 				// must re add it since it hasn't been resolved , it is required for correct serialization
 				o.ownedUnresolvedOperations.add(o.superOperation.asType(UnresolvedOperation))
 			end
