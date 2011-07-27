@@ -92,15 +92,13 @@
                         <Export-Package>org.kermeta.utils.aether.*</Export-Package>
                         <Private-Package>
                         	org.jboss.netty.*,
+                        	org.jboss.logging.*,
                         	scala.*,
                         	org.codehaus.plexus.*,
                         	org.sonatype.*,
-                            org.apache.maven.repository.*,
-                            org.apache.maven.model.*,
-                            org.apache.maven.artifact.*,
-                            org.codehaus.plexus.interpolation.*,
-                            org.codehaus.plexus.util.*,
-                            com.ning.http.*
+                            org.apache.maven.*,
+                            com.ning.http.*,
+                            com.google.protobuf
                         </Private-Package>
                     </instructions>
                 </configuration>
