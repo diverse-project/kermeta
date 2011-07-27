@@ -2,7 +2,7 @@
 <!-- License    : EPL                                    -->
 <!-- Project    : utils.aether         -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 -->
-<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> -->
+<!-- Authors : François Fouquet <francois.fouquet@irisa.fr> -->
 
 <project
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
