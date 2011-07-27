@@ -1,0 +1,50 @@
+/* $Id:$ 
+ * Creation : July 27, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "test::kermeta::Main"
+@mainOperation "main"
+
+
+package test::kermeta;
+
+
+require kermeta
+
+
+using kermeta::standard
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+		
+		var myA : A init A.new
+		var myB : B init B.new
+
+
+		myB.ref:= myA.att //autorise		
+		
+		
+	end
+	
+	
+}
+
+
+class A {
+
+	attribute att : C[0..*]
+	reference ref : C[0..*]
+}
+
+class B {
+	
+	attribute att : Collection<C>
+	reference ref : Collection<C>
+}
+
+class C {
+}

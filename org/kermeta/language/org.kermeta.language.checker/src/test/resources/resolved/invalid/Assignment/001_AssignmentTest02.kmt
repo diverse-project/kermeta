@@ -1,0 +1,53 @@
+/* $Id:$ 
+ * Creation : July 27, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "test::kermeta::Main"
+@mainOperation "main"
+
+
+package test::kermeta;
+
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+		
+		var myA : A init A.new
+		
+		// 1ER cas
+		
+		myA.ref := Collection<B>.new
+		// Message erreur V1 à transposer en V2
+		/*
+		TYPE-CHECKER : You are trying to overwrite the internal reflective collection of the property 'att'.
+		Did you mean ? 
+		myA.att.clear
+		myA.att.addAll(kermeta::standard::Collection<test::kermeta::B>.new)
+		*/
+		
+		 
+		
+	end
+	
+	
+}
+
+
+class A {
+
+	attribute att : B[0..*]
+	reference ref : B[0..*]
+}
+
+class B {
+
+}
