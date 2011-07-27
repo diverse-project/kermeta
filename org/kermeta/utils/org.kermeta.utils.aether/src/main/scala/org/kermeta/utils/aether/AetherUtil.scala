@@ -28,6 +28,7 @@ import org.sonatype.aether.repository.{RepositoryPolicy, RemoteRepository, Local
 import org.sonatype.aether.artifact.Artifact
 import scala.collection.JavaConversions._
 
+
 /**
  * User: ffouquet
  * Date: 25/07/11
@@ -36,52 +37,46 @@ import scala.collection.JavaConversions._
 
 object AetherUtil {
 
-	def main(args: Array[String]) {
-      println("Hello, world!")
-    }
-
   val newRepositorySystem: RepositorySystem = {
     val locator = new DefaultServiceLocator()
     locator.addService(classOf[RepositoryConnectorFactory], classOf[FileRepositoryConnectorFactory])
     locator.addService(classOf[RepositoryConnectorFactory], classOf[AsyncRepositoryConnectorFactory])
+   // locator.addService(classOf[RepositoryConnectorFactory], classOf[WagonRepositoryConnectorFactory] )
+
+
+
     locator.getService(classOf[RepositorySystem])
   }
 
   def resolveDeployUnit(groupID: String, artifactID: String, version: String, repoURL: String): File = {
-   
-    var artifact: Artifact = new DefaultArtifact(List(groupID, artifactID, version).mkString(":"))
 
-    println("coucou");
-    
+    val artifact: Artifact = new DefaultArtifact(List(groupID, artifactID, version).mkString(":"))
+
     val artifactRequest = new ArtifactRequest
     artifactRequest.setArtifact(artifact)
 
-    println("coucou1");
-    
     val repositories: java.util.List[RemoteRepository] = new java.util.ArrayList();
     if (repoURL != null) {
-        val repo = new RemoteRepository
-        repo.setId(repoURL)
-        repo.setUrl(repoURL)
-        val repositoryPolicy = new RepositoryPolicy()
-        repositoryPolicy.setChecksumPolicy(RepositoryPolicy.CHECKSUM_POLICY_WARN)
-        repositoryPolicy.setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_ALWAYS)
-        repo.setPolicy(true, repositoryPolicy)
-        repositories.add(repo)
+      val repo = new RemoteRepository
+      repo.setId("idRepo")
+      repo.setUrl(repoURL)
+      repo.setContentType("default")
+      val repositoryPolicy = new RepositoryPolicy()
+      repositoryPolicy.setChecksumPolicy(RepositoryPolicy.CHECKSUM_POLICY_WARN)
+      repositoryPolicy.setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_ALWAYS)
+      repo.setPolicy(true, repositoryPolicy)
+      repositories.add(repo)
     }
 
-    println("coucou2");
-    
+
     artifactRequest.setRepositories(repositories)
-    
-    println("coucou3");
-   	var artefactResult : ArtifactResult = null;
-   	try {
-   	  artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
-   	} catch {
-   	  case r:Exception => println("Exception:"+ r.getStackTraceString);
-   	}
-    println("coucou4");
+    var artefactResult: ArtifactResult = null;
+    try {
+      artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
+    } catch {
+      case r: Exception => r.printStackTrace()
+    }
+    println(artefactResult.getArtifact.getFile.getAbsolutePath)
     artefactResult.getArtifact.getFile
   }
 
