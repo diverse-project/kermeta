@@ -1,0 +1,17 @@
+package pkg{
+	class Test {
+		attribute foo1 : kermeta::standard::Integer
+		attribute foo2 : kermeta::standard::Integer
+	
+		operation main() is do
+			if(true) then
+				var foo1 : kermeta::standard::String
+			else
+				var foo2 : kermeta::standard::String
+			end
+			
+			foo1.plus(1)
+			foo2.plus(2)
+		end
+	}
+}
