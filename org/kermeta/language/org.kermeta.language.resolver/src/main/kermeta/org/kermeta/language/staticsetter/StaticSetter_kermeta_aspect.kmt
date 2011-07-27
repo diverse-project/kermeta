@@ -113,6 +113,8 @@ package behavior {
 			// possibly replace all the statement by resolved ones
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Block") end
 			var newStatements : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			
+			context.pushContext()
 			self.statement.each{ oldStatement |
 				newStatements.add(oldStatement.resolveCallAndInferStatic(context))
 			}
@@ -132,6 +134,7 @@ package behavior {
 			end
 			// type of the block is the same as the one of the last instruction of the block 
 			result := self
+			context.popContext()
 		end 
 	}
 	
