@@ -12,6 +12,7 @@
     <artifactId>language.model</artifactId>
     <packaging>bundle</packaging>
     <name>language.model :: Kermeta2 model</name>
+    <version>2.0.1-BETA1</version>
     
     <parent>
         <groupId>org.kermeta.language</groupId>
@@ -133,5 +134,4 @@
             <version>${emf.version}</version>
         </dependency>
     </dependencies>
-
 </project>
