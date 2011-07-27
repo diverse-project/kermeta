@@ -43,19 +43,16 @@ object AetherUtil {
     locator.addService(classOf[RepositoryConnectorFactory], classOf[AsyncRepositoryConnectorFactory])
    // locator.addService(classOf[RepositoryConnectorFactory], classOf[WagonRepositoryConnectorFactory] )
 
-
-
     locator.getService(classOf[RepositorySystem])
   }
 
   def resolveDeployUnit(groupID: String, artifactID: String, version: String, repoURL: String): File = {
-
     val artifact: Artifact = new DefaultArtifact(List(groupID, artifactID, version).mkString(":"))
-
     val artifactRequest = new ArtifactRequest
     artifactRequest.setArtifact(artifact)
 
     val repositories: java.util.List[RemoteRepository] = new java.util.ArrayList();
+
     if (repoURL != null) {
       val repo = new RemoteRepository
       repo.setId("idRepo")
@@ -71,17 +68,16 @@ object AetherUtil {
 
     artifactRequest.setRepositories(repositories)
     var artefactResult: ArtifactResult = null;
+
     try {
       artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
     } catch {
-      case r: Exception => r.printStackTrace()
+      case e:Exception => e.printStackTrace()
     }
-    println(artefactResult.getArtifact.getFile.getAbsolutePath)
     artefactResult.getArtifact.getFile
   }
 
   val newRepositorySystemSession = {
-    println("coucou5");
     val session = new MavenRepositorySystemSession()
     /*
    val factory = new DefaultSettingsBuilderFactory
