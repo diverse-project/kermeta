@@ -98,7 +98,7 @@
                         	org.sonatype.*,
                             org.apache.maven.*,
                             com.ning.http.*,
-                            com.google.protobuf
+                            com.google.protobuf.*
                         </Private-Package>
                     </instructions>
                 </configuration>
