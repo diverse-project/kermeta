@@ -14,7 +14,6 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.language.structure.impl._
 import org.kermeta.language.behavior.impl._
-import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 import scala.collection.JavaConversions._
 
 /**
@@ -23,13 +22,19 @@ import scala.collection.JavaConversions._
 trait KLambdaParser extends KAbstractParser {
 
   def fLambda : Parser[Expression] = "{" ~ repsep(ident, ",") ~ "|" ~ fExpressionLst ~ "}" ^^ {
-    case ob1 ~ params ~ pipe ~ exps ~ cb1 => {
+    case _ ~ params ~ _ ~ exps ~ _ => {
 	 	  
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
 	 	 
         params.foreach{pname=>
           var newLambdaP = BehaviorFactory.eINSTANCE.createLambdaParameter
           newLambdaP.setName(pname)
+          //var newType = StructureFactory.eINSTANCE.createUnresolvedType
+          //var newTypeRef = BehaviorFactory.eINSTANCE.createTypeReference
+          //newTypeRef.setKType(newType)
+          //newLambdaP.setType(newTypeRef)
+          //newLambdaExp.getContainedType.add(newType) 
+
           newLambdaExp.getParameters.add(newLambdaP)
         }
 	var newBlock = BehaviorFactory.eINSTANCE.createBlock
