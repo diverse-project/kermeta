@@ -21,7 +21,7 @@ import scala.collection.JavaConversions._
  */
 trait KVarParser extends KAbstractParser with KGenericTypeParser {
 
-  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ genericQualifiedTypeObject ~ (("init" ~ fStatement)?) ^^ { case id1 ~ _ ~ unresType ~ initStat  =>
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ genericQualifiedTypeObject ~ (( ("init"|":="/*|"?="*/) ~ fStatement)?) ^^ { case id1 ~ _ ~ unresType ~ initStat  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       //TYPE GESTURE
@@ -33,7 +33,11 @@ trait KVarParser extends KAbstractParser with KGenericTypeParser {
       newo.setType(newtyperef)
       initStat match {
         case None =>
-        case Some(elseExp)=> elseExp match { case "init"~statm => newo.setInitialization(statm) }
+        case Some(elseExp)=> elseExp match { 
+            case "init"~statm => newo.setInitialization(statm)
+            //case "?="~statm => {newo.setInitialization(statm);newo.setIsCast(true) }
+            case ":="~statm => newo.setInitialization(statm)  //TODO REFACTORING
+          }
       }
       newo
   }
