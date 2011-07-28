@@ -46,10 +46,10 @@ class FullStaticResolver
  //      	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
        	//resolvedModelingUnit := unresolvedModelingUnit
-  //     	checkUnresolved(resolvedModelingUnit)
-       	//resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
+       	//checkUnresolved(resolvedModelingUnit)
+       	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
        	
-       	//unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
+       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
        	
        	stdio.writeln("	********************* " + folder+"results/....km" + " saved ************************")
 	end
@@ -81,7 +81,7 @@ class FullStaticResolver
 		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
 		
-		staticSetterContext.verbose := false
+		staticSetterContext.verbose := true
 		staticSetterContext.errors  := ctxt.errors
 		
 		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)

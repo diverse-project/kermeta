@@ -1062,6 +1062,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 						t.variable := foundType.asType(TypeVariable)
 						if (foundType.isInstanceOf(Class)) then
 							t.containedType.add(foundType)
+							
 						end
 					end
 				end
@@ -1078,7 +1079,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 					callTypeFinder(ctxt)
 					var foundType : Type init ctxt.getFoundType
 					if not foundType.isVoid() then
-						t.type := ctxt.foundType
+						t.type := foundType
 						if (foundType.isInstanceOf(Class)) then
 							t.containedType.add(foundType)
 						end

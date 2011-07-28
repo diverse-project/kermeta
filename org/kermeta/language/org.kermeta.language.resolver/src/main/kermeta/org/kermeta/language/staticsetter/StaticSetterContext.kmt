@@ -28,14 +28,39 @@ using org::kermeta::language::resolver
 class StaticSetterContext
 {
 	reference errors : OrderedSet<ResolverException>
+	
+	//used to store context for late resolving of lambdaexpressions
+	reference waitingContext : Sequence<ToBeResolvedLater>
 
 	attribute verbose : Boolean
 
 	operation initialize(mu : org::kermeta::language::structure::ModelingUnit) : StaticSetterContext is do
 	 	result := self
 	 	currentModelingUnit := mu
-	 	verbose := false
+	 	waitingContext:=Sequence<ToBeResolvedLater>.new
+	 	verbose := true
 	end
+	
+	operation saveWaitingContext(current : Expression) : Void is do
+		var tobeResolved : ToBeResolvedLater init ToBeResolvedLater.new
+		waitingContext.add(tobeResolved)
+		var newContext : StaticSetterContext init StaticSetterContext.new
+		tobeResolved.context:=newContext
+		newContext.errors:=errors
+		newContext.waitingContext:=waitingContext
+		newContext.verbose:=verbose
+		newContext.currentModelingUnit:=currentModelingUnit
+		newContext.currentClassDefinition:=currentClassDefinition
+		newContext.currentOperation:=currentOperation
+		contextFrames.each{ f|
+			newContext.contextFrames.add(StaticSetterContextFrame.clone(f))}
+
+		tobeResolved.current:=current
+		
+		//var contextTmp : Sequence<StaticSetterContextFrame> init Sequence<StaticSetterContextFrame>.new
+		//contextTmp
+	
+	end 
 	
 	/**
 	 * ModelingUnit we are processing 
@@ -98,6 +123,7 @@ class StaticSetterContext
 	 * Return the type of self.
 	 * The Type parameters are bound with least derived admitable type
 	 */
+	 
 	operation createSelfType() : org::kermeta::language::structure::Type is do
 		var selfType : org::kermeta::language::structure::Class  init org::kermeta::language::structure::Class.new
 		selfType.typeDefinition := currentClassDefinition
@@ -105,6 +131,9 @@ class StaticSetterContext
 			errors.add(ResolverException.new.initialize("Not able to create SelfType ", self))
 		else		
 			result := selfType
+		end
+		if selfType.typeDefinition.typeParameter.size!=selfType.typeParamBinding.size then
+		errors.add(ResolverException.new.initialize("Not implemented self with generics ", self))
 		end
 	end
 	
@@ -199,4 +228,13 @@ class StaticSetterContextFrame
 		symbolMap := kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>.new
 		result := self
 	end
+}
+
+class ToBeResolvedLater
+{
+	reference current : Expression
+	
+	reference context : StaticSetterContext
+
+
 }

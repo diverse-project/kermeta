@@ -18,7 +18,9 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
+require "StaticSetter_typevariableResolver.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
 
 using org::kermeta::language::resolver
 using org::kermeta::language::structure
@@ -97,7 +99,7 @@ package behavior {
 		operation resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Expression") end
 			// by default the StaticType is void
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))			
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))			
 			result := self
 			
 			// the algorithm is bottom up
@@ -119,7 +121,8 @@ package behavior {
 		/**
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
 		 */
-		operation setInferedStaticType(type : Type) : Type is do
+		operation setInferedStaticType(context : StaticSetterContext, type : Type) : Type is do
+			
 			if not type.isVoid then
 				self.staticType := type
 				if(type.container.isVoid) then
@@ -154,16 +157,17 @@ package behavior {
 			// TODO should we drill down into the other content of Block (for example: tag, ...)
 			
 			if (not self.statement.isEmpty()) then
-				setInferedStaticType(self.statement.last.staticType)
+				setInferedStaticType(context, self.statement.last.staticType)
 			else
-				setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))
+				setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))
 			end
 			// type of the block is the same as the one of the last instruction of the block 
 			result := self
 			context.popContext()
 		end 
 	}
-	
+	//resolve parameters
+	// this is called before the owning calloperation resolution
 	aspect class CallExpression {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallExpression") end
@@ -179,43 +183,53 @@ package behavior {
 			
 			result := self
 		end
+		
+		
 	}
 	
 	// FIXME to refactor: this method is too too long...
 	aspect class UnresolvedCall {
+		//an unresolved call could be replaced by: 
+		//a callvariable
+		//a callProperty
+		//a callOperation
+		//a TypeLiteral
+	
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of UnresolvedCall") end
 			if (context.verbose) then stdio.writeln("resolving UnresolvedCall "+ name) end
-			var targetType : Type 
+			//var targetType : Type 
 			if (target.isVoid) then
-				targetType := context.createSelfType
-				if (context.verbose) then stdio.writeln("  targetType is self : targetType.typeDefinition="+targetType.asType(Class).typeDefinition.toString) end
 				// look for a variable in the context
 				var symbolType : Type init context.getTypeForSymbol(self.name)
 				if not symbolType.isVoid then	
 					var callVariable : CallVariable init CallVariable.new
 					callVariable.name := self.name
 					if (context.verbose) then stdio.writeln("  FOUND callVariable="+callVariable.name) end
-					callVariable.setInferedStaticType(symbolType)
+					callVariable.setInferedStaticType(context, symbolType)
 					//	this is the CallVariable that must replace this UnresolvedCall
 					result := callVariable
+				else
+					target:= SelfExpression.new
 				end
-			else	
+			end
+			if not target.isVoid then	
 				if (context.verbose) then stdio.writeln("  infering targetType...") end
 				// replace current target by the possibly resolved one
 				target := target.resolveCallAndInferStatic(context)
-				targetType := target.staticType
-				if (context.verbose) then stdio.writeln("             targetType is infered as "+ targetType.toString + " for UnresolvedCall " + name) end
+				
+				if (context.verbose) then stdio.writeln("             target is infered as "+ target.staticType.toString + " for UnresolvedCall " + name) end
 			end 
-			
+			//resolve parameters
 			super(context)		
 				
 			// if not already found, look for an Operation
 			if result.isVoid then
-				if (targetType.isVoid) then 
+				if (target.isVoid) then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" ) 
 				else
-					var op : Operation init targetType.getCallableOperationByName(self.name)
+					var op : Operation init target.staticType.getCallableOperationByName(self.name)
+					//Here we must look if target is a TypeLiteral and if the type is a singleton
 					if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
 						// this is a TypeLiteral  
@@ -230,6 +244,7 @@ package behavior {
 						objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 						op := objectAny.getCallableOperationByName(self.name)
 					end
+					//if we finally found an operation
 					if not op.isVoid then
 						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
 						var callOperation :  CallOperation init  CallOperation.new
@@ -237,6 +252,7 @@ package behavior {
 						callOperation.name := self.name
 						callOperation.kOwnedTags.addAll(self.kOwnedTags)
 						// infer staticType of the content (except target which has been done previously)
+						// TODO check if necessary, probably already done
 						callOperation.eachOwnedElement{ e | 
 							e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
 							e // scala compiler needs somthing to return
@@ -247,11 +263,11 @@ package behavior {
 						callOperation.target := self.target 
 						// set staticOperation
 						callOperation.staticOperation := op
-
+						
 						// The static type of the call operation must be infered.
 						inferStaticTypeOfCallOperation(callOperation, op, context)
-
-						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved") end
+						
+						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
 						//	this is the CallOperation that must replace this UnresolvedCall
 						result := callOperation
 					end
@@ -259,10 +275,11 @@ package behavior {
 			end
 			// if not found, look for a Property
 			if result.isVoid then
-				if (targetType.isVoid) then 
+				if (target.isVoid) then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" ) 
 				else
-					var prop : Property init targetType.getCallablePropertyByName(self.name)
+					var prop : Property init target.staticType.getCallablePropertyByName(self.name)
+					//Here we look if the target is a TypeLiteral in case of a singleton
 					if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall") end
 						// this is a TypeLiteral  
@@ -277,6 +294,8 @@ package behavior {
 						objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
 						prop := objectAny.getCallablePropertyByName(self.name)
 					end
+					
+					//if we finally found a property
 					if not prop.isVoid then
 						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property2 of UnresolvedCall") end
 						var callProperty :  CallProperty init  CallProperty.new
@@ -295,13 +314,14 @@ package behavior {
 						// set staticProperty
 						callProperty.staticProperty := prop
 						
-						callProperty.setInferedStaticType(context.createTypeFromMultiplicityElement(prop))
+						callProperty.setInferedStaticType(context, context.createTypeFromMultiplicityElement(prop))
 						if (context.verbose) then stdio.writeln("  CallProperty "+ name + " resolved") end
 						//	this is the CallProperty that must replace this UnresolvedCall
 						result := callProperty
 					end
 				end
 			end
+			
 			// if not found, Look into TypeDefinition  ( is there any TypeLiteral in kermeta 2 ?)
 			if result.isVoid then
 				if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
@@ -323,7 +343,7 @@ package behavior {
 						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)				
 						// TODO deal with generics
 										
-						callTypeLiteral.setInferedStaticType(context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
 					end
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
 					result := callTypeLiteral
@@ -344,9 +364,9 @@ package behavior {
 			//TODO Method clone must be supported there as well.
 			if(op.name=="new" and op.owningClass.getQualifiedName()=="org::kermeta::language::structure::Class" and 
 				(not callOperation.target.isVoid).andThen{b | callOperation.target.isInstanceOf(CallTypeLiteral) }) then
-				callOperation.setInferedStaticType(callOperation.target.asType(CallTypeLiteral).typeref.type)
+				callOperation.setInferedStaticType(context,callOperation.target.asType(CallTypeLiteral).typeref.type)
 			else
-				callOperation.setInferedStaticType(context.createTypeFromMultiplicityElement(op))
+				callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElement(op))
 			end
 		end
 	}
@@ -359,13 +379,41 @@ package behavior {
 			super(context)		
 			result := self
 		end 
+		
+		/**
+		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
+		 */
+		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type is do
+			
+			if not type.isVoid then
+				// make sure all parameter of this type are concrete
+				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
+				if target.staticType.isInstanceOf(Class) then
+					bindings.addAll(target.staticType.asType(Class).typeParamBinding)
+				end
+				stdio.writeln("bindings.size : "+bindings.size.toString)
+				self.staticType := type.resolveTypeVariables(context,bindings)
+				if(self.staticType.isVoid) then
+					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
+					self.staticType := context.createTypeFromQualifiedName("kermeta::standard::Void")
+				end
+				if(self.staticType.container.isVoid) then
+					
+					self.containedType.add(self.staticType)
+				end
+				
+				result := self.staticType
+			else
+				stdio.writeln("Warning setting void as statictype on "+ self.name)
+			end
+		end
 	}
 	
 	aspect class EmptyExpression
 	{
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of EmptyExpression") end
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))			
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))			
 			result := self
 		end 
 	}
@@ -373,7 +421,7 @@ package behavior {
 	aspect class StringLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of StringLiteral") end
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::String"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::String"))								
 			result := self
 		end 
 	}
@@ -381,7 +429,7 @@ package behavior {
 	aspect class IntegerLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of IntegerLiteral") end
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Integer"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Integer"))								
 			result := self
 		end 
 	}	
@@ -389,7 +437,7 @@ package behavior {
 	aspect class VoidLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of VoidLiteral")	 end
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))								
 			result := self
 		end 
 	}
@@ -397,7 +445,7 @@ package behavior {
 	aspect class BooleanLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of BooleanLiteral") end
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Boolean"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Boolean"))								
 			result := self
 		end 
 	}
@@ -417,7 +465,7 @@ package behavior {
 			var staticTypeVariable : Type init context.createTypeFromMultiplicityElement(self.type)
 			
 			// type of the variable
-			setInferedStaticType(context.createTypeFromQualifiedName("kermeta::standard::Void"))
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))
 			 			 			
 			result := self
 			
@@ -432,7 +480,7 @@ package behavior {
 			
 			self.target := self.target.resolveCallAndInferStatic(context).asType(CallExpression) 
 					
-			self.setInferedStaticType(self.target.staticType)
+			self.setInferedStaticType(context, self.target.staticType)
 						
 			self.~value := self.~value.resolveCallAndInferStatic(context)
 			
@@ -457,7 +505,7 @@ package behavior {
 				staticTypeOfIF.type.add(self.elseBody.staticType)
 			end
 			
-			self.setInferedStaticType(staticTypeOfIF)
+			self.setInferedStaticType(context, staticTypeOfIF)
 			
 			result := self
 		end
@@ -486,7 +534,7 @@ package behavior {
 				context.createTypeFromQualifiedName("kermeta::standard::Void")
 			end
 			
-			self.setInferedStaticType(staticTypeOfLOOP)
+			self.setInferedStaticType(context, staticTypeOfLOOP)
 			
 			result := self
 			
@@ -500,7 +548,17 @@ package behavior {
 			// Creation of a type based on the current class definition corresponding to the self.
 			var type : Class init Class.new
 			type.typeDefinition := context.currentClassDefinition
-			self.setInferedStaticType(type)
+			type.typeDefinition.typeParameter.each{ tp |
+				var tvb : TypeVariableBinding init  TypeVariableBinding.new
+				tvb.variable := tp
+				if tp.supertype.isVoid then
+					context.createTypeFromQualifiedName("kermeta::standard::Object")
+				else
+					tvb.type := tp.supertype
+				end
+				type.typeParamBinding.add(tvb)
+			}
+			self.setInferedStaticType(context, type)
 			result := self
 		end
 	}
@@ -511,23 +569,43 @@ package behavior {
 			
 			self.expression := self.expression.resolveCallAndInferStatic(context)
 			
-			self.setInferedStaticType(self.expression.staticType)
+			self.setInferedStaticType(context, self.expression.staticType)
 			
 			result := self
 		end
 	}
-	
+	//Lambda Expression can be resolved if its lambda parameters are explicitely typed
+	//or if the container is a resolved operationCall 
 	aspect class LambdaExpression {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of LambdaExpression") end
+			
+			//if lambda parameters are explicitely typed
+			if parameters.forAll{p|not p.type.isVoid()} then
+			context.pushContext()
+				self.parameters.each{x|
+					context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
+					}
+				self.body := self.body.resolveCallAndInferStatic(context)
+			
+				self.setInferedStaticType(context, self.body.staticType)
+			context.popContext()
+			//lambda parameters are implicitly typed
+			else
+				if container.isInstanceOf(UnresolvedCall) then
+					context.saveWaitingContext(self)
+				//save the context and resolve the lambda expression later
+				else
+				//resolve it now
+				end
 				
-			self.body := self.body.resolveCallAndInferStatic(context)
-			
-			self.setInferedStaticType(self.body.staticType)
-			
+			end
+				
 			result := self
 		end 
 	}
+	
+	
 	
 	aspect class Rescue {
 		operation resolveCallAndInferStatic(context : StaticSetterContext) is do
@@ -566,7 +644,7 @@ package behavior {
 			if (operationContainer.isVoid) then
 				context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
 			else
-				self.setInferedStaticType(operationContainer.type)
+				self.setInferedStaticType(context, operationContainer.type)
 			end
 			
 			result := self

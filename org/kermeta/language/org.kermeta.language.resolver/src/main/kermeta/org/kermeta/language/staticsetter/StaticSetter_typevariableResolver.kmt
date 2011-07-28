@@ -1,0 +1,108 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ 
+ given a type with possibly some typevariable, returns a new type with no typevariable
+ */
+
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+require "StaticSetter_kermeta_aspect.kmt"
+using kermeta::standard
+
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+using org::kermeta::language::resolver
+using org::kermeta::language::staticsetter
+
+aspect class Type {
+
+	operation resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>):Type is do 
+		result := self
+	end
+
+}
+
+
+aspect class Class {
+
+	method resolveTypeVariables(context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do 
+		var newClass : Class init Class.new
+		newClass.typeDefinition:=typeDefinition
+		typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
+		if not virtualTypeBinding.isEmpty then
+			context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
+		end 
+		result := newClass
+	end
+
+}
+
+aspect class TypeVariableBinding {
+
+	operation cloner(context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : TypeVariableBinding is do
+		var newBinding : TypeVariableBinding init TypeVariableBinding.new
+		
+		newBinding.variable:=variable
+		var newt : Type init type.resolveTypeVariables(context, bindings)
+		if(newt.container.isVoid) then
+			newBinding.containedType.add(newt)
+		end
+		newBinding.type := newt
+		result := newBinding
+	end
+
+}
+
+
+aspect class ObjectTypeVariable{
+
+	method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+	
+		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables ")
+		result := bindings.detect{ b|
+			stdio.writeln("   ObjectTypeVariable.resolveTypeVariables " +  b.variable.toString +b.variable.name+ "  ?= " + self.toString +self.name)
+			
+			b.variable==self
+		}.type
+		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables result="+ result.toString)
+	end
+}
+
+aspect class ProductType{
+		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+		// TODO not sure must see with lambda and generic
+		result := self
+	end
+}
+aspect class FunctionType{
+		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+		// TODO not sure must see with lambda and generic
+		result := self
+	end
+}
+
+aspect class VoidType{
+		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+	
+		result := self
+	end
+}
+aspect class VirtualType{
+		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+		// TODO not sure must see with model type use case
+		result := self
+	end
+}
+aspect class ModelTypeVariable{
+		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
+	// TODO not sure must see with model type use case
+		result := self
+	end
+}
