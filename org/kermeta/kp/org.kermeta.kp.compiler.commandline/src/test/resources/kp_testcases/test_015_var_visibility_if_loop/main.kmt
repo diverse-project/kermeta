@@ -14,7 +14,7 @@ package pkg{
 			foo2.plus(2)
 			
 			from
-			var foo1: String
+			var foo1: kermeta::standard::String
 			until
 			foo1 == "coucou"
 			loop
