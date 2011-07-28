@@ -186,16 +186,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 		return name;
 	}
 
-  /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void EOperation0() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+  
 
 		/**
 	 * <!-- begin-user-doc -->

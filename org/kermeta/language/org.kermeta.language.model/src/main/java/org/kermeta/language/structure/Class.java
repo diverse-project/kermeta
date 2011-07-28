@@ -109,12 +109,5 @@ public interface Class extends ParameterizedType {
 	 */
 	String getName();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void EOperation0();
 
 } // Class

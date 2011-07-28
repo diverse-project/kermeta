@@ -204,7 +204,6 @@
             <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Class/superClass"/>
             <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Class/isAbstract"/>
             <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Class/name"/>
-            <genOperations ecoreOperation="kermeta.ecore#//kermeta/language/structure/Class/EOperation0"/>
           </genClasses>
           <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/DataType"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Enumeration">
