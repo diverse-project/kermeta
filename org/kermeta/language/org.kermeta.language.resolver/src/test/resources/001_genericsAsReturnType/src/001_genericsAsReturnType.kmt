@@ -16,6 +16,7 @@ class Foo
 		var y : A<Integer> init A<Integer>.new
 		var z : Integer init 1+1
 		z:=y.foo()+1
+		z:=y.x+2
 	end
 }
 }
