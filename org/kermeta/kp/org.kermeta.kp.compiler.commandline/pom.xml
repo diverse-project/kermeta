@@ -89,7 +89,7 @@
 			        <phase>test</phase>
 			        <configuration>
 			          <tasks>
-			            <junitreport todir="target/surefire-reports">
+			            <junitreport todir="target/surefire-reports" showoutput="on" printsummary="withOutAndErr">
 			              <fileset dir="target/surefire-reports">
 			                <include name="**/*.xml"/>
 			              </fileset>
