@@ -93,7 +93,7 @@
 			              <fileset dir="target/surefire-reports">
 			                <include name="**/*.xml"/>
 			              </fileset>
-			              <report format="noframes" todir="target/surefire-reports"/>
+			              <report format="frames" todir="target/surefire-reports"/>
 			            </junitreport>
 			          </tasks>
 			        </configuration>

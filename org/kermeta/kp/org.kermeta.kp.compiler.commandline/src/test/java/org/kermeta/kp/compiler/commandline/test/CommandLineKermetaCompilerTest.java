@@ -49,7 +49,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 		
 		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,additionalClassPath, false);
 				
-		assertTrue("Compiler has failed with message = " + compiler.errorMessage, !compiler.hasFailed);
+		assertTrue("Failure = " + compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?
 		
         //assert(true);
