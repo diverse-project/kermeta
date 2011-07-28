@@ -21,29 +21,47 @@ import scala.collection.JavaConversions._
  */
 trait KLambdaParser extends KAbstractParser {
 
-  def fLambda : Parser[Expression] = "{" ~ repsep(ident, ",") ~ "|" ~ fExpressionLst ~ "}" ^^ {
+  def fLambda : Parser[Expression] = "{" ~ repsep(lambdaProperty, ",") ~ "|" ~ fExpressionLst ~ "}" ^^ {
     case _ ~ params ~ _ ~ exps ~ _ => {
 	 	  
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
 	 	 
-        params.foreach{pname=>
-          var newLambdaP = BehaviorFactory.eINSTANCE.createLambdaParameter
-          newLambdaP.setName(pname)
-          //var newType = StructureFactory.eINSTANCE.createUnresolvedType
-          //var newTypeRef = BehaviorFactory.eINSTANCE.createTypeReference
-          //newTypeRef.setKType(newType)
-          //newLambdaP.setType(newTypeRef)
-          //newLambdaExp.getContainedType.add(newType) 
+        params.foreach{prop=>
+          if(prop.getType()!=null)
+            newLambdaExp.getContainedType.add(prop.getType().getType())
 
-          newLambdaExp.getParameters.add(newLambdaP)
+          newLambdaExp.getParameters.add(prop)
         }
-	var newBlock = BehaviorFactory.eINSTANCE.createBlock
+
+	      var newBlock = BehaviorFactory.eINSTANCE.createBlock
         newBlock.getStatement.addAll(exps)
         newLambdaExp.setBody(newBlock)
         newLambdaExp
       }
 	  
   }
+
+
+  def lambdaProperty : Parser[LambdaParameter] = ident ~ opt(":" ~> genericQualifiedType)  ^^ {
+    case id ~ qualifName => {
+      var newLambdaP = BehaviorFactory.eINSTANCE.createLambdaParameter
+      newLambdaP.setName(id)
+      qualifName match {
+        case Some(paramType) => {
+          var newTypeRef = BehaviorFactory.eINSTANCE.createTypeReference
+
+          if(paramType.isInstanceOf[UnresolvedType])
+            newTypeRef.setName(paramType.asInstanceOf[UnresolvedType].getTypeIdentifier())
+
+          newTypeRef.setType(paramType)
+          newLambdaP.setType(newTypeRef)
+        }
+        case None =>
+      }
+      newLambdaP
+    }
+  }
+
 
   def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ genericQualifiedType ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
       var newType = StructureFactory.eINSTANCE.createFunctionType
