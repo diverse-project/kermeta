@@ -469,6 +469,8 @@ package behavior {
 			
 			var staticTypeOfLOOP : Type
 			
+			context.pushContext()
+			
 			if (not self.initialization.isVoid) then
 				self.initialization := self.initialization.resolveCallAndInferStatic(context)
 			end
@@ -487,6 +489,8 @@ package behavior {
 			self.setInferedStaticType(staticTypeOfLOOP)
 			
 			result := self
+			
+			context.popContext()
 		end
 	}
 	
