@@ -34,12 +34,37 @@ package structure {
 			// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
 			context.inferContainedExpressionStatic(self)
 		end
+		
+		
+		operation getQualifiedNameResolving() : String is do
+			if (not container.isVoid).andThen{b | container.isInstanceOf(KermetaModelElement) } then
+				result := container().asType(KermetaModelElement).getQualifiedNameResolving()
+			else
+				result := ""
+			end
+		end
 	} 
+
+	aspect class Package {
+		method getQualifiedNameResolving() : String is do
+			result := super
+			
+			if(result!="") then
+				result := result + "::"
+			end
+
+			result := result + name
+		end
+	}
+
+
 	aspect class NamedElement {
 		method inferContainedExpressionStatic(context : StaticSetterContext) is do
 			context.inferContainedExpressionStatic(self)
 		end
 	}
+
+
 	aspect class TypeContainer {
 		method inferContainedExpressionStatic(context : StaticSetterContext) is do
 			context.inferContainedExpressionStatic(self)
@@ -284,7 +309,7 @@ package behavior {
 				
 				//trying with the package
 				if (typeDef.isVoid) then
-					typeDef := context.currentModelingUnit.getTypeDefinitionByQualifiedName(getQualifiedName(self)+"::"+self.name)
+					typeDef := context.currentModelingUnit.getTypeDefinitionByQualifiedName(getQualifiedNameResolving()+"::"+self.name)
 				end
 				
 				// TODO deal with using
@@ -324,32 +349,6 @@ package behavior {
 				callOperation.setInferedStaticType(context.createTypeFromMultiplicityElement(op))
 			end
 		end
-		
-		
-		
-		/**
-		* return the qualified name
-		*/
-		operation getQualifiedName(toFind : KermetaModelElement) : String is do //FIXME!! To remove
-			if (not toFind.isVoid) then
-				if (not toFind.container().isInstanceOf(Package)) then // FIXME does not check Void container
-					result := getQualifiedName(toFind.container().asType(KermetaModelElement))
-				else
-					if (not toFind.container().isVoid) then
-						result := getQualifiedName(toFind.container().asType(KermetaModelElement))
-						if (result != "") then
-							result := result + "::"
-						end
-						result := result + toFind.container().asType(Package).name
-					end
-				end
-				if (result.isVoid()) then
-					result := ""
-				end
-			else
-				result := ""
-			end
-		end
 	}
 	
 	aspect class CallFeature
@@ -358,13 +357,6 @@ package behavior {
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallFeature") end
 			// compute content of the CallFeature 
 			super(context)		
-			//FIXME useless instructions...
-			var targetType : Type 
-			if (target.isVoid) then
-				targetType := context.createSelfType
-			else
-				targetType := target.staticType
-			end 
 			result := self
 		end 
 	}
