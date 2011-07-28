@@ -18,6 +18,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 
 using org::kermeta::language::resolver
 using org::kermeta::language::structure
@@ -155,6 +156,7 @@ package behavior {
 		end
 	}
 	
+	// FIXME to refactor: this method is too too long...
 	aspect class UnresolvedCall {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of UnresolvedCall") end
@@ -174,8 +176,6 @@ package behavior {
 					result := callVariable
 				end
 			else	
-				
-				
 				if (context.verbose) then stdio.writeln("  infering targetType...") end
 				// replace current target by the possibly resolved one
 				target := target.resolveCallAndInferStatic(context)
@@ -222,8 +222,10 @@ package behavior {
 						callOperation.target := self.target 
 						// set staticOperation
 						callOperation.staticOperation := op
-						
-						callOperation.setInferedStaticType(context.createTypeFromMultiplicityElement(op))
+
+						// The static type of the call operation must be infered.
+						inferStaticTypeOfCallOperation(callOperation, op, context)
+
 						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved") end
 						//	this is the CallOperation that must replace this UnresolvedCall
 						result := callOperation
@@ -308,12 +310,29 @@ package behavior {
 			end
 		end
 		
+		
+		/**
+		 * This method infers the static type of the given call operation.
+		 */
+		operation inferStaticTypeOfCallOperation(callOperation : CallOperation, op : Operation, context : StaticSetterContext) : Void is do
+			//  The call of operation new that must not return type Object but the corresponding type associated to the new.
+			//TODO Method clone must be supported there as well.
+			if(op.name=="new" and op.owningClass.getQualifiedName()=="org::kermeta::language::structure::Class" and 
+				(not callOperation.target.isVoid).andThen{b | callOperation.target.isInstanceOf(CallTypeLiteral) }) then
+				callOperation.setInferedStaticType(callOperation.target.asType(CallTypeLiteral).typeref.type)
+			else
+				callOperation.setInferedStaticType(context.createTypeFromMultiplicityElement(op))
+			end
+		end
+		
+		
+		
 		/**
 		* return the qualified name
 		*/
-		operation getQualifiedName(toFind : KermetaModelElement) : String is do
+		operation getQualifiedName(toFind : KermetaModelElement) : String is do //FIXME!! To remove
 			if (not toFind.isVoid) then
-				if (not toFind.container().isInstanceOf(Package)) then
+				if (not toFind.container().isInstanceOf(Package)) then // FIXME does not check Void container
 					result := getQualifiedName(toFind.container().asType(KermetaModelElement))
 				else
 					if (not toFind.container().isVoid) then
@@ -339,7 +358,7 @@ package behavior {
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallFeature") end
 			// compute content of the CallFeature 
 			super(context)		
-			
+			//FIXME useless instructions...
 			var targetType : Type 
 			if (target.isVoid) then
 				targetType := context.createSelfType
