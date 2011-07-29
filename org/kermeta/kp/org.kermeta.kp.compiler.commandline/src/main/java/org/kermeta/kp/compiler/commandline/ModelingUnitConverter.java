@@ -97,7 +97,7 @@ public class ModelingUnitConverter {
 		catch(Exception e){
 			System.out.println("Received Exception while saving "+e);
 			java.util.Map<EObject,java.util.Collection<EStructuralFeature.Setting>> unresolvedMap ;
-			unresolvedMap = EcoreUtil.UnresolvedProxyCrossReferencer.find(mu.eResource());
+			unresolvedMap = EcoreUtil.ExternalCrossReferencer.find(mu.eResource());
 			for (EObject myEobject : unresolvedMap.keySet() ){
 				System.out.println("Patching dangling element "+myEobject+ " setting="+unresolvedMap.get(myEobject));
 				mu.eResource().getContents().add(myEobject);				
