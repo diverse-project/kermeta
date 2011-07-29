@@ -1288,6 +1288,20 @@ package kermeta {
 				end
 			}
 
+			aspect class UnresolvedInferredType {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
+					var aspectElement : org::kermeta::language::structure::UnresolvedInferredType
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
 		}
 
 

@@ -2031,6 +2031,19 @@ package kermeta {
 				end
 			}
 
+			aspect class UnresolvedInferredType inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::Type {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Unresolved is do
+					var mergedModelElement : org::kermeta::language::structure::UnresolvedInferredType
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedInferredType)
+					if (not mergedModelElement.isVoid) then
+						stdio.writeln("Merging content of a UnresolvedInferredType")
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
 		}
 
 

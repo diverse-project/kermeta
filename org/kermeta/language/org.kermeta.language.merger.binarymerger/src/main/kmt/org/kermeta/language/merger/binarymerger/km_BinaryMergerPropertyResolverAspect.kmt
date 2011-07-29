@@ -584,6 +584,13 @@ package kermeta {
 				end
 			}
 
+			aspect class UnresolvedInferredType inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::Type {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
 		}
 
 

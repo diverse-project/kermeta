@@ -235,6 +235,9 @@ package kermeta {
 			aspect class TypeMapping inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
+			aspect class UnresolvedInferredType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
 		}
 
 
