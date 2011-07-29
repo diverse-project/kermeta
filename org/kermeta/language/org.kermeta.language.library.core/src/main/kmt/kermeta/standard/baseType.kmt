@@ -1764,6 +1764,9 @@ class Character {        @CompilerIgnore "true"
 abstract class Summable {
 	operation plus(other : Summable) : Summable is abstract
 	operation minus(other : Summable) : Summable is abstract
+	operation mult(other : Summable) : Summable is abstract
+	operation div(other : Summable) : Summable is abstract
+	operation mod(other : Summable) : Summable is abstract
 }
 
 @CompilerIgnore "true"
