@@ -31,6 +31,8 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   /* */
   def classDecl : Parser[ClassDefinition]
 
+  def enumDecl : Parser[Enumeration]
+
   def program = opt(kpositioned(packageDecl)) ~ kermetaUnit ^^ { case decl ~ unit =>
       var newp =StructureFactory.eINSTANCE.createModelingUnit
       var usings : List[Using] = List()
@@ -71,7 +73,13 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
                     case None => newp.getOwnedTypeDefinition.add(cd)
                   }
                 }
-                case _ @ elem => println("unknow elem" + elem)
+                case enum : Enumeration => {
+                  lastPackageRoot match {
+                    case Some(previous)=> previous.getOwnedTypeDefinition.add(enum)
+                    case None => newp.getOwnedTypeDefinition.add(enum)
+                  }
+                }
+                case _ @ elem => println("unknow elem:" + elem)
               }}
           //case np : NameSpacePrefix => newp.setNamespacePrefix(np.name) //; var pos2 = np.pos.asInstanceOf[OffsetPosition] ; println(pos2.productArity+"-"+pos2.source.subSequence(0, pos2.offset.toInt))
           case u : Using => usings = usings ++ List(u)
@@ -173,13 +181,14 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
    newo.setValue(st1.toString)
    newo
    }*/
-  def annotableElement = kpositioned (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
+  def annotableElement = kpositioned (subPackageDecl | classDecl | enumDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
   def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
       newp.setName(packageName)
       decls match {
         case Some(_ @ subElem) => subElem.asInstanceOf[List[_]].foreach{elem => elem match {
               case cdef : ClassDefinition => newp.getOwnedTypeDefinition.add(cdef)
+              case enum : Enumeration => newp.getOwnedTypeDefinition.add(enum)
               case subPack : Package => newp.getNestedPackage.add(subPack);subPack.setNestingPackage(newp)
               case _ => println("unknow subelem")
             }}

@@ -25,7 +25,8 @@ import scala.util.parsing.input.OffsetPosition
  */
 class KParser extends KExpressionParser
                  with KModelingUnitParser
-                 with KClassDefinitionParser  {
+                 with KClassDefinitionParser
+                 with KEnumerationParser {
 
   def parse(content : String) : Option[ModelingUnit] = {
     val tokens = new lexical.Scanner(content)
