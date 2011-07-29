@@ -1170,6 +1170,11 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
               containment="true"/>
         </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedInferredType" eSuperTypes="#//kermeta/language/structure/Unresolved #//kermeta/language/structure/Type">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;However we need to use a special inferrence algorithm in order  to create a real Type that points to a concrete TypeDefinition.&#xD;&#xA;Exemple :&#xD;&#xA;A typical use will be for the type of the lambda parameter i in :&#xD;&#xA;operation foo(f : &lt;Integer->Integer) is abstract&#xD;&#xA;...&#xD;&#xA;foo{i | i+1 }&#xD;&#xA;&#xD;&#xA;in that case, the type of i is an UnresolvedInferredType, the Resolved should find the appropriate operation foo (if there is no ambiguity)&#xD;&#xA;"/>
+          </eAnnotations>
+        </eClassifiers>
       </eSubpackages>
     </eSubpackages>
   </eSubpackages>

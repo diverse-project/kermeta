@@ -43,6 +43,7 @@ import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeMapping;
 import org.kermeta.language.structure.TypeVariableBinding;
+import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -125,6 +126,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.TYPE_MAPPING: return createTypeMapping();
+			case StructurePackage.UNRESOLVED_INFERRED_TYPE: return createUnresolvedInferredType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -488,6 +490,16 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public TypeMapping createTypeMapping() {
 		TypeMappingImpl typeMapping = new TypeMappingImpl();
 		return typeMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedInferredType createUnresolvedInferredType() {
+		UnresolvedInferredTypeImpl unresolvedInferredType = new UnresolvedInferredTypeImpl();
+		return unresolvedInferredType;
 	}
 
 	/**

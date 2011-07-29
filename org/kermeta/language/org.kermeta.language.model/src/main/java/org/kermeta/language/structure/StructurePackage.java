@@ -3719,6 +3719,61 @@ public interface StructurePackage extends EPackage {
 	int TYPE_MAPPING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedInferredTypeImpl <em>Unresolved Inferred Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedInferredTypeImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedInferredType()
+	 * @generated
+	 */
+	int UNRESOLVED_INFERRED_TYPE = 42;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_INFERRED_TYPE__KTAG = UNRESOLVED__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_INFERRED_TYPE__KOWNED_TAGS = UNRESOLVED__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_INFERRED_TYPE__KTYPE = UNRESOLVED__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_INFERRED_TYPE__TYPE_CONTAINER = UNRESOLVED_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Inferred Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_INFERRED_TYPE_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3726,7 +3781,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 42;
+	int CONSTRAINT_LANGUAGE = 43;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -3736,7 +3791,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 43;
+	int CONSTRAINT_TYPE = 44;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -3746,7 +3801,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 44;
+	int STRING = 45;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -3756,7 +3811,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 45;
+	int BOOLEAN = 46;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -3765,7 +3820,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 46;
+	int INTEGER = 47;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -3774,7 +3829,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 47;
+	int UNLIMITED_NATURAL = 48;
 
 
 	/**
@@ -5232,6 +5287,16 @@ public interface StructurePackage extends EPackage {
 	EReference getTypeMapping_Mapping();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedInferredType <em>Unresolved Inferred Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Inferred Type</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedInferredType
+	 * @generated
+	 */
+	EClass getUnresolvedInferredType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6486,6 +6551,16 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_MAPPING__MAPPING = eINSTANCE.getTypeMapping_Mapping();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedInferredTypeImpl <em>Unresolved Inferred Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedInferredTypeImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedInferredType()
+		 * @generated
+		 */
+		EClass UNRESOLVED_INFERRED_TYPE = eINSTANCE.getUnresolvedInferredType();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

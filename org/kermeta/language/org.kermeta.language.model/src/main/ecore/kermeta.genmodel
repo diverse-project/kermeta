@@ -324,6 +324,7 @@
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/sourceType"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/mapping"/>
           </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedInferredType"/>
         </nestedGenPackages>
       </nestedGenPackages>
     </nestedGenPackages>

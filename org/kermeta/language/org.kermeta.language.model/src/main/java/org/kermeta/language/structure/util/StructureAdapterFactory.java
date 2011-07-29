@@ -48,6 +48,7 @@ import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -278,6 +279,10 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeMapping(TypeMapping object) {
 				return createTypeMappingAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedInferredType(UnresolvedInferredType object) {
+				return createUnresolvedInferredTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -884,6 +889,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedInferredType <em>Unresolved Inferred Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UnresolvedInferredType
+	 * @generated
+	 */
+	public Adapter createUnresolvedInferredTypeAdapter() {
 		return null;
 	}
 

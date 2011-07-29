@@ -48,6 +48,7 @@ import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -68,7 +69,7 @@ import org.kermeta.language.structure.VoidType;
  * @see org.kermeta.language.structure.StructurePackage
  * @generated
  */
-public class StructureSwitch<T> extends Switch<T> {
+public class StructureSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -90,16 +91,14 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Checks whether this is a switch for the given package.
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
+	public T doSwitch(EObject theEObject) {
+		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
 	/**
@@ -109,7 +108,27 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
+	}
+
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	//@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case StructurePackage.KERMETA_MODEL_ELEMENT: {
@@ -489,6 +508,15 @@ public class StructureSwitch<T> extends Switch<T> {
 				T result = caseTypeMapping(typeMapping);
 				if (result == null) result = caseTypeContainer(typeMapping);
 				if (result == null) result = caseKermetaModelElement(typeMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.UNRESOLVED_INFERRED_TYPE: {
+				UnresolvedInferredType unresolvedInferredType = (UnresolvedInferredType)theEObject;
+				T result = caseUnresolvedInferredType(unresolvedInferredType);
+				if (result == null) result = caseUnresolved(unresolvedInferredType);
+				if (result == null) result = caseType(unresolvedInferredType);
+				if (result == null) result = caseKermetaModelElement(unresolvedInferredType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1127,6 +1155,21 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Inferred Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Inferred Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedInferredType(UnresolvedInferredType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1137,7 +1180,7 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	@Override
+	//@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}
