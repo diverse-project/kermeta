@@ -5,7 +5,25 @@ using kermeta::standard
 class Test {
 	operation main() is do
 		var a : Integer := 1 + 0
+		a:= 1.plus(0)
 		a := 4 / 2
+		a := 4.div(2)
 		a := 5 * 3
+		a:= 5.mult(3)
+		a := 20.mod(4)
+		a := 3 - 6
+		a := 3.minus(6)
+		
+		var b : Float := 1
+		
+		b := b.plus(a)
+		b := b + a
+		b := b.minus(a)
+		b := b - a
+		b := b.div(a)
+		b := b / a
+		b := b.mult(a)
+		b := b * a
+		b := b.mod(a)
 	end
 }
