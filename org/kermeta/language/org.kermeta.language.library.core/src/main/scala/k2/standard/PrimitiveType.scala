@@ -580,7 +580,6 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	
     //def size():Int={return value.size}
   /*  def append(other : String):String={return value + other}
-    def plus(other : String) :java.lang.String={return value + other}
     def toReal() :Double={return java.lang.Double.parseDouble(value)}
     def toBoolean() :Boolean={return java.lang.Boolean.parseBoolean(value)}
     def contains(str1 : String) :Boolean={return value.contains(str1)}
@@ -602,6 +601,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
    //override def equals(arg0:Any) : Boolean = value.equals(arg0)
 	 override def toString() : java.lang.String = value.toString()
 	 override def hashCode() : Int = value.hashCode()
+	 def plus(other : Object) : java.lang.String={return value + other.toString()}
 	 def compareTo(arg0:java.lang.String) : Int = value.compareTo(arg0)
 	 def indexOf(arg0:Int) : Int = value.indexOf(arg0)
 	 def indexOf(arg0:Int,arg1:Int) : Int = value.indexOf(arg0,arg1)

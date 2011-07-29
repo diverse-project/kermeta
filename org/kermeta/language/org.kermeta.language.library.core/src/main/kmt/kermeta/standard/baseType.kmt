@@ -207,7 +207,11 @@ class Object
 	end
 }
 @CompilerIgnore "true"
-class String {        
+class String {
+		@CompilerIgnore "true"
+		operation plus(other : Object) : String is do
+		end
+    
 	@CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
           end
