@@ -250,6 +250,10 @@ class LanguageVisitor
 	
 	end
 	
+	operation visitUnresolvedInferredType(visited : UnresolvedInferredType, ctxt : LanguageVisitorContext) is do
+	
+	end
+	
 	operation visitUnresolvedType(visited : UnresolvedType, ctxt : LanguageVisitorContext) is do
 		visited.generics.each{g|
 			g.accept(self, ctxt)

@@ -486,6 +486,12 @@ package structure {
 		end
 	}
 	
+	aspect class UnresolvedInferredType {
+		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) from KermetaModelElement is do
+			visitor.visitUnresolvedInferredType(self, ctxt)
+		end
+	}
+	
 	aspect class Using {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
 			visitor.visitUsing(self, ctxt)

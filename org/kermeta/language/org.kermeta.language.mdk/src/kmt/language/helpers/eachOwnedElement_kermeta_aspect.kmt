@@ -718,7 +718,11 @@ aspect class UnresolvedOperation {
 		}
 	end
 }
-
+aspect class UnresolvedInferredType {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
+	end
+}
 aspect class Using {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
