@@ -25,6 +25,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 using org::kermeta::language::resolver
 using org::kermeta::language::structure
 using org::kermeta::language::staticsetter
+using kermeta::standard
 
 package structure {
 	 aspect class KermetaModelElement {
@@ -581,15 +582,15 @@ package behavior {
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of LambdaExpression") end
 			
 			//if lambda parameters are explicitely typed
-			if parameters.forAll{p|not p.type.isVoid()} then
-			context.pushContext()
+			if parameters.forAll{p|not p.type.isInstanceOf(UnresolvedInferredType)} then
+				context.pushContext()
 				self.parameters.each{x|
 					context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
 					}
 				self.body := self.body.resolveCallAndInferStatic(context)
 			
 				self.setInferedStaticType(context, self.body.staticType)
-			context.popContext()
+				context.popContext()
 			//lambda parameters are implicitly typed
 			else
 				if container.isInstanceOf(UnresolvedCall) then
@@ -597,6 +598,56 @@ package behavior {
 				//save the context and resolve the lambda expression later
 				else
 				//resolve it now
+					if container.isInstanceOf(CallOperation) and staticType.isVoid then
+						context.pushContext()
+						//find which parameter it is in the calloperation
+						var paramPosition : Integer init container.asType(CallOperation).parameters.indexOf(self)
+						//find the parameter's definition in the operation definition
+						var paramDef : Parameter init container.asType(CallOperation).staticOperation.ownedParameter.elementAt(paramPosition)
+						
+						
+						//check if it's really a function with the good number of parameters
+						if paramDef.type.isInstanceOf(FunctionType) then
+							var funcParamTypes : Sequence<Type> init Sequence<Type>.new
+							if paramDef.type.asType(FunctionType).left.isInstanceOf(ProductType) then
+								funcParamTypes.addAll(paramDef.type.asType(FunctionType).left.asType(ProductType).type)
+							else
+								funcParamTypes.add(paramDef.type.asType(FunctionType).left)
+							end
+							
+							//get bindings from the type of the containing callOperation
+							var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
+							if container.asType(CallOperation).staticType.isInstanceOf(Class) then
+								bindings.addAll(container.asType(CallOperation).staticType.asType(Class).typeParamBinding)
+							end
+							stdio.writeln("lambda bindings.size : "+bindings.size.toString)
+							
+							if self.parameters.size == funcParamTypes.size then
+								from var i : Integer init 0
+								until i == self.parameters.size
+								loop
+									var typeRef : TypeReference init TypeReference.new
+									parameters.elementAt(i).type :=typeRef 
+									typeRef.type:=funcParamTypes.elementAt(i).resolveTypeVariables(context,bindings)
+									if typeRef.type.container.isVoid then
+										typeRef.containedType.add(typeRef.type)
+									end
+								end
+							else
+								context.errors.add(ResolverException.new.initialize("ERROR : your lambda expression doesn't have the right number of parameters", self))
+							end
+							
+						
+						else
+							context.errors.add(ResolverException.new.initialize("ERROR : the parameter in the operation definition is not of type FunctionType", self))
+						end
+						
+						
+						context.popContext()
+					
+					else						
+						context.errors.add(ResolverException.new.initialize("ERROR : the lambdaExpression is not a parameter of a CallOperation", self))
+					end
 				end
 				
 			end
@@ -605,6 +656,8 @@ package behavior {
 		end 
 	}
 	
+	
+
 	
 	
 	aspect class Rescue {
