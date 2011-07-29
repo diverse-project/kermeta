@@ -350,6 +350,16 @@ object PrettyPrinter {
         }
       }
 
+      case c: EnumerationLiteral => {
+        res.append(c.getName + "; ")
+      }
+
+      case c: Enumeration => {
+        res.append("enum " + c.getName + " {")
+        c.getOwnedLiteral.foreach(p=> print(p, res))
+        res.append("}\n")
+      }
+
       case c: Rescue => {
         res.append("(" + c.getExceptionName + " : ")
         print(c.getExceptionType, res)
