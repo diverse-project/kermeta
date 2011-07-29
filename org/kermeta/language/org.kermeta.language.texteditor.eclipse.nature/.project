@@ -30,6 +30,5 @@
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
 	</natures>
 </projectDescription>

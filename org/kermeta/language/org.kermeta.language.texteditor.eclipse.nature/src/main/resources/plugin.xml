@@ -3,7 +3,7 @@
 <plugin>
 
    <extension
-         id="KermetaNatureID"
+         id="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID"
          name="Kermeta V2 Project Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
@@ -12,21 +12,56 @@
          </run>
       </runtime>
    </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
+   <extension point="org.eclipse.ui.popupMenus">
+     
+	<objectContribution
             adaptable="true"
             objectClass="org.eclipse.core.resources.IProject"
             nameFilter="*"
             id="org.kermeta.language.texteditor.eclipse.nature.contribution1">
          <action
-               label="Add/Remove Kermeta V2 Nature"
                class="org.kermeta.language.texteditor.eclipse.nature.internal.ToggleNatureAction"
-               menubarPath="additions"
                enablesFor="+"
-               id="org.kermeta.language.texteditor.eclipse.nature.addRemoveNatureAction">
+               icon="icons/kermeta.gif"
+               id="org.kermeta.language.texteditor.eclipse.nature.addNatureAction"
+               label="Add Kermeta V2 Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions">
          </action>
+         <visibility>
+         <and>
+            <not>
+                <objectState name="projectNature" value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID"/>
+            </not>
+            <objectClass name="org.eclipse.core.resources.IProject" />
+          </and>
+         </visibility>
       </objectContribution>
+	 <objectContribution
+	       adaptable="true"
+	       id="org.kermeta.language.texteditor.eclipse.nature.contribution2"
+	       nameFilter="*"
+	       objectClass="org.eclipse.core.resources.IProject">
+	    <action
+	          class="org.kermeta.language.texteditor.eclipse.nature.internal.ToggleNatureAction"
+	          enablesFor="+"
+	          icon="icons/kermeta.gif"
+	          id="org.kermeta.language.texteditor.eclipse.nature.removeNatureAction"
+	          label="Remove Kermeta V2 Nature"
+	          menubarPath="org.eclipse.ui.projectConfigure/additions">
+	    </action>
+	    <visibility>
+	       <and>
+	          <objectClass
+	                name="org.eclipse.core.resources.IProject">
+	          </objectClass>
+	          <objectState
+	                name="projectNature"
+	                value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID">
+	          </objectState>
+	       </and>
+	    </visibility>
+	 </objectContribution>
+
    </extension>
    <extension
          point="org.eclipse.ui.ide.projectNatureImages">
