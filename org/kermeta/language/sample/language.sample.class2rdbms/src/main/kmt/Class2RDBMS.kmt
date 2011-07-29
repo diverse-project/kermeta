@@ -1,12 +1,4 @@
-@mainClass "class2RDBMS::Main"
-@mainOperation "main"
-
 package class2RDBMS;
-
-require kermeta
-require "trace.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore"
-require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.kmt"
 
 using kermeta::standard
 using kermeta::utils
