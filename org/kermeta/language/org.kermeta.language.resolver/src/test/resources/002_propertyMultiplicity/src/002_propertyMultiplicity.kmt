@@ -1,0 +1,13 @@
+using kermeta::standard 
+package root_package{ 
+
+
+
+class Foo
+{
+	reference content : String[0..*]
+	operation bar() : Void is do
+		content
+	end
+}
+}
