@@ -1,0 +1,10 @@
+package root_package;
+
+using kermeta::standard
+
+class Test
+{
+	operation main() is do
+		var foo : String := "toto" + "tata"
+	end
+}
