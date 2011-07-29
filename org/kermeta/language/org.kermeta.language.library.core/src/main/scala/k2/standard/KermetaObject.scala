@@ -14,6 +14,13 @@ import k2.persistence.RichResource
 
 trait KermetaObjectAspect extends    KermetaObject
 trait KermetaObject extends org.eclipse.emf.ecore.EObject{
+	
+	def `assert`(test : Boolean) = { 
+		if(!test) {
+			throw new AssertionError("Assertation failed.")
+		}
+	}
+
 	def equals(element : Any) : Boolean
 	//def isNotEqual(element : Any) : Boolean = !this.equals(element)
 //	def isDirectInstanceOf(cl : Class) : Boolean
