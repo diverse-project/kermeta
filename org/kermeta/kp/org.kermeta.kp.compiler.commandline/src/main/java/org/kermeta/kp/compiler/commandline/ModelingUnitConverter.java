@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -89,8 +91,20 @@ public class ModelingUnitConverter {
 		else
 			System.out.println("cannot create resource for  "+uri);
 		Map<String, String> options = null;
-		mu.eResource().save(outputStream, options);
-
+		try {
+			mu.eResource().save(outputStream, options);
+		}
+		catch(Exception e){
+			System.out.println("Received Exception while saving "+e);
+			java.util.Map<EObject,java.util.Collection<EStructuralFeature.Setting>> unresolvedMap ;
+			unresolvedMap = EcoreUtil.UnresolvedProxyCrossReferencer.find(mu.eResource());
+			for (EObject myEobject : unresolvedMap.keySet() ){
+				System.out.println("Patching dangling element "+myEobject+ " setting="+unresolvedMap.get(myEobject));
+				mu.eResource().getContents().add(myEobject);				
+			}
+			System.out.println("Retrying to save .... ");
+			mu.eResource().save(outputStream, options);
+		}
 
 		if (mustSaveToFile){
 			System.out.println("Saving stream to file "+saveToFile);
