@@ -1,0 +1,16 @@
+package testOpCall;
+
+class Test_opcall {
+ 
+    operation operation1() : kermeta::standard::Integer is do
+        result := operation_asg(1234)
+        kermeta::io::StdIO.writeln(result.toString)
+    end
+
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        result := in + 3
+    end
+
+
+}
+

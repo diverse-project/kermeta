@@ -10,7 +10,7 @@ class Test_assignment {
     operation testoperation1() : kermeta::standard::Integer is do
         var ~result : kermeta::standard::Integer
         ~result := 4
-        kermeta::io::kermeta::io::StdIO.writeln(~result.toString)
+        kermeta::io::StdIO.writeln(~result.toString)
         
         result := ~result
     end
