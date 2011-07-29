@@ -1,0 +1,11 @@
+package root_package;
+
+using kermeta::standard
+
+class Test {
+	operation main() is do
+		var a : Integer := 1 + 0
+		a := 4 / 2
+		a := 5 * 3
+	end
+}
