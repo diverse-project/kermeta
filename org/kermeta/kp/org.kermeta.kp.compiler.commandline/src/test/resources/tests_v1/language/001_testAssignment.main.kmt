@@ -1,0 +1,200 @@
+package testAssignment;
+
+using kermeta::standard
+
+// Test simple assignements and casts on variables.
+// assignement of propoerties is covered by other tests
+ 
+class Test_assignment {
+
+    operation testoperation1() : kermeta::standard::Integer is do
+        var ~result : kermeta::standard::Integer
+        ~result := 4
+        kermeta::io::kermeta::io::StdIO.writeln(~result.toString)
+        
+        result := ~result
+    end
+    
+    operation test1() is do
+    	var s : String init "toto"
+    	assert(s == "toto")    	
+    end
+    
+    operation test2() is do
+    	var s : String
+    	s := "toto"
+    	assert(s == "toto")    	
+    end
+    
+    operation test3() is do
+    	var s : String
+    	s := "toto"
+    	s := void
+    	assert(s == void)    	
+    end
+    
+    
+    
+    operation testCast1() is do
+    	var s : String 
+    	var o : Object init "toto"
+    	s ?= o
+    	assert(s == "toto")    	
+    end
+    
+    operation testCast2() is do
+    	var s : String 
+    	var o : Object init 22
+    	s ?= o
+    	assert(s == void)    	
+    end
+}
+
+// An enumeration for Test_assignment_behavior::testAssignmentEnum
+enumeration AccesVariableEnumeration
+{
+	accPublic;
+	accPrivate;
+}
+
+class ATest 
+{
+	reference a : AccesVariableEnumeration
+}
+
+class ATestAttr
+{
+	attribute a : AccesVariableEnumeration
+}
+
+class B
+{
+	attribute name : kermeta::standard::String
+}
+
+class C
+{
+	attribute attr_name1 : kermeta::standard::String
+	attribute attr_name2 : kermeta::standard::String
+}
+
+class TestAssignmentString
+{
+	// -------------------------------------------------------------
+	// String test
+	// -------------------------------------------------------------
+		
+	operation testAssignmentStringAsVariable() is do
+		//String
+		var s : String init "titi"
+		var s1 : String init "titi2"
+		s := s1		
+		s1 := "toto"
+		kermeta::io::StdIO.writeln("s name :" + s )
+        assert(s == "titi2") //       assert (s != "titi2")
+	end
+	
+	operation testAssignmentStringAsReference() is do
+		var b : B init B.new
+		var b1 : B init B.new
+		b.name := "hello"
+		b1.name := "hi"
+		b.name := b1.name
+		b1.name := "hi again"
+		kermeta::io::StdIO.writeln("b.name : " + b.name)
+        // ------> b.name becomes "hi again"
+        assertTrueWithMsg(b.name == "hi", "We expected : b.name unchanged, and equals 'hi'")
+        assert(b1.name == "hi again")
+	end
+	
+	operation testAssignmentStringAsAttribute() is do
+		var c : C init C.new
+		
+		c.attr_name1 := "name1"
+		c.attr_name2 := "name2"
+		
+		c.attr_name1 := c.attr_name2
+		assert( c.attr_name1 == "name2" )
+		assert( c.attr_name2 == "name2" )
+		
+		c.attr_name2 := "name3"
+		assertTrueWithMsg( c.attr_name1 == "name2", "attr_name1 should equals 'name2'" )
+		assertTrueWithMsg( c.attr_name2 == "name3", "attr_name2 should equals 'name3'" )
+		kermeta::io::StdIO.writeln("Assignment of Strings as attributes is done")
+		
+	end
+}
+
+class TestAssignmentEnum
+{
+	operation testAssignmentEnumAsReference() : Void is do 
+   		var atest : ATest init ATest.new
+	    kermeta::io::StdIO.writeln("accPublic before assignment: " + AccesVariableEnumeration.accPublic.~enumeration.toString)	    				
+   	    assert(AccesVariableEnumeration.accPublic.~enumeration != void)
+	    atest.a := AccesVariableEnumeration.accPublic
+	    assert(AccesVariableEnumeration.accPublic.~enumeration != void)
+	    assert(atest.a.~enumeration != void)
+  		kermeta::io::StdIO.writeln("Assignment of Enum as reference is done")
+	end
+		
+	operation testAssignmentEnumAsVariable() : Void is do 
+	    var acc : AccesVariableEnumeration
+	    kermeta::io::StdIO.writeln("accPublic before assignment: " + AccesVariableEnumeration.accPublic.~enumeration.toString)	    				
+   	    assertTrueWithMsg(AccesVariableEnumeration.accPublic.~enumeration != void, "accPublic.enumeration should Not be Void")
+	    acc := AccesVariableEnumeration.accPublic
+	    assertTrueWithMsg(AccesVariableEnumeration.accPublic.~enumeration != void,  "accPublic.enumeration is Void")
+	    assert(acc.~enumeration != void)
+	    kermeta::io::StdIO.writeln("Assignment of Enum as variable is done")
+	end
+	
+	
+	operation testAssignmentEnumAsAttribute() : Void is do 
+   		var atest : ATestAttr init ATestAttr.new
+	    kermeta::io::StdIO.writeln("accPublic before assignment: " + AccesVariableEnumeration.accPublic.~enumeration.toString)	    				
+   	    assertTrueWithMsg(AccesVariableEnumeration.accPublic.~enumeration != void, "accPublic.enumeration is Not Void")
+	    atest.a := AccesVariableEnumeration.accPublic
+	    assertTrueWithMsg(AccesVariableEnumeration.accPublic.~enumeration != void,  "accPublic.enumeration is Void")
+	    assert(atest.a.~enumeration != void)
+   		kermeta::io::StdIO.writeln("Assignment of Enum as attribute is done")
+	end
+}
+
+class Test_assignment_behavior
+{
+	operation testAssignmentB() is do
+		var b : B init B.new
+		var b1 : B init B.new
+		b.name := "hello"
+		b1.name := "hi"
+		b := b1
+		b1.name := "hi again"
+		kermeta::io::StdIO.writeln("b name : " + b.name)
+        // ------> b.name becomes "hi again"
+        assert (b.name == "hi again")
+	end	
+	
+	operation testAssignmentIntegerAsVariable() is do
+		//Integer
+		var i1 : Integer init 1
+		var i2: Integer init 2
+		
+		i1 := i2
+		i2 := 4
+		kermeta::io::StdIO.writeln("i1 value :" + i1.toString + "; i2 value :" + i2.toString)
+        assert( i2 == 4)
+        assert( i1 == 2 )
+	end
+	
+	operation testAssignmentBoolean() is do
+		//Integer
+		var i1 : Boolean init true
+		var i2: Boolean init false
+		
+		i1 := i2
+		i2 := true
+        assert( i2 == true)
+        assert( i1 == false )
+	end
+
+}
+

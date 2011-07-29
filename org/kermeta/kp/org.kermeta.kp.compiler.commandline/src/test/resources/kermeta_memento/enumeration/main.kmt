@@ -1,8 +1,7 @@
 package pkg{
-	enumeration Seasons { spring; summer; automn; winter; }
+	enumeration Seasons { spring; summer; autumn; winter; }
 	
 	class Test {
-		@main ""
 		operation main() is do
 			x(pkg::Seasons.spring)
 		end
