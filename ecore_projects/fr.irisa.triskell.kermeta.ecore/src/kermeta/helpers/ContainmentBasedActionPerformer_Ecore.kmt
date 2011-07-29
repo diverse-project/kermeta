@@ -17,7 +17,7 @@ using ecore
 using kermeta::language::structure
 
 aspect class EPackage {
-	operation eachOwnedElement(func : <EObject -> Object>) : Void is do
+	operation eachOwnedElement(func : <EModelElement -> Object>) : Void is do
         self.eSubpackages.each{ p |
 			func(p)
 		}
@@ -29,7 +29,7 @@ aspect class EPackage {
 }
 
 aspect class EClass {
-	operation eachOwnedElement(func : <EObject -> Object>) : Void is do
+	operation eachOwnedElement(func : <EModelElement -> Object>) : Void is do
 		self.eReferences.each{ ref |
 			func(ref)
 		}

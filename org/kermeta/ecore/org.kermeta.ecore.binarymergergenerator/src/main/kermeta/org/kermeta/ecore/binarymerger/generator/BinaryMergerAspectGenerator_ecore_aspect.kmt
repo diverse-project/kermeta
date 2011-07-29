@@ -22,7 +22,14 @@ using kermeta::utils
 using EcoreHelpers
 using org::kermeta::binarymerger::generator
 
+
 aspect class EObject {
+	operation binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
+aspect class EModelElement {
 	operation binaryMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
 	end

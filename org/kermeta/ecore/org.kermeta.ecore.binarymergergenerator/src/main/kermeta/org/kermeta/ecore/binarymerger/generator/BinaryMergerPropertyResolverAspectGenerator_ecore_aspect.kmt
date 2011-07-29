@@ -29,6 +29,12 @@ aspect class EObject {
 	end
 	
 }
+aspect class EModelElement {
+	operation binaryMergerPropertyResolverAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
 
 aspect class EPackage {
 	method binaryMergerPropertyResolverAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
