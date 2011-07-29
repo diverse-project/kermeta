@@ -140,17 +140,21 @@ aspect class EClass {
 				end
 			}
 		end			
-		
 		context.popIndent
-		content.append("else\n")
+		content.append(context.indentString)
+		content.append("else")
 		context.pushIndent
-		content.append("result := false\n")
+		content.append(context.indentString)
+		content.append("result := false")
 		context.popIndent
-		content.append("end\n")
+		content.append(context.indentString)
+		content.append("end")
 		context.popIndent
-		content.append("end\n")
+		content.append(context.indentString)
+		content.append("end")
 		
 		context.popIndent
+		content.append(context.indentString)
 		result := content.append("}").toString()
 	end
 	
