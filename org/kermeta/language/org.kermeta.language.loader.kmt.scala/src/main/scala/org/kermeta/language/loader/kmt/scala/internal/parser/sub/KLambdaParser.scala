@@ -46,18 +46,22 @@ trait KLambdaParser extends KAbstractParser {
     case id ~ qualifName => {
       var newLambdaP = BehaviorFactory.eINSTANCE.createLambdaParameter
       newLambdaP.setName(id)
+
+      var newTypeRef = BehaviorFactory.eINSTANCE.createTypeReference
       qualifName match {
         case Some(paramType) => {
-          var newTypeRef = BehaviorFactory.eINSTANCE.createTypeReference
-
           if(paramType.isInstanceOf[UnresolvedType])
             newTypeRef.setName(paramType.asInstanceOf[UnresolvedType].getTypeIdentifier())
-
           newTypeRef.setType(paramType)
-          newLambdaP.setType(newTypeRef)
         }
-        case None =>
+        case None => {
+          // no type provided, we must indicates that it must be inferred
+          var unresolvedParamType  = StructureFactory.eINSTANCE.createUnresolvedInferredType()
+          newTypeRef.setType(unresolvedParamType)
+        }
+
       }
+       newLambdaP.setType(newTypeRef)
       newLambdaP
     }
   }
