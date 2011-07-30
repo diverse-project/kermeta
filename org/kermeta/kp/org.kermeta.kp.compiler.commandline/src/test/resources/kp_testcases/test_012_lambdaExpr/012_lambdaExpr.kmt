@@ -5,7 +5,7 @@ class Foo
 {
 	reference content : String[0..*]
 	operation bar() : Void is do
-		content.each{digit  | digit.toString()}
+		content.each{digit  | digit.toLowerCase()}
 	end
 }
 }
