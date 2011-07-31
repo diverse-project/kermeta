@@ -226,7 +226,7 @@ package behavior {
 				
 			// if not already found, look for an Operation
 			if result.isVoid then
-				if (target.isVoid) then 
+				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" ) 
 				else
 					var op : Operation init target.staticType.getCallableOperationByName(self.name)
@@ -271,12 +271,22 @@ package behavior {
 						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
 						//	this is the CallOperation that must replace this UnresolvedCall
 						result := callOperation
+						
+						from var lambdaToBeResolved : ToBeResolvedLater
+						until context.waitingContext.isEmpty()
+						loop
+							stdio.writeln("resolving a lambda")
+							lambdaToBeResolved := context.waitingContext.first()
+							context.waitingContext.removeAt(0)
+							lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
+						end
+						
 					end
 				end
 			end
 			// if not found, look for a Property
 			if result.isVoid then
-				if (target.isVoid) then 
+				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" ) 
 				else
 					var prop : Property init target.staticType.getCallablePropertyByName(self.name)
@@ -582,7 +592,7 @@ package behavior {
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of LambdaExpression") end
 			
 			//if lambda parameters are explicitely typed
-			if parameters.forAll{p|not p.type.isInstanceOf(UnresolvedInferredType)} then
+			if parameters.forAll{p|not p.type.type.isInstanceOf(UnresolvedInferredType)} then
 				context.pushContext()
 				self.parameters.each{x|
 					context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
@@ -617,8 +627,8 @@ package behavior {
 							
 							//get bindings from the type of the containing callOperation
 							var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-							if container.asType(CallOperation).staticType.isInstanceOf(Class) then
-								bindings.addAll(container.asType(CallOperation).staticType.asType(Class).typeParamBinding)
+							if container.asType(CallOperation).target.staticType.isInstanceOf(Class) then
+								bindings.addAll(container.asType(CallOperation).target.staticType.asType(Class).getAllTypeVariableBindings())
 							end
 							stdio.writeln("lambda bindings.size : "+bindings.size.toString)
 							
@@ -627,11 +637,13 @@ package behavior {
 								until i == self.parameters.size
 								loop
 									var typeRef : TypeReference init TypeReference.new
+									typeRef.upper:=1
 									parameters.elementAt(i).type :=typeRef 
 									typeRef.type:=funcParamTypes.elementAt(i).resolveTypeVariables(context,bindings)
 									if typeRef.type.container.isVoid then
 										typeRef.containedType.add(typeRef.type)
 									end
+									i:=i+1
 								end
 							else
 								context.errors.add(ResolverException.new.initialize("ERROR : your lambda expression doesn't have the right number of parameters", self))
@@ -641,7 +653,10 @@ package behavior {
 						else
 							context.errors.add(ResolverException.new.initialize("ERROR : the parameter in the operation definition is not of type FunctionType", self))
 						end
-						
+						self.parameters.each{x|
+							context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
+						}
+						self.body := self.body.resolveCallAndInferStatic(context)
 						
 						context.popContext()
 					

@@ -20,7 +20,7 @@ using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using org::kermeta::language::resolver
 using org::kermeta::language::staticsetter
-
+using kermeta::utils
 aspect class Type {
 
 	operation resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>):Type is do 
@@ -31,6 +31,44 @@ aspect class Type {
 
 
 aspect class Class {
+
+	operation getAllTypeVariableBindings() : Sequence<TypeVariableBinding> is do
+	result := Sequence<TypeVariableBinding>.new
+	
+	result.addAll(typeParamBinding)
+	
+	var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
+	
+	result.each{ b|
+		localBindings.put(b.variable, b.type)	
+	}
+	
+	//get All the inherited bindings
+	var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
+	typeDefinition.superType.each{ c|
+		if c.isInstanceOf(Class) then
+			if c.asType(Class).typeDefinition !=typeDefinition then
+				inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+			end
+		end
+	}
+	
+	//replace the variables in inherited Bindings according to local bindings
+	inheritedBindings.each{ b |
+		if b.type.isInstanceOf(TypeVariable) then
+			if localBindings.containsKey(b.type.asType(TypeVariable)) then
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable:=b.variable
+				tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
+				result.add(tvb)
+			end
+		end
+	}
+			
+	
+	
+	end
+	
 
 	method resolveTypeVariables(context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do 
 		var newClass : Class init Class.new
@@ -66,11 +104,20 @@ aspect class ObjectTypeVariable{
 	method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
 	
 		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables ")
-		result := bindings.detect{ b|
+		
+		var binding : TypeVariableBinding
+		binding := bindings.detect{ b|
 			stdio.writeln("   ObjectTypeVariable.resolveTypeVariables " +  b.variable.toString +b.variable.name+ "  ?= " + self.toString +self.name)
 			
 			b.variable==self
-		}.type
+		}
+		if binding != void then
+			result:=binding.type
+		else
+			result:=self
+			stdio.writeln("warning : binding not found : "+name)
+		end
+		
 		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables result="+ result.toString)
 	end
 }
