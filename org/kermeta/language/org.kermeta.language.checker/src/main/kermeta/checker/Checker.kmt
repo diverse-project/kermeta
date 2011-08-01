@@ -102,10 +102,10 @@ class Checker
 			}
 			
 
-			stdio.writeln("-- size of allConstraints after super : " + allConstraints.size().toString())
+			/*stdio.writeln("-- size of allConstraints after super : " + allConstraints.size().toString())
 			allConstraints.each{c|
 				stdio.writeln("  -> inv : " + c.name)
-			}
+			}*/
 			
 			// Checking invariants of the class
 			//cd.~inv.each{invariant |
