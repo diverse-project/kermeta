@@ -27,9 +27,6 @@ trait KLambdaParser extends KAbstractParser {
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
 	 	 
         params.foreach{prop=>
-          if(prop.getType()!=null)
-            newLambdaExp.getContainedType.add(prop.getType().getType())
-
           newLambdaExp.getParameters.add(prop)
         }
 
@@ -53,11 +50,13 @@ trait KLambdaParser extends KAbstractParser {
           if(paramType.isInstanceOf[UnresolvedType])
             newTypeRef.setName(paramType.asInstanceOf[UnresolvedType].getTypeIdentifier())
           newTypeRef.setType(paramType)
+          newTypeRef.getContainedType.add(paramType)
         }
         case None => {
           // no type provided, we must indicates that it must be inferred
           var unresolvedParamType  = StructureFactory.eINSTANCE.createUnresolvedInferredType()
           newTypeRef.setType(unresolvedParamType)
+          newTypeRef.getContainedType.add(unresolvedParamType)
         }
 
       }
