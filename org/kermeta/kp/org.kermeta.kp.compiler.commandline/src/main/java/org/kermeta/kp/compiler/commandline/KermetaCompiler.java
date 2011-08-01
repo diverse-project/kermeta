@@ -73,7 +73,7 @@ public class KermetaCompiler {
 
 	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 
-	public boolean checkingEnabled = true;
+	public boolean checkingEnabled = false;
 	public boolean stopOnError = true;
 
 	public boolean runInEclipse = false;
