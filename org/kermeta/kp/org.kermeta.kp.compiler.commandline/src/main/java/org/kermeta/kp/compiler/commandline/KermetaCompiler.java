@@ -73,7 +73,7 @@ public class KermetaCompiler {
 
 	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 
-	public boolean checkingEnabled = false;
+	public boolean checkingEnabled = true;
 	public boolean stopOnError = true;
 
 	public boolean runInEclipse = false;
@@ -236,11 +236,10 @@ public class KermetaCompiler {
 				}
 			}
 	
-			ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeChecking_afterMerging.km", logger).convert(mergedUnit.getResult());
 	
 			// Check mergedUnit for scope MERGED
 			if (checkingEnabled) {
-				DiagnosticModel results = checkModelingUnit(convertedModelingUnit, CheckerScope.MERGED);
+				DiagnosticModel results = checkModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, CheckerScope.MERGED);
 				if (results != null) {
 					processCheckingDiagnostics(results);
 		
@@ -251,7 +250,7 @@ public class KermetaCompiler {
 				}
 			}
 	
-			ModelingUnit resolvedUnit = resolveModelingUnit(convertedModelingUnit);
+			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/);
 	
 			if (resolvedUnit == null) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -581,6 +580,9 @@ public class KermetaCompiler {
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 
+		System.err.println("checkModelingUnit " + mu.getName() + " for scope " + scope.toString());
+		System.err.println("checkModelingUnit BIS " + mu.getName() + " for scope " + scope.toString());
+		
 		Checker theChecker;
 
 		if (runInEclipse) {
@@ -589,10 +591,14 @@ public class KermetaCompiler {
 			theChecker = new CheckerImpl();
 		}
 
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, 
+					targetIntermediateFolder + "/beforeCheckingforScope"+scope.toString()+".km", logger).convert(mu);
+
+		
 		// Checking
 		DiagnosticModel diags = null;
 		try {
-			diags = theChecker.check(mu, scope, "", logger);
+			diags = theChecker.check(convertedModelingUnit, scope, "", logger);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
