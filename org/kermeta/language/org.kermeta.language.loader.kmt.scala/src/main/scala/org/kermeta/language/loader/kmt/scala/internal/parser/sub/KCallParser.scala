@@ -36,6 +36,10 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
         case Some(_@par) => for (p <- par) newo.getParameters().add(p)
         case None =>
       }
+      newo.setIsCalledWithParenthesis( params match {
+                case Some(par) =>  true
+                case None =>      false
+            })
       newo.setTarget(NESTED_NEEDED())
       newo
   }
@@ -49,12 +53,17 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
           val newoo = BehaviorFactory.eINSTANCE.createUnresolvedCall
           newoo.setName(typeRef.getTypeIdentifier())
           newoo.getGenerics().addAll(typeRef.getGenerics())
+          newoo.setIsCalledWithParenthesis( params match {
+                case Some(par) =>  true
+                case None =>      false
+            })
           newoo
         }
       }
 
       params match {
-        case Some(_@par) => for (p <- par) newo.getParameters.add(p)
+        case Some(_@par) =>
+          for (p <- par) newo.getParameters.add(p)
         case None =>
       }
       newo
