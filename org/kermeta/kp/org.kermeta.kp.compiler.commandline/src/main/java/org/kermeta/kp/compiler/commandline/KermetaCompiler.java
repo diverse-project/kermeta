@@ -236,7 +236,7 @@ public class KermetaCompiler {
 				}
 			}
 	
-			ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeChecking_afterMerging.km").convert(mergedUnit.getResult());
+			ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeChecking_afterMerging.km", logger).convert(mergedUnit.getResult());
 	
 			// Check mergedUnit for scope MERGED
 			if (checkingEnabled) {
@@ -281,7 +281,7 @@ public class KermetaCompiler {
 			FileWriter writer = new FileWriter(mergedFile);
 	
 			logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
-			writer.write(new ModelingUnitConverter().saveMu(resolvedUnit, uri).toString());
+			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
 	
 			if (!generateKmOnly) {
@@ -452,7 +452,7 @@ public class KermetaCompiler {
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
-		ModelingUnitConverter muc = new ModelingUnitConverter();
+		ModelingUnitConverter muc = new ModelingUnitConverter(logger);
 
 		if (runInEclipse) {
 			theMerger = new KmBinaryMergerImpl4Eclipse();
@@ -499,7 +499,7 @@ public class KermetaCompiler {
 			theResolver = new KmResolverImpl(logger);
 		}
 
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeResolving.km").convert(mu);
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeResolving.km", logger).convert(mu);
 
 		// Resolving
 		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
@@ -516,7 +516,7 @@ public class KermetaCompiler {
 		}
 
 		if (resolvedMU.getResult() != null) {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km").convert(resolvedMU.getResult());
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km", logger).convert(resolvedMU.getResult());
 
 			// StaticSetting
 			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);

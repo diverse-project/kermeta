@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
@@ -38,16 +39,18 @@ public class ModelingUnitConverter {
 	
 	public String saveToFile = "";
 	public Boolean  mustSaveToFile = false;
+	public MessagingSystem logger;
 	
 	
-	public ModelingUnitConverter(Boolean  mustSaveToFile, String saveToFile) {
-		super();
+
+	public ModelingUnitConverter(MessagingSystem logger) {
+		this.logger = logger;
+		this.saveToFile = "";
+	}
+	public ModelingUnitConverter(Boolean  mustSaveToFile, String saveToFile, MessagingSystem logger) {
+		this.logger = logger;
 		this.saveToFile = saveToFile;
 		this.mustSaveToFile = mustSaveToFile;
-	}
-	public ModelingUnitConverter() {
-		super();
-		this.saveToFile = "";
 	}
 
 
@@ -88,26 +91,30 @@ public class ModelingUnitConverter {
 		Resource resource = resourceSet.createResource(uri);
 		if(resource != null)
 			resource.getContents().add(mu);
-		else
-			System.out.println("cannot create resource for  "+uri);
+		else {
+			logger.error("Cannot create resource for  "+uri, KermetaCompiler.LOG_MESSAGE_GROUP, new Exception("Created resource is null"));			
+		}
 		Map<String, String> options = null;
 		try {
 			mu.eResource().save(outputStream, options);
 		}
 		catch(Exception e){
-			System.out.println("Received Exception while saving "+e);
+			logger.error("Received Exception while saving "+e, KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			java.util.Map<EObject,java.util.Collection<EStructuralFeature.Setting>> unresolvedMap ;
 			unresolvedMap = EcoreUtil.ExternalCrossReferencer.find(mu.eResource());
 			for (EObject myEobject : unresolvedMap.keySet() ){
-				System.out.println("Patching dangling element "+myEobject+ " setting="+unresolvedMap.get(myEobject));
+				logger.error("Patching dangling element "+myEobject+ 
+						" referenced by "+unresolvedMap.get(myEobject) +
+						"\nthe dangling element is added to the root of the resource for debug purpose", 
+						KermetaCompiler.LOG_MESSAGE_GROUP, e);
 				mu.eResource().getContents().add(myEobject);				
-			}
-			System.out.println("Retrying to save .... ");
+			}			
+			logger.info("Retrying to save .... ", KermetaCompiler.LOG_MESSAGE_GROUP);
 			mu.eResource().save(outputStream, options);
 		}
 
 		if (mustSaveToFile){
-			System.out.println("Saving stream to file "+saveToFile);
+			logger.debug("Saving stream to file "+saveToFile, KermetaCompiler.LOG_MESSAGE_GROUP);
 			File fileToSave = new File(saveToFile);
 			if(!fileToSave.getParentFile().exists()){
 				fileToSave.getParentFile().mkdirs();

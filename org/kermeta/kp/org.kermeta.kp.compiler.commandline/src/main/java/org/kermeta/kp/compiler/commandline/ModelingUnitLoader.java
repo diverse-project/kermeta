@@ -69,7 +69,7 @@ public class ModelingUnitLoader {
 				if(saveIntermediateFiles && mu != null){
 					URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
 					URI saveKMURI = URI.createFileURI(targetIntermediateFolder+"/kmt2km"+uri.path()+".km");
-					new ModelingUnitConverter(true,saveKMURI.toFileString()).saveMu(mu, saveKMURI);
+					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -88,7 +88,7 @@ public class ModelingUnitLoader {
 				URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
 				URI saveKMURI = URI.createFileURI(targetIntermediateFolder+"/ecore2km"+uri.path()+".km");
 				logger.debug(saveKMURI.toString(), this.getClass().getName());
-				new ModelingUnitConverter(true,saveKMURI.toFileString()).saveMu(mu, saveKMURI);
+				new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
 			}
 		}else if (urlString.endsWith(".km")) {
 
