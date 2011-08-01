@@ -599,7 +599,8 @@ package behavior {
 					}
 				self.body := self.body.resolveCallAndInferStatic(context)
 			
-				self.setInferedStaticType(context, self.body.staticType)
+				//self.setInferedStaticType(context, self.body.staticType)
+				setFunctionType(context)
 				context.popContext()
 			//lambda parameters are implicitly typed
 			else
@@ -657,7 +658,7 @@ package behavior {
 							context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
 						}
 						self.body := self.body.resolveCallAndInferStatic(context)
-						
+						self.setFunctionType(context)
 						context.popContext()
 					
 					else						
@@ -669,6 +670,38 @@ package behavior {
 				
 			result := self
 		end 
+		
+		operation setFunctionType(context : StaticSetterContext) : Void is do
+		
+			var funcType : FunctionType init FunctionType.new
+			self.staticType:=funcType
+			self.containedType.add(funcType)
+			funcType.right:=self.body.staticType
+			
+			if parameters.size==1 then
+				funcType.left:=context.createTypeFromMultiplicityElement(parameters.one.type)
+				if funcType.left.container.isVoid then
+					funcType.containedType.add(funcType.left)
+				end
+			else
+				if parameters.size>1 then
+					var prodType : ProductType init ProductType.new
+					funcType.containedType.add(prodType)
+					funcType.left:=prodType
+					parameters.each{ p |
+						prodType.type.add(context.createTypeFromMultiplicityElement(parameters.one.type))
+					}
+					prodType.type.each{t|
+						if t.container.isVoid then
+							prodType.containedType.add(t)
+						end
+					}
+						
+				end
+			end
+		
+		end
+		
 	}
 	
 	
