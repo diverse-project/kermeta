@@ -16,17 +16,15 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 aspect class ModelingUnit
 {
-	/*
+	/**
 	 * Fake invariant for testing purposes
-	 *
-	 
-	 
+	 */
 	@Scope "LOADED MERGED RESOLVED"
-	@IsWarning "true"
+	//@IsWarning "true"
 	inv fake_invariant is do
 		// TODO
 		// To code this this would be probably easier if we reuse part of the code from resolver (using a require ?)
 		true
 	end
-	*/
+	
 }
