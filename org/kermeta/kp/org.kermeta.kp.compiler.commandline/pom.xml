@@ -83,7 +83,6 @@
 			<!-- Generating a better test report -->
 			<plugin>
 			    <artifactId>maven-antrun-plugin</artifactId>
-			    <version>1.6.5</version>
 			    <executions>
 			      <execution>
 			        <id>test-reports</id>
