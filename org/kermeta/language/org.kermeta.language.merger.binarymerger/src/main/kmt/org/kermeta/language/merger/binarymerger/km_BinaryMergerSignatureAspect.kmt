@@ -475,6 +475,9 @@ package kermeta {
 						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
 							result := result and self.isAtpre == aspectElement.isAtpre
 						end
+						if (not self.isCalledWithParenthesis.isVoid) and (not aspectElement.isCalledWithParenthesis.isVoid) then
+							result := result and self.isCalledWithParenthesis == aspectElement.isCalledWithParenthesis
+						end
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end

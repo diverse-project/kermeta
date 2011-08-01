@@ -807,6 +807,8 @@ package kermeta {
 						}
 						// select value for unary attribute
 						mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
+						// select value for unary attribute
+						mergedModelElement.isCalledWithParenthesis ?= self.selectUnaryProperty("isCalledWithParenthesis", self.isCalledWithParenthesis, mergedModelElement.isCalledWithParenthesis)
 						self.parameters.each{aspect_parameters | 
 							var equivalent_parameters : org::kermeta::language::behavior::Expression
 							equivalent_parameters := mergedModelElement.parameters.detect{ merged_parameters |
