@@ -207,7 +207,11 @@ package behavior {
 					var callVariable : CallVariable init CallVariable.new
 					callVariable.name := self.name
 					if (context.verbose) then stdio.writeln("  FOUND callVariable="+callVariable.name) end
-					callVariable.setInferedStaticType(context, symbolType)
+					if symbolType.isInstanceOf(FunctionType) and self.isCalledWithParenthesis then
+						callVariable.setInferedStaticType(context,symbolType.asType(FunctionType).right)
+					else
+						callVariable.setInferedStaticType(context, symbolType)
+					end
 					//	this is the CallVariable that must replace this UnresolvedCall
 					result := callVariable
 				else
@@ -223,7 +227,12 @@ package behavior {
 			end 
 			//resolve parameters
 			super(context)		
-				
+			
+			//if result is a variable with parameters, add resolved parameters
+			if not result.isVoid and not self.parameters.isEmpty then
+				result.asType(CallVariable).parameters.addAll(self.parameters)
+			end
+			
 			// if not already found, look for an Operation
 			if result.isVoid then
 				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
