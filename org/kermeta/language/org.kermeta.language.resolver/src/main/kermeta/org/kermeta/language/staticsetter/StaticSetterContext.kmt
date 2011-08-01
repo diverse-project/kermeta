@@ -53,7 +53,7 @@ class StaticSetterContext
 		newContext.currentClassDefinition:=currentClassDefinition
 		newContext.currentOperation:=currentOperation
 		contextFrames.each{ f|
-			newContext.contextFrames.add(StaticSetterContextFrame.clone(f))}
+			newContext.contextFrames.add(f.copy())}
 
 		tobeResolved.current:=current
 		
@@ -227,6 +227,13 @@ class StaticSetterContextFrame
 	operation initialize() : StaticSetterContextFrame is do
 		symbolMap := kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>.new
 		result := self
+	end
+	operation copy() : StaticSetterContextFrame is do
+		var newContext : StaticSetterContextFrame init StaticSetterContextFrame.new.initialize()
+		symbolMap.keys.each{ k |
+			 newContext.symbolMap.put(k, symbolMap.getValue(k)) 
+		}
+		result := newContext
 	end
 }
 
