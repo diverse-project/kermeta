@@ -9,9 +9,12 @@
 package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -59,13 +62,23 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			switch (delta.getResource().getType()) {
 			// Only handling project changes.
 			case IResource.PROJECT:
-				try {
-					if (resource.getProject() != null) {
-						if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
-							//do something to autobuild the projet ?
+				if (resource.getProject() != null) {
+					if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
+						try {
+							ArrayList<IFile> theKP = new ArrayList<IFile>();
+							findKPinProject(resource.getProject(), theKP);
+
+							for (IFile aKPFile : theKP) {
+								if (!kermetaBuilder.kpBuilders.containsKey(kermetaBuilder.generateIdentifier(aKPFile))) {
+									createBuilder(aKPFile);
+								}
+							}
+						} catch (CoreException e) {
 						}
+					} else {
+						removeBuilders((IProject) resource);
 					}
-				}  catch (CoreException e) {}
+				}
 				break;
 
 			case IResource.FILE:
@@ -79,7 +92,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									createBuilder(resource);
 								}
 							}
-						} catch (CoreException e) {}
+						} catch (CoreException e) {
+						}
 						break;
 					case IResourceDelta.REMOVED:
 						// handle removed resource
@@ -112,7 +126,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 								}
 							}
-						} catch (CoreException e) {}
+						} catch (CoreException e) {
+						}
 						break;
 					}
 				}
@@ -143,6 +158,36 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			};
 			job.setPriority(Job.LONG);
 			job.schedule();
+		}
+
+		private void findKPinProject(IContainer aProject, ArrayList<IFile> identifiedKp) throws CoreException {
+			for (IResource aMember : aProject.members()) {
+				if (aMember instanceof IFile) {
+					if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
+						identifiedKp.add((IFile) aMember);
+					}
+				} else {
+					if (aMember instanceof IContainer) {
+						findKPinProject((IContainer) aMember, identifiedKp);
+					}
+				}
+			}
+		}
+
+		private void removeBuilders(IProject aProject) {
+			ArrayList<String> theIdentifierToRemove = new ArrayList<String>();
+			for (KPBuilder aBuilder : kermetaBuilder.kpBuilders.values()) {
+				try {
+					if (!aBuilder.kpProjectFile.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
+						theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
+					}
+				} catch (CoreException e) {
+					theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
+				}
+			}
+			for (String anIdentifier : theIdentifierToRemove) {
+				kermetaBuilder.kpBuilders.remove(anIdentifier);
+			}
 		}
 	}
 
