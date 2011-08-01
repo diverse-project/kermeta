@@ -969,6 +969,15 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getUnresolvedCall_IsCalledWithParenthesis() {
+		return (EAttribute)unresolvedCallEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCallOperation() {
 		return callOperationEClass;
 	}
@@ -1140,6 +1149,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		createEAttribute(unresolvedCallEClass, UNRESOLVED_CALL__IS_ATPRE);
 		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__TARGET_PARENT);
 		createEReference(unresolvedCallEClass, UNRESOLVED_CALL__GENERICS);
+		createEAttribute(unresolvedCallEClass, UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS);
 
 		callOperationEClass = createEClass(CALL_OPERATION);
 		createEReference(callOperationEClass, CALL_OPERATION__STATIC_OPERATION);
@@ -1311,6 +1321,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEAttribute(getUnresolvedCall_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedCall_TargetParent(), theStructurePackage.getType(), null, "targetParent", null, 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnresolvedCall_Generics(), theStructurePackage.getType(), null, "generics", null, 0, -1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedCall_IsCalledWithParenthesis(), theStructurePackage.getBoolean(), "isCalledWithParenthesis", "false", 0, 1, UnresolvedCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callOperationEClass, CallOperation.class, "CallOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallOperation_StaticOperation(), theStructurePackage.getOperation(), null, "staticOperation", null, 0, 1, CallOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

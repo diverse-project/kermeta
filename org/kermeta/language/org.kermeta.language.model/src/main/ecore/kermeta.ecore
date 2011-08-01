@@ -386,6 +386,8 @@
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="generics" upperBound="-1"
               eType="#//kermeta/language/structure/Type" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCalledWithParenthesis"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="CallOperation" eSuperTypes="#//kermeta/language/behavior/CallFeature">
           <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation"

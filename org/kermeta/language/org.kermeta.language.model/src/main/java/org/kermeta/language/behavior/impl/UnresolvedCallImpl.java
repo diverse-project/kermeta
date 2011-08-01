@@ -52,6 +52,7 @@ import org.kermeta.language.structure.impl.UnresolvedImpl;
  *   <li>{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl#getIsAtpre <em>Is Atpre</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl#getTargetParent <em>Target Parent</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl#getGenerics <em>Generics</em>}</li>
+ *   <li>{@link org.kermeta.language.behavior.impl.UnresolvedCallImpl#getIsCalledWithParenthesis <em>Is Called With Parenthesis</em>}</li>
  * </ul>
  * </p>
  *
@@ -177,6 +178,26 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 	 * @ordered
 	 */
 	protected EList<Type> generics;
+
+	/**
+	 * The default value of the '{@link #getIsCalledWithParenthesis() <em>Is Called With Parenthesis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsCalledWithParenthesis()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_CALLED_WITH_PARENTHESIS_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsCalledWithParenthesis() <em>Is Called With Parenthesis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsCalledWithParenthesis()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isCalledWithParenthesis = IS_CALLED_WITH_PARENTHESIS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -423,6 +444,27 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsCalledWithParenthesis() {
+		return isCalledWithParenthesis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsCalledWithParenthesis(Boolean newIsCalledWithParenthesis) {
+		Boolean oldIsCalledWithParenthesis = isCalledWithParenthesis;
+		isCalledWithParenthesis = newIsCalledWithParenthesis;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS, oldIsCalledWithParenthesis, isCalledWithParenthesis));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -485,6 +527,8 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 				return basicGetTargetParent();
 			case BehaviorPackage.UNRESOLVED_CALL__GENERICS:
 				return getGenerics();
+			case BehaviorPackage.UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS:
+				return getIsCalledWithParenthesis();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -533,6 +577,9 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 				getGenerics().clear();
 				getGenerics().addAll((Collection<? extends Type>)newValue);
 				return;
+			case BehaviorPackage.UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS:
+				setIsCalledWithParenthesis((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -575,6 +622,9 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 			case BehaviorPackage.UNRESOLVED_CALL__GENERICS:
 				getGenerics().clear();
 				return;
+			case BehaviorPackage.UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS:
+				setIsCalledWithParenthesis(IS_CALLED_WITH_PARENTHESIS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -607,6 +657,8 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 				return targetParent != null;
 			case BehaviorPackage.UNRESOLVED_CALL__GENERICS:
 				return generics != null && !generics.isEmpty();
+			case BehaviorPackage.UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS:
+				return IS_CALLED_WITH_PARENTHESIS_EDEFAULT == null ? isCalledWithParenthesis != null : !IS_CALLED_WITH_PARENTHESIS_EDEFAULT.equals(isCalledWithParenthesis);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -685,6 +737,8 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 		result.append(name);
 		result.append(", isAtpre: ");
 		result.append(isAtpre);
+		result.append(", isCalledWithParenthesis: ");
+		result.append(isCalledWithParenthesis);
 		result.append(')');
 		return result.toString();
 	}

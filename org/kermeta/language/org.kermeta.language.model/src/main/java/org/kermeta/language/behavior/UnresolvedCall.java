@@ -38,6 +38,7 @@ import org.kermeta.language.structure.Using;
  *   <li>{@link org.kermeta.language.behavior.UnresolvedCall#getIsAtpre <em>Is Atpre</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.UnresolvedCall#getTargetParent <em>Target Parent</em>}</li>
  *   <li>{@link org.kermeta.language.behavior.UnresolvedCall#getGenerics <em>Generics</em>}</li>
+ *   <li>{@link org.kermeta.language.behavior.UnresolvedCall#getIsCalledWithParenthesis <em>Is Called With Parenthesis</em>}</li>
  * </ul>
  * </p>
  *
@@ -151,5 +152,32 @@ public interface UnresolvedCall extends Unresolved, CallExpression, TypeContaine
 	 * @generated
 	 */
 	EList<Type> getGenerics();
+
+	/**
+	 * Returns the value of the '<em><b>Is Called With Parenthesis</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Called With Parenthesis</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Called With Parenthesis</em>' attribute.
+	 * @see #setIsCalledWithParenthesis(Boolean)
+	 * @see org.kermeta.language.behavior.BehaviorPackage#getUnresolvedCall_IsCalledWithParenthesis()
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	Boolean getIsCalledWithParenthesis();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.behavior.UnresolvedCall#getIsCalledWithParenthesis <em>Is Called With Parenthesis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Called With Parenthesis</em>' attribute.
+	 * @see #getIsCalledWithParenthesis()
+	 * @generated
+	 */
+	void setIsCalledWithParenthesis(Boolean value);
 
 } // UnresolvedCall

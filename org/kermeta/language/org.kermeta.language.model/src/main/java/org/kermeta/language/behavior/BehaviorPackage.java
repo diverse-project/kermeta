@@ -2467,13 +2467,22 @@ public interface BehaviorPackage extends EPackage {
 	int UNRESOLVED_CALL__GENERICS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Is Called With Parenthesis</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Unresolved Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL_FEATURE_COUNT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 10;
+	int UNRESOLVED_CALL_FEATURE_COUNT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallPropertyImpl <em>Call Property</em>}' class.
@@ -3415,6 +3424,17 @@ public interface BehaviorPackage extends EPackage {
 	EReference getUnresolvedCall_Generics();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.behavior.UnresolvedCall#getIsCalledWithParenthesis <em>Is Called With Parenthesis</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Called With Parenthesis</em>'.
+	 * @see org.kermeta.language.behavior.UnresolvedCall#getIsCalledWithParenthesis()
+	 * @see #getUnresolvedCall()
+	 * @generated
+	 */
+	EAttribute getUnresolvedCall_IsCalledWithParenthesis();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallOperation <em>Call Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4096,6 +4116,14 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UNRESOLVED_CALL__GENERICS = eINSTANCE.getUnresolvedCall_Generics();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Called With Parenthesis</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS = eINSTANCE.getUnresolvedCall_IsCalledWithParenthesis();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallOperationImpl <em>Call Operation</em>}' class.

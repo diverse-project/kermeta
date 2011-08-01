@@ -104,6 +104,7 @@
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/targetParent"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/generics"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/behavior/UnresolvedCall/isCalledWithParenthesis"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallOperation">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
