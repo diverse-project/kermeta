@@ -63,7 +63,7 @@ class Checker
 	
 	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
 
-		stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
 		
 		
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
@@ -74,10 +74,11 @@ class Checker
 		// Retrieve obj classDefinition	
 		var cd : kermeta::language::structure::ClassDefinition 
 		cd := obj.getMetaClass().classDefinition
-		stdio.writeln("-- Object's metaClass is " + obj.getMetaClass().toString)
+		
+		/*stdio.writeln("-- Object's metaClass is " + obj.getMetaClass().toString)
 		stdio.writeln("-- Object's metaClass name is " + obj.getMetaClass().name)
 		stdio.writeln("-- Object's ClassDefinition is " + cd.name  )
-		
+		*/
 		
 		if ( not cd.isVoid ) then
 			
@@ -240,7 +241,7 @@ class Checker
 		
 		var consDiag : ConstraintDiagnostic
 			
-		stdio.writeln("  -- Checking invariant " + ~inv.name + " on class " + obj.getMetaClass.classDefinition.name )
+		//stdio.writeln("  -- Checking invariant " + ~inv.name + " on class " + obj.getMetaClass.classDefinition.name )
 		
 		var test : Boolean init filterInvariant(~inv, scope)
 		//stdio.writeln(" filtering result : " + test.toString)
