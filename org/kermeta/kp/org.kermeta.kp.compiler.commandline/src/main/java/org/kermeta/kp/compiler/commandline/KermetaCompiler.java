@@ -235,7 +235,8 @@ public class KermetaCompiler {
 					return null;
 				}
 			}
-	
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
 	
 			// Check mergedUnit for scope MERGED
 			if (checkingEnabled) {
@@ -256,6 +257,8 @@ public class KermetaCompiler {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				return null;
 			}
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
 			
 			// Check resolvedUnit for scope RESOLVED
 			if (checkingEnabled) {
@@ -282,7 +285,11 @@ public class KermetaCompiler {
 			logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
 			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
-	
+			
+
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
+			
 			if (!generateKmOnly) {
 				// deal with km to scala
 				// compiler require a file location not an URL
@@ -298,6 +305,9 @@ public class KermetaCompiler {
 			logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", LOG_MESSAGE_GROUP);
 			return resolvedUnit;
 		} finally {
+
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
 			lock.unlock();
 		}
 	}
