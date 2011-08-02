@@ -139,7 +139,9 @@ public class KPBuilder {
 				kp_last_modelingunit = result;
 				kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 				if (andRun) {
-					compiler.runK2Program(additionalClassPath, new ArrayList<String>());
+					ArrayList<String> params = new ArrayList<String>();
+					params.add("toto");
+					compiler.runK2Program(additionalClassPath, params);
 				}
 			}
 		} catch (Exception e) {
