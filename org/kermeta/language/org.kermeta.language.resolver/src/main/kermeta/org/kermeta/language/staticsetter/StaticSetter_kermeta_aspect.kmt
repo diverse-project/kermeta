@@ -734,22 +734,12 @@ package behavior {
 	}
 	
 	aspect class CallResult {
-		operation findOperation(currentContainer : KermetaModelElement) : Operation is do
-			if currentContainer.isInstanceOf(Operation) then
-				result := currentContainer.asType(Operation)
-			else
-				if currentContainer.container.isVoid then
-					result := void
-				else
-					result := findOperation(currentContainer.container.asType(KermetaModelElement))
-				end
-			end
-		end
+		
 	
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallResult") end  
 			
-			var operationContainer : Operation init findOperation(self.container().asType(KermetaModelElement))
+			var operationContainer : Operation init context.currentOperation
 			
 			if (operationContainer.isVoid) then
 				context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
