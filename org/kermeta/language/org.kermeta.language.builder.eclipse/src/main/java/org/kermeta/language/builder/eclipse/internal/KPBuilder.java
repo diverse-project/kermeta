@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -102,6 +103,7 @@ public class KPBuilder {
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
+			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (Exception e) {
 			try {
 				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Compilation failed : "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -135,6 +137,7 @@ public class KPBuilder {
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 			if (result != null) {
 				kp_last_modelingunit = result;
+				kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 				if (andRun) {
 					compiler.runK2Program(additionalClassPath, new ArrayList<String>());
 				}
