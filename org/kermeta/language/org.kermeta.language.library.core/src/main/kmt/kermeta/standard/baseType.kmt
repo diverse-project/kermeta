@@ -679,9 +679,26 @@ class Boolean {        @CompilerIgnore "true"
 
           end
         @CompilerIgnore "true"
-         operation notifyAll() : Void is do
+         operation ~or(other : Boolean) : Boolean is do
 
           end
+           @CompilerIgnore "true"
+         operation ~and(other : Boolean) : Boolean is do
+
+          end
+           @CompilerIgnore "true"
+         operation not() : Boolean is do
+
+          end
+           @CompilerIgnore "true"
+         operation andThen(func : <Boolean -> Boolean>) : Boolean is do
+
+          end
+          @CompilerIgnore "true"
+         operation orElse(func : <Boolean -> Boolean>) : Boolean is do
+
+          end
+          
 }
 @CompilerIgnore "true"
 class Date inherits Comparable {        @CompilerIgnore "true"
