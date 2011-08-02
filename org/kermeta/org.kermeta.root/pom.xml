@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <emf.version>2.7.0</emf.version>
         <scala.version>2.9.0-1</scala.version>
-        <framework.scala.version>0.12.10</framework.scala.version>
+        <framework.scala.version>0.12.11</framework.scala.version>
         <kermeta.model.version>1.4.0</kermeta.model.version>
         <language.compiler.version>1.4.1-BETA17-SNAPSHOT</language.compiler.version>
         <osgi.version>4.2.0</osgi.version>
