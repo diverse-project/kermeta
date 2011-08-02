@@ -1,0 +1,18 @@
+using kermeta::standard
+package root_package{
+
+
+
+class Foo
+{
+	
+	operation bar() : String is do
+	var x : Collection<String>
+	
+	x.each{y|
+		result:=y.toLowerCase}
+	 
+		
+	end
+}
+} 
