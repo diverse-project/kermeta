@@ -163,8 +163,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 		private void findKPinProject(IContainer aProject, ArrayList<IFile> identifiedKp) throws CoreException {
 			for (IResource aMember : aProject.members()) {
 				if (aMember instanceof IFile) {
-					if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
-						identifiedKp.add((IFile) aMember);
+					if (((IFile) aMember).getFileExtension() != null) {
+						if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
+							identifiedKp.add((IFile) aMember);
+						}
 					}
 				} else {
 					if (aMember instanceof IContainer) {
