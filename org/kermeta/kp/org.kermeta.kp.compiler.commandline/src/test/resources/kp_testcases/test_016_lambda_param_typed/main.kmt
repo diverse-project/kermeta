@@ -5,7 +5,10 @@ package root_package {
 		reference content : kermeta::standard::String[0..*]
 
 		operation bar() : Void is do
-			content.each{digit : kermeta::standard:String  | digit.toString()}
+			content.each{digit : kermeta::standard::String  | digit.toString()}
 		end
+		
+		
+		
 	}
 }
