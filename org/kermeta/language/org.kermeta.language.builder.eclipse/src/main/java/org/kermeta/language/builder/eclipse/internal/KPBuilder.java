@@ -27,7 +27,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
@@ -200,5 +202,27 @@ public class KPBuilder {
 	
 	public String getKpFileURL() {
 		return kpFileURL;
+	}
+	
+	public String getDefaultMainClass(){
+		KpLoaderImpl ldr = new KpLoaderImpl();
+		if (ldr != null) {
+			KermetaProject kp = ldr.loadKp(kpFileURL);
+			if (kp != null) {
+				return kp.getDefaultMainClass();
+			}
+		}
+		return "";
+	}
+	
+	public String getDefaultMainOperation(){
+		KpLoaderImpl ldr = new KpLoaderImpl();
+		if (ldr != null) {
+			KermetaProject kp = ldr.loadKp(kpFileURL);
+			if (kp != null) {
+				return kp.getDefaultMainOperation();
+			}
+		}
+		return "";
 	}
 }

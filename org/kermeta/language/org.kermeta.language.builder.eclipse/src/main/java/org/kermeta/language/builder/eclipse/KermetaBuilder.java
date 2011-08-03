@@ -191,4 +191,24 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 			}
 		}
 	}
+	
+	public String getDefaultMainClass(IFile kpFile) {
+		
+		if (kpBuilders.get(generateIdentifier(kpFile)) != null) {
+			String mainclass = kpBuilders.get(generateIdentifier(kpFile)).getDefaultMainClass();
+			return (mainclass == null)?"":mainclass;
+		}
+		
+		return "";
+	}
+	
+	public String getDefaultMainOperation(IFile kpFile) {
+		
+		if (kpBuilders.get(generateIdentifier(kpFile)) != null) {
+			String mainop = kpBuilders.get(generateIdentifier(kpFile)).getDefaultMainOperation();
+			return (mainop == null)?"":mainop;
+		}
+		
+		return "";
+	}
 }
