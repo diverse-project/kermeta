@@ -1,0 +1,13 @@
+package constraints;
+
+
+class A {
+
+
+attribute name : String
+
+inv nameCannotBeEmpty is do
+	self.name != ""
+end
+
+}

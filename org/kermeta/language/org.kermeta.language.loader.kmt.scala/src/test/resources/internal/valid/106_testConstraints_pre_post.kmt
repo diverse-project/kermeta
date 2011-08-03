@@ -1,0 +1,23 @@
+package constraint;
+
+
+class A {
+
+operation opName(c : String) : String
+// Declaration of the pre-condition
+	pre notVoidInput is 
+		do
+			c != void and c != ""
+		end
+	// Declaration of the post-condition
+	post notVoidOutput is
+		result != void and result != ""
+	
+	is
+		do
+		// operation body
+		end
+
+
+
+}
