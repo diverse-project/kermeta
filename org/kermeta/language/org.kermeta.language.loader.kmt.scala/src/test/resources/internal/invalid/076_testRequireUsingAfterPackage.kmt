@@ -1,0 +1,8 @@
+package PackageDeclaration;
+
+require kermeta
+
+package foo{}
+
+// not legal because alias must be before a possible use in the declarations
+using uri
