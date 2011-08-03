@@ -103,11 +103,9 @@ aspect class ObjectTypeVariable{
 
 	method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
 	
-		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables ")
 		
 		var binding : TypeVariableBinding
 		binding := bindings.detect{ b|
-			stdio.writeln("   ObjectTypeVariable.resolveTypeVariables " +  b.variable.toString +b.variable.name+ "  ?= " + self.toString +self.name)
 			
 			b.variable==self
 		}
@@ -118,7 +116,7 @@ aspect class ObjectTypeVariable{
 			stdio.writeln("warning : binding not found : "+name)
 		end
 		
-		stdio.writeln("   ObjectTypeVariable.resolveTypeVariables result="+ result.toString)
+		
 	end
 }
 

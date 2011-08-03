@@ -284,7 +284,7 @@ package behavior {
 						from var lambdaToBeResolved : ToBeResolvedLater
 						until context.waitingContext.isEmpty()
 						loop
-							stdio.writeln("resolving a lambda")
+							if (context.verbose) then stdio.writeln("resolving a lambda") end
 							lambdaToBeResolved := context.waitingContext.first()
 							context.waitingContext.removeAt(0)
 							lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
@@ -411,7 +411,7 @@ package behavior {
 				if target.staticType.isInstanceOf(Class) then
 					bindings.addAll(target.staticType.asType(Class).typeParamBinding)
 				end
-				stdio.writeln("bindings.size : "+bindings.size.toString)
+				if (context.verbose) then stdio.writeln("bindings.size : "+bindings.size.toString) end
 				self.staticType := type.resolveTypeVariables(context,bindings)
 				if(self.staticType.isVoid) then
 					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
