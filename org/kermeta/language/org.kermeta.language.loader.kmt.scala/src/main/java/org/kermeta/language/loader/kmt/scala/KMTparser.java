@@ -24,16 +24,16 @@ import scala.Option;
 
 public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTparser {
 
-    public ModelingUnit load(URL uri, String optionalContent, MessagingSystem logger) {
+    public ModelingUnit load(URL url, String optionalContent, MessagingSystem logger) {
         KParser parser = new KParser();
 
         String content = optionalContent;
         if (content.equals("")) {
-        	if(uri.getProtocol().equals("jar")){
+        	if(url.getProtocol().equals("jar")){
         		try{
 	        		// ParserUtil isn't able to load from inside a jar, so use the stream instead
-	    	    	JarURLConnection juc = (JarURLConnection) uri.openConnection();
-	    	    	InputStream is =  juc.getJarFile().getName().getClass().getResourceAsStream(uri.getFile().substring(uri.getFile().indexOf("!")+1));
+	    	    	JarURLConnection juc = (JarURLConnection) url.openConnection();
+	    	    	InputStream is =  juc.getJarFile().getName().getClass().getResourceAsStream(url.getFile().substring(url.getFile().indexOf("!")+1));
 	    	    	BufferedReader br = new BufferedReader(new InputStreamReader(is));	    	
 	    	    	String thisLine;
 	    	    	StringBuffer sb = new StringBuffer();
@@ -47,7 +47,8 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
         		}
         	}
         	else{
-        		content = ParserUtil.loadFile(uri.toString().replaceFirst("file:/", ""));
+        		System.out.println("    url.getFile() ="+url.getFile());
+        		content = ParserUtil.loadFile(url.getFile());
         	}
         }
 
@@ -58,7 +59,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
 
                 ParseException pe = parser.getErrors().get();
               	
-            	TextReference textRef = new TextReference(uri,pe.offsetBegin(),pe.offsetEnd());
+            	TextReference textRef = new TextReference(url,pe.offsetBegin(),pe.offsetEnd());
 
             	textRef.setBeginLine(pe.line());
             	textRef.setEndLine(pe.line());//TODO
@@ -84,7 +85,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
     		KermetaModelElement kme = (KermetaModelElement) tit.next();
     		for (Tag tag : kme.getKOwnedTags()) {
     			if (tag.getName().equals("traceability_text_reference")) {
-    				tag.setValue(uri.toString() + ";" + tag.getValue());
+    				tag.setValue(url.toString() + ";" + tag.getValue());
     			}
     		}
     	}
