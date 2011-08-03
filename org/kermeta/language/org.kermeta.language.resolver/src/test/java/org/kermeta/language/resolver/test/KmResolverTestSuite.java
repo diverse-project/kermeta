@@ -15,28 +15,38 @@ public class KmResolverTestSuite extends TestSuite {
     	//KermetaCompiler.initializeFactory();
     	System.out.println("début test suite");
 		
+		final String folderFullURIPass 	= new File(KmResolverTestSuite.class.getClassLoader().getResource("tests_pass").getFile()).getPath();
+		System.out.println("fullURI "+ folderFullURIPass);
+		
+		final TestSuite suite 		= new TestSuite("KmResolverTestSuite");
+		
+		
+		addTestsToSuite(folderFullURIPass, suite, true);
+		final String folderFullURIFail 	= new File(KmResolverTestSuite.class.getClassLoader().getResource("tests_fail").getFile()).getPath();
+		addTestsToSuite(folderFullURIFail, suite, false);
+		
+        return suite;
+    }
+
+
+	public static void addTestsToSuite(final String folderFullURI,
+			final TestSuite suite, boolean shouldPass) {
+		final List<File> files 		= new ArrayList<File>();
 		final FileFilter filter = new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
 				return pathname!=null && pathname.getAbsolutePath().endsWith("beforeResolving.km");
 			}
 		};
-		final String folderFullURI 	= new File(KmResolverTestSuite.class.getClassLoader().getResource("do_not_remove").getFile()).getParent();
-		System.out.println("fullURI "+ folderFullURI);
-		
-		final List<File> files 		= new ArrayList<File>();
-		final TestSuite suite 		= new TestSuite("KmResolverTestSuite");
 		
 		
 		getFiles(new File(folderFullURI), files, filter);
 		
 		for(File file : files) {
 			System.out.println("Testing: " + file.getPath() );
-			suite.addTest(new KmResolverTest(file.getPath()));
+			suite.addTest(new KmResolverTest(file.getPath(), shouldPass));
 		}
-		
-        return suite;
-    }
+	}
     
     
     public static void getFiles(final File file, final List<File> files, final FileFilter filter) {

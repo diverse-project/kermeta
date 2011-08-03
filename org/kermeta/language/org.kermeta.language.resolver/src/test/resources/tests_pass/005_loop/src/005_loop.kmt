@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : September 14, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cbouhour
+ */
+
+package helloworld {
+	class HelloWorld
+	{
+		
+		
+		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
+			
+			from var i : kermeta::standard::Integer init toto until i == 0 
+			loop
+				kermeta::io::StdIO.writeln(i)
+				i := i - 1
+			end 
+
+	}
+}

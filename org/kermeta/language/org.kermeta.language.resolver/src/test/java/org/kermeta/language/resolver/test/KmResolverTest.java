@@ -36,13 +36,13 @@ import java.io.File;
 
 public class KmResolverTest extends TestCase {
 	String kmFile;
+	boolean shouldPass;
 
 
-
-    public KmResolverTest(String kmFile) {
+    public KmResolverTest(String kmFile, boolean shouldPass) {
 		super();
 		this.kmFile = kmFile;
-
+		this.shouldPass=shouldPass;
 	}
 
 
@@ -69,7 +69,7 @@ public class KmResolverTest extends TestCase {
 		ErrorProneResult<ModelingUnit> epr=	resolver.resolve(beforeResolving);
 		
 		
-		assertTrue("Failed to resolve !", !epr.hasSevereProblems());
+		assertTrue("Failed to resolve !", epr.hasSevereProblems() ^ shouldPass);//for noobs :p : ^ is XOR 
     }
     
     @Override
