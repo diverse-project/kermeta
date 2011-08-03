@@ -33,6 +33,7 @@ class Test_assignment  {
     	   testCastVoid() 
 			
 	end
+	
 
 	// Test assignment to a variable that need to be escaped
     operation testAssignment1() : kermeta::standard::Integer is do
@@ -181,10 +182,10 @@ class TestAssignmentEnum
 		testAssignmentEnumAsReference() 
 		
 		//Assignment of Enum as variable
-		operation testAssignmentEnumAsVariable() 
+		testAssignmentEnumAsVariable() 
 		
 		//Assignment of Enum as attribute
-		operation testAssignmentEnumAsAttribute() 
+		 testAssignmentEnumAsAttribute() 
 		
 		
 	end
