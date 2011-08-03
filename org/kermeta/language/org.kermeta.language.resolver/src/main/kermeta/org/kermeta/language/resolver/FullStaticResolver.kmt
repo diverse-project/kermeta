@@ -81,7 +81,7 @@ class FullStaticResolver
 		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
 		
-		staticSetterContext.verbose := true
+		staticSetterContext.verbose := false
 		staticSetterContext.errors  := ctxt.errors
 		
 		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
