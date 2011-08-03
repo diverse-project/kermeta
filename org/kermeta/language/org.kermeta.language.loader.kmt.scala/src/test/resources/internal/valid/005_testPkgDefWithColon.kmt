@@ -1,0 +1,9 @@
+package prefix1::prefix2;
+
+package foo1 {
+	package bar{
+	}
+}
+
+package foo::bar{
+}
