@@ -2,7 +2,7 @@
 
 using kermeta::standard
 
-alias Integer : kermeta::standard::Integer;
+using kermeta::standard::Integer
 
 package testArithm{
 
@@ -60,6 +60,7 @@ class Test_arithm  {
 		 testoperation_ptm()
 		 
 	end
+	
 
     operation main_operation() : kermeta::standard::Integer is do
         var r1 : kermeta::standard::Integer
