@@ -1,0 +1,10 @@
+package test;
+
+class TestOnParam {
+
+operation seqParam (requiredClasses : bag RequiredClass[0..*],requiredProperties : bag RequiredProperty[0..*] ) : Void is do
+
+	stdio.writeln("seq param")
+end
+
+}
