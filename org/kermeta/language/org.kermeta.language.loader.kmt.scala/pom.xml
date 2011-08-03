@@ -44,6 +44,12 @@
             <artifactId>utils.systemservices.api</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.kermeta.utils</groupId>
+            <artifactId>utils.helpers</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
 
     </dependencies>
 

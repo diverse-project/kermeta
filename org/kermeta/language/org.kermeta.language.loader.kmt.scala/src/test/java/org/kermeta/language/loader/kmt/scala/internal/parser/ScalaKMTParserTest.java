@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
+import org.kermeta.utils.helpers.FileHelpers;
 import java.io.File;
 
 
@@ -35,16 +36,22 @@ public class ScalaKMTParserTest extends TestCase {
 	public void test() throws IOException  {
         System.out.println("Test parsing "+ (mustBeValid ? "valid " : "invalid ") + kmtFile);
         
-        java.net.URL url = kmtFile.toURI().toURL();
+        //java.net.URL url = kmtFile.toURI().toURL();
+       // FileHelpers fileHelper = new FileHelpers();
+        java.net.URL url = FileHelpers.FileToURL(kmtFile);
         KMTparser parser = new KMTparser();
         ErrorAwareMessagingSystem messagingSystem = new ErrorAwareMessagingSystem();
         ModelingUnit mu = parser.load(url, "", messagingSystem);
                 
-		
-        if(!messagingSystem.errorTrace.isEmpty()){
-        	assertTrue(messagingSystem.errorTrace.get(0), messagingSystem.errorTrace.isEmpty());
-        }
-		//assertTrue("Failure: ModelingUnit is null ", mu != null);
+		if(mustBeValid){
+	        if(!messagingSystem.errorTrace.isEmpty()){
+	        	assertTrue(messagingSystem.errorTrace.get(0), messagingSystem.errorTrace.isEmpty());
+	        }
+			assertTrue("Failure: ModelingUnit is null ", mu != null);
+		}
+		else{
+			assertTrue("Expecting parse error but none found", !messagingSystem.errorTrace.isEmpty());
+		}
     }
     
     @Override
