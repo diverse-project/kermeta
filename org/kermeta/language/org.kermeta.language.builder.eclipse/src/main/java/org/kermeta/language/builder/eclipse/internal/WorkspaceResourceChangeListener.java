@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.core.internal.resources.Workspace;
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -39,7 +37,6 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
  */
 public class WorkspaceResourceChangeListener implements IResourceChangeListener {
 
-	public static final String KP_FILE_EXTENSION = "kp";
 	private KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
 
 	public WorkspaceResourceChangeListener() {
@@ -66,7 +63,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 					if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
 						try {
 							ArrayList<IFile> theKP = new ArrayList<IFile>();
-							findKPinProject(resource.getProject(), theKP);
+							kermetaBuilder.findKPinProject(resource.getProject(), theKP);
 
 							for (IFile aKPFile : theKP) {
 								if (!kermetaBuilder.kpBuilders.containsKey(kermetaBuilder.generateIdentifier(aKPFile))) {
@@ -82,7 +79,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 				break;
 
 			case IResource.FILE:
-				if (resource.getFileExtension().equals(KP_FILE_EXTENSION)) {
+				if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
 					KPBuilder builder = null;
 					switch (delta.getKind()) {
 					case IResourceDelta.ADDED:
@@ -160,22 +157,6 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			job.schedule();
 		}
 
-		private void findKPinProject(IContainer aProject, ArrayList<IFile> identifiedKp) throws CoreException {
-			for (IResource aMember : aProject.members()) {
-				if (aMember instanceof IFile) {
-					if (((IFile) aMember).getFileExtension() != null) {
-						if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
-							identifiedKp.add((IFile) aMember);
-						}
-					}
-				} else {
-					if (aMember instanceof IContainer) {
-						findKPinProject((IContainer) aMember, identifiedKp);
-					}
-				}
-			}
-		}
-
 		private void removeBuilders(IProject aProject) {
 			ArrayList<String> theIdentifierToRemove = new ArrayList<String>();
 			for (KPBuilder aBuilder : kermetaBuilder.kpBuilders.values()) {
@@ -210,7 +191,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 							break;
 						case IResource.FILE:
 							if (resource.getFileExtension() != null) {
-								if (resource.getFileExtension().equals(KP_FILE_EXTENSION)) {
+								if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
 									// ignore kp in target folder
 									if (!resource.getProjectRelativePath().segments()[0].equals("target")) {
 										Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for " + resource.getFullPath(), this.getClass().getName());

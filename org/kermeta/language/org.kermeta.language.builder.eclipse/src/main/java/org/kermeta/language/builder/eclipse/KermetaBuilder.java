@@ -11,13 +11,17 @@ package org.kermeta.language.builder.eclipse;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -34,6 +38,7 @@ import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
+	public static final String KP_FILE_EXTENSION = "kp";
 	public HashMap<String,KPBuilder> kpBuilders = new HashMap<String,KPBuilder>();
 	
 	private static KermetaBuilder instance = null;
@@ -169,5 +174,21 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 			return kpBuilders.get(kpIdentifier).kp_last_modelingunit;
 		else
 			return null;
+	}
+	
+	public void findKPinProject(IContainer aProject, ArrayList<IFile> identifiedKp) throws CoreException {
+		for (IResource aMember : aProject.members()) {
+			if (aMember instanceof IFile) {
+				if (((IFile) aMember).getFileExtension() != null) {
+					if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
+						identifiedKp.add((IFile) aMember);
+					}
+				}
+			} else {
+				if (aMember instanceof IContainer) {
+					findKPinProject((IContainer) aMember, identifiedKp);
+				}
+			}
+		}
 	}
 }
