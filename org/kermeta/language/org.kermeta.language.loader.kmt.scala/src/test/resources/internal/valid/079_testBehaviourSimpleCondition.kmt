@@ -4,6 +4,7 @@ package root;
 class B
 {
  	operation opB() is do
- 		if (true) do end
+ 		if (true) then  do end
+ 		end
  	end
-}
+} 
