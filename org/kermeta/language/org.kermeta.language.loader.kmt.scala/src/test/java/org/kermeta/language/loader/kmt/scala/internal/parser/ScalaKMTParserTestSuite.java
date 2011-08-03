@@ -40,7 +40,7 @@ public class ScalaKMTParserTestSuite extends TestSuite {
 			for(File file : files) {
 				System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
 				suite.addTest(new ScalaKMTParserTest(file, 
-						file.getParentFile().getName().equals("valid") ));
+						!(file.getParent().contains("invalid")&&file.getParent().contains("internal")) ));
 			}
 			
 	        return suite;
