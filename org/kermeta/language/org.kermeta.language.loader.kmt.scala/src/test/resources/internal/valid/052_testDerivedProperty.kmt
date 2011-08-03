@@ -1,0 +1,25 @@
+class A 
+{
+    attribute period : Real
+    property readonly frequency : Real // property : keyword for derived property
+        getter is do
+            result := 1/period
+        end
+}
+// modifiable property :
+class B 
+{
+    attribute period : Real
+    property frequency : Real
+        getter is do
+             result := 1/period
+        end
+        setter is do
+            period := 1/value
+        end
+        
+    property readonly frequency : Real[0..*]
+        getter is do
+            result := Collection<Real>.new
+        end
+}
