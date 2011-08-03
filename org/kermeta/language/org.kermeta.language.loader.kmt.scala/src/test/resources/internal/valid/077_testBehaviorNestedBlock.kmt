@@ -1,6 +1,7 @@
-require kermeta
-package testBlock;
 
+package testBlock;
+ 
+require kermeta
 class Class1 {
 	
 	operation operation1() is do
@@ -8,7 +9,7 @@ class Class1 {
 		do
 			do
 			
-			rescue
+			rescue (e: Exception)
 			
 			end
 			
@@ -20,7 +21,7 @@ class Class1 {
 		
 		do
 		
-		rescue
+		rescue (e: Exception)
 			do end
 		end
 
