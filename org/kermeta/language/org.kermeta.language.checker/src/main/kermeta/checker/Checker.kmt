@@ -292,10 +292,12 @@ class Checker
 			
 			invProxy.metaclassQualifiedName := obj.getMetaClass.classDefinition.name
 			invProxy.invariantName := invariant.name
+			invProxy.message:= getInvariantMessage(invariant)
 			if (not(obj.containingResource.isVoid))
 			then
 				invProxy.mmUri :=  obj.containingResource.metaModelURI
 			end
+			
 			constraintDiagnostic.failedConstraint := invProxy
 			
 			result := constraintDiagnostic
@@ -305,6 +307,44 @@ class Checker
 		result := invariant.ownedTags.exists{t|
 			t.name=="IsWarning" and t.~value.equals("true")
 		}
+	end
+	
+	operation getInvariantMessage(invariant : kermeta::language::structure::Constraint) : String is do
+	
+		result:=""
+		
+		/*
+		stdio.writeln("getInvariantMessage for invariant " + invariant.name)
+		
+		invariant.ownedTags.each{t|
+			stdio.writeln(" - tag found (" + t.name + ")(" + t.~value + ")")
+			if (t.name.isVoid)
+			then
+				stdio.writeln("    t.name is void")
+			else
+				stdio.writeln("    t.name is not void")
+			end
+		}
+		*/
+		
+		var t : Tag init invariant.ownedTags.detect{t|
+			t.name.isVoid()
+		}
+		
+		/*
+		if (t.isVoid)
+		then
+			stdio.writeln("tag t is void")
+		else
+			stdio.writeln("tag t is not void")
+		end
+		*/
+		
+		if (not(t.isVoid))
+		then
+			result:=t.~value
+		end
+		
 	end
 	
 	operation filterInvariant(invariant : kermeta::language::structure::Constraint, scope : String) : Boolean is do
