@@ -1,0 +1,7 @@
+KermetaProject :"003_lambdaDefAndCall" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/003_lambdaDefAndCall.kmt"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}  
