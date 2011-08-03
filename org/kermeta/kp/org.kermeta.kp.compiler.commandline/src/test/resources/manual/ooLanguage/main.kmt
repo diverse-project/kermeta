@@ -30,7 +30,9 @@ package pkg{
 		do
 			if age < book.minimalAge then
 			raise AgeException.new
+			end
 		end
+		
 	}
 
 	class Main {
