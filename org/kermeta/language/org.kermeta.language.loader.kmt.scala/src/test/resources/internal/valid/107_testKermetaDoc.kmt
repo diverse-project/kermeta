@@ -1,0 +1,15 @@
+package test;
+
+class A {
+
+
+/** @param name : the operator name
+	@param op1 : the first integer to be added
+	@param op2 : the second operator to be added
+	@result : the result obtained by adding op1 to op2 */ 
+operation op (name : String, op1 : Integer, op2 : Integer) : Integer is do 
+	result := op1 + op2
+
+end
+
+}
