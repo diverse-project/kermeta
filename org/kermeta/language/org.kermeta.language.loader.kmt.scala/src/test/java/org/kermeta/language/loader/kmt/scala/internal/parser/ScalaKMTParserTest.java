@@ -18,6 +18,7 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.helpers.FileHelpers;
 import java.io.File;
+import java.net.URL;
 
 
 public class ScalaKMTParserTest extends TestCase {
@@ -34,10 +35,9 @@ public class ScalaKMTParserTest extends TestCase {
 
 
 	public void test() throws IOException  {
-        System.out.println("Test parsing "+ (mustBeValid ? "valid " : "invalid ") + kmtFile);
+		 System.out.println("Test parsing "+ (mustBeValid ? "valid " : "invalid ") + kmtFile);
         
-        //java.net.URL url = kmtFile.toURI().toURL();
-       // FileHelpers fileHelper = new FileHelpers();
+        
         java.net.URL url = FileHelpers.FileToURL(kmtFile);
         KMTparser parser = new KMTparser();
         ErrorAwareMessagingSystem messagingSystem = new ErrorAwareMessagingSystem();
