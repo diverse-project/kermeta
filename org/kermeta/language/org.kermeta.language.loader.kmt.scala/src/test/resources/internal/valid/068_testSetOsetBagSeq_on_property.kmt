@@ -1,0 +1,31 @@
+require kermeta
+
+using kermeta::standard::*	// don't need to specify it all the time
+
+class Test {
+
+	
+		// Collection with multiplicities
+	    reference myCol1 : set Integer[4..6] // At least 4 elements and never more than 6
+		reference myCol3 : seq String[2..*] // At least two strings in the sequence
+		reference myCol4 : set String[1..*] // An non empty set
+		reference myCol5 : String[1..*] // If you don't specify any keyword, it is an ordered set
+	        
+	    // Example of declaration of variables as Collections. All those syntaxes are valid
+		reference myCol1 : set Integer[0..*]   
+		
+		
+		reference myCol2 : oset String[0..*]  
+		reference myCol3 : bag Boolean[0..*]   
+		reference myCol4 : seq Integer[0..*]  
+		// if no keyword specified, and multiplicity is set, it is an OrderedSet
+		
+		attribute myCol4 : String[0..*]
+		
+		attribute myCol1a : seq Integer[0..*] 
+		attribute myCol2a : oset String[0..*]   
+		attribute myCol3a : kermeta::standard::Bag<Boolean>
+		attribute myCol3a : kermeta::standard::Sequence<Integer>
+		
+
+}
