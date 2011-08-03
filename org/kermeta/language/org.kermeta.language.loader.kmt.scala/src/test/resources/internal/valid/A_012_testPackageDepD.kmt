@@ -1,7 +1,10 @@
 
+package testPackDep;
+
 require kermeta
 
-package testPackDep;
+
+
 
 
 package toto {

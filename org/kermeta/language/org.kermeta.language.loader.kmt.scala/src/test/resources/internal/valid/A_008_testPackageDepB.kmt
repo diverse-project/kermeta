@@ -1,8 +1,10 @@
 
+package testPackDep;
 
 require kermeta
 require "A_012_PackageDepD.kmt"
-package testPackDep;
+
+
 
 
 class B {
