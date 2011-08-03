@@ -1,0 +1,42 @@
+package testConditional;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+
+class Class1 {
+	
+	operation operation1() is do
+		
+		
+		
+		if a or b then v2 := "coucou" end
+		
+		if a or b and c or b then v2 := "coucou" end
+		
+		var b : Boolean init not b().f
+		
+		if not b then true
+		end
+		
+		if a and b then true
+		end
+		
+		if (a and b) and c then true
+		end
+		
+		if (a and b) and  not f().g then true
+		end
+		
+		if (not a and b) and  not f().g then true
+		end
+		
+		if not ( a and b or c ) and  not f().g then true
+		end
+	end
+	
+}
+
