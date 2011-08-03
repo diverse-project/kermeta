@@ -56,7 +56,7 @@ public class ScalaKMTParserTest extends TestCase {
     
     @Override
     public String getName() {
-        return kmtFile.getParentFile().getParentFile().getName() + kmtFile.getParentFile().getName()  + kmtFile.getName();
+        return kmtFile.getParentFile().getParentFile().getName() +"."+ kmtFile.getParentFile().getName()+"."  + kmtFile.getName();
     }
 
     @Override
