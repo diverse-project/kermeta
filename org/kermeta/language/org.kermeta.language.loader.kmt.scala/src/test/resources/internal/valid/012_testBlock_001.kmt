@@ -9,7 +9,7 @@ class Class1 {
 		do
 			do
 			
-			rescue
+			rescue (e : Exception)
 			
 			end
 			
