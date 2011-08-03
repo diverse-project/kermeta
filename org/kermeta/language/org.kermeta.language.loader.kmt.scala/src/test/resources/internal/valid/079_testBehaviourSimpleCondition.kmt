@@ -1,0 +1,9 @@
+
+package root;
+
+class B
+{
+ 	operation opB() is do
+ 		if (true) do end
+ 	end
+}

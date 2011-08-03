@@ -1,0 +1,12 @@
+require kermeta
+
+using kermeta::standard::*		// don't need to specify it all the time
+
+class Test {
+
+	operation test() is do
+		var a : Integer init 1
+		var a : Integer := 1
+	end
+
+}

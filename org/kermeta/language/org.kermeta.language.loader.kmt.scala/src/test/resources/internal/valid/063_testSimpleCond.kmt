@@ -1,0 +1,19 @@
+package testSimpleCond;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 {
+	
+	operation operation1() is do
+		var v1 : Boolean
+		var v2 : Boolean
+		
+		if v1 then "coucou" else "not coucou" end
+	
+	end
+	
+}

@@ -1,0 +1,12 @@
+package testPackDep;
+
+require kermeta
+require "testPackageDepB.kmt"
+
+require "testPackageDepC.kmt"
+
+class A {
+
+	attribute e : toto::C
+ 
+}

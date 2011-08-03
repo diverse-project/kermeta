@@ -1,0 +1,27 @@
+package testCallExp;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+
+class Class1 {
+	
+	operation operation1() is do
+	
+		if not equals(self) then
+			raise "we have a problem !"
+		end
+	
+	end
+	
+	operation operation2() is do
+		// an op on object
+		getMetaClass()
+	
+	end
+	
+}
+

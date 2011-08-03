@@ -1,0 +1,15 @@
+package packageDeclaration ;
+
+enumeration Seasons { spring ; summer ; } 
+
+class A inherits Seasons { 
+
+	attribute a : A 
+
+	operation b ( b : Seasons) : Seasons is 
+	do 
+	
+	end 
+} 
+
+

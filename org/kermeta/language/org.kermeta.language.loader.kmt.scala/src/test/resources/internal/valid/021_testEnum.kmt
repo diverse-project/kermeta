@@ -1,0 +1,24 @@
+package testEnum;
+
+require kermeta
+
+enumeration Enum1 {
+	toto;
+	tata;
+}
+
+class TestEnum {
+
+	attribute prop : Enum1
+	
+	operation swap() is do
+		if prop == Enum1.toto then
+			prop := Enum1.tata
+		else
+			prop := Enum1.toto
+		end
+	end
+	
+	
+
+}

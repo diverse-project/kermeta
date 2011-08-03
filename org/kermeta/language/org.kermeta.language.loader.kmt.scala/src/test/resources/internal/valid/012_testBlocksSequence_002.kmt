@@ -1,0 +1,29 @@
+package testBlocksSequence;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+/**
+ * Test : a sequence of blocks
+*/
+class Class1 {
+	
+	operation operation1() is do
+		var v1 : Integer
+		var v2 : String
+		do
+			var v3 : Integer init 0
+			var v5 : String init v1
+		end	
+		do
+			var v4 : String init "blah"
+			v1 := v4
+		end
+		var v3 : Integer
+		v3 := 2
+	end
+	
+}

@@ -1,0 +1,23 @@
+package testSCommentInline;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 {
+	
+	operation operation1() is do
+		var v1 : Integer init 3
+		var v2 : Integer init 6 // This is a comment for var v2
+		
+		from var i : Integer init 0
+		until i == 10
+		loop
+			v1 := v1*v1 + v2
+		end
+	
+	end
+	
+}

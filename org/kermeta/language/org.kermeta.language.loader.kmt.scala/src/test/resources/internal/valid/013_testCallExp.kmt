@@ -1,0 +1,48 @@
+package testCallExp;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+
+class Class1 {
+	
+	operation operation1() is do
+		var v1 : Integer init 2
+		var v2 : String init "blah" 
+		
+		v2 := v2.concat(v2)
+		
+		v2 := v2.concat(v2).toString
+		
+		v2 := Class2.new.operation21(v2, "coucou").concat("hello").concat("world ! ")
+		
+		
+		
+		var myVar : package1::Class11 init package1::Class11.new
+		
+		myVar.operation111().isVoid()
+		
+		v2 := "hello ".concat("world !")
+	
+	end
+	
+}
+
+class Class2 {
+	operation operation21(s1: String, s2 : String) : String is do
+		s1.concat(s2).concat("coucou")
+	end
+}
+
+package package1 {
+	class Class11 {
+	
+		operation operation111() : Void is do
+		
+		end
+	
+	}
+}

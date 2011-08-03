@@ -1,0 +1,11 @@
+package testInterDepend;
+
+
+require kermeta
+require "testInterDependB.kmt"
+
+class A {
+
+	attribute b : B
+ 
+}

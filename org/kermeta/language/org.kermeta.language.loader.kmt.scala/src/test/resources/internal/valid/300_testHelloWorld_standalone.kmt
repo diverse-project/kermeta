@@ -1,0 +1,85 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package helloworld {
+	class HelloWorld
+	{
+		@main ""
+		operation main() : kermeta::standard::Void is do 
+			kermeta::io::StdIO.writeln("Hello World!")
+		end
+		
+		@main "Bonjour tout le monde"
+		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
+			kermeta::io::StdIO.writeln(msg)
+		end
+	}
+}
+
+// for reflexivity
+package org {
+	package kermeta {
+		package language {
+			package structure {
+				@CompilerIgnore "true"
+				class Class {
+				}
+				
+				@CompilerIgnore "true"
+				class Object {
+				}
+			}
+		}
+	}
+}
+
+// for core framework
+package kermeta{
+	package exception {
+		class NotImplementedException
+		{
+		}
+	}
+	package io {
+		@CompilerIgnore "true"
+		singleton StdIO
+		{			
+			/**
+			 * Writeln the object to standard output
+			 */ 
+			operation writeln(object : kermeta::standard::String) : kermeta::standard::Void is do
+		    	raise kermeta::exception::NotImplementedException.new
+			end						
+		}
+	}
+	package standard{
+
+		/**
+		 * The class Void 
+		 * By convention it is a sub-type of everything
+		 */
+		@CompilerIgnore "true"
+		class ~Void {
+				
+			/**
+			 * Returns the String identifier '<void>'
+			 */
+			method toString() : kermeta::standard::String is do
+				result := "<void>"
+			end			
+		}
+
+
+		@CompilerIgnore "true"
+		class String {        
+			
+		}		
+	}
+}

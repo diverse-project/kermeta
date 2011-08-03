@@ -1,0 +1,19 @@
+package testBlocksSequence;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+/**
+ * Test : a sequence of blocks
+*/
+class Class1 {
+	
+	operation operation1() is do
+		// call an op on object
+		getMetaClass()
+	end
+	
+}

@@ -1,0 +1,5 @@
+package PackageDeclaration
+
+require kermeta
+
+using "uri"
