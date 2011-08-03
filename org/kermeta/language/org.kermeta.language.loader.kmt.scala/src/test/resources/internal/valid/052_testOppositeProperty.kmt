@@ -1,0 +1,13 @@
+package pkg {
+	class A {
+		attribute b : pkg::B[0..*]#a
+		reference b2 : pkg::B[0..*]#a2
+	}
+	class B {
+		reference a : pkg::A[1..1]#b
+		
+		reference a2 : pkg::A[0..*]#b2
+	}
+	
+}
+	
