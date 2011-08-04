@@ -1,0 +1,7 @@
+KermetaProject :"001_variable_visibility" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/001_variable_visibility.kmt" 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+} 
