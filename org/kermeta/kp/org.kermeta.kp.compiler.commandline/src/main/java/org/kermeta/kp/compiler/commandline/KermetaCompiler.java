@@ -551,9 +551,29 @@ public class KermetaCompiler {
 	}
 
 	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder) {
+		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder);
+		/*
+		 * if(packageEquivalences != null){ for (int i = 0; i <
+		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
+		 * packageEquivalences[i];
+		 * this.getLog().info("   PackageEquivalence found: " +
+		 * equivalence.getEcorePackageName() + " -> "
+		 * +equivalence.getJavaPackageName());
+		 * kermeta.utils.TypeEquivalence.packageEquivelence
+		 * ().put(equivalence.getEcorePackageName(),
+		 * equivalence.getJavaPackageName()); } }
+		 */
+		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
+		km2ScalaCompiler.compile(kmFileURL);
+	}
+
+	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder) {
 		GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SCALA_SUBFOLDER);
 		GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SUBFOLDER);
+		//If classes is modified, please impact it on method checkIfBuildIsNeeded on KPBuilder.java
+		//*************
 		GlobalConfiguration.outputBinFolder_$eq(targetFolder + "/classes");
+		//*************
 		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getGroup() + "." + kp.getName());
 		GlobalConfiguration.props_$eq(new Properties());
 		GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
@@ -573,19 +593,6 @@ public class KermetaCompiler {
 
 		// GlobalConfiguration.load(GlobalConfiguration.props());
 		GlobalConfiguration.setScalaAspectPrefix(kp.getGroup() + "." + kp.getName());
-		/*
-		 * if(packageEquivalences != null){ for (int i = 0; i <
-		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
-		 * packageEquivalences[i];
-		 * this.getLog().info("   PackageEquivalence found: " +
-		 * equivalence.getEcorePackageName() + " -> "
-		 * +equivalence.getJavaPackageName());
-		 * kermeta.utils.TypeEquivalence.packageEquivelence
-		 * ().put(equivalence.getEcorePackageName(),
-		 * equivalence.getJavaPackageName()); } }
-		 */
-		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
-		km2ScalaCompiler.compile(kmFileURL);
 	}
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
@@ -874,13 +881,7 @@ public class KermetaCompiler {
 
 		return ref;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(System.getProperty("java.class.path"));
-		System.out.println(File.pathSeparator);
-
-	}
-
+	
 	private int scala2bytecode(List<String> additionalClassPath) {
 
 		List<String> classpath = new ArrayList<String>();
@@ -927,6 +928,13 @@ public class KermetaCompiler {
 		return result;
 	}
 
+	public void runK2Program(List<String> classpath, List<String> params, String kpFileURL, String targetGeneratedSourceFolder, String targetFolder) {
+		KpLoaderImpl ldr = new KpLoaderImpl();
+		KermetaProject kp = ldr.loadKp(kpFileURL);
+		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder);
+		runK2Program(classpath,params);
+	}
+	
 	public void runK2Program(List<String> classpath, List<String> params) {
 		StringBuffer f = new StringBuffer();
 		for (String s : classpath) {
