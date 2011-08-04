@@ -33,6 +33,12 @@
 	             label="Build Kermeta Project"
 	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
 	       </action>
+        <visibility>
+         <and>
+		   <objectState name="projectNature" value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID"/>
+           <objectClass name="org.eclipse.core.resources.IFile" />
+          </and>
+         </visibility>
 	     </objectContribution>
 	</extension>
 	
