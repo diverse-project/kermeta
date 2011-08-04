@@ -161,7 +161,7 @@ public class KPBuilder {
 			
 			long timeStampOfClasses = 0;
 
-			IResource theConcernedPath = kpProjectFile.getProject().findMember(File.separatorChar+"target"+File.separatorChar+"classes"+File.separatorChar);
+			IResource theConcernedPath = kpProjectFile.getParent().findMember(File.separatorChar+"target"+File.separatorChar+"classes"+File.separatorChar);
 			if (theConcernedPath != null) {
 				if (theConcernedPath instanceof IFolder) {
 					theConcernedPath.refreshLocal(IResource.DEPTH_INFINITE, null);
