@@ -29,6 +29,7 @@ class KParser extends KExpressionParser
                  with KEnumerationParser {
 
   def parse(content : String) : Option[ModelingUnit] = {
+    resetUnik
     val tokens = new lexical.Scanner(content)
 
     val result = phrase(program)(tokens)
