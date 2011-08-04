@@ -1,5 +1,7 @@
 package org.kermeta.language.builder.api;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.IResource;
 
 public abstract class Builder {
@@ -11,7 +13,7 @@ public abstract class Builder {
 	public final static String LOG_MESSAGE_GROUP = "org.kermeta.language.builder";
 	
 	public abstract void parseSpecificFile(IResource toParse, String content);
-	public abstract void buildFromKP(String kpIdentifier,boolean andRun);
+	public abstract void runFromKP(String kpIdentifier,ArrayList<String> params);
 	public abstract void buildFromKP(String kpIdentifier);
 	public abstract void compileFromKP(String kpIdentifier);
 	public abstract String findKPidentifierFromKMT(IResource kmt);
