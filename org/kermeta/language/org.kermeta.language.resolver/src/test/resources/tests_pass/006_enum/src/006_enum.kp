@@ -1,0 +1,7 @@
+KermetaProject :"006_enum" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/006_enum.kmt"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+}  
