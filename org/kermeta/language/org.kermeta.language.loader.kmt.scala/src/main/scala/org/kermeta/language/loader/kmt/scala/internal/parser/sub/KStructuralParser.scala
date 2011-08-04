@@ -116,7 +116,7 @@ trait KStructuralParser extends KAbstractParser {
       var processedList: List[Expression] = List()
       // navigate the original list in the reverse order and rebuild a list with the correct exprseeion,
       // recreate a hierachy for Calls that must be nested in the target of another expression
-      println(l.size + " " + l.mkString("\n"))
+      //println(l.size + " " + l.mkString("\n"))
       l.reverse.foreach(p => {
           p match {
             case cf: UnresolvedCall if (cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
