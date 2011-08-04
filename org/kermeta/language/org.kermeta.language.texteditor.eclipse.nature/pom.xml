@@ -44,6 +44,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.console</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.ide</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
@@ -61,6 +66,16 @@
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>${osgi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.debug.ui</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jdt.ui</artifactId>
+			<version>[3.5.0.0,)</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -87,7 +102,10 @@
 							org.eclipse.ui,
  							org.eclipse.core.runtime,
  							org.eclipse.core.resources,
- 							org.eclipse.ui.ide
+ 							org.eclipse.ui.ide,
+ 							org.eclipse.ui.console,
+ 							org.eclipse.debug.ui,
+ 							org.eclipse.jdt.ui
                         </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
