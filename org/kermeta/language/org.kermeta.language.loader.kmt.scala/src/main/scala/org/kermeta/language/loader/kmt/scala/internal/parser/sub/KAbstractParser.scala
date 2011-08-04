@@ -64,6 +64,19 @@ trait KAbstractParser extends TokenParsers {
     elem("identifier", _.isInstanceOf[Identifier]) ^^ (_.chars)
 
 
+  def resetUnik = unikP.clear
+  val unikP  = new scala.collection.mutable.HashMap[Parser[_],Boolean]()
+  def kunik[T](p : Parser[T]) : Parser[T] = Parser { in =>
+    p(in) match {
+      case Success(x,rest) if(unikP.get(p).isEmpty) => {
+        Success(x,rest)  
+      }
+      case Success(x,rest) if(!unikP.get(p).isEmpty) => {
+        Error("Cannot repeat expression ", rest)
+      }      
+      case _ @ ns => ns
+    }
+  }
   
 
 
