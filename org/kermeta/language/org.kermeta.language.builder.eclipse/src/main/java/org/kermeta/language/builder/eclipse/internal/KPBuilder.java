@@ -16,17 +16,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.eclipse.core.internal.resources.Folder;
+import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.internal.ide.undo.FolderDescription;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
@@ -34,6 +41,7 @@ import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
+import org.kermeta.utils.helpers.eclipse.URIHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
@@ -62,7 +70,7 @@ public class KPBuilder {
 		File f = new File(kpFileURL);
 		try {
 			String projectUri = f.getParentFile().getCanonicalPath();
-			outputFolder = projectUri+"/target";
+			outputFolder = projectUri+File.separatorChar+"target";
 			outputResourceFolder = outputFolder+"/resources";
 			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),true,outputFolder, true, true, false);
 			refreshFileIndex();
@@ -125,26 +133,103 @@ public class KPBuilder {
 		return dirtyFiles;
 	}
 
-	synchronized public void build(boolean andRun){
-		try {		
-			ArrayList<String> additionalClassPath = new ArrayList<String>();
+	synchronized private long getOldestTimeStamp(IResource theCurrent, long currentTimeStamp) throws CoreException {
+		long result = currentTimeStamp;
+		if (theCurrent instanceof IContainer) {
+			for (IResource aResource : ((IContainer)theCurrent).members()) {
+				long temp = getOldestTimeStamp(aResource, result);
+				if (temp < result || result == -1) {
+					result = temp;
+				}
+			}
+		} else {
+			long temp = theCurrent.getLocalTimeStamp();
+			if (result == -1) {
+				result = temp;
+			} else {
+				result = (result < temp)?result:temp;
+			}
+		}
+		return result;		
+	}
+	
+	synchronized private boolean checkIfBuildIsNeeded() {
+		try {
+			if (kp_last_modelingunit == null) {
+				return true;
+			}
+			
+			long timeStampOfClasses = 0;
 
+			IResource theConcernedPath = kpProjectFile.getProject().findMember(File.separatorChar+"target"+File.separatorChar+"classes"+File.separatorChar);
+			if (theConcernedPath != null) {
+				if (theConcernedPath instanceof IFolder) {
+					theConcernedPath.refreshLocal(IResource.DEPTH_INFINITE, null);
+					timeStampOfClasses = getOldestTimeStamp(theConcernedPath, -1);
+				}
+			}
+			
+			if (timeStampOfClasses == 0) {
+				return true;
+			}
+			
+			if (timeStampOfClasses <= kpProjectFile.getLocalTimeStamp()) {
+				return true;
+			}
+			
+			ArrayList<URL> theSources = compiler.getSources(kpFileURL);
+			for (URL oneURL : theSources) {
+				IFile theFile = ResourceHelpers.getIFile(oneURL.toString());
+				if (theFile != null) {
+					if (theFile.getLocalTimeStamp() > timeStampOfClasses) {
+						return true;
+					}
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	synchronized public void build(boolean andRun, ArrayList<String> params){
+		try {		
+			boolean isBuildNeeded = !andRun;
+			
+			if (andRun) {
+				isBuildNeeded = checkIfBuildIsNeeded();
+			}
+			
+			ArrayList<String> additionalClassPath = new ArrayList<String>();
+			
 			findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
 			findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
 			findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
-
-			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
-			if (result != null) {
-				kp_last_modelingunit = result;
-				kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
-				if (andRun) {
-					ArrayList<String> params = new ArrayList<String>();
-					params.add("toto");
-					compiler.runK2Program(additionalClassPath, params);
+			
+			ModelingUnit result = null;
+			
+			if (isBuildNeeded) {
+	
+				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
+				if (result != null) {
+					kp_last_modelingunit = result;
+					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 				}
+			}
+			if (andRun) {
+				if (isBuildNeeded && result != null) {
+					compiler.runK2Program(additionalClassPath, params);
+				} else {
+					compiler.runK2Program(additionalClassPath, params,kpFileURL,outputFolder,outputFolder);
+				}
+				
 			}
 		} catch (Exception e) {
 			try {
@@ -156,7 +241,7 @@ public class KPBuilder {
 	}
 	
 	synchronized public void build(){
-		build(false);
+		build(false, new ArrayList<String>());
 	}
 
 

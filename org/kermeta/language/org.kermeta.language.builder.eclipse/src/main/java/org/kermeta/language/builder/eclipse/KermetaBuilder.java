@@ -67,16 +67,19 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
 	@Override
 	public String generateIdentifier(IResource element) {
+		if (element == null) {
+			return "";
+		}
 		return element.getFullPath().toOSString();		
 	}
 
 	@Override
-	public synchronized void buildFromKP(final String kpIdentifier, final boolean andRun) {
+public synchronized void runFromKP(final String kpIdentifier, final ArrayList<String> params) {
 		
 		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
-					kpBuilders.get(kpIdentifier).build(andRun);
+					kpBuilders.get(kpIdentifier).build(true,params);
 				} catch (Exception e) {
 					try {
 						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
@@ -94,7 +97,22 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	@Override
 	public synchronized void buildFromKP(final String kpIdentifier) {
 		
-		buildFromKP(kpIdentifier,false);
+		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					kpBuilders.get(kpIdentifier).build();
+				} catch (Exception e) {
+					try {
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+					} catch (Exception u) {
+						e.printStackTrace();
+					}
+				}
+				return Status.OK_STATUS;
+	        }
+	    };
+	    job.setPriority(Job.LONG);
+	    job.schedule();	
 	}
 	
 	@Override
