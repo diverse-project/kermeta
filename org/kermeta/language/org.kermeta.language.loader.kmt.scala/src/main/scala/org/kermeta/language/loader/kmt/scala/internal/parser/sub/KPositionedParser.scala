@@ -55,7 +55,7 @@ trait KPositionedParser extends KAbstractParser {
                       }
                       
                     }
-                  case _ @ e=> println(e)
+                  case _ @ e=> println("PositionedToken which is not a KermetaModelElement : " +e)
                 }
               }
               Success(positionedResult,rest)
