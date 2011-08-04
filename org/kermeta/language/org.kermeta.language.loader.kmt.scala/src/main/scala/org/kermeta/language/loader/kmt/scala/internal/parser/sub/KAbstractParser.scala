@@ -69,12 +69,15 @@ trait KAbstractParser extends TokenParsers {
   def kunik[T](p : Parser[T]) : Parser[T] = Parser { in =>
     p(in) match {
       case Success(x,rest) if(unikP.get(p).isEmpty) => {
+          unikP.put(p,true)
         Success(x,rest)  
       }
       case Success(x,rest) if(!unikP.get(p).isEmpty) => {
-        Error("Cannot repeat expression ", rest)
+        Error("Cannot repeat expression ", in)
       }      
-      case _ @ ns => ns
+      case ns: NoSuccess => {
+          ns
+      }
     }
   }
   
