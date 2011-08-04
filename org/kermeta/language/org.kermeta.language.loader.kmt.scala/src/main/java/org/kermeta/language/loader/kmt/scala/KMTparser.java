@@ -43,11 +43,10 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
 	    	        content = sb.toString();
         		}
         		catch(IOException e){
-        	        System.err.println(e.getMessage());
+                    logger.error(e.getMessage(),KMTparser.LOG_MESSAGE_GROUP, e);
         		}
         	}
         	else{
-        		System.out.println("    url.getFile() ="+url.getFile());
         		content = ParserUtil.loadFile(url.getFile());
         	}
         }
