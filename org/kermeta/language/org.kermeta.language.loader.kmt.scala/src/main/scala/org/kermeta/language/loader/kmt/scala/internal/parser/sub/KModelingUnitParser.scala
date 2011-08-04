@@ -33,13 +33,20 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 
   def enumDecl : Parser[Enumeration]
 
-  def program = opt(kpositioned(packageDecl)) ~ kermetaUnit ^^ { case decl ~ unit =>
+  def program = opt((annotation)+) ~ opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ kermetaUnitContent ^^ { case rootTag ~ packPrefix ~ header ~ unitContent =>
       var newp =StructureFactory.eINSTANCE.createModelingUnit
       var usings : List[Using] = List()
 
       var lastPackageRoot : Option[Package] = None
 
-      decl match{
+      rootTag.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+              case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
+              case _ @ elem => println("TODO unknow elem in rootTag:" + elem)
+          } }
+          case _ @ d => println("TODO modeling unit roottag content: "+d)
+      } }
+      packPrefix match{
         case Some(d)=> {
 
            d.name.split("::").foreach{ topPackage =>
@@ -55,18 +62,23 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
         case None =>
       }
 
-
-      unit.foreach{elem => elem match {  	  
+      header.foreach{elem => elem match {
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
-                case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
-                case r : Require => newp.getRequires.add(r)
+              case r : Require => newp.getRequires.add(r)
+              case u : Using => usings = usings ++ List(u)
+              case _ @ elem => println("TODO unknow elem in header:" + elem)
+          } }
+          case _ @ d => println("TODO modeling unit header content: "+d)
+      } }
+      unitContent.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+                //case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
                 case p : Package => {
                   lastPackageRoot match {
                     case Some(previous)=> previous.getNestedPackage.add(p)
                     case None => newp.getPackages.add(p)
                   }
                 }
-                case u : Using => usings = usings ++ List(u) //newp.getUsings.add(u)
                 case cd : ClassDefinition => {
                    lastPackageRoot match {
                     case Some(previous)=> previous.getOwnedTypeDefinition.add(cd)
@@ -79,11 +91,10 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
                     case None => newp.getOwnedTypeDefinition.add(enum)
                   }
                 }
-                case _ @ elem => println("unknow elem:" + elem)
+                case _ @ elem => println("TODO unknow elem in main content:" + elem)
               }}
-          //case np : NameSpacePrefix => newp.setNamespacePrefix(np.name) //; var pos2 = np.pos.asInstanceOf[OffsetPosition] ; println(pos2.productArity+"-"+pos2.source.subSequence(0, pos2.offset.toInt))
-          case u : Using => usings = usings ++ List(u)
-          case _ @ d => println("TODO modeling unit catch some type sub elem="+d)
+
+          case _ @ d => println("TODO modeling unit main content: "+d)
         }}
       /* USING POST PROCESS */
       //Add Using clone to all UnresolvedType and UnresolvedCall
@@ -102,52 +113,13 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       newp
   }
 
-  /*
-  def positionedScompUnit = Parser { in =>
-    scompUnit(in) match {
-      case Success(x,rest) => {
-          var positionedResult = x
-          
-          in.first match {
-            case positionedToken : Positional => {
-                
-                x match {
-                  
-                  case l : List[_] => {
-                      l.foreach{ elem =>  elem match {                                         
-                          case me : KermetaModelElement => {
-                              //TODO IMPROVE
-                              var newtag= StructureFactory.eINSTANCE.createTag
-                              newtag.setName("source.line")
-                              newtag.setValue(positionedToken.pos.line.toString)
-                              me.getKOwnedTags.add(newtag)
-                      
-                              println(me)
-                            }
-                          case _ @ e=> println(e)
-                        }
-                      }
-                    }
-                  case _ @ e => println(e)
-                }  
-              }
-            case _ => println("warning unpositioned token !")
-          }
 
-          Success(positionedResult,rest)
-        }
-      case _ @ v => v
-    }
-  }*/
-  
-  
-  def kermetaUnit = (scompUnit+)
+  // prefix
+  def packageNamespaceDecl : Parser[NameSpacePrefix] =  "package" ~> packageName <~ ";" ^^ { case p =>  NameSpacePrefix(p)}
 
-  def scompUnit = kpositioned ( importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
-  /* DEPRECATED */
-  
-  def packageDecl : Parser[NameSpacePrefix] = positioned( "package" ~> packageName <~ ";" ^^ { case p =>  NameSpacePrefix(p)} )
-  private def importStmts = importStmt+
+
+  // header part of the ModelingUnit : using and optional require
+  def kermetaUnitHeader = ((kpositioned(importStmt) | kpositioned(usingStmt))+)
   private def importStmt = "require" ~ ( packageName | stringLit ) ^^ { case _ ~ e =>
       var newo =StructureFactory.eINSTANCE.createRequire
       newo.setUri(e.toString)
@@ -156,7 +128,9 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 
 
 
-
+  // main part of the ModelingUnit : package class and enumeration declaration including their annotations
+  def kermetaUnitContent = (topLevelDecl+)
+  // reassign annotation to the following annotable element
   private def topLevelDecl : Parser[List[Object]] = ((annotation | annotableElement)+) ^^ { case elems =>
       var listAnnotElem : List[Object] = List()
       var listTempTagToAdd : List[Tag] = List()
@@ -174,13 +148,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       listAnnotElem
   }
 
-  /*
-   def annotation : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
-   var newo =StructureFactory.eINSTANCE.createTag
-   newo.setName(id1.toString)
-   newo.setValue(st1.toString)
-   newo
-   }*/
+
   def annotableElement = kpositioned (subPackageDecl | classDecl | enumDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
   def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage

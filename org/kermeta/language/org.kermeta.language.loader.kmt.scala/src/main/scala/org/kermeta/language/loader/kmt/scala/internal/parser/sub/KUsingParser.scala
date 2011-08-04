@@ -11,7 +11,7 @@ import org.kermeta.language.structure.Using
 trait KUsingParser extends KAbstractParser {
 
     /* PROCESS USING  */
-  def usingStmts : Parser[Using] = "using" ~ usingStatment ^^ { case _ ~ stmts =>
+  def usingStmt : Parser[Using] = "using" ~ usingStatment ^^ { case _ ~ stmts =>
       //LocalUsing(id+"::"+q.prefixe,q.typeName)
       var newo =StructureFactory.eINSTANCE.createUsing
       newo.setFromQName(if(stmts._1 != "") { stmts._1 } else { stmts._2 }     )

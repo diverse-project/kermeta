@@ -1,0 +1,7 @@
+package PackageDeclaration1;
+
+package PackageDeclaration2;  // 2 namespace are invalid
+
+require kermeta
+
+package foo{}
