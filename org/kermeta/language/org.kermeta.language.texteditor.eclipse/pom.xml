@@ -39,6 +39,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.debug.core</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.debug.ui</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
 			<version>[3.5.1.0,)</version>
 		</dependency>
@@ -99,6 +109,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jdt.ui</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
@@ -142,6 +157,11 @@
 			<artifactId>org.osgi.core</artifactId>
 			<version>${osgi.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.texteditor.eclipse.nature</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -175,6 +195,8 @@
 							org.eclipse.text,
 							org.eclipse.ui.workbench,
 							org.eclipse.ui.workbench.texteditor,
+							org.eclipse.debug.core,
+							org.eclipse.debug.ui,
 							org.kermeta.language.model,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
@@ -185,7 +207,10 @@
 							org.kermeta.language.builder.eclipse,
 							org.kermeta.language.model,
 							org.kermeta.language.autocompletion.api,
-							org.kermeta.language.autocompletion
+							org.kermeta.language.autocompletion,
+							org.eclipse.swt,
+							org.eclipse.jdt.ui,
+							org.kermeta.language.texteditor.eclipse.nature
                         </Require-Bundle>
                         <Import-Packages>
                         	org.kermeta.language.structure,
