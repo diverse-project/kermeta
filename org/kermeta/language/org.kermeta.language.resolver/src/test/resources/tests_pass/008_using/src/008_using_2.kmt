@@ -1,12 +1,15 @@
+
 using p1
+using kermeta::standard
 package p3 {
 
 class B {
 
 	operation baz() : Void is do
-	var aA : A
+	var aA : p1::A
 	aA.foo()
-	 
+	var aABis : A
+	aABis.foo()
 	end
 
 

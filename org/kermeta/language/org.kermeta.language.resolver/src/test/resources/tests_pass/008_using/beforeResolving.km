@@ -1,91 +1,145 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="p1">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;0;66"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;24;90"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//p1/A/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;14;63"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;38;87"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
       <ownedOperation name="foo" type="//p1/A/foo/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;26;60"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;50;84"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;52;60"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;76;84"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
   </packages>
   <packages name="p2">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;66;132"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;90;155"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//p2/A/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;79;130"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;103;154"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
       <ownedOperation name="bar" type="//p2/A/bar/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;90;127"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;114;151"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;116;127"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_1.kmt;140;151"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
   </packages>
   <packages name="p3">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;9;102"/>
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;9;102"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;34;155"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;33;155"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//p3/B/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;23;100"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;48;154"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="p1" toName="p1"/>
+        <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="baz" type="//p3/B/baz/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;35;97"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;60;151"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="p1" toName="p1"/>
+          <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;61;97"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;86;151"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="aA">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;65;77"/>
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;90;106"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="p1::A">
               <usings fromQName="p1" toName="p1"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </containedType>
-            <type name="A" type="//p3/B/baz/@body/@statement.0/@containedType.0"/>
+            <type name="p1::A" type="//p3/B/baz/@body/@statement.0/@containedType.0"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;79;90"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;108;116"/>
             <usings fromQName="p1" toName="p1"/>
+            <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="aA">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;77;79"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;106;108"/>
               <usings fromQName="p1" toName="p1"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="aABis">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;116;131"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
+              <usings fromQName="p1" toName="p1"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <type name="A" type="//p3/B/baz/@body/@statement.2/@containedType.0"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;136;144"/>
+            <usings fromQName="p1" toName="p1"/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="aABis">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_2.kmt;131;136"/>
+              <usings fromQName="p1" toName="p1"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="C" superType="//p3/C/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;23;100"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;47;154"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="p2" toName="p2"/>
+        <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="baz" type="//p3/C/baz/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;35;97"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;59;151"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="p2" toName="p2"/>
+          <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;61;97"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;85;151"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="aA">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;65;77"/>
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;89;105"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="p2::A">
               <usings fromQName="p2" toName="p2"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </containedType>
-            <type name="A" type="//p3/C/baz/@body/@statement.0/@containedType.0"/>
+            <type name="p2::A" type="//p3/C/baz/@body/@statement.0/@containedType.0"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bar" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;79;90"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;107;116"/>
             <usings fromQName="p2" toName="p2"/>
+            <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="aA">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;77;79"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;105;107"/>
               <usings fromQName="p2" toName="p2"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="aABis">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;116;131"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
+              <usings fromQName="p2" toName="p2"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <type name="A" type="//p3/C/baz/@body/@statement.2/@containedType.0"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bar" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;136;144"/>
+            <usings fromQName="p2" toName="p2"/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="aABis">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/008_using_3.kmt;131;136"/>
+              <usings fromQName="p2" toName="p2"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
         </body>
