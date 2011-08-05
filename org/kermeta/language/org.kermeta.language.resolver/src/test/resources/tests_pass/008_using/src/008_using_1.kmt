@@ -1,0 +1,22 @@
+package p1{
+
+
+class A {
+
+	operation foo() : Void is do
+	end
+}
+
+}
+
+package p2{
+
+class A{
+
+	operation bar() : Void is do
+	
+	end
+
+}
+
+}

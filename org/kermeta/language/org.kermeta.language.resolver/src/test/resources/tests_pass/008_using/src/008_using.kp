@@ -1,0 +1,9 @@
+KermetaProject :"008_using" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/008_using_1.kmt"
+	source = "${project.baseUri}/008_using_2.kmt"
+	source = "${project.baseUri}/008_using_3.kmt"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+}  

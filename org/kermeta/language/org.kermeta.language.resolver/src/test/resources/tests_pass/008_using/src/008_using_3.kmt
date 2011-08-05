@@ -1,0 +1,16 @@
+using p2
+package p3 {
+
+class C {
+
+	operation baz() : Void is do
+	var aA : A
+	aA.bar()
+	 
+	end
+
+
+
+}
+
+}
