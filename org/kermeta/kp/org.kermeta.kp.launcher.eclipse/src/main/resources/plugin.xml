@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.ui.popupMenus">
+	     <objectContribution
+            adaptable="true"
+            id="KermetaPopupID"
+            nameFilter="*.kp"
+            objectClass="org.eclipse.core.resources.IFile">
+	        <menu
+	              icon="icons/kermeta.gif"
+	              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	              label="Kermeta"
+	              path="additions">
+	           <separator name="kermetagroup2"/>
+	        </menu>
+	       <action
+	             class="org.kermeta.kp.launcher.eclipse.internal.BuildKP"
+	             id="org.kermeta.kp.launcher.eclipse.internal.BuildKPID"
+	             icon="icons/kermeta.gif"
+	             label="Build Kermeta Project"
+	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	       </action>
+        <visibility>
+         <and>
+		   <objectState name="projectNature" value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID"/>
+           <objectClass name="org.eclipse.core.resources.IFile" />
+          </and>
+         </visibility>
+	     </objectContribution>
+	</extension>
+
+
+	<extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncher"
+            id="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncherID"
+            modes="run"
+            name="Kermeta Application"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+    <launchConfigurationTypeImage
+        icon="icons/kermeta.gif"
+        configTypeID="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncherID"
+        id="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncherImageID">
+    </launchConfigurationTypeImage>
+	</extension>
+	   <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+	    <launchConfigurationTabGroup
+	        type="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncherID"
+	        class="org.kermeta.kp.launcher.eclipse.internal.KermetaTabGroup"
+	        id="org.kermeta.kp.launcher.eclipse.internal.KermetaTabGroupID">
+	    </launchConfigurationTabGroup>
+	</extension>
+</plugin>
