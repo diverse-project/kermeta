@@ -39,16 +39,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.debug.core</artifactId>
-			<version>[3.5.2.0,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.debug.ui</artifactId>
-			<version>[3.5.2.0,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
 			<version>[3.5.1.0,)</version>
 		</dependency>
@@ -79,11 +69,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.swt</artifactId>
-			<version>[3.5.2.0,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
 			<version>[3.5.2.0,)</version>
 		</dependency>
@@ -105,11 +90,6 @@
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.text</artifactId>
-			<version>[3.5.0.0,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.jdt.ui</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
@@ -195,8 +175,6 @@
 							org.eclipse.text,
 							org.eclipse.ui.workbench,
 							org.eclipse.ui.workbench.texteditor,
-							org.eclipse.debug.core,
-							org.eclipse.debug.ui,
 							org.kermeta.language.model,
 							org.kermeta.language.loader.kmt.scala,
 							org.kermeta.language.loader.kmt.scala.api,
@@ -208,8 +186,6 @@
 							org.kermeta.language.model,
 							org.kermeta.language.autocompletion.api,
 							org.kermeta.language.autocompletion,
-							org.eclipse.swt,
-							org.eclipse.jdt.ui,
 							org.kermeta.language.texteditor.eclipse.nature
                         </Require-Bundle>
                         <Import-Packages>
