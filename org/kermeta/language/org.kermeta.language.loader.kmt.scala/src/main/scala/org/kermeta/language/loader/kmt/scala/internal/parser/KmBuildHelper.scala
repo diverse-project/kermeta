@@ -66,6 +66,8 @@ object KmBuildHelper {
             }
           }
         }
+      case otherType => {
+      }
     }
    
     // return the UnresolvedType
