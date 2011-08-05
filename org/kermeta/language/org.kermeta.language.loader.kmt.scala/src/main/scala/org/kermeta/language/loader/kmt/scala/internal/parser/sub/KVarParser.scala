@@ -10,25 +10,24 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
-import scala.collection.JavaConversions._
+import org.kermeta.language.loader.kmt.scala.internal.printer.PrettyPrinter
 
 /**
  * Sub parser dedicated to parse VariableDecl in KMT textual syntax  
  */
-trait KVarParser extends KAbstractParser with KGenericTypeParser {
+trait KVarParser extends KAbstractParser with KMultiplicityParser {
 
-  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ genericQualifiedTypeObject ~ (( ("init"|":="/*|"?="*/) ~ fStatement)?) ^^ { case id1 ~ _ ~ unresType ~ initStat  =>
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ multiplicityType ~ (( ("init"|":="/*|"?="*/) ~ fStatement)?) ^^ { case id1 ~ _ ~ mType ~ initStat  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       //TYPE GESTURE
       var newtyperef = BehaviorFactory.eINSTANCE.createTypeReference
-      newo.getContainedType.add(unresType)
-      newtyperef.setName(unresType.getTypeIdentifier())
-      newtyperef.setType(unresType)
+      mType.copyToKElem(newtyperef)
+      var res = new StringBuffer
+      PrettyPrinter.print(newtyperef, res)
+      newtyperef.setName(res.toString)
+
 
       newo.setType(newtyperef)
       initStat match {

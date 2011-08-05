@@ -1,6 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* $Id:  $
+ * Project : org.kermeta.language.loader.scalaKMT
+ * License : EPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 2010
+ * Authors :
+ * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
@@ -14,8 +19,6 @@ trait KGenericTypeParser extends KAbstractParser with KLambdaParser {
   /* PUBLIC METHOD */
   def genericQualifiedType : Parser[Type] = lambdaType | genericQualifiedTypeObject
 
-
-  
 
   def genericQualifiedTypeObject : Parser[UnresolvedType] = packageName ~ opt(genericParams) ^^{case qname ~ optParams =>
       var newType =StructureFactory.eINSTANCE.createUnresolvedType

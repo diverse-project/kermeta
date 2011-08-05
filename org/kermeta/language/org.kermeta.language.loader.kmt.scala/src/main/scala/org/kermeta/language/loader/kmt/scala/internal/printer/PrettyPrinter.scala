@@ -293,6 +293,7 @@ object PrettyPrinter {
       }
      
       case c: ProductType =>{
+        res.append("[")
         var i = 0
         c.getType.foreach(p => {
           if (i != 0)
@@ -300,6 +301,7 @@ object PrettyPrinter {
           print(p, res)
           i = i + 1
         })
+        res.append("]")
       }
 
      case c: Assignment =>{

@@ -22,7 +22,7 @@ import scala.collection.JavaConversions._
 object KmBuildHelper {
 
   /**
-   * retreive existing or create an UnresolvedType
+   * retrieve existing or create an UnresolvedType
    */
   def getOrCreateUnresolvedType(typeContainer : TypeContainer, typeIdentifier : String) : UnresolvedType = {
 
@@ -47,7 +47,7 @@ object KmBuildHelper {
   }
 
   /* *
-   * retreive existing equivalent UnresolveType in the TypeContainer or return the one that is passed as parameter
+   * retrieve existing equivalent UnresolveType in the TypeContainer or return the one that is passed as parameter
    * if a normal (not unresolved) is passed, simply return it
    */
   def selectType(typeContainer : TypeContainer, searchedType : org.kermeta.language.structure.Type) : org.kermeta.language.structure.Type = {
