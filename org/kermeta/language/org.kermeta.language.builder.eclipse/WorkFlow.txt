@@ -1,0 +1,21 @@
+***********Pendant la frappe (modification/save kmt) :
+1 --- language.texteditor.eclipse.internal.ScannerBasedDamagerRepairer.getDamageRegion
+1.1 --- language.builder.eclipse.KermetaBuilder.parseSpecificFile
+1.1.1 --- language.builder.eclipse.internal.KermetaParser.execute
+1.1.1.1 --- kp.compiler.commandline.KermetaCompiler.parse
+1.1.1.2 --- language.builder.eclipse.KermetaBuilder.compileFromKP
+1.1.1.2.1 --- language.builder.eclipse.internal.KPBuilder.compile
+1.1.1.2.1.1 --- kp.compiler.commandline.KermetaCompiler.kp2bytecode (kp2bytecode returns a ModelingUnit which is memorized in kp_last_modelingunit of KPBuilder class)
+***********Pendant la frappe (save kp) :
+1 --- language.builder.eclipse.internal.WorkspaceResourceChangeListener.KPFileDeltaVisitor.visit
+1.1 --- language.builder.eclipse.internal.KPBuilder.compile
+1.1.1 --- kp.compiler.commandline.KermetaCompiler.kp2bytecode (kp2bytecode returns a ModelingUnit which is memorized in kp_last_modelingunit of KPBuilder class)
+***********Lors du build
+1 --- language.builder.eclipse.KermetaBuilder.buildFromKP
+1.1 --- language.builder.eclipse.internal.KPBuilder.build
+1.1.1 --- kp.compiler.commandline.KermetaCompiler.kp2bytecode
+***********Gestion des fichiers en cours de modification
+==> Ces fichiers ne sont pris en compte que lors de la compilation.
+==> Lors du build, seuls les fichiers disque sont pris en compte.
+==> La liste des fichiers en cours de modification sont dans l'Activator du TextEditor (dirtyFilesContainment).
+==> La liste des fichiers en cours de modification sont mis à jours par firePropertyChange du KermetaEditor.
