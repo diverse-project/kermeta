@@ -112,7 +112,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
               var newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
               newo.setTarget(stat)
               op match {
-                case "!" => newo.setName("not")
+                case "not" => newo.setName("not")
                 case "-" => newo.setName("uminus")
               }
               newo
@@ -122,6 +122,6 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
       }
   }
   
-  def fUnaryOp = "!" | "-"
+  def fUnaryOp = "not" | "-"
 
 }
