@@ -2,7 +2,7 @@ package testOpCall;
 
 
 class TestFrom {
-     operation myOperation() : kermeta::standard::Integer from is TestFrom do
+     operation myOperation() : kermeta::standard::Integer is do
         result := 1
     end
 }
