@@ -2,13 +2,13 @@ package testOpCall;
 
 
 class TestFrom {
-     operation operation() : kermeta::standard::Integer from is TestFrom do
+     operation myOperation() : kermeta::standard::Integer from is TestFrom do
         result := 1
     end
 }
 class Test_opcall {
 
-    operation operation() : kermeta::standard::Integer from TestFrom is  do    // is illegal because the keyword "operation" means that there is no super possible
+    operation myOperation() : kermeta::standard::Integer from TestFrom is  do    // is illegal because the keyword "operation" means that there is no super possible
         result := 2
     end
 
