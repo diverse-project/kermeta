@@ -2,9 +2,19 @@ package test;
 
 class TestOnParam {
 
-operation seqParam (requiredClasses : bag RequiredClass[0..*],requiredProperties : seq RequiredProperty[0..*] ) : Void is do
+    operation multiplicityParam (requiredClasses : bag RequiredClass[0..*], requiredProperties : seq RequiredProperty[0..*] ) : Void is do
 
-	stdio.writeln("seq param")
-end
+        stdio.writeln("seq param")
+    end
+
+    operation multiplicityParam2 (requiredClasses : set RequiredClass[0..*], requiredProperties : oset RequiredProperty[0..*] ) : Void is do
+
+        stdio.writeln("seq param")
+    end
+
+    operation multiplicityParam3 (requiredClasses : RequiredClass[0..*], requiredProperties : RequiredProperty[1..1] ) : Void is do
+
+        stdio.writeln("seq param")
+    end
 
 }

@@ -1,0 +1,30 @@
+package test;
+class RequiredProperty {}
+class TestOnParam {
+
+    operation seqParam ( ) : bag RequiredClass[0..*] is do
+
+        result := void
+    end
+
+    operation seqParam ( ) : seq RequiredProperty[0..*] is do
+
+        result := void
+    end
+
+    operation seqParam ( ) : oset RequiredProperty[0..*] is do
+
+        result := void
+    end
+
+    operation seqParam ( ) : set RequiredProperty[0..*] is do
+
+        result := void
+    end
+
+    operation seqParam ( ) : RequiredProperty[0..*] is do
+
+        result := void
+    end
+
+}

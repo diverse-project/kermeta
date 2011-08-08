@@ -15,15 +15,15 @@ import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
 import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 
-trait KOperationParser extends KAbstractParser with KGenericTypeParser {
+trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   /* SUB PARSER CONTRACT */
   def annotation : Parser[Tag]
 
   /* END SUB PARSER CONTRACT */
 
 
-  def operationParameters = repsep(operationParameter ~ opt(attributeBounds) ,",")
-  def operationReturnType = opt(":" ~> genericQualifiedType ~ opt(attributeBounds))
+  def operationParameters = repsep(operationParameter ,",")
+  def operationReturnType = opt(":" ~> multiplicityType)
   def methodFromType = opt("from" ~> genericQualifiedType )
 
   def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>
@@ -71,7 +71,7 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
        case None => // DO NOTHING
        }*/
       params.foreach{par=>
-        newo.getOwnedParameter.add(par._1)
+        newo.getOwnedParameter.add(par)
       }
 
       unresolveType match {
@@ -82,9 +82,14 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
             //newo.getContainedType.add(newT)
           }
         case Some(urt)=> {
-            var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt._1)
-            newo.setType(selectedUnresolvedType)
-            newo.getContainedType.add(selectedUnresolvedType)
+            // copy Type and multiplicity information in this Operation
+            urt.copyToKElem(newo)
+
+
+
+            //var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt._1)
+            //newo.setType(selectedUnresolvedType)
+            //newo.getContainedType.add(selectedUnresolvedType)
           }
       }
       newo
@@ -92,11 +97,10 @@ trait KOperationParser extends KAbstractParser with KGenericTypeParser {
 
   private def operationGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
 
-  def operationParameter : Parser[Parameter] = ident ~ ":" ~ genericQualifiedType ^^ { case id ~ _ ~ unresolveType =>
+  def operationParameter : Parser[Parameter] = ident ~ ":" ~ multiplicityType ^^ { case id ~ _ ~ unresolveType =>
       var newo = StructureFactory.eINSTANCE.createParameter
       newo.setName(id)
-      newo.setType(unresolveType)
-      newo.getContainedType.add(unresolveType)
+      unresolveType.copyToKElem(newo)
       newo
   }
   /*

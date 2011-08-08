@@ -70,14 +70,7 @@ object PrettyPrinter {
         else
           res.append("\t\treference ")
         res.append(p.getName + " : ")
-        print(p.getType, res)
-        if ((p.getUpper != 1) || p.getLower != 0){
-          res.append("[")
-          res.append(p.getLower)
-          res.append("..")
-          res.append((""+p.getUpper).replace("-1","*"))
-          res.append("]")
-        }
+        printMultiplicityElementTypeType(p,res)
           
         //TODO opposite
         //TODO getter setter for derived
@@ -93,7 +86,7 @@ object PrettyPrinter {
           i = i + 1
         })
         res.append(") : ")
-        print(op.getType, res)
+        printMultiplicityElementTypeType(op,res)
         //TODO lower upper superoperation
         res.append(" is ")
         if (op.getIsAbstract!= null && op.getIsAbstract)
@@ -107,14 +100,7 @@ object PrettyPrinter {
       
       case p : Parameter =>{
         res.append(p.getName + " : " )
-        print(p.getType,res)
-          if ((p.getUpper != 1) || p.getLower != 0){
-          res.append("[")
-          res.append(p.getLower)
-          res.append("..")
-          res.append((""+p.getUpper).replace("-1","*"))
-          res.append("]")
-        }
+        printMultiplicityElementTypeType(p,res)
       }
       case p :UnresolvedType=>{
         res.append(p.getTypeIdentifier)
@@ -153,7 +139,7 @@ object PrettyPrinter {
       }
       case v: VariableDecl => {
         res.append("var " + v.getIdentifier + " : ")
-        print(v.getType, res)
+        printMultiplicityElementTypeType(v.getType,res)
         if (v.getInitialization != null) {
           res.append(" init ")
           print(v.getInitialization, res)
@@ -413,6 +399,28 @@ object PrettyPrinter {
     return ;
   }
 
+  /**
+   * operation dedicated to print the type part of a MultiplicityElement
+   */
+  def printMultiplicityElementTypeType(me: MultiplicityElement, res: java.lang.StringBuffer): Unit = {
+    val modifier =  CollectionModifier(me.getIsOrdered, me.getIsUnique)
+    if (me.getUpper != 1) { modifier match {
+        case  CollectionModifier(false, false) => res.append("bag ")
+        case  CollectionModifier(false, true)  => res.append("seq ")
+        case  CollectionModifier(true, false)  => res.append("set ")
+        case  CollectionModifier(true, true)   =>
+      }
+    }
+    print(me.getType, res)
+    if ((me.getUpper != 1) || me.getLower != 0){
+      res.append("[")
+      res.append(me.getLower)
+      res.append("..")
+      res.append((""+me.getUpper).replace("-1","*"))
+      res.append("]")
+    }
+  }
+  case class CollectionModifier(isOrdered : Boolean, isUnique : Boolean)
 }
  
 
