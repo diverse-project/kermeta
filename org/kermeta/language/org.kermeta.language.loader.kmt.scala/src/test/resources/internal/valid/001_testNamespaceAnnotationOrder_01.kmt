@@ -6,9 +6,9 @@
  *            barais
  */
 
-package test;
 @mainClass "test::Main"
 @mainOperation "main"
+package test;
 
 
 
