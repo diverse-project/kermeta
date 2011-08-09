@@ -1,4 +1,4 @@
-package testOpCall;
+package testVoid;
 
 using kermeta::standard
 
@@ -10,8 +10,4 @@ class Test_Void {
         var b : Type
         b := Void       // this is an UnresolvedType "Void"
     end
-
-
-
-
 }

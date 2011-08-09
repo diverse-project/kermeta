@@ -33,7 +33,7 @@ trait KLiteralParser extends KAbstractParser {
 
   private def fSelfLiteral : Parser[Expression] = ( "self" ) ^^^ { BehaviorFactory.eINSTANCE.createSelfExpression() }
   //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
-  private def fVoidLiteral : Parser[Expression] = ( "Void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
+  private def fVoidLiteral : Parser[Expression] = ( "void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
   private def fresultLiteral : Parser[Expression] = ( "result" ) ^^^ { BehaviorFactory.eINSTANCE.createCallResult }
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
