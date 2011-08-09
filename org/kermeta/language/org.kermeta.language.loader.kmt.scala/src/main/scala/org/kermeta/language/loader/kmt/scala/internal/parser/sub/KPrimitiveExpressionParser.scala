@@ -113,6 +113,7 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
               newo.setTarget(stat)
               op match {
                 case "not" => newo.setName("not")
+                case "!" => newo.setName("not")
                 case "-" => newo.setName("uminus")
               }
               newo
@@ -122,6 +123,6 @@ trait KPrimitiveExpressionParser extends KAbstractParser with KStructuralParser 
       }
   }
   
-  def fUnaryOp = "not" | "-"
+  def fUnaryOp = "not" | "!" | "-"
 
 }
