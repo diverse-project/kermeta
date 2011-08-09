@@ -1,0 +1,17 @@
+package testOpCall;
+
+using kermeta::standard
+
+class Test_Void {
+
+    operation operation1() : Void is do  // this must be un UnresolvedType  "Void"
+        var a : Object
+        a := void      // this is a   VoidLiteral
+        var b : Type
+        b := Void       // this is an UnresolvedType "Void"
+    end
+
+
+
+
+}
