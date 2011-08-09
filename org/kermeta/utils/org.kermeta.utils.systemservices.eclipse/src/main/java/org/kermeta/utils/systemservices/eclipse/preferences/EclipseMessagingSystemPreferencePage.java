@@ -76,8 +76,9 @@ public class EclipseMessagingSystemPreferencePage
 	
 	@Override
 	public boolean performOk() {
+		boolean result = super.performOk();
 		doIt();
-		return super.performOk();
+		return result;
 	}
 
 	protected void doIt(){

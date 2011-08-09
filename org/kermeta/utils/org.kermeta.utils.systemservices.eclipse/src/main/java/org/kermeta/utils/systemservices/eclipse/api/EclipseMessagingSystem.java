@@ -22,6 +22,8 @@ import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseConsoleOutputStream;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
+import org.kermeta.utils.systemservices.eclipse.internal.console.ConsoleIO;
+import org.kermeta.utils.systemservices.eclipse.internal.console.EclipseConsoleIOFactory;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugErrorMessage;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugMessage;
@@ -41,6 +43,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 	EclipseReporter eclipseReporter;
 	
+	protected ConsoleIO consoleIO; 
 	
 	
 	public EclipseMessagingSystem(String baseMessageGroup, String consoleTitle) {
@@ -48,6 +51,13 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		this.baseMessageGroup = baseMessageGroup;
 		this.consoleTitle = consoleTitle;
 		this.eclipseReporter = new EclipseReporter(this);
+		// get Eclipse console for this group
+		if(baseMessageGroup == null || baseMessageGroup.isEmpty()){
+			consoleIO = Activator.getDefault().getConsoleIO(); // use default kermeta console
+		}
+		else{
+			consoleIO = EclipseConsoleIOFactory.getInstance().getConsoleIO(baseMessageGroup, consoleTitle);
+		}
 	}
 
 	@Override
@@ -83,7 +93,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			break;
 		}
 		
-		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message));
+		consoleIO.print(getConsoleMessageFor(msgKind,message));
 		// currently redirect to stdio
 		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		//stdioRedirect.log(msgKind, message, messageGroup);
@@ -110,7 +120,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		StringWriter sw = new StringWriter();
 		throwable.printStackTrace(new PrintWriter(sw));
 		String stackTrace = sw.toString();
-		Activator.getDefault().getConsoleIO().print(getConsoleMessageFor(msgKind,message+"\n"+stackTrace));
+		consoleIO.print(getConsoleMessageFor(msgKind,message+"\n"+stackTrace));
 		// currently redirect to stdio
 		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		//stdioRedirect.log(msgKind, message, messageGroup, exception);
