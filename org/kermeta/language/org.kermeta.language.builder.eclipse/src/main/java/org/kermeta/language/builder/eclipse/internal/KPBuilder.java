@@ -116,7 +116,10 @@ public class KPBuilder {
 			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (Exception e) {
 			try {
-				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Compilation failed : "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Compilation failed : "+(e.getMessage()!= null ? e.getMessage() : e.toString()), 
+						KermetaBuilder.LOG_MESSAGE_GROUP, 
+						e, 
+						new FileReference(FileHelpers.StringToURL(kpFileURL)));
 			} catch (Exception f) {
 				e.printStackTrace();
 			}
@@ -233,7 +236,10 @@ public class KPBuilder {
 			}
 		} catch (Exception e) {
 			try {
-				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Build failed : "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Build failed : "+(e.getMessage()!= null ? e.getMessage() : e.toString()), 
+						KermetaBuilder.LOG_MESSAGE_GROUP, 
+						e,
+						new FileReference(FileHelpers.StringToURL(kpFileURL)));
 			} catch (Exception f) {
 				e.printStackTrace();
 			}
