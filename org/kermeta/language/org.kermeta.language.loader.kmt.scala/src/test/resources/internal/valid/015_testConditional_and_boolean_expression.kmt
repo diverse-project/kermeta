@@ -21,6 +21,11 @@ class Class1 {
 		
 		if not b then true
 		end
+
+		if not a and b then true
+		end
+		if not (a and b) then true
+		end
 		
 		if a and b then true
 		end
