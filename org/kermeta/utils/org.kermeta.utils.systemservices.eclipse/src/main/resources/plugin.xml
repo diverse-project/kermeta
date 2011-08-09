@@ -18,5 +18,19 @@
             name="kermeta2_marker">
       </attribute>
    </extension>
-
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="org.kermeta.utils.systemservices.eclipse.preferences.EclipseMessagingSystemPreferencePage"
+            id="org.kermeta.utils.systemservices.eclipse.preferences.EclipseMessagingSystemPreferencePage"
+            name="Kermeta messaging system">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.utils.systemservices.eclipse.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>

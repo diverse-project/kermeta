@@ -48,7 +48,6 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		this.baseMessageGroup = baseMessageGroup;
 		this.consoleTitle = consoleTitle;
 		this.eclipseReporter = new EclipseReporter(this);
-		captureSystemOutAndErr();
 	}
 
 	@Override
@@ -202,36 +201,5 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		}
 	}
 	
-	protected PrintStream OriginalSystemOut = System.out;
-	protected PrintStream OriginalSystemErr = System.err;
-	/** 
-	 * set the current System.out and System.err so they are redirected to our console
-	 */
-	public void captureSystemOutAndErr() {
-		OriginalSystemOut = System.out;
-		OriginalSystemErr = System.err;
-		PrintStream outPrintStream = new PrintStream(new EclipseConsoleOutputStream(Activator.getDefault().getConsoleIO(), false));
-		System.setOut(outPrintStream);
-		PrintStream errPrintStream = new PrintStream(new EclipseConsoleOutputStream(Activator.getDefault().getConsoleIO(), true));
-		System.setErr(errPrintStream);
-	}
-
-	/** 
-	 * set back the System.out and System.err to their original values
-	 */
-	public void releaseSystemOutAndErr() {
-		System.out.flush();
-		System.err.flush();
-		System.setOut(OriginalSystemOut);
-		System.setErr(OriginalSystemErr);
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		// make sure to release System out and err
-		releaseSystemOutAndErr();
-		super.finalize();
-	}
-
 	
 }
