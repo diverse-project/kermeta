@@ -38,8 +38,8 @@ public class EclipseConsoleIOFactory  {
     		// create the eclipse console
     		IOConsole ioConsole = new IOConsole(name, null);
 	    	ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ ioConsole });
-			ConsolePlugin.getDefault().getConsoleManager().showConsoleView(ioConsole);
-			ioConsole.activate();
+			// ConsolePlugin.getDefault().getConsoleManager().showConsoleView(ioConsole);
+			// ioConsole.activate(); // console will be displayed on first use
     		// create the IO with this console
 			consoleIo = new EclipseConsoleIO(ioConsole);
 	    	consoleIOMap.put(uid, consoleIo);

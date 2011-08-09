@@ -31,6 +31,7 @@ import org.kermeta.utils.systemservices.eclipse.internal.console.message.Warning
 
 public class EclipseConsoleIO extends ConsoleIO {
 
+	public boolean notAlreadyUsed = true;
 	
 	/** 	max width of the lines in the console, if overflow, start a new line */
 	public static final int CONSOLE_MAX_WIDTH = 5000;
@@ -96,6 +97,12 @@ public class EclipseConsoleIO extends ConsoleIO {
 	 * deal with large string : they are printed using a separated thread instead of the UI thread
 	 */
 	public void print(final ConsoleMessage message) {
+		if(notAlreadyUsed){
+			// display the console for the first time to the user 
+			ConsolePlugin.getDefault().getConsoleManager().showConsoleView(console);
+			console.activate();
+			notAlreadyUsed = false;
+		}
 		// support for reasonnable sized string
 		Runnable r = new Runnable() {
 			public void run() {
