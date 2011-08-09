@@ -8,6 +8,8 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -18,6 +20,7 @@ import org.eclipse.core.runtime.Status;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
+import org.kermeta.utils.systemservices.eclipse.internal.EclipseConsoleOutputStream;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.DebugErrorMessage;
@@ -45,6 +48,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		this.baseMessageGroup = baseMessageGroup;
 		this.consoleTitle = consoleTitle;
 		this.eclipseReporter = new EclipseReporter(this);
+		captureSystemOutAndErr();
 	}
 
 	@Override
@@ -197,5 +201,37 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			return new DebugMessage(message+"\n");
 		}
 	}
+	
+	protected PrintStream OriginalSystemOut = System.out;
+	protected PrintStream OriginalSystemErr = System.err;
+	/** 
+	 * set the current System.out and System.err so they are redirected to our console
+	 */
+	public void captureSystemOutAndErr() {
+		OriginalSystemOut = System.out;
+		OriginalSystemErr = System.err;
+		PrintStream outPrintStream = new PrintStream(new EclipseConsoleOutputStream(Activator.getDefault().getConsoleIO(), false));
+		System.setOut(outPrintStream);
+		PrintStream errPrintStream = new PrintStream(new EclipseConsoleOutputStream(Activator.getDefault().getConsoleIO(), true));
+		System.setErr(errPrintStream);
+	}
 
+	/** 
+	 * set back the System.out and System.err to their original values
+	 */
+	public void releaseSystemOutAndErr() {
+		System.out.flush();
+		System.err.flush();
+		System.setOut(OriginalSystemOut);
+		System.setErr(OriginalSystemErr);
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// make sure to release System out and err
+		releaseSystemOutAndErr();
+		super.finalize();
+	}
+
+	
 }
