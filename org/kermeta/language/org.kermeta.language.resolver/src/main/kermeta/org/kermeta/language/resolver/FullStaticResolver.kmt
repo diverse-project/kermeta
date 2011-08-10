@@ -51,7 +51,7 @@ class FullStaticResolver
        	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
        	
-       	stdio.writeln("	********************* " + folder+"results/....km" + " saved ************************")
+       	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"StaticSetted.km" + " saved ************************")
 	end
 	
 	operation getErrors() : OrderedSet<ResolverException> is do

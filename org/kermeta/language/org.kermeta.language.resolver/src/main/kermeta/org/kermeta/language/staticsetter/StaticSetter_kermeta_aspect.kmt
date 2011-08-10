@@ -195,6 +195,7 @@ package behavior {
 		//a callProperty
 		//a callOperation
 		//a TypeLiteral
+		//an EnumLiteral
 	
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of UnresolvedCall") end
@@ -233,6 +234,23 @@ package behavior {
 				result.asType(CallVariable).parameters.addAll(self.parameters)
 			end
 			
+			// if not already found, look for an Enumeration
+			if result.isVoid and not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
+				var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
+				// maybe the typeLiteral is an enumeration and we are looking for the EnumerationLiteral
+				if callTypeLiteral.typeref.type.isInstanceOf(Enumeration) then
+					if (context.verbose) then stdio.writeln("target is an Enumeration") end
+					var enumLiteral : EnumerationLiteral init callTypeLiteral.typeref.type.getCallableEnumLiteralByName(self.name)
+					if not enumLiteral.isVoid then
+						if (context.verbose) then stdio.writeln(" found EnumerationLiteral "+enumLiteral.name) end
+						var callEnumLiteral :  CallEnumLiteral init  CallEnumLiteral.new
+						callEnumLiteral.staticEnumLiteral := enumLiteral
+						callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags)
+						// callEnumLiteral.target := self.target
+						result := callEnumLiteral
+					end
+				end
+			end
 			// if not already found, look for an Operation
 			if result.isVoid then
 				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
@@ -246,6 +264,7 @@ package behavior {
 						// if this is a singleteton, try to look in the typereference
 						var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
 						op := callTypeLiteral.typeref.type.getCallableOperationByName(self.name)
+						
 					end
 					//Here we must look into Object which is the implicit superclass of everything
 					if (op.isVoid) then
@@ -372,6 +391,12 @@ package behavior {
 						// TODO deal with generics
 										
 						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+					end
+					if typeDef.isInstanceOf(Enumeration) then
+						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found an Enumeration " + typeDef.name) end
+						callTypeLiteral.typeref.type := typeDef.asType(Enumeration)										
+										
+						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Enumeration"))
 					end
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
 					result := callTypeLiteral
