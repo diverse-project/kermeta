@@ -48,7 +48,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "Kermeta editor console");
+		messaggingSystem = new EclipseMessagingSystem("", "Kermeta editor console");
 	}
 
 	/*
