@@ -1,13 +1,13 @@
 package org{
-package kermeta{
-package language{
-package structure{
-@CompilerIgnore "true"
-aspect class Class {
-	operation new() : org::kermeta::language::structure::Class is do
-	end
-}
-}
-}
-}
+	package kermeta{
+		package language{ 
+			package structure{
+				@CompilerIgnore "true"
+				aspect class Class {
+					operation new() : org::kermeta::language::structure::Class is do
+					end
+				}
+			}
+		}
+	}
 }
