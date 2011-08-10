@@ -57,9 +57,9 @@ class Test {
 	end
 	
 	operation testReflect() is do
-		var p : kermeta::language::structure::Package   
-		var e : kermeta::language::structure::Enumeration
-		var jaune : kermeta::language::structure::EnumerationLiteral
+		var p : org::kermeta::language::structure::Package   
+		var e : org::kermeta::language::structure::Enumeration
+		var jaune : org::kermeta::language::structure::EnumerationLiteral
 		
 		p ?= self.getMetaClass.typeDefinition.container
 		e ?= p.ownedTypeDefinition.select{ t | t.name == "Couleur" }.one
