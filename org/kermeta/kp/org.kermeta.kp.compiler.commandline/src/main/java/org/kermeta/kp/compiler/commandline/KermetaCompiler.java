@@ -298,14 +298,16 @@ public class KermetaCompiler {
 				km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
 				logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
 				// deal with scala to bytecode
-				scala2bytecode(additionalClassPath);
+				int result =scala2bytecode(additionalClassPath);
+				if(result != 0){
+					logger.logProblem(MessagingSystem.Kind.UserERROR, "Error detected during bytecode generation. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));					
+				}
 			} else {
 				logger.info("generateKmOnly flag set => Ignore scala generation", LOG_MESSAGE_GROUP);
 			}
-			logger.doneProgress("KermetaCompiler.kp2bytecode", kpFileURL + " has been compiled", LOG_MESSAGE_GROUP);
 			return resolvedUnit;
 		} finally {
-
+			logger.doneProgress(LOG_MESSAGE_GROUP, "End of compilation for " +kpFileURL , LOG_MESSAGE_GROUP);
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			lock.unlock();
