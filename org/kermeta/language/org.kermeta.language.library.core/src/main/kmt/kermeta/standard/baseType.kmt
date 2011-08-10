@@ -687,7 +687,7 @@ class Boolean {        @CompilerIgnore "true"
 
           end
            @CompilerIgnore "true"
-         operation not() : Boolean is do
+         operation ~not() : Boolean is do
 
           end
            @CompilerIgnore "true"
