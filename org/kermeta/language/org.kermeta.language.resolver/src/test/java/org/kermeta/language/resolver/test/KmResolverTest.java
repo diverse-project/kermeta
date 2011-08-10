@@ -67,9 +67,9 @@ public class KmResolverTest extends TestCase {
 		beforeResolving= (ModelingUnit) resource.getContents().get(0);
                 
 		ErrorProneResult<ModelingUnit> epr=	resolver.resolve(beforeResolving);
-		
-		
-		assertTrue("Failed to resolve !", epr.hasSevereProblems() ^ shouldPass);//for noobs :p : ^ is XOR 
+		String firstError = (epr.getProblems().size()!=0 ? epr.getProblems().get(0).getMessage() : "");
+		assertTrue("Failed to resolve ! "+firstError, 
+				epr.hasSevereProblems() ^ shouldPass);//for noobs :p : ^ is XOR 
     }
     
     @Override
@@ -84,7 +84,8 @@ public class KmResolverTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        //
+		// workaround cache problem in compiler, avoid Java heap space
+		kermeta.standard.JavaConversions.cleanCache();
     }
 }
 
