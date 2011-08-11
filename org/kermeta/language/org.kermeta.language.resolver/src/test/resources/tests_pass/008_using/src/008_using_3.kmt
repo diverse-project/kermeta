@@ -6,8 +6,10 @@ class C {
 
 	operation baz() : Void is do
 	var aA : p2::A
+	aA := p2::A.new
 	aA.bar()
 	 var aABis : A
+	 aABis := A.new
 	aABis.bar()
 	end
 

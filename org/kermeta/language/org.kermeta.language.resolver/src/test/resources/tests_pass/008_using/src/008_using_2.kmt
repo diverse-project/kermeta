@@ -7,8 +7,10 @@ class B {
 
 	operation baz() : Void is do
 	var aA : p1::A
+	aA := p1::A.new
 	aA.foo()
 	var aABis : A
+	aABis := A.new
 	aABis.foo()
 	end
 
