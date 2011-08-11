@@ -7257,7 +7257,7 @@
     </nestedPackage>
   </packages>
   <packages name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
-    <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;0;225"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;0;251"/>
     <kOwnedTags name="ecore" value="true">
       <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org"/>
     </kOwnedTags>
@@ -7266,7 +7266,7 @@
       <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/DummyClass"/>
     </ownedTypeDefinition>
     <nestedPackage name="kermeta" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta">
-      <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;14;223"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;14;249"/>
       <kOwnedTags name="ecore" value="true">
         <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta"/>
       </kOwnedTags>
@@ -7275,7 +7275,7 @@
         <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/DummyClass"/>
       </ownedTypeDefinition>
       <nestedPackage name="language" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language">
-        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;33;221"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;33;247"/>
         <kOwnedTags name="ecore" value="true">
           <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta/language"/>
         </kOwnedTags>
@@ -7284,7 +7284,7 @@
           <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/DummyClass"/>
         </ownedTypeDefinition>
         <nestedPackage name="structure" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;55;218"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;55;244"/>
           <kOwnedTags name="ecore" value="true">
             <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta/language/structure"/>
           </kOwnedTags>
@@ -7292,7 +7292,7 @@
             <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta/language/structure"/>
           </kOwnedTags>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/Class/@kOwnedTags.1" name="Class" superType="//org/kermeta/language/structure/Class/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;105;214"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;105;240"/>
             <kOwnedTags name="CompilerIgnore" value="true" object="//org/kermeta/language/structure/Class"/>
             <kOwnedTags name="ecore" value="true">
               <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta/language/structure/Class"/>
@@ -7300,7 +7300,7 @@
             <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel">
               <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.language.library.core.km_in_memory#//org/kermeta/language/structure/Class"/>
             </kOwnedTags>
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/ParameterizedType"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/ParameterizedType"/>
             <ownedAttribute kTag="//org/kermeta/language/structure/Class/ownedAttribute/@kOwnedTags.0 //org/kermeta/language/structure/Class/ownedAttribute/@kOwnedTags.1" name="ownedAttribute" type="//org/kermeta/language/structure/Class/ownedAttribute/@containedType.0" isOrdered="true" upper="-1" isReadOnly="true" isDerived="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/Class/ownedAttribute"/>
@@ -7328,10 +7328,10 @@
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
             </ownedAttribute>
             <ownedOperation name="new" type="//org/kermeta/language/structure/Class/new/@containedType.0" isOrdered="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;131;209"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;157;235"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//org/kermeta/language/structure/Class"/>
               <body xsi:type="org_kermeta_language_behavior:Block" staticType="//org/kermeta/language/structure/Class/new/@body/@containedType.0">
-                <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;193;209"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;219;235"/>
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
               </body>
             </ownedOperation>
