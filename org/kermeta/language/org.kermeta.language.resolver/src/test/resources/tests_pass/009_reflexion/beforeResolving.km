@@ -2,73 +2,63 @@
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="testReflexion">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test" superType="//testReflexion/Test/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;68;413"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
-        <usings fromQName="kermeta::standard" toName=""/>
-      </containedType>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;42;402"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
       <ownedOperation name="testReflect" type="//testReflexion/Test/testReflect/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;85;333"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-          <usings fromQName="kermeta::standard" toName=""/>
-        </containedType>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;59;322"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;112;333"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;86;322"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="c">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;117;171"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;91;145"/>
             <type name="org::kermeta::language::structure::Class" type="//testReflexion/Test/testReflect/@body/@statement.0/@type/@containedType.0" isOrdered="true">
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Class">
-                <usings fromQName="kermeta::standard" toName=""/>
-              </containedType>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Class"/>
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="td">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;171;232"/>
-            <type name="org::kermeta::language::structure::TypeDefinition" type="//testReflexion/Test/testReflect/@body/@statement.1/@type/@containedType.0" isOrdered="true">
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::TypeDefinition">
-                <usings fromQName="kermeta::standard" toName=""/>
-              </containedType>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;145;213"/>
+            <type name="org::kermeta::language::structure::GenericTypeDefinition" type="//testReflexion/Test/testReflect/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::GenericTypeDefinition"/>
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;232;234"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;213;215"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getMetaClass">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;241;257"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;222;238"/>
               <target xsi:type="org_kermeta_language_behavior:SelfExpression">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;237;241"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;218;222"/>
               </target>
             </value>
           </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;239;246"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;238;239"/>
+            </target>
+          </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="td">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;257;260"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;246;249"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="typeDefinition">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;265;283"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;254;272"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;264;265"/>
-                <usings fromQName="kermeta::standard" toName=""/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;253;254"/>
               </target>
             </value>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="td">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;283;286"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;272;275"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="typeDefinition">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;306;326"/>
-              <usings fromQName="kermeta::standard" toName=""/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;295;315"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getMetaClass">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;293;306"/>
-                <usings fromQName="kermeta::standard" toName=""/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;282;295"/>
                 <target xsi:type="org_kermeta_language_behavior:SelfExpression">
-                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;289;293"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;278;282"/>
                 </target>
               </target>
             </value>
@@ -76,12 +66,10 @@
         </body>
       </ownedOperation>
       <ownedOperation name="testReflect2" type="//testReflexion/Test/testReflect2/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;333;410"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-          <usings fromQName="kermeta::standard" toName=""/>
-        </containedType>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;322;399"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;361;410"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;350;399"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
@@ -8402,6 +8390,6 @@
     </nestedPackage>
   </packages>
   <requires uri="kermeta">
-    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;24;41"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/009_reflexion/src/009_reflexion.kmt;24;42"/>
   </requires>
 </org_kermeta_language_structure:ModelingUnit>
