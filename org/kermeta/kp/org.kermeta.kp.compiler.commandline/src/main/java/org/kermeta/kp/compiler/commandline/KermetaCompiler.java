@@ -240,8 +240,10 @@ public class KermetaCompiler {
 	
 			// Check mergedUnit for scope MERGED
 			if (checkingEnabled) {
+				logger.progress("KermetaCompiler.kp2bytecode", "Checking merged file...", LOG_MESSAGE_GROUP, 1);
 				DiagnosticModel results = checkModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, CheckerScope.MERGED);
 				if (results != null) {
+					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results);
 		
 					if (stopOnError && results.getDiagnostics().size() > 0) {
@@ -251,6 +253,10 @@ public class KermetaCompiler {
 				}
 			}
 	
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
+			
+			logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
 			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/);
 	
 			if (resolvedUnit == null) {
@@ -262,9 +268,11 @@ public class KermetaCompiler {
 			
 			// Check resolvedUnit for scope RESOLVED
 			if (checkingEnabled) {
-	
+
+				logger.progress("KermetaCompiler.kp2bytecode", "Checking resolved file...", LOG_MESSAGE_GROUP, 1);
 				DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 				if (results != null) {
+					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results);
 					
 					if (stopOnError && results.getDiagnostics().size() > 0) {
@@ -282,7 +290,6 @@ public class KermetaCompiler {
 			}
 			FileWriter writer = new FileWriter(mergedFile);
 	
-			logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
 			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
 			
@@ -599,8 +606,7 @@ public class KermetaCompiler {
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 
-		System.err.println("checkModelingUnit " + mu.getName() + " for scope " + scope.toString());
-		System.err.println("checkModelingUnit BIS " + mu.getName() + " for scope " + scope.toString());
+		logger.debug("checkModelingUnit " + mu.getName() + " for scope " + scope.toString(), LOG_MESSAGE_GROUP);
 		
 		Checker theChecker;
 
