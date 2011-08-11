@@ -1,0 +1,28 @@
+package testReflexion;
+
+require kermeta
+
+using kermeta::standard
+
+
+
+class Test {
+
+	
+	operation testReflect() is do
+		var c : org::kermeta::language::structure::Class   
+		var td : org::kermeta::language::structure::TypeDefinition
+		c := self.getMetaClass
+		td :=  c.typeDefinition
+		td := self.getMetaClass.typeDefinition
+		
+	end
+	
+	operation testReflect2() is do
+		
+		// TODO test about get / set
+		
+	end
+   
+}
+

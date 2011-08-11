@@ -1,0 +1,7 @@
+KermetaProject :"009_reflexion" 
+version :  "someVersion" 
+group :"group" 
+{ 
+	source = "${project.baseUri}/009_reflexion.kmt"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+}  
