@@ -18,7 +18,9 @@ trait KUsingParser extends KAbstractParser {
       newo
   }
   def usingTupleStatment :  Parser[Tuple2[String,String]] =
-    usingWildCardRenameStatment | usingDefinitionRenameStatment | simplifiedUsingRenameStatment | simpleUsingWildcardStatment
+    usingWildCardRenameStatment | usingDefinitionRenameStatment | usingSingleStatment
+
+  def usingSingleStatment :  Parser[Tuple2[String,String]] =   simplifiedUsingRenameStatment | simpleUsingWildcardStatment
 
   // ensures that if we have wildcard, then it must be on both side
   def usingWildCardRenameStatment : Parser[Tuple2[String,String]] =
@@ -62,7 +64,7 @@ trait KUsingParser extends KAbstractParser {
       }
 
   def simplifiedUsingRenameStatment : Parser[Tuple2[String,String]] =
-      ident ~ rep(usingIdent) ~ "{" ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds  ~ _  ~ endId ~ endIds ~ _  =>
+      ident ~ rep(usingIdent) ~ "::" ~ "{"  ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds  ~ _ ~ _ ~ endId ~ endIds ~ _  =>
           var resTuple : Tuple2[String,String] = (startId,endId)
           startIds.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid,resTuple._2)
