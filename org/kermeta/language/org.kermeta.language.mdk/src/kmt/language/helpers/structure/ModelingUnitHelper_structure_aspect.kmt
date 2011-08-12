@@ -69,7 +69,7 @@ aspect class ModelingUnit {
 			until (not result.isVoid) or iterator.isOff
 			loop
 				var currentUsing : Using init iterator.next
-				stdio.writeln("             using " +currentUsing.fromQName + "->" +currentUsing.toName)
+				// stdio.writeln("             using " +currentUsing.fromQName + "->" +currentUsing.toName)
 				//If the using does not define an alias
 				if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
 					//We now look for a type which the same name and which qualifiedPath is the fromQName
