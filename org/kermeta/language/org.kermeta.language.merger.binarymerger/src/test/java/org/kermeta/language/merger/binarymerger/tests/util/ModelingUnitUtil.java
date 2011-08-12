@@ -61,7 +61,7 @@ public class ModelingUnitUtil {
     public static ModelingUnit loadModelingUnitFromKMT(String kmtFilePath) throws IOException, URISyntaxException{
     
     	KMTparser parser = new KMTparser();		
-		Iterator<String> src = scala.io.Source.fromFile( new java.io.File(FileHelpers.StringToURI(kmtFilePath)),
+		Iterator<String> src = scala.io.Source.fromFile( new java.io.File(kmtFilePath.replaceFirst("file:/", "")),
 				"UTF8").getLines();
 
 		StringBuffer buf = new StringBuffer();
