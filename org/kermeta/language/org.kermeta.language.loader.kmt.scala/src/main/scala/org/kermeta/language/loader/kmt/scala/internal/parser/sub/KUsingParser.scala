@@ -23,9 +23,9 @@ trait KUsingParser extends KAbstractParser {
   // ensures that if we have wildcard, then it must be on both side
   def usingWildCardRenameStatment : Parser[Tuple2[String,String]] =
       ident ~ rep(usingIdent) ~ usingWildcard ~ "=>" ~ ident ~ rep(usingIdent) ~ usingWildcard ^^
-      { case fromId ~ fromIds ~ fromWild ~ toId ~ toIds ~ toWild =>
+      { case fromId ~ fromIds ~ fromWild ~ _ ~ toId ~ toIds ~ toWild =>
           // rebuild the tuple
-          var resTuple : Tuple2[String,String] = (""+fromId,""+toId)
+          var resTuple : Tuple2[String,String] = (fromId,toId)
           fromIds.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid,resTuple._2)
           }
@@ -38,8 +38,8 @@ trait KUsingParser extends KAbstractParser {
   // normal definition rename
   def usingDefinitionRenameStatment : Parser[Tuple2[String,String]] =
              ident  ~ rep(usingIdent)  ~ "=>" ~ ident ~ rep(usingIdent)  ^^
-      { case fromId ~ fromIds ~ toId ~ toIds  =>
-          var resTuple : Tuple2[String,String] = (""+fromId,""+toId)
+      { case fromId ~ fromIds ~ _ ~ toId ~ toIds  =>
+          var resTuple : Tuple2[String,String] = (fromId,toId)
           fromIds.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid,resTuple._2)
           }
@@ -50,7 +50,7 @@ trait KUsingParser extends KAbstractParser {
       }
   def simpleUsingWildcardStatment : Parser[Tuple2[String,String]] =
       ident ~ rep(usingIdent) ~ opt(usingWildcard) ^^ { case  id ~ ids ~ wild  =>
-          var resTuple : Tuple2[String,String] = (""+id,"")
+          var resTuple : Tuple2[String,String] = (id,"")
           ids.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid,resTuple._2)
           }
@@ -62,8 +62,8 @@ trait KUsingParser extends KAbstractParser {
       }
 
   def simplifiedUsingRenameStatment : Parser[Tuple2[String,String]] =
-      ident ~ rep(usingIdent) ~ "{" ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds ~ endId ~ endIds  =>
-          var resTuple : Tuple2[String,String] = (""+startId,""+endId)
+      ident ~ rep(usingIdent) ~ "{" ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds  ~ _  ~ endId ~ endIds ~ _  =>
+          var resTuple : Tuple2[String,String] = (startId,endId)
           startIds.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid,resTuple._2)
           }
