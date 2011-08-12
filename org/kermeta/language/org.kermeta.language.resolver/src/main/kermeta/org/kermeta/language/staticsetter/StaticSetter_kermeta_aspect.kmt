@@ -322,13 +322,15 @@ package behavior {
 			end
 			// if not found, look for a Property
 			if result.isVoid then
+				if (context.verbose) then stdio.writeln("      still not found trying to find a property "+name) end
 				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" ) 
 				else
+					if (context.verbose) then stdio.writeln("      target.staticType "+target.staticType.toString) end
 					var prop : Property init target.staticType.getCallablePropertyByName(self.name)
 					//Here we look if the target is a TypeLiteral in case of a singleton
 					if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall") end
+						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall "+name) end
 						// this is a TypeLiteral  
 						// if this is a singleteton, try to look in the typereference
 						var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
@@ -372,14 +374,9 @@ package behavior {
 			// if not found, Look into TypeDefinition  ( is there any TypeLiteral in kermeta 2 ?)
 			if result.isVoid then
 				if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
-				var typeDef : TypeDefinition init context.currentModelingUnit.getTypeDefinitionByQualifiedName(self.name)
+				var typeDef : TypeDefinition 
+				typeDef := context.currentModelingUnit.getTypeDefinitionByNameAndUsings(self.name, usings, context.currentModelingUnit.retrievePackage(getQualifiedNameResolving()))
 				
-				//trying with the package
-				if (typeDef.isVoid) then
-					typeDef := context.currentModelingUnit.getTypeDefinitionByQualifiedName(getQualifiedNameResolving()+"::"+self.name)
-				end
-				
-				// TODO deal with using
 				if not typeDef.isVoid then
 					if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found typeDef " + typeDef.name) end
 					var callTypeLiteral : CallTypeLiteral init CallTypeLiteral.new

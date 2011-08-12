@@ -17,6 +17,8 @@ require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/ker
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/Structure_Aspect_ResolverVisitedAs.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/Behavior_Aspect_ResolverVisitedAs.kmt"
 
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 //Aspect of org::kermeta::language::structure elements to get their qualified name
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 //Aspect for getAllSuperTypes in ClassDefinition
@@ -79,50 +81,20 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			/*
 			* If we have not found a corresponding TypeParameter
 			*/			
+			if (ctxt.foundType.isVoid()) then			
+				var typeDef : TypeDefinition 
+				typeDef := ctxt.currentModelingUnit.getTypeDefinitionByNameAndUsings(initialUnresolvedName, 
+								ctxt.unresolved.asType(UnresolvedType).usings, 
+								ctxt.currentPackage)
+				if not typeDef.isVoid then
+					// stdio.writeln("   DVK found TypeDefinition for "+initialUnresolvedName)
+					typeDef.accept(resolvedTypeFinder,ctxt)
+				end				
+			end
+			// DVK note : is this following necessary?, normally it should have been found by the previous step ...
 			if (ctxt.foundType.isVoid()) then
 				if (ctxt.qualifiedPath.isEmpty() and not ctxt.currentPackage.isVoid()) then
-					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)
-					
-					if not ctxt.unresolved.asType(UnresolvedType).usings.isEmpty() then
-						var i : Integer init 0
-						var use : Using
-						var found : Boolean init not ctxt.foundType.isVoid()
-						from found				
-						until found or i == ctxt.unresolved.asType(UnresolvedType).usings.size()
-						loop
-							use := ctxt.unresolved.asType(UnresolvedType).usings.at(i)
-							//If the using does not define an alias
-							if (use.toName.isVoid() or use.toName == "") then
-								//We now look for a type which the same name and which qualifiedPath is the fromQName
-								ctxt.qualifiedPath := use.fromQName.split("::")
-								ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)						
-							else
-								//We need to compare the alias to the unresolvedName and the qualifiedName we are looking for
-								//If the alias is name of the type we are looking for
-								if (use.toName.equals(initialUnresolvedName)) then
-									//We now look for a type which name is the last part of the fromQName and which qualifiedPath is the rest of the fromQName
-									ctxt.qualifiedPath := use.fromQName.split("::")
-									ctxt.unresolvedName := ctxt.qualifiedPath.last()
-									ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-									ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
-								else
-									//Else if the alias is the first part of the qualifiedPath we are looking for
-									if (not ctxt.qualifiedPath.isEmpty()) then
-										if (use.toName.equals(ctxt.qualifiedPath.first())) then
-											//We now look for a type which the same name and which qualifiedPath is the fromQName
-											ctxt.qualifiedPath := use.fromQName.split("::")
-											ctxt.qualifiedPath.remove(ctxt.qualifiedPath.last())
-											ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
-										end
-									end
-								end
-							end
-							
-							found := not ctxt.foundType.isVoid()
-							i := i + 1
-							ctxt.resetCompleteName(initialUnresolvedName, initialQualifiedPath)
-						end
-					end
+					ctxt.currentPackage.accept(resolvedTypeFinder, ctxt)										
 				else
 					ctxt.currentModelingUnit.accept(resolvedTypeFinder, ctxt)
 				end
