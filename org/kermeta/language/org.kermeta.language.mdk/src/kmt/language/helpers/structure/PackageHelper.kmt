@@ -21,4 +21,37 @@ aspect class Package {
 			result.addAll(p.getAllSubPackages())
 		}
 	end
+	
+	/**
+	 * search in this Package a relative Qualified name representing a TypeDefinition
+	 * ie. a name that might contains :: in order to search in sub packages 
+	 */ 
+	operation getTypeDefinitionByRelativeQName(qname : String) : TypeDefinition is do
+		stdio.writeln( "        searching " + qname + " in " +self.name)
+		var set_qname : Sequence<String> init qname.split("::")
+		if set_qname.size()==1 then
+			result := self.ownedTypeDefinition.detect{ c | c.name == qname}
+		else
+			var subpack : Package init self.nestedPackage.detect{ p |
+				p.name == set_qname.at(0)
+			}
+			if not subpack.isVoid then
+				from var i : Integer init 1
+				until i>=(set_qname.size()-1)
+				loop
+					subpack := subpack.nestedPackage.detect{ p |
+						p.name == set_qname.at(i)
+					}
+					i := i + 1
+				end
+				
+				result := subpack.ownedTypeDefinition.detect{ c |
+					c.name == set_qname.at(set_qname.size()-1)
+				}
+			else			 
+				result := void
+			end
+		end
+		
+	end
 }

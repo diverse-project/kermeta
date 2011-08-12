@@ -39,16 +39,24 @@ aspect class ClassDefinition {
 	 * return void if not found
 	 */
 	operation getCallablePropertyByName( attributeName : String ) : Property is do
-		//stdio.writeln("ClassDefinition.getCallablePeropertyByName=" + attributeName)
+		//stdio.writeln("     ClassDefinition.getCallablePropertyByName=" + attributeName+" on "+name)
 		result := self.ownedAttribute.detect{o| o.name == attributeName}		
 		if (result.isVoid) then
 			// not found locally, look into superclasses
-			self.superType.select{t | t.isInstanceOf(Class)}.detect{ cl | 
+			//stdio.writeln("     ClassDefinition " +name+" has "+self.superType.size.toString + " superType(s)")
+			self.superType.select{t |
+				if not t.isInstanceOf(Class) then
+					stdio.writeln("    weird: one of the super class of " + name + " isn't a Class but is "+t.toString)
+				end 
+				t.isInstanceOf(Class)}.detect{ cl | 
 				// look into super classes and store possible candidate into result
 				result := cl.asType(Class).typeDefinition.asType(ClassDefinition).getCallablePropertyByName(attributeName)
 				not result.isVoid // condition for detect to stop looking in the super classes 
 			}
 		end	
+		/* if(not result.isVoid) then
+			stdio.writeln("     attribute " + attributeName+" found on "+name)
+		end*/
 	end	
 }
 
@@ -60,6 +68,10 @@ aspect class Type {
 	
 	operation getCallablePropertyByName( attributeName : String ) : Property is do
 		//stdio.writeln("Type.getCallablePeropertyByName=" + attributeName)
+		result := void
+	end
+	
+	operation getCallableEnumLiteralByName (enumName : String) : EnumerationLiteral is do
 		result := void
 	end
 	
@@ -89,4 +101,10 @@ aspect class Class inherits ParameterizedType {
 	end	
 	
 }
-
+aspect class DataType inherits Type {}
+aspect class Enumeration inherits DataType {
+	method getCallableEnumLiteralByName (enumName : String) : EnumerationLiteral is do
+		
+		result := ownedLiteral.detect{ lit | lit.name == enumName}
+	end
+}

@@ -9,6 +9,7 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "PackageHelper.kmt"
+require "../../../standard/StringUtils.kmt"
 
 using kermeta::standard
 
@@ -39,8 +40,56 @@ aspect class ModelingUnit {
 			result := pack.ownedTypeDefinition.detect{ c |
 				c.name == set_qname.at(set_qname.size()-1)
 			}
-		else
-			result := void
+		else			
+			// search this qname in self.onwedTypeDefinition 
+			result := self.ownedTypeDefinition.detect{ c | c.name == set_qname.at(0)}
+		end
+	end
+	
+	/**
+	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName and taking into account a set of Usings
+	 * and optionally looking in the current Package (if not void)
+	 */
+	operation getTypeDefinitionByNameAndUsings( qname : String, 
+												usings : Collection<Using>, 
+												optionalCurrentPackage : Package) : TypeDefinition is do
+		
+		// search the exact qualified name
+		result := getTypeDefinitionByQualifiedName(qname)
+		if (optionalCurrentPackage.isVoid) then
+			stdio.writeln( "        optionalCurrentPackage is void" )			
+		end
+		if (result.isVoid and not optionalCurrentPackage.isVoid) then
+			// search this qualified name in the current Package
+			result := optionalCurrentPackage.getTypeDefinitionByRelativeQName(qname) 
+		end		
+		if (result.isVoid and not usings.isEmpty) then
+			
+			from var iterator :Iterator<Using> init usings.iterator
+			until (not result.isVoid) or iterator.isOff
+			loop
+				var currentUsing : Using init iterator.next
+				stdio.writeln("             using " +currentUsing.fromQName + "->" +currentUsing.toName)
+				//If the using does not define an alias
+				if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
+					//We now look for a type which the same name and which qualifiedPath is the fromQName
+					result := getTypeDefinitionByQualifiedName(currentUsing.fromQName + "::"+ qname)						
+				else					
+					if not currentUsing.fromQName.contains("*") then
+						// this is a TypeDefinition alias
+						if (currentUsing.toName.equals(qname)) then
+							result := getTypeDefinitionByQualifiedName(currentUsing.fromQName)
+						end
+					else
+						// this is a Package alias
+						var searchedStartString : String init currentUsing.toName.replace("*","")
+						if qname.startsWith(searchedStartString) then
+							var replacementStartString : String init currentUsing.fromQName.replace("*","")
+							result := getTypeDefinitionByQualifiedName(qname.replace(searchedStartString, replacementStartString))
+						end						
+					end					
+				end
+			end
 		end
 	end
 	
