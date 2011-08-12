@@ -30,31 +30,34 @@ public class Provisionner {
 		for (int i = 0; i < bundleRawURIs.length; i++) {
 			String bundleURI = bundleRawURIs[i].trim();
 			if(!bundleURI.startsWith("#") && !bundleURI.isEmpty()){
-
-				monitor.subTask("Provisionning "+bundleURI);
-				try{
-					BundleContext context = Activator.getDefault().getBundle().getBundleContext();
-					Bundle bundle = context.installBundle(bundleURI);
+				if(monitor.isCanceled()){
+					statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "user interruption : bundle not provisionned " + bundleURI, null));
+				}
+				else{
+					monitor.subTask("Provisionning "+bundleURI);
 					try{
-						bundle.start();
-						statusChildren.add(new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, bundleURI + " installed and started ",null));
+						BundleContext context = Activator.getDefault().getBundle().getBundleContext();
+						Bundle bundle = context.installBundle(bundleURI);
+						try{
+							bundle.start();
+							statusChildren.add(new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, bundleURI + " installed and started ",null));
+						}
+						catch (Exception e) {
+							statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to start " + bundleURI, e));
+							hasStartError = true;
+						}
 					}
+					
 					catch (Exception e) {
-						statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to start " + bundleURI, e));
+						if(e.getClass().getName().equals("org.eclipse.osgi.framework.internal.core.Framework$DuplicateBundleException")){
+							statusChildren.add(new Status(IStatus.WARNING, Activator.PLUGIN_ID, 0, "ingored installation of already installed bundle " + bundleURI, e));
+						}
+						else{
+							statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to install " + bundleURI, e));
+						}
 						hasStartError = true;
 					}
 				}
-				
-				catch (Exception e) {
-					if(e.getClass().getName().equals("org.eclipse.osgi.framework.internal.core.Framework$DuplicateBundleException")){
-						statusChildren.add(new Status(IStatus.WARNING, Activator.PLUGIN_ID, 0, "ingored installation of already installed bundle " + bundleURI, e));
-					}
-					else{
-						statusChildren.add(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "failed to install " + bundleURI, e));
-					}
-					hasStartError = true;
-				}
-				
 			}
 			monitor.worked(1);
 		}
