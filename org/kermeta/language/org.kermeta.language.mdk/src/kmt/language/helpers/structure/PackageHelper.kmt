@@ -27,7 +27,7 @@ aspect class Package {
 	 * ie. a name that might contains :: in order to search in sub packages 
 	 */ 
 	operation getTypeDefinitionByRelativeQName(qname : String) : TypeDefinition is do
-		stdio.writeln( "        searching " + qname + " in " +self.name)
+		// stdio.writeln( "        searching " + qname + " in " +self.name)
 		var set_qname : Sequence<String> init qname.split("::")
 		if set_qname.size()==1 then
 			result := self.ownedTypeDefinition.detect{ c | c.name == qname}
