@@ -14,9 +14,11 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.diff.metamodel.AttributeChange;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.metamodel.UpdateAttribute;
 import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.service.MatchService;
@@ -30,6 +32,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
+import org.kermeta.language.structure.Tag;
 
 
 public class EMFCompareModelHelper {
@@ -135,10 +138,27 @@ public class EMFCompareModelHelper {
 		//Last :
 		//if(((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges()> 0) {
 		//New :
+		boolean isReallyDifferent = false;
 		if(diffModel.getDifferences().size() > 0) {
 			for (DiffElement elem : diffModel.getDifferences()) {
-				System.out.println("Difference detected : "+elem.toString()); 
+				boolean isDifferent = true;
+				if (elem instanceof UpdateAttribute){
+					UpdateAttribute ac = (UpdateAttribute) elem;
+					if( ac.getAttribute().getName().equals("value") && ac.getLeftElement() instanceof Tag){
+						Tag t = (Tag)ac.getLeftElement();
+						if (t.getName().equals("traceability_text_reference")){
+							System.out.println("Ignoring change Tag.value UpdateAttribute : "+elem.toString());
+							isDifferent = false;
+						}
+					}
+				}
+				if(isDifferent){
+					System.out.println("Difference detected : "+elem.toString());
+					isReallyDifferent = true;
+				}
 			}
+		}
+		if(isReallyDifferent){
 			try {
 				URI uri = URI.createURI(diffModelPath);
 		        uri = new ExtensibleURIConverterImpl().normalize(uri);
