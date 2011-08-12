@@ -9,9 +9,11 @@
 */
 package org.kermeta.utils.provisionner4eclipse;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -54,7 +56,14 @@ public class Activator extends AbstractUIPlugin {
 		
 		super.start(context);
 		plugin = this;
-		new Provisionner().provisionFromPreferences();
+		Job job = new Job("OSGI bundle provisionner job") {
+			protected IStatus run(IProgressMonitor monitor) {
+				new Provisionner().provisionFromPreferences(monitor);
+				return Status.OK_STATUS;
+			}
+		};
+	    job.setPriority(Job.LONG);
+	    job.schedule(); // start as soon as possible
 	
 	}
 

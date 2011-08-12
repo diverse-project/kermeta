@@ -9,6 +9,10 @@
 */
 package org.kermeta.utils.provisionner4eclipse.preferences;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -73,7 +77,26 @@ public class BundleProvisionnerPreferencePage
 	@Override
 	protected void performApply() {
 		super.performApply();
-		new Provisionner().provisionFromPreferences();
+		doIt();
+	}
+
+	@Override
+	public boolean performOk() {
+		boolean res = super.performOk(); 
+		doIt();
+		return res;
+	}
+	
+	protected void doIt(){
+		Job job = new Job("OSGI bundle provisionner job") {
+			protected IStatus run(IProgressMonitor monitor) {
+				new Provisionner().provisionFromPreferences(monitor);
+				return Status.OK_STATUS;
+			}
+		};
+	    job.setPriority(Job.LONG);
+	    job.schedule(); // start as soon as possible
+		
 	}
 	
 }

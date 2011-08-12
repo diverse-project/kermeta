@@ -13,7 +13,7 @@ import org.eclipse.ui.IStartup;
 
 public class ProvisionnerEarlyStartup implements IStartup{
 
-	@Override
+	
 	public void earlyStartup() {
 		// simply start this bundle
 		Activator.getDefault();		

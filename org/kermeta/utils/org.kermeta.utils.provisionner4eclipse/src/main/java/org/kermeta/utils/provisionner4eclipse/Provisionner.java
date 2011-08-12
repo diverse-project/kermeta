@@ -11,6 +11,7 @@ package org.kermeta.utils.provisionner4eclipse;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
@@ -19,15 +20,18 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 public class Provisionner {
-	public void provisionFromPreferences(){
+	
+	public void provisionFromPreferences(IProgressMonitor monitor){
 		String bundleList = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BUNDLE_URI_LIST);
 		String[] bundleRawURIs = bundleList.split("\n");
+		monitor.beginTask("Provisionning OSGI Bundles", bundleRawURIs.length);
 		ArrayList<IStatus> statusChildren = new ArrayList<IStatus>();
 		boolean hasStartError = false;
 		for (int i = 0; i < bundleRawURIs.length; i++) {
 			String bundleURI = bundleRawURIs[i].trim();
 			if(!bundleURI.startsWith("#") && !bundleURI.isEmpty()){
-				
+
+				monitor.subTask("Provisionning "+bundleURI);
 				try{
 					BundleContext context = Activator.getDefault().getBundle().getBundleContext();
 					Bundle bundle = context.installBundle(bundleURI);
@@ -52,6 +56,7 @@ public class Provisionner {
 				}
 				
 			}
+			monitor.worked(1);
 		}
 		
 		String message= hasStartError? "One or more bundle failed to start or install":"All bundles have successfully started";
@@ -60,6 +65,6 @@ public class Provisionner {
 			mstatus.add(iStatus);
 		}
 		Activator.getDefault().getLog().log(mstatus);						
-		
+		monitor.done();
 	}
 }
