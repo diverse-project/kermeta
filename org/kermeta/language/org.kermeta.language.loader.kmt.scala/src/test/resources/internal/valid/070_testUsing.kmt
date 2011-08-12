@@ -1,6 +1,19 @@
 require kermeta
 
-using kermeta::standard::*
+using kermeta::standard::*                      // direct access to all definition of Package
+using kermeta::standard                         // retro compatibility supported, same as above   (should raise a deprecation warning)
 
-using kermeta::standard::Integer
+using kermeta::standard::Integer => MyInteger   // Type declaration renaming
+using kermeta::standard::Integer => Integer     // with renaming for direct access
+using kermeta::standard::{Integer}              // shortcut : same as above
+using kermeta::standard::Integer => standard::Integer     // with renaming for direct access
+using kermeta::{standard::Integer}              // shortcut : same as above
+using kermeta::standard::Integer => ks::Integer // another renaming
 
+using kermeta::standard::* => ks::*             // global renaming of a package
+
+
+
+class toto {
+
+}

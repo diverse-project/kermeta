@@ -11,14 +11,93 @@ import org.kermeta.language.structure.Using
 trait KUsingParser extends KAbstractParser {
 
     /* PROCESS USING  */
-  def usingStmt : Parser[Using] = "using" ~ usingStatment ^^ { case _ ~ stmts =>
+  def usingStmt : Parser[Using] = "using" ~ usingTupleStatment ^^ { case _ ~ utuple =>
+      var newo =StructureFactory.eINSTANCE.createUsing
+      newo.setFromQName(  utuple._1)
+      newo.setToName(  utuple._2)
+      newo
+  }
+  def usingTupleStatment :  Parser[Tuple2[String,String]] =
+    usingWildCardRenameStatment | usingDefinitionRenameStatment | simplifiedUsingRenameStatment | simpleUsingWildcardStatment
+
+  // ensures that if we have wildcard, then it must be on both side
+  def usingWildCardRenameStatment : Parser[Tuple2[String,String]] =
+      ident ~ rep(usingIdent) ~ usingWildcard ~ "=>" ~ ident ~ rep(usingIdent) ~ usingWildcard ^^
+      { case fromId ~ fromIds ~ fromWild ~ toId ~ toIds ~ toWild =>
+          // rebuild the tuple
+          var resTuple : Tuple2[String,String] = (""+fromId,""+toId)
+          fromIds.foreach{nid =>
+            resTuple = (resTuple._1+"::"+nid,resTuple._2)
+          }
+          toIds.foreach{nid =>
+            resTuple = (resTuple._1,resTuple._2+"::"+nid)
+          }
+          resTuple = (resTuple._1+"::*",resTuple._2+"::*")
+          resTuple
+      }
+  // normal definition rename
+  def usingDefinitionRenameStatment : Parser[Tuple2[String,String]] =
+             ident  ~ rep(usingIdent)  ~ "=>" ~ ident ~ rep(usingIdent)  ^^
+      { case fromId ~ fromIds ~ toId ~ toIds  =>
+          var resTuple : Tuple2[String,String] = (""+fromId,""+toId)
+          fromIds.foreach{nid =>
+            resTuple = (resTuple._1+"::"+nid,resTuple._2)
+          }
+          toIds.foreach{nid =>
+            resTuple = (resTuple._1,resTuple._2+"::"+nid)
+          }
+          resTuple
+      }
+  def simpleUsingWildcardStatment : Parser[Tuple2[String,String]] =
+      ident ~ rep(usingIdent) ~ opt(usingWildcard) ^^ { case  id ~ ids ~ wild  =>
+          var resTuple : Tuple2[String,String] = (""+id,"")
+          ids.foreach{nid =>
+            resTuple = (resTuple._1+"::"+nid,resTuple._2)
+          }
+          wild match {
+            case None =>
+            case Some(w)=> resTuple = (resTuple._1+"::"+w,resTuple._2)
+          }
+          resTuple
+      }
+
+  def simplifiedUsingRenameStatment : Parser[Tuple2[String,String]] =
+      ident ~ rep(usingIdent) ~ "{" ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds ~ endId ~ endIds  =>
+          var resTuple : Tuple2[String,String] = (""+startId,""+endId)
+          startIds.foreach{nid =>
+            resTuple = (resTuple._1+"::"+nid,resTuple._2)
+          }
+          endIds.foreach{nid =>
+            resTuple = (resTuple._1+"::"+nid,resTuple._2+"::"+nid)
+          }
+          resTuple
+      }
+ /*def usingStmt : Parser[Using] = "using" ~ usingStatment ~ opt(usingToStatment)^^ { case _ ~ from ~ to =>
       //LocalUsing(id+"::"+q.prefixe,q.typeName)
       var newo =StructureFactory.eINSTANCE.createUsing
-      newo.setFromQName(if(stmts._1 != "") { stmts._1 } else { stmts._2 }     )
-      newo.setToName(stmts._2)
+      newo.setFromQName(from )
+      to match{
+        case None =>
+        case Some(toStatement) => newo.setToName(toStatement)
+      }
+
       newo
   }
 
+  def usingStatment : Parser[String] = ident ~ rep(usingIdent) ~ opt(usingWildcard) ^^ {  case id ~ ids ~ wild  =>
+    var res : String = id
+    ids.foreach{nid =>
+        res = res+"::"+nid
+      }
+    wild match {
+        case None =>
+        case Some(w)=> res = res+"::*"
+      }
+    res
+  }
+
+  def usingToStatment : Parser[String] =  "=>" ~> usingStatment
+  */
 /*
   def usingStatment : Parser[Tuple2[String,String]] =
   (
@@ -36,6 +115,8 @@ trait KUsingParser extends KAbstractParser {
     }
 */
 
+
+   /*
   def usingStatment : Parser[Tuple2[String,String]] = ident ~ rep(usingIdent) ~ opt(usingWildcard) ~ opt(usingRename) ^^{ case id ~ ids ~ wild ~ rename =>
       var resTuple : Tuple2[String,String] = (id,id)
       ids.foreach{nid =>
@@ -52,11 +133,12 @@ trait KUsingParser extends KAbstractParser {
       resTuple
   }
 
-
+  */
   def usingIdent : Parser[String] = "::" ~> ident
   def usingWildcard : Parser[String] = "::" ~> "*"
+  /*
   def usingRename : Parser[Tuple2[String,String]] = "::" ~ "{" ~ ident ~ "=>" ~ ident ~ "}" ^^{ case _ ~ old ~ _ ~ newname ~_ => Tuple2(old,newname) }
-
+  */
   /*  END PROCESS USING */
 
 }
