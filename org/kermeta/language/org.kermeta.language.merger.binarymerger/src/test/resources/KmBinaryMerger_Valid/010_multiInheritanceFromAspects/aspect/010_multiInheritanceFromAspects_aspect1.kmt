@@ -4,5 +4,5 @@ using kermeta::standard
 class Parent1 {
 	attribute attributeFromParent1 : String 
 }
-class Child inherits Parent1{
+aspect class Child inherits Parent1{
 }
