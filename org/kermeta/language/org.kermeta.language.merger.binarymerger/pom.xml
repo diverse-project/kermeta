@@ -171,7 +171,6 @@
 								org.eclipse.emf.ecore.xmi,
 								org.eclipse.emf.ecore.xmi.impl,
 								org.kermeta.language.structure,
-								org.kermeta.language.helper.test.utils,
 								org.osgi.framework;version="[1.5,2)",
 								org.slf4j;version="[1.5,2)"
                         </Import-Package>
