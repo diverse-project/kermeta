@@ -20,9 +20,9 @@ import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
-import org.kermeta.language.merger.binarymerger.tests.util.FailedTest;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
+import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
+import org.kermeta.language.helper.tests.utils.FailedTest;
 
 /**
  *

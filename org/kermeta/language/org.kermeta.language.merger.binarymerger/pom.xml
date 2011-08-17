@@ -61,29 +61,12 @@
 			</exclusion> </exclusions> </dependency> -->
 		<!-- Test dependencies -->
 		
+		
+		
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.loader.kmt.scala</artifactId>
+			<artifactId>language.helper.tests</artifactId>
 			<version>${kermeta.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.emf.compare</artifactId>
-			<version>[1.0.1.v200909161031,)</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.emf.compare.diff</artifactId>
-			<version>[1.0.1.v200909161031,)</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.kermeta.eclipse</groupId>
-			<artifactId>org.eclipse.emf.compare.match</artifactId>
-			<version>[1.0.1.v200909161031,)</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -175,7 +158,8 @@
 								org.kermeta.language.model,
 								org.kermeta.language.merger.binarymerger.api,
 								org.kermeta.language.framework.scala,
-								org.kermeta.utils.systemservices.api
+								org.kermeta.utils.systemservices.api,
+								org.kermeta.language.helper.test
                         </Require-Bundle>
 							<Import-Package>
 								kermeta.persistence,
@@ -188,6 +172,7 @@
 								org.eclipse.emf.ecore.xmi,
 								org.eclipse.emf.ecore.xmi.impl,
 								org.kermeta.language.structure,
+								org.kermeta.language.helper.test.utils,
 								org.osgi.framework;version="[1.5,2)",
 								org.slf4j;version="[1.5,2)"
                         </Import-Package>
