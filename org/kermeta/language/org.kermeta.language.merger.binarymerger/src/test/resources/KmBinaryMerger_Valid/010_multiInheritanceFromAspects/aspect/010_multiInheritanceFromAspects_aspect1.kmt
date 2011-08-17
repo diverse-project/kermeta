@@ -1,0 +1,8 @@
+package test;
+using kermeta::standard
+
+class Parent1 {
+	attribute attributeFromParent1 : String 
+}
+class Child inherits Parent1{
+}

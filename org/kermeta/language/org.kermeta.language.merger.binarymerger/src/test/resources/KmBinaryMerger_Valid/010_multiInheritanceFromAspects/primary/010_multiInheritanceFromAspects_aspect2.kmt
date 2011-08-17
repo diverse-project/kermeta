@@ -1,0 +1,6 @@
+package test;
+using kermeta::standard
+
+class Child {
+	attribute attributeFromChild : String
+}
