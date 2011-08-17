@@ -158,8 +158,7 @@
 								org.kermeta.language.model,
 								org.kermeta.language.merger.binarymerger.api,
 								org.kermeta.language.framework.scala,
-								org.kermeta.utils.systemservices.api,
-								org.kermeta.language.helper.test
+								org.kermeta.utils.systemservices.api
                         </Require-Bundle>
 							<Import-Package>
 								kermeta.persistence,
