@@ -46,8 +46,7 @@ public class BundleProvisionnerPreferencePage
 		setDescription("Additional Eclipse platform dynamic provisionning system: \n"+"" +
 				"This dynamicaly adds bundles from external sources.\n"	+
 				"Notes and current limitations in this experimental version: \n"+
-				"- removed entries won't be unloaded dynamically, \n  a restart of Eclipse is required for that."+
-				"- the order is important, it main fail to start a bundle if \n  a required bundles isn't present before.");
+				"- removed entries won't be unloaded dynamically, \n  a restart of Eclipse is required for that.");
 	}
 	
 	/**
