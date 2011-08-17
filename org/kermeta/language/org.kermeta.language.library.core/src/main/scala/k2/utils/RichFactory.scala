@@ -1,6 +1,6 @@
 package k2.utils
 
-object RichFactory {
+object KerRichFactory {
 	
 	def createStringBuffer = new StringBuilder
 	def createHashtable[K,T]() = new java.util.HashMap[K,T]()

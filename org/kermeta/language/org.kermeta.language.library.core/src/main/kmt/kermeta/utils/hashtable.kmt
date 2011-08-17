@@ -4,7 +4,7 @@
  * IRISA / University of Rennes 1 (France)
  * Distributed under the terms of the EPL licence
  *
- * Implementation of kermeta hashtable types.
+ * Implementation of k2 hashtable types.
  *************************************************** */
  
 /** 
@@ -13,12 +13,12 @@
  * 
  * <img src="./figures/utils_package.png"/>
  */
-using kermeta::standard
-using org::kermeta::language::structure
-using kermeta::exceptions
+using k2::standard
+using org::k2::language::structure
+using k2::exceptions
 
 
-package kermeta{
+package k2{
 package utils{
 
 
@@ -27,7 +27,7 @@ package utils{
  * An implementation of hashtable
  * This implementation is for speed optimisation it cannot be serialized. 
  * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
+ * <img src="platform:/plugin/org.k2.documentation/src/figures/utils_package.png"/>
  */
 
 @CompilerIgnore "true"

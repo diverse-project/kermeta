@@ -4,7 +4,7 @@
  */
 
 package k2.io
-
+ 
 import java.io._
 
 object FileIO  extends k2.standard.EObjectImplForPrimitive{
@@ -15,9 +15,12 @@ object FileIO  extends k2.standard.EObjectImplForPrimitive{
       filename = file.replaceFirst("file:", "")
     } else {
       filename = file
+      println("toto")
     }
     //println("WriteTxt="+filename)
 
+ 
+    
     var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
     if(!repname.exists()){ repname.mkdirs }
     val fw = new FileWriter(new File(filename),false)

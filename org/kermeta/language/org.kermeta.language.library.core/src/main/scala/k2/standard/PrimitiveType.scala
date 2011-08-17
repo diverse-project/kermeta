@@ -32,8 +32,8 @@ object PrimitiveConversion{
     implicit def character2kermeta(x: Char) = new RichCharacter(x)
     //implicit def listToEList[G](l : java.util.List[G]) = l.asInstanceOf[org.eclipse.emf.common.util.EList[G]]
 	
-    implicit def toInt2(in:java.lang.Integer) : Int = in.intValue
-    implicit def toReal2(in:java.lang.Double) : Double = in.doubleValue
+    //implicit def toInt2(in:java.lang.Integer) : Int = in.intValue
+    //implicit def toReal2(in:java.lang.Double) : Double = in.doubleValue
     implicit def toInt(in:java.lang.Integer) : RichInteger = new RichInteger(in.intValue)
     //implicit def toReal(in:java.lang.Double) : RichReal = new RichReal(in.doubleValue)
 

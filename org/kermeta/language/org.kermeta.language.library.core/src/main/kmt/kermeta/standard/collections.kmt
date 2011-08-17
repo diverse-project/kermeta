@@ -13,11 +13,11 @@
  * <img src="./figures/collections_view.png"/>
  */
 
-using org::kermeta::language::structure
-using kermeta::exceptions
+using org::k2::language::structure
+using k2::exceptions
 
 
-package kermeta{
+package k2{
 package standard{
 
 
@@ -30,7 +30,7 @@ abstract class Map<K,V>
 {
 }
 /**
- * Collection is the root abstract class for all kermeta collections
+ * Collection is the root abstract class for all k2 collections
  */
 @CompilerIgnore "true"
 abstract class Collection<G> 

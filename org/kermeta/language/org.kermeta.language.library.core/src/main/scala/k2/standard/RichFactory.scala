@@ -1,5 +1,5 @@
 package k2.standard
-object RichFactory {
+object KerRichFactory {
  def createSet[A] : java.util.List[A] = { new java.util.ArrayList[A] }
  def createOrderedSet[A] : java.util.List[A] = { new java.util.ArrayList[A] }
  def createSequence[A] : java.util.List[A] = { new java.util.ArrayList[A] }

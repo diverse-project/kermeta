@@ -60,7 +60,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
       var thisclass : org.kermeta.language.structure.Class =this.asInstanceOf[org.kermeta.language.structure.Class]
       var clclass : org.kermeta.language.structure.Class = cl.asInstanceOf[org.kermeta.language.structure.Class]
 
-      if (k2.utils.UTilScala.getQualifiedNameClass( clclass.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition,"::").equals( k2.utils.UTilScala.getQualifiedNameClass(thisclass.getTypeDefinition,"::") ))
+      if (k2.utils.UTilScala.getQualifiedNameClassKermeta( clclass.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition,"::").equals( k2.utils.UTilScala.getQualifiedNameClassKermeta(thisclass.getTypeDefinition,"::") ))
         return true
       else
         return clclass.getTypeDefinition.asInstanceOf[org.kermeta.language.structure.ClassDefinition].getSuperType.exists(e=> this.isSuperTypeOf(e))

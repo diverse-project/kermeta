@@ -1,11 +1,11 @@
 
 
-using kermeta::standard
-using kermeta::utils
-using org::kermeta::language::structure
-using kermeta::exceptions
+using k2::standard
+using k2::utils
+using org::k2::language::structure
+using k2::exceptions
 
-package kermeta{
+package k2{
 
 package emfpersistence{
 

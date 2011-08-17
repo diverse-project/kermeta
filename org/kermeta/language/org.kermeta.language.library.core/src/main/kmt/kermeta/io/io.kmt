@@ -1,10 +1,10 @@
-using kermeta::standard
-using org::kermeta::language::structure
-using kermeta::exceptions
+using k2::standard
+using org::k2::language::structure
+using k2::exceptions
 
 
 
-package kermeta{
+package k2{
 package io{
 
 
@@ -20,7 +20,7 @@ package io{
  
 /**
  * Implementation of simple helpers to read ans write text files
- * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
+ * <img src="platform:/plugin/org.k2.documentation/src/figures/io_package.png"/>
  */
 @CompilerIgnore "true"
 class FileIO
