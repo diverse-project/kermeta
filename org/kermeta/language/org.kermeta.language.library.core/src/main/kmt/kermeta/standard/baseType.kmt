@@ -1,9 +1,9 @@
-using k2::standard
-using org::k2::language::structure
-using k2::exceptions
+using kermeta::standard
+using org::kermeta::language::structure
+using kermeta::exceptions
 
 
-package k2{
+package kermeta{
 package standard{
 
 /**
@@ -11,7 +11,7 @@ package standard{
  */
 @CompilerIgnore "true"
 class Void {
-}
+} 
 /**
  * TODO : miss operations 
  */
@@ -74,7 +74,7 @@ class Object
 	end
 	
 	/**
-	 * See k2::language::structure::Object.equals(Object)
+	 * See kermeta::language::structure::Object.equals(Object)
 	 */
 	@CompilerIgnore "true"
 	operation isNotEqual(element : Object) : Boolean from Object is do
@@ -203,7 +203,7 @@ class Object
 	 * or void if the object belongs to no Resource
 	 */
 	@CompilerIgnore "true"
-	operation containingResource() : k2::emfpersistence::Resource is do
+	operation containingResource() : kermeta::emfpersistence::Resource is do
 	end
 	
 	@CompilerIgnore "true"

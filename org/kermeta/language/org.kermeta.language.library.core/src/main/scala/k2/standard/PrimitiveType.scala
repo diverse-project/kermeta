@@ -140,7 +140,7 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
     def orElse(func : Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
     override def getValue():Object = new java.lang.Boolean(value)
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::standard::Boolean")
+        return createMetaClass("kermeta::standard::Boolean")
     }
 	
 }
@@ -199,7 +199,7 @@ class RichDouble(value: Double) extends RichNumeric[Double]{
 
 override def getValue():Object = new java.lang.Double(value)
 override def getMetaClass():org.kermeta.language.structure.Class={
-  return createMetaClass("k2::standard::Double")
+  return createMetaClass("kermeta::standard::Double")
 }
 
    //generated
@@ -237,7 +237,7 @@ class RichFloat(value: Float)extends RichNumeric[Float] {
 
 override def getValue():Object = new java.lang.Float(value)
 override def getMetaClass():org.kermeta.language.structure.Class={
-  return createMetaClass("k2::standard::Float")
+  return createMetaClass("kermeta::standard::Float")
 }
      //generated
      // override def equals(arg0:Any) : Boolean = value.equals(arg0)
@@ -328,7 +328,7 @@ class RichShort(value: Short) extends RichNumeric[Short] {
 
   override def getValue():Object = new java.lang.Short(value)
   override def getMetaClass():org.kermeta.language.structure.Class={
-      return createMetaClass("k2::standard::Short")
+      return createMetaClass("kermeta::standard::Short")
   }
 
    //generated
@@ -377,7 +377,7 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
 
     override def getValue():Object = value 	
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::standard::Boolean")
+        return createMetaClass("kermeta::standard::Boolean")
     }
  
 
@@ -405,7 +405,7 @@ class RichLong(value: Long)  extends RichNumeric[Long]{
 
   override def getValue():Object = new java.lang.Long(value)
   override def getMetaClass():org.kermeta.language.structure.Class={
-      return createMetaClass("k2::standard::Long")
+      return createMetaClass("kermeta::standard::Long")
   }
 
   //generated
@@ -466,7 +466,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
     override def getValue():Object = new java.lang.Integer(value)		
     //def isNotEqual(other : Any) :Boolean = this.equals(other)
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::standard::Integer")
+        return createMetaClass("kermeta::standard::Integer")
     }
 	
 }
@@ -492,7 +492,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
     override def isVoid():Boolean = false;
     override def getValue():Object = new java.lang.Double(value)	
     override def getMetaClass():org.k2.language.structure.Class={
-        return createMetaClass("k2::standard::Real")
+        return createMetaClass("kermeta::standard::Real")
     }
 
 }*/
@@ -513,7 +513,7 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
     override  def isVoid():Boolean = false;
     override def getValue():Object = value
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::standard::Char")
+        return createMetaClass("kermeta::standard::Char")
     }
 
 }
@@ -523,7 +523,7 @@ class RichEnum(value:java.lang.Object)  extends  EObjectImplForPrimitive{
     override  def isVoid():Boolean = value==null;
     def getValue():java.lang.Object = value
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::language::structure::Enumeration")
+        return createMetaClass("kermeta::language::structure::Enumeration")
     }
 
 }
@@ -658,7 +658,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
   
 
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("k2::standard::String")
+        return createMetaClass("kermeta::standard::String")
     }
 
 } 

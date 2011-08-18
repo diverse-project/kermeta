@@ -6,7 +6,7 @@ package org{
 				aspect class Class inherits ParameterizedType{
 					operation new() : org::kermeta::language::structure::Class is do
 					end
-				}
+				} 
 			}
 		}
 	}
