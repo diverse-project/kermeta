@@ -29,17 +29,21 @@ aspect class ModelingUnit {
 		}
 		if not pack.isVoid then
 			from var i : Integer init 1
-			until i>=(set_qname.size()-1)
+			until i>=(set_qname.size()-1) or pack.isVoid
 			loop
 				pack := pack.nestedPackage.detect{ p |
 					p.name == set_qname.at(i)
 				}
 				i := i + 1
 			end
-			
-			result := pack.ownedTypeDefinition.detect{ c |
-				c.name == set_qname.at(set_qname.size()-1)
-			}
+			if pack.isVoid then
+				// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
+				result := void
+			else
+				result := pack.ownedTypeDefinition.detect{ c |
+					c.name == set_qname.at(set_qname.size()-1)
+				}
+			end
 		else			
 			// search this qname in self.onwedTypeDefinition 
 			result := self.ownedTypeDefinition.detect{ c | c.name == set_qname.at(0)}
