@@ -6,11 +6,11 @@ import org.kermeta.compilo.scala._
 import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
-import java.util._
+import _root_.java.util._
 import org.eclipse.emf.ecore.EObject
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait CallSuperOperationAspect extends ObjectAspect with LogAspect {
+trait CallSuperOperationAspect extends KermetaModelElementAspect with LogAspect {
 	
   override def generateScalaCode(res : StringBuilder) : Unit = {
     log.debug("CallSuperOperation={}",this.getName())

@@ -6,17 +6,17 @@ import org.kermeta.compilo.scala._
 import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
-import java.util._
+import _root_.java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait EnumerationAspect extends ObjectAspect {
+trait EnumerationAspect extends KermetaModelElementAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (!Util.hasEcoreTag(this)){
-                  	//res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
-			res.append("_root_."+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())
+                  	//res.append(k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
+			res.append("_root_."+_root_.k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())
 		}else{
-			res.append("_root_."+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
+			res.append("_root_."+_root_.k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
 		}
 	}
 	
@@ -24,11 +24,11 @@ trait EnumerationAspect extends ObjectAspect {
 		
 		if (!Util.hasEcoreTag(this)){
 			var res : StringBuilder = new StringBuilder
-			res.append("package "+k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
+			res.append("package "+_root_.k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
 			res.append("import k2.io._\n")
 			res.append("import k2.standard._\n")
 			res.append("import k2.standard.JavaConversions._\n")
-			res append "object "+this.getName()+" extends scala.Enumeration {\n"
+			res append "object "+this.getName()+" extends Enumeration {\n"
 			res append "type "+this.getName()+" = Value\n"
 			res append "val "
 			var i =0
@@ -38,13 +38,13 @@ trait EnumerationAspect extends ObjectAspect {
 				i=i+1
 			}
 			res append " = Value\n"+"}"
-			Util.generateFile(k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())
+			Util.generateFile(_root_.k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())
 		}
 
 	}
 	
 	override def getQualifiedNameCompilo():String ={
-		return this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName();
+		return Util.protectScalaKeyword(this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "."+ this.getName());
 	  
 	}
 

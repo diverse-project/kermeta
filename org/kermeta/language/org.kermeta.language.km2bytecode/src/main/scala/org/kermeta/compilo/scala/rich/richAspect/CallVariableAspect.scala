@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait CallVariableAspect extends ObjectAspect with LogAspect {
+trait CallVariableAspect extends KermetaModelElementAspect with LogAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("CallVariable={}",this.getName())

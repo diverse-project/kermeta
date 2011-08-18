@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala.Util
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ProductTypeAspect extends ObjectAspect {
+trait ProductTypeAspect extends KermetaModelElementAspect {
 	
   override def generateScalaCode(res : StringBuilder) : Unit = {
 	  res.append("(")

@@ -9,17 +9,19 @@ import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl.VisitorAsyncUtility
 import org.kermeta.compilo.scala.visitor.impl._
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.Executors
-import java.io.File
-import org.kermeta.compilo.scala.rich.RichAspectImplicit._
+import _root_.java.util.concurrent.TimeUnit
+import _root_.java.util.concurrent.Executors
+import _root_.java.io.File
 import org.k2.compilo.scala.loader.LoadModelHelper
+import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
 class Compiler extends LogAspect {
 
-    def compile(url : java.lang.String){
+    def compile(url : _root_.java.lang.String){
         log.debug("Cleaning Output Step")
         Util.cleanFolder(GlobalConfiguration.outputFolder)
+        Util.cleanFolder(GlobalConfiguration.outputBinFolder)
+        Util.cleanFolder(GlobalConfiguration.outputProject + File.separator + "target")
         /* Init Factory Step */
         var t: LoadModelHelper = new LoadModelHelper()
         BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
@@ -34,7 +36,7 @@ class Compiler extends LogAspect {
         var fi  = new File(url);
         var fo =  new File(GlobalConfiguration.outputFolder +File.separator+".."+File.separator + "resources").getCanonicalFile
         fo.mkdirs
-        fo = new File(GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator +"Reflexivity.km" ).getCanonicalFile
+        fo = new File(GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" ).getCanonicalFile
         if (fo.exists)
             fo.delete
        

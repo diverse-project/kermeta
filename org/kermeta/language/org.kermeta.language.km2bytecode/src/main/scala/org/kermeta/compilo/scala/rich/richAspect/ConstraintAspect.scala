@@ -8,7 +8,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ConstraintAspect extends ObjectAspect with LogAspect {
+trait ConstraintAspect extends KermetaModelElementAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Generate Constraint {}",this.getName)
@@ -16,5 +16,6 @@ trait ConstraintAspect extends ObjectAspect with LogAspect {
 		this.getBody().generateScalaCode(res)
 		res.append("}\n")
 	}
+
 
 }

@@ -80,6 +80,49 @@
     
     <build>
     	<plugins>
+                   <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmArgs>
+                        <jvmArg>-Xmx1024m</jvmArg>
+                    </jvmArgs>
+                                           <launchers>
+                        <launcher>
+                            <id>runner</id>
+                            <mainClass>org.kermeta.compilo.scala.Main</mainClass>
+                            <args>
+                                <arg>-i</arg>
+                                <arg>/tmp/language.sample.simplecontrolstructure.km</arg>
+                                <arg>-p</arg>
+                                <arg>/opt/intellij/compiloV2/org.kermeta.language.km2bytecode/src/main/resources/kermetaCompiler.properties</arg>
+                            </args>
+
+                            <jvmArgs>
+                                <jvmArg>-Xmx1024m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                    </launchers>
+
+                </configuration>
+            </plugin>
     		<plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-jar-plugin</artifactId>

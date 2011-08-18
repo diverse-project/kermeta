@@ -10,7 +10,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait VoidTypeAspect extends ObjectAspect {
+trait VoidTypeAspect extends KermetaModelElementAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("k2.standard.Void")

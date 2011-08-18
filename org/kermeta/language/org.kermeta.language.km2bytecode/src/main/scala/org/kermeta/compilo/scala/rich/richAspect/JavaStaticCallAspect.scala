@@ -13,7 +13,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait JavaStaticCallAspect extends ObjectAspect with LogAspect {
+trait JavaStaticCallAspect extends KermetaModelElementAspect with LogAspect {
 
   override def generateScalaCode(res : StringBuilder) : Unit = {
 
@@ -28,7 +28,7 @@ res.append(")")
 
 
       /*
-      this.getOwnedTags.foreach{ tag =>
+      this.getKOwnedTags.foreach{ tag =>
             println("extern call"+tag.getName+" "+tag.getValue)
           if(tag.getName.contains("compiledJavaExtern")){
             res.append(tag.getValue)

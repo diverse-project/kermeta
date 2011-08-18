@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait PropertyAspect extends ObjectAspect with LogAspect {
+trait PropertyAspect extends KermetaModelElementAspect with LogAspect {
 	
 	
 	
@@ -51,7 +51,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
 	res.append(" : ")
 	
 	if (this.getUpper>1||this.getUpper == -1){
-            if (this.getIsOrdered.booleanValue){
+            if (this.getIsOrdered){
                 res.append("java.util.List[")
             }else{
                 res.append("java.util.List[")
@@ -72,8 +72,8 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
     def generateGet(res : StringBuilder,prefix:String) : Unit ={
 	res.append("def ")
 	var s: StringBuilder = new StringBuilder
-	this.getType().asInstanceOf[ObjectAspect].generateScalaCode(s)
-	if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
+	this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(s)
+	if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean")){
             res.append(prefix+"is")
 	}else
 	{
@@ -98,7 +98,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
             }
 
                     res.append("this.")
-            if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
+            if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean")){
                 if (this.getType().isInstanceOf[PrimitiveType]
                     && !("MARTE_Library.MARTE_PrimitivesTypes.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
                         "org.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
@@ -131,7 +131,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
 	
     def generateScalGet(res : StringBuilder,prefix:String) : Unit ={
         var s: StringBuilder = new StringBuilder
-        this.getType().asInstanceOf[ObjectAspect].generateScalaCode(s)
+        this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(s)
 		
         res.append("def "+GlobalConfiguration.scalaPrefix)
 //        res.append(this.getName+"")
@@ -158,7 +158,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
                 res.append("new RichKermetaList(")
             }
             
-            if ("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)&&(s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))){
+            if ("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)&&(s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean"))){
                 if (this.getName.startsWith("is"))
                         res.append("this."+this.getName+"()")                
                     else if (this.getUpper>1 ||this.getUpper == -1){
@@ -198,7 +198,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
 
 	
     def generateSet(res : StringBuilder,prefix:String) : Unit ={
-        if (!this.getIsReadOnly().booleanValue){
+        if (!this.getIsReadOnly()){
             res.append("def "+prefix+"set")
             res.append(this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size)+"(arg:")
             getListorType(res)
@@ -228,7 +228,7 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
     }
 	
     def generateScalSet(res : StringBuilder,prefix:String) : Unit ={
-        if (!this.getIsReadOnly().booleanValue){
+        if (!this.getIsReadOnly()){
             var currentname : String = this.getName
             
             if (("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName))&&("class".equals(currentname))){
@@ -274,16 +274,16 @@ trait PropertyAspect extends ObjectAspect with LogAspect {
 	
     def getListorType(res:StringBuilder)={
 	if (this.getUpper>1 ||this.getUpper == -1){
-            if (this.getIsOrdered.booleanValue){
+            if (this.getIsOrdered){
                 res.append("java.util.List[")
             }else{
                 //TODO gestion des SETs
                 res.append("java.util.List[")
             }
-            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+            this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
             res.append("]")
 	} else {
-            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+            this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
 	}
 	
 	

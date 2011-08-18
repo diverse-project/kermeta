@@ -9,16 +9,16 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ClassAspect extends TypeAspect with ObjectAspect with LogAspect {
+trait ClassAspect extends TypeAspect with KermetaModelElementAspect with LogAspect {
 
     override def generateScalaCode(res : StringBuilder) : Unit = {
         /*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName
-         pack=kermeta.utils.TypeEquivalence.getPackageEquivalence(pack);
+         pack=k2.utils.TypeEquivalence.getPackageEquivalence(pack);
          var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName
          //		if (Util.currentPackage.equals(pack))
          //				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
          //		else
-         res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))*/
+         res.append(k2.utils.TypeEquivalence.getTypeEquivalence(s))*/
 //                                                             typeEquivelence.put("org.kermeta.language.structure.Object","java.lang.Object")
   
        var qualifiedName = this.getQualifiedNameCompilo()

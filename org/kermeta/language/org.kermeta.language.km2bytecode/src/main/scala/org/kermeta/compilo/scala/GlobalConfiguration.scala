@@ -23,9 +23,6 @@ object GlobalConfiguration extends LogAspect{
         //props = new ResourceBundle
         _props
         //FIRST STEP CHECK VALUES
-        loadResult = loadResult && _props.containsKey("use.default.aspect.uml")
-        loadResult = loadResult && _props.containsKey("use.default.aspect.ecore")
-        loadResult = loadResult && _props.containsKey("use.default.aspect.km")
         loadResult = loadResult && _props.containsKey("project.group.id")
         loadResult = loadResult && _props.containsKey("project.artefact.id")
         if(loadResult){
@@ -39,7 +36,14 @@ object GlobalConfiguration extends LogAspect{
             outputBinFolder = outputProject + java.io.File.separator+"bin"
             workspaceURI = if(_props.containsKey("workspace.platform.uri")) { _props.getProperty("workspace.platform.uri") } else { null }
             pluginURI = if(_props.containsKey("workspace.plugin.uri")) { _props.getProperty("workspace.plugin.uri") } else { null }
+            additionalClassPath = if(_props.containsKey("user.additional.classpath")) { List.fromString(props.getProperty("user.additional.classpath"),',')} else { null }
+            scalaAspectPrefix = _props.getProperty("project.artefact.id").replace(".", "")
             this.init = true
+
+            log.info("Properties loaded")
+        }
+        else{
+          log.info("Ignored properties because some are missing")
         }
         return loadResult
     }
@@ -59,12 +63,6 @@ object GlobalConfiguration extends LogAspect{
 
         var loadResult = true
         this.props = this.convertResourceBundleToProperties(props)
-        //props = _props
-        //FIRST STEP CHECK VALUES
-        //
-        loadResult = loadResult && props.containsKey("use.default.aspect.uml")
-        loadResult = loadResult && props.containsKey("use.default.aspect.ecore")
-        loadResult = loadResult && props.containsKey("use.default.aspect.km")
         loadResult = loadResult && props.containsKey("project.group.id")
         loadResult = loadResult && props.containsKey("project.artefact.id")
         if(loadResult){
@@ -77,6 +75,7 @@ object GlobalConfiguration extends LogAspect{
             scalaAspectPrefix = props.getString("project.artefact.id").replace(".", "")
             outputFolder = outputProject+"/src"
             outputBinFolder = outputProject+"/bin"
+            additionalClassPath = if(props.containsKey("user.additional.classpath")) { List.fromString(props.getString("user.additional.classpath"),',')} else { null }
             workspaceURI = if(props.containsKey("workspace.platform.uri")) { props.getString("workspace.platform.uri") } else { null }
             pluginURI = if(props.containsKey("workspace.plugin.uri")) { props.getString("workspace.plugin.uri") } else { null }
             this.init = true
@@ -110,13 +109,33 @@ object GlobalConfiguration extends LogAspect{
                             else
                                 return true
     }
-    def useMaven() : Boolean = {var  exec = props.getProperty("usemaven")
-                            if ("false".equals(exec))
-                                return false
-                            else
+    def useMaven() : Boolean = {var  exec = props.getProperty("use.maven.to.compile")
+                            if ("true".equals(exec))
                                 return true
+                            else
+                                return false
     }
-  def baseClass() : String = {var  baseClass = props.getProperty("baseClass")
+
+
+    //var props : ResourceBundle = null
+    var props : Properties = null
+    var additionalClassPath : List[String] = null
+
+    var frameworkGeneratedPackageName : String = null
+    var implicitConvTraitName : String = "ImplicitConversion"
+    var viewDefTraitName : String = "ViewType"
+    var factoryName : String = "KerRichFactory"
+    var outputProject : String = null
+    var outputFolder : String = null
+    var outputBinFolder : String = null
+    var scalaPrefix : String = "Scala"
+       @scala.reflect.BeanProperty
+    var scalaAspectPrefix : String = k2.utils.UTilScala.scalaAspectPrefix
+    var workspaceURI : String = null
+    var pluginURI : String = null
+    var withRich : Boolean = true
+
+    def baseClass() : String = {var  baseClass = props.getProperty("baseClass")
                           if (baseClass != null)
                               return baseClass
                           else
@@ -128,28 +147,6 @@ object GlobalConfiguration extends LogAspect{
                           else
                               return null
   }
-
-
-    //var props : ResourceBundle = null
-    var props : Properties = null
-
-    var frameworkGeneratedPackageName : String = null
-    var implicitConvTraitName : String = "ImplicitConversion"
-    var viewDefTraitName : String = "ViewType"
-    var factoryName : String = "RichFactory"
-    var outputProject : String = null
-    var outputFolder : String = null
-    var outputBinFolder : String = null
-    var scalaPrefix : String = "Scala"
-   
-      
-      var scalaAspectPrefix : String = k2.utils.UTilScala.scalaAspectPrefix
-      def setScalaAspectPrefix(arg:String)={
-      scalaAspectPrefix = arg
-    }
-      var workspaceURI : String = null
-    var pluginURI : String = null
-    var withRich : Boolean = true
 
 } 
  

@@ -9,7 +9,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait BlockAspect extends ObjectAspect with LogAspect {
+trait BlockAspect extends KermetaModelElementAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 

@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait LambdaParameterAspect extends ObjectAspect {
+trait LambdaParameterAspect extends KermetaModelElementAspect {
 	
 	implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
 	
@@ -17,7 +17,7 @@ trait LambdaParameterAspect extends ObjectAspect {
 		res.append(this.getName())
 		if(this.getType() != null) {
 			res.append(" : ")
-			this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+			this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
 		}
 	}
 }

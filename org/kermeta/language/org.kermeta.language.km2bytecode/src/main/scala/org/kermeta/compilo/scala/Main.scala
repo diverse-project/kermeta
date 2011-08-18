@@ -20,21 +20,33 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl._
-import org.kermeta.language.km2bytecode.embedded.maven._
-import org.kermeta.language.km2bytecode.embedded.scala._
+import org.embedded.EmbettedScalaCompiler;
+import org.embedded.EmbettedScalaRunner;
+import org.embedded._
 import org.slf4j.{Logger,LoggerFactory}
 
+import java.io.FileWriter
+//import org.apache.maven.embedder.DefaultConfiguration
+import java.io.OutputStream
+import java.io.PrintStream
+import org.apache.maven.artifact.repository.metadata.DefaultRepositoryMetadataManager
+import org.apache.maven.embedder.DefaultConfiguration
+import org.apache.maven.embedder.MavenEmbedder
+import org.apache.maven.embedder.MavenEmbedderConsoleLogger
+import org.apache.maven.execution.DefaultMavenExecutionRequest
+import org.apache.maven.execution.MavenExecutionRequest
+import scala.collection.JavaConversions._
+
 object Main extends LogAspect {
-//	def log = LoggerFactory.getLogger(this.getClass())
 
   var outputStream : java.io.OutputStream=null
 
-  def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String, outputStream : java.io.OutputStream):Unit ={
+  def init(propertyurl:String, projectName:String, args:String, outputStream : java.io.OutputStream):Unit ={
 
     var v = new Properties
     v.load(new FileInputStream(new File(propertyurl)))
     GlobalConfiguration.load(v)
-    additionalClassPath = classpath.toList
+    additionalClassPath = GlobalConfiguration.additionalClassPath
     this.outputStream = outputStream
   }
  
@@ -47,83 +59,39 @@ object Main extends LogAspect {
 
   def main(args : Array[String]) : Unit = {
 
-    //STEP 0 - LOAD PROPERTIES FILE
-    if (!GlobalConfiguration.init)
-    {
-     var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler")
-  //    var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler_binaryMerger")
- //     var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler_typeSetter")
-     // var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler_ecore2km")
-      GlobalConfiguration.load(resource)
 
-    }
-    
-//   GlobalConfiguration.scalaAspectPrefix = "binaryMerger"
-//   GlobalConfiguration.scalaAspectPrefix = "typeSetter"
- //  GlobalConfiguration.scalaAspectPrefix = "ecore2km"
-
-
-//additionalClassPath = List("/home/barais/NetBeansProjects/org.kermeta.scala.compilo.test/src/test/resources/MIK/core.jar") ++ additionalClassPath
-//additionalClassPath = List("/home/barais/NetBeansProjects/org.kermeta.scala.compilo.test/src/test/resources/MIK/directives.jar") ++ additionalClassPath
-  //additionalClassPath = List("/home/barais/malai.jar") ++ additionalClassPath
-
-//Derivation
-
-//       additionalClassPath = List("/home/barais/workspaces/movida/fr.inria.featureDiagramEditor.derivation.fdext.ui/libForCompilo/featureadresolution.jar") ++ additionalClassPath
- //   additionalClassPath = List("/home/barais/workspaces/movida/lib/flow.jar") ++ additionalClassPath  
-//    additionalClassPath = List("/home/barais/workspaces/movida/lib/fr.inria.featureDiagramEditor.emf-0.0.1-SNAPSHOT.jar") ++ additionalClassPath
-//UML
- /*         additionalClassPath = List("/home/barais/workspaces/movida2/TestUMLLoadJava/lib/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar") ++ additionalClassPath
-          additionalClassPath = List("/home/barais/workspaces/movida2/TestUMLLoadJava/lib/org.eclipse.uml2.uml_3.1.1.v201008191505.jar") ++ additionalClassPath
-          additionalClassPath = List("/home/barais/workspaces/movida2/TestUMLLoadJava/lib/org.eclipse.uml2.common_1.5.0.v201005031530.jar") ++ additionalClassPath
-          additionalClassPath = List("/home/barais/workspaces/movida2/TestUMLLoadJava/lib/org.eclipse.uml2_3.0.0.v201005031530.jar") ++ additionalClassPath
-*/
-        //Stereotype
-   //     additionalClassPath = List("/home/barais/workspaces/movida2/Toto/dist/toto.jar") ++ additionalClassPath
-   //  Vhess
-   //  additionalClassPath = List("/home/barais/workspaces/movida2/Chess/dist/chess.jar") ++ additionalClassPath
-
-
-//Thales          
-/*    additionalClassPath = List("/home/barais/workspaces/movida/lib/fr.inria.featureDiagramEditor.emf-0.0.1-SNAPSHOT.jar") ++ additionalClassPath
-        additionalClassPath = List("/home/barais/workspaces/movida/fr.inria.featureDiagramEditor.derivation.fdext.ui/libForCompilo/featureadresolution.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/EMDE-ext/eclipse/plugins/com.thalesgroup.mde.emde_1.2.1.201012061534.jar") ++ additionalClassPath
-
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/melody-data/eclipse/plugins/com.thalesgroup.mde.shared.data.behavior.gen_1.5.0.201101041151.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/melody-data/eclipse/plugins/com.thalesgroup.mde.shared.data.core.gen_1.5.0.201101041151.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/melody-data/eclipse/plugins/com.thalesgroup.mde.shared.data.activity.gen_1.5.0.201101041151.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/melody-data/eclipse/plugins/com.thalesgroup.mde.melody.data.gen_1.5.0.201101041151.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/melody-data/eclipse/plugins/com.thalesgroup.mde.shared.data.statemachine.gen_1.5.0.201101041151.jar") ++ additionalClassPath
-additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/eclipse/plugins/com.thalesgroup.mde.shared.patterns_1.5.0.201101041151.jar") ++ additionalClassPath 
-*/     
-//      additionalClassPath = List("/home/barais/workspaces/mopcom-i/TestCompiloV2ModMap/adapter_lab_corporate_apis.jar") ++ additionalClassPath
-  
-        /*additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.annotation_1.0.1.jar") ++ additionalClassPath
-  additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.marte.ccslmodel_1.1.0.013262.jar") ++ additionalClassPath
-  additionalClassPath = List("/home/barais/compilo/julien/fr.inria.aoste.trace_1.0.0.jar") ++ additionalClassPath
-  additionalClassPath = List("/home/barais/compilo/julien/jars.jar") ++ additionalClassPath*/
-//  additionalClassPath = List("/home/barais/.m2/repository/org/kermeta/art/model/1.1.1-SNAPSHOT/model-1.1.1-SNAPSHOT.jar") ++ additionalClassPath
-  //  additionalClassPath = List("/home/barais/workspaces/movida2/org.kermeta.language.mdk/dist/language.model-2.0.1-SNAPSHOT.jar") ++ additionalClassPath
-/*
-    additionalClassPath = List("/home/barais/Desktop/CVL/plugins/ari_editor_1.0.0.jar") ++ additionalClassPath
-    additionalClassPath = List("/home/barais/Desktop/CVL/plugins/CVLResolutionEditor_1.0.0.jar") ++ additionalClassPath
-    additionalClassPath = List("/home/barais/Desktop/CVL/plugins/CVLVariabilityEditor_1.0.0.jar") ++ additionalClassPath
-*/
-        var inputFile : String = ""
+    var inputFile : String = ""
     var runnerParams = List[String]()
     var useFSC = false
     var scalacompile = true
+	var propertyfile = "kermetaCompiler.properties"
 	 	  
     for(a <- args){
       log.debug("Param : "+a)
     }
 
+    var input = false
+    var property = false
+    var help = false
     for (i <- 0 until args.length) args(i).replaceAll("\"", "").trim() match {
-      case "-help" | "-h" => println("Usage: scala Main [-help|-input INPUTFILE|-runp param1,param2|-fsc]")
+      case "-help" | "-h" => println("Usage: scala Main [-help|-input INPUTFILE|-property PROPERTYFILE|-runp param1,param2|-fsc]") 
+    		  help = true
+    		  return
       case "-input" | "-i" => {
           var nextI : Int = i + 1
           if(nextI < args.length){
             inputFile = args(nextI).replaceAll("\"", "").trim()
+            input = true
+            log.debug("Input File : {}",inputFile)
+          } else {
+            log.warn("Parameter Error")
+          }
+        }
+      case "-property" | "-p" => {
+          var nextI : Int = i + 1
+          if(nextI < args.length){
+            propertyfile = args(nextI).replaceAll("\"", "").trim()
+            property =true
             log.debug("Input File : {}",inputFile)
           } else {
             log.warn("Parameter Error")
@@ -144,36 +112,35 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
       case "-fsc" => { useFSC = true }
       case _ =>
     }
-	  
-	    
+    //inputFile="/opt/intellij/compiloV2/org.kermeta.language.km2bytecode/hello.world.km"
+
+    
+    //STEP 0 - LOAD PROPERTIES FILE
+    if (!GlobalConfiguration.init )
+    {
+      if (!(property && input)){
+    	if (!help)
+    		println("Usage: scala Main [-help|-input INPUTFILE|-property PROPERTYFILE|-runp param1,param2|-fsc]")    	  
+      return      
+    }
+      
+      if (property){
+    	  var v = new Properties
+    	  v.load(new FileInputStream(new File(propertyfile)))
+    	  GlobalConfiguration.load(v)
+    	  additionalClassPath = GlobalConfiguration.additionalClassPath
+      }
+      else{
+    	  var resource : ResourceBundle = ResourceBundle.getBundle(propertyfile)
+    			  GlobalConfiguration.load(resource)
+      }
+    }
+
+    
     var compilo = new Compiler
 
-//    inputFile = "/home/barais/NetBeansProjects/org.kermeta.scala.compilo.test/src/test/resources/MIK/kompose_ecore.km"
-   //   inputFile = "/home/barais/workspaces/malal/org.kermeta.ki.visual/kermeta/Visual.km"
-   //   inputFile = "/home/barais/workspaces/movida/fr.inria.featureDiagramEditor.derivation.fdext.ui/src/kermeta/Derivation/TextualDerivation.km"
-    //  inputFile = "/home/barais/workspaces/movida/TestCompilo/src/kermeta/010ValueTypeReflexion.km"
-  //      inputFile = "/home/barais/compilo/julien/Launcher.km"
-//   inputFile = "/home/barais/workspaces/compiloV2/smart@adaptor/src/main/kermeta/ArtCleaner.km"
-  //      inputFile="/home/barais/workspaces/compiloV2/TestCompilo/src/kermeta/testReflexivity001.km"
-  //      
-//  inputFile = "/home/barais/workspaces/movida/fr.inria.product_derivation_engine/src/kermeta/main/CallDerivation.km"
-//  inputFile =   "/home/barais/workspaces/movida/fr.inria.product_derivation_engine/src/kermeta/Derivation/DerivationEngine.km"
-//        inputFile = "/home/barais/workspaces/movida2/TestUMLLoadJava/model/new_file.km"
-//  inputFile =   "/home/barais/workspaces/movida/fr.inria.product_derivation_engine/src/kermeta/Selection/SelectionEngine.km"
- //inputFile ="/home/barais/workspaces/mopcom-i/TestCompiloV2ModMap/adapter.km"
-//inputFile ="/home/barais/workspaces/movida2/TestUMLLoadJava/model/marth/chessLoad.km"
- //   inputFile ="/home/barais/workspaces/movida2/org.kermeta.language.ecore2km/src/main/kermeta/Ecore2km.km"
-  //  inputFile ="/home/barais/workspaces/movida2/org.kermeta.language.merger.binarymerger/src/main/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMerger.km"
- //   inputFile ="/home/barais/workspaces/movida2/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/Resolver.km" 
-//  inputFile = "/home/barais/workspaces/movida2/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/FullStaticResolver.km"
- //  inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframework.km"
-//   inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndLoop.km"
-    //inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndIf.km"
 
-//inputFile = "/home/barais/workspaces/movida2/Kermeta2ToolChainStandalone/AfterStaticSetting__HelloWorldMiniframeworkAndRaise.km"
-//inputFile = "/home/barais/cours/TAA20102011/hello.world.km"
-   // inputFile = "/home/barais/workspaces/compiloV2/org.kermeta.language.km2bytecode/hello.world.km"
-        if(inputFile != ""){
+    if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
       compilo.compile(inputFile)
     } else {
@@ -185,9 +152,9 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
     /* Scalac compilation step */
 
 
-   if (scalacompile){
+    if (scalacompile){
       if (!GlobalConfiguration.useMaven){
-        var classpath =EmbeddedScalaCompiler.getActualClasspath
+        var classpath =EmbettedScalaCompiler.getActualClasspath
         
         if (additionalClassPath != null)
           classpath = additionalClassPath ++ classpath
@@ -199,22 +166,34 @@ additionalClassPath = List("/home/barais/app/IRISA-TRT-MOVIDA/M2/Shared-ext/ecli
           System.setErr(new java.io.PrintStream(outputStream))
         }
                 
-        var compilationResult = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+        var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
         result = compilationResult
         //Scala runner
         if(compilationResult == 0 && GlobalConfiguration.exec){
 
-          EmbeddedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
+          EmbettedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
         }
         if (GlobalConfiguration.createPackage ){
         	var fo =  new File(GlobalConfiguration.outputProject +File.separator + "target").getCanonicalFile
         	fo.mkdirs
-        	_root_.org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.scalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
+        	_root_.org.embedded.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.getScalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
         }
         if (outputStream != null){
           System.setOut(new PrintStream(oldOut))
           System.setErr(new PrintStream(oldErr))
         }
+        var project = POMGeneratorHelper.initProject(GlobalConfiguration.standalone, additionalClassPath)
+        var rootDirectory = new java.io.File(GlobalConfiguration.outputProject);
+        var pomFile = new java.io.File(rootDirectory, "pom.xml");
+        try {
+            var fw = new FileWriter(pomFile);
+            project.writeModel(fw);
+            fw.flush();
+            fw.close();
+        } catch  {
+            case e:Exception=> e.printStackTrace()
+        }
+
         
       }else{
         result = EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)

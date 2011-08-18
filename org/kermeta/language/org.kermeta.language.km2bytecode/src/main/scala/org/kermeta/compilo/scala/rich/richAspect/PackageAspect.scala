@@ -10,7 +10,7 @@ import java.util._
 import _root_.org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait PackageAspect extends ObjectAspect with IVisitable with LogAspect {
+trait PackageAspect extends KermetaModelElementAspect with IVisitable with LogAspect {
   this : Package =>
 	
   override def accept(visitor : IVisitor){

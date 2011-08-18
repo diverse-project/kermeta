@@ -17,8 +17,8 @@ object CopyEcoreFile {
     
       def copyEcorefiles(destFolder : String) : Unit = {
           println("copy ecore to " + destFolder)
-        CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactory.java", destFolder)
-        CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactoryWrapper.java", destFolder)
+        //CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactory.java", destFolder)
+        //CopyEcoreFile.copy("org/eclipse/emf/ecore/EcoreFactoryWrapper.java", destFolder)
         CopyEcoreFile.copy("org/eclipse/emf/ecore/impl/EcorePackageImpl.java", destFolder)
         
       }

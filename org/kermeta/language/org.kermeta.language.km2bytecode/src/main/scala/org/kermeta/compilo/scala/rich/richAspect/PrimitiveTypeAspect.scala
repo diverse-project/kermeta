@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
  
-trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
+trait PrimitiveTypeAspect extends KermetaModelElementAspect with LogAspect {
 	
     implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
 
@@ -54,7 +54,7 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
 			
         }else{
             if (this.getInstanceType !=null){
-                this.getInstanceType.asInstanceOf[ObjectAspect].generateScalaCode(res)
+                this.getInstanceType.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
             }
             else
                 res.append(k2.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
@@ -65,14 +65,14 @@ trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
     }
 	
     override def getQualifiedNameCompilo():String ={
-       // var res =  kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
+       // var res =  k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "."+ this.getName())
        var res = new StringBuilder
        this.generateScalaCode(res)
         return res.toString;
     }
 
         def whichBoolean():String ={
-        var res =  k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
+        var res =  k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "."+ this.getName())
        //var res = new StringBuilder
        //this.generateScalaCode(res)
       // println(res)

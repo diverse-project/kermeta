@@ -70,7 +70,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       res.append("import _root_.k2.standard._\n")
       res.append("import _root_.k2.standard.JavaConversions._\n")
       res.append("import _root_.k2.standard.PrimitiveConversion._\n")
-//      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
+      //res.append("import _root_.k2.kunit.KunitConversions._\n")
       par.generateScalaCode(res)
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
       if (!Util.hasEcoreTag(par)){
@@ -106,7 +106,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
          */
         //GENERATE ATTRIBUTE SIGNATURE
 
-        //res1.append("trait " + par.getName + " extends "+superQualifiedName+" with org.kermeta.scala.framework.language.structure.ObjectAspect")
+        //res1.append("trait " + par.getName + " extends "+superQualifiedName+" with org.kermeta.scala.framework.language.structure.KermetaModelElementAspect")
         Util.generateFile(genpackageName.toString, par.getName, res1.toString())
       }
     }

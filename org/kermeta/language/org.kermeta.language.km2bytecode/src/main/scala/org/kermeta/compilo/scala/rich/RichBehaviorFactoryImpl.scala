@@ -28,11 +28,18 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	override def createCallOperation() : CallOperation =  {
 		new CallOperationView
 	}
+  	override def createCallEnumLiteral() : CallEnumLiteral =  {
+		new CallEnumLiteralView
+	}
+
+  	override def createCallProperty() : CallProperty =  {
+		new CallPropertyView
+	}
 	
 
 	//TODO
 	override def createEmptyExpression() : EmptyExpression = {
-		new EmptyExpressionImpl() with ObjectAspect
+		new EmptyExpressionImpl() with KermetaModelElementAspect
 	}
 
 	override def createRaise() : Raise = {

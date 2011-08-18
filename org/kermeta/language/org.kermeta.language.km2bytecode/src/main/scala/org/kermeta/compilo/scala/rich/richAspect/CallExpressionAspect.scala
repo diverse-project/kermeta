@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait CallExpressionAspect extends ObjectAspect {
+trait CallExpressionAspect extends KermetaModelElementAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(".")

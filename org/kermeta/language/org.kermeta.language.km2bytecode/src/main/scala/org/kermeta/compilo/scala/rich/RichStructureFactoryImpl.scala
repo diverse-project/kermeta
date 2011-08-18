@@ -12,12 +12,12 @@ import org.kermeta.compilo.scala.rich._
 class RichStructureFactoryImpl extends StructureFactoryImpl {
     
 	override def createKermetaModelElement() = {
-		new ObjectView
+		new KermetaModelElementView
 	}
 
 	//TODO
 	override def createMultiplicityElement() = {
-		new MultiplicityElementImpl() with ObjectAspect
+		new MultiplicityElementImpl() with KermetaModelElementAspect
 	}
 
 	override def createOperation() : Operation = {
@@ -27,6 +27,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	override def createProperty() : Property = {
 		new PropertyView
 	}
+
 
 	
 	override def createEnumerationLiteral() : EnumerationLiteral = {
@@ -43,28 +44,25 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createModel() : Model = {
-		new ModelImpl() with ObjectAspect
+		new ModelImpl() with KermetaModelElementAspect
 	}
 
 	override def createModelType() : ModelType = {
-		new ModelTypeImpl() with ObjectAspect
+		new ModelTypeImpl() with KermetaModelElementAspect
 	}
 
 	override def createObjectTypeVariable() : ObjectTypeVariable = {
-		new ObjectTypeVariableView
+		new KermetaModelElementTypeVariableView
 	}
 
-	//TODO
 	override def createClassDefinition() : ClassDefinition = {
 		new ClassDefinitionView
 	}
 
-	//TODO
 	override def createFunctionType() : FunctionType = {
 		new FunctionTypeView
 	}
 
-	//TODO
 	override def createProductType() : ProductType = {
 		new ProductTypeView
 	}
@@ -75,7 +73,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createTypeDefinition() : TypeDefinition = {
-		new TypeDefinitionImpl() with ObjectAspect
+		new TypeDefinitionImpl() with KermetaModelElementAspect
 	}
 	
 	override def createVoidType() : VoidType = {
@@ -84,9 +82,12 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
  
 	//TODO
 	override def createRequire() : Require = {
-		new RequireImpl() with ObjectAspect
+		new RequireImpl() with KermetaModelElementAspect
 	}
 
+	override def createUsing() : Using = {
+		new UsingView
+	}
 
 	override def createModelingUnit() : ModelingUnit = {
 		new ModelingUnitView()
@@ -94,14 +95,13 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 
 
-	//TODO
 	override def createEnumeration() : Enumeration = {
 		new EnumerationView
 	}
 
 	//TODO
 	override def createParameter() : Parameter = {
-		new ParameterImpl() with ObjectAspect
+		new ParameterImpl() with KermetaModelElementAspect
 	}
 
 	override def createPrimitiveType() : PrimitiveType = {
@@ -110,17 +110,16 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createTag() : Tag = {
-		new TagImpl() with ObjectAspect
+		new TagImpl() with KermetaModelElementAspect
 	}
-	
-	//TODO
+
 	override def createConstraint() : Constraint = {
 		new ConstraintView
 	}
 
 	//TODO
 	override def createModelTypeVariable() : ModelTypeVariable = {
-		new ModelTypeVariableImpl() with ObjectAspect
+		new ModelTypeVariableImpl() with KermetaModelElementAspect
 	}
 //
 //	//TODO

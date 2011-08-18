@@ -9,15 +9,11 @@ import org.kermeta.language.behavior._
 import java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait LoopAspect extends ObjectAspect {
+trait LoopAspect extends KermetaModelElementAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("\n\n{")
-    if (this.getInitialization.isInstanceOf[Block]){
-    Util.generateScalaCodeEach(res,	this.getInitialization().asInstanceOf[Block].getStatement,"\n")
-    }else{
-      this.getInitialization().generateScalaCode(res)
-    }
+		this.getInitialization().generateScalaCode(res)
 		res.append("\n")
 		res.append("while (!(")
 		this.getStopCondition().generateScalaCode(res)

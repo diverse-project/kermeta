@@ -6,7 +6,7 @@ import org.kermeta.compilo.scala._
 import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
-import java.util._
+import _root_.java.util._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
 trait CallOperationAspect extends CallExpressionAspect with LogAspect {
@@ -17,14 +17,14 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
         if (this.getTarget!=null){
             if (this.getTarget.isInstanceOf[CallTypeLiteral]){
                 if (this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().isInstanceOf[ParameterizedType]){
-				
+
                     var ty : TypeDefinition =this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType].getTypeDefinition()
                     res.append("_root_.")
                     if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package])){
                         res.append(GlobalConfiguration.scalaAspectPrefix+".")
                     }
                     res.append(k2.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedNameCompilo))
-                    res.append(".RichFactory.create")
+                    res.append("."+GlobalConfiguration.factoryName+".create")
                     res.append(ty.getName())
                     var ty1 : ParameterizedType = this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]
                     //var i = 0;
@@ -40,14 +40,14 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
                 }
             }else{
                 res.append("utils.UTilScala.newInstance(")
-                this.getTarget.asInstanceOf[ObjectAspect].generateScalaCode(res)
+                this.getTarget.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
                 res.append(")")
 
             }
         }
     }
-	
-	
+
+
     def generateTarget(res : StringBuilder){
         if (this.getTarget()!=null){
             res.append("(")
@@ -62,28 +62,22 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
         Util.generateScalaCodeEach(res,this.getParameters,", ")
         res append closeS
     }
-	
- /*   def generatePropertyCall(res : StringBuilder){
-        var TargetType : StringBuilder = new StringBuilder
-        this.getTarget().getStaticType().generateScalaCode(TargetType)
-        res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
-		
-    }*/
+
     def generateOperationCall(res : StringBuilder){
         var TargetType : StringBuilder = new StringBuilder
-    
+
         this.getTarget().getStaticType().generateScalaCode(TargetType)
-    
+
         if(this.getName.contains("split")){
             println("call equivalence")
-            //println(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
+            //println(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
         }
-    
-    
+
+
         var ops : List[Operation] = this.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(this.getName))
         if (ops.size>0){
-            //if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-            //  res.append(Util.protectScalaKeyword(ops.get(0).getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+            //if (ops.get(0).getKOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+            //  res.append(Util.protectScalaKeyword(ops.get(0).getKOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
             //}else{
             res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
 
@@ -93,28 +87,20 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
 
         }
     }
-	
+
     def generateName(res : StringBuilder){
         res.append(this.getName())
     }
-    def generatePropertyName(res : StringBuilder){
+   /* def generatePropertyName(res : StringBuilder){
         res.append(GlobalConfiguration.scalaPrefix + this.getName())
-    }
+    }      */
 
-/*    def generateEnumLiteralCall(res : StringBuilder){
-        if (Util.hasEcoreTag(this.getStaticEnumLiteral.getEnumeration)){
-            var res1 : StringBuilder = new StringBuilder
-            generateName(res1)
-            res.append("getByName(\""+res1.toString+"\")")
-        }else{
-            generateName(res)
-        }
-    }*/
+
 
     def generateIsInstance(res : StringBuilder){
         res.append(this.getName())
     }
-
+  /*
     def generateKUnitCase(res : StringBuilder){
         this.getTarget().generateScalaCode(res)
         res append ".run("
@@ -131,7 +117,7 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
             })
         res append ")"
     }
-
+         */
     def generateInstanceOf(res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
         res.append("[")
         if (o.isInstanceOf[CallTypeLiteral]){
@@ -139,19 +125,18 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
             o.asInstanceOf[CallTypeLiteral].generateScalaCodeForInstanceOf(res)
         }
         else{
-            o.asInstanceOf[ObjectAspect].generateScalaCode(res)
+            o.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
         }
         res.append("]")
 
     }
-  
+
     /* TO MERGE */
-    def generateIsInstanceOf(res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement
-                          )={
+    def generateIsInstanceOf(res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
         if (o.isInstanceOf[CallTypeLiteral]){
             generateTarget(res);
             res.append(".");
-    
+
             res.append("isInstanceOf[")
             //res.append("_root_.")
             o.asInstanceOf[CallTypeLiteral].generateScalaCodeForInstanceOf(res)
@@ -162,23 +147,23 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
 
             generateTarget(res);
             res.append(",");
-    
-            o.asInstanceOf[ObjectAspect].generateScalaCode(res)
+
+            o.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
             res.append(")")
         }
-        res.append("\n")    
-    }  
-  
-  
+        res.append("\n")
+    }
+
+
     def generateClone(res:StringBuilder){
-        res.append("(scalaUtil.Util.clone(");generateTarget(res);res.append(","); this.getParameters.get(0).generateScalaCode(res);res.append("))"); 
+        res.append("(scalaUtil.Util.clone(");generateTarget(res);res.append(","); this.getParameters.get(0).generateScalaCode(res);res.append("))");
             if (this.getTarget.isInstanceOf[CallTypeLiteral]){
                 res.append(".asInstanceOf[")
-               // if (this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType.isInstanceOf[Class]){
-                    res.append("_root_." +k2.utils.TypeEquivalence.getTypeEquivalence(k2.utils.UTilScala.getQualifiedNameType(this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType, ".")))
+               // if (this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType.isInstanceOf[Class]){
+                    res.append("_root_." +k2.utils.TypeEquivalence.getTypeEquivalence(_root_.k2.utils.UTilScala.getQualifiedNameTypeJava(this.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType, ".")))
                     res.append("]")
                 //}else{
-                 //   res.append("_root_." + _root_.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
+                 //   res.append("_root_." + _root_.k2.utils.UTilScala.getQualifiedNameType(this.getTyperef().getType, "."))
                 //}
             }
     }
@@ -186,7 +171,7 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
     
 
             override def generateScalaCode(res : StringBuilder) : Unit = {
-                log.debug("CallFeature={}",this.getName())
+                log.debug("CallOperatio={}",this.getName())
                 this.getName match {
                     case "clone" =>  { generateClone(res)  }
       
@@ -202,14 +187,14 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
                     case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       
                     case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
-                        //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
+                    //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
                     case "isInstance" => {generateParam(res,"","") ;res.append(".isInstanceOf");generateInstanceOf(res, this.getTarget)}
       
-                    case "isKindOf" => generateIsInstanceOf(res,this.getParameters.get(0) )
+                    case "isKindOf" => generateTarget(res);res.append(".Kermeta");generateOperationCall(res);generateParam(res,"(",")")
                     case "isInstanceOf" => generateIsInstanceOf(res,this.getParameters.get(0) )
         
       
-                    case "isVoid" => { res.append("_root_.k2.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
+                    case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(res);res.append(")");}
                     case "add"
                         if (this.getTarget != null && this.getTarget.getStaticType != null && this.getTarget.getStaticType.isInstanceOf[org.kermeta.language.structure.Class]
                             && (this.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("OrderedSet")
@@ -221,12 +206,12 @@ trait CallOperationAspect extends CallExpressionAspect with LogAspect {
                                 ||this.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
                                     =>{generateTarget(res);res.append(".");res.append("addAllUnique");generateParam(res,"(",")")}
                     case "new" => generateNew(res)
-                    case _ if(this.getTarget != null && this.getStaticOperation!=null ) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
-                    case _ if(this.getTarget == null && this.getStaticOperation!=null ) => {res.append(Util.getEcoreRenameOperation(this.getStaticOperation));generateParam(res,"(",")") }
-/*                    case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
-                    case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }*/
- /*                   case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res); }
-                    case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral ==null) => {generateTarget(res);res.append(".");generateName(res) }*/
+                    case _ if(this.getTarget != null/* && this.getStaticOperation!=null && this.getStaticProperty==null*/) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
+                    case _ if(this.getTarget == null/* && this.getStaticOperation!=null && this.getStaticProperty==null*/) => {res.append(Util.getEcoreRenameOperation(this.getStaticOperation));generateParam(res,"(",")") }
+                    //case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
+                    //case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }
+ //                   case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res); }
+                    //case _ if(this.getTarget != null /*&& this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral ==null*/) => {generateTarget(res);res.append(".");generateName(res) }
                     case _ => log.debug("!!! Uncatch case ")
  
                 }

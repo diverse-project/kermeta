@@ -8,11 +8,11 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait AssignmentAspect extends ObjectAspect with LogAspect {
+trait AssignmentAspect extends KermetaModelElementAspect with LogAspect {
     this : Assignment =>
     override def generateScalaCode(res : StringBuilder) : Unit = {
         log.debug("Assignment={}",this.toString)
-        if ( this.getIsCast() != null && this.getIsCast().booleanValue){
+        if (  this.getIsCast() !=null &&  this.getIsCast()){
             res append "try{\n"
         }
         this.getTarget().generateScalaCode(res)
@@ -22,23 +22,21 @@ trait AssignmentAspect extends ObjectAspect with LogAspect {
         res append ")"	
         /* Step looking for a cast */
         var targetClass : StringBuilder = new StringBuilder
-        if (this.getIsCast() != null && this.getIsCast().booleanValue)
-        {
-            if (this.getTarget.getStaticType.isInstanceOf[Class] || this.getTarget.getStaticType.isInstanceOf[PrimitiveType]){
+        if (this.getIsCast() !=null && !this.getIsCast()){
+            //if(this.getValue().isInstanceOf[VoidLiteral]){
+                this.getTarget.getStaticType.generateScalaCode(targetClass)
+            //}
+        } else {
+            if (this.getTarget.getStaticType.isInstanceOf[Class] || this.getTarget.getStaticType.isInstanceOf[PrimitiveType]|| this.getTarget.getStaticType.isInstanceOf[Enumeration]){
                 this.getTarget.getStaticType.generateScalaCode(targetClass)
             }else {
+
                 if (this.getTarget.getStaticType.isInstanceOf[NamedElement]){
                     targetClass.append(this.getTarget.getStaticType.asInstanceOf[NamedElement].getName)
                 } else {
                     log.debug("TODO Assignment with Cast")
                 }
             }
-        } else
-
-        {
-            //if(this.getValue().isInstanceOf[VoidLiteral]){
-                this.getTarget.getStaticType.generateScalaCode(targetClass)
-            //}
         }
         /* Generate Cast if found */
         if(!targetClass.toString.equals("")){
@@ -46,7 +44,7 @@ trait AssignmentAspect extends ObjectAspect with LogAspect {
         }
         
         res.append(";")
-        if (this.getIsCast() != null && this.getIsCast().booleanValue){
+        if (this.getIsCast() !=null && this.getIsCast()){
             res append "\n}catch { case e:ClassCastException => {}}\n"
         }
 

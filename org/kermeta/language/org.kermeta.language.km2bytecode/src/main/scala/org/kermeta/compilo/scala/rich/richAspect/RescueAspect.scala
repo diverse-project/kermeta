@@ -7,7 +7,7 @@ import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 
-trait RescueAspect extends ObjectAspect with LogAspect {
+trait RescueAspect extends KermetaModelElementAspect with LogAspect {
   this : Rescue =>
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
@@ -15,12 +15,12 @@ trait RescueAspect extends ObjectAspect with LogAspect {
 		
                 if(this.getExceptionType != null){
                   res.append("case "+this.getExceptionName()+":")
-                  this.getExceptionType.asInstanceOf[ObjectAspect].generateScalaCode(res)
+                  this.getExceptionType.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
                 } else {
                   res.append("case _ ")
                 }
 		res.append(" => {")
-		this.getBody().foreach(b => {b.asInstanceOf[ObjectAspect].generateScalaCode(res);res.append("\n")})
+		this.getBody().foreach(b => {b.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res);res.append("\n")})
 		res.append("}\n")
 	}
 

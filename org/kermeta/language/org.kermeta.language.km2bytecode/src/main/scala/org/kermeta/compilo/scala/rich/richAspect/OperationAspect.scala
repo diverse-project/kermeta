@@ -7,7 +7,7 @@ import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 
-trait OperationAspect extends ObjectAspect with LogAspect {
+trait OperationAspect extends KermetaModelElementAspect with LogAspect {
 	
   implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 
@@ -20,8 +20,8 @@ trait OperationAspect extends ObjectAspect with LogAspect {
                res.append(" override")
       }
       res.append(" def ")
-      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+      //if (this.getKOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+      //  res.append(Util.protectScalaKeyword(this.getKOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
       //}else{
         res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(this)))
       //}
@@ -61,8 +61,8 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         res.append(" override")
       }
       res.append(" def ")
-      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+      //if (this.getKOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+      //  res.append(Util.protectScalaKeyword(this.getKOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
       //}else{
         res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(this)))
       //}
@@ -101,12 +101,26 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         res.append(" = null.asInstanceOf[")
         this.getListorType(res)
         //this.getType.generateScalaCode(res)
-        res.append("]; \n")
+        res.append("]; \n try { \n")
       if (this.getBody!= null){
 				
-        this.getBody().asInstanceOf[ObjectAspect].generateScalaCode(res)
+        this.getBody().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
       }
-        res append " return result\n}\n"
+res append "        }\n"
+res append "catch {\n"
+res append "case e :_root_.k2.exceptions.Exception => {throw e}\n"
+res append "  case e => {\n"
+res append "    val tutu18 = k2.exceptions.KerRichFactory.createException;\n"
+res append "  	tutu18.message = \"error in kermeta code on operation " + this.eContainer.asInstanceOf[ClassDefinitionAspect].getQualifiedNameCompilo +"."+this.getName +"\"\n"
+res append "  	  tutu18.setStackTrace(e.getStackTrace)\n"
+res append "  	  throw tutu18\n"
+res append "  }\n}\n"
+        
+      if ("_root_.k2.standard.Void".equals(res1.toString)){
+        res append " \n}\n"
+      } 
+      else
+          res append " return result\n}\n"
         //this.getType.generateScalaCode(res)
         //res append "]\n}\n"
         //res.append("}/*End_"+this.getName()+"*/\n")
@@ -120,7 +134,7 @@ trait OperationAspect extends ObjectAspect with LogAspect {
                                           var ii = 0;
                                           this.getTypeParameter.foreach{param=>
         if (ii>0) {res1.append(",")}
-        res1.append(param.asInstanceOf[ObjectAspect].getQualifiedNameCompilo())
+        res1.append(param.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo())
         ii= ii+1
       }
                                           res1.append("]")
@@ -132,21 +146,21 @@ trait OperationAspect extends ObjectAspect with LogAspect {
     var res1 : StringBuilder = new StringBuilder
 
     if (this.getUpper>1 ||this.getUpper == -1){
-      if (this.getIsOrdered.booleanValue){
+      if (this.getIsOrdered){
         res.append("org.eclipse.emf.common.util.EList[")
       }else{
         //TODO gestion des SETs
         res.append("org.eclipse.emf.common.util.EList[")
       }
 
-      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
 
     } else {
 
 
-      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
 
     }
@@ -157,17 +171,17 @@ trait OperationAspect extends ObjectAspect with LogAspect {
   def getListorType(param:Parameter,res:StringBuilder)={
     var res1 : StringBuilder = new StringBuilder
     if (param.getUpper>1 ||param.getUpper == -1){
-      if (param.getIsOrdered.booleanValue){
+      if (param.getIsOrdered){
         res.append("org.eclipse.emf.common.util.EList[")
       }else{
         //TODO gestion des SETs
         res.append("org.eclipse.emf.common.util.EList[")
       }
-      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      param.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
     } else {
-      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      param.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res1)
       res.append(getLocalTypeEquivalence(res1.toString))
     }
 

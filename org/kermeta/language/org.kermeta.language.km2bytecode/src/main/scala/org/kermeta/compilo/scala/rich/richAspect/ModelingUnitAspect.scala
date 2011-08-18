@@ -9,7 +9,7 @@ import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ModelingUnitAspect extends ObjectAspect with IVisitable {
+trait ModelingUnitAspect extends KermetaModelElementAspect with IVisitable {
 	 
 	 def accept(visitor : IVisitor){
 		visitor.visit(this)

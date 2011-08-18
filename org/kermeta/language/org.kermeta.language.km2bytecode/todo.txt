@@ -15,7 +15,7 @@ object RichFactory {
 }
 
  class RichPerson extends system.lab.impl.PersonImpl with ScalaAspect.system.lab.PersonAspect with org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation
-=> class RichPerson extends system.lab.Person with ScalaAspect.system.lab.PersonAspect with org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with kermeta.standard.EObjectImplForPrimitive
+=> class RichPerson extends system.lab.Person with ScalaAspect.system.lab.PersonAspect with org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with k2.standard.EObjectImplForPrimitive
 
 def Scalaemployees : java.util.List[_root_.system.corporate.Employee]={new RichKermetaList(this.getEmployees())}.asInstanceOf[java.util.List[_root_.system.corporate.Employee]]
 => def Scalaemployees : java.util.List[_root_.system.corporate.Employee]={if (this.getEmployees()==null) this.setEmployees(new java.util.ArrayList[_root_.system.corporate.Employee]); new RichKermetaList(this.getEmployees())}.asInstanceOf[java.util.List[_root_.system.corporate.Employee]]

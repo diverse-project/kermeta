@@ -27,7 +27,7 @@ object Util extends LogAspect {
      * @param obj model element to test
      * @return true if ecore tag is found
      */
-    def hasEcoreTag(obj : org.kermeta.language.structure.KermetaModelElement) : Boolean = {
+    def hasEcoreTag(obj : KermetaModelElement) : Boolean = {
         obj.getKOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
     }
 
@@ -38,7 +38,7 @@ object Util extends LogAspect {
      */
 
     def hasEcoreFromAPITag(obj : KermetaModelElement) : Boolean = {
-        obj.getKOwnedTags.exists(e=> "ecorefromAPI".equals(e.asInstanceOf[Tag].getName()))
+        obj.getKOwnedTags.exists(e=> "ecoreFromAPI".equals(e.asInstanceOf[Tag].getName()))
     }
     
     
@@ -72,9 +72,16 @@ object Util extends LogAspect {
     }
    
     def cleanFolder(repName : String){
+      if (repName != null){
         var f : java.io.File = new java.io.File(repName)
-        cleanFolder(f)
+        if (f != null) {
+          cleanFolder(f)
+        } else {
+          log.debug("Cleaning : folder : {} ,not exist",repName)
+        }        
+      }
     }
+    
     def cleanFolder(f : java.io.File){
         if(f.exists()){
             var children  = f.list
@@ -156,21 +163,21 @@ object Util extends LogAspect {
     var threadExecutor : ExecutorService = null
    
    
-    def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
+    def generateScalaCodeEach[A <: KermetaModelElement](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
-                e.asInstanceOf[ObjectAspect].generateScalaCode(res)
+                e.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
             })
     }
    
    
-    def generateProtectedScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
+    def generateProtectedScalaCodeEach[A <: KermetaModelElement](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
                 var temp = new StringBuilder
-                e.asInstanceOf[ObjectAspect].generateScalaCode(temp)
+                e.asInstanceOf[KermetaModelElementAspect].generateScalaCode(temp)
                 res.append(protectScalaKeyword(temp.toString))
             })
         //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
@@ -210,7 +217,7 @@ object Util extends LogAspect {
 
 
     def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String = {
-        var baseName = typD.asInstanceOf[ObjectAspect].getQualifiedNameCompilo
+        var baseName = typD.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo
 
         //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
         log.debug(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]))
@@ -226,7 +233,7 @@ object Util extends LogAspect {
     }
 
     def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
-        var baseName = typD.asInstanceOf[ObjectAspect].getQualifiedNameCompilo
+        var baseName = typD.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo
         baseName = baseName match {
             case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List") ) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
             case _ => { baseName }
