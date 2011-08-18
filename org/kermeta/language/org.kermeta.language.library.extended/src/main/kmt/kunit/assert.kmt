@@ -1,0 +1,181 @@
+/* $Id: assert.kmt,v 1.11 2008-08-21 15:48:24 cfaucher Exp $
+ * Creation date: May 29, 2007
+ * License:
+ * Copyright:
+ * Authors: Harry Lime (abstract) 
+ */
+
+/**
+ * main features of the famous Unit test tool for Kermeta language
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
+ */
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit"
+package kermeta::kunit;
+
+require "../Standard.kmt"
+
+using kermeta::standard
+
+/**
+ * to be written ############################
+ */
+@CompilerIgnore "true"
+abstract class AbstractFallible
+{
+
+    /** process the given condition and react if it is not satisfied */
+    operation assert(condition: Boolean):Void is
+	  	abstract
+  	
+    /**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
+    operation assertWithMsg(condition: Boolean, msg: String):Void 	is
+	  	abstract
+
+    /** to be used if a failure reaction is needed */
+	operation fail(msg: String): Void is
+		 abstract
+		 
+    /** process the given condition and react if it is not satisfied */
+	operation assertTrue(condition: Boolean): Void is
+		abstract
+		
+    /**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
+	operation assertTrueWithMsg(condition: Boolean, message: String): Void is
+		abstract
+	
+    /** process the given condition and react if it is satisfied */
+	operation assertFalse(condition: Boolean): Void is
+		abstract
+		
+    /**
+     * process the given condition and react with the given message
+     * if it is satisfied
+     */
+	operation assertFalseWithMsg(condition: Boolean, message: String): Void is
+		abstract
+	
+	/** process the two given string and react if they are not equal */ 
+ 	operation assertEqual(expected: String, actual: String): Void is
+		abstract
+
+  /**
+   * Log a failure if the two strings are not identical modulo-white-space
+   */
+ 	operation assertSimilar(expected: String, actual: String): Void is
+		do	
+			expected := distil(expected)
+			actual := distil(actual)
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual  \t:[" + actual + "]")
+		end
+		
+	/** 
+	 ** reduces all runs of white-space to a single space character
+	 **/
+	operation distil(s: String): String is
+		do
+			result := ""
+			var white: Boolean init false
+			from
+				var i : Integer init 0
+			until
+				i == s.size
+			loop
+				var c: String init s.elementAt(i).toString
+				if " \n\t".indexOf(c) >= 0 then
+					if not white then
+						white : = true
+						result := result +" "
+					end
+				else
+					result := result + c
+					if white then
+						white : = false
+					end
+				end
+				i := i + 1
+			end
+		end
+
+
+}
+
+
+/** AssertionViolatedException are raised when assertions are violated */
+@CompilerIgnore "true"
+class AssertionFailedError inherits kermeta::exceptions::Exception { }
+
+@CompilerIgnore "true"
+class Assert inherits AbstractFallible
+{
+
+	/** Fails if condition is false */
+	method assert(condition : Boolean) : Void is 
+        do
+            if not condition then 
+            	fail("assert failed") 
+            end
+        end
+	
+	/** will fail if condition is false */
+	method assertTrue(condition : Boolean) : Void is 
+        do
+            if not condition then 
+            	fail("assertTrue failed") 
+            end
+        end
+	
+	/** will fail if condition is false */
+	method assertTrueWithMsg(condition : Boolean, msg : String) : Void is 
+        do
+            if not condition then 
+            	fail("assertTrueWithMsg failed : " + msg) 
+            end 
+        end
+	
+	/** will fail if condition is true */
+	method assertFalse(condition : Boolean) : Void is
+        do
+            if condition then 
+            	fail("assertTrue number failed") 
+            end
+        end
+	
+	/** will fail if condition is true */
+	method assertFalseWithMsg(condition : Boolean, msg : String) : Void is
+        do
+            if condition then 
+            	fail("assertTrueWithMsg failed : " + msg) 
+            end 
+        end
+	
+	/** will fail if condition is false */
+    method assertWithMsg(condition: Boolean, msg: String):Void 	is
+	  	do
+            if not condition then 
+            	fail("assertTrueWithMsg failed : " + msg) 
+            end 
+		end
+
+	/** raise a AssertionViolatedException with the provided message */
+	method fail(msg: String): Void is
+		do
+            var exception : AssertionFailedError init AssertionFailedError.new
+            exception.message := msg
+            raise exception
+		end
+		 
+ 	/** Will fail if the two strings are not identical */
+ 	method assertEqual(expected: String, actual: String): Void is
+		do
+			if not expected.equals(actual) then
+				fail( "assertEqual failed\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+			end
+		end
+
+}
