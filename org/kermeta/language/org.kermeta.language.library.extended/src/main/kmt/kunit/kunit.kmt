@@ -14,11 +14,8 @@
  *
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit"
 package kermeta::kunit;
 
-require "../Standard.kmt"
-require "assert.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -30,13 +27,11 @@ using kermeta::kunit
 /**
  * This exception is rose if there is a problem on the name of the test method
  */
-@CompilerIgnore "true"
 class InvalidTestCaseNameException inherits exceptions::Exception{}
 
 /**
  * This is for when we try to build a suite from a class that isn't a TestCase
  */
-@CompilerIgnore "true"
 class InvalidParameterException inherits exceptions::Exception{}
 
 /**
@@ -45,7 +40,6 @@ class InvalidParameterException inherits exceptions::Exception{}
  * (assertions) and the mechanism for recording that those 
  * conditions have not been met.
  */
-@CompilerIgnore "true"
 abstract class Fallible inherits AbstractFallible 
 {
 
@@ -71,7 +65,7 @@ abstract class Fallible inherits AbstractFallible
    * where failures will be put 
    */
   operation  getLog(): Log  
-  	post logDefined is result != void 
+  //	post logDefined is result != void 
   	is abstract
   
    
@@ -182,7 +176,6 @@ abstract class Fallible inherits AbstractFallible
 /**
  * Log is a log of failures and errors that happened to fallibles since start was called
  */
-@CompilerIgnore "true"
 class Log
 {
 	/**
@@ -252,7 +245,6 @@ class Log
 /**
  * Failure represents an assertion failure stored in a failure log
  */
-@CompilerIgnore "true"
 class Failure
 {
 	/**
@@ -298,8 +290,6 @@ enumeration ErrorKind
  * Error represents an occurrence of an exception in setUp, tearDown or a test
  * and is stored in a failure log
  */
-
-@CompilerIgnore "true"
 class Error
 {
 	/**
@@ -390,7 +380,6 @@ class Error
  * The abstact notion of a test which is runnable and which has a log
  * in which it can keep note of failures
  */
-@CompilerIgnore "true"
 abstract class Test 
 {
     /**
@@ -411,8 +400,8 @@ abstract class Test
 	 * Initializes the log where failures and errors will be put
 	 */
 	operation setLog(log: Log): Void 
-		pre paramNotVoid is log != void
-		post logNotVoid is self.log != void
+	//	pre paramNotVoid is log != void
+	//	post logNotVoid is self.log != void
 		is do
 			self.log := log
 		end
@@ -421,7 +410,7 @@ abstract class Test
 	 * Execute the test and verify its assertions
 	 */
 	operation run():Void 
-		pre logNotVoid is self.log != void
+	//	pre logNotVoid is self.log != void
 		is  abstract
 }
 
@@ -443,7 +432,7 @@ abstract class Test
  *
  *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
  */
-@CompilerIgnore "true"
+
 class TestSuite inherits Test
 {
 	/**
@@ -467,7 +456,7 @@ class TestSuite inherits Test
 	  * test method in class c. C must be a descendent of TestCase
 	  */
    	operation addAllTestCasesFrom(testCaseClass: Class): TestSuite 
-   		pre testCaseClassIsATestCase is testCaseClass.superClass.contains(TestCase) 
+   	//	pre testCaseClassIsATestCase is testCaseClass.superClass.contains(TestCase) 
    		is
  		do
  			if not testCaseClass.superClass.exists{ sc | sc.equals(TestCase)} then
@@ -528,7 +517,6 @@ class TestSuite inherits Test
  * set up with their testMethodName using the addAllTestCasesFrom
  * operation on TestSuite
  */
-@CompilerIgnore "true"
 abstract class TestCase inherits Test, Fallible
 {
 
@@ -671,7 +659,6 @@ abstract class TestCase inherits Test, Fallible
  *
  * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods
  */
-@CompilerIgnore "true"
 class TestRunner
 {
 	/**
@@ -685,8 +672,8 @@ class TestRunner
 	 *  you can populate a suite with TestSuite.addAllTestCasesFrom
 	 */
 	 operation runTest(test:Test): Void 
-		pre testNotVoid is test != void
-		post logNotVoid is log != void
+	//	pre testNotVoid is test != void
+	//	post logNotVoid is log != void
 		is
 		do
 			log := Log.new
@@ -699,7 +686,7 @@ class TestRunner
 	  * and creates the necessary suite, and runs it. DEPRECATED
 	  */
 	operation run(testCaseClass: Class): Void 
-		pre cIsATestCase is testCaseClass.superClass.contains(TestCase) 
+	//	pre cIsATestCase is testCaseClass.superClass.contains(TestCase) 
 		is
 		do
 			runTest(TestSuite.new.addAllTestCasesFrom(testCaseClass))
@@ -710,27 +697,27 @@ class TestRunner
 	 * Run some tests first.
 	 */
 	operation printTestResult() is do
-		stdio.writeln(
+		Stdio.writeln(
 		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
 
 		if not log.failures.empty then
-			stdio.writeln("\nFailures: ")
-			log.failures.each { f | stdio.writeln("\n   " + f.toString) 	}
+			Stdio.writeln("\nFailures: ")
+			log.failures.each { f | Stdio.writeln("\n   " + f.toString) 	}
 		end
 		if not log.errors.empty then
-			stdio.writeln("\nErrors: ")	
+			Stdio.writeln("\nErrors: ")	
 			log.errors.each { e | 
-			stdio.writeln("\n   " + e.toString) 	}
+			Stdio.writeln("\n   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
-			stdio.writeln("\nErrors from setUp or tearDown : ")	
-			log.harnessErrors.each { e | stdio.writeln("\n   " + e.toString) 	}
+			Stdio.writeln("\nErrors from setUp or tearDown : ")	
+			log.harnessErrors.each { e | Stdio.writeln("\n   " + e.toString) 	}
 		end
-		stdio.writeln("\n Summary: ")
-		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
-		stdio.writeln("   Number of failures : " + log.failures.size.toString)
-		stdio.writeln("   Number of errors : " +  log.errors.size.toString)
-		stdio.writeln("   Number of errors in setUp or tearDown: " +  log.harnessErrors.size.toString)
-		stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
+		Stdio.writeln("\n Summary: ")
+		Stdio.writeln("   Number of launched tests : " + log.runtests.toString)
+		Stdio.writeln("   Number of failures : " + log.failures.size.toString)
+		Stdio.writeln("   Number of errors : " +  log.errors.size.toString)
+		Stdio.writeln("   Number of errors in setUp or tearDown: " +  log.harnessErrors.size.toString)
+		Stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
 	end
 }

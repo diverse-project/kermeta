@@ -9,17 +9,14 @@
  * main features of the famous Unit test tool for Kermeta language
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit"
 package kermeta::kunit;
 
-require "../Standard.kmt"
 
 using kermeta::standard
 
 /**
  * to be written ############################
  */
-@CompilerIgnore "true"
 abstract class AbstractFallible
 {
 
@@ -89,13 +86,13 @@ abstract class AbstractFallible
 				var c: String init s.elementAt(i).toString
 				if " \n\t".indexOf(c) >= 0 then
 					if not white then
-						white : = true
+						white := true
 						result := result +" "
 					end
 				else
 					result := result + c
 					if white then
-						white : = false
+						white := false
 					end
 				end
 				i := i + 1
@@ -107,10 +104,8 @@ abstract class AbstractFallible
 
 
 /** AssertionViolatedException are raised when assertions are violated */
-@CompilerIgnore "true"
 class AssertionFailedError inherits kermeta::exceptions::Exception { }
 
-@CompilerIgnore "true"
 class Assert inherits AbstractFallible
 {
 
