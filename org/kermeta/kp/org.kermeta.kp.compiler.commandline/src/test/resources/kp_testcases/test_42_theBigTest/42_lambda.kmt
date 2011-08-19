@@ -17,7 +17,7 @@
  */
 
 
-package testLambda;
+package root_package_lambda;
 
 using kermeta::io 
 using kermeta::standard 
@@ -26,7 +26,7 @@ using kermeta::kunit
 
 //alias FunctionType : kermeta::language::structure::FunctionType;
 
-class TestLambda inherits kermeta::kunit::Assert
+class LambdaTester inherits kermeta::kunit::Assert
 {
 	
 	operation mainTest() : Void is do
