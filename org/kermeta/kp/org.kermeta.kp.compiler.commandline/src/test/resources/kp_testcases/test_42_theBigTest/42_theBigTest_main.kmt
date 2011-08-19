@@ -21,7 +21,7 @@ package root_package{
 	       root_package_enum::EnumTester.new.main()	
 	       root_package_exception::ExceptionTester.new.main()
 	       root_package_generic::GenericTester.new.main()	
-	       root_package_loop::LambdaTester.new.main()	
+	       root_package_lambda::LambdaTester.new.main()	
 	       root_package_loop::LoopTester.new.main()	
 	       root_package_multipleInheritance::MultipleInheritanceTester.new.main()
 	       root_package_multiplicity::MultiplicityTester.new.main()
