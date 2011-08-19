@@ -1,6 +1,8 @@
 KermetaProject :"test_42_theBigTest" 
 version :  "2.0.1-SNAPSHOT" 
 group :"org.kermeta.language" 
+defaultMainClass : "root_package::Main"
+defaultMainOperation : "main"
 { 
 	source = "${project.baseUri}/42_enum.kmt"
 	source = "${project.baseUri}/42_exception.kmt"
