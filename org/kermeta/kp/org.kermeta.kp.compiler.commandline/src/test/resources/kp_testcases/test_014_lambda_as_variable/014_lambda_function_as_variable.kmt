@@ -31,7 +31,7 @@ class Main
 	operation main() : Void is do     
 		var rs:Integer
 		rs:= BinaryOp(12,21,Add()) 
-	    stdio.writeln(rs.toString())  // Prints 33
+	    kermeta::io::StdIO.writeln(rs.toString())  // Prints 33
 	    if rs != 33 then
 	    	var e : Exception init Exception.new
 	    	e.message := "rs="+rs.toString + " but it should have been = 33"
