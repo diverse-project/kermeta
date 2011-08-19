@@ -1,0 +1,14 @@
+KermetaProject :"test_019_exception" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language" 
+defaultMainClass : "testExceptionsPackage::TestExceptions"
+defaultMainOperation : "main"
+{ 
+	source = "${project.baseUri}/019_exception.kmt"
+	
+	// import library.extended	
+	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
+		 
+} 
+
+ 
