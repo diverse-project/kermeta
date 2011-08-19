@@ -29,7 +29,7 @@ using kermeta::kunit
 class LambdaTester inherits kermeta::kunit::Assert
 {
 	
-	operation mainTest() : Void is do
+	operation main() : Void is do
 		testNoLambda
 		testLambda1
 		testLambdaWithDef
