@@ -2,8 +2,9 @@ KermetaProject :"language.library.extended"
 version :  "2.0.1-SNAPSHOT" 
 group :"org.kermeta.language" 
 { 
-	source = "${project.baseUri}/src/main/kmt/kunit/assert.kmt"
-	source = "${project.baseUri}/src/main/kmt/kunit/assert.kmt"
+	// cannot be used like this due to dynamicExpression 
+	// source = "${project.baseUri}/src/main/kmt/kunit/assert.kmt"
+	// source = "${project.baseUri}/src/main/kmt/kunit/kunit.kmt"
 	
 	// import library.core	
 	dependency "library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   

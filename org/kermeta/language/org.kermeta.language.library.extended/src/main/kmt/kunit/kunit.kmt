@@ -20,19 +20,19 @@ package kermeta::kunit;
 using kermeta::standard
 using kermeta::utils
 using kermeta
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::kunit
 
 
 /**
  * This exception is rose if there is a problem on the name of the test method
  */
-class InvalidTestCaseNameException inherits exceptions::Exception{}
+class InvalidTestCaseNameException inherits kermeta::exceptions::Exception{}
 
 /**
  * This is for when we try to build a suite from a class that isn't a TestCase
  */
-class InvalidParameterException inherits exceptions::Exception{}
+class InvalidParameterException inherits kermeta::exceptions::Exception{}
 
 /**
  * This is represents the aspect of tests that they may go wrong.
@@ -460,7 +460,7 @@ class TestSuite inherits Test
    		is
  		do
  			if not testCaseClass.superClass.exists{ sc | sc.equals(TestCase)} then
- 				var e :exceptions:: Exception init InvalidParameterException.new
+ 				var e : kermeta::exceptions::Exception init InvalidParameterException.new
  				e.message :="Cannot build a suite from class: " + testCaseClass.name
  				raise e
  			end
@@ -595,7 +595,7 @@ abstract class TestCase inherits Test, Fallible
 			log.errors.each { f | 
 				msg := "Errors: "
 				msg := msg +"\n   " + f.toString
-				var exception : exceptions::Exception init exceptions::Exception.new
+				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				exception.message := msg
 				raise exception 	
 			}
@@ -620,20 +620,20 @@ abstract class TestCase inherits Test, Fallible
 					de.execute(self, Hashtable<String, kermeta::standard::Object>.new)
 					do
 						tearDown
-					rescue (e : exceptions::Exception)
+					rescue (e : kermeta::exceptions::Exception)
 						getLog.addTearDownError(self, e)
 					end
 				rescue (afe:  kermeta::kunit::AssertionFailedError)
 					getLog.addFailure(self, afe.message + "\nstack trace:\n" +  afe.stackTrace)
-				rescue (e1 : exceptions::Exception)
+				rescue (e1 : kermeta::exceptions::Exception)
 					getLog.addTestError(self,e1)
 					do
 						tearDown
-					rescue (e : exceptions::Exception)
+					rescue (e : kermeta::exceptions::Exception)
 						getLog.addTearDownError(self, e)
 					end
 				end
-			rescue (e : exceptions::Exception)
+			rescue (e : kermeta::exceptions::Exception)
 				getLog.addSetUpError(self, e)
 			end
 		end
