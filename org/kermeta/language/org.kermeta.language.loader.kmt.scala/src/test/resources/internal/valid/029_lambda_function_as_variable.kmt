@@ -14,12 +14,14 @@ require kermeta
 
 using kermeta::standard
 using kermeta::exceptions
+using kermeta::io::StdIO => stdio
+
 class Main
 {
 
 	operation Add():<[Integer,Integer]->Integer> is do
      	var f:<[Integer,Integer]->Integer>
-     	f:=function {i1:Integer,i2:Integer|i1+i2}
+     	f:= {i1:Integer,i2:Integer|i1+i2} // new syntax in k2 no need to put the keyword "function""
      	result:=f
    	end 
 
