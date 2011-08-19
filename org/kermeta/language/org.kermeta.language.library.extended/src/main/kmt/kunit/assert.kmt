@@ -64,17 +64,17 @@ abstract class AbstractFallible
   /**
    * Log a failure if the two strings are not identical modulo-white-space
    */
- 	operation assertSimilar(expected: String, actual: String): Void is
+ /*	operation assertSimilar(expected: String, actual: String): Void is
 		do	
 			expected := distil(expected)
 			actual := distil(actual)
 			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual  \t:[" + actual + "]")
 		end
-		
+	*/	
 	/** 
 	 ** reduces all runs of white-space to a single space character
 	 **/
-	operation distil(s: String): String is
+	/* operation distil(s: String): String is
 		do
 			result := ""
 			var white: Boolean init false
@@ -98,7 +98,7 @@ abstract class AbstractFallible
 				i := i + 1
 			end
 		end
-
+	*/
 
 }
 
