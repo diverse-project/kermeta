@@ -20,7 +20,7 @@
 package testLambda;
 
 using kermeta::io 
-using kermeta::standard
+using kermeta::standard 
 using kermeta::kunit
 
 
@@ -69,7 +69,8 @@ class TestLambda inherits kermeta::kunit::Assert
 	operation testLambda1() : Void is do
 		var lf1 : <Integer->Integer>
 		var res : Integer
-		lf1 := function { i : Integer | i.plus(1) }
+		// old syntax lf1 := function { i : Integer | i.plus(1) }
+		lf1 := { i : Integer | i.plus(1) }
 		res := lf1(3)
 		assert(res == 4)
 	end
@@ -77,14 +78,16 @@ class TestLambda inherits kermeta::kunit::Assert
 	/** test an operation call with a lambda expression */
 	operation testLambdaWithDef() : Void is do
 		var lf1 : <Integer->Integer>
-		lf1 := function { i : Integer | i.plus(1) }
+		// old syntax lf1 := function { i : Integer | i.plus(1) }
+		lf1 := { i : Integer | i.plus(1) }
 		assert(lf1(3).equals(4))
 	end
 
 	/** test a lambda exp. with 2 parameters */
 	operation testLambdaWithTwoParams() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
-		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		// old syntax lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		lf1 := { i : Integer, j : Integer | i.plus(j) }
 		assert(lf1(3, 4) == 7)
 	end
 
@@ -92,7 +95,8 @@ class TestLambda inherits kermeta::kunit::Assert
 	
 	operation testLambdaSimpleWithString() : Void is do
 		var lfs : <String->String>
-		lfs := function { str : String | "toto" }
+		// old syntax lfs := function { str : String | "toto" }
+		lfs := { str : String | "toto" }
 		lfs("pof")
 		assert(lfs("pof")=="toto")
 		
@@ -103,7 +107,8 @@ class TestLambda inherits kermeta::kunit::Assert
 	/** test a lambda exp. with a String */
 	operation testLambdaWithString() : Void is do
 		var lfs : <String->String>
-		lfs := function { str : String | str.substring(0,1) }
+		// old syntax lfs := function { str : String | str.substring(0,1) }
+		lfs := { str : String | str.substring(0,1) }
 		assert(lfs("pof")=="p")
 		
 	end
@@ -111,7 +116,8 @@ class TestLambda inherits kermeta::kunit::Assert
 	/** test a lambda exp. with 3 parameters */
 	operation testLambdaWithThreeParams() : Void is do
 		var lft1 : <[Integer, Integer, String]->Integer>
-		lft1 := function { i : Integer, j : Integer, k : String | k.indexOf("f") }
+		// old syntax lft1 := function { i : Integer, j : Integer, k : String | k.indexOf("f") }
+		lft1 := { i : Integer, j : Integer, k : String | k.indexOf("f") }
 		StdIO.writeln("stringOfMoreThanSevenChars".indexOf("f").toString)
 		assert(lft1(3, 4, "stringOfMoreThanSevenChars")==7)
 	end
@@ -119,7 +125,8 @@ class TestLambda inherits kermeta::kunit::Assert
 
 	operation testLambdaWithThreeParams2() : Void is do
 		var lft2 : <[Integer, Integer, String]->String>
-		lft2 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), i.plus(j)+2) }
+		// old syntax lft2 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), i.plus(j)+2) }
+		lft2 := { i : Integer, j : Integer, k : String | k.substring(i.plus(j), i.plus(j)+2) }
 		assert(lft2(3, 4, "stringOfMoreThanSevenChars")=="fM")
 	end
 
@@ -127,7 +134,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	do
 		var f: <Void -> Void>
 		var passed : Boolean init false
-		f := function{i : Void | StdIO.writeln("testLambdaWithoutParam")
+		f := {i : Void | StdIO.writeln("testLambdaWithoutParam")
 				passed := true
 				void
 			}       
@@ -142,7 +149,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	do
 		var f: <Void -> Void>
 		var passed : Boolean init false
-		f := function{i : Void | StdIO.writeln("testLambdaWithoutParam")
+		f := {i : Void | StdIO.writeln("testLambdaWithoutParam")
 				passed := true
 				void
 			}       
@@ -157,7 +164,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	do
 		var f: <Void -> Void>
 		var passed : Boolean init false
-		f := function{i : Void | StdIO.writeln("testLambdaWithoutParam3")
+		f := {i : Void | StdIO.writeln("testLambdaWithoutParam3")
 				passed := true
 				void
 			}       
@@ -173,8 +180,8 @@ class TestLambda inherits kermeta::kunit::Assert
 	operation testNestedLambda() : Void is do
 		var lf1 : <[Integer, Integer, String]->String>
 		var lf2 : <[String, String]->String>
-		lf1 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), 7) }
-		lf2 := function { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
+		lf1 := { i : Integer, j : Integer, k : String | k.substring(i.plus(j), 7) }
+		lf2 := { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
 		assert(lf2("abcde", "fghi")=="defg")
 	end
 	
@@ -182,7 +189,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	operation testLambdaWithExtVar() : Void is do
 		var lf1 : <Integer->Integer>
 		var extern_var : kermeta::standard::Integer
-		lf1 := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
+		lf1 := { i : kermeta::standard::Integer |  i.plus(extern_var)}
 		extern_var := 5
 		assert(lf1(4)==9)
 	end
@@ -192,7 +199,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	// test a lambda expression stored in a reference
 	operation testLambdaStoredInReference() : Void is do
 		
-		lambdaStoredInReference := function { i : kermeta::standard::Integer |  i.plus(1)}
+		lambdaStoredInReference := { i : kermeta::standard::Integer |  i.plus(1)}
 		
 		//assert(lambdaInReference(4)==5) // doesn't work
 		// workaround
@@ -207,7 +214,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	// test a lambda expression stored in a reference
 	operation testLambdaWithExternVarStoredInReference() : Void is do
 		var extern_var : Integer init 5
-		lambdaWithExternVarStoredInReference := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
+		lambdaWithExternVarStoredInReference := { i : kermeta::standard::Integer |  i.plus(extern_var)}
 		
 		//assert(lambdaInReference(4)==5) // doesn't work
 		// workaround
@@ -230,7 +237,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	
 	operation getOutsidescopeLambda() : <Integer->Integer> is do
 		var extern_var : Integer init 5
-		result := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
+		result := { i : kermeta::standard::Integer |  i.plus(extern_var)}
 		extern_var := 3
 	end
 	
@@ -254,7 +261,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	end
 	
 	operation getOutsidescopeLambdaAtt() : <Integer->Integer> is do
-		result := function { i : kermeta::standard::Integer |  i.plus(anInteger)}
+		result := { i : kermeta::standard::Integer |  i.plus(anInteger)}
 	end
 	
 	/* -------------------- */
@@ -272,7 +279,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	end
 	
 	operation getOutsidescopeLambdaParam(aParamInteger : Integer) : <Integer->Integer> is do
-		result := function { i : kermeta::standard::Integer |  i.plus(aParamInteger)}
+		result := { i : kermeta::standard::Integer |  i.plus(aParamInteger)}
 	end
 	
 	/* ----------------- */
@@ -281,7 +288,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	operation testLambdaVarPriority() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
 		var a_var : kermeta::standard::Integer
-		lf1 := function { i : Integer, a_var : Integer |  i.plus(a_var)}
+		lf1 := { i : Integer, a_var : Integer |  i.plus(a_var)}
 		a_var := 4
 		assert(lf1(1,2)==3)
 		assert(a_var == 4)
@@ -290,14 +297,14 @@ class TestLambda inherits kermeta::kunit::Assert
 	// lambda exp. as parameter of an operation?
 	operation testLambdaInOperation() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
-		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		lf1 := { i : Integer, j : Integer | i.plus(j) }
 		// 3 * 2 * 5
 		assert(3.mult(lf1(2, 5))==21)
 	end
 	
 	operation testOpWithLambdaAsParam() : Void is do
 		var lf1 : <Integer->Integer>
-		lf1 := function { i : Integer | i.plus(54) }
+		lf1 := { i : Integer | i.plus(54) }
 		assert(opWithLambdaAsParam(lf1, 3)==57)
 	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
@@ -325,8 +332,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	
 	operation testFract() is do
 		var fact : <Integer -> Integer>
-        fact := 
-	        function {x : Integer |
+        fact := {x : Integer |
 	        	if x == 0 then 1 else x * fact(x-1) end
 	       	}
         fact(3)
