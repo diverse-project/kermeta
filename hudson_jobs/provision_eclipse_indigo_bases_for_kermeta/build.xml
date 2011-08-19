@@ -23,7 +23,7 @@
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
 	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/${eclipse.code.name}"/>
-	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.6/"/>
+	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.0.0/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
