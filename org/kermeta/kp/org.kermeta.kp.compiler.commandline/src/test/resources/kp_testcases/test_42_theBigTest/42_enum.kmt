@@ -1,0 +1,116 @@
+/* $Id: arab2roman.kmt,v 1.3 2006-10-31 12:29:47 rdelamar Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : arab2roman.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Authors : 
+ *        Didier Vojtisek 
+ */
+
+ 
+using kermeta::standard
+
+package root_package_enum{
+
+enumeration Couleur {
+	jaune;
+	bleu;
+	vert;
+	rouge;
+}
+
+enumeration Jour {
+	lundi;
+	mardi;
+	mercredi;
+	jeudi;
+}
+
+
+class EnumTester
+	{
+
+	attribute color : Couleur
+	
+	attribute colors : Couleur[*]
+	
+	operation main() : Void is do
+	       	kermeta::io::StdIO.writeln("[begin]\tEnumTester()")
+	       	test1
+	       	test2
+	       	test3
+	       	test4
+	       	test5
+	       	testReflect
+	       	testReflect2
+	       	kermeta::io::StdIO.writeln("[end]\tEnumTester()")
+	end
+	
+	
+	operation test1() : Couleur is
+	do
+		result := Couleur.jaune
+	end
+	
+	operation test2() is do
+		var o : Object
+		o := Jour.lundi
+	end
+	
+	operation test3() is do
+		var c : Couleur
+		c := Couleur.jaune
+		c := c
+	end
+	
+	operation test4() : Set<Couleur> is do
+		result := Set<Couleur>.new
+        colors.each{ col | 
+        	result.add(col)
+        	color := col
+        }
+	end
+
+	operation test5() is do
+		var o : Object
+		o := Couleur.jaune
+		color ?= o
+	end
+	
+	operation testReflect() is do
+		var p : org::kermeta::language::structure::Package   
+		var e : org::kermeta::language::structure::Enumeration
+		var jaune : org::kermeta::language::structure::EnumerationLiteral
+		
+		p ?= self.getMetaClass.typeDefinition.container
+		e ?= p.ownedTypeDefinition.select{ t | t.name == "Couleur" }.one
+		jaune := e.ownedLiteral.select{ l | l.name == "jaune" }.one
+		
+		//assert(jaune == Couleur.jaune)
+		 
+		jaune == Couleur.jaune
+		 
+		var c : Couleur
+		
+		c ?= jaune
+		
+		//assert(c == Couleur.jaune)
+		
+		var j : Jour
+		j ?= jaune
+		
+		//assert(j == void)
+		
+		j == void
+		
+	end
+	
+	operation testReflect2() is do
+		
+		Couleur.ownedLiteral.size
+		
+	end
+}
+}

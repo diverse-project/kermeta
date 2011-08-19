@@ -1,0 +1,59 @@
+/* $Id: arab2roman.kmt,v 1.3 2006-10-31 12:29:47 rdelamar Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : arab2roman.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Authors : 
+ *        Didier Vojtisek 
+ */
+
+
+using kermeta::standard
+
+package root_package_multiplicity{
+	class MultiplicityTester
+	{
+	    operation main() : Void is do 
+	       	kermeta::io::StdIO.writeln("[begin]\tMultiplicityTester()")
+	    	var b : B := B.new
+			var a1 : A := A.new
+			a1.name := "(a1)mon nom a moi"
+			var a2 : A := A.new
+			a2.name := "(a2)je suis a2"
+			var a3 : A := A.new
+			a3.name := "(a3)I'm a3"
+			b.myA := a1
+			b.severalAs.add(a2)
+			b.severalAs.add(a3)
+			b.printName()
+	       	kermeta::io::StdIO.writeln("[begin]\tMultiplicityTester()")
+	    end
+	}
+	
+	class B {
+		reference myA : A
+		reference severalAs : A[0..*]
+		
+		operation printName() is do
+		    var td : org::kermeta::language::structure::GenericTypeDefinition
+			td := self.getMetaClass.typeDefinition 
+			myA.printName()
+			kermeta::io::StdIO.writeln("   referencing the folling A(s) :")
+			severalAs.each{aA | aA.printName}
+		end
+	
+	}
+	
+	
+	class A {
+		attribute name : String
+		
+		operation printName() is do
+			kermeta::io::StdIO.writeln(name)
+			
+		end
+	}
+	
+}	

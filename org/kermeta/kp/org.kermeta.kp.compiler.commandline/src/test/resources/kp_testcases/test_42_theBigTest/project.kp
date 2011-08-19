@@ -1,0 +1,21 @@
+KermetaProject :"test_42_theBigTest" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language" 
+{ 
+	source = "${project.baseUri}/42_enum.kmt"
+	source = "${project.baseUri}/42_exception.kmt"
+	source = "${project.baseUri}/42_generic.kmt"
+	//source = "${project.baseUri}/42_lambda.kmt"
+	source = "${project.baseUri}/42_loop.kmt"
+	source = "${project.baseUri}/42_multipleInheritance.kmt"
+	source = "${project.baseUri}/42_multiplicity.kmt"
+	
+	
+	source = "${project.baseUri}/42_theBigTest_main.kmt"
+	
+	// import library.extended	
+	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
+		 
+} 
+
+ 

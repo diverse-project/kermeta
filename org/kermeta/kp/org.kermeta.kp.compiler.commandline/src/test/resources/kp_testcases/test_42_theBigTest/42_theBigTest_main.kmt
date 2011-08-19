@@ -1,0 +1,32 @@
+/* $Id: arab2roman.kmt,v 1.3 2006-10-31 12:29:47 rdelamar Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : arab2roman.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Authors : 
+ *        Didier Vojtisek 
+ */
+
+
+using kermeta::standard
+
+package root_package{
+	class Main
+	{
+		
+	
+	    operation main() : Void is do 
+	       root_package_enum::EnumTester.new.main()	
+	       root_package_exception::ExceptionTester.new.main()
+	       root_package_generic::GenericTester.new.main()	
+	       //root_package_loop::LambdaTester.new.main()	
+	       root_package_loop::LoopTester.new.main()	
+	       root_package_multipleInheritance::MultipleInheritanceTester.new.main()
+	       root_package_multiplicity::MultiplicityTester.new.main()
+	       
+	       kermeta::io::StdIO.writeln("The end")
+	    end
+	}
+}

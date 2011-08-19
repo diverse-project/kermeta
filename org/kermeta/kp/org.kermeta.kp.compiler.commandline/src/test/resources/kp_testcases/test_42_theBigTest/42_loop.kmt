@@ -1,0 +1,42 @@
+/* $Id: arab2roman.kmt,v 1.3 2006-10-31 12:29:47 rdelamar Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : arab2roman.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Authors : 
+ *        Didier Vojtisek 
+ */
+
+
+using kermeta::standard
+
+package root_package_loop{
+	class LoopTester
+	{
+		
+	
+	    operation main() : Void is do 
+	       	kermeta::io::StdIO.writeln("[begin]\tLoopTester()")
+	       	from var j : Integer init 10
+			until j < 0
+			loop			
+			
+				//kermeta::io::StdIO.write(i.toString)
+				if (j < 5) then
+					kermeta::io::StdIO.writeln(" < 5")
+					if  j == 0  then
+						kermeta::io::StdIO.writeln("Zero reached")
+					end
+				else
+					kermeta::io::StdIO.writeln(" >= 5")
+				end
+				kermeta::io::StdIO.writeln("   j=" + j.toString)
+				j := j - 1  
+			end	 	
+			
+	       	kermeta::io::StdIO.writeln("[end]\tLoopTester()")
+	    end
+	}	
+}
