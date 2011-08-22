@@ -2,13 +2,17 @@
 
 	<property name="env.WORKSPACE" location="."/>
 	<!-- Change this according to the computer running the script -->
+	<property name="eclipse.download.base.url" value="http://eclipse.ialto.com/technology/epp/downloads/release/"/>
+	<property name="eclipse.download.folder" value="indigo/R/"/>
+	<property name="eclipse.download.base_version" value="eclipse-modeling-indigo-"/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="eclipse.native.archive.extension" value="tar.gz"/>
-	<property name="eclipse.native.base.url.release.folder" value="R-3.7-201106131736"/>
-	<property name="eclipse.native.base.url.release.number" value="3.7"/>
-	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-linux-gtk-x86_64.tar.gz"/>
+	<!--<property name="eclipse.native.base.url.release.folder" value="R-3.7-201106131736"/>
+	<property name="eclipse.native.base.url.release.number" value="3.7"/>-->
+	<property name="eclipse.native.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}linux-gtk-x86_64.tar.gz"/>
 	<property name="eclipse.native.equinox.version" value="1.2.0.v20110502"/>
 	<property name="eclipse.code.name" value="indigo"/>
+	<property name="p2.profile" value="epp.package.modeling"/>
 	<!--
 	<property name="eclipse.native.version.name" value="win32"/>
 	<property name="eclipse.native.archive.extension" value="zip"/>
@@ -41,22 +45,22 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-linux-gtk-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}linux-gtk-x86_64.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 	<target name="provision_linux_x86_base_for_kermeta">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-linux-gtk.tar.gz"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}linux-gtk.tar.gz"/>
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 
@@ -64,11 +68,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-win32.zip"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}win32.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 	
@@ -76,11 +80,11 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-win32-x86_64.zip"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}win32-x86_64.zip"/>
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 	
@@ -88,22 +92,22 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}macosx-cocoa-x86_64.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 	<target name="provision_macosx-cocoa_base_for_kermeta">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/${eclipse.native.base.url.release.folder}/eclipse-SDK-${eclipse.native.base.url.release.number}-macosx-cocoa.tar.gz"/>
+			<param name="eclipse.base.url" value="${eclipse.download.base.url}${eclipse.download.folder}${eclipse.download.base_version}macosx-cocoa.tar.gz"/>
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
-			<param name="target.profile" value="SDKProfile"/>
+			<param name="target.profile" value="${p2.profile}"/>
 		</antcall>
 	</target>
 
@@ -167,17 +171,18 @@
 		<!-- org.eclipse.xpand.sdk.feature.group is required by topcased UML modeler,
 		     org.eclipse.jdt seems not installed in some version (win32) and is required by findbug -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="org.eclipse.sdk.feature.group, org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.runtime.sdk.feature.group, org.eclipse.gmf.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group, org.eclipse.team.svn.revision.graph.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt.feature.group, org.eclipse.zest.feature.group"/>
+    		<!-- <param name="feature.name" value="org.eclipse.sdk.feature.group, org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.runtime.sdk.feature.group, org.eclipse.gmf.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group, org.eclipse.team.svn.revision.graph.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt.feature.group, org.eclipse.zest.feature.group"/> -->
+			<param name="feature.name" value="org.eclipse.wst.xml_ui.feature.feature.group org.eclipse.team.svn.feature.group, org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group, org.eclipse.team.svn.revision.graph.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
   		</antcall>
 		
 		<!-- FROM TOPCASED -->
-		<antcall target="provision_feature">
+		<!--<antcall target="provision_feature">
     		<param name="feature.name" value="org.topcased.modeler.uml.feature.group, org.topcased.dependencies.feature.group"/>
 			<param name="feature.repository" value="${topcased.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.code.name}_${eclipse.version.name}_base"/>
-  		</antcall>
+  		</antcall> -->
 		
 		<!-- FIND BUGS -->
 		<!-- <antcall target="provision_feature">
