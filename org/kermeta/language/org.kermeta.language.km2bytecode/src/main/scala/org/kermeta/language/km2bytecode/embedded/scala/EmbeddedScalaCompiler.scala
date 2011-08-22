@@ -4,6 +4,12 @@ package org.kermeta.language.km2bytecode.embedded.scala
 import org.kermeta.compilo.scala.LogAspect
 import java.io.File
 import scala.collection.JavaConversions._
+import tools.nsc.reporters.ConsoleReporter
+import tools.nsc.io.AbstractFile
+import tools.nsc.Properties._
+import java.io.File._
+import tools.nsc._
+import scala.tools.nsc.interactive.{ RefinedBuildManager, SimpleBuildManager }
 
 object EmbeddedScalaCompiler extends LogAspect {
 	
@@ -62,6 +68,8 @@ object EmbeddedScalaCompiler extends LogAspect {
 		
     return compilationResult
   }
-	
+
+
+
 
 }

@@ -29,8 +29,8 @@ object EmbeddedMavenHelper {
         }
         if(createPackage){
 
-            goals.add("package")
-            // goals.add("install")
+            // goals.add("package")
+             goals.add("install")
             //goals.add("bundle:install")
         }
         if(exec){

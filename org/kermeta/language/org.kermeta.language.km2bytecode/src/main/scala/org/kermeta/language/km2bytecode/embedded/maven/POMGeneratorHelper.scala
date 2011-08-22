@@ -75,11 +75,11 @@ object POMGeneratorHelper {
 
         var triskellPublic = new Repository
         triskellPublic.setId("triskellPublic")
-        triskellPublic.setUrl("http://www.kermeta.org/maven2/")
+        triskellPublic.setUrl("http://maven.irisa.fr/artifactory/public-release/")
 
         var triskellPublicSnapshot = new Repository
         triskellPublicSnapshot.setId("triskellPublicSnapshot")
-        triskellPublicSnapshot.setUrl("http://www.kermeta.org/maven2-snapshots/")
+        triskellPublicSnapshot.setUrl("http://maven.irisa.fr/artifactory/public-snapshot/")
 
         var scalaRepo = new Repository()
         scalaRepo.setId("Scala-tools Maven2 Repository")
@@ -88,7 +88,7 @@ object POMGeneratorHelper {
         /* INIT PLUGIN REPOSITORY */
         var scalaPluginRepo = new Repository()
         scalaPluginRepo.setId("scala-tools.org")
-        scalaPluginRepo.setUrl("http://scala-tools.org/repo-releases")
+        scalaPluginRepo.setUrl("http://maven.irisa.fr/artifactory/public-release/")
         //project.getModel().getPluginRepositories().add(scalaPluginRepo)
 
         project.getModel.setPluginRepositories(project.getModel().getPluginRepositories()++List(scalaPluginRepo))
@@ -135,7 +135,7 @@ object POMGeneratorHelper {
         var pluginScalaConfigurationId = new Xpp3Dom("id");
         pluginScalaConfigurationId.setValue("runner.MainRunner");
         var pluginScalaConfigurationMain = new Xpp3Dom("mainClass");
-        pluginScalaConfigurationMain.setValue(GlobalConfiguration.scalaAspectPrefix+"runner.MainRunner");
+        pluginScalaConfigurationMain.setValue(GlobalConfiguration.scalaAspectPrefix + "runner.MainRunner");
         pluginScalaConfigurationLauncher.addChild(pluginScalaConfigurationId);
         pluginScalaConfigurationLauncher.addChild(pluginScalaConfigurationMain);
         pluginScalaConfigurationLaunchers.addChild(pluginScalaConfigurationLauncher);
@@ -290,7 +290,7 @@ object POMGeneratorHelper {
         var dependencies = new scala.collection.mutable.ArrayBuffer[Dependency]
     
 
-        dependencies.add(this.createDependency("org.scala-lang", "scala-library", "2.8.1"))
+        dependencies.add(this.createDependency("org.scala-lang", "scala-library", "2.9.0-1"))
         dependencies.add(createDependency("org.kermeta.language", "language.model", "2.0.1-SNAPSHOT"));
         dependencies.add(createDependency("org.kermeta.emf", "emf.lib", "2.6.0"));
         dependencies.add(createDependency("org.kermeta.language", "language.library.core", "2.0.1-SNAPSHOT"));
