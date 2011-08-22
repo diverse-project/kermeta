@@ -20,7 +20,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Assignment
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Assignment)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Assignment")
+						// stdio.writeln("Merging content of a Assignment")
 						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						// select value for unary attribute
@@ -50,7 +50,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Expression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Expression)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Expression")
+						//stdio.writeln("Merging content of a Expression")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -76,7 +76,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallExpression)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallExpression")
+						//stdio.writeln("Merging content of a CallExpression")
 						self.parameters.each{aspect_parameters | 
 							var equivalent_parameters : org::kermeta::language::behavior::Expression
 							equivalent_parameters := mergedModelElement.parameters.detect{ merged_parameters |
@@ -117,7 +117,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Block
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Block)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Block")
+						//stdio.writeln("Merging content of a Block")
 						self.statement.each{aspect_statement | 
 							var equivalent_statement : org::kermeta::language::behavior::Expression
 							equivalent_statement := mergedModelElement.statement.detect{ merged_statement |
@@ -169,7 +169,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallVariable
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallVariable)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallVariable")
+						//stdio.writeln("Merging content of a CallVariable")
 						// select value for unary attribute
 						mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
 						self.containedType.each{aspect_containedType | 
@@ -197,7 +197,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallFeature
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallFeature)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallFeature")
+						//stdio.writeln("Merging content of a CallFeature")
 						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 						// select value for unary attribute
 						mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
@@ -226,7 +226,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallSuperOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallSuperOperation)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallSuperOperation")
+						//stdio.writeln("Merging content of a CallSuperOperation")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -252,7 +252,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallResult
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallResult)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallResult")
+						//stdio.writeln("Merging content of a CallResult")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -278,7 +278,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallValue
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallValue)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallValue")
+						//stdio.writeln("Merging content of a CallValue")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -304,7 +304,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Conditional
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Conditional)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Conditional")
+						//stdio.writeln("Merging content of a Conditional")
 						mergedModelElement.thenBody ?= self.selectUnaryProperty("thenBody", self.thenBody, mergedModelElement.thenBody)
 						mergedModelElement.elseBody ?= self.selectUnaryProperty("elseBody", self.elseBody, mergedModelElement.elseBody)
 						mergedModelElement.condition ?= self.selectUnaryProperty("condition", self.condition, mergedModelElement.condition)
@@ -333,7 +333,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Raise
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Raise)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Raise")
+						//stdio.writeln("Merging content of a Raise")
 						mergedModelElement.expression ?= self.selectUnaryProperty("expression", self.expression, mergedModelElement.expression)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
@@ -360,7 +360,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Rescue
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Rescue)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Rescue")
+						//stdio.writeln("Merging content of a Rescue")
 						self.body.each{aspect_body | 
 							var equivalent_body : org::kermeta::language::behavior::Expression
 							equivalent_body := mergedModelElement.body.detect{ merged_body |
@@ -389,7 +389,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::TypeReference
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::TypeReference)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeReference")
+						//stdio.writeln("Merging content of a TypeReference")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -404,7 +404,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Literal
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Literal)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Literal")
+						//stdio.writeln("Merging content of a Literal")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -430,7 +430,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::EmptyExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::EmptyExpression)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a EmptyExpression")
+						//stdio.writeln("Merging content of a EmptyExpression")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -456,7 +456,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::JavaStaticCall
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::JavaStaticCall)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a JavaStaticCall")
+						//stdio.writeln("Merging content of a JavaStaticCall")
 						self.parameters.each{aspect_parameters | 
 							var equivalent_parameters : org::kermeta::language::behavior::Expression
 							equivalent_parameters := mergedModelElement.parameters.detect{ merged_parameters |
@@ -499,7 +499,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::LambdaExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::LambdaExpression)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a LambdaExpression")
+						//stdio.writeln("Merging content of a LambdaExpression")
 						self.parameters.each{aspect_parameters | 
 							var equivalent_parameters : org::kermeta::language::behavior::LambdaParameter
 							equivalent_parameters := mergedModelElement.parameters.detect{ merged_parameters |
@@ -539,7 +539,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::LambdaParameter
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::LambdaParameter)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a LambdaParameter")
+						//stdio.writeln("Merging content of a LambdaParameter")
 						mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
@@ -555,7 +555,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::IntegerLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::IntegerLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a IntegerLiteral")
+						//stdio.writeln("Merging content of a IntegerLiteral")
 						// select value for unary attribute
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						self.containedType.each{aspect_containedType | 
@@ -583,7 +583,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::StringLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::StringLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a StringLiteral")
+						//stdio.writeln("Merging content of a StringLiteral")
 						// select value for unary attribute
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						self.containedType.each{aspect_containedType | 
@@ -611,7 +611,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::BooleanLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::BooleanLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a BooleanLiteral")
+						//stdio.writeln("Merging content of a BooleanLiteral")
 						// select value for unary attribute
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						self.containedType.each{aspect_containedType | 
@@ -639,7 +639,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallTypeLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallTypeLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallTypeLiteral")
+						//stdio.writeln("Merging content of a CallTypeLiteral")
 						mergedModelElement.typeref ?= self.selectUnaryProperty("typeref", self.typeref, mergedModelElement.typeref)
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
@@ -666,7 +666,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::VoidLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::VoidLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a VoidLiteral")
+						//stdio.writeln("Merging content of a VoidLiteral")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -692,7 +692,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Loop
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Loop)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Loop")
+						//stdio.writeln("Merging content of a Loop")
 						mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
 						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						mergedModelElement.stopCondition ?= self.selectUnaryProperty("stopCondition", self.stopCondition, mergedModelElement.stopCondition)
@@ -721,7 +721,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::SelfExpression
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::SelfExpression)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a SelfExpression")
+						//stdio.writeln("Merging content of a SelfExpression")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -747,7 +747,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::VariableDecl
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::VariableDecl)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a VariableDecl")
+						//stdio.writeln("Merging content of a VariableDecl")
 						mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
 						mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 						// select value for unary attribute
@@ -777,7 +777,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::UnresolvedCall
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::UnresolvedCall)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a UnresolvedCall")
+						//stdio.writeln("Merging content of a UnresolvedCall")
 						self.usings.each{aspect_usings | 
 							var equivalent_usings : org::kermeta::language::structure::Using
 							equivalent_usings := mergedModelElement.usings.detect{ merged_usings |
@@ -849,7 +849,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallOperation)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallOperation")
+						//stdio.writeln("Merging content of a CallOperation")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -875,7 +875,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallProperty
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallProperty)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallProperty")
+						//stdio.writeln("Merging content of a CallProperty")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -901,7 +901,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::CallEnumLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallEnumLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a CallEnumLiteral")
+						//stdio.writeln("Merging content of a CallEnumLiteral")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -933,7 +933,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::KermetaModelElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a KermetaModelElement")
+						//stdio.writeln("Merging content of a KermetaModelElement")
 						self.kOwnedTags.each{aspect_kOwnedTags | 
 							var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
 							equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
@@ -959,7 +959,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Operation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Operation)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Operation")
+						//stdio.writeln("Merging content of a Operation")
 						self.ownedParameter.each{aspect_ownedParameter | 
 							var equivalent_ownedParameter : org::kermeta::language::structure::Parameter
 							equivalent_ownedParameter := mergedModelElement.ownedParameter.detect{ merged_ownedParameter |
@@ -1029,7 +1029,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Property
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Property)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Property")
+						//stdio.writeln("Merging content of a Property")
 						mergedModelElement.getterBody ?= self.selectUnaryProperty("getterBody", self.getterBody, mergedModelElement.getterBody)
 						mergedModelElement.setterBody ?= self.selectUnaryProperty("setterBody", self.setterBody, mergedModelElement.setterBody)
 						self.ownedUnresolvedProperties.each{aspect_ownedUnresolvedProperties | 
@@ -1073,7 +1073,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Type
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Type")
+						//stdio.writeln("Merging content of a Type")
 					end
 					super(context)
 
@@ -1086,7 +1086,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeContainer
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeContainer)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeContainer")
+						//stdio.writeln("Merging content of a TypeContainer")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1112,7 +1112,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::EnumerationLiteral
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::EnumerationLiteral)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a EnumerationLiteral")
+						//stdio.writeln("Merging content of a EnumerationLiteral")
 					end
 					super(context)
 
@@ -1125,7 +1125,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeVariableBinding
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariableBinding)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeVariableBinding")
+						//stdio.writeln("Merging content of a TypeVariableBinding")
 					end
 					super(context)
 
@@ -1138,7 +1138,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::MultiplicityElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::MultiplicityElement)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a MultiplicityElement")
+						//stdio.writeln("Merging content of a MultiplicityElement")
 						// select value for unary attribute
 						mergedModelElement.isOrdered ?= self.selectUnaryProperty("isOrdered", self.isOrdered, mergedModelElement.isOrdered)
 						// select value for unary attribute
@@ -1161,7 +1161,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeDefinition
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeDefinition)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeDefinition")
+						//stdio.writeln("Merging content of a TypeDefinition")
 						self.typeMappings.each{aspect_typeMappings | 
 							var equivalent_typeMappings : org::kermeta::language::structure::TypeMapping
 							equivalent_typeMappings := mergedModelElement.typeMappings.detect{ merged_typeMappings |
@@ -1202,7 +1202,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Class
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Class)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Class")
+						//stdio.writeln("Merging content of a Class")
 					end
 					super(context)
 
@@ -1215,7 +1215,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::DataType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::DataType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a DataType")
+						//stdio.writeln("Merging content of a DataType")
 						self.typeMappings.each{aspect_typeMappings | 
 							var equivalent_typeMappings : org::kermeta::language::structure::TypeMapping
 							equivalent_typeMappings := mergedModelElement.typeMappings.detect{ merged_typeMappings |
@@ -1258,7 +1258,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Enumeration
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Enumeration)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Enumeration")
+						//stdio.writeln("Merging content of a Enumeration")
 						self.ownedLiteral.each{aspect_ownedLiteral | 
 							var equivalent_ownedLiteral : org::kermeta::language::structure::EnumerationLiteral
 							equivalent_ownedLiteral := mergedModelElement.ownedLiteral.detect{ merged_ownedLiteral |
@@ -1314,7 +1314,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::NamedElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::NamedElement)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a NamedElement")
+						//stdio.writeln("Merging content of a NamedElement")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -1329,7 +1329,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Package
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Package)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Package")
+						//stdio.writeln("Merging content of a Package")
 						self.nestedPackage.each{aspect_nestedPackage | 
 							var equivalent_nestedPackage : org::kermeta::language::structure::Package
 							equivalent_nestedPackage := mergedModelElement.nestedPackage.detect{ merged_nestedPackage |
@@ -1370,7 +1370,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Parameter
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Parameter)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Parameter")
+						//stdio.writeln("Merging content of a Parameter")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -1385,7 +1385,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::PrimitiveType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::PrimitiveType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a PrimitiveType")
+						//stdio.writeln("Merging content of a PrimitiveType")
 						self.typeMappings.each{aspect_typeMappings | 
 							var equivalent_typeMappings : org::kermeta::language::structure::TypeMapping
 							equivalent_typeMappings := mergedModelElement.typeMappings.detect{ merged_typeMappings |
@@ -1428,7 +1428,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypedElement
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypedElement)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypedElement")
+						//stdio.writeln("Merging content of a TypedElement")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -1444,7 +1444,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Tag
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Tag")
+						//stdio.writeln("Merging content of a Tag")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						// select value for unary attribute
@@ -1461,7 +1461,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::AbstractProperty
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractProperty)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a AbstractProperty")
+						//stdio.writeln("Merging content of a AbstractProperty")
 					end
 					super(context)
 
@@ -1474,7 +1474,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Constraint
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Constraint)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Constraint")
+						//stdio.writeln("Merging content of a Constraint")
 						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						// select value for unary attribute
 						// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
@@ -1499,7 +1499,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ClassDefinition
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ClassDefinition)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ClassDefinition")
+						//stdio.writeln("Merging content of a ClassDefinition")
 						self.~inv.each{aspect_inv | 
 							var equivalent_inv : org::kermeta::language::structure::Constraint
 							equivalent_inv := mergedModelElement.~inv.detect{ merged_inv |
@@ -1569,7 +1569,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ModelingUnit
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelingUnit)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ModelingUnit")
+						//stdio.writeln("Merging content of a ModelingUnit")
 						self.packages.each{aspect_packages | 
 							var equivalent_packages : org::kermeta::language::structure::Package
 							equivalent_packages := mergedModelElement.packages.detect{ merged_packages |
@@ -1610,7 +1610,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeDefinitionContainer
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeDefinitionContainer)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeDefinitionContainer")
+						//stdio.writeln("Merging content of a TypeDefinitionContainer")
 						self.ownedTypeDefinition.each{aspect_ownedTypeDefinition | 
 							var equivalent_ownedTypeDefinition : org::kermeta::language::structure::TypeDefinition
 							equivalent_ownedTypeDefinition := mergedModelElement.ownedTypeDefinition.detect{ merged_ownedTypeDefinition |
@@ -1636,7 +1636,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Require
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Require)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Require")
+						//stdio.writeln("Merging content of a Require")
 						// select value for unary attribute
 						mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
 					end
@@ -1651,7 +1651,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::GenericTypeDefinition
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::GenericTypeDefinition)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a GenericTypeDefinition")
+						//stdio.writeln("Merging content of a GenericTypeDefinition")
 						self.containedType.each{aspect_containedType | 
 							var equivalent_containedType : org::kermeta::language::structure::Type
 							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1677,7 +1677,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ParameterizedType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ParameterizedType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ParameterizedType")
+						//stdio.writeln("Merging content of a ParameterizedType")
 						self.virtualTypeBinding.each{aspect_virtualTypeBinding | 
 							var equivalent_virtualTypeBinding : org::kermeta::language::structure::TypeVariableBinding
 							equivalent_virtualTypeBinding := mergedModelElement.virtualTypeBinding.detect{ merged_virtualTypeBinding |
@@ -1716,7 +1716,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeVariable
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeVariable")
+						//stdio.writeln("Merging content of a TypeVariable")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -1731,7 +1731,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ObjectTypeVariable
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ObjectTypeVariable)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ObjectTypeVariable")
+						//stdio.writeln("Merging content of a ObjectTypeVariable")
 						// select value for unary attribute
 						mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 					end
@@ -1746,7 +1746,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ModelType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ModelType")
+						//stdio.writeln("Merging content of a ModelType")
 						self.typeMappings.each{aspect_typeMappings | 
 							var equivalent_typeMappings : org::kermeta::language::structure::TypeMapping
 							equivalent_typeMappings := mergedModelElement.typeMappings.detect{ merged_typeMappings |
@@ -1789,7 +1789,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ModelTypeVariable
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelTypeVariable)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ModelTypeVariable")
+						//stdio.writeln("Merging content of a ModelTypeVariable")
 						self.virtualType.each{aspect_virtualType | 
 							var equivalent_virtualType : org::kermeta::language::structure::VirtualType
 							equivalent_virtualType := mergedModelElement.virtualType.detect{ merged_virtualType |
@@ -1817,7 +1817,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::VirtualType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::VirtualType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a VirtualType")
+						//stdio.writeln("Merging content of a VirtualType")
 						self.typeParamBinding.each{aspect_typeParamBinding | 
 							var equivalent_typeParamBinding : org::kermeta::language::structure::TypeVariableBinding
 							equivalent_typeParamBinding := mergedModelElement.typeParamBinding.detect{ merged_typeParamBinding |
@@ -1845,7 +1845,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Model
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Model)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Model")
+						//stdio.writeln("Merging content of a Model")
 					end
 					super(context)
 
@@ -1858,7 +1858,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::AbstractOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractOperation)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a AbstractOperation")
+						//stdio.writeln("Merging content of a AbstractOperation")
 					end
 					super(context)
 
@@ -1871,7 +1871,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a UnresolvedType")
+						//stdio.writeln("Merging content of a UnresolvedType")
 						self.usings.each{aspect_usings | 
 							var equivalent_usings : org::kermeta::language::structure::Using
 							equivalent_usings := mergedModelElement.usings.detect{ merged_usings |
@@ -1912,7 +1912,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Unresolved
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Unresolved)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Unresolved")
+						//stdio.writeln("Merging content of a Unresolved")
 					end
 					super(context)
 
@@ -1925,7 +1925,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedProperty
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedProperty)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a UnresolvedProperty")
+						//stdio.writeln("Merging content of a UnresolvedProperty")
 						// select value for unary attribute
 						mergedModelElement.propertyIdentifier ?= self.selectUnaryProperty("propertyIdentifier", self.propertyIdentifier, mergedModelElement.propertyIdentifier)
 					end
@@ -1940,7 +1940,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedOperation
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedOperation)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a UnresolvedOperation")
+						//stdio.writeln("Merging content of a UnresolvedOperation")
 						// select value for unary attribute
 						mergedModelElement.operationIdentifier ?= self.selectUnaryProperty("operationIdentifier", self.operationIdentifier, mergedModelElement.operationIdentifier)
 						self.containedType.each{aspect_containedType | 
@@ -1968,7 +1968,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::Using
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Using)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a Using")
+						//stdio.writeln("Merging content of a Using")
 						// select value for unary attribute
 						mergedModelElement.fromQName ?= self.selectUnaryProperty("fromQName", self.fromQName, mergedModelElement.fromQName)
 						// select value for unary attribute
@@ -1985,7 +1985,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::ProductType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ProductType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a ProductType")
+						//stdio.writeln("Merging content of a ProductType")
 					end
 					super(context)
 
@@ -1998,7 +1998,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::FunctionType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::FunctionType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a FunctionType")
+						//stdio.writeln("Merging content of a FunctionType")
 					end
 					super(context)
 
@@ -2011,7 +2011,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::VoidType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::VoidType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a VoidType")
+						//stdio.writeln("Merging content of a VoidType")
 					end
 					super(context)
 
@@ -2024,7 +2024,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::TypeMapping
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeMapping)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a TypeMapping")
+						//stdio.writeln("Merging content of a TypeMapping")
 						mergedModelElement.mapping ?= self.selectUnaryProperty("mapping", self.mapping, mergedModelElement.mapping)
 					end
 					super(context)
@@ -2038,7 +2038,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedInferredType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedInferredType)
 					if (not mergedModelElement.isVoid) then
-						stdio.writeln("Merging content of a UnresolvedInferredType")
+						//stdio.writeln("Merging content of a UnresolvedInferredType")
 					end
 					super(context)
 
@@ -2054,7 +2054,7 @@ package kermeta {
 				var mergedModelElement : org::kermeta::language::DummyClass
 				mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::DummyClass)
 				if (not mergedModelElement.isVoid) then
-					stdio.writeln("Merging content of a DummyClass")
+					//stdio.writeln("Merging content of a DummyClass")
 				end
 				self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 				result := self
@@ -2069,7 +2069,7 @@ package kermeta {
 			var mergedModelElement : org::kermeta::DummyClass
 			mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::DummyClass)
 			if (not mergedModelElement.isVoid) then
-				stdio.writeln("Merging content of a DummyClass")
+				//stdio.writeln("Merging content of a DummyClass")
 			end
 			self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 			result := self
@@ -2084,7 +2084,7 @@ aspect class DummyClass inherits Mergeable  {
 		var mergedModelElement : org::DummyClass
 		mergedModelElement := self.similarElementInMergedModel.asType(org::DummyClass)
 		if (not mergedModelElement.isVoid) then
-			stdio.writeln("Merging content of a DummyClass")
+			//stdio.writeln("Merging content of a DummyClass")
 		end
 		self.eachOwnedElement{ e | e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)}
 		result := self
