@@ -20,9 +20,8 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala.visitor.impl._
-import org.embedded.EmbettedScalaCompiler;
-import org.embedded.EmbettedScalaRunner;
-import org.embedded._
+import org.kermeta.language.km2bytecode.embedded.scala._
+import org.kermeta.language.km2bytecode.embedded.maven._
 import org.slf4j.{Logger,LoggerFactory}
 
 import java.io.FileWriter
@@ -154,7 +153,7 @@ object Main extends LogAspect {
 
     if (scalacompile){
       if (!GlobalConfiguration.useMaven){
-        var classpath =EmbettedScalaCompiler.getActualClasspath
+        var classpath =EmbeddedScalaCompiler.getActualClasspath
         
         if (additionalClassPath != null)
           classpath = additionalClassPath ++ classpath
@@ -166,17 +165,17 @@ object Main extends LogAspect {
           System.setErr(new java.io.PrintStream(outputStream))
         }
                 
-        var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+        var compilationResult = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
         result = compilationResult
         //Scala runner
         if(compilationResult == 0 && GlobalConfiguration.exec){
 
-          EmbettedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
+          EmbeddedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
         }
         if (GlobalConfiguration.createPackage ){
         	var fo =  new File(GlobalConfiguration.outputProject +File.separator + "target").getCanonicalFile
         	fo.mkdirs
-        	_root_.org.embedded.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.getScalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
+        	_root_.org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.getScalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
         }
         if (outputStream != null){
           System.setOut(new PrintStream(oldOut))
