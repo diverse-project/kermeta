@@ -14,7 +14,7 @@ trait LambdaParameterAspect extends KermetaModelElementAspect {
 	implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append(this.getName())
+		res.append(Util.protectScalaKeyword(this.getName()))
 		if(this.getType() != null) {
 			res.append(" : ")
 			this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)

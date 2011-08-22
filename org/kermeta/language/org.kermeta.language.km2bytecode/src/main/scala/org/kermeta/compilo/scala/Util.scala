@@ -178,7 +178,8 @@ object Util extends LogAspect {
                 if(!ctx.isFirst) {res.append(sep) }
                 var temp = new StringBuilder
                 e.asInstanceOf[KermetaModelElementAspect].generateScalaCode(temp)
-                res.append(protectScalaKeyword(temp.toString))
+                // res.append(protectScalaKeyword(temp.toString)) // already protected
+             res.append(temp.toString)
             })
         //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
         /*
