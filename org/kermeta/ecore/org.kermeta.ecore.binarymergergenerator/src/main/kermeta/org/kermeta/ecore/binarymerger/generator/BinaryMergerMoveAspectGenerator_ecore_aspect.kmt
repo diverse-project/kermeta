@@ -119,7 +119,7 @@ aspect class EClass {
 		content.append("if (not mergedModelElement.isVoid) then")
 		context.pushIndent
 		content.append(context.indentString)
-		content.append("stdio.writeln(\"Merging content of a " + self.name + "\")")						
+		content.append("\\stdio.writeln(\"Merging content of a " + self.name + "\")")						
 		self.eachOwnedElement{ e |
 				content.append(e.binaryMergerMoveAspectKmtPrinter(context))
 		}
