@@ -295,13 +295,14 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				//We look for the Operation in all the typedefinitions of the superTypes of the container of the UnresolvedOperation
 				var containingOperation : Operation init ctxt.currentElement.asType(Operation)
 				var containingClassDef : ClassDefinition init containingOperation.container.asType(ClassDefinition)
+				var containingClassDefAllSuperTypes : OrderedSet<Type> init containingClassDef.getAllSuperTypes()
 				var i : Integer init 0
 				var superType : Type
 				var found : Boolean init false
 				from found				
-				until found or i == containingClassDef.getAllSuperTypes().size()
+				until found or i == containingClassDefAllSuperTypes.size()
 				loop
-					superType := containingClassDef.getAllSuperTypes().at(i)
+					superType := containingClassDefAllSuperTypes.at(i)
 					if (superType.isInstanceOf(Class)) then
 						superType.asType(Class).typeDefinition.accept(resolvedOperationFinder, ctxt)						
 						found := not ctxt.foundOperation.isVoid()
