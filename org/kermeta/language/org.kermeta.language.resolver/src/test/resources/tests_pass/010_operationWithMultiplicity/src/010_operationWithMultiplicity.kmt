@@ -7,6 +7,6 @@ class A
  
     operation opWithMultiplicity() : A[0..*] is do
    		result := OrderedSet<A>.new
-    	result.add(A.new)  
+    	result.add(A.new) 
    end
 }
