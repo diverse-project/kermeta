@@ -42,8 +42,9 @@ class FullStaticResolver
        	
        	//checkUnresolved(unresolvedModelingUnit)
         resolvedModelingUnit := doResolving(unresolvedModelingUnit)
-              	    	
- //      	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+         
+        stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
+       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
        	//resolvedModelingUnit := unresolvedModelingUnit
        	//checkUnresolved(resolvedModelingUnit)

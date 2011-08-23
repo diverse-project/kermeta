@@ -89,11 +89,15 @@ aspect class TypeVariableBinding {
 		
 		newBinding.variable:=variable
 		var newt : Type init type.resolveTypeVariables(context, bindings)
-		if(newt.container.isVoid) then
-			newBinding.containedType.add(newt)
+		if newt.isVoid then
+			context.errors.add(ResolverException.new.initialize("ERROR : TypeVariableBinding resolved as void !", self))
+		else
+			if(newt.container.isVoid) then
+				newBinding.containedType.add(newt)
+			end
+			newBinding.type := newt
+			result := newBinding
 		end
-		newBinding.type := newt
-		result := newBinding
 	end
 
 }
@@ -113,7 +117,7 @@ aspect class ObjectTypeVariable{
 			result:=binding.type
 		else
 			result:=self
-			stdio.writeln("warning : binding not found : "+name)
+			stdio.writeln("WARNING : binding not found : "+name)
 		end
 		
 		

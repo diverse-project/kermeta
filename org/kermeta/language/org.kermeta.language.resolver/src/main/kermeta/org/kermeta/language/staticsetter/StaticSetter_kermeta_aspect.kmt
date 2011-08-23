@@ -20,6 +20,8 @@ require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
 require "StaticSetter_typevariableResolver.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/prettyprinters/PrettyPrinter_kermeta_aspect.kmt"
 
 
 using org::kermeta::language::resolver
@@ -132,6 +134,7 @@ package behavior {
 				result := self.staticType
 			end
 		end
+		
 	}
 	
 	aspect class Block
@@ -270,7 +273,7 @@ package behavior {
 					if (op.isVoid) then
 						if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
 						var objectAny : ClassDefinition
-						objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
+						objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
 						op := objectAny.getCallableOperationByName(self.name)
 					end
 					//if we finally found an operation
@@ -340,7 +343,7 @@ package behavior {
 					if (prop.isVoid) then
 						if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find property : "+self.name)  end
 						var objectAny : ClassDefinition
-						objectAny := context.createClassDefinitionFromQualifiedName("kermeta::standard::Object")
+						objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
 						prop := objectAny.getCallablePropertyByName(self.name)
 					end
 					
@@ -441,7 +444,11 @@ package behavior {
 				if target.staticType.isInstanceOf(Class) then
 					bindings.addAll(target.staticType.asType(Class).typeParamBinding)
 				end
-				if (context.verbose) then stdio.writeln("bindings.size : "+bindings.size.toString) end
+				if (context.verbose) then 
+					stdio.write("bindings.size : "+bindings.size.toString+" content = (")
+					bindings.each{b | stdio.write(b.toString+", ")}
+					stdio.writeln(") on type " +type.toString)
+				end
 				self.staticType := type.resolveTypeVariables(context,bindings)
 				if(self.staticType.isVoid) then
 					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
@@ -542,17 +549,30 @@ package behavior {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Conditional") end
 			
-			var staticTypeOfIF : ProductType init ProductType.new
-			
-			self.thenBody := self.thenBody.resolveCallAndInferStatic(context)
-			
-			staticTypeOfIF.type.add(self.thenBody.staticType)
 			
 			self.condition := self.condition.resolveCallAndInferStatic(context)
 			
+			// see bug #1903, we limit ourself to the search to the nearest common supertype of the thenBody and elseBody
+			var staticTypeOfIF : Type
+			
+			self.thenBody := self.thenBody.resolveCallAndInferStatic(context)
+			if self.thenBody.staticType.isVoid then
+				stdio.writeln(" WARNING thenBody.staticType is void in " + self.container().asType(KermetaModelElement).prettyPrint)
+			end						
+			
 			if (not self.elseBody.isVoid) then
 				self.elseBody := self.elseBody.resolveCallAndInferStatic(context)
-				staticTypeOfIF.type.add(self.elseBody.staticType)
+				if self.elseBody.staticType.isVoid then
+					stdio.writeln(" WARNING elseBody.staticType is void in " + self.container().asType(KermetaModelElement).prettyPrint)
+				else
+					// TODO temporary code
+					if not self.elseBody.staticType.typeEquals(self.thenBody.staticType) then
+						// use Object as common super type
+						staticTypeOfIF:= context.createTypeFromQualifiedName("kermeta::standard::Object")
+					end
+					// TODO staticTypeOfIF:= getNearestCommonSuperType(self.thenBody.staticType, self.elseBody.staticType)
+				end
+				
 			end
 			
 			self.setInferedStaticType(context, staticTypeOfIF)
@@ -774,7 +794,7 @@ package behavior {
 			if (operationContainer.isVoid) then
 				context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
 			else
-				self.setInferedStaticType(context, operationContainer.type)
+				self.setInferedStaticType(context, context.createTypeFromMultiplicityElement(operationContainer) )
 			end
 			
 			result := self

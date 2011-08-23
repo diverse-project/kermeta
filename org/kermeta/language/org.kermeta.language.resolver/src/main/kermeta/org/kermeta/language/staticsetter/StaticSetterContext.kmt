@@ -110,12 +110,15 @@ class StaticSetterContext
 		end
 	end
 	
-	operation createClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
+	operation getClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
 		var cd : org::kermeta::language::structure::ClassDefinition
 		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
 		result := cd
 		if result.isVoid then
-			errors.add(ResolverException.new.initialize("Not able to create ClassDefinition for "+ classDefinitionQualifiedName, self))
+			if verbose then
+				stdio.writeln("Not able to get ClassDefinition for "+ classDefinitionQualifiedName)
+			end
+			errors.add(ResolverException.new.initialize("Not able to get ClassDefinition for "+ classDefinitionQualifiedName, self))
 		end
 	end
 	
