@@ -1,0 +1,12 @@
+package root_package;
+
+using kermeta::standard
+
+class A 
+{
+ 
+    operation opWithMultiplicity() : A[0..*] is do
+   		result := OrderedSet<A>.new
+    	result.add(A.new)  
+   end
+}
