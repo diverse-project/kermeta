@@ -15,6 +15,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,6 +27,8 @@ public class ScalaKMTParserTestSuite extends TestSuite {
 
 	 public static Test suite() {
 			//KermetaCompiler.initializeFactory();
+		 
+		  Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*",          new XMIResourceFactoryImpl());
 			
 			final FileFilter filter = new FileFilter() {
 				@Override

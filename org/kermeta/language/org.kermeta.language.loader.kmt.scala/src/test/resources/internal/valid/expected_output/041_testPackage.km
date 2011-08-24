@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="testPackage">
+    <nestedPackage name="package1">
+      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;67;140"/>
+      <nestedPackage name="package11">
+        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;88;111"/>
+      </nestedPackage>
+      <nestedPackage name="package12">
+        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;111;137"/>
+      </nestedPackage>
+    </nestedPackage>
+    <nestedPackage name="package2">
+      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;140;206"/>
+      <nestedPackage name="package21">
+        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;161;203"/>
+        <nestedPackage name="package211">
+          <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;181;201"/>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+    <nestedPackage name="package3">
+      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;206;226"/>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta">
+    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/parserTestPackage/041_testPackage.kmt;22;67"/>
+  </requires>
+</org_kermeta_language_structure:ModelingUnit>

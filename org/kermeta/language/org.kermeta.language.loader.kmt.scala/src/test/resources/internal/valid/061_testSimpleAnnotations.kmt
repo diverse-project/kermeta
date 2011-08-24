@@ -6,6 +6,7 @@ require kermeta
  * bonjour les degats
  */
 
+
 class String {}
 class Integer {}
 class Boolean {}

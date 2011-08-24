@@ -19,6 +19,7 @@ class Class1 {
 	 
 	/** Mon operation */
 	@return "of the jedi"
+	@documentation "ma doc"
 	operation operation1() is do
 		// v1 is a variable
 		// another

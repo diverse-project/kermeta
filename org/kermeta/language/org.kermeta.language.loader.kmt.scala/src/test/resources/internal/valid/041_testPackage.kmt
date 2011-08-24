@@ -1,5 +1,6 @@
 package testPackage;
 
+
 require kermeta
 
 //using metacore::standard
