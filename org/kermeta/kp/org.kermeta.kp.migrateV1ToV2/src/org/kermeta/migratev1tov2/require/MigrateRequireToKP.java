@@ -26,7 +26,8 @@ import org.kermeta.kp.Source;
 import org.kermeta.kp.migratev1tov2.parser.RequireParser;
 
 
-
+/** This class migrate the Kermeta V1 require in the (Kermeta Project) kp model.
+ require does not exist in kermeta V2 */
 public class MigrateRequireToKP {
 	
 	/**
@@ -52,7 +53,7 @@ public class MigrateRequireToKP {
 	 * Retrieve all of the requires needed by the main kmt file
 	 * @param pathFile
 	 * @param baseProject : the path to the base project
-	 * @return
+	 * @return :  the complete  list of required file (each file is added once)
 	 * @throws FileNotFoundException 
 	 */
 	public List<String> allRequires (String pathFile, String baseProject, String baseWorkspace) throws FileNotFoundException {
@@ -80,10 +81,21 @@ public class MigrateRequireToKP {
 		return requiredFiles;
 	}
 	
-	public boolean isKMTFile(String f) {
-		return f.endsWith(".kmt\"");
+	
+	/** Determines whether the path in parameter is a kmt file path 
+	 	@param filePath : the path of the tested path
+	 	@result : true if it is a kmt file, false otherwise
+	 */
+	public boolean isKMTFile(String filePath) {
+		return filePath.endsWith(".kmt\"");
 	}
 	
+	
+	/** Obtain the path of the kmt model 
+	 @param requiredFile : the path of the required path
+	 @param : baseProject : the baseProject path
+	 @param : baseWorkspace : the baseWorkspace path 
+	 @result : the path without the platform:*/
 	public String obtainPath(String requiredFile, String baseProject, String baseWorkspace) {
 		String result = "";
 		//"------" : Remove the quotes at the beginning and the end
@@ -93,7 +105,7 @@ public class MigrateRequireToKP {
 		// Test the path 
 		String [] t = s.split("/");
 		if (t.length == 1) {
-			result =  baseProject + "\\" + s;
+			result =  baseProject + "/" + s;
 			System.out.println("result " + result);
 		}
 		else {
@@ -101,7 +113,7 @@ public class MigrateRequireToKP {
 			if (t[0].equals("platform:")) {
 				String endPath ="";
 				for (int i = 2; i < t.length; i++) {
-					endPath = endPath + "\\" + t[i] ;
+					endPath = endPath + "/" + t[i] ;
 				}
 				result = baseWorkspace  + endPath;
 				
@@ -113,18 +125,34 @@ public class MigrateRequireToKP {
 		return result;
 	}
 	
+	
+	/** Migrate require elements from the Kermeta V1 file to a new kp model
+	 @param pathFile : the path of the kmt file
+	 @param baseProject : the baseProject path
+	 @param baseProjectNotation : name of baseProject variable in the kp project
+	 @param baseWorkspace : the path of the workspace
+	 @param projectName : the name of the kp project (the same as the Kermeta V1 file)
+	 @param groupName : the group of the Kermeta project
+	  */
 	public void migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Parse kmt main file
 		List<String> reqFiles = allRequires( pathFile, baseProject, baseWorkspace);
 		
-		// Manage source in the kp (change the String)
+		// Manage source in the kp (change the String, remove platform :)
 		List<String> requiredFiles = sourcesInKP (baseProject, baseProjectNotation, reqFiles );
+		
 		// Create new KP file :
 		createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
 		
 		
 	}
 	
+	
+	/** Replace beginning of all sources files path obtained by searching in the require Kermeta V1 elements by the base project notation
+	 @param baseProject : the baseProject path
+	 @param baseProjectNotation : the selected base project notation in the new kp model
+	 @param reqFiles : The list of path files from all the require of the Kermeta V1 file
+	 @result : the new modified list of path files */
 	public List<String> sourcesInKP (String baseProject, String baseProjectNotation,List<String> reqFiles ){
 		List<String> sourceFiles = new ArrayList<String> ();
 		String bproject = baseProject.replace("\\", "/");
@@ -153,6 +181,14 @@ public class MigrateRequireToKP {
 		return sourceFiles;
 	}
 	
+	
+	/**  Create new kp file and serialize it
+	 @param pathFile : the Kermeta file's path
+	 @param baseProject : the path of the base project
+	 @param baseProjectNotation : the new notation of the base project path in the new kp model
+	 @param requiredFiles : the files required by this kp project
+	 @param projectName : the name of the project
+	 @param groupName : the group of the kp project*/
 	public void createNewKpFile (String pathFile, String baseProject,String baseProjectNotation, List<String> requiredFiles, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Obtain annotation values : 
 		RequireParser parser = new RequireParser (pathFile);
@@ -163,9 +199,13 @@ public class MigrateRequireToKP {
 		
 		// Create KP model
 		ResourceSet resourceSet = new ResourceSetImpl();
-		//String pathKp = getPathKp(pathFile, baseProject);
+		
 		//String pathKp2 = "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\project.kp";
-		String pathKp = baseProject + "/project.kp";
+		
+		// Name the kp project with the same name as the main Kermeta file on which it is called
+		String kpProjectName = pathFile.substring(pathFile.lastIndexOf("/")+ 1, pathFile.length() );
+		String kpProjectNameWithoutExt = kpProjectName.substring(0,kpProjectName.lastIndexOf(".") );
+		String pathKp = baseProject + "/" + kpProjectNameWithoutExt + ".kp";
 		
 		
 		URI uri = URI.createFileURI(pathKp);

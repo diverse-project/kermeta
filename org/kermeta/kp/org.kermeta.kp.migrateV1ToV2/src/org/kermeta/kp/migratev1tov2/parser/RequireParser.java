@@ -11,6 +11,7 @@
 package org.kermeta.kp.migratev1tov2.parser;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -19,10 +20,13 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/** This class parses all require element in Kermeta V1 files  */
 public class RequireParser {
 	
 	private File parsedFile;
 	
+	
+	/** Constructor */
 	public RequireParser (String pathFile) {
 		parsedFile = new File(pathFile);	
 	}
@@ -30,6 +34,9 @@ public class RequireParser {
 //--------------------------------------------------------------------------------------------------------------	
 //	Parse require
 //--------------------------------------------------------------------------------------------------------------
+	
+	/** Process all the Kermeta file to find require elements
+	 @result : the list of required files contained in the require */
 	public final List<String> processLineByLine() throws FileNotFoundException {
 	    //Note that FileReader is used, not File, since File is not Closeable
 	    Scanner scanner = new Scanner(new FileReader(parsedFile));
@@ -54,6 +61,10 @@ public class RequireParser {
 	    return requiredFiles;
 	}
 	
+	
+	/** Process a line and search if it contains a require element 
+	 @param aLine : the given line to be processed
+	 @result : the requiredFile if the line contains a require element*/
 	protected String processLine(String aLine){
 	    //use a second Scanner to parse the content of each line 
 		String requiredFile ="";
@@ -76,6 +87,10 @@ public class RequireParser {
 //---------------------------------------------------------------------------------------------------------------
 // Parse mainClassAnnotation and mainOperation annotation
 //---------------------------------------------------------------------------------------------------------------
+	
+	/** Parse the whole Kermeta file to search a given annotation
+	 @param : annotationName : the name of the searched annotation
+	 @result : the value of the searched annotation */
 	public String parseAnnotation(String annotationName)  throws FileNotFoundException {
 	    //Note that FileReader is used, not File, since File is not Closeable
 		String annotationValue = "";
@@ -99,6 +114,10 @@ public class RequireParser {
 	}
 	
 	
+	/** Search a given annotation on one line 
+	 @param aLine : the current line
+	 @param annotationName : the name of the searched annotation
+	 @result : the value of the searched annotation */
 	protected String processLineForAnnotation(String aLine, String annotationName ){
 	    //use a second Scanner to parse the content of each line 
 		String annotationValue ="";
