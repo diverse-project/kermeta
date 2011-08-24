@@ -33,58 +33,53 @@ aspect class Type {
 aspect class Class {
 
 	operation getAllTypeVariableBindings() : Sequence<TypeVariableBinding> is do
-	result := Sequence<TypeVariableBinding>.new
-	
-	result.addAll(typeParamBinding)
-	
-	var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
-	
-	result.each{ b|
-		localBindings.put(b.variable, b.type)	
-	}
-	
-	//get All the inherited bindings
-	var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
-	typeDefinition.superType.each{ c|
-		if c.isInstanceOf(Class) then
-			if c.asType(Class).typeDefinition !=typeDefinition then
-				inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+		result := Sequence<TypeVariableBinding>.new
+		
+		result.addAll(typeParamBinding)
+		
+		var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
+		
+		result.each{ b|
+			localBindings.put(b.variable, b.type)	
+		}
+		
+		//get All the inherited bindings
+		var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
+		typeDefinition.superType.each{ c|
+			if c.isInstanceOf(Class) then
+				if c.asType(Class).typeDefinition !=typeDefinition then
+					inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+				end
 			end
-		end
-	}
-	
-	//replace the variables in inherited Bindings according to local bindings
-	inheritedBindings.each{ b |
-		if b.type.isInstanceOf(TypeVariable) then
-			if localBindings.containsKey(b.type.asType(TypeVariable)) then
-				var tvb : TypeVariableBinding init TypeVariableBinding.new
-				tvb.variable:=b.variable
-				tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
-				result.add(tvb)
+		}
+		
+		//replace the variables in inherited Bindings according to local bindings
+		inheritedBindings.each{ b |
+			if b.type.isInstanceOf(TypeVariable) then
+				if localBindings.containsKey(b.type.asType(TypeVariable)) then
+					var tvb : TypeVariableBinding init TypeVariableBinding.new
+					tvb.variable:=b.variable
+					tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
+					result.add(tvb)
+				end
 			end
-		end
-	}
-			
-	
-	
+		}
+		/* stdio.writeln("Bindings for Class")
+		result.each{b |		
+			stdio.writeln("["+b.variable.prettyPrint + ", "+b.type.prettyPrint +"]")
+		}*/
 	end
 	
 
 	method resolveTypeVariables(context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do 
-		if typeParamBinding.size == typeDefinition.typeParameter.size then
-			if context.verbose then
-				stdio.writeln("no need to resolve already resolved Class, simply return self)")
-			end
-			result := self
-		else
-			var newClass : Class init Class.new
-			newClass.typeDefinition:=typeDefinition
-			typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
-			if not virtualTypeBinding.isEmpty then
-				context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
-			end 
-			result := newClass
-		end
+		
+		var newClass : Class init Class.new
+		newClass.typeDefinition:=typeDefinition
+		typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
+		if not virtualTypeBinding.isEmpty then
+			context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
+		end 
+		result := newClass
 	end
 	
 

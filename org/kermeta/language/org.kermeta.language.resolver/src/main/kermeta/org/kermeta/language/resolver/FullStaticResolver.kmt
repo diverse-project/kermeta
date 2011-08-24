@@ -55,7 +55,7 @@ class FullStaticResolver
        	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"StaticSetted.km" + " saved ************************")
        	if not getErrors.isEmpty then
        		stdio.writeln("	********************* Errors detected")
-       		getErrors.each{e | stdio.writeln(e.toString)}
+       		getErrors.each{e | stdio.writeln(e.message)}
        	end
 	end
 	

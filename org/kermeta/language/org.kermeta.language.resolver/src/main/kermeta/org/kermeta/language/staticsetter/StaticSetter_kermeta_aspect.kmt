@@ -441,12 +441,16 @@ package behavior {
 			if not type.isVoid then
 				// make sure all parameter of this type are concrete
 				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
+				
+				
 				if target.staticType.isInstanceOf(Class) then
-					bindings.addAll(target.staticType.asType(Class).typeParamBinding)
+					bindings.addAll(target.staticType.asType(Class).getAllTypeVariableBindings())
 				end
 				if (context.verbose) then 
 					stdio.write("bindings.size : "+bindings.size.toString+" content = (")
-					bindings.each{b | stdio.write(b.toString+", ")}
+					bindings.each{b | 
+						stdio.write("["+b.type.toString+","+b.variable.prettyPrint+"], "
+					)}
 					stdio.writeln(") on type " +type.toString)
 				end
 				self.staticType := type.resolveTypeVariables(context,bindings)
@@ -622,7 +626,7 @@ package behavior {
 				var tvb : TypeVariableBinding init  TypeVariableBinding.new
 				tvb.variable := tp
 				if tp.supertype.isVoid then
-					context.createTypeFromQualifiedName("kermeta::standard::Object")
+					tvb.type := context.createTypeFromQualifiedName("kermeta::standard::Object")
 				else
 					tvb.type := tp.supertype
 				end
