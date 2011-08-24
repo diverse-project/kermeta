@@ -133,8 +133,9 @@ public class MigrateRequireToKP {
 	 @param baseWorkspace : the path of the workspace
 	 @param projectName : the name of the kp project (the same as the Kermeta V1 file)
 	 @param groupName : the group of the Kermeta project
+	 @result : the path of the new kp file
 	  */
-	public void migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
+	public String migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Parse kmt main file
 		List<String> reqFiles = allRequires( pathFile, baseProject, baseWorkspace);
 		
@@ -142,8 +143,10 @@ public class MigrateRequireToKP {
 		List<String> requiredFiles = sourcesInKP (baseProject, baseProjectNotation, reqFiles );
 		
 		// Create new KP file :
-		createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
+		String kpPath = createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
 		
+		// Return kp path file
+		return kpPath;
 		
 	}
 	
@@ -188,8 +191,9 @@ public class MigrateRequireToKP {
 	 @param baseProjectNotation : the new notation of the base project path in the new kp model
 	 @param requiredFiles : the files required by this kp project
 	 @param projectName : the name of the project
-	 @param groupName : the group of the kp project*/
-	public void createNewKpFile (String pathFile, String baseProject,String baseProjectNotation, List<String> requiredFiles, String projectName, String groupName) throws FileNotFoundException, IOException {
+	 @param groupName : the group of the kp project 
+	 @result : the new kp path file*/
+	public String createNewKpFile (String pathFile, String baseProject,String baseProjectNotation, List<String> requiredFiles, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Obtain annotation values : 
 		RequireParser parser = new RequireParser (pathFile);
 		String mainClass = parser.parseAnnotation("@mainClass");
@@ -243,6 +247,9 @@ public class MigrateRequireToKP {
 		// Add kp to the resource
 		resource.getContents().add(kp);
 			resource.save(null);
+			
+		// Return the kp path 
+		return kp.eResource().getURI().path();
 	}
 	
 	

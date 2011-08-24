@@ -9,11 +9,17 @@
 */
 package org.kermeta.kp.migratev1tov2.popup.actions;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -48,7 +54,7 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		if ((selection instanceof IStructuredSelection)) {
 			IStructuredSelection structured = (IStructuredSelection)selection;
-            Object object = structured.getFirstElement();
+          final  Object object = structured.getFirstElement();
             IFile kmtFile = (IFile) object;
             // "file:/"
             String kmtPathFile =  kmtFile.getLocation().toString().replace("\\", "/");
@@ -61,9 +67,24 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
             if (object instanceof IFile) {
             	MigrateRequireToKP migrate = new MigrateRequireToKP();
             	try {
-            		//migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
-            		migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
-            		// Later refresh
+            		//String kpPath = migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
+            	String kpPath = 	migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
+            	
+            	// Refresh Kp
+            	new Job("Refresh Kp ") {
+    				public IStatus run(IProgressMonitor pm) {
+    					
+    					try {
+							((IFile)object).getParent().refreshLocal(1,pm);
+						} catch (CoreException e) {
+							e.printStackTrace();
+						}
+    					return Status.OK_STATUS;
+    				}
+    			}.schedule(); 
+            	
+            	
+            		
             	} catch (FileNotFoundException e) {
             		e.printStackTrace();
             	} catch (IOException e) {
