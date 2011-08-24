@@ -52,6 +52,7 @@ import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.utils.helpers.FileHelpers;
+import org.kermeta.utils.helpers.StringHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
@@ -779,6 +780,8 @@ public class KermetaCompiler {
 			// Check if there is a sourceLocation tag
 			Boolean tagFound = false;
 
+			StringHelper helper;
+			
 			for (Tag t : kme.getKOwnedTags()) {
 
 				// System.err.println("Tag found. Name : " + t.getName() +
@@ -791,7 +794,10 @@ public class KermetaCompiler {
 					TextReference ref = createTextReference(t);
 
 					if (ref != null) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, ((InvariantProxy) failedConstraint).getMessage(), LOG_MESSAGE_GROUP, ref);
+						InvariantProxy proxy = (InvariantProxy) failedConstraint;
+						String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
+						errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
+						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
 					}
 				}
 			}
@@ -805,7 +811,10 @@ public class KermetaCompiler {
 				} else {
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, ((InvariantProxy) failedConstraint).getMessage(), LOG_MESSAGE_GROUP, ref);
+						InvariantProxy proxy = (InvariantProxy) failedConstraint;
+						String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
+						errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
+						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
 					}
 
 				}
