@@ -71,14 +71,22 @@ aspect class Class {
 	
 
 	method resolveTypeVariables(context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do 
-		var newClass : Class init Class.new
-		newClass.typeDefinition:=typeDefinition
-		typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
-		if not virtualTypeBinding.isEmpty then
-			context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
-		end 
-		result := newClass
+		if typeParamBinding.size == typeDefinition.typeParameter.size then
+			if context.verbose then
+				stdio.writeln("no need to resolve already resolved Class, simply return self)")
+			end
+			result := self
+		else
+			var newClass : Class init Class.new
+			newClass.typeDefinition:=typeDefinition
+			typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
+			if not virtualTypeBinding.isEmpty then
+				context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
+			end 
+			result := newClass
+		end
 	end
+	
 
 }
 
@@ -90,6 +98,7 @@ aspect class TypeVariableBinding {
 		newBinding.variable:=variable
 		var newt : Type init type.resolveTypeVariables(context, bindings)
 		if newt.isVoid then
+			stdio.writeln("ERROR : TypeVariableBinding resolved as void !")
 			context.errors.add(ResolverException.new.initialize("ERROR : TypeVariableBinding resolved as void !", self))
 		else
 			if(newt.container.isVoid) then

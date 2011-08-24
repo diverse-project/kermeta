@@ -349,7 +349,7 @@ package behavior {
 					
 					//if we finally found a property
 					if not prop.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property2 of UnresolvedCall") end
+						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property2 of UnresolvedCall : "+self.name) end
 						var callProperty :  CallProperty init  CallProperty.new
 						// move content of UnresolvedCall into the new CallOperation
 						callProperty.name := self.name
