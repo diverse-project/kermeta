@@ -1,0 +1,15 @@
+KermetaProject :"chained_lambda" 
+version :  "2.0.1-SNAPSHOT" 
+group :"org.kermeta.language.sample" 
+defaultMainClass :"class2RDBMS::Main"
+defaultMainOperation : "main"
+{ 
+	 
+	source = "${project.baseUri}/genericInheritance.kmt"
+	
+	// depends on library.core	
+	dependency "library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+		 
+} 
+
+ 

@@ -1,0 +1,32 @@
+using kermeta::standard
+package root_package{
+	class C<Z>{
+		operation c() is do
+		end
+	}
+
+	class B1<Y1> inherits C<Y1>{
+		operation b1() is do
+		end
+	}
+	class B2<Y2> inherits C<Y2>{
+		operation b1() is do
+		end
+	}
+	
+	class A<X> inherits B1<X>, B2<X>{
+		operation a() is do
+		end
+	}
+	
+	class Main{
+		operation main() is do
+			var foo : A<Integer>
+			foo.a()
+			foo.b1()
+			foo.b2()
+			foo.c()
+		end	
+	}
+	
+}
