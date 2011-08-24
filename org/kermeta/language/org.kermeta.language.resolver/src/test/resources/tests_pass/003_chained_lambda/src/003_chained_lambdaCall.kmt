@@ -1,0 +1,25 @@
+using kermeta::standard
+package root_package{
+
+
+	class A {
+	
+		reference s : String[0..*]
+		
+	}
+	
+	class B  {
+		attribute as : A[0..*]
+	
+	}
+	class Main{	
+		operation main() is do
+			var b : B := B.new
+			
+			
+			b.as.select{ a1 | a1.s }.each{a2 | a2.s.toString} 
+		end
+	
+	}
+	
+} 
