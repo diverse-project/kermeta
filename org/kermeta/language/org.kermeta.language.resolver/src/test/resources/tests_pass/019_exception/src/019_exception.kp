@@ -1,0 +1,7 @@
+KermetaProject :"019_exception.kp" 
+version :  "someVersion"
+group :"group" 
+{ 
+	source = "${project.baseUri}/019_exception.kmt" 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+} 
