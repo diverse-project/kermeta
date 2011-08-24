@@ -771,7 +771,7 @@ package behavior {
 		operation resolveCallAndInferStatic(context : StaticSetterContext) is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Rescue") end
 				
-				
+			context.addSymbol(exceptionName,exceptionType.type)				
 			var newBody : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
 
 			self.body.each{rb |
