@@ -18,16 +18,11 @@ public class CheckerTestSuite extends TestSuite {
 		final FileFilter filter = new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return pathname!=null && pathname.getAbsolutePath().endsWith(".kp");
+				return pathname!=null && pathname.getAbsolutePath().endsWith(".km");
 			}
 		};
 		System.err.println("Entering suite()");
 		
-		System.err.println(CheckerTestSuite.class.getClassLoader());
-		System.err.println(CheckerTestSuite.class.getClassLoader().getResource("do_not_remove"));
-		System.err.println(CheckerTestSuite.class.getClassLoader().getResource("do_not_remove").getFile());
-		System.err.println(new File(CheckerTestSuite.class.getClassLoader().getResource("do_not_remove").getFile()));
-		System.err.println(new File(CheckerTestSuite.class.getClassLoader().getResource("do_not_remove").getFile()).getParent());
 		
 		final String folderFullURI 	= new File(CheckerTestSuite.class.getClassLoader().getResource("do_not_remove").getFile()).getParent();
 		System.err.println("folderFullURI: " + folderFullURI);
@@ -37,8 +32,8 @@ public class CheckerTestSuite extends TestSuite {
 		getFiles(new File(folderFullURI), files, filter);
 		
 		for(File file : files) {
-			System.err.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
-			suite.addTest(new CheckerTest(file.getPath(), file.getParent()));
+			System.err.println("Testing: " + file.getPath());
+			suite.addTest(new CheckerTest(file.getPath()));
 		}
 		
     	
@@ -49,7 +44,6 @@ public class CheckerTestSuite extends TestSuite {
     
     
     public static void getFiles(final File file, final List<File> files, final FileFilter filter) {
-    	System.err.println(" -> getFiles()");
     	final String[] children = file.list();
     	final String base 		= file.getPath() + System.getProperty("file.separator");
     	File file2;

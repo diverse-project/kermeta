@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : August 4, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "main::kermeta::Main"
+@mainOperation "main"
+
+
+package main::kermeta;
+
+
+require kermeta
+
+
+require "http://www.eclipse.org/uml2/3.0.0/UML"
+
+//require "platform:/resource/testMarte/metamodel/MARTE.ecore"
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}

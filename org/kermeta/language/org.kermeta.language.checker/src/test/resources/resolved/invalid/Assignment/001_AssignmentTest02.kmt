@@ -28,7 +28,7 @@ class Main
 		myA.ref := Collection<B>.new
 		// Message erreur V1 à transposer en V2
 		/*
-		TYPE-CHECKER : You are trying to overwrite the internal reflective collection of the property 'att'.
+		TYPE-CHECKER : You are trying to overwrite the internal reflective collection of the property 'ref'.
 		Did you mean ? 
 		myA.att.clear
 		myA.att.addAll(kermeta::standard::Collection<test::kermeta::B>.new)
