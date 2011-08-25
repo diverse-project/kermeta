@@ -7,6 +7,7 @@ using trace
 using ClassMM
 using RDBMSMM
 
+using kermeta::io::StdIO => stdio
 
 class Class2RDBMS 
 {

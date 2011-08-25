@@ -1,0 +1,32 @@
+package RDBMSMM;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+aspect class FKey
+{
+	/**
+	 * prefix for the name of the columns
+	 * used by the createFKeyColumns method
+	 */
+	attribute prefix : String
+	
+	/**
+	 * Create the FKey columns in the table 
+	 */
+	operation createFKeyColumns() is do
+		var src_table : Table
+		src_table ?= container
+		stdio.writeln("Update fk from table" + src_table.toString + " to " + self.references.toString)
+		// add columns
+		references.pkey.each{ k |  
+			var c : Column init Column.new
+			c.name := prefix + k.name
+			c.type := k.type
+			self.cols.add(c)
+			src_table.cols.add(c)
+		}
+	end 
+	
+}
+

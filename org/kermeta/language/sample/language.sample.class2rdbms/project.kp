@@ -9,6 +9,7 @@ defaultMainOperation : "main"
 	source = "${project.baseUri}/src/main/kmt/trace.kmt"
 	source = "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
 	source = "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
+	source = "${project.baseUri}/src/main/kmt/RDBMSMM_aspect.kmt" 
 	
 	// depends on library.core	
 	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
