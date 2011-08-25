@@ -56,7 +56,7 @@ class Class2RDBMS
 	operation createColumnsForAttribute(table : Table, att : Attribute, prefix : String) is do
     	// The type is primitive : create a simple column
     	stdio.writeln("Create column for attribute " + att.name + ", prefix = " + prefix)
-    	if PrimitiveDataType.isInstance(att.type) then 
+    	if att.type.isInstanceOf(PrimitiveDataType) then 
     		var c : Column init Column.new
     		c.name := prefix + att.name
     		c.type := att.type.name
@@ -230,7 +230,7 @@ class Main
        until it.isOff
        loop
            var next : Object init it.next
-           if (ClassModel.isInstance(next)) then                 
+           if (next.isInstanceOf(ClassModel)) then                 
            		result ?= next
            end
        end
