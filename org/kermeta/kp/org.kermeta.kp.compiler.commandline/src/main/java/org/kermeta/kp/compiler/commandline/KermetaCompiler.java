@@ -245,7 +245,7 @@ public class KermetaCompiler {
 				DiagnosticModel results = checkModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, CheckerScope.MERGED);
 				if (results != null) {
 					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
-					processCheckingDiagnostics(results);
+					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 		
 					if (stopOnError && results.getDiagnostics().size() > 0) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The merged result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -274,7 +274,7 @@ public class KermetaCompiler {
 				DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 				if (results != null) {
 					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
-					processCheckingDiagnostics(results);
+					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 					
 					if (stopOnError && results.getDiagnostics().size() > 0) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -741,7 +741,7 @@ public class KermetaCompiler {
 		}
 	}
 
-	protected void processCheckingDiagnostics(DiagnosticModel diags) {
+	protected void processCheckingDiagnostics(DiagnosticModel diags, URL kpFile) {
 
 		if (diags == null) {
 			return;
@@ -762,7 +762,6 @@ public class KermetaCompiler {
 			if (failedConstraint instanceof InvariantProxy) {
 				message = message + "Invariant " + ((InvariantProxy) failedConstraint).getInvariantName() + " on object " + ((ModelReference) diag.getAppliesTo()).getReferencedObject().toString();
 			}
-			// String message = diag.getFailedConstraint().;
 			if (diag.isIsWarning()) {
 				logger.log(MessagingSystem.Kind.UserWARNING, message, LOG_MESSAGE_GROUP);
 			} else {
@@ -773,15 +772,13 @@ public class KermetaCompiler {
 			EObject myObject = ((ModelReference) diag.getAppliesTo()).getReferencedObject();
 			KermetaModelElement kme = (KermetaModelElement) myObject;
 
-			// System.err.println("The diagnostic involves " + kme.toString());
-
-			// System.err.println("KermetaModelElement succesfully casted !!");
+			InvariantProxy proxy = (InvariantProxy) failedConstraint;
+			String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
+			errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
 
 			// Check if there is a sourceLocation tag
 			Boolean tagFound = false;
 
-			StringHelper helper;
-			
 			for (Tag t : kme.getKOwnedTags()) {
 
 				// System.err.println("Tag found. Name : " + t.getName() +
@@ -792,12 +789,12 @@ public class KermetaCompiler {
 					tagFound = true;
 					logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() + ")   ", "");
 					TextReference ref = createTextReference(t);
-
 					if (ref != null) {
-						InvariantProxy proxy = (InvariantProxy) failedConstraint;
-						String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
-						errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
-						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						if (diag.isIsWarning()) {
+							logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+						} else {
+							logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						}
 					}
 				}
 			}
@@ -808,13 +805,22 @@ public class KermetaCompiler {
 
 				if (t == null) {
 					System.err.println("Impossible to retrieve a container with text traceability");
+					// In this case, place the error on the kp file
+					FileReference ref = new FileReference(kpFile);
+					if (diag.isIsWarning()) {
+						logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+					} else {
+						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+					}
+					
 				} else {
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
-						InvariantProxy proxy = (InvariantProxy) failedConstraint;
-						String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
-						errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
-						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						if (diag.isIsWarning()) {
+							logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+						} else {
+							logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						}
 					}
 
 				}
