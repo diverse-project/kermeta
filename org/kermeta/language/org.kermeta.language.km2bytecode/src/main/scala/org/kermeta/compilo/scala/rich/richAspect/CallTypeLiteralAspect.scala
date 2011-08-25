@@ -11,9 +11,11 @@ import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 trait CallTypeLiteralAspect extends KermetaModelElementAspect {
 
               override def generateScalaCode(res : StringBuilder) : Unit = {
-      var singleton : scala.Boolean =false
+      var singleton : scala.Boolean =false 
         if (this.getTyperef().getType.isInstanceOf[Class]){
-         singleton=   this.getTyperef().getType.asInstanceOf[Class]
+         if (this.getTyperef().getType.asInstanceOf[Class]
+             .getTypeDefinition.asInstanceOf[ClassDefinition].getIsSingleton != null)
+           singleton=   this.getTyperef().getType.asInstanceOf[Class]
              .getTypeDefinition.asInstanceOf[ClassDefinition].getIsSingleton.booleanValue
           if (singleton)
            {
