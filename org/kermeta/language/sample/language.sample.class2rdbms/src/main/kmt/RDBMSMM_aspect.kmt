@@ -20,12 +20,13 @@ aspect class FKey
 		stdio.writeln("Update fk from table" + src_table.toString + " to " + self.references.toString)
 		// add columns
 		references.pkey.each{ k |  
-			var c : Column init Column.new
+			var c : Column init RDBMSMM::Column.new
 			c.name := prefix + k.name
 			c.type := k.type
 			self.cols.add(c)
 			src_table.cols.add(c)
 		}
+		Column.new
 	end 
 	
 }
