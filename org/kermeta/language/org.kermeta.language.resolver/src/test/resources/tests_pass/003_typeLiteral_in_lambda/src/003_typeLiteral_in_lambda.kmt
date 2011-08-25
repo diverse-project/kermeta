@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : Aug 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package root_package;
+
+using kermeta::standard
+
+class Main
+{
+
+	operation main() : Void is do     
+		var col : Sequence<A> 
+		col.each{c |
+			var rs : A init A.new  // bug here, fail to find TypeLiteral A
+			rs := A.new
+		}
+		var rs : A init A.new
+		rs := A.new
+	end
+}
+
+class A{
+}
