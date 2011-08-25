@@ -2,7 +2,7 @@ package class2RDBMS;
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::persistence
+using kermeta::emfpersistence
 using trace
 using ClassMM
 using RDBMSMM
@@ -203,30 +203,27 @@ class Main
         var tranfo : Class2RDBMS init Class2RDBMS.new
         var outputModel : RDBMSModel init tranfo.transform(inputModel)
         
-        var repository : EMFRepository init EMFRepository.new
-        repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+        var resourceSet : ResourceSet init ResourceSet.new
+        //repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
         var resource : Resource init 
-        	repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
+        	resourceSet.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
         							 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
 	 	// Define a Root ...
-	 	resource.instances.add(outputModel)
+	 	resource.getContents.add(outputModel)
 	 		 	
 	 	resource.save()
        
-       rescue (e : kermeta::exceptions::ResourceLoadException)
-           metamodelRegistration(e)
+       
     end
     
     operation loadClassModel() : ClassModel is do             
-   		var repository : EMFRepository init EMFRepository.new
-   		repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var repository : ResourceSet init ResourceSet.new
+   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
    		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
    																									"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
-       	resource.load()
-      
-       // result ?= resource.instances.one
+       	resource.load()      
        
-       from var it : Iterator<Object> init resource.instances.iterator
+       from var it : Iterator<Object> init resource.getContents.iterator
        until it.isOff
        loop
            var next : Object init it.next
@@ -236,9 +233,4 @@ class Main
        end
    end
    
-   operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
-            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THE METAMODELS !\n"
-                     +"You can find additional information about thise sample on Kermeta web site : http://kermeta.org/examples")
-            raise e
-   end
 }
