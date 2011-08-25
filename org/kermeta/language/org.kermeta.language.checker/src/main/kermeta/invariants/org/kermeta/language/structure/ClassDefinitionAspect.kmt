@@ -40,8 +40,7 @@ aspect class ClassDefinition {
 	*/
 	
 	/**
-	 * Fake one for testing purposes
-	 */
+	 * Fake one for testing purposes */
 	@Scope "MERGED"
 	inv no_helloworld is do
 	

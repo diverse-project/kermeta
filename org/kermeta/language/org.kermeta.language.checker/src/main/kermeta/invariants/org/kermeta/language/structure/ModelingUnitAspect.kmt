@@ -27,4 +27,15 @@ aspect class ModelingUnit
 		true
 	end
 	
+	/**
+	 * Deprecated use of mainClass and mainOperation tags.
+	 * Consider moving these to the project's kp file.
+	 */
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv deprecated_mainClassOperation is do
+		not (self.kOwnedTags.exists{ t | t.name=="mainClass"} or
+		self.kOwnedTags.exists{ t | t.name=="mainOperation"} )
+		
+	end
 }
