@@ -116,7 +116,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	method visitEAttribute(eAttr : EAttribute) : Void is do
 		// If the target kermeta object is null, it means that is has not been created. Thus, the attribute must be ignored.
 		if((not eAttr.eContainingClass.targetKermetaObject.isVoid).andThen{b | eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
-			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, eAttr.changeable, eAttr.eType, 
+			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, not eAttr.changeable, eAttr.eType, 
 												 eAttr.eGenericType, eAttr.lowerBound, eAttr.upperBound)
 			// Adding the created Kermeta property to its class definition.
 			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
@@ -253,6 +253,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	method visitEReference(ref : EReference) : Void is do
 		// If the target kermeta object is null, it means that is has not been created. Thus, the reference must be ignored.
 		if((not ref.eContainingClass.targetKermetaObject.isVoid).andThen{b | ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
+			
 			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
 												 ref.eGenericType, ref.lowerBound, ref.upperBound)
 			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
