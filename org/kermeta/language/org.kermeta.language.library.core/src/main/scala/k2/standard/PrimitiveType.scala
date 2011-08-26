@@ -27,6 +27,8 @@ object PrimitiveConversion{
         implicit def float2kermeta(x: Float) = new RichFloat(x)
   implicit def double2kermeta(x: Double) = new RichDouble(x)
   implicit def date2kermeta(x: java.util.Date) = new RichDate(x)
+  implicit def resource2KerResource(x: org.eclipse.emf.ecore.resource.Resource) = new _root_.k2.persistence.RichResource(x)
+  implicit def resourceset2KerResourceset(x: org.eclipse.emf.ecore.resource.ResourceSet) = new _root_.k2.persistence.RichResourceSet(x)
 
 
     implicit def character2kermeta(x: Char) = new RichCharacter(x)
