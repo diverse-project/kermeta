@@ -97,6 +97,8 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
                     })
             }
             res append " with "+Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(this))
+            this.generateParamerterClass(res)
+
             res.append("{\n")
 
             this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
@@ -260,4 +262,13 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
                                                    res1.append("]")
         }
     }
+    
+      def whichBoolean(): String = {
+    var res = this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "." + this.getName()
+    //var res = new StringBuilder
+    //this.generateScalaCode(res)
+    // println(res)
+    return res;
+  }
+
 }

@@ -98,18 +98,22 @@ trait PropertyAspect extends KermetaModelElementAspect with LogAspect {
             }
 
                     res.append("this.")
-            if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean")){
+            if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean")|| s.toString.equals("_root_.java.lang.Boolean"))
+            {
+            	var packName = this.eContainer.eContainer.asInstanceOf[Package].getQualifiedNameCompilo
                 if (this.getType().isInstanceOf[PrimitiveType]
-                    && !("MARTE_Library.MARTE_PrimitivesTypes.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
-                        "org.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
-                        "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) || "Ker".equals(prefix) )                    
+                    &&  (!"Ker".equals(prefix) )                    
                 )
                 {
-                    log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
+                    //code probable mort
+                  log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
                     res.append(prefix+"get")
                 }else{
-                    
-                    res.append(prefix+"is")
+                	if ("org.kermeta.language.structure".equals(packName) || "org.kermeta.language.behavior".equals(packName))
+                    {res.append(prefix+"get")
+                    }else{
+                	  println("ECHO IS " + currentname + " "+ this.eContainer.asInstanceOf[ClassDefinition].getQualifiedNameCompilo  +this.getType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].whichBoolean)
+                    res.append(prefix+"is")}
                 }
             }
             else
@@ -132,7 +136,6 @@ trait PropertyAspect extends KermetaModelElementAspect with LogAspect {
     def generateScalGet(res : StringBuilder,prefix:String) : Unit ={
         var s: StringBuilder = new StringBuilder
         this.getType().asInstanceOf[KermetaModelElementAspect].generateScalaCode(s)
-		
         res.append("def "+GlobalConfiguration.scalaPrefix)
 //        res.append(this.getName+"")
         res.append(this.getName+"")

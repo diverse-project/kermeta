@@ -11,79 +11,73 @@ import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
 trait ClassAspect extends TypeAspect with KermetaModelElementAspect with LogAspect {
 
-    override def generateScalaCode(res : StringBuilder) : Unit = {
-        /*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName
+  override def generateScalaCode(res: StringBuilder): Unit = {
+    /*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName
          pack=k2.utils.TypeEquivalence.getPackageEquivalence(pack);
          var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName
          //		if (Util.currentPackage.equals(pack))
          //				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
          //		else
          res.append(k2.utils.TypeEquivalence.getTypeEquivalence(s))*/
-//                                                             typeEquivelence.put("org.kermeta.language.structure.Object","java.lang.Object")
-  
-       var qualifiedName = this.getQualifiedNameCompilo()
-       if (qualifiedName.contains( "org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable") ){
-           res.append(qualifiedName.replace("org.kermeta.language.structure.Object","java.lang.Object"))
-       }else{
-           res.append(qualifiedName)
-       }
-        /* Check Generique Param */
-			
-        if (this.getTypeParamBinding.size()>0){
-				
-			
-            var i : Int = 1
-            res.append("[")
-            this.getTypeParamBinding.foreach(e=> {
-//                    res.append("_<:")
-                    var res1: StringBuilder = new StringBuilder
-                    e.generateScalaCode(res1)
-                     if (false && res1.toString.contains(classOf[org.kermeta.language.structure.KermetaModelElement].getCanonicalName))
-//                        res.append("_ <: _root_.org.eclipse.emf.ecore.EObject")
-                          res.append("_ <: _root_.java.lang.Object")
-                    else
-                        res.append(res1.toString)
-                    if (i< this.getTypeParamBinding.size()){
-                        res.append(", ")
-                    }
-                    i=i+1;
-                })
-            res.append("]")
-         	
-            //TODO
-        }
-        else{
-	
-			
-			
-				
-            try{
-                var c = java.lang.Class.forName(this.getQualifiedNameCompilo())
-                if(c.getTypeParameters.size > 0){
-                    res.append("[")
-                    for(i <- 0 until c.getTypeParameters.length ){
-                        res.append("_")
-                        if(i < c.getTypeParameters.length -1){
-                            res.append(",")
-                        }
-                    }
-                    res.append("]")
-                }
-            } catch {
-                case _ =>
-            }
-        }
+    //                                                             typeEquivelence.put("org.kermeta.language.structure.Object","java.lang.Object")
 
+    var qualifiedName = this.getQualifiedNameCompilo()
+    if (qualifiedName.contains("org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable")) {
+      res.append(qualifiedName.replace("org.kermeta.language.structure.Object", "java.lang.Object"))
+    } else {
+      res.append(qualifiedName)
     }
-	
-    override def getQualifiedNameCompilo():String ={
-        var res = new StringBuilder
-        var typename = Util.protectScalaKeyword(Util.getQualifiedNamedBase(this.getTypeDefinition))
-        if(typename.contains(".")) res.append("_root_.")
-        res.append(typename)
+    /* Check Generique Param */
 
+    if (this.getTypeParamBinding.size() > 0) {
 
-        /*if (this.getTypeParamBinding.size>0){
+      var i: Int = 1
+      res.append("[")
+      this.getTypeParamBinding.foreach(e => {
+        //                    res.append("_<:")
+        var res1: StringBuilder = new StringBuilder
+        e.generateScalaCode(res1)
+        if (false && res1.toString.contains(classOf[org.kermeta.language.structure.KermetaModelElement].getCanonicalName))
+          //                        res.append("_ <: _root_.org.eclipse.emf.ecore.EObject")
+          res.append("_ <: _root_.java.lang.Object")
+        else
+          res.append(res1.toString)
+        if (i < this.getTypeParamBinding.size()) {
+          res.append(", ")
+        }
+        i = i + 1;
+      })
+      res.append("]")
+
+      //TODO
+    } else {
+
+      try {
+        var c = java.lang.Class.forName(this.getQualifiedNameCompilo())
+        if (c.getTypeParameters.size > 0) {
+          res.append("[")
+          for (i <- 0 until c.getTypeParameters.length) {
+            res.append("_")
+            if (i < c.getTypeParameters.length - 1) {
+              res.append(",")
+            }
+          }
+          res.append("]")
+        }
+      } catch {
+        case _ =>
+      }
+    }
+
+  }
+
+  override def getQualifiedNameCompilo(): String = {
+    var res = new StringBuilder
+    var typename = Util.protectScalaKeyword(Util.getQualifiedNamedBase(this.getTypeDefinition))
+    if (typename.contains(".")) res.append("_root_.")
+    res.append(typename)
+
+    /*if (this.getTypeParamBinding.size>0){
          var i = 0;
          res.append("[")
          this.getTypeParamBinding.foreach(ty => {
@@ -94,10 +88,11 @@ trait ClassAspect extends TypeAspect with KermetaModelElementAspect with LogAspe
          res.append("]")
 
          }*/
-        return res.toString
-    }
- 	
-    /*
+    return res.toString
+  }
+
+
+  /*
      override def generateScalaCode(res : StringBuilder) : Unit = {
 		
      if(this.getName() != "Main"){ //TODO REMOVE DEBUG MODE
