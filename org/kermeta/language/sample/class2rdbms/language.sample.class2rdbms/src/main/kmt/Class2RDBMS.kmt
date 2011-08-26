@@ -211,7 +211,7 @@ class Main
 	 	// Define a Root ...
 	 	resource.getContents.add(outputModel)
 	 		 	
-	 	resource.save()
+	 	resource.save(void)
        
        
     end
@@ -221,7 +221,7 @@ class Main
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
    		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
    																									"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
-       	resource.load()      
+       	resource.load(void)      
        
        from var it : Iterator<Object> init resource.getContents.iterator
        until it.isOff
