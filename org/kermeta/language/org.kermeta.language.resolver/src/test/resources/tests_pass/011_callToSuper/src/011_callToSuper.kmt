@@ -1,0 +1,27 @@
+using kermeta::standard
+
+package foo{
+
+	class A1 {
+	operation x() : Integer is do 
+		result:=1
+	end
+	}
+	
+	class A2{
+	operation x():Integer is do
+		result:=2
+	end
+		
+	}
+	
+	
+	class B inherits A1,A2{
+	
+	method x() : Integer from A2 is do
+		var i : Integer
+		i:=super().plus(1) 
+	end
+	
+	}
+} 
