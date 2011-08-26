@@ -13,7 +13,7 @@ object TypeEquivalence {
     pack1.put("kermeta.utils","k2.utils");
 
     pack1.put("ecore","org.eclipse.emf.ecore");
-    pack1.put("trace","fr.inria.aoste.trace");
+//    pack1.put("trace","fr.inria.aoste.trace");
     pack1.put("uml","org.eclipse.uml2.uml");
     //pack1.put("org.k2.language.structure","org.k2.language.structure")
     pack1.put("kermeta","org.kermeta")
