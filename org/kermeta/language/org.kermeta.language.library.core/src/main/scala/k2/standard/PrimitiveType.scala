@@ -15,7 +15,7 @@ object PrimitiveConversion{
     implicit def stringbuffer2kermeta(x: java.lang.StringBuffer) = new RichStringBuffer(x)
 
     implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)
-    implicit def boolean2javaboolean(x: java.lang.Boolean) : Boolean = {if (x== null) return false else return x.booleanValue()}
+    // implicit def boolean2javaboolean(x: java.lang.Boolean) : Boolean = {if (x== null) return false else return x.booleanValue()}
     implicit def javaboolean2kermeta(x: java.lang.Boolean) = new RichJavaBoolean(x)
     implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
     implicit def iteratorEObject2kermeta(x:java.util.Iterator[_<: org.eclipse.emf.ecore.EObject]) :  _root_.java.util.Iterator[_root_.java.lang.Object] =x.asInstanceOf[_root_.java.util.Iterator[_root_.java.lang.Object]]
