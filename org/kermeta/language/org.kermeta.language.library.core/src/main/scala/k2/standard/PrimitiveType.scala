@@ -40,7 +40,19 @@ object PrimitiveConversion{
     //implicit def toReal(in:java.lang.Double) : RichReal = new RichReal(in.doubleValue)
 
 
-  
+
+   implicit def IteratorEObject2IteratorKObject(x:  java.util.Iterator[org.eclipse.emf.ecore.EObject]) :java.util.Iterator[_root_.k2.standard.KermetaObject] = {
+        import k2.standard.JavaConversions._
+        var res = new _root_.java.util.Iterator[_root_.k2.standard.KermetaObject]{
+          def hasNext() : Boolean = x.hasNext
+          def next() : _root_.k2.standard.KermetaObject = x.next.asInstanceOf[_root_.k2.standard.KermetaObject]
+          def remove() = x.remove()
+        }
+        res
+        
+    }
+
+    
     implicit def ListInteger2ListInt(x:  org.eclipse.emf.common.util.EList[java.lang.Integer]) :java.util.List[Int] = {
         import k2.standard.JavaConversions._
         var l=new java.util.ArrayList[Int]() ;
