@@ -96,7 +96,6 @@ trait PropertyAspect extends KermetaModelElementAspect with LogAspect {
             if ("class".equals(currentname)  &&Util.hasEcoreTag(this) ){
                 currentname = currentname + "_"
             }
-
                     res.append("this.")
             if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("k2.standard.Boolean")|| s.toString.equals("_root_.java.lang.Boolean"))
             {
@@ -106,13 +105,15 @@ trait PropertyAspect extends KermetaModelElementAspect with LogAspect {
                 )
                 {
                     //code probable mort
-                  log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
+                	log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
                     res.append(prefix+"get")
                 }else{
+                	//TODO manage  the protected 
                 	if ("org.kermeta.language.structure".equals(packName) || "org.kermeta.language.behavior".equals(packName))
-                    {res.append(prefix+"get")
+                    {
+                	  res.append(prefix+"get")
                     }else{
-                	  println("ECHO IS " + currentname + " "+ this.eContainer.asInstanceOf[ClassDefinition].getQualifiedNameCompilo  +this.getType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].whichBoolean)
+                	 // println("ECHO IS " + currentname + " "+ this.eContainer.asInstanceOf[ClassDefinition].getQualifiedNameCompilo  +this.getType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].whichBoolean)
                     res.append(prefix+"is")}
                 }
             }

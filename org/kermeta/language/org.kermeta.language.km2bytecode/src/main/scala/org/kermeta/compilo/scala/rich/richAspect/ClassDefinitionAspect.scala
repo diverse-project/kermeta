@@ -263,12 +263,5 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
         }
     }
     
-      def whichBoolean(): String = {
-    var res = this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "." + this.getName()
-    //var res = new StringBuilder
-    //this.generateScalaCode(res)
-    // println(res)
-    return res;
-  }
 
 }
