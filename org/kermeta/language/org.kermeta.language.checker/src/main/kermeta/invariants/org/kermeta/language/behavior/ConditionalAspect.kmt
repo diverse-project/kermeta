@@ -1,0 +1,45 @@
+/* $Id:$ 
+ * Creation : August 26, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::behavior;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+// use Kermeta MDK to retrive qualified names
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
+using org::kermeta::language::structure
+
+aspect class Conditional
+{
+	
+	/**
+	 * The condition must be of type Boolean
+	 */
+	@Scope "RESOLVED"
+	inv condition_must_be_boolean is do
+	
+		var invResult : Boolean init false 
+		if (self.condition.staticType.isInstanceOf(ParameterizedType))
+		then
+			var typeDef : TypeDefinition init self.condition.staticType.asType(ParameterizedType).typeDefinition
+			stdio.writeln("   typeDefinition qualified name : " + typeDef.getQualifiedName()   )
+			if (typeDef.getQualifiedName=="kermeta::standard::Boolean")
+			then
+				invResult:=true		
+			end
+		end
+		
+		invResult
+	end
+	
+
+}

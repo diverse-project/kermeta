@@ -1,0 +1,32 @@
+using kermeta::standard
+
+package helloworld {
+	class HeloWorld 
+	{ 
+		@main ""
+		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
+			kermeta::io::StdIO.writeln("Hello World, everybody!")
+			//Generic type does not work
+			//var c : Collection<kermeta::standard::Integer>
+			//var c : Collection
+			//c.add(1)
+			//c.add(2)
+			//c.add(3)
+			//c.each{e | kermeta::io::StdIO.writeln(e)}
+			
+			var test : Boolean init true
+			var testBis : A
+			
+			
+			if (test)
+			then
+			end
+			
+
+			
+		end
+		
+		
+	}
+	
+}

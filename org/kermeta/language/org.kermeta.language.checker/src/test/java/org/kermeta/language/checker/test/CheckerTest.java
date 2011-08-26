@@ -38,25 +38,25 @@ public class CheckerTest extends TestCase {
 	
 	public CheckerTest(String path/*, String parent*/) {
 		super();
-		System.err.println("Creating test for file " + path);
+		System.out.println("--------------------------------------\nCreating test for file " + path);
 		this.kmFile=path;
 
 		String fileSeparator=System.getProperty("file.separator");
 		
 		if (path.contains(fileSeparator+"invalid"+fileSeparator)) {
-			System.err.println("- This is an invalid testcase");
+			System.out.println("- This is an invalid testcase");
 			this.isInvalidTestCase=true;
 			this.kmFileInvDescr=kmFile+".txt";
 		} else {
-			System.err.println("- This is a valid testcase");
+			System.out.println("- This is a valid testcase");
 			this.isInvalidTestCase=false;
 		}
 		
 		for (CheckerScope scope : CheckerScope.values()) {
-			System.err.println("- Checking scope : " + scope.toString() + " for file " + kmFile.toUpperCase());
+			//System.err.println("- Checking scope : " + scope.toString() + " for file " + kmFile.toUpperCase());
 			if (kmFile.toUpperCase().contains(fileSeparator+scope.toString()+fileSeparator)) {
 				this.scope=scope;
-				System.err.println("This test is for scope " + this.scope.toString());
+				System.out.println("This test is for scope " + this.scope.toString());
 			}
 		}
 		//System.err.println("isInvalid?"+isInvalidTestCase);
@@ -65,24 +65,32 @@ public class CheckerTest extends TestCase {
 	}
 
 	public void test() throws IOException  {
-        System.out.println("Test checking " + kmFile);
+        System.out.println("---------------------------------\nChecking " + kmFile);
 
+        
         String expectedFailedInvariant=null;
-        if (kmFileInvDescr!=null) {
-        	System.err.println("trying to read " + kmFileInvDescr);
-        	try {
-				expectedFailedInvariant = readFile(kmFileInvDescr);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				Assert.fail("The file " + kmFileInvDescr + " describing the expected failed invariant cannot be found");
-			}
+        
+        if (isInvalidTestCase) { 
+
+        	// If this test is an invalid test case, retrieve the description of the 
+        	// invariant that is expected to fail
+        	if (kmFileInvDescr!=null) {
+        		System.out.println("trying to read " + kmFileInvDescr);
+        		try {
+        			expectedFailedInvariant = readFile(kmFileInvDescr);
+        		} catch (FileNotFoundException e) {
+        			// TODO Auto-generated catch block
+        			Assert.fail("The file " + kmFileInvDescr + " describing the expected failed invariant cannot be found");
+        		}
+        	}
+            if (expectedFailedInvariant==null) {
+            	Assert.fail("There is no expected failed invariant in " + kmFileInvDescr);
+            } else if (expectedFailedInvariant.length()==0) {
+            	Assert.fail("There is no expected failed invariant in " + kmFileInvDescr);
+            }
+        
         }
         
-        if (expectedFailedInvariant==null) {
-        	Assert.fail("There is no expected failed invariant in " + kmFileInvDescr);
-        } else if (expectedFailedInvariant.length()==0) {
-        	Assert.fail("There is no expected failed invariant in " + kmFileInvDescr);
-        }
         
         // the checker
         Checker checker = new CheckerImpl();
@@ -100,6 +108,7 @@ public class CheckerTest extends TestCase {
         
 		// Check the modeling unit
 		DiagnosticModel result = checker.check(mu, scope, null, new StdioSimpleMessagingSystem());
+		System.out.println("DiagnosticModel size : " + result.getDiagnostics().size());
 		
 		// check results
 		if (isInvalidTestCase) {
@@ -111,6 +120,7 @@ public class CheckerTest extends TestCase {
 				//failedConstraint.
 				if (failedConstraint instanceof InvariantProxy) {
 					InvariantProxy invProxy = (InvariantProxy) failedConstraint;
+					System.out.println("failed constraint : " + invProxy.getInvariantName() + ", expected : (" + expectedFailedInvariant + ")");
 					if (invProxy.getInvariantName().equals(expectedFailedInvariant)) {
 						testOk=true;
 					}
@@ -185,8 +195,9 @@ public class CheckerTest extends TestCase {
 		}
 		 
 		// show file contents here
-		System.out.println(contents.toString());
-		return contents.toString();
+		System.out.println("("+contents.toString()+")");
+		// And delete \n at the end
+		return contents.toString().substring(0, contents.toString().length()-2);
 	}
 	
     @Override
