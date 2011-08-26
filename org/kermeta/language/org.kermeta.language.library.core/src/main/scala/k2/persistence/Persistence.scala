@@ -21,7 +21,6 @@ object EcorePackages{
     var workspaceURI : String = _
     var pluginURI : String = _
 
-
 }
 
 

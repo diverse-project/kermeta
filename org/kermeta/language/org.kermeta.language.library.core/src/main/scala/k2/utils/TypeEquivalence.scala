@@ -10,6 +10,7 @@ object TypeEquivalence {
     pack1.put("kermeta.io","k2.io");
     pack1.put("kermeta.exceptions","k2.exceptions");
     pack1.put("kermeta.persistence","k2.persistence");
+    pack1.put("kermeta.emfpersistence","k2.persistence");
     pack1.put("kermeta.utils","k2.utils");
 
     pack1.put("ecore","org.eclipse.emf.ecore");
@@ -96,6 +97,9 @@ object TypeEquivalence {
                                                              typeEquivelence.put("boolean", "java.lang.Boolean");
                                                              typeEquivelence.put("k2.standard.Boolean", "java.lang.Boolean");
                                                              typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
+                                                             typeEquivelence.put("k2.persistence.ResourceSet","org.eclipse.emf.ecore.resource.ResourceSet")
+                                                             typeEquivelence.put("k2.persistence.Resource","org.eclipse.emf.ecore.resource.Resource")
+                                                             
                                                              typeEquivelence.put( k2.utils.UTilScala.scalaAspectPrefix + ".org.kermeta.language.ReflectiveSequence", "java.util.List")
                                                              typeEquivelence.put("org.k2.language.ReflectiveSequence", "java.util.List")
 //                                                             typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
