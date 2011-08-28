@@ -40,15 +40,25 @@
 								<fileset dir="${basedir}/src/site/docbook/reference"> <include name="**/*.png" 
 								/> <include name="**/*.gif" /> <include name="**/*.jpg" /> </fileset> </copy> 
 								</postProcess> -->
+							<!-- <admonGraphics>1</admonGraphics>
+							<admonGraphicsPath>gfx/admonitions/</admonGraphicsPath>
+							<admonGraphicsExtension>.gif</admonGraphicsExtension>
+							<calloutGraphics>1</calloutGraphics>
+							<calloutGraphicsPath>gfx/callouts/</calloutGraphicsPath>
+							-->
+							<highlightSource>1</highlightSource>
+							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
+							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.single.xsl</htmlCustomization>
 							<preProcess>
 								<copy todir="target/docbkx/html/KerMeta-Manual_figures">
 									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
 								</copy>
-								<!-- <copy todir="target/docbkx/html/css" file="${project.basedir}/../../ow2-style.css" 
-									/> -->
+								<copy todir="target/docbkx/html">
+									<fileset dir="src/docbkx/resources" />
+								</copy>
 							</preProcess>
 						</configuration>
-						<phase>pre-site</phase>
+						<phase>compile</phase>
 					</execution>
 					<execution>
 						<id>single-pdf</id>
@@ -62,7 +72,7 @@
 								tofile="${basedir}/target/site/reference/pdf/spring-surf-docs.pdf" failonerror="false" 
 								/> </postProcess> -->
 						</configuration>
-						<phase>pre-site</phase>
+						<phase>compile</phase>
 					</execution>
 					<execution>
 						<id>multi-page</id>
@@ -81,7 +91,7 @@
 								/> <include name="**/*.gif" /> <include name="**/*.jpg" /> </fileset> </copy> 
 								</postProcess> -->
 						</configuration>
-						<phase>pre-site</phase>
+						<phase>compile</phase>
 					</execution>
 					<!-- <execution> <goals> <goal>generate-html</goal> <goal>generate-pdf</goal> 
 						<goal>generate-eclipse</goal> </goals> <phase>pre-site</phase> <configuration> 
@@ -108,6 +118,12 @@
 						<artifactId>fop</artifactId>
 						<version>1.0</version>
 					</dependency>
+					<dependency>
+			           <groupId>net.sf.xslthl</groupId>
+			           <artifactId>xslthl</artifactId>
+			           <version>2.0.1</version>
+			           <scope>runtime</scope>
+			        </dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
