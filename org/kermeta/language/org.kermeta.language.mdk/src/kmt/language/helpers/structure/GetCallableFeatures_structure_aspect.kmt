@@ -101,6 +101,35 @@ aspect class Class inherits ParameterizedType {
 	end	
 	
 }
+
+aspect class TypeVariable inherits Type{
+
+	/**
+	 * Get an Operation that can be called from an instance of this TypeVariable
+	 * return void if not found
+	 */
+	method getCallableOperationByName( operationName : String ) : Operation is do
+		if supertype.isVoid then
+			// should also search in kermeta::standard::Object
+		else
+			result := self.supertype.getCallableOperationByName(operationName)
+		end
+	end
+	
+	/**
+	 * Get a Property that can be called from an instance of this TypeVariable
+	 * return void if not found
+	 */
+	method getCallablePropertyByName( attributeName : String ) : Property is do
+		if supertype.isVoid then
+			// should search in kermeta::standard::Object
+		else
+			result := self.supertype.getCallablePropertyByName(attributeName)
+		end
+	end	
+}
+
+
 aspect class DataType inherits Type {}
 aspect class Enumeration inherits DataType {
 	method getCallableEnumLiteralByName (enumName : String) : EnumerationLiteral is do
