@@ -1,0 +1,27 @@
+package trace;
+
+require kermeta
+
+using kermeta::utils
+
+/**
+ * This class represents the trace of a transfo
+ */
+class Trace<SRC, TGT>
+{
+	/**
+	 * Mapping between source and target objects
+	 */
+	reference src2tgt : Hashtable<SRC, TGT>
+	
+	operation create() is do
+		src2tgt := Hashtable<SRC, TGT>.new
+		
+	end
+	
+	operation createSRC() : SRC is do		
+		result := SRC.new
+	end
+
+}
+
