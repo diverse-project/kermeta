@@ -427,7 +427,17 @@ package behavior {
 				(not callOperation.target.isVoid).andThen{b | callOperation.target.isInstanceOf(CallTypeLiteral) }) then
 				callOperation.setInferedStaticType(context,callOperation.target.asType(CallTypeLiteral).typeref.type)
 			else
-				callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElement(op))
+				//The call of operation asType must only take as parameter un type literal, for typing it statically, and must return
+				//the type represented by this literal
+				if op.name=="asType" and callOperation.parameters.size==1 then
+					if callOperation.parameters.one.isInstanceOf(CallTypeLiteral) then
+						callOperation.setInferedStaticType(context,callOperation.parameters.one.asType(CallTypeLiteral).typeref.type)
+					else						
+						context.errors.add(ResolverException.new.initialize("The special operation asType must have a type literal as a parameter.", self))
+					end
+				else
+					callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElement(op))
+				end
 			end
 		end
 	}
