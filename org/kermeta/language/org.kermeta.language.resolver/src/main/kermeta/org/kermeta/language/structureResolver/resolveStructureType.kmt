@@ -1,0 +1,42 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "ResolverContext_Aspect.kmt"
+using kermeta::standard
+using org::kermeta::language::resolver
+
+aspect class KermetaModelElement{
+
+	operation resolveStructureType(context : LanguageVisitorContext) is do
+		self.resolveStructureContainedType(context)
+		self.resolveStructureRererencedType(context)
+	end
+	
+	operation resolveStructureContainedType(context : LanguageVisitorContext) is do
+		
+	end
+	operation resolveStructureReferencedType(context : LanguageVisitorContext) is do
+		
+	end
+	
+	
+}
+
+aspect class TypeContainer inherits KermetaModelElement{
+	
+	method resolveStructureContainedType(context : LanguageVisitorContext) is do
+		
+		var toResolve : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new
+		containedType.each{ t|
+				if t.isInstanceOf(UnresolvedType) then
+					toResolve.add(t.asType(UnresolvedType))
+				end
+				}
+		toResolve.each{t |
+				var resolvedType : Type
+				resolvedType:=
+		
+	
+	end
+
+}

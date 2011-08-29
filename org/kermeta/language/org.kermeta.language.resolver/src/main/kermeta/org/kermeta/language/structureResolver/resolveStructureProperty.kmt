@@ -1,0 +1,13 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "ResolverContext_Aspect.kmt"
+using kermeta::standard
+using org::kermeta::language::resolver
+
+aspect class KermetaModelElement{
+
+	operation resolveStructureProperty(context : LanguageVisitorContext) is do
+		
+	end
+}

@@ -1,0 +1,31 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+aspect class ModelingUnit {
+	operation resolveWholeStructure() is do
+	
+		//init of context
+		var context : LanguageVisitorContext init LanguageVisitorContext.new.initialize(self)
+		
+		self.resolveStructure(context)
+		
+	end
+	
+
+}
+
+aspect class KermetaModelElement{
+
+	operation resolveStructure(context : LanguageVisitorContext) is do
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).resolveStructure(context)
+				end
+			e}// must return somthing for scala compiler to work		
+		self.resolveStructureType(context)
+		self.resolveStructureOperation(context)
+		self.resolveStructureProperty(context)
+	end
+}
