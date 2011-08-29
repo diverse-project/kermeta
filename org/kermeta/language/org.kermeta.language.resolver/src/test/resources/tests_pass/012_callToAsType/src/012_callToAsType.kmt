@@ -1,0 +1,23 @@
+using kermeta::standard
+
+package foo{
+
+	class A {
+	operation x() : Integer is do 
+		result:=1
+	end
+	}
+	
+	
+	
+	
+	class B {
+	
+	operation bar ()  is do
+		var o : Object
+		o:=A.new
+		o.asType(A).x() 
+	end
+	
+	}
+} 
