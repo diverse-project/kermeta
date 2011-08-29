@@ -50,6 +50,29 @@ package structure {
 		end
 	} 
 
+
+	aspect class ModelingUnit {
+		method inferContainedExpressionStatic(context : StaticSetterContext) is do
+			context.inferContainedExpressionStatic(self)
+			//we manage unresolved lambda now after the call operation but if other resolving should be deferred 
+			//it should be considered to move that part at the end of the resolving step
+			
+			from var lambdaToBeResolved : ToBeResolvedLater
+			until context.waitingContext.isEmpty()
+			loop
+				if (context.verbose) then stdio.writeln("resolving a lambda") end
+				lambdaToBeResolved := context.waitingContext.first()
+				context.waitingContext.removeAt(0)
+				//if the container of the lambda is still unresolved then there is nothing to do
+				if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall) then
+					context.errors.add(ResolverException.new.initialize("The type of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
+				else							
+					lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
+				end
+			end
+		end
+	
+	}
 	aspect class Package {
 		method getQualifiedNameResolving() : String is do
 			result := super
@@ -303,22 +326,7 @@ package behavior {
 						//	this is the CallOperation that must replace this UnresolvedCall
 						result := callOperation
 						
-						//we manage unresolved lambda now after the call operation but if other resolving should be deferred 
-						//it should be considered to move that part at the end of the resolving step
 						
-						from var lambdaToBeResolved : ToBeResolvedLater
-						until context.waitingContext.isEmpty()
-						loop
-							if (context.verbose) then stdio.writeln("resolving a lambda") end
-							lambdaToBeResolved := context.waitingContext.first()
-							context.waitingContext.removeAt(0)
-							//if the container of the lambda is still unresolved then there is nothing to do
-							if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall) then
-								context.errors.add(ResolverException.new.initialize("The type cannot of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
-							else							
-								lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
-							end
-						end
 						
 					end
 				end
