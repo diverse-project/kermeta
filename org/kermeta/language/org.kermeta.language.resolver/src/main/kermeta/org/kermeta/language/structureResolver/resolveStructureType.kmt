@@ -1,42 +1,255 @@
-package org::kermeta::language::structure;
+package org::kermeta::language;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "unresolvedType_Aspect.kmt"
 require "ResolverContext_Aspect.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
+package structure{
+	aspect class KermetaModelElement{
+	
+		operation resolveStructureType(context : LanguageVisitorContext) is do
+			
 
-aspect class KermetaModelElement{
-
-	operation resolveStructureType(context : LanguageVisitorContext) is do
-		self.resolveStructureContainedType(context)
-		self.resolveStructureRererencedType(context)
-	end
-	
-	operation resolveStructureContainedType(context : LanguageVisitorContext) is do
+			self.resolveStructureContainedType(context)
+			
+			self.resolveStructureReferencedType(context)
+			
+		end
 		
-	end
-	operation resolveStructureReferencedType(context : LanguageVisitorContext) is do
+		operation resolveStructureContainedType(context : LanguageVisitorContext) is do
+			//stdio.writeln("call of resolveStructureContainedType from kme "+ self.toString)
+		end
+		operation resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			//stdio.writeln("call of resolveStructureReferencedType from kme "+ self.toString)
+		end
 		
-	end
-	
-	
-}
-
-aspect class TypeContainer inherits KermetaModelElement{
-	
-	method resolveStructureContainedType(context : LanguageVisitorContext) is do
 		
-		var toResolve : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new
-		containedType.each{ t|
+	}
+	
+	
+	// The 2 following classes are type containers
+	
+	aspect class TypeContainer inherits KermetaModelElement{
+		
+		method resolveStructureContainedType(context : LanguageVisitorContext) is do
+			//stdio.writeln("call resolveStructureContainedType from typecontainer "+self.toString)
+			var toResolve : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new
+			containedType.each{ t|
+					if t.isInstanceOf(UnresolvedType) then
+						toResolve.add(t.asType(UnresolvedType))
+					end
+					}
+			toResolve.each{t |
+					var resolvedType : Type
+					resolvedType:=t.findCorrespondingType(context)
+					if not resolvedType.isVoid then
+						if resolvedType.container.isVoid then
+							containedType.add(resolvedType)
+						end
+						containedType.remove(t)
+					//else
+					//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+					end
+			}
+		
+		end
+	
+	}
+	
+	aspect class UnresolvedType inherits Type {
+		
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			// must maintain order	
+			from var i : Integer init 0
+			until i==generics.size
+			loop
+				if generics.at(i).isInstanceOf(UnresolvedType) then
+				
+					var unresolvedType : UnresolvedType init generics.at(i).asType(UnresolvedType)
+					var resolvedType : Type
+					resolvedType:=unresolvedType.correspondingType
+					if not resolvedType.isVoid then
+						generics.addAt(i,resolvedType)
+						generics.remove(unresolvedType)
+					end		
+					//else
+					//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+				end			
+				i:=i+1
+			end
+				
+		end
+	}
+	
+	
+	aspect class Property {
+		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+			super(context)
+		end
+	}
+	
+	
+	aspect class TypeDefinition {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			var unresolvedWithCorresponding : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new  
+			superType.each{ t|
 				if t.isInstanceOf(UnresolvedType) then
-					toResolve.add(t.asType(UnresolvedType))
+						if not t.asType(UnresolvedType).correspondingType.isVoid then
+							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
+						end
 				end
 				}
-		toResolve.each{t |
-				var resolvedType : Type
-				resolvedType:=
-		
+			unresolvedWithCorresponding.each{t|
+				superType.remove(t)
+				superType.add(t.correspondingType)
+				}
+		end
 	
-	end
+	}
+	
+	
+	aspect class TypeVariable {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not supertype.isVoid then
+				if supertype.isInstanceOf(UnresolvedType) then
+					if not supertype.asType(UnresolvedType).correspondingType.isVoid then
+						supertype:=supertype.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
+	aspect class TypeVariableBinding {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not type.isVoid then
+				if type.isInstanceOf(UnresolvedType) then
+					if not type.asType(UnresolvedType).correspondingType.isVoid then
+						type:=type.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
+	
+	aspect class TypedElement {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not type.isVoid then
+				if type.isInstanceOf(UnresolvedType) then
+					if not type.asType(UnresolvedType).correspondingType.isVoid then
+						type:=type.asType(UnresolvedType).correspondingType
+					else
+						stdio.writeln("type "+type.asType(UnresolvedType).typeIdentifier+" has not been resolved1")						
+					end
+				end
+			end
+		end
+	}
+	
+	
+	aspect class Operation {
+	
+		//defined to ensure that the method called is from TypeContainer and not from KermetaModelElement 
+		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+			super(context)
+		end
+		method resolveStructureReferencedType(context : LanguageVisitorContext) from TypedElement is do
+			super(context)
+			var unresolvedWithCorresponding : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new  
+			raisedException.each{ t|
+				if t.isInstanceOf(UnresolvedType) then
+						if not t.asType(UnresolvedType).correspondingType.isVoid then
+							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
+						end
+				end
+				}
+			unresolvedWithCorresponding.each{t|
+				raisedException.remove(t)
+				raisedException.add(t.correspondingType)
+				}
+			
+		end
+	}
+	
+	aspect class ProductType {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			
+			var unresolvedWithCorresponding : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new  
+			type.each{ t|
+				if t.isInstanceOf(UnresolvedType) then
+						if not t.asType(UnresolvedType).correspondingType.isVoid then
+							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
+						end
+				end
+				}
+			unresolvedWithCorresponding.each{t|
+				type.remove(t)
+				type.add(t.correspondingType)
+				}
+			
+		end
+	}
+	
+	aspect class FunctionType {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not left.isVoid then
+				if left.isInstanceOf(UnresolvedType) then
+					if not left.asType(UnresolvedType).correspondingType.isVoid then
+						left:=left.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+			if not right.isVoid then
+				if right.isInstanceOf(UnresolvedType) then
+					if not right.asType(UnresolvedType).correspondingType.isVoid then
+						right:=right.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
 
+}
+package behavior {
+	aspect class UnresolvedCall {
+	
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			// must maintain order	
+			from var i : Integer init 0
+			until i==generics.size
+			loop
+				if generics.at(i).isInstanceOf(UnresolvedType) then
+				
+					var unresolvedType : UnresolvedType init generics.at(i).asType(UnresolvedType)
+					var resolvedType : Type
+					resolvedType:=unresolvedType.correspondingType
+					if not resolvedType.isVoid then
+						generics.addAt(i,resolvedType)
+						generics.remove(unresolvedType)
+					end		
+					//else
+					//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+				end			
+				i:=i+1
+			end
+		end
+	}
+	
+	aspect class TypeReference {
+	
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not type.isVoid then
+				if type.isInstanceOf(UnresolvedType) then
+					if not type.asType(UnresolvedType).correspondingType.isVoid then
+						type:=type.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
 }

@@ -2,7 +2,13 @@ package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "ResolverContext_Aspect.kmt"
+require "resolveStructureType.kmt"
+require "resolveStructureOperation.kmt"
+require "resolveStructureProperty.kmt"
 using kermeta::standard
+using org::kermeta::language::resolver
 aspect class ModelingUnit {
 	operation resolveWholeStructure() is do
 	
@@ -27,5 +33,36 @@ aspect class KermetaModelElement{
 		self.resolveStructureType(context)
 		self.resolveStructureOperation(context)
 		self.resolveStructureProperty(context)
+	end
+}
+
+aspect class ClassDefinition{
+
+	method resolveStructure(context : LanguageVisitorContext) is do
+		context.currentClassDef:=self
+		super(context)
+		context.currentClassDef:=void
+	end
+}
+
+aspect class Operation{
+
+	method resolveStructure(context : LanguageVisitorContext) is do
+		context.currentOperation:=self
+		super(context)
+		context.currentOperation:=void
+	end
+}
+
+aspect class Package{
+
+	method resolveStructure(context : LanguageVisitorContext) is do
+		context.currentPackage:=self
+		super(context)
+		if container.isInstanceOf(Package) then
+			context.currentPackage?=container
+		else
+			context.currentPackage:=void
+		end
 	end
 }

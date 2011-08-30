@@ -1,0 +1,96 @@
+package org::kermeta::language::structure;
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+
+require "ResolverContext_Aspect.kmt"
+require kermeta
+using kermeta::standard
+using org::kermeta::language::resolver
+
+aspect class UnresolvedType {
+
+	reference correspondingType : Type
+	operation findCorrespondingType(context : LanguageVisitorContext) : Type  is do
+		
+		//test if the type already exists as a type parameter
+		if not context.currentOperation.isVoid then
+			correspondingType:=context.currentOperation.typeParameter.detect{t|
+					t.name.equals(self.typeIdentifier)
+				}
+		end
+		if correspondingType.isVoid and not context.currentClassDef.isVoid then
+			correspondingType:=context.currentClassDef.typeParameter.detect{t|
+					t.name.equals(self.typeIdentifier)
+				}
+		end
+		
+		//if not, create it from existing definitions in the mu
+		
+		if correspondingType.isVoid then
+			var typeDef : TypeDefinition 
+			typeDef := context.currentModelingUnit.getTypeDefinitionByNameAndUsings(self.typeIdentifier, 
+							self.usings, 
+							context.currentPackage)
+			correspondingType:=typeDef.getTypeFromDefinition(self, context)
+							
+		end
+		if correspondingType.isVoid then
+			context.errors.add(ResolverException.new.initialize("Type " + typeIdentifier + " is unresolved.", self))
+			stdio.writeln("Type " + typeIdentifier + " is unresolved.")
+		else
+			stdio.writeln("Type " + typeIdentifier + " is resolved.")
+		end
+		result:=correspondingType
+		
+	end
+	
+	
+}
+
+aspect class TypeDefinition {
+	operation getTypeFromDefinition(unresolved : UnresolvedType, context : LanguageVisitorContext) : Type is abstract
+}
+
+aspect class ClassDefinition {
+	method getTypeFromDefinition(unresolved : UnresolvedType, context : LanguageVisitorContext) : Type is do
+		var newClass : Class init Class.new
+		newClass.typeDefinition := self
+		
+		if (unresolved.generics.size() != self.typeParameter.size()) then
+			var message : String init "Resolver: Not the same number of parameters in UnresolvedType " + unresolved.typeIdentifier + "<"
+			
+			unresolved.generics.each{ g |
+				message := message + g.toString + " "
+			}
+			message := message+ "> and in ClassDefinition " + self.name +"<"
+			self.typeParameter.each{ tp | message := message + tp.toString + " " }
+			message := message + ">"
+			context.errors.add(ResolverException.new.initialize(message, self))
+		end
+		var typeParamBinding : TypeVariableBinding
+		var i : Integer init 0
+		//For each UnresolvedType in generics
+		unresolved.generics.each{g|g
+			//Create a new TypeVariableBinding
+			typeParamBinding := TypeVariableBinding.new
+			//Link it with the correspondant TypeVariable of c and the UnresolvedType
+			typeParamBinding.variable := self.typeParameter.at(i)
+			typeParamBinding.type := g
+			typeParamBinding.containedType.add(g)
+			//Add the new TypeVariable to the newClass
+			newClass.typeParamBinding.add(typeParamBinding)
+			i := i + 1
+		}
+		
+		result := newClass
+	end
+}
+
+aspect class DataType  {
+
+	method getTypeFromDefinition(unresolved : UnresolvedType, context : LanguageVisitorContext) : Type is do
+		result:=self
+	end
+}

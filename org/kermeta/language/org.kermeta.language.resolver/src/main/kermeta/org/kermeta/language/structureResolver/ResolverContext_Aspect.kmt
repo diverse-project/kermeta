@@ -37,12 +37,16 @@ aspect class LanguageVisitorContext {
 	reference currentModelingUnit : ModelingUnit
 	//Package the UnresolvedFinder is currently visiting
 	reference currentPackage : Package
+	
+	reference currentClassDef : ClassDefinition
+	
+	reference currentOperation : Operation
 	//KermetaModelElement the UnresolvedFinder is currently visiting (except Unresolved)
 	reference currentElement : KermetaModelElement
 	//Unresolved object we want to replace
-	reference unresolved : Unresolved
+	//reference unresolved : Unresolved
 	//Name of the unresolved object we want to replace
-	attribute unresolvedName : String
+	//attribute unresolvedName : String
 	//Qualified path to resolved object
 	attribute qualifiedPath : Sequence<String>
 	//Counter pointing the object name currently visited by the ResolvedFinder
@@ -58,6 +62,7 @@ aspect class LanguageVisitorContext {
 	
 	operation initialize(mu : ModelingUnit) : LanguageVisitorContext is do
 		errors := OrderedSet<ResolverException>.new
+		currentModelingUnit:=mu
 		//TODO initialize the table of Type definitions 
 		result := self
 	end
@@ -101,7 +106,7 @@ aspect class LanguageVisitorContext {
 		foundOperation := void
 	end
 	
-	operation reset() : Void is do
+	/*operation reset() : Void is do
 		unresolved := void
 		unresolvedName := void
 		resetCompleteName("", Sequence<String>.new)
@@ -111,5 +116,5 @@ aspect class LanguageVisitorContext {
 		unresolvedName := n
 		qualifiedPath := q
 		identifierCounter := 0
-	end
+	end*/
 }
