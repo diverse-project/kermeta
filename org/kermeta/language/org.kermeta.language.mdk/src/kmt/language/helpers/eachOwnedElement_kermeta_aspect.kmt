@@ -314,9 +314,6 @@ aspect class UnresolvedCall {
 		if (not self.target.isVoid) then
 			func(self.target.asType(kermeta::standard::Object))
 		end
-		self.generics.each{ e |
-			func(e)
-		}
 		self.parameters.each{ e |
 			func(e)
 		}
@@ -692,7 +689,7 @@ aspect class UnresolvedType {
 		self.usings.each{ e |
 			func(e)
 		}
-		self.generics.each{ e |
+		self.containedType.each{ e |
 			func(e)
 		}
 	end
