@@ -440,6 +440,7 @@ public class StructureSwitch<T> {
 				T result = caseUnresolvedType(unresolvedType);
 				if (result == null) result = caseType(unresolvedType);
 				if (result == null) result = caseUnresolved(unresolvedType);
+				if (result == null) result = caseTypeContainer(unresolvedType);
 				if (result == null) result = caseKermetaModelElement(unresolvedType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

@@ -23,9 +23,13 @@ trait KGenericTypeParser extends KAbstractParser with KLambdaParser {
   def genericQualifiedTypeObject : Parser[UnresolvedType] = packageName ~ opt(genericParams) ^^{case qname ~ optParams =>
       var newType =StructureFactory.eINSTANCE.createUnresolvedType
       newType.setTypeIdentifier(qname)
+      println("DVK qname = "+qname)
       optParams match {
         case None =>
-        case Some(gparams) => newType.getGenerics.addAll(gparams)
+        case Some(gparams) => {
+          newType.getGenerics.addAll(gparams)
+          newType.getContainedType.addAll(gparams)
+        }
       }
       newType
   }

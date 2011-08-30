@@ -170,7 +170,7 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 	protected Type targetParent;
 
 	/**
-	 * The cached value of the '{@link #getGenerics() <em>Generics</em>}' containment reference list.
+	 * The cached value of the '{@link #getGenerics() <em>Generics</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getGenerics()
@@ -434,7 +434,7 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 	 */
 	public EList<Type> getGenerics() {
 		if (generics == null) {
-			generics = new EObjectContainmentEList<Type>(Type.class, this, BehaviorPackage.UNRESOLVED_CALL__GENERICS);
+			generics = new EObjectResolvingEList<Type>(Type.class, this, BehaviorPackage.UNRESOLVED_CALL__GENERICS);
 		}
 		return generics;
 	}
@@ -491,8 +491,6 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 				return ((InternalEList<?>)getUsings()).basicRemove(otherEnd, msgs);
 			case BehaviorPackage.UNRESOLVED_CALL__TARGET:
 				return basicSetTarget(null, msgs);
-			case BehaviorPackage.UNRESOLVED_CALL__GENERICS:
-				return ((InternalEList<?>)getGenerics()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

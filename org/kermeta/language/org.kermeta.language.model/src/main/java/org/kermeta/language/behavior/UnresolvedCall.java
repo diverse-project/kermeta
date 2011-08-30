@@ -138,7 +138,7 @@ public interface UnresolvedCall extends Unresolved, CallExpression, TypeContaine
 	void setTargetParent(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Generics</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Generics</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -146,9 +146,9 @@ public interface UnresolvedCall extends Unresolved, CallExpression, TypeContaine
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generics</em>' containment reference list.
+	 * @return the value of the '<em>Generics</em>' reference list.
 	 * @see org.kermeta.language.behavior.BehaviorPackage#getUnresolvedCall_Generics()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getGenerics();

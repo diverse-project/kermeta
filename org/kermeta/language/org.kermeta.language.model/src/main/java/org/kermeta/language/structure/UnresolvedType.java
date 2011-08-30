@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface UnresolvedType extends Type, Unresolved {
+public interface UnresolvedType extends Type, Unresolved, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Type Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public interface UnresolvedType extends Type, Unresolved {
 	EList<Using> getUsings();
 
 	/**
-	 * Returns the value of the '<em><b>Generics</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Generics</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -82,9 +82,9 @@ public interface UnresolvedType extends Type, Unresolved {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generics</em>' containment reference list.
+	 * @return the value of the '<em>Generics</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedType_Generics()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getGenerics();

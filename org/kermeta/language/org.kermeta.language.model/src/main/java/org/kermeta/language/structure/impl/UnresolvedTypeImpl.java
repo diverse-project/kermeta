@@ -19,10 +19,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
+import org.kermeta.language.structure.TypeContainer;
+import org.kermeta.language.structure.Unresolved;
 import org.kermeta.language.structure.UnresolvedType;
 import org.kermeta.language.structure.Using;
 
@@ -33,6 +37,7 @@ import org.kermeta.language.structure.Using;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getUsings <em>Usings</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getGenerics <em>Generics</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedTypeImpl#getTypeIdentifier <em>Type Identifier</em>}</li>
@@ -42,6 +47,16 @@ import org.kermeta.language.structure.Using;
  * @generated
  */
 public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
+	/**
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> containedType;
+
 	/**
 	 * The cached value of the '{@link #getUsings() <em>Usings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -53,7 +68,7 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	protected EList<Using> usings;
 
 	/**
-	 * The cached value of the '{@link #getGenerics() <em>Generics</em>}' containment reference list.
+	 * The cached value of the '{@link #getGenerics() <em>Generics</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getGenerics()
@@ -106,6 +121,18 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList<Type>(Type.class, this, StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+		}
+		return containedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getTypeIdentifier() {
 		return typeIdentifier;
 	}
@@ -127,6 +154,21 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Using> getUsings() {
 		if (usings == null) {
 			usings = new EObjectContainmentEList<Using>(Using.class, this, StructurePackage.UNRESOLVED_TYPE__USINGS);
@@ -141,7 +183,7 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	 */
 	public EList<Type> getGenerics() {
 		if (generics == null) {
-			generics = new EObjectContainmentEList<Type>(Type.class, this, StructurePackage.UNRESOLVED_TYPE__GENERICS);
+			generics = new EObjectResolvingEList<Type>(Type.class, this, StructurePackage.UNRESOLVED_TYPE__GENERICS);
 		}
 		return generics;
 	}
@@ -154,10 +196,10 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				return ((InternalEList<?>)getUsings()).basicRemove(otherEnd, msgs);
-			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
-				return ((InternalEList<?>)getGenerics()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -170,6 +212,8 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				return getContainedType();
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				return getUsings();
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
@@ -189,6 +233,10 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				getContainedType().addAll((Collection<? extends Type>)newValue);
+				return;
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				getUsings().clear();
 				getUsings().addAll((Collection<? extends Using>)newValue);
@@ -212,6 +260,9 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				getContainedType().clear();
+				return;
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				getUsings().clear();
 				return;
@@ -233,6 +284,8 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE:
+				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.UNRESOLVED_TYPE__USINGS:
 				return usings != null && !usings.isEmpty();
 			case StructurePackage.UNRESOLVED_TYPE__GENERICS:
@@ -241,6 +294,48 @@ public class UnresolvedTypeImpl extends TypeImpl implements UnresolvedType {
 				return TYPE_IDENTIFIER_EDEFAULT == null ? typeIdentifier != null : !TYPE_IDENTIFIER_EDEFAULT.equals(typeIdentifier);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Unresolved.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Unresolved.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.UNRESOLVED_TYPE__CONTAINED_TYPE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

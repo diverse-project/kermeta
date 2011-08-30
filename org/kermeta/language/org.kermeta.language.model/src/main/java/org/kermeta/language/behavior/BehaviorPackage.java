@@ -2458,7 +2458,7 @@ public interface BehaviorPackage extends EPackage {
 	int UNRESOLVED_CALL__TARGET_PARENT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Generics</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Generics</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3413,10 +3413,10 @@ public interface BehaviorPackage extends EPackage {
 	EReference getUnresolvedCall_TargetParent();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.behavior.UnresolvedCall#getGenerics <em>Generics</em>}'.
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.behavior.UnresolvedCall#getGenerics <em>Generics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Generics</em>'.
+	 * @return the meta object for the reference list '<em>Generics</em>'.
 	 * @see org.kermeta.language.behavior.UnresolvedCall#getGenerics()
 	 * @see #getUnresolvedCall()
 	 * @generated
@@ -4110,7 +4110,7 @@ public interface BehaviorPackage extends EPackage {
 		EReference UNRESOLVED_CALL__TARGET_PARENT = eINSTANCE.getUnresolvedCall_TargetParent();
 
 		/**
-		 * The meta object literal for the '<em><b>Generics</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Generics</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
