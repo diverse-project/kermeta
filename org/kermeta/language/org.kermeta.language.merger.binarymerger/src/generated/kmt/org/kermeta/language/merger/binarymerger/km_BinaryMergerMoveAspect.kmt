@@ -20,7 +20,7 @@ package kermeta {
 					var mergedModelElement : org::kermeta::language::behavior::Assignment
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::Assignment)
 					if (not mergedModelElement.isVoid) then
-						// stdio.writeln("Merging content of a Assignment")
+						//stdio.writeln("Merging content of a Assignment")
 						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 						mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						// select value for unary attribute
@@ -792,19 +792,6 @@ package kermeta {
 							end
 						}
 						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
-						self.generics.each{aspect_generics | 
-							var equivalent_generics : org::kermeta::language::structure::Type
-							equivalent_generics := mergedModelElement.generics.detect{ merged_generics |
-								aspect_generics.localMatch(merged_generics)
-							}
-							if (not equivalent_generics.isVoid) then
-								// mark them as similar
-								aspect_generics.similarElementInMergedModel := equivalent_generics
-							else
-								// move it in merged model
-								mergedModelElement.generics.add(aspect_generics)
-							end
-						}
 						// select value for unary attribute
 						mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
 						// select value for unary attribute
@@ -1866,7 +1853,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::Unresolved {
+			aspect class UnresolvedType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::Type is do
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedType
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedType)
@@ -1885,21 +1872,21 @@ package kermeta {
 								mergedModelElement.usings.add(aspect_usings)
 							end
 						}
-						self.generics.each{aspect_generics | 
-							var equivalent_generics : org::kermeta::language::structure::Type
-							equivalent_generics := mergedModelElement.generics.detect{ merged_generics |
-								aspect_generics.localMatch(merged_generics)
-							}
-							if (not equivalent_generics.isVoid) then
-								// mark them as similar
-								aspect_generics.similarElementInMergedModel := equivalent_generics
-							else
-								// move it in merged model
-								mergedModelElement.generics.add(aspect_generics)
-							end
-						}
 						// select value for unary attribute
 						mergedModelElement.typeIdentifier ?= self.selectUnaryProperty("typeIdentifier", self.typeIdentifier, mergedModelElement.typeIdentifier)
+						self.containedType.each{aspect_containedType | 
+							var equivalent_containedType : org::kermeta::language::structure::Type
+							equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+								aspect_containedType.localMatch(merged_containedType)
+							}
+							if (not equivalent_containedType.isVoid) then
+								// mark them as similar
+								aspect_containedType.similarElementInMergedModel := equivalent_containedType
+							else
+								// move it in merged model
+								mergedModelElement.containedType.add(aspect_containedType)
+							end
+						}
 					end
 					super(context)
 
