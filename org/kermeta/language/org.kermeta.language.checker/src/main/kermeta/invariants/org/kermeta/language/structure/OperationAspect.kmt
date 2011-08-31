@@ -13,6 +13,18 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+// use Kermeta MDK to retrive qualified names
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+
+using kermeta::standard
+
 aspect class Operation
 {
 	/**
@@ -44,26 +56,85 @@ aspect class Operation
 	 * runnable operation. This means that these operations will be correctly typed only 
 	 * if they take no parameter, or a series of String or a collection of String.
 	 */
-	@Scope "LOADED"
+	@Scope "RESOLVED"
 	inv main_tag_validity is do
 	
-		if self.ownedTags.exists{ t | t.name.equals("main") }
-		then
-			//true
-			// The parameters should be of type String
-			self.ownedParameter.forAll{ p | p.getMetaClass.equals(kermeta::standard::String) } or
-			( if (self.ownedParameter.size.equals(1))
-			  then
-			  	self.ownedParameter.one.getMetaClass.equals(kermeta::standard::Collection<kermeta::standard::String>)
-			  else
-			 	false
-			  end
-			)
-		else
-			true
-		end
-	end
+		var res : Boolean init true
 	
+		if self.kOwnedTags.exists{ t | t.name.equals("main") }
+		then
+			//stdio.writeln("Checking main_tag_validity on operation " + self.name)
+
+			var nbParameter : Integer init self.ownedParameter.size
+			res:=false
+			
+			if (nbParameter==0) 
+			then
+				//stdio.writeln("no parameter -> OK")
+				res:=true
+			else
+		  		// retrieve the modelingunit and String TypeDefinition
+		  		var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
+		  		var stringTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::String")
+		  		
+				res:=self.ownedParameter.forAll{p|
+					// All parameters must be kermeta::standard::String
+					//stdio.writeln("------------------\nChecking parameter : " + p.toString)
+					if (not p.type.isVoid())
+					then
+						stdio.writeln("p.type : " + p.type.toString)
+						// Check p.type is a String
+						if (p.type.isInstanceOf(ParameterizedType))
+						then
+							var typeDef : TypeDefinition init p.type.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
+							typeDef.equals(stringTypeDef)
+							
+						else
+							false
+						end
+						
+					else
+						false
+					end				
+				}
+				
+				if (res==false and nbParameter==1)
+				then
+					// In this case, the parameter must be Collection<String>
+					var param : Parameter init self.ownedParameter.one
+					if (not(param.containedType.isVoid))
+					then
+				  		param.containedType.each{ t |
+							//stdio.writeln("   t : " + t.toString())
+			  				if (t.isInstanceOf(ParameterizedType))
+			  				then
+								// Check it is a Collection<String>		  				
+				  				// build a Collection<String> type
+				  				var typeSeq : Sequence<Type> init Sequence<Type>.new
+				  				typeSeq.add(Class.new.initializeFromAClassDefinition(stringTypeDef.asType(ClassDefinition)))
+				  				var StringCollectionType : Type init Class.new.initializeFromAGenericClassDefinition(
+				  								mu.getTypeDefinitionByQualifiedName("kermeta::standard::Collection").asType(ClassDefinition),
+				  								typeSeq)
+
+				  				//stdio.writeln("   stringCollType : " + StringCollectionType.toString)
+				  				res:=t.asType(ParameterizedType).typeEquals(StringCollectionType)
+				  				
+				  				
+			  				end 
+							
+				  		} 
+					end
+				end
+				
+			end
+			
+			//stdio.writeln("res=" + res.toString + "\n-----------------------------------")
+
+		end
+		
+		res
+	end
+}	
 	
 	/*
 	 * Check use of deprecated
@@ -81,5 +152,84 @@ aspect class Operation
 		
 	end
 	*/
-}
+	
+				/*
+			if (self.ownedParameter.size.equals(1))
+			  then
+			  	// Check this is a collection of String
+			  	// It must then be a TypeContainer
+			  	var param : Parameter init self.ownedParameter.one
+			  	stdio.writeln(" Just one parameter : " + param.name) 
+			  	if ( not(param.containedType.isVoid) )
+			  	then
+			  		// display all containedType 
+			  		stdio.writeln(" - number of containedType : " + param.containedType.size.toString)
+			  		param.containedType.each{ t | 
+			  			stdio.writeln("  -> type : " + t.toString)
+			  			if (t.isInstanceOf(ParameterizedType))
+			  			then
+				  			stdio.writeln("   This is a ParameterizedType...")
+				  			var typeDef : TypeDefinition init t.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
+				  			stdio.writeln("    typeDef : " + typeDef.getQualifiedName)
+				  			// typeDef is a Collection
+				  			//check its containedType
+				  			if (typeDef.containedType.size > 0)
+				  			then
+				  				stdio.writeln("   typeDef.containedType size = " + typeDef.containedType.size.toString)
+				  				typeDef.containedType.each{ ty |
+				  					stdio.writeln("     type:" + ty.toString)
+				  					if (ty.isInstanceOf(ParameterizedType))
+				  					then
+				  						stdio.writeln("      this type is a ParameterizedType")
+				  						//Retreive typeDef
+				  						var tyDef : TypeDefinition init ty.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
+				  						stdio.writeln("       ty.typeDefinition:" + tyDef.getQualifiedName)
+					  					stdio.writeln("       ty.typeParamBinding size :" + ty.asType(ParameterizedType).typeParamBinding.size.toString)
+				  					else
+				  						stdio.writeln("      this type is not a ParameterizedType")
+				  					end
+				  					//check typeParamBinding
+				  				}
+				  			else
+				  				stdio.writeln("   typeDef.containedType is empty")
+				  			end
+				  			
+				  			// Check typeParamBinding
+				  			stdio.writeln("    typeParamBinding size : " + t.asType(ParameterizedType).typeParamBinding.size.toString)
+				  			// there must be one typeParamBinding
+				  			t.asType(ParameterizedType).typeParamBinding.each{ tpb |
+				  				stdio.writeln("    tpb.containedType.size = " + tpb.containedType.size.toString)
+				  				tpb.containedType.each{ ct |
+				  					if (ct.isInstanceOf(ParameterizedType)) 
+				  					then
+				  						stdio.writeln("       typeDef: " + ct.asType(ParameterizedType).typeDefinition.asType(TypeDefinition).getQualifiedName)
+				  					else
+				  						stdio.writeln("       this ct is no ParameterizedType")
+				  					end
+				  				}
+				  			}
+				  			
+				  			false
+			  			else
+				  			stdio.writeln("   This is not a ParameterizedType...")
+				  			false
+			  			end 
+			  		}
+			  		(self.ownedParameter.one.containedType.size==1 and
+			  		self.ownedParameter.one.containedType.one.isInstanceOf(ParameterizedType) and
+			  		self.ownedParameter.one.containedType.one.asType(ParameterizedType).typeDefinition.asType(TypeDefinition).getQualifiedName.equals("kermeta::standard::String"))
+			  		//true
+			  	else
+				  	stdio.writeln(" - containedType is void !")
+			  		false
+			  	end
+			  else
+			  	stdio.writeln(" More than one parameter : " + self.ownedParameter.size.toString) 
+			 	false
+			  end
+			)*/
+		/*else
+			true*/
+	
+//}
 
