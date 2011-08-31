@@ -1,6 +1,8 @@
 package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/OperationSignatureEquivalence_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
 require "ResolverContext_Aspect.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
@@ -8,6 +10,71 @@ using org::kermeta::language::resolver
 aspect class KermetaModelElement{
 
 	operation resolveStructureOperation(context : LanguageVisitorContext) is do
+		
+	end
+}
+aspect class UnresolvedOperation {
+
+	reference correspondingOperation : Operation
+	operation findCorrespondingOperation(context : LanguageVisitorContext) : Operation is do
+		// type given in from 
+		stdio.writeln("look for corresponding operation")
+		
+		
+		var  classFrom: Class 
+		
+		if ~from.isVoid then
+			
+		else
+			classFrom?= ~from
+		end
+		stdio.writeln("from "+~from.toString)
+		if not classFrom.isVoid then
+			stdio.writeln("in typedef "+classFrom.typeDefinition.asType(ClassDefinition).name)
+			var  callableOperations : Set<Operation>
+			callableOperations:=classFrom.typeDefinition
+									.asType(ClassDefinition)
+									.getAllCallableOperations()
+									.select{op|op.hasSameSignature(context.currentOperation)}
+									.asSet()
+			if callableOperations.size()==1 then
+				correspondingOperation := callableOperations.one
+			else
+				context.errors.add(ResolverException.new.initialize("Super Operation "+operationIdentifier+" cannot be resolved", self))
+				stdio.writeln("Super Operation "+operationIdentifier+" cannot be resolved from "+context.currentClassDef.name)
+			end
+			correspondingOperation := classFrom
+				.typeDefinition
+				.asType(ClassDefinition)
+				.ownedOperation
+				.detect{o|o.hasSameSignature(context.currentOperation)}
+			
+		end
+		result:=correspondingOperation
+	
+	end
+	
+	
+}
+
+aspect class Operation {
+	method resolveStructureOperation(context : LanguageVisitorContext) is do
+		//if there is a super operation 
+		if not superOperation.isVoid then
+			if superOperation.isInstanceOf(UnresolvedOperation) then
+				var unresolvedOp : UnresolvedOperation init superOperation.asType(UnresolvedOperation)
+				// at this point superOperation
+				unresolvedOp.findCorrespondingOperation(context)
+				if not unresolvedOp.correspondingOperation.isVoid then
+					superOperation:=unresolvedOp.correspondingOperation
+					ownedUnresolvedOperations.remove(unresolvedOp)
+				else
+					stdio.writeln("operation cannot be resolved")	
+				end
+				
+							
+			end
+		end
 		
 	end
 }

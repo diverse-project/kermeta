@@ -38,9 +38,8 @@ aspect class UnresolvedType {
 		end
 		if correspondingType.isVoid then
 			context.errors.add(ResolverException.new.initialize("Type " + typeIdentifier + " is unresolved.", self))
-			stdio.writeln("Type " + typeIdentifier + " is unresolved.")
+			
 		else
-			stdio.writeln("Type " + typeIdentifier + " is resolved.")
 		end
 		result:=correspondingType
 		

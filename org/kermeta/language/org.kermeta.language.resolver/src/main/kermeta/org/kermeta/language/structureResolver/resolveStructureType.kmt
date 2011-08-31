@@ -89,6 +89,21 @@ package structure{
 			super(context)
 		end
 	}
+	aspect class UnresolvedOperation {
+		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+			super(context)
+		end
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not ~from.isVoid then
+				if ~from.isInstanceOf(UnresolvedType) then
+					if not ~from.asType(UnresolvedType).correspondingType.isVoid then
+						~from:=~from.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
 	
 	
 	aspect class TypeDefinition {
