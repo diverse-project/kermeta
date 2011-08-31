@@ -1,0 +1,15 @@
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+using kermeta::standard
+
+aspect class Operation {
+	
+	//this method is used to check if two operations from different classes
+	//have the same signature. For now, as in kermeta 1, the signature is limited
+	//to the operation name. See bug 1916 for further details and planned changes
+	operation hasSameSignature(anotherOperation : Operation) : Boolean is do
+		result:= self.name==anotherOperation.name
+	end
+}
