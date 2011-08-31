@@ -16,6 +16,10 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 // use Kermeta MDK to retrive qualified names
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+
 using org::kermeta::language::structure
 
 aspect class Conditional
@@ -31,11 +35,13 @@ aspect class Conditional
 		if (self.condition.staticType.isInstanceOf(ParameterizedType))
 		then
 			var typeDef : TypeDefinition init self.condition.staticType.asType(ParameterizedType).typeDefinition
-			stdio.writeln("   typeDefinition qualified name : " + typeDef.getQualifiedName()   )
-			if (typeDef.getQualifiedName=="kermeta::standard::Boolean")
-			then
-				invResult:=true		
-			end
+			//stdio.writeln("   typeDefinition qualified name : " + typeDef.getQualifiedName()   )
+			
+			// retrieve Boolean Type Definition from the modelingUnit
+		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
+		  	var booleanTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+			
+			invResult:= typeDef.equals(booleanTypeDef)
 		end
 		
 		invResult
