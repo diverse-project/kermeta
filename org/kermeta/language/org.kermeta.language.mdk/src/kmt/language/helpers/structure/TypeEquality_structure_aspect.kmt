@@ -34,7 +34,7 @@ aspect class ParameterizedType inherits Type {
 				from var i : Integer init 0//self.typeParamBinding().size()
 				until i >= self.typeParamBinding().size() or result==false
 				loop
-					stdio.writeln("i="+i.toString)
+					//stdio.writeln("i="+i.toString)
 					var t1 : Type init self.typeParamBinding().at(i).type
 					var t2 : Type init other.asType(ParameterizedType).typeParamBinding().at(i).type
 					result := result and t1.typeEquals(t2) 
