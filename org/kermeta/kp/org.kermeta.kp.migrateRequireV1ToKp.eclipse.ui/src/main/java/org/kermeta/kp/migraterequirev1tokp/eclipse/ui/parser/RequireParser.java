@@ -31,6 +31,53 @@ public class RequireParser {
 		parsedFile = new File(pathFile);	
 	}
 	
+//-------------------------------------------------------------------------------------------------------------
+// Global parse method
+//-------------------------------------------------------------------------------------------------------------
+	/** Process a line and search if it contains a require element 
+	 @param aLine : the given line to be processed
+	 @param parsedElt : the String we want to parse
+	 @result : the requiredFile if the line contains a require element*/
+	protected String processLine(String aLine, String parsedElt){
+	    //use a second Scanner to parse the content of each line 
+		String requiredFile ="";
+	    Scanner scanner = new Scanner(aLine);
+	    Pattern p = Pattern.compile(parsedElt);
+	
+	    if ( scanner.hasNext() ){
+	   String token = scanner.next();
+	    Matcher m = p.matcher(token);
+	    boolean b = m.matches();
+	    if (b) { // there is a require in the line
+	    	requiredFile = aLine.substring(m.regionEnd(), aLine.length());
+	    }
+	    }
+	    //no need to call scanner.close(), since the source is a String
+	    return requiredFile;
+	  }		
+	
+	/** Add all lines of a given file in a list
+	 @result : the list that contains all of the file lines */
+	public List<String> parseInList() throws FileNotFoundException {
+		  List<String> fileLines = new ArrayList <String>();
+		  Scanner scanner = new Scanner(new FileReader(parsedFile));
+		    try {
+		      //first use a Scanner to get each line
+		      while ( scanner.hasNextLine() ){
+		       fileLines.add(scanner.nextLine());
+		      }
+		    }
+		    finally {
+		      //ensure the underlying stream is always closed
+		      //this only has any effect if the item passed to the Scanner
+		      //constructor implements Closeable (which it does in this case).
+		      scanner.close();
+		    }
+		    return fileLines;
+		}
+		
+	
+	
 //--------------------------------------------------------------------------------------------------------------	
 //	Parse require
 //--------------------------------------------------------------------------------------------------------------
@@ -44,7 +91,7 @@ public class RequireParser {
 	    try {
 	      //first use a Scanner to get each line
 	      while ( scanner.hasNextLine() ){
-	       String resultLine = processLine( scanner.nextLine() );
+	       String resultLine = processLine( scanner.nextLine(), "require" );
 	       
 	       // Remove require Kermeta to improve
 	       if (!resultLine.isEmpty() && !resultLine.equals(" kermeta")) { // The line starts with a require
@@ -62,28 +109,6 @@ public class RequireParser {
 	}
 	
 	
-	/** Process a line and search if it contains a require element 
-	 @param aLine : the given line to be processed
-	 @result : the requiredFile if the line contains a require element*/
-	protected String processLine(String aLine){
-	    //use a second Scanner to parse the content of each line 
-		String requiredFile ="";
-	    Scanner scanner = new Scanner(aLine);
-	    Pattern p = Pattern.compile("require");
-	
-	    if ( scanner.hasNext() ){
-	   String token = scanner.next();
-	    Matcher m = p.matcher(token);
-	    boolean b = m.matches();
-	    if (b) { // there is a require in the line
-	    	requiredFile = aLine.substring(m.regionEnd(), aLine.length());
-	    }
-	    }
-	    //no need to call scanner.close(), since the source is a String
-	    return requiredFile;
-	  }
-	
-	
 //---------------------------------------------------------------------------------------------------------------
 // Parse mainClassAnnotation and mainOperation annotation
 //---------------------------------------------------------------------------------------------------------------
@@ -98,9 +123,13 @@ public class RequireParser {
 	    try {
 		      //first use a Scanner to get each line
 		      while ( scanner.hasNextLine() ){
-		       String resultLine = processLineForAnnotation( scanner.nextLine(), annotationName );
+		       String resultLine = processLine( scanner.nextLine(), annotationName );
 		       if (!resultLine.isEmpty()) {
 		    	   annotationValue = resultLine;
+		    	   
+		    	// We do not want to have "main::Main" but main::Main (remove the quotes)
+		    	   String [] splitquote =  annotationValue.split("\"");
+			    	annotationValue = splitquote[1];
 			      }
 		      } 
 		    }
@@ -114,29 +143,34 @@ public class RequireParser {
 	}
 	
 	
-	/** Search a given annotation on one line 
-	 @param aLine : the current line
-	 @param annotationName : the name of the searched annotation
-	 @result : the value of the searched annotation */
-	protected String processLineForAnnotation(String aLine, String annotationName ){
-	    //use a second Scanner to parse the content of each line 
-		String annotationValue ="";
-	    Scanner scanner = new Scanner(aLine);
-	    Pattern p = Pattern.compile(annotationName);
+	//------------------------------------------------------------------------------------------
+	// Parse stdio to change in Kermeta::Io::Stdio (by adding an using)
+	//------------------------------------------------------------------------------------------
 	
-	    if ( scanner.hasNext() ){
-	   String token = scanner.next();
-	    Matcher m = p.matcher(token);
-	    boolean b = m.matches();
-	    if (b) { // there is a value of an annotation in the line 
-	    	// We do not want to have "main::Main" but main::Main
-	    	String s = aLine.substring(m.regionEnd() + 1, aLine.length()-1);
-	    	String [] splitquote =  s.split("\"");
-	    	annotationValue = splitquote[1];
+	public boolean has_stdio() throws FileNotFoundException {
+	    //Note that FileReader is used, not File, since File is not Closeable
+		// Init has stdio to false
+		boolean has_stio = false;
+	    Scanner scanner = new Scanner(new FileReader(parsedFile));
+	   
+	    try {
+	      //first use a Scanner to get each line
+	      while ( scanner.hasNextLine() ){
+	       // stdio.writeln is considered as an only one token
+	       String resultLine = processLine( scanner.nextLine(), "" );
+	       
+	       // Remove require Kermeta to improve
+	       if (!resultLine.contains(" stdio.") ) { // The line starts with a require
+	    	   has_stio = true;
+	       }
+	      }
 	    }
+	    finally {
+	      //ensure the underlying stream is always closed
+	      //this only has any effect if the item passed to the Scanner
+	      //constructor implements Closeable (which it does in this case).
+	      scanner.close();
 	    }
-	    //no need to call scanner.close(), since the source is a String
-	    return annotationValue;
-	  }
-	
+	    return  has_stio;
+	}
 }

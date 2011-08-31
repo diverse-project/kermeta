@@ -10,8 +10,16 @@
 package org.kermeta.kp.migraterequirev1tokp.eclipse.ui.require;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,6 +155,7 @@ public class MigrateRequireToKP {
 		
 		// Return kp path file
 		return kpPath;
+		//return "";
 		
 	}
 	
@@ -158,7 +167,7 @@ public class MigrateRequireToKP {
 	 @result : the new modified list of path files */
 	public List<String> sourcesInKP (String baseProject, String baseProjectNotation,List<String> reqFiles ){
 		List<String> sourceFiles = new ArrayList<String> ();
-		String bproject = baseProject.replace("\\", "/");
+		String bproject = baseProject.replace("/", "/");
 		if (! reqFiles.isEmpty()) {
 			for (String s : reqFiles) {
 				String sourceF =s.substring(2, s.length()-1);
@@ -204,7 +213,7 @@ public class MigrateRequireToKP {
 		// Create KP model
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
-		//String pathKp2 = "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\project.kp";
+		//String pathKp2 = "C:/Users/mgouyett/Marie/Work/workspaceKermeta/runtime-EclipseApplication/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/project.kp";
 		
 		// Name the kp project with the same name as the main Kermeta file on which it is called
 		String kpProjectName = pathFile.substring(pathFile.lastIndexOf("/")+ 1, pathFile.length() );
@@ -253,7 +262,172 @@ public class MigrateRequireToKP {
 		
 	}
 	
+//------------------------------------------------------------------------------------------------------------------------
+// Update kmt file if necessary
+//------------------------------------------------------------------------------------------------------------------------
 	
+/** Migrate a kmt file to Kermeta v2 if necessary and save the old version before
+ @param pathFile : the path of the kmt file to test
+ @param baseProject : the path of the base project where this kmt file is stored */
+public void migrateKMT (String pathFile, String baseProject, String baseWorkspace ) throws FileNotFoundException, IOException	 {
+	// The migration is made only on kmt files
+	System.out.println("Begin migrate");
+	
+	//if (isKMTFile(pathFile)) {
+		
+		System.out.println("isKmtFile");
+		// create a new parser 
+		RequireParser parser = new RequireParser (pathFile);
+		
+		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
+		if (parser.has_stdio()) {
+			
+			
+			
+			// Test the pathFile and change it to be usable
+			String path = obtainPath(pathFile, baseProject, baseWorkspace);
+			
+			// save the old Kermeta V1 file
+			//copy(pathFile, pathFile + ".old");
+			
+			// Add using for stdio : 
+			addUsingStdio (pathFile, "using kermeta::IO::StdIO => stdio");
+			
+		}
+		else {
+			
+		}
+		
+		
+	//}
+	
+}
+	
+	/** Add a given using on a file
+	 @param pathFile : the file where the using will be added
+	 @param using : the using to add
+	 */
+	public void addUsingStdio (String pathFile, String using) throws FileNotFoundException  {
+		RequireParser parser = new RequireParser (pathFile);
+		
+		// Put all lines of the file in a list
+		List<String> fileLines = new ArrayList<String>();
+		fileLines =  parser.parseInList();
+		
+		// Retrieve the first index where a require is not followed by a require 
+		int index = lastIndexOfRequire(fileLines);
+		
+		// Add using just after these require
+		fileLines.add(index + 1,using);
+		
+		// Save the file lines on the file
+		String fileContents = fileContents (fileLines);
+		 writeInFile (pathFile, fileContents);
+	}
+	
+	
+	/** Retrieve the first index where a require is not followed by a require 
+	 @param fileLines : the list of file lines
+	 @result the first index where a require is not followed by a require, 0 if there is no requires */
+	public int lastIndexOfRequire(List<String> fileLines) {
+		int index = 0;
+		for (int i = 0; i<= fileLines.size(); i++) {
+			// We search the last index where we have a require
+			if (i < fileLines.size() && fileLines.get(i).startsWith("require") && (!(fileLines.get(i+1).startsWith("require")))) {
+				index = i;
+			}
+		}
+		
+		return index;
+	}
+	
+	
+	/** Write a given content in a file
+	 @param pathFile : the path of the file
+	 @param fileContents : the new content of the file */
+	public void writeInFile (String pathFile, String fileContents) {
+		 BufferedWriter bufferedWriter = null;
+	        
+	        try {
+	            
+	            //Construct the BufferedWriter object
+	            bufferedWriter = new BufferedWriter(new FileWriter(pathFile));
+	            
+	            //Start writing to the output stream
+	          bufferedWriter.write(fileContents);
+	    
+	        } catch (FileNotFoundException ex) {
+	            ex.printStackTrace();
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        } finally {
+	            //Close the BufferedWriter
+	            try {
+	                if (bufferedWriter != null) {
+	                    bufferedWriter.flush();
+	                    bufferedWriter.close();
+	                }
+	            } catch (IOException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+		
+	}
+	
+	
+	/** Add all lines of a file in a String
+	 @param fileLines : the list of lines in the file
+	 @result : the content of the file as a String */
+	public String fileContents (List<String> fileLines) {
+		String fileContents = "";
+		
+		for (String line : fileLines) {
+			fileContents = fileContents + "\n" + line;
+		}
+		
+		return fileContents;
+	}
+	
+	
+	/** Copy a given file to another
+	 @param fromFile : file to be copied
+	 @toFile : copy */
+	public static void copy(String fromFile, String toFile){
+		 
+		try{
+		 
+		 File f1 = new File(fromFile);
+		 File f2 = new File(toFile);
+		 InputStream in = new FileInputStream(f1);
+		 
+		//For Append the file.
+		//
+		OutputStream out = new FileOutputStream(f2);
+		byte[] buf = new byte[1024];
+		int len;
+		 
+		 try {
+			while ((len = in.read(buf)) > 0){
+			out.write(buf, 0, len);
+			in.close();
+			out.close();
+			 
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		  }
+		 
+		 catch(FileNotFoundException ex){
+		  
+		  ex.printStackTrace();
+
+		  }
+	
+	}
+
 	
 	
 	public static void main(String [] arg) {
@@ -261,11 +435,19 @@ public class MigrateRequireToKP {
 		try {
 			List<String> requiredFiles = new ArrayList<String>();
 			
-			//requiredFiles = migrate.parseKMTFile("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\workspace\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt");
-			requiredFiles = migrate.allRequires("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication"  );
-			migrate.displayList(requiredFiles);
+			//requiredFiles = migrate.parseKMTFile("C:/Users/mgouyett/Marie/Work/workspaceKermeta/workspace/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt");
+			//requiredFiles = migrate.allRequires("C:/Users/mgouyett/Marie/Work/workspaceKermeta/runtime-EclipseApplication/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt", "C:/Users/mgouyett/Marie/Work/workspaceKermeta/runtime-EclipseApplication/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo","C:/Users/mgouyett/Marie/Work/workspaceKermeta/runtime-EclipseApplication"  );
+			//migrate.displayList(requiredFiles);
+			String pathFile = "E:/W/workspaceKermetaIndigo2/workspace/testParse/new_file.kmt";
+			String baseProject = "E:/W/workspaceKermetaIndigo2/workspace/testParse";
+			String baseWorkspace = "E:/W/workspaceKermetaIndigo2/workspace";
+			
+			migrate.migrateKMT(pathFile, baseProject, baseWorkspace);
 			
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

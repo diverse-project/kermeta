@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
@@ -52,7 +53,15 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
+		MessageDialog.openInformation(
+				shell,
+				"Ui",
+				"New Action was executed.");
+		
+		
 		if ((selection instanceof IStructuredSelection)) {
+			
+			
 			IStructuredSelection structured = (IStructuredSelection)selection;
           final  Object object = structured.getFirstElement();
             IFile kmtFile = (IFile) object;
@@ -69,13 +78,20 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
             	try {
             		//String kpPath = migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
             	String kpPath = 	migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
+            	migrate.migrateKMT(kmtPathFile,baseDirectory, workspaceDirectory);
             	
+            	MessageDialog.openInformation(
+        				shell,
+        				"Ui",
+        				"New Action was 2.");
             	// Refresh Kp
             	new Job("Refresh Kp ") {
     				public IStatus run(IProgressMonitor pm) {
     					
     					try {
 							((IFile)object).getParent().refreshLocal(1,pm);
+							
+							
 						} catch (CoreException e) {
 							e.printStackTrace();
 						}
