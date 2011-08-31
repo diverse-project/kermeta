@@ -1,0 +1,33 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+using kermeta::standard
+
+package helloworld {
+	class HeloWorld 
+	{
+	 
+		@main "" 
+		operation testInv(str : Collection<String>) : kermeta::standard::Void is do 
+			kermeta::io::StdIO.writeln("Hello World, everybody!")
+			
+		end
+		
+		@main ""
+		operation testInv2(str : String, str2 : String, str3 : String) : kermeta::standard::Void is do
+		
+		end
+		
+	}
+	
+	class A<String> {
+	}
+	
+}
+
