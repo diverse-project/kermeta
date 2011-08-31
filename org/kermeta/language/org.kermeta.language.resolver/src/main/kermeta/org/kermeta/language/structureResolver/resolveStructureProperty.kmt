@@ -11,3 +11,40 @@ aspect class KermetaModelElement{
 		
 	end
 }
+
+aspect class UnresolvedProperty {
+
+	reference correspondingProperty : Property
+
+	operation findCorrespondingProperty (context : LanguageVisitorContext):Property is do
+		
+		//corresponding Property is in the typeDefinition of the type of containing property
+		var correspondingPropertyClass : Class
+		correspondingPropertyClass?= container.asType(Property).type
+		if correspondingPropertyClass.isVoid then
+			result:=void
+		else
+			var cd : ClassDefinition init correspondingPropertyClass.typeDefinition.asType(ClassDefinition)
+			correspondingProperty:=cd.ownedAttribute.detect{x|
+				x.name==propertyIdentifier
+				}
+			result:=correspondingProperty
+		end
+	end
+}
+aspect class Property{
+	method resolveStructureProperty(context : LanguageVisitorContext) is do
+		if not opposite.isVoid then
+			if opposite.isInstanceOf(UnresolvedProperty) then
+				var unresolvedP : UnresolvedProperty init opposite.asType(UnresolvedProperty)
+				unresolvedP.findCorrespondingProperty(context)
+				if not unresolvedP.correspondingProperty.isVoid then
+					opposite:=unresolvedP.correspondingProperty
+					ownedUnresolvedProperties.remove(unresolvedP)
+				end
+			end
+		end
+	end
+
+}
+
