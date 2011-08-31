@@ -10,11 +10,41 @@ package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "TypeHelpers_structure_aspect.kmt"
+require "OperationSignatureEquivalence_aspect.kmt"
 
 using kermeta::standard
 
 
 aspect class ClassDefinition {
+	
+	reference allCallableOperations : Set<Operation>
+	
+	/**
+	* Return all Operations that can be called from an instance of this ClassDefinition
+	* 
+	*/
+	operation getAllCallableOperations () : Set<Operation> is do
+		if not allCallableOperations.isVoid then
+			result:=allCallableOperations
+		else
+			result:=Set<Operation>.new
+			result.addAll(ownedOperation)
+			superType.each{ superT|
+				var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
+				superCallableOperations.each{ superCallable|
+					if not result.exists{ op|
+									op.hasSameSignature(superCallable)} then
+						result.add(superCallable)
+					end
+				}
+			}
+			allCallableOperations:=result
+		end
+	
+	end
+	
+	
+	
 	
 	/**
 	 * Get an Operation that can be called from an instance of this ClassDefinition
