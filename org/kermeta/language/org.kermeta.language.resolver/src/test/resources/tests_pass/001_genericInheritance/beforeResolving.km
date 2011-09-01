@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="root_package">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;24;407"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;25;439"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="C" superType="//root_package/C/@containedType.1" isAspect="false" typeParameter="//root_package/C/Z" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;47;92"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;49;99"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Z"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="c" type="//root_package/C/c/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;61;88"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;64;93"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;78;88"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;81;93"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B1" superType="//root_package/B1/@containedType.1" isAspect="false" typeParameter="//root_package/B1/Y1" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;92;154"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;99;165"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y1"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/B1/@containedType.1/@containedType.0" typeIdentifier="C">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Y1">
@@ -28,17 +28,17 @@
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="b1" type="//root_package/B1/b1/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;123;151"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;131;161"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;141;151"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;149;161"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B2" superType="//root_package/B2/@containedType.1" isAspect="false" typeParameter="//root_package/B2/Y2" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;154;218"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;165;234"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y2"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/B2/@containedType.1/@containedType.0" typeIdentifier="C">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Y2">
@@ -46,18 +46,18 @@
         </containedType>
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
-      <ownedOperation name="b1" type="//root_package/B2/b1/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;185;213"/>
+      <ownedOperation name="b2" type="//root_package/B2/b2/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;197;227"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;203;213"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;215;227"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//root_package/A/@containedType.1 //root_package/A/@containedType.2" isAspect="false" typeParameter="//root_package/A/X" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;218;286"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;234;307"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/A/@containedType.1/@containedType.0" typeIdentifier="B1">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
@@ -72,29 +72,29 @@
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="a" type="//root_package/A/a/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;254;281"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;271;300"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;271;281"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;288;300"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//root_package/Main/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;286;405"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;307;436"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="main" type="//root_package/Main/main/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;300;401"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;322;430"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;320;401"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;342;430"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="foo">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;326;350"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;349;374"/>
             <type name="A&lt;Integer>" type="//root_package/Main/main/@body/@statement.0/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Main/main/@body/@statement.0/@type/@containedType.0/@containedType.0" typeIdentifier="A">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
@@ -105,34 +105,34 @@
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;353;361"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;377;386"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;350;353"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;374;377"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b1" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;364;373"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;389;399"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;361;364"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;386;389"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b2" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;376;385"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;402;412"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;373;376"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;399;402"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;388;395"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;415;423"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericInheritance/src/genericInheritance.kmt;385;388"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/genericInheritance.kmt;412;415"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
