@@ -37,6 +37,20 @@ aspect class Type
 	end
 }
 
+aspect class TypeDefinition
+{
+	method getQualifiedName() : String is do 
+		result:=super()
+	end
+
+}
+aspect class DataType
+{
+	method getQualifiedName() : String from TypeDefinition is do
+		result:=super()
+	end
+}
+
 aspect class Class
 {
 	method getQualifiedName() : String is do	
@@ -68,16 +82,10 @@ aspect class Class
 		result := buffer.toString
 	end
 }
-aspect class DataType
-{
-	method getQualifiedName() : String is do
-		
-		result := super()
-	end
-}
+
 aspect class ModelType
 {
-	method getQualifiedName() : String is do
+	method getQualifiedName() : String from TypeDefinition is do
 		
 		result := super()
 	end
