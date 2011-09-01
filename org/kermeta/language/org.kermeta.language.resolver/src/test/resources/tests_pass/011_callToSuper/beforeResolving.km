@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="foo">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;25;281"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;25;288"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A1" superType="//foo/A1/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;40;106"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;40;106"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="x" type="//foo/A1/x/@containedType.0" isOrdered="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;52;101"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;52;101"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;79;101"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;79;101"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:CallResult">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;85;91"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;85;91"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;93;96"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;93;96"/>
             </value>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A2" superType="//foo/A2/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;106;173"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;106;173"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="x" type="//foo/A2/x/@containedType.0" isOrdered="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;117;166"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;117;166"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;142;166"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;142;166"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:CallResult">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;147;153"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;147;153"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;155;158"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;155;158"/>
             </value>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//foo/B/@containedType.0 //foo/B/@containedType.1" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;173;279"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;173;285"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A1">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
@@ -57,34 +57,35 @@
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="x" type="//foo/B/x/@containedType.0" isOrdered="true" superOperation="//foo/B/x/@ownedUnresolvedOperations.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;200;277"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;200;283"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;232;277"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;232;283"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="i">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;237;255"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;237;255"/>
             <type name="Integer" type="//foo/B/x/@body/@statement.0/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
                 <usings fromQName="kermeta::standard" toName=""/>
               </containedType>
             </type>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:Assignment">
-            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;255;256"/>
-              <usings fromQName="kermeta::standard" toName=""/>
-            </target>
-            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
-              <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;266;270"/>
-              </parameters>
-              <usings fromQName="kermeta::standard" toName=""/>
-              <target xsi:type="org_kermeta_language_behavior:CallSuperOperation">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/Test/src/011_callToSuper.kmt;258;265"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;265;276"/>
+            <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;271;272"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;255;256"/>
+                <usings fromQName="kermeta::standard" toName=""/>
               </target>
-            </value>
+              <value xsi:type="org_kermeta_language_behavior:CallSuperOperation">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/011_callToSuper/src/011_callToSuper.kmt;258;265"/>
+              </value>
+            </target>
           </statement>
         </body>
         <ownedUnresolvedOperations operationIdentifier="x" from="//foo/B/x/@ownedUnresolvedOperations.0/@containedType.0">

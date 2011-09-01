@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="root_package">
-    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;24;392"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;24;392"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//root_package/A/@containedType.1" isAspect="false" typeParameter="//root_package/A/X" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;48;154"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;48;154"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedAttribute name="baz" type="//root_package/A/baz/@containedType.0" isOrdered="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;63;82"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;63;82"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
       </ownedAttribute>
-      <ownedOperation name="foo" type="//root_package/A/foo/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;82;151"/>
+      <ownedOperation name="foo" type="//root_package/A/foo/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;82;151"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
-        <ownedParameter name="f" type="//root_package/A/foo/@ownedParameter.0/@containedType.0">
+        <ownedParameter name="f" type="//root_package/A/foo/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:FunctionType" left="//root_package/A/foo/@ownedParameter.0/@containedType.0/@containedType.1" right="//root_package/A/foo/@ownedParameter.0/@containedType.0/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
               <usings fromQName="kermeta::standard" toName=""/>
@@ -32,14 +32,14 @@
           </containedType>
         </ownedParameter>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;120;151"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;120;151"/>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toLowerCase">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;133;147"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;133;147"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="f" isCalledWithParenthesis="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;127;133"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;127;133"/>
               <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="baz">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;129;132"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;129;132"/>
                 <usings fromQName="kermeta::standard" toName=""/>
               </parameters>
               <usings fromQName="kermeta::standard" toName=""/>
@@ -49,7 +49,7 @@
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//root_package/B/@containedType.1" isAspect="false" typeParameter="//root_package/B/Y" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;154;189"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;154;189"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
         <usings fromQName="kermeta::standard" toName=""/>
@@ -59,35 +59,36 @@
       </containedType>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Foo" superType="//root_package/Foo/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;189;389"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;189;389"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedAttribute name="content" type="//root_package/Foo/content/@containedType.0" isOrdered="true" upper="-1">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;202;303"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;202;303"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
       </ownedAttribute>
-      <ownedOperation name="bar" type="//root_package/Foo/bar/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;303;387"/>
+      <ownedOperation name="bar" type="//root_package/Foo/bar/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;303;387"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;329;387"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;329;387"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="z">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;334;358"/>
-            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
-              <usings fromQName="kermeta::standard" toName=""/>
-              <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;334;358"/>
+            <type name="A&lt;Integer>" type="//root_package/Foo/bar/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
                 <usings fromQName="kermeta::standard" toName=""/>
-              </generics>
-            </containedType>
-            <type name="A" type="//root_package/Foo/bar/@body/@statement.0/@containedType.0"/>
+                <generics xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </generics>
+              </containedType>
+            </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;359;383"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;359;383"/>
             <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
               <parameters name="x">
                 <type type="//root_package/Foo/bar/@body/@statement.1/@parameters.0/@parameters.0/@type/@containedType.0">
@@ -96,16 +97,16 @@
               </parameters>
               <body xsi:type="org_kermeta_language_behavior:Block">
                 <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
-                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;371;380"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;371;380"/>
                   <usings fromQName="kermeta::standard" toName=""/>
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
-                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;366;371"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;366;371"/>
                     <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;369;370"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;369;370"/>
                     </parameters>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
-                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;367;368"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;367;368"/>
                       <usings fromQName="kermeta::standard" toName=""/>
                     </target>
                   </target>
@@ -114,7 +115,7 @@
             </parameters>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="z">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;358;359"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/003_lambdaDefAndCall/src/003_lambdaDefAndCall.kmt;358;359"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>

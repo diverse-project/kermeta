@@ -18,7 +18,7 @@
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
       </ownedAttribute>
-      <ownedOperation name="getColor" type="//testEnum/Test_enum/getColor/@containedType.0">
+      <ownedOperation name="getColor" type="//testEnum/Test_enum/getColor/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007-p010_testEnum/src/010_testEnum_001.kmt;145;219"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
           <usings fromQName="kermeta::standard" toName=""/>
@@ -40,7 +40,7 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="setColor" type="//testEnum/Test_enum/setColor/@containedType.0">
+      <ownedOperation name="setColor" type="//testEnum/Test_enum/setColor/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007-p010_testEnum/src/010_testEnum_001.kmt;219;450"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Set">
           <usings fromQName="kermeta::standard" toName=""/>
@@ -48,7 +48,7 @@
             <usings fromQName="kermeta::standard" toName=""/>
           </generics>
         </containedType>
-        <ownedParameter name="c" type="//testEnum/Test_enum/setColor/@ownedParameter.0/@containedType.0">
+        <ownedParameter name="c" type="//testEnum/Test_enum/setColor/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
             <usings fromQName="kermeta::standard" toName=""/>
           </containedType>
@@ -8461,5 +8461,7 @@
       </nestedPackage>
     </nestedPackage>
   </packages>
-  <requires uri="kermeta"/>
+  <requires uri="kermeta">
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007-p010_testEnum/src/010_testEnum_001.kmt;19;36"/>
+  </requires>
 </org_kermeta_language_structure:ModelingUnit>

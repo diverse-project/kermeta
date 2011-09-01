@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="root_package">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;24;156"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;24;156"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Foo" superType="//root_package/Foo/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;48;154"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;48;154"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
-      <ownedOperation name="bar" type="//root_package/Foo/bar/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;63;152"/>
+      <ownedOperation name="bar" type="//root_package/Foo/bar/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;63;152"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;89;152"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;89;152"/>
           <statement xsi:type="org_kermeta_language_behavior:Block">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;96;131"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;96;131"/>
             <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="x">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;103;123"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
-                <usings fromQName="kermeta::standard" toName=""/>
-              </containedType>
-              <type name="String" type="//root_package/Foo/bar/@body/@statement.0/@statement.0/@containedType.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;103;123"/>
+              <type name="String" type="//root_package/Foo/bar/@body/@statement.0/@statement.0/@type/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </containedType>
+              </type>
             </statement>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toLowerCase">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;132;147"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;132;147"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/001_variable_visibility.kmt;131;132"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_variable_visibility/src/001_variable_visibility.kmt;131;132"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
