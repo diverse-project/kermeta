@@ -10,7 +10,7 @@ package root_package{
 		end
 	}
 	class B2<Y2> inherits C<Y2>{
-		operation b1() is do
+		operation b2() is do
 		end
 	}
 	
