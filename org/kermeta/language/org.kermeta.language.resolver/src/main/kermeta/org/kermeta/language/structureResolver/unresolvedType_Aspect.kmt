@@ -9,7 +9,7 @@ require kermeta
 using kermeta::standard
 using org::kermeta::language::resolver
 
-aspect class UnresolvedType {
+aspect class UnresolvedType inherits Type, Unresolved, TypeContainer{
 
 	reference correspondingType : Type
 	operation findCorrespondingType(context : LanguageVisitorContext) : Type  is do
@@ -48,7 +48,7 @@ aspect class UnresolvedType {
 	
 }
 
-aspect class TypeDefinition {
+aspect class TypeDefinition inherits NamedElement, TypeContainer{
 	operation getTypeFromDefinition(unresolved : UnresolvedType, context : LanguageVisitorContext) : Type is abstract
 }
 
@@ -87,7 +87,7 @@ aspect class ClassDefinition {
 	end
 }
 
-aspect class DataType  {
+aspect class DataType inherits Type, TypeDefinition{
 
 	method getTypeFromDefinition(unresolved : UnresolvedType, context : LanguageVisitorContext) : Type is do
 		result:=self

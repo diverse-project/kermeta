@@ -10,7 +10,6 @@ package org::kermeta::language::resolver;
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
-require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
 require "../resolver/ResolverException.kmt"
 
 using org::kermeta::language::structure
@@ -18,20 +17,20 @@ using org::kermeta::language::resolver
 using kermeta::standard
 using kermeta::utils
 
-class Tuple<X, Y> {
+class MapEntryTypeDef {
 
-	reference x : X
+	reference x : String
 
-	reference y : Y
+	reference y : TypeDefinition
 
-	operation initialize(aX :X, aY : Y) : Tuple<X,Y> is do
+	operation initialize(aX :String, aY : TypeDefinition) : MapEntryTypeDef is do
 		x:=aX
 		y:=aY
 		result:=self
 	end 
 }
 
-aspect class LanguageVisitorContext {
+class LanguageVisitorContext {
 	attribute errors : OrderedSet<ResolverException>
 	//Modeling unit the UnresolvedFinder is currently visiting
 	reference currentModelingUnit : ModelingUnit
@@ -58,7 +57,7 @@ aspect class LanguageVisitorContext {
 	reference foundProperty : Property
 	
 	
-	attribute typedefTable : Hashtable<String, Sequence<Tuple<String,TypeDefinition>>>
+	attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
 	
 	operation initialize(mu : ModelingUnit) : LanguageVisitorContext is do
 		errors := OrderedSet<ResolverException>.new

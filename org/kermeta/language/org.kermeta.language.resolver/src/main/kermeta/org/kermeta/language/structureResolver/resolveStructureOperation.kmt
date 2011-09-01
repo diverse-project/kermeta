@@ -13,7 +13,7 @@ aspect class KermetaModelElement{
 		
 	end
 }
-aspect class UnresolvedOperation {
+aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeContainer {
 
 	reference correspondingOperation : Operation
 	operation findCorrespondingOperation(context : LanguageVisitorContext) : Operation is do
@@ -57,7 +57,7 @@ aspect class UnresolvedOperation {
 	
 }
 
-aspect class Operation {
+aspect class Operation inherits MultiplicityElement, AbstractOperation {
 	method resolveStructureOperation(context : LanguageVisitorContext) is do
 		//if there is a super operation 
 		if not superOperation.isVoid then

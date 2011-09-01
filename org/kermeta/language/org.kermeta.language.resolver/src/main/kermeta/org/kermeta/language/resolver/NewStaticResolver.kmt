@@ -41,7 +41,7 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doResolving2(unresolvedModelingUnit)
+        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
          
         stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
@@ -63,11 +63,12 @@ class FullStaticResolver
 		result := ctxt.errors
 	end
 
-	/*operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		result := doStaticSetting(doResolving(unresolvedModelingUnit))
-	end*/
 
-	operation doResolving2(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		result := doStaticSetting(doResolving(unresolvedModelingUnit))
+	end
+
+	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		unresolvedModelingUnit.resolveWholeStructure()
 		result:=unresolvedModelingUnit
 	end

@@ -9,7 +9,7 @@ require "resolveStructureOperation.kmt"
 require "resolveStructureProperty.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
-aspect class ModelingUnit {
+aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement {
 	operation resolveWholeStructure() is do
 	
 		//init of context
@@ -36,7 +36,7 @@ aspect class KermetaModelElement{
 	end
 }
 
-aspect class ClassDefinition{
+aspect class ClassDefinition inherits GenericTypeDefinition{
 
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentClassDef:=self
@@ -45,7 +45,7 @@ aspect class ClassDefinition{
 	end
 }
 
-aspect class Operation{
+aspect class Operation inherits MultiplicityElement, AbstractOperation{
 
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentOperation:=self
@@ -54,7 +54,7 @@ aspect class Operation{
 	end
 }
 
-aspect class Package{
+aspect class Package inherits NamedElement, TypeDefinitionContainer{
 
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentPackage:=self

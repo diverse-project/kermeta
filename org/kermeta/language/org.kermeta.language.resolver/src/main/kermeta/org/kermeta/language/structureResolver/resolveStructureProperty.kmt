@@ -12,7 +12,7 @@ aspect class KermetaModelElement{
 	end
 }
 
-aspect class UnresolvedProperty {
+aspect class UnresolvedProperty inherits AbstractProperty, Unresolved {
 
 	reference correspondingProperty : Property
 
@@ -32,7 +32,7 @@ aspect class UnresolvedProperty {
 		end
 	end
 }
-aspect class Property{
+aspect class Property inherits MultiplicityElement, AbstractProperty{
 	method resolveStructureProperty(context : LanguageVisitorContext) is do
 		if not opposite.isVoid then
 			if opposite.isInstanceOf(UnresolvedProperty) then

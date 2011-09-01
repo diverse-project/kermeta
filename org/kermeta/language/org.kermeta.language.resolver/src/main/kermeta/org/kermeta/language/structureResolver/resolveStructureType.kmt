@@ -58,7 +58,7 @@ package structure{
 	
 	}
 	
-	aspect class UnresolvedType inherits Type {
+	aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
 		
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			// must maintain order	
@@ -84,12 +84,20 @@ package structure{
 	}
 	
 	
-	aspect class Property {
-		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+	
+	aspect class MultiplicityElement inherits TypedElement{
+		method resolveStructureContainedType(context : LanguageVisitorContext) from TypedElement is do
 			super(context)
 		end
 	}
-	aspect class UnresolvedOperation {
+	
+	
+	aspect class Property inherits MultiplicityElement, AbstractProperty{
+		method resolveStructureContainedType(context : LanguageVisitorContext) from MultiplicityElement is do
+			super(context)
+		end
+	}
+	aspect class UnresolvedOperation inherits AbstractOperation, Unresolved, TypeContainer {
 		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
 			super(context)
 		end
@@ -106,7 +114,7 @@ package structure{
 	
 	
 	
-	aspect class TypeDefinition {
+	aspect class TypeDefinition inherits NamedElement, TypeContainer{
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			var unresolvedWithCorresponding : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new  
 			superType.each{ t|
@@ -125,7 +133,7 @@ package structure{
 	}
 	
 	
-	aspect class TypeVariable {
+	aspect class TypeVariable inherits TypeContainer, Type, NamedElement{
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			if not supertype.isVoid then
 				if supertype.isInstanceOf(UnresolvedType) then
@@ -137,7 +145,7 @@ package structure{
 		end
 	}
 	
-	aspect class TypeVariableBinding {
+	aspect class TypeVariableBinding inherits TypeContainer, KermetaModelElement {
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			if not type.isVoid then
 				if type.isInstanceOf(UnresolvedType) then
@@ -150,7 +158,10 @@ package structure{
 	}
 	
 	
-	aspect class TypedElement {
+	aspect class TypedElement inherits TypeContainer, NamedElement {
+		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+			super(context)
+		end
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			if not type.isVoid then
 				if type.isInstanceOf(UnresolvedType) then
@@ -165,10 +176,10 @@ package structure{
 	}
 	
 	
-	aspect class Operation {
+	aspect class Operation inherits MultiplicityElement, AbstractOperation {
 	
 		//defined to ensure that the method called is from TypeContainer and not from KermetaModelElement 
-		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
+		method resolveStructureContainedType(context : LanguageVisitorContext) from MultiplicityElement is do
 			super(context)
 		end
 		method resolveStructureReferencedType(context : LanguageVisitorContext) from TypedElement is do
@@ -189,7 +200,7 @@ package structure{
 		end
 	}
 	
-	aspect class ProductType {
+	aspect class ProductType inherits TypeContainer, Type{
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			
 			var unresolvedWithCorresponding : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new  
@@ -208,7 +219,7 @@ package structure{
 		end
 	}
 	
-	aspect class FunctionType {
+	aspect class FunctionType inherits TypeContainer, Type {
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			if not left.isVoid then
 				if left.isInstanceOf(UnresolvedType) then
@@ -230,7 +241,7 @@ package structure{
 
 }
 package behavior {
-	aspect class UnresolvedCall {
+	aspect class UnresolvedCall inherits Unresolved, CallExpression, TypeContainer{
 	
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			// must maintain order	
@@ -254,7 +265,7 @@ package behavior {
 		end
 	}
 	
-	aspect class TypeReference {
+	aspect class TypeReference inherits MultiplicityElement{
 	
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			if not type.isVoid then
