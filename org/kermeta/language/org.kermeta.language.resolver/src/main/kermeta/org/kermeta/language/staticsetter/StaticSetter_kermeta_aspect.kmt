@@ -403,7 +403,27 @@ package behavior {
 				end
 			end
 			
-			// if not found, Look into TypeDefinition  ( is there any TypeLiteral in kermeta 2 ?)
+			//if not found, look for a typevariable from the operation definition or the classdefinition and called by a CallTypeLiteral
+			
+			if result.isVoid then
+			
+				var typeVar :TypeVariable 
+				//first in operation
+				typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
+				//then in classdef
+				if typeVar.isVoid then
+					typeVar:=context.currentClassDefinition.typeParameter.detect{ t|t.name==self.name}
+				end
+				if not typeVar.isVoid then
+					var callTL : CallTypeLiteral init CallTypeLiteral.new
+					callTL.typeref := TypeReference.new
+					callTL.typeref.type := typeVar
+					callTL.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+					result:=callTL
+				end
+			end			
+			
+			// if not found, look for a TypeDefinition called by a CallTypeLiteral
 			if result.isVoid then
 				if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
 				var typeDef : TypeDefinition 
@@ -666,11 +686,12 @@ package behavior {
 			type.typeDefinition.typeParameter.each{ tp |
 				var tvb : TypeVariableBinding init  TypeVariableBinding.new
 				tvb.variable := tp
-				if tp.supertype.isVoid then
+				/*if tp.supertype.isVoid then
 					tvb.type := context.createTypeFromQualifiedName("kermeta::standard::Object")
 				else
 					tvb.type := tp.supertype
-				end
+				end*/
+				tvb.type:=tp
 				type.typeParamBinding.add(tvb)
 			}
 			self.setInferedStaticType(context, type)

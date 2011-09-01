@@ -33,7 +33,9 @@ aspect class UnresolvedType inherits Type, Unresolved, TypeContainer{
 			typeDef := context.currentModelingUnit.getTypeDefinitionByNameAndUsings(self.typeIdentifier, 
 							self.usings, 
 							context.currentPackage)
-			correspondingType:=typeDef.getTypeFromDefinition(self, context)
+			if not typeDef.isVoid then
+				correspondingType:=typeDef.getTypeFromDefinition(self, context)
+			end
 							
 		end
 		if correspondingType.isVoid then
