@@ -79,7 +79,10 @@ aspect class ClassDefinition {
 			//Link it with the correspondant TypeVariable of c and the UnresolvedType
 			typeParamBinding.variable := self.typeParameter.at(i)
 			typeParamBinding.type := g
-			typeParamBinding.containedType.add(g)
+			if g.container.isVoid then
+				// do not move "dual" Type-TypeDefinition like Enumeration
+				typeParamBinding.containedType.add(g)
+			end
 			//Add the new TypeVariable to the newClass
 			newClass.typeParamBinding.add(typeParamBinding)
 			i := i + 1
