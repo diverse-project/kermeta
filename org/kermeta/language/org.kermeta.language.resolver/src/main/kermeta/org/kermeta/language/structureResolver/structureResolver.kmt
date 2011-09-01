@@ -10,10 +10,9 @@ require "resolveStructureProperty.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
 aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement {
-	operation resolveWholeStructure() is do
+	operation resolveWholeStructure(context : LanguageVisitorContext) is do
 	
-		//init of context
-		var context : LanguageVisitorContext init LanguageVisitorContext.new.initialize(self)
+		
 		
 		self.resolveStructure(context)
 		

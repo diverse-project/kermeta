@@ -30,7 +30,7 @@ class MapEntryTypeDef {
 	end 
 }
 
-class LanguageVisitorContext {
+aspect class LanguageVisitorContext {
 	attribute errors : OrderedSet<ResolverException>
 	//Modeling unit the UnresolvedFinder is currently visiting
 	reference currentModelingUnit : ModelingUnit

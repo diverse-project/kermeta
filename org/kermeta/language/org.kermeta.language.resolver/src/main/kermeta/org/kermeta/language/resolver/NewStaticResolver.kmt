@@ -46,9 +46,9 @@ class FullStaticResolver
         stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
        	
-       	//resolvedModelingUnit := unresolvedModelingUnit
-       	//checkUnresolved(resolvedModelingUnit)
-       /*	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
+       	resolvedModelingUnit := unresolvedModelingUnit
+       	checkUnresolved(resolvedModelingUnit)
+       	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
        	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
        	
@@ -56,7 +56,7 @@ class FullStaticResolver
        	if not getErrors.isEmpty then
        		stdio.writeln("	********************* Errors detected")
        		getErrors.each{e | stdio.writeln(e.message)}
-       	end*/
+       	end
 	end
 	
 	operation getErrors() : OrderedSet<ResolverException> is do
@@ -69,7 +69,9 @@ class FullStaticResolver
 	end
 
 	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		unresolvedModelingUnit.resolveWholeStructure()
+		//init of context
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
+		unresolvedModelingUnit.resolveWholeStructure(ctxt)
 		result:=unresolvedModelingUnit
 	end
 
