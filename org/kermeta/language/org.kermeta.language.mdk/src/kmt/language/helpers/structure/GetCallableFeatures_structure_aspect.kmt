@@ -105,11 +105,20 @@ aspect class Type {
 		result := void
 	end
 	
+	operation getAllCallableOperations () : Set<Operation> is do
+	
+		result := void
+	end
+	
 }
 aspect class ParameterizedType inherits Type {}
 
 aspect class Class inherits ParameterizedType {
 	
+	method getAllCallableOperations () : Set<Operation> is do
+	
+		result := self.typeDefinition.asType(ClassDefinition).getAllCallableOperations()
+	end
 	
 	
 	/**
@@ -133,6 +142,15 @@ aspect class Class inherits ParameterizedType {
 }
 
 aspect class TypeVariable inherits Type{
+
+	
+	method getAllCallableOperations() : Set<Operation> is do
+		if supertype.isVoid then
+			// should also search in kermeta::standard::Object
+		else
+			result := self.supertype.getAllCallableOperations()
+		end
+	end
 
 	/**
 	 * Get an Operation that can be called from an instance of this TypeVariable
