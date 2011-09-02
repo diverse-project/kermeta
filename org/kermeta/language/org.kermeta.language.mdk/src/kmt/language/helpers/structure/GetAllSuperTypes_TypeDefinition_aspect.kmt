@@ -1,0 +1,39 @@
+/* $Id:$ 
+ * Creation : March 2, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "GetAllSuperTypes_Type_aspect.kmt"
+
+using kermeta::standard
+aspect class TypeDefinition {
+	/** returns the list of all superTypes for this TypeDefinition
+	 * implementation note : algorithm not applicable if there are cyclic inheritance
+	 */
+	operation getAllSuperTypes() : OrderedSet<Type> is do
+		var superTypes : OrderedSet<Type> init OrderedSet<Type>.new
+		self.superType.each{st|
+			superTypes.add(st)
+			superTypes.addAll(st.getAllSuperTypes())
+		}
+		result := superTypes
+	end
+}
+
+aspect class DataType inherits Type, TypeDefinition {
+	method getAllSuperTypes() : OrderedSet<Type> from TypeDefinition is do 
+		result := super()
+	end
+} 
+aspect class ModelType inherits  Type, TypeDefinition, Model {
+	method getAllSuperTypes() : OrderedSet<Type> from TypeDefinition is do 
+		result := super()
+	end
+}

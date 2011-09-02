@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : March 2, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "GetAllSuperTypes_TypeDefinition_aspect.kmt"
+
+using kermeta::standard
+
+aspect class Type {
+	/** returns the list of all superTypes for this type
+	 * implementation note : algorithm not applicable if there are cyclic inheritance
+	 */
+	operation getAllSuperTypes() : OrderedSet<Type> is do
+		// by default Type may have no super type, must look into concrete Type
+		result := OrderedSet<Type>.new
+	end
+}
+aspect class ParameterizedType inherits Type {
+	method getAllSuperTypes() : OrderedSet<Type> is do 
+		result := self.typeDefinition.getAllSuperTypes()
+	end
+}
+
+aspect class PrimitiveType inherits DataType {
+	method getAllSuperTypes() : OrderedSet<Type> from DataType is do 
+		result := self.instanceType.getAllSuperTypes()
+	end
+}
