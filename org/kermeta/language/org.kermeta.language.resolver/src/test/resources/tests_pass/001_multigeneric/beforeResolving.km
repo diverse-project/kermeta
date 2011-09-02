@@ -141,7 +141,7 @@
           <usings fromQName="kermeta::utils" toName=""/>
         </containedType>
       </ownedAttribute>
-      <ownedOperation name="create" type="//trace/BidirectionalTrace/create/@containedType.0" superOperation="//trace/BidirectionalTrace/create/@ownedUnresolvedOperations.0">
+      <ownedOperation name="create" type="//trace/BidirectionalTrace/create/@containedType.0">
         <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_multigeneric/src/trace.kmt;655;724"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::utils" toName=""/>
@@ -169,9 +169,8 @@
             </value>
           </statement>
         </body>
-        <ownedUnresolvedOperations operationIdentifier="create"/>
       </ownedOperation>
-      <ownedOperation name="storeTrace" type="//trace/BidirectionalTrace/storeTrace/@containedType.0" superOperation="//trace/BidirectionalTrace/storeTrace/@ownedUnresolvedOperations.0">
+      <ownedOperation name="storeTrace" type="//trace/BidirectionalTrace/storeTrace/@containedType.0">
         <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_multigeneric/src/trace.kmt;724;824"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
           <usings fromQName="kermeta::utils" toName=""/>
@@ -216,7 +215,6 @@
             </target>
           </statement>
         </body>
-        <ownedUnresolvedOperations operationIdentifier="storeTrace"/>
       </ownedOperation>
       <ownedOperation name="getSourceElem" type="//trace/BidirectionalTrace/getSourceElem/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_multigeneric/src/trace.kmt;824;910"/>
