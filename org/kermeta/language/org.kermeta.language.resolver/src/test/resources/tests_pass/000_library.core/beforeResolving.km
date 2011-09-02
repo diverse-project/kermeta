@@ -12388,7 +12388,7 @@
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/TypeMapping/mapping/@kOwnedTags.0" name="mapping" type="//org/kermeta/language/structure/TypeMapping/mapping/@containedType.0" isOrdered="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/mapping"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EObject"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/UnresolvedInferredType/@kOwnedTags.0 //org/kermeta/language/structure/UnresolvedInferredType/@kOwnedTags.1" name="UnresolvedInferredType" superType="//org/kermeta/language/structure/UnresolvedInferredType/@containedType.0 //org/kermeta/language/structure/UnresolvedInferredType/@containedType.1" isAspect="false" isAbstract="false">
