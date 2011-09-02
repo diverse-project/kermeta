@@ -26,6 +26,7 @@ import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
+import org.kermeta.language.helper.tests.utils.ErrorAwareMessagingSystem;
 
 
 import org.kermeta.language.structure.ModelingUnit;
@@ -52,7 +53,7 @@ public class KmResolverTest extends TestCase {
 
         
         // Phase 1 : compiles without crashing
-        MessagingSystem ms=new StdioSimpleMessagingSystem();
+        ErrorAwareMessagingSystem ms=new ErrorAwareMessagingSystem();
         KmResolver resolver = new KmResolverImpl(ms);
         ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
@@ -68,6 +69,9 @@ public class KmResolverTest extends TestCase {
                 
 		ErrorProneResult<ModelingUnit> epr=	resolver.resolve(beforeResolving);
 		String firstError = (epr.getProblems().size()!=0 ? epr.getProblems().get(0).getMessage() : "");
+		if(!ms.errorTrace.isEmpty()){
+        	assertTrue(ms.errorTrace.get(0), ms.errorTrace.isEmpty());
+        }
 		assertTrue("Failed to resolve ! "+firstError, 
 				epr.hasSevereProblems() ^ shouldPass);//for noobs :p : ^ is XOR 
     }
