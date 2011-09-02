@@ -20,7 +20,7 @@ aspect class ModelingUnit {
 	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName
 	 */
 	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
-		// result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
+	//	result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
 		 
 		var set_qname : Sequence<String> init qname.split("::")
 		if set_qname.size()==0 then
@@ -65,14 +65,13 @@ aspect class ModelingUnit {
 			cache := internal::Cache.new.initialize(self)
 		end
 		var typename : String init qname.split("::").last
-		var possibleTypeDefs : Set<TypeDefinition> init cache.cachedStructuralTypeDefinitions.getValue(typename)
+		var possibleTypeDefs : TypeDefinitionCollection init cache.cachedStructuralTypeDefinitions.getValue(typename)
 		if possibleTypeDefs.isVoid then
 			result := void
 		else
-			result := possibleTypeDefs.detect{t| t.getQualifiedName() == qname}
+			result := possibleTypeDefs.typeDefinitions.detect{t| t.getQualifiedName() == qname}
 		end
 	end
-	
 	/**
 	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName and taking into account a set of Usings
 	 * and optionally looking in the current Package (if not void)
@@ -191,21 +190,25 @@ aspect class ModelingUnit {
 package internal{
 	class Cache {
 		/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
-		reference cachedStructuralTypeDefinitions : kermeta::utils::Hashtable<String,Set<TypeDefinition>>
+		reference cachedStructuralTypeDefinitions : kermeta::utils::Hashtable<String,TypeDefinitionCollection>
 		operation initialize(mu : ModelingUnit) : Cache is do
-			cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
-			
+			// bug in kermeta 1 !?
+			//cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
+			cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,TypeDefinitionCollection>.new
 			mu.getTypeDefinitions().each{ td |
 			
 				var typename : String init td.name
-				var possibleTypeDefs : Set<TypeDefinition> init cachedStructuralTypeDefinitions.getValue(typename)
+				var possibleTypeDefs : TypeDefinitionCollection init cachedStructuralTypeDefinitions.getValue(typename)
 				if  possibleTypeDefs.isVoid then 
-					possibleTypeDefs := Set<TypeDefinition>.new
+					possibleTypeDefs := TypeDefinitionCollection.new
 					cachedStructuralTypeDefinitions.put(typename, possibleTypeDefs)
 				end
-				possibleTypeDefs.add(td)
-			}
+				possibleTypeDefs.typeDefinitions.add(td)
+			} 
 			result := self
 		end
+	}
+	class TypeDefinitionCollection{
+		reference typeDefinitions : TypeDefinition[0..*]
 	}
 }
