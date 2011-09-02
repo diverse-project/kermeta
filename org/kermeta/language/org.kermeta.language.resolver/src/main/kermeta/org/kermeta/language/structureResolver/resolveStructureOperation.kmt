@@ -69,7 +69,13 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					superOperation:=unresolvedOp.correspondingOperation
 					ownedUnresolvedOperations.remove(unresolvedOp)
 				else
-					stdio.writeln("operation cannot be resolved")	
+					//TODO when parser will be fixed about considering operation as equivalent as method
+					//the test is to be removed 
+					if unresolvedOp.~from.isVoid then
+						ownedUnresolvedOperations.remove(unresolvedOp)
+					else
+						stdio.writeln("operation cannot be resolved")
+					end	
 				end
 				
 							
