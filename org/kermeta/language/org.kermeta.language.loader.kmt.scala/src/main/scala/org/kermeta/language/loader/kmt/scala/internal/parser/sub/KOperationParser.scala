@@ -29,6 +29,7 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
       fromType match {
+        case None =>
         case Some(ft)=> {
             var newsuperO = StructureFactory.eINSTANCE.createUnresolvedOperation
             newsuperO.setOperationIdentifier(opName)
